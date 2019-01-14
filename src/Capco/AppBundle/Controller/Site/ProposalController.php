@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -48,6 +47,7 @@ class ProposalController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
+        $serializer = $this->get('serializer');
         $urlResolver = $this->get(UrlResolver::class);
 
         $stepUrls = $project
@@ -69,13 +69,6 @@ class ProposalController extends Controller
 
         $votableStep = $this->get(ProposalCurrentVotableStepDataLoader::class)->resolve($proposal);
         $currentVotableStepId = $votableStep ? $votableStep->getId() : null;
-
-        if ($votableStep && \in_array($votableStep->getType(), ['collect', 'selection'])) {
-            $currentVotableStepId = GlobalId::toGlobalId(
-                ucfirst($votableStep->getType()) . 'Step',
-                $votableStep->getId()
-            );
-        }
 
         return [
             'project' => $project,

@@ -11,10 +11,7 @@ const mutation = graphql`
   mutation DeleteProposalMutation($input: DeleteProposalInput!) {
     deleteProposal(input: $input) {
       proposal {
-        id
-        publicationStatus
-        trashedReason
-        deletedAt
+        ...ProposalAdminStatusForm_proposal
       }
       step {
         url

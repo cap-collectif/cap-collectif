@@ -13,45 +13,29 @@ class SelectionPage extends Page
     protected $path = '/project/{projectSlug}/selection/{stepSlug}';
 
     protected $elements = [
-        'proposal preview UHJvcG9zYWw6cHJvcG9zYWwy' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy',
-        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwy' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counter-votes .card__counter__value',
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwy' =>
-            'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwy',
-        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwy' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counter-comments .card__counter__value',
-        'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA==']",
-        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counter-votes .card__counter__value'",
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMA'",
-        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counter-comments .card__counter__value'",
-        'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            "#[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ=='",
-        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counter-votes .card__counter__value'",
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMQ',
-        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counter-comments .card__counter__value'",
-        'proposal preview UHJvcG9zYWw6cHJvcG9zYWw4' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4',
-        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWw4' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counter-votes .card__counter__value',
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWw4' =>
-            'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWw4',
-        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWw4' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counter-comments .card__counter__value',
+        'proposal preview proposal2' => '#proposal-proposal2',
+        'proposal votes counter proposal2' => '#proposal-proposal2 .card__counter-votes .card__counter__value',
+        'proposal vote button proposal2' => 'button#proposal-vote-btn-proposal2',
+        'proposal comments counter proposal2' => '#proposal-proposal2 .card__counter-comments .card__counter__value',
+        'proposal preview proposal10' => '#proposal-proposal10',
+        'proposal votes counter proposal10' => '#proposal-proposal10 .card__counter-votes .card__counter__value',
+        'proposal vote button proposal10' => 'button#proposal-vote-btn-proposal10',
+        'proposal comments counter proposal10' => '#proposal-proposal10 .card__counter-comments .card__counter__value',
+        'proposal preview proposal11' => '#proposal-proposal11',
+        'proposal votes counter proposal11' => '#proposal-proposal11 .card__counter-votes .card__counter__value',
+        'proposal vote button proposal11' => 'button#proposal-vote-btn-proposal11',
+        'proposal comments counter proposal11' => '#proposal-proposal11 .card__counter-comments .card__counter__value',
+        'proposal preview proposal8' => '#proposal-proposal8',
+        'proposal votes counter proposal8' => '#proposal-proposal8 .card__counter-votes .card__counter__value',
+        'proposal vote button proposal8' => 'button#proposal-vote-btn-proposal8',
+        'proposal comments counter proposal8' => '#proposal-proposal8 .card__counter-comments .card__counter__value',
         'proposal' => '.proposal-preview',
-        'proposal vote button to hover' => '#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwx',
+        'proposal vote button to hover' => '#proposal-vote-btn-proposal1',
         'sorting select' => 'select#proposal-sorting',
         'selected sorting option' => '#proposal-sorting option[selected]',
         'proposal vote form submit button' => '#confirm-proposal-vote',
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxOA==' =>
-            "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxOA==']",
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxNw==' =>
-            "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxNw==']",
+        'proposal vote button proposal18' => 'button#proposal-vote-btn-proposal18',
+        'proposal vote button proposal17' => 'button#proposal-vote-btn-proposal17',
     ];
 
     public function sortByDate()
@@ -76,36 +60,26 @@ class SelectionPage extends Page
 
     public function getVoteButton(string $id)
     {
-        return $this->getElement("proposal vote button ${id}");
+        return $this->getElement('proposal vote button ' . $id);
     }
 
-    public function getVoteButtonSelector(string $id = 'UHJvcG9zYWw6cHJvcG9zYWwy'): string
+    public function getVoteButtonSelector(string $id = 'proposal2'): string
     {
-        return $this->getSelector("proposal vote button ${id}");
+        return $this->getSelector('proposal vote button ' . $id);
     }
 
-    public function clickVoteButton(string $id = 'UHJvcG9zYWw6cHJvcG9zYWwy')
+    public function clickVoteButton(string $id = 'proposal2')
     {
         $button = $this->getVoteButton($id);
-
         try {
-            $button
-                ->getParent()
-                ->getParent()
-                ->getParent()
-                ->getParent()
-                ->mouseOver();
+            $button->getParent()->getParent()->getParent()->getParent()->mouseOver();
             $button->click();
         } catch (\Exception $e) {
-            $button
-                ->getParent()
-                ->getParent()
-                ->getParent()
-                ->click();
+            $button->getParent()->getParent()->getParent()->click();
         }
     }
 
-    public function getVoteButtonLabel(string $id = 'UHJvcG9zYWw6cHJvcG9zYWwy')
+    public function getVoteButtonLabel(string $id = 'proposal2')
     {
         return $this->getVoteButton($id)->getText();
     }
@@ -115,7 +89,7 @@ class SelectionPage extends Page
         return $this->getElement('proposal votes counter ' . $id);
     }
 
-    public function getVotesCount(string $id = 'UHJvcG9zYWw6cHJvcG9zYWwy'): int
+    public function getVotesCount(string $id = 'proposal2'): int
     {
         return (int) filter_var($this->getVotesCounter($id)->getText(), FILTER_SANITIZE_NUMBER_INT);
     }
@@ -125,12 +99,9 @@ class SelectionPage extends Page
         return $this->getElement('proposal comments counter ' . $id);
     }
 
-    public function getCommentsCount(string $id = 'UHJvcG9zYWw6cHJvcG9zYWwy'): int
+    public function getCommentsCount(string $id = 'proposal2'): int
     {
-        return (int) filter_var(
-            $this->getCommentsCounter($id)->getText(),
-            FILTER_SANITIZE_NUMBER_INT
-        );
+        return (int) filter_var($this->getCommentsCounter($id)->getText(), FILTER_SANITIZE_NUMBER_INT);
     }
 
     public function submitProposalVoteForm()
@@ -138,7 +109,7 @@ class SelectionPage extends Page
         $this->getElement('proposal vote form submit button')->click();
     }
 
-    public function hoverVoteButton(string $id = 'UHJvcG9zYWw6cHJvcG9zYWw4')
+    public function hoverVoteButton(string $id = 'proposal8')
     {
         $this->getVoteButton($id)->mouseOver();
     }
@@ -156,8 +127,7 @@ class SelectionPage extends Page
                         'Expected to be on "%s" but found "%s" instead',
                         $this->getUrl($urlParameters),
                         $this->getSession()->getCurrentUrl()
-                    )
-                );
+                ));
             }
         }
     }

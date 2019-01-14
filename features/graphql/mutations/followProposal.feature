@@ -1,4 +1,4 @@
-@followProposal @proposal_follow_graphql
+@followProposal
 Feature: Follow Proposals
 
 @database
@@ -17,7 +17,7 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
     }",
     "variables": {
       "input": {
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWw4",
+        "proposalId": "proposal8",
         "notifiedOf": "MINIMAL"
       }
     }
@@ -29,7 +29,7 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
     "data": {
       "followProposal": {
         "proposal": {
-          "id": "UHJvcG9zYWw6cHJvcG9zYWw4",
+          "id": "proposal8",
           "viewerFollowingConfiguration": "MINIMAL"
         }
       }
@@ -93,7 +93,7 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
     }",
     "variables": {
       "input": {
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWw4",
+        "proposalId": "proposal8",
         "notifiedOf": "MINIMAL"
       }
     }
@@ -105,7 +105,7 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
     "data": {
       "followProposal": {
         "proposal": {
-          "id": "UHJvcG9zYWw6cHJvcG9zYWw4"
+          "id": "proposal8"
         }
       }
     }
@@ -142,19 +142,19 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
             {
               "cursor": @string@,
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
+                "id": "proposal1"
               }
             },
             {
               "cursor": @string@,
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
+                "id": "proposal2"
               }
             },
             {
               "cursor": @string@,
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWw4"
+                "id": "proposal8"
               }
             }
           ]
@@ -175,7 +175,7 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
     }",
     "variables": {
       "input": {
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWw4"
+        "proposalId": "proposal8"
       }
     }
   }
@@ -186,7 +186,7 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
     "data": {
       "unfollowProposal": {
         "proposal": {
-          "id": "UHJvcG9zYWw6cHJvcG9zYWw4"
+          "id": "proposal8"
         }
       }
     }
@@ -223,13 +223,13 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
             {
               "cursor": @string@,
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
+                "id": "proposal1"
               }
             },
             {
               "cursor": @string@,
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
+                "id": "proposal2"
               }
             }
           ]

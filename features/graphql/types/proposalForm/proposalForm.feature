@@ -42,12 +42,12 @@ Scenario: GraphQL client wants to retrieve his evaluations
             "edges": [
               {
                 "node": {
-                  "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
+                  "id": "proposal1"
                 }
               },
               {
                 "node": {
-                  "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
+                  "id": "proposal2"
                 }
               }
             ]

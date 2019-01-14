@@ -23,7 +23,7 @@ Scenario: GraphQL client wants to create a fusion
     }",
     "variables": {
       "input": {
-        "fromProposals": ["UHJvcG9zYWw6cHJvcG9zYWwx", "UHJvcG9zYWw6cHJvcG9zYWwy"]
+        "fromProposals": ["proposal1", "proposal2"]
       }
     }
   }
@@ -41,10 +41,10 @@ Scenario: GraphQL client wants to create a fusion
           "adminUrl": @string@,
           "mergedFrom": [
             {
-              "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
+              "id": "proposal1"
             },
             {
-              "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
+              "id": "proposal2"
             }
           ]
         }
@@ -71,7 +71,7 @@ Scenario: GraphQL client wants to create a fusion with only 1 proposal
     }",
     "variables": {
       "input": {
-        "fromProposals": ["UHJvcG9zYWw6cHJvcG9zYWwx"]
+        "fromProposals": ["proposal1"]
       }
     }
   }
@@ -104,7 +104,7 @@ Scenario: GraphQL client wants to create a fusion with proposals from different 
     }",
     "variables": {
       "input": {
-        "fromProposals": ["UHJvcG9zYWw6cHJvcG9zYWwx", "UHJvcG9zYWw6cHJvcG9zYWw4"]
+        "fromProposals": ["proposal1", "proposal8"]
       }
     }
   }

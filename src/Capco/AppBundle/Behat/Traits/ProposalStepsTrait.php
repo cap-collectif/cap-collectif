@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Behat\Traits;
 
 use Behat\Gherkin\Node\TableNode;
 use FilesystemIterator;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PHPUnit\Framework\Assert;
 
 trait ProposalStepsTrait
@@ -1067,10 +1066,7 @@ trait ProposalStepsTrait
     {
         $this->getSession()
             ->getPage()
-            ->find(
-                'css',
-                '#UHJvcG9zYWw6cHJvcG9zYWwy-proposal-vote__private .form-group .react-toggle'
-            )
+            ->find('css', '#proposal2-proposal-vote__private .form-group .react-toggle')
             ->click();
     }
 
@@ -1111,12 +1107,10 @@ trait ProposalStepsTrait
      */
     public function theProposalVoteButtonMustBeDisabled(string $id = null)
     {
-        $id = $id ? GlobalId::toGlobalId('Proposal', $id) : $this->getProposalId();
+        $id = $id ?: $this->getProposalId();
+        $this->getSession()->wait(2000, "$('" . $id . "').length > 0");
 
-        $search = "[id='proposal-${id}']";
-        $this->getSession()->wait(2000, '$("' . $search . '").length > 0');
         $button = $this->getCurrentPage()->getVoteButton($id);
-
         Assert::assertTrue(
             $button->hasClass('disabled') || $button->hasAttribute('disabled'),
             'The proposal vote button is not disabled neither it has class "disabled".'
@@ -1134,8 +1128,7 @@ trait ProposalStepsTrait
             : '"proposal vote button" element is not present on the page';
 
         try {
-            $search = "[id='proposal-${id}']";
-            $this->getSession()->wait(2000, '$("' . $search . '").length > 0');
+            $this->getSession()->wait(2000, "$('" . $id . "').length > 0");
 
             $button = $this->getCurrentPage()->getVoteButton($this->getProposalId());
         } catch (\Exception $e) {
@@ -1149,7 +1142,7 @@ trait ProposalStepsTrait
     public function iShouldSeeTheProposalVoteLimitedTooltip()
     {
         $this->assertElementContainsText(
-            '#vote-tooltip-proposal-UHJvcG9zYWw6cHJvcG9zYWwxOA==',
+            '#vote-tooltip-proposal-proposal18',
             'proposal.vote.popover.limit_reached_title'
         );
     }
@@ -1160,7 +1153,7 @@ trait ProposalStepsTrait
     public function iShouldSeeTheProposalVoteTooltip()
     {
         $this->assertElementContainsText(
-            '#vote-tooltip-proposal-UHJvcG9zYWw6cHJvcG9zYWw4',
+            '#vote-tooltip-proposal-proposal8',
             'proposal.vote.popover.not_enough_credits_text'
         );
     }
@@ -1265,7 +1258,6 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalFollowButton(string $proposalId)
     {
-        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
         $page = $this->getCurrentPage();
         $page->clickFollowButton($proposalId);
         $this->iWait(2);
@@ -1276,7 +1268,6 @@ trait ProposalStepsTrait
      */
     public function iClickOnFollow(string $choice, string $proposalId)
     {
-        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
         $page = $this->getCurrentPage();
         $page->clickFollowChoice($choice, $proposalId);
     }
@@ -1284,31 +1275,28 @@ trait ProposalStepsTrait
     /**
      * @When I should see minimal checked on :proposalId
      */
-    public function iShouldSeeAdvancementCheckedOnProposal(string $proposalId)
+    public function iShouldSeeAdvancementCheckedOnProposal(string $proposalid)
     {
-        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
         $page = $this->getCurrentPage();
-        $page->followMinimalIsChecked($proposalId);
+        $page->followMinimalIsChecked($proposalid);
     }
 
     /**
      * @When I should see follow essential checked on :proposalId
      */
-    public function iShouldSeeFollowAdvancementAndCommentCheckedOnProposal(string $proposalId)
+    public function iShouldSeeFollowAdvancementAndCommentCheckedOnProposal(string $proposalid)
     {
-        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
         $page = $this->getCurrentPage();
-        $page->followEssentialIsChecked($proposalId);
+        $page->followEssentialIsChecked($proposalid);
     }
 
     /**
      * @When I should see follow all activities checked on :proposalId
      */
-    public function iShouldSeeFollowAllActivitiesCheckedOnProposal(string $proposalId)
+    public function iShouldSeeFollowAllActivitiesCheckedOnProposal(string $proposalid)
     {
-        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
         $page = $this->getCurrentPage();
-        $page->followAllIsChecked($proposalId);
+        $page->followAllIsChecked($proposalid);
     }
 
     /**
@@ -1316,8 +1304,6 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalUnfollowButton(string $proposalId)
     {
-        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
-
         $page = $this->getCurrentPage();
         $page->clickUnfollowButton($proposalId);
         $this->iWait(2);
@@ -1565,19 +1551,19 @@ trait ProposalStepsTrait
     protected function getProposalId(): string
     {
         if ($this->proposalPageIsOpen() || $this->selectionStepWithSimpleVoteIsOpen()) {
-            return 'UHJvcG9zYWw6cHJvcG9zYWwy';
+            return 'proposal2';
         }
         if (
             $this->proposalPageWithBudgetVoteIsOpen() ||
             $this->selectionStepWithBudgetVoteIsOpen()
         ) {
-            return 'UHJvcG9zYWw6cHJvcG9zYWw4';
+            return 'proposal8';
         }
         if ($this->selectionStepNotYetOpenIsOpen() || $this->proposalNotYetVotablePageIsOpen()) {
-            return 'UHJvcG9zYWw6cHJvcG9zYWwxMA==';
+            return 'proposal10';
         }
         if ($this->selectionStepClosedIsOpen() || $this->proposalNotVotableAnymoreIsOpen()) {
-            return 'UHJvcG9zYWw6cHJvcG9zYWwxMQ==';
+            return 'proposal11';
         }
 
         throw new \Exception('Unknown proposalId');

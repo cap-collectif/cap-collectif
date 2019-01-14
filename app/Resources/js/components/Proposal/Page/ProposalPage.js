@@ -8,13 +8,13 @@ import ProposalPageAlert from './ProposalPageAlert';
 import ProposalDraftAlert from './ProposalDraftAlert';
 import ProposalPageTabs from './ProposalPageTabs';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import type { FeatureToggles, State } from '../../../types';
+import type { Uuid, FeatureToggles, State } from '../../../types';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.graphql';
 
 type Props = {
-  proposalId: string,
-  currentVotableStepId: ?string,
+  proposalId: Uuid,
+  currentVotableStepId: ?Uuid,
   features: FeatureToggles,
   isAuthenticated: boolean,
 };

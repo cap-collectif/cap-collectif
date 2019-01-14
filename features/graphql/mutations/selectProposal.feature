@@ -24,8 +24,8 @@ Scenario: GraphQL client wants select a proposal without status
     }",
     "variables": {
       "input": {
-        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWw4",
+        "stepId": "selectionstep1",
+        "proposalId": "proposal8",
         "statusId": null
       }
     }
@@ -37,14 +37,14 @@ Scenario: GraphQL client wants select a proposal without status
       "data": {
         "selectProposal": {
           "proposal": {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWw4",
+            "id": "proposal8",
             "selections": [
               {
-                "step": { "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwNA==" },
+                "step": { "id": "selectionstep4" },
                 "status": null
               },
               {
-                "step": { "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==" },
+                "step": { "id": "selectionstep1" },
                 "status": null
               }
             ]
@@ -77,8 +77,8 @@ Scenario: GraphQL client wants select a proposal with status, then unselect
   }",
   "variables": {
     "input": {
-      "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWw4",
+      "stepId": "selectionstep1",
+      "proposalId": "proposal8",
       "statusId": "status1"
     }
   }
@@ -90,14 +90,14 @@ Scenario: GraphQL client wants select a proposal with status, then unselect
     "data": {
       "selectProposal": {
         "proposal": {
-          "id": "UHJvcG9zYWw6cHJvcG9zYWw4",
+          "id": "proposal8",
           "selections": [
             {
-              "step": { "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwNA==" },
+              "step": { "id": "selectionstep4" },
               "status": null
             },
             {
-              "step": { "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==" },
+              "step": { "id": "selectionstep1" },
               "status": { "id": "status1" }
             }
           ]
@@ -125,8 +125,8 @@ Scenario: GraphQL client wants select a proposal with status, then unselect
     }",
     "variables": {
       "input": {
-        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWw4"
+        "stepId": "selectionstep1",
+        "proposalId": "proposal8"
       }
     }
   }
@@ -139,7 +139,7 @@ Scenario: GraphQL client wants select a proposal with status, then unselect
         "proposal": {
           "selections": [
             {
-              "step": { "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwNA==" },
+              "step": { "id": "selectionstep4" },
               "status": null
             }
           ]

@@ -1,17 +1,14 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\ProposalFusionType;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -21,23 +18,17 @@ class CreateProposalFusionMutation implements MutationInterface
     private $formFactory;
     private $proposalRepo;
     private $translator;
-    private $globalIdResolver;
-    private $logger;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactory $formFactory,
         ProposalRepository $proposalRepo,
-        TranslatorInterface $translator,
-        GlobalIdResolver $globalIdResolver,
-        LoggerInterface $logger
+        TranslatorInterface $translator
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->proposalRepo = $proposalRepo;
         $this->translator = $translator;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->logger = $logger;
     }
 
     public function __invoke(Argument $input, User $author)
@@ -50,14 +41,11 @@ class CreateProposalFusionMutation implements MutationInterface
         }
 
         $proposalForm = null;
-        $this->logger->info(str_repeat('*', 150));
-        $proposalUuids = [];
         foreach ($proposalIds as $key => $id) {
-            $child = $this->globalIdResolver->resolve($id, $author);
+            $child = $this->proposalRepo->find($id);
             if (!$child) {
-                throw new UserError('Unknown proposal to merge with id: ' . var_export($id, true));
+                throw new UserError('Unknown proposal to merge with id: ' . $id);
             }
-            $proposalUuids[] = $child->getId();
             if (0 === $key) {
                 $proposalForm = $child->getProposalForm();
             } elseif ($child->getProposalForm() !== $proposalForm) {
@@ -72,7 +60,7 @@ class CreateProposalFusionMutation implements MutationInterface
         $form = $this->formFactory->create(ProposalFusionType::class, $proposal, [
             'proposalForm' => $proposalForm,
         ]);
-        $form->submit(['childConnections' => $proposalUuids], false);
+        $form->submit(['childConnections' => $proposalIds], false);
 
         if (!$form->isValid()) {
             throw new UserError('Invalid data.');
@@ -80,7 +68,7 @@ class CreateProposalFusionMutation implements MutationInterface
 
         if (
             $proposalForm->getStep() &&
-            ($defaultStatus = $proposalForm->getStep()->getDefaultStatus())
+            $defaultStatus = $proposalForm->getStep()->getDefaultStatus()
         ) {
             $proposal->setStatus($defaultStatus);
         }
