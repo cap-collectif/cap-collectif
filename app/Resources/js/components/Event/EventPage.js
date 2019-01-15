@@ -72,7 +72,6 @@ export class EventPage extends React.Component<Props> {
               return (
                 <div>
                   <section className="jumbotron--bg-1 ">
-                    {/* $FlowFixMe */}
                     <EventPageHeader query={props} eventPageTitle={this.props.eventPageTitle} />
                   </section>
                   <section className="section--custom">
