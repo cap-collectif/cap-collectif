@@ -51,6 +51,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
             $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
                 $object
             );
+            $data['eventCount'] = \count($object->getEvents());
 
             return $data;
         }
