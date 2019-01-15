@@ -150,7 +150,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
         id="and-the-privacy-policy"
         values={
           Object {
-            "url": "http://localhost/politique-de-confidentialite",
+            "url": "http://localhost/pages/politique-de-confidentialite",
           }
         }
       />
@@ -288,7 +288,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         id="and-the-privacy-policy"
         values={
           Object {
-            "url": "http://localhost/politique-de-confidentialite",
+            "url": "http://localhost/pages/politique-de-confidentialite",
           }
         }
       />
@@ -463,7 +463,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         id="and-the-privacy-policy"
         values={
           Object {
-            "url": "http://localhost/politique-de-confidentialite",
+            "url": "http://localhost/pages/politique-de-confidentialite",
           }
         }
       />
@@ -626,7 +626,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         id="and-the-privacy-policy"
         values={
           Object {
-            "url": "http://localhost/politique-de-confidentialite",
+            "url": "http://localhost/pages/politique-de-confidentialite",
           }
         }
       />
