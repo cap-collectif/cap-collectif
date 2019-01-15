@@ -160,13 +160,6 @@ Capco\AppBundle\Entity\SiteParameter:
     position: 2
     type: 0
 
-  SiteParameterCommunicationFrom:
-    keyname: global.site.communication_from
-    category: settings.global
-    value: de Cap Collectif
-    position: 2
-    type: 0
-
   # blog
   SiteParameterBlogPaginationSize:
     keyname: blog.pagination.size

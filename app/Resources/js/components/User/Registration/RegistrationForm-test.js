@@ -21,7 +21,6 @@ describe('<RegistrationForm />', () => {
     hasQuestions: false,
     responses: [],
     organizationName: 'Cap Collectif',
-    internalCommunicationFrom: 'de Cap Collectif',
     dispatch: jest.fn(),
     shieldEnabled: false,
     privacyPolicyRequired: true,
