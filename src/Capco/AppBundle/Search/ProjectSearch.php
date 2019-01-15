@@ -38,7 +38,7 @@ class ProjectSearch extends Search
 
     public function searchProjects(
         int $offset,
-        ?int $limit = null,
+        ?int $limit,
         array $order = null,
         string $term = null,
         array $providedFilters
@@ -51,13 +51,20 @@ class ProjectSearch extends Search
             'phrase_prefix'
         );
 
+        if (isset($providedFilters['withEventOnly'])) {
+            $withEventOnlyBoolQuery = new Query\BoolQuery();
+            $withEventOnlyBoolQuery->addShould(new Query\Range('eventCount', ['gt' => 0]));
+            $boolQuery->addMust($withEventOnlyBoolQuery);
+            unset($providedFilters['withEventOnly']);
+        }
+
         foreach ($providedFilters as $key => $value) {
             $boolQuery->addMust(new Term([$key => ['value' => $value]]));
         }
         $boolQuery->addMust(new Exists('id'));
 
         $query = new Query($boolQuery);
-      
+
         if (isset($order['field'])) {
             $query->setSort($this->getSort($order['field']));
         }
@@ -73,7 +80,7 @@ class ProjectSearch extends Search
                 return $result->getData()['id'];
             }, $resultSet->getResults())
         );
-        
+
         return [
             'projects' => $results,
             'count' => $resultSet->getTotalHits(),
@@ -115,7 +122,7 @@ class ProjectSearch extends Search
 
                 break;
         }
-        
+
         return [$sortField => ['order' => $sortOrder]];
     }
 }
