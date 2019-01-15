@@ -55,13 +55,8 @@ class ProposalMutation implements ContainerAwareInterface
         $formFactory = $this->container->get('form.factory');
 
         $values = $input->getRawArguments();
-
         $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
         unset($values['proposalId']); // This only useful to retrieve the proposal
-
-        foreach ($values['likers'] as &$userGlobalId) {
-            $userGlobalId = GlobalIdResolver::getDecodedId($userGlobalId)['id'];
-        }
 
         $form = $formFactory->create(ProposalNotationType::class, $proposal);
         $form->submit($values);

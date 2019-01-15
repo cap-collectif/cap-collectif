@@ -29,6 +29,7 @@ type Props = {|
   cguName: string,
   handleSubmit: Function,
   organizationName: string,
+  internalCommunicationFrom: string,
   shieldEnabled: boolean,
   dispatch: Dispatch,
 |};
@@ -93,6 +94,7 @@ export class RegistrationForm extends React.Component<Props> {
       addUserTypeField,
       addConsentExternalCommunicationField,
       addConsentInternalCommunicationField,
+      internalCommunicationFrom,
       userTypes,
       handleSubmit,
       addCaptchaField,
@@ -277,7 +279,14 @@ export class RegistrationForm extends React.Component<Props> {
             component={renderComponent}
             type="checkbox"
             labelClassName="font-weight-normal"
-            children={<FormattedMessage id="receive-news-and-results-of-the-consultations" />}
+            children={
+              <FormattedMessage
+                id="receive-news-and-results-of-the-consultations"
+                values={{
+                  from: internalCommunicationFrom,
+                }}
+              />
+            }
           />
         )}
         {addConsentExternalCommunicationField && (
@@ -316,6 +325,7 @@ const mapStateToProps = (state: State) => ({
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
+  internalCommunicationFrom: state.default.parameters['global.site.communication_from'],
   shieldEnabled: state.default.features.shield_mode,
   privacyPolicyRequired: state.default.features.privacy_policy,
   responses: formValueSelector(form)(state, 'responses'),

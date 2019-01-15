@@ -165,7 +165,11 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   >
     <FormattedMessage
       id="receive-news-and-results-of-the-consultations"
-      values={Object {}}
+      values={
+        Object {
+          "from": "de Cap Collectif",
+        }
+      }
     />
   </Field>
   <Field
@@ -303,7 +307,11 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   >
     <FormattedMessage
       id="receive-news-and-results-of-the-consultations"
-      values={Object {}}
+      values={
+        Object {
+          "from": "de Cap Collectif",
+        }
+      }
     />
   </Field>
   <Field
@@ -478,7 +486,11 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   >
     <FormattedMessage
       id="receive-news-and-results-of-the-consultations"
-      values={Object {}}
+      values={
+        Object {
+          "from": "de Cap Collectif",
+        }
+      }
     />
   </Field>
   <Field
@@ -641,7 +653,11 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
   >
     <FormattedMessage
       id="receive-news-and-results-of-the-consultations"
-      values={Object {}}
+      values={
+        Object {
+          "from": "de Cap Collectif",
+        }
+      }
     />
   </Field>
   <Field
