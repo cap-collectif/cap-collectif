@@ -171,11 +171,8 @@ class ExportController extends Controller
                             $contributor['notRegisteredEmail'],
                             $contributor['username'],
                             null,
-                            isset($contributor['registeredAt']) ?? null,
-                            isset($contributor['registeredAnonymously']) &&
-                            $contributor['registeredAnonymously']
-                                ? 'yes'
-                                : 'no',
+                            $edge['registeredAt'],
+                            $edge['registeredAnonymously'] ? 'yes' : 'no',
                             null,
                             null,
                             null,
