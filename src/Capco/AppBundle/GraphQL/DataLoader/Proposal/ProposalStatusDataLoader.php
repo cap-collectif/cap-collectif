@@ -14,26 +14,22 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProposalStatusDataLoader extends BatchDataLoader
 {
     private $globalIdResolver;
-    private $tokenStorage;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisCache $cache,
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
-        TokenStorageInterface $tokenStorage,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
         bool $enableCache
     ) {
         $this->globalIdResolver = $globalIdResolver;
-        $this->tokenStorage = $tokenStorage;
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -96,20 +92,17 @@ class ProposalStatusDataLoader extends BatchDataLoader
     {
         $statuses = [];
         foreach ($keys as $key) {
-            $statuses[] = $this->resolve($key['proposal'], $key['args']);
+            $statuses[] = $this->resolve($key['proposal'], $key['args'], $key['viewer']);
         }
 
         return $statuses;
     }
 
-    private function resolve(Proposal $proposal, Argument $args): ?Status
+    private function resolve(Proposal $proposal, Argument $args, $viewer): ?Status
     {
         if ($args->offsetExists('step') && $args->offsetGet('step')) {
             $stepId = $args->offsetGet('step');
-            $step = $this->globalIdResolver->resolve(
-                $stepId,
-                $this->tokenStorage->getToken()->getUser()
-            );
+            $step = $this->globalIdResolver->resolve($stepId, $viewer);
 
             if ($step instanceof CollectStep) {
                 return $proposal->getStatus();

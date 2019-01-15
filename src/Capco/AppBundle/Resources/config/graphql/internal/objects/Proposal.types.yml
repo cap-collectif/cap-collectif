@@ -75,7 +75,7 @@ Proposal:
         description: 'The related project.'
       status:
         type: 'Status'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStatusResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStatusResolver", [value, args, getUser()])'
         args:
           step:
             type: 'ID'
