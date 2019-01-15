@@ -21,7 +21,8 @@ Scenario: Events can be filtered by projects
   Given feature "projects_form" is enabled
   And I visited "events page"
   And I click the "#event-button-filter" element
-  And I select "Croissance, innovation, disruption" from react "#project"
+  And I wait 1 seconds
+  And I select and click "Croissance, innovation, disruption" from react "#project"
   Then I should see 3 ".event" elements
   And I should see "Event with registrations"
   # And I should see "Event without registrations"
@@ -41,7 +42,7 @@ Scenario: Events can be filtered by theme
   And I click the "#event-button-filter" element
   And I select "Justice" from react "#theme"
   And I wait 1 seconds
-  Then I should see 2 ".event" elements
+  Then I should see 1 ".event" elements
   And I should see "Event with registrations"
   And I should not see "ParisWeb2015"
 

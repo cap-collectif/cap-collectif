@@ -45,8 +45,8 @@ const countFilters = (theme: ?string, project: ?string, search: ?string): number
 };
 
 const query = graphql`
-  query EventListFiltersQuery($withEventOnly: Boolean, $term: String) {
-    projects(withEventOnly: $withEventOnly, term: $term) {
+  query EventListFiltersQuery($withEventOnly: Boolean) {
+    projects(withEventOnly: $withEventOnly) {
       edges {
         node {
           id
@@ -108,8 +108,8 @@ export class EventListFilters extends React.Component<Props> {
           id="project"
           name="project"
           placeholder={intl.formatMessage({ id: 'type-project' })}
-          loadOptions={input =>
-            fetchQuery(environment, query, { withEventOnly: true, term: input }).then(res => ({
+          loadOptions={() =>
+            fetchQuery(environment, query, { withEventOnly: true }).then(res => ({
               options: res.projects.edges.map(edge => ({
                 value: edge.node.id,
                 label: edge.node.title,
