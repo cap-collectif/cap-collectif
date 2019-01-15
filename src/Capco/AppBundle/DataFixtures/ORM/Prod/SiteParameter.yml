@@ -430,3 +430,9 @@ Capco\AppBundle\Entity\SiteParameter:
     value: 50
     position: 1
     type: 2
+  SiteParameterCommunicationFrom:
+    keyname: global.site.communication_from
+    category: settings.global
+    value: de Cap Collectif
+    position: 2
+    type: 0
