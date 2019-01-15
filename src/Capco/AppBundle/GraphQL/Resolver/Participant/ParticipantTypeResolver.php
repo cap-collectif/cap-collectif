@@ -7,14 +7,17 @@ use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Psr\Log\LoggerInterface;
 
 class ParticipantTypeResolver implements ResolverInterface
 {
     private $typeResolver;
+    private $logger;
 
-    public function __construct(TypeResolver $typeResolver)
+    public function __construct(TypeResolver $typeResolver, LoggerInterface $logger)
     {
         $this->typeResolver = $typeResolver;
+        $this->logger = $logger;
     }
 
     public function __invoke($node)

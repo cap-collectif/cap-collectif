@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import EventPageHeader_query from './__generated__/EventPageHeader_query.graphql';
+import type { EventPageHeader_query } from './__generated__/EventPageHeader_query.graphql';
 
 type Props = {
   query: EventPageHeader_query,
