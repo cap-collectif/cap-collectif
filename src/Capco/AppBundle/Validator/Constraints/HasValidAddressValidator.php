@@ -21,16 +21,26 @@ class HasValidAddressValidator extends ConstraintValidator
 
     public function validate($object, Constraint $constraint): bool
     {
-        if (!$object->getAddress() || !$object->getCity()) {
+        if (empty($object->getCity())) {
             $object->setLat(null);
             $object->setLng(null);
 
             return true;
         }
-        $address = $object->getAddress() . ', ' . $object->getZipCode() . ' ' . $object->getCity() . ', ' . $object->getCountry();
+
+        $address = !empty($object->getAddress()) ? $object->getAddress() . ', ' : '';
+        $address .= !empty($object->getZipCode()) ? $object->getZipCode() . ' ' : '';
+        $address .= !empty($object->getCity()) ? $object->getCity() . ', ' : '';
+        $address .= !empty($object->getCountry()) ? $object->getCountry() : '';
+
+        $address = rtrim($address, ', ');
+        $address = trim($address);
 
         try {
-            $coordinates = $this->geocoder->geocode($address)->first()->getCoordinates();
+            $coordinates = $this->geocoder
+                ->geocode($address)
+                ->first()
+                ->getCoordinates();
         } catch (NoResult $e) {
             $this->logger->error($e->getMessage());
             $coordinates = false;
@@ -41,22 +51,24 @@ class HasValidAddressValidator extends ConstraintValidator
             $object->setLng($coordinates->getLongitude());
         } else {
             $this->context
-                    ->buildViolation($constraint->message)
-                    ->atPath('address')
-                    ->addViolation()
-                ;
-            $this->context->buildViolation('')
-                    ->atPath('zipCode')
-                    ->addViolation()
-                ;
-            $this->context->buildViolation('')
-                    ->atPath('city')
-                    ->addViolation()
-                ;
-            $this->context->buildViolation('')
-                    ->atPath('country')
-                    ->addViolation()
-                ;
+                ->buildViolation($constraint->message)
+                ->atPath('address')
+                ->addViolation();
+            $this->context
+                ->buildViolation('')
+                ->atPath('zipCode')
+                ->addViolation();
+            $this->context
+                ->buildViolation('')
+                ->atPath('city')
+                ->addViolation();
+            $this->context
+                ->buildViolation('')
+                ->atPath('country')
+                ->addViolation();
+
+            $object->setLat(null);
+            $object->setLng(null);
 
             return false;
         }
