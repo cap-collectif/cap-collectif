@@ -28,6 +28,9 @@ PreviewQuery:
           author:
             type: 'ID'
             description: 'If non-null, filter projects by author'
+          withEventOnly:
+            type: 'Boolean'
+            description: 'If non-null, filter projects with events'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectsResolver", [args, getUser()])'
       events:
         type: 'PreviewEventConnection!'
