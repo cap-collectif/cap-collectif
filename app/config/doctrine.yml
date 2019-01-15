@@ -13,9 +13,9 @@ doctrine:
     mapping_types:
       enum: string
   orm:
-    metadata_cache_driver: apcu
-    query_cache_driver: apcu
-    result_cache_driver: apcu
+#    metadata_cache_driver: apcu
+#    query_cache_driver: apcu
+#    result_cache_driver: apcu
     # not the best production setting but otherwise cache:warmup fail
     auto_generate_proxy_classes: '%kernel.debug%'
     auto_mapping: true
