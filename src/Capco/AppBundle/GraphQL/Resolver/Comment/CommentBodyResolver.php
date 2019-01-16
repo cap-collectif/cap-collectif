@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Comment;
 use Capco\AppBundle\Entity\Comment;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 class CommentBodyResolver implements ResolverInterface
 {
@@ -17,7 +18,7 @@ class CommentBodyResolver implements ResolverInterface
 
     public function __invoke(Comment $comment): string
     {
-        if ($comment->isTrashed() && 'invisible' === $comment->getTrashedStatus()) {
+        if ($comment->isTrashed() && Trashable::STATUS_INVISIBLE === $comment->getTrashedStatus()) {
             return $this->translator->trans('hidden-content', [], 'CapcoAppBundle');
         }
 
