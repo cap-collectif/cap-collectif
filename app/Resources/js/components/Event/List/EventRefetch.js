@@ -6,7 +6,7 @@ import { formValueSelector } from 'redux-form';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import EventListPaginated from './EventListPaginated';
 import type { GlobalState } from '../../../types';
-import type { EventRefetch_query } from './__generated__/EventRefetch_query.graphql';
+import type EventRefetch_query from './__generated__/EventRefetch_query.graphql';
 
 type Props = {
   search: ?string,
@@ -14,7 +14,6 @@ type Props = {
   query: EventRefetch_query,
   theme: ?string,
   project: ?string,
-  userType: ?string,
 };
 
 type State = {
@@ -30,8 +29,7 @@ export class EventRefetch extends React.Component<Props, State> {
     if (
       prevProps.theme !== this.props.theme ||
       prevProps.project !== this.props.project ||
-      prevProps.search !== this.props.search ||
-      prevProps.userType !== this.props.userType
+      prevProps.search !== this.props.search
     ) {
       this._refetch();
     }
@@ -46,7 +44,6 @@ export class EventRefetch extends React.Component<Props, State> {
       search: this.props.search || null,
       theme: this.props.theme || null,
       project: this.props.project || null,
-      userType: this.props.userType || null,
     });
 
     this.props.relay.refetch(
@@ -76,7 +73,6 @@ const mapStateToProps = (state: GlobalState) => ({
   theme: selector(state, 'theme'),
   project: selector(state, 'project'),
   search: selector(state, 'search'),
-  userType: selector(state, 'userType'),
 });
 
 const container = connect(mapStateToProps)(EventRefetch);
@@ -92,7 +88,6 @@ export default createRefetchContainer(
           theme: { type: "ID" }
           project: { type: "ID" }
           search: { type: "String" }
-          userType: { type: "ID" }
           isFuture: { type: "Boolean" }
         ) {
         ...EventListPaginated_query
@@ -102,7 +97,6 @@ export default createRefetchContainer(
             theme: $theme
             project: $project
             search: $search
-            userType: $userType
             isFuture: $isFuture
           )
         ...EventPageHeader_query
@@ -112,7 +106,6 @@ export default createRefetchContainer(
             theme: $theme
             project: $project
             search: $search
-            userType: $userType
             isFuture: $isFuture
           )
       }
@@ -124,7 +117,6 @@ export default createRefetchContainer(
       $count: Int
       $theme: ID
       $project: ID
-      $userType: ID
       $search: String
       $isFuture: Boolean
     ) {
@@ -134,7 +126,6 @@ export default createRefetchContainer(
           count: $count
           theme: $theme
           project: $project
-          userType: $userType
           search: $search
           isFuture: $isFuture
         )

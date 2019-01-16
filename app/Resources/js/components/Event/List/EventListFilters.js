@@ -25,7 +25,6 @@ type Props = {|
   search: ?string,
   intl: IntlShape,
   addToggleViewButton: ?boolean,
-  userTypes: Array<Object>,
 |};
 
 const countFilters = (theme: ?string, project: ?string, search: ?string): number => {
@@ -53,7 +52,6 @@ export class EventListFilters extends React.Component<Props> {
       project,
       search,
       reset,
-      userTypes,
       intl,
       addToggleViewButton,
       dispatch,
@@ -116,17 +114,6 @@ export class EventListFilters extends React.Component<Props> {
       );
     }
 
-    filters.push(
-      <Field
-        component={select}
-        autoload
-        name="userType"
-        id="EventListFilters-filter-userType"
-        placeholder={intl.formatMessage({ id: 'registration.type' })}
-        options={userTypes.map(u => ({ value: u.id, label: u.name }))}
-      />,
-    );
-
     const popoverBottom = (
       <div>
         <form>
@@ -184,9 +171,7 @@ const mapStateToProps = (state: GlobalState) => ({
   theme: selector(state, 'theme'),
   project: selector(state, 'project'),
   search: selector(state, 'search'),
-  userType: selector(state, 'userType'),
   projects: state.project.projectsById,
-  userTypes: state.default.userTypes,
 });
 
 const form = reduxForm({

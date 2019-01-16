@@ -89,7 +89,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     data.private = values.private;
   }
 
-  return AddReplyMutation.commit({ input: data })
+  return AddReplyMutation.commit({ input: data, isAuthenticated: true })
     .then(() => {
       AppDispatcher.dispatch({
         actionType: 'UPDATE_ALERT',

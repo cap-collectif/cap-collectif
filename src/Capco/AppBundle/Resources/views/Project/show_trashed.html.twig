@@ -88,6 +88,15 @@
                     {% endfor %}
                 </div>
             {% endif %}
+            {{
+                react_render_component('ProjectTrashCommentApp', {
+                    'props': {
+                        'projectId': project.id,
+                        'isAuthenticated': is_granted('ROLE_USER'),
+                    },
+                    'rendering': 'client_side'
+                }) 
+            }}
         </div>
     </div>
 {% endblock %}

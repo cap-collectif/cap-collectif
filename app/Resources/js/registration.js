@@ -61,6 +61,7 @@ import VoteListApp from './startup/VoteListApp';
 import EventApp from './startup/EventApp';
 import ProjectDistrictAdminApp from './startup/ProjectDistrictAdminApp';
 import SiteFaviconAdminPageApp from './startup/SiteFaviconAdminPageApp';
+import ProjectTrashCommentApp from './startup/ProjectTrashCommentApp';
 
 import appStore from './stores/AppStore';
 import MapAdminPageApp from './startup/MapAdminPageApp';
@@ -149,4 +150,5 @@ ReactOnRails.register({
   VoteListApp,
   EventApp,
   ProjectDistrictAdminApp,
+  ProjectTrashCommentApp,
 });

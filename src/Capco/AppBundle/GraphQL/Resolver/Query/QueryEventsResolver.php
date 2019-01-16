@@ -3,11 +3,13 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Search\EventSearch;
+use Capco\AppBundle\Utils\Text;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class QueryEventsResolver implements ResolverInterface
 {
@@ -31,7 +33,6 @@ class QueryEventsResolver implements ResolverInterface
         if ($args->offsetExists('isFuture')) {
             $order = $args->offsetGet('isFuture');
         }
-
         try {
             $paginator = new Paginator(function (int $offset, int $limit) use (
                 $args,
@@ -48,9 +49,6 @@ class QueryEventsResolver implements ResolverInterface
                 }
                 if ($args->offsetExists('isFuture')) {
                     $filters['isFuture'] = $args->offsetGet('isFuture');
-                }
-                if ($args->offsetExists('userType')) {
-                    $filters['userType'] = $args->offsetGet('userType');
                 }
 
                 $results = $this->eventSearch->searchEvents(
@@ -72,7 +70,6 @@ class QueryEventsResolver implements ResolverInterface
             return $connection;
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-
             throw new \RuntimeException('Could not find events');
         }
     }

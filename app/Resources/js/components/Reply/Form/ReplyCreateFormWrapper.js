@@ -105,7 +105,7 @@ const container = connect(mapStateToProps)(ReplyCreateFormWrapper);
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment ReplyCreateFormWrapper_questionnaire on Questionnaire
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       anonymousAllowed
       description
       multipleRepliesAllowed
