@@ -30,7 +30,8 @@ PreviewQuery:
             description: 'If non-null, filter projects by author'
           withEventOnly:
             type: 'Boolean'
-            description: 'If non-null, filter projects with events'
+            description: 'If true, filter projects with events'
+            defaultValue: false
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectsResolver", [args, getUser()])'
       events:
         type: 'PreviewEventConnection!'

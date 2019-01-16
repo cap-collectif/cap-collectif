@@ -113,7 +113,7 @@ mappings:
         properties:
           id: { type: keyword }
           slug: { type: keyword }
-      eventCount: { type: float }
+      eventCount: { type: long }
   comment:
     properties:
       id: { type: keyword }

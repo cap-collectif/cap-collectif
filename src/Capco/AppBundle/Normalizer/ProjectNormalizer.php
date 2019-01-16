@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Helper\ProjectHelper;
+use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
 use Capco\AppBundle\Resolver\StepResolver;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -23,6 +24,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
     private $mediaExtension;
     private $stepResolver;
     private $contributionResolver;
+    private $eventRepository;
 
     public function __construct(
         UrlGeneratorInterface $router,
@@ -30,7 +32,8 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         ProjectHelper $helper,
         MediaExtension $mediaExtension,
         StepResolver $stepResolver,
-        ContributionResolver $contributionResolver
+        ContributionResolver $contributionResolver,
+        EventRepository $eventRepository
     ) {
         $this->router = $router;
         $this->normalizer = $normalizer;
@@ -38,12 +41,14 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->mediaExtension = $mediaExtension;
         $this->stepResolver = $stepResolver;
         $this->contributionResolver = $contributionResolver;
+        $this->eventRepository = $eventRepository;
     }
 
     public function normalize($object, $format = null, array $context = [])
     {
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
+        /** @var Project $object */
         $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Elasticsearch', $groups)) {
@@ -51,7 +56,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
             $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
                 $object
             );
-            $data['eventCount'] = \count($object->getEvents());
+            $data['eventCount'] = $this->eventRepository->countByProject($object->getId());
 
             return $data;
         }

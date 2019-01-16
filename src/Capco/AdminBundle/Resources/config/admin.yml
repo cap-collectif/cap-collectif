@@ -444,7 +444,7 @@ services:
 
   capco_admin.admin.event:
     class: Capco\AdminBundle\Admin\EventAdmin
-    arguments: [~, Capco\AppBundle\Entity\Event, CapcoAdminBundle:CRUD, '@security.token_storage']
+    arguments: [~, Capco\AppBundle\Entity\Event, CapcoAdminBundle:CRUD, '@Capco\AppBundle\Elasticsearch\Indexer']
     tags:
       - {
           name: sonata.admin,
