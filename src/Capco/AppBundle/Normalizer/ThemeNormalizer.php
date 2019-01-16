@@ -3,8 +3,6 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Theme;
-use Sonata\MediaBundle\Twig\Extension\MediaExtension;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -16,16 +14,11 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
     use SerializerAwareTrait;
     private $router;
     private $normalizer;
-    private $mediaExtension;
 
-    public function __construct(
-        UrlGeneratorInterface $router,
-        ObjectNormalizer $normalizer,
-        MediaExtension $mediaExtension
-    ) {
+    public function __construct(UrlGeneratorInterface $router, ObjectNormalizer $normalizer)
+    {
         $this->router = $router;
         $this->normalizer = $normalizer;
-        $this->mediaExtension = $mediaExtension;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -47,12 +40,6 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
                 true
             ),
         ];
-
-        try {
-            $data['media']['url'] = $this->mediaExtension->path($object->getMedia(), 'slider');
-        } catch (RouteNotFoundException $e) {
-            // Avoid some SonataMedia problems
-        }
 
         return $data;
     }
