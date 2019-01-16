@@ -136,7 +136,7 @@ Scenario: Project header should display correct number of votes
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see "10 project.show.meta.votes_count"
+  Then I should see "6 project.show.meta.votes_count"
 
 Scenario: Can not have access to download if export is disabled
   Given I visited "consultation page" with:
@@ -257,7 +257,6 @@ Scenario: Admin access to his project and click to edit it
   When I visited "collect page" with:
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-capcobeer                          |
-  And I wait 1 seconds
   Then I should see "Collecte des propositions pour la capcoBeer"
   And I should see "project.show.published_by admin"
   And I should see "global.draft.only_visible_by_you"
