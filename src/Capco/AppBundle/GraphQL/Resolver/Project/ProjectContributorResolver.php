@@ -17,7 +17,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProjectContributorResolver implements ResolverInterface
 {
-    public $useElasticsearch = true;
+    public $useElasticsearch = false;
     private $userSearch;
     private $logger;
     private $proposalSelectionVoteRepository;
