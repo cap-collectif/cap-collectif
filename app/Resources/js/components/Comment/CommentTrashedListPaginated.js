@@ -37,7 +37,9 @@ export class CommentTrashedListPaginated extends React.Component<Props, State> {
 
     return (
       <React.Fragment>
-        <h3>{project.comments.totalCount} Comment(s)</h3>
+        <h3>
+          {project.comments.totalCount} <FormattedMessage id="admin.fields.proposal.comments" />
+        </h3>
         <ListGroup bsClass="media-list" componentClass="ul">
           {project &&
             project.comments &&
@@ -46,7 +48,7 @@ export class CommentTrashedListPaginated extends React.Component<Props, State> {
               .filter(Boolean)
               .map(edge => edge.node)
               .filter(Boolean)
-              .map(node => <Comment key={node.id} comment={node} />)}
+              .map(node => <Comment key={node.id} comment={node} disabledButton />)}
           {relay.hasMore() && (
             <ListGroupItem style={{ textAlign: 'center' }}>
               {loading ? (

@@ -62,7 +62,7 @@ class CommentBody extends React.Component<Props, State> {
     const { comment } = this.props;
     if (comment.trashed) {
       return (
-        <span className="label label-default">
+        <span className="label label-default mr-5">
           {<FormattedMessage id="comment.trashed.label" />}
         </span>
       );
