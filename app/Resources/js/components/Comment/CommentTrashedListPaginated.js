@@ -13,24 +13,24 @@ type Props = {
 };
 
 type State = {
-  loading: boolean,
+  isLoading: boolean,
 };
 
 export class CommentTrashedListPaginated extends React.Component<Props, State> {
   state = {
-    loading: false,
+    isLoading: false,
   };
 
   handleLoadMore = () => {
-    this.setState({ loading: true });
+    this.setState({ isLoading: true });
     this.props.relay.loadMore(TRASHED_COMMENT_PAGINATOR_COUNT, () => {
-      this.setState({ loading: false });
+      this.setState({ isLoading: false });
     });
   };
 
   render() {
     const { project, relay } = this.props;
-    const { loading } = this.state;
+    const { isLoading } = this.state;
     if (!project.comments || project.comments.totalCount === 0) {
       return null;
     }
@@ -51,7 +51,7 @@ export class CommentTrashedListPaginated extends React.Component<Props, State> {
               .map(node => <Comment key={node.id} comment={node} disabledButton />)}
           {relay.hasMore() && (
             <ListGroupItem style={{ textAlign: 'center' }}>
-              {loading ? (
+              {isLoading ? (
                 <Loader />
               ) : (
                 <Button bsStyle="link" onClick={this.handleLoadMore}>

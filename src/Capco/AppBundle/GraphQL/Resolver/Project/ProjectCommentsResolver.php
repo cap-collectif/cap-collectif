@@ -33,6 +33,10 @@ class ProjectCommentsResolver implements ResolverInterface
                 $project,
                 $onlyTrashed
             ) {
+                if (0 === $offset && 0 === $limit) {
+                    return [];
+                }
+
                 return $this->proposalCommentRepository
                     ->getByProject($project, $offset, $limit, $onlyTrashed)
                     ->getIterator()
