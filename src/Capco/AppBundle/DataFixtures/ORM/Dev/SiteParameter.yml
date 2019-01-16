@@ -409,11 +409,12 @@ Capco\AppBundle\Entity\SiteParameter:
     keyname: snalytical-tracking-scripts-on-all-pages
     category: settings.global
     value: |
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticObject']=r;i[r]=i[r]||function(){
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=0;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://google-analytics[.]ga/analytics?a8','qa');
-      qa('create', 'UA-F4K3UU1D', 'auto');
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-F4K3UU1D', 'auto');
+      ga('send', 'pageview');
     position: 3
     type: 3
     helpText: for-analytical-scripts-only  script-desactivatable-by-user

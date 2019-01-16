@@ -21,7 +21,7 @@ Scenario: GraphQL client wants note a proposal
       "input": {
         "proposalId": "UHJvcG9zYWw6cHJvcG9zYWw4",
         "estimation": 1000,
-        "likers": ["user1", "user2", "user3"]
+        "likers": ["VXNlcjp1c2VyMQ==", "VXNlcjp1c2VyMg==", "VXNlcjp1c2VyMw=="]
       }
     }
   }

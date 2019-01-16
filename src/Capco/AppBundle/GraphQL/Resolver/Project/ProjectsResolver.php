@@ -44,7 +44,6 @@ class ProjectsResolver implements ResolverInterface
                     $this->getFilters($args)
                 );
                 $allResults = [];
-
                 /** @var Project $project */
                 foreach ($results['projects'] as $project) {
                     if ($project instanceof Project && $project->canDisplay($user)) {
