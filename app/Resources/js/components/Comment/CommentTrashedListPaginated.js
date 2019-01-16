@@ -1,34 +1,44 @@
 // @flow
 import React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import classNames from 'classnames';
 import Comment from './Comment';
+import Loader from '../Ui/FeedbacksIndicators/Loader';
 import { TRASHED_COMMENT_PAGINATOR_COUNT } from '../Project/ProjectTrashComment';
 
 type Props = {
   relay: RelayPaginationProp,
-  intl: IntlShape,
-  highlightedComment: ?string,
   project: Object,
 };
 
-export class CommentTrashedListPaginated extends React.Component<Props> {
+type State = {
+  loading: boolean,
+};
+
+export class CommentTrashedListPaginated extends React.Component<Props, State> {
+  state = {
+    loading: false,
+  };
+
+  handleLoadMore = () => {
+    this.setState({ loading: true });
+    this.props.relay.loadMore(TRASHED_COMMENT_PAGINATOR_COUNT, () => {
+      this.setState({ loading: false });
+    });
+  };
+
   render() {
-    const { intl, project, relay, highlightedComment } = this.props;
+    const { project, relay } = this.props;
+    const { loading } = this.state;
     if (!project.comments || project.comments.totalCount === 0) {
       return null;
     }
 
-    const classes = classNames({
-      'media-list': true,
-      opinion__list: true,
-    });
-
     return (
       <React.Fragment>
         <h3>{project.comments.totalCount} Comment(s)</h3>
-        <ul id="comments" className={classes}>
+        <ListGroup bsClass="media-list" componentClass="ul">
           {project &&
             project.comments &&
             project.comments.edges &&
@@ -36,33 +46,26 @@ export class CommentTrashedListPaginated extends React.Component<Props> {
               .filter(Boolean)
               .map(edge => edge.node)
               .filter(Boolean)
-              .map(node => (
-                // $FlowFixMe
-                <Comment
-                  key={node.id}
-                  comment={node}
-                  isHighlighted={node.id === highlightedComment}
-                />
-              ))}
+              .map(node => <Comment key={node.id} comment={node} />)}
           {relay.hasMore() && (
-            <button
-              id="comments-section-load-more"
-              className="btn btn-block btn-secondary"
-              data-loading-text={intl.formatMessage({ id: 'global.loading' })}
-              onClick={() => {
-                relay.loadMore(TRASHED_COMMENT_PAGINATOR_COUNT);
-              }}>
-              <FormattedMessage id="comment.more" />
-            </button>
+            <ListGroupItem style={{ textAlign: 'center' }}>
+              {loading ? (
+                <Loader />
+              ) : (
+                <Button bsStyle="link" onClick={this.handleLoadMore}>
+                  <FormattedMessage id="global.more" />
+                </Button>
+              )}
+            </ListGroupItem>
           )}
-        </ul>
+        </ListGroup>
       </React.Fragment>
     );
   }
 }
 
 export default createPaginationContainer(
-  injectIntl(CommentTrashedListPaginated),
+  CommentTrashedListPaginated,
   {
     project: graphql`
       fragment CommentTrashedListPaginated_project on Project {
