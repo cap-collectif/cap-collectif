@@ -12,11 +12,8 @@ use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Request\ParamFetcherInterface;
 use Capco\UserBundle\Form\Type\ApiProfileFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use Symfony\Component\Validator\Constraints as Assert;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
@@ -54,50 +51,6 @@ class UsersController extends FOSRestController
         $notInIds = $request->request->has('notInIds') ? $request->request->get('notInIds') : null;
 
         return $this->get('capco.search.user_search')->searchAllUsers($terms, $notInIds);
-    }
-
-    /**
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get users",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *  }
-     * )
-     *
-     * @Get("/users")
-     * @QueryParam(name="type", requirements="[a-z]+", nullable=true)
-     * @QueryParam(name="from", nullable=true)
-     * @QueryParam(name="to", nullable=true)
-     * @QueryParam(name="email", requirements=@Assert\Email, nullable=true)
-     * @View(serializerGroups={"UserId"})
-     */
-    public function getUsersAction(ParamFetcherInterface $paramFetcher)
-    {
-        $type = $paramFetcher->get('type');
-        $from = $paramFetcher->get('from');
-        $to = $paramFetcher->get('to');
-        $email = $paramFetcher->get('email');
-        $userType = null;
-
-        if ($type) {
-            $userType = $this->container->get('capco.user_type.repository')->findOneBySlug($type);
-            if (!$userType) {
-                throw new BadRequestHttpException(
-                    "This user type doesn't exist, please use a correct slug."
-                );
-            }
-        }
-
-        if ($email) {
-            $users = $this->container->get('capco.user.repository')->findBy(['email' => $email]);
-        } else {
-            $users = $this->container
-                ->get('capco.user.repository')
-                ->getPublishedWith($userType, $from, $to);
-        }
-
-        return ['count' => \count($users), 'users' => $users];
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -37,6 +38,66 @@ class ProposalAdmin extends AbstractAdmin
             ->deleteAll();
 
         return parent::getList();
+    }
+
+    public function getObject($id)
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            $em = $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager();
+            $em->getFilters()->disable('softdeleted');
+        }
+
+        return parent::getObject($id);
+    }
+
+    /**
+     * if user is supper admin return all else return only what I can see.
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            $em = $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager();
+            $em->getFilters()->disable('softdeleted');
+
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        // Not published are not visible
+        // Others depends on project visibility
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.proposalForm', 'pF')
+            ->leftJoin('pF.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'p')
+            ->andWhere($query->getRootAliases()[0] . '.published = true')
+            ->andWhere(
+                $query
+                    ->expr()
+                    ->orX(
+                        $query
+                            ->expr()
+                            ->andX(
+                                $query->expr()->eq('p.Author', ':author'),
+                                $query
+                                    ->expr()
+                                    ->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
+                            ),
+                        $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+                    )
+            );
+        $query->setParameter('author', $user);
+
+        return $query;
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -130,45 +191,5 @@ class ProposalAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(['batch', 'list', 'edit']);
-    }
-
-    /**
-     * if user is supper admin return all else return only what I can see
-     */
-    public function createQuery($context = 'list')
-    {
-        $user = $this->tokenStorage->getToken()->getUser();
-        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
-        }
-
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
-        // Not published are not visible
-        // Others depends on project visibility
-        $query
-            ->leftJoin($query->getRootAliases()[0] . '.proposalForm', 'pF')
-            ->leftJoin('pF.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pAs')
-            ->leftJoin('pAs.project', 'p')
-            ->andWhere($query->getRootAliases()[0] . '.published = true')
-            ->andWhere(
-                $query
-                    ->expr()
-                    ->orX(
-                        $query
-                            ->expr()
-                            ->andX(
-                                $query->expr()->eq('p.Author', ':author'),
-                                $query
-                                    ->expr()
-                                    ->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
-                            ),
-                        $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
-                    )
-            );
-        $query->setParameter('author', $user);
-
-        return $query;
     }
 }
