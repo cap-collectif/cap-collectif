@@ -209,7 +209,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
             <FormattedMessage
               id={keyTradForModalVote}
               values={{
-                num: step.viewerVotes.totalCount,
+                num: step.viewerVotes ? step.viewerVotes.totalCount : 0,
               }}
             />
           </h4>
@@ -290,7 +290,7 @@ export default createFragmentContainer(container, {
       ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
 
       ...ProposalsUserVotesTable_step
-      viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
+      viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         ...ProposalsUserVotesTable_votes
         totalCount
         edges {
