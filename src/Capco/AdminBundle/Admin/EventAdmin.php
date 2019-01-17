@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
@@ -187,9 +188,13 @@ class EventAdmin extends AbstractAdmin
                 'label' => 'admin.fields.event.body',
                 'config_name' => 'admin_editor',
             ])
-            ->add('author', 'sonata_type_model_autocomplete', [
+            ->add('author', ModelAutocompleteType::class, [
                 'label' => 'admin.fields.event.author',
+                'required' => true,
                 'property' => 'username',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail();
+                },
             ])
             ->add('startAt', 'sonata_type_datetime_picker', [
                 'label' => 'admin.fields.event.start_at',
