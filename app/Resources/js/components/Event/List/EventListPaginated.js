@@ -154,6 +154,7 @@ export default createPaginationContainer(
           theme: { type: "ID" }
           project: { type: "ID" }
           search: { type: "String" }
+          status: { type: "String" }
           isFuture: { type: "Boolean" }
         ) {
         events(
@@ -162,6 +163,7 @@ export default createPaginationContainer(
           theme: $theme
           project: $project
           search: $search
+          userType: $status
           isFuture: $isFuture
         ) @connection(key: "EventListPaginated_events", filters: []) {
           totalCount
@@ -206,6 +208,7 @@ export default createPaginationContainer(
         $theme: ID
         $project: ID
         $search: String
+        $status: String
         $isFuture: Boolean
       ) {
         ...EventListPaginated_query
@@ -215,6 +218,7 @@ export default createPaginationContainer(
             theme: $theme
             project: $project
             search: $search
+            userType: $status
             isFuture: $isFuture
           )
       }

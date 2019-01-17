@@ -140,8 +140,9 @@ export default createFragmentContainer(
         requirements {
           viewerMeetsTheRequirements @include(if: $isAuthenticated)
         }
-        ...RequirementsForm_step
-        ...RequirementsModal_step
+        ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+
+        ...RequirementsModal_step @arguments(isAuthenticated: $isAuthenticated)
       }
       contribuable
       viewerHasVote @include(if: $isAuthenticated)

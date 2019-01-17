@@ -114,6 +114,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
       variables={
         Object {
           "consultationId": "stepId",
+          "isAuthenticated": false,
         }
       }
     />
@@ -218,6 +219,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
       variables={
         Object {
           "consultationId": "stepId",
+          "isAuthenticated": false,
         }
       }
     />

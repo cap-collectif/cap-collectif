@@ -8,11 +8,14 @@ import type {
 } from './__generated__/UpdateProposalVotesMutation.graphql';
 
 const mutation = graphql`
-  mutation UpdateProposalVotesMutation($input: UpdateProposalVotesInput!) {
+  mutation UpdateProposalVotesMutation(
+    $input: UpdateProposalVotesInput!
+    $isAuthenticated: Boolean!
+  ) {
     updateProposalVotes(input: $input) {
       step {
         id
-        ...ProposalVoteModal_step
+        ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
         ...ProposalsUserVotesStep_step
       }
     }

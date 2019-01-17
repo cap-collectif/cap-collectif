@@ -139,8 +139,8 @@ export default createFragmentContainer(OpinionSourceBox, {
     fragment OpinionSourceBox_sourceable on Sourceable
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
-      ...OpinionSourceAdd_sourceable
-      ...OpinionSource_sourceable
+      ...OpinionSourceAdd_sourceable @arguments(isAuthenticated: $isAuthenticated)
+      ...OpinionSource_sourceable @arguments(isAuthenticated: $isAuthenticated)
       allSources: sources(first: 0) {
         totalCount
       }

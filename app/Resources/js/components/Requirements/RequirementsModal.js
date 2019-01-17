@@ -52,11 +52,13 @@ const container = connect()(RequirementsModal);
 export default createFragmentContainer(
   container,
   graphql`
-    fragment RequirementsModal_step on Consultation {
-      ...RequirementsForm_step
+    fragment RequirementsModal_step on Consultation
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+
       id
       requirements {
-        viewerMeetsTheRequirements
+        viewerMeetsTheRequirements @include(if: $isAuthenticated)
         reason
       }
     }

@@ -8,11 +8,11 @@ import type {
 } from './__generated__/DeleteReplyMutation.graphql';
 
 const mutation = graphql`
-  mutation DeleteReplyMutation($input: DeleteReplyInput!, $isAuthenticated: Boolean!) {
+  mutation DeleteReplyMutation($input: DeleteReplyInput!) {
     deleteReply(input: $input) {
       questionnaire {
         id
-        ...UserReplies_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+        ...UserReplies_questionnaire
       }
     }
   }

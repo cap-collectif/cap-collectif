@@ -9,7 +9,7 @@ Scenario: Registration is disabled and API client wants to resend an email
   """
   {
     "code":404,
-    "message": "error.feature_not_enabled"
+    "message": "error.feature_not_enabled (registration)"
   }
   """
 

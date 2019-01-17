@@ -43,7 +43,7 @@ export class UserReplies extends React.Component<Props> {
 export default createFragmentContainer(UserReplies, {
   questionnaire: graphql`
     fragment UserReplies_questionnaire on Questionnaire
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       viewerReplies @include(if: $isAuthenticated) {
         id
         ...ReplyModalLink_reply

@@ -140,7 +140,7 @@ export default createFragmentContainer(container, {
     fragment ProposalPageHeader_step on ProposalStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       ...ProposalVoteButtonWrapperFragment_step
-      ...ProposalVoteModal_step @include(if: $isAuthenticated)
+      ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
   proposal: graphql`

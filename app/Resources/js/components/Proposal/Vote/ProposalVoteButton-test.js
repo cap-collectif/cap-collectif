@@ -12,6 +12,7 @@ describe('<ProposalVoteButton />', () => {
     isDeleting: false,
     step: { id: 'stepId' },
     user: { id: 'id1' },
+    isAuthenticated: true,
   };
 
   it('renders viewer has not voted', () => {
