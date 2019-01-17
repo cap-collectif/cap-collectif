@@ -295,7 +295,7 @@ InternalUser:
         description: 'Has the user confirmed his email address ?'
       emailConfirmationSentAt:
         type: 'DateTime'
-        description: "When the user email confirmation was sent."
+        description: 'When the user email confirmation was sent.'
       arguments:
         type: 'ArgumentConnection!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentByUserResolver", [value, args])'
