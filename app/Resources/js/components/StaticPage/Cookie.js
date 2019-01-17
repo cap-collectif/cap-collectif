@@ -1,12 +1,13 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Col, Alert } from 'react-bootstrap';
+import { Col, Alert, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Toggle from 'react-toggle';
 import config from '../../config';
 import cookieMonster from '../../cookieMonster';
 import type { State } from '../../types';
+import FluxDispatcher from '../../dispatchers/AppDispatcher';
 
 type Props = {
   analyticsJs: ?string,
@@ -24,27 +25,64 @@ export class Cookie extends React.Component<Props, CookieState> {
     this.state = {
       isAdvertisingEnabled:
         config.canUseDOM &&
-        (typeof cookieMonster.adCookieConsentValue() === 'undefined'
-          ? true
-          : cookieMonster.adCookieConsentValue()),
+        (typeof cookieMonster.adCookieConsentValue() === 'undefined' ||
+        cookieMonster.adCookieConsentValue() === false
+          ? false
+          : cookieMonster.setCookie(true, 'adCookieConsentValue')),
       isAnalyticEnabled:
         config.canUseDOM &&
-        (typeof cookieMonster.analyticCookieValue() === 'undefined'
-          ? true
-          : cookieMonster.analyticCookieValue()),
+        (typeof cookieMonster.analyticCookieValue() === 'undefined' ||
+        cookieMonster.analyticCookieValue() === false
+          ? false
+          : cookieMonster.setCookie(true, 'analyticConsentValue')),
     };
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      const cookieConsent = document.getElementById('cookie-consent');
+      if (cookieConsent) {
+        cookieConsent.addEventListener(
+          'click',
+          () => {
+            this.toggleCookies(true);
+          },
+          false,
+        );
+      }
+    }, 100);
+  }
+
   toggleAnalyticCookies = (value: boolean): void => {
-    cookieMonster.toggleCookie(value, 'analyticConsentValue');
     this.setState({
       isAnalyticEnabled: value,
     });
   };
 
   toggleAdvertisingCookies = (value: boolean): void => {
-    cookieMonster.toggleCookie(value, 'adCookieConsentValue');
     this.setState({
+      isAdvertisingEnabled: value,
+    });
+  };
+
+  saveCookiesConfiguration = (): void => {
+    const { isAnalyticEnabled, isAdvertisingEnabled } = this.state;
+    cookieMonster.toggleCookie(isAnalyticEnabled, 'analyticConsentValue');
+    cookieMonster.toggleCookie(isAdvertisingEnabled, 'adCookieConsentValue');
+    if (isAnalyticEnabled && isAdvertisingEnabled && cookieMonster.isFullConsent() !== true) {
+      cookieMonster.considerFullConsent();
+    } else {
+      cookieMonster.doNotConsiderFullConsent();
+    }
+    FluxDispatcher.dispatch({
+      actionType: 'UPDATE_ALERT',
+      alert: { bsStyle: 'success', content: 'your-settings-have-been-saved-successfully' },
+    });
+  };
+
+  toggleCookies = (value: boolean): void => {
+    this.setState({
+      isAnalyticEnabled: value,
       isAdvertisingEnabled: value,
     });
   };
@@ -52,6 +90,7 @@ export class Cookie extends React.Component<Props, CookieState> {
   render() {
     const { isAnalyticEnabled, isAdvertisingEnabled } = this.state;
     const { analyticsJs, adJs } = this.props;
+
     return (
       <div id="cookies-manager">
         <div>
@@ -143,6 +182,18 @@ export class Cookie extends React.Component<Props, CookieState> {
             </div>
           </div>
         )}
+        <div>
+          <div className="row" style={{ padding: '10px 0' }} id="cookies-management-save">
+            <Button
+              className="ml-15 btn-primary"
+              id="cookies-save"
+              onClick={() => {
+                this.saveCookiesConfiguration();
+              }}>
+              <FormattedMessage id="global.save" />
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }

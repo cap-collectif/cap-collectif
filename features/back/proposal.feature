@@ -66,7 +66,7 @@ Scenario: Logged in admin, wants to change the proposal's status
 
 @database @elasticsearch
 Scenario: Logged in admin, wants to delete a proposal and check if followers are not present
-  Given I am logged in as super admin
+  Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal status tab
   And I delete the proposal
@@ -101,7 +101,7 @@ Scenario: Logged in admin, wants to download followers as CSV
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal followers tab
-  And I click on button "[id='proposal-follower-export-UHJvcG9zYWw6cHJvcG9zYWwxMA==']"
+  And I click on button "#proposal-follower-export-proposal10"
   And I follow "export_format_csv"
 
 @database @elasticsearch
@@ -109,5 +109,5 @@ Scenario: Logged in admin, wants to download followers as xlsx
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal followers tab
-  And I click on button "[id='proposal-follower-export-UHJvcG9zYWw6cHJvcG9zYWwxMA==']"
+  And I click on button "#proposal-follower-export-proposal10"
   And I follow "project.download.modal.button"

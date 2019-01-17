@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Questionnaire;
@@ -9,15 +8,17 @@ use Capco\AppBundle\Helper\GeometryHelper;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
+use PhpParser\Node\Arg;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 class QuestionResolver implements ResolverInterface
 {
     private $abstractQuestionRepository;
     private $proposalFormRepository;
     private $questionnaireRepository;
-
     public function __construct(
         AbstractQuestionRepository $abstractQuestionRepository,
         ProposalFormRepository $proposalFormRepository,
@@ -33,7 +34,7 @@ class QuestionResolver implements ResolverInterface
         return $question->getType();
     }
 
-    public function resolve(Argument $args): AbstractQuestion
+    public function resolve(Arg $args): AbstractQuestion
     {
         return $this->abstractQuestionRepository->find($args['id']);
     }
@@ -91,7 +92,6 @@ class QuestionResolver implements ResolverInterface
             return $a->getQuestionnaireAbstractQuestion()->getPosition() <=>
                 $b->getQuestionnaireAbstractQuestion()->getPosition();
         });
-
         return $questions;
     }
 
