@@ -15,8 +15,11 @@ class ViewerMeetsTheRequirementResolver implements ResolverInterface
         $this->resolver = $resolver;
     }
 
-    public function __invoke(Requirement $requirement, User $user): bool
+    public function __invoke(Requirement $requirement, ?User $user): bool
     {
+        if (null === $user) {
+            return false;
+        }
         $value = $this->resolver->__invoke($requirement, $user);
         if (null === $value) {
             return false;
