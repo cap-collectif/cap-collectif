@@ -1,9 +1,10 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import CommentTrashedListPaginated from '../Comment/CommentTrashedListPaginated';
+import type { ProjectTrashCommentQueryResponse } from './__generated__/ProjectTrashCommentQuery.graphql';
 
 type Props = {
   projectId: string,
@@ -38,7 +39,10 @@ export class ProjectTrashComment extends React.Component<Props> {
             count: TRASHED_COMMENT_PAGINATOR_COUNT,
             cursor: null,
           }}
-          render={({ error, props }) => {
+          render={({
+            error,
+            props,
+          }: { props?: ?ProjectTrashCommentQueryResponse } & ReadyState) => {
             if (error) {
               return graphqlError;
             }
