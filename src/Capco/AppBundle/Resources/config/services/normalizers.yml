@@ -41,3 +41,6 @@ services:
 
   Capco\AppBundle\Normalizer\PostNormalizer:
     tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\EventNormalizer:
+    tags: ['serializer.normalizer']
