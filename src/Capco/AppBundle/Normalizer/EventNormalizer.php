@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Entity\Event;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 
-class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
+class EventNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
     use SerializerAwareTrait;
     private $router;
@@ -40,7 +40,7 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
 
         $data['_links'] = [
             'show' => $this->router->generate(
-                'app_theme_show',
+                'app_event',
                 [
                     'slug' => $object->getSlug(),
                 ],
@@ -59,6 +59,6 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
 
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof Theme;
+        return $data instanceof Event;
     }
 }
