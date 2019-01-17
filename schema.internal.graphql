@@ -5781,6 +5781,7 @@ input UpdateProposalVotesInput {
 
   # The votes.
   votes: [VoteInput!]!
+  isAuthenticated: Boolean!
   clientMutationId: String
 }
 

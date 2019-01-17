@@ -229,7 +229,7 @@ export default createFragmentContainer(OpinionVotesButton, {
         contribuable
         step {
           requirements {
-            viewerMeetsTheRequirements
+            viewerMeetsTheRequirements @include(if: $isAuthenticated)
           }
           ...RequirementsForm_step
           ...RequirementsModal_step
@@ -248,7 +248,7 @@ export default createFragmentContainer(OpinionVotesButton, {
         contribuable
         step {
           requirements {
-            viewerMeetsTheRequirements
+            viewerMeetsTheRequirements @include(if: $isAuthenticated)
           }
           ...RequirementsForm_step
           ...RequirementsModal_step
