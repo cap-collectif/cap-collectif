@@ -81,10 +81,21 @@ class ThemeController extends Controller
             );
         }
 
+        $serializer = $this->get('serializer');
+        $ideaCreationProps = $serializer->serialize(
+            [
+                'themes' => $this->get('capco.theme.repository')->findAll(),
+                'themeId' => $theme->getId(),
+            ],
+            'json',
+            ['groups' => ['ThemeDetails']]
+        );
+
         return [
             'theme' => $theme,
             'themeId' => $theme->getId(),
             'max' => 12,
+            'ideaCreationProps' => $ideaCreationProps,
         ];
     }
 }

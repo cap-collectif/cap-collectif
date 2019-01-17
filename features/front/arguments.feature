@@ -189,6 +189,7 @@ Scenario: Anonymous user wants to vote for an argument on an opinion
 Scenario: Logged in user wants to vote for an argument on a version then delete his vote
   Given I am logged in as admin
   And I go to a version
+  And I wait 1 seconds
   When I vote for the argument
   Then I should see "alert.success.add.vote" in the "#global-alert-box" element
   When I delete my vote on the argument
@@ -198,6 +199,7 @@ Scenario: Logged in user wants to vote for an argument on a version then delete 
 Scenario: Logged in user wants to vote for his own argument on a version
   Given I am logged in as user
   And I go to a version
+  And I wait 1 seconds
   Then the argument vote button should be disabled
 
 @security

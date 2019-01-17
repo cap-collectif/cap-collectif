@@ -474,7 +474,7 @@ InternalMutation:
           payloadType: UpdateProfilePayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfileMutation", [value, getUser()])'
       updateProfilePassword:
-        access: "@=hasRole('ROLE_USER')"
+        access: '@=isAuthenticated()'
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateProfilePasswordInput
