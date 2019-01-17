@@ -38,9 +38,13 @@ export class CommentTrashedListPaginated extends React.Component<Props, State> {
 
     return (
       <React.Fragment>
-        <h3>
-          {project.comments.totalCount} <FormattedMessage id="admin.fields.proposal.comments" />
-        </h3>
+        <FormattedMessage
+          id="comment.list"
+          values={{
+            num: project.comments.totalCount,
+          }}
+          tagName="h3"
+        />
         <ListGroup bsClass="media-list" componentClass="ul">
           {project &&
             project.comments &&
