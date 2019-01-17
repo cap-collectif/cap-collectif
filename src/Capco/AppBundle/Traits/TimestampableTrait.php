@@ -28,7 +28,7 @@ trait TimestampableTrait
 
     public function setUpdatedAt(\DateTime $updatedAt): self
     {
-        if (property_exists($this, 'updatedAt')) {
+        if (property_exists($this, 'updatedAt') && $this->updatedAt) {
             $this->updatedAt = $updatedAt;
         }
 
@@ -37,25 +37,14 @@ trait TimestampableTrait
 
     public function getUpdatedAt()
     {
-        if (property_exists($this, 'updatedAt')) {
+        if (property_exists($this, 'updatedAt') && $this->updatedAt) {
             return $this->updatedAt;
         }
     }
 
-    public function isCreatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
-    {
-        if (property_exists($this, 'updatedAt')) {
-            $diff = $this->createdAt->diff($to);
-
-            return $diff < $interval;
-        }
-
-        return false;
-    }
-
     public function isUpdatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
     {
-        if (property_exists($this, 'updatedAt')) {
+        if (property_exists($this, 'updatedAt') && $this->updatedAt) {
             $diff = $this->updatedAt->diff($to);
 
             return $diff < $interval;
