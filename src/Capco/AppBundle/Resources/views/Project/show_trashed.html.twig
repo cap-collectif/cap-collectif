@@ -89,7 +89,7 @@
                 </div>
             {% endif %}
             
-            {% if project.projectType == 'project.types.participatoryBudgeting' %}
+            {% if project.getFirstCollectStep != null %}
                 {{
                     react_render_component('ProjectTrashCommentApp', {
                         'props': {
