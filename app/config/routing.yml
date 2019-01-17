@@ -101,13 +101,6 @@ capco_api_proposals:
   defaults:
     _format: json
 
-capco_api_themes:
-  resource: '@CapcoAppBundle/Controller/Api/ThemesController.php'
-  type: annotation
-  prefix: /api
-  defaults:
-    _format: json
-
 capco_api_statuses:
   resource: '@CapcoAppBundle/Controller/Api/StatusesController.php'
   type: annotation
