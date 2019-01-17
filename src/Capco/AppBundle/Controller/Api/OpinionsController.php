@@ -192,7 +192,7 @@ class OpinionsController extends FOSRestController
     public function postOpinionReportAction(Request $request, Opinion $opinion)
     {
         $viewer = $this->getUser();
-        if (!$viewer || 'anon.' === $viewer || $viewer === $opinion->getAuthor()) {
+        if (!$viewer || 'anon.' === $viewer || $viewer !== $opinion->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
 

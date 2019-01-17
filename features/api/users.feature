@@ -1,58 +1,6 @@
 @users
 Feature: Users
 
-@parallel-scenario
-Scenario: API client wants to know the number of users
-  Given I am logged in to api as admin
-  When I send a GET request to "/api/users"
-  Then the JSON response should match:
-  """
-  {
-    "count": "@integer@.greaterThan(0)",
-    "users": @...@
-  }
-  """
-
-@parallel-scenario
-Scenario: API client wants to know the number of citoyens
-  Given I am logged in to api as admin
-  When I send a GET request to "/api/users?type=citoyen"
-  Then the JSON response should match:
-  """
-  {
-    "count": "@integer@.greaterThan(0)",
-    "users": @...@
-  }
-  """
-
-@parallel-scenario
-Scenario: API client wants to know the number of citoyens who registered since 2020-11-23
-  When I send a GET request to "/api/users?type=citoyen&from=2020-11-23T00:00:00"
-  Then the JSON response should match:
-  """
-  {
-    "count": 0,
-    "users": []
-  }
-  """
-
-@parallel-scenario
-Scenario: API client wants to know the number of citoyens who have email aurelien@cap-collectif.com
-  Given I am logged in to api as admin
-  When I send a GET request to "/api/users?email=aurelien@cap-collectif.com"
-  Then the JSON response should match:
-  """
-  {
-    "count": 1,
-    "users": [{
-      "id": @string@,
-      "_links": {
-        "settings": @string@
-      }
-    }]
-  }
-  """
-
 @security
 Scenario: Anonymous API client wants to register but registration is not enabled
   When I send a POST request to "/api/users" with json:
@@ -121,6 +69,7 @@ Scenario: Anonymous API client wants to register with throwable email
         "plainPassword":[],
         "captcha":[],
         "consentExternalCommunication":[],
+        "consentInternalCommunication":[],
         "responses": []
       }
     }
@@ -157,6 +106,7 @@ Scenario: Anonymous API client wants to register with unknown additional data
            "email":[],
            "captcha":[],
            "consentExternalCommunication":[],
+           "consentInternalCommunication":[],
            "responses":[]
         }
      }

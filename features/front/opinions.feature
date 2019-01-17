@@ -70,7 +70,6 @@ Scenario: Author of an opinion loose their votes when updating it
     | opinion_body | Je modifie ma proposition !   |
   And I check "opinion_check"
   And I press "confirm-opinion-update"
-  And I wait 5 seconds
   Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3"
   And I wait 1 seconds
   And I should see 'global.votes {"num":0}'
