@@ -114,7 +114,7 @@ class CookieMonster {
       this.considerFullConsent();
       return;
     }
-    if (window.location.pathname === '/cookies-management' && target.id !== 'main-navbar') {
+    if (window.location.pathname === '/cookies-management' && target.id !== 'cookies-manager') {
       return;
     }
 
@@ -123,13 +123,35 @@ class CookieMonster {
 
   considerFullConsent = () => {
     Cookies.set('hasFullConsent', true, { expires: 395 });
-    this.executeAnalyticScript();
+    if (this.analyticCookieValue() !== true) {
+      this.setCookie(true, 'analyticConsentValue');
+      this.executeAnalyticScript();
+    }
+    if (this.adCookieConsentValue() !== true) {
+      this.setCookie(true, 'adCookieConsentValue');
+      // this.executeAdsScript();
+    }
     this.hideBanner();
   };
 
-  toggleCookie = (value: boolean, type: string) => {
+  doNotConsiderFullConsent = () => {
     Cookies.set('hasFullConsent', false, { expires: 395 });
     this.hideBanner();
+  };
+
+  setCookie = (value: boolean, type: string) => {
+    Cookies.set(type, value, { expires: 395 });
+
+    return true;
+  };
+
+  getUpperLevelDomain = (): string => {
+    const parts = window.location.hostname.split('.');
+    parts.shift();
+    return parts.join('.');
+  };
+
+  toggleCookie = (value: boolean, type: string) => {
     Cookies.set(type, value, { expires: 395 });
     const cookies = this.getCookies();
     if (type === 'analyticConsentValue') {
@@ -138,19 +160,14 @@ class CookieMonster {
       } else {
         GA_COOKIE_NAMES.forEach(name => {
           if (typeof Cookies.get(name) !== 'undefined') {
-            document.cookie =
-              name +
-              '=; expires=' +
-              new Date().toUTCString() +
-              '; domain=.' +
-              window.location.host +
-              '; path=/';
+            this.expireCookie(name, window.location.host);
+            this.expireCookie(name, this.getUpperLevelDomain());
           }
         });
         PK_COOKIE_NAMES.forEach(name => {
           cookies.forEach(cookie => {
             if (cookie.startsWith(name)) {
-              document.cookie = cookie + '=; expires=' + new Date().toUTCString() + '; path=/';
+              this.expireCookie(cookie);
             }
           });
         });
@@ -159,7 +176,17 @@ class CookieMonster {
       if (value) {
         this.executeAdsScript();
       }
+      // TODO delete ads cookies
     }
+  };
+
+  expireCookie = (coockieName: string, domain: ?string): void => {
+    document.cookie =
+      coockieName +
+      '=; expires=' +
+      new Date().toUTCString() +
+      (domain ? '; domain=.' + domain : '') +
+      '; path=/';
   };
 
   getCookies = () => {
@@ -194,6 +221,10 @@ class CookieMonster {
   executeAdsScript() {
     window.executeAdsScript();
   }
+
+  isFullConsent = () => {
+    return Cookies.getJSON('hasFullConsent');
+  };
 }
 
 export default new CookieMonster();
