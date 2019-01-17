@@ -16,6 +16,7 @@ describe('<ConsultationPropositionBox />', () => {
     },
     dispatch: jest.fn(),
     showConsultationPlan: true,
+    isAuthenticated: false,
   };
 
   const consultationPlanIsEnabled = {
