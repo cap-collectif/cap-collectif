@@ -3,7 +3,7 @@ import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import CommentTrashedList from '../Comment/CommentTrashedList';
+import CommentTrashedListPaginated from '../Comment/CommentTrashedListPaginated';
 
 type Props = {
   projectId: string,
@@ -28,8 +28,7 @@ export class ProjectTrashComment extends React.Component<Props> {
             ) {
               project: node(id: $projectId) {
                 id
-                ...CommentTrashedList_project
-                  @arguments(isAuthenticated: $isAuthenticated, count: $count)
+                ...CommentTrashedListPaginated_project @arguments(count: $count, cursor: $cursor)
               }
             }
           `}
@@ -56,7 +55,7 @@ export class ProjectTrashComment extends React.Component<Props> {
 
             return (
               /* $FlowFixMe $refType */
-              <CommentTrashedList project={props.project} />
+              <CommentTrashedListPaginated project={props.project} />
             );
           }}
         />

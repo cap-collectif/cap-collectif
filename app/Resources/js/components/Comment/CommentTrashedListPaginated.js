@@ -6,10 +6,11 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 import Comment from './Comment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import { TRASHED_COMMENT_PAGINATOR_COUNT } from '../Project/ProjectTrashComment';
+import type { CommentTrashedListPaginatedQuery_project } from './__generated__/CommentTrashedListPaginatedQuery.graphql';
 
 type Props = {
   relay: RelayPaginationProp,
-  project: Object,
+  project: CommentTrashedListPaginatedQuery_project,
 };
 
 type State = {
@@ -70,7 +71,8 @@ export default createPaginationContainer(
   CommentTrashedListPaginated,
   {
     project: graphql`
-      fragment CommentTrashedListPaginated_project on Project {
+      fragment CommentTrashedListPaginated_project on Project
+        @argumentDefinitions(count: { type: "Int" }, cursor: { type: "String" }) {
         id
         comments(first: $count, after: $cursor, onlyTrashed: true)
           @connection(key: "CommentTrashedListPaginated_comments") {
@@ -116,7 +118,7 @@ export default createPaginationContainer(
         $isAuthenticated: Boolean!
       ) {
         project: node(id: $projectId) {
-          ...CommentTrashedListPaginated_project
+          ...CommentTrashedListPaginated_project @arguments(count: $count, cursor: $cursor)
         }
       }
     `,
