@@ -231,8 +231,9 @@ export default createFragmentContainer(OpinionVotesButton, {
           requirements {
             viewerMeetsTheRequirements @include(if: $isAuthenticated)
           }
-          ...RequirementsForm_step
-          ...RequirementsModal_step
+          ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+
+          ...RequirementsModal_step @arguments(isAuthenticated: $isAuthenticated)
         }
         section {
           voteWidgetType
@@ -250,8 +251,8 @@ export default createFragmentContainer(OpinionVotesButton, {
           requirements {
             viewerMeetsTheRequirements @include(if: $isAuthenticated)
           }
-          ...RequirementsForm_step
-          ...RequirementsModal_step
+          ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+          ...RequirementsModal_step @arguments(isAuthenticated: $isAuthenticated)
         }
         section {
           voteWidgetType

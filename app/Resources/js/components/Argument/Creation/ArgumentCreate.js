@@ -189,8 +189,9 @@ export default createFragmentContainer(container, {
           requirements {
             viewerMeetsTheRequirements @include(if: $isAuthenticated)
           }
-          ...RequirementsForm_step
-          ...RequirementsModal_step
+          ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+
+          ...RequirementsModal_step @arguments(isAuthenticated: $isAuthenticated)
         }
       }
       ... on Version {
@@ -198,8 +199,9 @@ export default createFragmentContainer(container, {
           requirements {
             viewerMeetsTheRequirements @include(if: $isAuthenticated)
           }
-          ...RequirementsForm_step
-          ...RequirementsModal_step
+          ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+
+          ...RequirementsModal_step @arguments(isAuthenticated: $isAuthenticated)
         }
       }
     }

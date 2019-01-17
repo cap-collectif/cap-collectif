@@ -170,7 +170,8 @@ export default createFragmentContainer(container, {
   consultation: graphql`
     fragment OpinionCreateForm_consultation on Consultation
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      ...RequirementsForm_step
+      ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+
       id
       titleHelpText
       descriptionHelpText

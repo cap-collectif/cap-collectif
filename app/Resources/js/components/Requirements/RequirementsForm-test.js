@@ -71,7 +71,7 @@ describe('<RequirementsForm />', () => {
   };
 
   it('should render a vote widget for a simple vote without limit', () => {
-    const wrapper = shallow(<RequirementsForm step={step} {...formMock} />);
+    const wrapper = shallow(<RequirementsForm step={step} isAuthenticated {...formMock} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -84,10 +84,7 @@ describe('<RequirementsForm />', () => {
       requirement4: null,
       requirement5: false,
     };
-    const props = {
-      ...formMock,
-      step,
-    };
+    const props = { ...formMock, step, isAuthenticated: false };
     const dispatch = jest.fn();
     expect(onChange(previousValues, dispatch, props, previousValues)).toMatchSnapshot();
     jest.runAllTimers();
@@ -115,6 +112,7 @@ describe('<RequirementsForm />', () => {
     const props = {
       ...formMock,
       step,
+      isAuthenticated: false,
     };
     const dispatch = jest.fn();
     expect(onChange(values, dispatch, props, previousValues)).toMatchSnapshot();
@@ -128,10 +126,7 @@ describe('<RequirementsForm />', () => {
   });
 
   it('validate correctly', () => {
-    const props = {
-      ...formMock,
-      step,
-    };
+    const props = { ...formMock, step, isAuthenticated: false };
     expect(validate({}, { ...props, step: { requirements: { edges: null } } })).toMatchSnapshot();
 
     const values = {

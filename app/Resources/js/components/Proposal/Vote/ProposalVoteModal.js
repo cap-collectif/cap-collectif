@@ -287,7 +287,8 @@ export default createFragmentContainer(container, {
       form {
         isProposalForm
       }
-      ...RequirementsForm_step
+      ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+
       ...ProposalsUserVotesTable_step
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
         ...ProposalsUserVotesTable_votes

@@ -122,7 +122,8 @@ export default createFragmentContainer(container, {
       ...OpinionSourceForm_sourceable
       step {
         id
-        ...RequirementsForm_step
+        ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+
         requirements {
           viewerMeetsTheRequirements @include(if: $isAuthenticated)
           reason
