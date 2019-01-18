@@ -14,8 +14,9 @@ type Props = {
   placeholder: ?string,
   userListToNoSearch?: ?Array<string>,
 };
+type State = void;
 
-export default class UserListField extends React.Component<Props> {
+export default class UserListField extends React.Component<Props, State> {
   static defaultProps = {
     className: '',
   };
@@ -31,7 +32,7 @@ export default class UserListField extends React.Component<Props> {
     `;
 
     const getUsersListWithoutIds = graphql`
-      query UserListFieldQuery($notInIds: [String], $displayName: String) {
+      query UserListFieldNotInIdsQuery($notInIds: [String], $displayName: String) {
         userSearch(notInIds: $notInIds, displayName: $displayName) {
           id
           displayName
