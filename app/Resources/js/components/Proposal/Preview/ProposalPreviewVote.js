@@ -51,7 +51,7 @@ export default createFragmentContainer(ProposalPreviewVote, {
   step: graphql`
     fragment ProposalPreviewVote_step on Step
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
-      ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalVoteModal_step @include(if: $isAuthenticated)
       ...ProposalVoteButtonWrapperFragment_step
     }
   `,

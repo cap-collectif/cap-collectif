@@ -48,15 +48,14 @@ type Props = {
   ...FormProps,
   stepId?: ?string,
   step: RequirementsForm_step,
-  isAuthenticated: boolean,
 };
 
 const refetchViewer = graphql`
-  query RequirementsForm_userQuery($stepId: ID!, $isAuthenticated: Boolean!) {
+  query RequirementsForm_userQuery($stepId: ID!) {
     step: node(id: $stepId) {
       ... on RequirementStep {
         requirements {
-          viewerMeetsTheRequirements @include(if: $isAuthenticated)
+          viewerMeetsTheRequirements
         }
       }
     }
@@ -157,7 +156,6 @@ export const onChange = (
           if (props.stepId) {
             fetchQuery(environment, refetchViewer, {
               stepId: props.stepId,
-              isAuthenticated: props.isAuthenticated,
             });
           }
         });
@@ -260,7 +258,6 @@ const getRequirementInitialValue = (requirement: Requirement): ?string | boolean
 };
 
 const mapStateToProps = (state: State, { step }: Props) => ({
-  isAuthenticated: !!state.user.user,
   initialValues: step.requirements.edges
     ? step.requirements.edges
         .filter(Boolean)
@@ -279,14 +276,13 @@ const container = connect(mapStateToProps)(form);
 
 export default createFragmentContainer(container, {
   step: graphql`
-    fragment RequirementsForm_step on RequirementStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    fragment RequirementsForm_step on RequirementStep {
       requirements {
         edges {
           node {
             __typename
             id
-            viewerMeetsTheRequirement @include(if: $isAuthenticated)
+            viewerMeetsTheRequirement
             ... on DateOfBirthRequirement {
               viewerDateOfBirth
             }

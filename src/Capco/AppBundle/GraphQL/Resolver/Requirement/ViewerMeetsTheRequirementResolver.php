@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Requirement;
 
 use Capco\AppBundle\Entity\Requirement;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ViewerMeetsTheRequirementResolver implements ResolverInterface
@@ -14,11 +15,8 @@ class ViewerMeetsTheRequirementResolver implements ResolverInterface
         $this->resolver = $resolver;
     }
 
-    public function __invoke(Requirement $requirement, $user): bool
+    public function __invoke(Requirement $requirement, User $user): bool
     {
-        if ('anon.' === $user) {
-            return false;
-        }
         $value = $this->resolver->__invoke($requirement, $user);
         if (null === $value) {
             return false;

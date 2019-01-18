@@ -59,9 +59,8 @@ class ArgumentsBox extends React.Component<Props> {
 
 export default createFragmentContainer(ArgumentsBox, {
   opinion: graphql`
-    fragment ArgumentsBox_opinion on OpinionOrVersion
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      ...ArgumentCreate_argumentable @arguments(isAuthenticated: $isAuthenticated)
+    fragment ArgumentsBox_opinion on OpinionOrVersion {
+      ...ArgumentCreate_argumentable
       ...ArgumentList_argumentable
       ...UnpublishedArgumentListRenderer_argumentable
       ... on Opinion {

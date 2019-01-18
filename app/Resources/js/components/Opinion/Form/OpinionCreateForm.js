@@ -168,10 +168,8 @@ export default createFragmentContainer(container, {
     }
   `,
   consultation: graphql`
-    fragment OpinionCreateForm_consultation on Consultation
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
-
+    fragment OpinionCreateForm_consultation on Consultation {
+      ...RequirementsForm_step
       id
       titleHelpText
       descriptionHelpText
@@ -179,7 +177,7 @@ export default createFragmentContainer(container, {
         id
       }
       requirements {
-        viewerMeetsTheRequirements @include(if: $isAuthenticated)
+        viewerMeetsTheRequirements
         reason
         totalCount
       }

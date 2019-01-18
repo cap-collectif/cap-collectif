@@ -96,7 +96,10 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             'args' => $args->getRawArguments(),
         ];
 
-        if ($args->offsetExists('affiliations') || $proposalForm->getStep()->isPrivate()) {
+        if (
+            $args->offsetExists('affiliations') ||
+            (null !== $proposalForm->getStep() && $proposalForm->getStep()->isPrivate())
+        ) {
             // we need viewer in cache key
             $cacheKey['viewerId'] = $viewer ? $viewer->getId() : null;
         }

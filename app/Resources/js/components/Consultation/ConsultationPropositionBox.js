@@ -27,7 +27,6 @@ type Props = {
   showConsultationPlan: boolean,
   dispatch: Dispatch,
   consultationPlanEnabled: boolean,
-  isAuthenticated: boolean,
 };
 
 type State = {
@@ -87,7 +86,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
   };
 
   render() {
-    const { step, showConsultationPlan, consultationPlanEnabled, isAuthenticated } = this.props;
+    const { step, showConsultationPlan, consultationPlanEnabled } = this.props;
 
     const renderSectionRecursiveList = ({
       error,
@@ -150,19 +149,15 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
           <QueryRenderer
             environment={environment}
             query={graphql`
-              query ConsultationPropositionBoxQuery(
-                $consultationId: ID!
-                $isAuthenticated: Boolean!
-              ) {
+              query ConsultationPropositionBoxQuery($consultationId: ID!) {
                 consultation: node(id: $consultationId) {
                   ...StepInfos_step
-                  ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
+                  ...SectionRecursiveList_consultation
                 }
               }
             `}
             variables={{
               consultationId: step.id,
-              isAuthenticated,
             }}
             render={renderSectionRecursiveList}
           />
@@ -178,7 +173,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
       ? state.project.showConsultationPlanById[props.step.id]
       : true,
   consultationPlanEnabled: state.default.features.consultation_plan,
-  isAuthenticated: !!state.user.user,
 });
 
 export default connect(mapStateToProps)(ConsultationPropositionBox);
