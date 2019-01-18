@@ -88,18 +88,6 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            
-            {% if project.getFirstCollectStep != null %}
-                {{
-                    react_render_component('ProjectTrashCommentApp', {
-                        'props': {
-                            'projectId': project.id,
-                            'isAuthenticated': is_granted('ROLE_USER'),
-                        },
-                        'rendering': 'client_side'
-                    }) 
-                }}
-            {% endif %}
         </div>
     </div>
 {% endblock %}

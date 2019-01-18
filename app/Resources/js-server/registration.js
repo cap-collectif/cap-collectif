@@ -46,7 +46,6 @@ import ArgumentListApp from '../js/startup/ArgumentListApp';
 import VoteListApp from '../js/startup/VoteListApp';
 import EventApp from '../js/startup/EventApp';
 import ProjectDistrictAdminApp from '../js/startup/ProjectDistrictAdminApp';
-import ProjectTrashCommentApp from '../js/startup/ProjectTrashCommentApp';
 
 const emptyFunction = () => {};
 
@@ -103,5 +102,4 @@ ReactOnRails.register({
   VoteListApp,
   EventApp,
   ProjectDistrictAdminApp,
-  ProjectTrashCommentApp,
 });

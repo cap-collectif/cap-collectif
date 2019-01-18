@@ -58,13 +58,3 @@ Project:
         type: 'GroupConnection'
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", [value, args])'
-      comments:
-        description: 'The comments related to the project.'
-        type: 'CommentConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectCommentsResolver", [value, args])'
-        argsBuilder: 'Relay::Connection'
-        args:
-          onlyTrashed:
-            type: 'Boolean'
-            description: 'The connection will return only the trashed results.'
-            defaultValue: false

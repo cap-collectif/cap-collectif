@@ -8,7 +8,6 @@ Comment:
     fields:
       body:
         type: 'String!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentBodyResolver", [value])'
       createdAt:
         type: 'DateTime!'
       updatedAt:

@@ -30,7 +30,6 @@ type Props = ParentProps & {
   invalid: boolean,
   pristine: boolean,
   viewerIsConfirmedByEmail: boolean,
-  isAuthenticated: boolean,
 };
 
 type State = {
@@ -51,7 +50,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
   }
 
   onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) => {
-    const { pristine, dispatch, step, proposal, isAuthenticated } = this.props;
+    const { pristine, dispatch, step, proposal } = this.props;
 
     const tmpVote = values.votes.filter(v => v.id === null)[0];
 
@@ -81,7 +80,6 @@ export class ProposalVoteModal extends React.Component<Props, State> {
           step: step.id,
           votes: values.votes.map(v => ({ id: v.id, anonymous: !v.public })),
         },
-        isAuthenticated,
       });
     });
   };
@@ -208,7 +206,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
             <FormattedMessage
               id={keyTradForModalVote}
               values={{
-                num: step.viewerVotes ? step.viewerVotes.totalCount : 0,
+                num: step.viewerVotes.totalCount,
               }}
             />
           </h4>
@@ -257,7 +255,6 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
   pristine: isPristine(getFormName(props.step))(state),
   invalid: isInvalid(formName)(state),
   viewerIsConfirmedByEmail: state.user.user && state.user.user.isEmailConfirmed,
-  isAuthenticated: !!state.user.user,
 });
 
 const container = connect(mapStateToProps)(ProposalVoteModal);
@@ -271,14 +268,13 @@ export default createFragmentContainer(container, {
     }
   `,
   step: graphql`
-    fragment ProposalVoteModal_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    fragment ProposalVoteModal_step on ProposalStep {
       id
       votesRanking
       votesHelpText
       ... on RequirementStep {
         requirements {
-          viewerMeetsTheRequirements @include(if: $isAuthenticated)
+          viewerMeetsTheRequirements
           reason
           totalCount
         }
@@ -286,10 +282,9 @@ export default createFragmentContainer(container, {
       form {
         isProposalForm
       }
-      ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
-
+      ...RequirementsForm_step
       ...ProposalsUserVotesTable_step
-      viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+      viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
         ...ProposalsUserVotesTable_votes
         totalCount
         edges {

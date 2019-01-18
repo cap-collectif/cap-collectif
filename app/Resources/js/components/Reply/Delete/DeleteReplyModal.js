@@ -27,7 +27,7 @@ export class DeleteReplyModal extends React.Component<Props, State> {
     const { reply, onClose } = this.props;
 
     this.setState({ isSubmitting: true });
-    DeleteReplyMutation.commit({ input: { id: reply.id }, isAuthenticated: true })
+    DeleteReplyMutation.commit({ input: { id: reply.id } })
       .then(() => {
         onClose();
         AppDispatcher.dispatch({

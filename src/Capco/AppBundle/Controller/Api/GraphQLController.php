@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Overblog\GraphQLBundle\Request as GraphQLRequest;
+use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Overblog\GraphQLBundle\Request as GraphQLRequest;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
 
 class GraphQLController extends BaseController
 {
@@ -38,10 +37,6 @@ class GraphQLController extends BaseController
         $this->requestParser = $requestParser;
     }
 
-    /**
-     * @Route("/graphql", name="graphql_endpoint", defaults={"_feature_flags" = "public_api"})
-     * @Route("/graphql/{schemaName}", name="graphql_multiple_endpoint", requirements={"schemaName" = "public|internal"})
-     */
     public function endpointAction(Request $request, string $schemaName = null)
     {
         if (!$schemaName) {

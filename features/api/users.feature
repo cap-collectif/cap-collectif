@@ -14,7 +14,7 @@ Scenario: Anonymous API client wants to register but registration is not enabled
   Then the JSON response status code should be 404
   And the JSON response should match:
   """
-  {"code":404,"message":"error.feature_not_enabled (registration)"}
+  {"code":404,"message":"error.feature_not_enabled"}
   """
 
 # Note: captcha validation is disabled in test environement

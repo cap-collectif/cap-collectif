@@ -62,24 +62,11 @@ class CommentBody extends React.Component<Props, State> {
     const { comment } = this.props;
     if (comment.trashed) {
       return (
-        <span className="label label-default mr-5">
+        <span className="label label-default">
           {<FormattedMessage id="comment.trashed.label" />}
         </span>
       );
     }
-    return null;
-  };
-
-  renderTrashedReason = () => {
-    const { comment } = this.props;
-    if (comment.trashed) {
-      return (
-        <div className="mt-5">
-          <span>{comment.trashedReason}</span>
-        </div>
-      );
-    }
-
     return null;
   };
 
@@ -89,7 +76,6 @@ class CommentBody extends React.Component<Props, State> {
         {this.renderTrashedLabel()}
         <Linkify properties={{ className: 'external-link' }}>{nl2br(this.generateText())}</Linkify>
         {this.renderReadMoreOrLess()}
-        {this.renderTrashedReason()}
       </div>
     );
   }
@@ -99,7 +85,6 @@ export default createFragmentContainer(CommentBody, {
   comment: graphql`
     fragment CommentBody_comment on Comment {
       trashed
-      trashedReason
       body
     }
   `,

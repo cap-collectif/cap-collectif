@@ -1,11 +1,8 @@
 {% set stepId = currentStep.id|default(null) %}
-
-{% if currentStep is defined and currentStep.type is defined %}
-    {% if currentStep.type == 'collect' %}
-        {% set stepId = stepId|toGlobalId('CollectStep') %}
-    {% elseif currentStep.type == 'selection' %}
-        {% set stepId = stepId|toGlobalId('SelectionStep') %}
-    {% endif %}
+{% if currentStep is defined and currentStep.type == 'collect' %}
+    {% set stepId = stepId|toGlobalId('CollectStep') %}
+{% elseif currentStep is defined and  currentStep.type == 'selection' %}
+    {% set stepId = stepId|toGlobalId('SelectionStep') %}
 {% endif %}
 
 {% set state = {

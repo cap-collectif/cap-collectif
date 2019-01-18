@@ -5,22 +5,15 @@ exports[`<GroupAdminAddUsersForm /> render correctly 1`] = `
   onSubmit={[MockFunction]}
 >
   <div>
-    <Field
-      autoload={true}
-      clearable={true}
-      component={[Function]}
+    <UserListField
+      className=""
       id="group-users-users"
       inputClassName="fake-inputClassName"
-      label={
-        <FormattedMessage
-          id="group.admin.form.users"
-          values={Object {}}
-        />
-      }
+      label="group.admin.form.users"
       labelClassName="control-label"
-      loadOptions={[Function]}
-      multi={true}
       name="users"
+      placeholder="Sélectionnez un utilisateur"
+      userListToNoSearch={Array []}
     />
   </div>
 </form>
