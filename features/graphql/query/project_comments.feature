@@ -6,11 +6,11 @@ Scenario: GraphQL user wants to get list of trashed comments.
   Given I send a GraphQL POST request:
   """
   {
-    "query": "query getTrashedComments($projectId: ID!, $first: Int, $onlyTrashed Boolean) {
+    "query": "query getTrashedComments($projectId: ID!, $first: Int, $onlyTrashed: Boolean) {
       node(id: $projectId) {
         id
         ... on Project {
-          comments(first: $first, $onlyTrashed) {
+          comments(first: $first, onlyTrashed: $onlyTrashed) {
             totalCount
             edges {
               node {

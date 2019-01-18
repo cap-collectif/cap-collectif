@@ -8,7 +8,7 @@ import type { ProjectTrashCommentQueryResponse } from './__generated__/ProjectTr
 
 type Props = {
   projectId: string,
-  isAuthenticated: Boolean,
+  isAuthenticated: boolean,
 };
 
 export const TRASHED_COMMENT_PAGINATOR_COUNT = 20;
