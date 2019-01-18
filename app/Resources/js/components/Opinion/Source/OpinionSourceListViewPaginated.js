@@ -89,7 +89,7 @@ export default createPaginationContainer(
             endCursor
           }
         }
-        ...OpinionSource_sourceable
+        ...OpinionSource_sourceable @arguments(isAuthenticated: $isAuthenticated)
       }
     `,
   },

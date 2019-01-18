@@ -43,6 +43,7 @@ describe('<ProposalVoteModal />', () => {
         proposal={proposal}
         step={step}
         dispatch={jest.fn()}
+        isAuthenticated
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -66,6 +67,7 @@ describe('<ProposalVoteModal />', () => {
         proposal={proposal}
         step={questionStepForm}
         dispatch={jest.fn()}
+        isAuthenticated
       />,
     );
     expect(wrapper).toMatchSnapshot();

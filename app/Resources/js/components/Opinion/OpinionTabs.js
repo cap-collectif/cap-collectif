@@ -214,8 +214,7 @@ const mapStateToProps = (state: State) => ({
   isAuthenticated: !!state.user.user,
 });
 
-const connector = connect(mapStateToProps);
-const container = connector(OpinionTabs);
+const container = connect(mapStateToProps)(OpinionTabs);
 
 export default createFragmentContainer(container, {
   opinion: graphql`
@@ -266,7 +265,7 @@ export default createFragmentContainer(container, {
       }
       ...OpinionSourceBox_sourceable @arguments(isAuthenticated: $isAuthenticated)
       ...OpinionVersionsBox_opinion @arguments(isAuthenticated: $isAuthenticated)
-      ...ArgumentsBox_opinion
+      ...ArgumentsBox_opinion @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 });

@@ -33,10 +33,11 @@ class OpinionSourceAdd extends React.Component<Props> {
 const container = connect()(OpinionSourceAdd);
 export default createFragmentContainer(container, {
   sourceable: graphql`
-    fragment OpinionSourceAdd_sourceable on Sourceable {
+    fragment OpinionSourceAdd_sourceable on Sourceable
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       contribuable
-      ...OpinionSourceFormModal_sourceable
+      ...OpinionSourceFormModal_sourceable @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 });

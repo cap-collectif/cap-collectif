@@ -66,9 +66,10 @@ export default createFragmentContainer(OpinionSource, {
     }
   `,
   sourceable: graphql`
-    fragment OpinionSource_sourceable on Sourceable {
+    fragment OpinionSource_sourceable on Sourceable
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
-      ...OpinionSourceButtons_sourceable
+      ...OpinionSourceButtons_sourceable @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 });

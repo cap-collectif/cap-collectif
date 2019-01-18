@@ -116,14 +116,16 @@ export default createFragmentContainer(container, {
     }
   `,
   sourceable: graphql`
-    fragment OpinionSourceFormModal_sourceable on Sourceable {
+    fragment OpinionSourceFormModal_sourceable on Sourceable
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       ...OpinionSourceForm_sourceable
       step {
         id
-        ...RequirementsForm_step
+        ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+
         requirements {
-          viewerMeetsTheRequirements
+          viewerMeetsTheRequirements @include(if: $isAuthenticated)
           reason
           totalCount
         }

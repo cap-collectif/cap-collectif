@@ -27,6 +27,7 @@ type Props = ParentProps & {
   dispatch: Dispatch,
   isDeleting: boolean,
   disabled: boolean,
+  isAuthenticated: boolean,
 };
 
 // Should only be used via ProposalVoteButtonWrapper
@@ -53,13 +54,22 @@ export class ProposalVoteButton extends React.Component<Props> {
   };
 
   render() {
-    const { dispatch, step, user, proposal, disabled, isDeleting, id } = this.props;
+    const {
+      dispatch,
+      step,
+      user,
+      proposal,
+      disabled,
+      isDeleting,
+      id,
+      isAuthenticated,
+    } = this.props;
     const classes = classNames({ disabled });
     const action = !user
       ? null
       : proposal.viewerHasVote
       ? () => {
-          deleteVote(step, proposal);
+          deleteVote(step, proposal, isAuthenticated);
         }
       : () => {
           dispatch(openVoteModal(proposal.id));
@@ -89,6 +99,7 @@ export class ProposalVoteButton extends React.Component<Props> {
 
 const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
   isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
+  isAuthenticated: !!state.user.user,
 });
 
 const container = connect(mapStateToProps)(ProposalVoteButton);

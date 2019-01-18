@@ -283,19 +283,19 @@ InternalUser:
         description: "Return the user's contributions of the type requested."
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionResolver", [value, args])'
       isSubscribedToNewsLetter:
-        type: 'Boolean'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value])'
+        type: 'Boolean!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserIsSubscribedToNewsLetterResolver", [value])'
         description: 'Is user subscribed to the newsletter ?'
       subscribedToNewsLetterAt:
         type: 'DateTime'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value, "at"])'
-        description: 'The user subrscibes to the newsletter at date'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSubscribedToNewsLetterAtResolver", [value])'
+        description: 'When the user subscribed to the newsletter.'
       isEmailConfirmed:
         type: 'Boolean'
         description: 'Has the user confirmed his email address ?'
       emailConfirmationSentAt:
         type: 'DateTime'
-        description: "The user's email was confirmed at date"
+        description: 'When the user email confirmation was sent.'
       arguments:
         type: 'ArgumentConnection!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentByUserResolver", [value, args])'
