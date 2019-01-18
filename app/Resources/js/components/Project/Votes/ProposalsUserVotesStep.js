@@ -27,7 +27,6 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
       input: {
         step: this.props.step.id,
         votes: values.votes.map(v => ({ id: v.id, anonymous: !v.public })),
-        isAuthenticated: this.props.isAuthenticated,
       },
       isAuthenticated: this.props.isAuthenticated,
     });

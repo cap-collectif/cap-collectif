@@ -19,11 +19,8 @@ class RequirementViewerValueResolver implements ResolverInterface
     /**
      * Returns a string or a bool.
      */
-    public function __invoke(Requirement $requirement, ?User $user)
+    public function __invoke(Requirement $requirement, User $user)
     {
-        if (null == $user) {
-            return false;
-        }
         if (Requirement::FIRSTNAME === $requirement->getType()) {
             return $user->getFirstname();
         }
