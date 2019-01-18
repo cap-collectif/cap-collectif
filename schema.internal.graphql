@@ -4033,6 +4033,9 @@ type Query {
     search: String
   ): EventConnection!
 
+  # Lookup themes.
+  themes: [Theme!]!
+
   # Get the available map tokens
   mapTokens: [MapToken!]!
 
@@ -5954,7 +5957,7 @@ type User implements Node & UniformResourceLocatable {
   dateOfBirth: DateTime
 
   # Unattended roles as array.
-  roles: [UserRole]
+  roles: [UserRole!]!
 
   # Array of roles converted and translated to string.
   rolesText: String

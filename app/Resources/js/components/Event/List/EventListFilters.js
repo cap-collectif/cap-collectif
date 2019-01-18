@@ -16,9 +16,9 @@ import environment from '../../../createRelayEnvironment';
 
 type Theme = { id: Uuid, title: string };
 
+type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
 type Props = {|
   ...FormProps,
-  themes: Array<Theme>,
   features: FeatureToggles,
   dispatch: Dispatch,
   theme: ?string,
@@ -44,7 +44,7 @@ const countFilters = (theme: ?string, project: ?string, search: ?string): number
   return nbFilter;
 };
 
-const query = graphql`
+const projectQuery = graphql`
   query EventListFiltersQuery($withEventOnly: Boolean) {
     projects(withEventOnly: $withEventOnly) {
       edges {
@@ -57,7 +57,42 @@ const query = graphql`
   }
 `;
 
-export class EventListFilters extends React.Component<Props> {
+const themeQuery = graphql`
+  query EventListFiltersThemeQuery {
+    themes {
+      id
+      title
+    }
+  }
+`;
+
+export class EventListFilters extends React.Component<Props, State> {
+  state = {
+    projectOptions: [],
+    themeOptions: [],
+  };
+
+  componentDidMount() {
+    fetchQuery(environment, projectQuery, { withEventOnly: true })
+      .then(res => res.projects.edges.map(edge => ({
+          value: edge.node.id,
+          label: edge.node.title,
+        }))
+      )
+      .then(projectOptions => {
+        this.setState({ projectOptions });
+      });
+    fetchQuery(environment, themeQuery)
+      .then(res => res.themes.map(theme => ({
+          value: theme.id,
+          label: theme.title,
+        }))
+      )
+      .then(themeOptions => {
+        this.setState({ themeOptions });
+      });
+  }
+
   render() {
     const {
       features,
@@ -95,7 +130,7 @@ export class EventListFilters extends React.Component<Props> {
           id="event-theme"
           name="theme"
           placeholder={intl.formatMessage({ id: 'type-theme' })}
-          options={themes.map(th => ({ value: th.id, label: th.title }))}
+          options={this.state.themeOptions.map(th => ({ value: th.id, label: th.title }))}
         />,
       );
     }
@@ -108,14 +143,7 @@ export class EventListFilters extends React.Component<Props> {
           id="project"
           name="project"
           placeholder={intl.formatMessage({ id: 'type-project' })}
-          loadOptions={() =>
-            fetchQuery(environment, query, { withEventOnly: true }).then(res => ({
-              options: res.projects.edges.map(edge => ({
-                value: edge.node.id,
-                label: edge.node.title,
-              })),
-            }))
-          }
+          options={this.state.themeOptions}
         />,
       );
     }
@@ -199,12 +227,10 @@ const selector = formValueSelector('EventListFilters');
 
 const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
-  themes: state.default.themes,
   theme: selector(state, 'theme'),
   project: selector(state, 'project'),
   search: selector(state, 'search'),
   userType: selector(state, 'userType'),
-  projects: state.project.projectsById,
   userTypes: state.default.userTypes,
 });
 
