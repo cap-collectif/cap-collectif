@@ -28,7 +28,7 @@ InternalQuestionnaire:
         resolve: "@=resolver('questionnaire_questions', [value])"
       viewerReplies:
         type: '[Reply!]!'
-        access: '@=isAuthenticated()'
+        access: "@=hasRole('ROLE_USER')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'
       acknowledgeReplies:
         type: 'Boolean!'
