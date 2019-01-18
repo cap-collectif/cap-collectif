@@ -7,6 +7,7 @@ exports[`<CommentBody /> should render correctly 1`] = `
       "$refType": null,
       "body": "lol",
       "trashed": false,
+      "trashedReason": "mdr",
     }
   }
   componentRef={null}
@@ -20,6 +21,7 @@ exports[`<CommentBody /> should render correctly when trashed with body 1`] = `
       "$refType": null,
       "body": "lol",
       "trashed": true,
+      "trashedReason": "mdr",
     }
   }
   componentRef={null}

@@ -3135,6 +3135,24 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     # Returns the last `n` elements from the list.
     last: Int
   ): GroupConnection
+
+  # The comments related to the project.
+  comments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # The connection will return only the trashed results.
+    onlyTrashed: Boolean = false
+  ): CommentConnection!
 }
 
 # A connection to a list of items.

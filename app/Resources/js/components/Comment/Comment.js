@@ -18,6 +18,7 @@ import type { Comment_comment } from './__generated__/Comment_comment.graphql';
 type Props = {
   comment: Comment_comment,
   isHighlighted?: ?boolean,
+  disabledButton?: ?boolean,
 };
 
 type State = {
@@ -36,7 +37,7 @@ export class Comment extends React.Component<Props, State> {
   };
 
   render() {
-    const { comment, isHighlighted } = this.props;
+    const { comment, isHighlighted, disabledButton } = this.props;
     const classes = classNames({
       opinion: true,
       'opinion--comment': true,
@@ -65,20 +66,22 @@ export class Comment extends React.Component<Props, State> {
               <div className="comment__action">
                 {/* $FlowFixMe $refType */}
                 <CommentDate comment={comment} />
-                <div className="comment__buttons">
-                  {/* $FlowFixMe $refType */}
-                  <CommentVoteButton comment={comment} />{' '}
-                  <Button
-                    bsStyle="link"
-                    bsSize="sm"
-                    onClick={this.focusAnswer}
-                    className="btn-dark-gray btn--outline">
-                    <i className="cap-reply-mail-2" /> <FormattedMessage id="global.answer" />
-                  </Button>{' '}
-                  {/* $FlowFixMe $refType */}
-                  <CommentReportButton comment={comment} /> {/* $FlowFixMe $refType */}
-                  <CommentEdit comment={comment} />{' '}
-                </div>
+                {!disabledButton && (
+                  <div className="comment__buttons">
+                    {/* $FlowFixMe $refType */}
+                    <CommentVoteButton comment={comment} />{' '}
+                    <Button
+                      bsStyle="link"
+                      bsSize="sm"
+                      onClick={this.focusAnswer}
+                      className="btn-dark-gray btn--outline">
+                      <i className="cap-reply-mail-2" /> <FormattedMessage id="global.answer" />
+                    </Button>{' '}
+                    {/* $FlowFixMe $refType */}
+                    <CommentReportButton comment={comment} /> {/* $FlowFixMe $refType */}
+                    <CommentEdit comment={comment} />{' '}
+                  </div>
+                )}
               </div>
             </div>
           </div>

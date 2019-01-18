@@ -8,6 +8,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Model\CommentableInterface;
 
@@ -71,6 +72,31 @@ class ProposalCommentRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function getByProject(
+        Project $project,
+        int $first = 0,
+        int $offset = 100,
+        bool $onlyTrashed = false
+    ): Paginator {
+        $query = $this->getQueryCommentWithProject($onlyTrashed)
+            ->andWhere('pas.project = :project')
+            ->setParameter('project', $project)
+            ->setFirstResult($first)
+            ->setMaxResults($offset);
+
+        return new Paginator($query);
+    }
+
+    public function countByProject(Project $project, bool $onlyTrashed = false): int
+    {
+        $query = $this->getQueryCommentWithProject($onlyTrashed)
+            ->select('COUNT(c.id)')
+            ->andWhere('pas.project = :project')
+            ->setParameter('project', $project);
+
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
     protected function getPublishedNotTrashedQueryBuilder(?User $viewer): QueryBuilder
     {
         return $this->getPublishedQueryBuilder($viewer)->andWhere('c.trashedStatus IS NULL');
@@ -86,6 +112,23 @@ class ProposalCommentRepository extends EntityRepository
         }
 
         return $qb;
+    }
+
+    protected function getQueryCommentWithProject(bool $onlyTrashed = false)
+    {
+        $query = $this->createQueryBuilder('c')
+            ->leftJoin('c.proposal', 'p')
+            ->leftJoin('p.proposalForm', 'f')
+            ->leftJoin('f.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pas');
+
+        if ($onlyTrashed) {
+            $query = $query->andWhere('c.trashedAt IS NOT NULL')->orderBy('c.trashedAt', 'DESC');
+        } else {
+            $query = $query->andWhere('c.trashedAt IS NULL')->orderBy('c.publishedAt', 'DESC');
+        }
+
+        return $query;
     }
 
     private function getByCommentableQueryBuilder(

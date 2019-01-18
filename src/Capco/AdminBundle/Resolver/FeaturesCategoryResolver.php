@@ -43,11 +43,6 @@ class FeaturesCategoryResolver
                 'newsletter',
                 'share_buttons',
                 'search',
-                'votes_evolution',
-                'server_side_rendering',
-                'export',
-                'indexation',
-                'developer_documentation',
             ],
         ],
         'settings.notifications' => ['conditions' => [], 'features' => []],
@@ -103,6 +98,20 @@ class FeaturesCategoryResolver
                     continue;
                 }
             }
+        }
+
+        if (
+            'settings.modules' === $category &&
+            $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')
+        ) {
+            $toggles['developer_documentation'] = $this->manager->isActive(
+                'developer_documentation'
+            );
+            $toggles['public_api'] = $this->manager->isActive('public_api');
+            $toggles['votes_evolution'] = $this->manager->isActive('votes_evolution');
+            $toggles['server_side_rendering'] = $this->manager->isActive('server_side_rendering');
+            $toggles['export'] = $this->manager->isActive('export');
+            $toggles['indexation'] = $this->manager->isActive('indexation');
         }
 
         if ('settings.modules' === $category && EnvHelper::get('SYMFONY_LOGIN_SAML_ALLOWED')) {

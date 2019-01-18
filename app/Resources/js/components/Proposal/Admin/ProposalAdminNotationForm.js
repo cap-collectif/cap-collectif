@@ -16,10 +16,11 @@ import AlertForm from '../../Alert/AlertForm';
 import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
 import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalEvaluationMutation';
 import component from '../../Form/Field';
+import select from '../../Form/Select';
+import Fetcher from '../../../services/Fetcher';
 import ProposalAdminEvaluersForm from './ProposalAdminEvaluersForm';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
 import type { ProposalPageEvaluation_proposal } from '../Page/__generated__/ProposalPageEvaluation_proposal.graphql';
-import UserListField from '../../Admin/Field/UserListField';
 import {
   formatInitialResponsesValues,
   formatSubmitResponses,
@@ -216,15 +217,37 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   addonAfter={<Glyphicon glyph="euro" />}
                   label={<FormattedMessage id="proposal.estimation" />}
                 />
-                <UserListField
-                  id="likers"
+                <Field
                   name="likers"
+                  id="likers"
                   label="Coup(s) de coeur"
                   labelClassName="control-label"
                   inputClassName="fake-inputClassName"
+                  multi
                   placeholder="Sélectionnez un coup de coeur"
+                  component={select}
+                  clearable={false}
+                  loadOptions={terms =>
+                    Fetcher.postToJson(`/users/search`, { terms })
+                      .then(res => ({
+                        options: res.users
+                          .map(u => ({
+                            value: u.id,
+                            label: u.displayName,
+                          }))
+                          .concat(
+                            proposal.likers.map(u => ({
+                              value: u.id,
+                              label: u.displayName,
+                            })),
+                          ),
+                      }))
+                      // eslint-disable-next-line no-console
+                      .catch(e => console.error(e))
+                  }
                 />
               </div>
+
               {evaluationForm && (
                 <div className="box-header">
                   <h3 className="box-title">
