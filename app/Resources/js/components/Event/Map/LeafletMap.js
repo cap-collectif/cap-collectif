@@ -136,10 +136,12 @@ export class LeafletMap extends Component<Props> {
                                   fullDay
                                 />
                               </p>
-                              <p className="excerpt">
-                                <i className="cap-marker-1 mr-10" />
-                                {marker.address}
-                              </p>
+                              {marker.fullAddress && (
+                                <p className="excerpt">
+                                  <i className="cap-marker-1 mr-10" />
+                                  {marker.fullAddress}
+                                </p>
+                              )}
                             </div>
                           </IntlProvider>
                         </Provider>

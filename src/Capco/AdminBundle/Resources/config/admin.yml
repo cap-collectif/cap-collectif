@@ -122,7 +122,14 @@ services:
 
   capco_admin.admin.project:
     class: Capco\AdminBundle\Admin\ProjectAdmin
-    arguments: [~, Capco\AppBundle\Entity\Project, CapcoAdminBundle:CRUD, '@security.token_storage']
+    arguments:
+      [
+        ~,
+        Capco\AppBundle\Entity\Project,
+        CapcoAdminBundle:CRUD,
+        '@security.token_storage',
+        '@Capco\AppBundle\Elasticsearch\Indexer',
+      ]
     tags:
       - {
           name: sonata.admin,
@@ -326,7 +333,13 @@ services:
 
   capco_admin.admin.theme:
     class: Capco\AdminBundle\Admin\ThemeAdmin
-    arguments: [~, Capco\AppBundle\Entity\Theme, SonataAdminBundle:CRUD]
+    arguments:
+      [
+        ~,
+        Capco\AppBundle\Entity\Theme,
+        SonataAdminBundle:CRUD,
+        '@Capco\AppBundle\Elasticsearch\Indexer',
+      ]
     tags:
       - {
           name: sonata.admin,
@@ -444,7 +457,13 @@ services:
 
   capco_admin.admin.event:
     class: Capco\AdminBundle\Admin\EventAdmin
-    arguments: [~, Capco\AppBundle\Entity\Event, CapcoAdminBundle:CRUD, '@Capco\AppBundle\Elasticsearch\Indexer']
+    arguments:
+      [
+        ~,
+        Capco\AppBundle\Entity\Event,
+        CapcoAdminBundle:CRUD,
+        '@Capco\AppBundle\Elasticsearch\Indexer',
+      ]
     tags:
       - {
           name: sonata.admin,
