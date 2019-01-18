@@ -5,9 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\UserBundle\Entity\User;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class UserSubscribedToNewsLetterAtResolver implements ResolverInterface
+class UserNewsLetterResolver implements ResolverInterface
 {
     protected $newLetterRepository;
 
@@ -16,14 +17,18 @@ class UserSubscribedToNewsLetterAtResolver implements ResolverInterface
         $this->newLetterRepository = $newsletterSubscriptionRepository;
     }
 
-    public function __invoke(User $user): ?\DateTime
+    public function __invoke(User $user, string $type = null)
     {
         /** @var $newsLetter NewsletterSubscription */
-        $subscription = $this->newLetterRepository->findOneBy(['email' => $user->getEmail()]);
-        if (!$subscription) {
-            return null;
+        $newsLetter = $this->newLetterRepository->findOneBy(['email' => $user->getEmail()]);
+        if (!$newsLetter) {
+            throw new UserError('No newsletter');
         }
 
-        return $subscription->getCreatedAt();
+        if ('at' === $type) {
+            return $newsLetter->getCreatedAt();
+        }
+
+        return $newsLetter->getIsEnabled();
     }
 }

@@ -48,6 +48,7 @@ class FeaturesCategoryResolver
                 'export',
                 'indexation',
                 'developer_documentation',
+                'public_api',
             ],
         ],
         'settings.notifications' => ['conditions' => [], 'features' => []],
