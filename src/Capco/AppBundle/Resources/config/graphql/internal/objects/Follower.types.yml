@@ -4,7 +4,7 @@ Follower:
     description: 'A follower'
     fields:
       proposal:
-        type: 'InternalProposal'
+        type: 'Proposal'
       opinion:
         type: 'Opinion'
       user:

@@ -1,11 +1,11 @@
 SourceVote:
   type: object
   inherits:
-    - InternalVote
+    - Vote
     - Publishable
   config:
     interfaces:
-      - InternalVote
+      - Vote
       - Publishable
     fields:
       kind:

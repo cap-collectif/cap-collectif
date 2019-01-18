@@ -18,7 +18,7 @@ InternalConsultation:
       opinionCountShownBySection:
         type: 'Int'
       project:
-        type: 'InternalProject!'
+        type: 'Project!'
         description: 'The project'
       # TODO remove
       projectId:

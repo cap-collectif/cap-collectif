@@ -3,4 +3,4 @@ ChangeProposalContentPayload:
   config:
     fields:
       proposal:
-        type: 'InternalProposal!'
+        type: 'Proposal!'
