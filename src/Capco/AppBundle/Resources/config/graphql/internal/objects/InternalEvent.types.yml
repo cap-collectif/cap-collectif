@@ -14,7 +14,6 @@ InternalEvent:
         description: 'A list of Users that are participating to the event.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventParticipantsResolver", [value, args])'
         argsBuilder: 'Relay::Connection'
-      UserType:
       themes:
         type: '[Theme!]!'
       projects:

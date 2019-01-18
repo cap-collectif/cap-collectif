@@ -1855,7 +1855,6 @@ type Event implements Node & Commentable {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
-  UserType: 
   themes: [Theme!]!
   projects: [Project!]!
   author: User!
@@ -4005,6 +4004,9 @@ type Query {
 
     # If non-null, filters events with the given author.
     author: ID
+
+    # If non-null, filters events with the given author type.
+    userType: ID
 
     # If non-null, filters events with the given string to look for.
     search: String

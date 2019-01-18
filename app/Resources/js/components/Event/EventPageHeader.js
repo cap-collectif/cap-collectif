@@ -32,7 +32,7 @@ export default createFragmentContainer(EventPageHeader, {
         theme: { type: "ID" }
         project: { type: "ID" }
         search: { type: "String" }
-        status: { type: "String" }
+        userType: { type: "ID" }
         isFuture: { type: "Boolean" }
       ) {
       events(
@@ -41,7 +41,7 @@ export default createFragmentContainer(EventPageHeader, {
         theme: $theme
         project: $project
         search: $search
-        userType: $status
+        userType: $userType
         isFuture: $isFuture
       ) {
         totalCount
