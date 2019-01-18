@@ -84,15 +84,12 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             normalize={[Function]}
             type="number"
           />
-          <Field
-            clearable={false}
-            component={[Function]}
+          <UserListField
+            className=""
             id="likers"
             inputClassName="fake-inputClassName"
             label="Coup(s) de coeur"
             labelClassName="control-label"
-            loadOptions={[Function]}
-            multi={true}
             name="likers"
             placeholder="Sélectionnez un coup de coeur"
           />

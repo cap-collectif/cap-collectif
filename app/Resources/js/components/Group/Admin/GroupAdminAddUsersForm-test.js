@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { GroupAdminAddUsersForm } from './GroupAdminAddUsersForm';
+import { intlMock } from '../../../mocks';
 
 describe('<GroupAdminAddUsersForm />', () => {
   const props = {
@@ -14,6 +15,7 @@ describe('<GroupAdminAddUsersForm />', () => {
     handleSubmit: jest.fn(),
     dispatch: jest.fn(),
     onClose: jest.fn(),
+    intl: intlMock,
   };
 
   it('render correctly', () => {
