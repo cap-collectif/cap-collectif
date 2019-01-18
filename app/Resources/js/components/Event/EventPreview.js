@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import DatesInterval from '../Utils/DatesInterval';
-import EventPreview_event from './__generated__/EventPreview_event.graphql';
+import type { EventPreview_event } from './__generated__/EventPreview_event.graphql';
 import DateIcon from '../Ui/Dates/DateIcon';
 
 type Props = {
@@ -31,17 +31,12 @@ export class EventPreview extends React.Component<Props> {
             </h3>
             <p>
               {event.themes &&
-                event.themes.edges &&
-                event.themes.edges.length > 0 &&
-                event.themes.edges
-                  .filter(Boolean)
-                  .map(edge => edge.node)
-                  .filter(Boolean)
-                  .map((theme, key) => (
-                    <a key={key} href={theme.url} title={theme.title}>
-                      <span className="label label-default">{theme.title}</span>
-                    </a>
-                  ))}
+                event.themes.length > 0 &&
+                event.themes.filter(Boolean).map((theme, key) => (
+                  <a key={key} href={theme.url} title={theme.title}>
+                    <span className="label label-default">{theme.title}</span>
+                  </a>
+                ))}
             </p>
             <p className="excerpt">
               <i className="cap-calendar-1 mr-10" />

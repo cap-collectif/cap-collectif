@@ -46,6 +46,9 @@ PreviewQuery:
           author:
             type: 'ID'
             description: 'If non-null, filters events with the given author.'
+          userType:
+            type: 'ID'
+            description: 'If non-null, filters events with the given author type.'
           search:
             type: 'String'
             description: 'If non-null, filters events with the given string to look for.'

@@ -65,6 +65,7 @@ exports[`<EventPage /> renders correcty 1`] = `
         "project": null,
         "search": null,
         "theme": null,
+        "userType": null,
       }
     }
   />
