@@ -234,12 +234,3 @@ Capco\AppBundle\Entity\Argument:
     publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
-  argument{253..700}:
-    id: 'argument<current()>'
-    Opinion: '@opinion1'
-    type: <numberBetween(0, 1)>
-    Author: '@user<numberBetween(1, 50)>'
-    body: <text(300)>
-    createdAt: <(new \DateTime('2016-03-01'))>
-    updatedAt: <(new \DateTime('2017-03-01'))>
-    publishedAt: <(new \DateTime('2016-03-01'))>
