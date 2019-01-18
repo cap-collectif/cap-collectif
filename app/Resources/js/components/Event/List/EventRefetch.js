@@ -14,7 +14,6 @@ type Props = {
   query: EventRefetch_query,
   theme: ?string,
   project: ?string,
-  status: ?string,
 };
 
 type State = {
@@ -30,8 +29,7 @@ export class EventRefetch extends React.Component<Props, State> {
     if (
       prevProps.theme !== this.props.theme ||
       prevProps.project !== this.props.project ||
-      prevProps.search !== this.props.search ||
-      prevProps.status !== this.props.status
+      prevProps.search !== this.props.search
     ) {
       this._refetch();
     }
@@ -46,7 +44,6 @@ export class EventRefetch extends React.Component<Props, State> {
       search: this.props.search || null,
       theme: this.props.theme || null,
       project: this.props.project || null,
-      status: this.props.status || null,
     });
 
     this.props.relay.refetch(
@@ -76,7 +73,6 @@ const mapStateToProps = (state: GlobalState) => ({
   theme: selector(state, 'theme'),
   project: selector(state, 'project'),
   search: selector(state, 'search'),
-  status: selector(state, 'status'),
 });
 
 const container = connect(mapStateToProps)(EventRefetch);
@@ -92,7 +88,6 @@ export default createRefetchContainer(
           theme: { type: "ID" }
           project: { type: "ID" }
           search: { type: "String" }
-          status: { type: "String" }
           isFuture: { type: "Boolean" }
         ) {
         ...EventListPaginated_query
@@ -102,7 +97,6 @@ export default createRefetchContainer(
             theme: $theme
             project: $project
             search: $search
-            userType: $status
             isFuture: $isFuture
           )
         ...EventPageHeader_query
@@ -112,7 +106,6 @@ export default createRefetchContainer(
             theme: $theme
             project: $project
             search: $search
-            userType: $status
             isFuture: $isFuture
           )
       }

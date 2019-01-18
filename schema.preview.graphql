@@ -206,9 +206,6 @@ type Query {
     # If non-null, filters events with the given author.
     author: ID
 
-    # If non-null, filters events with the given author type.
-    userType: ID
-
     # If non-null, filters events with the given string to look for.
     search: String
   ): EventConnection!

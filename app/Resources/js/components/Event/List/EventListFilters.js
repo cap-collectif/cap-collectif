@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
-import {injectIntl, FormattedMessage, type IntlShape} from 'react-intl';
-import {Button, Row, Col} from 'react-bootstrap';
-import {connect} from 'react-redux';
-import {reduxForm, Field, formValueSelector, type FormProps} from 'redux-form';
+import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
+import { Button, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { reduxForm, Field, formValueSelector, type FormProps } from 'redux-form';
 import select from '../../Form/Select';
-import type {GlobalState, Dispatch, FeatureToggles, Uuid} from '../../../types';
+import type { GlobalState, Dispatch, FeatureToggles, Uuid } from '../../../types';
 import config from '../../../config';
 import component from '../../Form/Field';
-import {changeEventMobileListView} from '../../../redux/modules/event';
+import { changeEventMobileListView } from '../../../redux/modules/event';
 import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
 
@@ -25,7 +25,6 @@ type Props = {|
   search: ?string,
   intl: IntlShape,
   addToggleViewButton: ?boolean,
-  userTypes: Array<Object>,
 |};
 
 const countFilters = (theme: ?string, project: ?string, search: ?string): number => {
@@ -53,7 +52,6 @@ export class EventListFilters extends React.Component<Props> {
       project,
       search,
       reset,
-      userTypes,
       intl,
       addToggleViewButton,
       dispatch,
@@ -67,7 +65,7 @@ export class EventListFilters extends React.Component<Props> {
         filters.push(
           <div className="d-flex justify-content-end">
             <Button className="btn--outline btn-dark-gray" onClick={reset}>
-              <FormattedMessage id="reset-filters"/>
+              <FormattedMessage id="reset-filters" />
             </Button>
           </div>,
         );
@@ -81,8 +79,8 @@ export class EventListFilters extends React.Component<Props> {
           clearable
           id="event-theme"
           name="theme"
-          placeholder={intl.formatMessage({id: 'type-theme'})}
-          options={themes.map(th => ({value: th.id, label: th.title}))}
+          placeholder={intl.formatMessage({ id: 'type-theme' })}
+          options={themes.map(th => ({ value: th.id, label: th.title }))}
         />,
       );
     }
@@ -93,10 +91,10 @@ export class EventListFilters extends React.Component<Props> {
           clearable
           id="project"
           name="project"
-          placeholder={intl.formatMessage({id: 'type-project'})}
+          placeholder={intl.formatMessage({ id: 'type-project' })}
           options={Object.keys(projects)
             .map(key => projects[key])
-            .map(p => ({value: p.id, label: p.title}))}
+            .map(p => ({ value: p.id, label: p.title }))}
         />,
       );
     }
@@ -108,26 +106,13 @@ export class EventListFilters extends React.Component<Props> {
           id="event-search-input"
           name="search"
           type="text"
-          addonAfter={<i className="cap cap-magnifier"/>}
+          addonAfter={<i className="cap cap-magnifier" />}
           component={component}
-          placeholder={intl.formatMessage({id: 'proposal-search'})}
+          placeholder={intl.formatMessage({ id: 'proposal-search' })}
           groupClassName="event-search-group pull-right"
         />,
       );
     }
-
-    filters.push(
-      <Field
-        component={select}
-        autoload
-        name='status'
-        id='status'
-        placeholder={intl.formatMessage({id: 'registration.type'})}
-        options={Object.keys(userTypes)
-          .map(key => userTypes[key])
-          .map(u => ({value: u.id, label: u.name}))}
-      />,
-    );
 
     const popoverBottom = (
       <div>
@@ -149,7 +134,7 @@ export class EventListFilters extends React.Component<Props> {
     return (
       <Row className={config.isMobile ? 'mb-10 ml-0' : 'mb-10'}>
         <Col xs={12} md={8} className="pl-0">
-          <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()}/>
+          <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
           {config.isMobile && addToggleViewButton && features.display_map ? (
             <EventListToggleMobileViewBtn
               showMapButton
@@ -167,8 +152,8 @@ export class EventListFilters extends React.Component<Props> {
               name="search"
               type="text"
               component={component}
-              placeholder={intl.formatMessage({id: 'proposal-search'})}
-              addonAfter={<i className="cap cap-magnifier"/>}
+              placeholder={intl.formatMessage({ id: 'proposal-search' })}
+              addonAfter={<i className="cap cap-magnifier" />}
               divClassName="event-search-group pull-right w-100"
             />
           </form>
@@ -186,9 +171,7 @@ const mapStateToProps = (state: GlobalState) => ({
   theme: selector(state, 'theme'),
   project: selector(state, 'project'),
   search: selector(state, 'search'),
-  status: selector(state, 'status'),
   projects: state.project.projectsById,
-  userTypes: state.default.userTypes
 });
 
 const form = reduxForm({
