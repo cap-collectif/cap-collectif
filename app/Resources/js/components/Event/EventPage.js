@@ -32,6 +32,7 @@ export class EventPage extends React.Component<Props> {
               $search: String
               $theme: ID
               $project: ID
+              $userType: ID
               $isFuture: Boolean
             ) {
               ...EventPageHeader_query
@@ -41,6 +42,7 @@ export class EventPage extends React.Component<Props> {
                   search: $search
                   theme: $theme
                   project: $project
+                  userType: $userType
                   isFuture: $isFuture
                 )
               ...EventRefetch_query
@@ -50,6 +52,7 @@ export class EventPage extends React.Component<Props> {
                   search: $search
                   theme: $theme
                   project: $project
+                  userType: $userType
                   isFuture: $isFuture
                 )
             }
@@ -60,6 +63,7 @@ export class EventPage extends React.Component<Props> {
               cursor: null,
               search: null,
               theme: null,
+              userType: null,
               project: null,
               isFuture: true,
             }: EventPageQueryVariables)

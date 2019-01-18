@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import EventPreview from '../EventPreview';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import EventMap from '../Map/EventMap';
-import EventListPaginated_query from './__generated__/EventListPaginatedQuery.graphql';
+import type { EventListPaginated_query } from './__generated__/EventListPaginatedQuery.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 import config from '../../../config';
@@ -154,6 +154,7 @@ export default createPaginationContainer(
           theme: { type: "ID" }
           project: { type: "ID" }
           search: { type: "String" }
+          userType: { type: "ID" }
           isFuture: { type: "Boolean" }
         ) {
         events(
@@ -162,6 +163,7 @@ export default createPaginationContainer(
           theme: $theme
           project: $project
           search: $search
+          userType: $userType
           isFuture: $isFuture
         ) @connection(key: "EventListPaginated_events", filters: []) {
           totalCount
@@ -206,6 +208,7 @@ export default createPaginationContainer(
         $theme: ID
         $project: ID
         $search: String
+        $status: String
         $isFuture: Boolean
       ) {
         ...EventListPaginated_query
@@ -215,6 +218,7 @@ export default createPaginationContainer(
             theme: $theme
             project: $project
             search: $search
+            userType: $status
             isFuture: $isFuture
           )
       }

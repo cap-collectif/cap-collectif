@@ -25,7 +25,19 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
           Un super evenement
         </a>
       </h3>
-      <p />
+      <p>
+        <a
+          href="https://estcequecestbientotlheuredugouter.neocities.org/"
+          key="0"
+          title="Le gouter c'est la vie"
+        >
+          <span
+            className="label label-default"
+          >
+            Le gouter c'est la vie
+          </span>
+        </a>
+      </p>
       <p
         className="excerpt"
       >
@@ -79,7 +91,19 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
           Un super evenement
         </a>
       </h3>
-      <p />
+      <p>
+        <a
+          href="https://estcequecestbientotlheuredugouter.neocities.org/"
+          key="0"
+          title="Le gouter c'est la vie"
+        >
+          <span
+            className="label label-default"
+          >
+            Le gouter c'est la vie
+          </span>
+        </a>
+      </p>
       <p
         className="excerpt"
       >

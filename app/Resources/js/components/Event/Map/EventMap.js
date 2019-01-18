@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import LeafletMap from './LeafletMap';
-import EventMap_events from './__generated__/EventMap_events.graphql';
+import type { EventMap_events } from './__generated__/EventMap_events.graphql';
 
 type Props = {
   events: EventMap_events,

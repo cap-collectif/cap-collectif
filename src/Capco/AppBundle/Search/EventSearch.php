@@ -170,6 +170,9 @@ class EventSearch extends Search
         if (isset($providedFilters['projects'])) {
             $filters['projects.id'] = $providedFilters['projects'];
         }
+        if (isset($providedFilters['userType'])) {
+            $filters['author.userType.id'] = $providedFilters['userType'];
+        }
 
         return $filters;
     }

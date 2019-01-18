@@ -9,6 +9,7 @@ describe('<EventPreview />', () => {
   it('renders correctly and highlighted', () => {
     const props = {
       event: {
+        $refType,
         id: 'event1',
         startAt: '2018-09-27T03:00:00+01:00',
         endAt: '2019-09-27T03:00:00+01:00',
@@ -24,7 +25,6 @@ describe('<EventPreview />', () => {
         ],
       },
       isHighlighted: true,
-      $refType,
     };
     const wrapper = shallow(<EventPreview {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -33,6 +33,7 @@ describe('<EventPreview />', () => {
   it('renders correctly and not highlighted', () => {
     const props = {
       event: {
+        $refType,
         id: 'event1',
         startAt: '2018-09-27T03:00:00+01:00',
         endAt: '2019-09-27T03:00:00+01:00',
@@ -48,7 +49,6 @@ describe('<EventPreview />', () => {
         ],
       },
       isHighlighted: false,
-      $refType,
     };
     const wrapper = shallow(<EventPreview {...props} />);
     expect(wrapper).toMatchSnapshot();
