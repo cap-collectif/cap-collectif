@@ -16,7 +16,6 @@ class Manager
         'captcha',
         'consent_external_communication',
         'developer_documentation',
-        'public_api',
         'login_facebook',
         'login_gplus',
         'login_saml',

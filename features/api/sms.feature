@@ -9,7 +9,7 @@ Scenario: Anonymous API client wants to receive a confirmation sms
   """
   {
     "code":404,
-    "message": "error.feature_not_enabled (phone_confirmation)"
+    "message": "error.feature_not_enabled"
   }
   """
 
