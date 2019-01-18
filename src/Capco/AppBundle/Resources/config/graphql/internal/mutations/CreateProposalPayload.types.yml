@@ -5,3 +5,7 @@ CreateProposalPayload:
       proposal:
         type: 'Proposal'
         description: 'The created proposal, if everything goes well !'
+      userErrors:
+        type: '[UserError!]'
+        description: 'An unsuccessful mutation will return one or more `UserError` objects.'
+

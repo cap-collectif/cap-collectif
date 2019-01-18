@@ -193,6 +193,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     input: { ...data, proposalFormId: proposalForm.id },
   })
     .then(response => {
+      if (response.createProposal && response.createProposal.userErrors) {
+        for (const error of response.createProposal.userErrors) {
+          if (error.message === 'You contributed too many times.') {
+            throw new SubmissionError({ _error: 'publication-limit-reached' });
+          }
+        }
+      }
       if (!response.createProposal || !response.createProposal.proposal) {
         throw new Error('Mutation "createProposal" failed.');
       }
@@ -204,7 +211,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       window.location.href = createdProposal.url;
       dispatch(closeCreateModal());
     })
-    .catch(() => {
+    .catch(e => {
+      if (e instanceof SubmissionError) {
+        throw e;
+      }
       throw new SubmissionError({
         _error: 'global.error.server.form',
       });
@@ -349,8 +359,7 @@ export class ProposalForm extends React.Component<Props, State> {
         <WYSIWYGRender className="mb-15" value={proposalForm.description} />
         {error && (
           <Alert bsStyle="danger">
-            <i className="icon ion-ios-close-outline" />{' '}
-            <FormattedHTMLMessage id="global.error.server.form" />
+            <i className="icon ion-ios-close-outline" /> <FormattedHTMLMessage id={error} />
           </Alert>
         )}
         <Field

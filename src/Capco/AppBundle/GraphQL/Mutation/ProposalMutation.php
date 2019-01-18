@@ -363,7 +363,10 @@ class ProposalMutation implements ContainerAwareInterface
                     ->findCreatedSinceIntervalByAuthor($user, 'PT1M', 'author')
             ) >= 2
         ) {
-            throw new UserError('You contributed too many times.');
+            $this->logger->error('You contributed too many times.');
+            $error = ['message' => 'You contributed too many times.'];
+
+            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
         $values = $this->fixValues($values, $proposalForm);
