@@ -15,7 +15,7 @@ type Props = {
   userListToNoSearch?: ?Array<string>,
 };
 
-export default class UserListField extends React.Component<Props, State> {
+export default class UserListField extends React.Component<Props> {
   static defaultProps = {
     className: '',
   };
