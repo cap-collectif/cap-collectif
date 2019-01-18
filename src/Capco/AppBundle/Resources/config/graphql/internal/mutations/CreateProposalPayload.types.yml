@@ -8,4 +8,3 @@ CreateProposalPayload:
       userErrors:
         type: '[UserError!]'
         description: 'An unsuccessful mutation will return one or more `UserError` objects.'
-

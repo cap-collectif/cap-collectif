@@ -361,7 +361,7 @@ class ProposalMutation implements ContainerAwareInterface
                 $this->container
                     ->get('capco.proposal.repository')
                     ->findCreatedSinceIntervalByAuthor($user, 'PT1M', 'author')
-            ) >= 2
+            ) >= 1
         ) {
             $this->logger->error('You contributed too many times.');
             $error = ['message' => 'You contributed too many times.'];
