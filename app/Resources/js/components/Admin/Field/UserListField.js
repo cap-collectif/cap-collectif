@@ -14,7 +14,6 @@ type Props = {
   placeholder: ?string,
   userListToNoSearch?: ?Array<string>,
 };
-type State = void;
 
 export default class UserListField extends React.Component<Props, State> {
   static defaultProps = {
