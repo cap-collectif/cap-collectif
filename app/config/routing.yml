@@ -3,24 +3,17 @@ capco_admin:
   type: annotation
   prefix: /
 
-graphql_endpoint:
-  path: /graphql
-  defaults:
-    _controller: Capco\AppBundle\Controller\Api\GraphQLController::endpointAction
-    _format: 'json'
+# GraphQL
 
-graphql_multiple_endpoint:
-  path: /graphql/{schemaName}
-  requirements:
-    schemaName: public|internal
-  defaults:
-    _controller: Capco\AppBundle\Controller\Api\GraphQLController::endpointAction
-    _format: 'json'
+capco_graphql:
+  resource: '@CapcoAppBundle/Controller/Api/GraphQLController.php'
+  type: annotation
+  prefix: /
 
-graphiql_endpoint:
-  path: /graphiql
-  defaults:
-    _controller: Overblog\GraphiQLBundle\Controller\GraphiQLController::indexAction
+capco_graphiql:
+  resource: '@CapcoAppBundle/Controller/Api/GraphiQLController.php'
+  type: annotation
+  prefix: /
 
 # API
 

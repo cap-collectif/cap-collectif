@@ -1,15 +1,19 @@
 <?php
+
 namespace Capco\AppBundle\EventListener;
+
 use Capco\AppBundle\Toggle\Manager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
+
 class FeatureToggleListener
 {
     protected $manager;
     protected $translator;
     protected $logger;
+
     public function __construct(
         Manager $manager,
         TranslatorInterface $translator,
@@ -19,6 +23,7 @@ class FeatureToggleListener
         $this->translator = $translator;
         $this->logger = $logger;
     }
+
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
@@ -33,9 +38,8 @@ class FeatureToggleListener
                     $flag
                 );
                 $this->logger->warning($message);
-                throw new NotFoundHttpException(
-                    $this->translator->trans('error.feature_not_enabled', [], 'CapcoAppBundle')
-                );
+
+                throw new NotFoundHttpException($message);
             }
         }
     }
