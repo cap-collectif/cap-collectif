@@ -93,7 +93,6 @@ exports[`<ImageUpload /> render correctly 1`] = `
       />
     </div>
     <InjectIntl(ReactBootstrapInput)
-      className="text-center"
       id="id_delete"
       name="image-uploader__delete"
       onChange={[Function]}

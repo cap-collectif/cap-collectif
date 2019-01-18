@@ -11,9 +11,9 @@ exports[`<QuestionnaireAdminResultsMedia /> renders correctly mediaQuestion resp
       className="col-sm-3 col-xs-6 d-flex"
       key="file.png0"
     >
-      <Card>
-        <Body
-          className="text-center"
+      <CardContainer>
+        <div
+          className="card__body text-center"
         >
           <div
             className="mb-5"
@@ -34,16 +34,16 @@ exports[`<QuestionnaireAdminResultsMedia /> renders correctly mediaQuestion resp
           <FormattedMediaSize
             size="678887"
           />
-        </Body>
-      </Card>
+        </div>
+      </CardContainer>
     </div>
     <div
       className="col-sm-3 col-xs-6 d-flex"
       key="file2.pdf1"
     >
-      <Card>
-        <Body
-          className="text-center"
+      <CardContainer>
+        <div
+          className="card__body text-center"
         >
           <div
             className="mb-5"
@@ -64,16 +64,16 @@ exports[`<QuestionnaireAdminResultsMedia /> renders correctly mediaQuestion resp
           <FormattedMediaSize
             size="321678887"
           />
-        </Body>
-      </Card>
+        </div>
+      </CardContainer>
     </div>
     <div
       className="col-sm-3 col-xs-6 d-flex"
       key="file3.jpg2"
     >
-      <Card>
-        <Body
-          className="text-center"
+      <CardContainer>
+        <div
+          className="card__body text-center"
         >
           <div
             className="mb-5"
@@ -94,16 +94,16 @@ exports[`<QuestionnaireAdminResultsMedia /> renders correctly mediaQuestion resp
           <FormattedMediaSize
             size="887"
           />
-        </Body>
-      </Card>
+        </div>
+      </CardContainer>
     </div>
     <div
       className="col-sm-3 col-xs-6 d-flex"
       key="file4.png3"
     >
-      <Card>
-        <Body
-          className="text-center"
+      <CardContainer>
+        <div
+          className="card__body text-center"
         >
           <div
             className="mb-5"
@@ -124,16 +124,16 @@ exports[`<QuestionnaireAdminResultsMedia /> renders correctly mediaQuestion resp
           <FormattedMediaSize
             size="678"
           />
-        </Body>
-      </Card>
+        </div>
+      </CardContainer>
     </div>
     <div
       className="col-sm-3 col-xs-6 d-flex"
       key="file5.pdf4"
     >
-      <Card>
-        <Body
-          className="text-center"
+      <CardContainer>
+        <div
+          className="card__body text-center"
         >
           <div
             className="mb-5"
@@ -154,16 +154,16 @@ exports[`<QuestionnaireAdminResultsMedia /> renders correctly mediaQuestion resp
           <FormattedMediaSize
             size="90000000"
           />
-        </Body>
-      </Card>
+        </div>
+      </CardContainer>
     </div>
     <div
       className="col-sm-3 col-xs-6 d-flex"
       key="file10.pdf5"
     >
-      <Card>
-        <Body
-          className="text-center"
+      <CardContainer>
+        <div
+          className="card__body text-center"
         >
           <div
             className="mb-5"
@@ -184,16 +184,16 @@ exports[`<QuestionnaireAdminResultsMedia /> renders correctly mediaQuestion resp
           <FormattedMediaSize
             size="932100"
           />
-        </Body>
-      </Card>
+        </div>
+      </CardContainer>
     </div>
     <div
       className="col-sm-3 col-xs-6 d-flex"
       key="file6.jpg6"
     >
-      <Card>
-        <Body
-          className="text-center"
+      <CardContainer>
+        <div
+          className="card__body text-center"
         >
           <div
             className="mb-5"
@@ -214,16 +214,16 @@ exports[`<QuestionnaireAdminResultsMedia /> renders correctly mediaQuestion resp
           <FormattedMediaSize
             size="7890887"
           />
-        </Body>
-      </Card>
+        </div>
+      </CardContainer>
     </div>
     <div
       className="col-sm-3 col-xs-6 d-flex"
       key="file7.jpeg7"
     >
-      <Card>
-        <Body
-          className="text-center"
+      <CardContainer>
+        <div
+          className="card__body text-center"
         >
           <div
             className="mb-5"
@@ -244,16 +244,16 @@ exports[`<QuestionnaireAdminResultsMedia /> renders correctly mediaQuestion resp
           <FormattedMediaSize
             size="456887"
           />
-        </Body>
-      </Card>
+        </div>
+      </CardContainer>
     </div>
     <div
       className="col-sm-3 col-xs-6 d-flex"
       key="file8.png8"
     >
-      <Card>
-        <Body
-          className="text-center"
+      <CardContainer>
+        <div
+          className="card__body text-center"
         >
           <div
             className="mb-5"
@@ -274,8 +274,8 @@ exports[`<QuestionnaireAdminResultsMedia /> renders correctly mediaQuestion resp
           <FormattedMediaSize
             size="1234887"
           />
-        </Body>
-      </Card>
+        </div>
+      </CardContainer>
     </div>
   </div>
 </div>

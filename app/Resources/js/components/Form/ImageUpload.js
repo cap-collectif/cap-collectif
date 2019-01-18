@@ -161,7 +161,6 @@ export class ImageUpload extends React.Component<Props> {
                 type="checkbox"
                 id={`${id}_delete`}
                 name="image-uploader__delete"
-                className="text-center"
                 onChange={this.onToggleDelete}
                 ref={c => {
                   this._deleteCheckbox = c;

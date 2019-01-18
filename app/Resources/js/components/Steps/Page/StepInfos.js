@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import StepText from './StepText';
-import { Card } from '../../Ui/Card/Card';
+import { CardContainer } from '../../Ui/Card/CardContainer';
 import type { StepInfos_step } from './__generated__/StepInfos_step.graphql';
 
 type Props = {
@@ -14,11 +14,11 @@ export class StepInfos extends React.Component<Props> {
     const { step } = this.props;
     const { body } = step;
     return body ? (
-      <Card>
-        <Card.Body>
+      <CardContainer>
+        <div className="card__body">
           <StepText text={body} />
-        </Card.Body>
-      </Card>
+        </div>
+      </CardContainer>
     ) : null;
   }
 }

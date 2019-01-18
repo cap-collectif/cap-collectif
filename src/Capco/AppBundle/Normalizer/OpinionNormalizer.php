@@ -72,7 +72,7 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
             $data['_links'] = [
                 'show' => $showUrl,
                 'type' => $this->router->generate(
-                    'app_consultation_show_opinions',
+                    'app_project_show_opinions',
                     [
                         'projectSlug' => $project->getSlug(),
                         'stepSlug' => $step->getSlug(),

@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for closed step which remains a current step 1`] = `
-<Body>
+<div
+  className="card__body"
+>
   <div
-    className="flex-1"
+    className="card__body__infos"
   >
     <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
       project={
@@ -49,8 +51,8 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <Title
-      tagName="h3"
+    <h3
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -92,7 +94,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </Title>
+    </h3>
   </div>
   <ProjectPreviewProgressBar
     actualStep={
@@ -151,10 +153,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     }
   />
   <div
-    className="small excerpt"
+    className="card__actions"
   >
     <a
-      className="text-uppercase  mr-10"
       href="http://capco/closed-step2/show-link"
     >
       <FormattedMessage
@@ -165,13 +166,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
      
      
   </div>
-</Body>
+</div>
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for future project 1`] = `
-<Body>
+<div
+  className="card__body"
+>
   <div
-    className="flex-1"
+    className="card__body__infos"
   >
     <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
       project={
@@ -208,8 +211,8 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <Title
-      tagName="h3"
+    <h3
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -251,7 +254,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </Title>
+    </h3>
   </div>
   <ProjectPreviewProgressBar
     actualStep={
@@ -301,7 +304,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     }
   />
   <div
-    className="small excerpt"
+    className="card__actions"
   >
      
     <span
@@ -321,13 +324,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     </span>
      
   </div>
-</Body>
+</div>
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open participative step 1`] = `
-<Body>
+<div
+  className="card__body"
+>
   <div
-    className="flex-1"
+    className="card__body__infos"
   >
     <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
       project={
@@ -382,8 +387,8 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <Title
-      tagName="h3"
+    <h3
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -425,7 +430,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </Title>
+    </h3>
     <ForwardRef(Relay(ProjectPreviewCounters))
       project={
         Object {
@@ -546,10 +551,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     }
   />
   <div
-    className="small excerpt"
+    className="card__actions"
   >
     <a
-      className="text-uppercase  mr-10"
       href="http://capco/step1/show-link"
     >
       <FormattedMessage
@@ -563,13 +567,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       endAt="2017-11-25T09:00:24+01:00"
     />
   </div>
-</Body>
+</div>
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open step (with no actual participative step) 1`] = `
-<Body>
+<div
+  className="card__body"
+>
   <div
-    className="flex-1"
+    className="card__body__infos"
   >
     <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
       project={
@@ -624,8 +630,8 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <Title
-      tagName="h3"
+    <h3
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -667,7 +673,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </Title>
+    </h3>
     <ForwardRef(Relay(ProjectPreviewCounters))
       project={
         Object {
@@ -788,10 +794,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     }
   />
   <div
-    className="small excerpt"
+    className="card__actions"
   >
     <a
-      className="text-uppercase  mr-10"
       href="http://capco/step1/show-link"
     >
       <FormattedMessage
@@ -805,13 +810,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       endAt="2017-11-25T09:00:24+01:00"
     />
   </div>
-</Body>
+</div>
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for timeless step 1`] = `
-<Body>
+<div
+  className="card__body"
+>
   <div
-    className="flex-1"
+    className="card__body__infos"
   >
     <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
       project={
@@ -866,8 +873,8 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <Title
-      tagName="h3"
+    <h3
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -937,7 +944,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </Title>
+    </h3>
   </div>
   <ProjectPreviewProgressBar
     actualStep={
@@ -1005,10 +1012,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     }
   />
   <div
-    className="small excerpt"
+    className="card__actions"
   >
     <a
-      className="text-uppercase  mr-10"
       href="http://capco/timeless-step/show-link"
     >
       <FormattedMessage
@@ -1019,13 +1025,15 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
      
      
   </div>
-</Body>
+</div>
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body with h2 title & elements for closed step 1`] = `
-<Body>
+<div
+  className="card__body"
+>
   <div
-    className="flex-1"
+    className="card__body__infos"
   >
     <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
       project={
@@ -1062,8 +1070,8 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
         }
       }
     />
-    <Title
-      tagName="h2"
+    <h2
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -1105,7 +1113,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
           </div>
         </a>
       </OverlayTrigger>
-    </Title>
+    </h2>
   </div>
   <ProjectPreviewProgressBar
     actualStep={
@@ -1155,10 +1163,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
     }
   />
   <div
-    className="small excerpt"
+    className="card__actions"
   >
     <a
-      className="text-uppercase  mr-10"
       href="http://capco/closed-step2/show-link"
     >
       <FormattedMessage
@@ -1169,5 +1176,5 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
      
      
   </div>
-</Body>
+</div>
 `;

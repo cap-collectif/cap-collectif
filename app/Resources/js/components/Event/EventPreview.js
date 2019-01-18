@@ -8,16 +8,15 @@ import DateIcon from '../Ui/Dates/DateIcon';
 import { UserAvatar } from '../User/UserAvatar';
 import InlineList from '../Ui/List/InlineList';
 
-type Props = {|
-  +event: EventPreview_event,
-  +isHighlighted: boolean,
-  +isAuthorDisplay: boolean,
-|};
+type Props = {
+  event: EventPreview_event,
+  isHighlighted: ?boolean,
+  isAuthorDisplay: boolean,
+};
 
 export class EventPreview extends React.Component<Props> {
   static defaultProps = {
     isAuthorDisplay: true,
-    isHighlighted: false,
   };
 
   render() {
@@ -91,6 +90,7 @@ export default createFragmentContainer(EventPreview, {
       fullAddress
       url
       themes {
+        id
         title
         url
       }

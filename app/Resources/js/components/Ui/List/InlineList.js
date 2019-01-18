@@ -1,7 +1,6 @@
 // @flow
 import type { ComponentType } from 'react';
 import styled from 'styled-components';
-import colors from '../../../utils/colors';
 
 type Props = {
   separator?: string,
@@ -13,10 +12,6 @@ const InlineList: ComponentType<Props> = styled.ul`
 
   li {
     display: inline;
-
-    a {
-      color: ${colors.darkGray};
-    }
 
     &::after {
       content: ${props => (props.separator ? `"${props.separator}"` : `"•"`)};

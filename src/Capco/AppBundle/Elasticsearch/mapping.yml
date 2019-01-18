@@ -45,7 +45,7 @@ mappings:
     properties:
       id: { type: keyword }
       slug: { type: keyword }
-#      email: { type: keyword } # enable it for the next migration
+      #      email: { type: keyword } # enable it for the next migration
       username: &text_analysis_highlighted
         type: text
         analyzer: capco_french
@@ -216,6 +216,10 @@ mappings:
       createdAt: { type: date }
       updatedAt: { type: date }
       Author: *Author
+      type:
+        type: object
+        properties:
+          id: { type: keyword }
 
   opinionVersion:
     properties:

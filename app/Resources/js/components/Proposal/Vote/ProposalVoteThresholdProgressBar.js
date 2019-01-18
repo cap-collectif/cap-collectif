@@ -38,7 +38,6 @@ export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
           min={0}
           max={votesCount >= voteThreshold ? votesCount : voteThreshold}
           now={votesCount}
-          className="mb-0"
           bsStyle="success"
           label={
             votesCount >= voteThreshold ? (

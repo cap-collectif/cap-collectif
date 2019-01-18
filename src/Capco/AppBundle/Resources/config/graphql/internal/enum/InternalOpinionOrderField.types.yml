@@ -1,0 +1,24 @@
+InternalOpinionOrderField:
+  type: enum
+  config:
+    name: OpinionOrderField
+    description: 'Properties by which opinion connections can be ordered'
+    values:
+      POSITIONS:
+        value: '@=constant("Capco\\AppBundle\\Enum\\OpinionOrderField::POSITIONS")'
+        description: 'Allows ordering a list of opinions by position.'
+      RANDOM:
+        value: '@=constant("Capco\\AppBundle\\Enum\\OpinionOrderField::RANDOM")'
+        description: 'Allows ordering a list of opinions randomly.'
+      PUBLISHED_AT:
+        value: '@=constant("Capco\\AppBundle\\Enum\\OpinionOrderField::PUBLISHED_AT")'
+        description: 'Allows ordering a list of opinions by when they were created.'
+      VOTES:
+        value: '@=constant("Capco\\AppBundle\\Enum\\OpinionOrderField::VOTES")'
+        description: 'Allows ordering a list of opinions by the number of votes it have.'
+      VOTES_OK:
+        value: '@=constant("Capco\\AppBundle\\Enum\\OpinionOrderField::VOTES_OK")'
+        description: 'Allows ordering a list of opinions by the number of votes OK it have.'
+      COMMENTS:
+        value: '@=constant("Capco\\AppBundle\\Enum\\OpinionOrderField::COMMENTS")'
+        description: 'Allows ordering a list of opinions by the number of comments it have.'

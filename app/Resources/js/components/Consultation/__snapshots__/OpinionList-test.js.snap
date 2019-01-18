@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<OpinionList /> renders correcty 1`] = `
+exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
 <div
   className="anchor-offset"
   id="opinions--test17slug"
@@ -17,7 +17,7 @@ exports[`<OpinionList /> renders correcty 1`] = `
           id="global.opinionsCount"
           values={
             Object {
-              "num": 0,
+              "num": 10,
             }
           }
         />
@@ -25,6 +25,49 @@ exports[`<OpinionList /> renders correcty 1`] = `
       <div
         className="panel-heading__actions"
       >
+        <select
+          aria-label="global.filter"
+          className="form-control"
+          defaultValue="positions"
+          onBlur={[Function]}
+          onChange={[Function]}
+        >
+          <option
+            value="positions"
+          >
+            opinion.sort.positions
+          </option>
+          <option
+            value="random"
+          >
+            opinion.sort.random
+          </option>
+          <option
+            value="last"
+          >
+            opinion.sort.last
+          </option>
+          <option
+            value="old"
+          >
+            opinion.sort.old
+          </option>
+          <option
+            value="favorable"
+          >
+            opinion.sort.favorable
+          </option>
+          <option
+            value="votes"
+          >
+            opinion.sort.votes
+          </option>
+          <option
+            value="comments"
+          >
+            opinion.sort.comments
+          </option>
+        </select>
         <ForwardRef(Relay(Connect(NewOpinionButton)))
           consultation={
             Object {
@@ -41,7 +84,7 @@ exports[`<OpinionList /> renders correcty 1`] = `
               "$refType": null,
               "color": "red",
               "contribuable": true,
-              "contributionsCount": 0,
+              "contributionsCount": 10,
               "defaultOrderBy": "positions",
               "id": "id",
               "slug": "slug",
@@ -51,6 +94,880 @@ exports[`<OpinionList /> renders correcty 1`] = `
         />
       </div>
     </PanelHeading>
+    <ListGroup
+      bsClass="list-group"
+      className="list-group-custom"
+    >
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={
+          Object {
+            "count": 5,
+            "cursor": null,
+            "orderBy": Object {
+              "direction": "ASC",
+              "field": "POSITIONS",
+            },
+            "sectionId": "id",
+          }
+        }
+      />
+    </ListGroup>
+    <PanelFooter
+      bsClass="panel"
+      className="bg-white"
+    >
+      <a
+        className="text-center"
+        href="https://capco.dev"
+        style={
+          Object {
+            "backgroundColor": "#fff",
+            "display": "block",
+          }
+        }
+      >
+        <FormattedMessage
+          id="opinion.show.all"
+          values={Object {}}
+        />
+      </a>
+    </PanelFooter>
+  </Uncontrolled(Panel)>
+</div>
+`;
+
+exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
+<div
+  className="anchor-offset"
+  id="opinions--test17slug"
+>
+  <Uncontrolled(Panel)
+    className="opinion panel--red panel--default panel-custom"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <p>
+        <FormattedMessage
+          id="global.opinionsCount"
+          values={
+            Object {
+              "num": 10,
+            }
+          }
+        />
+      </p>
+      <div
+        className="panel-heading__actions"
+      >
+        <select
+          aria-label="global.filter"
+          className="form-control"
+          defaultValue="positions"
+          onBlur={[Function]}
+          onChange={[Function]}
+        >
+          <option
+            value="positions"
+          >
+            opinion.sort.positions
+          </option>
+          <option
+            value="random"
+          >
+            opinion.sort.random
+          </option>
+          <option
+            value="last"
+          >
+            opinion.sort.last
+          </option>
+          <option
+            value="old"
+          >
+            opinion.sort.old
+          </option>
+          <option
+            value="favorable"
+          >
+            opinion.sort.favorable
+          </option>
+          <option
+            value="votes"
+          >
+            opinion.sort.votes
+          </option>
+          <option
+            value="comments"
+          >
+            opinion.sort.comments
+          </option>
+        </select>
+        <ForwardRef(Relay(Connect(NewOpinionButton)))
+          consultation={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "consultation1",
+              "opinionCountShownBySection": 5,
+            }
+          }
+          label="opinion.create.button"
+          section={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "color": "red",
+              "contribuable": true,
+              "contributionsCount": 10,
+              "defaultOrderBy": "positions",
+              "id": "id",
+              "slug": "slug",
+              "url": "https://capco.dev",
+            }
+          }
+        />
+      </div>
+    </PanelHeading>
+    <ListGroup
+      bsClass="list-group"
+      className="list-group-custom"
+    >
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={
+          Object {
+            "count": 5,
+            "cursor": null,
+            "orderBy": Object {
+              "direction": "ASC",
+              "field": "POSITIONS",
+            },
+            "sectionId": "id",
+          }
+        }
+      />
+    </ListGroup>
+  </Uncontrolled(Panel)>
+</div>
+`;
+
+exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
+<div
+  className="anchor-offset"
+  id="opinions--test17slug"
+>
+  <Uncontrolled(Panel)
+    className="opinion panel--red panel--default panel-custom"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <p>
+        <FormattedMessage
+          id="global.opinionsCount"
+          values={
+            Object {
+              "num": 10,
+            }
+          }
+        />
+      </p>
+      <div
+        className="panel-heading__actions"
+      >
+        <select
+          aria-label="global.filter"
+          className="form-control"
+          defaultValue="positions"
+          onBlur={[Function]}
+          onChange={[Function]}
+        >
+          <option
+            value="positions"
+          >
+            opinion.sort.positions
+          </option>
+          <option
+            value="random"
+          >
+            opinion.sort.random
+          </option>
+          <option
+            value="last"
+          >
+            opinion.sort.last
+          </option>
+          <option
+            value="old"
+          >
+            opinion.sort.old
+          </option>
+          <option
+            value="favorable"
+          >
+            opinion.sort.favorable
+          </option>
+          <option
+            value="votes"
+          >
+            opinion.sort.votes
+          </option>
+          <option
+            value="comments"
+          >
+            opinion.sort.comments
+          </option>
+        </select>
+        <ForwardRef(Relay(Connect(NewOpinionButton)))
+          consultation={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "consultation1",
+              "opinionCountShownBySection": 5,
+            }
+          }
+          label="opinion.create.button"
+          section={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "color": "red",
+              "contribuable": true,
+              "contributionsCount": 10,
+              "defaultOrderBy": "positions",
+              "id": "id",
+              "slug": "slug",
+              "url": "https://capco.dev",
+            }
+          }
+        />
+      </div>
+    </PanelHeading>
+    <ListGroup
+      bsClass="list-group"
+      className="list-group-custom"
+    >
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={
+          Object {
+            "count": 5,
+            "cursor": null,
+            "orderBy": Object {
+              "direction": "ASC",
+              "field": "RANDOM",
+            },
+            "sectionId": "id",
+          }
+        }
+      />
+    </ListGroup>
+  </Uncontrolled(Panel)>
+</div>
+`;
+
+exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
+<div
+  className="anchor-offset"
+  id="opinions--test17slug"
+>
+  <Uncontrolled(Panel)
+    className="opinion panel--red panel--default panel-custom"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <p>
+        <FormattedMessage
+          id="global.opinionsCount"
+          values={
+            Object {
+              "num": 10,
+            }
+          }
+        />
+      </p>
+      <div
+        className="panel-heading__actions"
+      >
+        <select
+          aria-label="global.filter"
+          className="form-control"
+          defaultValue="positions"
+          onBlur={[Function]}
+          onChange={[Function]}
+        >
+          <option
+            value="positions"
+          >
+            opinion.sort.positions
+          </option>
+          <option
+            value="random"
+          >
+            opinion.sort.random
+          </option>
+          <option
+            value="last"
+          >
+            opinion.sort.last
+          </option>
+          <option
+            value="old"
+          >
+            opinion.sort.old
+          </option>
+          <option
+            value="favorable"
+          >
+            opinion.sort.favorable
+          </option>
+          <option
+            value="votes"
+          >
+            opinion.sort.votes
+          </option>
+          <option
+            value="comments"
+          >
+            opinion.sort.comments
+          </option>
+        </select>
+        <ForwardRef(Relay(Connect(NewOpinionButton)))
+          consultation={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "consultation1",
+              "opinionCountShownBySection": 5,
+            }
+          }
+          label="opinion.create.button"
+          section={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "color": "red",
+              "contribuable": true,
+              "contributionsCount": 10,
+              "defaultOrderBy": "positions",
+              "id": "id",
+              "slug": "slug",
+              "url": "https://capco.dev",
+            }
+          }
+        />
+      </div>
+    </PanelHeading>
+    <ListGroup
+      bsClass="list-group"
+      className="list-group-custom"
+    >
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={
+          Object {
+            "count": 5,
+            "cursor": null,
+            "orderBy": Object {
+              "direction": "DESC",
+              "field": "PUBLISHED_AT",
+            },
+            "sectionId": "id",
+          }
+        }
+      />
+    </ListGroup>
+  </Uncontrolled(Panel)>
+</div>
+`;
+
+exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
+<div
+  className="anchor-offset"
+  id="opinions--test17slug"
+>
+  <Uncontrolled(Panel)
+    className="opinion panel--red panel--default panel-custom"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <p>
+        <FormattedMessage
+          id="global.opinionsCount"
+          values={
+            Object {
+              "num": 10,
+            }
+          }
+        />
+      </p>
+      <div
+        className="panel-heading__actions"
+      >
+        <select
+          aria-label="global.filter"
+          className="form-control"
+          defaultValue="positions"
+          onBlur={[Function]}
+          onChange={[Function]}
+        >
+          <option
+            value="positions"
+          >
+            opinion.sort.positions
+          </option>
+          <option
+            value="random"
+          >
+            opinion.sort.random
+          </option>
+          <option
+            value="last"
+          >
+            opinion.sort.last
+          </option>
+          <option
+            value="old"
+          >
+            opinion.sort.old
+          </option>
+          <option
+            value="favorable"
+          >
+            opinion.sort.favorable
+          </option>
+          <option
+            value="votes"
+          >
+            opinion.sort.votes
+          </option>
+          <option
+            value="comments"
+          >
+            opinion.sort.comments
+          </option>
+        </select>
+        <ForwardRef(Relay(Connect(NewOpinionButton)))
+          consultation={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "consultation1",
+              "opinionCountShownBySection": 5,
+            }
+          }
+          label="opinion.create.button"
+          section={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "color": "red",
+              "contribuable": true,
+              "contributionsCount": 10,
+              "defaultOrderBy": "positions",
+              "id": "id",
+              "slug": "slug",
+              "url": "https://capco.dev",
+            }
+          }
+        />
+      </div>
+    </PanelHeading>
+    <ListGroup
+      bsClass="list-group"
+      className="list-group-custom"
+    >
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={
+          Object {
+            "count": 5,
+            "cursor": null,
+            "orderBy": Object {
+              "direction": "ASC",
+              "field": "PUBLISHED_AT",
+            },
+            "sectionId": "id",
+          }
+        }
+      />
+    </ListGroup>
+  </Uncontrolled(Panel)>
+</div>
+`;
+
+exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
+<div
+  className="anchor-offset"
+  id="opinions--test17slug"
+>
+  <Uncontrolled(Panel)
+    className="opinion panel--red panel--default panel-custom"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <p>
+        <FormattedMessage
+          id="global.opinionsCount"
+          values={
+            Object {
+              "num": 10,
+            }
+          }
+        />
+      </p>
+      <div
+        className="panel-heading__actions"
+      >
+        <select
+          aria-label="global.filter"
+          className="form-control"
+          defaultValue="positions"
+          onBlur={[Function]}
+          onChange={[Function]}
+        >
+          <option
+            value="positions"
+          >
+            opinion.sort.positions
+          </option>
+          <option
+            value="random"
+          >
+            opinion.sort.random
+          </option>
+          <option
+            value="last"
+          >
+            opinion.sort.last
+          </option>
+          <option
+            value="old"
+          >
+            opinion.sort.old
+          </option>
+          <option
+            value="favorable"
+          >
+            opinion.sort.favorable
+          </option>
+          <option
+            value="votes"
+          >
+            opinion.sort.votes
+          </option>
+          <option
+            value="comments"
+          >
+            opinion.sort.comments
+          </option>
+        </select>
+        <ForwardRef(Relay(Connect(NewOpinionButton)))
+          consultation={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "consultation1",
+              "opinionCountShownBySection": 5,
+            }
+          }
+          label="opinion.create.button"
+          section={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "color": "red",
+              "contribuable": true,
+              "contributionsCount": 10,
+              "defaultOrderBy": "positions",
+              "id": "id",
+              "slug": "slug",
+              "url": "https://capco.dev",
+            }
+          }
+        />
+      </div>
+    </PanelHeading>
+    <ListGroup
+      bsClass="list-group"
+      className="list-group-custom"
+    >
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={
+          Object {
+            "count": 5,
+            "cursor": null,
+            "orderBy": Object {
+              "direction": "DESC",
+              "field": "VOTES_OK",
+            },
+            "sectionId": "id",
+          }
+        }
+      />
+    </ListGroup>
+  </Uncontrolled(Panel)>
+</div>
+`;
+
+exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
+<div
+  className="anchor-offset"
+  id="opinions--test17slug"
+>
+  <Uncontrolled(Panel)
+    className="opinion panel--red panel--default panel-custom"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <p>
+        <FormattedMessage
+          id="global.opinionsCount"
+          values={
+            Object {
+              "num": 10,
+            }
+          }
+        />
+      </p>
+      <div
+        className="panel-heading__actions"
+      >
+        <select
+          aria-label="global.filter"
+          className="form-control"
+          defaultValue="positions"
+          onBlur={[Function]}
+          onChange={[Function]}
+        >
+          <option
+            value="positions"
+          >
+            opinion.sort.positions
+          </option>
+          <option
+            value="random"
+          >
+            opinion.sort.random
+          </option>
+          <option
+            value="last"
+          >
+            opinion.sort.last
+          </option>
+          <option
+            value="old"
+          >
+            opinion.sort.old
+          </option>
+          <option
+            value="favorable"
+          >
+            opinion.sort.favorable
+          </option>
+          <option
+            value="votes"
+          >
+            opinion.sort.votes
+          </option>
+          <option
+            value="comments"
+          >
+            opinion.sort.comments
+          </option>
+        </select>
+        <ForwardRef(Relay(Connect(NewOpinionButton)))
+          consultation={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "consultation1",
+              "opinionCountShownBySection": 5,
+            }
+          }
+          label="opinion.create.button"
+          section={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "color": "red",
+              "contribuable": true,
+              "contributionsCount": 10,
+              "defaultOrderBy": "positions",
+              "id": "id",
+              "slug": "slug",
+              "url": "https://capco.dev",
+            }
+          }
+        />
+      </div>
+    </PanelHeading>
+    <ListGroup
+      bsClass="list-group"
+      className="list-group-custom"
+    >
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={
+          Object {
+            "count": 5,
+            "cursor": null,
+            "orderBy": Object {
+              "direction": "DESC",
+              "field": "VOTES",
+            },
+            "sectionId": "id",
+          }
+        }
+      />
+    </ListGroup>
+  </Uncontrolled(Panel)>
+</div>
+`;
+
+exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
+<div
+  className="anchor-offset"
+  id="opinions--test17slug"
+>
+  <Uncontrolled(Panel)
+    className="opinion panel--red panel--default panel-custom"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <p>
+        <FormattedMessage
+          id="global.opinionsCount"
+          values={
+            Object {
+              "num": 10,
+            }
+          }
+        />
+      </p>
+      <div
+        className="panel-heading__actions"
+      >
+        <select
+          aria-label="global.filter"
+          className="form-control"
+          defaultValue="positions"
+          onBlur={[Function]}
+          onChange={[Function]}
+        >
+          <option
+            value="positions"
+          >
+            opinion.sort.positions
+          </option>
+          <option
+            value="random"
+          >
+            opinion.sort.random
+          </option>
+          <option
+            value="last"
+          >
+            opinion.sort.last
+          </option>
+          <option
+            value="old"
+          >
+            opinion.sort.old
+          </option>
+          <option
+            value="favorable"
+          >
+            opinion.sort.favorable
+          </option>
+          <option
+            value="votes"
+          >
+            opinion.sort.votes
+          </option>
+          <option
+            value="comments"
+          >
+            opinion.sort.comments
+          </option>
+        </select>
+        <ForwardRef(Relay(Connect(NewOpinionButton)))
+          consultation={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "consultation1",
+              "opinionCountShownBySection": 5,
+            }
+          }
+          label="opinion.create.button"
+          section={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "color": "red",
+              "contribuable": true,
+              "contributionsCount": 10,
+              "defaultOrderBy": "positions",
+              "id": "id",
+              "slug": "slug",
+              "url": "https://capco.dev",
+            }
+          }
+        />
+      </div>
+    </PanelHeading>
+    <ListGroup
+      bsClass="list-group"
+      className="list-group-custom"
+    >
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={
+          Object {
+            "count": 5,
+            "cursor": null,
+            "orderBy": Object {
+              "direction": "DESC",
+              "field": "COMMENTS",
+            },
+            "sectionId": "id",
+          }
+        }
+      />
+    </ListGroup>
   </Uncontrolled(Panel)>
 </div>
 `;

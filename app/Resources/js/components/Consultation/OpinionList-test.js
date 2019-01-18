@@ -7,12 +7,13 @@ import { $refType, $fragmentRefs, intlMock } from '../../mocks';
 
 describe('<OpinionList />', () => {
   const props = {
+    enablePagination: false,
     section: {
       $fragmentRefs,
       $refType,
       color: 'red',
       contribuable: true,
-      contributionsCount: 0,
+      contributionsCount: 10,
       defaultOrderBy: 'positions',
       id: 'id',
       slug: 'slug',
@@ -22,8 +23,19 @@ describe('<OpinionList />', () => {
     intl: intlMock,
   };
 
-  it('renders correcty', () => {
+  it('renders correcty with pagination disabled', () => {
     const wrapper = shallow(<OpinionList {...props} />);
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correcty with pagination enabled', () => {
+    const wrapper = shallow(<OpinionList {...props} enablePagination />);
+    expect(wrapper).toMatchSnapshot();
+
+    const orderBy = ['random', 'last', 'old', 'favorable', 'votes', 'comments'];
+    for (const order of orderBy) {
+      wrapper.find('select').simulate('change', { target: { value: order } });
+      expect(wrapper).toMatchSnapshot();
+    }
   });
 });
