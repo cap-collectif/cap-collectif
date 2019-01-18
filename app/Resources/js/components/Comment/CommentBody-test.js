@@ -9,6 +9,7 @@ const comment = {
   $refType,
   body: 'lol',
   trashed: false,
+  trashedReason: 'mdr',
 };
 
 describe('<CommentBody />', () => {

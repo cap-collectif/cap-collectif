@@ -70,12 +70,26 @@ class CommentBody extends React.Component<Props, State> {
     return null;
   };
 
+  renderTrashedReason = () => {
+    const { comment } = this.props;
+    if (comment.trashed) {
+      return (
+        <div className="mt-5">
+          <span>{comment.trashedReason}</span>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   render() {
     return (
       <div className="opinion__text">
         {this.renderTrashedLabel()}
         <Linkify properties={{ className: 'external-link' }}>{nl2br(this.generateText())}</Linkify>
         {this.renderReadMoreOrLess()}
+        {this.renderTrashedReason()}
       </div>
     );
   }
@@ -85,6 +99,7 @@ export default createFragmentContainer(CommentBody, {
   comment: graphql`
     fragment CommentBody_comment on Comment {
       trashed
+      trashedReason
       body
     }
   `,
