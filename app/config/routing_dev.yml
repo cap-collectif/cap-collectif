@@ -17,12 +17,5 @@ _translation_webui:
 _translation_profiler:
   resource: '@TranslationBundle/Resources/config/routing_symfony_profiler.yml'
 
-graphiql_multiple_endpoint:
-  path: /graphiql/{schemaName}
-  requirements:
-    schemaName: public|internal
-  defaults:
-    _controller: Overblog\GraphiQLBundle\Controller\GraphiQLController::indexAction
-
 _main:
   resource: routing.yml

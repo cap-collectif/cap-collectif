@@ -6131,15 +6131,15 @@ type User implements Node & UniformResourceLocatable {
   ): ContributionConnection!
 
   # Is user subscribed to the newsletter ?
-  isSubscribedToNewsLetter: Boolean!
+  isSubscribedToNewsLetter: Boolean
 
-  # When the user subscribed to the newsletter.
+  # The user subrscibes to the newsletter at date
   subscribedToNewsLetterAt: DateTime
 
   # Has the user confirmed his email address ?
   isEmailConfirmed: Boolean
 
-  # When the user email confirmation was sent.
+  # The user's email was confirmed at date
   emailConfirmationSentAt: DateTime
 
   # The arguments created by user.
