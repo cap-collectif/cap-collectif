@@ -113,7 +113,7 @@ Capco\AppBundle\Entity\MenuItem:
   MenuItem16:
     title: Développeurs
     link: developer
-    isEnabled: 0
+    isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
     associatedFeatures: [developer_documentation]

@@ -118,9 +118,6 @@ services:
   Box\Spout\Writer\CSV\Writer:
     class: Box\Spout\Writer\CSV\Writer
 
-  Capco\AppBundle\Controller\Api\GraphiQLController:
-    autowire: true
-
   Capco\AppBundle\PublicApi\PublicApiKeyUserProvider:
     autowire: true
     public: true

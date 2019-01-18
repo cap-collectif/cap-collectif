@@ -18,7 +18,6 @@ type Props = {|
   dispatch: Function,
   dirty: boolean,
   submitting: boolean,
-  isAuthenticated: boolean,
 |};
 
 export class ProposalsUserVotesStep extends React.Component<Props> {
@@ -28,7 +27,6 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
         step: this.props.step.id,
         votes: values.votes.map(v => ({ id: v.id, anonymous: !v.public })),
       },
-      isAuthenticated: this.props.isAuthenticated,
     });
 
   render() {
@@ -71,7 +69,9 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
           <h4 className="excerpt d-ib">
             <FormattedMessage
               id={keyTradProjectCount}
-              values={{ num: step.viewerVotes.totalCount }}
+              values={{
+                num: step.viewerVotes.totalCount,
+              }}
             />
           </h4>
         </div>
@@ -104,14 +104,13 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
 const mapStateToProps = (state, props: RelayProps) => ({
   dirty: isDirty(`proposal-user-vote-form-step-${props.step.id}`)(state),
   submitting: isSubmitting(`proposal-user-vote-form-step-${props.step.id}`)(state),
-  isAuthenticated: !!state.user.user,
 });
 const container = connect(mapStateToProps)(ProposalsUserVotesStep);
 
 export default createFragmentContainer(container, {
   step: graphql`
     fragment ProposalsUserVotesStep_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       ...ProposalsUserVotesTable_step
       id
       title

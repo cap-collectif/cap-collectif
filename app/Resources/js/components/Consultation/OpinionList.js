@@ -155,11 +155,10 @@ export default createFragmentContainer(container, {
     }
   `,
   consultation: graphql`
-    fragment OpinionList_consultation on Consultation
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    fragment OpinionList_consultation on Consultation {
       id
       opinionCountShownBySection
-      ...NewOpinionButton_consultation @arguments(isAuthenticated: $isAuthenticated)
+      ...NewOpinionButton_consultation
     }
   `,
 });

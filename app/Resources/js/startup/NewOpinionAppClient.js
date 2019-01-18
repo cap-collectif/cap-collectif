@@ -1,37 +1,30 @@
 // @flow
 import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
 import environment from '../createRelayEnvironment';
 import NewOpinionButton from '../components/Opinion/NewOpinionButton';
 import type { NewOpinionAppClientQueryVariables } from './__generated__/NewOpinionAppClientQuery.graphql';
-import type { GlobalState } from '../types';
 
-const NewOpinionAppClient = ({
+export default ({
   sectionId,
   consultationId,
   label,
-  isAuthenticated,
 }: {
   label: string,
   sectionId: string,
   consultationId: string,
-  isAuthenticated: boolean,
 }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query NewOpinionAppClientQuery(
-            $sectionId: ID!
-            $consultationId: ID!
-            $isAuthenticated: Boolean!
-          ) {
+          query NewOpinionAppClientQuery($sectionId: ID!, $consultationId: ID!) {
             consultation: node(id: $consultationId) {
-              ...NewOpinionButton_consultation @arguments(isAuthenticated: $isAuthenticated)
+              ...NewOpinionButton_consultation
             }
             section: node(id: $sectionId) {
               ...NewOpinionButton_section
@@ -42,7 +35,6 @@ const NewOpinionAppClient = ({
           ({
             sectionId,
             consultationId,
-            isAuthenticated,
           }: NewOpinionAppClientQueryVariables)
         }
         render={readyState => {
@@ -61,9 +53,3 @@ const NewOpinionAppClient = ({
     </IntlProvider>
   </Provider>
 );
-
-const mapStateToProps = (state: GlobalState) => ({
-  isAuthenticated: !!state.user.user,
-});
-
-export default connect(mapStateToProps)(NewOpinionAppClient);

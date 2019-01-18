@@ -267,12 +267,11 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
     });
 };
 
-export const deleteVote = (step: Object, proposal: Object, isAuthenticated: boolean) =>
+export const deleteVote = (step: Object, proposal: Object) =>
   removeVote
     .commit({
       stepId: step.id,
       input: { proposalId: proposal.id, stepId: step.id },
-      isAuthenticated,
     })
     .then(() => {
       FluxDispatcher.dispatch({

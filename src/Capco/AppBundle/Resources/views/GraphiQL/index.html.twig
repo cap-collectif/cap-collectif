@@ -23,7 +23,7 @@
 <body>
 {% block body %}
 
-  {% set isInternal = schemaName == 'internal' %}
+  {% set isInternal = app.request.attributes.get('_route_params') is not empty and app.request.attributes.get('_route_params').schemaName == 'internal' %}
   {% if app.user %}  
     {% set publicApiToken = publicApiKeyRepo.findPublicApiTokensByUser(app.user) is not empty ? publicApiKeyRepo.findPublicApiTokensByUser(app.user)[0] : null %}
   {% endif %}

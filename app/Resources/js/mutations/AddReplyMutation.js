@@ -8,14 +8,14 @@ import type {
 } from './__generated__/AddReplyMutation.graphql';
 
 const mutation = graphql`
-  mutation AddReplyMutation($input: AddReplyInput!) {
+  mutation AddReplyMutation($input: AddReplyInput!, $isAuthenticated: Boolean!) {
     addReply(input: $input) {
       reply {
         id
         questionnaire {
           id
-          ...ReplyCreateFormWrapper_questionnaire
-          ...UserReplies_questionnaire
+          ...ReplyCreateFormWrapper_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+          ...UserReplies_questionnaire @arguments(isAuthenticated: $isAuthenticated)
         }
       }
     }

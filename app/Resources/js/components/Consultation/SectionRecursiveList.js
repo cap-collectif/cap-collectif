@@ -31,10 +31,9 @@ export class SectionRecursiveList extends React.Component<Props> {
 export default createFragmentContainer(
   SectionRecursiveList,
   graphql`
-    fragment SectionRecursiveList_consultation on Consultation
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    fragment SectionRecursiveList_consultation on Consultation {
       ...UnpublishedOpinionList_consultation
-      ...Section_consultation @arguments(isAuthenticated: $isAuthenticated)
+      ...Section_consultation
       sections {
         ...Section_section
         sections {

@@ -180,28 +180,25 @@ const container = connect(mapStateToProps)(
 
 export default createFragmentContainer(container, {
   argumentable: graphql`
-    fragment ArgumentCreate_argumentable on Argumentable
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    fragment ArgumentCreate_argumentable on Argumentable {
       id
       contribuable
       ... on Opinion {
         step {
           requirements {
-            viewerMeetsTheRequirements @include(if: $isAuthenticated)
+            viewerMeetsTheRequirements
           }
-          ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
-
-          ...RequirementsModal_step @arguments(isAuthenticated: $isAuthenticated)
+          ...RequirementsForm_step
+          ...RequirementsModal_step
         }
       }
       ... on Version {
         step {
           requirements {
-            viewerMeetsTheRequirements @include(if: $isAuthenticated)
+            viewerMeetsTheRequirements
           }
-          ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
-
-          ...RequirementsModal_step @arguments(isAuthenticated: $isAuthenticated)
+          ...RequirementsForm_step
+          ...RequirementsModal_step
         }
       }
     }
