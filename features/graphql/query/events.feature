@@ -255,7 +255,7 @@ Scenario: GraphQL client wants to list events with theme2
   {
      "data":{
         "events":{
-           "totalCount":2,
+           "totalCount":3,
            "edges":[
               {
                  "node":{
@@ -273,6 +273,19 @@ Scenario: GraphQL client wants to list events with theme2
               {
                  "node":{
                     "_id":"event1",
+                    "themes":[
+                       {
+                          "id":"theme1"
+                       },
+                       {
+                          "id":"theme2"
+                       }
+                    ]
+                 }
+              },
+              {
+                 "node":{
+                    "_id":"event2",
                     "themes":[
                        {
                           "id":"theme1"

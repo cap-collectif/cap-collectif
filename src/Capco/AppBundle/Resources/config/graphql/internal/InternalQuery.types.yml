@@ -8,10 +8,6 @@ InternalQuery:
     fields:
       viewer:
         type: 'InternalUser!'
-      themes:
-        description: 'Lookup themes.'
-        type: '[Theme!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryThemesResolver")'
       mapTokens:
         type: '[MapToken!]!'
         description: 'Get the available map tokens'

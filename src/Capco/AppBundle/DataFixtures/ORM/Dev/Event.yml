@@ -45,7 +45,7 @@ Capco\AppBundle\Entity\Event:
     author: '@user<numberBetween(1, 5)>'
     link: http://www.phptour2014.fr
     projects: ['@p1']
-    themes: ['@theme1']
+    themes: ['@theme1', '@theme2']
   event3:
     id: event3
     title: GrenobleWeb2015

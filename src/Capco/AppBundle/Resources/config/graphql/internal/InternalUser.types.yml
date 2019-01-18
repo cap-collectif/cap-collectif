@@ -72,14 +72,11 @@ InternalUser:
         type: 'DateTime'
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       roles:
-        type: '[UserRole!]!'
-        access: "@=hasRole('ROLE_USER')"
+        type: '[UserRole]'
         description: 'Unattended roles as array.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRolesResolver", [value, getUser()])'
       rolesText:
         type: 'String'
-        access: "@=hasRole('ROLE_USER')"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRolesTextResolver", [value, getUser()])'
+        resolve: "@=resolver('user_rolesText', [value])"
         description: 'Array of roles converted and translated to string.'
       isArchiveDeleted:
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'

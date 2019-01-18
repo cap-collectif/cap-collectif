@@ -15,11 +15,7 @@ export class EventPageHeader extends React.Component<Props> {
     return (
       <div className="container text-center">
         <h1>
-          {eventPageTitle ? (
-            <FormattedHTMLMessage id={eventPageTitle} />
-          ) : (
-            <FormattedMessage id="events-list" />
-          )}
+          {<FormattedHTMLMessage id={eventPageTitle} /> || <FormattedMessage id="events-list" />}
         </h1>
         <FormattedMessage id="number-of-events" values={{ num: query.events.totalCount }} />
       </div>
