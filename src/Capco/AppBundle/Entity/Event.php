@@ -14,6 +14,7 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -199,7 +200,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this;
     }
 
-    public function getProjects(): iterable
+    public function getProjects(): Collection
     {
         return $this->projects;
     }
@@ -234,7 +235,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this->author;
     }
 
-    public function setZipCode(int $zipCode): self
+    public function setZipCode(?int $zipCode): self
     {
         $this->zipCode = $zipCode;
 
@@ -246,7 +247,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this->zipCode;
     }
 
-    public function setAddress(string $address = null): self
+    public function setAddress(?string $address = null): self
     {
         $this->address = $address;
 
@@ -258,7 +259,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this->address;
     }
 
-    public function setCity(string $city = null): self
+    public function setCity(?string $city = null): self
     {
         $this->city = $city;
 
@@ -275,9 +276,11 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this->country;
     }
 
-    public function setCountry(string $country = null)
+    public function setCountry(?string $country = null): self
     {
         $this->country = $country;
+
+        return $this;
     }
 
     public function getLat(): ?float
@@ -480,10 +483,10 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return true;
     }
 
-    public function getFullAddress(): string
+    public function getFullAddress(): ?string
     {
         $address = !empty($this->getAddress()) ? $this->getAddress() . ', ' : '';
-        $address .= !empty($this->getZipCode()) ?  $this->getZipCode() . ', ' : '';
+        $address .= !empty($this->getZipCode()) ? (string) $this->getZipCode() . ' ' : '';
         $address .= !empty($this->getCity()) ? $this->getCity() : '';
 
         $address = rtrim($address, ', ');

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Elasticsearch;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Doctrine\Common\EventSubscriber;
@@ -17,12 +18,11 @@ use Doctrine\ORM\Events;
  *  Listen any persist, update or delete operations happening in Doctrine, in order to:
  * - Index any created or updated object
  * - Re-index related author / step / project, to update counters.
- * - De-index any deleted object
+ * - De-index any deleted object.
  *
  * All indexations are added to a RabbitMQ queue, because doing all of this synchronously
  * would be very expensive.
- *
- **/
+ */
 class ElasticsearchDoctrineListener implements EventSubscriber
 {
     private $publisher;
@@ -34,11 +34,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
 
     public function getSubscribedEvents(): array
     {
-        return [
-            Events::postPersist,
-            Events::postUpdate,
-            Events::preRemove,
-        ];
+        return [Events::postPersist, Events::postUpdate, Events::preRemove];
     }
 
     public function postPersist(LifecycleEventArgs $args): void
@@ -87,6 +83,11 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         }
         if ($entity instanceof AbstractVote && $entity->getRelated()) {
             $this->process($entity->getRelated(), false);
+        }
+        if ($entity instanceof Event && $entity->getProjects()->count() > 0) {
+            foreach ($entity->getProjects() as $project) {
+                $this->process($project, false);
+            }
         }
     }
 }

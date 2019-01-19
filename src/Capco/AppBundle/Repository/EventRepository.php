@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
@@ -74,6 +75,7 @@ class EventRepository extends EntityRepository
             ->select('count(DISTINCT e)')
             ->andWhere('e.author = :user')
             ->setParameter('user', $user);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -151,6 +153,7 @@ class EventRepository extends EntityRepository
             ->setParameter('slug', $slug)
             ->orderBy('e.startAt', 'ASC')
             ->addOrderBy('registration.updatedAt', 'DESC');
+
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -206,6 +209,28 @@ class EventRepository extends EntityRepository
             ->orderBy('e.startAt', 'ASC');
 
         return $qb->getQuery()->execute();
+    }
+
+    public function countByProject($projectId)
+    {
+        $query = $this->createQueryBuilder('e')->select('COUNT(e.id)');
+
+        return $query
+            ->leftJoin('e.projects', 'p')
+            ->where('p.id = :project')
+            ->setParameter('project', $projectId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getEventsEnabledByIds(array $ids)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.enabled = true')
+            ->andWhere('e.id IN (:ids)')
+            ->setParameter(':ids', $ids);
+
+        return $qb->getQuery()->getResult();
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder

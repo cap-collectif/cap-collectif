@@ -78,11 +78,12 @@ exports[`<EventListFilters /> renders correctly 1`] = `
             >
               <div>
                 <Field
+                  autoload={true}
                   clearable={true}
                   component={[Function]}
                   id="project"
+                  loadOptions={[Function]}
                   name="project"
-                  options={Array []}
                   placeholder="type-project"
                 />
               </div>

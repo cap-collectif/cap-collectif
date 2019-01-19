@@ -3995,6 +3995,9 @@ type Query {
 
     # If non-null, filter projects by author
     author: ID
+
+    # If true, filter projects with events
+    withEventOnly: Boolean = false
   ): ProjectConnection!
 
   # Lookup events.
@@ -4029,6 +4032,9 @@ type Query {
     # If non-null, filters events with the given string to look for.
     search: String
   ): EventConnection!
+
+  # Lookup themes.
+  themes: [Theme!]!
 
   # Get the available map tokens
   mapTokens: [MapToken!]!
@@ -5951,7 +5957,7 @@ type User implements Node & UniformResourceLocatable {
   dateOfBirth: DateTime
 
   # Unattended roles as array.
-  roles: [UserRole]
+  roles: [UserRole!]!
 
   # Array of roles converted and translated to string.
   rolesText: String

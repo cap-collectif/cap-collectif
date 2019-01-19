@@ -3,6 +3,7 @@ import React from 'react';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { fetchQuery, graphql } from 'relay-runtime';
 import { reduxForm, Field, formValueSelector, type FormProps } from 'redux-form';
 import select from '../../Form/Select';
 import type { GlobalState, Dispatch, FeatureToggles, Uuid } from '../../../types';
@@ -11,13 +12,13 @@ import component from '../../Form/Field';
 import { changeEventMobileListView } from '../../../redux/modules/event';
 import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
+import environment from '../../../createRelayEnvironment';
 
 type Theme = { id: Uuid, title: string };
 
+type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
 type Props = {|
   ...FormProps,
-  themes: Array<Theme>,
-  projects: {},
   features: FeatureToggles,
   dispatch: Dispatch,
   theme: ?string,
@@ -43,12 +44,59 @@ const countFilters = (theme: ?string, project: ?string, search: ?string): number
   return nbFilter;
 };
 
-export class EventListFilters extends React.Component<Props> {
+const projectQuery = graphql`
+  query EventListFiltersQuery($withEventOnly: Boolean) {
+    projects(withEventOnly: $withEventOnly) {
+      edges {
+        node {
+          id
+          title
+        }
+      }
+    }
+  }
+`;
+
+const themeQuery = graphql`
+  query EventListFiltersThemeQuery {
+    themes {
+      id
+      title
+    }
+  }
+`;
+
+export class EventListFilters extends React.Component<Props, State> {
+  state = {
+    projectOptions: [],
+    themeOptions: [],
+  };
+
+  componentDidMount() {
+    fetchQuery(environment, projectQuery, { withEventOnly: true })
+      .then(res => res.projects.edges.map(edge => ({
+          value: edge.node.id,
+          label: edge.node.title,
+        }))
+      )
+      .then(projectOptions => {
+        this.setState({ projectOptions });
+      });
+    fetchQuery(environment, themeQuery)
+      .then(res => res.themes.map(theme => ({
+          value: theme.id,
+          label: theme.title,
+        }))
+      )
+      .then(themeOptions => {
+        this.setState({ themeOptions });
+      });
+  }
+
   render() {
     const {
       features,
       themes,
-      projects,
       theme,
       project,
       search,
@@ -82,7 +130,7 @@ export class EventListFilters extends React.Component<Props> {
           id="event-theme"
           name="theme"
           placeholder={intl.formatMessage({ id: 'type-theme' })}
-          options={themes.map(th => ({ value: th.id, label: th.title }))}
+          options={this.state.themeOptions.map(th => ({ value: th.id, label: th.title }))}
         />,
       );
     }
@@ -91,12 +139,11 @@ export class EventListFilters extends React.Component<Props> {
         <Field
           component={select}
           clearable
+          autoload
           id="project"
           name="project"
           placeholder={intl.formatMessage({ id: 'type-project' })}
-          options={Object.keys(projects)
-            .map(key => projects[key])
-            .map(p => ({ value: p.id, label: p.title }))}
+          options={this.state.themeOptions}
         />,
       );
     }
@@ -180,12 +227,10 @@ const selector = formValueSelector('EventListFilters');
 
 const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
-  themes: state.default.themes,
   theme: selector(state, 'theme'),
   project: selector(state, 'project'),
   search: selector(state, 'search'),
   userType: selector(state, 'userType'),
-  projects: state.project.projectsById,
   userTypes: state.default.userTypes,
 });
 
