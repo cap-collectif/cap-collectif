@@ -3,17 +3,8 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button, Panel } from 'react-bootstrap';
-import styled from 'styled-components';
 import type { OpinionAppendix_appendix } from './__generated__/OpinionAppendix_appendix.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
-
-const AppendixTypeBody = styled.span`
-  color: #707070;
-  margin-left: 8px;
-  font-weight: normal;
-  font-style: italic;
-  font-size: 16px;
-`;
 
 type Props = {
   appendix: OpinionAppendix_appendix,
@@ -99,9 +90,6 @@ class OpinionAppendix extends React.Component<Props, State> {
           }>
           {this.renderCaret()}
           {` ${appendix.appendixType.title}`}
-          {appendix.appendixType.helpText && (
-            <AppendixTypeBody>{`(${appendix.appendixType.helpText})`}</AppendixTypeBody>
-          )}
         </Button>
         {this.renderContent()}
       </div>
@@ -115,7 +103,6 @@ export default createFragmentContainer(OpinionAppendix, {
       body
       appendixType {
         title
-        helpText
       }
     }
   `,
