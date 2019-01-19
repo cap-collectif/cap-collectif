@@ -6,5 +6,3 @@ Capco\AppBundle\Entity\Synthesis\SynthesisUser:
       groups: [Users, UsersInfos]
     uniqueIdentifier:
       groups: [Users, UserInfos]
-    isAdmin:
-      groups: [UserInfos]

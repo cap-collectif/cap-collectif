@@ -249,7 +249,6 @@ Scenario: API client wants to get synthesis elements
         "author": {
           "displayName": "sfavot",
           "uniqueId": "sfavot",
-          "isAdmin": true,
           "media": {},
           "vip": true,
           "_links": {
@@ -307,7 +306,6 @@ Scenario: API client wants to get new synthesis elements
         "author": {
           "displayName": "sfavot",
           "uniqueId": "sfavot",
-          "isAdmin": true,
           "media": {},
           "vip": true,
           "_links": {
@@ -630,7 +628,6 @@ Scenario: API client wants to get a synthesis element that is published
     "author": {
       "displayName": "sfavot",
       "uniqueId": "sfavot",
-      "isAdmin": true,
       "media": {},
       "vip": true,
       "_links": {
@@ -782,7 +779,6 @@ Scenario: API client wants to update a synthesis element
     "author": {
       "displayName": "sfavot",
       "uniqueId": "sfavot",
-      "isAdmin": true,
       "media": {},
       "vip": true,
       "_links": {
