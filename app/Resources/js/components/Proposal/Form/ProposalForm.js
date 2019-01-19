@@ -362,44 +362,48 @@ export class ProposalForm extends React.Component<Props, State> {
           help={proposalForm.titleHelpText}
           label={<FormattedMessage id={titleFieldTradKey} />}
           addonAfter={
-            <Glyphicon
-              glyph="refresh"
-              className={isLoadingTitleSuggestions ? 'glyphicon-spin' : ''}
-            />
+            proposalForm.suggestingSimilarProposals ? (
+              <Glyphicon
+                glyph="refresh"
+                className={isLoadingTitleSuggestions ? 'glyphicon-spin' : ''}
+              />
+            ) : null
           }
         />
-        <Collapse in={titleSuggestions.length > 0}>
-          <Panel>
-            <Panel.Heading>
-              <Panel.Title>
-                <FormattedMessage
-                  id={titleSuggestHeader}
-                  values={{
-                    matches: titleSuggestions.length,
-                    terms: titleValue ? titleValue.split(' ').length : '',
-                  }}
-                />
-                <Button
-                  style={{ marginTop: -5 }}
-                  className="pull-right"
-                  onClick={() => {
-                    this.setState({ titleSuggestions: [] });
-                  }}>
-                  <FormattedMessage id="global.close" />
-                </Button>
-              </Panel.Title>
-            </Panel.Heading>
-            <ListGroup>
-              {titleSuggestions.slice(0, 5).map(suggestion => (
-                <ListGroupItem>
-                  <a href={suggestion.url} className="external-link">
-                    {suggestion.title}
-                  </a>
-                </ListGroupItem>
-              ))}
-            </ListGroup>
-          </Panel>
-        </Collapse>
+        {proposalForm.suggestingSimilarProposals ? (
+          <Collapse in={titleSuggestions.length > 0}>
+            <Panel>
+              <Panel.Heading>
+                <Panel.Title>
+                  <FormattedMessage
+                    id={titleSuggestHeader}
+                    values={{
+                      matches: titleSuggestions.length,
+                      terms: titleValue ? titleValue.split(' ').length : '',
+                    }}
+                  />
+                  <Button
+                    style={{ marginTop: -5 }}
+                    className="pull-right"
+                    onClick={() => {
+                      this.setState({ titleSuggestions: [] });
+                    }}>
+                    <FormattedMessage id="global.close" />
+                  </Button>
+                </Panel.Title>
+              </Panel.Heading>
+              <ListGroup>
+                {titleSuggestions.slice(0, 5).map(suggestion => (
+                  <ListGroupItem>
+                    <a href={suggestion.url} className="external-link">
+                      {suggestion.title}
+                    </a>
+                  </ListGroupItem>
+                ))}
+              </ListGroup>
+            </Panel>
+          </Collapse>
+        ) : null}
         {proposalForm.usingSummary && (
           <Field
             name="summary"
@@ -619,6 +623,7 @@ export default createFragmentContainer(container, {
     fragment ProposalForm_proposalForm on ProposalForm {
       id
       description
+      suggestingSimilarProposals
       step {
         id
       }

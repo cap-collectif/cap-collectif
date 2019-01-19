@@ -10,6 +10,12 @@ sentry:
   options:
     environment: '%kernel.environment%'
 
+doctrine:
+  orm:
+    metadata_cache_driver: apcu
+    query_cache_driver: apcu
+    result_cache_driver: apcu
+
 monolog:
   handlers:
     console:

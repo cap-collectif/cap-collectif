@@ -80,6 +80,9 @@ class ProjectsResolver implements ResolverInterface
         if ($args->offsetExists('author') && '' !== $args['author']) {
             $filters['author.id'] = GlobalId::fromGlobalId($args->offsetGet('author'))['id'];
         }
+        if ($args->offsetExists('withEventOnly') && '' !== $args['withEventOnly']) {
+            $filters['withEventOnly'] = $args['withEventOnly'];
+        }
 
         return $filters;
     }

@@ -1,10 +1,12 @@
 <?php
+
 namespace Capco\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Capco\AppBundle\Elasticsearch\Indexer;
 
 class ReportingController extends Controller
 {
@@ -29,6 +31,11 @@ class ReportingController extends Controller
 
         $object->setIsArchived(true);
         $this->admin->update($object);
+
+        // Synchronously index
+        $indexer = $this->get(Indexer::class);
+        $indexer->index(\get_class($related), $related->getId());
+        $indexer->finishBulk();
 
         $this->addFlash('sonata_flash_success', 'admin.action.reporting.disable.success');
 
@@ -57,6 +64,11 @@ class ReportingController extends Controller
 
         $object->setIsArchived(true);
         $this->admin->update($object);
+
+        // Synchronously index
+        $indexer = $this->get(Indexer::class);
+        $indexer->index(\get_class($related), $related->getId());
+        $indexer->finishBulk();
 
         $this->addFlash('sonata_flash_success', 'admin.action.reporting.trash.success');
 

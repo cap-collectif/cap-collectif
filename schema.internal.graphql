@@ -3657,6 +3657,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
   # Proposal form is description field is mandatory or not
   descriptionMandatory: Boolean!
+
+  # When a user is creating a proposal, suggest similar to avoid duplicate.
+  suggestingSimilarProposals: Boolean!
 }
 
 # Ways in which proposal connections can be ordered.
@@ -3995,6 +3998,9 @@ type Query {
 
     # If non-null, filter projects by author
     author: ID
+
+    # If true, filter projects with events
+    withEventOnly: Boolean = false
   ): ProjectConnection!
 
   # Lookup events.
@@ -4029,6 +4035,9 @@ type Query {
     # If non-null, filters events with the given string to look for.
     search: String
   ): EventConnection!
+
+  # Lookup themes.
+  themes: [Theme!]!
 
   # Get the available map tokens
   mapTokens: [MapToken!]!
@@ -5751,6 +5760,7 @@ input UpdateProposalFormInput {
 
   # Proposal form using summary field
   usingSummary: Boolean
+  suggestingSimilarProposals: Boolean
 
   # Proposal form is description field is mandatory or not
   descriptionMandatory: Boolean
@@ -5951,7 +5961,7 @@ type User implements Node & UniformResourceLocatable {
   dateOfBirth: DateTime
 
   # Unattended roles as array.
-  roles: [UserRole]
+  roles: [UserRole!]!
 
   # Array of roles converted and translated to string.
   rolesText: String

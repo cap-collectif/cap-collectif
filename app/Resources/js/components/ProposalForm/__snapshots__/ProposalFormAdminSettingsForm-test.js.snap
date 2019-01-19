@@ -60,25 +60,28 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
           values={Object {}}
         />
       </h4>
-      <div>
-        <h4>
-          <FormattedMessage
-            id="proposal_form.admin.settings.commentable"
-            values={Object {}}
-          />
-        </h4>
-        <Field
-          component={[Function]}
-          id="proposal_form_commentable"
-          name="commentable"
-          type="checkbox"
-        >
-          <FormattedMessage
-            id="proposal_form.commentable"
-            values={Object {}}
-          />
-        </Field>
-      </div>
+      <Field
+        component={[Function]}
+        id="proposal_form_commentable"
+        name="commentable"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.commentable"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_suggestingSimilarProposals"
+        name="suggestingSimilarProposals"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.suggestingSimilarProposals"
+          values={Object {}}
+        />
+      </Field>
       <Field
         component={[Function]}
         id="proposal_form_costable"

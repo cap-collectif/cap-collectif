@@ -59,6 +59,7 @@ class ProposalFormUpdateType extends AbstractType
 
             ->add('commentable', CheckboxType::class)
             ->add('costable', CheckboxType::class)
+            ->add('suggestingSimilarProposals', CheckboxType::class)
 
             ->add('categories', CollectionType::class, [
                 'entry_type' => ProposalCategoryType::class,

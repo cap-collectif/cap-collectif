@@ -78,18 +78,22 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
               <FormattedMessage id="proposal_form.admin.settings.options" />
             </h4>
             {isSuperAdmin && (
-              <div>
-                <h4>
-                  <FormattedMessage id="proposal_form.admin.settings.commentable" />
-                </h4>
-                <Field
-                  name="commentable"
-                  children={<FormattedMessage id="proposal_form.commentable" />}
-                  component={component}
-                  type="checkbox"
-                  id="proposal_form_commentable"
-                />
-              </div>
+              <Field
+                name="commentable"
+                children={<FormattedMessage id="proposal_form.commentable" />}
+                component={component}
+                type="checkbox"
+                id="proposal_form_commentable"
+              />
+            )}
+            {isSuperAdmin && (
+              <Field
+                name="suggestingSimilarProposals"
+                children={<FormattedMessage id="proposal_form.suggestingSimilarProposals" />}
+                component={component}
+                type="checkbox"
+                id="proposal_form_suggestingSimilarProposals"
+              />
             )}
             <Field
               name="costable"
@@ -138,6 +142,7 @@ const mapStateToProps = (state: State, props: RelayProps) => {
       title: proposalForm.title,
       commentable: proposalForm.commentable,
       costable: proposalForm.costable,
+      suggestingSimilarProposals: proposalForm.suggestingSimilarProposals,
     },
   };
 };
@@ -153,6 +158,7 @@ export default createFragmentContainer(
       title
       commentable
       costable
+      suggestingSimilarProposals
     }
   `,
 );

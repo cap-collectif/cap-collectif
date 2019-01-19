@@ -81,9 +81,8 @@ class ProposalFormMutation
         }
 
         $this->em->flush();
-        $this->em->clear();
 
-        return ['proposalForm' => $this->proposalFormRepository->find($id)];
+        return ['proposalForm' => $proposalForm];
     }
 
     public function updateNotificationsConfiguration(Argument $input)

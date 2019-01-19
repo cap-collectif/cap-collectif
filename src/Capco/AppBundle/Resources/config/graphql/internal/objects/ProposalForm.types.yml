@@ -108,3 +108,6 @@ ProposalForm:
       descriptionMandatory:
         type: 'Boolean!'
         description: 'Proposal form is description field is mandatory or not'
+      suggestingSimilarProposals:
+        type: 'Boolean!'
+        description: 'When a user is creating a proposal, suggest similar to avoid duplicate.'

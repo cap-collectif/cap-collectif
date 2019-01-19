@@ -8,7 +8,6 @@ use Elastica\Query;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\Result;
-use Capco\AppBundle\Entity\Event;
 
 class EventSearch extends Search
 {
@@ -101,14 +100,12 @@ class EventSearch extends Search
             ->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
 
-        $events = $this->getHydratedResults(
-            array_map(function (Result $result) {
-                return $result->getData()['id'];
-            }, $resultSet->getResults())
-        );
+        $ids = array_map(function (Result $result) {
+            return $result->getData()['id'];
+        }, $resultSet->getResults());
 
         return [
-            'events' => $events,
+            'events' => $this->getHydratedResults($ids),
             'count' => $resultSet->getTotalHits(),
             'order' => $order,
         ];
@@ -118,16 +115,18 @@ class EventSearch extends Search
     {
         // We can't use findById because we would lost the correct order of ids
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        return array_values(
-            array_filter(
-                array_map(function (string $id) {
-                    return $this->eventRepository->findOneBy(['id' => $id, 'enabled' => true]);
-                }, $ids),
-                function (?Event $event) {
-                    return null !== $event;
-                }
-            )
-        );
+        $events = $this->eventRepository->getEventsEnabledByIds($ids);
+        $results = array_map(function ($id) use ($events) {
+            $found = array_values(
+                array_filter($events, function ($event) use ($id) {
+                    return $event->getId() === $id;
+                })
+            );
+
+            return $found[0] ?? null;
+        }, $ids);
+
+        return $results;
     }
 
     private function getSort($order): array

@@ -50,6 +50,7 @@ describe('<ProposalForm />', () => {
         isOtherAllowed: false,
       },
     ],
+    suggestingSimilarProposals: true,
     isProposalForm: true,
     usingDistrict: true,
     usingDescription: true,

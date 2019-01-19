@@ -236,6 +236,11 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
      */
     private $usingIllustration = false;
 
+    /**
+     * @ORM\Column(name="suggesting_similar_proposals", type="boolean", nullable=false, options={"default": true})
+     */
+    private $suggestingSimilarProposals = true;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -846,6 +851,18 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     public function setUsingSummary(bool $usingSummary): self
     {
         $this->usingSummary = $usingSummary;
+
+        return $this;
+    }
+
+    public function getSuggestingSimilarProposals(): bool
+    {
+        return $this->suggestingSimilarProposals;
+    }
+
+    public function setSuggestingSimilarProposals(bool $suggestingSimilarProposals): self
+    {
+        $this->suggestingSimilarProposals = $suggestingSimilarProposals;
 
         return $this;
     }

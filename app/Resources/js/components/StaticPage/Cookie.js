@@ -107,6 +107,23 @@ export class Cookie extends React.Component<Props, CookieState> {
             </Alert>
           )}
         </div>
+        <div>
+          <div className="row" style={{ padding: '10px 0' }} id="cookies-indispensable">
+            <div>
+              <Col sm={8}>
+                <strong>
+                  <FormattedMessage id="indispensable" />
+                </strong>
+              </Col>
+              <Col sm={4} className="d-flex justify-content-end color-green">
+                <FormattedMessage id="always-on" />
+              </Col>
+            </div>
+            <Col sm={12} className="color-dark-gray">
+              <FormattedMessage id="help-text-essential-option" />
+            </Col>
+          </div>
+        </div>
         {analyticsJs && analyticsJs.length > 1 && (
           <div>
             <div className="row" style={{ padding: '10px 0' }} id="cookies-performance">

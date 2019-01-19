@@ -26,7 +26,7 @@ export default createFragmentContainer(EventMap, {
           lat
           lng
           url
-          address
+          fullAddress
           startAt
           endAt
           title

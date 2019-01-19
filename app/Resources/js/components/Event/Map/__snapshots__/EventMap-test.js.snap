@@ -13,8 +13,8 @@ exports[`<EventMap /> renders correcty 1`] = `
       "edges": Array [
         Object {
           "node": Object {
-            "address": "Ici et ailleur",
             "endAt": "2019-09-27T03:00:00+01:00",
+            "fullAddress": "Ici et ailleur",
             "id": "event1",
             "lat": 47.12345789,
             "lng": 1.23456789,
@@ -25,8 +25,8 @@ exports[`<EventMap /> renders correcty 1`] = `
         },
         Object {
           "node": Object {
-            "address": "Nul part et ailleur",
             "endAt": "2019-10-27T03:00:00+01:00",
+            "fullAddress": "Nul part et ailleur",
             "id": "event2",
             "lat": 47.1235444789,
             "lng": 1.23477789,

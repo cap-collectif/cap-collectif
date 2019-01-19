@@ -55,18 +55,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                   component={[Function]}
                   id="event-theme"
                   name="theme"
-                  options={
-                    Array [
-                      Object {
-                        "label": "Le gouter c'est la vie",
-                        "value": "theme-1",
-                      },
-                      Object {
-                        "label": "Theme 2",
-                        "value": "theme-2",
-                      },
-                    ]
-                  }
+                  options={Array []}
                   placeholder="type-theme"
                 />
               </div>

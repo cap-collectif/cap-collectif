@@ -33,7 +33,7 @@ export class EventPreview extends React.Component<Props> {
               {event.themes &&
                 event.themes.length > 0 &&
                 event.themes.filter(Boolean).map((theme, key) => (
-                  <a key={key} href={theme.url} title={theme.title}>
+                  <a className="mr-5" key={key} href={theme.url} title={theme.title}>
                     <span className="label label-default">{theme.title}</span>
                   </a>
                 ))}

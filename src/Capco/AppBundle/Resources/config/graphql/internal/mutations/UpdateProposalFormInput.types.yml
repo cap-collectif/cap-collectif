@@ -71,6 +71,8 @@ UpdateProposalFormInput:
       usingSummary:
         type: 'Boolean'
         description: 'Proposal form using summary field'
+      suggestingSimilarProposals:
+        type: 'Boolean'
       descriptionMandatory:
         type: 'Boolean'
         description: 'Proposal form is description field is mandatory or not'

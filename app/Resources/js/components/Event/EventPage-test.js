@@ -10,8 +10,13 @@ describe('<EventPage />', () => {
     eventPageBody: 'Description',
   };
 
-  it('renders correcty', () => {
+  it('renders correctly', () => {
     const wrapper = shallow(<EventPage {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly without title and body', () => {
+    const wrapper = shallow(<EventPage eventPageTitle="" eventPageBody="" />);
     expect(wrapper).toMatchSnapshot();
   });
 });

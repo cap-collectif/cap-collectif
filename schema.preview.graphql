@@ -178,6 +178,9 @@ type Query {
 
     # If non-null, filter projects by author
     author: ID
+
+    # If true, filter projects with events
+    withEventOnly: Boolean = false
   ): 
 
   # Lookup events.

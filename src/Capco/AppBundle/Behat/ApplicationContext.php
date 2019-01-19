@@ -12,7 +12,6 @@ use Behat\Gherkin\Node\TableNode;
 use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\NotifierFactory;
 use Behat\Mink\Driver\Selenium2Driver;
-use Capco\AppBundle\Behat\UserContext;
 use Symfony\Component\Process\Process;
 use WebDriver\Exception\ElementNotVisible;
 use Behat\Testwork\Tester\Result\TestResult;
@@ -916,6 +915,24 @@ class ApplicationContext extends UserContext
     public function iScrollTop()
     {
         $this->scrollTo('top');
+    }
+
+    /**
+     * @When /^(?:|I )select and click "(?P<option>(?:[^"]|\\")*)" from react "(?P<select>(?:[^"]|\\")*)"$/
+     */
+    public function selectOptionFromReactAndClickOn($select, $option)
+    {
+        // Select a project
+        $this->getSession()
+            ->getPage()
+            ->find('css', "${select} .Select-input input")
+            ->setValue($option);
+        $this->iWait(1);
+
+        $this->getCurrentPage()
+            ->find('css', "${select} .Select-option:nth-child(1)")
+            ->click();
+        $this->iWait(3);
     }
 
     /**

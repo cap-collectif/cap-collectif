@@ -16,6 +16,7 @@ describe('<ProposalFormAdminSettingsForm />', () => {
       title: 'title',
       commentable: true,
       costable: true,
+      suggestingSimilarProposals: true,
     },
   };
 
