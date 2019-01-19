@@ -126,7 +126,7 @@ export class EventListFilters extends React.Component<Props, State> {
         <Field
           component={select}
           clearable
-          id="event-theme"
+          id="EventListFilters-filter-theme"
           name="theme"
           placeholder={intl.formatMessage({ id: 'type-theme' })}
           options={this.state.themeOptions}
@@ -138,10 +138,10 @@ export class EventListFilters extends React.Component<Props, State> {
         <Field
           component={select}
           clearable
-          id="project"
+          id="EventListFilters-filter-project"
           name="project"
           placeholder={intl.formatMessage({ id: 'type-project' })}
-          options={this.state.themeOptions}
+          options={this.state.projectOptions}
         />,
       );
     }
