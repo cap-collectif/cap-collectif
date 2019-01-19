@@ -12,11 +12,10 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProposalViewerHasVoteDataLoader extends BatchDataLoader
 {
-    public $batch = false;
+    public $batch = true;
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
     private $globalIdResolver;
@@ -29,7 +28,6 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         GlobalIdResolver $globalIdResolver,
-        TokenStorageInterface $tokenStorage,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -38,7 +36,6 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->globalIdResolver = $globalIdResolver;
-        $this->tokenStorage = $tokenStorage;
 
         parent::__construct(
             [$this, 'all'],
@@ -91,10 +88,7 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
 
         $stepId = $keys[0]['stepId'];
         $user = $keys[0]['user'];
-        $step = $this->globalIdResolver->resolve(
-            $stepId,
-            $this->tokenStorage->getToken()->getUser()
-        );
+        $step = $this->globalIdResolver->resolve($stepId, $user);
 
         if (!$step) {
             $this->logger->error('Please provide a valid stepId');

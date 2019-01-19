@@ -11,6 +11,8 @@ use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerIsFollowingDataLoader;
+use GraphQL\Executor\Promise\Promise;
+use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 
 class ProposalViewerIsFollowingDataLoaderSpec extends ObjectBehavior
 {
@@ -65,10 +67,11 @@ class ProposalViewerIsFollowingDataLoaderSpec extends ObjectBehavior
             ->getByProposalIdsAndUser(['proposal1', 'proposal2'], $viewer)
             ->willReturn([$follower1, $follower2]);
 
+        $adapter = new SyncPromiseAdapter();
         $promiseFactory
             ->createAll([true, true])
             ->shouldBeCalled()
-            ->willReturn([]);
+            ->willReturn(new Promise(null, $adapter));
         $this->all($keys);
     }
 }

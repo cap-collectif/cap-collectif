@@ -211,11 +211,11 @@ class EventRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
-    public function countByProject($projectId)
+    public function countByProject($projectId): int
     {
         $query = $this->createQueryBuilder('e')->select('COUNT(e.id)');
 
-        return $query
+        return (int) $query
             ->leftJoin('e.projects', 'p')
             ->where('p.id = :project')
             ->setParameter('project', $projectId)
@@ -223,7 +223,7 @@ class EventRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getEventsEnabledByIds(array $ids)
+    public function getEventsEnabledByIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('e')
             ->where('e.enabled = true')

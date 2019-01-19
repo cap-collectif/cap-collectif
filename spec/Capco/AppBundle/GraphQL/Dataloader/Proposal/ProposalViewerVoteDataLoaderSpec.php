@@ -6,14 +6,16 @@ use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
+use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
+use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 
 class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
 {
@@ -23,7 +25,7 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        AbstractStepRepository $abstractStepRepository
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->beConstructedWith(
             $promiseFactory,
@@ -31,7 +33,7 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
             $logger,
             $proposalCollectVoteRepository,
             $proposalSelectionVoteRepository,
-            $abstractStepRepository,
+            $globalIdResolver,
             'prefix',
             60,
             false,
@@ -45,7 +47,7 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
     }
 
     public function it_resolve(
-        AbstractStepRepository $abstractStepRepository,
+        GlobalIdResolver $globalIdResolver,
         CollectStep $step,
         Proposal $proposal1,
         Proposal $proposal2,
@@ -73,15 +75,16 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
         $vote1->getProposal()->willReturn($proposal2);
         $vote2->getProposal()->willReturn($proposal1);
 
-        $abstractStepRepository->find('step1')->willReturn($step);
+        $globalIdResolver->resolve('step1', $user1)->willReturn($step);
         $proposalCollectVoteRepository
             ->getByProposalIdsAndStepAndUser(['proposal1', 'proposal2'], $step, $user1)
             ->willReturn([$vote1, $vote2]);
 
+        $adapter = new SyncPromiseAdapter();
         $promiseFactory
             ->createAll([$vote2, $vote1])
             ->shouldBeCalled()
-            ->willReturn([]);
+            ->willReturn(new Promise(null, $adapter));
         $this->all($keys);
     }
 }

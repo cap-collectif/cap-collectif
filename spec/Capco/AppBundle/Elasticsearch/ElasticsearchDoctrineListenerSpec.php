@@ -1,4 +1,5 @@
 <?php
+
 namespace spec\Capco\AppBundle\Elasticsearch;
 
 use Prophecy\Argument;
@@ -11,17 +12,17 @@ use Capco\AppBundle\Entity\Proposal;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Doctrine\ORM\Events;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 {
-    function let(Publisher $publisher)
+    public function let(Publisher $publisher)
     {
         $this->beConstructedWith($publisher);
     }
 
-    function it_subscribe_events()
+    public function it_subscribe_events()
     {
         $this->getSubscribedEvents()->shouldReturn([
             Events::postPersist,
@@ -30,7 +31,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         ]);
     }
 
-    function it_index_an_event(
+    public function it_index_an_event(
         Publisher $publisher,
         LifecycleEventArgs $args,
         Event $event,
@@ -38,22 +39,23 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
     ) {
         $event->getId()->willReturn('event1');
         $event->getAuthor()->willReturn($author);
+        $event->getProjects()->willReturn(new ArrayCollection([]));
 
         $message = new Message(
             json_encode([
-                'class' => get_class($event->getWrappedObject()),
+                'class' => \get_class($event->getWrappedObject()),
                 'id' => 'event1',
             ])
         );
         $publisher
-            ->publish("elasticsearch.indexation", Argument::exact($message))
+            ->publish('elasticsearch.indexation', Argument::exact($message))
             ->shouldBeCalledOnce();
 
         $args->getObject()->willReturn($event);
         $this->handleEvent($args);
     }
 
-    function it_index_a_proposal(
+    public function it_index_a_proposal(
         Publisher $publisher,
         LifecycleEventArgs $args,
         Proposal $proposal,
@@ -61,18 +63,18 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
     ) {
         $proposalMessage = new Message(
             json_encode([
-                'class' => get_class($proposal->getWrappedObject()),
+                'class' => \get_class($proposal->getWrappedObject()),
                 'id' => 'proposal1',
             ])
         );
         $authorMessage = new Message(
-            json_encode(['class' => get_class($author->getWrappedObject()), 'id' => 'user1'])
+            json_encode(['class' => \get_class($author->getWrappedObject()), 'id' => 'user1'])
         );
         $publisher
-            ->publish("elasticsearch.indexation", Argument::exact($proposalMessage))
+            ->publish('elasticsearch.indexation', Argument::exact($proposalMessage))
             ->shouldBeCalledOnce();
         $publisher
-            ->publish("elasticsearch.indexation", Argument::exact($authorMessage))
+            ->publish('elasticsearch.indexation', Argument::exact($authorMessage))
             ->shouldBeCalledOnce();
         $proposal->getId()->willReturn('proposal1');
         $author->getId()->willReturn('user1');
@@ -82,7 +84,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $this->handleEvent($args);
     }
 
-    function it_index_a_proposal_vote(
+    public function it_index_a_proposal_vote(
         Publisher $publisher,
         LifecycleEventArgs $args,
         ProposalCollectVote $vote,
@@ -91,23 +93,23 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
     ) {
         $proposalMessage = new Message(
             json_encode([
-                'class' => get_class($proposal->getWrappedObject()),
+                'class' => \get_class($proposal->getWrappedObject()),
                 'id' => 'proposal1',
             ])
         );
         $voteAuthorMessage = new Message(
             json_encode([
-                'class' => get_class($voteAuthor->getWrappedObject()),
+                'class' => \get_class($voteAuthor->getWrappedObject()),
                 'id' => 'user1',
             ])
         );
 
         // Votes are not indexed
         $publisher
-            ->publish("elasticsearch.indexation", Argument::exact($proposalMessage))
+            ->publish('elasticsearch.indexation', Argument::exact($proposalMessage))
             ->shouldBeCalledOnce();
         $publisher
-            ->publish("elasticsearch.indexation", Argument::exact($voteAuthorMessage))
+            ->publish('elasticsearch.indexation', Argument::exact($voteAuthorMessage))
             ->shouldBeCalledOnce();
         $proposal->getId()->willReturn('proposal1');
         $voteAuthor->getId()->willReturn('user1');
@@ -119,7 +121,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $this->handleEvent($args);
     }
 
-    function it_index_a_comment(
+    public function it_index_a_comment(
         Publisher $publisher,
         LifecycleEventArgs $args,
         Comment $comment,
@@ -128,31 +130,31 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
     ) {
         $commentMessage = new Message(
             json_encode([
-                'class' => get_class($comment->getWrappedObject()),
+                'class' => \get_class($comment->getWrappedObject()),
                 'id' => 'comment1',
             ])
         );
         $commentProposalMessage = new Message(
             json_encode([
-                'class' => get_class($commentProposal->getWrappedObject()),
+                'class' => \get_class($commentProposal->getWrappedObject()),
                 'id' => 'proposal1',
             ])
         );
         $commentAuthorMessage = new Message(
             json_encode([
-                'class' => get_class($commentAuthor->getWrappedObject()),
+                'class' => \get_class($commentAuthor->getWrappedObject()),
                 'id' => 'user1',
             ])
         );
 
         $publisher
-            ->publish("elasticsearch.indexation", Argument::exact($commentMessage))
+            ->publish('elasticsearch.indexation', Argument::exact($commentMessage))
             ->shouldBeCalledOnce();
         $publisher
-            ->publish("elasticsearch.indexation", Argument::exact($commentProposalMessage))
+            ->publish('elasticsearch.indexation', Argument::exact($commentProposalMessage))
             ->shouldBeCalledOnce();
         $publisher
-            ->publish("elasticsearch.indexation", Argument::exact($commentAuthorMessage))
+            ->publish('elasticsearch.indexation', Argument::exact($commentAuthorMessage))
             ->shouldBeCalledOnce();
 
         $comment->getId()->willReturn('comment1');
