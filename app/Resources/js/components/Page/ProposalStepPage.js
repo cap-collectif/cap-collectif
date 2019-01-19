@@ -66,7 +66,6 @@ export class ProposalStepPage extends React.Component<Props> {
               $theme: ID
               $userType: ID
               $isMapDisplay: Boolean!
-              $trashedStatus: ProposalTrashedStatus
             ) {
               viewer @include(if: $isAuthenticated) {
                 ...ProposalListView_viewer
@@ -126,7 +125,6 @@ export class ProposalStepPage extends React.Component<Props> {
               cursor: null,
               ...this.initialRenderVars,
               isMapDisplay: features.display_map,
-              trashedStatus: 'NOT_TRASHED',
             }: ProposalStepPageQueryVariables)
           }
           render={({ error, props }: { props: ?ProposalStepPageQueryResponse } & ReadyState) => {
