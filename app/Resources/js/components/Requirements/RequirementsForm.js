@@ -288,16 +288,16 @@ export default createFragmentContainer(container, {
             id
             viewerMeetsTheRequirement @include(if: $isAuthenticated)
             ... on DateOfBirthRequirement {
-              viewerDateOfBirth
+              viewerDateOfBirth @include(if: $isAuthenticated)
             }
             ... on FirstnameRequirement {
-              viewerValue
+              viewerValue @include(if: $isAuthenticated)
             }
             ... on LastnameRequirement {
-              viewerValue
+              viewerValue @include(if: $isAuthenticated)
             }
             ... on PhoneRequirement {
-              viewerValue
+              viewerValue @include(if: $isAuthenticated)
             }
             ... on CheckboxRequirement {
               label
