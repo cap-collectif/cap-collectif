@@ -9,9 +9,10 @@ class UserRolesResolver implements ResolverInterface
 {
     public function __invoke(User $user, User $viewer): array
     {
-        if ($user === $viewer) {
+        if ($user === $viewer || $viewer->isAdmin()) {
             return $user->getRoles();
         }
+
         return [];
     }
 }

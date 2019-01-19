@@ -9,7 +9,7 @@ class UserRolesTextResolver implements ResolverInterface
 {
     public function __invoke(User $user, User $viewer): ?string
     {
-        if ($user === $viewer) {
+        if ($user === $viewer || $viewer->isAdmin()) {
             $convertedRoles = array_map(function ($role) {
                 return str_replace(
                     ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN'],
@@ -17,9 +17,10 @@ class UserRolesTextResolver implements ResolverInterface
                     $role
                 );
             }, $user->getRoles());
-    
+
             return implode('|', $convertedRoles);
         }
+
         return null;
     }
 }
