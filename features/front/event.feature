@@ -22,7 +22,7 @@ Scenario: Events can be filtered by projects
   And I visited "events page"
   And I click the "#event-button-filter" element
   And I wait 3 seconds
-  And I select and click "Croissance, innovation, disruption" from react "#EventListFilters-filter-project"
+  And I select "Croissance, innovation, disruption" from react "#EventListFilters-filter-project"
   Then I should see 3 ".event" elements
   And I should see "Event with registrations"
   # And I should see "Event without registrations"

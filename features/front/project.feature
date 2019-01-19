@@ -33,8 +33,8 @@ Scenario: Project can be filtered by theme
   And I should see "project.preview.action.participe"
   And I should see "project.preview.action.seeResult"
   And I click the "#project-button-filter" element
-  And I wait "#theme" to appear on current page
-  And I select "Transport" from react "#theme"
+  And I wait "#project-theme" to appear on current page
+  And I select "Transport" from react "#project-theme"
   And I wait ".project-preview" to appear on current page
   Then I should see 9 ".project-preview" elements
   And I should see "Projet vide"
@@ -53,8 +53,8 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
   And feature "projects_form" is enabled
   And I visited "projects page"
   And I click the "#project-button-filter" element
-  And I wait "#theme" to appear on current page
-  And I select "Transport" from react "#theme"
+  And I wait "#project-theme" to appear on current page
+  And I select "Transport" from react "#project-theme"
   And I wait ".project-preview" to appear on current page
   And I select "global.filter_f_popular" from "project-sorting"
   And I wait ".project-preview" to appear on current page
@@ -68,8 +68,8 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And feature "projects_form" is enabled
   And I visited "projects page"
   And I click the "#project-button-filter" element
-  And I wait "#type" to appear on current page
-  And I select "project.types.consultation" from react "#type"
+  And I wait "#project-type" to appear on current page
+  And I select "project.types.consultation" from react "#project-type"
   And I wait ".project-preview" to appear on current page
   And I select "global.filter_f_popular" from "project-sorting"
   And I wait ".project-preview" to appear on current page

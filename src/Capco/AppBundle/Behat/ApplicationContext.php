@@ -918,24 +918,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @When /^(?:|I )select and click "(?P<option>(?:[^"]|\\")*)" from react "(?P<select>(?:[^"]|\\")*)"$/
-     */
-    public function selectOptionFromReactAndClickOn($select, $option)
-    {
-        // Select a project
-        $this->getSession()
-            ->getPage()
-            ->find('css', "${select} .Select-input input")
-            ->setValue($option);
-        $this->iWait(1);
-
-        $this->getCurrentPage()
-            ->find('css', "${select} .Select-option:nth-child(1)")
-            ->click();
-        $this->iWait(3);
-    }
-
-    /**
      * Selects option in select created by our react Field component with specified id
      * Example: When I select "Bats" from react "user_fears"
      * Example: And I select "Bats" from  react "user_fears".
