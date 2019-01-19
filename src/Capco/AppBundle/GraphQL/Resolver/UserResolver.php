@@ -113,6 +113,19 @@ class UserResolver implements ResolverInterface
         return $object->getSmsConfirmationSentAt();
     }
 
+    public function resolveRolesText($object): string
+    {
+        $convertedRoles = array_map(function ($role) {
+            return str_replace(
+                ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN'],
+                ['Utilisateur', 'Administrateur', 'Super Admin'],
+                $role
+            );
+        }, $object->getRoles());
+
+        return implode('|', $convertedRoles);
+    }
+
     public function contributionsToDeleteCount($object): int
     {
         return $this->deleteAccountMutation->hardDeleteUserContributionsInActiveSteps(

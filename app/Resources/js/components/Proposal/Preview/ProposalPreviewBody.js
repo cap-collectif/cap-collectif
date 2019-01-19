@@ -78,12 +78,8 @@ export class ProposalPreviewBody extends React.Component<Props> {
             /* $FlowFixMe */
             <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
           )}
-          {
-            step && step.project && step.project.opinionCanBeFollowed ?
-            /* $FlowFixMe */
-            <ProposalFollowButton proposal={proposal} />
-            : null
-          }
+          {/* $FlowFixMe */}
+          <ProposalFollowButton proposal={proposal} />
         </div>
         {step &&
           step.voteThreshold !== null &&
@@ -151,9 +147,6 @@ export default createFragmentContainer(container, {
       ...ProposalVoteThresholdProgressBar_step
       voteThreshold
       voteType
-      project {
-        opinionCanBeFollowed
-      }
     }
   `,
 });

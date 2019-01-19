@@ -26,13 +26,24 @@
     </main>
 
     {# Footer #}
+    {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
+    {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
+    {% if analytic_js is not empty and ads_js is empty %}
+        {% set bannerTrad =  'text-audience-cookie'|trans({}, 'CapcoAppBundle')  %}
+    {% elseif ads_js  is not empty and analytic_js is empty %}
+        {% set bannerTrad =  'text-cookie-communication'|trans({}, 'CapcoAppBundle')  %}
+    {% elseif ads_js is not empty and analytic_js is not empty %}
+        {% set bannerTrad =  'texte-cookie-audience-communication'|trans({}, 'CapcoAppBundle')  %}
+    {% endif %}
+    {% if bannerTrad is defined %}
     <div id="cookie-banner" class="cookie-banner">
-        <div class="col-sm-9">{{ 'performance-cookies-alert'|trans({}, 'CapcoAppBundle') }}</div>
+        <div class="col-sm-9">{{ bannerTrad }}</div>
         <div class="col-sm-3 d-flex justify-content-end">
             <a id="cookie-more-button" class="mr-10" name="cookie-more" href="{{ path('app_confidentialite') }}">{{ 'cookies-setting'|trans({}, 'CapcoAppBundle') }}</a>
             <div id="cookie-button-container"><button id="cookie-consent" class="btn btn-default btn-sm" >{{ 'ok-accept-everything'|trans({}, 'CapcoAppBundle') }}</button></div>
         </div>
     </div>
+    {% endif %}
 
     {% include '@CapcoApp/Default/footer.html.twig' %}
 

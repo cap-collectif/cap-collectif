@@ -79,13 +79,11 @@ export class EventPage extends React.Component<Props> {
                     {/* $FlowFixMe */}
                     <EventPageHeader query={props} eventPageTitle={this.props.eventPageTitle} />
                   </section>
-                  {this.props.eventPageBody && (
-                    <section className="section--custom">
-                      <div className="container">
-                        <FormattedHTMLMessage id={this.props.eventPageBody} />
-                      </div>
-                    </section>
-                  )}
+                  <section className="section--custom">
+                    <div className="container">
+                      <FormattedHTMLMessage id={this.props.eventPageBody} />
+                    </div>
+                  </section>
                   <section className="section--custom">
                     <div className="container">
                       <div

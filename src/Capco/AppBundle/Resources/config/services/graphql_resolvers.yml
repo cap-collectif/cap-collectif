@@ -177,6 +177,7 @@ services:
           method: 'resolvePhoneConfirmationSentAt',
         }
       - { name: overblog_graphql.resolver, alias: 'user_gender', method: 'resolveGender' }
+      - { name: overblog_graphql.resolver, alias: 'user_rolesText', method: 'resolveRolesText' }
       - {
           name: overblog_graphql.resolver,
           alias: 'user_contributionsToDeleteCount',

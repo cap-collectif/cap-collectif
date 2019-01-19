@@ -36,3 +36,7 @@ Capco\UserBundle\Entity\User:
       serialized_name: uniqueId
       type: string
       groups: [UserDetails, UsersInfos]
+    isAdmin:
+      serialized_name: isAdmin
+      type: boolean
+      groups: [UserDetails, UsersInfos]
