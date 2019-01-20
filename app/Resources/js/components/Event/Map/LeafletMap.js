@@ -81,6 +81,9 @@ export class LeafletMap extends Component<Props> {
         });
     }
     const bounds = L.latLngBounds(markersGroup);
+    if (!bounds.isValid()) {
+      return null;
+    }
     return (
       <div>
         <Map

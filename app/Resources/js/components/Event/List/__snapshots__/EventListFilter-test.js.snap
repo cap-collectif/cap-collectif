@@ -51,38 +51,6 @@ exports[`<EventListFilters /> renders correctly 1`] = `
             >
               <div>
                 <Field
-                  clearable={true}
-                  component={[Function]}
-                  id="EventListFilters-filter-theme"
-                  name="theme"
-                  options={Array []}
-                  placeholder="type-theme"
-                />
-              </div>
-            </Col>
-            <Col
-              bsClass="col"
-              className="mt-5"
-              componentClass="div"
-            >
-              <div>
-                <Field
-                  clearable={true}
-                  component={[Function]}
-                  id="EventListFilters-filter-project"
-                  name="project"
-                  options={Array []}
-                  placeholder="type-project"
-                />
-              </div>
-            </Col>
-            <Col
-              bsClass="col"
-              className="mt-5"
-              componentClass="div"
-            >
-              <div>
-                <Field
                   autoload={true}
                   component={[Function]}
                   id="EventListFilters-filter-userType"
@@ -116,7 +84,9 @@ exports[`<EventListFilters /> renders correctly 1`] = `
     smHidden={true}
     xsHidden={true}
   >
-    <form>
+    <form
+      onSubmit={[Function]}
+    >
       <Field
         addonAfter={
           <i
@@ -219,7 +189,9 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
     smHidden={true}
     xsHidden={true}
   >
-    <form>
+    <form
+      onSubmit={[Function]}
+    >
       <Field
         addonAfter={
           <i

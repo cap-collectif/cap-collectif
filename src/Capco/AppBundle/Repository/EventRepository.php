@@ -226,8 +226,10 @@ class EventRepository extends EntityRepository
     public function getEventsEnabledByIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('e')
+            ->addSelect('themes')
             ->where('e.enabled = true')
             ->andWhere('e.id IN (:ids)')
+            ->leftJoin('e.themes', 'themes')
             ->setParameter(':ids', $ids);
 
         return $qb->getQuery()->getResult();

@@ -22,6 +22,8 @@ class EventSearch extends Search
         'object.std',
         'teaser',
         'teaser.std',
+        'fullAddress',
+        'fullAddress.std',
     ];
 
     private const OLD = false;

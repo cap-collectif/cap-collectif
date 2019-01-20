@@ -121,7 +121,7 @@ export class EventListFilters extends React.Component<Props, State> {
       }
     }
 
-    if (features.themes) {
+    if (features.themes && this.state.themeOptions.length) {
       filters.push(
         <Field
           component={select}
@@ -133,7 +133,7 @@ export class EventListFilters extends React.Component<Props, State> {
         />,
       );
     }
-    if (features.projects_form) {
+    if (features.projects_form && this.state.projectOptions.length) {
       filters.push(
         <Field
           component={select}
@@ -161,16 +161,18 @@ export class EventListFilters extends React.Component<Props, State> {
       );
     }
 
-    filters.push(
-      <Field
-        component={select}
-        autoload
-        name="userType"
-        id="EventListFilters-filter-userType"
-        placeholder={intl.formatMessage({ id: 'registration.type' })}
-        options={userTypes.map(u => ({ value: u.id, label: u.name }))}
-      />,
-    );
+    if (userTypes.length) {
+      filters.push(
+        <Field
+          component={select}
+          autoload
+          name="userType"
+          id="EventListFilters-filter-userType"
+          placeholder={intl.formatMessage({ id: 'registration.type' })}
+          options={userTypes.map(u => ({ value: u.id, label: u.name }))}
+        />,
+      );
+    }
 
     const popoverBottom = (
       <div>
@@ -204,7 +206,11 @@ export class EventListFilters extends React.Component<Props, State> {
           ) : null}
         </Col>
         <Col md={4} smHidden xsHidden>
-          <form>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              return false;
+            }}>
             <Field
               id="event-search-input"
               name="search"

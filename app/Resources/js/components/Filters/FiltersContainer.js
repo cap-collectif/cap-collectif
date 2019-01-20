@@ -21,7 +21,11 @@ export default class FiltersContainer extends React.Component<Props> {
       <OverlayTrigger
         trigger="click"
         placement="bottom"
-        overlay={<Popover className="w-260">{overlay}</Popover>}
+        overlay={
+          <Popover id="FiltersContainer" className="w-260">
+            {overlay}
+          </Popover>
+        }
         className="w-25"
         id={`${type}-list-filters-d`}>
         <Button className="btn--outline btn-dark-gray" id={`${type}-button-filter`}>

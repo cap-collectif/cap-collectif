@@ -6,7 +6,6 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import EventPreview from '../EventPreview';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import EventMap from '../Map/EventMap';
 import type { EventListPaginated_query } from './__generated__/EventListPaginatedQuery.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
@@ -26,7 +25,7 @@ type State = {
   loading: boolean,
 };
 
-const EVENTS_PAGINATION = 25;
+const EVENTS_PAGINATION = 100;
 
 export class EventListPaginated extends React.Component<Props, State> {
   state = {
@@ -113,20 +112,16 @@ export class EventListPaginated extends React.Component<Props, State> {
         {relay.hasMore() && (
           <Row>
             <div className="text-center">
-              {this.state.loading ? (
-                <Loader />
-              ) : (
-                <Button
-                  bsStyle="link"
-                  onClick={() => {
-                    this.setState({ loading: true });
-                    relay.loadMore(EVENTS_PAGINATION, () => {
-                      this.setState({ loading: false });
-                    });
-                  }}>
-                  <FormattedMessage id="global.more" />
-                </Button>
-              )}
+              <Button
+                disabled={this.state.loading}
+                onClick={() => {
+                  this.setState({ loading: true });
+                  relay.loadMore(EVENTS_PAGINATION, () => {
+                    this.setState({ loading: false });
+                  });
+                }}>
+                <FormattedMessage id={this.state.loading ? 'global.loading' : 'global.more'} />
+              </Button>
             </div>
           </Row>
         )}
@@ -208,7 +203,7 @@ export default createPaginationContainer(
         $theme: ID
         $project: ID
         $search: String
-        $status: String
+        $userType: ID
         $isFuture: Boolean
       ) {
         ...EventListPaginated_query
@@ -218,7 +213,7 @@ export default createPaginationContainer(
             theme: $theme
             project: $project
             search: $search
-            userType: $status
+            userType: $userType
             isFuture: $isFuture
           )
       }

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
+import { debounce } from 'lodash';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import EventListPaginated from './EventListPaginated';
 import type { GlobalState } from '../../../types';
@@ -37,7 +38,7 @@ export class EventRefetch extends React.Component<Props, State> {
     }
   }
 
-  _refetch = () => {
+  _refetch = debounce(() => {
     this.setState({ isRefetching: true });
 
     const refetchVariables = fragmentVariables => ({
@@ -57,7 +58,7 @@ export class EventRefetch extends React.Component<Props, State> {
       },
       { force: true },
     );
-  };
+  }, 500);
 
   render() {
     const { query } = this.props;
