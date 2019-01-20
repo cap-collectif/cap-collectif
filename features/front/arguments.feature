@@ -163,7 +163,6 @@ Scenario: Anonymous wants to delete an argument on a version
 Scenario: Logged in user wants to vote for an argument on an opinion then delete his vote
   Given I am logged in as admin
   And I go to an opinion
-  And I wait 1 seconds
   When I vote for the argument
   Then I should see "alert.success.add.vote" in the "#global-alert-box" element
   When I delete my vote on the argument
@@ -193,7 +192,6 @@ Scenario: Anonymous user wants to vote for an argument on an opinion
 Scenario: Logged in user wants to vote for an argument on a version then delete his vote
   Given I am logged in as admin
   And I go to a version
-  And I wait 1 seconds
   When I vote for the argument
   Then I should see "alert.success.add.vote" in the "#global-alert-box" element
   When I delete my vote on the argument

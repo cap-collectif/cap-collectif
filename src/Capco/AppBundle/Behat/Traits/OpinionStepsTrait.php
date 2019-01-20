@@ -379,7 +379,10 @@ trait OpinionStepsTrait
     public function iVoteForTheArgument()
     {
         $page = $this->getCurrentPage();
-        $this->getSession()->wait(3000, '$(".opinion__votes-nb").length > 0');
+        $this->getSession()->wait(
+            7000,
+            "$('" . $page->getSelector('argument vote button') . "').length > 0"
+        );
         $wantedVotesCount = $page->getArgumentVotesCount() + 1;
         $this->clickArgumentVoteButtonWithLabel('vote.ok');
         $newVotesCount = $page->getArgumentVotesCount();
