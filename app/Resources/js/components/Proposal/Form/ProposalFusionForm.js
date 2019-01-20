@@ -80,7 +80,7 @@ export class ProposalFusionForm extends React.Component<Props> {
       <form>
         <Field
           name="project"
-          id="project"
+          id="ProposalFusionForm-project"
           label={intl.formatMessage({ id: 'admin.fields.proposal.project' })}
           placeholder={intl.formatMessage({ id: 'select-a-participatory-project' })}
           isLoading={projects.length === 0}
@@ -92,7 +92,7 @@ export class ProposalFusionForm extends React.Component<Props> {
         {currentCollectStep && (
           <Field
             name="fromProposals"
-            id="fromProposals"
+            id="ProposalFusionForm-fromProposals"
             multi
             label={intl.formatMessage({ id: 'initial-proposals' })}
             autoload

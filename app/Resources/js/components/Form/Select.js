@@ -9,12 +9,12 @@ type OnChangeInput = { value: string } | Array<{ value: string }>;
 type Props = {
   input: {
     name: string,
-    id: string,
     value: Value,
     onBlur: () => void,
     onChange: (value: Value) => void,
     onFocus: () => void,
   },
+  id: string,
   meta: { touched: boolean, error: ?string },
   label: string | React.Node,
   help: string | React.Node,
@@ -54,6 +54,7 @@ export class renderSelect extends React.Component<Props> {
       placeholder,
       loadOptions,
       filterOptions,
+      id,
       help,
       meta: { touched, error },
     } = this.props;
@@ -61,12 +62,12 @@ export class renderSelect extends React.Component<Props> {
     return (
       <div className="form-group">
         {label && (
-          <label htmlFor={input.id} className={labelClassName || 'control-label'}>
+          <label htmlFor={id} className={labelClassName || 'control-label'}>
             {label}
           </label>
         )}
         {help && <HelpBlock>{help}</HelpBlock>}
-        <div id={input.id} className={inputClassName || ''}>
+        <div id={id} className={inputClassName || ''}>
           {typeof loadOptions === 'function' ? (
             <Select.Async
               filterOptions={filterOptions}

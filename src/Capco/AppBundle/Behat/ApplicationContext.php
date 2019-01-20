@@ -918,19 +918,25 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Selects option in select created by our react Field component with specified id
-     * Example: When I select "Bats" from react "user_fears"
-     * Example: And I select "Bats" from  react "user_fears".
+     * Selects option in select created by our react Field component with specified id.
+     *
+     * Example: When I select "Bats" from react "#user_fears"
+     * Example: And I select "Bats" from  react "#user_fears".
      *
      * @When /^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from react "(?P<select>(?:[^"]|\\")*)"$/
      */
     public function selectOptionFromReact($select, $option)
     {
-        // Select a project
-        $this->getSession()
+        $selector = "${select} .Select-input input";
+        $element = $this->getSession()
             ->getPage()
-            ->find('css', "${select} .Select-input input")
-            ->setValue($option);
+            ->find('css', $selector);
+
+        if (null === $element) {
+            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
+        }
+
+        $element->setValue($option);
         $this->iWait(3);
     }
 

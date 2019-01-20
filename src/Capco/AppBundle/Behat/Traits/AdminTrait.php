@@ -33,7 +33,7 @@ trait AdminTrait
         // Select a project
         $this->getSession()
             ->getPage()
-            ->find('css', '#project .Select-input input')
+            ->find('css', '#ProposalFusionForm-project .Select-input input')
             ->setValue('7');
         $this->iWait(3);
         // Select 2 distinct proposals from the project
@@ -41,20 +41,20 @@ trait AdminTrait
         foreach ($proposals as $search) {
             $this->getSession()
                 ->getPage()
-                ->find('css', '#fromProposals')
+                ->find('css', '#ProposalFusionForm-fromProposals')
                 ->click();
             $searchInput = $this->getSession()
                 ->getPage()
-                ->find('css', '#fromProposals .Select-input input');
+                ->find('css', '#ProposalFusionForm-fromProposals .Select-input input');
             $searchInput->setValue($search);
             $this->getSession()
                 ->getPage()
-                ->find('css', '#fromProposals')
+                ->find('css', '#ProposalFusionForm-fromProposals')
                 ->click();
             $this->iWait(3);
             $option = $this->getSession()
                 ->getPage()
-                ->find('css', '#fromProposals .Select-option[id*="-option-1"]');
+                ->find('css', '#ProposalFusionForm-fromProposals .Select-option[id*="-option-1"]');
             if ($option) {
                 $option->click();
             }
@@ -62,7 +62,7 @@ trait AdminTrait
         }
         $this->getSession()
             ->getPage()
-            ->find('css', '#fromProposals')
+            ->find('css', '#ProposalFusionForm-fromProposals')
             ->click();
     }
 

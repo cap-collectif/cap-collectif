@@ -78,7 +78,6 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRolesResolver", [value, getUser()])'
       rolesText:
         type: 'String'
-        access: "@=hasRole('ROLE_USER')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRolesTextResolver", [value, getUser(),context])'
         description: 'Array of roles converted and translated to string.'
       isArchiveDeleted:
