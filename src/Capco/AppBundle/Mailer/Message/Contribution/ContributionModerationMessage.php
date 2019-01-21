@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Mailer\Message\Contribution;
 
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
+use Capco\AppBundle\Mailer\Message\DefaultMessage;
 use Capco\AppBundle\Model\Contribution;
 
-final class ContributionModerationMessage extends ExternalMessage
+final class ContributionModerationMessage extends DefaultMessage
 {
     public static function create(
         Contribution $contribution,
@@ -19,7 +19,10 @@ final class ContributionModerationMessage extends ExternalMessage
             'moderation.notification.subject',
             static::getMySubjectVars(),
             '@CapcoMail/notifyModeration.html.twig',
-            static::getMyTemplateVars($contribution, $trashUrl)
+            static::getMyTemplateVars(
+                $contribution,
+                $trashUrl
+            )
         );
     }
 
@@ -28,8 +31,10 @@ final class ContributionModerationMessage extends ExternalMessage
         return [];
     }
 
-    private static function getMyTemplateVars(Contribution $contribution, string $trashUrl): array
-    {
+    private static function getMyTemplateVars(
+        Contribution $contribution,
+        string $trashUrl
+    ): array {
         return [
             'contribution' => $contribution,
             'trashUrl' => $trashUrl,
