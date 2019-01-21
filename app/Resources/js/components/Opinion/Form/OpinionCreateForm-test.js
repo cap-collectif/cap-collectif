@@ -31,6 +31,7 @@ describe('<OpinionCreateForm />', () => {
         {
           id: '1',
           title: 'appendice',
+          helpText: 'help text appendice',
         },
       ],
     },
