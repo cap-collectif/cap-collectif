@@ -64,4 +64,9 @@ final class Text
     {
         return sprintf('#%02x%02x%02x', $r, $g, $b);
     }
+
+    public static function cleanNewline($value)
+    {
+        return str_replace("\n", ' ', $value);
+    }
 }
