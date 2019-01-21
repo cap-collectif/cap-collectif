@@ -41,6 +41,7 @@ export class Cookie extends React.Component<Props, CookieState> {
   componentDidMount() {
     setTimeout(() => {
       const cookieConsent = document.getElementById('cookie-consent');
+
       if (cookieConsent) {
         cookieConsent.addEventListener(
           'click',

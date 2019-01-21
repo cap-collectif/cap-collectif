@@ -50,34 +50,35 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript">
-        window.locale = "{{ intl_locale() }}";
-    </script>
-    {{ parent() }}
     {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
     {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
-    
+    <script type="text/javascript">
+        window.locale = "{{ intl_locale() }}";
+
+
+        window._capco_executeAnalyticScript = function(){
+            {% if null != analytic_js %}
+            var script = document.createElement("script");
+            script.innerHTML = '{{ analytic_js|e("js") }}';
+            document.body.appendChild(script);
+            {% endif %}
+        };
+
+        window._capco_executeAdsScript = function(){
+            {% if null != ads_js %}
+            var script = document.createElement("script");
+            script.innerHTML = '{{ ads_js|e("js") }}';
+            document.body.appendChild(script);
+            {% endif %}
+        };
+    </script>
+    {{ parent() }}
+
     <script type="text/javascript">
 
-        window.executeAnalyticScript = function(){
-            {% if null != analytic_js %}
-              var script = document.createElement("script");
-              script.innerHTML = '{{ analytic_js|e("js") }}';
-              document.body.appendChild(script);
-            {% endif %}
-        };
 
-        window.executeAdsScript = function(){
-            {% if null != ads_js %}
-            // TODO can enable disable ads cookies
-              {#var script = document.createElement("script");#}
-              {#script.innerHTML = '{{ ads_js|e("js") }}';#}
-              {#document.body.appendChild(script);#}
-            {% endif %}
-        };
-
-        document.addEventListener('DOMContentLoaded', function(event) {
-          cookieMonster.processCookieConsent();
+        document.addEventListener("DOMContentLoaded", function(event) {
+            cookieMonster.processCookieConsent();
         });
 
         $(window).on('load', function() {
