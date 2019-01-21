@@ -446,3 +446,10 @@ Capco\AppBundle\Entity\SiteParameter:
     value: 50
     position: 1
     type: 2
+
+  SiteParameterCookies:
+    keyname: cookies-list
+    category: pages.cookies
+    value: Cookies
+    position: 3
+    type: 1

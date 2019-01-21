@@ -43,14 +43,14 @@
                     </li>
                 {% endfor %}
                 <li>
-                    {{ react_render_component('CookieApp', {
-                        'props': {
-                            'analytic_js': analytic_js,
-                            'ads_js': ads_js,
-                            'bannerTrad':  bannerTrad,
-                            'isLink':  true,
-                        }
-                    }) }}
+                    |
+                    <a href="{{ path('app_cookies') }}">
+                        {{ 'cookies'|trans({}, 'CapcoAppBundle') }}
+                    </a>
+                    |
+                    <a href="{{ path('app_confidentialite') }}">
+                        {{ 'cookies-management'|trans({}, 'CapcoAppBundle') }}
+                    </a>
                 </li>
             </ul>
             <div class="capco-powered">

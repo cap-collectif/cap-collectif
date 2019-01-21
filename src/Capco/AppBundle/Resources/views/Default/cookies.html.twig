@@ -1,0 +1,37 @@
+{% set page_class = "cookies" %}
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block canonical_link %}{{ url('app_cookies') }}{% endblock %}
+
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title': ('cookies'|trans({}, 'CapcoAppBundle')),
+        'url':   url('app_cookies')
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ 'cookies' | trans({}, 'CapcoAppBundle') }}
+{% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1>{{ 'cookies' | trans({}, 'CapcoAppBundle') }}</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <section class="section--custom">
+        <div class="container" style="max-width: 660px">
+            {{ 'texte-cookies-page-1' | trans({}, 'CapcoAppBundle')|raw }}
+            {{ cookiesList|raw }}
+            <p>
+                <a href="{{ path('app_confidentialite') }}"
+                   title="{{ 'cookies-management' | trans({}, 'CapcoAppBundle') }}"> {{ 'set-up-cookies' | trans({}, 'CapcoAppBundle')|raw }}</a>
+            </p>
+            {{ 'texte-cookies-page-2' | trans({}, 'CapcoAppBundle')|raw }}
+        </div>
+    </section>
+{% endblock %}
