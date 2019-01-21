@@ -5,3 +5,5 @@ AppendixType:
     fields:
       title:
         type: 'String!'
+      helpText:
+        type: 'String'

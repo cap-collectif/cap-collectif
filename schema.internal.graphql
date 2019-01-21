@@ -277,6 +277,7 @@ type Appendix {
 # An AppendixType
 type AppendixType {
   title: String!
+  helpText: String
 }
 
 # An argument
