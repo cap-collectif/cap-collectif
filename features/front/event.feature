@@ -11,26 +11,22 @@ Scenario: Anonymous wants to list events
   And I wait ".event" to appear on current page
   Then I should see 10 ".event" elements
 
-Scenario: Anonymous wants to list archived events
-  Given I visited "events page"
-  And I should see 'event.index.appendices.archived.number {"%count%":3}'
-  And I follow "event.see_archived"
-  Then I should see 3 ".event" elements
-
 Scenario: Events can be filtered by projects
   Given feature "projects_form" is enabled
   And I visited "events page"
   And I click the "#event-button-filter" element
-  And I wait 3 seconds
   And I select "Croissance, innovation, disruption" from react "#EventListFilters-filter-project"
+  And I wait 2 seconds
   Then I should see 3 ".event" elements
   And I should see "Event with registrations"
   # And I should see "Event without registrations"
 
 Scenario: Archived events can be filtered by projects
+  Given feature "projects_form" is enabled
   Given I visited "events page"
-  And I follow "event.see_archived"
-  And I select "Croissance, innovation, disruption" from "event_search_project"
+  And I click the "#event-button-filter" element
+  And I select "Croissance, innovation, disruption" from react "#EventListFilters-filter-project"
+  And I select "finished" from react "#EventListFilters-filter-status"
   And I wait 2 seconds
   Then I should see 1 ".event" elements
   And I should see "evenementPasseSansDateDeFin"
@@ -49,8 +45,9 @@ Scenario: Events can be filtered by theme
 Scenario: Archived events can be filtered by theme
   Given feature "themes" is enabled
   And I visited "events page"
-  And I follow "event.see_archived"
-  And I select "Justice" from "event_search_theme"
+  And I click the "#event-button-filter" element
+  And I select "Justice" from react "#EventListFilters-filter-theme"
+  And I select "finished" from react "#EventListFilters-filter-status"
   And I wait 1 seconds
   Then I should see 1 ".event" elements
   And I should see "evenementPasseSansDateDeFin"
@@ -67,10 +64,10 @@ Scenario: Events can be filtered by title
 
 Scenario: Archived events can be filtered by title
   Given I visited "events page"
-  And I follow "event.see_archived"
+  And I click the "#event-button-filter" element
+  And I select "finished" from react "#EventListFilters-filter-status"
   When I fill in the following:
-    | event_search_term | ParisWeb2014 |
-  And I click the ".filter__search .btn" element
+    | event-search-input | ParisWeb2014 |
   And I wait 1 seconds
   Then I should see 1 ".event" elements
   And I should see "ParisWeb2014"
