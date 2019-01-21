@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -156,16 +157,23 @@ class UsersController extends FOSRestController
     {
         /** @var User $user */
         $user = $this->getUser();
+        /** @var LoggerInterface $logger */
+        $logger = $this->get('logger');
+
         if (!$user || 'anon.' === $user) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
 
         if ($user->isEmailConfirmed() && !$user->getNewEmailToConfirm()) {
+            $logger->warning('Already confirmed.');
+
             throw new BadRequestHttpException('Already confirmed.');
         }
 
         // security against mass click email resend
         if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
+            $logger->warning('Email already sent less than a minute ago.');
+
             throw new BadRequestHttpException('Email already sent less than a minute ago.');
         }
 
