@@ -60,13 +60,15 @@ export class ProposalVoteModal extends React.Component<Props, State> {
       if (
         !data ||
         !data.addProposalVote ||
-        typeof data.addProposalVote.vote === 'undefined' ||
-        data.addProposalVote.vote === null
+        !data.addProposalVote.voteEdge ||
+        !data.addProposalVote.voteEdge.node ||
+        typeof data.addProposalVote.voteEdge === 'undefined' ||
+        data.addProposalVote.voteEdge === null
       ) {
         console.error(data); // eslint-disable-line no-console
         return;
       }
-      tmpVote.id = data.addProposalVote.vote.id;
+      tmpVote.id = data.addProposalVote.voteEdge.node.id;
 
       // If the user didn't reorder
       // or update any vote privacy
