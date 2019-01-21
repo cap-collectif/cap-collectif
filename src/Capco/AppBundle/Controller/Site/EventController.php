@@ -83,69 +83,6 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/events/archived", name="app_event_archived", defaults={"_feature_flags" = "calendar"} )
-     * @Route("/events/archived/{theme}", name="app_event_archived_theme", defaults={"_feature_flags" = "calendar", "theme" = "all"} )
-     * @Route("/events/archived/{theme}/{project}", name="app_event_archived_project", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
-     * @Route("/events/archived/{theme}/{project}/{term}", name="app_event_archived_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
-     * @Template("CapcoAppBundle:Event:show_archived.html.twig")
-     *
-     * @param null|mixed $theme
-     * @param null|mixed $project
-     * @param null|mixed $term
-     */
-    public function showArchivedAction(
-        Request $request,
-        $theme = null,
-        $project = null,
-        $term = null
-    ) {
-        $currentUrl = $this->generateUrl('app_event_archived');
-
-        $form = $this->createForm(EventSearchType::class, null, [
-            'action' => $currentUrl,
-            'method' => 'POST',
-        ]);
-
-        if ('POST' === $request->getMethod()) {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $data = $form->getData();
-
-                return $this->redirect(
-                    $this->generateUrl('app_event_archived_term', [
-                        'theme' => isset($data['theme'])
-                            ? $data['theme']->getSlug()
-                            : Theme::FILTER_ALL,
-                        'project' => $data['project']
-                            ? $data['project']->getSlug()
-                            : Project::FILTER_ALL,
-                        'term' => $data['term'],
-                    ])
-                );
-            }
-        } else {
-            $form->setData([
-                'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
-                'term' => $term,
-            ]);
-        }
-
-        $groupedEvents = $this->get(EventResolver::class)->getEventsGroupedByYearAndMonth(
-            true,
-            $theme,
-            $project,
-            $term
-        );
-
-        return [
-            'years' => $groupedEvents,
-            'form' => $form->createView(),
-        ];
-    }
-
-    /**
      * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flags" = "calendar"})
      * @ParamConverter("event", options={"mapping": {"slug": "slug"}, "repository_method" = "getOne"})
      * @Template("CapcoAppBundle:Event:show.html.twig")

@@ -125,7 +125,6 @@ export class EventListFilters extends React.Component<Props, State> {
       filters.push(
         <Field
           component={select}
-          clearable
           id="EventListFilters-filter-theme"
           name="theme"
           placeholder={intl.formatMessage({ id: 'type-theme' })}
@@ -137,7 +136,6 @@ export class EventListFilters extends React.Component<Props, State> {
       filters.push(
         <Field
           component={select}
-          clearable
           id="EventListFilters-filter-project"
           name="project"
           placeholder={intl.formatMessage({ id: 'type-project' })}
@@ -145,6 +143,20 @@ export class EventListFilters extends React.Component<Props, State> {
         />,
       );
     }
+
+    filters.push(
+      <Field
+        component={select}
+        id="EventListFilters-filter-status"
+        name="status"
+        clearable={false}
+        placeholder={intl.formatMessage({ id: 'voting-status' })}
+        options={[
+          { value: true, label: intl.formatMessage({ id: 'ongoing-and-future' }) },
+          { value: false, label: intl.formatMessage({ id: 'finished' }) },
+        ]}
+      />,
+    );
 
     if (config.isMobile) {
       filters.push(
@@ -165,10 +177,9 @@ export class EventListFilters extends React.Component<Props, State> {
       filters.push(
         <Field
           component={select}
-          autoload
           name="userType"
           id="EventListFilters-filter-userType"
-          placeholder={intl.formatMessage({ id: 'registration.type' })}
+          placeholder={intl.formatMessage({ id: 'filter-userType' })}
           options={userTypes.map(u => ({ value: u.id, label: u.name }))}
         />,
       );
@@ -241,6 +252,9 @@ const mapStateToProps = (state: GlobalState) => ({
 const form = reduxForm({
   form: 'EventListFilters',
   destroyOnUnmount: false,
+  initialValues: {
+    status: true,
+  },
 })(EventListFilters);
 
 export default connect(mapStateToProps)(injectIntl(form));

@@ -28,22 +28,6 @@
 
 {% block body %}
     {{ react_render_component('EventApp', { 'props': { 'eventPageTitle': eventPageTitle, 'eventPageBody': eventPageBody }} ) }}
-
-    <section class="section--custom">
-        <div class="container appendices__container">
-            <div class="row">
-                <div class="col-xs-12 col-md-4 col-md-offset-4 text-center  appendices__item  box">
-                    <p class="appendices__title">{{ 'event.archived'|trans({}, 'CapcoAppBundle') }}</p>
-                    <p class="excerpt">
-                        {% transchoice archivedEventsNb with {'%count%': archivedEventsNb} from 'CapcoAppBundle' %}
-                            event.index.appendices.archived.number
-                        {% endtranschoice %}</p>
-                    <p><a href="{{ path('app_event_archived') }}" class="btn  btn-primary  btn--outline">{{ 'event.see_archived'|trans({}, 'CapcoAppBundle') }}</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
 {% endblock %}
 
 {% block javascripts %}

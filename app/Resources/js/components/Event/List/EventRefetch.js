@@ -16,6 +16,7 @@ type Props = {
   theme: ?string,
   project: ?string,
   userType: ?string,
+  status: ?boolean,
 };
 
 type State = {
@@ -32,6 +33,7 @@ export class EventRefetch extends React.Component<Props, State> {
       prevProps.theme !== this.props.theme ||
       prevProps.project !== this.props.project ||
       prevProps.search !== this.props.search ||
+      prevProps.status !== this.props.status ||
       prevProps.userType !== this.props.userType
     ) {
       this._refetch();
@@ -48,6 +50,7 @@ export class EventRefetch extends React.Component<Props, State> {
       theme: this.props.theme || null,
       project: this.props.project || null,
       userType: this.props.userType || null,
+      isFuture: this.props.status,
     });
 
     this.props.relay.refetch(
@@ -78,6 +81,7 @@ const mapStateToProps = (state: GlobalState) => ({
   project: selector(state, 'project'),
   search: selector(state, 'search'),
   userType: selector(state, 'userType'),
+  status: selector(state, 'status'),
 });
 
 const container = connect(mapStateToProps)(EventRefetch);
