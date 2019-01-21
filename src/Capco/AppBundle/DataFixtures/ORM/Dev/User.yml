@@ -121,8 +121,8 @@ Capco\UserBundle\Entity\User:
     id: 'user<current()>'
     username: user<current()>
     email: user<current()>@cap-collectif.com
-    firstname: firstname<current()>
-    lastname: lastname<current()>
+    firstname: <firstname()>
+    lastname: <lastname()>
     userType: '@UserType1'
     salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
     password: $2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe
