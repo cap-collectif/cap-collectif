@@ -76,6 +76,8 @@ def configure_vhosts():
         'capco.test',
         # To test paris login
         'capco.paris.fr',
+        'wwww.capco.nantes.fr',
+        'www.sous.sous.domaine.lille.fr',
     ]
 
     for domain in domains:

@@ -7,32 +7,45 @@ use Capco\AppBundle\Mailer\Message\AdminMessage;
 
 final class ProposalUpdateAdminMessage extends AdminMessage
 {
-    public static function create(Proposal $proposal,
-                                  string $recipentEmail,
-                                  string $proposalUrl,
-                                  string $proposalAdminUrl,
-                                  string $authorUrl,
-                                  string $recipientName = null): self
-    {
+    public static function create(
+        Proposal $proposal,
+        string $recipentEmail,
+        string $proposalUrl,
+        string $proposalAdminUrl,
+        string $authorUrl,
+        string $recipientName = null
+    ): self {
         return new self(
             $recipentEmail,
             $recipientName,
             'notification.email.proposal.update.subject',
             static::getMySubjectVars(
                 $proposal->getAuthor()->getDisplayName(),
-                $proposal->getProposalForm()->getStep()->getProject()->getTitle()
+                $proposal
+                    ->getProposalForm()
+                    ->getStep()
+                    ->getProject()
+                    ->getTitle()
             ),
             'notification.email.proposal.update.body',
             static::getMyTemplateVars(
                 $authorUrl,
                 $proposal->getAuthor()->getDisplayName(),
                 $proposal->getTitle(),
-                $proposal->getUpdatedAt()->format('d/m/Y'),
-                $proposal->getUpdatedAt()->format('H:i:s'),
+                null === $proposal->getUpdatedAt()
+                    ? $proposal->getCreatedAt()->format('d/m/Y')
+                    : $proposal->getUpdatedAt()->format('d/m/Y'),
+                null === $proposal->getUpdatedAt()
+                    ? $proposal->getCreatedAt()->format('H:i:s')
+                    : $proposal->getUpdatedAt()->format('H:i:s'),
                 $proposal->getBodyTextExcerpt(),
                 $proposalUrl,
                 $proposalAdminUrl,
-                $proposal->getProposalForm()->getStep()->getProject()->getTitle()
+                $proposal
+                    ->getProposalForm()
+                    ->getStep()
+                    ->getProject()
+                    ->getTitle()
             )
         );
     }
@@ -61,13 +74,11 @@ final class ProposalUpdateAdminMessage extends AdminMessage
         ];
     }
 
-    private static function getMySubjectVars(
-        string $username,
-        string $project
-    ): array {
+    private static function getMySubjectVars(string $username, string $project): array
+    {
         return [
-          '%username%' => self::escape($username),
-          '%project%' => self::escape($project),
+            '%username%' => self::escape($username),
+            '%project%' => self::escape($project),
         ];
     }
 }

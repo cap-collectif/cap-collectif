@@ -15,6 +15,7 @@ Capco\AppBundle\Entity\Proposal:
     reference: 1
     publishedAt: <(new \DateTime('2018-03-01 00:01:00'))>
     createdAt: <(new \DateTime('2018-03-01 00:01:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:01:00'))>
     evaluers: ['@group1']
   deletedProposal1:
     id: deletedProposal1

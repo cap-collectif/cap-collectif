@@ -3,6 +3,8 @@
 
 const GA_COOKIE_NAMES = ['__utma', '__utmb', '__utmc', '__utmz', '_ga', '_gat', '_gid'];
 
+const GTAG_COOKIE_NAMES = ['_gcl_au'];
+
 const PK_COOKIE_NAMES = ['_pk_ref', '_pk_cvar', '_pk_id', '_pk_ses', '_pk_hsr'];
 
 const SCROLL_VALUE_TO_CONSENT = 2000;
@@ -19,6 +21,7 @@ class CookieMonster {
     }
     this.cookieBanner = document.getElementById('cookie-banner');
     this.cookieConsent = document.getElementById('cookie-consent');
+    window._capco_ga_cookie_value = Cookies.getJSON('_ga');
   }
 
   isDoNotTrackActive = () => {
@@ -41,6 +44,10 @@ class CookieMonster {
         this.executeAnalyticScript();
         return;
       }
+      if (adsConsent === true) {
+        this.executeAdsScript();
+        return;
+      }
       // so do Not Track Is Activated
       this.hideBanner();
       return;
@@ -50,7 +57,9 @@ class CookieMonster {
     if (this.isDoNotTrackActive()) {
       if (typeof analyticConsent === 'undefined') {
         Cookies.set('analyticConsentValue', false, { expires: 395 });
-        Cookies.set('adCookieConsentValue', false, { expires: 395 });
+      }
+      if (typeof adsConsent === 'undefined') {
+        Cookies.set('analyticConsentValue', false, { expires: 395 });
       }
       if (consentCookie) {
         Cookies.set('hasFullConsent', false, { expires: 395 });
@@ -125,11 +134,11 @@ class CookieMonster {
     Cookies.set('hasFullConsent', true, { expires: 395 });
     if (this.analyticCookieValue() !== true) {
       this.setCookie(true, 'analyticConsentValue');
-      this.executeAnalyticScript();
+      this.executeAnalyticScript(true);
     }
     if (this.adCookieConsentValue() !== true) {
       this.setCookie(true, 'adCookieConsentValue');
-      // this.executeAdsScript();
+      this.executeAdsScript();
     }
     this.hideBanner();
   };
@@ -145,10 +154,16 @@ class CookieMonster {
     return true;
   };
 
-  getUpperLevelDomain = (): string => {
-    const parts = window.location.hostname.split('.');
-    parts.shift();
-    return parts.join('.');
+  getCookieDomain = (): string => {
+    return window.location.host;
+  };
+
+  changeGaExpireAt = (expire: string) => {
+    GA_COOKIE_NAMES.forEach(name => {
+      if (typeof Cookies.get(name) !== 'undefined') {
+        this.expireCookie(name, this.getCookieDomain(), expire);
+      }
+    });
   };
 
   toggleCookie = (value: boolean, type: string) => {
@@ -156,18 +171,13 @@ class CookieMonster {
     const cookies = this.getCookies();
     if (type === 'analyticConsentValue') {
       if (value) {
-        this.executeAnalyticScript();
+        this.executeAnalyticScript(true);
       } else {
-        GA_COOKIE_NAMES.forEach(name => {
-          if (typeof Cookies.get(name) !== 'undefined') {
-            this.expireCookie(name, window.location.host);
-            this.expireCookie(name, this.getUpperLevelDomain());
-          }
-        });
+        this.changeGaExpireAt(new Date().toUTCString());
         PK_COOKIE_NAMES.forEach(name => {
           cookies.forEach(cookie => {
             if (cookie.startsWith(name)) {
-              this.expireCookie(cookie);
+              this.expireCookie(cookie, null, new Date().toUTCString());
             }
           });
         });
@@ -176,17 +186,17 @@ class CookieMonster {
       if (value) {
         this.executeAdsScript();
       }
-      // TODO delete ads cookies
+      GTAG_COOKIE_NAMES.forEach(name => {
+        if (typeof Cookies.get(name) !== 'undefined') {
+          this.expireCookie(name, this.getCookieDomain(), new Date().toUTCString());
+        }
+      });
     }
   };
 
-  expireCookie = (coockieName: string, domain: ?string): void => {
+  expireCookie = (coockieName: string, domain: ?string, expireAt: string): void => {
     document.cookie =
-      coockieName +
-      '=; expires=' +
-      new Date().toUTCString() +
-      (domain ? '; domain=.' + domain : '') +
-      '; path=/';
+      coockieName + '=; expires=' + expireAt + (domain ? '; domain=.' + domain : '') + '; path=/';
   };
 
   getCookies = () => {
@@ -208,18 +218,25 @@ class CookieMonster {
   };
 
   removeCookieConsent = (event: Event) => {
-    var cookieChoiceElement = document.getElementById(this.cookieConsent);
+    const cookieChoiceElement = document.getElementById(this.cookieConsent);
     if (cookieChoiceElement != null && cookieChoiceElement.parentNode) {
       cookieChoiceElement.parentNode.removeChild(cookieChoiceElement);
     }
   };
 
-  executeAnalyticScript() {
-    window.executeAnalyticScript();
+  executeAnalyticScript(changeExpiration: ?boolean) {
+    window._capco_executeAnalyticScript();
+    if (typeof changeExpiration !== 'undefined' && changeExpiration === true) {
+      const expireIn13Months = new Date();
+      expireIn13Months.setMonth(expireIn13Months.getMonth() + 13);
+      setTimeout(() => {
+        this.changeGaExpireAt(expireIn13Months.toUTCString());
+      }, 1000);
+    }
   }
 
   executeAdsScript() {
-    window.executeAdsScript();
+    window._capco_executeAdsScript();
   }
 
   isFullConsent = () => {

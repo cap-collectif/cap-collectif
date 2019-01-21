@@ -142,6 +142,7 @@ export class OpinionCreateForm extends React.Component<Props> {
                 component={renderInput}
                 name={field.title}
                 label={field.title}
+                help={field.helpText}
                 type="editor"
                 id={`appendix_${index}`}
               />
@@ -164,6 +165,7 @@ export default createFragmentContainer(container, {
       appendixTypes {
         id
         title
+        helpText
       }
     }
   `,
