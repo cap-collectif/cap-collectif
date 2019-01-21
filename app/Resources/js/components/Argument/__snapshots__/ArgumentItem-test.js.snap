@@ -25,57 +25,86 @@ exports[`<ArgumentItem /> render correcty 1`] = `
         }
       }
     />
-    <div
-      className="opinion__data"
+    <ForwardRef(Relay(TrashedMessage))
+      contribution={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "author": Object {
+            "displayName": "lbrunet",
+            "id": "user1",
+            "media": Object {
+              "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
+            },
+            "slug": "lbrunet",
+            "url": "https://capco.dev/profile/lbrunet",
+            "vip": false,
+          },
+          "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
+          "createdAt": "2018-04-09T23:21:06+0200",
+          "id": "argument1",
+          "publishedAt": "2018-04-09T23:21:06+0200",
+          "related": Object {
+            "id": "opinion1",
+            "title": "Opinion 1",
+            "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
+          },
+          "type": "FOR",
+        }
+      }
     >
-      <p
-        className="h5 opinion__user"
+      <div
+        className="opinion__data"
       >
-        <UserLink
-          className=""
-          user={
+        <p
+          className="h5 opinion__user"
+        >
+          <UserLink
+            className=""
+            user={
+              Object {
+                "displayName": "lbrunet",
+                "id": "user1",
+                "media": Object {
+                  "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
+                },
+                "slug": "lbrunet",
+                "url": "https://capco.dev/profile/lbrunet",
+                "vip": false,
+              }
+            }
+          />
+        </p>
+        <ForwardRef(Relay(Connect(UnpublishedLabel)))
+          publishable={
             Object {
-              "displayName": "lbrunet",
-              "id": "user1",
-              "media": Object {
-                "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "lbrunet",
+                "id": "user1",
+                "media": Object {
+                  "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
+                },
+                "slug": "lbrunet",
+                "url": "https://capco.dev/profile/lbrunet",
+                "vip": false,
               },
-              "slug": "lbrunet",
-              "url": "https://capco.dev/profile/lbrunet",
-              "vip": false,
+              "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
+              "createdAt": "2018-04-09T23:21:06+0200",
+              "id": "argument1",
+              "publishedAt": "2018-04-09T23:21:06+0200",
+              "related": Object {
+                "id": "opinion1",
+                "title": "Opinion 1",
+                "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
+              },
+              "type": "FOR",
             }
           }
         />
-      </p>
-      <ForwardRef(Relay(Connect(UnpublishedLabel)))
-        publishable={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "author": Object {
-              "displayName": "lbrunet",
-              "id": "user1",
-              "media": Object {
-                "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-              },
-              "slug": "lbrunet",
-              "url": "https://capco.dev/profile/lbrunet",
-              "vip": false,
-            },
-            "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
-            "createdAt": "2018-04-09T23:21:06+0200",
-            "id": "argument1",
-            "publishedAt": "2018-04-09T23:21:06+0200",
-            "related": Object {
-              "id": "opinion1",
-              "title": "Opinion 1",
-              "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
-            },
-            "type": "FOR",
-          }
-        }
-      />
-    </div>
+      </div>
+    </ForwardRef(Relay(TrashedMessage))>
     <p
       className="opinion__text"
       style={
@@ -156,79 +185,108 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
         }
       }
     />
-    <div
-      className="opinion__data"
+    <ForwardRef(Relay(TrashedMessage))
+      contribution={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "author": Object {
+            "displayName": "lbrunet",
+            "id": "user1",
+            "media": Object {
+              "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
+            },
+            "slug": "lbrunet",
+            "url": "https://capco.dev/profile/lbrunet",
+            "vip": false,
+          },
+          "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
+          "createdAt": "2018-04-09T23:21:06+0200",
+          "id": "argument1",
+          "publishedAt": "2018-04-09T23:21:06+0200",
+          "related": Object {
+            "id": "opinion1",
+            "title": "Opinion 1",
+            "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
+          },
+          "type": "FOR",
+        }
+      }
     >
-      <p
-        className="h5 opinion__user"
+      <div
+        className="opinion__data"
       >
-        <UserLink
-          className=""
-          user={
+        <p
+          className="h5 opinion__user"
+        >
+          <UserLink
+            className=""
+            user={
+              Object {
+                "displayName": "lbrunet",
+                "id": "user1",
+                "media": Object {
+                  "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
+                },
+                "slug": "lbrunet",
+                "url": "https://capco.dev/profile/lbrunet",
+                "vip": false,
+              }
+            }
+          />
+          <Label
+            bsClass="label"
+            bsStyle="success"
+            className="label--right"
+          >
+            <FormattedMessage
+              id="argument.show.type.for"
+              values={Object {}}
+            />
+          </Label>
+        </p>
+        <ForwardRef(Relay(Connect(UnpublishedLabel)))
+          publishable={
             Object {
-              "displayName": "lbrunet",
-              "id": "user1",
-              "media": Object {
-                "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "lbrunet",
+                "id": "user1",
+                "media": Object {
+                  "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
+                },
+                "slug": "lbrunet",
+                "url": "https://capco.dev/profile/lbrunet",
+                "vip": false,
               },
-              "slug": "lbrunet",
-              "url": "https://capco.dev/profile/lbrunet",
-              "vip": false,
+              "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
+              "createdAt": "2018-04-09T23:21:06+0200",
+              "id": "argument1",
+              "publishedAt": "2018-04-09T23:21:06+0200",
+              "related": Object {
+                "id": "opinion1",
+                "title": "Opinion 1",
+                "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
+              },
+              "type": "FOR",
             }
           }
         />
-        <Label
-          bsClass="label"
-          bsStyle="success"
-          className="label--right"
-        >
+        <p>
           <FormattedMessage
-            id="argument.show.type.for"
+            id="admin.fields.opinion.link"
             values={Object {}}
           />
-        </Label>
-      </p>
-      <ForwardRef(Relay(Connect(UnpublishedLabel)))
-        publishable={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "author": Object {
-              "displayName": "lbrunet",
-              "id": "user1",
-              "media": Object {
-                "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
-              },
-              "slug": "lbrunet",
-              "url": "https://capco.dev/profile/lbrunet",
-              "vip": false,
-            },
-            "body": "<div>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>",
-            "createdAt": "2018-04-09T23:21:06+0200",
-            "id": "argument1",
-            "publishedAt": "2018-04-09T23:21:06+0200",
-            "related": Object {
-              "id": "opinion1",
-              "title": "Opinion 1",
-              "url": "https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2",
-            },
-            "type": "FOR",
-          }
-        }
-      />
-      <p>
-        <FormattedMessage
-          id="admin.fields.opinion.link"
-          values={Object {}}
-        />
-         : 
-        <a
-          href="https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2"
-        >
-          Opinion 1
-        </a>
-      </p>
-    </div>
+           : 
+          <a
+            href="https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2"
+          >
+            Opinion 1
+          </a>
+        </p>
+      </div>
+    </ForwardRef(Relay(TrashedMessage))>
     <p
       className="opinion__text"
       style={

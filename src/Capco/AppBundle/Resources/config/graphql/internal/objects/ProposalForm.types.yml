@@ -2,7 +2,7 @@ ProposalForm:
   type: object
   inherits:
     - 'Node'
-    - 'InternalWithProposals'
+    - 'WithProposals'
     - 'UniformResourceLocatable'
   config:
     description: 'A budget form'
@@ -73,7 +73,7 @@ ProposalForm:
       addressHelpText:
         type: 'String'
       questions:
-        type: '[InternalQuestion!]!'
+        type: '[Question!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", [value])'
       latMap:
         type: 'Float'
@@ -89,7 +89,7 @@ ProposalForm:
         type: 'EvaluationForm'
         description: 'Get the evaluation form of the proposal form'
       step:
-        type: 'InternalCollectStep'
+        type: 'CollectStep'
         description: 'Identifies the step that use the proposal form.'
       allowAknowledge:
         type: 'Boolean!'

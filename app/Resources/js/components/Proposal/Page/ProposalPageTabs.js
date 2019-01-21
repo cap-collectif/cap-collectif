@@ -17,6 +17,7 @@ import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalFusionList from './ProposalFusionList';
 import type { FeatureToggles } from '../../../types';
+import TrashedMessage from '../../Trashed/TrashedMessage';
 
 type Props = {
   viewer: ?ProposalPageTabs_viewer,
@@ -55,7 +56,7 @@ export class ProposalPageTabs extends React.Component<Props> {
 
   render() {
     const { viewer, proposal, step, features } = this.props;
-    const currentVotableStep = proposal.currentVotableStep;
+    const { currentVotableStep } = proposal;
     const votesCount = proposal.allVotes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
 
@@ -100,47 +101,50 @@ export class ProposalPageTabs extends React.Component<Props> {
           <div className="container">
             <Tab.Content animation={false}>
               <Tab.Pane eventKey="content">
-                <Row>
-                  <Col xs={12} sm={8}>
-                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-                    <ProposalFusionList proposal={proposal} />
-                    {proposal && proposal.news && proposal.news.totalCount > 0 && (
-                      /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
-                      <ProposalPageLastNews proposal={proposal} />
-                    )}
-                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-                    <ProposalPageContent proposal={proposal} step={step} viewer={viewer} />
-                  </Col>
-                  <Col xs={12} sm={4}>
-                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-                    <ProposalPageMetadata
-                      proposal={proposal}
-                      showDistricts={features.districts}
-                      showCategories={step && step.form.usingCategories}
-                      showNullEstimation={
-                        !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
-                      }
-                      showThemes={features.themes && (step && step.form.usingThemes)}
-                    />
-                    <br />
-                    {currentVotableStep !== null &&
-                      typeof currentVotableStep !== 'undefined' &&
-                      currentVotableStep.voteThreshold !== null &&
-                      typeof currentVotableStep.voteThreshold !== 'undefined' &&
-                      currentVotableStep.voteThreshold > 0 && (
-                        <span>
-                          {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-                          <ProposalPageVoteThreshold
-                            proposal={proposal}
-                            step={currentVotableStep}
-                          />
-                          <br />
-                        </span>
+                {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                <TrashedMessage contribution={proposal}>
+                  <Row>
+                    <Col xs={12} sm={8}>
+                      {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                      <ProposalFusionList proposal={proposal} />
+                      {proposal && proposal.news && proposal.news.totalCount > 0 && (
+                        /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
+                        <ProposalPageLastNews proposal={proposal} />
                       )}
-                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-                    <ProposalPageAdvancement proposal={proposal} />
-                  </Col>
-                </Row>
+                      {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                      <ProposalPageContent proposal={proposal} step={step} viewer={viewer} />
+                    </Col>
+                    <Col xs={12} sm={4}>
+                      {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                      <ProposalPageMetadata
+                        proposal={proposal}
+                        showDistricts={features.districts}
+                        showCategories={step && step.form.usingCategories}
+                        showNullEstimation={
+                          !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
+                        }
+                        showThemes={features.themes && (step && step.form.usingThemes)}
+                      />
+                      <br />
+                      {currentVotableStep !== null &&
+                        typeof currentVotableStep !== 'undefined' &&
+                        currentVotableStep.voteThreshold !== null &&
+                        typeof currentVotableStep.voteThreshold !== 'undefined' &&
+                        currentVotableStep.voteThreshold > 0 && (
+                          <span>
+                            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                            <ProposalPageVoteThreshold
+                              proposal={proposal}
+                              step={currentVotableStep}
+                            />
+                            <br />
+                          </span>
+                        )}
+                      {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                      <ProposalPageAdvancement proposal={proposal} />
+                    </Col>
+                  </Row>
+                </TrashedMessage>
               </Tab.Pane>
               {showVotesTab && (
                 <Tab.Pane eventKey="votes">
@@ -213,6 +217,7 @@ export default createFragmentContainer(ProposalPageTabs, {
       ...ProposalPageContent_proposal
       ...ProposalPageAdvancement_proposal
       ...ProposalPageVoteThreshold_proposal
+      ...TrashedMessage_contribution
       allVotes: votes(first: 0) {
         totalCount
       }

@@ -24,7 +24,7 @@ InternalQuestionnaire:
         type: 'Boolean!'
         resolve: '@=value.isPhoneConfirmationRequired()'
       questions:
-        type: '[InternalQuestion!]!'
+        type: '[Question!]!'
         resolve: "@=resolver('questionnaire_questions', [value])"
       viewerReplies:
         type: '[Reply!]!'
@@ -39,8 +39,3 @@ InternalQuestionnaire:
         type: 'Boolean!'
       participants:
         type: 'InternalUserConnection!'
-      replies:
-        type: 'InternalReplyConnection!'
-        argsBuilder: 'Relay::Connection'
-        description: 'A list of replies to the questionnaire.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireRepliesResolver", [value, args])'

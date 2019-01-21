@@ -1,9 +1,9 @@
 Reply:
   type: object
-  inherits: [Node, PublicPublishable, Draftable, Contribution, UniformResourceLocatable]
+  inherits: [Node, Publishable, Draftable, Contribution, UniformResourceLocatable]
   config:
     description: 'A Reply'
-    interfaces: [Node, PublicPublishable, Draftable, Contribution, UniformResourceLocatable]
+    interfaces: [Node, Publishable, Draftable, Contribution, UniformResourceLocatable]
     fields:
       private:
         type: 'Boolean!'
@@ -14,7 +14,7 @@ Reply:
       createdAt:
         type: 'DateTime!'
       responses:
-        type: '[InternalResponse]!'
+        type: '[Response]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value])'
       author:
         type: 'InternalUser!'

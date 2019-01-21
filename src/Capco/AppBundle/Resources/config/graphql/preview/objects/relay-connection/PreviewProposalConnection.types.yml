@@ -1,8 +1,0 @@
-PreviewProposalConnection:
-  type: relay-connection
-  config:
-    name: ProposalConnection
-    nodeType: PreviewProposal!
-    connectionFields:
-      totalCount:
-        type: Int!

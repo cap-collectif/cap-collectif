@@ -2,11 +2,11 @@ SourceVote:
   type: object
   inherits:
     - InternalVote
-    - PublicPublishable
+    - Publishable
   config:
     interfaces:
       - InternalVote
-      - PublicPublishable
+      - Publishable
     fields:
       kind:
         type: 'String!'

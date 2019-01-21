@@ -20,6 +20,7 @@
         <indexes>
             <index name="username_idx" columns="username"/>
             <index name="id_username_idx" columns="id,username"/>
+            <index name="email_idx" columns="email"/>
         </indexes>
 
         <unique-constraints>

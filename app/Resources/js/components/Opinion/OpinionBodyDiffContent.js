@@ -11,13 +11,13 @@ type Props = {
 
 class OpinionBodyDiffContent extends React.Component<Props> {
   render() {
-    const opinion = this.props.opinion;
+    const { opinion } = this.props;
 
     if (!opinion.modals || opinion.modals.length < 1) {
       return <WYSIWYGRender className="mb-15" value={opinion.body} />;
     }
 
-    const modals = opinion.modals;
+    const { modals } = opinion;
     const sections = [];
 
     if (opinion.body) {
@@ -74,6 +74,7 @@ export default createFragmentContainer(OpinionBodyDiffContent, {
     fragment OpinionBodyDiffContent_opinion on OpinionOrVersion {
       ... on Opinion {
         body
+        trashedStatus
         modals {
           key
           before
