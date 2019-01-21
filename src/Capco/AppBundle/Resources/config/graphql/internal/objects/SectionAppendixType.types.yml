@@ -11,6 +11,3 @@ SectionAppendixType:
       title:
         type: 'String'
         resolve: "@=resolver('sectionappendixtype_title', [value])"
-      helpText:
-        type: 'String'
-        resolve: "@=resolver('sectionappendixtype_helpText', [value])"
