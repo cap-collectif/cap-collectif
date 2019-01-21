@@ -103,6 +103,11 @@ services:
         }
       - {
           name: overblog_graphql.resolver,
+          alias: 'sectionappendixtype_helpText',
+          method: 'getSectionAppendixHelpText',
+        }
+      - {
+          name: overblog_graphql.resolver,
           alias: 'sectionContributionsRelay',
           method: 'getSectionContributionsConnection',
         }
