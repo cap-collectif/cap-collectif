@@ -29,8 +29,7 @@ class AppendixTypeAdmin extends CapcoAdmin
             ])
             ->add('helpText', null, [
                 'label' => 'admin.fields.appendix_type.help_text',
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -53,8 +52,7 @@ class AppendixTypeAdmin extends CapcoAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -68,8 +66,7 @@ class AppendixTypeAdmin extends CapcoAdmin
             ])
             ->add('helpText', null, [
                 'label' => 'admin.fields.appendix_type.help_text',
-            ])
-        ;
+            ]);
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -81,7 +78,7 @@ class AppendixTypeAdmin extends CapcoAdmin
             ])
             ->add('helpText', null, [
                 'label' => 'admin.fields.appendix_type.help_text',
-            ])
-        ;
+                'required' => false,
+            ]);
     }
 }

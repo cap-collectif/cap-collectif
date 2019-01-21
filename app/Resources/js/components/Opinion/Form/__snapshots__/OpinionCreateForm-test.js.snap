@@ -34,6 +34,7 @@ exports[`<OpinionCreateForm /> renders correctly 1`] = `
   />
   <Field
     component={[Function]}
+    help="help text appendice"
     id="appendix_0"
     key="0"
     label="appendice"
@@ -101,6 +102,7 @@ exports[`<OpinionCreateForm /> renders correctly with requirements 1`] = `
   />
   <Field
     component={[Function]}
+    help="help text appendice"
     id="appendix_0"
     key="0"
     label="appendice"

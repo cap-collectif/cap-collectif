@@ -92,6 +92,11 @@ class ConsultationResolver implements ContainerAwareInterface
         return $type->getAppendixTypeTitle();
     }
 
+    public function getSectionAppendixHelpText(OpinionTypeAppendixType $type)
+    {
+        return $type->getAppendixTypeHelpText();
+    }
+
     public function getSectionContributionsConnection(OpinionType $section, Arg $args): Connection
     {
         $paginator = new Paginator(function ($offset, $limit) use ($section, $args) {
