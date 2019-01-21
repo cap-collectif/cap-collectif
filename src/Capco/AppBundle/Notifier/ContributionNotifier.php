@@ -29,7 +29,7 @@ final class ContributionNotifier extends BaseNotifier
             $this->mailer->sendMessage(
                 ContributionModerationMessage::create(
                     $contribution,
-                    $this->urlResolver->getAdminObjectUrl($contribution, true),
+                    $this->urlResolver->getObjectUrl($contribution, true),
                     $contribution->getAuthor()->getEmail()
                 )
             );
