@@ -4836,7 +4836,6 @@ type SectionAppendixType {
   id: String
   position: Int!
   title: String
-  helpText: String
 }
 
 # A section is just a title in a quiz without any possible answer.
