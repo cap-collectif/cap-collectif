@@ -43,7 +43,7 @@ const validate = (values: Object) => {
         errors[value] = 'fill-field';
       }
     }
-    if (values[value] && values[value].length <= 2) {
+    if (values[value] && values[value].length < 2) {
       errors[value] = 'two-characters-minimum-required';
     }
     if (value !== 'biography') {
