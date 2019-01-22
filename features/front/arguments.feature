@@ -117,7 +117,7 @@ Scenario: Author of an argument on an opinion wants to delete it
   Given I am logged in as user
   And I go to an opinion
   When I delete my argument
-  And I wait 1 seconds
+  And I wait 3 seconds
   Then I should see "alert.success.delete.argument" in the "#global-alert-box" element
   And I should not see my argument anymore
 
