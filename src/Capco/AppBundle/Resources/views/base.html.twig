@@ -37,7 +37,7 @@
     {% elseif ads_js is not empty and analytic_js is not empty %}
         {% set bannerTrad =  'texte-cookie-audience-communication'|trans({}, 'CapcoAppBundle') %}
     {% endif %}
-    {#{% if bannerTrad is defined %}#}
+    {% if bannerTrad is defined %}
         {{ react_render_component('CookieApp', {
             'props': {
                 'analytic_js': analytic_js,
@@ -46,7 +46,7 @@
                 'isFooter':  'false',
             }
         }) }}
-    {#{% endif %}#}
+    {% endif %}
 
     {% include '@CapcoApp/Default/footer.html.twig' %}
 
@@ -82,7 +82,7 @@
 
 
         document.addEventListener("DOMContentLoaded", function (event) {
-            // cookieMonster.processCookieConsent();
+            cookieMonster.processCookieConsent();
         });
 
         $(window).on('load', function () {

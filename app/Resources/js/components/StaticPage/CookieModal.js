@@ -63,7 +63,7 @@ export class CookieModal extends React.Component<Props, State> {
                             </div>
                         </Modal.Body>
                         <Modal.Footer>
-                            <ButtonGroup className="pl-0 d-flex d-inline-block">
+                            <ButtonGroup className="d-inline-block">
                                 <CloseButton
                                     onClose={() => {
                                         this.setState({showModal: false});

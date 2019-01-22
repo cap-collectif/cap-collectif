@@ -94,7 +94,7 @@ export class Cookie extends React.Component<Props, CookieState> {
     return (
       <div>
         <section className="section--custom">
-          <div className="container w">
+          <div className="container w-auto" style={{width: 'auto'}}>
               <FormattedMessage id='cookies.content.page'/>
             <div className="row mt-10">
               <div className="col-xs-12 col-sm-8 col-md-12">
