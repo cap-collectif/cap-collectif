@@ -3,7 +3,6 @@
 ================================================================*/
 
 .cookie-banner, #cookieChoiceInfo {
-    display: none;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -31,7 +30,7 @@
 
 .cookie-inform-and-ask {
     background-color: transparentize($page-bgc, 0.2);
-    display: none;
+    //display: none;
     height: 100%;
     left: 0;
     position: fixed;

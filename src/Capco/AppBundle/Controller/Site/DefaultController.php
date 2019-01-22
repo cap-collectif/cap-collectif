@@ -100,13 +100,4 @@ class DefaultController extends Controller
 
         return ['form' => $form->createView()];
     }
-
-    /**
-     * @Route("/cookies-management", name="app_confidentialite")
-     * @Template("CapcoAppBundle:Default:confidentialite.html.twig")
-     */
-    public function confidentialiteAction(Request $request)
-    {
-        return [];
-    }
 }
