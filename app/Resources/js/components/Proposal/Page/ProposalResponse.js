@@ -69,7 +69,6 @@ class ProposalResponse extends React.PureComponent<Props> {
       case 'checkbox':
       case 'button': {
         const radioLabels = JSON.parse(response.value || '');
-        console.log(radioLabels);
         value = (
           <div>
             <h3 className="h3">{response.question.title}</h3>
