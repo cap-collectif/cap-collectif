@@ -27,7 +27,7 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       </h3>
       <p>
         <a
-          className="mr-5 d-ib"
+          className="mr-5"
           href="https://estcequecestbientotlheuredugouter.neocities.org/"
           key="0"
           title="Le gouter c'est la vie"
@@ -94,7 +94,7 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       </h3>
       <p>
         <a
-          className="mr-5 d-ib"
+          className="mr-5"
           href="https://estcequecestbientotlheuredugouter.neocities.org/"
           key="0"
           title="Le gouter c'est la vie"
