@@ -298,7 +298,7 @@ trait ProposalStepsTrait
      */
     public function thereShouldBeNbProposals(int $nb)
     {
-        $this->getSession()->wait(3000, "$('.proposal-preview').length > 0");
+        $this->getSession()->wait(5000, "$('.proposal-preview').length > 0");
         $this->assertPageMatchesText(
             '/(proposal.count_with_total {"num":' . $nb . '|proposal.count {"num":' . $nb . '})/'
         );
