@@ -57,7 +57,6 @@ Scenario: Can not create an argument in a version when step is closed
 Scenario: Author of an argument on an opinion looses his votes when updating it
   Given I am logged in as user
   And I go to an opinion
-  And I wait 1 seconds
   When I edit my argument
   Then I should see "alert.success.update.argument" in the "#global-alert-box" element
   And my argument should have changed
@@ -67,7 +66,6 @@ Scenario: Author of an argument on an opinion looses his votes when updating it
 Scenario: Author of an argument on an opinion wants to update it without checking the confirm checkbox
   Given I am logged in as user
   And I go to an opinion
-  And I wait 1 seconds
   When I edit my argument without confirming my votes lost
   Then I should see "argument.constraints.confirm" in the "#argument-form" element
 
@@ -98,7 +96,6 @@ Scenario: Author of an argument on a version looses his votes when updating it
 Scenario: Author of an argument on a version wants to update it without checking the confirm checkbox
   Given I am logged in as user
   And I go to a version
-  And I wait 1 seconds
   When I edit my argument without confirming my votes lost
   Then I should see "argument.constraints.confirm" in the "#argument-form" element
 
@@ -201,7 +198,6 @@ Scenario: Logged in user wants to vote for an argument on a version then delete 
 Scenario: Logged in user wants to vote for his own argument on a version
   Given I am logged in as user
   And I go to a version
-  And I wait 1 seconds
   Then the argument vote button should be disabled
 
 @security
@@ -213,7 +209,6 @@ Scenario: Logged in user wants to vote for an argument on a version in a closed 
 @security
 Scenario: Anonymous user wants to vote for an argument on a version
   Given I go to a version
-  And I wait 1 seconds
   When I click the argument vote button
   Then I should see a "#login-popover" element
 
