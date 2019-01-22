@@ -4,44 +4,40 @@ exports[`<ProjectTrashButton /> should render correctly 1`] = `
 <div
   className="container text-center"
 >
-  <div
-    className="row"
+  <h3
+    className="mt-0"
   >
-    <h3
-      className="mt-0"
-    >
-      <FormattedMessage
-        id="project.show.trashed.short_name"
-        values={Object {}}
-      />
-    </h3>
-    <p
-      className="excerpt"
-    >
-      <FormattedMessage
-        id="project.show.trashed.text"
-        values={Object {}}
-      />
-    </p>
-    <Connect(LoginOverlay)>
-      <a
-        href="www.test.com"
-        id="trash-link"
-        style={
-          Object {
-            "borderColor": "transparent !important",
-            "display": "block",
-          }
+    <FormattedMessage
+      id="project.show.trashed.short_name"
+      values={Object {}}
+    />
+  </h3>
+  <p
+    className="excerpt"
+  >
+    <FormattedMessage
+      id="project.show.trashed.text"
+      values={Object {}}
+    />
+  </p>
+  <Connect(LoginOverlay)>
+    <a
+      href="www.test.com"
+      id="trash-link"
+      style={
+        Object {
+          "borderColor": "transparent !important",
+          "display": "block",
         }
-      >
-        <p>
-          <FormattedMessage
-            id="project.show.trashed.display"
-            values={Object {}}
-          />
-        </p>
-      </a>
-    </Connect(LoginOverlay)>
-  </div>
+      }
+    >
+      <p>
+        <FormattedMessage
+          id="project.show.trashed.display"
+          values={Object {}}
+        />
+      </p>
+    </a>
+  </Connect(LoginOverlay)>
 </div>
 `;

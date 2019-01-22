@@ -15,24 +15,22 @@ export class ProjectTrashButton extends React.PureComponent<Props> {
     const { link, user } = this.props;
     return (
       <div className="container text-center">
-        <div className="row">
-          <h3 className="mt-0">
-            <FormattedMessage id="project.show.trashed.short_name" />
-          </h3>
-          <p className="excerpt">
-            <FormattedMessage id="project.show.trashed.text" />
-          </p>
-          <LoginOverlay>
-            <a
-              id="trash-link"
-              href={user ? link : null}
-              style={{ display: 'block', borderColor: 'transparent !important' }}>
-              <p>
-                <FormattedMessage id="project.show.trashed.display" />
-              </p>
-            </a>
-          </LoginOverlay>
-        </div>
+        <h3 className="mt-0">
+          <FormattedMessage id="project.show.trashed.short_name" />
+        </h3>
+        <p className="excerpt">
+          <FormattedMessage id="project.show.trashed.text" />
+        </p>
+        <LoginOverlay>
+          <a
+            id="trash-link"
+            href={user ? link : null}
+            style={{ display: 'block', borderColor: 'transparent !important' }}>
+            <p>
+              <FormattedMessage id="project.show.trashed.display" />
+            </p>
+          </a>
+        </LoginOverlay>
       </div>
     );
   }
