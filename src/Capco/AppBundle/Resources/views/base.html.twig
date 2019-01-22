@@ -55,9 +55,8 @@
     <script type="text/javascript">
         window.locale = "{{ intl_locale() }}";
 
-
         window._capco_executeAnalyticScript = function(){
-            {% if null != analytic_js %}
+            {% if analytic_js is not null %}
             var script = document.createElement("script");
             script.innerHTML = '{{ analytic_js|e("js") }}';
             document.body.appendChild(script);
@@ -65,7 +64,7 @@
         };
 
         window._capco_executeAdsScript = function(){
-            {% if null != ads_js %}
+            {% if ads_js is not null %}
             var script = document.createElement("script");
             script.innerHTML = '{{ ads_js|e("js") }}';
             document.body.appendChild(script);
