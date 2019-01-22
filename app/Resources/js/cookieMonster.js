@@ -33,9 +33,9 @@ class CookieMonster {
     const consentCookie = Cookies.getJSON('hasFullConsent');
     const analyticConsent = Cookies.getJSON('analyticConsentValue');
     const adsConsent = Cookies.getJSON('adCookieConsentValue');
-
     if (consentCookie === true) {
       this.executeAnalyticScript();
+      this.executeAdsScript();
       return;
     }
 
