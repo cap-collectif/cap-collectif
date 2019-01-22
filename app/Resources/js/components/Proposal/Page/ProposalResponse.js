@@ -11,10 +11,31 @@ type Props = {
   response: ProposalResponse_response,
 };
 
+type radioLabelsType = {
+  labels: [string],
+  other: string,
+};
+
 class ProposalResponse extends React.PureComponent<Props> {
   isHTML = () => {
     const { response } = this.props;
     return response.value && /<[a-z][\s\S]*>/i.test(response.value);
+  };
+
+  renderUniqueLabel = (radioLabels: radioLabelsType) => {
+    if (!radioLabels) {
+      return null;
+    }
+
+    if (radioLabels.labels[0]) {
+      return <p>{radioLabels.labels[0]}</p>;
+    }
+
+    if (radioLabels.other) {
+      return <p>{radioLabels.other}</p>;
+    }
+
+    return null;
   };
 
   render() {
@@ -48,6 +69,7 @@ class ProposalResponse extends React.PureComponent<Props> {
       case 'checkbox':
       case 'button': {
         const radioLabels = JSON.parse(response.value || '');
+        console.log(radioLabels);
         value = (
           <div>
             <h3 className="h3">{response.question.title}</h3>
@@ -58,7 +80,7 @@ class ProposalResponse extends React.PureComponent<Props> {
                 ))}
               </ul>
             ) : (
-              <p>{radioLabels && radioLabels.labels[0] ? radioLabels.labels[0] : ''}</p>
+              this.renderUniqueLabel(radioLabels)
             )}
           </div>
         );
