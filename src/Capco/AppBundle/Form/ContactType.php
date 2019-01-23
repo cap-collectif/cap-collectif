@@ -24,9 +24,15 @@ class ContactType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'contact.form.email',
                 'required' => true,
+                'attr' => [
+                    'aria-describedby' => 'email-error',
+                ],
                 'constraints' => [
                     new NotBlank(['message' => 'contact.no_email']),
-                    new Email(['message' => 'global.constraints.email.invalid']),
+                    new Email([
+                        'message' => 'global.constraints.email.invalid',
+                        'payload' => ['id' => 'email-error'],
+                    ]),
                 ],
             ])
             ->add('message', PurifiedTextareaType::class, [
