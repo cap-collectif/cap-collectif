@@ -15,20 +15,21 @@ class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name',
-            PurifiedTextType::class, [
+        $builder
+            ->add('name', PurifiedTextType::class, [
                 'label' => 'contact.form.name',
                 'required' => true,
                 'constraints' => [new NotBlank(['message' => 'contact.no_name'])],
             ])
-            ->add('email',
-                EmailType::class, [
+            ->add('email', EmailType::class, [
                 'label' => 'contact.form.email',
                 'required' => true,
-                'constraints' => [new NotBlank(['message' => 'contact.no_email']), new Email()],
+                'constraints' => [
+                    new NotBlank(['message' => 'contact.no_email']),
+                    new Email(['message' => 'global.constraints.email.invalid']),
+                ],
             ])
-            ->add('message',
-                PurifiedTextareaType::class, [
+            ->add('message', PurifiedTextareaType::class, [
                 'label' => 'contact.form.message',
                 'required' => true,
                 'attr' => [
@@ -36,8 +37,7 @@ class ContactType extends AbstractType
                     'cols' => '30',
                 ],
                 'constraints' => [new NotBlank(['message' => 'contact.no_message'])],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
