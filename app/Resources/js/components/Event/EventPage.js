@@ -35,16 +35,6 @@ export class EventPage extends React.Component<Props> {
               $userType: ID
               $isFuture: Boolean
             ) {
-              ...EventPageHeader_query
-                @arguments(
-                  cursor: $cursor
-                  count: $count
-                  search: $search
-                  theme: $theme
-                  project: $project
-                  userType: $userType
-                  isFuture: $isFuture
-                )
               ...EventRefetch_query
                 @arguments(
                   cursor: $cursor
@@ -77,7 +67,7 @@ export class EventPage extends React.Component<Props> {
                 <div>
                   <section className="jumbotron--bg-1 ">
                     {/* $FlowFixMe */}
-                    <EventPageHeader query={props} eventPageTitle={this.props.eventPageTitle} />
+                    <EventPageHeader eventPageTitle={this.props.eventPageTitle} />
                   </section>
                   {this.props.eventPageBody && (
                     <section className="section--custom">

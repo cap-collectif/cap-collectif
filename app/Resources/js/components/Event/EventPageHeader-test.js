@@ -3,16 +3,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { EventPageHeader } from './EventPageHeader';
-import { $refType } from '../../mocks';
 
 describe('<EventPageHeader />', () => {
   const props = {
-    query: {
-      events: {
-        totalCount: 10,
-      },
-      $refType,
-    },
     eventPageTitle: '<p>Titre personnalisé</p>',
   };
 
