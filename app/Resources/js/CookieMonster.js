@@ -33,6 +33,14 @@ class CookieMonster {
     const consentCookie = Cookies.getJSON('hasFullConsent');
     const analyticConsent = Cookies.getJSON('analyticConsentValue');
     const adsConsent = Cookies.getJSON('adCookieConsentValue');
+
+    if (this.cookieBanner === null && document.getElementById('cookie-banner') !== null) {
+      this.cookieBanner = document.getElementById('cookie-banner');
+    }
+    if (this.cookieConsent === null && document.getElementById('cookie-consent') !== null) {
+      this.cookieConsent = document.getElementById('cookie-consent');
+    }
+
     if (consentCookie === true) {
       this.executeAnalyticScript();
       this.executeAdsScript();
@@ -73,10 +81,6 @@ class CookieMonster {
   };
 
   onDocumentScroll = (event: Event) => {
-    if (window.location.pathname === '/cookies-management') {
-      return;
-    }
-
     if (
       (document.body && document.body.scrollTop > SCROLL_VALUE_TO_CONSENT) ||
       (document.documentElement && document.documentElement.scrollTop > SCROLL_VALUE_TO_CONSENT)
@@ -105,7 +109,18 @@ class CookieMonster {
       // $FlowFixMe
       target.id === 'cookie-banner' ||
       // $FlowFixMe
+      target.className.search('cookie-manager') !== -1 ||
+      // $FlowFixMe
+      target.parentNode.className.search('cookie-manager') !== -1 ||
+      // $FlowFixMe
+      target.parentNode.parentNode.className.search('cookie-manager') !== -1 ||
+      // $FlowFixMe
       target.parentNode.id === 'cookie-banner' ||
+      // $FlowFixMe
+      target.parentNode.id === 'cookie-more-button' ||
+      // $FlowFixMe
+      target.parentNode.id === 'cookies-cancel' ||
+      // $FlowFixMe
       target.parentNode.parentNode.id === 'cookie-banner' ||
       target.id === 'cookie-more-button'
     ) {
@@ -123,10 +138,6 @@ class CookieMonster {
       this.considerFullConsent();
       return;
     }
-    if (window.location.pathname === '/cookies-management' && target.id !== 'cookies-manager') {
-      return;
-    }
-
     this.considerFullConsent();
   };
 
