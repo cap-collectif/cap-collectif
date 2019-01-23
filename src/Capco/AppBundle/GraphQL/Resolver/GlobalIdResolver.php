@@ -46,7 +46,7 @@ class GlobalIdResolver
     {
         $user = null;
         if (empty($uuidOrGlobalId)) {
-            $this->logger->debug(json_encode($uuidOrGlobalId));
+            return null;
         }
 
         if ($userOrAnon instanceof User) {

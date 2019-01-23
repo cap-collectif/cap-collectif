@@ -11,7 +11,6 @@ import {
   submitConfirmPasswordFormSucceed,
 } from './user';
 import type { State } from './user';
-import config from '../../config';
 
 const initialState: State = {
   showLoginModal: false,
@@ -21,10 +20,12 @@ const initialState: State = {
   showConfirmPasswordModal: false,
   mapTokens: {
     MAPBOX: {
-      initialPublicToken: config.mapProviders.MAPBOX.apiKey,
-      publicToken: config.mapProviders.MAPBOX.apiKey,
-      styleOwner: config.mapProviders.MAPBOX.styleOwner,
-      styleId: config.mapProviders.MAPBOX.styleId,
+      initialPublicToken:
+        '***REMOVED***',
+      publicToken:
+        '***REMOVED***',
+      styleOwner: 'capcollectif',
+      styleId: '***REMOVED***',
     },
   },
   registration_form: {

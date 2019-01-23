@@ -63,7 +63,7 @@ class GenerateMapProviderPublicToken extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->io = new SymfonyStyle($input, $output);
         $provider = $input->getArgument('provider');
@@ -76,7 +76,7 @@ class GenerateMapProviderPublicToken extends Command
         }
     }
 
-    private function handleMapbox(): int
+    private function handleMapbox(): ?int
     {
         $sitename = $this->siteParameterResolver->getValue('global.site.fullname');
         $provider = $this->mapTokenRepository->getCurrentMapTokenForProvider(

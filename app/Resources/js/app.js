@@ -123,7 +123,7 @@ global.App = ($ => {
     const lat = mapElement.getAttribute('data-lat');
     const lng = mapElement.getAttribute('data-lng');
 
-    mapboxgl.accessToken = config.mapProviders.MAPBOX.apiKey;
+    mapboxgl.accessToken = config.mapboxApiKey;
 
     // Map
     const mapOptions = {

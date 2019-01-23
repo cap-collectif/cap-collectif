@@ -123,36 +123,6 @@ class MapboxAdminConfig extends React.Component<Props, State> {
       error,
     } = this.props;
 
-    const renderCustomStyles = () => (
-      <div>
-        <h3 className="d-ib">
-          <FormattedMessage id="style" />
-        </h3>
-        {(stylesSubmitSucceeded || stylesSubmitFailed) && (
-          <AlertForm
-            valid
-            invalid={false}
-            submitting={loading}
-            submitSucceeded={stylesSubmitSucceeded}
-            submitFailed={stylesSubmitFailed}
-          />
-        )}
-        <ListGroup>
-          {styles.map(style => (
-            <MapAdminStyleListItem
-              onMutationStart={this.onStyleListItemMutationStart}
-              onMutationEnd={this.onStyleListItemMutationEnd}
-              onMutationFailed={this.onStyleListItemMutationFailed}
-              disabled={loading}
-              key={style.id}
-              style={style}
-              mapTokenId={id}
-            />
-          ))}
-        </ListGroup>
-      </div>
-    );
-
     return (
       <form className="mapbox__config" onSubmit={handleSubmit}>
         <TitleContainer>
@@ -202,7 +172,35 @@ class MapboxAdminConfig extends React.Component<Props, State> {
           submitFailed={submitFailed}
           errorMessage={error}
         />
-        {styles && renderCustomStyles()}
+        {styles && (
+          <div>
+            <h3 className="d-ib">
+              <FormattedMessage id="style" />
+            </h3>
+            {(stylesSubmitSucceeded || stylesSubmitFailed) && (
+              <AlertForm
+                valid
+                invalid={false}
+                submitting={loading}
+                submitSucceeded={stylesSubmitSucceeded}
+                submitFailed={stylesSubmitFailed}
+              />
+            )}
+            <ListGroup>
+              {styles.map(style => (
+                <MapAdminStyleListItem
+                  onMutationStart={this.onStyleListItemMutationStart}
+                  onMutationEnd={this.onStyleListItemMutationEnd}
+                  onMutationFailed={this.onStyleListItemMutationFailed}
+                  disabled={loading}
+                  key={style.id}
+                  style={style}
+                  mapTokenId={id}
+                />
+              ))}
+            </ListGroup>
+          </div>
+        )}
       </form>
     );
   }
