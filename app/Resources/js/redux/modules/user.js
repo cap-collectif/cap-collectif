@@ -4,6 +4,7 @@ import Fetcher from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
+import config from '../../config';
 import { formatSubmitResponses } from '../../utils/responsesHelper';
 
 export type User = {
@@ -136,12 +137,10 @@ const initialState: State = {
   user: null,
   mapTokens: {
     MAPBOX: {
-      initialPublicToken:
-        '***REMOVED***',
-      publicToken:
-        '***REMOVED***',
-      styleOwner: 'capcollectif',
-      styleId: '***REMOVED***',
+      initialPublicToken: config.mapProviders.MAPBOX.apiKey,
+      publicToken: config.mapProviders.MAPBOX.apiKey,
+      styleOwner: config.mapProviders.MAPBOX.styleOwner,
+      styleId: config.mapProviders.MAPBOX.styleId,
     },
   },
   registration_form: {

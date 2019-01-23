@@ -16,7 +16,8 @@ const siteFaviconAdminForm = ({
     return graphqlError;
   }
   if (props) {
-    if (props.siteFavicon) {
+    // eslint-disable-next-line
+    if (props && props.siteFavicon) {
       return <SiteFaviconAdminForm {...props} />;
     }
     return graphqlError;

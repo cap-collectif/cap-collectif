@@ -7,8 +7,14 @@ export default {
   graphql: `${baseUrl}/graphql/internal`,
   api: `${baseUrl}/api`,
   mapsServerKey: '***REMOVED***',
-  mapboxApiKey:
-    '***REMOVED***',
+  mapProviders: {
+    MAPBOX: {
+      apiKey:
+        '***REMOVED***',
+      styleOwner: 'capcollectif',
+      styleId: '***REMOVED***',
+    },
+  },
   // https://github.com/elementalui/elemental/blob/master/src/constants.js
   canUseDOM: !!(typeof window !== 'undefined' && window.document && window.document.createElement),
   isMobile: !!(

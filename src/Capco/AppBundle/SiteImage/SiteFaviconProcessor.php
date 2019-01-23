@@ -118,13 +118,10 @@ class SiteFaviconProcessor
             $siteFavicons = $this->siteFaviconExtension->getSiteFavicons();
 
             try {
-                $image = $this->getSourceImageFromMedia($siteFavicon->getMedia());
-                if ($image) {
-                    list($r, $g, $b) = ColorThief::getColor($image);
-                    $color = Text::rgbToHex($r, $g, $b);
-                } else {
-                    $color = self::DEFAULT_COLOR;
-                }
+                list($r, $g, $b) = ColorThief::getColor(
+                    $this->getSourceImageFromMedia($siteFavicon->getMedia())
+                );
+                $color = Text::rgbToHex($r, $g, $b);
             } catch (\Exception $exception) {
                 $color = self::DEFAULT_COLOR;
             }
@@ -227,7 +224,7 @@ class SiteFaviconProcessor
         }
     }
 
-    private function getSourceImageFromMedia(Media $media): ?string
+    private function getSourceImageFromMedia(Media $media)
     {
         $context = stream_context_create([
             'ssl' => [
@@ -236,14 +233,6 @@ class SiteFaviconProcessor
             ],
         ]);
 
-        $url = $this->urlResolver->getMediaUrl($media);
-        $result = file_get_contents($url, false, $context);
-        if (false === $result) {
-            $this->logger->error('Could not get content of ' . $url);
-
-            return null;
-        }
-
-        return $result;
+        return file_get_contents($this->urlResolver->getMediaUrl($media), false, $context);
     }
 }
