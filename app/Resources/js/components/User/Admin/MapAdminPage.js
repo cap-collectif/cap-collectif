@@ -16,8 +16,7 @@ const mapboxAdminConfig = ({
     return graphqlError;
   }
   if (props) {
-    // eslint-disable-next-line
-    if (props && props.mapToken) {
+    if (props.mapToken) {
       return <MapboxAdminConfig {...props} />;
     }
     return graphqlError;

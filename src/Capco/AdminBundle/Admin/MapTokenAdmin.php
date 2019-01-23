@@ -29,7 +29,7 @@ class MapTokenAdmin extends BaseAdmin
     {
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollection $collection): void
     {
         $collection->clearExcept(['list']);
     }
