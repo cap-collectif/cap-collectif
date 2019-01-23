@@ -35,6 +35,7 @@ class CreateCsvFromProposalStepCommand extends Command
         'proposal_id' => 'id',
         'proposal_reference' => 'reference',
         'proposal_title' => 'title',
+        'proposal_votes_totalCount' => 'votes.totalCount',
         'proposal_createdAt' => 'createdAt',
         'proposal_publishedAt' => 'publishedAt',
         'proposal_updatedAt' => 'updatedAt',
