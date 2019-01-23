@@ -46,18 +46,16 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
       <div className="cookie-manager">
         {isLink ? (
           <div>
-            {' '}
-            |{/* eslint-disable-next-line */}
-            <a
+            |
+            <Button
+              bsStyle="link"
+              id="cookies-management"
               href="#"
-              onClick={e => {
-                e.stopPropagation();
-                e.nativeEvent.stopImmediatePropagation();
+              onClick={() => {
                 this.setState({ showModal: true });
-                return false;
               }}>
               <FormattedMessage id="cookies-management" />
-            </a>
+            </Button>
           </div>
         ) : (
           <div id="cookie-banner" className="cookie-banner">

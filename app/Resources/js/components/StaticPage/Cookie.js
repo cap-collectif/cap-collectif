@@ -90,12 +90,12 @@ export class Cookie extends React.Component<Props, CookieState> {
     const { isAnalyticEnabled, isAdvertisingEnabled } = this.state;
     const { analyticsJs, adJs } = this.props;
     return (
-      <div className="container w-auto cookie-manager" style={{ width: 'auto' }}>
+      <div className="container w-auto cookie-manager">
         <div className="row mt-10 cookie-manager" id="cookies-manager">
           {config.canUseDOM && CookieMonster.isDoNotTrackActive() && (
             <Alert bsStyle="info" className="row cookie-manager" id="cookies-alert">
               <Col sm={1} className="cookie-manager">
-                <div style={{ fontSize: 30, verticalAlign: 'top' }} className="cookie-manager">
+                <div className="col-top font-size-30 cookie-manager ">
                   <i className="cap cap-information-1" />
                 </div>
               </Col>
@@ -118,9 +118,10 @@ export class Cookie extends React.Component<Props, CookieState> {
               <Col sm={4} className="d-flex justify-content-end cookie-manager">
                 <div
                   className={
-                    isAnalyticEnabled ? 'color-green cookie-manager' : 'color-red cookie-manager'
-                  }
-                  style={{ marginRight: 10 }}>
+                    isAnalyticEnabled
+                      ? 'color-green cookie-manager mr-10'
+                      : 'color-red cookie-manager mr-10'
+                  }>
                   <FormattedMessage
                     id={isAnalyticEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
                   />
@@ -150,9 +151,10 @@ export class Cookie extends React.Component<Props, CookieState> {
               <Col sm={4} className="d-flex justify-content-end cookie-manager">
                 <div
                   className={
-                    isAdvertisingEnabled ? 'color-green cookie-manager' : 'color-red cookie-manager'
-                  }
-                  style={{ marginRight: 10 }}>
+                    isAdvertisingEnabled
+                      ? 'color-green cookie-manager mr-10'
+                      : 'color-red cookie-manager mr-10'
+                  }>
                   <FormattedMessage
                     id={isAdvertisingEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
                   />
