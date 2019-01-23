@@ -35,7 +35,7 @@ class CreateCsvFromProposalStepCommand extends Command
         'proposal_id' => 'id',
         'proposal_reference' => 'reference',
         'proposal_title' => 'title',
-        'proposal_votes_totalCount' => 'votes.totalCount',
+        'proposal_votes_totalCount' => 'allVotes.totalCount',
         'proposal_createdAt' => 'createdAt',
         'proposal_publishedAt' => 'publishedAt',
         'proposal_updatedAt' => 'updatedAt',
@@ -235,6 +235,7 @@ EOF;
         'proposal_id',
         'proposal_reference',
         'proposal_title',
+        'proposal_votes_totalCount',
         'proposal_createdAt',
         'proposal_publishedAt',
         'proposal_updatedAt',
@@ -1639,6 +1640,9 @@ ${COMMENT_VOTE_INFOS}
             reference
             id
             title
+            allVotes: votes(stepId: "{$proposalStep->getId()}", includeUnpublished: false, first: 0) {
+                totalCount
+            }
             createdAt
             publishedAt
             updatedAt
