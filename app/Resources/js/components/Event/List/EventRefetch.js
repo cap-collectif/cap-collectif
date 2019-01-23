@@ -110,16 +110,6 @@ export default createRefetchContainer(
             userType: $userType
             isFuture: $isFuture
           )
-        ...EventPageHeader_query
-          @arguments(
-            cursor: $cursor
-            count: $count
-            theme: $theme
-            project: $project
-            search: $search
-            userType: $userType
-            isFuture: $isFuture
-          )
       }
     `,
   },
