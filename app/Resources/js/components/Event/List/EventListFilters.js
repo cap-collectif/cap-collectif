@@ -5,6 +5,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { fetchQuery, graphql } from 'relay-runtime';
 import { reduxForm, Field, formValueSelector, type FormProps } from 'redux-form';
+import { createFragmentContainer } from 'react-relay';
 import select from '../../Form/Select';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import config from '../../../config';
@@ -13,10 +14,13 @@ import { changeEventMobileListView } from '../../../redux/modules/event';
 import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
 import environment from '../../../createRelayEnvironment';
+import EventListCounter from './EventListCounter';
+import type { EventListFilters_query } from './__generated__/EventListFilters_query.graphql';
 
 type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
 type Props = {|
   ...FormProps,
+  query: EventListFilters_query,
   features: FeatureToggles,
   dispatch: Dispatch,
   theme: ?string,
@@ -197,7 +201,16 @@ export class EventListFilters extends React.Component<Props, State> {
   }
 
   render() {
-    const { features, theme, project, search, intl, addToggleViewButton, dispatch } = this.props;
+    const {
+      features,
+      theme,
+      project,
+      search,
+      intl,
+      addToggleViewButton,
+      dispatch,
+      query,
+    } = this.props;
 
     const nbFilter = countFilters(theme, project, search);
 
@@ -210,8 +223,14 @@ export class EventListFilters extends React.Component<Props, State> {
     };
     return (
       <Row className={config.isMobile ? 'mb-10 ml-0' : 'mb-10'}>
-        <Col xs={12} md={8} className="pl-0">
-          <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
+        <Col xs={12} md={4} className="pl-0">
+          {/* $FlowFixMe $refType */}
+          <EventListCounter query={query} />
+        </Col>
+        <Col xs={12} md={4} className="pl-0">
+          <div className="pull-right">
+            <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
+          </div>
           {config.isMobile && addToggleViewButton && features.display_map ? (
             <EventListToggleMobileViewBtn
               showMapButton
@@ -263,4 +282,41 @@ const form = reduxForm({
   },
 })(EventListFilters);
 
-export default connect(mapStateToProps)(injectIntl(form));
+const container = connect(mapStateToProps)(injectIntl(form));
+
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment EventListFilters_query on Query
+      @argumentDefinitions(
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+        theme: { type: "ID" }
+        project: { type: "ID" }
+        search: { type: "String" }
+        userType: { type: "ID" }
+        isFuture: { type: "Boolean" }
+      ) {
+      ...EventListFilters_query
+        @arguments(
+          cursor: $cursor
+          count: $count
+          search: $search
+          theme: $theme
+          project: $project
+          userType: $userType
+          isFuture: $isFuture
+        )
+      ...EventListCounter_query
+        @arguments(
+          cursor: $cursor
+          count: $count
+          search: $search
+          theme: $theme
+          project: $project
+          userType: $userType
+          isFuture: $isFuture
+        )
+    }
+  `,
+);

@@ -133,6 +133,22 @@ export default createRefetchContainer(
           search: $search
           isFuture: $isFuture
         )
+      events(
+        first: $count
+        after: $cursor
+        theme: $theme
+        project: $project
+        search: $search
+        userType: $userType
+        isFuture: $isFuture
+      ) @connection(key: "EventListPaginated_events", filters: []) {
+        edges {
+          node {
+            id
+          }
+        }
+        totalCount
+      }
     }
   `,
 );

@@ -45,6 +45,16 @@ export class EventPage extends React.Component<Props> {
                   userType: $userType
                   isFuture: $isFuture
                 )
+              ...EventListCounter_query
+                @arguments(
+                  cursor: $cursor
+                  count: $count
+                  search: $search
+                  theme: $theme
+                  project: $project
+                  userType: $userType
+                  isFuture: $isFuture
+                )
             }
           `}
           variables={
@@ -81,7 +91,7 @@ export class EventPage extends React.Component<Props> {
                       <div
                         id="event-page-filters"
                         className={config.isMobile ? 'event-filters' : null}>
-                        <EventListFilters addToggleViewButton />
+                        <EventListFilters query={props} addToggleViewButton />
                       </div>
                       <div id="event-page-rendered">
                         {/* $FlowFixMe */}
