@@ -6,7 +6,6 @@ use Capco\AppBundle\Toggle\Manager;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -39,7 +38,7 @@ class ProfileFormType extends AbstractType
                 'label_attr' => ['style' => 'font-weight: normal; color: #000000'],
             ]);
         if ($this->toggleManager->isActive('user_type')) {
-            $builder->add('userType', IntegerType::class, [
+            $builder->add('userType', null, [
                 'empty_data' => 'user.profile.edit.no_user_type',
             ]);
         }
