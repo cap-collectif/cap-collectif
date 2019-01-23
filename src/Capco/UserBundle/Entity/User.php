@@ -659,7 +659,7 @@ class User extends BaseUser implements
 
     public function setAddress(?string $address): self
     {
-        $this->address = $address;
+        $this->address = strip_tags($address);
 
         return $this;
     }
@@ -677,7 +677,7 @@ class User extends BaseUser implements
      */
     public function setAddress2($address2)
     {
-        $this->address2 = $address2;
+        $this->address2 = strip_tags($address2);
     }
 
     public function getZipCode(): ?string
@@ -687,7 +687,7 @@ class User extends BaseUser implements
 
     public function setZipCode(?string $zipCode): self
     {
-        $this->zipCode = $zipCode;
+        $this->zipCode = strip_tags($zipCode);
 
         return $this;
     }
@@ -705,7 +705,7 @@ class User extends BaseUser implements
      */
     public function setCity($city)
     {
-        $this->city = $city;
+        $this->city = strip_tags($city);
     }
 
     /**
@@ -721,7 +721,7 @@ class User extends BaseUser implements
      */
     public function setNeighborhood($neighborhood)
     {
-        $this->neighborhood = $neighborhood;
+        $this->neighborhood = strip_tags($neighborhood);
     }
 
     public function getOpinions()
@@ -1551,5 +1551,20 @@ class User extends BaseUser implements
     public function getResetPasswordToken(): ?string
     {
         return $this->resetPasswordToken;
+    }
+
+    public function setUsername($username)
+    {
+        return parent::setUsername(strip_tags($username));
+    }
+
+    public function setFirstname($firstname)
+    {
+        return parent::setFirstname(strip_tags($firstname));
+    }
+
+    public function setLastname($lastname)
+    {
+        return parent::setLastname(strip_tags($lastname));
     }
 }

@@ -39,6 +39,7 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
         $form = $this->formFactory->create(PublicDataType::class, $this->user, [
             'csrf_protection' => false,
         ]);
+
         try {
             $form->submit($this->arguments, false);
         } catch (\LogicException $e) {
@@ -46,7 +47,8 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
         }
 
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . $form->getErrors(true, false));
+
             throw new UserError('Can\'t update !');
         }
 

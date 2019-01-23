@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Form\Type;
 
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -16,7 +17,7 @@ class UserFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', null, ['required' => true])
+            ->add('username', TextType::class, ['required' => true])
             ->add('email', EmailType::class, ['required' => true])
             ->add('plainPassword', PasswordType::class)
             ->add('roles', CollectionType::class, [
@@ -25,9 +26,9 @@ class UserFormType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
             ])
-            ->add('locked')
-            ->add('vip')
-            ->add('enabled');
+            ->add('locked', CheckboxType::class)
+            ->add('vip', CheckboxType::class)
+            ->add('enabled', CheckboxType::class);
     }
 
     /**
