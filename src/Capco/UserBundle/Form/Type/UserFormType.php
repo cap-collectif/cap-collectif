@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -17,7 +18,7 @@ class UserFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, ['required' => true])
+            ->add('username', PurifiedTextType::class, ['required' => true, 'strip_tags' => true])
             ->add('email', EmailType::class, ['required' => true])
             ->add('plainPassword', PasswordType::class)
             ->add('roles', CollectionType::class, [

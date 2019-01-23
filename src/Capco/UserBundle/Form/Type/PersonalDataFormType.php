@@ -2,12 +2,12 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,12 +16,12 @@ class PersonalDataFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('address', TextType::class)
-            ->add('address2', TextType::class)
+            ->add('firstname', PurifiedTextType::class, ['strip_tags' => true])
+            ->add('lastname', PurifiedTextType::class, ['strip_tags' => true])
+            ->add('address', PurifiedTextType::class, ['strip_tags' => true])
+            ->add('address2', PurifiedTextType::class, ['strip_tags' => true])
             ->add('zipCode')
-            ->add('city', TextType::class)
+            ->add('city', PurifiedTextType::class, ['strip_tags' => true])
             ->add('phone')
             ->add('email', EmailType::class)
             ->add('phoneConfirmed')

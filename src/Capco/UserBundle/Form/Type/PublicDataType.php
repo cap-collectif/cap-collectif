@@ -3,13 +3,13 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Form\Type\PurifiedTextareaType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,7 +29,7 @@ class PublicDataType extends AbstractType
             ->add('twitterUrl', UrlType::class)
             ->add('facebookUrl', UrlType::class)
             ->add('linkedInUrl', UrlType::class)
-            ->add('username', TextType::class, ['required' => true])
+            ->add('username', PurifiedTextType::class, ['required' => true, 'strip_tags' => true])
             ->add('neighborhood')
             ->add('media')
             ->add('profilePageIndexed', CheckboxType::class, [

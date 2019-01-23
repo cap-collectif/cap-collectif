@@ -5,5 +5,5 @@ services:
     public: false
 
   Capco\AppBundle\Form\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Form/*'
+    resource: '%kernel.project_dir%/src/Capco/AppBundle/Form/*'
   #    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/{}'

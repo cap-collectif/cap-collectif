@@ -2,11 +2,11 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Toggle\Manager;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -25,7 +25,7 @@ class ProfileFormType extends AbstractType
             ->add('twitterUrl', UrlType::class, ['label' => 'user.profile.edit.twitter'])
             ->add('facebookUrl', UrlType::class, ['label' => 'user.profile.edit.facebook'])
             ->add('linkedInUrl', UrlType::class, [])
-            ->add('username', TextType::class, ['required' => true])
+            ->add('username', PurifiedTextType::class, ['strip_tags' => true, 'required' => true])
             ->add('neighborhood', null, [])
             ->add('media', MediaType::class, [
                 'provider' => 'sonata.media.provider.image',
