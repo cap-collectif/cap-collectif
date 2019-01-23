@@ -77,16 +77,12 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                     options={
                       Array [
                         Object {
-                          "label": "all-events",
-                          "value": "all",
-                        },
-                        Object {
                           "label": "ongoing-and-future",
-                          "value": "ongoing-and-future",
+                          "value": true,
                         },
                         Object {
                           "label": "finished",
-                          "value": "finished",
+                          "value": false,
                         },
                       ]
                     }
@@ -232,16 +228,12 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                     options={
                       Array [
                         Object {
-                          "label": "all-events",
-                          "value": "all",
-                        },
-                        Object {
                           "label": "ongoing-and-future",
-                          "value": "ongoing-and-future",
+                          "value": true,
                         },
                         Object {
                           "label": "finished",
-                          "value": "finished",
+                          "value": false,
                         },
                       ]
                     }
