@@ -1,0 +1,9 @@
+services:
+  Capco\AppBundle\DataCollector\GraphQLCollector:
+    autowire: true
+    autoconfigure: true
+    tags:
+      - name: data_collector
+        template: '@CapcoApp/DataCollector/graphql.html.twig'
+        id: 'capco.graphql_collector'
+    public: false
