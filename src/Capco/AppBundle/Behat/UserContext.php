@@ -86,6 +86,16 @@ class UserContext extends DefaultContext
     }
 
     /**
+     * @Then user identified by email :email should have username :userName
+     */
+    public function userNameIs(string $email, string $userName)
+    {
+        $this->getEntityManager()->clear();
+        $user = $this->getRepository('CapcoUserBundle:User')->findOneByEmail($email);
+        expect($user->getUsername())->toBe($userName);
+    }
+
+    /**
      * @Then user :userSlug email_to_confirm should be :email
      */
     public function userNewEmailIs(string $userSlug, string $email)

@@ -535,3 +535,38 @@ Scenario: Admin should not be able to update other/own user as super admin
 "errors":[{"message":"You are not able to add super_admin role to a user.","category":@string@,"locations":[{"line":1,"column":74}],"path":["updateUserAccount"]}],"data":{"updateUserAccount":null}
   }
   """
+
+@database
+Scenario: A hacker want to inject HTML into username
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation UpdateProfilePublicDataMutation($input: UpdateProfilePublicDataInput!) {
+      updateProfilePublicData(input: $input) {
+        user {
+          id
+          username
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "username": "<h1><a href=x></a>pwned</h1>"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "updateProfilePublicData": {
+        "user": {
+          "id": "VXNlcjp1c2VyNQ==",
+          "username": "pwned"
+        }
+      }
+    }
+  }
+  """

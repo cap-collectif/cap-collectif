@@ -249,3 +249,18 @@ Scenario: API client wants to update his email and the domain email is restricte
     "message": "Unauthorized email domain."
   }
   """
+
+@security @database
+Scenario: Anonymous API client wants to hack register form with username payload
+  Given feature "registration" is enabled
+  When I send a POST request to "/api/users" with json:
+  """
+  {
+    "username": "<h1><a href=x></a>pwned</h1>",
+    "email": "pwned@gmail.com",
+    "plainPassword": "supersecureuserpass",
+    "captcha": "blabla"
+  }
+  """
+  Then the JSON response status code should be 201
+  Then user identified by email "pwned@gmail.com" should have username "pwned"
