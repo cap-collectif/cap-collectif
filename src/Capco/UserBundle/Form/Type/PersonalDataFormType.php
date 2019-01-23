@@ -1,10 +1,12 @@
 <?php
+
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,7 +22,7 @@ class PersonalDataFormType extends AbstractType
             ->add('zipCode')
             ->add('city')
             ->add('phone')
-            ->add('email')
+            ->add('email', EmailType::class)
             ->add('phoneConfirmed')
             ->add('dateOfBirth', DateTimeType::class, [
                 'widget' => 'single_text',

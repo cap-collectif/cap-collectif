@@ -1,10 +1,12 @@
 <?php
+
 namespace Capco\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Capco\AppBundle\Entity\RegistrationForm;
 
 class AdminConfigureRegistrationType extends AbstractType
 {
@@ -28,7 +30,7 @@ class AdminConfigureRegistrationType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => 'Capco\AppBundle\Entity\RegistrationForm',
+            'data_class' => RegistrationForm::class,
         ]);
     }
 }

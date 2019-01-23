@@ -1,9 +1,12 @@
 <?php
+
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,8 +17,8 @@ class UserFormType extends AbstractType
     {
         $builder
             ->add('username', null, ['required' => true])
-            ->add('email', null, ['required' => true])
-            ->add('plainPassword')
+            ->add('email', EmailType::class, ['required' => true])
+            ->add('plainPassword', PasswordType::class)
             ->add('roles', CollectionType::class, [
                 'entry_type' => TextType::class,
                 'allow_add' => true,
