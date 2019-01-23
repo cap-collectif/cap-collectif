@@ -12,6 +12,7 @@ type Props = {
   analyticsJs: ?string,
   adJs: ?string,
   bannerTrad: string,
+  isLink: boolean,
 };
 
 type CookieModalState = {
@@ -19,6 +20,10 @@ type CookieModalState = {
 };
 
 export class CookieModal extends React.Component<Props, CookieModalState> {
+  static defaultProps = {
+    isLink: false,
+  };
+
   cookie: any;
 
   constructor(props: Props) {
@@ -31,41 +36,59 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
 
   saveCookie = () => {
     this.cookie.current.saveCookiesConfiguration();
+    this.setState({ showModal: false });
   };
 
   render() {
-    const { analyticsJs, adJs, bannerTrad } = this.props;
+    const { isLink, analyticsJs, adJs, bannerTrad } = this.props;
     const { showModal } = this.state;
     return (
       <div className="cookie-manager">
-        <div id="cookie-banner" className="cookie-banner">
-          <div className="col-sm-9">
-            <FormattedMessage id={bannerTrad} />
-          </div>
-          <div className="col-sm-3 d-flex justify-content-end">
-            <Button
-              id="cookie-more-button"
-              className="mr-10 mt-10"
-              bsStyle="default"
-              onClick={() => {
+        {isLink ? (
+          <div>
+            {' '}
+            |{/* eslint-disable-next-line */}
+            <a
+              href="#"
+              onClick={e => {
+                e.stopPropagation();
+                e.nativeEvent.stopImmediatePropagation();
                 this.setState({ showModal: true });
-              }}
-              name="cookie-more">
-              <FormattedMessage id="cookies-setting" />
-            </Button>
-            <div id="cookie-button-container">
+                return false;
+              }}>
+              <FormattedMessage id="cookies-management" />
+            </a>
+          </div>
+        ) : (
+          <div id="cookie-banner" className="cookie-banner">
+            <div className="col-sm-9">
+              <FormattedMessage id={bannerTrad} />
+            </div>
+            <div className="col-sm-3 d-flex justify-content-end">
               <Button
-                id="cookie-consent"
+                id="cookie-more-button"
+                className="mr-10 mt-10"
                 bsStyle="default"
-                className="btn btn-default btn-sm mt-10"
                 onClick={() => {
-                  CookieMonster.considerFullConsent();
-                }}>
-                <FormattedMessage id="ok-accept-everything" />
+                  this.setState({ showModal: true });
+                }}
+                name="cookie-more">
+                <FormattedMessage id="cookies-setting" />
               </Button>
+              <div id="cookie-button-container">
+                <Button
+                  id="cookie-consent"
+                  bsStyle="default"
+                  className="btn btn-default btn-sm mt-10"
+                  onClick={() => {
+                    CookieMonster.considerFullConsent();
+                  }}>
+                  <FormattedMessage id="ok-accept-everything" />
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <div>
           <Modal
             animation={false}
