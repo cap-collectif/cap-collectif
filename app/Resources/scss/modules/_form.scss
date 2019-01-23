@@ -197,6 +197,17 @@ form {
 /* =============== Image uploader dropzone ==================*/
 
 .image-uploader {
+    &__label-info {
+        button {
+            margin-top: 0;
+            padding: 0;
+        }
+
+        .btn.btn-link, button.btn.btn-link:hover {
+            color: #fff;
+        }
+    }
+
     &__dropzone {
         width: 200px;
         height: 200px;
