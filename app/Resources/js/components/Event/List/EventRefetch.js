@@ -110,6 +110,16 @@ export default createRefetchContainer(
             userType: $userType
             isFuture: $isFuture
           )
+        ...EventPageHeader_query
+          @arguments(
+            cursor: $cursor
+            count: $count
+            theme: $theme
+            project: $project
+            search: $search
+            userType: $userType
+            isFuture: $isFuture
+          )
       }
     `,
   },
@@ -133,22 +143,6 @@ export default createRefetchContainer(
           search: $search
           isFuture: $isFuture
         )
-      events(
-        first: $count
-        after: $cursor
-        theme: $theme
-        project: $project
-        search: $search
-        userType: $userType
-        isFuture: $isFuture
-      ) @connection(key: "EventListPaginated_events", filters: []) {
-        edges {
-          node {
-            id
-          }
-        }
-        totalCount
-      }
     }
   `,
 );

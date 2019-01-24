@@ -10,6 +10,14 @@ exports[`<EventPageHeader /> renders correctly without title 1`] = `
       values={Object {}}
     />
   </h1>
+  <FormattedMessage
+    id="number-of-events"
+    values={
+      Object {
+        "num": 10,
+      }
+    }
+  />
 </div>
 `;
 
@@ -23,5 +31,13 @@ exports[`<EventPageHeader /> renders correcty 1`] = `
       values={Object {}}
     />
   </h1>
+  <FormattedMessage
+    id="number-of-events"
+    values={
+      Object {
+        "num": 10,
+      }
+    }
+  />
 </div>
 `;
