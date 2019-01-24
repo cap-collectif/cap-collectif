@@ -14,13 +14,6 @@ exports[`<EventMap /> renders correcty 1`] = `
         "edges": Array [
           Object {
             "node": Object {
-              "author": Object {
-                "media": Object {
-                  "url": "http://monimage.toto",
-                },
-                "url": "http://jesuistoto.fr",
-                "username": "toto",
-              },
               "endAt": "2019-09-27T03:00:00+01:00",
               "fullAddress": "Ici et ailleur",
               "id": "event1",
@@ -33,13 +26,6 @@ exports[`<EventMap /> renders correcty 1`] = `
           },
           Object {
             "node": Object {
-              "author": Object {
-                "media": Object {
-                  "url": "http://monimage.toto",
-                },
-                "url": "http://jesuistoto.fr",
-                "username": "toto",
-              },
               "endAt": "2019-10-27T03:00:00+01:00",
               "fullAddress": "Nul part et ailleur",
               "id": "event2",

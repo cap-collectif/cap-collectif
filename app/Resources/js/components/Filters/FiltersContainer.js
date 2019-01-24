@@ -9,7 +9,18 @@ type Props = {
   type: 'event' | 'project',
 };
 
-export default class FiltersContainer extends React.Component<Props> {
+type State = {
+  isOpen: boolean,
+};
+
+export default class FiltersContainer extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+    };
+  }
+
   renderFilterCount(): string {
     const { filterCount } = this.props;
     return filterCount && filterCount > 0 ? `(${filterCount})` : '';
@@ -21,14 +32,22 @@ export default class FiltersContainer extends React.Component<Props> {
       <OverlayTrigger
         trigger="click"
         placement="bottom"
+        aria-describedby=""
         overlay={
-          <Popover id="FiltersContainer" className="w-260">
+          <Popover id="" className="w-260">
             {overlay}
           </Popover>
         }
         className="w-25"
         id={`${type}-list-filters-d`}>
-        <Button className="btn--outline btn-dark-gray" id={`${type}-button-filter`}>
+        <Button
+          className="btn--outline btn-dark-gray"
+          id={`${type}-button-filter`}
+          aria-describedby=""
+          aria-expanded={this.state.isOpen}
+          onClick={() => {
+            this.setState({ isOpen: !this.state.isOpen });
+          }}>
           <i className="cap cap-filter-1 small mr-5" />
           <FormattedMessage id="link_filters" /> {this.renderFilterCount()}
           <i className="cap cap-triangle-down ml-5" />
