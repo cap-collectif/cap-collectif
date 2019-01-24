@@ -11,6 +11,9 @@ export class Captcha extends React.PureComponent<Props> {
 
   render() {
     const { onChange } = this.props;
+
+    // window.recaptchaOptions = { lang: window.navigator.language };
+
     return (
       <ReCAPTCHA
         ref={c => {
@@ -19,6 +22,7 @@ export class Captcha extends React.PureComponent<Props> {
         style={{ transform: 'scale(0.85)', transformOrigin: '0 0' }}
         sitekey="6LfKLxsTAAAAANGSsNIlspDarsFFK53b4bKiBYKC"
         onChange={onChange}
+        hl={window.navigator.language}
       />
     );
   }
