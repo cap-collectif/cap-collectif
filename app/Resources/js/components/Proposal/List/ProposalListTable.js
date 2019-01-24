@@ -343,9 +343,6 @@ export class ProposalListTable extends React.Component<Props, State> {
 
     return (
       <Table bordered hover tableLayoutFixed>
-        <caption className="sr-only">
-          <FormattedMessage id="project-list" />
-        </caption>
         <thead>
           <tr>
             {columns.map((column, key) => (
@@ -354,8 +351,7 @@ export class ProposalListTable extends React.Component<Props, State> {
                   width: column.style.width ? column.style.width : '200px',
                   display: column.hidden === true ? 'none' : 'table-cell',
                 }}
-                key={key}
-                scope="col">
+                key={key}>
                 <FormattedMessage id={column.text || 'global.non_applicable'} />
               </th>
             ))}

@@ -15,6 +15,23 @@ class ProjectRepository extends EntityRepository
 {
     use ProjectVisibilityTrait;
 
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->addSelect('theme', 'cover', 'author', 'district', 'pas', 'step')
+            ->leftJoin('p.themes', 'theme', 'WITH', 'theme.isEnabled = true')
+            ->leftJoin('p.districts', 'district')
+            ->leftJoin('p.Cover', 'cover')
+            ->leftJoin('p.Author', 'author')
+            ->leftJoin('p.steps', 'pas')
+            ->leftJoin('pas.step', 'step')
+            ->where('p.id IN (:ids)')
+            ->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -52,7 +69,7 @@ class ProjectRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
-    public function getAuthors($viewer = null, $order = 'DESC'): array
+    public function getAuthorsId($viewer = null, $order = 'DESC'): array
     {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
             ->select('a.id')

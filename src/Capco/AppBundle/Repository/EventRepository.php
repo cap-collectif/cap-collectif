@@ -15,6 +15,20 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class EventRepository extends EntityRepository
 {
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('e');
+        $qb
+            ->addSelect('a', 'm', 't')
+            ->leftJoin('e.author', 'a')
+            ->leftJoin('a.media', 'm')
+            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = true')
+            ->where('e.id IN (:ids)')
+            ->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     /**
      * Get events depending on theme, project and search term, ordered by startAt criteria.
      *
@@ -35,9 +49,7 @@ class EventRepository extends EntityRepository
     ) {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't', 'c')
-            ->leftJoin('e.author', 'a')
-            ->leftJoin('a.media', 'm')
-            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = true')
+
             ->leftJoin('e.projects', 'c', 'WITH', 'c.visibility = :visibility')
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
             ->orderBy('e.startAt', 'ASC');
