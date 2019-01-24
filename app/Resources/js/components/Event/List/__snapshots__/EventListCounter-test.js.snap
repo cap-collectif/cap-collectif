@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventListFilters /> renders correctly 1`] = `
+<FormattedMessage
+  id="n-events"
+  values={
+    Object {
+      "num": 2,
+    }
+  }
+/>
+`;
+
+exports[`<EventListFilters /> renders correctly when filtered projects 1`] = `
+<FormattedMessage
+  id="n-of-n-events"
+  values={
+    Object {
+      "filteredCount": 2,
+      "totalCount": 10,
+    }
+  }
+/>
+`;
