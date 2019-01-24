@@ -24,8 +24,12 @@ class ContactType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'contact.form.email',
                 'required' => true,
+                'help' => 'global.email.format',
+                'help_attr' => [
+                    'id' => 'email-help',
+                ],
                 'attr' => [
-                    'aria-describedby' => 'email-error',
+                    'aria-describedby' => 'email-error email-help',
                 ],
                 'constraints' => [
                     new NotBlank(['message' => 'contact.no_email']),

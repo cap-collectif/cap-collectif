@@ -6,10 +6,15 @@
     {% if type is not defined or 'file' != type %}
         {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) %}
     {% endif %}
-    {{- parent() -}}
     {% if help is defined and help is not null %}
-        <span class="help">{{ help | trans({}, translation_domain) }}</span>
+        <p
+            class="excerpt"
+            {{ (help_attr.id is defined and help_attr.id is not null) ? ('id=' ~ help_attr.id) : '' }}
+        >
+            {{ help | trans({}, translation_domain) }}
+        </p>
     {% endif %}
+    {{- parent() -}}
 {%- endblock form_widget_simple %}
 
 {% block textarea_widget -%}
