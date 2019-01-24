@@ -167,14 +167,17 @@ class UsersController extends FOSRestController
         if ($user->isEmailConfirmed() && !$user->getNewEmailToConfirm()) {
             $logger->warning('Already confirmed.');
 
-            throw new BadRequestHttpException('Already confirmed.');
+            return new JsonResponse(['message' => 'Already confirmed.', 'code' => 400], 400);
         }
 
         // security against mass click email resend
         if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
             $logger->warning('Email already sent less than a minute ago.');
 
-            throw new BadRequestHttpException('Email already sent less than a minute ago.');
+            return new JsonResponse(
+                ['message' => 'Email already sent less than a minute ago.', 'code' => 400],
+                400
+            );
         }
 
         if ($user->getNewEmailToConfirm()) {
@@ -195,12 +198,18 @@ class UsersController extends FOSRestController
      */
     public function postSendSmsConfirmationAction()
     {
+        /** @var User $user */
         $user = $this->getUser();
+        /** @var LoggerInterface $logger */
+        $logger = $this->get('logger');
+
         if (!$user || 'anon.' === $user) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
         if ($user->isPhoneConfirmed()) {
-            throw new BadRequestHttpException('Already confirmed.');
+            $logger->warning('Already confirmed.');
+
+            return new JsonResponse(['message' => 'Already confirmed.', 'code' => 400], 400);
         }
 
         if (!$user->getPhone()) {
@@ -235,12 +244,19 @@ class UsersController extends FOSRestController
      */
     public function postSmsConfirmationAction(Request $request)
     {
+        /** @var User $user */
         $user = $this->getUser();
+        /** @var LoggerInterface $logger */
+        $logger = $this->get('logger');
+
         if (!$user || 'anon.' === $user) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
+
         if ($user->isPhoneConfirmed()) {
-            throw new BadRequestHttpException('Already confirmed.');
+            $logger->warning('Already confirmed.');
+
+            return new JsonResponse(['message' => 'Already confirmed.', 'code' => 400], 400);
         }
 
         if (!$user->getSmsConfirmationCode()) {
