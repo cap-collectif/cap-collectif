@@ -26,6 +26,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
     bsClass="col"
     className="pl-0"
     componentClass="div"
+    id="event-filters"
     md={4}
     xs={12}
   >
@@ -185,6 +186,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
     bsClass="col"
     className="pl-0"
     componentClass="div"
+    id="event-filters"
     md={4}
     xs={12}
   >

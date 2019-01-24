@@ -247,7 +247,7 @@ export class EventListFilters extends React.Component<Props, State> {
           {/* $FlowFixMe $refType */}
           <EventListCounter query={query} />
         </Col>
-        <Col xs={12} md={4} className="pl-0">
+        <Col xs={12} md={4} className="pl-0" id="event-filters">
           <div className="pull-right">
             <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
           </div>

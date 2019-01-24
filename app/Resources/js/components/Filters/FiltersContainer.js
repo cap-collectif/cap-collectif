@@ -47,6 +47,15 @@ export default class FiltersContainer extends React.Component<Props, State> {
           aria-expanded={this.state.isOpen}
           onClick={() => {
             this.setState({ isOpen: !this.state.isOpen });
+            setTimeout(() => {
+              $('.popover.bottom').each(function() {
+                $(this).insertAfter(
+                  $(this)
+                    .parent()
+                    .find('#event-filters'),
+                );
+              });
+            }, 500);
           }}>
           <i className="cap cap-filter-1 small mr-5" />
           <FormattedMessage id="link_filters" /> {this.renderFilterCount()}
