@@ -20,9 +20,15 @@ class GraphQLCollector extends DataCollector
         Response $response,
         \Exception $exception = null
     ): void {
+        $graphqlQuery =
+            'graphql_multiple_endpoint' === $request->attributes->get('_route') ||
+            'graphql_endpoint'
+                ? json_decode($request->getContent(), true)
+                : null;
         $this->data = [
             'method' => $request->getMethod(),
             'query' => $request->request->get('query', null),
+            'graphql_query' => $graphqlQuery,
             'acceptable_content_types' => $request->getAcceptableContentTypes(),
         ];
     }
@@ -30,6 +36,11 @@ class GraphQLCollector extends DataCollector
     public function getQuery()
     {
         return $this->data['query'];
+    }
+
+    public function getGraphQLQuery()
+    {
+        return $this->data['graphql_query'];
     }
 
     public function getMethod()
@@ -54,6 +65,6 @@ class GraphQLCollector extends DataCollector
      */
     public function getName(): string
     {
-        return 'capco.graphql_collector';
+        return 'capco.graphql';
     }
 }

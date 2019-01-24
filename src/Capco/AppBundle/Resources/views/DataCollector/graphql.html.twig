@@ -38,16 +38,31 @@
 {% block panel %}
     {# Optional, for showing the most details. #}
     <h2>Queries</h2>
-    {% if collector.query is defined %}
-        <div class="metrics">
-            <div class="metric">
-                <span class="value">{{ collector.query }}</span>
-                <span class="label">Query</span>
-            </div>
-        </div>
+    {% if collector.graphQLQuery is not null %}
+        {#<div class="metrics">#}
+            {#<div class="metric">#}
+                {#<span class="value"></span>#}
+                {#<span class="label">Query</span>#}
+            {#</div>#}
+        {#</div>#}
     {% else %}
         <div class="empty">
             <p>No GraphQL queries found.</p>
         </div>
     {% endif %}
+    <h2>Statements</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Query</th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr>
+               <td>test</td>
+               <td>test</td>
+           </tr>
+        </tbody>
+    </table>
 {% endblock %}
