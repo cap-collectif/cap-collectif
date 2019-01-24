@@ -35,7 +35,7 @@ export class EventPage extends React.Component<Props> {
               $userType: ID
               $isFuture: Boolean
             ) {
-              ...EventRefetch_query
+              ...EventPageHeader_query
                 @arguments(
                   cursor: $cursor
                   count: $count
@@ -45,7 +45,7 @@ export class EventPage extends React.Component<Props> {
                   userType: $userType
                   isFuture: $isFuture
                 )
-              ...EventListCounter_query
+              ...EventRefetch_query
                 @arguments(
                   cursor: $cursor
                   count: $count
@@ -77,7 +77,7 @@ export class EventPage extends React.Component<Props> {
                 <div>
                   <section className="jumbotron--bg-1 ">
                     {/* $FlowFixMe */}
-                    <EventPageHeader eventPageTitle={this.props.eventPageTitle} />
+                    <EventPageHeader query={props} eventPageTitle={this.props.eventPageTitle} />
                   </section>
                   {this.props.eventPageBody && (
                     <section className="section--custom">
@@ -91,7 +91,7 @@ export class EventPage extends React.Component<Props> {
                       <div
                         id="event-page-filters"
                         className={config.isMobile ? 'event-filters' : null}>
-                        <EventListFilters query={props} addToggleViewButton />
+                        <EventListFilters addToggleViewButton />
                       </div>
                       <div id="event-page-rendered">
                         {/* $FlowFixMe */}
