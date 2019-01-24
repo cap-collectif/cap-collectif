@@ -10,98 +10,118 @@ exports[`<EventListFilters /> renders correctly 1`] = `
     bsClass="col"
     className="pl-0"
     componentClass="div"
-    md={8}
+    md={4}
     xs={12}
   >
-    <FiltersContainer
-      filterCount={2}
-      overlay={
-        <div>
-          <form>
-            <Col
-              bsClass="col"
-              className="mt-5"
-              componentClass="div"
-            >
-              <div>
-                <div
-                  className="d-flex justify-content-end"
-                >
-                  <Button
-                    active={false}
-                    block={false}
-                    bsClass="btn"
-                    bsStyle="default"
-                    className="btn--outline btn-dark-gray"
-                    disabled={false}
-                    onClick={[MockFunction]}
-                  >
-                    <FormattedMessage
-                      id="reset-filters"
-                      values={Object {}}
-                    />
-                  </Button>
-                </div>
-              </div>
-            </Col>
-            <Col
-              bsClass="col"
-              className="mt-5"
-              componentClass="div"
-            >
-              <div>
-                <Field
-                  clearable={false}
-                  component={[Function]}
-                  id="EventListFilters-filter-status"
-                  name="status"
-                  options={
-                    Array [
-                      Object {
-                        "label": "ongoing-and-future",
-                        "value": true,
-                      },
-                      Object {
-                        "label": "finished",
-                        "value": false,
-                      },
-                    ]
-                  }
-                  placeholder="voting-status"
-                />
-              </div>
-            </Col>
-            <Col
-              bsClass="col"
-              className="mt-5"
-              componentClass="div"
-            >
-              <div>
-                <Field
-                  component={[Function]}
-                  id="EventListFilters-filter-userType"
-                  name="userType"
-                  options={
-                    Array [
-                      Object {
-                        "label": "Citoyen",
-                        "value": "userType-1",
-                      },
-                      Object {
-                        "label": "Institution",
-                        "value": "userType-2",
-                      },
-                    ]
-                  }
-                  placeholder="filter-userType"
-                />
-              </div>
-            </Col>
-          </form>
-        </div>
+    <ForwardRef(Relay(EventListCounter))
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
       }
-      type="event"
     />
+  </Col>
+  <Col
+    bsClass="col"
+    className="pl-0"
+    componentClass="div"
+    md={4}
+    xs={12}
+  >
+    <div
+      className="pull-right"
+    >
+      <FiltersContainer
+        filterCount={2}
+        overlay={
+          <div>
+            <form>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <div
+                    className="d-flex justify-content-end"
+                  >
+                    <Button
+                      active={false}
+                      block={false}
+                      bsClass="btn"
+                      bsStyle="default"
+                      className="btn--outline btn-dark-gray"
+                      disabled={false}
+                      onClick={[MockFunction]}
+                    >
+                      <FormattedMessage
+                        id="reset-filters"
+                        values={Object {}}
+                      />
+                    </Button>
+                  </div>
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    clearable={false}
+                    component={[Function]}
+                    id="EventListFilters-filter-status"
+                    name="status"
+                    options={
+                      Array [
+                        Object {
+                          "label": "ongoing-and-future",
+                          "value": true,
+                        },
+                        Object {
+                          "label": "finished",
+                          "value": false,
+                        },
+                      ]
+                    }
+                    placeholder="voting-status"
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    component={[Function]}
+                    id="EventListFilters-filter-userType"
+                    name="userType"
+                    options={
+                      Array [
+                        Object {
+                          "label": "Citoyen",
+                          "value": "userType-1",
+                        },
+                        Object {
+                          "label": "Institution",
+                          "value": "userType-2",
+                        },
+                      ]
+                    }
+                    placeholder="filter-userType"
+                  />
+                </div>
+              </Col>
+            </form>
+          </div>
+        }
+        type="event"
+      />
+    </div>
   </Col>
   <Col
     bsClass="col"
@@ -141,98 +161,118 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
     bsClass="col"
     className="pl-0"
     componentClass="div"
-    md={8}
+    md={4}
     xs={12}
   >
-    <FiltersContainer
-      filterCount={2}
-      overlay={
-        <div>
-          <form>
-            <Col
-              bsClass="col"
-              className="mt-5"
-              componentClass="div"
-            >
-              <div>
-                <div
-                  className="d-flex justify-content-end"
-                >
-                  <Button
-                    active={false}
-                    block={false}
-                    bsClass="btn"
-                    bsStyle="default"
-                    className="btn--outline btn-dark-gray"
-                    disabled={false}
-                    onClick={[MockFunction]}
-                  >
-                    <FormattedMessage
-                      id="reset-filters"
-                      values={Object {}}
-                    />
-                  </Button>
-                </div>
-              </div>
-            </Col>
-            <Col
-              bsClass="col"
-              className="mt-5"
-              componentClass="div"
-            >
-              <div>
-                <Field
-                  clearable={false}
-                  component={[Function]}
-                  id="EventListFilters-filter-status"
-                  name="status"
-                  options={
-                    Array [
-                      Object {
-                        "label": "ongoing-and-future",
-                        "value": true,
-                      },
-                      Object {
-                        "label": "finished",
-                        "value": false,
-                      },
-                    ]
-                  }
-                  placeholder="voting-status"
-                />
-              </div>
-            </Col>
-            <Col
-              bsClass="col"
-              className="mt-5"
-              componentClass="div"
-            >
-              <div>
-                <Field
-                  component={[Function]}
-                  id="EventListFilters-filter-userType"
-                  name="userType"
-                  options={
-                    Array [
-                      Object {
-                        "label": "Citoyen",
-                        "value": "userType-1",
-                      },
-                      Object {
-                        "label": "Institution",
-                        "value": "userType-2",
-                      },
-                    ]
-                  }
-                  placeholder="filter-userType"
-                />
-              </div>
-            </Col>
-          </form>
-        </div>
+    <ForwardRef(Relay(EventListCounter))
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
       }
-      type="event"
     />
+  </Col>
+  <Col
+    bsClass="col"
+    className="pl-0"
+    componentClass="div"
+    md={4}
+    xs={12}
+  >
+    <div
+      className="pull-right"
+    >
+      <FiltersContainer
+        filterCount={2}
+        overlay={
+          <div>
+            <form>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <div
+                    className="d-flex justify-content-end"
+                  >
+                    <Button
+                      active={false}
+                      block={false}
+                      bsClass="btn"
+                      bsStyle="default"
+                      className="btn--outline btn-dark-gray"
+                      disabled={false}
+                      onClick={[MockFunction]}
+                    >
+                      <FormattedMessage
+                        id="reset-filters"
+                        values={Object {}}
+                      />
+                    </Button>
+                  </div>
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    clearable={false}
+                    component={[Function]}
+                    id="EventListFilters-filter-status"
+                    name="status"
+                    options={
+                      Array [
+                        Object {
+                          "label": "ongoing-and-future",
+                          "value": true,
+                        },
+                        Object {
+                          "label": "finished",
+                          "value": false,
+                        },
+                      ]
+                    }
+                    placeholder="voting-status"
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    component={[Function]}
+                    id="EventListFilters-filter-userType"
+                    name="userType"
+                    options={
+                      Array [
+                        Object {
+                          "label": "Citoyen",
+                          "value": "userType-1",
+                        },
+                        Object {
+                          "label": "Institution",
+                          "value": "userType-2",
+                        },
+                      ]
+                    }
+                    placeholder="filter-userType"
+                  />
+                </div>
+              </Col>
+            </form>
+          </div>
+        }
+        type="event"
+      />
+    </div>
   </Col>
   <Col
     bsClass="col"

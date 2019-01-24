@@ -105,7 +105,7 @@ class Indexer
                 } else {
                     // Empty mean DELETE
                     $this->addToBulk(
-                        new Document($object->getId(), [], $object->getElasticsearchTypeName())
+                        new Document($object->getId(), [], $object::getElasticsearchTypeName())
                     );
                 }
 
@@ -206,6 +206,13 @@ class Indexer
         $this->classes['comment'] = Comment::class;
 
         return $this->classes;
+    }
+
+    public function setIndex(Index $index): self
+    {
+        $this->index = $index;
+
+        return $this;
     }
 
     protected function buildDocument(IndexableInterface $object): Document

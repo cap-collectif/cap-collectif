@@ -5,6 +5,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { fetchQuery, graphql } from 'relay-runtime';
 import { reduxForm, Field, formValueSelector, type FormProps } from 'redux-form';
+import { createFragmentContainer } from 'react-relay';
 import select from '../../Form/Select';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import config from '../../../config';
@@ -13,10 +14,13 @@ import { changeEventMobileListView } from '../../../redux/modules/event';
 import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
 import environment from '../../../createRelayEnvironment';
+import EventListCounter from './EventListCounter';
+import type { EventListFilters_query } from './__generated__/EventListFilters_query.graphql';
 
 type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
 type Props = {|
   ...FormProps,
+  query: EventListFilters_query,
   features: FeatureToggles,
   dispatch: Dispatch,
   theme: ?string,
@@ -65,10 +69,7 @@ const themeQuery = graphql`
 `;
 
 export class EventListFilters extends React.Component<Props, State> {
-  state = {
-    projectOptions: [],
-    themeOptions: [],
-  };
+  state = { projectOptions: [], themeOptions: [] };
 
   componentDidMount() {
     fetchQuery(environment, projectQuery, { withEventOnly: true })
@@ -82,32 +83,17 @@ export class EventListFilters extends React.Component<Props, State> {
         this.setState({ projectOptions });
       });
     fetchQuery(environment, themeQuery)
-      .then(res =>
-        res.themes.map(theme => ({
-          value: theme.id,
-          label: theme.title,
-        })),
-      )
+      .then(res => res.themes.map(theme => ({ value: theme.id, label: theme.title })))
       .then(themeOptions => {
         this.setState({ themeOptions });
       });
   }
 
-  render() {
-    const {
-      features,
-      theme,
-      project,
-      search,
-      reset,
-      userTypes,
-      intl,
-      addToggleViewButton,
-      dispatch,
-    } = this.props;
+  getFilters(nbFilter: number): [] {
+    const { features, theme, project, reset, userTypes, intl } = this.props;
+    const { themeOptions, projectOptions } = this.state;
 
     const filters = [];
-    const nbFilter = countFilters(theme, project, search);
 
     if (theme !== null || project !== null) {
       if (nbFilter > 0) {
@@ -121,25 +107,25 @@ export class EventListFilters extends React.Component<Props, State> {
       }
     }
 
-    if (features.themes && this.state.themeOptions.length) {
+    if (features.themes && themeOptions.length) {
       filters.push(
         <Field
           component={select}
           id="EventListFilters-filter-theme"
           name="theme"
           placeholder={intl.formatMessage({ id: 'type-theme' })}
-          options={this.state.themeOptions}
+          options={themeOptions}
         />,
       );
     }
-    if (features.projects_form && this.state.projectOptions.length) {
+    if (features.projects_form && projectOptions.length) {
       filters.push(
         <Field
           component={select}
           id="EventListFilters-filter-project"
           name="project"
           placeholder={intl.formatMessage({ id: 'type-project' })}
-          options={this.state.projectOptions}
+          options={projectOptions}
         />,
       );
     }
@@ -152,8 +138,18 @@ export class EventListFilters extends React.Component<Props, State> {
         clearable={false}
         placeholder={intl.formatMessage({ id: 'voting-status' })}
         options={[
-          { value: true, label: intl.formatMessage({ id: 'ongoing-and-future' }) },
-          { value: false, label: intl.formatMessage({ id: 'finished' }) },
+          {
+            value: true,
+            label: intl.formatMessage({
+              id: 'ongoing-and-future',
+            }),
+          },
+          {
+            value: false,
+            label: intl.formatMessage({
+              id: 'finished',
+            }),
+          },
         ]}
       />,
     );
@@ -185,7 +181,13 @@ export class EventListFilters extends React.Component<Props, State> {
       );
     }
 
-    const popoverBottom = (
+    return filters;
+  }
+
+  getPopoverBottom(nbFilters: number) {
+    const filters = this.getFilters(nbFilters);
+
+    return (
       <div>
         <form>
           {filters.map((filter, index) => (
@@ -196,6 +198,23 @@ export class EventListFilters extends React.Component<Props, State> {
         </form>
       </div>
     );
+  }
+
+  render() {
+    const {
+      features,
+      theme,
+      project,
+      search,
+      intl,
+      addToggleViewButton,
+      dispatch,
+      query,
+    } = this.props;
+
+    const nbFilter = countFilters(theme, project, search);
+
+    const popoverBottom = this.getPopoverBottom(nbFilter);
 
     const filterCount = () => {
       if (nbFilter > 0) {
@@ -204,8 +223,14 @@ export class EventListFilters extends React.Component<Props, State> {
     };
     return (
       <Row className={config.isMobile ? 'mb-10 ml-0' : 'mb-10'}>
-        <Col xs={12} md={8} className="pl-0">
-          <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
+        <Col xs={12} md={4} className="pl-0">
+          {/* $FlowFixMe $refType */}
+          <EventListCounter query={query} />
+        </Col>
+        <Col xs={12} md={4} className="pl-0">
+          <div className="pull-right">
+            <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
+          </div>
           {config.isMobile && addToggleViewButton && features.display_map ? (
             <EventListToggleMobileViewBtn
               showMapButton
@@ -257,4 +282,41 @@ const form = reduxForm({
   },
 })(EventListFilters);
 
-export default connect(mapStateToProps)(injectIntl(form));
+const container = connect(mapStateToProps)(injectIntl(form));
+
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment EventListFilters_query on Query
+      @argumentDefinitions(
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+        theme: { type: "ID" }
+        project: { type: "ID" }
+        search: { type: "String" }
+        userType: { type: "ID" }
+        isFuture: { type: "Boolean" }
+      ) {
+      ...EventListFilters_query
+        @arguments(
+          cursor: $cursor
+          count: $count
+          search: $search
+          theme: $theme
+          project: $project
+          userType: $userType
+          isFuture: $isFuture
+        )
+      ...EventListCounter_query
+        @arguments(
+          cursor: $cursor
+          count: $count
+          search: $search
+          theme: $theme
+          project: $project
+          userType: $userType
+          isFuture: $isFuture
+        )
+    }
+  `,
+);
