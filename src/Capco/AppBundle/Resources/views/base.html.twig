@@ -55,6 +55,8 @@
     <script type="text/javascript">
         window.locale = "{{ intl_locale() }}";
 
+        window.recaptchaOptions = { lang: "{{ intl_locale() }}" };
+
         window._capco_executeAnalyticScript = function(){
             {% if analytic_js is not null %}
             var script = document.createElement("script");
