@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader;
 
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Psr\Log\LoggerInterface;
 use Overblog\DataLoader\Option;
 use Overblog\DataLoader\DataLoader;
@@ -20,6 +21,7 @@ abstract class BatchDataLoader extends DataLoader
     protected $cacheTtl;
     protected $debug;
     protected $enableCache = true;
+    private $collector;
 
     public function __construct(
         callable $batchFunction,
@@ -29,6 +31,7 @@ abstract class BatchDataLoader extends DataLoader
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
+        GraphQLCollector $collector,
         bool $enableCache = true
     ) {
         $this->cachePrefix = $cachePrefix;
@@ -37,6 +40,7 @@ abstract class BatchDataLoader extends DataLoader
         $this->cacheTtl = $cacheTtl;
         $this->debug = $debug;
         $this->enableCache = $enableCache;
+        $this->collector = $collector;
         $options = new Option([
             'cacheKeyFn' => function ($key) {
                 $serializedKey = $this->serializeKey($key);
@@ -95,6 +99,7 @@ abstract class BatchDataLoader extends DataLoader
 
         if (!$this->enableCache || !$cacheItem->isHit()) {
             if ($this->debug) {
+                $this->collector->addCacheMiss($this->serializeKey($key));
                 $this->logger->info(
                     \get_class($this) .
                         ' Cache MISS for: ' .
@@ -132,6 +137,7 @@ abstract class BatchDataLoader extends DataLoader
         }
 
         if ($this->debug) {
+            $this->collector->addCacheHit($this->serializeKey($key));
             $this->logger->info(
                 \get_class($this) . 'Cache HIT for: ' . var_export($this->serializeKey($key), true)
             );
