@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -32,7 +31,6 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
-        GraphQLCollector $collector,
         bool $enableCache
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
@@ -47,7 +45,6 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
             $cachePrefix,
             $cacheTtl,
             $debug,
-            $collector,
             $enableCache
         );
     }
