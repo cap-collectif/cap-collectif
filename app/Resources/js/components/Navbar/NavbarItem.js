@@ -23,9 +23,7 @@ class NavbarItem extends React.Component<Props> {
   render() {
     const { item, isChild, refCallback, className, onKeyDown, intl } = this.props;
 
-    // const title = `${item.title} - page active`;
     const title = `${item.title} - ${intl.formatMessage({ id: 'active.page' })}`;
-    // const title = `${item.title} - ${<FormattedMessage id="global.filter_random" />}`;
 
     if (item.hasEnabledFeature) {
       if (item.children && item.children.length > 0) {
