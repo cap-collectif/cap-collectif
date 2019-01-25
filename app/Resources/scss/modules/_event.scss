@@ -34,6 +34,19 @@
         border-bottom: 1px solid $border-color;
     }
 
+    .month-calendar {
+        color: white;
+        font-size: 14px;
+        margin-top: 1px;
+        margin-bottom: 2px;
+    }
+
+    .day-calendar {
+        color: #212529;
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+
     .event__body {
         background-color: $white;
         text-align: left;
