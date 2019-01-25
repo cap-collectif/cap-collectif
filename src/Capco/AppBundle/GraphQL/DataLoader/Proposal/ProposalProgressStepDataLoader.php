@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisTagCache;
@@ -18,6 +19,7 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
+        GraphQLCollector $collector,
         bool $enableCache
     ) {
         parent::__construct(
@@ -28,6 +30,7 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
             $cachePrefix,
             $cacheTtl,
             $debug,
+            $collector,
             $enableCache
         );
     }
