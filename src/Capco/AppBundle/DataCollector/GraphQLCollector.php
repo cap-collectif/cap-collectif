@@ -109,7 +109,7 @@ class GraphQLCollector extends DataCollector
 
     public function getCacheHitsReadsPercentage(): float
     {
-        return \round($this->getCacheHitsCount() / $this->getCacheTotalReads(), 2);
+        return \round(($this->getCacheHitsCount() / $this->getCacheTotalReads()) * 100, 2);
     }
 
     public function getCacheMisses(): array
