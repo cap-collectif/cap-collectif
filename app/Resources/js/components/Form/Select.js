@@ -3,7 +3,7 @@ import * as React from 'react';
 import { HelpBlock } from 'react-bootstrap';
 import Select from 'react-select';
 
-type Options = Array<{ id: string, label: string }>;
+type Options = Array<{ value: string, label: string }>;
 type Value = string | Array<{ value: string }>;
 type OnChangeInput = { value: string } | Array<{ value: string }>;
 type Props = {
@@ -31,22 +31,18 @@ type Props = {
   inputClassName?: string,
 };
 
-// const CustomClearText = () => 'clear all';
-// const ClearIndicator = (props) => {
-//   const { children = <CustomClearText/>, getStyles, innerProps: { ref, ...restInnerProps } } = props;
-//   return (
-//     <div {...restInnerProps} ref={ref} style={getStyles('clearIndicator', props)}>
-//       <div style={{ padding: '0px 5px' }}>
-//         {children}
-//       </div>
-//     </div>
-//   );
-// };
-// const ClearIndicatorStyles = (base, state) => ({
-//   ...base,
-//   cursor: 'pointer',
-//   color: state.isFocused ? 'blue' : 'black',
-// });
+const CustomClearText = () => 'clear all';
+const ClearIndicator = props => {
+  const {
+    children = <CustomClearText />,
+    innerProps: { ref, ...restInnerProps },
+  } = props;
+  return (
+    <div {...restInnerProps} ref={ref}>
+      <div style={{ padding: '0px 5px' }}>{children}</div>
+    </div>
+  );
+};
 
 export class renderSelect extends React.Component<Props> {
   static defaultProps = {
@@ -77,7 +73,10 @@ export class renderSelect extends React.Component<Props> {
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
 
-    console.log(this.props.input.value, this.props);
+    const selectLabel =
+      options && options.filter(option => option && option.value && option.value === value);
+
+    const selectValue = value ? selectLabel && selectLabel[0] : null;
 
     return (
       <div className="form-group">
@@ -97,10 +96,12 @@ export class renderSelect extends React.Component<Props> {
               defaultOptions={autoload}
               isClearable
               // isClearable={clearable}
-              // placeholder={placeholder}
+              placeholder={placeholder}
               loadOptions={loadOptions}
+              onBlurResetsInput={false}
+              onCloseResetsInput={false}
               // valueKey="value"
-              value={value}
+              // value={value}
               name={name}
               isMulti={multi}
               options={options}
@@ -125,32 +126,34 @@ export class renderSelect extends React.Component<Props> {
             <Select
               name={name}
               // defaultValue={options[1]}
-              // components={{ ClearIndicator }}
+              components={{ ClearIndicator }}
               // styles={{ clearIndicator: ClearIndicatorStyles }}
               isDisabled={disabled}
               options={options}
-              filterOption={filterOptions}
+              // filterOption={filterOptions}
+              onBlurResetsInput={false}
+              onCloseResetsInput={false}
               placeholder={placeholder}
-              loadOptions={loadOptions}
-              // valueKey="value"
+              // loadOptions={loadOptions}
               isClearable={clearable}
               // autoload={autoload}
               isMulti={multi}
-              value={value}
-              onSelectResetsInput={false}
+              value={selectValue}
               // inputValue={input.value}
               noOptionsMessage={() => 'Pas de résultats…'}
               // loadingPlaceholder="Chargement…"
-              onBlur={() => onBlur()}
+              onBlur={onBlur}
               onFocus={onFocus}
               onChange={(newValue: OnChangeInput) => {
-                if (typeof onChange === 'function') {
-                  onChange();
-                }
+                console.log(newValue);
+                // if (typeof onChange === 'function') {
+                //   onChange();
+                // }
                 if (multi && Array.isArray(newValue)) {
                   return input.onChange(newValue);
                 }
                 if (!Array.isArray(newValue)) {
+                  console.log('test');
                   input.onChange(newValue ? newValue.value : '');
                 }
               }}
