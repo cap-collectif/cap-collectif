@@ -37,32 +37,51 @@
 
 {% block panel %}
     {# Optional, for showing the most details. #}
-    <h2>Queries</h2>
-    {% if collector.graphQLQuery is not null %}
-        {#<div class="metrics">#}
-            {#<div class="metric">#}
-                {#<span class="value"></span>#}
-                {#<span class="label">Query</span>#}
-            {#</div>#}
-        {#</div>#}
-    {% else %}
-        <div class="empty">
-            <p>No GraphQL queries found.</p>
+    <h2>Dataloader stats</h2>
+    {% if collector.cacheHitsCount > 0 or collector.cacheMissesCount > 0 %}
+        <div class="metrics">
+            <div class="metric">
+                <span class="value">{{ collector.cacheHitsCount }}</span>
+                <span class="label">Total hits</span>
+            </div>
+            <div class="metric">
+                <span class="value">{{ collector.cacheMissesCount }}</span>
+                <span class="label">Total misses</span>
+            </div>
+            <div class="metric">
+                <span class="value">{{ collector.cacheTotalReads }}</span>
+                <span class="label">Total reads</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric">
+                <span class="value">{{ collector.cacheHitsReadsPercentage }} <span class="unit">%</span></span>
+                <span class="label">Hits / reads</span>
+            </div>
         </div>
-    {% endif %}
-    <h2>Statements</h2>
-    <table>
-        <thead>
+        <h2>Cache calls</h2>
+        <table>
+            <thead>
             <tr>
                 <th>Type</th>
-                <th>Query</th>
+                <th>Subtype</th>
+                <th>Cached</th>
+                <th>Serialized key</th>
             </tr>
-        </thead>
-        <tbody>
-           <tr>
-               <td>test</td>
-               <td>test</td>
-           </tr>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for entry in collector.cacheHitsMisses %}
+                <tr>
+                    <td>{{ entry.type }}</td>
+                    <td>{{ entry.subtype }}</td>
+                    <td>{{ entry.cached ? 'Yes' : 'No' }}</td>
+                    <td>{{ dump(entry.value) }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="empty">
+            <p>No GraphQL queries using dataloaders where found.</p>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -59,6 +59,8 @@ abstract class BatchDataLoader extends DataLoader
         ]);
         parent::__construct(
             function ($ids) use ($batchFunction) {
+                $this->collector->addBatchFunction($ids, $batchFunction);
+
                 return $batchFunction($ids);
             },
             $promiseFactory,
@@ -94,12 +96,15 @@ abstract class BatchDataLoader extends DataLoader
 
         if ($this->enableCache) {
             $cacheKey = $this->getCacheKeyFromKey($key);
+            $this->collector->incrementCacheRead();
             $cacheItem = $this->cache->getItem($cacheKey);
         }
 
         if (!$this->enableCache || !$cacheItem->isHit()) {
             if ($this->debug) {
-                $this->collector->addCacheMiss($this->serializeKey($key));
+                $parts = explode('\\', static::class);
+                $subtype = array_pop($parts);
+                $this->collector->addCacheMiss($this->serializeKey($key), $subtype);
                 $this->logger->info(
                     \get_class($this) .
                         ' Cache MISS for: ' .
@@ -137,7 +142,9 @@ abstract class BatchDataLoader extends DataLoader
         }
 
         if ($this->debug) {
-            $this->collector->addCacheHit($this->serializeKey($key));
+            $parts = explode('\\', static::class);
+            $subtype = array_pop($parts);
+            $this->collector->addCacheHit($this->serializeKey($key), $subtype);
             $this->logger->info(
                 \get_class($this) . 'Cache HIT for: ' . var_export($this->serializeKey($key), true)
             );

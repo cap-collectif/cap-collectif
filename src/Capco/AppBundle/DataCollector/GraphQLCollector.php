@@ -8,7 +8,8 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 class GraphQLCollector extends DataCollector
 {
-    private $cacheMap = ['HITS' => [], 'MISSES' => []];
+    private $cache = ['READS' => 0, 'HITS' => [], 'MISSES' => []];
+    private $batchFns = [];
 
     /**
      * Collects data for the given Request and Response.
@@ -33,23 +34,62 @@ class GraphQLCollector extends DataCollector
             'graphql_query' => $graphqlQuery,
             'acceptable_content_types' => $request->getAcceptableContentTypes(),
         ];
-        $this->data['cache'] = $this->cacheMap;
+        $this->data['cache'] = $this->cache;
     }
 
     /**
      * @param string|array $value
+     * @param string       $subtype
+     * @param string       $type
      */
-    public function addCacheHit($value): void
+    public function addCacheHit($value, string $subtype, string $type = 'dataloader'): void
     {
-        $this->cacheMap['HITS'][] = $value;
+        $this->cache['HITS'][] = [
+            'type' => $type,
+            'subtype' => $subtype,
+            'cached' => true,
+            'value' => $value,
+        ];
+    }
+
+    public function addBatchFunction($arguments, callable $function): void
+    {
+        $this->batchFns[] = compact('arguments', 'function');
+    }
+
+    public function incrementCacheRead(): void
+    {
+        ++$this->cache['READS'];
     }
 
     /**
      * @param string|array $value
+     * @param string       $subtype
+     * @param string       $type
      */
-    public function addCacheMiss($value): void
+    public function addCacheMiss($value, string $subtype, string $type = 'dataloader'): void
     {
-        $this->cacheMap['MISSES'][] = $value;
+        $this->cache['MISSES'][] = [
+            'type' => $type,
+            'subtype' => $subtype,
+            'cached' => false,
+            'value' => $value,
+        ];
+    }
+
+    public function getBatchFunctions(): array
+    {
+        return $this->batchFns;
+    }
+
+    public function hasBatchFunctions(): bool
+    {
+        return \count($this->batchFns) > 0;
+    }
+
+    public function getCacheHitsMisses(): array
+    {
+        return \array_merge($this->getCacheHits(), $this->getCacheMisses());
     }
 
     public function getCache(): array
@@ -62,9 +102,29 @@ class GraphQLCollector extends DataCollector
         return $this->data['cache']['HITS'];
     }
 
+    public function getCacheHitsCount(): int
+    {
+        return \count($this->data['cache']['HITS']);
+    }
+
+    public function getCacheHitsReadsPercentage(): float
+    {
+        return \round($this->getCacheHitsCount() / $this->getCacheTotalReads(), 2);
+    }
+
     public function getCacheMisses(): array
     {
         return $this->data['cache']['MISSES'];
+    }
+
+    public function getCacheMissesCount(): int
+    {
+        return \count($this->data['cache']['MISSES']);
+    }
+
+    public function getCacheTotalReads(): int
+    {
+        return $this->getCacheHitsCount() + $this->getCacheMissesCount();
     }
 
     public function getQuery()
