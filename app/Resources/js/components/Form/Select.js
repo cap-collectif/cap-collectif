@@ -31,6 +31,23 @@ type Props = {
   inputClassName?: string,
 };
 
+// const CustomClearText = () => 'clear all';
+// const ClearIndicator = (props) => {
+//   const { children = <CustomClearText/>, getStyles, innerProps: { ref, ...restInnerProps } } = props;
+//   return (
+//     <div {...restInnerProps} ref={ref} style={getStyles('clearIndicator', props)}>
+//       <div style={{ padding: '0px 5px' }}>
+//         {children}
+//       </div>
+//     </div>
+//   );
+// };
+// const ClearIndicatorStyles = (base, state) => ({
+//   ...base,
+//   cursor: 'pointer',
+//   color: state.isFocused ? 'blue' : 'black',
+// });
+
 export class renderSelect extends React.Component<Props> {
   static defaultProps = {
     multi: false,
@@ -59,6 +76,9 @@ export class renderSelect extends React.Component<Props> {
       meta: { touched, error },
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
+
+    console.log(this.props.input.value, this.props);
+
     return (
       <div className="form-group">
         {label && (
@@ -70,19 +90,22 @@ export class renderSelect extends React.Component<Props> {
         <div id={id} className={inputClassName || ''}>
           {typeof loadOptions === 'function' ? (
             <Select.Async
-              filterOptions={filterOptions}
-              disabled={disabled}
-              autoload={autoload}
-              clearable={clearable}
-              placeholder={placeholder}
+              filterOption={filterOptions}
+              // components={{ ClearIndicator }}
+              // styles={{ clearIndicator: ClearIndicatorStyles }}
+              isDisabled={disabled}
+              defaultOptions={autoload}
+              isClearable
+              // isClearable={clearable}
+              // placeholder={placeholder}
               loadOptions={loadOptions}
-              valueKey="value"
+              // valueKey="value"
               value={value}
               name={name}
-              multi={multi}
+              isMulti={multi}
               options={options}
-              noResultsText="Pas de résultats…"
-              loadingPlaceholder="Chargement…"
+              noOptionsMessage={() => 'Pas de résultats…'}
+              // loadingPlaceholder="Chargement…"
               onBlur={() => onBlur()}
               onFocus={onFocus}
               onChange={(newValue: OnChangeInput) => {
@@ -101,18 +124,23 @@ export class renderSelect extends React.Component<Props> {
           ) : (
             <Select
               name={name}
-              disabled={disabled}
+              // defaultValue={options[1]}
+              // components={{ ClearIndicator }}
+              // styles={{ clearIndicator: ClearIndicatorStyles }}
+              isDisabled={disabled}
               options={options}
-              filterOptions={filterOptions}
+              filterOption={filterOptions}
               placeholder={placeholder}
               loadOptions={loadOptions}
-              valueKey="value"
-              clearable={clearable}
-              autoload={autoload}
-              multi={multi}
+              // valueKey="value"
+              isClearable={clearable}
+              // autoload={autoload}
+              isMulti={multi}
               value={value}
-              noResultsText="Pas de résultats…"
-              loadingPlaceholder="Chargement…"
+              onSelectResetsInput={false}
+              // inputValue={input.value}
+              noOptionsMessage={() => 'Pas de résultats…'}
+              // loadingPlaceholder="Chargement…"
               onBlur={() => onBlur()}
               onFocus={onFocus}
               onChange={(newValue: OnChangeInput) => {
