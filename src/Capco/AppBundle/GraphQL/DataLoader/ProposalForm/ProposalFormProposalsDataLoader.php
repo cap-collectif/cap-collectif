@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\ProposalForm;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
@@ -31,7 +30,6 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
-        GraphQLCollector $collector,
         bool $enableCache
     ) {
         $this->proposalRepo = $proposalRepo;
@@ -44,7 +42,6 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $cachePrefix,
             $cacheTtl,
             $debug,
-            $collector,
             $enableCache
         );
     }

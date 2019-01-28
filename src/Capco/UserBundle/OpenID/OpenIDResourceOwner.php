@@ -2,30 +2,24 @@
 
 namespace Capco\UserBundle\OpenID;
 
-use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Capco\AppBundle\Helper\EnvHelper;
+use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
+use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 {
     protected $paths = [
         'identifier' => 'sub',
-        'username' => 'name',
-        'nickname' => 'name',
-        'realname' => 'name',
-        'email' => 'email',
     ];
 
-    public function getUserInformation(array $accessToken, array $extraParameters = [])
-    {
-        // If instance is Nantes OpenID.
-        if ('nantes' === EnvHelper::get('SYMFONY_INSTANCE_NAME')) {
-            $this->paths = [
-                'identifier' => 'sub',
-                'email' => 'email',
-                'nickname' => ['given_name', 'family_name'],
-            ];
-        }
+    public function getUserInformation(
+        array $accessToken,
+        array $extraParameters = []
+    ): UserResponseInterface {
+        $this->paths = (new OpenIDPathMapper(
+            EnvHelper::get('SYMFONY_INSTANCE_NAME')
+        ))->getOpenIDMapping();
 
         return parent::getUserInformation($accessToken, $extraParameters);
     }

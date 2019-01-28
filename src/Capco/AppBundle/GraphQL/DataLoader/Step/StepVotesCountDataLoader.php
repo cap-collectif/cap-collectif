@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -27,7 +26,6 @@ class StepVotesCountDataLoader extends BatchDataLoader
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
-        GraphQLCollector $collector,
         bool $enableCache
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
@@ -40,7 +38,6 @@ class StepVotesCountDataLoader extends BatchDataLoader
             $cachePrefix,
             $cacheTtl,
             $debug,
-            $collector,
             $enableCache
         );
     }
