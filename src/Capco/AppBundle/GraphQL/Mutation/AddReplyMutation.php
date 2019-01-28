@@ -94,7 +94,7 @@ class AddReplyMutation implements MutationInterface
         $this->em->flush();
         $this->redisStorageHelper->recomputeUserCounters($user);
 
-        if ($questionnaire->isAcknowledgeReplies() && !$reply->isDraft()) {
+        if ($questionnaire->isAcknowledgeReplies()) {
             $this->userNotifier->acknowledgeReply($questionnaire->getStep()->getProject(), $reply);
         }
 
@@ -106,7 +106,7 @@ class AddReplyMutation implements MutationInterface
         $errors = [];
         foreach ($form->getErrors() as $error) {
             $this->logger->error((string) $error->getMessage());
-            $this->logger->error(implode('', $form->getExtraData()));
+            $this->logger->error(implode($form->getExtraData()));
             $errors[] = (string) $error->getMessage();
         }
         if (!empty($errors)) {
