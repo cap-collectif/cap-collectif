@@ -5,12 +5,7 @@ exports[`<ProjectTrashButton /> should render correctly 1`] = `
   className="container text-center"
 >
   <h2
-    className="mt-0"
-    style={
-      Object {
-        "color": "black",
-      }
-    }
+    className="mt-0  project__trash-title"
   >
     <FormattedMessage
       id="project.show.trashed.short_name"

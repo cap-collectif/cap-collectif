@@ -254,7 +254,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                     <li
                       className={this.getClass(step.id)}
                       key={key}
-                      title={`[${step.label}] - ${intl.formatMessage({
+                      title={`${step.label} - ${intl.formatMessage({
                         id: 'global.active.step',
                       })}`}>
                       <a href={step._links.show} className="d-flex">

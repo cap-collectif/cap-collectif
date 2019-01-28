@@ -18,7 +18,11 @@
             </div>
         </div>
         <div class="col-md-9  col-sm-9  col-xs-12  event__body  box  event-js">
-            <h4 class="event__title"><a href="{{ path('app_event_show' ,{'slug': event.slug } ) }}">{{ event.title }}</a></h4>
+            <h4 class="event__title">
+                <a href="{{ path('app_event_show' ,{'slug': event.slug } ) }}" title="{{ event.title }}">
+                    {{ event.title }}
+                </a>
+            </h4>
             <p>
                 {% for theme in event.themes %}
                     <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}"><span class="label label-default">{{ theme.title }}</span></a>

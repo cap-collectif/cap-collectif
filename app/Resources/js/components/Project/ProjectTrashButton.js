@@ -15,7 +15,7 @@ export class ProjectTrashButton extends React.PureComponent<Props> {
     const { link, user } = this.props;
     return (
       <div className="container text-center">
-        <h2 className="mt-0" style={{ color: 'black' }}>
+        <h2 className="mt-0  project__trash-title">
           <FormattedMessage id="project.show.trashed.short_name" />
         </h2>
         <p className="excerpt">
