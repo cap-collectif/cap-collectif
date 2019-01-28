@@ -21,6 +21,14 @@ export default class FiltersContainer extends React.Component<Props, State> {
     };
   }
 
+  componentDidUpdate() {
+    setTimeout(() => {
+      $('.popover.bottom').each(function() {
+        $(this).removeAttr('role');
+      });
+    }, 500);
+  }
+
   renderFilterCount(): string {
     const { filterCount } = this.props;
     return filterCount && filterCount > 0 ? `(${filterCount})` : '';
@@ -34,7 +42,7 @@ export default class FiltersContainer extends React.Component<Props, State> {
         placement="bottom"
         aria-describedby=""
         overlay={
-          <Popover id="" className="w-260">
+          <Popover id="FiltersContainer" className="w-260" rel="">
             {overlay}
           </Popover>
         }
