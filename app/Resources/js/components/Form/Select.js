@@ -79,8 +79,6 @@ export class renderSelect extends React.Component<Props> {
 
     const selectValue = value ? selectLabel && selectLabel[0] : null;
 
-    console.log(this.props);
-
     return (
       <div className="form-group">
         {label && (
