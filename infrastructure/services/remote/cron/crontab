@@ -16,10 +16,10 @@
 #0 3 * * * /usr/bin/timeout 2h /usr/local/bin/gosu capco php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:counters --env=prod
 
 # Generate exports every hour
-0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation --env=prod
-0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire --env=prod
-0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:proposalStep --env=prod
-0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:users --env=prod
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation --env=prod --quiet
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire --env=prod --quiet
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:proposalStep --env=prod --quiet
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:users --env=prod --quiet
 
 # Remind users to confirm their account every hour
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:remind-user-account-confirmation --env=prod

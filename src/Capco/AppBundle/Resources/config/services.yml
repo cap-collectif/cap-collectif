@@ -17,7 +17,6 @@ imports:
   - { resource: services/notifiers.yml }
   - { resource: services/elasticsearch.yml }
   - { resource: services/data_fixtures.yml }
-  - { resource: services/data_collectors.yml }
   - { resource: services/helpers.yml }
   - { resource: services/synthesis.yml }
   - { resource: services/cache.yml }
