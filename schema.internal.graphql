@@ -786,6 +786,12 @@ type ChangeSourcePayload {
 input ChangeUserNotificationsConfigurationInput {
   # The new proposal comment notification value
   onProposalCommentMail: Boolean!
+
+  # The new external consent for communication
+  consentExternalCommunication: Boolean!
+
+  # The new internal consent for communication
+  consentInternalCommunication: Boolean!
   clientMutationId: String
 }
 
