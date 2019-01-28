@@ -71,10 +71,12 @@ export class ProposalPageTabs extends React.Component<Props> {
                 <NavItem eventKey="content" className="tab">
                   <FormattedMessage id="proposal.tabs.content" />
                 </NavItem>
-                <NavItem eventKey="blog" className="tab">
-                  <FormattedMessage id="proposal.tabs.blog" />
-                  <span className="badge">{proposal.news.totalCount}</span>
-                </NavItem>
+                {proposal.news.totalCount > 0 && (
+                  <NavItem eventKey="blog" className="tab">
+                    <FormattedMessage id="proposal.tabs.blog" />
+                    <span className="badge">{proposal.news.totalCount}</span>
+                  </NavItem>
+                )}
                 {proposal.viewerCanSeeEvaluation && (
                   <NavItem eventKey="evaluation" className="tab">
                     <FormattedMessage id="proposal.tabs.evaluation" />
@@ -102,8 +104,10 @@ export class ProposalPageTabs extends React.Component<Props> {
                   <Col xs={12} sm={8}>
                     {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                     <ProposalFusionList proposal={proposal} />
-                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-                    <ProposalPageLastNews proposal={proposal} />
+                    {proposal && proposal.news && proposal.news.totalCount > 0 && (
+                      /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
+                      <ProposalPageLastNews proposal={proposal} />
+                    )}
                     {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                     <ProposalPageContent proposal={proposal} step={step} viewer={viewer} />
                   </Col>
@@ -160,10 +164,12 @@ export class ProposalPageTabs extends React.Component<Props> {
                   </Tab.Container>
                 </Tab.Pane>
               )}
-              <Tab.Pane eventKey="blog">
-                {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-                <ProposalPageBlog proposal={proposal} />
-              </Tab.Pane>
+              {proposal.news.totalCount > 0 && (
+                <Tab.Pane eventKey="blog">
+                  {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                  <ProposalPageBlog proposal={proposal} />
+                </Tab.Pane>
+              )}
               <Tab.Pane eventKey="evaluation">
                 {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                 <ProposalPageEvaluation proposal={proposal} />
