@@ -99,28 +99,4 @@ class UserNotificationsConfiguration
 
         return $this;
     }
-
-    public function isConsentExternalCommunication(): bool
-    {
-        return $this->user->isConsentExternalCommunication();
-    }
-
-    public function setConsentExternalCommunication(bool $consentExternalCommunication): self
-    {
-        $this->user->setConsentExternalCommunication($consentExternalCommunication);
-
-        return $this;
-    }
-
-    public function isConsentInternalCommunication(): bool
-    {
-        return $this->user->isConsentInternalCommunication();
-    }
-
-    public function setConsentInternalCommunication(bool $consentInternalCommunication): self
-    {
-        $this->user->setConsentInternalCommunication($consentInternalCommunication);
-
-        return $this;
-    }
 }

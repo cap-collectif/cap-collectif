@@ -96,6 +96,21 @@ type AddEventPayload {
   clientMutationId: String
 }
 
+input AddEventsInput {
+  # A list of events input to import.
+  events: [EventInput!]!
+
+  # This option is useful if you want to test your import. Set it to true if you want to import definitively.
+  dryRun: Boolean!
+  clientMutationId: String
+}
+
+type AddEventsPayload {
+  # List of imported events.
+  importedEvents: [Event!]!
+  clientMutationId: String
+}
+
 input AddOpinionVoteInput {
   # The Node ID of the opinion/version to vote.
   opinionId: ID!
@@ -786,12 +801,6 @@ type ChangeSourcePayload {
 input ChangeUserNotificationsConfigurationInput {
   # The new proposal comment notification value
   onProposalCommentMail: Boolean!
-
-  # The new external consent for communication
-  consentExternalCommunication: Boolean!
-
-  # The new internal consent for communication
-  consentInternalCommunication: Boolean!
   clientMutationId: String
 }
 
@@ -1899,6 +1908,26 @@ type EventEdge {
   cursor: String!
 }
 
+input EventInput {
+  title: String!
+  body: String!
+  startAt: String
+  endAt: String
+  authorEmail: String!
+  themes: [ID!]!
+  projects: [ID!]!
+  link: String
+  registrationEnable: Boolean!
+  enabled: Boolean!
+  commentable: Boolean!
+  zipCode: String
+  address: String
+  metaDescription: String
+  customCode: String
+  city: String
+  country: String
+}
+
 # Require a firstname
 type FirstnameRequirement implements Node & Requirement {
   # The ID of an object
@@ -2417,6 +2446,7 @@ type Mutation {
   changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
   removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload
   changeSiteFavicon(input: InternalChangeSiteFaviconInput!): InternalChangeSiteFaviconPayload
+  addEvents(input: AddEventsInput!): AddEventsPayload
   addComment(input: AddCommentInput!): AddCommentPayload
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
   addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload
