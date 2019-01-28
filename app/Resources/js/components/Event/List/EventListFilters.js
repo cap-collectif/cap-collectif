@@ -114,7 +114,7 @@ export class EventListFilters extends React.Component<Props, State> {
       if (nbFilter > 0) {
         filters.push(
           <div className="d-flex justify-content-end">
-            <Button className="btn--outline btn-dark-gray" onClick={reset}>
+            <Button className="btn--outline btn-dark-gray mb-10" onClick={reset}>
               <FormattedMessage id="reset-filters" />
             </Button>
           </div>,

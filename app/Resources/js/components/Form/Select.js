@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { HelpBlock } from 'react-bootstrap';
 import Select from 'react-select';
+import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 
 type Options = Array<{ value: string, label: string }>;
 type Value = string | Array<{ value: string }>;
@@ -14,6 +15,7 @@ type Props = {
     onChange: (value: Value) => void,
     onFocus: () => void,
   },
+  intl: IntlShape,
   id: string,
   meta: { touched: boolean, error: ?string },
   label: string | React.Node,
@@ -31,15 +33,13 @@ type Props = {
   inputClassName?: string,
 };
 
-const CustomClearText = () => 'clear all';
 const ClearIndicator = props => {
   const {
-    children = <CustomClearText />,
     innerProps: { ref, ...restInnerProps },
   } = props;
   return (
-    <div {...restInnerProps} ref={ref}>
-      <div style={{ padding: '0px 5px' }}>{children}</div>
+    <div role="button" className="select__clear-zone" {...restInnerProps} ref={ref}>
+      <i className="cap cap-times mr-10 ml-10" />
     </div>
   );
 };
@@ -69,6 +69,7 @@ export class renderSelect extends React.Component<Props> {
       filterOptions,
       id,
       help,
+      intl,
       meta: { touched, error },
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
@@ -77,6 +78,8 @@ export class renderSelect extends React.Component<Props> {
       options && options.filter(option => option && option.value && option.value === value);
 
     const selectValue = value ? selectLabel && selectLabel[0] : null;
+
+    console.log(this.props);
 
     return (
       <div className="form-group">
@@ -90,23 +93,20 @@ export class renderSelect extends React.Component<Props> {
           {typeof loadOptions === 'function' ? (
             <Select.Async
               filterOption={filterOptions}
-              // components={{ ClearIndicator }}
-              // styles={{ clearIndicator: ClearIndicatorStyles }}
+              components={{ ClearIndicator }}
               isDisabled={disabled}
               defaultOptions={autoload}
-              isClearable
-              // isClearable={clearable}
+              isClearable={clearable}
               placeholder={placeholder}
               loadOptions={loadOptions}
               onBlurResetsInput={false}
               onCloseResetsInput={false}
-              // valueKey="value"
-              // value={value}
+              value={selectValue}
               name={name}
               isMulti={multi}
               options={options}
-              noOptionsMessage={() => 'Pas de résultats…'}
-              // loadingPlaceholder="Chargement…"
+              noOptionsMessage={() => <FormattedMessage id="select.no-results" />}
+              loadingPlaceholder={intl.formatMessage({ id: 'global.loading' })}
               onBlur={() => onBlur()}
               onFocus={onFocus}
               onChange={(newValue: OnChangeInput) => {
@@ -125,35 +125,28 @@ export class renderSelect extends React.Component<Props> {
           ) : (
             <Select
               name={name}
-              // defaultValue={options[1]}
               components={{ ClearIndicator }}
-              // styles={{ clearIndicator: ClearIndicatorStyles }}
               isDisabled={disabled}
               options={options}
-              // filterOption={filterOptions}
+              filterOption={filterOptions}
               onBlurResetsInput={false}
               onCloseResetsInput={false}
               placeholder={placeholder}
-              // loadOptions={loadOptions}
               isClearable={clearable}
-              // autoload={autoload}
               isMulti={multi}
               value={selectValue}
-              // inputValue={input.value}
-              noOptionsMessage={() => 'Pas de résultats…'}
-              // loadingPlaceholder="Chargement…"
-              onBlur={onBlur}
+              noOptionsMessage={() => <FormattedMessage id="select.no-results" />}
+              loadingPlaceholder={intl.formatMessage({ id: 'global.loading' })}
+              onBlur={() => onBlur()}
               onFocus={onFocus}
               onChange={(newValue: OnChangeInput) => {
-                console.log(newValue);
-                // if (typeof onChange === 'function') {
-                //   onChange();
-                // }
+                if (typeof onChange === 'function') {
+                  onChange();
+                }
                 if (multi && Array.isArray(newValue)) {
                   return input.onChange(newValue);
                 }
                 if (!Array.isArray(newValue)) {
-                  console.log('test');
                   input.onChange(newValue ? newValue.value : '');
                 }
               }}
@@ -166,4 +159,4 @@ export class renderSelect extends React.Component<Props> {
   }
 }
 
-export default renderSelect;
+export default injectIntl(renderSelect);
