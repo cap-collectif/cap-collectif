@@ -85,7 +85,7 @@ export class NotificationsForm extends Component<Props> {
             {(consent_external_communication || consent_internal_communication) && (
               <React.Fragment>
                 <p className="notifications-app-title">
-                  <FormattedMessage id="Générales" />
+                  <FormattedMessage id="admin.label.settings.global" />
                 </p>
                 <Table className="notifications-table" striped>
                   <thead>
