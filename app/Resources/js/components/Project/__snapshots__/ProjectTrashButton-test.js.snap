@@ -4,14 +4,19 @@ exports[`<ProjectTrashButton /> should render correctly 1`] = `
 <div
   className="container text-center"
 >
-  <h3
+  <h2
     className="mt-0"
+    style={
+      Object {
+        "color": "black",
+      }
+    }
   >
     <FormattedMessage
       id="project.show.trashed.short_name"
       values={Object {}}
     />
-  </h3>
+  </h2>
   <p
     className="excerpt"
   >
