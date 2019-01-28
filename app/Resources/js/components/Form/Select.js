@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { HelpBlock } from 'react-bootstrap';
 import Select from 'react-select';
+import Async from 'react-select/lib/Async';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 
 type Options = Array<{ value: string, label: string }>;
@@ -44,7 +45,7 @@ const ClearIndicator = props => {
   );
 };
 
-export class renderSelect extends React.Component<Props> {
+class renderSelect extends React.Component<Props> {
   static defaultProps = {
     multi: false,
     disabled: false,
@@ -74,10 +75,22 @@ export class renderSelect extends React.Component<Props> {
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
 
-    const selectLabel =
-      options && options.filter(option => option && option.value && option.value === value);
+    let selectValue = null;
+    let selectLabel = null;
 
-    const selectValue = value ? selectLabel && selectLabel[0] : null;
+    if (multi) {
+      selectValue = [];
+      // selectLabel =
+      //   options && options.filter(option => option && option.value && option.value === value);
+      // selectValue = value ? selectLabel && selectLabel : null;
+    } else {
+      selectLabel =
+        options && options.filter(option => option && option.value && option.value === value);
+      selectValue = value ? selectLabel && selectLabel[0] : null;
+    }
+
+    console.log(this.props);
+    console.warn(loadOptions);
 
     return (
       <div className="form-group">
@@ -89,7 +102,7 @@ export class renderSelect extends React.Component<Props> {
         {help && <HelpBlock>{help}</HelpBlock>}
         <div id={id} className={inputClassName || ''}>
           {typeof loadOptions === 'function' ? (
-            <Select.Async
+            <Async
               filterOption={filterOptions}
               components={{ ClearIndicator }}
               isDisabled={disabled}
