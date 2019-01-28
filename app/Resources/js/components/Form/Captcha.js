@@ -11,7 +11,6 @@ export class Captcha extends React.PureComponent<Props> {
 
   render() {
     const { onChange } = this.props;
-
     return (
       <ReCAPTCHA
         ref={c => {

@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -157,27 +156,17 @@ class UsersController extends FOSRestController
     {
         /** @var User $user */
         $user = $this->getUser();
-        /** @var LoggerInterface $logger */
-        $logger = $this->get('logger');
-
         if (!$user || 'anon.' === $user) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
 
         if ($user->isEmailConfirmed() && !$user->getNewEmailToConfirm()) {
-            $logger->warning('Already confirmed.');
-
-            return new JsonResponse(['message' => 'Already confirmed.', 'code' => 400], 400);
+            throw new BadRequestHttpException('Already confirmed.');
         }
 
         // security against mass click email resend
         if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
-            $logger->warning('Email already sent less than a minute ago.');
-
-            return new JsonResponse(
-                ['message' => 'Email already sent less than a minute ago.', 'code' => 400],
-                400
-            );
+            throw new BadRequestHttpException('Email already sent less than a minute ago.');
         }
 
         if ($user->getNewEmailToConfirm()) {
@@ -198,18 +187,12 @@ class UsersController extends FOSRestController
      */
     public function postSendSmsConfirmationAction()
     {
-        /** @var User $user */
         $user = $this->getUser();
-        /** @var LoggerInterface $logger */
-        $logger = $this->get('logger');
-
         if (!$user || 'anon.' === $user) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
         if ($user->isPhoneConfirmed()) {
-            $logger->warning('Already confirmed.');
-
-            return new JsonResponse(['message' => 'Already confirmed.', 'code' => 400], 400);
+            throw new BadRequestHttpException('Already confirmed.');
         }
 
         if (!$user->getPhone()) {
@@ -244,19 +227,12 @@ class UsersController extends FOSRestController
      */
     public function postSmsConfirmationAction(Request $request)
     {
-        /** @var User $user */
         $user = $this->getUser();
-        /** @var LoggerInterface $logger */
-        $logger = $this->get('logger');
-
         if (!$user || 'anon.' === $user) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
-
         if ($user->isPhoneConfirmed()) {
-            $logger->warning('Already confirmed.');
-
-            return new JsonResponse(['message' => 'Already confirmed.', 'code' => 400], 400);
+            throw new BadRequestHttpException('Already confirmed.');
         }
 
         if (!$user->getSmsConfirmationCode()) {
