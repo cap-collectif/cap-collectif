@@ -102,7 +102,9 @@ class renderSelect extends React.Component<Props> {
               isDisabled={disabled}
               defaultOptions={autoload}
               isClearable={clearable}
-              placeholder={placeholder || 'Sélectionnez un élément ...'}
+              placeholder={
+                placeholder || <FormattedMessage id="admin.fields.menu_item.parent_empty" />
+              }
               loadOptions={loadOptions}
               onBlurResetsInput={false}
               cacheOptions
@@ -136,7 +138,9 @@ class renderSelect extends React.Component<Props> {
               filterOption={filterOptions}
               onBlurResetsInput={false}
               onCloseResetsInput={false}
-              placeholder={placeholder}
+              placeholder={
+                placeholder || <FormattedMessage id="admin.fields.menu_item.parent_empty" />
+              }
               isClearable={clearable}
               isMulti={multi}
               value={selectValue}
