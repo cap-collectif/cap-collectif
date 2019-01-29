@@ -109,12 +109,14 @@ class SectionAdmin extends AbstractAdmin
                 'label' => 'admin.fields.section.enabled',
                 'editable' => true,
             ])
+            ->add('createdAt', null, [
+                'label' => 'admin.fields.group.created_at',
+            ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.section.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
                     'edit' => [],
                     'delete' => [
                         'template' => 'CapcoAdminBundle:Section:list__action_delete.html.twig',
@@ -131,6 +133,7 @@ class SectionAdmin extends AbstractAdmin
         $fields = Section::$fieldsForType[$this->getSubject()->getType()];
         $subject = $this->getSubject();
 
+        $formMapper->with('admin.label.settings.global');
         if ($fields['title']) {
             $formMapper->add('title', null, [
                 'label' => 'admin.fields.section.title',
@@ -143,14 +146,6 @@ class SectionAdmin extends AbstractAdmin
             ]);
         }
 
-        $formMapper
-            ->add('enabled', null, [
-                'label' => 'admin.fields.section.enabled',
-                'required' => false,
-            ])
-            ->add('position', null, [
-                'label' => 'admin.fields.section.position',
-            ]);
         if ($fields['teaser']) {
             $formMapper->add('teaser', null, [
                 'label' => 'admin.fields.section.teaser',
@@ -180,6 +175,33 @@ class SectionAdmin extends AbstractAdmin
                 'choices_as_values' => true,
             ]);
         }
+        $formMapper->end();
+
+        if ($subject && 'metrics' === $subject->getType()) {
+            $formMapper
+                ->with('admin.label.section.display.metrics')
+                ->add('metricsToDisplayBasics', null, [
+                    'label' => 'admin.fields.section.basicsMetrics',
+                ])
+                ->add('metricsToDisplayEvents', null, [
+                    'label' => 'admin.fields.section.eventsMetrics',
+                ])
+                ->add('metricsToDisplayProjects', null, [
+                    'label' => 'admin.fields.section.projectsMetrics',
+                ])
+                ->end();
+        }
+
+        $formMapper
+            ->with('admin.label.section.publication')
+            ->add('position', null, [
+                'label' => 'admin.fields.section.position',
+            ])
+            ->add('enabled', null, [
+                'label' => 'admin.fields.section.enabled',
+                'required' => false,
+            ])
+            ->end();
     }
 
     /**

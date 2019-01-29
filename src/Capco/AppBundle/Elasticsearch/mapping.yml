@@ -76,6 +76,16 @@ mappings:
               id: { type: keyword }
           count:
             type: long
+      totalContributionsCount:
+        type: nested
+        properties:
+          contribution:
+            type: object
+            properties:
+              id: { type: keyword }
+          count:
+            type: long
+
   argument:
     properties:
       id: { type: keyword }

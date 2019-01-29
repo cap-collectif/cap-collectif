@@ -152,6 +152,18 @@ class HomepageController extends Controller
     }
 
     /**
+     * @Template("CapcoAppBundle:Homepage:metrics.html.twig")
+     */
+    public function metricsSectionAction(Section $section = null)
+    {
+        $props = $this->serializer->serialize($section, 'json', [
+            'groups' => ['Section'],
+        ]);
+
+        return ['section' => $section, 'props' => $props];
+    }
+
+    /**
      * @Template("CapcoAppBundle:Homepage:videos.html.twig")
      */
     public function lastVideosAction(int $max = null, int $offset = null, Section $section = null)

@@ -2,7 +2,7 @@
 /* @flow */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { DateDropdownPicker } from './DateDropdownPicker';
+import DateDropdownPicker from './DateDropdownPicker';
 
 describe('<DateDropdownPicker />', () => {
   const props = {

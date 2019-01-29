@@ -8,6 +8,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class AbstractVoteRepository extends EntityRepository
 {
@@ -38,6 +39,21 @@ class AbstractVoteRepository extends EntityRepository
             ->setParameter('author', $user);
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function findAllVotes(int $limit, int $offset): Paginator
+    {
+        $qb = $this->createQueryBuilder('v');
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return new Paginator($qb);
     }
 
     /**

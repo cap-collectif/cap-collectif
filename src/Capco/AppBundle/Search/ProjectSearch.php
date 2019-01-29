@@ -6,6 +6,7 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Exists;
+use Elastica\Aggregation;
 use Elastica\Query\Term;
 use Elastica\Result;
 
@@ -85,6 +86,23 @@ class ProjectSearch extends Search
             'count' => $resultSet->getTotalHits(),
             'order' => $order,
         ];
+    }
+
+    public function getAllContributions(): int
+    {
+        $query = new Query();
+        $allContributionsAggQuery = new Aggregation\Terms('contributionsCount');
+        $allContributionsAggQuery->setField('contributionsCount');
+        $query->addAggregation($allContributionsAggQuery);
+        $resultSet = $this->index->getType($this->type)->search($query);
+
+        $totalCount = array_sum(
+            array_map(function (array $result) {
+                return $result['key'] * $result['doc_count'];
+            }, $resultSet->getAggregation('contributionsCount')['buckets'])
+        );
+
+        return $totalCount ?: 0;
     }
 
     private function getHydratedResults(array $ids): array

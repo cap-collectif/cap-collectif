@@ -30,7 +30,7 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
     if (!viewer || !viewer.proposalVotes) {
       return true;
     }
-    const { creditsLeft } = viewer.proposalVotes;
+    const creditsLeft = viewer.proposalVotes.creditsLeft;
     if (creditsLeft !== null && typeof creditsLeft !== 'undefined' && proposal.estimation) {
       return creditsLeft >= proposal.estimation;
     }

@@ -91,7 +91,8 @@
             {% include '@CapcoApp/Homepage/custom_section.html.twig' with {'section': section} only %}
         {% elseif section.type == 'proposals' %}
             {{ render(controller('CapcoAppBundle:Site/Homepage:lastProposals', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
-        {% elseif section.type == 'figures' %}
+        {% elseif section.type == 'metrics' %}
+            {{ render(controller('CapcoAppBundle:Site/Homepage:metricsSection', {'section': section})) }}
         {% endif %}
 
     {% endfor %}

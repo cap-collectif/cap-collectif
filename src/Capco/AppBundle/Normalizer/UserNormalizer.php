@@ -77,8 +77,23 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                     ];
                 }
             }
+
             $data['contributionsCountByProject'] = $contributionsCountByProject;
             $data['contributionsCountByStep'] = $contributionsCountByStep;
+            $data['totalContributionsCount'] = array_merge(
+                $data['contributionsCountByProject'],
+                $data['contributionsCountByStep']
+            );
+
+            array_walk($data['totalContributionsCount'], function (&$item) {
+                if (isset($item['step'])) {
+                    $item['contribution'] = $item['step'];
+                    unset($item['step']);
+                } else {
+                    $item['contribution'] = $item['project'];
+                    unset($item['project']);
+                }
+            });
         }
 
         $links = [

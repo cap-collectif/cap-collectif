@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { SiteFaviconAdminPage } from './SiteFaviconAdminPage';
+import SiteFaviconAdminPage from './SiteFaviconAdminPage';
 
 describe('<SiteFaviconAdminPage />', () => {
   it('renders correctly', () => {

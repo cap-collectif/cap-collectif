@@ -38,7 +38,7 @@ class OpinionAppendix extends React.Component<Props, State> {
   };
 
   renderContent = () => {
-    const { appendix } = this.props;
+    const appendix = this.props.appendix;
     const style = this.state.expanded ? { marginBottom: '15px' } : {};
     return (
       <Panel
@@ -56,7 +56,7 @@ class OpinionAppendix extends React.Component<Props, State> {
   };
 
   render() {
-    const { appendix } = this.props;
+    const appendix = this.props.appendix;
 
     if (!appendix.body) {
       return null;

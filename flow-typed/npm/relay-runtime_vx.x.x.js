@@ -3,7 +3,6 @@ import type { RecordProxy } from 'react-relay';
 declare module 'relay-runtime' {
   
   declare export type ConcreteFragment = any;
-  declare export type ReaderFragment = any;
   declare export type FragmentReference = any;
   declare export type ConcreteRequest = any;
   declare export type RequestNode = any;
