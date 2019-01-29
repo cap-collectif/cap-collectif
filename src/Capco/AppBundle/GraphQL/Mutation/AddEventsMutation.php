@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Form\EventType;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -19,7 +19,7 @@ class AddEventsMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         UserRepository $userRepo
     ) {
         $this->em = $em;

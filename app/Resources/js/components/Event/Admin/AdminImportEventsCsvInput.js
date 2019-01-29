@@ -33,6 +33,8 @@ export const HEADERS = [
   'link',
 ];
 
+const CSV_MAX_UPLOAD_SIZE = 8000000; // 8 Mo
+
 export const AdminImportEventsCsvInput = ({
   input,
   meta: { asyncValidating, valid },
@@ -56,7 +58,7 @@ export const AdminImportEventsCsvInput = ({
       <FileUpload
         name={input.name}
         accept="text/csv"
-        maxSize={26000}
+        maxSize={CSV_MAX_UPLOAD_SIZE}
         inputProps={{ id: 'csv-file_field' }}
         minSize={1}
         disabled={disabled}
