@@ -100,13 +100,6 @@ export default createPaginationContainer(
               startAt
               endAt
               title
-              author {
-                username
-                url
-                media {
-                  url
-                }
-              }
             }
           }
         }

@@ -23,22 +23,13 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 class ProfileController extends Controller
 {
     /**
-     * @Route("/edit-profile", name="capco_profile_edit", defaults={"_feature_flags" = "profiles"})
+     * @Route("/edit-profile", name="capco_profile_edit")
      * @Template("CapcoUserBundle:Profile:edit_profile.html.twig")
      * @Security("has_role('ROLE_USER')")
      */
     public function editProfileAction()
     {
         return [];
-    }
-
-    /**
-     * @Route("/edit-account", name="capco_profile_edit_account")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function editAccountAction()
-    {
-        return $this->redirectToRoute('capco_profile_edit');
     }
 
     /**
