@@ -79,12 +79,12 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
                           }
                         }
                       `,
-                }).then(response => ({
-                  options: response.data.groups.map(group => ({
+                }).then(response =>
+                  response.data.groups.map(group => ({
                     value: group.id,
                     label: group.title,
                   })),
-                }))
+                )
               }
             />
             <ButtonToolbar className="box-content__toolbar">

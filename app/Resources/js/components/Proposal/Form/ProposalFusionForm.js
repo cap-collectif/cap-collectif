@@ -106,13 +106,12 @@ export class ProposalFusionForm extends React.Component<Props> {
             }
             loadOptions={input =>
               fetchQuery(environment, query, { term: input, stepId: currentCollectStep.id }).then(
-                res => ({
-                  options: res.step.proposals.edges.map(edge => ({
+                res =>
+                  res.step.proposals.edges.map(edge => ({
                     value: edge.node.id,
                     label: edge.node.title,
                     stepId: currentCollectStep.id,
                   })),
-                }),
               )
             }
           />

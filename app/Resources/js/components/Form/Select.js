@@ -3,7 +3,7 @@ import * as React from 'react';
 import { HelpBlock } from 'react-bootstrap';
 import Select from 'react-select';
 import Async from 'react-select/lib/Async';
-import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 type Options = Array<{ value: string, label: string }>;
 type Value = string | Array<{ value: string }>;
@@ -16,7 +16,6 @@ type Props = {
     onChange: (value: Value) => void,
     onFocus: () => void,
   },
-  intl: IntlShape,
   id: string,
   meta: { touched: boolean, error: ?string },
   label: string | React.Node,
@@ -70,7 +69,6 @@ class renderSelect extends React.Component<Props> {
       filterOptions,
       id,
       help,
-      intl,
       meta: { touched, error },
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
@@ -79,18 +77,14 @@ class renderSelect extends React.Component<Props> {
     let selectLabel = null;
 
     if (multi) {
-      selectValue = [];
-      // selectLabel =
-      //   options && options.filter(option => option && option.value && option.value === value);
-      // selectValue = value ? selectLabel && selectLabel : null;
+      selectLabel =
+        options && options.filter(option => option && option.value && option.value === value);
+      selectValue = value ? selectLabel && selectLabel : [];
     } else {
       selectLabel =
         options && options.filter(option => option && option.value && option.value === value);
       selectValue = value ? selectLabel && selectLabel[0] : null;
     }
-
-    console.log(this.props);
-    console.warn(loadOptions);
 
     return (
       <div className="form-group">
@@ -108,16 +102,16 @@ class renderSelect extends React.Component<Props> {
               isDisabled={disabled}
               defaultOptions={autoload}
               isClearable={clearable}
-              placeholder={placeholder}
+              placeholder={placeholder || 'Sélectionnez un élément ...'}
               loadOptions={loadOptions}
               onBlurResetsInput={false}
+              cacheOptions
               onCloseResetsInput={false}
               value={selectValue}
               name={name}
               isMulti={multi}
-              options={options}
               noOptionsMessage={() => <FormattedMessage id="select.no-results" />}
-              loadingPlaceholder={intl.formatMessage({ id: 'global.loading' })}
+              loadingMessage={() => <FormattedMessage id="global.loading" />}
               onBlur={() => onBlur()}
               onFocus={onFocus}
               onChange={(newValue: OnChangeInput) => {
@@ -147,7 +141,7 @@ class renderSelect extends React.Component<Props> {
               isMulti={multi}
               value={selectValue}
               noOptionsMessage={() => <FormattedMessage id="select.no-results" />}
-              loadingPlaceholder={intl.formatMessage({ id: 'global.loading' })}
+              loadingMessage={() => <FormattedMessage id="global.loading" />}
               onBlur={() => onBlur()}
               onFocus={onFocus}
               onChange={(newValue: OnChangeInput) => {
@@ -170,4 +164,4 @@ class renderSelect extends React.Component<Props> {
   }
 }
 
-export default injectIntl(renderSelect);
+export default renderSelect;

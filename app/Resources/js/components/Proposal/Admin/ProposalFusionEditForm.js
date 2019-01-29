@@ -95,8 +95,8 @@ export class ProposalFusionEditForm extends React.Component<Props> {
           component={select}
           clearable={false}
           loadOptions={(input: string) =>
-            fetchQuery(environment, query, { term: input, stepId }).then(res => ({
-              options: res.step.proposals.edges
+            fetchQuery(environment, query, { term: input, stepId }).then(res =>
+              res.step.proposals.edges
                 .map(edge => ({
                   value: edge.node.id,
                   label: edge.node.title,
@@ -108,7 +108,7 @@ export class ProposalFusionEditForm extends React.Component<Props> {
                     label: p.title,
                   })),
                 ),
-            }))
+            )
           }
         />
       </form>
