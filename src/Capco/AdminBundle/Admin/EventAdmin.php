@@ -98,7 +98,7 @@ class EventAdmin extends AbstractAdmin
             ->add('enabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
             ])
-            ->add('commentable', null, [
+            ->add('isCommentable', null, [
                 'label' => 'admin.fields.event.is_commentable',
             ])
             ->add('updatedAt', null, [
@@ -146,7 +146,7 @@ class EventAdmin extends AbstractAdmin
                 'label' => 'admin.fields.event.is_enabled',
                 'editable' => true,
             ])
-            ->add('commentable', null, [
+            ->add('isCommentable', null, [
                 'label' => 'admin.fields.event.is_commentable',
                 'editable' => true,
             ])
@@ -269,7 +269,7 @@ class EventAdmin extends AbstractAdmin
                 'label' => 'admin.fields.event.is_enabled',
                 'required' => false,
             ])
-            ->add('commentable', null, [
+            ->add('isCommentable', null, [
                 'label' => 'admin.fields.event.is_commentable',
                 'required' => false,
             ])
@@ -352,7 +352,7 @@ class EventAdmin extends AbstractAdmin
             ->add('enabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
             ])
-            ->add('commentable', null, [
+            ->add('isCommentable', null, [
                 'label' => 'admin.fields.event.is_commentable',
             ])
             ->add('commentsCount', null, [

@@ -297,16 +297,6 @@ export default createFragmentContainer(
         userType: { type: "ID" }
         isFuture: { type: "Boolean" }
       ) {
-      ...EventListFilters_query
-        @arguments(
-          cursor: $cursor
-          count: $count
-          search: $search
-          theme: $theme
-          project: $project
-          userType: $userType
-          isFuture: $isFuture
-        )
       ...EventListCounter_query
         @arguments(
           cursor: $cursor

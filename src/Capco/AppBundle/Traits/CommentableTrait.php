@@ -21,7 +21,7 @@ trait CommentableTrait
      *
      * @ORM\Column(name="is_commentable", type="boolean")
      */
-    private $commentable = true;
+    private $isCommentable = true;
 
     public function increaseCommentsCount($nb)
     {
@@ -77,12 +77,12 @@ trait CommentableTrait
 
     public function isCommentable(): bool
     {
-        return $this->commentable ?? false;
+        return $this->isCommentable ?? false;
     }
 
-    public function setCommentable(bool $commentable): self
+    public function setIsCommentable(bool $isCommentable): self
     {
-        $this->commentable = $commentable;
+        $this->isCommentable = $isCommentable;
 
         return $this;
     }
