@@ -9,7 +9,7 @@ class MailCatcherContext extends Base
     /**
      * @Then email should match snapshot :file
      */
-    public function emailContentShouldMatch($file, $writeSnapshot = false)
+    public function emailContentShouldMatch($file, $writeSnapshot = true)
     {
         $message = $this->getCurrentMessage();
 
