@@ -80,5 +80,5 @@ Version:
       diff:
         type: 'HTML'
       project:
-        type: 'Project'
+        type: 'InternalProject'
         description: 'The related project.'

@@ -1,7 +1,7 @@
 ProposalVoteConnection:
   type: relay-connection
   config:
-    nodeType: ProposalVote!
+    nodeType: InternalProposalVote!
     connectionFields:
       totalCount:
         type: Int!
