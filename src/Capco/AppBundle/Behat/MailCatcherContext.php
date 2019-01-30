@@ -9,7 +9,7 @@ class MailCatcherContext extends Base
     /**
      * @Then email should match snapshot :file
      */
-    public function emailContentShouldMatch($file, $writeSnapshot = true)
+    public function emailContentShouldMatch($file, $writeSnapshot = false)
     {
         $message = $this->getCurrentMessage();
 
@@ -24,10 +24,16 @@ class MailCatcherContext extends Base
         }
 
         if ($writeSnapshot) {
-            $newSnapshot =
-                fopen(__DIR__ . '/snapshots/' . $file, 'wb') || die('Unable to open file!');
-            fwrite($newSnapshot, $content);
-            fclose($newSnapshot);
+            try {
+                $newSnapshot = fopen(__DIR__ . '/snapshots/' . $file, 'wb');
+                fwrite($newSnapshot, $content);
+                fclose($newSnapshot);
+            } catch (\Exception $e) {
+                throw $e;
+            }
+            sprintf('Snapshot written for mail "%s", you can now relaunch the testsuite.', $file);
+
+            return false;
         }
 
         try {
