@@ -17,7 +17,7 @@ InternalEvent:
       themes:
         type: '[Theme!]!'
       projects:
-        type: '[InternalProject!]!'
+        type: '[Project!]!'
       author:
         type: 'InternalUser!'
       commentable:

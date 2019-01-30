@@ -1,7 +1,9 @@
 PrivatableVote:
   type: interface
+  inherits:
+    - Vote
+    - Publishable
   config:
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", [value])'
     fields:
       private:
         type: 'Boolean'
