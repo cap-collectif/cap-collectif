@@ -2,5 +2,5 @@ PostRelatedContent:
   type: union
   config:
     description: 'A related content for a post'
-    types: [Theme, Proposal, Project]
+    types: [Theme, Proposal, InternalProject]
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentTypeResolver", [value])'

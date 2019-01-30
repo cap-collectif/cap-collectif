@@ -1,0 +1,17 @@
+PreviewProposalVote:
+  type: object
+  inherits:
+    - Publishable
+    - PrivatableVote
+    - PreviewVote
+  config:
+    name: ProposalVote
+    interfaces:
+      - PreviewVote
+      - Publishable
+      - PrivatableVote
+    fields:
+      anonymous:
+        type: 'Boolean!'
+        description: 'Is the vote anonymous ?'
+        resolve: '@=value.isPrivate()'

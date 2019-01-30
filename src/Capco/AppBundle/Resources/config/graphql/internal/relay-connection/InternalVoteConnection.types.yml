@@ -1,7 +1,8 @@
-ProjectConnection:
+InternalVoteConnection:
   type: relay-connection
   config:
-    nodeType: Project!
+    name: VoteConnection
+    nodeType: InternalVote
     connectionFields:
       totalCount:
         type: Int!

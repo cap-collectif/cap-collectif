@@ -63,7 +63,7 @@
           {% block graphql_fetcher_headers %}
           headers = {
             {# Preview schema is enabled by default, maybe we should add a toggle #}
-            {% if not isInternal %}
+            {% if isInternal == false %}
             "Accept": "application/vnd.cap-collectif.preview+json",
             {% endif %}
             "Content-Type": "application/json",

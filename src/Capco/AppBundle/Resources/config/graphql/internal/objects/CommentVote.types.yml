@@ -1,12 +1,12 @@
 CommentVote:
   type: object
   inherits:
-    - Vote
+    - InternalVote
     - Publishable
   config:
     interfaces:
       - Node
-      - Vote
+      - InternalVote
       - Publishable
     fields:
       contribution:

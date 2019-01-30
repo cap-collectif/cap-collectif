@@ -1,8 +1,11 @@
-PrivatableVote:
+PreviewVote:
   type: interface
   config:
+    name: Vote
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", [value])'
     fields:
-      private:
-        type: 'Boolean'
-        description: 'Anonymous or not.'
+      id:
+        type: 'ID!'
+      createdAt:
+        type: 'DateTime!'
+        description: 'Date of vote.'

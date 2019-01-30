@@ -3074,35 +3074,7 @@ type PresentationStep implements Step {
   body: HTML
 }
 
-# Entities that can be published.
 interface PrivatableVote {
-  # The ID of an object
-  id: ID!
-
-  # Date of vote.
-  createdAt: DateTime!
-
-  # The author of the contribution.
-  author: User
-
-  # The contribution that was voted.
-  related: Contribution
-
-  # Returns Type of vote
-  kind: String!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
   # Anonymous or not.
   private: Boolean
 }
@@ -3122,26 +3094,30 @@ input ProgressStepInput {
 }
 
 # A participatory project.
-type Project implements Node & UniformResourceLocatable & UniformResourceAdminLocatable {
+type Project implements UniformResourceLocatable & UniformResourceAdminLocatable & Node {
   # The ID of an object
   id: ID!
 
   # The URL to this resource.
   url: URI!
 
-  # The admin URL to this resource.
-  adminUrl: URI!
-  steps: [Step!]!
+  # The title of the project.
   title: String!
-  author: User!
-  video: String
-  cover: Media
-  contributionsCount: Int!
-  votes: VoteConnection!
-  hasParticipativeStep: Boolean!
-  links: ProjectLinks!
-  type: ProjectType
-  themes: [Theme!]
+
+  # A list of votes associated with the project.
+  votes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): VoteConnection!
 
   # A list of contributor associated with the project.
   contributors(
@@ -3157,6 +3133,18 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     # Returns the last `n` elements from the list.
     last: Int
   ): UserConnection!
+
+  # The admin URL to this resource.
+  adminUrl: URI!
+  steps: [Step!]!
+  author: User!
+  video: String
+  cover: Media
+  contributionsCount: Int!
+  hasParticipativeStep: Boolean!
+  links: ProjectLinks!
+  type: ProjectType
+  themes: [Theme!]
   votableSteps: [ProposalStep!]!
 
   # The visibility of project
@@ -3920,8 +3908,14 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
+  # Anonymous or not.
+  private: Boolean
+
   # Date of vote.
   createdAt: DateTime!
+
+  # Is the vote anonymous ?
+  anonymous: Boolean!
 
   # The author of the contribution. If null, the vote is anonymous.
   author: User
@@ -3931,12 +3925,6 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
 
   # Returns 'proposalVote'.
   kind: String!
-
-  # Anonymous or not.
-  private: Boolean
-
-  # Is the vote anonymous ?
-  anonymous: Boolean!
 
   # Return the proposal.
   proposal: Proposal!
