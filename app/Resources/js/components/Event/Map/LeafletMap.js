@@ -14,6 +14,7 @@ import type { GlobalState, Dispatch } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 import type { MapTokens } from '../../../redux/modules/user';
 import type { MapOptions } from '../../Proposal/Map/LeafletMap';
+import { UserAvatar } from '../../User/UserAvatar';
 
 type Props = {|
   markers: Object | '',
@@ -142,10 +143,20 @@ export class LeafletMap extends Component<Props> {
                           */}
                         {/* <Provider store={ReactOnRails.getStore('appStore')}>
                           <IntlProvider> */}
-                        <div>
-                          <h4>
-                            <a href={marker.url}>{marker.title}</a>
-                          </h4>
+                            <div>
+                              <h2>
+                                <a href={marker.url}>{marker.title}</a>
+                              </h2>
+                              {marker.author && marker.author.username && (
+                                <p className="excerpt">
+                                  <div>
+                                    <UserAvatar size={16} user={marker.author} className="mr-10" />
+                                    <span className="font-weight-semi-bold">
+                                      {marker.author.username}
+                                    </span>
+                                  </div>
+                                </p>
+                              )}
                           {/* <p className="excerpt">
                                 <i className="cap-calendar-1 mr-10" />
                                 <DatesInterval

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -81,12 +82,8 @@ class UserSearch extends Search
             ->setSize($limit);
         $resultSet = $this->index->getType('user')->search($query);
 
-        $ids = array_map(function (Result $result) {
-            return $result->getData()['id'];
-        }, $resultSet->getResults());
-
         return [
-            'results' => $this->getHydratedResults($ids),
+            'results' => $this->getHydratedResults($resultSet->getResults()),
             'totalCount' => $resultSet->getTotalHits(),
         ];
     }
@@ -118,27 +115,25 @@ class UserSearch extends Search
             ->setSize($limit);
         $resultSet = $this->index->getType('user')->search($query);
 
-        $ids = array_map(function (Result $result) {
-            return $result->getData()['id'];
-        }, $resultSet->getResults());
-
         return [
-            'results' => $this->getHydratedResults($ids),
-            'count' => $resultSet->getTotalHits(),
+            'results' => $this->getHydratedResults($resultSet->getResults()),
+            'totalCount' => $resultSet->getTotalHits(),
         ];
     }
 
-    private function getHydratedResults(array $ids): array
+    private function getHydratedResults(array $results): array
     {
         // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        $users = $this->userRepo->hydrateFromIds($ids);
-        // We have to restore the correct order of ids, because Doctrine has lost it, see:
-        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        usort($users, function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
-
-        return $users;
+        return array_values(
+            array_filter(
+                array_map(function (Result $result) {
+                    return $this->userRepo->findOneBy(['id' => $result->getData()['id']]);
+                }, $results),
+                function (?User $user) {
+                    return null !== $user;
+                }
+            )
+        );
     }
 }
