@@ -53,15 +53,4 @@ describe('<ProposalPageTabs />', () => {
     const wrapper = shallow(<ProposalPageTabs proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('should render without blog tab', () => {
-    const proposalWithoutBlogTab = {
-      ...proposal,
-      news: {
-        totalCount: 0,
-      },
-    };
-    const wrapper = shallow(<ProposalPageTabs proposal={proposalWithoutBlogTab} {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
 });

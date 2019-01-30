@@ -30,32 +30,6 @@ exports[`<NavbarRight /> should render correctly 1`] = `
       bsClass="dropdown"
       disabled={false}
       divider={false}
-      eventKey={3.4}
-      header={false}
-      href="/profile/edit-profile#account"
-      key="3.4"
-    >
-      <i
-        aria-hidden="true"
-        className="cap cap-setting-adjustment mr-10"
-      />
-      <FormattedMessage
-        id="navbar.user_settings"
-        values={Object {}}
-      />
-    </MenuItem>
-    <MenuItem
-      aria-hidden="true"
-      bsClass="dropdown"
-      disabled={false}
-      divider={true}
-      header={false}
-      key="3.5"
-    />
-    <MenuItem
-      bsClass="dropdown"
-      disabled={false}
-      divider={false}
       eventKey={3.6}
       header={false}
       id="logout-button"
@@ -64,7 +38,12 @@ exports[`<NavbarRight /> should render correctly 1`] = `
     >
       <i
         aria-hidden="true"
-        className="cap cap-power-1 mr-10"
+        className="cap cap-power-1"
+        style={
+          Object {
+            "marginRight": 10,
+          }
+        }
       />
       <FormattedMessage
         id="global.logout"

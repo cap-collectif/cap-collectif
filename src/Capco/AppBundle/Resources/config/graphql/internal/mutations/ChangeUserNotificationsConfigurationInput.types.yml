@@ -6,9 +6,3 @@ ChangeUserNotificationsConfigurationInput:
       onProposalCommentMail:
         type: 'Boolean!'
         description: 'The new proposal comment notification value'
-      consentExternalCommunication:
-        type: 'Boolean!'
-        description: 'The new external consent for communication'
-      consentInternalCommunication:
-        type: 'Boolean!'
-        description: 'The new internal consent for communication'

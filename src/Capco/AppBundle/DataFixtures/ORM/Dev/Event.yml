@@ -209,6 +209,3 @@ Capco\AppBundle\Entity\Event:
     startAt: <dateTimeBetween('+10 days', '+50 days')>
     author: '@user<numberBetween(1, 5)>'
     link: http://www.lavie.fr
-    zipCode: '07400'
-    city: Meysse
-    address: 1 rue chevrière
