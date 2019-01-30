@@ -185,3 +185,70 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     title: J'ai plusieurs choix?
     required: false
     type: 3 # radio
+  multiplequestionHapNoelProposalForm15:
+    id: 50
+    title: Hap ou Noel ?
+    required: true
+    type: 4 # select
+  multiplequestionHapCreationProposalForm15:
+    id: 51
+    title: Par qui Hap a t-il été créé ?
+    type: 4 # select
+  multiplequestionIsHapGoodProposalForm15:
+    id: 52
+    title: Hap est-il un homme bon ?
+    type: 4 # select
+  multiplequestionNoelFeteProposalForm15:
+    id: 53
+    title: Noel a t-il un rapport avec la fête de Noël ?
+    type: 4 # select
+  multiplequestionNoelHatColorProposalForm15:
+    id: 54
+    title: De quelle couleur est le chapeau de Noël ?
+    type: 4 # select
+  multiplequestionMarvelOrDcProposalForm15:
+    id: 55
+    title: Plutôt Marvel ou DC ?
+    type: 4 # select
+  multiplequestionDcSupermanLikeProposalForm15:
+    id: 56
+    title: T'aimes bien Superman ?
+    type: 4 # select
+  multiplequestionDcBatmanLikeProposalForm15:
+    id: 57
+    title: T'aimes bien Batman ?
+    type: 4 # select
+  multiplequestionDcSupergirlLikeProposalForm15:
+    id: 58
+    title: T'aimes bien Supergirl ?
+    type: 4 # select
+  multiplequestionMarvelIronManLikeProposalForm15:
+    id: 59
+    title: T'aimes bien Iron Man ?
+    type: 4 # select
+  multiplequestionMarvelLukeCageLikeProposalForm15:
+    id: 60
+    title: T'aimes bien Luke Cage ?
+    type: 4 # select
+  multiplequestionMarvelThorLikeProposalForm15:
+    id: 61
+    title: T'aimes bien Thor ?
+    type: 4 # select
+  multiplequestionEndConditionelProposalForm15:
+    id: 62
+    title: C'est la fin mais j'affiche quand même des choix
+    type: 4 # select
+  multiplequestionFavoriteFleuveProposalForm15:
+    id: 63
+    title: Votre fleuve préféré
+    required: true
+    type: 4 # select
+  multiplequestionHapGangeProposalForm15:
+    id: 64
+    title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
+    required: false
+    type: 4 # select
+  multiplequestionHapNotGoodHowDareYouProposalForm15:
+    id: 65
+    title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
+    type: 4 # select
