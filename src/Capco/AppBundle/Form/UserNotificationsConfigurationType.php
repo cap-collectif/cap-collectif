@@ -12,7 +12,9 @@ class UserNotificationsConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('onProposalCommentMail', CheckboxType::class);
+            ->add('onProposalCommentMail', CheckboxType::class)
+            ->add('consentExternalCommunication', CheckboxType::class)
+            ->add('consentInternalCommunication', CheckboxType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

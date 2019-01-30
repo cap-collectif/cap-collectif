@@ -64,7 +64,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     private $endAt;
 
     /**
-     * @ORM\Column(name="zipCode", type="integer", nullable=true)
+     * @ORM\Column(name="zipCode", type="string", nullable=true)
      */
     private $zipCode;
 
@@ -235,14 +235,14 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this->author;
     }
 
-    public function setZipCode(?int $zipCode): self
+    public function setZipCode(?string $zipCode): self
     {
         $this->zipCode = $zipCode;
 
         return $this;
     }
 
-    public function getZipCode(): ?int
+    public function getZipCode(): ?string
     {
         return $this->zipCode;
     }

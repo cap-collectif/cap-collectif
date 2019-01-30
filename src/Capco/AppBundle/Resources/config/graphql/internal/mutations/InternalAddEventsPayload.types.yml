@@ -1,0 +1,8 @@
+InternalAddEventsPayload:
+  type: relay-mutation-payload
+  config:
+    name: AddEventsPayload
+    fields:
+      importedEvents:
+        type: '[InternalEvent!]!'
+        description: 'List of imported events.'

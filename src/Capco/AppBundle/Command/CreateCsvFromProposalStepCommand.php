@@ -905,14 +905,16 @@ EOF;
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_COMMENT_VOTE_HEADER_MAP[$columnName])) {
                 $value = Arr::path($vote, self::PROPOSAL_COMMENT_VOTE_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $cleanValue = Text::cleanNewline($value);
+                $row[] = exportUtils::parseCellValue($cleanValue);
             } elseif (isset($this->proposalHeaderMap[$columnName])) {
                 // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
             } elseif (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
                 // copy comment row
                 $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $cleanValue = Text::cleanNewline($value);
+                $row[] = exportUtils::parseCellValue($cleanValue);
             } else {
                 $row[] = '';
             }

@@ -473,6 +473,7 @@ services:
         }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
+      - [setTemplate, [list, CapcoAdminBundle:Event:list.html.twig]]
 
   capco_admin.admin.video:
     class: Capco\AdminBundle\Admin\VideoAdmin

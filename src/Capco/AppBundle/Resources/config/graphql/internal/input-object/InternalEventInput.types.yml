@@ -1,0 +1,39 @@
+InternalEventInput:
+  type: input-object
+  config:
+    name: EventInput
+    fields:
+      title:
+        type: 'String!'
+      body:
+        type: 'String!'
+      startAt:
+        type: 'String'
+      endAt:
+        type: 'String'
+      authorEmail:
+        type: 'String!'
+      themes:
+        type: '[ID!]!'
+      projects:
+        type: '[ID!]!'
+      link:
+        type: 'String'
+      registrationEnable:
+        type: 'Boolean!'
+      enabled:
+        type: 'Boolean!'
+      commentable:
+        type: 'Boolean!'
+      zipCode:
+        type: 'String'
+      address:
+        type: 'String'
+      metaDescription:
+        type: 'String'
+      customCode:
+        type: 'String'
+      city:
+        type: 'String'
+      country:
+        type: 'String'
