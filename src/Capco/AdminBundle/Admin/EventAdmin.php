@@ -13,7 +13,6 @@ use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class EventAdmin extends AbstractAdmin
@@ -280,7 +279,7 @@ class EventAdmin extends AbstractAdmin
                 'required' => false,
                 'help' => 'admin.help.event.adress',
             ])
-            ->add('zipCode', NumberType::class, [
+            ->add('zipCode', null, [
                 'label' => 'admin.fields.event.zipcode',
                 'required' => false,
             ])
