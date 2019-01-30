@@ -73,7 +73,11 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('Section');
         }
         if ($node instanceof Proposal) {
-            return $this->typeResolver->resolve('Proposal');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewProposal');
+            }
+
+            return $this->typeResolver->resolve('InternalProposal');
         }
         if ($node instanceof OpinionVersion) {
             return $this->typeResolver->resolve('Version');

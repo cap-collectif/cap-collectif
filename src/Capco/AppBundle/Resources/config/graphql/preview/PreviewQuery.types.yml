@@ -7,13 +7,14 @@ PreviewQuery:
     description: 'Root of the schema.'
     fields:
       projects:
-        type: 'ProjectPreviewConnection!'
+        type: 'PreviewProjectConnection!'
         description: 'Lookup projects.'
         argsBuilder: 'Relay::Connection'
         args:
           orderBy:
             type: 'ProjectOrder'
             defaultValue: { field: LATEST, direction: DESC }
+            description: 'Ordering options for projects returning from the connection.'
           term:
             type: 'String'
             description: 'If non-null, projects with the given string to look for.'

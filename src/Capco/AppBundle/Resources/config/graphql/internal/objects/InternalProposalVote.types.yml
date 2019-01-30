@@ -13,7 +13,7 @@ InternalProposalVote:
       - PrivatableVote
     fields:
       proposal:
-        type: 'Proposal!'
+        type: 'InternalProposal!'
         description: 'Return the proposal.'
       step:
         type: 'ProposalStep!'

@@ -51,6 +51,7 @@ overblog_graphql:
           - PreviewProject
           - PreviewEvent
           - PreviewProposalVote
+          - PreviewProposal
       # This is our internal schema (used by our clients)
       internal:
         query: InternalQuery

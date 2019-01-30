@@ -36,8 +36,12 @@
       </div>
     {% else %}
       {% if app.user %}
-        Sorry, we could not find an API key for your account <strong>{{app.user.username}}</strong>. Contact <email>coucou@cap-collectif.com</email>. Your API requests are not authenticated.
+        Sorry, we could not find an API key for your account <strong>{{app.user.username}}</strong>. 
+        <br />
+        Your API requests are <strong>not authenticated</strong>. Contact <a href="mailto:coucou@cap-collectif.com">coucou@cap-collectif.com</a> if you need to use authenticated requests (but you probably don't !). 
        {% else %}
+        Your API requests are <strong>not authenticated</strong>.
+        <br />
         Start exploring GraphQL API queries using your account by <strong>logging in</strong>. 
        {% endif %}
     {% endif %}

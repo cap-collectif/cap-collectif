@@ -1,4 +1,4 @@
-ProjectPreviewConnection:
+PreviewProjectConnection:
   type: relay-connection
   config:
     name: ProjectConnection

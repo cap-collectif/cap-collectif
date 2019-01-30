@@ -3,5 +3,5 @@ CreateProposalPayload:
   config:
     fields:
       proposal:
-        type: 'Proposal'
+        type: 'InternalProposal'
         description: 'The created proposal, if everything goes well !'
