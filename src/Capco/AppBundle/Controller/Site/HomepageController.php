@@ -53,18 +53,28 @@ class HomepageController extends Controller
             $form->handleRequest($request);
 
             if ($form->isSubmitted()) {
+                // We create a session only if form is submitted
+                $flashBag = $this->get('session')->getFlashBag();
                 if ($form->isValid()) {
                     // TODO: move this to a unique constraint in form instead
+                    /** @var NewsletterSubscription $email */
                     $email = $this->get('capco.newsletter_subscription.repository')->findOneByEmail(
                         $subscription->getEmail()
                     );
 
-                    // We create a session only if form is submitted
-                    $flashBag = $this->get('session')->getFlashBag();
-                    if ($email) {
+                    if ($email && $email->getIsEnabled()) {
                         $flashBag->add(
                             'info',
                             $translator->trans('homepage.newsletter.already_subscribed')
+                        );
+                    } elseif ($email && !$email->getIsEnabled()) {
+                        $email->setIsEnabled(true);
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($email);
+                        $em->flush();
+                        $flashBag->add(
+                            'success',
+                            $translator->trans('homepage.newsletter.success')
                         );
                     } else {
                         $em = $this->getDoctrine()->getManager();
