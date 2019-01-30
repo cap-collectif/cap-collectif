@@ -59,7 +59,7 @@ Scenario: Not confirmed logged in API client wants resend a confirmation email
   """
   And 0 mail should be sent
 
-@database @dev
+@database
 Scenario: Not confirmed logged in API client can receive a new confirmation email
   Given feature "registration" is enabled
   And I am logged in to api as user_not_confirmed
@@ -67,7 +67,7 @@ Scenario: Not confirmed logged in API client can receive a new confirmation emai
   Then the JSON response status code should be 201
   And 1 mail should be sent
   And I open mail with subject 'email-subject-registration-confirmation {"{username}":"user_not_confirmed"}'
-  Then email should match snapshot 'emailSubjectRegistrationConfirmation.html'
+  Then I should see 'email-content-registration-confirmation {"{username}":"user_not_confirmed","{sitename}":"Cap-Collectif","{businessName}":"Cap Collectif","{profileUrl}":"https:\/\/capco.test\/profile\/usernotconfirmed","{confirmationUrl}":"https:\/\/capco.test\/account\/email_confirmation\/azertyuiop"}notification.email.external_footer {"{to}":"user_not_confirmed@test.com","{sitename}":"Cap-Collectif","{siteUrl}":"https:\/\/capco.test\/","{businessUrl}":"https:\/\/cap-collectif.com","{business}":"Cap Collectif"}' in mail
 
 @database @security
 Scenario: Not confirmed logged in API client wants to mass spam confirmation email
@@ -105,7 +105,6 @@ Scenario: Logged in API client can update his email
   Then I should see "/account/new_email_confirmation/" in mail
   And I open mail with subject 'email.confirmEmailChanged.subject {"%username%":"user"}'
   Then I should see "email-content-mail-changed" in mail
-  Then email should match snapshot 'confirmEmailChanged.html'
 
 @security
 Scenario: Logged in API client can't update his email, to an existing email
