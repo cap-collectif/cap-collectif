@@ -1,43 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EventMap /> renders correcty 1`] = `
-<Connect(LeafletMap)
-  defaultMapOptions={
-    Object {
-      "zoom": 12,
+<div>
+  <Connect(LeafletMap)
+    defaultMapOptions={
+      Object {
+        "zoom": 12,
+      }
     }
-  }
-  markers={
-    Object {
-      "$refType": null,
-      "edges": Array [
-        Object {
-          "node": Object {
-            "endAt": "2019-09-27T03:00:00+01:00",
-            "fullAddress": "Ici et ailleur",
-            "id": "event1",
-            "lat": 47.12345789,
-            "lng": 1.23456789,
-            "startAt": "2018-09-27T03:00:00+01:00",
-            "title": "Evenement des gens perdu",
-            "url": "http://perdu.com",
+    loading={false}
+    markers={
+      Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "endAt": "2019-09-27T03:00:00+01:00",
+              "fullAddress": "Ici et ailleur",
+              "id": "event1",
+              "lat": 47.12345789,
+              "lng": 1.23456789,
+              "startAt": "2018-09-27T03:00:00+01:00",
+              "title": "Evenement des gens perdu",
+              "url": "http://perdu.com",
+            },
           },
-        },
-        Object {
-          "node": Object {
-            "endAt": "2019-10-27T03:00:00+01:00",
-            "fullAddress": "Nul part et ailleur",
-            "id": "event2",
-            "lat": 47.1235444789,
-            "lng": 1.23477789,
-            "startAt": "2018-10-07T03:00:00+01:00",
-            "title": "Evenement des gens pas perdu",
-            "url": "http://perdu.com",
+          Object {
+            "node": Object {
+              "endAt": "2019-10-27T03:00:00+01:00",
+              "fullAddress": "Nul part et ailleur",
+              "id": "event2",
+              "lat": 47.1235444789,
+              "lng": 1.23477789,
+              "startAt": "2018-10-07T03:00:00+01:00",
+              "title": "Evenement des gens pas perdu",
+              "url": "http://perdu.com",
+            },
           },
+        ],
+        "pageInfo": Object {
+          "endCursor": "cursor2",
+          "hasNextPage": true,
+          "hasPreviousPage": false,
+          "startCursor": "cursor1",
         },
-      ],
-      "totalCount": 2,
+        "totalCount": 5,
+      }
     }
-  }
-/>
+  />
+</div>
 `;
