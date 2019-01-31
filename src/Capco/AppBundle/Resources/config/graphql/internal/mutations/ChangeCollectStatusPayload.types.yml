@@ -3,4 +3,4 @@ ChangeCollectStatusPayload:
   config:
     fields:
       proposal:
-        type: 'Proposal!'
+        type: 'InternalProposal!'

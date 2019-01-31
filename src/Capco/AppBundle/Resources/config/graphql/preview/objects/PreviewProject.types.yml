@@ -1,0 +1,29 @@
+PreviewProject:
+  type: object
+  inherits:
+    - Node
+    - UniformResourceLocatable
+  config:
+    name: Project
+    interfaces:
+      - Node
+      - UniformResourceLocatable
+    description: 'A participatory project.'
+    fields:
+      # id:
+      #   builder: 'Relay::GlobalId'
+      #   builderConfig:
+      #     typeName: Project
+      title:
+        type: 'String!'
+        description: 'The title of the project.'
+      votes:
+        description: 'A list of votes associated with the project.'
+        type: 'PreviewVoteConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotesResolver", [value])'
+      contributors:
+        type: 'PublicUserConnection!'
+        description: 'A list of contributor associated with the project.'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", [value, args])'
