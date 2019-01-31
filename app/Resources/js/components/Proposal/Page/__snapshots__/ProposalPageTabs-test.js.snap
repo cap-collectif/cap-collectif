@@ -365,3 +365,306 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
   </div>
 </Uncontrolled(TabContainer)>
 `;
+
+exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
+<Uncontrolled(TabContainer)
+  className="tabs__container"
+  defaultActiveKey="content"
+  id="proposal-page-tabs"
+>
+  <div>
+    <div
+      className="tabs"
+    >
+      <div
+        className="container"
+      >
+        <Nav
+          bsClass="nav"
+          bsStyle="tabs"
+          justified={false}
+          pullLeft={false}
+          pullRight={false}
+          stacked={false}
+        >
+          <NavItem
+            active={false}
+            className="tab"
+            disabled={false}
+            eventKey="content"
+          >
+            <FormattedMessage
+              id="proposal.tabs.content"
+              values={Object {}}
+            />
+          </NavItem>
+          <NavItem
+            active={false}
+            className="tab"
+            disabled={false}
+            eventKey="evaluation"
+          >
+            <FormattedMessage
+              id="proposal.tabs.evaluation"
+              values={Object {}}
+            />
+          </NavItem>
+          <NavItem
+            active={false}
+            className="tab"
+            disabled={false}
+            eventKey="votes"
+          >
+            <FormattedMessage
+              id="proposal.tabs.votes"
+              values={Object {}}
+            />
+            <span
+              className="badge"
+            >
+              1
+            </span>
+          </NavItem>
+          <NavItem
+            active={false}
+            className="tab"
+            disabled={false}
+            eventKey="followers"
+          >
+            <FormattedMessage
+              id="proposal.tabs.followers"
+              values={Object {}}
+            />
+            <span
+              className="badge"
+            >
+              169
+            </span>
+          </NavItem>
+        </Nav>
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <TabContent
+        animation={false}
+        bsClass="tab"
+        componentClass="div"
+        mountOnEnter={false}
+        unmountOnExit={false}
+      >
+        <TabPane
+          bsClass="tab-pane"
+          eventKey="content"
+        >
+          <Row
+            bsClass="row"
+            componentClass="div"
+          >
+            <Col
+              bsClass="col"
+              componentClass="div"
+              sm={8}
+              xs={12}
+            >
+              <ForwardRef(Relay(ProposalFusionList))
+                proposal={
+                  Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                    "allFollowers": Object {
+                      "totalCount": 169,
+                    },
+                    "allVotes": Object {
+                      "totalCount": 1,
+                    },
+                    "currentVotableStep": null,
+                    "id": "1",
+                    "news": Object {
+                      "totalCount": 0,
+                    },
+                    "viewerCanSeeEvaluation": true,
+                    "votableSteps": Array [],
+                  }
+                }
+              />
+              <ForwardRef(Relay(Connect(ProposalPageContent)))
+                proposal={
+                  Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                    "allFollowers": Object {
+                      "totalCount": 169,
+                    },
+                    "allVotes": Object {
+                      "totalCount": 1,
+                    },
+                    "currentVotableStep": null,
+                    "id": "1",
+                    "news": Object {
+                      "totalCount": 0,
+                    },
+                    "viewerCanSeeEvaluation": true,
+                    "votableSteps": Array [],
+                  }
+                }
+                step={
+                  Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                    "form": Object {
+                      "usingCategories": true,
+                      "usingThemes": true,
+                    },
+                  }
+                }
+                viewer={null}
+              />
+            </Col>
+            <Col
+              bsClass="col"
+              componentClass="div"
+              sm={4}
+              xs={12}
+            >
+              <ForwardRef(Relay(ProposalPageMetadata))
+                proposal={
+                  Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                    "allFollowers": Object {
+                      "totalCount": 169,
+                    },
+                    "allVotes": Object {
+                      "totalCount": 1,
+                    },
+                    "currentVotableStep": null,
+                    "id": "1",
+                    "news": Object {
+                      "totalCount": 0,
+                    },
+                    "viewerCanSeeEvaluation": true,
+                    "votableSteps": Array [],
+                  }
+                }
+                showCategories={true}
+                showDistricts={true}
+                showNullEstimation={false}
+                showThemes={true}
+              />
+              <br />
+              <ForwardRef(Relay(ProposalPageAdvancement))
+                proposal={
+                  Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                    "allFollowers": Object {
+                      "totalCount": 169,
+                    },
+                    "allVotes": Object {
+                      "totalCount": 1,
+                    },
+                    "currentVotableStep": null,
+                    "id": "1",
+                    "news": Object {
+                      "totalCount": 0,
+                    },
+                    "viewerCanSeeEvaluation": true,
+                    "votableSteps": Array [],
+                  }
+                }
+              />
+            </Col>
+          </Row>
+        </TabPane>
+        <TabPane
+          bsClass="tab-pane"
+          eventKey="votes"
+        >
+          <Uncontrolled(TabContainer)
+            defaultActiveKey={0}
+            id="tab-votesByStep"
+          >
+            <Row
+              bsClass="row"
+              className="clearfix"
+              componentClass="div"
+            >
+              <Nav
+                bsClass="nav"
+                bsStyle="pills"
+                className="mb-20"
+                justified={false}
+                pullLeft={false}
+                pullRight={false}
+                stacked={false}
+              />
+              <TabContent
+                animation={false}
+                bsClass="tab"
+                componentClass="div"
+                mountOnEnter={false}
+                unmountOnExit={false}
+              />
+            </Row>
+          </Uncontrolled(TabContainer)>
+        </TabPane>
+        <TabPane
+          bsClass="tab-pane"
+          eventKey="evaluation"
+        >
+          <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+            proposal={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "allFollowers": Object {
+                  "totalCount": 169,
+                },
+                "allVotes": Object {
+                  "totalCount": 1,
+                },
+                "currentVotableStep": null,
+                "id": "1",
+                "news": Object {
+                  "totalCount": 0,
+                },
+                "viewerCanSeeEvaluation": true,
+                "votableSteps": Array [],
+              }
+            }
+          />
+        </TabPane>
+        <TabPane
+          bsClass="tab-pane"
+          eventKey="followers"
+        >
+          <ForwardRef(Relay(ProposalPageFollowers))
+            pageAdmin={false}
+            proposal={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "allFollowers": Object {
+                  "totalCount": 169,
+                },
+                "allVotes": Object {
+                  "totalCount": 1,
+                },
+                "currentVotableStep": null,
+                "id": "1",
+                "news": Object {
+                  "totalCount": 0,
+                },
+                "viewerCanSeeEvaluation": true,
+                "votableSteps": Array [],
+              }
+            }
+          />
+        </TabPane>
+      </TabContent>
+    </div>
+  </div>
+</Uncontrolled(TabContainer)>
+`;

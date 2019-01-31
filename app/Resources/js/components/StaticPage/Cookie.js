@@ -166,18 +166,21 @@ export class Cookie extends React.Component<Props, CookieState> {
             </div>
           </div>
         )}
-        <div>
-          <div className="row" style={{ padding: '10px 0' }} id="cookies-management-save">
-            <Button
-              className="ml-15 btn-primary"
-              id="cookies-save"
-              onClick={() => {
-                this.saveCookiesConfiguration();
-              }}>
-              <FormattedMessage id="global.save" />
-            </Button>
-          </div>
-        </div>
+        {(adJs && adJs.length > 1) ||
+          (analyticsJs && analyticsJs.length > 1 && (
+            <div>
+              <div className="row" style={{ padding: '10px 0' }} id="cookies-management-save">
+                <Button
+                  className="ml-15 btn-primary"
+                  id="cookies-save"
+                  onClick={() => {
+                    this.saveCookiesConfiguration();
+                  }}>
+                  <FormattedMessage id="global.save" />
+                </Button>
+              </div>
+            </div>
+          ))}
       </div>
     );
   }

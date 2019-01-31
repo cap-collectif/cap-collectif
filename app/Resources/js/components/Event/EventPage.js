@@ -45,7 +45,7 @@ export class EventPage extends React.Component<Props> {
                   userType: $userType
                   isFuture: $isFuture
                 )
-              ...EventListCounter_query
+              ...EventListFilters_query
                 @arguments(
                   cursor: $cursor
                   count: $count

@@ -105,9 +105,6 @@ class ThemeAdmin extends AbstractAdmin
             );
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -153,15 +150,19 @@ class ThemeAdmin extends AbstractAdmin
             ]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('title', null, [
                 'label' => 'admin.fields.theme.title',
                 'required' => true,
+            ])
+            ->add('slug', null, [
+                'label' => 'admin.fields.page.slug',
+                'attr' => [
+                    'read-only' => true,
+                    'disabled' => true,
+                ],
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.theme.author',
@@ -225,9 +226,6 @@ class ThemeAdmin extends AbstractAdmin
             ->end();
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper

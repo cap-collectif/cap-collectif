@@ -26,6 +26,13 @@ type Props = {
   valid: boolean,
   submitSucceeded: boolean,
   submitFailed: boolean,
+  features: {
+    consent_external_communication: boolean,
+    consent_internal_communication: boolean,
+  },
+  parameters: {
+    'global.site.organization_name': string,
+  },
   handleSubmit: () => void,
 };
 
@@ -48,7 +55,11 @@ export class NotificationsForm extends Component<Props> {
       valid,
       submitSucceeded,
       submitFailed,
+      features,
+      parameters,
     } = this.props;
+
+    const { consent_external_communication, consent_internal_communication } = features;
 
     const header = (
       <div className="panel-heading profile-header">
@@ -71,9 +82,62 @@ export class NotificationsForm extends Component<Props> {
         <Panel id="capco_horizontal_form">
           <Panel.Heading>{header}</Panel.Heading>
           <Panel.Body>
-            <h2 className="page-header">
-              <FormattedMessage id="profile.account.notifications.title" />
-            </h2>
+            {(consent_external_communication || consent_internal_communication) && (
+              <React.Fragment>
+                <p className="notifications-app-title">
+                  <FormattedMessage id="admin.label.settings.global" />
+                </p>
+                <Table className="notifications-table" striped>
+                  <thead>
+                    <tr>
+                      <th>
+                        <FormattedMessage id="send-me-notifications-about" />
+                      </th>
+                      <th>
+                        <FormattedMessage id="profile.account.notifications.email" />
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {consent_external_communication && (
+                      <tr>
+                        <td>
+                          <FormattedMessage id="platform-news" />
+                        </td>
+                        <td>
+                          <Field
+                            name="consentExternalCommunication"
+                            component={component}
+                            type="checkbox"
+                            id="proposal-comment-mail"
+                          />
+                        </td>
+                      </tr>
+                    )}
+                    {consent_internal_communication && (
+                      <tr>
+                        <td>
+                          <FormattedMessage
+                            id="information-related-to-other-activities-of"
+                            values={{
+                              organizationName: parameters['global.site.organization_name'],
+                            }}
+                          />
+                        </td>
+                        <td>
+                          <Field
+                            name="consentInternalCommunication"
+                            component={component}
+                            type="checkbox"
+                            id="proposal-comment-mail"
+                          />
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </Table>
+              </React.Fragment>
+            )}
             <p className="notifications-app-title">
               <FormattedMessage id="profile.account.notifications.app.collectstep" />
             </p>
@@ -129,7 +193,13 @@ const form = reduxForm({
 })(NotificationsForm);
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
-  initialValues: props.viewer.notificationsConfiguration,
+  features: state.default.features,
+  parameters: state.default.parameters,
+  initialValues: {
+    consentExternalCommunication: props.viewer.consentExternalCommunication,
+    consentInternalCommunication: props.viewer.consentInternalCommunication,
+    onProposalCommentMail: props.viewer.notificationsConfiguration.onProposalCommentMail,
+  },
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -138,6 +208,8 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment NotificationsForm_viewer on User {
+      consentExternalCommunication
+      consentInternalCommunication
       notificationsConfiguration {
         onProposalCommentMail
       }
