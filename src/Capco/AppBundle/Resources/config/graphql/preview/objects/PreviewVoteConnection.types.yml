@@ -1,8 +1,0 @@
-PreviewVoteConnection:
-  type: relay-connection
-  config:
-    name: VoteConnection
-    nodeType: PreviewVote
-    connectionFields:
-      totalCount:
-        type: Int!

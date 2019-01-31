@@ -5,6 +5,6 @@ RemoveProposalVotePayload:
       step:
         type: 'ProposalStep!'
       proposal:
-        type: 'InternalProposal!'
+        type: 'Proposal!'
       viewer:
         type: 'InternalUser!'

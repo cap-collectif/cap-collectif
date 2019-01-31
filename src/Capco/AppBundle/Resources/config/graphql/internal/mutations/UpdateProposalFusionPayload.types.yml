@@ -3,8 +3,8 @@ UpdateProposalFusionPayload:
   config:
     fields:
       proposal:
-        type: 'InternalProposal'
+        type: 'Proposal'
         description: 'The updated proposal'
       removedMergedFrom:
-        type: '[InternalProposal]!'
+        type: '[Proposal]!'
         description: 'The proposals that have been removed from the fusion.'

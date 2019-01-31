@@ -105,8 +105,7 @@ export class EventListPaginated extends React.Component<Props, State> {
               sm={!config.isMobile ? 4 : 12}
               xs={12}
               className={!config.isMobile ? 'sticky-t-60' : null}>
-              {/* $FlowFixMe relayProps */}
-              <EventMap query={query} />
+              <EventMap events={query.events} />
             </Col>
           ) : null}
         </Row>
@@ -153,16 +152,6 @@ export default createPaginationContainer(
           userType: { type: "ID" }
           isFuture: { type: "Boolean" }
         ) {
-        ...EventMap_query
-          @arguments(
-            count: $count
-            cursor: $cursor
-            theme: $theme
-            project: $project
-            search: $search
-            userType: $userType
-            isFuture: $isFuture
-          )
         events(
           first: $count
           after: $cursor
@@ -173,6 +162,7 @@ export default createPaginationContainer(
           isFuture: $isFuture
         ) @connection(key: "EventListPaginated_events", filters: []) {
           totalCount
+          ...EventMap_events
           edges {
             node {
               id

@@ -96,21 +96,6 @@ type AddEventPayload {
   clientMutationId: String
 }
 
-input AddEventsInput {
-  # A list of events input to import.
-  events: [EventInput!]!
-
-  # This option is useful if you want to test your import. Set it to true if you want to import definitively.
-  dryRun: Boolean!
-  clientMutationId: String
-}
-
-type AddEventsPayload {
-  # List of imported events.
-  importedEvents: [Event!]!
-  clientMutationId: String
-}
-
 input AddOpinionVoteInput {
   # The Node ID of the opinion/version to vote.
   opinionId: ID!
@@ -801,12 +786,6 @@ type ChangeSourcePayload {
 input ChangeUserNotificationsConfigurationInput {
   # The new proposal comment notification value
   onProposalCommentMail: Boolean!
-
-  # The new external consent for communication
-  consentExternalCommunication: Boolean!
-
-  # The new internal consent for communication
-  consentInternalCommunication: Boolean!
   clientMutationId: String
 }
 
@@ -1914,26 +1893,6 @@ type EventEdge {
   cursor: String!
 }
 
-input EventInput {
-  title: String!
-  body: String!
-  startAt: String
-  endAt: String
-  authorEmail: String!
-  themes: [ID!]!
-  projects: [ID!]!
-  link: String
-  registrationEnable: Boolean!
-  enabled: Boolean!
-  commentable: Boolean!
-  zipCode: String
-  address: String
-  metaDescription: String
-  customCode: String
-  city: String
-  country: String
-}
-
 # Require a firstname
 type FirstnameRequirement implements Node & Requirement {
   # The ID of an object
@@ -2452,7 +2411,6 @@ type Mutation {
   changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
   removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload
   changeSiteFavicon(input: InternalChangeSiteFaviconInput!): InternalChangeSiteFaviconPayload
-  addEvents(input: AddEventsInput!): AddEventsPayload
   addComment(input: AddCommentInput!): AddCommentPayload
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
   addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload
@@ -3074,7 +3032,35 @@ type PresentationStep implements Step {
   body: HTML
 }
 
+# Entities that can be published.
 interface PrivatableVote {
+  # The ID of an object
+  id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns Type of vote
+  kind: String!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
   # Anonymous or not.
   private: Boolean
 }
@@ -3094,30 +3080,26 @@ input ProgressStepInput {
 }
 
 # A participatory project.
-type Project implements UniformResourceLocatable & UniformResourceAdminLocatable & Node {
+type Project implements Node & UniformResourceLocatable & UniformResourceAdminLocatable {
   # The ID of an object
   id: ID!
 
   # The URL to this resource.
   url: URI!
 
-  # The title of the project.
+  # The admin URL to this resource.
+  adminUrl: URI!
+  steps: [Step!]!
   title: String!
-
-  # A list of votes associated with the project.
-  votes(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): VoteConnection!
+  author: User!
+  video: String
+  cover: Media
+  contributionsCount: Int!
+  votes: VoteConnection!
+  hasParticipativeStep: Boolean!
+  links: ProjectLinks!
+  type: ProjectType
+  themes: [Theme!]
 
   # A list of contributor associated with the project.
   contributors(
@@ -3133,18 +3115,6 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
     # Returns the last `n` elements from the list.
     last: Int
   ): UserConnection!
-
-  # The admin URL to this resource.
-  adminUrl: URI!
-  steps: [Step!]!
-  author: User!
-  video: String
-  cover: Media
-  contributionsCount: Int!
-  hasParticipativeStep: Boolean!
-  links: ProjectLinks!
-  type: ProjectType
-  themes: [Theme!]
   votableSteps: [ProposalStep!]!
 
   # The visibility of project
@@ -3295,32 +3265,14 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   # The ID of an object
   id: ID!
 
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
-  # Url of the contribution
-  url: URI!
-
-  # Identifies the contribution title.
-  title: String!
-
-  # Identifies the body of the contribution.
-  body: HTML
-
   # The kind of contribution.
   kind: String!
 
   # Return the related contribution if the contribution is related to another.
   related: Contribution
+
+  # The URL to this resource.
+  url: URI!
 
   # The comments related to the commentable.
   comments(
@@ -3337,6 +3289,18 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
     last: Int
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 
   # Identifies proposals as draft.
   draft: Boolean!
@@ -3447,6 +3411,12 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
 
   # The unique reference of proposal
   reference: String!
+
+  # Identifies the contribution title.
+  title: String!
+
+  # Identifies the body of the contribution.
+  body: HTML
 
   # Identifies the body of the contribution rendered to text.
   bodyText: String!
@@ -3891,7 +3861,7 @@ enum ProposalTrashedStatus {
   NOT_TRASHED
 }
 
-# A vote on a proposal for a given step.
+# Entities that can be published.
 type ProposalVote implements Vote & Publishable & PrivatableVote {
   # The ID of an object
   id: ID!
@@ -3908,9 +3878,6 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
-  # Anonymous or not.
-  private: Boolean
-
   # Date of vote.
   createdAt: DateTime!
 
@@ -3922,6 +3889,9 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
 
   # Returns 'proposalVote'.
   kind: String!
+
+  # Anonymous or not.
+  private: Boolean
 
   # Is the vote anonymous ?
   anonymous: Boolean!
@@ -4012,8 +3982,6 @@ type Query {
 
     # Returns the last `n` elements from the list.
     last: Int
-
-    # Ordering options for projects returning from the connection.
     orderBy: ProjectOrder = {field: LATEST, direction: DESC}
 
     # If non-null, projects with the given string to look for.

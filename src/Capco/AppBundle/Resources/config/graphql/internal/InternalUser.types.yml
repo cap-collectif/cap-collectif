@@ -240,7 +240,7 @@ InternalUser:
         description: 'Get all medias the user has published.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMediasResolver", [value, args])'
       votes:
-        type: 'InternalVoteConnection!'
+        type: 'VoteConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all votes of the user.'
         args:

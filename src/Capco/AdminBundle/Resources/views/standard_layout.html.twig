@@ -64,13 +64,6 @@
             </li>
         </ul>
   {% endif %}
-    {% if admin.class == 'Capco\\AppBundle\\Entity\\Event' and admin.hasSubject == false %}
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                {{ react_render_component('AdminImportEventsApp') }}
-            </li>
-        </ul>
-  {% endif %}
   {% if admin.class == 'Capco\\AppBundle\\Entity\\ProposalForm' and admin.hasSubject == false %}
       <ul class="nav navbar-nav navbar-right">
         <li>

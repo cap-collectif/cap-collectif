@@ -282,8 +282,3 @@ Scenario: Anonymous user wants to see saved proposals when he returns on the sel
   Then I go to a selection step
   When proposals should be ordered randomly
   Then I should see same proposals
-
-@elasticsearch
-Scenario: Anonymous user want to show a proposal without actuality
-  Given I go to a proposal not yet votable
-  Then I should not see an "#proposal-page-tabs-tab-blog" element

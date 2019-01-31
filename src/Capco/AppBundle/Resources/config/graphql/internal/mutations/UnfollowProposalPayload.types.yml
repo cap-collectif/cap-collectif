@@ -3,6 +3,6 @@ UnfollowProposalPayload:
   config:
     fields:
       proposal:
-        type: 'InternalProposal'
+        type: 'Proposal'
       unfollowerId:
         type: 'ID'

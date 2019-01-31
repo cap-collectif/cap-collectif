@@ -66,7 +66,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('consultation_plan');
         $toggleManager->activate('display_map');
         $toggleManager->activate('privacy_policy');
-        $toggleManager->activate('public_api');
 
         if ('prod' == $this->getContainer()->getParameter('kernel.environment')) {
             $toggleManager->deactivate('registration');
@@ -77,7 +76,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
 
             $toggleManager->deactivate('login_saml');
             $toggleManager->deactivate('login_paris');
-            $toggleManager->deactivate('public_api');
             $toggleManager->activate('export');
 
             $toggleManager->activate('shield_mode');

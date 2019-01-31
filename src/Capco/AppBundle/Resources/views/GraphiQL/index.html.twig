@@ -36,13 +36,9 @@
       </div>
     {% else %}
       {% if app.user %}
-        Sorry, we could not find an API key for your account <strong>{{app.user.username}}</strong>. 
-        <br />
-        Your API requests are <strong>not authenticated</strong>. Contact <a href="mailto:coucou@cap-collectif.com">coucou@cap-collectif.com</a> if you need to use authenticated requests (but you probably don't !). 
+        Sorry, we could not find an API key for your account <strong>{{app.user.username}}</strong>. Contact <email>coucou@cap-collectif.com</email>. Your API requests are not authenticated.
        {% else %}
-        Your API requests are <strong>not authenticated</strong>.
-        <br />
-        Start exploring GraphQL API queries using your account by <strong>logging in</strong>. 
+        Start exploring GraphQL API queries using your account by logging in. 
        {% endif %}
     {% endif %}
       <div style="margin-left: 15px">
@@ -67,7 +63,7 @@
           {% block graphql_fetcher_headers %}
           headers = {
             {# Preview schema is enabled by default, maybe we should add a toggle #}
-            {% if isInternal == false %}
+            {% if not isInternal %}
             "Accept": "application/vnd.cap-collectif.preview+json",
             {% endif %}
             "Content-Type": "application/json",

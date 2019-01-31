@@ -62,7 +62,6 @@ import EventApp from './startup/EventApp';
 import ProjectDistrictAdminApp from './startup/ProjectDistrictAdminApp';
 import SiteFaviconAdminPageApp from './startup/SiteFaviconAdminPageApp';
 import ProjectTrashCommentApp from './startup/ProjectTrashCommentApp';
-import AdminImportEventsApp from './startup/AdminImportEventsApp';
 
 import appStore from './stores/AppStore';
 import MapAdminPageApp from './startup/MapAdminPageApp';
@@ -116,7 +115,6 @@ ReactOnRails.register({
   NavbarApp,
   EmailNotConfirmedApp,
   NewOpinionApp,
-  AdminImportEventsApp,
   AccountProfileApp,
   ProjectTrashButtonApp,
   ProjectStepTabsApp,
