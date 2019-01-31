@@ -28,6 +28,7 @@ export default class ProjectsListFilterThemes extends React.Component<Props> {
           options={themes.map(t => ({
             value: t.id,
             label: intl.formatMessage({ id: t.title }),
+            ariaLabel: intl.formatMessage({ id: t.title }),
           }))}
         />
       );

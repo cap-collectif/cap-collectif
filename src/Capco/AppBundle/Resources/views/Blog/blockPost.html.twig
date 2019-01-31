@@ -1,10 +1,10 @@
 <li class="media  media--news  block  block--bordered  box">
     {%  if post.media %}
-        <a href="{{ path('app_blog_show', {'slug': post.slug}) }}" class="pull-left" alt="{{ post.title }}">
+        <a href="{{ path('app_blog_show', {'slug': post.slug}) }}" class="pull-left">
             {% thumbnail post.media, 'post' with {'title': post.media.name, 'alt': post.media.name, 'class': 'media-object'} %}
         </a>
     {% else %}
-        <a href="{{ path('app_blog_show', {'slug': post.slug}) }}" class="pull-left" alt="{{ post.title }}">
+        <a href="{{ path('app_blog_show', {'slug': post.slug}) }}" class="pull-left">
             <div class="bg--post  media-object">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="110px" height="110px" viewBox="-146.5 -110.5 335.5 301.5" enable-background="new -146.5 -110.5 335.5 301.5" xml:space="preserve" style="margin: 0 auto; display: block;">
                     <line fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="-51.639" y1="-51.638" x2="51.913" y2="-51.638"/>
@@ -34,7 +34,16 @@
                 {{ 'blog.written_by' | trans({}, 'CapcoAppBundle') }}
                 {% for author in post.Authors %}
                     {% if is_feature_enabled('profiles') %}
-                        <a href="{{ path('capco_user_profile_show_all', { slug: author.slug })}}">{{ author.username }}</a>{% else %}<span>{{ author.username }}</span>{% endif %}{% if loop.revindex0 == '1' %}{{ 'blog.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endfor %}
+                        <a href="{{ path('capco_user_profile_show_all', { slug: author.slug })}}">
+                            {{ author.username }}
+                        </a>
+                    {% else %}
+                        <span>{{ author.username }}</span>
+                    {% endif %}
+                    {% if loop.revindex0 == '1' %}
+                        {{ 'blog.and' | trans({}, 'CapcoAppBundle') }}
+                    {% elseif loop.revindex0 >= '2' %}, {% endif %}
+                {% endfor %}
             {% endif %}
         </p>
         {% if post.abstract %}

@@ -42,7 +42,7 @@
             <a href="{{ project.video }}" class="play fancybox" data-type="iframe">
         {% endif %}
         {% if project.Cover %}
-            {% thumbnail project.Cover, 'blockHeader' with {'title': project.title, 'alt': project.title, 'class': 'img-responsive'} %}
+            {% thumbnail project.Cover, 'blockHeader' with {'title': project.title, 'alt': '', 'class': 'img-responsive'} %}
         {% else %}
             <div class="bg__wrapper">
                 <div class="bg--default bg--project">

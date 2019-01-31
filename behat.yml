@@ -30,7 +30,7 @@ e2e:
         - Capco\AppBundle\Behat\ApplicationContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\NavigationContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
+        - Capco\AppBundle\Behat\MailCatcherContext
       filters:
         tags: '@core&&~@event_registration&&~@rgpd'
     consultation:
@@ -39,7 +39,7 @@ e2e:
         - Capco\AppBundle\Behat\ApplicationContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\NavigationContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
+        - Capco\AppBundle\Behat\MailCatcherContext
       filters:
         tags: '@consultation'
     bp:
@@ -48,7 +48,7 @@ e2e:
         - Capco\AppBundle\Behat\ApplicationContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\NavigationContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
+        - Capco\AppBundle\Behat\MailCatcherContext
       filters:
         tags: '@bp'
     questionnaire:
@@ -57,7 +57,7 @@ e2e:
         - Capco\AppBundle\Behat\ApplicationContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\NavigationContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
+        - Capco\AppBundle\Behat\MailCatcherContext
       filters:
         tags: '@questionnaire'
     bo:
@@ -65,7 +65,7 @@ e2e:
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext
         - Capco\AppBundle\Behat\NavigationContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
+        - Capco\AppBundle\Behat\MailCatcherContext
 
 commands:
   extensions:
@@ -85,7 +85,7 @@ commands:
         - Capco\AppBundle\Behat\ExportContext
         - Capco\AppBundle\Behat\CommandContext
         - Capco\AppBundle\Behat\RabbitMQContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
+        - Capco\AppBundle\Behat\MailCatcherContext
         - SamParkinson\Behat\Context\FileSystemContext
 
 api:
@@ -104,7 +104,7 @@ api:
         - Capco\AppBundle\Behat\ApiContext
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\RabbitMQContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
+        - Capco\AppBundle\Behat\MailCatcherContext
     graphql:
       paths:
         - '%paths.base%/features/graphql'
@@ -113,4 +113,4 @@ api:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\GraphQLContext
         - Capco\AppBundle\Behat\RabbitMQContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
+        - Capco\AppBundle\Behat\MailCatcherContext
