@@ -11,7 +11,7 @@ type Props = {
 const OpinionSourceTitle = ({ source }: Props) => (
   <h3 className="title">
     {source.category && <Label bsStyle="primary">{source.category.title}</Label>}{' '}
-    <a className="external-link" href={source.link}>
+    <a className="external-link" href={source.url}>
       {source.title}
     </a>
   </h3>
@@ -23,10 +23,10 @@ export default createFragmentContainer(
     fragment OpinionSourceTitle_source on Source {
       id
       title
-      link
       category {
         title
       }
+      url
     }
   `,
 );

@@ -55,7 +55,7 @@ class QueryEventsResolver implements ResolverInterface
 
                 $results = $this->eventSearch->searchEvents(
                     $offset,
-                    $limit,
+                    $limit + 2,
                     $order,
                     $search,
                     $filters

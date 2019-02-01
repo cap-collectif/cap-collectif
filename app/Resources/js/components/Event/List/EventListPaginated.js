@@ -97,6 +97,24 @@ export class EventListPaginated extends React.Component<Props, State> {
                       />
                     </Row>
                   ))}
+              {relay.hasMore() && (
+                <Row>
+                  <div className="text-center">
+                    <Button
+                      disabled={this.state.loading}
+                      onClick={() => {
+                        this.setState({ loading: true });
+                        relay.loadMore(EVENTS_PAGINATION, () => {
+                          this.setState({ loading: false });
+                        });
+                      }}>
+                      <FormattedMessage
+                        id={this.state.loading ? 'global.loading' : 'global.more'}
+                      />
+                    </Button>
+                  </div>
+                </Row>
+              )}
             </Col>
           ) : null}
           {this.shouldRenderToggleListOrMap('map') ? (
@@ -111,22 +129,6 @@ export class EventListPaginated extends React.Component<Props, State> {
             </Col>
           ) : null}
         </Row>
-        {relay.hasMore() && (
-          <Row>
-            <div className="text-center">
-              <Button
-                disabled={this.state.loading}
-                onClick={() => {
-                  this.setState({ loading: true });
-                  relay.loadMore(EVENTS_PAGINATION, () => {
-                    this.setState({ loading: false });
-                  });
-                }}>
-                <FormattedMessage id={this.state.loading ? 'global.loading' : 'global.more'} />
-              </Button>
-            </div>
-          </Row>
-        )}
       </React.Fragment>
     );
   }

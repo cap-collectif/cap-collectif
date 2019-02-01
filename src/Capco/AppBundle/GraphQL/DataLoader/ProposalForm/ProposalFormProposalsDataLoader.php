@@ -204,7 +204,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                             $form,
                             $viewer,
                             $offset,
-                            $limit,
+                            $limit + 2,
                             $field,
                             $direction
                         )

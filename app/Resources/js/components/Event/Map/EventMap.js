@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Button, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import LeafletMap from './LeafletMap';
 import type { EventMap_query } from './__generated__/EventMap_query.graphql';
 
@@ -45,16 +45,22 @@ export class EventMap extends React.Component<Props, State> {
     } = this.props;
     const { loading } = this.state;
     return (
-      <div>
+      <div style={{ position: 'relative' }}>
+        {relay.hasMore() && !loading ? (
+          <Button
+            style={{
+              position: 'absolute',
+              marginLeft: '-115px',
+              left: '50%',
+              top: '85%',
+              zIndex: '1500',
+            }}
+            onClick={this.loadAll}>
+            <FormattedMessage id="map-load-all-events" />
+          </Button>
+        ) : null}
         {/* $FlowFixMe */}
         <LeafletMap loading={loading} markers={events} defaultMapOptions={{ zoom: 12 }} />
-        {relay.hasMore() && !loading ? (
-          <Row className="text-center">
-            <Button className="mt-10" onClick={this.loadAll}>
-              <FormattedMessage id="map-load-all-events" />
-            </Button>
-          </Row>
-        ) : null}
       </div>
     );
   }
