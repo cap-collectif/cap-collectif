@@ -17,6 +17,8 @@ const defaultProps = {
   intl: intlMock,
   search: 'PHP',
   theme: 'theme-1',
+  userType: null,
+  status: 'all',
   project: 'project1',
   features: {
     ...features,

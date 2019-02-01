@@ -25,9 +25,7 @@ export default class FiltersContainer extends React.Component<Props, State> {
     setTimeout(() => {
       const queryAll = document.querySelectorAll('.popover.bottom');
       if (queryAll !== null) {
-        Array
-          // $FlowFixMe
-          .from(queryAll.forEach(el => el.removeAttribute('role')));
+        queryAll.forEach(el => el.removeAttribute('role'));
       }
     }, 500);
   }
@@ -62,9 +60,7 @@ export default class FiltersContainer extends React.Component<Props, State> {
               const target = document.getElementById('event-filters');
               const queryAll = document.querySelectorAll('.popover.bottom');
               if (target !== null && queryAll !== null) {
-                Array
-                  // $FlowFixMe
-                  .from(queryAll.forEach(el => target.after(el)));
+                queryAll.forEach(el => target.after(el));
               }
             }, 500);
           }}>

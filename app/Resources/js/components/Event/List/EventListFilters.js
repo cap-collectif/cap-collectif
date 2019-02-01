@@ -25,13 +25,21 @@ type Props = {|
   dispatch: Dispatch,
   theme: ?string,
   project: ?string,
+  status: string,
+  userType: ?string,
   search: ?string,
   intl: IntlShape,
   addToggleViewButton: ?boolean,
   userTypes: Array<Object>,
 |};
 
-const countFilters = (theme: ?string, project: ?string, search: ?string): number => {
+const countFilters = (
+  theme: ?string,
+  project: ?string,
+  search: ?string,
+  userType: ?string,
+  status: string,
+): number => {
   let nbFilter = 0;
   if (theme) {
     nbFilter++;
@@ -39,6 +47,13 @@ const countFilters = (theme: ?string, project: ?string, search: ?string): number
   if (project) {
     nbFilter++;
   }
+  if (userType) {
+    nbFilter++;
+  }
+  if (status !== 'all') {
+    nbFilter++;
+  }
+
   if (config.isMobile && search) {
     nbFilter++;
   }
@@ -227,13 +242,15 @@ export class EventListFilters extends React.Component<Props, State> {
       theme,
       project,
       search,
+      userType,
+      status,
       intl,
       addToggleViewButton,
       dispatch,
       query,
     } = this.props;
 
-    const nbFilter = countFilters(theme, project, search);
+    const nbFilter = countFilters(theme, project, search, userType, status);
 
     const popoverBottom = this.getPopoverBottom(nbFilter);
 
@@ -292,6 +309,7 @@ const mapStateToProps = (state: GlobalState) => ({
   project: selector(state, 'project'),
   search: selector(state, 'search'),
   userType: selector(state, 'userType'),
+  status: selector(state, 'status'),
   userTypes: state.default.userTypes,
 });
 
@@ -299,7 +317,7 @@ const form = reduxForm({
   form: 'EventListFilters',
   destroyOnUnmount: false,
   initialValues: {
-    status: 'all',
+    status: 'ongoing-and-future',
   },
 })(EventListFilters);
 
