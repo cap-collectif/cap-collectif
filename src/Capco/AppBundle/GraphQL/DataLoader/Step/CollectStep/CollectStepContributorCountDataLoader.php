@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -23,7 +22,6 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
-        GraphQLCollector $collector,
         bool $enableCache
     ) {
         $this->stepContributorResolver = $stepContributorResolver;
@@ -35,7 +33,6 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
             $cachePrefix,
             $cacheTtl,
             $debug,
-            $collector,
             $enableCache
         );
     }

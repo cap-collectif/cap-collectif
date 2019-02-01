@@ -95,23 +95,6 @@ Scenario: Logged in user wants to add another reply when multiple replies is not
   Then I should see "reply.user_has_reply.reason" in the "#main" element
   And the questionnaire form should be disabled
 
-## Mail
-
-@database
-Scenario: Logged in API client can update his email
-  Given I am logged in as user
-  And I go to a questionnaire step
-  When I fill the questionnaire form
-  And I submit my reply
-  And I wait "#global-alert-box .alert-success" to appear on current page
-  Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  When I wait 1 seconds
-  And I should see my reply
-  And I wait 2 seconds
-  And 1 mail should be sent
-  And I open mail with subject 'reply.acknowledgement.subject'
-  Then email should match snapshot 'replyAcknowledgement.html'
-
 ## Replies list
 
 Scenario: Logged in user wants to see the list of his replies

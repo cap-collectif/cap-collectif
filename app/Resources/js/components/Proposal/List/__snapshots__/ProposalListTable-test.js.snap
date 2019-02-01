@@ -160,19 +160,10 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
   hover={true}
   tableLayoutFixed={true}
 >
-  <caption
-    className="sr-only"
-  >
-    <FormattedMessage
-      id="project-list"
-      values={Object {}}
-    />
-  </caption>
   <thead>
     <tr>
       <th
         key="0"
-        scope="col"
         style={
           Object {
             "display": "table-cell",
@@ -187,7 +178,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </th>
       <th
         key="1"
-        scope="col"
         style={
           Object {
             "display": "none",
@@ -202,7 +192,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </th>
       <th
         key="2"
-        scope="col"
         style={
           Object {
             "display": "table-cell",
@@ -217,7 +206,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </th>
       <th
         key="3"
-        scope="col"
         style={
           Object {
             "display": "table-cell",
@@ -232,7 +220,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </th>
       <th
         key="4"
-        scope="col"
         style={
           Object {
             "display": "table-cell",
@@ -247,7 +234,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </th>
       <th
         key="5"
-        scope="col"
         style={
           Object {
             "display": "none",
@@ -262,7 +248,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </th>
       <th
         key="6"
-        scope="col"
         style={
           Object {
             "display": "none",
@@ -277,7 +262,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </th>
       <th
         key="7"
-        scope="col"
         style={
           Object {
             "display": "table-cell",
@@ -292,7 +276,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </th>
       <th
         key="8"
-        scope="col"
         style={
           Object {
             "display": "none",
@@ -307,7 +290,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </th>
       <th
         key="9"
-        scope="col"
         style={
           Object {
             "display": "none",
@@ -322,7 +304,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </th>
       <th
         key="10"
-        scope="col"
         style={
           Object {
             "display": "none",
@@ -337,7 +318,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </th>
       <th
         key="11"
-        scope="col"
         style={
           Object {
             "display": "table-cell",

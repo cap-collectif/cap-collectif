@@ -21,19 +21,6 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 
 class UserRepository extends EntityRepository
 {
-    public function hydrateFromIds(array $ids): array
-    {
-        $qb = $this->createQueryBuilder('u');
-        $qb
-            ->addSelect('media', 'userType')
-            ->leftJoin('u.media', 'media')
-            ->leftJoin('u.userType', 'userType')
-            ->where('u.id IN (:ids)')
-            ->setParameter('ids', $ids);
-
-        return $qb->getQuery()->getResult();
-    }
-
     public function findUserByPublicApiKey(string $apiKey): ?User
     {
         return $this->createQueryBuilder('u')

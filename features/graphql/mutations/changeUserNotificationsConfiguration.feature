@@ -10,8 +10,6 @@ Scenario: GraphQL client wants to modify a user notifications configuration
     "query": "mutation ($input: ChangeUserNotificationsConfigurationInput!) {
       changeUserNotificationsConfiguration(input: $input) {
         user {
-          consentExternalCommunication
-          consentInternalCommunication
           notificationsConfiguration {
             onProposalCommentMail
           }
@@ -20,9 +18,7 @@ Scenario: GraphQL client wants to modify a user notifications configuration
     }",
     "variables": {
       "input": {
-        "onProposalCommentMail": false,
-        "consentExternalCommunication": false,
-        "consentInternalCommunication": false
+        "onProposalCommentMail": false
       }
     }
   }
@@ -33,8 +29,6 @@ Scenario: GraphQL client wants to modify a user notifications configuration
     "data": {
       "changeUserNotificationsConfiguration": {
         "user": {
-          "consentExternalCommunication": false,
-          "consentInternalCommunication": false,
           "notificationsConfiguration": {
             "onProposalCommentMail": false
           }

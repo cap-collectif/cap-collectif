@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Toggle\Manager;
@@ -28,7 +27,6 @@ class PostAdmin extends CapcoAdmin
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
     }
-
     // For mosaic view
     public function getObjectMetadata($object)
     {
@@ -62,38 +60,6 @@ class PostAdmin extends CapcoAdmin
         }
     }
 
-    /**
-     * if user is not super admin return only what he can see.
-     */
-    public function createQuery($context = 'list')
-    {
-        $user = $this->tokenStorage->getToken()->getUser();
-        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
-        }
-
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
-        $query
-            ->leftJoin($query->getRootAliases()[0] . '.projects', 'p')
-            ->andWhere(
-                $query
-                    ->expr()
-                    ->andX(
-                        $query->expr()->eq('p.Author', ':author'),
-                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
-                    )
-            );
-        $query->orWhere(
-            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
-        );
-        $query->orWhere('p IS NULL');
-
-        $query->setParameter('author', $user);
-
-        return $query;
-    }
-
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title', null, ['label' => 'admin.fields.blog_post.title']);
@@ -118,7 +84,7 @@ class PostAdmin extends CapcoAdmin
             ->add('body', null, ['label' => 'admin.fields.blog_post.body'])
             ->add('createdAt', null, ['label' => 'admin.fields.blog_post.created_at'])
             ->add('isPublished', null, ['label' => 'admin.fields.blog_post.is_published'])
-            ->add('commentable', null, ['label' => 'admin.fields.blog_post.is_commentable'])
+            ->add('isCommentable', null, ['label' => 'admin.fields.blog_post.is_commentable'])
             ->add('publishedAt', null, ['label' => 'admin.fields.blog_post.published_at'])
             ->add('updatedAt', null, ['label' => 'admin.fields.blog_post.title'])
             ->add(
@@ -154,7 +120,7 @@ class PostAdmin extends CapcoAdmin
                 'label' => 'admin.fields.blog_post.is_published',
             ])
             ->add('publishedAt', null, ['label' => 'admin.fields.blog_post.published_at'])
-            ->add('commentable', null, [
+            ->add('isCommentable', null, [
                 'label' => 'admin.fields.blog_post.is_commentable',
                 'editable' => true,
             ])
@@ -265,7 +231,7 @@ class PostAdmin extends CapcoAdmin
                 'label' => 'admin.fields.blog_post.is_published',
                 'required' => false,
             ])
-            ->add('commentable', null, [
+            ->add('isCommentable', null, [
                 'label' => 'admin.fields.blog_post.is_commentable',
                 'required' => false,
             ]);
@@ -299,9 +265,41 @@ class PostAdmin extends CapcoAdmin
             ])
             ->add('isPublished', null, ['label' => 'admin.fields.blog_post.is_published'])
             ->add('publishedAt', null, ['label' => 'admin.fields.blog_post.published_at'])
-            ->add('commentable', null, ['label' => 'admin.fields.blog_post.is_commentable'])
+            ->add('isCommentable', null, ['label' => 'admin.fields.blog_post.is_commentable'])
             ->add('commentsCount', null, ['label' => 'admin.fields.blog_post.comments_count'])
             ->add('updatedAt', null, ['label' => 'admin.fields.blog_post.updated_at'])
             ->add('createdAt', null, ['label' => 'admin.fields.blog_post.created_at']);
+    }
+
+    /**
+     * if user is not super admin return only what he can see.
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.projects', 'p')
+            ->andWhere(
+                $query
+                    ->expr()
+                    ->andX(
+                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
+                    )
+            );
+        $query->orWhere(
+            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+        );
+        $query->orWhere('p IS NULL');
+
+        $query->setParameter('author', $user);
+
+        return $query;
     }
 }

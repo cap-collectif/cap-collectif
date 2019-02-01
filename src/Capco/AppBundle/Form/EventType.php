@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Event;
@@ -25,18 +24,8 @@ class EventType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'Y-MM-dd HH:mm:ss',
             ])
-            ->add('registrationEnable')
             ->add('enabled')
-            ->add('commentable')
-            ->add('link')
-            ->add('zipCode')
-            ->add('address')
-            ->add('metaDescription')
-            ->add('customCode')
-            ->add('city')
-            ->add('country')
-            ->add('projects')
-            ->add('themes');
+            ->add('isCommentable');
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -236,6 +236,10 @@ class ExportContext implements KernelAwareContext
                 if ('at' === $suffix) {
                     continue;
                 }
+                // We skip Sonata's cached medias URLs because they can be dynamic
+                if (false !== \strpos($cellValue, 'media/default')) {
+                    continue;
+                }
                 if (!isset($actual[$i])) {
                     throw new \RuntimeException(
                         sprintf(
