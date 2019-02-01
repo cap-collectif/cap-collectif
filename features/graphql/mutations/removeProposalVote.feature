@@ -9,9 +9,7 @@ Scenario: Logged in API client wants to remove a vote but has not voted
   {
     "query": "mutation ($input: RemoveProposalVoteInput!) {
       removeProposalVote(input: $input) {
-        proposal {
-          id
-        }
+        previousVoteId
       }
     }",
     "variables": {
@@ -47,9 +45,7 @@ Scenario: Logged in API client wants to remove a vote but has not voted
   {
     "query": "mutation ($input: RemoveProposalVoteInput!) {
       removeProposalVote(input: $input) {
-        proposal {
-          id
-        }
+        previousVoteId
       }
     }",
     "variables": {
@@ -85,9 +81,7 @@ Scenario: Logged in API client wants to remove a vote
   {
     "query": "mutation ($input: RemoveProposalVoteInput!) {
       removeProposalVote(input: $input) {
-        proposal {
-          id
-        }
+        previousVoteId
       }
     }",
     "variables": {
@@ -103,9 +97,7 @@ Scenario: Logged in API client wants to remove a vote
   {
     "data": {
       "removeProposalVote": {
-        "proposal": {
-          "id": "UHJvcG9zYWw6cHJvcG9zYWw3"
-        }
+        "previousVoteId": "1051"
       }
     }
   }
