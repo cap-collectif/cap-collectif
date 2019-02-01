@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
@@ -19,23 +20,25 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
     private $proposalSelectionVoteRepository;
     private $proposalCollectVoteRepository;
     private $commentableCommentsDataLoader;
+    private $tokenStorage;
 
     public function __construct(
         ObjectNormalizer $normalizer,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        CommentableCommentsDataLoader $commentableCommentsDataLoader
+        CommentableCommentsDataLoader $commentableCommentsDataLoader,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->normalizer = $normalizer;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function normalize($object, $format = null, array $context = [])
     {
         $data = $this->normalizer->normalize($object, $format, $context);
-
         $selectionVotesCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedByStepsId(
             $object
         );
@@ -68,17 +71,13 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
             'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
             'first' => 0,
         ]);
+        $commentsConnection = $this->commentableCommentsDataLoader->resolve(
+            $object,
+            $args,
+            $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null
+        );
 
-        if ($object->isCommentable()) {
-            $commentsConnection = $this->commentableCommentsDataLoader->resolve(
-                $object,
-                $args,
-                null
-            );
             $data['commentsCount'] = $commentsConnection->{'totalCountWithAnswers'};
-        } else {
-            $data['commentsCount'] = 0;
-        }
 
         return $data;
     }

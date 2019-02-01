@@ -5,7 +5,7 @@ import Image from './Image';
 import { avatarPx } from '../../../utils/sizes';
 
 type Props = {
-  size: 'small' | 'normal',
+  size: 'small' | 'normal' | 'tiny',
   className?: string,
   src: string,
   alt: string,

@@ -11,6 +11,7 @@ const props = {
   height: '400px',
   linearGradient: false,
   alt: 'my alternative',
+  role: 'img',
 };
 
 describe('<DarkenGradientMedia />', () => {

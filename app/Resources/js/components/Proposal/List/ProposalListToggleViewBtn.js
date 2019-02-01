@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { type intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import type { State } from '../../../types';
@@ -10,6 +10,7 @@ type Props = {
   onChange: Function,
   mode?: 'mosaic' | 'map' | 'table',
   showMapButton: boolean,
+  intl: intlShape,
 };
 
 export class ProposalListToggleViewBtn extends React.Component<Props> {
@@ -21,7 +22,7 @@ export class ProposalListToggleViewBtn extends React.Component<Props> {
   };
 
   render() {
-    const { mode, showMapButton } = this.props;
+    const { mode, showMapButton, intl } = this.props;
 
     return (
       <div
@@ -29,10 +30,13 @@ export class ProposalListToggleViewBtn extends React.Component<Props> {
         className="btn-group d-flex mb-15"
         style={{ width: '100%' }}
         role="group"
-        aria-label="Step view">
+        aria-label={intl.formatMessage({ id: 'global.filter.chose.display.type' })}>
         <Button
           bsStyle="default"
           active={mode === 'table'}
+          role="checkbox"
+          ariaChecked={mode === 'table'}
+          title={mode === 'table' ? intl.formatMessage({ id: 'table-selected' }) : null}
           style={{ flex: '1 0 auto' }}
           onClick={this.handleClick.bind(this, 'table')}>
           <i className="cap cap-android-menu" /> <FormattedMessage id="list-view" />
@@ -40,6 +44,9 @@ export class ProposalListToggleViewBtn extends React.Component<Props> {
         <Button
           bsStyle="default"
           active={mode === 'mosaic'}
+          role="checkbox"
+          aria-checked={mode === 'mosaic'}
+          title={mode === 'mosaic' ? intl.formatMessage({ id: 'mosaic-selected' }) : null}
           style={{ flex: '1 0 auto' }}
           onClick={this.handleClick.bind(this, 'mosaic')}>
           <i className="cap cap-th-large" /> <FormattedMessage id="grid" />
@@ -48,6 +55,9 @@ export class ProposalListToggleViewBtn extends React.Component<Props> {
           <Button
             bsStyle="default"
             style={{ flex: '1 0 auto' }}
+            role="checkbox"
+            aria-checked={mode === 'map'}
+            title={mode === 'map' ? intl.formatMessage({ id: 'map-selected' }) : null}
             active={mode === 'map'}
             onClick={this.handleClick.bind(this, 'map')}>
             <i className="cap cap-map-location" /> <FormattedMessage id="proposal.map.map" />
@@ -62,4 +72,4 @@ const mapStateToProps = (state: State) => ({
   mode: state.proposal.selectedViewByStep || 'mosaic',
 });
 
-export default connect(mapStateToProps)(ProposalListToggleViewBtn);
+export default connect(mapStateToProps)(injectIntl(ProposalListToggleViewBtn));

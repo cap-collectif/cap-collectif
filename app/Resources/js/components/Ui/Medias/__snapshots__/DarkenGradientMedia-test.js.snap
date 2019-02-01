@@ -2,10 +2,8 @@
 
 exports[`<DarkenGradientMedia /> should render correctly default darkenGradientMedia 1`] = `
 <DarkenGradientMedia__Container
-  aria-label=""
   height="100%"
   linearGradient={true}
-  role="img"
   url="https://source.unsplash.com/collection/1353633"
   width="100%"
 />
