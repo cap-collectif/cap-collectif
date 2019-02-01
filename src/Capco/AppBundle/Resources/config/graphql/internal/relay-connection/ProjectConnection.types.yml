@@ -1,8 +1,7 @@
-PreviewProjectConnection:
+ProjectConnection:
   type: relay-connection
   config:
-    name: ProjectConnection
-    nodeType: PreviewProject!
+    nodeType: Project!
     connectionFields:
       totalCount:
         type: Int!

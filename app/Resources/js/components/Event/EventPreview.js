@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import DatesInterval from '../Utils/DatesInterval';
 import type { EventPreview_event } from './__generated__/EventPreview_event.graphql';
 import DateIcon from '../Ui/Dates/DateIcon';
-import { UserAvatar } from '../User/UserAvatar';
 
 type Props = {
   event: EventPreview_event,
@@ -40,23 +39,13 @@ export class EventPreview extends React.Component<Props> {
                 ))}
             </p>
             <p className="excerpt">
-              {event.author && event.author.username && event.author.media && (
-                <div>
-                  {/* $FlowFixMe */}
-                  <UserAvatar size={16} user={event.author} />
-                  <span className="font-weight-semi-bold">{event.author.username}</span>
-                </div>
-              )}
-            </p>
-            <p className="excerpt">
               <i className="cap-calendar-1 mr-10" />
               <DatesInterval startAt={event.startAt} endAt={event.endAt} fullDay />
             </p>
             <p className="excerpt">
               {event.fullAddress ? (
                 <div>
-                  <i className="cap-marker-1 mr-10" />
-                  {event.fullAddress}
+                  <i className="cap-marker-1 mr-10" /> {event.fullAddress}
                 </div>
               ) : null}
             </p>
@@ -80,13 +69,6 @@ export default createFragmentContainer(EventPreview, {
         id
         title
         url
-      }
-      author {
-        username
-        url
-        media {
-          url
-        }
       }
     }
   `,

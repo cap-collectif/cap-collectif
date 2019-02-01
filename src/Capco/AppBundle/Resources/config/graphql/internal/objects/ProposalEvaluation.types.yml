@@ -4,7 +4,7 @@ ProposalEvaluation:
     description: 'An evaluation for a proposal'
     fields:
       proposal:
-        type: 'InternalProposal!'
+        type: 'Proposal!'
         description: 'Identifies the proposal.'
       version:
         type: 'Int!'

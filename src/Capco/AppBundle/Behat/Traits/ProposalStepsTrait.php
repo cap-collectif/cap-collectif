@@ -485,14 +485,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I fill the simple proposal form
-     */
-    public function iFillTheSimpleProposalForm()
-    {
-        $this->fillField('proposal_title', 'This is a good title');
-    }
-
-    /**
      * @When I comment :body
      *
      * @param string $body

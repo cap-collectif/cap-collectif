@@ -13,7 +13,7 @@ export class EventListCounter extends React.Component<Props> {
     const { query } = this.props;
     return query.events.totalCount === query.eventsWithoutFilters.totalCount ? (
       <FormattedMessage
-        id="number-of-events"
+        id="n-events"
         values={{
           num: query.events.totalCount,
         }}

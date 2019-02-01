@@ -33,7 +33,7 @@ InternalQuery:
         description: 'Get the current registration form'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver")'
       projects:
-        type: 'InternalProjectConnection!'
+        type: 'ProjectConnection!'
       events:
         type: 'InternalEventConnection!'
       projectAuthors:
@@ -91,7 +91,7 @@ InternalQuery:
             type: 'Float!'
         resolve: "@=resolver('query_available_districts_for_location', [args['proposalFormId'], args['latitude'], args['longitude']])"
       votesByContribution:
-        type: '[InternalProposalVote!]!'
+        type: '[ProposalVote!]!'
         description: 'TO BE REMOVED'
         args:
           contribution:

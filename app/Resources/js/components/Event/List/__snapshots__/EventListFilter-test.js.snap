@@ -26,6 +26,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
     bsClass="col"
     className="pl-0"
     componentClass="div"
+    id="event-filters"
     md={4}
     xs={12}
   >
@@ -70,6 +71,9 @@ exports[`<EventListFilters /> renders correctly 1`] = `
               >
                 <div>
                   <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-status-listbox"
+                    aria-haspopup="true"
                     clearable={false}
                     component={[Function]}
                     id="EventListFilters-filter-status"
@@ -77,20 +81,17 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                     options={
                       Array [
                         Object {
-                          "label": "all-events",
-                          "value": "all",
-                        },
-                        Object {
                           "label": "ongoing-and-future",
-                          "value": "ongoing-and-future",
+                          "value": true,
                         },
                         Object {
                           "label": "finished",
-                          "value": "finished",
+                          "value": false,
                         },
                       ]
                     }
                     placeholder="voting-status"
+                    role="combobox"
                   />
                 </div>
               </Col>
@@ -101,6 +102,9 @@ exports[`<EventListFilters /> renders correctly 1`] = `
               >
                 <div>
                   <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-userType-listbox"
+                    aria-haspopup="true"
                     component={[Function]}
                     id="EventListFilters-filter-userType"
                     name="userType"
@@ -117,6 +121,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                       ]
                     }
                     placeholder="filter-userType"
+                    role="combobox"
                   />
                 </div>
               </Col>
@@ -181,6 +186,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
     bsClass="col"
     className="pl-0"
     componentClass="div"
+    id="event-filters"
     md={4}
     xs={12}
   >
@@ -225,6 +231,9 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
               >
                 <div>
                   <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-status-listbox"
+                    aria-haspopup="true"
                     clearable={false}
                     component={[Function]}
                     id="EventListFilters-filter-status"
@@ -232,20 +241,17 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                     options={
                       Array [
                         Object {
-                          "label": "all-events",
-                          "value": "all",
-                        },
-                        Object {
                           "label": "ongoing-and-future",
-                          "value": "ongoing-and-future",
+                          "value": true,
                         },
                         Object {
                           "label": "finished",
-                          "value": "finished",
+                          "value": false,
                         },
                       ]
                     }
                     placeholder="voting-status"
+                    role="combobox"
                   />
                 </div>
               </Col>
@@ -256,6 +262,9 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
               >
                 <div>
                   <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-userType-listbox"
+                    aria-haspopup="true"
                     component={[Function]}
                     id="EventListFilters-filter-userType"
                     name="userType"
@@ -272,6 +281,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                       ]
                     }
                     placeholder="filter-userType"
+                    role="combobox"
                   />
                 </div>
               </Col>

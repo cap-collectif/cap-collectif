@@ -285,6 +285,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
           <Panel id="capco_horizontal_form">
             <Panel.Heading>{header}</Panel.Heading>
             <Panel.Body>
+              <h2 className="page-header">
+                <FormattedMessage id="personal-data" />
+              </h2>
               {!hasData(viewer, currentValues) && (
                 <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
                   <Well>
