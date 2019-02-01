@@ -65,7 +65,7 @@ export class EventPage extends React.Component<Props> {
               theme: null,
               userType: null,
               project: null,
-              isFuture: true,
+              isFuture: null,
             }: EventPageQueryVariables)
           }
           render={({ error, props }: { props: ?EventPageQueryResponse } & ReadyState) => {

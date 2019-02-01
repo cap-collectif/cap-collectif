@@ -139,17 +139,18 @@ export class EventListFilters extends React.Component<Props, State> {
         placeholder={intl.formatMessage({ id: 'voting-status' })}
         options={[
           {
-            value: true,
+            value: 'all',
+            label: intl.formatMessage({
+              id: 'all-events',
+            }),
+          },
+          {
+            value: 'ongoing-and-future',
             label: intl.formatMessage({
               id: 'ongoing-and-future',
             }),
           },
-          {
-            value: false,
-            label: intl.formatMessage({
-              id: 'finished',
-            }),
-          },
+          { value: 'finished', label: intl.formatMessage({ id: 'finished' }) },
         ]}
       />,
     );
@@ -278,7 +279,7 @@ const form = reduxForm({
   form: 'EventListFilters',
   destroyOnUnmount: false,
   initialValues: {
-    status: true,
+    status: 'all',
   },
 })(EventListFilters);
 
