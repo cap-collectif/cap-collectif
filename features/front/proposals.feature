@@ -124,6 +124,21 @@ Scenario: Logged in user wants to create a proposal with theme
   And I click the "#proposal-page-tabs-tab-followers" element
   And I should see my subscription as "user" in the proposal followers list
 
+@database
+Scenario: Logged in user wants to create two proposal in under a minute
+  Given feature "districts" is enabled
+  And I am logged in as user
+  When I go to a project with requirement condition to vote and ranking
+  When I click the create proposal button
+  When I fill the simple proposal form
+  And I submit the create proposal form
+  When I go to a project with requirement condition to vote and ranking
+  When I click the create proposal button
+  When I fill the simple proposal form
+  And I submit the create proposal form
+  Then I should see "publication-limit-reached"
+  When I reload the page, I should see a confirm popup 
+
 @security
 Scenario: Logged in user wants to create a proposal without providing required response
   Given feature "districts" is enabled
