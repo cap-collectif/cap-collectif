@@ -356,19 +356,6 @@ class ProposalMutation implements ContainerAwareInterface
             unset($values['draft']);
         }
 
-        if (
-            \count(
-                $this->container
-                    ->get('capco.proposal.repository')
-                    ->findCreatedSinceIntervalByAuthor($user, 'PT1M', 'author')
-            ) >= 2
-        ) {
-            $this->logger->error('You contributed too many times.');
-            $error = ['message' => 'You contributed too many times.'];
-
-            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
-        }
-
         $values = $this->fixValues($values, $proposalForm);
         $proposal = new Proposal();
         $follower = new Follower();

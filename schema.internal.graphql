@@ -1535,9 +1535,6 @@ input CreateProposalInput {
 type CreateProposalPayload {
   # The created proposal, if everything goes well !
   proposal: Proposal
-
-  # An unsuccessful mutation will return one or more `UserError` objects.
-  userErrors: [UserError!]
   clientMutationId: String
 }
 

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -88,20 +87,18 @@ class ProjectSearch extends Search
         ];
     }
 
-    public function getHydratedResults(array $ids): array
+    private function getHydratedResults(array $ids): array
     {
-        // We can't use findById because we would lost the correct order of ids
+        // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        return array_values(
-            array_filter(
-                array_map(function (string $id) {
-                    return $this->projectRepo->findOneBy(['id' => $id]);
-                }, $ids),
-                function (?Project $project) {
-                    return null !== $project;
-                }
-            )
-        );
+        $projects = $this->projectRepo->hydrateFromIds($ids);
+        // We have to restore the correct order of ids, because Doctrine has lost it, see:
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        usort($projects, function ($a, $b) use ($ids) {
+            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+        });
+
+        return $projects;
     }
 
     private function getSort(string $order): array

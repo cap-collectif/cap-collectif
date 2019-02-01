@@ -1095,6 +1095,11 @@ EOF;
                 if (isset($value['question']) && $value['question']['title'] === $columnName) {
                     if (isset($value['formattedValue'])) {
                         $row[] = Text::cleanNewline($value['formattedValue']);
+                    } elseif (isset($value['medias'])) {
+                        $urls = array_map(function (array $media) {
+                            return $media['url'];
+                        }, $value['medias']);
+                        $row[] = implode(', ', $urls);
                     } else {
                         $row[] = '';
                     }
@@ -1203,9 +1208,15 @@ EOF;
     {
         $result = $headers;
         $sample = Arr::path(Arr::path($proposals, 'data.node.proposals.edges')[0], 'node');
-        $questions = array_map(function ($item) {
-            return $item['question']['title'];
-        }, $sample['responses']);
+        $questions = array_filter(
+            array_map(function ($item) {
+                if ('section' !== $item['question']['kind']) {
+                    return $item['question']['title'];
+                }
+
+                return null;
+            }, $sample['responses'])
+        );
         foreach ($questions as $question) {
             $this->proposalHeaderMap[$question] = 'responses';
         }
@@ -1217,7 +1228,12 @@ EOF;
             $this->currentStep->getProposalForm() &&
             ($evaluationForm = $this->currentStep->getProposalForm()->getEvaluationForm())
         ) {
-            $evaluationFormAsArray = $evaluationForm->getRealQuestions()->toArray();
+            $evaluationFormAsArray = $evaluationForm
+                ->getRealQuestions()
+                ->filter(function (AbstractQuestion $question) {
+                    return AbstractQuestion::QUESTION_TYPE_SECTION !== $question->getType();
+                })
+                ->toArray();
             /** @var AbstractQuestion $question */
             foreach (\array_reverse($evaluationFormAsArray) as $question) {
                 $result = $this->insert(
@@ -1678,12 +1694,14 @@ ${COMMENT_VOTE_INFOS}
               ... on ValueResponse {
                 question {
                   title
+                  kind
                 }
                 formattedValue
               }
               ... on MediaResponse {
                 question {
                   title
+                  kind
                 }
                 medias {
                   url
@@ -1696,6 +1714,7 @@ ${COMMENT_VOTE_INFOS}
                   question {
                     id
                     title
+                    kind
                   }
                   formattedValue
                 }
@@ -1703,6 +1722,7 @@ ${COMMENT_VOTE_INFOS}
                   question {
                     id
                     title
+                    kind
                   }
                   medias {
                     url
