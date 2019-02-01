@@ -27,7 +27,7 @@ type Props = {
   multi: boolean,
   options?: Options, // or loadOptions for async
   loadOptions?: () => Options, // or options for sync
-  filterOptions?: Function,
+  filterOption?: Function,
   onChange: () => void,
   labelClassName?: string,
   inputClassName?: string,
@@ -66,7 +66,7 @@ class renderSelect extends React.Component<Props> {
       clearable,
       placeholder,
       loadOptions,
-      filterOptions,
+      filterOption,
       id,
       help,
       meta: { touched, error },
@@ -76,14 +76,20 @@ class renderSelect extends React.Component<Props> {
     let selectValue = null;
     let selectLabel = null;
 
-    if (multi) {
-      selectLabel =
-        options && options.filter(option => option && option.value && option.value === value);
-      selectValue = value ? selectLabel && selectLabel : [];
+    if (typeof loadOptions === 'function') {
+
     } else {
-      selectLabel =
-        options && options.filter(option => option && option.value && option.value === value);
-      selectValue = value ? selectLabel && selectLabel[0] : null;
+      if (multi) {
+        console.log(options);
+        selectLabel =
+          options && options.filter(option => option && option.value && option.value === value);
+        selectValue = value ? selectLabel && selectLabel : [];
+        console.log(selectValue);
+      } else {
+        selectLabel =
+          options && options.filter(option => option && option.value && option.value === value);
+        selectValue = value ? selectLabel && selectLabel[0] : null;
+      }
     }
 
     return (
@@ -97,7 +103,8 @@ class renderSelect extends React.Component<Props> {
         <div id={id} className={inputClassName || ''}>
           {typeof loadOptions === 'function' ? (
             <Async
-              filterOption={filterOptions}
+              filterOption={filterOption}
+              ref={ref}
               components={{ ClearIndicator }}
               isDisabled={disabled}
               defaultOptions={autoload}
@@ -106,9 +113,9 @@ class renderSelect extends React.Component<Props> {
                 placeholder || <FormattedMessage id="admin.fields.menu_item.parent_empty" />
               }
               loadOptions={loadOptions}
-              onBlurResetsInput={false}
+              // onBlurResetsInput={false}
               cacheOptions
-              onCloseResetsInput={false}
+              // onCloseResetsInput={false}
               value={selectValue}
               name={name}
               isMulti={multi}
@@ -135,7 +142,7 @@ class renderSelect extends React.Component<Props> {
               components={{ ClearIndicator }}
               isDisabled={disabled}
               options={options}
-              filterOption={filterOptions}
+              filterOption={filterOption}
               onBlurResetsInput={false}
               onCloseResetsInput={false}
               placeholder={

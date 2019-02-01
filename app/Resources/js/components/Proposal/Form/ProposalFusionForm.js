@@ -76,6 +76,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch) =>
 export class ProposalFusionForm extends React.Component<Props> {
   render() {
     const { currentCollectStep, projects, onProjectChange, intl } = this.props;
+
+    // console.warn(currentCollectStep);
     return (
       <form>
         <Field
@@ -99,19 +101,31 @@ export class ProposalFusionForm extends React.Component<Props> {
             help={intl.formatMessage({ id: '2-proposals-minimum' })}
             placeholder={intl.formatMessage({ id: 'select-proposals' })}
             component={select}
-            filterOptions={(options, filter, currentValues) =>
-              options
-                .filter(o => o.stepId === currentCollectStep.id) // If step has changed, we hide previous steps
-                .filter(o => !currentValues.includes(o))
+            filterOption={(option) => {
+              // console.log(option);
+
+              if(option && option.data.stepId === currentCollectStep.id) {
+
+                return true;
+              }
+
+              return false;
+              // .filter(o => !currentValues.includes(o))
+            }
             }
             loadOptions={input =>
               fetchQuery(environment, query, { term: input, stepId: currentCollectStep.id }).then(
-                res =>
-                  res.step.proposals.edges.map(edge => ({
+                res => {
+                  const options = res.step.proposals.edges.map(edge => ({
                     value: edge.node.id,
                     label: edge.node.title,
                     stepId: currentCollectStep.id,
-                  })),
+                  }));
+
+                  // console.log(options);
+
+                  return options;
+                }
               )
             }
           />
