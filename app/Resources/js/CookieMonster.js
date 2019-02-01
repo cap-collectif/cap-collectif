@@ -108,6 +108,7 @@ class CookieMonster {
     // $FlowFixMe
     if (
       target !== null &&
+      // $FlowFixMe
       target.id &&
       (target.id === 'cookie-banner' || target.id === 'cookie-more-button')
     ) {

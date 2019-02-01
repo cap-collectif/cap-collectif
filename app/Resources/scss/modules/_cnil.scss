@@ -10,7 +10,7 @@
     padding: 10px;
     background-color: $dark;
     color: $white;
-    z-index: 9999;
+    z-index: 1000;
 
     &.active {
         display: block;
@@ -37,7 +37,7 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    z-index: 9999;
+    z-index: 1000;
 
     &.active {
         display: block;

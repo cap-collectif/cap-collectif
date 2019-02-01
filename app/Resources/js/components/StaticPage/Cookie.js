@@ -90,7 +90,7 @@ export class Cookie extends React.Component<Props, CookieState> {
     const { isAnalyticEnabled, isAdvertisingEnabled } = this.state;
     const { analyticsJs, adJs } = this.props;
     return (
-      <div className="container w-auto cookie-manager">
+      <div className="container cookie-manager w-auto">
         <div className="row mt-10 cookie-manager" id="cookies-manager">
           {config.canUseDOM && CookieMonster.isDoNotTrackActive() && (
             <Alert bsStyle="info" className="row cookie-manager" id="cookies-alert">

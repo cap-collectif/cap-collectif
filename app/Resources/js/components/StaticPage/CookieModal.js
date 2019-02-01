@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { ButtonGroup, Button, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import CloseButton from '../Form/CloseButton';
 import Cookie from './Cookie';
@@ -48,9 +48,9 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
           <div>
             |
             <Button
+              variant="link"
               bsStyle="link"
               id="cookies-management"
-              href="#"
               onClick={() => {
                 this.setState({ showModal: true });
               }}>
@@ -62,28 +62,27 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
             <div className="col-sm-9">
               <FormattedMessage id={bannerTrad} />
             </div>
-            <div className="col-sm-3 d-flex justify-content-end">
+            <div className="col-sm-3 text-right">
               <Button
                 id="cookie-more-button"
                 className="mr-10 mt-10"
-                bsStyle="default"
+                variant="link"
+                bsStyle="link"
                 onClick={() => {
                   this.setState({ showModal: true });
                 }}
                 name="cookie-more">
                 <FormattedMessage id="cookies-setting" />
               </Button>
-              <div id="cookie-button-container">
-                <Button
-                  id="cookie-consent"
-                  bsStyle="default"
-                  className="btn btn-default btn-sm mt-10"
-                  onClick={() => {
-                    CookieMonster.considerFullConsent();
-                  }}>
-                  <FormattedMessage id="ok-accept-everything" />
-                </Button>
-              </div>
+              <Button
+                id="cookie-consent"
+                bsStyle="default"
+                className="btn btn-default btn-sm mt-10"
+                onClick={() => {
+                  CookieMonster.considerFullConsent();
+                }}>
+                <FormattedMessage id="ok-accept-everything" />
+              </Button>
             </div>
           </div>
         )}
@@ -107,20 +106,15 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
               <Cookie analyticsJs={analyticsJs} adJs={adJs} ref={this.cookie} />
             </Modal.Body>
             <Modal.Footer className="cookie-manager">
-              <ButtonGroup className="d-inline-block cookie-manager">
-                <CloseButton
-                  buttonId="cookies-cancel"
-                  onClose={() => {
-                    this.setState({ showModal: false });
-                  }}
-                />
-                <button
-                  className="ml-15 btn btn-primary"
-                  id="cookies-save"
-                  onClick={this.saveCookie}>
-                  <FormattedMessage id="global.save" />
-                </button>
-              </ButtonGroup>
+              <CloseButton
+                buttonId="cookies-cancel"
+                onClose={() => {
+                  this.setState({ showModal: false });
+                }}
+              />
+              <button className="ml-15 btn btn-primary" id="cookies-save" onClick={this.saveCookie}>
+                <FormattedMessage id="global.save" />
+              </button>
             </Modal.Footer>
           </Modal>
         </div>
