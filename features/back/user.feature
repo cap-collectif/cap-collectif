@@ -97,7 +97,7 @@ Scenario: Logged in super admin wants to create a user
     | username | a                 |
     | email    | qsdqsdqsdsqdqsdqs |
   And I should see "registration.constraints.username.min"
-  And I should see "global.constraints.email.invalid"
+  And I should see "registration.constraints.email.invalid"
   Then I fill in the following:
     | username | Toto                  |
     | email    | blague.toto@gmail.com |

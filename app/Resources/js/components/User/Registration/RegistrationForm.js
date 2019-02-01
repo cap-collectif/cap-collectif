@@ -57,7 +57,7 @@ export const validate = (values: FormValues, props: Props) => {
     errors.username = 'registration.constraints.username.min';
   }
   if (!values.email || !isEmail(values.email)) {
-    errors.email = 'global.constraints.email.invalid';
+    errors.email = 'registration.constraints.email.invalid';
   }
   if (!values.plainPassword || values.plainPassword.length < 8) {
     errors.plainPassword = 'registration.constraints.password.min';
