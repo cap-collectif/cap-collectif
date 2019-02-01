@@ -23,6 +23,13 @@ describe('<LeafletMap />', () => {
             startAt: '2018-09-27T03:00:00+01:00',
             endAt: '2019-09-27T03:00:00+01:00',
             title: 'Evenement des gens perdu',
+            author: {
+              username: 'toto',
+              media: {
+                url: 'http://monimage.toto',
+              },
+              url: 'http://jesuistoto.fr',
+            },
           },
         },
         {
@@ -35,6 +42,13 @@ describe('<LeafletMap />', () => {
             startAt: '2018-10-07T03:00:00+01:00',
             endAt: '2019-10-27T03:00:00+01:00',
             title: 'Evenement des gens pas perdu',
+            author: {
+              username: 'toto',
+              media: {
+                url: 'http://monimage.toto',
+              },
+              url: 'http://jesuistoto.fr',
+            },
           },
         },
       ],
