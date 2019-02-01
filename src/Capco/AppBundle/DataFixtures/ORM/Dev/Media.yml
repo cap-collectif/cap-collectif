@@ -2,110 +2,136 @@ Capco\MediaBundle\Entity\Media:
   # projects
   MediaProject1:
     id: media1
+    providerReference: project-1.jpg
     binaryContent: project-1.jpg
     name: Titre du média
   MediaProject2:
     id: media2
+    providerReference: project-2.jpg
     binaryContent: project-2.jpg
     name: Titre du média 2
   MediaProject3:
     id: media3
+    providerReference: project-3.jpg
     binaryContent: project-3.jpg
     name: Titre du média 2
   MediaProject4:
     id: media-project4
+    providerReference: project-4.jpg
     binaryContent: project-4.jpg
     name: Titre du média 4
   MediaProjectImageVideo:
     id: media4
+    providerReference: project-image-video.jpg
     binaryContent: project-image-video.jpg
     name: Titre du média 2
   # projects
   MediaIdea1:
     id: media5
+    providerReference: idea-1.jpg
     binaryContent: idea-1.jpg
     name: Titre du média
   MediaIdea2:
     id: media6
+    providerReference: idea-2.jpg
     binaryContent: idea-2.jpg
     name: Titre du média 2
   # users
   MediaUser1:
     id: media7
+    providerReference: sfavot.jpg
     binaryContent: user/sfavot.jpg
     name: Suzanne Favot
   MediaUser2:
     id: media8
+    providerReference: lbrunet.jpg
     binaryContent: user/lbrunet.jpg
     name: Laurent Brunet
   MediaUser3:
     id: media9
+    providerReference: xlacot.jpg
     binaryContent: user/xlacot.jpg
     name: Xavier Lacot
   MediaUser4:
     id: media10
+    providerReference: spyl.jpg
     binaryContent: user/spyl.jpg
     name: Spyl
   MediaUser5:
     id: media11
+    providerReference: welcomattic.jpg
     binaryContent: user/welcomattic.jpg
     name: Welcomattic
   #SiteImages
   Logo:
     id: media12
+    providerReference: logo.png
     binaryContent: logo.png
     name: Logo
   header:
     id: media13
+    providerReference: header.jpg
     binaryContent: header.jpg
     name: Header
   picto:
     id: media14
+    providerReference: picto.png
     binaryContent: picto.png
     name: Picto
   # Social Network
   MediaFlickr:
     id: media15
+    providerReference: flickr.png
     binaryContent: social/flickr.png
     name: Flickr
   MediaFacebook:
     id: media16
+    providerReference: facebook.png
     binaryContent: social/facebook.png
     name: Facebook
   MediaGooglePlus:
     id: media17
+    providerReference: google_plus.png
     binaryContent: social/google_plus.png
     name: Google
   MediaLinkedIn:
     id: media18
+    providerReference: linkedIn.png
     binaryContent: social/linkedIn.png
     name: LinkedIn
   MediaRSS:
     id: media19
+    providerReference: rss.png
     binaryContent: social/rss.png
     name: RSS
   MediaTwitter:
     id: media20
+    providerReference: twitter.png
     binaryContent: social/twitter.png
     name: Twitter
   MediaCapcoSite:
     id: media21
+    providerReference: capco.png
     binaryContent: social/capco.png
     name: Capco
   MediaAvatar:
     id: media22
+    providerReference: default_avatar.jpg
     binaryContent: default_avatar.jpg
     name: Avatar
   MediaVotesBar:
     id: media23
+    providerReference: votes_bar_image.png
     binaryContent: votes_bar_image.png
     name: Image de la barre de votes
   MediaInstagram:
     id: media25
+    providerReference: instagram.png
     binaryContent: social/instagram.png
     name: Instagram
   # File
   MediaFilePdf:
     id: media24
+    providerReference: small_pdf.pdf
     binaryContent: small_pdf.pdf
     name: Small PDF

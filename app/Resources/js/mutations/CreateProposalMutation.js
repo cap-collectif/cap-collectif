@@ -15,6 +15,9 @@ const mutation = graphql`
         url
         publicationStatus
       }
+      userErrors {
+        message
+      }
     }
   }
 `;

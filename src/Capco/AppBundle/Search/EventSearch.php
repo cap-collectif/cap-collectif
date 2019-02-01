@@ -113,22 +113,18 @@ class EventSearch extends Search
         ];
     }
 
-    public function getHydratedResults(array $ids): array
+    private function getHydratedResults(array $ids): array
     {
-        // We can't use findById because we would lost the correct order of ids
+        // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        $events = $this->eventRepository->getEventsEnabledByIds($ids);
-        $results = array_map(function ($id) use ($events) {
-            $found = array_values(
-                array_filter($events, function ($event) use ($id) {
-                    return $event->getId() === $id;
-                })
-            );
+        $events = $this->eventRepository->hydrateFromIds($ids);
+        // We have to restore the correct order of ids, because Doctrine has lost it, see:
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        usort($events, function ($a, $b) use ($ids) {
+            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+        });
 
-            return $found[0] ?? null;
-        }, $ids);
-
-        return $results;
+        return $events;
     }
 
     private function getSort($order): array

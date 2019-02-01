@@ -31,6 +31,7 @@ class ProjectsListFilterTypes extends React.Component<Props> {
           options={projectTypes.map(p => ({
             value: p.id,
             label: intl.formatMessage({ id: p.title }),
+            ariaLabel: intl.formatMessage({ id: p.title }),
           }))}
         />
       );

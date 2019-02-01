@@ -2,7 +2,7 @@
 
 exports[`<EventListFilters /> renders correctly 1`] = `
 <FormattedMessage
-  id="n-events"
+  id="number-of-events"
   values={
     Object {
       "num": 2,

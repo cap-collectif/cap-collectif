@@ -2,7 +2,7 @@
 
 exports[`<ProposalListToggleViewBtn /> should render a toggle button with map selected 1`] = `
 <div
-  aria-label="Step view"
+  aria-label="global.filter.chose.display.type"
   className="btn-group d-flex mb-15"
   id="step-view-toggle"
   role="group"
@@ -14,16 +14,19 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with map se
 >
   <Button
     active={false}
+    ariaChecked={false}
     block={false}
     bsClass="btn"
     bsStyle="default"
     disabled={false}
     onClick={[Function]}
+    role="checkbox"
     style={
       Object {
         "flex": "1 0 auto",
       }
     }
+    title={null}
   >
     <i
       className="cap cap-android-menu"
@@ -36,16 +39,19 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with map se
   </Button>
   <Button
     active={false}
+    aria-checked={false}
     block={false}
     bsClass="btn"
     bsStyle="default"
     disabled={false}
     onClick={[Function]}
+    role="checkbox"
     style={
       Object {
         "flex": "1 0 auto",
       }
     }
+    title={null}
   >
     <i
       className="cap cap-th-large"
@@ -58,16 +64,19 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with map se
   </Button>
   <Button
     active={true}
+    aria-checked={true}
     block={false}
     bsClass="btn"
     bsStyle="default"
     disabled={false}
     onClick={[Function]}
+    role="checkbox"
     style={
       Object {
         "flex": "1 0 auto",
       }
     }
+    title="map-selected"
   >
     <i
       className="cap cap-map-location"
@@ -83,7 +92,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with map se
 
 exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic selected 1`] = `
 <div
-  aria-label="Step view"
+  aria-label="global.filter.chose.display.type"
   className="btn-group d-flex mb-15"
   id="step-view-toggle"
   role="group"
@@ -95,16 +104,19 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic
 >
   <Button
     active={false}
+    ariaChecked={false}
     block={false}
     bsClass="btn"
     bsStyle="default"
     disabled={false}
     onClick={[Function]}
+    role="checkbox"
     style={
       Object {
         "flex": "1 0 auto",
       }
     }
+    title={null}
   >
     <i
       className="cap cap-android-menu"
@@ -117,16 +129,19 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic
   </Button>
   <Button
     active={true}
+    aria-checked={true}
     block={false}
     bsClass="btn"
     bsStyle="default"
     disabled={false}
     onClick={[Function]}
+    role="checkbox"
     style={
       Object {
         "flex": "1 0 auto",
       }
     }
+    title="mosaic-selected"
   >
     <i
       className="cap cap-th-large"
@@ -139,16 +154,19 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic
   </Button>
   <Button
     active={false}
+    aria-checked={false}
     block={false}
     bsClass="btn"
     bsStyle="default"
     disabled={false}
     onClick={[Function]}
+    role="checkbox"
     style={
       Object {
         "flex": "1 0 auto",
       }
     }
+    title={null}
   >
     <i
       className="cap cap-map-location"
@@ -164,7 +182,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic
 
 exports[`<ProposalListToggleViewBtn /> should render a toggle button without map & with table selected 1`] = `
 <div
-  aria-label="Step view"
+  aria-label="global.filter.chose.display.type"
   className="btn-group d-flex mb-15"
   id="step-view-toggle"
   role="group"
@@ -176,16 +194,19 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button without map
 >
   <Button
     active={true}
+    ariaChecked={true}
     block={false}
     bsClass="btn"
     bsStyle="default"
     disabled={false}
     onClick={[Function]}
+    role="checkbox"
     style={
       Object {
         "flex": "1 0 auto",
       }
     }
+    title="table-selected"
   >
     <i
       className="cap cap-android-menu"
@@ -198,16 +219,19 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button without map
   </Button>
   <Button
     active={false}
+    aria-checked={false}
     block={false}
     bsClass="btn"
     bsStyle="default"
     disabled={false}
     onClick={[Function]}
+    role="checkbox"
     style={
       Object {
         "flex": "1 0 auto",
       }
     }
+    title={null}
   >
     <i
       className="cap cap-th-large"

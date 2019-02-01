@@ -3,6 +3,6 @@ DeleteProposalPayload:
   config:
     fields:
       proposal:
-        type: 'InternalProposal!'
+        type: 'Proposal!'
       step:
         type: 'CollectStep!'

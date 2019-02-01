@@ -19,14 +19,8 @@ class DraftableTypeResolver implements ResolverInterface
 
     public function __invoke($node): Type
     {
-        $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
-
         if ($node instanceof Proposal) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewProposal');
-            }
-
-            return $this->typeResolver->resolve('InternalProposal');
+            return $this->typeResolver->resolve('Proposal');
         }
         if ($node instanceof Reply) {
             return $this->typeResolver->resolve('Reply');

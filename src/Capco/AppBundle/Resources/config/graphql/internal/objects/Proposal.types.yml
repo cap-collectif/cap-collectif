@@ -1,19 +1,19 @@
-InternalProposal:
+Proposal:
   type: object
   inherits:
-    - PreviewProposal
-    - Node
-    - Contribution
-    - Commentable
-    - Publishable
-    - Draftable
-    - Reportable
-    - Trashable
-    - WithFollowers
-    - UniformResourceLocatable
-    - UniformResourceAdminLocatable
+    [
+      Node,
+      Contribution,
+      Commentable,
+      Publishable,
+      Draftable,
+      Reportable,
+      Trashable,
+      WithFollowers,
+      UniformResourceLocatable,
+      UniformResourceAdminLocatable,
+    ]
   config:
-    name: Proposal
     description: 'A budget contribution'
     interfaces:
       [
@@ -28,6 +28,12 @@ InternalProposal:
         UniformResourceAdminLocatable,
       ]
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Proposal
+      url:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalUrlResolver", [value])'
       adminUrl:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAdminUrlResolver", [value])'
         access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"
@@ -65,7 +71,7 @@ InternalProposal:
             type: 'ReportingOrder'
             defaultValue: { field: CREATED_AT, direction: DESC }
       project:
-        type: 'InternalProject!'
+        type: 'Project!'
         description: 'The related project.'
       status:
         type: 'Status'
@@ -120,6 +126,12 @@ InternalProposal:
         type: 'String!'
         description: 'The unique reference of proposal'
         resolve: "@=resolver('proposal_reference', [value])"
+      title:
+        type: 'String!'
+        description: 'Identifies the contribution title.'
+      body:
+        type: 'HTML'
+        description: 'Identifies the body of the contribution.'
       bodyText:
         type: 'String!'
         description: 'Identifies the body of the contribution rendered to text.'
@@ -165,11 +177,11 @@ InternalProposal:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
       mergedFrom:
-        type: '[InternalProposal!]!'
+        type: '[Proposal!]!'
         description: 'If the proposal is a fusion, contains the list of merged proposals.'
         resolve: '@=value.getChildConnections()'
       mergedIn:
-        type: '[InternalProposal!]!'
+        type: '[Proposal!]!'
         description: 'If the proposal listed in a fusion, contains the list of fusions.'
         resolve: '@=value.getParentConnections()'
       followers:
@@ -214,7 +226,7 @@ InternalProposal:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", [value, args, getUser()])'
       viewerVote:
         access: "@=hasRole('ROLE_USER')"
-        type: 'InternalProposalVote'
+        type: 'ProposalVote'
         args:
           step:
             type: 'ID!'

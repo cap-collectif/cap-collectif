@@ -61,7 +61,7 @@ exports[`<EventPage /> renders correctly 1`] = `
       Object {
         "count": 100,
         "cursor": null,
-        "isFuture": true,
+        "isFuture": null,
         "project": null,
         "search": null,
         "theme": null,
@@ -133,7 +133,7 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
       Object {
         "count": 100,
         "cursor": null,
-        "isFuture": true,
+        "isFuture": null,
         "project": null,
         "search": null,
         "theme": null,
