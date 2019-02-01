@@ -31,7 +31,7 @@ Scenario: An anonymous wants to show cookie page
 
 Scenario: An anonymous wants to toggle cookies performance
   Given I visited "projects page" with cookies not accepted
-  When I follow "cookies-management"
+  When I click on button "#cookies-management"
   And I wait 1 seconds
   And I should see "step.vote_type.disabled"
   Then I toggle performance cookies
@@ -41,13 +41,13 @@ Scenario: An anonymous wants to toggle cookies performance
   And I should not see "texte-cookie-audience-communication"
   Then I go to a proposal with lot of comments
   And I visited "projects page" with cookies not accepted
-  When I follow "cookies-management"
+  When I click on button "#cookies-management"
   And I should see "list.label_enabled"
   And I should not see "texte-cookie-audience-communication"
 
 Scenario: An anonymous wants to toggle cookies advertising
   Given I visited "projects page" with cookies not accepted
-  When I follow "cookies-management"
+  When I click on button "#cookies-management"
   And I should see "step.vote_type.disabled"
   Then I toggle advertising cookies
   And I should see "list.label_enabled"
@@ -55,7 +55,7 @@ Scenario: An anonymous wants to toggle cookies advertising
   And I should not see "texte-cookie-audience-communication"
   Then I go to a proposal with lot of comments
   And I visited "projects page" with cookies not accepted
-  When I follow "cookies-management"
+  When I click on button "#cookies-management"
   And I should see "step.vote_type.disabled"
   And I should see "list.label_enabled"
   And I should not see "texte-cookie-audience-communication"
@@ -74,7 +74,7 @@ Scenario: An anonymous accept cookies then change is mind and the cookies should
   And I should see a cookie named "hasFullConsent"
   And I create a cookie named "_pk_id.2733"
   And I visited "projects page"
-  When I follow "cookies-management"
+  When I click on button "#cookies-management"
   And I toggle performance cookies
   And I click on button "#cookies-save"
   Then I should not see a cookie named "_pk_id.2733"
