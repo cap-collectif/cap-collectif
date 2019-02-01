@@ -26,7 +26,6 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
         >
           <li
             key="0"
-            title="presentation step - global.active.step"
           >
             <a
               className="d-flex"
@@ -104,7 +103,6 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
           </li>
           <li
             key="1"
-            title="open step - global.active.step"
           >
             <a
               className="d-flex"
@@ -188,7 +186,6 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
           <li
             className="active"
             key="2"
-            title="timeless step - global.active.step"
           >
             <a
               className="d-flex"
@@ -271,7 +268,6 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
           </li>
           <li
             key="3"
-            title="last step - global.active.step"
           >
             <a
               className="d-flex"

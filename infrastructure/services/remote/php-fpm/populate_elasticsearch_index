@@ -4,8 +4,9 @@ while ! curl http://localhost:9200 > /dev/null 2>&1;
   do sleep 0.1
 done
 
+su capco -c "php bin/console capco:es:create --env=prod --no-interaction --quiet"
 # Increasing memory_limit is required when importing a lot of content
-su capco -c "php -d memory_limit=-1 bin/console capco:es:create --populate --env=prod --no-interaction --quiet"
+su capco -c "php -d memory_limit=2048M bin/console capco:es:populate --env=prod --no-interaction --quiet"
 
 if [ $? -eq 1 ]; then
   exit 1

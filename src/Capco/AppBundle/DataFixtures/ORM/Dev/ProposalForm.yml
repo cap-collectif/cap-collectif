@@ -260,25 +260,3 @@ Capco\AppBundle\Entity\ProposalForm:
     reference: 113
     allowAknowledge: true
     isProposalForm: false
-  proposalform15:
-    id: proposalform15
-    step: '@collectstepWithQuestions'
-    title: Formulaire attaché à une étape de collecte avec questions
-    description: <p><text(100)></p>
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: true
-    usingDescription: true
-    descriptionMandatory: false
-    usingIllustration: false
-    usingSummary: false
-    districtMandatory: false
-    usingCategories: true
-    themeMandatory: false
-    categoryMandatory: true
-    reference: 114
-    allowAknowledge: true

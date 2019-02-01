@@ -542,17 +542,6 @@ Capco\AppBundle\Entity\Proposal:
     reference: 47
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-  proposal{40..100}:
-    id: 'proposal<current()>'
-    title: <text(6)>
-    body: |
-      <text(200)>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    author: '@user1'
-    proposalForm: '@proposalform15'
-    reference: '1<current()>'
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   question1:
     id: question1
     title: Comment faire de l'électricité ?

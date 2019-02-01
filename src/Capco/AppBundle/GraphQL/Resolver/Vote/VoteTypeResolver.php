@@ -26,14 +26,24 @@ class VoteTypeResolver implements ResolverInterface
 
     public function __invoke(AbstractVote $node): Type
     {
+        $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
+
         if ($node instanceof OpinionVote) {
             return $this->typeResolver->resolve('OpinionVote');
         }
         if ($node instanceof ProposalCollectVote) {
-            return $this->typeResolver->resolve('ProposalVote');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewProposalVote');
+            }
+
+            return $this->typeResolver->resolve('InternalProposalVote');
         }
         if ($node instanceof ProposalSelectionVote) {
-            return $this->typeResolver->resolve('ProposalVote');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewProposalVote');
+            }
+
+            return $this->typeResolver->resolve('InternalProposalVote');
         }
         if ($node instanceof OpinionVersionVote) {
             return $this->typeResolver->resolve('VersionVote');

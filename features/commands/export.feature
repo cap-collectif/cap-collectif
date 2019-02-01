@@ -24,7 +24,6 @@ Scenario: Admin wants to export collect steps
   And exported "csv" file with name "bp-avec-vote-classement_selection-avec-vote-classement-limite.csv" should match its snapshot
   And exported "csv" file with name "budget-avec-vote-limite_collecte-avec-vote-simple-limite.csv" should match its snapshot
   And exported "csv" file with name "budget-avec-vote-limite_selection-avec-vote-budget-limite.csv" should match its snapshot
-  And exported "csv" file with name "budget-participatif-rennes_collecte-des-propositions-avec-questions.csv" should match its snapshot
   And exported "csv" file with name "budget-participatif-rennes_collecte-des-propositions-fermee.csv" should match its snapshot
   And exported "csv" file with name "budget-participatif-rennes_collecte-des-propositions-privee.csv" should match its snapshot
   And exported "csv" file with name "budget-participatif-rennes_collecte-des-propositions.csv" should match its snapshot

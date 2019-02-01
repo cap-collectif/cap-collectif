@@ -1,9 +1,8 @@
-ProposalConnection:
+PreviewVoteConnection:
   type: relay-connection
   config:
-    nodeType: InternalProposal!
+    name: VoteConnection
+    nodeType: PreviewVote
     connectionFields:
       totalCount:
-        type: Int!
-      fusionCount:
         type: Int!

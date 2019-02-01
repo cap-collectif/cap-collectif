@@ -42,6 +42,8 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolveContributionType($data)
     {
         $typeResolver = $this->container->get('overblog_graphql.type_resolver');
+        $currentSchemaName = $typeResolver->getCurrentSchemaName();
+        
         if ($data instanceof Opinion) {
             return $typeResolver->resolve('Opinion');
         }
@@ -67,7 +69,11 @@ class ConsultationResolver implements ContainerAwareInterface
             return $typeResolver->resolve('Comment');
         }
         if ($data instanceof Proposal) {
-            return $typeResolver->resolve('Proposal');
+            if ('preview' === $currentSchemaName) {
+                return $typeResolver->resolve('PreviewProposal');
+            }
+
+            return $typeResolver->resolve('InternalProposal');
         }
         if ($data instanceof Reply) {
             return $typeResolver->resolve('Reply');

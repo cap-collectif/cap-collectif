@@ -13,15 +13,14 @@
     <p>
         {{ 'reply.acknowledgement.replies'|trans({}, 'CapcoAppBundle') }}
     </p>
-
-    {% for response in reply.responses if response.question.inputType != 'section' %}
+    {% for response in reply.responses %}
         <p>
             <strong>{{ response.question.title }}</strong><br>
             {% if response.type == 'value' and (response.value is null or (response.value is iterable and response.value | length == 0)) %}
                 <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
-            {% elseif response.question.inputType == 'editor' %}
+            {% elseif response.question.type == 'editor' %}
                 <span>{{ response.value | raw }}</span>
-            {% elseif response.question.inputType == 'ranking' %}
+            {% elseif response.question.type == 'ranking' %}
                 {% if response.value.labels | length > 0 %}
                     <ol>
                         {% for label in response.value.labels %}
