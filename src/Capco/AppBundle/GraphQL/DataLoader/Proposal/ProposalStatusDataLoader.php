@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Status;
@@ -27,6 +28,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
+        GraphQLCollector $collector,
         bool $enableCache
     ) {
         $this->globalIdResolver = $globalIdResolver;
@@ -38,6 +40,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
             $cachePrefix,
             $cacheTtl,
             $debug,
+            $collector,
             $enableCache
         );
     }

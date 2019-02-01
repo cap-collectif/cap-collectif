@@ -13,7 +13,6 @@ use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class EventAdmin extends AbstractAdmin
@@ -98,7 +97,7 @@ class EventAdmin extends AbstractAdmin
             ->add('enabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
             ])
-            ->add('isCommentable', null, [
+            ->add('commentable', null, [
                 'label' => 'admin.fields.event.is_commentable',
             ])
             ->add('updatedAt', null, [
@@ -146,7 +145,7 @@ class EventAdmin extends AbstractAdmin
                 'label' => 'admin.fields.event.is_enabled',
                 'editable' => true,
             ])
-            ->add('isCommentable', null, [
+            ->add('commentable', null, [
                 'label' => 'admin.fields.event.is_commentable',
                 'editable' => true,
             ])
@@ -269,7 +268,7 @@ class EventAdmin extends AbstractAdmin
                 'label' => 'admin.fields.event.is_enabled',
                 'required' => false,
             ])
-            ->add('isCommentable', null, [
+            ->add('commentable', null, [
                 'label' => 'admin.fields.event.is_commentable',
                 'required' => false,
             ])
@@ -280,7 +279,7 @@ class EventAdmin extends AbstractAdmin
                 'required' => false,
                 'help' => 'admin.help.event.adress',
             ])
-            ->add('zipCode', NumberType::class, [
+            ->add('zipCode', null, [
                 'label' => 'admin.fields.event.zipcode',
                 'required' => false,
             ])
@@ -352,7 +351,7 @@ class EventAdmin extends AbstractAdmin
             ->add('enabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
             ])
-            ->add('isCommentable', null, [
+            ->add('commentable', null, [
                 'label' => 'admin.fields.event.is_commentable',
             ])
             ->add('commentsCount', null, [

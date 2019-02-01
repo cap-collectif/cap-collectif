@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
 use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
@@ -17,6 +18,7 @@ class ProposalLikersDataLoader extends BatchDataLoader
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
+        GraphQLCollector $collector,
         bool $enableCache
     ) {
         parent::__construct(
@@ -27,6 +29,7 @@ class ProposalLikersDataLoader extends BatchDataLoader
             $cachePrefix,
             $cacheTtl,
             $debug,
+            $collector,
             $enableCache
         );
     }

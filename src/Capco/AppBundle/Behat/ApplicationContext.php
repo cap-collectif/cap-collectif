@@ -35,6 +35,7 @@ use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
+use Capco\AppBundle\Behat\Traits\AdminEventTrait;
 
 const REPOSITORY_NAME = 'repository_qa';
 const SNAPSHOT_NAME = 'snap_qa';
@@ -55,6 +56,7 @@ class ApplicationContext extends UserContext
     use AdminTrait;
     use ExportDatasUserTrait;
     use CookiesTrait;
+    use AdminEventTrait;
 
     protected $dbContainer;
     protected $cookieConsented;

@@ -1,14 +1,15 @@
 // @flow
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet-universal';
-import { Provider, connect } from 'react-redux';
-import ReactOnRails from 'react-on-rails';
-import { IntlProvider } from 'react-intl-redux';
+import { connect } from 'react-redux';
+// import ReactOnRails from 'react-on-rails';
+// import { IntlProvider } from 'react-intl-redux';
+import { FormattedMessage } from 'react-intl';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import LocateControl from '../../Proposal/Map/LocateControl';
 import LeafletSearch from '../../Proposal/Map/LeafletSearch';
 import config from '../../../config';
-import DatesInterval from '../../Utils/DatesInterval';
+// import DatesInterval from '../../Utils/DatesInterval';
 import type { GlobalState, Dispatch } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 import type { MapTokens } from '../../../redux/modules/user';
@@ -20,6 +21,7 @@ type Props = {|
   defaultMapOptions: MapOptions,
   eventSelected: ?string,
   dispatch: Dispatch,
+  loading: boolean,
 |};
 
 let L;
@@ -27,6 +29,7 @@ let L;
 export class LeafletMap extends Component<Props> {
   static defaultProps = {
     markers: '',
+    loading: false,
     defaultMapOptions: {
       center: { lat: 48.8586047, lng: 2.3137325 },
       zoom: 10,
@@ -62,7 +65,7 @@ export class LeafletMap extends Component<Props> {
   };
 
   render() {
-    const { markers, defaultMapOptions, eventSelected, mapTokens } = this.props;
+    const { loading, markers, defaultMapOptions, eventSelected, mapTokens } = this.props;
     const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
 
     if (config.canUseDOM) {
@@ -81,16 +84,28 @@ export class LeafletMap extends Component<Props> {
         });
     }
     const bounds = L.latLngBounds(markersGroup);
-    if (!bounds.isValid()) {
-      return null;
-    }
     return (
-      <div>
+      <div style={{ position: 'relative' }}>
+        {loading ? (
+          <p
+            style={{
+              position: 'absolute',
+              marginLeft: '-50px',
+              left: '50%',
+              top: '50%',
+              color: '#000',
+              zIndex: '1500',
+            }}>
+            <FormattedMessage id="global.loading" />
+          </p>
+        ) : null}
         <Map
-          bounds={bounds}
+          bounds={bounds.isValid() ? bounds : undefined}
           zoom={defaultMapOptions.zoom}
           maxZoom={18}
+          preferCanvas
           id="event-map"
+          style={loading ? { WebkitFilter: 'blur(5px)', zIndex: '0' } : { zIndex: '0' }}
           scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
@@ -98,7 +113,7 @@ export class LeafletMap extends Component<Props> {
           />
           <MarkerClusterGroup
             spiderfyOnMaxZoom
-            showCoverageOnHover
+            showCoverageOnHover={false}
             zoomToBoundsOnClick
             onMarkerClick={marker => this.handleMarkersClick(marker)}
             maxClusterRadius={30}>
@@ -109,10 +124,10 @@ export class LeafletMap extends Component<Props> {
                 .filter(Boolean)
                 .map(edge => edge.node)
                 .filter(Boolean)
-                .map((marker, key) =>
+                .map(marker =>
                   marker.lat && marker.lng ? (
                     <Marker
-                      key={key}
+                      key={marker.id}
                       id={`marker_${marker.id}`}
                       position={[marker.lat, marker.lng]}
                       icon={this.getMarkerIcon(marker)}>
@@ -125,29 +140,29 @@ export class LeafletMap extends Component<Props> {
                         {/* We call the provider because react leaflet need it to call DatesInterval  react-leaflet.js.org/docs/en/intro.html#dom-rendering
                             @Todo find an other way to render this without IntlProvider
                           */}
-                        <Provider store={ReactOnRails.getStore('appStore')}>
-                          <IntlProvider>
-                            <div>
-                              <h2>
-                                <a href={marker.url}>{marker.title}</a>
-                              </h2>
-                              <p className="excerpt">
+                        {/* <Provider store={ReactOnRails.getStore('appStore')}>
+                          <IntlProvider> */}
+                        <div>
+                          <h4>
+                            <a href={marker.url}>{marker.title}</a>
+                          </h4>
+                          {/* <p className="excerpt">
                                 <i className="cap-calendar-1 mr-10" />
                                 <DatesInterval
                                   endAt={marker.endAt}
                                   startAt={marker.startAt}
                                   fullDay
                                 />
-                              </p>
-                              {marker.fullAddress && (
-                                <p className="excerpt">
-                                  <i className="cap-marker-1 mr-10" />
-                                  {marker.fullAddress}
-                                </p>
-                              )}
-                            </div>
-                          </IntlProvider>
-                        </Provider>
+                              </p> */}
+                          {marker.fullAddress && (
+                            <p className="excerpt">
+                              <i className="cap-marker-1 mr-5" />
+                              {marker.fullAddress}
+                            </p>
+                          )}
+                        </div>
+                        {/* </IntlProvider>
+                        </Provider> */}
                       </Popup>
                     </Marker>
                   ) : null,

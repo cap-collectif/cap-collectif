@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\User;
 
 use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -42,6 +43,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
+        GraphQLCollector $collector,
         bool $enableCache
     ) {
         $this->abstractStepRepository = $repository;
@@ -58,6 +60,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
             $cachePrefix,
             $cacheTtl,
             $debug,
+            $collector,
             $enableCache
         );
     }

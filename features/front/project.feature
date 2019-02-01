@@ -98,7 +98,7 @@ Scenario: Restricted project should display in projects list
   When I fill in the following:
     | project-search-input | custom |
   And I click the "#project-search-button" element
-  And I wait 3 seconds
+  And I wait 6 seconds
   And I wait ".project-preview" to appear on current page
   Then I should see 1 ".project-preview" elements
   And I should see "Un avenir meilleur pour les nains de jardins (custom access)"
