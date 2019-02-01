@@ -67,7 +67,6 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
         ratioY={9}
       >
         <DarkenGradientMedia
-          alt=""
           height="100%"
           linearGradient={true}
           url="/media/croissance.jpg"

@@ -8,7 +8,8 @@ type Props = {
   width: string,
   height: string,
   linearGradient: boolean,
-  alt: string,
+  role?: string,
+  alt?: string,
 };
 
 export const Container = styled.div.attrs({
@@ -30,11 +31,10 @@ export class DarkenGradientMedia extends PureComponent<Props> {
     linearGradient: true,
     width: '100%',
     height: '100%',
-    alt: '',
   };
 
   render() {
-    const { url, width, height, linearGradient, alt, children } = this.props;
+    const { url, width, height, linearGradient, alt, children, role } = this.props;
 
     return (
       <Container
@@ -42,7 +42,7 @@ export class DarkenGradientMedia extends PureComponent<Props> {
         width={width}
         height={height}
         linearGradient={linearGradient}
-        role="img"
+        role={role}
         aria-label={alt}>
         {children}
       </Container>

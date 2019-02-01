@@ -1,7 +1,7 @@
 YesNoPairedVote:
   type: interface
   inherits:
-    - Vote
+    - InternalVote
     - Publishable
   config:
     resolveType: "@=resolver('contribution_type', [value])"

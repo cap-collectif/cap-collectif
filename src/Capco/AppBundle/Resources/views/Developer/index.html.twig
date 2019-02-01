@@ -234,7 +234,7 @@
     {% endif %}
     
     {% if mutation and category == "mutation" and selection is not null %}
-    {% for field in mutation.fields if field.name == selection %}
+    {% for field in mutation.fields|sort if field.name == selection %}
         <h2>{{field.name}}
         {% if field.config.access|default(false) %}
             {# We need a way to get info about the required access #}
@@ -260,7 +260,7 @@
     {% endif %}
 
     {% if category == "object" %}
-      {% for type in objects if type.name == selection %}
+      {% for type in objects|sort if type.name == selection %}
         <h2>{{type.name}}</h2>
         {% if type.preview is defined and type.preview %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
@@ -292,8 +292,11 @@
     {% endif %}
 
     {% if category == "interface" %}
-      {% for type in interfaces if type.name == selection|sort %}
+      {% for type in interfaces|sort if type.name == selection %}
         <h2>{{type.name}}</h2>
+        {% if type.preview is defined and type.preview %}
+            {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
+        {% endif %}
         <p>{{type.description}}</p>
         <h3>Implemented by</h3>
         <ul>
@@ -354,7 +357,7 @@
     {% endif %}
 
     {% if category == "scalar" %}
-      {% for scalar in scalars if scalar.name == selection|sort %}
+      {% for scalar in scalars|sort if scalar.name == selection %}
         <h2>{{scalar.name}}</h2>
         <p>{{scalar.description}}</p>
       {% endfor %}

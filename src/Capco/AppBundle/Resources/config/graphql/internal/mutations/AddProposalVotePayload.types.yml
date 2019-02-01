@@ -3,6 +3,6 @@ AddProposalVotePayload:
   config:
     fields:
       vote:
-        type: 'ProposalVote!'
+        type: 'InternalProposalVote!'
       viewer:
         type: 'InternalUser!'

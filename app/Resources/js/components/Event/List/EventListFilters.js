@@ -115,10 +115,6 @@ export class EventListFilters extends React.Component<Props, State> {
           name="theme"
           placeholder={intl.formatMessage({ id: 'type-theme' })}
           options={themeOptions}
-          role="combobox"
-          aria-autocomplete="list"
-          aria-haspopup="true"
-          aria-controls="EventListFilters-filter-theme-listbox"
         />,
       );
     }
@@ -130,10 +126,6 @@ export class EventListFilters extends React.Component<Props, State> {
           name="project"
           placeholder={intl.formatMessage({ id: 'type-project' })}
           options={projectOptions}
-          role="combobox"
-          aria-autocomplete="list"
-          aria-haspopup="true"
-          aria-controls="EventListFilters-filter-project-listbox"
         />,
       );
     }
@@ -143,25 +135,22 @@ export class EventListFilters extends React.Component<Props, State> {
         component={select}
         id="EventListFilters-filter-status"
         name="status"
-        role="combobox"
-        aria-autocomplete="list"
-        aria-haspopup="true"
-        aria-controls="EventListFilters-filter-status-listbox"
         clearable={false}
         placeholder={intl.formatMessage({ id: 'voting-status' })}
         options={[
           {
-            value: true,
+            value: 'all',
+            label: intl.formatMessage({
+              id: 'all-events',
+            }),
+          },
+          {
+            value: 'ongoing-and-future',
             label: intl.formatMessage({
               id: 'ongoing-and-future',
             }),
           },
-          {
-            value: false,
-            label: intl.formatMessage({
-              id: 'finished',
-            }),
-          },
+          { value: 'finished', label: intl.formatMessage({ id: 'finished' }) },
         ]}
       />,
     );
@@ -173,10 +162,6 @@ export class EventListFilters extends React.Component<Props, State> {
           id="event-search-input"
           name="search"
           type="text"
-          role="combobox"
-          aria-autocomplete="list"
-          aria-haspopup="true"
-          aria-controls="event-search-input-listbox"
           addonAfter={<i className="cap cap-magnifier" />}
           component={component}
           placeholder={intl.formatMessage({ id: 'proposal-search' })}
@@ -190,11 +175,7 @@ export class EventListFilters extends React.Component<Props, State> {
         <Field
           component={select}
           name="userType"
-          role="combobox"
-          aria-autocomplete="list"
-          aria-haspopup="true"
           id="EventListFilters-filter-userType"
-          aria-controls="EventListFilters-filter-userType-listbox"
           placeholder={intl.formatMessage({ id: 'filter-userType' })}
           options={userTypes.map(u => ({ value: u.id, label: u.name }))}
         />,
@@ -247,7 +228,7 @@ export class EventListFilters extends React.Component<Props, State> {
           {/* $FlowFixMe $refType */}
           <EventListCounter query={query} />
         </Col>
-        <Col xs={12} md={4} className="pl-0" id="event-filters">
+        <Col xs={12} md={4} className="pl-0">
           <div className="pull-right">
             <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
           </div>
@@ -298,7 +279,7 @@ const form = reduxForm({
   form: 'EventListFilters',
   destroyOnUnmount: false,
   initialValues: {
-    status: true,
+    status: 'all',
   },
 })(EventListFilters);
 

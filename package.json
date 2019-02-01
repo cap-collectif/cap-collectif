@@ -149,7 +149,7 @@
     "babel-plugin-styled-components": "^1.8.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
-    "bower": "^1.7.7",
+    "bower": "^1.8.8",
     "brunch": "^2.10.17",
     "bundlesize": "^0.17.0",
     "classnames": "^2.2.3",

@@ -50,7 +50,7 @@ export class EventRefetch extends React.Component<Props, State> {
       theme: this.props.theme || null,
       project: this.props.project || null,
       userType: this.props.userType || null,
-      isFuture: this.props.status,
+      isFuture: this.props.status === 'all' ? null : this.props.status === 'ongoing-and-future',
     });
 
     this.props.relay.refetch(

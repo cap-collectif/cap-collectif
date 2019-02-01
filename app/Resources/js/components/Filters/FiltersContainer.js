@@ -9,29 +9,7 @@ type Props = {
   type: 'event' | 'project',
 };
 
-type State = {
-  isOpen: boolean,
-};
-
-export default class FiltersContainer extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isOpen: false,
-    };
-  }
-
-  componentDidUpdate() {
-    setTimeout(() => {
-      const queryAll = document.querySelectorAll('.popover.bottom');
-      if (queryAll !== null) {
-        Array
-          // $FlowFixMe
-          .from(queryAll.forEach(el => el.removeAttribute('role')));
-      }
-    }, 500);
-  }
-
+export default class FiltersContainer extends React.Component<Props> {
   renderFilterCount(): string {
     const { filterCount } = this.props;
     return filterCount && filterCount > 0 ? `(${filterCount})` : '';
@@ -43,31 +21,14 @@ export default class FiltersContainer extends React.Component<Props, State> {
       <OverlayTrigger
         trigger="click"
         placement="bottom"
-        aria-describedby=""
         overlay={
-          <Popover id="FiltersContainer" className="w-260" rel="">
+          <Popover id="FiltersContainer" className="w-260">
             {overlay}
           </Popover>
         }
         className="w-25"
         id={`${type}-list-filters-d`}>
-        <Button
-          className="btn--outline btn-dark-gray"
-          id={`${type}-button-filter`}
-          aria-describedby=""
-          aria-expanded={this.state.isOpen}
-          onClick={() => {
-            this.setState({ isOpen: !this.state.isOpen });
-            setTimeout(() => {
-              const target = document.getElementById('event-filters');
-              const queryAll = document.querySelectorAll('.popover.bottom');
-              if (target !== null && queryAll !== null) {
-                Array
-                  // $FlowFixMe
-                  .from(queryAll.forEach(el => target.after(el)));
-              }
-            }, 500);
-          }}>
+        <Button className="btn--outline btn-dark-gray" id={`${type}-button-filter`}>
           <i className="cap cap-filter-1 small mr-5" />
           <FormattedMessage id="link_filters" /> {this.renderFilterCount()}
           <i className="cap cap-triangle-down ml-5" />

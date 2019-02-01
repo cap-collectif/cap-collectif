@@ -3,6 +3,6 @@ FollowProposalPayload:
   config:
     fields:
       proposal:
-        type: 'Proposal'
+        type: 'InternalProposal'
       followerEdge:
         type: 'FollowerEdge'
