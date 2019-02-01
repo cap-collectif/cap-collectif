@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { Button } from 'react-bootstrap';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { type GlobalState } from '../../types';
 
@@ -19,7 +19,6 @@ type Props = {
   currentStepId: ?string,
   // eslint-disable-next-line react/no-unused-prop-types
   projectId: string,
-  intl: IntlShape,
 };
 
 type State = {
@@ -219,7 +218,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
   }
 
   render() {
-    const { steps, intl } = this.props;
+    const { steps } = this.props;
 
     if (steps.length <= 1) {
       return null;
@@ -251,12 +250,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                 {steps
                   .filter(step => step.enabled)
                   .map((step, key) => (
-                    <li
-                      className={this.getClass(step.id)}
-                      key={key}
-                      title={`${step.label} - ${intl.formatMessage({
-                        id: 'global.active.step',
-                      })}`}>
+                    <li className={this.getClass(step.id)} key={key}>
                       <a href={step._links.show} className="d-flex">
                         <div className="navbar__step-nb">
                           <span>{key + 1}</span>
@@ -308,4 +302,4 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
   currentStepId: state.project.currentProjectStepById,
 });
 
-export default connect(mapStateToProps)(injectIntl(ProjectStepTabs));
+export default connect(mapStateToProps)(ProjectStepTabs);

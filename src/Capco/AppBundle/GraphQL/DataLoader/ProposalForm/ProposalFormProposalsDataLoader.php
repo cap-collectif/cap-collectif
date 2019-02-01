@@ -160,7 +160,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         } elseif ($args->offsetExists('author')) {
             $filters['author'] = $args->offsetGet('author');
         }
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
+        $paginator = new Paginator(function (int $offset, int $limit) use (
             $form,
             $args,
             $viewer,

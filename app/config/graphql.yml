@@ -48,6 +48,10 @@ overblog_graphql:
         types:
           - PublicConsultation
           - PublicQuestionnaire
+          - PreviewProject
+          - PreviewEvent
+          - PreviewProposalVote
+          - PreviewProposal
       # This is our internal schema (used by our clients)
       internal:
         query: InternalQuery
@@ -58,6 +62,7 @@ overblog_graphql:
         types:
           - MultipleChoiceQuestionLogicJumpCondition
           - Argument
+          - InternalProject
           - AnswerOrPost
           - CheckboxRequirement
           - FirstnameRequirement

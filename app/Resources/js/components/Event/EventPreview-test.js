@@ -23,13 +23,6 @@ describe('<EventPreview />', () => {
             title: "Le gouter c'est la vie",
           },
         ],
-        author: {
-          username: 'toto',
-          media: {
-            url: 'http://monimage.toto',
-          },
-          url: 'http://jesuistoto.fr',
-        },
       },
       isHighlighted: true,
     };
@@ -54,13 +47,6 @@ describe('<EventPreview />', () => {
             title: "Le gouter c'est la vie",
           },
         ],
-        author: {
-          username: 'toto',
-          media: {
-            url: 'http://monimage.toto',
-          },
-          url: 'http://jesuistoto.fr',
-        },
       },
       isHighlighted: false,
     };

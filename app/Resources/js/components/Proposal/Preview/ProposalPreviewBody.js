@@ -37,9 +37,9 @@ export class ProposalPreviewBody extends React.Component<Props> {
           ) : (
             <React.Fragment>
               <a href={proposal.url}>
-                <h4 className="card__title">
+                <h2 className="card__title">
                   <Truncate lines={3}>{proposal.title}</Truncate>
-                </h4>
+                </h2>
               </a>
               <div className="excerpt small">{proposal.summaryOrBodyExcerpt}</div>
             </React.Fragment>
@@ -78,10 +78,12 @@ export class ProposalPreviewBody extends React.Component<Props> {
             /* $FlowFixMe */
             <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
           )}
-          {step && step.project && step.project.opinionCanBeFollowed ? (
+          {
+            step && step.project && step.project.opinionCanBeFollowed ?
             /* $FlowFixMe */
             <ProposalFollowButton proposal={proposal} />
-          ) : null}
+            : null
+          }
         </div>
         {step &&
           step.voteThreshold !== null &&

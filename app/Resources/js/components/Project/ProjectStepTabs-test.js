@@ -3,7 +3,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectStepTabs } from './ProjectStepTabs';
-import { intlMock } from '../../mocks';
 
 describe('<ProposalUserVoteItem />', () => {
   const props = {
@@ -41,7 +40,6 @@ describe('<ProposalUserVoteItem />', () => {
     ],
     currentStepId: 'cs3',
     projectId: '5',
-    intl: intlMock,
   };
 
   const oneStepProps = {
@@ -57,7 +55,6 @@ describe('<ProposalUserVoteItem />', () => {
     ],
     currentStepId: 'cs1',
     projectId: '5',
-    intl: intlMock,
   };
 
   it('should render correctly without arrow & with active tab', () => {
