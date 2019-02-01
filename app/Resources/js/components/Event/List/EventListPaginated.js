@@ -104,6 +104,7 @@ export class EventListPaginated extends React.Component<Props, State> {
               md={!config.isMobile ? 4 : 12}
               sm={!config.isMobile ? 4 : 12}
               xs={12}
+              aria-hidden="true"
               className={!config.isMobile ? 'sticky-t-60' : null}>
               {/* $FlowFixMe relayProps */}
               <EventMap query={query} />

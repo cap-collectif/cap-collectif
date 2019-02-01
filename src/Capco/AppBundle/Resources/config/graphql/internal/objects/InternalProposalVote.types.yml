@@ -1,20 +1,19 @@
-ProposalVote:
+InternalProposalVote:
   type: object
   inherits:
     - Publishable
     - PrivatableVote
+    - InternalVote
+    - PreviewProposalVote
   config:
+    name: ProposalVote
     interfaces:
-      - Vote
+      - InternalVote
       - Publishable
       - PrivatableVote
     fields:
-      anonymous:
-        type: 'Boolean!'
-        description: 'Is the vote anonymous ?'
-        resolve: '@=value.isPrivate()'
       proposal:
-        type: 'Proposal!'
+        type: 'InternalProposal!'
         description: 'Return the proposal.'
       step:
         type: 'ProposalStep!'

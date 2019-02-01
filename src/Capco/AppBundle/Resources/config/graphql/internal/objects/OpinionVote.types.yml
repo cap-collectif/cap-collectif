@@ -7,7 +7,7 @@ OpinionVote:
     interfaces:
       - YesNoPairedVote
       - Publishable
-      - Vote
+      - InternalVote
     fields:
       id:
         builder: 'Relay::GlobalId'

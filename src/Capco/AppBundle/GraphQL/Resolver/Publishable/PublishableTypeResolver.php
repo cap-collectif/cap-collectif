@@ -25,12 +25,19 @@ class PublishableTypeResolver implements ResolverInterface
 
     public function __invoke(Publishable $node): Type
     {
+        $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
+
         if ($node instanceof Opinion) {
             return $this->typeResolver->resolve('Opinion');
         }
         if ($node instanceof Proposal) {
-            return $this->typeResolver->resolve('Proposal');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewProposal');
+            }
+
+            return $this->typeResolver->resolve('InternalProposal');
         }
+
         if ($node instanceof OpinionVersion) {
             return $this->typeResolver->resolve('Version');
         }
