@@ -18,7 +18,7 @@ export const validate = (values: Object) => {
   const errors = {};
 
   if (!values.username || !isEmail(values.username)) {
-    errors.username = 'global.constraints.email.invalid';
+    errors.username = 'registration.constraints.email.invalid';
   }
 
   return errors;
