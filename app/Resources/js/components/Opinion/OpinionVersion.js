@@ -3,8 +3,8 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroupItem } from 'react-bootstrap';
 import { injectIntl, type IntlShape } from 'react-intl';
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import OpinionPreview from './OpinionPreview';
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts';
 // import VotePiechart from '../Utils/VotePiechart';
 import type { OpinionVersion_version } from './__generated__/OpinionVersion_version.graphql';
 import colors from '../../utils/colors';
@@ -48,6 +48,41 @@ class OpinionVersion extends React.Component<Props> {
   //   );
   // };
 
+  renderCustomizedLabel = ({
+     cx,
+     cy,
+     midAngle,
+     innerRadius,
+     outerRadius,
+     index,
+     value
+   }: Object) => {
+
+    const RADIAN = Math.PI / 180;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text x={x} y={y} fill="white" key={index} textAnchor="middle" dominantBaseline="central">
+        {value}
+      </text>
+    );
+  };
+
+  renderTooltip = ({ payload, type, label }) => {
+    console.log(payload);
+    console.warn(type, label);
+
+    if(payload.length > 0) {
+      return (
+        <div>{payload[0].name}</div>
+      )
+    }
+
+    return null;
+  };
+
   render() {
     const { version, rankingThreshold, intl } = this.props;
 
@@ -70,12 +105,12 @@ class OpinionVersion extends React.Component<Props> {
           <div style={{ width: '400px', height: '150px'}}>
             <ResponsiveContainer>
               <PieChart>
-                {/*<Legend*/}
-                  {/*layout="vertical"*/}
-                  {/*align="left"*/}
-                  {/*verticalAlign="middle"*/}
-                  {/*content={({ name, value }) => `${name}: ${value}`}*/}
-                {/*/>*/}
+                <Tooltip
+                  content={this.renderTooltip}
+                  // formatter={(name) => {
+                  //   return `${name}`;
+                  // }}
+                />
                 <Pie
                   data={data}
                   innerRadius={10}
@@ -84,18 +119,24 @@ class OpinionVersion extends React.Component<Props> {
                   stroke="none"
                   fontSize="16px"
                   isAnimationActive={false}
+                  percent
                   dataKey="value"
-                  label={({ name, value }) => `${name}: ${value}`}
-                  // label={this.renderCustomizedLabel}
+                  labelLine={false}
+                  // label={({ name, value }) => `${name} (${value})`}
+                  label={this.renderCustomizedLabel}
                   // label={(name, value)=>`${name}: ${value}`}
                 >
-                  {data.map((entry, index) => (
-                    <Cell
-                      key={index}
-                      aria-labelledby={entry.name}
-                      fill={colors.accessibleColors[index % colors.accessibleColors.length]}
-                    />
-                  ))}{' '}
+                  {data.map((entry, index) => {
+                    console.log(entry);
+
+                    return (
+                      <Cell
+                        key={index}
+                        aria-labelledby={entry.name}
+                        fill={colors.votes[index % colors.votes.length]}
+                      />
+                    )
+                  })}{' '}
                 </Pie>
               </PieChart>
             </ResponsiveContainer>
