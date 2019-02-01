@@ -45,7 +45,7 @@ Scenario: Admin wants to change an event
                 "title": "Rencontre avec les habitants",
                 "body": "Tout le monde est invité",
                 "author": {
-                  "_id": @string@
+                  "_id": "user1"
                 }
               }
           }

@@ -1,15 +1,23 @@
-Project:
+InternalProject:
   type: object
-  inherits: [Node, UniformResourceLocatable, UniformResourceAdminLocatable]
+  inherits:
+    - PreviewProject
+    - UniformResourceAdminLocatable
   config:
-    interfaces: [Node, UniformResourceLocatable, UniformResourceAdminLocatable]
+    name: Project
+    interfaces:
+      - UniformResourceLocatable
+      - UniformResourceAdminLocatable
+      - Node
     description: 'A participatory project.'
     fields:
+      contributors:
+        type: 'InternalUserConnection!'
+      votes:
+        type: 'InternalVoteConnection!'
       steps:
         type: '[Step!]!'
         resolve: '@=value.getRealSteps()'
-      title:
-        type: 'String!'
       author:
         type: 'InternalUser!'
       video:
@@ -20,9 +28,6 @@ Project:
       contributionsCount:
         type: 'Int!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", [value])'
-      votes:
-        type: 'VoteConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotesResolver", [value])'
       hasParticipativeStep:
         type: Boolean!
         resolve: '@=value.hasParticipativeStep()'
@@ -34,11 +39,6 @@ Project:
         resolve: '@=value.getProjectType()'
       themes:
         type: '[Theme!]'
-      contributors:
-        type: 'InternalUserConnection!'
-        description: 'A list of contributor associated with the project.'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", [value, args])'
       url:
         type: 'URI!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectUrlResolver", [value])'

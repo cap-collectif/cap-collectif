@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
@@ -59,9 +58,6 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
 
     public static $questionTypesLabels = [];
 
-    //field used to the position assignation
-    public $temporaryId;
-
     /**
      * Needed by sonata admin.
      *
@@ -74,13 +70,18 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
      */
     protected $questionnaireAbstractQuestion;
 
+    public function __construct()
+    {
+        $this->jumps = new ArrayCollection();
+    }
+
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJump", mappedBy="origin", orphanRemoval=true, cascade={"persist", "remove"}, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJump", mappedBy="origin", orphanRemoval=true, cascade={"persist", "remove"})
      */
     protected $jumps;
 
@@ -116,10 +117,8 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
      */
     protected $responses;
 
-    public function __construct()
-    {
-        $this->jumps = new ArrayCollection();
-    }
+    //field used to the position assignation
+    public $temporaryId;
 
     public function __toString()
     {
@@ -128,13 +127,6 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         }
 
         return 'New Question';
-    }
-
-    public function __clone()
-    {
-        if ($this->id) {
-            $this->id = null;
-        }
     }
 
     /**
@@ -166,6 +158,13 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         }
 
         return $this;
+    }
+
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+        }
     }
 
     public function setHelpText(string $helpText = null): self

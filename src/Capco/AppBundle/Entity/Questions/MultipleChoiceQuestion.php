@@ -21,7 +21,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
     ];
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"remove"}, orphanRemoval=true, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $choices;
