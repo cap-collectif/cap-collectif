@@ -9,7 +9,7 @@ ProposalStep:
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
     fields:
       project:
-        type: 'InternalProject'
+        type: 'Project'
       votesLimit:
         type: 'Int'
       budget:

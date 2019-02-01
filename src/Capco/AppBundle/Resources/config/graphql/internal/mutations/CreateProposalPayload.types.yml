@@ -3,7 +3,7 @@ CreateProposalPayload:
   config:
     fields:
       proposal:
-        type: 'InternalProposal'
+        type: 'Proposal'
         description: 'The created proposal, if everything goes well !'
       userErrors:
         type: '[UserError!]'

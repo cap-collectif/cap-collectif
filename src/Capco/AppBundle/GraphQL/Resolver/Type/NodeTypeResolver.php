@@ -53,11 +53,7 @@ class NodeTypeResolver implements ResolverInterface
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
         if ($node instanceof Project) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewProject');
-            }
-
-            return $this->typeResolver->resolve('InternalProject');
+            return $this->typeResolver->resolve('Project');
         }
         if ($node instanceof Questionnaire) {
             if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
@@ -73,11 +69,7 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('Section');
         }
         if ($node instanceof Proposal) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewProposal');
-            }
-
-            return $this->typeResolver->resolve('InternalProposal');
+            return $this->typeResolver->resolve('Proposal');
         }
         if ($node instanceof OpinionVersion) {
             return $this->typeResolver->resolve('Version');

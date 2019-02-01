@@ -45,6 +45,14 @@ exports[`<PersonalData /> should render user withou address 1`] = `
         bsClass="panel"
         collapsible={false}
       >
+        <h2
+          className="page-header"
+        >
+          <FormattedMessage
+            id="personal-data"
+            values={Object {}}
+          />
+        </h2>
         <div>
           <div>
             <div
@@ -767,6 +775,14 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
         bsClass="panel"
         collapsible={false}
       >
+        <h2
+          className="page-header"
+        >
+          <FormattedMessage
+            id="personal-data"
+            values={Object {}}
+          />
+        </h2>
         <div>
           <div>
             <div
@@ -1324,6 +1340,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
         bsClass="panel"
         collapsible={false}
       >
+        <h2
+          className="page-header"
+        >
+          <FormattedMessage
+            id="personal-data"
+            values={Object {}}
+          />
+        </h2>
         <div>
           <div>
             <div

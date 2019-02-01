@@ -116,6 +116,7 @@ export const onChange = (
 
       dispatch(startSubmit(formName));
       const newValue = values[element];
+
       if (typeof newValue !== 'string') {
         if (requirement.__typename === 'CheckboxRequirement' && typeof newValue === 'boolean') {
           // The user just (un-)checked a box, so we can call our API directly
@@ -126,6 +127,12 @@ export const onChange = (
             },
           }).then(() => {
             dispatch(stopSubmit(formName));
+            if (props.stepId) {
+              fetchQuery(environment, refetchViewer, {
+                stepId: props.stepId,
+                isAuthenticated: props.isAuthenticated,
+              });
+            }
           });
         }
         return;
