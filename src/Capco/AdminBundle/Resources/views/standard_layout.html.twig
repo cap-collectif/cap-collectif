@@ -66,8 +66,11 @@
   {% endif %}
     {% if admin.class == 'Capco\\AppBundle\\Entity\\Event' and admin.hasSubject == false %}
         <ul class="nav navbar-nav navbar-right">
-            <li>
+            <li class="mr-5">
                 {{ react_render_component('AdminImportEventsApp') }}
+            </li>
+            <li class="mr-5">
+                {{ react_render_component('AdminExportButtonApp') }}
             </li>
         </ul>
   {% endif %}

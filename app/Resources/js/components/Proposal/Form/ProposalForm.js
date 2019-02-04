@@ -35,7 +35,11 @@ import type { ProposalForm_proposal } from './__generated__/ProposalForm_proposa
 import type { ProposalForm_proposalForm } from './__generated__/ProposalForm_proposalForm.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import CreateProposalMutation from '../../../mutations/CreateProposalMutation';
-import { closeCreateModal, closeEditProposalModal } from '../../../redux/modules/proposal';
+import {
+  closeCreateModal,
+  closeEditProposalModal,
+  addProposalInRandomResultsByStep,
+} from '../../../redux/modules/proposal';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import {
   formatInitialResponsesValues,
@@ -46,7 +50,6 @@ import {
 import environment from '../../../createRelayEnvironment';
 import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
-import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -171,9 +174,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
           throw new Error('Mutation "changeProposalContent" failed.');
         }
+        const updatedProposal = response.changeProposalContent.proposal;
+        if (updatedProposal.publicationStatus !== 'DRAFT' && proposalForm.step) {
+          addProposalInRandomResultsByStep(updatedProposal, proposalForm.step.id);
+        }
         window.removeEventListener('beforeunload', onUnload);
         dispatch(closeEditProposalModal());
-        window.location.reload();
+        location.reload();
       })
       .catch(() => {
         throw new SubmissionError({
@@ -197,20 +204,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         throw new Error('Mutation "createProposal" failed.');
       }
       const createdProposal = response.createProposal.proposal;
+      if (createdProposal.publicationStatus !== 'DRAFT' && proposalForm.step) {
+        addProposalInRandomResultsByStep(createdProposal, proposalForm.step.id);
+      }
       window.removeEventListener('beforeunload', onUnload);
+      window.location.href = createdProposal.url;
       dispatch(closeCreateModal());
-      FluxDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: { bsStyle: 'success', content: 'proposal.create.redirecting' },
-      });
-
-      const TIMEOUT_BEFORE_REDIRECTION = 2000; // 2s
-      // We may have some MySQL replication latency
-      // That's why it's better to wait a bit
-      // before redirecting, to avoid 404s…
-      setTimeout(() => {
-        window.location.href = createdProposal.url;
-      }, TIMEOUT_BEFORE_REDIRECTION);
     })
     .catch(e => {
       if (e instanceof SubmissionError) {
