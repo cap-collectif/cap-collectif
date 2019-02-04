@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<EventMap /> renders correctly 1`] = `
+exports[`<EventMap /> renders correcty 1`] = `
 <div
   style={
     Object {
@@ -40,7 +40,9 @@ exports[`<EventMap /> renders correctly 1`] = `
           Object {
             "node": Object {
               "author": Object {
-                "media": null,
+                "media": Object {
+                  "url": "http://monimage.toto",
+                },
                 "url": "http://jesuistoto.fr",
                 "username": "toto",
               },
