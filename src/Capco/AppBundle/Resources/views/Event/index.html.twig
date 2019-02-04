@@ -27,7 +27,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ react_render_component('EventApp', { 'props': props} ) }}
+    {{ react_render_component('EventApp', { 'props': { 'eventPageTitle': eventPageTitle, 'eventPageBody': eventPageBody }} ) }}
 {% endblock %}
 
 {% block javascripts %}

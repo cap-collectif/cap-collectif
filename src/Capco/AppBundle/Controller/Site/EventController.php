@@ -3,8 +3,14 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\EventRegistrationType;
+use Capco\AppBundle\Form\EventSearchType;
 use Capco\AppBundle\Helper\EventHelper;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Resolver\EventResolver;
+use Capco\AppBundle\Search\EventSearch;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,15 +22,63 @@ class EventController extends Controller
 {
     /**
      * @Route("/events", name="app_event", defaults={"_feature_flags" = "calendar"} )
+     * @Route("/events/filter/{theme}", name="app_event_search_theme", defaults={"_feature_flags" = "calendar", "theme" = "all"} )
+     * @Route("/events/filter/{theme}/{project}", name="app_event_search_project", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
+     * @Route("/events/filter/{theme}/{project}/{term}", name="app_event_search_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
      * @Template("CapcoAppBundle:Event:index.html.twig")
      */
-    public function indexAction()
+    public function indexAction(Request $request, $theme = null, $project = null, $term = null)
     {
+        $currentUrl = $this->generateUrl('app_event');
+
+        $form = $this->createForm(EventSearchType::class, null, [
+            'action' => $currentUrl,
+            'method' => 'POST',
+        ]);
+
+        if ('POST' === $request->getMethod()) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $data = $form->getData();
+
+                return $this->redirect(
+                    $this->generateUrl('app_event_search_term', [
+                        'theme' =>
+                            isset($data['theme']) && $data['theme']
+                                ? $data['theme']->getSlug()
+                                : Theme::FILTER_ALL,
+                        'project' => $data['project']
+                            ? $data['project']->getSlug()
+                            : Project::FILTER_ALL,
+                        'term' => $data['term'],
+                    ])
+                );
+            }
+        } else {
+            $form->setData([
+                'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
+                'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
+                'term' => $term,
+            ]);
+        }
+
+        $groupedEvents = $this->get(EventResolver::class)->getEventsGroupedByYearAndMonth(
+            false,
+            $theme,
+            $project,
+            $term
+        );
+        $archivedEvents = $this->get(EventSearch::class)->searchEvents(0, 100, 'asc', null, [
+            'isFuture' => false,
+        ]);
+
         return [
-            'props' => [
-                'eventPageTitle' => $this->get(Resolver::class)->getValue('events.jumbotron.title'),
-                'eventPageBody' => $this->get(Resolver::class)->getValue('events.content.body'),
-            ],
+            'years' => $groupedEvents,
+            'form' => $form->createView(),
+            'archivedEventsNb' => $archivedEvents['count'],
+            'eventPageTitle' => $this->get(Resolver::class)->getValue('events.jumbotron.title'),
+            'eventPageBody' => $this->get(Resolver::class)->getValue('events.content.body'),
         ];
     }
 
