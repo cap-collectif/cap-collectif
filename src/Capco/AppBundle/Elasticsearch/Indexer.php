@@ -72,22 +72,52 @@ class Indexer
     {
         $classes = $this->getClassesToIndex();
 
-        $classesOrdered = array_values($classes);
-        usort($classesOrdered, function ($a, $b) {
-            return \call_user_func($a . '::getElasticsearchPriority') >
-                \call_user_func($b . '::getElasticsearchPriority');
-        });
+        // $classesOrdered = array_values($classes);
+        // usort($classesOrdered, function ($a, $b) {
+        //     return \call_user_func($a . '::getElasticsearchPriority') >
+        //         \call_user_func($b . '::getElasticsearchPriority');
+        // });
 
-        foreach ($classesOrdered as $class) {
-            $this->indexType($class, $output);
+        foreach ($classes as $class) {
+            $repository = $this->em->getRepository($class);
+
+            $query = $repository->createQueryBuilder('a')->getQuery();
+            $iterableResult = $query->iterate();
+
+            if ($output) {
+                $count = $repository
+                    ->createQueryBuilder('a')
+                    ->select('count(a)')
+                    ->getQuery()
+                    ->getSingleScalarResult();
+                $output->writeln(PHP_EOL . "<info> Indexing ${count} ${class}</info>");
+                $progress = new ProgressBar($output, $count);
+                $progress->start();
+            }
+
+            foreach ($iterableResult as $row) {
+                /** @var IndexableInterface $object */
+                $object = $row[0];
+
+                if ($object->isIndexable()) {
+                    $document = $this->buildDocument($object);
+                    $this->addToBulk($document);
+                } else {
+                    // Empty mean DELETE
+                    $this->addToBulk(
+                        new Document($object->getId(), [], $object::getElasticsearchTypeName())
+                    );
+                }
+
+                if (isset($progress)) {
+                    $progress->advance();
+                }
+                $this->em->detach($row[0]);
+            }
+            if (isset($progress)) {
+                $progress->finish();
+            }
         }
-    }
-
-    public function indexAllForType(string $type, OutputInterface $output = null): void
-    {
-        $classes = $this->getClassesToIndex();
-
-        $this->indexType($classes[$type], $output);
     }
 
     /**
@@ -196,48 +226,6 @@ class Indexer
         }
 
         return new Document($object->getId(), $json, $object::getElasticsearchTypeName());
-    }
-
-    private function indexType(string $class, OutputInterface $output = null): void
-    {
-        $repository = $this->em->getRepository($class);
-
-        $query = $repository->createQueryBuilder('a')->getQuery();
-        $iterableResult = $query->iterate();
-
-        if ($output) {
-            $count = $repository
-                ->createQueryBuilder('a')
-                ->select('count(a)')
-                ->getQuery()
-                ->getSingleScalarResult();
-            $output->writeln(PHP_EOL . "<info> Indexing ${count} ${class}</info>");
-            $progress = new ProgressBar($output, $count);
-            $progress->start();
-        }
-
-        foreach ($iterableResult as $row) {
-            /** @var IndexableInterface $object */
-            $object = $row[0];
-
-            if ($object->isIndexable()) {
-                $document = $this->buildDocument($object);
-                $this->addToBulk($document);
-            } else {
-                // Empty mean DELETE
-                $this->addToBulk(
-                    new Document($object->getId(), [], $object::getElasticsearchTypeName())
-                );
-            }
-
-            if (isset($progress)) {
-                $progress->advance();
-            }
-            $this->em->detach($row[0]);
-        }
-        if (isset($progress)) {
-            $progress->finish();
-        }
     }
 
     /**

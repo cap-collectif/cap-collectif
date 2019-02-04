@@ -2,10 +2,9 @@
 
 namespace Capco\AppBundle\Command\Elasticsearch;
 
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -26,7 +25,6 @@ class PopulateIndexCommand extends Command
         $this->setName('capco:es:populate')->setDescription(
             'Populate the current Elasticsearch Indexes.'
         );
-        $this->addArgument('type', InputArgument::OPTIONAL, 'Populate only a specific type ?');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -41,14 +39,8 @@ class PopulateIndexCommand extends Command
 
         $output->writeln(['Start indexing Elasticsearch.']);
 
-        $type = $input->getArgument('type');
-
         try {
-            if ($type) {
-                $this->indexer->indexAllForType($type, $output);
-            } else {
-                $this->indexer->indexAll($output);
-            }
+            $this->indexer->indexAll($output);
             $this->indexer->finishBulk();
         } catch (\RuntimeException $e) {
             $output->writeln('<error>' . $e->getMessage() . '</error>');

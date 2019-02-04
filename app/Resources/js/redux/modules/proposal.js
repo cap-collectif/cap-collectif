@@ -220,28 +220,6 @@ export const stopVoting = (): VoteFailedAction => ({
   type: 'proposal/VOTE_FAILED',
 });
 
-export const addProposalInRandomResultsByStep = (
-  proposal: { +id: string },
-  currentProjectStepId: string,
-) => {
-  if (LocalStorageService.isValid('proposal.randomResultsByStep')) {
-    const randomResultsByStep = LocalStorageService.get('proposal.randomResultsByStep');
-    const lastProposals = randomResultsByStep[currentProjectStepId];
-
-    if (lastProposals.indexOf(proposal.id) !== -1) {
-      return;
-    }
-
-    const proposals = {};
-    proposals[currentProjectStepId] = [proposal.id, ...lastProposals];
-
-    LocalStorageService.set('proposal.randomResultsByStep', {
-      ...randomResultsByStep,
-      ...proposals,
-    });
-  }
-};
-
 export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymously: boolean) => {
   dispatch(startVoting());
   return addVote
