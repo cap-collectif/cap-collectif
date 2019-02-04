@@ -44,10 +44,8 @@ describe('<LeafletMap />', () => {
             title: 'Evenement des gens pas perdu',
             author: {
               username: 'toto',
-              media: {
-                url: 'http://monimage.toto',
-              },
               url: 'http://jesuistoto.fr',
+              media: null,
             },
           },
         },
