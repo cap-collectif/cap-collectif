@@ -430,8 +430,6 @@ class ProposalMutation implements ContainerAwareInterface
 
         $values = $input->getRawArguments();
         $proposal = $this->globalIdResolver->resolve($values['id'], $user);
-        // Save the previous draft status to send the good notif.
-        $wasDraft = $proposal->isDraft();
 
         if (!$proposal) {
             $error = sprintf('Unknown proposal with id "%s"', $values['id']);
@@ -439,6 +437,8 @@ class ProposalMutation implements ContainerAwareInterface
 
             throw new UserError($error);
         }
+        // Save the previous draft status to send the good notif.
+        $wasDraft = $proposal->isDraft();
         unset($values['id']); // This only useful to retrieve the proposal
         $proposalForm = $proposal->getProposalForm();
 
