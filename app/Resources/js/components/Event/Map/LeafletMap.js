@@ -143,20 +143,20 @@ export class LeafletMap extends Component<Props> {
                           */}
                         {/* <Provider store={ReactOnRails.getStore('appStore')}>
                           <IntlProvider> */}
-                            <div>
-                              <h2>
-                                <a href={marker.url}>{marker.title}</a>
-                              </h2>
-                              {marker.author && marker.author.username && (
-                                <p className="excerpt">
-                                  <div>
-                                    <UserAvatar size={16} user={marker.author} className="mr-10" />
-                                    <span className="font-weight-semi-bold">
-                                      {marker.author.username}
-                                    </span>
-                                  </div>
-                                </p>
-                              )}
+                        <div>
+                          <h2>
+                            <a href={marker.url}>{marker.title}</a>
+                          </h2>
+                          {marker.author && marker.author.username && (
+                            <p className="excerpt">
+                              <div>
+                                <UserAvatar size={16} user={marker.author} />
+                                <span className="font-weight-semi-bold">
+                                  {marker.author.username}
+                                </span>
+                              </div>
+                            </p>
+                          )}
                           {/* <p className="excerpt">
                                 <i className="cap-calendar-1 mr-10" />
                                 <DatesInterval
@@ -167,7 +167,7 @@ export class LeafletMap extends Component<Props> {
                               </p> */}
                           {marker.fullAddress && (
                             <p className="excerpt">
-                              <i className="cap-marker-1 mr-5" />
+                              <i className="cap-marker-1 mr-15" />
                               {marker.fullAddress}
                             </p>
                           )}
