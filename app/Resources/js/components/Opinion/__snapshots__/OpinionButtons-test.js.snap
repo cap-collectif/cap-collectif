@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionButtons /> should render correctly 1`] = `
+<ButtonToolbar
+  bsClass="btn-toolbar"
+>
+  <ForwardRef(Relay(Connect(OpinionDelete)))
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "__typename": "Opinion",
+        "author": Object {
+          "slug": "userAdmin",
+        },
+        "project": Object {
+          "opinionCanBeFollowed": true,
+        },
+        "section": Object {
+          "url": "#",
+        },
+        "title": "title",
+        "url": "www.test.com",
+      }
+    }
+  />
+  <ForwardRef(Relay(OpinionFollowButton))
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "__typename": "Opinion",
+        "author": Object {
+          "slug": "userAdmin",
+        },
+        "project": Object {
+          "opinionCanBeFollowed": true,
+        },
+        "section": Object {
+          "url": "#",
+        },
+        "title": "title",
+        "url": "www.test.com",
+      }
+    }
+  />
+  <ForwardRef(Relay(Connect(OpinionReportButton)))
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "__typename": "Opinion",
+        "author": Object {
+          "slug": "userAdmin",
+        },
+        "project": Object {
+          "opinionCanBeFollowed": true,
+        },
+        "section": Object {
+          "url": "#",
+        },
+        "title": "title",
+        "url": "www.test.com",
+      }
+    }
+  />
+  <Connect(ShareButtonDropdown)
+    className="ml-5"
+    id="opinion-share-button"
+    title="title"
+    url="www.test.com"
+  />
+</ButtonToolbar>
+`;

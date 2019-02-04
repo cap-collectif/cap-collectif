@@ -18,7 +18,7 @@ type Props = {
   user?: Object,
 };
 
-class OpinionButtons extends React.Component<Props> {
+export class OpinionButtons extends React.Component<Props> {
   static defaultProps = {
     user: null,
   };
