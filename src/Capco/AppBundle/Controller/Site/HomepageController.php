@@ -4,9 +4,11 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Entity\Section;
+use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -61,30 +63,53 @@ class HomepageController extends Controller
                     $email = $this->get('capco.newsletter_subscription.repository')->findOneByEmail(
                         $subscription->getEmail()
                     );
+                    /** @var User $userToNotify */
+                    $userToNotify = $this->get('capco.user.repository')->findOneBy([
+                        'email' => $subscription->getEmail(),
+                    ]);
+                    $em = $this->getDoctrine()->getManager();
 
-                    if ($email && $email->getIsEnabled()) {
-                        $flashBag->add(
-                            'info',
-                            $translator->trans('homepage.newsletter.already_subscribed')
-                        );
-                    } elseif ($email && !$email->getIsEnabled()) {
-                        $email->setIsEnabled(true);
-                        $em = $this->getDoctrine()->getManager();
-                        $em->persist($email);
-                        $em->flush();
-                        $flashBag->add(
-                            'success',
-                            $translator->trans('homepage.newsletter.success')
-                        );
-                    } else {
-                        $em = $this->getDoctrine()->getManager();
+                    if ($userToNotify) {
+                        /** @var UserNotificationsConfiguration $userNotification */
+                        $userNotification = $userToNotify->getNotificationsConfiguration();
+                        if (!$userNotification->isConsentExternalCommunication()) {
+                            $userToNotify->setNotificationsConfiguration(
+                                $userNotification->setConsentExternalCommunication(true)
+                            );
+                            $flashBag->add(
+                                'success',
+                                $translator->trans('homepage.newsletter.success')
+                            );
+                            $em->persist($userToNotify);
+                        } elseif ($userNotification->isConsentExternalCommunication()) {
+                            $flashBag->add(
+                                'info',
+                                $translator->trans('homepage.newsletter.already_subscribed')
+                            );
+                        }
+                    } elseif (!$email) {
                         $em->persist($subscription);
-                        $em->flush();
                         $flashBag->add(
                             'success',
                             $translator->trans('homepage.newsletter.success')
                         );
+                    } elseif ($email) {
+                        if ($email->getIsEnabled()) {
+                            $flashBag->add(
+                                'info',
+                                $translator->trans('homepage.newsletter.already_subscribed')
+                            );
+                        } else {
+                            $email->setIsEnabled(true);
+                            $em->persist($email);
+                            $flashBag->add(
+                                'success',
+                                $translator->trans('homepage.newsletter.success')
+                            );
+                        }
                     }
+
+                    $em->flush();
                 } else {
                     $flashBag->add('danger', $translator->trans('homepage.newsletter.invalid'));
                 }

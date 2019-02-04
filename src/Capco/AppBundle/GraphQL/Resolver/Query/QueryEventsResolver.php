@@ -14,7 +14,7 @@ class QueryEventsResolver implements ResolverInterface
 {
     use ResolverTrait;
 
-    public const FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR = 100;
+    public const FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR = 10;
     private $eventSearch;
     private $logger;
 
