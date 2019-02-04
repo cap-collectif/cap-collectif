@@ -14,7 +14,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with map se
 >
   <Button
     active={false}
-    aria-checked={false}
+    ariaChecked={false}
     block={false}
     bsClass="btn"
     bsStyle="default"
@@ -104,7 +104,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic
 >
   <Button
     active={false}
-    aria-checked={false}
+    ariaChecked={false}
     block={false}
     bsClass="btn"
     bsStyle="default"
@@ -194,7 +194,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button without map
 >
   <Button
     active={true}
-    aria-checked={true}
+    ariaChecked={true}
     block={false}
     bsClass="btn"
     bsStyle="default"

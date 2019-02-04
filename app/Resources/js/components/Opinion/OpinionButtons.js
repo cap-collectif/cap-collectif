@@ -63,12 +63,12 @@ class OpinionButtons extends React.Component<Props> {
         {/* $FlowFixMe $fragmentRefs is missing */}
         {opinion.project.opinionCanBeFollowed && <OpinionFollowButton opinion={opinion} />}
         <OpinionReportButton opinion={opinion} />
-        {opinion.title && opinion.section && opinion.section.url && (
+        {opinion.title && opinion.url && (
           <ShareButtonDropdown
             id="opinion-share-button"
             className="ml-5"
             title={opinion.title}
-            url={opinion.section.url}
+            url={opinion.url}
           />
         )}
       </ButtonToolbar>
@@ -95,6 +95,7 @@ export default createFragmentContainer(container, {
         __typename
         contribuable
         title
+        url
         section {
           url
         }
@@ -109,6 +110,7 @@ export default createFragmentContainer(container, {
         __typename
         ...OpinionVersionEditModal_version
         contribuable
+        url
         title
         section {
           url

@@ -35,7 +35,7 @@ export class ProposalListToggleViewBtn extends React.Component<Props> {
           bsStyle="default"
           active={mode === 'table'}
           role="checkbox"
-          aria-checked={mode === 'table'}
+          ariaChecked={mode === 'table'}
           title={mode === 'table' ? intl.formatMessage({ id: 'table-selected' }) : null}
           style={{ flex: '1 0 auto' }}
           onClick={this.handleClick.bind(this, 'table')}>
