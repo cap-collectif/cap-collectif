@@ -40,7 +40,7 @@ export class EventPreview extends React.Component<Props> {
                 ))}
             </p>
             <p className="excerpt">
-              {event.author && event.author.username && (
+              {event.author && event.author.username && event.author.media && (
                 <div>
                   {/* $FlowFixMe */}
                   <UserAvatar size={16} user={event.author} />
