@@ -54,3 +54,38 @@ Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition:
     operator: IS_NOT
     question: '@ljMultipleQuestionCheckbox'
     value: '@ljQuestionChoiceIsntACheckbox'
+  ljconditionHapProposalForm15:
+    id: ljconditionHapProposalForm15
+    operator: IS
+    question: '@multiplequestionHapNoelProposalForm15'
+    value: '@questionchoiceHapProposalForm15'
+  ljconditionHapGoodProposalForm15:
+    id: ljconditionHapGoodProposalForm15
+    operator: IS
+    question: '@multiplequestionIsHapGoodProposalForm15'
+    value: '@questionchoiceHapBonNonProposalForm15'
+  ljconditionNoelProposalForm15:
+    id: ljconditionNoelProposalForm15
+    operator: IS
+    question: '@multiplequestionHapNoelProposalForm15'
+    value: '@questionchoiceNoelProposalForm15'
+  ljconditionFleuveHapProposalForm15:
+    id: ljconditionFleuveHapProposalForm15
+    operator: IS
+    question: '@multiplequestionHapNoelProposalForm15'
+    value: '@questionchoiceHapProposalForm15'
+  ljconditionFleuveGangeProposalForm15:
+    id: ljconditionFleuveGangeProposalForm15
+    operator: IS
+    question: '@multiplequestionFavoriteFleuveProposalForm15'
+    value: '@questionchoiceLeGangeProposalForm15'
+  ljconditionMarvelProposalForm15:
+    id: ljconditionMarvelProposalForm15
+    operator: IS
+    question: '@multiplequestionMarvelOrDcProposalForm15'
+    value: '@questionchoiceMarvelOrDcMarvelProposalForm15'
+  ljconditionDcProposalForm15:
+    id: ljconditionDcProposalForm15
+    operator: IS
+    question: '@multiplequestionMarvelOrDcProposalForm15'
+    value: '@questionchoiceMarvelOrDcDcProposalForm15'

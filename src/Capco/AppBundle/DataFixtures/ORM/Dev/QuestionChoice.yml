@@ -440,3 +440,188 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: troisième choix
     position: 3
     question: '@multiplequestion13'
+  questionchoiceHapProposalForm15:
+    id: questionchoiceHapProposalForm15
+    title: Hap
+    position: 1
+    question: '@multiplequestionHapNoelProposalForm15'
+  questionchoiceNoelProposalForm15:
+    id: questionchoiceNoelProposalForm15
+    title: Noel
+    position: 2
+    question: '@multiplequestionHapNoelProposalForm15'
+  questionchoiceLeGangeProposalForm15:
+    id: questionchoicLeGangeProposalForm15
+    title: Le gange
+    position: 1
+    question: '@multiplequestionFavoriteFleuveProposalForm15'
+  questionchoiceLeNilProposalForm15:
+    id: questionchoiceLeNilProposalForm15
+    title: Le nil
+    position: 2
+    question: '@multiplequestionFavoriteFleuveProposalForm15'
+  questionchoiceLaSeineProposalForm15:
+    id: questionchoiceLaSeineProposalForm15
+    title: La seine
+    position: 3
+    question: '@multiplequestionFavoriteFleuveProposalForm15'
+  questionchoiceAmazoneProposalForm15:
+    id: questionchoiceAmazoneProposalForm15
+    title: L'Amazone
+    position: 4
+    question: '@multiplequestionFavoriteFleuveProposalForm15'
+  questionchoiceHapGangeOuiProposalForm15:
+    id: questionchoiceHapGangeOuiProposalForm15
+    title: Oui
+    position: 1
+    question: '@multiplequestionHapGangeProposalForm15'
+  questionchoiceHapGangeNonProposalForm15:
+    id: questionchoiceHapGangeNonProposalForm15
+    title: Non
+    position: 2
+    question: '@multiplequestionHapGangeProposalForm15'
+  questionchoiceHapJvcProposalForm15:
+    id: questionchoiceJvcProposalForm15
+    title: JVC
+    position: 1
+    question: '@multiplequestionHapCreationProposalForm15'
+  questionchoiceHapTeslaProposalForm15:
+    id: questionchoiceTeslaProposalForm15
+    title: Tesla
+    position: 2
+    question: '@multiplequestionHapCreationProposalForm15'
+  questionchoiceHapCislaProposalForm15:
+    id: questionchoiceCislaProposalForm15
+    title: Cisla
+    position: 3
+    question: '@multiplequestionHapCreationProposalForm15'
+  questionchoiceHapBonOuiProposalForm15:
+    id: questionchoiceHapBonOuiProposalForm15
+    title: Oui
+    position: 1
+    question: '@multiplequestionIsHapGoodProposalForm15'
+  questionchoiceHapBonNonProposalForm15:
+    id: questionchoiceHapBonNonProposalForm15
+    title: Non
+    position: 2
+    question: '@multiplequestionIsHapGoodProposalForm15'
+  questionchoiceNoelOuiProposalForm15:
+    id: questionchoiceNoelOuiProposalForm15
+    title: Oui
+    position: 1
+    question: '@multiplequestionNoelFeteProposalForm15'
+  questionchoiceNoelNonBakaProposalForm15:
+    id: questionchoiceNoelNonBakaProposalForm15
+    title: Non baka
+    position: 2
+    question: '@multiplequestionNoelFeteProposalForm15'
+  questionchoiceNoelRedHatProposalForm15:
+    id: questionchoiceNoelRedHatProposalForm15
+    title: Rouge
+    position: 1
+    question: '@multiplequestionNoelHatColorProposalForm15'
+  questionchoiceNoelGreenHatProposalForm15:
+    id: questionchoiceNoelGreenHatProposalForm15
+    title: Vert
+    position: 2
+    question: '@multiplequestionNoelHatColorProposalForm15'
+  questionchoiceNoelBlueHatProposalForm15:
+    id: questionchoiceNoelBlueHatProposalForm15
+    title: Bleu
+    position: 3
+    question: '@multiplequestionNoelHatColorProposalForm15'
+  questionchoiceMarvelOrDcMarvelProposalForm15:
+    id: questionchoiceMarvelOrDcMarvelProposalForm15
+    title: Marvel
+    position: 1
+    question: '@multiplequestionMarvelOrDcProposalForm15'
+  questionchoiceMarvelOrDcDcProposalForm15:
+    id: questionchoiceMarvelOrDcDcProposalForm15
+    title: DC
+    position: 2
+    question: '@multiplequestionMarvelOrDcProposalForm15'
+  questionchoiceDcSupermanYesProposalForm15:
+    id: questionchoiceDcSupermanYesProposalForm15
+    title: Oui
+    position: 1
+    question: '@multiplequestionDcSupermanLikeProposalForm15'
+  questionchoiceDcSupermanNoProposalForm15:
+    id: questionchoiceDcSupermanNoProposalForm15
+    title: Non
+    position: 2
+    question: '@multiplequestionDcSupermanLikeProposalForm15'
+  questionchoiceDcBatmanYesProposalForm15:
+    id: questionchoiceDcBatmanYesProposalForm15
+    title: Oui
+    position: 1
+    question: '@multiplequestionDcBatmanLikeProposalForm15'
+  questionchoiceDcBatmanYes2ProposalForm15:
+    id: questionchoiceDcBatmanYes2ProposalForm15
+    title: Oui
+    position: 2
+    question: '@multiplequestionDcBatmanLikeProposalForm15'
+  questionchoiceDcSupergirlYesProposalForm15:
+    id: questionchoiceDcSupergirlYesProposalForm15
+    title: Oui
+    position: 1
+    question: '@multiplequestionDcSupergirlLikeProposalForm15'
+  questionchoiceDcSupergirlNoProposalForm15:
+    id: questionchoiceDcSupergirlNoProposalForm15
+    title: Non
+    position: 2
+    question: '@multiplequestionDcSupergirlLikeProposalForm15'
+  questionchoiceMarvelIronManYesProposalForm15:
+    id: questionchoiceMarvelIronManYesProposalForm15
+    title: Oui
+    position: 1
+    question: '@multiplequestionMarvelIronManLikeProposalForm15'
+  questionchoiceMarvelIronManNoProposalForm15:
+    id: questionchoiceMarvelIronManNoProposalForm15
+    title: Non
+    position: 2
+    question: '@multiplequestionMarvelIronManLikeProposalForm15'
+  questionchoiceMarvelLukeCageYesProposalForm15:
+    id: questionchoiceMarvelLukeCageYesProposalForm15
+    title: Oui c un bo chauve ténébreux
+    position: 1
+    question: '@multiplequestionMarvelLukeCageLikeProposalForm15'
+  questionchoiceMarvelLukeCageYes2ProposalForm15:
+    id: questionchoiceMarvelLukeCageYes2ProposalForm15
+    title: Oui
+    position: 2
+    question: '@multiplequestionMarvelLukeCageLikeProposalForm15'
+  questionchoiceMarvelLukeCageYes3ProposalForm15:
+    id: questionchoiceMarvelLukeCageYes3ProposalForm15
+    title: OUI
+    position: 3
+    question: '@multiplequestionMarvelLukeCageLikeProposalForm15'
+  questionchoiceMarvelThorYesProposalForm15:
+    id: questionchoiceMarvelThorYesProposalForm15
+    title: ui
+    position: 1
+    question: '@multiplequestionMarvelThorLikeProposalForm15'
+  questionchoiceMarvelThorNoProposalForm15:
+    id: questionchoiceMarvelThorNoProposalForm15
+    title: nn
+    position: 2
+    question: '@multiplequestionMarvelThorLikeProposalForm15'
+  questionchoiceEndConditionOkProposalForm15:
+    id: questionchoiceEndConditionOkProposalForm15
+    title: Oki
+    position: 1
+    question: '@multiplequestionEndConditionelProposalForm15'
+  questionchoiceEndConditionOk2ProposalForm15:
+    id: questionchoiceEndConditionOk2ProposalForm15
+    title: Doki
+    position: 2
+    question: '@multiplequestionEndConditionelProposalForm15'
+  hapNotGoodHowDareYouOkiProposalForm15:
+    id: HapNotGoodHowDareYouOkiProposalForm15
+    title: Oki
+    position: 1
+    question: '@multiplequestionHapNotGoodHowDareYouProposalForm15'
+  hapNotGoodHowDareYouGpasluProposalForm15:
+    id: HapNotGoodHowDareYouGpasluProposalForm15
+    title: mdr g pas lu
+    position: 2
+    question: '@multiplequestionHapNotGoodHowDareYouProposalForm15'
