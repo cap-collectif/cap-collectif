@@ -45,11 +45,24 @@ const ClearIndicator = props => {
 };
 
 class renderSelect extends React.Component<Props> {
+  myRef: any;
+
+  constructor(props: Props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+
   static defaultProps = {
     multi: false,
     disabled: false,
     autoload: false,
     clearable: true,
+  };
+
+  clearValues = () => {
+    console.warn(this.myRef.current);
+    // sometimes the default options remain selected in async, we have to do this to reset the input
+    this.myRef.current.state.defaultOptions = [];
   };
 
   render() {
@@ -77,19 +90,15 @@ class renderSelect extends React.Component<Props> {
     let selectLabel = null;
 
     if (typeof loadOptions === 'function') {
-
+      selectValue = value;
+    } else if (multi) {
+      selectLabel =
+        options && options.filter(option => option && option.value && option.value === value);
+      selectValue = value ? selectLabel && selectLabel : [];
     } else {
-      if (multi) {
-        console.log(options);
-        selectLabel =
-          options && options.filter(option => option && option.value && option.value === value);
-        selectValue = value ? selectLabel && selectLabel : [];
-        console.log(selectValue);
-      } else {
-        selectLabel =
-          options && options.filter(option => option && option.value && option.value === value);
-        selectValue = value ? selectLabel && selectLabel[0] : null;
-      }
+      selectLabel =
+        options && options.filter(option => option && option.value && option.value === value);
+      selectValue = value ? selectLabel && selectLabel[0] : null;
     }
 
     return (
@@ -104,7 +113,7 @@ class renderSelect extends React.Component<Props> {
           {typeof loadOptions === 'function' ? (
             <Async
               filterOption={filterOption}
-              ref={ref}
+              ref={this.myRef}
               components={{ ClearIndicator }}
               isDisabled={disabled}
               defaultOptions={autoload}
@@ -113,9 +122,7 @@ class renderSelect extends React.Component<Props> {
                 placeholder || <FormattedMessage id="admin.fields.menu_item.parent_empty" />
               }
               loadOptions={loadOptions}
-              // onBlurResetsInput={false}
-              cacheOptions
-              // onCloseResetsInput={false}
+              cacheOptions={false}
               value={selectValue}
               name={name}
               isMulti={multi}
