@@ -49,7 +49,7 @@ Scenario: Anonymous wants to register with every possible errors
   | zipcode              | 94                   |
   And I press "global.register"
   Then I should see "registration.constraints.username.min"
-  And I should see "registration.constraints.email.invalid"
+  And I should see "global.constraints.email.invalid"
   And I should see "registration.constraints.password.min"
 
 @database

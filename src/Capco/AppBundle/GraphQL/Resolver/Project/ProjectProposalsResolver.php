@@ -3,52 +3,44 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Entity\Project;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
+use Capco\AppBundle\GraphQL\DataLoader\Project\ProjectProposalsDataLoader;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class ProjectProposalsResolver implements ResolverInterface
 {
-    protected $adapter;
-    private $collectStepResolver;
+    protected $dataLoader;
+    protected $promiseAdapter;
 
     public function __construct(
-        CollectStepProposalCountResolver $collectStepResolver,
-        PromiseAdapterInterface $adapter
+        ProjectProposalsDataLoader $dataLoader,
+        PromiseAdapterInterface $promiseAdapter
     ) {
-        $this->adapter = $adapter;
-        $this->collectStepResolver = $collectStepResolver;
+        $this->dataLoader = $dataLoader;
+        $this->promiseAdapter = $promiseAdapter;
     }
 
-    public function __invoke(Project $project, ?Arg $args = null): Connection
+    public function __invoke(Project $project, ?Arg $args = null): Promise
     {
         if (!$args) {
             $args = new Arg(['first' => 0]);
         }
 
-        // Setup dataLoader here instead
-        $totalCount = $this->getProjectProposalsCount($project);
-
-        $paginator = new Paginator(function (int $offset, int $limit) {
-            return [];
-        });
-
-        return $paginator->auto($args, $totalCount);
+        return $this->dataLoader->load(compact('args', 'project'));
     }
 
-    public function getProjectProposalsCount(Project $project): int
+    public function resolveSync(Project $project, ?Arg $args = null): Connection
     {
-        $count = 0;
-        foreach ($project->getSteps() as $pStep) {
-            $step = $pStep->getStep();
-            if ($step->isCollectStep()) {
-                $count += $this->collectStepResolver->__invoke($step);
-            }
-        }
+        $conn = null;
+        $this->promiseAdapter->await(
+            $this->__invoke($project, $args)->then(function ($value) use (&$conn) {
+                $conn = $value;
+            })
+        );
 
-        return $count;
+        return $conn;
     }
 }

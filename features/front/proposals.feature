@@ -136,6 +136,10 @@ Scenario: Logged in user wants to create two proposal in under a minute
   When I click the create proposal button
   When I fill the simple proposal form
   And I submit the create proposal form
+  When I go to a project with requirement condition to vote and ranking
+  When I click the create proposal button
+  When I fill the simple proposal form
+  And I submit the create proposal form
   Then I should see "publication-limit-reached"
   When I reload the page, I should see a confirm popup 
 

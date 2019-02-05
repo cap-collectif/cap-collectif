@@ -14,10 +14,10 @@ Scenario: User wants to send a message via contact page with wrong email
   Given I visited "contact page"
   When I fill in the following:
     | contact_name         | Mwa                                      |
-    | contact_email        | coucou je suis un imbécile               |
+    | contact_email        | baka               |
     | contact_message      | Hello ! Votre site il est trop swag ! ^^ |
   And I press "contact.submit"
-  Then I should see "This value is not a valid email address" in the "#main" element
+  Then I should see "global.constraints.email.invalid" in the "#main" element
 
 Scenario: User wants to send a message via contact page without filling fields
   Given I visited "contact page"

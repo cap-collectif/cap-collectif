@@ -2,80 +2,41 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
+use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\SourceRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
 
 class StepContributionsResolver implements ResolverInterface
 {
-    protected $opinionRepository;
-    protected $sourceRepository;
-    protected $argumentRepository;
-    protected $opinionVersionRepository;
-    protected $proposalRepository;
-    protected $proposalCollectVoteRepository;
-    protected $replyRepository;
+    private $dataLoader;
+    private $promiseAdapter;
 
     public function __construct(
-        OpinionRepository $opinionRepository,
-        SourceRepository $sourceRepository,
-        ArgumentRepository $argumentRepository,
-        OpinionVersionRepository $opinionVersionRepository,
-        ProposalRepository $proposalRepository,
-        ReplyRepository $replyRepository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository
+        StepContributionsDataLoader $dataLoader,
+        PromiseAdapterInterface $promiseAdapter
     ) {
-        $this->opinionRepository = $opinionRepository;
-        $this->sourceRepository = $sourceRepository;
-        $this->argumentRepository = $argumentRepository;
-        $this->opinionVersionRepository = $opinionVersionRepository;
-        $this->proposalRepository = $proposalRepository;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->replyRepository = $replyRepository;
+        $this->dataLoader = $dataLoader;
+        $this->promiseAdapter = $promiseAdapter;
     }
 
-    public function __invoke(AbstractStep $step, Argument $args): Connection
+    public function __invoke(AbstractStep $step, Argument $args): Promise
     {
-        $totalCount = 0;
-        if ($step instanceof ConsultationStep) {
-            $totalCount += $this->opinionRepository->countPublishedContributionsByStep($step);
-            $totalCount += $this->opinionRepository->countTrashedContributionsByStep($step);
+        return $this->dataLoader->load(compact('step', 'args'));
+    }
 
-            $totalCount += $this->argumentRepository->countPublishedArgumentsByStep($step);
-            $totalCount += $this->argumentRepository->countTrashedArgumentsByStep($step);
+    public function resolveSync(AbstractStep $step, Argument $args): Connection
+    {
+        $conn = null;
+        $this->promiseAdapter->await(
+            $this->__invoke($step, $args)->then(function ($value) use (&$conn) {
+                $conn = $value;
+            })
+        );
 
-            $totalCount += $this->opinionVersionRepository->countPublishedOpinionVersionByStep(
-                $step
-            );
-            $totalCount += $this->opinionVersionRepository->countTrashedOpinionVersionByStep($step);
-
-            $totalCount += $this->sourceRepository->countPublishedSourcesByStep($step);
-            $totalCount += $this->sourceRepository->countTrashedSourcesByStep($step);
-        } elseif ($step instanceof CollectStep) {
-            $totalCount += $this->proposalRepository->countPublishedProposalByStep($step);
-            // We do not account votes as a contribution, maybe this will change
-            // $totalCount += $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
-            //     $step
-            // );
-        } elseif ($step instanceof QuestionnaireStep) {
-            $totalCount += $this->replyRepository->countRepliesByStep($step);
-        }
-        $paginator = new Paginator(function (int $offset, int $limit) {
-            return [];
-        });
-
-        return $paginator->auto($args, $totalCount);
+        return $conn;
     }
 }

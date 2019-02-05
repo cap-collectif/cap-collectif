@@ -273,7 +273,7 @@ class ContributionResolver
     {
         $count = 0;
         foreach ($project->getSteps() as $step) {
-            $count += $this->stepContributionsResolver->__invoke(
+            $count += $this->stepContributionsResolver->resolveSync(
                 $step->getStep(),
                 new Argument(['first' => 0])
             )->totalCount;

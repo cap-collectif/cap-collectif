@@ -1,5 +1,5 @@
 {% macro contributions_popover(project) %}{% spaceless %}
-    {% set totalProposalsCount = projectProposalsResolver.__invoke(project).totalCount %}
+    {% set totalProposalsCount = projectProposalsResolver.resolveSync(project).totalCount %}
     {% set opinions = project.totalOpinionsCount + totalProposalsCount %}
     {% if opinions > 0 %}
         {% set opinionLabel = project.opinionTerm == 0 ? 'project.show.meta.opinionsCount' : 'project.show.meta.articlesCount' %}

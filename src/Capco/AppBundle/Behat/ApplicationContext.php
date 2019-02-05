@@ -927,7 +927,7 @@ class ApplicationContext extends UserContext
      *
      * @When /^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from react "(?P<select>(?:[^"]|\\")*)"$/
      */
-    public function selectOptionFromReact($select, $option)
+    public function selectOptionFromReact(string $select, string $option): void
     {
         $selector = "${select} .Select-input input";
         $element = $this->getSession()

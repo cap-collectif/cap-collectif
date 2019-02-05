@@ -6,6 +6,7 @@ import { formValueSelector } from 'redux-form';
 import { debounce } from 'lodash';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import EventListPaginated from './EventListPaginated';
+import { graphqlError } from '../../../createRelayEnvironment';
 import type { GlobalState } from '../../../types';
 import type { EventRefetch_query } from './__generated__/EventRefetch_query.graphql';
 
@@ -21,11 +22,13 @@ type Props = {
 
 type State = {
   isRefetching: boolean,
+  hasRefetchError: boolean,
 };
 
 export class EventRefetch extends React.Component<Props, State> {
   state = {
     isRefetching: false,
+    hasRefetchError: false,
   };
 
   componentDidUpdate(prevProps: Props) {
@@ -56,7 +59,10 @@ export class EventRefetch extends React.Component<Props, State> {
     this.props.relay.refetch(
       refetchVariables,
       null,
-      () => {
+      error => {
+        if (error) {
+          this.setState({ hasRefetchError: true });
+        }
         this.setState({ isRefetching: false });
       },
       { force: true },
@@ -65,6 +71,10 @@ export class EventRefetch extends React.Component<Props, State> {
 
   render() {
     const { query } = this.props;
+
+    if (this.state.hasRefetchError) {
+      return graphqlError;
+    }
 
     if (this.state.isRefetching) {
       return <Loader />;

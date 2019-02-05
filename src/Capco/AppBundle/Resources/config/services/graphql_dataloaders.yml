@@ -123,3 +123,19 @@ services:
       $cacheTtl: 600
       $debug: '%kernel.debug%'
       $enableCache: true
+
+  Capco\AppBundle\GraphQL\DataLoader\Project\ProjectProposalsDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: ProjectProposalsDataLoader
+      $cacheTtl: 120
+      $debug: '%kernel.debug%'
+      $enableCache: true
+
+  Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: StepContributionsDataLoader
+      $cacheTtl: 120
+      $debug: '%kernel.debug%'
+      $enableCache: true
