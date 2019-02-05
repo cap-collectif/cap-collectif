@@ -21,7 +21,7 @@
                         <p class="excerpt">{% transchoice nbEvents with {'%count%': nbEvents | length} from 'CapcoAppBundle' %}
                             theme.show.appendices.events.number
                             {% endtranschoice %}</p>
-                        <p><a href="{{ path('app_event_search_theme', {'theme': theme.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.events.button'|trans({}, 'CapcoAppBundle') }}</a></p>
+                        <p><a href="{{ path('app_event') }}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.events.button'|trans({}, 'CapcoAppBundle') }}</a></p>
                     </div>
                 {% endif %}
             </div>
