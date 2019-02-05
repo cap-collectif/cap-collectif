@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Reply;
@@ -12,12 +13,20 @@ use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 
 final class UserNotifier extends BaseNotifier
 {
-    public function acknowledgeReply(Project $project, Reply $reply): void
-    {
+    public function acknowledgeReply(
+        Project $project,
+        Reply $reply,
+        $endAt,
+        string $stepUrl,
+        bool $isUpdated = false
+    ): void {
         $this->mailer->sendMessage(
             QuestionnaireAcknowledgeReplyMessage::create(
                 $project,
                 $reply,
+                $endAt,
+                $stepUrl,
+                $isUpdated,
                 $reply->getAuthor()->getEmail()
             )
         );

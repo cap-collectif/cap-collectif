@@ -14,6 +14,7 @@ use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 
 class UpdateReplyMutation implements MutationInterface
 {
@@ -23,6 +24,7 @@ class UpdateReplyMutation implements MutationInterface
     private $responsesFormatter;
     private $replyRepo;
     private $userNotifier;
+    private $stepUrlResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -30,7 +32,8 @@ class UpdateReplyMutation implements MutationInterface
         ReplyRepository $replyRepo,
         RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
-        UserNotifier $userNotifier
+        UserNotifier $userNotifier,
+        StepUrlResolver $stepUrlResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -38,6 +41,7 @@ class UpdateReplyMutation implements MutationInterface
         $this->redisStorageHelper = $redisStorageHelper;
         $this->responsesFormatter = $responsesFormatter;
         $this->userNotifier = $userNotifier;
+        $this->stepUrlResolver = $stepUrlResolver;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -65,7 +69,11 @@ class UpdateReplyMutation implements MutationInterface
 
         $questionnaire = $reply->getQuestionnaire();
         if ($questionnaire && $questionnaire->isAcknowledgeReplies() && !$reply->isDraft()) {
-            $this->userNotifier->acknowledgeReply($questionnaire->getStep()->getProject(), $reply);
+            $step = $questionnaire->getStep();
+            $project = $step->getProject();
+            $stepUrl = $this->stepUrlResolver->__invoke($questionnaire->getStep());
+            $endAt = $questionnaire->getStep()->getEndAt();
+            $this->userNotifier->acknowledgeReply($project, $reply, $endAt, $stepUrl, true);
         }
 
         $this->em->flush();

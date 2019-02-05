@@ -20,6 +20,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 
 class AddReplyMutation implements MutationInterface
 {
@@ -32,6 +33,7 @@ class AddReplyMutation implements MutationInterface
     private $logger;
     private $replyRepo;
     private $userNotifier;
+    private $stepUrlResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -41,7 +43,8 @@ class AddReplyMutation implements MutationInterface
         RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
         LoggerInterface $logger,
-        UserNotifier $userNotifier
+        UserNotifier $userNotifier,
+        StepUrlResolver $stepUrlResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -51,6 +54,7 @@ class AddReplyMutation implements MutationInterface
         $this->responsesFormatter = $responsesFormatter;
         $this->logger = $logger;
         $this->userNotifier = $userNotifier;
+        $this->stepUrlResolver = $stepUrlResolver;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -95,7 +99,11 @@ class AddReplyMutation implements MutationInterface
         $this->redisStorageHelper->recomputeUserCounters($user);
 
         if ($questionnaire->isAcknowledgeReplies() && !$reply->isDraft()) {
-            $this->userNotifier->acknowledgeReply($questionnaire->getStep()->getProject(), $reply);
+            $step = $questionnaire->getStep();
+            $project = $step->getProject();
+            $stepUrl = $this->stepUrlResolver->__invoke($questionnaire->getStep());
+            $endAt = $questionnaire->getStep()->getEndAt();
+            $this->userNotifier->acknowledgeReply($project, $reply, $endAt, $stepUrl, false);
         }
 
         return ['questionnaire' => $questionnaire, 'reply' => $reply];

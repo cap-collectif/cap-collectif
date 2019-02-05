@@ -1,51 +1,91 @@
+{% set siteName = capco_site_parameter_value('global.site.fullname') %}
+{% set endDate =  endAt|localizeddate('long', 'none', 'fr_FR')  %}
+{% set nowDate =  "now"|localizeddate('long', 'none', 'fr_FR')  %}
+{% set nowHour =  "now"|date('H') ~ 'h' ~ "now"|date('i')  %}
+
 {% block body_text %}
     {% autoescape false %}
-    <p>
-        {{ 'reply.acknowledgement.hello'|trans({
+    <style type="text/css">
+        .align-center {
+            text-align: center;
+            width: 100%;
+        }
+
+        .bold-text {
+            font-weight: bold;
+        }
+
+        .btn {
+            border: 1px solid #8a8a8a;
+            padding: 5px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: black;
+            background-color: #f6f6f6;
+        }
+
+        .btn:hover {
+            border: 1px solid black;
+            background-color: #dedede;
+        }
+    </style>
+    
+    <div class="align-center">
+        <p>
+            {{ siteName }}
+        </p>
+    
+        <p class="bold-text">
+            {{ 'acknowledgement-of-receipt'|trans({}, 'CapcoAppBundle') }}
+        </p>
+    
+        <p>
+            {{ nowDate }}
+        </p>
+    </div>
+ 
+    <p class="bold-text">
+        {{ 'hello-username'|trans({
             '%username%' : reply.author.username
         }, 'CapcoAppBundle') }}
     </p>
+
+    {% if not isUpdated %}
+        <p>
+            {{ 'thank-you-for-participating-in-the-project'|trans({
+                '%projectTitle%': project.title,
+                '%projectLink%': stepUrl
+            }, 'CapcoAppBundle') }}
+        </p>
+    {% endif %}
+ 
+    {% if isUpdated %}
+        <p>
+            {{ 'you-have-changed-your-answer-to-the-question'|trans({
+                '%answerChangeDate%': nowDate,
+                '%answerChangeTime%': nowHour,
+                '%surveyTitle%': project.title
+            }, 'CapcoAppBundle') }}
+        </p>
+    {% else %}
+        <p>
+            {{ 'your-answer-to-the-survey-have-been-registered-on-date-at-time'|trans({
+                '%questionnaireDate%': nowDate,
+                '%questionnaireTime%': nowHour,
+                '%surveyName%': project.title
+            }, 'CapcoAppBundle') }}
+        </p>
+    {% endif %}
+
     <p>
-        {{ 'reply.acknowledgement.thx'|trans({
-            '%projectname%': project.title
+        {{ 'you-can-modify-or-delete-your-answers-until-date-until-date'|trans({
+            '%questionnaireEndDate%': endDate
         }, 'CapcoAppBundle') }}
     </p>
-    <p>
-        {{ 'reply.acknowledgement.replies'|trans({}, 'CapcoAppBundle') }}
-    </p>
 
-    {% for response in reply.responses if response.question.inputType != 'section' %}
-        <p>
-            <strong>{{ response.question.title }}</strong><br>
-            {% if response.type == 'value' and (response.value is null or (response.value is iterable and response.value | length == 0)) %}
-                <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
-            {% elseif response.question.inputType == 'editor' %}
-                <span>{{ response.value | raw }}</span>
-            {% elseif response.question.inputType == 'ranking' %}
-                {% if response.value.labels | length > 0 %}
-                    <ol>
-                        {% for label in response.value.labels %}
-                            <li>{{ label }}</li>
-                        {% endfor %}
-                    </ol>
-                {% else %}
-                    <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
-                {% endif %}
-            {% elseif response.type == 'value' and response.value is iterable %}
-                {% set labels = response.value.labels %}
-                {% if response.value.other is defined and response.value.other is not null %}
-                    {% set labels = labels | merge([response.value.other]) %}
-                {% endif %}
-                {% if labels | length > 0 %}
-                    <span>{{ labels | join(', ') }}</span>
-                {% else %}
-                    <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
-                {% endif %}
-            {% elseif response.type == 'value' %}
-                <span>{{ response.value }}</span>
-            {% endif %}
-        </p>
-    {% endfor %}
+    <p>
+        <a href="{{ stepUrl }}" class="btn">{{ 'access-my-answer'|trans({}, 'CapcoAppBundle') }}</a>
+    </p>
     {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}
