@@ -755,8 +755,10 @@ EOF;
             $proposalWithNews,
             'news',
             function ($edge) use ($proposal, $progress) {
-                $news = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
-                $this->addProposalNewsRow($news, $proposal, $edge['cursor']);
+                if ($edge) {
+                    $news = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
+                    $this->addProposalNewsRow($news, $proposal, $edge['cursor']);
+                }
                 $progress->advance();
             },
             function ($pageInfo) use ($proposal) {
