@@ -451,7 +451,7 @@ class ApplicationContext extends UserContext
      * @Then I wait :element to appear on current page
      * @Then I wait :element to appear on current page maximum :timeout
      */
-    public function iWaitElementToAppearOnPage(string $element, int $timeout = 3000)
+    public function iWaitElementToAppearOnPage(string $element, int $timeout = 5000)
     {
         expect($this->getSession()->wait($timeout, "$('" . $element . "').length > 0"))->toBe(true);
     }
