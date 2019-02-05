@@ -2,10 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
-use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -60,29 +57,6 @@ class ProjectVotesResolver implements ResolverInterface
         $count = 0;
         if ($step instanceof ConsultationStep) {
             $count = $step->getVotesCount();
-            // foreach ($step->getOpinions() as $opinion) {
-            //     $count += $opinion->getVotesCountAll();
-            //     /** @var Argument $argument */
-            //     foreach ($opinion->getArguments() as $argument) {
-            //         $count += $argument->getVotesCount();
-            //     }
-            //     /** @var Source $source */
-            //     foreach ($opinion->getSources() as $source) {
-            //         $count += $source->getVotesCount();
-            //     }
-            //     /** @var OpinionVersion $version */
-            //     foreach ($opinion->getVersions() as $version) {
-            //         $count += $version->getVotesCountAll();
-            //         /** @var Argument $argument */
-            //         foreach ($version->getArguments() as $argument) {
-            //             $count += $argument->getVotesCount();
-            //         }
-            //         /** @var Source $source */
-            //         foreach ($version->getSources() as $source) {
-            //             $count += $source->getVotesCount();
-            //         }
-            //     }
-            // }
         } elseif ($step instanceof SelectionStep || $step instanceof CollectStep) {
             $promise = $this->stepVotesCountResolver
                 ->__invoke($step)

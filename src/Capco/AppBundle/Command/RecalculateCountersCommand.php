@@ -307,11 +307,29 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                         $cs->getId() .
                         '\''
                 );
-                $votes = $projectVotesResolver->countStepVotes($cs);
+                $count = 0;
+                foreach ($cs->getOpinions() as $opinion) {
+                    $count += $opinion->getVotesCountAll();
+                    foreach ($opinion->getArguments() as $argument) {
+                        $count += $argument->getVotesCount();
+                    }
+                    foreach ($opinion->getSources() as $source) {
+                        $count += $source->getVotesCount();
+                    }
+                    foreach ($opinion->getVersions() as $version) {
+                        $count += $version->getVotesCountAll();
+                        foreach ($version->getArguments() as $argument) {
+                            $count += $argument->getVotesCount();
+                        }
+                        foreach ($version->getSources() as $source) {
+                            $count += $source->getVotesCount();
+                        }
+                    }
+                }
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\ConsultationStep cs
                     set cs.votesCount = ' .
-                        $votes .
+                        $count .
                         '
                     where cs.id = \'' .
                         $cs->getId() .
