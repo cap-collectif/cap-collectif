@@ -252,10 +252,22 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         $connection = $paginator->auto($args, $totalCount);
         $connection->totalCount = $totalCount;
 
-        // TODO this is too slow
-        $countFusions = $this->proposalRepo->countFusionsByProposalForm($form);
-        $connection->{'fusionCount'} = $countFusions;
+        $connection->{'fusionCount'} = $this->getFusionsCount($form);
 
         return $connection;
+    }
+
+    private function getFusionsCount(ProposalForm $form): int
+    {
+        $cacheItem = $this->cache->getItem(
+            'ProposalFormProposalsDataLoader-getFusionsCount-' . $form->getId()
+        );
+        if (!$cacheItem->isHit()) {
+            $value = $this->proposalRepo->countFusionsByProposalForm($form);
+            $cacheItem->set($value)->expiresAfter(120);
+            $this->cache->save($cacheItem);
+        }
+
+        return $cacheItem->get();
     }
 }

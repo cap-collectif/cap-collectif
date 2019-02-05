@@ -42,6 +42,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * }, indexes={
  *     @ORM\Index(name="idx_author", columns={"id", "author_id"}),
  *     @ORM\Index(name="idx_slug", columns={"slug", "deleted_at"}),
+ *     @ORM\Index(name="idx_proposalform_published", columns={"is_draft", "trashed_at", "published", "proposal_form_id", "deleted_at"}),
  *     @ORM\Index(name="idx_proposal_published", columns={"id", "published", "deleted_at", "is_draft", "trashed_at"})
  * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
