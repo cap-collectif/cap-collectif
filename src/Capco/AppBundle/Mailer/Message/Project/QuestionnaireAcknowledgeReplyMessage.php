@@ -11,7 +11,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
     public static function create(
         Project $project,
         Reply $reply,
-        $endAt,
+        \DateTime $endAt,
         string $stepUrl,
         bool $isUpdated,
         string $recipentEmail,
@@ -30,7 +30,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
     private static function getMyTemplateVars(
         Project $project,
         Reply $reply,
-        $endAt,
+        \DateTime $endAt,
         string $stepUrl,
         bool $isUpdated
     ): array {
