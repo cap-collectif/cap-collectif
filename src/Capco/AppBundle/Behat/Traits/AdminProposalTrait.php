@@ -89,18 +89,18 @@ trait AdminProposalTrait
     {
         $this->iWait(2);
         $this->getCurrentPage()
-            ->find('css', '#evaluers .Select-input input')
+            ->find('css', '#evaluers .react-select__input input')
             ->setValue($analyst1);
         $this->iWait(3);
         $this->getCurrentPage()
             ->find('css', '#evaluers')
             ->click();
         $this->getCurrentPage()
-            ->find('css', '#evaluers .Select-option:nth-child(1)')
+            ->find('css', '#evaluers .react-select__menu-list .react-select__option:first-child')
             ->click();
         $this->iWait(3);
         $this->getCurrentPage()
-            ->find('css', '#evaluers .Select-input input')
+            ->find('css', '#evaluers .react-select__input input')
             ->setValue($analyst2);
         $this->iWait(2);
         $this->getCurrentPage()
@@ -108,7 +108,7 @@ trait AdminProposalTrait
             ->click();
         $this->iWait(2);
         $this->getCurrentPage()
-            ->find('css', '#evaluers .Select-option:nth-child(1)')
+            ->find('css', '#evaluers .react-select__menu-list .react-select__option:first-child')
             ->click();
     }
 
