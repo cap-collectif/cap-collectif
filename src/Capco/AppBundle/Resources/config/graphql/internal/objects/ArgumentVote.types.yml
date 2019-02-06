@@ -2,11 +2,11 @@ ArgumentVote:
   type: object
   inherits:
     - InternalVote
-    - Publishable
+    - PublicPublishable
   config:
     interfaces:
       - InternalVote
-      - Publishable
+      - PublicPublishable
     fields:
       related:
         type: 'Argument'

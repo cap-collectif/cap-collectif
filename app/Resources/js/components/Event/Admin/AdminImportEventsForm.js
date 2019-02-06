@@ -23,9 +23,7 @@ type State = {|
 |};
 
 type SubmittedFormValue = {|
-  events: {
-    data: Array<Object>,
-  },
+  events: Array<Object>,
 |};
 
 export const formName = 'AdminImportEventsForm';
@@ -64,7 +62,7 @@ const prepareVariablesFromAnalyzedFile = (
 const onSubmit = (values: SubmittedFormValue, dispatch: Dispatch, { onClose, reset }: Props) => {
   const variables = {
     input: {
-      events: values.events.data,
+      events: values.events,
       dryRun: false,
     },
   };
@@ -90,17 +88,8 @@ const asyncValidate = (
       reset();
       return;
     }
-    if (response.addEvents) {
-      const { importedEvents, notFoundEmails, notFoundThemes, brokenDates } = response.addEvents;
-      dispatch(
-        change(formName, 'events', {
-          data: variables.input.events,
-          importedEvents,
-          notFoundEmails,
-          notFoundThemes,
-          brokenDates,
-        }),
-      );
+    if (response.addEvents.importedEvents.length) {
+      dispatch(change(formName, 'events', variables.input.events));
     }
   });
 };

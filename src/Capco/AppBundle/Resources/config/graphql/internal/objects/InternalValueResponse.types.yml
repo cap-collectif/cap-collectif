@@ -1,0 +1,15 @@
+InternalValueResponse:
+  type: object
+  inherits:
+    - PreviewValueResponse
+  config:
+    name: ValueResponse
+    interfaces:
+      - InternalResponse
+    description: 'A response'
+    fields:
+      question:
+        type: 'InternalQuestion!'
+      formattedValue:
+        type: 'String'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\FormattedValueResponseTypeResolver", [value])'

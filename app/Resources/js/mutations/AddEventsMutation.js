@@ -13,9 +13,6 @@ const mutation = graphql`
       importedEvents {
         id
       }
-      notFoundEmails
-      notFoundThemes
-      brokenDates
     }
   }
 `;

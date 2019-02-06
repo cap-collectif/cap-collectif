@@ -1,7 +1,7 @@
 ResponseConnection:
   type: relay-connection
   config:
-    nodeType: Response!
+    nodeType: InternalResponse!
     connectionFields:
       totalCount:
         type: Int!

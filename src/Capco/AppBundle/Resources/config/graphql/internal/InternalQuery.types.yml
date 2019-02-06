@@ -106,7 +106,7 @@ InternalQuery:
             type: 'ID!'
         resolve: "@=resolver('contributions', [args])"
       question:
-        type: 'Question!'
+        type: 'InternalQuestion!'
         description: 'TO BE REMOVED'
         args:
           id:

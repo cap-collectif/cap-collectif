@@ -108,15 +108,6 @@ input AddEventsInput {
 type AddEventsPayload {
   # List of imported events.
   importedEvents: [Event!]!
-
-  # List of emails that didn't match an existing user.
-  notFoundEmails: [Email]!
-
-  # List of themes ID that didn't match an existing themes.
-  notFoundThemes: [ID]!
-
-  # List of dates that didn't got the good format
-  brokenDates: [String]!
   clientMutationId: String
 }
 
@@ -349,13 +340,13 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 
   # The author of the contribution.
@@ -860,33 +851,6 @@ type CheckboxRequirement implements Node & Requirement {
 type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   # The ID of an object
   id: ID!
-
-  # The kind of the step
-  kind: String!
-
-  # The status of the step
-  status: StepStatus
-
-  # The type of the step
-  type: String
-
-  # Does the step have a end date ?
-  timeless: Boolean
-
-  # Start date of the step.
-  startAt: DateTime
-
-  # End date of the step.
-  endAt: DateTime
-
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
-
-  # The introduction text of the step.
-  body: HTML
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -910,9 +874,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -921,6 +882,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -931,6 +895,33 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     # If non-null, filters proposals with the given trashed status.
     trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
+
+  # The title of the step.
+  title: String!
+
+  # The kind of the step
+  kind: String!
+
+  # The status of the step
+  status: StepStatus
+
+  # The type of the step
+  type: String
+
+  # Does the step have a end date ?
+  timeless: Boolean
+
+  # Start date of the step.
+  startAt: DateTime
+
+  # End date of the step.
+  endAt: DateTime
+
+  # The url of the step
+  url: String!
+
+  # The introduction text of the step.
+  body: HTML
 
   # The viewer unpublished proposals (only visible by viewer).
   viewerProposalsUnpublished(
@@ -1031,13 +1022,13 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 
   # Does the viewer already submitted a report ?
@@ -1904,6 +1895,9 @@ type Event implements Node & Commentable {
 
   # The url of the event
   url: URI!
+  registrationEnable: Boolean!
+  metaDescription: String
+  customCode: String
 }
 
 # A connection to a list of items.
@@ -2295,7 +2289,7 @@ type Media implements UniformResourceLocatable {
   providerReference: String!
 }
 
-# A media question
+# A media question.
 type MediaQuestion implements Question {
   id: ID!
   title: String!
@@ -2720,13 +2714,13 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 
   # The author of the contribution.
@@ -3322,11 +3316,26 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   # Url of the contribution
   url: URI!
 
-  # Identifies the contribution title.
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # Identifies the trashed visibility.
+  trashedStatus: TrashableStatus
+
+  # Identifies the moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # Identifies the reason why the moderator trashed the contribution.
+  trashedReason: String
+
+  # Identifies the proposal title.
   title: String!
 
-  # Identifies the body of the contribution.
+  # Identifies the body of the proposal.
   body: HTML
+
+  # Identifies the responses of the proposal.
+  responses: [Response]!
 
   # The kind of contribution.
   kind: String!
@@ -3369,18 +3378,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
     last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
 
   # Followers connection
   followers(
@@ -3434,7 +3431,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   selections: [Selection!]!
   likers: [User!]!
   estimation: Int
-  responses: [Response]!
   media: Media
   theme: Theme
   category: ProposalCategory
@@ -3605,9 +3601,6 @@ type ProposalForm implements Node & UniformResourceLocatable {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -3616,6 +3609,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -3806,9 +3802,6 @@ interface ProposalStep {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -3817,6 +3810,9 @@ interface ProposalStep {
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -4774,7 +4770,7 @@ interface RequirementStep {
   ): RequirementConnection!
 }
 
-# A contribution with an author
+# A response to a question.
 interface Response {
   question: Question!
 }
@@ -5010,9 +5006,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -5021,6 +5014,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -5242,13 +5238,13 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 
   # The author of the contribution.
@@ -5511,13 +5507,13 @@ interface Trashable {
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 }
 
@@ -6310,10 +6306,12 @@ type UserType {
 
 # A response
 type ValueResponse implements Response {
-  question: Question!
+  # Nullable ID in case of empty response.
+  id: ID
 
-  # The value, can be a JSON
+  # The response value which can be a string or a JSON.
   value: String
+  question: Question!
   formattedValue: String
 }
 
@@ -6427,13 +6425,13 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 
   # `true` if the object is published.

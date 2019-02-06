@@ -11,4 +11,4 @@ LogicJumpCondition:
         type: 'LogicJumpConditionOperator!'
       question:
         description: 'Return the question which is going to be tested against the condition.'
-        type: 'Question!'
+        type: 'InternalQuestion!'

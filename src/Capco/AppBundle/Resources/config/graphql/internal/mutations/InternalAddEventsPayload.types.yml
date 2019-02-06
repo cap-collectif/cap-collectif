@@ -6,12 +6,3 @@ InternalAddEventsPayload:
       importedEvents:
         type: '[InternalEvent!]!'
         description: 'List of imported events.'
-      notFoundEmails:
-        type: '[Email]!'
-        description: "List of emails that didn't match an existing user."
-      notFoundThemes:
-        type: '[ID]!'
-        description: "List of themes ID that didn't match an existing themes."
-      brokenDates:
-        type: '[String]!'
-        description: "List of dates that didn't got the good format"

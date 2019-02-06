@@ -1,6 +1,7 @@
-Question:
+InternalQuestion:
   type: interface
   config:
+    name: Question
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
     fields:
       id:

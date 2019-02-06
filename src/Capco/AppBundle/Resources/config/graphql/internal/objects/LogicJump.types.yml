@@ -11,10 +11,10 @@ LogicJump:
         type: 'Boolean!'
       origin:
         description: 'Return the question that trigger this logic jump.'
-        type: 'Question!'
+        type: 'InternalQuestion!'
       destination:
         description: 'Return the question which this logic jump leads to.'
-        type: 'Question!'
+        type: 'InternalQuestion!'
       conditions:
         description: 'Return the necessited conditions that needs to be fullfiled to trigger this logic jump.'
         type: '[LogicJumpCondition]'
