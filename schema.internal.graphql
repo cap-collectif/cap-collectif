@@ -1895,6 +1895,9 @@ type Event implements Node & Commentable {
 
   # The url of the event
   url: URI!
+  registrationEnable: Boolean!
+  metaDescription: String
+  customCode: String
 }
 
 # A connection to a list of items.
