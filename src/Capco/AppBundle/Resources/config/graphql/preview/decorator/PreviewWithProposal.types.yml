@@ -22,9 +22,6 @@ PreviewWithProposals:
           author:
             type: 'ID'
             description: 'If non-null, filters proposals with the given author.'
-          status:
-            type: 'ID'
-            description: 'If non-null, filters proposals with the given status.'
           theme:
             type: 'ID'
             description: 'If non-null, filters proposals with the given theme.'
@@ -35,7 +32,3 @@ PreviewWithProposals:
             type: 'ProposalOrder'
             description: 'Ordering options for proposals returned from the connection.'
             defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }
-          trashedStatus:
-            type: 'ProposalTrashedStatus'
-            description: 'If non-null, filters proposals with the given trashed status.'
-            defaultValue: 'NOT_TRASHED'

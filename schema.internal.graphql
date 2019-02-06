@@ -874,9 +874,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -886,14 +883,17 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
-    # If non-null, filters proposals with the given trashed status.
-    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The title of the step.
@@ -3601,9 +3601,6 @@ type ProposalForm implements Node & UniformResourceLocatable {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -3613,14 +3610,17 @@ type ProposalForm implements Node & UniformResourceLocatable {
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
-    # If non-null, filters proposals with the given trashed status.
-    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -3802,9 +3802,6 @@ interface ProposalStep {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -3814,14 +3811,17 @@ interface ProposalStep {
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
-    # If non-null, filters proposals with the given trashed status.
-    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -5006,9 +5006,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -5018,14 +5015,17 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
-    # If non-null, filters proposals with the given trashed status.
-    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).

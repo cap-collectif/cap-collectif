@@ -12,7 +12,7 @@ PreviewQuery:
         argsBuilder: 'Relay::Connection'
         args:
           orderBy:
-            type: 'ProjectOrder'
+            type: 'PreviewProjectOrder'
             defaultValue: { field: LATEST, direction: DESC }
             description: 'Ordering options for projects returning from the connection.'
           term:

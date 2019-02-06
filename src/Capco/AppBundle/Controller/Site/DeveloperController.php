@@ -45,6 +45,7 @@ class DeveloperController extends Controller
         $mutation = null;
 
         $publicWhiteList = [
+            'OrderDirection',
             'Trashable',
             'TrashableStatus',
             'NotPublishedReason',
