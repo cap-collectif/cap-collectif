@@ -6,7 +6,6 @@ import DatesInterval from '../Utils/DatesInterval';
 import type { EventPreview_event } from './__generated__/EventPreview_event.graphql';
 import DateIcon from '../Ui/Dates/DateIcon';
 import { UserAvatar } from '../User/UserAvatar';
-import InlineList from '../Ui/List/InlineList';
 
 type Props = {
   event: EventPreview_event,
@@ -31,6 +30,15 @@ export class EventPreview extends React.Component<Props> {
                 {event.title}
               </a>
             </h3>
+            <p>
+              {event.themes &&
+                event.themes.length > 0 &&
+                event.themes.filter(Boolean).map((theme, key) => (
+                  <a className="mr-5 d-ib" key={key} href={theme.url} title={theme.title}>
+                    <span className="label label-default">{theme.title}</span>
+                  </a>
+                ))}
+            </p>
             <p className="excerpt">
               {event.author && event.author.username && (
                 <div>
@@ -52,20 +60,6 @@ export class EventPreview extends React.Component<Props> {
                 </div>
               ) : null}
             </p>
-            {event.themes && event.themes.length > 0 && (
-              <div className="excerpt">
-                <i className="cap cap-folder-2 mr-10 r-0" />
-                <InlineList separator="," className="d-ib">
-                  {event.themes.filter(Boolean).map((theme, key) => (
-                    <li key={key}>
-                      <a href={theme.url} title={theme.title}>
-                        {theme.title}
-                      </a>
-                    </li>
-                  ))}
-                </InlineList>
-              </div>
-            )}
           </div>
         </div>
       </React.Fragment>

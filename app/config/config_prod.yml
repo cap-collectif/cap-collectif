@@ -9,6 +9,7 @@ sentry:
   dsn: '%sentry_dsn%'
   options:
     environment: '%kernel.environment%'
+    name: '%router.request_context.host%'
 
 doctrine:
   orm:
