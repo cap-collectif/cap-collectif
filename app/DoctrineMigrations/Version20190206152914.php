@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190206152535 extends AbstractMigration
+final class Version20190206152914 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -20,7 +20,10 @@ final class Version20190206152535 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('CREATE INDEX email_idx ON fos_user (email)');
+        $this->addSql('DROP INDEX idx_proposalform_published ON proposal');
+        $this->addSql(
+            'CREATE INDEX idx_proposalform_published ON proposal (id, is_draft, trashed_at, published, proposal_form_id, deleted_at)'
+        );
     }
 
     public function down(Schema $schema): void
@@ -31,6 +34,9 @@ final class Version20190206152535 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('DROP INDEX email_idx ON fos_user');
+        $this->addSql('DROP INDEX idx_proposalform_published ON proposal');
+        $this->addSql(
+            'CREATE INDEX idx_proposalform_published ON proposal (is_draft, trashed_at, published, proposal_form_id, deleted_at)'
+        );
     }
 }
