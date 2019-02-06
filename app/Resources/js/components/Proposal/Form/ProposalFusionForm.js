@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { fetchQuery, graphql } from 'relay-runtime';
 import { injectIntl, type IntlShape } from 'react-intl';
@@ -75,8 +74,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch) =>
     });
 
 export class ProposalFusionForm extends React.Component<Props> {
-  myRef: any;
-
   constructor(props: Props) {
     super(props);
     this.myRef = React.createRef();
@@ -87,10 +84,11 @@ export class ProposalFusionForm extends React.Component<Props> {
 
     onProjectChange(formName, 'fromProposals', []);
     if (this.myRef.current) {
-      console.log(ReactDOM.findDOMNode(this.myRef.current));
       this.myRef.current.getRenderedComponent().clearValues();
     }
   };
+
+  myRef: any;
 
   render() {
     const { currentCollectStep, projects, intl } = this.props;
