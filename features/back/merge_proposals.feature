@@ -1,7 +1,7 @@
 @proposal @merge_proposals
 Feature: Merge proposals
 
-@database @elasticsearch @dev
+@database @elasticsearch
 Scenario: Logged in admin wants create a proposal from a merge of 2 proposals
   Given I am logged in as admin
   And I go to the admin proposals list page

@@ -169,6 +169,7 @@ const getCurrentCollectStep = (state: State): ?Object => {
 const mapStateToProps = (state: State) => ({
   projects: getBudgetProjects(state.project.projectsById),
   currentCollectStep: getCurrentCollectStep(state),
+  currentProjectId: getSelectedProjectId(state),
 });
 
 const form = reduxForm({

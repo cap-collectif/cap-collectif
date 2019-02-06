@@ -60,7 +60,6 @@ class renderSelect extends React.Component<Props> {
   };
 
   clearValues = () => {
-    console.warn(this.myRef.current);
     // sometimes the default options remain selected in async, we have to do this to reset the input
     this.myRef.current.state.defaultOptions = [];
   };
@@ -124,6 +123,8 @@ class renderSelect extends React.Component<Props> {
               loadOptions={loadOptions}
               cacheOptions={false}
               value={selectValue}
+              className="react-select-container"
+              classNamePrefix="react-select"
               name={name}
               isMulti={multi}
               noOptionsMessage={() => <FormattedMessage id="select.no-results" />}
@@ -148,6 +149,8 @@ class renderSelect extends React.Component<Props> {
               name={name}
               components={{ ClearIndicator }}
               isDisabled={disabled}
+              className="react-select-container"
+              classNamePrefix="react-select"
               options={options}
               filterOption={filterOption}
               onBlurResetsInput={false}
