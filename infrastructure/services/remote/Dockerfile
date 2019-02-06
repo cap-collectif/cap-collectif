@@ -258,7 +258,7 @@ RUN chown -R capco:capco . \
     && gosu capco php bin/console assets:install --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
 
 # Build JS
-RUN yarn global add bower@1.8.8 babel-cli \
+RUN yarn global add bower@1.8.4 babel-cli \
     && gosu capco yarn install --pure-lockfile \
     && gosu capco bower install --config.interactive=false \
     && gosu capco npm rebuild node-sass > /dev/null \

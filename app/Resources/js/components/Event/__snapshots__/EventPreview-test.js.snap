@@ -25,20 +25,6 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
           Un super evenement
         </a>
       </h3>
-      <p>
-        <a
-          className="mr-5 d-ib"
-          href="https://estcequecestbientotlheuredugouter.neocities.org/"
-          key="0"
-          title="Le gouter c'est la vie"
-        >
-          <span
-            className="label label-default"
-          >
-            Le gouter c'est la vie
-          </span>
-        </a>
-      </p>
       <p
         className="excerpt"
       >
@@ -91,6 +77,28 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
           21 rue george 5, 75012 Paris
         </div>
       </p>
+      <div
+        className="excerpt"
+      >
+        <i
+          className="cap cap-folder-2 mr-10 r-0"
+        />
+        <InlineList
+          className="d-ib"
+          separator=","
+        >
+          <li
+            key="0"
+          >
+            <a
+              href="https://estcequecestbientotlheuredugouter.neocities.org/"
+              title="Le gouter c'est la vie"
+            >
+              Le gouter c'est la vie
+            </a>
+          </li>
+        </InlineList>
+      </div>
     </div>
   </div>
 </Fragment>
@@ -121,20 +129,6 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
           Un super evenement
         </a>
       </h3>
-      <p>
-        <a
-          className="mr-5 d-ib"
-          href="https://estcequecestbientotlheuredugouter.neocities.org/"
-          key="0"
-          title="Le gouter c'est la vie"
-        >
-          <span
-            className="label label-default"
-          >
-            Le gouter c'est la vie
-          </span>
-        </a>
-      </p>
       <p
         className="excerpt"
       >
@@ -187,6 +181,28 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
           21 rue george 5, 75012 Paris
         </div>
       </p>
+      <div
+        className="excerpt"
+      >
+        <i
+          className="cap cap-folder-2 mr-10 r-0"
+        />
+        <InlineList
+          className="d-ib"
+          separator=","
+        >
+          <li
+            key="0"
+          >
+            <a
+              href="https://estcequecestbientotlheuredugouter.neocities.org/"
+              title="Le gouter c'est la vie"
+            >
+              Le gouter c'est la vie
+            </a>
+          </li>
+        </InlineList>
+      </div>
     </div>
   </div>
 </Fragment>
@@ -217,20 +233,6 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
           Un super evenement
         </a>
       </h3>
-      <p>
-        <a
-          className="mr-5 d-ib"
-          href="https://estcequecestbientotlheuredugouter.neocities.org/"
-          key="0"
-          title="Le gouter c'est la vie"
-        >
-          <span
-            className="label label-default"
-          >
-            Le gouter c'est la vie
-          </span>
-        </a>
-      </p>
       <p
         className="excerpt"
       >
@@ -281,6 +283,28 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
           21 rue george 5, 75012 Paris
         </div>
       </p>
+      <div
+        className="excerpt"
+      >
+        <i
+          className="cap cap-folder-2 mr-10 r-0"
+        />
+        <InlineList
+          className="d-ib"
+          separator=","
+        >
+          <li
+            key="0"
+          >
+            <a
+              href="https://estcequecestbientotlheuredugouter.neocities.org/"
+              title="Le gouter c'est la vie"
+            >
+              Le gouter c'est la vie
+            </a>
+          </li>
+        </InlineList>
+      </div>
     </div>
   </div>
 </Fragment>
@@ -311,20 +335,6 @@ exports[`<EventPreview /> renders without username 1`] = `
           Un super evenement
         </a>
       </h3>
-      <p>
-        <a
-          className="mr-5 d-ib"
-          href="https://estcequecestbientotlheuredugouter.neocities.org/"
-          key="0"
-          title="Le gouter c'est la vie"
-        >
-          <span
-            className="label label-default"
-          >
-            Le gouter c'est la vie
-          </span>
-        </a>
-      </p>
       <p
         className="excerpt"
       />
@@ -350,6 +360,28 @@ exports[`<EventPreview /> renders without username 1`] = `
           21 rue george 5, 75012 Paris
         </div>
       </p>
+      <div
+        className="excerpt"
+      >
+        <i
+          className="cap cap-folder-2 mr-10 r-0"
+        />
+        <InlineList
+          className="d-ib"
+          separator=","
+        >
+          <li
+            key="0"
+          >
+            <a
+              href="https://estcequecestbientotlheuredugouter.neocities.org/"
+              title="Le gouter c'est la vie"
+            >
+              Le gouter c'est la vie
+            </a>
+          </li>
+        </InlineList>
+      </div>
     </div>
   </div>
 </Fragment>
