@@ -1,8 +1,10 @@
 MultipleChoiceQuestion:
   type: object
-  inherits: [Question]
+  inherits:
+    - InternalQuestion
   config:
-    interfaces: [Question]
+    interfaces:
+      - InternalQuestion
     description: 'A multiple choice question'
     fields:
       kind:

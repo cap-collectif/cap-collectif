@@ -1,7 +1,13 @@
-CollectStep:
+InternalCollectStep:
   type: object
-  inherits: [Node, Step, ProposalStep, RequirementStep]
+  inherits:
+    - Node
+    - PreviewCollectStep
+    - Step
+    - ProposalStep
+    - RequirementStep
   config:
+    name: CollectStep
     interfaces: [Node, Step, ProposalStep, RequirementStep]
     fields:
       id:
@@ -25,7 +31,7 @@ CollectStep:
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
       viewerProposalDrafts:
-        type: 'ProposalConnection!'
+        type: 'InternalProposalConnection!'
         access: "@=hasRole('ROLE_USER')"
         argsBuilder: 'Relay::Connection'
         resolve: "@=resolver('query_get_draft_proposals_for_user_in_step', [value, getUser(), args])"

@@ -1,14 +1,14 @@
 PreviewProposalVote:
   type: object
   inherits:
-    - Publishable
+    - PublicPublishable
     - PrivatableVote
     - PreviewVote
   config:
     name: ProposalVote
     description: 'A vote on a proposal for a given step.'
     interfaces:
-      - Publishable
+      - PublicPublishable
       - PreviewVote
       - PrivatableVote
     fields:

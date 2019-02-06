@@ -1,13 +1,11 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
 use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\InterfaceType;
@@ -46,57 +44,77 @@ class DeveloperController extends Controller
         $query = null;
         $mutation = null;
 
+        $publicWhiteList = [
+            'Trashable',
+            'TrashableStatus',
+            'NotPublishedReason',
+            'UniformResourceLocatable',
+            'UserError',
+            'Node',
+            'String',
+            'Int',
+            'Float',
+            'Boolean',
+            'ID',
+            'HTML',
+            'Email',
+            'DateTime',
+            'URI',
+        ];
         foreach ($typeResolver->getSolutions() as $solutionID => $solution) {
             $aliases = $typeResolver->getSolutionAliases($solutionID);
 
             // We set info about preview
             $solution->{'preview'} = false;
-            if (substr($aliases[0], 0, 7) === 'Preview') {
+            if ('Preview' === substr($aliases[0], 0, 7)) {
                 $solution->{'preview'} = true;
             }
 
-            // All scalars are considered public
-            if ($solution instanceof ScalarType) {
-                $scalars[] = $solution;
-                continue;
-            }
-
             // We remove everything not in public or preview schema
-            if ($solution->{'preview'} === false && substr($aliases[0], 0, 6) !== 'Public') {
+            if (
+                !\in_array($aliases[0], $publicWhiteList) &&
+                false === $solution->{'preview'} &&
+                'Public' !== substr($aliases[0], 0, 6)
+            ) {
                 continue;
             }
 
             if ($solution instanceof EnumType) {
                 $enums[] = $solution;
+            } elseif ($solution instanceof ScalarType) {
+                $scalars[] = $solution;
             } elseif ($solution instanceof UnionType) {
                 $unions[] = $solution;
             } elseif ($solution instanceof InterfaceType) {
+                dump($solution);
                 $interfaces[] = $solution;
             } elseif ($solution instanceof InputObjectType) {
                 $input_objects[] = $solution;
             } elseif ($solution instanceof ObjectType) {
                 // Special types
-                if ($solution->name === 'Query') {
+                if ('Query' === $solution->name) {
                     // We display PreviewQuery
                     if ($solution->{'preview'}) {
                         $query = $solution;
                     }
+
                     continue;
                 }
-                if ($solution->name === 'Mutation') {
+                if ('Mutation' === $solution->name) {
                     $mutation = $solution;
+
                     continue;
                 }
                 // We exclude Payload
-                if (strpos($solution->name, 'Payload') !== false) {
+                if (false !== strpos($solution->name, 'Payload')) {
                     continue;
                 }
                 // We exclude Edge
-                if (strpos($solution->name, 'Edge') !== false) {
+                if (false !== strpos($solution->name, 'Edge')) {
                     continue;
                 }
                 // We exclude Connection
-                if (strpos($solution->name, 'Connection') !== false) {
+                if (false !== strpos($solution->name, 'Connection')) {
                     continue;
                 }
                 $objects[] = $solution;

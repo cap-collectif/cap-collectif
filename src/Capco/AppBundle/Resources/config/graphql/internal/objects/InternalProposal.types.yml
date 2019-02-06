@@ -5,7 +5,7 @@ InternalProposal:
     - Node
     - Contribution
     - Commentable
-    - Publishable
+    - PublicPublishable
     - Draftable
     - Reportable
     - Trashable
@@ -20,7 +20,7 @@ InternalProposal:
         Node,
         Contribution,
         Commentable,
-        Publishable,
+        PublicPublishable,
         Draftable,
         Reportable,
         Trashable,
@@ -82,8 +82,7 @@ InternalProposal:
       estimation:
         type: 'Int'
       responses:
-        type: '[Response]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", [value, getUser(), context])'
+        type: '[InternalResponse]!'
       media:
         type: 'Media'
       theme:

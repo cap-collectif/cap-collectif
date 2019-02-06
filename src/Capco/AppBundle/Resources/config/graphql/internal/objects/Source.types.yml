@@ -2,7 +2,7 @@ Source:
   type: object
   inherits:
     - Node
-    - Publishable
+    - PublicPublishable
     - Contribution
     - Reportable
     - Trashable
@@ -13,7 +13,7 @@ Source:
     description: 'A source'
     interfaces:
       - Node
-      - Publishable
+      - PublicPublishable
       - Contribution
       - Reportable
       - Trashable
