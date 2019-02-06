@@ -1,23 +1,19 @@
 // @flow
-import type { ComponentType } from 'react';
+// mport * as React from 'react';
 import styled from 'styled-components';
 
-type Props = {
-  separator?: string,
-};
-
-const InlineList: ComponentType<Props> = styled.ul.attrs({
+const InlineList = styled.ul.attrs({
   className: 'excerpt',
 })`
   padding: 0;
   margin: 0;
 
   li {
-    display: inline;
+    display: inline-block;
 
     &::after {
-      content: ${props => (props.separator ? `"${props.separator}"` : `"•"`)};
-      padding: ${props => (props.separator === ',' ? '0 5px 0 0' : '0 5px')};
+      content: '•';
+      padding: 0 5px;
     }
 
     &:last-child::after {

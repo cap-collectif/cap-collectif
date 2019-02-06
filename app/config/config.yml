@@ -40,6 +40,10 @@ parameters:
   saml_sp: '%env(SYMFONY_SAML_SP)%'
   elasticsearch_host: '%env(SYMFONY_ELASTICSEARCH_HOST)%'
   redis_host: '%env(SYMFONY_REDIS_HOST)%'
+  mailer_user: '%env(SYMFONY_MAILER_USER)%'
+  mailer_password: '%env(SYMFONY_MAILER_PASSWORD)%'
+  mailer_host: '%env(SYMFONY_MAILER_HOST)%'
+  mailer_port: '%env(SYMFONY_MAILER_PORT)%'
   locale: '%env(SYMFONY_LOCALE)%'
   secret: '%env(SYMFONY_SECRET)%'
   use_assetic_controller: '%env(SYMFONY_USE_ASSETIC_CONTROLLER)%'
@@ -71,7 +75,6 @@ parameters:
   openid_access_token_url: '%env(SYMFONY_OPENID_ACCESS_TOKEN_URL)%'
   openid_userinfo_url: '%env(SYMFONY_OPENID_USERINFO_URL)%'
   prometheus_bearer_token: '%env(SYMFONY_PROMETHEUS_BEARER_TOKEN)%'
-  mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
 
   # Default values
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
@@ -86,6 +89,10 @@ parameters:
   env(SYMFONY_SAML_SP): oda
   env(SYMFONY_ELASTICSEARCH_HOST): 127.0.0.1
   env(SYMFONY_REDIS_HOST): 127.0.0.1
+  env(SYMFONY_MAILER_USER): ~
+  env(SYMFONY_MAILER_PASSWORD): ~
+  env(SYMFONY_MAILER_HOST): mailcatchersmtp
+  env(SYMFONY_MAILER_PORT): 25
   env(SYMFONY_LOCALE): fr-FR
   env(SYMFONY_SECRET): ***REMOVED***
   env(SYMFONY_USE_ASSETIC_CONTROLLER): true
@@ -113,7 +120,6 @@ parameters:
   env(SYMFONY_OPENID_ACCESS_TOKEN_URL): ~
   env(SYMFONY_OPENID_USERINFO_URL): ~
   env(SYMFONY_PROMETHEUS_BEARER_TOKEN): ~
-  env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
 
 framework:
   secret: '%secret%'
