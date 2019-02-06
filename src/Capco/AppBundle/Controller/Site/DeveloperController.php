@@ -25,6 +25,15 @@ class DeveloperController extends Controller
     }
 
     /**
+     * @Route("/developer/guides/", name="app_developer_guides", defaults={"_feature_flags" = "developer_documentation"})
+     * @Template("CapcoAppBundle:Developer:guides.html.twig")
+     */
+    public function guidesAction(Request $request)
+    {
+        return [];
+    }
+
+    /**
      * @Route("/developer", name="app_developer", defaults={"_feature_flags" = "developer_documentation"})
      * @Route("/developer/{category}/", name="app_developer_category", requirements={"category" = "query|previews|breaking_changes"}, defaults={"_feature_flags" = "developer_documentation"})
      * @Route("/developer/{category}/{selection}", name="app_developer_category_type", requirements={"category" = "mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"})
