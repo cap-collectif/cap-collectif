@@ -2,17 +2,15 @@ PreviewProposal:
   type: object
   inherits:
     - Node
-    - PublicPublishable
+    - Publishable
     - UniformResourceLocatable
-    - Trashable
   config:
     name: Proposal
-    description: 'A proposal to a proposal form.'
+    description: 'A contribution to a proposal form.'
     interfaces:
       - Node
-      - PublicPublishable
+      - Publishable
       - UniformResourceLocatable
-      - Trashable
     fields:
       id:
         builder: 'Relay::GlobalId'
@@ -22,11 +20,7 @@ PreviewProposal:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalUrlResolver", [value])'
       title:
         type: 'String!'
-        description: 'Identifies the proposal title.'
+        description: 'Identifies the contribution title.'
       body:
         type: 'HTML'
-        description: 'Identifies the body of the proposal.'
-      responses:
-        type: '[PreviewResponse]!'
-        description: 'Identifies the responses of the proposal.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", [value, getUser(), context])'
+        description: 'Identifies the body of the contribution.'

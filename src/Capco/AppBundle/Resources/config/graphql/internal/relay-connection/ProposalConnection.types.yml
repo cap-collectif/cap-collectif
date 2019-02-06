@@ -1,7 +1,6 @@
-InternalProposalConnection:
+ProposalConnection:
   type: relay-connection
   config:
-    name: ProposalConnection
     nodeType: InternalProposal!
     connectionFields:
       totalCount:

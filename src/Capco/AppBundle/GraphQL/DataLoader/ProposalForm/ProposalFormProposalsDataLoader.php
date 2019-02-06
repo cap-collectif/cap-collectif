@@ -19,7 +19,6 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class ProposalFormProposalsDataLoader extends BatchDataLoader
 {
-    public const FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR = 10;
     private $proposalRepo;
     private $proposalSearch;
 
@@ -205,7 +204,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                             $form,
                             $viewer,
                             $offset,
-                            $limit + self::FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR,
+                            $limit + 2,
                             $field,
                             $direction
                         )

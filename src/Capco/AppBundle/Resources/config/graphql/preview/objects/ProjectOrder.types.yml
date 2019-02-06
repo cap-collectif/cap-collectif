@@ -1,7 +1,6 @@
-PreviewProjectOrder:
+ProjectOrder:
   type: input-object
   config:
-    name: ProjectOrder
     description: 'Ways in which project can be ordered.'
     fields:
       field:

@@ -32,7 +32,6 @@ type Props = {
   },
   parameters: {
     'global.site.organization_name': string,
-    'global.site.communication_from': string,
   },
   handleSubmit: () => void,
 };
@@ -100,19 +99,14 @@ export class NotificationsForm extends Component<Props> {
                     </tr>
                   </thead>
                   <tbody>
-                    {consent_internal_communication && (
+                    {consent_external_communication && (
                       <tr>
                         <td>
-                          <FormattedMessage
-                            id="platform-news"
-                            values={{
-                              from: parameters['global.site.communication_from'],
-                            }}
-                          />
+                          <FormattedMessage id="platform-news" />
                         </td>
                         <td>
                           <Field
-                            name="consentInternalCommunication"
+                            name="consentExternalCommunication"
                             component={component}
                             type="checkbox"
                             id="proposal-comment-mail"
@@ -120,7 +114,7 @@ export class NotificationsForm extends Component<Props> {
                         </td>
                       </tr>
                     )}
-                    {consent_external_communication && (
+                    {consent_internal_communication && (
                       <tr>
                         <td>
                           <FormattedMessage
@@ -132,7 +126,7 @@ export class NotificationsForm extends Component<Props> {
                         </td>
                         <td>
                           <Field
-                            name="consentExternalCommunication"
+                            name="consentInternalCommunication"
                             component={component}
                             type="checkbox"
                             id="proposal-comment-mail"

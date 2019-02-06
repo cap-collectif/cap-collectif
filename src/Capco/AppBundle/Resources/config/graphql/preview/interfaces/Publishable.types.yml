@@ -1,9 +1,8 @@
-PublicPublishable:
+Publishable:
   type: interface
   inherits:
     - Node
   config:
-    name: Publishable
     description: 'Entities that can be published.'
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableTypeResolver", [value])'
     fields:

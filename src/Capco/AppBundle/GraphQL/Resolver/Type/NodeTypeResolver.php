@@ -115,11 +115,7 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('SelectionStep');
         }
         if ($node instanceof CollectStep) {
-            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
-                return $this->typeResolver->resolve('PreviewCollectStep');
-            }
-
-            return $this->typeResolver->resolve('InternalCollectStep');
+            return $this->typeResolver->resolve('CollectStep');
         }
         if ($node instanceof PresentationStep) {
             return $this->typeResolver->resolve('PresentationStep');

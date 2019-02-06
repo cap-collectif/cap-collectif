@@ -1,8 +1,0 @@
-PreviewResponse:
-  type: interface
-  inherits:
-    - Node
-  config:
-    name: Response
-    description: 'A response to a question.'
-    resolveType: "@=resolver('response_type', [value])"

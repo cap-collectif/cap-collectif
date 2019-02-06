@@ -2,7 +2,7 @@ ProposalStep:
   type: interface
   inherits:
     - Step
-    - InternalWithProposals
+    - WithProposals
     - RequirementStep
   config:
     description: 'A proposal step'

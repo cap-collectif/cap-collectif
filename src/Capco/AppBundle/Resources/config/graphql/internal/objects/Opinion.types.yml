@@ -3,7 +3,7 @@ Opinion:
   inherits:
     [
       Node,
-      PublicPublishable,
+      Publishable,
       Argumentable,
       Sourceable,
       Reportable,
@@ -18,7 +18,7 @@ Opinion:
     interfaces:
       [
         Node,
-        PublicPublishable,
+        Publishable,
         Argumentable,
         Sourceable,
         Reportable,

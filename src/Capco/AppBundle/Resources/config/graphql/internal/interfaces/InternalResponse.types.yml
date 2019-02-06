@@ -1,9 +1,0 @@
-InternalResponse:
-  type: interface
-  config:
-    name: Response
-    description: 'A response to a question.'
-    resolveType: "@=resolver('response_type', [value])"
-    fields:
-      question:
-        type: 'InternalQuestion!'

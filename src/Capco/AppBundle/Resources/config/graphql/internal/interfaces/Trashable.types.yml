@@ -9,10 +9,10 @@ Trashable:
         description: '`true` if the contribution is trashed.'
       trashedStatus:
         type: 'TrashableStatus'
-        description: 'Identifies the trashed visibility.'
+        description: 'The status.'
       trashedAt:
         type: 'DateTime'
-        description: 'Identifies the moment the moderator trashed the contribution.'
+        description: 'The moment the moderator trashed the contribution.'
       trashedReason:
         type: 'String'
-        description: 'Identifies the reason why the moderator trashed the contribution.'
+        description: 'The reason the moderator trashed the contribution.'

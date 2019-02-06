@@ -1,11 +1,9 @@
 MediaQuestion:
   type: object
-  inherits:
-    - InternalQuestion
+  inherits: [Question]
   config:
-    interfaces:
-      - InternalQuestion
-    description: 'A media question.'
+    interfaces: [Question]
+    description: 'A media question'
     fields:
       kind:
         resolve: 'media'

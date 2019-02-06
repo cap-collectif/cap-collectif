@@ -8595,16 +8595,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "1.10.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "b2b8ffe1560b9fb0110b02993594a4b04a511959"
+                "reference": "7ebc06dcab248bdf12e807bed3b308ef9c8a6ebf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/b2b8ffe1560b9fb0110b02993594a4b04a511959",
-                "reference": "b2b8ffe1560b9fb0110b02993594a4b04a511959",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/7ebc06dcab248bdf12e807bed3b308ef9c8a6ebf",
+                "reference": "7ebc06dcab248bdf12e807bed3b308ef9c8a6ebf",
                 "shasum": ""
             },
             "require": {
@@ -8655,46 +8655,48 @@
                 "log",
                 "logging"
             ],
-            "time": "2018-11-09T12:27:19+00:00"
+            "time": "2018-06-19T15:02:57+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
-            "version": "2.3.0",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "a403d28f94c26bb3d1ed716d2522749625d62893"
+                "reference": "044f6c37484520def283ff17e13af555a02f20be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/a403d28f94c26bb3d1ed716d2522749625d62893",
-                "reference": "a403d28f94c26bb3d1ed716d2522749625d62893",
+                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/044f6c37484520def283ff17e13af555a02f20be",
+                "reference": "044f6c37484520def283ff17e13af555a02f20be",
                 "shasum": ""
             },
             "require": {
                 "jean85/pretty-package-versions": "^1.0",
                 "php": "^7.1",
-                "sentry/sentry": "^1.9",
+                "sentry/sentry": "^1.8",
                 "symfony/config": "^3.0||^4.0",
                 "symfony/console": "^3.3||^4.0",
                 "symfony/dependency-injection": "^3.0||^4.0",
                 "symfony/event-dispatcher": "^3.0||^4.0",
                 "symfony/http-kernel": "^3.0||^4.0",
-                "symfony/security-core": "^3.0||^4.0"
+                "symfony/security-core": "^3.0||^4.0",
+                "symfony/yaml": "^3.0||^4.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.8",
-                "phpstan/phpstan": "^0.10",
-                "phpstan/phpstan-phpunit": "^0.10",
-                "phpunit/phpunit": "^7",
+                "phpstan/phpstan": "^0.9.1",
+                "phpstan/phpstan-phpunit": "^0.9.1",
+                "phpunit/phpunit": "^6.5",
                 "scrutinizer/ocular": "^1.4",
                 "symfony/expression-language": "^3.0||^4.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "master": "2.1.x-dev",
-                    "releases/1.x": "1.1.x-dev"
+                    "master": "2.0.x-dev",
+                    "releases/0.8.x": "0.8.x-dev",
+                    "releases/1.x": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -8724,7 +8726,7 @@
                 "sentry",
                 "symfony"
             ],
-            "time": "2019-01-28T09:23:48+00:00"
+            "time": "2018-06-01T08:59:16+00:00"
         },
         {
             "name": "simplesamlphp/saml2",

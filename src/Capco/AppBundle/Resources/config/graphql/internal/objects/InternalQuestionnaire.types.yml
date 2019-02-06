@@ -24,7 +24,7 @@ InternalQuestionnaire:
         type: 'Boolean!'
         resolve: '@=value.isPhoneConfirmationRequired()'
       questions:
-        type: '[InternalQuestion!]!'
+        type: '[Question!]!'
         resolve: "@=resolver('questionnaire_questions', [value])"
       viewerReplies:
         type: '[Reply!]!'

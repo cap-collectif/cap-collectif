@@ -2,11 +2,11 @@ VersionVote:
   type: object
   inherits:
     - YesNoPairedVote
-    - PublicPublishable
+    - Publishable
   config:
     interfaces:
       - YesNoPairedVote
-      - PublicPublishable
+      - Publishable
       - InternalVote
     fields:
       id:

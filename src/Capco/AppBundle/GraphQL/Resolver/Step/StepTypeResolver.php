@@ -27,17 +27,11 @@ class StepTypeResolver implements ResolverInterface
 
     public function __invoke(AbstractStep $step): Type
     {
-        $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
-
         if ($step instanceof SelectionStep) {
             return $this->typeResolver->resolve('SelectionStep');
         }
         if ($step instanceof CollectStep) {
-            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
-                return $this->typeResolver->resolve('PreviewCollectStep');
-            }
-
-            return $this->typeResolver->resolve('InternalCollectStep');
+            return $this->typeResolver->resolve('CollectStep');
         }
         if ($step instanceof PresentationStep) {
             return $this->typeResolver->resolve('PresentationStep');

@@ -1,7 +1,7 @@
 InternalProposalVote:
   type: object
   inherits:
-    - PublicPublishable
+    - Publishable
     - PrivatableVote
     - InternalVote
     - PreviewProposalVote
@@ -9,7 +9,7 @@ InternalProposalVote:
     name: ProposalVote
     interfaces:
       - InternalVote
-      - PublicPublishable
+      - Publishable
       - PrivatableVote
     fields:
       proposal:

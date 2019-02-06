@@ -74,17 +74,11 @@ class ProposalResolver implements ResolverInterface
 
     public function resolveResponseType(AbstractResponse $response)
     {
-        $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
-
         if ($response instanceof MediaResponse) {
             return $this->typeResolver->resolve('MediaResponse');
         }
         if ($response instanceof ValueResponse) {
-            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
-                return $this->typeResolver->resolve('PreviewValueResponse');
-            }
-
-            return $this->typeResolver->resolve('InternalValueResponse');
+            return $this->typeResolver->resolve('ValueResponse');
         }
 
         throw new UserError('Could not resolve type of Response.');

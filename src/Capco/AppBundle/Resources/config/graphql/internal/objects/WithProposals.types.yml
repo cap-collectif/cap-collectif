@@ -1,12 +1,11 @@
-InternalWithProposals:
+WithProposals:
   type: object
   decorator: true
-  inherits:
-    - PreviewWithProposals
   config:
     fields:
       proposals:
-        type: 'InternalProposalConnection!'
+        type: 'ProposalConnection!'
+        argsBuilder: 'Relay::Connection'
         args:
           first:
             type: 'Int'
@@ -49,6 +48,6 @@ InternalWithProposals:
             defaultValue: 'NOT_TRASHED'
       viewerProposalsUnpublished:
         access: "@=hasRole('ROLE_USER')"
-        type: 'InternalProposalConnection'
+        type: 'ProposalConnection'
         argsBuilder: 'Relay::Connection'
         description: 'The viewer unpublished proposals (only visible by viewer).'
