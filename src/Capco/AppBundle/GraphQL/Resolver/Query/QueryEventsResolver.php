@@ -11,6 +11,7 @@ use Psr\Log\LoggerInterface;
 
 class QueryEventsResolver implements ResolverInterface
 {
+    public const FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR = 10;
     private $eventSearch;
     private $logger;
 
@@ -55,7 +56,7 @@ class QueryEventsResolver implements ResolverInterface
 
                 $results = $this->eventSearch->searchEvents(
                     $offset,
-                    $limit + 2,
+                    $limit + self::FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR,
                     $order,
                     $search,
                     $filters
