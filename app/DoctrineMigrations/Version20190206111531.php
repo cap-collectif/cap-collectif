@@ -20,10 +20,6 @@ final class Version20190206111531 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('CREATE INDEX idx_slug ON proposal (slug, deleted_at)');
-        $this->addSql(
-            'CREATE INDEX idx_proposalform_published ON proposal (is_draft, trashed_at, published, proposal_form_id, deleted_at)'
-        );
         $this->addSql(
             'CREATE INDEX idx_questionnaire_published ON reply (questionnaire_id, published)'
         );
@@ -37,8 +33,6 @@ final class Version20190206111531 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('DROP INDEX idx_slug ON proposal');
-        $this->addSql('DROP INDEX idx_proposalform_published ON proposal');
         $this->addSql('DROP INDEX idx_questionnaire_published ON reply');
     }
 }
