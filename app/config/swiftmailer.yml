@@ -1,10 +1,16 @@
+accord_mandrill_swift_mailer:
+  api_key: '%mandrill_api_key%'
+  async: false
+
 swiftmailer:
   default_mailer: default
   mailers:
     default:
       transport: smtp
       local_domain: '%router.request_context.host%'
-      host: '%mailer_host%'
-      port: '%mailer_port%'
-      username: '%mailer_user%'
-      password: '%mailer_password%'
+      host: mailcatchersmtp
+      port: 25
+      username: ~
+      password: ~
+    mandrill:
+      transport: accord_mandrill

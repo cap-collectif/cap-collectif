@@ -30,13 +30,7 @@ export class UserPreview extends React.Component<Props> {
             <UserAvatar user={user} />
           </div>
           <div className="ellipsis">
-            {user ? (
-              <UserLink className="excerpt" user={user} />
-            ) : (
-              <span className="excerpt">
-                <FormattedMessage id="global.anonymous" />
-              </span>
-            )}
+            {user ? <UserLink user={user} /> : <FormattedMessage id="global.anonymous" />}
             <p className="excerpt small">
               {user ? (
                 <span>
