@@ -27,5 +27,5 @@ InternalRegistrationForm:
         type: '[InternalEmailDomain!]'
       questions:
         description: 'The available questions'
-        type: '[InternalQuestion!]!'
+        type: '[Question!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\RegistrationForm\\RegistrationFormQuestionsResolver", [value])'

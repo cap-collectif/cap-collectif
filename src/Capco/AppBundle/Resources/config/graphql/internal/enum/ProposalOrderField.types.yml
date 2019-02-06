@@ -1,7 +1,6 @@
-PreviewProposalOrderField:
+ProposalOrderField:
   type: enum
   config:
-    name: ProposalOrderField
     description: 'Properties by which proposal connections can be ordered'
     values:
       PUBLISHED_AT:

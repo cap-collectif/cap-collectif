@@ -1,10 +1,8 @@
 SectionQuestion:
   type: object
-  inherits:
-    - InternalQuestion
+  inherits: [Question]
   config:
-    interfaces:
-      - InternalQuestion
+    interfaces: [Question]
     description: 'A section is just a title in a quiz without any possible answer.'
     fields:
       kind:

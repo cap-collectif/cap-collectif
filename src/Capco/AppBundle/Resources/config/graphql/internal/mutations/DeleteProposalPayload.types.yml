@@ -5,4 +5,4 @@ DeleteProposalPayload:
       proposal:
         type: 'InternalProposal!'
       step:
-        type: 'InternalCollectStep!'
+        type: 'CollectStep!'

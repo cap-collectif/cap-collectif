@@ -1,11 +1,11 @@
 MediaResponse:
   type: object
   config:
-    interfaces: [InternalResponse]
+    interfaces: [Response]
     description: 'A response'
     fields:
       question:
-        type: 'InternalQuestion!'
+        type: 'Question!'
       medias:
         type: '[Media!]!'
         description: 'Medias'
