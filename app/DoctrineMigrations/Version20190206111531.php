@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190205163530 extends AbstractMigration
+final class Version20190206111531 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -20,8 +20,13 @@ final class Version20190205163530 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('DROP INDEX idx_author ON reply');
-        $this->addSql('CREATE INDEX idx_author ON reply (questionnaire_id, published)');
+        $this->addSql('CREATE INDEX idx_slug ON proposal (slug, deleted_at)');
+        $this->addSql(
+            'CREATE INDEX idx_proposalform_published ON proposal (is_draft, trashed_at, published, proposal_form_id, deleted_at)'
+        );
+        $this->addSql(
+            'CREATE INDEX idx_questionnaire_published ON reply (questionnaire_id, published)'
+        );
     }
 
     public function down(Schema $schema): void
@@ -32,7 +37,8 @@ final class Version20190205163530 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('DROP INDEX idx_author ON reply');
-        $this->addSql('CREATE INDEX idx_author ON reply (id, author_id)');
+        $this->addSql('DROP INDEX idx_slug ON proposal');
+        $this->addSql('DROP INDEX idx_proposalform_published ON proposal');
+        $this->addSql('DROP INDEX idx_questionnaire_published ON reply');
     }
 }
