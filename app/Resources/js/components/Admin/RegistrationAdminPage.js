@@ -139,6 +139,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <div className="d-flex align-items-center mb-15 mt-15">
           <Toggle
             icons
+            disabled
             checked={features.consent_internal_communication}
             onChange={() =>
               onToggle('consent_internal_communication', !features.consent_internal_communication)

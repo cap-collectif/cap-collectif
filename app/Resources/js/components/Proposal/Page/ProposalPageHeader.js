@@ -15,7 +15,6 @@ import type { ProposalPageHeader_proposal } from './__generated__/ProposalPageHe
 import type { ProposalPageHeader_step } from './__generated__/ProposalPageHeader_step.graphql';
 import type { ProposalPageHeader_viewer } from './__generated__/ProposalPageHeader_viewer.graphql';
 import type { State } from '../../../types';
-import TrashedMessage from '../../Trashed/TrashedMessage';
 
 type Props = {
   proposal: ProposalPageHeader_proposal,
@@ -68,10 +67,7 @@ export class ProposalPageHeader extends React.Component<Props> {
             <i className="cap cap-arrow-65-1 icon--black" /> <FormattedMessage id={tradKeyToBack} />
           </a>
         </div>
-        {/* $FlowFixMe $reftype */}
-        <TrashedMessage className="consultation__header__title h1" contribution={proposal}>
-          <h1 className="consultation__header__title h1">{proposal.title}</h1>
-        </TrashedMessage>
+        <h1 className="consultation__header__title h1">{proposal.title}</h1>
         <div className="media mb-15">
           {/* $FlowFixMe Will be a fragment soon */}
           <UserAvatar className="pull-left" user={proposal.author} />
@@ -151,7 +147,6 @@ export default createFragmentContainer(container, {
     fragment ProposalPageHeader_proposal on Proposal
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
-      ...TrashedMessage_contribution
       ...UnpublishedLabel_publishable
       ...ProposalVoteButtonWrapperFragment_proposal
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
