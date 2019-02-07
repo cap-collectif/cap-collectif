@@ -767,6 +767,17 @@ trait OpinionStepsTrait
     }
 
     /**
+     * I click the reporting opinion version button.
+     *
+     * @When I click the reporting opinion version button
+     */
+    public function iClickTheReportingOpinionVersionButton()
+    {
+        $this->getSession()->wait(3000, "$('#opinion-votes-show-all').length > 0");
+        $this->navigationContext->getPage('opinion version page')->clickReportButton();
+    }
+
+    /**
      * I should see all opinion version votes.
      *
      * @Then I should see all opinion version votes

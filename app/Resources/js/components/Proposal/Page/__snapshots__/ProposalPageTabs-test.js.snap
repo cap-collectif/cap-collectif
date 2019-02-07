@@ -108,146 +108,168 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
           bsClass="tab-pane"
           eventKey="content"
         >
-          <Row
-            bsClass="row"
-            componentClass="div"
+          <ForwardRef(Relay(TrashedMessage))
+            contribution={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "allFollowers": Object {
+                  "totalCount": 169,
+                },
+                "allVotes": Object {
+                  "totalCount": 1,
+                },
+                "currentVotableStep": null,
+                "id": "1",
+                "news": Object {
+                  "totalCount": 1,
+                },
+                "viewerCanSeeEvaluation": true,
+                "votableSteps": Array [],
+              }
+            }
           >
-            <Col
-              bsClass="col"
+            <Row
+              bsClass="row"
               componentClass="div"
-              sm={8}
-              xs={12}
             >
-              <ForwardRef(Relay(ProposalFusionList))
-                proposal={
-                  Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 1,
-                    },
-                    "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+              <Col
+                bsClass="col"
+                componentClass="div"
+                sm={8}
+                xs={12}
+              >
+                <ForwardRef(Relay(ProposalFusionList))
+                  proposal={
+                    Object {
+                      "$fragmentRefs": null,
+                      "$refType": null,
+                      "allFollowers": Object {
+                        "totalCount": 169,
+                      },
+                      "allVotes": Object {
+                        "totalCount": 1,
+                      },
+                      "currentVotableStep": null,
+                      "id": "1",
+                      "news": Object {
+                        "totalCount": 1,
+                      },
+                      "viewerCanSeeEvaluation": true,
+                      "votableSteps": Array [],
+                    }
                   }
-                }
-              />
-              <ForwardRef(Relay(ProposalPageLastNews))
-                proposal={
-                  Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 1,
-                    },
-                    "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+                />
+                <ForwardRef(Relay(ProposalPageLastNews))
+                  proposal={
+                    Object {
+                      "$fragmentRefs": null,
+                      "$refType": null,
+                      "allFollowers": Object {
+                        "totalCount": 169,
+                      },
+                      "allVotes": Object {
+                        "totalCount": 1,
+                      },
+                      "currentVotableStep": null,
+                      "id": "1",
+                      "news": Object {
+                        "totalCount": 1,
+                      },
+                      "viewerCanSeeEvaluation": true,
+                      "votableSteps": Array [],
+                    }
                   }
-                }
-              />
-              <ForwardRef(Relay(Connect(ProposalPageContent)))
-                proposal={
-                  Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 1,
-                    },
-                    "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+                />
+                <ForwardRef(Relay(Connect(ProposalPageContent)))
+                  proposal={
+                    Object {
+                      "$fragmentRefs": null,
+                      "$refType": null,
+                      "allFollowers": Object {
+                        "totalCount": 169,
+                      },
+                      "allVotes": Object {
+                        "totalCount": 1,
+                      },
+                      "currentVotableStep": null,
+                      "id": "1",
+                      "news": Object {
+                        "totalCount": 1,
+                      },
+                      "viewerCanSeeEvaluation": true,
+                      "votableSteps": Array [],
+                    }
                   }
-                }
-                step={
-                  Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "form": Object {
-                      "usingCategories": true,
-                      "usingThemes": true,
-                    },
+                  step={
+                    Object {
+                      "$fragmentRefs": null,
+                      "$refType": null,
+                      "form": Object {
+                        "usingCategories": true,
+                        "usingThemes": true,
+                      },
+                    }
                   }
-                }
-                viewer={null}
-              />
-            </Col>
-            <Col
-              bsClass="col"
-              componentClass="div"
-              sm={4}
-              xs={12}
-            >
-              <ForwardRef(Relay(ProposalPageMetadata))
-                proposal={
-                  Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 1,
-                    },
-                    "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+                  viewer={null}
+                />
+              </Col>
+              <Col
+                bsClass="col"
+                componentClass="div"
+                sm={4}
+                xs={12}
+              >
+                <ForwardRef(Relay(ProposalPageMetadata))
+                  proposal={
+                    Object {
+                      "$fragmentRefs": null,
+                      "$refType": null,
+                      "allFollowers": Object {
+                        "totalCount": 169,
+                      },
+                      "allVotes": Object {
+                        "totalCount": 1,
+                      },
+                      "currentVotableStep": null,
+                      "id": "1",
+                      "news": Object {
+                        "totalCount": 1,
+                      },
+                      "viewerCanSeeEvaluation": true,
+                      "votableSteps": Array [],
+                    }
                   }
-                }
-                showCategories={true}
-                showDistricts={true}
-                showNullEstimation={false}
-                showThemes={true}
-              />
-              <br />
-              <ForwardRef(Relay(ProposalPageAdvancement))
-                proposal={
-                  Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 1,
-                    },
-                    "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+                  showCategories={true}
+                  showDistricts={true}
+                  showNullEstimation={false}
+                  showThemes={true}
+                />
+                <br />
+                <ForwardRef(Relay(ProposalPageAdvancement))
+                  proposal={
+                    Object {
+                      "$fragmentRefs": null,
+                      "$refType": null,
+                      "allFollowers": Object {
+                        "totalCount": 169,
+                      },
+                      "allVotes": Object {
+                        "totalCount": 1,
+                      },
+                      "currentVotableStep": null,
+                      "id": "1",
+                      "news": Object {
+                        "totalCount": 1,
+                      },
+                      "viewerCanSeeEvaluation": true,
+                      "votableSteps": Array [],
+                    }
                   }
-                }
-              />
-            </Col>
-          </Row>
+                />
+              </Col>
+            </Row>
+          </ForwardRef(Relay(TrashedMessage))>
         </TabPane>
         <TabPane
           bsClass="tab-pane"
@@ -458,125 +480,147 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
           bsClass="tab-pane"
           eventKey="content"
         >
-          <Row
-            bsClass="row"
-            componentClass="div"
+          <ForwardRef(Relay(TrashedMessage))
+            contribution={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "allFollowers": Object {
+                  "totalCount": 169,
+                },
+                "allVotes": Object {
+                  "totalCount": 1,
+                },
+                "currentVotableStep": null,
+                "id": "1",
+                "news": Object {
+                  "totalCount": 0,
+                },
+                "viewerCanSeeEvaluation": true,
+                "votableSteps": Array [],
+              }
+            }
           >
-            <Col
-              bsClass="col"
+            <Row
+              bsClass="row"
               componentClass="div"
-              sm={8}
-              xs={12}
             >
-              <ForwardRef(Relay(ProposalFusionList))
-                proposal={
-                  Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 0,
-                    },
-                    "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+              <Col
+                bsClass="col"
+                componentClass="div"
+                sm={8}
+                xs={12}
+              >
+                <ForwardRef(Relay(ProposalFusionList))
+                  proposal={
+                    Object {
+                      "$fragmentRefs": null,
+                      "$refType": null,
+                      "allFollowers": Object {
+                        "totalCount": 169,
+                      },
+                      "allVotes": Object {
+                        "totalCount": 1,
+                      },
+                      "currentVotableStep": null,
+                      "id": "1",
+                      "news": Object {
+                        "totalCount": 0,
+                      },
+                      "viewerCanSeeEvaluation": true,
+                      "votableSteps": Array [],
+                    }
                   }
-                }
-              />
-              <ForwardRef(Relay(Connect(ProposalPageContent)))
-                proposal={
-                  Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 0,
-                    },
-                    "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+                />
+                <ForwardRef(Relay(Connect(ProposalPageContent)))
+                  proposal={
+                    Object {
+                      "$fragmentRefs": null,
+                      "$refType": null,
+                      "allFollowers": Object {
+                        "totalCount": 169,
+                      },
+                      "allVotes": Object {
+                        "totalCount": 1,
+                      },
+                      "currentVotableStep": null,
+                      "id": "1",
+                      "news": Object {
+                        "totalCount": 0,
+                      },
+                      "viewerCanSeeEvaluation": true,
+                      "votableSteps": Array [],
+                    }
                   }
-                }
-                step={
-                  Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "form": Object {
-                      "usingCategories": true,
-                      "usingThemes": true,
-                    },
+                  step={
+                    Object {
+                      "$fragmentRefs": null,
+                      "$refType": null,
+                      "form": Object {
+                        "usingCategories": true,
+                        "usingThemes": true,
+                      },
+                    }
                   }
-                }
-                viewer={null}
-              />
-            </Col>
-            <Col
-              bsClass="col"
-              componentClass="div"
-              sm={4}
-              xs={12}
-            >
-              <ForwardRef(Relay(ProposalPageMetadata))
-                proposal={
-                  Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 0,
-                    },
-                    "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+                  viewer={null}
+                />
+              </Col>
+              <Col
+                bsClass="col"
+                componentClass="div"
+                sm={4}
+                xs={12}
+              >
+                <ForwardRef(Relay(ProposalPageMetadata))
+                  proposal={
+                    Object {
+                      "$fragmentRefs": null,
+                      "$refType": null,
+                      "allFollowers": Object {
+                        "totalCount": 169,
+                      },
+                      "allVotes": Object {
+                        "totalCount": 1,
+                      },
+                      "currentVotableStep": null,
+                      "id": "1",
+                      "news": Object {
+                        "totalCount": 0,
+                      },
+                      "viewerCanSeeEvaluation": true,
+                      "votableSteps": Array [],
+                    }
                   }
-                }
-                showCategories={true}
-                showDistricts={true}
-                showNullEstimation={false}
-                showThemes={true}
-              />
-              <br />
-              <ForwardRef(Relay(ProposalPageAdvancement))
-                proposal={
-                  Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 0,
-                    },
-                    "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+                  showCategories={true}
+                  showDistricts={true}
+                  showNullEstimation={false}
+                  showThemes={true}
+                />
+                <br />
+                <ForwardRef(Relay(ProposalPageAdvancement))
+                  proposal={
+                    Object {
+                      "$fragmentRefs": null,
+                      "$refType": null,
+                      "allFollowers": Object {
+                        "totalCount": 169,
+                      },
+                      "allVotes": Object {
+                        "totalCount": 1,
+                      },
+                      "currentVotableStep": null,
+                      "id": "1",
+                      "news": Object {
+                        "totalCount": 0,
+                      },
+                      "viewerCanSeeEvaluation": true,
+                      "votableSteps": Array [],
+                    }
                   }
-                }
-              />
-            </Col>
-          </Row>
+                />
+              </Col>
+            </Row>
+          </ForwardRef(Relay(TrashedMessage))>
         </TabPane>
         <TabPane
           bsClass="tab-pane"
