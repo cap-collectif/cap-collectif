@@ -18,7 +18,13 @@ class EventRepository extends EntityRepository
     public function hydrateFromIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('e');
-        $qb->where('e.id IN (:ids)')->setParameter('ids', $ids);
+        $qb
+            ->addSelect('a', 'm', 't')
+            ->leftJoin('e.author', 'a')
+            ->leftJoin('a.media', 'm')
+            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = true')
+            ->where('e.id IN (:ids)')
+            ->setParameter('ids', $ids);
 
         return $qb->getQuery()->getResult();
     }

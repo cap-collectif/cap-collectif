@@ -63,12 +63,7 @@ class QueryEventsResolver implements ResolverInterface
                 );
 
                 $totalCount = $results['count'];
-                //                foreach ($results['events'] as $key => $event) {
-                //                    if(!$event->getUser()){
-                //                        unset($results['events'][$key]);
-                //                        $totalCount--;
-                //                    }
-                //                }
+
                 return $results['events'];
             });
 
