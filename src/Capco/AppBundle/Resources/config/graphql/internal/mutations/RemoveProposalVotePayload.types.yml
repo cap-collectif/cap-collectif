@@ -8,5 +8,3 @@ RemoveProposalVotePayload:
         type: 'InternalProposal!'
       viewer:
         type: 'InternalUser!'
-      previousVoteId:
-        type: 'ID'

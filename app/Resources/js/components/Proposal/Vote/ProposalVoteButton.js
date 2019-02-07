@@ -47,7 +47,7 @@ export class ProposalVoteButton extends React.Component<Props> {
   getButtonText = () => {
     const { isHovering, proposal } = this.props;
 
-    if (proposal.viewerHasVote) {
+    if (proposal.viewerVote) {
       return isHovering ? 'proposal.vote.delete' : 'proposal.vote.voted';
     }
     return 'proposal.vote.add';

@@ -100,7 +100,7 @@ class ReplyRepository extends EntityRepository
     public function countByAuthorAndProject(User $author, Project $project): int
     {
         $qb = $this->getPublishedQueryBuilder()
-            ->select('COUNT(DISTINCT reply)')
+            ->select('COUNT(reply)')
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.step IN (:steps)')
             ->andWhere('reply.author = :author')
@@ -121,8 +121,9 @@ class ReplyRepository extends EntityRepository
 
     public function countByAuthorAndStep(User $author, QuestionnaireStep $step): int
     {
+        // TODO: avoid leftJoin here would be better for perf
         $qb = $this->getPublishedQueryBuilder()
-            ->select('COUNT(DISTINCT reply)')
+            ->select('COUNT(reply)')
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.step = :step')
             ->andWhere('reply.author = :author')
@@ -134,8 +135,9 @@ class ReplyRepository extends EntityRepository
 
     public function countRepliesByStep(QuestionnaireStep $step): int
     {
+        // TODO: avoid leftJoin here would be better for perf
         $qb = $this->getPublishedQueryBuilder()
-            ->select('COUNT(DISTINCT reply)')
+            ->select('COUNT(reply)')
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.step = :step')
             ->setParameter('step', $step);

@@ -106,6 +106,7 @@ class UserRepository extends EntityRepository
 
     public function getRegisteredCount(): int
     {
+        // TODO why do we need DISTINCT ?
         $qb = $this->createQueryBuilder('u');
         $qb->select('count(DISTINCT u.id)');
         $qb->andWhere('u.confirmationToken IS NULL');
@@ -118,6 +119,7 @@ class UserRepository extends EntityRepository
 
     public function getRegisteredNotConfirmedByEmailCount(): int
     {
+        // TODO why do we need DISTINCT ?
         $qb = $this->createQueryBuilder('u');
         $qb->select('count(DISTINCT u.id)');
         $qb->andWhere('u.confirmationToken IS NOT NULL');
@@ -1043,6 +1045,7 @@ class UserRepository extends EntityRepository
 
     public function countAllowedViewersForProject(Project $project): int
     {
+        // TODO why do we need DISTINCT ?
         $query = $this->createQueryBuilder('u')
             ->select('count(DISTINCT u.id)')
             ->leftJoin('u.userGroups', 'uG')

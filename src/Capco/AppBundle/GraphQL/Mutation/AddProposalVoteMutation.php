@@ -16,13 +16,11 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\AbstractStepRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
@@ -157,8 +155,7 @@ class AddProposalVoteMutation implements MutationInterface
 
         // Synchronously index for mutation payload
         $this->proposalVotesDataLoader->useElasticsearch = false;
-        $edge = new Edge(ConnectionBuilder::offsetToCursor(0), $vote);
 
-        return ['vote' => $vote, 'viewer' => $user, 'voteEdge' => $edge, 'proposal' => $proposal];
+        return ['vote' => $vote, 'viewer' => $user];
     }
 }

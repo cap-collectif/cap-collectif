@@ -98,8 +98,6 @@ class RemoveProposalVoteMutation implements MutationInterface
             throw new UserError('This step is no longer contributable.');
         }
 
-        $previousVoteId = $vote->getId();
-
         $this->em->remove($vote);
         $this->em->flush();
         $this->proposalVotesDataLoader->invalidate($proposal);
@@ -110,10 +108,6 @@ class RemoveProposalVoteMutation implements MutationInterface
         // Synchronously index for mutation payload
         $this->proposalVotesDataLoader->useElasticsearch = false;
 
-        return [
-            'viewer' => $user,
-            'previousVoteId' => $previousVoteId,
-            'step' => $step,
-        ];
+        return ['proposal' => $proposal, 'step' => $step, 'viewer' => $user];
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AbstractVote;
@@ -35,19 +34,17 @@ class AbstractVoteRepository extends EntityRepository
             ->select('count(DISTINCT v)')
             ->andWhere('v.user = :author')
             ->setParameter('author', $user);
-
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
      * Find all votes by author, only the public one.
-     *
      * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/native-sql.html
      */
     public function findAllByAuthor(User $user, int $limit = 100, int $offset = 0): array
     {
         $sqlRequest =
-            'SELECT * FROM votes WHERE (private = 0 OR private IS NULL) AND voter_id = :user_id LIMIT :offset, :limit';
+            "SELECT * FROM votes WHERE (private = 0 OR private IS NULL) AND voter_id = :user_id LIMIT :offset, :limit";
 
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult(AbstractVote::class, 'v');
@@ -74,8 +71,9 @@ class AbstractVoteRepository extends EntityRepository
             ->setParameter('user_id', $user->getId())
             ->setParameter('offset', $offset)
             ->setParameter('limit', $limit);
+        $results = $nativeQuery->execute();
 
-        return $nativeQuery->execute();
+        return $results;
     }
 
     /**
@@ -107,13 +105,35 @@ class AbstractVoteRepository extends EntityRepository
             if (isset($counts[$vote['value']])) {
                 ++$counts[$vote['value']];
                 $counts['date'] = (new \DateTime(
-                    $vote['updatedAt'] ?? $vote['createdAt']
+                    isset($vote['updatedAt']) ? $vote['updatedAt'] : $vote['createdAt']
                 ))->getTimestamp();
                 $result[] = array_values($counts);
             }
         }
 
         return $result;
+    }
+
+    /**
+     * Get one vote by id.
+     *
+     * @param $vote
+     * @param mixed $id
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
+     */
+    public function getOneById($id)
+    {
+        return $this->getQueryBuilder()
+            ->addSelect('aut', 'm', 'v', 'r')
+            ->leftJoin('v.user', 'aut')
+            ->leftJoin('aut.media', 'm')
+            ->andWhere('v.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     /**
@@ -145,6 +165,7 @@ class AbstractVoteRepository extends EntityRepository
                     }
                 }
             } catch (EntityNotFoundException $e) {
+
             }
         }
 
