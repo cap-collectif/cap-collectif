@@ -96,7 +96,7 @@ trait AdminProposalTrait
             ->find('css', '#evaluers')
             ->click();
         $this->getCurrentPage()
-            ->find('css', '#evaluers .react-select__menu-list .react-select__option:first-child')
+            ->find('css', '#evaluers .react-select__option:first-child')
             ->click();
         $this->iWait(3);
         $this->getCurrentPage()
@@ -108,7 +108,7 @@ trait AdminProposalTrait
             ->click();
         $this->iWait(2);
         $this->getCurrentPage()
-            ->find('css', '#evaluers .react-select__menu-list .react-select__option:first-child')
+            ->find('css', '#evaluers .react-select__option:first-child')
             ->click();
     }
 
