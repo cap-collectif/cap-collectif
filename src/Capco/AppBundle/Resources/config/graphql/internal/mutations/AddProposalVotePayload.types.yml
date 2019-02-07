@@ -6,3 +6,5 @@ AddProposalVotePayload:
         type: 'InternalProposalVote!'
       viewer:
         type: 'InternalUser!'
+      voteEdge:
+        type: 'ProposalVoteEdge!'

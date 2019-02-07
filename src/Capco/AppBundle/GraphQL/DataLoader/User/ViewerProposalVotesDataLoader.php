@@ -2,24 +2,26 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\User;
 
-use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
-use Capco\UserBundle\Entity\User;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use DeepCopy\DeepCopy;
 
 class ViewerProposalVotesDataLoader extends BatchDataLoader
 {
@@ -30,6 +32,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     private $proposalSelectionVoteRepository;
     private $globalIdResolver;
     private $helper;
+    private $abstractVoteRepository;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -44,12 +47,14 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
-        bool $enableCache
+        bool $enableCache,
+        AbstractVoteRepository $abstractVoteRepository
     ) {
         $this->abstractStepRepository = $repository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->globalIdResolver = $globalIdResolver;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        $this->abstractVoteRepository = $abstractVoteRepository;
         $this->helper = $helper;
 
         parent::__construct(
@@ -144,13 +149,27 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
 
     protected function normalizeValue($value)
     {
-        // TODO we can do better here
-        return $value;
+        $copier = new DeepCopy(true);
+
+        $connection = $copier->copy($value);
+
+        if ($connection) {
+            foreach ($connection->edges as $vote) {
+                $vote->node = $vote->node->getId();
+            }
+        }
+
+        return $connection;
     }
 
     protected function denormalizeValue($value)
     {
-        // TODO we can do better here
+        if ($value) {
+            foreach ($value->edges as $vote) {
+                $vote->node = $this->abstractVoteRepository->find($vote->node);
+            }
+        }
+
         return $value;
     }
 

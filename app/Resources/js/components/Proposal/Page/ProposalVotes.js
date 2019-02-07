@@ -49,10 +49,13 @@ export class ProposalVotes extends React.Component<Props, State> {
               />
             </h3>
             <Row>
-              {proposal.votes.edges.filter(Boolean).map((edge, key) => (
-                // $FlowFixMe $refType
-                <UserBox key={key} user={edge.node.author} className="proposal__vote" />
-              ))}
+              {proposal.votes.edges.filter(Boolean).map(
+                (edge, key) =>
+                  edge.node && (
+                    // $FlowFixMe $refType
+                    <UserBox key={key} user={edge.node.author} className="proposal__vote" />
+                  ),
+              )}
             </Row>
           </div>
         ) : (
@@ -93,7 +96,7 @@ export default createPaginationContainer(
       ) {
       id
       votes(first: $count, after: $cursor, stepId: $stepId)
-        @connection(key: "ProposalVotes_votes", filters: ["proposalId", "stepId"]) {
+        @connection(key: "ProposalVotes_votes", filters: ["stepId"]) {
         edges {
           node {
             author {
