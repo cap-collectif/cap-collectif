@@ -1882,7 +1882,7 @@ type Event implements Node & Commentable {
   ): ParticipantConnection!
   themes: [Theme!]!
   projects: [Project!]!
-  author: User!
+  author: User
   commentable: Boolean!
   link: URI
   media: Media

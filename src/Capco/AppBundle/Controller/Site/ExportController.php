@@ -401,7 +401,7 @@ class ExportController extends Controller
      * @Route("/export-events-list", name="app_export_event_list")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function downloadExportEventListction(): StreamedResponse
+    public function downloadExportEventListAction(): StreamedResponse
     {
         $this->get(GraphQlAclListener::class)->disableAcl();
         $executor = $this->get('overblog_graphql.request_executor');
