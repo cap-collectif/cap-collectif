@@ -11,6 +11,7 @@ import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
 import UnpublishedLabel from '../Publishable/UnpublishedLabel';
 import type { ArgumentItem_argument } from './__generated__/ArgumentItem_argument.graphql';
+import TrashedMessage from '../Trashed/TrashedMessage';
 
 type Props = {
   argument: ArgumentItem_argument,
@@ -23,7 +24,7 @@ export class ArgumentItem extends React.Component<Props> {
   };
 
   renderDate = () => {
-    const argument = this.props.argument;
+    const { argument } = this.props;
 
     if (typeof Modernizr === 'undefined' || !Modernizr.intl) {
       return null;
@@ -60,27 +61,31 @@ export class ArgumentItem extends React.Component<Props> {
         <div className="opinion__body">
           {/* $FlowFixMe Will be a fragment soon */}
           <UserAvatar user={argument.author} className="pull-left" />
-          <div className="opinion__data">
-            <p className="h5 opinion__user">
-              <UserLink user={argument.author} />
-              {isProfile && (
-                <Label bsStyle={labelStyle} className="label--right">
-                  <FormattedMessage id={labelValueTranslateId} />
-                </Label>
-              )}
-            </p>
-            {this.renderDate()}
-            <UnpublishedLabel publishable={argument} />
-            {isProfile && (
-              <p>
-                <FormattedMessage id="admin.fields.opinion.link" />
-                {' : '}
-                <a href={argument.related ? argument.related.url : ''}>
-                  {argument.related ? argument.related.title : ''}
-                </a>
+
+          {/* $FlowFixMe $refType */}
+          <TrashedMessage contribution={argument}>
+            <div className="opinion__data">
+              <p className="h5 opinion__user">
+                <UserLink user={argument.author} />
+                {isProfile && (
+                  <Label bsStyle={labelStyle} className="label--right">
+                    <FormattedMessage id={labelValueTranslateId} />
+                  </Label>
+                )}
               </p>
-            )}
-          </div>
+              {this.renderDate()}
+              <UnpublishedLabel publishable={argument} />
+              {isProfile && (
+                <p>
+                  <FormattedMessage id="admin.fields.opinion.link" />
+                  {' : '}
+                  <a href={argument.related ? argument.related.url : ''}>
+                    {argument.related ? argument.related.title : ''}
+                  </a>
+                </p>
+              )}
+            </div>
+          </TrashedMessage>
           <p
             className="opinion__text"
             style={{
@@ -104,6 +109,7 @@ export default createFragmentContainer(
   graphql`
     fragment ArgumentItem_argument on Argument
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+      ...TrashedMessage_contribution
       ...UnpublishedLabel_publishable
       id
       createdAt

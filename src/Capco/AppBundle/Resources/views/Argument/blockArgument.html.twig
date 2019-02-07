@@ -35,6 +35,8 @@
                 </span>
                 {% if argument.getTrashedStatus() == 'visible' %}
                     {{ argument.body | escape | nl2br }}
+                {% elseif argument.getTrashedStatus() == 'invisible' %}
+                        {{ 'hidden-content'|trans({}, 'CapcoAppBundle') }}
                 {% endif %}
             {% else %}
                 {{ argument.body | escape | nl2br }}
