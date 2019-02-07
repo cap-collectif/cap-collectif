@@ -9,6 +9,7 @@ import OpinionSourceContent from './OpinionSourceContent';
 import OpinionSourceButtons from './OpinionSourceButtons';
 import type { OpinionSource_source } from './__generated__/OpinionSource_source.graphql';
 import type { OpinionSource_sourceable } from './__generated__/OpinionSource_sourceable.graphql';
+import TrashedMessage from '../../Trashed/TrashedMessage';
 
 type Props = {
   source: OpinionSource_source,
@@ -27,7 +28,8 @@ export class OpinionSource extends React.Component<Props> {
         <div className="left-block">
           {/* $FlowFixMe Will be a fragment soon */}
           <UserAvatar user={source.author} />
-          <div>
+          {/* $FlowFixMe $refType */}
+          <TrashedMessage contribution={source}>
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionInfos rankingThreshold={null} opinion={source} />
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
@@ -38,7 +40,7 @@ export class OpinionSource extends React.Component<Props> {
             <div className="actions small">
               <OpinionSourceButtons sourceable={sourceable} source={source} />
             </div>
-          </div>
+          </TrashedMessage>
         </div>
       </ListGroupItem>
     );
@@ -54,6 +56,7 @@ export default createFragmentContainer(OpinionSource, {
       ...OpinionSourceTitle_source
       ...OpinionSourceContent_source
       ...OpinionSourceButtons_source @arguments(isAuthenticated: $isAuthenticated)
+      ...TrashedMessage_contribution
       author {
         id
         displayName

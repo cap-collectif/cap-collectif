@@ -21,7 +21,22 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
         }
       }
     />
-    <div>
+    <ForwardRef(Relay(TrashedMessage))
+      contribution={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "author": Object {
+            "displayName": "author1",
+            "id": "author1",
+            "media": null,
+            "url": "https://capco/dev/profile/author1",
+            "vip": true,
+          },
+          "id": "1",
+        }
+      }
+    >
       <ForwardRef(Relay(OpinionInfos))
         opinion={
           Object {
@@ -98,7 +113,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
           }
         />
       </div>
-    </div>
+    </ForwardRef(Relay(TrashedMessage))>
   </div>
 </ListGroupItem>
 `;
@@ -124,7 +139,22 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
         }
       }
     />
-    <div>
+    <ForwardRef(Relay(TrashedMessage))
+      contribution={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "author": Object {
+            "displayName": "author1",
+            "id": "author1",
+            "media": null,
+            "url": "https://capco/dev/profile/author1",
+            "vip": false,
+          },
+          "id": "1",
+        }
+      }
+    >
       <ForwardRef(Relay(OpinionInfos))
         opinion={
           Object {
@@ -201,7 +231,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
           }
         />
       </div>
-    </div>
+    </ForwardRef(Relay(TrashedMessage))>
   </div>
 </ListGroupItem>
 `;
