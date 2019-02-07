@@ -1,8 +1,10 @@
 SimpleQuestion:
   type: object
-  inherits: [Question]
+  inherits:
+    - InternalQuestion
   config:
-    interfaces: [Question]
+    interfaces:
+      - InternalQuestion
     description: 'A simple question'
     fields:
       kind:

@@ -1,8 +1,0 @@
-Response:
-  type: interface
-  config:
-    description: 'A contribution with an author'
-    resolveType: "@=resolver('response_type', [value])"
-    fields:
-      question:
-        type: 'Question!'

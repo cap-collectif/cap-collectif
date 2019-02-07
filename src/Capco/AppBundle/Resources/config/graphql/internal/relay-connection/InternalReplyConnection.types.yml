@@ -1,7 +1,8 @@
-ResponseConnection:
+InternalReplyConnection:
   type: relay-connection
   config:
-    nodeType: InternalResponse!
+    name: ReplyConnection
+    nodeType: Reply!
     connectionFields:
       totalCount:
         type: Int!

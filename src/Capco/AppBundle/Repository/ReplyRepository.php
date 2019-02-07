@@ -2,16 +2,17 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
+use Capco\AppBundle\Entity\Reply;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Reply;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
-use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
 
 class ReplyRepository extends EntityRepository
 {
@@ -59,6 +60,20 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function findByQuestionnaire(
+        Questionnaire $questionnaire,
+        int $offset,
+        int $limit
+    ): Paginator {
+        $qb = $this->getPublishedQueryBuilder()
+            ->andWhere('reply.questionnaire = :questionnaire')
+            ->setParameter('questionnaire', $questionnaire)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
+
+        return new Paginator($qb);
+    }
+
     public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('r');
@@ -100,7 +115,7 @@ class ReplyRepository extends EntityRepository
     public function countByAuthorAndProject(User $author, Project $project): int
     {
         $qb = $this->getPublishedQueryBuilder()
-            ->select('COUNT(reply)')
+            ->select('COUNT(DISTINCT reply)')
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.step IN (:steps)')
             ->andWhere('reply.author = :author')
@@ -121,9 +136,8 @@ class ReplyRepository extends EntityRepository
 
     public function countByAuthorAndStep(User $author, QuestionnaireStep $step): int
     {
-        // TODO: avoid leftJoin here would be better for perf
         $qb = $this->getPublishedQueryBuilder()
-            ->select('COUNT(reply)')
+            ->select('COUNT(DISTINCT reply)')
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.step = :step')
             ->andWhere('reply.author = :author')
@@ -135,9 +149,8 @@ class ReplyRepository extends EntityRepository
 
     public function countRepliesByStep(QuestionnaireStep $step): int
     {
-        // TODO: avoid leftJoin here would be better for perf
         $qb = $this->getPublishedQueryBuilder()
-            ->select('COUNT(reply)')
+            ->select('COUNT(DISTINCT reply)')
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.step = :step')
             ->setParameter('step', $step);

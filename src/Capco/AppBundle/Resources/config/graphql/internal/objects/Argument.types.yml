@@ -2,7 +2,7 @@ Argument:
   type: object
   inherits:
     - Node
-    - Publishable
+    - PublicPublishable
     - Contribution
     - Reportable
     - Trashable
@@ -13,7 +13,7 @@ Argument:
     description: 'An argument'
     interfaces:
       - Node
-      - Publishable
+      - PublicPublishable
       - Contribution
       - Reportable
       - Trashable
