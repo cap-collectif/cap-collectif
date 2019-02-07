@@ -27,12 +27,6 @@ class PopulateIndexCommand extends Command
             'Populate the current Elasticsearch Indexes.'
         );
         $this->addArgument('type', InputArgument::OPTIONAL, 'Populate only a specific type ?');
-        $this->addArgument(
-            'offset',
-            InputArgument::OPTIONAL,
-            'Populate from a specific offset (default 0)',
-            0
-        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -48,11 +42,10 @@ class PopulateIndexCommand extends Command
         $output->writeln(['Start indexing Elasticsearch.']);
 
         $type = $input->getArgument('type');
-        $offset = $input->getArgument('offset');
 
         try {
             if ($type) {
-                $this->indexer->indexAllForType($type, $offset, $output);
+                $this->indexer->indexAllForType($type, $output);
             } else {
                 $this->indexer->indexAll($output);
             }
