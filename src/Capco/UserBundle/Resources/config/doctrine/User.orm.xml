@@ -20,7 +20,13 @@
         <indexes>
             <index name="username_idx" columns="username"/>
             <index name="id_username_idx" columns="id,username"/>
+            <!-- sonata_admin_retrieve_autocomplete_items -->
+            <index name="id_username_updated_at_idx" columns="id,username,updated_at"/>
             <index name="email_idx" columns="email"/>
+            <!-- account_confirm_email -->
+            <index name="new_email_confirmation_token_idx" columns="new_email_confirmation_token"/>
+            <!-- fos_user_resetting_reset -->
+            <index name="reset_password_token_idx" columns="reset_password_token"/>
         </indexes>
 
         <unique-constraints>

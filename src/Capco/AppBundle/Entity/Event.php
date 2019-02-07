@@ -20,7 +20,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="event")
+ * @ORM\Table(name="event", indexes={
+ *     @ORM\Index(name="idx_enabled", columns={"id", "is_enabled"})
+ * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\EndAfterStart()
