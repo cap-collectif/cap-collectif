@@ -1,6 +1,7 @@
-ProjectOrderField:
+PreviewProjectOrderField:
   type: enum
   config:
+    name: ProjectOrderField
     description: 'Ordering projects.'
     values:
       POPULAR:

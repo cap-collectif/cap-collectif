@@ -1,0 +1,54 @@
+InternalWithProposals:
+  type: object
+  decorator: true
+  inherits:
+    - PreviewWithProposals
+  config:
+    fields:
+      proposals:
+        type: 'InternalProposalConnection!'
+        args:
+          first:
+            type: 'Int'
+            defaultValue: 100
+          district:
+            type: 'ID'
+            description: 'If non-null, filters proposals with the given district.'
+          userType:
+            type: 'ID'
+            description: 'If non-null, filters proposals with the given type of author.'
+          category:
+            type: 'ID'
+            description: 'If non-null, filters proposals with the given category.'
+          author:
+            type: 'ID'
+            description: 'If non-null, filters proposals with the given author.'
+          status:
+            type: 'ID'
+            description: 'If non-null, filters proposals with the given status.'
+          theme:
+            type: 'ID'
+            description: 'If non-null, filters proposals with the given theme.'
+          term:
+            type: 'String'
+            description: 'If non-null, filters proposals with the given string to look for.'
+          orderBy:
+            type: 'PreviewProposalOrder'
+            description: 'Ordering options for proposals returned from the connection.'
+            defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }
+          affiliations:
+            type: '[ProposalAffiliation]'
+            description: 'Affiliation options for proposals returned from the connection.'
+          includeUnpublished:
+            type: 'Boolean'
+            description: '(ROLE_SUPER_ADMIN only) Select also unpublished proposals.'
+            defaultValue: false
+          trashedStatus:
+            type: 'ProposalTrashedStatus'
+            description: 'If non-null, filters proposals with the given trashed status.'
+            defaultValue: 'NOT_TRASHED'
+      viewerProposalsUnpublished:
+        access: "@=hasRole('ROLE_USER')"
+        type: 'InternalProposalConnection'
+        argsBuilder: 'Relay::Connection'
+        description: 'The viewer unpublished proposals (only visible by viewer).'

@@ -1,111 +1,128 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<OpinionBox /> should render correctly 1`] = `
-<ForwardRef(Relay(TrashedMessage))
-  className="mb-15"
-  contribution={
-    Object {
-      "$fragmentRefs": null,
-      "$refType": null,
-      "__typename": "Opinion",
-      "section": Object {
-        "color": "info",
-        "title": "sectionTitle",
-        "url": "#",
-      },
-      "title": "title",
-    }
-  }
+<div
+  className="block block--bordered opinion__details"
 >
   <div
-    className="block block--bordered opinion__details"
+    className="opinion opinion--info opinion--current"
   >
     <div
-      className="opinion opinion--info opinion--current"
-    >
-      <div
-        className="opinion__header opinion__header--centered"
-        style={
-          Object {
-            "height": "auto",
-          }
+      className="opinion__header opinion__header--centered"
+      style={
+        Object {
+          "height": "auto",
         }
+      }
+    >
+      <a
+        className="pull-left btn btn-default opinion__header__back"
+        href="#"
       >
-        <a
-          className="pull-left btn btn-default opinion__header__back"
-          href="#"
-        >
-          <i
-            className="cap cap-arrow-1-1"
-          />
-          <span
-            className="hidden-xs hidden-sm"
-          >
-             
-            <FormattedMessage
-              id="opinion.header.back"
-              values={Object {}}
-            />
-          </span>
-        </a>
-        <div
-          className="opinion__header__title"
+        <i
+          className="cap cap-arrow-1-1"
         />
-        <h2
-          className="h4 opinion__header__title"
+        <span
+          className="hidden-xs hidden-sm"
         >
+           
           <FormattedMessage
-            id="opinion.header.opinion"
+            id="opinion.header.back"
             values={Object {}}
           />
-          <p
-            className="small excerpt"
-            style={
+        </span>
+      </a>
+      <div
+        className="opinion__header__title"
+      />
+      <h2
+        className="h4 opinion__header__title"
+      >
+        <FormattedMessage
+          id="opinion.header.opinion"
+          values={Object {}}
+        />
+        <p
+          className="small excerpt"
+          style={
+            Object {
+              "marginTop": "5px",
+            }
+          }
+        >
+          sectionTitle
+        </p>
+      </h2>
+    </div>
+    <ListGroup
+      bsClass="list-group"
+      className="list-group-custom mb-0"
+    >
+      <ListGroupItem
+        bsClass="list-group-item"
+        className="list-group-item__opinion no-border"
+        listItem={false}
+      >
+        <div
+          className="left-block"
+        >
+          <ForwardRef(Relay(OpinionPreview))
+            link={false}
+            opinion={
               Object {
-                "marginTop": "5px",
+                "$fragmentRefs": null,
+                "$refType": null,
+                "__typename": "Opinion",
+                "section": Object {
+                  "color": "info",
+                  "title": "sectionTitle",
+                  "url": "#",
+                },
+                "title": "title",
               }
             }
-          >
-            sectionTitle
-          </p>
-        </h2>
-      </div>
-      <ListGroup
-        bsClass="list-group"
-        className="list-group-custom mb-0"
-      >
-        <ListGroupItem
-          bsClass="list-group-item"
-          className="list-group-item__opinion no-border"
-          listItem={false}
-        >
-          <div
-            className="left-block"
-          >
-            <ForwardRef(Relay(OpinionPreview))
-              link={false}
-              opinion={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "__typename": "Opinion",
-                  "section": Object {
-                    "color": "info",
-                    "title": "sectionTitle",
-                    "url": "#",
-                  },
-                  "title": "title",
-                }
-              }
-              opinionTerm={0}
-              rankingThreshold={0}
-              showUpdatedDate={true}
-            />
-          </div>
-        </ListGroupItem>
-      </ListGroup>
-    </div>
-    <ForwardRef(Relay(OpinionAppendices))
+            opinionTerm={0}
+            rankingThreshold={0}
+            showUpdatedDate={true}
+          />
+        </div>
+      </ListGroupItem>
+    </ListGroup>
+  </div>
+  <ForwardRef(Relay(OpinionAppendices))
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "__typename": "Opinion",
+        "section": Object {
+          "color": "info",
+          "title": "sectionTitle",
+          "url": "#",
+        },
+        "title": "title",
+      }
+    }
+  />
+  <div
+    className="opinion__description"
+  >
+    <ForwardRef(Relay(OpinionBody))
+      opinion={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "__typename": "Opinion",
+          "section": Object {
+            "color": "info",
+            "title": "sectionTitle",
+            "url": "#",
+          },
+          "title": "title",
+        }
+      }
+    />
+    <ForwardRef(Relay(OpinionVotesBox))
       opinion={
         Object {
           "$fragmentRefs": null,
@@ -121,85 +138,51 @@ exports[`<OpinionBox /> should render correctly 1`] = `
       }
     />
     <div
-      className="opinion__description"
-    >
-      <ForwardRef(Relay(OpinionBody))
-        opinion={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "__typename": "Opinion",
-            "section": Object {
-              "color": "info",
-              "title": "sectionTitle",
-              "url": "#",
-            },
-            "title": "title",
-          }
-        }
-      />
-      <ForwardRef(Relay(OpinionVotesBox))
-        opinion={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "__typename": "Opinion",
-            "section": Object {
-              "color": "info",
-              "title": "sectionTitle",
-              "url": "#",
-            },
-            "title": "title",
-          }
-        }
-      />
-      <div
-        aria-label={
-          <FormattedMessage
-            id="vote.form"
-            values={Object {}}
-          />
-        }
-        className="opinion__buttons"
-        style={
-          Object {
-            "marginBottom": "15px",
-            "marginTop": "15px",
-          }
-        }
-      >
-        <ForwardRef(Relay(Connect(OpinionButtons)))
-          opinion={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "__typename": "Opinion",
-              "section": Object {
-                "color": "info",
-                "title": "sectionTitle",
-                "url": "#",
-              },
-              "title": "title",
-            }
-          }
+      aria-label={
+        <FormattedMessage
+          id="vote.form"
+          values={Object {}}
         />
-      </div>
-    </div>
-    <ForwardRef(Relay(OpinionAnswer))
-      opinion={
+      }
+      className="opinion__buttons"
+      style={
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "__typename": "Opinion",
-          "section": Object {
-            "color": "info",
-            "title": "sectionTitle",
-            "url": "#",
-          },
-          "title": "title",
+          "marginBottom": "15px",
+          "marginTop": "15px",
         }
       }
-    />
+    >
+      <ForwardRef(Relay(Connect(OpinionButtons)))
+        opinion={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "__typename": "Opinion",
+            "section": Object {
+              "color": "info",
+              "title": "sectionTitle",
+              "url": "#",
+            },
+            "title": "title",
+          }
+        }
+      />
+    </div>
   </div>
-</ForwardRef(Relay(TrashedMessage))>
+  <ForwardRef(Relay(OpinionAnswer))
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "__typename": "Opinion",
+        "section": Object {
+          "color": "info",
+          "title": "sectionTitle",
+          "url": "#",
+        },
+        "title": "title",
+      }
+    }
+  />
+</div>
 `;

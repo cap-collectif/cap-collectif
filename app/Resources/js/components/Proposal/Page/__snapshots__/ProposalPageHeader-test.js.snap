@@ -23,42 +23,11 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
       />
     </a>
   </div>
-  <ForwardRef(Relay(TrashedMessage))
+  <h1
     className="consultation__header__title h1"
-    contribution={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "author": Object {
-          "displayName": "userAdmin",
-          "media": Object {
-            "url": "http://media.url",
-          },
-          "username": "userAdmin",
-        },
-        "createdAt": "2015-01-01 00:00:00",
-        "form": Object {
-          "isProposalForm": false,
-        },
-        "id": "1",
-        "project": Object {
-          "opinionCanBeFollowed": true,
-        },
-        "publicationStatus": "PUBLISHED",
-        "publishedAt": "2015-01-01 00:00:00",
-        "theme": null,
-        "title": "titre",
-        "updatedAt": "2015-01-05 00:00:00",
-        "url": "true",
-      }
-    }
   >
-    <h1
-      className="consultation__header__title h1"
-    >
-      titre
-    </h1>
-  </ForwardRef(Relay(TrashedMessage))>
+    titre
+  </h1>
   <div
     className="media mb-15"
   >
@@ -217,44 +186,11 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
       />
     </a>
   </div>
-  <ForwardRef(Relay(TrashedMessage))
+  <h1
     className="consultation__header__title h1"
-    contribution={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "author": Object {
-          "displayName": "userAdmin",
-          "media": Object {
-            "url": "http://media.url",
-          },
-          "username": "userAdmin",
-        },
-        "createdAt": "2015-01-01 00:00:00",
-        "form": Object {
-          "isProposalForm": true,
-        },
-        "id": "1",
-        "project": Object {
-          "opinionCanBeFollowed": true,
-        },
-        "publicationStatus": "PUBLISHED",
-        "publishedAt": "2015-01-01 00:00:00",
-        "theme": Object {
-          "title": "titre du theme",
-        },
-        "title": "titre",
-        "updatedAt": "2015-01-05 00:00:00",
-        "url": "true",
-      }
-    }
   >
-    <h1
-      className="consultation__header__title h1"
-    >
-      titre
-    </h1>
-  </ForwardRef(Relay(TrashedMessage))>
+    titre
+  </h1>
   <div
     className="media mb-15"
   >

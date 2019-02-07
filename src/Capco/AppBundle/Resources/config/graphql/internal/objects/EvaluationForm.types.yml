@@ -14,6 +14,6 @@ EvaluationForm:
         type: 'String'
         description: 'The description of evaluation form'
       questions:
-        type: '[Question!]!'
+        type: '[InternalQuestion!]!'
         description: 'List of questions in the evaluation form'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EvaluationForm\\EvaluationFormResolver", [value, getUser()])'

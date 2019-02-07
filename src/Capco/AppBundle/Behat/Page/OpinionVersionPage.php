@@ -16,7 +16,6 @@ class OpinionVersionPage extends Page
         'show all votes button' => '#opinion-votes-show-all',
         'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',
         'share button' => 'opinion-share-button',
-        'report button' => '#report-opinion-version1-button',
         // Tabs
         'sources tab' => '#opinion-page-tabs-tab-sources',
         'arguments tab' => '#opinion-page-tabs-tab-arguments',
@@ -66,11 +65,6 @@ class OpinionVersionPage extends Page
     public function clickShareButton()
     {
         $this->getElement('share button')->click();
-    }
-
-    public function clickReportButton()
-    {
-        $this->getElement('report button')->click();
     }
 
     public function getFirstSourceVoteCounter()
@@ -135,7 +129,7 @@ class OpinionVersionPage extends Page
 
     public function getArgumentVotesCount()
     {
-        return (int) $this->getArgumentVotesCounter()->getText();
+        return (int) ($this->getArgumentVotesCounter()->getText());
     }
 
     public function clickArgumentEditButton()

@@ -1,10 +1,19 @@
 Comment:
   type: object
   inherits:
-    [Node, Trashable, Reportable, Publishable, Contribution, Commentable, UniformResourceLocatable]
+    [
+      Node,
+      Trashable,
+      Reportable,
+      PublicPublishable,
+      Contribution,
+      Commentable,
+      UniformResourceLocatable,
+    ]
   config:
     description: 'A comment'
-    interfaces: [Node, Publishable, Reportable, Contribution, Commentable, UniformResourceLocatable]
+    interfaces:
+      [Node, PublicPublishable, Reportable, Contribution, Commentable, UniformResourceLocatable]
     fields:
       body:
         type: 'String!'

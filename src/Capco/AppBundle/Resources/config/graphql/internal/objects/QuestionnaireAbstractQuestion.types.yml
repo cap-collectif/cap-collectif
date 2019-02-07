@@ -7,4 +7,4 @@ QuestionnaireAbstractQuestion:
       position:
         type: 'Int'
       question:
-        type: 'Question'
+        type: 'InternalQuestion'
