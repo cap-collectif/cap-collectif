@@ -216,15 +216,14 @@ class OpinionsController extends FOSRestController
     }
 
     /**
-     * @Post("/opinions/{opinionId}/versions/{versionId}/reports")
+     * @Post("/versions/{versionId}/reports")
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postOpinionVersionReportAction(Request $request, OpinionVersion $version)
     {
         $viewer = $this->getUser();
-
-        if (!$viewer || 'anon.' === $viewer || $viewer === $version->getAuthor()) {
+        if (!$viewer || 'anon.' === $viewer || $viewer !== $opinion->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
 

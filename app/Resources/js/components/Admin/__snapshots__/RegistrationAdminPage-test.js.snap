@@ -204,6 +204,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
   >
     <Toggle
       checked={false}
+      disabled={true}
       icons={true}
       onChange={[Function]}
     />
@@ -485,6 +486,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
   >
     <Toggle
       checked={false}
+      disabled={true}
       icons={true}
       onChange={[Function]}
     />
