@@ -176,8 +176,9 @@ class ProposalRepository extends EntityRepository
 
     public function countFusionsByProposalForm(ProposalForm $form): int
     {
+        // TODO: Let's try count(*)
         $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(proposal.id)')
+            ->select('COUNT(proposal)')
             ->andWhere('proposal.proposalForm = :form')
             ->andWhere('SIZE(proposal.childConnections) > 0')
             ->setParameter('form', $form);
@@ -608,7 +609,7 @@ class ProposalRepository extends EntityRepository
         $query = $this->createQueryBuilder('p');
 
         return $query
-            ->select('count(DISTINCT p.id)')
+            ->select('count(p.id)')
             ->leftJoin('p.proposalForm', 'pf')
             ->andWhere('pf.step = :cs')
             ->andWhere('p.draft = 0')
