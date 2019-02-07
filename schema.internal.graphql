@@ -144,7 +144,6 @@ type AddProposalVotePayload {
   vote: ProposalVote!
   viewer: User!
   voteEdge: ProposalVoteEdge!
-  proposal: Proposal!
   clientMutationId: String
 }
 
@@ -4522,6 +4521,7 @@ input RemoveProposalVoteInput {
 
 type RemoveProposalVotePayload {
   step: ProposalStep!
+  proposal: Proposal!
   viewer: User!
   previousVoteId: ID
   clientMutationId: String
