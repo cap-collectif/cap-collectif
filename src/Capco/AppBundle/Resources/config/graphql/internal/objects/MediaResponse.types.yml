@@ -3,7 +3,7 @@ MediaResponse:
   inherits:
     - InternalResponse
   config:
-    interfaces: 
+    interfaces:
       - InternalResponse
     description: 'A response'
     fields:

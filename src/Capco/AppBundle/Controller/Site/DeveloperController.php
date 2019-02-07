@@ -87,7 +87,6 @@ class DeveloperController extends Controller
             } elseif ($solution instanceof UnionType) {
                 $unions[] = $solution;
             } elseif ($solution instanceof InterfaceType) {
-                dump($solution);
                 $interfaces[] = $solution;
             } elseif ($solution instanceof InputObjectType) {
                 $input_objects[] = $solution;
