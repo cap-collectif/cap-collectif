@@ -12,6 +12,10 @@ services:
     arguments:
       $projectRootDir: '%kernel.project_dir%'
 
+  Capco\AppBundle\Command\CreateCsvFromEventsCommand:
+    arguments:
+      $projectRootDir: '%kernel.project_dir%'
+
   Capco\AppBundle\Command\CreateCsvFromConsultationStepCommand:
     arguments:
       $projectRootDir: '%kernel.project_dir%'
