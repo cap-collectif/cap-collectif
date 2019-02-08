@@ -346,14 +346,24 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             <br />
           </span>
         </p>
-        <p
-          className="mb-25"
-        >
-          <FormattedHTMLMessage
-            id="results-not-available"
-            values={Object {}}
-          />
-        </p>
+        <ForwardRef(Relay(QuestionnaireAdminResultsText))
+          simpleQuestion={
+            Object {
+              "$fragmentRefs": null,
+              "__typename": "SimpleQuestion",
+              "participants": Object {
+                "totalCount": 4,
+              },
+              "private": false,
+              "required": false,
+              "responses": Object {
+                "totalCount": 4,
+              },
+              "title": "question type text",
+              "type": "text",
+            }
+          }
+        />
       </PrivateBox>
     </div>
     <div
