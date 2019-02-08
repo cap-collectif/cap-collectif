@@ -2321,7 +2321,7 @@ type MediaQuestion implements Question {
     last: Int
   ): ParticipantConnection!
 
-  # Return users who answered the question
+  # Return responses of participants
   responses(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -2381,7 +2381,7 @@ type MultipleChoiceQuestion implements Question {
     last: Int
   ): ParticipantConnection!
 
-  # Return users who answered the question
+  # Return responses of participants
   responses(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -4192,7 +4192,7 @@ interface Question {
     last: Int
   ): ParticipantConnection!
 
-  # Return users who answered the question
+  # Return responses of participants
   responses(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -4952,7 +4952,7 @@ type SectionQuestion implements Question {
     last: Int
   ): ParticipantConnection!
 
-  # Return users who answered the question
+  # Return responses of participants
   responses(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -5190,7 +5190,7 @@ type SimpleQuestion implements Question {
     last: Int
   ): ParticipantConnection!
 
-  # Return users who answered the question
+  # Return responses of participants
   responses(
     # Returns the elements in the list that come after the specified cursor.
     after: String

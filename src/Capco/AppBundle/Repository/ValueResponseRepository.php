@@ -1,9 +1,11 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ValueResponseRepository extends EntityRepository
 {
@@ -14,6 +16,7 @@ class ValueResponseRepository extends EntityRepository
             ->leftJoin('r.question', 'question')
             ->andWhere('question.id = :question')
             ->setParameter('question', $question);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -24,15 +27,32 @@ class ValueResponseRepository extends EntityRepository
             ->leftJoin('r.question', 'question')
             ->andWhere('question.id = :question')
             ->setParameter('question', $question);
+
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getAllByQuestion(AbstractQuestion $question, $limit = 32, $offset = 0)
+    {
+        $qb = $this->getNoEmptyResultQueryBuilder()
+            ->leftJoin('r.question', 'question')
+            ->andWhere('question.id = :question')
+            ->setParameter('question', $question);
+
+        $query = $qb
+            ->getQuery()
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->useQueryCache(true); // ->useResultCache(true, 60)
+
+        return new Paginator($query);
     }
 
     private function getNoEmptyResultQueryBuilder(): QueryBuilder
     {
         return // Some fixes until we use a proper JSON query
+            // TODO: This only works for question on a reply
+            // We must support responses on a proposal/other object
             $this->createQueryBuilder('r')
-                // TODO: This only works for question on a reply
-                // We must support responses on a proposal/other object
                 ->leftJoin('r.reply', 'reply')
                 ->andWhere('reply.draft = false')
                 ->andWhere('r.value IS NOT NULL')
