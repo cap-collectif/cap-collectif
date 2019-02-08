@@ -23,6 +23,7 @@ class MediaQuestionType extends AbstractType
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
         $builder->add('type', IntegerType::class);
+        $builder->add('resultOpen', CheckboxType::class);
         $builder->add('jumps', CollectionType::class, [
             'allow_add' => true,
             'allow_delete' => true,

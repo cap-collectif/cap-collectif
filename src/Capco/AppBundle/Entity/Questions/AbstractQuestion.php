@@ -57,6 +57,14 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         self::QUESTION_TYPE_NUMBER => 'number',
     ];
 
+    public static $questionTypeFree = [
+        self::QUESTION_TYPE_EDITOR,
+        self::QUESTION_TYPE_MEDIAS,
+        self::QUESTION_TYPE_NUMBER,
+        self::QUESTION_TYPE_SIMPLE_TEXT,
+        self::QUESTION_TYPE_MULTILINE_TEXT,
+    ];
+
     public static $questionTypesLabels = [];
 
     //field used to the position assignation
@@ -115,6 +123,11 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="question", cascade={"persist", "remove"})
      */
     protected $responses;
+
+    /**
+     * @ORM\Column(name="result_open", type="boolean", nullable=true)
+     */
+    protected $resultOpen;
 
     public function __construct()
     {
@@ -324,4 +337,22 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     {
         return true;
     }
+
+    public function resultOpen(): ?bool
+    {
+        return $this->resultOpen;
+    }
+
+    /**
+     * Result of question can be open only if question is a free question
+     */
+    public function setResultOpen(?bool $resultOpen): self
+    {
+        if ($resultOpen !== null && in_array($this->getType(), static::$questionTypeFree)) {
+            $this->resultOpen = $resultOpen;
+        }
+
+        return $this;
+    }
+
 }

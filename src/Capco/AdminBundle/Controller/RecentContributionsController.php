@@ -1,6 +1,8 @@
 <?php
+
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AdminBundle\Resolver\RecentContributionsResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -87,7 +89,7 @@ class RecentContributionsController extends Controller
      */
     public function unpublishAction(Request $request, $type, $id)
     {
-        $resolver = $this->get('capco_admin.recent_contributions_resolver');
+        $resolver = $this->get(RecentContributionsResolver::class);
         $em = $this->get('doctrine')->getManager();
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 
@@ -132,7 +134,7 @@ class RecentContributionsController extends Controller
      */
     public function trashAction(Request $request, $type, $id)
     {
-        $resolver = $this->get('capco_admin.recent_contributions_resolver');
+        $resolver = $this->get(RecentContributionsResolver::class);
         $em = $this->get('doctrine')->getManager();
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 

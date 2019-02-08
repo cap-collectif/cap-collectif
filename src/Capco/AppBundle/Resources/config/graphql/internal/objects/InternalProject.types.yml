@@ -58,9 +58,6 @@ InternalProject:
         type: 'GroupConnection'
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", [value, args])'
-      districts:
-        type: '[ProjectDistrict]'
-        description: 'The district of the project'
       comments:
         description: 'The comments related to the project.'
         type: 'CommentConnection!'

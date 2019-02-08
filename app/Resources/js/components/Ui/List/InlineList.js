@@ -6,7 +6,9 @@ type Props = {
   separator?: string,
 };
 
-const InlineList: ComponentType<Props> = styled.ul`
+const InlineList: ComponentType<Props> = styled.ul.attrs({
+  className: 'excerpt',
+})`
   padding: 0;
   margin: 0;
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
@@ -106,6 +107,12 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
      */
     private $proposalForm;
 
+    /**
+     * @var bool
+     * @ORM\Column(name="private_result", type="boolean", nullable=false)
+     */
+    private $privateResult = true;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -134,7 +141,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         }
     }
 
-    public function setDescription(string $description): Questionnaire
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -146,7 +153,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         return $this->description;
     }
 
-    public function setType(string $type): Questionnaire
+    public function setType(string $type): self
     {
         $this->type = $type;
 
@@ -449,6 +456,18 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     public function setPhoneConfirmation(bool $phoneConfirmation): self
     {
         $this->phoneConfirmation = $phoneConfirmation;
+
+        return $this;
+    }
+
+    public function isPrivateResult(): bool
+    {
+        return $this->privateResult;
+    }
+
+    public function setPrivateResult(bool $privateResult): self
+    {
+        $this->privateResult = $privateResult;
 
         return $this;
     }
