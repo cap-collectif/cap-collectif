@@ -204,7 +204,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         alert: { bsStyle: 'success', content: 'proposal.create.redirecting' },
       });
 
-      const TIMEOUT_BEFORE_REDIRECTION = 2000; // 2s
+      const TIMEOUT_BEFORE_REDIRECTION = 5000; // 5s
       // We may have some MySQL replication latency
       // That's why it's better to wait a bit
       // before redirecting, to avoid 404s…
