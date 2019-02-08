@@ -7,21 +7,21 @@ use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\AppBundle\Repository\SourceRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 
 class StepContributionsDataLoader extends BatchDataLoader
 {
@@ -29,7 +29,7 @@ class StepContributionsDataLoader extends BatchDataLoader
     protected $sourceRepository;
     protected $argumentRepository;
     protected $opinionVersionRepository;
-    protected $proposalRepository;
+    protected $proposalCountResolver;
     protected $proposalCollectVoteRepository;
     protected $replyRepository;
 
@@ -43,7 +43,7 @@ class StepContributionsDataLoader extends BatchDataLoader
         SourceRepository $sourceRepository,
         ArgumentRepository $argumentRepository,
         OpinionVersionRepository $opinionVersionRepository,
-        ProposalRepository $proposalRepository,
+        CollectStepProposalCountResolver $proposalCountResolver,
         ReplyRepository $replyRepository,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         bool $debug,
@@ -54,7 +54,7 @@ class StepContributionsDataLoader extends BatchDataLoader
         $this->sourceRepository = $sourceRepository;
         $this->argumentRepository = $argumentRepository;
         $this->opinionVersionRepository = $opinionVersionRepository;
-        $this->proposalRepository = $proposalRepository;
+        $this->proposalCountResolver = $proposalCountResolver;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->replyRepository = $replyRepository;
         parent::__construct(
@@ -112,14 +112,15 @@ class StepContributionsDataLoader extends BatchDataLoader
             $totalCount += $this->sourceRepository->countPublishedSourcesByStep($step);
             $totalCount += $this->sourceRepository->countTrashedSourcesByStep($step);
         } elseif ($step instanceof CollectStep) {
-            $totalCount += $this->proposalRepository->countPublishedProposalByStep($step);
+            $totalCount += $this->proposalCountResolver->__invoke($step);
             // We do not account votes as a contribution, maybe this will change
             // $totalCount += $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
             //     $step
             // );
         } elseif ($step instanceof QuestionnaireStep) {
-            $totalCount += $this->replyRepository->countRepliesByStep($step);
+            $totalCount += $step->getRepliesCount();
         }
+
         $paginator = new Paginator(function (int $offset, int $limit) {
             return [];
         });

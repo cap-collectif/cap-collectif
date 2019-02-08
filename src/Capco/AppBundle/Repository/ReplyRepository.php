@@ -71,7 +71,9 @@ class ReplyRepository extends EntityRepository
             ->setMaxResults($limit)
             ->setFirstResult($offset);
 
-        return new Paginator($qb);
+        // We don't need to $fetchJoinCollection here
+        // this impact performance a lot.
+        return new Paginator($qb, false);
     }
 
     public function findAllByAuthor(User $user): array

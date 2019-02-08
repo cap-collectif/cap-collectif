@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotesResolver;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireRepliesResolver;
 
 class RecalculateCountersCommand extends ContainerAwareCommand
 {
@@ -36,6 +37,9 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $this->entityManager = $container->get('doctrine')->getManager();
         $contributionResolver = $container->get(ContributionResolver::class);
+
+        $repliesResolver = $container->get(QuestionnaireRepliesResolver::class);
+
         $this->force = $input->getOption('force');
 
         $projectVotesResolver = $container->get(ProjectVotesResolver::class);
@@ -340,19 +344,25 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         // ****************************** Questionnaire step counters **************************************
 
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Steps\QuestionnaireStep qs set qs.repliesCount = (
-          select count(DISTINCT r.id)
-          from CapcoAppBundle:Reply r INNER JOIN CapcoAppBundle:Questionnaire q WITH r.questionnaire = q
-          where q.step = qs AND r.published = 1 AND r.draft = 0 group by q.step
-        )'
-        );
-
         $questionnaireSteps = $this->entityManager
             ->getRepository('CapcoAppBundle:Steps\QuestionnaireStep')
             ->findAll();
+
         foreach ($questionnaireSteps as $qs) {
             if ($qs->isOpen() || $this->force) {
+                if ($qs->getQuestionnaire()) {
+                    $repliesCount = $repliesResolver->calculateTotalCount($qs->getQuestionnaire());
+                    $this->executeQuery(
+                        'UPDATE CapcoAppBundle:Steps\QuestionnaireStep qs
+                        set qs.repliesCount = ' .
+                            $repliesCount .
+                            '
+                        where qs.id = \'' .
+                            $qs->getId() .
+                            '\''
+                    );
+                }
+
                 $participants = $contributionResolver->countStepContributors($qs);
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\QuestionnaireStep qs

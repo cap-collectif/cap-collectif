@@ -20,7 +20,10 @@ class QuestionnaireRepliesResolver implements ResolverInterface
 
     public function __invoke(Questionnaire $questionnaire, Arg $args): Connection
     {
-        $totalCount = $this->replyRepository->countPublishedForQuestionnaire($questionnaire);
+        $totalCount = 0;
+        if ($questionnaire->getStep()) {
+            $totalCount = $questionnaire->getStep()->getRepliesCount();
+        }
 
         $paginator = new Paginator(function (int $offset, int $limit) use ($questionnaire) {
             return $this->replyRepository
@@ -30,5 +33,10 @@ class QuestionnaireRepliesResolver implements ResolverInterface
         });
 
         return $paginator->auto($args, $totalCount);
+    }
+
+    public function calculateTotalCount(Questionnaire $questionnaire): int
+    {
+        return $this->replyRepository->countPublishedForQuestionnaire($questionnaire);
     }
 }

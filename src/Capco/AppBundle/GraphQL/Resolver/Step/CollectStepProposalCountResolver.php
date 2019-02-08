@@ -4,8 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 
 // This is a helper not a pure GraphQL resolver
@@ -13,13 +14,16 @@ class CollectStepProposalCountResolver implements ResolverInterface
 {
     private $dataLoader;
     private $adapter;
+    private $proposalRepo;
 
     public function __construct(
         PromiseAdapterInterface $adapter,
-        ProposalFormProposalsDataLoader $dataLoader
+        ProposalFormProposalsDataLoader $dataLoader,
+        ProposalRepository $proposalRepo
     ) {
         $this->dataLoader = $dataLoader;
         $this->adapter = $adapter;
+        $this->proposalRepo = $proposalRepo;
     }
 
     public function __invoke(CollectStep $step): int
@@ -45,5 +49,11 @@ class CollectStepProposalCountResolver implements ResolverInterface
         }
 
         return $count;
+    }
+
+    // TODO not used for now
+    private function resolveWithMySQL(CollectStep $step): int
+    {
+        $this->proposalRepo->countPublishedProposalByStep($step);
     }
 }

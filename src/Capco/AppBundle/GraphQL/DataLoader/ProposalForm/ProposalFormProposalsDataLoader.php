@@ -20,6 +20,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 class ProposalFormProposalsDataLoader extends BatchDataLoader
 {
     public const FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR = 10;
+    public const CACHE_TIME_FUSION_COUNT = 480;
+
     private $proposalRepo;
     private $proposalSearch;
 
@@ -265,7 +267,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         );
         if (!$cacheItem->isHit()) {
             $value = $this->proposalRepo->countFusionsByProposalForm($form);
-            $cacheItem->set($value)->expiresAfter(120);
+            $cacheItem->set($value)->expiresAfter(self::CACHE_TIME_FUSION_COUNT);
             $this->cache->save($cacheItem);
         }
 
