@@ -1,47 +1,28 @@
 // @flow
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-type Props = {};
+const TIME_BEFORE_HIDE_MESSAGE = 10000;
 
-type State = {
-  showSucceededMessage: boolean,
-};
+export default function AlertFormSucceededMessage() {
+  const [showSucceededMessage, setShowSucceededMessage] = useState(true);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowSucceededMessage(false);
+    }, TIME_BEFORE_HIDE_MESSAGE);
 
-export class AlertFormSucceededMessage extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      showSucceededMessage: true,
+    return () => {
+      clearTimeout(timeout);
     };
-  }
+  });
 
-  componentDidMount() {
-    this.showDelayMessage();
-  }
-
-  showDelayMessage() {
-    setTimeout(() => {
-      this.setState({
-        showSucceededMessage: false,
-      });
-    }, 10000);
-  }
-
-  render() {
-    const { showSucceededMessage } = this.state;
-
-    if (showSucceededMessage) {
-      return (
-        <div className="alert__form_succeeded-message">
-          <i className="cap cap-android-checkmark-circle" /> <FormattedMessage id="global.saved" />
-        </div>
-      );
-    }
-
+  if (!showSucceededMessage) {
     return null;
   }
-}
 
-export default AlertFormSucceededMessage;
+  return (
+    <div className="alert__form_succeeded-message">
+      <i className="cap cap-android-checkmark-circle" /> <FormattedMessage id="global.saved" />
+    </div>
+  );
+}
