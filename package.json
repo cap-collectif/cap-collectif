@@ -106,7 +106,7 @@
     },
     {
       "path": "./web/js/app.js",
-      "maxSize": "1100 KB"
+      "maxSize": "1140 KB"
     },
     {
       "path": "./web/js/vendor.js",
@@ -241,7 +241,7 @@
     "react-relay": "^1.6.0",
     "react-router": "3.2.0",
     "react-router-bootstrap": "rr-v3",
-    "react-select": "1.2.1",
+    "react-select": "^2.3.0",
     "react-toggle": "^4.0.1",
     "react-treebeard": "https://github.com/cap-collectif/react-treebeard/tarball/e4161ce74943dad35d3616196396eb6a624796eb",
     "react-truncate": "^2.1.5",

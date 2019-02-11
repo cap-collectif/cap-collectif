@@ -10,6 +10,7 @@ export type State = {
   +projectTypes: Array<Object>,
   +limit: ?number,
   +orderBy: string,
+  +filters: Object,
   +term: ?string,
   +status: ?string,
   +isLoading: boolean,
@@ -25,6 +26,7 @@ const initialState: State = {
   projectTypes: [],
   limit: null,
   orderBy: 'LATEST',
+  filters: {},
   term: null,
   status: null,
   isLoading: true,
@@ -56,7 +58,8 @@ export type ProjectAction =
   | ChangeProjectTermAction
   | CloseConsultationPlanAction
   | OpenConsultationPlanAction
-  | ChangeConsultationPlanActiveItemsAction;
+  | ChangeConsultationPlanActiveItemsAction
+  | { type: 'project/CHANGE_FILTER', filter: string, value: string };
 
 export const changeOrderBy = (orderBy: string): ChangeOrderByAction => ({
   type: 'project/CHANGE_ORDER_BY',
@@ -89,6 +92,10 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
+    case 'project/CHANGE_FILTER': {
+      const filters = { ...state.filters, [action.filter]: action.value };
+      return { ...state, filters };
+    }
     case 'project/CHANGE_ORDER_BY':
       return { ...state, orderBy: action.orderBy };
     case 'project/CHANGE_TERM':

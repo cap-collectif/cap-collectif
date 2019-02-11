@@ -74,8 +74,25 @@ const onSubmit = (values: FormValues, dispatch: Dispatch) =>
     });
 
 export class ProposalFusionForm extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+
+  handleChange = () => {
+    const { onProjectChange } = this.props;
+
+    onProjectChange(formName, 'fromProposals', []);
+    if (this.myRef.current) {
+      this.myRef.current.getRenderedComponent().clearValues();
+    }
+  };
+
+  myRef: any;
+
   render() {
-    const { currentCollectStep, projects, onProjectChange, intl } = this.props;
+    const { currentCollectStep, projects, intl } = this.props;
+
     return (
       <form>
         <Field
@@ -86,7 +103,7 @@ export class ProposalFusionForm extends React.Component<Props> {
           isLoading={projects.length === 0}
           component={select}
           clearable={false}
-          onChange={() => onProjectChange(formName, 'fromProposals', [])}
+          onChange={this.handleChange}
           options={projects.map(p => ({ value: p.id, label: p.title }))}
         />
         {currentCollectStep && (
@@ -94,25 +111,31 @@ export class ProposalFusionForm extends React.Component<Props> {
             name="fromProposals"
             id="ProposalFusionForm-fromProposals"
             multi
+            ref={this.myRef}
+            withRef
             label={intl.formatMessage({ id: 'initial-proposals' })}
             autoload
             help={intl.formatMessage({ id: '2-proposals-minimum' })}
             placeholder={intl.formatMessage({ id: 'select-proposals' })}
             component={select}
-            filterOptions={(options, filter, currentValues) =>
-              options
-                .filter(o => o.stepId === currentCollectStep.id) // If step has changed, we hide previous steps
-                .filter(o => !currentValues.includes(o))
-            }
+            filterOption={option => {
+              if (option && option.data.stepId === currentCollectStep.id) {
+                return true;
+              }
+
+              return false;
+            }}
             loadOptions={input =>
               fetchQuery(environment, query, { term: input, stepId: currentCollectStep.id }).then(
-                res => ({
-                  options: res.step.proposals.edges.map(edge => ({
+                res => {
+                  const options = res.step.proposals.edges.map(edge => ({
                     value: edge.node.id,
                     label: edge.node.title,
                     stepId: currentCollectStep.id,
-                  })),
-                }),
+                  }));
+
+                  return options;
+                },
               )
             }
           />
@@ -146,6 +169,7 @@ const getCurrentCollectStep = (state: State): ?Object => {
 const mapStateToProps = (state: State) => ({
   projects: getBudgetProjects(state.project.projectsById),
   currentCollectStep: getCurrentCollectStep(state),
+  currentProjectId: getSelectedProjectId(state),
 });
 
 const form = reduxForm({

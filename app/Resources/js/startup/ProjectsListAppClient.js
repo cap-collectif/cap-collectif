@@ -5,11 +5,11 @@ import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
 import ProjectsList from '../components/Project/List/ProjectsList';
 
-type Props = {|
-  limit?: number,
-  paginate?: boolean,
-  themeId?: string,
-|};
+type Props = {
+  limit?: ?number,
+  paginate?: ?boolean,
+  themeId?: ?string,
+};
 
 export default (props: Props) => (
   <Provider store={ReactOnRails.getStore('appStore')}>

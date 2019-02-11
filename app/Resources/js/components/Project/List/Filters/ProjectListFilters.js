@@ -80,27 +80,9 @@ const mapStateToProps = (state: GlobalState) => ({
   status: selector(state, 'status'),
 });
 
-type FormValues = {|
-  +author: ?string,
-  +theme: ?string,
-  +type: ?string,
-  +status: ?string,
-|};
-
-export const getInitialValues = (): FormValues => {
-  const urlSearch = new URLSearchParams(window.location.search);
-  return {
-    status: urlSearch.get('status') || null,
-    type: urlSearch.get('type') || null,
-    author: urlSearch.get('author') || null,
-    theme: urlSearch.get('theme') || null,
-  };
-};
-
 const form = reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  initialValues: getInitialValues(),
 })(ProjectListFilters);
 
 export default connect(mapStateToProps)(form);
