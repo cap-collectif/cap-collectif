@@ -1,48 +1,125 @@
 // @flow
 import * as React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { ListGroupItem } from 'react-bootstrap';
+import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
+import { ListGroupItem, Button } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import ListGroupFlush from '../Ui/List/ListGroupFlush';
 import type { QuestionnaireAdminResultsText_simpleQuestion } from './__generated__/QuestionnaireAdminResultsText_simpleQuestion.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
+import Loader from '../Ui/FeedbacksIndicators/Loader';
+
+const RESPONSE_PAGINATION = 5;
 
 type Props = {
+  relay: RelayPaginationProp,
   simpleQuestion: QuestionnaireAdminResultsText_simpleQuestion,
 };
 
-export class QuestionnaireAdminResultsText extends React.Component<Props> {
-  render() {
-    const { simpleQuestion } = this.props;
+type State = {
+  loading: boolean,
+};
 
-    return (
-      <ListGroupFlush>
-        {simpleQuestion.responses &&
-          simpleQuestion.responses.edges &&
-          simpleQuestion.responses.edges.map(response => (
-            <ListGroupItem>
-              <WYSIWYGRender value={response && response.node && response.node.value} />
-            </ListGroupItem>
-          ))}
-      </ListGroupFlush>
-    );
+export class QuestionnaireAdminResultsText extends React.Component<Props, State> {
+  state = {
+    loading: false,
+  };
+
+  handleLoadMore = () => {
+    this.setState({ loading: true });
+    this.props.relay.loadMore(RESPONSE_PAGINATION, () => {
+      this.setState({ loading: false });
+    });
+  };
+  render() {
+
+    const { relay, simpleQuestion } = this.props;
+    const { loading } = this.state;
+
+    if(simpleQuestion.responses && simpleQuestion.responses.edges) {
+      return (
+        <div className="mb-20">
+          <ListGroupFlush striped>
+            {simpleQuestion.responses.edges.map((response, key) => (
+                <ListGroupItem key={key}>
+                  <WYSIWYGRender value={response && response.node && response.node.value} />
+                </ListGroupItem>
+              ))}
+              {relay.hasMore() && (
+                <div style={{ textAlign: 'center', width: '100%' }}>
+                  {this.state.loading ? (
+                    <Loader />
+                  ) : (
+                    <Button bsStyle="link" onClick={this.handleLoadMore}>
+                      <FormattedMessage id="global.more" />
+                    </Button>
+                  )}
+                </div>
+              )}
+          </ListGroupFlush>
+        </div>
+      );
+    }
+    
+    return null;
   }
 }
 
-export default createFragmentContainer(QuestionnaireAdminResultsText, {
-  simpleQuestion: graphql`
-    fragment QuestionnaireAdminResultsText_simpleQuestion on SimpleQuestion {
-      title
-      responses {
-        totalCount
-        edges {
-          node {
-            id
-            ... on ValueResponse {
-              value
+export default createPaginationContainer(
+  QuestionnaireAdminResultsText, 
+  {
+    simpleQuestion: graphql`
+      fragment QuestionnaireAdminResultsText_simpleQuestion on SimpleQuestion 
+      @argumentDefinitions(
+        count: { type: "Int", defaultValue: 5 }
+        cursor: { type: "String", defaultValue: null }
+      ) {
+        id
+        responses (
+          first: $count
+          after: $cursor
+        ) @connection(key: "QuestionnaireAdminResultsText__responses", filters: []) {
+            edges {
+              node {
+                id
+                ... on ValueResponse {
+                  value
+                }
+              }
+            }
+            pageInfo {
+              hasPreviousPage
+              hasNextPage
+              startCursor
+              endCursor
             }
           }
+      }
+    `,
+  },
+  {
+    direction: 'forward',
+    getConnectionFromProps(props: Props) {
+      return props.simpleQuestion && props.simpleQuestion.responses;
+    },
+    getFragmentVariables(prevVars) {
+      return {
+        ...prevVars,
+      };
+    },
+    getVariables(props: Props, { count, cursor }, fragmentVariables) {
+      return {
+        ...fragmentVariables,
+        count,
+        cursor,
+        questionId: props.simpleQuestion.id
+      };
+    },
+    query: graphql`
+      query QuestionnaireAdminResultsTextQuery($questionId: ID!, $cursor: String, $count: Int) {
+        simpleQuestion: node(id: $questionId) {
+          ...QuestionnaireAdminResultsText_simpleQuestion @arguments(count: $count, cursor: $cursor)
         }
       }
-    }
-  `,
-});
+    `,
+  },
+);
