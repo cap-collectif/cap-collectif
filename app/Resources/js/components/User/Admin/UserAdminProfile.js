@@ -67,7 +67,7 @@ const validate = (values: Object) => {
     if ((value === 'userType' && !values[value]) || (values[value] && values[value].length === 0)) {
       values[value] = null;
     }
-    if (values[value] && values[value].length <= 2) {
+    if (values[value] && values[value].length < 2) {
       errors[value] = 'two-characters-minimum-required';
     }
     if (value !== 'biography') {
