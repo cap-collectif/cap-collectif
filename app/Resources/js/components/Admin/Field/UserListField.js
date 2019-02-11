@@ -54,22 +54,22 @@ export default class UserListField extends React.Component<Props> {
         return fetchQuery(environment, getUsersListWithoutIds, {
           notInIds: usersIds,
           displayName: terms,
-        }).then(data =>
-          data.userSearch.map(u => ({
+        }).then(data => ({
+          options: data.userSearch.map(u => ({
             value: u.id,
             label: u.displayName,
           })),
-        );
+        }));
       }
 
       return fetchQuery(environment, getUsersList, {
         displayName: terms,
-      }).then(data =>
-        data.userSearch.map(u => ({
+      }).then(data => ({
+        options: data.userSearch.map(u => ({
           value: u.id,
           label: u.displayName,
         })),
-      );
+      }));
     };
 
     return (

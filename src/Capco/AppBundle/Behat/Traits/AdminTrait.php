@@ -33,7 +33,7 @@ trait AdminTrait
         // Select a project
         $this->getSession()
             ->getPage()
-            ->find('css', '#ProposalFusionForm-project .react-select__input input')
+            ->find('css', '#ProposalFusionForm-project .Select-input input')
             ->setValue('7');
         $this->iWait(3);
         // Select 2 distinct proposals from the project
@@ -45,7 +45,7 @@ trait AdminTrait
                 ->click();
             $searchInput = $this->getSession()
                 ->getPage()
-                ->find('css', '#ProposalFusionForm-fromProposals .react-select__input input');
+                ->find('css', '#ProposalFusionForm-fromProposals .Select-input input');
             $searchInput->setValue($search);
             $this->getSession()
                 ->getPage()
@@ -54,14 +54,9 @@ trait AdminTrait
             $this->iWait(3);
             $option = $this->getSession()
                 ->getPage()
-                ->find(
-                    'css',
-                    '#ProposalFusionForm-fromProposals .react-select__menu-list .react-select__option:first-child'
-                );
+                ->find('css', '#ProposalFusionForm-fromProposals .Select-option[id*="-option-1"]');
             if ($option) {
                 $option->click();
-            } else {
-                throw new \Exception('Could not find option');
             }
             $this->iWait(2);
         }

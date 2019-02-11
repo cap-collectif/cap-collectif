@@ -4,19 +4,15 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { type FormProps, reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { fetchQuery } from 'relay-runtime';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import AlertForm from '../../Alert/AlertForm';
 import ChangeProposalEvaluersMutation from '../../../mutations/ChangeProposalEvaluersMutation';
 import select from '../../Form/Select';
-import environment from '../../../createRelayEnvironment';
+import Fetcher from '../../../services/Fetcher';
 import type { ProposalAdminEvaluersForm_proposal } from './__generated__/ProposalAdminEvaluersForm_proposal.graphql';
-import type { Dispatch, GlobalState } from '../../../types';
+import type { Dispatch, State } from '../../../types';
 
 type FormValues = {| evaluers: Array<{ value: string }> |};
-
-type State = { evaluersOptions: Array<Object> };
-
 type RelayProps = {| proposal: ProposalAdminEvaluersForm_proposal |};
 type Props = {|
   ...RelayProps,
@@ -35,33 +31,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) =>
     },
   });
 
-const evaluersQuery = graphql`
-  query ProposalAdminEvaluersFormQuery {
-    groups {
-      id
-      title
-    }
-  }
-`;
-
-export class ProposalAdminEvaluersForm extends React.Component<Props, State> {
-  state = {
-    evaluersOptions: [],
-  };
-
-  componentDidMount() {
-    fetchQuery(environment, evaluersQuery)
-      .then(response =>
-        response.groups.map(group => ({
-          value: group.id,
-          label: group.title,
-        })),
-      )
-      .then(evaluersOptions => {
-        this.setState({ evaluersOptions });
-      });
-  }
-
+export class ProposalAdminEvaluersForm extends React.Component<Props> {
   render() {
     const {
       invalid,
@@ -73,8 +43,6 @@ export class ProposalAdminEvaluersForm extends React.Component<Props, State> {
       submitting,
       intl,
     } = this.props;
-    const { evaluersOptions } = this.state;
-
     return (
       <div>
         <div>
@@ -96,11 +64,28 @@ export class ProposalAdminEvaluersForm extends React.Component<Props, State> {
               id="evaluers"
               label="Groupes"
               labelClassName="control-label"
+              inputClassName="fake-inputClassName"
               multi
               placeholder={intl.formatMessage({ id: 'proposal.analysts.form.placeholder' })}
               component={select}
               clearable={false}
-              options={evaluersOptions}
+              loadOptions={() =>
+                Fetcher.graphql({
+                  query: `
+                        query {
+                          groups {
+                            id
+                            title
+                          }
+                        }
+                      `,
+                }).then(response => ({
+                  options: response.data.groups.map(group => ({
+                    value: group.id,
+                    label: group.title,
+                  })),
+                }))
+              }
             />
             <ButtonToolbar className="box-content__toolbar">
               <Button
@@ -132,7 +117,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalAdminEvaluersForm);
 
-const mapStateToProps = (state: GlobalState, props: RelayProps) => ({
+const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: {
     evaluers: props.proposal.evaluers.map(u => ({
       value: u.id,
