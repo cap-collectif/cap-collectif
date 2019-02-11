@@ -10,6 +10,7 @@ use Elastica\Query;
 use Elastica\Query\Range;
 use Elastica\Query\Term;
 use Elastica\Result;
+use Elastica\ResultSet;
 
 class UserSearch extends Search
 {
@@ -41,13 +42,14 @@ class UserSearch extends Search
         }
 
         $resultSet = $this->index->getType($this->type)->search($query);
+        $users = $this->getHydratedResultsFromResultSet($resultSet);
 
         if ($onlyUsers) {
-            return $this->getHydratedResults($resultSet->getResults());
+            return $users;
         }
 
         return [
-            'users' => $this->getHydratedResults($resultSet->getResults()),
+            'users' => $users,
             'count' => $resultSet->getTotalHits(),
         ];
     }
@@ -79,14 +81,11 @@ class UserSearch extends Search
             ->setSource(['id'])
             ->setFrom($offset)
             ->setSize($limit);
-        $resultSet = $this->index->getType('user')->search($query);
-
-        $ids = array_map(function (Result $result) {
-            return $result->getData()['id'];
-        }, $resultSet->getResults());
+        $resultSet = $this->index->getType($this->type)->search($query);
+        $users = $this->getHydratedResultsFromResultSet($resultSet);
 
         return [
-            'results' => $this->getHydratedResults($ids),
+            'results' => $users,
             'totalCount' => $resultSet->getTotalHits(),
         ];
     }
@@ -116,16 +115,23 @@ class UserSearch extends Search
             ->setSource(['id'])
             ->setFrom($offset)
             ->setSize($limit);
-        $resultSet = $this->index->getType('user')->search($query);
 
+        $resultSet = $this->index->getType($this->type)->search($query);
+        $users = $this->getHydratedResultsFromResultSet($resultSet);
+
+        return [
+            'results' => $users,
+            'totalCount' => $resultSet->getTotalHits(),
+        ];
+    }
+
+    private function getHydratedResultsFromResultSet(ResultSet $resultSet): array
+    {
         $ids = array_map(function (Result $result) {
             return $result->getData()['id'];
         }, $resultSet->getResults());
 
-        return [
-            'results' => $this->getHydratedResults($ids),
-            'totalCount' => $resultSet->getTotalHits(),
-        ];
+        return $this->getHydratedResults($ids);
     }
 
     private function getHydratedResults(array $ids): array
