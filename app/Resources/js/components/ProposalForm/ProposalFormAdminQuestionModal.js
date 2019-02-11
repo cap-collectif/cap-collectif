@@ -31,6 +31,7 @@ type Props = {
 } & ParentProps;
 
 const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
+const freeAnswerQuestions = ['text', 'textarea', 'editor', 'number', 'medias'];
 
 export class ProposalFormAdminQuestionModal extends React.Component<Props> {
   render() {
@@ -128,6 +129,9 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
               <option value="number">
                 {intl.formatMessage({ id: 'admin.fields.validation_rule.number' })}
               </option>
+              <option value="medias">
+                {intl.formatMessage({ id: 'global.question.types.medias' })}
+              </option>
             </optgroup>
             <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_unique' })}>
               <option value="button">{intl.formatMessage({ id: 'question.types.button' })}</option>
@@ -146,16 +150,11 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                 {intl.formatMessage({ id: 'global.question.types.ranking' })}
               </option>
             </optgroup>
-            <optgroup label={intl.formatMessage({ id: 'global.question.types.other' })}>
-              <option value="medias">
-                {intl.formatMessage({ id: 'global.question.types.medias' })}
-              </option>
-            </optgroup>
           </Field>
           {multipleChoiceQuestions.indexOf(type) !== -1 && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
-                <FormattedMessage id="admin.fields.question.group_question_choices" />
+                <FormattedMessage id="admin.fields.reply.group_responses" />
               </h4>
               <FieldArray
                 name={`${member}.choices`}
@@ -180,29 +179,33 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
               {!currentQuestion.id && type !== 'ranking' && (
                 <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
               )}
+            </div>
+            )}
               <h4 style={{ fontWeight: 'bold' }}>
                 <span>
-                  <FormattedMessage id="group.admin.parameters" />
+                  <FormattedMessage id="proposal_form.admin.settings.options" />
                 </span>
               </h4>
-              <Field
-                id={`${member}.randomQuestionChoices`}
-                name={`${member}.randomQuestionChoices`}
-                type="checkbox"
-                normalize={val => !!val}
-                children={<FormattedMessage id="admin.fields.question.random_question_choices" />}
-                component={component}
-              />
-              <Field
-                id={`${member}.isOtherAllowed`}
-                name={`${member}.isOtherAllowed`}
-                type="checkbox"
-                normalize={val => !!val}
-                children={<FormattedMessage id="admin.fields.question.other_allowed" />}
-                component={component}
-              />
-            </div>
-          )}
+            {multipleChoiceQuestions.indexOf(type) !== -1 && (
+              <div>
+                <Field
+                  id={`${member}.randomQuestionChoices`}
+                  name={`${member}.randomQuestionChoices`}
+                  type="checkbox"
+                  normalize={val => !!val}
+                  children={<FormattedMessage id="admin.fields.question.random_question_choices" />}
+                  component={component}
+                />
+                <Field
+                  id={`${member}.isOtherAllowed`}
+                  name={`${member}.isOtherAllowed`}
+                  type="checkbox"
+                  normalize={val => !!val}
+                  children={<FormattedMessage id="admin.fields.question.other_allowed" />}
+                  component={component}
+                />
+              </div>
+            )}
           <Field
             id={`${member}.required`}
             name={`${member}.required`}
@@ -212,13 +215,25 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
             component={component}
           />
           <Field
-            children="Visible uniquement par l'utilisateur et l'administrateur"
+            children={<FormattedMessage id="admin.fields.question.private"/>}
             id={`${member}.private`}
             normalize={val => !!val}
             name={`${member}.private`}
             type="checkbox"
             component={component}
           />
+          {freeAnswerQuestions.indexOf(type) !== -1 && (
+            <div>
+              <Field
+                children={<FormattedMessage id="published-results"/>}
+                id={`${member}.resultOpen`}
+                normalize={val => !!val}
+                name={`${member}.resultOpen`}
+                type="checkbox"
+                component={component}
+              />
+            </div>
+          )}
           {multipleChoiceQuestions.indexOf(type) !== -1 && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>

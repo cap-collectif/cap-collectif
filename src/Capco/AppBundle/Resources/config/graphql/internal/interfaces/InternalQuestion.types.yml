@@ -57,3 +57,6 @@ InternalQuestion:
       jumps:
         description: 'The associated logic jumps to this question.'
         type: '[LogicJump]'
+      resultOpen:
+        description: 'If question type is "free" the result of question can be private to the user and admin'
+        type: 'Boolean'

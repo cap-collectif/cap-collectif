@@ -289,7 +289,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
             <FormattedMessage id="question_modal.create.title" />
           </Button>
         </ButtonToolbar>
-        <FlashMessages style={{ marginTop: '15px' }} success={flashMessages} />
+        <FlashMessages className="mt-15" success={flashMessages} />
       </div>
     );
   }

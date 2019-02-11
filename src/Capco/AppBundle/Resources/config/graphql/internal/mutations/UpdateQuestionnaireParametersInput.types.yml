@@ -13,3 +13,5 @@ UpdateQuestionnaireParametersInput:
         type: 'Boolean'
       phoneConfirmation:
         type: 'Boolean'
+      privateResult:
+        type: 'Boolean'

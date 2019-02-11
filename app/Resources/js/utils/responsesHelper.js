@@ -109,6 +109,67 @@ const QuestionAdminFragment = graphql`
 `;
 
 // eslint-disable-next-line no-unused-vars
+const QuestionnaireQuestionAdminFragment = graphql`
+  fragment responsesHelper_adminQuestionnaireQuestion on Question {
+    id
+    title
+    number
+    private
+    position
+    required
+    helpText
+    jumps {
+      id
+      always
+      origin {
+        id
+      }
+      destination {
+        id
+        title
+        number
+      }
+      conditions {
+        id
+        operator
+        question {
+          id
+          title
+        }
+        ... on MultipleChoiceQuestionLogicJumpCondition {
+          value {
+            id
+            title
+          }
+        }
+      }
+    }
+    description
+    resultOpen
+    type
+    ... on MultipleChoiceQuestion {
+      isOtherAllowed
+      randomQuestionChoices
+      validationRule {
+        type
+        number
+      }
+      choices(allowRandomize: false) {
+        # this is updated
+        id
+        title
+        description
+        color
+        image {
+          id
+          url
+        }
+      }
+    }
+  }
+`;
+
+// eslint-disable-next-line no-unused-vars
 const QuestionFragment = graphql`
   fragment responsesHelper_question on Question {
     id

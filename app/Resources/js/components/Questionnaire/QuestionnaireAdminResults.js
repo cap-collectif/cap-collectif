@@ -145,6 +145,7 @@ export default createFragmentContainer(
         allResponses: responses {
           totalCount
         }
+        resultOpen
         ...QuestionnaireAdminResultsText_simpleQuestion
         ...QuestionnaireAdminResultsMedia_mediaQuestion
         ...QuestionnaireAdminResultsBarChart_multipleChoiceQuestion

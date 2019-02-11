@@ -27,12 +27,29 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { questionnaire } = props;
   values.questionnaireId = questionnaire.id;
   delete values.id;
+
+  const privateResult = values.privateResult === 'private';
+
   return UpdateQuestionnaireParametersMutation.commit({
-    input: values,
+    input: {
+      ...values,
+      privateResult,
+    },
   });
 };
 
-export class QuestionnaireAdminParametersForm extends React.Component<Props> {
+type MyState = {|
+  confidentialityType: string,
+|};
+
+export class QuestionnaireAdminParametersForm extends React.Component<Props, MyState> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      confidentialityType: props.questionnaire.privateResult ? 'private' : 'public',
+    };
+  }
+
   render() {
     const {
       invalid,
@@ -91,6 +108,43 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
               type="checkbox"
               id="questionnaire_sms"
             />
+            <div className="box-header">
+              <h3 className="box-title">
+                <FormattedMessage id="results" />
+              </h3>
+            </div>
+            <Field
+              name="privateResult"
+              component={component}
+              type="radio"
+              id="questionnaire_private"
+              radioChecked={this.state.confidentialityType === 'private'}
+              onChange={() => {
+                this.setState({ confidentialityType: 'private' });
+              }}
+              children={
+                <div>
+                  <i className="cap-lock-2-1 mr-5" />
+                  <FormattedMessage id="private-visibility-private" />
+                </div>
+              }
+            />
+            <Field
+              name="privateResult"
+              component={component}
+              type="radio"
+              radioChecked={this.state.confidentialityType === 'public'}
+              id="questionnaire_public"
+              onChange={() => {
+                this.setState({ confidentialityType: 'public' });
+              }}
+              children={
+                <div>
+                  <i className="cap-chat-security mr-5" />
+                  <FormattedMessage id="persons-with-access-to-the-project" />
+                </div>
+              }
+            />
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}
@@ -131,6 +185,7 @@ const mapStateToProps = (state: State, props: RelayProps) => {
       phoneConfirmation: questionnaire.phoneConfirmation,
       multipleRepliesAllowed: questionnaire.multipleRepliesAllowed,
       acknowledgeReplies: questionnaire.acknowledgeReplies,
+      privateResult: questionnaire.privateResult ? 'private' : 'public',
     },
   };
 };
@@ -146,6 +201,7 @@ export default createFragmentContainer(containerIntl, {
       phoneConfirmation
       multipleRepliesAllowed
       acknowledgeReplies
+      privateResult
     }
   `,
 });
