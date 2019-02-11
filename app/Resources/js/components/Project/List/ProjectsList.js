@@ -7,22 +7,20 @@ import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { ProjectsListQueryResponse } from './__generated__/ProjectsListQuery.graphql';
 import { type GlobalState } from '../../../types';
 import ProjectListView from './ProjectListView';
-import { selector } from './Filters/ProjectListFilters';
+import { getInitialValues } from './Filters/ProjectListFilters';
 
-type Props = {
-  author?: ?string,
+type Props = {|
   orderBy: ?string,
-  type?: ?string,
-  theme?: ?string,
-  status?: ?string,
-  // Used only on /themes page
-  themeId?: ?string,
   term?: ?string,
+  // Used only on /themes page
+  themeId: ?string,
   // Default props not working
   orderBy?: ?string,
-  limit?: ?number,
-  paginate?: ?boolean,
-};
+  // Defined pagination limit
+  limit: number,
+  // Should we allow pagination ?
+  paginate: boolean,
+|};
 
 class ProjectsList extends React.Component<Props> {
   initialRenderVars = {};
@@ -30,19 +28,20 @@ class ProjectsList extends React.Component<Props> {
   static defaultProps = {
     limit: 50,
     paginate: true,
+    themeId: null,
   };
 
   constructor(props: Props) {
     super(props);
     this.initialRenderVars = {
-      author: props.author,
-      theme: props.theme || props.themeId,
+      ...getInitialValues(),
       orderBy: props.orderBy,
-      type: props.type,
-      status: props.status,
       term: props.term,
       limit: props.limit,
     };
+    if (props.themeId) {
+      this.initialRenderVars.theme = props.themeId;
+    }
   }
 
   renderProjectList = ({
@@ -110,9 +109,6 @@ class ProjectsList extends React.Component<Props> {
 
 const mapStateToProps = (state: GlobalState) => ({
   orderBy: state.project.orderBy || 'LATEST',
-  author: selector(state, 'author'),
-  theme: selector(state, 'theme'),
-  type: selector(state, 'type'),
 });
 
 export default connect(mapStateToProps)(ProjectsList);

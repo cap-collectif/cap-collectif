@@ -30,14 +30,6 @@ form {
         }
     }
 
-    .select__clear-zone {
-        color: $dark-gray;
-
-        &:hover {
-            color: $danger-color;
-        }
-    }
-
     .checkbox[disabled="disabled"] {
         label,
         ins {

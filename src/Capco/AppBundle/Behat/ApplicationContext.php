@@ -929,7 +929,7 @@ class ApplicationContext extends UserContext
      */
     public function selectOptionFromReact(string $select, string $option): void
     {
-        $selector = "${select} .react-select__input input";
+        $selector = "${select} .Select-input input";
         $element = $this->getSession()
             ->getPage()
             ->find('css', $selector);

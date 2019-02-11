@@ -31,11 +31,12 @@ exports[`<ProposalAdminEvaluersForm /> render correctly 1`] = `
         clearable={false}
         component={[Function]}
         id="evaluers"
+        inputClassName="fake-inputClassName"
         label="Groupes"
         labelClassName="control-label"
+        loadOptions={[Function]}
         multi={true}
         name="evaluers"
-        options={Array []}
         placeholder="proposal.analysts.form.placeholder"
       />
       <ButtonToolbar
