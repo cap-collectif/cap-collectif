@@ -122,10 +122,11 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props, MyS
               onChange={() => {
                 this.setState({ confidentialityType: 'private' });
               }}
+              label={<FormattedMessage id='access-right'/>}
               children={
                 <div>
                   <i className="cap-lock-2-1 mr-5" />
-                  <FormattedMessage id="private-visibility-private" />
+                  <FormattedMessage id="administrators" />
                 </div>
               }
             />

@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
 import {createFragmentContainer, graphql} from "react-relay";
 import type {QuestionnaireResults_questionnaire} from './__generated__/QuestionnaireResults_questionnaire.graphql'
+import DatesInterval from "../Utils/DatesInterval";
 
 type Props = {
   intl: IntlShape,
@@ -12,12 +13,31 @@ type Props = {
 export class QuestionnaireResults extends React.Component<Props> {
   render() {
     const {questionnaire, intl} = this.props;
+    let totalTotalCount = 0;
+    questionnaire.questions.map(question => {
+      totalTotalCount += question.responses.totalCount;
+    });
+
 
     return (
       <div>
         <h2 className="h2">
-          <FormattedMessage id="results" />
+          <FormattedMessage id="results"/>
         </h2>
+        <div>
+          {totalTotalCount === 0 ? (
+              <FormattedMessage id="no_result"/>
+            ) :
+            <div className="mb-30 project__step-dates">
+              {(questionnaire.step.startAt || questionnaire.step.endAt) && (
+                <div className="mr-15 d-ib">
+                  <i className="cap cap-calendar-2-1"/>{' '}
+                  <DatesInterval startAt={questionnaire.step.startAt} endAt={questionnaire.step.endAt} fullDay/>
+                </div>
+              )}
+            </div>
+          }
+        </div>
       </div>
     );
   }
@@ -32,6 +52,7 @@ export default createFragmentContainer(container, {
         ... on MultipleChoiceQuestion {
           id
           title
+          resultOpen
           responses {
             totalCount
             edges {
@@ -47,6 +68,7 @@ export default createFragmentContainer(container, {
           id
           title
           description
+          resultOpen
           responses {
             totalCount
             edges {
@@ -62,6 +84,7 @@ export default createFragmentContainer(container, {
           id
           title
           description
+          resultOpen
           responses {
             totalCount
             edges {
@@ -76,6 +99,10 @@ export default createFragmentContainer(container, {
             }
           }
         }
+      }
+      step {
+        startAt
+        endAt
       }
     }
   `,
