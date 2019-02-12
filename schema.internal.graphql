@@ -108,6 +108,15 @@ input AddEventsInput {
 type AddEventsPayload {
   # List of imported events.
   importedEvents: [Event!]!
+
+  # List of emails that didn't match an existing user.
+  notFoundEmails: [Email]!
+
+  # List of themes ID that didn't match an existing themes.
+  notFoundThemes: [ID]!
+
+  # List of dates that didn't got the good format
+  brokenDates: [String]!
   clientMutationId: String
 }
 
