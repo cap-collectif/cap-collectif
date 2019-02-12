@@ -79,15 +79,15 @@ class Indexer
         });
 
         foreach ($classesOrdered as $class) {
-            $this->indexType($class, $output);
+            $this->indexType($class, 0, $output);
         }
     }
 
-    public function indexAllForType(string $type, OutputInterface $output = null): void
+    public function indexAllForType(string $type, int $offset, OutputInterface $output = null): void
     {
         $classes = $this->getClassesToIndex();
 
-        $this->indexType($classes[$type], $output);
+        $this->indexType($classes[$type], $offset, $output);
     }
 
     /**
@@ -198,7 +198,7 @@ class Indexer
         return new Document($object->getId(), $json, $object::getElasticsearchTypeName());
     }
 
-    private function indexType(string $class, OutputInterface $output = null): void
+    private function indexType(string $class, int $offset, OutputInterface $output = null): void
     {
         $repository = $this->em->getRepository($class);
 
@@ -216,7 +216,14 @@ class Indexer
             $progress->start();
         }
 
-        foreach ($iterableResult as $row) {
+        foreach ($iterableResult as $key => $row) {
+            if ($key < $offset) {
+                if (isset($progress)) {
+                    $progress->advance();
+                }
+
+                continue;
+            }
             /** @var IndexableInterface $object */
             $object = $row[0];
 
