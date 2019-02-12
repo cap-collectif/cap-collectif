@@ -56,9 +56,10 @@ export class ProposalPageTabs extends React.Component<Props> {
 
   render() {
     const { viewer, proposal, step, features } = this.props;
-    const { currentVotableStep } = proposal;
+    const { currentVotableStep, project } = proposal;
     const votesCount = proposal.allVotes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
+    const showFollowersTab = project && project.opinionCanBeFollowed;
 
     return (
       <Tab.Container
@@ -89,12 +90,14 @@ export class ProposalPageTabs extends React.Component<Props> {
                     <span className="badge">{votesCount}</span>
                   </NavItem>
                 )}
-                <NavItem eventKey="followers" className="tab">
-                  <FormattedMessage id="proposal.tabs.followers" />
-                  <span className="badge">
-                    {proposal.allFollowers ? proposal.allFollowers.totalCount : 0}
-                  </span>
-                </NavItem>
+                {showFollowersTab && (
+                  <NavItem eventKey="followers" className="tab">
+                    <FormattedMessage id="proposal.tabs.followers" />
+                    <span className="badge">
+                      {proposal.allFollowers ? proposal.allFollowers.totalCount : 0}
+                    </span>
+                  </NavItem>
+                )}
               </Nav>
             </div>
           </div>
@@ -237,6 +240,9 @@ export default createFragmentContainer(ProposalPageTabs, {
       viewerCanSeeEvaluation
       allFollowers: followers(first: 0) {
         totalCount
+      }
+      project {
+        opinionCanBeFollowed
       }
     }
   `,

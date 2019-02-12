@@ -23,6 +23,9 @@ describe('<ProposalPageTabs />', () => {
       totalCount: 1,
     },
     viewerCanSeeEvaluation: true,
+    project: {
+      opinionCanBeFollowed: true,
+    },
   };
 
   const props = {
