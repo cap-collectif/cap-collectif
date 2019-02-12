@@ -4,7 +4,7 @@ exports[`<ProposalCreateFusionButton /> should render correctly 1`] = `
 <div>
   <a
     className="mt-10 btn btn-default"
-    href="/events/download"
+    href="/export-events-list"
     id="export-events-button"
   >
     <FormattedMessage
