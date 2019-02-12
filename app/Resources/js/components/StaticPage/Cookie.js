@@ -18,8 +18,8 @@ type CookieState = {
 };
 
 export class Cookie extends React.Component<Props, CookieState> {
-  constructor() {
-    super();
+  constructor(props: Props) {
+    super(props);
     this.state = {
       isAdvertisingEnabled:
         config.canUseDOM &&

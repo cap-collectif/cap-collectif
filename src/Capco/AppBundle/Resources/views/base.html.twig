@@ -40,10 +40,8 @@
     {% if bannerTrad is defined %}
         {{ react_render_component('CookieApp', {
             'props': {
-                'analytic_js': analytic_js,
-                'ads_js': ads_js,
-                'bannerTrad':  bannerTrad,
-                'isFooter':  'false',
+                'bannerTrad': bannerTrad,
+                'isLink': false,
             }
         }) }}
     {% endif %}
@@ -58,9 +56,9 @@
     <script type="text/javascript">
         window.locale = "{{ intl_locale() }}";
 
-        window.recaptchaOptions = { lang: "{{ intl_locale() }}" };
+        window.recaptchaOptions = {lang: "{{ intl_locale() }}"};
 
-        window._capco_executeAnalyticScript = function(){
+        window._capco_executeAnalyticScript = function () {
             {% if analytic_js is not null %}
             var script = document.createElement("script");
             script.innerHTML = '{{ analytic_js|e("js") }}';
@@ -68,7 +66,7 @@
             {% endif %}
         };
 
-        window._capco_executeAdsScript = function(){
+        window._capco_executeAdsScript = function () {
             {% if ads_js is not null %}
             var script = document.createElement("script");
             script.innerHTML = '{{ ads_js|e("js") }}';
