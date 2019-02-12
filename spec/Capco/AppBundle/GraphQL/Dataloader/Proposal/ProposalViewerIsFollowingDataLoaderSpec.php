@@ -7,13 +7,12 @@ use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
-use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Repository\FollowerRepository;
-use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerIsFollowingDataLoader;
+use GraphQL\Executor\Promise\Promise;
+use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 
 class ProposalViewerIsFollowingDataLoaderSpec extends ObjectBehavior
 {
@@ -21,8 +20,7 @@ class ProposalViewerIsFollowingDataLoaderSpec extends ObjectBehavior
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        FollowerRepository $followerRepository,
-        GraphQLCollector $collector
+        FollowerRepository $followerRepository
     ) {
         $this->beConstructedWith(
             $promiseFactory,
@@ -32,7 +30,6 @@ class ProposalViewerIsFollowingDataLoaderSpec extends ObjectBehavior
             'prefix',
             60,
             false,
-            $collector,
             true
         );
     }
