@@ -1,23 +1,21 @@
 // @flow
 import * as React from 'react';
-import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
+import {FormattedMessage, injectIntl} from 'react-intl';
 import {createFragmentContainer, graphql} from "react-relay";
 import type {QuestionnaireResults_questionnaire} from './__generated__/QuestionnaireResults_questionnaire.graphql'
 import DatesInterval from "../Utils/DatesInterval";
 
 type Props = {
-  intl: IntlShape,
   questionnaire: ?QuestionnaireResults_questionnaire
 };
 
 export class QuestionnaireResults extends React.Component<Props> {
   render() {
-    const {questionnaire, intl} = this.props;
+    const {questionnaire} = this.props;
     let totalTotalCount = 0;
     questionnaire.questions.map(question => {
-      totalTotalCount += question.responses.totalCount;
+      totalTotalCount += question.responses ? question.responses.totalCount : 0;
     });
-
 
     return (
       <div>

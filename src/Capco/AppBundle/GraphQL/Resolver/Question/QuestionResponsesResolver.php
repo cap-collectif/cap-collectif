@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Question;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\Repository\MediaResponseRepository;
@@ -30,8 +31,20 @@ class QuestionResponsesResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(AbstractQuestion $question, Arg $args): Connection
+    public function __invoke(AbstractQuestion $question, Arg $args, User $viewer)
     {
+        if (!$question->resultOpen() && !$viewer->isAdmin()) {
+            return [];
+        }
+
+        if ($question->getQuestionnaire() && $question->getQuestionnaire()->isPrivateResult() && !$viewer->isAdmin()) {
+            return [];
+        }
+
+        if ($question->getQuestionnaire() && !$question->getQuestionnaire()->canDisplay($viewer)) {
+            return [];
+        }
+
         $totalCount = 0;
         $arguments = $args->getRawArguments();
         $withNotConfirmedUser =
@@ -76,13 +89,14 @@ class QuestionResponsesResolver implements ResolverInterface
                     );
                 }
 
-                return $responses->getIterator()->getArrayCopy();
-            } catch (\RuntimeException $exception) {
-                $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+                    return $responses->getIterator()->getArrayCopy();
+                } catch (\RuntimeException $exception) {
+                    $this->logger->error(__METHOD__.' : '.$exception->getMessage());
 
-                throw new \RuntimeException('Find responses of survey failed');
+                    throw new \RuntimeException('Find responses of survey failed');
+                }
             }
-        });
+        );
 
         return $paginator->auto($args, $totalCount);
     }
