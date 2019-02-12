@@ -23,13 +23,30 @@
 {% endblock %}
 
 {% block body %}
+    {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
+    {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
+    {% if analytic_js is not empty and ads_js is empty %}
+        {% set bannerTrad =  'text-audience-cookie'|trans({}, 'CapcoAppBundle') %}
+    {% elseif ads_js  is not empty and analytic_js is empty %}
+        {% set bannerTrad =  'text-cookie-communication'|trans({}, 'CapcoAppBundle') %}
+    {% elseif ads_js is not empty and analytic_js is not empty %}
+        {% set bannerTrad =  'texte-cookie-audience-communication'|trans({}, 'CapcoAppBundle') %}
+    {% endif %}
+
     <section class="section--custom">
         <div class="container" style="max-width: 660px">
             {{ 'texte-cookies-page-1' | trans({}, 'CapcoAppBundle')|raw }}
             {{ cookiesList|raw }}
             <p>
-                <a href="{{ path('app_confidentialite') }}"
-                   title="{{ 'cookies-management' | trans({}, 'CapcoAppBundle') }}"> {{ 'set-up-cookies' | trans({}, 'CapcoAppBundle')|raw }}</a>
+                {{ react_render_component('CookieApp', {
+                    'props': {
+                        'analytic_js': analytic_js,
+                        'ads_js': ads_js,
+                        'bannerTrad':  bannerTrad,
+                        'isLink':  true,
+                        'cookieTrad':  'set-up-cookies',
+                    }
+                }) }}
             </p>
             {{ 'texte-cookies-page-2' | trans({}, 'CapcoAppBundle')|raw }}
         </div>

@@ -12,6 +12,7 @@ type Props = {
   analyticsJs: ?string,
   adJs: ?string,
   bannerTrad: string,
+  cookieTrad?: ?string,
   isLink: boolean,
 };
 
@@ -40,21 +41,21 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
   };
 
   render() {
-    const { isLink, analyticsJs, adJs, bannerTrad } = this.props;
+    const { isLink, analyticsJs, adJs, bannerTrad,cookieTrad } = this.props;
     const { showModal } = this.state;
     return (
       <div className="cookie-manager">
         {isLink ? (
           <div>
-            |
             <Button
               variant="link"
               bsStyle="link"
+              className="p-0"
               id="cookies-management"
               onClick={() => {
                 this.setState({ showModal: true });
               }}>
-              <FormattedMessage id="cookies-management" />
+              <FormattedMessage id={cookieTrad || 'cookies-management'} />
             </Button>
           </div>
         ) : (

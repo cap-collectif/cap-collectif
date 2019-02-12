@@ -39,18 +39,23 @@
                         <a href="{{ menu_url(footerLink) }}">
                             {{ footerLink.title }}
                         </a>
-                        {% if not loop.last %} |{% endif %}
+                        |
                     </li>
                 {% endfor %}
                 <li>
-                    |
                     <a href="{{ path('app_cookies') }}">
                         {{ 'cookies'|trans({}, 'CapcoAppBundle') }}
-                    </a>
-                    |
-                    <a href="{{ path('app_confidentialite') }}">
-                        {{ 'cookies-management'|trans({}, 'CapcoAppBundle') }}
-                    </a>
+                    </a> |
+                </li>
+                <li>
+                    {{ react_render_component('CookieApp', {
+                        'props': {
+                            'analytic_js': analytic_js,
+                            'ads_js': ads_js,
+                            'bannerTrad':  bannerTrad,
+                            'isLink':  true,
+                        }
+                    }) }}
                 </li>
             </ul>
             <div class="capco-powered">

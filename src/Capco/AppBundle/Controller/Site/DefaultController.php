@@ -100,19 +100,20 @@ class DefaultController extends Controller
 
         return ['form' => $form->createView()];
     }
+
     /**
      * @Route("/cookies-page", name="app_cookies")
      * @Template("CapcoAppBundle:Default:cookies.html.twig")
      */
-    {
     public function cookiesAction(Request $request)
+    {
         $cookiesList = $this->get('capco.site_parameter.repository')->findOneBy([
             'keyname' => 'cookies-list',
             'isEnabled' => 1,
-
         ]);
+
         return [
+            'cookiesList' => $cookiesList ? $cookiesList->getValue() : '',
         ];
     }
-            'cookiesList' => $cookiesList ? $cookiesList->getValue() : '',
 }
