@@ -3,21 +3,21 @@
 {% block field %}
     <div>
         {% if (object.Opinion is not null) %}
-            <p><a href="{{ path('admin_capco_app_opinion_edit', {'id': object.Opinion.id}) }}">
+            <p><a href="{{ path('admin_capco_app_opinion_show', {'id': object.Opinion.id}) }}">
                 <strong>{{ object.Opinion.title }}</strong>
             </a></p>
             {{ object.Opinion.body | raw }}
         {% elseif (object.opinionVersion is not null) %}
-            <p><a href="{{ path('admin_capco_app_opinionversion_edit', {'id': object.opinionVersion.id}) }}">
+            <p><a href="{{ path('admin_capco_app_opinionversion_show', {'id': object.opinionVersion.id}) }}">
                 <strong>{{ object.opinionVersion.title }}</strong>
             </a></p>
             {{ object.opinionVersion.body | raw }}
         {% elseif (object.Source is not null) %}
-            <p><a href="{{ path('admin_capco_app_source_edit', {'id': object.Source.id}) }}">
+            <p><a href="{{ path('admin_capco_app_source_show', {'id': object.Source.id}) }}">
                 <strong>{{ object.Source.title }}</strong>
             </a></p>
         {% elseif (object.Argument is not null) %}
-            <p><a href="{{ path('admin_capco_app_argument_edit', {'id': object.Argument.id}) }}">
+            <p><a href="{{ path('admin_capco_app_argument_show', {'id': object.Argument.id}) }}">
                 {{ object.Argument.body }}
             </a></p>
         {% elseif (object.Comment is not null) %}
