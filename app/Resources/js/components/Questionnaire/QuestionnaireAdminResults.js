@@ -7,6 +7,7 @@ import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking
 import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart';
 import QuestionnaireAdminResultsText from './QuestionnaireAdminResultsText';
 import type { QuestionnaireAdminResults_questionnaire } from './__generated__/QuestionnaireAdminResults_questionnaire.graphql';
+import QuestionnaireAdminResultsMedia from './QuestionnaireAdminResultsMedia';
 import withColors from '../Utils/withColors';
 import PrivateBox from '../Ui/Boxes/PrivateBox';
 
@@ -25,6 +26,10 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
 
     if (question.type === 'text') {
       return <QuestionnaireAdminResultsText simpleQuestion={question} />;
+    }
+
+    if (question.type === 'media') {
+      return <QuestionnaireAdminResultsMedia mediaQuestion={question} />;
     }
 
     if (question.__typename !== 'MultipleChoiceQuestion') {
@@ -85,7 +90,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
                       ) : (
                         <FormattedMessage id="no-answer" />
                       )}
-                      {question.participants &&
+                      {/* {question.participants &&
                         question.responses &&
                         question.responses.totalCount !== 0 && (
                           <React.Fragment>
@@ -96,7 +101,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
                               values={{ num: question.responses.totalCount }}
                             />
                           </React.Fragment>
-                        )}
+                        )} */}
                       <br />
                       {question.required && (
                         <b>
@@ -125,7 +130,8 @@ const container = withColors(QuestionnaireAdminResults);
 export default createFragmentContainer(
   container,
   graphql`
-    fragment QuestionnaireAdminResults_questionnaire on Questionnaire {
+    fragment QuestionnaireAdminResults_questionnaire on Questionnaire 
+    {
       questions {
         __typename
         title
@@ -135,10 +141,9 @@ export default createFragmentContainer(
         participants {
           totalCount
         }
-        responses {
-          totalCount
-        }
+       
         ...QuestionnaireAdminResultsText_simpleQuestion
+        ...QuestionnaireAdminResultsMedia_mediaQuestion
         ...QuestionnaireAdminResultsBarChart_multipleChoiceQuestion
         ...QuestionnaireAdminResultsPieChart_multipleChoiceQuestion
         ...QuestionnaireAdminResultsRanking_multipleChoiceQuestion
@@ -146,3 +151,12 @@ export default createFragmentContainer(
     }
   `,
 );
+
+// responses (
+//   first: $count
+//   after: $cursor
+// ) {
+//   totalCount
+// }
+
+//@arguments(count: $count, after: $after)
