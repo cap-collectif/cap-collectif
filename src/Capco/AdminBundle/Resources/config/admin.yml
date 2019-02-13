@@ -717,5 +717,12 @@ services:
 
   sonata.admin.controller.admin:
     class: Capco\AdminBundle\Controller\HelperController
-    arguments: ['@twig', '@sonata.admin.pool', '@sonata.admin.helper', '@validator', '@capco.search.user_search']
+    arguments:
+      [
+        '@twig',
+        '@sonata.admin.pool',
+        '@sonata.admin.helper',
+        '@validator',
+        '@capco.search.user_search',
+      ]
     public: true

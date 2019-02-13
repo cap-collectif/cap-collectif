@@ -101,21 +101,22 @@ class HelperController extends BaseHelperController
         $searchText = $request->get('q');
 
         if (User::class === $entity) {
+            $items = [];
+
             /** @var UserSearch $userSearch */
             $users = $this->userSearch->searchUsers($searchText, [$property]);
             if ($users['count'] > 0) {
-                $items = [];
                 $getter = 'get' . ucfirst($property);
                 foreach ($users['users'] as $user) {
                     $items[] = ['id' => $user->getId(), 'label' => $user->$getter()];
                 }
-
-                return new JsonResponse([
-                    'status' => 'OK',
-                    'more' => false,
-                    'items' => $items,
-                ]);
             }
+
+            return new JsonResponse([
+                'status' => 'OK',
+                'more' => false,
+                'items' => $items,
+            ]);
         }
         $targetAdmin = $fieldDescription->getAssociationAdmin();
 
