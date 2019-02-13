@@ -2,15 +2,18 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Search\EventSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryEventsResolver implements ResolverInterface
 {
+    use ResolverTrait;
+
     public const FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR = 10;
     private $eventSearch;
     private $logger;
@@ -23,6 +26,8 @@ class QueryEventsResolver implements ResolverInterface
 
     public function __invoke(Argument $args): Connection
     {
+        $this->protectArguments($args);
+
         $totalCount = 0;
         $search = null;
         $order = null;
