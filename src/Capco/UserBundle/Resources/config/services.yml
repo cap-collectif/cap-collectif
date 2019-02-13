@@ -6,7 +6,9 @@ services:
 
   Capco\UserBundle\Authenticator\:
     resource: '%kernel.root_dir%/../src/Capco/UserBundle/Authenticator/*'
-  #    exclude: '%kernel.root_dir%/../src/Capco/UserBundle/{Security/Exception/*, Repository/*,Entity/*, DependencyInjection/*, Controller/*}'
+
+  Capco\UserBundle\Controller\ConfirmationController:
+    autowire: true
 
   Capco\UserBundle\Form\:
     resource: '%kernel.root_dir%/../src/Capco/UserBundle/Form/*'

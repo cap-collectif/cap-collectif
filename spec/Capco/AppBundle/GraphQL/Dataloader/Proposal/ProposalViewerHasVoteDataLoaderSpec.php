@@ -10,12 +10,13 @@ use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\ProposalCollectVote;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
-use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 
 class ProposalViewerHasVoteDataLoaderSpec extends ObjectBehavior
 {
@@ -25,7 +26,8 @@ class ProposalViewerHasVoteDataLoaderSpec extends ObjectBehavior
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        GraphQLCollector $collector
     ) {
         $this->beConstructedWith(
             $promiseFactory,
@@ -37,6 +39,7 @@ class ProposalViewerHasVoteDataLoaderSpec extends ObjectBehavior
             'prefix',
             60,
             false,
+            $collector,
             true
         );
     }

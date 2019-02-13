@@ -99,6 +99,8 @@ InternalProposal:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\FormattedAddressTypeResolver", [value])'
       author:
         type: 'InternalUser!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAuthorResolver", [value])'
+        description: 'The author of the contribution.'
       deletedAt:
         type: 'DateTime'
         description: 'The delete date.'

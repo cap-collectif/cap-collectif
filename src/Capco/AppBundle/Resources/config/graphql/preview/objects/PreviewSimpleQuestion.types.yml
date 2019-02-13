@@ -1,9 +1,0 @@
-PreviewSimpleQuestion:
-  type: object
-  inherits:
-    - PreviewQuestion
-  config:
-    name: SimpleQuestion
-    interfaces:
-      - PreviewQuestion
-    description: 'A simple question'

@@ -41,6 +41,10 @@ InternalEvent:
         type: 'Float'
       lng:
         type: 'Float'
+      url:
+        type: 'URI!'
+        description: 'The url of the event'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventUrlResolver", [value])'
       registrationEnable:
         type: 'Boolean!'
       metaDescription:
