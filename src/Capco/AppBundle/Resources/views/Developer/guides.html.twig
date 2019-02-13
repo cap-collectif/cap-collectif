@@ -8,34 +8,22 @@
 {% endblock %}
 
 {% block body %}
-<style>
-.graphiql-wrapper {
-    height:715px
-}
-
-iframe#graphiql {
-    width:100%;
-    height:inherit;
-    border:1px solid #ddd
-}
-</style>
 
 <div class="container  developers__container">
 
-<div class="row">
-    <h2><a href="/">GraphQL API - Examples</a></h2>
-    {% include 'CapcoAppBundle:Developer:menu.html.twig' with {'active': 'guides'} %}
-</div>
+{% include 'CapcoAppBundle:Developer:header.html.twig' with {'active': 'guides'} only %}
 
-<div class="row">
-<div class="col-md-12">
-  <div class="graphiql-wrapper" style="margin-top: 15px">
-    <iframe id="graphiql" scrolling="no" src="{{url('graphiql_endpoint')}}?query=toto">
-      <p>You must have iframes enabled to use this feature.</p>
-    </iframe>
-  </div>
-</div>
-</div>
+<div class="row mt-40">
 
+<p>These guides provide information on getting started with our API:</p>
+
+<ul>
+    <li><p><a href="{{ path('app_developer_guide', { 'slug': 'events' }) }}">Look up a paginated list</a>: A guide to get events with pagination</p></li>
+    {% if graphql_list_collect_steps()|length %}
+        <li><p><a href="{{ path('app_developer_guide', { 'slug': 'proposals' }) }}">Look up proposals</a>: A guide to get a step's proposals</p></li>
+    {% endif %}
+</ul>
+
+</div>
 </div>
 {% endblock %}

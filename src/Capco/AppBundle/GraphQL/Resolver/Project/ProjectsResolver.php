@@ -3,17 +3,20 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Search\ProjectSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Search\ProjectSearch;
-use Capco\UserBundle\Entity\User;
 
 class ProjectsResolver implements ResolverInterface
 {
+    use ResolverTrait;
+
     private $logger;
     private $projectSearch;
 
@@ -23,14 +26,15 @@ class ProjectsResolver implements ResolverInterface
         $this->projectSearch = $projectSearch;
     }
 
-    public function __invoke(Argument $args, ?User $user = null): Connection
+    public function __invoke(Argument $args, ?User $viewer = null): Connection
     {
+        $this->protectArguments($args);
         $totalCount = 0;
 
         try {
             $paginator = new Paginator(function (int $offset, int $limit) use (
                 $args,
-                $user,
+                $viewer,
                 &$totalCount
             ) {
                 $term = $args->offsetExists('term') ? $args->offsetGet('term') : null;
@@ -46,7 +50,7 @@ class ProjectsResolver implements ResolverInterface
                 $allResults = [];
                 /** @var Project $project */
                 foreach ($results['projects'] as $project) {
-                    if ($project instanceof Project && $project->canDisplay($user)) {
+                    if ($project instanceof Project && $project->canDisplay($viewer)) {
                         $allResults[] = $project;
                     }
                 }

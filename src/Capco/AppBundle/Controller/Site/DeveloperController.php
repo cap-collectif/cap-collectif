@@ -25,6 +25,14 @@ class DeveloperController extends Controller
     }
 
     /**
+     * @Route("/developer/guides/{slug}", name="app_developer_guide", defaults={"_feature_flags" = "developer_documentation"})
+     */
+    public function guideAction(string $slug)
+    {
+        return $this->render('CapcoAppBundle:Developer:guides/' . $slug . '.html.twig');
+    }
+
+    /**
      * @Route("/developer/guides/", name="app_developer_guides", defaults={"_feature_flags" = "developer_documentation"})
      * @Template("CapcoAppBundle:Developer:guides.html.twig")
      */
