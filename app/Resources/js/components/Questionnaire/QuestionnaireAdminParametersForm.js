@@ -2,13 +2,13 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, type FormProps } from 'redux-form';
+import { reduxForm, Field, type FormProps, formValueSelector } from 'redux-form';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import component from '../Form/Field';
 import AlertForm from '../Alert/AlertForm';
 import type { QuestionnaireAdminParametersForm_questionnaire } from './__generated__/QuestionnaireAdminParametersForm_questionnaire.graphql';
-import type { State } from '../../types';
+import type { GlobalState } from '../../types';
 import UpdateQuestionnaireParametersMutation from '../../mutations/UpdateQuestionnaireParametersMutation';
 
 type RelayProps = {|
@@ -17,6 +17,8 @@ type RelayProps = {|
 type Props = {|
   ...RelayProps,
   ...FormProps,
+  currentValues: Object,
+  initialValues: Object,
 |};
 
 const formName = 'questionnaire-admin-parameters';
@@ -38,18 +40,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   });
 };
 
-type MyState = {|
-  confidentialityType: string,
-|};
-
-export class QuestionnaireAdminParametersForm extends React.Component<Props, MyState> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      confidentialityType: props.questionnaire.privateResult ? 'private' : 'public',
-    };
-  }
-
+export class QuestionnaireAdminParametersForm extends React.Component<Props> {
   render() {
     const {
       invalid,
@@ -59,6 +50,7 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props, MyS
       valid,
       submitSucceeded,
       submitFailed,
+      currentValues,
     } = this.props;
 
     return (
@@ -118,11 +110,9 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props, MyS
               component={component}
               type="radio"
               id="questionnaire_private"
-              radioChecked={this.state.confidentialityType === 'private'}
-              onChange={() => {
-                this.setState({ confidentialityType: 'private' });
-              }}
-              label={<FormattedMessage id='access-right'/>}
+              radioChecked={currentValues.privateResult === 'private'}
+              value="private"
+              label={<FormattedMessage id="access-right" />}
               children={
                 <div>
                   <i className="cap-lock-2-1 mr-5" />
@@ -134,11 +124,9 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props, MyS
               name="privateResult"
               component={component}
               type="radio"
-              radioChecked={this.state.confidentialityType === 'public'}
+              radioChecked={currentValues.privateResult === 'public'}
               id="questionnaire_public"
-              onChange={() => {
-                this.setState({ confidentialityType: 'public' });
-              }}
+              value="public"
               children={
                 <div>
                   <i className="cap-chat-security mr-5" />
@@ -172,13 +160,16 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props, MyS
   }
 }
 
+const selector = formValueSelector(formName);
+
 const form = reduxForm({
   onSubmit,
   validate,
+  enableReinitialize: true,
   form: formName,
 })(QuestionnaireAdminParametersForm);
 
-const mapStateToProps = (state: State, props: RelayProps) => {
+const mapStateToProps = (state: GlobalState, props: RelayProps) => {
   const { questionnaire } = props;
   return {
     initialValues: {
@@ -187,6 +178,9 @@ const mapStateToProps = (state: State, props: RelayProps) => {
       multipleRepliesAllowed: questionnaire.multipleRepliesAllowed,
       acknowledgeReplies: questionnaire.acknowledgeReplies,
       privateResult: questionnaire.privateResult ? 'private' : 'public',
+    },
+    currentValues: {
+      privateResult: selector(state, 'privateResult'),
     },
   };
 };
