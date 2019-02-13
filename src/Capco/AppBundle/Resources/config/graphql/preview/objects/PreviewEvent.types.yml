@@ -2,9 +2,11 @@ PreviewEvent:
   type: object
   inherits:
     - Node
+    - UniformResourceLocatable
   config:
     interfaces:
       - Node
+      - UniformResourceLocatable
     name: Event
     description: 'An event.'
     fields:
@@ -33,3 +35,5 @@ PreviewEvent:
       enabled:
         type: 'Boolean!'
         description: 'Identifies if the event is published.'
+      url:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventUrlResolver", [value])'

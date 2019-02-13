@@ -1835,6 +1835,9 @@ type Event implements Node & Commentable {
   # The ID of an object
   id: ID!
 
+  # The URL to this resource.
+  url: URI!
+
   # The title of the event.
   title: String!
 
@@ -1902,9 +1905,6 @@ type Event implements Node & Commentable {
   country: String
   lat: Float
   lng: Float
-
-  # The url of the event
-  url: URI!
   registrationEnable: Boolean!
   metaDescription: String
   customCode: String
@@ -2301,8 +2301,8 @@ type Media implements UniformResourceLocatable {
 
 # A media question.
 type MediaQuestion implements Question {
-  id: ID!
   title: String!
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -2361,8 +2361,8 @@ type MediaResponse implements Response {
 
 # A multiple choice question
 type MultipleChoiceQuestion implements Question {
-  id: ID!
   title: String!
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -3343,6 +3343,9 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   # Identifies the proposal title.
   title: String!
 
+  # The author of the contribution.
+  author: User!
+
   # Identifies the body of the proposal.
   body: HTML
 
@@ -3449,9 +3452,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   district: ProposalDistrict
   address: Address
   formattedAddress: String
-
-  # The author of the contribution.
-  author: User!
 
   # The delete date.
   deletedAt: DateTime
@@ -4172,8 +4172,8 @@ type Query {
 }
 
 interface Question {
-  id: ID!
   title: String!
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -4932,8 +4932,8 @@ type SectionAppendixType {
 
 # A section is just a title in a quiz without any possible answer.
 type SectionQuestion implements Question {
-  id: ID!
   title: String!
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -5170,8 +5170,8 @@ type SetEvaluationFormInProposalFormPayload {
 
 # A simple question
 type SimpleQuestion implements Question {
-  id: ID!
   title: String!
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -6360,9 +6360,11 @@ type ValueResponse implements Response {
   # Nullable ID in case of empty response.
   id: String
 
+  # The question.
+  question: Question!
+
   # The response value which can be a string or a JSON.
   value: String
-  question: Question!
   formattedValue: String
 }
 

@@ -22,10 +22,7 @@ iframe#graphiql {
 
 <div class="container  developers__container">
 
-<div class="row">
-    <h2><a href="/">GraphQL API - Explorer</a></h2>
-    {% include 'CapcoAppBundle:Developer:menu.html.twig' with {'active': 'explorer'} %}
-</div>
+{% include 'CapcoAppBundle:Developer:header.html.twig' with {'active': 'explorer'} only %}
 
 <div class="row">
 <div class="col-md-12">

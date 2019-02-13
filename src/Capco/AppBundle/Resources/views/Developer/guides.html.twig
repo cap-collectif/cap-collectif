@@ -1,0 +1,29 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title': 'Developper',
+        'url':   url('app_developer')
+    } only %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container  developers__container">
+
+{% include 'CapcoAppBundle:Developer:header.html.twig' with {'active': 'guides'} only %}
+
+<div class="row mt-40">
+
+<p>These guides provide information on getting started with our API:</p>
+
+<ul>
+    <li><p><a href="{{ path('app_developer_guide', { 'slug': 'events' }) }}">Look up a paginated list</a>: A guide to get events with pagination</p></li>
+    {% if graphql_list_collect_steps()|length %}
+        <li><p><a href="{{ path('app_developer_guide', { 'slug': 'proposals' }) }}">Look up proposals</a>: A guide to get a step's proposals</p></li>
+    {% endif %}
+</ul>
+
+</div>
+</div>
+{% endblock %}
