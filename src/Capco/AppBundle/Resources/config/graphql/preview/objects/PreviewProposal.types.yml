@@ -23,10 +23,6 @@ PreviewProposal:
       title:
         type: 'String!'
         description: 'Identifies the proposal title.'
-      author:
-        type: 'PublicUser!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAuthorResolver", [value])'
-        description: 'The author of the contribution.'
       body:
         type: 'HTML'
         description: 'Identifies the body of the proposal.'

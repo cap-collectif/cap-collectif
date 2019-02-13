@@ -1,13 +1,13 @@
 InternalQuestion:
   type: interface
-  inherits:
-    - PreviewQuestion
   config:
     name: Question
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
     fields:
       id:
         type: 'ID!'
+      title:
+        type: 'String!'
       number:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
         type: 'Int!'

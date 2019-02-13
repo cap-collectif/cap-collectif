@@ -8,6 +8,3 @@ PreviewResponse:
       id:
         type: 'String'
         description: 'Nullable ID in case of empty response.'
-      question:
-        type: 'PreviewQuestion!'
-        description: 'The question.'

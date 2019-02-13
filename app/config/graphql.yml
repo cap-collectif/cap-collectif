@@ -53,8 +53,6 @@ overblog_graphql:
           - PreviewProposalVote
           - PreviewProposal
           - PreviewValueResponse
-          - PreviewCollectStep
-          - PreviewSimpleQuestion
       # This is our internal schema (used by our clients)
       internal:
         query: InternalQuery
@@ -80,7 +78,7 @@ overblog_graphql:
           - PresentationStep
           - QuestionnaireStep
           - RankingStep
-          - InternalSimpleQuestion
+          - SimpleQuestion
           - InternalValueResponse
           - VersionVote
           - SectionQuestion

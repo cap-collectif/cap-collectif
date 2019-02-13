@@ -1,44 +1,3 @@
-# A step to collect proposals.
-type CollectStep implements Node {
-  # The ID of an object
-  id: ID!
-  proposals(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-
-    # If non-null, filters proposals with the given district.
-    district: ID
-
-    # If non-null, filters proposals with the given type of author.
-    userType: ID
-
-    # If non-null, filters proposals with the given category.
-    category: ID
-
-    # If non-null, filters proposals with the given author.
-    author: ID
-
-    # If non-null, filters proposals with the given theme.
-    theme: ID
-
-    # If non-null, filters proposals with the given string to look for.
-    term: String
-
-    # Ordering options for proposals returned from the connection.
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
-  ): ProposalConnection!
-
-  # The title of the step.
-  title: String!
-}
-
 # A consultation
 type Consultation implements Node {
   # The ID of an object
@@ -76,12 +35,9 @@ type Consultation implements Node {
 scalar DateTime
 
 # An event.
-type Event implements Node & UniformResourceLocatable {
+type Event implements Node {
   # The ID of an object
   id: ID!
-
-  # The URL to this resource.
-  url: URI!
 
   # The title of the event.
   title: String!
@@ -290,61 +246,11 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   # Identifies the proposal title.
   title: String!
 
-  # The author of the contribution.
-  author: User!
-
   # Identifies the body of the proposal.
   body: HTML
 
   # Identifies the responses of the proposal.
   responses: [Response]!
-}
-
-# A connection to a list of items.
-type ProposalConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ProposalEdge]
-}
-
-# An edge in a connection.
-type ProposalEdge {
-  # The item at the end of the edge.
-  node: Proposal!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-# Ways in which proposal connections can be ordered.
-input ProposalOrder {
-  # The field in which to order nodes by.
-  field: ProposalOrderField!
-
-  # The direction in which to order nodes.
-  direction: OrderDirection! = ASC
-}
-
-# Properties by which proposal connections can be ordered
-enum ProposalOrderField {
-  # Allows ordering a list of proposals by when they were created.
-  PUBLISHED_AT
-
-  # Allows ordering a list of proposals by the number of votes it have.
-  VOTES
-
-  # Allows ordering a list of proposals by the number of comments it have.
-  COMMENTS
-
-  # Allows randomizing a list of proposals.
-  RANDOM
-
-  # Allows ordering a list of proposals by the cost it have been estimated.
-  COST
 }
 
 # A vote on a proposal for a given step.
@@ -479,10 +385,6 @@ type Query {
   ): EventConnection!
 }
 
-interface Question {
-  title: String!
-}
-
 # A questionnaire is a series of questions that users can answer.
 type Questionnaire implements Node {
   # The ID of an object
@@ -517,14 +419,6 @@ type Questionnaire implements Node {
 interface Response {
   # Nullable ID in case of empty response.
   id: String
-
-  # The question.
-  question: Question!
-}
-
-# A simple question
-type SimpleQuestion implements Question {
-  title: String!
 }
 
 # A trashable contribution
@@ -600,9 +494,6 @@ type UserEdge {
 type ValueResponse implements Response {
   # Nullable ID in case of empty response.
   id: String
-
-  # The question.
-  question: Question!
 
   # The response value which can be a string or a JSON.
   value: String

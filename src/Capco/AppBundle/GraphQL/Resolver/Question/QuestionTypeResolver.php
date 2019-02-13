@@ -23,13 +23,8 @@ class QuestionTypeResolver implements ResolverInterface
 
     public function __invoke(AbstractQuestion $question): Type
     {
-        $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
-
         if ($question instanceof SimpleQuestion) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewSimpleQuestion');
-            }
-            return $this->typeResolver->resolve('InternalSimpleQuestion');
+            return $this->typeResolver->resolve('SimpleQuestion');
         }
         if ($question instanceof MediaQuestion) {
             return $this->typeResolver->resolve('MediaQuestion');

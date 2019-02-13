@@ -1,9 +1,8 @@
-InternalSimpleQuestion:
+SimpleQuestion:
   type: object
   inherits:
     - InternalQuestion
   config:
-    name: SimpleQuestion
     interfaces:
       - InternalQuestion
     description: 'A simple question'
