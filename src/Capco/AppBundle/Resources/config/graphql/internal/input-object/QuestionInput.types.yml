@@ -29,5 +29,3 @@ QuestionInput:
         type: 'String'
       jumps:
         type: '[LogicJumpInput]'
-      resultOpen:
-        type: 'Boolean'

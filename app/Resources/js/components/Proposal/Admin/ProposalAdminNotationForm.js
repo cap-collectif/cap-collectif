@@ -290,7 +290,6 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
       value: u.id,
       label: u.displayName,
     })),
-    resultOpen: false,
     version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
     responses: formatInitialResponses(props),
   },

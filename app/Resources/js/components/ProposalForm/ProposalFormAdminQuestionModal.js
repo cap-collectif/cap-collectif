@@ -31,7 +31,6 @@ type Props = {
 } & ParentProps;
 
 const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
-const freeAnswerQuestions = ['text', 'textarea', 'editor', 'number', 'medias'];
 
 export class ProposalFormAdminQuestionModal extends React.Component<Props> {
   render() {
@@ -180,32 +179,32 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                 <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
               )}
             </div>
-            )}
-              <h4 style={{ fontWeight: 'bold' }}>
-                <span>
-                  <FormattedMessage id="proposal_form.admin.settings.options" />
-                </span>
-              </h4>
-            {multipleChoiceQuestions.indexOf(type) !== -1 && (
-              <div>
-                <Field
-                  id={`${member}.randomQuestionChoices`}
-                  name={`${member}.randomQuestionChoices`}
-                  type="checkbox"
-                  normalize={val => !!val}
-                  children={<FormattedMessage id="admin.fields.question.random_question_choices" />}
-                  component={component}
-                />
-                <Field
-                  id={`${member}.isOtherAllowed`}
-                  name={`${member}.isOtherAllowed`}
-                  type="checkbox"
-                  normalize={val => !!val}
-                  children={<FormattedMessage id="admin.fields.question.other_allowed" />}
-                  component={component}
-                />
-              </div>
-            )}
+          )}
+          <h4 style={{ fontWeight: 'bold' }}>
+            <span>
+              <FormattedMessage id="proposal_form.admin.settings.options" />
+            </span>
+          </h4>
+          {multipleChoiceQuestions.indexOf(type) !== -1 && (
+            <div>
+              <Field
+                id={`${member}.randomQuestionChoices`}
+                name={`${member}.randomQuestionChoices`}
+                type="checkbox"
+                normalize={val => !!val}
+                children={<FormattedMessage id="admin.fields.question.random_question_choices" />}
+                component={component}
+              />
+              <Field
+                id={`${member}.isOtherAllowed`}
+                name={`${member}.isOtherAllowed`}
+                type="checkbox"
+                normalize={val => !!val}
+                children={<FormattedMessage id="admin.fields.question.other_allowed" />}
+                component={component}
+              />
+            </div>
+          )}
           <Field
             id={`${member}.required`}
             name={`${member}.required`}
@@ -215,25 +214,13 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
             component={component}
           />
           <Field
-            children={<FormattedMessage id="admin.fields.question.private"/>}
+            children={<FormattedMessage id="admin.fields.question.private" />}
             id={`${member}.private`}
             normalize={val => !!val}
             name={`${member}.private`}
             type="checkbox"
             component={component}
           />
-          {freeAnswerQuestions.indexOf(type) !== -1 && (
-            <div>
-              <Field
-                children={<FormattedMessage id="published-results"/>}
-                id={`${member}.resultOpen`}
-                normalize={val => !!val}
-                name={`${member}.resultOpen`}
-                type="checkbox"
-                component={component}
-              />
-            </div>
-          )}
           {multipleChoiceQuestions.indexOf(type) !== -1 && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>

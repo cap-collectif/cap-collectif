@@ -64,7 +64,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "responses": Object {
                 "totalCount": 14,
               },
-              "resultOpen": null,
               "title": "question type select",
               "type": "select",
             }
@@ -135,7 +134,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "responses": Object {
                 "totalCount": 98,
               },
-              "resultOpen": null,
               "title": "question type radio",
               "type": "radio",
             }
@@ -200,7 +198,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "responses": Object {
                 "totalCount": 48,
               },
-              "resultOpen": null,
               "title": "question type checkbox",
               "type": "checkbox",
             }
@@ -265,7 +262,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "responses": Object {
                 "totalCount": 43,
               },
-              "resultOpen": null,
               "title": "question type button",
               "type": "button",
             }
@@ -318,7 +314,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "responses": Object {
                 "totalCount": 0,
               },
-              "resultOpen": null,
               "title": "question type ranking",
               "type": "ranking",
             }

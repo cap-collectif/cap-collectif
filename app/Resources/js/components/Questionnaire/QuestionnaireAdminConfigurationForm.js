@@ -196,7 +196,7 @@ export default createFragmentContainer(
       description
       questions {
         id
-        ...responsesHelper_adminQuestionnaireQuestion @relay(mask: false)
+        ...responsesHelper_adminQuestion @relay(mask: false)
       }
     }
   `,

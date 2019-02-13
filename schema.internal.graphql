@@ -2366,9 +2366,6 @@ type MediaQuestion implements Question & Node {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
-
-  # If question type is "free" the result of question can be private to the user and admin
-  resultOpen: Boolean
 }
 
 # A response
@@ -2437,9 +2434,6 @@ type MultipleChoiceQuestion implements Question & Node {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
-
-  # If question type is "free" the result of question can be private to the user and admin
-  resultOpen: Boolean
   isOtherAllowed: Boolean!
 
   # Responses of the `other` question choice.
@@ -4257,9 +4251,6 @@ interface Question {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
-
-  # If question type is "free" the result of question can be private to the user and admin
-  resultOpen: Boolean
 }
 
 # A possible choice of a question
@@ -4342,7 +4333,6 @@ input QuestionInput {
   choices: [QuestionChoiceInput]
   description: String
   jumps: [LogicJumpInput]
-  resultOpen: Boolean
 }
 
 # Value of type of question
@@ -4421,6 +4411,8 @@ type Questionnaire implements Node {
     # Returns the last `n` elements from the list.
     last: Int
   ): ReplyConnection!
+
+  # Results of survey are private
   privateResult: Boolean!
 }
 
@@ -5030,9 +5022,6 @@ type SectionQuestion implements Question & Node {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
-
-  # If question type is "free" the result of question can be private to the user and admin
-  resultOpen: Boolean
 }
 
 input SelectProposalInput {
@@ -5279,9 +5268,6 @@ type SimpleQuestion implements Question & Node {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
-
-  # If question type is "free" the result of question can be private to the user and admin
-  resultOpen: Boolean
 }
 
 # A site image

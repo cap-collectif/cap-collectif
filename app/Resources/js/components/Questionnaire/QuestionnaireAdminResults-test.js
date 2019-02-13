@@ -19,7 +19,6 @@ describe('<QuestionnaireAdminResults />', () => {
           private: false,
           participants: { totalCount: 7 },
           responses: { totalCount: 14 },
-          resultOpen: null,
         },
         {
           $fragmentRefs,
@@ -30,7 +29,6 @@ describe('<QuestionnaireAdminResults />', () => {
           private: false,
           participants: { totalCount: 98 },
           responses: { totalCount: 98 },
-          resultOpen: null,
         },
         {
           $fragmentRefs,
@@ -41,7 +39,6 @@ describe('<QuestionnaireAdminResults />', () => {
           private: false,
           participants: { totalCount: 45 },
           responses: { totalCount: 48 },
-          resultOpen: null,
         },
         {
           $fragmentRefs,
@@ -52,7 +49,6 @@ describe('<QuestionnaireAdminResults />', () => {
           private: false,
           participants: { totalCount: 2 },
           responses: { totalCount: 4 },
-          resultOpen: null,
         },
         {
           $fragmentRefs,
@@ -63,7 +59,6 @@ describe('<QuestionnaireAdminResults />', () => {
           private: false,
           participants: { totalCount: 43 },
           responses: { totalCount: 43 },
-          resultOpen: null,
         },
         {
           $fragmentRefs,
@@ -74,7 +69,6 @@ describe('<QuestionnaireAdminResults />', () => {
           private: false,
           participants: { totalCount: 38 },
           responses: { totalCount: 0 },
-          resultOpen: null,
         },
         {
           $fragmentRefs,
@@ -85,7 +79,6 @@ describe('<QuestionnaireAdminResults />', () => {
           private: false,
           participants: { totalCount: 4 },
           responses: { totalCount: 4 },
-          resultOpen: null,
         },
         {
           $fragmentRefs,
@@ -96,7 +89,6 @@ describe('<QuestionnaireAdminResults />', () => {
           private: false,
           participants: { totalCount: 89 },
           responses: { totalCount: 89 },
-          resultOpen: null,
         },
         {
           $fragmentRefs,
@@ -107,7 +99,6 @@ describe('<QuestionnaireAdminResults />', () => {
           private: false,
           participants: { totalCount: 9 },
           responses: { totalCount: 9 },
-          resultOpen: null,
         },
       ],
     },
@@ -135,7 +126,6 @@ describe('<QuestionnaireAdminResults />', () => {
           private: true,
           participants: { totalCount: 0 },
           responses: { totalCount: 0 },
-          resultOpen: null,
         },
       ],
     },

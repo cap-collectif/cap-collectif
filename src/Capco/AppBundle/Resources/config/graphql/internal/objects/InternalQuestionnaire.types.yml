@@ -46,3 +46,4 @@ InternalQuestionnaire:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireRepliesResolver", [value, args])'
       privateResult:
         type: 'Boolean!'
+        description: 'Results of survey are private'

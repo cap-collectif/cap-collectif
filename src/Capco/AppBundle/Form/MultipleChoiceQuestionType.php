@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Form;
 
 use Capco\AdminBundle\Form\QuestionValidationRuleType;
@@ -24,7 +25,6 @@ class MultipleChoiceQuestionType extends AbstractType
         $builder->add('description', PurifiedTextType::class);
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
-        $builder->add('resultOpen', CheckboxType::class);
         $builder->add('type', IntegerType::class);
         $builder->add('choices', CollectionType::class, [
             'allow_add' => true,

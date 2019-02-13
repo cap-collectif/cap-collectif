@@ -55,7 +55,6 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
           number: 1,
           position: 1,
           jumps: [],
-          resultOpen: null,
         },
       ],
     },

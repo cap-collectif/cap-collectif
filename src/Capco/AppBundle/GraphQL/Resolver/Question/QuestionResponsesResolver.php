@@ -11,7 +11,6 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
 
@@ -33,11 +32,11 @@ class QuestionResponsesResolver implements ResolverInterface
 
     public function __invoke(AbstractQuestion $question, Arg $args, User $viewer)
     {
-        if (!$question->resultOpen() && !$viewer->isAdmin()) {
-            return [];
-        }
-
-        if ($question->getQuestionnaire() && $question->getQuestionnaire()->isPrivateResult() && !$viewer->isAdmin()) {
+        if (
+            $question->getQuestionnaire() &&
+            $question->getQuestionnaire()->isPrivateResult() &&
+            !$viewer->isAdmin()
+        ) {
             return [];
         }
 
@@ -89,14 +88,13 @@ class QuestionResponsesResolver implements ResolverInterface
                     );
                 }
 
-                    return $responses->getIterator()->getArrayCopy();
-                } catch (\RuntimeException $exception) {
-                    $this->logger->error(__METHOD__.' : '.$exception->getMessage());
+                return $responses->getIterator()->getArrayCopy();
+            } catch (\RuntimeException $exception) {
+                $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
-                    throw new \RuntimeException('Find responses of survey failed');
-                }
+                throw new \RuntimeException('Find responses of survey failed');
             }
-        );
+        });
 
         return $paginator->auto($args, $totalCount);
     }
