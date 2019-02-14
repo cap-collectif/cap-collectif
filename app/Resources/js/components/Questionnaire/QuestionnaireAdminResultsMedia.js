@@ -1,12 +1,11 @@
 // @flow
 import * as React from 'react';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
-import { ListGroupItem, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import ListGroupFlush from '../Ui/List/ListGroupFlush';
 import type { QuestionnaireAdminResultsMedia_mediaQuestion } from './__generated__/QuestionnaireAdminResultsMedia_mediaQuestion.graphql';
-import WYSIWYGRender from '../Form/WYSIWYGRender';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
+import { CardContainer } from '../Ui/Card/CardContainer';
 
 const RESPONSE_PAGINATION = 5;
 
@@ -30,70 +29,93 @@ export class QuestionnaireAdminResultsMedia extends React.Component<Props, State
       this.setState({ loading: false });
     });
   };
-  render() {
 
+  render() {
     const { relay, mediaQuestion } = this.props;
     const { loading } = this.state;
 
-    if(mediaQuestion.responses && mediaQuestion.responses.edges) {
+    const mediaQuestionMedias =
+      mediaQuestion &&
+      mediaQuestion.responses &&
+      mediaQuestion.responses.edges &&
+      mediaQuestion.responses.edges.reduce((acc, curr) => {
+        acc.push(curr && curr.node.medias);
+        return acc;
+      }, []);
+
+    // eslint-disable-next-line
+    const medias = [].concat.apply([], mediaQuestionMedias);
+
+    if (medias.length > 0) {
       return (
         <div className="mb-20">
-            {mediaQuestion.responses.edges.map((response, key) => (
-                <div key={key}>
-                  {response.authorName}
-                </div>
-              ))}
-              {relay.hasMore() && (
-                <div style={{ textAlign: 'center', width: '100%' }}>
-                  {this.state.loading ? (
-                    <Loader />
-                  ) : (
-                    <Button bsStyle="link" onClick={this.handleLoadMore}>
-                      <FormattedMessage id="global.more" />
-                    </Button>
-                  )}
-                </div>
+          <div className="row">
+            {medias.map((media, key) => (
+              <div key={key} className="col-sm-3 col-xs-6">
+                <CardContainer>
+                  <div className="card__body text-center">
+                    <span>
+                      {media && media.name} <br />
+                      {media && media.size}
+                    </span>
+                  </div>
+                </CardContainer>
+              </div>
+            ))}
+          </div>
+
+          {relay.hasMore() && (
+            <div className="w-100 text-center">
+              {loading ? (
+                <Loader />
+              ) : (
+                <Button
+                  bsStyle="primary"
+                  className="btn-outline-primary"
+                  onClick={this.handleLoadMore}>
+                  <FormattedMessage id="global.more" />
+                </Button>
               )}
+            </div>
+          )}
         </div>
       );
     }
-    
+
     return null;
   }
 }
 
 export default createPaginationContainer(
-  QuestionnaireAdminResultsMedia, 
+  QuestionnaireAdminResultsMedia,
   {
     mediaQuestion: graphql`
-      fragment QuestionnaireAdminResultsMedia_mediaQuestion on MediaQuestion 
-      @argumentDefinitions(
-        count: { type: "Int", defaultValue: 5 }
-        cursor: { type: "String", defaultValue: null }
-      ) {
+      fragment QuestionnaireAdminResultsMedia_mediaQuestion on MediaQuestion
+        @argumentDefinitions(
+          count: { type: "Int", defaultValue: 5 }
+          cursor: { type: "String", defaultValue: null }
+        ) {
         id
-        responses (
-          first: $count
-          after: $cursor
-        ) @connection(key: "QuestionnaireAdminResultsMedia__responses", filters: []) {
-            edges {
-              node {
-                id
-                ... on MediaResponse {
-                  medias {
-                    description
-                    authorName
-                  }
+        responses(first: $count, after: $cursor)
+          @connection(key: "QuestionnaireAdminResultsMedia__responses", filters: []) {
+          edges {
+            node {
+              id
+              ... on MediaResponse {
+                medias {
+                  name
+                  size
                 }
               }
             }
-            pageInfo {
-              hasPreviousPage
-              hasNextPage
-              startCursor
-              endCursor
-            }
           }
+          pageInfo {
+            hasPreviousPage
+            hasNextPage
+            startCursor
+            endCursor
+          }
+        }
       }
     `,
   },
@@ -112,7 +134,7 @@ export default createPaginationContainer(
         ...fragmentVariables,
         count,
         cursor,
-        questionId: props.mediaQuestion.id
+        questionId: props.mediaQuestion.id,
       };
     },
     query: graphql`

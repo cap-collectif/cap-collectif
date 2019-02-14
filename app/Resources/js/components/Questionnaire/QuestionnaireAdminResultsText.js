@@ -8,7 +8,7 @@ import type { QuestionnaireAdminResultsText_simpleQuestion } from './__generated
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 
-const RESPONSE_PAGINATION = 5;
+const RESPONSE_PAGINATION = 15;
 
 type Props = {
   relay: RelayPaginationProp,
@@ -30,69 +30,70 @@ export class QuestionnaireAdminResultsText extends React.Component<Props, State>
       this.setState({ loading: false });
     });
   };
-  render() {
 
+  render() {
     const { relay, simpleQuestion } = this.props;
     const { loading } = this.state;
 
-    if(simpleQuestion.responses && simpleQuestion.responses.edges) {
+    if (simpleQuestion.responses && simpleQuestion.responses.edges) {
       return (
         <div className="mb-20">
-          <ListGroupFlush striped>
+          <ListGroupFlush striped className="border-bottom">
             {simpleQuestion.responses.edges.map((response, key) => (
-                <ListGroupItem key={key}>
-                  <WYSIWYGRender value={response && response.node && response.node.value} />
-                </ListGroupItem>
-              ))}
-              {relay.hasMore() && (
-                <div style={{ textAlign: 'center', width: '100%' }}>
-                  {this.state.loading ? (
-                    <Loader />
-                  ) : (
-                    <Button bsStyle="link" onClick={this.handleLoadMore}>
-                      <FormattedMessage id="global.more" />
-                    </Button>
-                  )}
-                </div>
-              )}
+              <ListGroupItem key={key}>
+                <WYSIWYGRender value={response && response.node && response.node.value} />
+              </ListGroupItem>
+            ))}
           </ListGroupFlush>
+          {relay.hasMore() && (
+            <>
+              {loading ? (
+                <Loader />
+              ) : (
+                <Button
+                  bsStyle="primary"
+                  className="btn-outline-primary"
+                  onClick={this.handleLoadMore}>
+                  <FormattedMessage id="global.more" />
+                </Button>
+              )}
+            </>
+          )}
         </div>
       );
     }
-    
+
     return null;
   }
 }
 
 export default createPaginationContainer(
-  QuestionnaireAdminResultsText, 
+  QuestionnaireAdminResultsText,
   {
     simpleQuestion: graphql`
-      fragment QuestionnaireAdminResultsText_simpleQuestion on SimpleQuestion 
-      @argumentDefinitions(
-        count: { type: "Int", defaultValue: 5 }
-        cursor: { type: "String", defaultValue: null }
-      ) {
+      fragment QuestionnaireAdminResultsText_simpleQuestion on SimpleQuestion
+        @argumentDefinitions(
+          count: { type: "Int", defaultValue: 5 }
+          cursor: { type: "String", defaultValue: null }
+        ) {
         id
-        responses (
-          first: $count
-          after: $cursor
-        ) @connection(key: "QuestionnaireAdminResultsText__responses", filters: []) {
-            edges {
-              node {
-                id
-                ... on ValueResponse {
-                  value
-                }
+        responses(first: $count, after: $cursor)
+          @connection(key: "QuestionnaireAdminResultsText__responses", filters: []) {
+          edges {
+            node {
+              id
+              ... on ValueResponse {
+                value
               }
             }
-            pageInfo {
-              hasPreviousPage
-              hasNextPage
-              startCursor
-              endCursor
-            }
           }
+          pageInfo {
+            hasPreviousPage
+            hasNextPage
+            startCursor
+            endCursor
+          }
+        }
       }
     `,
   },
@@ -111,11 +112,15 @@ export default createPaginationContainer(
         ...fragmentVariables,
         count,
         cursor,
-        questionId: props.simpleQuestion.id
+        questionId: props.simpleQuestion.id,
       };
     },
     query: graphql`
-      query QuestionnaireAdminResultsTextQuery($questionId: ID!, $cursor: String, $count: Int) {
+      query QuestionnaireAdminResultsTextPaginatedQuery(
+        $questionId: ID!
+        $cursor: String
+        $count: Int
+      ) {
         simpleQuestion: node(id: $questionId) {
           ...QuestionnaireAdminResultsText_simpleQuestion @arguments(count: $count, cursor: $cursor)
         }

@@ -38,7 +38,9 @@ const Container = styled(ListGroup).attrs({
     font-size: 14px;
   }
 
-  ${props => props.striped === true && `
+  ${props =>
+    props.striped === true &&
+    `
     .list-group-item:nth-child(odd) {
       background-color: ${colors.pageBgc};
     }
@@ -48,13 +50,18 @@ const Container = styled(ListGroup).attrs({
 type Props = {
   children: ?React.Node,
   striped?: boolean,
+  className?: string,
 };
 
 export class ListGroupFlush extends React.Component<Props> {
   render() {
-    const { children, striped } = this.props;
+    const { children, striped, className } = this.props;
 
-    return <Container striped={striped}>{children}</Container>;
+    return (
+      <Container striped={striped} className={className}>
+        {children}
+      </Container>
+    );
   }
 }
 

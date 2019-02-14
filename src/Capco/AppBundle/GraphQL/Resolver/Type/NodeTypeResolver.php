@@ -38,6 +38,10 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
+use Capco\AppBundle\Entity\Questions\SectionQuestion;
+use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 
 class NodeTypeResolver implements ResolverInterface
 {
@@ -184,6 +188,19 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof MapToken) {
             return $this->typeResolver->resolve('MapToken');
+        }
+
+        if ($node instanceof SimpleQuestion) {
+            return $this->typeResolver->resolve('SimpleQuestion');
+        }
+        if ($node instanceof MediaQuestion) {
+            return $this->typeResolver->resolve('MediaQuestion');
+        }
+        if ($node instanceof MultipleChoiceQuestion) {
+            return $this->typeResolver->resolve('MultipleChoiceQuestion');
+        }
+        if ($node instanceof SectionQuestion) {
+            return $this->typeResolver->resolve('SectionQuestion');
         }
 
         throw new UserError('Could not resolve type of Node.');

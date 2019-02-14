@@ -24,11 +24,14 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
       return null;
     }
 
-    if (question.type === 'text') {
+    if (question.__typename === 'SimpleQuestion') {
+      // $FlowFixMe
       return <QuestionnaireAdminResultsText simpleQuestion={question} />;
     }
 
-    if (question.type === 'media') {
+    if (question.__typename === 'MediaQuestion') {
+      console.log('test');
+      // $FlowFixMe
       return <QuestionnaireAdminResultsMedia mediaQuestion={question} />;
     }
 
@@ -69,6 +72,9 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
     const { questionnaire } = this.props;
     const questions = questionnaire.questions.filter(q => q.type !== 'section');
 
+    console.log(questionnaire);
+    console.warn(questions);
+
     return (
       <div className="box box-primary container-fluid">
         <div className="box-content mt-25">
@@ -90,18 +96,18 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
                       ) : (
                         <FormattedMessage id="no-answer" />
                       )}
-                      {/* {question.participants &&
-                        question.responses &&
-                        question.responses.totalCount !== 0 && (
+                      {question.participants &&
+                        question.allResponses &&
+                        question.allResponses.totalCount !== 0 && (
                           <React.Fragment>
                             {' '}
                             /{' '}
                             <FormattedMessage
                               id="count-answers"
-                              values={{ num: question.responses.totalCount }}
+                              values={{ num: question.allResponses.totalCount }}
                             />
                           </React.Fragment>
-                        )} */}
+                        )}
                       <br />
                       {question.required && (
                         <b>
@@ -130,8 +136,7 @@ const container = withColors(QuestionnaireAdminResults);
 export default createFragmentContainer(
   container,
   graphql`
-    fragment QuestionnaireAdminResults_questionnaire on Questionnaire 
-    {
+    fragment QuestionnaireAdminResults_questionnaire on Questionnaire {
       questions {
         __typename
         title
@@ -141,7 +146,9 @@ export default createFragmentContainer(
         participants {
           totalCount
         }
-       
+        allResponses: responses {
+          totalCount
+        }
         ...QuestionnaireAdminResultsText_simpleQuestion
         ...QuestionnaireAdminResultsMedia_mediaQuestion
         ...QuestionnaireAdminResultsBarChart_multipleChoiceQuestion
@@ -151,12 +158,3 @@ export default createFragmentContainer(
     }
   `,
 );
-
-// responses (
-//   first: $count
-//   after: $cursor
-// ) {
-//   totalCount
-// }
-
-//@arguments(count: $count, after: $after)
