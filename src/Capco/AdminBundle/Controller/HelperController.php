@@ -50,7 +50,6 @@ class HelperController extends BaseHelperController
 
         // subject will be empty to avoid unnecessary database requests and keep autocomplete function fast
         $admin->setSubject($admin->getNewInstance());
-        dump($context);
         if ('filter' === $context) {
             // filter
             $fieldDescription = $this->retrieveFilterFieldDescription(
@@ -58,7 +57,6 @@ class HelperController extends BaseHelperController
                 $request->get('field')
             );
             $filterAutocomplete = $admin->getDatagrid()->getFilter($fieldDescription->getName());
-            dump($filterAutocomplete);
             $entity = $filterAutocomplete->getOption('field_options')['class'];
             $property = $filterAutocomplete->getFieldOption('property');
             $callback = $filterAutocomplete->getFieldOption('callback');
@@ -104,11 +102,18 @@ class HelperController extends BaseHelperController
             $items = [];
 
             /** @var UserSearch $userSearch */
-            $users = $this->userSearch->searchUsers($searchText, [$property]);
+            $properties = explode(',', $property);
+            $users = $this->userSearch->searchUsers($searchText, $properties);
             if ($users['count'] > 0) {
-                $getter = 'get' . ucfirst($property);
                 foreach ($users['users'] as $user) {
-                    $items[] = ['id' => $user->getId(), 'label' => $user->$getter()];
+                    $label = '';
+
+                    foreach ($properties as $property) {
+                        $getter = 'get' . ucfirst($property);
+                        $label .= $user->$getter() . ' - ';
+                    }
+
+                    $items[] = ['id' => $user->getId(), 'label' => rtrim($label, ' - ')];
                 }
             }
 
