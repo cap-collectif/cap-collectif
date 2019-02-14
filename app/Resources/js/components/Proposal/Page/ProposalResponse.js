@@ -22,6 +22,9 @@ class ProposalResponse extends React.PureComponent<Props> {
     return response.value && /<[a-z][\s\S]*>/i.test(response.value);
   };
 
+  isRadioEmpty = (radioLabels: radioLabelsType) =>
+    radioLabels.labels.length === 0 && !radioLabels.other;
+
   renderUniqueLabel = (radioLabels: radioLabelsType) => {
     if (!radioLabels) {
       return null;
@@ -52,6 +55,13 @@ class ProposalResponse extends React.PureComponent<Props> {
 
     if ((!response.value || response.value.length === 0) && response.question.type !== 'medias') {
       return null;
+    }
+
+    if (response.question.type === 'radio') {
+      const radioLabelsValue = JSON.parse(response.value || '');
+      if (this.isRadioEmpty(radioLabelsValue)) {
+        return null;
+      }
     }
 
     switch (response.question.type) {
