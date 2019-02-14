@@ -48,23 +48,23 @@ exports[`<RequirementsForm /> call api on every value changed 2`] = `
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
   ],
@@ -85,7 +85,7 @@ exports[`<RequirementsForm /> call api on every value changed 3`] = `
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": Promise {},
     },
   ],
@@ -126,19 +126,19 @@ exports[`<RequirementsForm /> call api on every value changed 4`] = `
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": Promise {},
     },
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": Promise {},
     },
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": Promise {},
     },
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": Promise {},
     },
   ],

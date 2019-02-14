@@ -362,17 +362,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                             '\''
                     );
                 }
-
-                $participants = $contributionResolver->countStepContributors($qs);
-                $this->executeQuery(
-                    'UPDATE CapcoAppBundle:Steps\QuestionnaireStep qs
-                    set qs.contributorsCount = ' .
-                        $participants .
-                        '
-                    where qs.id = \'' .
-                        $qs->getId() .
-                        '\''
-                );
             }
         }
 

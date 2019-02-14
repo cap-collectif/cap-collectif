@@ -39,22 +39,15 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     private $repliesCount = 0;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="contributors_count", type="integer")
-     */
-    private $contributorsCount = 0;
-
-    /**
      * @var Questionnaire
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", mappedBy="step", cascade={"persist"})
      */
-    private $questionnaire = null;
+    private $questionnaire;
 
     /**
      * @ORM\Column(name="footer", type="text", nullable=true)
      */
-    private $footer = null;
+    private $footer;
 
     public function getFooter()
     {
@@ -79,26 +72,6 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     public function isQuestionnaireStep(): bool
     {
         return true;
-    }
-
-    /**
-     * @return int
-     */
-    public function getContributorsCount()
-    {
-        return $this->contributorsCount;
-    }
-
-    /**
-     * @param int $contributorsCount
-     *
-     * @return $this
-     */
-    public function setContributorsCount($contributorsCount)
-    {
-        $this->contributorsCount = $contributorsCount;
-
-        return $this;
     }
 
     /**

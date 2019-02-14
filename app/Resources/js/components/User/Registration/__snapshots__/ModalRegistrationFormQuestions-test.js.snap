@@ -30,11 +30,11 @@ exports[`<ModalRegistrationFormQuestions/> renders a form with dynamic fields 1`
       ],
       "results": Array [
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": undefined,
         },
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": undefined,
         },
       ],
