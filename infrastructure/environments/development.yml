@@ -10,6 +10,7 @@ application:
     SYMFONY_INSTANCE_NAME: dev
     XDEBUG_CONFIG: 'remote_host=192.168.74.67'
     PHP_XDEBUG_ENABLED: 0
+    SYMFONY_DATABASE_NAME: vraidebat
   volumes:
     - ../../:/var/www
     - /var/run/docker.sock:/var/run/docker.sock
