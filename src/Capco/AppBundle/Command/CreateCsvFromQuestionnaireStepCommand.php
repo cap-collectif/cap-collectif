@@ -72,7 +72,7 @@ class CreateCsvFromQuestionnaireStepCommand extends ContainerAwareCommand
 
         return $this->getContainer()
             ->get('doctrine')
-            ->getRepository(QuestionnaireStepRepository::class)
+            ->getRepository('CapcoAppBundle:Steps\QuestionnaireStep')
             ->find($input->getArgument('questionnaireStepId'));
     }
 }
