@@ -20,15 +20,8 @@ class UserEventsResolver implements ResolverInterface
 
     public function __invoke(User $user, Argument $args): Connection
     {
-        $field = $args->offsetGet('orderBy')['field'];
-        $direction = $args->offsetGet('orderBy')['direction'];
-
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
-            $user,
-            $field,
-            $direction
-        ) {
-            return $this->eventRepo->findAllByUser($user, $field, $direction);
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($user) {
+            return $this->eventRepo->findAllByUser($user);
         });
 
         $totalCount = $this->eventRepo->countAllByUser($user);

@@ -3,7 +3,7 @@
 exports[`<EventPreview /> renders correctly and highlighted 1`] = `
 <Fragment>
   <div
-    className="d-flex flex-1 event block  block--bordered highlighted-comment"
+    className="event block  block--bordered highlighted-comment"
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"
@@ -28,30 +28,32 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <UserAvatar
-          anchor={true}
-          className=""
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          size={16}
-          style={Object {}}
-          user={
-            Object {
-              "media": Object {
-                "url": "http://monimage.toto",
-              },
-              "url": "http://jesuistoto.fr",
-              "username": "toto",
+        <div>
+          <UserAvatar
+            anchor={true}
+            className=""
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+            size={16}
+            style={Object {}}
+            user={
+              Object {
+                "media": Object {
+                  "url": "http://monimage.toto",
+                },
+                "url": "http://jesuistoto.fr",
+                "username": "toto",
+              }
             }
-          }
-        />
-        <span
-          className="font-weight-semi-bold"
-        >
-          toto
-        </span>
+          />
+          <span
+            className="font-weight-semi-bold"
+          >
+            toto
+          </span>
+        </div>
       </p>
       <p
         className="excerpt"
@@ -68,10 +70,12 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <i
-          className="cap-marker-1 mr-10"
-        />
-        21 rue george 5, 75012 Paris
+        <div>
+          <i
+            className="cap-marker-1 mr-10"
+          />
+          21 rue george 5, 75012 Paris
+        </div>
       </p>
       <div
         className="excerpt"
@@ -103,7 +107,7 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
 exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
 <Fragment>
   <div
-    className="d-flex flex-1 event block  block--bordered "
+    className="event block  block--bordered "
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"
@@ -128,30 +132,32 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <UserAvatar
-          anchor={true}
-          className=""
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          size={16}
-          style={Object {}}
-          user={
-            Object {
-              "media": Object {
-                "url": "http://monimage.toto",
-              },
-              "url": "http://jesuistoto.fr",
-              "username": "toto",
+        <div>
+          <UserAvatar
+            anchor={true}
+            className=""
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+            size={16}
+            style={Object {}}
+            user={
+              Object {
+                "media": Object {
+                  "url": "http://monimage.toto",
+                },
+                "url": "http://jesuistoto.fr",
+                "username": "toto",
+              }
             }
-          }
-        />
-        <span
-          className="font-weight-semi-bold"
-        >
-          toto
-        </span>
+          />
+          <span
+            className="font-weight-semi-bold"
+          >
+            toto
+          </span>
+        </div>
       </p>
       <p
         className="excerpt"
@@ -168,10 +174,12 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <i
-          className="cap-marker-1 mr-10"
-        />
-        21 rue george 5, 75012 Paris
+        <div>
+          <i
+            className="cap-marker-1 mr-10"
+          />
+          21 rue george 5, 75012 Paris
+        </div>
       </p>
       <div
         className="excerpt"
@@ -203,7 +211,7 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
 exports[`<EventPreview /> renders correctly without picture for user 1`] = `
 <Fragment>
   <div
-    className="d-flex flex-1 event block  block--bordered "
+    className="event block  block--bordered "
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"
@@ -228,28 +236,30 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
       <p
         className="excerpt"
       >
-        <UserAvatar
-          anchor={true}
-          className=""
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          size={16}
-          style={Object {}}
-          user={
-            Object {
-              "media": null,
-              "url": "http://jesuistoto.fr",
-              "username": "toto",
+        <div>
+          <UserAvatar
+            anchor={true}
+            className=""
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+            size={16}
+            style={Object {}}
+            user={
+              Object {
+                "media": null,
+                "url": "http://jesuistoto.fr",
+                "username": "toto",
+              }
             }
-          }
-        />
-        <span
-          className="font-weight-semi-bold"
-        >
-          toto
-        </span>
+          />
+          <span
+            className="font-weight-semi-bold"
+          >
+            toto
+          </span>
+        </div>
       </p>
       <p
         className="excerpt"
@@ -266,10 +276,12 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
       <p
         className="excerpt"
       >
-        <i
-          className="cap-marker-1 mr-10"
-        />
-        21 rue george 5, 75012 Paris
+        <div>
+          <i
+            className="cap-marker-1 mr-10"
+          />
+          21 rue george 5, 75012 Paris
+        </div>
       </p>
       <div
         className="excerpt"
@@ -301,7 +313,7 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
 exports[`<EventPreview /> renders without username 1`] = `
 <Fragment>
   <div
-    className="d-flex flex-1 event block  block--bordered "
+    className="event block  block--bordered "
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"
@@ -341,10 +353,12 @@ exports[`<EventPreview /> renders without username 1`] = `
       <p
         className="excerpt"
       >
-        <i
-          className="cap-marker-1 mr-10"
-        />
-        21 rue george 5, 75012 Paris
+        <div>
+          <i
+            className="cap-marker-1 mr-10"
+          />
+          21 rue george 5, 75012 Paris
+        </div>
       </p>
       <div
         className="excerpt"

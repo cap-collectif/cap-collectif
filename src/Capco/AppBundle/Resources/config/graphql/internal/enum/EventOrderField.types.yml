@@ -1,7 +1,0 @@
-EventOrderField:
-  type: enum
-  config:
-    description: 'Ordering options for events.'
-    values:
-      START_AT:
-        value: 'START_AT'

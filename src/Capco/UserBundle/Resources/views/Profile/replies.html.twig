@@ -1,4 +1,4 @@
-<ul class="media-list">
+<ul class="list-group">
     {% for reply in replies %}
         {% include 'CapcoUserBundle:Profile:blockReply.html.twig' with {'reply': reply, 'classes': 'block  block--bordered  box'} only %}
     {% endfor %}

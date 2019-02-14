@@ -66,7 +66,6 @@ import SiteFaviconAdminPageApp from './startup/SiteFaviconAdminPageApp';
 import ProjectTrashCommentApp from './startup/ProjectTrashCommentApp';
 import AdminImportEventsApp from './startup/AdminImportEventsApp';
 import AdminExportButtonApp from './startup/AdminExportButtonApp';
-import EventListApp from './startup/EventListApp';
 
 import appStore from './stores/AppStore';
 import MapAdminPageApp from './startup/MapAdminPageApp';
@@ -158,5 +157,4 @@ ReactOnRails.register({
   ProjectDistrictAdminApp,
   ProjectTrashCommentApp,
   AdminExportButtonApp,
-  EventListApp,
 });
