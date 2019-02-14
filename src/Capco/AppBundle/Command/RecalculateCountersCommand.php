@@ -9,7 +9,6 @@ use Capco\AppBundle\Resolver\ContributionResolver;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotesResolver;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireRepliesResolver;
 
 class RecalculateCountersCommand extends ContainerAwareCommand
@@ -40,10 +39,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $contributionResolver = $container->get(ContributionResolver::class);
 
         $repliesResolver = $container->get(QuestionnaireRepliesResolver::class);
-
         $this->force = $input->getOption('force');
-
-        $projectVotesResolver = $container->get(ProjectVotesResolver::class);
 
         // ****************************** Opinion counters **********************************************
 
@@ -315,7 +311,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
                 $count = $container
                     ->get('capco.abstract_vote.repository')
-                    ->getVotesFromCollectStep($cs);
+                    ->getVotesFromConsultationStep($cs);
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\ConsultationStep cs
                     set cs.votesCount = ' .

@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AbstractVote;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
@@ -172,7 +172,7 @@ class AbstractVoteRepository extends EntityRepository
         return $result ? $result['value'] : null;
     }
 
-    public function getVotesFromCollectStep(AbstractStep $step): int
+    public function getVotesFromConsultationStep(ConsultationStep $step): int
     {
         $id = $step->getId();
 
