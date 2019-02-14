@@ -98,6 +98,7 @@ class HelperController extends BaseHelperController
         }
         $searchText = $request->get('q');
 
+        // START CUSTOME CAPCO CODE
         if (User::class === $entity) {
             $items = [];
 
@@ -123,6 +124,7 @@ class HelperController extends BaseHelperController
                 'items' => $items,
             ]);
         }
+        // END CUSTOME CAPCO CODE
         $targetAdmin = $fieldDescription->getAssociationAdmin();
 
         // check user permission
