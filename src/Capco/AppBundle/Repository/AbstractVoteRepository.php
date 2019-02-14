@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
@@ -169,6 +170,99 @@ class AbstractVoteRepository extends EntityRepository
         $result = $qb->getQuery()->getOneOrNullResult();
 
         return $result ? $result['value'] : null;
+    }
+
+    public function getVotesFromCollectStep(AbstractStep $step): int
+    {
+        $count = 0;
+        $id = $step->getId();
+
+        $sql = "
+                        SELECT COUNT(v.id)
+                        FROM votes v
+                        LEFT JOIN opinion o ON v.opinion_id = o.id
+                        WHERE o.step_id = \"${id}\"
+                        AND v.published = true;
+                    ";
+        $stmt = $this->getEntityManager()
+            ->getConnection()
+            ->query($sql)
+            ->fetchAll()[0]['COUNT(v.id)'];
+        $count += $stmt;
+
+        $sql = "
+                    SELECT COUNT(v.id)
+                    FROM votes v
+                    LEFT JOIN argument a ON v.argument_id = a.id
+                    LEFT JOIN opinion o ON a.opinion_id = o.id
+                    WHERE o.step_id = \"${id}\"
+                    AND v.published = true;
+                ";
+        $stmt = $this->getEntityManager()
+            ->getConnection()
+            ->query($sql)
+            ->fetchAll()[0]['COUNT(v.id)'];
+        $count += $stmt;
+
+        $sql = "
+                    SELECT COUNT(v.id)
+                    FROM votes v
+                    LEFT JOIN source s ON v.source_id = s.id
+                    LEFT JOIN opinion o ON s.opinion_id = o.id
+                    WHERE o.step_id = \"${id}\"
+                    AND v.published = true;
+                ";
+        $stmt = $this->getEntityManager()
+            ->getConnection()
+            ->query($sql)
+            ->fetchAll()[0]['COUNT(v.id)'];
+        $count += $stmt;
+
+        $sql = "
+                    SELECT COUNT(v.id)
+                    FROM votes v
+                    LEFT JOIN opinion_version ov ON v.opinion_version_id = ov.id
+                    LEFT JOIN opinion o ON ov.opinion_id = o.id
+                    WHERE o.step_id = \"${id}\"
+                    AND v.published = true;
+                ";
+
+        $stmt = $this->getEntityManager()
+            ->getConnection()
+            ->query($sql);
+        $count += $stmt->fetchAll()[0]['COUNT(v.id)'];
+
+        $sql = "
+                    SELECT COUNT(v.id)
+                    FROM votes v
+                    LEFT JOIN argument a ON v.argument_id = a.id
+                    LEFT JOIN opinion_version ov ON a.opinion_version_id = ov.id
+                    LEFT JOIN opinion o ON ov.opinion_id = o.id
+                    WHERE o.step_id = \"${id}\"
+                    AND v.published = true;
+                ";
+
+        $stmt = $this->getEntityManager()
+            ->getConnection()
+            ->query($sql);
+        $count += $stmt->fetchAll()[0]['COUNT(v.id)'];
+
+        $sql = "
+                    SELECT COUNT(v.id)
+                    FROM votes v
+                    LEFT JOIN source s ON v.source_id = s.id
+                    LEFT JOIN opinion_version ov ON s.opinion_version_id = ov.id
+                    LEFT JOIN opinion o ON ov.opinion_id = o.id
+                    WHERE o.step_id = \"${id}\"
+                    AND v.published = true;
+                ";
+
+        $stmt = $this->getEntityManager()
+            ->getConnection()
+            ->query($sql);
+        $count += $stmt->fetchAll()[0]['COUNT(v.id)'];
+
+        return $count;
     }
 
     protected function getQueryBuilder()

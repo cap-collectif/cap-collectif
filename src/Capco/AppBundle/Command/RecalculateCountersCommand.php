@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\Opinion;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputOption;
 use Capco\AppBundle\Resolver\ContributionResolver;
@@ -311,25 +312,10 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                         $cs->getId() .
                         '\''
                 );
-                $count = 0;
-                foreach ($cs->getOpinions() as $opinion) {
-                    $count += $opinion->getVotesCountAll();
-                    foreach ($opinion->getArguments() as $argument) {
-                        $count += $argument->getVotesCount();
-                    }
-                    foreach ($opinion->getSources() as $source) {
-                        $count += $source->getVotesCount();
-                    }
-                    foreach ($opinion->getVersions() as $version) {
-                        $count += $version->getVotesCountAll();
-                        foreach ($version->getArguments() as $argument) {
-                            $count += $argument->getVotesCount();
-                        }
-                        foreach ($version->getSources() as $source) {
-                            $count += $source->getVotesCount();
-                        }
-                    }
-                }
+
+                $count = $container
+                    ->get('capco.abstract_vote.repository')
+                    ->getVotesFromCollectStep($cs);
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\ConsultationStep cs
                     set cs.votesCount = ' .
