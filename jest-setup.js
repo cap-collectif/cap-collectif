@@ -23,10 +23,6 @@ global.$ = $;
 // $FlowFixMe
 global.jQuery = $;
 
-global.Cookies = {
-  getJSON: () => ( '' ),
-  set:() => ('')
-};
 
 global.window.__SERVER__ = false;
 

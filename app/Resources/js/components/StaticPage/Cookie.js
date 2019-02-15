@@ -1,10 +1,12 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Col, Alert } from 'react-bootstrap';
+import { Col, Alert, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import Toggle from 'react-toggle';
 import config from '../../config';
-import CookieMonster from '../../CookieMonster';
+import cookieMonster from '../../cookieMonster';
+import type { State } from '../../types';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 
 type Props = {
@@ -18,21 +20,21 @@ type CookieState = {
 };
 
 export class Cookie extends React.Component<Props, CookieState> {
-  constructor(props: Props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       isAdvertisingEnabled:
         config.canUseDOM &&
-        (typeof CookieMonster.adCookieConsentValue() === 'undefined' ||
-        CookieMonster.adCookieConsentValue() === false
+        (typeof cookieMonster.adCookieConsentValue() === 'undefined' ||
+        cookieMonster.adCookieConsentValue() === false
           ? false
-          : CookieMonster.setCookie(true, 'adCookieConsentValue')),
+          : cookieMonster.setCookie(true, 'adCookieConsentValue')),
       isAnalyticEnabled:
         config.canUseDOM &&
-        (typeof CookieMonster.analyticCookieValue() === 'undefined' ||
-        CookieMonster.analyticCookieValue() === false
+        (typeof cookieMonster.analyticCookieValue() === 'undefined' ||
+        cookieMonster.analyticCookieValue() === false
           ? false
-          : CookieMonster.setCookie(true, 'analyticConsentValue')),
+          : cookieMonster.setCookie(true, 'analyticConsentValue')),
     };
   }
 
@@ -64,21 +66,14 @@ export class Cookie extends React.Component<Props, CookieState> {
     });
   };
 
-  toggleCookies = (value: boolean): void => {
-    this.setState({
-      isAnalyticEnabled: value,
-      isAdvertisingEnabled: value,
-    });
-  };
-
   saveCookiesConfiguration = (): void => {
     const { isAnalyticEnabled, isAdvertisingEnabled } = this.state;
-    CookieMonster.toggleCookie(isAnalyticEnabled, 'analyticConsentValue');
-    CookieMonster.toggleCookie(isAdvertisingEnabled, 'adCookieConsentValue');
-    if (isAnalyticEnabled && isAdvertisingEnabled && CookieMonster.isFullConsent() !== true) {
-      CookieMonster.considerFullConsent();
+    cookieMonster.toggleCookie(isAnalyticEnabled, 'analyticConsentValue');
+    cookieMonster.toggleCookie(isAdvertisingEnabled, 'adCookieConsentValue');
+    if (isAnalyticEnabled && isAdvertisingEnabled && cookieMonster.isFullConsent() !== true) {
+      cookieMonster.considerFullConsent();
     } else {
-      CookieMonster.doNotConsiderFullConsent();
+      cookieMonster.doNotConsiderFullConsent();
     }
     FluxDispatcher.dispatch({
       actionType: 'UPDATE_ALERT',
@@ -86,95 +81,114 @@ export class Cookie extends React.Component<Props, CookieState> {
     });
   };
 
+  toggleCookies = (value: boolean): void => {
+    this.setState({
+      isAnalyticEnabled: value,
+      isAdvertisingEnabled: value,
+    });
+  };
+
   render() {
     const { isAnalyticEnabled, isAdvertisingEnabled } = this.state;
     const { analyticsJs, adJs } = this.props;
+
     return (
-      <div className="container cookie-manager w-auto">
-        <div className="row mt-10 cookie-manager" id="cookies-manager">
-          {config.canUseDOM && CookieMonster.isDoNotTrackActive() && (
-            <Alert bsStyle="info" className="row cookie-manager" id="cookies-alert">
-              <Col sm={1} className="cookie-manager">
-                <div className="col-top font-size-30 cookie-manager ">
+      <div id="cookies-manager">
+        <div>
+          {config.canUseDOM && cookieMonster.isDoNotTrackActive() && (
+            <Alert bsStyle="info" className="row">
+              <Col sm={1}>
+                <div style={{ fontSize: 30, verticalAlign: 'top' }}>
                   <i className="cap cap-information-1" />
                 </div>
               </Col>
-              <Col sm={11} className="cookie-manager">
+              <Col sm={11}>
                 <FormattedMessage id="cookies-are-disabled-by-default" />
               </Col>
             </Alert>
           )}
-          <FormattedMessage id="cookies.content.page" />
-          {analyticsJs && analyticsJs.length > 1 && (
-            <div
-              className="row cookie-manager"
-              style={{ padding: '10px 0' }}
-              id="cookies-performance">
-              <Col sm={8} className="cookie-manager">
-                <strong>
-                  <FormattedMessage id="performance" />
-                </strong>
-              </Col>
-              <Col sm={4} className="d-flex justify-content-end cookie-manager">
-                <div
-                  className={
-                    isAnalyticEnabled
-                      ? 'color-green cookie-manager mr-10'
-                      : 'color-red cookie-manager mr-10'
-                  }>
-                  <FormattedMessage
-                    id={isAnalyticEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
+        </div>
+        {analyticsJs && analyticsJs.length > 1 && (
+          <div>
+            <div className="row" style={{ padding: '10px 0' }} id="cookies-performance">
+              <div>
+                <Col sm={8}>
+                  <strong>
+                    <FormattedMessage id="performance" />
+                  </strong>
+                </Col>
+                <Col sm={4} className="d-flex justify-content-end">
+                  <div
+                    className={isAnalyticEnabled ? 'color-green' : 'color-red'}
+                    style={{ marginRight: 10 }}>
+                    <FormattedMessage
+                      id={isAnalyticEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
+                    />
+                  </div>
+                  <Toggle
+                    checked={isAnalyticEnabled}
+                    onChange={() => this.toggleAnalyticCookies(!isAnalyticEnabled)}
                   />
-                </div>
-                <Toggle
-                  id="cookies-enable-analytic"
-                  checked={isAnalyticEnabled}
-                  className="cookie-manager"
-                  onChange={() => this.toggleAnalyticCookies(!isAnalyticEnabled)}
-                />
-              </Col>
-              <Col sm={12} className="color-dark-gray cookie-manager">
+                </Col>
+              </div>
+              <Col sm={12} className="color-dark-gray">
                 <FormattedMessage id="help-text-performance-option" />
               </Col>
             </div>
-          )}
-          {adJs && adJs.length > 1 && (
-            <div
-              className="row cookie-manager"
-              style={{ padding: '10px 0' }}
-              id="cookies-advertising">
-              <Col sm={8} className="cookie-manager">
-                <strong>
-                  <FormattedMessage id="advertising" />
-                </strong>
-              </Col>
-              <Col sm={4} className="d-flex justify-content-end cookie-manager">
-                <div
-                  className={
-                    isAdvertisingEnabled
-                      ? 'color-green cookie-manager mr-10'
-                      : 'color-red cookie-manager mr-10'
-                  }>
-                  <FormattedMessage
-                    id={isAdvertisingEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
+          </div>
+        )}
+        {adJs && adJs.length > 1 && (
+          <div>
+            <div className="row" style={{ padding: '10px 0' }} id="cookies-advertising">
+              <div>
+                <Col sm={8}>
+                  <strong>
+                    <FormattedMessage id="advertising" />
+                  </strong>
+                </Col>
+                <Col sm={4} className="d-flex justify-content-end">
+                  <div
+                    className={isAdvertisingEnabled ? 'color-green' : 'color-red'}
+                    style={{ marginRight: 10 }}>
+                    <FormattedMessage
+                      id={isAdvertisingEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
+                    />
+                  </div>
+                  <Toggle
+                    checked={isAdvertisingEnabled}
+                    onChange={() => this.toggleAdvertisingCookies(!isAdvertisingEnabled)}
                   />
-                </div>
-                <Toggle
-                  id="cookies-enable-ads"
-                  checked={isAdvertisingEnabled}
-                  className="cookie-manager"
-                  onChange={() => this.toggleAdvertisingCookies(!isAdvertisingEnabled)}
-                />
-              </Col>
-              <Col sm={12} className="color-dark-gray cookie-manager">
+                </Col>
+              </div>
+              <Col sm={12} className="color-dark-gray">
                 <FormattedMessage id="help-text-advertising-option" />
               </Col>
             </div>
-          )}
-        </div>
+          </div>
+        )}
+        {(adJs && adJs.length > 1) ||
+          (analyticsJs && analyticsJs.length > 1 && (
+            <div>
+              <div className="row" style={{ padding: '10px 0' }} id="cookies-management-save">
+                <Button
+                  className="ml-15 btn-primary"
+                  id="cookies-save"
+                  onClick={() => {
+                    this.saveCookiesConfiguration();
+                  }}>
+                  <FormattedMessage id="global.save" />
+                </Button>
+              </div>
+            </div>
+          ))}
       </div>
     );
   }
 }
 
-export default Cookie;
+const mapStateToProps = (state: State) => ({
+  analyticsJs: state.default.parameters['snalytical-tracking-scripts-on-all-pages'],
+  adJs: state.default.parameters['ad-scripts-on-all-pages'],
+});
+
+export default connect(mapStateToProps)(Cookie);

@@ -39,26 +39,19 @@
                         <a href="{{ menu_url(footerLink) }}">
                             {{ footerLink.title }}
                         </a>
-                        |
+                        {% if not loop.last %} |{% endif %}
                     </li>
                 {% endfor %}
                 <li>
-                    <a href="{{ path('app_cookies') }}">
-                        {{ 'cookies'|trans({}, 'CapcoAppBundle') }}
-                    </a> |
-                </li>
-                <li>
-                    {{ react_render_component('CookieApp', {
-                        'props': {
-                            'bannerTrad':  bannerTrad,
-                            'isLink':  true,
-                        }
-                    }) }}
+                    |
+                    <a href="{{ path('app_confidentialite') }}">
+                        {{ 'cookies-management'|trans({}, 'CapcoAppBundle') }}
+                    </a>
                 </li>
             </ul>
             <div class="capco-powered">
                 <p>
-                    {{ 'global.capco_powered' | trans({'%startlink%': '<a class="external-link" href="https://cap-collectif.com">', '%endlink%': '</a>' }, 'CapcoAppBundle') | raw }}
+                    {{ 'global.capco_powered' | trans({'%startlink%': '<a class="external-link" href="https://cap-collectif.com">', '%endlink%': '</a>' }, 'CapcoAppBundle') | raw}}
                 </p>
             </div>
         </div>

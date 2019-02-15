@@ -5,18 +5,16 @@
     {% include '@CapcoApp/Default/header.html.twig' %}
 
     {% if app.request.hasPreviousSession %}
-        <div id="symfony-flash-messages">
-            {% for key, messages in app.session.flashbag.all() %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ key }} alert-dismissible  alert--no-radius" role="alert"
-                         style="margin-bottom: 0; text-align: center">
-                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
-                                class="sr-only">{{ 'global.alert.close'|trans({}, 'CapcoAppBundle') }}</span></button>
-                        <span>{% block error_message %}{{ message | trans({}, 'CapcoAppBundle') }}{% endblock %}</span>
-                    </div>
-                {% endfor %}
+      <div id="symfony-flash-messages">
+        {% for key, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+            <div class="alert alert-{{ key }} alert-dismissible  alert--no-radius" role="alert" style="margin-bottom: 0; text-align: center">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'global.alert.close'|trans({}, 'CapcoAppBundle') }}</span></button>
+                <span>{% block error_message %}{{ message | trans({}, 'CapcoAppBundle') }}{% endblock %}</span>
+            </div>
             {% endfor %}
-        </div>
+        {% endfor %}
+      </div>
     {% endif %}
 
 
@@ -31,19 +29,20 @@
     {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
     {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
     {% if analytic_js is not empty and ads_js is empty %}
-        {% set bannerTrad =  'text-audience-cookie'|trans({}, 'CapcoAppBundle') %}
+        {% set bannerTrad =  'text-audience-cookie'|trans({}, 'CapcoAppBundle')  %}
     {% elseif ads_js  is not empty and analytic_js is empty %}
-        {% set bannerTrad =  'text-cookie-communication'|trans({}, 'CapcoAppBundle') %}
+        {% set bannerTrad =  'text-cookie-communication'|trans({}, 'CapcoAppBundle')  %}
     {% elseif ads_js is not empty and analytic_js is not empty %}
-        {% set bannerTrad =  'texte-cookie-audience-communication'|trans({}, 'CapcoAppBundle') %}
+        {% set bannerTrad =  'texte-cookie-audience-communication'|trans({}, 'CapcoAppBundle')  %}
     {% endif %}
     {% if bannerTrad is defined %}
-        {{ react_render_component('CookieApp', {
-            'props': {
-                'bannerTrad': bannerTrad,
-                'isLink': false,
-            }
-        }) }}
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="col-sm-9">{{ bannerTrad }}</div>
+        <div class="col-sm-3 d-flex justify-content-end">
+            <a id="cookie-more-button" class="mr-10" name="cookie-more" href="{{ path('app_confidentialite') }}">{{ 'cookies-setting'|trans({}, 'CapcoAppBundle') }}</a>
+            <div id="cookie-button-container"><button id="cookie-consent" class="btn btn-default btn-sm" >{{ 'ok-accept-everything'|trans({}, 'CapcoAppBundle') }}</button></div>
+        </div>
+    </div>
     {% endif %}
 
     {% include '@CapcoApp/Default/footer.html.twig' %}
@@ -56,9 +55,9 @@
     <script type="text/javascript">
         window.locale = "{{ intl_locale() }}";
 
-        window.recaptchaOptions = {lang: "{{ intl_locale() }}"};
+        window.recaptchaOptions = { lang: "{{ intl_locale() }}" };
 
-        window._capco_executeAnalyticScript = function () {
+        window._capco_executeAnalyticScript = function(){
             {% if analytic_js is not null %}
             var script = document.createElement("script");
             script.innerHTML = '{{ analytic_js|e("js") }}';
@@ -66,7 +65,7 @@
             {% endif %}
         };
 
-        window._capco_executeAdsScript = function () {
+        window._capco_executeAdsScript = function(){
             {% if ads_js is not null %}
             var script = document.createElement("script");
             script.innerHTML = '{{ ads_js|e("js") }}';
@@ -79,16 +78,16 @@
     <script type="text/javascript">
 
 
-        document.addEventListener("DOMContentLoaded", function (event) {
+        document.addEventListener("DOMContentLoaded", function(event) {
             cookieMonster.processCookieConsent();
         });
 
-        $(window).on('load', function () {
+        $(window).on('load', function() {
             App.externalLinks();
             App.skipLinks();
         });
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
+          $('[data-toggle="tooltip"]').tooltip();
         });
 
         App.customModal('.modal--custom');

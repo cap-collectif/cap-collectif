@@ -3,12 +3,12 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
-import CookieModal from "../components/StaticPage/CookieModal";
+import Cookie from '../components/StaticPage/Cookie';
 
 export default (props: Object) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <CookieModal {...props} />
+      <Cookie {...props} />
     </IntlProvider>
   </Provider>
 );

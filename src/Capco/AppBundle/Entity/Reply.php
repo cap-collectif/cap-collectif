@@ -24,7 +24,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Table(name="reply", indexes={
  *     @ORM\Index(name="idx_author", columns={"id", "author_id"}),
- *     @ORM\Index(name="idx_questionnaire_published", columns={"id", "questionnaire_id", "published"})
+ *     @ORM\Index(name="idx_questionnaire_published", columns={"id", "questionnaire_id", "published"}),
+ *     @ORM\Index(name="idx_author_draft", columns={"id", "questionnaire_id", "author_id", "private", "is_draft"})
  * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")

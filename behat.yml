@@ -32,7 +32,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@core&&~@event_registration'
+        tags: '@core&&~@event_registration&&~@rgpd'
     consultation:
       paths: ['%paths.base%/features/front']
       contexts:
