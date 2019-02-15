@@ -26,4 +26,4 @@ Capco\UserBundle\Entity\User:
       type: string
       groups: [UserDetails, UsersInfos]
     email:
-      groups: [UsersInfos, Elasticsearch]
+      groups: [Elasticsearch]
