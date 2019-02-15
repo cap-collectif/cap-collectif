@@ -16,7 +16,7 @@ type radioLabelsType = {
   other: string,
 };
 
-class ProposalResponse extends React.PureComponent<Props> {
+export class ProposalResponse extends React.PureComponent<Props> {
   isHTML = () => {
     const { response } = this.props;
     return response.value && /<[a-z][\s\S]*>/i.test(response.value);
