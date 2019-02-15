@@ -12,6 +12,8 @@ import 'moment/locale/es';
 import esLocaleData from 'react-intl/locale-data/es';
 import 'moment/locale/de';
 import deLocaleData from 'react-intl/locale-data/de';
+// $FlowFixMe Polyfill
+import 'url-search-params-polyfill';
 
 import ProjectsListApp from './startup/ProjectsListAppClient';
 import ProposalStepPageApp from './startup/ProposalStepPageApp';
