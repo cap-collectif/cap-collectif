@@ -43,10 +43,9 @@ export class QuestionnaireAdminResultsMedia extends React.Component<Props, State
         return acc;
       }, []);
 
-    // eslint-disable-next-line
-    const medias = [].concat.apply([], mediaQuestionMedias);
+    const medias = mediaQuestionMedias && [].concat(...mediaQuestionMedias);
 
-    if (medias.length > 0) {
+    if (medias && medias.length > 0) {
       return (
         <div className="mb-20">
           <div className="row">
