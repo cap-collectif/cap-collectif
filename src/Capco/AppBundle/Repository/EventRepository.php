@@ -22,7 +22,7 @@ class EventRepository extends EntityRepository
             ->addSelect('a', 'm', 't')
             ->leftJoin('e.author', 'a')
             ->leftJoin('a.media', 'm')
-            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = true')
+            ->leftJoin('e.themes', 't')
             ->where('e.id IN (:ids)')
             ->setParameter('ids', $ids);
 
