@@ -142,12 +142,20 @@
 .w-260 {
     width: 260px;
 }
+
+.w-auto {
+    width: auto;
+}
+
 /* =====
   Border
 ==== */
 
 .no-border {
     border: none;
+}
+.border-radius-none {
+    border-radius: 0;
 }
 
 /* =====
@@ -184,6 +192,10 @@
 
 .font-weight-semi-bold {
     font-weight: 600;
+}
+
+.font-size-30 {
+    font-size: 30px;
 }
 
 .text-ellipsis {

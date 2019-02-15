@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 type Props = {
   onClose: () => any,
   label: string,
+  buttonId?: ?string,
 };
 
 class CloseButton extends React.Component<Props> {
@@ -14,9 +15,9 @@ class CloseButton extends React.Component<Props> {
   };
 
   render() {
-    const { label, onClose } = this.props;
+    const { label, onClose, buttonId } = this.props;
     return (
-      <Button onClick={onClose}>
+      <Button onClick={onClose} id={buttonId || ''}>
         <FormattedMessage id={label} />
       </Button>
     );

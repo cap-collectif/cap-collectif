@@ -102,11 +102,18 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/cookies-management", name="app_confidentialite")
-     * @Template("CapcoAppBundle:Default:confidentialite.html.twig")
+     * @Route("/cookies-page", name="app_cookies")
+     * @Template("CapcoAppBundle:Default:cookies.html.twig")
      */
-    public function confidentialiteAction(Request $request)
+    public function cookiesAction(Request $request)
     {
-        return [];
+        $cookiesList = $this->get('capco.site_parameter.repository')->findOneBy([
+            'keyname' => 'cookies-list',
+            'isEnabled' => 1,
+        ]);
+
+        return [
+            'cookiesList' => $cookiesList ? $cookiesList->getValue() : '',
+        ];
     }
 }

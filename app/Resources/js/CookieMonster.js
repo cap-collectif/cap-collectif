@@ -33,6 +33,14 @@ class CookieMonster {
     const consentCookie = Cookies.getJSON('hasFullConsent');
     const analyticConsent = Cookies.getJSON('analyticConsentValue');
     const adsConsent = Cookies.getJSON('adCookieConsentValue');
+
+    if (this.cookieBanner === null && document.getElementById('cookie-banner') !== null) {
+      this.cookieBanner = document.getElementById('cookie-banner');
+    }
+    if (this.cookieConsent === null && document.getElementById('cookie-consent') !== null) {
+      this.cookieConsent = document.getElementById('cookie-consent');
+    }
+
     if (consentCookie === true) {
       this.executeAnalyticScript();
       this.executeAdsScript();
@@ -73,10 +81,6 @@ class CookieMonster {
   };
 
   onDocumentScroll = (event: Event) => {
-    if (window.location.pathname === '/cookies-management') {
-      return;
-    }
-
     if (
       (document.body && document.body.scrollTop > SCROLL_VALUE_TO_CONSENT) ||
       (document.documentElement && document.documentElement.scrollTop > SCROLL_VALUE_TO_CONSENT)
@@ -101,16 +105,43 @@ class CookieMonster {
 
   onDocumentClick = (event: Event) => {
     const target = event.target;
+    // $FlowFixMe
     if (
+      target !== null &&
       // $FlowFixMe
-      target.id === 'cookie-banner' ||
-      // $FlowFixMe
-      target.parentNode.id === 'cookie-banner' ||
-      target.parentNode.parentNode.id === 'cookie-banner' ||
-      target.id === 'cookie-more-button'
+      target.id &&
+      (target.id === 'cookie-banner' || target.id === 'cookie-more-button')
     ) {
       return;
     }
+    // $FlowFixMe
+    if (target !== null && target.className && target.className.search('cookie-manager') !== -1) {
+      return;
+    }
+    if (
+      (target !== null &&
+        // $FlowFixMe
+        target.parentNode !== null &&
+        target.parentNode.className &&
+        target.parentNode.className.search('cookie-manager') !== -1) ||
+      // $FlowFixMe
+      target.parentNode.id === 'cookie-banner' ||
+      target.parentNode.id === 'cookie-banner' ||
+      target.parentNode.id === 'cookie-more-button' ||
+      target.parentNode.id === 'cookies-cancel'
+    ) {
+      return;
+    }
+    if (
+      (target !== null &&
+        target.parentNode !== null &&
+        target.parentNode.parentNode !== null &&
+        target.parentNode.parentNode.id === 'cookie-banner') ||
+      target.parentNode.parentNode.className.search('cookie-manager') !== -1
+    ) {
+      return;
+    }
+
     if (this.isDoNotTrackActive()) {
       Cookies.set('hasFullConsent', false, { expires: 395 });
       this.hideBanner();
@@ -123,10 +154,6 @@ class CookieMonster {
       this.considerFullConsent();
       return;
     }
-    if (window.location.pathname === '/cookies-management' && target.id !== 'cookies-manager') {
-      return;
-    }
-
     this.considerFullConsent();
   };
 

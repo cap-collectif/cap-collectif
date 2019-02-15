@@ -22,6 +22,7 @@ class FeaturesCategoryResolver
         'pages.login' => ['conditions' => [], 'features' => []],
         'pages.contact' => ['conditions' => [], 'features' => []],
         'pages.footer' => ['conditions' => [], 'features' => []],
+        'pages.cookies' => ['conditions' => [], 'features' => []],
         'pages.charter' => ['conditions' => [], 'features' => []],
         'pages.shield' => ['conditions' => [], 'features' => ['shield_mode']],
         'settings.global' => ['conditions' => [], 'features' => []],

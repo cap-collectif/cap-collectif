@@ -2,7 +2,7 @@ exports.config = {
   overrides: {
     production: {
       optimize: true,
-      sourceMaps: true,
+      sourceMaps: false,
     },
   },
   npm: {

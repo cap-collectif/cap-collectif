@@ -18,7 +18,7 @@ require('./modernizr');
 if (!Modernizr.intl) {
   require('./browserUpdate');
 }
-global.cookieMonster = require('./cookieMonster').default;
+global.cookieMonster = require('./CookieMonster').default;
 
 // Our global App for symfony
 global.App = ($ => {

@@ -426,13 +426,14 @@ Capco\AppBundle\Entity\SiteParameter:
     keyname: ad-scripts-on-all-pages
     category: settings.global
     value: |
+      var IDSITE = 'CAPCO';
       var _paq = _paq || [];
       _paq.push(['trackPageView']);
       _paq.push(['enableLinkTracking']);
       (function() {
         var u='//{$PIWIK_URL}/';
        _paq.push(['setTrackerUrl', u+'piwik.php']);
-       _paq.push(['setSiteId', {$IDSITE}]);
+       _paq.push(['setSiteId', {IDSITE}]);
        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
        })();
@@ -445,3 +446,10 @@ Capco\AppBundle\Entity\SiteParameter:
     value: 50
     position: 1
     type: 2
+
+  SiteParameterCookies:
+    keyname: cookies-list
+    category: pages.cookies
+    value: Cookies
+    position: 3
+    type: 1

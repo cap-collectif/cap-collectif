@@ -436,3 +436,10 @@ Capco\AppBundle\Entity\SiteParameter:
     value: de Cap Collectif
     position: 2
     type: 0
+
+  SiteParameterCookies:
+    keyname: cookies-list
+    category: pages.cookies
+    value: ''
+    position: 3
+    type: 1
