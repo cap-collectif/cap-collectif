@@ -112,7 +112,12 @@ class ProjectAdmin extends CapcoAdmin
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.project.author'],
                 null,
-                ['property' => 'username']
+                [
+                    'property' => 'email,username',
+                    'to_string_callback' => function ($enitity, $property) {
+                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    },
+                ]
             );
 
         if (

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -24,7 +25,12 @@ class CommentVoteAdmin extends Admin
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.comment_vote.voter'],
                 null,
-                ['property' => 'username']
+                [
+                    'property' => 'email,username',
+                    'to_string_callback' => function ($enitity, $property) {
+                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    },
+                ]
             );
     }
 

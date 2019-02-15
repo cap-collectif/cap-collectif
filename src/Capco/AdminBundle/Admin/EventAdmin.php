@@ -91,7 +91,10 @@ class EventAdmin extends AbstractAdmin
                 ],
                 null,
                 [
-                    'property' => 'username',
+                    'property' => 'email,username',
+                    'to_string_callback' => function ($enitity, $property) {
+                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    },
                 ]
             )
             ->add('enabled', null, [
