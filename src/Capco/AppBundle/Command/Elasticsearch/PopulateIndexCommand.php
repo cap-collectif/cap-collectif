@@ -46,6 +46,7 @@ class PopulateIndexCommand extends Command
         }
 
         $output->writeln(['Start indexing Elasticsearch.']);
+        $output->writeln(['Current index : ' . $this->indexer->getIndex()->getName()]);
 
         $type = $input->getArgument('type');
         $offset = $input->getArgument('offset');
