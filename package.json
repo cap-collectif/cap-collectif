@@ -241,7 +241,7 @@
     "react-radio": "^2.1.1",
     "react-radio-buttons": "^1.0.11",
     "react-redux": "^5.0.6",
-    "react-relay": "^1.6.0",
+    "react-relay": "^2.0.0",
     "react-router": "3.2.0",
     "react-router-bootstrap": "rr-v3",
     "react-select": "^2.3.0",
