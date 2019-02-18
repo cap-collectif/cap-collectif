@@ -424,3 +424,9 @@ Capco\AppBundle\Entity\SiteParameter:
     value: de Cap Collectif
     position: 2
     type: 0
+  SiteParameterHomePageShareButton:
+    keyname: homepage.jumbotron.share_button
+    category: pages.homepage
+    value: false
+    position: 120
+    type: 8

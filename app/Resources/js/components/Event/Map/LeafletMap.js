@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet-universal';
 import { connect } from 'react-redux';
+import { fetchQuery, graphql } from 'relay-runtime';
 // import ReactOnRails from 'react-on-rails';
 // import { IntlProvider } from 'react-intl-redux';
 import { FormattedMessage } from 'react-intl';
@@ -15,6 +16,8 @@ import { changeEventSelected } from '../../../redux/modules/event';
 import type { MapTokens } from '../../../redux/modules/user';
 import type { MapOptions } from '../../Proposal/Map/LeafletMap';
 import { UserAvatar } from '../../User/UserAvatar';
+import environment from '../../../createRelayEnvironment';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
 
 type Props = {|
   markers: Object | '',
@@ -25,9 +28,57 @@ type Props = {|
   loading: boolean,
 |};
 
+type State = {|
+  currentEvent: ?{
+    id: string,
+    author: ?{
+      username: string,
+      media: ?{
+        url: string,
+      },
+      url: string,
+    },
+    startAt: string,
+    endAt: string,
+    fullAddress: string,
+    title: string,
+    url: string,
+  },
+|};
+
 let L;
 
-export class LeafletMap extends Component<Props> {
+const eventMapPreviewQuery = graphql`
+  query LeafletMapQuery($id: ID!) {
+    node(id: $id) {
+      ... on Event {
+        id
+        title
+        url
+        fullAddress
+        startAt
+        endAt
+        title
+        author {
+          username
+          url
+          media {
+            url
+          }
+        }
+      }
+    }
+  }
+`;
+
+export class LeafletMap extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      currentEvent: null,
+    };
+  }
+
   static defaultProps = {
     markers: '',
     loading: false,
@@ -62,7 +113,17 @@ export class LeafletMap extends Component<Props> {
   };
 
   handleMarkersClick = (marker: Object) => {
-    this.props.dispatch(changeEventSelected(marker.options.id.split('_')[1]));
+    const currentMarkerId = marker.options.id.split('_')[1];
+    if (
+      this.state.currentEvent === null ||
+      typeof this.state.currentEvent !== 'undefined' ||
+      (this.state.currentEvent && this.state.currentEvent.id) !== currentMarkerId
+    ) {
+      fetchQuery(environment, eventMapPreviewQuery, { id: currentMarkerId }).then(data => {
+        this.setState({ currentEvent: data.node });
+      });
+    }
+    this.props.dispatch(changeEventSelected(currentMarkerId));
   };
 
   render() {
@@ -143,35 +204,37 @@ export class LeafletMap extends Component<Props> {
                           */}
                         {/* <Provider store={ReactOnRails.getStore('appStore')}>
                           <IntlProvider> */}
-                        <div>
-                          <h2>
-                            <a href={marker.url}>{marker.title}</a>
-                          </h2>
-                          {marker.author && marker.author.username && (
-                            <p className="excerpt">
-                              <div>
-                                <UserAvatar size={16} user={marker.author} />
-                                <span className="font-weight-semi-bold">
-                                  {marker.author.username}
-                                </span>
-                              </div>
-                            </p>
-                          )}
-                          {/* <p className="excerpt">
-                                <i className="cap-calendar-1 mr-10" />
-                                <DatesInterval
-                                  endAt={marker.endAt}
-                                  startAt={marker.startAt}
-                                  fullDay
-                                />
-                              </p> */}
-                          {marker.fullAddress && (
-                            <p className="excerpt">
-                              <i className="cap-marker-1 mr-15" />
-                              {marker.fullAddress}
-                            </p>
-                          )}
-                        </div>
+                        {this.state.currentEvent && this.state.currentEvent.id === marker.id ? (
+                          <div>
+                            <h2>
+                              <a href={this.state.currentEvent.url}>
+                                {this.state.currentEvent.title}
+                              </a>
+                            </h2>
+                            {this.state.currentEvent.author &&
+                              this.state.currentEvent.author.username && (
+                                <p className="excerpt">
+                                  <div>
+                                    {/* $FlowFixMe */}
+                                    <UserAvatar size={16} user={this.state.currentEvent.author} />
+                                    <span className="font-weight-semi-bold">
+                                      {this.state.currentEvent.author.username}
+                                    </span>
+                                  </div>
+                                </p>
+                              )}
+                            {this.state.currentEvent.fullAddress && (
+                              <p className="excerpt">
+                                <i className="cap-marker-1 mr-15" />
+                                {this.state.currentEvent.fullAddress}
+                              </p>
+                            )}
+                          </div>
+                        ) : (
+                          <div>
+                            <Loader />
+                          </div>
+                        )}
                         {/* </IntlProvider>
                         </Provider> */}
                       </Popup>

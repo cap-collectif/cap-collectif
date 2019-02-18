@@ -101,18 +101,6 @@ export default createPaginationContainer(
               id
               lat
               lng
-              url
-              fullAddress
-              startAt
-              endAt
-              title
-              author {
-                username
-                url
-                media {
-                  url
-                }
-              }
             }
           }
         }
