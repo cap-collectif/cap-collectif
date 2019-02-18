@@ -65,11 +65,6 @@ class Indexer
         $this->logger = $logger;
     }
 
-    public function getIndex(): Index
-    {
-        return $this->index;
-    }
-
     /**
      * Fetch ALL the indexable entities and send them to bulks.
      */
