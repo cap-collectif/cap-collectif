@@ -882,16 +882,14 @@ EOF;
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_REPORTING_HEADER_MAP[$columnName])) {
                 $value = Arr::path($report, self::PROPOSAL_REPORTING_HEADER_MAP[$columnName]);
-                $cleanValue = Text::cleanNewline($value);
-                $row[] = exportUtils::parseCellValue($cleanValue);
+                $row[] = exportUtils::parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$columnName])) {
                 // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
             } elseif (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
                 // copy comment row
                 $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
-                $cleanValue = Text::cleanNewline($value);
-                $row[] = exportUtils::parseCellValue($cleanValue);
+                $row[] = exportUtils::parseCellValue($value);
             } else {
                 $row[] = '';
             }
