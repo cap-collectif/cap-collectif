@@ -6,8 +6,9 @@ import { FormattedMessage } from 'react-intl';
 import type { QuestionnaireAdminResultsMedia_mediaQuestion } from './__generated__/QuestionnaireAdminResultsMedia_mediaQuestion.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import { CardContainer } from '../Ui/Card/CardContainer';
+import FileIcon from '../Ui/Icons/FileIcon';
 
-const RESPONSE_PAGINATION = 5;
+const RESPONSE_PAGINATION = 15;
 
 type Props = {
   relay: RelayPaginationProp,
@@ -45,22 +46,43 @@ export class QuestionnaireAdminResultsMedia extends React.Component<Props, State
 
     const medias = mediaQuestionMedias && [].concat(...mediaQuestionMedias);
 
+    console.log(medias);
+
     if (medias && medias.length > 0) {
       return (
         <div className="mb-20">
-          <div className="row">
-            {medias.map((media, key) => (
-              <div key={key} className="col-sm-3 col-xs-6">
-                <CardContainer>
-                  <div className="card__body text-center">
-                    <span>
-                      {media && media.name} <br />
-                      {media && media.size}
-                    </span>
-                  </div>
-                </CardContainer>
-              </div>
-            ))}
+          <div className="row d-flex flex-wrap">
+            {medias.map((media, key) => {
+              const { contentType } = media;
+              const format = contentType.split('/').pop();
+              let size;
+              if (media.size / 1000 < 1000) {
+                size = `${Math.round(media.size / 1000)} Ko`;
+              } else if (media.size / 1000000 < 1000) {
+                size = `${Math.round(media.size / 1000000)} Mo`;
+              } else {
+                size = `${Math.round(media.size / 1000000000)} Go`;
+              }
+
+              return (
+                <div key={key} className="col-sm-3 col-xs-6 d-flex">
+                  <CardContainer>
+                    <div className="card__body text-center">
+                      <div className="mb-5">
+                        <FileIcon format={format} />
+                      </div>
+                      <span className="mb-5">
+                        <a href={media.url}>{media.name}</a>
+                      </span>
+                      <span>
+                        {/* {media.size} */}
+                        {size}
+                      </span>
+                    </div>
+                  </CardContainer>
+                </div>
+              );
+            })}
           </div>
 
           {relay.hasMore() && (
@@ -102,8 +124,10 @@ export default createPaginationContainer(
               id
               ... on MediaResponse {
                 medias {
+                  url
                   name
                   size
+                  contentType
                 }
               }
             }
