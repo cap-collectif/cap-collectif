@@ -30,7 +30,6 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
     }
 
     if (question.__typename === 'MediaQuestion') {
-      console.log('test');
       // $FlowFixMe
       return <QuestionnaireAdminResultsMedia mediaQuestion={question} />;
     }
@@ -71,9 +70,6 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
   render() {
     const { questionnaire } = this.props;
     const questions = questionnaire.questions.filter(q => q.type !== 'section');
-
-    console.log(questionnaire);
-    console.warn(questions);
 
     return (
       <div className="box box-primary container-fluid">

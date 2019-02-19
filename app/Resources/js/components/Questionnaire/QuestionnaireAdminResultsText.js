@@ -54,7 +54,7 @@ export class QuestionnaireAdminResultsText extends React.Component<Props, State>
                   bsStyle="primary"
                   className="btn-outline-primary mt-20"
                   onClick={this.handleLoadMore}>
-                  <FormattedMessage id="global.more" />
+                  <FormattedMessage id="see-more-answers" />
                 </Button>
               )}
             </>

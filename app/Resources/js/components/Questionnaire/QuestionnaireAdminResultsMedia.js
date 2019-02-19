@@ -7,8 +7,9 @@ import type { QuestionnaireAdminResultsMedia_mediaQuestion } from './__generated
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import { CardContainer } from '../Ui/Card/CardContainer';
 import FileIcon from '../Ui/Icons/FileIcon';
+import FormattedMediaSize from '../Utils/FormattedMediaSize';
 
-const RESPONSE_PAGINATION = 15;
+const RESPONSE_PAGINATION = 24;
 
 type Props = {
   relay: RelayPaginationProp,
@@ -46,23 +47,12 @@ export class QuestionnaireAdminResultsMedia extends React.Component<Props, State
 
     const medias = mediaQuestionMedias && [].concat(...mediaQuestionMedias);
 
-    console.log(medias);
-
     if (medias && medias.length > 0) {
       return (
         <div className="mb-20">
           <div className="row d-flex flex-wrap">
             {medias.map((media, key) => {
-              const { contentType } = media;
-              const format = contentType.split('/').pop();
-              let size;
-              if (media.size / 1000 < 1000) {
-                size = `${Math.round(media.size / 1000)} Ko`;
-              } else if (media.size / 1000000 < 1000) {
-                size = `${Math.round(media.size / 1000000)} Mo`;
-              } else {
-                size = `${Math.round(media.size / 1000000000)} Go`;
-              }
+              const format = media.contentType.split('/').pop();
 
               return (
                 <div key={key} className="col-sm-3 col-xs-6 d-flex">
@@ -74,10 +64,7 @@ export class QuestionnaireAdminResultsMedia extends React.Component<Props, State
                       <span className="mb-5">
                         <a href={media.url}>{media.name}</a>
                       </span>
-                      <span>
-                        {/* {media.size} */}
-                        {size}
-                      </span>
+                      <FormattedMediaSize size={media.size} />
                     </div>
                   </CardContainer>
                 </div>
@@ -94,7 +81,7 @@ export class QuestionnaireAdminResultsMedia extends React.Component<Props, State
                   bsStyle="primary"
                   className="btn-outline-primary"
                   onClick={this.handleLoadMore}>
-                  <FormattedMessage id="global.more" />
+                  <FormattedMessage id="see-more-documents" />
                 </Button>
               )}
             </div>
@@ -113,7 +100,7 @@ export default createPaginationContainer(
     mediaQuestion: graphql`
       fragment QuestionnaireAdminResultsMedia_mediaQuestion on MediaQuestion
         @argumentDefinitions(
-          count: { type: "Int", defaultValue: 5 }
+          count: { type: "Int", defaultValue: 24 }
           cursor: { type: "String", defaultValue: null }
         ) {
         id
