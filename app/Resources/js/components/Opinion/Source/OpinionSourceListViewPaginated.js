@@ -7,17 +7,23 @@ import OpinionSource from './OpinionSource';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { OpinionSourceListViewPaginated_sourceable } from './__generated__/OpinionSourceListViewPaginated_sourceable.graphql';
 
-type Props = {
+type Props = {|
   relay: RelayPaginationProp,
   sourceable: OpinionSourceListViewPaginated_sourceable,
-};
-type State = {
+|};
+
+type State = {|
   loading: boolean,
-};
+|};
 
 class OpinionSourceListViewPaginated extends React.Component<Props, State> {
+  state = {
+    loading: false,
+  };
+
   render() {
     const { sourceable, relay } = this.props;
+    const { loading } = this.state;
     if (!sourceable.sources.edges || sourceable.sources.edges.length === 0) {
       return (
         <Panel.Body className="text-center">
@@ -40,7 +46,7 @@ class OpinionSourceListViewPaginated extends React.Component<Props, State> {
           ))}
         {relay.hasMore() && (
           <ListGroupItem style={{ textAlign: 'center' }}>
-            {this.state.loading ? (
+            {loading ? (
               <Loader />
             ) : (
               <Button
