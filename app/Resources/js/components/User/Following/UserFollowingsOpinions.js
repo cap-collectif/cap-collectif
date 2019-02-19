@@ -23,11 +23,11 @@ export class UserFollowingsOpinions extends Component<Props, State> {
 
   onUnfollowAll() {
     const { viewer } = this.props;
-    const ids = viewer.followingOpinions.edges.map(edge => edge.node.id);
+    const idsOpinion = viewer.followingOpinions.edges.map(edge => edge.node.id);
 
     this.setState({ open: !this.state.open }, () => {
       UnfollowOpinionMutation.commit({
-        input: { ids },
+        input: { idsOpinion },
       });
     });
   }
