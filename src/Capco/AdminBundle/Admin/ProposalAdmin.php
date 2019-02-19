@@ -158,12 +158,7 @@ class ProposalAdmin extends AbstractAdmin
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.proposal.updateAuthor'],
                 null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
-                ]
+                ['property' => 'username']
             )
             ->add('district', null, ['label' => 'admin.fields.proposal.district'])
             ->add(
@@ -171,24 +166,14 @@ class ProposalAdmin extends AbstractAdmin
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.proposal.author'],
                 null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
-                ]
+                ['property' => 'username']
             )
             ->add(
                 'likers',
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.proposal.likers'],
                 null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
-                ]
+                ['property' => 'username']
             )
             ->add('updatedAt', null, ['label' => 'admin.fields.proposal.updated_at']);
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {

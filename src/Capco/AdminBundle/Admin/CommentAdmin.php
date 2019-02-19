@@ -43,28 +43,6 @@ class CommentAdmin extends AbstractAdmin
         return $object;
     }
 
-    public function getTemplate($name)
-    {
-        if ('list' === $name) {
-            return 'CapcoAdminBundle:Comment:list.html.twig';
-        }
-        if ('edit' === $name) {
-            return 'CapcoAdminBundle:Comment:edit.html.twig';
-        }
-
-        return $this->getTemplateRegistry()->getTemplate($name);
-    }
-
-    public function getViewer()
-    {
-        return $this->tokenStorage->getToken()->getUser();
-    }
-
-    public function isViewerSuperAdmin()
-    {
-        return \is_object($this->getViewer()) && $this->getViewer()->hasRole('ROLE_SUPER_ADMIN');
-    }
-
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -73,12 +51,7 @@ class CommentAdmin extends AbstractAdmin
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.comment.author'],
                 null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
-                ]
+                ['property' => 'username']
             )
             ->add('authorName', null, ['label' => 'admin.fields.comment.author_name'])
             ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])
@@ -172,6 +145,27 @@ class CommentAdmin extends AbstractAdmin
             ])
             ->add('trashedReason', null, ['label' => 'admin.fields.comment.trashed_reason'])
             ->add('pinned', null, ['label' => 'admin.fields.comment.pinned', 'required' => false]);
+    }
+
+    public function getTemplate($name)
+    {
+        if ('list' === $name) {
+            return 'CapcoAdminBundle:Comment:list.html.twig';
+        } elseif ('edit' === $name) {
+            return 'CapcoAdminBundle:Comment:edit.html.twig';
+        }
+
+        return $this->getTemplateRegistry()->getTemplate($name);
+    }
+
+    public function getViewer()
+    {
+        return $this->tokenStorage->getToken()->getUser();
+    }
+
+    public function isViewerSuperAdmin()
+    {
+        return is_object($this->getViewer()) && $this->getViewer()->hasRole('ROLE_SUPER_ADMIN');
     }
 
     protected function configureRoutes(RouteCollection $collection)

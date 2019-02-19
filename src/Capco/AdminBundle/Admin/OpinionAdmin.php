@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
@@ -63,38 +62,6 @@ class OpinionAdmin extends CapcoAdmin
     {
     }
 
-    /**
-     * if user is supper admin return all else return only what I can see.
-     */
-    public function createQuery($context = 'list')
-    {
-        $user = $this->tokenStorage->getToken()->getUser();
-        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
-        }
-
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
-        $query
-            ->leftJoin($query->getRootAliases()[0] . '.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pAs')
-            ->leftJoin('pAs.project', 'p')
-            ->orWhere(
-                $query
-                    ->expr()
-                    ->andX(
-                        $query->expr()->eq('p.Author', ':author'),
-                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
-                    )
-            );
-        $query->orWhere(
-            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
-        );
-        $query->setParameter('author', $user);
-
-        return $query;
-    }
-
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -105,12 +72,7 @@ class OpinionAdmin extends CapcoAdmin
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.opinion.author'],
                 null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
-                ]
+                ['property' => 'username']
             )
             ->add('step', null, ['label' => 'admin.fields.opinion.step'])
             ->add('OpinionType', null, ['label' => 'admin.fields.opinion.opinion_type'])
@@ -268,5 +230,37 @@ class OpinionAdmin extends CapcoAdmin
             ->join('cs.consultationStepType', 'type')
             ->where('type = :stepType')
             ->setParameter('stepType', $consultationStepType);
+    }
+
+    /**
+     * if user is supper admin return all else return only what I can see
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'p')
+            ->orWhere(
+                $query
+                    ->expr()
+                    ->andX(
+                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
+                    )
+            );
+        $query->orWhere(
+            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+        );
+        $query->setParameter('author', $user);
+
+        return $query;
     }
 }

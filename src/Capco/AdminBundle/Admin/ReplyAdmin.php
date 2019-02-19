@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AdminBundle\Admin;
 
 use Doctrine\DBAL\Query\QueryBuilder;
@@ -25,39 +24,6 @@ class ReplyAdmin extends AbstractAdmin
         $this->tokenStorage = $tokenStorage;
     }
 
-    /**
-     * if user is supper admin return all else return only what I can see.
-     */
-    public function createQuery($context = 'list')
-    {
-        $user = $this->tokenStorage->getToken()->getUser();
-        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
-        }
-
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
-        $query
-            ->leftJoin($query->getRootAliases()[0] . '.questionnaire', 'q')
-            ->leftJoin('q.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pAs')
-            ->leftJoin('pAs.project', 'p')
-            ->orWhere(
-                $query
-                    ->expr()
-                    ->andX(
-                        $query->expr()->eq('p.Author', ':author'),
-                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
-                    )
-            );
-        $query->orWhere(
-            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
-        );
-        $query->setParameter('author', $user);
-
-        return $query;
-    }
-
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -67,12 +33,7 @@ class ReplyAdmin extends AbstractAdmin
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.reply.author'],
                 null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
-                ]
+                ['property' => 'username']
             )
             ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at'])
             ->add('questionnaire.step', null, ['label' => 'admin.fields.reply.questionnaire_step'])
@@ -120,5 +81,38 @@ class ReplyAdmin extends AbstractAdmin
     {
         $collection->remove('create');
         $collection->remove('edit');
+    }
+
+    /**
+     * if user is supper admin return all else return only what I can see
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.questionnaire', 'q')
+            ->leftJoin('q.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'p')
+            ->orWhere(
+                $query
+                    ->expr()
+                    ->andX(
+                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
+                    )
+            );
+        $query->orWhere(
+            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+        );
+        $query->setParameter('author', $user);
+
+        return $query;
     }
 }

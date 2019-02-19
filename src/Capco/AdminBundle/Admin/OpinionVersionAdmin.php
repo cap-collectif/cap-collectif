@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -33,39 +32,6 @@ class OpinionVersionAdmin extends AbstractAdmin
     {
     }
 
-    /**
-     * if user is supper admin return all else return only what I can see.
-     */
-    public function createQuery($context = 'list')
-    {
-        $user = $this->tokenStorage->getToken()->getUser();
-        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
-        }
-
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
-        $query
-            ->leftJoin($query->getRootAliases()[0] . '.parent', 'pa')
-            ->leftJoin('pa.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pAs')
-            ->leftJoin('pAs.project', 'p')
-            ->orWhere(
-                $query
-                    ->expr()
-                    ->andX(
-                        $query->expr()->eq('p.Author', ':author'),
-                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
-                    )
-            );
-        $query->orWhere(
-            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
-        );
-        $query->setParameter('author', $user);
-
-        return $query;
-    }
-
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -77,12 +43,7 @@ class OpinionVersionAdmin extends AbstractAdmin
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.opinion_version.author'],
                 null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
-                ]
+                ['property' => 'username']
             )
             ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
             ->add('published', null, ['label' => 'admin.fields.opinion_version.is_enabled'])
@@ -164,6 +125,39 @@ class OpinionVersionAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(['list', 'create', 'edit', 'delete', 'show']);
+    }
+
+    /**
+     * if user is supper admin return all else return only what I can see
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.parent', 'pa')
+            ->leftJoin('pa.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'p')
+            ->orWhere(
+                $query
+                    ->expr()
+                    ->andX(
+                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
+                    )
+            );
+        $query->orWhere(
+            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+        );
+        $query->setParameter('author', $user);
+
+        return $query;
     }
 
     protected function configureShowFields(ShowMapper $showMapper)

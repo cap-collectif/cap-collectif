@@ -19,6 +19,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateCsvFromEventsCommand extends ContainerAwareCommand
 {
     public const EVENTS_HEADERS = [
+        '_id',
+        'id',
         'title',
         'body',
         'media_id',
@@ -107,6 +109,8 @@ class CreateCsvFromEventsCommand extends ContainerAwareCommand
             function ($edge) use ($writer, $progress) {
                 $event = $edge['node'];
                 $writer->addRow([
+                    $event['_id'],
+                    $event['id'],
                     $event['title'],
                     $event['body'],
                     $event['media'] ? $event['media']['id'] : null,
@@ -161,6 +165,8 @@ class CreateCsvFromEventsCommand extends ContainerAwareCommand
             edges {
               cursor  
               node {
+                _id
+                id
                 title
                 body
                 media {

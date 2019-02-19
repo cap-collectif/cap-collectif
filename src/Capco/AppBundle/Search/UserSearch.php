@@ -54,34 +54,6 @@ class UserSearch extends Search
         ];
     }
 
-    public function searchUsers(
-        $terms = null,
-        $fields = [],
-        $notInIds = [],
-        $onlyUsers = false
-    ): array {
-        $query = new Query\BoolQuery();
-
-        if ($terms) {
-            $query = $this->searchTermsInMultipleFields($query, $fields, $terms, 'phrase_prefix');
-        }
-        if (\count($notInIds) > 0) {
-            $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
-        }
-
-        $resultSet = $this->index->getType($this->type)->search($query);
-        $users = $this->getHydratedResultsFromResultSet($resultSet);
-
-        if ($onlyUsers) {
-            return $users;
-        }
-
-        return [
-            'users' => $users,
-            'count' => $resultSet->getTotalHits(),
-        ];
-    }
-
     public function getContributorByProject(Project $project, int $offset, int $limit): array
     {
         $nestedQuery = new Query\Nested();

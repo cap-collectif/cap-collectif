@@ -91,10 +91,7 @@ class EventAdmin extends AbstractAdmin
                 ],
                 null,
                 [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
+                    'property' => 'username',
                 ]
             )
             ->add('enabled', null, [
@@ -195,7 +192,7 @@ class EventAdmin extends AbstractAdmin
                 'required' => true,
                 'property' => 'email',
                 'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    return $enitity->getEmail();
                 },
             ])
             ->add('startAt', 'sonata_type_datetime_picker', [

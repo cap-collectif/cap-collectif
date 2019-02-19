@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\OpinionVote;
@@ -23,12 +22,7 @@ class OpinionVoteAdmin extends Admin
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.opinion_vote.voter'],
                 null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
-                ]
+                ['property' => 'username']
             )
             ->add('value', null, ['label' => 'admin.fields.opinion_vote.value'])
             ->add('updatedAt', null, ['label' => 'admin.fields.opinion_vote.updated_at'])
