@@ -378,6 +378,20 @@ class ProfileController extends Controller
         ];
     }
 
+    /**
+     * @Route("/{slug}/events", name="capco_user_profile_show_events", defaults={"_feature_flags" = "profiles"})
+     * @Template("CapcoUserBundle:Profile:showUserEvents.html.twig")
+     */
+    public function showEventsAction(User $user)
+    {
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
+
+        return [
+            'user' => $user,
+            'projectsCount' => $projectsCount,
+        ];
+    }
+
     private function getProposalsProps(User $user)
     {
         $proposalsWithStep = $this->get(

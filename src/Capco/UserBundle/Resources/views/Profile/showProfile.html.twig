@@ -56,6 +56,14 @@
                     </a>
                 </li>
                 {% endif %}
+
+                <li class="profile__value {% if (app.request.attributes.get('_route') == 'capco_user_profile_show_events') %}active{% endif %} ">
+                    <a href="{{ path('capco_user_profile_show_events', {'slug': user.slug}) }}">
+                        <h2 class="h5 excerpt  profile__value__label">Event</h2>
+                        <p class="profile__value__number">3</p>
+                    </a>
+                </li>
+
                 {#dont use user.projectsCount because it's included private projects and we want to display public projects only#}
                 {% if projectsCount > 0 %}
                 <li class="profile__value {% if (app.request.attributes.get('_route') == 'capco_user_profile_show_projects') %}active{% endif %} ">
