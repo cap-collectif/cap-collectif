@@ -25,3 +25,5 @@ Capco\UserBundle\Entity\User:
       serialized_name: uniqueId
       type: string
       groups: [UserDetails, UsersInfos]
+    email:
+      groups: [Elasticsearch]
