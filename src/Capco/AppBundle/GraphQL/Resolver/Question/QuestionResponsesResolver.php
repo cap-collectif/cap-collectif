@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\Resolver\Question;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\Repository\MediaResponseRepository;
@@ -30,8 +29,12 @@ class QuestionResponsesResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(AbstractQuestion $question, Arg $args, User $viewer)
+    public function __invoke(AbstractQuestion $question, Arg $args, $viewer)
     {
+        if (!$viewer) {
+            return [];
+        }
+
         if (
             $question->getQuestionnaire() &&
             $question->getQuestionnaire()->isPrivateResult() &&
