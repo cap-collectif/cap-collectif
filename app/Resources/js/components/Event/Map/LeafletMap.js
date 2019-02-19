@@ -72,6 +72,8 @@ const eventMapPreviewQuery = graphql`
 `;
 
 export class LeafletMap extends Component<Props, State> {
+  eventsViewed = [];
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -114,16 +116,22 @@ export class LeafletMap extends Component<Props, State> {
 
   handleMarkersClick = (marker: Object) => {
     const currentMarkerId = marker.options.id.split('_')[1];
-    if (
+    this.props.dispatch(changeEventSelected(currentMarkerId));
+
+    // load from local cache
+    if (typeof this.eventsViewed[currentMarkerId] !== 'undefined') {
+      this.setState({ currentEvent: this.eventsViewed[currentMarkerId] });
+    } else if (
       this.state.currentEvent === null ||
       typeof this.state.currentEvent !== 'undefined' ||
       (this.state.currentEvent && this.state.currentEvent.id) !== currentMarkerId
     ) {
       fetchQuery(environment, eventMapPreviewQuery, { id: currentMarkerId }).then(data => {
+        // add it in local cache
+        this.eventsViewed[data.node.id] = data.node;
         this.setState({ currentEvent: data.node });
       });
     }
-    this.props.dispatch(changeEventSelected(currentMarkerId));
   };
 
   render() {
@@ -178,6 +186,9 @@ export class LeafletMap extends Component<Props, State> {
             showCoverageOnHover={false}
             zoomToBoundsOnClick
             onMarkerClick={marker => this.handleMarkersClick(marker)}
+            onPopupClose={() => {
+              this.props.dispatch(changeEventSelected(null));
+            }}
             maxClusterRadius={30}>
             {markers &&
               markers.edges &&

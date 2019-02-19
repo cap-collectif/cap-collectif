@@ -15,7 +15,7 @@ type State = {|
   loading: boolean,
 |};
 
-const PAGINATION = 250;
+const PAGINATION = 100;
 
 export class EventMap extends React.Component<Props, State> {
   state = {
