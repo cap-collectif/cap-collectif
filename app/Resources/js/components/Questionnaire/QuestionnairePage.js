@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
-import {injectIntl} from "react-intl";
-import {createFragmentContainer, graphql} from "react-relay";
-import StepPageHeader from "../Steps/Page/StepPageHeader";
-import UserReplies from "../Reply/UserReplies";
-import ReplyCreateFormWrapper from "../Reply/Form/ReplyCreateFormWrapper";
-import StepPageFooter from "../Steps/Page/StepPageFooter";
-import {type QuestionnairePage_questionnaire} from './__generated__/QuestionnairePage_questionnaire.graphql';
+import { injectIntl } from 'react-intl';
+import { createFragmentContainer, graphql } from 'react-relay';
+import StepPageHeader from '../Steps/Page/StepPageHeader';
+import UserReplies from '../Reply/UserReplies';
+import ReplyCreateFormWrapper from '../Reply/Form/ReplyCreateFormWrapper';
+import StepPageFooter from '../Steps/Page/StepPageFooter';
+import { type QuestionnairePage_questionnaire } from './__generated__/QuestionnairePage_questionnaire.graphql';
 
 type Props = {
   questionnaire: ?QuestionnairePage_questionnaire,
@@ -14,17 +14,17 @@ type Props = {
 
 export class QuestionnairePage extends React.Component<Props> {
   render() {
-    const {questionnaire} = this.props;
+    const { questionnaire } = this.props;
 
     return (
       <div>
         {/* $FlowFixMe $refType */}
-        {questionnaire.step && <StepPageHeader step={questionnaire.step}/>}
+        {questionnaire.step && <StepPageHeader step={questionnaire.step} />}
         {/* $FlowFixMe $refType */}
-        <UserReplies questionnaire={questionnaire}/>
-        <ReplyCreateFormWrapper questionnaire={questionnaire}/>
+        <UserReplies questionnaire={questionnaire} />
+        <ReplyCreateFormWrapper questionnaire={questionnaire} />
         {/* $FlowFixMe $refType */}
-        {questionnaire.step && <StepPageFooter step={questionnaire.step}/>}
+        {questionnaire.step && <StepPageFooter step={questionnaire.step} />}
       </div>
     );
   }
@@ -35,7 +35,7 @@ const container = injectIntl(QuestionnairePage);
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment QuestionnairePage_questionnaire on Questionnaire
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       step {
         ...StepPageFooter_step
         ...StepPageHeader_step
