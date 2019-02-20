@@ -22,13 +22,13 @@ class Version20190215115957 extends AbstractMigration
         $date = (new \DateTime())->format('Y-m-d H:i:s');
         $this->connection->insert('site_parameter', [
             'keyname' => 'homepage.jumbotron.share_button',
-            'value' => 1,
+            'value' => 0,
             'position' => 120,
             'category' => 'pages.homepage',
             'type' => 8,
             'created_at' => $date,
             'updated_at' => $date,
-            'is_enabled' => 1,
+            'is_enabled' => 0,
         ]);
     }
 
