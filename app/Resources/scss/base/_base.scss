@@ -145,6 +145,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
     p {
       margin: 0;
@@ -185,6 +186,16 @@
         display: flex;
         margin: auto 0;
       }
+
+      .opinion__pie-chart {
+        width: 280px;
+        height: 105px;
+        max-width: 100%;
+
+        & .recharts-pie {
+          font-weight: 500;
+        }
+      }
     }
 
     h4, h3 {
@@ -197,13 +208,15 @@
 
 @media (max-width: $screen-xs-max) {
   .list-group-custom {
-    .list-group-item {
-      flex-direction: column;
-    }
-
     .opinion__chart {
       display: none;
     }
+  }
+}
+
+@media (max-width: 605px) {
+  .opinion__pie-chart {
+    margin: 10px auto auto;
   }
 }
 

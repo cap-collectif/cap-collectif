@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { injectIntl, type IntlShape } from 'react-intl';
+import colors from '../../utils/colors';
 
 type Props = {
   intl: IntlShape,
@@ -49,7 +50,7 @@ class VotePiechart extends React.Component<Props> {
                 width: '100%',
                 height: '85%',
               },
-              colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
+              colors: colors.votes,
               pieSliceText: 'value',
               backgroundColor: 'transparent',
             }}

@@ -1,3 +1,5 @@
+import colors from './utils/colors';
+
 /*eslint-disable */
 (function($) {
   'use strict';
@@ -23,7 +25,7 @@
         ]);
         options = {
           legend: 'none',
-          colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
+          colors: colors.votes,
           pieSliceText: 'value',
           backgroundColor: 'transparent',
         };
