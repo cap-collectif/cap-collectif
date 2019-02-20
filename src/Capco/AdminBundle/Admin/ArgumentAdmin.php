@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Argument;
@@ -26,6 +27,40 @@ class ArgumentAdmin extends AbstractAdmin
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
     }
+
+    /**
+     * if user is supper admin return all else return only what I can see.
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.opinion', 'op')
+            ->leftJoin('op.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'p')
+            ->orWhere(
+                $query
+                    ->expr()
+                    ->andX(
+                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
+                    )
+            );
+        $query->orWhere(
+            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+        );
+        $query->setParameter('author', $user);
+
+        return $query;
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -39,7 +74,12 @@ class ArgumentAdmin extends AbstractAdmin
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.argument.author'],
                 null,
-                ['property' => 'username']
+                [
+                    'property' => 'username,email',
+                    'to_string_callback' => function ($enitity, $property) {
+                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    },
+                ]
             )
             ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
             ->add('updatedAt', null, ['label' => 'admin.fields.argument.updated_at'])
@@ -97,7 +137,10 @@ class ArgumentAdmin extends AbstractAdmin
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.argument.author',
-                'property' => 'username',
+                'property' => 'username,email',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                },
             ])
             ->add('body', null, ['label' => 'admin.fields.argument.body', 'attr' => ['rows' => 10]])
             ->add('trashedStatus', TrashedStatusType::class, [
@@ -111,38 +154,5 @@ class ArgumentAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-    }
-
-    /**
-     * if user is supper admin return all else return only what I can see
-     */
-    public function createQuery($context = 'list')
-    {
-        $user = $this->tokenStorage->getToken()->getUser();
-        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
-        }
-
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
-        $query
-            ->leftJoin($query->getRootAliases()[0] . '.opinion', 'op')
-            ->leftJoin('op.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pAs')
-            ->leftJoin('pAs.project', 'p')
-            ->orWhere(
-                $query
-                    ->expr()
-                    ->andX(
-                        $query->expr()->eq('p.Author', ':author'),
-                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
-                    )
-            );
-        $query->orWhere(
-            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
-        );
-        $query->setParameter('author', $user);
-
-        return $query;
     }
 }

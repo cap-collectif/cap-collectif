@@ -182,7 +182,10 @@ class OpinionAdmin extends CapcoAdmin
             ->add('title', null, ['label' => 'admin.fields.opinion.title'])
             ->add('Author', ModelAutocompleteType::class, [
                 'label' => 'admin.fields.opinion.author',
-                'property' => 'username',
+                'property' => 'username,email',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                },
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.opinion.position',

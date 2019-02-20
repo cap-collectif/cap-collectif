@@ -82,7 +82,10 @@ class VideoAdmin extends AbstractAdmin
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.video.author',
-                'property' => 'username',
+                'property' => 'username,email',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                },
             ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.video.is_enabled',
