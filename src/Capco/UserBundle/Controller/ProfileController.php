@@ -385,10 +385,12 @@ class ProfileController extends Controller
     public function showEventsAction(User $user)
     {
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
+        $eventsCount = $this->get('capco.event.repository')->countAllByUser($user);
 
         return [
             'user' => $user,
             'projectsCount' => $projectsCount,
+            'eventsCount' => $eventsCount,
         ];
     }
 
