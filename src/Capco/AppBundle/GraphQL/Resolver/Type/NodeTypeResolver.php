@@ -191,7 +191,11 @@ class NodeTypeResolver implements ResolverInterface
         }
 
         if ($node instanceof SimpleQuestion) {
-            return $this->typeResolver->resolve('SimpleQuestion');
+            if (\in_array($currentSchemaName, ['preview'], true)) {
+                return $this->typeResolver->resolve('PreviewSimpleQuestion');
+            }
+
+            return $this->typeResolver->resolve('InternalSimpleQuestion');
         }
         if ($node instanceof MediaQuestion) {
             return $this->typeResolver->resolve('MediaQuestion');
