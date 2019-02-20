@@ -55,7 +55,7 @@ export class QuestionnaireAdminResultsMedia extends React.Component<Props, State
               const format = media.contentType.split('/').pop();
 
               return (
-                <div key={key} className="col-sm-3 col-xs-6 d-flex">
+                <div key={`${media.name}${key}`} className="col-sm-3 col-xs-6 d-flex">
                   <CardContainer>
                     <div className="card__body text-center">
                       <div className="mb-5">
