@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Mailer\Message\Message;
-use Capco\AppBundle\Mailer\Message\User\ContactMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
@@ -38,16 +37,11 @@ class MailerService
     {
         $delivered = true;
 
-        // ReplyTo's header is used in Contact's context because we want to keep platform's sender but
-        // deliver as final user (eg: from: sender@cap-collectif.com in API but show in mailbox from: user@gmail.com)
-        if ($message instanceof ContactMessage) {
-            $message->setReplyTo($message->getSenderEmail());
-            // this trigger next condition below.
-            $message->setSenderEmail(null);
-        }
-
         if (!$message->getSenderEmail()) {
-            $this->setDefaultSender($message);
+            $senderEmail = $this->siteParams->getValue('admin.mail.notifications.send_address');
+            $senderName = $this->siteParams->getValue('admin.mail.notifications.send_name');
+            $message->setSenderEmail($senderEmail);
+            $message->setSenderName($senderName);
         }
 
         $message->setSitename($this->siteParams->getValue('global.site.fullname'));
@@ -99,12 +93,6 @@ class MailerService
         if (!empty($message->getCC())) {
             $swiftMessage->setCc($message->getCC());
         }
-
-        if (!empty($message->getReplyTo())) {
-            // We don't want to keep name.
-            $swiftMessage->setReplyTo([$message->getReplyTo() => null]);
-        }
-
         //  try {
         foreach ($message->getRecipients() as $recipient) {
             $swiftMessage->setTo([$recipient->getEmailAddress() => $recipient->getFullName()]);
@@ -124,13 +112,5 @@ class MailerService
     public function getFailedRecipients()
     {
         return $this->failedRecipients;
-    }
-
-    private function setDefaultSender(Message $message): void
-    {
-        $senderEmail = $this->siteParams->getValue('admin.mail.notifications.send_address');
-        $senderName = $this->siteParams->getValue('admin.mail.notifications.send_name');
-        $message->setSenderEmail($senderEmail);
-        $message->setSenderName($senderName);
     }
 }
