@@ -16,8 +16,16 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', PurifiedTextType::class)
-            ->add('description', PurifiedTextType::class)
+            ->add('title', PurifiedTextType::class, [
+                'strip_tags' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
+            ->add('description', PurifiedTextType::class, [
+                'strip_tags' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
             ->add('questions', CollectionType::class, [
                 'allow_add' => true,
                 'allow_delete' => true,

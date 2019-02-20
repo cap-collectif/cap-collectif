@@ -144,3 +144,8 @@ services:
     autowire: true
     arguments:
       $webDir: '%kernel.project_dir%/web/'
+
+  Capco\AppBundle\Controller\Site\ExportController:
+    autowire: true
+    arguments:
+      $exportDir: '%kernel.project_dir%/web/export/'

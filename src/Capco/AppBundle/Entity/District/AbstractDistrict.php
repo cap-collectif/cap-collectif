@@ -65,7 +65,7 @@ abstract class AbstractDistrict implements IndexableInterface
 
     public function __construct()
     {
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getGeojson(): ?string

@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -21,37 +21,67 @@ class ProposalFormUpdateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', PurifiedTextType::class)
-            ->add('titleHelpText', PurifiedTextType::class)
+            ->add('title', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
+            ->add('titleHelpText', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
 
-            ->add('description', PurifiedTextType::class)
+            ->add('description', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
 
             ->add('usingDescription', CheckboxType::class)
             ->add('descriptionMandatory', CheckboxType::class)
-            ->add('descriptionHelpText', PurifiedTextType::class)
+            ->add('descriptionHelpText', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
 
             ->add('usingSummary', CheckboxType::class)
-            ->add('summaryHelpText', PurifiedTextType::class)
+            ->add('summaryHelpText', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
 
             ->add('usingIllustration', CheckboxType::class)
-            ->add('illustrationHelpText', PurifiedTextType::class)
+            ->add('illustrationHelpText', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
 
             ->add('proposalInAZoneRequired', CheckboxType::class)
 
             ->add('usingThemes', CheckboxType::class)
             ->add('themeMandatory', CheckboxType::class)
-            ->add('themeHelpText', PurifiedTextType::class)
+            ->add('themeHelpText', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
 
             ->add('usingDistrict', CheckboxType::class)
             ->add('districtMandatory', CheckboxType::class)
-            ->add('districtHelpText', PurifiedTextType::class)
+            ->add('districtHelpText', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
 
             ->add('usingCategories', CheckboxType::class)
             ->add('categoryMandatory', CheckboxType::class)
-            ->add('categoryHelpText', PurifiedTextType::class)
+            ->add('categoryHelpText', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
 
             ->add('usingAddress', CheckboxType::class)
-            ->add('addressHelpText', PurifiedTextType::class)
+            ->add('addressHelpText', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
 
             ->add('latMap', NumberType::class)
             ->add('lngMap', NumberType::class)

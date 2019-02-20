@@ -1,7 +1,7 @@
 MediaConnection:
   type: relay-connection
   config:
-    nodeType: Media!
+    nodeType: InternalMedia!
     connectionFields:
       totalCount:
         type: Int!

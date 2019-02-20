@@ -3,7 +3,6 @@ services:
     public: true
 
   Capco\AppBundle\Repository\AbstractVoteRepository:
-    public: false
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:AbstractVote']
 

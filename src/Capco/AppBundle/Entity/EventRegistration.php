@@ -58,7 +58,7 @@ class EventRegistration
     public function __construct(Event $event = null)
     {
         $this->event = $event;
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt = new \DateTime();
         $this->confirmed = false;
     }
 

@@ -29,16 +29,29 @@ class QuestionTypeResolver implements ResolverInterface
             if ('preview' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PreviewSimpleQuestion');
             }
+
             return $this->typeResolver->resolve('InternalSimpleQuestion');
         }
         if ($question instanceof MediaQuestion) {
-            return $this->typeResolver->resolve('MediaQuestion');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewMediaQuestion');
+            }
+
+            return $this->typeResolver->resolve('InternalMediaQuestion');
         }
         if ($question instanceof MultipleChoiceQuestion) {
-            return $this->typeResolver->resolve('MultipleChoiceQuestion');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewMultipleChoiceQuestion');
+            }
+
+            return $this->typeResolver->resolve('InternalMultipleChoiceQuestion');
         }
         if ($question instanceof SectionQuestion) {
-            return $this->typeResolver->resolve('SectionQuestion');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewSectionQuestion');
+            }
+
+            return $this->typeResolver->resolve('InternalSectionQuestion');
         }
 
         throw new UserError('Could not resolve type of Question.');

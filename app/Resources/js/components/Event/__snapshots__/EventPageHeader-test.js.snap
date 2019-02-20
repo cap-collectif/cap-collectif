@@ -4,7 +4,9 @@ exports[`<EventPageHeader /> renders correctly without title 1`] = `
 <div
   className="container text-center"
 >
-  <h1>
+  <h1
+    className="m-0"
+  >
     <FormattedMessage
       id="events-list"
       values={Object {}}
@@ -17,7 +19,9 @@ exports[`<EventPageHeader /> renders correcty 1`] = `
 <div
   className="container text-center"
 >
-  <h1>
+  <h1
+    className="m-0"
+  >
     <FormattedHTMLMessage
       id="<p>Titre personnalisé</p>"
       values={Object {}}

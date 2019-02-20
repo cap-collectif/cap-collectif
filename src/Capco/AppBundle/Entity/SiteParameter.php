@@ -114,7 +114,7 @@ class SiteParameter
      */
     public function __construct()
     {
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt = new \DateTime();
         $this->type = self::TYPE_SIMPLE_TEXT;
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\SectionQuestion;
@@ -15,15 +16,28 @@ class SectionQuestionType extends AbstractType
 {
     /**
      * @// TODO: delete `private` and `required` during the refacto.
+     *
      * @see https://github.com/cap-collectif/platform/issues/6073 tech task.
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('id', IntegerType::class);
         $builder->add('temporaryId', TextType::class);
-        $builder->add('title', PurifiedTextType::class);
-        $builder->add('description', PurifiedTextType::class);
-        $builder->add('helpText', PurifiedTextType::class);
+        $builder->add('title', PurifiedTextType::class, [
+            'strip_tags' => true,
+            'purify_html' => true,
+            'purify_html_profile' => 'default',
+        ]);
+        $builder->add('description', PurifiedTextType::class, [
+            'strip_tags' => true,
+            'purify_html' => true,
+            'purify_html_profile' => 'default',
+        ]);
+        $builder->add('helpText', PurifiedTextType::class, [
+            'strip_tags' => true,
+            'purify_html' => true,
+            'purify_html_profile' => 'default',
+        ]);
         $builder->add('type', IntegerType::class);
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);

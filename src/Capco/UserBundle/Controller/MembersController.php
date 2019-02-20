@@ -18,7 +18,7 @@ class MembersController extends Controller
      * @Route("/members/{page}", name="app_members", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "members_list"})
      * @Route("/members/{userType}/{page}", name="app_members_type", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "members_list"} )
      * @Route("/members/{userType}/{sort}/{page}", name="app_members_type_sorted", requirements={"page" = "\d+"}, defaults={"page" = 1, "userType" = null, "_feature_flags" = "members_list"} )
-     * @Template()
+     * @Template("CapcoUserBundle:Members:index.html.twig")
      */
     public function indexAction(Request $request, $page, $userType = null, $sort = null)
     {

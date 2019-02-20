@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Form\Type\PurifiedTextareaType;
-use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,28 +14,33 @@ class OpinionVersionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', PurifiedTextType::class, [
+            ->add('title', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
                 'constraints' => [
-                  new Assert\NotNull(),
-                  new Assert\NotBlank(),
-                  new Assert\Length(['min' => 2]),
+                    new Assert\NotNull(),
+                    new Assert\NotBlank(),
+                    new Assert\Length(['min' => 2]),
                 ],
             ])
-            ->add('body', PurifiedTextareaType::class, [
+            ->add('body', TextareaType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
                 'constraints' => [
-                  new Assert\NotNull(),
-                  new Assert\NotBlank(),
-                  new Assert\Length(['min' => 2]),
+                    new Assert\NotNull(),
+                    new Assert\NotBlank(),
+                    new Assert\Length(['min' => 2]),
                 ],
             ])
-            ->add('comment', PurifiedTextareaType::class, [
+            ->add('comment', TextareaType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
                 'constraints' => [
-                  new Assert\NotNull(),
-                  new Assert\NotBlank(),
-                  new Assert\Length(['min' => 2]),
+                    new Assert\NotNull(),
+                    new Assert\NotBlank(),
+                    new Assert\Length(['min' => 2]),
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

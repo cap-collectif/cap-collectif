@@ -47,14 +47,18 @@ overblog_graphql:
         # These types names should be explicitly declare here
         types:
           - PublicConsultation
-          - PublicQuestionnaire
+          - PreviewQuestionnaire
           - PreviewProject
           - PreviewEvent
           - PreviewProposalVote
           - PreviewProposal
           - PreviewValueResponse
+          - PreviewMediaResponse
           - PreviewCollectStep
           - PreviewSimpleQuestion
+          - PreviewMultipleChoiceQuestion
+          - PreviewSectionQuestion
+          - PreviewMediaQuestion
       # This is our internal schema (used by our clients)
       internal:
         query: InternalQuery
@@ -71,16 +75,16 @@ overblog_graphql:
           - FirstnameRequirement
           - LastnameRequirement
           - DateOfBirthRequirement
-          - MediaQuestion
-          - MediaResponse
-          - MultipleChoiceQuestion
           - OpinionOrVersion
           - OtherStep
           - PhoneRequirement
           - PresentationStep
           - QuestionnaireStep
           - RankingStep
-          - InternalSimpleQuestion
-          - InternalValueResponse
           - VersionVote
-          - SectionQuestion
+          - InternalSimpleQuestion
+          - InternalMultipleChoiceQuestion
+          - InternalValueResponse
+          - InternalSectionQuestion
+          - InternalMediaQuestion
+          - InternalMediaResponse

@@ -16,12 +16,32 @@ class PersonalDataFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', PurifiedTextType::class, ['strip_tags' => true])
-            ->add('lastname', PurifiedTextType::class, ['strip_tags' => true])
-            ->add('address', PurifiedTextType::class, ['strip_tags' => true])
-            ->add('address2', PurifiedTextType::class, ['strip_tags' => true])
+            ->add('firstname', PurifiedTextType::class, [
+                'purify_html' => true,
+                'strip_tags' => true,
+                'purify_html_profile' => 'default',
+            ])
+            ->add('lastname', PurifiedTextType::class, [
+                'strip_tags' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
+            ->add('address', PurifiedTextType::class, [
+                'strip_tags' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
+            ->add('address2', PurifiedTextType::class, [
+                'strip_tags' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
             ->add('zipCode')
-            ->add('city', PurifiedTextType::class, ['strip_tags' => true])
+            ->add('city', PurifiedTextType::class, [
+                'strip_tags' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
             ->add('phone')
             ->add('email', EmailType::class)
             ->add('phoneConfirmed')

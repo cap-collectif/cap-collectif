@@ -64,8 +64,12 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalProject');
         }
         if ($node instanceof Questionnaire) {
-            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
+            if ('public' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PublicQuestionnaire');
+            }
+
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewQuestionnaire');
             }
 
             return $this->typeResolver->resolve('InternalQuestionnaire');
@@ -155,7 +159,7 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalEvent');
         }
         if ($node instanceof Reply) {
-            return $this->typeResolver->resolve('Reply');
+            return $this->typeResolver->resolve('InternalReply');
         }
         if ($node instanceof Follower) {
             return $this->typeResolver->resolve('Follower');

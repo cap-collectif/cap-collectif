@@ -11,7 +11,7 @@ class SoftDeleteEventListener
         $em = $event->getEntityManager();
         foreach ($em->getUnitOfWork()->getScheduledEntityDeletions() as $object) {
             if (method_exists($object, 'getDeletedAt')) {
-                if ($object->getDeletedAt() instanceof \Datetime) {
+                if ($object->getDeletedAt() instanceof \DateTime) {
                     continue;
                 }
                 $object->setDeletedAt(new \DateTime());

@@ -1,6 +1,12 @@
 includes:
-  - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan/conf/config.level1.neon
+
 parameters:
+    checkClassCaseSensitivity: true
+    checkThisOnly: true
+    autoload_files:
+        - vendor/autoload.php
     excludes_analyse:
         - %currentWorkingDirectory%/app/AppKernel.php
         - %currentWorkingDirectory%/app/config/parameters.php
@@ -37,3 +43,16 @@ parameters:
 
 # Method Capco\AppBundle\Entity\Post::canContribute() invoked with 1 parameter, 0 required.
         - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/CommentableTrait.php
+    symfony:
+        constant_hassers: true
+
+rules:
+    - \PHPStan\Rules\Cast\EchoRule
+    - \PHPStan\Rules\Cast\InvalidCastRule
+    - \PHPStan\Rules\Cast\InvalidPartOfEncapsedStringRule
+    - \PHPStan\Rules\Cast\PrintRule
+    - \PHPStan\Rules\Functions\IncompatibleDefaultParameterTypeRule
+    - \PHPStan\Rules\Methods\IncompatibleDefaultParameterTypeRule
+    - \PHPStan\Rules\Operators\InvalidBinaryOperationRule
+    - \PHPStan\Rules\Operators\InvalidUnaryOperationRule
+    - \PHPStan\Rules\Operators\InvalidComparisonOperationRule

@@ -36,11 +36,11 @@ class Answer
 
     public function __construct()
     {
-        $this->updatedAt = new \Datetime();
-        $this->createdAt = new \Datetime();
+        $this->updatedAt = new \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): ?string
     {
         if ($this->getTitle()) {
             return $this->getTitle();
@@ -49,18 +49,12 @@ class Answer
         return 'Answer';
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param mixed $title
-     */
-    public function setTitle($title)
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 

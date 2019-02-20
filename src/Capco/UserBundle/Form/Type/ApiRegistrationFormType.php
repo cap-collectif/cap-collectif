@@ -32,7 +32,12 @@ class ApiRegistrationFormType extends AbstractType
         // disable password repeated
         $builder->remove('plainPassword')->add('plainPassword', PasswordType::class);
         $builder
-            ->add('username', PurifiedTextType::class, ['required' => true, 'strip_tags' => true])
+            ->add('username', PurifiedTextType::class, [
+                'required' => true,
+                'purify_html' => true,
+                'strip_tags' => true,
+                'purify_html_profile' => 'default',
+            ])
             ->add('email', EmailType::class, ['required' => true]);
 
         $builder->add('captcha', ReCaptchaType::class, ['validation_groups' => ['registration']]);

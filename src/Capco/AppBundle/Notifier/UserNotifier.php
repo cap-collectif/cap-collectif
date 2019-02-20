@@ -1,9 +1,11 @@
 <?php
+
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
@@ -12,12 +14,27 @@ use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 
 final class UserNotifier extends BaseNotifier
 {
-    public function acknowledgeReply(Project $project, Reply $reply): void
-    {
+    public function acknowledgeReply(
+        Project $project,
+        Reply $reply,
+        ?\DateTime $endAt,
+        string $stepUrl,
+        AbstractStep $step,
+        User $user,
+        bool $isUpdated = false
+    ): void {
         $this->mailer->sendMessage(
             QuestionnaireAcknowledgeReplyMessage::create(
                 $project,
                 $reply,
+                $endAt,
+                $stepUrl,
+                $isUpdated,
+                $step,
+                $user->isEmailConfirmed(),
+                $user->isEmailConfirmed()
+                    ? ''
+                    : $this->userResolver->resolveRegistrationConfirmationUrl($user),
                 $reply->getAuthor()->getEmail()
             )
         );

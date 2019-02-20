@@ -32,7 +32,7 @@ InternalUser:
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       # TODO rename this to `avatar`
       media:
-        type: 'Media'
+        type: 'InternalMedia'
         description: "The user's public avatar."
       updatedAt:
         type: 'DateTime'
@@ -238,7 +238,7 @@ InternalUser:
       deletedAccountAt:
         type: 'DateTime'
       medias:
-        type: '[Media]!'
+        type: '[InternalMedia]!'
         description: 'Get all medias the user has published.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMediasResolver", [value, args])'
       votes:
@@ -310,7 +310,7 @@ InternalUser:
         description: 'The arguments created by user.'
         argsBuilder: 'Relay::Connection'
       responses:
-        type: 'ResponseConnection!'
+        type: 'InternalResponseConnection!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserResponsesResolver", [value])'
         description: 'The responses answered by user.'
         argsBuilder: 'Relay::Connection'

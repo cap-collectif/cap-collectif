@@ -1,0 +1,9 @@
+PreviewMediaQuestion:
+  type: object
+  inherits:
+    - PreviewQuestion
+  config:
+    interfaces:
+      - PreviewQuestion
+    name: MediaQuestion
+    description: 'A question which accept document only.'

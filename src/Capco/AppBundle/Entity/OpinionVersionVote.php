@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -64,7 +65,7 @@ class OpinionVersionVote extends AbstractVote
 
     public function __construct()
     {
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getRelated()

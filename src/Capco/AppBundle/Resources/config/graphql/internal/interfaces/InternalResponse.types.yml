@@ -10,3 +10,4 @@ InternalResponse:
         description: 'Nullable ID in case of empty response.'
       question:
         type: 'InternalQuestion!'
+        description: 'Identifies the question of the response.'

@@ -36,7 +36,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
           questions={
             Array [
               Object {
-                "choices": null,
+                "choices": Array [],
                 "description": "description of question",
                 "helpText": "",
                 "id": "10",
@@ -277,7 +277,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
           questions={
             Array [
               Object {
-                "choices": null,
+                "choices": Array [],
                 "description": "description of question",
                 "helpText": "",
                 "id": "10",
@@ -481,7 +481,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
           questions={
             Array [
               Object {
-                "choices": null,
+                "choices": Array [],
                 "description": "description of question",
                 "helpText": "",
                 "id": "10",
@@ -992,7 +992,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
           questions={
             Array [
               Object {
-                "choices": null,
+                "choices": Array [],
                 "description": "description of question",
                 "helpText": "",
                 "id": "10",

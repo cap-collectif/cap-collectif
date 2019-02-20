@@ -95,7 +95,7 @@
 }
 
 .p-15 {
-    padding: 10px;
+    padding: 15px;
 }
 
 /* =====
@@ -208,8 +208,4 @@
     position: sticky;
     position: -webkit-sticky;
     top: 0;
-}
-.sticky-t-60 {
-    @extend .sticky;
-    top: 60px;
 }

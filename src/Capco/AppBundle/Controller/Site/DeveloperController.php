@@ -61,6 +61,10 @@ class DeveloperController extends Controller
         $query = null;
         $mutation = null;
 
+        // Public types with Preview types should be here :
+        $blackList = ['PublicQuestionnaire'];
+
+        // Public types hard to guess :
         $publicWhiteList = [
             'OrderDirection',
             'Trashable',
@@ -68,6 +72,7 @@ class DeveloperController extends Controller
             'NotPublishedReason',
             'UniformResourceLocatable',
             'UserError',
+            'PageInfo',
             'Node',
             'String',
             'Int',
@@ -86,6 +91,11 @@ class DeveloperController extends Controller
             $solution->{'preview'} = false;
             if ('Preview' === substr($aliases[0], 0, 7)) {
                 $solution->{'preview'} = true;
+            }
+
+            // We remove everything in black list
+            if (\in_array($aliases[0], $blackList)) {
+                continue;
             }
 
             // We remove everything not in public or preview schema

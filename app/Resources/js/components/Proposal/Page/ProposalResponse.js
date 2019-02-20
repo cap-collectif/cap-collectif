@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
 import ProposalMediaResponse from './ProposalMediaResponse';
 import TitleInvertContrast from '../../Ui/Typography/TitleInvertContrast';
 import type { ProposalResponse_response } from './__generated__/ProposalResponse_response.graphql';
@@ -22,9 +23,6 @@ export class ProposalResponse extends React.PureComponent<Props> {
     return response.value && /<[a-z][\s\S]*>/i.test(response.value);
   };
 
-  isRadioEmpty = (radioLabels: radioLabelsType) =>
-    radioLabels.labels.length === 0 && !radioLabels.other;
-
   renderUniqueLabel = (radioLabels: radioLabelsType) => {
     if (!radioLabels) {
       return null;
@@ -41,11 +39,31 @@ export class ProposalResponse extends React.PureComponent<Props> {
     return null;
   };
 
+  getEmptyResponseValue = () => {
+    const { response } = this.props;
+
+    return (
+      <div className="block">
+        <h3 className="h3">{response.question.title}</h3>
+        <p className="excerpt">
+          <FormattedMessage id="project.votes.widget.no_value" />
+        </p>
+      </div>
+    );
+  };
+
   render() {
     const response = this.props.response;
+    const questionType = response.question.type;
+    const responseWithJSON =
+      questionType === 'button' ||
+      questionType === 'radio' ||
+      questionType === 'checkbox' ||
+      questionType === 'ranking';
+    const defaultEditorEmptyValue = '<p><br></p>';
     let value = '';
 
-    if (response.question.type === 'section') {
+    if (questionType === 'section') {
       return (
         <div>
           <TitleInvertContrast>{response.question.title}</TitleInvertContrast>
@@ -53,14 +71,21 @@ export class ProposalResponse extends React.PureComponent<Props> {
       );
     }
 
-    if ((!response.value || response.value.length === 0) && response.question.type !== 'medias') {
-      return null;
+    if (
+      (questionType === 'medias' && response.medias && response.medias.length === 0) ||
+      (questionType === 'editor' && response.value === defaultEditorEmptyValue) ||
+      ((!response.value || response.value.length === 0) && questionType !== 'medias')
+    ) {
+      return this.getEmptyResponseValue();
     }
 
-    if (response.question.type === 'radio') {
-      const radioLabelsValue = JSON.parse(response.value || '');
-      if (this.isRadioEmpty(radioLabelsValue)) {
-        return null;
+    if (responseWithJSON && response.value) {
+      const responseValue = JSON.parse(response.value);
+      const labelsValue = responseValue.labels.filter(el => el != null);
+      const otherValue = responseValue.other;
+
+      if (!otherValue && labelsValue.length === 0) {
+        return this.getEmptyResponseValue();
       }
     }
 

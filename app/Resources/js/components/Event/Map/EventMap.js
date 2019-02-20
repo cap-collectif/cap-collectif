@@ -50,10 +50,10 @@ export class EventMap extends React.Component<Props, State> {
           <Button
             style={{
               position: 'absolute',
-              marginLeft: '-115px',
-              left: '50%',
+              marginLeft: '5%',
               top: '85%',
               zIndex: '1500',
+              width: '90%',
             }}
             onClick={this.loadAll}>
             <FormattedMessage id="map-load-all-events" />

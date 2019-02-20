@@ -3,34 +3,13 @@ services:
     autowire: true
     autoconfigure: true
     public: false
+    bind:
+      $projectRootDir: '%kernel.project_dir%'
+      $kernelRootDir: '%kernel.root_dir%'
 
   Capco\AppBundle\Command\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/Command/*'
     exclude: '%kernel.root_dir%/../src/Capco/AppBundle/Command/Maker/*'
-
-  Capco\AppBundle\Command\CreateCsvFromProposalStepCommand:
-    arguments:
-      $projectRootDir: '%kernel.project_dir%'
-
-  Capco\AppBundle\Command\CreateCsvFromEventsCommand:
-    arguments:
-      $projectRootDir: '%kernel.project_dir%'
-
-  Capco\AppBundle\Command\CreateCsvFromConsultationStepCommand:
-    arguments:
-      $projectRootDir: '%kernel.project_dir%'
-
-  Capco\AppBundle\Command\CreateCsvFromUserCommand:
-    arguments:
-      $kernelRootDir: '%kernel.root_dir%'
-
-  Capco\AppBundle\Command\FollowerNotifierCommand:
-    autoconfigure: true
-    autowire: true
-
-  Capco\AppBundle\Command\CreateCsvFromUsersCommand:
-    arguments:
-      $projectRootDir: '%kernel.project_dir%'
 
   Capco\AppBundle\Command\GenerateMapProviderPublicToken:
     arguments:

@@ -17,7 +17,7 @@
     "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack/webpack.config.serverside.legacy.js",
     "build-relay-schema": "relay-compiler --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums",
     "build-relay-schema:watch": "relay-compiler --watch --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums",
-    "download-translations": "bin/console translation:download --no-debug",
+    "download-translations": "bin/console translation:download app --no-debug",
     "update-js-translation": "node --experimental-modules ./xlf2-to-json.mjs",
     "trad": "yarn run download-translations && yarn run update-js-translation && yarn run clean-cache",
     "fonts": "cd app/Resources; rm -rf fonts; git clone --depth 1 git@github.com:cap-collectif/fonts.git; cp -r fonts/fonts/. assets/fonts",
@@ -85,7 +85,7 @@
       "./bin/php-cs-fixer fix --config=.php_cs --verbose",
       "prettier --parser php --write",
       "git add",
-      "php -d memory_limit=-1 bin/phpstan analyse -l 2 -c phpstan.neon"
+      "php -d memory_limit=-1 bin/phpstan analyse -c phpstan.neon"
     ],
     "*.py": [
       "pycodestyle --ignore=E501,W605",
@@ -144,6 +144,7 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-add-module-exports": "^1.0.0",
+    "babel-plugin-polished": "^1.1.0",
     "babel-plugin-react-docgen": "^2.0.0",
     "babel-plugin-relay": "^1.6.2",
     "babel-plugin-styled-components": "^1.8.0",
@@ -206,6 +207,7 @@
     "node-sass": "^4.10.0",
     "papaparse": "^4.6.3",
     "points-cluster": "^0.1.4",
+    "polished": "^3.0.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.15.2",
     "prop-types": "^15.6.1",

@@ -1,0 +1,19 @@
+InternalQuestionChoice:
+  type: object
+  inherits:
+    - PreviewQuestionChoice
+  config:
+    name: QuestionChoice
+    fields:
+      description:
+        type: 'String'
+      color:
+        type: 'QuestionChoiceColor'
+      image:
+        type: 'InternalMedia'
+      responses:
+        type: 'InternalResponseConnection!'
+      ranking:
+        type: '[InternalQuestionChoiceRanking]'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResolver", [value])'
+        description: 'Return the ranking of the given question choice'

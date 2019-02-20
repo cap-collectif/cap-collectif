@@ -60,7 +60,7 @@ class Client extends BaseClient
         array $data,
         array $query,
         $start,
-        float $engineMS = 0,
+        float $engineMS = 0.0,
         int $itemCount = 0,
         array $response = null
     ): void {

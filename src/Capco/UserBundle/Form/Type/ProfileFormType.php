@@ -25,7 +25,12 @@ class ProfileFormType extends AbstractType
             ->add('twitterUrl', UrlType::class, ['label' => 'user.profile.edit.twitter'])
             ->add('facebookUrl', UrlType::class, ['label' => 'user.profile.edit.facebook'])
             ->add('linkedInUrl', UrlType::class, [])
-            ->add('username', PurifiedTextType::class, ['strip_tags' => true, 'required' => true])
+            ->add('username', PurifiedTextType::class, [
+                'strip_tags' => true,
+                'required' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
             ->add('neighborhood', null, [])
             ->add('media', MediaType::class, [
                 'provider' => 'sonata.media.provider.image',
