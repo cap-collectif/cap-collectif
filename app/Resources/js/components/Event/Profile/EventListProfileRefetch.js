@@ -24,7 +24,7 @@ export class EventListProfileRefetch extends React.Component<Props> {
           .filter(Boolean)
           .map((node, key) => (
             <Col key={key} md={6} xs={12}>
-              <EventPreview event={node} isHighlighted={false} />
+              <EventPreview event={node} isHighlighted={false} isAuthorDisplay={false} />
             </Col>
           ))}
       </Row>
