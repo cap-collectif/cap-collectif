@@ -15,7 +15,7 @@ export class ProposalStepPageHeader extends React.Component<Props> {
 
     const queryCount = step.proposals.totalCount;
     const total = step.allProposals.totalCount;
-    const fusionCount = step.allProposals.fusionCount;
+    const { fusionCount } = step.allProposals;
     const tradKeyForTotalCount =
       step.form && step.form.isProposalForm && step.form.isProposalForm === true
         ? 'proposal.count_with_total'

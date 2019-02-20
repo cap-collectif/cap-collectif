@@ -65,7 +65,7 @@ const refetchViewer = graphql`
 
 export const validate = (values: FormValues, props: Props) => {
   const errors = {};
-  const edges = props.step.requirements.edges;
+  const { edges } = props.step.requirements;
   if (!edges) {
     return errors;
   }
