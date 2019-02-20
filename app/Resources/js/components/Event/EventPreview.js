@@ -33,11 +33,11 @@ export class EventPreview extends React.Component<Props> {
             </h3>
             <p className="excerpt">
               {event.author && event.author.username && (
-                <div>
+                <React.Fragment>
                   {/* $FlowFixMe */}
                   <UserAvatar size={16} user={event.author} />
                   <span className="font-weight-semi-bold">{event.author.username}</span>
-                </div>
+                </React.Fragment>
               )}
             </p>
             <p className="excerpt">
@@ -46,10 +46,10 @@ export class EventPreview extends React.Component<Props> {
             </p>
             <p className="excerpt">
               {event.fullAddress ? (
-                <div>
+                <React.Fragment>
                   <i className="cap-marker-1 mr-10" />
                   {event.fullAddress}
-                </div>
+                </React.Fragment>
               ) : null}
             </p>
             {event.themes && event.themes.length > 0 && (

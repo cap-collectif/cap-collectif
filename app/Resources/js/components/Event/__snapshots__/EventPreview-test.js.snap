@@ -28,32 +28,30 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <div>
-          <UserAvatar
-            anchor={true}
-            className=""
-            onBlur={[Function]}
-            onFocus={[Function]}
-            onMouseOut={[Function]}
-            onMouseOver={[Function]}
-            size={16}
-            style={Object {}}
-            user={
-              Object {
-                "media": Object {
-                  "url": "http://monimage.toto",
-                },
-                "url": "http://jesuistoto.fr",
-                "username": "toto",
-              }
+        <UserAvatar
+          anchor={true}
+          className=""
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={16}
+          style={Object {}}
+          user={
+            Object {
+              "media": Object {
+                "url": "http://monimage.toto",
+              },
+              "url": "http://jesuistoto.fr",
+              "username": "toto",
             }
-          />
-          <span
-            className="font-weight-semi-bold"
-          >
-            toto
-          </span>
-        </div>
+          }
+        />
+        <span
+          className="font-weight-semi-bold"
+        >
+          toto
+        </span>
       </p>
       <p
         className="excerpt"
@@ -70,12 +68,10 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <div>
-          <i
-            className="cap-marker-1 mr-10"
-          />
-          21 rue george 5, 75012 Paris
-        </div>
+        <i
+          className="cap-marker-1 mr-10"
+        />
+        21 rue george 5, 75012 Paris
       </p>
       <div
         className="excerpt"
@@ -132,32 +128,30 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <div>
-          <UserAvatar
-            anchor={true}
-            className=""
-            onBlur={[Function]}
-            onFocus={[Function]}
-            onMouseOut={[Function]}
-            onMouseOver={[Function]}
-            size={16}
-            style={Object {}}
-            user={
-              Object {
-                "media": Object {
-                  "url": "http://monimage.toto",
-                },
-                "url": "http://jesuistoto.fr",
-                "username": "toto",
-              }
+        <UserAvatar
+          anchor={true}
+          className=""
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={16}
+          style={Object {}}
+          user={
+            Object {
+              "media": Object {
+                "url": "http://monimage.toto",
+              },
+              "url": "http://jesuistoto.fr",
+              "username": "toto",
             }
-          />
-          <span
-            className="font-weight-semi-bold"
-          >
-            toto
-          </span>
-        </div>
+          }
+        />
+        <span
+          className="font-weight-semi-bold"
+        >
+          toto
+        </span>
       </p>
       <p
         className="excerpt"
@@ -174,12 +168,10 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <div>
-          <i
-            className="cap-marker-1 mr-10"
-          />
-          21 rue george 5, 75012 Paris
-        </div>
+        <i
+          className="cap-marker-1 mr-10"
+        />
+        21 rue george 5, 75012 Paris
       </p>
       <div
         className="excerpt"
@@ -236,30 +228,28 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
       <p
         className="excerpt"
       >
-        <div>
-          <UserAvatar
-            anchor={true}
-            className=""
-            onBlur={[Function]}
-            onFocus={[Function]}
-            onMouseOut={[Function]}
-            onMouseOver={[Function]}
-            size={16}
-            style={Object {}}
-            user={
-              Object {
-                "media": null,
-                "url": "http://jesuistoto.fr",
-                "username": "toto",
-              }
+        <UserAvatar
+          anchor={true}
+          className=""
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={16}
+          style={Object {}}
+          user={
+            Object {
+              "media": null,
+              "url": "http://jesuistoto.fr",
+              "username": "toto",
             }
-          />
-          <span
-            className="font-weight-semi-bold"
-          >
-            toto
-          </span>
-        </div>
+          }
+        />
+        <span
+          className="font-weight-semi-bold"
+        >
+          toto
+        </span>
       </p>
       <p
         className="excerpt"
@@ -276,12 +266,10 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
       <p
         className="excerpt"
       >
-        <div>
-          <i
-            className="cap-marker-1 mr-10"
-          />
-          21 rue george 5, 75012 Paris
-        </div>
+        <i
+          className="cap-marker-1 mr-10"
+        />
+        21 rue george 5, 75012 Paris
       </p>
       <div
         className="excerpt"
@@ -353,12 +341,10 @@ exports[`<EventPreview /> renders without username 1`] = `
       <p
         className="excerpt"
       >
-        <div>
-          <i
-            className="cap-marker-1 mr-10"
-          />
-          21 rue george 5, 75012 Paris
-        </div>
+        <i
+          className="cap-marker-1 mr-10"
+        />
+        21 rue george 5, 75012 Paris
       </p>
       <div
         className="excerpt"

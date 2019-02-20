@@ -1,0 +1,52 @@
+// @flow
+import React from 'react';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
+import type { EventListProfileQueryResponse } from './__generated__/EventListProfileQuery.graphql';
+import EventListProfileRefetch from './EventListProfileRefetch';
+
+type Props = {
+  userId?: string,
+  isAuthenticated?: boolean,
+};
+
+class EventListProfile extends React.Component<Props> {
+  render() {
+    return (
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query EventListProfileQuery($userId: ID!) {
+            user: node(id: $userId) {
+              ... on User {
+                ...EventListProfileRefetch_user
+              }
+            }
+          }
+        `}
+        variables={{
+          userId: this.props.userId,
+        }}
+        render={({ error, props }: { props: ?EventListProfileQueryResponse } & ReadyState) => {
+          if (error) {
+            return graphqlError;
+          }
+
+          if (!props) {
+            return null;
+          }
+
+          const { user } = props;
+
+          if (!user) {
+            return null;
+          }
+
+          return <EventListProfileRefetch user={user} />;
+        }}
+      />
+    );
+  }
+}
+
+export default EventListProfile;

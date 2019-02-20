@@ -3,7 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
-import EventListProfil from '../components/Event/Profil/EventListProfil';
+import EventListProfile from '../components/Event/Profile/EventListProfile';
 
 type Props = {
   userId?: string,
@@ -13,7 +13,7 @@ type Props = {
 export default (props: Props) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <EventListProfil {...props} />
+      <EventListProfile {...props} />
     </IntlProvider>
   </Provider>
 );
