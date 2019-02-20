@@ -193,7 +193,7 @@ class EventAdmin extends AbstractAdmin
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'admin.fields.event.author',
                 'required' => true,
-                'property' => 'email',
+                'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
                 },

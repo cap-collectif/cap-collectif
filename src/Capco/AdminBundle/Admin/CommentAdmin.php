@@ -156,7 +156,10 @@ class CommentAdmin extends AbstractAdmin
             ->add('body', null, ['label' => 'admin.fields.comment.body', 'attr' => ['rows' => 8]])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.comment.author',
-                'property' => 'username',
+                'property' => 'username,email',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                },
                 'help' => 'admin.help.comment.author',
                 'required' => false,
             ])

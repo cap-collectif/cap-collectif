@@ -127,7 +127,10 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->add('title', null, ['label' => 'admin.fields.opinion_version.title'])
             ->add('author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.opinion_version.author',
-                'property' => 'username',
+                'property' => 'username,email',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                },
             ])
             ->add('parent', 'sonata_type_model', ['label' => 'admin.fields.opinion_version.parent'])
             ->add('body', CKEditorType::class, [

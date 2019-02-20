@@ -33,15 +33,17 @@ class AnswerAdmin extends CapcoAdmin
             ])
             ->add('author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.answer.author',
-                'property' => 'username',
+                'property' => 'username,email',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                },
                 'required' => true,
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.answer.body',
                 'config_name' => 'admin_editor',
                 'required' => true,
-            ])
-        ;
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)

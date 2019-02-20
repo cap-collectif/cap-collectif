@@ -75,7 +75,10 @@ class OpinionVoteAdmin extends Admin
             ->add('opinion', 'sonata_type_model', ['label' => 'admin.fields.opinion_vote.opinion'])
             ->add('user', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.opinion_vote.voter',
-                'property' => 'username',
+                'property' => 'username,email',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                },
             ])
             ->add('value', 'choice', [
                 'label' => 'admin.fields.opinion_vote.value',
