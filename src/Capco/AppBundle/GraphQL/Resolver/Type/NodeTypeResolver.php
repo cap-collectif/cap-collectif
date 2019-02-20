@@ -191,7 +191,7 @@ class NodeTypeResolver implements ResolverInterface
         }
 
         if ($node instanceof SimpleQuestion) {
-            if (\in_array($currentSchemaName, ['preview'], true)) {
+            if ('preview' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PreviewSimpleQuestion');
             }
 
