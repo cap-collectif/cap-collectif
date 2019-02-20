@@ -453,10 +453,3 @@ Capco\AppBundle\Entity\SiteParameter:
     value: Cookies
     position: 3
     type: 1
-
-  SiteParameterHomePageShareButton:
-    keyname: homepage.jumbotron.share_button
-    category: pages.homepage
-    value: true
-    position: 120
-    type: 8
