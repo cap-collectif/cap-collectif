@@ -184,10 +184,7 @@ class PostAdmin extends CapcoAdmin
             ->add('title', null, ['label' => 'admin.fields.blog_post.title'])
             ->add('Authors', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.blog_post.authors',
-                'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                },
+                'property' => 'username',
                 'multiple' => true,
                 'required' => false,
             ])

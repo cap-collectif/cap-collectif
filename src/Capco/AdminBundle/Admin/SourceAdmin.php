@@ -127,10 +127,7 @@ class SourceAdmin extends AbstractAdmin
             ->add('body', null, ['label' => 'admin.fields.source.body'])
             ->add('author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.source.author',
-                'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                },
+                'property' => 'username',
             ])
             ->add('opinion', 'sonata_type_model', ['label' => 'admin.fields.source.opinion'])
             ->add('category', 'sonata_type_model', ['label' => 'admin.fields.source.category'])

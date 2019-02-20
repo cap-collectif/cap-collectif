@@ -169,10 +169,7 @@ class ThemeAdmin extends AbstractAdmin
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.theme.author',
-                'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                },
+                'property' => 'username',
             ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.theme.is_enabled',

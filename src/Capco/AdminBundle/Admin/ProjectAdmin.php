@@ -229,10 +229,7 @@ class ProjectAdmin extends CapcoAdmin
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.project.author',
-                'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                },
+                'property' => 'username',
             ])
             ->add('opinionTerm', 'choice', [
                 'label' => 'admin.fields.project.opinion_term',
