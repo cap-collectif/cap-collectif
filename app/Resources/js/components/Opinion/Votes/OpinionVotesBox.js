@@ -39,9 +39,10 @@ class OpinionVotesBox extends React.Component<Props> {
             <Col sm={12} md={4}>
               {/* $FlowFixMe */}
               <VotePiechart
-                top={20}
-                height="180px"
-                width="200px"
+                height="150px"
+                width="300px"
+                innerRadius={20}
+                outerRadius={60}
                 ok={opinion.votesYes ? opinion.votesYes.totalCount : 0}
                 nok={opinion.votesNo ? opinion.votesNo.totalCount : 0}
                 mitige={opinion.votesMitige ? opinion.votesMitige.totalCount : 0}

@@ -3,10 +3,10 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroupItem } from 'react-bootstrap';
 import { injectIntl, type IntlShape } from 'react-intl';
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import OpinionPreview from './OpinionPreview';
 import type { OpinionVersion_version } from './__generated__/OpinionVersion_version.graphql';
 import colors from '../../utils/colors';
+import PieChart from '../Ui/Chart/PieChart';
 
 type Props = {
   version: OpinionVersion_version,
@@ -15,41 +15,6 @@ type Props = {
 };
 
 class OpinionVersion extends React.Component<Props> {
-  renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    index,
-    value,
-  }: Object) => {
-    const RADIAN = Math.PI / 180;
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text x={x} y={y} fill="white" key={index} textAnchor="middle" dominantBaseline="central">
-        {value}
-      </text>
-    );
-  };
-
-  renderTooltip = ({ payload, type, label }) => {
-    console.log(payload);
-    console.warn(type, label);
-
-    if (payload.length > 0) {
-      return (
-        <div className="block" style={{ backgroundColor: '#fff' }}>
-          {payload[0].name}
-        </div>
-      );
-    }
-
-    return null;
-  };
 
   render() {
     const { version, rankingThreshold, intl } = this.props;
@@ -71,35 +36,7 @@ class OpinionVersion extends React.Component<Props> {
         </div>
         {version.votes && version.votes.totalCount > 0 ? (
           <div className="opinion__pie-chart">
-            <ResponsiveContainer>
-              <PieChart>
-                <Legend layout="vertical" align="right" verticalAlign="middle" />
-                <Pie
-                  data={data}
-                  innerRadius={10}
-                  outerRadius={50}
-                  paddingAngle={2}
-                  stroke="none"
-                  fontSize="16px"
-                  isAnimationActive={false}
-                  percent
-                  dataKey="value"
-                  labelLine={false}
-                  label={this.renderCustomizedLabel}>
-                  {data.map((entry, index) => {
-                    console.log(entry);
-
-                    return (
-                      <Cell
-                        key={index}
-                        aria-labelledby={entry.name}
-                        fill={colors.votes[index % colors.votes.length]}
-                      />
-                    );
-                  })}{' '}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
+            <PieChart data={data} innerRadius={15} outerRadius={50} height="105px" maxWidth="280px" colors={colors.votes} />
           </div>
         ) : null}
       </ListGroupItem>

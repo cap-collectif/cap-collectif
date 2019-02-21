@@ -12,7 +12,7 @@ type Props = {
 };
 
 export class Opinion extends React.Component<Props> {
-  defaultProps = {
+  static defaultProps = {
     showUpdatedDate: false,
   };
 
@@ -29,9 +29,6 @@ export class Opinion extends React.Component<Props> {
         {opinion.votes && opinion.votes.totalCount > 0 ? (
           /* $FlowFixMe */
           <VotePiechart
-            top={10}
-            height="90px"
-            width="145px"
             ok={opinion.votesOk.totalCount}
             nok={opinion.votesNok.totalCount}
             mitige={opinion.votesMitige.totalCount}

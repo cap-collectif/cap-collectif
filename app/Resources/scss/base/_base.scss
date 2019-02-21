@@ -186,16 +186,6 @@
         display: flex;
         margin: auto 0;
       }
-
-      .opinion__pie-chart {
-        width: 280px;
-        height: 105px;
-        max-width: 100%;
-
-        & .recharts-pie {
-          font-weight: 500;
-        }
-      }
     }
 
     h4, h3 {

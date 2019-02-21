@@ -30,7 +30,7 @@ const colors = {
     '#5574a6',
     '#3b3eac',
   ],
-  votes: ['#088A20', '#f0ad4e', '#dc3545'],
+  votes: ['#5cb85c', '#f0ad4e', '#d9534f'],
 };
 
 export default colors;
