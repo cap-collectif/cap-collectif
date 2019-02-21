@@ -93,10 +93,16 @@ class EventRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findAllByUser(User $user): array
+    public function findAllByUser(User $user, string $field = null, string $direction = null): array
     {
         $qb = $this->createQueryBuilder('e');
         $qb->andWhere('e.author = :user')->setParameter('user', $user);
+
+        if ($field && $direction) {
+            if ('START_AT' === $field) {
+                $qb->addOrderBy('e.startAt', $direction);
+            }
+        }
 
         return $qb->getQuery()->getResult();
     }
