@@ -101,7 +101,7 @@ trait ProposalStepsTrait
     ];
     protected static $proposalWithBudgetVoteParams = [
         'projectSlug' => 'depot-avec-selection-vote-budget',
-        'stepSlug' => 'collecte-des-propositions-1',
+        'stepSlug' => 'collecte-des-propositions-2',
         'proposalSlug' => 'proposition-pas-chere',
     ];
     protected static $proposalNotYetVotable = [
