@@ -112,12 +112,6 @@ class GlobalIdResolver
                     $node = $this->container->get('capco.proposal.repository')->find($uuid);
 
                     break;
-                case 'Question':
-                    $node = $this->container
-                        ->get('capco.abstract_question.repository')
-                        ->find($uuid);
-
-                    break;
                 default:
                     break;
             }

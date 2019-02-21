@@ -5,7 +5,6 @@ MultipleChoiceQuestion:
   config:
     interfaces:
       - InternalQuestion
-      - Node
     description: 'A multiple choice question'
     fields:
       kind:

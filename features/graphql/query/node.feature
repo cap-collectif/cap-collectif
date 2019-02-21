@@ -5,7 +5,7 @@ Scenario: GraphQL client want to get a node of all available types
   Given I send a GraphQL POST request:
   """
   {
-    "query": "query node ($opinionId: ID!, $proposalId: ID!, $projectId: ID!, $groupId: ID!, $proposalFormId: ID!, $questionnaireId: ID!, $eventId: ID!, $requirementId: ID!, $questionId: ID!){
+    "query": "query node ($opinionId: ID!, $proposalId: ID!, $projectId: ID!, $groupId: ID!, $proposalFormId: ID!, $questionnaireId: ID!, $eventId: ID!, $requirementId: ID!){
       opinion: node(id: $opinionId) {
         ... on Opinion {
           title
@@ -46,11 +46,6 @@ Scenario: GraphQL client want to get a node of all available types
           id
         }
       }
-      question: node(id: $questionId) {
-        ... on Question {
-          id
-        }
-      }
     }",
     "variables": {
       "opinionId": "opinion1",
@@ -60,8 +55,7 @@ Scenario: GraphQL client want to get a node of all available types
       "proposalFormId": "proposalForm1",
       "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
       "eventId": "RXZlbnQ6ZXZlbnQx",
-      "requirementId": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx",
-      "questionId": "UXVlc3Rpb246Mg=="
+      "requirementId": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx"
     }
   }
   """
@@ -92,9 +86,6 @@ Scenario: GraphQL client want to get a node of all available types
       },
       "requirement": {
         "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx"
-      },
-      "question": {
-        "id": "UXVlc3Rpb246Mg=="
       }
     }
   }

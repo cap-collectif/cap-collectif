@@ -30,11 +30,11 @@ Scenario: Anonymous API client wants to register
     "captcha": "fakekey",
     "responses": [
       {
-        "question": "UXVlc3Rpb246Ng==",
+        "question": 6,
         "value": "Réponse à la question obligatoire"
       },
       {
-        "question": "UXVlc3Rpb246MTc=",
+        "question": 17,
         "value": "Sangohan"
       }
     ]
@@ -127,11 +127,11 @@ Scenario: Anonymous API client wants to register with zipcode and type
     "zipcode": "99999",
     "responses": [
       {
-        "question": "UXVlc3Rpb246Ng==",
+        "question": 6,
         "value": "Réponse à la question obligatoire"
       },
       {
-        "question": "UXVlc3Rpb246MTc=",
+        "question": 17,
         "value": "Sangohan"
       }
     ]

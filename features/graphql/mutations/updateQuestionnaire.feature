@@ -46,7 +46,7 @@ Scenario: GraphQL client wants to update a questionnaire
               "description":"New description",
               "questions":[
                  {
-                    "id":"UXVlc3Rpb246NA==",
+                    "id":"4",
                     "title":"Evaluez le co\u00fbt de votre proposition",
                     "helpText":"D\u00e9crivez dans les grandes lignes le budget de votre proposition",
                     "description":null,
@@ -56,7 +56,7 @@ Scenario: GraphQL client wants to update a questionnaire
                     "kind":"simple"
                  },
                  {
-                    "id":"UXVlc3Rpb246NjY2",
+                    "id":"666",
                     "title":"ça roule ?",
                     "helpText":null,
                     "description":null,
@@ -66,7 +66,7 @@ Scenario: GraphQL client wants to update a questionnaire
                     "kind":"simple"
                  },
                  {
-                    "id":"UXVlc3Rpb246MTMxMw==",
+                    "id":"1313",
                     "title":"Un nombre stp",
                     "helpText":null,
                     "description":null,
@@ -111,7 +111,7 @@ Scenario: GraphQL admin wants to reorder questions
             "question": {
               "description": "Youpla",
               "helpText": "text",
-              "id": "UXVlc3Rpb246NjY2",
+              "id": "666",
               "private": false,
               "required": true,
               "title": "Luffy ou Zoro ?",
@@ -122,7 +122,7 @@ Scenario: GraphQL admin wants to reorder questions
             "question": {
               "description": "Ceci est un test",
               "helpText": "text",
-              "id": "UXVlc3Rpb246NA==",
+              "id": "4",
               "private": false,
               "required": true,
               "title": "Hé salut les amis ! C'est david lafarge pokemon comment allez-vous ?",
@@ -142,7 +142,7 @@ Scenario: GraphQL admin wants to reorder questions
         "questionnaire": {
           "questions": [
             {
-              "id": "UXVlc3Rpb246NjY2",
+              "id": "666",
               "title": "Luffy ou Zoro ?",
               "helpText": "text",
               "description": "Youpla",
@@ -151,7 +151,7 @@ Scenario: GraphQL admin wants to reorder questions
               "required": true
             },
             {
-              "id": "UXVlc3Rpb246NA==",
+              "id": "4",
               "title": "Hé salut les amis ! C'est david lafarge pokemon comment allez-vous ?",
               "helpText": "text",
               "description": "Ceci est un test",
@@ -191,7 +191,7 @@ Scenario: GraphQL admin wants to delete first question
         "questions": [
           {
             "question": {
-              "id": "UXVlc3Rpb246NDk=",
+              "id": "49",
               "private": false,
               "otherAllowed": false,
               "randomQuestionChoices": false,
@@ -236,7 +236,7 @@ Scenario: GraphQL admin wants to delete first question
         "questionnaire": {
           "questions": [
             {
-              "id": "UXVlc3Rpb246NDk=",
+              "id": "49",
               "title": "J'ai plusieurs choix?",
               "type": "radio"
             }
@@ -278,7 +278,7 @@ Scenario: GraphQL admin wants to delete first question choice
         "questions": [
           {
             "question": {
-              "id": "UXVlc3Rpb246MTMxNQ==",
+              "id": "1315",
               "private": false,
               "required": false,
               "title": "Je n'ai pas de projet?",
@@ -287,7 +287,7 @@ Scenario: GraphQL admin wants to delete first question choice
           },
           {
             "question": {
-              "id": "UXVlc3Rpb246NDk=",
+              "id": "49",
               "private": false,
               "otherAllowed": false,
               "randomQuestionChoices": false,
@@ -327,12 +327,12 @@ Scenario: GraphQL admin wants to delete first question choice
         "questionnaire": {
           "questions": [
             {
-              "id": "UXVlc3Rpb246MTMxNQ==",
+              "id": "1315",
               "title": "Je n'ai pas de projet?",
               "type": "text"
             },
             {
-              "id": "UXVlc3Rpb246NDk=",
+              "id": "49",
               "title": "J'ai plusieurs choix?",
               "type": "radio",
               "choices": [

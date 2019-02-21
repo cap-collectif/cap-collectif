@@ -28,10 +28,6 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\Entity\Questions\SectionQuestion;
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -162,22 +158,6 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof Post) {
             return $this->typeResolver->resolve('Post');
-        }
-        if ($node instanceof SimpleQuestion) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewSimpleQuestion');
-            }
-
-            return $this->typeResolver->resolve('InternalSimpleQuestion');
-        }
-        if ($node instanceof MediaQuestion) {
-            return $this->typeResolver->resolve('MediaQuestion');
-        }
-        if ($node instanceof MultipleChoiceQuestion) {
-            return $this->typeResolver->resolve('MultipleChoiceQuestion');
-        }
-        if ($node instanceof SectionQuestion) {
-            return $this->typeResolver->resolve('SectionQuestion');
         }
         if ($node instanceof Requirement) {
             return $this->requirementTypeResolver->__invoke($node);

@@ -5,7 +5,6 @@ MediaQuestion:
   config:
     interfaces:
       - InternalQuestion
-      - Node
     description: 'A media question.'
     fields:
       kind:

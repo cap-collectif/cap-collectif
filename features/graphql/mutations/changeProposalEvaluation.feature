@@ -30,26 +30,26 @@ Scenario: Admin wants to update the evaluation of a proposal
         "version": 1,
         "responses": [
            {
-              "question": "UXVlc3Rpb246OA==",
+              "question": "8",
               "value":"Modification de l'évaluation"
            },
            {
-              "question": "UXVlc3Rpb246OQ==",
+              "question": "9",
               "value":"Cette évaluation est hyper utile, à accepter."
            },
            {
-              "question": "UXVlc3Rpb246MjA=",
+              "question": "20",
               "value":"{\"labels\":\"Au top\",\"other\":null}"},
            {
-              "question": "UXVlc3Rpb246MjE=",
+              "question": "21",
               "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
            },
            {
-              "question": "UXVlc3Rpb246MjI=",
+              "question": "22",
               "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
            },
            {
-              "question": "UXVlc3Rpb246MjM=",
+              "question": "23",
               "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
            }
         ]
@@ -67,30 +67,30 @@ Scenario: Admin wants to update the evaluation of a proposal
           "evaluation": {
             "responses": [
             {
-               "question": { "id": "UXVlc3Rpb246OA==" },
+               "question": { "id": "8" },
                "value":"Modification de l'évaluation"
             },
             {
-               "question": { "id": "UXVlc3Rpb246OQ==" },
+               "question": { "id": "9" },
                "value":"Cette évaluation est hyper utile, à accepter."
             },
             {
-               "question": { "id": "UXVlc3Rpb246MjA=" },
+               "question": { "id": "20" },
                "value":"{\"labels\":\"Au top\",\"other\":null}"},
             {
-               "question": { "id": "UXVlc3Rpb246MjE=" },
+               "question": { "id": "21" },
                "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
             },
             {
-               "question": { "id": "UXVlc3Rpb246MjI=" },
+               "question": { "id": "22" },
                "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
             },
             {
-               "question": { "id": "UXVlc3Rpb246MjM=" },
+               "question": { "id": "23" },
                "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
             },
             {
-              "question": {"id":"UXVlc3Rpb246NDc="},
+              "question": {"id":"47"},
               "value": null
             }
             ]
@@ -131,26 +131,26 @@ Scenario: Admin wants to update the evaluation of a proposal and the version sho
         "version": 1,
         "responses": [
            {
-              "question": "UXVlc3Rpb246OA==",
+              "question": "8",
               "value":"Modification de l'évaluation"
            },
            {
-              "question": "UXVlc3Rpb246OQ==",
+              "question": "9",
               "value":"Cette évaluation est hyper utile, à accepter."
            },
            {
-              "question": "UXVlc3Rpb246MjA=",
+              "question": "20",
               "value":"{\"labels\":\"Au top\",\"other\":null}"},
            {
-              "question": "UXVlc3Rpb246MjE=",
+              "question": "21",
               "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
            },
            {
-              "question": "UXVlc3Rpb246MjI=",
+              "question": "22",
               "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
            },
            {
-              "question": "UXVlc3Rpb246MjM=",
+              "question": "23",
               "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
            }
         ]
@@ -169,30 +169,30 @@ Scenario: Admin wants to update the evaluation of a proposal and the version sho
             "version": 2,
             "responses": [
             {
-               "question": { "id": "UXVlc3Rpb246OA==" },
+               "question": { "id": "8" },
                "value":"Modification de l'évaluation"
             },
             {
-               "question": { "id": "UXVlc3Rpb246OQ==" },
+               "question": { "id": "9" },
                "value":"Cette évaluation est hyper utile, à accepter."
             },
             {
-               "question": { "id": "UXVlc3Rpb246MjA=" },
+               "question": { "id": "20" },
                "value":"{\"labels\":\"Au top\",\"other\":null}"},
             {
-               "question": { "id": "UXVlc3Rpb246MjE=" },
+               "question": { "id": "21" },
                "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
             },
             {
-               "question": { "id": "UXVlc3Rpb246MjI=" },
+               "question": { "id": "22" },
                "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
             },
             {
-               "question": { "id": "UXVlc3Rpb246MjM=" },
+               "question": { "id": "23" },
                "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
             },
             {
-              "question": {"id":"UXVlc3Rpb246NDc="},
+              "question": {"id":"47"},
               "value": null
             }
             ]
@@ -233,26 +233,26 @@ Scenario: Admin should be prompted to refresh page if someone has already modifi
       "version": 1,
       "responses": [
          {
-            "question": "UXVlc3Rpb246OA==",
+            "question": "8",
             "value":"Modification de l'évaluation"
          },
          {
-            "question": "UXVlc3Rpb246OQ==",
+            "question": "9",
             "value":"Cette évaluation est hyper utile, à accepter."
          },
          {
-            "question": "UXVlc3Rpb246MjA=",
+            "question": "20",
             "value":"{\"labels\":\"Au top\",\"other\":null}"},
          {
-            "question": "UXVlc3Rpb246MjE=",
+            "question": "21",
             "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
          },
          {
-            "question": "UXVlc3Rpb246MjI=",
+            "question": "22",
             "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
          },
          {
-            "question": "UXVlc3Rpb246MjM=",
+            "question": "23",
             "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
          }
       ]
@@ -271,30 +271,30 @@ Scenario: Admin should be prompted to refresh page if someone has already modifi
           "version": 2,
           "responses": [
           {
-             "question": { "id": "UXVlc3Rpb246OA==" },
+             "question": { "id": "8" },
              "value":"Modification de l'évaluation"
           },
           {
-             "question": { "id": "UXVlc3Rpb246OQ==" },
+             "question": { "id": "9" },
              "value":"Cette évaluation est hyper utile, à accepter."
           },
           {
-             "question": { "id": "UXVlc3Rpb246MjA=" },
+             "question": { "id": "20" },
              "value":"{\"labels\":\"Au top\",\"other\":null}"},
           {
-             "question": { "id": "UXVlc3Rpb246MjE=" },
+             "question": { "id": "21" },
              "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
           },
           {
-             "question": { "id": "UXVlc3Rpb246MjI=" },
+             "question": { "id": "22" },
              "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
           },
           {
-             "question": { "id": "UXVlc3Rpb246MjM=" },
+             "question": { "id": "23" },
              "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
           },
           {
-              "question": {"id":"UXVlc3Rpb246NDc="},
+              "question": {"id":"47"},
               "value": null
            }
           ]
@@ -331,26 +331,26 @@ Scenario: Admin should be prompted to refresh page if someone has already modifi
       "version": 1,
       "responses": [
          {
-            "question": "UXVlc3Rpb246OA==",
+            "question": "8",
             "value":"Encore une modification de l'évaluation"
          },
          {
-            "question": "UXVlc3Rpb246OQ==",
+            "question": "9",
             "value":"Cette évaluation est hyper inutile, à refuser."
          },
          {
-            "question": "UXVlc3Rpb246MjA=",
+            "question": "20",
             "value":"{\"labels\":\"Au top\",\"other\":null}"},
          {
-            "question": "UXVlc3Rpb246MjE=",
+            "question": "21",
             "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
          },
          {
-            "question": "UXVlc3Rpb246MjI=",
+            "question": "22",
             "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
          },
          {
-            "question": "UXVlc3Rpb246MjM=",
+            "question": "23",
             "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
          }
       ]
@@ -408,7 +408,7 @@ Scenario: Evaluer wants to update the evaluation of a proposal
         "version": 1,
         "responses": [
         {
-           "question": "UXVlc3Rpb246OA==",
+           "question": "8",
            "value": "Pouet"
         }
         ]
@@ -426,7 +426,7 @@ Scenario: Evaluer wants to update the evaluation of a proposal
           "evaluation": {
             "responses": [
               {
-                "question": { "id": "UXVlc3Rpb246OA==" },
+                "question": { "id": "8" },
                 "value": "Pouet"
               },
               @...@
@@ -468,7 +468,7 @@ Scenario: Evaluer wants to update the evaluation of a proposal and the version s
         "version": 1,
         "responses": [
         {
-           "question": "UXVlc3Rpb246OA==",
+           "question": "8",
            "value": "Pouet"
         }
         ]
@@ -487,7 +487,7 @@ Scenario: Evaluer wants to update the evaluation of a proposal and the version s
             "version": 2,
             "responses": [
               {
-                "question": { "id": "UXVlc3Rpb246OA==" },
+                "question": { "id": "8" },
                 "value": "Pouet"
               },
               @...@
@@ -529,26 +529,26 @@ Scenario: Evaluer should be prompted to refresh page if someone has already modi
       "version": 1,
       "responses": [
          {
-            "question": "UXVlc3Rpb246OA==",
+            "question": "8",
             "value":"Modification de l'évaluation"
          },
          {
-            "question": "UXVlc3Rpb246OQ==",
+            "question": "9",
             "value":"Cette évaluation est hyper utile, à accepter."
          },
          {
-            "question": "UXVlc3Rpb246MjA=",
+            "question": "20",
             "value":"{\"labels\":\"Au top\",\"other\":null}"},
          {
-            "question": "UXVlc3Rpb246MjE=",
+            "question": "21",
             "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
          },
          {
-            "question": "UXVlc3Rpb246MjI=",
+            "question": "22",
             "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
          },
          {
-            "question": "UXVlc3Rpb246MjM=",
+            "question": "23",
             "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
          }
       ]
@@ -567,29 +567,29 @@ Scenario: Evaluer should be prompted to refresh page if someone has already modi
           "version": 2,
           "responses": [
           {
-             "question": { "id": "UXVlc3Rpb246OA==" },
+             "question": { "id": "8" },
              "value":"Modification de l'évaluation"
           },
           {
-             "question": { "id": "UXVlc3Rpb246OQ==" },
+             "question": { "id": "9" },
              "value":"Cette évaluation est hyper utile, à accepter."
           },
           {
-             "question": { "id": "UXVlc3Rpb246MjA=" },
+             "question": { "id": "20" },
              "value":"{\"labels\":\"Au top\",\"other\":null}"},
           {
-             "question": { "id": "UXVlc3Rpb246MjE=" },
+             "question": { "id": "21" },
              "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
           },
           {
-             "question": { "id": "UXVlc3Rpb246MjI=" },
+             "question": { "id": "22" },
              "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
           },
           {
-             "question": { "id": "UXVlc3Rpb246MjM=" },
+             "question": { "id": "23" },
              "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
           },
-          {"question":{"id":"UXVlc3Rpb246NDc="},"value":null}
+          {"question":{"id":"47"},"value":null}
           ]
         }
       }
@@ -624,26 +624,26 @@ Scenario: Evaluer should be prompted to refresh page if someone has already modi
       "version": 1,
       "responses": [
          {
-            "question": "UXVlc3Rpb246OA==",
+            "question": "8",
             "value":"Encore une modification de l'évaluation"
          },
          {
-            "question": "UXVlc3Rpb246OQ==",
+            "question": "9",
             "value":"Cette évaluation est hyper inutile, à refuser."
          },
          {
-            "question": "UXVlc3Rpb246MjA=",
+            "question": "20",
             "value":"{\"labels\":\"Au top\",\"other\":null}"},
          {
-            "question": "UXVlc3Rpb246MjE=",
+            "question": "21",
             "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
          },
          {
-            "question": "UXVlc3Rpb246MjI=",
+            "question": "22",
             "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
          },
          {
-            "question": "UXVlc3Rpb246MjM=",
+            "question": "23",
             "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
          }
       ]

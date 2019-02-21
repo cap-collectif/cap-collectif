@@ -2,12 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Traits;
 
-use Doctrine\ORM\PersistentCollection;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\FormInterface;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\Form\FormInterface;
 
 trait QuestionPersisterTrait
 {
@@ -42,10 +41,6 @@ trait QuestionPersisterTrait
 
             //we are updating a question
             if (isset($dataQuestion['question']['id'])) {
-                // decode GraphQL id to id
-                $dataQuestion['question']['id'] = GlobalId::fromGlobalId(
-                    $dataQuestion['question']['id']
-                )['id'];
                 $dataQuestionId = $dataQuestion['question']['id'];
                 $argumentsQuestionsId[] = $dataQuestionId;
 

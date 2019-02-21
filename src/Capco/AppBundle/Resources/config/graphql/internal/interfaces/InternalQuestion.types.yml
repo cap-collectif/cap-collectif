@@ -2,15 +2,12 @@ InternalQuestion:
   type: interface
   inherits:
     - PreviewQuestion
-    - Node
   config:
     name: Question
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
     fields:
       id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Question
+        type: 'ID!'
       number:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
         type: 'Int!'

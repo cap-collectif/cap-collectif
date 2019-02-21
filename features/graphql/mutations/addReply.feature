@@ -29,11 +29,11 @@ Scenario: User wants to add a reply
         "draft": false,
         "responses": [
             {
-              "question": "UXVlc3Rpb246Mg==",
+              "question": "2",
               "value": "Je pense que c'est la ville parfaite pour organiser les JO"
             },
             {
-              "question": "UXVlc3Rpb246MTM=",
+              "question": "13",
               "value": "{\"labels\":[\"Athlétisme\",\"Sports collectifs\"],\"other\":\"Embêter Maxime\"}"
             }
         ]
@@ -50,15 +50,15 @@ Scenario: User wants to add a reply
               "id": @uuid@,
               "published": true,
               "responses": [
-                {"question": {"id":"UXVlc3Rpb246Mg==" }, "value": "Je pense que c\u0027est la ville parfaite pour organiser les JO"},
-                {"question": {"id":"UXVlc3Rpb246MTM="}, "value": "{\"labels\":[\"Athl\u00e9tisme\",\"Sports collectifs\"],\"other\":\"Emb\u00eater Maxime\"}"},
-                {"question": {"id":"UXVlc3Rpb246MTQ="}, "value": "{\"labels\":[],\"other\":null}"},
-                {"question": {"id":"UXVlc3Rpb246MTU="}, "value": @null@ },
-                {"question": {"id":"UXVlc3Rpb246MTY="}, "value": "{\"labels\":[],\"other\":null}"},
-                {"question": {"id":"UXVlc3Rpb246MTg="}, "value": "{\"labels\":[],\"other\":null}"},
-                {"question": {"id":"UXVlc3Rpb246MTk="}, "value": "{\"labels\":[],\"other\":null}"},
-                {"question": {"id":"UXVlc3Rpb246MzAx"}, "value": @null@},
-                {"question": {"id":"UXVlc3Rpb246MzAy"}, "value": @null@}
+                {"question": {"id":"2" }, "value": "Je pense que c\u0027est la ville parfaite pour organiser les JO"},
+                {"question": {"id":"13"}, "value": "{\"labels\":[\"Athl\u00e9tisme\",\"Sports collectifs\"],\"other\":\"Emb\u00eater Maxime\"}"},
+                {"question": {"id":"14"}, "value": "{\"labels\":[],\"other\":null}"},
+                {"question": {"id":"15"}, "value": @null@ },
+                {"question": {"id":"16"}, "value": "{\"labels\":[],\"other\":null}"},
+                {"question": {"id":"18"}, "value": "{\"labels\":[],\"other\":null}"},
+                {"question": {"id":"19"}, "value": "{\"labels\":[],\"other\":null}"},
+                {"question": {"id":"301"}, "value": @null@},
+                {"question": {"id":"302"}, "value": @null@}
               ]
           }
        }

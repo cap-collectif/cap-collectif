@@ -2300,10 +2300,8 @@ type Media implements UniformResourceLocatable {
 }
 
 # A media question.
-type MediaQuestion implements Question & Node {
+type MediaQuestion implements Question {
   title: String!
-
-  # The ID of an object
   id: ID!
   number: Int!
   type: QuestionTypeValue!
@@ -2362,10 +2360,8 @@ type MediaResponse implements Response {
 }
 
 # A multiple choice question
-type MultipleChoiceQuestion implements Question & Node {
+type MultipleChoiceQuestion implements Question {
   title: String!
-
-  # The ID of an object
   id: ID!
   number: Int!
   type: QuestionTypeValue!
@@ -4175,11 +4171,8 @@ type Query {
   ): ProjectDistrictConnection!
 }
 
-# Fetches an object given its ID
 interface Question {
   title: String!
-
-  # The ID of an object
   id: ID!
   number: Int!
   type: QuestionTypeValue!
@@ -4938,10 +4931,8 @@ type SectionAppendixType {
 }
 
 # A section is just a title in a quiz without any possible answer.
-type SectionQuestion implements Question & Node {
+type SectionQuestion implements Question {
   title: String!
-
-  # The ID of an object
   id: ID!
   number: Int!
   type: QuestionTypeValue!
@@ -5178,10 +5169,8 @@ type SetEvaluationFormInProposalFormPayload {
 }
 
 # A simple question
-type SimpleQuestion implements Question & Node {
+type SimpleQuestion implements Question {
   title: String!
-
-  # The ID of an object
   id: ID!
   number: Int!
   type: QuestionTypeValue!
