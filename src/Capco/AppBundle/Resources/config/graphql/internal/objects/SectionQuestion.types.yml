@@ -5,6 +5,7 @@ SectionQuestion:
   config:
     interfaces:
       - InternalQuestion
+      - Node
     description: 'A section is just a title in a quiz without any possible answer.'
     fields:
       kind:

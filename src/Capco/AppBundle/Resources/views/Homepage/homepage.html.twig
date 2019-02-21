@@ -46,6 +46,15 @@
                 {% if null != jumbotron_button and null != jumbotron_button_link %}
                     <p><a href="{{ jumbotron_button_link }}" class="btn  btn--outline btn-custom-1  btn-lg" role="button">{{ jumbotron_button }}</a></p>
                 {% endif %}
+                {% if capco_site_parameter_value('homepage.jumbotron.share_button') == "1" %}
+                {{
+                    react_render_component('ShareButtonDropdownApp', {
+                        'props': {
+                            'url': url('app_homepage')
+                        }
+                    })
+                }}
+                {% endif %}
             </div>
         </div>
     </div>

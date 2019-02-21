@@ -29,11 +29,11 @@ Scenario: User wants to update a reply
         "draft": false,
         "responses": [
             {
-              "question": "2",
+              "question": "UXVlc3Rpb246Mg==",
               "value": "Je pense que c'est la ville parfaite pour organiser les JO"
             },
             {
-              "question": "13",
+              "question": "UXVlc3Rpb246MTM=",
               "value": "{\"labels\":[\"Athlétisme\",\"Sports collectifs\"],\"other\":\"Embêter Maxime\"}"
             }
         ]
@@ -52,109 +52,109 @@ Scenario: User wants to update a reply
             "responses":[
                {
                   "question":{
-                     "id":"2"
+                     "id":"UXVlc3Rpb246Mg=="
                   },
                   "value":"Je pense que c\u0027est la ville parfaite pour organiser les JO"
                },
                {
                   "question":{
-                     "id":"13"
+                     "id":"UXVlc3Rpb246MTM="
                   },
                   "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:\u0022Emb\u00eater Maxime\u0022}"
                },
                {
                   "question":{
-                     "id":"14"
+                     "id":"UXVlc3Rpb246MTQ="
                   },
                   "value":"{\u0022labels\u0022:[\u0022Maxime Arrouard\u0022],\u0022other\u0022:null}"
                },
                {
                   "question":{
-                     "id":"13"
+                     "id":"UXVlc3Rpb246MTM="
                   },
                   "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:\u0022Emb\u00eater Maxime\u0022}"
                },
                {
                   "question":{
-                     "id":"13"
+                     "id":"UXVlc3Rpb246MTM="
                   },
                   "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:\u0022Emb\u00eater Maxime\u0022}"
                },
                {
                   "question":{
-                     "id":"13"
+                     "id":"UXVlc3Rpb246MTM="
                   },
                   "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:\u0022Emb\u00eater Maxime\u0022}"
                },
                {
                   "question":{
-                     "id":"13"
+                     "id":"UXVlc3Rpb246MTM="
                   },
                   "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:\u0022Emb\u00eater Maxime\u0022}"
                },
                {
                   "question":{
-                     "id":"13"
+                     "id":"UXVlc3Rpb246MTM="
                   },
                   "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:\u0022Emb\u00eater Maxime\u0022}"
                },
                {
                   "question":{
-                     "id":"13"
+                     "id":"UXVlc3Rpb246MTM="
                   },
                   "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:\u0022Emb\u00eater Maxime\u0022}"
                },
                {
                   "question":{
-                     "id":"13"
+                     "id":"UXVlc3Rpb246MTM="
                   },
                   "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:\u0022Emb\u00eater Maxime\u0022}"
                },
                {
                   "question":{
-                     "id":"13"
+                     "id":"UXVlc3Rpb246MTM="
                   },
                   "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:\u0022Emb\u00eater Maxime\u0022}"
                },
                {
                   "question":{
-                     "id":"13"
+                     "id":"UXVlc3Rpb246MTM="
                   },
                   "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:\u0022Emb\u00eater Maxime\u0022}"
                },
                {
                   "question":{
-                     "id":"15"
+                     "id":"UXVlc3Rpb246MTU="
                   },
                   "value":null
                },
                {
                   "question":{
-                     "id":"16"
+                     "id":"UXVlc3Rpb246MTY="
                   },
                   "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                },
                {
                   "question":{
-                     "id":"18"
+                     "id":"UXVlc3Rpb246MTg="
                   },
                   "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                },
                {
                   "question":{
-                     "id":"19"
+                     "id":"UXVlc3Rpb246MTk="
                   },
                   "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                },
                {
                   "question":{
-                     "id":"301"
+                     "id":"UXVlc3Rpb246MzAx"
                   },
                   "value":null
                },
                {
                   "question":{
-                     "id":"302"
+                     "id":"UXVlc3Rpb246MzAy"
                   },
                   "value":null
                }

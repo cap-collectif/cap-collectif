@@ -24,19 +24,19 @@ Scenario: Admin should be notified if GraphQL user modify his proposal
         "body": "Grâce à ça, on aura des cheveux qui sentent la madeleine !!!!!!!",
         "responses": [
           {
-            "question": "1",
+            "question": "UXVlc3Rpb246MQ==",
             "value": "reponse-1"
           },
           {
-            "question": "3",
+            "question": "UXVlc3Rpb246Mw==",
             "value": "reponse-3"
           },
           {
-            "question": "11",
+            "question": "UXVlc3Rpb246MTE=",
             "medias": ["media1"]
           },
           {
-            "question": "12",
+            "question": "UXVlc3Rpb246MTI=",
             "medias": []
           }
         ]
@@ -85,19 +85,19 @@ Scenario: GraphQL client wants to edit his proposal
         "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit",
         "responses": [
           {
-            "question": "1",
+            "question": "UXVlc3Rpb246MQ==",
             "value": "reponse-1"
           },
           {
-            "question": "3",
+            "question": "UXVlc3Rpb246Mw==",
             "value": "reponse-3"
           },
           {
-            "question": "11",
+            "question": "UXVlc3Rpb246MTE=",
             "medias": ["media1"]
           },
           {
-            "question": "12",
+            "question": "UXVlc3Rpb246MTI=",
             "medias": []
           }
         ]
@@ -154,19 +154,19 @@ Scenario: GraphQL client wants to edit his proposal
         "category": "pCategory3",
         "responses": [
           {
-            "question": "3",
+            "question": "UXVlc3Rpb246Mw==",
             "value": "New reponse-3"
           },
           {
-            "question": "11",
+            "question": "UXVlc3Rpb246MTE=",
             "medias": ["media1", "media2"]
           },
           {
-            "question": "12",
+            "question": "UXVlc3Rpb246MTI=",
             "medias": []
           },
           {
-            "question": "1",
+            "question": "UXVlc3Rpb246MQ==",
             "value": "New reponse-1"
           }
         ]
@@ -187,25 +187,25 @@ Scenario: GraphQL client wants to edit his proposal
               "responses":[
                  {
                     "question":{
-                       "id":"303"
+                       "id":"UXVlc3Rpb246MzAz"
                     },
                     "value":null
                  },
                  {
                     "question":{
-                       "id":"1"
+                       "id":"UXVlc3Rpb246MQ=="
                     },
                     "value":"New reponse-1"
                  },
                  {
                     "question":{
-                       "id":"3"
+                       "id":"UXVlc3Rpb246Mw=="
                     },
                     "value":"New reponse-3"
                  },
                  {
                     "question":{
-                       "id":"11"
+                       "id":"UXVlc3Rpb246MTE="
                     },
                     "medias":[
                        {
@@ -218,7 +218,7 @@ Scenario: GraphQL client wants to edit his proposal
                  },
                  {
                     "question":{
-                       "id":"12"
+                       "id":"UXVlc3Rpb246MTI="
                     },
                     "medias":[
 
@@ -282,19 +282,19 @@ Scenario: Super Admin GraphQL client wants to update a proposal
         "category": "pCategory2",
         "responses": [
           {
-            "question": "11",
+            "question": "UXVlc3Rpb246MTE=",
             "medias": ["media1"]
           },
           {
-            "question": "1",
+            "question": "UXVlc3Rpb246MQ==",
             "value": "reponse-1"
           },
           {
-            "question": "3",
+            "question": "UXVlc3Rpb246Mw==",
             "value": "reponse-3"
           },
           {
-            "question": "12",
+            "question": "UXVlc3Rpb246MTI=",
             "medias": ["media1"]
           }
         ],
@@ -327,25 +327,25 @@ Scenario: Super Admin GraphQL client wants to update a proposal
               "responses":[
                  {
                     "question":{
-                       "id":"303"
+                       "id":"UXVlc3Rpb246MzAz"
                     },
                     "value":null
                  },
                  {
                     "question":{
-                       "id":"1"
+                       "id":"UXVlc3Rpb246MQ=="
                     },
                     "value":"reponse-1"
                  },
                  {
                     "question":{
-                       "id":"3"
+                       "id":"UXVlc3Rpb246Mw=="
                     },
                     "value":"reponse-3"
                  },
                  {
                     "question":{
-                       "id":"11"
+                       "id":"UXVlc3Rpb246MTE="
                     },
                     "medias":[
                        {
@@ -355,7 +355,7 @@ Scenario: Super Admin GraphQL client wants to update a proposal
                  },
                  {
                     "question":{
-                       "id":"12"
+                       "id":"UXVlc3Rpb246MTI="
                     },
                     "medias":[
                        {
@@ -391,19 +391,19 @@ Scenario: GraphQL client wants to edit his proposal without required response
         "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "responses": [
           {
-            "question": "1",
+            "question": "UXVlc3Rpb246MQ==",
             "value": "reponse-1"
           },
           {
-            "question": "3",
+            "question": "UXVlc3Rpb246Mw==",
             "value": "reponse-3"
           },
           {
-            "question": "11",
+            "question": "UXVlc3Rpb246MTE=",
             "medias": []
           },
           {
-            "question": "12",
+            "question": "UXVlc3Rpb246MTI=",
             "medias": []
           }
         ]
