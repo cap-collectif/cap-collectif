@@ -443,10 +443,3 @@ Capco\AppBundle\Entity\SiteParameter:
     value: ''
     position: 3
     type: 1
-
-  SiteParameterHomePageShareButton:
-    keyname: homepage.jumbotron.share_button
-    category: pages.homepage
-    value: false
-    position: 120
-    type: 8

@@ -66,6 +66,20 @@ div.geosearch div.results > :hover {
   max-width: 250px;
 }
 
+/* ipad Mini Portrait */
+@media only screen and (max-device-width:768px){
+  div.geosearch {
+    display: none;
+  }
+}
+
+/* ipad Mini Landscape */
+@media only screen and (max-device-width:1024px) {
+  div.geosearch {
+    display: none;
+  }
+}
+
 .marker-cluster-small {
     background-color: rgba(181, 226, 140, 0.6); }
 

@@ -69,7 +69,7 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {% if parameter.type == 8 %}
+                                    {% if parameter.keyname == 'homepage.jumbotron.darken' %}
                                         {{ parameter.value == '0' ? 'global.disabled'|trans({}, 'CapcoAppBundle') : 'global.enabled'|trans({}, 'CapcoAppBundle') }}
                                     {% else %}
                                         {{ parameter.value  }}
