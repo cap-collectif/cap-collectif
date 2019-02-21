@@ -16,10 +16,10 @@ class EventListProfile extends React.Component<Props> {
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query EventListProfileQuery($userId: ID!) {
+          query EventListProfileQuery($userId: ID!, $orderBy: EventsOrder) {
             user: node(id: $userId) {
               ... on User {
-                ...EventListProfileRefetch_user
+                ...EventListProfileRefetch_user @arguments(orderBy: $orderBy)
               }
             }
           }

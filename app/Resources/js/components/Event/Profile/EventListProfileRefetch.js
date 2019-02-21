@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createRefetchContainer } from 'react-relay';
+import styled from 'styled-components';
 import { Row, Col } from 'react-bootstrap';
 import EventPreview from '../EventPreview';
 import { EventListProfileQuery_user } from './__generated__/EventListProfileQuery.graphql';
@@ -8,6 +9,13 @@ import { EventListProfileQuery_user } from './__generated__/EventListProfileQuer
 type Props = {
   user: EventListProfileQuery_user,
 };
+
+const RowCustom = styled(Row)`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 15px;
+`;
 
 export class EventListProfileRefetch extends React.Component<Props> {
   render() {
@@ -17,17 +25,27 @@ export class EventListProfileRefetch extends React.Component<Props> {
     }
 
     return (
-      <Row>
-        {user.events.edges
-          .filter(Boolean)
-          .map(edge => edge.node)
-          .filter(Boolean)
-          .map((node, key) => (
-            <Col key={key} md={6} xs={12}>
-              <EventPreview event={node} isHighlighted={false} isAuthorDisplay={false} />
-            </Col>
-          ))}
-      </Row>
+      <React.Fragment>
+        <RowCustom>
+          <Col>
+            <select>
+              <option value="new">Les plus récents</option>
+              <option value="old">Les plus anciens</option>
+            </select>
+          </Col>
+        </RowCustom>
+        <Row>
+          {user.events.edges
+            .filter(Boolean)
+            .map(edge => edge.node)
+            .filter(Boolean)
+            .map((node, key) => (
+              <Col key={key} md={6} xs={12}>
+                <EventPreview event={node} isHighlighted={false} isAuthorDisplay={false} />
+              </Col>
+            ))}
+        </Row>
+      </React.Fragment>
     );
   }
 }
@@ -36,8 +54,9 @@ export default createRefetchContainer(
   EventListProfileRefetch,
   {
     user: graphql`
-      fragment EventListProfileRefetch_user on User {
-        events(first: 100) {
+      fragment EventListProfileRefetch_user on User
+        @argumentDefinitions(orderBy: { type: "EventsOrder" }) {
+        events(first: 100, orderBy: $orderBy) {
           totalCount
           edges {
             node {
@@ -50,9 +69,9 @@ export default createRefetchContainer(
     `,
   },
   graphql`
-    query EventListProfileRefetchQuery($userId: ID!) {
+    query EventListProfileRefetchQuery($userId: ID!, $orderBy: EventsOrder) {
       user: node(id: $userId) {
-        ...EventListProfileRefetch_user
+        ...EventListProfileRefetch_user @arguments(orderBy: $orderBy)
       }
     }
   `,
