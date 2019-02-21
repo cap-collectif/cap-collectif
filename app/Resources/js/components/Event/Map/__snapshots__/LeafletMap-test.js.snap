@@ -28,6 +28,7 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
       markers={Array []}
       maxClusterRadius={30}
       onMarkerClick={[Function]}
+      onPopupClose={[Function]}
       showCoverageOnHover={false}
       spiderfyOnMaxZoom={true}
       zoomToBoundsOnClick={true}

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { MenuItem, DropdownButton, Modal } from 'react-bootstrap';
 import type { GlobalState } from '../../types';
 
-type Props = {
+type Props = {|
   id: string,
   enabled: boolean,
   title: string,
@@ -13,11 +13,11 @@ type Props = {
   className?: string,
   bsStyle?: string,
   style?: Object,
-};
+|};
 
-type State = {
+type State = {|
   show: boolean,
-};
+|};
 
 class ShareButtonDropdown extends React.Component<Props, State> {
   static defaultProps = {

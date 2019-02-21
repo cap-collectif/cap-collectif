@@ -20,38 +20,16 @@ exports[`<EventMap /> renders correctly 1`] = `
         "edges": Array [
           Object {
             "node": Object {
-              "author": Object {
-                "media": Object {
-                  "url": "http://monimage.toto",
-                },
-                "url": "http://jesuistoto.fr",
-                "username": "toto",
-              },
-              "endAt": "2019-09-27T03:00:00+01:00",
-              "fullAddress": "Ici et ailleur",
               "id": "event1",
               "lat": 47.12345789,
               "lng": 1.23456789,
-              "startAt": "2018-09-27T03:00:00+01:00",
-              "title": "Evenement des gens perdu",
-              "url": "http://perdu.com",
             },
           },
           Object {
             "node": Object {
-              "author": Object {
-                "media": null,
-                "url": "http://jesuistoto.fr",
-                "username": "toto",
-              },
-              "endAt": "2019-10-27T03:00:00+01:00",
-              "fullAddress": "Nul part et ailleur",
               "id": "event2",
               "lat": 47.1235444789,
               "lng": 1.23477789,
-              "startAt": "2018-10-07T03:00:00+01:00",
-              "title": "Evenement des gens pas perdu",
-              "url": "http://perdu.com",
             },
           },
         ],

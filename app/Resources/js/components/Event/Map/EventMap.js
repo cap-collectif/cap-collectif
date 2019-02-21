@@ -15,7 +15,7 @@ type State = {|
   loading: boolean,
 |};
 
-const PAGINATION = 250;
+const PAGINATION = 100;
 
 export class EventMap extends React.Component<Props, State> {
   state = {
@@ -101,18 +101,6 @@ export default createPaginationContainer(
               id
               lat
               lng
-              url
-              fullAddress
-              startAt
-              endAt
-              title
-              author {
-                username
-                url
-                media {
-                  url
-                }
-              }
             }
           }
         }
