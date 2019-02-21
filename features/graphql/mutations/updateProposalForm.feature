@@ -295,7 +295,7 @@ Scenario: GraphQL client wants to delete the first question
         "questions": [
           {
             "question": {
-              "id": "48",
+              "id": "UXVlc3Rpb246NDg=",
               "title": "Question Multiple?",
               "helpText": null,
               "description": null,
@@ -345,7 +345,7 @@ Scenario: GraphQL client wants to delete the first question
           "id": "proposalform13",
           "questions": [
             {
-              "id": "48",
+              "id": "UXVlc3Rpb246NDg=",
               "title": "Question Multiple?",
               "type": "radio"
             }
@@ -388,7 +388,7 @@ Scenario: GraphQL client wants to delete the first question choice
         "questions": [
           {
             "question": {
-              "id": "1314",
+              "id": "UXVlc3Rpb246MTMxNA==",
               "private": false,
               "required": false,
               "title": "Question simple?",
@@ -397,7 +397,7 @@ Scenario: GraphQL client wants to delete the first question choice
           },
           {
             "question": {
-              "id": "48",
+              "id": "UXVlc3Rpb246NDg=",
               "title": "Question Multiple?",
               "helpText": null,
               "description": null,
@@ -441,12 +441,12 @@ Scenario: GraphQL client wants to delete the first question choice
           "id": "proposalform13",
           "questions": [
             {
-              "id": "1314",
+              "id": "UXVlc3Rpb246MTMxNA==",
               "title": "Question simple?",
               "type": "text"
             },
             {
-              "id": "48",
+              "id": "UXVlc3Rpb246NDg=",
               "title": "Question Multiple?",
               "type": "radio",
               "choices": [

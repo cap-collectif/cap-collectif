@@ -80,13 +80,13 @@ Scenario: Evaluer wants to retrieve evaluation form questions
         "proposalForm": {
           "evaluationForm": {
             "questions": [
-              {"id":"8"},
-              {"id":"9"},
-              {"id":"20"},
-              {"id":"21"},
-              {"id":"22"},
-              {"id":"23"},
-              {"id":"47"}
+              {"id":"UXVlc3Rpb246OA=="},
+              {"id":"UXVlc3Rpb246OQ=="},
+              {"id":"UXVlc3Rpb246MjA="},
+              {"id":"UXVlc3Rpb246MjE="},
+              {"id":"UXVlc3Rpb246MjI="},
+              {"id":"UXVlc3Rpb246MjM="},
+              {"id":"UXVlc3Rpb246NDc="}
             ]
           }
        }
@@ -116,13 +116,13 @@ Scenario: Anonymous wants to retrieve evaluation form questions
         "proposalForm": {
           "evaluationForm": {
             "questions": [
-              {"id":"8"},
-              {"id":"9"},
-              {"id":"20"},
-              {"id":"21"},
-              {"id":"22"},
-              {"id":"23"},
-              {"id":"47"}
+              {"id":"UXVlc3Rpb246OA=="},
+              {"id":"UXVlc3Rpb246OQ=="},
+              {"id":"UXVlc3Rpb246MjA="},
+              {"id":"UXVlc3Rpb246MjE="},
+              {"id":"UXVlc3Rpb246MjI="},
+              {"id":"UXVlc3Rpb246MjM="},
+              {"id":"UXVlc3Rpb246NDc="}
             ]
           }
        }

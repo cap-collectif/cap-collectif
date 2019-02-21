@@ -21,15 +21,15 @@ Scenario: GraphQL client wants to retrieve questions
     "data": {
       "questionnaire": {
         "questions": [
-          {"id":"2"},
-          {"id":"13"},
-          {"id":"14"},
-          {"id":"15"},
-          {"id":"16"},
-          {"id":"18"},
-          {"id":"19"},
-          {"id":"301"},
-          {"id":"302"}
+          {"id":"UXVlc3Rpb246Mg=="},
+          {"id":"UXVlc3Rpb246MTM="},
+          {"id":"UXVlc3Rpb246MTQ="},
+          {"id":"UXVlc3Rpb246MTU="},
+          {"id":"UXVlc3Rpb246MTY="},
+          {"id":"UXVlc3Rpb246MTg="},
+          {"id":"UXVlc3Rpb246MTk="},
+          {"id":"UXVlc3Rpb246MzAx"},
+          {"id":"UXVlc3Rpb246MzAy"}
         ]
       }
     }
@@ -68,109 +68,109 @@ Scenario: GraphQL client wants to retrieve replies
                "responses":[
                   {
                      "question":{
-                        "id":"2"
+                        "id":"UXVlc3Rpb246Mg=="
                      },
                      "value":"Youpi ! J\u0027adore des JO"
                   },
                   {
                      "question":{
-                        "id":"13"
+                        "id":"UXVlc3Rpb246MTM="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"14"
+                        "id":"UXVlc3Rpb246MTQ="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Maxime Arrouard\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"13"
+                        "id":"UXVlc3Rpb246MTM="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"13"
+                        "id":"UXVlc3Rpb246MTM="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"13"
+                        "id":"UXVlc3Rpb246MTM="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"13"
+                        "id":"UXVlc3Rpb246MTM="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"13"
+                        "id":"UXVlc3Rpb246MTM="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"13"
+                        "id":"UXVlc3Rpb246MTM="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"13"
+                        "id":"UXVlc3Rpb246MTM="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"13"
+                        "id":"UXVlc3Rpb246MTM="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"13"
+                        "id":"UXVlc3Rpb246MTM="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"15"
+                        "id":"UXVlc3Rpb246MTU="
                      },
                      "value":null
                   },
                   {
                      "question":{
-                        "id":"16"
+                        "id":"UXVlc3Rpb246MTY="
                      },
                      "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"18"
+                        "id":"UXVlc3Rpb246MTg="
                      },
                      "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"19"
+                        "id":"UXVlc3Rpb246MTk="
                      },
                      "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"301"
+                        "id":"UXVlc3Rpb246MzAx"
                      },
                      "value":null
                   },
                   {
                      "question":{
-                        "id":"302"
+                        "id":"UXVlc3Rpb246MzAy"
                      },
                      "value":null
                   }
@@ -181,55 +181,55 @@ Scenario: GraphQL client wants to retrieve replies
                "responses":[
                   {
                      "question":{
-                        "id":"13"
+                        "id":"UXVlc3Rpb246MTM="
                      },
                      "value":"{\u0022labels\u0022:[\u0022Natation\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"2"
+                        "id":"UXVlc3Rpb246Mg=="
                      },
                      "value":null
                   },
                   {
                      "question":{
-                        "id":"14"
+                        "id":"UXVlc3Rpb246MTQ="
                      },
                      "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"15"
+                        "id":"UXVlc3Rpb246MTU="
                      },
                      "value":null
                   },
                   {
                      "question":{
-                        "id":"16"
+                        "id":"UXVlc3Rpb246MTY="
                      },
                      "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"18"
+                        "id":"UXVlc3Rpb246MTg="
                      },
                      "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"19"
+                        "id":"UXVlc3Rpb246MTk="
                      },
                      "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
-                        "id":"301"
+                        "id":"UXVlc3Rpb246MzAx"
                      },
                      "value":null
                   },
                   {
                      "question":{
-                        "id":"302"
+                        "id":"UXVlc3Rpb246MzAy"
                      },
                      "value":null
                   }
@@ -350,7 +350,7 @@ Scenario: GraphQL client wants to get question's responses
       "questionnaire":{
          "questions":[
             {
-               "id":"2",
+               "id":"UXVlc3Rpb246Mg==",
                "title":"\u00cates-vous satisfait que la ville de Paris soit candidate \u00e0 l\u0027organisation des JO de 2024 ?",
                "description":null,
                "responses":{
@@ -410,7 +410,7 @@ Scenario: GraphQL client wants to get question's responses
                }
             },
             {
-               "id":"13",
+               "id":"UXVlc3Rpb246MTM=",
                "title":"Pour quel type d\u0027\u00e9preuve \u00eates vous pr\u00eat \u00e0 acheter des places ?",
                "responses":{
                   "totalCount":20,
@@ -519,7 +519,7 @@ Scenario: GraphQL client wants to get question's responses
                }
             },
             {
-               "id":"14",
+               "id":"UXVlc3Rpb246MTQ=",
                "title":"Quel est ton athl\u00e8te favori ?",
                "responses":{
                   "totalCount":1,
@@ -533,7 +533,7 @@ Scenario: GraphQL client wants to get question's responses
                }
             },
             {
-               "id":"15",
+               "id":"UXVlc3Rpb246MTU=",
                "title":"Nelson Monfort parle-t-il:",
                "responses":{
                   "totalCount":0,
@@ -543,7 +543,7 @@ Scenario: GraphQL client wants to get question's responses
                }
             },
             {
-               "id":"16",
+               "id":"UXVlc3Rpb246MTY=",
                "title":"Classez vos choix",
                "responses":{
                   "totalCount":0,
@@ -553,7 +553,7 @@ Scenario: GraphQL client wants to get question's responses
                }
             },
             {
-               "id":"18",
+               "id":"UXVlc3Rpb246MTg=",
                "title":"Choissez le meilleur logo",
                "responses":{
                   "totalCount":0,
@@ -563,7 +563,7 @@ Scenario: GraphQL client wants to get question's responses
                }
             },
             {
-               "id":"19",
+               "id":"UXVlc3Rpb246MTk=",
                "title":"Est-ce que Martoni a encore une balle dans son chargeur ?",
                "responses":{
                   "totalCount":0,

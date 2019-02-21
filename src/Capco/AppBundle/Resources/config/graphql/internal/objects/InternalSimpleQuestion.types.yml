@@ -6,6 +6,7 @@ InternalSimpleQuestion:
     name: SimpleQuestion
     interfaces:
       - InternalQuestion
+      - Node
     description: 'A simple question'
     fields:
       kind:
