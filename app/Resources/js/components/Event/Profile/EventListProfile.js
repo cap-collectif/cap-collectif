@@ -42,6 +42,7 @@ class EventListProfile extends React.Component<Props> {
             return null;
           }
 
+          /* $FlowFixMe */
           return <EventListProfileRefetch user={user} />;
         }}
       />

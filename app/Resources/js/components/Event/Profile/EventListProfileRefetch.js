@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { graphql, createRefetchContainer } from 'react-relay';
+import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import styled from 'styled-components';
 import { Row, Col } from 'react-bootstrap';
 import EventPreview from '../EventPreview';
@@ -8,7 +8,10 @@ import { EventListProfileQuery_user } from './__generated__/EventListProfileQuer
 
 type Props = {
   user: EventListProfileQuery_user,
+  relay: RelayRefetchProp,
 };
+
+type OrderByType = 'new' | 'old';
 
 const RowCustom = styled(Row)`
   display: flex;
@@ -17,7 +20,26 @@ const RowCustom = styled(Row)`
   margin: 15px;
 `;
 
+const getOrderBy = (order: OrderByType) => {
+  if (order === 'old') {
+    return { field: 'START_AT', direction: 'ASC' };
+  }
+
+  return { field: 'START_AT', direction: 'DESC' };
+};
+
 export class EventListProfileRefetch extends React.Component<Props> {
+  _refetch = (order: OrderByType) => {
+    const { relay } = this.props;
+    const orderBy = getOrderBy(order);
+    relay.refetch({ orderBy }, null);
+  };
+
+  onChangeHandler = (e: Event) => {
+    // $FlowFixMe
+    this._refetch(e.target.value);
+  };
+
   render() {
     const { user } = this.props;
     if (!user) {
@@ -28,7 +50,8 @@ export class EventListProfileRefetch extends React.Component<Props> {
       <React.Fragment>
         <RowCustom>
           <Col>
-            <select>
+            {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+            <select onChange={e => this.onChangeHandler(e)}>
               <option value="new">Les plus récents</option>
               <option value="old">Les plus anciens</option>
             </select>
