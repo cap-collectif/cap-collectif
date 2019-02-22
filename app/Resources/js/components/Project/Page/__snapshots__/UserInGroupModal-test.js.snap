@@ -44,7 +44,9 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         </b>
       </ModalTitle>
     </ModalHeader>
-    <ListGroupFlush>
+    <ListGroupFlush
+      striped={false}
+    >
       <ListGroupItem
         bsClass="list-group-item"
         className="d-flex text-left"
@@ -183,7 +185,9 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         </b>
       </ModalTitle>
     </ModalHeader>
-    <ListGroupFlush>
+    <ListGroupFlush
+      striped={false}
+    >
       <ListGroupItem
         bsClass="list-group-item"
         className="d-flex text-left"

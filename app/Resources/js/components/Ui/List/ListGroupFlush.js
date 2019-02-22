@@ -49,11 +49,15 @@ const Container = styled(ListGroup).attrs({
 
 type Props = {
   children: ?React.Node,
-  striped?: boolean,
+  striped: boolean,
   className?: string,
 };
 
 export class ListGroupFlush extends React.Component<Props> {
+  static defaultProps = {
+    striped: false,
+  };
+
   render() {
     const { children, striped, className } = this.props;
 
