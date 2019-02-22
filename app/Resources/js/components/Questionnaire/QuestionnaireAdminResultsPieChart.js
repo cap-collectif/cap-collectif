@@ -80,8 +80,6 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
 
     const data = cleanMultipleChoiceQuestion(multipleChoiceQuestion, intl);
 
-    console.log(data);
-
     return (
       <div className="row">
         <div className="col-xs-12">
