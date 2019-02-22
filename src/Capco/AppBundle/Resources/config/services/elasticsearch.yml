@@ -8,12 +8,15 @@ services:
     resource: '%kernel.project_dir%/src/Capco/AppBundle/Elasticsearch/*'
     exclude: '%kernel.project_dir%/src/Capco/AppBundle/Elasticsearch/{ElasticsearchHelper.php}'
 
-  Elastica\Client:
+  Capco\AppBundle\Elasticsearch\Client:
     autowire: true
     public: true
     arguments:
       - connections:
           - { host: '%elasticsearch_host%', port: '9200' }
+      - ~
+      - '@Capco\AppBundle\Elasticsearch\ElasticsearchLogger'
+      - '%kernel.debug%'
 
   Capco\AppBundle\Elasticsearch\IndexBuilder:
     autowire: true
