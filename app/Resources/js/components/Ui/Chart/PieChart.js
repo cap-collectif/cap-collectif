@@ -1,21 +1,56 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
-import { Cell, Legend, Pie, PieChart as Chart, ResponsiveContainer } from 'recharts';
+import { Cell, Pie, PieChart as Chart, ResponsiveContainer, Tooltip } from 'recharts';
+import defaultColors from '../../../utils/colors';
+
+type Data = {
+  name: string,
+  value: number,
+};
 
 type Props = {
-  data: Array<Object>,
-  innerRadius: number, 
+  data: Array<Data>,
+  innerRadius: number,
   outerRadius: number,
   colors: Array<string>,
-  maxWidth?: string,
-  height: string
-}
+  width: string,
+  height: string,
+};
 
-const PieChart = (props: Props) => {
-  const { data, innerRadius, outerRadius, colors, maxWidth, height } = props;
+const TooltipWrapper = styled.div`
+  background-color: #fff;
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid ${defaultColors.borderColor};
+`;
 
-  const renderCustomizedLabel = ({
+const ContentWrapper = styled.div.attrs({
+  className: 'pie-chart__container',
+})`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  max-width: 100%;
+  font-size: 14px;
+
+  .recharts-pie {
+    font-weight: 500;
+  }
+
+  .recharts-legend-wrapper {
+    line-height: normal;
+  }
+`;
+
+export class PieChart extends React.Component<Props> {
+  static defaultProps = {
+    height: '95px',
+    width: '115px',
+    innerRadius: 10,
+    outerRadius: 45,
+  };
+
+  renderCustomizedLabel = ({
     cx,
     cy,
     midAngle,
@@ -36,49 +71,52 @@ const PieChart = (props: Props) => {
     );
   };
 
-  const ContentWrapper = styled.div`
-    max-width: ${props => props.maxWidth ? props.maxWidth : 'none'};
-    height: ${propos => props.height};
-    width: 100%;
+  renderTooltip = (props: { payload: Array<Object> }) => {
+    const { payload } = props;
 
-    .recharts-pie {
-      font-weight: 500;
+    if (payload && payload.length > 0) {
+      return (
+        <TooltipWrapper>
+          {payload[0].name} - {payload[0].value}
+        </TooltipWrapper>
+      );
     }
 
-    .recharts-legend-wrapper {
-      line-height: normal;
-    }
-  `;
+    return null;
+  };
 
-  return (
-    <ContentWrapper maxWidth={maxWidth} height={height}>
-      <ResponsiveContainer>
-        <Chart>
-          <Legend layout="vertical" align="right" verticalAlign="middle" />
-          <Pie
-            data={data}
-            innerRadius={innerRadius}
-            outerRadius={outerRadius}
-            paddingAngle={2}
-            stroke="none"
-            fontSize="16px"
-            isAnimationActive={false}
-            percent
-            dataKey="value"
-            labelLine={false}
-            label={renderCustomizedLabel}>
-            {data.map((entry, index) => (
+  render() {
+    const { data, innerRadius, outerRadius, colors, width, height } = this.props;
+
+    return (
+      <ContentWrapper width={width} height={height}>
+        <ResponsiveContainer>
+          <Chart>
+            <Tooltip content={this.renderTooltip} />
+            <Pie
+              data={data}
+              innerRadius={innerRadius}
+              outerRadius={outerRadius}
+              paddingAngle={2}
+              stroke="none"
+              isAnimationActive={false}
+              percent
+              dataKey="value"
+              labelLine={false}
+              label={this.renderCustomizedLabel}>
+              {data.map((entry, index) => (
                 <Cell
                   key={index}
                   aria-labelledby={entry.name}
                   fill={colors[index % colors.length]}
                 />
               ))}{' '}
-          </Pie>
-        </Chart>
-      </ResponsiveContainer>
-    </ContentWrapper>
-  )
+            </Pie>
+          </Chart>
+        </ResponsiveContainer>
+      </ContentWrapper>
+    );
+  }
 }
 
 export default PieChart;

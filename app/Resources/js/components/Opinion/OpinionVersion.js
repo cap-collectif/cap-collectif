@@ -15,7 +15,6 @@ type Props = {
 };
 
 class OpinionVersion extends React.Component<Props> {
-
   render() {
     const { version, rankingThreshold, intl } = this.props;
 
@@ -36,7 +35,7 @@ class OpinionVersion extends React.Component<Props> {
         </div>
         {version.votes && version.votes.totalCount > 0 ? (
           <div className="opinion__pie-chart">
-            <PieChart data={data} innerRadius={15} outerRadius={50} height="105px" maxWidth="280px" colors={colors.votes} />
+            <PieChart data={data} colors={colors.votes} />
           </div>
         ) : null}
       </ListGroupItem>

@@ -198,15 +198,9 @@
 
 @media (max-width: $screen-xs-max) {
   .list-group-custom {
-    .opinion__chart {
+    .pie-chart__container {
       display: none;
     }
-  }
-}
-
-@media (max-width: 605px) {
-  .opinion__pie-chart {
-    margin: 10px auto auto;
   }
 }
 
