@@ -13,7 +13,6 @@ type Props = {
   width?: string,
   innerRadius?: number,
   outerRadius?: number,
-  className?: string,
 };
 
 class VotePiechart extends React.Component<Props> {
@@ -24,17 +23,7 @@ class VotePiechart extends React.Component<Props> {
   };
 
   render() {
-    const {
-      intl,
-      ok,
-      mitige,
-      nok,
-      innerRadius,
-      outerRadius,
-      height,
-      width,
-      className,
-    } = this.props;
+    const { intl, ok, mitige, nok, innerRadius, outerRadius, height, width } = this.props;
 
     const data = [
       { name: intl.formatMessage({ id: 'vote.ok' }), value: ok },
@@ -45,7 +34,6 @@ class VotePiechart extends React.Component<Props> {
     if (!__SERVER__ && ok + mitige + nok > 0) {
       return (
         <PieChart
-          className={className}
           data={data}
           innerRadius={innerRadius}
           outerRadius={outerRadius}

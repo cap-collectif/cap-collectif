@@ -34,9 +34,7 @@ class OpinionVersion extends React.Component<Props> {
           <OpinionPreview opinion={version} rankingThreshold={rankingThreshold} />
         </div>
         {version.votes && version.votes.totalCount > 0 ? (
-          <div className="opinion__pie-chart">
-            <PieChart data={data} colors={colors.votes} />
-          </div>
+          <PieChart data={data} colors={colors.votes} />
         ) : null}
       </ListGroupItem>
     );
