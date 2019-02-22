@@ -65,7 +65,14 @@ export class OpinionList extends React.Component<Props> {
                   defaultValue={section.defaultOrderBy}
                   className="form-control"
                   aria-label={intl.formatMessage({ id: 'global.filter' })}
+                  onChange={(event: SyntheticInputEvent<>) => {
+                    // eslint-disable-line  jsx-a11y/no-onchange
+                    if (section.url) {
+                      window.location.href = `${section.url}/sort/${event.target.value}`;
+                    }
+                  }}
                   onBlur={(event: SyntheticInputEvent<>) => {
+                    // eslint-disable-line  jsx-a11y/no-onchange
                     if (section.url) {
                       window.location.href = `${section.url}/sort/${event.target.value}`;
                     }
