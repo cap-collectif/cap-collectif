@@ -45,9 +45,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when on
       />
     </ModalTitle>
   </ModalHeader>
-  <ListGroupFlush
-    striped={false}
-  >
+  <ListGroupFlush>
     <ListGroupItem
       bsClass="list-group-item"
       className="bg-vip d-flex text-left"
@@ -132,9 +130,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
       />
     </ModalTitle>
   </ModalHeader>
-  <ListGroupFlush
-    striped={false}
-  >
+  <ListGroupFlush>
     <ListGroupItem
       bsClass="list-group-item"
       className="bg-vip d-flex text-left"

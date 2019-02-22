@@ -48,7 +48,6 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
     </ModalHeader>
     <ListGroupFlush
       className="d-flex text-left"
-      striped={false}
     >
       <ListGroupItem
         bsClass="list-group-item"
@@ -180,7 +179,6 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
     </ModalHeader>
     <ListGroupFlush
       className="d-flex text-left"
-      striped={false}
     >
       <ListGroupItem
         bsClass="list-group-item"
