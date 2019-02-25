@@ -47,6 +47,12 @@ type Props = {
 };
 
 export class OpinionList extends React.Component<Props> {
+  sort(section: Object, event: SyntheticInputEvent<>) {
+    if (section.url) {
+      window.location.href = `${section.url}/sort/${event.target.value}`;
+    }
+  }
+
   render() {
     const { section, consultation, intl } = this.props;
     return (
@@ -65,10 +71,11 @@ export class OpinionList extends React.Component<Props> {
                   defaultValue={section.defaultOrderBy}
                   className="form-control"
                   aria-label={intl.formatMessage({ id: 'global.filter' })}
+                  onChange={(event: SyntheticInputEvent<>) => {
+                    this.sort(section, event);
+                  }}
                   onBlur={(event: SyntheticInputEvent<>) => {
-                    if (section.url) {
-                      window.location.href = `${section.url}/sort/${event.target.value}`;
-                    }
+                    this.sort(section, event);
                   }}>
                   <option value="positions">
                     {intl.formatMessage({ id: 'opinion.sort.positions' })}

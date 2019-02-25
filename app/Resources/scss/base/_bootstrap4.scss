@@ -9,6 +9,11 @@
     background-color: $white;
 }
 
+/* ======================== Border ============================*/
+.border-bottom {
+    border-bottom: 1px solid $border-color;
+}
+
 /* ======================== Button ============================*/
 .btn-md {
     font-size: 16px;
