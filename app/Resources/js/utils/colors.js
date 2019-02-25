@@ -1,7 +1,7 @@
 // @flow
 const colors = {
   black: '#000000',
-  primaryColor: '#0388cc',
+  primaryColor: '#007c91',
   darkGray: '#707070',
   iconGrayColor: '#acacac',
   borderColor: '#e3e3e3',

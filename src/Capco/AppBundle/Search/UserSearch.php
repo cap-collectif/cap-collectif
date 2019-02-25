@@ -63,13 +63,13 @@ class UserSearch extends Search
         $query = new Query\BoolQuery();
 
         if ($terms) {
-            $query = $this->searchTermsInMultipleFields($query, $fields, $terms, 'phrase_prefix');
+            $query = $this->searchTermsInMultipleFields($query, $fields, $terms, 'best_fields');
         }
         if (\count($notInIds) > 0) {
             $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
         }
 
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $resultSet = $this->index->getType($this->type)->search($query, 300);
         $users = $this->getHydratedResultsFromResultSet($resultSet);
 
         if ($onlyUsers) {

@@ -5,9 +5,7 @@ import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import QuestionnaireAdminResultsBarChart from './QuestionnaireAdminResultsBarChart';
 import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking';
 import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart';
-import QuestionnaireAdminResultsText from './QuestionnaireAdminResultsText';
 import type { QuestionnaireAdminResults_questionnaire } from './__generated__/QuestionnaireAdminResults_questionnaire.graphql';
-import QuestionnaireAdminResultsMedia from './QuestionnaireAdminResultsMedia';
 import withColors from '../Utils/withColors';
 import PrivateBox from '../Ui/Boxes/PrivateBox';
 
@@ -22,16 +20,6 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
 
     if (question.participants && question.participants.totalCount === 0) {
       return null;
-    }
-
-    if (question.__typename === 'SimpleQuestion') {
-      // $FlowFixMe
-      return <QuestionnaireAdminResultsText simpleQuestion={question} />;
-    }
-
-    if (question.__typename === 'MediaQuestion') {
-      // $FlowFixMe
-      return <QuestionnaireAdminResultsMedia mediaQuestion={question} />;
     }
 
     if (question.__typename !== 'MultipleChoiceQuestion') {
@@ -93,14 +81,14 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
                         <FormattedMessage id="no-answer" />
                       )}
                       {question.participants &&
-                        question.allResponses &&
-                        question.allResponses.totalCount !== 0 && (
+                        question.responses &&
+                        question.responses.totalCount !== 0 && (
                           <React.Fragment>
                             {' '}
                             /{' '}
                             <FormattedMessage
                               id="count-answers"
-                              values={{ num: question.allResponses.totalCount }}
+                              values={{ num: question.responses.totalCount }}
                             />
                           </React.Fragment>
                         )}
@@ -142,11 +130,9 @@ export default createFragmentContainer(
         participants {
           totalCount
         }
-        allResponses: responses {
+        responses {
           totalCount
         }
-        ...QuestionnaireAdminResultsText_simpleQuestion
-        ...QuestionnaireAdminResultsMedia_mediaQuestion
         ...QuestionnaireAdminResultsBarChart_multipleChoiceQuestion
         ...QuestionnaireAdminResultsPieChart_multipleChoiceQuestion
         ...QuestionnaireAdminResultsRanking_multipleChoiceQuestion

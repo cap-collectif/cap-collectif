@@ -179,10 +179,6 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.abstract_question.repository')->find($uuid);
-        }
-
-        if (!$node) {
             $error = "Could not resolve node with uuid ${uuid}";
             $this->logger->warning($error);
 

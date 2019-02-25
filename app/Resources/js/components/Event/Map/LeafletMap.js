@@ -205,8 +205,6 @@ export class LeafletMap extends Component<Props, State> {
                       position={[marker.lat, marker.lng]}
                       icon={this.getMarkerIcon(marker)}>
                       <Popup
-                        autoPanPadding={[50, 50]}
-                        maxWidth={200}
                         className={
                           eventSelected && eventSelected === marker.id
                             ? 'event-map-popup'
@@ -227,16 +225,18 @@ export class LeafletMap extends Component<Props, State> {
                             {this.state.currentEvent.author &&
                               this.state.currentEvent.author.username && (
                                 <p className="excerpt">
-                                  {/* $FlowFixMe */}
-                                  <UserAvatar size={16} user={this.state.currentEvent.author} />
-                                  <span className="font-weight-semi-bold">
-                                    {this.state.currentEvent.author.username}
-                                  </span>
+                                  <div>
+                                    {/* $FlowFixMe */}
+                                    <UserAvatar size={16} user={this.state.currentEvent.author} />
+                                    <span className="font-weight-semi-bold">
+                                      {this.state.currentEvent.author.username}
+                                    </span>
+                                  </div>
                                 </p>
                               )}
                             {this.state.currentEvent.fullAddress && (
                               <p className="excerpt">
-                                <i className="cap-marker-1 mr-10" />
+                                <i className="cap-marker-1 mr-15" />
                                 {this.state.currentEvent.fullAddress}
                               </p>
                             )}

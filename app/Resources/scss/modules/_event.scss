@@ -71,22 +71,8 @@
     }
 }
 
-.event-map-popup {
-    font-size: 14px;
-    overflow-wrap: break-word;
-
-    h2 {
-        font-size: 24px;
-        margin-bottom: 15px;
-    }
-
-    .leaflet-popup-content-wrapper {
-        border-radius: 0;
-
-        p {
-            margin: 0 0 12px;
-        }
-    }   
+.event-map-popup .leaflet-popup-content-wrapper {
+    border-radius: 0;
 }
 
 .event-filters {
