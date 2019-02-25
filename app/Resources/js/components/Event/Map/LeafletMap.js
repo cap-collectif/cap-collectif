@@ -205,7 +205,6 @@ export class LeafletMap extends Component<Props, State> {
                       position={[marker.lat, marker.lng]}
                       icon={this.getMarkerIcon(marker)}>
                       <Popup
-                        // autoPanPadding={new L.point(50, 50)}
                         autoPanPadding={[50, 50]}
                         maxWidth={200}
                         className={
