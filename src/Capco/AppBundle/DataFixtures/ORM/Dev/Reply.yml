@@ -31,3 +31,15 @@ Capco\AppBundle\Entity\Reply:
     createdAt: <(new \DateTime('2016-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
     draft: true
+  reply6:
+    id: 'reply6'
+    author: '@user_updating_email'
+    questionnaire: '@questionnaire1'
+    publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+  reply7:
+    id: 'reply7'
+    author: '@user_not_confirmed'
+    questionnaire: '@questionnaire1'
+    publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
