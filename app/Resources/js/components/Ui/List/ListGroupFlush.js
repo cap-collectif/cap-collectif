@@ -2,7 +2,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { ListGroup } from 'react-bootstrap';
-import colors from '../../../utils/colors';
 
 const Container = styled(ListGroup).attrs({
   className: 'list-group-flush',
@@ -16,10 +15,6 @@ const Container = styled(ListGroup).attrs({
     border-left: 0;
     border-radius: 0;
     padding: 15px 0;
-  }
-
-  .ql-editor {
-    padding: 0 15px;
   }
 
   .list-group-item:last-child {
@@ -37,35 +32,17 @@ const Container = styled(ListGroup).attrs({
   .excerpt {
     font-size: 14px;
   }
-
-  ${props =>
-    props.striped === true &&
-    `
-    .list-group-item:nth-child(odd) {
-      background-color: ${colors.pageBgc};
-    }
-  `}
 `;
 
 type Props = {
   children: ?React.Node,
-  striped: boolean,
-  className?: string,
 };
 
 export class ListGroupFlush extends React.Component<Props> {
-  static defaultProps = {
-    striped: false,
-  };
-
   render() {
-    const { children, striped, className } = this.props;
+    const { children } = this.props;
 
-    return (
-      <Container striped={striped} className={className}>
-        {children}
-      </Container>
-    );
+    return <Container>{children}</Container>;
   }
 }
 

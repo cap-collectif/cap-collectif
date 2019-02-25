@@ -7,12 +7,3 @@ services:
         template: '@CapcoApp/DataCollector/graphql.html.twig'
         id: 'capco.graphql'
     public: false
-
-  Capco\AppBundle\DataCollector\ElasticsearchCollector:
-    autowire: true
-    autoconfigure: true
-    tags:
-      - name: data_collector
-        template: '@CapcoApp/DataCollector/elasticsearch.html.twig'
-        id: 'capco.elasticsearch'
-    public: false

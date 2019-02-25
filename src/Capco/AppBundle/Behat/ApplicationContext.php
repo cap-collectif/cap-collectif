@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Capco\AppBundle\Elasticsearch\Client;
+use Elastica\Client;
 use Elastica\Snapshot;
 use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;

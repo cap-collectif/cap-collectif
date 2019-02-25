@@ -87,7 +87,6 @@ export class ProposalResponse extends React.PureComponent<Props> {
                 {radioLabels.labels.map((label, index) => (
                   <li key={index}>{label}</li>
                 ))}
-                {radioLabels.other && <li>{radioLabels.other}</li>}
               </ul>
             ) : (
               this.renderUniqueLabel(radioLabels)

@@ -69,7 +69,7 @@ export default createPaginationContainer(
   {
     voteList: graphql`
       fragment VoteListProfile_voteList on User
-      @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
+        @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
         id
         votes(first: $count, after: $cursor) @connection(key: "VoteListProfile_votes") {
           totalCount
