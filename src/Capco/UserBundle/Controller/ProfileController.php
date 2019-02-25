@@ -313,8 +313,15 @@ class ProfileController extends Controller
             'author' => $user,
             'private' => false,
         ]);
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
+        $eventsCount = $this->getEventsCount($user);
 
-        return ['user' => $user, 'replies' => $replies];
+        return [
+            'user' => $user,
+            'replies' => $replies,
+            'projectsCount' => $projectsCount,
+            'eventsCount' => $eventsCount,
+        ];
     }
 
     /**
