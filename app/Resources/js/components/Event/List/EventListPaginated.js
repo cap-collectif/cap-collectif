@@ -86,7 +86,7 @@ export class EventListPaginated extends React.Component<Props, State> {
                   .filter(Boolean)
                   .map((node, key) => (
                     // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
-                    <Row
+                    <div
                       key={key}
                       onMouseOver={() => (config.isMobile ? null : this.onFocus(node.id))}
                       className={config.isMobile ? 'ml-0 mr-0' : null}>
@@ -95,7 +95,7 @@ export class EventListPaginated extends React.Component<Props, State> {
                         isHighlighted={eventSelected && eventSelected === node.id}
                         event={node}
                       />
-                    </Row>
+                    </div>
                   ))}
               {relay.hasMore() && (
                 <Row>

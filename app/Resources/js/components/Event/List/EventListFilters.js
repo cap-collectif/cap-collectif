@@ -260,12 +260,17 @@ export class EventListFilters extends React.Component<Props, State> {
       }
     };
     return (
-      <Row className={config.isMobile ? 'mb-10 ml-0' : 'mb-10'}>
-        <Col xs={12} md={4} className="pl-0">
+      <Row
+        className={
+          config.isMobile
+            ? 'ml-0 align-items-center d-flex flex-wrap'
+            : 'align-items-center d-flex flex-wrap'
+        }>
+        <Col xs={12} md={5}>
           {/* $FlowFixMe $refType */}
           <EventListCounter query={query} />
         </Col>
-        <Col xs={12} md={4} className="pl-0" id="event-filters">
+        <Col xs={12} md={4} id="event-filters">
           <div className="pull-right">
             <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
           </div>
@@ -279,7 +284,7 @@ export class EventListFilters extends React.Component<Props, State> {
             />
           ) : null}
         </Col>
-        <Col md={4} smHidden xsHidden>
+        <Col md={3} smHidden xsHidden>
           <form
             onSubmit={e => {
               e.preventDefault();

@@ -79,18 +79,14 @@ export class EventPage extends React.Component<Props> {
                     {/* $FlowFixMe */}
                     <EventPageHeader eventPageTitle={this.props.eventPageTitle} />
                   </section>
-                  {this.props.eventPageBody && (
-                    <section className="section--custom">
-                      <div className="container">
-                        <FormattedHTMLMessage id={this.props.eventPageBody} />
-                      </div>
-                    </section>
-                  )}
-                  <section className="section--custom">
+                  <section className="section--alt">
                     <div className="container">
-                      <div
-                        id="event-page-filters"
-                        className={config.isMobile ? 'event-filters' : null}>
+                      {this.props.eventPageBody && (
+                        <p>
+                          <FormattedHTMLMessage id={this.props.eventPageBody} />
+                        </p>
+                      )}
+                      <div id="event-page-filters" className="event-filters p-15">
                         <EventListFilters query={props} addToggleViewButton />
                       </div>
                       <div id="event-page-rendered">

@@ -50,7 +50,6 @@ export default class FiltersContainer extends React.Component<Props, State> {
         className="w-25"
         id={`${type}-list-filters-d`}>
         <Button
-          className="btn--outline btn-dark-gray"
           id={`${type}-button-filter`}
           aria-describedby=""
           aria-expanded={this.state.isOpen}

@@ -3,14 +3,13 @@
 exports[`<EventListFilters /> renders correctly 1`] = `
 <Row
   bsClass="row"
-  className="mb-10"
+  className="align-items-center d-flex flex-wrap"
   componentClass="div"
 >
   <Col
     bsClass="col"
-    className="pl-0"
     componentClass="div"
-    md={4}
+    md={5}
     xs={12}
   >
     <ForwardRef(Relay(EventListCounter))
@@ -24,7 +23,6 @@ exports[`<EventListFilters /> renders correctly 1`] = `
   </Col>
   <Col
     bsClass="col"
-    className="pl-0"
     componentClass="div"
     id="event-filters"
     md={4}
@@ -139,7 +137,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
   <Col
     bsClass="col"
     componentClass="div"
-    md={4}
+    md={3}
     smHidden={true}
     xsHidden={true}
   >
@@ -167,14 +165,13 @@ exports[`<EventListFilters /> renders correctly 1`] = `
 exports[`<EventListFilters /> renders correctly without filters 1`] = `
 <Row
   bsClass="row"
-  className="mb-10"
+  className="align-items-center d-flex flex-wrap"
   componentClass="div"
 >
   <Col
     bsClass="col"
-    className="pl-0"
     componentClass="div"
-    md={4}
+    md={5}
     xs={12}
   >
     <ForwardRef(Relay(EventListCounter))
@@ -188,7 +185,6 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
   </Col>
   <Col
     bsClass="col"
-    className="pl-0"
     componentClass="div"
     id="event-filters"
     md={4}
@@ -303,7 +299,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
   <Col
     bsClass="col"
     componentClass="div"
-    md={4}
+    md={3}
     smHidden={true}
     xsHidden={true}
   >
