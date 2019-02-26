@@ -53,14 +53,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "MultipleChoiceQuestion",
+              "allResponses": Object {
+                "totalCount": 14,
+              },
               "participants": Object {
                 "totalCount": 7,
               },
               "private": false,
               "required": false,
-              "responses": Object {
-                "totalCount": 14,
-              },
               "title": "question type select",
               "type": "select",
             }
@@ -120,14 +120,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "MultipleChoiceQuestion",
+              "allResponses": Object {
+                "totalCount": 98,
+              },
               "participants": Object {
                 "totalCount": 98,
               },
               "private": false,
               "required": true,
-              "responses": Object {
-                "totalCount": 98,
-              },
               "title": "question type radio",
               "type": "radio",
             }
@@ -181,14 +181,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "MultipleChoiceQuestion",
+              "allResponses": Object {
+                "totalCount": 48,
+              },
               "participants": Object {
                 "totalCount": 45,
               },
               "private": false,
               "required": false,
-              "responses": Object {
-                "totalCount": 48,
-              },
               "title": "question type checkbox",
               "type": "checkbox",
             }
@@ -242,14 +242,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "MultipleChoiceQuestion",
+              "allResponses": Object {
+                "totalCount": 43,
+              },
               "participants": Object {
                 "totalCount": 43,
               },
               "private": false,
               "required": false,
-              "responses": Object {
-                "totalCount": 43,
-              },
               "title": "question type button",
               "type": "button",
             }
@@ -291,14 +291,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "MultipleChoiceQuestion",
+              "allResponses": Object {
+                "totalCount": 0,
+              },
               "participants": Object {
                 "totalCount": 38,
               },
               "private": false,
               "required": false,
-              "responses": Object {
-                "totalCount": 0,
-              },
               "title": "question type ranking",
               "type": "ranking",
             }
@@ -346,14 +346,24 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             <br />
           </span>
         </p>
-        <p
-          className="mb-25"
-        >
-          <FormattedHTMLMessage
-            id="results-not-available"
-            values={Object {}}
-          />
-        </p>
+        <ForwardRef(Relay(QuestionnaireAdminResultsText))
+          simpleQuestion={
+            Object {
+              "$fragmentRefs": null,
+              "__typename": "SimpleQuestion",
+              "allResponses": Object {
+                "totalCount": 4,
+              },
+              "participants": Object {
+                "totalCount": 4,
+              },
+              "private": false,
+              "required": false,
+              "title": "question type text",
+              "type": "text",
+            }
+          }
+        />
       </PrivateBox>
     </div>
     <div
@@ -396,14 +406,24 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             <br />
           </span>
         </p>
-        <p
-          className="mb-25"
-        >
-          <FormattedHTMLMessage
-            id="results-not-available"
-            values={Object {}}
-          />
-        </p>
+        <ForwardRef(Relay(QuestionnaireAdminResultsText))
+          simpleQuestion={
+            Object {
+              "$fragmentRefs": null,
+              "__typename": "SimpleQuestion",
+              "allResponses": Object {
+                "totalCount": 89,
+              },
+              "participants": Object {
+                "totalCount": 89,
+              },
+              "private": false,
+              "required": false,
+              "title": "question type number",
+              "type": "number",
+            }
+          }
+        />
       </PrivateBox>
     </div>
     <div
@@ -446,14 +466,24 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             <br />
           </span>
         </p>
-        <p
-          className="mb-25"
-        >
-          <FormattedHTMLMessage
-            id="results-not-available"
-            values={Object {}}
-          />
-        </p>
+        <ForwardRef(Relay(QuestionnaireAdminResultsMedia))
+          mediaQuestion={
+            Object {
+              "$fragmentRefs": null,
+              "__typename": "MediaQuestion",
+              "allResponses": Object {
+                "totalCount": 9,
+              },
+              "participants": Object {
+                "totalCount": 9,
+              },
+              "private": false,
+              "required": false,
+              "title": "question type number",
+              "type": "medias",
+            }
+          }
+        />
       </PrivateBox>
     </div>
   </div>
