@@ -98,10 +98,8 @@ class EventRepository extends EntityRepository
         $qb = $this->createQueryBuilder('e');
         $qb->andWhere('e.author = :user')->setParameter('user', $user);
 
-        if ($field && $direction) {
-            if ('START_AT' === $field) {
-                $qb->addOrderBy('e.startAt', $direction);
-            }
+        if ($field && $direction && 'START_AT' === $field) {
+            $qb->addOrderBy('e.startAt', $direction);
         }
 
         return $qb->getQuery()->getResult();

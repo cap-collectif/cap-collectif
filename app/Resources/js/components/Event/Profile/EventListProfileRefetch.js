@@ -52,7 +52,7 @@ export class EventListProfileRefetch extends React.Component<Props> {
         <RowCustom>
           <Col>
             {/* eslint-disable-next-line jsx-a11y/no-onchange */}
-            <select onChange={e => this.onChangeHandler(e)}>
+            <select onChange={this.onChangeHandler}>
               <FormattedMessage id="project.sort.last">
                 {(message: string) => <option value="new">{message}</option>}
               </FormattedMessage>
