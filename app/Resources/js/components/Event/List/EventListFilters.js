@@ -14,7 +14,7 @@ import { changeEventMobileListView } from '../../../redux/modules/event';
 import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
 import environment from '../../../createRelayEnvironment';
-import EventListCounter from './EventListCounter';
+// import EventListCounter from './EventListCounter';
 import type { EventListFilters_query } from './__generated__/EventListFilters_query.graphql';
 
 type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
@@ -38,7 +38,6 @@ const countFilters = (
   project: ?string,
   search: ?string,
   userType: ?string,
-  status: string,
 ): number => {
   let nbFilter = 0;
   if (theme) {
@@ -48,9 +47,6 @@ const countFilters = (
     nbFilter++;
   }
   if (userType) {
-    nbFilter++;
-  }
-  if (status !== 'all') {
     nbFilter++;
   }
 
@@ -153,35 +149,6 @@ export class EventListFilters extends React.Component<Props, State> {
       );
     }
 
-    filters.push(
-      <Field
-        component={select}
-        id="EventListFilters-filter-status"
-        name="status"
-        role="combobox"
-        aria-autocomplete="list"
-        aria-haspopup="true"
-        aria-controls="EventListFilters-filter-status-listbox"
-        clearable={false}
-        placeholder={intl.formatMessage({ id: 'voting-status' })}
-        options={[
-          {
-            value: 'all',
-            label: intl.formatMessage({
-              id: 'all-events',
-            }),
-          },
-          {
-            value: 'ongoing-and-future',
-            label: intl.formatMessage({
-              id: 'ongoing-and-future',
-            }),
-          },
-          { value: 'finished', label: intl.formatMessage({ id: 'finished' }) },
-        ]}
-      />,
-    );
-
     if (config.isMobile) {
       filters.push(
         <Field
@@ -243,14 +210,15 @@ export class EventListFilters extends React.Component<Props, State> {
       project,
       search,
       userType,
-      status,
       intl,
       addToggleViewButton,
       dispatch,
-      query,
+      // query,
     } = this.props;
 
-    const nbFilter = countFilters(theme, project, search, userType, status);
+    console.log(this.props);
+
+    const nbFilter = countFilters(theme, project, search, userType);
 
     const popoverBottom = this.getPopoverBottom(nbFilter);
 
@@ -268,7 +236,33 @@ export class EventListFilters extends React.Component<Props, State> {
         }>
         <Col xs={12} md={5}>
           {/* $FlowFixMe $refType */}
-          <EventListCounter query={query} />
+          {/* <EventListCounter query={query} /> */}
+          <Field
+            component={select}
+            id="EventListFilters-filter-status"
+            name="status"
+            role="combobox"
+            aria-autocomplete="list"
+            aria-haspopup="true"
+            aria-controls="EventListFilters-filter-status-listbox"
+            clearable={false}
+            placeholder={intl.formatMessage({ id: 'voting-status' })}
+            options={[
+              {
+                value: 'all',
+                label: intl.formatMessage({
+                  id: 'all-events',
+                }),
+              },
+              {
+                value: 'ongoing-and-future',
+                label: intl.formatMessage({
+                  id: 'ongoing-and-future',
+                }),
+              },
+              { value: 'finished', label: intl.formatMessage({ id: 'finished' }) },
+            ]}
+          />
         </Col>
         <Col xs={12} md={4} id="event-filters">
           <div className="pull-right">

@@ -2,6 +2,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
+import styled from 'styled-components';
+import colors from '../../utils/colors';
 
 type Props = {
   overlay: React.Element<*>,
@@ -12,6 +14,10 @@ type Props = {
 type State = {
   isOpen: boolean,
 };
+
+const OverlayTriggerWrapper = styled(OverlayTrigger)`
+  color: ${colors.darkText};
+`;
 
 export default class FiltersContainer extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -38,7 +44,7 @@ export default class FiltersContainer extends React.Component<Props, State> {
   render() {
     const { overlay, type } = this.props;
     return (
-      <OverlayTrigger
+      <OverlayTriggerWrapper
         trigger="click"
         placement="bottom"
         aria-describedby=""
@@ -67,7 +73,7 @@ export default class FiltersContainer extends React.Component<Props, State> {
           <FormattedMessage id="link_filters" /> {this.renderFilterCount()}
           <i className="cap cap-triangle-down ml-5" />
         </Button>
-      </OverlayTrigger>
+      </OverlayTriggerWrapper>
     );
   }
 }

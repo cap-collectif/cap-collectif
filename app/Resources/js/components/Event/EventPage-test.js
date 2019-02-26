@@ -8,6 +8,7 @@ describe('<EventPage />', () => {
   const props = {
     eventPageTitle: 'Titre personnalisé',
     eventPageBody: 'Description',
+    backgroundColor: '#F6F6F6',
   };
 
   it('renders correctly', () => {
@@ -16,7 +17,7 @@ describe('<EventPage />', () => {
   });
 
   it('renders correctly without title and body', () => {
-    const wrapper = shallow(<EventPage eventPageTitle="" eventPageBody="" />);
+    const wrapper = shallow(<EventPage backgroundColor="red" eventPageTitle="" eventPageBody="" />);
     expect(wrapper).toMatchSnapshot();
   });
 });

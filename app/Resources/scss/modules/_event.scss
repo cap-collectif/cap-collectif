@@ -89,29 +89,6 @@
     }   
 }
 
-.event-filters {
-    background-color: darken($primary-color, 0.6);
-    color: $white;
-    margin: 25px 0 30px;
-    border-radius: 4px;
-}
-
-.event-search-group .form-group {
-    margin-bottom: 0;
-}
-
-@media screen and (max-width: $screen-sm-max) {
-    .event-filters {
-        position: sticky;
-        top: 50px;
-        z-index: 1010;
-        min-height: 60px;
-        padding: 10px 0;
-    }
-}
-
-
-
 #event-search-input {
     z-index: 0;
 }
