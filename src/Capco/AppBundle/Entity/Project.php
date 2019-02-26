@@ -128,8 +128,6 @@ class Project implements IndexableInterface
     private $themes;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Steps\ProjectAbstractStep", mappedBy="project",  cascade={"persist", "remove"}, orphanRemoval = true)
      * @ORM\OrderBy({"position" = "ASC"})
      * @CapcoAssert\HasOnlyOneSelectionStepAllowingProgressSteps()
@@ -861,6 +859,10 @@ class Project implements IndexableInterface
 
     public function hasParticipativeStep(): bool
     {
+        if ($this->steps->isEmpty()) {
+            return false;
+        }
+
         foreach ($this->steps as $pas) {
             $step = $pas->getStep();
             if ($step instanceof ParticipativeStepInterface && $step->isParticipative()) {
