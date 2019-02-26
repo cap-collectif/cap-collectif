@@ -1,41 +1,58 @@
-        <p>
-        reply.acknowledgement.hello {"%username%":"user"}
-    </p>
-    <p>
-        reply.acknowledgement.thx {"%projectname%":"Projet avec questionnaire"}
-    </p>
-    <p>
-        reply.acknowledgement.replies
-    </p>
-
-            <p>
-            <strong>Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?</strong><br>
-                            <span>Je pense que c'est la ville parfaite pour organiser les JO</span>
-                    </p>
-            <p>
-            <strong>Pour quel type d'épreuve êtes vous prêt à acheter des places ?</strong><br>
-                                                                                <span>Athlétisme, Natation, Sports collectifs</span>
-                                    </p>
-            <p>
-            <strong>Quel est ton athlète favori ?</strong><br>
-                                                                                <span>reply.acknowledgement.no_value</span>
-                                    </p>
-            <p>
-            <strong>Nelson Monfort parle-t-il:</strong><br>
-                            <span>reply.acknowledgement.no_value</span>
-                    </p>
-            <p>
-            <strong>Classez vos choix</strong><br>
-                                                <ol>
-                                                    <li></li>
-                                            </ol>
-                                    </p>
-            <p>
-            <strong>Choissez le meilleur logo</strong><br>
-                                                                                <span>reply.acknowledgement.no_value</span>
-                                    </p>
-            <p>
-            <strong>Est-ce que Martoni a encore une balle dans son chargeur ?</strong><br>
-                                                                                <span></span>
-                                    </p>
-        notification.email.external_footer {"{to}":"user@test.com","{sitename}":"Cap-Collectif","{siteUrl}":"https:\/\/capco.test\/","{businessUrl}":"https:\/\/cap-collectif.com","{business}":"Cap Collectif"}
+             <style type="text/css">
+             .align-center {
+                 text-align: center;
+                 width: 100%;
+             }
+    
+             .bold-text {
+                 font-weight: bold;
+             }
+    
+             .btn {
+                 border: 1px solid #8a8a8a;
+                 padding: 5px;
+                 border-radius: 4px;
+                 text-decoration: none;
+                 color: black;
+                 background-color: #f6f6f6;
+             }
+    
+             .btn:hover {
+                 border: 1px solid black;
+                 background-color: #dedede;
+             }
+         </style>
+    
+         <div class="align-center">
+             <p>
+                 Cap-Collectif
+             </p>
+    
+             <p class="bold-text">
+                 acknowledgement-of-receipt
+             </p>
+    
+             <p>
+                 26 février 2019
+             </p>
+         </div>
+    
+         <p class="bold-text">
+             hello-username {"%username%":"user"}
+         </p>
+    
+                 <p>
+                 thank-you-for-participating-in-the-project {"%projectTitle%":"Projet avec questionnaire","%projectLink%":"https:\/\/capco.test\/project\/projet-avec-questionnaire\/questionnaire\/questionnaire-des-jo-2024"}
+             </p>
+    
+                 <p>
+                 your-answer-to-the-survey-have-been-registered-on-date-at-time {"%questionnaireDate%":"26 f\u00e9vrier 2019","%questionnaireTime%":"17h12","%surveyName%":"Projet avec questionnaire"}
+             </p>
+    
+         <p>
+             you-can-modify-or-delete-your-answers-until-date-until-date {"%questionnaireEndDate%":"8 mars 2019"}
+         </p>
+    
+         <p>
+             <a href="https://capco.test/project/projet-avec-questionnaire/questionnaire/questionnaire-des-jo-2024" class="btn">access-my-answer</a>
+         </p>
