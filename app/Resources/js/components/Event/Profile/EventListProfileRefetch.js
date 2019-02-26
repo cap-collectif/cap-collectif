@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { Row, Col } from 'react-bootstrap';
 import EventPreview from '../EventPreview';
@@ -52,8 +53,12 @@ export class EventListProfileRefetch extends React.Component<Props> {
           <Col>
             {/* eslint-disable-next-line jsx-a11y/no-onchange */}
             <select onChange={e => this.onChangeHandler(e)}>
-              <option value="new">Les plus récents</option>
-              <option value="old">Les plus anciens</option>
+              <FormattedMessage id="project.sort.last">
+                {(message: string) => <option value="new">{message}</option>}
+              </FormattedMessage>
+              <FormattedMessage id="opinion.sort.old">
+                {(message: string) => <option value="old">{message}</option>}
+              </FormattedMessage>
             </select>
           </Col>
         </RowCustom>
