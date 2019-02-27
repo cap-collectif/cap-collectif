@@ -60,7 +60,14 @@ class ViewElement extends React.Component {
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'piechart')) {
       return (
         <div className="synthesis__element__votes">
-          <VotePiechart ok={votes[1] || 0} nok={votes[-1] || 0} mitige={votes[0] || 0} />
+          <VotePiechart
+            top={20}
+            height="180px"
+            width="100%"
+            ok={votes[1] || 0}
+            nok={votes[-1] || 0}
+            mitige={votes[0] || 0}
+          />
           <p style={{ textAlign: 'center' }}>
             <FormattedMessage
               id="synthesis.vote.total"
