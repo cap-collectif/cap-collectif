@@ -74,7 +74,7 @@ export class EventListProfileRefetch extends React.Component<Props> {
             .map(edge => edge.node)
             .filter(Boolean)
             .map((node, key) => (
-              <Col key={key} md={6} xs={12}>
+              <Col key={key} md={6} xs={12} className="d-flex">
                 <EventPreview event={node} isHighlighted={false} isAuthorDisplay={false} />
               </Col>
             ))}

@@ -3,7 +3,7 @@
 exports[`<EventPreview /> renders correctly and highlighted 1`] = `
 <Fragment>
   <div
-    className="event block  block--bordered highlighted-comment"
+    className="d-flex flex-1 event block  block--bordered highlighted-comment"
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"
@@ -103,7 +103,7 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
 exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
 <Fragment>
   <div
-    className="event block  block--bordered "
+    className="d-flex flex-1 event block  block--bordered "
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"
@@ -203,7 +203,7 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
 exports[`<EventPreview /> renders correctly without picture for user 1`] = `
 <Fragment>
   <div
-    className="event block  block--bordered "
+    className="d-flex flex-1 event block  block--bordered "
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"
@@ -301,7 +301,7 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
 exports[`<EventPreview /> renders without username 1`] = `
 <Fragment>
   <div
-    className="event block  block--bordered "
+    className="d-flex flex-1 event block  block--bordered "
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"

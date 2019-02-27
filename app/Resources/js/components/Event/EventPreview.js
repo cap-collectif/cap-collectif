@@ -26,7 +26,7 @@ export class EventPreview extends React.Component<Props> {
     });
     return (
       <React.Fragment>
-        <div className={`event block  block--bordered ${detailClasses}`}>
+        <div className={`d-flex flex-1 event block  block--bordered ${detailClasses}`}>
           <div className="col-md-2 col-sm-2 hidden-xs">
             <DateIcon startAt={event.startAt} />
           </div>
