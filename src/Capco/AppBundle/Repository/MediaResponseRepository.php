@@ -10,13 +10,21 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class MediaResponseRepository extends EntityRepository
 {
-    public function countParticipantsByQuestion(MediaQuestion $question): ?int
-    {
+    public function countParticipantsByQuestion(
+        MediaQuestion $question,
+        bool $withNotConfirmedUser = false
+    ): ?int {
         $qb = $this->getNoEmptyResultQueryBuilder()
             ->select('COUNT(DISTINCT reply.author)')
             ->leftJoin('r.question', 'question')
-            ->andWhere('question.id = :question')
-            ->setParameter('question', $question);
+            ->leftJoin('reply.author', 'author')
+            ->andWhere('question.id = :question');
+        if (!$withNotConfirmedUser) {
+            $qb->andWhere(
+                'author.newEmailConfirmationToken IS NULL AND author.confirmationToken IS NULL'
+            );
+        }
+        $qb->setParameter('question', $question);
 
         return $qb->getQuery()->getSingleScalarResult();
     }
