@@ -23,6 +23,7 @@ const TooltipWrapper = styled.div`
   padding: 3px 10px;
   border-radius: 4px;
   border: 1px solid ${defaultColors.borderColor};
+  white-space: nowrap;
 `;
 
 const ContentWrapper = styled.div.attrs({
