@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
@@ -89,8 +90,7 @@ class SynthesisAdmin extends AbstractAdmin
 
     private function createQueryBuilderForConsultationSteps($projectId)
     {
-        $qb = $this->modelManager
-            ->createQuery('CapcoAppBundle:Steps\ConsultationStep', 'cs')
+        $qb = $this->modelManager->createQuery('CapcoAppBundle:Steps\ConsultationStep', 'cs')
             ->where('cs.isEnabled = :enabled')
             ->setParameter('enabled', true);
         if ($projectId) {

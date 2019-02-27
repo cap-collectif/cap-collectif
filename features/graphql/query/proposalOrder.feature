@@ -13,7 +13,9 @@ Scenario: GraphQL client want to order proposals by COMMENTS
             edges {
               node {
                 id
-                commentsCount
+                comments {
+                  totalCount
+                }
               }
             }
           }
@@ -35,37 +37,49 @@ Scenario: GraphQL client want to order proposals by COMMENTS
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWwx",
-                       "commentsCount":20
+                       "comments": {
+                         "totalCount":19
+                       }
                     }
                  },
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWwxMA==",
-                       "commentsCount":0
+                       "comments": {
+                         "totalCount":0
+                       }
                     }
                  },
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
-                       "commentsCount":0
+                       "comments": {
+                         "totalCount":0
+                       }
                     }
                  },
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
-                       "commentsCount":0
+                       "comments": {
+                         "totalCount":0
+                       }
                     }
                  },
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWwz",
-                       "commentsCount":0
+                       "comments": {
+                         "totalCount":0
+                       }
                     }
                  },
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWw0",
-                       "commentsCount":0
+                       "comments": {
+                         "totalCount":0
+                       }
                     }
                  }
               ]

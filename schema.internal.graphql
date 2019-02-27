@@ -3509,9 +3509,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
 
   # Identifies the answers to an evaluation form.
   evaluation: ProposalEvaluation
-
-  # Count number of comments for the proposal.
-  commentsCount: Int!
   votes(
     # Returns the elements in the list that come after the specified cursor.
     after: String

@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
@@ -20,10 +21,7 @@ class QuestionnaireAbstractQuestionAdmin extends CapcoAdmin
     {
         // delete linked question
         if ($object->getQuestion()) {
-            $em = $this->getConfigurationPool()
-                ->getContainer()
-                ->get('doctrine')
-                ->getManager();
+            $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
             $em->remove($object->getQuestion());
         }
     }
@@ -32,11 +30,8 @@ class QuestionnaireAbstractQuestionAdmin extends CapcoAdmin
     {
         $questionnaireId = null;
 
-        if ($this->hasParentFieldDescription()) {
-            // this Admin is embedded
-            $questionnaire = $this->getParentFieldDescription()
-                ->getAdmin()
-                ->getSubject();
+        if ($this->hasParentFieldDescription()) { // this Admin is embedded
+            $questionnaire = $this->getParentFieldDescription()->getAdmin()->getSubject();
             if ($questionnaire) {
                 $questionnaireId = $questionnaire->getId();
             }
@@ -47,20 +42,16 @@ class QuestionnaireAbstractQuestionAdmin extends CapcoAdmin
                 'label' => 'admin.fields.questionnaire_abstractquestion.position',
                 'required' => true,
             ])
-            ->add(
-                'question',
-                'sonata_type_model_list',
-                [
-                    'required' => true,
-                    'label' => 'admin.fields.questionnaire_abstractquestion.questions',
-                    'translation_domain' => 'CapcoAppBundle',
-                    'btn_delete' => false,
-                    'btn_add' => 'admin.fields.questionnaire_abstractquestion.questions_add',
-                ],
-                [
-                    'link_parameters' => ['questionnaireId' => $questionnaireId],
-                ]
-            );
+            ->add('question', 'sonata_type_model_list', [
+                'required' => true,
+                'label' => 'admin.fields.questionnaire_abstractquestion.questions',
+                'translation_domain' => 'CapcoAppBundle',
+                'btn_delete' => false,
+                'btn_add' => 'admin.fields.questionnaire_abstractquestion.questions_add',
+            ], [
+                'link_parameters' => ['questionnaireId' => $questionnaireId],
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollection $collection)

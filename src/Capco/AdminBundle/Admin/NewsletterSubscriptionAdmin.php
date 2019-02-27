@@ -2,14 +2,14 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class NewsletterSubscriptionAdmin extends AbstractAdmin
+class NewsletterSubscriptionAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -18,7 +18,9 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
 
     public function getFeatures()
     {
-        return ['newsletter'];
+        return [
+            'newsletter',
+        ];
     }
 
     /**
@@ -35,7 +37,8 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.newsletter_subscription.created_at',
-            ]);
+            ])
+        ;
     }
 
     /**
@@ -62,7 +65,8 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     /**
@@ -77,7 +81,8 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.newsletter_subscription.is_enabled',
                 'required' => false,
-            ]);
+            ])
+        ;
     }
 
     /**
@@ -95,7 +100,8 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.newsletter_subscription.created_at',
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollection $collection)

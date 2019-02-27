@@ -27,7 +27,7 @@ Scenario: GraphQL user wants to get list of trashed comments.
       "onlyTrashed": true
     }
   }
-  """
+"""
   Then the JSON response should match:
   """
   {

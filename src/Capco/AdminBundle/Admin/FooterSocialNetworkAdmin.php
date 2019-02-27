@@ -3,13 +3,13 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\FooterSocialNetwork;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class FooterSocialNetworkAdmin extends AbstractAdmin
+class FooterSocialNetworkAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -39,7 +39,8 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.footer_social_network.updated_at',
-            ]);
+            ])
+        ;
     }
 
     /**
@@ -76,7 +77,8 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     /**
@@ -101,7 +103,8 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.footer_social_network.position',
-            ]);
+            ])
+        ;
     }
 
     /**
@@ -131,6 +134,7 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.footer_social_network.updated_at',
-            ]);
+            ])
+        ;
     }
 }
