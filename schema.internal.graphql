@@ -2342,7 +2342,7 @@ type MediaQuestion implements Question & Node {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # Get participant with user not confirmed
+    # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
@@ -2410,7 +2410,7 @@ type MultipleChoiceQuestion implements Question & Node {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # Get participant with user not confirmed
+    # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
@@ -4227,7 +4227,7 @@ interface Question {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # Get participant with user not confirmed
+    # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
@@ -4995,7 +4995,7 @@ type SectionQuestion implements Question & Node {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # Get participant with user not confirmed
+    # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
@@ -5241,7 +5241,7 @@ type SimpleQuestion implements Question & Node {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # Get participant with user not confirmed
+    # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
