@@ -11,7 +11,7 @@ import InlineList from '../Ui/List/InlineList';
 type Props = {
   event: EventPreview_event,
   isHighlighted: ?boolean,
-  isAuthorDisplay?: boolean,
+  isAuthorDisplay: boolean,
 };
 
 export class EventPreview extends React.Component<Props> {
