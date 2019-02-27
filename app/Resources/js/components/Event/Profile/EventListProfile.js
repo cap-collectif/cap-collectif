@@ -26,6 +26,7 @@ class EventListProfile extends React.Component<Props> {
         `}
         variables={{
           userId: this.props.userId,
+          orderBy: { field: 'START_AT', direction: 'DESC' },
         }}
         render={({ error, props }: { props: ?EventListProfileQueryResponse } & ReadyState) => {
           if (error) {
