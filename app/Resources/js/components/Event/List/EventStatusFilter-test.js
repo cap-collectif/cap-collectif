@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { EventListCounter } from './EventListCounter';
+import { EventStatusFilter } from './EventStatusFilter';
 import { $refType } from '../../../mocks';
 
 const defaultQuery = {
@@ -34,7 +34,7 @@ const defaultProps = {
 
 describe('<EventListFilters />', () => {
   it('renders correctly', () => {
-    const wrapper = shallow(<EventListCounter {...defaultProps} />);
+    const wrapper = shallow(<EventStatusFilter {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -47,7 +47,7 @@ describe('<EventListFilters />', () => {
         },
       },
     };
-    const wrapper = shallow(<EventListCounter {...props} />);
+    const wrapper = shallow(<EventStatusFilter {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

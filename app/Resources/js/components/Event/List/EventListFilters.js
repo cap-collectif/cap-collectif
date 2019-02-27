@@ -14,7 +14,7 @@ import { changeEventMobileListView } from '../../../redux/modules/event';
 import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
 import environment from '../../../createRelayEnvironment';
-// import EventListCounter from './EventListCounter';
+import EventStatusFilter from './EventStatusFilter';
 import type { EventListFilters_query } from './__generated__/EventListFilters_query.graphql';
 
 type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
@@ -203,6 +203,40 @@ export class EventListFilters extends React.Component<Props, State> {
     );
   }
 
+  statusPopover = () => {
+    return (
+      <form>
+        <label>
+          <Field
+            name="status"
+            component="input"
+            type="radio"
+            value="all"
+          />{' '}
+          <FormattedMessage id="all-events" />
+        </label>
+        <label>
+          <Field
+            name="status"
+            component="input"
+            type="radio"
+            value="ongoing-and-future"
+          />{' '}
+          <FormattedMessage id="ongoing-and-future" />
+        </label>
+        <label>
+          <Field
+            name="status"
+            component="input"
+            type="radio"
+            value="finished"
+          />{' '}
+          <FormattedMessage id="finished" />
+        </label>
+      </form>
+    )
+  };
+
   render() {
     const {
       features,
@@ -213,10 +247,9 @@ export class EventListFilters extends React.Component<Props, State> {
       intl,
       addToggleViewButton,
       dispatch,
-      // query,
+      status,
+      query,
     } = this.props;
-
-    console.log(this.props);
 
     const nbFilter = countFilters(theme, project, search, userType);
 
@@ -227,6 +260,9 @@ export class EventListFilters extends React.Component<Props, State> {
         return nbFilter;
       }
     };
+
+    console.log(status);
+
     return (
       <Row
         className={
@@ -236,33 +272,7 @@ export class EventListFilters extends React.Component<Props, State> {
         }>
         <Col xs={12} md={5}>
           {/* $FlowFixMe $refType */}
-          {/* <EventListCounter query={query} /> */}
-          <Field
-            component={select}
-            id="EventListFilters-filter-status"
-            name="status"
-            role="combobox"
-            aria-autocomplete="list"
-            aria-haspopup="true"
-            aria-controls="EventListFilters-filter-status-listbox"
-            clearable={false}
-            placeholder={intl.formatMessage({ id: 'voting-status' })}
-            options={[
-              {
-                value: 'all',
-                label: intl.formatMessage({
-                  id: 'all-events',
-                }),
-              },
-              {
-                value: 'ongoing-and-future',
-                label: intl.formatMessage({
-                  id: 'ongoing-and-future',
-                }),
-              },
-              { value: 'finished', label: intl.formatMessage({ id: 'finished' }) },
-            ]}
-          />
+          <EventStatusFilter query={query} overlay={this.statusPopover} status={status} />
         </Col>
         <Col xs={12} md={4} id="event-filters">
           <div className="pull-right">
@@ -335,7 +345,7 @@ export default createFragmentContainer(
         userType: { type: "ID" }
         isFuture: { type: "Boolean" }
       ) {
-      ...EventListCounter_query
+      ...EventStatusFilter_query
         @arguments(
           cursor: $cursor
           count: $count
