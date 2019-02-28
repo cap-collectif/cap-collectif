@@ -33,7 +33,7 @@ const EventFiltersWrapper = styled.div.attrs({
   margin: 25px 0 30px;
   border-radius: 4px;
 
-  .form-group {
+  .event-search-group .form-group {
     margin-bottom: 0;
   }
 

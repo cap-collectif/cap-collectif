@@ -15,6 +15,7 @@ import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
 import environment from '../../../createRelayEnvironment';
 import EventStatusFilter from './EventStatusFilter';
+import fieldComponent from '../../Form/Field';
 import type { EventListFilters_query } from './__generated__/EventListFilters_query.graphql';
 
 type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
@@ -202,6 +203,43 @@ export class EventListFilters extends React.Component<Props, State> {
       </div>
     );
   }
+
+  // getStatusPopover = () => {
+  //   const { status } = this.props;
+
+  //   console.log(status);
+  //   return (
+  //     <form>
+  //         <Field
+  //           component={fieldComponent}
+  //           name="status"
+  //           type="radio"
+  //           value="all"
+  //           radioChecked={status === 'all'}
+  //         >
+  //           <FormattedMessage id="all-events" />
+  //         </Field>
+  //         <Field
+  //           component={fieldComponent}
+  //           name="status"
+  //           type="radio"
+  //           value="ongoing-and-future"
+  //           radioChecked={status === 'ongoing-and-future'}
+  //         >
+  //           <FormattedMessage id="ongoing-and-future" />
+  //         </Field>
+  //         <Field
+  //           component={fieldComponent}
+  //           name="status"
+  //           type="radio"
+  //           value="finished"
+  //           radioChecked={status === 'finished'}
+  //         >
+  //           <FormattedMessage id="finished" />
+  //         </Field>
+  //     </form>
+  //   )
+  // };
 
   render() {
     const {

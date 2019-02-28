@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import styled from 'styled-components';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { Field, formValueSelector } from 'redux-form';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
@@ -11,43 +12,56 @@ import fieldComponent from '../../Form/Field';
 
 type Props = {
   query: EventStatusFilter_query,
-  overlay: React.Element<*>,
   status: ?string,
   intl: IntlShape,
 };
 
-export class EventStatusFilter extends React.Component<Props> {
+const StatusButton = styled(Button).attrs({
+  bsStyle: 'link'
+})`
+  text-transform: lowercase;
+  font-size: 16px;
+  text-decoration: underline;
 
+  &, &:hover {
+    color: white;
+  }
+`
+
+export class EventStatusFilter extends React.Component<Props> {
   statusPopover = () => {
-    const { intl } = this.props;
+    const { status } = this.props;
 
     return (
       <Popover>
         <form>
             <Field
               component={fieldComponent}
+              id="all-events"
               name="status"
               type="radio"
               value="all"
-              // label={intl.formatMessage({ id: 'all-events' })}
+              radioChecked={status === 'all'}
             >
-              <FormattedMessage id="all-events" />
+              <FormattedMessage id="search.form.themes.all" />
             </Field>
             <Field
               component={fieldComponent}
+              id="ongoing-and-future-events"
               name="status"
               type="radio"
               value="ongoing-and-future"
-              // label={intl.formatMessage({ id: 'ongoing-and-future' })}
+              radioChecked={status === 'ongoing-and-future'}
             >
-              <FormattedMessage id="ongoing-and-future" />
+              <FormattedMessage id="theme.show.status.future" />
             </Field>
             <Field
               component={fieldComponent}
+              id="finished-events"
               name="status"
               type="radio"
               value="finished"
-              // label={intl.formatMessage({ id: 'finished' })}
+              radioChecked={status === 'finished'}
             >
               <FormattedMessage id="finished" />
             </Field>
@@ -57,10 +71,24 @@ export class EventStatusFilter extends React.Component<Props> {
     )
   };
 
-  render() {
-    const { query, overlay, status } = this.props;
+  getButtonMessage = () => {
+    const { status } = this.props;
 
-    console.warn(status);
+    if(status === 'all') {
+      return (<FormattedMessage id="search.form.themes.all" />);
+    }
+
+    if(status === 'ongoing-and-future') {
+      return <FormattedMessage id="theme.show.status.future" />;
+    }
+
+    return <FormattedMessage id="finished" />;
+  }
+
+  render() {
+    const { query, status } = this.props;
+
+    // console.warn(status);
 
     return (
       <>
@@ -74,14 +102,12 @@ export class EventStatusFilter extends React.Component<Props> {
         trigger="click"
         placement="bottom"
         aria-describedby=""
-        overlay={this.statusPopover()}>
-          <Button bsStyle="link">
-            {status === 'all' ? (
-              <FormattedMessage id="all-events" />
-            ) : (
-              <FormattedMessage id="all-events" />
-            )}
-          </Button>
+        // overlay={<Popover>{overlay}</Popover>}
+        overlay={this.statusPopover()}
+        >
+          <StatusButton>
+            {this.getButtonMessage()}
+          </StatusButton>
         </OverlayTrigger>
         
       </>
