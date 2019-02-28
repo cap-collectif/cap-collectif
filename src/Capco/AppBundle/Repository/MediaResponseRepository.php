@@ -10,24 +10,40 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class MediaResponseRepository extends EntityRepository
 {
-    public function countParticipantsByQuestion(MediaQuestion $question): ?int
-    {
+    public function countParticipantsByQuestion(
+        MediaQuestion $question,
+        bool $withNotConfirmedUser = false
+    ): ?int {
         $qb = $this->getNoEmptyResultQueryBuilder()
             ->select('COUNT(DISTINCT reply.author)')
             ->leftJoin('r.question', 'question')
-            ->andWhere('question.id = :question')
-            ->setParameter('question', $question);
+            ->leftJoin('reply.author', 'author')
+            ->andWhere('question.id = :question');
+        if (!$withNotConfirmedUser) {
+            $qb->andWhere(
+                'author.newEmailConfirmationToken IS NULL AND author.confirmationToken IS NULL'
+            );
+        }
+        $qb->setParameter('question', $question);
 
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countByQuestion(MediaQuestion $question): int
-    {
+    public function countByQuestion(
+        MediaQuestion $question,
+        bool $withNotConfirmedUser = false
+    ): int {
         $qb = $this->getNoEmptyResultQueryBuilder()
             ->select('COUNT(r.id)')
             ->leftJoin('r.question', 'question')
-            ->andWhere('question.id = :question')
-            ->setParameter('question', $question);
+            ->leftJoin('reply.author', 'author')
+            ->andWhere('question.id = :question');
+        if (!$withNotConfirmedUser) {
+            $qb->andWhere(
+                'author.newEmailConfirmationToken IS NULL AND author.confirmationToken IS NULL'
+            );
+        }
+        $qb->setParameter('question', $question);
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -35,12 +51,20 @@ class MediaResponseRepository extends EntityRepository
     public function getAllByQuestion(
         AbstractQuestion $question,
         $limit = 32,
-        $offset = 0
+        $offset = 0,
+        bool $withNotConfirmedUser = false
     ): Paginator {
+        /** @var QueryBuilder $qb */
         $qb = $this->getNoEmptyResultQueryBuilder()
             ->leftJoin('r.question', 'question')
-            ->andWhere('question.id = :question')
-            ->setParameter('question', $question);
+            ->leftJoin('reply.author', 'author')
+            ->andWhere('question.id = :question');
+        if (!$withNotConfirmedUser) {
+            $qb->andWhere(
+                'author.newEmailConfirmationToken IS NULL AND author.confirmationToken IS NULL'
+            );
+        }
+        $qb->setParameter('question', $question);
 
         $query = $qb
             ->getQuery()
@@ -58,8 +82,8 @@ class MediaResponseRepository extends EntityRepository
             // We must support responses on a proposal/other object
             $this->createQueryBuilder('r')
                 ->leftJoin('r.reply', 'reply')
-                ->andWhere('reply.draft = false')
+                ->andWhere('(reply.draft = false')
                 ->leftJoin('r.medias', 'media')
-                ->andWhere('media.id IS NOT NULL');
+                ->andWhere('media.id IS NOT NULL)');
     }
 }

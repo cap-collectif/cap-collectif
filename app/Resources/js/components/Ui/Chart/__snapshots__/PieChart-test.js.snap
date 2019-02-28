@@ -1,0 +1,251 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PieChart /> renders PieChart 1`] = `
+<PieChart__ContentWrapper
+  height="479px"
+  width="110px"
+>
+  <ResponsiveContainer
+    debounce={0}
+    height="100%"
+    width="100%"
+  >
+    <PieChart
+      barCategoryGap="10%"
+      barGap={4}
+      cx="50%"
+      cy="50%"
+      endAngle={360}
+      innerRadius={0}
+      layout="centric"
+      margin={
+        Object {
+          "bottom": 5,
+          "left": 5,
+          "right": 5,
+          "top": 5,
+        }
+      }
+      outerRadius="80%"
+      reverseStackOrder={false}
+      stackOffset="none"
+      startAngle={0}
+    >
+      <Tooltip
+        active={false}
+        animationDuration={400}
+        animationEasing="ease"
+        content={[Function]}
+        contentStyle={Object {}}
+        coordinate={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        cursor={true}
+        cursorStyle={Object {}}
+        filterNull={true}
+        isAnimationActive={true}
+        itemSorter={[Function]}
+        itemStyle={Object {}}
+        labelStyle={Object {}}
+        offset={10}
+        separator=" : "
+        useTranslate3d={false}
+        viewBox={
+          Object {
+            "x1": 0,
+            "x2": 0,
+            "y1": 0,
+            "y2": 0,
+          }
+        }
+        wrapperStyle={Object {}}
+      />
+      <Pie
+        animationBegin={400}
+        animationDuration={1500}
+        animationEasing="ease"
+        blendStroke={false}
+        cx="50%"
+        cy="50%"
+        data={
+          Array [
+            Object {
+              "name": "ok",
+              "value": 896,
+            },
+            Object {
+              "name": "mixed",
+              "value": 0,
+            },
+            Object {
+              "name": "not ok",
+              "value": 9768678,
+            },
+          ]
+        }
+        dataKey="value"
+        endAngle={360}
+        fill="#808080"
+        hide={false}
+        innerRadius={15}
+        isAnimationActive={false}
+        label={[Function]}
+        labelLine={false}
+        legendType="rect"
+        minAngle={0}
+        nameKey="name"
+        outerRadius={55}
+        paddingAngle={2}
+        percent={true}
+        startAngle={0}
+        stroke="none"
+      >
+        <Cell
+          aria-labelledby="ok"
+          fill="#fff"
+          key="0"
+        />
+        <Cell
+          aria-labelledby="mixed"
+          fill="#000"
+          key="1"
+        />
+        <Cell
+          aria-labelledby="not ok"
+          fill="#F9F9F9"
+          key="2"
+        />
+         
+      </Pie>
+    </PieChart>
+  </ResponsiveContainer>
+</PieChart__ContentWrapper>
+`;
+
+exports[`<PieChart /> renders PieChart with default props 1`] = `
+<PieChart__ContentWrapper
+  height="95px"
+  width="115px"
+>
+  <ResponsiveContainer
+    debounce={0}
+    height="100%"
+    width="100%"
+  >
+    <PieChart
+      barCategoryGap="10%"
+      barGap={4}
+      cx="50%"
+      cy="50%"
+      endAngle={360}
+      innerRadius={0}
+      layout="centric"
+      margin={
+        Object {
+          "bottom": 5,
+          "left": 5,
+          "right": 5,
+          "top": 5,
+        }
+      }
+      outerRadius="80%"
+      reverseStackOrder={false}
+      stackOffset="none"
+      startAngle={0}
+    >
+      <Tooltip
+        active={false}
+        animationDuration={400}
+        animationEasing="ease"
+        content={[Function]}
+        contentStyle={Object {}}
+        coordinate={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        cursor={true}
+        cursorStyle={Object {}}
+        filterNull={true}
+        isAnimationActive={true}
+        itemSorter={[Function]}
+        itemStyle={Object {}}
+        labelStyle={Object {}}
+        offset={10}
+        separator=" : "
+        useTranslate3d={false}
+        viewBox={
+          Object {
+            "x1": 0,
+            "x2": 0,
+            "y1": 0,
+            "y2": 0,
+          }
+        }
+        wrapperStyle={Object {}}
+      />
+      <Pie
+        animationBegin={400}
+        animationDuration={1500}
+        animationEasing="ease"
+        blendStroke={false}
+        cx="50%"
+        cy="50%"
+        data={
+          Array [
+            Object {
+              "name": "ok",
+              "value": 896,
+            },
+            Object {
+              "name": "mixed",
+              "value": 0,
+            },
+            Object {
+              "name": "not ok",
+              "value": 9768678,
+            },
+          ]
+        }
+        dataKey="value"
+        endAngle={360}
+        fill="#808080"
+        hide={false}
+        innerRadius={10}
+        isAnimationActive={false}
+        label={[Function]}
+        labelLine={false}
+        legendType="rect"
+        minAngle={0}
+        nameKey="name"
+        outerRadius={45}
+        paddingAngle={2}
+        percent={true}
+        startAngle={0}
+        stroke="none"
+      >
+        <Cell
+          aria-labelledby="ok"
+          fill="#fff"
+          key="0"
+        />
+        <Cell
+          aria-labelledby="mixed"
+          fill="#000"
+          key="1"
+        />
+        <Cell
+          aria-labelledby="not ok"
+          fill="#F9F9F9"
+          key="2"
+        />
+         
+      </Pie>
+    </PieChart>
+  </ResponsiveContainer>
+</PieChart__ContentWrapper>
+`;

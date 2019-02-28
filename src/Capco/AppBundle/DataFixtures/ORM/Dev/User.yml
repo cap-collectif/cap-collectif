@@ -352,6 +352,7 @@ Capco\UserBundle\Entity\User:
   user_without_username:
     id: 'user518'
     username: null
+    slug: user518
     email: no_name@cap-collectif.com
     userType: '@UserType1'
     plainPassword: no_name
