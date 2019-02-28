@@ -29,10 +29,10 @@ const TooltipWrapper = styled.div`
 const ContentWrapper = styled.div.attrs({
   className: 'pie-chart__container',
 })`
+  min-width: ${props => props.width};
   width: ${props => props.width};
   height: ${props => props.height};
-  display: flex;
-  flex: 1 0 auto;
+  max-width: 100%;
   font-size: 14px;
 
   .recharts-pie {
