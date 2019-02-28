@@ -29,22 +29,28 @@ export class EventStatusFilter extends React.Component<Props> {
               name="status"
               type="radio"
               value="all"
-              label={intl.formatMessage({ id: 'all-events' })}
-            />
+              // label={intl.formatMessage({ id: 'all-events' })}
+            >
+              <FormattedMessage id="all-events" />
+            </Field>
             <Field
               component={fieldComponent}
               name="status"
               type="radio"
               value="ongoing-and-future"
-              label={intl.formatMessage({ id: 'ongoing-and-future' })}
-            />
+              // label={intl.formatMessage({ id: 'ongoing-and-future' })}
+            >
+              <FormattedMessage id="ongoing-and-future" />
+            </Field>
             <Field
               component={fieldComponent}
               name="status"
               type="radio"
               value="finished"
-              label={intl.formatMessage({ id: 'finished' })}
-            />
+              // label={intl.formatMessage({ id: 'finished' })}
+            >
+              <FormattedMessage id="finished" />
+            </Field>
         </form>
       </Popover>
       
