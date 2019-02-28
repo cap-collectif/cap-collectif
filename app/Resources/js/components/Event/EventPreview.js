@@ -11,22 +11,17 @@ import InlineList from '../Ui/List/InlineList';
 type Props = {
   event: EventPreview_event,
   isHighlighted: ?boolean,
-  isAuthorDisplay: boolean,
 };
 
 export class EventPreview extends React.Component<Props> {
-  static defaultProps = {
-    isAuthorDisplay: true,
-  };
-
   render() {
-    const { event, isHighlighted, isAuthorDisplay } = this.props;
+    const { event, isHighlighted } = this.props;
     const detailClasses = classNames({
       'highlighted-comment': isHighlighted,
     });
     return (
       <React.Fragment>
-        <div className={`d-flex flex-1-1 event block  block--bordered ${detailClasses}`}>
+        <div className={`event block  block--bordered ${detailClasses}`}>
           <div className="col-md-2 col-sm-2 hidden-xs">
             <DateIcon startAt={event.startAt} />
           </div>
@@ -36,27 +31,25 @@ export class EventPreview extends React.Component<Props> {
                 {event.title}
               </a>
             </h3>
-            {isAuthorDisplay && (
-              <p className="excerpt">
-                {event.author && event.author.username && (
-                  <React.Fragment>
-                    {/* $FlowFixMe */}
-                    <UserAvatar size={16} user={event.author} />
-                    <span className="font-weight-semi-bold">{event.author.username}</span>
-                  </React.Fragment>
-                )}
-              </p>
-            )}
+            <p className="excerpt">
+              {event.author && event.author.username && (
+                <div>
+                  {/* $FlowFixMe */}
+                  <UserAvatar size={16} user={event.author} />
+                  <span className="font-weight-semi-bold">{event.author.username}</span>
+                </div>
+              )}
+            </p>
             <p className="excerpt">
               <i className="cap-calendar-1 mr-10" />
               <DatesInterval startAt={event.startAt} endAt={event.endAt} fullDay />
             </p>
             <p className="excerpt">
               {event.fullAddress ? (
-                <React.Fragment>
+                <div>
                   <i className="cap-marker-1 mr-10" />
                   {event.fullAddress}
-                </React.Fragment>
+                </div>
               ) : null}
             </p>
             {event.themes && event.themes.length > 0 && (

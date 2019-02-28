@@ -145,7 +145,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 
     p {
       margin: 0;
@@ -198,6 +197,9 @@
 
 @media (max-width: $screen-xs-max) {
   .list-group-custom {
+    .list-group-item {
+      flex-direction: column;
+    }
     .pie-chart__container {
       display: none;
     }

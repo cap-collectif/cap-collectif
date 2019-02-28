@@ -1950,17 +1950,6 @@ input EventInput {
   country: String
 }
 
-# Ordering options for events.
-enum EventOrderField {
-  START_AT
-}
-
-# Ways in which lists of events can be ordered upon return.
-input EventsOrder {
-  field: EventOrderField! = START_AT
-  direction: OrderDirection! = DESC
-}
-
 # Require a firstname
 type FirstnameRequirement implements Node & Requirement {
   # The ID of an object
@@ -6255,7 +6244,6 @@ type User implements Node & UniformResourceLocatable {
 
     # Returns the last `n` elements from the list.
     last: Int
-    orderBy: EventsOrder = {field: START_AT, direction: DESC}
   ): EventConnection!
 
   # Return the user's contributions of the type requested.

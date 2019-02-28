@@ -31,7 +31,8 @@ const ContentWrapper = styled.div.attrs({
 })`
   width: ${props => props.width};
   height: ${props => props.height};
-  max-width: 100%;
+  display: flex;
+  flex: 1 0 auto;
   font-size: 14px;
 
   .recharts-pie {
