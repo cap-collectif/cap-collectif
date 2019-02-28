@@ -2,33 +2,32 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
   simplequestion1:
     id: 1
     title: Evaluez l'importance de votre proposition
-    helpText: "Décrivez l'importance de votre proposition avec un adjectif (ex: indispensable, souhaitable ...)"
+    helpText:
+      "Décrivez l'importance de votre proposition avec un adjectif (ex: indispensable, souhaitable ...)"
     required: false
     type: 0 # one line text
     private: true
   simplequestion2:
     id: 2
-    title: Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?
+    title:
+      Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?
     required: true
     type: 0 # one line text
   simplequestion3:
     id: 3
     title: Evaluez le coût de votre proposition
-    slug: evaluez-le-cout-de-votre-proposition
     helpText: Décrivez dans les grandes lignes le budget de votre proposition
     required: true
     type: 1 # textarea
   simplequestion4:
     id: 4
     title: Evaluez le coût de votre proposition
-    slug: evaluez-le-cout-de-votre-proposition-1
     helpText: Décrivez dans les grandes lignes le budget de votre proposition
     required: true
     type: 1 # textarea
   simplequestion5:
     id: 5
     title: Evaluez le coût de votre proposition
-    slug: evaluez-le-cout-de-votre-proposition-2
     helpText: Décrivez dans les grandes lignes le budget de votre proposition
     required: true
     type: 2 # editor

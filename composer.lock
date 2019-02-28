@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71b2d7034688435892bc0b7f149ed85a",
+    "content-hash": "481e98691c05c12567eac4d79edb5725",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -2920,16 +2920,16 @@
         },
         {
             "name": "gedmo/doctrine-extensions",
-            "version": "v2.4.37",
+            "version": "v2.4.36",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/DoctrineExtensions.git",
-                "reference": "103be6c3a3b663aad36384edae339c8b30399898"
+                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
+                "reference": "87c78ff9fd4b90460386f753d95622f6fbbfcb27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/DoctrineExtensions/zipball/103be6c3a3b663aad36384edae339c8b30399898",
-                "reference": "103be6c3a3b663aad36384edae339c8b30399898",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/87c78ff9fd4b90460386f753d95622f6fbbfcb27",
+                "reference": "87c78ff9fd4b90460386f753d95622f6fbbfcb27",
                 "shasum": ""
             },
             "require": {
@@ -2962,10 +2962,15 @@
                     "Gedmo\\": "lib/Gedmo"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
+                {
+                    "name": "David Buchmann",
+                    "email": "david@liip.ch"
+                },
                 {
                     "name": "Gediminas Morkevicius",
                     "email": "gediminas.morkevicius@gmail.com"
@@ -2973,17 +2978,13 @@
                 {
                     "name": "Gustavo Falco",
                     "email": "comfortablynumb84@gmail.com"
-                },
-                {
-                    "name": "David Buchmann",
-                    "email": "david@liip.ch"
                 }
             ],
             "description": "Doctrine2 behavioral extensions",
             "homepage": "http://gediminasm.org/",
             "keywords": [
+                "Blameable",
                 "behaviors",
-                "blameable",
                 "doctrine2",
                 "extensions",
                 "gedmo",
@@ -2996,12 +2997,7 @@
                 "tree",
                 "uploadable"
             ],
-            "support": {
-                "email": "gediminas.morkevicius@gmail.com",
-                "wiki": "https://github.com/Atlantic18/DoctrineExtensions/tree/master/doc",
-                "source": "https://github.com/cap-collectif/DoctrineExtensions/tree/v2.4.37"
-            },
-            "time": "2019-02-14T15:45:41+00:00"
+            "time": "2018-07-26T12:16:35+00:00"
         },
         {
             "name": "gettext/gettext",

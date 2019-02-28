@@ -2,7 +2,6 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep1:
     id: collectstep1
     title: Collecte des propositions
-    slug: collecte-des-propositions
     label: Dépôt
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', 'now')>
@@ -29,7 +28,6 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep3:
     id: collectstep3
     title: Collecte des propositions
-    slug: collecte-des-propositions-1
     label: Dépôt
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
@@ -63,7 +61,6 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep7:
     id: collectstep7
     title: Collecte avec vote simple limité
-    slug: collecte-avec-vote-simple-limite
     label: Dépôt
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
@@ -73,7 +70,6 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep8:
     id: collectstep8
     title: Collecte avec vote simple limité
-    slug: collecte-avec-vote-simple-limite-1
     label: Dépôt
     body: <p><text(1000)></p>
     timeless: true

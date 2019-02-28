@@ -194,7 +194,6 @@ Capco\AppBundle\Entity\Proposal:
   proposal11:
     id: proposal11
     title: Proposition plus votable
-    slug: proposition-plus-votable
     body: |
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 3
@@ -211,7 +210,6 @@ Capco\AppBundle\Entity\Proposal:
   proposal12:
     id: proposal12
     title: Proposition plus votable
-    slug: proposition-plus-votable-1
     body: |
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 3
@@ -228,7 +226,6 @@ Capco\AppBundle\Entity\Proposal:
   proposal13:
     id: proposal13
     title: Proposition plus votable 2
-    slug: proposition-plus-votable-2
     body: |
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 3

@@ -193,7 +193,6 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform12:
     id: proposalform12
     title: Collect des propositions
-    slug: collect-des-propositions
     description: <p><text(100)></p>
     step: '@collectstep12'
     notificationsConfiguration: '@proposalFormNotificationConfiguration14'

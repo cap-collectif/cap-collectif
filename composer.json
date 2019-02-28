@@ -71,10 +71,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/symfony"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/cap-collectif/DoctrineExtensions"
         }
     ],
     "require": {
@@ -106,7 +102,6 @@
         "sonata-project/intl-bundle": "2.4.0",
         "sonata-project/notification-bundle": "^3.0",
         "hwi/oauth-bundle": "^0.6",
-        "gedmo/doctrine-extensions": "v2.4.37",
         "liip/imagine-bundle": "1.9.1",
         "qandidate/toggle-bundle": "~0.1",
         "predis/predis": "^1.0",

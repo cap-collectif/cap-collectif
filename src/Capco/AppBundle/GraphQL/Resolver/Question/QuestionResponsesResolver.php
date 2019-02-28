@@ -33,29 +33,15 @@ class QuestionResponsesResolver implements ResolverInterface
     public function __invoke(AbstractQuestion $question, Arg $args): Connection
     {
         $totalCount = 0;
-        $arguments = $args->getRawArguments();
-        $withNotConfirmedUser =
-            isset($arguments['withNotConfirmedUser']) &&
-            true === $arguments['withNotConfirmedUser'];
-
         if ($question instanceof MultipleChoiceQuestion || $question instanceof SimpleQuestion) {
-            $totalCount = $this->valueResponseRepository->countByQuestion(
-                $question,
-                $withNotConfirmedUser
-            );
+            $totalCount = $this->valueResponseRepository->countByQuestion($question);
         }
         if ($question instanceof MediaQuestion) {
-            $totalCount = $this->mediaResponseRepository->countByQuestion(
-                $question,
-                $withNotConfirmedUser
-            );
+            $totalCount = $this->mediaResponseRepository->countByQuestion($question);
         }
 
         // get data of $question instanceof MultipleChoiceQuestion && $question instanceof SimpleQuestion && $question instanceof MediaQuestion
-        $paginator = new Paginator(function ($offset, $limit) use (
-            $question,
-            $withNotConfirmedUser
-        ) {
+        $paginator = new Paginator(function ($offset, $limit) use ($question) {
             try {
                 if (
                     $question instanceof MultipleChoiceQuestion ||
@@ -64,15 +50,13 @@ class QuestionResponsesResolver implements ResolverInterface
                     $responses = $this->valueResponseRepository->getAllByQuestion(
                         $question,
                         $limit,
-                        $offset,
-                        $withNotConfirmedUser
+                        $offset
                     );
                 } else {
                     $responses = $this->mediaResponseRepository->getAllByQuestion(
                         $question,
                         $limit,
-                        $offset,
-                        $withNotConfirmedUser
+                        $offset
                     );
                 }
 
