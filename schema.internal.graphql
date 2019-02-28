@@ -2341,6 +2341,9 @@ type MediaQuestion implements Question & Node {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get participant with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
   # Return responses of participants
@@ -2356,6 +2359,9 @@ type MediaQuestion implements Question & Node {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ResponseConnection!
 
   # The associated logic jumps to this question.
@@ -2403,6 +2409,9 @@ type MultipleChoiceQuestion implements Question & Node {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get participant with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
   # Return responses of participants
@@ -2418,6 +2427,9 @@ type MultipleChoiceQuestion implements Question & Node {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ResponseConnection!
 
   # The associated logic jumps to this question.
@@ -4217,6 +4229,9 @@ interface Question {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get participant with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
   # Return responses of participants
@@ -4232,6 +4247,9 @@ interface Question {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ResponseConnection!
 
   # The associated logic jumps to this question.
@@ -4979,6 +4997,9 @@ type SectionQuestion implements Question & Node {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get participant with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
   # Return responses of participants
@@ -4994,6 +5015,9 @@ type SectionQuestion implements Question & Node {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ResponseConnection!
 
   # The associated logic jumps to this question.
@@ -5219,6 +5243,9 @@ type SimpleQuestion implements Question & Node {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get participant with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
   # Return responses of participants
@@ -5234,6 +5261,9 @@ type SimpleQuestion implements Question & Node {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ResponseConnection!
 
   # The associated logic jumps to this question.

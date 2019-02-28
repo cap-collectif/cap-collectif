@@ -241,12 +241,101 @@ Scenario: GraphQL client wants to retrieve replies
 }
   """
 
+Scenario: GraphQL client wants to get question's participants with users not confirmed
+  Given I am logged in to graphql as user
+  When I send a GraphQL request:
+  """
+  {
+    questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==") {
+      ... on Questionnaire {
+        participants {
+          totalCount
+        }
+        questions {
+          id
+          participants(withNotConfirmedUser: true) {
+           totalCount
+          }
+        }
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "questionnaire":{
+           "participants":{
+              "totalCount":5
+           },
+           "questions":[
+              {
+                 "id":"UXVlc3Rpb246Mg==",
+                 "participants":{
+                    "totalCount":2
+                 }
+              },
+              {
+                 "id":"UXVlc3Rpb246MTM=",
+                 "participants":{
+                    "totalCount":2
+                 }
+              },
+              {
+                 "id":"UXVlc3Rpb246MTQ=",
+                 "participants":{
+                    "totalCount":1
+                 }
+              },
+              {
+                 "id":"UXVlc3Rpb246MTU=",
+                 "participants":{
+                    "totalCount":0
+                 }
+              },
+              {
+                 "id":"UXVlc3Rpb246MTY=",
+                 "participants":{
+                    "totalCount":0
+                 }
+              },
+              {
+                 "id":"UXVlc3Rpb246MTg=",
+                 "participants":{
+                    "totalCount":0
+                 }
+              },
+              {
+                 "id":"UXVlc3Rpb246MTk=",
+                 "participants":{
+                    "totalCount":0
+                 }
+              },
+              {
+                 "id":"UXVlc3Rpb246MzAx",
+                 "participants":{
+                    "totalCount":0
+                 }
+              },
+              {
+                 "id":"UXVlc3Rpb246MzAy",
+                 "participants":{
+                    "totalCount":0
+                 }
+              }
+           ]
+        }
+     }
+  }
+  """
+
 Scenario: GraphQL client wants to get question's participants
   Given I am logged in to graphql as user
   When I send a GraphQL request:
   """
   {
-      questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlNA==") {
+      questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==") {
         ... on Questionnaire {
           participants {
             totalCount
@@ -267,7 +356,7 @@ Scenario: GraphQL client wants to get question's participants
     "data": {
       "questionnaire": {
         "participants": {
-          "totalCount": @integer@
+          "totalCount": 5
         },
         "questions": [
           {
@@ -513,6 +602,402 @@ Scenario: GraphQL client wants to get question's responses
                      {
                         "node":{
                            "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     }
+                  ]
+               }
+            },
+            {
+               "id":"UXVlc3Rpb246MTQ=",
+               "title":"Quel est ton athl\u00e8te favori ?",
+               "responses":{
+                  "totalCount":1,
+                  "edges":[
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Maxime Arrouard\u0022],\u0022other\u0022:null}"
+                        }
+                     }
+                  ]
+               }
+            },
+            {
+               "id":"UXVlc3Rpb246MTU=",
+               "title":"Nelson Monfort parle-t-il:",
+               "responses":{
+                  "totalCount":0,
+                  "edges":[
+
+                  ]
+               }
+            },
+            {
+               "id":"UXVlc3Rpb246MTY=",
+               "title":"Classez vos choix",
+               "responses":{
+                  "totalCount":0,
+                  "edges":[
+
+                  ]
+               }
+            },
+            {
+               "id":"UXVlc3Rpb246MTg=",
+               "title":"Choissez le meilleur logo",
+               "responses":{
+                  "totalCount":0,
+                  "edges":[
+
+                  ]
+               }
+            },
+            {
+               "id":"UXVlc3Rpb246MTk=",
+               "title":"Est-ce que Martoni a encore une balle dans son chargeur ?",
+               "responses":{
+                  "totalCount":0,
+                  "edges":[
+
+                  ]
+               }
+            },
+            {
+
+            },
+            {
+
+            }
+         ]
+      }
+   }
+}
+  """
+
+Scenario: GraphQL client wants to get question's responses
+  Given I am logged in to graphql as user
+  When I send a GraphQL request:
+  """
+  {
+    questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==") {
+      ... on Questionnaire {
+        questions {
+          ... on MultipleChoiceQuestion {
+            id
+            title
+          responses(withNotConfirmedUser: true) {
+              totalCount
+              edges {
+                node {
+                  ... on ValueResponse {
+                    value
+                  }
+                }
+              }
+            }
+          }
+          ... on SimpleQuestion {
+            id
+            title
+            description
+          responses(withNotConfirmedUser: true) {
+              totalCount
+              edges {
+                node {
+                  ... on ValueResponse {
+                    value
+                  }
+                }
+              }
+            }
+          }
+          ... on MediaQuestion {
+            id
+            title
+            description
+          responses(withNotConfirmedUser: true) {
+              totalCount
+              edges {
+                node {
+                  ... on MediaResponse {
+                    medias {
+                      id
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+{
+   "data":{
+      "questionnaire":{
+         "questions":[
+            {
+               "id":"UXVlc3Rpb246Mg==",
+               "title":"\u00cates-vous satisfait que la ville de Paris soit candidate \u00e0 l\u0027organisation des JO de 2024 ?",
+               "description":null,
+               "responses":{
+                  "totalCount":11,
+                  "edges":[
+                     {
+                        "node":{
+                           "value":"Trop bien ! On va voir de supers athl\u00e8tes \u00e0 Paris !"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"Youpi ! J\u0027adore des JO"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"\u003Cp\u003EExpedita mollitia illo eum et odit qui aut. Quia laboriosam ut accusantium.\u003C\/p\u003E"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"\u003Cp\u003EQuo assumenda eos ut ipsa voluptatibus ut aut. Illo perferendis qui et ipsum voluptas optio.\u003C\/p\u003E"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"\u003Cp\u003EQui quia autem deleniti. Quia culpa accusamus ex. Ea hic inventore dolores qui similique est cum.\u003C\/p\u003E"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"\u003Cp\u003EDolore inventore nam illum ut et. Id aut architecto et et. Vel earum voluptas et expedita.\u003C\/p\u003E"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"\u003Cp\u003EUllam quia nisi quam est. Dolor in a ducimus.\u003C\/p\u003E"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"\u003Cp\u003EItaque inventore a sed est eligendi quidem aut. Rem id aut et hic deserunt est qui.\u003C\/p\u003E"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"\u003Cp\u003EQui dolores perferendis expedita non. Harum enim itaque illum commodi sapiente.\u003C\/p\u003E"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"\u003Cp\u003EAtque distinctio dicta placeat corrupti in ex totam. Iure ipsum dolor cumque ut.\u003C\/p\u003E"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"Trop cool ! On va voir Tibo qui cours en slip !"
+                        }
+                     }
+                  ]
+               }
+            },
+            {
+               "id":"UXVlc3Rpb246MTM=",
+               "title":"Pour quel type d\u0027\u00e9preuve \u00eates vous pr\u00eat \u00e0 acheter des places ?",
+               "responses":{
+                  "totalCount":38,
+                  "edges":[
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                         }
                      }
                   ]
