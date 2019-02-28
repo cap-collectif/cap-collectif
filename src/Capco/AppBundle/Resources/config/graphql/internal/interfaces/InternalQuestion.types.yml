@@ -39,21 +39,11 @@ InternalQuestion:
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", [value, args])'
         description: 'Return users who answered the question'
-        args:
-          withNotConfirmedUser:
-            type: 'Boolean'
-            description: 'Get participant with user not confirmed'
-            defaultValue: false
       responses:
         type: 'ResponseConnection!'
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionResponsesResolver", [value, args])'
         description: 'Return responses of participants'
-        args:
-          withNotConfirmedUser:
-            type: 'Boolean'
-            description: 'Get responses with user not confirmed'
-            defaultValue: false
       jumps:
         description: 'The associated logic jumps to this question.'
         type: '[LogicJump]'

@@ -144,15 +144,3 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@multiplequestion1'
     reply: '@reply2'
     value: { 'labels': ['Natation', 'Sports collectifs'], 'other': null }
-  response{61...70}:
-    question: '@multiplequestion1'
-    reply: '@reply6'
-    value: { 'labels': ['Response of user not confirmed'], 'other': null }
-  response{71...80}:
-    question: '@multiplequestion1'
-    reply: '@reply7'
-    value: { 'labels': ['Response of user not confirmed', 'Sports collectifs'], 'other': null }
-  response81:
-    question: '@simplequestion2'
-    reply: '@reply7'
-    value: Trop cool ! On va voir Tibo qui cours en slip !
