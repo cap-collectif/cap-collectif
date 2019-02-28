@@ -30,7 +30,6 @@ const EventFiltersWrapper = styled.div.attrs({
   padding: 15px;
   background-color: ${props =>
     props.backgroundColor ? darken(0.1, props.backgroundColor) : colors.primaryColor};
-  color: ${colors.white};
   margin: 25px 0 30px;
   border-radius: 4px;
 

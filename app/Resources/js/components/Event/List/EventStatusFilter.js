@@ -1,20 +1,61 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
-import { Field } from 'redux-form';
+import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
+import { Field, formValueSelector } from 'redux-form';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import type { EventStatusFilter_query } from './__generated__/EventStatusFilter_query.graphql';
+import type { State } from '../../../types';
+import fieldComponent from '../../Form/Field';
 
 type Props = {
   query: EventStatusFilter_query,
   overlay: React.Element<*>,
-  status: ?string
+  status: ?string,
+  intl: IntlShape,
 };
 
 export class EventStatusFilter extends React.Component<Props> {
+
+  statusPopover = () => {
+    const { intl } = this.props;
+
+    return (
+      <Popover>
+        <form>
+            <Field
+              component={fieldComponent}
+              name="status"
+              type="radio"
+              value="all"
+              label={intl.formatMessage({ id: 'all-events' })}
+            />
+            <Field
+              component={fieldComponent}
+              name="status"
+              type="radio"
+              value="ongoing-and-future"
+              label={intl.formatMessage({ id: 'ongoing-and-future' })}
+            />
+            <Field
+              component={fieldComponent}
+              name="status"
+              type="radio"
+              value="finished"
+              label={intl.formatMessage({ id: 'finished' })}
+            />
+        </form>
+      </Popover>
+      
+    )
+  };
+
   render() {
-    const { query, overlay } = this.props;
+    const { query, overlay, status } = this.props;
+
+    console.warn(status);
+
     return (
       <>
         <FormattedMessage
@@ -27,11 +68,7 @@ export class EventStatusFilter extends React.Component<Props> {
         trigger="click"
         placement="bottom"
         aria-describedby=""
-        overlay={
-          <Popover id="FiltersContainer" className="w-260" rel="">
-            {overlay}
-          </Popover>
-        }>
+        overlay={this.statusPopover()}>
           <Button bsStyle="link">
             {status === 'all' ? (
               <FormattedMessage id="all-events" />
@@ -43,12 +80,18 @@ export class EventStatusFilter extends React.Component<Props> {
         
       </>
     )
-      
-    
   }
 }
 
-export default createFragmentContainer(EventStatusFilter, {
+const selector = formValueSelector('EventListFilters');
+
+const mapStateToProps = (state: State) => ({
+  status: selector(state, 'status'),
+});
+
+const container = connect(mapStateToProps)(injectIntl(EventStatusFilter));
+
+export default createFragmentContainer(container, {
   query: graphql`
     fragment EventStatusFilter_query on Query
       @argumentDefinitions(

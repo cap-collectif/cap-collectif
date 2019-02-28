@@ -203,40 +203,6 @@ export class EventListFilters extends React.Component<Props, State> {
     );
   }
 
-  statusPopover = () => {
-    return (
-      <form>
-        <label>
-          <Field
-            name="status"
-            component="input"
-            type="radio"
-            value="all"
-          />{' '}
-          <FormattedMessage id="all-events" />
-        </label>
-        <label>
-          <Field
-            name="status"
-            component="input"
-            type="radio"
-            value="ongoing-and-future"
-          />{' '}
-          <FormattedMessage id="ongoing-and-future" />
-        </label>
-        <label>
-          <Field
-            name="status"
-            component="input"
-            type="radio"
-            value="finished"
-          />{' '}
-          <FormattedMessage id="finished" />
-        </label>
-      </form>
-    )
-  };
-
   render() {
     const {
       features,
@@ -260,9 +226,7 @@ export class EventListFilters extends React.Component<Props, State> {
         return nbFilter;
       }
     };
-
-    console.log(status);
-
+    
     return (
       <Row
         className={
@@ -272,7 +236,7 @@ export class EventListFilters extends React.Component<Props, State> {
         }>
         <Col xs={12} md={5}>
           {/* $FlowFixMe $refType */}
-          <EventStatusFilter query={query} overlay={this.statusPopover} status={status} />
+          <EventStatusFilter query={query} />
         </Col>
         <Col xs={12} md={4} id="event-filters">
           <div className="pull-right">
