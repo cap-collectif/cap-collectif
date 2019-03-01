@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -67,7 +68,7 @@ class QuestionChoice
         return $this;
     }
 
-    public function getQuestion()
+    public function getQuestion(): AbstractQuestion
     {
         return $this->question;
     }
@@ -77,7 +78,7 @@ class QuestionChoice
      *
      * @return $this
      */
-    public function setQuestion(?AbstractQuestion $question)
+    public function setQuestion(?AbstractQuestion $question): self
     {
         $this->question = $question;
 
@@ -87,7 +88,7 @@ class QuestionChoice
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -97,14 +98,14 @@ class QuestionChoice
      *
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription($description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getImage()
+    public function getImage(): ?Media
     {
         return $this->image;
     }

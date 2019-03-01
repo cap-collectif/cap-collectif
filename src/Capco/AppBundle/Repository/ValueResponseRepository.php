@@ -74,6 +74,26 @@ class ValueResponseRepository extends EntityRepository
         return new Paginator($query);
     }
 
+    public function getAllByQuestionWithoutPaginator(
+        AbstractQuestion $question,
+        bool $withNotConfirmedUser = false
+    ) {
+        $qb = $this->getNoEmptyResultQueryBuilder()
+            ->leftJoin('r.question', 'question')
+            ->leftJoin('reply.author', 'author')
+            ->andWhere('question.id = :question');
+        if (!$withNotConfirmedUser) {
+            $qb->andWhere(
+                'author.newEmailConfirmationToken IS NULL AND author.confirmationToken IS NULL'
+            );
+        }
+        $qb->setParameter('question', $question);
+
+        $query = $qb->getQuery()->useQueryCache(true); // ->useResultCache(true, 60)
+
+        return $query->getResult();
+    }
+
     private function getNoEmptyResultQueryBuilder(): QueryBuilder
     {
         return // Some fixes until we use a proper JSON query

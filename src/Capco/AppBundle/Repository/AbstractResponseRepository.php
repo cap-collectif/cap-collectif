@@ -1,10 +1,9 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\Console\Question\Question;
 
 class AbstractResponseRepository extends EntityRepository
 {
@@ -15,6 +14,7 @@ class AbstractResponseRepository extends EntityRepository
             ->leftJoin('r.question', 'question')
             ->andWhere('r.reply = :reply')
             ->setParameter('reply', $replyId);
+
         return $qb->getQuery()->getArrayResult();
     }
 
