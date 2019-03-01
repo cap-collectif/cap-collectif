@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { SectionContainerQueryResponse } from './__generated__/SectionContainerQuery.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
+import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {
   body: string,
@@ -46,7 +47,9 @@ export class SectionContainer extends PureComponent<Props> {
       <div className="row">
         <h2 className="h2">{title}</h2>
         <p className="block">{teaser}</p>
-        <p className="block">{body}</p>
+        <p className="block">
+          <WYSIWYGRender value={body} />
+        </p>
         <QueryRenderer
           variables={{}}
           environment={environment}

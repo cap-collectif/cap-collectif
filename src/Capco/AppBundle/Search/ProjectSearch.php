@@ -6,7 +6,6 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Exists;
-use Elastica\Aggregation;
 use Elastica\Query\Term;
 use Elastica\Result;
 
@@ -91,15 +90,14 @@ class ProjectSearch extends Search
     public function getAllContributions(): int
     {
         $query = new Query();
-        $allContributionsAggQuery = new Aggregation\Terms('contributionsCount');
-        $allContributionsAggQuery->setField('contributionsCount');
-        $query->addAggregation($allContributionsAggQuery);
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $resultSet = $this->index
+            ->getType($this->type)
+            ->search($query, $this->projectRepo->count([]));
 
         $totalCount = array_sum(
-            array_map(function (array $result) {
-                return $result['key'] * $result['doc_count'];
-            }, $resultSet->getAggregation('contributionsCount')['buckets'])
+            array_map(function (Result $result) {
+                return $result->getHit()['_source']['contributionsCount'];
+            }, $resultSet->getResults())
         );
 
         return $totalCount ?: 0;
