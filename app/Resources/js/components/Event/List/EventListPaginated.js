@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import classNames from 'classnames';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import EventPreview from '../EventPreview';
 import EventMap from '../Map/EventMap';
@@ -26,6 +27,10 @@ type State = {
 };
 
 const EVENTS_PAGINATION = 100;
+
+const MapContainer = styled(Col)`
+  top: 150px;
+`;
 
 export class EventListPaginated extends React.Component<Props, State> {
   state = {
@@ -118,15 +123,15 @@ export class EventListPaginated extends React.Component<Props, State> {
             </Col>
           ) : null}
           {this.shouldRenderToggleListOrMap('map') ? (
-            <Col
+            <MapContainer
               md={!config.isMobile ? 4 : 12}
               sm={!config.isMobile ? 4 : 12}
               xs={12}
               aria-hidden="true"
-              className={!config.isMobile ? 'sticky-t-60' : null}>
+              className={!config.isMobile ? 'sticky' : null}>
               {/* $FlowFixMe relayProps */}
               <EventMap query={query} />
-            </Col>
+            </MapContainer>
           ) : null}
         </Row>
       </React.Fragment>

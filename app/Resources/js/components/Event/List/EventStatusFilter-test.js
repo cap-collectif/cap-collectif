@@ -30,6 +30,7 @@ const defaultProps = {
   query: {
     ...defaultQuery,
   },
+  status: 'finished',
 };
 
 describe('<EventListFilters />', () => {
@@ -46,6 +47,7 @@ describe('<EventListFilters />', () => {
           totalCount: 10,
         },
       },
+      status: 'ongoing-and-future',
     };
     const wrapper = shallow(<EventStatusFilter {...props} />);
     expect(wrapper).toMatchSnapshot();

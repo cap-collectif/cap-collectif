@@ -2,6 +2,7 @@
 import React from 'react';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchQuery, graphql } from 'relay-runtime';
 import { reduxForm, Field, formValueSelector, type FormProps } from 'redux-form';
@@ -15,7 +16,6 @@ import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
 import environment from '../../../createRelayEnvironment';
 import EventStatusFilter from './EventStatusFilter';
-import fieldComponent from '../../Form/Field';
 import type { EventListFilters_query } from './__generated__/EventListFilters_query.graphql';
 
 type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
@@ -26,7 +26,6 @@ type Props = {|
   dispatch: Dispatch,
   theme: ?string,
   project: ?string,
-  status: string,
   userType: ?string,
   search: ?string,
   intl: IntlShape,
@@ -80,6 +79,18 @@ const themeQuery = graphql`
   }
 `;
 
+const StatusWrapper = styled(Col)`
+  color: white;
+  display: flex;
+  align-items: center;
+`;
+const FiltersWrapper = styled(Col)`
+  @media screen and (max-width: 767px) {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
 export class EventListFilters extends React.Component<Props, State> {
   state = { projectOptions: [], themeOptions: [] };
 
@@ -107,17 +118,24 @@ export class EventListFilters extends React.Component<Props, State> {
 
     const filters = [];
 
-    if (theme !== null || project !== null) {
-      if (nbFilter > 0) {
-        filters.push(
-          <div className="d-flex justify-content-end">
-            <Button className="btn--outline btn-dark-gray mb-10" onClick={reset}>
-              <FormattedMessage id="reset-filters" />
-            </Button>
-          </div>,
-        );
-      }
-    }
+    filters.push(
+      <div className="visible-xs-block">
+        <Field
+          clearable
+          id="event-search-input"
+          name="search"
+          type="text"
+          role="combobox"
+          aria-autocomplete="list"
+          aria-haspopup="true"
+          aria-controls="event-search-input-listbox"
+          addonAfter={<i className="cap cap-magnifier" />}
+          component={component}
+          placeholder={intl.formatMessage({ id: 'proposal-search' })}
+          groupClassName="event-search-group pull-right"
+        />
+      </div>,
+    );
 
     if (features.themes && themeOptions.length) {
       filters.push(
@@ -150,25 +168,6 @@ export class EventListFilters extends React.Component<Props, State> {
       );
     }
 
-    if (config.isMobile) {
-      filters.push(
-        <Field
-          clearable
-          id="event-search-input"
-          name="search"
-          type="text"
-          role="combobox"
-          aria-autocomplete="list"
-          aria-haspopup="true"
-          aria-controls="event-search-input-listbox"
-          addonAfter={<i className="cap cap-magnifier" />}
-          component={component}
-          placeholder={intl.formatMessage({ id: 'proposal-search' })}
-          groupClassName="event-search-group pull-right"
-        />,
-      );
-    }
-
     if (userTypes.length) {
       filters.push(
         <Field
@@ -185,6 +184,16 @@ export class EventListFilters extends React.Component<Props, State> {
       );
     }
 
+    if (theme !== null || project !== null) {
+      if (nbFilter > 0) {
+        filters.push(
+          <Button bsStyle="link" className="p-0" onClick={reset}>
+            <FormattedMessage id="reset-filters" />
+          </Button>,
+        );
+      }
+    }
+
     return filters;
   }
 
@@ -193,6 +202,11 @@ export class EventListFilters extends React.Component<Props, State> {
 
     return (
       <div>
+        <p>
+          <b>
+            <FormattedMessage id="filter-by" />
+          </b>
+        </p>
         <form>
           {filters.map((filter, index) => (
             <Col key={index} className="mt-5">
@@ -204,43 +218,6 @@ export class EventListFilters extends React.Component<Props, State> {
     );
   }
 
-  // getStatusPopover = () => {
-  //   const { status } = this.props;
-
-  //   console.log(status);
-  //   return (
-  //     <form>
-  //         <Field
-  //           component={fieldComponent}
-  //           name="status"
-  //           type="radio"
-  //           value="all"
-  //           radioChecked={status === 'all'}
-  //         >
-  //           <FormattedMessage id="all-events" />
-  //         </Field>
-  //         <Field
-  //           component={fieldComponent}
-  //           name="status"
-  //           type="radio"
-  //           value="ongoing-and-future"
-  //           radioChecked={status === 'ongoing-and-future'}
-  //         >
-  //           <FormattedMessage id="ongoing-and-future" />
-  //         </Field>
-  //         <Field
-  //           component={fieldComponent}
-  //           name="status"
-  //           type="radio"
-  //           value="finished"
-  //           radioChecked={status === 'finished'}
-  //         >
-  //           <FormattedMessage id="finished" />
-  //         </Field>
-  //     </form>
-  //   )
-  // };
-
   render() {
     const {
       features,
@@ -251,7 +228,6 @@ export class EventListFilters extends React.Component<Props, State> {
       intl,
       addToggleViewButton,
       dispatch,
-      status,
       query,
     } = this.props;
 
@@ -264,7 +240,7 @@ export class EventListFilters extends React.Component<Props, State> {
         return nbFilter;
       }
     };
-    
+
     return (
       <Row
         className={
@@ -272,15 +248,15 @@ export class EventListFilters extends React.Component<Props, State> {
             ? 'ml-0 align-items-center d-flex flex-wrap'
             : 'align-items-center d-flex flex-wrap'
         }>
-        <Col xs={12} md={5}>
+        <StatusWrapper sm={4} md={5} xsHidden>
           {/* $FlowFixMe $refType */}
           <EventStatusFilter query={query} />
-        </Col>
-        <Col xs={12} md={4} id="event-filters">
+        </StatusWrapper>
+        <FiltersWrapper xs={12} sm={4} id="event-filters">
           <div className="pull-right">
             <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
           </div>
-          {config.isMobile && addToggleViewButton && features.display_map ? (
+          {addToggleViewButton && features.display_map ? (
             <EventListToggleMobileViewBtn
               showMapButton
               isMobileListView
@@ -289,8 +265,8 @@ export class EventListFilters extends React.Component<Props, State> {
               }}
             />
           ) : null}
-        </Col>
-        <Col md={3} smHidden xsHidden>
+        </FiltersWrapper>
+        <Col sm={4} md={3} xsHidden>
           <form
             onSubmit={e => {
               e.preventDefault();
@@ -320,7 +296,6 @@ const mapStateToProps = (state: GlobalState) => ({
   project: selector(state, 'project'),
   search: selector(state, 'search'),
   userType: selector(state, 'userType'),
-  status: selector(state, 'status'),
   userTypes: state.default.userTypes,
 });
 

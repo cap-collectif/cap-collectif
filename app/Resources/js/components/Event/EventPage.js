@@ -32,17 +32,15 @@ const EventFiltersWrapper = styled.div.attrs({
     props.backgroundColor ? darken(0.1, props.backgroundColor) : colors.primaryColor};
   margin: 25px 0 30px;
   border-radius: 4px;
+  // position: sticky;
+  top: 50px;
+  z-index: 1010;
 
   .event-search-group .form-group {
     margin-bottom: 0;
   }
 
-  @media screen and (max-width: $screen-sm-max) {
-    position: sticky;
-    top: 50px;
-    z-index: 1010;
-    min-height: 60px;
-    padding: 10px 0;
+  @media screen and (max-width: 991px) {
   }
 `;
 
@@ -111,13 +109,21 @@ export class EventPage extends React.Component<Props> {
                   <section className="section--alt">
                     <div className="container">
                       {this.props.eventPageBody && (
-                        <p>
+                        <p className="hidden-xs">
                           <FormattedHTMLMessage id={this.props.eventPageBody} />
                         </p>
                       )}
                       <EventFiltersWrapper backgroundColor={backgroundColor}>
                         <EventListFilters query={props} addToggleViewButton />
                       </EventFiltersWrapper>
+                      {this.props.eventPageBody && (
+                        <>
+                          <p className="visible-xs-block">
+                            <FormattedHTMLMessage id={this.props.eventPageBody} />
+                          </p>
+                          {/* display status filter */}
+                        </>
+                      )}
                       <div id="event-page-rendered">
                         {/* $FlowFixMe */}
                         <EventRefetch query={props} />
