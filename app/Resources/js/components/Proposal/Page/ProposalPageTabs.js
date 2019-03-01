@@ -26,6 +26,10 @@ type Props = {
   features: FeatureToggles,
 };
 
+type State = {
+  tabKey: string,
+};
+
 const getHashKey = (hash: string) => {
   if (hash.indexOf('content') !== -1) {
     return 'content';
@@ -45,7 +49,14 @@ const getHashKey = (hash: string) => {
   return 'content';
 };
 
-export class ProposalPageTabs extends React.Component<Props> {
+export class ProposalPageTabs extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      tabKey: 'content',
+    };
+  }
+
   getDefaultKey() {
     const hash = typeof window !== 'undefined' ? window.location.hash : null;
     if (hash) {
@@ -56,6 +67,7 @@ export class ProposalPageTabs extends React.Component<Props> {
 
   render() {
     const { viewer, proposal, step, features } = this.props;
+    const { tabKey } = this.state;
     const { currentVotableStep, project } = proposal;
     const votesCount = proposal.allVotes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
@@ -64,7 +76,8 @@ export class ProposalPageTabs extends React.Component<Props> {
     return (
       <Tab.Container
         id="proposal-page-tabs"
-        defaultActiveKey={this.getDefaultKey()}
+        activeKey={tabKey}
+        onSelect={key => this.setState({ tabKey: key })}
         className="tabs__container">
         <div>
           <div className="tabs">
@@ -149,7 +162,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                   </Row>
                 </TrashedMessage>
               </Tab.Pane>
-              {showVotesTab && (
+              {showVotesTab && tabKey === 'votes' && (
                 <Tab.Pane eventKey="votes">
                   <Tab.Container id="tab-votesByStep" defaultActiveKey={0}>
                     <Row className="clearfix">

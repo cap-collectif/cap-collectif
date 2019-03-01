@@ -44,7 +44,12 @@ class ThemeRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder();
-        $qb->addOrderBy('t.position', 'ASC');
+        $qb
+            ->addSelect('c')
+            ->leftJoin('t.projects', 'c')
+            ->leftJoin('t.events', 'events')
+            ->leftJoin('t.posts', 'posts')
+            ->addOrderBy('t.position', 'ASC');
         $qb->addOrderBy('t.position', 'ASC')->addOrderBy('t.updatedAt', 'DESC');
         if (null !== $term) {
             $qb->andWhere('t.title LIKE :term')->setParameter('term', '%' . $term . '%');
@@ -62,6 +67,11 @@ class ThemeRepository extends EntityRepository
     public function getOneBySlug(string $slug): ?Theme
     {
         $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('a', 'am', 'm', 'p', 'post', 'e')
+            ->leftJoin('t.Author', 'a')
+            ->leftJoin('a.media', 'am')
+            ->leftJoin('t.media', 'm')
+            ->leftJoin('t.projects', 'p')
             ->leftJoin('t.posts', 'post', 'WITH', 'post.isPublished = :enabled')
             ->leftJoin('t.events', 'e', 'WITH', 'e.enabled = :enabled')
             ->andWhere('t.slug = :slug')

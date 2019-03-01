@@ -2,9 +2,10 @@
 
 exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] = `
 <Uncontrolled(TabContainer)
+  activeKey="content"
   className="tabs__container"
-  defaultActiveKey="content"
   id="proposal-page-tabs"
+  onSelect={[Function]}
 >
   <div>
     <div
@@ -291,38 +292,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
         </TabPane>
         <TabPane
           bsClass="tab-pane"
-          eventKey="votes"
-        >
-          <Uncontrolled(TabContainer)
-            defaultActiveKey={0}
-            id="tab-votesByStep"
-          >
-            <Row
-              bsClass="row"
-              className="clearfix"
-              componentClass="div"
-            >
-              <Nav
-                bsClass="nav"
-                bsStyle="pills"
-                className="mb-20"
-                justified={false}
-                pullLeft={false}
-                pullRight={false}
-                stacked={false}
-              />
-              <TabContent
-                animation={false}
-                bsClass="tab"
-                componentClass="div"
-                mountOnEnter={false}
-                unmountOnExit={false}
-              />
-            </Row>
-          </Uncontrolled(TabContainer)>
-        </TabPane>
-        <TabPane
-          bsClass="tab-pane"
           eventKey="blog"
         >
           <ForwardRef(Relay(ProposalPageBlog))
@@ -417,9 +386,10 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
 
 exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
 <Uncontrolled(TabContainer)
+  activeKey="content"
   className="tabs__container"
-  defaultActiveKey="content"
   id="proposal-page-tabs"
+  onSelect={[Function]}
 >
   <div>
     <div
@@ -663,38 +633,6 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
               </Col>
             </Row>
           </ForwardRef(Relay(TrashedMessage))>
-        </TabPane>
-        <TabPane
-          bsClass="tab-pane"
-          eventKey="votes"
-        >
-          <Uncontrolled(TabContainer)
-            defaultActiveKey={0}
-            id="tab-votesByStep"
-          >
-            <Row
-              bsClass="row"
-              className="clearfix"
-              componentClass="div"
-            >
-              <Nav
-                bsClass="nav"
-                bsStyle="pills"
-                className="mb-20"
-                justified={false}
-                pullLeft={false}
-                pullRight={false}
-                stacked={false}
-              />
-              <TabContent
-                animation={false}
-                bsClass="tab"
-                componentClass="div"
-                mountOnEnter={false}
-                unmountOnExit={false}
-              />
-            </Row>
-          </Uncontrolled(TabContainer)>
         </TabPane>
         <TabPane
           bsClass="tab-pane"
