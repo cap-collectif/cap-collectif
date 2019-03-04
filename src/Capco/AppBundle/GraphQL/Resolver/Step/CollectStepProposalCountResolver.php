@@ -26,7 +26,7 @@ class CollectStepProposalCountResolver implements ResolverInterface
         $this->proposalRepo = $proposalRepo;
     }
 
-    public function __invoke(CollectStep $step): int
+    public function __invoke(CollectStep $step, bool $useSql = false): int
     {
         $count = 0;
         $args = new Argument([
@@ -34,7 +34,7 @@ class CollectStepProposalCountResolver implements ResolverInterface
             'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'ASC'],
         ]);
 
-        if ($step->getProposalForm()) {
+        if ($step->getProposalForm() && !$useSql) {
             $promise = $this->dataLoader
                 ->load([
                     'form' => $step->getProposalForm(),
@@ -46,6 +46,8 @@ class CollectStepProposalCountResolver implements ResolverInterface
                     $count = $connection->totalCount;
                 });
             $this->adapter->await($promise);
+        } elseif ($useSql) {
+            $count = $this->resolveWithMySQL($step);
         }
 
         return $count;
@@ -54,6 +56,6 @@ class CollectStepProposalCountResolver implements ResolverInterface
     // TODO not used for now
     private function resolveWithMySQL(CollectStep $step): int
     {
-        $this->proposalRepo->countPublishedProposalByStep($step);
+        return $this->proposalRepo->countPublishedProposalByStep($step);
     }
 }

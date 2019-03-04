@@ -112,7 +112,7 @@ class StepContributionsDataLoader extends BatchDataLoader
             $totalCount += $this->sourceRepository->countPublishedSourcesByStep($step);
             $totalCount += $this->sourceRepository->countTrashedSourcesByStep($step);
         } elseif ($step instanceof CollectStep) {
-            $totalCount += $this->proposalCountResolver->__invoke($step);
+            $totalCount += $this->proposalCountResolver->__invoke($step, true);
             // We do not account votes as a contribution, maybe this will change
             // $totalCount += $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
             //     $step

@@ -28,7 +28,7 @@ class QueryVotesResolver implements ResolverInterface
         });
 
         $connection = $paginator->auto($args, $totalCount);
-        $connection->totalCount = $this->votesRepository->count([]);
+        $connection->totalCount = $this->votesRepository->countPublished();
 
         return $connection;
     }

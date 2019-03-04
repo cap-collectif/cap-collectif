@@ -269,13 +269,14 @@ class ContributionResolver
         return \count($this->getStepContributorsOrdered($step));
     }
 
-    public function countProjectContributions(Project $project): int
+    public function countProjectContributions(Project $project, bool $useSql = false): int
     {
         $count = 0;
         foreach ($project->getSteps() as $step) {
             $count += $this->stepContributionsResolver->resolveSync(
                 $step->getStep(),
-                new Argument(['first' => 0])
+                new Argument(['first' => 0]),
+                $useSql
             )->totalCount;
         }
 

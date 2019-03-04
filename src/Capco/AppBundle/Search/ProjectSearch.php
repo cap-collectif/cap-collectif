@@ -90,17 +90,17 @@ class ProjectSearch extends Search
     public function getAllContributions(): int
     {
         $query = new Query();
+        $query->setSource(['contributionsCount']);
         $resultSet = $this->index
             ->getType($this->type)
             ->search($query, $this->projectRepo->count([]));
-
         $totalCount = array_sum(
             array_map(function (Result $result) {
-                return $result->getHit()['_source']['contributionsCount'];
+                return $result->getData()['contributionsCount'];
             }, $resultSet->getResults())
         );
 
-        return $totalCount ?: 0;
+        return $totalCount;
     }
 
     private function getHydratedResults(array $ids): array

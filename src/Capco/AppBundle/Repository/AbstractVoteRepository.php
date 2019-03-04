@@ -45,6 +45,8 @@ class AbstractVoteRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('v');
 
+        $qb->andWhere('v.published = true');
+
         if ($limit) {
             $qb->setMaxResults($limit);
         }
@@ -215,14 +217,14 @@ class AbstractVoteRepository extends EntityRepository
                 WHERE o.step_id =\"${id}\"
                 AND v.published = true
                 UNION
-                SELECT COUNT(v.id) as nb, 'opv'as entity
+                SELECT COUNT(v.id) as nb, 'opv' as entity
                 FROM votes v
                 LEFT JOIN opinion_version ov ON v.opinion_version_id = ov.id
                 LEFT JOIN opinion o ON ov.opinion_id = o.id
                 WHERE o.step_id =\"${id}\"
                 AND v.published = true
                 UNION
-                SELECT COUNT(v.id) as nb, 'aropv'as entity
+                SELECT COUNT(v.id) as nb, 'aropv' as entity
                 FROM votes v
                 LEFT JOIN argument a ON v.argument_id = a.id
                 LEFT JOIN opinion_version ov ON a.opinion_version_id = ov.id
@@ -230,7 +232,7 @@ class AbstractVoteRepository extends EntityRepository
                 WHERE o.step_id =\"${id}\"
                 AND v.published = true
                 UNION
-                SELECT COUNT(v.id) as nb, 'srcopv'as entity
+                SELECT COUNT(v.id) as nb, 'srcopv'  as entity
                 FROM votes v
                 LEFT JOIN source s ON v.source_id = s.id
                 LEFT JOIN opinion_version ov ON s.opinion_version_id = ov.id
