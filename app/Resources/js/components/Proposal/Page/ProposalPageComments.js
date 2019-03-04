@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import CommentSectionFragmented from '../../Comment/CommentSectionFragmented';
 import type { ProposalPageComments_proposal } from './__generated__/ProposalPageComments_proposal.graphql';
-import type { GlobalState } from '../../types';
+import type { GlobalState } from '../../../types';
 
 type Props = {
   proposal: ProposalPageComments_proposal,
   className: string,
+  isAuthenticated: boolean,
 };
 
 class ProposalPageComments extends React.Component<Props> {
@@ -28,7 +29,7 @@ class ProposalPageComments extends React.Component<Props> {
       <div className={classNames(classes)}>
         {proposal.form.commentable && (
           // $FlowFixMe
-          <CommentSectionFragmented isAuthenticated={isAuthenticated} proposal={proposal} />
+          <CommentSectionFragmented isAuthenticated={isAuthenticated} commentable={proposal} />
         )}
       </div>
     );
@@ -49,7 +50,7 @@ export default createFragmentContainer(container, {
         id
         commentable
       }
-      ... CommentSectionFragmented_commentable @arguments(isAuthenticated: $isAuthenticated)
+      ...CommentSectionFragmented_commentable @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 });
