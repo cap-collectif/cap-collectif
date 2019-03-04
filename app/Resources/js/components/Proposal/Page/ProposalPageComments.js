@@ -1,9 +1,11 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
-import CommentSection from '../../Comment/CommentSection';
+import CommentSectionFragmented from '../../Comment/CommentSectionFragmented';
 import type { ProposalPageComments_proposal } from './__generated__/ProposalPageComments_proposal.graphql';
+import type { GlobalState } from '../../types';
 
 type Props = {
   proposal: ProposalPageComments_proposal,
@@ -16,7 +18,7 @@ class ProposalPageComments extends React.Component<Props> {
   };
 
   render() {
-    const { className, proposal } = this.props;
+    const { className, proposal, isAuthenticated } = this.props;
     const classes = {
       proposal__comments: true,
       [className]: true,
@@ -26,14 +28,20 @@ class ProposalPageComments extends React.Component<Props> {
       <div className={classNames(classes)}>
         {proposal.form.commentable && (
           // $FlowFixMe
-          <CommentSection commentableId={proposal.id} />
+          <CommentSectionFragmented isAuthenticated={isAuthenticated} proposal={proposal} />
         )}
       </div>
     );
   }
 }
 
-export default createFragmentContainer(ProposalPageComments, {
+const mapStateToProps = (state: GlobalState) => ({
+  isAuthenticated: !!state.user.user,
+});
+
+const container = connect(mapStateToProps)(ProposalPageComments);
+
+export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalPageComments_proposal on Proposal {
       id
@@ -41,6 +49,7 @@ export default createFragmentContainer(ProposalPageComments, {
         id
         commentable
       }
+      ... CommentSectionFragmented_commentable @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 });
