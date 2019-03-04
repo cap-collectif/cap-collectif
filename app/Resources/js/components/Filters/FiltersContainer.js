@@ -27,14 +27,14 @@ export default class FiltersContainer extends React.Component<Props, State> {
     };
   }
 
-  componentDidUpdate() {
-    setTimeout(() => {
-      const queryAll = document.querySelectorAll('.popover.bottom');
-      if (queryAll !== null) {
-        queryAll.forEach(el => el.removeAttribute('role'));
-      }
-    }, 500);
-  }
+  // componentDidUpdate() {
+  //   setTimeout(() => {
+  //     const queryAll = document.querySelectorAll('.popover.bottom');
+  //     if (queryAll !== null) {
+  //       queryAll.forEach(el => el.removeAttribute('role'));
+  //     }
+  //   }, 500);
+  // }
 
   renderFilterCount(): string {
     const { filterCount } = this.props;
@@ -61,13 +61,13 @@ export default class FiltersContainer extends React.Component<Props, State> {
           aria-expanded={this.state.isOpen}
           onClick={() => {
             this.setState({ isOpen: !this.state.isOpen });
-            setTimeout(() => {
-              const target = document.getElementById('event-filters');
-              const queryAll = document.querySelectorAll('.popover.bottom');
-              if (target !== null && queryAll !== null) {
-                queryAll.forEach(el => target.after(el));
-              }
-            }, 500);
+            // setTimeout(() => {
+            //   const target = document.getElementById('event-filters');
+            //   const queryAll = document.querySelectorAll('.popover.bottom');
+            //   if (target !== null && queryAll !== null) {
+            //     queryAll.forEach(el => target.after(el));
+            //   }
+            // }, 500);
           }}>
           <i className="cap cap-filter-1 small mr-5" />
           <FormattedMessage id="link_filters" /> {this.renderFilterCount()}

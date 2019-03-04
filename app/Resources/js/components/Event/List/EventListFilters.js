@@ -15,7 +15,8 @@ import { changeEventMobileListView } from '../../../redux/modules/event';
 import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
 import environment from '../../../createRelayEnvironment';
-import EventStatusFilter from './EventStatusFilter';
+import EventListCounter from './EventListCounter';
+import EventListStatusFilter from './EventListStatusFilter';
 import type { EventListFilters_query } from './__generated__/EventListFilters_query.graphql';
 
 type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
@@ -250,7 +251,8 @@ export class EventListFilters extends React.Component<Props, State> {
         }>
         <StatusWrapper sm={4} md={5} xsHidden>
           {/* $FlowFixMe $refType */}
-          <EventStatusFilter query={query} />
+          <EventListCounter query={query} />
+          <EventListStatusFilter />
         </StatusWrapper>
         <FiltersWrapper xs={12} sm={4} id="event-filters">
           <div className="pull-right">
@@ -322,7 +324,7 @@ export default createFragmentContainer(
         userType: { type: "ID" }
         isFuture: { type: "Boolean" }
       ) {
-      ...EventStatusFilter_query
+      ...EventListCounter_query
         @arguments(
           cursor: $cursor
           count: $count

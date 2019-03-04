@@ -32,7 +32,7 @@ const EventFiltersWrapper = styled.div.attrs({
     props.backgroundColor ? darken(0.1, props.backgroundColor) : colors.primaryColor};
   margin: 25px 0 30px;
   border-radius: 4px;
-  // position: sticky;
+  position: sticky;
   top: 50px;
   z-index: 1010;
 

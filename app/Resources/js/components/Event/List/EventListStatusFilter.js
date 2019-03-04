@@ -1,19 +1,22 @@
 // @flow
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { graphql, createFragmentContainer } from 'react-relay';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Field, formValueSelector } from 'redux-form';
-import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
+import { Button, Overlay, Popover } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import type { EventStatusFilter_query } from './__generated__/EventStatusFilter_query.graphql';
-import type { State } from '../../../types';
+import type { GlobalState } from '../../../types';
 import fieldComponent from '../../Form/Field';
 
 type Props = {
-  query: EventStatusFilter_query,
   status: ?string,
 };
+
+type State = {
+  show: boolean
+}
 
 const StatusButton = styled(Button).attrs({
   bsStyle: 'link',
@@ -29,13 +32,49 @@ const StatusButton = styled(Button).attrs({
   }
 `;
 
-export class EventStatusFilter extends React.Component<Props> {
-  statusPopover = () => {
+const StatusPopover = styled(Popover).attrs({
+  id: 'event-status-filter'
+})`
+  color: black;
+
+  .radio {
+    margin-top: 0;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-group:last-child {
+    &, .radio {
+      margin-bottom: 0;
+    }
+  }
+`
+
+export class EventListStatusFilter extends React.Component<Props, State> {
+  target: any;
+  
+  constructor(props: Props) {
+    super(props);
+
+    this.target = React.createRef();
+
+    this.state = {
+      show: false
+    };
+  }
+
+  handleToggle = () => {
+    this.setState({ show: !this.state.show });
+  }
+
+  getPopover = () => {
     const { status } = this.props;
 
     return (
-      <Popover id="event-status-filter">
-        <form>
+      <StatusPopover>
+        <form onChange={this.handleToggle}>
           <Field
             component={fieldComponent}
             id="all-events"
@@ -64,7 +103,7 @@ export class EventStatusFilter extends React.Component<Props> {
             <FormattedMessage id="finished" />
           </Field>
         </form>
-      </Popover>
+      </StatusPopover>
     );
   };
 
@@ -87,67 +126,27 @@ export class EventStatusFilter extends React.Component<Props> {
   };
 
   render() {
-    const { query } = this.props;
-
     return (
-      <>
-        <FormattedMessage
-          id="number-of-events"
-          values={{
-            num: query.events.totalCount,
-          }}
-        />
-        <OverlayTrigger
-          trigger="click"
+      <div className="position-relative">
+        <StatusButton onClick={this.handleToggle} ref={this.target}>{this.getButtonMessage()}</StatusButton>
+        <Overlay
           placement="bottom"
-          aria-describedby=""
-          overlay={this.statusPopover()}>
-          <StatusButton>{this.getButtonMessage()}</StatusButton>
-        </OverlayTrigger>
-      </>
+          container={this}
+          show={this.state.show}
+          target={this.target.current}
+        >
+          {this.getPopover()} 
+        </Overlay>
+      </div>
     );
   }
+  
 }
 
 const selector = formValueSelector('EventListFilters');
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: GlobalState) => ({
   status: selector(state, 'status'),
 });
 
-const container = connect(mapStateToProps)(EventStatusFilter);
-
-export default createFragmentContainer(container, {
-  query: graphql`
-    fragment EventStatusFilter_query on Query
-      @argumentDefinitions(
-        count: { type: "Int!" }
-        cursor: { type: "String" }
-        theme: { type: "ID" }
-        project: { type: "ID" }
-        search: { type: "String" }
-        userType: { type: "ID" }
-        isFuture: { type: "Boolean" }
-      ) {
-      events(
-        first: $count
-        after: $cursor
-        theme: $theme
-        project: $project
-        search: $search
-        userType: $userType
-        isFuture: $isFuture
-      ) @connection(key: "EventListPaginated_events", filters: []) {
-        edges {
-          node {
-            id
-          }
-        }
-        totalCount
-      }
-      eventsWithoutFilters: events {
-        totalCount
-      }
-    }
-  `,
-});
+export default connect(mapStateToProps)(EventListStatusFilter);
