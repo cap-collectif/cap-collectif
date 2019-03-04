@@ -16,7 +16,7 @@ final class UserNotifier extends BaseNotifier
     public function acknowledgeReply(
         Project $project,
         Reply $reply,
-        \DateTime $endAt,
+        ?\DateTime $endAt,
         string $stepUrl,
         bool $isUpdated = false
     ): void {

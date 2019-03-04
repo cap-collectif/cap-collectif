@@ -1,7 +1,9 @@
 {% set siteName = capco_site_parameter_value('global.site.fullname') %}
-{% set endDate =  endAt|localizeddate('long', 'none', 'fr_FR')  %}
 {% set nowDate =  "now"|localizeddate('long', 'none', 'fr_FR')  %}
 {% set nowHour =  "now"|date('H') ~ 'h' ~ "now"|date('i')  %}
+{% if endAt is not null %}
+    {% set endDate =  endAt|localizeddate('long', 'none', 'fr_FR')  %}
+{% endif %}
 
 {% block body_text %}
     {% autoescape false %}
@@ -77,11 +79,13 @@
         </p>
     {% endif %}
 
-    <p>
-        {{ 'you-can-modify-or-delete-your-answers-until-date-until-date'|trans({
-            '%questionnaireEndDate%': endDate
-        }, 'CapcoAppBundle') }}
-    </p>
+    {% if endAt is not null %}
+        <p>
+            {{ 'you-can-modify-or-delete-your-answer-until-date-until-date'|trans({
+                '%questionnaireEndDate%': endDate
+            }, 'CapcoAppBundle') }}
+        </p>
+    {% endif %}
 
     <p>
         <a href="{{ stepUrl }}" class="btn">{{ 'access-my-answer'|trans({}, 'CapcoAppBundle') }}</a>

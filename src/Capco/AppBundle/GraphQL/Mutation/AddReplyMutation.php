@@ -101,8 +101,13 @@ class AddReplyMutation implements MutationInterface
         if ($questionnaire->isAcknowledgeReplies() && !$reply->isDraft()) {
             $step = $questionnaire->getStep();
             $project = $step->getProject();
-            $stepUrl = $this->stepUrlResolver->__invoke($questionnaire->getStep());
-            $endAt = $questionnaire->getStep()->getEndAt();
+            if ($step) {
+                $endAt = $step->getEndAt();
+                $stepUrl = $this->stepUrlResolver->__invoke($step);
+            } else {
+                $endAt = null;
+                $stepUrl = '';
+            }
             $this->userNotifier->acknowledgeReply($project, $reply, $endAt, $stepUrl, false);
         }
 
