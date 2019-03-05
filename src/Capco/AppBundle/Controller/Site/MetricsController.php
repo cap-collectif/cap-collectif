@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +50,7 @@ class MetricsController extends Controller
         $argumentCount = $this->get('capco.argument.repository')->countPublished();
         $sourceCount = $this->get('capco.source.repository')->countPublished();
         $proposalCount = $this->get('capco.proposal.repository')->countPublished();
-        $replyCount = $this->get('capco.reply.repository')->countPublished();
+        $replyCount = $this->get(ReplyRepository::class)->countPublished();
 
         $contributionCount =
             $opinionCount +

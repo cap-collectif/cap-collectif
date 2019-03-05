@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -72,7 +73,7 @@ class UserContributionByStepResolver implements ResolverInterface
         }
         if ($step instanceof QuestionnaireStep) {
             $totalCount += $this->container
-                ->get('capco.reply.repository')
+                ->get(ReplyRepository::class)
                 ->countByAuthorAndStep($user, $step);
         }
 

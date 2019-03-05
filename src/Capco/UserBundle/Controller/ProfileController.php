@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -192,7 +193,7 @@ class ProfileController extends Controller
         $versions = $this->get('capco.opinion_version.repository')->getByUser($user);
         $arguments = $this->get('capco.argument.repository')->getByUser($user);
 
-        $replies = $this->get('capco.reply.repository')->findBy([
+        $replies = $this->get(ReplyRepository::class)->findBy([
             'author' => $user,
             'private' => false,
             'draft' => false,
@@ -310,7 +311,7 @@ class ProfileController extends Controller
      */
     public function showRepliesAction(User $user)
     {
-        $replies = $this->get('capco.reply.repository')->findBy([
+        $replies = $this->get(ReplyRepository::class)->findBy([
             'author' => $user,
             'private' => false,
         ]);

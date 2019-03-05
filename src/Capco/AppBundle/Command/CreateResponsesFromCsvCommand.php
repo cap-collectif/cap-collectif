@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
+use Capco\AppBundle\Repository\ReplyRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -70,7 +71,7 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
                 return 1;
             }
             $reply = $this->getContainer()
-                ->get('capco.reply.repository')
+                ->get(ReplyRepository::class)
                 ->findOneBy([
                     'author' => $author,
                     'questionnaire' => $questionnaire,

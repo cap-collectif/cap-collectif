@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -98,10 +99,10 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 break;
             case 'REPLY':
                 $result['values'] = $this->container
-                    ->get('capco.reply.repository')
+                    ->get(ReplyRepository::class)
                     ->findAllByAuthor($user);
                 $result['totalCount'] = $this->container
-                    ->get('capco.reply.repository')
+                    ->get(ReplyRepository::class)
                     ->countAllByAuthor($user);
 
                 return $result;
