@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
+use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -30,74 +31,81 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
 
         switch ($requestedType) {
             case 'OPINION':
-                $result['values'] = $this->container->get(
-                    'capco.opinion.repository'
-                )->findAllByAuthor($user);
-                $result['totalCount'] = $this->container->get(
-                    'capco.opinion.repository'
-                )->countAllByAuthor($user);
+                $result['values'] = $this->container
+                    ->get('capco.opinion.repository')
+                    ->findAllByAuthor($user);
+                $result['totalCount'] = $this->container
+                    ->get('capco.opinion.repository')
+                    ->countAllByAuthor($user);
 
                 return $result;
+
                 break;
             case 'OPINIONVERSION':
-                $result['values'] = $this->container->get(
-                    'capco.opinion_version.repository'
-                )->findAllByAuthor($user);
-                $result['totalCount'] = $this->container->get(
-                    'capco.opinion_version.repository'
-                )->countAllByAuthor($user);
+                $result['values'] = $this->container
+                    ->get('capco.opinion_version.repository')
+                    ->findAllByAuthor($user);
+                $result['totalCount'] = $this->container
+                    ->get('capco.opinion_version.repository')
+                    ->countAllByAuthor($user);
 
                 return $result;
+
                 break;
             case 'COMMENT':
-                $result['values'] = $this->container->get(
-                    'capco.comment.repository'
-                )->findAllByAuthor($user);
-                $result['totalCount'] = $this->container->get(
-                    'capco.comment.repository'
-                )->countAllByAuthor($user);
+                $result['values'] = $this->container
+                    ->get('capco.comment.repository')
+                    ->findAllByAuthor($user);
+                $result['totalCount'] = $this->container
+                    ->get('capco.comment.repository')
+                    ->countAllByAuthor($user);
 
                 return $result;
+
                 break;
             case 'ARGUMENT':
-                $result['values'] = $this->container->get(
-                    'capco.argument.repository'
-                )->findAllByAuthor($user);
-                $result['totalCount'] = $this->container->get(
-                    'capco.argument.repository'
-                )->countAllByAuthor($user);
+                $result['values'] = $this->container
+                    ->get(ArgumentRepository::class)
+                    ->findAllByAuthor($user);
+                $result['totalCount'] = $this->container
+                    ->get(ArgumentRepository::class)
+                    ->countAllByAuthor($user);
 
                 return $result;
+
                 break;
             case 'SOURCE':
-                $result['values'] = $this->container->get(
-                    'capco.source.repository'
-                )->findAllByAuthor($user);
-                $result['totalCount'] = $this->container->get(
-                    'capco.source.repository'
-                )->countAllByAuthor($user);
+                $result['values'] = $this->container
+                    ->get('capco.source.repository')
+                    ->findAllByAuthor($user);
+                $result['totalCount'] = $this->container
+                    ->get('capco.source.repository')
+                    ->countAllByAuthor($user);
 
                 return $result;
+
                 break;
             case 'PROPOSAL':
-                $result['values'] = $this->container->get(
-                    'capco.proposal.repository'
-                )->findAllByAuthor($user);
-                $result['totalCount'] = $this->container->get(
-                    'capco.proposal.repository'
-                )->countAllByAuthor($user);
+                $result['values'] = $this->container
+                    ->get('capco.proposal.repository')
+                    ->findAllByAuthor($user);
+                $result['totalCount'] = $this->container
+                    ->get('capco.proposal.repository')
+                    ->countAllByAuthor($user);
 
                 return $result;
+
                 break;
             case 'REPLY':
-                $result['values'] = $this->container->get(
-                    'capco.reply.repository'
-                )->findAllByAuthor($user);
-                $result['totalCount'] = $this->container->get(
-                    'capco.reply.repository'
-                )->countAllByAuthor($user);
+                $result['values'] = $this->container
+                    ->get('capco.reply.repository')
+                    ->findAllByAuthor($user);
+                $result['totalCount'] = $this->container
+                    ->get('capco.reply.repository')
+                    ->countAllByAuthor($user);
 
                 return $result;
+
                 break;
         }
     }

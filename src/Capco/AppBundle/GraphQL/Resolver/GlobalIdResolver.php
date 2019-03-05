@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Comment;
@@ -171,7 +172,7 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.argument.repository')->find($uuid);
+            $node = $this->container->get(ArgumentRepository::class)->find($uuid);
         }
 
         if (!$node) {
@@ -218,7 +219,7 @@ class GlobalIdResolver
 
         if (!$node) {
             $node = $this->container
-                ->get('capco.argument.repository')
+                ->get(ArgumentRepository::class)
                 ->findOneByModerationToken($token);
         }
 
