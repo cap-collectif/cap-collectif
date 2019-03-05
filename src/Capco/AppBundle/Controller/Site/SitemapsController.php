@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\StepResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -85,10 +86,7 @@ class SitemapsController extends Controller
                 'changefreq' => 'daily',
                 'priority' => '1.0',
             ];
-            foreach (
-                $this->get('capco.blog.post.repository')->findBy(['isPublished' => true])
-                as $post
-            ) {
+            foreach ($this->get(PostRepository::class)->findBy(['isPublished' => true]) as $post) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_blog_show', [
                         'slug' => $post->getSlug(),
@@ -107,10 +105,7 @@ class SitemapsController extends Controller
                 'changefreq' => 'daily',
                 'priority' => '1.0',
             ];
-            foreach (
-                $this->get('capco.event.repository')->findBy(['enabled' => true])
-                as $event
-            ) {
+            foreach ($this->get('capco.event.repository')->findBy(['enabled' => true]) as $event) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_event_show', [
                         'slug' => $event->getSlug(),
@@ -163,7 +158,9 @@ class SitemapsController extends Controller
                         'opinionSlug' => $opinion->getSlug(),
                     ]),
                     'priority' => '2.0',
-                    'lastmod' => $opinion->getUpdatedAt() ? $opinion->getUpdatedAt()->format(\DateTime::W3C) : null,
+                    'lastmod' => $opinion->getUpdatedAt()
+                        ? $opinion->getUpdatedAt()->format(\DateTime::W3C)
+                        : null,
                     'changefreq' => 'hourly',
                 ];
             }

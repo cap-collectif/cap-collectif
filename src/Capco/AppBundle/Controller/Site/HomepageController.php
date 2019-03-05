@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
+use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
@@ -200,7 +201,7 @@ class HomepageController extends Controller
     {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
-        $posts = $this->get('capco.blog.post.repository')->getLast($max, $offset);
+        $posts = $this->get(PostRepository::class)->getLast($max, $offset);
 
         return ['posts' => $posts, 'section' => $section];
     }

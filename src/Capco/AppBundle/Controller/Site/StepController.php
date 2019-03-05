@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -61,12 +62,9 @@ class StepController extends Controller
         }
         $projectSlug = $project->getSlug();
         $events = $this->get(EventResolver::class)->getLastByProject($projectSlug, 2);
-        $posts = $this->get('capco.blog.post.repository')->getLastPublishedByProject(
-            $projectSlug,
-            2
-        );
+        $posts = $this->get(PostRepository::class)->getLastPublishedByProject($projectSlug, 2);
         $nbEvents = $this->get(EventResolver::class)->countEvents(null, null, $projectSlug, null);
-        $nbPosts = $this->get('capco.blog.post.repository')->countSearchResults(null, $projectSlug);
+        $nbPosts = $this->get(PostRepository::class)->countSearchResults(null, $projectSlug);
 
         $projectContributorResolver = $this->get(ProjectContributorResolver::class);
 

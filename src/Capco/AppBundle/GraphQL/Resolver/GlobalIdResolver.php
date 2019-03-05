@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\PostRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Comment;
@@ -73,7 +74,7 @@ class GlobalIdResolver
 
             switch ($decodeGlobalId['type']) {
                 case 'Post':
-                    $node = $this->container->get('capco.blog.post.repository')->find($uuid);
+                    $node = $this->container->get(PostRepository::class)->find($uuid);
 
                     break;
                 case 'Event':

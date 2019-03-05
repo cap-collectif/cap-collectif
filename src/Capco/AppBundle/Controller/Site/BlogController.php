@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\PostSearchType;
+use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -62,7 +63,7 @@ class BlogController extends Controller
 
         $pagination = $this->get(Resolver::class)->getValue('blog.pagination.size');
 
-        $posts = $this->get('capco.blog.post.repository')->getSearchResults(
+        $posts = $this->get(PostRepository::class)->getSearchResults(
             $pagination,
             $page,
             $theme,
@@ -95,7 +96,7 @@ class BlogController extends Controller
      */
     public function showAction(Request $request, $slug)
     {
-        $post = $this->get('capco.blog.post.repository')->getPublishedBySlug($slug);
+        $post = $this->get(PostRepository::class)->getPublishedBySlug($slug);
 
         if (!$post) {
             throw new NotFoundHttpException('Could not find a published article for this slug.');

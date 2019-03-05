@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Form\ProjectSearchType;
 use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\HttpFoundation\Request;
@@ -216,7 +217,7 @@ class ProjectController extends Controller
     {
         $pagination = $this->get(Resolver::class)->getValue('blog.pagination.size');
 
-        $posts = $this->get('capco.blog.post.repository')->getSearchResults(
+        $posts = $this->get(PostRepository::class)->getSearchResults(
             $pagination,
             $page,
             null,
