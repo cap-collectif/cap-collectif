@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
@@ -114,9 +115,7 @@ class GlobalIdResolver
 
                     break;
                 case 'Question':
-                    $node = $this->container
-                        ->get('capco.abstract_question.repository')
-                        ->find($uuid);
+                    $node = $this->container->get(AbstractQuestionRepository::class)->find($uuid);
 
                     break;
                 default:
@@ -180,7 +179,7 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.abstract_question.repository')->find($uuid);
+            $node = $this->container->get(AbstractQuestionRepository::class)->find($uuid);
         }
 
         if (!$node) {
