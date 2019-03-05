@@ -1,7 +1,5 @@
 // @flow
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { graphql, createFragmentContainer } from 'react-relay';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Field, formValueSelector } from 'redux-form';
@@ -15,8 +13,8 @@ type Props = {
 };
 
 type State = {
-  show: boolean
-}
+  show: boolean,
+};
 
 const StatusButton = styled(Button).attrs({
   bsStyle: 'link',
@@ -33,7 +31,7 @@ const StatusButton = styled(Button).attrs({
 `;
 
 const StatusPopover = styled(Popover).attrs({
-  id: 'event-status-filter'
+  id: 'event-status-filter',
 })`
   color: black;
 
@@ -46,28 +44,29 @@ const StatusPopover = styled(Popover).attrs({
   }
 
   .form-group:last-child {
-    &, .radio {
+    &,
+    .radio {
       margin-bottom: 0;
     }
   }
-`
+`;
 
 export class EventListStatusFilter extends React.Component<Props, State> {
   target: any;
-  
+
   constructor(props: Props) {
     super(props);
 
     this.target = React.createRef();
 
     this.state = {
-      show: false
+      show: false,
     };
   }
 
   handleToggle = () => {
     this.setState({ show: !this.state.show });
-  }
+  };
 
   getPopover = () => {
     const { status } = this.props;
@@ -128,19 +127,19 @@ export class EventListStatusFilter extends React.Component<Props, State> {
   render() {
     return (
       <div className="position-relative">
-        <StatusButton onClick={this.handleToggle} ref={this.target}>{this.getButtonMessage()}</StatusButton>
+        <StatusButton onClick={this.handleToggle} ref={this.target} aria-expanded={this.state.show}>
+          {this.getButtonMessage()}
+        </StatusButton>
         <Overlay
           placement="bottom"
           container={this}
           show={this.state.show}
-          target={this.target.current}
-        >
-          {this.getPopover()} 
+          target={this.target.current}>
+          {this.getPopover()}
         </Overlay>
       </div>
     );
   }
-  
 }
 
 const selector = formValueSelector('EventListFilters');

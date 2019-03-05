@@ -1,0 +1,516 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
+<div
+  className="position-relative"
+>
+  <EventListStatusFilter__StatusButton
+    aria-expanded={false}
+    onClick={[Function]}
+  >
+    ( 
+    <FormattedMessage
+      id="search.form.themes.all"
+      values={Object {}}
+    />
+     )
+  </EventListStatusFilter__StatusButton>
+  <Overlay
+    animation={[Function]}
+    container={
+      EventListStatusFilter {
+        "context": Object {},
+        "getButtonMessage": [Function],
+        "getPopover": [Function],
+        "handleToggle": [Function],
+        "props": Object {
+          "status": "all",
+        },
+        "refs": Object {},
+        "setState": [Function],
+        "state": Object {
+          "show": false,
+        },
+        "target": Object {
+          "current": null,
+        },
+        "updater": Updater {
+          "_callbacks": Array [],
+          "_renderer": ReactShallowRenderer {
+            "_context": Object {},
+            "_element": <EventListStatusFilter
+              status="all"
+            />,
+            "_forcedUpdate": false,
+            "_instance": [Circular],
+            "_newState": null,
+            "_rendered": <div
+              className="position-relative"
+            >
+              <EventListStatusFilter__StatusButton
+                aria-expanded={false}
+                onClick={[Function]}
+              >
+                <React.Fragment>
+                  ( 
+                  <FormattedMessage
+                    id="search.form.themes.all"
+                    values={Object {}}
+                  />
+                   )
+                </React.Fragment>
+              </EventListStatusFilter__StatusButton>
+              <Overlay
+                animation={[Function]}
+                container={[Circular]}
+                placement="bottom"
+                rootClose={false}
+                show={false}
+                target={null}
+              >
+                <EventListStatusFilter__StatusPopover>
+                  <form
+                    onChange={[Function]}
+                  >
+                    <Field
+                      component={[Function]}
+                      id="all-events"
+                      name="status"
+                      radioChecked={true}
+                      type="radio"
+                      value="all"
+                    >
+                      <FormattedMessage
+                        id="search.form.themes.all"
+                        values={Object {}}
+                      />
+                    </Field>
+                    <Field
+                      component={[Function]}
+                      id="ongoing-and-future-events"
+                      name="status"
+                      radioChecked={false}
+                      type="radio"
+                      value="ongoing-and-future"
+                    >
+                      <FormattedMessage
+                        id="theme.show.status.future"
+                        values={Object {}}
+                      />
+                    </Field>
+                    <Field
+                      component={[Function]}
+                      id="finished-events"
+                      name="status"
+                      radioChecked={false}
+                      type="radio"
+                      value="finished"
+                    >
+                      <FormattedMessage
+                        id="finished"
+                        values={Object {}}
+                      />
+                    </Field>
+                  </form>
+                </EventListStatusFilter__StatusPopover>
+              </Overlay>
+            </div>,
+            "_rendering": false,
+            "_updater": [Circular],
+          },
+        },
+      }
+    }
+    placement="bottom"
+    rootClose={false}
+    show={false}
+    target={null}
+  >
+    <EventListStatusFilter__StatusPopover>
+      <form
+        onChange={[Function]}
+      >
+        <Field
+          component={[Function]}
+          id="all-events"
+          name="status"
+          radioChecked={true}
+          type="radio"
+          value="all"
+        >
+          <FormattedMessage
+            id="search.form.themes.all"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="ongoing-and-future-events"
+          name="status"
+          radioChecked={false}
+          type="radio"
+          value="ongoing-and-future"
+        >
+          <FormattedMessage
+            id="theme.show.status.future"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="finished-events"
+          name="status"
+          radioChecked={false}
+          type="radio"
+          value="finished"
+        >
+          <FormattedMessage
+            id="finished"
+            values={Object {}}
+          />
+        </Field>
+      </form>
+    </EventListStatusFilter__StatusPopover>
+  </Overlay>
+</div>
+`;
+
+exports[`<EventListStatusFilters /> renders correctly with finished status & true show state 1`] = `
+<div
+  className="position-relative"
+>
+  <EventListStatusFilter__StatusButton
+    aria-expanded={true}
+    onClick={[Function]}
+  >
+    <FormattedMessage
+      id="finished"
+      values={Object {}}
+    />
+  </EventListStatusFilter__StatusButton>
+  <Overlay
+    animation={[Function]}
+    container={
+      EventListStatusFilter {
+        "context": Object {},
+        "getButtonMessage": [Function],
+        "getPopover": [Function],
+        "handleToggle": [Function],
+        "props": Object {
+          "status": "finished",
+        },
+        "refs": Object {},
+        "setState": [Function],
+        "state": Object {
+          "show": true,
+        },
+        "target": Object {
+          "current": null,
+        },
+        "updater": Updater {
+          "_callbacks": Array [],
+          "_renderer": ReactShallowRenderer {
+            "_context": Object {},
+            "_element": <EventListStatusFilter
+              status="finished"
+            />,
+            "_forcedUpdate": false,
+            "_instance": [Circular],
+            "_newState": Object {
+              "show": true,
+            },
+            "_rendered": <div
+              className="position-relative"
+            >
+              <EventListStatusFilter__StatusButton
+                aria-expanded={true}
+                onClick={[Function]}
+              >
+                <FormattedMessage
+                  id="finished"
+                  values={Object {}}
+                />
+              </EventListStatusFilter__StatusButton>
+              <Overlay
+                animation={[Function]}
+                container={[Circular]}
+                placement="bottom"
+                rootClose={false}
+                show={true}
+                target={null}
+              >
+                <EventListStatusFilter__StatusPopover>
+                  <form
+                    onChange={[Function]}
+                  >
+                    <Field
+                      component={[Function]}
+                      id="all-events"
+                      name="status"
+                      radioChecked={false}
+                      type="radio"
+                      value="all"
+                    >
+                      <FormattedMessage
+                        id="search.form.themes.all"
+                        values={Object {}}
+                      />
+                    </Field>
+                    <Field
+                      component={[Function]}
+                      id="ongoing-and-future-events"
+                      name="status"
+                      radioChecked={false}
+                      type="radio"
+                      value="ongoing-and-future"
+                    >
+                      <FormattedMessage
+                        id="theme.show.status.future"
+                        values={Object {}}
+                      />
+                    </Field>
+                    <Field
+                      component={[Function]}
+                      id="finished-events"
+                      name="status"
+                      radioChecked={true}
+                      type="radio"
+                      value="finished"
+                    >
+                      <FormattedMessage
+                        id="finished"
+                        values={Object {}}
+                      />
+                    </Field>
+                  </form>
+                </EventListStatusFilter__StatusPopover>
+              </Overlay>
+            </div>,
+            "_rendering": false,
+            "_updater": [Circular],
+          },
+        },
+      }
+    }
+    placement="bottom"
+    rootClose={false}
+    show={true}
+    target={null}
+  >
+    <EventListStatusFilter__StatusPopover>
+      <form
+        onChange={[Function]}
+      >
+        <Field
+          component={[Function]}
+          id="all-events"
+          name="status"
+          radioChecked={false}
+          type="radio"
+          value="all"
+        >
+          <FormattedMessage
+            id="search.form.themes.all"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="ongoing-and-future-events"
+          name="status"
+          radioChecked={false}
+          type="radio"
+          value="ongoing-and-future"
+        >
+          <FormattedMessage
+            id="theme.show.status.future"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="finished-events"
+          name="status"
+          radioChecked={true}
+          type="radio"
+          value="finished"
+        >
+          <FormattedMessage
+            id="finished"
+            values={Object {}}
+          />
+        </Field>
+      </form>
+    </EventListStatusFilter__StatusPopover>
+  </Overlay>
+</div>
+`;
+
+exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future status 1`] = `
+<div
+  className="position-relative"
+>
+  <EventListStatusFilter__StatusButton
+    aria-expanded={false}
+    onClick={[Function]}
+  >
+    <FormattedMessage
+      id="theme.show.status.future"
+      values={Object {}}
+    />
+  </EventListStatusFilter__StatusButton>
+  <Overlay
+    animation={[Function]}
+    container={
+      EventListStatusFilter {
+        "context": Object {},
+        "getButtonMessage": [Function],
+        "getPopover": [Function],
+        "handleToggle": [Function],
+        "props": Object {
+          "status": "ongoing-and-future",
+        },
+        "refs": Object {},
+        "setState": [Function],
+        "state": Object {
+          "show": false,
+        },
+        "target": Object {
+          "current": null,
+        },
+        "updater": Updater {
+          "_callbacks": Array [],
+          "_renderer": ReactShallowRenderer {
+            "_context": Object {},
+            "_element": <EventListStatusFilter
+              status="ongoing-and-future"
+            />,
+            "_forcedUpdate": false,
+            "_instance": [Circular],
+            "_newState": null,
+            "_rendered": <div
+              className="position-relative"
+            >
+              <EventListStatusFilter__StatusButton
+                aria-expanded={false}
+                onClick={[Function]}
+              >
+                <FormattedMessage
+                  id="theme.show.status.future"
+                  values={Object {}}
+                />
+              </EventListStatusFilter__StatusButton>
+              <Overlay
+                animation={[Function]}
+                container={[Circular]}
+                placement="bottom"
+                rootClose={false}
+                show={false}
+                target={null}
+              >
+                <EventListStatusFilter__StatusPopover>
+                  <form
+                    onChange={[Function]}
+                  >
+                    <Field
+                      component={[Function]}
+                      id="all-events"
+                      name="status"
+                      radioChecked={false}
+                      type="radio"
+                      value="all"
+                    >
+                      <FormattedMessage
+                        id="search.form.themes.all"
+                        values={Object {}}
+                      />
+                    </Field>
+                    <Field
+                      component={[Function]}
+                      id="ongoing-and-future-events"
+                      name="status"
+                      radioChecked={true}
+                      type="radio"
+                      value="ongoing-and-future"
+                    >
+                      <FormattedMessage
+                        id="theme.show.status.future"
+                        values={Object {}}
+                      />
+                    </Field>
+                    <Field
+                      component={[Function]}
+                      id="finished-events"
+                      name="status"
+                      radioChecked={false}
+                      type="radio"
+                      value="finished"
+                    >
+                      <FormattedMessage
+                        id="finished"
+                        values={Object {}}
+                      />
+                    </Field>
+                  </form>
+                </EventListStatusFilter__StatusPopover>
+              </Overlay>
+            </div>,
+            "_rendering": false,
+            "_updater": [Circular],
+          },
+        },
+      }
+    }
+    placement="bottom"
+    rootClose={false}
+    show={false}
+    target={null}
+  >
+    <EventListStatusFilter__StatusPopover>
+      <form
+        onChange={[Function]}
+      >
+        <Field
+          component={[Function]}
+          id="all-events"
+          name="status"
+          radioChecked={false}
+          type="radio"
+          value="all"
+        >
+          <FormattedMessage
+            id="search.form.themes.all"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="ongoing-and-future-events"
+          name="status"
+          radioChecked={true}
+          type="radio"
+          value="ongoing-and-future"
+        >
+          <FormattedMessage
+            id="theme.show.status.future"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="finished-events"
+          name="status"
+          radioChecked={false}
+          type="radio"
+          value="finished"
+        >
+          <FormattedMessage
+            id="finished"
+            values={Object {}}
+          />
+        </Field>
+      </form>
+    </EventListStatusFilter__StatusPopover>
+  </Overlay>
+</div>
+`;

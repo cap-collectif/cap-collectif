@@ -11,7 +11,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
     sm={4}
     xsHidden={true}
   >
-    <ForwardRef(Relay(Connect(EventStatusFilter)))
+    <ForwardRef(Relay(EventListCounter))
       query={
         Object {
           "$fragmentRefs": null,
@@ -19,6 +19,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
         }
       }
     />
+    <Connect(EventListStatusFilter) />
   </EventListFilters__StatusWrapper>
   <EventListFilters__FiltersWrapper
     id="event-filters"
@@ -174,7 +175,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
     sm={4}
     xsHidden={true}
   >
-    <ForwardRef(Relay(Connect(EventStatusFilter)))
+    <ForwardRef(Relay(EventListCounter))
       query={
         Object {
           "$fragmentRefs": null,
@@ -182,6 +183,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
         }
       }
     />
+    <Connect(EventListStatusFilter) />
   </EventListFilters__StatusWrapper>
   <EventListFilters__FiltersWrapper
     id="event-filters"

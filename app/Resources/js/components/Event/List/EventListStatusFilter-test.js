@@ -2,54 +2,22 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { EventStatusFilter } from './EventStatusFilter';
-import { $refType } from '../../../mocks';
+import { EventListStatusFilter } from './EventListStatusFilter';
 
-const defaultQuery = {
-  $refType,
-  events: {
-    totalCount: 2,
-    edges: [
-      {
-        node: {
-          id: '1',
-        },
-      },
-      {
-        node: {
-          id: '2',
-        },
-      },
-    ],
-  },
-  eventsWithoutFilters: {
-    totalCount: 2,
-  },
-};
-const defaultProps = {
-  query: {
-    ...defaultQuery,
-  },
-  status: 'finished',
-};
-
-describe('<EventListFilters />', () => {
-  it('renders correctly', () => {
-    const wrapper = shallow(<EventStatusFilter {...defaultProps} />);
+describe('<EventListStatusFilters />', () => {
+  it('renders correctly with finished status & true show state', () => {
+    const wrapper = shallow(<EventListStatusFilter status="finished" />);
+    wrapper.setState({ show: true });
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly when filtered projects', () => {
-    const props = {
-      query: {
-        ...defaultQuery,
-        eventsWithoutFilters: {
-          totalCount: 10,
-        },
-      },
-      status: 'ongoing-and-future',
-    };
-    const wrapper = shallow(<EventStatusFilter {...props} />);
+  it('renders correctly with ongoing-and-future status', () => {
+    const wrapper = shallow(<EventListStatusFilter status="ongoing-and-future" />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly with all status', () => {
+    const wrapper = shallow(<EventListStatusFilter status="all" />);
     expect(wrapper).toMatchSnapshot();
   });
 });
