@@ -63,7 +63,6 @@ security:
       logout:
         path: /logout
         success_handler: Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler
-        logout_on_user_change: true
 
   access_control:
     - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
