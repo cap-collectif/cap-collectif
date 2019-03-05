@@ -35,49 +35,46 @@ sonata_admin:
     groups:
       admin.group.moderation:
         items:
-          - capco_admin.admin.reporting
-          - capco_admin.admin.proposal
-          - capco_admin.admin.opinion
-          - capco_admin.admin.reply
-          - capco_admin.admin.opinion_version
-          - capco_admin.admin.argument
-          - capco_admin.admin.source
-          - capco_admin.admin.comment
+          - Capco\AdminBundle\Admin\ReportingAdmin
+          - Capco\AdminBundle\Admin\ProposalAdmin
+          - Capco\AdminBundle\Admin\OpinionAdmin
+          - Capco\AdminBundle\Admin\ReplyAdmin
+          - Capco\AdminBundle\Admin\OpinionVersionAdmin
+          - Capco\AdminBundle\Admin\ArgumentAdmin
+          - Capco\AdminBundle\Admin\SourceAdmin
+          - Capco\AdminBundle\Admin\CommentAdmin
       admin.group.content:
         items:
-          - capco_admin.admin.highlighted
-          - capco_admin.admin.theme
-          - capco_admin.admin.post
-          - capco_admin.admin.event
-          - capco_admin.admin.video
-          - capco_admin.admin.page
+          - Capco\AdminBundle\Admin\HighlightedContentAdmin
+          - Capco\AdminBundle\Admin\ThemeAdmin
+          - Capco\AdminBundle\Admin\PostAdmin
+          - Capco\AdminBundle\Admin\EventAdmin
+          - Capco\AdminBundle\Admin\VideoAdmin
+          - Capco\AdminBundle\Admin\PageAdmin
           - sonata.media.admin.media
       admin.group.project:
         items:
-          - capco_admin.admin.project
-          - capco_admin.admin.appendix_type
-          - capco_admin.admin.category
-          - capco_admin.admin.consultation_step_type
-          - capco_admin.admin.proposal_form
-          - capco_admin.admin.questionnaire
-          - capco_admin.admin.project_type
+          - Capco\AdminBundle\Admin\ProjectAdmin
+          - Capco\AdminBundle\Admin\AppendixTypeAdmin
+          - Capco\AdminBundle\Admin\CategoryAdmin
+          - Capco\AdminBundle\Admin\ConsultationStepTypeAdmin
+          - Capco\AdminBundle\Admin\ProposalFormAdmin
+          - Capco\AdminBundle\Admin\QuestionnaireAdmin
+          - Capco\AdminBundle\Admin\ProjectTypeAdmin
       sonata.admin.group.user:
         items:
           - sonata.user.admin.user
-          - capco_admin.admin.group
-          - capco_admin.admin.user_type
-          - capco_admin.admin.newsletter_subscription
+          - Capco\AdminBundle\Admin\GroupAdmin
+          - Capco\AdminBundle\Admin\UserTypeAdmin
+          - Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin
       admin.group.parameters:
         items:
-          - capco_admin.admin.menu_item
-          - capco_admin.admin.social_network
-          - capco_admin.admin.footer_social_network
-          - capco_admin.admin.project_district
-          - capco_admin.admin.map
-          - capco_admin.admin.site_favicon
+          - Capco\AdminBundle\Admin\MenuItemAdmin
+          - Capco\AdminBundle\Admin\SocialNetworkAdmin
+          - Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
       admin.group.pages:
         items:
-          - capco_admin.admin.section
+          - Capco\AdminBundle\Admin\SectionAdmin
 
 sonata_doctrine_orm_admin:
   templates:
@@ -101,8 +98,8 @@ sonata_block:
     sonata.media.block.media: ~
     sonata.media.block.gallery: ~
     sonata.media.block.feature_media: ~
-    capco_admin.blog.block.recent_posts: ~
-    capco_admin.block.recent_contributions: ~
+    Capco\AdminBundle\Block\RecentPostBlockService: ~
+    Capco\AdminBundle\Block\RecentContributionsBlockService: ~
     Capco\AdminBundle\Block\HelpBlockService: ~
 
 sonata_classification:
@@ -116,7 +113,7 @@ sonata_classification:
 sonata_intl:
   timezone:
     detectors:
-      - capco.intl.timezone_detector.global
+      - Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector
     locales:
       default: Europe/Paris
       fr-FR: Europe/Paris
