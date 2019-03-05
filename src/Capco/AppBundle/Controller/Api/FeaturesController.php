@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Form\ApiToggleType;
@@ -119,7 +120,7 @@ class FeaturesController extends FOSRestController
         $orderedQuestions = json_decode($request->getContent(), true)['questions'];
         $registrationForm = $this->get(RegistrationFormRepository::class)->findCurrent();
         $absQuestions = $this->get(
-            'capco.questionnaire_abstract_question.repository'
+            QuestionnaireAbstractQuestionRepository::class
         )->findByRegistrationForm($registrationForm);
 
         foreach ($orderedQuestions as $key => $orderQuestion) {
