@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 class OpinionUrlResolver implements ResolverInterface
 {
@@ -17,7 +17,7 @@ class OpinionUrlResolver implements ResolverInterface
 
     public function __construct(
         ConsultationStepRepository $consultationStepRepository,
-        Router $router,
+        RouterInterface $router,
         LoggerInterface $logger
     ) {
         $this->consultationStepRepository = $consultationStepRepository;

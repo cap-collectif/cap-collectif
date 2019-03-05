@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Security\Http\Logout;
 
 use Capco\AppBundle\Toggle\Manager;
@@ -7,7 +8,7 @@ use SimpleSAML\Auth\Simple;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
 class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
@@ -19,7 +20,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 
     public function __construct(
         Simple $samlAuth,
-        Router $router,
+        RouterInterface $router,
         Manager $toggleManager,
         OpenAmClient $client
     ) {
@@ -31,7 +32,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 
     public function onLogoutSuccess(Request $request)
     {
-        /* @var Session $session */
+        // @var Session $session
         $deleteType = $request->get('deleteType');
         $returnTo =
             'SOFT' === $deleteType || 'HARD' === $deleteType

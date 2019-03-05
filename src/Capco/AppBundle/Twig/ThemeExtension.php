@@ -7,7 +7,7 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Capco\AppBundle\Cache\RedisCache;
 
@@ -30,7 +30,7 @@ class ThemeExtension extends \Twig_Extension
         ProjectRepository $projectRepo,
         \Twig_Extensions_Extension_Intl $twig,
         SerializerInterface $serializer,
-        Router $router,
+        RouterInterface $router,
         StepHelper $stepHelper,
         UrlResolver $urlResolver,
         RedisCache $cache
