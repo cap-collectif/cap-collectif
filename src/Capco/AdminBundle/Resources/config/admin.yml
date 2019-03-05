@@ -220,6 +220,30 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
+  Capco\AdminBundle\Admin\MapTokenAdmin:
+    arguments: [~, Capco\AppBundle\Entity\MapToken, SonataAdminBundle:CRUD]
+    tags:
+      - {
+          name: sonata.admin,
+          manager_type: orm,
+          group: admin.group.parameters,
+          label: admin-settings-map,
+        }
+    calls:
+      - [setTranslationDomain, [CapcoAppBundle]]
+
+  Capco\AdminBundle\Admin\ProjectDistrictAdmin:
+    arguments: [~, Capco\AppBundle\Entity\District\ProjectDistrict, SonataAdminBundle:CRUD]
+    tags:
+      - {
+          name: sonata.admin,
+          manager_type: orm,
+          group: admin.group.parameters,
+          label: admin.label.project_district,
+        }
+    calls:
+      - [setTranslationDomain, [CapcoAppBundle]]
+
   Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin:
     arguments: [~, Capco\AppBundle\Entity\NewsletterSubscription, SonataAdminBundle:CRUD]
     tags:
@@ -332,6 +356,11 @@ services:
         }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
+
+  Capco\AdminBundle\Admin\SiteFaviconAdmin:
+    arguments: [~, ~, CapcoAdminBundle:SiteFavicon]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: website-icon }
 
   Capco\AdminBundle\Admin\SocialNetworkAdmin:
     arguments: [~, Capco\AppBundle\Entity\SocialNetwork, SonataAdminBundle:CRUD]
