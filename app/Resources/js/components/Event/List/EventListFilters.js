@@ -86,7 +86,7 @@ const StatusWrapper = styled(Col)`
   align-items: center;
 `;
 const FiltersWrapper = styled(Col)`
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 991px) {
     display: flex;
     justify-content: space-between;
   }
@@ -120,7 +120,7 @@ export class EventListFilters extends React.Component<Props, State> {
     const filters = [];
 
     filters.push(
-      <div className="visible-xs-block">
+      <div className="visible-xs-block visible-sm-block">
         <Field
           clearable
           id="event-search-input"
@@ -242,17 +242,14 @@ export class EventListFilters extends React.Component<Props, State> {
       }
     };
 
-    // console.log(features.display_map);
-    // console.warn(addToggleViewButton);
-
     return (
       <Row className="align-items-center d-flex flex-wrap">
-        <StatusWrapper sm={4} md={5} xsHidden>
+        <StatusWrapper xs={4} md={5} xsHidden smHidden>
           {/* $FlowFixMe $refType */}
           <EventListCounter query={query} />
           <EventListStatusFilter />
         </StatusWrapper>
-        <FiltersWrapper xs={12} sm={4} id="event-filters">
+        <FiltersWrapper xs={12} md={4} id="event-filters">
           <div className="pull-right">
             <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
           </div>
@@ -266,7 +263,7 @@ export class EventListFilters extends React.Component<Props, State> {
             />
           ) : null}
         </FiltersWrapper>
-        <Col sm={4} md={3} xsHidden>
+        <Col xs={4} md={3} xsHidden smHidden>
           <form
             onSubmit={e => {
               e.preventDefault();

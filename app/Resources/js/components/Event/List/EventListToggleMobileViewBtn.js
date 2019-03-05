@@ -25,7 +25,7 @@ export class EventListToggleMobileViewBtn extends React.Component<Props> {
       <div
         id="event-view-toggle"
         role="group"
-        className="btn-group visible-xs-inline-block"
+        className="btn-group visible-xs-inline-block visible-sm-inline-block"
         aria-label="Event view">
         <Button
           className="btn-center"

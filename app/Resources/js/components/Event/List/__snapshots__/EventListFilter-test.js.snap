@@ -8,7 +8,8 @@ exports[`<EventListFilters /> renders correctly 1`] = `
 >
   <EventListFilters__StatusWrapper
     md={5}
-    sm={4}
+    smHidden={true}
+    xs={4}
     xsHidden={true}
   >
     <ForwardRef(Relay(EventListCounter))
@@ -23,7 +24,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
   </EventListFilters__StatusWrapper>
   <EventListFilters__FiltersWrapper
     id="event-filters"
-    sm={4}
+    md={4}
     xs={12}
   >
     <div
@@ -49,7 +50,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
               >
                 <div>
                   <div
-                    className="visible-xs-block"
+                    className="visible-xs-block visible-sm-block"
                   >
                     <Field
                       addonAfter={
@@ -140,7 +141,8 @@ exports[`<EventListFilters /> renders correctly 1`] = `
     bsClass="col"
     componentClass="div"
     md={3}
-    sm={4}
+    smHidden={true}
+    xs={4}
     xsHidden={true}
   >
     <form
@@ -172,7 +174,8 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
 >
   <EventListFilters__StatusWrapper
     md={5}
-    sm={4}
+    smHidden={true}
+    xs={4}
     xsHidden={true}
   >
     <ForwardRef(Relay(EventListCounter))
@@ -187,7 +190,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
   </EventListFilters__StatusWrapper>
   <EventListFilters__FiltersWrapper
     id="event-filters"
-    sm={4}
+    md={4}
     xs={12}
   >
     <div
@@ -213,7 +216,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
               >
                 <div>
                   <div
-                    className="visible-xs-block"
+                    className="visible-xs-block visible-sm-block"
                   >
                     <Field
                       addonAfter={
@@ -299,7 +302,8 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
     bsClass="col"
     componentClass="div"
     md={3}
-    sm={4}
+    smHidden={true}
+    xs={4}
     xsHidden={true}
   >
     <form

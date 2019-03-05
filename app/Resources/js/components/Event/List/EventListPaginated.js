@@ -33,7 +33,7 @@ const MapContainer = styled(Col)`
   top: 150px;
   position: sticky;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 991px) {
     top: 0;
   }
 `;
@@ -51,14 +51,14 @@ export const EventListPaginated = (props: Props) => {
 
   const shouldRenderToggleListOrMap = (component: 'list' | 'map'): boolean => {
     if (component === 'list') {
-      if (screenWidth > 767) {
+      if (screenWidth > 991) {
         return true;
       }
       return isMobileListView;
     }
 
     if (component === 'map' && features.display_map) {
-      if (screenWidth > 767) {
+      if (screenWidth > 991) {
         return true;
       }
       return !isMobileListView;
@@ -76,51 +76,49 @@ export const EventListPaginated = (props: Props) => {
   }
 
   return (
-    <React.Fragment>
-      <Row>
-        {shouldRenderToggleListOrMap('list') ? (
-          <Col id="event-list" sm={features.display_map ? 8 : 12} xs={12}>
-            {query.events.edges &&
-              query.events.edges
-                .filter(Boolean)
-                .map(edge => edge.node)
-                .filter(Boolean)
-                .map((node, key) => (
-                  // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
-                  <div key={key} onMouseOver={() => (screenWidth > 767 ? onFocus(node.id) : null)}>
-                    <EventPreview
-                      // $FlowFixMe eslint
-                      isHighlighted={eventSelected && eventSelected === node.id}
-                      event={node}
-                    />
-                  </div>
-                ))}
-            {relay.hasMore() && (
-              <Row>
-                <div className="text-center">
-                  <Button
-                    disabled={loading}
-                    onClick={() => {
-                      setLoading(true);
-                      relay.loadMore(EVENTS_PAGINATION, () => {
-                        setLoading(false);
-                      });
-                    }}>
-                    <FormattedMessage id={loading ? 'global.loading' : 'global.more'} />
-                  </Button>
+    <Row>
+      {shouldRenderToggleListOrMap('list') ? (
+        <Col id="event-list" md={features.display_map ? 8 : 12} xs={12}>
+          {query.events.edges &&
+            query.events.edges
+              .filter(Boolean)
+              .map(edge => edge.node)
+              .filter(Boolean)
+              .map((node, key) => (
+                // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
+                <div key={key} onMouseOver={() => (screenWidth > 991 ? onFocus(node.id) : null)}>
+                  <EventPreview
+                    // $FlowFixMe eslint
+                    isHighlighted={eventSelected && eventSelected === node.id}
+                    event={node}
+                  />
                 </div>
-              </Row>
-            )}
-          </Col>
-        ) : null}
-        {shouldRenderToggleListOrMap('map') ? (
-          <MapContainer sm={4} xs={12} aria-hidden="true">
-            {/* $FlowFixMe relayProps */}
-            <EventMap query={query} />
-          </MapContainer>
-        ) : null}
-      </Row>
-    </React.Fragment>
+              ))}
+          {relay.hasMore() && (
+            <Row>
+              <div className="text-center">
+                <Button
+                  disabled={loading}
+                  onClick={() => {
+                    setLoading(true);
+                    relay.loadMore(EVENTS_PAGINATION, () => {
+                      setLoading(false);
+                    });
+                  }}>
+                  <FormattedMessage id={loading ? 'global.loading' : 'global.more'} />
+                </Button>
+              </div>
+            </Row>
+          )}
+        </Col>
+      ) : null}
+      {shouldRenderToggleListOrMap('map') ? (
+        <MapContainer md={4} xs={12} aria-hidden="true">
+          {/* $FlowFixMe relayProps */}
+          <EventMap query={query} />
+        </MapContainer>
+      ) : null}
+    </Row>
   );
 };
 

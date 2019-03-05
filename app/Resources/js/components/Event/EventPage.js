@@ -41,6 +41,7 @@ const EventFiltersWrapper = styled.div.attrs({
   }
 
   @media screen and (max-width: 991px) {
+    margin-top: 0;
   }
 `;
 
@@ -109,7 +110,7 @@ export class EventPage extends React.Component<Props> {
                   <section className="section--alt">
                     <div className="container">
                       {this.props.eventPageBody && (
-                        <p className="hidden-xs">
+                        <p className="hidden-xs hidden-sm">
                           <FormattedHTMLMessage id={this.props.eventPageBody} />
                         </p>
                       )}
@@ -117,12 +118,12 @@ export class EventPage extends React.Component<Props> {
                         <EventListFilters query={props} addToggleViewButton />
                       </EventFiltersWrapper>
                       {this.props.eventPageBody && (
-                        <>
-                          <p className="visible-xs-block">
+                        <div className="mb-30 visible-xs-block visible-sm-block">
+                          <p>
                             <FormattedHTMLMessage id={this.props.eventPageBody} />
                           </p>
                           {/* display status filter */}
-                        </>
+                        </div>
                       )}
                       <div id="event-page-rendered">
                         {/* $FlowFixMe */}
