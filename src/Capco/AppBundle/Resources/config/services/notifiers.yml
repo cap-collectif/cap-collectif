@@ -11,8 +11,7 @@ services:
   Capco\AppBundle\Notifier\ProposalNotifier:
     public: true
 
-  capco.fos_notifier:
-    class: Capco\AppBundle\Notifier\FOSNotifier
+  Capco\AppBundle\Notifier\FOSNotifier:
     public: true
 
   capco.contact_notifier:
