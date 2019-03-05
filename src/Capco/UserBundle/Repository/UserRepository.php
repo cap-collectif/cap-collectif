@@ -790,14 +790,11 @@ class UserRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
-    /**
-     * Get search results.
-     */
     public function getSearchResults(
-        $nbByPage = 8,
-        $page = 1,
-        $sort = null,
-        $type = null
+        int $nbByPage = 8,
+        int $page = 1,
+        ?string $sort = null,
+        ?string $type = null
     ): Paginator {
         if ($page < 1) {
             throw new \InvalidArgumentException(
@@ -817,7 +814,15 @@ class UserRepository extends EntityRepository
         if (!$sort || 'activity' === $sort) {
             $qb
                 ->addSelect(
-                    '(u.proposalsCount + u.proposalCommentsCount + u.opinionsCount + u.opinionVersionsCount + u.argumentsCount + u.sourcesCount + u.postCommentsCount + u.eventCommentsCount) AS HIDDEN contributionsCount'
+                    '(
+                    u.proposalsCount + 
+                    u.proposalCommentsCount + 
+                    u.opinionsCount + 
+                    u.opinionVersionsCount + 
+                    u.argumentsCount + 
+                    u.sourcesCount + 
+                    u.postCommentsCount 
+                    ) AS HIDDEN contributionsCount'
                 )
                 ->addOrderBy('contributionsCount', 'DESC');
         } else {

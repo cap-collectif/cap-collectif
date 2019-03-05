@@ -21,7 +21,6 @@ class MembersController extends Controller
     public function indexAction(Request $request, $page, $userType = null, $sort = null)
     {
         $currentUrl = $this->generateUrl('app_members');
-        $em = $this->get('doctrine.orm.entity_manager');
 
         $form = $this->createForm(MemberSearchType::class, null, [
             'action' => $currentUrl,
@@ -53,7 +52,7 @@ class MembersController extends Controller
 
         $pagination = $this->get(Resolver::class)->getValue('members.pagination.size');
 
-        $sort = null === $sort ? 'activity' : $sort;
+        $sort = $sort ?? 'activity';
         $members = $this->get('capco.user.repository')->getSearchResults(
             $pagination,
             $page,
