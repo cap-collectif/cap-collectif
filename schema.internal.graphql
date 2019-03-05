@@ -6138,7 +6138,7 @@ type User implements Node & UniformResourceLocatable {
   commentVotesCount: Int!
   votesCount: Int!
 
-  # Previsionnal number of contributions who will be totally deleted if the user chose to delete his account.
+  # Provisional number of contributions who will be totally deleted if the user chose to delete his account.
   contributionsToDeleteCount: Int!
   sourcesCount: Int!
   repliesCount: Int!
