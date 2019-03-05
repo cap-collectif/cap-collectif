@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
@@ -18,6 +19,7 @@ final class UserNotifier extends BaseNotifier
         Reply $reply,
         ?\DateTime $endAt,
         string $stepUrl,
+        AbstractStep $step,
         bool $isUpdated = false
     ): void {
         $this->mailer->sendMessage(
@@ -27,6 +29,7 @@ final class UserNotifier extends BaseNotifier
                 $endAt,
                 $stepUrl,
                 $isUpdated,
+                $step,
                 $reply->getAuthor()->getEmail()
             )
         );

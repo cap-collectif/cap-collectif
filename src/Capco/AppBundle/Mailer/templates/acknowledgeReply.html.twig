@@ -70,7 +70,7 @@
             {{ 'you-have-changed-your-answer-to-the-question'|trans({
                 '%answerChangeDate%': nowDate,
                 '%answerChangeTime%': nowHour,
-                '%surveyTitle%': reply.questionnaire.title
+                '%surveyTitle%': step.title
             }, 'CapcoAppBundle') }}
         </p>
     {% else %}
@@ -78,7 +78,7 @@
             {{ 'your-answer-to-the-survey-have-been-registered-on-date-at-time'|trans({
                 '%questionnaireDate%': nowDate,
                 '%questionnaireTime%': nowHour,
-                '%surveyName%': reply.questionnaire.title
+                '%surveyName%': step.title
             }, 'CapcoAppBundle') }}
         </p>
     {% endif %}

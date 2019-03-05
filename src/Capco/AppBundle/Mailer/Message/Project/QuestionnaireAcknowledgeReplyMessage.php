@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Mailer\Message\Project;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Mailer\Message\ExternalMessage;
 
 final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
@@ -14,6 +15,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
         ?\DateTime $endAt,
         string $stepUrl,
         bool $isUpdated,
+        AbstractStep $step,
         string $recipentEmail,
         string $recipientName = null
     ): self {
@@ -23,7 +25,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
             'reply.acknowledgement.subject',
             static::getMySubjectVars(),
             '@CapcoMail/acknowledgeReply.html.twig',
-            static::getMyTemplateVars($project, $reply, $endAt, $stepUrl, $isUpdated)
+            static::getMyTemplateVars($project, $reply, $endAt, $stepUrl, $step, $isUpdated)
         );
     }
 
@@ -32,6 +34,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
         Reply $reply,
         ?\DateTime $endAt,
         string $stepUrl,
+        AbstractStep $step,
         bool $isUpdated
     ): array {
         return [
@@ -39,6 +42,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
             'reply' => $reply,
             'endAt' => $endAt,
             'stepUrl' => $stepUrl,
+            'step' => $step,
             'isUpdated' => $isUpdated,
         ];
     }
