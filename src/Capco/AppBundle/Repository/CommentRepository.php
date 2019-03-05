@@ -135,15 +135,14 @@ class CommentRepository extends EntityRepository
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('sclr', 'sclr');
 
-        $query = $this->createNativeNamedQuery('eventCommentsCount');
-        $query
-            ->setResultSetMapping($rsm)
-            ->setSQL(
+        $query = $this->getEntityManager()
+            ->createNativeQuery(
                 '
             SELECT count(c.id) AS sclr FROM comment c USE INDEX (comment_idx_published_id_id)
             WHERE c.author_id = :userId AND c.published = 1 AND e.is_enabled = 1
             INNER JOIN event e ON c.event_id = e.id
-            GROUP BY c.author_id ORDER BY NULL'
+            GROUP BY c.author_id ORDER BY NULL',
+                $rsm
             )
             ->setParameter('userId', $user->getId());
 
