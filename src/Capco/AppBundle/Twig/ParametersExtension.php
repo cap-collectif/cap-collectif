@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Twig;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\SiteColor\Resolver as SiteColorResolver;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\TranslatorInterface;
 use Capco\AppBundle\Cache\RedisCache;
 
@@ -23,7 +23,7 @@ class ParametersExtension extends \Twig_Extension
         Manager $manager,
         Resolver $siteParameterResolver,
         TranslatorInterface $translator,
-        RouterInterface $router,
+        Router $router,
         SiteColorResolver $siteColorResolver,
         RedisCache $cache
     ) {

@@ -19,7 +19,7 @@ use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateAdminMessage;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ProposalNotifier extends BaseNotifier
@@ -38,7 +38,7 @@ class ProposalNotifier extends BaseNotifier
         ProposalAdminUrlResolver $proposalAdminUrlResolver,
         ProposalUrlResolver $proposalUrlResolver,
         UrlResolver $urlResolver,
-        RouterInterface $router,
+        Router $router,
         TranslatorInterface $translator,
         UserUrlResolver $userUrlResolver
     ) {

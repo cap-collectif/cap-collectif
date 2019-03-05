@@ -13,7 +13,7 @@ use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ConsultationStepExtractor
@@ -39,7 +39,7 @@ class ConsultationStepExtractor
     public function __construct(
         EntityManagerInterface $em,
         TranslatorInterface $translator,
-        RouterInterface $router,
+        Router $router,
         OpinionTypesResolver $opinionTypeResolver,
         UrlResolver $urlResolver
     ) {
@@ -269,8 +269,10 @@ class ConsultationStepExtractor
     /**
      * Get or create a new folder from a provided parent.
      */
-    public function createFolderInElement(string $label, SynthesisElement $parent): SynthesisElement
-    {
+    public function createFolderInElement(
+        string $label,
+        SynthesisElement $parent
+    ): SynthesisElement {
         $label = $this->translator->trans($label, [], 'CapcoAppBundle');
 
         // Check if folder already exists
@@ -352,10 +354,9 @@ class ConsultationStepExtractor
      */
     public function setDataFromContribution(
         SynthesisElement $element,
-        // Contribution|OpinionType
+        /*Contribution|OpinionType*/
         $contribution
-    ): SynthesisElement
-    {
+    ): SynthesisElement {
         if ($contribution instanceof OpinionType) {
             return $this->setDataFromOpinionType($element, $contribution);
         }
@@ -511,8 +512,10 @@ class ConsultationStepExtractor
 
     public function isElementExisting(SynthesisElement $element, $object): bool
     {
-        return $element->getLinkedDataClass() === \get_class($object) &&
-            (string) $element->getLinkedDataId() === (string) $object->getId();
+        return (
+            $element->getLinkedDataClass() === \get_class($object) &&
+            (string) $element->getLinkedDataId() === (string) $object->getId()
+        );
     }
 
     public function isElementOutdated(SynthesisElement $element, $object): bool

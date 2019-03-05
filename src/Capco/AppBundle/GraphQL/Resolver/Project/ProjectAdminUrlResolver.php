@@ -1,17 +1,18 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 
 class ProjectAdminUrlResolver implements ResolverInterface
 {
     protected $router;
 
-    public function __construct(RouterInterface $router)
+    public function __construct(Router $router)
     {
         $this->router = $router;
     }

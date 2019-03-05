@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Form\ApiSourceType;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -35,7 +35,7 @@ class AddSourceMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
+        FormFactory $formFactory,
         OpinionRepository $opinionRepo,
         OpinionVersionRepository $versionRepo,
         RedisStorageHelper $redisStorage,

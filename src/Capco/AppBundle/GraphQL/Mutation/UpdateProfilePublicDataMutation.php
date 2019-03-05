@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormFactory;
 
 class UpdateProfilePublicDataMutation extends BaseUpdateProfile
 {
@@ -18,7 +18,7 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
+        FormFactory $formFactory,
         LoggerInterface $logger,
         UserRepository $userRepository,
         Manager $toggleManager

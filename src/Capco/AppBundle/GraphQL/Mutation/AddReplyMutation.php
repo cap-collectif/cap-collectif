@@ -18,7 +18,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Error\UserErrors;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
 
 class AddReplyMutation implements MutationInterface
@@ -35,7 +35,7 @@ class AddReplyMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
+        FormFactory $formFactory,
         ReplyRepository $replyRepo,
         QuestionnaireRepository $questionnaireRepo,
         RedisStorageHelper $redisStorageHelper,

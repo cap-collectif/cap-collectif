@@ -1,20 +1,30 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
+use Doctrine\ORM\EntityManager;
+use Capco\AppBundle\Entity\LogicJump;
+use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Questionnaire;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Repository\LogicJumpRepository;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\Repository\QuestionChoiceRepository;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
+use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
+use Capco\AppBundle\Repository\AbstractLogicJumpConditionRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 
 class UpdateQuestionnaireConfigurationMutation implements MutationInterface
@@ -30,7 +40,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
+        FormFactory $formFactory,
         QuestionnaireRepository $questionnaireRepository,
         QuestionnaireAbstractQuestionRepository $questionRepo,
         AbstractQuestionRepository $abstractQuestionRepo,
@@ -70,7 +80,6 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
-
             throw GraphQLException::fromFormErrors($form);
         }
         $this->em->flush();

@@ -5,7 +5,7 @@ security:
   encoders:
     Capco\UserBundle\Entity\User: bcrypt
     drupal:
-      id: drupal.encoder
+      id: Capco\UserBundle\Security\DrupalEncoder
 
   role_hierarchy:
     ROLE_ADMIN: [ROLE_USER, ROLE_SONATA_ADMIN]
@@ -15,7 +15,7 @@ security:
 
   providers:
     fos_userbundle:
-      id: capco_user.user_provider.email
+      id: Capco\UserBundle\Security\Core\User\UserEmailProvider
     simple_preauth:
       id: Capco\UserBundle\Security\Core\User\SimplePreAuthenticatorUserProvider
     public_api_key_user_provider:

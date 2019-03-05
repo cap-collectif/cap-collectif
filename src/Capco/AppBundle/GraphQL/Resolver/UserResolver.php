@@ -8,7 +8,7 @@ use FOS\UserBundle\Model\UserInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 
 class UserResolver implements ResolverInterface
 {
@@ -17,7 +17,7 @@ class UserResolver implements ResolverInterface
     private $deleteAccountMutation;
 
     public function __construct(
-        RouterInterface $router,
+        Router $router,
         TypeResolver $typeResolver,
         DeleteAccountMutation $deleteAccountMutation
     ) {

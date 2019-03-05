@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Manager;
 
 use Capco\AppBundle\Entity\Comment;
@@ -8,11 +7,12 @@ use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 
 class CommentResolver
 {
@@ -22,7 +22,7 @@ class CommentResolver
 
     public function __construct(
         EntityManagerInterface $em,
-        RouterInterface $router,
+        Router $router,
         UrlResolver $urlResolver
     ) {
         $this->em = $em;

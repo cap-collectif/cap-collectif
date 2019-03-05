@@ -4,13 +4,13 @@ namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 
 class ProposalFormUrlResolver implements ResolverInterface
 {
     private $router;
 
-    public function __construct(RouterInterface $router)
+    public function __construct(Router $router)
     {
         $this->router = $router;
     }
@@ -24,13 +24,10 @@ class ProposalFormUrlResolver implements ResolverInterface
             return '';
         }
 
-        return $this->router->generate(
-            'app_project_show_collect',
+        return $this->router->generate('app_project_show_collect',
             [
                 'projectSlug' => $project->getSlug(),
                 'stepSlug' => $step->getSlug(),
-            ],
-            true
-        );
+            ], true);
     }
 }

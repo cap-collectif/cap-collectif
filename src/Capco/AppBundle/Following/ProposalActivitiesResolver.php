@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Following;
 
 use Capco\AppBundle\Entity\Follower;
@@ -14,7 +13,7 @@ use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 
 class ProposalActivitiesResolver extends ActivitiesResolver
 {
@@ -34,7 +33,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
         ProposalFormRepository $proposalFormRepository,
         ProjectRepository $projectRepository,
         LoggerInterface $logger,
-        RouterInterface $router
+        Router $router
     ) {
         $this->followerRepository = $followerRepository;
         $this->proposalRepository = $proposalRepository;
@@ -57,7 +56,6 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                 $userId = $user->getId();
             } catch (\RuntimeException $e) {
                 $this->logger->error(__METHOD__ . ' ' . $e->getMessage());
-
                 continue;
             }
             if (!$this->isUserEmailValid($user)) {
@@ -68,7 +66,6 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                         $user->getEmailCanonical()
                     )
                 );
-
                 continue;
             }
             if (!isset($followersWithActivities[$userId])) {
@@ -85,9 +82,8 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                 $userActivity->setLastname($user->getLastname());
                 $userActivity->addUserProposal($proposalId, $follower->getNotifiedOf());
                 $userActivity->setUrlManagingFollowings($unfollowingPage);
-                // @var UserActivity $followersWithActivities[$userId]
+                /* @var UserActivity $followersWithActivities[$userId] */
                 $followersWithActivities[$userId] = $userActivity;
-
                 continue;
             }
             $followersWithActivities[$userId]->addUserProposal(
@@ -102,7 +98,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
     public function getActivitiesByRelativeTime(string $relativeTime = 'yesterday'): array
     {
         $yesterdayMidnight = new \DateTime($relativeTime . ' midnight');
-        $yesterdayLasTime = new \DateTime($relativeTime . ' 23:59');
+        $yesterdayLasTime = (new \DateTime($relativeTime . ' 23:59'));
         $twentyFourHoursInterval = new \DateInterval('PT24H');
         $proposalForms = $this->proposalFormRepository->findAll();
         $proposalActivities = [];
@@ -188,7 +184,6 @@ class ProposalActivitiesResolver extends ActivitiesResolver
         foreach ($activitiesByUserId as $userId => $userActivity) {
             if (!$userActivity->hasProposal()) {
                 unset($activitiesByUserId[$userId]);
-
                 continue;
             }
 
@@ -228,7 +223,6 @@ class ProposalActivitiesResolver extends ActivitiesResolver
             foreach ($userActivity->getUserProjects() as $projectId => $project) {
                 if (empty($project['proposals'])) {
                     $userActivity->removeUserProject($projectId);
-
                     continue;
                 }
                 foreach ($project['proposals'] as $proposalId => $proposal) {
@@ -243,7 +237,6 @@ class ProposalActivitiesResolver extends ActivitiesResolver
             // check if user got a project and remove user without project
             if (!$userActivity->hasUserProject()) {
                 unset($activitiesByUserId[$userId]);
-
                 continue;
             }
             $activitiesByUserId[$userId] = $userActivity;

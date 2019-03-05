@@ -1,13 +1,13 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Opinion;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Form\OpinionVersionType;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -29,7 +29,7 @@ class AddVersionMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
+        FormFactory $formFactory,
         OpinionRepository $opinionRepo,
         OpinionVersionRepository $versionRepo,
         RedisStorageHelper $redisStorage,
@@ -49,9 +49,8 @@ class AddVersionMutation implements MutationInterface
         $opinion = $this->opinionRepo->find($opinionId);
 
         if (!$opinion || !$opinion instanceof Opinion) {
-            $this->logger->error("Unknown opinion with id: ${opinionId}");
+            $this->logger->error("Unknown opinion with id: $opinionId");
             $error = ['message' => 'Unknown opinion.'];
-
             return ['version' => null, 'versionEdge' => null, 'userErrors' => [$error]];
         }
 
@@ -60,14 +59,12 @@ class AddVersionMutation implements MutationInterface
                 'Can\'t add a version to an uncontributable opinion with id: ' . $opinionId
             );
             $error = ['message' => 'Can\'t add a version to an uncontributable opinion.'];
-
             return ['version' => null, 'versionEdge' => null, 'userErrors' => [$error]];
         }
 
         if (0 === $opinion->getOpinionType()->isVersionable()) {
             $this->logger->error("Can't add a version to an unversionable opinion.");
             $error = ['message' => "Can't add a version to an unversionable opinion."];
-
             return ['version' => null, 'versionEdge' => null, 'userErrors' => [$error]];
         }
 

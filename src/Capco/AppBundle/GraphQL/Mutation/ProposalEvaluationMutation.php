@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormFactory;
 
 class ProposalEvaluationMutation
 {
@@ -29,7 +29,7 @@ class ProposalEvaluationMutation
         EntityManagerInterface $entityManager,
         ResponsesFormatter $responsesFormatter,
         ProposalEvaluationRepository $proposalEvaluationRepository,
-        FormFactoryInterface $formFactory,
+        FormFactory $formFactory,
         ProposalRepository $proposalRepository,
         GlobalIdResolver $globalIdResolver
     ) {

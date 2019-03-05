@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Manager\MenuItemResolver;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 use Capco\AppBundle\Entity\MenuItem;
 
 class MenuLinkExtension extends \Twig_Extension
@@ -11,7 +11,7 @@ class MenuLinkExtension extends \Twig_Extension
     protected $resolver;
     protected $router;
 
-    public function __construct(MenuItemResolver $resolver, RouterInterface $router)
+    public function __construct(MenuItemResolver $resolver, Router $router)
     {
         $this->resolver = $resolver;
         $this->router = $router;

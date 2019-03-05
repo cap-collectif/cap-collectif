@@ -5,11 +5,16 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\QuestionnaireCreateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Form\Type\UserFormType;
+use Doctrine\DBAL\Driver\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class CreateQuestionnaireMutation implements MutationInterface
 {
@@ -19,7 +24,7 @@ class CreateQuestionnaireMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
+        FormFactory $formFactory,
         LoggerInterface $logger
     ) {
         $this->em = $em;
@@ -36,7 +41,6 @@ class CreateQuestionnaireMutation implements MutationInterface
         $form->submit($input->getRawArguments(), false);
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
-
             throw GraphQLException::fromFormErrors($form);
         }
 

@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class CreateUserMutation implements MutationInterface
@@ -21,7 +21,7 @@ class CreateUserMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
+        FormFactory $formFactory,
         LoggerInterface $logger
     ) {
         $this->em = $em;

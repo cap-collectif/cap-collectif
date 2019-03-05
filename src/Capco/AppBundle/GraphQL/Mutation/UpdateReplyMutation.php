@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ReplyType;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Notifier\UserNotifier;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -26,7 +26,7 @@ class UpdateReplyMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
+        FormFactory $formFactory,
         ReplyRepository $replyRepo,
         RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,

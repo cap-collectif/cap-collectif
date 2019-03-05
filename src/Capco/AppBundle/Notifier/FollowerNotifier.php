@@ -9,7 +9,7 @@ use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class FollowerNotifier extends BaseNotifier
@@ -28,7 +28,7 @@ final class FollowerNotifier extends BaseNotifier
         UserResolver $userResolver,
         UrlResolver $urlResolver,
         LoggerInterface $logger,
-        RouterInterface $router
+        Router $router
     ) {
         parent::__construct($mailer, $siteParams, $userResolver);
         $this->urlResolver = $urlResolver;

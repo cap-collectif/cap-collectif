@@ -1,12 +1,13 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\EventType;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
@@ -24,7 +25,7 @@ class ChangeEventMutation implements MutationInterface
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
+        FormFactory $formFactory,
         LoggerInterface $logger
     ) {
         $this->globalIdResolver = $globalIdResolver;

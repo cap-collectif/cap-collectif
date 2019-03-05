@@ -4,14 +4,14 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class UserIsGrantedResolver
 {
     protected $tokenStorage;
     protected $logger;
 
-    public function __construct(TokenStorageInterface $tokenStorage, LoggerInterface $logger)
+    public function __construct(TokenStorage $tokenStorage, LoggerInterface $logger)
     {
         $this->logger = $logger;
         $this->tokenStorage = $tokenStorage;
@@ -23,11 +23,7 @@ class UserIsGrantedResolver
         \ArrayObject $context = null,
         array $roleRequest = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']
     ): bool {
-        if (
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl')
-        ) {
+        if ($context && $context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl')) {
             return true;
         }
         if (!$user instanceof User) {
@@ -57,11 +53,8 @@ class UserIsGrantedResolver
         }
 
         $this->logger->warning(
-            __METHOD__ .
-                ' : User with id ' .
-                $user->getId() .
-                ' try to get information about user with id ' .
-                $token->getUser()->getId()
+            __METHOD__ . ' : User with id ' . $user->getId() . ' try to get information about user with id ' . $token->getUser(
+            )->getId()
         );
 
         return false;

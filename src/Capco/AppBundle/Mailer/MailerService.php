@@ -6,7 +6,7 @@ use Capco\AppBundle\Mailer\Message\Message;
 use Capco\AppBundle\Mailer\Message\User\ContactMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -24,7 +24,7 @@ class MailerService
         EngineInterface $templating,
         TranslatorInterface $translator,
         Resolver $siteParams,
-        RouterInterface $router
+        Router $router
     ) {
         $this->mailer = $mailer;
         $this->templating = $templating;

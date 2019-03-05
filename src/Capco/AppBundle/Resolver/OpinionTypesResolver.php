@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 
 class OpinionTypesResolver
 {
@@ -16,11 +16,8 @@ class OpinionTypesResolver
     private $opinionRepo;
     private $router;
 
-    public function __construct(
-        OpinionTypeRepository $opinionTypeRepo,
-        OpinionRepository $opinionRepo,
-        RouterInterface $router
-    ) {
+    public function __construct(OpinionTypeRepository $opinionTypeRepo, OpinionRepository $opinionRepo, Router $router)
+    {
         $this->opinionTypeRepo = $opinionTypeRepo;
         $this->opinionRepo = $opinionRepo;
         $this->router = $router;
@@ -33,15 +30,14 @@ class OpinionTypesResolver
                 return $section;
             }
         }
-
         throw new NotFoundHttpException('This type does not exist for this consultation step');
     }
 
-    public function getAvailableLinkTypesForConsultationStepType(
-        ConsultationStepType $consultationStepType
-    ) {
-        return $this->opinionTypeRepo->getLinkableOpinionTypesForConsultationStepType(
-            $consultationStepType
-        );
+    public function getAvailableLinkTypesForConsultationStepType(ConsultationStepType $consultationStepType)
+    {
+        return $this
+            ->opinionTypeRepo
+            ->getLinkableOpinionTypesForConsultationStepType($consultationStepType)
+        ;
     }
 }
