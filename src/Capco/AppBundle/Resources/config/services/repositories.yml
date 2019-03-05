@@ -1,424 +1,291 @@
 services:
-  capco.abstract_vote.repository:
+  _defaults:
     public: true
-    class: Capco\AppBundle\Repository\AbstractVoteRepository
+
+  Capco\AppBundle\Repository\AbstractVoteRepository:
+    public: false
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:AbstractVote']
 
-  capco.argument.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ArgumentRepository
+  capco.abstract_vote.repository:
+    alias: Capco\AppBundle\Repository\AbstractVoteRepository
+
+  Capco\AppBundle\Repository\ArgumentRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Argument']
 
-  capco.reply.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ReplyRepository
+  Capco\AppBundle\Repository\ReplyRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Reply']
 
-  capco.argument_vote.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ArgumentVoteRepository
+  Capco\AppBundle\Repository\ArgumentVoteRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ArgumentVote']
 
-  capco.registration_form.repository:
-    public: true
-    class: Capco\AppBundle\Repository\RegistrationFormRepository
+  Capco\AppBundle\Repository\RegistrationFormRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:RegistrationForm']
 
-  capco.abstract_question.repository:
-    public: true
-    class: Capco\AppBundle\Repository\AbstractQuestionRepository
+  Capco\AppBundle\Repository\AbstractQuestionRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Questions\AbstractQuestion']
 
-  capco.questionnaire_abstract_question.repository:
-    public: true
-    class: Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository
+  Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Questions\QuestionnaireAbstractQuestion']
 
-  capco.blog.post.repository:
-    public: true
-    class: Capco\AppBundle\Repository\PostRepository
+  Capco\AppBundle\Repository\PostRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Post']
 
-  capco.collect_step.repository:
-    public: true
-    class: Capco\AppBundle\Repository\CollectStepRepository
+  Capco\AppBundle\Repository\CollectStepRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\CollectStep']
 
-  capco.consultation_step_type.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ConsultationStepTypeRepository
+  Capco\AppBundle\Repository\ConsultationStepTypeRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\ConsultationStepType']
 
-  capco.district.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ProposalDistrictRepository
+  Capco\AppBundle\Repository\ProposalDistrictRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:District\ProposalDistrict']
 
-  capco.event.repository:
-    public: true
-    class: Capco\AppBundle\Repository\EventRepository
+  Capco\AppBundle\Repository\EventRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Event']
 
-  capco.event_registration.repository:
-    public: true
-    class: Capco\AppBundle\Repository\EventRegistrationRepository
+  Capco\AppBundle\Repository\EventRegistrationRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:EventRegistration']
 
-  capco.highlighted.repository:
-    public: true
-    class: Capco\AppBundle\Repository\HighlightedContentRepository
+  Capco\AppBundle\Repository\HighlightedContentRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:HighlightedContent']
 
-  capco.menu_item.repository:
-    public: true
-    class: Capco\AppBundle\Repository\MenuItemRepository
+  Capco\AppBundle\Repository\MenuItemRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:MenuItem']
 
-  capco.opinion.repository:
-    public: true
-    class: Capco\AppBundle\Repository\OpinionRepository
+  Capco\AppBundle\Repository\OpinionRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Opinion']
 
-  capco.opinion_version.repository:
-    public: true
-    class: Capco\AppBundle\Repository\OpinionVersionRepository
+  Capco\AppBundle\Repository\OpinionVersionRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:OpinionVersion']
 
-  capco.reporting.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ReportingRepository
+  Capco\AppBundle\Repository\ReportingRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Reporting']
 
-  capco.opinion_type.repository:
-    public: true
-    class: Capco\AppBundle\Repository\OpinionTypeRepository
+  Capco\AppBundle\Repository\OpinionTypeRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:OpinionType']
 
-  capco.comment.repository:
-    public: true
-    class: Capco\AppBundle\Repository\CommentRepository
+  Capco\AppBundle\Repository\CommentRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Comment']
 
-  capco.post_comment.repository:
-    public: true
-    class: Capco\AppBundle\Repository\PostCommentRepository
+  Capco\AppBundle\Repository\PostCommentRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:PostComment']
 
-  capco.proposal_comment.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ProposalCommentRepository
+  Capco\AppBundle\Repository\ProposalCommentRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProposalComment']
 
-  capco.event_comment.repository:
-    public: true
-    class: Capco\AppBundle\Repository\EventCommentRepository
+  Capco\AppBundle\Repository\EventCommentRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:EventComment']
 
-  capco.comment_vote.repository:
-    public: true
-    class: Capco\AppBundle\Repository\CommentVoteRepository
+  Capco\AppBundle\Repository\CommentVoteRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:CommentVote']
 
-  capco.proposal.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ProposalRepository
+  Capco\AppBundle\Repository\ProposalRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Proposal']
 
-  capco.proposal_selection_vote.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ProposalSelectionVoteRepository
+  Capco\AppBundle\Repository\ProposalSelectionVoteRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProposalSelectionVote']
 
-  capco.proposal_collect_vote.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ProposalCollectVoteRepository
+  Capco\AppBundle\Repository\ProposalCollectVoteRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProposalCollectVote']
 
-  capco.opinion_vote.repository:
-    public: true
-    class: Capco\AppBundle\Repository\OpinionVoteRepository
+  Capco\AppBundle\Repository\OpinionVoteRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:OpinionVote']
 
-  capco.question_choice.repository:
-    public: true
-    class: Capco\AppBundle\Repository\QuestionChoiceRepository
+  Capco\AppBundle\Repository\QuestionChoiceRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:QuestionChoice']
 
-  capco.response.repository:
-    public: true
-    class: Capco\AppBundle\Repository\AbstractResponseRepository
+  Capco\AppBundle\Repository\AbstractResponseRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Responses\AbstractResponse']
 
   Capco\AppBundle\Repository\ValueResponseRepository:
-    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Responses\ValueResponse']
 
   Capco\AppBundle\Repository\MediaResponseRepository:
-    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Responses\MediaResponse']
 
-  capco.section.repository:
-    public: true
-    class: Capco\AppBundle\Repository\SectionRepository
+  Capco\AppBundle\Repository\SectionRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Section']
 
-  capco.selection_step.repository:
-    public: true
-    class: Capco\AppBundle\Repository\SelectionStepRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Steps\SelectionStep']
-
   Capco\AppBundle\Repository\SelectionStepRepository:
-    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\SelectionStep']
 
-  capco.status.repository:
-    public: true
-    class: Capco\AppBundle\Repository\StatusRepository
+  Capco\AppBundle\Repository\StatusRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Status']
 
-  capco.selection.repository:
-    public: true
-    class: Capco\AppBundle\Repository\SelectionRepository
+  Capco\AppBundle\Repository\SelectionRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Selection']
 
-  capco.site_color.repository:
-    public: true
-    class: Capco\AppBundle\Repository\SiteColorRepository
+  Capco\AppBundle\Repository\SiteColorRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:SiteColor']
 
-  capco.site_image.repository:
-    public: true
-    class: Capco\AppBundle\Repository\SiteImageRepository
+  Capco\AppBundle\Repository\SiteImageRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:SiteImage']
 
-  capco.site_parameter.repository:
-    public: true
-    class: Capco\AppBundle\Repository\SiteParameterRepository
+  Capco\AppBundle\Repository\SiteParameterRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:SiteParameter']
 
-  capco.theme.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ThemeRepository
+  Capco\AppBundle\Repository\ThemeRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Theme']
 
-  capco.user_type.repository:
-    public: true
-    class: Capco\UserBundle\Repository\UserTypeRepository
+  Capco\UserBundle\Repository\UserTypeRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoUserBundle:UserType']
 
-  capco.user.repository:
-    public: true
-    class: Capco\UserBundle\Repository\UserRepository
+  Capco\UserBundle\Repository\UserRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoUserBundle:User']
 
-  capco.user_notifications_configuration.repository:
-    public: true
-    class: Capco\AppBundle\Repository\UserNotificationsConfigurationRepository
+  Capco\AppBundle\Repository\UserNotificationsConfigurationRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserNotificationsConfiguration']
 
-  capco.video.repository:
-    public: true
-    class: Capco\AppBundle\Repository\VideoRepository
+  Capco\AppBundle\Repository\VideoRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Video']
 
   Capco\AppBundle\Repository\ProjectRepository:
-    public: true
-    class: Capco\AppBundle\Repository\ProjectRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Project']
 
   Capco\AppBundle\Repository\ProjectTypeRepository:
-    public: true
-    class: Capco\AppBundle\Repository\ProjectTypeRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProjectType']
 
-  capco.abstract_step.repository:
-    public: true
-    class: Capco\AppBundle\Repository\AbstractStepRepository
+  Capco\AppBundle\Repository\AbstractStepRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\AbstractStep']
-
-  Capco\AppBundle\Repository\AbstractStepRepository:
     alias: capco.abstract_step.repository
 
-  capco.consultation_step.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ConsultationStepRepository
+  Capco\AppBundle\Repository\ConsultationStepRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\ConsultationStep']
 
-  capco.progress_step.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ProgressStepRepository
+  Capco\AppBundle\Repository\ProgressStepRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\ProgressStep']
 
-  capco.proposal_category.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ProposalCategoryRepository
+  Capco\AppBundle\Repository\ProposalCategoryRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProposalCategory']
 
-  capco.proposal_form.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ProposalFormRepository
+  Capco\AppBundle\Repository\ProposalFormRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProposalForm']
 
-  capco.group.repository:
-    public: true
-    class: Capco\AppBundle\Repository\GroupRepository
+  Capco\AppBundle\Repository\GroupRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Group']
 
-  capco.user_group.repository:
-    public: true
-    class: Capco\AppBundle\Repository\UserGroupRepository
+  Capco\AppBundle\Repository\UserGroupRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserGroup']
 
-  capco.questionnaire.repository:
-    public: true
-    class: Capco\AppBundle\Repository\QuestionnaireRepository
+  Capco\AppBundle\Repository\QuestionnaireRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Questionnaire']
 
-  capco.proposal_evaluation.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ProposalEvaluationRepository
+  Capco\AppBundle\Repository\ProposalEvaluationRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProposalEvaluation']
 
-  capco.source.repository:
-    public: true
-    class: Capco\AppBundle\Repository\SourceRepository
+  Capco\AppBundle\Repository\SourceRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Source']
 
-  capco.follower.repository:
-    public: true
-    class: Capco\AppBundle\Repository\FollowerRepository
+  Capco\AppBundle\Repository\FollowerRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Follower']
 
-  capco.source_vote.repository:
-    public: true
-    class: Capco\AppBundle\Repository\SourceVoteRepository
+  Capco\AppBundle\Repository\SourceVoteRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:SourceVote']
 
-  capco.opinion_version_vote.repository:
-    public: true
-    class: Capco\AppBundle\Repository\OpinionVersionVoteRepository
+  Capco\AppBundle\Repository\OpinionVersionVoteRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:OpinionVersionVote']
 
-  capco.newsletter_subscription.repository:
-    public: true
-    class: Capco\AppBundle\Repository\NewsletterSubscriptionRepository
+  Capco\AppBundle\Repository\NewsletterSubscriptionRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:NewsletterSubscription']
 
-  capco.user_archive.repository:
-    public: true
-    class: Capco\AppBundle\Repository\UserArchiveRepository
+  Capco\AppBundle\Repository\UserArchiveRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserArchive']
 
   Capco\AppBundle\Repository\RequirementRepository:
-    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Requirement']
 
   Capco\AppBundle\Repository\UserRequirementRepository:
-    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserRequirement']
 
-  capco.email_domain.repository:
-    public: true
-    class: Capco\AppBundle\Repository\EmailDomainRepository
+  Capco\AppBundle\Repository\EmailDomainRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:EmailDomain']
 
-  capco.category.repository:
-    public: true
-    class: Capco\AppBundle\Repository\CategoryRepository
+  Capco\AppBundle\Repository\CategoryRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Category']
 
-  capco.synthesis_syhthesis.repository:
-    public: true
-    class: Capco\AppBundle\Repository\Synthesis\SynthesisRepository
+  Capco\AppBundle\Repository\Synthesis\SynthesisRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Synthesis']
 
   Capco\AppBundle\Repository\PublicApiTokenRepository:
-    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:PublicApiToken']
 
   Capco\AppBundle\Repository\ProjectDistrictRepository:
-    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:District\ProjectDistrict']
 
   Capco\AppBundle\Repository\FooterSocialNetworkRepository:
-    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:FooterSocialNetwork']
 
   Capco\AppBundle\Repository\MapTokenRepository:
-    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:MapToken']
   Capco\MediaBundle\Repository\MediaRepository:
-    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoMediaBundle:Media']
