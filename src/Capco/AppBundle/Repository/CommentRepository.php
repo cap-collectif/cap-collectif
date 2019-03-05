@@ -140,8 +140,7 @@ class CommentRepository extends EntityRepository
                 '
             SELECT count(c.id) AS sclr FROM comment c USE INDEX (comment_idx_published_id_id)
             INNER JOIN event e ON c.event_id = e.id
-            WHERE c.author_id = :userId AND c.published = 1 AND e.is_enabled = 1
-            GROUP BY c.author_id',
+            WHERE c.author_id = :userId AND c.published = 1 AND e.is_enabled = 1',
                 $rsm
             )
             ->setParameter('userId', $user->getId());

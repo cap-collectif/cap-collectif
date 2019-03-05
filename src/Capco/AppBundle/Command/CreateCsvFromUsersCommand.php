@@ -152,7 +152,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         }
         $fileName = 'users.csv';
 
-        $requestString = $this->getUsersGraphQLQuery(null);
+        $requestString = $this->getUsersGraphQLQuery();
         $datas = $this->executor
             ->execute('internal', [
                 'query' => $requestString,
