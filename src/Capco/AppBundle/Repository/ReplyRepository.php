@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
-use Doctrine\ORM\Query\ResultSetMapping;
 use Capco\AppBundle\Entity\Questionnaire;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -19,19 +18,15 @@ class ReplyRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
 
-    // TODO draft are accounted here but should not.
     public function countPublishedForQuestionnaire(Questionnaire $questionnaire): int
     {
-        $rsm = new ResultSetMapping();
-        $rsm->addScalarResult('sclr', 'sclr');
-        $query = $this->_em
-            ->createNativeQuery(
-                'SELECT COUNT(r.id) as sclr FROM reply r USE INDEX (idx_questionnaire_published) WHERE r.published = 1 AND r.questionnaire_id = :questionnaireId',
-                $rsm
-            )
+        $qb = $this->getPublishedQueryBuilder()
+            ->select('COUNT(reply.id) as repliesCount')
+            ->leftJoin('reply.questionnaire', 'questionnaire')
+            ->andWhere('questionnaire.id = :questionnaireId')
             ->setParameter('questionnaireId', $questionnaire->getId());
 
-        return (int) $query->getSingleScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getOneForUserAndQuestionnaire(Questionnaire $questionnaire, User $user): ?Reply
