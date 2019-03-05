@@ -13,7 +13,7 @@ use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Traits\AddressableTrait;
-use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
+use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\HasResponsesTrait;
@@ -65,6 +65,7 @@ class Proposal implements
 {
     use UuidTrait;
     use ReferenceTrait;
+    use CommentableTrait;
     use TimestampableTrait;
     use TrashableTrait;
     use SluggableTitleTrait;
@@ -77,7 +78,6 @@ class Proposal implements
     use PublishableTrait;
     use FollowableTrait;
     use AddressableTrait;
-    use CommentableWithoutCounterTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -268,6 +268,7 @@ class Proposal implements
         $this->reports = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->responses = new ArrayCollection();
+        $this->commentsCount = 0;
         $this->updatedAt = null;
         $this->selections = new ArrayCollection();
         $this->likers = new ArrayCollection();

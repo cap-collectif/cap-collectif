@@ -2,7 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -10,7 +10,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 
-class SocialNetworkAdmin extends Admin
+class SocialNetworkAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -22,7 +22,9 @@ class SocialNetworkAdmin extends Admin
     {
         $media = $object->getMedia();
         if ($media) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $provider = $this->getConfigurationPool()
+                ->getContainer()
+                ->get($media->getProviderName());
             $format = $provider->getFormatName($media, 'form');
             $url = $provider->generatePublicUrl($media, $format);
 
@@ -52,8 +54,7 @@ class SocialNetworkAdmin extends Admin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.social_network.updated_at',
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -89,8 +90,7 @@ class SocialNetworkAdmin extends Admin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -112,16 +112,21 @@ class SocialNetworkAdmin extends Admin
             ->add('position', null, [
                 'label' => 'admin.fields.social_network.position',
             ])
-            ->add('media', 'sonata_type_model_list', [
-                'required' => false,
-                'label' => 'admin.fields.social_network.media',
-            ], [
-                'link_parameters' => [
-                    'context' => 'default',
-                    'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
-            ], ])
-        ;
+            ->add(
+                'media',
+                'sonata_type_model_list',
+                [
+                    'required' => false,
+                    'label' => 'admin.fields.social_network.media',
+                ],
+                [
+                    'link_parameters' => [
+                        'context' => 'default',
+                        'hide_context' => true,
+                        'provider' => 'sonata.media.provider.image',
+                    ],
+                ]
+            );
     }
 
     /**
@@ -151,8 +156,7 @@ class SocialNetworkAdmin extends Admin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.social_network.updated_at',
-            ])
-        ;
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)

@@ -193,6 +193,14 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )'
         );
 
+        $this->executeQuery(
+            'UPDATE CapcoAppBundle:Proposal p set p.commentsCount = (
+          select count(DISTINCT pc.id)
+          from CapcoAppBundle:ProposalComment pc
+          where pc.proposal = p AND pc.published = 1 AND pc.trashedAt IS NULL GROUP BY pc.proposal
+        )'
+        );
+
         // ************************ Consultation step counters ***********************************************
 
         $this->executeQuery(

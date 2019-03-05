@@ -2,13 +2,13 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class CommentVoteAdmin extends Admin
+class CommentVoteAdmin extends AbstractAdmin
 {
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
 

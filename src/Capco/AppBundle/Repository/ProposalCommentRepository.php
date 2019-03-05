@@ -46,7 +46,7 @@ class ProposalCommentRepository extends EntityRepository
 
     public function countCommentsByCommentable(
         CommentableInterface $commentable,
-        ?User $viewer = null
+        ?User $viewer
     ): int {
         $qb = $this->getByCommentableQueryBuilder($commentable, true, $viewer)->select(
             'count(c.id)'

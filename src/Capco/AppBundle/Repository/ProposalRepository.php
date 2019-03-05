@@ -54,24 +54,9 @@ class ProposalRepository extends EntityRepository
      */
     public function getOneBySlug(string $slug): ?Proposal
     {
-        // This subquery will use the "idx_slug" index to retrieve the proposal id
-        $id = $this->createQueryBuilder('p')
-            ->select('p.id')
-            ->where('p.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->getQuery()
-            ->useQueryCache(true)
-            ->useResultCache(true, 60)
-            ->getSingleScalarResult();
-
-        if (!$id) {
-            return null;
-        }
-
-        // This query will hydrate the proposal
-        $qb = $this->createQueryBuilder('p')
-            ->andWhere('p.id = :proposalId')
-            ->setParameter('proposalId', $id);
+        $qb = $this->createQueryBuilder('proposal')
+            ->andWhere('proposal.slug = :slug')
+            ->setParameter('slug', $slug);
 
         return $qb
             ->getQuery()
@@ -268,6 +253,7 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.status', 'status')
             ->leftJoin('proposal.district', 'district')
             ->andWhere('proposal.trashedStatus IS NULL')
+            ->orderBy('proposal.commentsCount', 'DESC')
             ->addOrderBy('proposal.createdAt', 'DESC')
             ->addGroupBy('proposal.id');
 
@@ -297,7 +283,7 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.proposalForm', 'f')
             ->andWhere('f.step = :step')
             ->setParameter('step', $step)
-
+            ->orderBy('proposal.commentsCount', 'DESC')
             ->addOrderBy('proposal.createdAt', 'DESC')
             ->addGroupBy('proposal.id');
 

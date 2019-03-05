@@ -159,9 +159,9 @@ class HomepageController extends Controller
      * @Template("CapcoAppBundle:Homepage:lastProposals.html.twig")
      */
     public function lastProposalsAction(
-        ?int $max = null,
-        ?int $offset = null,
-        ?Section $section = null
+        int $max = null,
+        int $offset = null,
+        Section $section = null
     ) {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
@@ -181,11 +181,8 @@ class HomepageController extends Controller
     /**
      * @Template("CapcoAppBundle:Homepage:lastThemes.html.twig")
      */
-    public function lastThemesAction(
-        ?int $max = null,
-        ?int $offset = null,
-        ?Section $section = null
-    ) {
+    public function lastThemesAction(int $max = null, int $offset = null, Section $section = null)
+    {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
         $topics = $this->get('capco.theme.repository')->getLast($max, $offset);

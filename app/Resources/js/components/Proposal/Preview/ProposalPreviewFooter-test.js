@@ -22,7 +22,7 @@ describe('<ProposalPreviewFooter />', () => {
     form: {
       commentable: true,
     },
-    comments: { totalCount: 3 },
+    commentsCount: 3,
     allVotesOnStep: {
       totalCount: 42,
     },

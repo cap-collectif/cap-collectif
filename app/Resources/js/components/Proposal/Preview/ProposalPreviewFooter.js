@@ -33,12 +33,12 @@ export class ProposalPreviewFooter extends React.Component<Props> {
       <div className={`card__counters ${classNames(countersClasses)}`}>
         {showComments && (
           <div className="card__counter card__counter-comments">
-            <div className="card__counter__value">{proposal.comments.totalCount}</div>
+            <div className="card__counter__value">{proposal.commentsCount}</div>
             <div>
               <FormattedMessage
                 id="comment.count_no_nb"
                 values={{
-                  count: proposal.comments.totalCount,
+                  count: proposal.commentsCount,
                 }}
               />
             </div>
@@ -78,9 +78,7 @@ export default createFragmentContainer(ProposalPreviewFooter, {
       form {
         commentable
       }
-      comments: comments {
-        totalCount
-      }
+      commentsCount
       allVotesOnStep: votes(stepId: $stepId, first: 0) @skip(if: $isProfileView) {
         totalCount
       }
