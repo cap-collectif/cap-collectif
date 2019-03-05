@@ -242,13 +242,11 @@ export class EventListFilters extends React.Component<Props, State> {
       }
     };
 
+    // console.log(features.display_map);
+    // console.warn(addToggleViewButton);
+
     return (
-      <Row
-        className={
-          config.isMobile
-            ? 'ml-0 align-items-center d-flex flex-wrap'
-            : 'align-items-center d-flex flex-wrap'
-        }>
+      <Row className="align-items-center d-flex flex-wrap">
         <StatusWrapper sm={4} md={5} xsHidden>
           {/* $FlowFixMe $refType */}
           <EventListCounter query={query} />

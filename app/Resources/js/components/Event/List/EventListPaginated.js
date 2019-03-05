@@ -1,17 +1,17 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import classNames from 'classnames';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { useWindowWidth } from '../../../utils/hooks/useWindowWidth';
 import EventPreview from '../EventPreview';
 import EventMap from '../Map/EventMap';
 import type { EventListPaginated_query } from './__generated__/EventListPaginatedQuery.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
-import config from '../../../config';
 
 type Props = {
   query: EventListPaginated_query,
@@ -22,122 +22,107 @@ type Props = {
   isMobileListView: boolean,
 };
 
-type State = {
-  loading: boolean,
-};
+// check flow with hook
+// type State = {
+//   loading: boolean,
+// };
 
 const EVENTS_PAGINATION = 100;
 
 const MapContainer = styled(Col)`
   top: 150px;
+  position: sticky;
+
+  @media screen and (max-width: 767px) {
+    top: 0;
+  }
 `;
 
-export class EventListPaginated extends React.Component<Props, State> {
-  state = {
-    loading: false,
-  };
+export const EventListPaginated = (props: Props) => {
+  const { query, relay, eventSelected, features, dispatch, isMobileListView } = props;
+  const [loading, setLoading] = useState(false);
+  const screenWidth = useWindowWidth();
 
-  onFocus(eventId: string) {
-    const { dispatch, features } = this.props;
+  const onFocus = (eventId: string) => {
     if (features.display_map) {
       dispatch(changeEventSelected(eventId));
     }
-  }
+  };
 
-  shouldRenderToggleListOrMap(component: 'list' | 'map'): boolean {
-    const { isMobileListView, features } = this.props;
+  const shouldRenderToggleListOrMap = (component: 'list' | 'map'): boolean => {
     if (component === 'list') {
-      if (!config.isMobile) {
+      if (screenWidth > 767) {
         return true;
       }
-
       return isMobileListView;
     }
+
     if (component === 'map' && features.display_map) {
-      if (!config.isMobile) {
+      if (screenWidth > 767) {
         return true;
       }
-
       return !isMobileListView;
     }
 
     return false;
-  }
+  };
 
-  render() {
-    const { query, relay, eventSelected, features } = this.props;
-
-    if (query.events.totalCount === 0) {
-      return (
-        <p className={classNames({ 'p--centered': true, 'mb-40': true })}>
-          <FormattedMessage id="event.empty" />
-        </p>
-      );
-    }
-
+  if (query.events.totalCount === 0) {
     return (
-      <React.Fragment>
-        <Row>
-          {this.shouldRenderToggleListOrMap('list') ? (
-            <Col
-              id="event-list"
-              md={features.display_map ? 8 : 12}
-              sm={features.display_map ? 8 : 12}
-              xs={12}>
-              {query.events.edges &&
-                query.events.edges
-                  .filter(Boolean)
-                  .map(edge => edge.node)
-                  .filter(Boolean)
-                  .map((node, key) => (
-                    // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
-                    <div
-                      key={key}
-                      onMouseOver={() => (config.isMobile ? null : this.onFocus(node.id))}
-                      className={config.isMobile ? 'ml-0 mr-0' : null}>
-                      <EventPreview
-                        // $FlowFixMe eslint
-                        isHighlighted={eventSelected && eventSelected === node.id}
-                        event={node}
-                      />
-                    </div>
-                  ))}
-              {relay.hasMore() && (
-                <Row>
-                  <div className="text-center">
-                    <Button
-                      disabled={this.state.loading}
-                      onClick={() => {
-                        this.setState({ loading: true });
-                        relay.loadMore(EVENTS_PAGINATION, () => {
-                          this.setState({ loading: false });
-                        });
-                      }}>
-                      <FormattedMessage
-                        id={this.state.loading ? 'global.loading' : 'global.more'}
-                      />
-                    </Button>
-                  </div>
-                </Row>
-              )}
-            </Col>
-          ) : null}
-          {this.shouldRenderToggleListOrMap('map') ? (
-            <MapContainer
-              md={!config.isMobile ? 4 : 12}
-              sm={!config.isMobile ? 4 : 12}
-              xs={12}
-              aria-hidden="true"
-              className={!config.isMobile ? 'sticky' : null}>
-              {/* $FlowFixMe relayProps */}
-              <EventMap query={query} />
-            </MapContainer>
-          ) : null}
-        </Row>
-      </React.Fragment>
+      <p className={classNames({ 'p--centered': true, 'mb-40': true })}>
+        <FormattedMessage id="event.empty" />
+      </p>
     );
   }
-}
+
+  return (
+    <React.Fragment>
+      <Row>
+        {shouldRenderToggleListOrMap('list') ? (
+          <Col id="event-list" sm={features.display_map ? 8 : 12} xs={12}>
+            {query.events.edges &&
+              query.events.edges
+                .filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+                .map((node, key) => (
+                  // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
+                  <div key={key} onMouseOver={() => (screenWidth > 767 ? onFocus(node.id) : null)}>
+                    <EventPreview
+                      // $FlowFixMe eslint
+                      isHighlighted={eventSelected && eventSelected === node.id}
+                      event={node}
+                    />
+                  </div>
+                ))}
+            {relay.hasMore() && (
+              <Row>
+                <div className="text-center">
+                  <Button
+                    disabled={loading}
+                    onClick={() => {
+                      setLoading(true);
+                      relay.loadMore(EVENTS_PAGINATION, () => {
+                        setLoading(false);
+                      });
+                    }}>
+                    <FormattedMessage id={loading ? 'global.loading' : 'global.more'} />
+                  </Button>
+                </div>
+              </Row>
+            )}
+          </Col>
+        ) : null}
+        {shouldRenderToggleListOrMap('map') ? (
+          <MapContainer sm={4} xs={12} aria-hidden="true">
+            {/* $FlowFixMe relayProps */}
+            <EventMap query={query} />
+          </MapContainer>
+        ) : null}
+      </Row>
+    </React.Fragment>
+  );
+};
 
 const mapStateToProps = (state: GlobalState) => ({
   eventSelected: state.event.eventSelected,
