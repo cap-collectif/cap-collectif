@@ -88,7 +88,7 @@ Capco\AppBundle\Entity\Section:
     teaser: null
     body: null
     nbObjects: null
-    enabled: true
+    enabled: false
     metricsToDisplayBasics: true
     metricsToDisplayEvents: true
     metricsToDisplayProjects: true
