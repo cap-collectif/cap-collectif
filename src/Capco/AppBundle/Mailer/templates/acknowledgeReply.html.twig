@@ -1,3 +1,5 @@
+{% extends "@CapcoMail/standardLayout.html.twig" %}
+
 {% set siteName = capco_site_parameter_value('global.site.fullname') %}
 {% set nowDate =  "now"|localizeddate('long', 'none', 'fr_FR')  %}
 {% set nowHour =  "now"|date('H') ~ 'h' ~ "now"|date('i')  %}
@@ -5,14 +7,31 @@
     {% set endDate =  endAt|localizeddate('long', 'none', 'fr_FR')  %}
 {% endif %}
 
-{% block body_text %}
+{% block html_title %}
+    {{ 'acknowledgement-of-receipt'|trans({},'CapcoAppBundle') }}
+{% endblock %}
+
+{% block header_mail %}
+    <tr>
+        <td class="resp-full-td" valign="top" style="margin:0 20px; texlign:center;">
+            <div style="text-align: center;">
+                <a class="resp-punchline" href="#" style="color:#337ab7; ot-autline:none; text-decoration:none; font-size:20px; font-family:'Open Sans', helvetica, arial, sans-serif; text-align:center;">
+                    {{ siteName }}
+                </a>
+                <h1 class="resp-punchline" style="color:#000000; outline:none; font-size:22px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:500; text-align:center;">
+                    {{ 'acknowledgment-of-receipt'|trans({},'CapcoAppBundle') }}
+                </h1>
+                <span class="resp-punchline" style="color:#999999; outline:none; font-size:20px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; text-align:center;">
+                    {{ nowDate }}
+                </span>
+            </div>
+        </td>
+    </tr>
+{% endblock %}
+
+{% block core_mail %}
     {% autoescape false %}
     <style type="text/css">
-        .align-center {
-            text-align: center;
-            width: 100%;
-        }
-
         .bold-text {
             font-weight: bold;
         }
@@ -31,21 +50,6 @@
             background-color: #dedede;
         }
     </style>
-    
-    <div class="align-center">
-        <p>
-            {{ siteName }}
-        </p>
-    
-        <p class="bold-text">
-            {{ 'acknowledgement-of-receipt'|trans({}, 'CapcoAppBundle') }}
-        </p>
-    
-        <p>
-            {{ nowDate }}
-        </p>
-    </div>
- 
     <p class="bold-text">
         {{ 'hello-username'|trans({
             '%username%' : reply.author.username
@@ -92,4 +96,3 @@
     </p>
     {% endautoescape %}
 {% endblock %}
-{% block body_html %}{% endblock %}
