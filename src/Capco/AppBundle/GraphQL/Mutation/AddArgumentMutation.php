@@ -9,7 +9,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Form\ArgumentType;
 use Capco\AppBundle\Model\Argumentable;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Swarrot\SwarrotBundle\Broker\Publisher;
@@ -39,7 +39,7 @@ class AddArgumentMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         OpinionRepository $opinionRepo,
         OpinionVersionRepository $versionRepo,
         RedisStorageHelper $redisStorage,

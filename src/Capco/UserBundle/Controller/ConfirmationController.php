@@ -3,7 +3,7 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use FOS\UserBundle\Security\LoginManager;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Repository\UserRepository;
@@ -25,7 +25,7 @@ class ConfirmationController extends Controller
     public function __construct(
         UserManager $userManager,
         LoginManager $loginManager,
-        Router $router,
+        RouterInterface $router,
         Session $session,
         ContributionManager $contributionManager,
         UserRepository $userRepo

@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProposalFusionMutation implements MutationInterface
 {
@@ -18,7 +18,7 @@ class UpdateProposalFusionMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver
     ) {
         $this->em = $em;

@@ -1,10 +1,11 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Swarrot\Broker\Message;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ArgumentType;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -25,7 +26,7 @@ class ChangeArgumentMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         ArgumentRepository $argumentRepo,
         RedisStorageHelper $redisStorage,
         Publisher $publisher

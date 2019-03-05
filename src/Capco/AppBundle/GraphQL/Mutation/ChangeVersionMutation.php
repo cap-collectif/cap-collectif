@@ -1,7 +1,7 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Form\OpinionVersionType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
@@ -11,7 +11,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class ChangeVersionMutation implements MutationInterface
@@ -23,7 +23,7 @@ class ChangeVersionMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         OpinionVersionRepository $versionRepo,
         RedisStorageHelper $redisStorage
     ) {

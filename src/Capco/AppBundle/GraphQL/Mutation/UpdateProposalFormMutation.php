@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
@@ -15,7 +14,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProposalFormMutation implements MutationInterface
 {
@@ -30,7 +29,7 @@ class UpdateProposalFormMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         ProposalFormRepository $proposalFormRepo,
         LoggerInterface $logger,
         QuestionnaireAbstractQuestionRepository $questionRepo,
@@ -68,10 +67,10 @@ class UpdateProposalFormMutation implements MutationInterface
             }
 
             foreach ($proposalForm->getDistricts() as $position => $district) {
-                if (!in_array($district->getId(), $districtsIds)) {
+                if (!\in_array($district->getId(), $districtsIds)) {
                     $deletedDistrict = [
                         'id' => $district->getId(),
-                        'name' => "NULL",
+                        'name' => 'NULL',
                     ];
                     array_splice($arguments['districts'], $position, 0, [$deletedDistrict]);
                 }
@@ -87,10 +86,10 @@ class UpdateProposalFormMutation implements MutationInterface
             }
 
             foreach ($proposalForm->getCategories() as $position => $category) {
-                if (!in_array($category->getId(), $categoriesIds)) {
+                if (!\in_array($category->getId(), $categoriesIds)) {
                     $deletedCategory = [
                         'id' => $category->getId(),
-                        'name' => "NULL",
+                        'name' => 'NULL',
                     ];
                     // Add deleted category.
                     array_splice($arguments['categories'], $position, 0, [$deletedCategory]);
@@ -106,6 +105,7 @@ class UpdateProposalFormMutation implements MutationInterface
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
+
             throw GraphQLException::fromFormErrors($form);
         }
 

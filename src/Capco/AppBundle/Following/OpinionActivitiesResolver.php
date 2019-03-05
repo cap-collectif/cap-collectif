@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Following;
 
 use Capco\AppBundle\Entity\Follower;
@@ -11,8 +12,7 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\Router;
-use Capco\AppBundle\Following\ActivitiesResolver;
+use Symfony\Component\Routing\RouterInterface;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Resolver\UrlArrayResolver;
 
@@ -43,7 +43,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
         FollowerRepository $followerRepository,
         ProjectRepository $projectRepository,
         LoggerInterface $logger,
-        Router $router,
+        RouterInterface $router,
         OpinionRepository $opinionRepository,
         OpinionVoteRepository $opinionVoteRepository,
         ArgumentRepository $argumentRepository,
@@ -67,7 +67,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
         $followersWithActivities = [];
 
         /**
-         * @var Follower $follower
+         * @var Follower
          */
         foreach ($followers as $follower) {
             try {
@@ -76,6 +76,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
                 $userId = $user->getId();
             } catch (\RuntimeException $e) {
                 $this->logger->error(__METHOD__ . ' ' . $e->getMessage());
+
                 continue;
             }
 
@@ -88,6 +89,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
                         $user->getEmailCanonical()
                     )
                 );
+
                 continue;
             }
 
@@ -124,7 +126,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
     public function getActivitiesByRelativeTime(string $relativeTime = 'yesterday'): array
     {
         $yesterdayMidnight = new \DateTime($relativeTime . ' midnight');
-        $yesterdayLasTime = (new \DateTime($relativeTime . ' 23:59'));
+        $yesterdayLasTime = new \DateTime($relativeTime . ' 23:59');
         $twentyFourHoursInterval = new \DateInterval('PT24H');
 
         $opinionActivities = [];
@@ -134,7 +136,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
         ]);
 
         /**
-         * @var \Capco\AppBundle\Entity\Opinion $opinion
+         * @var \Capco\AppBundle\Entity\Opinion
          */
         foreach ($opinions as $opinion) {
             $currentOpinion = [];
@@ -193,7 +195,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
             $currentOpinion['countActivities'] = $this->countActivities($currentOpinion);
 
             // If there is 0 activity, don't add it to array.
-            if ($currentOpinion['countActivities'] === 0) {
+            if (0 === $currentOpinion['countActivities']) {
                 unset($currentOpinion);
             } else {
                 $opinionActivities[$opinionId] = $currentOpinion;
@@ -209,11 +211,12 @@ class OpinionActivitiesResolver extends ActivitiesResolver
         array $opinionActivities
     ): array {
         /**
-         * @var UserActivity $userActivity
+         * @var UserActivity
          */
         foreach ($activitiesByUserId as $userId => $userActivity) {
             if (!$userActivity->hasOpinion()) {
                 unset($activitiesByUserId[$userId]);
+
                 continue;
             }
 
@@ -224,7 +227,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
 
                 $opinion = $opinionActivities[$opinionId];
 
-                if (isset($opinion['countActivities']) && $opinion['countActivities'] === 0) {
+                if (isset($opinion['countActivities']) && 0 === $opinion['countActivities']) {
                     continue;
                 }
 
@@ -240,7 +243,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
                 }
 
                 if (
-                    in_array($notifiedOf, [
+                    \in_array($notifiedOf, [
                         FollowerNotifiedOfInterface::ESSENTIAL,
                         FollowerNotifiedOfInterface::MINIMAL,
                     ])
@@ -251,7 +254,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
                 }
 
                 $opinion['countActivities'] = $this->countActivities($opinion);
-                if ($opinion['countActivities'] === 0) {
+                if (0 === $opinion['countActivities']) {
                     continue;
                 }
 
@@ -269,6 +272,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
             foreach ($userActivity->getUserProjects() as $projectId => $project) {
                 if (empty($project['opinions'])) {
                     $userActivity->removeUserProject($projectId);
+
                     continue;
                 }
 
@@ -283,11 +287,10 @@ class OpinionActivitiesResolver extends ActivitiesResolver
 
             $userActivity->setUserOpinions([]);
 
-            /**
-             * Check if user got a project and remove user without project.
-             */
+            // Check if user got a project and remove user without project.
             if (!$userActivity->hasUserProject()) {
                 unset($activitiesByUserId[$userId]);
+
                 continue;
             }
             $activitiesByUserId[$userId] = $userActivity;

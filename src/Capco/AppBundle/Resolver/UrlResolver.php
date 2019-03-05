@@ -19,7 +19,6 @@ use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 
 class UrlResolver
@@ -33,7 +32,7 @@ class UrlResolver
 
     public function __construct(
         ContainerInterface $container,
-        Router $router,
+        RouterInterface $router,
         Manager $manager,
         MediaExtension $mediaExtension,
         ?string $scheme = '',

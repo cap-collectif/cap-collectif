@@ -13,7 +13,7 @@ use Psr\Log\LoggerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class ProposalFormMutation
 {
@@ -24,7 +24,7 @@ class ProposalFormMutation
     private $questionnaireRepository;
 
     public function __construct(
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         EntityManagerInterface $em,
         LoggerInterface $logger,
         ProposalFormRepository $proposalFormRepository,

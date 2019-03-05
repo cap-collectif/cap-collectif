@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 class UrlArrayResolver
 {
     protected $router;
     protected $referenceType;
 
-    public function __construct(Router $router)
+    public function __construct(RouterInterface $router)
     {
         $this->router = $router;
     }

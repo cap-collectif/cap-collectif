@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Manager;
 
 use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Constraints\Url;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Capco\AppBundle\Cache\RedisCache;
@@ -21,7 +21,7 @@ class MenuItemResolver
     public function __construct(
         MenuItemRepository $repository,
         Manager $toggleManager,
-        Router $router,
+        RouterInterface $router,
         ValidatorInterface $validator,
         RedisCache $cache
     ) {

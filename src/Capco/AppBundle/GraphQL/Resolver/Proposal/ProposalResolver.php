@@ -19,7 +19,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 class ProposalResolver implements ResolverInterface
 {
@@ -31,7 +31,7 @@ class ProposalResolver implements ResolverInterface
 
     public function __construct(
         ProposalRepository $proposalRepository,
-        Router $router,
+        RouterInterface $router,
         PostRepository $postRepository,
         TypeResolver $typeResolver,
         ProposalFormRepository $proposalFormRepository

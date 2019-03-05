@@ -3,14 +3,14 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\AbstractVote as Vote;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 class VoteResolver
 {
     protected $router;
     protected $urlResolver;
 
-    public function __construct(Router $router, UrlResolver $urlResolver)
+    public function __construct(RouterInterface $router, UrlResolver $urlResolver)
     {
         $this->router = $router;
         $this->urlResolver = $urlResolver;
