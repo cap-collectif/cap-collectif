@@ -1,7 +1,7 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Form\RegistrationFormQuestionsUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateRegistrationFormQuestionsMutation implements MutationInterface
@@ -50,7 +49,7 @@ class UpdateRegistrationFormQuestionsMutation implements MutationInterface
         $registrationForm = $this->registrationFormRepository->findCurrent();
 
         if (!$registrationForm) {
-            throw new UserError("No registration form");
+            throw new UserError('No registration form');
         }
 
         $form = $this->formFactory->create(
@@ -66,6 +65,7 @@ class UpdateRegistrationFormQuestionsMutation implements MutationInterface
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
+
             throw GraphQLException::fromFormErrors($form);
         }
 

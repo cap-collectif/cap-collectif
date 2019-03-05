@@ -5,7 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use GraphQL\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -26,7 +26,7 @@ abstract class BaseUpdateProfile implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         UserRepository $userRepository
     ) {

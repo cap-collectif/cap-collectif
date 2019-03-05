@@ -51,7 +51,7 @@ services:
     arguments: ['@fos_user.user_manager', {}]
     alias: 'capco_user.user_provider.email'
 
-  Capco\UserBundle\Security\DrupalEncoder:
+  drupal.encoder:
     class: Capco\UserBundle\Security\DrupalEncoder
 
   Capco\UserBundle\Authenticator\SamlAuthenticator:

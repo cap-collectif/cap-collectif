@@ -9,7 +9,7 @@ use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProfilePasswordMutation extends BaseUpdateProfile
 {
@@ -17,7 +17,7 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         UserRepository $userRepository,
         UserManager $userManager

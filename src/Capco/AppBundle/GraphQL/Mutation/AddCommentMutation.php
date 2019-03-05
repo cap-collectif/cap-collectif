@@ -11,7 +11,7 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Entity\PostComment;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\Entity\EventComment;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\CapcoAppBundleEvents;
@@ -41,7 +41,7 @@ class AddCommentMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
         EventDispatcherInterface $dispatcher,

@@ -12,7 +12,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class CreateProposalFusionMutation implements MutationInterface
@@ -26,7 +26,7 @@ class CreateProposalFusionMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         ProposalRepository $proposalRepo,
         TranslatorInterface $translator,
         GlobalIdResolver $globalIdResolver,
