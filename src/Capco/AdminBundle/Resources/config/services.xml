@@ -43,7 +43,7 @@
             <tag name="sonata.block" />
         </service>
 
-        <service id="capco_admin.block.help" class="Capco\AdminBundle\Block\HelpBlockService">
+        <service id="Capco\AdminBundle\Block\HelpBlockService" class="Capco\AdminBundle\Block\HelpBlockService">
             <argument>capco_admin.block.help</argument>
             <argument type="service" id="templating" />
             <tag name="sonata.block" />

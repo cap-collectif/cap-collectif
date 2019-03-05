@@ -103,7 +103,7 @@ sonata_block:
     sonata.media.block.feature_media: ~
     capco_admin.blog.block.recent_posts: ~
     capco_admin.block.recent_contributions: ~
-    capco_admin.block.help: ~
+    Capco\AdminBundle\Block\HelpBlockService: ~
 
 sonata_classification:
   class:
