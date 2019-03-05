@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
@@ -104,7 +105,7 @@ class GlobalIdResolver
 
                     break;
                 case 'CollectStep':
-                    $node = $this->container->get('capco.collect_step.repository')->find($uuid);
+                    $node = $this->container->get(CollectStepRepository::class)->find($uuid);
 
                     break;
                 case 'SelectionStep':

@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Section;
+use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -132,7 +133,7 @@ class SectionAdmin extends AbstractAdmin
         if ($fields['title']) {
             $formMapper->add('title', null, [
                 'label' => 'admin.fields.section.title',
-                'help' => 'be-concise-1-or-2-words'
+                'help' => 'be-concise-1-or-2-words',
             ]);
         } else {
             $formMapper->add('title', null, [
@@ -153,7 +154,7 @@ class SectionAdmin extends AbstractAdmin
             $formMapper->add('teaser', null, [
                 'label' => 'admin.fields.section.teaser',
                 'required' => false,
-                'help' => 'support-your-title'
+                'help' => 'support-your-title',
             ]);
         }
 
@@ -224,10 +225,11 @@ class SectionAdmin extends AbstractAdmin
     {
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get('capco.collect_step.repository')
+            ->get(CollectStepRepository::class)
             ->createQueryBuilder('cs')
             ->where('cs.isEnabled = :enabled')
             ->setParameter('enabled', true);
+
         return $qb->getQuery();
     }
 }
