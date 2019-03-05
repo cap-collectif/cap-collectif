@@ -70,7 +70,7 @@
             {{ 'you-have-changed-your-answer-to-the-question'|trans({
                 '%answerChangeDate%': nowDate,
                 '%answerChangeTime%': nowHour,
-                '%surveyTitle%': project.title
+                '%surveyTitle%': reply.questionnaire.title
             }, 'CapcoAppBundle') }}
         </p>
     {% else %}
@@ -78,7 +78,7 @@
             {{ 'your-answer-to-the-survey-have-been-registered-on-date-at-time'|trans({
                 '%questionnaireDate%': nowDate,
                 '%questionnaireTime%': nowHour,
-                '%surveyName%': project.title
+                '%surveyName%': reply.questionnaire.title
             }, 'CapcoAppBundle') }}
         </p>
     {% endif %}
@@ -92,7 +92,13 @@
     {% endif %}
 
     <p>
-        <a href="{{ stepUrl }}" class="btn">{{ 'access-my-answer'|trans({}, 'CapcoAppBundle') }}</a>
+        <button type="button"><a href="{{ stepUrl }}">{{ 'access-my-answer'|trans({}, 'CapcoAppBundle') }}</a></button>
     </p>
     {% endautoescape %}
+{% endblock %}
+
+{% block footer_mail %}
+    <span style="font-size:13px; font-family:'Open Sans', helvetica, arial, sans-serif; color:#999999">
+        {{ 'notification.email.external_footer'|trans({'{sitename}': siteName}, 'CapcoAppBundle') | raw }}
+    </span>
 {% endblock %}
