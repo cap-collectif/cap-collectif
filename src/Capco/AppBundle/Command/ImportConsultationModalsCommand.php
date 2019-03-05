@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\OpinionModal;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
+use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -38,7 +39,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
             ->get('doctrine')
             ->getManager();
         $step = $this->getContainer()
-            ->get('capco.consultation_step.repository')
+            ->get(ConsultationStepTypeRepository::class)
             ->findOneBySlug($input->getArgument('step'));
         if (!\is_object($step)) {
             throw new \InvalidArgumentException(

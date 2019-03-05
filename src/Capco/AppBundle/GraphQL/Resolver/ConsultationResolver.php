@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Answer;
 use Capco\AppBundle\Entity\Source;
@@ -43,7 +44,7 @@ class ConsultationResolver implements ContainerAwareInterface
     {
         $typeResolver = $this->container->get('overblog_graphql.type_resolver');
         $currentSchemaName = $typeResolver->getCurrentSchemaName();
-        
+
         if ($data instanceof Opinion) {
             return $typeResolver->resolve('Opinion');
         }
@@ -125,7 +126,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolve(Arg $args)
     {
-        $repo = $this->container->get('capco.consultation_step.repository');
+        $repo = $this->container->get(ConsultationStepTypeRepository::class);
         if (isset($args['id'])) {
             $stepId = GlobalId::fromGlobalId($args['id'])['id'];
             $consultation = $repo->find($stepId);

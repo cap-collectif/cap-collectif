@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
@@ -59,7 +60,7 @@ class OpinionsController extends FOSRestController
         }
 
         $uuid = GlobalId::fromGlobalId($stepId)['id'];
-        $step = $this->get('capco.consultation_step.repository')->find($uuid);
+        $step = $this->get(ConsultationStepTypeRepository::class)->find($uuid);
 
         if (!$step) {
             throw new BadRequestHttpException('Unknown step.');

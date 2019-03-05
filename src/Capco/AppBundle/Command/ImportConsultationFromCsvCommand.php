@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -67,7 +68,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             ->get('fos_user.user_manager')
             ->findUserByEmail($userEmail);
         $consultationStep = $this->getContainer()
-            ->get('capco.consultation_step.repository')
+            ->get(ConsultationStepTypeRepository::class)
             ->findOneBy(['slug' => $consultationStepSlug]);
         if (!$user) {
             $output->writeln(
