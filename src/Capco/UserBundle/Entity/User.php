@@ -189,11 +189,6 @@ class User extends BaseUser implements
     /**
      * @var int
      */
-    protected $eventCommentsCount = 0;
-
-    /**
-     * @var int
-     */
     protected $proposalCommentsCount = 0;
 
     // Votes
@@ -1003,22 +998,6 @@ class User extends BaseUser implements
     /**
      * @return int
      */
-    public function getEventCommentsCount()
-    {
-        return $this->eventCommentsCount;
-    }
-
-    /**
-     * @param int $eventCommentsCount
-     */
-    public function setEventCommentsCount($eventCommentsCount)
-    {
-        $this->eventCommentsCount = $eventCommentsCount;
-    }
-
-    /**
-     * @return int
-     */
     public function getProposalCommentsCount(): int
     {
         return $this->proposalCommentsCount;
@@ -1278,9 +1257,9 @@ class User extends BaseUser implements
             $this->proposalVotesCount;
     }
 
-    public function getCommentsCount()
+    public function getCommentsCount(): int
     {
-        return $this->postCommentsCount + $this->eventCommentsCount + $this->proposalCommentsCount;
+        return $this->postCommentsCount + $this->proposalCommentsCount;
     }
 
     public function getUsername(): ?string

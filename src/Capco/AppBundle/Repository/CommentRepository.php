@@ -1,9 +1,11 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 class CommentRepository extends EntityRepository
 {
@@ -12,6 +14,7 @@ class CommentRepository extends EntityRepository
         $qb = $this->createQueryBuilder('c')
             ->select('count(DISTINCT c.id)')
             ->where('c.published = true');
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -20,6 +23,7 @@ class CommentRepository extends EntityRepository
         $qb = $this->createQueryBuilder('c')
             ->select('count(DISTINCT c.authorEmail)')
             ->where('c.Author IS NULL');
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -35,6 +39,7 @@ class CommentRepository extends EntityRepository
                 'c.trashedAt as trashed'
             )
             ->leftJoin('c.Author', 'a');
+
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -53,6 +58,7 @@ class CommentRepository extends EntityRepository
             ->leftJoin('c.Author', 'a')
             ->where('c.id = :id')
             ->setParameter('id', $id);
+
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
 
@@ -122,6 +128,26 @@ class CommentRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getEventCommentsCount(User $user): int
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('sclr', 'sclr');
+
+        $query = $this->createNativeNamedQuery('eventCommentsCount');
+        $query
+            ->setResultSetMapping($rsm)
+            ->setSQL(
+                '
+            SELECT count(c.id) AS sclr FROM comment c USE INDEX (comment_idx_published_id_id)
+            WHERE c.author_id = :userId AND c.published = 1 AND e.is_enabled = 1
+            INNER JOIN event e ON c.event_id = e.id
+            GROUP BY c.author_id ORDER BY NULL'
+            )
+            ->setParameter('userId', $user->getId());
+
+        return (int) $query->getSingleScalarResult();
     }
 
     protected function getPublishedQueryBuilder()

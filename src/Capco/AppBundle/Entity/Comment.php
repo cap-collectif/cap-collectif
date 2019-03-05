@@ -31,6 +31,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  *    @ORM\Index(name="parent_comment_idx", columns={"id", "parent_id"}),
  *    @ORM\Index(name="author_comment_idx", columns={"id", "author_id"}),
  *    @ORM\Index(name="post_comment_idx", columns={"id", "post_id"}),
+ *    @ORM\Index(name="comment_idx_published_id_id", columns={"id", "author_id", "published"})
  * })
  * @ORM\HasLifecycleCallbacks()
  * @ORM\InheritanceType("SINGLE_TABLE")

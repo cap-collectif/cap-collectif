@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
 use Doctrine\ORM\EntityManager;
@@ -156,23 +157,6 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
                 SELECT count(pc.id) from CapcoAppBundle:PostComment pc
                 INNER JOIN CapcoAppBundle:Post p WITH pc.post = p
                 WHERE pc.Author = u AND pc.published = 1 GROUP BY pc.Author
-              )'
-                )
-                ->execute();
-        }
-
-        if (
-            $this->force ||
-            $this->em
-                ->createQuery('SELECT COUNT(comment.id) FROM CapcoAppBundle:EventComment comment')
-                ->getSingleScalarResult() > 0
-        ) {
-            $this->em
-                ->createQuery(
-                    'UPDATE CapcoUserBundle:User u set u.eventCommentsCount = (
-                SELECT count(ec.id) from CapcoAppBundle:EventComment ec
-                INNER JOIN CapcoAppBundle:Event e WITH ec.Event = e
-                WHERE ec.Author = u AND ec.published = 1 AND e.enabled = 1 GROUP BY ec.Author
               )'
                 )
                 ->execute();

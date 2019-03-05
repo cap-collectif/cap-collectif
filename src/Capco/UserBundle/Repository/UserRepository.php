@@ -2,22 +2,22 @@
 
 namespace Capco\UserBundle\Repository;
 
-use Doctrine\ORM\Query\Expr;
-use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Entity\Group;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\UserBundle\Entity\UserType;
 use Capco\AppBundle\Entity\PublicApiToken;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Entity\UserType;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class UserRepository extends EntityRepository
 {

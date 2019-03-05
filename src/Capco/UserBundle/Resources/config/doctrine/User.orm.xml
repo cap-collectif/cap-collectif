@@ -120,7 +120,6 @@
         </one-to-many>
 
         <field name="postCommentsCount" column="post_comments_count" type="integer" nullable="false" />
-        <field name="eventCommentsCount" column="event_comments_count" type="integer" nullable="false" />
         <field name="proposalCommentsCount" column="proposal_comments_count" type="integer" nullable="false" />
 
         <field name="commentVotesCount" column="comment_votes_count" type="integer" nullable="false" />

@@ -26,7 +26,10 @@ class QuestionnaireRepliesResolver implements ResolverInterface
         }
 
         $paginator = new Paginator(function (int $offset, int $limit) use ($questionnaire) {
-            return $this->replyRepository->findByQuestionnaire($questionnaire, $offset, $limit);
+            return $this->replyRepository
+                ->findByQuestionnaire($questionnaire, $offset, $limit)
+                ->getIterator()
+                ->getArrayCopy();
         });
 
         return $paginator->auto($args, $totalCount);

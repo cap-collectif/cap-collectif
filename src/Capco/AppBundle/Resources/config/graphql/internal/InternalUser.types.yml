@@ -143,7 +143,7 @@ InternalUser:
         type: 'Int!'
       contributionsToDeleteCount:
         type: 'Int!'
-        description: 'Previsionnal number of contributions who will be totally deleted if the user chose to delete his account.'
+        description: 'Provisional number of contributions who will be totally deleted if the user chose to delete his account.'
         resolve: "@=resolver('user_contributionsToDeleteCount', [value])"
       sourcesCount:
         type: 'Int!'
@@ -153,6 +153,7 @@ InternalUser:
         type: 'Int!'
       eventCommentsCount:
         type: 'Int!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventCommentsCountResolver", [value])'
       projectsCount:
         type: 'Int!'
       userType:
@@ -198,6 +199,7 @@ InternalUser:
             description: 'Ordering options for followers returning from the connection'
       contributionsCount:
         type: 'Int!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsCountResolver", [value])'
         description: 'Total of contributions count'
       facebookUrl:
         type: 'String'

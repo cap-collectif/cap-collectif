@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Capco\AppBundle\Entity\Questionnaire;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
@@ -64,37 +65,20 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function hydrateFromIds(array $ids): array
-    {
-        $qb = $this->createQueryBuilder('r');
-        $qb->where('r.id IN (:ids)')->setParameter('ids', $ids);
-
-        return $qb->getQuery()->getResult();
-    }
-
     public function findByQuestionnaire(
         Questionnaire $questionnaire,
         int $offset,
         int $limit
-    ): array {
-        $rsm = new ResultSetMapping();
-        $rsm->addScalarResult('id', 'id');
-
-        $nativeQuery = $this->getEntityManager()
-            ->createNativeQuery(
-                'SELECT r.id FROM reply r USE INDEX (idx_questionnaire_published) WHERE r.published = 1 AND r.questionnaire_id = :questionnaire AND r.is_draft = 0 ORDER BY r.publishedAt ASC LIMIT :offset, :limit',
-                $rsm
-            )
+    ): Paginator {
+        $qb = $this->getPublishedQueryBuilder()
+            ->andWhere('reply.questionnaire = :questionnaire')
             ->setParameter('questionnaire', $questionnaire)
-            ->setParameter('offset', $offset)
-            ->setParameter('limit', $limit);
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
 
-        $result = $nativeQuery->execute();
-        $ids = array_map(function ($data) {
-            return $data['id'];
-        }, $result);
-
-        return $this->hydrateFromIds($result);
+        // We don't need to $fetchJoinCollection here
+        // this impact performance a lot.
+        return new Paginator($qb, false);
     }
 
     public function findAllByAuthor(User $user): array

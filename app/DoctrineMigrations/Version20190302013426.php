@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190305115016 extends AbstractMigration
+final class Version20190302013426 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -20,10 +20,10 @@ final class Version20190305115016 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('DROP INDEX idx_questionnaire_published ON reply');
         $this->addSql(
-            'CREATE INDEX idx_questionnaire_published ON reply (id, questionnaire_id, published, is_draft, publishedAt)'
+            'CREATE INDEX comment_idx_published_id_id ON comment (id, author_id, published)'
         );
+        $this->addSql('ALTER TABLE fos_user DROP event_comments_count');
     }
 
     public function down(Schema $schema): void
@@ -34,9 +34,7 @@ final class Version20190305115016 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('DROP INDEX idx_questionnaire_published ON reply');
-        $this->addSql(
-            'CREATE INDEX idx_questionnaire_published ON reply (id, questionnaire_id, published)'
-        );
+        $this->addSql('DROP INDEX comment_idx_published_id_id ON comment');
+        $this->addSql('ALTER TABLE fos_user ADD event_comments_count INT NOT NULL');
     }
 }

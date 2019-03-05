@@ -51,7 +51,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         /** @var Project $object */
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (\in_array('Elasticsearch', $groups)) {
+        if (\in_array('Elasticsearch', $groups, true)) {
             $data['projectStatus'] = $object->getCurrentStepStatus();
             $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
                 $object
@@ -66,7 +66,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
             'external' => $object->getExternalLink(),
         ];
 
-        if (\in_array('ProjectAdmin', $groups)) {
+        if (\in_array('ProjectAdmin', $groups, true)) {
             $links['admin'] = $this->router->generate(
                 'admin_capco_app_project_edit',
                 ['id' => $object->getId()],
@@ -86,22 +86,20 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         if ($steps) {
             $data['steps'] = $steps;
         }
-        if (\in_array('Projects', $groups)) {
-            if ($object->getCover()) {
-                try {
-                    $data['cover'] = [
-                        'url' => $this->mediaExtension->path($object->getCover(), 'project'),
-                    ];
-                } catch (RouteNotFoundException $e) {
-                    // Avoid some SonataMedia problems
-                }
+        if (\in_array('Projects', $groups, true) && $object->getCover()) {
+            try {
+                $data['cover'] = [
+                    'url' => $this->mediaExtension->path($object->getCover(), 'project'),
+                ];
+            } catch (RouteNotFoundException $e) {
+                // Avoid some SonataMedia problems
             }
         }
 
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof Project;
     }
