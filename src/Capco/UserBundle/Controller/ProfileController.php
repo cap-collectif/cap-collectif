@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -199,7 +200,7 @@ class ProfileController extends Controller
 
         $sources = $this->get('capco.source.repository')->getByUser($user);
         $comments = $this->get('capco.comment.repository')->getByUser($user);
-        $votes = $this->get('capco.abstract_vote.repository')->getPublicVotesByUser($user);
+        $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
         $eventsCount = $this->getEventsCount($user);
 
         return array_merge(
@@ -388,7 +389,7 @@ class ProfileController extends Controller
      */
     public function showVotesAction(User $user)
     {
-        $votes = $this->get('capco.abstract_vote.repository')->getPublicVotesByUser($user);
+        $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);

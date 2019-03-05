@@ -1,7 +1,9 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,7 +20,7 @@ class MetricsController extends Controller
     public function metricsAction(Request $request): Response
     {
         if (
-            $this->getParameter('kernel.environment') === 'prod' &&
+            'prod' === $this->getParameter('kernel.environment') &&
             $request->headers->get('Authorization') !==
                 $this->getParameter('prometheus_bearer_token')
         ) {
@@ -39,8 +41,8 @@ class MetricsController extends Controller
         )->getRegisteredNotConfirmedByEmailCount();
 
         $commentCount = $this->get('capco.comment.repository')->countPublished();
-        $voteCount = $this->get('capco.abstract_vote.repository')->countPublished();
-        $voteUnpublishedCount = $this->get('capco.abstract_vote.repository')->countUnpublished();
+        $voteCount = $this->get(AbstractVoteRepository::class)->countPublished();
+        $voteUnpublishedCount = $this->get(AbstractVoteRepository::class)->countUnpublished();
 
         $opinionCount = $this->get('capco.opinion.repository')->countPublished();
         $versionCount = $this->get('capco.opinion_version.repository')->countPublished();

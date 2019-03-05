@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputOption;
 use Capco\AppBundle\Resolver\ContributionResolver;
@@ -302,7 +303,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                 );
 
                 $count = $container
-                    ->get('capco.abstract_vote.repository')
+                    ->get(AbstractVoteRepository::class)
                     ->getVotesFromConsultationStep($cs);
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\ConsultationStep cs
