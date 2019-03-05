@@ -5,6 +5,7 @@ namespace Capco\UserBundle\Controller;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
+use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
@@ -477,6 +478,6 @@ class ProfileController extends Controller
 
     private function getEventsCount(User $user): int
     {
-        return $this->get('capco.event.repository')->countAllByUser($user);
+        return $this->get(EventRepository::class)->countAllByUser($user);
     }
 }

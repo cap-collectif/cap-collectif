@@ -8,6 +8,7 @@ use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
+use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
@@ -80,7 +81,7 @@ class GlobalIdResolver
 
                     break;
                 case 'Event':
-                    $node = $this->container->get('capco.event.repository')->find($uuid);
+                    $node = $this->container->get(EventRepository::class)->find($uuid);
 
                     break;
                 case 'User':

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\StepResolver;
 use Capco\AppBundle\Toggle\Manager;
@@ -105,7 +106,7 @@ class SitemapsController extends Controller
                 'changefreq' => 'daily',
                 'priority' => '1.0',
             ];
-            foreach ($this->get('capco.event.repository')->findBy(['enabled' => true]) as $event) {
+            foreach ($this->get(EventRepository::class)->findBy(['enabled' => true]) as $event) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_event_show', [
                         'slug' => $event->getSlug(),
