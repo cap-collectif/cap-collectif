@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\PostRepository;
@@ -66,10 +67,7 @@ class SitemapsController extends Controller
                 'changefreq' => 'weekly',
                 'priority' => '0.5',
             ];
-            foreach (
-                $this->get('capco.theme.repository')->findBy(['isEnabled' => true])
-                as $theme
-            ) {
+            foreach ($this->get(ThemeRepository::class)->findBy(['isEnabled' => true]) as $theme) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_theme_show', [
                         'slug' => $theme->getSlug(),
@@ -130,7 +128,7 @@ class SitemapsController extends Controller
         $stepResolver = $this->get(StepResolver::class);
         /** @var AbstractStep $step */
         foreach (
-            $this->get('capco.abstract_step.repository')->findBy(['isEnabled' => true])
+            $this->get(AbstractStepRepository::class)->findBy(['isEnabled' => true])
             as $step
         ) {
             if ($step->getProject() && $step->getProject()->canDisplay($this->getUser())) {

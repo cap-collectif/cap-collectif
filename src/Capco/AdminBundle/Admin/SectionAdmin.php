@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\SectionRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -28,7 +29,7 @@ class SectionAdmin extends AbstractAdmin
 
         $all = $this->getConfigurationPool()
             ->getContainer()
-            ->get('capco.section.repository')
+            ->get(SectionRepository::class)
             ->findAll();
 
         $ids = [];

@@ -10,6 +10,8 @@ use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\HttpFoundation\Request;
@@ -104,9 +106,9 @@ class ProjectController extends Controller
         $opinions = $this->get(OpinionRepository::class)->getTrashedByProject($project);
         $versions = $this->get(OpinionVersionRepository::class)->getTrashedByProject($project);
         $arguments = $this->get(ArgumentRepository::class)->getTrashedByProject($project);
-        $sources = $this->get('capco.source.repository')->getTrashedByProject($project);
+        $sources = $this->get(SourceRepository::class)->getTrashedByProject($project);
 
-        $proposals = $this->get('capco.proposal.repository')->getTrashedByProject($project);
+        $proposals = $this->get(ProposalRepository::class)->getTrashedByProject($project);
 
         return [
             'project' => $project,

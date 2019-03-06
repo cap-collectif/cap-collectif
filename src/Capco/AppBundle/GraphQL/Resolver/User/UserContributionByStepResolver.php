@@ -6,7 +6,14 @@ use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
+use Capco\AppBundle\Repository\OpinionVoteRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Repository\SourceVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -46,32 +53,32 @@ class UserContributionByStepResolver implements ResolverInterface
                 ->get(ArgumentRepository::class)
                 ->countByAuthorAndStep($user, $step);
             $totalCount += $this->container
-                ->get('capco.source.repository')
+                ->get(SourceRepository::class)
                 ->countByAuthorAndStep($user, $step);
             $totalCount += $this->container
-                ->get('capco.opinion_vote.repository')
+                ->get(OpinionVoteRepository::class)
                 ->countByAuthorAndStep($user, $step);
             $totalCount += $this->container
                 ->get(ArgumentVoteRepository::class)
                 ->countByAuthorAndStep($user, $step);
             $totalCount += $this->container
-                ->get('capco.source_vote.repository')
+                ->get(SourceVoteRepository::class)
                 ->countByAuthorAndStep($user, $step);
             $totalCount += $this->container
-                ->get('capco.opinion_version_vote.repository')
+                ->get(OpinionVersionVoteRepository::class)
                 ->countByAuthorAndStep($user, $step);
         }
         if ($step instanceof CollectStep) {
             $totalCount += $this->container
-                ->get('capco.proposal.repository')
+                ->get(ProposalRepository::class)
                 ->countByAuthorAndStep($user, $step);
             $totalCount += $this->container
-                ->get('capco.proposal_collect_vote.repository')
+                ->get(ProposalCollectVoteRepository::class)
                 ->countByAuthorAndStep($user, $step);
         }
         if ($step instanceof SelectionStep) {
             $totalCount += $this->container
-                ->get('capco.proposal_selection_vote.repository')
+                ->get(ProposalSelectionVoteRepository::class)
                 ->countByAuthorAndStep($user, $step);
         }
         if ($step instanceof QuestionnaireStep) {

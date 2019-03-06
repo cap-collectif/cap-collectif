@@ -3,9 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Repository\SourceRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -57,10 +60,10 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 break;
             case 'COMMENT':
                 $result['values'] = $this->container
-                    ->get('capco.comment.repository')
+                    ->get(CommentRepository::class)
                     ->findAllByAuthor($user);
                 $result['totalCount'] = $this->container
-                    ->get('capco.comment.repository')
+                    ->get(CommentRepository::class)
                     ->countAllByAuthor($user);
 
                 return $result;
@@ -79,10 +82,10 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 break;
             case 'SOURCE':
                 $result['values'] = $this->container
-                    ->get('capco.source.repository')
+                    ->get(SourceRepository::class)
                     ->findAllByAuthor($user);
                 $result['totalCount'] = $this->container
-                    ->get('capco.source.repository')
+                    ->get(SourceRepository::class)
                     ->countAllByAuthor($user);
 
                 return $result;
@@ -90,10 +93,10 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 break;
             case 'PROPOSAL':
                 $result['values'] = $this->container
-                    ->get('capco.proposal.repository')
+                    ->get(ProposalRepository::class)
                     ->findAllByAuthor($user);
                 $result['totalCount'] = $this->container
-                    ->get('capco.proposal.repository')
+                    ->get(ProposalRepository::class)
                     ->countAllByAuthor($user);
 
                 return $result;

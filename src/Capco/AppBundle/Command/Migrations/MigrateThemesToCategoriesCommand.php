@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Command\Migrations;
 
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ThemeRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -65,12 +67,12 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
         $count = 0;
 
         $themes = $this->getContainer()
-            ->get('capco.theme.repository')
+            ->get(ThemeRepository::class)
             ->findAll();
 
         foreach ($themes as $theme) {
             $proposals = $this->getContainer()
-                ->get('capco.proposal.repository')
+                ->get(ProposalRepository::class)
                 ->findBy([
                     'proposalForm' => $form,
                     'theme' => $theme,

@@ -6,6 +6,8 @@ use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\PostSearchType;
 use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -54,10 +56,8 @@ class BlogController extends Controller
             }
         } else {
             $form->setData([
-                'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                'project' => $this->get(
-                    'Capco\AppBundle\Repository\ProjectRepository'
-                )->findOneBySlug($project),
+                'theme' => $this->get(ThemeRepository::class)->findOneBySlug($theme),
+                'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
             ]);
         }
 

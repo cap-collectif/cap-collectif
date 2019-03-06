@@ -5,6 +5,8 @@ namespace Capco\AppBundle\Command;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
+use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputOption;
 use Capco\AppBundle\Resolver\ContributionResolver;
@@ -343,11 +345,11 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         // ****************************** Selection steps counters **************************************
 
-        $selectionSteps = $container->get('capco.selection_step.repository')->findAll();
+        $selectionSteps = $container->get(SelectionStepRepository::class)->findAll();
         foreach ($selectionSteps as $ss) {
             if ($ss->isOpen() || $this->force) {
                 $anonymousParticipants = $container
-                    ->get('capco.user.repository')
+                    ->get(UserRepository::class)
                     ->countSelectionStepProposalAnonymousVoters($ss);
                 $participants =
                     $contributionResolver->countStepContributors($ss) + $anonymousParticipants;

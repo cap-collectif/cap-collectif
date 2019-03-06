@@ -2,6 +2,9 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AppBundle\Repository\SiteColorRepository;
+use Capco\AppBundle\Repository\SiteImageRepository;
+use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -39,21 +42,21 @@ class SettingsController extends Controller
 
         $admin_pool = $this->get('sonata.admin.pool');
 
-        $parameters = $this->get('capco.site_parameter.repository')->findBy(
+        $parameters = $this->get(SiteParameterRepository::class)->findBy(
             [
                 'category' => $category,
             ],
             ['position' => 'ASC']
         );
 
-        $images = $this->get('capco.site_image.repository')->findBy(
+        $images = $this->get(SiteImageRepository::class)->findBy(
             [
                 'category' => $category,
             ],
             ['position' => 'ASC']
         );
 
-        $colors = $this->get('capco.site_color.repository')->findBy(
+        $colors = $this->get(SiteColorRepository::class)->findBy(
             [
                 'category' => $category,
             ],
