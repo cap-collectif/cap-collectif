@@ -48,10 +48,12 @@ export class EventPageContainer extends React.Component<Props> {
         {eventPageBody && (
           <p>
             <FormattedHTMLMessage id={eventPageBody} />
-            <div className="visible-xs-block visible-sm-block d-flex dark-text">
-              {/* $FlowFixMe */}
-              <EventListCounter query={query} />
-              <EventListStatusFilter />
+            <div className="visible-xs-block visible-sm-block mt-15">
+              <div className="d-flex align-items-center">
+                {/* $FlowFixMe */}
+                <EventListCounter query={query} />
+                <EventListStatusFilter />
+              </div>
             </div>
           </p>
         )}

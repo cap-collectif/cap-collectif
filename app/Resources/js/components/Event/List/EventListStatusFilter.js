@@ -7,6 +7,7 @@ import { Button, Overlay, Popover } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import type { GlobalState } from '../../../types';
 import fieldComponent from '../../Form/Field';
+import colors from '../../../utils/colors';
 
 type Props = {
   status: ?string,
@@ -27,6 +28,10 @@ const StatusButton = styled(Button).attrs({
   &.btn.btn-link,
   &.btn.btn-link:hover {
     color: white;
+
+    @media screen and (max-width: 991px) {
+      color: ${colors.darkText};
+    }
   }
 `;
 
