@@ -5,21 +5,17 @@ namespace Capco\AppBundle\Traits;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Post;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 trait CommentableWithoutCounterTrait
 {
     /**
-     * @var bool
-     *
      * @ORM\Column(name="is_commentable", type="boolean")
      */
     private $commentable = true;
 
-    /**
-     * @return mixed
-     */
-    public function getComments()
+    public function getComments(): ?Collection
     {
         return $this->comments;
     }
