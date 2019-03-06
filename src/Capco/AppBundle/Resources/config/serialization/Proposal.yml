@@ -11,8 +11,6 @@ Capco\AppBundle\Entity\Proposal:
       groups: [Proposals, Elasticsearch]
     author:
       groups: [Proposals, Elasticsearch]
-    commentsCount:
-      groups: [Proposals]
     canContribute:
       groups: [Proposals]
     createdAt:
