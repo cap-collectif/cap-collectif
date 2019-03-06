@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\HighlightedContentRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -128,7 +129,7 @@ class HomepageController extends Controller
      */
     public function highlightedContentAction(Section $section = null)
     {
-        $highlighteds = $this->get('capco.highlighted.repository')->getAllOrderedByPosition(4);
+        $highlighteds = $this->get(HighlightedContentRepository::class)->getAllOrderedByPosition(4);
         $props = $this->serializer->serialize(['highlighteds' => $highlighteds], 'json', [
             'groups' => [
                 'HighlightedContent',
