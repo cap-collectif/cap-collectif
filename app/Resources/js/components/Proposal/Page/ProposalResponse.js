@@ -111,8 +111,16 @@ export class ProposalResponse extends React.PureComponent<Props> {
       }
 
       default: {
-        const responseValue =
-          response.question.type === 'number' ? JSON.parse(response.value || '') : response.value;
+        let responseValue = '';
+        if (response.question.type !== 'number') {
+          try {
+            responseValue = JSON.parse(response.value || '');
+          } catch (e) {
+            responseValue = response.value || '';
+          }
+        }
+        responseValue = response.value || '';
+
         value = (
           <div>
             <h3 className="h3">{response.question.title}</h3>
