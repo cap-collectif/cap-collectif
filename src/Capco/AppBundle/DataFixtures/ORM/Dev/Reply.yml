@@ -2,28 +2,24 @@ Capco\AppBundle\Entity\Reply:
   reply1:
     id: 'reply1'
     author: '@user502'
-    draft: 0
     questionnaire: '@questionnaire1'
     publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
   reply2:
     id: 'reply2'
-    draft: 0
     author: '@user4'
     questionnaire: '@questionnaire1'
     publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
   reply3:
     id: 'reply3'
-    draft: 0
     author: '@user4'
     questionnaire: '@questionnaire2'
     createdAt: <(new \DateTime('2016-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
   reply4:
     id: 'reply4'
-    draft: 0
     author: '@user4'
     questionnaire: '@questionnaire3'
     createdAt: <(new \DateTime('2016-03-01'))>
@@ -37,14 +33,12 @@ Capco\AppBundle\Entity\Reply:
     draft: true
   reply6:
     id: 'reply6'
-    draft: 0
     author: '@user_updating_email'
     questionnaire: '@questionnaire1'
     publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
   reply7:
     id: 'reply7'
-    draft: 0
     author: '@user_not_confirmed'
     questionnaire: '@questionnaire1'
     publishedAt: <(new \DateTime('2016-03-01'))>

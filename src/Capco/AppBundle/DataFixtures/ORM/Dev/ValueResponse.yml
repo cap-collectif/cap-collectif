@@ -156,35 +156,3 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@simplequestion2'
     reply: '@reply7'
     value: Trop cool ! On va voir Tibo qui cours en slip !
-  response82:
-    question: '@multiplequestion3'
-    reply: '@reply2'
-    value: 'Assez fort (Mon sonotone est mal réglé)'
-  response83:
-    question: '@multiplequestion6'
-    reply: '@reply2'
-    value: { 'labels': ['Logo 1'], 'other': null }
-  response84:
-    question: '@multiplequestion3'
-    reply: '@reply6'
-    value: 'Pas assez fort (Mon sonotone est en panne)'
-  response85:
-    question: '@multiplequestion7'
-    reply: '@reply7'
-    value: { 'labels': ['Oui'], 'other': null }
-  response86:
-    question: '@multiplequestion8'
-    reply: '@reply2'
-    value: { 'labels': ['Au top'], 'other': null }
-  response87:
-    question: '@multiplequestion7'
-    reply: '@reply2'
-    value: { 'labels': ['Il bluffe'], 'other': null }
-  response88:
-    question: '@multiplequestion8'
-    reply: '@reply6'
-    value: { 'labels': ['Incohérente'], 'other': null }
-  response89:
-    question: '@multiplequestion8'
-    reply: '@reply7'
-    value: { 'labels': ['Au top'], 'other': null }

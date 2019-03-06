@@ -2,9 +2,9 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 
-class ProjectDistrictAdmin extends Admin
+class ProjectDistrictAdmin extends AbstractAdmin
 {
     public function getTemplate($name)
     {

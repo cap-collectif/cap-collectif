@@ -142,29 +142,23 @@ Scenario: GraphQL client wants to retrieve replies
                      "question":{
                         "id":"UXVlc3Rpb246MTU="
                      },
-                     "value":"Assez fort (Mon sonotone est mal r\u00e9gl\u00e9)"
+                     "value":null
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTY="
+                     },
+                     "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
                         "id":"UXVlc3Rpb246MTg="
                      },
-                     "value":"{\u0022labels\u0022:[\u0022Logo 1\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MjA="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Au top\u0022],\u0022other\u0022:null}"
+                     "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
                         "id":"UXVlc3Rpb246MTk="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Il bluffe\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTY="
                      },
                      "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                   },
@@ -297,7 +291,7 @@ Scenario: GraphQL client wants to get question's participants with users not con
               {
                  "id":"UXVlc3Rpb246MTU=",
                  "participants":{
-                    "totalCount":1
+                    "totalCount":0
                  }
               },
               {
@@ -309,13 +303,13 @@ Scenario: GraphQL client wants to get question's participants with users not con
               {
                  "id":"UXVlc3Rpb246MTg=",
                  "participants":{
-                    "totalCount":1
+                    "totalCount":0
                  }
               },
               {
                  "id":"UXVlc3Rpb246MTk=",
                  "participants":{
-                    "totalCount":1
+                    "totalCount":0
                  }
               },
               {
@@ -631,13 +625,9 @@ Scenario: GraphQL client wants to get question's responses
                "id":"UXVlc3Rpb246MTU=",
                "title":"Nelson Monfort parle-t-il:",
                "responses":{
-                  "totalCount":1,
+                  "totalCount":0,
                   "edges":[
-                     {
-                        "node":{
-                           "value":"Assez fort (Mon sonotone est mal r\u00e9gl\u00e9)"
-                        }
-                     }
+
                   ]
                }
             },
@@ -655,13 +645,9 @@ Scenario: GraphQL client wants to get question's responses
                "id":"UXVlc3Rpb246MTg=",
                "title":"Choissez le meilleur logo",
                "responses":{
-                  "totalCount":1,
+                  "totalCount":0,
                   "edges":[
-                     {
-                        "node":{
-                           "value":"{\u0022labels\u0022:[\u0022Logo 1\u0022],\u0022other\u0022:null}"
-                        }
-                     }
+
                   ]
                }
             },
@@ -669,13 +655,9 @@ Scenario: GraphQL client wants to get question's responses
                "id":"UXVlc3Rpb246MTk=",
                "title":"Est-ce que Martoni a encore une balle dans son chargeur ?",
                "responses":{
-                  "totalCount":1,
+                  "totalCount":0,
                   "edges":[
-                     {
-                        "node":{
-                           "value":"{\u0022labels\u0022:[\u0022Il bluffe\u0022],\u0022other\u0022:null}"
-                        }
-                     }
+
                   ]
                }
             },
@@ -1039,18 +1021,9 @@ Scenario: GraphQL client wants to get question's responses
                "id":"UXVlc3Rpb246MTU=",
                "title":"Nelson Monfort parle-t-il:",
                "responses":{
-                  "totalCount":2,
+                  "totalCount":0,
                   "edges":[
-                     {
-                        "node":{
-                           "value":"Assez fort (Mon sonotone est mal r\u00e9gl\u00e9)"
-                        }
-                     },
-                     {
-                        "node":{
-                           "value":"Pas assez fort (Mon sonotone est en panne)"
-                        }
-                     }
+
                   ]
                }
             },
@@ -1068,13 +1041,9 @@ Scenario: GraphQL client wants to get question's responses
                "id":"UXVlc3Rpb246MTg=",
                "title":"Choissez le meilleur logo",
                "responses":{
-                  "totalCount":1,
+                  "totalCount":0,
                   "edges":[
-                     {
-                        "node":{
-                           "value":"{\u0022labels\u0022:[\u0022Logo 1\u0022],\u0022other\u0022:null}"
-                        }
-                     }
+
                   ]
                }
             },
@@ -1082,18 +1051,9 @@ Scenario: GraphQL client wants to get question's responses
                "id":"UXVlc3Rpb246MTk=",
                "title":"Est-ce que Martoni a encore une balle dans son chargeur ?",
                "responses":{
-                  "totalCount":2,
+                  "totalCount":0,
                   "edges":[
-                     {
-                        "node":{
-                           "value":"{\u0022labels\u0022:[\u0022Oui\u0022],\u0022other\u0022:null}"
-                        }
-                     },
-                     {
-                        "node":{
-                           "value":"{\u0022labels\u0022:[\u0022Il bluffe\u0022],\u0022other\u0022:null}"
-                        }
-                     }
+
                   ]
                }
             },

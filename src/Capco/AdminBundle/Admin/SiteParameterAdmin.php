@@ -4,7 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\SiteParameter;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
-class SiteParameterAdmin extends Admin
+class SiteParameterAdmin extends AbstractAdmin
 {
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'isEnabled'];
 
