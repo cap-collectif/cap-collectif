@@ -7,9 +7,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:AbstractVote']
 
-  capco.abstract_vote.repository:
-    alias: Capco\AppBundle\Repository\AbstractVoteRepository
-
   Capco\AppBundle\Repository\ArgumentRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Argument']
@@ -193,7 +190,6 @@ services:
   Capco\AppBundle\Repository\AbstractStepRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\AbstractStep']
-    alias: capco.abstract_step.repository
 
   Capco\AppBundle\Repository\ConsultationStepRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]

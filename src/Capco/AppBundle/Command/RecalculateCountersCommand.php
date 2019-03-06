@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
+use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
@@ -291,7 +291,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )'
         );
 
-        $consultationSteps = $container->get(ConsultationStepTypeRepository::class)->findAll();
+        $consultationSteps = $container->get(ConsultationStepRepository::class)->findAll();
         foreach ($consultationSteps as $cs) {
             if ($cs->isOpen() || $this->force) {
                 $participants = $contributionResolver->countStepContributors($cs);

@@ -14,6 +14,8 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Repository\UserArchiveRepository;
+use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -48,7 +50,7 @@ class ProfileController extends Controller
     public function loginAndShowEditFollowingsAction(Request $request, string $token)
     {
         $userNotificationsConfiguration = $this->get(
-            'capco.user_notifications_configuration.repository'
+            UserNotificationsConfigurationRepository::class
         )->findOneBy(['unsubscribeToken' => $token]);
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
@@ -100,7 +102,7 @@ class ProfileController extends Controller
     public function loginAndShowDataAction(Request $request, string $token)
     {
         $userNotificationsConfiguration = $this->get(
-            'capco.user_notifications_configuration.repository'
+            UserNotificationsConfigurationRepository::class
         )->findOneBy(['unsubscribeToken' => $token]);
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
@@ -118,7 +120,7 @@ class ProfileController extends Controller
     public function loginAndShowNotificationsOptionsAction(Request $request, string $token)
     {
         $userNotificationsConfiguration = $this->get(
-            'capco.user_notifications_configuration.repository'
+            UserNotificationsConfigurationRepository::class
         )->findOneBy(['unsubscribeToken' => $token]);
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
@@ -140,7 +142,7 @@ class ProfileController extends Controller
     {
         /** @var UserNotificationsConfiguration $userNotificationsConfiguration */
         $userNotificationsConfiguration = $this->get(
-            'capco.user_notifications_configuration.repository'
+            UserNotificationsConfigurationRepository::class
         )->findOneBy(['unsubscribeToken' => $token]);
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
