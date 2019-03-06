@@ -11,8 +11,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CommentSubscriber implements EventSubscriberInterface
 {
-    const NOTIFY_TO_ADMIN = 'admin';
-    const NOTIFY_TO_AUTHOR = 'author';
+    public const NOTIFY_TO_ADMIN = 'admin';
+    public const NOTIFY_TO_AUTHOR = 'author';
 
     private $publisher;
 
@@ -28,13 +28,12 @@ class CommentSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onCommentChanged(CommentChangedEvent $event)
+    public function onCommentChanged(CommentChangedEvent $event): void
     {
         $comment = $event->getComment();
         $action = $event->getAction();
         $entity = $comment->getRelatedObject();
         if ('remove' === $action) {
-            $entity->decreaseCommentsCount(1);
             if ($comment instanceof ProposalComment) {
                 $isAnonymous = null === $comment->getAuthor();
                 $comment = [
@@ -64,7 +63,6 @@ class CommentSubscriber implements EventSubscriberInterface
                 $this->publisher->publish('comment.delete', new Message(json_encode($comment)));
             }
         } elseif ('add' === $action) {
-            $entity->increaseCommentsCount(1);
             $this->publisher->publish(
                 'comment.create',
                 new Message(
