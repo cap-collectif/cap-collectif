@@ -136,10 +136,6 @@ InternalProposal:
       draft:
         type: 'Boolean!'
         description: 'Identifies proposals as draft.'
-      # TODO remove this counter
-      commentsCount:
-        type: 'Int!'
-        description: 'Count number of comments for the proposal.'
       votes:
         type: 'ProposalVoteConnection!'
         argsBuilder: 'Relay::Connection'

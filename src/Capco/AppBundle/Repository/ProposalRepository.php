@@ -268,7 +268,6 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.status', 'status')
             ->leftJoin('proposal.district', 'district')
             ->andWhere('proposal.trashedStatus IS NULL')
-            ->orderBy('proposal.commentsCount', 'DESC')
             ->addOrderBy('proposal.createdAt', 'DESC')
             ->addGroupBy('proposal.id');
 
@@ -298,7 +297,7 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.proposalForm', 'f')
             ->andWhere('f.step = :step')
             ->setParameter('step', $step)
-            ->orderBy('proposal.commentsCount', 'DESC')
+
             ->addOrderBy('proposal.createdAt', 'DESC')
             ->addGroupBy('proposal.id');
 

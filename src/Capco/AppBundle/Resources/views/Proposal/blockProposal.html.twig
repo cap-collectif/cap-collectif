@@ -62,13 +62,14 @@
                 </div>
             {% endif %}
             {% if not proposal.isTrashed() %}
+                {% set commentsCount = capco_comment_proposal_count(proposal) %}
                 <div class="proposal__counters">
                     <div class="proposal__counter">
                         <div class="proposal__counter__value" >
-                            {{ proposal.commentsCount }}
+                            {{ commentsCount }}
                         </div>
                         <div class="proposal__counter__label" >
-                            {% transchoice proposal.commentsCount with {'%count%': proposal.commentsCount} from 'CapcoAppBundle' %}
+                            {% transchoice commentsCount with {'%count%': commentsCount} from 'CapcoAppBundle' %}
                             proposal.show.comments
                             {% endtranschoice %}
                         </div>
