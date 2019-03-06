@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -90,13 +91,17 @@ class ProjectSearch extends Search
     public function getAllContributions(): int
     {
         $query = new Query();
-        $query->setSource(['contributionsCount']);
+        $query->setSource(['contributionsCount', 'visibility']);
         $resultSet = $this->index
             ->getType($this->type)
             ->search($query, $this->projectRepo->count([]));
         $totalCount = array_sum(
             array_map(function (Result $result) {
-                return $result->getData()['contributionsCount'];
+                if (ProjectVisibilityMode::VISIBILITY_PUBLIC === $result->getData()['visibility']) {
+                    return $result->getData()['contributionsCount'];
+                }
+
+                return 0;
             }, $resultSet->getResults())
         );
 

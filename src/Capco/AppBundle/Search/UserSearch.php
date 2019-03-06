@@ -170,10 +170,7 @@ class UserSearch extends Search
             ],
         ]);
 
-        $query
-            ->setSource(['id'])
-            ->setFrom($offset)
-            ->setSize($limit);
+        $query->setFrom($offset)->setSize($limit);
 
         $resultSet = $this->index->getType('user')->search($query);
 

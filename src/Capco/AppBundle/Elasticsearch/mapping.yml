@@ -112,6 +112,7 @@ mappings:
       createdAt: { type: date }
       publishedAt: { type: date }
       author: *Author
+      visibility: { type: long }
       projectType:
         type: object
         properties:
