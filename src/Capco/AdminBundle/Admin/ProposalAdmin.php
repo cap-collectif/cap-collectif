@@ -48,7 +48,10 @@ class ProposalAdmin extends AbstractAdmin
                 ->getContainer()
                 ->get('doctrine')
                 ->getManager();
-            $em->getFilters()->disable('softdeleted');
+            $filters = $em->getFilters();
+            if ($filters->isEnabled('softdeleted')) {
+                $filters->disable('softdeleted');
+            }
         }
 
         return parent::getObject($id);
@@ -65,7 +68,10 @@ class ProposalAdmin extends AbstractAdmin
                 ->getContainer()
                 ->get('doctrine')
                 ->getManager();
-            $em->getFilters()->disable('softdeleted');
+            $filters = $em->getFilters();
+            if ($filters->isEnabled('softdeleted')) {
+                $filters->disable('softdeleted');
+            }
 
             return parent::createQuery($context);
         }
