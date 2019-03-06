@@ -8,6 +8,7 @@ use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Repository\ReportingRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -94,10 +95,10 @@ class MetricsController extends Controller
             })
         );
 
-        $reportCount = \count($this->get('capco.reporting.repository')->findAll());
+        $reportCount = \count($this->get(ReportingRepository::class)->findAll());
         // Traité ou non ?
         $reportArchivedCount = \count(
-            $this->get('capco.reporting.repository')->findBy(['isArchived' => true])
+            $this->get(ReportingRepository::class)->findBy(['isArchived' => true])
         );
 
         // Followers
