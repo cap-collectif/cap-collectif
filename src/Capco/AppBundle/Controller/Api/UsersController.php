@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -105,7 +104,7 @@ class UsersController extends FOSRestController
         if ($creatingAnAdmin) {
             $this->get('capco.user_notifier')->adminConfirmation($user);
         } else {
-            $this->get(FOSNotifier::class)->sendConfirmationEmailMessage($user);
+            $this->get('capco.fos_notifier')->sendConfirmationEmailMessage($user);
         }
 
         $userManager->updateUser($user);
@@ -184,7 +183,7 @@ class UsersController extends FOSRestController
         if ($user->getNewEmailToConfirm()) {
             $this->get('capco.user_notifier')->newEmailConfirmation($user);
         } else {
-            $this->get(FOSNotifier::class)->sendConfirmationEmailMessage($user);
+            $this->get('capco.fos_notifier')->sendConfirmationEmailMessage($user);
         }
 
         $user->setEmailConfirmationSentAt(new \DateTime());

@@ -9,7 +9,7 @@ fos_user:
     user_manager: sonata.user.orm.user_manager
     email_canonicalizer: Capco\AppBundle\Utils\Canonicalizer
     username_canonicalizer: Capco\AppBundle\Utils\Canonicalizer
-    mailer: Capco\AppBundle\Notifier\FOSNotifier
+    mailer: capco.fos_notifier
   registration:
     confirmation:
       enabled: true
