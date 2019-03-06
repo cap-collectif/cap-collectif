@@ -126,23 +126,29 @@ Scenario: User wants to update a reply
                   "question":{
                      "id":"UXVlc3Rpb246MTU="
                   },
-                  "value":null
-               },
-               {
-                  "question":{
-                     "id":"UXVlc3Rpb246MTY="
-                  },
-                  "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
+                  "value":"Assez fort (Mon sonotone est mal r\u00e9gl\u00e9)"
                },
                {
                   "question":{
                      "id":"UXVlc3Rpb246MTg="
                   },
-                  "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
+                  "value":"{\u0022labels\u0022:[\u0022Logo 1\u0022],\u0022other\u0022:null}"
+               },
+               {
+                  "question":{
+                     "id":"UXVlc3Rpb246MjA="
+                  },
+                  "value":"{\u0022labels\u0022:[\u0022Au top\u0022],\u0022other\u0022:null}"
                },
                {
                   "question":{
                      "id":"UXVlc3Rpb246MTk="
+                  },
+                  "value":"{\u0022labels\u0022:[\u0022Il bluffe\u0022],\u0022other\u0022:null}"
+               },
+               {
+                  "question":{
+                     "id":"UXVlc3Rpb246MTY="
                   },
                   "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                },
