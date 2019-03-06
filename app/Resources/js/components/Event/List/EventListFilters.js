@@ -80,7 +80,7 @@ const themeQuery = graphql`
   }
 `;
 
-const StatusWrapper = styled(Col)`
+const StatusContainer = styled(Col)`
   color: white;
   display: flex;
   align-items: center;
@@ -247,11 +247,11 @@ export class EventListFilters extends React.Component<Props, State> {
 
     return (
       <Row className="align-items-center d-flex flex-wrap">
-        <StatusWrapper xs={4} md={5} xsHidden smHidden>
+        <StatusContainer xs={4} md={5} xsHidden smHidden>
           {/* $FlowFixMe $refType */}
           <EventListCounter query={query} />
           <EventListStatusFilter />
-        </StatusWrapper>
+        </StatusContainer>
         <FiltersWrapper xs={12} md={4} id="event-filters">
           <div className="pull-right">
             <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />

@@ -22,11 +22,6 @@ type Props = {
   isMobileListView: boolean,
 };
 
-// check flow with hook
-// type State = {
-//   loading: boolean,
-// };
-
 const EVENTS_PAGINATION = 100;
 
 const MapContainer = styled(Col)`
