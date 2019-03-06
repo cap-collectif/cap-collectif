@@ -8,6 +8,7 @@ use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Form\ProjectSearchType;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
@@ -101,7 +102,7 @@ class ProjectController extends Controller
         }
 
         $opinions = $this->get(OpinionRepository::class)->getTrashedByProject($project);
-        $versions = $this->get('capco.opinion_version.repository')->getTrashedByProject($project);
+        $versions = $this->get(OpinionVersionRepository::class)->getTrashedByProject($project);
         $arguments = $this->get(ArgumentRepository::class)->getTrashedByProject($project);
         $sources = $this->get('capco.source.repository')->getTrashedByProject($project);
 

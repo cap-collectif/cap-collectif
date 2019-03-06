@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -81,7 +82,7 @@ class OpinionController extends Controller
         string $versionSlug
     ) {
         $opinion = $this->get(OpinionRepository::class)->findOneBySlug($opinionSlug);
-        $version = $this->get('capco.opinion_version.repository')->findOneBySlug($versionSlug);
+        $version = $this->get(OpinionVersionRepository::class)->findOneBySlug($versionSlug);
 
         if (!$opinion || !$version) {
             throw $this->createNotFoundException(

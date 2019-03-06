@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -39,7 +40,7 @@ class UserContributionByStepResolver implements ResolverInterface
                 ->get(OpinionRepository::class)
                 ->countByAuthorAndStep($user, $step);
             $totalCount += $this->container
-                ->get('capco.opinion_version.repository')
+                ->get(OpinionVersionRepository::class)
                 ->countByAuthorAndStep($user, $step);
             $totalCount += $this->container
                 ->get(ArgumentRepository::class)

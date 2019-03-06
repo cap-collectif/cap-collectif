@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
@@ -191,7 +192,7 @@ class ProfileController extends Controller
         $opinionTypesWithUserOpinions = $this->get('capco.opinion_type.repository')->getByUser(
             $user
         );
-        $versions = $this->get('capco.opinion_version.repository')->getByUser($user);
+        $versions = $this->get(OpinionVersionRepository::class)->getByUser($user);
         $arguments = $this->get('capco.argument.repository')->getByUser($user);
 
         $replies = $this->get(ReplyRepository::class)->findBy([
@@ -278,7 +279,7 @@ class ProfileController extends Controller
      */
     public function showOpinionVersionsAction(User $user)
     {
-        $versions = $this->get('capco.opinion_version.repository')->getByUser($user);
+        $versions = $this->get(OpinionVersionRepository::class)->getByUser($user);
 
         return ['user' => $user, 'versions' => $versions];
     }

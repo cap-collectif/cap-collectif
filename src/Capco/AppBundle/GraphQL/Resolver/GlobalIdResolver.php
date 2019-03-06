@@ -10,6 +10,7 @@ use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
@@ -144,7 +145,7 @@ class GlobalIdResolver
         $node = $this->container->get(OpinionRepository::class)->find($uuid);
 
         if (!$node) {
-            $node = $this->container->get('capco.opinion_version.repository')->find($uuid);
+            $node = $this->container->get(OpinionVersionRepository::class)->find($uuid);
         }
 
         if (!$node) {
@@ -217,7 +218,7 @@ class GlobalIdResolver
 
         if (!$node) {
             $node = $this->container
-                ->get('capco.opinion_version.repository')
+                ->get(OpinionVersionRepository::class)
                 ->findOneByModerationToken($token);
         }
 

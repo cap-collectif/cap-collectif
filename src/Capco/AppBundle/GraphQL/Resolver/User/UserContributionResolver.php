@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -45,10 +46,10 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 break;
             case 'OPINIONVERSION':
                 $result['values'] = $this->container
-                    ->get('capco.opinion_version.repository')
+                    ->get(OpinionVersionRepository::class)
                     ->findAllByAuthor($user);
                 $result['totalCount'] = $this->container
-                    ->get('capco.opinion_version.repository')
+                    ->get(OpinionVersionRepository::class)
                     ->countAllByAuthor($user);
 
                 return $result;

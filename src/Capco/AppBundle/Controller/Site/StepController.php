@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -113,7 +114,7 @@ class StepController extends Controller
         );
 
         $nbVersionsToDisplay = $step->getNbVersionsToDisplay() ?? 10;
-        $versions = $this->get('capco.opinion_version.repository')->getEnabledByProject(
+        $versions = $this->get(OpinionVersionRepository::class)->getEnabledByProject(
             $project,
             $excludedAuthor,
             true,
@@ -189,7 +190,7 @@ class StepController extends Controller
             ? $project->getAuthor()->getId()
             : null;
 
-        $versions = $this->get('capco.opinion_version.repository')->getEnabledByProject(
+        $versions = $this->get(OpinionVersionRepository::class)->getEnabledByProject(
             $project,
             $excludedAuthor,
             true,
