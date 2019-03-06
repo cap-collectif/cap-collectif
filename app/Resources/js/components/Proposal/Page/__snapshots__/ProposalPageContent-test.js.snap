@@ -124,7 +124,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(ProposalPageComments))
+  <ForwardRef(Relay(Connect(ProposalPageComments)))
     proposal={
       Object {
         "$fragmentRefs": null,

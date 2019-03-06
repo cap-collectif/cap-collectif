@@ -54,24 +54,9 @@ class ProposalRepository extends EntityRepository
      */
     public function getOneBySlug(string $slug): ?Proposal
     {
-        // This subquery will use the "idx_slug" index to retrieve the proposal id
-        $id = $this->createQueryBuilder('p')
-            ->select('p.id')
-            ->where('p.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->getQuery()
-            ->useQueryCache(true)
-            ->useResultCache(true, 60)
-            ->getSingleScalarResult();
-
-        if (!$id) {
-            return null;
-        }
-
-        // This query will hydrate the proposal
-        $qb = $this->createQueryBuilder('p')
-            ->andWhere('p.id = :proposalId')
-            ->setParameter('proposalId', $id);
+        $qb = $this->createQueryBuilder('proposal')
+            ->andWhere('proposal.slug = :slug')
+            ->setParameter('slug', $slug);
 
         return $qb
             ->getQuery()
