@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -45,7 +46,7 @@ class MetricsController extends Controller
         $voteCount = $this->get(AbstractVoteRepository::class)->countPublished();
         $voteUnpublishedCount = $this->get(AbstractVoteRepository::class)->countUnpublished();
 
-        $opinionCount = $this->get('capco.opinion.repository')->countPublished();
+        $opinionCount = $this->get(OpinionRepository::class)->countPublished();
         $versionCount = $this->get('capco.opinion_version.repository')->countPublished();
         $argumentCount = $this->get('capco.argument.repository')->countPublished();
         $sourceCount = $this->get('capco.source.repository')->countPublished();
@@ -61,14 +62,14 @@ class MetricsController extends Controller
             $replyCount;
 
         $contributionTrashedCount = 0;
-        $contributionTrashedCount += $this->get('capco.opinion.repository')->countTrashed();
+        $contributionTrashedCount += $this->get(OpinionRepository::class)->countTrashed();
         $contributionTrashedCount += $this->get('capco.opinion_version.repository')->countTrashed();
         $contributionTrashedCount += $this->get('capco.argument.repository')->countTrashed();
         $contributionTrashedCount += $this->get('capco.source.repository')->countTrashed();
         $contributionTrashedCount += $this->get('capco.proposal.repository')->countTrashed();
 
         $contributionUnpublishedCount = 0;
-        $contributionUnpublishedCount += $this->get('capco.opinion.repository')->countUnpublished();
+        $contributionUnpublishedCount += $this->get(OpinionRepository::class)->countUnpublished();
         $contributionUnpublishedCount += $this->get(
             'capco.opinion_version.repository'
         )->countUnpublished();

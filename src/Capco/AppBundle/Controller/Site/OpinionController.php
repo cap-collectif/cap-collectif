@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -46,7 +47,7 @@ class OpinionController extends Controller
             'opinionTypeSlug' => $opinionType->getSlug(),
             'page' => $page,
         ]);
-        $opinions = $this->get('capco.opinion.repository')->getByOpinionTypeOrdered(
+        $opinions = $this->get(OpinionRepository::class)->getByOpinionTypeOrdered(
             $opinionType->getId(),
             10,
             $page,
@@ -79,7 +80,7 @@ class OpinionController extends Controller
         string $opinionSlug,
         string $versionSlug
     ) {
-        $opinion = $this->get('capco.opinion.repository')->findOneBySlug($opinionSlug);
+        $opinion = $this->get(OpinionRepository::class)->findOneBySlug($opinionSlug);
         $version = $this->get('capco.opinion_version.repository')->findOneBySlug($versionSlug);
 
         if (!$opinion || !$version) {
@@ -115,7 +116,7 @@ class OpinionController extends Controller
         string $opinionSlug
     ) {
         /** @var Opinion $opinion */
-        $opinion = $this->get('capco.opinion.repository')->findOneBySlug($opinionSlug);
+        $opinion = $this->get(OpinionRepository::class)->findOneBySlug($opinionSlug);
 
         if (!$opinion) {
             throw $this->createNotFoundException(

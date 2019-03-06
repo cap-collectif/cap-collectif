@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -154,7 +155,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             }
 
             $opinion = $this->getContainer()
-                ->get('capco.opinion.repository')
+                ->get(OpinionRepository::class)
                 ->findOneBy(['title' => $row[0], 'step' => $consultationStep]);
             if (\is_object($opinion) && !$input->getOption('force')) {
                 $output->writeln(

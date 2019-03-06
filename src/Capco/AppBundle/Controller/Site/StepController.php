@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -104,7 +105,7 @@ class StepController extends Controller
             : null;
 
         $nbOpinionsToDisplay = $step->getNbOpinionsToDisplay() ?? 10;
-        $opinions = $this->get('capco.opinion.repository')->getEnabledByProject(
+        $opinions = $this->get(OpinionRepository::class)->getEnabledByProject(
             $project,
             $excludedAuthor,
             true,
@@ -150,7 +151,7 @@ class StepController extends Controller
             ? $project->getAuthor()->getId()
             : null;
 
-        $opinions = $this->get('capco.opinion.repository')->getEnabledByProject(
+        $opinions = $this->get(OpinionRepository::class)->getEnabledByProject(
             $project,
             $excludedAuthor,
             true,

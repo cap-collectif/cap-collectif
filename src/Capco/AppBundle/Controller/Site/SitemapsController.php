@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\StepResolver;
 use Capco\AppBundle\Toggle\Manager;
@@ -143,10 +144,7 @@ class SitemapsController extends Controller
         }
 
         /** @var Opinion $opinion */
-        foreach (
-            $this->get('capco.opinion.repository')->findBy(['published' => true])
-            as $opinion
-        ) {
+        foreach ($this->get(OpinionRepository::class)->findBy(['published' => true]) as $opinion) {
             if ($opinion->canDisplay($this->getUser())) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_project_show_opinion', [

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
@@ -78,7 +79,7 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException('You dont meets all the requirements.');
         }
 
-        $repo = $this->get('capco.opinion.repository');
+        $repo = $this->get(OpinionRepository::class);
 
         if (\count($repo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
             throw new BadRequestHttpException('You contributed too many times.');

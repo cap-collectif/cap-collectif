@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Capco\AppBundle\Entity\OpinionModal;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -51,7 +52,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
         $modals = $this->getModals($input->getArgument('filePath'));
         foreach ($modals as $row) {
             $opinion = $this->getContainer()
-                ->get('capco.opinion.repository')
+                ->get(OpinionRepository::class)
                 ->findOneBy([
                     'title' => $row['opinion'],
                     'step' => $step,

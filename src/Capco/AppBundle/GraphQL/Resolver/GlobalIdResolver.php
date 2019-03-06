@@ -9,6 +9,7 @@ use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
 use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
@@ -140,7 +141,7 @@ class GlobalIdResolver
         $uuid = $uuidOrGlobalId;
 
         $node = null;
-        $node = $this->container->get('capco.opinion.repository')->find($uuid);
+        $node = $this->container->get(OpinionRepository::class)->find($uuid);
 
         if (!$node) {
             $node = $this->container->get('capco.opinion_version.repository')->find($uuid);
@@ -212,7 +213,7 @@ class GlobalIdResolver
 
     public function resolveByModerationToken(string $token): ModerableInterface
     {
-        $node = $this->container->get('capco.opinion.repository')->findOneByModerationToken($token);
+        $node = $this->container->get(OpinionRepository::class)->findOneByModerationToken($token);
 
         if (!$node) {
             $node = $this->container
