@@ -112,7 +112,7 @@ export class EventListStatusFilter extends React.Component<Props, State> {
     if (status === 'all') {
       return (
         <>
-          ( <FormattedMessage id="search.form.themes.all" /> )
+          (<FormattedMessage id="search.form.themes.all" />)
         </>
       );
     }
@@ -142,7 +142,7 @@ export class EventListStatusFilter extends React.Component<Props, State> {
   }
 }
 
-const selector = formValueSelector('EventListFilters');
+const selector = formValueSelector('EventPageContainer');
 
 const mapStateToProps = (state: GlobalState) => ({
   status: selector(state, 'status'),

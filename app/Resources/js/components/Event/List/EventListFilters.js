@@ -5,7 +5,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchQuery, graphql } from 'relay-runtime';
-import { reduxForm, Field, formValueSelector, type FormProps } from 'redux-form';
+import { Field, formValueSelector, type FormProps, reset } from 'redux-form';
 import { createFragmentContainer } from 'react-relay';
 import select from '../../Form/Select';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
@@ -114,7 +114,7 @@ export class EventListFilters extends React.Component<Props, State> {
   }
 
   getFilters(nbFilter: number): [] {
-    const { features, theme, project, reset, userTypes, intl } = this.props;
+    const { features, theme, project, userTypes, intl, dispatch } = this.props;
     const { themeOptions, projectOptions } = this.state;
 
     const filters = [];
@@ -188,7 +188,10 @@ export class EventListFilters extends React.Component<Props, State> {
     if (theme !== null || project !== null) {
       if (nbFilter > 0) {
         filters.push(
-          <Button bsStyle="link" className="p-0" onClick={reset}>
+          <Button
+            bsStyle="link"
+            className="p-0"
+            onClick={() => dispatch(reset('EventPageContainer'))}>
             <FormattedMessage id="reset-filters" />
           </Button>,
         );
@@ -285,7 +288,7 @@ export class EventListFilters extends React.Component<Props, State> {
   }
 }
 
-const selector = formValueSelector('EventListFilters');
+const selector = formValueSelector('EventPageContainer');
 
 const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
@@ -296,15 +299,7 @@ const mapStateToProps = (state: GlobalState) => ({
   userTypes: state.default.userTypes,
 });
 
-const form = reduxForm({
-  form: 'EventListFilters',
-  destroyOnUnmount: false,
-  initialValues: {
-    status: 'ongoing-and-future',
-  },
-})(EventListFilters);
-
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect(mapStateToProps)(injectIntl(EventListFilters));
 
 export default createFragmentContainer(
   container,

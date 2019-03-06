@@ -8,12 +8,12 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
     aria-expanded={false}
     onClick={[Function]}
   >
-    ( 
+    (
     <FormattedMessage
       id="search.form.themes.all"
       values={Object {}}
     />
-     )
+    )
   </EventListStatusFilter__StatusButton>
   <Overlay
     animation={[Function]}
@@ -52,12 +52,12 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                 onClick={[Function]}
               >
                 <React.Fragment>
-                  ( 
+                  (
                   <FormattedMessage
                     id="search.form.themes.all"
                     values={Object {}}
                   />
-                   )
+                  )
                 </React.Fragment>
               </EventListStatusFilter__StatusButton>
               <Overlay

@@ -116,7 +116,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                     bsStyle="link"
                     className="p-0"
                     disabled={false}
-                    onClick={[MockFunction]}
+                    onClick={[Function]}
                   >
                     <FormattedMessage
                       id="reset-filters"
@@ -282,7 +282,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                     bsStyle="link"
                     className="p-0"
                     disabled={false}
-                    onClick={[MockFunction]}
+                    onClick={[Function]}
                   >
                     <FormattedMessage
                       id="reset-filters"
