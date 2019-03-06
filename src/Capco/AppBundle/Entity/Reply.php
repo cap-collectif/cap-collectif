@@ -90,7 +90,7 @@ class Reply implements Publishable, Contribution, VoteContribution
         return null;
     }
 
-    public function getAuthor()
+    public function getAuthor(): ?User
     {
         return $this->author;
     }

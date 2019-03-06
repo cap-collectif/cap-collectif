@@ -126,7 +126,7 @@ abstract class AbstractResponse
         return $this;
     }
 
-    public function getReply()
+    public function getReply(): ?Reply
     {
         return $this->reply;
     }
