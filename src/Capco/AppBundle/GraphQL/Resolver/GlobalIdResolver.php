@@ -10,6 +10,7 @@ use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\UserBundle\Entity\User;
@@ -149,7 +150,7 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.opinion_type.repository')->find($uuid);
+            $node = $this->container->get(OpinionTypeRepository::class)->find($uuid);
         }
 
         if (!$node) {

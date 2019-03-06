@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -251,7 +252,7 @@ class OpinionAdmin extends CapcoAdmin
 
         $opinionType = $this->getConfigurationPool()
             ->getContainer()
-            ->get('capco.opinion_type.repository')
+            ->get(OpinionTypeRepository::class)
             ->find($this->getPersistentParameter('opinion_type'));
 
         if (!$opinionType) {

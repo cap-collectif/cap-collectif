@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
@@ -189,9 +190,7 @@ class ProfileController extends Controller
         ]);
         $projectsCount = \count($projectsRaw);
 
-        $opinionTypesWithUserOpinions = $this->get('capco.opinion_type.repository')->getByUser(
-            $user
-        );
+        $opinionTypesWithUserOpinions = $this->get(OpinionTypeRepository::class)->getByUser($user);
         $versions = $this->get(OpinionVersionRepository::class)->getByUser($user);
         $arguments = $this->get('capco.argument.repository')->getByUser($user);
 
@@ -258,9 +257,7 @@ class ProfileController extends Controller
      */
     public function showOpinionsAction(User $user)
     {
-        $opinionTypesWithUserOpinions = $this->get('capco.opinion_type.repository')->getByUser(
-            $user
-        );
+        $opinionTypesWithUserOpinions = $this->get(OpinionTypeRepository::class)->getByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
