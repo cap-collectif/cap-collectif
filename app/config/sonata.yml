@@ -19,17 +19,17 @@ sonata_admin:
         }
       - {
           position: right,
-          type: capco_admin.block.help,
+          type: Capco\AdminBundle\Block\HelpBlockService,
           settings: { title: admin.label.help_block },
         }
       - {
           position: right,
-          type: capco_admin.block.recent_contributions,
+          type: Capco\AdminBundle\Block\RecentContributionsBlockService,
           settings: { number: 5, title: admin.label.recent_contributions },
         }
       - {
           position: left,
-          type: capco_admin.blog.block.recent_posts,
+          type: Capco\AdminBundle\Block\RecentPostBlockService,
           settings: { number: 7, title: admin.label.recent_posts, toggle: 'blog' },
         }
     groups:
