@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
-use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Form\ApiToggleType;
 use Capco\AppBundle\Form\ApiQuestionType;
@@ -92,7 +90,7 @@ class FeaturesController extends FOSRestController
         $question->setRequired($data['required']);
 
         $abs = new QuestionnaireAbstractQuestion();
-        $registrationForm = $this->get(RegistrationFormRepository::class)->findCurrent();
+        $registrationForm = $this->get('capco.registration_form.repository')->findCurrent();
         $abs->setRegistrationForm($registrationForm);
         $abs->setQuestion($question);
         $abs->setPosition(0);
@@ -118,9 +116,9 @@ class FeaturesController extends FOSRestController
         }
 
         $orderedQuestions = json_decode($request->getContent(), true)['questions'];
-        $registrationForm = $this->get(RegistrationFormRepository::class)->findCurrent();
+        $registrationForm = $this->get('capco.registration_form.repository')->findCurrent();
         $absQuestions = $this->get(
-            QuestionnaireAbstractQuestionRepository::class
+            'capco.questionnaire_abstract_question.repository'
         )->findByRegistrationForm($registrationForm);
 
         foreach ($orderedQuestions as $key => $orderQuestion) {
@@ -193,7 +191,7 @@ class FeaturesController extends FOSRestController
             throw new AccessDeniedHttpException('Not authorized.');
         }
 
-        $registrationForm = $this->get(RegistrationFormRepository::class)->findCurrent();
+        $registrationForm = $this->get('capco.registration_form.repository')->findCurrent();
 
         $form = $this->createForm(AdminConfigureRegistrationType::class, $registrationForm);
         $form->submit($request->request->all(), false);

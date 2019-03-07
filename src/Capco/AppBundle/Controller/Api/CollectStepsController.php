@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Repository\ProposalRepository;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -22,7 +21,7 @@ class CollectStepsController extends FOSRestController
             throw new AccessDeniedException();
         }
 
-        $proposalRepository = $this->get(ProposalRepository::class);
+        $proposalRepository = $this->get('capco.proposal.repository');
         $results = $proposalRepository->getProposalMarkersForCollectStep($step);
         $router = $this->get('router');
 

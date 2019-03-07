@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,7 +31,7 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
 
             // Opinions
             $opinions = $this->getContainer()
-                ->get(OpinionRepository::class)
+                ->get('capco.opinion.repository')
                 ->getEnabledByProjectsOrderedByVotes($project, $excludedAuthor);
 
             $prevValue = null;
@@ -47,7 +45,7 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
 
             // Versions
             $versions = $this->getContainer()
-                ->get(OpinionVersionRepository::class)
+                ->get('capco.opinion_version.repository')
                 ->getEnabledByProjectsOrderedByVotes($project, $excludedAuthor);
 
             $prevValue = null;

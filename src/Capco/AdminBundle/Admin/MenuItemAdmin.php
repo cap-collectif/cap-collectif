@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Manager\MenuItemResolver;
-use Capco\AppBundle\Repository\MenuItemRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -27,7 +26,7 @@ class MenuItemAdmin extends AbstractAdmin
 
         $all = $this->getConfigurationPool()
             ->getContainer()
-            ->get(MenuItemRepository::class)
+            ->get('capco.menu_item.repository')
             ->findAll();
 
         $ids = [];
@@ -248,19 +247,19 @@ class MenuItemAdmin extends AbstractAdmin
 
     private function createParentsItemQuery()
     {
-        return $this->modelManager
-            ->createQuery($this->getClass(), 'p')
+        $query = $this->modelManager->createQuery($this->getClass(), 'p')
             ->where('p.parent IS NULL')
             ->andWhere('p.menu = :header')
             ->setParameter('header', MenuItem::TYPE_HEADER)
             ->andWhere('p.link IS NULL OR p.link = :blankLink')
             ->setParameter('blankLink', '');
+
+        return $query;
     }
 
     private function createPageQuery()
     {
-        return $this->modelManager
-            ->createQuery('CapcoAppBundle:Page', 'p')
+        return $this->modelManager->createQuery('CapcoAppBundle:Page', 'p')
             ->where('p.isEnabled = :enabled')
             ->setParameter('enabled', true);
     }

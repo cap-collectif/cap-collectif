@@ -3,9 +3,6 @@
 namespace Capco\AppBundle\Command\Migrations;
 
 use Capco\AppBundle\Entity\ProposalCategory;
-use Capco\AppBundle\Repository\CollectStepRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\ThemeRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -51,9 +48,9 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         $collectStep = $this->getContainer()
-            ->get(CollectStepRepository::class)
+            ->get('capco.collect_step.repository')
             ->findOneBy(['slug' => $collectStepSlug]);
-        if (!$collectStep || !($form = $collectStep->getProposalForm())) {
+        if (!$collectStep || !$form = $collectStep->getProposalForm()) {
             $output->writeln(
                 '<error>Unknown collect step' .
                     $collectStepSlug .
@@ -67,12 +64,12 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
         $count = 0;
 
         $themes = $this->getContainer()
-            ->get(ThemeRepository::class)
+            ->get('capco.theme.repository')
             ->findAll();
 
         foreach ($themes as $theme) {
             $proposals = $this->getContainer()
-                ->get(ProposalRepository::class)
+                ->get('capco.proposal.repository')
                 ->findBy([
                     'proposalForm' => $form,
                     'theme' => $theme,

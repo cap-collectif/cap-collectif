@@ -8,7 +8,6 @@ use Capco\AppBundle\Manager\MediaManager;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
-use Capco\UserBundle\Repository\UserTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -156,7 +155,7 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         foreach (self::PROFILES_TYPES as $key => $value) {
             if (
                 !$this->getContainer()
-                    ->get(UserTypeRepository::class)
+                    ->get('capco.user_type.repository')
                     ->findOneBy(['name' => $value])
             ) {
                 $type = (new UserType())->setName($value)->setCreatedAt(new \DateTime());
@@ -167,7 +166,7 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         foreach (self::PROFILES_TYPES_RATTACHEMENT as $agentName) {
             if (
                 !$this->getContainer()
-                    ->get(UserTypeRepository::class)
+                    ->get('capco.user_type.repository')
                     ->findOneBy(['name' => $agentName])
             ) {
                 $type = (new UserType())->setName($agentName)->setCreatedAt(new \DateTime());
@@ -179,7 +178,7 @@ class ParisImportUsersCommand extends ContainerAwareCommand
 
         return new ArrayCollection(
             $this->getContainer()
-                ->get(UserTypeRepository::class)
+                ->get('capco.user_type.repository')
                 ->findAll()
         );
     }
@@ -228,7 +227,6 @@ class ParisImportUsersCommand extends ContainerAwareCommand
                 ->setCreatedAt(new \DateTime($userRow['created_at']))
                 ->setLastLogin(new \DateTime($userRow['last_login_at']))
                 ->setDateOfBirth(new \DateTime($userRow['birthdate']));
-
             try {
                 if (
                     '' !== $userRow['filename'] &&

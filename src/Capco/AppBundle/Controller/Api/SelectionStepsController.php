@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Repository\ProposalRepository;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -16,7 +15,7 @@ class SelectionStepsController extends FOSRestController
     public function getProposalsMarkerByCollectStepAction(string $selectionStepId)
     {
         $step = $this->get('global_id_resolver')->resolve($selectionStepId, $this->getUser());
-        $proposalRepository = $this->get(ProposalRepository::class);
+        $proposalRepository = $this->get('capco.proposal.repository');
         $results = $proposalRepository->getProposalMarkersForSelectionStep($step);
         $router = $this->get('router');
 

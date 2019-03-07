@@ -4,8 +4,6 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Repository\ConsultationStepRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Answer;
 use Capco\AppBundle\Entity\Source;
@@ -45,7 +43,7 @@ class ConsultationResolver implements ContainerAwareInterface
     {
         $typeResolver = $this->container->get('overblog_graphql.type_resolver');
         $currentSchemaName = $typeResolver->getCurrentSchemaName();
-
+        
         if ($data instanceof Opinion) {
             return $typeResolver->resolve('Opinion');
         }
@@ -108,7 +106,7 @@ class ConsultationResolver implements ContainerAwareInterface
     public function getSectionContributionsConnection(OpinionType $section, Arg $args): Connection
     {
         $paginator = new Paginator(function ($offset, $limit) use ($section, $args) {
-            $repo = $this->container->get(OpinionRepository::class);
+            $repo = $this->container->get('capco.opinion.repository');
             $criteria = ['section' => $section, 'trashed' => false];
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
@@ -127,7 +125,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolve(Arg $args)
     {
-        $repo = $this->container->get(ConsultationStepRepository::class);
+        $repo = $this->container->get('capco.consultation_step.repository');
         if (isset($args['id'])) {
             $stepId = GlobalId::fromGlobalId($args['id'])['id'];
             $consultation = $repo->find($stepId);
@@ -168,7 +166,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function getSectionOpinionsCount(OpinionType $type): int
     {
-        $repo = $this->container->get(OpinionRepository::class);
+        $repo = $this->container->get('capco.opinion.repository');
 
         return $repo->countByOpinionType($type->getId());
     }
