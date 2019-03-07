@@ -11,21 +11,18 @@ services:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Mutation/*'
     exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Mutation/{UserNotificationsConfigurationMutation.php,DistrictMutation.php,ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php,ProposalEvaluationMutation.php}'
 
-  capco.mutation.user_notifications:
-    class: Capco\AppBundle\GraphQL\Mutation\UserNotificationsConfigurationMutation
+  Capco\AppBundle\GraphQL\Mutation\UserNotificationsConfigurationMutation:
     tags:
       - {
           name: overblog_graphql.mutation,
           alias: 'changeUserNotificationsConfiguration',
           method: 'change',
         }
-  capco.mutation.district:
-    class: Capco\AppBundle\GraphQL\Mutation\DistrictMutation
+  Capco\AppBundle\GraphQL\Mutation\DistrictMutation:
     tags:
       - { name: overblog_graphql.mutation, alias: 'changeDistrict', method: 'change' }
 
-  capco.mutation.proposal:
-    class: Capco\AppBundle\GraphQL\Mutation\ProposalMutation
+  Capco\AppBundle\GraphQL\Mutation\ProposalMutation:
     tags:
       - {
           name: overblog_graphql.mutation,
@@ -63,8 +60,7 @@ services:
       - { name: overblog_graphql.mutation, alias: 'createProposal', method: 'create' }
     autowire: true
 
-  capco.mutation.proposal_form:
-    class: Capco\AppBundle\GraphQL\Mutation\ProposalFormMutation
+  Capco\AppBundle\GraphQL\Mutation\ProposalFormMutation:
     tags:
       - { name: overblog_graphql.mutation, alias: 'createProposalForm', method: 'create' }
       - { name: overblog_graphql.mutation, alias: 'updateProposalForm', method: 'update' }
@@ -79,8 +75,7 @@ services:
           method: 'setEvaluationForm',
         }
 
-  capco.mutation.groups:
-    class: Capco\AppBundle\GraphQL\Mutation\GroupMutation
+  Capco\AppBundle\GraphQL\Mutation\GroupMutation:
     tags:
       - { name: overblog_graphql.mutation, alias: 'createGroup', method: 'create' }
       - { name: overblog_graphql.mutation, alias: 'updateGroup', method: 'update' }
@@ -88,8 +83,7 @@ services:
       - { name: overblog_graphql.mutation, alias: 'deleteUserInGroup', method: 'deleteUserInGroup' }
       - { name: overblog_graphql.mutation, alias: 'addUsersInGroup', method: 'addUsersInGroup' }
 
-  capco.mutation.proposal_evaluation:
-    class: Capco\AppBundle\GraphQL\Mutation\ProposalEvaluationMutation
+  Capco\AppBundle\GraphQL\Mutation\ProposalEvaluationMutation:
     autowire: true
     tags:
       - {

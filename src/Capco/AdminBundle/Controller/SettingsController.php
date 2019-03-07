@@ -63,7 +63,9 @@ class SettingsController extends Controller
             ['position' => 'ASC']
         );
 
-        $featuresCategoryResolver = $this->get('capco.admin.features_category_resolver');
+        $featuresCategoryResolver = $this->get(
+            'Capco\AdminBundle\Resolver\FeaturesCategoryResolver'
+        );
         $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
         $group = $featuresCategoryResolver->getGroupNameForCategory($category);
 
@@ -119,9 +121,9 @@ class SettingsController extends Controller
             ->getFlashBag()
             ->add('success', $message);
 
-        $category = $this->get('capco.admin.features_category_resolver')->findCategoryForToggle(
-            $toggle
-        );
+        $category = $this->get(
+            'Capco\AdminBundle\Resolver\FeaturesCategoryResolver'
+        )->findCategoryForToggle($toggle);
 
         return $this->redirect(
             $this->generateUrl('capco_admin_settings', [
