@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -123,7 +124,7 @@ class ConsultationStepTypeAdmin extends AbstractAdmin
 
         return $this->getConfigurationPool()
             ->getContainer()
-            ->get('capco.opinion_type.repository')
+            ->get(OpinionTypeRepository::class)
             ->getOrderedRootNodesQuery($subject);
     }
 }

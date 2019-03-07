@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Repository\SourceVoteRepository;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -42,7 +43,7 @@ class SourcesController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
 
-        $previousVote = $this->get('capco.source_vote.repository')->findOneBy([
+        $previousVote = $this->get(SourceVoteRepository::class)->findOneBy([
             'user' => $viewer,
             'source' => $source,
         ]);
@@ -80,7 +81,7 @@ class SourcesController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
 
-        $vote = $this->get('capco.source_vote.repository')->findOneBy([
+        $vote = $this->get(SourceVoteRepository::class)->findOneBy([
             'user' => $viewer,
             'source' => $source,
         ]);

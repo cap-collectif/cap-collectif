@@ -2,6 +2,8 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Repository\ConsultationStepRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -248,14 +250,9 @@ class OpinionAdmin extends CapcoAdmin
             return;
         }
 
-        $em = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine')
-            ->getManager();
-
         $opinionType = $this->getConfigurationPool()
             ->getContainer()
-            ->get('capco.opinion_type.repository')
+            ->get(OpinionTypeRepository::class)
             ->find($this->getPersistentParameter('opinion_type'));
 
         if (!$opinionType) {
@@ -266,7 +263,7 @@ class OpinionAdmin extends CapcoAdmin
 
         return $this->getConfigurationPool()
             ->getContainer()
-            ->get('capco.consultation_step.repository')
+            ->get(ConsultationStepRepository::class)
             ->createQueryBuilder('cs')
             ->join('cs.consultationStepType', 'type')
             ->where('type = :stepType')

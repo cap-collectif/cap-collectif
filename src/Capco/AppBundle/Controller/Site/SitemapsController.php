@@ -4,6 +4,10 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\StepResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -63,10 +67,7 @@ class SitemapsController extends Controller
                 'changefreq' => 'weekly',
                 'priority' => '0.5',
             ];
-            foreach (
-                $this->get('capco.theme.repository')->findBy(['isEnabled' => true])
-                as $theme
-            ) {
+            foreach ($this->get(ThemeRepository::class)->findBy(['isEnabled' => true]) as $theme) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_theme_show', [
                         'slug' => $theme->getSlug(),
@@ -85,10 +86,7 @@ class SitemapsController extends Controller
                 'changefreq' => 'daily',
                 'priority' => '1.0',
             ];
-            foreach (
-                $this->get('capco.blog.post.repository')->findBy(['isPublished' => true])
-                as $post
-            ) {
+            foreach ($this->get(PostRepository::class)->findBy(['isPublished' => true]) as $post) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_blog_show', [
                         'slug' => $post->getSlug(),
@@ -107,10 +105,7 @@ class SitemapsController extends Controller
                 'changefreq' => 'daily',
                 'priority' => '1.0',
             ];
-            foreach (
-                $this->get('capco.event.repository')->findBy(['enabled' => true])
-                as $event
-            ) {
+            foreach ($this->get(EventRepository::class)->findBy(['enabled' => true]) as $event) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_event_show', [
                         'slug' => $event->getSlug(),
@@ -133,7 +128,7 @@ class SitemapsController extends Controller
         $stepResolver = $this->get(StepResolver::class);
         /** @var AbstractStep $step */
         foreach (
-            $this->get('capco.abstract_step.repository')->findBy(['isEnabled' => true])
+            $this->get(AbstractStepRepository::class)->findBy(['isEnabled' => true])
             as $step
         ) {
             if ($step->getProject() && $step->getProject()->canDisplay($this->getUser())) {
@@ -147,10 +142,7 @@ class SitemapsController extends Controller
         }
 
         /** @var Opinion $opinion */
-        foreach (
-            $this->get('capco.opinion.repository')->findBy(['published' => true])
-            as $opinion
-        ) {
+        foreach ($this->get(OpinionRepository::class)->findBy(['published' => true]) as $opinion) {
             if ($opinion->canDisplay($this->getUser())) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_project_show_opinion', [
@@ -163,7 +155,9 @@ class SitemapsController extends Controller
                         'opinionSlug' => $opinion->getSlug(),
                     ]),
                     'priority' => '2.0',
-                    'lastmod' => $opinion->getUpdatedAt() ? $opinion->getUpdatedAt()->format(\DateTime::W3C) : null,
+                    'lastmod' => $opinion->getUpdatedAt()
+                        ? $opinion->getUpdatedAt()->format(\DateTime::W3C)
+                        : null,
                     'changefreq' => 'hourly',
                 ];
             }

@@ -14,7 +14,7 @@
         <service id="capco_admin.blog.block.recent_posts" class="%capco_admin.blog.block.recent_post.class%">
             <argument>capco_admin.blog.block.recent_posts</argument>
             <argument type="service" id="templating" />
-            <argument type="service" id="capco.blog.post.repository" />
+            <argument type="service" id="Capco\AppBundle\Repository\PostRepository" />
             <argument type="service" id="Capco\AppBundle\Toggle\Manager" />
             <tag name="sonata.block" />
         </service>

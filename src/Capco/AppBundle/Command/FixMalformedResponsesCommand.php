@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,7 +22,7 @@ class FixMalformedResponsesCommand extends ContainerAwareCommand
 
         $em = $container->get('doctrine.orm.entity_manager');
         $responses = $this->getContainer()
-            ->get('capco.response.repository')
+            ->get(AbstractResponseRepository::class)
             ->createQueryBuilder('r')
             ->getQuery()
             ->getArrayResult();

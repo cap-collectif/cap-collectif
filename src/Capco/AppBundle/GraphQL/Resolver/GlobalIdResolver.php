@@ -4,6 +4,23 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\ConsultationStepRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\FollowerRepository;
+use Capco\AppBundle\Repository\GroupRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\ProposalFormRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Comment;
@@ -14,6 +31,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Repository\MapTokenRepository;
+use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
@@ -71,25 +89,23 @@ class GlobalIdResolver
 
             switch ($decodeGlobalId['type']) {
                 case 'Post':
-                    $node = $this->container->get('capco.blog.post.repository')->find($uuid);
+                    $node = $this->container->get(PostRepository::class)->find($uuid);
 
                     break;
                 case 'Event':
-                    $node = $this->container->get('capco.event.repository')->find($uuid);
+                    $node = $this->container->get(EventRepository::class)->find($uuid);
 
                     break;
                 case 'User':
-                    $node = $this->container->get('capco.user.repository')->find($uuid);
+                    $node = $this->container->get(UserRepository::class)->find($uuid);
 
                     break;
                 case 'Questionnaire':
-                    $node = $this->container->get('capco.questionnaire.repository')->find($uuid);
+                    $node = $this->container->get(QuestionnaireRepository::class)->find($uuid);
 
                     break;
                 case 'Consultation':
-                    $node = $this->container
-                        ->get('capco.consultation_step.repository')
-                        ->find($uuid);
+                    $node = $this->container->get(ConsultationStepRepository::class)->find($uuid);
 
                     break;
                 case 'MapToken':
@@ -101,21 +117,19 @@ class GlobalIdResolver
 
                     break;
                 case 'CollectStep':
-                    $node = $this->container->get('capco.collect_step.repository')->find($uuid);
+                    $node = $this->container->get(CollectStepRepository::class)->find($uuid);
 
                     break;
                 case 'SelectionStep':
-                    $node = $this->container->get('capco.selection_step.repository')->find($uuid);
+                    $node = $this->container->get(SelectionStepRepository::class)->find($uuid);
 
                     break;
                 case 'Proposal':
-                    $node = $this->container->get('capco.proposal.repository')->find($uuid);
+                    $node = $this->container->get(ProposalRepository::class)->find($uuid);
 
                     break;
                 case 'Question':
-                    $node = $this->container
-                        ->get('capco.abstract_question.repository')
-                        ->find($uuid);
+                    $node = $this->container->get(AbstractQuestionRepository::class)->find($uuid);
 
                     break;
                 default:
@@ -136,30 +150,30 @@ class GlobalIdResolver
         $uuid = $uuidOrGlobalId;
 
         $node = null;
-        $node = $this->container->get('capco.opinion.repository')->find($uuid);
+        $node = $this->container->get(OpinionRepository::class)->find($uuid);
 
         if (!$node) {
-            $node = $this->container->get('capco.opinion_version.repository')->find($uuid);
+            $node = $this->container->get(OpinionVersionRepository::class)->find($uuid);
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.opinion_type.repository')->find($uuid);
+            $node = $this->container->get(OpinionTypeRepository::class)->find($uuid);
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.group.repository')->find($uuid);
+            $node = $this->container->get(GroupRepository::class)->find($uuid);
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.proposal.repository')->find($uuid);
+            $node = $this->container->get(ProposalRepository::class)->find($uuid);
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.proposal_form.repository')->find($uuid);
+            $node = $this->container->get(ProposalFormRepository::class)->find($uuid);
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.comment.repository')->find($uuid);
+            $node = $this->container->get(CommentRepository::class)->find($uuid);
         }
 
         if (!$node) {
@@ -167,19 +181,19 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.abstract_step.repository')->find($uuid);
+            $node = $this->container->get(AbstractStepRepository::class)->find($uuid);
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.argument.repository')->find($uuid);
+            $node = $this->container->get(ArgumentRepository::class)->find($uuid);
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.follower.repository')->find($uuid);
+            $node = $this->container->get(FollowerRepository::class)->find($uuid);
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.abstract_question.repository')->find($uuid);
+            $node = $this->container->get(AbstractQuestionRepository::class)->find($uuid);
         }
 
         if (!$node) {
@@ -208,17 +222,17 @@ class GlobalIdResolver
 
     public function resolveByModerationToken(string $token): ModerableInterface
     {
-        $node = $this->container->get('capco.opinion.repository')->findOneByModerationToken($token);
+        $node = $this->container->get(OpinionRepository::class)->findOneByModerationToken($token);
 
         if (!$node) {
             $node = $this->container
-                ->get('capco.opinion_version.repository')
+                ->get(OpinionVersionRepository::class)
                 ->findOneByModerationToken($token);
         }
 
         if (!$node) {
             $node = $this->container
-                ->get('capco.argument.repository')
+                ->get(ArgumentRepository::class)
                 ->findOneByModerationToken($token);
         }
 

@@ -3,6 +3,10 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
+use Capco\AppBundle\Repository\ConsultationStepRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
+use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputOption;
 use Capco\AppBundle\Resolver\ContributionResolver;
@@ -287,7 +291,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )'
         );
 
-        $consultationSteps = $container->get('capco.consultation_step.repository')->findAll();
+        $consultationSteps = $container->get(ConsultationStepRepository::class)->findAll();
         foreach ($consultationSteps as $cs) {
             if ($cs->isOpen() || $this->force) {
                 $participants = $contributionResolver->countStepContributors($cs);
@@ -302,7 +306,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                 );
 
                 $count = $container
-                    ->get('capco.abstract_vote.repository')
+                    ->get(AbstractVoteRepository::class)
                     ->getVotesFromConsultationStep($cs);
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\ConsultationStep cs
@@ -341,11 +345,11 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         // ****************************** Selection steps counters **************************************
 
-        $selectionSteps = $container->get('capco.selection_step.repository')->findAll();
+        $selectionSteps = $container->get(SelectionStepRepository::class)->findAll();
         foreach ($selectionSteps as $ss) {
             if ($ss->isOpen() || $this->force) {
                 $anonymousParticipants = $container
-                    ->get('capco.user.repository')
+                    ->get(UserRepository::class)
                     ->countSelectionStepProposalAnonymousVoters($ss);
                 $participants =
                     $contributionResolver->countStepContributors($ss) + $anonymousParticipants;
