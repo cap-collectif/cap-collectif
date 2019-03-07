@@ -5,6 +5,9 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\PostSearchType;
+use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -53,16 +56,14 @@ class BlogController extends Controller
             }
         } else {
             $form->setData([
-                'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                'project' => $this->get(
-                    'Capco\AppBundle\Repository\ProjectRepository'
-                )->findOneBySlug($project),
+                'theme' => $this->get(ThemeRepository::class)->findOneBySlug($theme),
+                'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
             ]);
         }
 
         $pagination = $this->get(Resolver::class)->getValue('blog.pagination.size');
 
-        $posts = $this->get('capco.blog.post.repository')->getSearchResults(
+        $posts = $this->get(PostRepository::class)->getSearchResults(
             $pagination,
             $page,
             $theme,
@@ -95,7 +96,7 @@ class BlogController extends Controller
      */
     public function showAction(Request $request, $slug)
     {
-        $post = $this->get('capco.blog.post.repository')->getPublishedBySlug($slug);
+        $post = $this->get(PostRepository::class)->getPublishedBySlug($slug);
 
         if (!$post) {
             throw new NotFoundHttpException('Could not find a published article for this slug.');

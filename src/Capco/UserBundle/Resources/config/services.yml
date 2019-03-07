@@ -31,10 +31,6 @@ services:
     abstract: false
     public: true
 
-  capco.oauth.provider:
-    class: Capco\UserBundle\Security\Core\User\OauthUserProvider
-    arguments: ['@fos_user.user_manager', { facebook: facebook_id, google: google_id }]
-
   Capco\UserBundle\Security\Core\User\OauthUserProvider:
     arguments: ['@fos_user.user_manager', { facebook: facebook_id, google: google_id }]
 

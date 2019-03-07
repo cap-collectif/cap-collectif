@@ -1,6 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,7 +27,7 @@ class ComputeDiffCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
-        $repo = $this->getContainer()->get('capco.opinion_version.repository');
+        $repo = $this->getContainer()->get(OpinionVersionRepository::class);
 
         $versions = $repo->getAllIds();
 
