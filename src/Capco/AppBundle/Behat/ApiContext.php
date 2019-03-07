@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Manager\LogManager;
+use Capco\AppBundle\Synthesis\Handler\SynthesisHandler;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Doctrine\ORM\Id\AssignedGenerator;
 use GuzzleHttp\Client;
@@ -348,10 +349,10 @@ EOF;
         $consultationStep = $this->getEntityManager()
             ->getRepository(ConsultationStep::class)
             ->find($csId);
-        $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep(
-            $synthesis,
-            $consultationStep
-        );
+
+        /** @var SynthesisHandler $synthesisHandler */
+        $synthesisHandler = $this->getService(SynthesisHandler::class);
+        $synthesisHandler->createSynthesisFromConsultationStep($synthesis, $consultationStep);
     }
 
     /**

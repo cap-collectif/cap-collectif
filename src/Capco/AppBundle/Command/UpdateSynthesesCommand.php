@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Synthesis\Handler\SynthesisHandler;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -10,10 +11,9 @@ class UpdateSynthesesCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-            ->setName('capco:syntheses:update')
-            ->setDescription('Update the syntheses from their source data')
-        ;
+        $this->setName('capco:syntheses:update')->setDescription(
+            'Update the syntheses from their source data'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -26,10 +26,9 @@ class UpdateSynthesesCommand extends ContainerAwareCommand
             ->get('doctrine')
             ->getManager()
             ->getRepository('CapcoAppBundle:Synthesis\Synthesis')
-            ->findAll()
-        ;
+            ->findAll();
 
-        $synthesisHandler = $container->get('capco.synthesis.synthesis_handler');
+        $synthesisHandler = $container->get(SynthesisHandler::class);
 
         foreach ($syntheses as $synthesis) {
             $output->write('.');

@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
+use Capco\AppBundle\Synthesis\Handler\SynthesisHandler;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -83,7 +84,7 @@ class SynthesisAdmin extends AbstractAdmin
     {
         $this->getConfigurationPool()
             ->getContainer()
-            ->get('capco.synthesis.synthesis_handler')
+            ->get(SynthesisHandler::class)
             ->createOrUpdateElementsFromSource($synthesis);
     }
 
