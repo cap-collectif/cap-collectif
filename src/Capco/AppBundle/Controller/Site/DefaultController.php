@@ -86,7 +86,7 @@ class DefaultController extends Controller
                     return $this->redirect($this->generateUrl('app_homepage'));
                 }
 
-                $this->get('capco.contact_notifier')->onContact(
+                $this->get('Capco\AppBundle\Notifier\ContactNotifier')->onContact(
                     $adminEmail,
                     $data['email'],
                     $data['name'],

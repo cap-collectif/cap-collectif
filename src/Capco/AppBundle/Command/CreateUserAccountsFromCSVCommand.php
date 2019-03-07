@@ -69,7 +69,7 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
                 );
                 if ($sendEmail) {
                     $this->getContainer()
-                        ->get('capco.user_notifier')
+                        ->get('Capco\AppBundle\Notifier\UserNotifier')
                         ->emailConfirmation($user);
                 }
                 $writer->insertOne([$user->getEmail(), $confirmationUrl]);

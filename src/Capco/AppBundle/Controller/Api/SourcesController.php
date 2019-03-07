@@ -167,7 +167,7 @@ class SourcesController extends FOSRestController
         $em->persist($report);
         $em->flush();
 
-        $this->get('capco.report_notifier')->onCreate($report);
+        $this->get('Capco\AppBundle\Notifier\ReportNotifier')->onCreate($report);
 
         return $report;
     }
