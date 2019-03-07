@@ -23,8 +23,6 @@ Capco\AppBundle\Entity\Event:
       groups: [Elasticsearch]
     themes:
       groups: [Elasticsearch]
-    commentsCount:
-      groups: [Events]
     canContribute:
       groups: [Events]
     createdAt:

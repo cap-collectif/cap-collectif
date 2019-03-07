@@ -34,7 +34,7 @@ class EventNormalizer implements NormalizerInterface, SerializerAwareInterface
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (\in_array('Elasticsearch', $groups)) {
+        if (\in_array('Elasticsearch', $groups, true)) {
             return $data;
         }
 
