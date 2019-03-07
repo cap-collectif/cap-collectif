@@ -20,7 +20,7 @@ class RemindUserAccountConfirmationCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
-        $notifier = $container->get('Capco\AppBundle\Notifier\UserNotifier');
+        $notifier = $container->get('capco.user_notifier');
         $logger = $container->get('logger');
 
         $users = $container->get(UserRepository::class)->findNotEmailConfirmedUsersSince24Hours();

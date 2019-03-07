@@ -27,7 +27,7 @@ class ReportingController extends Controller
             if ($related instanceof Trashable) {
                 $related->setTrashedStatus(Trashable::STATUS_INVISIBLE);
             }
-            $this->get('Capco\AppBundle\Notifier\ContributionNotifier')->onModeration($related);
+            $this->get('capco.contribution_notifier')->onModeration($related);
         }
 
         $this->admin->update($related);
@@ -62,7 +62,7 @@ class ReportingController extends Controller
             if ($related instanceof Trashable) {
                 $related->setTrashedStatus(Trashable::STATUS_VISIBLE);
             }
-            $this->get('Capco\AppBundle\Notifier\ContributionNotifier')->onModeration($related);
+            $this->get('capco.contribution_notifier')->onModeration($related);
         }
 
         $this->admin->update($related);

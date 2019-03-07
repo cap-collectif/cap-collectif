@@ -83,7 +83,7 @@ class ArgumentsController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($report);
         $em->flush();
-        $this->get('Capco\AppBundle\Notifier\ReportNotifier')->onCreate($report);
+        $this->get('capco.report_notifier')->onCreate($report);
 
         return $report;
     }

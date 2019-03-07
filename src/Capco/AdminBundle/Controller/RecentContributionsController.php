@@ -102,9 +102,7 @@ class RecentContributionsController extends Controller
             $contribution->setTrashedStatus(Trashable::STATUS_INVISIBLE);
             $contribution->setTrashedReason($motives);
             $em->flush();
-            $this->get('Capco\AppBundle\Notifier\ContributionNotifier')->onModeration(
-                $contribution
-            );
+            $this->get('capco.contribution_notifier')->onModeration($contribution);
 
             $this->addFlash(
                 'sonata_flash_success',
@@ -149,9 +147,7 @@ class RecentContributionsController extends Controller
             $contribution->setTrashedStatus(Trashable::STATUS_VISIBLE);
             $contribution->setTrashedReason($motives);
             $em->flush();
-            $this->get('Capco\AppBundle\Notifier\ContributionNotifier')->onModeration(
-                $contribution
-            );
+            $this->get('capco.contribution_notifier')->onModeration($contribution);
 
             $this->addFlash(
                 'sonata_flash_success',

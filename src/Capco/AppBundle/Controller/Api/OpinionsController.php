@@ -212,7 +212,7 @@ class OpinionsController extends FOSRestController
         $this->getDoctrine()
             ->getManager()
             ->flush();
-        $this->get('Capco\AppBundle\Notifier\ReportNotifier')->onCreate($report);
+        $this->get('capco.report_notifier')->onCreate($report);
 
         return $report;
     }
@@ -244,7 +244,7 @@ class OpinionsController extends FOSRestController
         $this->getDoctrine()
             ->getManager()
             ->flush();
-        $this->get('Capco\AppBundle\Notifier\ReportNotifier')->onCreate($report);
+        $this->get('capco.report_notifier')->onCreate($report);
 
         return $report;
     }
