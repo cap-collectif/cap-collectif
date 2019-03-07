@@ -83,7 +83,7 @@ class SynthesisAdmin extends AbstractAdmin
     {
         $this->getConfigurationPool()
             ->getContainer()
-            ->get('capco.synthesis.synthesis_handler')
+            ->get('Capco\AppBundle\Synthesis\Handler\SynthesisHandler')
             ->createOrUpdateElementsFromSource($synthesis);
     }
 

@@ -10,12 +10,10 @@ services:
   Capco\AppBundle\Synthesis\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/Synthesis/*'
 
-  capco.synthesis.synthesis_handler:
-    class: Capco\AppBundle\Synthesis\Handler\SynthesisHandler
+  Capco\AppBundle\Synthesis\Handler\SynthesisHandler:
     autowire: true
     public: true
 
-  capco.synthesis.synthesis_element_handler:
-    class: Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler
+  Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler:
     autowire: true
     public: true

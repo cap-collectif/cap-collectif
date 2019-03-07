@@ -348,10 +348,9 @@ EOF;
         $consultationStep = $this->getEntityManager()
             ->getRepository(ConsultationStep::class)
             ->find($csId);
-        $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep(
-            $synthesis,
-            $consultationStep
-        );
+        $this->getService(
+            'Capco\AppBundle\Synthesis\Handler\SynthesisHandler'
+        )->createSynthesisFromConsultationStep($synthesis, $consultationStep);
     }
 
     /**

@@ -47,7 +47,7 @@ class SynthesisController extends FOSRestController
             throw new AccessDeniedHttpException('Not authorized.');
         }
 
-        return $this->get('capco.synthesis.synthesis_handler')->getAllSyntheses();
+        return $this->get('Capco\AppBundle\Synthesis\Handler\SynthesisHandler')->getAllSyntheses();
     }
 
     /**
@@ -80,7 +80,9 @@ class SynthesisController extends FOSRestController
             return $form;
         }
 
-        return $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
+        return $this->get('Capco\AppBundle\Synthesis\Handler\SynthesisHandler')->createSynthesis(
+            $synthesis
+        );
     }
 
     /**
@@ -115,10 +117,9 @@ class SynthesisController extends FOSRestController
             return $form;
         }
 
-        return $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep(
-            $synthesis,
-            $consultationStep
-        );
+        return $this->get(
+            'Capco\AppBundle\Synthesis\Handler\SynthesisHandler'
+        )->createSynthesisFromConsultationStep($synthesis, $consultationStep);
     }
 
     /**
@@ -175,7 +176,9 @@ class SynthesisController extends FOSRestController
         $form = $this->createForm(SynthesisForm::class, $synthesis);
         $form->submit($request->request->all(), false);
         if ($form->isValid()) {
-            return $this->get('capco.synthesis.synthesis_handler')->updateSynthesis($synthesis);
+            return $this->get(
+                'Capco\AppBundle\Synthesis\Handler\SynthesisHandler'
+            )->updateSynthesis($synthesis);
         }
 
         return $form;
@@ -205,7 +208,9 @@ class SynthesisController extends FOSRestController
             throw new AccessDeniedHttpException('Not authorized.');
         }
 
-        return $this->get('capco.synthesis.synthesis_handler')->getUpdatedSynthesis($id);
+        return $this->get(
+            'Capco\AppBundle\Synthesis\Handler\SynthesisHandler'
+        )->getUpdatedSynthesis($id);
     }
 
     /**
@@ -247,7 +252,7 @@ class SynthesisController extends FOSRestController
         }
 
         return $this->get(
-            'capco.synthesis.synthesis_element_handler'
+            'Capco\AppBundle\Synthesis\Handler\SynthesisHandler'
         )->getElementsFromSynthesisByType($synthesis, $type, $term, $offset, $limit);
     }
 
@@ -287,7 +292,7 @@ class SynthesisController extends FOSRestController
         }
 
         return $this->get(
-            'capco.synthesis.synthesis_element_handler'
+            'Capco\AppBundle\Synthesis\Handler\SynthesisHandler'
         )->getElementsTreeFromSynthesisByType($synthesis, $type, $parent);
     }
 
@@ -324,7 +329,7 @@ class SynthesisController extends FOSRestController
 
         return [
             'count' => $this->get(
-                'capco.synthesis.synthesis_element_handler'
+                'Capco\AppBundle\Synthesis\Handler\SynthesisHandler'
             )->countElementsFromSynthesisByType($synthesis, $type),
         ];
     }
@@ -389,11 +394,9 @@ class SynthesisController extends FOSRestController
             throw new BadRequestHttpException($form->getErrors(true));
         }
 
-        return $this->get('capco.synthesis.synthesis_element_handler')->createElementInSynthesis(
-            $element,
-            $synthesis,
-            $this->getUser()
-        );
+        return $this->get(
+            'Capco\AppBundle\Synthesis\Handler\SynthesisHandler'
+        )->createElementInSynthesis($element, $synthesis, $this->getUser());
     }
 
     /**
@@ -430,10 +433,9 @@ class SynthesisController extends FOSRestController
             throw new BadRequestHttpException($form->getErrors(true));
         }
 
-        return $this->get('capco.synthesis.synthesis_element_handler')->updateElementInSynthesis(
-            $element,
-            $synthesis
-        );
+        return $this->get(
+            'Capco\AppBundle\Synthesis\Handler\SynthesisHandler'
+        )->updateElementInSynthesis($element, $synthesis);
     }
 
     /**
@@ -463,7 +465,9 @@ class SynthesisController extends FOSRestController
             throw new AccessDeniedHttpException('Not authorized.');
         }
 
-        return $this->get('capco.synthesis.synthesis_element_handler')->getLogsForElement($element);
+        return $this->get('Capco\AppBundle\Synthesis\Handler\SynthesisHandler')->getLogsForElement(
+            $element
+        );
     }
 
     /**
