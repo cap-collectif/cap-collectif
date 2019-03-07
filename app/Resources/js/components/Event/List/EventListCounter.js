@@ -4,16 +4,14 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import type { EventListCounter_query } from './__generated__/EventListCounter_query.graphql';
 
-export const EventListCounter = ({query}: {query: EventListCounter_query}) => {
-    return (
-      <FormattedMessage
-        id="number-of-events"
-        values={{
-          num: query.events.totalCount,
-        }}
-      />
-    );
-}
+export const EventListCounter = ({ query }: { query: EventListCounter_query }) => (
+  <FormattedMessage
+    id="number-of-events"
+    values={{
+      num: query && query.events && query.events.totalCount ? query.events.totalCount : 0,
+    }}
+  />
+);
 
 export default createFragmentContainer(EventListCounter, {
   query: graphql`
