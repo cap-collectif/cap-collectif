@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Form\ContactType;
 use Capco\AppBundle\Repository\SiteParameterRepository;
+use Capco\AppBundle\Notifier\ContactNotifier;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -86,7 +87,7 @@ class DefaultController extends Controller
                     return $this->redirect($this->generateUrl('app_homepage'));
                 }
 
-                $this->get('capco.contact_notifier')->onContact(
+                $this->get(ContactNotifier::class)->onContact(
                     $adminEmail,
                     $data['email'],
                     $data['name'],

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,6 +23,7 @@ class DeleteProposalMutation implements MutationInterface
     private $indexer;
     private $dataloader;
     private $globalIdResolver;
+    private $logger;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -29,7 +31,8 @@ class DeleteProposalMutation implements MutationInterface
         Publisher $publisher,
         Indexer $indexer,
         ProposalFormProposalsDataLoader $dataloader,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        LoggerInterface $logger
     ) {
         $this->em = $em;
         $this->redisHelper = $redisHelper;
@@ -37,6 +40,7 @@ class DeleteProposalMutation implements MutationInterface
         $this->indexer = $indexer;
         $this->dataloader = $dataloader;
         $this->globalIdResolver = $globalIdResolver;
+        $this->logger = $logger;
     }
 
     public function __invoke(string $proposalId, User $user): array
@@ -45,6 +49,9 @@ class DeleteProposalMutation implements MutationInterface
         if (!$proposal || !$proposal instanceof Proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalId));
         }
+
+        $proposalForm = $proposal->getProposalForm();
+        $step = $proposalForm->getStep();
 
         $author = $proposal->getAuthor();
 
@@ -66,9 +73,8 @@ class DeleteProposalMutation implements MutationInterface
         $this->indexer->remove(\get_class($proposal), $proposal->getId());
         $this->indexer->finishBulk();
 
-        $proposalForm = $proposal->getProposalForm();
         $this->dataloader->invalidate($proposalForm);
 
-        return ['proposal' => $proposal, 'viewer' => $user, 'step' => $proposalForm->getStep()];
+        return ['proposal' => $proposal, 'viewer' => $user, 'step' => $step];
     }
 }

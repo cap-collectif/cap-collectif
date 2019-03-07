@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\UserBundle\Repository\UserRepository;
+use Capco\AppBundle\Notifier\UserNotifier;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,7 +21,7 @@ class RemindUserAccountConfirmationCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
-        $notifier = $container->get('capco.user_notifier');
+        $notifier = $container->get(UserNotifier::class);
         $logger = $container->get('logger');
 
         $users = $container->get(UserRepository::class)->findNotEmailConfirmedUsersSince24Hours();

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Notifier\ReportNotifier;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
@@ -212,7 +213,7 @@ class OpinionsController extends FOSRestController
         $this->getDoctrine()
             ->getManager()
             ->flush();
-        $this->get('capco.report_notifier')->onCreate($report);
+        $this->get(ReportNotifier::class)->onCreate($report);
 
         return $report;
     }
@@ -244,7 +245,7 @@ class OpinionsController extends FOSRestController
         $this->getDoctrine()
             ->getManager()
             ->flush();
-        $this->get('capco.report_notifier')->onCreate($report);
+        $this->get(ReportNotifier::class)->onCreate($report);
 
         return $report;
     }
