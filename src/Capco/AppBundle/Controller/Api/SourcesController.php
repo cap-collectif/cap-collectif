@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Repository\SourceVoteRepository;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -43,7 +42,7 @@ class SourcesController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
 
-        $previousVote = $this->get(SourceVoteRepository::class)->findOneBy([
+        $previousVote = $this->get('capco.source_vote.repository')->findOneBy([
             'user' => $viewer,
             'source' => $source,
         ]);
@@ -60,7 +59,7 @@ class SourcesController extends FOSRestController
         $source->incrementVotesCount();
         $em->persist($vote);
         $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($viewer);
+        $this->get('Capco\AppBundle\Helper\RedisStorageHelper')->recomputeUserCounters($viewer);
     }
 
     /**
@@ -81,7 +80,7 @@ class SourcesController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
 
-        $vote = $this->get(SourceVoteRepository::class)->findOneBy([
+        $vote = $this->get('capco.source_vote.repository')->findOneBy([
             'user' => $viewer,
             'source' => $source,
         ]);
@@ -93,7 +92,7 @@ class SourcesController extends FOSRestController
         $source->decrementVotesCount();
         $em->remove($vote);
         $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($viewer);
+        $this->get('Capco\AppBundle\Helper\RedisStorageHelper')->recomputeUserCounters($viewer);
     }
 
     /**

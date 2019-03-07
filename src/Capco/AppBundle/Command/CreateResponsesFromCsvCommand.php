@@ -2,16 +2,9 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
-use Capco\AppBundle\Repository\AbstractQuestionRepository;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -52,9 +45,8 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
             ->get(ConvertCsvToArray::class)
             ->convert('pjl/responses.csv', ';');
         foreach ($responses as $row) {
-            /** @var User $author */
             $author = $this->getContainer()
-                ->get(UserRepository::class)
+                ->get('capco.user.repository')
                 ->findOneBy(['email' => $row['email']]);
             if (!$author) {
                 $output->writeln(
@@ -65,9 +57,8 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
 
                 return 1;
             }
-            /** @var Questionnaire $questionnaire */
             $questionnaire = $this->getContainer()
-                ->get(QuestionnaireRepository::class)
+                ->get('capco.questionnaire.repository')
                 ->find($row['questionnaire_id']);
             if (!$questionnaire) {
                 $output->writeln(
@@ -79,7 +70,7 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
                 return 1;
             }
             $reply = $this->getContainer()
-                ->get(ReplyRepository::class)
+                ->get('capco.reply.repository')
                 ->findOneBy([
                     'author' => $author,
                     'questionnaire' => $questionnaire,
@@ -94,9 +85,8 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
                 $reply->setPrivate($row['private']);
                 $em->persist($reply);
             }
-            /** @var AbstractQuestion $question */
             $question = $this->getContainer()
-                ->get(AbstractQuestionRepository::class)
+                ->get('capco.abstract_question.repository')
                 ->find($row['question_id']);
             $response = new ValueResponse();
             $response->setReply($reply);

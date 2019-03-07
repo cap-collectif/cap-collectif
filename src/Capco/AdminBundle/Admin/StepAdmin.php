@@ -14,10 +14,6 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\Form\Type\PurifiedTextareaType;
-use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
-use Capco\AppBundle\Repository\ProposalFormRepository;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -454,7 +450,7 @@ class StepAdmin extends CapcoAdmin
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get(ConsultationStepTypeRepository::class)
+            ->get('capco.consultation_step_type.repository')
             ->createQueryBuilder('f')
             ->where('f.step IS NULL OR f.step = :step')
             ->setParameter('step', $subject);
@@ -467,7 +463,7 @@ class StepAdmin extends CapcoAdmin
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get(ProposalFormRepository::class)
+            ->get('capco.proposal_form.repository')
             ->createQueryBuilder('f')
             ->where('f.step IS NULL OR f.step = :step')
             ->setParameter('step', $subject);
@@ -480,7 +476,7 @@ class StepAdmin extends CapcoAdmin
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get(QuestionnaireRepository::class)
+            ->get('capco.questionnaire.repository')
             ->createQueryBuilder('q')
             ->where('q.step IS NULL OR q.step = :step')
             ->setParameter('step', $subject);
@@ -493,7 +489,7 @@ class StepAdmin extends CapcoAdmin
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get(StatusRepository::class)
+            ->get('capco.status.repository')
             ->createQueryBuilder('s')
             ->where('s.step = :step')
             ->setParameter('step', $subject);

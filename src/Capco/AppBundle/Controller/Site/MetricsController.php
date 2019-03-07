@@ -1,22 +1,8 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\CommentRepository;
-use Capco\AppBundle\Repository\FollowerRepository;
-use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\AppBundle\Repository\ReportingRepository;
-use Capco\AppBundle\Repository\SourceRepository;
-use Capco\UserBundle\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +18,7 @@ class MetricsController extends Controller
     public function metricsAction(Request $request): Response
     {
         if (
-            'prod' === $this->getParameter('kernel.environment') &&
+            $this->getParameter('kernel.environment') === 'prod' &&
             $request->headers->get('Authorization') !==
                 $this->getParameter('prometheus_bearer_token')
         ) {
@@ -43,25 +29,25 @@ class MetricsController extends Controller
         $formatter = new TextFormatter();
 
         $registeredContributorCount = $this->get(
-            UserRepository::class
+            'capco.user.repository'
         )->getRegisteredContributorCount();
 
-        $registeredConfirmedByEmail = $this->get(UserRepository::class)->getRegisteredCount();
+        $registeredConfirmedByEmail = $this->get('capco.user.repository')->getRegisteredCount();
 
         $registeredNotConfirmedByEmail = $this->get(
-            UserRepository::class
+            'capco.user.repository'
         )->getRegisteredNotConfirmedByEmailCount();
 
-        $commentCount = $this->get(CommentRepository::class)->countPublished();
-        $voteCount = $this->get(AbstractVoteRepository::class)->countPublished();
-        $voteUnpublishedCount = $this->get(AbstractVoteRepository::class)->countUnpublished();
+        $commentCount = $this->get('capco.comment.repository')->countPublished();
+        $voteCount = $this->get('capco.abstract_vote.repository')->countPublished();
+        $voteUnpublishedCount = $this->get('capco.abstract_vote.repository')->countUnpublished();
 
-        $opinionCount = $this->get(OpinionRepository::class)->countPublished();
-        $versionCount = $this->get(OpinionVersionRepository::class)->countPublished();
-        $argumentCount = $this->get(ArgumentRepository::class)->countPublished();
-        $sourceCount = $this->get(SourceRepository::class)->countPublished();
-        $proposalCount = $this->get(ProposalRepository::class)->countPublished();
-        $replyCount = $this->get(ReplyRepository::class)->countPublished();
+        $opinionCount = $this->get('capco.opinion.repository')->countPublished();
+        $versionCount = $this->get('capco.opinion_version.repository')->countPublished();
+        $argumentCount = $this->get('capco.argument.repository')->countPublished();
+        $sourceCount = $this->get('capco.source.repository')->countPublished();
+        $proposalCount = $this->get('capco.proposal.repository')->countPublished();
+        $replyCount = $this->get('capco.reply.repository')->countPublished();
 
         $contributionCount =
             $opinionCount +
@@ -72,45 +58,49 @@ class MetricsController extends Controller
             $replyCount;
 
         $contributionTrashedCount = 0;
-        $contributionTrashedCount += $this->get(OpinionRepository::class)->countTrashed();
-        $contributionTrashedCount += $this->get(OpinionVersionRepository::class)->countTrashed();
-        $contributionTrashedCount += $this->get(ArgumentRepository::class)->countTrashed();
-        $contributionTrashedCount += $this->get(SourceRepository::class)->countTrashed();
-        $contributionTrashedCount += $this->get(ProposalRepository::class)->countTrashed();
+        $contributionTrashedCount += $this->get('capco.opinion.repository')->countTrashed();
+        $contributionTrashedCount += $this->get('capco.opinion_version.repository')->countTrashed();
+        $contributionTrashedCount += $this->get('capco.argument.repository')->countTrashed();
+        $contributionTrashedCount += $this->get('capco.source.repository')->countTrashed();
+        $contributionTrashedCount += $this->get('capco.proposal.repository')->countTrashed();
 
         $contributionUnpublishedCount = 0;
-        $contributionUnpublishedCount += $this->get(OpinionRepository::class)->countUnpublished();
+        $contributionUnpublishedCount += $this->get('capco.opinion.repository')->countUnpublished();
         $contributionUnpublishedCount += $this->get(
-            OpinionVersionRepository::class
+            'capco.opinion_version.repository'
         )->countUnpublished();
-        $contributionUnpublishedCount += $this->get(ArgumentRepository::class)->countUnpublished();
-        $contributionUnpublishedCount += $this->get(SourceRepository::class)->countUnpublished();
-        $contributionUnpublishedCount += $this->get(ProposalRepository::class)->countUnpublished();
+        $contributionUnpublishedCount += $this->get(
+            'capco.argument.repository'
+        )->countUnpublished();
+        $contributionUnpublishedCount += $this->get('capco.source.repository')->countUnpublished();
+        $contributionUnpublishedCount += $this->get(
+            'capco.proposal.repository'
+        )->countUnpublished();
 
         $projectCount = \count(
             $this->get(ProjectRepository::class)->findBy([
                 'visibility' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
             ])
         );
-        $steps = $this->get(AbstractStepRepository::class)->findAll();
+        $steps = $this->get('capco.abstract_step.repository')->findAll();
         $contribuableStepsCount = \count(
             array_reduce($steps, function ($step) {
                 return $step && $step->canContribute($this->getUser());
             })
         );
 
-        $reportCount = \count($this->get(ReportingRepository::class)->findAll());
+        $reportCount = \count($this->get('capco.reporting.repository')->findAll());
         // Traité ou non ?
         $reportArchivedCount = \count(
-            $this->get(ReportingRepository::class)->findBy(['isArchived' => true])
+            $this->get('capco.reporting.repository')->findBy(['isArchived' => true])
         );
 
         // Followers
-        $followerCount = \count($this->get(FollowerRepository::class)->findAll());
+        $followerCount = \count($this->get('capco.follower.repository')->findAll());
 
         // Newsletter inscription
         $newsletterSubscriptionCount = \count(
-            $this->get(NewsletterSubscriptionRepository::class)->findAll()
+            $this->get('capco.newsletter_subscription.repository')->findAll()
         );
 
         // Theme

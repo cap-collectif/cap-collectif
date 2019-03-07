@@ -4,8 +4,6 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
-use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -82,7 +80,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
             $consultationStepType = $this->getConfigurationPool()
                 ->getContainer()
-                ->get(ConsultationStepTypeRepository::class)
+                ->get('capco.consultation_step_type.repository')
                 ->find($consultationStepTypeId);
             $type->setConsultationStepType($consultationStepType);
         }
@@ -224,7 +222,7 @@ class OpinionTypeAdmin extends AbstractAdmin
 
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get(OpinionTypeRepository::class)
+            ->get('capco.opinion_type.repository')
             ->createQueryBuilder('ot')
             ->leftJoin('ot.consultationStepType', 'consultationStepType')
             ->where('consultationStepType.id = :consultationStepTypeId')

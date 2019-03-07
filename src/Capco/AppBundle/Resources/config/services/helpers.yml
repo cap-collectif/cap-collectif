@@ -8,6 +8,5 @@ services:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/Helper/*'
     exclude: '%kernel.root_dir%/../src/Capco/AppBundle/Helper/{RedisStorageHelper.php}'
 
-  redis_storage.helper:
-    class: Capco\AppBundle\Helper\RedisStorageHelper
+  Capco\AppBundle\Helper\RedisStorageHelper:
     arguments: ['@snc_redis.default']

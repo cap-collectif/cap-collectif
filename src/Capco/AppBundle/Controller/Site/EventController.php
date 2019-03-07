@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\Helper\EventHelper;
-use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -149,7 +148,7 @@ class EventController extends Controller
      */
     public function lastEventsAction(int $max = 3, int $offset = 0)
     {
-        $events = $this->get(EventRepository::class)->getLast($max, $offset);
+        $events = $this->get('capco.event.repository')->getLast($max, $offset);
 
         return ['events' => $events];
     }

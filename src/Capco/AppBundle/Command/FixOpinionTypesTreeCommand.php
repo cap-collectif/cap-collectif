@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,7 +16,7 @@ class FixOpinionTypesTreeCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $repo = $this->getContainer()->get(OpinionTypeRepository::class);
+        $repo = $this->getContainer()->get('capco.opinion_type.repository');
 
         $repo->verify();
         $repo->recover();

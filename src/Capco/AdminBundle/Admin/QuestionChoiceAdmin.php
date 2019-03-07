@@ -3,7 +3,6 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\QuestionChoice;
-use Capco\AppBundle\Repository\SiteColorRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -18,7 +17,7 @@ class QuestionChoiceAdmin extends AbstractAdmin
             'admin.fields.question_choice.colors.primary'
         ] = $this->getConfigurationPool()
             ->getContainer()
-            ->get(SiteColorRepository::class)
+            ->get('capco.site_color.repository')
             ->findOneBy(['keyname' => 'color.btn.primary.bg'])
             ->getValue();
 

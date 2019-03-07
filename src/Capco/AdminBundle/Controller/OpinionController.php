@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionAppendix;
-use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
@@ -27,7 +26,7 @@ class OpinionController extends Controller
             return $preResponse;
         }
 
-        if (($listMode = $request->get('_list_mode'))) {
+        if ($listMode = $request->get('_list_mode')) {
             $this->admin->setListMode($listMode);
         }
 
@@ -68,7 +67,7 @@ class OpinionController extends Controller
 
         $opinionTypeId = $request->get('opinion_type');
         if ($opinionTypeId) {
-            $opinionType = $this->get(OpinionTypeRepository::class)->find($opinionTypeId);
+            $opinionType = $this->get('capco.opinion_type.repository')->find($opinionTypeId);
             if ($opinionType) {
                 $object->setOpinionType($opinionType);
                 $object = $this->updateAppendicesForOpinion($object);
@@ -183,7 +182,7 @@ class OpinionController extends Controller
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
-        if (\is_object($object) && !$object->canDisplay($this->getUser())) {
+        if (is_object($object) && !$object->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
         if (!$object) {
@@ -421,7 +420,7 @@ class OpinionController extends Controller
 
     public function getConsultationStepTypes()
     {
-        $rootOpinionTypes = $this->get(OpinionTypeRepository::class)
+        $rootOpinionTypes = $this->get('capco.opinion_type.repository')
             ->createQueryBuilder('ot')
             ->select('ot', 'ct')
             ->leftJoin('ot.consultationStepType', 'ct')
@@ -430,7 +429,7 @@ class OpinionController extends Controller
             ->orderBy('ct.id', 'asc')
             ->getQuery()
             ->getArrayResult();
-        $otRepo = $this->get(OpinionTypeRepository::class);
+        $otRepo = $this->get('capco.opinion_type.repository');
         $consultationStepTypes = [];
 
         foreach ($rootOpinionTypes as $root) {
@@ -460,7 +459,6 @@ class OpinionController extends Controller
                 if ($capp->getAppendixType() === $otat->getAppendixType()) {
                     $found = true;
                     $newAppendices->add($capp);
-
                     break;
                 }
             }
