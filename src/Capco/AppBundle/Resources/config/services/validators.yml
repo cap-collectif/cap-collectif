@@ -1,108 +1,85 @@
 services:
-  capco.check_email_domain.validator:
-    class: Capco\AppBundle\Validator\Constraints\CheckEmailDomainValidator
+  _defaults:
     autowire: true
+    autoconfigure: true
+    public: false
+
+  #capco.check_email_domain.validator:
+  Capco\AppBundle\Validator\Constraints\CheckEmailDomainValidator:
     tags:
       - { name: validator.constraint_validator, alias: capco.check_email_domain.validator }
-
-  capco.has_required_responses.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestionsValidator
-    autowire: true
+    #capco.has_required_responses.validator:
+  Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestionsValidator:
     tags:
       - { name: validator.constraint_validator, alias: has_required_responses.validator }
-
-  capco.already_vote.validator:
-    class: Capco\AppBundle\Validator\Constraints\DidNotAlreadyVoteValidator
-    autowire: true
+    #capco.already_vote.validator:
+  Capco\AppBundle\Validator\Constraints\DidNotAlreadyVoteValidator:
     tags:
       - { name: validator.constraint_validator, alias: already_vote.validator }
-
-  capco.email_belongs_not.validator:
-    class: Capco\AppBundle\Validator\Constraints\EmailDoesNotBelongToUserValidator
-    autowire: true
+    #capco.email_belongs_not.validator:
+  Capco\AppBundle\Validator\Constraints\EmailDoesNotBelongToUserValidator:
     tags:
       - { name: validator.constraint_validator, alias: email_belongs_not.validator }
-
-  capco.end_after_start.validator:
-    class: Capco\AppBundle\Validator\Constraints\EndAfterStartValidator
+    #capco.end_after_start.validator:
+  Capco\AppBundle\Validator\Constraints\EndAfterStartValidator:
     tags:
       - { name: validator.constraint_validator, alias: end_after_start.validator }
-
-  capco.has_theme_if_activated.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasThemeIfActivatedValidator
-    autowire: true
+    #capco.has_theme_if_activated.validator:
+  Capco\AppBundle\Validator\Constraints\HasThemeIfActivatedValidator:
     tags:
       - { name: validator.constraint_validator, alias: has_theme_if_activated.validator }
-
-  capco.is_social_network_url.validator:
-    class: Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrlValidator
+    #capco.is_social_network_url.validator:
+  Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrlValidator:
     tags:
       - { name: validator.constraint_validator, alias: is_social_network_url.validator }
-
-  capco.unlisted_email.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasUnlistedEmailValidator
-    autowire: true
+    #capco.unlisted_email.validator:
+  Capco\AppBundle\Validator\Constraints\HasUnlistedEmailValidator:
     tags:
       - { name: validator.constraint_validator, alias: unlisted_email.validator }
-
-  capco.has_enough_credits.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasEnoughCreditsToVoteValidator
-    autowire: true
+    #capco.has_enough_credits.validator:
+  Capco\AppBundle\Validator\Constraints\HasEnoughCreditsToVoteValidator:
     tags:
       - { name: validator.constraint_validator, alias: has_enough_credits.validator }
-
-  capco.recaptcha.validator:
-    class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
-    autowire: true
+    #capco.recaptcha.validator:
+  Capco\AppBundle\Validator\Constraints\ReCaptchaValidator:
     arguments:
       $privateKey: '%recaptcha_private_key%'
     tags:
       - { name: validator.constraint_validator, alias: recaptcha.validator }
 
-  capco.has_theme_if_mandatory.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasThemeIfMandatoryValidator
-    autowire: true
+    #capco.has_theme_if_mandatory.validator:
+  Capco\AppBundle\Validator\Constraints\HasThemeIfMandatoryValidator:
     tags:
       - { name: validator.constraint_validator, alias: has_theme_if_mandatory.validator }
-
-  capco.has_category_if_mandatory.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasCategoryIfMandatoryValidator
+    #capco.has_category_if_mandatory.validator:
+  Capco\AppBundle\Validator\Constraints\HasCategoryIfMandatoryValidator:
     tags:
       - { name: validator.constraint_validator, alias: has_category_if_mandatory.validator }
-
-  capco.check_register.validator:
-    class: Capco\AppBundle\Validator\Constraints\CheckRegisterValidator
+    #capco.check_register.validator:
+  Capco\AppBundle\Validator\Constraints\CheckRegisterValidator:
     tags:
       - { name: validator.constraint_validator, alias: check_register.validator }
-
-  capco.has_valid_address.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasValidAddressValidator
-    autowire: true
+    #capco.has_valid_address.validator:
+  Capco\AppBundle\Validator\Constraints\HasValidAddressValidator:
     tags:
       - { name: validator.constraint_validator, alias: has_valid_address.validator }
 
-  capco.has_only_one_selection_step_allowing_progress_step.validator:
-    class:
-      Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressStepsValidator
+  #    capco.has_only_one_selection_step_allowing_progress_step.validator:
+  Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressStepsValidator:
     tags:
       - {
           name: validator.constraint_validator,
           alias: has_only_one_selection_step_allowing_progress_step.validator,
         }
-
-  capco.has_district_if_mandatory.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasDistrictIfMandatoryValidator
-    autowire: true
+    #capco.has_district_if_mandatory.validator:
+  Capco\AppBundle\Validator\Constraints\HasDistrictIfMandatoryValidator:
     tags:
       - { name: validator.constraint_validator, alias: has_district_if_mandatory.validator }
-
-  capco.has_address_if_mandatory.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasAddressIfMandatoryValidator
+    #capco.has_address_if_mandatory.validator:
+  Capco\AppBundle\Validator\Constraints\HasAddressIfMandatoryValidator:
     tags:
       - { name: validator.constraint_validator, alias: has_address_if_mandatory.validator }
-
-  capco.not_throwable_email.validator:
-    class: Capco\AppBundle\Validator\Constraints\NotThrowableEmailValidator
-    autowire: true
+    #capco.not_throwable_email.validator:
+  Capco\AppBundle\Validator\Constraints\NotThrowableEmailValidator:
     tags:
       - { name: validator.constraint_validator, alias: capco.not_throwable_email.validator }
