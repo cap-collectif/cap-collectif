@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
@@ -61,7 +59,7 @@ class OpinionsController extends FOSRestController
         }
 
         $uuid = GlobalId::fromGlobalId($stepId)['id'];
-        $step = $this->get(ConsultationStepTypeRepository::class)->find($uuid);
+        $step = $this->get('capco.consultation_step.repository')->find($uuid);
 
         if (!$step) {
             throw new BadRequestHttpException('Unknown step.');
@@ -79,7 +77,7 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException('You dont meets all the requirements.');
         }
 
-        $repo = $this->get(OpinionRepository::class);
+        $repo = $this->get('capco.opinion.repository');
 
         if (\count($repo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
             throw new BadRequestHttpException('You contributed too many times.');

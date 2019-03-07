@@ -2,12 +2,8 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Notifier\FOSNotifier;
-use Capco\AppBundle\Repository\CommentRepository;
-use Capco\AppBundle\Repository\EmailDomainRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\UserBundle\Repository\UserRepository;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,9 +31,9 @@ class UsersController extends FOSRestController
     public function getUsersCountersAction()
     {
         $registeredContributorCount = $this->get(
-            UserRepository::class
+            'capco.user.repository'
         )->getRegisteredContributorCount();
-        $anonymousComments = $this->get(CommentRepository::class)->getAnonymousCount();
+        $anonymousComments = $this->get('capco.comment.repository')->getAnonymousCount();
 
         return [
             'contributors' => $registeredContributorCount + $anonymousComments,
@@ -108,7 +104,7 @@ class UsersController extends FOSRestController
         if ($creatingAnAdmin) {
             $this->get('capco.user_notifier')->adminConfirmation($user);
         } else {
-            $this->get(FOSNotifier::class)->sendConfirmationEmailMessage($user);
+            $this->get('capco.fos_notifier')->sendConfirmationEmailMessage($user);
         }
 
         $userManager->updateUser($user);
@@ -187,7 +183,7 @@ class UsersController extends FOSRestController
         if ($user->getNewEmailToConfirm()) {
             $this->get('capco.user_notifier')->newEmailConfirmation($user);
         } else {
-            $this->get(FOSNotifier::class)->sendConfirmationEmailMessage($user);
+            $this->get('capco.fos_notifier')->sendConfirmationEmailMessage($user);
         }
 
         $user->setEmailConfirmationSentAt(new \DateTime());
@@ -318,13 +314,13 @@ class UsersController extends FOSRestController
             );
         }
 
-        if ($this->container->get(UserRepository::class)->findOneByEmail($newEmailToConfirm)) {
+        if ($this->container->get('capco.user.repository')->findOneByEmail($newEmailToConfirm)) {
             return new JsonResponse(['message' => 'Already used email.'], 400);
         }
 
         if (
             $toggleManager->isActive('restrict_registration_via_email_domain') &&
-            !$this->container->get(EmailDomainRepository::class)->findOneBy([
+            !$this->container->get('capco.email_domain.repository')->findOneBy([
                 'value' => explode('@', $newEmailToConfirm)[1],
             ])
         ) {

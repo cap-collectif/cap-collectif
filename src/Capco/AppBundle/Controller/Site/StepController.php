@@ -5,9 +5,6 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -64,9 +61,12 @@ class StepController extends Controller
         }
         $projectSlug = $project->getSlug();
         $events = $this->get(EventResolver::class)->getLastByProject($projectSlug, 2);
-        $posts = $this->get(PostRepository::class)->getLastPublishedByProject($projectSlug, 2);
+        $posts = $this->get('capco.blog.post.repository')->getLastPublishedByProject(
+            $projectSlug,
+            2
+        );
         $nbEvents = $this->get(EventResolver::class)->countEvents(null, null, $projectSlug, null);
-        $nbPosts = $this->get(PostRepository::class)->countSearchResults(null, $projectSlug);
+        $nbPosts = $this->get('capco.blog.post.repository')->countSearchResults(null, $projectSlug);
 
         $projectContributorResolver = $this->get(ProjectContributorResolver::class);
 
@@ -106,7 +106,7 @@ class StepController extends Controller
             : null;
 
         $nbOpinionsToDisplay = $step->getNbOpinionsToDisplay() ?? 10;
-        $opinions = $this->get(OpinionRepository::class)->getEnabledByProject(
+        $opinions = $this->get('capco.opinion.repository')->getEnabledByProject(
             $project,
             $excludedAuthor,
             true,
@@ -114,7 +114,7 @@ class StepController extends Controller
         );
 
         $nbVersionsToDisplay = $step->getNbVersionsToDisplay() ?? 10;
-        $versions = $this->get(OpinionVersionRepository::class)->getEnabledByProject(
+        $versions = $this->get('capco.opinion_version.repository')->getEnabledByProject(
             $project,
             $excludedAuthor,
             true,
@@ -152,7 +152,7 @@ class StepController extends Controller
             ? $project->getAuthor()->getId()
             : null;
 
-        $opinions = $this->get(OpinionRepository::class)->getEnabledByProject(
+        $opinions = $this->get('capco.opinion.repository')->getEnabledByProject(
             $project,
             $excludedAuthor,
             true,
@@ -190,7 +190,7 @@ class StepController extends Controller
             ? $project->getAuthor()->getId()
             : null;
 
-        $versions = $this->get(OpinionVersionRepository::class)->getEnabledByProject(
+        $versions = $this->get('capco.opinion_version.repository')->getEnabledByProject(
             $project,
             $excludedAuthor,
             true,

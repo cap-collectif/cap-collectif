@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Event;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Requirement;
+use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Repository\EventRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -32,7 +33,7 @@ class GlobalIdResolverSpec extends ObjectBehavior
     ) {
         $event->canDisplay(null)->willReturn(true);
         $eventRepo->find('event1')->willReturn($event);
-        $container->get(EventRepository::class)->willReturn($eventRepo);
+        $container->get('capco.event.repository')->willReturn($eventRepo);
         $this->beConstructedWith($container, $logger);
         $globalId = GlobalId::toGlobalId('Event', 'event1');
 
@@ -73,7 +74,7 @@ class GlobalIdResolverSpec extends ObjectBehavior
     ) {
         $uuid = 'opinion1';
         $opinionRepo->find($uuid)->willReturn($opinion);
-        $container->get(OpinionRepository::class)->willReturn($opinionRepo);
+        $container->get('capco.opinion.repository')->willReturn($opinionRepo);
 
         $this->beConstructedWith($container, $logger);
         $this->resolve($uuid, null)->shouldReturn($opinion);

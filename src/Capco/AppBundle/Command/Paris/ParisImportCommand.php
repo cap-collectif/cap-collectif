@@ -22,10 +22,8 @@ use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\ProjectTypeRepository;
-use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -160,7 +158,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
         $output->writeln('<info>Importing projects...</info>');
         $author = $this->getContainer()
-            ->get(UserRepository::class)
+            ->get('capco.user.repository')
             ->findOneBy([
                 'username' => 'Mairie de Paris',
             ]);
@@ -280,15 +278,14 @@ class ParisImportCommand extends ContainerAwareCommand
 
                     continue;
                 }
-                /** @var User $author */
                 $author = $this->getContainer()
-                    ->get(UserRepository::class)
+                    ->get('capco.user.repository')
                     ->findOneBy([
                         'username' => $proposal['author_name'],
                     ]);
                 $proposalParisId = $proposal['proposal_id'];
                 $district = $this->getContainer()
-                    ->get(ProposalDistrictRepository::class)
+                    ->get('capco.district.repository')
                     ->findOneBy([
                         'form' => $step->getProposalForm(),
                         'name' => $proposal['district'],
@@ -369,9 +366,8 @@ class ParisImportCommand extends ContainerAwareCommand
 
                     continue;
                 }
-                /** @var User $author */
                 $author = $this->getContainer()
-                    ->get(UserRepository::class)
+                    ->get('capco.user.repository')
                     ->findOneBy([
                         'username' => $comment['author_name'],
                     ]);

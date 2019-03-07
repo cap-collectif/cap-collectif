@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -32,7 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface
 {
     use DateHelperTrait,
-        CommentableTrait,
+        CommentableWithoutCounterTrait,
         UuidTrait,
         TextableTrait,
         MetaDescriptionCustomCodeTrait,
@@ -148,7 +148,6 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         $this->registrations = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->projects = new ArrayCollection();
-        $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
     }
 
@@ -488,7 +487,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function getFullAddress(): ?string
     {
         $address = !empty($this->getAddress()) ? $this->getAddress() . ', ' : '';
-        $address .= !empty($this->getZipCode()) ? (string) $this->getZipCode() . ' ' : '';
+        $address .= !empty($this->getZipCode()) ? $this->getZipCode() . ' ' : '';
         $address .= !empty($this->getCity()) ? $this->getCity() : '';
 
         $address = rtrim($address, ', ');

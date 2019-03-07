@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\Proposal;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 
 class ReferenceEventListener
@@ -30,7 +30,7 @@ class ReferenceEventListener
         }
     }
 
-    private function updateReferenceIsNecessary(EntityManagerInterface $om, $entity)
+    private function updateReferenceIsNecessary(EntityManager $om, $entity)
     {
         if ($entity instanceof Proposal) {
             $proposalForm = $entity->getProposalForm();

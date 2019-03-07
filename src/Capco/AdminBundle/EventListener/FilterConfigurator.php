@@ -1,8 +1,7 @@
 <?php
-
 namespace Capco\AdminBundle\EventListener;
 
-use Doctrine\Orm\EntityManagerInterface;
+use Doctrine\Orm\EntityManager;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
@@ -10,7 +9,7 @@ class FilterConfigurator
 {
     private $em;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManager $em)
     {
         $this->em = $em;
     }

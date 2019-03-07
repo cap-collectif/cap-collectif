@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Repository\MenuItemRepository;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +19,7 @@ class MenuItemController extends Controller
     public function batchActionDeleteIsRelevant(array $selectedIds, $allEntitiesSelected)
     {
         foreach ($selectedIds as $id) {
-            $item = $this->container->get(MenuItemRepository::class)->find($id);
+            $item = $this->container->get('capco.menu_item.repository')->find($id);
             if (!$item->getIsDeletable()) {
                 return 'admin.action.menu_item.batch_delete.denied';
             }
