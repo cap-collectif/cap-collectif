@@ -108,7 +108,15 @@ class AddReplyMutation implements MutationInterface
                 $endAt = null;
                 $stepUrl = '';
             }
-            $this->userNotifier->acknowledgeReply($project, $reply, $endAt, $stepUrl, $step, false);
+            $this->userNotifier->acknowledgeReply(
+                $project,
+                $reply,
+                $endAt,
+                $stepUrl,
+                $step,
+                $user,
+                false
+            );
         }
 
         return ['questionnaire' => $questionnaire, 'reply' => $reply];

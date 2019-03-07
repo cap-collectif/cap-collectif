@@ -83,6 +83,15 @@
         </p>
     {% endif %}
 
+    {% if not isUserConfirmed %}
+        {{ 'unpublished-contribution-help-text'|trans({}, 'CapcoAppBundle') }}
+        {{ 'user.register.confirmation_message.please_validate'|trans({}, 'CapcoAppBundle') }}
+
+        <p>
+            <a href="{{ confirmationUrl }}"><strong>{{ 'user.register.confirmation_message.validate'|trans({}, 'CapcoAppBundle') }}</strong></a>
+        </p>
+    {% endif %}
+
     {% if endAt is not null %}
         <p>
             {{ 'you-can-modify-or-delete-your-answer-until-date'|trans({
@@ -92,7 +101,7 @@
     {% endif %}
 
     <p>
-        <button type="button"><a href="{{ stepUrl }}">{{ 'access-my-answer'|trans({}, 'CapcoAppBundle') }}</a></button>
+        <a href="{{ stepUrl }}">{{ 'access-my-answer'|trans({}, 'CapcoAppBundle') }}</a>
     </p>
     {% endautoescape %}
 {% endblock %}

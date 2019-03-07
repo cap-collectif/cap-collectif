@@ -78,7 +78,15 @@ class UpdateReplyMutation implements MutationInterface
                 $endAt = null;
                 $stepUrl = '';
             }
-            $this->userNotifier->acknowledgeReply($project, $reply, $endAt, $stepUrl, $step, true);
+            $this->userNotifier->acknowledgeReply(
+                $project,
+                $reply,
+                $endAt,
+                $stepUrl,
+                $step,
+                $user,
+                true
+            );
         }
 
         $this->em->flush();

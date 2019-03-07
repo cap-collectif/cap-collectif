@@ -20,6 +20,7 @@ final class UserNotifier extends BaseNotifier
         ?\DateTime $endAt,
         string $stepUrl,
         AbstractStep $step,
+        User $user,
         bool $isUpdated = false
     ): void {
         $this->mailer->sendMessage(
@@ -30,6 +31,8 @@ final class UserNotifier extends BaseNotifier
                 $stepUrl,
                 $isUpdated,
                 $step,
+                $user->isEmailConfirmed(),
+                $this->userResolver->resolveRegistrationConfirmationUrl($user),
                 $reply->getAuthor()->getEmail()
             )
         );

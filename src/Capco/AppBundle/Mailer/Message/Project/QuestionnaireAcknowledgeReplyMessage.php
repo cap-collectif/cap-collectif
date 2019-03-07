@@ -16,6 +16,8 @@ final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
         string $stepUrl,
         bool $isUpdated,
         AbstractStep $step,
+        bool $isUserConfirmed,
+        string $confirmationUrl,
         string $recipentEmail,
         string $recipientName = null
     ): self {
@@ -25,7 +27,16 @@ final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
             'reply.acknowledgement.subject',
             static::getMySubjectVars(),
             '@CapcoMail/acknowledgeReply.html.twig',
-            static::getMyTemplateVars($project, $reply, $endAt, $stepUrl, $step, $isUpdated)
+            static::getMyTemplateVars(
+                $project,
+                $reply,
+                $endAt,
+                $stepUrl,
+                $step,
+                $isUpdated,
+                $isUserConfirmed,
+                $confirmationUrl
+            )
         );
     }
 
@@ -35,7 +46,9 @@ final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
         ?\DateTime $endAt,
         string $stepUrl,
         AbstractStep $step,
-        bool $isUpdated
+        bool $isUpdated,
+        bool $isUserConfirmed,
+        string $confirmationUrl
     ): array {
         return [
             'project' => $project,
@@ -44,6 +57,8 @@ final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
             'stepUrl' => $stepUrl,
             'step' => $step,
             'isUpdated' => $isUpdated,
+            'isUserConfirmed' => $isUserConfirmed,
+            'confirmationUrl' => $confirmationUrl,
         ];
     }
 
