@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\ThemeSearchType;
+use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -48,7 +49,7 @@ class ThemeController extends Controller
 
         $pagination = $this->get(Resolver::class)->getValue('themes.pagination');
 
-        $themes = $this->get('capco.theme.repository')->getSearchResultsWithCounters(
+        $themes = $this->get(ThemeRepository::class)->getSearchResultsWithCounters(
             $pagination,
             $page,
             $term

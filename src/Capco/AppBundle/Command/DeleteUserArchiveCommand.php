@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\UserArchive;
+use Capco\AppBundle\Repository\UserArchiveRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,9 +13,9 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-            ->setName('capco:user_archives:delete')
-            ->setDescription('Delete the archive datas requested by a user');
+        $this->setName('capco:user_archives:delete')->setDescription(
+            'Delete the archive datas requested by a user'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -24,7 +25,9 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
         $dateToDelete = $currDate->modify('-7 days');
 
         $output->writeln('Retrieving archives ...');
-        $archives = $this->getContainer()->get('capco.user_archive.repository')->getArchivesToDelete($dateToDelete);
+        $archives = $this->getContainer()
+            ->get(UserArchiveRepository::class)
+            ->getArchivesToDelete($dateToDelete);
 
         $output->writeln(\count($archives) . ' archives to delete.');
         $progress = new ProgressBar($output, \count($archives));
@@ -46,7 +49,10 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
     protected function removeArchiveFile(UserArchive $archive)
     {
         $fileSystem = $this->getContainer()->get('filesystem');
-        $zipFile = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $archive->getPath();
+        $zipFile =
+            $this->getContainer()->getParameter('kernel.root_dir') .
+            '/../web/export/' .
+            $archive->getPath();
         if ($fileSystem->exists($zipFile)) {
             $fileSystem->remove($zipFile);
         }

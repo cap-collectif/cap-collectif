@@ -4,8 +4,20 @@ namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Repository\UserArchiveRepository;
+use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -38,7 +50,7 @@ class ProfileController extends Controller
     public function loginAndShowEditFollowingsAction(Request $request, string $token)
     {
         $userNotificationsConfiguration = $this->get(
-            'capco.user_notifications_configuration.repository'
+            UserNotificationsConfigurationRepository::class
         )->findOneBy(['unsubscribeToken' => $token]);
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
@@ -66,7 +78,7 @@ class ProfileController extends Controller
      */
     public function downloadArchiveAction(Request $request)
     {
-        $archive = $this->get('capco.user_archive.repository')->getLastForUser($this->getUser());
+        $archive = $this->get(UserArchiveRepository::class)->getLastForUser($this->getUser());
 
         if (!$archive) {
             throw new NotFoundHttpException('Archive not found');
@@ -90,7 +102,7 @@ class ProfileController extends Controller
     public function loginAndShowDataAction(Request $request, string $token)
     {
         $userNotificationsConfiguration = $this->get(
-            'capco.user_notifications_configuration.repository'
+            UserNotificationsConfigurationRepository::class
         )->findOneBy(['unsubscribeToken' => $token]);
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
@@ -108,7 +120,7 @@ class ProfileController extends Controller
     public function loginAndShowNotificationsOptionsAction(Request $request, string $token)
     {
         $userNotificationsConfiguration = $this->get(
-            'capco.user_notifications_configuration.repository'
+            UserNotificationsConfigurationRepository::class
         )->findOneBy(['unsubscribeToken' => $token]);
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
@@ -130,7 +142,7 @@ class ProfileController extends Controller
     {
         /** @var UserNotificationsConfiguration $userNotificationsConfiguration */
         $userNotificationsConfiguration = $this->get(
-            'capco.user_notifications_configuration.repository'
+            UserNotificationsConfigurationRepository::class
         )->findOneBy(['unsubscribeToken' => $token]);
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
@@ -167,7 +179,7 @@ class ProfileController extends Controller
         }
 
         $user = $slug
-            ? $this->get('capco.user.repository')->findOneBySlug($slug)
+            ? $this->get(UserRepository::class)->findOneBySlug($slug)
             : $this->get('security.token_storage')
                 ->getToken()
                 ->getUser();
@@ -185,21 +197,19 @@ class ProfileController extends Controller
         ]);
         $projectsCount = \count($projectsRaw);
 
-        $opinionTypesWithUserOpinions = $this->get('capco.opinion_type.repository')->getByUser(
-            $user
-        );
-        $versions = $this->get('capco.opinion_version.repository')->getByUser($user);
-        $arguments = $this->get('capco.argument.repository')->getByUser($user);
+        $opinionTypesWithUserOpinions = $this->get(OpinionTypeRepository::class)->getByUser($user);
+        $versions = $this->get(OpinionVersionRepository::class)->getByUser($user);
+        $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
 
-        $replies = $this->get('capco.reply.repository')->findBy([
+        $replies = $this->get(ReplyRepository::class)->findBy([
             'author' => $user,
             'private' => false,
             'draft' => false,
         ]);
 
-        $sources = $this->get('capco.source.repository')->getByUser($user);
-        $comments = $this->get('capco.comment.repository')->getByUser($user);
-        $votes = $this->get('capco.abstract_vote.repository')->getPublicVotesByUser($user);
+        $sources = $this->get(SourceRepository::class)->getByUser($user);
+        $comments = $this->get(CommentRepository::class)->getByUser($user);
+        $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
         $eventsCount = $this->getEventsCount($user);
 
         return array_merge(
@@ -254,9 +264,7 @@ class ProfileController extends Controller
      */
     public function showOpinionsAction(User $user)
     {
-        $opinionTypesWithUserOpinions = $this->get('capco.opinion_type.repository')->getByUser(
-            $user
-        );
+        $opinionTypesWithUserOpinions = $this->get(OpinionTypeRepository::class)->getByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
@@ -275,7 +283,7 @@ class ProfileController extends Controller
      */
     public function showOpinionVersionsAction(User $user)
     {
-        $versions = $this->get('capco.opinion_version.repository')->getByUser($user);
+        $versions = $this->get(OpinionVersionRepository::class)->getByUser($user);
 
         return ['user' => $user, 'versions' => $versions];
     }
@@ -309,7 +317,7 @@ class ProfileController extends Controller
      */
     public function showRepliesAction(User $user)
     {
-        $replies = $this->get('capco.reply.repository')->findBy([
+        $replies = $this->get(ReplyRepository::class)->findBy([
             'author' => $user,
             'private' => false,
         ]);
@@ -330,7 +338,7 @@ class ProfileController extends Controller
      */
     public function showArgumentsAction(User $user)
     {
-        $arguments = $this->get('capco.argument.repository')->getByUser($user);
+        $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
@@ -350,7 +358,7 @@ class ProfileController extends Controller
      */
     public function showSourcesAction(User $user)
     {
-        $sources = $this->get('capco.source.repository')->getByUser($user);
+        $sources = $this->get(SourceRepository::class)->getByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
@@ -369,7 +377,7 @@ class ProfileController extends Controller
      */
     public function showCommentsAction(User $user)
     {
-        $comments = $this->get('capco.comment.repository')->getByUser($user);
+        $comments = $this->get(CommentRepository::class)->getByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
@@ -388,7 +396,7 @@ class ProfileController extends Controller
      */
     public function showVotesAction(User $user)
     {
-        $votes = $this->get('capco.abstract_vote.repository')->getPublicVotesByUser($user);
+        $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
@@ -420,7 +428,7 @@ class ProfileController extends Controller
     private function getProposalsProps(User $user)
     {
         $proposalsWithStep = $this->get(
-            'capco.proposal.repository'
+            ProposalRepository::class
         )->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user);
         $proposalsCount = array_reduce($proposalsWithStep, function ($sum, $item) {
             $sum += \count($item['proposals']);
@@ -475,6 +483,6 @@ class ProfileController extends Controller
 
     private function getEventsCount(User $user): int
     {
-        return $this->get('capco.event.repository')->countAllByUser($user);
+        return $this->get(EventRepository::class)->countAllByUser($user);
     }
 }

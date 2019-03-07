@@ -42,7 +42,7 @@ class SourcesController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
 
-        $previousVote = $this->get('capco.source_vote.repository')->findOneBy([
+        $previousVote = $this->get(SourceVoteRepository::class)->findOneBy([
             'user' => $viewer,
             'source' => $source,
         ]);
@@ -80,7 +80,7 @@ class SourcesController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
 
-        $vote = $this->get('capco.source_vote.repository')->findOneBy([
+        $vote = $this->get(SourceVoteRepository::class)->findOneBy([
             'user' => $viewer,
             'source' => $source,
         ]);

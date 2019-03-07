@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Answer;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -64,11 +66,11 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
             $object = null;
             if ('opinion' === $type) {
                 $object = $this->getContainer()
-                    ->get('capco.opinion.repository')
+                    ->get(OpinionRepository::class)
                     ->findOneBy(['slug' => $slug]);
             } elseif ('version' === $type) {
                 $object = $this->getContainer()
-                    ->get('capco.opinion_version.repository')
+                    ->get(OpinionVersionRepository::class)
                     ->findOneBy(['slug' => $slug]);
             }
 

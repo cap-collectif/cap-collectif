@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Form\ContactType;
+use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -107,7 +108,7 @@ class DefaultController extends Controller
      */
     public function cookiesAction(Request $request)
     {
-        $cookiesList = $this->get('capco.site_parameter.repository')->findOneBy([
+        $cookiesList = $this->get(SiteParameterRepository::class)->findOneBy([
             'keyname' => 'cookies-list',
             'isEnabled' => 1,
         ]);

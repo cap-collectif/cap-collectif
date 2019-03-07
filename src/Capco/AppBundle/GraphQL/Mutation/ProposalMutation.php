@@ -3,7 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
-use Elastica\Index;
+use Capco\AppBundle\Repository\ProposalFormRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\SelectionRepository;
+use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Swarrot\Broker\Message;
 use Psr\Log\LoggerInterface;
@@ -55,7 +58,7 @@ class ProposalMutation implements ContainerAwareInterface
         $formFactory = $this->container->get('form.factory');
 
         $values = $input->getRawArguments();
-
+        /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
         unset($values['proposalId']); // This only useful to retrieve the proposal
 
@@ -149,7 +152,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $status = null;
         if ($statusId) {
-            $status = $this->container->get('capco.status.repository')->find($statusId);
+            $status = $this->container->get(StatusRepository::class)->find($statusId);
         }
 
         $proposal->setStatus($status);
@@ -172,7 +175,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $proposalId = GlobalIdResolver::getDecodedId($proposalId);
         $stepId = GlobalIdResolver::getDecodedId($stepId);
-        $selection = $this->container->get('capco.selection.repository')->findOneBy([
+        $selection = $this->container->get(SelectionRepository::class)->findOneBy([
             'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
             'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
         ]);
@@ -183,7 +186,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $status = null;
         if ($statusId) {
-            $status = $this->container->get('capco.status.repository')->find($statusId);
+            $status = $this->container->get(StatusRepository::class)->find($statusId);
         }
 
         $selection->setStatus($status);
@@ -208,7 +211,7 @@ class ProposalMutation implements ContainerAwareInterface
         $proposalId = GlobalIdResolver::getDecodedId($proposalId);
         $stepId = GlobalIdResolver::getDecodedId($stepId);
 
-        $selection = $this->container->get('capco.selection.repository')->findOneBy([
+        $selection = $this->container->get(SelectionRepository::class)->findOneBy([
             'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
             'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
         ]);
@@ -241,7 +244,7 @@ class ProposalMutation implements ContainerAwareInterface
         $proposalId = GlobalIdResolver::getDecodedId($proposalId);
         $stepId = GlobalIdResolver::getDecodedId($stepId);
 
-        $selection = $this->container->get('capco.selection.repository')->findOneBy([
+        $selection = $this->container->get(SelectionRepository::class)->findOneBy([
             'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
             'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
         ]);
@@ -252,7 +255,7 @@ class ProposalMutation implements ContainerAwareInterface
         $selectionStatus = null;
 
         if ($statusId) {
-            $selectionStatus = $this->container->get('capco.status.repository')->find($statusId);
+            $selectionStatus = $this->container->get(StatusRepository::class)->find($statusId);
         }
 
         $proposal = $this->globalIdResolver->resolve($proposalId['id'], $user);
@@ -333,7 +336,7 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
-        $proposalFormRepo = $this->container->get('capco.proposal_form.repository');
+        $proposalFormRepo = $this->container->get(ProposalFormRepository::class);
 
         $values = $input->getRawArguments();
 
@@ -359,7 +362,7 @@ class ProposalMutation implements ContainerAwareInterface
         if (
             \count(
                 $this->container
-                    ->get('capco.proposal.repository')
+                    ->get(ProposalRepository::class)
                     ->findCreatedSinceIntervalByAuthor($user, 'PT1M', 'author')
             ) >= 2
         ) {

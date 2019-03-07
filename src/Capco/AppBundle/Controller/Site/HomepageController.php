@@ -6,9 +6,17 @@ use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\HighlightedContentRepository;
+use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
+use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Repository\VideoRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -60,11 +68,11 @@ class HomepageController extends Controller
                 if ($form->isValid()) {
                     // TODO: move this to a unique constraint in form instead
                     /** @var NewsletterSubscription $email */
-                    $email = $this->get('capco.newsletter_subscription.repository')->findOneByEmail(
+                    $email = $this->get(NewsletterSubscriptionRepository::class)->findOneByEmail(
                         $subscription->getEmail()
                     );
                     /** @var User $userToNotify */
-                    $userToNotify = $this->get('capco.user.repository')->findOneBy([
+                    $userToNotify = $this->get(UserRepository::class)->findOneBy([
                         'email' => $subscription->getEmail(),
                     ]);
                     $em = $this->getDoctrine()->getManager();
@@ -126,7 +134,7 @@ class HomepageController extends Controller
      */
     public function highlightedContentAction(Section $section = null)
     {
-        $highlighteds = $this->get('capco.highlighted.repository')->getAllOrderedByPosition(4);
+        $highlighteds = $this->get(HighlightedContentRepository::class)->getAllOrderedByPosition(4);
         $props = $this->serializer->serialize(['highlighteds' => $highlighteds], 'json', [
             'groups' => [
                 'HighlightedContent',
@@ -150,7 +158,7 @@ class HomepageController extends Controller
     {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
-        $videos = $this->get('capco.video.repository')->getLast($max, $offset);
+        $videos = $this->get(VideoRepository::class)->getLast($max, $offset);
 
         return ['videos' => $videos, 'section' => $section];
     }
@@ -166,13 +174,13 @@ class HomepageController extends Controller
         $max = $max ?? 4;
         $offset = $offset ?? 0;
         if ($section->getStep() && $section->getStep()->isCollectStep()) {
-            $proposals = $this->get('capco.proposal.repository')->getLastByStep(
+            $proposals = $this->get(ProposalRepository::class)->getLastByStep(
                 $max,
                 $offset,
                 $section->getStep()
             );
         } else {
-            $proposals = $this->get('capco.proposal.repository')->getLast($max, $offset);
+            $proposals = $this->get(ProposalRepository::class)->getLast($max, $offset);
         }
 
         return ['proposals' => $proposals, 'section' => $section];
@@ -188,7 +196,7 @@ class HomepageController extends Controller
     ) {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
-        $topics = $this->get('capco.theme.repository')->getLast($max, $offset);
+        $topics = $this->get(ThemeRepository::class)->getLast($max, $offset);
 
         return ['topics' => $topics, 'section' => $section];
     }
@@ -200,7 +208,7 @@ class HomepageController extends Controller
     {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
-        $posts = $this->get('capco.blog.post.repository')->getLast($max, $offset);
+        $posts = $this->get(PostRepository::class)->getLast($max, $offset);
 
         return ['posts' => $posts, 'section' => $section];
     }
@@ -224,7 +232,7 @@ class HomepageController extends Controller
     {
         $max = $max ?? 3;
         $offset = $offset ?? 0;
-        $events = $this->get('capco.event.repository')->getLast($max, $offset);
+        $events = $this->get(EventRepository::class)->getLast($max, $offset);
 
         return ['events' => $events, 'section' => $section];
     }

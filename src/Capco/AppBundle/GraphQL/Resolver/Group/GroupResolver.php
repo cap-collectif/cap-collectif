@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Group;
 
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Repository\GroupRepository;
+use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
@@ -16,12 +18,12 @@ class GroupResolver implements ContainerAwareInterface, ResolverInterface
 
     public function resolveAll(): array
     {
-        return $this->container->get('capco.group.repository')->findAll();
+        return $this->container->get(GroupRepository::class)->findAll();
     }
 
     public function resolveUsersConnection(Group $group, Argument $args): Connection
     {
-        $userRepo = $this->container->get('capco.user.repository');
+        $userRepo = $this->container->get(UserRepository::class);
 
         $paginator = new Paginator(function () use ($userRepo, $group) {
             return $userRepo->getUsersInGroup($group);

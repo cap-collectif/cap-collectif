@@ -5,6 +5,8 @@ namespace Capco\UserBundle\Controller;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Form\Type\MemberSearchType;
+use Capco\UserBundle\Repository\UserRepository;
+use Capco\UserBundle\Repository\UserTypeRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -45,7 +47,7 @@ class MembersController extends Controller
             }
         } else {
             $form->setData([
-                'userType' => $this->get('capco.user_type.repository')->findOneBySlug($userType),
+                'userType' => $this->get(UserTypeRepository::class)->findOneBySlug($userType),
                 'sort' => $sort,
             ]);
         }
@@ -53,7 +55,7 @@ class MembersController extends Controller
         $pagination = $this->get(Resolver::class)->getValue('members.pagination.size');
 
         $sort = $sort ?? 'activity';
-        $members = $this->get('capco.user.repository')->getSearchResults(
+        $members = $this->get(UserRepository::class)->getSearchResults(
             $pagination,
             $page,
             $sort,
