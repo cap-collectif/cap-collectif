@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
@@ -19,7 +20,7 @@ class ProposalsController extends FOSRestController
      */
     public function getProposalSelectionsAction(string $proposalId)
     {
-        $proposal = $this->get('global_id_resolver')->resolve($proposalId, $this->getUser());
+        $proposal = $this->get(GlobalIdResolver::class)->resolve($proposalId, $this->getUser());
 
         return $proposal->getSelections();
     }
@@ -31,7 +32,7 @@ class ProposalsController extends FOSRestController
     public function postProposalReportAction(Request $request, string $proposalId)
     {
         $viewer = $this->getUser();
-        $proposal = $this->get('global_id_resolver')->resolve($proposalId, $this->getUser());
+        $proposal = $this->get(GlobalIdResolver::class)->resolve($proposalId, $this->getUser());
 
         if (!$viewer || 'anon.' === $viewer || $viewer === $proposal->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
