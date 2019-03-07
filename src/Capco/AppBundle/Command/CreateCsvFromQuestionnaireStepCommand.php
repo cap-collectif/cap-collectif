@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Repository\QuestionnaireStepRepository;
 use Capco\AppBundle\Resolver\ProjectDownloadResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -58,8 +57,8 @@ class CreateCsvFromQuestionnaireStepCommand extends ContainerAwareCommand
                 $filename .= $qs->getProject()->getSlug() . '_';
             }
             $filename .= $qs->getSlug() . '.xlsx';
-            $path = $container->getParameter('kernel.root_dir');
-            $writer->save($path . '/../web/export/' . $filename);
+            $path = $container->getParameter('kernel.project_dir');
+            $writer->save($path . '/web/export/' . $filename);
             $output->writeln('The export file "' . $filename . '" has been created.');
         }
     }
