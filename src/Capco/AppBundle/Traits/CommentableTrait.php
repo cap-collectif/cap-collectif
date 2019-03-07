@@ -5,56 +5,50 @@ namespace Capco\AppBundle\Traits;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Post;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 trait CommentableTrait
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="comments_count", type="integer")
      */
     private $commentsCount = 0;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="is_commentable", type="boolean")
      */
     private $commentable = true;
 
-    public function increaseCommentsCount($nb)
+    public function increaseCommentsCount(int $nb): self
     {
         $this->commentsCount += $nb;
+
+        return $this;
     }
 
-    public function decreaseCommentsCount($nb)
+    public function decreaseCommentsCount(int $nb): self
     {
         if ($this->commentsCount >= $nb) {
             $this->commentsCount -= $nb;
         }
+
+        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCommentsCount()
+    public function getCommentsCount(): int
     {
         return $this->commentsCount;
     }
 
-    /**
-     * @param int $commentsCount
-     */
-    public function setCommentsCount($commentsCount)
+    public function setCommentsCount(int $commentsCount): self
     {
         $this->commentsCount = $commentsCount;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getComments()
+    public function getComments(): ?Collection
     {
         return $this->comments;
     }
