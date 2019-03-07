@@ -2362,7 +2362,7 @@ type MediaQuestion implements Question & Node {
 
     # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
-  ): ResponseConnection!
+  ): ResponseConnection
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -2430,7 +2430,7 @@ type MultipleChoiceQuestion implements Question & Node {
 
     # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
-  ): ResponseConnection!
+  ): ResponseConnection
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -4247,7 +4247,7 @@ interface Question {
 
     # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
-  ): ResponseConnection!
+  ): ResponseConnection
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -5018,7 +5018,7 @@ type SectionQuestion implements Question & Node {
 
     # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
-  ): ResponseConnection!
+  ): ResponseConnection
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -5264,7 +5264,7 @@ type SimpleQuestion implements Question & Node {
 
     # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
-  ): ResponseConnection!
+  ): ResponseConnection
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]

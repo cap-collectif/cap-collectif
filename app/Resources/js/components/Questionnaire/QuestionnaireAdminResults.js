@@ -93,14 +93,14 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
                         <FormattedMessage id="no-answer" />
                       )}
                       {question.participants &&
-                        question.allResponses &&
-                        question.allResponses.totalCount !== 0 && (
+                        question.responses &&
+                        question.responses.totalCount !== 0 && (
                           <React.Fragment>
                             {' '}
                             /{' '}
                             <FormattedMessage
                               id="count-answers"
-                              values={{ num: question.allResponses.totalCount }}
+                              values={{ num: question.responses.totalCount }}
                             />
                           </React.Fragment>
                         )}
@@ -142,10 +142,9 @@ export default createFragmentContainer(
         participants {
           totalCount
         }
-        allResponses: responses {
+        responses {
           totalCount
         }
-        resultOpen
         ...QuestionnaireAdminResultsText_simpleQuestion
         ...QuestionnaireAdminResultsMedia_mediaQuestion
         ...QuestionnaireAdminResultsBarChart_multipleChoiceQuestion

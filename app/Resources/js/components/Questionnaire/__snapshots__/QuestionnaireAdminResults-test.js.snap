@@ -53,9 +53,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "MultipleChoiceQuestion",
-              "allResponses": Object {
-                "totalCount": 14,
-              },
               "participants": Object {
                 "totalCount": 7,
               },
@@ -123,9 +120,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "MultipleChoiceQuestion",
-              "allResponses": Object {
-                "totalCount": 98,
-              },
               "participants": Object {
                 "totalCount": 98,
               },
@@ -187,9 +181,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "MultipleChoiceQuestion",
-              "allResponses": Object {
-                "totalCount": 48,
-              },
               "participants": Object {
                 "totalCount": 45,
               },
@@ -251,9 +242,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "MultipleChoiceQuestion",
-              "allResponses": Object {
-                "totalCount": 43,
-              },
               "participants": Object {
                 "totalCount": 43,
               },
@@ -303,9 +291,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "MultipleChoiceQuestion",
-              "allResponses": Object {
-                "totalCount": 0,
-              },
               "participants": Object {
                 "totalCount": 38,
               },
@@ -366,14 +351,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "SimpleQuestion",
-              "allResponses": Object {
-                "totalCount": 4,
-              },
               "participants": Object {
                 "totalCount": 4,
               },
               "private": false,
               "required": false,
+              "responses": Object {
+                "totalCount": 4,
+              },
               "title": "question type text",
               "type": "text",
             }
@@ -426,14 +411,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "SimpleQuestion",
-              "allResponses": Object {
-                "totalCount": 89,
-              },
               "participants": Object {
                 "totalCount": 89,
               },
               "private": false,
               "required": false,
+              "responses": Object {
+                "totalCount": 89,
+              },
               "title": "question type number",
               "type": "number",
             }
@@ -486,14 +471,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             Object {
               "$fragmentRefs": null,
               "__typename": "MediaQuestion",
-              "allResponses": Object {
-                "totalCount": 9,
-              },
               "participants": Object {
                 "totalCount": 9,
               },
               "private": false,
               "required": false,
+              "responses": Object {
+                "totalCount": 9,
+              },
               "title": "question type number",
               "type": "medias",
             }
