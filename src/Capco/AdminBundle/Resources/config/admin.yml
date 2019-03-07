@@ -1,9 +1,9 @@
 imports:
+  - { resource: listeners.yml }
   - { resource: services/validators.yml }
 
 services:
-  capco_admin.admin.page:
-    class: Capco\AdminBundle\Admin\PageAdmin
+  Capco\AdminBundle\Admin\PageAdmin:
     arguments: [~, Capco\AppBundle\Entity\Page, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -16,8 +16,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.menu_item:
-    class: Capco\AdminBundle\Admin\MenuItemAdmin
+  Capco\AdminBundle\Admin\MenuItemAdmin:
     arguments: [~, Capco\AppBundle\Entity\MenuItem, CapcoAdminBundle:MenuItem]
     tags:
       - {
@@ -29,8 +28,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.opinion:
-    class: Capco\AdminBundle\Admin\OpinionAdmin
+  Capco\AdminBundle\Admin\OpinionAdmin:
     arguments:
       [~, Capco\AppBundle\Entity\Opinion, CapcoAdminBundle:Opinion, '@security.token_storage']
     tags:
@@ -43,8 +41,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.argument:
-    class: Capco\AdminBundle\Admin\ArgumentAdmin
+  Capco\AdminBundle\Admin\ArgumentAdmin:
     arguments:
       [~, Capco\AppBundle\Entity\Argument, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
@@ -57,8 +54,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.appendix:
-    class: Capco\AdminBundle\Admin\OpinionAppendixAdmin
+  Capco\AdminBundle\Admin\OpinionAppendixAdmin:
     arguments: [~, Capco\AppBundle\Entity\OpinionAppendix, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -70,8 +66,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.appendix_type:
-    class: Capco\AdminBundle\Admin\AppendixTypeAdmin
+  Capco\AdminBundle\Admin\AppendixTypeAdmin:
     arguments: [~, Capco\AppBundle\Entity\AppendixType, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -83,8 +78,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.opinion_type_appendix_type:
-    class: Capco\AdminBundle\Admin\OpinionTypeAppendixTypeAdmin
+  Capco\AdminBundle\Admin\OpinionTypeAppendixTypeAdmin:
     arguments: [~, Capco\AppBundle\Entity\OpinionTypeAppendixType, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -96,31 +90,28 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.argument_vote:
-    class: Capco\AdminBundle\Admin\ArgumentVoteAdmin
+  Capco\AdminBundle\Admin\ArgumentVoteAdmin:
     arguments: [~, Capco\AppBundle\Entity\ArgumentVote, SonataAdminBundle:CRUD]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.argument_vote }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.proposal_collect_vote:
-    class: Capco\AdminBundle\Admin\ProposalCollectVoteAdmin
+  Capco\AdminBundle\Admin\ProposalCollectVoteAdmin:
     arguments: [~, Capco\AppBundle\Entity\ProposalCollectVote, SonataAdminBundle:CRUD]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.proposal_collect_vote }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.proposal_selection_vote:
-    class: Capco\AdminBundle\Admin\ProposalSelectionVoteAdmin
+  Capco\AdminBundle\Admin\ProposalSelectionVoteAdmin:
     arguments: [~, Capco\AppBundle\Entity\ProposalSelectionVote, SonataAdminBundle:CRUD]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.proposal_collect_vote }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.project:
+  Capco\AdminBundle\Admin\ProjectAdmin:
     class: Capco\AdminBundle\Admin\ProjectAdmin
     arguments:
       [
@@ -140,8 +131,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.proposal:
-    class: Capco\AdminBundle\Admin\ProposalAdmin
+  Capco\AdminBundle\Admin\ProposalAdmin:
     arguments:
       [~, Capco\AppBundle\Entity\Proposal, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
@@ -156,8 +146,7 @@ services:
       - [setTemplate, [edit, CapcoAdminBundle:Proposal:edit.html.twig]]
       - [setTemplate, [list, CapcoAdminBundle:Proposal:list.html.twig]]
 
-  capco_admin.admin.reply:
-    class: Capco\AdminBundle\Admin\ReplyAdmin
+  Capco\AdminBundle\Admin\ReplyAdmin:
     arguments: [~, Capco\AppBundle\Entity\Reply, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
@@ -169,8 +158,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.questionnaire:
-    class: Capco\AdminBundle\Admin\QuestionnaireAdmin
+  Capco\AdminBundle\Admin\QuestionnaireAdmin:
     arguments:
       [~, Capco\AppBundle\Entity\Questionnaire, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
@@ -179,8 +167,7 @@ services:
       - [setTranslationDomain, [CapcoAppBundle]]
       - [setTemplate, [edit, CapcoAdminBundle:Questionnaire:edit.html.twig]]
 
-  capco_admin.admin.proposal_form:
-    class: Capco\AdminBundle\Admin\ProposalFormAdmin
+  Capco\AdminBundle\Admin\ProposalFormAdmin:
     arguments:
       [
         ~,
@@ -200,32 +187,28 @@ services:
       - [setTemplate, [edit, CapcoAdminBundle:ProposalForm:edit.html.twig]]
       - [setTemplate, [list, CapcoAdminBundle:ProposalForm:list.html.twig]]
 
-  capco_admin.admin.question_choice:
-    class: Capco\AdminBundle\Admin\QuestionChoiceAdmin
+  Capco\AdminBundle\Admin\QuestionChoiceAdmin:
     arguments: [~, Capco\AppBundle\Entity\QuestionChoice, SonataAdminBundle:CRUD]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.question_choice }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.status:
-    class: Capco\AdminBundle\Admin\StatusAdmin
+  Capco\AdminBundle\Admin\StatusAdmin:
     arguments: [~, Capco\AppBundle\Entity\Status, SonataAdminBundle:CRUD]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.status }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.requirement:
-    class: Capco\AdminBundle\Admin\RequirementAdmin
+  Capco\AdminBundle\Admin\RequirementAdmin:
     arguments: [~, Capco\AppBundle\Entity\Requirement, SonataAdminBundle:CRUD]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.status }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.footer_social_network:
-    class: Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
+  Capco\AdminBundle\Admin\FooterSocialNetworkAdmin:
     arguments: [~, Capco\AppBundle\Entity\FooterSocialNetwork, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -237,8 +220,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.map:
-    class: Capco\AdminBundle\Admin\MapTokenAdmin
+  Capco\AdminBundle\Admin\MapTokenAdmin:
     arguments: [~, Capco\AppBundle\Entity\MapToken, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -250,8 +232,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.project_district:
-    class: Capco\AdminBundle\Admin\ProjectDistrictAdmin
+  Capco\AdminBundle\Admin\ProjectDistrictAdmin:
     arguments: [~, Capco\AppBundle\Entity\District\ProjectDistrict, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -263,8 +244,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.newsletter_subscription:
-    class: Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin
+  Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin:
     arguments: [~, Capco\AppBundle\Entity\NewsletterSubscription, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -276,8 +256,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.opinion_type:
-    class: Capco\AdminBundle\Admin\OpinionTypeAdmin
+  Capco\AdminBundle\Admin\OpinionTypeAdmin:
     arguments:
       [
         ~,
@@ -295,8 +274,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.reporting:
-    class: Capco\AdminBundle\Admin\ReportingAdmin
+  Capco\AdminBundle\Admin\ReportingAdmin:
     arguments: [~, Capco\AppBundle\Entity\Reporting, CapcoAdminBundle:Reporting]
     tags:
       - {
@@ -308,8 +286,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.step:
-    class: Capco\AdminBundle\Admin\StepAdmin
+  Capco\AdminBundle\Admin\StepAdmin:
     arguments: [~, Capco\AppBundle\Entity\Steps\AbstractStep, CapcoAdminBundle:Step]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.step }
@@ -331,8 +308,7 @@ services:
           ],
         ]
 
-  capco_admin.admin.theme:
-    class: Capco\AdminBundle\Admin\ThemeAdmin
+  Capco\AdminBundle\Admin\ThemeAdmin:
     arguments:
       [
         ~,
@@ -350,16 +326,14 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.opinion_vote:
-    class: Capco\AdminBundle\Admin\OpinionVoteAdmin
+  Capco\AdminBundle\Admin\OpinionVoteAdmin:
     arguments: [~, Capco\AppBundle\Entity\OpinionVote, SonataAdminBundle:CRUD]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.opinion_vote }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.site_parameter:
-    class: Capco\AdminBundle\Admin\SiteParameterAdmin
+  Capco\AdminBundle\Admin\SiteParameterAdmin:
     arguments: [~, Capco\AppBundle\Entity\SiteParameter, CapcoAdminBundle:SiteParameter]
     tags:
       - {
@@ -371,8 +345,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.site_color:
-    class: Capco\AdminBundle\Admin\SiteColorAdmin
+  Capco\AdminBundle\Admin\SiteColorAdmin:
     arguments: [~, Capco\AppBundle\Entity\SiteColor, CapcoAdminBundle:SiteParameter]
     tags:
       - {
@@ -384,8 +357,12 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.social_network:
-    class: Capco\AdminBundle\Admin\SocialNetworkAdmin
+  Capco\AdminBundle\Admin\SiteFaviconAdmin:
+    arguments: [~, ~, CapcoAdminBundle:SiteFavicon]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: website-icon }
+
+  Capco\AdminBundle\Admin\SocialNetworkAdmin:
     arguments: [~, Capco\AppBundle\Entity\SocialNetwork, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -397,8 +374,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.site_image:
-    class: Capco\AdminBundle\Admin\SiteImageAdmin
+  Capco\AdminBundle\Admin\SiteImageAdmin:
     arguments: [~, Capco\AppBundle\Entity\SiteImage, CapcoAdminBundle:SiteParameter]
     tags:
       - {
@@ -410,14 +386,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.site_favicon:
-    class: Capco\AdminBundle\Admin\SiteFaviconAdmin
-    arguments: [~, ~, CapcoAdminBundle:SiteFavicon]
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: website-icon }
-
-  capco_admin.admin.category:
-    class: Capco\AdminBundle\Admin\CategoryAdmin
+  Capco\AdminBundle\Admin\CategoryAdmin:
     arguments: [~, Capco\AppBundle\Entity\Category, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -429,8 +398,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.source:
-    class: Capco\AdminBundle\Admin\SourceAdmin
+  Capco\AdminBundle\Admin\SourceAdmin:
     arguments: [~, Capco\AppBundle\Entity\Source, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
@@ -442,8 +410,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.post:
-    class: Capco\AdminBundle\Admin\PostAdmin
+  Capco\AdminBundle\Admin\PostAdmin:
     arguments: [~, Capco\AppBundle\Entity\Post, SonataAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
@@ -455,7 +422,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.event:
+  Capco\AdminBundle\Admin\EventAdmin:
     class: Capco\AdminBundle\Admin\EventAdmin
     arguments:
       [
@@ -475,8 +442,7 @@ services:
       - [setTranslationDomain, [CapcoAppBundle]]
       - [setTemplate, [list, CapcoAdminBundle:Event:list.html.twig]]
 
-  capco_admin.admin.video:
-    class: Capco\AdminBundle\Admin\VideoAdmin
+  Capco\AdminBundle\Admin\VideoAdmin:
     arguments: [~, Capco\AppBundle\Entity\Video, CapcoAdminBundle:CRUD]
     tags:
       - {
@@ -488,8 +454,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.comment:
-    class: Capco\AdminBundle\Admin\CommentAdmin
+  Capco\AdminBundle\Admin\CommentAdmin:
     arguments:
       [~, Capco\AppBundle\Entity\Comment, CapcoAdminBundle:Comment, '@security.token_storage']
     tags:
@@ -512,16 +477,14 @@ services:
           ],
         ]
 
-  capco_admin.admin.comment_vote:
-    class: Capco\AdminBundle\Admin\CommentVoteAdmin
+  Capco\AdminBundle\Admin\CommentVoteAdmin:
     arguments: [~, Capco\AppBundle\Entity\CommentVote, SonataAdminBundle:CRUD]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.comment_vote }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.consultation_step_type:
-    class: Capco\AdminBundle\Admin\ConsultationStepTypeAdmin
+  Capco\AdminBundle\Admin\ConsultationStepTypeAdmin:
     arguments: [~, Capco\AppBundle\Entity\Steps\ConsultationStepType, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -533,8 +496,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.section:
-    class: Capco\AdminBundle\Admin\SectionAdmin
+  Capco\AdminBundle\Admin\SectionAdmin:
     arguments: [~, Capco\AppBundle\Entity\Section, CapcoAdminBundle:Section]
     tags:
       - {
@@ -546,8 +508,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.user_type:
-    class: Capco\AdminBundle\Admin\UserTypeAdmin
+  Capco\AdminBundle\Admin\UserTypeAdmin:
     arguments: [~, Capco\UserBundle\Entity\UserType, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -559,8 +520,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.highlighted:
-    class: Capco\AdminBundle\Admin\HighlightedContentAdmin
+  Capco\AdminBundle\Admin\HighlightedContentAdmin:
     arguments: [~, Capco\AppBundle\Entity\HighlightedContent, CapcoAdminBundle:HighlightedContent]
     tags:
       - {
@@ -584,16 +544,14 @@ services:
           ],
         ]
 
-  capco_admin.admin.project_abstractstep:
-    class: Capco\AdminBundle\Admin\ProjectAbstractStepAdmin
+  Capco\AdminBundle\Admin\ProjectAbstractStepAdmin:
     arguments: [~, Capco\AppBundle\Entity\Steps\ProjectAbstractStep, SonataAdminBundle:CRUD]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.project_abstractstep }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.questionnaire_abstractquestion:
-    class: Capco\AdminBundle\Admin\QuestionnaireAbstractQuestionAdmin
+  Capco\AdminBundle\Admin\QuestionnaireAbstractQuestionAdmin:
     arguments:
       [~, Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion, SonataAdminBundle:CRUD]
     tags:
@@ -601,16 +559,14 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.synthesis:
-    class: Capco\AdminBundle\Admin\SynthesisAdmin
+  Capco\AdminBundle\Admin\SynthesisAdmin:
     arguments: [~, Capco\AppBundle\Entity\Synthesis\Synthesis, SonataAdminBundle:CRUD]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.synthesis }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.opinion_version:
-    class: Capco\AdminBundle\Admin\OpinionVersionAdmin
+  Capco\AdminBundle\Admin\OpinionVersionAdmin:
     arguments:
       [~, Capco\AppBundle\Entity\OpinionVersion, SonataAdminBundle:CRUD, '@security.token_storage']
     tags:
@@ -623,8 +579,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.answer:
-    class: Capco\AdminBundle\Admin\AnswerAdmin
+  Capco\AdminBundle\Admin\AnswerAdmin:
     arguments: [~, Capco\AppBundle\Entity\Answer, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -636,16 +591,14 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.selection_step:
-    class: Capco\AdminBundle\Admin\SelectionStepAdmin
+  Capco\AdminBundle\Admin\SelectionStepAdmin:
     arguments: [~, Capco\AppBundle\Entity\Steps\SelectionStep, CapcoAdminBundle:Step]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.step }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.response:
-    class: Capco\AdminBundle\Admin\ResponseAdmin
+  Capco\AdminBundle\Admin\ResponseAdmin:
     arguments: [~, Capco\AppBundle\Entity\Responses\AbstractResponse, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -657,16 +610,14 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.proposal_category:
-    class: Capco\AdminBundle\Admin\ProposalCategoryAdmin
+  Capco\AdminBundle\Admin\ProposalCategoryAdmin:
     arguments: [~, Capco\AppBundle\Entity\ProposalCategory, SonataAdminBundle:CRUD]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.proposal_category }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.proposal_form.notification:
-    class: Capco\AdminBundle\Admin\ProposalFormNotificationConfigurationAdmin
+  Capco\AdminBundle\Admin\ProposalFormNotificationConfigurationAdmin:
     arguments:
       [
         ~,
@@ -678,8 +629,7 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.project_type:
-    class: Capco\AdminBundle\Admin\ProjectTypeAdmin
+  Capco\AdminBundle\Admin\ProjectTypeAdmin:
     arguments: [~, Capco\AppBundle\Entity\ProjectType, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -700,8 +650,7 @@ services:
   #    calls:
   #    - [ setTemplate, [list, CapcoMediaBundle:MediaAdmin:mosaic.html.twig]]
 
-  capco_admin.admin.group:
-    class: Capco\AdminBundle\Admin\GroupAdmin
+  Capco\AdminBundle\Admin\GroupAdmin:
     arguments: [~, Capco\AppBundle\Entity\Group, SonataAdminBundle:CRUD]
     tags:
       - {
@@ -715,8 +664,7 @@ services:
       - [setTemplate, [edit, CapcoAdminBundle:Group:edit.html.twig]]
       - [setTemplate, [list, CapcoAdminBundle:Group:list.html.twig]]
 
-  sonata.admin.controller.admin:
-    class: Capco\AdminBundle\Controller\HelperController
+  Capco\AdminBundle\Controller\HelperController:
     arguments:
       [
         '@twig',

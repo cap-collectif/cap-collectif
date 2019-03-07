@@ -497,7 +497,11 @@ EOF;
     public function proposalWithIdShouldBeSoftDeleted(string $id)
     {
         $em = $this->getEntityManager();
-        $em->getFilters()->disable('softdeleted');
+
+        $filters = $em->getFilters();
+        if ($filters->isEnabled('softdeleted')) {
+            $filters->disable('softdeleted');
+        }
         $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($id);
 
         Assert::assertTrue($proposal->isDeleted());
