@@ -185,17 +185,15 @@ export class EventListFilters extends React.Component<Props, State> {
       );
     }
 
-    if (theme !== null || project !== null) {
-      if (nbFilter > 0) {
-        filters.push(
-          <Button
-            bsStyle="link"
-            className="p-0"
-            onClick={() => dispatch(reset('EventPageContainer'))}>
-            <FormattedMessage id="reset-filters" />
-          </Button>,
-        );
-      }
+    if ((theme !== null || project !== null) && nbFilter > 0) {
+      filters.push(
+        <Button
+          bsStyle="link"
+          className="p-0"
+          onClick={() => dispatch(reset('EventPageContainer'))}>
+          <FormattedMessage id="reset-filters" />
+        </Button>,
+      );
     }
 
     return filters;

@@ -12,6 +12,7 @@ import EventMap from '../Map/EventMap';
 import type { EventListPaginated_query } from './__generated__/EventListPaginatedQuery.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
+import sizes from '../../../utils/sizes';
 
 type Props = {
   query: EventListPaginated_query,
@@ -46,14 +47,14 @@ export const EventListPaginated = (props: Props) => {
 
   const shouldRenderToggleListOrMap = (component: 'list' | 'map'): boolean => {
     if (component === 'list') {
-      if (screenWidth > 991) {
+      if (screenWidth > sizes.bootstrapGrid.smMax) {
         return true;
       }
       return isMobileListView;
     }
 
     if (component === 'map' && features.display_map) {
-      if (screenWidth > 991) {
+      if (screenWidth > sizes.bootstrapGrid.smMax) {
         return true;
       }
       return !isMobileListView;
@@ -81,7 +82,11 @@ export const EventListPaginated = (props: Props) => {
               .filter(Boolean)
               .map((node, key) => (
                 // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
-                <div key={key} onMouseOver={() => (screenWidth > 991 ? onFocus(node.id) : null)}>
+                <div
+                  key={key}
+                  onMouseOver={() =>
+                    screenWidth > sizes.bootstrapGrid.smMax ? onFocus(node.id) : null
+                  }>
                   <EventPreview
                     // $FlowFixMe eslint
                     isHighlighted={eventSelected && eventSelected === node.id}
