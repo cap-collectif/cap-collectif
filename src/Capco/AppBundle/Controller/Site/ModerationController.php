@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Opinion;
@@ -21,7 +20,7 @@ class ModerationController extends Controller
      */
     public function moderateAction(string $token, string $reason)
     {
-        $contribution = $this->get(GlobalIdResolver::class)->resolveByModerationToken($token);
+        $contribution = $this->get('global_id_resolver')->resolveByModerationToken($token);
 
         $hiddenReasons = [
             'reporting.status.sexual',

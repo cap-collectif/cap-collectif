@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AdminBundle\Resolver\FeaturesCategoryResolver;
 use Capco\AppBundle\Repository\SiteColorRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
@@ -64,7 +63,7 @@ class SettingsController extends Controller
             ['position' => 'ASC']
         );
 
-        $featuresCategoryResolver = $this->get(FeaturesCategoryResolver::class);
+        $featuresCategoryResolver = $this->get('capco.admin.features_category_resolver');
         $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
         $group = $featuresCategoryResolver->getGroupNameForCategory($category);
 
@@ -120,7 +119,9 @@ class SettingsController extends Controller
             ->getFlashBag()
             ->add('success', $message);
 
-        $category = $this->get(FeaturesCategoryResolver::class)->findCategoryForToggle($toggle);
+        $category = $this->get('capco.admin.features_category_resolver')->findCategoryForToggle(
+            $toggle
+        );
 
         return $this->redirect(
             $this->generateUrl('capco_admin_settings', [

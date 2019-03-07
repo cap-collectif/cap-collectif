@@ -1,7 +1,7 @@
 <?php
+
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Helper\EnvHelper;
@@ -74,7 +74,7 @@ class ProjectDownloadResolver
         return $headers;
     }
 
-    public function getContent(AbstractStep $step, bool $withVote = false): \PHPExcel_Writer_IWriter
+    public function getContent(AbstractStep $step): \PHPExcel_Writer_IWriter
     {
         if (!$step) {
             throw new NotFoundHttpException('Step not found');
@@ -98,10 +98,8 @@ class ProjectDownloadResolver
         return $this->getWriterFromData($data, $this->headers, $title);
     }
 
-    /*
-     * Add item in correct section
-     */
-    public function addItemToData($item)
+    // Add item in correct section
+    public function addItemToData($item): void
     {
         $this->data[] = $item;
     }
@@ -129,7 +127,7 @@ class ProjectDownloadResolver
         return $this->data;
     }
 
-    public function getRepliesData(iterable $replies)
+    public function getRepliesData(iterable $replies): void
     {
         foreach ($replies as $reply) {
             $responses = $this->em
@@ -151,6 +149,7 @@ class ProjectDownloadResolver
             'author_email' => $reply['author']['email'],
             'phone' => $reply['author']['phone'] ? (string) $reply['author']['phone'] : '',
             'created' => $this->dateToString($reply['createdAt']),
+            'updated' => $this->dateToString($reply['updatedAt']),
             'anonymous' => $this->booleanToString($reply['private']),
             'draft' => $this->booleanToString($reply['draft']),
         ];
@@ -173,7 +172,7 @@ class ProjectDownloadResolver
     {
         $responseMedia = null;
         $mediasUrl = [];
-        if ($response['response_type'] === 'media') {
+        if ('media' === $response['response_type']) {
             $responseMedia = $this->em
                 ->getRepository('CapcoAppBundle:Responses\MediaResponse')
                 ->findOneBy([
@@ -216,7 +215,7 @@ class ProjectDownloadResolver
         );
         $nbCols = \count($headers);
         // Add headers
-        [$startColumn, $startRow] = \PHPExcel_Cell::coordinateFromString();
+        list($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString();
         $currentColumn = $startColumn;
         foreach ($headers as $header) {
             if (\is_array($header)) {
@@ -231,7 +230,7 @@ class ProjectDownloadResolver
             $sheet->setCellValueExplicit($currentColumn . $startRow, $header);
             ++$currentColumn;
         }
-        [$startColumn, $startRow] = \PHPExcel_Cell::coordinateFromString('A2');
+        list($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString('A2');
         $currentRow = $startRow;
         // Loop through data
         foreach ($data as $row) {
@@ -246,23 +245,6 @@ class ProjectDownloadResolver
 
         // create the writer
         return $this->phpexcel->createWriter($phpExcelObject, 'Excel2007');
-    }
-
-    private function initCustomFieldsInHeader(ProposalForm $proposalForm): void
-    {
-        $this->customFields = [];
-        foreach ($proposalForm->getQuestions() as $question) {
-            $title = $question->getQuestion()->getTitle();
-            $this->customFields[] = $title;
-        }
-
-        if ($proposalForm->getEvaluationForm()) {
-            foreach ($proposalForm->getEvaluationForm()->getRealQuestions() as $question) {
-                $this->customFields[] = $question->getTitle();
-            }
-        }
-
-        $this->headers = array_merge($this->headers, $this->customFields);
     }
 
     private function booleanToString($boolean): string
@@ -290,8 +272,7 @@ class ProjectDownloadResolver
         $text = str_ireplace($oneBreak, "\r", $text);
         $text = str_ireplace($twoBreaks, "\r\n", $text);
         $text = strip_tags($text);
-        $text = html_entity_decode($text, ENT_QUOTES);
 
-        return $text;
+        return html_entity_decode($text, ENT_QUOTES);
     }
 }
