@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Processor\Proposal;
 
 use Capco\AppBundle\Notifier\ProposalNotifier;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
@@ -27,15 +28,11 @@ class ProposalDeleteProcessor implements ProcessorInterface
     public function process(Message $message, array $options): bool
     {
         $json = json_decode($message->getBody(), true);
-        $filters = $this->em->getFilters();
-
-        if ($filters->isEnabled('softdeleted')) {
-            $filters->disable('softdeleted');
+        if ($this->em->getFilters()->isEnabled('softdeleted')) {
+            $this->em->getFilters()->disable('softdeleted');
         }
         $proposal = $this->proposalRepository->find($json['proposalId']);
-        if (!$filters->isEnabled('softdeleted')) {
-            $filters->enable('softdeleted');
-        }
+        $this->em->getFilters()->enable('softdeleted');
         if (
             $proposal->getProposalForm()->getNotificationsConfiguration() &&
             $proposal

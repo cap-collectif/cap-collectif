@@ -35,49 +35,49 @@ sonata_admin:
     groups:
       admin.group.moderation:
         items:
-          - Capco\AdminBundle\Admin\ReportingAdmin
-          - Capco\AdminBundle\Admin\ProposalAdmin
-          - Capco\AdminBundle\Admin\OpinionAdmin
-          - Capco\AdminBundle\Admin\ReplyAdmin
-          - Capco\AdminBundle\Admin\OpinionVersionAdmin
-          - Capco\AdminBundle\Admin\ArgumentAdmin
-          - Capco\AdminBundle\Admin\SourceAdmin
-          - Capco\AdminBundle\Admin\CommentAdmin
+          - capco_admin.admin.reporting
+          - capco_admin.admin.proposal
+          - capco_admin.admin.opinion
+          - capco_admin.admin.reply
+          - capco_admin.admin.opinion_version
+          - capco_admin.admin.argument
+          - capco_admin.admin.source
+          - capco_admin.admin.comment
       admin.group.content:
         items:
-          - Capco\AdminBundle\Admin\HighlightedContentAdmin
-          - Capco\AdminBundle\Admin\ThemeAdmin
-          - Capco\AdminBundle\Admin\PostAdmin
-          - Capco\AdminBundle\Admin\EventAdmin
-          - Capco\AdminBundle\Admin\VideoAdmin
-          - Capco\AdminBundle\Admin\PageAdmin
+          - capco_admin.admin.highlighted
+          - capco_admin.admin.theme
+          - capco_admin.admin.post
+          - capco_admin.admin.event
+          - capco_admin.admin.video
+          - capco_admin.admin.page
           - sonata.media.admin.media
       admin.group.project:
         items:
-          - Capco\AdminBundle\Admin\ProjectAdmin
-          - Capco\AdminBundle\Admin\AppendixTypeAdmin
-          - Capco\AdminBundle\Admin\CategoryAdmin
-          - Capco\AdminBundle\Admin\ConsultationStepTypeAdmin
-          - Capco\AdminBundle\Admin\ProposalFormAdmin
-          - Capco\AdminBundle\Admin\QuestionnaireAdmin
-          - Capco\AdminBundle\Admin\ProjectTypeAdmin
+          - capco_admin.admin.project
+          - capco_admin.admin.appendix_type
+          - capco_admin.admin.category
+          - capco_admin.admin.consultation_step_type
+          - capco_admin.admin.proposal_form
+          - capco_admin.admin.questionnaire
+          - capco_admin.admin.project_type
       sonata.admin.group.user:
         items:
           - sonata.user.admin.user
-          - Capco\AdminBundle\Admin\GroupAdmin
-          - Capco\AdminBundle\Admin\UserTypeAdmin
-          - Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin
+          - capco_admin.admin.group
+          - capco_admin.admin.user_type
+          - capco_admin.admin.newsletter_subscription
       admin.group.parameters:
         items:
-          - Capco\AdminBundle\Admin\MenuItemAdmin
-          - Capco\AdminBundle\Admin\SocialNetworkAdmin
-          - Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
-          - Capco\AdminBundle\Admin\ProjectDistrictAdmin
-          - Capco\AdminBundle\Admin\MapTokenAdmin
-          - Capco\AdminBundle\Admin\SiteFaviconAdmin
+          - capco_admin.admin.menu_item
+          - capco_admin.admin.social_network
+          - capco_admin.admin.footer_social_network
+          - capco_admin.admin.project_district
+          - capco_admin.admin.map
+          - capco_admin.admin.site_favicon
       admin.group.pages:
         items:
-          - Capco\AdminBundle\Admin\SectionAdmin
+          - capco_admin.admin.section
 
 sonata_doctrine_orm_admin:
   templates:
@@ -101,9 +101,9 @@ sonata_block:
     sonata.media.block.media: ~
     sonata.media.block.gallery: ~
     sonata.media.block.feature_media: ~
-    Capco\AdminBundle\Block\RecentPostBlockService: ~
-    Capco\AdminBundle\Block\RecentContributionsBlockService: ~
-    Capco\AdminBundle\Block\HelpBlockService: ~
+    capco_admin.blog.block.recent_posts: ~
+    capco_admin.block.recent_contributions: ~
+    capco_admin.block.help: ~
 
 sonata_classification:
   class:
@@ -116,7 +116,7 @@ sonata_classification:
 sonata_intl:
   timezone:
     detectors:
-      - Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector
+      - capco.intl.timezone_detector.global
     locales:
       default: Europe/Paris
       fr-FR: Europe/Paris

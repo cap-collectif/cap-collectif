@@ -1,54 +1,59 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="capco_admin.blog.block.recent_post.class">Capco\AdminBundle\Block\RecentPostBlockService</parameter>
+        <parameter key="sonata.intl.timezone_detector.global.class">Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector</parameter>
+    </parameters>
 
     <services>
 
-        <service id="Capco\AdminBundle\Block\RecentPostBlockService">
-            <argument>Capco\AdminBundle\Block\RecentPostBlockService</argument>
+        <service id="capco_admin.blog.block.recent_posts" class="%capco_admin.blog.block.recent_post.class%">
+            <argument>capco_admin.blog.block.recent_posts</argument>
             <argument type="service" id="templating" />
             <argument type="service" id="capco.blog.post.repository" />
             <argument type="service" id="Capco\AppBundle\Toggle\Manager" />
             <tag name="sonata.block" />
         </service>
 
-        <service id="Capco\AdminBundle\Resolver\FeaturesCategoryResolver" autowire="true">
+        <service id="capco.admin.features_category_resolver" class="Capco\AdminBundle\Resolver\FeaturesCategoryResolver" autowire="true">
         </service>
 
-        <service id="Capco\AdminBundle\Twig\FeaturesCategoryExtension" autowire="true">
+        <service id="capco.admin.features_category_extension" class="Capco\AdminBundle\Twig\FeaturesCategoryExtension" autowire="true">
             <tag name="twig.extension" />
         </service>
 
-        <service id="Capco\AdminBundle\Form\Extension\ModelTypeExtension" autowire="true">
+        <service id="capco.model_type.extension" class="Capco\AdminBundle\Form\Extension\ModelTypeExtension" autowire="true">
             <tag name="form.type_extension" extended-type="Sonata\AdminBundle\Form\Type\ModelType" />
         </service>
 
-        <service id="Capco\AdminBundle\Resolver\RecentContributionsResolver" autowire="true" public="true">
+        <service id="capco_admin.recent_contributions_resolver" class="Capco\AdminBundle\Resolver\RecentContributionsResolver" autowire="true">
         </service>
 
-        <service id="Capco\AdminBundle\Resolver\RecentReportingResolver" autowire="true" public="true">
+        <service id="capco_admin.recent_reports_resolver" class="Capco\AdminBundle\Resolver\RecentReportingResolver" autowire="true">
         </service>
 
-        <service id="Capco\AdminBundle\Block\RecentContributionsBlockService" >
-            <argument>Capco\AdminBundle\Block\RecentContributionsBlockService</argument>
+        <service id="capco_admin.block.recent_contributions" class="Capco\AdminBundle\Block\RecentContributionsBlockService">
+            <argument>capco_admin.block.recent_contributions</argument>
             <argument type="service" id="templating" />
-            <argument type="service" id="Capco\AdminBundle\Resolver\RecentContributionsResolver" />
+            <argument type="service" id="capco_admin.recent_contributions_resolver" />
             <tag name="sonata.block" />
         </service>
 
-        <service id="Capco\AdminBundle\Block\HelpBlockService" >
-            <argument>Capco\AdminBundle\Block\HelpBlockService</argument>
+        <service id="capco_admin.block.help" class="Capco\AdminBundle\Block\HelpBlockService">
+            <argument>capco_admin.block.help</argument>
             <argument type="service" id="templating" />
             <tag name="sonata.block" />
         </service>
 
-        <service id="Capco\AdminBundle\Twig\VarsExtension">
+        <service id="capco.admin.vars_extension" class="Capco\AdminBundle\Twig\VarsExtension">
             <tag name="twig.extension" />
         </service>
 
-        <service id="Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector" autowire="true">
+        <service id="capco.intl.timezone_detector.global" class="%sonata.intl.timezone_detector.global.class%" autowire="true">
             <tag name="sonata_intl.timezone_detector" alias="global" />
         </service>
 
