@@ -2,7 +2,7 @@ hwi_oauth:
   http:
     client: httplug.client.hwi
   connect:
-    account_connector: capco.oauth.provider
+    account_connector: Capco\UserBundle\Security\Core\User\OauthUserProvider
   firewall_names: [main]
   target_path_parameter: _destination
   fosub:
