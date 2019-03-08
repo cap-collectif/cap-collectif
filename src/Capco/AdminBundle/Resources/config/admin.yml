@@ -664,8 +664,7 @@ services:
       - [setTemplate, [edit, CapcoAdminBundle:Group:edit.html.twig]]
       - [setTemplate, [list, CapcoAdminBundle:Group:list.html.twig]]
 
-  sonata.admin.controller.admin:
-    class: Capco\AdminBundle\Controller\HelperController
+  Capco\AdminBundle\Controller\HelperController:
     arguments:
       [
         '@twig',

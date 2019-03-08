@@ -3,6 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
 import TagsList from '../../Ui/List/TagsList';
+import InlineList from '../../Ui/List/InlineList';
 import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFragment';
 import type { ProjectPreviewCounters_project } from './__generated__/ProjectPreviewCounters_project.graphql';
 
@@ -21,6 +22,7 @@ class ProjectPreviewCounters extends React.Component<Props> {
 
   render() {
     const { project } = this.props;
+
     return (
       <TagsList>
         <ProjectPreviewCounter
@@ -40,6 +42,18 @@ class ProjectPreviewCounters extends React.Component<Props> {
           showZero
           icon="cap-user-2-1"
         />
+        {project.districts && project.districts.length > 0 && (
+          <div className="tags-list__tag">
+            <i className="cap cap-marker-1-1" />
+            <InlineList separator="," className="d-i">
+              {project.districts &&
+                project.districts.map((district, key) => (
+                  <li key={key}>{district && district.name}</li>
+                ))}
+            </InlineList>
+          </div>
+        )}
+
         <div className="tags-list__tag">
           {/* $FlowFixMe */}
           <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />
@@ -53,6 +67,9 @@ export default createFragmentContainer(ProjectPreviewCounters, {
   project: graphql`
     fragment ProjectPreviewCounters_project on Project {
       id
+      districts {
+        name
+      }
       contributors {
         totalCount
         anonymousCount
