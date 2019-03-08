@@ -46,7 +46,7 @@ export class EventPageContainer extends React.Component<Props> {
     return (
       <div className="container">
         {eventPageBody && (
-          <p>
+          <div>
             <FormattedHTMLMessage id={eventPageBody} />
             <div className="visible-xs-block visible-sm-block mt-15">
               <div className="d-flex align-items-center">
@@ -55,7 +55,7 @@ export class EventPageContainer extends React.Component<Props> {
                 <EventListStatusFilter />
               </div>
             </div>
-          </p>
+          </div>
         )}
         <EventFiltersContainer backgroundColor={backgroundColor}>
           <EventListFilters query={query} addToggleViewButton />
