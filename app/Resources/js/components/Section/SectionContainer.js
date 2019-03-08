@@ -98,15 +98,6 @@ export class SectionContainer extends PureComponent<Props> {
                         </MetricsBox>
                         <MetricsBox>
                           <span className="metrics-number">
-                            <i className="cap-hand-like-2" />
-                            {props.votes.totalCount}
-                          </span>
-                          <p>
-                            <FormattedMessage id="capco.section.metrics.votes" />
-                          </p>
-                        </MetricsBox>
-                        <MetricsBox>
-                          <span className="metrics-number">
                             <i className="cap-user-2" />
                             {props.contributors.totalCount}
                           </span>
@@ -116,7 +107,18 @@ export class SectionContainer extends PureComponent<Props> {
                         </MetricsBox>
                       </React.Fragment>
                     )}
-                    {metricsToDisplayEvents && (
+                    {metricsToDisplayBasics && props.votes.totalCount > 0 && (
+                      <MetricsBox>
+                        <span className="metrics-number">
+                          <i className="cap-hand-like-2" />
+                          {props.votes.totalCount}
+                        </span>
+                        <p>
+                          <FormattedMessage id="capco.section.metrics.votes" />
+                        </p>
+                      </MetricsBox>
+                    )}
+                    {metricsToDisplayEvents && props.events.totalCount > 0 && (
                       <MetricsBox>
                         <span className="metrics-number">
                           <i className="cap-calendar-1" />

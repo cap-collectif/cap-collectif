@@ -5,8 +5,11 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\SectionRepository;
+use Capco\AppBundle\GraphQL\Resolver\Query\QueryEventsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Query\QueryVotesResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -178,18 +181,36 @@ class SectionAdmin extends AbstractAdmin
         $formMapper->end();
 
         if ($subject && 'metrics' === $subject->getType()) {
+            $args = new Argument(['first' => 100]);
+
+            $votes = $this->getConfigurationPool()
+                ->getContainer()
+                ->get(QueryVotesResolver::class)
+                ->__invoke($args);
+            $basicsMetricsLabel =
+                $votes->totalCount > 0
+                    ? 'admin.fields.section.basicsMetrics'
+                    : 'admin.fields.section.basicsMetricsNoVotes';
+
             $formMapper
                 ->with('admin.label.section.display.metrics')
                 ->add('metricsToDisplayBasics', null, [
-                    'label' => 'admin.fields.section.basicsMetrics',
-                ])
-                ->add('metricsToDisplayEvents', null, [
-                    'label' => 'admin.fields.section.eventsMetrics',
+                    'label' => $basicsMetricsLabel,
                 ])
                 ->add('metricsToDisplayProjects', null, [
                     'label' => 'admin.fields.section.projectsMetrics',
-                ])
-                ->end();
+                ]);
+
+            $events = $this->getConfigurationPool()
+                ->getContainer()
+                ->get(QueryEventsResolver::class)
+                ->__invoke($args);
+            if ($events->totalCount > 0) {
+                $formMapper->add('metricsToDisplayEvents', null, [
+                    'label' => 'admin.fields.section.eventsMetrics',
+                ]);
+            }
+            $formMapper->end();
         }
 
         $formMapper
