@@ -1,5 +1,5 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import type { ReadyState } from 'react-relay';
@@ -32,7 +32,7 @@ const MetricsBox = styled.div`
   min-width: 225px;
 `;
 
-export class SectionContainer extends PureComponent<Props> {
+export class SectionContainer extends Component<Props> {
   render() {
     const {
       body,
@@ -107,7 +107,7 @@ export class SectionContainer extends PureComponent<Props> {
                         </MetricsBox>
                       </React.Fragment>
                     )}
-                    {metricsToDisplayBasics && props.votes.totalCount > 0 && (
+                    {metricsToDisplayBasics && props.votes && props.votes.totalCount > 0 && (
                       <MetricsBox>
                         <span className="metrics-number">
                           <i className="cap-hand-like-2" />
@@ -118,7 +118,7 @@ export class SectionContainer extends PureComponent<Props> {
                         </p>
                       </MetricsBox>
                     )}
-                    {metricsToDisplayEvents && props.events.totalCount > 0 && (
+                    {metricsToDisplayEvents && props.events && props.events.totalCount > 0 && (
                       <MetricsBox>
                         <span className="metrics-number">
                           <i className="cap-calendar-1" />
