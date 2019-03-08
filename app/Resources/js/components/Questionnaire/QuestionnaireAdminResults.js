@@ -11,10 +11,10 @@ import QuestionnaireAdminResultsMedia from './QuestionnaireAdminResultsMedia';
 import withColors from '../Utils/withColors';
 import PrivateBox from '../Ui/Boxes/PrivateBox';
 
-type Props = {
+type Props = {|
   questionnaire: QuestionnaireAdminResults_questionnaire,
   backgroundColor: string,
-};
+|};
 
 export class QuestionnaireAdminResults extends React.Component<Props> {
   getFormattedResults = (question: Object) => {
@@ -93,14 +93,14 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
                         <FormattedMessage id="no-answer" />
                       )}
                       {question.participants &&
-                        question.responses &&
-                        question.responses.totalCount !== 0 && (
+                        question.allResponses &&
+                        question.allResponses.totalCount !== 0 && (
                           <React.Fragment>
                             {' '}
                             /{' '}
                             <FormattedMessage
                               id="count-answers"
-                              values={{ num: question.responses.totalCount }}
+                              values={{ num: question.allResponses.totalCount }}
                             />
                           </React.Fragment>
                         )}
@@ -142,7 +142,7 @@ export default createFragmentContainer(
         participants {
           totalCount
         }
-        responses {
+        allResponses: responses {
           totalCount
         }
         ...QuestionnaireAdminResultsText_simpleQuestion
