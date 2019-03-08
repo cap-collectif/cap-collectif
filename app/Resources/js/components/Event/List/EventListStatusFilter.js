@@ -19,7 +19,7 @@ type State = {
 
 const StatusButton = styled(Button).attrs({
   bsStyle: 'link',
-  id: '#event-status-filter-button',
+  id: 'event-status-filter-button',
 })`
   text-transform: lowercase;
   font-size: 16px;
