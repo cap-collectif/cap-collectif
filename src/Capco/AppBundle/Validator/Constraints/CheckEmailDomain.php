@@ -13,6 +13,6 @@ class CheckEmailDomain extends Constraint
 
     public function validatedBy()
     {
-        return 'capco.check_email_domain.validator';
+        return CheckEmailDomainValidator::class;
     }
 }
