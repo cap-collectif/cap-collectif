@@ -9,7 +9,6 @@ use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Repository\SourceVoteRepository;
-use Capco\AppBundle\Notifier\ReportNotifier;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -168,7 +167,7 @@ class SourcesController extends FOSRestController
         $em->persist($report);
         $em->flush();
 
-        $this->get(ReportNotifier::class)->onCreate($report);
+        $this->get('capco.report_notifier')->onCreate($report);
 
         return $report;
     }

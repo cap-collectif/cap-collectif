@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Notifier\ContributionNotifier;
 use Capco\AdminBundle\Resolver\RecentContributionsResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
@@ -103,7 +102,7 @@ class RecentContributionsController extends Controller
             $contribution->setTrashedStatus(Trashable::STATUS_INVISIBLE);
             $contribution->setTrashedReason($motives);
             $em->flush();
-            $this->get(ContributionNotifier::class)->onModeration($contribution);
+            $this->get('capco.contribution_notifier')->onModeration($contribution);
 
             $this->addFlash(
                 'sonata_flash_success',
@@ -148,7 +147,7 @@ class RecentContributionsController extends Controller
             $contribution->setTrashedStatus(Trashable::STATUS_VISIBLE);
             $contribution->setTrashedReason($motives);
             $em->flush();
-            $this->get(ContributionNotifier::class)->onModeration($contribution);
+            $this->get('capco.contribution_notifier')->onModeration($contribution);
 
             $this->addFlash(
                 'sonata_flash_success',

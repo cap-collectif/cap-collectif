@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
-use Capco\AppBundle\Notifier\ReportNotifier;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -84,7 +83,7 @@ class ArgumentsController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($report);
         $em->flush();
-        $this->get(ReportNotifier::class)->onCreate($report);
+        $this->get('capco.report_notifier')->onCreate($report);
 
         return $report;
     }

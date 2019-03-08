@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EmailDomainRepository;
-use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
@@ -107,7 +106,7 @@ class UsersController extends FOSRestController
         $user->setConfirmationToken($token);
 
         if ($creatingAnAdmin) {
-            $this->get(UserNotifier::class)->adminConfirmation($user);
+            $this->get('capco.user_notifier')->adminConfirmation($user);
         } else {
             $this->get(FOSNotifier::class)->sendConfirmationEmailMessage($user);
         }
@@ -186,7 +185,7 @@ class UsersController extends FOSRestController
         }
 
         if ($user->getNewEmailToConfirm()) {
-            $this->get(UserNotifier::class)->newEmailConfirmation($user);
+            $this->get('capco.user_notifier')->newEmailConfirmation($user);
         } else {
             $this->get(FOSNotifier::class)->sendConfirmationEmailMessage($user);
         }
@@ -343,7 +342,7 @@ class UsersController extends FOSRestController
         $token = $this->get('fos_user.util.token_generator')->generateToken();
 
         $user->setNewEmailConfirmationToken($token);
-        $this->get(UserNotifier::class)->newEmailConfirmation($user);
+        $this->get('capco.user_notifier')->newEmailConfirmation($user);
 
         $this->getDoctrine()
             ->getManager()

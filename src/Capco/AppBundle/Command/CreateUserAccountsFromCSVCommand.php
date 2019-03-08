@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
 use League\Csv\Writer;
@@ -70,7 +69,7 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
                 );
                 if ($sendEmail) {
                     $this->getContainer()
-                        ->get(UserNotifier::class)
+                        ->get('capco.user_notifier')
                         ->emailConfirmation($user);
                 }
                 $writer->insertOne([$user->getEmail(), $confirmationUrl]);

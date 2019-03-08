@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Notifier\ContributionNotifier;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -28,7 +27,7 @@ class ReportingController extends Controller
             if ($related instanceof Trashable) {
                 $related->setTrashedStatus(Trashable::STATUS_INVISIBLE);
             }
-            $this->get(ContributionNotifier::class)->onModeration($related);
+            $this->get('capco.contribution_notifier')->onModeration($related);
         }
 
         $this->admin->update($related);
@@ -63,7 +62,7 @@ class ReportingController extends Controller
             if ($related instanceof Trashable) {
                 $related->setTrashedStatus(Trashable::STATUS_VISIBLE);
             }
-            $this->get(ContributionNotifier::class)->onModeration($related);
+            $this->get('capco.contribution_notifier')->onModeration($related);
         }
 
         $this->admin->update($related);
