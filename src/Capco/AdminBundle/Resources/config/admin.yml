@@ -672,6 +672,6 @@ services:
         '@sonata.admin.pool',
         '@sonata.admin.helper',
         '@validator',
-        '@capco.search.user_search',
+        '@Capco\AppBundle\Search\UserSearch',
       ]
     public: true

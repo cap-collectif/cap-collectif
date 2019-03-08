@@ -1,13 +1,15 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Search\GlobalSearch;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Elasticsearch\HybridResult;
 use Capco\AppBundle\Form\SearchType as SearchForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class SearchController extends Controller
@@ -37,23 +39,20 @@ class SearchController extends Controller
         }
 
         // Perform the search
-        $searchResults = $this->container->get('capco.search.global_search')->search(
-            $page,
-            $searchParams['term'],
-            $sortField,
-            $sortOrder,
-            $searchParams['type']
-        );
+        $searchResults = $this->container
+            ->get(GlobalSearch::class)
+            ->search($page, $searchParams['term'], $sortField, $sortOrder, $searchParams['type']);
 
         /**
-         * Do not display Proposal if we are not allowed
-         * @var HybridResult $searchResult
+         * Do not display Proposal if we are not allowed.
+         *
+         * @var HybridResult
          */
         foreach ($searchResults['results'] as $key => $searchResult) {
             /** @var Proposal $proposal */
             if (
                 $searchResult->getTransformed() instanceof Proposal &&
-                $proposal = $searchResult->getTransformed()
+                ($proposal = $searchResult->getTransformed())
             ) {
                 if (!$proposal->getStep()) {
                     continue;
@@ -66,7 +65,7 @@ class SearchController extends Controller
             /** @var Project $project */
             if (
                 $searchResult->getTransformed() instanceof Project &&
-                $project = $searchResult->getTransformed()
+                ($project = $searchResult->getTransformed())
             ) {
                 if (!$project->canDisplay($this->getUser())) {
                     unset($searchResults['results'][$key]);
