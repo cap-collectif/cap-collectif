@@ -18,11 +18,14 @@ services:
     arguments:
       $apiSeverKey: '%google_maps_key_server%'
 
-  pmill\Doctrine\Hydrator\ArrayHydrator:
+  capco.utils.array_hydrator:
+    class: pmill\Doctrine\Hydrator\ArrayHydrator
     arguments: ['@doctrine.orm.default_entity_manager']
 
-  EmailChecker\EmailChecker:
-    arguments: ['@EmailChecker\Adapter\FileAdapter']
+  capco.utils.throwable_email_checker:
+    class: EmailChecker\EmailChecker
+    arguments: ['@capco.utils.throwable_email_checker.adapter']
 
-  EmailChecker\Adapter\FileAdapter:
+  capco.utils.throwable_email_checker.adapter:
+    class: EmailChecker\Adapter\FileAdapter
     arguments: ['%kernel.root_dir%/config/throwable_emails.txt']
