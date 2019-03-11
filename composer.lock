@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "041e0084815898a1f181447971540dfe",
+    "content-hash": "d5cd4a5260353bc78aa268d737d53e8f",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -3955,23 +3955,23 @@
         },
         {
             "name": "infinite-networks/form-bundle",
-            "version": "1.0.11",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/infinite-networks/InfiniteFormBundle.git",
-                "reference": "9e156c4c548aa0118adc22fabf7be23e340dd458"
+                "url": "https://github.com/cap-collectif/InfiniteFormBundle.git",
+                "reference": "88f8fa10d31be7e87e730936f1b3ca0a3b9b91ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infinite-networks/InfiniteFormBundle/zipball/9e156c4c548aa0118adc22fabf7be23e340dd458",
-                "reference": "9e156c4c548aa0118adc22fabf7be23e340dd458",
+                "url": "https://api.github.com/repos/cap-collectif/InfiniteFormBundle/zipball/88f8fa10d31be7e87e730936f1b3ca0a3b9b91ac",
+                "reference": "88f8fa10d31be7e87e730936f1b3ca0a3b9b91ac",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.3",
-                "php": ">=5.3.2",
-                "symfony/form": "^2.3 || ^3.0",
-                "symfony/framework-bundle": "^2.3 || ^3.0"
+                "php": ">=5.6",
+                "symfony/form": "^3.0|^4.0",
+                "symfony/framework-bundle": "^3.0|^4.0"
             },
             "conflict": {
                 "twig/twig": "<1.12"
@@ -3983,7 +3983,7 @@
                 "doctrine/orm": "~2.3",
                 "robloach/component-installer": "^0.2",
                 "symfony/phpunit-bridge": "^2.7",
-                "symfony/symfony": "^2.3.5 || ^3.0"
+                "symfony/symfony": "^3.0|^4.0"
             },
             "type": "library",
             "extra": {
@@ -3996,7 +3996,6 @@
                     "Infinite\\FormBundle\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4007,7 +4006,11 @@
                 }
             ],
             "description": "A collection of useful form types and extensions for Symfony2",
-            "time": "2017-05-12T05:01:21+00:00"
+            "support": {
+                "issues": "https://github.com/infinite-networks/InfiniteFormBundle/issues",
+                "source": "https://github.com/cap-collectif/InfiniteFormBundle/tree/master"
+            },
+            "time": "2018-11-20T15:07:22+00:00"
         },
         {
             "name": "jaimeperez/twig-configurable-i18n",
@@ -4960,20 +4963,21 @@
         },
         {
             "name": "limenius/react-bundle",
-            "version": "v2.3.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Limenius/ReactBundle.git",
-                "reference": "e72364a0db0783ba00c34eb4ef873432a9d43f4c"
+                "reference": "afa0bdd39dbfcdc12518013bbbf7b7b4326afbfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Limenius/ReactBundle/zipball/e72364a0db0783ba00c34eb4ef873432a9d43f4c",
-                "reference": "e72364a0db0783ba00c34eb4ef873432a9d43f4c",
+                "url": "https://api.github.com/repos/Limenius/ReactBundle/zipball/afa0bdd39dbfcdc12518013bbbf7b7b4326afbfc",
+                "reference": "afa0bdd39dbfcdc12518013bbbf7b7b4326afbfc",
                 "shasum": ""
             },
             "require": {
-                "limenius/react-renderer": "^3.0.0",
+                "limenius/react-renderer": "^0.14.0",
+                "nacmartin/phpexecjs": "^0.8",
                 "php": ">=5.5.0",
                 "symfony/config": "^2.7.0|^3.0.6|^4.0",
                 "symfony/dependency-injection": "^2.7.0|^3.0.6|^4.0",
@@ -5005,24 +5009,24 @@
                 "isomorphic",
                 "react"
             ],
-            "time": "2018-12-10T11:52:02+00:00"
+            "time": "2017-11-22T11:08:06+00:00"
         },
         {
             "name": "limenius/react-renderer",
-            "version": "v3.0.0",
+            "version": "v0.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Limenius/ReactRenderer.git",
-                "reference": "3387be293f19a6e3ca1ac88f12bffa41a101bac0"
+                "reference": "a6a16654d7c44947abc128da69b1f69fbc6586ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Limenius/ReactRenderer/zipball/3387be293f19a6e3ca1ac88f12bffa41a101bac0",
-                "reference": "3387be293f19a6e3ca1ac88f12bffa41a101bac0",
+                "url": "https://api.github.com/repos/Limenius/ReactRenderer/zipball/a6a16654d7c44947abc128da69b1f69fbc6586ae",
+                "reference": "a6a16654d7c44947abc128da69b1f69fbc6586ae",
                 "shasum": ""
             },
             "require": {
-                "nacmartin/phpexecjs": "^2.0",
+                "nacmartin/phpexecjs": "^0.8",
                 "php": ">=5.5.0",
                 "twig/twig": "^1.20|^2.0"
             },
@@ -5054,7 +5058,7 @@
                 "reactjs",
                 "twig"
             ],
-            "time": "2018-12-06T16:30:50+00:00"
+            "time": "2017-11-06T16:49:25+00:00"
         },
         {
             "name": "liuggio/ExcelBundle",
@@ -5423,16 +5427,16 @@
         },
         {
             "name": "nacmartin/phpexecjs",
-            "version": "v2.0.0",
+            "version": "v0.8.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nacmartin/phpexecjs.git",
-                "reference": "abb8566e4e5d079e30312e72b33bcf01e09990d9"
+                "reference": "dc42f9dd48235a042ae8de758c73e79fe658f875"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nacmartin/phpexecjs/zipball/abb8566e4e5d079e30312e72b33bcf01e09990d9",
-                "reference": "abb8566e4e5d079e30312e72b33bcf01e09990d9",
+                "url": "https://api.github.com/repos/nacmartin/phpexecjs/zipball/dc42f9dd48235a042ae8de758c73e79fe658f875",
+                "reference": "dc42f9dd48235a042ae8de758c73e79fe658f875",
                 "shasum": ""
             },
             "require": {
@@ -5455,7 +5459,7 @@
                 }
             ],
             "description": "Run JavaScript code from PHP",
-            "time": "2017-11-22T20:17:42+00:00"
+            "time": "2017-11-22T11:12:15+00:00"
         },
         {
             "name": "nelmio/alice",
@@ -11150,12 +11154,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle.git",
-                "reference": "2946c0a"
+                "reference": "2f9963dad5a55f26033a74268385c12c251f75ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/WebfactoryIcuTranslationBundle/zipball/2946c0a",
-                "reference": "2946c0a",
+                "url": "https://api.github.com/repos/cap-collectif/WebfactoryIcuTranslationBundle/zipball/2f9963dad5a55f26033a74268385c12c251f75ad",
+                "reference": "2f9963dad5a55f26033a74268385c12c251f75ad",
                 "shasum": ""
             },
             "require": {
@@ -11212,7 +11216,7 @@
             "support": {
                 "source": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle/tree/master"
             },
-            "time": "2018-11-19T14:57:56+00:00"
+            "time": "2018-11-20T14:31:28+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -15487,6 +15491,7 @@
         "sonata-project/datagrid-bundle": 20,
         "friendsofsymfony/elastica-bundle": 20,
         "jms/serializer": 20,
+        "infinite-networks/form-bundle": 20,
         "hslavich/simplesamlphp-bundle": 20,
         "cocur/slugify": 20,
         "phayes/geophp": 20,

@@ -79,6 +79,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cap-collectif/InfiniteFormBundle"
         }
     ],
     "require": {
@@ -131,7 +135,7 @@
         "liuggio/excelbundle": "^2.1",
         "exercise/htmlpurifier-bundle": "^0.2.4",
         "odolbeau/rabbit-mq-admin-toolkit": "^4.0",
-        "infinite-networks/form-bundle": "^1.0",
+        "infinite-networks/form-bundle": "dev-master",
         "swarrot/swarrot-bundle": "^1.4",
         "league/csv": "^8.2",
         "php-http/socket-client": "^1.2",
@@ -146,7 +150,7 @@
         "jolicode/jolitypo-bundle": "^1.0",
         "caxy/htmldiff-bundle": "~0.1.2",
         "ocramius/proxy-manager": "2.0.2",
-        "limenius/react-bundle": "^2.3",
+        "limenius/react-bundle": "^1.0",
         "cocur/slugify": "@dev",
         "phayes/geoPHP": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
         "php-translation/symfony-bundle": "^0.4.0",
@@ -162,7 +166,7 @@
         "knplabs/knp-menu-bundle": "2.2.1",
         "sensio/generator-bundle": "3.1.7",
         "box/spout": "^2.7",
-        "webfactory/icu-translation-bundle": "dev-master#2946c0a",
+        "webfactory/icu-translation-bundle": "dev-master",
         "ruflin/elastica": "~5",
         "tweedegolf/prometheus-client": "^0.2.3",
         "symfony/polyfill-php55": "^1.7.0",
