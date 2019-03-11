@@ -109,6 +109,8 @@ Scenario: Logged in API client can update his email
   And I should see my reply
   And I wait 2 seconds
   And 1 mail should be sent
+  And I open mail with subject 'reply.acknowledgement.subject'
+  Then email should match snapshot 'replyAcknowledgement.html'
 
 ## Replies list
 
