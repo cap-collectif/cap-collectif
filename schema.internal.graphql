@@ -3211,6 +3211,9 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
     last: Int
   ): GroupConnection
 
+  # The district of the project
+  districts: [ProjectDistrict]
+
   # The comments related to the project.
   comments(
     # Returns the elements in the list that come after the specified cursor.
@@ -4411,9 +4414,6 @@ type Questionnaire implements Node {
     # Returns the last `n` elements from the list.
     last: Int
   ): ReplyConnection!
-
-  # Results of survey are private
-  privateResult: Boolean!
 }
 
 input QuestionnaireAbstractQuestionInput {
@@ -5983,7 +5983,6 @@ input UpdateQuestionnaireParametersInput {
   anonymousAllowed: Boolean
   multipleRepliesAllowed: Boolean
   phoneConfirmation: Boolean
-  privateResult: Boolean
   clientMutationId: String
 }
 

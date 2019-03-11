@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalRepository;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -17,7 +16,7 @@ class CollectStepsController extends FOSRestController
      */
     public function getProposalsMarkerByCollectStepAction(string $collectStepId)
     {
-        $step = $this->get(GlobalIdResolver::class)->resolve($collectStepId, $this->getUser());
+        $step = $this->get('global_id_resolver')->resolve($collectStepId, $this->getUser());
 
         if ($step->isPrivate()) {
             throw new AccessDeniedException();

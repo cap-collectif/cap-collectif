@@ -9,30 +9,27 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
-class GroupResolver implements ResolverInterface
+class GroupResolver implements ContainerAwareInterface, ResolverInterface
 {
-    private $groupRepository;
-    private $userRepository;
-
-    public function __construct(GroupRepository $groupRepository, UserRepository $userRepository)
-    {
-        $this->groupRepository = $groupRepository;
-        $this->userRepository = $userRepository;
-    }
+    use ContainerAwareTrait;
 
     public function resolveAll(): array
     {
-        return $this->groupRepository->findAll();
+        return $this->container->get(GroupRepository::class)->findAll();
     }
 
     public function resolveUsersConnection(Group $group, Argument $args): Connection
     {
-        $paginator = new Paginator(function () use ($group) {
-            return $this->userRepository->getUsersInGroup($group);
+        $userRepo = $this->container->get(UserRepository::class);
+
+        $paginator = new Paginator(function () use ($userRepo, $group) {
+            return $userRepo->getUsersInGroup($group);
         });
 
-        $totalCount = $this->userRepository->countUsersInGroup($group);
+        $totalCount = $userRepo->countUsersInGroup($group);
 
         return $paginator->auto($args, $totalCount);
     }

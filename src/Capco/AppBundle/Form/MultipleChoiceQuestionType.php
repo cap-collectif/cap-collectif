@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Form;
 
 use Capco\AdminBundle\Form\QuestionValidationRuleType;

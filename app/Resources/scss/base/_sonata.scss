@@ -142,6 +142,6 @@ svg.avatar {
 }
 
 // Fix wrong padding left in checkboxes
-.tab-pane.active .checkbox label, .modal-body .checkbox label, .tab-pane.active .radio label, .modal-body .radio label {
+.tab-pane.active .checkbox label, .modal-body .checkbox label {
     padding-left: 40px;
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questionnaire;
@@ -17,8 +16,7 @@ class QuestionnaireParametersUpdateType extends AbstractType
             ->add('acknowledgeReplies', CheckboxType::class)
             ->add('anonymousAllowed', CheckboxType::class)
             ->add('multipleRepliesAllowed', CheckboxType::class)
-            ->add('phoneConfirmation', CheckboxType::class)
-            ->add('privateResult', CheckboxType::class);
+            ->add('phoneConfirmation', CheckboxType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -11,8 +10,9 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Psr\Log\LoggerInterface;
 
 class QuestionResponsesResolver implements ResolverInterface
 {
@@ -30,23 +30,8 @@ class QuestionResponsesResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(AbstractQuestion $question, Arg $args, $viewer)
+    public function __invoke(AbstractQuestion $question, Arg $args): Connection
     {
-        $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
-        $emptyConnection->totalCount = 0;
-
-        if (
-            $question->getQuestionnaire() &&
-            $question->getQuestionnaire()->isPrivateResult() &&
-            (!$viewer || !$viewer->isAdmin())
-        ) {
-            return $emptyConnection;
-        }
-
-        if ($question->getQuestionnaire() && !$question->getQuestionnaire()->canDisplay($viewer)) {
-            return $emptyConnection;
-        }
-
         $totalCount = 0;
         $arguments = $args->getRawArguments();
         $withNotConfirmedUser =

@@ -2,13 +2,13 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, type FormProps, formValueSelector } from 'redux-form';
+import { reduxForm, Field, type FormProps } from 'redux-form';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import component from '../Form/Field';
 import AlertForm from '../Alert/AlertForm';
 import type { QuestionnaireAdminParametersForm_questionnaire } from './__generated__/QuestionnaireAdminParametersForm_questionnaire.graphql';
-import type { GlobalState } from '../../types';
+import type { State } from '../../types';
 import UpdateQuestionnaireParametersMutation from '../../mutations/UpdateQuestionnaireParametersMutation';
 
 type RelayProps = {|
@@ -17,8 +17,6 @@ type RelayProps = {|
 type Props = {|
   ...RelayProps,
   ...FormProps,
-  currentValues: Object,
-  initialValues: Object,
 |};
 
 const formName = 'questionnaire-admin-parameters';
@@ -29,14 +27,8 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { questionnaire } = props;
   values.questionnaireId = questionnaire.id;
   delete values.id;
-
-  const privateResult = values.privateResult === 'private';
-
   return UpdateQuestionnaireParametersMutation.commit({
-    input: {
-      ...values,
-      privateResult,
-    },
+    input: values,
   });
 };
 
@@ -50,7 +42,6 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
       valid,
       submitSucceeded,
       submitFailed,
-      currentValues,
     } = this.props;
 
     return (
@@ -100,40 +91,6 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
               type="checkbox"
               id="questionnaire_sms"
             />
-            <div className="box-header">
-              <h3 className="box-title">
-                <FormattedMessage id="results" />
-              </h3>
-            </div>
-            <Field
-              name="privateResult"
-              component={component}
-              type="radio"
-              id="questionnaire_private"
-              radioChecked={currentValues.privateResult === 'private'}
-              value="private"
-              label={<FormattedMessage id="access-right" />}
-              children={
-                <div>
-                  <i className="cap-lock-2-1 mr-5" />
-                  <FormattedMessage id="administrators" />
-                </div>
-              }
-            />
-            <Field
-              name="privateResult"
-              component={component}
-              type="radio"
-              radioChecked={currentValues.privateResult === 'public'}
-              id="questionnaire_public"
-              value="public"
-              children={
-                <div>
-                  <i className="cap-chat-security mr-5" />
-                  <FormattedMessage id="persons-with-access-to-the-project" />
-                </div>
-              }
-            />
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}
@@ -160,16 +117,13 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
   }
 }
 
-const selector = formValueSelector(formName);
-
 const form = reduxForm({
   onSubmit,
   validate,
-  enableReinitialize: true,
   form: formName,
 })(QuestionnaireAdminParametersForm);
 
-const mapStateToProps = (state: GlobalState, props: RelayProps) => {
+const mapStateToProps = (state: State, props: RelayProps) => {
   const { questionnaire } = props;
   return {
     initialValues: {
@@ -177,10 +131,6 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
       phoneConfirmation: questionnaire.phoneConfirmation,
       multipleRepliesAllowed: questionnaire.multipleRepliesAllowed,
       acknowledgeReplies: questionnaire.acknowledgeReplies,
-      privateResult: questionnaire.privateResult ? 'private' : 'public',
-    },
-    currentValues: {
-      privateResult: selector(state, 'privateResult'),
     },
   };
 };
@@ -196,7 +146,6 @@ export default createFragmentContainer(containerIntl, {
       phoneConfirmation
       multipleRepliesAllowed
       acknowledgeReplies
-      privateResult
     }
   `,
 });

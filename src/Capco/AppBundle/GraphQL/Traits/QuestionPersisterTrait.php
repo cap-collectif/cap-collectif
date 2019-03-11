@@ -68,40 +68,31 @@ trait QuestionPersisterTrait
                             'id' => $abstractQuestion->getId(),
                             'title' => null,
                         ];
-                        array_splice(
-                            $dataQuestion['question']['choices'],
-                            $position,
-                            0,
-                            [
-                                $deletedChoice,
-                            ]
-                        );
+                        array_splice($dataQuestion['question']['choices'], $position, 0, [
+                            $deletedChoice,
+                        ]);
                     }
                 }
             }
         }
 
         // we must reorder arguments datas to match database order (used in the symfony form)
-        usort(
-            $arguments['questions'],
-            function ($a, $b) use ($questionsOrderedByIdInDb) {
-                if (isset($a['question']['id'], $b['question']['id'])) {
-                    return array_search($a['question']['id'], $questionsOrderedByIdInDb, false) >
-                        array_search($b['question']['id'], $questionsOrderedByIdInDb, false);
-                }
-
-                //@todo respect the user order, for now we just put new items at the end
-                return isset($a['question']['id']) ? false : true;
+        usort($arguments['questions'], function ($a, $b) use ($questionsOrderedByIdInDb) {
+            if (isset($a['question']['id'], $b['question']['id'])) {
+                return array_search($a['question']['id'], $questionsOrderedByIdInDb, false) >
+                    array_search($b['question']['id'], $questionsOrderedByIdInDb, false);
             }
-        );
+            //@todo respect the user order, for now we just put new items at the end
+            return isset($a['question']['id']) ? false : true;
+        });
 
         foreach ($entity->getQuestions() as $position => $questionnaireQuestion) {
             if (
-            !\in_array(
-                $questionnaireQuestion->getQuestion()->getId(),
-                $argumentsQuestionsId,
-                false
-            )
+                !\in_array(
+                    $questionnaireQuestion->getQuestion()->getId(),
+                    $argumentsQuestionsId,
+                    false
+                )
             ) {
                 // Put the title to null to be delete from delete_empty CollectionType field
                 $deletedQuestion = [
@@ -115,11 +106,9 @@ trait QuestionPersisterTrait
                 array_splice($arguments['questions'], $position, 0, [$deletedQuestion]);
             }
         }
-        try {
-            $form->submit($arguments, false);
-        } catch (\RuntimeException $exception) {
-            $this->logger->error(__METHOD__.' : '.$exception->getMessage().var_export($form->getExtraData(), true));
-        }
+
+        $form->submit($arguments, false);
+
         $qaq = $entity->getQuestions();
 
         // We make sure a question position by questionnaire is unique

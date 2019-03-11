@@ -128,9 +128,6 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
               <option value="number">
                 {intl.formatMessage({ id: 'admin.fields.validation_rule.number' })}
               </option>
-              <option value="medias">
-                {intl.formatMessage({ id: 'global.question.types.medias' })}
-              </option>
             </optgroup>
             <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_unique' })}>
               <option value="button">{intl.formatMessage({ id: 'question.types.button' })}</option>
@@ -149,11 +146,16 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                 {intl.formatMessage({ id: 'global.question.types.ranking' })}
               </option>
             </optgroup>
+            <optgroup label={intl.formatMessage({ id: 'global.question.types.other' })}>
+              <option value="medias">
+                {intl.formatMessage({ id: 'global.question.types.medias' })}
+              </option>
+            </optgroup>
           </Field>
           {multipleChoiceQuestions.indexOf(type) !== -1 && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
-                <FormattedMessage id="admin.fields.reply.group_responses" />
+                <FormattedMessage id="admin.fields.question.group_question_choices" />
               </h4>
               <FieldArray
                 name={`${member}.choices`}
@@ -178,15 +180,11 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
               {!currentQuestion.id && type !== 'ranking' && (
                 <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
               )}
-            </div>
-          )}
-          <h4 style={{ fontWeight: 'bold' }}>
-            <span>
-              <FormattedMessage id="proposal_form.admin.settings.options" />
-            </span>
-          </h4>
-          {multipleChoiceQuestions.indexOf(type) !== -1 && (
-            <div>
+              <h4 style={{ fontWeight: 'bold' }}>
+                <span>
+                  <FormattedMessage id="group.admin.parameters" />
+                </span>
+              </h4>
               <Field
                 id={`${member}.randomQuestionChoices`}
                 name={`${member}.randomQuestionChoices`}
@@ -214,7 +212,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
             component={component}
           />
           <Field
-            children={<FormattedMessage id="admin.fields.question.private" />}
+            children="Visible uniquement par l'utilisateur et l'administrateur"
             id={`${member}.private`}
             normalize={val => !!val}
             name={`${member}.private`}
