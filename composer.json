@@ -75,6 +75,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/DoctrineExtensions"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle"
         }
     ],
     "require": {
@@ -158,7 +162,7 @@
         "knplabs/knp-menu-bundle": "2.2.1",
         "sensio/generator-bundle": "3.1.7",
         "box/spout": "^2.7",
-        "webfactory/icu-translation-bundle": "^0.6.1",
+        "webfactory/icu-translation-bundle": "dev-master#2946c0a",
         "ruflin/elastica": "~5",
         "tweedegolf/prometheus-client": "^0.2.3",
         "symfony/polyfill-php55": "^1.7.0",
