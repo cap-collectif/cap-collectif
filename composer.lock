@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71b2d7034688435892bc0b7f149ed85a",
+    "content-hash": "47a38fe824b39961a4bd305c0d4471dd",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -279,22 +279,22 @@
         },
         {
             "name": "caxy/htmldiff-bundle",
-            "version": "v0.1.2",
+            "version": "v0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caxy/HtmlDiffBundle.git",
-                "reference": "0ee1ca9f1098da196adc47d4f8fa6acd2b402080"
+                "reference": "2b353013aaa3ba78c87b3ad36db1cc49f699a1a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/0ee1ca9f1098da196adc47d4f8fa6acd2b402080",
-                "reference": "0ee1ca9f1098da196adc47d4f8fa6acd2b402080",
+                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/2b353013aaa3ba78c87b3ad36db1cc49f699a1a7",
+                "reference": "2b353013aaa3ba78c87b3ad36db1cc49f699a1a7",
                 "shasum": ""
             },
             "require": {
                 "caxy/php-htmldiff": "~0.1",
                 "php": ">=5.3.9",
-                "symfony/framework-bundle": "~2.3||3.*"
+                "symfony/framework-bundle": "~2.3||3.*||4.*"
             },
             "require-dev": {
                 "doctrine/doctrine-cache-bundle": "~1.0"
@@ -331,7 +331,7 @@
                 "diffing",
                 "html"
             ],
-            "time": "2017-07-05T17:38:43+00:00"
+            "time": "2018-05-24T21:46:34+00:00"
         },
         {
             "name": "caxy/php-htmldiff",
@@ -9875,7 +9875,7 @@
                 "youtube"
             ],
             "support": {
-                "source": "https://github.com/cap-collectif/SonataMediaBundle/tree/bugfix-3.11.1"
+                "source": "https://github.com/cap-collectif/SonataMediaBundle/tree/bugfix-3.11-1-clone"
             },
             "time": "2018-06-14T15:51:01+00:00"
         },
