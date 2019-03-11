@@ -5168,16 +5168,16 @@
         },
         {
             "name": "mattketmo/email-checker",
-            "version": "v1.5.4",
+            "version": "v1.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MattKetmo/EmailChecker.git",
-                "reference": "4d8042b1685e53a917bb065bce163a97da11de06"
+                "reference": "3b1afb8a1d439eefed687fecf3340967cdb7c106"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MattKetmo/EmailChecker/zipball/4d8042b1685e53a917bb065bce163a97da11de06",
-                "reference": "4d8042b1685e53a917bb065bce163a97da11de06",
+                "url": "https://api.github.com/repos/MattKetmo/EmailChecker/zipball/3b1afb8a1d439eefed687fecf3340967cdb7c106",
+                "reference": "3b1afb8a1d439eefed687fecf3340967cdb7c106",
                 "shasum": ""
             },
             "require": {
@@ -5194,6 +5194,16 @@
                 "symfony/validator": "Add validation constraints"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "EmailChecker\\Laravel\\EmailCheckerServiceProvider"
+                    ],
+                    "aliases": {
+                        "EmailChecker": "EmailChecker\\Laravel\\EmailCheckerFacade"
+                    }
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "EmailChecker\\": "src/EmailChecker"
@@ -5216,7 +5226,7 @@
                 "email",
                 "throwaway"
             ],
-            "time": "2017-10-11T11:06:03+00:00"
+            "time": "2018-08-29T06:39:00+00:00"
         },
         {
             "name": "michelf/php-markdown",
