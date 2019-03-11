@@ -38,7 +38,8 @@ class QueryVotesResolver implements ResolverInterface
     public function __invoke(Argument $args): Connection
     {
         $totalCount = 0;
-        foreach ($this->projectsResolver->__invoke($args)->edges as $edge) {
+        $projectArgs = new Argument(['first' => 100]);
+        foreach ($this->projectsResolver->__invoke($projectArgs)->edges as $edge) {
             $totalCount += $this->countProjectVotes($edge->node);
         }
 
