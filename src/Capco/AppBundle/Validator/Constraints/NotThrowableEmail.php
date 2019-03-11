@@ -13,6 +13,6 @@ class NotThrowableEmail extends Constraint
 
     public function validatedBy(): string
     {
-        return 'capco.not_throwable_email.validator';
+        return NotThrowableEmailValidator::class;
     }
 }
