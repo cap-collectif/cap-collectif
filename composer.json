@@ -146,7 +146,7 @@
         "jolicode/jolitypo-bundle": "^1.0",
         "caxy/htmldiff-bundle": "~0.1.2",
         "ocramius/proxy-manager": "2.0.2",
-        "limenius/react-bundle": "^0.13.1",
+        "limenius/react-bundle": "^2.3",
         "cocur/slugify": "@dev",
         "phayes/geoPHP": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
         "php-translation/symfony-bundle": "^0.4.0",
