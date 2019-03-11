@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47a38fe824b39961a4bd305c0d4471dd",
+    "content-hash": "d00aecc0f19b53efc5e117d79ed27f66",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -238,16 +238,16 @@
         },
         {
             "name": "cap-collectif/id-to-uuid",
-            "version": "1.1.0",
+            "version": "v2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cap-collectif/id-to-uuid.git",
-                "reference": "a5478c99ab5d10e986b997346b52726e28b0426c"
+                "reference": "08e73defc022a66430d1aba61f9572ad6adebcbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/id-to-uuid/zipball/a5478c99ab5d10e986b997346b52726e28b0426c",
-                "reference": "a5478c99ab5d10e986b997346b52726e28b0426c",
+                "url": "https://api.github.com/repos/cap-collectif/id-to-uuid/zipball/08e73defc022a66430d1aba61f9572ad6adebcbf",
+                "reference": "08e73defc022a66430d1aba61f9572ad6adebcbf",
                 "shasum": ""
             },
             "require": {
@@ -275,7 +275,7 @@
                 }
             ],
             "description": "Easily migrate from auto incremented id to uuid",
-            "time": "2017-09-29T09:58:31+00:00"
+            "time": "2018-11-16T14:45:04+00:00"
         },
         {
             "name": "caxy/htmldiff-bundle",

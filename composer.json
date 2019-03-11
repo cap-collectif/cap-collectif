@@ -138,7 +138,7 @@
         "simplesamlphp/simplesamlphp": "^1.16",
         "hslavich/simplesamlphp-bundle": "dev-master",
         "simplesamlphp/saml2": "^3.3",
-        "cap-collectif/id-to-uuid": "^1.1",
+        "cap-collectif/id-to-uuid": "^2.0",
         "jolicode/jolitypo-bundle": "^1.0",
         "caxy/htmldiff-bundle": "~0.1.2",
         "ocramius/proxy-manager": "2.0.2",
