@@ -13,6 +13,6 @@ class HasThemeIfActivated extends Constraint
 
     public function validatedBy()
     {
-        return 'has_theme_if_activated.validator';
+        return HasThemeIfActivatedValidator::class;
     }
 }

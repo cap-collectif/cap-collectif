@@ -13,7 +13,7 @@ class HasDistrictIfMandatory extends Constraint
 
     public function validatedBy()
     {
-        return 'has_district_if_mandatory.validator';
+        return HasDistrictIfMandatoryValidator::class;
     }
 
     public function getTargets()

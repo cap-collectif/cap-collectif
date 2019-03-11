@@ -13,7 +13,7 @@ class HasValidAddress extends Constraint
 
     public function validatedBy()
     {
-        return 'has_valid_address.validator';
+        return HasValidAddressValidator::class;
     }
 
     public function getTargets()

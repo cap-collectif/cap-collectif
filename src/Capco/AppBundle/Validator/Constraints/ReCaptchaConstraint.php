@@ -10,6 +10,6 @@ class ReCaptchaConstraint extends Constraint
 
     public function validatedBy()
     {
-        return 'recaptcha.validator';
+        return ReCaptchaValidator::class;
     }
 }

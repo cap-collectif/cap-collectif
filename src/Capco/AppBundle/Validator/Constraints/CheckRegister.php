@@ -11,7 +11,7 @@ class CheckRegister extends Constraint
 {
     public function validatedBy()
     {
-        return 'check_register.validator';
+        return CheckRegisterValidator::class;
     }
 
     public function getTargets()

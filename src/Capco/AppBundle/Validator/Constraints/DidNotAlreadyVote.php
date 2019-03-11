@@ -15,7 +15,7 @@ class DidNotAlreadyVote extends Constraint
 
     public function validatedBy()
     {
-        return 'already_vote.validator';
+        return DidNotAlreadyVoteValidator::class;
     }
 
     public function getTargets()

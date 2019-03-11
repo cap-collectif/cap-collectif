@@ -15,7 +15,7 @@ class HasAddressIfMandatory extends Constraint
 
     public function validatedBy(): string
     {
-        return 'has_address_if_mandatory.validator';
+        return HasAddressIfMandatoryValidator::class;
     }
 
     public function getTargets()

@@ -13,7 +13,7 @@ class EmailDoesNotBelongToUser extends Constraint
 
     public function validatedBy()
     {
-        return 'email_belongs_not.validator';
+        return EmailDoesNotBelongToUserValidator::class;
     }
 
     public function getTargets()

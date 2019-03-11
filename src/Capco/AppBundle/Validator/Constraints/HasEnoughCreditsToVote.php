@@ -13,7 +13,7 @@ class HasEnoughCreditsToVote extends Constraint
 
     public function validatedBy()
     {
-        return 'has_enough_credits.validator';
+        return HasEnoughCreditsToVoteValidator::class;
     }
 
     public function getTargets()

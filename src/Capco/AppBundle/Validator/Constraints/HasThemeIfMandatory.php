@@ -13,7 +13,7 @@ class HasThemeIfMandatory extends Constraint
 
     public function validatedBy()
     {
-        return 'has_theme_if_mandatory.validator';
+        return HasThemeIfMandatoryValidator::class;
     }
 
     public function getTargets()
