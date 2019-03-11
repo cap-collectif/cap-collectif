@@ -1,5 +1,6 @@
 services:
-  Capco\AdminBundle\EventListener\FilterConfigurator:
+  filter.configurator:
+    class: Capco\AdminBundle\EventListener\FilterConfigurator
     arguments: ['@doctrine.orm.entity_manager']
     tags:
       - { name: kernel.event_listener, event: kernel.controller }

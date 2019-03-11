@@ -5,7 +5,7 @@ namespace Capco\AdminBundle\Block;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\BlockBundle\Block\AbstractAdminBlockService;
+use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
@@ -13,17 +13,13 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RecentPostBlockService extends AbstractAdminBlockService
+class RecentPostBlockService extends BaseBlockService
 {
     protected $postRepository;
     protected $toggleManager;
 
-    public function __construct(
-        $name,
-        EngineInterface $templating,
-        PostRepository $repository,
-        Manager $manager
-    ) {
+    public function __construct($name, EngineInterface $templating, PostRepository $repository, Manager $manager)
+    {
         parent::__construct($name, $templating);
 
         $this->postRepository = $repository;
@@ -46,9 +42,8 @@ class RecentPostBlockService extends AbstractAdminBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        if (
-            $blockContext->getSetting('toggle') &&
-            !$this->toggleManager->isActive($blockContext->getSetting('toggle'))
+        if ($blockContext->getSetting('toggle')
+            && !$this->toggleManager->isActive($blockContext->getSetting('toggle'))
         ) {
             return new Response();
         }

@@ -9,37 +9,29 @@ final class UserConfirmEmailChangedMessage extends ExternalMessage
 {
     public static function create(
         User $user,
-        string $recipentEmail,
+        string $recipientEmail,
         string $recipientName = null
     ): self {
         return new self(
-            $recipentEmail,
+            $recipientEmail,
             $recipientName,
             'email.confirmEmailChanged.subject',
-            static::getMySubjectVars(
-                $user->getUsername()
-            ),
+            static::getMySubjectVars($user->getUsername()),
             'email-content-mail-changed',
-            static::getMyTemplateVars(
-                $user->getNewEmailToConfirm(),
-                $user->getUsername()
-            )
+            static::getMyTemplateVars($user->getNewEmailToConfirm(), $user->getUsername())
         );
     }
 
-    private static function getMyTemplateVars(
-        $newEmailToConfirm,
-        $username
-    ): array {
+    private static function getMyTemplateVars($newEmailToConfirm, $username): array
+    {
         return [
             '{newEmailToConfirm}' => $newEmailToConfirm,
             '{username}' => $username,
         ];
     }
 
-    private static function getMySubjectVars(
-        string $username
-    ): array {
+    private static function getMySubjectVars(string $username): array
+    {
         return [
             '%username%' => $username,
         ];
