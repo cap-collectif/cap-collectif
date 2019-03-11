@@ -11,8 +11,7 @@ services:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/*'
     exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,QuestionResolver.php,ConsultationResolver.php,UserResolver.php, Group/GroupResolver.php, Proposal/ProposalEvaluationResolver.php,UserIsGrantedResolver.php}'
 
-  global_id_resolver:
-    class: Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver
+  Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver:
     autowire: true
     public: true
     tags:
@@ -20,8 +19,7 @@ services:
       - { name: overblog_graphql.resolver, alias: 'query_nodes', method: 'resolveMultiple' }
 
 
-  capco.resolver.question:
-    class: Capco\AppBundle\GraphQL\Resolver\QuestionResolver
+  Capco\AppBundle\GraphQL\Resolver\QuestionResolver:
     autowire: true
     tags:
       - { name: overblog_graphql.resolver, alias: 'query_question', method: 'resolve' }
@@ -53,8 +51,7 @@ services:
           method: 'resolveQuestionnaireQuestions',
         }
 
-  capco.resolver.proposals:
-    class: Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver
+  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver:
     autowire: true
     tags:
       - {
@@ -88,8 +85,7 @@ services:
           method: 'resolveViewerCanSeeEvaluation',
         }
 
-  capco.resolver.consultations:
-    class: Capco\AppBundle\GraphQL\Resolver\ConsultationResolver
+  Capco\AppBundle\GraphQL\Resolver\ConsultationResolver:
     tags:
       - {
           name: overblog_graphql.resolver,
@@ -172,8 +168,7 @@ services:
           method: 'resolveContributionType',
         }
 
-  capco.resolvers.users:
-    class: Capco\AppBundle\GraphQL\Resolver\UserResolver
+  Capco\AppBundle\GraphQL\Resolver\UserResolver:
     tags:
       - { name: overblog_graphql.resolver, alias: 'user_email', method: 'resolveEmail' }
       - {
@@ -188,8 +183,7 @@ services:
           method: 'contributionsToDeleteCount',
         }
 
-  capco.resolvers.groups:
-    class: Capco\AppBundle\GraphQL\Resolver\Group\GroupResolver
+  Capco\AppBundle\GraphQL\Resolver\Group\GroupResolver:
     tags:
       - { name: overblog_graphql.resolver, alias: 'groups', method: 'resolveAll' }
       - { name: overblog_graphql.resolver, alias: 'group', method: 'resolve' }

@@ -11,10 +11,10 @@ import QuestionnaireAdminResultsMedia from './QuestionnaireAdminResultsMedia';
 import withColors from '../Utils/withColors';
 import PrivateBox from '../Ui/Boxes/PrivateBox';
 
-type Props = {
+type Props = {|
   questionnaire: QuestionnaireAdminResults_questionnaire,
   backgroundColor: string,
-};
+|};
 
 export class QuestionnaireAdminResults extends React.Component<Props> {
   getFormattedResults = (question: Object) => {

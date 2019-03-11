@@ -47,7 +47,7 @@ InternalQuestion:
       responses:
         type: 'ResponseConnection!'
         argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionResponsesResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionResponsesResolver", [value, args, getUser()])'
         description: 'Return responses of participants'
         args:
           withNotConfirmedUser:

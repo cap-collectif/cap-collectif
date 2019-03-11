@@ -8,26 +8,31 @@ Capco\AppBundle\Entity\Questionnaire:
     anonymousAllowed: true
     acknowledgeReplies: true
     type: 'QUESTIONNAIRE'
+    privateResult: false
   questionnaire2:
     id: questionnaire2
     title: Questionnaire de test
     description: <p><text(100)></p>
     step: '@questionnairestep2'
     multipleRepliesAllowed: false
+    privateResult: false
   questionnaire3:
     id: questionnaire3
     title: Questionnaire dans une étape fermée
     description: <p><text(100)></p>
     step: '@questionnairestep3'
     multipleRepliesAllowed: true
+    privateResult: true
   questionnaire4:
     id: questionnaire4
     title: Questionnaire pour budget participatif
     description: <p><text(100)></p>
+    privateResult: true
   questionnaire5:
     id: questionnaire5
     title: Questionnaire pour budget participatif disponible
     description: <p><text(100)></p>
+    privateResult: true
   questionnaireWithJumps:
     id: questionnaireWithJumps
     title: El famoso questionnaire a branche
@@ -36,22 +41,27 @@ Capco\AppBundle\Entity\Questionnaire:
     multipleRepliesAllowed: true
     anonymousAllowed: true
     acknowledgeReplies: true
+    privateResult: true
   questionnaire6:
     id: questionnaire6
     title: Questionnaire pour budget participatif de la Force
     description: <p><text(100)></p>
+    privateResult: true
   questionnaire7:
     id: questionnaire7
     title: Consultation pour conquerir le monde
     description: <p><text(100)></p>
+    privateResult: true
   questionnaire8:
     id: questionnaire8
     title: Consultation pour la capcoBeer
     description: <p><text(100)></p>
+    privateResult: true
   questionnaire9:
     id: questionnaire9
     title: Consultation pour la FLNJ
     description: <p><text(100)></p>
+    privateResult: true
   questionnaireWithJumps2:
     id: questionnaireWithJumps2
     title: Questionnaire saut conditionnel (tous les champs)
@@ -60,6 +70,7 @@ Capco\AppBundle\Entity\Questionnaire:
     multipleRepliesAllowed: true
     anonymousAllowed: true
     acknowledgeReplies: true
+    privateResult: true
   questionnaire10:
     id: questionnaire10
     title: Questionnaire non rattaché
@@ -67,3 +78,4 @@ Capco\AppBundle\Entity\Questionnaire:
     multipleRepliesAllowed: true
     anonymousAllowed: true
     acknowledgeReplies: true
+    privateResult: true

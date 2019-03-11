@@ -1,13 +1,14 @@
 // @flow
 import React, { Component } from 'react';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
+import { connect } from 'react-redux';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import QuestionnaireAdminPageTabs from './QuestionnaireAdminPageTabs';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { QuestionnaireAdminPageQueryResponse } from './__generated__/QuestionnaireAdminPageQuery.graphql';
-import type { Uuid } from '../../types';
+import type { Uuid, State } from '../../types';
 
-type Props = { questionnaireId: Uuid };
+type Props = {| enableResultsTab: boolean, questionnaireId: Uuid |};
 
 const component = ({
   error,
@@ -32,12 +33,13 @@ const component = ({
 
 export class QuestionnaireAdminPage extends Component<Props> {
   render() {
+    const { enableResultsTab } = this.props;
     return (
       <div className="admin_questionnaire_form">
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query QuestionnaireAdminPageQuery($id: ID!) {
+            query QuestionnaireAdminPageQuery($id: ID!, $enableResultsTab: Boolean!) {
               questionnaire: node(id: $id) {
                 ...QuestionnaireAdminPageTabs_questionnaire
               }
@@ -45,6 +47,7 @@ export class QuestionnaireAdminPage extends Component<Props> {
           `}
           variables={{
             id: this.props.questionnaireId,
+            enableResultsTab,
           }}
           render={component}
         />
@@ -53,4 +56,8 @@ export class QuestionnaireAdminPage extends Component<Props> {
   }
 }
 
-export default QuestionnaireAdminPage;
+const mapStateToProps = (state: State) => ({
+  enableResultsTab: state.default.features.new_feature_questionnaire_result,
+});
+
+export default connect(mapStateToProps)(QuestionnaireAdminPage);

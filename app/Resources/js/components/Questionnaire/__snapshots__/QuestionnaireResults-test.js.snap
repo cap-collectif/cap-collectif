@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionnaireResults /> renders correctly 1`] = `
+<div>
+  <h2
+    className="h2"
+  >
+    <FormattedMessage
+      id="results"
+      values={Object {}}
+    />
+  </h2>
+  <div>
+    <div
+      className="mb-30 project__step-dates"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-calendar-2-1"
+        />
+         
+        <DatesInterval
+          endAt="2018-02-04T00:00:00+01:00"
+          fullDay={true}
+          startAt="2018-01-26T03:00:00+01:00"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

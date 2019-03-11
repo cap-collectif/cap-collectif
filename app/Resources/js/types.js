@@ -25,6 +25,7 @@ export type MediaFromAPI = {|
 
 export type FeatureToggles = {
   blog: boolean,
+  new_feature_questionnaire_result: boolean,
   calendar: boolean,
   captcha: boolean,
   consent_external_communication: boolean,
@@ -86,6 +87,7 @@ export type FeatureToggle =
   | 'votes_evolution'
   | 'export'
   | 'server_side_rendering'
+  | 'new_feature_questionnaire_result'
   | 'zipcode_at_register'
   | 'consultation_plan'
   | 'display_map';

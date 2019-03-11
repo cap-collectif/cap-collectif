@@ -11,6 +11,7 @@ class Manager
     protected $toggleManager;
 
     protected static $toggles = [
+        'new_feature_questionnaire_result',
         'blog',
         'calendar',
         'captcha',

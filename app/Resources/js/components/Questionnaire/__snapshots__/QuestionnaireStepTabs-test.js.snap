@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is private 1`] = `
+<div>
+  <Uncontrolled(Tabs)
+    defaultActiveKey={1}
+    id="user-admin-page-tabs"
+  >
+    <Tab
+      eventKey={1}
+      title="project.types.questionnaire"
+    >
+      <ForwardRef(Relay(InjectIntl(QuestionnairePage)))
+        questionnaire={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "privateResult": false,
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey={2}
+      title="results"
+    >
+      <ForwardRef(Relay(InjectIntl(QuestionnaireResults)))
+        questionnaire={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "privateResult": false,
+          }
+        }
+      />
+    </Tab>
+  </Uncontrolled(Tabs)>
+</div>
+`;
+
+exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is public 1`] = `
+<div>
+  <ForwardRef(Relay(InjectIntl(QuestionnairePage)))
+    questionnaire={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "privateResult": true,
+      }
+    }
+  />
+</div>
+`;

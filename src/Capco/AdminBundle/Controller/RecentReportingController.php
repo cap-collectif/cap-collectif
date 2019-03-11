@@ -2,6 +2,8 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AdminBundle\Admin\ReportingAdmin;
+use Capco\AdminBundle\Resolver\RecentReportingResolver;
 use Capco\AppBundle\Entity\Reporting;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -17,7 +19,7 @@ class RecentReportingController extends Controller
      */
     public function indexAction()
     {
-        $resolver = $this->get('capco_admin.recent_reports_resolver');
+        $resolver = $this->get(RecentReportingResolver::class);
         $reports = $resolver->getRecentReports();
 
         return [
@@ -26,7 +28,7 @@ class RecentReportingController extends Controller
             'recentReporting' => true,
             'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
             'admin_pool' => $this->get('sonata.admin.pool'),
-            'admin' => $this->get('capco_admin.admin.reporting'),
+            'admin' => $this->get(ReportingAdmin::class),
         ];
     }
 }

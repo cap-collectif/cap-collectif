@@ -2,16 +2,17 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalRepository extends EntityRepository
 {
@@ -55,14 +56,14 @@ class ProposalRepository extends EntityRepository
     public function getOneBySlug(string $slug): ?Proposal
     {
         // This subquery will use the "idx_slug" index to retrieve the proposal id
-        $id = $this->createQueryBuilder('p')
-            ->select('p.id')
-            ->where('p.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->getQuery()
-            ->useQueryCache(true)
-            ->useResultCache(true, 60)
-            ->getSingleScalarResult();
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('id', 'id');
+
+        $query = $this->_em
+            ->createNativeQuery('SELECT p.id as id FROM proposal p WHERE p.slug = :slug', $rsm)
+            ->setParameter('slug', $slug);
+
+        $id = $query->getSingleScalarResult();
 
         if (!$id) {
             return null;

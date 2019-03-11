@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
