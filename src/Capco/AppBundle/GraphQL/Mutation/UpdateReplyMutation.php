@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ReplyType;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -47,6 +48,7 @@ class UpdateReplyMutation implements MutationInterface
     public function __invoke(Argument $input, User $user): array
     {
         $values = $input->getRawArguments();
+        /** @var Reply $reply */
         $reply = $this->replyRepo->find($values['replyId']);
         unset($values['replyId']);
 
@@ -68,16 +70,16 @@ class UpdateReplyMutation implements MutationInterface
         }
 
         $questionnaire = $reply->getQuestionnaire();
-        if ($questionnaire && $questionnaire->isAcknowledgeReplies() && !$reply->isDraft()) {
+        if (
+            $questionnaire &&
+            $questionnaire->isAcknowledgeReplies() &&
+            !$reply->isDraft() &&
+            $questionnaire->getStep()
+        ) {
             $step = $questionnaire->getStep();
             $project = $step->getProject();
-            if ($step) {
-                $endAt = $step->getEndAt();
-                $stepUrl = $this->stepUrlResolver->__invoke($step);
-            } else {
-                $endAt = null;
-                $stepUrl = '';
-            }
+            $endAt = $step->getEndAt();
+            $stepUrl = $this->stepUrlResolver->__invoke($step);
             $this->userNotifier->acknowledgeReply(
                 $project,
                 $reply,

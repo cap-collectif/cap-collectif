@@ -32,7 +32,9 @@ final class UserNotifier extends BaseNotifier
                 $isUpdated,
                 $step,
                 $user->isEmailConfirmed(),
-                $this->userResolver->resolveRegistrationConfirmationUrl($user),
+                $user->isEmailConfirmed()
+                    ? ''
+                    : $this->userResolver->resolveRegistrationConfirmationUrl($user),
                 $reply->getAuthor()->getEmail()
             )
         );

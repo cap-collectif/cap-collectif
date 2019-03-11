@@ -26,7 +26,6 @@ class AddReplyMutation implements MutationInterface
 {
     private $em;
     private $formFactory;
-    private $proposalRepo;
     private $questionnaireRepo;
     private $redisStorageHelper;
     private $responsesFormatter;
@@ -97,17 +96,15 @@ class AddReplyMutation implements MutationInterface
         $this->em->persist($reply);
         $this->em->flush();
         $this->redisStorageHelper->recomputeUserCounters($user);
-
-        if ($questionnaire->isAcknowledgeReplies() && !$reply->isDraft()) {
+        if (
+            $questionnaire->isAcknowledgeReplies() &&
+            !$reply->isDraft() &&
+            $questionnaire->getStep()
+        ) {
             $step = $questionnaire->getStep();
             $project = $step->getProject();
-            if ($step) {
-                $endAt = $step->getEndAt();
-                $stepUrl = $this->stepUrlResolver->__invoke($step);
-            } else {
-                $endAt = null;
-                $stepUrl = '';
-            }
+            $endAt = $step->getEndAt();
+            $stepUrl = $this->stepUrlResolver->__invoke($step);
             $this->userNotifier->acknowledgeReply(
                 $project,
                 $reply,
