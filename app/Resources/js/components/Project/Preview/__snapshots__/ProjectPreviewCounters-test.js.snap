@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectPreviewProgressBar /> should render correctly counters with districts 1`] = `
+<TagsList>
+  <ProjectPreviewCounter
+    icon="cap-baloon-1"
+    label="project.preview.counters.contributions"
+    showZero={true}
+    value={89}
+  />
+  <ProjectPreviewCounter
+    icon="cap-hand-like-2-1"
+    label="project.preview.counters.votes"
+    showZero={false}
+    value={54}
+  />
+  <ProjectPreviewCounter
+    icon="cap-user-2-1"
+    label="project.preview.counters.contributors"
+    showZero={true}
+    value={54}
+  />
+  <div
+    className="tags-list__tag"
+  >
+    <i
+      className="cap cap-marker-1-1"
+    />
+    <InlineList
+      className="d-i"
+      separator=","
+    >
+      <li
+        key="0"
+      >
+        rive gauche
+      </li>
+      <li
+        key="1"
+      >
+        rive droite
+      </li>
+    </InlineList>
+  </div>
+  <div
+    className="tags-list__tag"
+  >
+    <ForwardRef(Relay(ProjectRestrictedAccessFragment))
+      icon="cap-lock-2-1"
+      project={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "contributionsCount": 89,
+          "contributors": Object {
+            "anonymousCount": 0,
+            "totalCount": 54,
+          },
+          "districts": Array [
+            Object {
+              "name": "rive gauche",
+            },
+            Object {
+              "name": "rive droite",
+            },
+          ],
+          "id": "project2",
+          "votes": Object {
+            "totalCount": 54,
+          },
+        }
+      }
+    />
+  </div>
+</TagsList>
+`;
+
+exports[`<ProjectPreviewProgressBar /> should render correctly counters without districts 1`] = `
+<TagsList>
+  <ProjectPreviewCounter
+    icon="cap-baloon-1"
+    label="project.preview.counters.contributions"
+    showZero={true}
+    value={71}
+  />
+  <ProjectPreviewCounter
+    icon="cap-hand-like-2-1"
+    label="project.preview.counters.votes"
+    showZero={false}
+    value={48}
+  />
+  <ProjectPreviewCounter
+    icon="cap-user-2-1"
+    label="project.preview.counters.contributors"
+    showZero={true}
+    value={50}
+  />
+  <div
+    className="tags-list__tag"
+  >
+    <ForwardRef(Relay(ProjectRestrictedAccessFragment))
+      icon="cap-lock-2-1"
+      project={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "contributionsCount": 71,
+          "contributors": Object {
+            "anonymousCount": 2,
+            "totalCount": 48,
+          },
+          "districts": Array [],
+          "id": "project1",
+          "votes": Object {
+            "totalCount": 48,
+          },
+        }
+      }
+    />
+  </div>
+</TagsList>
+`;

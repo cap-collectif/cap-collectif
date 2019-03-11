@@ -305,7 +305,7 @@ export class ProposalListTable extends React.Component<Props, State> {
       if (keyName === 'likers' && value) {
         return (
           <td key={key}>
-            <InlineList className="mb-0">
+            <InlineList className="mb-0 excerpt">
               {value.map((user, i) => (
                 <li key={i}>{user.displayName}</li>
               ))}
