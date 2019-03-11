@@ -45,12 +45,18 @@ export class ProposalResponse extends React.PureComponent<Props> {
     const response = this.props.response;
     let value = '';
 
+    console.log(response);
+
     if (response.question.type === 'section') {
       return (
         <div>
           <TitleInvertContrast>{response.question.title}</TitleInvertContrast>
         </div>
       );
+    }
+
+    if(response.question.type === 'medias' && response.medias && response.medias.length === 0) {
+      return null;
     }
 
     if ((!response.value || response.value.length === 0) && response.question.type !== 'medias') {
