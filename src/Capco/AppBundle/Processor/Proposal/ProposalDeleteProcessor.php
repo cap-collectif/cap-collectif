@@ -44,7 +44,7 @@ class ProposalDeleteProcessor implements ProcessorInterface
 
         if (!$proposal) {
             $this->logger->error(
-                \get_class($this) . ' - Unable to find proposal with id: ' . $json['proposalId']
+                __CLASS__ . ' - Unable to find proposal with id: ' . $json['proposalId']
             );
 
             return false;
