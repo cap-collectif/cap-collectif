@@ -4,7 +4,7 @@ namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Form\MediaResponseType;
-use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Capco\AppBundle\Form\ValueResponseType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\UserType;
@@ -32,7 +32,12 @@ class ApiRegistrationFormType extends AbstractType
         // disable password repeated
         $builder->remove('plainPassword')->add('plainPassword', PasswordType::class);
         $builder
-            ->add('username', PurifiedTextType::class, ['required' => true, 'strip_tags' => true])
+            ->add('username', TextType::class, [
+                'required' => true,
+                'strip_tags' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
             ->add('email', EmailType::class, ['required' => true]);
 
         $builder->add('captcha', ReCaptchaType::class, ['validation_groups' => ['registration']]);

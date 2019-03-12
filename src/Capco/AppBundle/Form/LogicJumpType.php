@@ -1,15 +1,12 @@
 <?php
+
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\AbstractLogicJumpCondition;
 use Capco\AppBundle\Entity\LogicJump;
-use Capco\AppBundle\Entity\QuestionChoice;
-use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 
 class LogicJumpType extends AbstractType
 {

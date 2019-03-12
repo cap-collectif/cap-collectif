@@ -1,12 +1,10 @@
 <?php
+
 namespace Capco\AppBundle\Form;
 
-use Capco\AdminBundle\Form\QuestionValidationRuleType;
 use Capco\AppBundle\Entity\QuestionChoice;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,8 +13,14 @@ class QuestionChoiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('id');
-        $builder->add('title', PurifiedTextType::class);
-        $builder->add('description', PurifiedTextType::class);
+        $builder->add('title', TextType::class, [
+            'purify_html' => true,
+            'purify_html_profile' => 'default',
+        ]);
+        $builder->add('description', TextType::class, [
+            'purify_html' => true,
+            'purify_html_profile' => 'default',
+        ]);
         $builder->add('color');
         $builder->add('image');
     }

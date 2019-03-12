@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,22 +12,22 @@ class ProgessStepType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // 'required' => true
         $builder
-            ->add('title',
-                PurifiedTextType::class, [
+            ->add('title', TextType::class, [
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
                 'required' => true,
             ])
             ->add('startAt', DateTimeType::class, [
-              'widget' => 'single_text',
-              'format' => 'Y-MM-dd HH:mm:ss',
-              // 'required' => true
+                'widget' => 'single_text',
+                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('endAt', DateTimeType::class, [
-              'widget' => 'single_text',
-              'format' => 'Y-MM-dd HH:mm:ss',
-              // 'required' => false
-            ])
-        ;
+                'widget' => 'single_text',
+                'format' => 'Y-MM-dd HH:mm:ss',
+                // 'required' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
