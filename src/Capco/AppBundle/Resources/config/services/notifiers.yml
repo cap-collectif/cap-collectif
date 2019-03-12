@@ -14,24 +14,19 @@ services:
   Capco\AppBundle\Notifier\FOSNotifier:
     public: true
 
-  capco.contact_notifier:
-    class: Capco\AppBundle\Notifier\ContactNotifier
+  Capco\AppBundle\Notifier\ContactNotifier:
     public: true
 
-  capco.user_notifier:
-    class: Capco\AppBundle\Notifier\UserNotifier
+  Capco\AppBundle\Notifier\UserNotifier:
     public: true
 
-  capco.project_notifier:
-    class: Capco\AppBundle\Notifier\ProjectNotifier
+  Capco\AppBundle\Notifier\ProjectNotifier:
     public: true
 
-  capco.contribution_notifier:
-    class: Capco\AppBundle\Notifier\ContributionNotifier
+  Capco\AppBundle\Notifier\ContributionNotifier:
     public: true
 
-  capco.report_notifier:
-    class: Capco\AppBundle\Notifier\ReportNotifier
+  Capco\AppBundle\Notifier\ReportNotifier:
     public: true
 
   Capco\AppBundle\Notifier\FollowerNotifier:

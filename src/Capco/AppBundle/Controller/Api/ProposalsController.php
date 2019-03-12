@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Notifier\ReportNotifier;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
@@ -52,7 +53,7 @@ class ProposalsController extends FOSRestController
         $this->getDoctrine()
             ->getManager()
             ->flush();
-        $this->get('capco.report_notifier')->onCreate($report);
+        $this->get(ReportNotifier::class)->onCreate($report);
 
         return $report;
     }

@@ -48,7 +48,7 @@ class ProjectsController extends FOSRestController
         $em->persist($project);
         $em->flush();
 
-        $this->get('capco.project_notifier')->onCreate($project);
+        $this->get(ProjectNotifier::class)->onCreate($project);
 
         return $project;
     }

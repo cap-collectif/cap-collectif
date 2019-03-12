@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
+use Capco\AppBundle\Notifier\ReportNotifier;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -36,7 +37,7 @@ class CommentsController extends FOSRestController
 
         $this->get('doctrine.orm.entity_manager')->persist($report);
         $this->get('doctrine.orm.entity_manager')->flush();
-        $this->get('capco.report_notifier')->onCreate($report);
+        $this->get(ReportNotifier::class)->onCreate($report);
 
         return $report;
     }
