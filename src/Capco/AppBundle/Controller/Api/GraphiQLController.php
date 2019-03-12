@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Twig\Environment as TwigEnvironment;
 use Symfony\Component\HttpFoundation\Response;
 use Overblog\GraphiQLBundle\Config\GraphiQLViewConfig;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Overblog\GraphiQLBundle\Config\GraphiQLControllerEndpoint;
 
 final class GraphiQLController

@@ -7,7 +7,7 @@ use Capco\AdminBundle\Resolver\RecentContributionsResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 

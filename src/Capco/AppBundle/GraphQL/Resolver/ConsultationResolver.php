@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\UserBundle\Entity\User;
@@ -19,6 +20,7 @@ use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Doctrine\Common\Collections\Collection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Entity\OpinionVersionVote;
@@ -29,62 +31,77 @@ use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Overblog\GraphQLBundle\Resolver\TypeResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
+use Symfony\Component\Routing\RouterInterface;
 
-class ConsultationResolver implements ContainerAwareInterface
+class ConsultationResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
-
     public $project;
+    private $typeResolver;
+    private $opinionRepository;
+    private $consultationStepRepository;
+    private $router;
+    private $opinionUrlResolver;
+
+    public function __construct(
+        TypeResolver $typeResolver,
+        OpinionRepository $opinionRepository,
+        ConsultationStepRepository $consultationStepRepository,
+        RouterInterface $router,
+        OpinionUrlResolver $opinionUrlResolver
+    ) {
+        $this->typeResolver = $typeResolver;
+        $this->opinionRepository = $opinionRepository;
+        $this->consultationStepRepository = $consultationStepRepository;
+        $this->router = $router;
+        $this->opinionUrlResolver = $opinionUrlResolver;
+    }
 
     public function resolveContributionType($data)
     {
-        $typeResolver = $this->container->get('overblog_graphql.type_resolver');
-        $currentSchemaName = $typeResolver->getCurrentSchemaName();
+        $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
         if ($data instanceof Opinion) {
-            return $typeResolver->resolve('Opinion');
+            return $this->typeResolver->resolve('Opinion');
         }
         if ($data instanceof OpinionVote) {
-            return $typeResolver->resolve('OpinionVote');
+            return $this->typeResolver->resolve('OpinionVote');
         }
         if ($data instanceof OpinionVersion) {
-            return $typeResolver->resolve('Version');
+            return $this->typeResolver->resolve('Version');
         }
         if ($data instanceof OpinionVersionVote) {
-            return $typeResolver->resolve('VersionVote');
+            return $this->typeResolver->resolve('VersionVote');
         }
         if ($data instanceof Argument) {
-            return $typeResolver->resolve('Argument');
+            return $this->typeResolver->resolve('Argument');
         }
         if ($data instanceof Source) {
-            return $typeResolver->resolve('Source');
+            return $this->typeResolver->resolve('Source');
         }
         if ($data instanceof Reporting) {
-            return $typeResolver->resolve('Reporting');
+            return $this->typeResolver->resolve('Reporting');
         }
         if ($data instanceof Comment) {
-            return $typeResolver->resolve('Comment');
+            return $this->typeResolver->resolve('Comment');
         }
         if ($data instanceof Proposal) {
             if ('preview' === $currentSchemaName) {
-                return $typeResolver->resolve('PreviewProposal');
+                return $this->typeResolver->resolve('PreviewProposal');
             }
 
-            return $typeResolver->resolve('InternalProposal');
+            return $this->typeResolver->resolve('InternalProposal');
         }
         if ($data instanceof Reply) {
-            return $typeResolver->resolve('Reply');
+            return $this->typeResolver->resolve('Reply');
         }
         if ($data instanceof Answer) {
-            return $typeResolver->resolve('Answer');
+            return $this->typeResolver->resolve('Answer');
         }
         if ($data instanceof Post) {
-            return $typeResolver->resolve('Post');
+            return $this->typeResolver->resolve('Post');
         }
 
         throw new UserError('Could not resolve type of Contribution.');
@@ -108,13 +125,12 @@ class ConsultationResolver implements ContainerAwareInterface
     public function getSectionContributionsConnection(OpinionType $section, Arg $args): Connection
     {
         $paginator = new Paginator(function ($offset, $limit) use ($section, $args) {
-            $repo = $this->container->get(OpinionRepository::class);
             $criteria = ['section' => $section, 'trashed' => false];
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
             $orderBy = [$field => $direction];
 
-            return $repo
+            return $this->opinionRepository
                 ->getByCriteriaOrdered($criteria, $orderBy, null, $offset)
                 ->getIterator()
                 ->getArrayCopy();
@@ -127,15 +143,14 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolve(Arg $args)
     {
-        $repo = $this->container->get(ConsultationStepRepository::class);
         if (isset($args['id'])) {
             $stepId = GlobalId::fromGlobalId($args['id'])['id'];
-            $consultation = $repo->find($stepId);
+            $consultation = $this->consultationStepRepository->find($stepId);
 
             return [$consultation];
         }
 
-        return $repo->findAll();
+        return $this->consultationStepRepository->findAll();
     }
 
     public function getSectionChildren(OpinionType $type, Arg $argument)
@@ -155,7 +170,7 @@ class ConsultationResolver implements ContainerAwareInterface
         $step = $type->getStep();
         $project = $step->getProject();
 
-        return $this->container->get('router')->generate(
+        return $this->router->generate(
             'app_consultation_show_opinions',
             [
                 'projectSlug' => $project->getSlug(),
@@ -168,9 +183,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function getSectionOpinionsCount(OpinionType $type): int
     {
-        $repo = $this->container->get(OpinionRepository::class);
-
-        return $repo->countByOpinionType($type->getId());
+        return $this->opinionRepository->countByOpinionType($type->getId());
     }
 
     public function resolveConsultationSections(
@@ -224,9 +237,7 @@ class ConsultationResolver implements ContainerAwareInterface
     {
         $parent = $argument->getParent();
         if ($parent instanceof Opinion) {
-            return $this->container->get(OpinionUrlResolver::class)->__invoke($parent) .
-                '#arg-' .
-                $argument->getId();
+            return $this->opinionUrlResolver->__invoke($parent) . '#arg-' . $argument->getId();
         }
         if ($parent instanceof OpinionVersion) {
             return $this->resolveVersionUrl($parent) . '#arg-' . $argument->getId();
@@ -242,7 +253,7 @@ class ConsultationResolver implements ContainerAwareInterface
         $step = $opinion->getStep();
         $project = $step->getProject();
 
-        return $this->container->get('router')->generate(
+        return $this->router->generate(
             'app_project_show_opinion_version',
             [
                 'projectSlug' => $project->getSlug(),

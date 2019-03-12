@@ -7,7 +7,7 @@ use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Form\Type\MemberSearchType;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\UserBundle\Repository\UserTypeRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
