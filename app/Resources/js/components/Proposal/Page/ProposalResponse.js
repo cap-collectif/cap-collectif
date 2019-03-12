@@ -22,9 +22,6 @@ export class ProposalResponse extends React.PureComponent<Props> {
     return response.value && /<[a-z][\s\S]*>/i.test(response.value);
   };
 
-  isRadioEmpty = (radioLabels: radioLabelsType) =>
-    radioLabels.labels.length === 0 && !radioLabels.other;
-
   renderUniqueLabel = (radioLabels: radioLabelsType) => {
     if (!radioLabels) {
       return null;
@@ -43,11 +40,15 @@ export class ProposalResponse extends React.PureComponent<Props> {
 
   render() {
     const response = this.props.response;
+    const questionType = response.question.type;
+    const responseWithJSON =
+      questionType === 'button' ||
+      questionType === 'radio' ||
+      questionType === 'checkbox' ||
+      questionType === 'ranking';
     let value = '';
 
-    console.log(response);
-
-    if (response.question.type === 'section') {
+    if (questionType === 'section') {
       return (
         <div>
           <TitleInvertContrast>{response.question.title}</TitleInvertContrast>
@@ -55,17 +56,20 @@ export class ProposalResponse extends React.PureComponent<Props> {
       );
     }
 
-    if(response.question.type === 'medias' && response.medias && response.medias.length === 0) {
+    if (
+      (questionType === 'medias' && response.medias && response.medias.length === 0) ||
+      (questionType === 'editor' && response.value === '<p><br></p>') ||
+      ((!response.value || response.value.length === 0) && questionType !== 'medias')
+    ) {
       return null;
     }
 
-    if ((!response.value || response.value.length === 0) && response.question.type !== 'medias') {
-      return null;
-    }
+    if (responseWithJSON && response.value) {
+      const responseValue = JSON.parse(response.value);
+      const labelsValue = responseValue.labels.filter(el => el != null);
+      const otherValue = responseValue.other;
 
-    if (response.question.type === 'radio') {
-      const radioLabelsValue = JSON.parse(response.value || '');
-      if (this.isRadioEmpty(radioLabelsValue)) {
+      if (!otherValue && labelsValue.length === 0) {
         return null;
       }
     }
