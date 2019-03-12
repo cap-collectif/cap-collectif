@@ -17,9 +17,6 @@ services:
   Capco\AppBundle\SiteColor\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/SiteColor/*'
 
-  Capco\AppBundle\Following\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Following/*'
-
   Capco\AppBundle\Manager\CommentResolver:
     autowire: true
     public: true

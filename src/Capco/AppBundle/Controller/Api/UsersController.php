@@ -6,7 +6,6 @@ use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EmailDomainRepository;
 use Capco\AppBundle\Notifier\UserNotifier;
-use Capco\AppBundle\Search\UserSearch;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
@@ -57,7 +56,7 @@ class UsersController extends FOSRestController
         $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
         $notInIds = $request->request->has('notInIds') ? $request->request->get('notInIds') : null;
 
-        return $this->get(UserSearch::class)->searchAllUsers($terms, $notInIds);
+        return $this->get('capco.search.user_search')->searchAllUsers($terms, $notInIds);
     }
 
     /**

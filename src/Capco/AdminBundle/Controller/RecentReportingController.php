@@ -5,7 +5,7 @@ namespace Capco\AdminBundle\Controller;
 use Capco\AdminBundle\Admin\ReportingAdmin;
 use Capco\AdminBundle\Resolver\RecentReportingResolver;
 use Capco\AppBundle\Entity\Reporting;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

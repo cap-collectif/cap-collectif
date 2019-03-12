@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Entity\Comment;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Elastica\Bulk;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Index;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -53,7 +53,7 @@ class Indexer
     private $logger;
 
     public function __construct(
-        RegistryInterface $registry,
+        Registry $registry,
         SerializerInterface $serializer,
         Index $index,
         LoggerInterface $logger

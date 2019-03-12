@@ -7,7 +7,7 @@ use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Notifier\ContactNotifier;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

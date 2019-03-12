@@ -84,7 +84,7 @@ class ReplyRepository extends EntityRepository
         // This make the query too slow for such a huge table
         $nativeQuery = $this->getEntityManager()
             ->createNativeQuery(
-                'SELECT r.id FROM reply r USE INDEX (idx_questionnaire_published) WHERE r.published = 1 AND r.questionnaire_id = :questionnaire AND r.is_draft = 0 ORDER BY r.id LIMIT :offset, :limit',
+                'SELECT r.id FROM reply r USE INDEX (idx_questionnaire_published) WHERE r.published = 1 AND r.questionnaire_id = :questionnaire AND r.is_draft = 0 LIMIT :offset, :limit',
                 $rsm
             )
             ->setParameter('questionnaire', $questionnaire)

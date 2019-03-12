@@ -8,11 +8,14 @@ services:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/Search/*'
   #    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/{}'
 
-  Capco\AppBundle\Search\GlobalSearch:
+  capco.search.global_search:
+    class: Capco\AppBundle\Search\GlobalSearch
     public: true
 
   Capco\AppBundle\Search\EventSearch:
+    class: Capco\AppBundle\Search\EventSearch
     public: true
 
-  Capco\AppBundle\Search\UserSearch:
+  capco.search.user_search:
+    class: Capco\AppBundle\Search\UserSearch
     public: true

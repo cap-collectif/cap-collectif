@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Overblog\GraphQLBundle\Request as GraphQLRequest;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
 
 class GraphQLController extends BaseController
