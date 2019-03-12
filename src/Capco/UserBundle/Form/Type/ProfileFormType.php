@@ -26,7 +26,6 @@ class ProfileFormType extends AbstractType
             ->add('facebookUrl', UrlType::class, ['label' => 'user.profile.edit.facebook'])
             ->add('linkedInUrl', UrlType::class, [])
             ->add('username', TextType::class, [
-                'strip_tags' => true,
                 'required' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',

@@ -31,7 +31,6 @@ class PublicDataType extends AbstractType
             ->add('linkedInUrl', UrlType::class)
             ->add('username', TextType::class, [
                 'required' => true,
-                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])

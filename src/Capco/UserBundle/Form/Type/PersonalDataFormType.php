@@ -17,28 +17,23 @@ class PersonalDataFormType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
             ->add('lastname', TextType::class, [
-                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
             ->add('address', TextType::class, [
-                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
             ->add('address2', TextType::class, [
-                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
             ->add('zipCode')
             ->add('city', TextType::class, [
-                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
