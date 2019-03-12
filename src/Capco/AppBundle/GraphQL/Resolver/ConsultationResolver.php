@@ -56,7 +56,7 @@ class ConsultationResolver implements ResolverInterface
         $this->opinionRepository = $opinionRepository;
         $this->consultationStepRepository = $consultationStepRepository;
         $this->router = $router;
-        $this->opinionRepository = $opinionUrlResolver;
+        $this->opinionUrlResolver = $opinionUrlResolver;
     }
 
     public function resolveContributionType($data)
@@ -170,7 +170,7 @@ class ConsultationResolver implements ResolverInterface
         $step = $type->getStep();
         $project = $step->getProject();
 
-        return $this->container->get('router')->generate(
+        return $this->router->generate(
             'app_consultation_show_opinions',
             [
                 'projectSlug' => $project->getSlug(),
