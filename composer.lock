@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2017e351909dcf04e47dbbd08859fda7",
+    "content-hash": "4fc7dbc42a36eb95889ad2a011915631",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -8190,30 +8190,33 @@
         },
         {
             "name": "qandidate/toggle-bundle",
-            "version": "0.8.0",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/qandidate-labs/qandidate-toggle-bundle.git",
-                "reference": "f8e39374dc79448cceaec2447d858cf0a02f1bff"
+                "reference": "20bc97257c56102c7c0c70a02d83a0a33b9f7598"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/qandidate-labs/qandidate-toggle-bundle/zipball/f8e39374dc79448cceaec2447d858cf0a02f1bff",
-                "reference": "f8e39374dc79448cceaec2447d858cf0a02f1bff",
+                "url": "https://api.github.com/repos/qandidate-labs/qandidate-toggle-bundle/zipball/20bc97257c56102c7c0c70a02d83a0a33b9f7598",
+                "reference": "20bc97257c56102c7c0c70a02d83a0a33b9f7598",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
+                "php": ">=7.0",
                 "qandidate/toggle": "~1.0",
-                "symfony/framework-bundle": "~2.7|~3.0",
-                "symfony/security-core": "~2.7|~3.0"
+                "symfony/framework-bundle": "^2.7||^3.0||^4.0",
+                "symfony/http-foundation": "^2.7||^3.0||^4.0",
+                "symfony/http-kernel": "^2.7||^3.0||^4.0",
+                "symfony/security-bundle": "^2.7||^3.0||^4.0"
             },
             "require-dev": {
-                "matthiasnoback/symfony-dependency-injection-test": "^1.1",
-                "phpunit/phpunit": "^5.0 || ^4.8.10",
-                "symfony/browser-kit": "~2.7|~3.0",
-                "symfony/framework-bundle": "~2.7|~3.0",
-                "symfony/twig-bundle": "~2.7|~3.0",
+                "matthiasnoback/symfony-config-test": "^2.2",
+                "matthiasnoback/symfony-dependency-injection-test": "^1.2",
+                "phpunit/phpunit": "^5.2",
+                "symfony/browser-kit": "^2.7||^3.0||^4.0",
+                "symfony/twig-bundle": "^2.7||^3.0||^4.0",
                 "twig/twig": "~1.16,>=1.16.2"
             },
             "suggest": {
@@ -8222,7 +8225,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.6.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -8245,7 +8248,7 @@
                 }
             ],
             "description": "This Bundle provides the integration with qandidate/toggle. It provides the services and configuration you need to implement feature toggles in your Symfony application.",
-            "time": "2017-10-21T20:58:03+00:00"
+            "time": "2019-01-02T08:58:54+00:00"
         },
         {
             "name": "react/promise",
