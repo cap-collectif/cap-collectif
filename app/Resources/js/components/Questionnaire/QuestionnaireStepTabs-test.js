@@ -9,6 +9,7 @@ describe('<QuestionnaireStepTabs />', () => {
   it('renders correctly questionnaire is public', () => {
     const props = {
       intl: intlMock,
+      enableResults: true,
       questionnaire: {
         privateResult: true,
         $refType,
@@ -18,9 +19,25 @@ describe('<QuestionnaireStepTabs />', () => {
     const wrapper = shallow(<QuestionnaireStepTabs {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders correctly when results are disabled', () => {
+    const props = {
+      intl: intlMock,
+      enableResults: false,
+      questionnaire: {
+        privateResult: true,
+        $refType,
+        $fragmentRefs,
+      },
+    };
+    const wrapper = shallow(<QuestionnaireStepTabs {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('renders correctly questionnaire is private', () => {
     const props = {
       intl: intlMock,
+      enableResults: true,
       questionnaire: {
         privateResult: false,
         $refType,

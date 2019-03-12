@@ -8,10 +8,11 @@ import { type QuestionnaireStepPageQueryResponse } from './__generated__/Questio
 import { Loader } from '../Ui/FeedbacksIndicators/Loader';
 import QuestionnaireStepTabs from '../Questionnaire/QuestionnaireStepTabs';
 
-type Props = {
+type Props = {|
   questionnaireId: ?string,
   isAuthenticated: boolean,
-};
+  enableResults: boolean,
+|};
 
 const component = ({
   error,
@@ -27,6 +28,7 @@ const component = ({
     if (props.questionnaire) {
       return (
         <div>
+          {/* $FlowFixMe $refType */}
           <QuestionnaireStepTabs questionnaire={props.questionnaire} />
         </div>
       );
@@ -38,24 +40,28 @@ const component = ({
 
 export class QuestionnaireStepPage extends React.Component<Props> {
   render() {
-    const { questionnaireId, isAuthenticated } = this.props;
-
+    const { questionnaireId, isAuthenticated, enableResults } = this.props;
     return (
       <div>
         {questionnaireId ? (
           <QueryRenderer
             environment={environment}
             query={graphql`
-              query QuestionnaireStepPageQuery($id: ID!, $isAuthenticated: Boolean!) {
+              query QuestionnaireStepPageQuery(
+                $id: ID!
+                $isAuthenticated: Boolean!
+                $enableResults: Boolean!
+              ) {
                 questionnaire: node(id: $id) {
                   ...QuestionnaireStepTabs_questionnaire
-                    @arguments(isAuthenticated: $isAuthenticated)
+                    @arguments(isAuthenticated: $isAuthenticated, enableResults: $enableResults)
                 }
               }
             `}
             variables={{
               id: questionnaireId,
               isAuthenticated,
+              enableResults,
             }}
             render={component}
           />
@@ -67,6 +73,7 @@ export class QuestionnaireStepPage extends React.Component<Props> {
 
 const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: state.user.user !== null,
+  enableResults: state.default.features.new_feature_questionnaire_result,
 });
 
 export default connect(mapStateToProps)(QuestionnaireStepPage);
