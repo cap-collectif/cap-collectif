@@ -65,23 +65,26 @@ parameters:
   env(SYMFONY_DISABLE_MAIL_DELIVERY): false
 
 services:
-  import.csvtoarray:
-    class: Capco\AppBundle\Helper\ConvertCsvToArray
+  Capco\AppBundle\Helper\ConvertCsvToArray:
+    autowire: true
+    public: true
 
   Capco\AppBundle\Controller\Site\DeveloperController:
     autowire: true
+    public: true
 
   Capco\AppBundle\Controller\Api\GraphQLController:
     autowire: true
+    public: true
     arguments:
       $batchParser: '@overblog_graphql.request_batch_parser'
       $requestParser: '@overblog_graphql.request_parser'
 
   Capco\AppBundle\Controller\Site\HomepageController:
     autowire: true
+    public: true
 
-  redis_adapter:
-    class: Capco\AppBundle\Adapter\RedisAdapter
+  Capco\AppBundle\Adapter\RedisAdapter:
     arguments: ['@snc_redis.default']
 
   Capco\AppBundle\Mailer\MailerService:
@@ -101,12 +104,10 @@ services:
     class: Ivory\HttpAdapter\CurlHttpAdapter
 
   ##################### SMS
-  twilio.sms_sender:
-    class: Capco\AppBundle\Sms\TwilioSmsSender
+  Capco\AppBundle\Sms\TwilioSmsSender:
     arguments: ['%twilio_sid%', '%twilio_token%']
 
-  sms.service:
-    class: Capco\AppBundle\Sms\SmsService
+  Capco\AppBundle\Sms\SmsService:
     autowire: true
     arguments:
       $number: '%twilio_number%'
@@ -120,6 +121,7 @@ services:
 
   Capco\AppBundle\Controller\Api\GraphiQLController:
     autowire: true
+    public: true
 
   Capco\AppBundle\PublicApi\PublicApiKeyUserProvider:
     autowire: true
@@ -133,9 +135,8 @@ services:
     autowire: true
     public: true
 
-  capco.webonyx_graphql_sync_promise_adapter:
+  Overblog\PromiseAdapter\Adapter\WebonyxGraphQLSyncPromiseAdapter:
     public: true
-    class: Overblog\PromiseAdapter\Adapter\WebonyxGraphQLSyncPromiseAdapter
     arguments:
       - '@webonyx_graphql.sync_promise_adapter'
 

@@ -7,6 +7,7 @@ use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EmailDomainRepository;
 use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\AppBundle\Search\UserSearch;
+use Capco\AppBundle\Sms\SmsService;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
@@ -231,7 +232,7 @@ class UsersController extends FOSRestController
         }
 
         try {
-            $this->get('sms.service')->confirm($user);
+            $this->get(SmsService::class)->confirm($user);
         } catch (\Services_Twilio_RestException $e) {
             $this->get('logger')->error($e->getMessage());
 

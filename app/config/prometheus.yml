@@ -1,5 +1,5 @@
 tweede_golf_prometheus:
-  storage_adapter_service: 'redis_adapter'
+  storage_adapter_service: 'Capco\AppBundle\Adapter\RedisAdapter'
   register_defaults: false
   collectors:
     registeredConfirmedByEmail:
