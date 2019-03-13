@@ -2,7 +2,7 @@
 
 namespace Capco\AdminBundle\Block;
 
-use Sonata\BlockBundle\Block\AbstractAdminBlockService;
+use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;

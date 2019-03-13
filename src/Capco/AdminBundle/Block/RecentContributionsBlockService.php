@@ -4,7 +4,7 @@ namespace Capco\AdminBundle\Block;
 
 use Capco\AdminBundle\Resolver\RecentContributionsResolver;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\BlockBundle\Block\AbstractAdminBlockService;
+use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;

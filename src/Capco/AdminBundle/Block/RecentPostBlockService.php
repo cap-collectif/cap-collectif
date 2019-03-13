@@ -5,7 +5,7 @@ namespace Capco\AdminBundle\Block;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\BlockBundle\Block\AbstractAdminBlockService;
+use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
