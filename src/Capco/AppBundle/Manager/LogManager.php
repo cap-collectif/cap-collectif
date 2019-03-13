@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Gedmo\Loggable\Entity\LogEntry;
-use Sonata\UserBundle\Entity\UserManager;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class LogManager
@@ -15,7 +15,7 @@ class LogManager
 
     public function __construct(
         TranslatorInterface $translator,
-        UserManager $userManager,
+        UserManagerInterface $userManager,
         EntityManagerInterface $em
     ) {
         $this->translator = $translator;

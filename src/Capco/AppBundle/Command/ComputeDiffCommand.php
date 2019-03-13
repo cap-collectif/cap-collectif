@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Generator\DiffGenerator;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -36,7 +37,7 @@ class ComputeDiffCommand extends ContainerAwareCommand
         foreach ($versions as $versionId) {
             $version = $repo->find($versionId);
             if ('' === $version->getDiff() || $input->getOption('force')) {
-                $container->get('capco.diff.generator')->generate($version);
+                $container->get(DiffGenerator::class)->generate($version);
                 $em->flush();
             }
             $progress->advance();
@@ -46,7 +47,7 @@ class ComputeDiffCommand extends ContainerAwareCommand
         $modals = $em->getRepository('CapcoAppBundle:OpinionModal')->findAll();
         $progress = new ProgressBar($output, \count($modals));
         foreach ($modals as $modal) {
-            $container->get('capco.diff.generator')->generate($modal);
+            $container->get(DiffGenerator::class)->generate($modal);
             $em->flush();
             $progress->advance();
         }

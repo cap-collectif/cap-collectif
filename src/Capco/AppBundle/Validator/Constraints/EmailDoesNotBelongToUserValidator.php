@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Sonata\UserBundle\Entity\UserManager;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -10,7 +10,7 @@ class EmailDoesNotBelongToUserValidator extends ConstraintValidator
 {
     private $userManager;
 
-    public function __construct(UserManager $userManager)
+    public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;
     }
@@ -20,7 +20,8 @@ class EmailDoesNotBelongToUserValidator extends ConstraintValidator
         if (null !== $value->getEmail()) {
             $user = $this->userManager->findUserByEmail($value->getEmail());
             if (null !== $user) {
-                $this->context->buildViolation($constraint->message)
+                $this->context
+                    ->buildViolation($constraint->message)
                     ->atPath('email')
                     ->addViolation();
             }

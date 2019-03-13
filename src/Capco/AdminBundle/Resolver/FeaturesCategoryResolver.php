@@ -4,7 +4,7 @@ namespace Capco\AdminBundle\Resolver;
 
 use Capco\AppBundle\Helper\EnvHelper;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class FeaturesCategoryResolver
 {
@@ -53,8 +53,10 @@ class FeaturesCategoryResolver
     protected $manager;
     protected $authorizationChecker;
 
-    public function __construct(Manager $manager, AuthorizationChecker $authorizationChecker)
-    {
+    public function __construct(
+        Manager $manager,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->manager = $manager;
         $this->authorizationChecker = $authorizationChecker;
     }

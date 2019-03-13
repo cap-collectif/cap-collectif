@@ -87,8 +87,7 @@ services:
   Capco\AppBundle\Mailer\MailerService:
     autowire: true
 
-  capco.diff.generator:
-    class: Capco\AppBundle\Generator\DiffGenerator
+  Capco\AppBundle\Generator\DiffGenerator:
     autowire: true
 
   geocoder.google_map:
@@ -113,8 +112,8 @@ services:
       $number: '%twilio_number%'
     public: true
 
-  capco.canonicalizer:
-    class: Capco\AppBundle\Utils\Canonicalizer
+  Capco\AppBundle\Utils\Canonicalizer:
+    autowire: true
 
   Box\Spout\Writer\CSV\Writer:
     class: Box\Spout\Writer\CSV\Writer
