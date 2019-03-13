@@ -11031,20 +11031,20 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.36.0",
+            "version": "v1.38.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "730c9c4471b5152d23061feb02b03382264c8a15"
+                "reference": "874adbd9222f928f6998732b25b01b41dff15b0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/730c9c4471b5152d23061feb02b03382264c8a15",
-                "reference": "730c9c4471b5152d23061feb02b03382264c8a15",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/874adbd9222f928f6998732b25b01b41dff15b0c",
+                "reference": "874adbd9222f928f6998732b25b01b41dff15b0c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
+                "php": ">=5.4.0",
                 "symfony/polyfill-ctype": "^1.8"
             },
             "require-dev": {
@@ -11055,7 +11055,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.36-dev"
+                    "dev-master": "1.38-dev"
                 }
             },
             "autoload": {
@@ -11093,7 +11093,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-12-16T10:34:11+00:00"
+            "time": "2019-03-12T18:45:24+00:00"
         },
         {
             "name": "twilio/sdk",
@@ -15222,7 +15222,7 @@
                 "page"
             ],
             "support": {
-                "source": "https://github.com/spyl94/BehatPageObjectExtension/tree/master"
+                "source": "https://github.com/cap-collectif/BehatPageObjectExtension/tree/master"
             },
             "time": "2016-03-15T13:13:55+00:00"
         },
@@ -15408,7 +15408,7 @@
                 "testing"
             ],
             "support": {
-                "source": "https://github.com/spyl94/behat-parallel-scenario/tree/master"
+                "source": "https://github.com/cap-collectif/behat-parallel-scenario/tree/master"
             },
             "time": "2016-03-11T13:43:33+00:00"
         },
