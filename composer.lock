@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24ab7343ecb8f4862834aebbca332e89",
+    "content-hash": "ab3c9705f403f19628f1f121de020373",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -3408,32 +3408,33 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.4.2",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
+                "reference": "9f83dded91781a01c63574e387eaa769be769115"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/9f83dded91781a01c63574e387eaa769be769115",
+                "reference": "9f83dded91781a01c63574e387eaa769be769115",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0",
-                "psr/http-message": "~1.0"
+                "psr/http-message": "~1.0",
+                "ralouphie/getallheaders": "^2.0.5"
             },
             "provide": {
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
@@ -3463,13 +3464,14 @@
             "keywords": [
                 "http",
                 "message",
+                "psr-7",
                 "request",
                 "response",
                 "stream",
                 "uri",
                 "url"
             ],
-            "time": "2017-03-20T17:10:46+00:00"
+            "time": "2018-12-04T20:46:45+00:00"
         },
         {
             "name": "guzzlehttp/ringphp",
@@ -3955,16 +3957,16 @@
         },
         {
             "name": "infinite-networks/form-bundle",
-            "version": "dev-master",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/InfiniteFormBundle.git",
-                "reference": "88f8fa10d31be7e87e730936f1b3ca0a3b9b91ac"
+                "url": "https://github.com/infinite-networks/InfiniteFormBundle.git",
+                "reference": "e7fc67771f137205740c85ce62dec9446bc64d31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/InfiniteFormBundle/zipball/88f8fa10d31be7e87e730936f1b3ca0a3b9b91ac",
-                "reference": "88f8fa10d31be7e87e730936f1b3ca0a3b9b91ac",
+                "url": "https://api.github.com/repos/infinite-networks/InfiniteFormBundle/zipball/e7fc67771f137205740c85ce62dec9446bc64d31",
+                "reference": "e7fc67771f137205740c85ce62dec9446bc64d31",
                 "shasum": ""
             },
             "require": {
@@ -3977,11 +3979,8 @@
                 "twig/twig": "<1.12"
             },
             "require-dev": {
-                "components/jquery": "~3.1",
-                "components/qunit": "~1.11",
                 "doctrine/doctrine-bundle": "~1.2",
                 "doctrine/orm": "~2.3",
-                "robloach/component-installer": "^0.2",
                 "symfony/phpunit-bridge": "^2.7",
                 "symfony/symfony": "^3.0|^4.0"
             },
@@ -4006,11 +4005,7 @@
                 }
             ],
             "description": "A collection of useful form types and extensions for Symfony2",
-            "support": {
-                "issues": "https://github.com/infinite-networks/InfiniteFormBundle/issues",
-                "source": "https://github.com/cap-collectif/InfiniteFormBundle/tree/master"
-            },
-            "time": "2018-11-20T15:07:22+00:00"
+            "time": "2019-03-08T04:22:32+00:00"
         },
         {
             "name": "jaimeperez/twig-configurable-i18n",
@@ -4448,16 +4443,16 @@
         },
         {
             "name": "knplabs/gaufrette",
-            "version": "v0.5.0",
+            "version": "v0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/Gaufrette.git",
-                "reference": "2f228650fd4cc50c3d3c1d6541546ffc169b2240"
+                "reference": "a0627e91e8753f442eea6560cb347151cd306b2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/2f228650fd4cc50c3d3c1d6541546ffc169b2240",
-                "reference": "2f228650fd4cc50c3d3c1d6541546ffc169b2240",
+                "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/a0627e91e8753f442eea6560cb347151cd306b2c",
+                "reference": "a0627e91e8753f442eea6560cb347151cd306b2c",
                 "shasum": ""
             },
             "require": {
@@ -4474,8 +4469,7 @@
                 "dropbox-php/dropbox-php": "*",
                 "google/apiclient": "~1.1.3",
                 "league/flysystem": "~1.0",
-                "microsoft/azure-storage": "~0.15.0",
-                "microsoft/windowsazure": "~0.4",
+                "microsoft/azure-storage-blob": "^1.0",
                 "mikey179/vfsstream": "~1.2.0",
                 "mongodb/mongodb": "^1.1",
                 "phpseclib/phpseclib": "^2.0",
@@ -4504,7 +4498,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.5.x-dev"
+                    "dev-master": "0.7.x-dev"
                 }
             },
             "autoload": {
@@ -4534,7 +4528,7 @@
                 "filesystem",
                 "media"
             ],
-            "time": "2018-01-04T19:50:08+00:00"
+            "time": "2018-08-30T13:26:15+00:00"
         },
         {
             "name": "knplabs/knp-menu",
@@ -8210,6 +8204,46 @@
             "time": "2019-01-02T08:58:54+00:00"
         },
         {
+            "name": "ralouphie/getallheaders",
+            "version": "2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralouphie/getallheaders.git",
+                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.0",
+                "satooshi/php-coveralls": ">=1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/getallheaders.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "A polyfill for getallheaders.",
+            "time": "2016-02-11T07:05:27+00:00"
+        },
+        {
             "name": "react/promise",
             "version": "v2.7.0",
             "source": {
@@ -9724,23 +9758,23 @@
         },
         {
             "name": "sonata-project/media-bundle",
-            "version": "dev-bugfix-3.11.1",
+            "version": "dev-bugfix-3.16.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cap-collectif/SonataMediaBundle.git",
-                "reference": "d93211e614d88c34a6b3f6035e54f395c3a505df"
+                "reference": "762fee514e4077510495ca49fc5bf0123b8a2e48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/SonataMediaBundle/zipball/d93211e614d88c34a6b3f6035e54f395c3a505df",
-                "reference": "d93211e614d88c34a6b3f6035e54f395c3a505df",
+                "url": "https://api.github.com/repos/cap-collectif/SonataMediaBundle/zipball/762fee514e4077510495ca49fc5bf0123b8a2e48",
+                "reference": "762fee514e4077510495ca49fc5bf0123b8a2e48",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/psr7": "^1.0",
                 "imagine/imagine": "^0.6 || ^0.7",
                 "jms/serializer-bundle": "^1.0 || ^2.0",
-                "knplabs/gaufrette": "^0.3 || ^0.4 || ^0.5",
+                "knplabs/gaufrette": "^0.3 || ^0.4 || ^0.5 || ^0.6 || ^0.7",
                 "kriswallsmith/buzz": "^0.15 || ^0.16",
                 "php": "^5.6 || ^7.0",
                 "psr/log": "^1.0",
@@ -9774,7 +9808,7 @@
                 "liip/imagine-bundle": "<1.9",
                 "sonata-project/block-bundle": "<3.11 || >=4.0",
                 "sonata-project/classification-bundle": "<3.0 || >= 5.0",
-                "sonata-project/formatter-bundle": "<3.2",
+                "sonata-project/formatter-bundle": "<3.4",
                 "sonata-project/notification-bundle": "<3.3",
                 "sonata-project/seo-bundle": "<2.1 || >=3.0",
                 "symfony/monolog-bundle": "<2.4"
@@ -9790,7 +9824,7 @@
                 "sonata-project/block-bundle": "^3.11",
                 "sonata-project/datagrid-bundle": "^2.3",
                 "sonata-project/doctrine-orm-admin-bundle": "^3.4",
-                "sonata-project/formatter-bundle": "^3.4",
+                "sonata-project/formatter-bundle": "^3.4 || ^4.0",
                 "sonata-project/notification-bundle": "^3.3",
                 "sonata-project/seo-bundle": "^2.5",
                 "symfony/phpunit-bridge": "^4.0",
@@ -9850,9 +9884,9 @@
                 "youtube"
             ],
             "support": {
-                "source": "https://github.com/cap-collectif/SonataMediaBundle/tree/bugfix-3.11-1-clone"
+                "source": "https://github.com/cap-collectif/SonataMediaBundle/tree/bugfix-3.16.3"
             },
-            "time": "2018-06-14T15:51:01+00:00"
+            "time": "2018-11-23T09:24:35+00:00"
         },
         {
             "name": "sonata-project/notification-bundle",
@@ -15476,9 +15510,9 @@
             "package": "symfony/symfony"
         },
         {
-            "alias": "3.13.1",
-            "alias_normalized": "3.13.1.0",
-            "version": "dev-bugfix-3.11.1",
+            "alias": "3.16.3",
+            "alias_normalized": "3.16.3.0",
+            "version": "dev-bugfix-3.16.3",
             "package": "sonata-project/media-bundle"
         },
         {
@@ -15501,7 +15535,6 @@
         "sonata-project/datagrid-bundle": 20,
         "friendsofsymfony/elastica-bundle": 20,
         "jms/serializer": 20,
-        "infinite-networks/form-bundle": 20,
         "hslavich/simplesamlphp-bundle": 20,
         "cocur/slugify": 20,
         "phayes/geophp": 20,
