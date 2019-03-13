@@ -46,7 +46,10 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
 
       return (
         <React.Fragment>
-          <Button bsStyle="link" onClick={this.handleShow} className="p-0">
+          <Button
+            bsStyle="link"
+            onClick={this.handleShow}
+            className="p-0 project-districts__modal-link">
             {project.districts[0] && project.districts[0].name}{' '}
             <FormattedMessage
               id="and-count-other-areas"
