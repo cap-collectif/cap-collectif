@@ -82,12 +82,11 @@
                             {% endif %}<span>,</span>
                             {{ 'project.show.on_date' | trans({'%date%': project.publishedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
                             {% if project.districts | length > 0 %}
-                                {% include '@CapcoApp/Project/show_districts.html.twig' with {'project': project} %}
+                                <span>· </span>  
                                 {{ react_render_component('ProjectHeaderDistrictsApp', {
                                     'props': {
                                         'projectId': project.id,
-                                    },
-                                    
+                                    }
                                 })}}
                             {% endif %}
                         {% endspaceless %}
