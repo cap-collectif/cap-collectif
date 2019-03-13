@@ -363,7 +363,7 @@ class StepAdmin extends CapcoAdmin
                     ])
                     ->add('defaultSort', 'choice', [
                         'label' => 'admin.fields.step.default_sort',
-                        'choices' => SelectionStep::$sortLabels,
+                        'choices' => CollectStep::$sortLabels,
                         'translation_domain' => 'CapcoAppBundle',
                         'required' => true,
                     ]);
