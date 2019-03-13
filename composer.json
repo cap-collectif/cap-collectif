@@ -147,7 +147,7 @@
         "caxy/htmldiff-bundle": "~0.1.2",
         "ocramius/proxy-manager": "2.0.2",
         "limenius/react-bundle": "^1.0",
-        "cocur/slugify": "@dev",
+        "cocur/slugify": "~3.2",
         "phayes/geoPHP": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
         "php-translation/symfony-bundle": "^0.4.0",
         "php-translation/loco-adapter": "^0.4.0",

@@ -443,16 +443,16 @@
         },
         {
             "name": "cocur/slugify",
-            "version": "3.1.x-dev",
+            "version": "v3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cocur/slugify.git",
-                "reference": "b2ccf7b735f4f3df3979aef2e1ebf8e19ca772f7"
+                "reference": "d41701efe58ba2df9cae029c3d21e1518cc6780e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/b2ccf7b735f4f3df3979aef2e1ebf8e19ca772f7",
-                "reference": "b2ccf7b735f4f3df3979aef2e1ebf8e19ca772f7",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/d41701efe58ba2df9cae029c3d21e1518cc6780e",
+                "reference": "d41701efe58ba2df9cae029c3d21e1518cc6780e",
                 "shasum": ""
             },
             "require": {
@@ -470,9 +470,9 @@
                 "pimple/pimple": "~1.1",
                 "plumphp/plum": "~0.1",
                 "silex/silex": "~1.3",
-                "symfony/config": "~2.4|~3.0",
-                "symfony/dependency-injection": "~2.4|~3.0",
-                "symfony/http-kernel": "~2.4|~3.0",
+                "symfony/config": "~2.4|~3.0|~4.0",
+                "symfony/dependency-injection": "~2.4|~3.0|~4.0",
+                "symfony/http-kernel": "~2.4|~3.0|~4.0",
                 "twig/twig": "~1.26|~2.0",
                 "zendframework/zend-modulemanager": "~2.2",
                 "zendframework/zend-servicemanager": "~2.2",
@@ -504,7 +504,7 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2018-01-22T09:00:48+00:00"
+            "time": "2019-01-31T20:38:55+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -3995,6 +3995,7 @@
                     "Infinite\\FormBundle\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -15536,7 +15537,6 @@
         "friendsofsymfony/elastica-bundle": 20,
         "jms/serializer": 20,
         "hslavich/simplesamlphp-bundle": 20,
-        "cocur/slugify": 20,
         "phayes/geophp": 20,
         "webonyx/graphql-php": 20,
         "overblog/graphql-bundle": 20,
