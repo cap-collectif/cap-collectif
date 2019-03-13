@@ -63,7 +63,7 @@ export const EventListPaginated = (props: Props) => {
     return false;
   };
 
-  if (!query || !query.events || query.events.totalCount === 0) {
+  if (!query.events || query.events.totalCount === 0) {
     return (
       <p className={classNames({ 'p--centered': true, 'mb-40': true })}>
         <FormattedMessage id="event.empty" />
