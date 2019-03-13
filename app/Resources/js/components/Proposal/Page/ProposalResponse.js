@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
 import ProposalMediaResponse from './ProposalMediaResponse';
 import TitleInvertContrast from '../../Ui/Typography/TitleInvertContrast';
 import type { ProposalResponse_response } from './__generated__/ProposalResponse_response.graphql';
@@ -38,6 +39,19 @@ export class ProposalResponse extends React.PureComponent<Props> {
     return null;
   };
 
+  getEmptyResponseValue = () => {
+    const { response } = this.props;
+
+    return (
+      <div className="block">
+        <h3 className="h3">{response.question.title}</h3>
+        <p className="excerpt">
+          <FormattedMessage id="project.votes.widget.no_value" />
+        </p>
+      </div>
+    );
+  };
+
   render() {
     const response = this.props.response;
     const questionType = response.question.type;
@@ -61,7 +75,7 @@ export class ProposalResponse extends React.PureComponent<Props> {
       (questionType === 'editor' && response.value === '<p><br></p>') ||
       ((!response.value || response.value.length === 0) && questionType !== 'medias')
     ) {
-      return null;
+      return this.getEmptyResponseValue();
     }
 
     if (responseWithJSON && response.value) {
@@ -70,7 +84,7 @@ export class ProposalResponse extends React.PureComponent<Props> {
       const otherValue = responseValue.other;
 
       if (!otherValue && labelsValue.length === 0) {
-        return null;
+        return this.getEmptyResponseValue();
       }
     }
 
