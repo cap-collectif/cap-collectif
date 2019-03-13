@@ -1,9 +1,11 @@
 // @flow
 import * as React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, ListGroupItem } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
 
 import InlineList from '../Ui/List/InlineList';
+import ListGroupFlush from '../Ui/List/ListGroupFlush';
 import type { ProjectHeaderDistrictsList_project } from './__generated__/ProjectHeaderDistrictsList_project.graphql';
 
 type Props = {
@@ -31,29 +33,50 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
     const { project } = this.props;
     const { show } = this.state;
 
-    if (project.districts && project.districts.length <= 3) {
+    if (project.districts) {
+      if (project.districts.length <= 3) {
+        return (
+          <InlineList separator="," className="d-i">
+            {project.districts.map((district, key) => (
+              <li key={key}>{district && district.name}</li>
+            ))}
+          </InlineList>
+        );
+      }
+
       return (
-        <InlineList separator="," className="d-i">
-          {project.districts.map((district, key) => (
-            <li key={key}>{district && district.name}</li>
-          ))}
-        </InlineList>
+        <React.Fragment>
+          <Button bsStyle="link" onClick={this.handleShow} className="p-0">
+            {project.districts[0] && project.districts[0].name}{' '}
+            <FormattedMessage
+              id="and-count-other-areas"
+              values={{
+                count: project.districts.length - 1,
+              }}
+            />
+          </Button>
+          <Modal show={show} onHide={this.handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>
+                <FormattedMessage
+                  id="count-area"
+                  values={{
+                    count: project.districts.length,
+                  }}
+                />
+              </Modal.Title>
+            </Modal.Header>
+            <ListGroupFlush>
+              {project.districts.map((district, key) => (
+                <ListGroupItem key={key}>{district && district.name}</ListGroupItem>
+              ))}
+            </ListGroupFlush>
+          </Modal>
+        </React.Fragment>
       );
     }
 
-    return (
-      <div>
-        <Button bsStyle="link" onClick={this.handleShow}>
-          lorem
-        </Button>
-        <Modal show={show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        </Modal>
-      </div>
-    );
+    return null;
   }
 }
 
