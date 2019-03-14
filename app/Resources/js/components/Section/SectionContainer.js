@@ -20,16 +20,20 @@ type Props = {
 
 const MetricsRow = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
 `;
 
-const MetricsBox = styled.div`
+const MetricsBox = styled.div.attrs({
+  className: 'col-xs-6 col-md-4 col-lg-2',
+})`
   background-color: white;
   padding: 20px;
   box-shadow: 1px 2px 0 #0808081a;
   border-radius: 3px;
   min-width: 225px;
+  margin-bottom: 15px;
+  margin-left: 10px;
 `;
 
 export class SectionContainer extends Component<Props> {
@@ -84,7 +88,7 @@ export class SectionContainer extends Component<Props> {
                 props.contributions !== null
               ) {
                 return (
-                  <MetricsRow>
+                  <MetricsRow className="row">
                     {metricsToDisplayBasics && (
                       <React.Fragment>
                         <MetricsBox>
