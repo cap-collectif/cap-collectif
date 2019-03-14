@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Capco\AppBundle\Behat\Traits\AdminDashboardTait;
 use Capco\AppBundle\Behat\Traits\AdminGeneralTait;
 use Capco\AppBundle\Elasticsearch\Client;
 use Elastica\Snapshot;
@@ -59,6 +60,7 @@ class ApplicationContext extends UserContext
     use CookiesTrait;
     use AdminEventTrait;
     use AdminGeneralTait;
+    use AdminDashboardTait;
 
     protected $dbContainer;
     protected $cookieConsented;
