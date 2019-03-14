@@ -60,6 +60,7 @@ export class ProposalResponse extends React.PureComponent<Props> {
       questionType === 'radio' ||
       questionType === 'checkbox' ||
       questionType === 'ranking';
+    const defaultEditorEmptyValue = '<p><br></p>';
     let value = '';
 
     if (questionType === 'section') {
@@ -72,7 +73,7 @@ export class ProposalResponse extends React.PureComponent<Props> {
 
     if (
       (questionType === 'medias' && response.medias && response.medias.length === 0) ||
-      (questionType === 'editor' && response.value === '<p><br></p>') ||
+      (questionType === 'editor' && response.value === defaultEditorEmptyValue) ||
       ((!response.value || response.value.length === 0) && questionType !== 'medias')
     ) {
       return this.getEmptyResponseValue();
