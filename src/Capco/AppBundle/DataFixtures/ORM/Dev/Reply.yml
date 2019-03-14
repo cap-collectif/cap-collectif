@@ -27,6 +27,7 @@ Capco\AppBundle\Entity\Reply:
     author: '@user4'
     questionnaire: '@questionnaire3'
     createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2019-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
   reply5:
     id: 'reply5'
