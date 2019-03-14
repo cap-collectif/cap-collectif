@@ -40,6 +40,7 @@ const StatusPopover = styled(Popover).attrs({
   id: 'event-status-filter',
 })`
   color: black;
+  white-space: nowrap;
 
   .radio {
     margin-top: 0;
