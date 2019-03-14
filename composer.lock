@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd7a8eb1375c238eeb822d7c055f19a8",
+    "content-hash": "24ab7343ecb8f4862834aebbca332e89",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -4389,35 +4389,39 @@
         },
         {
             "name": "jolicode/jolitypo",
-            "version": "1.0.2",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jolicode/JoliTypo.git",
-                "reference": "f04ed9672c2039c4e5a8e1f9cc5ccc97fa757048"
+                "reference": "b88e06ac94738d15dc394aff4537dd12578ff769"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jolicode/JoliTypo/zipball/f04ed9672c2039c4e5a8e1f9cc5ccc97fa757048",
-                "reference": "f04ed9672c2039c4e5a8e1f9cc5ccc97fa757048",
+                "url": "https://api.github.com/repos/jolicode/JoliTypo/zipball/b88e06ac94738d15dc394aff4537dd12578ff769",
+                "reference": "b88e06ac94738d15dc394aff4537dd12578ff769",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "lib-libxml": "*",
                 "org_heigl/hyphenator": "~2.0.3",
-                "php": ">=5.3.0"
+                "php": ">=5.6.0"
             },
             "conflict": {
                 "ext-apc": "3.1.11"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "~2.2.0",
-                "phpunit/phpunit": "~4.5"
+                "phpunit/phpunit": "~4.5",
+                "symfony/framework-bundle": "^2.3|^3.0|^4.0"
             },
             "type": "library",
             "autoload": {
                 "psr-0": {
                     "JoliTypo": "src/"
+                },
+                "psr-4": {
+                    "JoliTypo\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4440,52 +4444,7 @@
                 "smartquote",
                 "typography"
             ],
-            "time": "2017-04-02T17:22:10+00:00"
-        },
-        {
-            "name": "jolicode/jolitypo-bundle",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jolicode/JoliTypoBundle.git",
-                "reference": "b4571660ab3cf32e619ba537c3720a1396d9aaa0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jolicode/JoliTypoBundle/zipball/b4571660ab3cf32e619ba537c3720a1396d9aaa0",
-                "reference": "b4571660ab3cf32e619ba537c3720a1396d9aaa0",
-                "shasum": ""
-            },
-            "require": {
-                "jolicode/jolitypo": "^1.0",
-                "php": ">=5.3.2",
-                "symfony/framework-bundle": "^2.3|^3.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Joli\\TypoBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Damien Alexandre",
-                    "email": "dalexandre@jolicode.com"
-                }
-            ],
-            "description": "JoliTypo integration for your Symfony2 project",
-            "homepage": "https://github.com/jolicode/JoliTypoBundle",
-            "keywords": [
-                "hyphen",
-                "jolitypo",
-                "smartquote",
-                "typography"
-            ],
-            "time": "2016-08-10T09:25:21+00:00"
+            "time": "2018-11-21T11:43:30+00:00"
         },
         {
             "name": "knplabs/gaufrette",
@@ -12884,25 +12843,25 @@
         },
         {
             "name": "jolicode/jolinotif",
-            "version": "v1.3.0",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jolicode/JoliNotif.git",
-                "reference": "105da615c0c4224b4b5cff1fe81a69f718574d8b"
+                "reference": "0b5f786c5f181b3916df616ca191892713257662"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jolicode/JoliNotif/zipball/105da615c0c4224b4b5cff1fe81a69f718574d8b",
-                "reference": "105da615c0c4224b4b5cff1fe81a69f718574d8b",
+                "url": "https://api.github.com/repos/jolicode/JoliNotif/zipball/0b5f786c5f181b3916df616ca191892713257662",
+                "reference": "0b5f786c5f181b3916df616ca191892713257662",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0",
-                "symfony/process": "~2.3|~3.0"
+                "php": ">=7.0",
+                "symfony/process": "~3.3|~4.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "~2.0",
-                "phpunit/phpunit": "~4.8.35"
+                "symfony/phpunit-bridge": "^3.3"
             },
             "bin": [
                 "jolinotif"
@@ -12910,7 +12869,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -12936,7 +12895,52 @@
                 "notification",
                 "windows"
             ],
-            "time": "2018-01-25T11:14:02+00:00"
+            "time": "2019-02-26T18:10:50+00:00"
+        },
+        {
+            "name": "jolicode/jolitypo-bundle",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jolicode/JoliTypoBundle.git",
+                "reference": "b4571660ab3cf32e619ba537c3720a1396d9aaa0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jolicode/JoliTypoBundle/zipball/b4571660ab3cf32e619ba537c3720a1396d9aaa0",
+                "reference": "b4571660ab3cf32e619ba537c3720a1396d9aaa0",
+                "shasum": ""
+            },
+            "require": {
+                "jolicode/jolitypo": "^1.0",
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "^2.3|^3.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Joli\\TypoBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damien Alexandre",
+                    "email": "dalexandre@jolicode.com"
+                }
+            ],
+            "description": "JoliTypo integration for your Symfony2 project",
+            "homepage": "https://github.com/jolicode/JoliTypoBundle",
+            "keywords": [
+                "hyphen",
+                "jolitypo",
+                "smartquote",
+                "typography"
+            ],
+            "time": "2016-08-10T09:25:21+00:00"
         },
         {
             "name": "leanphp/phpspec-code-coverage",

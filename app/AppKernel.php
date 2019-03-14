@@ -57,7 +57,7 @@ class AppKernel extends Kernel
             // feature activation / deactivation
             new Qandidate\Bundle\ToggleBundle\QandidateToggleBundle(),
             // typography concerns
-            new Joli\TypoBundle\JoliTypoBundle(),
+            new JoliTypo\Bridge\Symfony\JoliTypoBundle(),
             // CKEditor
             new \CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
             new \Ivory\CKEditorBundle\IvoryCKEditorBundle(),
