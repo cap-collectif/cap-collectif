@@ -39,7 +39,7 @@ export const ProjectHeaderDistricts = (properties: Props) => {
           }
 
           if (!props) {
-            return <Loader />;
+            return <Loader size={10} />;
           }
 
           const { project } = props;
