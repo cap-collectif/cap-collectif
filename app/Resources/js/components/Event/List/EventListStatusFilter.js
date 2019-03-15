@@ -11,6 +11,7 @@ import colors from '../../../utils/colors';
 
 type Props = {
   status: ?string,
+  screen?: 'mobile' | 'desktop',
 };
 
 type State = {
@@ -19,7 +20,7 @@ type State = {
 
 const StatusButton = styled(Button).attrs({
   bsStyle: 'link',
-  id: 'event-status-filter-button',
+  id: props => `event-status-filter-button-${props.screen || ''}`,
 })`
   text-transform: lowercase;
   font-size: 16px;
@@ -132,9 +133,15 @@ export class EventListStatusFilter extends React.Component<Props, State> {
   };
 
   render() {
+    const { screen } = this.props;
+
     return (
       <div className="position-relative">
-        <StatusButton onClick={this.handleToggle} ref={this.target} aria-expanded={this.state.show}>
+        <StatusButton
+          onClick={this.handleToggle}
+          ref={this.target}
+          aria-expanded={this.state.show}
+          screen={screen}>
           {this.getButtonMessage()}
         </StatusButton>
         <Overlay

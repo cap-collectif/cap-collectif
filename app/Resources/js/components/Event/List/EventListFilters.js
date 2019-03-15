@@ -248,7 +248,7 @@ export class EventListFilters extends React.Component<Props, State> {
         <StatusContainer xs={4} md={5} xsHidden smHidden>
           {/* $FlowFixMe $refType */}
           <EventListCounter query={query} />
-          <EventListStatusFilter />
+          <EventListStatusFilter screen="desktop" />
         </StatusContainer>
         <FiltersWrapper xs={12} md={4} id="event-filters">
           <div className="pull-right">

@@ -20,7 +20,9 @@ exports[`<EventListFilters /> renders correctly 1`] = `
         }
       }
     />
-    <Connect(EventListStatusFilter) />
+    <Connect(EventListStatusFilter)
+      screen="desktop"
+    />
   </EventListFilters__StatusContainer>
   <EventListFilters__FiltersWrapper
     id="event-filters"
@@ -186,7 +188,9 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
         }
       }
     />
-    <Connect(EventListStatusFilter) />
+    <Connect(EventListStatusFilter)
+      screen="desktop"
+    />
   </EventListFilters__StatusContainer>
   <EventListFilters__FiltersWrapper
     id="event-filters"

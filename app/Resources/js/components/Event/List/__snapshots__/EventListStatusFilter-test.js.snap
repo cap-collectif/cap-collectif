@@ -7,6 +7,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
   <EventListStatusFilter__StatusButton
     aria-expanded={false}
     onClick={[Function]}
+    screen="desktop"
   >
     (
     <FormattedMessage
@@ -24,6 +25,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
         "getPopover": [Function],
         "handleToggle": [Function],
         "props": Object {
+          "screen": "desktop",
           "status": "all",
         },
         "refs": Object {},
@@ -39,6 +41,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
           "_renderer": ReactShallowRenderer {
             "_context": Object {},
             "_element": <EventListStatusFilter
+              screen="desktop"
               status="all"
             />,
             "_forcedUpdate": false,
@@ -50,6 +53,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
               <EventListStatusFilter__StatusButton
                 aria-expanded={false}
                 onClick={[Function]}
+                screen="desktop"
               >
                 <React.Fragment>
                   (
@@ -353,6 +357,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
   <EventListStatusFilter__StatusButton
     aria-expanded={false}
     onClick={[Function]}
+    screen="mobile"
   >
     <FormattedMessage
       id="theme.show.status.future"
@@ -368,6 +373,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
         "getPopover": [Function],
         "handleToggle": [Function],
         "props": Object {
+          "screen": "mobile",
           "status": "ongoing-and-future",
         },
         "refs": Object {},
@@ -383,6 +389,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
           "_renderer": ReactShallowRenderer {
             "_context": Object {},
             "_element": <EventListStatusFilter
+              screen="mobile"
               status="ongoing-and-future"
             />,
             "_forcedUpdate": false,
@@ -394,6 +401,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
               <EventListStatusFilter__StatusButton
                 aria-expanded={false}
                 onClick={[Function]}
+                screen="mobile"
               >
                 <FormattedMessage
                   id="theme.show.status.future"

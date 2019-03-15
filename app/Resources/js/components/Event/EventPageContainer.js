@@ -52,7 +52,7 @@ export class EventPageContainer extends React.Component<Props> {
               <div className="d-flex align-items-center">
                 {/* $FlowFixMe $refType */}
                 <EventListCounter query={query} />
-                <EventListStatusFilter />
+                <EventListStatusFilter screen="mobile" />
               </div>
             </div>
           </div>

@@ -12,12 +12,12 @@ describe('<EventListStatusFilters />', () => {
   });
 
   it('renders correctly with ongoing-and-future status', () => {
-    const wrapper = shallow(<EventListStatusFilter status="ongoing-and-future" />);
+    const wrapper = shallow(<EventListStatusFilter screen="mobile" status="ongoing-and-future" />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly with all status', () => {
-    const wrapper = shallow(<EventListStatusFilter status="all" />);
+    const wrapper = shallow(<EventListStatusFilter screen="desktop" status="all" />);
     expect(wrapper).toMatchSnapshot();
   });
 });
