@@ -27,7 +27,7 @@ const MetricsRow = styled.div`
 const MetricsBox = styled.div.attrs({
   className: 'col-xs-6 col-md-4 col-lg-2',
 })`
-  background-color: white;
+  background-color: ${color => color.color};
   padding: 20px;
   box-shadow: 1px 2px 0 #0808081a;
   border-radius: 3px;
@@ -46,6 +46,12 @@ export class SectionContainer extends Component<Props> {
       metricsToDisplayEvents,
       metricsToDisplayProjects,
     } = this.props;
+
+    const metricsSection = document.getElementById('metrics');
+    const sectionBgColor = window
+      .getComputedStyle(metricsSection, null)
+      .getPropertyValue('background-color');
+    const colorToDisplay = sectionBgColor === 'rgb(246, 246, 246)' ? 'white' : '#F6F6F6';
 
     return (
       <div className="row">
@@ -91,7 +97,7 @@ export class SectionContainer extends Component<Props> {
                   <MetricsRow className="row">
                     {metricsToDisplayBasics && (
                       <React.Fragment>
-                        <MetricsBox>
+                        <MetricsBox color={colorToDisplay}>
                           <span className="metrics-number">
                             <i className="cap-file-1" />
                             {props.contributions}
@@ -100,7 +106,7 @@ export class SectionContainer extends Component<Props> {
                             <FormattedMessage id="capco.section.metrics.contributions" />
                           </p>
                         </MetricsBox>
-                        <MetricsBox>
+                        <MetricsBox color={colorToDisplay}>
                           <span className="metrics-number">
                             <i className="cap-user-2" />
                             {props.contributors.totalCount}
@@ -112,7 +118,7 @@ export class SectionContainer extends Component<Props> {
                       </React.Fragment>
                     )}
                     {metricsToDisplayBasics && props.votes && props.votes.totalCount > 0 && (
-                      <MetricsBox>
+                      <MetricsBox color={colorToDisplay}>
                         <span className="metrics-number">
                           <i className="cap-hand-like-2" />
                           {props.votes.totalCount}
@@ -123,7 +129,7 @@ export class SectionContainer extends Component<Props> {
                       </MetricsBox>
                     )}
                     {metricsToDisplayEvents && props.events && props.events.totalCount > 0 && (
-                      <MetricsBox>
+                      <MetricsBox color={colorToDisplay}>
                         <span className="metrics-number">
                           <i className="cap-calendar-1" />
                           {props.events.totalCount}
@@ -134,7 +140,7 @@ export class SectionContainer extends Component<Props> {
                       </MetricsBox>
                     )}
                     {metricsToDisplayProjects && (
-                      <MetricsBox>
+                      <MetricsBox color={colorToDisplay}>
                         <span className="metrics-number">
                           <i className="cap-folder-2" />
                           {props.projects.totalCount}

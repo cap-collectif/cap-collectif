@@ -160,7 +160,7 @@ class HomepageController extends Controller
             'groups' => ['Section'],
         ]);
 
-        return ['section' => $section, 'props' => $props];
+        return ['props' => $props];
     }
 
     /**
