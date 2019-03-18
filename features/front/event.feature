@@ -20,8 +20,7 @@ Scenario: Events can be filtered by projects
   And I select "project1" from react "#EventListFilters-filter-project"
   And I wait 1 seconds
   Then I should see 3 ".event" elements
-  And I click the "#event-status-filter-button-desktop" element
-  And I click the "#finished-events" element
+  And I select "finished" from react "#EventListFilters-filter-status"
   And I wait 1 seconds
   Then I should see 1 ".event" elements
 
@@ -42,8 +41,7 @@ Scenario: Archived events can be filtered by theme
   And I wait ".event" to appear on current page
   And I click the "#event-button-filter" element
   And I select "Justice" from react "#EventListFilters-filter-theme"
-  And I click the "#event-status-filter-button-desktop" element
-  And I click the "#finished-events" element
+  And I select "finished" from react "#EventListFilters-filter-status"
   And I wait 1 seconds
   Then I should see 1 ".event" elements
   And I should see "evenementPasseSansDateDeFin"
@@ -62,8 +60,8 @@ Scenario: Events can be filtered by title
 Scenario: Archived events can be filtered by title
   Given I visited "events page"
   And I wait ".event" to appear on current page
-  And I click the "#event-status-filter-button-desktop" element
-  And I click the "#finished-events" element
+  And I click the "#event-button-filter" element
+  And I select "finished" from react "#EventListFilters-filter-status"
   When I fill in the following:
     | event-search-input | ParisWeb2014 |
   And I wait 1 seconds

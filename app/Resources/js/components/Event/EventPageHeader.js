@@ -11,7 +11,7 @@ export class EventPageHeader extends React.Component<Props> {
     const { eventPageTitle } = this.props;
     return (
       <div className="container text-center">
-        <h1 className="m-0">
+        <h1>
           {eventPageTitle ? (
             <FormattedHTMLMessage id={eventPageTitle} />
           ) : (
