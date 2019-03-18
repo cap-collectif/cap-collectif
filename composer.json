@@ -105,7 +105,7 @@
         "sonata-project/admin-bundle": "^3.1.0",
         "sonata-project/doctrine-orm-admin-bundle": "^3.0",
         "sonata-project/block-bundle": "3.12.1",
-        "sonata-project/media-bundle": "dev-bugfix-3.11.1 as 3.13.1",
+        "sonata-project/media-bundle": "dev-bugfix-3.16.3 as 3.16.3",
         "sonata-project/user-bundle": "^4.0",
         "sonata-project/datagrid-bundle": "~2.2@dev",
         "sonata-project/exporter": "1.8.0",
