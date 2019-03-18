@@ -162,7 +162,6 @@
         "imagine/imagine": "^0.7.1",
         "liip/imagine-bundle": "~2.1",
         "knplabs/knp-menu-bundle": "2.2.1",
-        "sensio/generator-bundle": "3.1.7",
         "box/spout": "^2.7",
         "webfactory/icu-translation-bundle": "dev-master",
         "ruflin/elastica": "~5",
@@ -192,18 +191,18 @@
         "pyrech/composer-changelogs": "^1.5",
         "tonicforhealth/behat-parallel-scenario": "dev-master#65b5b4d1130d3c9c16097d172882781e839ecfc5",
         "behat/gherkin": "^4.4",
-        "phpstan/phpstan": "^0.8.5",
         "sensiolabs/behat-page-object-extension": "dev-master#0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
         "sjparkinson/behat-file-system-context": "^0.1.0",
-        "phpstan/phpstan-doctrine": "^0.8.0",
+        "phpstan/phpstan-doctrine": "^0.11.0",
         "alexandresalome/mailcatcher": "dev-master#e5bff236a6560d5314ea9bba32bcea6e3588b40d",
-        "lookyman/phpstan-symfony": "^0.4.1",
         "phpspec/phpspec": "^5.0",
         "leanphp/phpspec-code-coverage": "dev-patch-1",
         "bossa/phpspec2-expect": "@dev",
         "phpunit/phpunit": "^7.3",
         "bex/behat-step-time-logger": "^1.0",
-        "friendsofphp/php-cs-fixer": "^2.13"
+        "friendsofphp/php-cs-fixer": "^2.13",
+        "phpstan/phpstan-symfony": "^0.11.2",
+        "phpstan/phpstan": "^0.11.4"
     },
     "scripts": {
         "post-install-cmd": [
