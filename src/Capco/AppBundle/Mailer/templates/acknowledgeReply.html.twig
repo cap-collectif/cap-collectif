@@ -1,113 +1,51 @@
-{% extends "@CapcoMail/standardLayout.html.twig" %}
-
-{% set siteName = capco_site_parameter_value('global.site.fullname') %}
-{% set nowDate =  "now"|localizeddate('long', 'none', 'fr_FR')  %}
-{% set nowHour =  "now"|date('H') ~ 'h' ~ "now"|date('i')  %}
-{% if endAt is not null %}
-    {% set endDate =  endAt|localizeddate('long', 'none', 'fr_FR')  %}
-{% endif %}
-
-{% block html_title %}
-    {{ 'acknowledgement-of-receipt'|trans({},'CapcoAppBundle') }}
-{% endblock %}
-
-{% block header_mail %}
-    <tr>
-        <td class="resp-full-td" valign="top" style="margin:0 20px; texlign:center;">
-            <div style="text-align: center;">
-                <a class="resp-punchline" href="#" style="color:#337ab7; ot-autline:none; text-decoration:none; font-size:20px; font-family:'Open Sans', helvetica, arial, sans-serif; text-align:center;">
-                    {{ siteName }}
-                </a>
-                <h1 class="resp-punchline" style="color:#000000; outline:none; font-size:22px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:500; text-align:center;">
-                    {{ 'acknowledgment-of-receipt'|trans({},'CapcoAppBundle') }}
-                </h1>
-                <span class="resp-punchline" style="color:#999999; outline:none; font-size:20px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; text-align:center;">
-                    {{ nowDate }}
-                </span>
-            </div>
-        </td>
-    </tr>
-{% endblock %}
-
-{% block core_mail %}
+{% block body_text %}
     {% autoescape false %}
-    <style type="text/css">
-        .bold-text {
-            font-weight: bold;
-        }
-
-        .btn {
-            border: 1px solid #8a8a8a;
-            padding: 5px;
-            border-radius: 4px;
-            text-decoration: none;
-            color: black;
-            background-color: #f6f6f6;
-        }
-
-        .btn:hover {
-            border: 1px solid black;
-            background-color: #dedede;
-        }
-    </style>
-    <p class="bold-text">
-        {{ 'hello-username'|trans({
+    <p>
+        {{ 'reply.acknowledgement.hello'|trans({
             '%username%' : reply.author.username
         }, 'CapcoAppBundle') }}
     </p>
-
-    {% if not isUpdated %}
-        <p>
-            {{ 'thank-you-for-participating-in-the-project'|trans({
-                '%projectTitle%': project.title,
-                '%projectLink%': stepUrl
-            }, 'CapcoAppBundle') }}
-        </p>
-    {% endif %}
- 
-    {% if isUpdated %}
-        <p>
-            {{ 'you-have-changed-your-answer-to-the-question'|trans({
-                '%answerChangeDate%': nowDate,
-                '%answerChangeTime%': nowHour,
-                '%surveyTitle%': step.title
-            }, 'CapcoAppBundle') }}
-        </p>
-    {% else %}
-        <p>
-            {{ 'your-answer-to-the-survey-have-been-registered-on-date-at-time'|trans({
-                '%questionnaireDate%': nowDate,
-                '%questionnaireTime%': nowHour,
-                '%surveyName%': step.title
-            }, 'CapcoAppBundle') }}
-        </p>
-    {% endif %}
-
-    {% if not isUserConfirmed %}
-        {{ 'unpublished-contribution-help-text'|trans({}, 'CapcoAppBundle') }}
-        {{ 'user.register.confirmation_message.please_validate'|trans({}, 'CapcoAppBundle') }}
-
-        <p>
-            <a href="{{ confirmationUrl }}"><strong>{{ 'user.register.confirmation_message.validate'|trans({}, 'CapcoAppBundle') }}</strong></a>
-        </p>
-    {% endif %}
-
-    {% if endAt is not null %}
-        <p>
-            {{ 'you-can-modify-or-delete-your-answer-until-date'|trans({
-                '%surveyEndDate%': endDate
-            }, 'CapcoAppBundle') }}
-        </p>
-    {% endif %}
-
     <p>
-        <a href="{{ stepUrl }}">{{ 'access-my-answer'|trans({}, 'CapcoAppBundle') }}</a>
+        {{ 'reply.acknowledgement.thx'|trans({
+            '%projectname%': project.title
+        }, 'CapcoAppBundle') }}
     </p>
+    <p>
+        {{ 'reply.acknowledgement.replies'|trans({}, 'CapcoAppBundle') }}
+    </p>
+
+    {% for response in reply.responses if response.question.inputType != 'section' %}
+        <p>
+            <strong>{{ response.question.title }}</strong><br>
+            {% if response.type == 'value' and (response.value is null or (response.value is iterable and response.value | length == 0)) %}
+                <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
+            {% elseif response.question.inputType == 'editor' %}
+                <span>{{ response.value | raw }}</span>
+            {% elseif response.question.inputType == 'ranking' %}
+                {% if response.value.labels | length > 0 %}
+                    <ol>
+                        {% for label in response.value.labels %}
+                            <li>{{ label }}</li>
+                        {% endfor %}
+                    </ol>
+                {% else %}
+                    <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
+                {% endif %}
+            {% elseif response.type == 'value' and response.value is iterable %}
+                {% set labels = response.value.labels %}
+                {% if response.value.other is defined and response.value.other is not null %}
+                    {% set labels = labels | merge([response.value.other]) %}
+                {% endif %}
+                {% if labels | length > 0 %}
+                    <span>{{ labels | join(', ') }}</span>
+                {% else %}
+                    <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
+                {% endif %}
+            {% elseif response.type == 'value' %}
+                <span>{{ response.value }}</span>
+            {% endif %}
+        </p>
+    {% endfor %}
     {% endautoescape %}
 {% endblock %}
-
-{% block footer_mail %}
-    <span style="font-size:13px; font-family:'Open Sans', helvetica, arial, sans-serif; color:#999999">
-        {{ 'notification.email.external_footer'|trans({'{sitename}': siteName}, 'CapcoAppBundle') | raw }}
-    </span>
-{% endblock %}
+{% block body_html %}{% endblock %}

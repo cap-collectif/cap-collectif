@@ -1,7 +1,9 @@
+# www.robotstxt.org/
+# www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
 User-agent: *
 Allow: /
 Disallow: /_profiler/
 Disallow: /_wdt/
 Disallow: /_configurator/
 Disallow: /admin/
-Disallow: /media/
+Disallow /secure/
