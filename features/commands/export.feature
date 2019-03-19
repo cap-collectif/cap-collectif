@@ -5,32 +5,6 @@ Background:
   Given feature "export" is enabled
 
 @parallel-scenario
-Scenario: Admin wants to export projects contributors
-  Given I run "capco:export:projects-contributors"
-  Then the command exit code should be 0
-  And exported "csv" file with name "participants_appel-a-projets.csv" should match its snapshot
-  And exported "csv" file with name "participants_bp-avec-vote-classement.csv" should match its snapshot
-  And exported "csv" file with name "participants_budget-avec-vote-limite.csv" should match its snapshot
-  And exported "csv" file with name "participants_budget-participatif-rennes.csv" should match its snapshot
-  And exported "csv" file with name "participants_croissance-innovation-disruption.csv" should match its snapshot
-  And exported "csv" file with name "participants_depot-avec-selection-vote-budget.csv" should match its snapshot
-  And exported "csv" file with name "participants_depot-avec-selection-vote-simple.csv" should match its snapshot
-  And exported "csv" file with name "participants_le-p16-un-projet-a-base-de-riz.csv" should match its snapshot
-  And exported "csv" file with name "participants_project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement.csv" should match its snapshot
-  And exported "csv" file with name "participants_project-pour-la-force-visible-par-mauriau-seulement.csv" should match its snapshot
-  And exported "csv" file with name "participants_projet-a-venir.csv" should match its snapshot
-  And exported "csv" file with name "participants_projet-avec-questionnaire.csv" should match its snapshot
-  And exported "csv" file with name "participants_projet-avec-une-etape-de-participation-en-continue.csv" should match its snapshot
-  And exported "csv" file with name "participants_projet-de-loi-renseignement.csv" should match its snapshot
-  And exported "csv" file with name "participants_projet-sans-etapes-participatives.csv" should match its snapshot
-  And exported "csv" file with name "participants_projet-vide.csv" should match its snapshot
-  And exported "csv" file with name "participants_questions-responses.csv" should match its snapshot
-  And exported "csv" file with name "participants_qui-doit-conquerir-le-monde-visible-par-les-admins-seulement.csv" should match its snapshot
-  And exported "csv" file with name "participants_strategie-technologique-de-letat-et-services-publics.csv" should match its snapshot
-  And exported "csv" file with name "participants_transformation-numerique-des-relations.csv" should match its snapshot
-  And exported "csv" file with name "participants_un-avenir-meilleur-pour-les-nains-de-jardins-custom-access.csv" should match its snapshot
-
-@parallel-scenario
 Scenario: Admin wants to export consultation steps
   Given I run "capco:export:consultation"
   Then the command exit code should be 0

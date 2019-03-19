@@ -1,5 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalResponse /> should render correct with empty answer 1`] = `""`;
+exports[`<ProposalResponse /> should render correct with empty answer 1`] = `
+<div
+  className="block"
+>
+  <h3
+    className="h3"
+  >
+    Question invisible?
+  </h3>
+  <p
+    className="excerpt"
+  >
+    <FormattedMessage
+      id="project.votes.widget.no_value"
+      values={Object {}}
+    />
+  </p>
+</div>
+`;
 
-exports[`<ProposalResponse /> should render correct with question type number 1`] = `""`;
+exports[`<ProposalResponse /> should render correct with question type number 1`] = `
+<div
+  className="block"
+>
+  <h3
+    className="h3"
+  >
+    Question type number ?
+  </h3>
+  <p
+    className="excerpt"
+  >
+    <FormattedMessage
+      id="project.votes.widget.no_value"
+      values={Object {}}
+    />
+  </p>
+</div>
+`;

@@ -3,15 +3,14 @@
 exports[`<EventListFilters /> renders correctly 1`] = `
 <Row
   bsClass="row"
-  className="mb-10"
+  className="align-items-center d-flex flex-wrap"
   componentClass="div"
 >
-  <Col
-    bsClass="col"
-    className="pl-0"
-    componentClass="div"
-    md={4}
-    xs={12}
+  <EventListFilters__StatusContainer
+    md={5}
+    smHidden={true}
+    xs={4}
+    xsHidden={true}
   >
     <ForwardRef(Relay(EventListCounter))
       query={
@@ -21,11 +20,11 @@ exports[`<EventListFilters /> renders correctly 1`] = `
         }
       }
     />
-  </Col>
-  <Col
-    bsClass="col"
-    className="pl-0"
-    componentClass="div"
+    <Connect(EventListStatusFilter)
+      screen="desktop"
+    />
+  </EventListFilters__StatusContainer>
+  <EventListFilters__FiltersWrapper
     id="event-filters"
     md={4}
     xs={12}
@@ -37,6 +36,14 @@ exports[`<EventListFilters /> renders correctly 1`] = `
         filterCount={2}
         overlay={
           <div>
+            <p>
+              <b>
+                <FormattedMessage
+                  id="filter-by"
+                  values={Object {}}
+                />
+              </b>
+            </p>
             <form>
               <Col
                 bsClass="col"
@@ -45,58 +52,27 @@ exports[`<EventListFilters /> renders correctly 1`] = `
               >
                 <div>
                   <div
-                    className="d-flex justify-content-end"
+                    className="visible-xs-block visible-sm-block"
                   >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="btn--outline btn-dark-gray mb-10"
-                      disabled={false}
-                      onClick={[MockFunction]}
-                    >
-                      <FormattedMessage
-                        id="reset-filters"
-                        values={Object {}}
-                      />
-                    </Button>
+                    <Field
+                      addonAfter={
+                        <i
+                          className="cap cap-magnifier"
+                        />
+                      }
+                      aria-autocomplete="list"
+                      aria-controls="event-search-input-listbox"
+                      aria-haspopup="true"
+                      clearable={true}
+                      component={[Function]}
+                      groupClassName="event-search-group pull-right"
+                      id="event-search-input"
+                      name="search"
+                      placeholder="proposal-search"
+                      role="combobox"
+                      type="text"
+                    />
                   </div>
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <Field
-                    aria-autocomplete="list"
-                    aria-controls="EventListFilters-filter-status-listbox"
-                    aria-haspopup="true"
-                    clearable={false}
-                    component={[Function]}
-                    id="EventListFilters-filter-status"
-                    name="status"
-                    options={
-                      Array [
-                        Object {
-                          "label": "all-events",
-                          "value": "all",
-                        },
-                        Object {
-                          "label": "ongoing-and-future",
-                          "value": "ongoing-and-future",
-                        },
-                        Object {
-                          "label": "finished",
-                          "value": "finished",
-                        },
-                      ]
-                    }
-                    placeholder="voting-status"
-                    role="combobox"
-                  />
                 </div>
               </Col>
               <Col
@@ -129,18 +105,46 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                   />
                 </div>
               </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="link"
+                    className="p-0"
+                    disabled={false}
+                    onClick={[Function]}
+                  >
+                    <FormattedMessage
+                      id="reset-filters"
+                      values={Object {}}
+                    />
+                  </Button>
+                </div>
+              </Col>
             </form>
           </div>
         }
         type="event"
       />
     </div>
-  </Col>
+    <Connect(EventListToggleMobileViewBtn)
+      isMobileListView={true}
+      onChange={[Function]}
+      showMapButton={true}
+    />
+  </EventListFilters__FiltersWrapper>
   <Col
     bsClass="col"
     componentClass="div"
-    md={4}
+    md={3}
     smHidden={true}
+    xs={4}
     xsHidden={true}
   >
     <form
@@ -167,15 +171,14 @@ exports[`<EventListFilters /> renders correctly 1`] = `
 exports[`<EventListFilters /> renders correctly without filters 1`] = `
 <Row
   bsClass="row"
-  className="mb-10"
+  className="align-items-center d-flex flex-wrap"
   componentClass="div"
 >
-  <Col
-    bsClass="col"
-    className="pl-0"
-    componentClass="div"
-    md={4}
-    xs={12}
+  <EventListFilters__StatusContainer
+    md={5}
+    smHidden={true}
+    xs={4}
+    xsHidden={true}
   >
     <ForwardRef(Relay(EventListCounter))
       query={
@@ -185,11 +188,11 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
         }
       }
     />
-  </Col>
-  <Col
-    bsClass="col"
-    className="pl-0"
-    componentClass="div"
+    <Connect(EventListStatusFilter)
+      screen="desktop"
+    />
+  </EventListFilters__StatusContainer>
+  <EventListFilters__FiltersWrapper
     id="event-filters"
     md={4}
     xs={12}
@@ -201,6 +204,14 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
         filterCount={2}
         overlay={
           <div>
+            <p>
+              <b>
+                <FormattedMessage
+                  id="filter-by"
+                  values={Object {}}
+                />
+              </b>
+            </p>
             <form>
               <Col
                 bsClass="col"
@@ -209,58 +220,27 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
               >
                 <div>
                   <div
-                    className="d-flex justify-content-end"
+                    className="visible-xs-block visible-sm-block"
                   >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="btn--outline btn-dark-gray mb-10"
-                      disabled={false}
-                      onClick={[MockFunction]}
-                    >
-                      <FormattedMessage
-                        id="reset-filters"
-                        values={Object {}}
-                      />
-                    </Button>
+                    <Field
+                      addonAfter={
+                        <i
+                          className="cap cap-magnifier"
+                        />
+                      }
+                      aria-autocomplete="list"
+                      aria-controls="event-search-input-listbox"
+                      aria-haspopup="true"
+                      clearable={true}
+                      component={[Function]}
+                      groupClassName="event-search-group pull-right"
+                      id="event-search-input"
+                      name="search"
+                      placeholder="proposal-search"
+                      role="combobox"
+                      type="text"
+                    />
                   </div>
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <Field
-                    aria-autocomplete="list"
-                    aria-controls="EventListFilters-filter-status-listbox"
-                    aria-haspopup="true"
-                    clearable={false}
-                    component={[Function]}
-                    id="EventListFilters-filter-status"
-                    name="status"
-                    options={
-                      Array [
-                        Object {
-                          "label": "all-events",
-                          "value": "all",
-                        },
-                        Object {
-                          "label": "ongoing-and-future",
-                          "value": "ongoing-and-future",
-                        },
-                        Object {
-                          "label": "finished",
-                          "value": "finished",
-                        },
-                      ]
-                    }
-                    placeholder="voting-status"
-                    role="combobox"
-                  />
                 </div>
               </Col>
               <Col
@@ -293,18 +273,41 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                   />
                 </div>
               </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="link"
+                    className="p-0"
+                    disabled={false}
+                    onClick={[Function]}
+                  >
+                    <FormattedMessage
+                      id="reset-filters"
+                      values={Object {}}
+                    />
+                  </Button>
+                </div>
+              </Col>
             </form>
           </div>
         }
         type="event"
       />
     </div>
-  </Col>
+  </EventListFilters__FiltersWrapper>
   <Col
     bsClass="col"
     componentClass="div"
-    md={4}
+    md={3}
     smHidden={true}
+    xs={4}
     xsHidden={true}
   >
     <form
