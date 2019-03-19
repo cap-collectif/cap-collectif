@@ -1,0 +1,5 @@
+services:
+    Capco\AppBundle\PhpStan\PropertiesFromAnnotationsClassReflectionExtension:
+      autowire: true
+      tags:
+            - phpstan.broker.propertiesClassReflectionExtension
