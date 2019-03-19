@@ -1,9 +1,8 @@
 includes:
   - vendor/phpstan/phpstan-doctrine/extension.neon
-  - vendor/phpstan/phpstan-symfony/extension.neon
 parameters:
-    symfony:
-        container_xml_path: %currentWorkingDirectory%/var/cache/dev/appDevDebugProjectContainer.xml
+    autoload_files:
+        - vendor/autoload.php
     excludes_analyse:
         - %currentWorkingDirectory%/app/AppKernel.php
         - %currentWorkingDirectory%/app/config/parameters.php
@@ -40,3 +39,5 @@ parameters:
 
 # Method Capco\AppBundle\Entity\Post::canContribute() invoked with 1 parameter, 0 required.
         - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/CommentableTrait.php
+    symfony:
+        constant_hassers: true
