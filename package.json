@@ -85,7 +85,7 @@
       "./bin/php-cs-fixer fix --config=.php_cs --verbose",
       "prettier --parser php --write",
       "git add",
-      "php -d memory_limit=-1 bin/phpstan analyse -l 2 -c phpstan.neon"
+      "php -d memory_limit=-1 bin/phpstan analyse -c phpstan.neon"
     ],
     "*.py": [
       "pycodestyle --ignore=E501,W605",
