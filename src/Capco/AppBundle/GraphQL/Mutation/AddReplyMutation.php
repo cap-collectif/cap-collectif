@@ -20,19 +20,18 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 
 class AddReplyMutation implements MutationInterface
 {
     private $em;
     private $formFactory;
+    private $proposalRepo;
     private $questionnaireRepo;
     private $redisStorageHelper;
     private $responsesFormatter;
     private $logger;
     private $replyRepo;
     private $userNotifier;
-    private $stepUrlResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -42,8 +41,7 @@ class AddReplyMutation implements MutationInterface
         RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
         LoggerInterface $logger,
-        UserNotifier $userNotifier,
-        StepUrlResolver $stepUrlResolver
+        UserNotifier $userNotifier
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -53,7 +51,6 @@ class AddReplyMutation implements MutationInterface
         $this->responsesFormatter = $responsesFormatter;
         $this->logger = $logger;
         $this->userNotifier = $userNotifier;
-        $this->stepUrlResolver = $stepUrlResolver;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -96,24 +93,9 @@ class AddReplyMutation implements MutationInterface
         $this->em->persist($reply);
         $this->em->flush();
         $this->redisStorageHelper->recomputeUserCounters($user);
-        if (
-            $questionnaire->isAcknowledgeReplies() &&
-            !$reply->isDraft() &&
-            $questionnaire->getStep()
-        ) {
-            $step = $questionnaire->getStep();
-            $project = $step->getProject();
-            $endAt = $step->getEndAt();
-            $stepUrl = $this->stepUrlResolver->__invoke($step);
-            $this->userNotifier->acknowledgeReply(
-                $project,
-                $reply,
-                $endAt,
-                $stepUrl,
-                $step,
-                $user,
-                false
-            );
+
+        if ($questionnaire->isAcknowledgeReplies() && !$reply->isDraft()) {
+            $this->userNotifier->acknowledgeReply($questionnaire->getStep()->getProject(), $reply);
         }
 
         return ['questionnaire' => $questionnaire, 'reply' => $reply];

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<EventListCounters /> renders correctly 1`] = `
+exports[`<EventListFilters /> renders correctly 1`] = `
 <FormattedMessage
   id="number-of-events"
   values={
@@ -11,12 +11,13 @@ exports[`<EventListCounters /> renders correctly 1`] = `
 />
 `;
 
-exports[`<EventListCounters /> renders correctly when filtered projects 1`] = `
+exports[`<EventListFilters /> renders correctly when filtered projects 1`] = `
 <FormattedMessage
-  id="number-of-events"
+  id="n-of-n-events"
   values={
     Object {
-      "num": 2,
+      "filteredCount": 2,
+      "totalCount": 10,
     }
   }
 />

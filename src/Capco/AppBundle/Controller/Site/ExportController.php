@@ -9,12 +9,17 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Symfony\Component\Translation\TranslatorInterface;
 
 const USER_FRAGMENT = '
     id
@@ -97,6 +102,20 @@ const USER_HEADERS_EVENTS = [
 
 class ExportController extends Controller
 {
+    private $flashBag;
+    private $translator;
+    private $exportDir;
+
+    public function __construct(
+        TranslatorInterface $translator,
+        FlashBagInterface $flashBag,
+        string $exportDir
+    ) {
+        $this->flashBag = $flashBag;
+        $this->translator = $translator;
+        $this->exportDir = $exportDir;
+    }
+
     /**
      * @Route("/export-event-participants/{eventId}", name="app_export_event_participants")
      * @ParamConverter("event", options={"mapping": {"eventId": "id"}})
@@ -215,78 +234,28 @@ class ExportController extends Controller
      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function downloadProjectContributorsAction(Project $project): StreamedResponse
+    public function downloadProjectContributorsAction(Request $request, Project $project)
     {
-        $this->get(GraphQlAclListener::class)->disableAcl();
-        $executor = $this->get('overblog_graphql.request_executor');
-        $connectionTraversor = $this->get(ConnectionTraversor::class);
+        $fileName = 'participants_' . $project->getSlug() . '.csv';
 
-        $data = $executor
-            ->execute('internal', [
-                'query' => $this->getProjectContributorsGraphQLQuery($project->getId()),
-                'variables' => [],
-            ])
-            ->toArray();
+        if (!file_exists($this->exportDir . $fileName)) {
+            $this->flashBag->add(
+                'danger',
+                $this->translator->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
+            );
 
-        if (!isset($data['data'])) {
-            $this->get('logger')->error('GraphQL Query Error: ' . $data['error']);
-            $this->get('logger')->info('GraphQL query: ' . json_encode($data));
+            return $this->redirect($request->headers->get('referer'));
         }
 
-        $fileName =
-            (new \DateTime())->format('Y-m-d') . '_participants_' . $project->getSlug() . '.csv';
-        $writer = WriterFactory::create(Type::CSV);
+        $contentType = 'text/csv';
 
-        $response = new StreamedResponse(function () use (
-            $writer,
-            $data,
-            $project,
-            $connectionTraversor
-        ) {
-            $writer->openToFile('php://output');
-            $writer->addRow(USER_HEADERS);
-            $connectionTraversor->traverse(
-                $data,
-                'contributors',
-                function ($edge) use ($writer) {
-                    $contributor = $edge['node'];
-                    $writer->addRow([
-                        $contributor['id'],
-                        $contributor['email'],
-                        $contributor['username'],
-                        $contributor['userType'] ? $contributor['userType']['name'] : null,
-                        $contributor['createdAt'],
-                        $contributor['updatedAt'],
-                        $contributor['lastLogin'],
-                        $contributor['rolesText'],
-                        $contributor['consentExternalCommunication'],
-                        $contributor['enabled'],
-                        $contributor['isEmailConfirmed'],
-                        $contributor['locked'],
-                        $contributor['phoneConfirmed'],
-                        $contributor['gender'],
-                        $contributor['dateOfBirth'],
-                        $contributor['website'],
-                        $contributor['biography'],
-                        $contributor['address'],
-                        $contributor['zipCode'],
-                        $contributor['city'],
-                        $contributor['phone'],
-                        $contributor['url'],
-                    ]);
-                },
-                function ($pageInfo) use ($project) {
-                    return $this->getProjectContributorsGraphQLQuery(
-                        $project->getId(),
-                        $pageInfo['endCursor']
-                    );
-                }
-            );
-            $writer->close();
-        });
-
-        $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment; filename="' . $fileName . '"');
+        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
+        $response = new BinaryFileResponse($this->exportDir . $fileName);
+        $response->headers->set('X-Accel-Redirect', '/export/' . $fileName);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
+        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
+        $response->headers->set('Pragma', 'public');
+        $response->headers->set('Cache-Control', 'maxage=1');
 
         return $response;
     }
@@ -369,39 +338,6 @@ class ExportController extends Controller
         $response->headers->set('Content-Disposition', 'attachment; filename="' . $fileName . '"');
 
         return $response;
-    }
-
-    private function getProjectContributorsGraphQLQuery(
-        string $projectId,
-        ?string $userCursor = null
-    ): string {
-        if ($userCursor) {
-            $userCursor = sprintf(', after: "%s"', $userCursor);
-        }
-
-        $USER_FRAGMENT = USER_FRAGMENT;
-
-        return <<<EOF
-        query {
-          node(id: "${projectId}") {
-            ... on Project {
-              contributors(first: 50  ${userCursor}) {
-                edges {
-                  cursor
-                  node {
-                   ${USER_FRAGMENT}
-                  }
-                }
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-              }
-            }
-          }
-        }
-EOF;
     }
 
     private function getEventContributorsGraphQLQuery(

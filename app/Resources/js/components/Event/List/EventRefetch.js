@@ -84,7 +84,7 @@ export class EventRefetch extends React.Component<Props, State> {
   }
 }
 
-const selector = formValueSelector('EventPageContainer');
+const selector = formValueSelector('EventListFilters');
 
 const mapStateToProps = (state: GlobalState) => ({
   theme: selector(state, 'theme'),

@@ -18,7 +18,7 @@ export class LocateControl extends MapControl<Props> {
     this.leafletElement = L.control.locate({
       position,
       flyTo: true,
-      icon: 'cap-compass-3',
+      icon: 'cap-map-target-1',
       strings: {
         title: intl.formatMessage({ id: 'proposal.map.form.control.title' }),
         metersUnit: intl.formatMessage({
