@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\UuidTrait;
@@ -50,7 +51,7 @@ class Category
     public function __construct()
     {
         $this->sources = new ArrayCollection();
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function __toString()

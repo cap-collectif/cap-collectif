@@ -191,7 +191,7 @@ class OpinionType
     {
         $this->voteWidgetType = self::VOTE_WIDGET_BOTH;
         $this->Opinions = new ArrayCollection();
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt = new \DateTime();
         $this->appendixTypes = new ArrayCollection();
         $this->children = new ArrayCollection();
     }

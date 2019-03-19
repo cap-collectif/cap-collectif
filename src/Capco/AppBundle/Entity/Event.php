@@ -148,7 +148,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         $this->registrations = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->projects = new ArrayCollection();
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function __toString()

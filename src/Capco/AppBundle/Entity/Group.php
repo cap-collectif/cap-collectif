@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\BlameableTrait;
@@ -33,6 +34,11 @@ class Group
     protected $evaluating;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="restrictedViewerGroups")
+     */
+    protected $projectsVisibleByTheGroup;
+
+    /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
@@ -42,17 +48,12 @@ class Group
      */
     private $userGroups;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="restrictedViewerGroups")
-     */
-    protected $projectsVisibleByTheGroup;
-
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
         $this->evaluating = new ArrayCollection();
         $this->projectsVisibleByTheGroup = new ArrayCollection();
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function __toString()
@@ -149,6 +150,7 @@ class Group
         if ($this->projectsVisibleByTheGroup->get($project)) {
             $this->projectsVisibleByTheGroup->remove($project);
         }
+
         return $this;
     }
 }

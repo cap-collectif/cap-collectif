@@ -73,7 +73,7 @@ class SocialNetwork
      */
     public function __construct()
     {
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function __toString()
