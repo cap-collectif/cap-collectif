@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
-import { FormattedHTMLMessage } from 'react-intl';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type {
@@ -10,17 +9,20 @@ import type {
   EventPageQueryVariables,
 } from './__generated__/EventPageQuery.graphql';
 import config from '../../config';
-import EventListFilters from './List/EventListFilters';
-import EventRefetch from './List/EventRefetch';
+import EventPageContainer from './EventPageContainer';
 import EventPageHeader from './EventPageHeader';
+import withColors from '../Utils/withColors';
 
 type Props = {
   eventPageTitle: ?string,
   eventPageBody: ?string,
+  backgroundColor: ?string,
 };
 
 export class EventPage extends React.Component<Props> {
   render() {
+    const { backgroundColor } = this.props;
+
     return (
       <div className="event-page">
         <QueryRenderer
@@ -35,17 +37,7 @@ export class EventPage extends React.Component<Props> {
               $userType: ID
               $isFuture: Boolean
             ) {
-              ...EventRefetch_query
-                @arguments(
-                  cursor: $cursor
-                  count: $count
-                  search: $search
-                  theme: $theme
-                  project: $project
-                  userType: $userType
-                  isFuture: $isFuture
-                )
-              ...EventListFilters_query
+              ...EventPageContainer_query
                 @arguments(
                   cursor: $cursor
                   count: $count
@@ -79,25 +71,12 @@ export class EventPage extends React.Component<Props> {
                     {/* $FlowFixMe */}
                     <EventPageHeader eventPageTitle={this.props.eventPageTitle} />
                   </section>
-                  {this.props.eventPageBody && (
-                    <section className="section--custom">
-                      <div className="container">
-                        <FormattedHTMLMessage id={this.props.eventPageBody} />
-                      </div>
-                    </section>
-                  )}
-                  <section className="section--custom">
-                    <div className="container">
-                      <div
-                        id="event-page-filters"
-                        className={config.isMobile ? 'event-filters' : null}>
-                        <EventListFilters query={props} addToggleViewButton />
-                      </div>
-                      <div id="event-page-rendered">
-                        {/* $FlowFixMe */}
-                        <EventRefetch query={props} />
-                      </div>
-                    </div>
+                  <section className="section--alt">
+                    <EventPageContainer
+                      query={props}
+                      eventPageBody={this.props.eventPageBody}
+                      backgroundColor={backgroundColor}
+                    />
                   </section>
                 </div>
               );
@@ -114,4 +93,4 @@ export class EventPage extends React.Component<Props> {
   }
 }
 
-export default EventPage;
+export default withColors(EventPage);

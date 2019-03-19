@@ -11,9 +11,19 @@ export const avatarPx = {
   tiny: `${avatarNb.tiny}px`,
 };
 
+const bootstrapGrid = {
+  xsMax: 767,
+  smMin: 768,
+  smMax: 991,
+  mdMin: 992,
+  mdMax: 1199,
+  lgMin: 1200,
+};
+
 const sizes = {
   avatarNb,
   avatarPx,
+  bootstrapGrid,
 };
 
 export default sizes;
