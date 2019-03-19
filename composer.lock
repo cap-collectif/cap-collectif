@@ -443,16 +443,16 @@
         },
         {
             "name": "cocur/slugify",
-            "version": "v3.2",
+            "version": "3.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cocur/slugify.git",
-                "reference": "d41701efe58ba2df9cae029c3d21e1518cc6780e"
+                "reference": "b2ccf7b735f4f3df3979aef2e1ebf8e19ca772f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/d41701efe58ba2df9cae029c3d21e1518cc6780e",
-                "reference": "d41701efe58ba2df9cae029c3d21e1518cc6780e",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/b2ccf7b735f4f3df3979aef2e1ebf8e19ca772f7",
+                "reference": "b2ccf7b735f4f3df3979aef2e1ebf8e19ca772f7",
                 "shasum": ""
             },
             "require": {
@@ -466,13 +466,13 @@
                 "mikey179/vfsstream": "~1.6",
                 "mockery/mockery": "~0.9",
                 "nette/di": "~2.2",
-                "phpunit/phpunit": "~4.8.36|~5.2",
+                "phpunit/phpunit": "~4.8|~5.2",
                 "pimple/pimple": "~1.1",
                 "plumphp/plum": "~0.1",
                 "silex/silex": "~1.3",
-                "symfony/config": "~2.4|~3.0|~4.0",
-                "symfony/dependency-injection": "~2.4|~3.0|~4.0",
-                "symfony/http-kernel": "~2.4|~3.0|~4.0",
+                "symfony/config": "~2.4|~3.0",
+                "symfony/dependency-injection": "~2.4|~3.0",
+                "symfony/http-kernel": "~2.4|~3.0",
                 "twig/twig": "~1.26|~2.0",
                 "zendframework/zend-modulemanager": "~2.2",
                 "zendframework/zend-servicemanager": "~2.2",
@@ -504,7 +504,7 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2019-01-31T20:38:55+00:00"
+            "time": "2018-01-22T09:00:48+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -3957,16 +3957,16 @@
         },
         {
             "name": "infinite-networks/form-bundle",
-            "version": "2.0.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/infinite-networks/InfiniteFormBundle.git",
-                "reference": "e7fc67771f137205740c85ce62dec9446bc64d31"
+                "url": "https://github.com/cap-collectif/InfiniteFormBundle.git",
+                "reference": "88f8fa10d31be7e87e730936f1b3ca0a3b9b91ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infinite-networks/InfiniteFormBundle/zipball/e7fc67771f137205740c85ce62dec9446bc64d31",
-                "reference": "e7fc67771f137205740c85ce62dec9446bc64d31",
+                "url": "https://api.github.com/repos/cap-collectif/InfiniteFormBundle/zipball/88f8fa10d31be7e87e730936f1b3ca0a3b9b91ac",
+                "reference": "88f8fa10d31be7e87e730936f1b3ca0a3b9b91ac",
                 "shasum": ""
             },
             "require": {
@@ -3979,8 +3979,11 @@
                 "twig/twig": "<1.12"
             },
             "require-dev": {
+                "components/jquery": "~3.1",
+                "components/qunit": "~1.11",
                 "doctrine/doctrine-bundle": "~1.2",
                 "doctrine/orm": "~2.3",
+                "robloach/component-installer": "^0.2",
                 "symfony/phpunit-bridge": "^2.7",
                 "symfony/symfony": "^3.0|^4.0"
             },
@@ -3995,7 +3998,6 @@
                     "Infinite\\FormBundle\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4006,7 +4008,11 @@
                 }
             ],
             "description": "A collection of useful form types and extensions for Symfony2",
-            "time": "2019-03-08T04:22:32+00:00"
+            "support": {
+                "issues": "https://github.com/infinite-networks/InfiniteFormBundle/issues",
+                "source": "https://github.com/cap-collectif/InfiniteFormBundle/tree/master"
+            },
+            "time": "2018-11-20T15:07:22+00:00"
         },
         {
             "name": "jaimeperez/twig-configurable-i18n",
@@ -15536,7 +15542,9 @@
         "sonata-project/datagrid-bundle": 20,
         "friendsofsymfony/elastica-bundle": 20,
         "jms/serializer": 20,
+        "infinite-networks/form-bundle": 20,
         "hslavich/simplesamlphp-bundle": 20,
+        "cocur/slugify": 20,
         "phayes/geophp": 20,
         "webonyx/graphql-php": 20,
         "overblog/graphql-bundle": 20,

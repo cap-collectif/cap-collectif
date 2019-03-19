@@ -8,6 +8,7 @@ import component from './Field';
 import ButtonBody from '../Reply/Form/ButtonBody';
 import WYSIWYGRender from './WYSIWYGRender';
 
+
 type Props = {
   name: string,
   choices: ?Array<Object>,

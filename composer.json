@@ -79,6 +79,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cap-collectif/InfiniteFormBundle"
         }
     ],
     "require": {
@@ -86,7 +90,7 @@
         "symfony/symfony": "dev-waiting-42 as 3.4.20",
         "doctrine/doctrine-bundle": "^1.6",
         "twig/extensions": "~1.0",
-        "twig/twig": "^1.27",
+        "twig/twig": "~1.27",
         "symfony/swiftmailer-bundle": "^3.1.0",
         "symfony/monolog-bundle": "~3.1.1",
         "sensio/distribution-bundle": "~5.0",
@@ -131,7 +135,7 @@
         "liuggio/excelbundle": "^2.1",
         "exercise/htmlpurifier-bundle": "^0.2.4",
         "odolbeau/rabbit-mq-admin-toolkit": "^4.0",
-        "infinite-networks/form-bundle": "~2.0",
+        "infinite-networks/form-bundle": "dev-master",
         "swarrot/swarrot-bundle": "^1.4",
         "league/csv": "^8.2",
         "php-http/socket-client": "^1.2",
@@ -147,7 +151,7 @@
         "caxy/htmldiff-bundle": "~0.1.2",
         "ocramius/proxy-manager": "2.0.2",
         "limenius/react-bundle": "^1.0",
-        "cocur/slugify": "~3.2",
+        "cocur/slugify": "@dev",
         "phayes/geoPHP": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
         "php-translation/symfony-bundle": "^0.4.0",
         "php-translation/loco-adapter": "^0.4.0",

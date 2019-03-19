@@ -22,9 +22,13 @@ export class EventListToggleMobileViewBtn extends React.Component<Props> {
     const { isMobileListView } = this.props;
 
     return (
-      <div id="event-view-toggle" role="group" className="btn-group ml-10" aria-label="Event view">
+      <div
+        id="event-view-toggle"
+        role="group"
+        className="btn-group visible-xs-inline-block visible-sm-inline-block"
+        aria-label="Event view">
         <Button
-          className="btn--outline btn-dark-gray btn-center flex-1"
+          className="btn-center"
           id="event-view-toggle"
           active={isMobileListView}
           onClick={this.handleClick.bind(this, true)}>
@@ -32,7 +36,6 @@ export class EventListToggleMobileViewBtn extends React.Component<Props> {
         </Button>
         <Button
           id="event-view-toggle"
-          className="btn--outline btn-dark-gray flex-1"
           active={!isMobileListView}
           onClick={this.handleClick.bind(this, false)}>
           <i className="cap cap-map-location" /> <FormattedMessage id="proposal.map.map" />
