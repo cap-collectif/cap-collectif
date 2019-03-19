@@ -21,7 +21,9 @@
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:proposalStep --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:users --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:events --env=prod --quiet
-0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:projects-contributors --env=prod --quiet
+
+# Generate export for projects contributors every 10 hours
+0 0 0/10 1/1 * ? * /usr/bin/timeout 480m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:projects-contributors --env=prod --quiet
 
 # Remind users to confirm their account every hour
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:remind-user-account-confirmation --env=prod
