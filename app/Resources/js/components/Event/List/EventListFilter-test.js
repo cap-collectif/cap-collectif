@@ -18,6 +18,7 @@ const defaultProps = {
   search: 'PHP',
   theme: 'theme-1',
   userType: null,
+  status: 'all',
   project: 'project1',
   features: {
     ...features,
