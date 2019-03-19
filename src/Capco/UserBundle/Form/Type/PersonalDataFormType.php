@@ -2,7 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -16,24 +16,29 @@ class PersonalDataFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class, [
+            ->add('firstname', PurifiedTextType::class, [
+                'purify_html' => true,
+                'strip_tags' => true,
+                'purify_html_profile' => 'default',
+            ])
+            ->add('lastname', PurifiedTextType::class, [
+                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
-            ->add('lastname', TextType::class, [
+            ->add('address', PurifiedTextType::class, [
+                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
-            ->add('address', TextType::class, [
-                'purify_html' => true,
-                'purify_html_profile' => 'default',
-            ])
-            ->add('address2', TextType::class, [
+            ->add('address2', PurifiedTextType::class, [
+                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
             ->add('zipCode')
-            ->add('city', TextType::class, [
+            ->add('city', PurifiedTextType::class, [
+                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])

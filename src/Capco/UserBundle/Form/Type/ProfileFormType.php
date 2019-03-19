@@ -2,7 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Toggle\Manager;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
@@ -25,7 +25,8 @@ class ProfileFormType extends AbstractType
             ->add('twitterUrl', UrlType::class, ['label' => 'user.profile.edit.twitter'])
             ->add('facebookUrl', UrlType::class, ['label' => 'user.profile.edit.facebook'])
             ->add('linkedInUrl', UrlType::class, [])
-            ->add('username', TextType::class, [
+            ->add('username', PurifiedTextType::class, [
+                'strip_tags' => true,
                 'required' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',

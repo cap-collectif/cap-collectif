@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -15,13 +16,13 @@ class ApiAdminRegistrationFormType extends ApiRegistrationFormType
         parent::buildForm($builder, $options);
         $builder->remove('plainPassword');
         $builder->remove('captcha');
-        $builder
-            ->add('username', TextType::class, [
-                'required' => true,
-                'purify_html' => true,
-                'purify_html_profile' => 'default',
-            ])
-            ->add('email', EmailType::class, ['required' => true]);
+        $builder->add('username', PurifiedTextType::class, [
+            'required' => true,
+            'purify_html' => true,
+            'strip_tags' => true,
+            'purify_html_profile' => 'default',
+        ]);
+        $builder->add('email', EmailType::class, ['required' => true]);
         $builder->add('roles', CollectionType::class, ['entry_type' => TextType::class]);
     }
 

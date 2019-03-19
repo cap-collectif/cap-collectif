@@ -4,7 +4,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -45,10 +45,11 @@ class PageAdmin extends AbstractAdmin
             ->end();
         $formMapper
             ->with('admin.fields.page.advanced')
-            ->add('metaDescription', TextType::class, [
+            ->add('metaDescription', PurifiedTextType::class, [
                 'label' => 'page.metadescription',
                 'required' => false,
                 'help' => 'admin.help.metadescription',
+                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])

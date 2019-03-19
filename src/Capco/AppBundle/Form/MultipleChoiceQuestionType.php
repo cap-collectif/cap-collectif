@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form;
 use Capco\AdminBundle\Form\QuestionValidationRuleType;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -19,15 +20,18 @@ class MultipleChoiceQuestionType extends AbstractType
     {
         $builder->add('id');
         $builder->add('temporaryId', TextType::class);
-        $builder->add('title', TextType::class, [
+        $builder->add('title', PurifiedTextType::class, [
+            'strip_tags' => true,
             'purify_html' => true,
             'purify_html_profile' => 'default',
         ]);
-        $builder->add('helpText', TextType::class, [
+        $builder->add('helpText', PurifiedTextType::class, [
+            'strip_tags' => true,
             'purify_html' => true,
             'purify_html_profile' => 'default',
         ]);
-        $builder->add('description', TextType::class, [
+        $builder->add('description', PurifiedTextType::class, [
+            'strip_tags' => true,
             'purify_html' => true,
             'purify_html_profile' => 'default',
         ]);

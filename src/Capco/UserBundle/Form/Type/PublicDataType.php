@@ -2,7 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
@@ -29,7 +29,8 @@ class PublicDataType extends AbstractType
             ->add('twitterUrl', UrlType::class)
             ->add('facebookUrl', UrlType::class)
             ->add('linkedInUrl', UrlType::class)
-            ->add('username', TextType::class, [
+            ->add('username', PurifiedTextType::class, [
+                'strip_tags' => true,
                 'required' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',

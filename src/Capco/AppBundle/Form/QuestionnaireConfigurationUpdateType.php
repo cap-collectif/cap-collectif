@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,11 +16,13 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
+            ->add('title', PurifiedTextType::class, [
+                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
-            ->add('description', TextType::class, [
+            ->add('description', PurifiedTextType::class, [
+                'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])

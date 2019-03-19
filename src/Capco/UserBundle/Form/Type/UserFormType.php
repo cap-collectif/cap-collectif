@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -17,9 +18,10 @@ class UserFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, [
+            ->add('username', PurifiedTextType::class, [
                 'required' => true,
                 'purify_html' => true,
+                'strip_tags' => true,
                 'purify_html_profile' => 'default',
             ])
             ->add('email', EmailType::class, ['required' => true])
