@@ -8,6 +8,8 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Overblog\GraphQLBundle\Request\Executor;
+use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -105,8 +107,16 @@ class ExportController extends Controller
     private $flashBag;
     private $translator;
     private $exportDir;
+    private $aclListener;
+    private $connectionTraversor;
+    private $executor;
+    private $logger;
 
     public function __construct(
+        GraphQlAclListener $aclListener,
+        ConnectionTraversor $connectionTraversor,
+        Executor $executor,
+        LoggerInterface $logger,
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
         string $exportDir
@@ -114,6 +124,10 @@ class ExportController extends Controller
         $this->flashBag = $flashBag;
         $this->translator = $translator;
         $this->exportDir = $exportDir;
+        $this->aclListener = $aclListener;
+        $this->connectionTraversor = $connectionTraversor;
+        $this->executor = $executor;
+        $this->logger = $logger;
     }
 
     /**
@@ -123,11 +137,9 @@ class ExportController extends Controller
      */
     public function downloadEventParticipantsAction(Event $event): StreamedResponse
     {
-        $this->get(GraphQlAclListener::class)->disableAcl();
-        $executor = $this->get('overblog_graphql.request_executor');
-        $connectionTraversor = $this->get(ConnectionTraversor::class);
+        $this->aclListener->disableAcl();
 
-        $data = $executor
+        $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getEventContributorsGraphQLQuery($event->getId()),
                 'variables' => [],
@@ -135,8 +147,8 @@ class ExportController extends Controller
             ->toArray();
 
         if (!isset($data['data'])) {
-            $this->get('logger')->error('GraphQL Query Error: ' . $data['errors']);
-            $this->get('logger')->info('GraphQL query: ' . json_encode($data));
+            $this->logger->error('GraphQL Query Error: ' . $data['errors']);
+            $this->logger->info('GraphQL query: ' . json_encode($data));
         }
         $fileName =
             (new \DateTime())->format('Y-m-d') .
@@ -144,15 +156,10 @@ class ExportController extends Controller
             $event->getSlug() .
             '.csv';
         $writer = WriterFactory::create(Type::CSV);
-        $response = new StreamedResponse(function () use (
-            $writer,
-            $data,
-            $event,
-            $connectionTraversor
-        ) {
+        $response = new StreamedResponse(function () use ($writer, $data, $event) {
             $writer->openToFile('php://output');
             $writer->addRow(USER_HEADERS_EVENTS);
-            $connectionTraversor->traverse(
+            $this->connectionTraversor->traverse(
                 $data,
                 'participants',
                 function ($edge) use ($writer) {
