@@ -32,14 +32,14 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
     ];
 
     public static $sortLabels = [
-        'comments' => 'step.sort.comments',
-        'last' => 'step.sort.last',
-        'old' => 'step.sort.old',
-        'random' => 'step.sort.random',
-        'votes' => 'step.sort.votes',
-        'least-votes' => 'step.sort.least-votes',
-        'expensive' => 'step.sort.expensive',
-        'cheap' => 'step.sort.cheap',
+        'step.sort.comments' => 'comments',
+        'step.sort.last' => 'last',
+        'step.sort.old' => 'old',
+        'step.sort.random' => 'random',
+        'step.sort.votes' => 'votes',
+        'step.sort.least-votes' => 'least-votes',
+        'step.sort.expensive' => 'expensive',
+        'step.sort.cheap' => 'cheap',
     ];
 
     /**
