@@ -151,7 +151,7 @@
         "ocramius/proxy-manager": "2.0.2",
         "limenius/react-bundle": "^1.0",
         "cocur/slugify": "~3.2",
-        "phayes/geoPHP": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
+        "phayes/geophp": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
         "pmill/doctrine-array-hydrator": "^0.1.2",
         "webonyx/graphql-php": "dev-master#efe1bcf052d4b42910c9f96fad3c10e4482ef7a8 as 0.12.0",
         "overblog/graphql-php-generator": "^0.7.0",
