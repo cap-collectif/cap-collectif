@@ -3181,9 +3181,6 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
 
   # The admin URL to this resource.
   adminUrl: URI!
-
-  # Slug of a project
-  slug: String!
   steps: [Step!]!
   author: User!
   video: String

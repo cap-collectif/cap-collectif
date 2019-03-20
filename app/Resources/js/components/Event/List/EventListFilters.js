@@ -2,9 +2,10 @@
 import React from 'react';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchQuery, graphql } from 'relay-runtime';
-import { reduxForm, Field, formValueSelector, type FormProps } from 'redux-form';
+import { Field, formValueSelector, type FormProps, reset } from 'redux-form';
 import { createFragmentContainer } from 'react-relay';
 import select from '../../Form/Select';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
@@ -15,6 +16,7 @@ import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
 import environment from '../../../createRelayEnvironment';
 import EventListCounter from './EventListCounter';
+import EventListStatusFilter from './EventListStatusFilter';
 import type { EventListFilters_query } from './__generated__/EventListFilters_query.graphql';
 
 type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
@@ -25,7 +27,6 @@ type Props = {|
   dispatch: Dispatch,
   theme: ?string,
   project: ?string,
-  status: string,
   userType: ?string,
   search: ?string,
   intl: IntlShape,
@@ -38,7 +39,6 @@ const countFilters = (
   project: ?string,
   search: ?string,
   userType: ?string,
-  status: string,
 ): number => {
   let nbFilter = 0;
   if (theme) {
@@ -48,9 +48,6 @@ const countFilters = (
     nbFilter++;
   }
   if (userType) {
-    nbFilter++;
-  }
-  if (status !== 'all') {
     nbFilter++;
   }
 
@@ -83,6 +80,18 @@ const themeQuery = graphql`
   }
 `;
 
+const StatusContainer = styled(Col)`
+  color: white;
+  display: flex;
+  align-items: center;
+`;
+const FiltersWrapper = styled(Col)`
+  @media screen and (max-width: 991px) {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
 export class EventListFilters extends React.Component<Props, State> {
   state = { projectOptions: [], themeOptions: [] };
 
@@ -105,22 +114,29 @@ export class EventListFilters extends React.Component<Props, State> {
   }
 
   getFilters(nbFilter: number): [] {
-    const { features, theme, project, reset, userTypes, intl } = this.props;
+    const { features, theme, project, userTypes, intl, dispatch } = this.props;
     const { themeOptions, projectOptions } = this.state;
 
     const filters = [];
 
-    if (theme !== null || project !== null) {
-      if (nbFilter > 0) {
-        filters.push(
-          <div className="d-flex justify-content-end">
-            <Button className="btn--outline btn-dark-gray mb-10" onClick={reset}>
-              <FormattedMessage id="reset-filters" />
-            </Button>
-          </div>,
-        );
-      }
-    }
+    filters.push(
+      <div className="visible-xs-block visible-sm-block">
+        <Field
+          clearable
+          id="event-search-input"
+          name="search"
+          type="text"
+          role="combobox"
+          aria-autocomplete="list"
+          aria-haspopup="true"
+          aria-controls="event-search-input-listbox"
+          addonAfter={<i className="cap cap-magnifier" />}
+          component={component}
+          placeholder={intl.formatMessage({ id: 'proposal-search' })}
+          groupClassName="event-search-group pull-right"
+        />
+      </div>,
+    );
 
     if (features.themes && themeOptions.length) {
       filters.push(
@@ -153,54 +169,6 @@ export class EventListFilters extends React.Component<Props, State> {
       );
     }
 
-    filters.push(
-      <Field
-        component={select}
-        id="EventListFilters-filter-status"
-        name="status"
-        role="combobox"
-        aria-autocomplete="list"
-        aria-haspopup="true"
-        aria-controls="EventListFilters-filter-status-listbox"
-        clearable={false}
-        placeholder={intl.formatMessage({ id: 'voting-status' })}
-        options={[
-          {
-            value: 'all',
-            label: intl.formatMessage({
-              id: 'all-events',
-            }),
-          },
-          {
-            value: 'ongoing-and-future',
-            label: intl.formatMessage({
-              id: 'ongoing-and-future',
-            }),
-          },
-          { value: 'finished', label: intl.formatMessage({ id: 'finished' }) },
-        ]}
-      />,
-    );
-
-    if (config.isMobile) {
-      filters.push(
-        <Field
-          clearable
-          id="event-search-input"
-          name="search"
-          type="text"
-          role="combobox"
-          aria-autocomplete="list"
-          aria-haspopup="true"
-          aria-controls="event-search-input-listbox"
-          addonAfter={<i className="cap cap-magnifier" />}
-          component={component}
-          placeholder={intl.formatMessage({ id: 'proposal-search' })}
-          groupClassName="event-search-group pull-right"
-        />,
-      );
-    }
-
     if (userTypes.length) {
       filters.push(
         <Field
@@ -217,6 +185,17 @@ export class EventListFilters extends React.Component<Props, State> {
       );
     }
 
+    if ((theme !== null || project !== null) && nbFilter > 0) {
+      filters.push(
+        <Button
+          bsStyle="link"
+          className="p-0"
+          onClick={() => dispatch(reset('EventPageContainer'))}>
+          <FormattedMessage id="reset-filters" />
+        </Button>,
+      );
+    }
+
     return filters;
   }
 
@@ -225,6 +204,11 @@ export class EventListFilters extends React.Component<Props, State> {
 
     return (
       <div>
+        <p>
+          <b>
+            <FormattedMessage id="filter-by" />
+          </b>
+        </p>
         <form>
           {filters.map((filter, index) => (
             <Col key={index} className="mt-5">
@@ -243,14 +227,13 @@ export class EventListFilters extends React.Component<Props, State> {
       project,
       search,
       userType,
-      status,
       intl,
       addToggleViewButton,
       dispatch,
       query,
     } = this.props;
 
-    const nbFilter = countFilters(theme, project, search, userType, status);
+    const nbFilter = countFilters(theme, project, search, userType);
 
     const popoverBottom = this.getPopoverBottom(nbFilter);
 
@@ -259,17 +242,19 @@ export class EventListFilters extends React.Component<Props, State> {
         return nbFilter;
       }
     };
+
     return (
-      <Row className={config.isMobile ? 'mb-10 ml-0' : 'mb-10'}>
-        <Col xs={12} md={4} className="pl-0">
+      <Row className="align-items-center d-flex flex-wrap">
+        <StatusContainer xs={4} md={5} xsHidden smHidden>
           {/* $FlowFixMe $refType */}
           <EventListCounter query={query} />
-        </Col>
-        <Col xs={12} md={4} className="pl-0" id="event-filters">
+          <EventListStatusFilter screen="desktop" />
+        </StatusContainer>
+        <FiltersWrapper xs={12} md={4} id="event-filters">
           <div className="pull-right">
             <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
           </div>
-          {config.isMobile && addToggleViewButton && features.display_map ? (
+          {addToggleViewButton && features.display_map ? (
             <EventListToggleMobileViewBtn
               showMapButton
               isMobileListView
@@ -278,8 +263,8 @@ export class EventListFilters extends React.Component<Props, State> {
               }}
             />
           ) : null}
-        </Col>
-        <Col md={4} smHidden xsHidden>
+        </FiltersWrapper>
+        <Col xs={4} md={3} xsHidden smHidden>
           <form
             onSubmit={e => {
               e.preventDefault();
@@ -301,7 +286,7 @@ export class EventListFilters extends React.Component<Props, State> {
   }
 }
 
-const selector = formValueSelector('EventListFilters');
+const selector = formValueSelector('EventPageContainer');
 
 const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
@@ -309,19 +294,10 @@ const mapStateToProps = (state: GlobalState) => ({
   project: selector(state, 'project'),
   search: selector(state, 'search'),
   userType: selector(state, 'userType'),
-  status: selector(state, 'status'),
   userTypes: state.default.userTypes,
 });
 
-const form = reduxForm({
-  form: 'EventListFilters',
-  destroyOnUnmount: false,
-  initialValues: {
-    status: 'ongoing-and-future',
-  },
-})(EventListFilters);
-
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect(mapStateToProps)(injectIntl(EventListFilters));
 
 export default createFragmentContainer(
   container,

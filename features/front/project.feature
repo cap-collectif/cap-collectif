@@ -84,7 +84,7 @@ Scenario: Project can be filtered by title
   And I visited "projects page"
   When I fill in the following:
     | project-search-input | innovation |
-  And I click the "#project-search-button" element
+  And I click on button "#project-search-button"
   And I wait ".project-preview" to appear on current page
   Then I should see 1 ".project-preview" elements
   And I should see "Croissance, innovation, disruption"
