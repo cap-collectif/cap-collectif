@@ -17,7 +17,7 @@ class SettingsController extends Controller
 {
     /**
      * @Route("/admin/settings/pages.registration/list", name="capco_admin_settings_registration")
-     * @Template()
+     * @Template("@CapcoAdmin/Settings/registration.html.twig")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function registrationAction(Request $request)
@@ -31,7 +31,7 @@ class SettingsController extends Controller
 
     /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
-     * @Template()
+     * @Template("CapcoAdminBundle:Settings:list.html.twig")
      *
      * @param mixed $category
      */

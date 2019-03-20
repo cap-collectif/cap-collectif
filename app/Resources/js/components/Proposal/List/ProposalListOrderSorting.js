@@ -32,6 +32,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
 
   constructor(props: Props) {
     super(props);
+
     this.state = {
       // eslint-disable-next-line react/prop-types
       displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(props.orderByComments ? ['comments'] : [])
@@ -40,15 +41,13 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { dispatch, defaultSort, stepId } = this.props;
     const savedSort = LocalStorage.get('proposal.orderByStep');
     if (!savedSort || !Object.prototype.hasOwnProperty.call(savedSort, stepId)) {
       if (defaultSort) {
         dispatch(changeOrder(defaultSort));
       }
-    } else {
-      dispatch(changeOrder(savedSort[stepId]));
     }
   }
 

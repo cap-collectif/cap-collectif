@@ -20,7 +20,7 @@ class RecentContributionsController extends Controller
      */
     public function indexAction()
     {
-        $resolver = $this->get('capco_admin.recent_contributions_resolver');
+        $resolver = $this->get(RecentContributionsResolver::class);
         $contributions = $resolver->getRecentContributions();
 
         return [
@@ -41,7 +41,7 @@ class RecentContributionsController extends Controller
      */
     public function showAction($type, $id)
     {
-        $resolver = $this->get('capco_admin.recent_contributions_resolver');
+        $resolver = $this->get(RecentContributionsResolver::class);
 
         $contribution = $resolver->getContributionByTypeAndId($type, $id);
 
@@ -66,7 +66,7 @@ class RecentContributionsController extends Controller
      */
     public function validateAction($type, $id)
     {
-        $resolver = $this->get('capco_admin.recent_contributions_resolver');
+        $resolver = $this->get(RecentContributionsResolver::class);
         $em = $this->get('doctrine')->getManager();
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 
