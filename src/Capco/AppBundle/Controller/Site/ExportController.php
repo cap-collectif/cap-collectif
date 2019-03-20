@@ -248,7 +248,11 @@ class ExportController extends Controller
         if (!file_exists($this->exportDir . $fileName)) {
             $this->flashBag->add(
                 'danger',
-                $this->translator->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
+                $this->translator->trans(
+                    'project_contributors.download.not_yet_generated',
+                    [],
+                    'CapcoAppBundle'
+                )
             );
 
             return $this->redirect($request->headers->get('referer'));
