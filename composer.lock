@@ -10697,16 +10697,16 @@
         },
         {
             "name": "symfony/security-acl",
-            "version": "v3.0.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-acl.git",
-                "reference": "ab4dfe2d95e038cd367dd04604487b0a3359bcff"
+                "reference": "22928f6be80a37f301500c67e50f57f5b25ffaa8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-acl/zipball/ab4dfe2d95e038cd367dd04604487b0a3359bcff",
-                "reference": "ab4dfe2d95e038cd367dd04604487b0a3359bcff",
+                "url": "https://api.github.com/repos/symfony/security-acl/zipball/22928f6be80a37f301500c67e50f57f5b25ffaa8",
+                "reference": "22928f6be80a37f301500c67e50f57f5b25ffaa8",
                 "shasum": ""
             },
             "require": {
@@ -10754,7 +10754,7 @@
             ],
             "description": "Symfony Security Component - ACL (Access Control List)",
             "homepage": "https://symfony.com",
-            "time": "2017-07-21T06:01:18+00:00"
+            "time": "2018-12-13T16:51:15+00:00"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -15746,6 +15746,7 @@
         "overblog/graphql-bundle": 20,
         "webfactory/icu-translation-bundle": 20,
         "tweedegolf/prometheus-bundle": 20,
+        "symfony/security-acl": 20,
         "tonicforhealth/behat-parallel-scenario": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "alexandresalome/mailcatcher": 20,
