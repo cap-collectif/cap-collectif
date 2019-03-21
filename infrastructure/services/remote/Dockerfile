@@ -262,7 +262,7 @@ RUN yarn global add bower@1.8.8 babel-cli \
     && gosu capco yarn install --pure-lockfile \
     && gosu capco bower install --config.interactive=false \
     && gosu capco npm rebuild node-sass > /dev/null \
-    && gosu capco php bin/console translation:download app --env=prod \
+    && gosu capco php bin/console translation:download --env=prod \
     && gosu capco yarn run update-js-translation \
     && gosu capco yarn run build-relay-schema \
     ## SSR is disabled

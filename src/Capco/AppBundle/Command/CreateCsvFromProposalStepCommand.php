@@ -1224,7 +1224,7 @@ EOF;
         foreach ($questions as $question) {
             $this->proposalHeaderMap[$question] = 'responses';
         }
-        foreach (array_reverse($questions) as $question) {
+        foreach (\array_reverse($questions) as $question) {
             $result = $this->insert($result, self::CUSTOM_QUESTIONS_HEADER_OFFSET, $question);
         }
         /** @var Questionnaire $evaluationForm */
@@ -1239,7 +1239,7 @@ EOF;
                 })
                 ->toArray();
             /** @var AbstractQuestion $question */
-            foreach (array_reverse($evaluationFormAsArray) as $question) {
+            foreach (\array_reverse($evaluationFormAsArray) as $question) {
                 $result = $this->insert(
                     $result,
                     self::CUSTOM_QUESTIONS_HEADER_OFFSET + \count($questions),
@@ -1274,7 +1274,7 @@ EOF;
         string $proposalId,
         string $stepId,
         ?string $votesAfter = null,
-        ?int $VOTES_PER_PAGE = self::VOTES_PER_PAGE
+        ?string $VOTES_PER_PAGE = self::VOTES_PER_PAGE
     ): string {
         $VOTE_INFOS_FRAGMENT = self::PROPOSAL_VOTE_INFOS_FRAGMENT;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
@@ -1314,7 +1314,7 @@ EOF;
     protected function getProposalReportingsGraphQLQuery(
         string $proposalId,
         ?string $reportingsAfter = null,
-        ?int $REPORTING_PER_PAGE = self::REPORTINGS_PER_PAGE
+        ?string $REPORTING_PER_PAGE = self::REPORTINGS_PER_PAGE
     ): string {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
@@ -1354,7 +1354,7 @@ EOF;
     protected function getProposalCommentsGraphQLQuery(
         string $proposalId,
         ?string $commentsAfter = null,
-        ?int $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
+        ?string $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
     ): string {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
@@ -1402,10 +1402,10 @@ EOF;
         ?string $commentsAfter = null,
         ?string $votesAfter = null,
         ?string $reportingsAfter = null,
-        ?int $NEWS_PER_PAGE = self::NEWS_PER_PAGE,
-        ?int $VOTES_PER_PAGE = self::VOTES_PER_PAGE,
-        ?int $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE,
-        ?int $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
+        ?string $NEWS_PER_PAGE = self::NEWS_PER_PAGE,
+        ?string $VOTES_PER_PAGE = self::VOTES_PER_PAGE,
+        ?string $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE,
+        ?string $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
     ): string {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
@@ -1521,7 +1521,7 @@ EOF;
     protected function getProposalCommentReportingsGraphQLQuery(
         string $commentId,
         ?string $reportsAfter = null,
-        ?int $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE
+        ?string $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE
     ): string {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
@@ -1561,7 +1561,7 @@ EOF;
     protected function getProposalCommentVotesGraphQLQuery(
         string $commentId,
         ?string $votesAfter = null,
-        ?int $VOTES_PER_PAGE = self::VOTES_PER_PAGE
+        ?string $VOTES_PER_PAGE = self::VOTES_PER_PAGE
     ): string {
         $VOTE_INFOS_FRAGMENT = self::COMMENT_VOTE_INFOS;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
@@ -1602,9 +1602,9 @@ EOF;
         ?string $proposalAfter = null,
         ?string $votesAfter = null,
         ?string $commentsAfter = null,
-        int $PROPOSALS_PER_PAGE = self::PROPOSALS_PER_PAGE,
-        int $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE,
-        int $VOTES_PER_PAGE = self::VOTES_PER_PAGE
+        string $PROPOSALS_PER_PAGE = self::PROPOSALS_PER_PAGE,
+        string $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE,
+        string $VOTES_PER_PAGE = self::VOTES_PER_PAGE
     ): string {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;

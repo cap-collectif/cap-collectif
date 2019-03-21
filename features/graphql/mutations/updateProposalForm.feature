@@ -453,13 +453,13 @@ Scenario: GraphQL client wants to delete the first question choice
                 {
                   "id": "questionchoice33",
                   "title": "Non",
-                  "description": null,
+                  "description": "",
                   "color": null
                 },
                 {
                   "id": "questionchoice34",
                   "title": "Peut être",
-                  "description": null,
+                  "description": "",
                   "color": null
                 }
               ]

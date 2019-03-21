@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Overlay, Popover } from 'react-bootstrap';
+import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 
 type Props = {
   overlay: React.Element<*>,
@@ -10,19 +10,14 @@ type Props = {
 };
 
 type State = {
-  show: boolean,
+  isOpen: boolean,
 };
 
 export default class FiltersContainer extends React.Component<Props, State> {
-  target: any;
-
   constructor(props: Props) {
     super(props);
-
-    this.target = React.createRef();
-
     this.state = {
-      show: false,
+      isOpen: false,
     };
   }
 
@@ -40,34 +35,40 @@ export default class FiltersContainer extends React.Component<Props, State> {
     return filterCount && filterCount > 0 ? `(${filterCount})` : '';
   }
 
-  handleToggle = () => {
-    this.setState({ show: !this.state.show });
-  };
-
   render() {
     const { overlay, type } = this.props;
     return (
-      <div className="position-relative">
+      <OverlayTrigger
+        trigger="click"
+        placement="bottom"
+        aria-describedby=""
+        overlay={
+          <Popover id="FiltersContainer" className="w-260" rel="">
+            {overlay}
+          </Popover>
+        }
+        className="w-25"
+        id={`${type}-list-filters-d`}>
         <Button
+          className="btn--outline btn-dark-gray"
           id={`${type}-button-filter`}
-          ref={this.target}
-          aria-expanded={this.state.show}
-          onClick={this.handleToggle}>
+          aria-describedby=""
+          aria-expanded={this.state.isOpen}
+          onClick={() => {
+            this.setState({ isOpen: !this.state.isOpen });
+            setTimeout(() => {
+              const target = document.getElementById('event-filters');
+              const queryAll = document.querySelectorAll('.popover.bottom');
+              if (target !== null && queryAll !== null) {
+                queryAll.forEach(el => target.after(el));
+              }
+            }, 500);
+          }}>
           <i className="cap cap-filter-1 small mr-5" />
           <FormattedMessage id="link_filters" /> {this.renderFilterCount()}
           <i className="cap cap-triangle-down ml-5" />
         </Button>
-        <Overlay
-          placement="bottom"
-          container={this}
-          show={this.state.show}
-          target={this.target.current}
-          id={`${type}-list-filters-d`}>
-          <Popover id="FiltersContainer" className="w-260" rel="">
-            {overlay}
-          </Popover>
-        </Overlay>
-      </div>
+      </OverlayTrigger>
     );
   }
 }

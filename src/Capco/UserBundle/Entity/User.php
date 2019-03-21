@@ -51,14 +51,29 @@ class User extends BaseUser implements
 
     protected $gender;
 
+    /**
+     * @var int
+     */
     protected $facebook_id;
 
+    /**
+     * @var int
+     */
     protected $facebook_access_token;
 
+    /**
+     * @var int
+     */
     protected $facebookUrl;
 
+    /**
+     * @var int
+     */
     protected $google_id;
 
+    /**
+     * @var int
+     */
     protected $google_access_token;
 
     protected $linkedInUrl;
@@ -66,24 +81,51 @@ class User extends BaseUser implements
     protected $credentialsExpireAt;
     protected $credentialsExpired = false;
 
+    /**
+     * @var string
+     */
     protected $twitter_id;
 
+    /**
+     * @var string
+     */
     protected $twitter_access_token;
 
+    /**
+     * @var string
+     */
     protected $twitterUrl;
 
+    /**
+     * @var
+     */
     protected $media;
 
+    /**
+     * @var string
+     */
     protected $address;
 
+    /**
+     * @var string
+     */
     protected $address2;
 
     protected $zipCode;
 
+    /**
+     * @var string
+     */
     protected $neighborhood;
 
+    /**
+     * @var string
+     */
     protected $city;
 
+    /**
+     * @var string
+     */
     protected $encoder;
 
     protected $opinions;

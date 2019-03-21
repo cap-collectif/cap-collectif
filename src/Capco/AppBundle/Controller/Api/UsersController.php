@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 

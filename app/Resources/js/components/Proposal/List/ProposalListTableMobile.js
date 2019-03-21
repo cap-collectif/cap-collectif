@@ -23,7 +23,7 @@ export class ProposalListTableMobile extends React.Component<Props> {
     return (
       <ListGroup className="list-group-custom">
         {data.map((item, key) => {
-          const { value } = item.implementationPhase;
+          const value = item.implementationPhase.value;
           const openSteps = value.list.filter(step => moment().isBetween(step.startAt, step.endAt));
           const openTimelessSteps = value.list.filter(
             step => !step.endAt && moment().isAfter(step.startAt),

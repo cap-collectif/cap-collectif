@@ -257,7 +257,7 @@ class ProjectDownloadResolver
         return $this->translator->trans('global.no', [], 'CapcoAppBundle');
     }
 
-    private function dateToString(?\DateTime $date = null): string
+    private function dateToString(\DateTime $date = null): string
     {
         if ($date) {
             return $date->format('Y-m-d H:i:s');
@@ -266,7 +266,7 @@ class ProjectDownloadResolver
         return '';
     }
 
-    private function formatText($text): string
+    private function formatText($text)
     {
         $oneBreak = ['<br>', '<br/>', '&nbsp;'];
         $twoBreaks = ['</p>'];

@@ -71,7 +71,7 @@ class Reply implements Publishable, Contribution, VoteContribution
 
     public function __construct()
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
         $this->responses = new ArrayCollection();
     }
 

@@ -32,7 +32,7 @@ const defaultProps = {
   },
 };
 
-describe('<EventListCounters />', () => {
+describe('<EventListFilters />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<EventListCounter {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();

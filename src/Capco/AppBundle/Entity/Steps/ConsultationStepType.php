@@ -58,7 +58,7 @@ class ConsultationStepType
     public function __construct()
     {
         $this->opinionTypes = new ArrayCollection();
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()

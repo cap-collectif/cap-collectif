@@ -121,8 +121,8 @@ class Post implements CommentableInterface, IndexableInterface
         $this->projects = new ArrayCollection();
         $this->proposals = new ArrayCollection();
         $this->commentsCount = 0;
-        $this->updatedAt = new \DateTime();
-        $this->publishedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
+        $this->publishedAt = new \Datetime();
     }
 
     public function __toString()

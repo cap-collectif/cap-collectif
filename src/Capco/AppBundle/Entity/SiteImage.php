@@ -77,7 +77,7 @@ class SiteImage
      */
     public function __construct()
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()

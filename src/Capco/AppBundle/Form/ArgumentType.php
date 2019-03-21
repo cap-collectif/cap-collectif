@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,14 +13,15 @@ class ArgumentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('body', TextType::class, [
+            ->add('body',
+                PurifiedTextareaType::class, [
                 'required' => true,
-                'purify_html' => true,
-                'purify_html_profile' => 'default',
             ])
-            ->add('type', IntegerType::class, [
+            ->add('type',
+                IntegerType::class, [
                 'required' => true,
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

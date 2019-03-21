@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
@@ -362,7 +363,7 @@ class StepAdmin extends CapcoAdmin
                     ])
                     ->add('defaultSort', 'choice', [
                         'label' => 'admin.fields.step.default_sort',
-                        'choices' => CollectStep::$sortLabels,
+                        'choices' => SelectionStep::$sortLabels,
                         'translation_domain' => 'CapcoAppBundle',
                         'required' => true,
                     ]);

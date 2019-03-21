@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
@@ -43,7 +42,7 @@ class UserType
      */
     public function __construct()
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()

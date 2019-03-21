@@ -49,9 +49,6 @@ class PageAdmin extends AbstractAdmin
                 'label' => 'page.metadescription',
                 'required' => false,
                 'help' => 'admin.help.metadescription',
-                'strip_tags' => true,
-                'purify_html' => true,
-                'purify_html_profile' => 'default',
             ])
             ->add(
                 'cover',

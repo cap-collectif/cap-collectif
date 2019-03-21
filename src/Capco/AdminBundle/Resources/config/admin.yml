@@ -358,7 +358,7 @@ services:
       - [setTranslationDomain, [CapcoAppBundle]]
 
   Capco\AdminBundle\Admin\SiteFaviconAdmin:
-    arguments: [~, Capco\AppBundle\Entity\SiteImage, CapcoAdminBundle:SiteFavicon]
+    arguments: [~, ~, CapcoAdminBundle:SiteFavicon]
     tags:
       - { name: sonata.admin, manager_type: orm, label: website-icon }
 

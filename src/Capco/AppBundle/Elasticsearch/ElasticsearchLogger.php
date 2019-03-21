@@ -22,7 +22,7 @@ class ElasticsearchLogger implements LoggerInterface
         float $time,
         array $connection = [],
         array $query = [],
-        float $engineTime = 0.0,
+        float $engineTime = 0,
         int $itemCount = 0,
         array $response = null
     ): void {

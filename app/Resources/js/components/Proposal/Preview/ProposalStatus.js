@@ -13,7 +13,7 @@ type Props = {
 export class ProposalStatus extends React.Component<Props> {
   render() {
     const { proposal } = this.props;
-    let { status } = proposal;
+    let status = proposal.status;
     if (proposal.trashed) {
       status = {
         color: 'default',

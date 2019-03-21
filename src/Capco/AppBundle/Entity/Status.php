@@ -43,12 +43,12 @@ class Status
     ];
 
     public static $statusesLabels = [
-        'statuses.labels.normal' => self::NORMAL,
-        'statuses.labels.primary' => self::PRIMARY,
-        'statuses.labels.success' => self::SUCCESS,
-        'statuses.labels.info' => self::INFO,
-        'statuses.labels.warning' => self::WARNING,
-        'statuses.labels.danger' => self::DANGER,
+         'statuses.labels.normal' => self::NORMAL,
+         'statuses.labels.primary' => self::PRIMARY,
+         'statuses.labels.success' => self::SUCCESS,
+         'statuses.labels.info' => self::INFO,
+         'statuses.labels.warning' => self::WARNING,
+         'statuses.labels.danger' => self::DANGER,
     ];
 
     /**
@@ -83,7 +83,7 @@ class Status
      */
     public function __construct()
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
         $this->proposals = new ArrayCollection();
     }
 

@@ -96,7 +96,7 @@ class Section
     /**
      * @ORM\Column(name="body", type="text", nullable=true)
      */
-    private $body;
+    private $body = null;
 
     /**
      * @ORM\Column(name="type", type="string", length=255)
@@ -151,7 +151,7 @@ class Section
 
     public function __construct()
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()

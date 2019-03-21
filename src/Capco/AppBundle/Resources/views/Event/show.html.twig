@@ -49,6 +49,11 @@
                                                 <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if loop.revindex0 == '1' %} {{ 'event.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endif %}{% endfor %},
                                     {% endif %}
                                     {{ 'event.show.on_date'|trans({'%date%': event.createdAt | localizeddate('long', 'none') }, 'CapcoAppBundle') }}
+                                    {% if capco_comment_can_show(event) %}
+                                        | {% transchoice event.commentsCount with {'%count%': event.commentsCount} from 'CapcoAppBundle' %}
+                                        event.show.comments
+                                        {% endtranschoice %}
+                                    {% endif %}
                                     {% if event.registrations|length > 0 %}
                                         | {% transchoice event.registrations|length with {'%count%': event.registrations|length} from 'CapcoAppBundle' %}
                                         event_registration.listing.count

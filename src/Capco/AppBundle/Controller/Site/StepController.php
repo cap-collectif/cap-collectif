@@ -357,7 +357,7 @@ class StepController extends Controller
      * })
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={
      *    "mapping": {"stepSlug": "slug"},
-     *    "repository_method"="getOne",
+     *    "method"="getOne",
      *    "map_method_signature"=true
      * })
      * @Template("CapcoAppBundle:Consultation:show.html.twig")

@@ -122,7 +122,7 @@ abstract class Comment implements
         $this->votes = new ArrayCollection();
         $this->answers = new ArrayCollection();
         $this->Reports = new ArrayCollection();
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()

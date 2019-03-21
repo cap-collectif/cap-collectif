@@ -71,7 +71,7 @@ class ProposalNotifier extends BaseNotifier
             $stepUrl = $this->urlResolver->getStepUrl($proposal->getStep(), true);
             $confirmationUrl = null;
 
-            if ($proposal->getAuthor() && !$proposal->getAuthor()->isEmailConfirmed()) {
+            if (!$proposal->getAuthor()->isEmailConfirmed()) {
                 $confirmationUrl = $this->router->generate(
                     'account_confirm_email',
                     [

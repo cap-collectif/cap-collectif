@@ -3,7 +3,8 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Comment;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -32,19 +33,11 @@ class CommentType extends AbstractType
             ]);
         }
 
-        $builder->add('body', TextType::class, [
-            'required' => true,
-            'purify_html' => true,
-            'purify_html_profile' => 'default',
-        ]);
+        $builder->add('body', PurifiedTextareaType::class, ['required' => true]);
 
         if (!$this->user || !\is_object($this->user)) {
             $builder
-                ->add('authorName', TextType::class, [
-                    'required' => true,
-                    'purify_html' => true,
-                    'purify_html_profile' => 'default',
-                ])
+                ->add('authorName', PurifiedTextType::class, ['required' => true])
                 ->add('authorEmail', EmailType::class, ['required' => true]);
         }
     }

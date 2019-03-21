@@ -81,7 +81,7 @@ class Page
     public function __construct()
     {
         $this->MenuItems = new ArrayCollection();
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()

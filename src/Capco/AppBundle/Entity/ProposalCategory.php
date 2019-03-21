@@ -44,8 +44,8 @@ class ProposalCategory
 
     public function __construct()
     {
-        $this->updatedAt = new \DateTime();
-        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
+        $this->createdAt = new \Datetime();
     }
 
     public function __toString()

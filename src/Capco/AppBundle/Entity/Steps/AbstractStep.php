@@ -149,7 +149,7 @@ abstract class AbstractStep implements DisplayableInBOInterface
      */
     public function __construct()
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
         $this->statuses = new ArrayCollection();
     }
 

@@ -4,11 +4,11 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,21 +18,9 @@ class SimpleQuestionType extends AbstractType
     {
         $builder->add('id', IntegerType::class);
         $builder->add('temporaryId', TextType::class);
-        $builder->add('title', PurifiedTextType::class, [
-            'strip_tags' => true,
-            'purify_html' => true,
-            'purify_html_profile' => 'default',
-        ]);
-        $builder->add('helpText', PurifiedTextType::class, [
-            'purify_html' => true,
-            'strip_tags' => true,
-            'purify_html_profile' => 'default',
-        ]);
-        $builder->add('description', PurifiedTextType::class, [
-            'strip_tags' => true,
-            'purify_html' => true,
-            'purify_html_profile' => 'default',
-        ]);
+        $builder->add('title', PurifiedTextType::class);
+        $builder->add('helpText', PurifiedTextType::class);
+        $builder->add('description', PurifiedTextType::class);
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
         $builder->add('type', IntegerType::class);

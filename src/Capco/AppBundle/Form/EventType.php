@@ -5,9 +5,9 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventType extends AbstractType
@@ -15,14 +15,8 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
-                'purify_html' => true,
-                'purify_html_profile' => 'default',
-            ])
-            ->add('body', TextareaType::class, [
-                'purify_html' => true,
-                'purify_html_profile' => 'default',
-            ])
+            ->add('title', PurifiedTextType::class)
+            ->add('body', PurifiedTextareaType::class)
             ->add('startAt', DateTimeType::class, [
                 'widget' => 'single_text',
                 'format' => 'Y-MM-dd HH:mm:ss',

@@ -116,7 +116,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     public function __construct()
     {
         $this->questions = new ArrayCollection();
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()

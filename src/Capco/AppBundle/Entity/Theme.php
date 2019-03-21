@@ -133,7 +133,7 @@ class Theme implements IndexableInterface
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->proposals = new ArrayCollection();
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()

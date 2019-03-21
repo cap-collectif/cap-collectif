@@ -8,11 +8,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait AnonymousableTrait
 {
     /**
+     * @var
+     *
      * @ORM\Column(name="ip_address", type="string", nullable=true)
      * @Assert\Ip(version="all")
      */
     protected $ipAddress;
-
     /**
      * @ORM\Column(name="username", type="string", length=255, nullable=true)
      */
@@ -24,36 +25,60 @@ trait AnonymousableTrait
      */
     private $email;
 
-    public function getUsername(): ?string
+    /**
+     * Gets the value of username.
+     *
+     * @return mixed
+     */
+    public function getUsername()
     {
         return $this->username;
     }
 
-    public function setUsername(?string $username = null): self
+    /**
+     * @param mixed $username
+     *
+     * @return $this
+     */
+    public function setUsername($username)
     {
         $this->username = $username;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    /**
+     * @return mixed
+     */
+    public function getEmail()
     {
         return $this->email;
     }
 
-    public function setEmail(?string $email = null): self
+    /**
+     * @param mixed $email
+     *
+     * @return $this
+     */
+    public function setEmail($email)
     {
         $this->email = $email;
 
         return $this;
     }
 
-    public function getIpAddress(): ?string
+    /**
+     * @return mixed
+     */
+    public function getIpAddress()
     {
         return $this->ipAddress;
     }
 
-    public function setIpAddress(?string $ipAddress = null): self
+    /**
+     * @param mixed $ipAddress
+     */
+    public function setIpAddress($ipAddress)
     {
         $this->ipAddress = $ipAddress;
 

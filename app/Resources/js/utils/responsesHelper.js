@@ -262,11 +262,11 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
 //   question: string,
 //   medias: $ReadOnlyArray<string>,
 // |}>;
-type SubmitResponses = $ReadOnlyArray<{|
+type SubmitResponses = $ReadOnlyArray<{
   value?: any,
   question: string,
   medias?: ?$ReadOnlyArray<string>,
-|}>;
+}>;
 
 const getValueFromSubmitResponse = search => {
   if (search && typeof search.value === 'string') {

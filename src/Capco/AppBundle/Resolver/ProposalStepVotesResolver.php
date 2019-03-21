@@ -54,7 +54,7 @@ class ProposalStepVotesResolver extends AbstractExtension
         return [new TwigFilter('current_votable_step', [$this, 'getFirstVotableStepForProposal'])];
     }
 
-    public function voteIsPossible($vote): bool
+    public function voteIsPossible($vote)
     {
         return $this->checkIntanceOfProposalVote($vote);
     }
@@ -149,9 +149,8 @@ class ProposalStepVotesResolver extends AbstractExtension
         return $this->getAmountSpentForVotes($votes);
     }
 
-    private function checkIntanceOfProposalVote($vote): bool
+    private function checkIntanceOfProposalVote($vote)
     {
-        $connected = $anonymous = $step = null;
         switch (true) {
             case $vote instanceof ProposalSelectionVote:
                 $step = $vote->getSelectionStep();
@@ -189,18 +188,18 @@ class ProposalStepVotesResolver extends AbstractExtension
 
         $proposal = $vote->getProposal();
         $otherVotes = [];
-        if ($vote->getUser() && $connected) {
+        if ($vote->getUser()) {
             $otherVotes = $connected;
         } elseif ($vote->getEmail()) {
             $otherVotes = $anonymous;
         }
 
-        if ($step && !$step->isVotable()) {
+        if (!$step->isVotable()) {
             return false;
         }
 
         if ($vote instanceof ProposalSelectionVote || $vote instanceof ProposalCollectVote) {
-            if ($step && $step->isBudgetVotable() && $step->getBudget()) {
+            if ($step->isBudgetVotable() && $step->getBudget()) {
                 $left = $step->getBudget() - $this->getAmountSpentForVotes($otherVotes);
 
                 return $left >= $proposal->getEstimation();
