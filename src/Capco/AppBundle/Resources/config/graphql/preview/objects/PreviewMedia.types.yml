@@ -1,0 +1,12 @@
+PreviewMedia:
+  type: object
+  inherits:
+    - UniformResourceLocatable
+  config:
+    name: Media
+    interfaces:
+      - UniformResourceLocatable
+    description: 'A file uploaded by a user.'
+    fields:
+      url:
+        resolve: "@=resolver('media_url', [value, args])"

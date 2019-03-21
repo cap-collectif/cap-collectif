@@ -1,8 +1,9 @@
-MultipleChoiceQuestion:
+InternalMultipleChoiceQuestion:
   type: object
   inherits:
     - InternalQuestion
   config:
+    name: MultipleChoiceQuestion
     interfaces:
       - InternalQuestion
       - Node
@@ -16,12 +17,12 @@ MultipleChoiceQuestion:
         resolve: "@=resolver('question_isOtherAllowed', [value])"
       # TODO we can probably design this better
       otherResponses:
-        type: 'ResponseConnection!'
+        type: 'InternalResponseConnection!'
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\OtherQuestionChoiceResponseResolver", [value, args])'
         description: 'Responses of the `other` question choice.'
       choices:
-        type: '[QuestionChoice!]'
+        type: '[InternalQuestionChoice!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQuestionChoicesResolver", [value, args])'
         args:
           allowRandomize:

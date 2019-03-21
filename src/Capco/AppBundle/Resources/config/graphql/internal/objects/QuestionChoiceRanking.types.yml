@@ -1,13 +1,14 @@
-QuestionChoiceRanking:
+InternalQuestionChoiceRanking:
   type: object
   config:
+    name: QuestionChoiceRanking
     description: 'The choice ranking'
     fields:
       position:
         type: 'Int!'
-        description: 'Return the position of the choice'
+        description: 'Identifies the position of the choice'
       responses:
-        type: 'ResponseConnection!'
+        type: 'InternalResponseConnection!'
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResponseResolver", [value, args])'
-        description: 'Select the responses of the c'
+        description: 'Identifies the responses of the choice.'

@@ -1,7 +1,8 @@
-ResponseConnection:
+PreviewResponseConnection:
   type: relay-connection
   config:
-    nodeType: InternalResponse!
+    name: ResponseConnection
+    nodeType: PreviewResponse!
     connectionFields:
       totalCount:
         type: Int!

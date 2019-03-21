@@ -3,6 +3,6 @@ AddReplyPayload:
   config:
     fields:
       reply:
-        type: 'Reply'
+        type: 'InternalReply'
       questionnaire:
         type: 'InternalQuestionnaire'
