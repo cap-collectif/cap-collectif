@@ -134,11 +134,12 @@ const form = reduxForm({
 
 const container = injectIntl(form);
 
-export default createFragmentContainer(container, {
-  user: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment UserAdminPassword_user on User {
       id
       isViewer
     }
   `,
-});
+);

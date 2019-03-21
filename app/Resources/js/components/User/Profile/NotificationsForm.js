@@ -210,8 +210,9 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
 
 const container = connect(mapStateToProps)(injectIntl(form));
 
-export default createFragmentContainer(container, {
-  viewer: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment NotificationsForm_viewer on User {
       consentExternalCommunication
       consentInternalCommunication
@@ -220,4 +221,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+);

@@ -38,10 +38,11 @@ export class RenderPrivateAccess extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(RenderPrivateAccess, {
-  project: graphql`
+export default createFragmentContainer(
+  RenderPrivateAccess,
+  graphql`
     fragment RenderPrivateAccess_project on Project {
       visibility
     }
   `,
-});
+);

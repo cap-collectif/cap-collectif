@@ -67,8 +67,9 @@ export class RenderCustomAccess extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(RenderCustomAccess, {
-  project: graphql`
+export default createFragmentContainer(
+  RenderCustomAccess,
+  graphql`
     fragment RenderCustomAccess_project on Project {
       restrictedViewers(first: $count, after: $cursor) {
         totalUserCount
@@ -76,4 +77,4 @@ export default createFragmentContainer(RenderCustomAccess, {
       ...UserGroupModal_project @arguments(count: $count, cursor: $cursor)
     }
   `,
-});
+);

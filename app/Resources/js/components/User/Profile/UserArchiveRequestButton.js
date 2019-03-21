@@ -94,8 +94,9 @@ export class UserArchiveRequestButton extends Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(UserArchiveRequestButton, {
-  viewer: graphql`
+export default createFragmentContainer(
+  UserArchiveRequestButton,
+  graphql`
     fragment UserArchiveRequestButton_viewer on User {
       email
       isArchiveReady
@@ -103,4 +104,4 @@ export default createFragmentContainer(UserArchiveRequestButton, {
       firstArchive
     }
   `,
-});
+);

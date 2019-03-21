@@ -190,8 +190,9 @@ export class ProposalFollowButton extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(ProposalFollowButton, {
-  proposal: graphql`
+export default createFragmentContainer(
+  ProposalFollowButton,
+  graphql`
     fragment ProposalFollowButton_proposal on Proposal
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
@@ -199,4 +200,4 @@ export default createFragmentContainer(ProposalFollowButton, {
       viewerFollowingConfiguration @include(if: $isAuthenticated)
     }
   `,
-});
+);

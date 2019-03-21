@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FieldArray, type FormProps, reduxForm } from 'redux-form';
+import { type FormProps, reduxForm, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
@@ -81,8 +81,9 @@ const mapStateToProps = (state: State, props: Props) => ({
 
 const container = connect(mapStateToProps)(injectIntl(form));
 
-export default createFragmentContainer(container, {
-  registrationForm: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
       id
       questions {
@@ -91,4 +92,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+);

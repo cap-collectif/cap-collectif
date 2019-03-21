@@ -65,6 +65,9 @@ exports[`<ProjectPreviewProgressBar /> should render correctly counters with dis
             },
           ],
           "id": "project2",
+          "isContributionsCounterDisplayable": true,
+          "isParticipantsCounterDisplayable": true,
+          "isVotesCounterDisplayable": true,
           "votes": Object {
             "totalCount": 54,
           },
@@ -111,6 +114,9 @@ exports[`<ProjectPreviewProgressBar /> should render correctly counters without 
           },
           "districts": Array [],
           "id": "project1",
+          "isContributionsCounterDisplayable": true,
+          "isParticipantsCounterDisplayable": true,
+          "isVotesCounterDisplayable": true,
           "votes": Object {
             "totalCount": 48,
           },

@@ -654,8 +654,9 @@ const mapStateToProps = (state: State, props: Props) => ({
 
 const container = connect(mapStateToProps)(injectIntl(form));
 
-export default createFragmentContainer(container, {
-  viewer: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment PersonalData_viewer on User {
       id
       firstname
@@ -673,4 +674,4 @@ export default createFragmentContainer(container, {
       ...UserArchiveRequestButton_viewer
     }
   `,
-});
+);

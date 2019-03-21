@@ -97,10 +97,11 @@ const mapStateToProps = (state: GlobalState) => ({
 
 const container = connect(mapStateToProps)(AccountBox);
 
-export default createFragmentContainer(container, {
-  viewer: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment AccountBox_viewer on User {
       ...DeleteAccountModal_viewer
     }
   `,
-});
+);

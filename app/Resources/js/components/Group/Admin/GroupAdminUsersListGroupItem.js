@@ -107,8 +107,9 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
 
 const container = connect()(GroupAdminUsersListGroupItem);
 
-export default createFragmentContainer(container, {
-  user: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment GroupAdminUsersListGroupItem_user on User {
       id
       displayName
@@ -120,4 +121,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+);

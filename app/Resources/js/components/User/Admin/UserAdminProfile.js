@@ -317,8 +317,9 @@ const mapStateToProps = (state: GlobalState, { user }: RelayProps) => ({
 const container = connect(mapStateToProps)(injectIntl(form));
 
 // same as Profile.js I have to find a solution to merge both in one
-export default createFragmentContainer(container, {
-  user: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment UserAdminProfile_user on User {
       id
       media {
@@ -342,4 +343,4 @@ export default createFragmentContainer(container, {
       isViewer
     }
   `,
-});
+);

@@ -133,8 +133,9 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
 });
 const container = connect(mapStateToProps)(injectIntl(form));
 
-export default createFragmentContainer(container, {
-  proposal: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment ProposalFusionEditForm_proposal on Proposal {
       id
       mergedFrom {
@@ -149,4 +150,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+);

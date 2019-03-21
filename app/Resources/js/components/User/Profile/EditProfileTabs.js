@@ -152,8 +152,9 @@ const mapStateToProps = (state: State) => ({
 
 const container = connect(mapStateToProps)(EditProfileTabs);
 
-export default createFragmentContainer(container, {
-  viewer: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment EditProfileTabs_viewer on User {
       ...FollowingsTab_viewer
       ...NotificationsForm_viewer
@@ -168,4 +169,4 @@ export default createFragmentContainer(container, {
       url
     }
   `,
-});
+);

@@ -240,8 +240,9 @@ const mapStateToProps = (state: State) => ({
 
 const container = connect(mapStateToProps)(Post);
 
-export default createFragmentContainer(container, {
-  post: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment Post_post on Post {
       abstract
       url
@@ -263,4 +264,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+);

@@ -24,10 +24,11 @@ class TrashedMessage extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(TrashedMessage, {
-  contribution: graphql`
+export default createFragmentContainer(
+  TrashedMessage,
+  graphql`
     fragment TrashedMessage_contribution on Trashable {
       trashedStatus
     }
   `,
-});
+);

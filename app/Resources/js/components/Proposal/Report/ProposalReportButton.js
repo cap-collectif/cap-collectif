@@ -34,8 +34,9 @@ export class ProposalReportButton extends React.Component<Props> {
 
 const container = connect()(ProposalReportButton);
 
-export default createFragmentContainer(container, {
-  proposal: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment ProposalReportButton_proposal on Proposal
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
@@ -45,4 +46,4 @@ export default createFragmentContainer(container, {
       viewerHasReport @include(if: $isAuthenticated)
     }
   `,
-});
+);

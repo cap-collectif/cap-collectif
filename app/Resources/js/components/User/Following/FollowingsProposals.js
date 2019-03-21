@@ -83,8 +83,9 @@ export class FollowingsProposals extends Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(FollowingsProposals, {
-  viewer: graphql`
+export default createFragmentContainer(
+  FollowingsProposals,
+  graphql`
     fragment FollowingsProposals_viewer on User
       @argumentDefinitions(
         count: { type: "Int", defaultValue: 1000 }
@@ -107,4 +108,4 @@ export default createFragmentContainer(FollowingsProposals, {
       }
     }
   `,
-});
+);

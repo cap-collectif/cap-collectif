@@ -76,8 +76,9 @@ const form = reduxForm({
   },
 })(EventPageContainer);
 
-export default createFragmentContainer(form, {
-  query: graphql`
+export default createFragmentContainer(
+  form,
+  graphql`
     fragment EventPageContainer_query on Query
       @argumentDefinitions(
         count: { type: "Int!" }
@@ -120,4 +121,4 @@ export default createFragmentContainer(form, {
         )
     }
   `,
-});
+);

@@ -60,8 +60,9 @@ export class UnpublishedOpinionList extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(UnpublishedOpinionList, {
-  consultation: graphql`
+export default createFragmentContainer(
+  UnpublishedOpinionList,
+  graphql`
     fragment UnpublishedOpinionList_consultation on Consultation {
       viewerOpinionsUnpublished(first: 100) {
         totalCount
@@ -75,4 +76,4 @@ export default createFragmentContainer(UnpublishedOpinionList, {
       }
     }
   `,
-});
+);

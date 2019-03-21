@@ -306,8 +306,9 @@ const mapStateToProps = (state: State, { user }: RelayProps) => ({
 const container = connect(mapStateToProps)(injectIntl(form));
 
 // same as PersonalData.js I have to find a solution to merge both in one
-export default createFragmentContainer(container, {
-  user: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment UserAdminPersonalData_user on User {
       id
       email
@@ -326,4 +327,4 @@ export default createFragmentContainer(container, {
       isViewer
     }
   `,
-});
+);

@@ -72,8 +72,9 @@ export class OpinionProjectRow extends Component<Props, State> {
     );
   }
 }
-export default createFragmentContainer(OpinionProjectRow, {
-  viewer: graphql`
+export default createFragmentContainer(
+  OpinionProjectRow,
+  graphql`
     fragment OpinionProjectRow_viewer on User
       @argumentDefinitions(
         count: { type: "Int", defaultValue: 1000 }
@@ -94,4 +95,4 @@ export default createFragmentContainer(OpinionProjectRow, {
       }
     }
   `,
-});
+);

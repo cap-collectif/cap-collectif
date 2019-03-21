@@ -299,8 +299,9 @@ const mapStateToProps = (state: GlobalState) => ({
 
 const container = connect(mapStateToProps)(injectIntl(EventListFilters));
 
-export default createFragmentContainer(container, {
-  query: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment EventListFilters_query on Query
       @argumentDefinitions(
         count: { type: "Int!" }
@@ -323,4 +324,4 @@ export default createFragmentContainer(container, {
         )
     }
   `,
-});
+);

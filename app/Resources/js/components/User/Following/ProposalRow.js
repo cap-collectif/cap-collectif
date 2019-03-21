@@ -60,12 +60,13 @@ export class ProposalRow extends Component<Props, State> {
     );
   }
 }
-export default createFragmentContainer(ProposalRow, {
-  proposal: graphql`
+export default createFragmentContainer(
+  ProposalRow,
+  graphql`
     fragment ProposalRow_proposal on Proposal {
       id
       title
       url
     }
   `,
-});
+);

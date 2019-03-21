@@ -75,34 +75,31 @@ export class ProposalPageFollowers extends React.Component<Props, State> {
 
 export default createPaginationContainer(
   ProposalPageFollowers,
-  {
-    proposal: graphql`
-      fragment ProposalPageFollowers_proposal on Proposal
-        @argumentDefinitions(
-          count: { type: "Int", defaultValue: 20 }
-          cursor: { type: "String", defaultValue: null }
-        ) {
-        id
-        followers(first: $count, after: $cursor)
-          @connection(key: "ProposalPageFollowers_followers") {
-          edges {
-            cursor
-            node {
-              id
-              ...UserBox_user
-            }
+  graphql`
+    fragment ProposalPageFollowers_proposal on Proposal
+      @argumentDefinitions(
+        count: { type: "Int", defaultValue: 20 }
+        cursor: { type: "String", defaultValue: null }
+      ) {
+      id
+      followers(first: $count, after: $cursor) @connection(key: "ProposalPageFollowers_followers") {
+        edges {
+          cursor
+          node {
+            id
+            ...UserBox_user
           }
-          pageInfo {
-            hasPreviousPage
-            hasNextPage
-            endCursor
-            startCursor
-          }
-          totalCount
         }
+        pageInfo {
+          hasPreviousPage
+          hasNextPage
+          endCursor
+          startCursor
+        }
+        totalCount
       }
-    `,
-  },
+    }
+  `,
   {
     direction: 'forward',
     getConnectionFromProps(props: Props) {

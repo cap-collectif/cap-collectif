@@ -71,10 +71,11 @@ const container = connect(
   mapDispatchToProps,
 )(ProposalFusionEditModal);
 
-export default createFragmentContainer(container, {
-  proposal: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment ProposalFusionEditModal_proposal on Proposal {
       ...ProposalFusionEditForm_proposal
     }
   `,
-});
+);

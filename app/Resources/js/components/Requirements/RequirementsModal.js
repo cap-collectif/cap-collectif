@@ -49,8 +49,9 @@ export class RequirementsModal extends React.Component<Props> {
 }
 
 const container = connect()(RequirementsModal);
-export default createFragmentContainer(container, {
-  step: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment RequirementsModal_step on Consultation
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
@@ -62,4 +63,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+);

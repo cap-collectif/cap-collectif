@@ -87,8 +87,9 @@ export class VoteItem extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(VoteItem, {
-  vote: graphql`
+export default createFragmentContainer(
+  VoteItem,
+  graphql`
     fragment VoteItem_vote on Vote {
       id
       __typename
@@ -134,4 +135,4 @@ export default createFragmentContainer(VoteItem, {
       }
     }
   `,
-});
+);

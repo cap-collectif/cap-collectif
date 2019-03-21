@@ -53,8 +53,9 @@ export class ProposalFusionList extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(ProposalFusionList, {
-  proposal: graphql`
+export default createFragmentContainer(
+  ProposalFusionList,
+  graphql`
     fragment ProposalFusionList_proposal on Proposal {
       id
       mergedFrom {
@@ -69,4 +70,4 @@ export default createFragmentContainer(ProposalFusionList, {
       }
     }
   `,
-});
+);

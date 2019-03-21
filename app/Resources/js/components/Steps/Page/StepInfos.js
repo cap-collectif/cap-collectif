@@ -23,10 +23,11 @@ export class StepInfos extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(StepInfos, {
-  step: graphql`
+export default createFragmentContainer(
+  StepInfos,
+  graphql`
     fragment StepInfos_step on Step {
       body
     }
   `,
-});
+);

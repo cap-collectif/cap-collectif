@@ -97,12 +97,13 @@ export class ContactAdminListItem extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(ContactAdminListItem, {
-  contactForm: graphql`
+export default createFragmentContainer(
+  ContactAdminListItem,
+  graphql`
     fragment ContactAdminListItem_contactForm on ContactForm {
       id
       title
       ...ContactFormAdminModal_contactForm
     }
   `,
-});
+);

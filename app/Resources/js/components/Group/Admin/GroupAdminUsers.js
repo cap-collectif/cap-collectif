@@ -170,8 +170,9 @@ const myComponent = injectIntl(GroupAdminUsers);
 
 const container = connect(mapStateToProps)(myComponent);
 
-export default createFragmentContainer(container, {
-  group: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment GroupAdminUsers_group on Group {
       id
       title
@@ -185,4 +186,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+);

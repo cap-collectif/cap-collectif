@@ -83,8 +83,9 @@ export class UserFollowingsOpinions extends Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(UserFollowingsOpinions, {
-  viewer: graphql`
+export default createFragmentContainer(
+  UserFollowingsOpinions,
+  graphql`
     fragment UserFollowingsOpinions_viewer on User
       @argumentDefinitions(
         count: { type: "Int", defaultValue: 1000 }
@@ -107,4 +108,4 @@ export default createFragmentContainer(UserFollowingsOpinions, {
       }
     }
   `,
-});
+);

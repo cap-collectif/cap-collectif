@@ -39,8 +39,9 @@ export class Opinion extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(Opinion, {
-  opinion: graphql`
+export default createFragmentContainer(
+  Opinion,
+  graphql`
     fragment Opinion_opinion on Opinion {
       ...OpinionPreview_opinion
       votes(first: 0) {
@@ -65,4 +66,4 @@ export default createFragmentContainer(Opinion, {
       }
     }
   `,
-});
+);

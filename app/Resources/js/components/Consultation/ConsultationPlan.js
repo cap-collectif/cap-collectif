@@ -140,8 +140,9 @@ const container = connect(
   mapDispatchToProps,
 )(injectIntl(ConsultationPlan));
 
-export default createFragmentContainer(container, {
-  consultation: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment ConsultationPlan_consultation on Consultation {
       id
       sections {
@@ -161,4 +162,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+);

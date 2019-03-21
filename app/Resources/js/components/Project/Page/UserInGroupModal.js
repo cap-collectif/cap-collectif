@@ -108,41 +108,39 @@ const container = injectIntl(UserInGroupModal);
 
 export default createPaginationContainer(
   container,
-  {
-    group: graphql`
-      fragment UserInGroupModal_group on Group
-        @argumentDefinitions(
-          count: { type: "Int", defaultValue: 10 }
-          cursor: { type: "String", defaultValue: null }
-        ) {
-        id
-        title
-        users(first: $count, after: $cursor) @connection(key: "UserInGroupModal_users") {
-          edges {
-            cursor
-            node {
+  graphql`
+    fragment UserInGroupModal_group on Group
+      @argumentDefinitions(
+        count: { type: "Int", defaultValue: 10 }
+        cursor: { type: "String", defaultValue: null }
+      ) {
+      id
+      title
+      users(first: $count, after: $cursor) @connection(key: "UserInGroupModal_users") {
+        edges {
+          cursor
+          node {
+            id
+            media {
               id
-              media {
-                id
-                name
-                size
-                url
-              }
+              name
+              size
               url
-              username
             }
+            url
+            username
           }
-          pageInfo {
-            hasPreviousPage
-            hasNextPage
-            startCursor
-            endCursor
-          }
-          totalCount
         }
+        pageInfo {
+          hasPreviousPage
+          hasNextPage
+          startCursor
+          endCursor
+        }
+        totalCount
       }
-    `,
-  },
+    }
+  `,
   {
     direction: 'forward',
     getConnectionFromProps(props) {

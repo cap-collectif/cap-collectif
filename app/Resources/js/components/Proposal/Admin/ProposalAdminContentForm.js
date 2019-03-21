@@ -499,8 +499,9 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => ({
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
-export default createFragmentContainer(container, {
-  proposal: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment ProposalAdminContentForm_proposal on Proposal {
       ...ProposalFusionEditModal_proposal
       id
@@ -596,4 +597,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+);

@@ -19,11 +19,12 @@ export class DraftProposalPreview extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(DraftProposalPreview, {
-  proposal: graphql`
+export default createFragmentContainer(
+  DraftProposalPreview,
+  graphql`
     fragment DraftProposalPreview_proposal on Proposal {
       title
       url
     }
   `,
-});
+);

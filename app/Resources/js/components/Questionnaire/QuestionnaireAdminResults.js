@@ -129,8 +129,9 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
 
 const container = withColors(QuestionnaireAdminResults);
 
-export default createFragmentContainer(container, {
-  questionnaire: graphql`
+export default createFragmentContainer(
+  container,
+  graphql`
     fragment QuestionnaireAdminResults_questionnaire on Questionnaire {
       questions {
         __typename
@@ -152,4 +153,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+);

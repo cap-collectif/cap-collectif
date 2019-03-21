@@ -237,8 +237,9 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
   }
 }
 
-export default createFragmentContainer(DeleteAccountModal, {
-  viewer: graphql`
+export default createFragmentContainer(
+  DeleteAccountModal,
+  graphql`
     fragment DeleteAccountModal_viewer on User {
       contributionsCount
       votesCount
@@ -246,4 +247,4 @@ export default createFragmentContainer(DeleteAccountModal, {
       id
     }
   `,
-});
+);

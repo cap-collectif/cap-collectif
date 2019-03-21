@@ -52,30 +52,28 @@ export class OpinionFollowersBox extends React.Component<Props> {
 
 export default createPaginationContainer(
   OpinionFollowersBox,
-  {
-    opinion: graphql`
-      fragment OpinionFollowersBox_opinion on Opinion
-        @argumentDefinitions(
-          count: { type: "Int", defaultValue: 20 }
-          cursor: { type: "String", defaultValue: null }
-        ) {
-        id
-        followers(first: $count, after: $cursor) @connection(key: "OpinionFollowersBox_followers") {
-          edges {
-            cursor
-            node {
-              ...UserBox_user
-            }
+  graphql`
+    fragment OpinionFollowersBox_opinion on Opinion
+      @argumentDefinitions(
+        count: { type: "Int", defaultValue: 20 }
+        cursor: { type: "String", defaultValue: null }
+      ) {
+      id
+      followers(first: $count, after: $cursor) @connection(key: "OpinionFollowersBox_followers") {
+        edges {
+          cursor
+          node {
+            ...UserBox_user
           }
-          pageInfo {
-            hasNextPage
-            endCursor
-          }
-          totalCount
         }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        totalCount
       }
-    `,
-  },
+    }
+  `,
   {
     direction: 'forward',
     getConnectionFromProps(props) {

@@ -126,8 +126,9 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(ArgumentVoteButton, {
-  argument: graphql`
+export default createFragmentContainer(
+  ArgumentVoteButton,
+  graphql`
     fragment ArgumentVoteButton_argument on Argument
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
@@ -151,4 +152,4 @@ export default createFragmentContainer(ArgumentVoteButton, {
       }
     }
   `,
-});
+);

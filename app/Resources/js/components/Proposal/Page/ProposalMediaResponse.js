@@ -30,8 +30,9 @@ export class ProposalMediaResponse extends React.PureComponent<Props> {
   }
 }
 
-export default createFragmentContainer(ProposalMediaResponse, {
-  medias: graphql`
+export default createFragmentContainer(
+  ProposalMediaResponse,
+  graphql`
     fragment ProposalMediaResponse_medias on Media @relay(plural: true) {
       id
       name
@@ -39,4 +40,4 @@ export default createFragmentContainer(ProposalMediaResponse, {
       url
     }
   `,
-});
+);

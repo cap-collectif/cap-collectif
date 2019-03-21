@@ -12,10 +12,11 @@ const OpinionSourceContent = ({ source }: Props) => (
   <WYSIWYGRender className="excerpt" value={source.body} />
 );
 
-export default createFragmentContainer(OpinionSourceContent, {
-  source: graphql`
+export default createFragmentContainer(
+  OpinionSourceContent,
+  graphql`
     fragment OpinionSourceContent_source on Source {
       body
     }
   `,
-});
+);
