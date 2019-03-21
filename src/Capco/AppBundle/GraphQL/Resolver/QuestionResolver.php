@@ -84,7 +84,7 @@ class QuestionResolver implements ResolverInterface
         return $this->questionnaireRepository->getAvailableQuestionnaires();
     }
 
-    public function resolveQuestionnaireQuestions(Questionnaire $questionnaire): array
+    public function resolveQuestionnaireQuestions(Questionnaire $questionnaire)
     {
         $questions = $questionnaire->getRealQuestions()->toArray();
         usort($questions, function ($a, $b) {

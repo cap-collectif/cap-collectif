@@ -9,4 +9,4 @@ MultipleChoiceQuestionLogicJumpCondition:
     fields:
       value:
         description: 'The value that the condition should meet to be fullfiled (depending on the operator).'
-        type: 'InternalQuestionChoice'
+        type: 'QuestionChoice'

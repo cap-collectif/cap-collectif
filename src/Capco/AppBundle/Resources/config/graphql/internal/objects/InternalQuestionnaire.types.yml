@@ -2,7 +2,7 @@ InternalQuestionnaire:
   type: object
   inherits:
     - Node
-    - PreviewQuestionnaire
+    - PublicQuestionnaire
     - InternalPrimaryKey
   config:
     name: Questionnaire
@@ -25,8 +25,9 @@ InternalQuestionnaire:
         resolve: '@=value.isPhoneConfirmationRequired()'
       questions:
         type: '[InternalQuestion!]!'
+        resolve: "@=resolver('questionnaire_questions', [value])"
       viewerReplies:
-        type: '[InternalReply!]!'
+        type: '[Reply!]!'
         access: "@=hasRole('ROLE_USER')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'
       acknowledgeReplies:

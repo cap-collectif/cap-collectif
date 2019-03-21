@@ -32,7 +32,7 @@ describe('<ReplyForm />', () => {
     private: false,
     required: true,
     isOtherAllowed: false,
-    choices: [],
+    choices: null,
   };
 
   const facultativeCheckbox = {

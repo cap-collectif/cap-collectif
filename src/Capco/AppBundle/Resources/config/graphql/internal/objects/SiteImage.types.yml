@@ -19,5 +19,5 @@ SiteImage:
         type: 'String!'
         description: 'The category of the site image'
       media:
-        type: 'InternalMedia'
+        type: 'Media'
         description: 'The associated media of the site image'

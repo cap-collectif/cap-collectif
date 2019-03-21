@@ -11,22 +11,9 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-/**
- * @method Project[]|null findAll()
- */
 class ProjectRepository extends EntityRepository
 {
     use ProjectVisibilityTrait;
-
-    public function findAllIdsWithSlugs(): array
-    {
-        $qb = $this->createQueryBuilder('p');
-
-        return $qb
-            ->select('p.id', 'p.slug')
-            ->getQuery()
-            ->getArrayResult();
-    }
 
     public function hydrateFromIds(array $ids): array
     {

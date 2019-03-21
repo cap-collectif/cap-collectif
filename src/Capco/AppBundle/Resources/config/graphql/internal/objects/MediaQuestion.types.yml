@@ -1,4 +1,4 @@
-InternalMediaQuestion:
+MediaQuestion:
   type: object
   inherits:
     - InternalQuestion
@@ -6,7 +6,6 @@ InternalMediaQuestion:
     interfaces:
       - InternalQuestion
       - Node
-    name: MediaQuestion
     description: 'A media question.'
     fields:
       kind:

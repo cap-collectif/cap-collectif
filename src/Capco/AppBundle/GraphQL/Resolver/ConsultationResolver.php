@@ -95,7 +95,7 @@ class ConsultationResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalProposal');
         }
         if ($data instanceof Reply) {
-            return $this->typeResolver->resolve('InternalReply');
+            return $this->typeResolver->resolve('Reply');
         }
         if ($data instanceof Answer) {
             return $this->typeResolver->resolve('Answer');

@@ -3,5 +3,5 @@ UpdateReplyPayload:
   config:
     fields:
       reply:
-        type: 'InternalReply'
+        type: 'Reply'
         description: 'Update a reply'

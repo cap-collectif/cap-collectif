@@ -14,6 +14,7 @@ InternalProposal:
     - UniformResourceAdminLocatable
   config:
     name: Proposal
+    description: 'A budget contribution'
     interfaces:
       [
         Node,
@@ -83,7 +84,7 @@ InternalProposal:
       responses:
         type: '[InternalResponse]!'
       media:
-        type: 'InternalMedia'
+        type: 'Media'
       theme:
         type: 'Theme'
         resolve: '@=value.getTheme()'
@@ -101,6 +102,9 @@ InternalProposal:
       deletedAt:
         type: 'DateTime'
         description: 'The delete date.'
+      updatedAt:
+        type: 'DateTime'
+        description: 'The updated date.'
       updatedBy:
         type: 'InternalUser'
         description: 'The update user.'
@@ -150,6 +154,9 @@ InternalProposal:
             type: 'Boolean'
             description: '(ROLE_SUPER_ADMIN only) Select also unpublished votes.'
             defaultValue: false
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
       mergedFrom:
         type: '[InternalProposal!]!'
         description: 'If the proposal is a fusion, contains the list of merged proposals.'

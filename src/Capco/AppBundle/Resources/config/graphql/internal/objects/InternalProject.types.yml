@@ -15,9 +15,6 @@ InternalProject:
         type: 'InternalUserConnection!'
       votes:
         type: 'InternalVoteConnection!'
-      slug:
-        type: 'String!'
-        description: 'Slug of a project'
       steps:
         type: '[Step!]!'
         resolve: '@=value.getRealSteps()'
@@ -26,7 +23,7 @@ InternalProject:
       video:
         type: 'String'
       cover:
-        type: 'InternalMedia'
+        type: 'Media'
         resolve: '@=value.getCover()'
       contributionsCount:
         type: 'Int!'

@@ -41,7 +41,7 @@ Post:
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", [value])'
       media:
-        type: 'InternalMedia'
+        type: 'Media'
       themes:
         type: '[Theme!]!'
       body:

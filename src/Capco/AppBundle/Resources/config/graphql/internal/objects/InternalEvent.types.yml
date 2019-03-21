@@ -26,7 +26,7 @@ InternalEvent:
       link:
         type: 'URI'
       media:
-        type: 'InternalMedia'
+        type: 'Media'
       address:
         type: 'String'
       fullAddress:
