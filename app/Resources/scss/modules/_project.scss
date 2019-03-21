@@ -27,8 +27,12 @@
     }
 }
 
-.project__district-modal-link {
-    color: $brand-color-2;
+.project-districts__modal-link {
+    font-size: 16px;
+}
+
+.project__header__media .media-body div {
+    display: inline-block;
 }
 
 #project__project-list-filters-d {
