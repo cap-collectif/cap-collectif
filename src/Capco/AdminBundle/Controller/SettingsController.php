@@ -6,6 +6,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\SiteColorRepository;
+use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AdminBundle\Resolver\FeaturesCategoryResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
