@@ -3,13 +3,12 @@ PreviewEvent:
   inherits:
     - Node
     - UniformResourceLocatable
-    - Timestampable
   config:
     interfaces:
       - Node
       - UniformResourceLocatable
     name: Event
-    description: 'Represents a calendar event.'
+    description: 'An event.'
     fields:
       id:
         builder: 'Relay::GlobalId'
@@ -24,6 +23,12 @@ PreviewEvent:
       endAt:
         type: 'DateTime'
         description: 'The end of the event.'
+      updatedAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when the object was last updated.'
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
       body:
         type: 'HTML!'
         description: 'Identifies the body of the event.'

@@ -66,10 +66,10 @@ const validate = (values: Object) => {
 const onSubmit = (values: FormValue, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
   const userId = props.user.id;
+  const { isEmailConfirmed, ...rest } = values
   const input = {
-    ...values,
+    ...rest,
     userId,
-    isEmailConfirmed: undefined,
   };
 
   return UpdateProfilePersonalDataMutation.commit({ input })

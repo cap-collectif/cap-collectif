@@ -256,14 +256,14 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: 
       dispatch(closeRegistrationModal());
     })
     .catch(error => {
-      const response = error.response;
+      const { response } = error;
       const errors: Object = { _error: 'Registration failed !' };
       if (typeof window.grecaptcha !== 'undefined') {
         window.grecaptcha.reset();
         dispatch(change('registration-form', 'captcha', null));
       }
       if (response.errors) {
-        const children = response.errors.children;
+        const { children } = response.errors;
         if (children.email.errors && children.email.errors.length > 0) {
           children.email.errors.map(string => {
             if (string === 'already_used_email') {

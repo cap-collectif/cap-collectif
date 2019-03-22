@@ -12,7 +12,6 @@ Opinion:
       ContributionWithAuthor,
       EditableContribution,
       WithFollowers,
-      Timestampable,
     ]
   config:
     description: 'A contribution'
@@ -29,6 +28,9 @@ Opinion:
         EditableContribution,
       ]
     fields:
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", [value])'
       pinned:

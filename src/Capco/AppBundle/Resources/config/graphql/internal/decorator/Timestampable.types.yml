@@ -1,0 +1,10 @@
+Timestampable:
+  decorator: true
+  config:
+    fields:
+      createdAt:
+        description: 'The creation date'
+        type: 'DateTime!'
+      updatedAt:
+        description: 'The updated date'
+        type: 'DateTime'

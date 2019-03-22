@@ -7,14 +7,6 @@ InternalQuestion:
     name: Question
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
     fields:
-      # Overrides from Preview
-      responses:
-        type: 'InternalResponseConnection!'
-        args:
-          withNotConfirmedUser:
-            type: 'Boolean'
-            description: 'Get responses with user not confirmed'
-            defaultValue: false
       id:
         builder: 'Relay::GlobalId'
         builderConfig:
@@ -51,6 +43,16 @@ InternalQuestion:
           withNotConfirmedUser:
             type: 'Boolean'
             description: 'Get participant with user not confirmed'
+            defaultValue: false
+      responses:
+        type: 'ResponseConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionResponsesResolver", [value, args, getUser()])'
+        description: 'Return responses of participants'
+        args:
+          withNotConfirmedUser:
+            type: 'Boolean'
+            description: 'Get responses with user not confirmed'
             defaultValue: false
       jumps:
         description: 'The associated logic jumps to this question.'

@@ -75,19 +75,13 @@ type Consultation implements Node {
 # A string containing a datetime.
 scalar DateTime
 
-# Represents a calendar event.
+# An event.
 type Event implements Node & UniformResourceLocatable {
   # The ID of an object
   id: ID!
 
   # The URL to this resource.
   url: URI!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
 
   # The title of the event.
   title: String!
@@ -97,6 +91,12 @@ type Event implements Node & UniformResourceLocatable {
 
   # The end of the event.
   endAt: DateTime
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
 
   # Identifies the body of the event.
   body: HTML!
@@ -127,69 +127,6 @@ type EventEdge {
 
 # A string containing HTML code.
 scalar HTML
-
-# A file uploaded by a user.
-type Media implements UniformResourceLocatable {
-  # The URL to this resource.
-  url: URI!
-}
-
-# A question which accept document only.
-type MediaQuestion implements Question {
-  # Identifies the question title.
-  title: String!
-
-  # Return responses on this questions.
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
-}
-
-# A media response.
-type MediaResponse implements Response {
-  # Nullable ID in case of empty response.
-  id: String
-
-  # The question.
-  question: Question!
-
-  # Identifies medias of the response.
-  medias: [Media!]!
-}
-
-# A question with multiple choices available.
-type MultipleChoiceQuestion implements Question {
-  # Identifies the question title.
-  title: String!
-
-  # Return responses on this questions.
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
-
-  # The question available choices.
-  choices: [QuestionChoice!]!
-}
 
 # Fetches an object given its ID
 interface Node {
@@ -318,7 +255,7 @@ enum ProjectOrderField {
   LATEST
 }
 
-# Represents a user's contribution to a collect step.
+# A proposal to a proposal form.
 type Proposal implements Node & Publishable & UniformResourceLocatable & Trashable {
   # The ID of an object
   id: ID!
@@ -349,12 +286,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
 
   # Identifies the proposal title.
   title: String!
@@ -549,47 +480,7 @@ type Query {
 }
 
 interface Question {
-  # Identifies the question title.
   title: String!
-
-  # Return responses on this questions.
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
-}
-
-# A possible choice of a question.
-type QuestionChoice {
-  # The ID of an object.
-  id: ID!
-
-  # Identifies the question choice title.
-  title: String!
-
-  # Identifies the responses of the question choice.
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 }
 
 # A questionnaire is a series of questions that users can answer.
@@ -620,75 +511,6 @@ type Questionnaire implements Node {
     # Returns the last `n` elements from the list.
     last: Int
   ): UserConnection!
-
-  # List of questions.
-  questions: [Question!]!
-
-  # A list of replies to the questionnaire.
-  replies(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ReplyConnection!
-}
-
-# Represents a user's answer to a questionnaire.
-type Reply implements Node & Publishable {
-  # The ID of an object
-  id: ID!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
-
-  # The responses of the reply.
-  responses: [Response]!
-
-  # The author of the contribution.
-  author: User!
-}
-
-# A connection to a list of items.
-type ReplyConnection {
-  # Identifies the total count of items in the connection.
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ReplyEdge]
-}
-
-# An edge in a connection.
-type ReplyEdge {
-  # The item at the end of the edge.
-  node: Reply!
-
-  # A cursor for use in pagination.
-  cursor: String!
 }
 
 # A response to a question.
@@ -700,70 +522,12 @@ interface Response {
   question: Question!
 }
 
-# A connection to a list of items.
-type ResponseConnection {
-  # Identifies the total count of items in the connection.
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ResponseEdge]
-}
-
-# An edge in a connection.
-type ResponseEdge {
-  # The item at the end of the edge.
-  node: Response!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-# A section is just a title in a quiz without any possible answer.
-type SectionQuestion implements Question {
-  # Identifies the question title.
-  title: String!
-
-  # Return responses on this questions.
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
-}
-
 # A simple question
 type SimpleQuestion implements Question {
-  # Identifies the question title.
   title: String!
-
-  # Return responses on this questions.
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 }
 
-# Entities that can be trashed.
+# A trashable contribution
 interface Trashable {
   # `true` if the contribution is trashed.
   trashed: Boolean!
@@ -844,7 +608,7 @@ type ValueResponse implements Response {
   value: String
 }
 
-# A vote.
+# Fetches an object given its ID
 interface Vote {
   # The ID of an object
   id: ID!

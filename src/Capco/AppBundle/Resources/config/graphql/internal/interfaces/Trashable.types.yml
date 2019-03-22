@@ -1,7 +1,7 @@
 Trashable:
   type: interface
   config:
-    description: 'Entities that can be trashed.'
+    description: 'A trashable contribution'
     resolveType: "@=resolver('contribution_type', [value])"
     fields:
       trashed:

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { $refType } from '../../../mocks';
 
-import ProjectType from './ProjectType';
+import { ProjectType } from './ProjectType';
 
 const defaultProps = {
   project: {

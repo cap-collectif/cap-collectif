@@ -77,13 +77,8 @@ class ProposalResolver implements ResolverInterface
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
         if ($response instanceof MediaResponse) {
-            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
-                return $this->typeResolver->resolve('PreviewMediaResponse');
-            }
-
-            return $this->typeResolver->resolve('InternalMediaResponse');
+            return $this->typeResolver->resolve('MediaResponse');
         }
-
         if ($response instanceof ValueResponse) {
             if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
                 return $this->typeResolver->resolve('PreviewValueResponse');

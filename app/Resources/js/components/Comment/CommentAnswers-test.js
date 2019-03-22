@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import CommentAnswers from './CommentAnswers';
+import { CommentAnswers } from './CommentAnswers';
 import { $refType, $fragmentRefs } from '../../mocks';
 
 const props = {

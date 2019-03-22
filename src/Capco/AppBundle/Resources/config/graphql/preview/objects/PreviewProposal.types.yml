@@ -5,10 +5,9 @@ PreviewProposal:
     - PublicPublishable
     - UniformResourceLocatable
     - Trashable
-    - Timestampable
   config:
     name: Proposal
-    description: "Represents a user's contribution to a collect step."
+    description: 'A proposal to a proposal form.'
     interfaces:
       - Node
       - PublicPublishable

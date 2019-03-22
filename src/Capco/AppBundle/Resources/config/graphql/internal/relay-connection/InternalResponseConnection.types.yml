@@ -1,9 +1,0 @@
-InternalResponseConnection:
-  type: relay-connection
-  config:
-    name: ResponseConnection
-    nodeType: InternalResponse!
-    connectionFields:
-      totalCount:
-        type: Int!
-        description: Identifies the total count of items in the connection.

@@ -42,7 +42,7 @@ const onSubmit = async (values: FormValues) => {
   return RemoveSiteFaviconMutation.commit({ input: {} });
 };
 
-const SiteFaviconAdminForm = (props: Props) => {
+export const SiteFaviconAdminForm = (props: Props) => {
   const {
     siteFavicon,
     handleSubmit,
@@ -54,7 +54,8 @@ const SiteFaviconAdminForm = (props: Props) => {
     submitting,
   } = props;
   document.querySelectorAll('link[rel="icon"]').forEach((node: HTMLElement) => {
-    if (node instanceof HTMLLinkElement) { // eslint-disable-line no-undef
+    // eslint-disable-next-line no-undef
+    if (node instanceof HTMLLinkElement) {
       node.href = siteFavicon && siteFavicon.media ? siteFavicon.media.url : '/favicon-96x96.png';
     }
   });

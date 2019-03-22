@@ -146,7 +146,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
       createSuccessMsgId = 'your-section-has-been-registered';
     }
 
-    const flashMessages = this.state.flashMessages;
+    const { flashMessages } = this.state;
     flashMessages.push(createSuccessMsgId);
 
     this.setState(

@@ -1,9 +1,8 @@
-InternalSectionQuestion:
+SectionQuestion:
   type: object
   inherits:
     - InternalQuestion
   config:
-    name: SectionQuestion
     interfaces:
       - InternalQuestion
       - Node

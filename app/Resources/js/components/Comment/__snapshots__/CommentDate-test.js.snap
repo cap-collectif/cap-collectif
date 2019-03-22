@@ -1,49 +1,95 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CommentDate /> should render correctly 1`] = `
-<ContainerConstructor
-  body="lol"
-  comment={
-    Object {
-      "$refType": null,
-      "createdAt": "2018-01-02",
-      "publishedAt": "2018-11-02",
-      "updatedAt": "2018-08-02",
-    }
-  }
-  componentRef={null}
-  trashed={false}
-/>
+<span
+  className="h5 comment__date"
+>
+  <span
+    className="excerpt"
+  >
+    <FormattedDate
+      day="numeric"
+      hour="numeric"
+      minute="numeric"
+      month="long"
+      value={"2018-01-01T23:00:00.000Z"}
+      year="numeric"
+    />
+  </span>
+  <br />
+  <span
+    className="excerpt"
+  >
+    <FormattedMessage
+      id="comment.edited"
+      values={Object {}}
+    />
+     
+    <FormattedDate
+      day="numeric"
+      hour="numeric"
+      minute="numeric"
+      month="long"
+      value={"2018-08-01T22:00:00.000Z"}
+      year="numeric"
+    />
+  </span>
+</span>
 `;
 
 exports[`<CommentDate /> should render correctly with trashed false 1`] = `
-<ContainerConstructor
-  body="lol"
-  comment={
-    Object {
-      "$refType": null,
-      "createdAt": "2018-01-02",
-      "publishedAt": "2018-11-02",
-      "updatedAt": "2018-08-02",
-    }
-  }
-  componentRef={null}
-  trashed={false}
-/>
+<span
+  className="h5 comment__date"
+>
+  <span
+    className="excerpt"
+  >
+    <FormattedDate
+      day="numeric"
+      hour="numeric"
+      minute="numeric"
+      month="long"
+      value={"2018-01-01T23:00:00.000Z"}
+      year="numeric"
+    />
+  </span>
+  <br />
+  <span
+    className="excerpt"
+  >
+    <FormattedMessage
+      id="comment.edited"
+      values={Object {}}
+    />
+     
+    <FormattedDate
+      day="numeric"
+      hour="numeric"
+      minute="numeric"
+      month="long"
+      value={"2018-08-01T22:00:00.000Z"}
+      year="numeric"
+    />
+  </span>
+</span>
 `;
 
 exports[`<CommentDate /> should render null with createdAt > publishedAt 1`] = `
-<ContainerConstructor
-  body="lol"
-  comment={
-    Object {
-      "$refType": null,
-      "createdAt": "2019-08-02",
-      "publishedAt": "2018-11-02",
-      "updatedAt": "2018-08-02",
-    }
-  }
-  componentRef={null}
-  trashed={false}
-/>
+<span
+  className="h5 comment__date"
+>
+  <span
+    className="excerpt"
+  >
+    <FormattedDate
+      day="numeric"
+      hour="numeric"
+      minute="numeric"
+      month="long"
+      value={"2019-08-01T22:00:00.000Z"}
+      year="numeric"
+    />
+  </span>
+  <br />
+</span>
 `;

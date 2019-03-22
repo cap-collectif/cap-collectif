@@ -4,7 +4,6 @@ PreviewVote:
     - Node
   config:
     name: Vote
-    description: 'A vote.'
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", [value])'
     fields:
       createdAt:

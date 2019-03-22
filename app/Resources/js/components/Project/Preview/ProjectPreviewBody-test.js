@@ -4,7 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { $refType, $fragmentRefs } from '../../../mocks';
 
-import ProjectPreviewBody from './ProjectPreviewBody';
+import { ProjectPreviewBody } from './ProjectPreviewBody';
 
 const defaultStep = {
   startAt: null,

@@ -36,9 +36,9 @@ type FormValues = {
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, { user }: Props) => {
   const roles = values.roles.labels;
-  const vip = values.vip;
-  const enabled = values.enabled;
-  const locked = values.locked;
+  const { vip } = values;
+  const { enabled } = values;
+  const { locked } = values;
   const input = {
     vip,
     locked,
