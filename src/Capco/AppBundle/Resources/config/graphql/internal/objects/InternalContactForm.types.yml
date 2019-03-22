@@ -1,0 +1,25 @@
+InternalContactForm:
+  type: object
+  inherits:
+    - Node
+  config:
+    name: ContactForm
+    interfaces: [Node]
+    fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: ContactForm
+        description: 'The title of the contact Form'
+      title:
+        description: 'The title of the contact Form'
+        type: 'String!'
+      interlocutor:
+        description: 'The interlocutor of the contact Form'
+        type: 'String!'
+      body:
+        description: 'The body of the contact Form'
+        type: 'String!'
+      email:
+        description: 'The mail to send the contact Form'
+        type: 'String!'

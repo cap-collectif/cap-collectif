@@ -40,7 +40,10 @@ export class DeleteModal extends React.Component<Props> {
             {<FormattedMessage id={deleteModalTitle} />}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>{<FormattedMessage id={deleteModalContent} />}</Modal.Body>
+        <Modal.Body>
+          <i className="cap cap-alert-2" style={{ color: '#dc3545', fontSize: '22px' }} />
+          <FormattedMessage id={deleteModalContent} />
+        </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={closeDeleteModal} />
           <Button onClick={onDelete} bsStyle="danger">

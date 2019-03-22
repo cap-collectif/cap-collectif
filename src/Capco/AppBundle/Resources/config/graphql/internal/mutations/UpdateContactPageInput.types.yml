@@ -1,0 +1,11 @@
+UpdateContactPageInput:
+  type: relay-mutation-input
+  config:
+    description: 'The input associated to the updateContactPage mutatiopn.'
+    fields:
+      title:
+        type: 'String!'
+        description: 'The title of the contact page.'
+      description:
+        type: 'HTML'
+        description: 'The description of the contact page.'

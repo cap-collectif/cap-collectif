@@ -47,6 +47,15 @@ exports[`<DeleteModal /> render correctly Delete Modal 1`] = `
     bsClass="modal-body"
     componentClass="div"
   >
+    <i
+      className="cap cap-alert-2"
+      style={
+        Object {
+          "color": "#dc3545",
+          "fontSize": "22px",
+        }
+      }
+    />
     <FormattedMessage
       id="contenu.de.la.modal.de.suppression"
       values={Object {}}

@@ -460,3 +460,10 @@ Capco\AppBundle\Entity\SiteParameter:
     value: true
     position: 120
     type: 8
+
+  SiteParameterContactTitle:
+    keyname: contact.title
+    category: pages.contact
+    value: Contact
+    position: 600
+    type: 0

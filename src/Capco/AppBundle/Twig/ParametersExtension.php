@@ -69,6 +69,8 @@ class ParametersExtension extends \Twig_Extension
             $keys = [
                 'login.text.top',
                 'login.text.bottom',
+                'contact.title',
+                'contact.content.body',
                 'global.site.organization_name',
                 'global.site.communication_from',
                 'snalytical-tracking-scripts-on-all-pages',

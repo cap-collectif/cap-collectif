@@ -177,7 +177,7 @@ abstract class Message
         return $this;
     }
 
-    public function setReplyTo(string $replyTo): self
+    public function setReplyTo(?string $replyTo): self
     {
         $this->replyTo = $replyTo;
 

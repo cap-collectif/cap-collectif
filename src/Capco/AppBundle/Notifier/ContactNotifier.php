@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Mailer\Message\User\ContactMessage;
@@ -10,7 +11,9 @@ final class ContactNotifier extends BaseNotifier
         string $senderEmail,
         string $senderName,
         string $message,
-        string $siteUrl
+        string $siteUrl,
+        string $object,
+        string $title
     ) {
         $this->mailer->sendMessage(
             ContactMessage::create(
@@ -19,7 +22,10 @@ final class ContactNotifier extends BaseNotifier
                 $senderName,
                 $message,
                 $this->siteParams->getValue('global.site.fullname'),
-                $siteUrl
+                $siteUrl,
+                null,
+                $object,
+                $title
             )
         );
     }

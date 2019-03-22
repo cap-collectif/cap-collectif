@@ -69,6 +69,27 @@ type AddCommentVotePayload {
   clientMutationId: String
 }
 
+input AddContactFormInput {
+  # Title of the contact form.
+  title: String!
+
+  # Interlocutor of the contact form.
+  interlocutor: String!
+
+  # Description of the contact form.
+  body: String
+
+  # Email of the interlocutor of the contact form.
+  email: String!
+  clientMutationId: String
+}
+
+type AddContactFormPayload {
+  # The contact form created.
+  contactForm: ContactForm!
+  clientMutationId: String
+}
+
 input AddEventInput {
   # The contents of the event title.
   title: String!
@@ -1372,6 +1393,24 @@ type Consultation implements Node & Step & RequirementStep {
   ): ContributionConnection
 }
 
+# Fetches an object given its ID
+type ContactForm implements Node {
+  # The title of the contact Form
+  id: ID!
+
+  # The title of the contact Form
+  title: String!
+
+  # The interlocutor of the contact Form
+  interlocutor: String!
+
+  # The body of the contact Form
+  body: String!
+
+  # The mail to send the contact Form
+  email: String!
+}
+
 # A contribution with an author
 interface Contribution {
   # The ID of an object
@@ -2556,6 +2595,11 @@ type Mutation {
   updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
   setEvaluationFormInProposalForm(input: SetEvaluationFormInProposalFormInput!): SetEvaluationFormInProposalFormPayload
   changeProposalEvaluation(input: ChangeProposalEvaluationInput!): ChangeProposalEvaluationPayload
+  updateContactPage(input: UpdateContactPageInput!): UpdateContactPagePayload
+  sendContactForm(input: SendContactFormInput!): SendContactFormPayload
+  addContactForm(input: AddContactFormInput!): AddContactFormPayload
+  removeContactForm(input: RemoveContactFormInput!): RemoveContactFormPayload
+  updateContactForm(input: UpdateContactFormInput!): UpdateContactFormPayload
   createGroup(input: CreateGroupInput!): CreateGroupPayload
   updateGroup(input: UpdateGroupInput!): UpdateGroupPayload
   deleteGroup(input: DeleteGroupInput!): DeleteGroupPayload
@@ -4139,6 +4183,9 @@ type Query {
 
   # Get the current registration form
   registrationForm: RegistrationForm
+
+  # Get the contact forms
+  contactForms: [ContactForm!]
   projectAuthors: [User!]!
   projectTypes: [ProjectType!]!
   users(
@@ -4574,6 +4621,18 @@ type RemoveCommentVotePayload {
   deletedVoteId: ID
   contribution: Comment
   viewer: User!
+  clientMutationId: String
+}
+
+input RemoveContactFormInput {
+  # ID of the contact form to delete.
+  id: ID!
+  clientMutationId: String
+}
+
+type RemoveContactFormPayload {
+  # Id of the deleted contact form.
+  deletedContactFormId: ID!
   clientMutationId: String
 }
 
@@ -5224,6 +5283,33 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   ): UserConnection!
 }
 
+input SendContactFormInput {
+  # The ID of the contact form.
+  idContactForm: ID!
+
+  # The title of the contact form.
+  title: String!
+
+  # The body of the contact form.
+  body: String!
+
+  # The email of the contact.
+  email: String!
+
+  # The captcha of the form.
+  name: String
+
+  # The captcha verification.
+  captcha: String
+  clientMutationId: String
+}
+
+type SendContactFormPayload {
+  # The contact form submited.
+  contactForm: ContactForm!
+  clientMutationId: String
+}
+
 input SetEvaluationFormInProposalFormInput {
   proposalFormId: ID!
   evaluationFormId: ID
@@ -5709,6 +5795,48 @@ input UnselectProposalInput {
 
 type UnselectProposalPayload {
   proposal: Proposal!
+  clientMutationId: String
+}
+
+input UpdateContactFormInput {
+  # ID of the contact form to update.
+  id: ID!
+
+  # Title of the contact form.
+  title: String!
+
+  # Interlocutor of the contact form.
+  interlocutor: String!
+
+  # Description of the contact form.
+  body: String
+
+  # Email of the interlocutor of the contact form.
+  email: String!
+  clientMutationId: String
+}
+
+type UpdateContactFormPayload {
+  # The contact form updated.
+  contactForm: ContactForm
+  clientMutationId: String
+}
+
+input UpdateContactPageInput {
+  # The title of the contact page.
+  title: String!
+
+  # The description of the contact page.
+  description: HTML
+  clientMutationId: String
+}
+
+type UpdateContactPagePayload {
+  # The title of the contact page.
+  title: String!
+
+  # The description of the contact page.
+  description: HTML
   clientMutationId: String
 }
 

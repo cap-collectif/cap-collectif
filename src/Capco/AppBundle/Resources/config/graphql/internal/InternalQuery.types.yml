@@ -32,6 +32,10 @@ InternalQuery:
         type: 'InternalRegistrationForm'
         description: 'Get the current registration form'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver")'
+      contactForms:
+        type: '[InternalContactForm!]'
+        description: 'Get the contact forms'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ContactFormQueryResolver")'
       projects:
         type: 'InternalProjectConnection!'
       events:

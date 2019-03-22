@@ -2,8 +2,12 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\SiteParameter;
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * @method SiteParameter|null findOneBy(array $criteria, array $orderBy = null)
+ */
 class SiteParameterRepository extends EntityRepository
 {
     public function getValuesIfEnabled(): array

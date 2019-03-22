@@ -437,6 +437,41 @@ InternalMutation:
           inputType: ChangeProposalEvaluationInput
           payloadType: ChangeProposalEvaluationPayload
           mutateAndGetPayload: "@=mutation('changeProposalEvaluation', [value, getUser()])"
+      # Contact From
+      updateContactPage:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: UpdateContactPageInput
+          payloadType: UpdateContactPagePayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateContactPageMutation", [value])'
+      sendContactForm:
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: SendContactFormInput
+          payloadType: SendContactFormPayload
+          mutateAndGetPayload: "@=mutation('sendContactForm', [value, getUser()])"
+      addContactForm:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: AddContactFormInput
+          payloadType: AddContactFormPayload
+          mutateAndGetPayload: "@=mutation('addContactForm', [value])"
+      removeContactForm:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: RemoveContactFormInput
+          payloadType: RemoveContactFormPayload
+          mutateAndGetPayload: "@=mutation('removeContactForm', [value, getUser()])"
+      updateContactForm:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: UpdateContactFormInput
+          payloadType: UpdateContactFormPayload
+          mutateAndGetPayload: "@=mutation('updateContactForm', [value, getUser()])"
       # Groups
       createGroup:
         access: "@=hasRole('ROLE_ADMIN')"

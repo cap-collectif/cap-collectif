@@ -9,6 +9,7 @@ class LoaderDataFixture extends AbstractLoader
     public function getFixtures()
     {
         return [
+            __DIR__ . '/ContactForm.yml',
             __DIR__ . '/MediaContext.yml',
             __DIR__ . '/MediaCategory.yml',
             __DIR__ . '/Media.yml',

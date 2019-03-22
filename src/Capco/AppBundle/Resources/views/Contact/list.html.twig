@@ -1,0 +1,50 @@
+{% set page_class = "contact" %}
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block canonical_link %}{{ url('app_contact') }}{% endblock %}
+
+{% set title = capco_site_parameter_value('contact.title') ?: 'which-question'|trans({}, 'CapcoAppBundle') %}
+{% set meta_description = capco_site_parameter_value('contact.metadescription') %}
+{% set content_body = capco_site_parameter_value('contact.content.body') %}
+{% set picto = capco_site_image_media('contact.picto') %}
+
+{% block metaTags %}
+    {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       title,
+        'description': (meta_description|striptags ?: content_body|striptags|truncate(250, true)),
+        'image':       image,
+        'url':         url('app_contact')
+    } only %}
+{% endblock %}
+
+{% block title %}
+        {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <section class="section--custom">
+        <div class="container" style="max-width: 660px">
+            {{ content_body | raw }}
+            <div class="row" style="margin-top: 10px">
+                <div class="col-xs-12 col-sm-8 col-md-12">
+                    {{ react_render_component('ContactsListPage', {}) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% set customCode = capco_site_parameter_value('contact.customcode') %}
+    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
+{% endblock %}

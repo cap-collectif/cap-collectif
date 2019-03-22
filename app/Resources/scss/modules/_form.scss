@@ -497,3 +497,9 @@ Hack form button - radio check
         transform: rotate(359deg);
     }
 }
+
+/* ======================== ContactForm ==========================*/
+
+.contact__form .contact-form_textarea textarea {
+    resize: vertical;
+}

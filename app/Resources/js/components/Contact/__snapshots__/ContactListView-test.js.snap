@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ContactForm /> should render correctly 1`] = `
+<div>
+  <h3>
+    <FormattedMessage
+      id="which-question"
+      values={Object {}}
+    />
+  </h3>
+  <div
+    className="contact__form__list"
+  >
+    <CollapseGroup
+      labels={
+        Array [
+          "Contact form 1",
+          "Contact form 1",
+        ]
+      }
+    >
+      <ForwardRef(Relay(Connect(ReduxForm)))
+        contactForm={
+          Object {
+            "$fragmentRefs": null,
+            "title": "Contact form 1",
+          }
+        }
+        key="0"
+      />
+      <ForwardRef(Relay(Connect(ReduxForm)))
+        contactForm={
+          Object {
+            "$fragmentRefs": null,
+            "title": "Contact form 1",
+          }
+        }
+        key="1"
+      />
+    </CollapseGroup>
+  </div>
+</div>
+`;
+
+exports[`<ContactForm /> should render correctly with no contactForm 1`] = `
+<FormattedMessage
+  id="admin.fields.step.no_proposal_form"
+  values={Object {}}
+/>
+`;
+
+exports[`<ContactForm /> should render correctly with only one contactForm 1`] = `
+<ForwardRef(Relay(Connect(ReduxForm)))
+  contactForm={
+    Object {
+      "$fragmentRefs": null,
+      "title": "Contact form 1",
+    }
+  }
+/>
+`;

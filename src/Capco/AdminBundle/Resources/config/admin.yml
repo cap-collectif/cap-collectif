@@ -112,7 +112,6 @@ services:
       - [setTranslationDomain, [CapcoAppBundle]]
 
   Capco\AdminBundle\Admin\ProjectAdmin:
-    class: Capco\AdminBundle\Admin\ProjectAdmin
     arguments:
       [
         ~,
@@ -385,6 +384,11 @@ services:
         }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
+
+  Capco\AdminBundle\Admin\ContactAdmin:
+    arguments: [~, ~, CapcoAdminBundle:Contact]
+    tags:
+      - { name: sonata.admin, group: admin.group.project, manager_type: orm, label: contact.title }
 
   Capco\AdminBundle\Admin\CategoryAdmin:
     arguments: [~, Capco\AppBundle\Entity\Category, SonataAdminBundle:CRUD]
@@ -664,7 +668,14 @@ services:
       - [setTemplate, [edit, CapcoAdminBundle:Group:edit.html.twig]]
       - [setTemplate, [list, CapcoAdminBundle:Group:list.html.twig]]
 
-  sonata.admin.action.retrieve_autocomplete_items:
-    class: Capco\AdminBundle\Action\RetrieveAutocompleteItemsAction
-    autowire: true
+  sonata.admin.controller.admin:
+    class: Capco\AdminBundle\Controller\HelperController
+    arguments:
+      [
+        '@twig',
+        '@sonata.admin.pool',
+        '@sonata.admin.helper',
+        '@validator',
+        '@Capco\AppBundle\Search\UserSearch',
+      ]
     public: true

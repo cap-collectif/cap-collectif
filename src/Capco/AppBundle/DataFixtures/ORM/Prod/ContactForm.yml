@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\ContactForm:
+  ContactForm1:
+    id: contactForm1
+    title: Formulaire de contact
+    interlocutor: Assistance de Cap Collectif
+    body: <p>Nous ferons de notre mieux pour vous répondre dès que possible. Nous travaillons généralement entre 09H30 et 18H30. En cas d'urgence, pensez à notre rubrique d'aide.</p>
+    email: assistance@cap-collectif.com

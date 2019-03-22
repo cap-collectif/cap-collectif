@@ -1,0 +1,8 @@
+RemoveContactFormPayload:
+  type: relay-mutation-payload
+  config:
+    description: 'Remove a new contact form.'
+    fields:
+      deletedContactFormId:
+        type: 'ID!'
+        description: 'Id of the deleted contact form.'

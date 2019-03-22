@@ -116,6 +116,7 @@ export type GlobalState = {|
 |};
 
 export type State = GlobalState;
+export type User = UserState;
 
 export type Store = ReduxStore<State, Action>;
 export type Dispatch = ReduxDispatch<Action>;

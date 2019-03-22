@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Behat\Traits;
 trait AdminTrait
 {
     use AdminProposalTrait;
+    use AdminContactListTrait;
     use AdminProposalFormTrait;
     use AdminUserTrait;
     use AdminProjectDistrictTrait;

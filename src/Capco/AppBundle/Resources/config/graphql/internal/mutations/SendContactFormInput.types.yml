@@ -1,0 +1,23 @@
+SendContactFormInput:
+  type: relay-mutation-input
+  config:
+    description: 'Contact the support with an email.'
+    fields:
+      idContactForm:
+        type: 'ID!'
+        description: 'The ID of the contact form.'
+      title:
+        type: 'String!'
+        description: 'The title of the contact form.'
+      body:
+        type: 'String!'
+        description: 'The body of the contact form.'
+      email:
+        type: 'String!'
+        description: 'The email of the contact.'
+      name:
+        type: 'String'
+        description: 'The captcha of the form.'
+      captcha:
+        type: 'String'
+        description: 'The captcha verification.'

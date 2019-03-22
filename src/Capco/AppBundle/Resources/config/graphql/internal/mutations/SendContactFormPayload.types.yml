@@ -1,0 +1,8 @@
+SendContactFormPayload:
+  type: relay-mutation-payload
+  config:
+    description: 'Contact the support with an email.'
+    fields:
+      contactForm:
+        type: 'InternalContactForm!'
+        description: 'The contact form submited.'

@@ -22,7 +22,13 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:RegistrationForm']
 
+  Capco\AppBundle\Repository\ContactFormRepository:
+    public: true
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:ContactForm']
+
   Capco\AppBundle\Repository\AbstractQuestionRepository:
+    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Questions\AbstractQuestion']
 

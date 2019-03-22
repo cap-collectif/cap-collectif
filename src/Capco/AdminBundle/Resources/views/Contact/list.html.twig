@@ -1,0 +1,30 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+
+
+{% block list_filters %}{% endblock %}
+{% block list_filters_actions %}{% endblock %}
+{% block tab_menu %}{% endblock %}
+{% block actions %}{% endblock %}
+
+{% block sonata_breadcrumb %}
+{% endblock %}
+
+{% block form %}
+    <div style="position: fixed; width: 60%; left: 30%; z-index: 1030; margin-top:10px;">
+        {{ react_render_component('AlertBoxApp') }}
+    </div>
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    {{
+    react_render_component('ContactAdminPageApp', {
+        'rendering': 'client_side'
+    })
+    }}
+{% endblock %}
+
+{% block list_table %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

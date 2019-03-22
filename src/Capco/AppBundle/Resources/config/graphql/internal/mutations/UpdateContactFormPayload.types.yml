@@ -1,0 +1,8 @@
+UpdateContactFormPayload:
+  type: relay-mutation-payload
+  config:
+    description: 'Update a new contact form.'
+    fields:
+      contactForm:
+        type: 'InternalContactForm'
+        description: 'The contact form updated.'

@@ -2,16 +2,15 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AdminBundle\Resolver\FeaturesCategoryResolver;
-use Capco\AppBundle\Repository\SiteColorRepository;
-use Capco\AppBundle\Repository\SiteImageRepository;
-use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Capco\AppBundle\Repository\SiteColorRepository;
+use Capco\AppBundle\Repository\SiteParameterRepository;
+use Capco\AdminBundle\Resolver\FeaturesCategoryResolver;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class SettingsController extends Controller
 {
@@ -37,8 +36,13 @@ class SettingsController extends Controller
      */
     public function listAction(Request $request, $category)
     {
+        $featuresCategoryResolver = $this->get(FeaturesCategoryResolver::class);
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
+        }
+
+        if (!$featuresCategoryResolver->isCategoryEnabled($category)) {
+            throw $this->createNotFoundException();
         }
 
         $admin_pool = $this->get('sonata.admin.pool');

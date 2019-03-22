@@ -4,9 +4,22 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 type Props = {
   onChange: (response: string) => void,
+  value: ?string,
 };
 
 export class Captcha extends React.PureComponent<Props> {
+  componentDidUpdate(prevProps: Props) {
+    const { value } = this.props;
+    if (
+      prevProps &&
+      prevProps.value !== null &&
+      !value &&
+      typeof window.grecaptcha !== 'undefined'
+    ) {
+      window.grecaptcha.reset();
+    }
+  }
+
   captcha: ?Object;
 
   render() {

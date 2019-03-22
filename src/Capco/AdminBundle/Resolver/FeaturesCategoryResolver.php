@@ -20,7 +20,6 @@ class FeaturesCategoryResolver
         ],
         'pages.members' => ['conditions' => ['members_list'], 'features' => []],
         'pages.login' => ['conditions' => [], 'features' => []],
-        'pages.contact' => ['conditions' => [], 'features' => []],
         'pages.footer' => ['conditions' => [], 'features' => []],
         'pages.cookies' => ['conditions' => [], 'features' => []],
         'pages.charter' => ['conditions' => [], 'features' => []],

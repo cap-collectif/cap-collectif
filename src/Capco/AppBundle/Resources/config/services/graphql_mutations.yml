@@ -75,6 +75,13 @@ services:
           method: 'setEvaluationForm',
         }
 
+  Capco\AppBundle\GraphQL\Mutation\ContactFormMutation:
+    tags:
+      - { name: overblog_graphql.mutation, alias: 'sendContactForm', method: 'send' }
+      - { name: overblog_graphql.mutation, alias: 'addContactForm', method: 'add' }
+      - { name: overblog_graphql.mutation, alias: 'removeContactForm', method: 'remove' }
+      - { name: overblog_graphql.mutation, alias: 'updateContactForm', method: 'update' }
+
   Capco\AppBundle\GraphQL\Mutation\GroupMutation:
     tags:
       - { name: overblog_graphql.mutation, alias: 'createGroup', method: 'create' }

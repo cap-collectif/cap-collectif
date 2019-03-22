@@ -28,6 +28,7 @@ use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\MapTokenRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\ContactFormRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -131,6 +132,10 @@ class GlobalIdResolver
                     break;
                 case 'Question':
                     $node = $this->container->get(AbstractQuestionRepository::class)->find($uuid);
+
+                    break;
+                case 'ContactForm':
+                    $node = $this->container->get(ContactFormRepository::class)->find($uuid);
 
                     break;
                 default:

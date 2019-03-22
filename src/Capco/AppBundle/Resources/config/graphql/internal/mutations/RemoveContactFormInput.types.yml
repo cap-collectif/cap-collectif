@@ -1,0 +1,9 @@
+RemoveContactFormInput:
+  type: relay-mutation-input
+  config:
+    description: 'Remove contact form.'
+    name: RemoveContactFormInput
+    fields:
+      id:
+        type: 'ID!'
+        description: 'ID of the contact form to delete.'

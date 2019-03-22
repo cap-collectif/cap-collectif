@@ -1,0 +1,322 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ContactForm /> should render correctly 1`] = `
+<div
+  className="contact__form"
+>
+  <div
+    className="block--bordered p-10"
+  >
+    <WYSIWYGRender
+      className="mb-20 p-10"
+      value="<p>This is a contact form body</p>"
+    />
+    <Field
+      component={[Function]}
+      id="group_name"
+      label={
+        <span>
+          <FormattedMessage
+            id="group.title"
+            values={Object {}}
+          />
+           
+          <span
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
+      name="name"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      help="global.email.format"
+      id="group_email"
+      label={
+        <FormattedMessage
+          id="user.login.email"
+          values={Object {}}
+        />
+      }
+      name="email"
+      type="email"
+    />
+    <Field
+      component={[Function]}
+      id="group_object"
+      label={
+        <FormattedMessage
+          id="object"
+          values={Object {}}
+        />
+      }
+      name="title"
+      type="text"
+    />
+    <Field
+      autosize={false}
+      component={[Function]}
+      divClassName="contact-form_textarea"
+      id="group_description"
+      label={
+        <FormattedMessage
+          id="group.description"
+          values={Object {}}
+        />
+      }
+      name="body"
+      type="textarea"
+    />
+    <Connect(SubmitButton)
+      disabled={false}
+      id="confirm-opinion-create"
+      label="contact.submit"
+      onSubmit={[Function]}
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <i
+        className="cap cap-paper-plane"
+      />
+        
+    </Connect(SubmitButton)>
+    <div
+      className="color-dark-gray mt-10 small"
+    >
+      <FormattedHTMLMessage
+        id="information-for-the-contact-form"
+        values={
+          Object {
+            "organisationName": "Cap Collectif",
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ContactForm /> should render correctly with a captcha 1`] = `
+<div
+  className="contact__form"
+>
+  <div
+    className="block--bordered p-10"
+  >
+    <WYSIWYGRender
+      className="mb-20 p-10"
+      value="<p>This is a contact form body</p>"
+    />
+    <Field
+      component={[Function]}
+      id="group_name"
+      label={
+        <span>
+          <FormattedMessage
+            id="group.title"
+            values={Object {}}
+          />
+           
+          <span
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
+      name="name"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      help="global.email.format"
+      id="group_email"
+      label={
+        <FormattedMessage
+          id="user.login.email"
+          values={Object {}}
+        />
+      }
+      name="email"
+      type="email"
+    />
+    <Field
+      component={[Function]}
+      id="group_object"
+      label={
+        <FormattedMessage
+          id="object"
+          values={Object {}}
+        />
+      }
+      name="title"
+      type="text"
+    />
+    <Field
+      autosize={false}
+      component={[Function]}
+      divClassName="contact-form_textarea"
+      id="group_description"
+      label={
+        <FormattedMessage
+          id="group.description"
+          values={Object {}}
+        />
+      }
+      name="body"
+      type="textarea"
+    />
+    <Field
+      component={[Function]}
+      id="captcha"
+      name="captcha"
+      type="captcha"
+    />
+    <Connect(SubmitButton)
+      disabled={false}
+      id="confirm-opinion-create"
+      label="contact.submit"
+      onSubmit={[Function]}
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <i
+        className="cap cap-paper-plane"
+      />
+        
+    </Connect(SubmitButton)>
+    <div
+      className="color-dark-gray mt-10 small"
+    >
+      <FormattedHTMLMessage
+        id="information-for-the-contact-form"
+        values={
+          Object {
+            "organisationName": "Cap Collectif",
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ContactForm /> should render correctly with a connected user 1`] = `
+<div
+  className="contact__form"
+>
+  <div
+    className="block--bordered p-10"
+  >
+    <WYSIWYGRender
+      className="mb-20 p-10"
+      value="<p>This is a contact form body</p>"
+    />
+    <Field
+      component={[Function]}
+      id="group_name"
+      label={
+        <span>
+          <FormattedMessage
+            id="group.title"
+            values={Object {}}
+          />
+           
+          <span
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
+      name="name"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      help="global.email.format"
+      id="group_email"
+      label={
+        <FormattedMessage
+          id="user.login.email"
+          values={Object {}}
+        />
+      }
+      name="email"
+      type="email"
+    />
+    <Field
+      component={[Function]}
+      id="group_object"
+      label={
+        <FormattedMessage
+          id="object"
+          values={Object {}}
+        />
+      }
+      name="title"
+      type="text"
+    />
+    <Field
+      autosize={false}
+      component={[Function]}
+      divClassName="contact-form_textarea"
+      id="group_description"
+      label={
+        <FormattedMessage
+          id="group.description"
+          values={Object {}}
+        />
+      }
+      name="body"
+      type="textarea"
+    />
+    <Connect(SubmitButton)
+      disabled={false}
+      id="confirm-opinion-create"
+      label="contact.submit"
+      onSubmit={[Function]}
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <i
+        className="cap cap-paper-plane"
+      />
+        
+    </Connect(SubmitButton)>
+    <div
+      className="color-dark-gray mt-10 small"
+    >
+      <FormattedHTMLMessage
+        id="information-for-the-contact-form"
+        values={
+          Object {
+            "organisationName": "Cap Collectif",
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;

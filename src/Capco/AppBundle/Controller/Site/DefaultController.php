@@ -2,15 +2,12 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Form\ContactType;
-use Capco\AppBundle\Repository\SiteParameterRepository;
-use Capco\AppBundle\Notifier\ContactNotifier;
-use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Capco\AppBundle\Repository\SiteParameterRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
@@ -65,42 +62,11 @@ class DefaultController extends Controller
 
     /**
      * @Route("/contact", name="app_contact")
-     * @Template("CapcoAppBundle:Default:contact.html.twig")
+     * @Template("CapcoAppBundle:Contact:list.html.twig")
      */
     public function contactAction(Request $request)
     {
-        $form = $this->createForm(ContactType::class);
-
-        if ('POST' === $request->getMethod()) {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $data = $form->getData();
-
-                // We create a session for flashBag
-                $flashBag = $this->get('session')->getFlashBag();
-
-                $adminEmail = $this->get(Resolver::class)->getValue('admin.mail.contact');
-                if (null === $adminEmail) {
-                    $flashBag->add('danger', 'contact.email.sent_error');
-
-                    return $this->redirect($this->generateUrl('app_homepage'));
-                }
-
-                $this->get(ContactNotifier::class)->onContact(
-                    $adminEmail,
-                    $data['email'],
-                    $data['name'],
-                    $data['message'],
-                    $this->generateUrl('app_homepage')
-                );
-                $flashBag->add('success', 'contact.email.sent_success');
-
-                return $this->redirect($this->generateUrl('app_homepage'));
-            }
-        }
-
-        return ['form' => $form->createView()];
+        return [];
     }
 
     /**

@@ -2,13 +2,15 @@
 
 namespace Capco\AppBundle\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Capco\UserBundle\Form\Type\ReCaptchaType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class ContactType extends AbstractType
 {
@@ -17,10 +19,16 @@ class ContactType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'contact.form.name',
+                'required' => false,
+                'constraints' => [],
+            ])
+            ->add('title', PurifiedTextType::class, [
+                'label' => 'contact.form.title',
                 'required' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
-                'constraints' => [new NotBlank(['message' => 'contact.no_name'])],
+                'constraints' => [new NotBlank(['message' => 'contact.title'])],
+                'strip_tags' => true,
             ])
             ->add('email', EmailType::class, [
                 'label' => 'contact.form.email',
@@ -40,7 +48,8 @@ class ContactType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('message', TextType::class, [
+            ->add('captcha', ReCaptchaType::class, ['validation_groups' => ['registration']])
+            ->add('body', TextType::class, [
                 'label' => 'contact.form.message',
                 'required' => true,
                 'purify_html' => true,
@@ -57,6 +66,7 @@ class ContactType extends AbstractType
     {
         $resolver->setDefaults([
             'translation_domain' => 'CapcoAppBundle',
+            'csrf_protection' => false,
         ]);
     }
 }

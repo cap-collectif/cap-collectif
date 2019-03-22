@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
-import type { State } from '../../types';
+import type { State, User } from '../../types';
 
 type Props = {
   id?: ?string,
@@ -17,7 +17,8 @@ type Props = {
   style: Object,
   disabled: boolean,
   loginOverlay: boolean,
-  user: Object,
+  user?: User,
+  children?: any,
 };
 
 class SubmitButton extends React.Component<Props> {
@@ -39,7 +40,16 @@ class SubmitButton extends React.Component<Props> {
   };
 
   render() {
-    const { loginOverlay, isSubmitting, bsStyle, className, id, label, style } = this.props;
+    const {
+      loginOverlay,
+      isSubmitting,
+      bsStyle,
+      className,
+      id,
+      label,
+      style,
+      children,
+    } = this.props;
     const disabled = isSubmitting || this.props.disabled;
     return (
       <LoginOverlay enabled={loginOverlay}>
@@ -51,6 +61,7 @@ class SubmitButton extends React.Component<Props> {
           bsStyle={bsStyle}
           className={className}
           style={style}>
+          {children}
           <FormattedMessage id={isSubmitting ? 'global.loading' : label} />
         </Button>
       </LoginOverlay>
