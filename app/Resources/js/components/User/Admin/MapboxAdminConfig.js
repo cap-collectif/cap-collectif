@@ -79,7 +79,7 @@ const onSubmit = async (values: FormValues) => {
   }
 };
 
-class MapboxAdminConfig extends React.Component<Props, State> {
+export class MapboxAdminConfig extends React.Component<Props, State> {
   state = {
     loading: false,
     stylesSubmitSucceeded: false,

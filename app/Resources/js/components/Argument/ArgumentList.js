@@ -76,11 +76,11 @@ export class ArgumentList extends React.Component<Props, State> {
               return graphqlError;
             }
             if (props) {
-              const argumentable = props.argumentable;
+              const { argumentable } = props;
               if (!argumentable || !argumentable.allArguments) {
                 return graphqlError;
               }
-              const totalCount = argumentable.allArguments.totalCount;
+              const { totalCount } = argumentable.allArguments;
               const htmlFor = `filter-arguments-${type}`;
               return (
                 <Panel className="panel--white panel-custom">

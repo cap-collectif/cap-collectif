@@ -24,6 +24,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class StepAdmin extends CapcoAdmin
 {
@@ -206,11 +207,13 @@ class StepAdmin extends CapcoAdmin
                     ['label' => 'fields', 'by_reference' => false],
                     ['edit' => 'inline', 'inline' => 'table', 'sortable' => 'position']
                 )
-                ->add('requirementsReason', PurifiedTextareaType::class, [
+                ->add('requirementsReason', TextareaType::class, [
                     'translation_domain' => 'CapcoAppBundle',
                     'label' => 'reason-for-collection',
                     'required' => false,
                     'help' => 'help-text-for-reason-for-collection-field',
+                    'purify_html' => true,
+                    'purify_html_profile' => 'default',
                 ])
                 ->end();
         } elseif ($subject instanceof SynthesisStep) {
@@ -335,11 +338,13 @@ class StepAdmin extends CapcoAdmin
                     ['label' => 'fields', 'by_reference' => false],
                     ['edit' => 'inline', 'inline' => 'table', 'sortable' => 'position']
                 )
-                ->add('requirementsReason', PurifiedTextareaType::class, [
+                ->add('requirementsReason', TextareaType::class, [
                     'translation_domain' => 'CapcoAppBundle',
                     'label' => 'reason-for-collection',
                     'required' => false,
                     'help' => 'help-text-for-reason-for-collection-field',
+                    'purify_html' => true,
+                    'purify_html_profile' => 'default',
                 ])
                 ->end();
             if ($subject instanceof CollectStep) {

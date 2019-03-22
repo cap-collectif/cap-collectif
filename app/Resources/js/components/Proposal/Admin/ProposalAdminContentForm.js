@@ -180,8 +180,8 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
       change,
       responses,
     } = this.props;
-    const form = proposal.form;
-    const categories = proposal.form.categories;
+    const { form } = proposal;
+    const { categories } = proposal.form;
     const optional = (
       <span className="excerpt">
         {' '}

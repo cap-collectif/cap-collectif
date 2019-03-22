@@ -546,6 +546,6 @@ class Theme implements IndexableInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchWithAuthor'];
+        return ['Elasticsearch'];
     }
 }

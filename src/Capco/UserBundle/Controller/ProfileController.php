@@ -167,7 +167,7 @@ class ProfileController extends Controller
     /**
      * @Route("/", name="capco_user_profile_show", defaults={"_feature_flags" = "profiles"})
      * @Route("/{slug}", name="capco_user_profile_show_all", defaults={"_feature_flags" = "profiles"})
-     * @Template()
+     * @Template("@CapcoUser/Profile/show.html.twig")
      */
     public function showAction(string $slug = null)
     {

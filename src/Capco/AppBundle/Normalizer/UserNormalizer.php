@@ -44,13 +44,6 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     {
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
-        
-        // We only need Author mapping.
-        if (\in_array('ElasticsearchWithAuthor', $groups)) {
-            return ['id' => $object->getId(), 'userType' => $object->getUserType() ? [ 'id' => $object->getUserType()->getId() ] : null]; 
-        }
-
-        // We need fullmapping
         $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Elasticsearch', $groups)) {

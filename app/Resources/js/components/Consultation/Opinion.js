@@ -18,7 +18,7 @@ export class Opinion extends React.Component<Props> {
 
   render() {
     const { opinion, showUpdatedDate } = this.props;
-    const author = opinion.author;
+    const { author } = opinion;
     return (
       <ListGroupItem
         className={`list-group-item__opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
