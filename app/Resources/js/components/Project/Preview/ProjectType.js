@@ -9,7 +9,7 @@ type Props = {
   project: ProjectType_project,
 };
 
-export class ProjectType extends React.Component<Props> {
+class ProjectType extends React.Component<Props> {
   render() {
     const { project } = this.props;
     return project.type ? (

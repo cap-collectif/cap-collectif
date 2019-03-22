@@ -26,7 +26,7 @@ export class ProposalListFilters extends React.Component<Props> {
   render() {
     const { dispatch, features, intl, step, filters } = this.props;
 
-    const { form } = step;
+    const form = step.form;
 
     const options = {
       types: this.props.types,

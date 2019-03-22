@@ -1,0 +1,15 @@
+PreviewMediaResponse:
+  type: object
+  inherits:
+    - PreviewResponse
+  config:
+    name: MediaResponse
+    interfaces:
+      - PreviewResponse
+    description: 'A media response.'
+    fields:
+      question:
+        type: 'PreviewQuestion!'
+      medias:
+        type: '[PreviewMedia!]!'
+        description: 'Identifies medias of the response.'

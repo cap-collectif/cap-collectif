@@ -1,9 +1,20 @@
-Reply:
+InternalReply:
   type: object
-  inherits: [Node, PublicPublishable, Draftable, Contribution, UniformResourceLocatable]
+  inherits:
+    - PreviewReply
+    - Node
+    - PublicPublishable
+    - Draftable
+    - Contribution
+    - UniformResourceLocatable
   config:
-    description: 'A Reply'
-    interfaces: [Node, PublicPublishable, Draftable, Contribution, UniformResourceLocatable]
+    name: Reply
+    interfaces:
+      - Node
+      - PublicPublishable
+      - Draftable
+      - Contribution
+      - UniformResourceLocatable
     fields:
       private:
         type: 'Boolean!'
@@ -11,17 +22,10 @@ Reply:
         type: 'ReplyPublicationStatus!'
         description: 'The reply status.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyPublicationStatusResolver", [value])'
-      createdAt:
-        type: 'DateTime!'
       responses:
         type: '[InternalResponse]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value])'
       author:
         type: 'InternalUser!'
-        description: 'The author of the contribution.'
-      updatedAt:
-        type: 'DateTime'
-        description: 'The updated date.'
       questionnaire:
         type: 'InternalQuestionnaire!'
         description: 'Identifies the form where the contribution was submitted.'

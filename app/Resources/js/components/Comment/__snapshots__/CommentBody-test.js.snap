@@ -1,52 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CommentBody /> should render correctly 1`] = `
-<div
-  className="opinion__text"
->
-  <Linkify
-    className="Linkify"
-    component="a"
-    properties={
-      Object {
-        "className": "external-link",
-      }
+<ContainerConstructor
+  comment={
+    Object {
+      "$refType": null,
+      "body": "lol",
+      "trashed": false,
+      "trashedReason": "mdr",
     }
-  >
-    lol
-  </Linkify>
-</div>
+  }
+  componentRef={null}
+/>
 `;
 
 exports[`<CommentBody /> should render correctly when trashed with body 1`] = `
-<div
-  className="opinion__text"
->
-  <span
-    className="label label-default mr-5"
-  >
-    <FormattedMessage
-      id="comment.trashed.label"
-      values={Object {}}
-    />
-  </span>
-  <Linkify
-    className="Linkify"
-    component="a"
-    properties={
-      Object {
-        "className": "external-link",
-      }
+<ContainerConstructor
+  comment={
+    Object {
+      "$refType": null,
+      "body": "lol",
+      "trashed": true,
+      "trashedReason": "mdr",
     }
-  >
-    lol
-  </Linkify>
-  <div
-    className="mt-5"
-  >
-    <span>
-      mdr
-    </span>
-  </div>
-</div>
+  }
+  componentRef={null}
+/>
 `;

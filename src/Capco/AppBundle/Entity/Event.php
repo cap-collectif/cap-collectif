@@ -476,7 +476,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch'];
+        return ['Elasticsearch', 'ElasticsearchWithAuthor'];
     }
 
     public function canDisplayInBo($user = null): bool

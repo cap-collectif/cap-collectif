@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Draftable;
 
 use GraphQL\Type\Definition\Type;
@@ -29,7 +30,7 @@ class DraftableTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalProposal');
         }
         if ($node instanceof Reply) {
-            return $this->typeResolver->resolve('Reply');
+            return $this->typeResolver->resolve('InternalReply');
         }
 
         throw new UserError('Could not resolve type of Draftable.');

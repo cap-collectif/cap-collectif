@@ -48,7 +48,7 @@ The following query looks up the "<strong>{{ selectedStep.label }}</strong>" ste
 {% set query = '{
   node(id: "'~ stepId ~ '") {
     ... on CollectStep {
-      proposals(first: 10) {
+      proposals(first: 10, after: null) {
         totalCount
         edges {
           node {

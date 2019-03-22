@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Question;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
+use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
@@ -52,6 +53,14 @@ class QuestionResponsesResolver implements ResolverInterface
         $withNotConfirmedUser =
             isset($arguments['withNotConfirmedUser']) &&
             true === $arguments['withNotConfirmedUser'];
+
+        // Schema design is wrong but let's return empty connection for now…
+        if ($question instanceof SectionQuestion) {
+            $connection = ConnectionBuilder::connectionFromArray([], $args);
+            $connection->totalCount = 0;
+
+            return $connection;
+        }
 
         if ($question instanceof MultipleChoiceQuestion || $question instanceof SimpleQuestion) {
             $totalCount = $this->valueResponseRepository->countByQuestion(

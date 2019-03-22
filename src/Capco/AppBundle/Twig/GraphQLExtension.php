@@ -2,17 +2,24 @@
 
 namespace Capco\AppBundle\Twig;
 
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class GraphQLExtension extends \Twig_Extension
 {
     private $collectStepRepo;
+    private $questionnaireRepo;
 
-    public function __construct(CollectStepRepository $collectStepRepo)
-    {
+    public function __construct(
+        CollectStepRepository $collectStepRepo,
+        QuestionnaireRepository $questionnaireRepo
+    ) {
         $this->collectStepRepo = $collectStepRepo;
+        $this->questionnaireRepo = $questionnaireRepo;
     }
 
     public function getFunctions(): array
@@ -20,6 +27,7 @@ class GraphQLExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('graphql_offset_to_cursor', [$this, 'getOffsetToCursor']),
             new \Twig_SimpleFunction('graphql_list_collect_steps', [$this, 'getCollectSteps']),
+            new \Twig_SimpleFunction('graphql_list_questionnaires', [$this, 'getQuestionnaires']),
         ];
     }
 
@@ -32,11 +40,23 @@ class GraphQLExtension extends \Twig_Extension
     {
         $steps = $this->collectStepRepo->findAll();
 
-        return array_map(function ($step) {
+        return array_map(function (CollectStep $step) {
             return [
                 'id' => GlobalId::toGlobalId('CollectStep', $step->getId()),
                 'label' => $step->__toString(),
             ];
         }, $steps);
+    }
+
+    public function getQuestionnaires(): array
+    {
+        $questionnaires = $this->questionnaireRepo->findAll();
+
+        return array_map(function (Questionnaire $questionnaire) {
+            return [
+                'id' => GlobalId::toGlobalId('Questionnaire', $questionnaire->getId()),
+                'label' => $questionnaire->__toString(),
+            ];
+        }, $questionnaires);
     }
 }

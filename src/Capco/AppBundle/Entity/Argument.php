@@ -306,6 +306,6 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch'];
+        return ['Elasticsearch', 'ElasticsearchWithAuthor'];
     }
 }

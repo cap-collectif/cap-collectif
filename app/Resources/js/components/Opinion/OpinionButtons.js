@@ -52,7 +52,7 @@ export class OpinionButtons extends React.Component<Props> {
   };
 
   render() {
-    const { opinion } = this.props;
+    const opinion = this.props.opinion;
     if (!opinion) {
       return null;
     }

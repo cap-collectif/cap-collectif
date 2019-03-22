@@ -85,9 +85,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const media =
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   const userId = props.user.id;
-  const { id, isViewer, url, ...rest} = values
   const input = {
-    ...rest,
+    ...values,
     media,
     userId,
     userType: values.userType || null,

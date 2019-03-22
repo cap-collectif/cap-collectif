@@ -269,7 +269,7 @@ class SynthesisElementStore extends BaseStore {
     if (parentId === 'root') {
       tree = ArrayHelper.addElementToArray(tree, element);
     } else if (parentInTree) {
-      const { children } = parentInTree;
+      const children = parentInTree.children;
       parentInTree.children = ArrayHelper.addElementToArray(children, element);
       parentInTree.childrenCount = parentInTree.children.length;
     }
@@ -330,13 +330,13 @@ class SynthesisElementStore extends BaseStore {
 
   addElementInTree(child) {
     let tree = this._elements.notIgnoredTree;
-    const { parent } = child;
+    const parent = child.parent;
     if (!parent) {
       tree = ArrayHelper.addElementToArray(tree, child);
     } else {
       const parentInTree = this.getElementInTreeById(tree, parent.id);
       if (parentInTree) {
-        let { children } = parentInTree;
+        let children = parentInTree.children;
         children = ArrayHelper.addElementToArray(children, child);
         parentInTree.children = children;
         parentInTree.childrenCount++;
@@ -346,13 +346,13 @@ class SynthesisElementStore extends BaseStore {
 
   removeElementFromTree(child) {
     let tree = this._elements.notIgnoredTree;
-    const { parent } = child;
+    const parent = child.parent;
     if (!parent) {
       tree = ArrayHelper.removeElementFromArray(tree, child);
     } else {
       const parentInTree = this.getElementInTreeById(tree, parent.id);
       if (parentInTree) {
-        let { children } = parentInTree;
+        let children = parentInTree.children;
         children = ArrayHelper.removeElementFromArray(children, child);
         parentInTree.children = children;
         parentInTree.childrenCount++;

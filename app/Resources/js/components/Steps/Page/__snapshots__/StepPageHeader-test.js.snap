@@ -1,110 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
-<div>
-  <h2
-    className="h2"
-  >
-    I am a title
-  </h2>
-  <div
-    className="mb-30 project__step-dates"
-  />
-  <ForwardRef(Relay(StepInfos))
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "endAt": "",
-        "startAt": "",
-        "status": "OPENED",
-        "timeless": false,
-        "title": "I am a title",
-        "type": "consultation",
-      }
+<ContainerConstructor
+  componentRef={null}
+  step={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "endAt": "",
+      "startAt": "",
+      "status": "OPENED",
+      "timeless": false,
+      "title": "I am a title",
+      "type": "consultation",
     }
-  />
-</div>
+  }
+/>
 `;
 
 exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
-<div>
-  <h2
-    className="h2"
-  >
-    I am a title
-  </h2>
-  <div
-    className="mb-30 project__step-dates"
-  />
-  <ForwardRef(Relay(StepInfos))
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "endAt": "",
-        "startAt": "",
-        "status": "OPENED",
-        "timeless": false,
-        "title": "I am a title",
-        "type": "questionnaire",
-      }
+<ContainerConstructor
+  componentRef={null}
+  step={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "endAt": "",
+      "startAt": "",
+      "status": "OPENED",
+      "timeless": false,
+      "title": "I am a title",
+      "type": "questionnaire",
     }
-  />
-</div>
+  }
+/>
 `;
 
 exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
-<div>
-  <h2
-    className="h2"
-  >
-    I am a title
-  </h2>
-  <div
-    className="mb-30 project__step-dates"
-  />
-  <h4
-    style={
-      Object {
-        "marginBottom": "20px",
-      }
+<ContainerConstructor
+  componentRef={null}
+  step={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "endAt": "",
+      "startAt": "",
+      "status": "OPENED",
+      "timeless": false,
+      "title": "I am a title",
+      "type": "selection",
+      "votable": true,
+      "voteThreshold": 1,
     }
-  >
-    <i
-      className="cap cap-hand-like-2-1"
-      style={
-        Object {
-          "color": "#377bb5",
-          "fontSize": "22px",
-        }
-      }
-    />
-     
-    <FormattedMessage
-      id="proposal.vote.threshold.step"
-      values={
-        Object {
-          "num": 1,
-        }
-      }
-    />
-  </h4>
-  <ForwardRef(Relay(StepInfos))
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "endAt": "",
-        "startAt": "",
-        "status": "OPENED",
-        "timeless": false,
-        "title": "I am a title",
-        "type": "selection",
-        "votable": true,
-        "voteThreshold": 1,
-      }
-    }
-  />
-</div>
+  }
+/>
 `;

@@ -1838,6 +1838,12 @@ type Event implements Node & Commentable {
   # The URL to this resource.
   url: URI!
 
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
   # The title of the event.
   title: String!
 
@@ -1846,12 +1852,6 @@ type Event implements Node & Commentable {
 
   # The end of the event.
   endAt: DateTime
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
 
   # Identifies the body of the event.
   body: HTML!
@@ -2312,7 +2312,26 @@ type Media implements UniformResourceLocatable {
 
 # A media question.
 type MediaQuestion implements Question & Node {
+  # Identifies the question title.
   title: String!
+
+  # Return responses on this questions.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
+  ): ResponseConnection!
 
   # The ID of an object
   id: ID!
@@ -2345,24 +2364,6 @@ type MediaQuestion implements Question & Node {
     # Get participant with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
-
-  # Return responses of participants
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-
-    # Get responses with user not confirmed
-    withNotConfirmedUser: Boolean = false
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -2372,6 +2373,8 @@ type MediaQuestion implements Question & Node {
 type MediaResponse implements Response {
   # Nullable ID in case of empty response.
   id: String
+
+  # Identifies the question of the response.
   question: Question!
 
   # Medias
@@ -2380,7 +2383,26 @@ type MediaResponse implements Response {
 
 # A multiple choice question
 type MultipleChoiceQuestion implements Question & Node {
+  # Identifies the question title.
   title: String!
+
+  # Return responses on this questions.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
+  ): ResponseConnection!
 
   # The ID of an object
   id: ID!
@@ -2413,24 +2435,6 @@ type MultipleChoiceQuestion implements Question & Node {
     # Get participant with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
-
-  # Return responses of participants
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-
-    # Get responses with user not confirmed
-    withNotConfirmedUser: Boolean = false
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -2453,7 +2457,7 @@ type MultipleChoiceQuestion implements Question & Node {
   choices(
     # If the question has `randomQuestionChoices: true` will return choices in a random order.
     allowRandomize: Boolean = false
-  ): [QuestionChoice!]
+  ): [QuestionChoice!]!
   validationRule: MultipleChoiceQuestionValidationRule
   randomQuestionChoices: Boolean!
 }
@@ -3341,7 +3345,7 @@ enum ProjectVisibility {
   PUBLIC
 }
 
-# A budget contribution
+# Represents a type that can be retrieved by a URL on the admin.
 type Proposal implements Node & Contribution & Commentable & Publishable & Draftable & Reportable & Trashable & UniformResourceLocatable & UniformResourceAdminLocatable {
   # The ID of an object
   id: ID!
@@ -3372,6 +3376,12 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
 
   # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
 
   # Identifies the proposal title.
   title: String!
@@ -3489,9 +3499,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   # The delete date.
   deletedAt: DateTime
 
-  # The updated date.
-  updatedAt: DateTime
-
   # The update user.
   updatedBy: User
 
@@ -3533,9 +3540,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
     # (ROLE_SUPER_ADMIN only) Select also unpublished votes.
     includeUnpublished: Boolean = false
   ): ProposalVoteConnection!
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
 
   # If the proposal is a fusion, contains the list of merged proposals.
   mergedFrom: [Proposal!]!
@@ -4203,7 +4207,26 @@ type Query {
 
 # Fetches an object given its ID
 interface Question {
+  # Identifies the question title.
   title: String!
+
+  # Return responses on this questions.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
+  ): ResponseConnection!
 
   # The ID of an object
   id: ID!
@@ -4237,37 +4260,19 @@ interface Question {
     withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
-  # Return responses of participants
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-
-    # Get responses with user not confirmed
-    withNotConfirmedUser: Boolean = false
-  ): ResponseConnection!
-
   # The associated logic jumps to this question.
   jumps: [LogicJump]
 }
 
-# A possible choice of a question
+# A possible choice of a question.
 type QuestionChoice {
+  # The ID of an object.
   id: ID!
-  title: String!
-  description: String
-  color: QuestionChoiceColor
-  image: Media
 
-  # Select all the responses of the given question choice
+  # Identifies the question choice title.
+  title: String!
+
+  # Identifies the responses of the question choice.
   responses(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -4281,6 +4286,9 @@ type QuestionChoice {
     # Returns the last `n` elements from the list.
     last: Int
   ): ResponseConnection!
+  description: String
+  color: QuestionChoiceColor
+  image: Media
 
   # Return the ranking of the given question choice
   ranking: [QuestionChoiceRanking]
@@ -4306,10 +4314,10 @@ input QuestionChoiceInput {
 
 # The choice ranking
 type QuestionChoiceRanking {
-  # Return the position of the choice
+  # Identifies the position of the choice
   position: Int!
 
-  # Select the responses of the c
+  # Identifies the responses of the choice.
   responses(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -4385,23 +4393,8 @@ type Questionnaire implements Node {
     last: Int
   ): UserConnection!
 
-  # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID
-  step: QuestionnaireStep
-  anonymousAllowed: Boolean!
-  description: String
-  multipleRepliesAllowed: Boolean!
-
-  # accept answers or not
-  contribuable: Boolean!
-  phoneConfirmationRequired: Boolean!
+  # List of questions.
   questions: [Question!]!
-  viewerReplies: [Reply!]!
-  acknowledgeReplies: Boolean!
-
-  # The questionnaire type
-  type: QuestionnaireType!
-  phoneConfirmation: Boolean!
 
   # A list of replies to the questionnaire.
   replies(
@@ -4417,6 +4410,23 @@ type Questionnaire implements Node {
     # Returns the last `n` elements from the list.
     last: Int
   ): ReplyConnection!
+
+  # Expose Primary Key, do not use it, except for testing purpose.
+  _id: ID
+  step: QuestionnaireStep
+  anonymousAllowed: Boolean!
+  description: String
+  multipleRepliesAllowed: Boolean!
+
+  # accept answers or not
+  contribuable: Boolean!
+  phoneConfirmationRequired: Boolean!
+  viewerReplies: [Reply!]!
+  acknowledgeReplies: Boolean!
+
+  # The questionnaire type
+  type: QuestionnaireType!
+  phoneConfirmation: Boolean!
 
   # Results of survey are private
   privateResult: Boolean!
@@ -4610,7 +4620,7 @@ type RemoveSourceVotePayload {
   clientMutationId: String
 }
 
-# A Reply
+# Represents a type that can be retrieved by a URL.
 type Reply implements Node & Publishable & Draftable & Contribution & UniformResourceLocatable {
   # The ID of an object
   id: ID!
@@ -4627,6 +4637,18 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # The responses of the reply.
+  responses: [Response]!
+
+  # The author of the contribution.
+  author: User!
+
   # Is the object a draft.
   draft: Boolean!
 
@@ -4642,14 +4664,6 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
 
   # The reply status.
   publicationStatus: ReplyPublicationStatus!
-  createdAt: DateTime!
-  responses: [Response]!
-
-  # The author of the contribution.
-  author: User!
-
-  # The updated date.
-  updatedAt: DateTime
 
   # Identifies the form where the contribution was submitted.
   questionnaire: Questionnaire!
@@ -4865,6 +4879,8 @@ interface RequirementStep {
 interface Response {
   # Nullable ID in case of empty response.
   id: String
+
+  # Identifies the question of the response.
   question: Question!
 }
 
@@ -4974,7 +4990,26 @@ type SectionAppendixType {
 
 # A section is just a title in a quiz without any possible answer.
 type SectionQuestion implements Question & Node {
+  # Identifies the question title.
   title: String!
+
+  # Return responses on this questions.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
+  ): ResponseConnection!
 
   # The ID of an object
   id: ID!
@@ -5007,24 +5042,6 @@ type SectionQuestion implements Question & Node {
     # Get participant with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
-
-  # Return responses of participants
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-
-    # Get responses with user not confirmed
-    withNotConfirmedUser: Boolean = false
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -5220,7 +5237,26 @@ type SetEvaluationFormInProposalFormPayload {
 
 # A simple question
 type SimpleQuestion implements Question & Node {
+  # Identifies the question title.
   title: String!
+
+  # Return responses on this questions.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
+  ): ResponseConnection!
 
   # The ID of an object
   id: ID!
@@ -5254,35 +5290,17 @@ type SimpleQuestion implements Question & Node {
     withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
 
-  # Return responses of participants
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-
-    # Get responses with user not confirmed
-    withNotConfirmedUser: Boolean = false
-  ): ResponseConnection!
-
   # The associated logic jumps to this question.
   jumps: [LogicJump]
 }
 
 # A site image
 type SiteImage {
-  # The creation date
-  createdAt: DateTime!
-
-  # The updated date
+  # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
   id: ID!
 
   # A unique key to distinguish site image
@@ -5611,7 +5629,7 @@ type Theme implements UniformResourceLocatable {
   title: String!
 }
 
-# A trashable contribution
+# Entities that can be trashed.
 interface Trashable {
   # `true` if the contribution is trashed.
   trashed: Boolean!

@@ -17,7 +17,7 @@ type Props = {
 export class ContributionPaginatedList extends React.Component<Props> {
   render() {
     const { relay, consultation } = this.props;
-    const { contributionConnection } = consultation;
+    const contributionConnection = consultation.contributionConnection;
     if (
       !contributionConnection ||
       typeof contributionConnection.edges === 'undefined' ||

@@ -1,0 +1,9 @@
+PreviewSectionQuestion:
+  type: object
+  inherits:
+    - PreviewQuestion
+  config:
+    name: SectionQuestion
+    interfaces:
+      - PreviewQuestion
+    description: 'A section is just a title in a quiz without any possible answer.'
