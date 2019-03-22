@@ -51,9 +51,8 @@ class CollectStepProposalCountResolver implements ResolverInterface
         return $count;
     }
 
-    // TODO not used for now
     private function resolveWithMySQL(CollectStep $step): int
     {
-        $this->proposalRepo->countPublishedProposalByStep($step);
+        return $this->proposalRepo->countPublishedProposalByStep($step);
     }
 }

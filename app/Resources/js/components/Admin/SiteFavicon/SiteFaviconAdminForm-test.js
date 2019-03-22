@@ -2,14 +2,13 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { SiteFaviconAdminForm } from './SiteFaviconAdminForm';
-import { formMock, $refType } from '../../../mocks';
+import SiteFaviconAdminForm from './SiteFaviconAdminForm';
+import { formMock } from '../../../mocks';
 
 describe('<SiteFaviconAdminPage />', () => {
   it('renders correctly without a favicon set', () => {
     const props = {
       siteFavicon: {
-        ...$refType,
         id: 'siteFaviconId',
         media: null,
       },
@@ -22,7 +21,6 @@ describe('<SiteFaviconAdminPage />', () => {
   it('renders correctly when a favicon is set', () => {
     const props = {
       siteFavicon: {
-        ...$refType,
         id: 'siteFaviconId',
         media: {
           id: 'mediaId',

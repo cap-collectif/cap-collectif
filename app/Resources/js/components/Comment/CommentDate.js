@@ -9,7 +9,7 @@ type Props = {
   comment: CommentDate_comment,
 };
 
-export class CommentDate extends React.Component<Props> {
+class CommentDate extends React.Component<Props> {
   renderDate = () => {
     const { comment } = this.props;
     if (!Modernizr.intl) {

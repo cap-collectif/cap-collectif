@@ -13,9 +13,9 @@ type Props = {
 
 class OpinionPreviewCounters extends React.Component<Props> {
   render() {
-    const { opinion } = this.props;
+    const opinion = this.props.opinion;
     if (!opinion || !opinion.section) return null;
-    const { section } = opinion;
+    const section = opinion.section;
     const counters = [];
     if (section.voteWidgetType !== VOTE_WIDGET_DISABLED) {
       counters.push(

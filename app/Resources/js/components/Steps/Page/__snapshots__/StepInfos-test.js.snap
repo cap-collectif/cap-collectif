@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<StepInfos /> should render correcty 1`] = `
-<CardContainer>
-  <div
-    className="card__body"
-  >
-    <StepText
-      text="Coucou"
-    />
-  </div>
-</CardContainer>
+<ContainerConstructor
+  componentRef={null}
+  step={
+    Object {
+      "$refType": null,
+      "body": "Coucou",
+    }
+  }
+/>
 `;

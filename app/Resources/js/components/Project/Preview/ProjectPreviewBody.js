@@ -70,7 +70,7 @@ const getActualStep = (project: ProjectPreviewBody_project) => {
   }
 };
 
-export class ProjectPreviewBody extends React.Component<Props> {
+class ProjectPreviewBody extends React.Component<Props> {
   getAction = (step: Object) => {
     const { project } = this.props;
 

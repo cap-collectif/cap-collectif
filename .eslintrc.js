@@ -94,10 +94,6 @@ module.exports = {
     'react/no-children-prop': 'off',
     // TODO enable this
     'react/no-array-index-key': 'off',
-    'react/default-props-match-prop-types': 'off',
-    'react/no-unused-prop-types': 'off',
-    'react/prop-types': 'warn',
-    'react/no-array-index-key': 'off',
     // TODO enable this
     'no-plusplus': 'off',
     // We must render some HTML from WYSIWYG

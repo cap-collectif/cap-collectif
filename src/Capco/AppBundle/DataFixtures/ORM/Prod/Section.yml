@@ -81,19 +81,22 @@ Capco\AppBundle\Entity\Section:
     nbObjects: null
     enabled: true
     associatedFeatures: []
-  SectionFigures:
-    type: figures
+  SectionMetrics:
+    type: metrics
     title: Chiffres-clés
-    position: 10
+    position: 11
     teaser: null
     body: null
     nbObjects: null
     enabled: false
+    metricsToDisplayBasics: true
+    metricsToDisplayEvents: true
+    metricsToDisplayProjects: true
     associatedFeatures: []
   SectionProposals:
     type: proposals
     title: Mise en avant d'une étape de collecte
-    position: 11
+    position: 10
     teaser: null
     body: null
     nbObjects: 3

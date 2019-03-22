@@ -55,12 +55,3 @@ Capco\AppBundle\Entity\Reply:
     publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2019-03-01'))>
-  # Reply on a private result questionnaire
-  reply8:
-    id: 'reply8'
-    draft: 0
-    author: '@user5'
-    questionnaire: '@questionnaire10'
-    publishedAt: <(new \DateTime('2016-03-01'))>
-    createdAt: <(new \DateTime('2016-03-01'))>
-    updatedAt: <(new \DateTime('2019-03-01'))>

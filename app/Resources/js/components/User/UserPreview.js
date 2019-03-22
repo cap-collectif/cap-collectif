@@ -16,7 +16,7 @@ type Props = {
 
 export class UserPreview extends React.Component<Props> {
   render() {
-    const { user } = this.props;
+    const user = this.props.user;
     const contributionsCount = user && user.contributionsCount ? user.contributionsCount : 0;
     const classes = {
       'pb-10': true,

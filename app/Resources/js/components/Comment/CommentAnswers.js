@@ -19,7 +19,7 @@ const classes = classNames({
   'comment-answers': true,
 });
 
-export class CommentAnswers extends React.Component<Props, State> {
+class CommentAnswers extends React.Component<Props, State> {
   state = {
     highlightedComment: null,
   };

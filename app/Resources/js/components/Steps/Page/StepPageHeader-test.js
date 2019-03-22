@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { StepPageHeader } from './StepPageHeader';
+import StepPageHeader from './StepPageHeader';
 import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<StepPageHeader />', () => {
