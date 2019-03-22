@@ -62,6 +62,7 @@ export class ContactAdminListItem extends React.Component<Props, State> {
           showDeleteModal={showRemoveContactFormModal}
           deleteElement={() => {
             onDelete(contactForm.id);
+            window.location.reload();
           }}
           deleteModalTitle="group.admin.contactForm.modal.delete.content"
           deleteModalContent="group-admin-parameters-modal-delete-content"

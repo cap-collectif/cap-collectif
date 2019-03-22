@@ -3,12 +3,11 @@
 namespace Capco\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Email;
-use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class ContactFormType extends AbstractType
@@ -16,14 +15,18 @@ class ContactFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('interlocutor', PurifiedTextType::class, [
+            ->add('interlocutor', TextType::class, [
                 'label' => 'contact.form.interlocutor',
                 'required' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
                 'constraints' => [new NotBlank(['message' => 'contact.no_interlocutor'])],
             ])
-            ->add('title', PurifiedTextType::class, [
+            ->add('title', TextType::class, [
                 'label' => 'contact.form.title',
                 'required' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
                 'constraints' => [new NotBlank(['message' => 'contact.title'])],
             ])
             ->add('email', EmailType::class, [
@@ -44,9 +47,11 @@ class ContactFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('body', PurifiedTextareaType::class, [
+            ->add('body', TextType::class, [
                 'label' => 'contact.form.body',
                 'required' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
                 'attr' => [
                     'rows' => '10',
                     'cols' => '30',

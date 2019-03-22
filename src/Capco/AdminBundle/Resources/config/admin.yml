@@ -386,9 +386,11 @@ services:
       - [setTranslationDomain, [CapcoAppBundle]]
 
   Capco\AdminBundle\Admin\ContactAdmin:
-    arguments: [~, ~, CapcoAdminBundle:Contact]
+    arguments: [~, '', CapcoAdminBundle:Contact]
     tags:
       - { name: sonata.admin, group: admin.group.project, manager_type: orm, label: contact.title }
+    calls:
+      - [setTranslationDomain, [CapcoAppBundle]]
 
   Capco\AdminBundle\Admin\CategoryAdmin:
     arguments: [~, Capco\AppBundle\Entity\Category, SonataAdminBundle:CRUD]

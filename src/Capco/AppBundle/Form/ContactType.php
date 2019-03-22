@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Capco\UserBundle\Form\Type\ReCaptchaType;
-use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -22,13 +21,12 @@ class ContactType extends AbstractType
                 'required' => false,
                 'constraints' => [],
             ])
-            ->add('title', PurifiedTextType::class, [
+            ->add('title', TextType::class, [
                 'label' => 'contact.form.title',
                 'required' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
                 'constraints' => [new NotBlank(['message' => 'contact.title'])],
-                'strip_tags' => true,
             ])
             ->add('email', EmailType::class, [
                 'label' => 'contact.form.email',

@@ -33,7 +33,7 @@ export class ContactsListView extends React.Component<Props> {
         </div>
       );
     }
-    return <FormattedMessage id="admin.fields.step.no_proposal_form" />;
+    return null;
   }
 }
 

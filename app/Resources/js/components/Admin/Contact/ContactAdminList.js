@@ -14,7 +14,7 @@ type Props = {
 class ContactAdminList extends React.Component<Props> {
   renderContactsList() {
     const { query } = this.props;
-    if (query.contactForms) {
+    if (query.contactForms && query.contactForms.length > 0) {
       const contactForms = query.contactForms.filter(Boolean);
       return (
         <ListGroup>

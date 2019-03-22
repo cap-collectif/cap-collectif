@@ -2,10 +2,10 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
 
-class ContactAdmin extends BaseAdmin
+class ContactAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'capco_admin_contact';
     protected $baseRoutePattern = 'contact';
