@@ -42,12 +42,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
 </div>
 `;
 
-exports[`<ContactForm /> should render correctly with no contactForm 1`] = `
-<FormattedMessage
-  id="admin.fields.step.no_proposal_form"
-  values={Object {}}
-/>
-`;
+exports[`<ContactForm /> should render correctly with no contactForm 1`] = `""`;
 
 exports[`<ContactForm /> should render correctly with only one contactForm 1`] = `
 <ForwardRef(Relay(Connect(ReduxForm)))
