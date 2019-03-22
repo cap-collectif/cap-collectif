@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Container = styled.div.attrs({
-  className: 'card-cover',
+  className: 'card__cover',
 })`
   overflow: hidden;
   height: ${props => props.height};

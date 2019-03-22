@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
 const Counters = styled.div.attrs({
-  className: 'card-counters small',
+  className: 'card__counters small',
 })`
   padding: 5px;
   background-color: ${colors.pageBgc};
@@ -11,7 +11,7 @@ const Counters = styled.div.attrs({
   text-align: center;
   display: flex;
 
-  .card-counters {
+  .card__counters {
     &__item {
       flex: 1;
 

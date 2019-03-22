@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Container = styled.div.attrs({
-  className: 'card-header',
+  className: 'card__header',
 })`
   background-color: ${props => props.bgColor};
   color: ${props => (props.bgColor === colors.pageBgc ? colors.dark : darken(0.6, props.bgColor))};

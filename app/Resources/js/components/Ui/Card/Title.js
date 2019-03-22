@@ -10,7 +10,7 @@ type Props = {
 const e = React.createElement;
 
 const Container = styled(({ tagName, children, ...props }) => e(tagName, props, children)).attrs({
-  className: 'card-title',
+  className: 'card__title',
 })`
   font-size: 18px;
   line-height: 1.2;

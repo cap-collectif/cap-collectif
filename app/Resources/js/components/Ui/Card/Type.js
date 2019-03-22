@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Container = styled.div.attrs({
-  className: 'card-type',
+  className: 'card__type',
 })`
   background-color: ${props => props.bgColor};
   border-top-right-radius: 3px;

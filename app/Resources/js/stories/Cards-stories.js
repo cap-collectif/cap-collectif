@@ -102,12 +102,12 @@ storiesOf('Card', module)
           )}
           {cardCounters && (
             <Card.Counters>
-              <div className="card-counters__item">
-                <div className="card-counters__value">0</div>
+              <div className="card__counters__item">
+                <div className="card__counters__value">0</div>
                 <div>Lorem ipsum</div>
               </div>
-              <div className="card-counters__item">
-                <div className="card-counters__value">40</div>
+              <div className="card__counters__item">
+                <div className="card__counters__value">40</div>
                 <div>Lorem ipsum</div>
               </div>
             </Card.Counters>

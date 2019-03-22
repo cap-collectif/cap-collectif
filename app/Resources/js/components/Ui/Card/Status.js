@@ -11,8 +11,8 @@ type Props = {
 const Container = styled.div.attrs({
   className: props =>
     props.bsStyle === 'primary'
-      ? 'ellipsis card-status custom-primary-bgcolor'
-      : 'ellipsis card-status',
+      ? 'ellipsis card__status custom-primary-bgcolor'
+      : 'ellipsis card__status',
 })`
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
