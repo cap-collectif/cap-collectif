@@ -1371,7 +1371,7 @@ trait ProposalStepsTrait
             },
             $this->getSession()
                 ->getPage()
-                ->findAll('css', '.opinion__list .card-title')
+                ->findAll('css', '.opinion__list .card__title')
         );
 
         $this->currentCollectsStep = $items;
@@ -1383,7 +1383,7 @@ trait ProposalStepsTrait
     public function iShouldSeeSameProposals()
     {
         $savedSteps = $this->currentCollectsStep;
-        $selector = '.opinion__list .card-title';
+        $selector = '.opinion__list .card__title';
 
         $items = array_map(
             function ($element) {
@@ -1403,7 +1403,7 @@ trait ProposalStepsTrait
     public function iShouldSeeOtherProposals()
     {
         $savedSteps = $this->currentCollectsStep;
-        $selector = '.opinion__list .card-title span span';
+        $selector = '.opinion__list .card__title span span';
 
         $items = array_map(
             function ($element) {
@@ -1485,7 +1485,7 @@ trait ProposalStepsTrait
         $this->element1ShouldBeBeforeElement2ForSelector(
             $proposal1,
             $proposal2,
-            '.proposal-preview .card-title'
+            '.proposal-preview .card__title'
         );
     }
 
