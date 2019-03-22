@@ -1,19 +1,132 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CommentAnswer /> should render correctly 1`] = `
-<ContainerConstructor
-  comment={
-    Object {
-      "$fragmentRefs": null,
-      "$refType": null,
-      "author": Object {
-        "displayName": "admin",
-        "media": null,
-        "vip": true,
-      },
-      "id": "proposalComment1",
-    }
-  }
-  componentRef={null}
-/>
+<li
+  className="opinion opinion--comment"
+>
+  <div
+    className="opinion__body"
+  >
+    <div
+      className="opinion__content"
+    >
+      <Connect(UserAvatar)
+        user={
+          Object {
+            "displayName": "admin",
+            "media": null,
+            "vip": true,
+          }
+        }
+      />
+      <div
+        className="comment__detail"
+      >
+        <div
+          className="bg-vip comment__description"
+          id="comment_proposalComment1"
+        >
+          <div
+            className="opinion__data"
+          >
+            <ForwardRef(Relay(CommentInfos))
+              comment={
+                Object {
+                  "$fragmentRefs": null,
+                  "$refType": null,
+                  "author": Object {
+                    "displayName": "admin",
+                    "media": null,
+                    "vip": true,
+                  },
+                  "id": "proposalComment1",
+                }
+              }
+            />
+          </div>
+          <ForwardRef(Relay(CommentBody))
+            comment={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "author": Object {
+                  "displayName": "admin",
+                  "media": null,
+                  "vip": true,
+                },
+                "id": "proposalComment1",
+              }
+            }
+          />
+        </div>
+        <div
+          className="comment__action"
+        >
+          <ForwardRef(Relay(CommentDate))
+            comment={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "author": Object {
+                  "displayName": "admin",
+                  "media": null,
+                  "vip": true,
+                },
+                "id": "proposalComment1",
+              }
+            }
+          />
+          <div
+            className="comment__buttons"
+          >
+            <ForwardRef(Relay(CommentVoteButton))
+              comment={
+                Object {
+                  "$fragmentRefs": null,
+                  "$refType": null,
+                  "author": Object {
+                    "displayName": "admin",
+                    "media": null,
+                    "vip": true,
+                  },
+                  "id": "proposalComment1",
+                }
+              }
+            />
+             
+            <ForwardRef(Relay(Connect(CommentReportButton)))
+              comment={
+                Object {
+                  "$fragmentRefs": null,
+                  "$refType": null,
+                  "author": Object {
+                    "displayName": "admin",
+                    "media": null,
+                    "vip": true,
+                  },
+                  "id": "proposalComment1",
+                }
+              }
+            />
+             
+            <ForwardRef(Relay(CommentEdit))
+              comment={
+                Object {
+                  "$fragmentRefs": null,
+                  "$refType": null,
+                  "author": Object {
+                    "displayName": "admin",
+                    "media": null,
+                    "vip": true,
+                  },
+                  "id": "proposalComment1",
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
 `;

@@ -11,7 +11,7 @@ type Props = {
 
 export class ProposalDraftAlert extends React.Component<Props> {
   render() {
-    const proposal = this.props.proposal;
+    const { proposal } = this.props;
     if (proposal.publicationStatus === 'DRAFT') {
       return (
         <Alert bsStyle="warning" style={{ marginBottom: '0', textAlign: 'center' }}>

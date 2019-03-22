@@ -1,46 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CommentAnswers /> should render correctly 1`] = `
-<ContainerConstructor
-  comment={
-    Object {
-      "$refType": null,
-      "answers": Object {
-        "edges": Array [
-          Object {
-            "node": Object {
-              "$fragmentRefs": null,
-              "id": "1",
-            },
-          },
-          Object {
-            "node": Object {
-              "$fragmentRefs": null,
-              "id": "2",
-            },
-          },
-        ],
-        "totalCount": 2,
-      },
-      "id": "proposalComment1",
+<ul
+  className="media-list opinion__list comment-answers"
+  id="comments"
+>
+  <ForwardRef(Relay(CommentAnswer))
+    comment={
+      Object {
+        "$fragmentRefs": null,
+        "id": "1",
+      }
     }
-  }
-  componentRef={null}
-/>
+    isHighlighted={false}
+    key="1"
+  />
+  <ForwardRef(Relay(CommentAnswer))
+    comment={
+      Object {
+        "$fragmentRefs": null,
+        "id": "2",
+      }
+    }
+    isHighlighted={false}
+    key="2"
+  />
+</ul>
 `;
 
-exports[`<CommentAnswers /> should render correctly with no answers 1`] = `
-<ContainerConstructor
-  comment={
-    Object {
-      "$refType": null,
-      "answers": Object {
-        "edges": Array [],
-        "totalCount": 0,
-      },
-      "id": "proposalComment2",
-    }
-  }
-  componentRef={null}
-/>
-`;
+exports[`<CommentAnswers /> should render correctly with no answers 1`] = `""`;

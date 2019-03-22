@@ -133,7 +133,7 @@ export class ProposalStepPage extends React.Component<Props> {
             }
 
             if (props) {
-              const step = props.step;
+              const { step } = props;
 
               if (!step) {
                 return graphqlError;

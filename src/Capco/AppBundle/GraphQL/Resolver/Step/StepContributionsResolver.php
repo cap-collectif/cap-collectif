@@ -23,19 +23,16 @@ class StepContributionsResolver implements ResolverInterface
         $this->promiseAdapter = $promiseAdapter;
     }
 
-    public function __invoke(AbstractStep $step, Argument $args, bool $useSql = false): Promise
+    public function __invoke(AbstractStep $step, Argument $args): Promise
     {
         return $this->dataLoader->load(compact('step', 'args'));
     }
 
-    public function resolveSync(
-        AbstractStep $step,
-        Argument $args,
-        bool $useSql = false
-    ): Connection {
+    public function resolveSync(AbstractStep $step, Argument $args): Connection
+    {
         $conn = null;
         $this->promiseAdapter->await(
-            $this->__invoke($step, $args, $useSql)->then(function ($value) use (&$conn) {
+            $this->__invoke($step, $args)->then(function ($value) use (&$conn) {
                 $conn = $value;
             })
         );

@@ -16,7 +16,7 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
     const { step, proposal } = this.props;
     // We should use a new query render to fetch votes only from the step
     const votesCount = proposal.votes.totalCount;
-    const voteThreshold = step.voteThreshold;
+    const { voteThreshold } = step;
     if (voteThreshold === null || typeof voteThreshold === 'undefined') {
       return null;
     }

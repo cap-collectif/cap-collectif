@@ -75,6 +75,18 @@ exports[`<ArgumentItem /> render correcty 1`] = `
             }
           />
         </p>
+        <p
+          className="excerpt opinion__date"
+        >
+          <FormattedDate
+            day="numeric"
+            hour="numeric"
+            minute="numeric"
+            month="long"
+            value={"2018-04-09T21:21:06.000Z"}
+            year="numeric"
+          />
+        </p>
         <ForwardRef(Relay(Connect(UnpublishedLabel)))
           publishable={
             Object {
@@ -244,6 +256,18 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
               values={Object {}}
             />
           </Label>
+        </p>
+        <p
+          className="excerpt opinion__date"
+        >
+          <FormattedDate
+            day="numeric"
+            hour="numeric"
+            minute="numeric"
+            month="long"
+            value={"2018-04-09T21:21:06.000Z"}
+            year="numeric"
+          />
         </p>
         <ForwardRef(Relay(Connect(UnpublishedLabel)))
           publishable={

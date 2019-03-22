@@ -1,24 +1,24 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
 import {
+  change as changeRedux,
+  Field,
+  FieldArray,
   type FormProps,
   formValueSelector,
   reduxForm,
-  FieldArray,
-  Field,
   SubmissionError,
-  change as changeRedux,
 } from 'redux-form';
-import { connect } from 'react-redux';
-import { createFragmentContainer, graphql } from 'react-relay';
-import type { Dispatch, State } from '../../../types';
-import type { ReplyForm_questionnaire } from './__generated__/ReplyForm_questionnaire.graphql';
-import type { ReplyForm_reply } from './__generated__/ReplyForm_reply.graphql';
+import {connect} from 'react-redux';
+import {createFragmentContainer, graphql} from 'react-relay';
+import type {Dispatch, State} from '../../../types';
+import type {ReplyForm_questionnaire} from './__generated__/ReplyForm_questionnaire.graphql';
+import type {ReplyForm_reply} from './__generated__/ReplyForm_reply.graphql';
 import {
   formatInitialResponsesValues,
-  renderResponses,
   formatSubmitResponses,
+  renderResponses,
   type ResponsesInReduxForm,
   validateResponses,
 } from '../../../utils/responsesHelper';
@@ -26,7 +26,7 @@ import renderComponent from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import AddReplyMutation from '../../../mutations/AddReplyMutation';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import { CardContainer } from '../../Ui/Card/CardContainer';
+import {CardContainer} from '../../Ui/Card/CardContainer';
 import UpdateReplyMutation from '../../../mutations/UpdateReplyMutation';
 import SubmitButton from '../../Form/SubmitButton';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
@@ -52,14 +52,20 @@ const onUnload = e => {
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { questionnaire, reply, onClose } = props;
+  const {questionnaire, reply, onClose} = props;
   const data = {};
 
   data.responses = formatSubmitResponses(values.responses, questionnaire.questions);
   data.draft = values.draft;
   if (reply) {
     data.replyId = reply.id;
-    return UpdateReplyMutation.commit({ input: data })
+    return UpdateReplyMutation.commit({
+      input: {
+        replyId: data.replyId,
+        responses: data.responses,
+        draft: data.draft,
+      }
+    })
       .then(() => {
         AppDispatcher.dispatch({
           actionType: 'UPDATE_ALERT',
@@ -89,7 +95,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     data.private = values.private;
   }
 
-  return AddReplyMutation.commit({ input: data, isAuthenticated: true })
+  return AddReplyMutation.commit({
+    input: {
+      questionnaireId: data.questionnaireId,
+      responses: data.responses,
+      private: data.private,
+      draft: data.draft,
+    }, isAuthenticated: true
+  })
     .then(() => {
       AppDispatcher.dispatch({
         actionType: 'UPDATE_ALERT',
@@ -112,8 +125,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 const validate = (values: FormValues, props: Props) => {
-  const { questions } = props.questionnaire;
-  const { responses } = values;
+  const {questions} = props.questionnaire;
+  const {responses} = values;
   const errors = {};
 
   const responsesError = validateResponses(questions, responses, 'reply', props.intl);
@@ -149,7 +162,7 @@ export class ReplyForm extends React.Component<Props> {
   }
 
   formIsDisabled() {
-    const { questionnaire, user, reply } = this.props;
+    const {questionnaire, user, reply} = this.props;
 
     return (
       !questionnaire.contribuable ||
@@ -188,7 +201,7 @@ export class ReplyForm extends React.Component<Props> {
             <form id="reply-form" ref="form" onSubmit={handleSubmit}>
               {questionnaire.description && (
                 <div className="mb-15">
-                  <WYSIWYGRender value={questionnaire.description} />
+                  <WYSIWYGRender value={questionnaire.description}/>
                 </div>
               )}
               <FieldArray
@@ -204,14 +217,14 @@ export class ReplyForm extends React.Component<Props> {
               />
               {questionnaire.anonymousAllowed && (
                 <div>
-                  <hr className="mb-30" />
+                  <hr className="mb-30"/>
                   <Field
                     type="checkbox"
                     name="private"
                     helpPrint={false}
                     id={`${form}-reply-private`}
                     component={renderComponent}
-                    children={<FormattedMessage id="reply.form.private" />}
+                    children={<FormattedMessage id="reply.form.private"/>}
                     disabled={disabled}
                   />
                 </div>
@@ -289,7 +302,7 @@ const container = connect(mapStateToProps)(injectIntl(form));
 export default createFragmentContainer(container, {
   reply: graphql`
     fragment ReplyForm_reply on Reply
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
       private
       publicationStatus
@@ -302,7 +315,7 @@ export default createFragmentContainer(container, {
   `,
   questionnaire: graphql`
     fragment ReplyForm_questionnaire on Questionnaire
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       anonymousAllowed
       description
       multipleRepliesAllowed

@@ -125,27 +125,3 @@ InternalQuery:
             defaultValue: 1000
         access: "@=hasRole('ROLE_ADMIN')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryProjectDistrictResolver", [args])'
-      allContributors:
-        description: 'List all the contributors in the platform.'
-        type: 'InternalUserConnection!'
-        argsBuilder: 'Relay::Connection'
-        args:
-          first:
-            type: 'Int'
-            defaultValue: 100
-        access: "@=hasRole('ROLE_ADMIN')"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributorsResolver", [args])'
-      allContributions:
-        description: 'Return the number of contributions in the platform.'
-        type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributionsResolver", [args])'
-      votes:
-        description: 'List all the votes in the platform.'
-        type: 'InternalVoteConnection!'
-        argsBuilder: 'Relay::Connection'
-        args:
-          first:
-            type: 'Int'
-            defaultValue: 100
-        access: "@=hasRole('ROLE_ADMIN')"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryVotesResolver", [args])'

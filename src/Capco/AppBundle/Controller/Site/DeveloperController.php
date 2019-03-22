@@ -62,7 +62,12 @@ class DeveloperController extends Controller
         $mutation = null;
 
         // Public types with Preview types should be here :
-        $blackList = ['PublicQuestionnaire'];
+        $blackList = [
+            'PublicQuestionnaire',
+            // TODO: remove me
+            'PreviewQuestionnaire',
+            'PreviewReply',
+        ];
 
         // Public types hard to guess :
         $publicWhiteList = [

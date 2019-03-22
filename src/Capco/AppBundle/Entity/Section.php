@@ -85,12 +85,6 @@ class Section
             'body' => true,
             'nbObjects' => false,
         ],
-        'metrics' => [
-            'title' => true,
-            'teaser' => true,
-            'body' => true,
-            'nbObjects' => false,
-        ],
     ];
 
     /**
@@ -139,21 +133,6 @@ class Section
     private $enabled;
 
     /**
-     * @ORM\Column(name="metrics_to_display_basics", type="boolean")
-     */
-    private $metricsToDisplayBasics = false;
-
-    /**
-     * @ORM\Column(name="metrics_to_display_events", type="boolean")
-     */
-    private $metricsToDisplayEvents = false;
-
-    /**
-     * @ORM\Column(name="metrics_to_display_projects", type="boolean")
-     */
-    private $metricsToDisplayProjects = false;
-
-    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
@@ -196,54 +175,6 @@ class Section
     public function setTitle($title)
     {
         $this->title = $title;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMetricsToDisplayBasics()
-    {
-        return $this->metricsToDisplayBasics;
-    }
-
-    /**
-     * @param mixed $metricsToDisplayBasics
-     */
-    public function setMetricsToDisplayBasics($metricsToDisplayBasics): void
-    {
-        $this->metricsToDisplayBasics = $metricsToDisplayBasics;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMetricsToDisplayEvents()
-    {
-        return $this->metricsToDisplayEvents;
-    }
-
-    /**
-     * @param mixed $metricsToDisplayEvents
-     */
-    public function setMetricsToDisplayEvents($metricsToDisplayEvents): void
-    {
-        $this->metricsToDisplayEvents = $metricsToDisplayEvents;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMetricsToDisplayProjects()
-    {
-        return $this->metricsToDisplayProjects;
-    }
-
-    /**
-     * @param mixed $metricsToDisplayProjects
-     */
-    public function setMetricsToDisplayProjects($metricsToDisplayProjects): void
-    {
-        $this->metricsToDisplayProjects = $metricsToDisplayProjects;
     }
 
     /**

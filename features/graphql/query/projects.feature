@@ -72,9 +72,9 @@ Scenario: GraphQL client wants to list projects order by popularity
          "edges":[
             {"node":{"id":"project1"}},
             {"node":{"id":"project5"}},
-            {"node":{"id":"project6"}},
             {"node":{"id":"project2"}},
-            {"node":{"id":"project15"}}
+            {"node":{"id":"project3"}},
+            {"node":{"id":"project10"}}
           ]
          }
       }

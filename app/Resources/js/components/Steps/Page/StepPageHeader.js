@@ -11,7 +11,7 @@ type Props = {
   step: StepPageHeader_step,
 };
 
-class StepPageHeader extends React.Component<Props> {
+export class StepPageHeader extends React.Component<Props> {
   stepIsParticipative() {
     const { step } = this.props;
 
