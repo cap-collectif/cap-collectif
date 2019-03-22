@@ -117,6 +117,30 @@ type AddEventPayload {
   clientMutationId: String
 }
 
+input AddEventsInput {
+  # A list of events input to import.
+  events: [EventInput!]!
+
+  # This option is useful if you want to test your import. Set it to true if you want to import definitively.
+  dryRun: Boolean!
+  clientMutationId: String
+}
+
+type AddEventsPayload {
+  # List of imported events.
+  importedEvents: [Event!]!
+
+  # List of emails that didn't match an existing user.
+  notFoundEmails: [Email]!
+
+  # List of themes ID that didn't match an existing themes.
+  notFoundThemes: [ID]!
+
+  # List of dates that didn't got the good format
+  brokenDates: [String]!
+  clientMutationId: String
+}
+
 input AddOpinionVoteInput {
   # The Node ID of the opinion/version to vote.
   opinionId: ID!
@@ -149,6 +173,7 @@ input AddProposalVoteInput {
 type AddProposalVotePayload {
   vote: ProposalVote!
   viewer: User!
+  voteEdge: ProposalVoteEdge!
   clientMutationId: String
 }
 
@@ -346,13 +371,13 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 
   # The author of the contribution.
@@ -385,6 +410,7 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   viewerHasVote: Boolean!
   viewerVote: ArgumentVote
   contribuable: Boolean!
+  step: Consultation!
 }
 
 # A connection to a list of items.
@@ -620,6 +646,42 @@ type ChangeEventPayload {
   clientMutationId: String
 }
 
+input ChangeMapProviderTokenInput {
+  # The name of the provider the new token will be set
+  provider: MapTokenProvider!
+
+  # The new public token
+  publicToken: String
+
+  # The new secret token
+  secretToken: String
+  clientMutationId: String
+}
+
+type ChangeMapProviderTokenPayload {
+  # The newly map token
+  mapToken: MapToken
+  clientMutationId: String
+}
+
+input ChangeMapStyleInput {
+  # The ID of the map token to modify the style
+  mapTokenId: ID!
+
+  # The new style owner
+  styleOwner: String!
+
+  # The new style ID
+  styleId: ID!
+  clientMutationId: String
+}
+
+type ChangeMapStylePayload {
+  # The newly map token
+  mapToken: MapToken
+  clientMutationId: String
+}
+
 input ChangeProposalContentInput {
   # The proposal id
   id: ID!
@@ -770,6 +832,12 @@ type ChangeSourcePayload {
 input ChangeUserNotificationsConfigurationInput {
   # The new proposal comment notification value
   onProposalCommentMail: Boolean!
+
+  # The new external consent for communication
+  consentExternalCommunication: Boolean!
+
+  # The new internal consent for communication
+  consentInternalCommunication: Boolean!
   clientMutationId: String
 }
 
@@ -811,36 +879,9 @@ type CheckboxRequirement implements Node & Requirement {
 }
 
 # A proposal step
-type CollectStep implements Node & Step & ProposalStep {
+type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   # The ID of an object
   id: ID!
-
-  # The kind of the step
-  kind: String!
-
-  # The status of the step
-  status: StepStatus
-
-  # The type of the step
-  type: String
-
-  # Does the step have a end date ?
-  timeless: Boolean
-
-  # Start date of the step.
-  startAt: DateTime
-
-  # End date of the step.
-  endAt: DateTime
-
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
-
-  # The introduction text of the step.
-  body: HTML
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -864,9 +905,6 @@ type CollectStep implements Node & Step & ProposalStep {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -875,6 +913,9 @@ type CollectStep implements Node & Step & ProposalStep {
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -885,6 +926,33 @@ type CollectStep implements Node & Step & ProposalStep {
     # If non-null, filters proposals with the given trashed status.
     trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
+
+  # The title of the step.
+  title: String!
+
+  # The kind of the step
+  kind: String!
+
+  # The status of the step
+  status: StepStatus
+
+  # The type of the step
+  type: String
+
+  # Does the step have a end date ?
+  timeless: Boolean
+
+  # Start date of the step.
+  startAt: DateTime
+
+  # End date of the step.
+  endAt: DateTime
+
+  # The url of the step
+  url: String!
+
+  # The introduction text of the step.
+  body: HTML
 
   # The viewer unpublished proposals (only visible by viewer).
   viewerProposalsUnpublished(
@@ -985,13 +1053,13 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 
   # Does the viewer already submitted a report ?
@@ -1204,7 +1272,7 @@ interface Commentable {
 }
 
 # A consultation
-type Consultation implements Node & Step {
+type Consultation implements Node & Step & RequirementStep {
   # Expose Primary Key, do not use it, except for testing purpose.
   _id: ID
 
@@ -1237,6 +1305,21 @@ type Consultation implements Node & Step {
 
   # The number of votes in this consultation.
   votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
+
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
 
   # The kind of the step
   kind: String!
@@ -1501,6 +1584,9 @@ input CreateProposalInput {
 type CreateProposalPayload {
   # The created proposal, if everything goes well !
   proposal: Proposal
+
+  # An unsuccessful mutation will return one or more `UserError` objects.
+  userErrors: [UserError!]
   clientMutationId: String
 }
 
@@ -1788,6 +1874,15 @@ type Event implements Node & Commentable {
   # The ID of an object
   id: ID!
 
+  # The URL to this resource.
+  url: URI!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
   # The title of the event.
   title: String!
 
@@ -1796,12 +1891,6 @@ type Event implements Node & Commentable {
 
   # The end of the event.
   endAt: DateTime
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
 
   # Identifies the body of the event.
   body: HTML!
@@ -1844,7 +1933,7 @@ type Event implements Node & Commentable {
   ): ParticipantConnection!
   themes: [Theme!]!
   projects: [Project!]!
-  author: User!
+  author: User
   commentable: Boolean!
   link: URI
   media: Media
@@ -1855,9 +1944,9 @@ type Event implements Node & Commentable {
   country: String
   lat: Float
   lng: Float
-
-  # The url of the event
-  url: URI!
+  registrationEnable: Boolean!
+  metaDescription: String
+  customCode: String
 }
 
 # A connection to a list of items.
@@ -1878,6 +1967,37 @@ type EventEdge {
 
   # A cursor for use in pagination.
   cursor: String!
+}
+
+input EventInput {
+  title: String!
+  body: String!
+  startAt: String
+  endAt: String
+  authorEmail: String!
+  themes: [ID!]!
+  projects: [ID!]!
+  link: String
+  registrationEnable: Boolean!
+  enabled: Boolean!
+  commentable: Boolean!
+  zipCode: String
+  address: String
+  metaDescription: String
+  customCode: String
+  city: String
+  country: String
+}
+
+# Ordering options for events.
+enum EventOrderField {
+  START_AT
+}
+
+# Ways in which lists of events can be ordered upon return.
+input EventsOrder {
+  field: EventOrderField! = START_AT
+  direction: OrderDirection! = DESC
 }
 
 # Require a firstname
@@ -2035,6 +2155,28 @@ scalar HTML
 # A string containing an IP address.
 scalar IP
 
+input InternalChangeSiteFaviconInput {
+  # The media id to associate for the website favicon
+  mediaId: ID!
+  clientMutationId: String
+}
+
+type InternalChangeSiteFaviconPayload {
+  # The newly updated site image favicon
+  siteFavicon: SiteImage!
+  clientMutationId: String
+}
+
+input InternalRemoveSiteFaviconInput {
+  clientMutationId: String
+}
+
+type InternalRemoveSiteFaviconPayload {
+  # The newly updated site image favicon
+  siteFavicon: SiteImage!
+  clientMutationId: String
+}
+
 # A string containing JSON code.
 scalar JSON
 
@@ -2115,6 +2257,78 @@ input LogicJumpInput {
   conditions: [LogicJumpConditionInput]
 }
 
+# A map token used for connecting external services with our maps
+type MapToken implements Node {
+  # The ID of an object
+  id: ID!
+
+  # Expose Primary Key, do not use it, except for testing purpose.
+  _id: ID
+
+  # The public token
+  publicToken: String!
+
+  # The secret token
+  secretToken: String
+
+  # The corresponding provider in which belongs the token
+  provider: MapTokenProvider
+
+  # The style id associated to this map token (available only if a style is applied)
+  styleId: ID
+
+  # The style owner associated to this map token (available only if a style is applied)
+  styleOwner: String
+
+  # The available styles associated to this map token
+  styles(
+    # Filter the styles by its visibility
+    visibility: MapTokenStyleVisibility
+  ): [MapTokenStyle]
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# The provider for a map token
+enum MapTokenProvider {
+  # Used for Mapbox service provider
+  MAPBOX
+}
+
+# A map token style
+type MapTokenStyle {
+  id: ID!
+
+  # The name of the style
+  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+
+  # The version of the style
+  version: Int!
+
+  # The preview url of the style
+  previewUrl: URI!
+
+  # Does the style is the current one applied to the whole website?
+  isCurrent: Boolean!
+
+  # The owner of the style
+  owner: String!
+
+  # The visibility of the style
+  visibility: MapTokenStyleVisibility!
+}
+
+# The visibility of a style for a map token
+enum MapTokenStyleVisibility {
+  # The style is public
+  PUBLIC
+
+  # The style is private
+  PRIVATE
+}
+
 # A media
 type Media implements UniformResourceLocatable {
   # The URL to this resource.
@@ -2135,10 +2349,31 @@ type Media implements UniformResourceLocatable {
   providerReference: String!
 }
 
-# A media question
-type MediaQuestion implements Question {
-  id: ID!
+# A media question.
+type MediaQuestion implements Question & Node {
+  # Identifies the question title.
   title: String!
+
+  # Return responses on this questions.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
+  ): ResponseConnection!
+
+  # The ID of an object
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -2164,22 +2399,10 @@ type MediaQuestion implements Question {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get participant with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -2187,6 +2410,10 @@ type MediaQuestion implements Question {
 
 # A response
 type MediaResponse implements Response {
+  # Nullable ID in case of empty response.
+  id: String
+
+  # Identifies the question of the response.
   question: Question!
 
   # Medias
@@ -2194,9 +2421,30 @@ type MediaResponse implements Response {
 }
 
 # A multiple choice question
-type MultipleChoiceQuestion implements Question {
-  id: ID!
+type MultipleChoiceQuestion implements Question & Node {
+  # Identifies the question title.
   title: String!
+
+  # Return responses on this questions.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
+  ): ResponseConnection!
+
+  # The ID of an object
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -2222,22 +2470,10 @@ type MultipleChoiceQuestion implements Question {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get participant with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -2260,7 +2496,7 @@ type MultipleChoiceQuestion implements Question {
   choices(
     # If the question has `randomQuestionChoices: true` will return choices in a random order.
     allowRandomize: Boolean = false
-  ): [QuestionChoice!]
+  ): [QuestionChoice!]!
   validationRule: MultipleChoiceQuestionValidationRule
   randomQuestionChoices: Boolean!
 }
@@ -2300,6 +2536,11 @@ enum MultipleChoiceQuestionValidationRulesTypes {
 type Mutation {
   addEvent(input: AddEventInput!): AddEventPayload
   changeEvent(input: ChangeEventInput!): ChangeEventPayload
+  changeMapProviderToken(input: ChangeMapProviderTokenInput!): ChangeMapProviderTokenPayload
+  changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
+  removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload
+  changeSiteFavicon(input: InternalChangeSiteFaviconInput!): InternalChangeSiteFaviconPayload
+  addEvents(input: AddEventsInput!): AddEventsPayload
   addComment(input: AddCommentInput!): AddCommentPayload
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
   addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload
@@ -2495,6 +2736,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection
+  step: Consultation!
 
   # The sources related to the sourceable.
   sources(
@@ -2559,13 +2801,13 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 
   # The author of the contribution.
@@ -2601,7 +2843,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # true if the contribution is pinned.
   pinned: Boolean!
-  step: Consultation!
 
   # The viewer vote.
   viewerVote: OpinionVote
@@ -2926,35 +3167,7 @@ type PresentationStep implements Step {
   body: HTML
 }
 
-# Entities that can be published.
 interface PrivatableVote {
-  # The ID of an object
-  id: ID!
-
-  # Date of vote.
-  createdAt: DateTime!
-
-  # The author of the contribution.
-  author: User
-
-  # The contribution that was voted.
-  related: Contribution
-
-  # Returns Type of vote
-  kind: String!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
   # Anonymous or not.
   private: Boolean
 }
@@ -2974,29 +3187,32 @@ input ProgressStepInput {
 }
 
 # A participatory project.
-type Project implements Node & UniformResourceLocatable & UniformResourceAdminLocatable {
+type Project implements UniformResourceLocatable & UniformResourceAdminLocatable & Node {
   # The ID of an object
   id: ID!
 
   # The URL to this resource.
   url: URI!
 
-  # The admin URL to this resource.
-  adminUrl: URI!
-  steps: [Step!]!
+  # The title of the project.
   title: String!
-  author: User!
-  video: String
-  cover: Media
-  participantsCount: Int!
-  contributionsCount: Int!
-  votesCount: Int!
-  hasParticipativeStep: Boolean!
-  links: ProjectLinks!
-  type: ProjectType
-  themes: [Theme!]
 
-  # A list of contributor associated with the project.
+  # A list of votes associated with the project.
+  votes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): VoteConnection!
+
+  # A list of contributors associated with the project.
   contributors(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -3010,6 +3226,21 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     # Returns the last `n` elements from the list.
     last: Int
   ): UserConnection!
+
+  # The admin URL to this resource.
+  adminUrl: URI!
+
+  # Slug of a project
+  slug: String!
+  steps: [Step!]!
+  author: User!
+  video: String
+  cover: Media
+  contributionsCount: Int!
+  hasParticipativeStep: Boolean!
+  links: ProjectLinks!
+  type: ProjectType
+  themes: [Theme!]
   votableSteps: [ProposalStep!]!
 
   # The visibility of project
@@ -3030,6 +3261,27 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     # Returns the last `n` elements from the list.
     last: Int
   ): GroupConnection
+
+  # The district of the project
+  districts: [ProjectDistrict]
+
+  # The comments related to the project.
+  comments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # The connection will return only the trashed results.
+    onlyTrashed: Boolean = false
+  ): CommentConnection!
 }
 
 # A connection to a list of items.
@@ -3137,19 +3389,61 @@ enum ProjectVisibility {
   PUBLIC
 }
 
-# A budget contribution
+# Represents a type that can be retrieved by a URL on the admin.
 type Proposal implements Node & Contribution & Commentable & Publishable & Draftable & Reportable & Trashable & UniformResourceLocatable & UniformResourceAdminLocatable {
   # The ID of an object
   id: ID!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # Url of the contribution
+  url: URI!
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # Identifies the trashed visibility.
+  trashedStatus: TrashableStatus
+
+  # Identifies the moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # Identifies the reason why the moderator trashed the contribution.
+  trashedReason: String
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # Identifies the proposal title.
+  title: String!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the body of the proposal.
+  body: HTML
+
+  # Identifies the responses of the proposal.
+  responses: [Response]!
 
   # The kind of contribution.
   kind: String!
 
   # Return the related contribution if the contribution is related to another.
   related: Contribution
-
-  # The URL to this resource.
-  url: URI!
 
   # The comments related to the commentable.
   comments(
@@ -3166,18 +3460,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
     last: Int
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
 
   # Identifies proposals as draft.
   draft: Boolean!
@@ -3198,18 +3480,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
     last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
 
   # Followers connection
   followers(
@@ -3263,7 +3533,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   selections: [Selection!]!
   likers: [User!]!
   estimation: Int
-  responses: [Response]!
   media: Media
   theme: Theme
   category: ProposalCategory
@@ -3271,14 +3540,8 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   address: Address
   formattedAddress: String
 
-  # The author of the contribution.
-  author: User!
-
   # The delete date.
   deletedAt: DateTime
-
-  # The updated date.
-  updatedAt: DateTime
 
   # The update user.
   updatedBy: User
@@ -3288,12 +3551,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
 
   # The unique reference of proposal
   reference: String!
-
-  # Identifies the contribution title.
-  title: String!
-
-  # Identifies the body of the contribution.
-  body: HTML
 
   # Identifies the body of the contribution rendered to text.
   bodyText: String!
@@ -3309,9 +3566,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
 
   # Identifies the answers to an evaluation form.
   evaluation: ProposalEvaluation
-
-  # Count number of comments for the proposal.
-  commentsCount: Int!
   votes(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -3330,9 +3584,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
     # (ROLE_SUPER_ADMIN only) Select also unpublished votes.
     includeUnpublished: Boolean = false
   ): ProposalVoteConnection!
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
 
   # If the proposal is a fusion, contains the list of merged proposals.
   mergedFrom: [Proposal!]!
@@ -3440,9 +3691,6 @@ type ProposalForm implements Node & UniformResourceLocatable {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -3451,6 +3699,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -3534,6 +3785,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
   # Proposal form is description field is mandatory or not
   descriptionMandatory: Boolean!
+
+  # When a user is creating a proposal, suggest similar to avoid duplicate.
+  suggestingSimilarProposals: Boolean!
 }
 
 # Ways in which proposal connections can be ordered.
@@ -3638,9 +3892,6 @@ interface ProposalStep {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -3649,6 +3900,9 @@ interface ProposalStep {
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -3735,7 +3989,7 @@ enum ProposalTrashedStatus {
   NOT_TRASHED
 }
 
-# Entities that can be published.
+# A vote on a proposal for a given step.
 type ProposalVote implements Vote & Publishable & PrivatableVote {
   # The ID of an object
   id: ID!
@@ -3752,6 +4006,9 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
+  # Anonymous or not.
+  private: Boolean
+
   # Date of vote.
   createdAt: DateTime!
 
@@ -3763,9 +4020,6 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
 
   # Returns 'proposalVote'.
   kind: String!
-
-  # Anonymous or not.
-  private: Boolean
 
   # Is the vote anonymous ?
   anonymous: Boolean!
@@ -3856,6 +4110,8 @@ type Query {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Ordering options for projects returning from the connection.
     orderBy: ProjectOrder = {field: LATEST, direction: DESC}
 
     # If non-null, projects with the given string to look for.
@@ -3872,6 +4128,9 @@ type Query {
 
     # If non-null, filter projects by author
     author: ID
+
+    # If true, filter projects with events
+    withEventOnly: Boolean = false
   ): ProjectConnection!
 
   # Lookup events.
@@ -3900,9 +4159,27 @@ type Query {
     # If non-null, filters events with the given author.
     author: ID
 
+    # If non-null, filters events with the given author type.
+    userType: ID
+
     # If non-null, filters events with the given string to look for.
     search: String
   ): EventConnection!
+
+  # Lookup themes.
+  themes: [Theme!]!
+
+  # Get the available map tokens
+  mapTokens: [MapToken!]!
+
+  # Search a particular map token by its provider
+  mapToken(
+    # The map provider
+    provider: MapTokenProvider!
+  ): MapToken
+
+  # Get the current favicon
+  siteFavicon: SiteImage!
 
   # Get the current registration form
   registrationForm: RegistrationForm
@@ -3975,9 +4252,31 @@ type Query {
   ): ProjectDistrictConnection!
 }
 
+# Fetches an object given its ID
 interface Question {
-  id: ID!
+  # Identifies the question title.
   title: String!
+
+  # Return responses on this questions.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
+  ): ResponseConnection!
+
+  # The ID of an object
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -4003,36 +4302,24 @@ interface Question {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get participant with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
 }
 
-# A possible choice of a question
+# A possible choice of a question.
 type QuestionChoice {
+  # The ID of an object.
   id: ID!
-  title: String!
-  description: String
-  color: QuestionChoiceColor
-  image: Media
 
-  # Select all the responses of the given question choice
+  # Identifies the question choice title.
+  title: String!
+
+  # Identifies the responses of the question choice.
   responses(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -4046,6 +4333,9 @@ type QuestionChoice {
     # Returns the last `n` elements from the list.
     last: Int
   ): ResponseConnection!
+  description: String
+  color: QuestionChoiceColor
+  image: Media
 
   # Return the ranking of the given question choice
   ranking: [QuestionChoiceRanking]
@@ -4071,10 +4361,10 @@ input QuestionChoiceInput {
 
 # The choice ranking
 type QuestionChoiceRanking {
-  # Return the position of the choice
+  # Identifies the position of the choice
   position: Int!
 
-  # Select the responses of the c
+  # Identifies the responses of the choice.
   responses(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -4150,8 +4440,27 @@ type Questionnaire implements Node {
     last: Int
   ): UserConnection!
 
+  # List of questions.
+  questions: [Question!]!
+
+  # A list of replies to the questionnaire.
+  replies(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ReplyConnection!
+
   # Expose Primary Key, do not use it, except for testing purpose.
   _id: ID
+  step: QuestionnaireStep
   anonymousAllowed: Boolean!
   description: String
   multipleRepliesAllowed: Boolean!
@@ -4159,13 +4468,15 @@ type Questionnaire implements Node {
   # accept answers or not
   contribuable: Boolean!
   phoneConfirmationRequired: Boolean!
-  questions: [Question!]!
   viewerReplies: [Reply!]!
   acknowledgeReplies: Boolean!
 
   # The questionnaire type
   type: QuestionnaireType!
   phoneConfirmation: Boolean!
+
+  # Results of survey are private
+  privateResult: Boolean!
 }
 
 input QuestionnaireAbstractQuestionInput {
@@ -4203,6 +4514,7 @@ type QuestionnaireStep implements Node & Step {
 
   # The introduction text of the step.
   body: HTML
+  footer: String
 
   # A list of contributor associated with the step.
   contributors(
@@ -4350,6 +4662,7 @@ type RemoveProposalVotePayload {
   step: ProposalStep!
   proposal: Proposal!
   viewer: User!
+  previousVoteId: ID
   clientMutationId: String
 }
 
@@ -4366,7 +4679,7 @@ type RemoveSourceVotePayload {
   clientMutationId: String
 }
 
-# A Reply
+# Represents a type that can be retrieved by a URL.
 type Reply implements Node & Publishable & Draftable & Contribution & UniformResourceLocatable {
   # The ID of an object
   id: ID!
@@ -4383,6 +4696,18 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # The responses of the reply.
+  responses: [Response]!
+
+  # The author of the contribution.
+  author: User!
+
   # Is the object a draft.
   draft: Boolean!
 
@@ -4398,19 +4723,32 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
 
   # The reply status.
   publicationStatus: ReplyPublicationStatus!
-  createdAt: DateTime!
-  responses: [Response]!
-
-  # The author of the contribution.
-  author: User!
-
-  # The updated date.
-  updatedAt: DateTime
 
   # Identifies the form where the contribution was submitted.
   questionnaire: Questionnaire!
   viewerCanUpdate: Boolean!
   viewerCanDelete: Boolean!
+}
+
+# A connection to a list of items.
+type ReplyConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ReplyEdge]
+}
+
+# An edge in a connection.
+type ReplyEdge {
+  # The item at the end of the edge.
+  node: Reply!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # Available statuses
@@ -4579,8 +4917,29 @@ type RequirementEdge {
   cursor: String!
 }
 
-# A contribution with an author
+interface RequirementStep {
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
+}
+
+# A response to a question.
 interface Response {
+  # Nullable ID in case of empty response.
+  id: String
+
+  # Identifies the question of the response.
   question: Question!
 }
 
@@ -4685,12 +5044,34 @@ type SectionAppendixType {
   id: String
   position: Int!
   title: String
+  helpText: String
 }
 
 # A section is just a title in a quiz without any possible answer.
-type SectionQuestion implements Question {
-  id: ID!
+type SectionQuestion implements Question & Node {
+  # Identifies the question title.
   title: String!
+
+  # Return responses on this questions.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
+  ): ResponseConnection!
+
+  # The ID of an object
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -4716,22 +5097,10 @@ type SectionQuestion implements Question {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get participant with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -4761,7 +5130,7 @@ type Selection {
 }
 
 # A budget contribution
-type SelectionStep implements Node & Step & ProposalStep {
+type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   # The ID of an object
   id: ID!
 
@@ -4814,9 +5183,6 @@ type SelectionStep implements Node & Step & ProposalStep {
     # If non-null, filters proposals with the given author.
     author: ID
 
-    # If non-null, filters proposals with the given status.
-    status: ID
-
     # If non-null, filters proposals with the given theme.
     theme: ID
 
@@ -4825,6 +5191,9 @@ type SelectionStep implements Node & Step & ProposalStep {
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # If non-null, filters proposals with the given status.
+    status: ID
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -4953,9 +5322,30 @@ type SetEvaluationFormInProposalFormPayload {
 }
 
 # A simple question
-type SimpleQuestion implements Question {
-  id: ID!
+type SimpleQuestion implements Question & Node {
+  # Identifies the question title.
   title: String!
+
+  # Return responses on this questions.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Get responses with user not confirmed
+    withNotConfirmedUser: Boolean = false
+  ): ResponseConnection!
+
+  # The ID of an object
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -4981,25 +5371,38 @@ type SimpleQuestion implements Question {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Get participant with user not confirmed
+    withNotConfirmedUser: Boolean = false
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
+}
+
+# A site image
+type SiteImage {
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+  id: ID!
+
+  # A unique key to distinguish site image
+  keyname: String!
+
+  # Does the site image is currently enabled?
+  isEnabled: Boolean!
+
+  # The position of the site image
+  position: Int!
+
+  # The category of the site image
+  category: String!
+
+  # The associated media of the site image
+  media: Media
 }
 
 # A source
@@ -5048,13 +5451,13 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 
   # The author of the contribution.
@@ -5062,6 +5465,7 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
+  step: Consultation!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -5191,6 +5595,7 @@ type SourceVoteEdge {
 interface Sourceable {
   id: ID!
   contribuable: Boolean!
+  step: Consultation!
 
   # The sources related to the sourceable.
   sources(
@@ -5320,18 +5725,18 @@ type Theme implements UniformResourceLocatable {
   title: String!
 }
 
-# A trashable contribution
+# Entities that can be trashed.
 interface Trashable {
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 }
 
@@ -5661,6 +6066,7 @@ input UpdateProposalFormInput {
 
   # Proposal form using summary field
   usingSummary: Boolean
+  suggestingSimilarProposals: Boolean
 
   # Proposal form is description field is mandatory or not
   descriptionMandatory: Boolean
@@ -5739,6 +6145,7 @@ input UpdateQuestionnaireParametersInput {
   anonymousAllowed: Boolean
   multipleRepliesAllowed: Boolean
   phoneConfirmation: Boolean
+  privateResult: Boolean
   clientMutationId: String
 }
 
@@ -5833,7 +6240,7 @@ type User implements Node & UniformResourceLocatable {
   vip: Boolean!
 
   # The user's slug (unique).
-  slug: String
+  slug: String!
 
   # The user's email.
   email: String
@@ -5861,7 +6268,7 @@ type User implements Node & UniformResourceLocatable {
   dateOfBirth: DateTime
 
   # Unattended roles as array.
-  roles: [UserRole]
+  roles: [UserRole!]!
 
   # Array of roles converted and translated to string.
   rolesText: String
@@ -5894,7 +6301,7 @@ type User implements Node & UniformResourceLocatable {
   commentVotesCount: Int!
   votesCount: Int!
 
-  # Previsionnal number of contributions who will be totally deleted if the user chose to delete his account.
+  # Provisional number of contributions who will be totally deleted if the user chose to delete his account.
   contributionsToDeleteCount: Int!
   sourcesCount: Int!
   repliesCount: Int!
@@ -5907,6 +6314,9 @@ type User implements Node & UniformResourceLocatable {
 
   # Is user accepted the external communication during the registration.
   consentExternalCommunication: Boolean!
+
+  # Has user approved internal communication during the registration.
+  consentInternalCommunication: Boolean!
 
   # Array of proposals followed by current user.
   followingProposals(
@@ -6038,6 +6448,7 @@ type User implements Node & UniformResourceLocatable {
 
     # Returns the last `n` elements from the list.
     last: Int
+    orderBy: EventsOrder = {field: START_AT, direction: DESC}
   ): EventConnection!
 
   # Return the user's contributions of the type requested.
@@ -6059,15 +6470,15 @@ type User implements Node & UniformResourceLocatable {
   ): ContributionConnection!
 
   # Is user subscribed to the newsletter ?
-  isSubscribedToNewsLetter: Boolean
+  isSubscribedToNewsLetter: Boolean!
 
-  # The user subrscibes to the newsletter at date
+  # When the user subscribed to the newsletter.
   subscribedToNewsLetterAt: DateTime
 
   # Has the user confirmed his email address ?
   isEmailConfirmed: Boolean
 
-  # The user's email was confirmed at date
+  # When the user email confirmation was sent.
   emailConfirmationSentAt: DateTime
 
   # The arguments created by user.
@@ -6162,9 +6573,13 @@ type UserType {
 
 # A response
 type ValueResponse implements Response {
+  # Nullable ID in case of empty response.
+  id: String
+
+  # The question.
   question: Question!
 
-  # The value, can be a JSON
+  # The response value which can be a string or a JSON.
   value: String
   formattedValue: String
 }
@@ -6183,6 +6598,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   # The URL to this resource.
   url: URI!
   contribuable: Boolean!
+  step: Consultation!
 
   # The sources related to the sourceable.
   sources(
@@ -6278,13 +6694,13 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
+  # Identifies the trashed visibility.
   trashedStatus: TrashableStatus
 
-  # The moment the moderator trashed the contribution.
+  # Identifies the moment the moderator trashed the contribution.
   trashedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
+  # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 
   # `true` if the object is published.
