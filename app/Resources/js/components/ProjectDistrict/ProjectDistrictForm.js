@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react';
-import { reduxForm, type FormProps } from 'redux-form';
-import { Modal, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import {type FormProps, reduxForm} from 'redux-form';
+import {Button, Modal} from 'react-bootstrap';
+import {connect} from 'react-redux';
+import {FormattedMessage} from 'react-intl';
 import CreateProjectDistrictMutation from '../../mutations/CreateProjectDistrictMutation';
 import UpdateProjectDistrictMutation from '../../mutations/UpdateProjectDistrictMutation';
 import CloseButton from '../Form/CloseButton';
 import DistrictAdminFields from '../District/DistrictAdminFields';
-import type { GlobalState, District } from '../../types';
+import type {District, GlobalState} from '../../types';
 
 type Props = {
   show: boolean,
@@ -79,22 +79,35 @@ const validate = (values: FormValues) => {
 
 const onSubmit = (values: FormValues) => {
   const input = {
-    ...values.projectDistrict,
-    __typename: undefined,
-  };
+    name: values.projectDistrict.name,
+    geojson: values.projectDistrict.geojson,
+    displayedOnMap: values.projectDistrict.displayedOnMap,
+    border: {
+      enabled: values.projectDistrict.border ? values.projectDistrict.border.enabled : null,
+      color: values.projectDistrict.border ? values.projectDistrict.border.color : null,
+      opacity: values.projectDistrict.border ? values.projectDistrict.border.opacity : null,
+      size: values.projectDistrict.border ? values.projectDistrict.border.size : null,
+    },
+    background: {
+      enabled: values.projectDistrict.background ? values.projectDistrict.background.enabled : null,
+      color: values.projectDistrict.background ? values.projectDistrict.background.color : null,
+      opacity: values.projectDistrict.background ? values.projectDistrict.background.opacity : null,
+    },
+  }
 
   if (Object.prototype.hasOwnProperty.call(values.projectDistrict, 'id')) {
-    // $FlowFixMe
-    return UpdateProjectDistrictMutation.commit({ input });
+
+    return UpdateProjectDistrictMutation.commit({input : {... input, id: values.projectDistrict.id}});
   }
 
   return CreateProjectDistrictMutation.commit({ input });
+
 };
 
 export class ProjectDistrictForm extends React.Component<Props> {
   handleOnSubmit = (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    const { handleSubmit, handleClose } = this.props;
+    const {handleSubmit, handleClose} = this.props;
 
     handleSubmit();
     handleClose();
@@ -131,16 +144,16 @@ export class ProjectDistrictForm extends React.Component<Props> {
           </Modal.Header>
           <Modal.Body>
             {/* $FlowFixMe */}
-            <DistrictAdminFields member={member} district={district} />
+            <DistrictAdminFields member={member} district={district}/>
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={handleClose} />
+            <CloseButton onClose={handleClose}/>
             <Button
               type="submit"
               id="js-sumbit-button"
               bsStyle="primary"
               disabled={pristine || invalid || submitting}>
-              <FormattedMessage id={submitting ? 'global.loading' : 'global.validate'} />
+              <FormattedMessage id={submitting ? 'global.loading' : 'global.validate'}/>
             </Button>
           </Modal.Footer>
         </form>
@@ -161,7 +174,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     return {};
   }
 
-  const { district } = props;
+  const {district} = props;
 
   return {
     initialValues: {

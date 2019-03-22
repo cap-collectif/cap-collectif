@@ -23,7 +23,7 @@ export class UnpublishedProposalListView extends React.Component<Props> {
     ) {
       return null;
     }
-    const notPublishedReason = step.viewerProposalsUnpublished.edges[0].node.notPublishedReason;
+    const { notPublishedReason } = step.viewerProposalsUnpublished.edges[0].node;
     return (
       <Panel bsStyle="danger">
         <Panel.Heading>

@@ -17,7 +17,7 @@ class StepPreview extends React.Component<Props> {
 
   render() {
     const { className, votes } = this.props;
-    const step = this.props.step;
+    const { step } = this.props;
     return (
       <li className={className}>
         <div>

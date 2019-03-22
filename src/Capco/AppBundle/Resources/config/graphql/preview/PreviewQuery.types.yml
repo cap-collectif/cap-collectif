@@ -34,10 +34,6 @@ PreviewQuery:
             type: 'Boolean'
             description: 'If true, filter projects with events'
             defaultValue: false
-          onlyPublic:
-            type: 'Boolean'
-            description: 'If true, return only publics projects'
-            defaultValue: false
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectsResolver", [args, getUser()])'
       events:
         type: 'PreviewEventConnection!'

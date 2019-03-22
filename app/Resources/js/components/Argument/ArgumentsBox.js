@@ -35,7 +35,7 @@ class ArgumentsBox extends React.Component<Props> {
     if (!opinion.section) {
       return null;
     }
-    const commentSystem = opinion.section.commentSystem;
+    const { commentSystem } = opinion.section;
     if (commentSystem === COMMENT_SYSTEM_BOTH) {
       return (
         <Row>

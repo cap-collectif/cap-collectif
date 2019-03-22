@@ -9,7 +9,7 @@ type Props = {
   step: StepInfos_step,
 };
 
-class StepInfos extends React.Component<Props> {
+export class StepInfos extends React.Component<Props> {
   render() {
     const { step } = this.props;
     const { body } = step;

@@ -30,13 +30,13 @@ export class OpinionProjectRow extends Component<Props, State> {
 
   onUnfollowCurrentProject() {
     const { project, viewer } = this.props;
-    const ids = viewer.followingOpinions.edges
+    const idsOpinion = viewer.followingOpinions.edges
       .filter(edge => edge.node.project.id === project.id)
       .map(edge => edge.node.id);
 
     this.setState({ open: !this.state.open }, () => {
       UnfollowOpinionMutation.commit({
-        input: { ids },
+        input: { idsOpinion },
       }).then(() => true);
     });
   }

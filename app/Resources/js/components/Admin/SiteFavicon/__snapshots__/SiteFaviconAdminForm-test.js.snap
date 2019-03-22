@@ -1,111 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SiteFaviconAdminPage /> renders correctly when a favicon is set 1`] = `
-<ContainerConstructor
-  anyTouched={false}
-  array={
-    Object {
-      "insert": [MockFunction],
-      "move": [MockFunction],
-      "pop": [MockFunction],
-      "push": [MockFunction],
-      "remove": [MockFunction],
-      "removeAll": [MockFunction],
-      "shift": [MockFunction],
-      "splice": [MockFunction],
-      "swap": [MockFunction],
-      "unshift": [MockFunction],
+<form
+  onSubmit={[MockFunction]}
+>
+  <Field
+    component={[Function]}
+    help={
+      <FormattedMessage
+        id="favicon-parameters"
+        values={Object {}}
+      />
     }
-  }
-  asyncValidate={[MockFunction]}
-  asyncValidating={false}
-  autofill={[MockFunction]}
-  blur={[MockFunction]}
-  change={[MockFunction]}
-  clearAsyncError={[MockFunction]}
-  clearSubmit={[MockFunction]}
-  componentRef={null}
-  destroy={[MockFunction]}
-  dirty={false}
-  dispatch={[MockFunction]}
-  error={null}
-  form="formName"
-  handleSubmit={[MockFunction]}
-  initialValues={Object {}}
-  initialize={[MockFunction]}
-  initialized={true}
-  invalid={false}
-  pristine={true}
-  reset={[MockFunction]}
-  siteFavicon={
-    Object {
-      "id": "siteFaviconId",
-      "media": Object {
-        "id": "mediaId",
-        "name": "Favicon",
-        "url": "https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg",
-      },
+    id="proposal_media"
+    label={
+      <span>
+        <FormattedMessage
+          id="admin.fields.theme.media"
+          values={Object {}}
+        />
+      </span>
     }
-  }
-  submitFailed={false}
-  submitSucceeded={false}
-  submitting={false}
-  touch={[MockFunction]}
-  untouch={[MockFunction]}
-  valid={true}
-  warning={null}
-/>
+    name="media"
+    type="image"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={true}
+    id="site_favicon_save"
+    type="submit"
+  >
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
+  <AlertForm
+    invalid={false}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    valid={true}
+  />
+</form>
 `;
 
 exports[`<SiteFaviconAdminPage /> renders correctly without a favicon set 1`] = `
-<ContainerConstructor
-  anyTouched={false}
-  array={
-    Object {
-      "insert": [MockFunction],
-      "move": [MockFunction],
-      "pop": [MockFunction],
-      "push": [MockFunction],
-      "remove": [MockFunction],
-      "removeAll": [MockFunction],
-      "shift": [MockFunction],
-      "splice": [MockFunction],
-      "swap": [MockFunction],
-      "unshift": [MockFunction],
+<form
+  onSubmit={[MockFunction]}
+>
+  <Field
+    component={[Function]}
+    help={
+      <FormattedMessage
+        id="favicon-parameters"
+        values={Object {}}
+      />
     }
-  }
-  asyncValidate={[MockFunction]}
-  asyncValidating={false}
-  autofill={[MockFunction]}
-  blur={[MockFunction]}
-  change={[MockFunction]}
-  clearAsyncError={[MockFunction]}
-  clearSubmit={[MockFunction]}
-  componentRef={null}
-  destroy={[MockFunction]}
-  dirty={false}
-  dispatch={[MockFunction]}
-  error={null}
-  form="formName"
-  handleSubmit={[MockFunction]}
-  initialValues={Object {}}
-  initialize={[MockFunction]}
-  initialized={true}
-  invalid={false}
-  pristine={true}
-  reset={[MockFunction]}
-  siteFavicon={
-    Object {
-      "id": "siteFaviconId",
-      "media": null,
+    id="proposal_media"
+    label={
+      <span>
+        <FormattedMessage
+          id="admin.fields.theme.media"
+          values={Object {}}
+        />
+      </span>
     }
-  }
-  submitFailed={false}
-  submitSucceeded={false}
-  submitting={false}
-  touch={[MockFunction]}
-  untouch={[MockFunction]}
-  valid={true}
-  warning={null}
-/>
+    name="media"
+    type="image"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={true}
+    id="site_favicon_save"
+    type="submit"
+  >
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
+  <AlertForm
+    invalid={false}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    valid={true}
+  />
+</form>
 `;

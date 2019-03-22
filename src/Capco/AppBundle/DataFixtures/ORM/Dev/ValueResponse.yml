@@ -188,3 +188,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@multiplequestion8'
     reply: '@reply7'
     value: { 'labels': ['Au top'], 'other': null }
+  response90:
+    question: '@simplequestion14'
+    reply: '@reply8'
+    value: 'secret'

@@ -8,7 +8,7 @@ import type { ProposalPageAlert_proposal } from './__generated__/ProposalPageAle
 type Props = { proposal: ProposalPageAlert_proposal };
 export class ProposalPageAlert extends React.Component<Props> {
   render() {
-    const proposal = this.props.proposal;
+    const { proposal } = this.props;
     if (proposal.publicationStatus === 'TRASHED') {
       return (
         <Alert bsStyle="warning" style={{ marginBottom: '0', textAlign: 'center' }}>

@@ -2,25 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Repository\AbstractQuestionRepository;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\CollectStepRepository;
-use Capco\AppBundle\Repository\CommentRepository;
-use Capco\AppBundle\Repository\ConsultationStepRepository;
-use Capco\AppBundle\Repository\EventRepository;
-use Capco\AppBundle\Repository\FollowerRepository;
-use Capco\AppBundle\Repository\GroupRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Repository\ProposalFormRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Comment;
@@ -30,12 +14,29 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Repository\MapTokenRepository;
+use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\GroupRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\FollowerRepository;
+use Capco\AppBundle\Repository\MapTokenRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ProposalFormRepository;
+use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
+use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -194,6 +195,10 @@ class GlobalIdResolver
 
         if (!$node) {
             $node = $this->container->get(AbstractQuestionRepository::class)->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get(ReplyRepository::class)->find($uuid);
         }
 
         if (!$node) {

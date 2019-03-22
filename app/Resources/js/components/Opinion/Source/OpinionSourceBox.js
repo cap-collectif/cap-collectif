@@ -38,7 +38,7 @@ export class OpinionSourceBox extends React.Component<Props, State> {
   render() {
     const { sourceable, isAuthenticated } = this.props;
     const { order } = this.state;
-    const totalCount = sourceable.allSources.totalCount;
+    const { totalCount } = sourceable.allSources;
     return (
       <div>
         {sourceable.viewerSourcesUnpublished &&
