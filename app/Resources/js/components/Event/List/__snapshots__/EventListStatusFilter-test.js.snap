@@ -40,13 +40,33 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
           "_callbacks": Array [],
           "_renderer": ReactShallowRenderer {
             "_context": Object {},
+            "_currentlyRenderingComponent": null,
+            "_didScheduleRenderPhaseUpdate": false,
+            "_dispatcher": Object {
+              "readContext": [Function],
+              "useCallback": [Function],
+              "useContext": [Function],
+              "useDebugValue": [Function],
+              "useEffect": [Function],
+              "useImperativeHandle": [Function],
+              "useLayoutEffect": [Function],
+              "useMemo": [Function],
+              "useReducer": [Function],
+              "useRef": [Function],
+              "useState": [Function],
+            },
             "_element": <EventListStatusFilter
               screen="desktop"
               status="all"
             />,
+            "_firstWorkInProgressHook": null,
             "_forcedUpdate": false,
             "_instance": [Circular],
+            "_isReRender": false,
             "_newState": null,
+            "_numberOfReRenders": 0,
+            "_previousComponentIdentity": null,
+            "_renderPhaseUpdates": null,
             "_rendered": <div
               className="position-relative"
             >
@@ -121,6 +141,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
             </div>,
             "_rendering": false,
             "_updater": [Circular],
+            "_workInProgressHook": null,
           },
         },
       }
@@ -215,14 +236,32 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
           "_callbacks": Array [],
           "_renderer": ReactShallowRenderer {
             "_context": Object {},
+            "_currentlyRenderingComponent": null,
+            "_didScheduleRenderPhaseUpdate": false,
+            "_dispatcher": Object {
+              "readContext": [Function],
+              "useCallback": [Function],
+              "useContext": [Function],
+              "useDebugValue": [Function],
+              "useEffect": [Function],
+              "useImperativeHandle": [Function],
+              "useLayoutEffect": [Function],
+              "useMemo": [Function],
+              "useReducer": [Function],
+              "useRef": [Function],
+              "useState": [Function],
+            },
             "_element": <EventListStatusFilter
               status="finished"
             />,
+            "_firstWorkInProgressHook": null,
             "_forcedUpdate": false,
             "_instance": [Circular],
-            "_newState": Object {
-              "show": true,
-            },
+            "_isReRender": false,
+            "_newState": null,
+            "_numberOfReRenders": 0,
+            "_previousComponentIdentity": null,
+            "_renderPhaseUpdates": null,
             "_rendered": <div
               className="position-relative"
             >
@@ -292,6 +331,7 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
             </div>,
             "_rendering": false,
             "_updater": [Circular],
+            "_workInProgressHook": null,
           },
         },
       }
@@ -388,13 +428,33 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
           "_callbacks": Array [],
           "_renderer": ReactShallowRenderer {
             "_context": Object {},
+            "_currentlyRenderingComponent": null,
+            "_didScheduleRenderPhaseUpdate": false,
+            "_dispatcher": Object {
+              "readContext": [Function],
+              "useCallback": [Function],
+              "useContext": [Function],
+              "useDebugValue": [Function],
+              "useEffect": [Function],
+              "useImperativeHandle": [Function],
+              "useLayoutEffect": [Function],
+              "useMemo": [Function],
+              "useReducer": [Function],
+              "useRef": [Function],
+              "useState": [Function],
+            },
             "_element": <EventListStatusFilter
               screen="mobile"
               status="ongoing-and-future"
             />,
+            "_firstWorkInProgressHook": null,
             "_forcedUpdate": false,
             "_instance": [Circular],
+            "_isReRender": false,
             "_newState": null,
+            "_numberOfReRenders": 0,
+            "_previousComponentIdentity": null,
+            "_renderPhaseUpdates": null,
             "_rendered": <div
               className="position-relative"
             >
@@ -465,6 +525,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
             </div>,
             "_rendering": false,
             "_updater": [Circular],
+            "_workInProgressHook": null,
           },
         },
       }

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
+import { formValueSelector } from 'redux-form';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import classNames from 'classnames';
 import styled from 'styled-components';
@@ -9,19 +10,25 @@ import { connect } from 'react-redux';
 import { useWindowWidth } from '../../../utils/hooks/useWindowWidth';
 import EventPreview from '../EventPreview';
 import EventMap from '../Map/EventMap';
+import EventPagePassedEventsPreview from './EventPagePassedEventsPreview';
 import type { EventListPaginated_query } from './__generated__/EventListPaginatedQuery.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 import sizes from '../../../utils/sizes';
 
-type Props = {
+type OwnProps = {|
   query: EventListPaginated_query,
   relay: RelayPaginationProp,
+|};
+
+type Props = {|
+  ...OwnProps,
   eventSelected: ?string,
   dispatch: Dispatch,
   features: FeatureToggles,
   isMobileListView: boolean,
-};
+  status: string,
+|};
 
 const EVENTS_PAGINATION = 100;
 
@@ -35,7 +42,7 @@ const MapContainer = styled(Col)`
 `;
 
 export const EventListPaginated = (props: Props) => {
-  const { query, relay, eventSelected, features, dispatch, isMobileListView } = props;
+  const { status, query, relay, eventSelected, features, dispatch, isMobileListView } = props;
   const [loading, setLoading] = useState(false);
   const screenWidth = useWindowWidth();
 
@@ -64,10 +71,15 @@ export const EventListPaginated = (props: Props) => {
   };
 
   if (!query.events || query.events.totalCount === 0) {
+    const showPreviewPassedEvents =
+      status === 'ongoing-and-future' && query.previewPassedEvents.totalCount > 1;
     return (
-      <p className={classNames({ 'p--centered': true, 'mb-40': true })}>
-        <FormattedMessage id="event.empty" />
-      </p>
+      <>
+        <p className={classNames({ 'p--centered': true, 'mb-40': true })}>
+          <FormattedMessage id={showPreviewPassedEvents ? 'no-upcoming-events' : 'event.empty'} />
+        </p>
+        {showPreviewPassedEvents ? <EventPagePassedEventsPreview query={query} /> : null}
+      </>
     );
   }
 
@@ -105,7 +117,7 @@ export const EventListPaginated = (props: Props) => {
                       setLoading(false);
                     });
                   }}>
-                  <FormattedMessage id={loading ? 'global.loading' : 'global.more'} />
+                  <FormattedMessage id={loading ? 'global.loading' : 'see-more-events'} />
                 </Button>
               </div>
             </Row>
@@ -122,13 +134,16 @@ export const EventListPaginated = (props: Props) => {
   );
 };
 
+const selector = formValueSelector('EventPageContainer');
+
 const mapStateToProps = (state: GlobalState) => ({
   eventSelected: state.event.eventSelected,
   features: state.default.features,
   isMobileListView: state.event.isMobileListView,
+  status: selector(state, 'status'),
 });
 
-const container = connect(mapStateToProps)(EventListPaginated);
+const container = connect<Props, GlobalState, _>(mapStateToProps)(EventListPaginated);
 
 export default createPaginationContainer(
   container,
@@ -144,6 +159,10 @@ export default createPaginationContainer(
           userType: { type: "ID" }
           isFuture: { type: "Boolean" }
         ) {
+        previewPassedEvents: events(first: 3, isFuture: false) {
+          totalCount
+        }
+        ...EventPagePassedEventsPreview_query
         ...EventMap_query
           @arguments(
             count: $count
@@ -185,12 +204,12 @@ export default createPaginationContainer(
     getConnectionFromProps(props: Props) {
       return props.query && props.query.events;
     },
-    getFragmentVariables(prevVars) {
+    getFragmentVariables(prevVars: any) {
       return {
         ...prevVars,
       };
     },
-    getVariables(props: Props, { count, cursor }, fragmentVariables) {
+    getVariables(props: Props, { count, cursor }: any, fragmentVariables: any) {
       return {
         ...fragmentVariables,
         count,

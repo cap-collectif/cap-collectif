@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
+<Fragment>
+  <h5>
+    <strong>
+      <FormattedMessage
+        id="past-events"
+        values={
+          Object {
+            "num": 3,
+          }
+        }
+      />
+    </strong>
+  </h5>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <Col
+      bsClass="col"
+      componentClass="div"
+      id="EventPagePassedEventsPreview"
+      md={12}
+      xs={12}
+    >
+      <ForwardRef(Relay(EventPreview))
+        event={
+          Object {
+            "$fragmentRefs": null,
+            "id": "event1",
+          }
+        }
+        isHighlighted={false}
+        key="0"
+      />
+      <ForwardRef(Relay(EventPreview))
+        event={
+          Object {
+            "$fragmentRefs": null,
+            "id": "event2",
+          }
+        }
+        isHighlighted={false}
+        key="1"
+      />
+      <ForwardRef(Relay(EventPreview))
+        event={
+          Object {
+            "$fragmentRefs": null,
+            "id": "event3",
+          }
+        }
+        isHighlighted={false}
+        key="2"
+      />
+    </Col>
+  </Row>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <div
+      className="text-center"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="see-all-past-events"
+          values={Object {}}
+        />
+      </Button>
+    </div>
+  </Row>
+</Fragment>
+`;
+
+exports[`<EventPagePassedEventsPreviews /> renders correctly when empty 1`] = `""`;

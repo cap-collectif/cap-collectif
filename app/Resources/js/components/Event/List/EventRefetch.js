@@ -80,6 +80,7 @@ export class EventRefetch extends React.Component<Props, State> {
       return <Loader />;
     }
 
+    // $FlowFixMe Flow failed to infer redux's dispatch
     return <EventListPaginated query={query} />;
   }
 }

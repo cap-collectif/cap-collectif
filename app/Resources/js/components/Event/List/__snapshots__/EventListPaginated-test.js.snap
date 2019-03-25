@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventListPaginated /> renders a preview of passed events when status future and no future events 1`] = `
+<Fragment>
+  <p
+    className="p--centered mb-40"
+  >
+    <FormattedMessage
+      id="no-upcoming-events"
+      values={Object {}}
+    />
+  </p>
+  <ForwardRef(Relay(Connect(EventPagePassedEventsPreview)))
+    query={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "events": Object {
+          "edges": Array [],
+          "pageInfo": Object {
+            "endCursor": null,
+            "hasNextPage": false,
+            "hasPreviousPage": false,
+            "startCursor": null,
+          },
+          "totalCount": 0,
+        },
+        "previewPassedEvents": Object {
+          "totalCount": 10,
+        },
+      }
+    }
+  />
+</Fragment>
+`;
+
+exports[`<EventListPaginated /> renders correctly when status all 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    id="event-list"
+    md={8}
+    xs={12}
+  >
+    <div
+      key="0"
+      onMouseOver={[Function]}
+    >
+      <ForwardRef(Relay(EventPreview))
+        event={
+          Object {
+            "id": "event1",
+          }
+        }
+        isHighlighted={null}
+      />
+    </div>
+    <div
+      key="1"
+      onMouseOver={[Function]}
+    >
+      <ForwardRef(Relay(EventPreview))
+        event={
+          Object {
+            "id": "event2",
+          }
+        }
+        isHighlighted={null}
+      />
+    </div>
+    <div
+      key="2"
+      onMouseOver={[Function]}
+    >
+      <ForwardRef(Relay(EventPreview))
+        event={
+          Object {
+            "id": "event3",
+          }
+        }
+        isHighlighted={null}
+      />
+    </div>
+  </Col>
+  <EventListPaginated__MapContainer
+    aria-hidden="true"
+    md={4}
+    xs={12}
+  >
+    <ForwardRef(Relay(EventMap))
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "events": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "id": "event1",
+                },
+              },
+              Object {
+                "node": Object {
+                  "id": "event2",
+                },
+              },
+              Object {
+                "node": Object {
+                  "id": "event3",
+                },
+              },
+            ],
+            "pageInfo": Object {
+              "endCursor": null,
+              "hasNextPage": true,
+              "hasPreviousPage": false,
+              "startCursor": null,
+            },
+            "totalCount": 3,
+          },
+          "previewPassedEvents": Object {
+            "totalCount": 0,
+          },
+        }
+      }
+    />
+  </EventListPaginated__MapContainer>
+</Row>
+`;
+
+exports[`<EventListPaginated /> renders correctly when status future and no future events and no passed events 1`] = `
+<Fragment>
+  <p
+    className="p--centered mb-40"
+  >
+    <FormattedMessage
+      id="event.empty"
+      values={Object {}}
+    />
+  </p>
+</Fragment>
+`;

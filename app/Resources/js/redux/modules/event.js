@@ -3,7 +3,7 @@ import type { Exact, Action } from '../../types';
 
 export type State = {
   +eventSelected: ?string,
-  +isMobileListView: ?boolean,
+  +isMobileListView: boolean,
 };
 
 const initialState: State = {
