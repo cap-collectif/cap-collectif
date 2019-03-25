@@ -33,7 +33,7 @@ const onSubmit = values => {
   });
 };
 
-type Props = {|
+export type Props = {|
   ...FormProps,
   submitting: boolean,
   handleSubmit: () => void,

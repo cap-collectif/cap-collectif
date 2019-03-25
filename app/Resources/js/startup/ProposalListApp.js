@@ -12,7 +12,7 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <QueryRenderer
-        variables={{ authorId, isProfileView: true, isAuthenticated, stepId: '' }}
+        variables={{ authorId, isProfileView: true, isAuthenticated, stepId: "" }}
         environment={environment}
         query={graphql`
           query ProposalListAppQuery(

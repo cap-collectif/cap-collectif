@@ -3,17 +3,20 @@ import * as React from 'react';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import CommentTrashedListPaginated from '../Comment/CommentTrashedListPaginated';
-import type { ProjectTrashCommentQueryResponse } from './__generated__/ProjectTrashCommentQuery.graphql';
+import ProposalTrashedListPaginated from '../Proposal/List/ProposalTrashedListPaginated';
+import type {
+  ProjectTrashProposalQueryResponse,
+  ProjectTrashProposalQueryVariables,
+} from './__generated__/ProjectTrashProposalQuery.graphql';
 
-type Props = {|
+export type Props = {|
   +projectId: string,
   +isAuthenticated: boolean,
 |};
 
-export const TRASHED_COMMENT_PAGINATOR_COUNT = 20;
+export const TRASHED_PROPOSAL_PAGINATOR_COUNT = 20;
 
-export class ProjectTrashComment extends React.Component<Props> {
+export class ProjectTrashProposal extends React.Component<Props> {
   render() {
     const { projectId, isAuthenticated } = this.props;
     return (
@@ -21,28 +24,31 @@ export class ProjectTrashComment extends React.Component<Props> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ProjectTrashCommentQuery(
+            query ProjectTrashProposalQuery(
               $projectId: ID!
+              $stepId: ID
               $isAuthenticated: Boolean!
               $cursor: String
               $count: Int
             ) {
               project: node(id: $projectId) {
                 id
-                ...CommentTrashedListPaginated_project @arguments(count: $count, cursor: $cursor)
+                ...ProposalTrashedListPaginated_project @arguments(count: $count, cursor: $cursor)
               }
             }
           `}
-          variables={{
-            projectId,
-            isAuthenticated,
-            count: TRASHED_COMMENT_PAGINATOR_COUNT,
-            cursor: null,
-          }}
+          variables={
+            ({
+              projectId,
+              isAuthenticated,
+              count: TRASHED_PROPOSAL_PAGINATOR_COUNT,
+              cursor: null,
+            }: ProjectTrashProposalQueryVariables)
+          }
           render={({
             error,
             props,
-          }: { props?: ?ProjectTrashCommentQueryResponse } & ReadyState) => {
+          }: { props?: ?ProjectTrashProposalQueryResponse } & ReadyState) => {
             if (error) {
               return graphqlError;
             }
@@ -59,7 +65,7 @@ export class ProjectTrashComment extends React.Component<Props> {
 
             return (
               /* $FlowFixMe $refType */
-              <CommentTrashedListPaginated project={props.project} />
+              <ProposalTrashedListPaginated project={props.project} />
             );
           }}
         />
@@ -68,4 +74,4 @@ export class ProjectTrashComment extends React.Component<Props> {
   }
 }
 
-export default ProjectTrashComment;
+export default ProjectTrashProposal;

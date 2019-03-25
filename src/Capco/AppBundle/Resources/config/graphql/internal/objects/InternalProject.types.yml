@@ -3,6 +3,7 @@ InternalProject:
   inherits:
     - PreviewProject
     - UniformResourceAdminLocatable
+    - InternalWithProposals
   config:
     name: Project
     interfaces:
@@ -64,6 +65,8 @@ InternalProject:
       districts:
         type: '[ProjectDistrict]'
         description: 'The district of the project'
+      proposals:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args, getUser()])'
       comments:
         description: 'The comments related to the project.'
         type: 'CommentConnection!'
