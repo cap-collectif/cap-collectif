@@ -1,254 +1,136 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MapboxAdminConfig/> should render 1`] = `
-<form
-  className="mapbox__config"
-  onSubmit={[MockFunction]}
->
-  <MapboxAdminConfig__TitleContainer>
-    <img
-      alt="Mapbox"
-      height={32}
-      src="/svg/mapbox_logo.svg"
-      width={32}
-    />
-    <h3>
-      Mapbox
-    </h3>
-  </MapboxAdminConfig__TitleContainer>
-  <p
-    className="help-block sonata-ba-field-help"
-  >
-    <FormattedMessage
-      id="desc-text-mapbox"
-      values={Object {}}
-    />
-  </p>
-  <Field
-    component={[Function]}
-    help={
-      <FormattedHTMLMessage
-        id="helptext-api-key"
-        values={Object {}}
-      />
+<ContainerConstructor
+  anyTouched={false}
+  array={
+    Object {
+      "insert": [MockFunction],
+      "move": [MockFunction],
+      "pop": [MockFunction],
+      "push": [MockFunction],
+      "remove": [MockFunction],
+      "removeAll": [MockFunction],
+      "shift": [MockFunction],
+      "splice": [MockFunction],
+      "swap": [MockFunction],
+      "unshift": [MockFunction],
     }
-    id="token"
-    label={
-      <FormattedMessage
-        id="public-api-key"
-        values={Object {}}
-      />
+  }
+  asyncValidate={[MockFunction]}
+  asyncValidating={false}
+  autofill={[MockFunction]}
+  blur={[MockFunction]}
+  change={[MockFunction]}
+  clearAsyncError={[MockFunction]}
+  clearSubmit={[MockFunction]}
+  componentRef={null}
+  destroy={[MockFunction]}
+  dirty={false}
+  dispatch={[MockFunction]}
+  error={null}
+  form="formName"
+  handleSubmit={[MockFunction]}
+  initialValues={Object {}}
+  initialize={[MockFunction]}
+  initialized={true}
+  invalid={false}
+  mapToken={
+    Object {
+      "id": "mapboxMapToken",
+      "provider": "MAPBOX",
+      "publicToken": "publicToken",
+      "secretToken": "secretToken",
+      "styleId": null,
+      "styleOwner": null,
+      "styles": Array [],
     }
-    name="publicToken"
-    type="text"
-  />
-  <div
-    className="clearfix"
-  />
-  <Field
-    component={[Function]}
-    help={
-      <FormattedHTMLMessage
-        id="helptext-api-key"
-        values={Object {}}
-      />
-    }
-    id="token"
-    label={
-      <FormattedMessage
-        id="secret-api-key"
-        values={Object {}}
-      />
-    }
-    name="secretToken"
-    type="text"
-  />
-  <div
-    className="clearfix"
-  />
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
-    className="mb-15"
-    disabled={false}
-    id="user-admin-profile-save"
-    type="submit"
-  >
-    <MapboxAdminConfig__SubmitButtonInner>
-      <FormattedMessage
-        id="verify"
-        values={Object {}}
-      />
-    </MapboxAdminConfig__SubmitButtonInner>
-  </Button>
-  <AlertForm
-    errorMessage={null}
-    invalid={false}
-    submitFailed={false}
-    submitSucceeded={false}
-    submitting={false}
-    valid={true}
-  />
-  <div>
-    <h3
-      className="d-ib"
-    >
-      <FormattedMessage
-        id="style"
-        values={Object {}}
-      />
-    </h3>
-    <ListGroup
-      bsClass="list-group"
-    />
-  </div>
-</form>
+  }
+  pristine={true}
+  reset={[MockFunction]}
+  submitFailed={false}
+  submitSucceeded={false}
+  submitting={false}
+  touch={[MockFunction]}
+  untouch={[MockFunction]}
+  valid={true}
+  warning={null}
+/>
 `;
 
 exports[`<MapboxAdminConfig/> should render with styles 1`] = `
-<form
-  className="mapbox__config"
-  onSubmit={[MockFunction]}
->
-  <MapboxAdminConfig__TitleContainer>
-    <img
-      alt="Mapbox"
-      height={32}
-      src="/svg/mapbox_logo.svg"
-      width={32}
-    />
-    <h3>
-      Mapbox
-    </h3>
-  </MapboxAdminConfig__TitleContainer>
-  <p
-    className="help-block sonata-ba-field-help"
-  >
-    <FormattedMessage
-      id="desc-text-mapbox"
-      values={Object {}}
-    />
-  </p>
-  <Field
-    component={[Function]}
-    help={
-      <FormattedHTMLMessage
-        id="helptext-api-key"
-        values={Object {}}
-      />
+<ContainerConstructor
+  anyTouched={false}
+  array={
+    Object {
+      "insert": [MockFunction],
+      "move": [MockFunction],
+      "pop": [MockFunction],
+      "push": [MockFunction],
+      "remove": [MockFunction],
+      "removeAll": [MockFunction],
+      "shift": [MockFunction],
+      "splice": [MockFunction],
+      "swap": [MockFunction],
+      "unshift": [MockFunction],
     }
-    id="token"
-    label={
-      <FormattedMessage
-        id="public-api-key"
-        values={Object {}}
-      />
+  }
+  asyncValidate={[MockFunction]}
+  asyncValidating={false}
+  autofill={[MockFunction]}
+  blur={[MockFunction]}
+  change={[MockFunction]}
+  clearAsyncError={[MockFunction]}
+  clearSubmit={[MockFunction]}
+  componentRef={null}
+  destroy={[MockFunction]}
+  dirty={false}
+  dispatch={[MockFunction]}
+  error={null}
+  form="formName"
+  handleSubmit={[MockFunction]}
+  initialValues={Object {}}
+  initialize={[MockFunction]}
+  initialized={true}
+  invalid={false}
+  mapToken={
+    Object {
+      "id": "mapboxMapToken",
+      "provider": "MAPBOX",
+      "publicToken": "publicToken",
+      "secretToken": "secretToken",
+      "styleId": "lebotheme",
+      "styleOwner": "capcollectif",
+      "styles": Array [
+        Object {
+          "createdAt": "2018-11-23 00:00:00",
+          "id": "mapStyle1",
+          "isCurrent": true,
+          "name": "Le bo thème",
+          "owner": "capcollectif",
+          "previewUrl": "https://api.mapbox.com/styles/v1/capcollectif/lebotheme/tiles/256/14/8114/5686?access_token=***REMOVED***",
+          "updatedAt": null,
+        },
+        Object {
+          "createdAt": "2018-11-23 00:00:00",
+          "id": "mapStyle2",
+          "isCurrent": false,
+          "name": "Le bo thème 2",
+          "owner": "capcollectif",
+          "previewUrl": "https://api.mapbox.com/styles/v1/capcollectif/lebotheme2/tiles/256/14/8114/5686?access_token=***REMOVED***",
+          "updatedAt": "2018-11-23 10:00:00",
+        },
+      ],
     }
-    name="publicToken"
-    type="text"
-  />
-  <div
-    className="clearfix"
-  />
-  <Field
-    component={[Function]}
-    help={
-      <FormattedHTMLMessage
-        id="helptext-api-key"
-        values={Object {}}
-      />
-    }
-    id="token"
-    label={
-      <FormattedMessage
-        id="secret-api-key"
-        values={Object {}}
-      />
-    }
-    name="secretToken"
-    type="text"
-  />
-  <div
-    className="clearfix"
-  />
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
-    className="mb-15"
-    disabled={false}
-    id="user-admin-profile-save"
-    type="submit"
-  >
-    <MapboxAdminConfig__SubmitButtonInner>
-      <FormattedMessage
-        id="verify"
-        values={Object {}}
-      />
-    </MapboxAdminConfig__SubmitButtonInner>
-  </Button>
-  <AlertForm
-    errorMessage={null}
-    invalid={false}
-    submitFailed={false}
-    submitSucceeded={false}
-    submitting={false}
-    valid={true}
-  />
-  <div>
-    <h3
-      className="d-ib"
-    >
-      <FormattedMessage
-        id="style"
-        values={Object {}}
-      />
-    </h3>
-    <ListGroup
-      bsClass="list-group"
-    >
-      <MapAdminStyleListItem
-        disabled={false}
-        key="mapStyle1"
-        mapTokenId="mapboxMapToken"
-        onMutationEnd={[Function]}
-        onMutationFailed={[Function]}
-        onMutationStart={[Function]}
-        style={
-          Object {
-            "createdAt": "2018-11-23 00:00:00",
-            "id": "mapStyle1",
-            "isCurrent": true,
-            "name": "Le bo thème",
-            "owner": "capcollectif",
-            "previewUrl": "https://api.mapbox.com/styles/v1/capcollectif/lebotheme/tiles/256/14/8114/5686?access_token=***REMOVED***",
-            "updatedAt": null,
-          }
-        }
-      />
-      <MapAdminStyleListItem
-        disabled={false}
-        key="mapStyle2"
-        mapTokenId="mapboxMapToken"
-        onMutationEnd={[Function]}
-        onMutationFailed={[Function]}
-        onMutationStart={[Function]}
-        style={
-          Object {
-            "createdAt": "2018-11-23 00:00:00",
-            "id": "mapStyle2",
-            "isCurrent": false,
-            "name": "Le bo thème 2",
-            "owner": "capcollectif",
-            "previewUrl": "https://api.mapbox.com/styles/v1/capcollectif/lebotheme2/tiles/256/14/8114/5686?access_token=***REMOVED***",
-            "updatedAt": "2018-11-23 10:00:00",
-          }
-        }
-      />
-    </ListGroup>
-  </div>
-</form>
+  }
+  pristine={true}
+  reset={[MockFunction]}
+  submitFailed={false}
+  submitSucceeded={false}
+  submitting={false}
+  touch={[MockFunction]}
+  untouch={[MockFunction]}
+  valid={true}
+  warning={null}
+/>
 `;

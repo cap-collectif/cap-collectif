@@ -22,7 +22,8 @@ export class UnpublishedOpinionList extends React.Component<Props> {
     ) {
       return null;
     }
-    const { notPublishedReason } = consultation.viewerOpinionsUnpublished.edges[0].node;
+    const notPublishedReason =
+      consultation.viewerOpinionsUnpublished.edges[0].node.notPublishedReason;
     return (
       <Panel bsStyle="danger" className="panel-custom">
         <Panel.Heading>

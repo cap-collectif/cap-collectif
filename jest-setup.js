@@ -28,10 +28,6 @@ global.Cookies = {
   set:() => ('')
 };
 
-global.Modernizr = {
-  intl: true
-}
-
 global.window.__SERVER__ = false;
 
 const throwError = (warning) => {

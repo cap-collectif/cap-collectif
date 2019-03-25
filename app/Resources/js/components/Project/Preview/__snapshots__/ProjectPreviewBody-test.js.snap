@@ -1,1180 +1,299 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for closed step which remains a current step 1`] = `
-<div
-  className="card__body"
->
-  <div
-    className="card__body__infos"
-  >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
-      project={
+<ContainerConstructor
+  componentRef={null}
+  project={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "hasParticipativeStep": false,
+      "id": "1",
+      "links": Object {
+        "external": null,
+      },
+      "steps": Array [
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "hasParticipativeStep": false,
-          "id": "1",
-          "links": Object {
-            "external": null,
-          },
-          "steps": Array [
-            Object {
-              "endAt": "2016-12-28T09:00:24+01:00",
-              "startAt": "2016-12-20T09:00:24+01:00",
-              "status": "CLOSED",
-              "timeless": null,
-              "title": "Closed step",
-              "type": "presentation",
-              "url": "http://capco/closed-step1/show-link",
-            },
-            Object {
-              "endAt": "2017-01-28T09:00:24+01:00",
-              "startAt": "2017-01-20T09:00:24+01:00",
-              "status": "CLOSED",
-              "timeless": null,
-              "title": "closed step 2",
-              "type": "presentation",
-              "url": "http://capco/closed-step2/show-link",
-            },
-            Object {
-              "endAt": "2017-12-28T09:00:24+01:00",
-              "startAt": "2017-12-20T09:00:24+01:00",
-              "status": "FUTURE",
-              "timeless": null,
-              "title": "Future step 1",
-              "type": "presentation",
-              "url": "http://capco/future-step1/show-link",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
-    <h3
-      className="card__title"
-    >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="project-1-tooltip"
-            placement="right"
-          >
-            Name of my project
-          </Tooltip>
-        }
-        placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
-      >
-        <a
-          href="http://capco/show-link"
-        >
-          <div
-            style={
-              Object {
-                "width": "98%",
-              }
-            }
-          >
-            <Truncate
-              ellipsis="…"
-              lines={3}
-              trimWhitespace={false}
-              width={0}
-            >
-              Name of my project
-            </Truncate>
-          </div>
-        </a>
-      </OverlayTrigger>
-    </h3>
-  </div>
-  <ProjectPreviewProgressBar
-    actualStep={
-      Object {
-        "endAt": "2017-01-28T09:00:24+01:00",
-        "startAt": "2017-01-20T09:00:24+01:00",
-        "status": "CLOSED",
-        "timeless": null,
-        "title": "closed step 2",
-        "type": "presentation",
-        "url": "http://capco/closed-step2/show-link",
-      }
-    }
-    isCurrentStep={true}
-    project={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "hasParticipativeStep": false,
-        "id": "1",
-        "links": Object {
-          "external": null,
+          "endAt": "2016-12-28T09:00:24+01:00",
+          "startAt": "2016-12-20T09:00:24+01:00",
+          "status": "CLOSED",
+          "timeless": null,
+          "title": "Closed step",
+          "type": "presentation",
+          "url": "http://capco/closed-step1/show-link",
         },
-        "steps": Array [
-          Object {
-            "endAt": "2016-12-28T09:00:24+01:00",
-            "startAt": "2016-12-20T09:00:24+01:00",
-            "status": "CLOSED",
-            "timeless": null,
-            "title": "Closed step",
-            "type": "presentation",
-            "url": "http://capco/closed-step1/show-link",
-          },
-          Object {
-            "endAt": "2017-01-28T09:00:24+01:00",
-            "startAt": "2017-01-20T09:00:24+01:00",
-            "status": "CLOSED",
-            "timeless": null,
-            "title": "closed step 2",
-            "type": "presentation",
-            "url": "http://capco/closed-step2/show-link",
-          },
-          Object {
-            "endAt": "2017-12-28T09:00:24+01:00",
-            "startAt": "2017-12-20T09:00:24+01:00",
-            "status": "FUTURE",
-            "timeless": null,
-            "title": "Future step 1",
-            "type": "presentation",
-            "url": "http://capco/future-step1/show-link",
-          },
-        ],
-        "title": "Name of my project",
-        "url": "http://capco/show-link",
-      }
+        Object {
+          "endAt": "2017-01-28T09:00:24+01:00",
+          "startAt": "2017-01-20T09:00:24+01:00",
+          "status": "CLOSED",
+          "timeless": null,
+          "title": "closed step 2",
+          "type": "presentation",
+          "url": "http://capco/closed-step2/show-link",
+        },
+        Object {
+          "endAt": "2017-12-28T09:00:24+01:00",
+          "startAt": "2017-12-20T09:00:24+01:00",
+          "status": "FUTURE",
+          "timeless": null,
+          "title": "Future step 1",
+          "type": "presentation",
+          "url": "http://capco/future-step1/show-link",
+        },
+      ],
+      "title": "Name of my project",
+      "url": "http://capco/show-link",
     }
-  />
-  <div
-    className="card__actions"
-  >
-    <a
-      href="http://capco/closed-step2/show-link"
-    >
-      <FormattedMessage
-        id="project.preview.action.seeStep"
-        values={Object {}}
-      />
-    </a>
-     
-     
-  </div>
-</div>
+  }
+/>
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for future project 1`] = `
-<div
-  className="card__body"
->
-  <div
-    className="card__body__infos"
-  >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
-      project={
+<ContainerConstructor
+  componentRef={null}
+  project={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "hasParticipativeStep": false,
+      "id": "1",
+      "links": Object {
+        "external": null,
+      },
+      "steps": Array [
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "hasParticipativeStep": false,
-          "id": "1",
-          "links": Object {
-            "external": null,
-          },
-          "steps": Array [
-            Object {
-              "endAt": "2017-12-28T09:00:24+01:00",
-              "startAt": "2017-12-20T09:00:24+01:00",
-              "status": "FUTURE",
-              "timeless": null,
-              "title": "Future step 1",
-              "type": "presentation",
-              "url": "http://capco/future-step1/show-link",
-            },
-            Object {
-              "endAt": "2018-01-28T09:00:24+01:00",
-              "startAt": "2018-01-20T09:00:24+01:00",
-              "status": "FUTURE",
-              "timeless": null,
-              "title": "Future step 2",
-              "type": "presentation",
-              "url": "http://capco/future-step2/show-link",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
-    <h3
-      className="card__title"
-    >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="project-1-tooltip"
-            placement="right"
-          >
-            Name of my project
-          </Tooltip>
-        }
-        placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
-      >
-        <a
-          href="http://capco/show-link"
-        >
-          <div
-            style={
-              Object {
-                "width": "98%",
-              }
-            }
-          >
-            <Truncate
-              ellipsis="…"
-              lines={3}
-              trimWhitespace={false}
-              width={0}
-            >
-              Name of my project
-            </Truncate>
-          </div>
-        </a>
-      </OverlayTrigger>
-    </h3>
-  </div>
-  <ProjectPreviewProgressBar
-    actualStep={
-      Object {
-        "endAt": "2017-12-28T09:00:24+01:00",
-        "startAt": "2017-12-20T09:00:24+01:00",
-        "status": "FUTURE",
-        "timeless": null,
-        "title": "Future step 1",
-        "type": "presentation",
-        "url": "http://capco/future-step1/show-link",
-      }
-    }
-    isCurrentStep={false}
-    project={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "hasParticipativeStep": false,
-        "id": "1",
-        "links": Object {
-          "external": null,
+          "endAt": "2017-12-28T09:00:24+01:00",
+          "startAt": "2017-12-20T09:00:24+01:00",
+          "status": "FUTURE",
+          "timeless": null,
+          "title": "Future step 1",
+          "type": "presentation",
+          "url": "http://capco/future-step1/show-link",
         },
-        "steps": Array [
-          Object {
-            "endAt": "2017-12-28T09:00:24+01:00",
-            "startAt": "2017-12-20T09:00:24+01:00",
-            "status": "FUTURE",
-            "timeless": null,
-            "title": "Future step 1",
-            "type": "presentation",
-            "url": "http://capco/future-step1/show-link",
-          },
-          Object {
-            "endAt": "2018-01-28T09:00:24+01:00",
-            "startAt": "2018-01-20T09:00:24+01:00",
-            "status": "FUTURE",
-            "timeless": null,
-            "title": "Future step 2",
-            "type": "presentation",
-            "url": "http://capco/future-step2/show-link",
-          },
-        ],
-        "title": "Name of my project",
-        "url": "http://capco/show-link",
-      }
+        Object {
+          "endAt": "2018-01-28T09:00:24+01:00",
+          "startAt": "2018-01-20T09:00:24+01:00",
+          "status": "FUTURE",
+          "timeless": null,
+          "title": "Future step 2",
+          "type": "presentation",
+          "url": "http://capco/future-step2/show-link",
+        },
+      ],
+      "title": "Name of my project",
+      "url": "http://capco/show-link",
     }
-  />
-  <div
-    className="card__actions"
-  >
-     
-    <span
-      className="excerpt-dark"
-    >
-      <FormattedMessage
-        id="date.startAt"
-        values={Object {}}
-      />
-       
-      <FormattedDate
-        day="numeric"
-        month="long"
-        value={2017-12-20T08:00:24.000Z}
-        year="numeric"
-      />
-    </span>
-     
-  </div>
-</div>
+  }
+/>
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open participative step 1`] = `
-<div
-  className="card__body"
->
-  <div
-    className="card__body__infos"
-  >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
-      project={
+<ContainerConstructor
+  componentRef={null}
+  project={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "hasParticipativeStep": true,
+      "id": "1",
+      "links": Object {
+        "external": null,
+      },
+      "steps": Array [
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "hasParticipativeStep": true,
-          "id": "1",
-          "links": Object {
-            "external": null,
-          },
-          "steps": Array [
-            Object {
-              "endAt": null,
-              "startAt": null,
-              "status": "CLOSED",
-              "timeless": null,
-              "title": "Closed step",
-              "type": null,
-              "url": "",
-            },
-            Object {
-              "endAt": "2018-11-28T09:00:24+01:00",
-              "startAt": "2017-11-20T09:00:24+01:00",
-              "status": "OPENED",
-              "timeless": false,
-              "title": "Open step 2",
-              "type": "collect",
-              "url": "http://capco/step2/show-link",
-            },
-            Object {
-              "endAt": "2017-11-25T09:00:24+01:00",
-              "startAt": "2017-01-10T09:00:24+01:00",
-              "status": "OPENED",
-              "timeless": false,
-              "title": "Open step 1",
-              "type": "collect",
-              "url": "http://capco/step1/show-link",
-            },
-            Object {
-              "endAt": null,
-              "startAt": null,
-              "status": "FUTURE",
-              "timeless": null,
-              "title": "Future step",
-              "type": null,
-              "url": "",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
-    <h3
-      className="card__title"
-    >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="project-1-tooltip"
-            placement="right"
-          >
-            Name of my project
-          </Tooltip>
-        }
-        placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
-      >
-        <a
-          href="http://capco/show-link"
-        >
-          <div
-            style={
-              Object {
-                "width": "98%",
-              }
-            }
-          >
-            <Truncate
-              ellipsis="…"
-              lines={3}
-              trimWhitespace={false}
-              width={0}
-            >
-              Name of my project
-            </Truncate>
-          </div>
-        </a>
-      </OverlayTrigger>
-    </h3>
-    <ForwardRef(Relay(ProjectPreviewCounters))
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "hasParticipativeStep": true,
-          "id": "1",
-          "links": Object {
-            "external": null,
-          },
-          "steps": Array [
-            Object {
-              "endAt": null,
-              "startAt": null,
-              "status": "CLOSED",
-              "timeless": null,
-              "title": "Closed step",
-              "type": null,
-              "url": "",
-            },
-            Object {
-              "endAt": "2018-11-28T09:00:24+01:00",
-              "startAt": "2017-11-20T09:00:24+01:00",
-              "status": "OPENED",
-              "timeless": false,
-              "title": "Open step 2",
-              "type": "collect",
-              "url": "http://capco/step2/show-link",
-            },
-            Object {
-              "endAt": "2017-11-25T09:00:24+01:00",
-              "startAt": "2017-01-10T09:00:24+01:00",
-              "status": "OPENED",
-              "timeless": false,
-              "title": "Open step 1",
-              "type": "collect",
-              "url": "http://capco/step1/show-link",
-            },
-            Object {
-              "endAt": null,
-              "startAt": null,
-              "status": "FUTURE",
-              "timeless": null,
-              "title": "Future step",
-              "type": null,
-              "url": "",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
-  </div>
-  <ProjectPreviewProgressBar
-    actualStep={
-      Object {
-        "endAt": "2017-11-25T09:00:24+01:00",
-        "startAt": "2017-01-10T09:00:24+01:00",
-        "status": "OPENED",
-        "timeless": false,
-        "title": "Open step 1",
-        "type": "collect",
-        "url": "http://capco/step1/show-link",
-      }
-    }
-    isCurrentStep={null}
-    project={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "hasParticipativeStep": true,
-        "id": "1",
-        "links": Object {
-          "external": null,
+          "endAt": null,
+          "startAt": null,
+          "status": "CLOSED",
+          "timeless": null,
+          "title": "Closed step",
+          "type": null,
+          "url": "",
         },
-        "steps": Array [
-          Object {
-            "endAt": null,
-            "startAt": null,
-            "status": "CLOSED",
-            "timeless": null,
-            "title": "Closed step",
-            "type": null,
-            "url": "",
-          },
-          Object {
-            "endAt": "2018-11-28T09:00:24+01:00",
-            "startAt": "2017-11-20T09:00:24+01:00",
-            "status": "OPENED",
-            "timeless": false,
-            "title": "Open step 2",
-            "type": "collect",
-            "url": "http://capco/step2/show-link",
-          },
-          Object {
-            "endAt": "2017-11-25T09:00:24+01:00",
-            "startAt": "2017-01-10T09:00:24+01:00",
-            "status": "OPENED",
-            "timeless": false,
-            "title": "Open step 1",
-            "type": "collect",
-            "url": "http://capco/step1/show-link",
-          },
-          Object {
-            "endAt": null,
-            "startAt": null,
-            "status": "FUTURE",
-            "timeless": null,
-            "title": "Future step",
-            "type": null,
-            "url": "",
-          },
-        ],
-        "title": "Name of my project",
-        "url": "http://capco/show-link",
-      }
+        Object {
+          "endAt": "2018-11-28T09:00:24+01:00",
+          "startAt": "2017-11-20T09:00:24+01:00",
+          "status": "OPENED",
+          "timeless": false,
+          "title": "Open step 2",
+          "type": "collect",
+          "url": "http://capco/step2/show-link",
+        },
+        Object {
+          "endAt": "2017-11-25T09:00:24+01:00",
+          "startAt": "2017-01-10T09:00:24+01:00",
+          "status": "OPENED",
+          "timeless": false,
+          "title": "Open step 1",
+          "type": "collect",
+          "url": "http://capco/step1/show-link",
+        },
+        Object {
+          "endAt": null,
+          "startAt": null,
+          "status": "FUTURE",
+          "timeless": null,
+          "title": "Future step",
+          "type": null,
+          "url": "",
+        },
+      ],
+      "title": "Name of my project",
+      "url": "http://capco/show-link",
     }
-  />
-  <div
-    className="card__actions"
-  >
-    <a
-      href="http://capco/step1/show-link"
-    >
-      <FormattedMessage
-        id="project.preview.action.participe"
-        values={Object {}}
-      />
-    </a>
-     
-     
-    <RemainingTime
-      endAt="2017-11-25T09:00:24+01:00"
-    />
-  </div>
-</div>
+  }
+/>
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open step (with no actual participative step) 1`] = `
-<div
-  className="card__body"
->
-  <div
-    className="card__body__infos"
-  >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
-      project={
+<ContainerConstructor
+  componentRef={null}
+  project={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "hasParticipativeStep": true,
+      "id": "1",
+      "links": Object {
+        "external": null,
+      },
+      "steps": Array [
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "hasParticipativeStep": true,
-          "id": "1",
-          "links": Object {
-            "external": null,
-          },
-          "steps": Array [
-            Object {
-              "endAt": null,
-              "startAt": null,
-              "status": "CLOSED",
-              "timeless": null,
-              "title": "Closed step",
-              "type": null,
-              "url": "",
-            },
-            Object {
-              "endAt": "2018-11-28T09:00:24+01:00",
-              "startAt": "2017-11-20T09:00:24+01:00",
-              "status": "OPENED",
-              "timeless": false,
-              "title": "Open step 2",
-              "type": "collect",
-              "url": "http://capco/step2/show-link",
-            },
-            Object {
-              "endAt": "2017-11-25T09:00:24+01:00",
-              "startAt": "2017-01-10T09:00:24+01:00",
-              "status": "OPENED",
-              "timeless": false,
-              "title": "Open step 1",
-              "type": "collect",
-              "url": "http://capco/step1/show-link",
-            },
-            Object {
-              "endAt": null,
-              "startAt": null,
-              "status": "FUTURE",
-              "timeless": null,
-              "title": "Future step",
-              "type": null,
-              "url": "",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
-    <h3
-      className="card__title"
-    >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="project-1-tooltip"
-            placement="right"
-          >
-            Name of my project
-          </Tooltip>
-        }
-        placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
-      >
-        <a
-          href="http://capco/show-link"
-        >
-          <div
-            style={
-              Object {
-                "width": "98%",
-              }
-            }
-          >
-            <Truncate
-              ellipsis="…"
-              lines={3}
-              trimWhitespace={false}
-              width={0}
-            >
-              Name of my project
-            </Truncate>
-          </div>
-        </a>
-      </OverlayTrigger>
-    </h3>
-    <ForwardRef(Relay(ProjectPreviewCounters))
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "hasParticipativeStep": true,
-          "id": "1",
-          "links": Object {
-            "external": null,
-          },
-          "steps": Array [
-            Object {
-              "endAt": null,
-              "startAt": null,
-              "status": "CLOSED",
-              "timeless": null,
-              "title": "Closed step",
-              "type": null,
-              "url": "",
-            },
-            Object {
-              "endAt": "2018-11-28T09:00:24+01:00",
-              "startAt": "2017-11-20T09:00:24+01:00",
-              "status": "OPENED",
-              "timeless": false,
-              "title": "Open step 2",
-              "type": "collect",
-              "url": "http://capco/step2/show-link",
-            },
-            Object {
-              "endAt": "2017-11-25T09:00:24+01:00",
-              "startAt": "2017-01-10T09:00:24+01:00",
-              "status": "OPENED",
-              "timeless": false,
-              "title": "Open step 1",
-              "type": "collect",
-              "url": "http://capco/step1/show-link",
-            },
-            Object {
-              "endAt": null,
-              "startAt": null,
-              "status": "FUTURE",
-              "timeless": null,
-              "title": "Future step",
-              "type": null,
-              "url": "",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
-  </div>
-  <ProjectPreviewProgressBar
-    actualStep={
-      Object {
-        "endAt": "2017-11-25T09:00:24+01:00",
-        "startAt": "2017-01-10T09:00:24+01:00",
-        "status": "OPENED",
-        "timeless": false,
-        "title": "Open step 1",
-        "type": "collect",
-        "url": "http://capco/step1/show-link",
-      }
-    }
-    isCurrentStep={null}
-    project={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "hasParticipativeStep": true,
-        "id": "1",
-        "links": Object {
-          "external": null,
+          "endAt": null,
+          "startAt": null,
+          "status": "CLOSED",
+          "timeless": null,
+          "title": "Closed step",
+          "type": null,
+          "url": "",
         },
-        "steps": Array [
-          Object {
-            "endAt": null,
-            "startAt": null,
-            "status": "CLOSED",
-            "timeless": null,
-            "title": "Closed step",
-            "type": null,
-            "url": "",
-          },
-          Object {
-            "endAt": "2018-11-28T09:00:24+01:00",
-            "startAt": "2017-11-20T09:00:24+01:00",
-            "status": "OPENED",
-            "timeless": false,
-            "title": "Open step 2",
-            "type": "collect",
-            "url": "http://capco/step2/show-link",
-          },
-          Object {
-            "endAt": "2017-11-25T09:00:24+01:00",
-            "startAt": "2017-01-10T09:00:24+01:00",
-            "status": "OPENED",
-            "timeless": false,
-            "title": "Open step 1",
-            "type": "collect",
-            "url": "http://capco/step1/show-link",
-          },
-          Object {
-            "endAt": null,
-            "startAt": null,
-            "status": "FUTURE",
-            "timeless": null,
-            "title": "Future step",
-            "type": null,
-            "url": "",
-          },
-        ],
-        "title": "Name of my project",
-        "url": "http://capco/show-link",
-      }
+        Object {
+          "endAt": "2018-11-28T09:00:24+01:00",
+          "startAt": "2017-11-20T09:00:24+01:00",
+          "status": "OPENED",
+          "timeless": false,
+          "title": "Open step 2",
+          "type": "collect",
+          "url": "http://capco/step2/show-link",
+        },
+        Object {
+          "endAt": "2017-11-25T09:00:24+01:00",
+          "startAt": "2017-01-10T09:00:24+01:00",
+          "status": "OPENED",
+          "timeless": false,
+          "title": "Open step 1",
+          "type": "collect",
+          "url": "http://capco/step1/show-link",
+        },
+        Object {
+          "endAt": null,
+          "startAt": null,
+          "status": "FUTURE",
+          "timeless": null,
+          "title": "Future step",
+          "type": null,
+          "url": "",
+        },
+      ],
+      "title": "Name of my project",
+      "url": "http://capco/show-link",
     }
-  />
-  <div
-    className="card__actions"
-  >
-    <a
-      href="http://capco/step1/show-link"
-    >
-      <FormattedMessage
-        id="project.preview.action.participe"
-        values={Object {}}
-      />
-    </a>
-     
-     
-    <RemainingTime
-      endAt="2017-11-25T09:00:24+01:00"
-    />
-  </div>
-</div>
+  }
+/>
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for timeless step 1`] = `
-<div
-  className="card__body"
->
-  <div
-    className="card__body__infos"
-  >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
-      project={
+<ContainerConstructor
+  componentRef={null}
+  project={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "hasParticipativeStep": false,
+      "id": "1",
+      "links": Object {
+        "external": "http://capco/external-link",
+      },
+      "steps": Array [
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "hasParticipativeStep": false,
-          "id": "1",
-          "links": Object {
-            "external": "http://capco/external-link",
-          },
-          "steps": Array [
-            Object {
-              "endAt": null,
-              "startAt": null,
-              "status": "CLOSED",
-              "timeless": null,
-              "title": "Closed step",
-              "type": null,
-              "url": "",
-            },
-            Object {
-              "endAt": "2017-11-25T09:00:24+01:00",
-              "startAt": "2017-11-10T09:00:24+01:00",
-              "status": "OPENED",
-              "timeless": false,
-              "title": "Open step",
-              "type": "presentation",
-              "url": "http://capco/step/show-link",
-            },
-            Object {
-              "endAt": null,
-              "startAt": null,
-              "status": "OPENED",
-              "timeless": true,
-              "title": "timeless step",
-              "type": "collect",
-              "url": "http://capco/timeless-step/show-link",
-            },
-            Object {
-              "endAt": null,
-              "startAt": null,
-              "status": "FUTURE",
-              "timeless": null,
-              "title": "Future step",
-              "type": null,
-              "url": "",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
-    <h3
-      className="card__title"
-    >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="project-1-tooltip"
-            placement="right"
-          >
-            Name of my project
-          </Tooltip>
-        }
-        placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
-      >
-        <a
-          href="http://capco/external-link"
-        >
-          <div
-            style={
-              Object {
-                "width": "98%",
-              }
-            }
-          >
-            <Truncate
-              ellipsis="…"
-              lines={3}
-              trimWhitespace={false}
-              width={0}
-            >
-              Name of my project
-            </Truncate>
-            <svg
-              id="Calque_1"
-              style={
-                Object {
-                  "display": "inline-block",
-                  "height": 16,
-                  "marginLeft": 5,
-                  "width": 16,
-                }
-              }
-              version="1.1"
-              viewBox="0 0 89.7 90.1"
-              x="0px"
-              xmlSpace="preserve"
-              xmlns="http://www.w3.org/2000/svg"
-              y="0px"
-            >
-              <g
-                className="externalLinkSvg"
-              >
-                <path
-                  d="M85.5,0H56.9c-2.3,0-4.2,1.9-4.2,4.2s1.9,4.2,4.2,4.2h19.1L35.1,49.2c-1.6,1.6-1.6,4.3,0,5.9c0.8,0.8,1.9,1.2,2.9,1.2 s2.1-0.4,2.9-1.2l40.4-40.4v18.2c0,2.3,1.9,4.2,4.2,4.2s4.2-1.9,4.2-4.2V4.2C89.7,1.9,87.8,0,85.5,0z"
-                />
-                <path
-                  d="M71.1,41.9c-2.3,0-4.2,1.9-4.2,4.2V79c0,1.5-1.3,2.8-2.8,2.8H11.1c-1.5,0-2.8-1.3-2.8-2.8V25.9c0-1.5,1.3-2.8,2.8-2.8h33 c2.3,0,4.2-1.9,4.2-4.2s-1.9-4.2-4.2-4.2h-33C5,14.8,0,19.7,0,25.9V79c0,6.1,5,11.1,11.1,11.1h53.1c6.1,0,11.1-5,11.1-11.1V46.1 C75.3,43.8,73.4,41.9,71.1,41.9z"
-                />
-              </g>
-            </svg>
-          </div>
-        </a>
-      </OverlayTrigger>
-    </h3>
-  </div>
-  <ProjectPreviewProgressBar
-    actualStep={
-      Object {
-        "endAt": null,
-        "startAt": null,
-        "status": "OPENED",
-        "timeless": true,
-        "title": "timeless step",
-        "type": "collect",
-        "url": "http://capco/timeless-step/show-link",
-      }
-    }
-    isCurrentStep={null}
-    project={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "hasParticipativeStep": false,
-        "id": "1",
-        "links": Object {
-          "external": "http://capco/external-link",
+          "endAt": null,
+          "startAt": null,
+          "status": "CLOSED",
+          "timeless": null,
+          "title": "Closed step",
+          "type": null,
+          "url": "",
         },
-        "steps": Array [
-          Object {
-            "endAt": null,
-            "startAt": null,
-            "status": "CLOSED",
-            "timeless": null,
-            "title": "Closed step",
-            "type": null,
-            "url": "",
-          },
-          Object {
-            "endAt": "2017-11-25T09:00:24+01:00",
-            "startAt": "2017-11-10T09:00:24+01:00",
-            "status": "OPENED",
-            "timeless": false,
-            "title": "Open step",
-            "type": "presentation",
-            "url": "http://capco/step/show-link",
-          },
-          Object {
-            "endAt": null,
-            "startAt": null,
-            "status": "OPENED",
-            "timeless": true,
-            "title": "timeless step",
-            "type": "collect",
-            "url": "http://capco/timeless-step/show-link",
-          },
-          Object {
-            "endAt": null,
-            "startAt": null,
-            "status": "FUTURE",
-            "timeless": null,
-            "title": "Future step",
-            "type": null,
-            "url": "",
-          },
-        ],
-        "title": "Name of my project",
-        "url": "http://capco/show-link",
-      }
+        Object {
+          "endAt": "2017-11-25T09:00:24+01:00",
+          "startAt": "2017-11-10T09:00:24+01:00",
+          "status": "OPENED",
+          "timeless": false,
+          "title": "Open step",
+          "type": "presentation",
+          "url": "http://capco/step/show-link",
+        },
+        Object {
+          "endAt": null,
+          "startAt": null,
+          "status": "OPENED",
+          "timeless": true,
+          "title": "timeless step",
+          "type": "collect",
+          "url": "http://capco/timeless-step/show-link",
+        },
+        Object {
+          "endAt": null,
+          "startAt": null,
+          "status": "FUTURE",
+          "timeless": null,
+          "title": "Future step",
+          "type": null,
+          "url": "",
+        },
+      ],
+      "title": "Name of my project",
+      "url": "http://capco/show-link",
     }
-  />
-  <div
-    className="card__actions"
-  >
-    <a
-      href="http://capco/timeless-step/show-link"
-    >
-      <FormattedMessage
-        id="project.preview.action.participe"
-        values={Object {}}
-      />
-    </a>
-     
-     
-  </div>
-</div>
+  }
+/>
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body with h2 title & elements for closed step 1`] = `
-<div
-  className="card__body"
->
-  <div
-    className="card__body__infos"
-  >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
-      project={
+<ContainerConstructor
+  componentRef={null}
+  hasSecondTitle={true}
+  project={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "hasParticipativeStep": false,
+      "id": "1",
+      "links": Object {
+        "external": null,
+      },
+      "steps": Array [
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "hasParticipativeStep": false,
-          "id": "1",
-          "links": Object {
-            "external": null,
-          },
-          "steps": Array [
-            Object {
-              "endAt": "2016-12-28T09:00:24+01:00",
-              "startAt": "2016-12-20T09:00:24+01:00",
-              "status": "CLOSED",
-              "timeless": null,
-              "title": "Closed step",
-              "type": "presentation",
-              "url": "http://capco/closed-step1/show-link",
-            },
-            Object {
-              "endAt": "2017-01-28T09:00:24+01:00",
-              "startAt": "2017-01-20T09:00:24+01:00",
-              "status": "CLOSED",
-              "timeless": null,
-              "title": "closed step 2",
-              "type": "presentation",
-              "url": "http://capco/closed-step2/show-link",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
-    <h2
-      className="card__title"
-    >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="project-1-tooltip"
-            placement="right"
-          >
-            Name of my project
-          </Tooltip>
-        }
-        placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
-      >
-        <a
-          href="http://capco/show-link"
-        >
-          <div
-            style={
-              Object {
-                "width": "98%",
-              }
-            }
-          >
-            <Truncate
-              ellipsis="…"
-              lines={3}
-              trimWhitespace={false}
-              width={0}
-            >
-              Name of my project
-            </Truncate>
-          </div>
-        </a>
-      </OverlayTrigger>
-    </h2>
-  </div>
-  <ProjectPreviewProgressBar
-    actualStep={
-      Object {
-        "endAt": "2017-01-28T09:00:24+01:00",
-        "startAt": "2017-01-20T09:00:24+01:00",
-        "status": "CLOSED",
-        "timeless": null,
-        "title": "closed step 2",
-        "type": "presentation",
-        "url": "http://capco/closed-step2/show-link",
-      }
-    }
-    isCurrentStep={null}
-    project={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "hasParticipativeStep": false,
-        "id": "1",
-        "links": Object {
-          "external": null,
+          "endAt": "2016-12-28T09:00:24+01:00",
+          "startAt": "2016-12-20T09:00:24+01:00",
+          "status": "CLOSED",
+          "timeless": null,
+          "title": "Closed step",
+          "type": "presentation",
+          "url": "http://capco/closed-step1/show-link",
         },
-        "steps": Array [
-          Object {
-            "endAt": "2016-12-28T09:00:24+01:00",
-            "startAt": "2016-12-20T09:00:24+01:00",
-            "status": "CLOSED",
-            "timeless": null,
-            "title": "Closed step",
-            "type": "presentation",
-            "url": "http://capco/closed-step1/show-link",
-          },
-          Object {
-            "endAt": "2017-01-28T09:00:24+01:00",
-            "startAt": "2017-01-20T09:00:24+01:00",
-            "status": "CLOSED",
-            "timeless": null,
-            "title": "closed step 2",
-            "type": "presentation",
-            "url": "http://capco/closed-step2/show-link",
-          },
-        ],
-        "title": "Name of my project",
-        "url": "http://capco/show-link",
-      }
+        Object {
+          "endAt": "2017-01-28T09:00:24+01:00",
+          "startAt": "2017-01-20T09:00:24+01:00",
+          "status": "CLOSED",
+          "timeless": null,
+          "title": "closed step 2",
+          "type": "presentation",
+          "url": "http://capco/closed-step2/show-link",
+        },
+      ],
+      "title": "Name of my project",
+      "url": "http://capco/show-link",
     }
-  />
-  <div
-    className="card__actions"
-  >
-    <a
-      href="http://capco/closed-step2/show-link"
-    >
-      <FormattedMessage
-        id="project.preview.action.seeResult"
-        values={Object {}}
-      />
-    </a>
-     
-     
-  </div>
-</div>
+  }
+/>
 `;

@@ -48,12 +48,14 @@
                     </a> |
                 </li>
                 <li>
+                {% if bannerTrad is defined %}
                     {{ react_render_component('CookieApp', {
                         'props': {
                             'bannerTrad':  bannerTrad,
                             'isLink':  true,
                         }
                     }) }}
+                {% endif %}
                 </li>
             </ul>
             <div class="capco-powered">

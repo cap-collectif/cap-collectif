@@ -39,6 +39,9 @@ class ProjectsResolver implements ResolverInterface
             ) {
                 $term = $args->offsetExists('term') ? $args->offsetGet('term') : null;
                 $order = $args->offsetExists('orderBy') ? $args->offsetGet('orderBy') : null;
+                $onlyPublic = $args->offsetExists('onlyPublic')
+                    ? $args->offsetGet('onlyPublic')
+                    : false;
 
                 $results = $this->projectSearch->searchProjects(
                     0,
@@ -48,10 +51,18 @@ class ProjectsResolver implements ResolverInterface
                     $this->getFilters($args)
                 );
                 $allResults = [];
-                /** @var Project $project */
-                foreach ($results['projects'] as $project) {
-                    if ($project instanceof Project && $project->canDisplay($viewer)) {
-                        $allResults[] = $project;
+                // @var Project $project
+                if (!$onlyPublic) {
+                    foreach ($results['projects'] as $project) {
+                        if ($project instanceof Project && $project->canDisplay($viewer)) {
+                            $allResults[] = $project;
+                        }
+                    }
+                } else {
+                    foreach ($results['projects'] as $project) {
+                        if ($project instanceof Project && $project->isPublic()) {
+                            $allResults[] = $project;
+                        }
                     }
                 }
                 $totalCount = \count($allResults);

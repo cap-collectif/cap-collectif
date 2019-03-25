@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { CommentDate } from './CommentDate';
+import CommentDate from './CommentDate';
 import { $refType } from '../../mocks';
 
 const defaultComment = {

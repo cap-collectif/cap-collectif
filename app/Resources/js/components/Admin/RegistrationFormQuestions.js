@@ -14,9 +14,7 @@ import { submitQuestion } from '../../utils/submitQuestion';
 
 type Props = {|
   ...FormProps,
-  // eslint-disable-next-line react/no-unused-prop-types
   registrationForm: RegistrationFormQuestions_registrationForm,
-  // eslint-disable-next-line react/no-unused-prop-types
   intl: IntlShape,
 |};
 

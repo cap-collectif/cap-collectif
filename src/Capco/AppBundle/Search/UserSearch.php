@@ -153,6 +153,33 @@ class UserSearch extends Search
         ];
     }
 
+    public function getAllContributors(int $offset, int $limit): array
+    {
+        $nestedQuery = new Query\Nested();
+        $nestedQuery->setPath('totalContributionsCount');
+
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery->addMust(new Range('totalContributionsCount.count', ['gt' => 0]));
+
+        $nestedQuery->setQuery($boolQuery);
+
+        $query = new Query($nestedQuery);
+        $query->setSort([
+            'totalContributionsCount.count' => [
+                'order' => 'desc',
+            ],
+        ]);
+
+        $query->setFrom($offset)->setSize($limit);
+
+        $resultSet = $this->index->getType('user')->search($query);
+
+        return [
+            'results' => $this->getHydratedResults($resultSet->getResults()),
+            'totalCount' => $resultSet->getTotalHits(),
+        ];
+    }
+
     private function getHydratedResultsFromResultSet(ResultSet $resultSet): array
     {
         $ids = array_map(function (Result $result) {
@@ -164,9 +191,16 @@ class UserSearch extends Search
 
     private function getHydratedResults(array $ids): array
     {
+        if (isset($ids[0]) && !\is_string($ids[0])) {
+            $ids = array_map(function (Result $result) {
+                return $result->getData()['id'];
+            }, $ids);
+        }
+
         // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
         $users = $this->userRepo->hydrateFromIds($ids);
+
         // We have to restore the correct order of ids, because Doctrine has lost it, see:
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
         usort($users, function ($a, $b) use ($ids) {

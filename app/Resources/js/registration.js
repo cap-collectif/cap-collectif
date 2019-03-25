@@ -23,6 +23,7 @@ import NewOpinionApp from './startup/NewOpinionAppClient';
 import ProjectTrashButtonApp from './startup/ProjectTrashButtonApp';
 import ProjectStepTabsApp from './startup/ProjectStepTabsApp';
 import CarouselApp from './startup/CarouselApp';
+import MetricsApp from './startup/MetricsApp';
 import OpinionPageApp from './startup/OpinionPageApp';
 import CommentSectionApp from './startup/CommentSectionApp';
 import SynthesisViewBoxApp from './startup/SynthesisViewBoxApp';
@@ -126,6 +127,7 @@ ReactOnRails.register({
   ProjectTrashButtonApp,
   ProjectStepTabsApp,
   CarouselApp,
+  MetricsApp,
   EvaluationsIndexPageApp,
   OpinionPageApp,
   CommentSectionApp,

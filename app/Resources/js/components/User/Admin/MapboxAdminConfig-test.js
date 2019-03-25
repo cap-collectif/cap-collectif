@@ -2,7 +2,7 @@
 /* @flow */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { MapboxAdminConfig } from './MapboxAdminConfig';
+import MapboxAdminConfig from './MapboxAdminConfig';
 import { formMock } from '../../../mocks';
 
 describe('<MapboxAdminConfig/>', () => {
