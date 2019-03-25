@@ -664,14 +664,7 @@ services:
       - [setTemplate, [edit, CapcoAdminBundle:Group:edit.html.twig]]
       - [setTemplate, [list, CapcoAdminBundle:Group:list.html.twig]]
 
-  sonata.admin.controller.admin:
-    class: Capco\AdminBundle\Controller\HelperController
-    arguments:
-      [
-        '@twig',
-        '@sonata.admin.pool',
-        '@sonata.admin.helper',
-        '@validator',
-        '@Capco\AppBundle\Search\UserSearch',
-      ]
+  sonata.admin.action.retrieve_autocomplete_items:
+    class: Capco\AdminBundle\Action\RetrieveAutocompleteItemsAction
+    autowire: true
     public: true

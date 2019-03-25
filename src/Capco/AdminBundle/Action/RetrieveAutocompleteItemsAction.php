@@ -1,42 +1,52 @@
 <?php
 
-namespace Capco\AdminBundle\Controller;
+declare(strict_types=1);
+
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Capco\AdminBundle\Action;
 
 use Capco\AppBundle\Search\UserSearch;
 use Capco\UserBundle\Entity\User;
-use Sonata\AdminBundle\Controller\HelperController as BaseHelperController;
-use Sonata\AdminBundle\Admin\AdminHelper;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Filter\FilterInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Twig\Environment;
-use Symfony\Component\Routing\Annotation\Route;
 
-class HelperController extends BaseHelperController
+final class RetrieveAutocompleteItemsAction
 {
+    /**
+     * @var Pool
+     */
+    private $pool;
+
+    /** @var UserSearch $userSearch */
     private $userSearch;
 
-    public function __construct(
-        Environment $twig,
-        Pool $pool,
-        AdminHelper $helper,
-        ValidatorInterface $validator,
-        UserSearch $userSearch
-    ) {
+    public function __construct(Pool $pool, UserSearch $userSearch)
+    {
+        $this->pool = $pool;
         $this->userSearch = $userSearch;
-        parent::__construct($twig, $pool, $helper, $validator);
     }
 
     /**
      * Retrieve list of items for autocomplete form field.
      *
-     * @Route("/admin/core/get-autocomplete-items", name="sonata_admin_retrieve_autocomplete_items" )
+     * @throws \RuntimeException
+     * @throws AccessDeniedException
+     *
+     * @return JsonResponse
      */
-    public function retrieveAutocompleteItemsAction(Request $request)
+    public function __invoke(Request $request)
     {
         $admin = $this->pool->getInstance($request->get('admin_code'));
         $admin->setRequest($request);
@@ -50,6 +60,7 @@ class HelperController extends BaseHelperController
 
         // subject will be empty to avoid unnecessary database requests and keep autocomplete function fast
         $admin->setSubject($admin->getNewInstance());
+
         if ('filter' === $context) {
             // filter
             $fieldDescription = $this->retrieveFilterFieldDescription(
@@ -58,6 +69,7 @@ class HelperController extends BaseHelperController
             );
             $filterAutocomplete = $admin->getDatagrid()->getFilter($fieldDescription->getName());
             $entity = $filterAutocomplete->getOption('field_options')['class'];
+
             $property = $filterAutocomplete->getFieldOption('property');
             $callback = $filterAutocomplete->getFieldOption('callback');
             $minimumInputLength = $filterAutocomplete->getFieldOption('minimum_input_length', 3);
@@ -75,9 +87,9 @@ class HelperController extends BaseHelperController
             // create/edit form
             $fieldDescription = $this->retrieveFormFieldDescription($admin, $request->get('field'));
             $formAutocomplete = $admin->getForm()->get($fieldDescription->getName());
-
             $formAutocompleteConfig = $formAutocomplete->getConfig();
             $entity = $formAutocompleteConfig->getOption('class');
+
             if ($formAutocompleteConfig->getAttribute('disabled')) {
                 throw new AccessDeniedException(
                     'Autocomplete list can`t be retrieved because the form element is disabled or read_only.'
@@ -96,13 +108,13 @@ class HelperController extends BaseHelperController
                 'target_admin_access_action'
             );
         }
+
         $searchText = $request->get('q');
 
         // START CUSTOM CAPCO CODE
         if (User::class === $entity) {
             $items = [];
 
-            /** @var UserSearch $userSearch */
             $properties = explode(',', $property);
             $users = $this->userSearch->searchUsers($searchText, $properties);
             if ($users['count'] > 0) {
@@ -125,6 +137,7 @@ class HelperController extends BaseHelperController
             ]);
         }
         // END CUSTOM CAPCO CODE
+
         $targetAdmin = $fieldDescription->getAssociationAdmin();
 
         // check user permission
