@@ -39,8 +39,6 @@ export class EventPageContainer extends React.Component<Props> {
   render() {
     const { eventPageBody, query, backgroundColor } = this.props;
 
-    console.warn(backgroundColor);
-
     return (
       <div className="container">
         {eventPageBody && (
