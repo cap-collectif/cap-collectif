@@ -282,6 +282,7 @@
         "underscore.string": "3.3.5",
         "lodash": "4.17.11",
         "braces": "2.3.1",
-        "clean-css": "4.1.11"
+        "clean-css": "4.1.11",
+        "js-yaml": "3.13.0"
     }
 }
