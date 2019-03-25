@@ -157,7 +157,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     draft: values.draft,
     responses: formatSubmitResponses(values.responses, proposalForm.questions),
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
-    addressText: undefined,
   };
 
   if (!proposalForm.step) {

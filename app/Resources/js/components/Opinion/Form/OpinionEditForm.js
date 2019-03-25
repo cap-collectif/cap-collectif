@@ -60,7 +60,7 @@ type Props = {|
 export class OpinionEditForm extends React.Component<Props> {
   render() {
     const { opinion, handleSubmit } = this.props;
-    const step = opinion.step;
+    const { step } = opinion;
     return (
       <form id={formName} onSubmit={handleSubmit}>
         <Field

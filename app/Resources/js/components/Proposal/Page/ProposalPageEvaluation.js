@@ -79,7 +79,7 @@ export class ProposalPageEvaluation extends React.Component<Props> {
       change,
       intl,
     } = this.props;
-    const evaluationForm = proposal.form.evaluationForm;
+    const { evaluationForm } = proposal.form;
     if (!evaluationForm) {
       return null;
     }

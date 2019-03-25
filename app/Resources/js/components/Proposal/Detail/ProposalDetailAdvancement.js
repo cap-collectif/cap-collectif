@@ -111,7 +111,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
     const { proposal, project } = this.props;
     const progressSteps = generateProgressStepsWithColorAndStatus(proposal.progressSteps);
     const steps = project.steps.sort((a, b) => a.position - b.position);
-    const selections = proposal.selections;
+    const { selections } = proposal;
     for (const step of steps) {
       step.isSelected =
         step.type === 'collect' || selections.map(selection => selection.step.id).includes(step.id);

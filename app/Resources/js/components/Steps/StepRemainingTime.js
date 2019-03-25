@@ -9,7 +9,7 @@ type Props = {
 class StepRemainingTime extends React.Component<Props> {
   render() {
     const { step } = this.props;
-    const counters = step.counters;
+    const { counters } = step;
     if (!counters) {
       return null;
     }

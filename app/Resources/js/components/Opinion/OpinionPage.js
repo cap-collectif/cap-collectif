@@ -58,7 +58,7 @@ export class OpinionPage extends React.Component<Props> {
               return graphqlError;
             }
             if (props) {
-              const opinion = props.opinion;
+              const { opinion } = props;
               if (!opinion) {
                 return graphqlError;
               }

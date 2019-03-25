@@ -14,7 +14,7 @@ type State = {
   expanded: boolean,
 };
 
-class CommentBody extends React.Component<Props, State> {
+export class CommentBody extends React.Component<Props, State> {
   state = {
     expanded: false,
   };

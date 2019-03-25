@@ -23,11 +23,11 @@ export class FollowingsProposals extends Component<Props, State> {
 
   onUnfollowAll() {
     const { viewer } = this.props;
-    const ids = viewer.followingProposals.edges.map(edge => edge.node.id);
+    const idsProposal = viewer.followingProposals.edges.map(edge => edge.node.id);
 
     this.setState({ open: !this.state.open }, () => {
       UnfollowProposalMutation.commit({
-        input: { ids },
+        input: { idsProposal },
       });
     });
   }

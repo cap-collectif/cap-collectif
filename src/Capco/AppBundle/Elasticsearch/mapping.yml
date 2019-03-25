@@ -76,16 +76,6 @@ mappings:
               id: { type: keyword }
           count:
             type: long
-      totalContributionsCount:
-        type: nested
-        properties:
-          contribution:
-            type: object
-            properties:
-              id: { type: keyword }
-          count:
-            type: long
-
   argument:
     properties:
       id: { type: keyword }
@@ -112,7 +102,6 @@ mappings:
       createdAt: { type: date }
       publishedAt: { type: date }
       author: *Author
-      visibility: { type: long }
       projectType:
         type: object
         properties:

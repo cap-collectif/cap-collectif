@@ -8,7 +8,7 @@ type Props = { opinion: OpinionAppendices_opinion };
 
 class OpinionAppendices extends React.Component<Props> {
   render() {
-    const opinion = this.props.opinion;
+    const { opinion } = this.props;
     if (!opinion || opinion.__typename === 'Version') {
       return null;
     }

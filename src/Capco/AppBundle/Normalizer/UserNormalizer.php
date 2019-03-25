@@ -44,6 +44,13 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     {
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
+        
+        // We only need Author mapping.
+        if (\in_array('ElasticsearchWithAuthor', $groups)) {
+            return ['id' => $object->getId(), 'userType' => $object->getUserType() ? [ 'id' => $object->getUserType()->getId() ] : null]; 
+        }
+
+        // We need fullmapping
         $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Elasticsearch', $groups)) {
@@ -77,23 +84,8 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                     ];
                 }
             }
-
             $data['contributionsCountByProject'] = $contributionsCountByProject;
             $data['contributionsCountByStep'] = $contributionsCountByStep;
-            $data['totalContributionsCount'] = array_merge(
-                $data['contributionsCountByProject'],
-                $data['contributionsCountByStep']
-            );
-
-            array_walk($data['totalContributionsCount'], function (&$item) {
-                if (isset($item['step'])) {
-                    $item['contribution'] = $item['step'];
-                    unset($item['step']);
-                } else {
-                    $item['contribution'] = $item['project'];
-                    unset($item['project']);
-                }
-            });
         }
 
         $links = [

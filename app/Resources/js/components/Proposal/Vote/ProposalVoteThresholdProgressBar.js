@@ -15,7 +15,7 @@ export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
   render() {
     const { proposal, step } = this.props;
     const votesCount = proposal.votes.totalCount;
-    const voteThreshold = step.voteThreshold;
+    const { voteThreshold } = step;
     if (voteThreshold === null || typeof voteThreshold === 'undefined') {
       return null;
     }

@@ -28,7 +28,7 @@ class VoteLinechart extends React.Component<Props> {
   initChart = () => {
     const { height, history, width } = this.props;
     // $FlowFixMe
-    const AreaChart = google.visualization.AreaChart;
+    const { AreaChart } = google.visualization;
     // $FlowFixMe
     const DataTable = google.visualization.arrayToDataTable;
     const lines = [

@@ -13,7 +13,7 @@ type Props = { proposal: ProposalPreviewHeader_proposal };
 
 export class ProposalPreviewHeader extends React.Component<Props> {
   render() {
-    const proposal = this.props.proposal;
+    const { proposal } = this.props;
     const date = proposal.publishedAt || proposal.createdAt;
     return (
       <CardUser>

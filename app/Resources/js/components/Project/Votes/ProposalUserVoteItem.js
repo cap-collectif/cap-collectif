@@ -44,7 +44,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
       vote,
       ranking,
     } = this.props;
-    const proposal = vote.proposal;
+    const { proposal } = vote;
 
     const colTitleWidth = () => {
       if (step.votesRanking === true && step.voteType === 'BUDGET') {
