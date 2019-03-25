@@ -12,8 +12,7 @@ describe('<Status />', () => {
   });
 
   it('should render correctly with other bgColor', () => {
-    const wrapper = shallow(<Status>My Status</Status>);
-    wrapper.setProps({ bgColor: 'danger' });
+    const wrapper = shallow(<Status bgColor="danger">My Status</Status>);
     expect(wrapper).toMatchSnapshot();
   });
 });

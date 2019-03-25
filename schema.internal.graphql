@@ -5635,11 +5635,11 @@ interface Sourceable {
 type Status {
   id: ID!
   name: String!
-  color: StatusType!
+  color: StatusColor!
 }
 
 # Different status type
-enum StatusType {
+enum StatusColor {
   info
   primary
   success

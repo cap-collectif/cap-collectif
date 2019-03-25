@@ -1,4 +1,4 @@
-StatusType:
+StatusColor:
   type: enum
   config:
     description: 'Different status type'

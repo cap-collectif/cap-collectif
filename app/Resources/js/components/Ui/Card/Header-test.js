@@ -12,8 +12,7 @@ describe('<Header />', () => {
   });
 
   it('should render correctly with other bgColor', () => {
-    const wrapper = shallow(<Header>My Header</Header>);
-    wrapper.setProps({ bgColor: 'green' });
+    const wrapper = shallow(<Header bgColor="green">My Header</Header>);
     expect(wrapper).toMatchSnapshot();
   });
 });

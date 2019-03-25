@@ -20,8 +20,6 @@ const BoxContainer = styled.div`
 export const ColorBox = (props: Props) => {
   const { backgroundColor, children, className, darkness } = props;
 
-  console.log(backgroundColor);
-
   return (
     <BoxContainer darkness={darkness} className={className} backgroundColor={backgroundColor}>
       {children}

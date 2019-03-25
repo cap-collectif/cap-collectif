@@ -2,9 +2,10 @@
 import styled from 'styled-components';
 import * as React from 'react';
 import { BsStyleColors } from '../../../utils/colors';
+import type { StatusColor } from '../../Proposal/__generated__/ProposalCollectStatus_proposal.graphql';
 
 type Props = {
-  bgColor: 'info' | 'primary' | 'success' | 'warning' | 'danger' | 'default',
+  bgColor: StatusColor,
   children: React.Node,
 };
 
