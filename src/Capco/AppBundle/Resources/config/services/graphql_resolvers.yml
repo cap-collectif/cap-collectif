@@ -9,7 +9,7 @@ services:
 
   Capco\AppBundle\GraphQL\Resolver\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/*'
-    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,QuestionResolver.php,ConsultationResolver.php,UserResolver.php, Group/GroupResolver.php, Proposal/ProposalEvaluationResolver.php,UserIsGrantedResolver.php}'
+    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,ConsultationResolver.php,UserResolver.php, Group/GroupResolver.php, Proposal/ProposalEvaluationResolver.php,UserIsGrantedResolver.php}'
 
   Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver:
     autowire: true
@@ -17,39 +17,6 @@ services:
     tags:
       - { name: overblog_graphql.resolver, alias: 'query_node', method: 'resolve' }
       - { name: overblog_graphql.resolver, alias: 'query_nodes', method: 'resolveMultiple' }
-
-
-  Capco\AppBundle\GraphQL\Resolver\QuestionResolver:
-    autowire: true
-    tags:
-      - { name: overblog_graphql.resolver, alias: 'query_question', method: 'resolve' }
-      - { name: overblog_graphql.resolver, alias: 'question_type', method: 'resolveType' }
-      - { name: overblog_graphql.resolver, alias: 'question_position', method: 'resolvePosition' }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'query_available_districts_for_location',
-          method: 'resolveDistrictsForLocalisation',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'question_isOtherAllowed',
-          method: 'resolveisOtherAllowed',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'question_validation_rule',
-          method: 'resolveValidationRule',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'query_get_available_questionnaires',
-          method: 'resolveAvailableQuestionnaires',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'questionnaire_questions',
-          method: 'resolveQuestionnaireQuestions',
-        }
 
   Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver:
     autowire: true

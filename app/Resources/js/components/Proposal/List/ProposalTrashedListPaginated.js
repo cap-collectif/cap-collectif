@@ -5,7 +5,7 @@ import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import { TRASHED_PROPOSAL_PAGINATOR_COUNT } from '../../Project/ProjectTrashProposal';
-import type { ProposalTrashedListPaginatedQuery_project } from '~relay/ProposalTrashedListPaginatedQuery.graphql';
+import type { ProposalTrashedListPaginatedQuery_project } from './__generated__/ProposalTrashedListPaginatedQuery.graphql';
 import ProposalPreview from '../Preview/ProposalPreview';
 
 type Props = {|
@@ -48,15 +48,13 @@ export class ProposalTrashedListPaginated extends React.Component<Props, State> 
         />
         <ListGroup bsClass="media-list" componentClass="ul">
           {project &&
-            project.proposals &&
-            project.proposals.edges &&
-            project.proposals.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map(node => (
-                <ProposalPreview key={node.id} proposal={node} step={null} viewer={null} />
-              ))}
+          project.proposals &&
+          project.proposals.edges &&
+          project.proposals.edges
+            .filter(Boolean)
+            .map(edge => edge.node)
+            .filter(Boolean)
+            .map(node => <ProposalPreview key={node.id} proposal={node} step={null} viewer={null} />)}
           {relay.hasMore() && (
             <ListGroupItem style={{ textAlign: 'center' }}>
               {isLoading ? (
@@ -79,20 +77,19 @@ export default createPaginationContainer(
   {
     project: graphql`
       fragment ProposalTrashedListPaginated_project on Project
-        @argumentDefinitions(
-          count: { type: "Int" }
+      @argumentDefinitions(
+          count: { type: "Int" }, 
           cursor: { type: "String" }
           stepId: { type: "ID!", defaultValue: "" }
-        ) {
+      ) {
         id
         proposals(first: $count, after: $cursor, trashedStatus: TRASHED)
-          @connection(key: "ProposalTrashedListPaginated_proposals") {
+        @connection(key: "ProposalTrashedListPaginated_proposals") {
           totalCount
           edges {
             node {
               id
-              ...ProposalPreview_proposal
-                @arguments(isProfileView: true, stepId: $stepId, isAuthenticated: $isAuthenticated)
+              ...ProposalPreview_proposal @arguments(isProfileView: true, stepId: $stepId, isAuthenticated: $isAuthenticated)
             }
           }
           pageInfo {
@@ -124,11 +121,11 @@ export default createPaginationContainer(
     },
     query: graphql`
       query ProposalTrashedListPaginatedQuery(
-        $projectId: ID!
-        $stepId: ID
-        $count: Int
-        $cursor: String
-        $isAuthenticated: Boolean!
+      $projectId: ID!
+      $stepId: ID
+      $count: Int
+      $cursor: String
+      $isAuthenticated: Boolean!
       ) {
         project: node(id: $projectId) {
           ...ProposalTrashedListPaginated_project @arguments(count: $count, cursor: $cursor)

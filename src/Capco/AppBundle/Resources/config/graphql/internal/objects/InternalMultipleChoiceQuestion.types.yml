@@ -14,7 +14,7 @@ InternalMultipleChoiceQuestion:
       # TODO we can probably design this better
       isOtherAllowed:
         type: 'Boolean!'
-        resolve: "@=resolver('question_isOtherAllowed', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceIsOtherAllowedResolver", [value])'
       # TODO we can probably design this better
       otherResponses:
         type: 'InternalResponseConnection!'

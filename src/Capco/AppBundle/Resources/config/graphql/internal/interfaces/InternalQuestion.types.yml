@@ -24,11 +24,11 @@ InternalQuestion:
         type: 'Int!'
       type:
         type: 'QuestionTypeValue!'
-        resolve: "@=resolver('question_type', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeValueResolver", [value])'
       #need it for conditional jumps
       position:
         type: 'Int!'
-        resolve: "@=resolver('question_position', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionPositionResolver", [value])'
         description: 'The position of the question'
       private:
         type: 'Boolean!'

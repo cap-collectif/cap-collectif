@@ -9,7 +9,7 @@ import ProposalPreview from '../Proposal/Preview/ProposalPreview';
 import type {
   LastProposalsQueryResponse,
   LastProposalsQueryVariables,
-} from '~relay/LastProposalsQuery.graphql';
+} from './__generated__/LastProposalsQuery.graphql';
 
 export type Props = {|
   +ids: $ReadOnlyArray<string>,
