@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190311115018 extends AbstractMigration implements ContainerAwareInterface
+final class Version20190320141742 extends AbstractMigration implements ContainerAwareInterface
 {
     private $container;
     private $generator;
