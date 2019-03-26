@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import AlertFormSucceededMessage from './AlertFormSucceededMessage';
 
 type Props = {
@@ -12,44 +12,41 @@ type Props = {
   errorMessage?: string,
 };
 
-export const AlertForm = ({
-  valid,
-  invalid,
-  submitSucceeded,
-  submitFailed,
-  submitting,
-  errorMessage,
-}: Props) => {
-  if (errorMessage) {
-    return (
-      <div className="d-ib">
-        <div className="alert__form_server-failed-message">
-          <i className="cap cap-ios-close-outline" /> <FormattedHTMLMessage id={errorMessage} />
+export class AlertForm extends React.Component<Props> {
+  render() {
+    const { valid, invalid, submitSucceeded, submitFailed, submitting, errorMessage } = this.props;
+    if (errorMessage) {
+      return (
+        <div className="d-ib">
+          <div className="alert__form_server-failed-message">
+            <i className="cap cap-ios-close-outline" /> <FormattedHTMLMessage id={errorMessage} />
+          </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
 
-  if (invalid) {
+    if (invalid) {
+      return (
+        <div className="d-ib">
+          <div className="alert__form_invalid-field">
+            <i className="cap cap-ios-close-outline" />{' '}
+            <FormattedMessage id="global.invalid.form" />
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="d-ib">
-        <div className="alert__form_invalid-field">
-          <i className="cap cap-ios-close-outline" /> <FormattedMessage id="global.invalid.form" />
-        </div>
+        {valid && submitSucceeded && !submitting && <AlertFormSucceededMessage />}
+        {submitFailed && (
+          <div className="alert__form_server-failed-message">
+            <i className="cap cap-ios-close-outline" />{' '}
+            <FormattedHTMLMessage id="global.error.server.form" />
+          </div>
+        )}
       </div>
     );
   }
-  return (
-    <div className="d-ib">
-      {valid && submitSucceeded && !submitting && <AlertFormSucceededMessage />}
-      {submitFailed && (
-        <div className="alert__form_server-failed-message">
-          <i className="cap cap-ios-close-outline" />{' '}
-          <FormattedHTMLMessage id="global.error.server.form" />
-        </div>
-      )}
-    </div>
-  );
-};
+}
 
 export default AlertForm;

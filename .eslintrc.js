@@ -10,7 +10,7 @@ module.exports = {
     'plugin:relay/recommended',
   ],
   parser: 'babel-eslint',
-  plugins: ['flowtype', 'import', 'react', 'react-hooks', 'jsx-a11y', 'jest', 'relay', 'graphql'],
+  plugins: ['flowtype', 'import', 'react', 'jsx-a11y', 'jest', 'relay', 'graphql'],
   globals: {
     $: true,
     screen: true,
@@ -55,8 +55,6 @@ module.exports = {
     'react/no-unused-state': 'warn',
     // TODO set this to error
     'react/sort-comp': 'warn',
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     'graphql/named-operations': [
       'error',
       {

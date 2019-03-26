@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 const TIME_BEFORE_HIDE_MESSAGE = 10000;
 
-const AlertFormSucceededMessage = () => {
+export default function AlertFormSucceededMessage() {
   const [showSucceededMessage, setShowSucceededMessage] = useState(true);
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -25,6 +25,4 @@ const AlertFormSucceededMessage = () => {
       <i className="cap cap-android-checkmark-circle" /> <FormattedMessage id="global.saved" />
     </div>
   );
-};
-
-export default AlertFormSucceededMessage;
+}
