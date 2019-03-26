@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
+import { darken } from 'polished';
 import { FormattedHTMLMessage } from 'react-intl';
 import { createFragmentContainer } from 'react-relay';
 import { reduxForm } from 'redux-form';
 import { graphql } from 'relay-runtime';
 import type { EventPageContainer_query } from './__generated__/EventPageContainer_query.graphql';
 
-import ColorBox from '../Ui/Boxes/ColorBox';
 import EventListFilters from './List/EventListFilters';
 import EventRefetch from './List/EventRefetch';
 import EventListCounter from './List/EventListCounter';
@@ -20,10 +20,14 @@ type Props = {
   backgroundColor: ?string,
 };
 
-const EventFiltersContainer = styled(ColorBox).attrs({
+const EventFiltersContainer = styled.div.attrs({
   id: 'event-page-filters',
 })`
+  padding: 15px;
+  background-color: ${props =>
+    props.backgroundColor ? darken(0.1, props.backgroundColor) : colors.primaryColor};
   margin: 25px 0 30px;
+  border-radius: 4px;
   position: sticky;
   top: 50px;
   z-index: 1010;
@@ -53,9 +57,7 @@ export class EventPageContainer extends React.Component<Props> {
             </div>
           </div>
         )}
-        <EventFiltersContainer
-          darkness={0.1}
-          backgroundColor={backgroundColor || colors.primaryColor}>
+        <EventFiltersContainer backgroundColor={backgroundColor}>
           <EventListFilters query={query} addToggleViewButton />
         </EventFiltersContainer>
 

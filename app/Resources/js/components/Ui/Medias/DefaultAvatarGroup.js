@@ -13,7 +13,7 @@ export const Container = styled.svg.attrs({
 })`
   border-radius: 50%;
   color: #fff;
-  background-color: ${colors.defaultCustomColor};
+  background-color: ${colors.primaryColor};
 `;
 
 export class DefaultAvatarGroup extends React.Component<Props> {

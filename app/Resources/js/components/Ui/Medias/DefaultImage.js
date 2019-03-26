@@ -15,7 +15,7 @@ export const Container = styled.div.attrs({
   width: ${props => props.width};
   height: ${props => props.height};
   display: flex;
-  background-color: ${colors.defaultCustomColor};
+  background-color: ${colors.primaryColor};
 
   svg {
     margin: auto;

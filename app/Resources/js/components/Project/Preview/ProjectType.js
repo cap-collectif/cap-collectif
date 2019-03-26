@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import Card from '../../Ui/Card/Card';
+import CardType from '../../Ui/Card/CardType';
 import type { ProjectType_project } from './__generated__/ProjectType_project.graphql';
 
 type Props = {
@@ -12,11 +12,10 @@ type Props = {
 export class ProjectType extends React.Component<Props> {
   render() {
     const { project } = this.props;
-
     return project.type ? (
-      <Card.Type bgColor={project.type.color}>
+      <CardType color={project.type.color}>
         <FormattedMessage id={project.type.title} />
-      </Card.Type>
+      </CardType>
     ) : null;
   }
 }

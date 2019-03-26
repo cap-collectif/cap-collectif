@@ -30,6 +30,10 @@ type State = {
   stylesSubmitFailed: boolean,
 };
 
+type Action = {
+  type: 'MUTATION_START' | 'MUTATION_END' | 'MUTATION_FAILED',
+};
+
 const TitleContainer = styled.div`
   display: flex;
   align-items: center;
@@ -79,134 +83,145 @@ const onSubmit = async (values: FormValues) => {
   }
 };
 
-export class MapboxAdminConfig extends React.Component<Props, State> {
-  state = {
-    loading: false,
-    stylesSubmitSucceeded: false,
-    stylesSubmitFailed: false,
-  };
+const initialState: State = {
+  loading: false,
+  stylesSubmitSucceeded: false,
+  stylesSubmitFailed: false,
+};
 
-  onStyleListItemMutationStart = () => {
-    this.setState({
-      loading: true,
-      stylesSubmitSucceeded: false,
-      stylesSubmitFailed: false,
-    });
-  };
-
-  onStyleListItemMutationEnd = () => {
-    this.setState({
-      loading: false,
-      stylesSubmitSucceeded: true,
-      stylesSubmitFailed: false,
-    });
-  };
-
-  onStyleListItemMutationFailed = () => {
-    this.setState({
-      loading: false,
-      stylesSubmitSucceeded: false,
-      stylesSubmitFailed: true,
-    });
-  };
-
-  render() {
-    const { loading, stylesSubmitFailed, stylesSubmitSucceeded } = this.state;
-    const {
-      mapToken: { styles, id },
-      invalid,
-      submitting,
-      handleSubmit,
-      submitFailed,
-      submitSucceeded,
-      valid,
-      error,
-    } = this.props;
-
-    const renderCustomStyles = () => (
-      <div>
-        <h3 className="d-ib">
-          <FormattedMessage id="style" />
-        </h3>
-        {(stylesSubmitSucceeded || stylesSubmitFailed) && (
-          <AlertForm
-            valid
-            invalid={false}
-            submitting={loading}
-            submitSucceeded={stylesSubmitSucceeded}
-            submitFailed={stylesSubmitFailed}
-          />
-        )}
-        <ListGroup>
-          {styles.map(style => (
-            <MapAdminStyleListItem
-              onMutationStart={this.onStyleListItemMutationStart}
-              onMutationEnd={this.onStyleListItemMutationEnd}
-              onMutationFailed={this.onStyleListItemMutationFailed}
-              disabled={loading}
-              key={style.id}
-              style={style}
-              mapTokenId={id}
-            />
-          ))}
-        </ListGroup>
-      </div>
-    );
-
-    return (
-      <form className="mapbox__config" onSubmit={handleSubmit}>
-        <TitleContainer>
-          <img src="/svg/mapbox_logo.svg" width={32} height={32} alt="Mapbox" />
-          <h3>Mapbox</h3>
-        </TitleContainer>
-        <p className="help-block sonata-ba-field-help">
-          <FormattedMessage id="desc-text-mapbox" />
-        </p>
-        <Field
-          name="publicToken"
-          component={component}
-          type="text"
-          id="token"
-          help={<FormattedHTMLMessage id="helptext-api-key" />}
-          label={<FormattedMessage id="public-api-key" />}
-        />
-        <div className="clearfix" />
-        <Field
-          name="secretToken"
-          component={component}
-          type="text"
-          id="token"
-          help={<FormattedHTMLMessage id="helptext-api-key" />}
-          label={<FormattedMessage id="secret-api-key" />}
-        />
-        <div className="clearfix" />
-        <Button
-          disabled={invalid || submitting}
-          type="submit"
-          bsStyle="primary"
-          className="mb-15"
-          id="user-admin-profile-save">
-          <SubmitButtonInner>
-            {submitting ? (
-              <Loader show inline size={20} color="white" />
-            ) : (
-              <FormattedMessage id="verify" />
-            )}
-          </SubmitButtonInner>
-        </Button>
-        <AlertForm
-          valid={valid}
-          invalid={false}
-          submitting={submitting}
-          submitSucceeded={submitSucceeded}
-          submitFailed={submitFailed}
-          errorMessage={error}
-        />
-        {styles && renderCustomStyles()}
-      </form>
-    );
+const reducer = (state: State, action: Action) => {
+  switch (action.type) {
+    case 'MUTATION_START':
+      return {
+        loading: true,
+        stylesSubmitSucceeded: false,
+        stylesSubmitFailed: false,
+      };
+    case 'MUTATION_END':
+      return {
+        loading: false,
+        stylesSubmitSucceeded: true,
+        stylesSubmitFailed: false,
+      };
+    case 'MUTATION_FAILED':
+      return {
+        loading: false,
+        stylesSubmitSucceeded: false,
+        stylesSubmitFailed: true,
+      };
+    default:
+      throw new Error(`unknown action : ${action.type}`);
   }
-}
+};
+
+export const MapboxAdminConfig = (props: Props) => {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+
+  const onMutationStart = React.useCallback(() => {
+    dispatch({ type: 'MUTATION_START' });
+  }, []);
+  const onMutationEnd = React.useCallback(() => {
+    dispatch({ type: 'MUTATION_END' });
+  }, []);
+  const onMutationFailed = React.useCallback(() => {
+    dispatch({ type: 'MUTATION_FAILED' });
+  }, []);
+
+  const { loading, stylesSubmitFailed, stylesSubmitSucceeded } = state;
+  const {
+    mapToken: { styles, id },
+    invalid,
+    submitting,
+    handleSubmit,
+    submitFailed,
+    submitSucceeded,
+    valid,
+    error,
+  } = props;
+
+  const renderCustomStyles = () => (
+    <div>
+      <h3 className="d-ib">
+        <FormattedMessage id="style" />
+      </h3>
+      {(stylesSubmitSucceeded || stylesSubmitFailed) && (
+        <AlertForm
+          valid
+          invalid={false}
+          submitting={loading}
+          submitSucceeded={stylesSubmitSucceeded}
+          submitFailed={stylesSubmitFailed}
+        />
+      )}
+      <ListGroup>
+        {styles.map(style => (
+          <MapAdminStyleListItem
+            onMutationStart={onMutationStart}
+            onMutationEnd={onMutationEnd}
+            onMutationFailed={onMutationFailed}
+            disabled={loading}
+            key={style.id}
+            style={style}
+            mapTokenId={id}
+          />
+        ))}
+      </ListGroup>
+    </div>
+  );
+
+  return (
+    <form className="mapbox__config" onSubmit={handleSubmit}>
+      <TitleContainer>
+        <img src="/svg/mapbox_logo.svg" width={32} height={32} alt="Mapbox" />
+        <h3>Mapbox</h3>
+      </TitleContainer>
+      <p className="help-block sonata-ba-field-help">
+        <FormattedMessage id="desc-text-mapbox" />
+      </p>
+      <Field
+        name="publicToken"
+        component={component}
+        type="text"
+        id="token"
+        help={<FormattedHTMLMessage id="helptext-api-key" />}
+        label={<FormattedMessage id="public-api-key" />}
+      />
+      <div className="clearfix" />
+      <Field
+        name="secretToken"
+        component={component}
+        type="text"
+        id="token"
+        help={<FormattedHTMLMessage id="helptext-api-key" />}
+        label={<FormattedMessage id="secret-api-key" />}
+      />
+      <div className="clearfix" />
+      <Button
+        disabled={invalid || submitting}
+        type="submit"
+        bsStyle="primary"
+        className="mb-15"
+        id="user-admin-profile-save">
+        <SubmitButtonInner>
+          {submitting ? (
+            <Loader show inline size={20} color="white" />
+          ) : (
+            <FormattedMessage id="verify" />
+          )}
+        </SubmitButtonInner>
+      </Button>
+      <AlertForm
+        valid={valid}
+        invalid={false}
+        submitting={submitting}
+        submitSucceeded={submitSucceeded}
+        submitFailed={submitFailed}
+        errorMessage={error}
+      />
+      {styles && renderCustomStyles()}
+    </form>
+  );
+};
 
 const form = reduxForm({
   onSubmit,

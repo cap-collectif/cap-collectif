@@ -1,13 +1,7 @@
 // @flow
 const colors = {
   black: '#000000',
-  dark: '#212529',
-  defaultCustomColor: '#007c91',
   primaryColor: '#0388cc',
-  dangerColor: '#dc3545',
-  warningColor: '#f0ad4e',
-  successColor: '#088A20',
-  infoColor: '#1D8293',
   darkGray: '#707070',
   iconGrayColor: '#acacac',
   borderColor: '#e3e3e3',
@@ -37,26 +31,6 @@ const colors = {
     '#3b3eac',
   ],
   votes: ['#5cb85c', '#f0ad4e', '#d9534f'],
-};
-
-export const CardHeaderColors = {
-  gray: colors.borderColor,
-  white: colors.white,
-  green: '#d4edda',
-  blueDark: '#87c1ff',
-  blue: '#cce5ff',
-  orange: '#fff3cd',
-  red: '#f8d7da',
-  default: colors.pageBgc,
-};
-
-export const BsStyleColors = {
-  info: colors.infoColor,
-  primary: colors.defaultCustomColor,
-  success: colors.successColor,
-  warning: colors.warningColor,
-  danger: colors.dangerColor,
-  default: colors.darkGray,
 };
 
 export default colors;

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AlertFormSucceededMessage /> render correctly 1`] = `
+<div
+  className="alert__form_succeeded-message"
+>
+  <i
+    className="cap cap-android-checkmark-circle"
+  />
+   
+  <FormattedMessage
+    id="global.saved"
+    values={Object {}}
+  />
+</div>
+`;

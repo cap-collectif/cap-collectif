@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 import type { ProposalPreviewFooter_proposal } from './__generated__/ProposalPreviewFooter_proposal.graphql';
 import type { ProposalPreviewFooter_step } from './__generated__/ProposalPreviewFooter_step.graphql';
-import Card from '../../Ui/Card/Card';
 
 type Props = {
   proposal: ProposalPreviewFooter_proposal,
@@ -23,11 +23,17 @@ export class ProposalPreviewFooter extends React.Component<Props> {
       return null;
     }
 
+    const countersClasses = {};
+
+    if (showVotes && showComments) {
+      countersClasses.card__counters_multiple = true;
+    }
+
     return (
-      <Card.Counters>
+      <div className={`card__counters ${classNames(countersClasses)}`}>
         {showComments && (
-          <div className="card__counters__item card__counters__item--comments">
-            <div className="card__counters__value">{proposal.comments.totalCount}</div>
+          <div className="card__counter card__counter-comments">
+            <div className="card__counter__value">{proposal.comments.totalCount}</div>
             <div>
               <FormattedMessage
                 id="comment.count_no_nb"
@@ -39,8 +45,8 @@ export class ProposalPreviewFooter extends React.Component<Props> {
           </div>
         )}
         {showVotes && proposal.allVotesOnStep && (
-          <div className="card__counters__item card__counters__item--votes">
-            <div className="card__counters__value">{proposal.allVotesOnStep.totalCount}</div>
+          <div className="card__counter card__counter-votes">
+            <div className="card__counter__value">{proposal.allVotesOnStep.totalCount}</div>
             <div>
               <FormattedMessage
                 id="proposal.vote.count_no_nb"
@@ -51,7 +57,7 @@ export class ProposalPreviewFooter extends React.Component<Props> {
             </div>
           </div>
         )}
-      </Card.Counters>
+      </div>
     );
   }
 }

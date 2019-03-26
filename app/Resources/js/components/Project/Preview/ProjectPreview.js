@@ -5,7 +5,7 @@ import { Col } from 'react-bootstrap';
 import ProjectType from './ProjectType';
 import ProjectCover from './ProjectCover';
 import ProjectPreviewBody from './ProjectPreviewBody';
-import { Card } from '../../Ui/Card/Card';
+import { CardContainer } from '../../Ui/Card/CardContainer';
 import type { ProjectPreview_project } from './__generated__/ProjectPreview_project.graphql';
 
 type Props = {
@@ -19,14 +19,14 @@ export class ProjectPreview extends React.Component<Props> {
     const projectID = project.id ? `project-preview-${project.id}` : 'project-preview';
     return (
       <Col xs={12} sm={6} md={4} lg={3} className="d-flex">
-        <Card id={projectID} className="project-preview">
+        <CardContainer id={projectID} className="project-preview">
           {/* $FlowFixMe $fragmentRefs */}
           <ProjectType project={project} />
           {/* $FlowFixMe $fragmentRefs */}
           <ProjectCover project={project} />
           {/* $FlowFixMe $fragmentRefs */}
           <ProjectPreviewBody project={project} hasSecondTitle={hasSecondTitle} />
-        </Card>
+        </CardContainer>
       </Col>
     );
   }

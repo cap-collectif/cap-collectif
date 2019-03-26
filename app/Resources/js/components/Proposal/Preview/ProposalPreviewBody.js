@@ -14,8 +14,6 @@ import ProposalFollowButton from '../Follow/ProposalFollowButton';
 import type { ProposalPreviewBody_proposal } from './__generated__/ProposalPreviewBody_proposal.graphql';
 import type { ProposalPreviewBody_step } from './__generated__/ProposalPreviewBody_step.graphql';
 import type { ProposalPreviewBody_viewer } from './__generated__/ProposalPreviewBody_viewer.graphql';
-import Card from '../../Ui/Card/Card';
-import ProposalPreviewUser from './ProposalPreviewUser';
 
 type Props = {
   proposal: ProposalPreviewBody_proposal,
@@ -30,11 +28,8 @@ export class ProposalPreviewBody extends React.Component<Props> {
 
     const showThemes = true;
     return (
-      <Card.Body>
-        <div className="flex-1">
-          {/* $FlowFixMe */}
-          <ProposalPreviewUser proposal={proposal} />
-          <hr />
+      <div className="card__body">
+        <div className="card__body__infos">
           {proposal.trashed && proposal.trashedStatus === 'INVISIBLE' ? (
             <h4>
               <FormattedMessage id="proposal.show.trashed.contentDeleted" />
@@ -42,11 +37,11 @@ export class ProposalPreviewBody extends React.Component<Props> {
           ) : (
             <React.Fragment>
               <a href={proposal.url}>
-                <Card.Title tagName="h4">
+                <h4 className="card__title">
                   <Truncate lines={3}>{proposal.title}</Truncate>
-                </Card.Title>
+                </h4>
               </a>
-              <p className="excerpt small">{proposal.summaryOrBodyExcerpt}</p>
+              <div className="excerpt small">{proposal.summaryOrBodyExcerpt}</div>
             </React.Fragment>
           )}
           <TagsList>
@@ -97,7 +92,7 @@ export class ProposalPreviewBody extends React.Component<Props> {
               <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
             </div>
           )}
-      </Card.Body>
+      </div>
     );
   }
 }
@@ -135,7 +130,6 @@ export default createFragmentContainer(container, {
       category {
         name
       }
-      ...ProposalPreviewUser_proposal
       ...ProposalPreviewVote_proposal
         @arguments(isAuthenticated: $isAuthenticated)
         @skip(if: $isProfileView)

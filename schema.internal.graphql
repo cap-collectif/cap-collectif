@@ -5635,17 +5635,7 @@ interface Sourceable {
 type Status {
   id: ID!
   name: String!
-  color: StatusColor!
-}
-
-# Different status type
-enum StatusColor {
-  info
-  primary
-  success
-  warning
-  danger
-  default
+  color: String!
 }
 
 # A step inside a project.

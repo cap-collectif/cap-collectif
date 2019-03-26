@@ -1,12 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalPreviewFooter /> should render a footer with comments counters only 1`] = `
-<Counters>
+<div
+  className="card__counters "
+>
   <div
-    className="card__counters__item card__counters__item--comments"
+    className="card__counter card__counter-comments"
   >
     <div
-      className="card__counters__value"
+      className="card__counter__value"
     >
       3
     </div>
@@ -21,16 +23,18 @@ exports[`<ProposalPreviewFooter /> should render a footer with comments counters
       />
     </div>
   </div>
-</Counters>
+</div>
 `;
 
 exports[`<ProposalPreviewFooter /> should render a footer with votes and comments counters 1`] = `
-<Counters>
+<div
+  className="card__counters card__counters_multiple"
+>
   <div
-    className="card__counters__item card__counters__item--comments"
+    className="card__counter card__counter-comments"
   >
     <div
-      className="card__counters__value"
+      className="card__counter__value"
     >
       3
     </div>
@@ -46,10 +50,10 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes and comment
     </div>
   </div>
   <div
-    className="card__counters__item card__counters__item--votes"
+    className="card__counter card__counter-votes"
   >
     <div
-      className="card__counters__value"
+      className="card__counter__value"
     >
       42
     </div>
@@ -64,16 +68,18 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes and comment
       />
     </div>
   </div>
-</Counters>
+</div>
 `;
 
 exports[`<ProposalPreviewFooter /> should render a footer with votes counters only 1`] = `
-<Counters>
+<div
+  className="card__counters "
+>
   <div
-    className="card__counters__item card__counters__item--votes"
+    className="card__counter card__counter-votes"
   >
     <div
-      className="card__counters__value"
+      className="card__counter__value"
     >
       42
     </div>
@@ -88,7 +94,7 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes counters on
       />
     </div>
   </div>
-</Counters>
+</div>
 `;
 
 exports[`<ProposalPreviewFooter /> should render a footer without counters 1`] = `""`;
