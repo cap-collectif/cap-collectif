@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
+use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\SelectionRepository;
@@ -407,9 +408,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em->persist($proposal);
         $em->flush();
 
-        $this->container
-            ->get('Capco\AppBundle\Helper\RedisStorageHelper')
-            ->recomputeUserCounters($user);
+        $this->container->get(RedisStorageHelper::class)->recomputeUserCounters($user);
 
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);

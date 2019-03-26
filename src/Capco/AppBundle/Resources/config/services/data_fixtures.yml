@@ -1,9 +1,5 @@
 services:
-  alice.processor.media:
-    class: Capco\AppBundle\DataFixtures\Processor\MediaProcessor
-    tags: [{ name: hautelook_alice.alice.processor }]
-
-  alice.processor.ids:
-    class: Capco\AppBundle\DataFixtures\Processor\FixedIdsProcessor
+  _defaults:
+    autoconfigure: true
     autowire: true
-    tags: [{ name: hautelook_alice.alice.processor }]
+  Capco\AppBundle\DataFixtures\Processor\MediaProcessor: ~

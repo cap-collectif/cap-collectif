@@ -6,7 +6,7 @@ trait SynthesisStepsTrait
 {
     protected static $synthesis = [
         'projectSlug' => 'strategie-technologique-de-letat-et-services-publics',
-        'stepSlug' => 'synthese',
+        'stepSlug' => 'synthese-1',
     ];
 
     /**
@@ -30,7 +30,9 @@ trait SynthesisStepsTrait
      */
     public function iShouldSeeTheSynthesis()
     {
-        $synthesisSelector = $this->navigationContext->getPage('synthesis page')->getSynthesisViewSelector();
+        $synthesisSelector = $this->navigationContext
+            ->getPage('synthesis page')
+            ->getSynthesisViewSelector();
         $this->assertElementOnPage($synthesisSelector);
         $this->assertPageContainsText('Le problème constaté');
         $this->assertPageContainsText('Les causes');
@@ -50,7 +52,9 @@ trait SynthesisStepsTrait
      */
     public function iShouldSeeTheNewSynthesisElements()
     {
-        $elementsSelector = $this->navigationContext->getPage('synthesis edition page')->getElementsSelector();
+        $elementsSelector = $this->navigationContext
+            ->getPage('synthesis edition page')
+            ->getElementsSelector();
         $this->assertNumElements(7, $elementsSelector);
     }
 
@@ -68,7 +72,9 @@ trait SynthesisStepsTrait
      */
     public function iShouldSeeTheArchivedSynthesisElements(int $nb = 15)
     {
-        $elementsSelector = $this->navigationContext->getPage('synthesis edition page')->getElementsSelector();
+        $elementsSelector = $this->navigationContext
+            ->getPage('synthesis edition page')
+            ->getElementsSelector();
         $this->assertNumElements($nb, $elementsSelector);
     }
 
@@ -86,7 +92,9 @@ trait SynthesisStepsTrait
      */
     public function iShouldSeeThePublishedSynthesisElements()
     {
-        $elementsSelector = $this->navigationContext->getPage('synthesis edition page')->getElementsSelector();
+        $elementsSelector = $this->navigationContext
+            ->getPage('synthesis edition page')
+            ->getElementsSelector();
         $this->assertNumElements(15, $elementsSelector);
     }
 
@@ -104,7 +112,9 @@ trait SynthesisStepsTrait
      */
     public function iShouldSeeTheUnpublishedSynthesisElements(int $nb = 0)
     {
-        $elementsSelector = $this->navigationContext->getPage('synthesis edition page')->getElementsSelector();
+        $elementsSelector = $this->navigationContext
+            ->getPage('synthesis edition page')
+            ->getElementsSelector();
         $this->assertNumElements($nb, $elementsSelector);
         if (0 === $nb) {
             $this->assertPageContainsText('synthesis.edition.list.none');
@@ -125,7 +135,9 @@ trait SynthesisStepsTrait
      */
     public function iShouldSeeAllTheSynthesisElements()
     {
-        $elementsSelector = $this->navigationContext->getPage('synthesis edition page')->getElementsSelector();
+        $elementsSelector = $this->navigationContext
+            ->getPage('synthesis edition page')
+            ->getElementsSelector();
         $this->assertNumElements(15, $elementsSelector);
     }
 

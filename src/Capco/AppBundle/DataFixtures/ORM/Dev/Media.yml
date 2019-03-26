@@ -1,137 +1,157 @@
 Capco\MediaBundle\Entity\Media:
-  # projects
   MediaProject1:
     id: media1
-    providerReference: project-1.jpg
     binaryContent: project-1.jpg
-    name: Titre du média
+    providerName: sonata.media.provider.image
+    context: default
+    name: Titre du média 1
   MediaProject2:
     id: media2
-    providerReference: project-2.jpg
     binaryContent: project-2.jpg
+    providerName: sonata.media.provider.image
+    context: default
     name: Titre du média 2
   MediaProject3:
     id: media3
-    providerReference: project-3.jpg
     binaryContent: project-3.jpg
-    name: Titre du média 2
+    providerName: sonata.media.provider.image
+    context: default
+    name: Titre du média 3
   MediaProject4:
     id: media-project4
-    providerReference: project-4.jpg
     binaryContent: project-4.jpg
+    providerName: sonata.media.provider.image
+    context: default
     name: Titre du média 4
   MediaProjectImageVideo:
     id: media4
-    providerReference: project-image-video.jpg
     binaryContent: project-image-video.jpg
-    name: Titre du média 2
-  # projects
+    providerName: sonata.media.provider.image
+    context: default
+    name: Project image video
   MediaIdea1:
     id: media5
-    providerReference: idea-1.jpg
     binaryContent: idea-1.jpg
-    name: Titre du média
+    providerName: sonata.media.provider.image
+    context: default
+    name: Titre du média idée 1
   MediaIdea2:
     id: media6
-    providerReference: idea-2.jpg
     binaryContent: idea-2.jpg
-    name: Titre du média 2
-  # users
+    providerName: sonata.media.provider.image
+    context: default
+    name: Titre du média idée 2
   MediaUser1:
     id: media7
-    providerReference: sfavot.jpg
     binaryContent: user/sfavot.jpg
+    providerName: sonata.media.provider.image
+    context: default
     name: Suzanne Favot
   MediaUser2:
     id: media8
-    providerReference: lbrunet.jpg
     binaryContent: user/lbrunet.jpg
+    providerName: sonata.media.provider.image
+    context: default
     name: Laurent Brunet
   MediaUser3:
     id: media9
-    providerReference: xlacot.jpg
     binaryContent: user/xlacot.jpg
+    providerName: sonata.media.provider.image
+    context: default
     name: Xavier Lacot
   MediaUser4:
     id: media10
-    providerReference: spyl.jpg
     binaryContent: user/spyl.jpg
+    providerName: sonata.media.provider.image
+    context: default
     name: Spyl
   MediaUser5:
     id: media11
-    providerReference: welcomattic.jpg
     binaryContent: user/welcomattic.jpg
+    providerName: sonata.media.provider.image
+    context: default
     name: Welcomattic
-  #SiteImages
   Logo:
     id: media12
-    providerReference: logo.png
     binaryContent: logo.png
+    providerName: sonata.media.provider.image
+    context: default
     name: Logo
   header:
     id: media13
-    providerReference: header.jpg
     binaryContent: header.jpg
+    providerName: sonata.media.provider.image
+    context: default
     name: Header
   picto:
     id: media14
-    providerReference: picto.png
     binaryContent: picto.png
+    providerName: sonata.media.provider.image
+    context: default
     name: Picto
-  # Social Network
   MediaFlickr:
     id: media15
-    providerReference: flickr.png
     binaryContent: social/flickr.png
+    providerName: sonata.media.provider.image
+    context: default
     name: Flickr
   MediaFacebook:
     id: media16
-    providerReference: facebook.png
     binaryContent: social/facebook.png
+    providerName: sonata.media.provider.image
+    context: default
     name: Facebook
   MediaGooglePlus:
     id: media17
-    providerReference: google_plus.png
     binaryContent: social/google_plus.png
+    providerName: sonata.media.provider.image
+    context: default
     name: Google
   MediaLinkedIn:
     id: media18
-    providerReference: linkedIn.png
     binaryContent: social/linkedIn.png
+    providerName: sonata.media.provider.image
+    context: default
     name: LinkedIn
   MediaRSS:
     id: media19
-    providerReference: rss.png
     binaryContent: social/rss.png
+    providerName: sonata.media.provider.image
+    context: default
     name: RSS
   MediaTwitter:
     id: media20
-    providerReference: twitter.png
     binaryContent: social/twitter.png
+    providerName: sonata.media.provider.image
+    context: default
     name: Twitter
   MediaCapcoSite:
     id: media21
-    providerReference: capco.png
     binaryContent: social/capco.png
+    providerName: sonata.media.provider.image
+    context: default
     name: Capco
   MediaAvatar:
     id: media22
-    providerReference: default_avatar.jpg
     binaryContent: default_avatar.jpg
+    providerName: sonata.media.provider.image
+    context: default
     name: Avatar
   MediaVotesBar:
     id: media23
-    providerReference: votes_bar_image.png
     binaryContent: votes_bar_image.png
+    providerName: sonata.media.provider.image
+    context: default
     name: Image de la barre de votes
   MediaInstagram:
     id: media25
-    providerReference: instagram.png
     binaryContent: social/instagram.png
+    providerName: sonata.media.provider.image
+    context: default
     name: Instagram
-  # File
   MediaFilePdf:
     id: media24
-    providerReference: small_pdf.pdf
     binaryContent: small_pdf.pdf
     name: Small PDF
+    providerName: sonata.media.provider.file
+    context: default

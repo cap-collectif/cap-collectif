@@ -3,7 +3,6 @@ Capco\ClassificationBundle\Entity\Category:
     name: root
     enabled: true
     context: '@MediaContext1'
-
   MediaCategory2:
     name: sources
     enabled: true

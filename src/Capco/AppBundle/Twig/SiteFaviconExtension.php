@@ -23,7 +23,13 @@ class SiteFaviconExtension extends \Twig_Extension
 
     public function getSiteFavicons(): ?array
     {
-        $mediaFavicon = $this->repository->getSiteFavicon()->getMedia();
+        $mediaFavicon = $this->repository->getSiteFavicon();
+
+        if (!$mediaFavicon) {
+            return null;
+        }
+
+        $mediaFavicon = $mediaFavicon->getMedia();
 
         if (!$mediaFavicon) {
             return null;

@@ -149,3 +149,22 @@ services:
     autowire: true
     arguments:
       $exportDir: '%kernel.project_dir%/web/export/'
+
+  Capco\AppBundle\DataFixtures\ORM\CustomOrderFilesLocator:
+    arguments:
+      - '@hautelook_alice.locator.environmentless'
+
+  # Replaces the default file locator used
+  hautelook_alice.locator: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderFilesLocator'
+
+  # We re-declare the loader we want to override to give it a different name
+  capco.fidry_alice_data_fixtures.loader.simple:
+    class: Fidry\AliceDataFixtures\Loader\SimpleLoader
+    arguments:
+      - '@nelmio_alice.files_loader'
+
+  # We override the simple loader
+  fidry_alice_data_fixtures.loader.simple:
+    class: Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader
+    arguments:
+      - '@capco.fidry_alice_data_fixtures.loader.simple'

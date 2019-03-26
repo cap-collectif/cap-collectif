@@ -3,47 +3,77 @@ Capco\MediaBundle\Entity\Media:
   Logo:
     binaryContent: logo.png
     name: Logo
+    providerName: sonata.media.provider.image
+    context: default
   header:
     binaryContent: header_prod.jpg
     name: Header
+    providerName: sonata.media.provider.image
+    context: default
   picto:
     binaryContent: picto.png
     name: Picto
+    providerName: sonata.media.provider.image
+    context: default
   # Social Network
   MediaFlickr:
     binaryContent: social/flickr.png
     name: Flickr
+    providerName: sonata.media.provider.image
+    context: default
   MediaFacebook:
     binaryContent: social/facebook.png
     name: Facebook
+    providerName: sonata.media.provider.image
+    context: default
   MediaGooglePlus:
     binaryContent: social/google_plus.png
     name: Google
+    providerName: sonata.media.provider.image
+    context: default
   MediaLinkedIn:
     binaryContent: social/linkedIn.png
     name: LinkedIn
+    providerName: sonata.media.provider.image
+    context: default
   MediaRSS:
     binaryContent: social/rss.png
     name: RSS
+    providerName: sonata.media.provider.image
+    context: default
   MediaTwitter:
     binaryContent: social/twitter.png
     name: Twitter
+    providerName: sonata.media.provider.image
+    context: default
   MediaCapcoSite:
     binaryContent: social/capco.png
     name: Capco
+    providerName: sonata.media.provider.image
+    context: default
   MediaInstagram:
     binaryContent: social/instagram.png
     name: Instagram
+    providerName: sonata.media.provider.image
+    context: default
   MediaVotesBar:
     binaryContent: votes_bar_image.png
     name: Image de la barre de votes
+    providerName: sonata.media.provider.image
+    context: default
   # projects
   MediaProject1:
     binaryContent: project-1.jpg
     name: Titre du média
+    providerName: sonata.media.provider.image
+    context: default
   MediaProject2:
     binaryContent: project-2.jpg
     name: Titre du média
+    providerName: sonata.media.provider.image
+    context: default
   MediaProject3:
     binaryContent: project-3.jpg
     name: Titre du média
+    providerName: sonata.media.provider.image
+    context: default

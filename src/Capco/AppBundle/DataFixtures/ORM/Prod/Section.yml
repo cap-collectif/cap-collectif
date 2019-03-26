@@ -13,8 +13,7 @@ Capco\AppBundle\Entity\Section:
     title: La démarche
     position: 2
     teaser: null
-    body: |
-      <p>Introduisez ici votre démarche et vos objectifs.</p>
+    body: <stripslashes('\<p>Introduisez ici votre démarche et vos objectifs.</p>\')>
     nbObjects: null
     enabled: true
     associatedFeatures: []

@@ -1,9 +1,8 @@
 Capco\AppBundle\Entity\Event:
   event1:
-    id: event1
     title: Exemple d’événement
     enabled: true
-    body: <p> Ceci est le détail de l’événement</p>
+    body: <stripslashes('\<p> Ceci est le détail de l’événement</p>\')>
     startAt: <(new \DateTime('2030-01-01'))>
     author: '@user1'
     media: '@MediaProject3'

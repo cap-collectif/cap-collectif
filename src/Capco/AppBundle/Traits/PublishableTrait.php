@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;

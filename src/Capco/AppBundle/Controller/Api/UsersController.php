@@ -284,8 +284,10 @@ class UsersController extends FOSRestController
     private function updatePhone(Request $request)
     {
         $user = $this->getUser();
+        if (!$user || 'anon.' === $user) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
         $previousPhone = $user->getPhone();
-
         $form = $this->createForm(ApiProfileFormType::class, $user);
         $form->submit($request->request->all(), false);
 
@@ -308,6 +310,9 @@ class UsersController extends FOSRestController
     private function updateEmail(Request $request)
     {
         $user = $this->getUser();
+        if (!$user || 'anon.' === $user) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
         $newEmailToConfirm = $request->request->get('email');
         $password = $request->request->get('password');
         $toggleManager = $this->container->get(Manager::class);

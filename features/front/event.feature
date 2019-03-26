@@ -95,6 +95,7 @@ Scenario: Logged in user wants to comment an event
     | body        | J'ai un truc à dire |
   And I should not see "comment.with_my_account"
 
+@database
 Scenario: Anonymous wants to comment an event without email
   Given I visited eventpage with:
     | slug | event-with-registrations |

@@ -1,9 +1,9 @@
 Capco\AppBundle\Entity\Answer:
   answer1:
     title: Réponse du gouvernement
-    body: <p><text(300)></p>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     author: '@user4'
   answer2:
     title: Réponse du gouvernement à la modification
-    body: <p><text(300)></p>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     author: '@user4'

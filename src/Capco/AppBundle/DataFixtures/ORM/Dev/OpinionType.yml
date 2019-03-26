@@ -157,7 +157,7 @@ Capco\AppBundle\Entity\OpinionType:
     defaultFilter: votes
     isEnabled: true
     consultationStepType: '@typeCauses'
-  opinionType{17...27}:
+  opinionType{17..27}:
     id: opinionType<current()>
     title: Test<current()>
     position: 2

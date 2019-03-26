@@ -26,7 +26,7 @@ Scenario: GraphQL admin want to get all of the users who are contributors.
   {
     "data": {
       "allContributors": {
-        "totalCount": 82,
+        "totalCount": 84,
         "anonymousCount": 0,
         "edges": [
           {

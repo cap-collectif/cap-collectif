@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('now', '+10 days')>
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     opinionCount: 0
     votesCount: 10
     requirementsReason: Vous devez avoir un numéro de téléphone.
@@ -39,7 +39,7 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     title: Elaboration de la Loi
     label: Consultation
     isEnabled: true
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('+1 days', '+10 days')>
     opinionCount: 0

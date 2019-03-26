@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\Questionnaire:
   questionnaire1:
     id: questionnaire1
     title: Votre avis sur les JO 2024 à Paris
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@questionnairestep1'
     multipleRepliesAllowed: true
     anonymousAllowed: true
@@ -12,31 +12,31 @@ Capco\AppBundle\Entity\Questionnaire:
   questionnaire2:
     id: questionnaire2
     title: Questionnaire de test
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@questionnairestep2'
     multipleRepliesAllowed: false
     privateResult: false
   questionnaire3:
     id: questionnaire3
     title: Questionnaire dans une étape fermée
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@questionnairestep3'
     multipleRepliesAllowed: true
     privateResult: true
   questionnaire4:
     id: questionnaire4
     title: Questionnaire pour budget participatif
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaire5:
     id: questionnaire5
     title: Questionnaire pour budget participatif disponible
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaireWithJumps:
     id: questionnaireWithJumps
     title: El famoso questionnaire a branche
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@questionnairestepJump'
     multipleRepliesAllowed: true
     anonymousAllowed: true
@@ -45,27 +45,27 @@ Capco\AppBundle\Entity\Questionnaire:
   questionnaire6:
     id: questionnaire6
     title: Questionnaire pour budget participatif de la Force
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaire7:
     id: questionnaire7
     title: Consultation pour conquerir le monde
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaire8:
     id: questionnaire8
     title: Consultation pour la capcoBeer
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaire9:
     id: questionnaire9
     title: Consultation pour la FLNJ
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaireWithJumps2:
     id: questionnaireWithJumps2
     title: Questionnaire saut conditionnel (tous les champs)
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@questionnairestepJump2'
     multipleRepliesAllowed: true
     anonymousAllowed: true
@@ -74,7 +74,7 @@ Capco\AppBundle\Entity\Questionnaire:
   questionnaire10:
     id: questionnaire10
     title: Questionnaire non rattaché
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     multipleRepliesAllowed: true
     anonymousAllowed: true
     acknowledgeReplies: true

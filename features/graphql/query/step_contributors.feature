@@ -156,7 +156,7 @@ Scenario: GraphQL client want to get the list of contributors of a selectionStep
     "data": {
       "selectionStep": {
         "contributors": {
-          "totalCount": 46,
+          "totalCount": 47,
           "pageInfo": {
             "hasNextPage": true,
             "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="

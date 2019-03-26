@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     user: '@user4'
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
-  proposalSelectionVote{4...50}:
+  proposalSelectionVote{4..50}:
     id (unique): '<numberBetween(1001, 1050)>'
     proposal: '@proposal3'
     selectionStep: '@selectionstep1'
@@ -55,7 +55,6 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     selectionStep: '@selectionstep8'
     user: '@user4'
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    published: false
   questionSelectionVote56:
     id: 1057
     proposal: '@question1'

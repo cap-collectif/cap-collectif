@@ -56,7 +56,6 @@ Capco\UserBundle\Entity\User:
     email: admin@test.com
     userType: '@UserType1'
     plainPassword: admin
-    media: null
     roles:
       - 'ROLE_ADMIN'
     vip: true
@@ -73,7 +72,6 @@ Capco\UserBundle\Entity\User:
     email: admin@cap-collectif.com
     userType: '@UserType1'
     plainPassword: admin
-    media: null
     roles:
       - 'ROLE_ADMIN'
     vip: true
@@ -113,19 +111,19 @@ Capco\UserBundle\Entity\User:
     firstname: toto
     lastname: toto
     email: drupal@gmail.com
-    password: $S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU
+    password: <htmlentities('$S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU')>
     enabled: true
     createdAt: <(new \DateTime('2015-01-01'))>
 
   user{6..200}:
     id: 'user<current()>'
     username: user<current()>
-    email: user<current()>@cap-collectif.com
+    email: <htmlentities('user')><current()><htmlentities('@cap-collectif.com')>
     firstname: firstname<current()>
     lastname: lastname<current()>
     userType: '@UserType1'
     salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
-    password: $2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe
+    password: <htmlentities('$2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe')>
     roles:
       - 'ROLE_USER'
     enabled: true
@@ -317,14 +315,14 @@ Capco\UserBundle\Entity\User:
     username: mauriau
     firstname: Maxime
     lastname: AURIAU
-    email: maxime.auriau@cap-collectif.com
+    email: 'maxime.auriau@cap-collectif.com'
     userType: '@UserType1'
     plainPassword: toto
     roles:
       - 'ROLE_SUPER_ADMIN'
     media: '@MediaUser5'
     vip: true
-    emailConfirmationSentAt: '2018-06-06 13:37:00'
+    emailConfirmationSentAt: <(new \DateTime('2018-06-06 13:37:00'))>
     enabled: true
     phoneConfirmed: true
     createdAt: <(new \DateTime('2015-01-01'))>
@@ -374,6 +372,6 @@ Capco\UserBundle\Entity\User:
     media: '@MediaUser1'
     biography: Yrf pungf qbzvarebag ovragbg yr zbaqr.
     vip: true
-    emailConfirmationSentAt: '2018-09-05 17:14:00'
+    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
     enabled: true
     createdAt: <(new \DateTime('2015-01-01'))>

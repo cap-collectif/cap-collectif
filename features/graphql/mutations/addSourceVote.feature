@@ -30,7 +30,7 @@ Scenario: Logged in API client wants to vote for a comment
     "data":{
       "addSourceVote":{
         "voteEdge":{
-          "node":{"id":"50212","published":true}
+          "node":{"id":"50267","published":true}
         }
       }
     }

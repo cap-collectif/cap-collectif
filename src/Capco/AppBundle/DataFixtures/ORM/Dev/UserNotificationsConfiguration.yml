@@ -1,4 +1,5 @@
 Capco\AppBundle\Entity\UserNotificationsConfiguration:
   allDisabledUserNotifications:
+    id: 'allDisabledUserNotifications'
     onProposalCommentMail: false
     unsubscribeToken: ***REMOVED***

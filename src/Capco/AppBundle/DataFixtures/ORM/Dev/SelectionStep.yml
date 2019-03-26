@@ -6,9 +6,9 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('now', '+40 days')>
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 1
-    votesHelpText: <p><text(100)></p>
+    votesHelpText: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
   selectionstep2:
     id: selectionstep2
     title: Vainqueur
@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     isEnabled: true
     startAt: <dateTimeBetween('-10 days', '-8 days')>
     endAt: <dateTimeBetween('+2 days', '+10 days')>
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 0
   selectionstep3:
     id: selectionstep3
@@ -25,7 +25,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     isEnabled: true
     startAt: <dateTimeBetween('-10 days', '-5 days')>
     endAt: <dateTimeBetween('-4 days', '-1 days')>
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 1
   selectionstep4:
     id: selectionstep4
@@ -34,9 +34,9 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('now', '+40 days')>
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 2
-    votesHelpText: <p><text(100)></p>
+    votesHelpText: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     budget: 3000000
   selectionstep5:
     id: selectionstep5
@@ -45,9 +45,9 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('now', '+40 days')>
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 1
-    votesHelpText: <p><text(100)></p>
+    votesHelpText: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
   selectionstep6:
     id: selectionstep6
     title: Sélection à venir
@@ -55,7 +55,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     isEnabled: true
     startAt: <dateTimeBetween('+1 days', '+10 days')>
     endAt: <dateTimeBetween('+11 days', '+20 days')>
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 1
   selectionstep7:
     id: selectionstep7
@@ -64,7 +64,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     isEnabled: true
     allowingProgressSteps: true
     startAt: <dateTimeBetween('+1 days', '+10 days')>
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 0
   selectionstep8:
     id: selectionstep8
@@ -73,14 +73,14 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     isEnabled: true
     startAt: <dateTimeBetween('-10 days', '-5 days')>
     endAt: <dateTimeBetween('+11 days', '+20 days')>
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 2
     votesLimit: 1
   selectionstepVoteClassement:
     id: selectionstepVoteClassement
     title: Selection avec vote classement limité
     label: Selection avec vote classement limité
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
     endAt: <dateTimeBetween('+28 days', '+50 days')>
     voteType: 1
@@ -91,7 +91,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     id: selectionQuestionStepVoteClassement
     title: Selection de questions avec vote classement limité
     label: Selection de questions avec vote classement limité
-    body: <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
     endAt: <dateTimeBetween('+28 days', '+50 days')>
     voteType: 1

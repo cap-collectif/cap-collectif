@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\ProposalCollectVote:
-  proposalCollectVote{1...50}:
+  proposalCollectVote{1..50}:
     id (unique): '<numberBetween(2000, 2050)>'
     proposal: '@proposal14'
     collectStep: '@collectstep5'

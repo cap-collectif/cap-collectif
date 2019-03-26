@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform1:
     id: proposalForm1
     title: Collecte des propositions pour le budget 2016 de la Ville de Rennes
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectstep1'
     notificationsConfiguration: '@proposalFormNotificationConfiguration1'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -83,7 +83,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalFormVote:
     id: proposalFormVote
     title: Collecte des propositions de vote pour le budget 2016 de la Ville de Rennes
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectStepWithVote'
     notificationsConfiguration: '@proposalFormNotificationConfiguration9'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -116,7 +116,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform9:
     id: proposalForm9
     title: Collecte des propositions pour le budget 2018 de la Ville de La Force
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectstep9'
     notificationsConfiguration: '@proposalFormNotificationConfiguration11'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -145,7 +145,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform10:
     id: proposalform10
     title: Qui ? Quoi ? Comment conquerir le monde ?
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectstep10'
     notificationsConfiguration: '@proposalFormNotificationConfiguration12'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -169,7 +169,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform11:
     id: proposalform11
     title: CapcoBeer ?
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectstep11'
     notificationsConfiguration: '@proposalFormNotificationConfiguration13'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -194,7 +194,7 @@ Capco\AppBundle\Entity\ProposalForm:
     id: proposalform12
     title: Collect des propositions
     slug: collect-des-propositions
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectstep12'
     notificationsConfiguration: '@proposalFormNotificationConfiguration14'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -218,7 +218,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform13:
     id: proposalform13
     title: Formulaire attaché à aucun projet
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     titleHelpText: Choisissez un titre pour votre proposition
     themeHelpText: Sélectionnez un thème
     districtHelpText: Sélectionnez une zone géographique
@@ -239,7 +239,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform14:
     id: proposalForm14
     title: Poser une question
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectQuestionVoteAvecClassement'
     notificationsConfiguration: '@proposalFormNotificationConfiguration15'
     titleHelpText: Choisissez un titre pour votre question
@@ -265,7 +265,7 @@ Capco\AppBundle\Entity\ProposalForm:
     id: proposalform15
     step: '@collectstepWithQuestions'
     title: Formulaire attaché à une étape de collecte avec questions
-    description: <p><text(100)></p>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     titleHelpText: Choisissez un titre pour votre proposition
     themeHelpText: Sélectionnez un thème
     districtHelpText: Sélectionnez une zone géographique

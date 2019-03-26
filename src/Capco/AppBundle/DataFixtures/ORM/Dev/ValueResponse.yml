@@ -132,23 +132,23 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@multiplequestion5'
     value: 'Sangohan'
     user: '@user666'
-  reply{32...40}:
+  reply{32..40}:
     question: '@simplequestion2'
     reply: '@reply1'
-    value: <p><text(100)></p>
-  reply{41...50}:
+    value: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
+  reply{41..50}:
     question: '@multiplequestion1'
     reply: '@reply1'
     value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': null }
-  reply{51...60}:
+  reply{51..60}:
     question: '@multiplequestion1'
     reply: '@reply2'
     value: { 'labels': ['Natation', 'Sports collectifs'], 'other': null }
-  response{61...70}:
+  response{61..70}:
     question: '@multiplequestion1'
     reply: '@reply6'
     value: { 'labels': ['Response of user not confirmed'], 'other': null }
-  response{71...80}:
+  response{71..80}:
     question: '@multiplequestion1'
     reply: '@reply7'
     value: { 'labels': ['Response of user not confirmed', 'Sports collectifs'], 'other': null }

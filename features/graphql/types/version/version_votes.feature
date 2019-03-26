@@ -39,7 +39,7 @@ Scenario: Anonymous wants to get votes for an version
     "data": {
       "version": {
         "votes": {
-          "totalCount": 49,
+          "totalCount": 50,
           "pageInfo": {
             "hasNextPage": true
           },

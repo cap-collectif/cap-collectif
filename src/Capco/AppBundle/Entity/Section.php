@@ -368,6 +368,13 @@ class Section
         return $this;
     }
 
+    public function setType($type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
     // ************************* Custom methods ***********************************
 
     public function isCustom()

@@ -1,9 +1,7 @@
 Capco\AppBundle\Entity\Reporting:
   reporting2:
     id: 2
-    body: |
-      <p><text(100)></p>
-      <p><text(300)></p>
+    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p><p>\')><text(300)><stripslashes('\</p>\')>
     Reporter: '@user100'
     proposal: '@proposal1'
     status: 2
@@ -11,9 +9,7 @@ Capco\AppBundle\Entity\Reporting:
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
   reporting3:
     id: 3
-    body: |
-      <p><text(100)></p>
-      <p><text(300)></p>
+    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p><p>\')><text(300)><stripslashes('\</p>\')>
     Reporter: '@user100'
     Source: '@source1'
     status: 2
@@ -21,9 +17,7 @@ Capco\AppBundle\Entity\Reporting:
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
   reporting4:
     id: 4
-    body: |
-      <p><text(100)></p>
-      <p><text(300)></p>
+    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p><p>\')><text(300)><stripslashes('\</p>\')>
     Reporter: '@user100'
     opinionVersion: '@version1'
     status: 2
@@ -31,9 +25,7 @@ Capco\AppBundle\Entity\Reporting:
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
   reporting5:
     id: 5
-    body: |
-      <p><text(100)></p>
-      <p><text(300)></p>
+    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p><p>\')><text(300)><stripslashes('\</p>\')>
     Reporter: '@user100'
     Argument: '@argument1'
     status: 2
@@ -41,9 +33,7 @@ Capco\AppBundle\Entity\Reporting:
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
   reporting6:
     id: 6
-    body: |
-      <p><text(100)></p>
-      <p><text(300)></p>
+    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p><p>\')><text(300)><stripslashes('\</p>\')>
     Reporter: '@user100'
     Comment: '@evComment1'
     status: 2

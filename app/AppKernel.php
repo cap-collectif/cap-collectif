@@ -23,9 +23,13 @@ class AppKernel extends Kernel
             // Doctrine candies
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Hautelook\AliceBundle\HautelookAliceBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
             // Doctrine migrations
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            // if loaded in dev, the data fixtures import crashed
+            new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle(),
+            new Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle(),
+            new Hautelook\AliceBundle\HautelookAliceBundle(),
             // sonata admin
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
@@ -41,10 +45,10 @@ class AppKernel extends Kernel
             new \Http\HttplugBundle\HttplugBundle(),
             // oauth user
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new Sonata\ClassificationBundle\SonataClassificationBundle(),
+
             // sonata media
             new Sonata\MediaBundle\SonataMediaBundle(),
-            new Sonata\ClassificationBundle\SonataClassificationBundle(),
-            new Liip\ImagineBundle\LiipImagineBundle(),
             // Prometheus
             new TweedeGolf\PrometheusBundle\TweedeGolfPrometheusBundle(),
             // project bundles

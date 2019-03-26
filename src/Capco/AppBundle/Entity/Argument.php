@@ -126,6 +126,14 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         return $this->createdAt;
     }
 
+    /** for the upgrade of alice fixture bundle */
+    public function setCreatedAt(?\DateTime $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
     public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;

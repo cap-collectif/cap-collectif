@@ -29,6 +29,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
         $responses = $object->getResponses();
         foreach ($questions as $qaq) {
             $question = $qaq->getQuestion();
+
             if ($question->isRequired() && !$this->hasResponseForQuestion($question, $responses)) {
                 $this->context
                     ->buildViolation($constraint->message)

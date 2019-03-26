@@ -37,7 +37,7 @@ Scenario: Moderator wants to moderate and hide a version via email link
 @database
 Scenario: Moderator wants to moderate a version via email link
   Given I go to "/moderate/version1ModerationToken/reason/moderation-guideline-violation"
-  Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-1"
+  Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-1"
   And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
 
 @database

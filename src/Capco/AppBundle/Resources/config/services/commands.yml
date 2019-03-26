@@ -14,3 +14,11 @@ services:
   Capco\AppBundle\Command\GenerateMapProviderPublicToken:
     arguments:
       $mapboxSecretKey: '%mapbox_secret_key%'
+
+  Capco\AppBundle\Command\ReinitCommand:
+    arguments:
+      $name: 'capco:reinit'
+
+  Capco\AppBundle\Command\LoadProdDataCommand:
+    arguments:
+      $name: 'capco:load-prod-data'

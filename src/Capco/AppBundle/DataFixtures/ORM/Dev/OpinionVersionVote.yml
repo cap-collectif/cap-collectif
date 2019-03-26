@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\OpinionVersionVote:
-  opinionVersionVote{1...50}:
+  opinionVersionVote{1..50}:
     opinionVersion: '@version2'
     value: <numberBetween(-1, 1)>
     user: '@user<current()>'

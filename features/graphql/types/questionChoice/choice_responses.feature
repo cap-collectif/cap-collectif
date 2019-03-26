@@ -44,19 +44,19 @@ Scenario: GraphQL client wants question's choices and the number of answers to e
                   {
                      "title":"Athl\u00e9tisme",
                      "responses":{
-                        "totalCount":10
+                        "totalCount":11
                      }
                   },
                   {
                      "title":"Natation",
                      "responses":{
-                        "totalCount":10
+                        "totalCount":11
                      }
                   },
                   {
                      "title":"Sports collectifs",
                      "responses":{
-                        "totalCount":20
+                        "totalCount":22
                      }
                   },
                   {

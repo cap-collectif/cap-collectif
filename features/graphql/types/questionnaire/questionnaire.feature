@@ -68,87 +68,9 @@ Scenario: GraphQL client wants to retrieve replies
                "responses":[
                   {
                      "question":{
-                        "id":"UXVlc3Rpb246Mg=="
+                        "id":"UXVlc3Rpb246MTk="
                      },
-                     "value":"Youpi ! J\u0027adore des JO"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTM="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTQ="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Maxime Arrouard\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTM="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTM="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTM="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTM="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTM="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTM="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTM="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTM="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTM="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTU="
-                     },
-                     "value":"Assez fort (Mon sonotone est mal r\u00e9gl\u00e9)"
-                  },
-                  {
-                     "question":{
-                        "id":"UXVlc3Rpb246MTg="
-                     },
-                     "value":"{\u0022labels\u0022:[\u0022Logo 1\u0022],\u0022other\u0022:null}"
+                     "value":"{\u0022labels\u0022:[\u0022Il bluffe\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
@@ -158,9 +80,93 @@ Scenario: GraphQL client wants to retrieve replies
                   },
                   {
                      "question":{
-                        "id":"UXVlc3Rpb246MTk="
+                        "id":"UXVlc3Rpb246MTg="
                      },
-                     "value":"{\u0022labels\u0022:[\u0022Il bluffe\u0022],\u0022other\u0022:null}"
+                     "value":"{\u0022labels\u0022:[\u0022Logo 1\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTU="
+                     },
+                     "value":"Assez fort (Mon sonotone est mal r\u00e9gl\u00e9)"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTM="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTM="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTM="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTM="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTM="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTM="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTM="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTM="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTM="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTM="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTM="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246Mg=="
+                     },
+                     "value":"Youpi ! J\u0027adore des JO"
+                  },
+                  {
+                     "question":{
+                        "id":"UXVlc3Rpb246MTQ="
+                     },
+                     "value":"{\u0022labels\u0022:[\u0022Maxime Arrouard\u0022],\u0022other\u0022:null}"
                   },
                   {
                      "question":{
@@ -449,56 +455,61 @@ Scenario: GraphQL client wants to get question's responses
                "title":"\u00cates-vous satisfait que la ville de Paris soit candidate \u00e0 l\u0027organisation des JO de 2024 ?",
                "description":null,
                "responses":{
-                  "totalCount":10,
+                  "totalCount":11,
                   "edges":[
                      {
                         "node":{
-                           "value":"Trop bien ! On va voir de supers athl\u00e8tes \u00e0 Paris !"
+                           "value":@string@
                         }
                      },
                      {
                         "node":{
-                           "value":"Youpi ! J\u0027adore des JO"
+                           "value":@string@
                         }
                      },
                      {
                         "node":{
-                           "value": @string@
+                            "value": @string@
                         }
                      },
                      {
                         "node":{
-                           "value": @string@
+                            "value": @string@
                         }
                      },
                      {
                         "node":{
-                           "value": @string@
+                            "value": @string@
                         }
                      },
                      {
                         "node":{
-                           "value": @string@
+                            "value": @string@
                         }
                      },
                      {
                         "node":{
-                           "value": @string@
+                            "value": @string@
                         }
                      },
                      {
                         "node":{
-                           "value": @string@
+                            "value": @string@
                         }
                      },
                      {
                         "node":{
-                           "value": @string@
+                            "value": @string@
                         }
                      },
                      {
                         "node":{
-                           "value": @string@
+                            "value": @string@
+                        }
+                     },
+                     {
+                        "node":{
+                            "value": @string@
                         }
                      }
                   ]
@@ -508,7 +519,7 @@ Scenario: GraphQL client wants to get question's responses
                "id":"UXVlc3Rpb246MTM=",
                "title":"Pour quel type d\u0027\u00e9preuve \u00eates vous pr\u00eat \u00e0 acheter des places ?",
                "responses":{
-                  "totalCount":20,
+                  "totalCount":22,
                   "edges":[
                      {
                         "node":{
@@ -558,6 +569,16 @@ Scenario: GraphQL client wants to get question's responses
                      {
                         "node":{
                            "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                         }
                      },
                      {
@@ -762,11 +783,56 @@ Scenario: GraphQL client wants to get question's responses
                "title":"\u00cates-vous satisfait que la ville de Paris soit candidate \u00e0 l\u0027organisation des JO de 2024 ?",
                "description":null,
                "responses":{
-                  "totalCount":11,
+                  "totalCount":12,
                   "edges":[
                      {
                         "node":{
-                           "value":"Trop bien ! On va voir de supers athl\u00e8tes \u00e0 Paris !"
+                           "value":"Trop cool ! On va voir Tibo qui cours en slip !"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":@string@
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":@string@
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":@string@
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":@string@
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":@string@
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":@string@
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":@string@
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":@string@
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":@string@
                         }
                      },
                      {
@@ -776,47 +842,7 @@ Scenario: GraphQL client wants to get question's responses
                      },
                      {
                         "node":{
-                           "value":"\u003Cp\u003EExpedita mollitia illo eum et odit qui aut. Quia laboriosam ut accusantium.\u003C\/p\u003E"
-                        }
-                     },
-                     {
-                        "node":{
-                           "value":"\u003Cp\u003EQuo assumenda eos ut ipsa voluptatibus ut aut. Illo perferendis qui et ipsum voluptas optio.\u003C\/p\u003E"
-                        }
-                     },
-                     {
-                        "node":{
-                           "value":"\u003Cp\u003EQui quia autem deleniti. Quia culpa accusamus ex. Ea hic inventore dolores qui similique est cum.\u003C\/p\u003E"
-                        }
-                     },
-                     {
-                        "node":{
-                           "value":"\u003Cp\u003EDolore inventore nam illum ut et. Id aut architecto et et. Vel earum voluptas et expedita.\u003C\/p\u003E"
-                        }
-                     },
-                     {
-                        "node":{
-                           "value":"\u003Cp\u003EUllam quia nisi quam est. Dolor in a ducimus.\u003C\/p\u003E"
-                        }
-                     },
-                     {
-                        "node":{
-                           "value":"\u003Cp\u003EItaque inventore a sed est eligendi quidem aut. Rem id aut et hic deserunt est qui.\u003C\/p\u003E"
-                        }
-                     },
-                     {
-                        "node":{
-                           "value":"\u003Cp\u003EQui dolores perferendis expedita non. Harum enim itaque illum commodi sapiente.\u003C\/p\u003E"
-                        }
-                     },
-                     {
-                        "node":{
-                           "value":"\u003Cp\u003EAtque distinctio dicta placeat corrupti in ex totam. Iure ipsum dolor cumque ut.\u003C\/p\u003E"
-                        }
-                     },
-                     {
-                        "node":{
-                           "value":"Trop cool ! On va voir Tibo qui cours en slip !"
+                           "value":"Trop bien ! On va voir de supers athl\u00e8tes \u00e0 Paris !"
                         }
                      }
                   ]
@@ -826,7 +852,7 @@ Scenario: GraphQL client wants to get question's responses
                "id":"UXVlc3Rpb246MTM=",
                "title":"Pour quel type d\u0027\u00e9preuve \u00eates vous pr\u00eat \u00e0 acheter des places ?",
                "responses":{
-                  "totalCount":38,
+                  "totalCount":42,
                   "edges":[
                      {
                         "node":{
@@ -880,6 +906,16 @@ Scenario: GraphQL client wants to get question's responses
                      },
                      {
                         "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Athl\u00e9tisme\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
                            "value":"{\u0022labels\u0022:[\u0022Natation\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                         }
                      },
@@ -971,6 +1007,16 @@ Scenario: GraphQL client wants to get question's responses
                      {
                         "node":{
                            "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022],\u0022other\u0022:null}"
+                        }
+                     },
+                     {
+                        "node":{
+                           "value":"{\u0022labels\u0022:[\u0022Response of user not confirmed\u0022,\u0022Sports collectifs\u0022],\u0022other\u0022:null}"
                         }
                      },
                      {
@@ -1043,12 +1089,12 @@ Scenario: GraphQL client wants to get question's responses
                   "edges":[
                      {
                         "node":{
-                           "value":"Assez fort (Mon sonotone est mal r\u00e9gl\u00e9)"
+                           "value":"Pas assez fort (Mon sonotone est en panne)"
                         }
                      },
                      {
                         "node":{
-                           "value":"Pas assez fort (Mon sonotone est en panne)"
+                           "value":"Assez fort (Mon sonotone est mal r\u00e9gl\u00e9)"
                         }
                      }
                   ]
@@ -1086,12 +1132,12 @@ Scenario: GraphQL client wants to get question's responses
                   "edges":[
                      {
                         "node":{
-                           "value":"{\u0022labels\u0022:[\u0022Oui\u0022],\u0022other\u0022:null}"
+                           "value":"{\u0022labels\u0022:[\u0022Il bluffe\u0022],\u0022other\u0022:null}"
                         }
                      },
                      {
                         "node":{
-                           "value":"{\u0022labels\u0022:[\u0022Il bluffe\u0022],\u0022other\u0022:null}"
+                           "value":"{\u0022labels\u0022:[\u0022Oui\u0022],\u0022other\u0022:null}"
                         }
                      }
                   ]

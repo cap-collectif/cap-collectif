@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion2'
     type: 0
     Author: '@user4'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
@@ -26,7 +26,7 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion2'
     type: 0
     Author: '@user4'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     publishedAt: <(new \DateTime('2015-01-01'))>
     trashedStatus: 'invisible'
     trashedAt: <(new \DateTime('2017-03-01'))>
@@ -37,7 +37,7 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion3'
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>`
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>`
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
@@ -47,7 +47,7 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion3'
     type: 0
     Author: '@user_not_confirmed_with_contributions'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
 
@@ -56,7 +56,7 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion3'
     type: 1
     Author: '@user_not_confirmed_with_contributions'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
 
@@ -65,7 +65,7 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion<numberBetween(4, 50)>'
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
@@ -79,7 +79,7 @@ Capco\AppBundle\Entity\Argument:
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     trashedStatus: 'invisible'
 
   argument{176..200}:
@@ -90,14 +90,14 @@ Capco\AppBundle\Entity\Argument:
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
 
   argument201:
     id: 'argument201'
     Opinion: '@opinion51'
     type: 0
     Author: '@user1'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
@@ -107,7 +107,7 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion51'
     type: 0
     Author: '@user2'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
@@ -117,7 +117,7 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion52'
     type: 0
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
@@ -128,7 +128,7 @@ Capco\AppBundle\Entity\Argument:
     opinionVersion: '@version1'
     type: 0
     Author: '@user5'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
@@ -137,7 +137,7 @@ Capco\AppBundle\Entity\Argument:
     opinionVersion: '@version1'
     type: 1
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
@@ -182,7 +182,7 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion57'
     type: 1
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2017-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
@@ -192,7 +192,7 @@ Capco\AppBundle\Entity\Argument:
     opinionVersion: '@version1'
     type: 1
     Author: '@user1'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2017-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
@@ -205,14 +205,14 @@ Capco\AppBundle\Entity\Argument:
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2017-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
 
   argument{213..250}:
     id: 'argument<current()>'
     Opinion: '@opinion69'
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
+    body: <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2017-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>

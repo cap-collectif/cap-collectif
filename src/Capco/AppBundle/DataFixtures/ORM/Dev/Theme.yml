@@ -5,13 +5,9 @@ Capco\AppBundle\Entity\Theme:
     teaser: <sentence(3)>
     isEnabled: true
     position: 1
+    media: null
     status: 0
-    body: |
-      <p>Mise en place du thème <strong>immobilier</strong></p>
-      <p><text(1000)></p>
-      <h3>un thème pas comme les autres</h3>
-      <p><text(500)></p>
-    Author: '@user4'
+    body: <stripslashes('\<p>Mise en place du thème <strong>immobilier</strong></p>\')>
   theme2:
     id: theme2
     title: Justice
@@ -19,12 +15,7 @@ Capco\AppBundle\Entity\Theme:
     isEnabled: true
     position: 2
     status: 1
-    body: |
-      <p>Mise en place du thème <strong>justice</strong></p>
-      <p><text(1000)></p>
-      <h3>un thème important</h3>
-      <p><text(500)></p>
-    Author: '@user4'
+    body: <stripslashes('\<p>Mise en place du thème <strong>justice</strong></p><p>\')><text(1000)><stripslashes('\</p>\')>
     media: '@MediaProject1'
   theme3:
     id: theme3
@@ -33,20 +24,14 @@ Capco\AppBundle\Entity\Theme:
     isEnabled: true
     position: 3
     status: 2
-    body: |
-      <p>Mise en place du thème <strong>transport</strong></p>
-      <p><text(100)></p>
-      <h3>un troisième thème pratique</h3>
-      <p><text(500)></p>
-    Author: '@user4'
+    body: <stripslashes('\<p>Mise en place du thème <strong>transport</strong></p><p>\')><text(100)><stripslashes('\</p>\')><stripslashes('\<h3>un troisième thème pratique</h3><p>\')><text(500)><stripslashes('\</p>\')>
     media: '@MediaProject2'
   theme4:
     id: theme4
     title: Thème vide
     teaser: <sentence(3)>
     isEnabled: true
+    media: null
     position: 5
     status: 2
-    body: |
-      <p><text(500)></p>
-    Author: '@user4'
+    body: <stripslashes('\<p>\')><text(500)><stripslashes('\</p>\')>

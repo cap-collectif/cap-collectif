@@ -3,6 +3,10 @@
 namespace Capco\AppBundle\Behat\Traits;
 
 use Behat\Gherkin\Node\TableNode;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\UserBundle\Entity\User;
 use FilesystemIterator;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PHPUnit\Framework\Assert;
@@ -96,7 +100,7 @@ trait ProposalStepsTrait
     ];
     protected static $proposalNotNotifiable = [
         'projectSlug' => 'budget-avec-vote-limite',
-        'stepSlug' => 'collecte-avec-vote-simple-limite',
+        'stepSlug' => 'collecte-avec-vote-simple-limite-1',
         'proposalSlug' => 'proposition-17',
     ];
     protected static $proposalWithBudgetVoteParams = [
@@ -1112,13 +1116,12 @@ trait ProposalStepsTrait
         string $proposalId,
         string $stepSlug
     ) {
-        $user = $this->getRepository('CapcoUserBundle:User')->findOneBySlug($userSlug);
-        $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
-        $step = $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->findOneBySlug(
-            $stepSlug
-        );
+        $user = $this->getRepository(User::class)->findOneBySlug($userSlug);
+        $proposal = $this->getRepository(Proposal::class)->find($proposalId);
+        $step = $this->getRepository(SelectionStep::class)->findOneBySlug($stepSlug);
+
         Assert::assertNotNull(
-            $this->getRepository('CapcoAppBundle:ProposalSelectionVote')->findOneBy([
+            $this->getRepository(ProposalSelectionVote::class)->findOneBy([
                 'user' => $user,
                 'proposal' => $proposal,
                 'selectionStep' => $step,

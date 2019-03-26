@@ -32,7 +32,7 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameter8:
     keyname: footer.text.body
     category: pages.footer
-    value: Ce site participatif a été réalisé grâce à la plateforme innovante de participation <a href="http://www.cap-collectif.com">Cap Collectif</a>, selon les principes de la <a href="http://fr.wikipedia.org/wiki/Gouvernement_ouvert">démocratie ouverte</a>.
+    value: <stripslashes('\Ce site participatif a été réalisé grâce à la plateforme innovante de participation <a href="http://www.cap-collectif.com">Cap Collectif</a>, selon les principes de la <a href="http://fr.wikipedia.org/wiki/Gouvernement_ouvert">démocratie ouverte</a>.\')>
     position: 210
     type: 1
   SiteParameter99:
@@ -68,15 +68,13 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameter18:
     keyname: themes.jumbotron.body
     category: pages.themes
-    value: |
-      <p><text(100)></p>
+    value: <stripslashes('\<p>\<text(100)>\</p>\')>
     position: 510
     type: 1
   SiteParameter19:
     keyname: themes.content.body
     category: pages.themes
-    value: |
-      <p><text(100)></p>
+    value: <stripslashes('\<p>\<text(100)>\</p>\')>
     position: 520
     type: 1
 
@@ -89,17 +87,13 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameter21:
     keyname: contact.content.body
     category: pages.contact
-    value: |
-      <p>Une remarque, un avis à partager, ou une demande d’informations supplémentaires ? Nous vous invitons à compléter le formulaire ci-dessous. Nous nous engageons à vous répondre dans les meilleurs délais.</p>
+    value: <stripslashes('\<p>Une remarque, un avis à partager, ou une demande d\’informations supplémentaires ? Nous vous invitons à compléter le formulaire ci-dessous. Nous nous engageons à vous répondre dans les meilleurs délais.</p>\')>
     position: 610
     type: 1
   SiteParameter22:
     keyname: contact.content.address
     category: pages.contact
-    value: |
-      Cap Collectif<br>
-      25, rue Claude Tillier<br>
-      75012 Paris<br>
+    value: <stripslashes('\<p>Cap Collectif<br>25, rue Claude Tillier<br>75012 Paris.</p>\')>
     position: 620
     type: 1
   SiteParameter23:
@@ -384,29 +378,7 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterCharterContent:
     keyname: charter.body
     category: pages.charter
-    value: |
-      <p>Toute personne peut s’exprimer librement sur la plateforme sous réserve de respecter la présente charte.</p>
-      <p>En m’inscrivant sur la plateforme :
-      <ul>
-        <li>J’adhère à la démarche de participation : je cherche à améliorer les idées, projets, propositions formulées, en donnant mon avis, et propose moi-même de nouvelles solutions ;</li>
-        <li>J’atteste de ma pleine et entière adhésion aux valeurs et aux règles du débat démocratique.</li>
-      </ul></p>
-      <p>En conséquence, je m’engage en tant que participant :
-      <ul>
-        <li>À ne publier aucune information volontairement erronée, tronquée, ou hors sujet ;</li>
-        <li>À reconnaître à chacun le droit d’avoir une opinion différente de la mienne et à la respecter ;</li>
-        <li>À n’exprimer, diffuser, ou partager aucun contenu offensant ou contraire à la loi ;</li>
-        <li>À signaler aux modérateurs tous les contenus en infraction avec la présente Charte.</li>
-      </ul></p>
-      <p>Les contributions dont le comportement est contraire à cette Charte sont susceptibles d’être modérées ou supprimées sans préavis. L’équipe de modération se réserve donc le droit de supprimer :
-      <ul>
-        <li>Les messages à vocation publicitaire, promotionnelle ou commerciale ;</li>
-        <li>Les contributions prosélytes (politique, sectaire, religieuse, sexuelle, etc.) - sont considérées comme prosélytes les contributions qui invitent à un acte de mobilisation (signer une pétition, participer à une manifestation, etc.) ou qui ont pour vocation de susciter l'adhésion ;</li>
-        <li>Les contributions portant atteinte à autrui, c'est-à-dire attaquant une personne ou un groupe de personnes en raison de leurs caractéristiques propres ;</li>
-        <li>Les contributions dont le propos est injurieux, grossier, diffamatoire, irrespectueux, agressif, violent, raciste, xénophobe, homophobe, ou faisant l’apologie des crimes de guerre ;</li>
-        <li>Les contributions renvoyant des sites internet ou des contenus dont la teneur ne respecterait pas la présente charte.</li>
-      </ul></p>
-      <p>Chaque personne peut contribuer tant qu’elle s’engage à respecter au préalable les règles de la Charte. En cas de violation grave ou répétée de la Charte, l’utilisateur est passible de voir son compte suspendu ou supprimé. </p>
+    value: <stripslashes("\<p>Toute personne peut s\’exprimer librement sur la plateforme sous réserve de respecter la présente charte.</p> <p>En m\’inscrivant sur la plateforme\:\<ul>\<li>J\’adhère à la démarche de participation\:\je cherche à améliorer les idées, projets, propositions formulées, en donnant mon avis, et propose moi-même de nouvelles solutions ;</li>\<li>J\’atteste de ma pleine et entière adhésion aux valeurs et aux règles du débat démocratique.</li>\</ul>\</p>\<p>En conséquence, je m\’engage en tant que participant\:\<ul>\<li>À ne publier aucune information volontairement erronée, tronquée, ou hors sujet ;</li>\<li>À reconnaître à chacun le droit d\’avoir une opinion différente de la mienne et à la respecter ;</li>\<li>À n\’exprimer, diffuser, ou partager aucun contenu offensant ou contraire à la loi ;</li>\<li>À signaler aux modérateurs tous les contenus en infraction avec la présente Charte.</li>\</ul>\</p>\<p>\Les contributions dont le comportement est contraire à cette Charte sont susceptibles d\’être modérées ou supprimées sans préavis. L\’équipe de modération se réserve donc le droit de supprimer\:\<ul>\<li>\Les messages à vocation publicitaire, promotionnelle ou commerciale ;</li>\<li>\Les contributions prosélytes (politique, sectaire, religieuse, sexuelle, etc.) - sont considérées comme prosélytes les contributions qui invitent à un acte de mobilisation (signer une pétition, participer à une manifestation, etc.) ou qui ont pour vocation de susciter l\'adhésion ;\</li>\<li>\Les contributions portant atteinte à autrui, c\'est-à-dire attaquant une personne ou un groupe de personnes en raison de leurs caractéristiques propres ;</li>\<li>\Les contributions dont le propos est injurieux, grossier, diffamatoire, irrespectueux, agressif, violent, raciste,xénophobe,homophobe, ou faisant l\’apologie des crimes de guerre ;\</li>\<li>\Les contributions renvoyant des sites internet ou des contenus dont la teneur ne respecterait pas la présente charte.</li>\</ul>\</p>\<p>Chaque personne peut contribuer tant qu\’elle s\’engage à respecter au préalable les règles de la Charte. En cas de violation grave ou répétée de la Charte, l\’utilisateur est passible de voir son compte suspendu ou supprimé. </p>\")>
     position: 1
     type: 1
   SiteParameterScriptAnalytic:

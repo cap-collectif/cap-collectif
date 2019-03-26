@@ -113,6 +113,23 @@ sonata_classification:
     collection: Capco\ClassificationBundle\Entity\Collection
     context: Capco\ClassificationBundle\Entity\Context
     media: Capco\MediaBundle\Entity\Media
+  admin:
+    tag:
+      class: Sonata\ClassificationBundle\Admin\TagAdmin
+      controller: SonataAdminBundle:CRUD
+      translation: SonataClassificationBundle
+    category:
+      class: Sonata\ClassificationBundle\Admin\CategoryAdmin
+      controller: SonataClassificationBundle:CategoryAdmin
+      translation: SonataClassificationBundle
+    collection:
+      class: Sonata\ClassificationBundle\Admin\CollectionAdmin
+      controller: SonataAdminBundle:CRUD
+      translation: SonataClassificationBundle
+    context:
+      class: Sonata\ClassificationBundle\Admin\ContextAdmin
+      controller: SonataAdminBundle:CRUD
+      translation: SonataClassificationBundle
 
 sonata_intl:
   timezone:
@@ -130,8 +147,8 @@ sonata_media:
     gallery: Capco\MediaBundle\Entity\Gallery
     gallery_has_media: Capco\MediaBundle\Entity\GalleryHasMedia
     category: Capco\ClassificationBundle\Entity\Category
-  default_context: default
   db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+  default_context: default # you need to set a context
   contexts:
     default: # the default context is mandatory
       providers:
@@ -160,23 +177,18 @@ sonata_media:
         header_md: { width: 1024, quality: 70 }
         header_sm: { width: 800, quality: 70 }
         header_xs: { width: 640, quality: 70 }
-
     sonata_collection:
       providers:
         - sonata.media.provider.image
-
       formats:
         preview: { width: 100, quality: 100 }
         wide: { width: 820, quality: 100 }
-
     sonata_category:
       providers:
         - sonata.media.provider.image
-
       formats:
         preview: { width: 100, quality: 100 }
         wide: { width: 820, quality: 100 }
-
     sources:
       download:
         strategy: sonata.media.security.superadmin_strategy
@@ -185,7 +197,6 @@ sonata_media:
         - sonata.media.provider.file
         - sonata.media.provider.image
       formats: ~
-
   providers:
     image:
       thumbnail: sonata.media.thumbnail.liip_imagine
@@ -243,7 +254,7 @@ sonata_media:
           'application/vnd.ms-excel',
           'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
           'application/vnd.ms-powerpoint',
-          ' application/vnd.openxmlformats-officedocument.presentationml.presentation',
+          'application/vnd.openxmlformats-officedocument.presentationml.presentation',
           'application/vnd.oasis.opendocument.text',
           'application/vnd.oasis.opendocument.graphics',
           'application/vnd.oasis.opendocument.presentation',

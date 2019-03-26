@@ -148,7 +148,7 @@ trait OpinionStepsTrait
         $votesInModalSelector = $this->navigationContext
             ->getPage('opinion page')
             ->getVotesInModalSelector();
-        $this->assertNumElements(45, $votesInModalSelector);
+        $this->assertNumElements(46, $votesInModalSelector);
     }
 
     /**
@@ -787,7 +787,7 @@ trait OpinionStepsTrait
         $votesInModalSelector = $this->navigationContext
             ->getPage('opinion version page')
             ->getVotesInModalSelector();
-        $this->assertNumElements(49, $votesInModalSelector);
+        $this->assertNumElements(50, $votesInModalSelector);
     }
 
     protected function opinionPageIsOpen()

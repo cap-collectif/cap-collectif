@@ -25,10 +25,12 @@ class Resolver
         }
 
         if (!isset($this->parameters[$key])) {
-            return $value;
+            return html_entity_decode($value);
         }
 
-        $value = $this->parameters[$key]['value'];
+        $value = \is_string($this->parameters[$key]['value'])
+            ? html_entity_decode($this->parameters[$key]['value'])
+            : $this->parameters[$key]['value'];
 
         if ($this->parameters[$key]['type'] === SiteParameter::$types['integer']) {
             $value = is_numeric($value) ? (int) $value : 0;

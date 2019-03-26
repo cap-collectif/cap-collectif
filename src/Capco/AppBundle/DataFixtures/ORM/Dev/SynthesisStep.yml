@@ -1,21 +1,17 @@
 Capco\AppBundle\Entity\Steps\SynthesisStep:
-    sstep1:
-        id: sstep1
-        title: Synthèse
-        label: Synthèse
-        body: Voici la synthèse
-        isEnabled: true
-        synthesis: '@synthesis1'
-        body: |
-            <p>Afficher le texte pour la préparation de la synthèse</p>
-            <p><text(1000)></p>
-    sstep2:
-        id: sstep2
-        title: Synthèse
-        label: Synthèse
-        body: Voici la synthèse
-        isEnabled: true
-        synthesis: '@synthesis2'
-        body: |
-            <p>Afficher le texte pour la préparation de la synthèse</p>
-            <p><text(1000)></p>
+  sstep1:
+    id: sstep1
+    title: Synthèse
+    slug: synthese-1
+    label: Synthèse
+    isEnabled: true
+    synthesis: '@synthesis1'
+    body: <stripslashes('\<p>Afficher le texte pour la préparation de la synthèse</p><p>\')><text(1000)><stripslashes('\</p>\')>
+  sstep2:
+    id: sstep2
+    title: Synthèse
+    slug: synthese-2
+    label: Synthèse
+    body: Voici la synthèse
+    isEnabled: true
+    synthesis: '@synthesis2'

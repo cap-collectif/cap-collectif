@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\Interfaces\Trashable;
@@ -23,7 +24,7 @@ trait TrashableTrait
 
     public function isTrashed(): bool
     {
-        return $this->trashedStatus !== null;
+        return null !== $this->trashedStatus;
     }
 
     public function getTrashedStatus(): ?string
@@ -41,9 +42,7 @@ trait TrashableTrait
             return $this;
         }
 
-        if (
-            !\in_array($status, array(Trashable::STATUS_VISIBLE, Trashable::STATUS_INVISIBLE), true)
-        ) {
+        if (!\in_array($status, [Trashable::STATUS_VISIBLE, Trashable::STATUS_INVISIBLE], true)) {
             throw new \InvalidArgumentException('Invalid status');
         }
 
@@ -56,6 +55,14 @@ trait TrashableTrait
     public function getTrashedAt(): ?\DateTime
     {
         return $this->trashedAt;
+    }
+
+    /** for the new fixture bunfle we need this setter */
+    public function setTrashedAt(?\DateTime $trashedAt = null): self
+    {
+        $this->trashedAt = $trashedAt;
+
+        return $this;
     }
 
     public function getTrashedReason(): ?string
@@ -75,7 +82,7 @@ trait TrashableTrait
         if ($this->isTrashed()) {
             $diff = $this->trashedAt->diff($to);
 
-            /**
+            /*
              * (array) to fix bug on DateInterval comparison.
              * @see http://www.fabienmoreau.com/php/comparer-objets-dateinterval-en-php-5
              */

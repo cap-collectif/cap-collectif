@@ -5,5 +5,4 @@ Capco\AppBundle\Entity\Steps\PresentationStep:
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('-10days', 'now')>
-    body:
-      <p> L'étape de présentation est généralement la première étape de chaque projet participatif d'une plateforme contenant plusieurs projets participatifs. Elle est essentiellement composée d'une zone de texte dont l'objectif est de présenter le projet participatif. L'étape de présentation se différencie d'une étape personnalisée (étape générique ne contenant que du texte) grâce à l'affichage sous le texte d'introduction des actualités et événements qui ont été liés au projet lors de leur création. On trouve également la liste des participants au projet.</p>
+    body: <stripslashes("\<p> L\'étape de présentation est généralement la première étape de chaque projet participatif d\'une plateforme contenant plusieurs projets participatifs. Elle est essentiellement composée d\'une zone de texte dont l\'objectif est de présenter le projet participatif. L\'étape de présentation se différencie d\'une étape personnalisée (étape générique ne contenant que du texte) grâce à l\'affichage sous le texte d\'introduction des actualités et événements qui ont été liés au projet lors de leur création. On trouve également la liste des participants au projet.</p>\")>

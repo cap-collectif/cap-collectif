@@ -1,37 +1,36 @@
 Capco\AppBundle\Entity\Steps\PresentationStep:
   pstep1:
     id: pstep1
+    slug: presentation-1
     title: Présentation
     label: Présentation
     isEnabled: true
-    body: |
-      <p>Afficher le texte pour la préparation de la synthèse</p>
-      <p><text(1000)></p>
+    body: <stripslashes('\<p>Afficher le texte pour la préparation de la synthèse</p><p>\')><text(1000)><stripslashes('\</p>\')>
   pstep2:
     id: pstep2
+    slug: presentation-2
     title: Présentation
     label: Présentation
     isEnabled: true
-    body: |
-      <p><text(1000)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
   pstep3:
     id: pstep3
+    slug: presentation-3
     title: Présentation
     label: Présentation
     isEnabled: true
-    body: |
-      <p><text(100)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
   pstep4:
     id: pstep4
+    slug: presentation-4
     title: Présentation
     label: Présentation
     isEnabled: true
-    body: |
-      <p><text(100)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
   pstep5:
     id: pstep5
+    slug: presentation-5
     title: Présentation
     label: Présentation
     isEnabled: true
-    body: |
-      <p><text(100)></p>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>

@@ -80,17 +80,12 @@ Scenario: GraphQL client wants to list current and future events
            "edges":[
               {
                  "node":{
-                    "_id":"event10"
-                 }
-              },
-              {
-                 "node":{
                     "_id":"event9"
                  }
               },
               {
                  "node":{
-                    "_id":"event7"
+                    "_id":"event10"
                  }
               },
               {
@@ -100,7 +95,12 @@ Scenario: GraphQL client wants to list current and future events
               },
               {
                  "node":{
-                    "_id":"event6"
+                    "_id":"event7"
+                 }
+              },
+              {
+                 "node":{
+                    "_id":"event3"
                  }
               }
            ]

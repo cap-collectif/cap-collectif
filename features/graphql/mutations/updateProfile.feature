@@ -454,7 +454,7 @@ Scenario: Super admin should be able to update other user account
           "id":"VXNlcjp1c2VyNTE2",
           "vip":true,
           "enabled":true,
-          "roles":["ROLE_USER","ROLE_SUPER_ADMIN","ROLE_ADMIN"]
+          "roles":["ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_USER"]
         }
       }
     }
@@ -496,7 +496,7 @@ Scenario: Admin should be able to update other user account
           "id":"VXNlcjp1c2VyNTE2",
           "vip":true,
           "enabled":true,
-          "roles":["ROLE_USER","ROLE_SUPER_ADMIN","ROLE_ADMIN"]
+          "roles":["ROLE_SUPER_ADMIN","ROLE_ADMIN","ROLE_USER"]
         }
       }
     }

@@ -1,5 +1,5 @@
 hautelook_alice:
-  # Locale to used for faker; must be a valid Faker locale otherwise will fallback to en_US
-  locale: '%locale%'
-  # Maximum number of time the loader will try to load the files passed
-  loading_limit: 100
+  fixtures_path: 'src/Capco/AppBundle/DataFixtures/ORM/Dev'
+  root_dirs:
+    - '%kernel.root_dir%'
+    - '%kernel.project_dir%'

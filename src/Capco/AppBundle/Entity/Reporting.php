@@ -119,14 +119,16 @@ class Reporting implements CreatableInterface
         return $this;
     }
 
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTime $createAt = null): self
+    {
+        $this->createdAt = $createAt;
+
+        return $this;
     }
 
     public function getReporter(): ?User

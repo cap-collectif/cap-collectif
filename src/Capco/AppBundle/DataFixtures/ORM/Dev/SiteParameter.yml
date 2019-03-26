@@ -10,8 +10,7 @@ Capco\AppBundle\Entity\SiteParameter:
     category: pages.homepage
     position: 110
     type: 1
-    value: |
-      <p> Parlement & Citoyens permet aux parlementaires et aux citoyens de travailler ensemble à la résolution de problèmes de société par la rédaction de propositions de loi.</p>
+    value: <stripslashes('\<p> Parlement & Citoyens permet aux parlementaires et aux citoyens de travailler ensemble à la résolution de problèmes de société par la rédaction de propositions de loi.</p>\')>
   SiteParameter3:
     keyname: homepage.jumbotron.button
     category: pages.homepage
@@ -33,7 +32,7 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameter8:
     keyname: footer.text.body
     category: pages.footer
-    value: Ce site participatif a été réalisé grâce à la plateforme innovante de participation <a href="http://www.cap-collectif.com">Cap Collectif</a>, selon les principes de la <a href="http://fr.wikipedia.org/wiki/Gouvernement_ouvert">démocratie ouverte</a>.
+    value: <stripslashes('\Ce site participatif a été réalisé grâce à la plateforme innovante de participation <a href="http://www.cap-collectif.com">Cap Collectif</a>, selon les principes de la <a href="http://fr.wikipedia.org/wiki/Gouvernement_ouvert">démocratie ouverte</a>.')>
     position: 210
     type: 1
   SiteParameter99:
@@ -51,15 +50,13 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameter10:
     keyname: projects.jumbotron.body
     category: pages.projects
-    value: |
-      <p><text(100)></p>
+    value: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     position: 310
     type: 1
   SiteParameter11:
     keyname: projects.content.body
     category: pages.projects
-    value: |
-      <p><text(100)></p>
+    value: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     position: 320
     type: 1
 
@@ -72,40 +69,32 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameter18:
     keyname: themes.jumbotron.body
     category: pages.themes
-    value: |
-      <p><text(100)></p>
+    value: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     position: 510
     type: 1
   SiteParameter19:
     keyname: themes.content.body
     category: pages.themes
-    value: |
-      <p><text(100)></p>
+    value: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     position: 520
     type: 1
 
   SiteParameter20:
     keyname: contact.jumbotron.body
     category: pages.contact
-    value: |
-      <p><text(100)></p>
+    value: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     position: 600
     type: 1
   SiteParameter21:
     keyname: contact.content.body
     category: pages.contact
-    value: |
-      <h2>Situez-nous !</h2>
-      <p><text(250)><p>
+    value: <stripslashes('\<h2>Situez-nous !</h2><p>\')><text(250)><stripslashes('\<p>\')>
     position: 610
     type: 1
   SiteParameter22:
     keyname: contact.content.address
     category: pages.contact
-    value: |
-      Cap Collectif<br>
-      18 avenue Parmentier<br>
-      75011 Paris<br>
+    value: <stripslashes('\Cap Collectif<br>18 avenue Parmentier<br>75011 Paris<br>\')>
     position: 620
     type: 1
   SiteParameter23:
@@ -189,8 +178,7 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterBlogDescription:
     keyname: blog.content.body
     category: pages.blog
-    value: |
-      <p><text(100)></p>
+    value: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     position: 770
     type: 1
 
@@ -205,13 +193,13 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterLoginTop:
     keyname: login.text.top
     category: pages.login
-    value: '<p>Je suis un texte</p>'
+    value: <stripslashes('\<p>Je suis un texte</p>\')>
     position: 250
     type: 1
   SiteParameterLoginBottom:
     keyname: login.text.bottom
     category: pages.login
-    value: '<p>Et moi aussi</p>'
+    value: <stripslashes('\<p>Et moi aussi</p>\')>
     position: 251
     type: 1
 
@@ -225,8 +213,7 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterEventContentPage:
     keyname: events.content.body
     category: pages.events
-    value: |
-      <p><text(100)></p>
+    value: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     position: 303
     type: 1
 
@@ -280,8 +267,7 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterShieldText:
     keyname: shield.introduction
     category: pages.shield
-    value: |
-      <p>Ce site est réservé aux inscrits</p>
+    value: <stripslashes('\<p>Ce site est réservé aux inscrits</p>\')>
     position: 2
     type: 1
   SiteParameterLocale:
@@ -392,32 +378,13 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterCharterContent:
     keyname: charter.body
     category: pages.charter
-    value: |
-      Retrouvez sur cette page la possibilité de pouvoir afficher la charte du site.
-      <h2>Charte</h2>
-      <p><text(1000)></p>
-      <p><text(350)></p>
-      <h3>En tant que membre de Cap-Collectif</h3>
-      <p><text(350)></p>
-      <p><text(550)></p>
-      <h2>En conséquence, je m’engage :</h2>
-      <h3>En conséquence, je m’engage :</h3>
-      <p><text(350)></p>
+    value: <stripslashes('\Retrouvez sur cette page la possibilité de pouvoir afficher la charte du site.      <h2>Charte</h2>      <p>\')><text(1000)><stripslashes('\</p><p>\')><text(350)><stripslashes('\</p><h3>En tant que membre de Cap-Collectif</h3><p>\')><text(350)><stripslashes('\</p><p>\')><text(550)><stripslashes('\</p><h2>En conséquence, je m’engage :</h2><h3>En conséquence, je m’engage :</h3><p>\')><text(350)><stripslashes('\</p>\')>
     position: 1
     type: 1
   SiteParameterScriptAnalytic:
     keyname: snalytical-tracking-scripts-on-all-pages
     category: settings.global
-    value: |
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=0;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      if(typeof window._capco_ga_cookie_value === 'undefined'){
-        ga('create', 'UA-112509737-19', {'cookieDomain': '.capco.dev', 'cookieExpires': 1123200});
-      }
-      ga('send', 'pageview');
+    value: <stripslashes("\(\function\(\i,s,o,g,r,a,m\)\{\i['GoogleAnalyticsObject']=r;i[r]=i[r]||function\(\)\{\      \(\i[r].q=i[r].q||[]\)\.push\(\arguments\)\}\,i[r].l=1*new Date\(\)\;a=s.createElement\(\o\)\,      m=s.getElementsByTagName\(\o\)\[0];a.async=0;asrc=g;m.parentNode.insertBefore\(\a,m\)\      \}\)\(\window,document,'script','https://www.google-analytics.com/analytics.js','ga'\)\;      if\(\typeof window._capco_ga_cookie_value === 'undefined'\)\{\        ga\(\'create', 'UA-112509737-19',\{\'cookieDomain'\:\ '.capco.dev', 'cookieExpires'\:\ 1123200\}\);      \}\      ga('send', 'pageview');\")>
     position: 3
     type: 3
     helpText: for-analytical-scripts-only  script-desactivatable-by-user
@@ -425,18 +392,7 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterScriptAdvertising:
     keyname: ad-scripts-on-all-pages
     category: settings.global
-    value: |
-      var IDSITE = 'CAPCO';
-      var _paq = _paq || [];
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      (function() {
-        var u='//{$PIWIK_URL}/';
-       _paq.push(['setTrackerUrl', u+'piwik.php']);
-       _paq.push(['setSiteId', {IDSITE}]);
-       var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-       g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-       })();
+    value: <stripslashes("\var IDSITE = 'CAPCO';      var _paq = _paq || [];      _paq.push\(\['trackPageView']\)\;      _paq.push\(\['enableLinkTracking']\)\;      \(\function\(\)\ \{\      var u='\/\/\{\$\PIWIK_URL\}\/\';      _paq.push\(\['setTrackerUrl',u+'piwik.php']\)\;      _paq.push\(\['setSiteId', \{\IDSITE\}\]\)\;      var d=document, g=d.createElement\(\'script'\)\, s=d.getElementsByTagName\(\'script'\)\[0];      g.type='text\/\javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js';s.parentNode.insertBefore\(\g,s\)\;      \}\)\(\)\;\")>
     position: 3
     type: 3
     helpText: reserved-for-ad-scripts  script-desactivatable-by-user
