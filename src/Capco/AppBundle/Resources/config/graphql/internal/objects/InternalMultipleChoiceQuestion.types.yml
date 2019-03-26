@@ -31,7 +31,7 @@ InternalMultipleChoiceQuestion:
             description: 'If the question has `randomQuestionChoices: true` will return choices in a random order.'
       validationRule:
         type: 'MultipleChoiceQuestionValidationRule'
-        resolve: "@=resolver('question_validation_rule', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionValidationRuleResolver", [value])'
       randomQuestionChoices:
         type: 'Boolean!'
         resolve: '@=value.isRandomQuestionChoices()'
