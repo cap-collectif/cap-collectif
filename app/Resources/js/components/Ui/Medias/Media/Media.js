@@ -8,13 +8,13 @@ import Left from './Left';
 
 type Props = {
   children?: any,
+  className?: string,
 };
 
 export const Container = styled(MediaBtsp)`
   display: flex;
-  align-items: flex-start;
+  margin: initial;
 `;
-
 
 export default class Media extends PureComponent<Props> {
   static Body = Body;
@@ -24,8 +24,8 @@ export default class Media extends PureComponent<Props> {
   static Heading = Heading;
 
   render() {
-    const { children } = this.props;
+    const { children, className } = this.props;
 
-    return <Container>{children}</Container>;
+    return <Container className={className}>{children}</Container>;
   }
 }

@@ -21,9 +21,12 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
       >
         <PanelHeading
           bsClass="panel"
+          className="d-flex"
           componentClass="div"
         >
-          <Media>
+          <Media
+            className="m-auto align-items-center"
+          >
             <Left>
               <Connect(UserAvatar)
                 user={
@@ -318,9 +321,12 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
       >
         <PanelHeading
           bsClass="panel"
+          className="d-flex"
           componentClass="div"
         >
-          <Media>
+          <Media
+            className="m-auto align-items-center"
+          >
             <Left>
               <Connect(UserAvatar)
                 user={
@@ -530,9 +536,12 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
       >
         <PanelHeading
           bsClass="panel"
+          className="d-flex"
           componentClass="div"
         >
-          <Media>
+          <Media
+            className="m-auto align-items-center"
+          >
             <Left>
               <Connect(UserAvatar)
                 user={

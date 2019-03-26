@@ -60,8 +60,8 @@ export class EditProfileTabs extends Component<Props> {
         <Row className="clearfix">
           <Col sm={4} md={3}>
             <Panel id="panel-account">
-              <Panel.Heading>
-                <Media>
+              <Panel.Heading className="d-flex">
+                <Media className="m-auto align-items-center">
                   <Media.Left>
                     <UserAvatar user={viewer} />
                   </Media.Left>
