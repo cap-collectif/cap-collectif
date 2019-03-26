@@ -214,10 +214,10 @@ class Project implements IndexableInterface
      */
     private $districts;
 
-    public function __construct(array $themes = [], array $restrictedViewerGroups = [])
+    public function __construct()
     {
-        $this->restrictedViewerGroups = new ArrayCollection($restrictedViewerGroups);
-        $this->themes = new ArrayCollection($themes);
+        $this->restrictedViewerGroups = new ArrayCollection();
+        $this->themes = new ArrayCollection();
         $this->steps = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();

@@ -142,12 +142,12 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
      */
     private $registrationEnable = false;
 
-    public function __construct(array $projects = [], array $themes = [])
+    public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->registrations = new ArrayCollection();
-        $this->themes = new ArrayCollection($themes);
-        $this->projects = new ArrayCollection($projects);
+        $this->themes = new ArrayCollection();
+        $this->projects = new ArrayCollection();
         $this->updatedAt = new \DateTime();
     }
 

@@ -39,12 +39,4 @@ trait PublishableTrait
     {
         return $this->getStep() ? $this->getStep()->getEndAt() : null;
     }
-
-    /** for upgrade of fixture bundle */
-    public function setPublished(bool $published): self
-    {
-        $this->published = $published;
-
-        return $this;
-    }
 }

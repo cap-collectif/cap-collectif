@@ -1,12 +1,12 @@
 Capco\AppBundle\Entity\Project:
   p1:
-    __construct: [['@theme1', '@theme2']]
     id: 'project1'
     title: Croissance, innovation, disruption
     projectType: '@projectType3'
     Author: '@user4'
     Cover: '@MediaProject1'
     video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
+    themes: ['@theme1', '@theme2']
     publishedAt: <dateTimeBetween('-1 days', 'now')>
     exportable: true
     opinionsRankingThreshold: 60
@@ -14,64 +14,63 @@ Capco\AppBundle\Entity\Project:
     visibility: 2
     opinionCanBeFollowed: true
   p2:
-    __construct: [['@theme1', '@theme3']]
     id: 'project2'
     title: Stratégie technologique de l'Etat et services publics
     projectType: '@projectType2'
     Author: '@user4'
     Cover: '@MediaProject2'
+    themes: ['@theme1', '@theme3']
     publishedAt: <dateTimeBetween('-3 days', '-2 days')>
     visibility: 2
   p3:
-    __construct: [['@theme1', '@theme3']]
     id: 'project3'
     title: Transformation numérique des relations
     projectType: '@projectType3'
     Author: '@user4'
+    themes: ['@theme2', '@theme3']
     visibility: 2
     publishedAt: <dateTimeBetween('-5 days', '- 4 days')>
   p4:
-    __construct: [['@theme2', '@theme3']]
     id: 'project4'
     title: Projet vide
     projectType: '@projectType2'
     Author: '@user4'
+    themes: ['@theme2', '@theme3']
     publishedAt: <dateTimeBetween('-7 days', '-6 days')>
     visibility: 2
   p5:
-    __construct: [['@theme1', '@theme3']]
     id: 'project5'
     title: Projet de loi Renseignement
     projectType: '@projectType2'
     Author: '@user2'
     Cover: '@MediaProject1'
     video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
+    themes: ['@theme1', '@theme3']
     publishedAt: <dateTimeBetween('-9 days', '-8 days')>
     exportable: true
     opinionsRankingThreshold: 60
     versionsRankingThreshold: 20
     visibility: 2
   p6:
-    __construct: [['@theme3']]
     id: 'project6'
     title: Budget Participatif Rennes
     projectType: '@projectType4'
     Author: '@user502'
+    themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-11 days', '-10 days')>
     visibility: 2
     opinionCanBeFollowed: true
   p7:
-    __construct: [['@theme3']]
     id: 'project7'
     title: Dépot avec selection vote budget
     projectType: '@projectType4'
     Author: '@user4'
+    themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-13 days', '-12 days')>
     visibility: 2
   p8:
-    __construct: [['@theme3']]
     id: 'project8'
     title: Projet avec questionnaire
     projectType: '@projectType7'
@@ -85,11 +84,11 @@ Capco\AppBundle\Entity\Project:
     title: Appel à projets
     projectType: '@projectType1'
     Author: '@user1'
+    themes: []
     exportable: true
     publishedAt: <dateTimeBetween('-17 days', '-16 days')>
     visibility: 2
   p10:
-    __construct: [['@theme3']]
     id: 'project10'
     title: Dépôt avec selection vote simple
     projectType: '@projectType4'
@@ -107,12 +106,12 @@ Capco\AppBundle\Entity\Project:
     publishedAt: <dateTimeBetween('-21 days', '-20 days')>
     visibility: 2
   p12:
-    __construct: [['@theme2']]
     id: 'project12'
     title: Projet sans étapes participatives
     projectType: '@projectType2'
     Author: '@user4'
     Cover: '@MediaProject4'
+    themes: ['@theme2']
     exportable: true
     publishedAt: <dateTimeBetween('-23 days', '-22 days')>
     visibility: 2
@@ -126,7 +125,6 @@ Capco\AppBundle\Entity\Project:
     publishedAt: <dateTimeBetween('-25 days', '-24 days')>
     visibility: 2
   p14:
-    __construct: [['@theme1']]
     id: 'project14'
     title: Projet à venir
     projectType: '@projectType2'
@@ -145,7 +143,6 @@ Capco\AppBundle\Entity\Project:
     publishedAt: <dateTimeBetween('-29 days', '-28 days')>
     visibility: 2
   p16:
-    __construct: [['@theme3']]
     id: 'project16'
     title: Le P16 un projet à base de riz
     projectType: '@projectType4'
@@ -164,7 +161,6 @@ Capco\AppBundle\Entity\Project:
     publishedAt: <dateTimeBetween('-33 days', '-32 days')>
     visibility: 0
   p18:
-    __construct: [['@theme2']]
     id: 'ProjectAccessibleForAdminOnly'
     title: Qui doit conquérir le monde ? | Visible par les admins seulement
     projectType: '@projectType2'
@@ -174,28 +170,30 @@ Capco\AppBundle\Entity\Project:
     publishedAt: <dateTimeBetween('-35 days', '-34 days')>
     visibility: 1
   p19:
-    __construct: [['@theme3']]
     id: 'ProjectAccessibleForMeOnlyByAdmin'
     title: Project pour la création de la capCoBeer (visible par admin seulement)
     projectType: '@projectType4'
     Author: '@user4'
+    themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-37 days', '-36 days')>
     visibility: 0
   p20:
-    __construct: [['@theme2'], ['@group2', '@group3']]
     id: 'ProjectWithCustomAccess'
     title: Un avenir meilleur pour les nains de jardins (custom access)
     projectType: '@projectType7'
     Author: '@user4'
+    themes: ['@theme2']
     exportable: true
     publishedAt: <dateTimeBetween('-39 days', '-38 days')>
     visibility: 3
+    restrictedViewerGroups: ['@group2', '@group3']
   p21:
     id: 'project21'
     title: Questions/Responses
     projectType: '@projectType4'
     Author: '@user4'
+    themes: []
     exportable: true
     publishedAt: <dateTimeBetween('-41 days', '-40 days')>
     visibility: 2
