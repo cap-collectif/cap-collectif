@@ -18,7 +18,7 @@ class ResponseResolver implements ResolverInterface
         $this->typeResolver = $typeResolver;
     }
 
-    public function resolveResponseType(AbstractResponse $response)
+    public function __invoke(AbstractResponse $response)
     {
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
