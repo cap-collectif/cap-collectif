@@ -261,7 +261,7 @@ class Proposal implements
      */
     private $followers;
 
-    public function __construct()
+    public function __construct(array $likers = [], array $evaluers = [])
     {
         $this->selectionVotes = new ArrayCollection();
         $this->collectVotes = new ArrayCollection();
@@ -270,8 +270,8 @@ class Proposal implements
         $this->responses = new ArrayCollection();
         $this->updatedAt = null;
         $this->selections = new ArrayCollection();
-        $this->likers = new ArrayCollection();
-        $this->evaluers = new ArrayCollection();
+        $this->likers = new ArrayCollection($likers);
+        $this->evaluers = new ArrayCollection($evaluers);
         $this->followers = new ArrayCollection();
         $this->progressSteps = new ArrayCollection();
         $this->childConnections = new ArrayCollection();

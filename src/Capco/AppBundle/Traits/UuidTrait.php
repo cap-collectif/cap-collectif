@@ -25,4 +25,8 @@ trait UuidTrait
 
         return $this;
     }
+
+    public function trololo()
+    {
+    }
 }
