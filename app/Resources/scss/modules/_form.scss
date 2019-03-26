@@ -372,6 +372,7 @@ form {
         position: relative;
 
         &__choices {
+            position: relative;
             z-index: 10;
             border: 1px dashed $border-color;
         }
