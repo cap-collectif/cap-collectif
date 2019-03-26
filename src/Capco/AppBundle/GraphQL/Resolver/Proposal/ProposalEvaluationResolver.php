@@ -9,11 +9,11 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProposalEvaluationResolver implements ResolverInterface
 {
-    private $proposalResolver;
+    private $isViewerAnEvaluerResolver;
 
-    public function __construct(ProposalResolver $proposalResolver)
+    public function __construct(IsViewerAnEvaluerResolver $isViewerAnEvaluerResolver)
     {
-        $this->proposalResolver = $proposalResolver;
+        $this->isViewerAnEvaluerResolver = $isViewerAnEvaluerResolver;
     }
 
     public function __invoke(
@@ -21,10 +21,7 @@ class ProposalEvaluationResolver implements ResolverInterface
         $user,
         \ArrayObject $context
     ): Collection {
-        $isEvaluer = $this->proposalResolver->resolveViewerIsEvaluer(
-            $evaluation->getProposal(),
-            $user
-        );
+        $isEvaluer = $this->isViewerAnEvaluerResolver->__invoke($evaluation->getProposal(), $user);
         $viewerCanSeePrivateResponses =
             $isEvaluer ||
             ($user instanceof User && $user->isAdmin()) ||

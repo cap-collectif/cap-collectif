@@ -20,37 +20,6 @@ services:
 
   Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver:
     autowire: true
-    tags:
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposal_viewer_is_evaluer',
-          method: 'resolveViewerIsEvaluer',
-        }
-      - { name: overblog_graphql.resolver, alias: 'post_abstract', method: 'resolvePostAbstract' }
-      - { name: overblog_graphql.resolver, alias: 'proposal_news', method: 'resolveNews' }
-   
-      - { name: overblog_graphql.resolver, alias: 'response_type', method: 'resolveResponseType' }
-      - { name: overblog_graphql.resolver, alias: 'proposal_reference', method: 'resolveReference' }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposal_evaluation',
-          method: 'resolveEvaluation',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'query_get_draft_proposals_for_user_in_step',
-          method: 'resolveDraftProposalsForUserInStep',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposal_posts_count',
-          method: 'resolvePostsCount',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposal_viewer_can_see_evaluation',
-          method: 'resolveViewerCanSeeEvaluation',
-        }
 
   Capco\AppBundle\GraphQL\Resolver\ConsultationResolver:
     tags:
