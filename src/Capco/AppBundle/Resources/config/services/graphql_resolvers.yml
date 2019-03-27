@@ -107,13 +107,6 @@ services:
 
   Capco\AppBundle\GraphQL\Resolver\UserResolver:
     tags:
-      - { name: overblog_graphql.resolver, alias: 'user_email', method: 'resolveEmail' }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'user_phoneConfirmationSentAt',
-          method: 'resolvePhoneConfirmationSentAt',
-        }
-      - { name: overblog_graphql.resolver, alias: 'user_gender', method: 'resolveGender' }
       - {
           name: overblog_graphql.resolver,
           alias: 'user_contributionsToDeleteCount',
