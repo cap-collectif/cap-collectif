@@ -78,7 +78,7 @@ InternalQuery:
         description: 'Lookup groups.'
         type: '[Group!]!'
         access: "@=hasRole('ROLE_ADMIN')"
-        resolve: "@=resolver('groups')"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupsListResolver")'
       proposalForms:
         description: 'Lookup forms.'
         type: '[ProposalForm]!'
