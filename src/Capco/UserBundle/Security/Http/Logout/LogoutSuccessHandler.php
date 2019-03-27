@@ -60,6 +60,14 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
             );
         }
 
+        if (
+            $this->toggleManager->isActive('login_openid') &&
+            $this->toggleManager->isActive('disconnect_openid')
+        ) {
+            $logoutUrl =
+                'https://www.laregioncitoyenne.fr/auth/realms/laregioncitoyenne/protocol/openid-connect/logout';
+        }
+
         return $response;
     }
 }

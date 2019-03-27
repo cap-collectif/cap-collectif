@@ -70,6 +70,7 @@ parameters:
   openid_authorization_url: '%env(SYMFONY_OPENID_AUTHORIZATION_URL)%'
   openid_access_token_url: '%env(SYMFONY_OPENID_ACCESS_TOKEN_URL)%'
   openid_userinfo_url: '%env(SYMFONY_OPENID_USERINFO_URL)%'
+  openid_logout_url: '%env(SYMFONY_OPENID_LOGOUT_URL)%'
   prometheus_bearer_token: '%env(SYMFONY_PROMETHEUS_BEARER_TOKEN)%'
   mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
   #
@@ -112,11 +113,12 @@ parameters:
   env(SYMFONY_TWILIO_NUMBER): +***REMOVED***
   env(SYMFONY_DISABLE_MAIL_DELIVERY): false
   env(SYMFONY_SENTRY_DSN): ~
-  env(SYMFONY_OPENID_CLIENT_ID): ~
-  env(SYMFONY_OPENID_SECRET): ~
-  env(SYMFONY_OPENID_AUTHORIZATION_URL): ~
-  env(SYMFONY_OPENID_ACCESS_TOKEN_URL): ~
-  env(SYMFONY_OPENID_USERINFO_URL): ~
+  env(SYMFONY_OPENID_CLIENT_ID): account
+  env(SYMFONY_OPENID_SECRET): ***REMOVED***
+  env(SYMFONY_OPENID_AUTHORIZATION_URL): http://192.168.64.2:8080/auth/realms/master/protocol/openid-connect/auth
+  env(SYMFONY_OPENID_ACCESS_TOKEN_URL): http://192.168.64.2:8080/auth/realms/master/protocol/openid-connect/token
+  env(SYMFONY_OPENID_USERINFO_URL): http://192.168.64.2:8080/auth/realms/master/protocol/openid-connect/userinfo
+  env(SYMFONY_OPENID_LOGOUT_URL): http://192.168.64.2:8080/auth/realms/master/protocol/openid-connect/logout
   env(SYMFONY_PROMETHEUS_BEARER_TOKEN): ~
   env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
 
@@ -128,7 +130,7 @@ framework:
     app: cache.adapter.redis
     default_redis_provider: "redis://%redis_host%"
   router:
-    resource: '%kernel.root_dir%/config/routing.yml'
+    resource: '%kernel.project_dir%/app/config/routing.yml'
     strict_requirements: null
   form: null
   csrf_protection: null

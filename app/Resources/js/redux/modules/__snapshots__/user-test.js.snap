@@ -26,6 +26,7 @@ Object {
   },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showOpenIDLoginModal": false,
   "showRegistrationModal": false,
   "user": Object {
     "newEmailToConfirm": null,
@@ -59,6 +60,7 @@ Object {
   },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showOpenIDLoginModal": false,
   "showRegistrationModal": false,
   "user": null,
 }
@@ -90,6 +92,7 @@ Object {
   },
   "showConfirmPasswordModal": true,
   "showLoginModal": false,
+  "showOpenIDLoginModal": false,
   "showRegistrationModal": false,
   "user": null,
 }
@@ -121,6 +124,7 @@ Object {
   },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showOpenIDLoginModal": false,
   "showRegistrationModal": false,
   "user": null,
 }
@@ -152,6 +156,7 @@ Object {
   },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showOpenIDLoginModal": false,
   "showRegistrationModal": false,
   "user": null,
 }
@@ -183,6 +188,7 @@ Object {
   },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showOpenIDLoginModal": false,
   "showRegistrationModal": false,
   "user": null,
 }
@@ -214,6 +220,7 @@ Object {
   },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showOpenIDLoginModal": false,
   "showRegistrationModal": false,
   "user": Object {
     "newEmailToConfirm": "popo@gmail.com",
