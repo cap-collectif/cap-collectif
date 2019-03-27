@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalStatus /> should render a status 1`] = `
-<CardStatus
-  className="status--success"
+<Status
+  bgColor="success"
 >
   Coucou
-</CardStatus>
+</Status>
 `;

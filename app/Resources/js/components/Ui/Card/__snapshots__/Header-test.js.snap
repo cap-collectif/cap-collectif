@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> should render correctly 1`] = `
+<Header__Container
+  bgColor="#f6f6f6"
+>
+  My Header
+</Header__Container>
+`;
+
+exports[`<Header /> should render correctly with other bgColor 1`] = `
+<Header__Container
+  bgColor="#d4edda"
+>
+  My Header
+</Header__Container>
+`;

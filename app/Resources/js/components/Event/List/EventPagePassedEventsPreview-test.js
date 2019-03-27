@@ -13,9 +13,9 @@ describe('<EventPagePassedEventsPreviews />', () => {
       previewPassedEvents: {
         totalCount: 3,
         edges: [
-          { node: { $fragmentRefs } },
-          { node: { $fragmentRefs } },
-          { node: { $fragmentRefs } },
+          { node: { id: 'event1', $fragmentRefs } },
+          { node: { id: 'event2', $fragmentRefs } },
+          { node: { id: 'event3', $fragmentRefs } },
         ],
       },
     },

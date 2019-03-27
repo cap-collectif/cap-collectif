@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const TagsList = styled.div.attrs({
   className: 'ellipsis',
 })`
-  margin-top: 10px;
   font-size: 14px;
 
   .tags-list__tag {

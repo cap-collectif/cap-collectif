@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UnpublishedLabel /> renders when not published because author confirmed his account too late 1`] = `
-<span>
+<Fragment>
    
   <OverlayTrigger
     defaultOverlayShown={false}
@@ -36,6 +36,7 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
     <Label
       bsClass="label"
       bsStyle="danger"
+      className="ellipsis d-ib mw-100 mt-5"
     >
       <i
         className="cap cap-delete-2"
@@ -47,11 +48,11 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
       />
     </Label>
   </OverlayTrigger>
-</span>
+</Fragment>
 `;
 
 exports[`<UnpublishedLabel /> renders when not published because author is not confirmed 1`] = `
-<span>
+<Fragment>
    
   <OverlayTrigger
     defaultOverlayShown={false}
@@ -86,6 +87,7 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
     <Label
       bsClass="label"
       bsStyle="danger"
+      className="ellipsis d-ib mw-100 mt-5"
     >
       <i
         className="cap cap-delete-2"
@@ -97,11 +99,11 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
       />
     </Label>
   </OverlayTrigger>
-</span>
+</Fragment>
 `;
 
 exports[`<UnpublishedLabel /> renders when not published because author must confirm 1`] = `
-<span>
+<Fragment>
    
   <OverlayTrigger
     defaultOverlayShown={false}
@@ -143,6 +145,7 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
     <Label
       bsClass="label"
       bsStyle="danger"
+      className="ellipsis d-ib mw-100 mt-5"
     >
       <i
         className="cap cap-delete-2"
@@ -154,7 +157,7 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
       />
     </Label>
   </OverlayTrigger>
-</span>
+</Fragment>
 `;
 
 exports[`<UnpublishedLabel /> renders when published 1`] = `""`;
