@@ -63,12 +63,12 @@ const container = connect()(EventPagePassedEventsPreview);
 
 export default createFragmentContainer(container, {
   query: graphql`
-    fragment EventPagePassedEventsPreview_query on Query {
-      previewPassedEvents: events(first: 3, isFuture: false) {
+    fragment EventPagePassedEventsPreview_query on Query
+      @argumentDefinitions(previewCount: { type: "Int" }) {
+      previewPassedEvents: events(first: $previewCount, isFuture: false) {
         totalCount
         edges {
           node {
-            id
             ...EventPreview_event
           }
         }
