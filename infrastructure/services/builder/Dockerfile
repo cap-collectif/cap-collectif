@@ -51,8 +51,8 @@ RUN apt-get update && \
     docker-php-ext-install -j$(nproc) curl mbstring intl mysqli dom zip gd xsl && \
     rm -r /var/lib/apt/lists/*
 
-# Install bower and babel-cli
-RUN yarn global add bower@1.8.4 babel-cli
+# Install babel-cli
+RUN yarn global add babel-cli
 
 COPY capco.ini /usr/local/etc/php/conf.d/capco.ini
 COPY build.sh /usr/local/bin/build

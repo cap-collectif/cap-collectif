@@ -29,7 +29,6 @@ builder:
     - ../../:/var/www
     - ~/Library/Caches/Composer:/home/capco/.composer
     - ~/Library/Caches/Yarn:/home/capco/.cache/yarn
-    - ~/Library/Caches/Bower:/home/capco/.cache/bower
   command: echo "Use 'docker-compose run builder build' to build deps"
 
 qarunner:

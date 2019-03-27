@@ -6,15 +6,14 @@ schema.internal.json
 /web/bundles/
 /web/images/*
 /web/fonts/*
+/web/assets/*
 /web/css/*
 /web/js/*
 /web/media/*
 /web/uploads/*
 /web/export/*
 
-# Fonts directory used by styleguide and containing _fonts.scss compiled by brunch
 app/Resources/fonts
-# Fonts directory containing fonts compiled by brunch
 app/Resources/assets/fonts
 
 translations/*
@@ -38,10 +37,9 @@ infrastructure/services/databasefixtures/dump.sql
 *.log
 .eslintcache
 
-# Node / grunt / bower
+# Node / grunt
 /node_modules/
 /app/Resources/libs
-/bower_components/
 
 # redis
 dump.rdb

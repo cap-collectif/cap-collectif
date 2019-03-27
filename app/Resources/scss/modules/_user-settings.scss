@@ -6,7 +6,7 @@
     border-top: 1px solid $border-color;
 
     li a {
-        @include border-radius(0);
+        border-radius: 0;
         color: $dark;
     }
 }

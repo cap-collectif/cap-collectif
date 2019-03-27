@@ -231,7 +231,7 @@
 
         & > a {
             margin-right: 0;
-            @include border-radius(0 !important);
+            border-radius: 0 !important;
             border: 0;
             color: $dark;
             border-top: 2px solid transparent;

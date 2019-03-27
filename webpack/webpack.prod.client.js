@@ -7,9 +7,6 @@ const prodConf = {
   mode: 'production',
   // Don't attempt to continue if there are any errors.
   bail: true,
-  // We generate sourcemaps in production. This is slow but gives good results.
-  // You can exclude the *.map files from the build during deployment.
-  devtool: 'source-map',
   optimization: {
     minimizer: [
       new TerserPlugin({
@@ -39,9 +36,6 @@ const prodConf = {
             ascii_only: true,
           },
         },
-        // Use multi-process parallel running to improve the build speed
-        // Default number of concurrent runs: os.cpus().length - 1
-        parallel: true,
         // Enable file caching
         cache: true,
       }),

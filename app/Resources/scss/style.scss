@@ -45,13 +45,15 @@
 /* ===============================================================
     $BOOTSTRAP
 ================================================================*/
-@import "bower_components/compass-mixins/lib/compass";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// This line is absolutely needed by bootstrap-sass to find the fonts associated.
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 /* ===============================================================
     $FONTS
 ================================================================*/
-@import "app/Resources/fonts/_fonts.scss";
+// @import "../fonts/_fonts.scss";
 
 /* ===============================================================
     $VARIABLES
@@ -62,14 +64,14 @@
     $BASE
 ================================================================*/
 @import
-  "base/tools",
-  "base/bootstrap4",
-  "base/error",
-  "base/utils",
-  "base/front",
-  "base/base",
-  "base/header",
-  "base/footer"
+  "base/_tools.scss",
+  "base/_bootstrap4.scss",
+  "base/_error.scss",
+  "base/_utils.scss",
+  "base/_front.scss",
+  "base/_base.scss",
+  "base/_header.scss",
+  "base/_footer.scss"
 ;
 
 /* ===============================================================

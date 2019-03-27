@@ -2,9 +2,9 @@
     $ADMIN
 ================================================================*/
 
-@import "bower_components/compass-mixins/lib/compass";
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
-
+// This line is absolutely needed by bootstrap-sass to find the fonts associated.
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import "base/variables",
   "base/tools",

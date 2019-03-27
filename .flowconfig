@@ -7,14 +7,12 @@ all=warn
 [ignore]
 ; ignore module source to prefer libdef
 .*/node_modules/*
-.*/bower_components/*
 ; ignore compiled files
 .*/web/*
 ; large dirs that are not imported
 .*/vendor/*
 .*/app/Resources/assets/*
 .*/app/Resources/fonts/*
-.*/bower.json
 .*/.storybook/*
 .*/docs/*
 .*/coverage/*

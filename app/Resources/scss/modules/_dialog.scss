@@ -3,7 +3,7 @@
 ================================================================*/
 .dialog {
     padding: 0;
-    @include border-radius(6px);
+    border-radius: 6px;
 }
 
 .dialog__header {

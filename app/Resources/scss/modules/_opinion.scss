@@ -558,7 +558,7 @@
         padding: 3px 3px 0;
         font-size: 12px;
         top: 0;
-        @include border-radius(3px)
+        border-radius: 3px;
     }
 
     // Colors
@@ -597,7 +597,7 @@
 }
 
 .opinion__votes__more__link {
-    @include border-radius(50%);
+    border-radius: 50%;
     display: inline-block;
     vertical-align: middle;
     width: 45px;

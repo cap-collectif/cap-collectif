@@ -1,12 +1,11 @@
 # https://github.com/brigade/scss-lint
 # Linters Documentation https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/linter/README.md
 
-scss_files: "**/*.scss"
+scss_files: '**/*.scss'
 exclude:
   - './node_modules/**/*'
   - './web/**'
   - './vendor/**'
-  - './bower_components/**'
 
 linters:
   BangFormat:
@@ -120,7 +119,7 @@ linters:
 
   PropertySortOrder:
     enabled: true
-#    order: smacss # concentric, smacss, recess
+    #    order: smacss # concentric, smacss, recess
     order:
       # Positioning
       - float
@@ -237,14 +236,34 @@ linters:
   PropertyUnits:
     enabled: true
     global: [
-      'ch', 'em', 'ex', 'rem',                 # Font-relative lengths
-      'cm', 'in', 'mm', 'pc', 'pt', 'px', 'q', # Absolute lengths
-      'vh', 'vw', 'vmin', 'vmax',              # Viewport-percentage lengths
-      'deg', 'grad', 'rad', 'turn',            # Angle
-      'ms', 's',                               # Duration
-      'Hz', 'kHz',                             # Frequency
-      'dpi', 'dpcm', 'dppx',                   # Resolution
-      '%']                                     # Other
+        'ch',
+        'em',
+        'ex',
+        'rem', # Font-relative lengths
+        'cm',
+        'in',
+        'mm',
+        'pc',
+        'pt',
+        'px',
+        'q', # Absolute lengths
+        'vh',
+        'vw',
+        'vmin',
+        'vmax', # Viewport-percentage lengths
+        'deg',
+        'grad',
+        'rad',
+        'turn', # Angle
+        'ms',
+        's', # Duration
+        'Hz',
+        'kHz', # Frequency
+        'dpi',
+        'dpcm',
+        'dppx', # Resolution
+        '%',
+      ] # Other
     properties: {}
 
   PseudoElement:
@@ -336,9 +355,9 @@ linters:
 
   VendorPrefix:
     enabled: false
-#    identifier_list: base
-#    additional_identifiers: []
-#    excluded_identifiers: []
+  #    identifier_list: base
+  #    additional_identifiers: []
+  #    excluded_identifiers: []
 
   ZeroUnit:
     enabled: true

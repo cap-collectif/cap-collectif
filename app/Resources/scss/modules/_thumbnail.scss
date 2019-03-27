@@ -3,7 +3,7 @@
 ================================================================*/
 
 .thumbnail--custom {
-    @include border-radius(0);
+    border-radius: 0;
     padding: 0;
 
     &:hover {
