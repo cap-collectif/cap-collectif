@@ -3,7 +3,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
-import ProjectStatsPage, { type OwnProps as Props } from '../components/Project/Stats/ProjectStatsPage';
+import ProjectStatsPage, {
+  type OwnProps as Props,
+} from '../components/Project/Stats/ProjectStatsPage';
 
 export default (props: Props) => (
   <Provider store={ReactOnRails.getStore('appStore')}>

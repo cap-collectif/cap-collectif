@@ -8,7 +8,8 @@ type Props = {
 };
 
 export const Container = styled(MediaBtsp.Left)`
-  img, svg {
+  img,
+  svg {
     margin-right: 10px;
   }
 `;
