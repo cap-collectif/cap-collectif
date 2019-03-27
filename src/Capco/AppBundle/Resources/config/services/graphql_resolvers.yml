@@ -105,14 +105,6 @@ services:
           method: 'resolveContributionType',
         }
 
-  Capco\AppBundle\GraphQL\Resolver\UserResolver:
-    tags:
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'user_contributionsToDeleteCount',
-          method: 'contributionsToDeleteCount',
-        }
-
   # This is not a resolver but a voter, rename and move this elsewhere
   Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:
     autowire: true

@@ -5,7 +5,7 @@ SectionAppendixType:
     fields:
       id:
         type: 'String'
-        resolve: "@=resolver('sectionappendixtype_id', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictTypeResolver", [value])'
       position:
         type: 'Int!'
       title:
