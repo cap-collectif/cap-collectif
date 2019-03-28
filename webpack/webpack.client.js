@@ -58,6 +58,7 @@ const devConf = {
     // Same as print but for backoffice
     'style-admin': [
       path.join(webpackConfig.nodeModulesDir, 'ckeditor/ckeditor.js'),
+      path.join(webpackConfig.nodeModulesDir, 'react-toggle/style.css'),
       path.join(webpackConfig.appDir, 'Resources/scss/style-admin.scss'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),
