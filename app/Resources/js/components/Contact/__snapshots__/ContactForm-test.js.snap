@@ -66,7 +66,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
       id="group_description"
       label={
         <FormattedMessage
-          id="group.description"
+          id="contact.your-message"
           values={Object {}}
         />
       }
@@ -171,7 +171,7 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
       id="group_description"
       label={
         <FormattedMessage
-          id="group.description"
+          id="contact.your-message"
           values={Object {}}
         />
       }
@@ -282,7 +282,7 @@ exports[`<ContactForm /> should render correctly with a connected user 1`] = `
       id="group_description"
       label={
         <FormattedMessage
-          id="group.description"
+          id="contact.your-message"
           values={Object {}}
         />
       }
