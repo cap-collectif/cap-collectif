@@ -1,12 +1,15 @@
 <?php
-
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\AbstractLogicJumpCondition;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Form\Type\RelayNodeType;
+use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LogicJumpConditionType extends AbstractType
@@ -15,7 +18,7 @@ class LogicJumpConditionType extends AbstractType
     {
         $builder->add('id');
         $builder->add('operator');
-        $builder->add('question', RelayNodeType::class, ['class' => AbstractQuestion::class]);
+        $builder->add('question');
         $builder->add('value');
     }
 

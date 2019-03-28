@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionListPaginated /> renders correcty with pagination disabled 1`] = `
+<Fragment>
+  <ForwardRef(Relay(Opinion))
+    key="0"
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "id": "opinion1",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <ForwardRef(Relay(Opinion))
+    key="1"
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "id": "opinion2",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <ForwardRef(Relay(Opinion))
+    key="2"
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "id": "opinion3",
+      }
+    }
+    showUpdatedDate={false}
+  />
+</Fragment>
+`;
+
+exports[`<OpinionListPaginated /> renders correcty with pagination enabled 1`] = `
+<Fragment>
+  <ForwardRef(Relay(Opinion))
+    key="0"
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "id": "opinion1",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <ForwardRef(Relay(Opinion))
+    key="1"
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "id": "opinion2",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <ForwardRef(Relay(Opinion))
+    key="2"
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "id": "opinion3",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <div
+    className="text-center"
+  >
+    <PanelFooter
+      bsClass="panel"
+      className="bg-white"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="link"
+        disabled={false}
+        id="OpinionListPaginated-loadmore"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="see-more-proposals"
+          values={Object {}}
+        />
+      </Button>
+    </PanelFooter>
+  </div>
+</Fragment>
+`;
+
+exports[`<OpinionListPaginated /> renders correcty with pagination enabled 2`] = `
+<Fragment>
+  <ForwardRef(Relay(Opinion))
+    key="0"
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "id": "opinion1",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <ForwardRef(Relay(Opinion))
+    key="1"
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "id": "opinion2",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <ForwardRef(Relay(Opinion))
+    key="2"
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "id": "opinion3",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <div
+    className="text-center"
+  >
+    <PanelFooter
+      bsClass="panel"
+      className="bg-white"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="link"
+        disabled={true}
+        id="OpinionListPaginated-loadmore"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.loading"
+          values={Object {}}
+        />
+      </Button>
+    </PanelFooter>
+  </div>
+</Fragment>
+`;

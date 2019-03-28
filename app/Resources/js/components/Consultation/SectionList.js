@@ -2,11 +2,20 @@
 import * as React from 'react';
 import Section from './Section';
 
-type Props = {
-  section: Object,
-  consultation: Object,
-  level: number,
-};
+type Props = {|
+  // We have a recursive type…
+  +section: {|
+    __id: string,
+    sections: $ReadOnlyArray<{|
+      __id: string,
+      $fragmentRefs: any,
+      sections: $ReadOnlyArray<{||}>,
+    |}>,
+    $fragmentRefs: any,
+  |},
+  +consultation: {||},
+  +level: number,
+|};
 
 export class SectionList extends React.Component<Props> {
   render() {
@@ -14,9 +23,11 @@ export class SectionList extends React.Component<Props> {
 
     return (
       <div className="section-list_container" id={section.__id}>
+        {/* $FlowFixMe $refType */}
         <Section consultation={consultation} section={section} level={level} />
         {section.sections &&
           section.sections.map((subSelection, index) => (
+            // $FlowFixMe $refType
             <SectionList
               key={index}
               consultation={consultation}

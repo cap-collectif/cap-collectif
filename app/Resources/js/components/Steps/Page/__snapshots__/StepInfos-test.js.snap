@@ -1,13 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<StepInfos /> should render correcty 1`] = `
-<CardContainer>
-  <div
-    className="card__body"
-  >
+<Card>
+  <Body>
     <StepText
       text="Coucou"
     />
-  </div>
-</CardContainer>
+  </Body>
+</Card>
 `;

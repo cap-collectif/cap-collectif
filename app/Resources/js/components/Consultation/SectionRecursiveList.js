@@ -18,11 +18,10 @@ export class SectionRecursiveList extends React.Component<Props> {
         {/* $FlowFixMe */}
         <UnpublishedOpinionList consultation={consultation} />
         {consultation.sections &&
-          consultation.sections
-            .filter(Boolean)
-            .map((section, index) => (
-              <SectionList key={index} consultation={consultation} section={section} level={0} />
-            ))}
+          consultation.sections.filter(Boolean).map((section, index) => (
+            // $FlowFixMe $refType
+            <SectionList key={index} consultation={consultation} section={section} level={0} />
+          ))}
       </div>
     );
   }

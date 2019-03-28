@@ -9,7 +9,7 @@ LogicJumpConditionInput:
         type: 'LogicJumpConditionOperator!'
         description: 'The operator used to check the condition'
       question:
-        type: 'ID!'
+        type: 'Int!'
         description: 'The id of the question you want to have a condition'
       value:
         type: 'String'

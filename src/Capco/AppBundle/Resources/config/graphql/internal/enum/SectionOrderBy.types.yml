@@ -1,0 +1,19 @@
+# TODO just a helper, should be removed
+SectionOrderBy:
+  type: enum
+  config:
+    values:
+      positions:
+        value: 'positions'
+      random:
+        value: 'random'
+      last:
+        value: 'last'
+      old:
+        value: 'old'
+      favorable:
+        value: 'favorable'
+      votes:
+        value: 'votes'
+      comments:
+        value: 'comments'

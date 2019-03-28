@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Type /> should render correctly 1`] = `
+<Type__Container
+  bgColor="#707070"
+>
+  My Type
+</Type__Container>
+`;
+
+exports[`<Type /> should render correctly with other bgColor 1`] = `
+<Type__Container
+  bgColor="#c3c3c3"
+>
+  My type
+</Type__Container>
+`;

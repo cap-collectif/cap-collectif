@@ -9,6 +9,7 @@ import RemainingTime from '../../Utils/RemainingTime';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
 import ProjectPreviewCounters from './ProjectPreviewCounters';
+import Card from '../../Ui/Card/Card';
 import type { ProjectPreviewBody_project } from './__generated__/ProjectPreviewBody_project.graphql';
 
 type Props = {
@@ -78,21 +79,21 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
     if (step.status === 'OPENED' && this.actualStepIsParticipative()) {
       return (
-        <a href={step.url}>
+        <a href={step.url} className="text-uppercase  mr-10">
           <FormattedMessage id="project.preview.action.participe" />
         </a>
       );
     }
     if ((!this.actualStepIsParticipative() && step.status === 'OPENED') || isCurrentStep) {
       return (
-        <a href={step.url}>
+        <a href={step.url} className="text-uppercase  mr-10">
           <FormattedMessage id="project.preview.action.seeStep" />
         </a>
       );
     }
     if (step.status === 'CLOSED') {
       return (
-        <a href={step.url}>
+        <a href={step.url} className="text-uppercase  mr-10">
           <FormattedMessage id="project.preview.action.seeResult" />
         </a>
       );
@@ -162,11 +163,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
   getTitle = () => {
     const { hasSecondTitle } = this.props;
 
-    if (hasSecondTitle) {
-      return <h2 className="card__title">{this.getTitleContent()}</h2>;
-    }
-
-    return <h3 className="card__title">{this.getTitleContent()}</h3>;
+    return <Card.Title tagName={hasSecondTitle ? 'h2' : 'h3'}>{this.getTitleContent()}</Card.Title>;
   };
 
   actualStepIsParticipative() {
@@ -188,8 +185,8 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const isCurrentStep = getCurrentStep(project);
 
     return (
-      <div className="card__body">
-        <div className="card__body__infos">
+      <Card.Body>
+        <div className="flex-1">
           <ProjectPreviewThemes project={project} />
           {this.getTitle()}
           {/* $FlowFixMe $fragmentRefs */}
@@ -202,7 +199,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
             isCurrentStep={isCurrentStep}
           />
         )}
-        <div className="card__actions">
+        <div className="small excerpt">
           {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
           {actualStep &&
             actualStep.status === 'OPENED' &&
@@ -210,7 +207,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
             actualStep.endAt &&
             this.actualStepIsParticipative() && <RemainingTime endAt={actualStep.endAt} />}
         </div>
-      </div>
+      </Card.Body>
     );
   }
 }

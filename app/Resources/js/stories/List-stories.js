@@ -90,7 +90,7 @@ storiesOf('List', module)
         </ListGroupItem>
         <ListGroupItem className="list-group-item__opinion">
           <div className="left-block">
-            <UserAvatar defaultAvatar={null} user={author} />
+            <UserAvatar user={author} />
             <div>
               <p>
                 {/* <a href="#" className="author-name"> */}

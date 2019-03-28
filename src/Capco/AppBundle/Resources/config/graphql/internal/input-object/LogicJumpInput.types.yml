@@ -7,10 +7,10 @@ LogicJumpInput:
       always:
         type: 'Boolean'
       origin:
-        type: 'ID!'
+        type: 'Int!'
         description: 'The id of the question where the logic jump start'
       destination:
-        type: 'ID!'
+        type: 'Int!'
         description: 'The id of the question where the logic jump end if the conditions are fulfilled'
       conditions:
         type: '[LogicJumpConditionInput]'

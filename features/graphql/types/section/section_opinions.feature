@@ -2,42 +2,23 @@
 Feature: Opinion types
 
 @read-only
-Scenario: GraphQL client wants to list consultations
+Scenario: GraphQL client wants to list consultations ordered by positions
   When I send a GraphQL request:
   """
-  query OpinionListQuery {
-    node(id: "opinionType12") {
+  query {
+    node(id: "opinionType10") {
       ... on Section {
-        opinions(limit: 5) {
-          ...Opinion_opinion
-          id
+        opinions(first: 25, orderBy: {field: POSITIONS, direction: DESC}) {
+          totalCount
+          edges {
+            node {
+              id
+              pinned
+            }
+          }
         }
       }
     }
-  }
-  fragment Opinion_opinion on Opinion {
-        id
-        url
-        title
-        createdAt
-        updatedAt
-        author {
-          vip
-          displayName
-          media {
-            url
-            id
-          }
-          id
-        }
-        section {
-          title
-          versionable
-          linkable
-          sourceable
-          voteWidgetType
-          id
-        }
   }
   """
   Then the JSON response should match:
@@ -45,31 +26,163 @@ Scenario: GraphQL client wants to list consultations
   {
      "data":{
         "node": {
-        "opinions":[
-           {
-              "id": "opinion51",
-              "url": "https://capco.test/consultations/strategie-technologique-de-letat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/les-causes/opinion-51",
-              "title": "Opinion 51",
-              "createdAt": @string@,
-              "updatedAt": null,
-              "author": {
-                 "vip": false,
-                 "displayName": "user",
-                 "media": null,
-                 "id": @string@
-              },
-              "section": {
-                 "title": "Les causes",
-                 "versionable": true,
-                 "linkable": false,
-                 "sourceable": true,
-                 "voteWidgetType": 2,
-                 "id": @string@
+        "opinions": {
+          "totalCount": 21,
+          "edges": [
+            { 
+              "node": {
+                 "id": @string@,
+                 "pinned": @boolean@
               }
-           },
-           @...@
-        ]
-     }
+            },
+            @...@
+          ]
+        }
+      }
+    }
+  }
+  """
+
+@read-only
+Scenario: GraphQL client wants to list consultations ordered by votes
+  When I send a GraphQL request:
+  """
+  query {
+    node(id: "opinionType10") {
+      ... on Section {
+        opinions(first: 25, orderBy: {field: VOTES, direction: DESC}) {
+          totalCount
+          edges {
+            node {
+              id
+              pinned
+              votes {
+                totalCount
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "node": {
+        "opinions": {
+          "totalCount": 21,
+          "edges": [
+            { 
+              "node": {
+                 "id": @string@,
+                 "pinned": @boolean@,
+                 "votes": {
+                    "totalCount": @integer@
+                  }
+              }
+            },
+            @...@
+          ]
+        }
+      }
+    }
+  }
+  """
+
+@read-only
+Scenario: GraphQL client wants to list consultations ordered by favorites
+  When I send a GraphQL request:
+  """
+  query {
+    node(id: "opinionType10") {
+      ... on Section {
+        opinions(first: 25, orderBy: {field: VOTES_OK, direction: DESC}) {
+          totalCount
+          edges {
+            node {
+              id
+              pinned
+              votes(value: YES) {
+                totalCount
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "node": {
+        "opinions": {
+          "totalCount": 21,
+          "edges": [
+            { 
+              "node": {
+                 "id": @string@,
+                 "pinned": @boolean@,
+                 "votes": {
+                    "totalCount": @integer@
+                  }
+              }
+            },
+            @...@
+          ]
+        }
+      }
+    }
+  }
+  """
+
+@read-only
+Scenario: GraphQL client wants to list consultations ordered by comments
+  When I send a GraphQL request:
+  """
+  query {
+    node(id: "opinionType10") {
+      ... on Section {
+        opinions(first: 25, orderBy: {field: COMMENTS, direction: DESC}) {
+          totalCount
+          edges {
+            node {
+              id
+              pinned
+              arguments {
+                totalCount
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "node": {
+        "opinions": {
+          "totalCount": 21,
+          "edges": [
+            { 
+              "node": {
+                 "id": @string@,
+                 "pinned": @boolean@,
+                 "arguments": {
+                    "totalCount": @integer@
+                  }
+              }
+            },
+            @...@
+          ]
+        }
+      }
     }
   }
   """

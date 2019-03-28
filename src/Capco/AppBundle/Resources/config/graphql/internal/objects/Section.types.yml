@@ -8,6 +8,8 @@ Section:
       id:
         type: 'ID!'
         description: 'The id of the section.'
+      consultation:
+        type: 'InternalConsultation'
       slug:
         type: 'String!'
         description: 'The slug of the section.'
@@ -66,13 +68,13 @@ Section:
       url:
         resolve: "@=resolver('section_url', [value])"
       defaultOrderBy:
-        type: 'String' # should be an enum
+        type: 'SectionOrderBy'
         resolve: '@=value.getDefaultFilter()'
       opinions:
-        type: '[Opinion!]!'
-        description: 'TO BE REMOVED'
-        args:
-          limit:
-            description: 'Max depth.'
-            type: 'Int!'
+        type: 'OpinionConnection!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionOpinionsResolver", [value, args])'
+        argsBuilder: 'Relay::Connection'
+        args:
+          orderBy:
+            type: 'InternalOpinionOrder'
+            description: 'Ordering options for followers returning from the connection'

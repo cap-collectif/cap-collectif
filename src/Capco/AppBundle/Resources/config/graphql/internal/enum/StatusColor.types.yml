@@ -1,0 +1,17 @@
+StatusColor:
+  type: enum
+  config:
+    description: 'Different status type'
+    values:
+      info:
+        value: 'info'
+      primary:
+        value: 'primary'
+      success:
+        value: 'success'
+      warning:
+        value: 'warning'
+      danger:
+        value: 'danger'
+      default:
+        value: 'default'

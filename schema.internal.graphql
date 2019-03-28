@@ -2228,7 +2228,7 @@ input LogicJumpConditionInput {
   operator: LogicJumpConditionOperator!
 
   # The id of the question you want to have a condition
-  question: ID!
+  question: Int!
 
   # The answer the selected question should have to trigger the condition
   value: String
@@ -2248,10 +2248,10 @@ input LogicJumpInput {
   always: Boolean
 
   # The id of the question where the logic jump start
-  origin: ID!
+  origin: Int!
 
   # The id of the question where the logic jump end if the conditions are fulfilled
-  destination: ID!
+  destination: Int!
 
   # A collection of conditions that you have to fulfill for displaying the destination question
   conditions: [LogicJumpConditionInput]
@@ -2951,6 +2951,36 @@ type OpinionModal {
 }
 
 union OpinionOrVersion = Opinion | Version
+
+# Ways in which opinion connections can be ordered.
+input OpinionOrder {
+  # The field in which to order nodes by.
+  field: OpinionOrderField!
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = ASC
+}
+
+# Properties by which opinion connections can be ordered
+enum OpinionOrderField {
+  # Allows ordering a list of opinions by position.
+  POSITIONS
+
+  # Allows ordering a list of opinions randomly.
+  RANDOM
+
+  # Allows ordering a list of opinions by when they were created.
+  PUBLISHED_AT
+
+  # Allows ordering a list of opinions by the number of votes it have.
+  VOTES
+
+  # Allows ordering a list of opinions by the number of votes OK it have.
+  VOTES_OK
+
+  # Allows ordering a list of opinions by the number of comments it have.
+  COMMENTS
+}
 
 # Entities that can be published.
 type OpinionVote implements YesNoPairedVote & Publishable & Vote {
@@ -4983,6 +5013,7 @@ type Section implements Node & UniformResourceLocatable {
 
   # The id of the section.
   id: ID!
+  consultation: Consultation
 
   # The slug of the section.
   slug: String!
@@ -5030,13 +5061,23 @@ type Section implements Node & UniformResourceLocatable {
   votesHelpText: String
   votesThreshold: Int
   votesThresholdHelpText: String
-  defaultOrderBy: String
-
-  # TO BE REMOVED
+  defaultOrderBy: SectionOrderBy
   opinions(
-    # Max depth.
-    limit: Int!
-  ): [Opinion!]!
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Ordering options for followers returning from the connection
+    orderBy: OpinionOrder
+  ): OpinionConnection!
 }
 
 # A section
@@ -5045,6 +5086,16 @@ type SectionAppendixType {
   position: Int!
   title: String
   helpText: String
+}
+
+enum SectionOrderBy {
+  positions
+  random
+  last
+  old
+  favorable
+  votes
+  comments
 }
 
 # A section is just a title in a quiz without any possible answer.
@@ -5635,7 +5686,17 @@ interface Sourceable {
 type Status {
   id: ID!
   name: String!
-  color: String!
+  color: StatusColor!
+}
+
+# Different status type
+enum StatusColor {
+  info
+  primary
+  success
+  warning
+  danger
+  default
 }
 
 # A step inside a project.

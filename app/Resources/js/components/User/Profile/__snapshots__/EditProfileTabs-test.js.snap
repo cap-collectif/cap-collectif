@@ -21,36 +21,42 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
       >
         <PanelHeading
           bsClass="panel"
+          className="d-flex"
           componentClass="div"
         >
-          <CardUser>
-            <Connect(UserAvatar)
-              className="pull-left"
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+          <Media
+            className="m-auto align-items-center"
+          >
+            <Left>
+              <Connect(UserAvatar)
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-            <UserLink
-              className=""
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+              />
+            </Left>
+            <Body>
+              <UserLink
+                className="excerpt"
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-          </CardUser>
+              />
+            </Body>
+          </Media>
         </PanelHeading>
         <ListGroup
           bsClass="list-group"
@@ -315,36 +321,42 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
       >
         <PanelHeading
           bsClass="panel"
+          className="d-flex"
           componentClass="div"
         >
-          <CardUser>
-            <Connect(UserAvatar)
-              className="pull-left"
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+          <Media
+            className="m-auto align-items-center"
+          >
+            <Left>
+              <Connect(UserAvatar)
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-            <UserLink
-              className=""
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+              />
+            </Left>
+            <Body>
+              <UserLink
+                className="excerpt"
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-          </CardUser>
+              />
+            </Body>
+          </Media>
         </PanelHeading>
         <ListGroup
           bsClass="list-group"
@@ -524,36 +536,42 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
       >
         <PanelHeading
           bsClass="panel"
+          className="d-flex"
           componentClass="div"
         >
-          <CardUser>
-            <Connect(UserAvatar)
-              className="pull-left"
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+          <Media
+            className="m-auto align-items-center"
+          >
+            <Left>
+              <Connect(UserAvatar)
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-            <UserLink
-              className=""
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+              />
+            </Left>
+            <Body>
+              <UserLink
+                className="excerpt"
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-          </CardUser>
+              />
+            </Body>
+          </Media>
         </PanelHeading>
         <ListGroup
           bsClass="list-group"

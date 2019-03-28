@@ -79,10 +79,10 @@ export class UnpublishedLabel extends React.Component<Props> {
     }
 
     return (
-      <span>
+      <React.Fragment>
         {' '}
         <OverlayTrigger placement="top" overlay={overlay}>
-          <Label bsStyle="danger">
+          <Label bsStyle="danger" className="ellipsis d-ib mw-100 mt-5">
             <i className="cap cap-delete-2" />{' '}
             <FormattedMessage
               id={
@@ -93,7 +93,7 @@ export class UnpublishedLabel extends React.Component<Props> {
             />
           </Label>
         </OverlayTrigger>
-      </span>
+      </React.Fragment>
     );
   }
 }

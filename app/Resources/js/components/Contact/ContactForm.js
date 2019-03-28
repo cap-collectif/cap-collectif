@@ -129,7 +129,7 @@ export class ContactForm extends React.Component<Props> {
           <Field
             name="body"
             divClassName="contact-form_textarea"
-            label={<FormattedMessage id="group.description" />}
+            label={<FormattedMessage id="contact.your-message" />}
             component={component}
             autosize={false}
             type="textarea"

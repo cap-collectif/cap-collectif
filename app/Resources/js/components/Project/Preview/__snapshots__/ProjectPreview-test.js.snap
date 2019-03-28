@@ -10,7 +10,7 @@ exports[`<ProjectPreview /> should render correctly project with participative s
   sm={6}
   xs={12}
 >
-  <CardContainer
+  <Card
     className="project-preview"
     id="project-preview-project1"
   >
@@ -41,6 +41,6 @@ exports[`<ProjectPreview /> should render correctly project with participative s
         }
       }
     />
-  </CardContainer>
+  </Card>
 </Col>
 `;
