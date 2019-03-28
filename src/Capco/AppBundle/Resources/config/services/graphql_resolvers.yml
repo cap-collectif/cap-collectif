@@ -26,59 +26,6 @@ services:
     tags:
       - {
           name: overblog_graphql.resolver,
-          alias: 'sectionappendixtype_id',
-          method: 'getSectionAppendixId',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'sectionappendixtype_title',
-          method: 'getSectionAppendixTitle',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'sectionappendixtype_helpText',
-          method: 'getSectionAppendixHelpText',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'sectionContributionsRelay',
-          method: 'getSectionContributionsConnection',
-        }
-      - { name: overblog_graphql.resolver, alias: 'section_url', method: 'getSectionUrl' }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'contributionsBySection',
-          method: 'getContributionsBySection',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'section_contributionsCount',
-          method: 'getSectionOpinionsCount',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'section_contributions',
-          method: 'getSectionOpinions',
-        }
-      - { name: overblog_graphql.resolver, alias: 'section_sections', method: 'getSectionChildren' }
-      - { name: overblog_graphql.resolver, alias: 'consultation', method: 'resolve' }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposition_section',
-          method: 'resolvePropositionSection',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'consultation_sections',
-          method: 'resolveConsultationSections',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposition_arguments',
-          method: 'resolvePropositionArguments',
-        }
-      - {
-          name: overblog_graphql.resolver,
           alias: 'proposition_vote_author',
           method: 'resolvePropositionVoteAuthor',
         }

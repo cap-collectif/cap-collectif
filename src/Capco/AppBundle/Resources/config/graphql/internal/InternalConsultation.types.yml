@@ -36,7 +36,7 @@ InternalConsultation:
       sections:
         type: '[Section]'
         description: 'List of sections.'
-        resolve: "@=resolver('consultation_sections', [value, args])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationSectionResolver", [value, args])'
       contributors:
         type: 'InternalUserConnection!'
       # TODO internal

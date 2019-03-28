@@ -73,7 +73,7 @@ InternalQuery:
           id:
             description: 'If omitted, returns all consultations. If provided, returns the consultation of the particular id.'
             type: 'ID'
-        resolve: "@=resolver('consultation', [args])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationQueryResolver", [args])'
       groups:
         description: 'Lookup groups.'
         type: '[Group!]!'
