@@ -9,14 +9,14 @@ Reporting:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
       author:
-        resolve: "@=resolver('reporting_author', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reporting\\ReportingAuthorResolver", [value])'
       bodyText:
         type: 'String!'
         description: 'The escaped content of the argument.'
       type:
         type: 'ReportingType!'
         description: 'Kind of report.'
-        resolve: "@=resolver('reporting_type', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reporting\\ReportingTypeResolver", [value])'
       body:
         type: 'String!'
         description: 'The content of the argument.'

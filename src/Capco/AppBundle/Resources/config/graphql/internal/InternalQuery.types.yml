@@ -94,13 +94,6 @@ InternalQuery:
           longitude:
             type: 'Float!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictsForLocalisationResolver", [args["proposalFormId"], args["latitude"], args["longitude"]])'
-      votesByContribution:
-        type: '[InternalProposalVote!]!'
-        description: 'TO BE REMOVED'
-        args:
-          contribution:
-            type: 'ID!'
-        resolve: "@=resolver('votesByContribution', [args])"
       contributions:
         type: '[Opinion!]!'
         description: 'TO BE REMOVED'

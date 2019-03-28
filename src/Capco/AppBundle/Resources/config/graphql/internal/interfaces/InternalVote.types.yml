@@ -12,7 +12,7 @@ InternalVote:
       author:
         type: 'InternalUser'
         description: 'The author of the contribution.'
-        resolve: "@=resolver('proposition_vote_author', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\PropositionVoteUserResolver", [value])'
       related:
         type: 'Contribution'
         description: 'The contribution that was voted.'
