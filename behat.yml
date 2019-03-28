@@ -41,7 +41,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@consultation'
+        tags: '@consultation&&~@synthesis'
     bp:
       paths: ['%paths.base%/features/front']
       contexts:
