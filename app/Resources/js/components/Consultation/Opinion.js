@@ -6,10 +6,10 @@ import OpinionPreview from '../Opinion/OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
 import type { Opinion_opinion } from './__generated__/Opinion_opinion.graphql';
 
-type Props = {|
-  +opinion: Opinion_opinion,
-  +showUpdatedDate: boolean,
-|};
+type Props = {
+  opinion: Opinion_opinion,
+  showUpdatedDate: boolean,
+};
 
 export class Opinion extends React.Component<Props> {
   static defaultProps = {

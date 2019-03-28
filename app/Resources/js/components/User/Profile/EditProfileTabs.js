@@ -11,10 +11,10 @@ import FollowingsTab from '../Following/FollowingsTab';
 import type EditProfileTabs_viewer from './__generated__/EditProfileTabs_viewer.graphql';
 import UserAvatar from '../UserAvatar';
 import UserLink from '../UserLink';
+import CardUser from '../../Ui/Card/CardUser';
 import ChangePasswordForm from './ChangePasswordForm';
 import PersonalData from './PersonalData';
 import Profile from './Profile';
-import Media from '../../Ui/Medias/Media/Media';
 
 type Props = {
   features: FeatureToggles,
@@ -60,15 +60,11 @@ export class EditProfileTabs extends Component<Props> {
         <Row className="clearfix">
           <Col sm={4} md={3}>
             <Panel id="panel-account">
-              <Panel.Heading className="d-flex">
-                <Media className="m-auto align-items-center">
-                  <Media.Left>
-                    <UserAvatar user={viewer} />
-                  </Media.Left>
-                  <Media.Body>
-                    <UserLink className="excerpt" user={viewer} />
-                  </Media.Body>
-                </Media>
+              <Panel.Heading>
+                <CardUser>
+                  <UserAvatar className="pull-left" user={viewer} />
+                  <UserLink user={viewer} />
+                </CardUser>
               </Panel.Heading>
               <ListGroup>
                 <Nav bsStyle="pills" stacked>

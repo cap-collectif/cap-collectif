@@ -6,20 +6,15 @@ import type { Section_section } from './__generated__/Section_section.graphql';
 import type { Section_consultation } from './__generated__/Section_consultation.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 
-type Props = {|
-  +section: Section_section,
-  +consultation: Section_consultation,
-  +level: number,
-  +enablePagination: boolean,
-|};
+type Props = {
+  section: Section_section,
+  consultation: Section_consultation,
+  level: number,
+};
 
 export class Section extends React.Component<Props> {
-  static defaultProps = {
-    enablePagination: false,
-  };
-
   render() {
-    const { enablePagination, consultation, section, level } = this.props;
+    const { consultation, section, level } = this.props;
     return (
       <div
         id={`opinion-type--${section.slug}`}
@@ -33,11 +28,7 @@ export class Section extends React.Component<Props> {
         {(section.contributionsCount > 0 || section.contribuable) && (
           <div className="mt-15">
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-            <OpinionList
-              enablePagination={enablePagination}
-              consultation={consultation}
-              section={section}
-            />
+            <OpinionList consultation={consultation} section={section} />
           </div>
         )}
       </div>

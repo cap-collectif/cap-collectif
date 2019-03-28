@@ -42,6 +42,5 @@
         "react-docgen",
         "relay",
         "transform-class-properties",
-        "polished"
     ]
 }

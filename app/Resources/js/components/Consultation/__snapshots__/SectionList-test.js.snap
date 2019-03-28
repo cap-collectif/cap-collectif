@@ -3,36 +3,11 @@
 exports[`<SectionList /> renders correcty 1`] = `
 <div
   className="section-list_container"
-  id="section1"
 >
   <ForwardRef(Relay(Section))
     consultation={Object {}}
     level={0}
-    section={
-      Object {
-        "$fragmentRefs": null,
-        "__id": "section1",
-        "sections": Array [
-          Object {
-            "$fragmentRefs": null,
-            "__id": "section2",
-            "sections": Array [],
-          },
-        ],
-      }
-    }
-  />
-  <SectionList
-    consultation={Object {}}
-    key="0"
-    level={1}
-    section={
-      Object {
-        "$fragmentRefs": null,
-        "__id": "section2",
-        "sections": Array [],
-      }
-    }
+    section={Object {}}
   />
 </div>
 `;

@@ -2,10 +2,8 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Enum\OpinionOrderField;
-use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -380,50 +378,73 @@ class OpinionRepository extends EntityRepository
         return new Paginator($query);
     }
 
+    /**
+     * Get opinions by opinionType.
+     *
+     * @param mixed $opinionTypeId
+     * @param mixed $nbByPage
+     * @param mixed $page
+     * @param mixed $opinionsSort
+     */
     public function getByOpinionTypeOrdered(
-        OpinionType $section,
-        int $offset,
-        int $limit,
-        array $orderBy
+        $opinionTypeId,
+        $nbByPage = 10,
+        $page = 1,
+        $opinionsSort = 'positions'
     ) {
-        $field = $orderBy['field'];
-        $direction = $orderBy['direction'];
+        if ($page < 1) {
+            throw new \InvalidArgumentException(
+                sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page)
+            );
+        }
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->andWhere('o.OpinionType = :section')
+            ->addSelect(
+                'ot',
+                'aut',
+                'm',
+                '(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb'
+            )
+            ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('o.Author', 'aut')
+            ->leftJoin('aut.media', 'm')
+            ->andWhere('ot.id = :opinionType')
             ->andWhere('o.trashedAt IS NULL')
-            ->setParameter('section', $section);
+            ->setParameter('opinionType', $opinionTypeId)
+            ->addOrderBy('o.pinned', 'DESC');
+        if ($opinionsSort) {
+            if ('last' === $opinionsSort) {
+                $qb->addOrderBy('o.createdAt', 'DESC')->addOrderBy('o.votesCountOk', 'DESC');
+            } elseif ('old' === $opinionsSort) {
+                $qb->addOrderBy('o.createdAt', 'ASC')->addOrderBy('o.votesCountOk', 'DESC');
+            } elseif ('favorable' === $opinionsSort) {
+                $qb
+                    ->addOrderBy('o.votesCountOk', 'DESC')
+                    ->addOrderBy('o.votesCountNok', 'ASC')
+                    ->addOrderBy('o.createdAt', 'DESC');
+            } elseif ('votes' === $opinionsSort) {
+                $qb->addOrderBy('vnb', 'DESC')->addOrderBy('o.createdAt', 'DESC');
+            } elseif ('comments' === $opinionsSort) {
+                $qb->addOrderBy('o.argumentsCount', 'DESC')->addOrderBy('o.createdAt', 'DESC');
+            } elseif ('positions' === $opinionsSort) {
+                // trick in DQL to order NULL values last
+                $qb
+                    ->addSelect('-o.position as HIDDEN inversePosition')
+                    ->addOrderBy('inversePosition', 'DESC')
 
-        if (OpinionOrderField::PUBLISHED_AT === $field) {
-            $qb->addOrderBy('o.createdAt', $direction);
-        } elseif (OpinionOrderField::VOTES_OK === $field) {
-            $qb
-                ->addOrderBy('o.votesCountOk', $direction)
-                ->addOrderBy('o.votesCountNok', OrderDirection::reverse($direction));
-        } elseif (OpinionOrderField::VOTES === $field) {
-            $qb
-                ->addSelect('(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
-                ->addOrderBy('vnb', $direction);
-        } elseif (OpinionOrderField::COMMENTS === $field) {
-            $qb->addOrderBy('o.argumentsCount', $direction)->addOrderBy('o.createdAt', 'DESC');
-        } elseif (OpinionOrderField::POSITIONS === $field) {
-            // trick in DQL to order NULL values last
-            // TODO random with pagination sucks in MySQL,
-            // it should be in ElasticSearch cf OpinionSearch.
-            // ->addSelect('RAND() as HIDDEN rand')
-            // ->addOrderBy('rand')
-            $qb
-                ->addSelect('-o.position as HIDDEN inversePosition')
-                ->addOrderBy('o.pinned', 'DESC')
-                ->addOrderBy('inversePosition', 'DESC');
-        } elseif (OpinionOrderField::RANDOM === $field) {
-            $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
+                    ->addSelect('RAND() as HIDDEN rand')
+                    ->addOrderBy('rand');
+            } elseif ('random' === $opinionsSort) {
+                $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
+            }
         }
 
         $query = $qb
             ->getQuery()
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setFirstResult(($page - 1) * $nbByPage)
+            ->setMaxResults($nbByPage);
+        $query->useQueryCache(true);
+        // $query->useResultCache(true, 60);
 
         return new Paginator($query);
     }

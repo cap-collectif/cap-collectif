@@ -29,6 +29,7 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
         event={
           Object {
             "$fragmentRefs": null,
+            "id": "event1",
           }
         }
         isHighlighted={false}
@@ -38,6 +39,7 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
         event={
           Object {
             "$fragmentRefs": null,
+            "id": "event2",
           }
         }
         isHighlighted={false}
@@ -47,6 +49,7 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
         event={
           Object {
             "$fragmentRefs": null,
+            "id": "event3",
           }
         }
         isHighlighted={false}

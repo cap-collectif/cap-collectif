@@ -49,7 +49,6 @@ import ProjectDistrictAdminApp from '../js/startup/ProjectDistrictAdminApp';
 import ProjectTrashCommentApp from '../js/startup/ProjectTrashCommentApp';
 import AdminExportButtonApp from '../js/startup/AdminExportButtonApp';
 import EventListApp from '../js/startup/EventListApp';
-import SectionPageApp from '../js/startup/SectionPageApp';
 
 const emptyFunction = () => {};
 
@@ -66,7 +65,6 @@ ReactOnRails.register({
   RegistrationAdminApp,
   ShieldApp,
   ChooseAUsernameApp,
-  SectionPageApp,
   ProposalFormCreateButtonApp,
   ProjectListPageApp,
   ProposalCreateFusionButtonApp,

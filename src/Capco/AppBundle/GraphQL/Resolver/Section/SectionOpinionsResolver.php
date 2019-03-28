@@ -2,34 +2,34 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Section;
 
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\OpinionType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class SectionOpinionsResolver implements ResolverInterface
 {
+    private $logger;
     private $opinionRepo;
 
-    public function __construct(OpinionRepository $opinionRepo)
+    public function __construct(OpinionRepository $opinionRepo, LoggerInterface $logger)
     {
+        $this->logger = $logger;
         $this->opinionRepo = $opinionRepo;
     }
 
-    public function __invoke(OpinionType $section, Argument $args): Connection
+    public function __invoke(OpinionType $section, Argument $args): array
     {
-        $totalCount = $this->opinionRepo->countByOpinionType($section->getId());
+        if (0 === $section->getOpinions()->count()) {
+            return [];
+        }
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($section, $args) {
-            // TODO use OpinionSearch here.
-            return $this->opinionRepo
-                ->getByOpinionTypeOrdered($section, $offset, $limit, $args->offsetGet('orderBy'))
-                ->getIterator()
-                ->getArrayCopy();
-        });
+        $limit = $args->offsetGet('limit');
 
-        return $paginator->auto($args, $totalCount);
+        return $this->opinionRepo
+            ->getByOpinionTypeOrdered($section->getId(), $limit, 1, $section->getDefaultFilter())
+            ->getIterator()
+            ->getArrayCopy();
     }
 }

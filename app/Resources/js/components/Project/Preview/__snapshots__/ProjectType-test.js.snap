@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectPreview /> should render correctly project type 1`] = `
-<Type
-  bgColor="#337ab7"
+<CardType
+  color="#337ab7"
 >
   <FormattedMessage
     id="presentation"
     values={Object {}}
   />
-</Type>
+</CardType>
 `;
 
 exports[`<ProjectPreview /> should render correctly project with null type 1`] = `""`;

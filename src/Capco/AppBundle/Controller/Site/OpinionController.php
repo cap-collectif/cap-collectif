@@ -18,24 +18,21 @@ use Symfony\Component\HttpFoundation\Request;
 class OpinionController extends Controller
 {
     /**
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}", name="app_project_show_opinions", requirements={"opinionTypeSlug" = ".+"})
-     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}", name="app_project_show_opinions_2", requirements={"opinionTypeSlug" = ".+"})
-     *
-     * Legacy URLs :
-     *
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="legacy_app_project_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}/", name="legacy_app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
-     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="legacy_app_consultation_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
-     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}", name="legacy_app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="app_project_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}/", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
-     * @Template("CapcoAppBundle:Consultation:SectionPage.html.twig")
+     * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
      */
-    public function sectionPageAction(
+    public function showByTypeAction(
         Project $project,
+        int $page,
         string $opinionTypeSlug,
         Request $request,
-        ConsultationStep $currentStep
+        ConsultationStep $currentStep,
+        string $opinionsSort = null
     ) {
         if (!$currentStep->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
@@ -44,10 +41,31 @@ class OpinionController extends Controller
         $opinionTypesResolver = $this->get(OpinionTypesResolver::class);
         $opinionType = $opinionTypesResolver->findByStepAndSlug($currentStep, $opinionTypeSlug);
 
+        $filter = $opinionsSort ?: $opinionType->getDefaultFilter();
+        $currentUrl = $this->generateUrl('app_consultation_show_opinions', [
+            'projectSlug' => $project->getSlug(),
+            'stepSlug' => $currentStep->getSlug(),
+            'opinionTypeSlug' => $opinionType->getSlug(),
+            'page' => $page,
+        ]);
+        $opinions = $this->get(OpinionRepository::class)->getByOpinionTypeOrdered(
+            $opinionType->getId(),
+            10,
+            $page,
+            $filter
+        );
+
         return [
+            'currentUrl' => $currentUrl,
             'project' => $project,
             'opinionType' => $opinionType,
+            'opinions' => $opinions,
+            'page' => $page,
+            'nbPage' => ceil(\count($opinions) / 10),
+            'opinionsSort' => $filter,
+            'opinionSortOrders' => Opinion::$sortCriterias,
             'currentStep' => $currentStep,
+            'currentRoute' => $request->get('_route'),
         ];
     }
 

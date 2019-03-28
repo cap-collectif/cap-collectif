@@ -26,7 +26,6 @@ exports[`<Section /> renders correcty 1`] = `
           "$refType": null,
         }
       }
-      enablePagination={false}
       section={
         Object {
           "$fragmentRefs": null,

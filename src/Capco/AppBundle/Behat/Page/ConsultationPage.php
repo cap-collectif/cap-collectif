@@ -10,6 +10,9 @@ class ConsultationPage extends Page
 {
     use PageTrait;
 
+    /**
+     * @var string
+     */
     protected $path = '/project/{projectSlug}/consultation/{stepSlug}';
 
     protected function verifyUrl(array $urlParameters = [])
@@ -25,8 +28,7 @@ class ConsultationPage extends Page
                         'Expected to be on "%s" but found "%s" instead',
                         $this->getUrl($urlParameters),
                         $this->getSession()->getCurrentUrl()
-                    )
-                );
+                ));
             }
         }
     }

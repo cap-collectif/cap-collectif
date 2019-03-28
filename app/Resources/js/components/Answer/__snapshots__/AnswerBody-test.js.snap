@@ -12,6 +12,11 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
   >
     <Connect(UserAvatar)
       className="pull-left"
+      style={
+        Object {
+          "paddingRight": "10px",
+        }
+      }
       user={
         Object {
           "displayName": "bg",

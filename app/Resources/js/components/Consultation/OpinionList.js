@@ -3,84 +3,58 @@ import React from 'react';
 import { QueryRenderer, graphql, createFragmentContainer, type ReadyState } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ListGroup, Panel } from 'react-bootstrap';
-import OpinionListPaginated from './OpinionListPaginated';
+import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import type {
-  SectionOrderBy,
-  OpinionList_section,
-} from './__generated__/OpinionList_section.graphql';
+import type { OpinionList_section } from './__generated__/OpinionList_section.graphql';
 import type { OpinionList_consultation } from './__generated__/OpinionList_consultation.graphql';
 import type {
   OpinionListQueryResponse,
   OpinionListQueryVariables,
-  OpinionOrder,
 } from './__generated__/OpinionListQuery.graphql';
 
-type Props = {|
-  +section: OpinionList_section,
-  +consultation: OpinionList_consultation,
-  +intl: IntlShape,
-  +enablePagination: boolean,
-|};
+const renderOpinionList = ({
+  error,
+  props,
+}: {
+  props: ?OpinionListQueryResponse,
+} & ReadyState) => {
+  if (error) {
+    console.log(error); // eslint-disable-line no-console
+    return graphqlError;
+  }
+  if (props) {
+    if (!props.section || !props.section.opinions) {
+      return graphqlError;
+    }
+    return (
+      <React.Fragment>
+        {props.section.opinions.map((opinion, index) => (
+          // $FlowFixMe $refType
+          <Opinion key={index} opinion={opinion} showUpdatedDate={false} />
+        ))}
+      </React.Fragment>
+    );
+  }
+  return <Loader />;
+};
 
-type State = {|
-  +sort: SectionOrderBy,
-|};
+type Props = {
+  section: OpinionList_section,
+  consultation: OpinionList_consultation,
+  intl: IntlShape,
+};
 
-const INITIAL_PAGINATION_COUNT = 5;
-const INITIAL_PREVIEW_COUNT = 10;
-
-export class OpinionList extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      sort: props.section.defaultOrderBy || 'positions',
-    };
+export class OpinionList extends React.Component<Props> {
+  sort(section: Object, event: SyntheticInputEvent<>) {
+    if (section.url) {
+      window.location.href = `${section.url}/sort/${event.target.value}`;
+    }
   }
 
-  sort = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    // We need to cast to enum value
-    this.setState({ sort: ((event.target.value: any): SectionOrderBy) });
-  };
-
-  getOrderBy = (): OpinionOrder => {
-    const { sort } = this.state;
-    let orderBy = { field: 'POSITIONS', direction: 'ASC' };
-    switch (sort) {
-      case 'positions':
-        orderBy = { field: 'POSITIONS', direction: 'ASC' };
-        break;
-      case 'random':
-        // $FlowFixMe looks like a bug with "RANDOM"
-        orderBy = { field: 'RANDOM', direction: 'ASC' };
-        break;
-      case 'last':
-        orderBy = { field: 'PUBLISHED_AT', direction: 'DESC' };
-        break;
-      case 'old':
-        orderBy = { field: 'PUBLISHED_AT', direction: 'ASC' };
-        break;
-      case 'favorable':
-        orderBy = { field: 'VOTES_OK', direction: 'DESC' };
-        break;
-      case 'votes':
-        orderBy = { field: 'VOTES', direction: 'DESC' };
-        break;
-      case 'comments':
-        orderBy = { field: 'COMMENTS', direction: 'DESC' };
-        break;
-      default:
-        break;
-    }
-
-    return orderBy;
-  };
-
   render() {
-    const { enablePagination, section, consultation, intl } = this.props;
-
+    const { section, consultation, intl } = this.props;
     return (
       <div id={`opinions--test17${section.slug}`} className="anchor-offset">
         <Panel className={`opinion panel--${section.color} panel--default panel-custom`}>
@@ -97,8 +71,12 @@ export class OpinionList extends React.Component<Props, State> {
                   defaultValue={section.defaultOrderBy}
                   className="form-control"
                   aria-label={intl.formatMessage({ id: 'global.filter' })}
-                  onChange={this.sort}
-                  onBlur={this.sort}>
+                  onChange={(event: SyntheticInputEvent<>) => {
+                    this.sort(section, event);
+                  }}
+                  onBlur={(event: SyntheticInputEvent<>) => {
+                    this.sort(section, event);
+                  }}>
                   <option value="positions">
                     {intl.formatMessage({ id: 'opinion.sort.positions' })}
                   </option>
@@ -130,58 +108,27 @@ export class OpinionList extends React.Component<Props, State> {
               <QueryRenderer
                 environment={environment}
                 query={graphql`
-                  query OpinionListQuery(
-                    $sectionId: ID!
-                    $count: Int!
-                    $cursor: String
-                    $orderBy: OpinionOrder!
-                  ) {
+                  query OpinionListQuery($sectionId: ID!, $limit: Int!) {
                     section: node(id: $sectionId) {
-                      id
-                      ...OpinionListPaginated_section
-                        @arguments(count: $count, cursor: $cursor, orderBy: $orderBy)
+                      ... on Section {
+                        opinions(limit: $limit) {
+                          ...Opinion_opinion
+                        }
+                      }
                     }
                   }
                 `}
                 variables={
                   ({
                     sectionId: section.id,
-                    orderBy: this.getOrderBy(),
-                    cursor: null,
-                    count: enablePagination
-                      ? INITIAL_PAGINATION_COUNT
-                      : consultation.opinionCountShownBySection ?? INITIAL_PREVIEW_COUNT,
+                    limit: consultation.opinionCountShownBySection ?? 10,
                   }: OpinionListQueryVariables)
                 }
-                render={({
-                  error,
-                  props,
-                }: {
-                  props: ?OpinionListQueryResponse,
-                } & ReadyState) => {
-                  if (error) {
-                    console.log(error); // eslint-disable-line no-console
-                    return graphqlError;
-                  }
-                  if (props) {
-                    if (!props.section) {
-                      return graphqlError;
-                    }
-                    return (
-                      // $FlowFixMe $refType
-                      <OpinionListPaginated
-                        enablePagination={enablePagination}
-                        section={props.section}
-                      />
-                    );
-                  }
-                  return <Loader />;
-                }}
+                render={renderOpinionList}
               />
             </ListGroup>
           )}
-          {!enablePagination &&
-          section.contributionsCount &&
+          {section.contributionsCount &&
           consultation.opinionCountShownBySection &&
           section.contributionsCount > consultation.opinionCountShownBySection ? (
             <Panel.Footer className="bg-white">

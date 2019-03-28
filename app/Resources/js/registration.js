@@ -71,7 +71,6 @@ import AdminExportButtonApp from './startup/AdminExportButtonApp';
 import EventListApp from './startup/EventListApp';
 import ContactsListPage from './startup/ContactsListPage';
 import ContactPage from './startup/ContactPage';
-import SectionPageApp from './startup/SectionPageApp';
 
 import appStore from './stores/AppStore';
 import MapAdminPageApp from './startup/MapAdminPageApp';
@@ -129,7 +128,6 @@ ReactOnRails.register({
   EmailNotConfirmedApp,
   NewOpinionApp,
   AdminImportEventsApp,
-  SectionPageApp,
   AccountProfileApp,
   ProjectTrashButtonApp,
   ProjectStepTabsApp,

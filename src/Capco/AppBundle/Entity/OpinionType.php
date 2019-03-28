@@ -6,7 +6,6 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 /**
  * @ORM\Table(name="opinion_type")
@@ -202,12 +201,7 @@ class OpinionType
         return $this->getId() ? $this->getTitle() : 'New opinion type';
     }
 
-    public function getConsultation(): ?ConsultationStep
-    {
-        return $this->getStep();
-    }
-
-    public function getStep(): ?ConsultationStep
+    public function getStep()
     {
         return $this->getConsultationStepType()
             ? $this->getConsultationStepType()->getStep()

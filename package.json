@@ -42,11 +42,6 @@
     "flow-coverage-report": {
         "threshold": 70,
         "outputDir": "coverage/flow/",
-        "excludeGlob": [
-            "app/Resources/js/components/Synthesis/**/*.js",
-            "app/Resources/js/**/__generated__/*.js",
-            "app/Resources/js/stories/**/*.js"
-        ],
         "globIncludePatterns": [
             "app/Resources/js/**/*.js"
         ],
@@ -186,7 +181,7 @@
         "fancybox": "^3.0.0",
         "file-loader": "^1.1.11",
         "flow-bin": "0.92.0",
-        "flow-coverage-report": "^0.6.1",
+        "flow-coverage-report": "^0.6.0",
         "flux": "^3.1.3",
         "gherkin-lint": "^3.0.0",
         "graphql": "^0.13.2",

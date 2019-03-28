@@ -1,0 +1,55 @@
+{% import _self as tree %}
+{% macro display_child(collection, depth, currentStep, project, opinionSortOrders) %}
+    {% for block in collection %}
+
+        <p id="opinion-type--{{ block.slug }}" class="anchor-offset text-center opinion-type__title level--{{ depth }}">
+            {{ block.title }}<br>
+            <span class="small excerpt">{{ block.subtitle }}</span>
+        </p>
+
+        {% if block.total_opinions_count > 0 or (block.isPublished() == true and currentStep.canContribute) %}
+            <div id="opinions--{{ block.slug }}" class="anchor-offset block  block--bordered">
+                {% include 'CapcoAppBundle:Project:list_header.html.twig' with {
+                    'project': project,
+                    'currentStep': currentStep,
+                    'opinionType': block,
+                    'opinions': block.opinions,
+                    'opinions_count': block.total_opinions_count,
+                    'opinionTerm': project.opinionTerm,
+                    'opinionSortOrders': opinionSortOrders,
+                } only %}
+
+                {% if block.total_opinions_count > 0 %}
+                    <ul class="media-list  opinion__list">
+                        {% for opinion in block.opinions %}
+                            {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': block, 'opinionTerm': project.opinionTerm} only %}
+                        {% endfor %}
+                    </ul>
+                    {% if block.total_opinions_count > currentStep.opinionCountShownBySection  %}
+                        {% set showAllLabel = project.opinionTerm == 0 ? 'opinion.show.all' : 'opinion.show.articles_all'  %}
+                        <div class="opinion  opinion__footer  box">
+                            <a href="{{ path('app_consultation_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug,'opinionTypeSlug': block.slug}) }}" class="text-center" style="display: block">
+                                {{ showAllLabel | trans({}, 'CapcoAppBundle') }}
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+        {% endif %}
+
+        {% if block.__children is defined and block.__children|length %}
+            {{ _self.display_child(block.__children, depth + 1, currentStep, project, opinionSortOrders) }}
+        {% endif %}
+
+    {% endfor %}
+{% endmacro %}
+
+{% if blocks|length > 0 %}
+  {{ tree.display_child(blocks, 0, currentStep, project, opinionSortOrders) }}
+{% else %}
+    <div class="project__empty-block  text-center">
+        <p class="icon  cap-bubble-attention-6"></p>
+        <p>{{ 'opinion.show.no_opinion_types'|trans({}, 'CapcoAppBundle') }}</p>
+    </div>
+{% endif %}

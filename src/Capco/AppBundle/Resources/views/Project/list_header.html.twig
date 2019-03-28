@@ -20,7 +20,7 @@
                             {% endif %}
                         </option>
                         {% for opinionSortOrderKey, opinionSortOrder in opinionSortOrders %}
-                            <option data-url="{{ path('app_project_show_opinions_sorted', {projectSlug: project.slug, stepSlug: currentStep.slug, opinionTypeSlug: opinionType.slug, opinionsSort: opinionSortOrder }) }}">
+                            <option data-url="{{ path('app_consultation_show_opinions_sorted', {projectSlug: project.slug, stepSlug: currentStep.slug, opinionTypeSlug: opinionType.slug, opinionsSort: opinionSortOrder }) }}">
                                 {{ opinionSortOrderKey | trans({}, 'CapcoAppBundle') }}
                             </option>
                         {% endfor %}

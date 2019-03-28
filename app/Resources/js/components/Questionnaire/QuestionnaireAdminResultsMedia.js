@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import type { QuestionnaireAdminResultsMedia_mediaQuestion } from './__generated__/QuestionnaireAdminResultsMedia_mediaQuestion.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import { Card } from '../Ui/Card/Card';
+import { CardContainer } from '../Ui/Card/CardContainer';
 import FileIcon from '../Ui/Icons/FileIcon';
 import FormattedMediaSize from '../Utils/FormattedMediaSize';
 
@@ -56,8 +56,8 @@ export class QuestionnaireAdminResultsMedia extends React.Component<Props, State
 
               return (
                 <div key={`${media.name}${key}`} className="col-sm-3 col-xs-6 d-flex">
-                  <Card>
-                    <Card.Body className="text-center">
+                  <CardContainer>
+                    <div className="card__body text-center">
                       <div className="mb-5">
                         <FileIcon format={format} />
                       </div>
@@ -65,8 +65,8 @@ export class QuestionnaireAdminResultsMedia extends React.Component<Props, State
                         <a href={media.url}>{media.name}</a>
                       </span>
                       <FormattedMediaSize size={media.size} />
-                    </Card.Body>
-                  </Card>
+                    </div>
+                  </CardContainer>
                 </div>
               );
             })}

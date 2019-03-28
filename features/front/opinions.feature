@@ -14,19 +14,7 @@ Scenario: Can create an opinion of contribuable type in opened project
     | opinion_body  | Description de ma proposition   |
   And I press "confirm-opinion-create"
   Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/titre"
-
-@read-only
-Scenario: An anonymous can paginate opinions inside a section
-  Given I am logged in as user
-  And I visited "section page" with:
-    | projectSlug | projet-de-loi-renseignement |
-    | stepSlug    | elaboration-de-la-loi       |
-    | sectionSlug | titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1       |
-  And I wait 2 seconds
-  Then I should see 5 ".list-group-item__opinion" element
-  When I click the "#OpinionListPaginated-loadmore" element
-  And I wait 2 seconds
-  Then I should see 8 ".list-group-item__opinion" element
+  # Then I should see "Merci ! Votre proposition a bien été enregistrée."
 
 @security
 Scenario: Can not create an opinion of non-contribuable type

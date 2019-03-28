@@ -9,10 +9,21 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
   sm={6}
   xs={12}
 >
-  <Card
+  <CardContainer
     className="proposal-preview"
     id="proposal-1"
   >
+    <ForwardRef(Relay(ProposalPreviewHeader))
+      proposal={
+        Object {
+          "$refType": null,
+          "author": Object {
+            "vip": false,
+          },
+          "id": "1",
+        }
+      }
+    />
     <ForwardRef(Relay(Connect(ProposalPreviewBody)))
       proposal={
         Object {
@@ -57,7 +68,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
         }
       }
     />
-  </Card>
+  </CardContainer>
 </Col>
 `;
 
@@ -70,10 +81,21 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
   sm={6}
   xs={12}
 >
-  <Card
+  <CardContainer
     className="bg-vip proposal-preview"
     id="proposal-1"
   >
+    <ForwardRef(Relay(ProposalPreviewHeader))
+      proposal={
+        Object {
+          "$refType": null,
+          "author": Object {
+            "vip": true,
+          },
+          "id": "1",
+        }
+      }
+    />
     <ForwardRef(Relay(Connect(ProposalPreviewBody)))
       proposal={
         Object {
@@ -118,6 +140,6 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
         }
       }
     />
-  </Card>
+  </CardContainer>
 </Col>
 `;

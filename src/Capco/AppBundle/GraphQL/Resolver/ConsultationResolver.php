@@ -165,20 +165,20 @@ class ConsultationResolver implements ResolverInterface
         return $iterator;
     }
 
-    public function getSectionUrl(OpinionType $type): string
+    public function getSectionUrl(OpinionType $type)
     {
         $step = $type->getStep();
         $project = $step->getProject();
 
         return $this->router->generate(
-            'app_project_show_opinions',
+            'app_consultation_show_opinions',
             [
                 'projectSlug' => $project->getSlug(),
                 'stepSlug' => $step->getSlug(),
                 'opinionTypeSlug' => $type->getSlug(),
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
-        );
+        ) . '/1';
     }
 
     public function getSectionOpinionsCount(OpinionType $type): int
