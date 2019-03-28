@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { Modal } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { Button, Modal } from 'react-bootstrap';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { closeOpenIDLoginModal } from '../../../redux/modules/user';
 import type { Dispatch, State } from '../../../types';
@@ -31,15 +31,23 @@ export class OpenIDLoginModal extends React.Component<Props> {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {
-              <FormattedMessage
-                id="continue-as-sso-connected-user"
-                values={{ SSOConnectedUserName: 'Moi' }}
-              />
-            }
-            <a href="/">
-              <FormattedMessage id="change-user" />
-            </a>
+            <Button
+              bsStyle="primary"
+              className="w-100"
+              onClick={() => {
+                window.location.href = `/login/openid?_destination=${window &&
+                  window.location.href}`;
+              }}>
+              {
+                <FormattedHTMLMessage
+                  id="continue-as-sso-connected-user"
+                  values={{ SsoConnectedUsername: 'Pierre Tondereau' }}
+                />
+              }
+            </Button>
+            <p className="mt-15 mb-0 text-center">
+              <a href="/">{<FormattedMessage id="change-user" />}</a>
+            </p>
           </Modal.Body>
         </form>
       </Modal>

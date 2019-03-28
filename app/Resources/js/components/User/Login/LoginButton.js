@@ -88,7 +88,7 @@ export class LoginButton extends React.Component<Props> {
 const mapStateToProps = state => ({
   loginWithMonCompteParis: state.default.features.login_paris,
   loginWithOpenId: state.default.features.login_openid,
-  changeUserOpenId: state.default.features.disconnected_openid,
+  changeUserOpenId: state.default.features.disconnect_openid,
 });
 
 const mapDispatchToProps = dispatch => ({

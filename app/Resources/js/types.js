@@ -34,7 +34,7 @@ export type FeatureToggles = {
   login_paris: boolean,
   privacy_policy: boolean,
   login_openid: boolean,
-  disconnected_openid: boolean,
+  disconnect_openid: boolean,
   members_list: boolean,
   newsletter: boolean,
   profiles: boolean,
