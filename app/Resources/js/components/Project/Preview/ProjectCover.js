@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import ProjectImage from './ProjectImage';
-import CardCover from '../../Ui/Card/CardCover';
+import Card from '../../Ui/Card/Card';
 import type { ProjectCover_project } from './__generated__/ProjectCover_project.graphql';
 
 type Props = { project: ProjectCover_project };
@@ -20,12 +20,12 @@ class ProjectCover extends React.Component<Props> {
         : '';
 
     return (
-      <CardCover>
+      <Card.Cover>
         <a href={link} alt={project.title} className={linkClasses}>
           {/* $FlowFixMe $fragmentRefs */}
           <ProjectImage project={project} />
         </a>
-      </CardCover>
+      </Card.Cover>
     );
   }
 }

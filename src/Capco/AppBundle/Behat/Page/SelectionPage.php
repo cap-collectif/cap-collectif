@@ -15,34 +15,34 @@ class SelectionPage extends Page
     protected $elements = [
         'proposal preview UHJvcG9zYWw6cHJvcG9zYWwy' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy',
         'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwy' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counter-votes .card__counter__value',
+            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counters__item--votes .card__counters__value',
         'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwy' =>
             'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwy',
         'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwy' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counter-comments .card__counter__value',
+            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counters__item--comments .card__counters__value',
         'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
             "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA==']",
         'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counter-votes .card__counter__value'",
+            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counters__item--votes .card__counters__value'",
         'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
             "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMA'",
         'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counter-comments .card__counter__value'",
+            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counters__item--comments .card__counters__value'",
         'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
             "#[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ=='",
         'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counter-votes .card__counter__value'",
+            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counters__item--votes .card__counters__value'",
         'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
             'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMQ',
         'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counter-comments .card__counter__value'",
+            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counters__item--comments .card__counters__value'",
         'proposal preview UHJvcG9zYWw6cHJvcG9zYWw4' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4',
         'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWw4' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counter-votes .card__counter__value',
+            '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counters__item--votes .card__counters__value',
         'proposal vote button UHJvcG9zYWw6cHJvcG9zYWw4' =>
             'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWw4',
         'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWw4' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counter-comments .card__counter__value',
+            '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counters__item--comments .card__counters__value',
         'proposal' => '.proposal-preview',
         'proposal vote button to hover' => '#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwx',
         'sorting select' => 'select#proposal-sorting',

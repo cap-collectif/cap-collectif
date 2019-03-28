@@ -2,11 +2,10 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalStatus from './ProposalStatus';
-import { CardContainer } from '../../Ui/Card/CardContainer';
+import { Card } from '../../Ui/Card/Card';
 import type { ProposalPreview_proposal } from './__generated__/ProposalPreview_proposal.graphql';
 import type { ProposalPreview_step } from './__generated__/ProposalPreview_step.graphql';
 import type { ProposalPreview_viewer } from './__generated__/ProposalPreview_viewer.graphql';
@@ -23,19 +22,17 @@ export class ProposalPreview extends React.Component<Props> {
 
     return (
       <Col componentClass="li" xs={12} sm={6} md={4} lg={3}>
-        <CardContainer
+        <Card
           id={`proposal-${proposal.id}`}
           className={
             proposal.author && proposal.author.vip ? 'bg-vip proposal-preview' : 'proposal-preview'
           }>
-          {/* $FlowFixMe */}
-          <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
           {/* $FlowFixMe */}
           {step && <ProposalPreviewFooter step={step} proposal={proposal} />}
           {/* $FlowFixMe */}
           <ProposalStatus proposal={proposal} />
-        </CardContainer>
+        </Card>
       </Col>
     );
   }
@@ -64,7 +61,7 @@ export default createFragmentContainer(ProposalPreview, {
       author {
         vip
       }
-      ...ProposalPreviewHeader_proposal
+
       ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       ...ProposalPreviewBody_proposal
         @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView)

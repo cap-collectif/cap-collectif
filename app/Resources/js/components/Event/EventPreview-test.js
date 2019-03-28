@@ -18,7 +18,6 @@ describe('<EventPreview />', () => {
         url: 'http://impossible.com',
         themes: [
           {
-            id: 'theme1',
             url: 'https://estcequecestbientotlheuredugouter.neocities.org/',
             title: "Le gouter c'est la vie",
           },
@@ -49,7 +48,6 @@ describe('<EventPreview />', () => {
         url: 'http://impossible.com',
         themes: [
           {
-            id: 'theme1',
             url: 'https://estcequecestbientotlheuredugouter.neocities.org/',
             title: "Le gouter c'est la vie",
           },
@@ -80,7 +78,6 @@ describe('<EventPreview />', () => {
         url: 'http://impossible.com',
         themes: [
           {
-            id: 'theme1',
             url: 'https://estcequecestbientotlheuredugouter.neocities.org/',
             title: "Le gouter c'est la vie",
           },
@@ -111,7 +108,6 @@ describe('<EventPreview />', () => {
         url: 'http://impossible.com',
         themes: [
           {
-            id: 'theme1',
             url: 'https://estcequecestbientotlheuredugouter.neocities.org/',
             title: "Le gouter c'est la vie",
           },

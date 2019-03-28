@@ -1,9 +1,8 @@
 // @flow
 import * as React from 'react';
-import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import CardStatus from '../../Ui/Card/CardStatus';
+import Card from '../../Ui/Card/Card';
 import type { ProposalStatus_proposal } from './__generated__/ProposalStatus_proposal.graphql';
 
 type Props = {
@@ -31,10 +30,8 @@ export class ProposalStatus extends React.Component<Props> {
     if (!status) {
       return null;
     }
-    const statusClasses = {};
-    statusClasses[`status--${status.color}`] = true;
 
-    return <CardStatus className={classNames(statusClasses)}>{status && status.name}</CardStatus>;
+    return <Card.Status bgColor={status.color}>{status && status.name}</Card.Status>;
   }
 }
 

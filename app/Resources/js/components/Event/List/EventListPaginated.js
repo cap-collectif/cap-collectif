@@ -72,7 +72,7 @@ export const EventListPaginated = (props: Props) => {
 
   if (!query.events || query.events.totalCount === 0) {
     const showPreviewPassedEvents =
-      status === 'ongoing-and-future' && query.previewPassedEvents.totalCount > 1;
+      status === 'ongoing-and-future' && query.previewPassedEvents.totalCount > 0;
     return (
       <>
         <p className={classNames({ 'p--centered': true, 'mb-40': true })}>
@@ -158,11 +158,12 @@ export default createPaginationContainer(
           search: { type: "String" }
           userType: { type: "ID" }
           isFuture: { type: "Boolean" }
+          previewCount: { type: "Int", defaultValue: 5 }
         ) {
-        previewPassedEvents: events(first: 3, isFuture: false) {
+        previewPassedEvents: events(first: $previewCount, isFuture: false) {
           totalCount
         }
-        ...EventPagePassedEventsPreview_query
+        ...EventPagePassedEventsPreview_query @arguments(previewCount: $previewCount)
         ...EventMap_query
           @arguments(
             count: $count
