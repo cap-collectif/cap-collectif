@@ -4161,6 +4161,9 @@ type Query {
 
     # If true, filter projects with events
     withEventOnly: Boolean = false
+
+    # If true, return only publics projects
+    onlyPublic: Boolean = false
   ): ProjectConnection!
 
   # Lookup events.
@@ -4280,6 +4283,35 @@ type Query {
     # Returns the last `n` elements from the list.
     last: Int
   ): ProjectDistrictConnection!
+
+  # List all the contributors in the platform.
+  allContributors(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+
+  # Return the number of contributions in the platform.
+  allContributions: Int!
+
+  # List all the votes in the platform.
+  votes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): VoteConnection!
 }
 
 # Fetches an object given its ID

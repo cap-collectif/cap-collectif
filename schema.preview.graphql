@@ -512,6 +512,9 @@ type Query {
 
     # If true, filter projects with events
     withEventOnly: Boolean = false
+
+    # If true, return only publics projects
+    onlyPublic: Boolean = false
   ): ProjectConnection!
 
   # Lookup events.

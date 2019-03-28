@@ -398,7 +398,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     /**
      * @return int
      */
-    public function getContributionsCount()
+    public function getContributionsCount(): int
     {
         return $this->opinionCount +
             $this->trashedOpinionCount +
@@ -410,7 +410,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
             $this->trashedSourceCount;
     }
 
-    public function getLabelTitle()
+    public function getLabelTitle(): string
     {
         $label = $this->getTitle();
         if ($this->getProject()) {

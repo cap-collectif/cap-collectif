@@ -5,8 +5,11 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\SectionRepository;
+use Capco\AppBundle\GraphQL\Resolver\Query\QueryEventsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Query\QueryVotesResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -109,12 +112,14 @@ class SectionAdmin extends AbstractAdmin
                 'label' => 'admin.fields.section.enabled',
                 'editable' => true,
             ])
+            ->add('createdAt', null, [
+                'label' => 'admin.fields.group.created_at',
+            ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.section.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
                     'edit' => [],
                     'delete' => [
                         'template' => 'CapcoAdminBundle:Section:list__action_delete.html.twig',
@@ -131,6 +136,7 @@ class SectionAdmin extends AbstractAdmin
         $fields = Section::$fieldsForType[$this->getSubject()->getType()];
         $subject = $this->getSubject();
 
+        $formMapper->with('admin.label.settings.global');
         if ($fields['title']) {
             $formMapper->add('title', null, [
                 'label' => 'admin.fields.section.title',
@@ -143,14 +149,6 @@ class SectionAdmin extends AbstractAdmin
             ]);
         }
 
-        $formMapper
-            ->add('enabled', null, [
-                'label' => 'admin.fields.section.enabled',
-                'required' => false,
-            ])
-            ->add('position', null, [
-                'label' => 'admin.fields.section.position',
-            ]);
         if ($fields['teaser']) {
             $formMapper->add('teaser', null, [
                 'label' => 'admin.fields.section.teaser',
@@ -180,6 +178,51 @@ class SectionAdmin extends AbstractAdmin
                 'choices_as_values' => true,
             ]);
         }
+        $formMapper->end();
+
+        if ($subject && 'metrics' === $subject->getType()) {
+            $args = new Argument(['first' => 100]);
+
+            $votes = $this->getConfigurationPool()
+                ->getContainer()
+                ->get(QueryVotesResolver::class)
+                ->__invoke($args);
+            $basicsMetricsLabel =
+                $votes->totalCount > 0
+                    ? 'admin.fields.section.basicsMetrics'
+                    : 'admin.fields.section.basicsMetricsNoVotes';
+
+            $formMapper
+                ->with('admin.label.section.display.metrics')
+                ->add('metricsToDisplayBasics', null, [
+                    'label' => $basicsMetricsLabel,
+                ])
+                ->add('metricsToDisplayProjects', null, [
+                    'label' => 'admin.fields.section.projectsMetrics',
+                ]);
+
+            $events = $this->getConfigurationPool()
+                ->getContainer()
+                ->get(QueryEventsResolver::class)
+                ->__invoke($args);
+            if ($events->totalCount > 0) {
+                $formMapper->add('metricsToDisplayEvents', null, [
+                    'label' => 'admin.fields.section.eventsMetrics',
+                ]);
+            }
+            $formMapper->end();
+        }
+
+        $formMapper
+            ->with('admin.label.section.publication')
+            ->add('position', null, [
+                'label' => 'admin.fields.section.position',
+            ])
+            ->add('enabled', null, [
+                'label' => 'admin.fields.section.enabled',
+                'required' => false,
+            ])
+            ->end();
     }
 
     /**

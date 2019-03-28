@@ -80,8 +80,8 @@ Capco\AppBundle\Entity\Section:
     nbObjects: null
     enabled: true
     associatedFeatures: []
-  SectionFigures:
-    type: figures
+  SectionMetrics:
+    type: metrics
     title: Chiffres-clés
     position: 11
     teaser: <text(150)>
