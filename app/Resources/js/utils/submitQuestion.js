@@ -41,12 +41,12 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
         ? question.jumps.filter(Boolean).map(jump => ({
             ...jump,
             // We only send ids to the server
-            origin: jump.origin ? parseInt(jump.origin.id, 10) : null,
-            destination: jump.destination ? parseInt(jump.destination.id, 10) : null,
+            origin: jump.origin ? jump.origin.id : null,
+            destination: jump.destination ? jump.destination.id : null,
             conditions: jump.conditions
               ? jump.conditions.filter(Boolean).map(condition => ({
                   ...condition,
-                  question: parseInt(condition.question.id, 10),
+                  question: condition.question.id,
                   value: condition.value ? condition.value.id : null,
                 }))
               : null,

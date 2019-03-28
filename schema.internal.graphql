@@ -2228,7 +2228,7 @@ input LogicJumpConditionInput {
   operator: LogicJumpConditionOperator!
 
   # The id of the question you want to have a condition
-  question: Int!
+  question: ID!
 
   # The answer the selected question should have to trigger the condition
   value: String
@@ -2248,10 +2248,10 @@ input LogicJumpInput {
   always: Boolean
 
   # The id of the question where the logic jump start
-  origin: Int!
+  origin: ID!
 
   # The id of the question where the logic jump end if the conditions are fulfilled
-  destination: Int!
+  destination: ID!
 
   # A collection of conditions that you have to fulfill for displaying the destination question
   conditions: [LogicJumpConditionInput]

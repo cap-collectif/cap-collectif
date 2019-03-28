@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\LogicJump;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,8 +16,8 @@ class LogicJumpType extends AbstractType
     {
         $builder->add('id');
         $builder->add('always');
-        $builder->add('origin');
-        $builder->add('destination');
+        $builder->add('origin', RelayNodeType::class, ['class' => AbstractQuestion::class]);
+        $builder->add('destination', RelayNodeType::class, ['class' => AbstractQuestion::class]);
         $builder->add('conditions', CollectionType::class, [
             'allow_add' => true,
             'allow_delete' => true,
