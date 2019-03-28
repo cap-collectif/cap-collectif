@@ -28,7 +28,6 @@ Scenario: Logged in admin wants edit a proposal advancement tab
   And I change the proposal advancement select "proposal advancement selection status" with option "Soumis au vote"
   Then I save current proposal admin advancement
   And I wait ".alert__form_succeeded-message" to appear on current page
-  And I reload the page, I should see a confirm popup 
 
 @database @elasticsearch
 Scenario: Logged in admin wants to add some analyst groups
