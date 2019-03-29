@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Modal } from 'react-bootstrap';
-import type { DeleteReplyModal_reply } from '~relay/DeleteReplyModal_reply.graphql';
+import type { DeleteReplyModal_reply } from './__generated__/DeleteReplyModal_reply.graphql';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';

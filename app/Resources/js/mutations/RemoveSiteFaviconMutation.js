@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   RemoveSiteFaviconVariables,
   RemoveSiteFaviconResponse,
-} from '~relay/RemoveSiteFaviconMutation.graphql';
+} from './__generated__/RemoveSiteFaviconMutation.graphql';
 
 const mutation = graphql`
   mutation RemoveSiteFaviconMutation($input: InternalRemoveSiteFaviconInput!) {

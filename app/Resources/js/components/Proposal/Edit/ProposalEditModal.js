@@ -11,7 +11,7 @@ import ProposalForm, { formName } from '../Form/ProposalForm';
 import ProposalDraftAlert from '../Page/ProposalDraftAlert';
 import type { Dispatch, GlobalState } from '../../../types';
 import { closeEditProposalModal } from '../../../redux/modules/proposal';
-import type { ProposalEditModal_proposal } from '~relay/ProposalEditModal_proposal.graphql';
+import type { ProposalEditModal_proposal } from './__generated__/ProposalEditModal_proposal.graphql';
 
 type Props = {
   intl: IntlShape,

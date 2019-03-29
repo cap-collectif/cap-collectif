@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { MenuItem, DropdownButton } from 'react-bootstrap';
-import type { ProposalAdminFollowers_proposal } from '~relay/ProposalAdminFollowers_proposal.graphql';
+import type { ProposalAdminFollowers_proposal } from './__generated__/ProposalAdminFollowers_proposal.graphql';
 import ProposalPageFollowers from '../Page/ProposalPageFollowers';
 
 type Props = {|

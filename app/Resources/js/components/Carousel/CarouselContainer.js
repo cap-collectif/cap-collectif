@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import CarouselMobile from './CarouselMobile';
 import CarouselDesktop from './CarouselDesktop';
 
-type Props = {
+export type Props = {
   highlighteds: Array<Object>,
 };
 

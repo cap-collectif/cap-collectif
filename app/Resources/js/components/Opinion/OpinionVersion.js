@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroupItem } from 'react-bootstrap';
 import { injectIntl, type IntlShape } from 'react-intl';
 import OpinionPreview from './OpinionPreview';
-import type { OpinionVersion_version } from '~relay/OpinionVersion_version.graphql';
+import type { OpinionVersion_version } from './__generated__/OpinionVersion_version.graphql';
 import colors from '../../utils/colors';
 import PieChart from '../Ui/Chart/PieChart';
 

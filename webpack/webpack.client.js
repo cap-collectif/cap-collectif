@@ -12,11 +12,6 @@ const devConf = {
     filename: '[name].js',
     path: webpackConfig.outputDir,
   },
-  resolve: {
-    alias: {
-      '~relay': path.resolve(__dirname, '../app/Resources/js/__generated__/~relay')
-    }
-  },
   entry: {
     vendor: [
       path.join(webpackConfig.bowerDir, 'ckeditor/ckeditor.js'),

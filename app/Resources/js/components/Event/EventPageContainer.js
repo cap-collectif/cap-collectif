@@ -5,7 +5,7 @@ import { FormattedHTMLMessage } from 'react-intl';
 import { createFragmentContainer } from 'react-relay';
 import { reduxForm } from 'redux-form';
 import { graphql } from 'relay-runtime';
-import type { EventPageContainer_query } from '~relay/EventPageContainer_query.graphql';
+import type { EventPageContainer_query } from './__generated__/EventPageContainer_query.graphql';
 
 import ColorBox from '../Ui/Boxes/ColorBox';
 import EventListFilters from './List/EventListFilters';

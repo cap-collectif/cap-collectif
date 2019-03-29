@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroup } from 'react-bootstrap';
-import type { ContactAdminList_query } from '~relay/ContactAdminList_query.graphql';
+import type { ContactAdminList_query } from './__generated__/ContactAdminList_query.graphql';
 import ContactAdminListItem from './ContactAdminListItem';
 import ContactFormAdminAdd from './ContactFormAdminAdd';
 

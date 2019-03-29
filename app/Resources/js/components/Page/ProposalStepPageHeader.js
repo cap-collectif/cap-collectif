@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import ProposalCreate from '../Proposal/Create/ProposalCreate';
-import type { ProposalStepPageHeader_step } from '~relay/ProposalStepPageHeader_step.graphql';
+import type { ProposalStepPageHeader_step } from './__generated__/ProposalStepPageHeader_step.graphql';
 
 type Props = {
   step: ProposalStepPageHeader_step,

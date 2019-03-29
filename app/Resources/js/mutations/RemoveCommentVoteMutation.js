@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   RemoveCommentVoteMutationVariables,
   RemoveCommentVoteMutationResponse,
-} from '~relay/RemoveCommentVoteMutation.graphql';
+} from './__generated__/RemoveCommentVoteMutation.graphql';
 
 const mutation = graphql`
   mutation RemoveCommentVoteMutation($input: RemoveCommentVoteInput!) {

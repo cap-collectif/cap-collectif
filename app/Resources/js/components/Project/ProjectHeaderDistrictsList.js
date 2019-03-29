@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import InlineList from '../Ui/List/InlineList';
 import ListGroupFlush from '../Ui/List/ListGroupFlush';
-import type { ProjectHeaderDistrictsList_project } from '~relay/ProjectHeaderDistrictsList_project.graphql';
+import type { ProjectHeaderDistrictsList_project } from './__generated__/ProjectHeaderDistrictsList_project.graphql';
 
 type Props = {
   project: ProjectHeaderDistrictsList_project,

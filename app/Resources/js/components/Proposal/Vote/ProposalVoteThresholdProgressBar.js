@@ -3,8 +3,8 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ProgressBar } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { ProposalVoteThresholdProgressBar_proposal } from '~relay/ProposalVoteThresholdProgressBar_proposal.graphql';
-import type { ProposalVoteThresholdProgressBar_step } from '~relay/ProposalVoteThresholdProgressBar_step.graphql';
+import type { ProposalVoteThresholdProgressBar_proposal } from './__generated__/ProposalVoteThresholdProgressBar_proposal.graphql';
+import type { ProposalVoteThresholdProgressBar_step } from './__generated__/ProposalVoteThresholdProgressBar_step.graphql';
 
 type Props = {
   proposal: ProposalVoteThresholdProgressBar_proposal,

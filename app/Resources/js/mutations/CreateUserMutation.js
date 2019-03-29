@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   CreateUserMutationVariables,
   CreateUserMutationResponse,
-} from '~relay/CreateUserMutation.graphql';
+} from './__generated__/CreateUserMutation.graphql';
 
 const mutation = graphql`
   mutation CreateUserMutation($input: CreateUserInput!) {

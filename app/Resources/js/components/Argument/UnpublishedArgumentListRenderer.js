@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import UnpublishedArgumentList from './UnpublishedArgumentList';
-import type { UnpublishedArgumentListRendererQueryResponse } from '~relay/UnpublishedArgumentListRendererQuery.graphql';
-import type { UnpublishedArgumentListRenderer_argumentable } from '~relay/UnpublishedArgumentListRenderer_argumentable.graphql';
+import type { UnpublishedArgumentListRendererQueryResponse } from './__generated__/UnpublishedArgumentListRendererQuery.graphql';
+import type { UnpublishedArgumentListRenderer_argumentable } from './__generated__/UnpublishedArgumentListRenderer_argumentable.graphql';
 import type { State } from '../../types';
 
 type Props = {

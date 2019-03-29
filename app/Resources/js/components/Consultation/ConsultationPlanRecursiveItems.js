@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import type { Dispatch, GlobalState } from '../../types';
-import type { ConsultationPlanRecursiveItems_consultation } from '~relay/ConsultationPlanRecursiveItems_consultation.graphql';
+import type { ConsultationPlanRecursiveItems_consultation } from './__generated__/ConsultationPlanRecursiveItems_consultation.graphql';
 import ConsultationPlanItems from './ConsultationPlanItems';
 import { closeConsultationPlan, openConsultationPlan } from '../../redux/modules/project';
 import config from '../../config';

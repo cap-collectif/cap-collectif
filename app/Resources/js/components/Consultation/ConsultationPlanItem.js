@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
-import type { ConsultationPlanItem_section } from '~relay/ConsultationPlanItem_section.graphql';
+import type { ConsultationPlanItem_section } from './__generated__/ConsultationPlanItem_section.graphql';
 import config from '../../config';
 import type { State } from '../../types';
 

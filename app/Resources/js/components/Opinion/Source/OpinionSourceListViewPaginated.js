@@ -5,7 +5,7 @@ import { ListGroup, ListGroupItem, Button, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import OpinionSource from './OpinionSource';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import type { OpinionSourceListViewPaginated_sourceable } from '~relay/OpinionSourceListViewPaginated_sourceable.graphql';
+import type { OpinionSourceListViewPaginated_sourceable } from './__generated__/OpinionSourceListViewPaginated_sourceable.graphql';
 
 type Props = {|
   relay: RelayPaginationProp,

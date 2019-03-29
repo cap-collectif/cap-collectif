@@ -5,7 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Alert } from 'react-bootstrap';
 import RequirementsForm from './RequirementsForm';
-import type { RequirementsModal_step } from '~relay/RequirementsModal_step.graphql';
+import type { RequirementsModal_step } from './__generated__/RequirementsModal_step.graphql';
 
 type Props = {
   show: boolean,

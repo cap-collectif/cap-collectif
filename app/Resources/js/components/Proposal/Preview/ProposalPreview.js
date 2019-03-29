@@ -6,9 +6,9 @@ import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalStatus from './ProposalStatus';
 import { Card } from '../../Ui/Card/Card';
-import type { ProposalPreview_proposal } from '~relay/ProposalPreview_proposal.graphql';
-import type { ProposalPreview_step } from '~relay/ProposalPreview_step.graphql';
-import type { ProposalPreview_viewer } from '~relay/ProposalPreview_viewer.graphql';
+import type { ProposalPreview_proposal } from './__generated__/ProposalPreview_proposal.graphql';
+import type { ProposalPreview_step } from './__generated__/ProposalPreview_step.graphql';
+import type { ProposalPreview_viewer } from './__generated__/ProposalPreview_viewer.graphql';
 
 type Props = {
   proposal: ProposalPreview_proposal,

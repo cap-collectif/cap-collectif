@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import type { OpinionBodyDiffModal_modal } from '~relay/OpinionBodyDiffModal_modal.graphql';
+import type { OpinionBodyDiffModal_modal } from './__generated__/OpinionBodyDiffModal_modal.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {

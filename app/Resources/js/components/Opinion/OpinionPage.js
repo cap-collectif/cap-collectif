@@ -10,9 +10,9 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type {
   OpinionPageQueryVariables,
   OpinionPageQueryResponse,
-} from '~relay/OpinionPageQuery.graphql';
+} from './__generated__/OpinionPageQuery.graphql';
 
-type Props = {
+export type Props = {
   opinionId?: string,
   versionId?: string,
   isAuthenticated: boolean,

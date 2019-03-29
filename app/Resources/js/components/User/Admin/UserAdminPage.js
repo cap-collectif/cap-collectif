@@ -10,9 +10,9 @@ import type { State } from '../../../types';
 import type {
   UserAdminPageQueryResponse,
   UserAdminPageQueryVariables,
-} from '~relay/UserAdminPageQuery.graphql';
+} from './__generated__/UserAdminPageQuery.graphql';
 
-type Props = { userId: string, dirty: boolean };
+export type Props = { userId: string, dirty: boolean };
 
 const onUnload = e => {
   e.returnValue = true;

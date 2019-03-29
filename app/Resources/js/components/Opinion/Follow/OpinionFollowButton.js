@@ -15,7 +15,7 @@ import {
 import { FormattedMessage } from 'react-intl';
 import FollowOpinionMutation from '../../../mutations/FollowOpinionMutation';
 import UpdateFollowOpinionMutation from '../../../mutations/UpdateFollowOpinionMutation';
-import type { OpinionFollowButton_opinion } from '~relay/OpinionFollowButton_opinion.graphql';
+import type { OpinionFollowButton_opinion } from './__generated__/OpinionFollowButton_opinion.graphql';
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
 import LoginOverlay from '../../Utils/LoginOverlay';
 

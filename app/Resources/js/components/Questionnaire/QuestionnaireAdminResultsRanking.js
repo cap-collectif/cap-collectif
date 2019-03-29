@@ -3,7 +3,7 @@ import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import Table from '../Ui/Table/Table';
-import type { QuestionnaireAdminResultsRanking_multipleChoiceQuestion } from '~relay/QuestionnaireAdminResultsRanking_multipleChoiceQuestion.graphql';
+import type { QuestionnaireAdminResultsRanking_multipleChoiceQuestion } from './__generated__/QuestionnaireAdminResultsRanking_multipleChoiceQuestion.graphql';
 import QuestionnaireAdminResultsRankingLine from './QuestionnaireAdminResultsRankingLine';
 
 type Props = {

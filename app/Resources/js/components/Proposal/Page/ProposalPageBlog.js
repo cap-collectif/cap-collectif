@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import Post from '../../Blog/Post';
-import type { ProposalPageBlog_proposal } from '~relay/ProposalPageBlog_proposal.graphql';
+import type { ProposalPageBlog_proposal } from './__generated__/ProposalPageBlog_proposal.graphql';
 
 type Props = { proposal: ProposalPageBlog_proposal };
 

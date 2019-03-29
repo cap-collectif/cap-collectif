@@ -8,7 +8,7 @@ import { ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../Form/Field';
 import AlertForm from '../Alert/AlertForm';
 import ChangeProposalFormParametersMutation from '../../mutations/ChangeProposalFormParametersMutation';
-import type { ProposalFormAdminSettingsForm_proposalForm } from '~relay/ProposalFormAdminSettingsForm_proposalForm.graphql';
+import type { ProposalFormAdminSettingsForm_proposalForm } from './__generated__/ProposalFormAdminSettingsForm_proposalForm.graphql';
 import type { State } from '../../types';
 
 type RelayProps = {|

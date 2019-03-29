@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedNumber } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { ProposalDetailEstimation_proposal } from '~relay/ProposalDetailEstimation_proposal.graphql';
+import type { ProposalDetailEstimation_proposal } from './__generated__/ProposalDetailEstimation_proposal.graphql';
 
 type Props = {
   proposal: ProposalDetailEstimation_proposal,

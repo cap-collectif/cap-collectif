@@ -6,7 +6,7 @@ import moment from 'moment-timezone';
 import { connect } from 'react-redux';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
 import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
-import type { ProposalDetailAdvancement_proposal } from '~relay/ProposalDetailAdvancement_proposal.graphql';
+import type { ProposalDetailAdvancement_proposal } from './__generated__/ProposalDetailAdvancement_proposal.graphql';
 
 const grey = '#d9d9d9';
 const green = '#5cb85c';

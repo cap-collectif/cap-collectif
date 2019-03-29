@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   DeleteGroupMutationVariables,
   DeleteGroupMutationResponse,
-} from '~relay/DeleteGroupMutation.graphql';
+} from './__generated__/DeleteGroupMutation.graphql';
 
 const mutation = graphql`
   mutation DeleteGroupMutation($input: DeleteGroupInput!) {

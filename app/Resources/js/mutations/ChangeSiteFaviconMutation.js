@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   ChangeSiteFaviconVariables,
   ChangeSiteFaviconResponse,
-} from '~relay/ChangeSiteFaviconMutation.graphql';
+} from './__generated__/ChangeSiteFaviconMutation.graphql';
 
 const mutation = graphql`
   mutation ChangeSiteFaviconMutation($input: InternalChangeSiteFaviconInput!) {

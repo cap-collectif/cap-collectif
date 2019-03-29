@@ -2,27 +2,28 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\NewsletterSubscription;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Section;
-use Capco\AppBundle\Entity\UserNotificationsConfiguration;
-use Capco\AppBundle\Form\NewsletterSubscriptionType;
-use Capco\AppBundle\Repository\EventRepository;
-use Capco\AppBundle\Repository\HighlightedContentRepository;
-use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Resolver\SectionResolver;
+use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Repository\VideoRepository;
-use Capco\AppBundle\Toggle\Manager;
-use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Resolver\SectionResolver;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Entity\NewsletterSubscription;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\Repository\HighlightedContentRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 
 class HomepageController extends Controller
 {
@@ -195,7 +196,11 @@ class HomepageController extends Controller
             $proposals = $this->get(ProposalRepository::class)->getLast($max, $offset);
         }
 
-        return ['proposals' => $proposals, 'section' => $section];
+        $ids = array_map(function (Proposal $proposal) {
+            return $proposal->getId();
+        }, $proposals);
+
+        return ['proposals' => $ids, 'section' => $section];
     }
 
     /**

@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import moment from 'moment';
-import type { Post_post } from '~relay/Post_post.graphql';
+import type { Post_post } from './__generated__/Post_post.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 import type { State } from '../../types';
 

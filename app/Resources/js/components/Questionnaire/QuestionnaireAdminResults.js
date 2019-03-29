@@ -6,7 +6,7 @@ import QuestionnaireAdminResultsBarChart from './QuestionnaireAdminResultsBarCha
 import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking';
 import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart';
 import QuestionnaireAdminResultsText from './QuestionnaireAdminResultsText';
-import type { QuestionnaireAdminResults_questionnaire } from '~relay/QuestionnaireAdminResults_questionnaire.graphql';
+import type { QuestionnaireAdminResults_questionnaire } from './__generated__/QuestionnaireAdminResults_questionnaire.graphql';
 import QuestionnaireAdminResultsMedia from './QuestionnaireAdminResultsMedia';
 import withColors from '../Utils/withColors';
 import PrivateBox from '../Ui/Boxes/PrivateBox';

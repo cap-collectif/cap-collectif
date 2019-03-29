@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Modal, Button, Radio, Panel } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import type { DeleteAccountModal_viewer } from '~relay/DeleteAccountModal_viewer.graphql';
+import type { DeleteAccountModal_viewer } from './__generated__/DeleteAccountModal_viewer.graphql';
 import DefaultAvatar from './DefaultAvatar';
 import CloseButton from '../Form/CloseButton';
 import DeleteAccountMutation from '../../mutations/DeleteAccountMutation';

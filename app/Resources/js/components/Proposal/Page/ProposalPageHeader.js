@@ -11,9 +11,9 @@ import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
-import type { ProposalPageHeader_proposal } from '~relay/ProposalPageHeader_proposal.graphql';
-import type { ProposalPageHeader_step } from '~relay/ProposalPageHeader_step.graphql';
-import type { ProposalPageHeader_viewer } from '~relay/ProposalPageHeader_viewer.graphql';
+import type { ProposalPageHeader_proposal } from './__generated__/ProposalPageHeader_proposal.graphql';
+import type { ProposalPageHeader_step } from './__generated__/ProposalPageHeader_step.graphql';
+import type { ProposalPageHeader_viewer } from './__generated__/ProposalPageHeader_viewer.graphql';
 import type { State } from '../../../types';
 import TrashedMessage from '../../Trashed/TrashedMessage';
 

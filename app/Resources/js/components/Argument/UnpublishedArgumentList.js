@@ -4,7 +4,7 @@ import { Panel, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ArgumentItem from './ArgumentItem';
-import type { UnpublishedArgumentList_argumentable } from '~relay/UnpublishedArgumentList_argumentable.graphql';
+import type { UnpublishedArgumentList_argumentable } from './__generated__/UnpublishedArgumentList_argumentable.graphql';
 
 type Props = {
   argumentable: UnpublishedArgumentList_argumentable,

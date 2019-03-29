@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import RenderCustomAccess from './RenderCustomAccess';
 import RenderPrivateAccess from './RenderPrivateAccess';
-import type { ProjectRestrictedAccessFragment_project } from '~relay/ProjectRestrictedAccessFragment_project.graphql';
+import type { ProjectRestrictedAccessFragment_project } from './__generated__/ProjectRestrictedAccessFragment_project.graphql';
 
 type Props = {
   icon?: ?string,

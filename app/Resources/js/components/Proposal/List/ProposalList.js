@@ -7,9 +7,9 @@ import { Row } from 'react-bootstrap';
 import ProposalPreview from '../Preview/ProposalPreview';
 import ProposalListTable from './ProposalListTable';
 import VisibilityBox from '../../Utils/VisibilityBox';
-import type { ProposalList_step } from '~relay/ProposalList_step.graphql';
-import type { ProposalList_viewer } from '~relay/ProposalList_viewer.graphql';
-import type { ProposalList_proposals } from '~relay/ProposalList_proposals.graphql';
+import type { ProposalList_step } from './__generated__/ProposalList_step.graphql';
+import type { ProposalList_viewer } from './__generated__/ProposalList_viewer.graphql';
+import type { ProposalList_proposals } from './__generated__/ProposalList_proposals.graphql';
 
 type Props = {
   step: ?ProposalList_step,
@@ -68,20 +68,22 @@ export class ProposalList extends React.Component<Props> {
 
     return (
       <React.Fragment>
-        {proposalsVisiblePublicly.edges && proposalsVisiblePublicly.edges.length > 0 && (
-          <React.Fragment>
-            {view === 'mosaic'
-              ? renderProposals(proposalsVisiblePublicly, step, viewer)
-              : renderProposalListTableView(proposalsVisiblePublicly, step)}
-          </React.Fragment>
-        )}
-        {proposalsVisibleOnlyByViewer.edges && proposalsVisibleOnlyByViewer.edges.length > 0 && (
-          <VisibilityBox enabled>
-            {view === 'mosaic'
-              ? renderProposals(proposalsVisibleOnlyByViewer, step, viewer)
-              : renderProposalListTableView(proposalsVisibleOnlyByViewer, step)}
-          </VisibilityBox>
-        )}
+        {proposalsVisiblePublicly.edges &&
+          proposalsVisiblePublicly.edges.length > 0 && (
+            <React.Fragment>
+              {view === 'mosaic'
+                ? renderProposals(proposalsVisiblePublicly, step, viewer)
+                : renderProposalListTableView(proposalsVisiblePublicly, step)}
+            </React.Fragment>
+          )}
+        {proposalsVisibleOnlyByViewer.edges &&
+          proposalsVisibleOnlyByViewer.edges.length > 0 && (
+            <VisibilityBox enabled>
+              {view === 'mosaic'
+                ? renderProposals(proposalsVisibleOnlyByViewer, step, viewer)
+                : renderProposalListTableView(proposalsVisibleOnlyByViewer, step)}
+            </VisibilityBox>
+          )}
       </React.Fragment>
     );
   }

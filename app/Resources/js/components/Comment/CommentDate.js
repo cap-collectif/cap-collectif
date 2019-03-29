@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import type { CommentDate_comment } from '~relay/CommentDate_comment.graphql';
+import type { CommentDate_comment } from './__generated__/CommentDate_comment.graphql';
 
 type Props = {
   comment: CommentDate_comment,

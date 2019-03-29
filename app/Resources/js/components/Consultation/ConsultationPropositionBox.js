@@ -10,7 +10,7 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import RemainingTime from '../Utils/RemainingTime';
 import DatesInterval from '../Utils/DatesInterval';
 import StepInfos from '../Steps/Page/StepInfos';
-import type { ConsultationPropositionBoxQueryResponse } from '~relay/ConsultationPropositionBoxQuery.graphql';
+import type { ConsultationPropositionBoxQueryResponse } from './__generated__/ConsultationPropositionBoxQuery.graphql';
 import ConsultationPlan from './ConsultationPlan';
 
 type Step = {

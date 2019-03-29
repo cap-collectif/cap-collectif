@@ -16,7 +16,7 @@ import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import component from '../../Form/Field';
 import AddArgumentMutation from '../../../mutations/AddArgumentMutation';
 import type { State, Dispatch } from '../../../types';
-import type { ArgumentCreate_argumentable } from '~relay/ArgumentCreate_argumentable.graphql';
+import type { ArgumentCreate_argumentable } from './__generated__/ArgumentCreate_argumentable.graphql';
 import RequirementsFormModal from '../../Requirements/RequirementsModal';
 
 type FormValues = { body: ?string };

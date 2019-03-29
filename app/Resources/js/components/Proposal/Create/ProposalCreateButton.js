@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import type { ProposalCreateButton_proposalForm } from '~relay/ProposalCreateButton_proposalForm.graphql';
+import type { ProposalCreateButton_proposalForm } from './__generated__/ProposalCreateButton_proposalForm.graphql';
 
 type Props = {
   handleClick: Function,

@@ -10,7 +10,7 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { closeArgumentEditModal } from '../../../redux/modules/opinion';
 import type { State, Dispatch } from '../../../types';
-import type { ArgumentEditModal_argument } from '~relay/ArgumentEditModal_argument.graphql';
+import type { ArgumentEditModal_argument } from './__generated__/ArgumentEditModal_argument.graphql';
 
 type RelayProps = {| argument: ArgumentEditModal_argument |};
 

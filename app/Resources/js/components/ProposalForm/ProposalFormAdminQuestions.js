@@ -18,7 +18,7 @@ import { ProposalFormAdminDeleteQuestionModal } from './ProposalFormAdminDeleteQ
 import { QuestionAdmin } from '../Question/QuestionAdmin';
 import SectionQuestionAdminModal from '../Question/SectionQuestionAdminModal';
 import FlashMessages from '../Utils/FlashMessages';
-import type { QuestionTypeValue } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
+import type { QuestionTypeValue } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 
 type Props = {
   dispatch: Dispatch,

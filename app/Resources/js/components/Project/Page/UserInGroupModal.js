@@ -3,7 +3,7 @@ import React from 'react';
 import { Modal, ListGroupItem, Button } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import type { UserInGroupModal_group } from '~relay/UserInGroupModal_group.graphql';
+import type { UserInGroupModal_group } from './__generated__/UserInGroupModal_group.graphql';
 import { UserAvatar } from '../../User/UserAvatar';
 import CloseButton from '../../Form/CloseButton';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';

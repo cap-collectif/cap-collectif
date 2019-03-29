@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button, Modal } from 'react-bootstrap';
-import type { UserArchiveRequestButton_viewer } from '~relay/UserArchiveRequestButton_viewer.graphql';
+import type { UserArchiveRequestButton_viewer } from './__generated__/UserArchiveRequestButton_viewer.graphql';
 import CloseButton from '../../Form/CloseButton';
 import { baseUrl } from '../../../config';
 import RequestUserArchiveMutation from '../../../mutations/RequestUserArchiveMutation';

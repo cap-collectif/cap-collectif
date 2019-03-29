@@ -4,7 +4,7 @@ import { createPaginationContainer, graphql, type RelayPaginationProp } from 're
 import { ListGroupItem, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import ListGroupFlush from '../Ui/List/ListGroupFlush';
-import type { QuestionnaireAdminResultsText_simpleQuestion } from '~relay/QuestionnaireAdminResultsText_simpleQuestion.graphql';
+import type { QuestionnaireAdminResultsText_simpleQuestion } from './__generated__/QuestionnaireAdminResultsText_simpleQuestion.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 

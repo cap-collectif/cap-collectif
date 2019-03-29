@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { baseUrl } from '../../../config';
-import type { ProposalAdminNewsForm_proposal } from '~relay/ProposalAdminNewsForm_proposal.graphql';
+import type { ProposalAdminNewsForm_proposal } from './__generated__/ProposalAdminNewsForm_proposal.graphql';
 
 type DefaultProps = void;
 type Props = {

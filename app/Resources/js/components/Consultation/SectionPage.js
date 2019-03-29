@@ -5,7 +5,7 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Section from './Section';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import type { SectionPageQueryResponse } from '~relay/SectionPageQuery.graphql';
+import type { SectionPageQueryResponse } from './__generated__/SectionPageQuery.graphql';
 import type { GlobalState } from '../../types';
 
 type Props = {|

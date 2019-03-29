@@ -5,7 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import RemainingTime from '../../Utils/RemainingTime';
 import DatesInterval from '../../Utils/DatesInterval';
 import StepInfos from './StepInfos';
-import { type StepPageHeader_step } from '~relay/StepPageHeader_step.graphql';
+import { type StepPageHeader_step } from './__generated__/StepPageHeader_step.graphql';
 
 type Props = {
   step: StepPageHeader_step,

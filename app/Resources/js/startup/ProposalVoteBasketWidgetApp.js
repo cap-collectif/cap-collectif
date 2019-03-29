@@ -9,7 +9,7 @@ import ProposalVoteBasketWidget from '../components/Proposal/Vote/ProposalVoteBa
 import type {
   ProposalVoteBasketWidgetAppQueryResponse,
   ProposalVoteBasketWidgetAppQueryVariables,
-} from '~relay/ProposalVoteBasketWidgetAppQuery.graphql';
+} from './__generated__/ProposalVoteBasketWidgetAppQuery.graphql';
 
 type Props = {
   stepId: string,

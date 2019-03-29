@@ -7,7 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import component from '../../Form/Field';
 import type { GlobalState, MediaFromAPI } from '../../../types';
-import { type SiteFaviconAdminForm_siteFavicon } from '~relay/SiteFaviconAdminForm_siteFavicon.graphql';
+import { type SiteFaviconAdminForm_siteFavicon } from './__generated__/SiteFaviconAdminForm_siteFavicon.graphql';
 import ChangeSiteFaviconMutation from '../../../mutations/ChangeSiteFaviconMutation';
 import AlertForm from '../../Alert/AlertForm';
 import RemoveSiteFaviconMutation from '../../../mutations/RemoveSiteFaviconMutation';

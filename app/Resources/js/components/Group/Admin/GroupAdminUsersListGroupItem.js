@@ -12,7 +12,7 @@ import {
   groupAdminUsersUserDeletionFailed,
   groupAdminUsersUserDeletionReset,
 } from '../../../redux/modules/user';
-import type { GroupAdminUsersListGroupItem_user } from '~relay/GroupAdminUsersListGroupItem_user.graphql';
+import type { GroupAdminUsersListGroupItem_user } from './__generated__/GroupAdminUsersListGroupItem_user.graphql';
 import type { Uuid, Dispatch } from '../../../types';
 
 type Props = {

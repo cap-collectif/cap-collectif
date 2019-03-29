@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import type { ProjectsListQueryResponse } from '~relay/ProjectsListQuery.graphql';
+import type { ProjectsListQueryResponse } from './__generated__/ProjectsListQuery.graphql';
 import { type GlobalState } from '../../../types';
 import ProjectListView from './ProjectListView';
 import { getInitialValues } from './Filters/ProjectListFilters';

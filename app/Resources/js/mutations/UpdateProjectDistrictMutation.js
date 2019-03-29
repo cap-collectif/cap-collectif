@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   UpdateProjectDistrictMutationVariables,
   UpdateProjectDistrictMutationResponse,
-} from '~relay/UpdateProjectDistrictMutation.graphql';
+} from './__generated__/UpdateProjectDistrictMutation.graphql';
 
 const mutation = graphql`
   mutation UpdateProjectDistrictMutation($input: UpdateProjectDistrictInput!) {

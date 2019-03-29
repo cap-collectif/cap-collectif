@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionTypeLabel from './OpinionTypeLabel';
-import type { OpinionPreviewTitle_opinion } from '~relay/OpinionPreviewTitle_opinion.graphql';
+import type { OpinionPreviewTitle_opinion } from './__generated__/OpinionPreviewTitle_opinion.graphql';
 
 type Props = {
   opinion: OpinionPreviewTitle_opinion,

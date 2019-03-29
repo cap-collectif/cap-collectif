@@ -5,7 +5,7 @@ import { injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import GroupAdminUsers from './GroupAdminUsers';
 import GroupAdminParameters from './GroupAdminParameters';
-import type { GroupAdminPageTabs_group } from '~relay/GroupAdminPageTabs_group.graphql';
+import type { GroupAdminPageTabs_group } from './__generated__/GroupAdminPageTabs_group.graphql';
 
 type Props = { group: GroupAdminPageTabs_group, intl: IntlShape };
 

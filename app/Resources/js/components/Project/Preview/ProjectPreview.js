@@ -6,7 +6,7 @@ import ProjectType from './ProjectType';
 import ProjectCover from './ProjectCover';
 import ProjectPreviewBody from './ProjectPreviewBody';
 import { Card } from '../../Ui/Card/Card';
-import type { ProjectPreview_project } from '~relay/ProjectPreview_project.graphql';
+import type { ProjectPreview_project } from './__generated__/ProjectPreview_project.graphql';
 
 type Props = {
   project: ProjectPreview_project,

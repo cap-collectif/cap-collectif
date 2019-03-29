@@ -6,7 +6,7 @@ import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import type { Dispatch, State } from '../../../types';
-import type { UserAdminPersonalData_user } from '~relay/UserAdminPersonalData_user.graphql';
+import type { UserAdminPersonalData_user } from './__generated__/UserAdminPersonalData_user.graphql';
 import component from '../../Form/Field';
 import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import AlertForm from '../../Alert/AlertForm';
@@ -66,7 +66,7 @@ const validate = (values: Object) => {
 const onSubmit = (values: FormValue, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
   const userId = props.user.id;
-  const { isEmailConfirmed, ...rest } = values;
+  const { isEmailConfirmed, ...rest } = values
   const input = {
     ...rest,
     userId,

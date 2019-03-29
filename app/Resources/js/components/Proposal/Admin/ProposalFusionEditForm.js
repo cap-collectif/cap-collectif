@@ -9,7 +9,7 @@ import environment from '../../../createRelayEnvironment';
 import select from '../../Form/Select';
 import UpdateProposalFusionMutation from '../../../mutations/UpdateProposalFusionMutation';
 import type { Dispatch, Uuid, State } from '../../../types';
-import type { ProposalFusionEditForm_proposal } from '~relay/ProposalFusionEditForm_proposal.graphql';
+import type { ProposalFusionEditForm_proposal } from './__generated__/ProposalFusionEditForm_proposal.graphql';
 
 export const formName = 'update-proposal-fusion';
 

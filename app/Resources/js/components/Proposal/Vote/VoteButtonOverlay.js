@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
-import type { VoteButtonOverlay_step } from '~relay/VoteButtonOverlay_step.graphql';
+import type { VoteButtonOverlay_step } from './__generated__/VoteButtonOverlay_step.graphql';
 
 type Props = {
   children: React.Node,

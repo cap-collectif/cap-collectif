@@ -6,10 +6,10 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalVoteButton from './ProposalVoteButton';
 import VoteButtonOverlay from './VoteButtonOverlay';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import type { ProposalVoteButtonWrapperFragment_proposal } from '~relay/ProposalVoteButtonWrapperFragment_proposal.graphql';
-import type { ProposalVoteButtonWrapperFragment_step } from '~relay/ProposalVoteButtonWrapperFragment_step.graphql';
+import type { ProposalVoteButtonWrapperFragment_proposal } from './__generated__/ProposalVoteButtonWrapperFragment_proposal.graphql';
+import type { ProposalVoteButtonWrapperFragment_step } from './__generated__/ProposalVoteButtonWrapperFragment_step.graphql';
 import HoverObserver from '../../Utils/HoverObserver';
-import type { ProposalVoteButtonWrapperFragment_viewer } from '~relay/ProposalVoteButtonWrapperFragment_viewer.graphql';
+import type { ProposalVoteButtonWrapperFragment_viewer } from './__generated__/ProposalVoteButtonWrapperFragment_viewer.graphql';
 
 type Props = {
   proposal: ProposalVoteButtonWrapperFragment_proposal,

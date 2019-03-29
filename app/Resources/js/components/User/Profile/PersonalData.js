@@ -22,7 +22,7 @@ import {
   formValueSelector,
 } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import type PersonalData_viewer from '~relay/PersonalData_viewer.graphql';
+import type PersonalData_viewer from './__generated__/PersonalData_viewer.graphql';
 import AlertForm from '../../Alert/AlertForm';
 import type { Dispatch, State } from '../../../types';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';

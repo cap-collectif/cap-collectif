@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import type { ReadyState } from 'react-relay';
 import styled from 'styled-components';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import type { SectionContainerQueryResponse } from '~relay/SectionContainerQuery.graphql';
+import type { SectionContainerQueryResponse } from './__generated__/SectionContainerQuery.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 

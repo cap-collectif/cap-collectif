@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import DatesInterval from '../Utils/DatesInterval';
-import type { EventPreview_event } from '~relay/EventPreview_event.graphql';
+import type { EventPreview_event } from './__generated__/EventPreview_event.graphql';
 import DateIcon from '../Ui/Dates/DateIcon';
 import { UserAvatar } from '../User/UserAvatar';
 import InlineList from '../Ui/List/InlineList';

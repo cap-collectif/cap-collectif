@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   UpdateProfileMutationVariables,
   UpdateProfileMutationResponse,
-} from '~relay/UpdateProfileMutation.graphql';
+} from './__generated__/UpdateProfileMutation.graphql';
 
 const mutation = graphql`
   mutation UpdateProfileMutation($input: UpdateProfileInput!) {

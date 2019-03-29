@@ -4,7 +4,7 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import ContributionPaginatedList, { pageSize } from './ContributionPaginatedList';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import type { ConsultationContributionFilteredQueryResponse } from '~relay/ConsultationContributionFilteredQuery.graphql';
+import type { ConsultationContributionFilteredQueryResponse } from './__generated__/ConsultationContributionFilteredQuery.graphql';
 
 const renderConsultationPaginated = ({
   error,

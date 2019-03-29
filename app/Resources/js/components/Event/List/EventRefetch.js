@@ -8,7 +8,7 @@ import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import EventListPaginated from './EventListPaginated';
 import { graphqlError } from '../../../createRelayEnvironment';
 import type { GlobalState } from '../../../types';
-import type { EventRefetch_query } from '~relay/EventRefetch_query.graphql';
+import type { EventRefetch_query } from './__generated__/EventRefetch_query.graphql';
 
 type Props = {
   search: ?string,

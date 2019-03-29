@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   DeleteAccountVariables,
   DeleteAccountResponse,
-} from '~relay/DeleteAccountMutation.graphql';
+} from './__generated__/DeleteAccountMutation.graphql';
 
 const mutation = graphql`
   mutation DeleteAccountMutation($input: DeleteAccountInput!) {

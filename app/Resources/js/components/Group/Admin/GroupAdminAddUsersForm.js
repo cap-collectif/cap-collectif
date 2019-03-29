@@ -3,7 +3,7 @@ import React from 'react';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { reduxForm } from 'redux-form';
 import type { Dispatch } from '../../../types';
-import GroupAdminUsers_group from '~relay/GroupAdminUsers_group.graphql';
+import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
 import { groupAdminUsersUserDeletionReset } from '../../../redux/modules/user';
 import AddUsersInGroupMutation from '../../../mutations/AddUsersInGroupMutation';
 import UserListField from '../../Admin/Field/UserListField';

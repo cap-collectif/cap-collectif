@@ -15,7 +15,7 @@ import {
 import { FormattedMessage } from 'react-intl';
 import FollowProposalMutation from '../../../mutations/FollowProposalMutation';
 import UpdateFollowProposalMutation from '../../../mutations/UpdateFollowProposalMutation';
-import type { ProposalFollowButton_proposal } from '~relay/ProposalFollowButton_proposal.graphql';
+import type { ProposalFollowButton_proposal } from './__generated__/ProposalFollowButton_proposal.graphql';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 import LoginOverlay from '../../Utils/LoginOverlay';
 

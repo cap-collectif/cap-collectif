@@ -6,8 +6,8 @@ import { Button } from 'react-bootstrap';
 import LoginOverlay from '../Utils/LoginOverlay';
 import OpinionCreateModal from './Create/OpinionCreateModal';
 import { openOpinionCreateModal } from '../../redux/modules/opinion';
-import type { NewOpinionButton_section } from '~relay/NewOpinionButton_section.graphql';
-import type { NewOpinionButton_consultation } from '~relay/NewOpinionButton_consultation.graphql';
+import type { NewOpinionButton_section } from './__generated__/NewOpinionButton_section.graphql';
+import type { NewOpinionButton_consultation } from './__generated__/NewOpinionButton_consultation.graphql';
 
 type Props = {
   section: NewOpinionButton_section,

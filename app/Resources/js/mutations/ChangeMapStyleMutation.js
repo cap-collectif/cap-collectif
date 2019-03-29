@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   ChangeMapStyleMutationVariables,
   ChangeMapStyleMutationResponse as Response,
-} from '~relay/ChangeMapStyleMutation.graphql';
+} from './__generated__/ChangeMapStyleMutation.graphql';
 
 export type ChangeMapStyleMutationResponse = Response;
 

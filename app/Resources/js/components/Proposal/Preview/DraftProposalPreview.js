@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import type { DraftProposalPreview_proposal } from '~relay/DraftProposalPreview_proposal.graphql';
+import type { DraftProposalPreview_proposal } from './__generated__/DraftProposalPreview_proposal.graphql';
 
 type Props = {
   proposal: DraftProposalPreview_proposal,

@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import component from '../../Form/Field';
 import { AlertForm } from '../../Alert/AlertForm';
 import ChangeUserNotificationsConfigurationMutation from '../../../mutations/ChangeUserNotificationsConfigurationMutation';
-import type { NotificationsForm_viewer } from '~relay/NotificationsForm_viewer.graphql';
+import type { NotificationsForm_viewer } from './__generated__/NotificationsForm_viewer.graphql';
 import type { State } from '../../../types';
 
 type RelayProps = {|

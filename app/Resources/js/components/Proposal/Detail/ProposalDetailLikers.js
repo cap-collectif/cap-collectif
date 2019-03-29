@@ -6,7 +6,7 @@ import { injectIntl, type IntlShape } from 'react-intl';
 import { openDetailLikersModal } from '../../../redux/modules/proposal';
 import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
 import ProposalDetailLikersModal from './ProposalDetailLikersModal';
-import type { ProposalDetailLikers_proposal } from '~relay/ProposalDetailLikers_proposal.graphql';
+import type { ProposalDetailLikers_proposal } from './__generated__/ProposalDetailLikers_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
 
 type Props = {

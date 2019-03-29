@@ -4,7 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import classNames from 'classnames';
 import DraftProposalPreview from '../Preview/DraftProposalPreview';
 import DraftBox from '../../Utils/DraftBox';
-import type { DraftProposalList_step } from '~relay/DraftProposalList_step.graphql';
+import type { DraftProposalList_step } from './__generated__/DraftProposalList_step.graphql';
 
 type Props = {
   step: DraftProposalList_step,

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionAppendix from './OpinionAppendix';
-import type { OpinionAppendices_opinion } from '~relay/OpinionAppendices_opinion.graphql';
+import type { OpinionAppendices_opinion } from './__generated__/OpinionAppendices_opinion.graphql';
 
 type Props = { opinion: OpinionAppendices_opinion };
 

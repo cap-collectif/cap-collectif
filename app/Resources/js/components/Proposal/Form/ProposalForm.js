@@ -26,13 +26,13 @@ import component from '../../Form/Field';
 import type {
   ProposalFormSearchProposalsQueryResponse,
   ProposalFormSearchProposalsQueryVariables,
-} from '~relay/ProposalFormSearchProposalsQuery.graphql';
+} from './__generated__/ProposalFormSearchProposalsQuery.graphql';
 import type {
   ProposalFormAvailableDistrictsForLocalisationQueryResponse,
   ProposalFormAvailableDistrictsForLocalisationQueryVariables,
-} from '~relay/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
-import type { ProposalForm_proposal } from '~relay/ProposalForm_proposal.graphql';
-import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql';
+} from './__generated__/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
+import type { ProposalForm_proposal } from './__generated__/ProposalForm_proposal.graphql';
+import type { ProposalForm_proposalForm } from './__generated__/ProposalForm_proposalForm.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import CreateProposalMutation from '../../../mutations/CreateProposalMutation';
 import { closeCreateModal, closeEditProposalModal } from '../../../redux/modules/proposal';
