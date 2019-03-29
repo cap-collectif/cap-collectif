@@ -12,7 +12,7 @@ import type { FeatureToggles, State } from '../../../types';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.graphql';
 
-export type Props = {
+type Props = {
   proposalId: string,
   currentVotableStepId: ?string,
   features: FeatureToggles,

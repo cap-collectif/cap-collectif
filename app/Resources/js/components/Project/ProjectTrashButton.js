@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
 import { type State } from '../../types';
 
-export type Props = {|
+type Props = {
   link: string,
   user: ?Object,
-|};
+};
 
 export class ProjectTrashButton extends React.PureComponent<Props> {
   render() {

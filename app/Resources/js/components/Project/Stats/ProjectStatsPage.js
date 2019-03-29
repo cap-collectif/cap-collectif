@@ -6,7 +6,7 @@ import { Nav, NavItem } from 'react-bootstrap';
 import ProjectStatsList from './ProjectStatsList';
 import type { GlobalState } from '../../../types';
 
-export type OwnProps = {|
+type OwnProps = {|
   steps: Array<Object>,
   projectId: string,
 |};

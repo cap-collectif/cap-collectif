@@ -10,6 +10,7 @@ use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
@@ -107,12 +108,15 @@ class ProjectController extends Controller
         $arguments = $this->get(ArgumentRepository::class)->getTrashedByProject($project);
         $sources = $this->get(SourceRepository::class)->getTrashedByProject($project);
 
+        $proposals = $this->get(ProposalRepository::class)->getTrashedByProject($project);
+
         return [
             'project' => $project,
             'opinions' => $opinions,
             'versions' => $versions,
             'arguments' => $arguments,
             'sources' => $sources,
+            'proposals' => $proposals,
             'argumentsLabels' => Argument::$argumentTypesLabels,
             'currentStep' => 'trash_step',
         ];

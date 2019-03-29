@@ -6,10 +6,10 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import CommentTrashedListPaginated from '../Comment/CommentTrashedListPaginated';
 import type { ProjectTrashCommentQueryResponse } from './__generated__/ProjectTrashCommentQuery.graphql';
 
-type Props = {|
-  +projectId: string,
-  +isAuthenticated: boolean,
-|};
+type Props = {
+  projectId: string,
+  isAuthenticated: boolean,
+};
 
 export const TRASHED_COMMENT_PAGINATOR_COUNT = 20;
 
