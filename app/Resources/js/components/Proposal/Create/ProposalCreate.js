@@ -11,7 +11,7 @@ import CloseButton from '../../Form/CloseButton';
 import ProposalForm, { formName } from '../Form/ProposalForm';
 import { openCreateModal, closeCreateModal } from '../../../redux/modules/proposal';
 import type { Dispatch, GlobalState } from '../../../types';
-import type { ProposalCreate_proposalForm } from '~relay/ProposalCreate_proposalForm.graphql';
+import type { ProposalCreate_proposalForm } from './__generated__/ProposalCreate_proposalForm.graphql';
 
 type Props = {
   intl: IntlShape,

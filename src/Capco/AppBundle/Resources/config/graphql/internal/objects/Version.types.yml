@@ -70,7 +70,7 @@ Version:
         type: 'Answer'
         resolve: '@=value.getAnswer()'
       contribuable:
-        resolve: '@=value.canContribute()'
+        resolve: '@=value.canContribute(getUser())'
       parent:
         type: 'Opinion!'
       viewerVote:

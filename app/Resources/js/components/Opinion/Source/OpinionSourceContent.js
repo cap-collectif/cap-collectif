@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { OpinionSourceContent_source } from '~relay/OpinionSourceContent_source.graphql';
+import type { OpinionSourceContent_source } from './__generated__/OpinionSourceContent_source.graphql';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type Props = {

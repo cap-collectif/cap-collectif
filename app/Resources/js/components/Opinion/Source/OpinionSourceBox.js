@@ -7,13 +7,13 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type {
   OpinionSourceBoxQueryVariables,
   OpinionSourceBoxQueryResponse,
-} from '~relay/OpinionSourceBoxQuery.graphql';
+} from './__generated__/OpinionSourceBoxQuery.graphql';
 import OpinionSourceListView from './OpinionSourceListView';
 import OpinionSourceAdd from './OpinionSourceAdd';
 import OpinionSource from './OpinionSource';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import Filter from '../../Utils/Filter';
-import type { OpinionSourceBox_sourceable } from '~relay/OpinionSourceBox_sourceable.graphql';
+import type { OpinionSourceBox_sourceable } from './__generated__/OpinionSourceBox_sourceable.graphql';
 
 type Props = {
   sourceable: OpinionSourceBox_sourceable,

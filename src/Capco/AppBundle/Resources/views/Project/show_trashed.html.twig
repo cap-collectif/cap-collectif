@@ -33,22 +33,37 @@
                     {{ 'project.show.trashed.short_name'|trans({}, 'CapcoAppBundle') }}
                 </h2>
             </div>
-            {% set trashedNb = (arguments|length + opinions|length + versions|length + sources|length + proposals|length) %}
+            
+            {% set trashedNb = (arguments|length + opinions|length + versions|length + sources|length) %}
             <div>
                 <p>
                     {{ 'project.show.trashed.text'|trans({}, 'CapcoAppBundle') }}
                 </p>
             </div>
 
-            <h3 class="mb-25">
-                {{ trashedNb }}
-                {% transchoice trashedNb with {'%count%': trashedNb} from 'CapcoAppBundle'  %}
-                project.show.meta.total_count
-                {% endtranschoice %}
-            </h3>
+            {% if trashedNb > 0 or project.getFirstCollectStep != null %}
 
-            {% if trashedNb > 0 %}
-                {% if proposals|length == 0 %}
+            {% if project.getFirstCollectStep != null %}
+                {{
+                    react_render_component('ProjectTrashProposalApp', {
+                        'props': {
+                            'projectId': project.id,
+                            'isAuthenticated': is_granted('ROLE_USER'),
+                        },
+                        'rendering': 'client_side'
+                    })
+                }}
+                {{
+                    react_render_component('ProjectTrashCommentApp', {
+                        'props': {
+                            'projectId': project.id,
+                            'isAuthenticated': is_granted('ROLE_USER'),
+                        },
+                        'rendering': 'client_side'
+                    }) 
+                }}
+            {% endif %}
+            
                     <div class="block  block--bordered">
                         <ul class="media-list  opinion__list">
                             {% if opinions|length > 0 %}
@@ -73,7 +88,6 @@
                             {% endif %}
                         </ul>
                     </div>
-                {% endif %}
             {% else %}
                 <div class="project__empty-block  text-center">
                     <p class="icon  cap-bubble-attention-6"></p>
@@ -81,25 +95,6 @@
                 </div>
             {% endif %}
 
-            {% if proposals|length > 0 %}
-                <div class="row proposal-preview-trash_list">
-                    {% for proposal in proposals %}
-                        {% include 'CapcoAppBundle:Proposal:blockProposal.html.twig' with {'proposal': proposal } only %}
-                    {% endfor %}
-                </div>
-            {% endif %}
-            
-            {% if project.getFirstCollectStep != null %}
-                {{
-                    react_render_component('ProjectTrashCommentApp', {
-                        'props': {
-                            'projectId': project.id,
-                            'isAuthenticated': is_granted('ROLE_USER'),
-                        },
-                        'rendering': 'client_side'
-                    }) 
-                }}
-            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -8,8 +8,8 @@ import Fetcher, { json } from '../../../services/Fetcher';
 import renderInput from '../../Form/Field';
 import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 import type { Dispatch } from '../../../types';
-import type { OpinionCreateForm_section } from '~relay/OpinionCreateForm_section.graphql';
-import type { OpinionCreateForm_consultation } from '~relay/OpinionCreateForm_consultation.graphql';
+import type { OpinionCreateForm_section } from './__generated__/OpinionCreateForm_section.graphql';
+import type { OpinionCreateForm_consultation } from './__generated__/OpinionCreateForm_consultation.graphql';
 import RequirementsForm from '../../Requirements/RequirementsForm';
 
 type RelayProps = {|

@@ -7,7 +7,7 @@ import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type {
   ProposalVotesByStepQueryResponse,
   ProposalVotesByStepQueryVariables,
-} from '~relay/ProposalVotesByStepQuery.graphql';
+} from './__generated__/ProposalVotesByStepQuery.graphql';
 
 type Props = {
   proposal: { +id: string },

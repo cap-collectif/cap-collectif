@@ -19,8 +19,8 @@ import component from '../../Form/Field';
 import select from '../../Form/Select';
 import AlertForm from '../../Alert/AlertForm';
 import ProposalFusionEditModal from './ProposalFusionEditModal';
-import type { ProposalAdminContentForm_proposal } from '~relay/ProposalAdminContentForm_proposal.graphql';
-import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql';
+import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
+import type { ProposalForm_proposalForm } from '../Form/__generated__/ProposalForm_proposalForm.graphql';
 import type { Uuid, GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import {
   renderResponses,

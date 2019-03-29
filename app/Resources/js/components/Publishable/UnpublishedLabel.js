@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { OverlayTrigger, Label, Popover } from 'react-bootstrap';
-import type { UnpublishedLabel_publishable } from '~relay/UnpublishedLabel_publishable.graphql';
+import type { UnpublishedLabel_publishable } from './__generated__/UnpublishedLabel_publishable.graphql';
 import type { GlobalState } from '../../types';
 
 type Props = {

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import type { ProposalDetailLikersLabel_proposal } from '~relay/ProposalDetailLikersLabel_proposal.graphql';
+import type { ProposalDetailLikersLabel_proposal } from './__generated__/ProposalDetailLikersLabel_proposal.graphql';
 
 type Props = { proposal: ProposalDetailLikersLabel_proposal };
 

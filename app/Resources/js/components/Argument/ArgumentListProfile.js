@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import type { ArgumentListProfile_argumentList } from '~relay/ArgumentListProfile_argumentList.graphql';
+import type { ArgumentListProfile_argumentList } from './__generated__/ArgumentListProfile_argumentList.graphql';
 
 import ArgumentItem from './ArgumentItem';
 import Loader from '../Ui/FeedbacksIndicators/Loader';

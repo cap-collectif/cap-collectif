@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import DefaultProjectImage from './DefaultProjectImage';
-import type { ProjectImage_project } from '~relay/ProjectImage_project.graphql';
+import type { ProjectImage_project } from './__generated__/ProjectImage_project.graphql';
 
 type Props = {
   project: ProjectImage_project,

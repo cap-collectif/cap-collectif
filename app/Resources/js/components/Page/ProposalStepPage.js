@@ -16,7 +16,7 @@ import type { FeatureToggles, State } from '../../types';
 import type {
   ProposalStepPageQueryResponse,
   ProposalStepPageQueryVariables,
-} from '~relay/ProposalStepPageQuery.graphql';
+} from './__generated__/ProposalStepPageQuery.graphql';
 import config from '../../config';
 
 type OwnProps = {|

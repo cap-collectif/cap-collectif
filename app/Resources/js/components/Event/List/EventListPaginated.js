@@ -11,7 +11,7 @@ import { useWindowWidth } from '../../../utils/hooks/useWindowWidth';
 import EventPreview from '../EventPreview';
 import EventMap from '../Map/EventMap';
 import EventPagePassedEventsPreview from './EventPagePassedEventsPreview';
-import type { EventListPaginated_query } from '~relay/EventListPaginatedQuery.graphql';
+import type { EventListPaginated_query } from './__generated__/EventListPaginatedQuery.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 import sizes from '../../../utils/sizes';

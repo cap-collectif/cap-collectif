@@ -7,7 +7,7 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 import DeleteSourceMutation from '../../../mutations/DeleteSourceMutation';
-import type { OpinionSourceDeleteModal_source } from '~relay/OpinionSourceDeleteModal_source.graphql';
+import type { OpinionSourceDeleteModal_source } from './__generated__/OpinionSourceDeleteModal_source.graphql';
 
 type Props = {
   show: boolean,

@@ -14,7 +14,7 @@ import component from '../Form/Field';
 import toggle from '../Form/Toggle';
 import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutation';
 import AlertForm from '../Alert/AlertForm';
-import type { ProposalFormAdminConfigurationForm_proposalForm } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
+import type { ProposalFormAdminConfigurationForm_proposalForm } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 import type { State, FeatureToggles } from '../../types';
 
 type RelayProps = {| proposalForm: ProposalFormAdminConfigurationForm_proposalForm |};

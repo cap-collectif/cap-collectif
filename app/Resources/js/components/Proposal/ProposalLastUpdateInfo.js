@@ -3,7 +3,7 @@ import * as React from 'react';
 import moment from 'moment';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import type { ProposalLastUpdateInfo_proposal } from '~relay/ProposalLastUpdateInfo_proposal.graphql';
+import type { ProposalLastUpdateInfo_proposal } from './__generated__/ProposalLastUpdateInfo_proposal.graphql';
 
 type Props = {
   proposal: ProposalLastUpdateInfo_proposal,

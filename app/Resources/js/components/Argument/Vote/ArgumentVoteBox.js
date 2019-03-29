@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ArgumentVoteButton from './ArgumentVoteButton';
-import type { ArgumentVoteBox_argument } from '~relay/ArgumentVoteBox_argument.graphql';
+import type { ArgumentVoteBox_argument } from './__generated__/ArgumentVoteBox_argument.graphql';
 
 type Props = {
   argument: ArgumentVoteBox_argument,

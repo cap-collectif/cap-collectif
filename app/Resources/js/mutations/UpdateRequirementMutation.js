@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   UpdateRequirementMutationVariables,
   UpdateRequirementMutationResponse,
-} from '~relay/UpdateRequirementMutation.graphql';
+} from './__generated__/UpdateRequirementMutation.graphql';
 
 const mutation = graphql`
   mutation UpdateRequirementMutation($input: UpdateRequirementInput!) {

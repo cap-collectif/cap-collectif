@@ -6,7 +6,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse, Panel, ListGroup } from 'react-bootstrap';
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
-import type OpinionProjectRow_viewer from '~relay/OpinionProjectRow_viewer.graphql';
+import type OpinionProjectRow_viewer from './__generated__/OpinionProjectRow_viewer.graphql';
 import OpinionRow from './OpinionRow';
 import type { Uuid } from '../../../types';
 

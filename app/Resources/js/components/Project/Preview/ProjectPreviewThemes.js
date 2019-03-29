@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
 import type { State } from '../../../types';
 import InlineList from '../../Ui/List/InlineList';
-import type { ProjectPreviewThemes_project } from '~relay/ProjectPreviewThemes_project.graphql';
+import type { ProjectPreviewThemes_project } from './__generated__/ProjectPreviewThemes_project.graphql';
 
 type Props = {
   project: ProjectPreviewThemes_project,

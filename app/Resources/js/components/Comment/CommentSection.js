@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import type { CommentSectionQueryResponse } from '~relay/CommentSectionQuery.graphql';
+import type { CommentSectionQueryResponse } from './__generated__/CommentSectionQuery.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { GlobalState } from '../../types';
 import CommentSectionView from './CommentSectionView';

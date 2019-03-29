@@ -5,7 +5,7 @@ import { type FormProps, reduxForm, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import type { RegistrationFormQuestions_registrationForm } from '~relay/RegistrationFormQuestions_registrationForm.graphql';
+import type { RegistrationFormQuestions_registrationForm } from './__generated__/RegistrationFormQuestions_registrationForm.graphql';
 import type { State } from '../../types';
 import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestions';
 import UpdateRegistrationFormQuestionsMutation from '../../mutations/UpdateRegistrationFormQuestionsMutation';

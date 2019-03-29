@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, ButtonToolbar } from 'react-bootstrap';
-import type { GroupAdminParameters_group } from '~relay/GroupAdminParameters_group.graphql';
+import type { GroupAdminParameters_group } from './__generated__/GroupAdminParameters_group.graphql';
 import AlertForm from '../../Alert/AlertForm';
 import DeleteGroupMutation from '../../../mutations/DeleteGroupMutation';
 import SubmitButton from '../../Form/SubmitButton';

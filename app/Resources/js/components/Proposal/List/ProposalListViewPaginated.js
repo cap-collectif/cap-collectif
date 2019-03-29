@@ -3,8 +3,8 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import type { ProposalListViewPaginated_step } from '~relay/ProposalListViewPaginated_step.graphql';
-import type { ProposalListViewPaginated_viewer } from '~relay/ProposalListViewPaginated_viewer.graphql';
+import type { ProposalListViewPaginated_step } from './__generated__/ProposalListViewPaginated_step.graphql';
+import type { ProposalListViewPaginated_viewer } from './__generated__/ProposalListViewPaginated_viewer.graphql';
 import VisibilityBox from '../../Utils/VisibilityBox';
 import ProposalList from './ProposalList';
 

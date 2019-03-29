@@ -13,7 +13,7 @@ import DeleteProposalMutation from '../../../mutations/DeleteProposalMutation';
 import type {
   ProposalPublicationStatus,
   ProposalAdminStatusForm_proposal,
-} from '~relay/ProposalAdminStatusForm_proposal.graphql';
+} from './__generated__/ProposalAdminStatusForm_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
 
 type DefaultProps = void;

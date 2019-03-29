@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionList from './OpinionList';
-import type { Section_section } from '~relay/Section_section.graphql';
-import type { Section_consultation } from '~relay/Section_consultation.graphql';
+import type { Section_section } from './__generated__/Section_section.graphql';
+import type { Section_consultation } from './__generated__/Section_consultation.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {|

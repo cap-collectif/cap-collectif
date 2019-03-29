@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type UserFollowingsOpinions_viewer from '~relay/UserFollowingsOpinions_viewer.graphql';
+import type UserFollowingsOpinions_viewer from './__generated__/UserFollowingsOpinions_viewer.graphql';
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
 import OpinionProjectRow from './OpinionProjectRow';
 

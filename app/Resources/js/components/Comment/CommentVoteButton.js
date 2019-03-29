@@ -7,7 +7,7 @@ import RemoveCommentVoteMutation from '../../mutations/RemoveCommentVoteMutation
 import AddCommentVoteMutation from '../../mutations/AddCommentVoteMutation';
 import LoginOverlay from '../Utils/LoginOverlay';
 import UnpublishedTooltip from '../Publishable/UnpublishedTooltip';
-import type { CommentVoteButton_comment } from '~relay/CommentVoteButton_comment.graphql';
+import type { CommentVoteButton_comment } from './__generated__/CommentVoteButton_comment.graphql';
 
 type Props = {
   comment: CommentVoteButton_comment,

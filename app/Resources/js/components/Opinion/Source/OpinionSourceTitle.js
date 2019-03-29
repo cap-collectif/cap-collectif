@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Label } from 'react-bootstrap';
-import type { OpinionSourceTitle_source } from '~relay/OpinionSourceTitle_source.graphql';
+import type { OpinionSourceTitle_source } from './__generated__/OpinionSourceTitle_source.graphql';
 
 type Props = {
   source: OpinionSourceTitle_source,

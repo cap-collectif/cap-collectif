@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import SiteFaviconAdminForm from './SiteFaviconAdminForm';
-import { type SiteFaviconAdminPageQueryResponse } from '~relay/SiteFaviconAdminPageQuery.graphql';
+import { type SiteFaviconAdminPageQueryResponse } from './__generated__/SiteFaviconAdminPageQuery.graphql';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 

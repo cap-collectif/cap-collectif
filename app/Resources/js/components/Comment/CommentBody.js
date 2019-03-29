@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import Linkify from 'react-linkify';
 import { FormattedMessage } from 'react-intl';
 import nl2br from 'react-nl2br';
-import type { CommentBody_comment } from '~relay/CommentBody_comment.graphql';
+import type { CommentBody_comment } from './__generated__/CommentBody_comment.graphql';
 
 type Props = {
   comment: CommentBody_comment,

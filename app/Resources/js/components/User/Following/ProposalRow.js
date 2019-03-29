@@ -6,7 +6,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse, ListGroupItem } from 'react-bootstrap';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
-import type ProposalRow_proposal from '~relay/ProposalRow_proposal.graphql';
+import type ProposalRow_proposal from './__generated__/ProposalRow_proposal.graphql';
 
 type Props = {
   proposal: ProposalRow_proposal,

@@ -36,10 +36,6 @@ app/config/parameters/*
 /web/app_dev.php
 /web/app_test.php
 
-# ide config
-jsconfig.json
-ide.config.js
-
 # infra
 infrastructure/environments/current.yml
 infrastructure/services/databasefixtures/dump.sql

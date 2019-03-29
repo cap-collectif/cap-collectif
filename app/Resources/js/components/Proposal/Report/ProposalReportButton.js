@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ReportBox from '../../Report/ReportBox';
 import { submitProposalReport } from '../../../redux/modules/report';
-import type { ProposalReportButton_proposal } from '~relay/ProposalReportButton_proposal.graphql';
+import type { ProposalReportButton_proposal } from './__generated__/ProposalReportButton_proposal.graphql';
 
 type Props = {
   proposal: ProposalReportButton_proposal,

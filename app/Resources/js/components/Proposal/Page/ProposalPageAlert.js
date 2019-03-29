@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Alert } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { ProposalPageAlert_proposal } from '~relay/ProposalPageAlert_proposal.graphql';
+import type { ProposalPageAlert_proposal } from './__generated__/ProposalPageAlert_proposal.graphql';
 
 type Props = { proposal: ProposalPageAlert_proposal };
 export class ProposalPageAlert extends React.Component<Props> {

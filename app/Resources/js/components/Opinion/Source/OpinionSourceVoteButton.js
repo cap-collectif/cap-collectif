@@ -8,7 +8,7 @@ import AddSourceVoteMutation from '../../../mutations/AddSourceVoteMutation';
 import RemoveSourceVoteMutation from '../../../mutations/RemoveSourceVoteMutation';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
-import type { OpinionSourceVoteButton_source } from '~relay/OpinionSourceVoteButton_source.graphql';
+import type { OpinionSourceVoteButton_source } from './__generated__/OpinionSourceVoteButton_source.graphql';
 import RequirementsFormModal from '../../Requirements/RequirementsModal';
 
 type Props = {

@@ -6,7 +6,7 @@ import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import type { Dispatch, State, GlobalState } from '../../../types';
-import type { UserAdminProfile_user } from '~relay/UserAdminProfile_user.graphql';
+import type { UserAdminProfile_user } from './__generated__/UserAdminProfile_user.graphql';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
@@ -85,7 +85,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const media =
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   const userId = props.user.id;
-  const { id, isViewer, url, ...rest } = values;
+  const { id, isViewer, url, ...rest} = values
   const input = {
     ...rest,
     media,

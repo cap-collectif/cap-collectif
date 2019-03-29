@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   ChangeUserNotificationsConfigurationMutationVariables,
   ChangeUserNotificationsConfigurationMutationResponse,
-} from '~relay/ChangeUserNotificationsConfigurationMutation.graphql';
+} from './__generated__/ChangeUserNotificationsConfigurationMutation.graphql';
 
 const mutation = graphql`
   mutation ChangeUserNotificationsConfigurationMutation(

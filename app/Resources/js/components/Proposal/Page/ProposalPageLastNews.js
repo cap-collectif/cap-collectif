@@ -3,7 +3,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import AnswerBody from '../../Answer/AnswerBody';
-import type { ProposalPageLastNews_proposal } from '~relay/ProposalPageLastNews_proposal.graphql';
+import type { ProposalPageLastNews_proposal } from './__generated__/ProposalPageLastNews_proposal.graphql';
 
 export class ProposalPageLastNews extends React.Component<{
   proposal: ProposalPageLastNews_proposal,

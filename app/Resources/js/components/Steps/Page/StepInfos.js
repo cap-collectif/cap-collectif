@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import StepText from './StepText';
 import { Card } from '../../Ui/Card/Card';
-import type { StepInfos_step } from '~relay/StepInfos_step.graphql';
+import type { StepInfos_step } from './__generated__/StepInfos_step.graphql';
 
 type Props = {
   step: StepInfos_step,

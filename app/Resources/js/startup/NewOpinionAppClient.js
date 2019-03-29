@@ -6,7 +6,7 @@ import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
 import environment from '../createRelayEnvironment';
 import NewOpinionButton from '../components/Opinion/NewOpinionButton';
-import type { NewOpinionAppClientQueryVariables } from '~relay/NewOpinionAppClientQuery.graphql';
+import type { NewOpinionAppClientQueryVariables } from './__generated__/NewOpinionAppClientQuery.graphql';
 import type { GlobalState } from '../types';
 
 const NewOpinionAppClient = ({

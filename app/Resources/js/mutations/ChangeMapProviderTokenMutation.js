@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   ChangeMapProviderTokenMutationVariables,
   ChangeMapProviderTokenMutationResponse as Response,
-} from '~relay/ChangeMapProviderTokenMutation.graphql';
+} from './__generated__/ChangeMapProviderTokenMutation.graphql';
 
 export type ChangeMapProviderTokenMutationResponse = Response;
 

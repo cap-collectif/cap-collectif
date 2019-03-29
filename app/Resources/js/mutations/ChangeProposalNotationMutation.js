@@ -5,7 +5,7 @@ import environment from '../createRelayEnvironment';
 import type {
   ChangeProposalNotationMutationVariables,
   ChangeProposalNotationMutationResponse,
-} from '~relay/ChangeProposalNotationMutation.graphql';
+} from './__generated__/ChangeProposalNotationMutation.graphql';
 
 const mutation = graphql`
   mutation ChangeProposalNotationMutation($input: ChangeProposalNotationInput!) {

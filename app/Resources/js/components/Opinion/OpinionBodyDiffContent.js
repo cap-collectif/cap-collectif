@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionBodyDiffModal from './OpinionBodyDiffModal';
-import type { OpinionBodyDiffContent_opinion } from '~relay/OpinionBodyDiffContent_opinion.graphql';
+import type { OpinionBodyDiffContent_opinion } from './__generated__/OpinionBodyDiffContent_opinion.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {

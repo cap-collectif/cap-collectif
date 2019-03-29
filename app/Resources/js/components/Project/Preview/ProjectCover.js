@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import ProjectImage from './ProjectImage';
 import Card from '../../Ui/Card/Card';
-import type { ProjectCover_project } from '~relay/ProjectCover_project.graphql';
+import type { ProjectCover_project } from './__generated__/ProjectCover_project.graphql';
 
 type Props = { project: ProjectCover_project };
 

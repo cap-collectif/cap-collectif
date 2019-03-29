@@ -7,7 +7,7 @@ import Media from '../../Ui/Medias/Media/Media';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
-import type { ProposalPreviewUser_proposal } from '~relay/ProposalPreviewUser_proposal.graphql';
+import type { ProposalPreviewUser_proposal } from './__generated__/ProposalPreviewUser_proposal.graphql';
 
 type Props = { proposal: ProposalPreviewUser_proposal };
 

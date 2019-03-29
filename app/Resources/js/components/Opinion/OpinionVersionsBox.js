@@ -13,8 +13,8 @@ import OpinionVersionCreateModal from './OpinionVersionCreateModal';
 import type {
   OpinionVersionsBoxQueryVariables,
   OpinionVersionsBoxQueryResponse,
-} from '~relay/OpinionVersionsBoxQuery.graphql';
-import type { OpinionVersionsBox_opinion } from '~relay/OpinionVersionsBox_opinion.graphql';
+} from './__generated__/OpinionVersionsBoxQuery.graphql';
+import type { OpinionVersionsBox_opinion } from './__generated__/OpinionVersionsBox_opinion.graphql';
 
 type Props = {
   opinion: OpinionVersionsBox_opinion,

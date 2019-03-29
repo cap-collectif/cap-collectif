@@ -12,7 +12,7 @@ import {
 } from '../../redux/modules/opinion';
 import AddVersionMutation from '../../mutations/AddVersionMutation';
 import type { State } from '../../types';
-import type { OpinionVersionCreateForm_opinion } from '~relay/OpinionVersionCreateForm_opinion.graphql';
+import type { OpinionVersionCreateForm_opinion } from './__generated__/OpinionVersionCreateForm_opinion.graphql';
 
 export const formName = 'opinion-version-create';
 type FormValues = {

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { type ResponseValue_response } from '~relay/ResponseValue_response.graphql';
+import { type ResponseValue_response } from './__generated__/ResponseValue_response.graphql';
 import { getValueFromResponse } from '../../../utils/responsesHelper';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 

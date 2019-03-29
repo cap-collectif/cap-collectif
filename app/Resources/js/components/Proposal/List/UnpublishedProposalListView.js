@@ -3,8 +3,8 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import type { UnpublishedProposalListView_step } from '~relay/UnpublishedProposalListView_step.graphql';
-import type { UnpublishedProposalListView_viewer } from '~relay/UnpublishedProposalListView_viewer.graphql';
+import type { UnpublishedProposalListView_step } from './__generated__/UnpublishedProposalListView_step.graphql';
+import type { UnpublishedProposalListView_viewer } from './__generated__/UnpublishedProposalListView_viewer.graphql';
 import ProposalList from './ProposalList';
 
 type Props = {

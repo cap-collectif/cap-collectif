@@ -8,7 +8,7 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import DeleteVersionMutation from '../../../mutations/DeleteVersionMutation';
 import DeleteOpinionMutation from '../../../mutations/DeleteOpinionMutation';
-import type { OpinionDelete_opinion } from '~relay/OpinionDelete_opinion.graphql';
+import type { OpinionDelete_opinion } from './__generated__/OpinionDelete_opinion.graphql';
 import type { GlobalState } from '../../../types';
 
 type Props = {

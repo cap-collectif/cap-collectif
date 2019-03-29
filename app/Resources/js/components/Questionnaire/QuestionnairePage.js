@@ -6,7 +6,7 @@ import StepPageHeader from '../Steps/Page/StepPageHeader';
 import UserReplies from '../Reply/UserReplies';
 import ReplyCreateFormWrapper from '../Reply/Form/ReplyCreateFormWrapper';
 import StepPageFooter from '../Steps/Page/StepPageFooter';
-import { type QuestionnairePage_questionnaire } from '~relay/QuestionnairePage_questionnaire.graphql';
+import { type QuestionnairePage_questionnaire } from './__generated__/QuestionnairePage_questionnaire.graphql';
 
 type Props = {
   questionnaire: ?QuestionnairePage_questionnaire,

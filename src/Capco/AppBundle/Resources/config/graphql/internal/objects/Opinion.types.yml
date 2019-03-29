@@ -86,7 +86,7 @@ Opinion:
         description: 'Where the proposition has been placed.'
         resolve: "@=resolver('proposition_section', [value])"
       contribuable:
-        resolve: '@=value.canContribute()'
+        resolve: '@=value.canContribute(getUser())'
       answer:
         type: 'Answer'
         resolve: '@=value.getAnswer()'

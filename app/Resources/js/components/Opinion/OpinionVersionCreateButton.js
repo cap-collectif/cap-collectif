@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
 import { showOpinionVersionCreateModal } from '../../redux/modules/opinion';
 import type { Dispatch } from '../../types';
-import type { OpinionVersionCreateButton_opinion } from '~relay/OpinionVersionCreateButton_opinion.graphql';
+import type { OpinionVersionCreateButton_opinion } from './__generated__/OpinionVersionCreateButton_opinion.graphql';
 
 type Props = {
   className?: string,

@@ -6,7 +6,7 @@ import commitMutation from './commitMutation';
 import type {
   AddProposalVoteMutationVariables,
   AddProposalVoteMutationResponse,
-} from '~relay/AddProposalVoteMutation.graphql';
+} from './__generated__/AddProposalVoteMutation.graphql';
 
 const mutation = graphql`
   mutation AddProposalVoteMutation($input: AddProposalVoteInput!, $stepId: ID!) {

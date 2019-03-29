@@ -7,7 +7,7 @@ import ProposalFormAdminConfigurationForm from './ProposalFormAdminConfiguration
 import ProposalFormAdminNotificationForm from './ProposalFormAdminNotificationForm';
 import ProposalFormAdminEvaluationForm from './ProposalFormAdminEvaluationForm';
 import ProposalFormAdminSettingsForm from './ProposalFormAdminSettingsForm';
-import type { ProposalFormAdminPageTabs_proposalForm } from '~relay/ProposalFormAdminPageTabs_proposalForm.graphql';
+import type { ProposalFormAdminPageTabs_proposalForm } from './__generated__/ProposalFormAdminPageTabs_proposalForm.graphql';
 
 type DefaultProps = void;
 type Props = { proposalForm: ProposalFormAdminPageTabs_proposalForm, intl: IntlShape };

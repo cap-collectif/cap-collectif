@@ -3,7 +3,7 @@ import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import type { QuestionnaireAdminResultsBarChart_multipleChoiceQuestion } from '~relay/QuestionnaireAdminResultsBarChart_multipleChoiceQuestion.graphql';
+import type { QuestionnaireAdminResultsBarChart_multipleChoiceQuestion } from './__generated__/QuestionnaireAdminResultsBarChart_multipleChoiceQuestion.graphql';
 import { cleanMultipleChoiceQuestion } from '../../utils/cleanMultipleChoiceQuestion';
 
 type Props = {

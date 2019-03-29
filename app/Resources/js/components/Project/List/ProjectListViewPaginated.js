@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import type { ProjectListViewPaginated_query } from '~relay/ProjectListViewPaginated_query.graphql';
+import type { ProjectListViewPaginated_query } from './__generated__/ProjectListViewPaginated_query.graphql';
 import ProjectPreview from '../Preview/ProjectPreview';
 
 type Props = {

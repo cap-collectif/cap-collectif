@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
 import {
   change as changeRedux,
   Field,
@@ -10,11 +10,11 @@ import {
   reduxForm,
   SubmissionError,
 } from 'redux-form';
-import { connect } from 'react-redux';
-import { createFragmentContainer, graphql } from 'react-relay';
-import type { Dispatch, State } from '../../../types';
-import type { ReplyForm_questionnaire } from '~relay/ReplyForm_questionnaire.graphql';
-import type { ReplyForm_reply } from '~relay/ReplyForm_reply.graphql';
+import {connect} from 'react-redux';
+import {createFragmentContainer, graphql} from 'react-relay';
+import type {Dispatch, State} from '../../../types';
+import type {ReplyForm_questionnaire} from './__generated__/ReplyForm_questionnaire.graphql';
+import type {ReplyForm_reply} from './__generated__/ReplyForm_reply.graphql';
 import {
   formatInitialResponsesValues,
   formatSubmitResponses,
@@ -52,7 +52,7 @@ const onUnload = e => {
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { questionnaire, reply, onClose } = props;
+  const {questionnaire, reply, onClose} = props;
   const data = {};
 
   data.responses = formatSubmitResponses(values.responses, questionnaire.questions);
@@ -64,7 +64,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         replyId: data.replyId,
         responses: data.responses,
         draft: data.draft,
-      },
+      }
     })
       .then(() => {
         AppDispatcher.dispatch({
@@ -101,8 +101,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       responses: data.responses,
       private: data.private,
       draft: data.draft,
-    },
-    isAuthenticated: true,
+    }, isAuthenticated: true
   })
     .then(() => {
       AppDispatcher.dispatch({
@@ -126,8 +125,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 const validate = (values: FormValues, props: Props) => {
-  const { questions } = props.questionnaire;
-  const { responses } = values;
+  const {questions} = props.questionnaire;
+  const {responses} = values;
   const errors = {};
 
   const responsesError = validateResponses(questions, responses, 'reply', props.intl);
@@ -163,7 +162,7 @@ export class ReplyForm extends React.Component<Props> {
   }
 
   formIsDisabled() {
-    const { questionnaire, user, reply } = this.props;
+    const {questionnaire, user, reply} = this.props;
 
     return (
       !questionnaire.contribuable ||
@@ -202,7 +201,7 @@ export class ReplyForm extends React.Component<Props> {
             <form id="reply-form" ref="form" onSubmit={handleSubmit}>
               {questionnaire.description && (
                 <div className="mb-15">
-                  <WYSIWYGRender value={questionnaire.description} />
+                  <WYSIWYGRender value={questionnaire.description}/>
                 </div>
               )}
               <FieldArray
@@ -218,14 +217,14 @@ export class ReplyForm extends React.Component<Props> {
               />
               {questionnaire.anonymousAllowed && (
                 <div>
-                  <hr className="mb-30" />
+                  <hr className="mb-30"/>
                   <Field
                     type="checkbox"
                     name="private"
                     helpPrint={false}
                     id={`${form}-reply-private`}
                     component={renderComponent}
-                    children={<FormattedMessage id="reply.form.private" />}
+                    children={<FormattedMessage id="reply.form.private"/>}
                     disabled={disabled}
                   />
                 </div>
@@ -303,7 +302,7 @@ const container = connect(mapStateToProps)(injectIntl(form));
 export default createFragmentContainer(container, {
   reply: graphql`
     fragment ReplyForm_reply on Reply
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
       private
       publicationStatus
@@ -316,7 +315,7 @@ export default createFragmentContainer(container, {
   `,
   questionnaire: graphql`
     fragment ReplyForm_questionnaire on Questionnaire
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       anonymousAllowed
       description
       multipleRepliesAllowed

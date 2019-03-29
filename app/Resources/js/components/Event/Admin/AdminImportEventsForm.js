@@ -9,7 +9,7 @@ import type { Dispatch } from '../../../types';
 import type {
   AddEventsMutationResponse,
   AddEventsMutationVariables,
-} from '~relay/AddEventsMutation.graphql';
+} from '../../../mutations/__generated__/AddEventsMutation.graphql';
 import { AdminImportEventsCsvInput, HEADERS } from './AdminImportEventsCsvInput';
 
 type Props = FormProps & {|

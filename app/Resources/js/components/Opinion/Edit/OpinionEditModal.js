@@ -10,7 +10,7 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import type { State, Dispatch } from '../../../types';
 import { closeOpinionEditModal } from '../../../redux/modules/opinion';
-import type { OpinionEditModal_opinion } from '~relay/OpinionEditModal_opinion.graphql';
+import type { OpinionEditModal_opinion } from './__generated__/OpinionEditModal_opinion.graphql';
 
 type RelayProps = {|
   opinion: OpinionEditModal_opinion,

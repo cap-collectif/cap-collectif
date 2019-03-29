@@ -10,7 +10,7 @@ import ConfirmPasswordModal from '../ConfirmPasswordModal';
 import DeleteAccountModal from '../DeleteAccountModal';
 import { confirmPassword } from '../../../redux/modules/user';
 import type { GlobalState, Dispatch } from '../../../types';
-import type { AccountBox_viewer } from '~relay/AccountBox_viewer.graphql';
+import type { AccountBox_viewer } from './__generated__/AccountBox_viewer.graphql';
 
 type Props = {
   viewer: AccountBox_viewer,

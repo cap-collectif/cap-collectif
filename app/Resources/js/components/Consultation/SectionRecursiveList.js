@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import SectionList from './SectionList';
 import UnpublishedOpinionList from './UnpublishedOpinionList';
-import type { SectionRecursiveList_consultation } from '~relay/SectionRecursiveList_consultation.graphql';
+import type { SectionRecursiveList_consultation } from './__generated__/SectionRecursiveList_consultation.graphql';
 
 type Props = {
   consultation: SectionRecursiveList_consultation,

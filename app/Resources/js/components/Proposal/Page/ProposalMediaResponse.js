@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { ProposalMediaResponse_medias } from '~relay/ProposalMediaResponse_medias.graphql';
+import type { ProposalMediaResponse_medias } from './__generated__/ProposalMediaResponse_medias.graphql';
 
 type Props = {
   medias: ProposalMediaResponse_medias,

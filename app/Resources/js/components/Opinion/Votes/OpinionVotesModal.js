@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Modal, Row, Button } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import UserBox from '../../User/UserBox';
-import type { OpinionVotesModal_opinion } from '~relay/OpinionVotesModal_opinion.graphql';
+import type { OpinionVotesModal_opinion } from './__generated__/OpinionVotesModal_opinion.graphql';
 
 type Props = {
   opinion: OpinionVotesModal_opinion,

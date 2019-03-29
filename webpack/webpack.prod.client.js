@@ -44,6 +44,7 @@ const prodConf = {
         parallel: true,
         // Enable file caching
         cache: true,
+        sourceMap: true,
       }),
     ],
   },

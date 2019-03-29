@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
 import { submitOpinionReport } from '../../redux/modules/report';
 import ReportBox from '../Report/ReportBox';
-import type { OpinionReportButton_opinion } from '~relay/OpinionReportButton_opinion.graphql';
+import type { OpinionReportButton_opinion } from './__generated__/OpinionReportButton_opinion.graphql';
 
 type Props = {
   dispatch: Function,

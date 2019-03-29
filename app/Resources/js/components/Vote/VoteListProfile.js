@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import type { VoteListProfile_voteList } from '~relay/VoteListProfile_voteList.graphql';
+import type { VoteListProfile_voteList } from './__generated__/VoteListProfile_voteList.graphql';
 import VoteItem from './VoteItem';
 
 import Loader from '../Ui/FeedbacksIndicators/Loader';
@@ -69,7 +69,7 @@ export default createPaginationContainer(
   {
     voteList: graphql`
       fragment VoteListProfile_voteList on User
-        @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
+      @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
         id
         votes(first: $count, after: $cursor) @connection(key: "VoteListProfile_votes") {
           totalCount

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import UserAvatar from './UserAvatar';
 import UserLink from './UserLink';
-import type { UserPreview_user } from '~relay/UserPreview_user.graphql';
+import type { UserPreview_user } from './__generated__/UserPreview_user.graphql';
 import UserNotConfirmedLabel from './UserNotConfirmedLabel';
 import Media from '../Ui/Medias/Media/Media';
 import Card from '../Ui/Card/Card';

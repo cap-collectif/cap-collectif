@@ -7,7 +7,7 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import DeleteArgumentMutation from '../../../mutations/DeleteArgumentMutation';
-import type { ArgumentDeleteModal_argument } from '~relay/ArgumentDeleteModal_argument.graphql';
+import type { ArgumentDeleteModal_argument } from './__generated__/ArgumentDeleteModal_argument.graphql';
 
 type Props = {
   show: boolean,

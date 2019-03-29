@@ -9,7 +9,7 @@ import AddArgumentVoteMutation from '../../../mutations/AddArgumentVoteMutation'
 import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
-import type { ArgumentVoteButton_argument } from '~relay/ArgumentVoteButton_argument.graphql';
+import type { ArgumentVoteButton_argument } from './__generated__/ArgumentVoteButton_argument.graphql';
 import RequirementsFormModal from '../../Requirements/RequirementsModal';
 
 type Props = {

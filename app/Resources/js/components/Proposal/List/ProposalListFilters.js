@@ -10,7 +10,7 @@ import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
 import { changeFilter, changeProposalListView } from '../../../redux/modules/proposal';
 import ProposalListToggleViewBtn from './ProposalListToggleViewBtn';
-import type { ProposalListFilters_step } from '~relay/ProposalListFilters_step.graphql';
+import type { ProposalListFilters_step } from './__generated__/ProposalListFilters_step.graphql';
 
 type Props = {|
   step: ProposalListFilters_step,

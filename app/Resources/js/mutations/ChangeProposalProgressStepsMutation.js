@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   ChangeProposalProgressStepsMutationVariables,
   ChangeProposalProgressStepsMutationResponse,
-} from '~relay/ChangeProposalProgressStepsMutation.graphql';
+} from './__generated__/ChangeProposalProgressStepsMutation.graphql';
 
 const mutation = graphql`
   mutation ChangeProposalProgressStepsMutation($input: ChangeProposalProgressStepsInput!) {

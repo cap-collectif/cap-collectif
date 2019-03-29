@@ -9,14 +9,15 @@ use Capco\AppBundle\Cache\RedisTagCache;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
+use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class ProjectProposalsDataLoader extends BatchDataLoader
 {
-    private $collectStepResolver;
+    private $proposalFormProposalsDataLoader;
+    private $adapter;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -24,12 +25,13 @@ class ProjectProposalsDataLoader extends BatchDataLoader
         LoggerInterface $logger,
         string $cachePrefix,
         int $cacheTtl,
-        CollectStepProposalCountResolver $collectStepResolver,
+        ProposalFormProposalsDataLoader $proposalFormProposalsDataLoader,
         bool $debug,
         GraphQLCollector $collector,
         bool $enableCache
     ) {
-        $this->collectStepResolver = $collectStepResolver;
+        $this->proposalFormProposalsDataLoader = $proposalFormProposalsDataLoader;
+        $this->adapter = $promiseFactory;
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -69,25 +71,42 @@ class ProjectProposalsDataLoader extends BatchDataLoader
 
     private function resolveWithoutBatch(Project $project, Argument $args): Connection
     {
-        $totalCount = $this->getProjectProposalsCount($project);
+        $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
+        $emptyConnection->totalCount = 0;
+        $data = $emptyConnection;
 
-        $paginator = new Paginator(function (int $offset, int $limit) {
-            return [];
-        });
-
-        return $paginator->auto($args, $totalCount);
-    }
-
-    private function getProjectProposalsCount(Project $project): int
-    {
-        $count = 0;
-        foreach ($project->getSteps() as $pStep) {
-            $step = $pStep->getStep();
-            if ($step->isCollectStep()) {
-                $count += $this->collectStepResolver->__invoke($step);
-            }
+        // For now, to simplify, we consider that only one collect step is possible on a project.
+        $step = $project->getFirstCollectStep();
+        if ($step && $step->getProposalForm()) {
+            $promise =
+                // Null visibility will avoid private proposals
+                $this->proposalFormProposalsDataLoader
+                    ->load([
+                        'form' => $step->getProposalForm(),
+                        'args' => $args,
+                        'viewer' => null,
+                        'request' => null,
+                    ])
+                    ->then(function (Connection $connection) use (&$data) {
+                        $data = $connection;
+                    });
+            $this->adapter->await($promise);
         }
 
-        return $count;
+        return $data;
     }
+
+    // This count on all steps, not used.
+    // private function getProjectProposalsCount(Project $project): int
+    // {
+    //     $count = 0;
+    //     foreach ($project->getSteps() as $pStep) {
+    //         $step = $pStep->getStep();
+    //         if ($step->isCollectStep()) {
+    //             $count += $this->collectStepProposalsCountResolver->__invoke($step);
+    //         }
+    //     }
+
+    //     return $count;
+    // }
 }

@@ -6,13 +6,13 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import ProposalList from '../components/Proposal/List/ProposalList';
-import type { ProposalListAppQueryResponse } from '~relay/ProposalListAppQuery.graphql';
+import type { ProposalListAppQueryResponse } from './__generated__/ProposalListAppQuery.graphql';
 
 export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticated: boolean }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <QueryRenderer
-        variables={{ authorId, isProfileView: true, isAuthenticated, stepId: '' }}
+        variables={{ authorId, isProfileView: true, isAuthenticated, stepId: "" }}
         environment={environment}
         query={graphql`
           query ProposalListAppQuery(

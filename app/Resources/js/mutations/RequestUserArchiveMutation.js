@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   RequestUserArchiveMutationVariables,
   RequestUserArchiveMutationResponse,
-} from '~relay/RequestUserArchiveMutation.graphql';
+} from './__generated__/RequestUserArchiveMutation.graphql';
 
 const mutation = graphql`
   mutation RequestUserArchiveMutation {

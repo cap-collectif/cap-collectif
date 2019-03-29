@@ -8,7 +8,7 @@ import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import { deleteProposal, closeDeleteProposalModal } from '../../../redux/modules/proposal';
 import type { State, Dispatch } from '../../../types';
-import type { ProposalDeleteModal_proposal } from '~relay/ProposalDeleteModal_proposal.graphql';
+import type { ProposalDeleteModal_proposal } from './__generated__/ProposalDeleteModal_proposal.graphql';
 
 type Props = {
   proposal: ProposalDeleteModal_proposal,

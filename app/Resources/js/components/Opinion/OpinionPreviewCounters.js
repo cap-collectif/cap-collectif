@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { COMMENT_SYSTEM_NONE } from '../../constants/ArgumentConstants';
 import { VOTE_WIDGET_DISABLED } from '../../constants/VoteConstants';
 import InlineList from '../Ui/List/InlineList';
-import type { OpinionPreviewCounters_opinion } from '~relay/OpinionPreviewCounters_opinion.graphql';
+import type { OpinionPreviewCounters_opinion } from './__generated__/OpinionPreviewCounters_opinion.graphql';
 
 type Props = {
   opinion: OpinionPreviewCounters_opinion,
