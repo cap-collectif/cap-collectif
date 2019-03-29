@@ -9,7 +9,7 @@ services:
 
   Capco\AppBundle\GraphQL\Resolver\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/*'
-    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,UserIsGrantedResolver.php}'
+    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,ConsultationResolver.php,UserIsGrantedResolver.php}'
 
   Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver:
     autowire: true
