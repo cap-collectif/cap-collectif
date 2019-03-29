@@ -16,7 +16,7 @@ Group:
       users:
         type: 'InternalUserConnection!'
         argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\UserSearchQueryResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupUsersResolver", [value, args])'
       createdAt:
         type: 'DateTime!'
       updatedAt:

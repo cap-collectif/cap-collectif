@@ -26,12 +26,6 @@ services:
     tags:
       - {
           name: overblog_graphql.resolver,
-          alias: 'reporting_author',
-          method: 'resolveReportingAuthor',
-        }
-      - { name: overblog_graphql.resolver, alias: 'reporting_type', method: 'resolveReportingType' }
-      - {
-          name: overblog_graphql.resolver,
           alias: 'contribution_type',
           method: 'resolveContributionType',
         }
