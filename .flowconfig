@@ -27,6 +27,9 @@ flow-typed
 emoji=true
 module.use_strict=true
 
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=__generated__
+
 ; This enforce a good practice
 experimental.const_params=true
 

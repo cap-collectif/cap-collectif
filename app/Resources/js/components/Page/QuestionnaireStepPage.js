@@ -8,7 +8,7 @@ import { type QuestionnaireStepPageQueryResponse } from './__generated__/Questio
 import { Loader } from '../Ui/FeedbacksIndicators/Loader';
 import QuestionnaireStepTabs from '../Questionnaire/QuestionnaireStepTabs';
 
-export type Props = {|
+type Props = {|
   questionnaireId: ?string,
   isAuthenticated: boolean,
   enableResults: boolean,

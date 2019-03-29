@@ -1,0 +1,100 @@
+{% set colClasses = colClasses is defined ? colClasses : "col-xs-12 col-sm-6 col-md-4" %}
+<div class="{{colClasses}} d-flex">
+    <div class="block  block--bordered proposal__preview">
+        <div class="box {% if proposal.author.isVip %}bg-vip{% endif %}">
+            <div>
+                {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': proposal.Author, 'classes': '', 'link_classes': 'pull-left proposal__avatar'} only %}
+                <div class="proposal__author">
+                    {% if is_feature_enabled('profiles') %}
+                        <a href="{{ path('capco_user_profile_show_all', {'slug': proposal.Author.slug}) }}">
+                            {{ proposal.Author.username }}
+                        </a>
+                    {% else %}
+                        {{ proposal.Author.username }}
+                    {% endif %}
+                    <p class="excerpt proposal__date">
+                        {{ proposal.publishedAt | localizeddate('long', 'none') }}
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="proposal__body" >
+                {% if proposal.getTrashedStatus() == 'invisible' %}
+                    <h4>
+                        {{ 'proposal.show.trashed.contentDeleted'|trans({}, 'CapcoAppBundle') }}
+                    </h4>
+                {% else %}
+                    <h2 class="h4 proposal__title">
+                        <a href={{ path('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'proposalSlug': proposal.slug, 'stepSlug': proposal.step.slug}) }}>
+                            {{ proposal.title }}
+                        </a>
+                    </h2>
+                {% endif %}
+                {% if proposal.isTrashed() and proposal.getTrashedStatus() == 'visible' %}
+                    <p class="excerpt">
+                        {{ proposal.summary }}
+                    </p>
+                {% endif %}
+                {% if proposal.isPublished() == true %}
+                    <div class="proposal__infos">
+                        {% if proposal.theme is not null %}
+                            <div class="proposal__info">
+                                <i class="cap cap-tag-1-1"></i>{{ proposal.theme.title }}
+                            </div>
+                        {% endif %}
+                        {% if proposal.district is not null %}
+                            <div class="proposal__info">
+                                <i class="cap cap-marker-1-1"></i>{{ proposal.district.name }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="proposal__footer">
+            {% if proposal.isTrashed() and proposal.trashedReason is not null %}
+                <div class="proposal__trashed-reason">
+                    <p class="px-15">
+                        {{ 'proposal.show.trashed.shortReason'|trans({}, 'CapcoAppBundle') }}
+                        <br>
+                        <span class="excerpt">{{ proposal.trashedReason }}</span>
+                    </p>
+                </div>
+            {% endif %}
+            {% if not proposal.isTrashed() %}
+                {% set commentsCount = capco_comment_proposal_count(proposal) %}
+                <div class="proposal__counters">
+                    <div class="proposal__counter">
+                        <div class="proposal__counter__value" >
+                            {{ commentsCount }}
+                        </div>
+                        <div class="proposal__counter__label" >
+                            {% transchoice commentsCount with {'%count%': commentsCount} from 'CapcoAppBundle' %}
+                            proposal.show.comments
+                            {% endtranschoice %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if proposal.isTrashed() %}
+                <div class="{{ 'proposal__status status--default' }}">
+                    {% if proposal.getTrashedStatus() == 'visible' %}
+                        {{ 'proposal.show.trashed.reason.moderated' | trans({}, 'CapcoAppBundle') }}
+                    {% else %}
+                        {{ 'proposal.show.trashed.reason.deleted' | trans({}, 'CapcoAppBundle') }}
+                    {% endif %}
+                </div>
+            {% else %}
+                {% if proposal.status is not null %}
+                    <div class="{{ 'proposal__status status--' ~ proposal.status.color }}">
+                        {{ proposal.status.name }}
+                    </div>
+                {% else %}
+                    <div class="proposal__status status--default">
+                        {{ 'proposal.show.no_status' | trans({}, 'CapcoAppBundle') }}
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>

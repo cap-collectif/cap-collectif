@@ -67,14 +67,12 @@ import ProjectDistrictAdminApp from './startup/ProjectDistrictAdminApp';
 import SiteFaviconAdminPageApp from './startup/SiteFaviconAdminPageApp';
 import ContactAdminPageApp from './startup/ContactAdminPageApp';
 import ProjectTrashCommentApp from './startup/ProjectTrashCommentApp';
-import ProjectTrashProposalApp from './startup/ProjectTrashProposalApp';
 import AdminImportEventsApp from './startup/AdminImportEventsApp';
 import AdminExportButtonApp from './startup/AdminExportButtonApp';
 import EventListApp from './startup/EventListApp';
 import ContactsListPage from './startup/ContactsListPage';
 import ContactPage from './startup/ContactPage';
 import SectionPageApp from './startup/SectionPageApp';
-import LastProposalsApp from './startup/LastProposalsApp';
 
 import appStore from './stores/AppStore';
 import MapAdminPageApp from './startup/MapAdminPageApp';
@@ -114,7 +112,6 @@ window.__SERVER__ = false;
 ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
-  LastProposalsApp,
   AccountProfileFollowingsApp,
   ContactsListPage,
   ContactPage,
@@ -172,7 +169,6 @@ ReactOnRails.register({
   EventApp,
   ProjectDistrictAdminApp,
   ProjectTrashCommentApp,
-  ProjectTrashProposalApp,
   AdminExportButtonApp,
   EventListApp,
 });

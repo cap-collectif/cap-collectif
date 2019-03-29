@@ -3259,65 +3259,6 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
 
   # The admin URL to this resource.
   adminUrl: URI!
-  proposals(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-
-    # If non-null, filters proposals with the given district.
-    district: ID
-
-    # If non-null, filters proposals with the given type of author.
-    userType: ID
-
-    # If non-null, filters proposals with the given category.
-    category: ID
-
-    # If non-null, filters proposals with the given author.
-    author: ID
-
-    # If non-null, filters proposals with the given theme.
-    theme: ID
-
-    # If non-null, filters proposals with the given string to look for.
-    term: String
-
-    # Ordering options for proposals returned from the connection.
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
-
-    # If non-null, filters proposals with the given status.
-    status: ID
-
-    # Affiliation options for proposals returned from the connection.
-    affiliations: [ProposalAffiliation]
-
-    # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
-    includeUnpublished: Boolean = false
-
-    # If non-null, filters proposals with the given trashed status.
-    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
-  ): ProposalConnection!
-
-  # The viewer unpublished proposals (only visible by viewer).
-  viewerProposalsUnpublished(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ProposalConnection
 
   # Slug of a project
   slug: String!

@@ -342,6 +342,26 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getTrashedByProject(Project $project)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->addSelect('f', 's', 'aut', 'm', 'theme', 'status', 'district')
+            ->leftJoin('p.author', 'aut')
+            ->leftJoin('aut.media', 'm')
+            ->leftJoin('p.theme', 'theme')
+            ->leftJoin('p.status', 'status')
+            ->leftJoin('p.district', 'district')
+            ->leftJoin('p.proposalForm', 'f')
+            ->leftJoin('f.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pas')
+            ->andWhere('pas.project = :project')
+            ->andWhere('p.trashedAt IS NOT NULL')
+            ->setParameter('project', $project)
+            ->orderBy('p.trashedAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getProposalMarkersForCollectStep(CollectStep $step): array
     {
         $qb = $this->getIsEnabledQueryBuilder()

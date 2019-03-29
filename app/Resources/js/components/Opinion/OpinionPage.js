@@ -12,7 +12,7 @@ import type {
   OpinionPageQueryResponse,
 } from './__generated__/OpinionPageQuery.graphql';
 
-export type Props = {
+type Props = {
   opinionId?: string,
   versionId?: string,
   isAuthenticated: boolean,

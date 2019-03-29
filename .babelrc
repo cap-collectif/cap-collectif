@@ -40,7 +40,7 @@
         "@babel/plugin-proposal-class-properties",
         "styled-components",
         "react-docgen",
-        "relay",
+        ["relay", { "artifactDirectory":  "./app/Resources/js/__relay__generated__" }],
         "transform-class-properties",
         "polished"
     ]

@@ -7,7 +7,7 @@ import { type GlobalState } from '../../types';
 
 type stepStatus = 'open' | 'closed' | 'future';
 
-export type Props = {
+type Props = {
   steps: Array<{
     _links: { show: string },
     id: string,

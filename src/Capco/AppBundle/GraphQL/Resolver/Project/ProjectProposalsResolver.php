@@ -26,10 +26,7 @@ class ProjectProposalsResolver implements ResolverInterface
     public function __invoke(Project $project, ?Arg $args = null): Promise
     {
         if (!$args) {
-            $args = new Arg([
-                'first' => 0,
-                'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'ASC'],
-            ]);
+            $args = new Arg(['first' => 0]);
         }
 
         return $this->dataLoader->load(compact('args', 'project'));
@@ -38,9 +35,8 @@ class ProjectProposalsResolver implements ResolverInterface
     public function resolveSync(Project $project, ?Arg $args = null): Connection
     {
         $conn = null;
-
         $this->promiseAdapter->await(
-            $this->__invoke($project, $args)->then(function (Connection $value) use (&$conn) {
+            $this->__invoke($project, $args)->then(function ($value) use (&$conn) {
                 $conn = $value;
             })
         );
