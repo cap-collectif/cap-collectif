@@ -340,9 +340,8 @@ const mapStateToProps = (state: State, props: Props) => ({
 
 const container = connect(mapStateToProps)(injectIntl(form));
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  viewer: graphql`
     fragment Profile_viewer on User {
       id
       media {
@@ -365,4 +364,4 @@ export default createFragmentContainer(
       neighborhood
     }
   `,
-);
+});

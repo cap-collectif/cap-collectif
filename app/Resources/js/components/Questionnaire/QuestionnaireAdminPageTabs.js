@@ -50,13 +50,12 @@ const mapStateToProps = (state: State) => ({
 
 const container = connect(mapStateToProps)(injectIntl(QuestionnaireAdminPageTabs));
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  questionnaire: graphql`
     fragment QuestionnaireAdminPageTabs_questionnaire on Questionnaire {
       ...QuestionnaireAdminResults_questionnaire @include(if: $enableResultsTab)
       ...QuestionnaireAdminConfigurationForm_questionnaire
       ...QuestionnaireAdminParametersForm_questionnaire
     }
   `,
-);
+});

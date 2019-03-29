@@ -42,9 +42,8 @@ class ArgumentReportButton extends React.Component<Props> {
 
 const container = connect()(ArgumentReportButton);
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  argument: graphql`
     fragment ArgumentReportButton_argument on Argument
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       author {
@@ -58,4 +57,4 @@ export default createFragmentContainer(
       viewerHasReport @include(if: $isAuthenticated)
     }
   `,
-);
+});

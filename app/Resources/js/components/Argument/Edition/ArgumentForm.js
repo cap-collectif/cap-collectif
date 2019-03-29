@@ -100,12 +100,11 @@ const container = connector(
   })(ArgumentForm),
 );
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  argument: graphql`
     fragment ArgumentForm_argument on Argument {
       id
       body
     }
   `,
-);
+});

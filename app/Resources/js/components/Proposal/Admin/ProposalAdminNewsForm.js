@@ -79,9 +79,8 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
 
 const container = injectIntl(ProposalAdminNewsForm);
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  proposal: graphql`
     fragment ProposalAdminNewsForm_proposal on Proposal {
       news {
         totalCount
@@ -95,4 +94,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

@@ -149,13 +149,12 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => ({
 
 const container = connect(mapStateToProps)(form);
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  group: graphql`
     fragment GroupAdminParameters_group on Group {
       id
       title
       description
     }
   `,
-);
+});

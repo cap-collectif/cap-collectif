@@ -79,9 +79,8 @@ class ArgumentButtons extends React.Component<Props, State> {
 }
 
 const container = connect()(ArgumentButtons);
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  argument: graphql`
     fragment ArgumentButtons_argument on Argument
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       author {
@@ -98,4 +97,4 @@ export default createFragmentContainer(
       ...ArgumentReportButton_argument @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
-);
+});
