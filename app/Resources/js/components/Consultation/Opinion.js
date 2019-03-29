@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroupItem } from 'react-bootstrap';
 import OpinionPreview from '../Opinion/OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
-import type { Opinion_opinion } from './__generated__/Opinion_opinion.graphql';
+import type { Opinion_opinion } from '~relay/Opinion_opinion.graphql';
 
 type Props = {|
   +opinion: Opinion_opinion,

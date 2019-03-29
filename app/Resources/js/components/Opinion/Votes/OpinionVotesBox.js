@@ -6,7 +6,7 @@ import { VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH } from '../../../constants/VoteC
 import VotePiechart from '../../Utils/VotePiechart';
 import OpinionVotesBar from './OpinionVotesBar';
 import OpinionVotesButtons from './OpinionVotesButtons';
-import type { OpinionVotesBox_opinion } from './__generated__/OpinionVotesBox_opinion.graphql';
+import type { OpinionVotesBox_opinion } from '~relay/OpinionVotesBox_opinion.graphql';
 
 type Props = { opinion: OpinionVotesBox_opinion };
 

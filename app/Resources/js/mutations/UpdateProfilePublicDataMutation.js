@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   UpdateProfilePublicDataMutationVariables,
   UpdateProfilePublicDataMutationResponse as Response,
-} from './__generated__/UpdateProfilePublicDataMutation.graphql';
+} from '~relay/UpdateProfilePublicDataMutation.graphql';
 
 export type UpdateProfilePublicDataMutationResponse = Response;
 

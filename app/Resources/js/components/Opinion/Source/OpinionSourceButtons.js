@@ -9,8 +9,8 @@ import EditButton from '../../Form/EditButton';
 import DeleteButton from '../../Form/DeleteButton';
 import OpinionSourceVoteBox from './OpinionSourceVoteBox';
 import { showSourceEditModal } from '../../../redux/modules/opinion';
-import type { OpinionSourceButtons_source } from './__generated__/OpinionSourceButtons_source.graphql';
-import type { OpinionSourceButtons_sourceable } from './__generated__/OpinionSourceButtons_sourceable.graphql';
+import type { OpinionSourceButtons_source } from '~relay/OpinionSourceButtons_source.graphql';
+import type { OpinionSourceButtons_sourceable } from '~relay/OpinionSourceButtons_sourceable.graphql';
 
 type Props = {
   source: OpinionSourceButtons_source,

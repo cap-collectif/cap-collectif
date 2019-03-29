@@ -5,7 +5,7 @@ import environment from '../createRelayEnvironment';
 import type {
   ChangeProposalEvaluationMutationVariables,
   ChangeProposalEvaluationMutationResponse,
-} from './__generated__/ChangeProposalEvaluationMutation.graphql';
+} from '~relay/ChangeProposalEvaluationMutation.graphql';
 
 const mutation = graphql`
   mutation ChangeProposalEvaluationMutation($input: ChangeProposalEvaluationInput!) {

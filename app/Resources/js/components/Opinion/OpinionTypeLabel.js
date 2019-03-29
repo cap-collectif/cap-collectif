@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Label } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { OpinionTypeLabel_section } from './__generated__/OpinionTypeLabel_section.graphql';
+import type { OpinionTypeLabel_section } from '~relay/OpinionTypeLabel_section.graphql';
 
 type Props = { section: OpinionTypeLabel_section };
 

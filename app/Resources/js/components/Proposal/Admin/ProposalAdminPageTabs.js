@@ -9,7 +9,7 @@ import ProposalAdminContentForm from './ProposalAdminContentForm';
 import ProposalAdminNotationForm from './ProposalAdminNotationForm';
 import ProposalAdminNewsForm from './ProposalAdminNewsForm';
 import ProposalAdminFollowers from './ProposalAdminFollowers';
-import type { ProposalAdminPageTabs_proposal } from './__generated__/ProposalAdminPageTabs_proposal.graphql';
+import type { ProposalAdminPageTabs_proposal } from '~relay/ProposalAdminPageTabs_proposal.graphql';
 
 type Props = { proposal: ProposalAdminPageTabs_proposal, intl: IntlShape };
 

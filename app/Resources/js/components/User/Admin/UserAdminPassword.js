@@ -5,7 +5,7 @@ import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import type { Dispatch, State } from '../../../types';
-import type { UserAdminPassword_user } from './__generated__/UserAdminPassword_user.graphql';
+import type { UserAdminPassword_user } from '~relay/UserAdminPassword_user.graphql';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';

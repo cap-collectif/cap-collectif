@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   DeleteUserInGroupMutationVariables,
   DeleteUserInGroupMutationResponse,
-} from './__generated__/DeleteUserInGroupMutation.graphql';
+} from '~relay/DeleteUserInGroupMutation.graphql';
 
 const mutation = graphql`
   mutation DeleteUserInGroupMutation($input: DeleteUserInGroupInput!) {

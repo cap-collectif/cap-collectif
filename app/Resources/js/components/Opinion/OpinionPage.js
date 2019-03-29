@@ -10,7 +10,7 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type {
   OpinionPageQueryVariables,
   OpinionPageQueryResponse,
-} from './__generated__/OpinionPageQuery.graphql';
+} from '~relay/OpinionPageQuery.graphql';
 
 type Props = {
   opinionId?: string,

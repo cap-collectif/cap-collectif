@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   AddVersionMutationVariables,
   AddVersionMutationResponse,
-} from './__generated__/AddVersionMutation.graphql';
+} from '~relay/AddVersionMutation.graphql';
 
 const mutation = graphql`
   mutation AddVersionMutation($input: AddVersionInput!) {

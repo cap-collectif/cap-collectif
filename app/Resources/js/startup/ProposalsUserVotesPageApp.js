@@ -9,7 +9,7 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import type {
   ProposalsUserVotesPageAppQueryResponse,
   ProposalsUserVotesPageAppQueryVariables,
-} from './__generated__/ProposalsUserVotesPageAppQuery.graphql';
+} from '~relay/ProposalsUserVotesPageAppQuery.graphql';
 
 const mainNode = (data: { projectId: string }) => {
   const store = ReactOnRails.getStore('appStore');

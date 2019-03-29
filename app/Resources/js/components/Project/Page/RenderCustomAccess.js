@@ -4,7 +4,7 @@ import { Tooltip, OverlayTrigger, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserGroupModal from './UserGroupModal';
-import type { RenderCustomAccess_project } from './__generated__/RenderCustomAccess_project.graphql';
+import type { RenderCustomAccess_project } from '~relay/RenderCustomAccess_project.graphql';
 
 type Props = {
   project: RenderCustomAccess_project,

@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { Row, Col } from 'react-bootstrap';
 import EventPreview from '../EventPreview';
-import { EventListProfileQuery_user } from './__generated__/EventListProfileQuery.graphql';
+import { EventListProfileQuery_user } from '~relay/EventListProfileQuery.graphql';
 
 type Props = {
   user: EventListProfileQuery_user,

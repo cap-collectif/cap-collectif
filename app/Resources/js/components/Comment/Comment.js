@@ -13,7 +13,7 @@ import CommentReportButton from './CommentReportButton';
 import CommentEdit from './CommentEdit';
 import CommentAnswers from './CommentAnswers';
 import CommentForm from './CommentForm';
-import type { Comment_comment } from './__generated__/Comment_comment.graphql';
+import type { Comment_comment } from '~relay/Comment_comment.graphql';
 
 type Props = {
   comment: Comment_comment,

@@ -10,7 +10,7 @@ import AlertForm from '../../Alert/AlertForm';
 import ChangeProposalEvaluersMutation from '../../../mutations/ChangeProposalEvaluersMutation';
 import select from '../../Form/Select';
 import environment from '../../../createRelayEnvironment';
-import type { ProposalAdminEvaluersForm_proposal } from './__generated__/ProposalAdminEvaluersForm_proposal.graphql';
+import type { ProposalAdminEvaluersForm_proposal } from '~relay/ProposalAdminEvaluersForm_proposal.graphql';
 import type { Dispatch, GlobalState } from '../../../types';
 
 type FormValues = {| evaluers: Array<{ value: string }> |};

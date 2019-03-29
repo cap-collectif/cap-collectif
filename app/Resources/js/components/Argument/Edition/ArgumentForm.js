@@ -9,7 +9,7 @@ import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import ChangeArgumentMutation from '../../../mutations/ChangeArgumentMutation';
 import { closeArgumentEditModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
-import type { ArgumentForm_argument } from './__generated__/ArgumentForm_argument.graphql';
+import type { ArgumentForm_argument } from '~relay/ArgumentForm_argument.graphql';
 
 export const formName = 'argument-edit-form';
 

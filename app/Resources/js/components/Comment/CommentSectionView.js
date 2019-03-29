@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
 import CommentListView from './CommentListView';
 import CommentForm from './CommentForm';
-import type { CommentSectionFragmented_commentable } from './__generated__/CommentSectionFragmented_commentable.graphql';
+import type { CommentSectionFragmented_commentable } from '~relay/CommentSectionFragmented_commentable.graphql';
 
 type Props = {
   intl: IntlShape,

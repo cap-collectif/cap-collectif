@@ -6,7 +6,7 @@ import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
 import OpinionVotesModal from './OpinionVotesModal';
 import VersionVotesModal from '../VersionVotesModal';
-import type { OpinionVotesBar_opinion } from './__generated__/OpinionVotesBar_opinion.graphql';
+import type { OpinionVotesBar_opinion } from '~relay/OpinionVotesBar_opinion.graphql';
 
 type Props = {
   opinion: OpinionVotesBar_opinion,

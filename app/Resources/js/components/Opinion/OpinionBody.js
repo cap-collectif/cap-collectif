@@ -5,7 +5,7 @@ import { Well } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
 import FormattedText from '../../services/FormattedText';
-import type { OpinionBody_opinion } from './__generated__/OpinionBody_opinion.graphql';
+import type { OpinionBody_opinion } from '~relay/OpinionBody_opinion.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {

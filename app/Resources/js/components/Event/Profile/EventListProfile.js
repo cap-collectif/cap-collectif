@@ -2,7 +2,7 @@
 import React from 'react';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
-import type { EventListProfileQueryResponse } from './__generated__/EventListProfileQuery.graphql';
+import type { EventListProfileQueryResponse } from '~relay/EventListProfileQuery.graphql';
 import EventListProfileRefetch from './EventListProfileRefetch';
 
 type Props = {

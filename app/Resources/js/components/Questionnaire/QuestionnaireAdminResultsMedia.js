@@ -3,7 +3,7 @@ import * as React from 'react';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import type { QuestionnaireAdminResultsMedia_mediaQuestion } from './__generated__/QuestionnaireAdminResultsMedia_mediaQuestion.graphql';
+import type { QuestionnaireAdminResultsMedia_mediaQuestion } from '~relay/QuestionnaireAdminResultsMedia_mediaQuestion.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import { Card } from '../Ui/Card/Card';
 import FileIcon from '../Ui/Icons/FileIcon';

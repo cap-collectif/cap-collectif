@@ -3,7 +3,7 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import UserPreview from './UserPreview';
-import type { UserBox_user } from './__generated__/UserBox_user.graphql';
+import type { UserBox_user } from '~relay/UserBox_user.graphql';
 
 type Props = {
   user: ?UserBox_user,

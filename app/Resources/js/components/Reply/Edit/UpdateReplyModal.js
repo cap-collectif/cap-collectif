@@ -5,7 +5,7 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
-import { type UpdateReplyModal_reply } from './__generated__/UpdateReplyModal_reply.graphql';
+import { type UpdateReplyModal_reply } from '~relay/UpdateReplyModal_reply.graphql';
 import CloseButton from '../../Form/CloseButton';
 import ReplyForm from '../Form/ReplyForm';
 

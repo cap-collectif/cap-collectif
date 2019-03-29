@@ -9,7 +9,7 @@ import ProposalFusionEditForm, { formName } from './ProposalFusionEditForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import type { State, Dispatch } from '../../../types';
-import type { ProposalFusionEditModal_proposal } from './__generated__/ProposalFusionEditModal_proposal.graphql';
+import type { ProposalFusionEditModal_proposal } from '~relay/ProposalFusionEditModal_proposal.graphql';
 
 type Props = {
   proposal: ProposalFusionEditModal_proposal,

@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   ChangeProposalPublicationStatusMutationVariables,
   ChangeProposalPublicationStatusMutationResponse,
-} from './__generated__/ChangeProposalPublicationStatusMutation.graphql';
+} from '~relay/ChangeProposalPublicationStatusMutation.graphql';
 
 const mutation = graphql`
   mutation ChangeProposalPublicationStatusMutation($input: ChangeProposalPublicationStatusInput!) {

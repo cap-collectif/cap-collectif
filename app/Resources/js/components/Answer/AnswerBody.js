@@ -5,7 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
-import type { AnswerBody_answer } from './__generated__/AnswerBody_answer.graphql';
+import type { AnswerBody_answer } from '~relay/AnswerBody_answer.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {

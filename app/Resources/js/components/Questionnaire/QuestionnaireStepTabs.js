@@ -4,7 +4,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { type QuestionnaireStepTabs_questionnaire } from './__generated__/QuestionnaireStepTabs_questionnaire.graphql';
+import { type QuestionnaireStepTabs_questionnaire } from '~relay/QuestionnaireStepTabs_questionnaire.graphql';
 import QuestionnaireResults from './QuestionnaireResults';
 import QuestionnairePage from './QuestionnairePage';
 import type { GlobalState } from '../../types';

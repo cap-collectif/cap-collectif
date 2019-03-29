@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
-import type { ProposalPageMetadata_proposal } from './__generated__/ProposalPageMetadata_proposal.graphql';
+import type { ProposalPageMetadata_proposal } from '~relay/ProposalPageMetadata_proposal.graphql';
 
 type Props = {
   proposal: ProposalPageMetadata_proposal,
@@ -25,27 +25,24 @@ export class ProposalPageMetadata extends React.Component<Props> {
           (showNullEstimation && proposal.estimation)) && (
           <div className="proposal__page__metadata">
             <div className="proposal__infos">
-              {showThemes &&
-                proposal.theme && (
-                  <div className="proposal__info proposal__info--district ellipsis">
-                    <i className="cap cap-tag-1-1 icon--blue" />
-                    {proposal.theme.title}
-                  </div>
-                )}
-              {showCategories &&
-                proposal.category && (
-                  <div className="proposal__info proposal__info--category ellipsis">
-                    <i className="cap cap-tag-1-1 icon--blue" />
-                    {proposal.category.name}
-                  </div>
-                )}
-              {showDistricts &&
-                proposal.district && (
-                  <div className="proposal__info proposal__info--district ellipsis">
-                    <i className="cap cap-marker-1-1 icon--blue" />
-                    {proposal.district.name}
-                  </div>
-                )}
+              {showThemes && proposal.theme && (
+                <div className="proposal__info proposal__info--district ellipsis">
+                  <i className="cap cap-tag-1-1 icon--blue" />
+                  {proposal.theme.title}
+                </div>
+              )}
+              {showCategories && proposal.category && (
+                <div className="proposal__info proposal__info--category ellipsis">
+                  <i className="cap cap-tag-1-1 icon--blue" />
+                  {proposal.category.name}
+                </div>
+              )}
+              {showDistricts && proposal.district && (
+                <div className="proposal__info proposal__info--district ellipsis">
+                  <i className="cap cap-marker-1-1 icon--blue" />
+                  {proposal.district.name}
+                </div>
+              )}
               {/* $FlowFixMe */}
               <ProposalDetailEstimation
                 proposal={proposal}

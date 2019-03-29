@@ -4,7 +4,7 @@ import { QueryRenderer, graphql } from 'react-relay';
 import ReplyForm from './ReplyForm';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import type { ReplyCreateFormQueryResponse } from './__generated__/ReplyCreateFormQuery.graphql';
+import type { ReplyCreateFormQueryResponse } from '~relay/ReplyCreateFormQuery.graphql';
 
 const component = ({ error, props }: { error: ?Error, props: ?ReplyCreateFormQueryResponse }) => {
   if (error) {

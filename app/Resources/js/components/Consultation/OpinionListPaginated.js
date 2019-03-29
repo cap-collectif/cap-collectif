@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import type { OpinionListPaginated_section } from './__generated__/OpinionListPaginated_section.graphql';
+import type { OpinionListPaginated_section } from '~relay/OpinionListPaginated_section.graphql';
 import Opinion from './Opinion';
 
 type Props = {|

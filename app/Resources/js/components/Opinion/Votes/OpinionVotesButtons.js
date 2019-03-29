@@ -3,7 +3,7 @@ import React from 'react';
 import { ButtonToolbar } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionVotesButton from './OpinionVotesButton';
-import type { OpinionVotesButtons_opinion } from './__generated__/OpinionVotesButtons_opinion.graphql';
+import type { OpinionVotesButtons_opinion } from '~relay/OpinionVotesButtons_opinion.graphql';
 
 type Props = {
   opinion: OpinionVotesButtons_opinion,

@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   CreateProposalFormMutationResponse,
   CreateProposalFormMutationVariables,
-} from './__generated__/CreateProposalFormMutation.graphql';
+} from '~relay/CreateProposalFormMutation.graphql';
 
 const mutation = graphql`
   mutation CreateProposalFormMutation($input: CreateProposalFormInput!) {

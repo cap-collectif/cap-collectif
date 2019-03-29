@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import CommentSectionFragmented from '../../Comment/CommentSectionFragmented';
-import type { ProposalPageComments_proposal } from './__generated__/ProposalPageComments_proposal.graphql';
+import type { ProposalPageComments_proposal } from '~relay/ProposalPageComments_proposal.graphql';
 import type { GlobalState } from '../../../types';
 
 type Props = {

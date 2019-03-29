@@ -3,8 +3,8 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { ProgressBar } from 'react-bootstrap';
-import type { ProposalPageVoteThreshold_step } from './__generated__/ProposalPageVoteThreshold_step.graphql';
-import type { ProposalPageVoteThreshold_proposal } from './__generated__/ProposalPageVoteThreshold_proposal.graphql';
+import type { ProposalPageVoteThreshold_step } from '~relay/ProposalPageVoteThreshold_step.graphql';
+import type { ProposalPageVoteThreshold_proposal } from '~relay/ProposalPageVoteThreshold_proposal.graphql';
 
 type Props = {
   proposal: ProposalPageVoteThreshold_proposal,

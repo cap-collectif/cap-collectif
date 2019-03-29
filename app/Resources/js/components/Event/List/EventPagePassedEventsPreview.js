@@ -8,7 +8,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { formName } from '../EventPageContainer';
 import EventPreview from '../EventPreview';
 import type { Dispatch } from '../../../types';
-import type { EventPagePassedEventsPreview_query } from './__generated__/EventPagePassedEventsPreview_query.graphql';
+import type { EventPagePassedEventsPreview_query } from '~relay/EventPagePassedEventsPreview_query.graphql';
 
 type Props = {|
   query: EventPagePassedEventsPreview_query,

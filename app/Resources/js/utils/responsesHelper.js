@@ -15,7 +15,7 @@ import WYSIWYGRender from '../components/Form/WYSIWYGRender';
 import type {
   MultipleChoiceQuestionValidationRulesTypes,
   QuestionChoiceColor,
-} from './__generated__/responsesHelper_question.graphql';
+} from '~relay/responsesHelper_question.graphql';
 
 // eslint-disable-next-line no-unused-vars
 const ResponseFragment = graphql`

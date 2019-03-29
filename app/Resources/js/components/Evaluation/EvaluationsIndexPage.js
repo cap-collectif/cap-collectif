@@ -4,7 +4,7 @@ import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import ProposalFormEvaluationList, { pageSize } from './ProposalFormEvaluationList';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import type { EvaluationsIndexPageQueryResponse } from './__generated__/EvaluationsIndexPageQuery.graphql';
+import type { EvaluationsIndexPageQueryResponse } from '~relay/EvaluationsIndexPageQuery.graphql';
 
 export const renderComponent = ({
   error,

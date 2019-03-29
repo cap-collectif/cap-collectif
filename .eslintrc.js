@@ -144,7 +144,7 @@ module.exports = {
     'import/resolver': {
       alias: {
         map: [
-          ['~relay', './app/Resources/js/__generated__/relay']
+          ['~relay', './app/Resources/js/__generated__/~relay']
         ],
       }
     }

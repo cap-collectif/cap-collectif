@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, Collapse, Panel, ListGroup } from 'react-bootstrap';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
-import type ProposalProjectRow_viewer from './__generated__/ProposalProjectRow_viewer.graphql';
+import type ProposalProjectRow_viewer from '~relay/ProposalProjectRow_viewer.graphql';
 import ProposalRow from './ProposalRow';
 import type { Uuid } from '../../../types';
 

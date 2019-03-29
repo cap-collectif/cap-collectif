@@ -21,8 +21,8 @@ import {
   type DroppableStateSnapshot,
 } from 'react-beautiful-dnd';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
-import type { ProposalsUserVotesTable_step } from './__generated__/ProposalsUserVotesTable_step.graphql';
-import type { ProposalsUserVotesTable_votes } from './__generated__/ProposalsUserVotesTable_votes.graphql';
+import type { ProposalsUserVotesTable_step } from '~relay/ProposalsUserVotesTable_step.graphql';
+import type { ProposalsUserVotesTable_votes } from '~relay/ProposalsUserVotesTable_votes.graphql';
 import type { State } from '../../../types';
 import config from '../../../config';
 

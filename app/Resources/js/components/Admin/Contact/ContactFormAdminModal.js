@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { type ContactFormAdminModal_contactForm } from './__generated__/ContactFormAdminModal_contactForm.graphql';
+import { type ContactFormAdminModal_contactForm } from '~relay/ContactFormAdminModal_contactForm.graphql';
 import CloseButton from '../../Form/CloseButton';
 import ContactFormAdminForm from './ContactFormAdminForm';
 

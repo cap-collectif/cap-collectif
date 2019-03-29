@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import Opinion from './Opinion';
-import type { ContributionPaginatedList_consultation } from './__generated__/ContributionPaginatedList_consultation.graphql';
+import type { ContributionPaginatedList_consultation } from '~relay/ContributionPaginatedList_consultation.graphql';
 import { graphqlError } from '../../createRelayEnvironment';
 
 export const pageSize = 20;

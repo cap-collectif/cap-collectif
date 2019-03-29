@@ -3,7 +3,7 @@
         "baseUrl": ".",
         "paths": {
             "~relay/*": [
-                "./app/Resources/js/__generated__/relay/*"
+                "./app/Resources/js/__generated__/~relay/*"
             ]
         }
     }

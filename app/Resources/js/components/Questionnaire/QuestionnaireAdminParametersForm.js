@@ -7,7 +7,7 @@ import { ButtonToolbar, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import component from '../Form/Field';
 import AlertForm from '../Alert/AlertForm';
-import type { QuestionnaireAdminParametersForm_questionnaire } from './__generated__/QuestionnaireAdminParametersForm_questionnaire.graphql';
+import type { QuestionnaireAdminParametersForm_questionnaire } from '~relay/QuestionnaireAdminParametersForm_questionnaire.graphql';
 import type { GlobalState } from '../../types';
 import UpdateQuestionnaireParametersMutation from '../../mutations/UpdateQuestionnaireParametersMutation';
 

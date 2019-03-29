@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { Panel, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import Opinion from './Opinion';
-import type { UnpublishedOpinionList_consultation } from './__generated__/UnpublishedOpinionList_consultation.graphql';
+import type { UnpublishedOpinionList_consultation } from '~relay/UnpublishedOpinionList_consultation.graphql';
 
 type Props = {|
   +consultation: UnpublishedOpinionList_consultation,

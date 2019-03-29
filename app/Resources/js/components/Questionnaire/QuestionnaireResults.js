@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import type { QuestionnaireResults_questionnaire } from './__generated__/QuestionnaireResults_questionnaire.graphql';
+import type { QuestionnaireResults_questionnaire } from '~relay/QuestionnaireResults_questionnaire.graphql';
 import DatesInterval from '../Utils/DatesInterval';
 
 type Props = {

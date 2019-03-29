@@ -5,7 +5,7 @@ import ReactOnRails from 'react-on-rails';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';
-import type { ArgumentListAppQueryResponse } from './__generated__/ArgumentListAppQuery.graphql';
+import type { ArgumentListAppQueryResponse } from '~relay/ArgumentListAppQuery.graphql';
 import ArgumentListProfile from '../components/Argument/ArgumentListProfile';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 

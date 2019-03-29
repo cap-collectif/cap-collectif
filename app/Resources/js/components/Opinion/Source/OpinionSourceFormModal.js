@@ -12,8 +12,8 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
-import type { OpinionSourceFormModal_source } from './__generated__/OpinionSourceFormModal_source.graphql';
-import type { OpinionSourceFormModal_sourceable } from './__generated__/OpinionSourceFormModal_sourceable.graphql';
+import type { OpinionSourceFormModal_source } from '~relay/OpinionSourceFormModal_source.graphql';
+import type { OpinionSourceFormModal_sourceable } from '~relay/OpinionSourceFormModal_sourceable.graphql';
 import RequirementsForm from '../../Requirements/RequirementsForm';
 
 type RelayProps = {|

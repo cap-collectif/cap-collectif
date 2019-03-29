@@ -14,8 +14,8 @@ import moment from 'moment';
 import toggle from '../../Form/Toggle';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
 import ProposalDetailEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
-import type { ProposalUserVoteItem_vote } from './__generated__/ProposalUserVoteItem_vote.graphql';
-import type { ProposalUserVoteItem_step } from './__generated__/ProposalUserVoteItem_step.graphql';
+import type { ProposalUserVoteItem_vote } from '~relay/ProposalUserVoteItem_vote.graphql';
+import type { ProposalUserVoteItem_step } from '~relay/ProposalUserVoteItem_step.graphql';
 
 type Props = {
   vote: ProposalUserVoteItem_vote,

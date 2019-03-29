@@ -5,7 +5,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import ProposalCollectStatus from '../Proposal/ProposalCollectStatus';
 import ProposalLastUpdateInfo from '../Proposal/ProposalLastUpdateInfo';
-import type { ProposalFormEvaluationRow_proposal } from './__generated__/ProposalFormEvaluationRow_proposal.graphql';
+import type { ProposalFormEvaluationRow_proposal } from '~relay/ProposalFormEvaluationRow_proposal.graphql';
 
 type Props = { proposal: ProposalFormEvaluationRow_proposal };
 
