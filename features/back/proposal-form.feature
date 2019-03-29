@@ -30,7 +30,7 @@ Scenario: Logged in admin wants edit a proposal form page content
   And I fill in the following:
     | questions[0].title | test title |
     | questions[0].helpText | test helptext |
-  And I select "medias" from "questions[0].type"git
+  And I select "medias" from "questions[0].type"
   And I check "questions[0].required"
   And I click on a proposal form button "personal-field add popup save"
   And I click on a proposal form button "personal-section add"
