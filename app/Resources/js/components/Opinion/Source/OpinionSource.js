@@ -7,8 +7,8 @@ import OpinionInfos from '../OpinionInfos';
 import OpinionSourceTitle from './OpinionSourceTitle';
 import OpinionSourceContent from './OpinionSourceContent';
 import OpinionSourceButtons from './OpinionSourceButtons';
-import type { OpinionSource_source } from './__generated__/OpinionSource_source.graphql';
-import type { OpinionSource_sourceable } from './__generated__/OpinionSource_sourceable.graphql';
+import type { OpinionSource_source } from '~relay/OpinionSource_source.graphql';
+import type { OpinionSource_sourceable } from '~relay/OpinionSource_sourceable.graphql';
 import TrashedMessage from '../../Trashed/TrashedMessage';
 
 type Props = {

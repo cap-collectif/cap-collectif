@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   UpdateQuestionnaireConfigurationMutationVariables,
   UpdateQuestionnaireConfigurationMutationResponse,
-} from './__generated__/UpdateQuestionnaireConfigurationMutation.graphql';
+} from '~relay/UpdateQuestionnaireConfigurationMutation.graphql';
 
 const mutation = graphql`
   mutation UpdateQuestionnaireConfigurationMutation(

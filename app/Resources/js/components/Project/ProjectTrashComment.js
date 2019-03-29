@@ -4,7 +4,7 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import CommentTrashedListPaginated from '../Comment/CommentTrashedListPaginated';
-import type { ProjectTrashCommentQueryResponse } from './__generated__/ProjectTrashCommentQuery.graphql';
+import type { ProjectTrashCommentQueryResponse } from '~relay/ProjectTrashCommentQuery.graphql';
 
 type Props = {
   projectId: string,

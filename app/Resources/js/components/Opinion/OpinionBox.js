@@ -9,7 +9,7 @@ import OpinionButtons from './OpinionButtons';
 import OpinionAppendices from './OpinionAppendices';
 import OpinionBody from './OpinionBody';
 import OpinionVotesBox from './Votes/OpinionVotesBox';
-import type { OpinionBox_opinion } from './__generated__/OpinionBox_opinion.graphql';
+import type { OpinionBox_opinion } from '~relay/OpinionBox_opinion.graphql';
 import TrashedMessage from '../Trashed/TrashedMessage';
 
 type Props = {

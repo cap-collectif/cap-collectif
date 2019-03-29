@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
-import type { ProposalListView_step } from './__generated__/ProposalListView_step.graphql';
-import type { ProposalListView_viewer } from './__generated__/ProposalListView_viewer.graphql';
+import type { ProposalListView_step } from '~relay/ProposalListView_step.graphql';
+import type { ProposalListView_viewer } from '~relay/ProposalListView_viewer.graphql';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { GlobalState } from '../../../types';
 import ProposalListViewPaginated from './ProposalListViewPaginated';

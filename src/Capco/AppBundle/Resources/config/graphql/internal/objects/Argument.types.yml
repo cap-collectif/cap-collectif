@@ -51,6 +51,6 @@ Argument:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentViewerVoteResolver", [value, getUser()])'
       contribuable:
         type: 'Boolean!'
-        resolve: '@=value.canContribute(getUser())'
+        resolve: '@=value.canContribute()'
       step:
         type: 'InternalConsultation!'

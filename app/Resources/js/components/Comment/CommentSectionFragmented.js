@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { CommentSectionFragmented_commentable } from './__generated__/CommentSectionFragmented_commentable.graphql';
+import type { CommentSectionFragmented_commentable } from '~relay/CommentSectionFragmented_commentable.graphql';
 import CommentSectionView from './CommentSectionView';
 
 type Props = {

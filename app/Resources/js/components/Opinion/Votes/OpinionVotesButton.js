@@ -11,7 +11,7 @@ import { VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import AddOpinionVoteMutation from '../../../mutations/AddOpinionVoteMutation';
 import RemoveOpinionVoteMutation from '../../../mutations/RemoveOpinionVoteMutation';
 import RequirementsFormModal from '../../Requirements/RequirementsModal';
-import type { OpinionVotesButton_opinion } from './__generated__/OpinionVotesButton_opinion.graphql';
+import type { OpinionVotesButton_opinion } from '~relay/OpinionVotesButton_opinion.graphql';
 
 type RelayProps = {
   opinion: OpinionVotesButton_opinion,

@@ -4,7 +4,7 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 import { FormattedMessage } from 'react-intl';
 import { Row } from 'react-bootstrap';
 import UserBox from '../User/UserBox';
-import type { OpinionFollowersBox_opinion } from './__generated__/OpinionFollowersBox_opinion.graphql';
+import type { OpinionFollowersBox_opinion } from '~relay/OpinionFollowersBox_opinion.graphql';
 import { graphqlError } from '../../createRelayEnvironment';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../constants/ProposalConstants';
 

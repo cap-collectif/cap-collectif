@@ -7,7 +7,7 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 import type {
   EventPageQueryResponse,
   EventPageQueryVariables,
-} from './__generated__/EventPageQuery.graphql';
+} from '~relay/EventPageQuery.graphql';
 import config from '../../config';
 import EventPageContainer from './EventPageContainer';
 import EventPageHeader from './EventPageHeader';

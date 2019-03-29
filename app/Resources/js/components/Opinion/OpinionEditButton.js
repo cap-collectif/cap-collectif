@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import OpinionEditModal from './Edit/OpinionEditModal';
 import { openOpinionEditModal } from '../../redux/modules/opinion';
-import type { OpinionEditButton_opinion } from './__generated__/OpinionEditButton_opinion.graphql';
+import type { OpinionEditButton_opinion } from '~relay/OpinionEditButton_opinion.graphql';
 
 type Props = {
   dispatch: Function,

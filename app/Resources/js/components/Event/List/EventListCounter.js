@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import type { EventListCounter_query } from './__generated__/EventListCounter_query.graphql';
+import type { EventListCounter_query } from '~relay/EventListCounter_query.graphql';
 
 export const EventListCounter = ({ query }: { query: EventListCounter_query }) => (
   <FormattedMessage

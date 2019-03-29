@@ -34,7 +34,7 @@ Source:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceVotesResolver", [value, args, getUser()])'
       contribuable:
         type: 'Boolean!'
-        resolve: '@=value.canContribute(getUser())'
+        resolve: '@=value.canContribute()'
       viewerHasVote:
         type: 'Boolean!'
         access: "@=hasRole('ROLE_USER')"

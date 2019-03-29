@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Modal, Row, Button } from 'react-bootstrap';
 import CloseButton from '../Form/CloseButton';
 import UserBox from '../User/UserBox';
-import type { VersionVotesModal_version } from './__generated__/VersionVotesModal_version.graphql';
+import type { VersionVotesModal_version } from '~relay/VersionVotesModal_version.graphql';
 
 type Props = {
   version: VersionVotesModal_version,

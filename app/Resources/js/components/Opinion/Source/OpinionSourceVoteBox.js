@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
-import type { OpinionSourceVoteBox_source } from './__generated__/OpinionSourceVoteBox_source.graphql';
+import type { OpinionSourceVoteBox_source } from '~relay/OpinionSourceVoteBox_source.graphql';
 
 type Props = {
   source: OpinionSourceVoteBox_source,

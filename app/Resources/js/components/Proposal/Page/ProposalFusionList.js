@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import type { ProposalFusionList_proposal } from './__generated__/ProposalFusionList_proposal.graphql';
+import type { ProposalFusionList_proposal } from '~relay/ProposalFusionList_proposal.graphql';
 
 type Props = {
   proposal: ProposalFusionList_proposal,

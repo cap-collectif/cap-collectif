@@ -1,5 +1,5 @@
 // @flow
-import type { responsesHelper_question } from './__generated__/responsesHelper_question.graphql';
+import type { responsesHelper_question } from '~relay/responsesHelper_question.graphql';
 
 // Easyfix: We should rely on __typename MultipleChoiceQuestion instead
 const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];

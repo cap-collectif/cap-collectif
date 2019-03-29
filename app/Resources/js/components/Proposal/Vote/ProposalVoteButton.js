@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { openVoteModal, deleteVote } from '../../../redux/modules/proposal';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import type { Uuid, Dispatch, GlobalState } from '../../../types';
-import type { ProposalVoteButton_proposal } from './__generated__/ProposalVoteButton_proposal.graphql';
+import type { ProposalVoteButton_proposal } from '~relay/ProposalVoteButton_proposal.graphql';
 
 type Step = {
   +id: Uuid,

@@ -10,7 +10,7 @@ import ProjectListFilterOrder from './ProjectListFilterOrder';
 import FiltersContainer from '../../../Filters/FiltersContainer';
 import ProjectListSearch from '../ProjectListSearch';
 import environment from '../../../../createRelayEnvironment';
-import type { ProjectListFiltersContainerQueryResponse } from './__generated__/ProjectListFiltersContainerQuery.graphql';
+import type { ProjectListFiltersContainerQueryResponse } from '~relay/ProjectListFiltersContainerQuery.graphql';
 import type { GlobalState } from '../../../../types';
 import config from '../../../../config';
 

@@ -30,7 +30,7 @@ Comment:
         type: 'Boolean!'
       contribuable:
         type: 'Boolean!'
-        resolve: '@=value.canContribute(getUser())'
+        resolve: '@=value.canContribute()'
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
       answers:

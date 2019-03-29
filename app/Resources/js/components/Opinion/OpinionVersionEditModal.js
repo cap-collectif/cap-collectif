@@ -8,7 +8,7 @@ import { submit, isSubmitting } from 'redux-form';
 import { closeOpinionVersionEditModal } from '../../redux/modules/opinion';
 import OpinionVersionEditForm, { formName } from './OpinionVersionEditForm';
 import type { State } from '../../types';
-import type { OpinionVersionEditModal_version } from './__generated__/OpinionVersionEditModal_version.graphql';
+import type { OpinionVersionEditModal_version } from '~relay/OpinionVersionEditModal_version.graphql';
 
 type Props = {
   show: boolean,

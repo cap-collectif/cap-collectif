@@ -31,7 +31,7 @@ InternalConsultation:
       contribuable:
         type: 'Boolean!'
         description: 'Contributions are allowed right now.'
-        resolve: '@=value.canContribute(getUser())'
+        resolve: '@=value.canContribute()'
       # Should stay an array ?
       sections:
         type: '[Section]'

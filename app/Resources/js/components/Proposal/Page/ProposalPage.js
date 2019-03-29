@@ -10,7 +10,7 @@ import ProposalPageTabs from './ProposalPageTabs';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { FeatureToggles, State } from '../../../types';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
-import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.graphql';
+import type ProposalPageQueryResponse from '~relay/ProposalPageQuery.graphql';
 
 type Props = {
   proposalId: string,

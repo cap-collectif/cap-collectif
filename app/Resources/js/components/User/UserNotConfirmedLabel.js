@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Label } from 'react-bootstrap';
-import type { UserNotConfirmedLabel_user } from './__generated__/UserNotConfirmedLabel_user.graphql';
+import type { UserNotConfirmedLabel_user } from '~relay/UserNotConfirmedLabel_user.graphql';
 
 type Props = {
   user: UserNotConfirmedLabel_user,

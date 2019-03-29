@@ -5,7 +5,7 @@ import ReactOnRails from 'react-on-rails';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';
-import type { VoteListAppQueryResponse } from './__generated__/VoteListAppQuery.graphql';
+import type { VoteListAppQueryResponse } from '~relay/VoteListAppQuery.graphql';
 import VoteListProfile from '../components/Vote/VoteListProfile';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 

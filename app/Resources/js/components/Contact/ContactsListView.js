@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { ContactsListView_query } from './__generated__/ContactsListView_query.graphql';
+import type { ContactsListView_query } from '~relay/ContactsListView_query.graphql';
 import ContactForm from './ContactForm';
 import CollapseGroup from '../CollapseGroup/CollapseGroup';
 

@@ -7,16 +7,13 @@ import OpinionListPaginated from './OpinionListPaginated';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import type {
-  SectionOrderBy,
-  OpinionList_section,
-} from './__generated__/OpinionList_section.graphql';
-import type { OpinionList_consultation } from './__generated__/OpinionList_consultation.graphql';
+import type { SectionOrderBy, OpinionList_section } from '~relay/OpinionList_section.graphql';
+import type { OpinionList_consultation } from '~relay/OpinionList_consultation.graphql';
 import type {
   OpinionListQueryResponse,
   OpinionListQueryVariables,
   OpinionOrder,
-} from './__generated__/OpinionListQuery.graphql';
+} from '~relay/OpinionListQuery.graphql';
 
 type Props = {|
   +section: OpinionList_section,

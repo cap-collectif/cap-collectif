@@ -5,7 +5,7 @@ import moment from 'moment';
 import { graphql, createFragmentContainer } from 'react-relay';
 import Truncate from 'react-truncate';
 import classNames from 'classnames';
-import type { VoteItem_vote } from './__generated__/VoteItem_vote.graphql';
+import type { VoteItem_vote } from '~relay/VoteItem_vote.graphql';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 

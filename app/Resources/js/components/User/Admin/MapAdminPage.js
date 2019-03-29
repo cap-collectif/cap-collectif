@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
-import type { MapAdminPageQueryResponse } from './__generated__/MapAdminPageQuery.graphql';
+import type { MapAdminPageQueryResponse } from '~relay/MapAdminPageQuery.graphql';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import MapboxAdminConfig from './MapboxAdminConfig';

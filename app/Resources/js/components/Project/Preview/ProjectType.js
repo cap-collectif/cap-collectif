@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import Card from '../../Ui/Card/Card';
-import type { ProjectType_project } from './__generated__/ProjectType_project.graphql';
+import type { ProjectType_project } from '~relay/ProjectType_project.graphql';
 
 type Props = {
   project: ProjectType_project,

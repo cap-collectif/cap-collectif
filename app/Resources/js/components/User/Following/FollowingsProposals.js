@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type FollowingsProposals_viewer from './__generated__/FollowingsProposals_viewer.graphql';
+import type FollowingsProposals_viewer from '~relay/FollowingsProposals_viewer.graphql';
 import ProposalProjectRow from './ProposalProjectRow';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 

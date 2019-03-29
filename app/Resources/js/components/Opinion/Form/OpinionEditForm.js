@@ -8,7 +8,7 @@ import Fetcher, { json } from '../../../services/Fetcher';
 import type { State, Dispatch } from '../../../types';
 import renderInput from '../../Form/Field';
 import { closeOpinionEditModal } from '../../../redux/modules/opinion';
-import type { OpinionEditForm_opinion } from './__generated__/OpinionEditForm_opinion.graphql';
+import type { OpinionEditForm_opinion } from '~relay/OpinionEditForm_opinion.graphql';
 
 type RelayProps = {|
   opinion: OpinionEditForm_opinion,

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
-import type { StepPageFooter_step } from './__generated__/StepPageFooter_step.graphql';
+import type { StepPageFooter_step } from '~relay/StepPageFooter_step.graphql';
 
 type Props = {
   step: StepPageFooter_step,

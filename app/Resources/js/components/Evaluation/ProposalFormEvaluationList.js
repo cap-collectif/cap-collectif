@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import { Table, Button } from 'react-bootstrap';
 import ProposalFormEvaluationRow from './ProposalFormEvaluationRow';
-import type { ProposalFormEvaluationList_proposalForm } from './__generated__/ProposalFormEvaluationList_proposalForm.graphql';
+import type { ProposalFormEvaluationList_proposalForm } from '~relay/ProposalFormEvaluationList_proposalForm.graphql';
 
 export const pageSize = 100;
 

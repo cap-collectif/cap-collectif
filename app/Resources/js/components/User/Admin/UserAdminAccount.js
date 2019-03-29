@@ -9,7 +9,7 @@ import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import type { GlobalState, Dispatch } from '../../../types';
 import UpdateUserAccountMutation from '../../../mutations/UpdateUserAccountMutation';
-import type { UserAdminAccount_user } from './__generated__/UserAdminAccount_user.graphql';
+import type { UserAdminAccount_user } from '~relay/UserAdminAccount_user.graphql';
 import DeleteAccountModal from '../DeleteAccountModal';
 import SelectUserRole from '../../Form/SelectUserRole';
 import DatesInterval from '../../Utils/DatesInterval';

@@ -8,8 +8,8 @@ import Input from '../Form/Input';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import ArgumentListView, { type ArgumentOrder } from './ArgumentListView';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import type { ArgumentListQueryResponse } from './__generated__/ArgumentListQuery.graphql';
-import type { ArgumentList_argumentable } from './__generated__/ArgumentList_argumentable.graphql';
+import type { ArgumentListQueryResponse } from '~relay/ArgumentListQuery.graphql';
+import type { ArgumentList_argumentable } from '~relay/ArgumentList_argumentable.graphql';
 import type { GlobalState } from '../../types';
 
 type Props = {

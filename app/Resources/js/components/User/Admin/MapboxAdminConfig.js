@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Field, type FormProps, reduxForm, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled from 'styled-components';
-import type { MapboxAdminConfig_mapToken } from './__generated__/MapAdminPageQuery.graphql';
+import type { MapboxAdminConfig_mapToken } from '~relay/MapAdminPageQuery.graphql';
 import ChangeMapProviderTokenMutation from '../../../mutations/ChangeMapProviderTokenMutation';
 import type { GlobalState } from '../../../types';
 import component from '../../Form/Field';

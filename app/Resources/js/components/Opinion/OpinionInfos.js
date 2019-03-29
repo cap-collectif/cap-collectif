@@ -7,7 +7,7 @@ import { FormattedMessage, FormattedDate } from 'react-intl';
 import UserLink from '../User/UserLink';
 import PinnedLabel from '../Utils/PinnedLabel';
 import UnpublishedLabel from '../Publishable/UnpublishedLabel';
-import type { OpinionInfos_opinion } from './__generated__/OpinionInfos_opinion.graphql';
+import type { OpinionInfos_opinion } from '~relay/OpinionInfos_opinion.graphql';
 
 type Props = {
   opinion: OpinionInfos_opinion,

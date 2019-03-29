@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { Row } from 'react-bootstrap';
 import UserBox from '../../User/UserBox';
-import type { ProposalVotes_proposal } from './__generated__/ProposalVotes_proposal.graphql';
+import type { ProposalVotes_proposal } from '~relay/ProposalVotes_proposal.graphql';
 
 type Props = {
   proposal: ProposalVotes_proposal,

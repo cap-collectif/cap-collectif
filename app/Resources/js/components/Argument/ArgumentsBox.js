@@ -6,7 +6,7 @@ import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/Argu
 import UnpublishedArgumentListRenderer from './UnpublishedArgumentListRenderer';
 import ArgumentList from './ArgumentList';
 import ArgumentCreate from './Creation/ArgumentCreate';
-import type { ArgumentsBox_opinion } from './__generated__/ArgumentsBox_opinion.graphql';
+import type { ArgumentsBox_opinion } from '~relay/ArgumentsBox_opinion.graphql';
 
 type Props = {
   opinion: ArgumentsBox_opinion,

@@ -8,7 +8,7 @@ import DeleteModal from '../../Modal/DeleteModal';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import ContactFormAdminModal from './ContactFormAdminModal';
 import RemoveContactFormMutation from '../../../mutations/RemoveContactFormMutation';
-import type { ContactAdminListItem_contactForm } from './__generated__/ContactAdminListItem_contactForm.graphql';
+import type { ContactAdminListItem_contactForm } from '~relay/ContactAdminListItem_contactForm.graphql';
 
 type Props = {
   contactForm: ContactAdminListItem_contactForm,

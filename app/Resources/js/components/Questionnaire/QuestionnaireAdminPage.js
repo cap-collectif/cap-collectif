@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import QuestionnaireAdminPageTabs from './QuestionnaireAdminPageTabs';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import type { QuestionnaireAdminPageQueryResponse } from './__generated__/QuestionnaireAdminPageQuery.graphql';
+import type { QuestionnaireAdminPageQueryResponse } from '~relay/QuestionnaireAdminPageQuery.graphql';
 import type { Uuid, State } from '../../types';
 
 type Props = {| enableResultsTab: boolean, questionnaireId: Uuid |};

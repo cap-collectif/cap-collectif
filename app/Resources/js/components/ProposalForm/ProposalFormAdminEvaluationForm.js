@@ -9,7 +9,7 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { Dispatch, State } from '../../types';
 import component from '../Form/Field';
 import AlertForm from '../Alert/AlertForm';
-import type { ProposalFormAdminEvaluationForm_proposalForm } from './__generated__/ProposalFormAdminEvaluationForm_proposalForm.graphql';
+import type { ProposalFormAdminEvaluationForm_proposalForm } from '~relay/ProposalFormAdminEvaluationForm_proposalForm.graphql';
 import SetEvaluationFormInProposalFormMutation from '../../mutations/SetEvaluationFormInProposalFormMutation';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import moment from 'moment';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { ImplementationStepTitle_progressSteps } from './__generated__/ImplementationStepTitle_progressSteps.graphql';
+import type { ImplementationStepTitle_progressSteps } from '~relay/ImplementationStepTitle_progressSteps.graphql';
 
 type Props = {
   progressSteps: ImplementationStepTitle_progressSteps,

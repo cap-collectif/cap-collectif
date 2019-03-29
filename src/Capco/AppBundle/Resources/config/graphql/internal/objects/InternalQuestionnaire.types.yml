@@ -18,7 +18,7 @@ InternalQuestionnaire:
         type: 'Boolean!'
       contribuable:
         type: 'Boolean!'
-        resolve: '@=value.canContribute(getUser())'
+        resolve: '@=value.canContribute()'
         description: 'accept answers or not'
       phoneConfirmationRequired:
         type: 'Boolean!'

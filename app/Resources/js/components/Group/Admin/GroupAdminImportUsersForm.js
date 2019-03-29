@@ -8,7 +8,7 @@ import type { Dispatch, Uuid } from '../../../types';
 import type {
   AddUsersToGroupFromEmailMutationResponse,
   AddUsersToGroupFromEmailMutationVariables,
-} from '../../../mutations/__generated__/AddUsersToGroupFromEmailMutation.graphql';
+} from '~relay/AddUsersToGroupFromEmailMutation.graphql';
 import type { User } from '../../../redux/modules/user';
 import { isEmail } from '../../../services/Validator';
 import { CsvDropZoneInput } from './CsvDropZoneInput';

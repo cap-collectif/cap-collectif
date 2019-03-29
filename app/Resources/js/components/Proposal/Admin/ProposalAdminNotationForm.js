@@ -17,8 +17,8 @@ import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNot
 import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalEvaluationMutation';
 import component from '../../Form/Field';
 import ProposalAdminEvaluersForm from './ProposalAdminEvaluersForm';
-import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
-import type { ProposalPageEvaluation_proposal } from '../Page/__generated__/ProposalPageEvaluation_proposal.graphql';
+import type { ProposalAdminNotationForm_proposal } from '~relay/ProposalAdminNotationForm_proposal.graphql';
+import type { ProposalPageEvaluation_proposal } from '~relay/ProposalPageEvaluation_proposal.graphql';
 import UserListField from '../../Admin/Field/UserListField';
 import {
   formatInitialResponsesValues,

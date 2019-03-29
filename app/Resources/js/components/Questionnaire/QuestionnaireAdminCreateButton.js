@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { ToggleButton, Button, Modal } from 'react-bootstrap';
 import { reduxForm, Field, change, type FormProps } from 'redux-form';
 
-import { type QuestionnaireType } from '../Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
+import { type QuestionnaireType } from '~relay/ReplyForm_questionnaire.graphql';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';

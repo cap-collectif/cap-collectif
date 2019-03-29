@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ListGroupItem, Modal } from 'react-bootstrap';
 import { closeDetailLikersModal } from '../../../redux/modules/proposal';
-import type { ProposalDetailLikersModal_proposal } from './__generated__/ProposalDetailLikersModal_proposal.graphql';
+import type { ProposalDetailLikersModal_proposal } from '~relay/ProposalDetailLikersModal_proposal.graphql';
 import UserAvatar from '../../User/UserAvatar';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
 import type { Dispatch } from '../../../types';

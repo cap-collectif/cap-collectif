@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import OpinionSourceListViewPaginated from './OpinionSourceListViewPaginated';
-import type { OpinionSourceListView_sourceable } from './__generated__/OpinionSourceListView_sourceable.graphql';
+import type { OpinionSourceListView_sourceable } from '~relay/OpinionSourceListView_sourceable.graphql';
 
 export type OpinionSourceOrder = 'old' | 'last' | 'popular';
 
