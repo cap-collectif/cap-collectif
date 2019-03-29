@@ -9,7 +9,7 @@ services:
 
   Capco\AppBundle\GraphQL\Resolver\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/*'
-    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,ConsultationResolver.php,UserResolver.php, Proposal/ProposalEvaluationResolver.php,UserIsGrantedResolver.php}'
+    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,UserIsGrantedResolver.php}'
 
   Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver:
     autowire: true
@@ -20,15 +20,6 @@ services:
 
   Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver:
     autowire: true
-
-
-  Capco\AppBundle\GraphQL\Resolver\ConsultationResolver:
-    tags:
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'contribution_type',
-          method: 'resolveContributionType',
-        }
 
   # This is not a resolver but a voter, rename and move this elsewhere
   Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:

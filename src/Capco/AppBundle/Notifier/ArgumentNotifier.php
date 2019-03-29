@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\GraphQL\Resolver\ConsultationResolver;
+use Capco\AppBundle\GraphQL\Resolver\Argument\ArgumentUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
@@ -16,7 +16,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ArgumentNotifier extends BaseNotifier
 {
-    protected $consultationResolver;
+    protected $argumentUrlResolver;
     protected $router;
     protected $translator;
     protected $userUrlResolver;
@@ -25,13 +25,13 @@ class ArgumentNotifier extends BaseNotifier
         MailerService $mailer,
         Resolver $siteParams,
         UserResolver $userResolver,
-        ConsultationResolver $consultationResolver,
+        ArgumentUrlResolver $argumentUrlResolver,
         RouterInterface $router,
         TranslatorInterface $translator,
         UserUrlResolver $userUrlResolver
     ) {
         parent::__construct($mailer, $siteParams, $userResolver);
-        $this->consultationResolver = $consultationResolver;
+        $this->argumentUrlResolver = $argumentUrlResolver;
         $this->router = $router;
         $this->translator = $translator;
         $this->userUrlResolver = $userUrlResolver;
@@ -47,7 +47,7 @@ class ArgumentNotifier extends BaseNotifier
                     $argument,
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     null,
-                    $this->consultationResolver->resolveArgumentUrl($argument),
+                    $this->argumentUrlResolver->resolveArgumentUrl($argument),
                     $this->userUrlResolver->__invoke($argument->getAuthor()),
                     $this->router,
                     $this->translator
@@ -66,7 +66,7 @@ class ArgumentNotifier extends BaseNotifier
                     $argument,
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     null,
-                    $this->consultationResolver->resolveArgumentUrl($argument),
+                    $this->argumentUrlResolver->resolveArgumentUrl($argument),
                     $this->userUrlResolver->__invoke($argument->getAuthor()),
                     $this->router,
                     $this->translator
@@ -80,7 +80,7 @@ class ArgumentNotifier extends BaseNotifier
         $this->mailer->sendMessage(
             TrashedArgumentAuthorMessage::create(
                 $argument,
-                $this->consultationResolver->resolveArgumentUrl($argument)
+                $this->argumentUrlResolver->resolveArgumentUrl($argument)
             )
         );
     }

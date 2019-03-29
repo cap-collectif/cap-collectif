@@ -1,5 +1,5 @@
 OpinionOrVersion:
   type: union
   config:
-    resolveType: "@=resolver('contribution_type', [value])"
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
     types: [Opinion, Version]

@@ -2,7 +2,7 @@ Sourceable:
   type: interface
   config:
     description: 'A sourceable'
-    resolveType: "@=resolver('contribution_type', [value])"
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
     fields:
       id:
         type: 'ID!'
