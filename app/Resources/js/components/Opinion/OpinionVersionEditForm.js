@@ -8,7 +8,7 @@ import ChangeVersionMutation from '../../mutations/ChangeVersionMutation';
 import { closeOpinionVersionEditModal } from '../../redux/modules/opinion';
 import renderInput from '../Form/Field';
 import type { State } from '../../types';
-import type { OpinionVersionEditForm_version } from './__generated__/OpinionVersionEditForm_version.graphql';
+import type { OpinionVersionEditForm_version } from '~relay/OpinionVersionEditForm_version.graphql';
 
 export const formName = 'opinion-version-edit';
 

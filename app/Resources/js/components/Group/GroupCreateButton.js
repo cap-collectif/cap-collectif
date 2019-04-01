@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import CreateGroupMutation from '../../mutations/CreateGroupMutation';
-import type CreateGroupMutationResponse from '../../mutations/__generated__/CreateGroupMutation.graphql';
+import type CreateGroupMutationResponse from '~relay/CreateGroupMutation.graphql';
 import GroupForm from './GroupForm';
 
 type Props = {

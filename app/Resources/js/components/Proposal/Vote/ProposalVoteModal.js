@@ -14,8 +14,8 @@ import environment from '../../../createRelayEnvironment';
 import type { GlobalState, Dispatch } from '../../../types';
 import RequirementsForm, { formName } from '../../Requirements/RequirementsForm';
 import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation';
-import type { ProposalVoteModal_proposal } from './__generated__/ProposalVoteModal_proposal.graphql';
-import type { ProposalVoteModal_step } from './__generated__/ProposalVoteModal_step.graphql';
+import type { ProposalVoteModal_proposal } from '~relay/ProposalVoteModal_proposal.graphql';
+import type { ProposalVoteModal_step } from '~relay/ProposalVoteModal_step.graphql';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type ParentProps = {

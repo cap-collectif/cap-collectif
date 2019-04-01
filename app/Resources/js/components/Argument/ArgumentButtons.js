@@ -10,7 +10,7 @@ import ArgumentReportButton from './ArgumentReportButton';
 import EditButton from '../Form/EditButton';
 import DeleteButton from '../Form/DeleteButton';
 import { openArgumentEditModal } from '../../redux/modules/opinion';
-import type { ArgumentButtons_argument } from './__generated__/ArgumentButtons_argument.graphql';
+import type { ArgumentButtons_argument } from '~relay/ArgumentButtons_argument.graphql';
 import type { Dispatch } from '../../types';
 
 type OwnProps = {|

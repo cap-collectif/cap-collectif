@@ -6,7 +6,7 @@ import environnement from '../createRelayEnvironment';
 import type {
   UnfollowProposalMutationVariables,
   UnfollowProposalMutationResponse,
-} from './__generated__/UnfollowProposalMutation.graphql';
+} from '~relay/UnfollowProposalMutation.graphql';
 
 const mutation = graphql`
   mutation UnfollowProposalMutation($input: UnfollowProposalInput!) {

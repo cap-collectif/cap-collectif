@@ -5,7 +5,7 @@ import ProjectPreviewCounter from './ProjectPreviewCounter';
 import TagsList from '../../Ui/List/TagsList';
 import InlineList from '../../Ui/List/InlineList';
 import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFragment';
-import type { ProjectPreviewCounters_project } from './__generated__/ProjectPreviewCounters_project.graphql';
+import type { ProjectPreviewCounters_project } from '~relay/ProjectPreviewCounters_project.graphql';
 
 type Props = {
   project: ProjectPreviewCounters_project,

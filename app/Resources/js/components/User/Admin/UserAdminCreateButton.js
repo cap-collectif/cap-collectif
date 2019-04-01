@@ -11,7 +11,7 @@ import { form } from '../Registration/RegistrationForm';
 import AlertForm from '../../Alert/AlertForm';
 import type { Dispatch } from '../../../types';
 import SelectUserRole from '../../Form/SelectUserRole';
-import { type UserRole } from '../../../mutations/__generated__/CreateUserMutation.graphql';
+import { type UserRole } from '~relay/CreateUserMutation.graphql';
 
 const formName = 'user-admin-create';
 

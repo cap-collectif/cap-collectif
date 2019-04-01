@@ -10,7 +10,7 @@ import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
 import ProjectPreviewCounters from './ProjectPreviewCounters';
 import Card from '../../Ui/Card/Card';
-import type { ProjectPreviewBody_project } from './__generated__/ProjectPreviewBody_project.graphql';
+import type { ProjectPreviewBody_project } from '~relay/ProjectPreviewBody_project.graphql';
 
 type Props = {
   project: ProjectPreviewBody_project,

@@ -5,7 +5,7 @@ import environnement from '../createRelayEnvironment';
 import type {
   UpdateFollowOpinionMutationVariables,
   UpdateFollowOpinionMutationResponse as Response,
-} from './__generated__/FollowOpinionMutation.graphql';
+} from '~relay/FollowOpinionMutation.graphql';
 
 const mutation = graphql`
   mutation UpdateFollowOpinionMutation($input: UpdateFollowOpinionInput!) {

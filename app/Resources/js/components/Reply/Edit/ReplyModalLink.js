@@ -4,7 +4,7 @@ import { FormattedMessage, FormattedDate } from 'react-intl';
 import { ListGroupItem, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import moment from 'moment';
-import type { ReplyModalLink_reply } from './__generated__/ReplyModalLink_reply.graphql';
+import type { ReplyModalLink_reply } from '~relay/ReplyModalLink_reply.graphql';
 import UpdateReplyModal from './UpdateReplyModal';
 import ReplyDraftLabel from './ReplyDraftLabel';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';

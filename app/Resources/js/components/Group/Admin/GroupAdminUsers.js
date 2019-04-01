@@ -12,7 +12,7 @@ import {
   hasSubmitFailed,
   type FormProps,
 } from 'redux-form';
-import type { GroupAdminUsers_group } from './__generated__/GroupAdminUsers_group.graphql';
+import type { GroupAdminUsers_group } from '~relay/GroupAdminUsers_group.graphql';
 import AlertForm from '../../Alert/AlertForm';
 import AlertFormSucceededMessage from '../../Alert/AlertFormSucceededMessage';
 import GroupAdminUsersListGroupItem from './GroupAdminUsersListGroupItem';

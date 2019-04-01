@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import AnswerBody from '../Answer/AnswerBody';
-import type { OpinionAnswer_opinion } from './__generated__/OpinionAnswer_opinion.graphql';
+import type { OpinionAnswer_opinion } from '~relay/OpinionAnswer_opinion.graphql';
 
 type Props = {
   opinion: OpinionAnswer_opinion,

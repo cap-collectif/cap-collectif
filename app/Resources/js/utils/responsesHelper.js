@@ -3,8 +3,8 @@ import * as React from 'react';
 import { type IntlShape } from 'react-intl';
 import { graphql } from 'react-relay';
 import { type FieldArrayProps, Field } from 'redux-form';
-import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
-import type { LogicJumpConditionOperator } from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
+import type { QuestionTypeValue } from '~relay/ProposalPageEvaluation_proposal.graphql';
+import type { LogicJumpConditionOperator } from '~relay/ReplyForm_questionnaire.graphql';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '../components/Ui/Typography/TitleInvertContrast';
 import { checkOnlyNumbers } from '../services/Validator';
@@ -15,7 +15,7 @@ import WYSIWYGRender from '../components/Form/WYSIWYGRender';
 import type {
   MultipleChoiceQuestionValidationRulesTypes,
   QuestionChoiceColor,
-} from './__generated__/responsesHelper_question.graphql';
+} from '~relay/responsesHelper_question.graphql';
 
 // eslint-disable-next-line no-unused-vars
 const ResponseFragment = graphql`

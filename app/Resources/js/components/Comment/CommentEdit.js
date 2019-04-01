@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import type { CommentEdit_comment } from './__generated__/CommentEdit_comment.graphql';
+import type { CommentEdit_comment } from '~relay/CommentEdit_comment.graphql';
 
 type Props = {
   comment: CommentEdit_comment,

@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import ProposalMediaResponse from './ProposalMediaResponse';
 import TitleInvertContrast from '../../Ui/Typography/TitleInvertContrast';
-import type { ProposalResponse_response } from './__generated__/ProposalResponse_response.graphql';
+import type { ProposalResponse_response } from '~relay/ProposalResponse_response.graphql';
 import PrivateBox from '../../Ui/Boxes/PrivateBox';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 

@@ -3,8 +3,8 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedNumber, FormattedMessage } from 'react-intl';
 import { Nav, Navbar, Button, ProgressBar } from 'react-bootstrap';
-import type { ProposalVoteBasketWidget_step } from './__generated__/ProposalVoteBasketWidget_step.graphql';
-import type { ProposalVoteBasketWidget_viewer } from './__generated__/ProposalVoteBasketWidget_viewer.graphql';
+import type { ProposalVoteBasketWidget_step } from '~relay/ProposalVoteBasketWidget_step.graphql';
+import type { ProposalVoteBasketWidget_viewer } from '~relay/ProposalVoteBasketWidget_viewer.graphql';
 import { getSpentPercentage } from '../../../services/ProposalVotesHelper';
 
 type Props = {
@@ -55,29 +55,28 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
           </Navbar.Header>
         )}
         <Navbar.Collapse>
-          {step.voteType === 'SIMPLE' &&
-            step.votesLimit && (
-              <Nav>
-                <li className="navbar-text widget__counter">
-                  <p className="widget__counter__label">
-                    {<FormattedMessage id="project.votes.widget.votes" />}
-                  </p>
-                  <span className="widget__counter__value">{step.votesLimit}</span>
-                </li>
-                <li className="navbar-text widget__counter">
-                  <p className="widget__counter__label">
-                    {<FormattedMessage id="project.votes.widget.votes_left" />}
-                  </p>
-                  <span className="widget__counter__value">{step.votesLimit - votesCount}</span>
-                </li>
-                <li className="navbar-text widget__counter">
-                  <p className="widget__counter__label">
-                    {<FormattedMessage id="project.votes.widget.votes_spent" />}
-                  </p>
-                  <span className="widget__counter__value">{votesCount}</span>
-                </li>
-              </Nav>
-            )}
+          {step.voteType === 'SIMPLE' && step.votesLimit && (
+            <Nav>
+              <li className="navbar-text widget__counter">
+                <p className="widget__counter__label">
+                  {<FormattedMessage id="project.votes.widget.votes" />}
+                </p>
+                <span className="widget__counter__value">{step.votesLimit}</span>
+              </li>
+              <li className="navbar-text widget__counter">
+                <p className="widget__counter__label">
+                  {<FormattedMessage id="project.votes.widget.votes_left" />}
+                </p>
+                <span className="widget__counter__value">{step.votesLimit - votesCount}</span>
+              </li>
+              <li className="navbar-text widget__counter">
+                <p className="widget__counter__label">
+                  {<FormattedMessage id="project.votes.widget.votes_spent" />}
+                </p>
+                <span className="widget__counter__value">{votesCount}</span>
+              </li>
+            </Nav>
+          )}
           {step.voteType === 'BUDGET' && (
             <Nav>
               <li className="navbar-text widget__counter">
@@ -133,17 +132,16 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
               )}
             </Nav>
           )}
-          {step.voteType === 'SIMPLE' &&
-            !step.votesLimit && (
-              <Nav>
-                <li className="navbar-text widget__counter">
-                  <p className="widget__counter__label">
-                    {<FormattedMessage id="project.votes.widget.votes" />}
-                  </p>
-                  <span className="widget__counter__value">{votesCount}</span>
-                </li>
-              </Nav>
-            )}
+          {step.voteType === 'SIMPLE' && !step.votesLimit && (
+            <Nav>
+              <li className="navbar-text widget__counter">
+                <p className="widget__counter__label">
+                  {<FormattedMessage id="project.votes.widget.votes" />}
+                </p>
+                <span className="widget__counter__value">{votesCount}</span>
+              </li>
+            </Nav>
+          )}
           <Button
             bsStyle="default"
             className="widget__button navbar-btn pull-right"

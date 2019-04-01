@@ -11,9 +11,9 @@ import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgr
 import TagsList from '../../Ui/List/TagsList';
 import type { State, FeatureToggles } from '../../../types';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
-import type { ProposalPreviewBody_proposal } from './__generated__/ProposalPreviewBody_proposal.graphql';
-import type { ProposalPreviewBody_step } from './__generated__/ProposalPreviewBody_step.graphql';
-import type { ProposalPreviewBody_viewer } from './__generated__/ProposalPreviewBody_viewer.graphql';
+import type { ProposalPreviewBody_proposal } from '~relay/ProposalPreviewBody_proposal.graphql';
+import type { ProposalPreviewBody_step } from '~relay/ProposalPreviewBody_step.graphql';
+import type { ProposalPreviewBody_viewer } from '~relay/ProposalPreviewBody_viewer.graphql';
 import Card from '../../Ui/Card/Card';
 import ProposalPreviewUser from './ProposalPreviewUser';
 

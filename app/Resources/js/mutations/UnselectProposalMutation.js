@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   UnselectProposalMutationVariables,
   UnselectProposalMutationResponse,
-} from './__generated__/UnselectProposalMutation.graphql';
+} from '~relay/UnselectProposalMutation.graphql';
 
 const mutation = graphql`
   mutation UnselectProposalMutation($input: UnselectProposalInput!) {

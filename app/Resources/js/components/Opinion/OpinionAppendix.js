@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button, Panel } from 'react-bootstrap';
-import type { OpinionAppendix_appendix } from './__generated__/OpinionAppendix_appendix.graphql';
+import type { OpinionAppendix_appendix } from '~relay/OpinionAppendix_appendix.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {

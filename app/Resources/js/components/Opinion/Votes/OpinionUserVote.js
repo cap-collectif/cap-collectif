@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import UserAvatar from '../../User/UserAvatar';
-import type { OpinionUserVote_vote } from './__generated__/OpinionUserVote_vote.graphql';
+import type { OpinionUserVote_vote } from '~relay/OpinionUserVote_vote.graphql';
 
 type Props = {
   vote: OpinionUserVote_vote,

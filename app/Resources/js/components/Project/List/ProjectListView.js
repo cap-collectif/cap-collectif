@@ -5,7 +5,7 @@ import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-re
 
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { GlobalState } from '../../../types';
-import type { ProjectListView_query } from './__generated__/ProjectListView_query.graphql';
+import type { ProjectListView_query } from '~relay/ProjectListView_query.graphql';
 import ProjectListViewPaginated from './ProjectListViewPaginated';
 import { selector } from './Filters/ProjectListFilters';
 

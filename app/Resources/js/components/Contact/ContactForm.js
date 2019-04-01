@@ -12,7 +12,7 @@ import { isEmail } from '../../services/Validator';
 import type { Dispatch, GlobalState } from '../../types';
 import AppDispatcher from '../../dispatchers/AppDispatcher';
 import SendContactFormMutation from '../../mutations/SendContactFormMutation';
-import type { ContactForm_contactForm } from './__generated__/ContactForm_contactForm.graphql';
+import type { ContactForm_contactForm } from '~relay/ContactForm_contactForm.graphql';
 
 type OwnProps = {|
   ...FormProps,

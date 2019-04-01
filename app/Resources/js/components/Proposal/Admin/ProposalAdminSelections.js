@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { formValueSelector, reduxForm, Field, FieldArray } from 'redux-form';
 import { ButtonToolbar, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
-import type { ProposalAdminSelections_proposal } from './__generated__/ProposalAdminSelections_proposal.graphql';
+import type { ProposalAdminSelections_proposal } from '~relay/ProposalAdminSelections_proposal.graphql';
 import type { State, Dispatch } from '../../../types';
 import AlertForm from '../../Alert/AlertForm';
 import component from '../../Form/Field';

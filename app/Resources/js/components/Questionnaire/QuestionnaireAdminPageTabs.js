@@ -7,7 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import QuestionnaireAdminConfigurationForm from './QuestionnaireAdminConfigurationForm';
 import QuestionnaireAdminParametersForm from './QuestionnaireAdminParametersForm';
 import QuestionnaireAdminResults from './QuestionnaireAdminResults';
-import type { QuestionnaireAdminPageTabs_questionnaire } from './__generated__/QuestionnaireAdminPageTabs_questionnaire.graphql';
+import type { QuestionnaireAdminPageTabs_questionnaire } from '~relay/QuestionnaireAdminPageTabs_questionnaire.graphql';
 import type { State } from '../../types';
 
 type Props = {|

@@ -3,9 +3,9 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment';
-import type { ProposalPreviewVote_proposal } from './__generated__/ProposalPreviewVote_proposal.graphql';
-import type { ProposalPreviewVote_step } from './__generated__/ProposalPreviewVote_step.graphql';
-import type { ProposalPreviewVote_viewer } from './__generated__/ProposalPreviewVote_viewer.graphql';
+import type { ProposalPreviewVote_proposal } from '~relay/ProposalPreviewVote_proposal.graphql';
+import type { ProposalPreviewVote_step } from '~relay/ProposalPreviewVote_step.graphql';
+import type { ProposalPreviewVote_viewer } from '~relay/ProposalPreviewVote_viewer.graphql';
 
 type Props = {
   proposal: ProposalPreviewVote_proposal,

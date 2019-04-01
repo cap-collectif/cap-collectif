@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import classNames from 'classnames';
-import type { ProposalCollectStatus_proposal } from './__generated__/ProposalCollectStatus_proposal.graphql';
+import type { ProposalCollectStatus_proposal } from '~relay/ProposalCollectStatus_proposal.graphql';
 
 type Props = {
   proposal: ProposalCollectStatus_proposal,

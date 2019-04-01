@@ -11,8 +11,8 @@ import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 import AddSourceMutation from '../../../mutations/AddSourceMutation';
 import ChangeSourceMutation from '../../../mutations/ChangeSourceMutation';
 import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
-import type { OpinionSourceForm_source } from './__generated__/OpinionSourceForm_source.graphql';
-import type { OpinionSourceForm_sourceable } from './__generated__/OpinionSourceForm_sourceable.graphql';
+import type { OpinionSourceForm_source } from '~relay/OpinionSourceForm_source.graphql';
+import type { OpinionSourceForm_sourceable } from '~relay/OpinionSourceForm_sourceable.graphql';
 import type { State } from '../../../types';
 
 type FormValues = {

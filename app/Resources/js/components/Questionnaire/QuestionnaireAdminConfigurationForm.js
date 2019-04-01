@@ -10,7 +10,7 @@ import AlertForm from '../Alert/AlertForm';
 import component from '../Form/Field';
 import UpdateQuestionnaireConfigurationMutation from '../../mutations/UpdateQuestionnaireConfigurationMutation';
 import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestions';
-import type { QuestionnaireAdminConfigurationForm_questionnaire } from './__generated__/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
+import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
 import type { State, FeatureToggles } from '../../types';
 
 type RelayProps = {| questionnaire: QuestionnaireAdminConfigurationForm_questionnaire |};

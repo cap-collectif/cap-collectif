@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   AddUsersInGroupMutationVariables,
   AddUsersInGroupMutationResponse,
-} from './__generated__/AddUsersInGroupMutation.graphql';
+} from '~relay/AddUsersInGroupMutation.graphql';
 
 const mutation = graphql`
   mutation AddUsersInGroupMutation($input: AddUsersInGroupInput!) {

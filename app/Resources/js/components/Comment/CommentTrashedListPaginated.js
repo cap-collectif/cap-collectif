@@ -6,7 +6,7 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 import Comment from './Comment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import { TRASHED_COMMENT_PAGINATOR_COUNT } from '../Project/ProjectTrashComment';
-import type { CommentTrashedListPaginatedQuery_project } from './__generated__/CommentTrashedListPaginatedQuery.graphql';
+import type { CommentTrashedListPaginatedQuery_project } from '~relay/CommentTrashedListPaginatedQuery.graphql';
 
 type Props = {
   relay: RelayPaginationProp,

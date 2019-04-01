@@ -10,7 +10,7 @@ import type { State } from '../../../types';
 import type {
   UserAdminPageQueryResponse,
   UserAdminPageQueryVariables,
-} from './__generated__/UserAdminPageQuery.graphql';
+} from '~relay/UserAdminPageQuery.graphql';
 
 export type Props = { userId: string, dirty: boolean };
 

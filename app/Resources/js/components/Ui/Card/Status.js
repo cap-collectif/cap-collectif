@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import * as React from 'react';
 import { BsStyleColors } from '../../../utils/colors';
-import type { StatusColor } from '../../Proposal/__generated__/ProposalCollectStatus_proposal.graphql';
+import type { StatusColor } from '~relay/ProposalCollectStatus_proposal.graphql';
 
 type Props = {
   bgColor: StatusColor,

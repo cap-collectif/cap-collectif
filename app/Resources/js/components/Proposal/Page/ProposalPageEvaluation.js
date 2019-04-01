@@ -13,7 +13,7 @@ import {
   type ResponsesValues,
 } from '../Admin/ProposalAdminNotationForm';
 import { renderResponses, formatSubmitResponses } from '../../../utils/responsesHelper';
-import type { ProposalPageEvaluation_proposal } from './__generated__/ProposalPageEvaluation_proposal.graphql';
+import type { ProposalPageEvaluation_proposal } from '~relay/ProposalPageEvaluation_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 

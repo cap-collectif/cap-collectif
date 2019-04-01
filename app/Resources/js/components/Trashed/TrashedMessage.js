@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { TrashedMessage_contribution } from './__generated__/TrashedMessage_contribution.graphql';
+import type { TrashedMessage_contribution } from '~relay/TrashedMessage_contribution.graphql';
 
 type Props = {
   contribution: TrashedMessage_contribution,

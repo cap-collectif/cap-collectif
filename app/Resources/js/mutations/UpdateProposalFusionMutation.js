@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   UpdateProposalFusionMutationResponse,
   UpdateProposalFusionMutationVariables,
-} from './__generated__/UpdateProposalFusionMutation.graphql';
+} from '~relay/UpdateProposalFusionMutation.graphql';
 
 // We use this mutation from a child or a fusion, that's why we
 // are not using the ...Fragment syntax

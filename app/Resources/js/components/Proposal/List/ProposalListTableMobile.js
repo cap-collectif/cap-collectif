@@ -6,7 +6,7 @@ import ProgressList from '../../Ui/List/ProgressList';
 import CroppedLabel from '../../Ui/Labels/CroppedLabel';
 import ImplementationStepTitle from '../ImplementationStepTitle';
 import ProgressListItem from '../../Ui/List/ProgressListItem';
-import type { ImplementationStepTitle_progressSteps } from '../__generated__/ImplementationStepTitle_progressSteps.graphql';
+import type { ImplementationStepTitle_progressSteps } from '~relay/ImplementationStepTitle_progressSteps.graphql';
 
 type Props = {
   data: Array<Object>,

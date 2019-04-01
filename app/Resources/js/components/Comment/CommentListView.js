@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
-import type { CommentListView_commentable } from './__generated__/CommentListView_commentable.graphql';
+import type { CommentListView_commentable } from '~relay/CommentListView_commentable.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import CommentListViewPaginated from './CommentListViewPaginated';
 import scrollToAnchor from '../../services/ScrollToAnchor';

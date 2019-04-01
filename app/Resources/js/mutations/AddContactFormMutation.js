@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   AddContactFormMutationVariables,
   AddContactFormMutationResponse,
-} from './__generated__/AddContactFormMutation.graphql';
+} from '~relay/AddContactFormMutation.graphql';
 
 const mutation = graphql`
   mutation AddContactFormMutation($input: AddContactFormInput!) {

@@ -5,7 +5,7 @@ import { type FormProps, reduxForm, Field, SubmissionError, submit } from 'redux
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { Dispatch, State } from '../../../types';
-import type { ContactFormAdminForm_contactForm } from './__generated__/ContactFormAdminForm_contactForm.graphql';
+import type { ContactFormAdminForm_contactForm } from '~relay/ContactFormAdminForm_contactForm.graphql';
 import renderInput from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import SubmitButton from '../../Form/SubmitButton';

@@ -11,7 +11,7 @@ import OpinionSourceBox from './Source/OpinionSourceBox';
 // import VoteLinechart from '../Utils/VoteLinechart';
 import type { State } from '../../types';
 import { scrollToAnchor } from '../../services/ScrollToAnchor';
-import type { OpinionTabs_opinion } from './__generated__/OpinionTabs_opinion.graphql';
+import type { OpinionTabs_opinion } from '~relay/OpinionTabs_opinion.graphql';
 import OpinionFollowersBox from './OpinionFollowersBox';
 
 type RelayProps = {|

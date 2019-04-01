@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   CreateProposalFusionMutationVariables,
   CreateProposalFusionMutationResponse as Response,
-} from './__generated__/CreateProposalFusionMutation.graphql';
+} from '~relay/CreateProposalFusionMutation.graphql';
 
 export type CreateProposalFusionMutationResponse = Response;
 

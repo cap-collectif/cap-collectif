@@ -5,7 +5,7 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import ProjectHeaderDistrictsList from './ProjectHeaderDistrictsList';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { Uuid } from '../../types';
-import type { ProjectHeaderDistrictsQueryResponse } from './__generated__/ProjectHeaderDistrictsQuery.graphql';
+import type { ProjectHeaderDistrictsQueryResponse } from '~relay/ProjectHeaderDistrictsQuery.graphql';
 
 type Props = {
   projectId: Uuid,

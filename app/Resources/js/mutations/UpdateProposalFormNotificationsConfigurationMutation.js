@@ -5,7 +5,7 @@ import commitMutation from './commitMutation';
 import type {
   UpdateProposalFormNotificationsConfigurationMutationVariables,
   UpdateProposalFormNotificationsConfigurationMutationResponse,
-} from './__generated__/UpdateProposalFormNotificationsConfigurationMutation.graphql';
+} from '~relay/UpdateProposalFormNotificationsConfigurationMutation.graphql';
 
 const mutation = graphql`
   mutation UpdateProposalFormNotificationsConfigurationMutation(

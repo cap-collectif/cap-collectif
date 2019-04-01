@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import PinnedLabel from '../Utils/PinnedLabel';
 import UnpublishedLabel from '../Publishable/UnpublishedLabel';
 import UserLink from '../User/UserLink';
-import type { CommentInfos_comment } from './__generated__/CommentInfos_comment.graphql';
+import type { CommentInfos_comment } from '~relay/CommentInfos_comment.graphql';
 
 type Props = {
   comment: CommentInfos_comment,

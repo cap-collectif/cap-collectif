@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import classNames from 'classnames';
 import Comment from './Comment';
-import type { CommentListViewPaginated_commentable } from './__generated__/CommentListViewPaginated_commentable.graphql';
+import type { CommentListViewPaginated_commentable } from '~relay/CommentListViewPaginated_commentable.graphql';
 
 type Props = {
   relay: RelayPaginationProp,

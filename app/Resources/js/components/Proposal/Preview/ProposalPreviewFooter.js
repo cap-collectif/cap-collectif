@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import type { ProposalPreviewFooter_proposal } from './__generated__/ProposalPreviewFooter_proposal.graphql';
-import type { ProposalPreviewFooter_step } from './__generated__/ProposalPreviewFooter_step.graphql';
+import type { ProposalPreviewFooter_proposal } from '~relay/ProposalPreviewFooter_proposal.graphql';
+import type { ProposalPreviewFooter_step } from '~relay/ProposalPreviewFooter_step.graphql';
 import Card from '../../Ui/Card/Card';
 
 type Props = {

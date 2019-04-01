@@ -10,7 +10,7 @@ import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
 import UnpublishedLabel from '../Publishable/UnpublishedLabel';
-import type { ArgumentItem_argument } from './__generated__/ArgumentItem_argument.graphql';
+import type { ArgumentItem_argument } from '~relay/ArgumentItem_argument.graphql';
 import TrashedMessage from '../Trashed/TrashedMessage';
 
 type Props = {

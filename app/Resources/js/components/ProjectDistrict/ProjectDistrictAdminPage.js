@@ -8,7 +8,7 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import EditButton from '../Ui/Button/EditButton';
 import DeleteButtonPopover from '../Ui/Button/DeleteButtonPopover';
 import AddButton from '../Ui/Button/AddButton';
-import type { ProjectDistrictAdminPageQueryResponse } from './__generated__/ProjectDistrictAdminPageQuery.graphql';
+import type { ProjectDistrictAdminPageQueryResponse } from '~relay/ProjectDistrictAdminPageQuery.graphql';
 import ProjectDistrictForm from './ProjectDistrictForm';
 import DeleteProjectDistrictMutation from '../../mutations/DeleteProjectDistrictMutation';
 

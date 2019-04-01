@@ -5,7 +5,7 @@ import UserAvatar from '../User/UserAvatar';
 import OpinionInfos from './OpinionInfos';
 import OpinionPreviewTitle from './OpinionPreviewTitle';
 import OpinionPreviewCounters from './OpinionPreviewCounters';
-import type { OpinionPreview_opinion } from './__generated__/OpinionPreview_opinion.graphql';
+import type { OpinionPreview_opinion } from '~relay/OpinionPreview_opinion.graphql';
 
 type Props = {
   showUpdatedDate: boolean,

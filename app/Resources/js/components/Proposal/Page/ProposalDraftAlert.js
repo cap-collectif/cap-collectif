@@ -3,7 +3,7 @@ import React from 'react';
 import { Alert } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { ProposalDraftAlert_proposal } from './__generated__/ProposalDraftAlert_proposal.graphql';
+import type { ProposalDraftAlert_proposal } from '~relay/ProposalDraftAlert_proposal.graphql';
 
 type Props = {
   proposal: ProposalDraftAlert_proposal,

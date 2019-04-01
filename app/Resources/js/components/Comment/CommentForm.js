@@ -15,7 +15,7 @@ import UserAvatar from '../User/UserAvatar';
 import AddCommentMutation from '../../mutations/AddCommentMutation';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import type { GlobalState, Dispatch } from '../../types';
-import type { CommentForm_commentable } from './__generated__/CommentForm_commentable.graphql';
+import type { CommentForm_commentable } from '~relay/CommentForm_commentable.graphql';
 
 type RelayProps = {| commentable: CommentForm_commentable |};
 

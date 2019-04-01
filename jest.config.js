@@ -7,6 +7,7 @@ module.exports = {
     "!app/Resources/js/components/Ui/**/*.js"
   ],
   coverageReporters: ['json-summary', 'lcov'],
+  modulePaths: ['./app/Resources/js/__generated__'],
   roots: ['app/Resources/js'],
   testEnvironment: 'jsdom',
   testRegex: '\\-test.js$',

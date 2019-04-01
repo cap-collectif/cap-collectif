@@ -3,7 +3,7 @@ import React from 'react';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import type { RenderPrivateAccess_project } from './__generated__/RenderPrivateAccess_project.graphql';
+import type { RenderPrivateAccess_project } from '~relay/RenderPrivateAccess_project.graphql';
 
 type Props = {
   project: RenderPrivateAccess_project,
