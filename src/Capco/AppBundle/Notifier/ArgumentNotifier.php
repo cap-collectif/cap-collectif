@@ -47,7 +47,7 @@ class ArgumentNotifier extends BaseNotifier
                     $argument,
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     null,
-                    $this->argumentUrlResolver->resolveArgumentUrl($argument),
+                    $this->argumentUrlResolver->__invoke($argument),
                     $this->userUrlResolver->__invoke($argument->getAuthor()),
                     $this->router,
                     $this->translator
@@ -66,7 +66,7 @@ class ArgumentNotifier extends BaseNotifier
                     $argument,
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     null,
-                    $this->argumentUrlResolver->resolveArgumentUrl($argument),
+                    $this->argumentUrlResolver->__invoke($argument),
                     $this->userUrlResolver->__invoke($argument->getAuthor()),
                     $this->router,
                     $this->translator
@@ -80,7 +80,7 @@ class ArgumentNotifier extends BaseNotifier
         $this->mailer->sendMessage(
             TrashedArgumentAuthorMessage::create(
                 $argument,
-                $this->argumentUrlResolver->resolveArgumentUrl($argument)
+                $this->argumentUrlResolver->__invoke($argument)
             )
         );
     }
