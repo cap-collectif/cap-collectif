@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class SectionAppendixIdResolver implements ResolverInterface
 {
-    public function __invoke(OpinionTypeAppendixType $type)
+    public function __invoke(OpinionTypeAppendixType $type): ?string
     {
         return $type->getAppendixTypeId();
     }

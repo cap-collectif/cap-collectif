@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class SectionAppendixHelpTextResolver implements ResolverInterface
 {
-    public function __invoke(OpinionTypeAppendixType $type)
+    public function __invoke(OpinionTypeAppendixType $type): ?string
     {
         return $type->getAppendixTypeHelpText();
     }

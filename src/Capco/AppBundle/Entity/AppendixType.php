@@ -50,7 +50,7 @@ class AppendixType
     /**
      * @return mixed
      */
-    public function getHelpText()
+    public function getHelpText(): ?string
     {
         return $this->helpText;
     }

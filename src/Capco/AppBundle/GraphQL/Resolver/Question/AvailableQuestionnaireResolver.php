@@ -14,7 +14,7 @@ class AvailableQuestionnaireResolver implements ResolverInterface
         $this->questionnaireRepository = $questionnaireRepository;
     }
 
-    public function __invoke()
+    public function __invoke(): array
     {
         return $this->questionnaireRepository->getAvailableQuestionnaires();
     }

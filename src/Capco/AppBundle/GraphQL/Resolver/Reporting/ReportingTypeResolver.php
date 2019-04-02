@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ReportingTypeResolver implements ResolverInterface
 {
-    public function __invoke(Reporting $reporting)
+    public function __invoke(Reporting $reporting): int
     {
         return $reporting->getStatus();
     }

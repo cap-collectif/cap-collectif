@@ -14,13 +14,15 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Resolver\TypeResolver;
 
-class ConsultationTypeResolver
+class ConsultationTypeResolver implements ResolverInterface
 {
     private $typeResolver;
 
-    public function __construct($typeResolver)
+    public function __construct(TypeResolver $typeResolver)
     {
         $this->typeResolver = $typeResolver;
     }

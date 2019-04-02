@@ -20,7 +20,7 @@ class SectionContributionRelayResolver implements ResolverInterface
 
     public function __invoke(OpinionType $section, Arg $args): Connection
     {
-        $paginator = new Paginator(function ($offset, $limit) use ($section, $args) {
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($section, $args) {
             $criteria = ['section' => $section, 'trashed' => false];
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
