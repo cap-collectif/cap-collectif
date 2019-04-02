@@ -161,3 +161,8 @@ InternalQuery:
             defaultValue: 100
         access: "@=hasRole('ROLE_ADMIN')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryVotesResolver", [args])'
+      openIDUserInfos:
+        description: 'An object representation of information gathered from OpenID server.'
+        type: 'OpenIDUserInfos!'
+        access: "@=hasRole('ROLE_USER')"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\OpenID\\UserInfoResolver.php", [value, getUser()])'
