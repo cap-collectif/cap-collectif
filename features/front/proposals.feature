@@ -15,9 +15,9 @@ Scenario: Anonymous user wants to see proposals in a collect step and apply stat
   Given features themes, districts are enabled
   And I go to an open collect step
   Then there should be 6 proposals
-  And I change the proposals status filter to "Approuvé"
+  And I change the proposals status filter to "status2"
   Then there should be 1 proposals
-  And I change the proposals status filter to "En cours"
+  And I change the proposals status filter to "status1"
   Then there should be 4 proposals
 
 @elasticsearch
@@ -25,9 +25,9 @@ Scenario: Anonymous user wants to see proposals in a collect step and apply cont
   Given features themes, districts, user_type are enabled
   And I go to an open collect step
   Then there should be 6 proposals
-  And I change the proposals contributor type filter to "Citoyen"
+  And I change the proposals contributor type filter to "1"
   Then there should be 6 proposals
-  And I change the proposals contributor type filter to "Institution"
+  And I change the proposals contributor type filter to "4"
   Then there should be 0 proposals
 
 @elasticsearch

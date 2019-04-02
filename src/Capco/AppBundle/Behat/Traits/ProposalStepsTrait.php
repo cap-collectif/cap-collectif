@@ -311,7 +311,8 @@ trait ProposalStepsTrait
      */
     public function iChangeTheProposalsThemeFilter()
     {
-        $this->selectOption('proposal-filter-themes', 'Justice');
+        $this->pressButton('proposal-filter-themes-button');
+        $this->selectOptionAccessible('#proposal-filter-themes', 'theme2');
         $this->iWait(2);
     }
 
@@ -320,7 +321,8 @@ trait ProposalStepsTrait
      */
     public function iChangeTheProposalStatusTo(string $status)
     {
-        $this->selectOption('proposal-filter-statuses', $status);
+        $this->pressButton('proposal-filter-statuses-button');
+        $this->selectOptionAccessible('#proposal-filter-statuses', $status);
         $this->iWait(2);
     }
 
@@ -329,7 +331,9 @@ trait ProposalStepsTrait
      */
     public function iChangeTheProposalContributorTypeTo(string $type)
     {
-        $this->selectOption('proposal-filter-types', $type);
+        $this->pressButton('proposal-filter-types-button');
+        $this->selectOptionAccessible('#proposal-filter-types', $type);
+
         $this->iWait(2);
     }
 
@@ -338,7 +342,9 @@ trait ProposalStepsTrait
      */
     public function iSortProposalsByDate()
     {
-        $this->getCurrentPage()->sortByDate();
+        $this->pressButton('proposal-filter-sorting-button');
+        $this->selectOptionAccessible('#proposal-filter-sorting', 'last');
+
         $this->iWait(2);
     }
 
@@ -347,7 +353,9 @@ trait ProposalStepsTrait
      */
     public function iSortProposalsByComments()
     {
-        $this->getCurrentPage()->sortByComments();
+        $this->pressButton('proposal-filter-sorting-button');
+        $this->selectOptionAccessible('#proposal-filter-sorting', 'comments');
+
         $this->iWait(1);
     }
 
@@ -368,8 +376,7 @@ trait ProposalStepsTrait
      */
     public function proposalShouldBeBeforeProposal(string $proposal1, string $proposal2): void
     {
-        $option = $this->getCurrentPage()->getSelectedSortingOption();
-        Assert::assertEquals('last', $option);
+        $this->assertIfFilterSortedBy('last');
         $this->proposalBeforeProposal($proposal1, $proposal2);
     }
 
@@ -379,10 +386,18 @@ trait ProposalStepsTrait
     public function proposalsShouldBeOrderedByDate()
     {
         $option = $this->getCurrentPage()->getSelectedSortingOption();
-        Assert::assertEquals('last', $option);
+        $this->assertIfFilterSortedBy('last');
         $this->proposalBeforeProposal(
             'Ravalement de la façade de la bibliothèque municipale',
             'Proposition pas encore votable'
+        );
+    }
+
+    public function assertIfFilterSortedBy($type)
+    {
+        $this->getSession()->wait(
+            3000,
+            "$('#proposal-sorting[aria-label=\"global.filter_f_${type}\"]').length > 0"
         );
     }
 
@@ -391,9 +406,8 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeOrderedRandomly()
     {
-        $this->getSession()->wait(3000, "$('select#proposal-sorting').length > 0");
-        $option = $this->getCurrentPage()->getSelectedSortingOption();
-        Assert::assertEquals('random', $option);
+        $this->getSession()->wait(3000, "$('#proposal-sorting').length > 0");
+        $this->assertIfFilterSortedBy('random');
     }
 
     /**
@@ -401,8 +415,8 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeOrderedByComments()
     {
-        $option = $this->getCurrentPage()->getSelectedSortingOption();
-        Assert::assertEquals('comments', $option);
+        $this->assertIfFilterSortedBy('comments');
+
         $this->proposalBeforeProposal(
             'Ravalement de la façade de la bibliothèque municipale',
             'Rénovation du gymnase'
@@ -431,8 +445,7 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeFilteredByThemeAndTermsAndSortedByComments()
     {
-        $option = $this->getCurrentPage()->getSelectedSortingOption();
-        Assert::assertEquals('comments', $option);
+        $this->assertIfFilterSortedBy('comments');
         $this->assertPageContainsText('Proposition pas encore votable');
         $this->assertPageContainsText('Proposition plus votable');
         $this->proposalBeforeProposal('Proposition pas encore votable', 'Proposition plus votable');
