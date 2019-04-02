@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SelectOption /> should render 1`] = `
+<SelectOption__Li>
+  <SelectOption__Button
+    aria-checked={false}
+    isSelected={false}
+    onClick={[Function]}
+    role="checkbox"
+    value="0"
+  >
+    Message
+  </SelectOption__Button>
+</SelectOption__Li>
+`;

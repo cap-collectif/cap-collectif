@@ -2,34 +2,34 @@
 
 exports[`<ProposalListOrderSorting /> should render the list order sorting component 1`] = `
 <div>
-  <InjectIntl(ReactBootstrapInput)
-    aria-label="global.filter"
-    id="proposal-sorting"
-    onChange={[Function]}
-    type="select"
-    value="random"
+  <Select
+    id="proposal-filter-sorting-button"
+    label="global.filter_f_random"
   >
-    <FormattedMessage
-      id="global.filter_f_random"
+    <SelectOption
+      isSelected={true}
       key="random"
-      values={Object {}}
+      onClick={[Function]}
+      value="random"
     >
-      <Component />
-    </FormattedMessage>
-    <FormattedMessage
-      id="global.filter_f_last"
+      global.filter_f_random
+    </SelectOption>
+    <SelectOption
+      isSelected={false}
       key="last"
-      values={Object {}}
+      onClick={[Function]}
+      value="last"
     >
-      <Component />
-    </FormattedMessage>
-    <FormattedMessage
-      id="global.filter_f_old"
+      global.filter_f_last
+    </SelectOption>
+    <SelectOption
+      isSelected={false}
       key="old"
-      values={Object {}}
+      onClick={[Function]}
+      value="old"
     >
-      <Component />
-    </FormattedMessage>
-  </InjectIntl(ReactBootstrapInput)>
+      global.filter_f_old
+    </SelectOption>
+  </Select>
 </div>
 `;

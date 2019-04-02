@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Select /> should render 1`] = `
+<div>
+  <div
+    className="form-group position-relative"
+  >
+    <Select__Button
+      aria-expanded={false}
+      aria-label="label"
+      onClick={[Function]}
+    >
+      label
+      <Select__Icon>
+        <i
+          className="cap-arrow-39"
+        />
+      </Select__Icon>
+    </Select__Button>
+  </div>
+</div>
+`;
