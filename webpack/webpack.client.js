@@ -20,8 +20,8 @@ const devConf = {
   },
   resolve: {
     alias: {
-      '~relay': path.resolve(__dirname, '../app/Resources/js/__generated__/~relay')
-    }
+      '~relay': path.resolve(__dirname, '../app/Resources/js/__generated__/~relay'),
+    },
   },
   entry: {
     vendor: [
@@ -57,7 +57,6 @@ const devConf = {
 
     // Same as print but for backoffice
     'style-admin': [
-      path.join(webpackConfig.nodeModulesDir, 'ckeditor/ckeditor.js'),
       path.join(webpackConfig.nodeModulesDir, 'react-toggle/style.css'),
       path.join(webpackConfig.appDir, 'Resources/scss/style-admin.scss'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
@@ -94,6 +93,10 @@ const devConf = {
       {
         from: path.resolve(__dirname, '../node_modules/jquery-minicolors/jquery.minicolors.png'),
         to: path.resolve(__dirname, '../web/css/jquery.minicolors.png'),
+      },
+      {
+        from: path.resolve(__dirname, '../app/Resources/assets/js/'),
+        to: path.resolve(__dirname, '../web/js/'),
       },
     ]),
   ],
