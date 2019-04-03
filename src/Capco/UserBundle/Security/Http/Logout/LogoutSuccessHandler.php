@@ -19,10 +19,10 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     protected $client;
 
     public function __construct(
-        Simple $samlAuth,
         RouterInterface $router,
         Manager $toggleManager,
-        OpenAmClient $client
+        OpenAmClient $client,
+        ?Simple $samlAuth = null
     ) {
         $this->samlAuth = $samlAuth;
         $this->router = $router;
