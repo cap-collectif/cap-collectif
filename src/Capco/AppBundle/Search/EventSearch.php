@@ -2,9 +2,11 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRepository;
 use Elastica\Index;
 use Elastica\Query;
+use Elastica\Aggregation;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\Result;
@@ -69,8 +71,8 @@ class EventSearch extends Search
                 // FUTURE and current
                 case self::LAST:
                     $dateBoolQuery = new Query\BoolQuery();
-                    $dateBoolQuery->addShould(new Query\Range('startAt', ['gte' => 'now/d']));
-                    $dateBoolQuery->addShould(new Query\Range('endAt', ['gte' => 'now/d']));
+                    $dateBoolQuery->addShould(new Query\Range('startAt', ['gt' => 'now/d']));
+                    $dateBoolQuery->addShould(new Query\Range('endAt', ['gt' => 'now/d']));
                     $boolQuery->addMust($dateBoolQuery);
 
                     break;
@@ -113,7 +115,24 @@ class EventSearch extends Search
         ];
     }
 
-    private function getHydratedResults(array $ids): array
+    public function getDistinctAllAuthorsId(): array
+    {
+        $query = new Query();
+
+        $authorsOnlyAggQuery = new Aggregation\Terms('authorsOnly');
+        $authorsOnlyAggQuery->setField('author.id');
+        $query->addAggregation($authorsOnlyAggQuery);
+
+        $resultSet = $this->index->getType($this->type)->search($query);
+
+        $ids = array_map(function (array $result) {
+            return $result['key'];
+        }, $resultSet->getAggregation('authorsOnly')['buckets']);
+
+        return $ids;
+    }
+
+    public function getHydratedResults(array $ids): array
     {
         // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
@@ -161,6 +180,9 @@ class EventSearch extends Search
         if (isset($providedFilters['themes'])) {
             $filters['themes.id'] = $providedFilters['themes'];
         }
+        if (isset($providedFilters['isRegistrable'])) {
+            $filters['isRegistrable'] = $providedFilters['isRegistrable'];
+        }
         if (isset($providedFilters['author'])) {
             $filters['author.id'] = $providedFilters['author'];
         }
@@ -169,6 +191,11 @@ class EventSearch extends Search
         }
         if (isset($providedFilters['userType'])) {
             $filters['author.userType.id'] = $providedFilters['userType'];
+        }
+        if (isset($providedFilters['author'])) {
+            $filters['author.id'] = GlobalIdResolver::getDecodedId($providedFilters['author'])[
+                'id'
+            ];
         }
 
         return $filters;

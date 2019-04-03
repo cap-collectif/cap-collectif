@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Repository\EventRepository;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -17,24 +18,33 @@ class EventNormalizer implements NormalizerInterface, SerializerAwareInterface
     private $router;
     private $normalizer;
     private $mediaExtension;
+    private $eventRepository;
 
     public function __construct(
         UrlGeneratorInterface $router,
         ObjectNormalizer $normalizer,
-        MediaExtension $mediaExtension
+        MediaExtension $mediaExtension,
+        EventRepository $eventRepository
     ) {
         $this->router = $router;
         $this->normalizer = $normalizer;
         $this->mediaExtension = $mediaExtension;
+        $this->eventRepository = $eventRepository;
     }
 
+    /** @var Event $object */
     public function normalize($object, $format = null, array $context = [])
     {
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (\in_array('Elasticsearch', $groups, true)) {
+        if (\in_array('Elasticsearch', $groups)) {
+            $data['isRegistrable'] = false;
+            if ($object->isRegistrationEnable() || !empty($object->getLink())) {
+                $data['isRegistrable'] = true;
+            }
+
             return $data;
         }
 

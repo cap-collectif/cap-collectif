@@ -79,6 +79,8 @@ export default createPaginationContainer(
           search: { type: "String" }
           userType: { type: "ID" }
           isFuture: { type: "Boolean" }
+          author: { type: "ID" }
+          isRegistrable: { type: "Boolean" }
         ) {
         events(
           first: $count
@@ -88,6 +90,8 @@ export default createPaginationContainer(
           search: $search
           userType: $userType
           isFuture: $isFuture
+          author: $author
+          isRegistrable: $isRegistrable
         ) @connection(key: "EventMap_events", filters: []) {
           totalCount
           pageInfo {
@@ -133,6 +137,8 @@ export default createPaginationContainer(
         $search: String
         $userType: ID
         $isFuture: Boolean
+        $author: ID
+        $isRegistrable: Boolean
       ) {
         ...EventMap_query
           @arguments(
@@ -143,6 +149,8 @@ export default createPaginationContainer(
             search: $search
             userType: $userType
             isFuture: $isFuture
+            author: $author
+            isRegistrable: $isRegistrable
           )
       }
     `,

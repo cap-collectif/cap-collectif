@@ -148,6 +148,7 @@ mappings:
       startAt: { type: date }
       endAt: { type: date }
       author: *Author
+      isRegistrable: { type: boolean }
       themes:
         type: object
         properties:

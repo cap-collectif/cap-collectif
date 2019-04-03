@@ -36,6 +36,8 @@ export class EventPage extends React.Component<Props> {
               $project: ID
               $userType: ID
               $isFuture: Boolean
+              $author: ID
+              $isRegistrable: Boolean
             ) {
               ...EventPageContainer_query
                 @arguments(
@@ -45,6 +47,8 @@ export class EventPage extends React.Component<Props> {
                   theme: $theme
                   project: $project
                   userType: $userType
+                  author: $author
+                  isRegistrable: $isRegistrable
                   isFuture: $isFuture
                 )
             }
@@ -58,6 +62,8 @@ export class EventPage extends React.Component<Props> {
               userType: null,
               project: null,
               isFuture: true,
+              author: null,
+              isRegistrable: null,
             }: EventPageQueryVariables)
           }
           render={({ error, props }: { props: ?EventPageQueryResponse } & ReadyState) => {

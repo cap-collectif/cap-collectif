@@ -1075,6 +1075,14 @@ class UserRepository extends EntityRepository
             ->getArrayResult();
     }
 
+    public function getUsersByIds(array $ids): array
+    {
+        $query = $this->createQueryBuilder('u');
+        $query->andWhere('u.id IN (:ids)')->setParameter('ids', $ids);
+
+        return $query->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');

@@ -3490,6 +3490,21 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
   isVotesCounterDisplayable: Boolean!
   isContributionsCounterDisplayable: Boolean!
   isParticipantsCounterDisplayable: Boolean!
+
+  # The events related to the project.
+  events(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): EventConnection!
 }
 
 # A connection to a list of items.
@@ -4375,6 +4390,9 @@ type Query {
 
     # If non-null, filters events with the given string to look for.
     search: String
+
+    # If non-null, filters events with the given registration type
+    isRegistrable: Boolean
   ): EventConnection!
 
   # Lookup themes.
@@ -4414,6 +4432,9 @@ type Query {
 
     # Remove super admin from export.
     superAdmin: Boolean = false
+
+    # If true, get all distinct author of events
+    authorsOfEventOnly: Boolean = false
   ): UserConnection!
   userSearch(
     # Filter by displayName.

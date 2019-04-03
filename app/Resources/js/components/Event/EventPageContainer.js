@@ -87,6 +87,8 @@ export default createFragmentContainer(form, {
         search: { type: "String" }
         userType: { type: "ID" }
         isFuture: { type: "Boolean" }
+        author: { type: "ID" }
+        isRegistrable: { type: "Boolean" }
       ) {
       ...EventRefetch_query
         @arguments(
@@ -97,6 +99,8 @@ export default createFragmentContainer(form, {
           project: $project
           userType: $userType
           isFuture: $isFuture
+          author: $author
+          isRegistrable: $isRegistrable
         )
       ...EventListFilters_query
         @arguments(
@@ -107,6 +111,8 @@ export default createFragmentContainer(form, {
           project: $project
           userType: $userType
           isFuture: $isFuture
+          author: $author
+          isRegistrable: $isRegistrable
         )
       ...EventListCounter_query
         @arguments(
@@ -117,6 +123,8 @@ export default createFragmentContainer(form, {
           project: $project
           userType: $userType
           isFuture: $isFuture
+          author: $author
+          isRegistrable: $isRegistrable
         )
     }
   `,

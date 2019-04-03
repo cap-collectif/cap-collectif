@@ -51,6 +51,60 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                 componentClass="div"
               >
                 <div>
+                  <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-isRegistrable-listbox"
+                    aria-haspopup="true"
+                    clearable={false}
+                    component={[Function]}
+                    id="EventListFilters-filter-isRegistrable"
+                    name="isRegistrable"
+                    options={
+                      Array [
+                        Object {
+                          "label": "all-events",
+                          "value": "all",
+                        },
+                        Object {
+                          "label": "open",
+                          "value": "true",
+                        },
+                        Object {
+                          "label": "closed",
+                          "value": "false",
+                        },
+                      ]
+                    }
+                    placeholder="global.registration"
+                    role="combobox"
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-author-listbox"
+                    aria-haspopup="true"
+                    component={[Function]}
+                    id="EventListFilters-filter-authors"
+                    name="author"
+                    options={Array []}
+                    placeholder="project_download.label.author"
+                    role="combobox"
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
                   <div
                     className="visible-xs-block visible-sm-block"
                   >
@@ -213,6 +267,60 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
               </b>
             </p>
             <form>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-isRegistrable-listbox"
+                    aria-haspopup="true"
+                    clearable={false}
+                    component={[Function]}
+                    id="EventListFilters-filter-isRegistrable"
+                    name="isRegistrable"
+                    options={
+                      Array [
+                        Object {
+                          "label": "all-events",
+                          "value": "all",
+                        },
+                        Object {
+                          "label": "open",
+                          "value": "true",
+                        },
+                        Object {
+                          "label": "closed",
+                          "value": "false",
+                        },
+                      ]
+                    }
+                    placeholder="global.registration"
+                    role="combobox"
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-author-listbox"
+                    aria-haspopup="true"
+                    component={[Function]}
+                    id="EventListFilters-filter-authors"
+                    name="author"
+                    options={Array []}
+                    placeholder="project_download.label.author"
+                    role="combobox"
+                  />
+                </div>
+              </Col>
               <Col
                 bsClass="col"
                 className="mt-5"

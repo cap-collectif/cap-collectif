@@ -10,9 +10,11 @@ exports[`<EventPage /> renders correctly 1`] = `
     render={[Function]}
     variables={
       Object {
+        "author": null,
         "count": 100,
         "cursor": null,
         "isFuture": true,
+        "isRegistrable": null,
         "project": null,
         "search": null,
         "theme": null,
@@ -33,9 +35,11 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
     render={[Function]}
     variables={
       Object {
+        "author": null,
         "count": 100,
         "cursor": null,
         "isFuture": true,
+        "isRegistrable": null,
         "project": null,
         "search": null,
         "theme": null,

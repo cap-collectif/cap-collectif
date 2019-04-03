@@ -19,7 +19,11 @@ import EventListCounter from './EventListCounter';
 import EventListStatusFilter from './EventListStatusFilter';
 import type { EventListFilters_query } from '~relay/EventListFilters_query.graphql';
 
-type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
+type State = {
+  projectOptions: Array<Object>,
+  themeOptions: Array<Object>,
+  authorsOptions: Array<Object>,
+};
 type Props = {|
   ...FormProps,
   query: EventListFilters_query,
@@ -79,7 +83,18 @@ const themeQuery = graphql`
     }
   }
 `;
-
+const eventsAuthorQuery = graphql`
+  query EventListFiltersAuthorsQuery($authorsOfEventOnly: Boolean) {
+    users(authorsOfEventOnly: $authorsOfEventOnly) {
+      edges {
+        node {
+          id
+          username
+        }
+      }
+    }
+  }
+`;
 const StatusContainer = styled(Col)`
   color: white;
   display: flex;
@@ -93,7 +108,7 @@ const FiltersWrapper = styled(Col)`
 `;
 
 export class EventListFilters extends React.Component<Props, State> {
-  state = { projectOptions: [], themeOptions: [] };
+  state = { projectOptions: [], themeOptions: [], authorsOptions: [] };
 
   componentDidMount() {
     fetchQuery(environment, projectQuery, { withEventOnly: true })
@@ -111,14 +126,55 @@ export class EventListFilters extends React.Component<Props, State> {
       .then(themeOptions => {
         this.setState({ themeOptions });
       });
+    if (this.state.authorsOptions.length === 0) {
+      fetchQuery(environment, eventsAuthorQuery, { authorsOfEventOnly: true })
+        .then(res =>
+          res.users.edges.map(edge => ({
+            value: edge.node.id,
+            label: edge.node.username,
+          })),
+        )
+        .then(authorsOptions => {
+          this.setState({ authorsOptions });
+        });
+    }
   }
 
   getFilters(nbFilter: number): [] {
     const { features, theme, project, userTypes, intl, dispatch } = this.props;
-    const { themeOptions, projectOptions } = this.state;
-
+    const { themeOptions, projectOptions, authorsOptions } = this.state;
     const filters = [];
-
+    filters.push(
+      <Field
+        component={select}
+        id="EventListFilters-filter-isRegistrable"
+        name="isRegistrable"
+        placeholder={intl.formatMessage({ id: 'global.registration' })}
+        role="combobox"
+        aria-autocomplete="list"
+        aria-haspopup="true"
+        clearable={false}
+        aria-controls="EventListFilters-filter-isRegistrable-listbox"
+        options={[
+          { value: 'all', label: intl.formatMessage({ id: 'all-events' }) },
+          { value: 'true', label: intl.formatMessage({ id: 'open' }) },
+          { value: 'false', label: intl.formatMessage({ id: 'closed' }) },
+        ]}
+      />,
+    );
+    filters.push(
+      <Field
+        component={select}
+        id="EventListFilters-filter-authors"
+        name="author"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-haspopup="true"
+        aria-controls="EventListFilters-filter-author-listbox"
+        placeholder={intl.formatMessage({ id: 'project_download.label.author' })}
+        options={authorsOptions}
+      />,
+    );
     filters.push(
       <div className="visible-xs-block visible-sm-block">
         <Field
@@ -295,6 +351,8 @@ const mapStateToProps = (state: GlobalState) => ({
   search: selector(state, 'search'),
   userType: selector(state, 'userType'),
   userTypes: state.default.userTypes,
+  author: selector(state, 'author'),
+  isRegistrable: selector(state, 'isRegistrable'),
 });
 
 const container = connect(mapStateToProps)(injectIntl(EventListFilters));
@@ -310,6 +368,8 @@ export default createFragmentContainer(container, {
         search: { type: "String" }
         userType: { type: "ID" }
         isFuture: { type: "Boolean" }
+        author: { type: "ID" }
+        isRegistrable: { type: "Boolean" }
       ) {
       ...EventListCounter_query
         @arguments(
@@ -320,6 +380,8 @@ export default createFragmentContainer(container, {
           project: $project
           userType: $userType
           isFuture: $isFuture
+          author: $author
+          isRegistrable: $isRegistrable
         )
     }
   `,
