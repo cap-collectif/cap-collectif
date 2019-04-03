@@ -40,7 +40,7 @@ InternalProposal:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalCurrentVotableStepResolver", [value])'
       viewerIsAnEvaluer:
         type: 'Boolean!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\IsViewerAnEvaluerResolver", [value, getUser()])'
+        resolve: "@=resolver('proposal_viewer_is_evaluer', [value, getUser()])"
       news:
         type: 'NewsConnection!'
         argsBuilder: 'Relay::Connection'
@@ -112,7 +112,7 @@ InternalProposal:
       reference:
         type: 'String!'
         description: 'The unique reference of proposal'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReferenceResolver", [value])'
+        resolve: "@=resolver('proposal_reference', [value])"
       bodyText:
         type: 'String!'
         description: 'Identifies the body of the contribution rendered to text.'
@@ -128,7 +128,7 @@ InternalProposal:
       evaluation:
         type: 'ProposalEvaluation'
         description: 'Identifies the answers to an evaluation form.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAnswerEvaluationResolver", [value])'
+        resolve: "@=resolver('proposal_evaluation', [value])"
       draft:
         type: 'Boolean!'
         description: 'Identifies proposals as draft.'
@@ -186,10 +186,10 @@ InternalProposal:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationProposalResolver", [value, getUser()])'
       postsCount:
         type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPostsCountResolver", [value])'
+        resolve: "@=resolver('proposal_posts_count', [value])"
       viewerCanSeeEvaluation:
         type: 'Boolean!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerCanSeeEvaluationResolver", [value, getUser()])'
+        resolve: "@=resolver('proposal_viewer_can_see_evaluation', [value, getUser()])"
       viewerHasVote:
         access: "@=hasRole('ROLE_USER')"
         type: 'Boolean!'

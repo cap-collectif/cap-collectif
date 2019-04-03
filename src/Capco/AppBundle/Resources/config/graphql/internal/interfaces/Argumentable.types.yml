@@ -4,7 +4,7 @@ Argumentable:
     - Node
   config:
     description: 'An argumentable'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
+    resolveType: "@=resolver('contribution_type', [value])"
     fields:
       contribuable:
         type: 'Boolean!'

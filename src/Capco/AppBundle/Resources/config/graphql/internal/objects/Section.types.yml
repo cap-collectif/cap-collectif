@@ -27,7 +27,7 @@ Section:
         description: 'The description of the section.'
       contributionsCount:
         type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionsCountResolver", [value])'
+        resolve: "@=resolver('section_contributionsCount', [value])"
       contributionConnection:
         type: 'ContributionConnection!'
         argsBuilder: 'Relay::Connection'
@@ -39,14 +39,14 @@ Section:
             type: 'Int'
             defaultValue: 10
             description: 'Returns the first n elements from the list.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionRelayResolver", [value, args])'
+        resolve: '@=resolver("sectionContributionsRelay", [value, args])'
       appendixTypes:
         type: '[SectionAppendixType]'
         description: 'Array of appendix types (possibly empty).'
       sections:
         type: '[Section]'
         description: 'Array of subsections (possibly empty).'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionSectionResolver", [value, args])'
+        resolve: "@=resolver('section_sections', [value, args])"
       voteWidgetType:
         type: 'Int!'
       commentSystem:
@@ -66,7 +66,7 @@ Section:
       votesThresholdHelpText:
         type: 'String'
       url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionUrlResolver", [value])'
+        resolve: "@=resolver('section_url', [value])"
       defaultOrderBy:
         type: 'SectionOrderBy'
         resolve: '@=value.getDefaultFilter()'

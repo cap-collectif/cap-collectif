@@ -14,7 +14,7 @@ InternalMultipleChoiceQuestion:
       # TODO we can probably design this better
       isOtherAllowed:
         type: 'Boolean!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceIsOtherAllowedResolver", [value])'
+        resolve: "@=resolver('question_isOtherAllowed', [value])"
       # TODO we can probably design this better
       otherResponses:
         type: 'InternalResponseConnection!'
@@ -31,7 +31,7 @@ InternalMultipleChoiceQuestion:
             description: 'If the question has `randomQuestionChoices: true` will return choices in a random order.'
       validationRule:
         type: 'MultipleChoiceQuestionValidationRule'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionValidationRuleResolver", [value])'
+        resolve: "@=resolver('question_validation_rule', [value])"
       randomQuestionChoices:
         type: 'Boolean!'
         resolve: '@=value.isRandomQuestionChoices()'

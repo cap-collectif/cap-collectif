@@ -107,7 +107,7 @@ class Reporting implements CreatableInterface
         return $this->getRelatedObject();
     }
 
-    public function getStatus(): ?int
+    public function getStatus()
     {
         return $this->status;
     }

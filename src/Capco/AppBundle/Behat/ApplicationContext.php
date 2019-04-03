@@ -946,6 +946,18 @@ class ApplicationContext extends UserContext
         $this->iWait(3);
     }
 
+    /**
+     * @When I select :select with option :option
+     *
+     * @param mixed $element
+     * @param mixed $value
+     */
+    public function selectOptionAccessible(string $select, string $option): void
+    {
+        $selector = "${select} .select__option button[value=${option}]";
+        $this->iClickElement($selector);
+    }
+
     private function isSuiteWithJS(Suite $suite): bool
     {
         return \in_array($suite->getName(), ['core', 'consultation', 'questionnaire', 'bp', 'bo']);

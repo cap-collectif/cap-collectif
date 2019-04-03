@@ -1,5 +1,5 @@
 AnswerOrPost:
   type: union
   config:
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
+    resolveType: "@=resolver('contribution_type', [value])"
     types: [Answer, Post]

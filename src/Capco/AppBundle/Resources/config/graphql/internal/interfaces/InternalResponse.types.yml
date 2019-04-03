@@ -3,7 +3,7 @@ InternalResponse:
   config:
     name: Response
     description: 'A response to a question.'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\ResponseResolver", [value])'
+    resolveType: "@=resolver('response_type', [value])"
     fields:
       id:
         type: 'String'

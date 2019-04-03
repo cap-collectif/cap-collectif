@@ -34,7 +34,7 @@ InternalCollectStep:
         type: 'InternalProposalConnection!'
         access: "@=hasRole('ROLE_USER')"
         argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CollectStep\\CollectStepViewerProposalDraftResolver", [value, getUser(), args])'
+        resolve: "@=resolver('query_get_draft_proposals_for_user_in_step', [value, getUser(), args])"
       proposals:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\CollectStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
       viewerProposalsUnpublished:

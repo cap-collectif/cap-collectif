@@ -7,7 +7,7 @@ import ProposalTrashedListPaginated from '../Proposal/List/ProposalTrashedListPa
 import type {
   ProjectTrashProposalQueryResponse,
   ProjectTrashProposalQueryVariables,
-} from './__generated__/ProjectTrashProposalQuery.graphql';
+} from '~relay/ProjectTrashProposalQuery.graphql';
 
 export type Props = {|
   +projectId: string,

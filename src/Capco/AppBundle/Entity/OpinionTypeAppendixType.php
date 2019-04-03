@@ -68,12 +68,12 @@ class OpinionTypeAppendixType
         return $this->appendixType ? $this->appendixType->getTitle() : null;
     }
 
-    public function getAppendixTypeId(): ?string
+    public function getAppendixTypeId()
     {
         return $this->appendixType ? $this->appendixType->getId() : null;
     }
 
-    public function getAppendixTypeHelpText(): ?string
+    public function getAppendixTypeHelpText()
     {
         return $this->appendixType ? $this->appendixType->getHelpText() : null;
     }

@@ -73,12 +73,12 @@ InternalQuery:
           id:
             description: 'If omitted, returns all consultations. If provided, returns the consultation of the particular id.'
             type: 'ID'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationQueryResolver", [args])'
+        resolve: "@=resolver('consultation', [args])"
       groups:
         description: 'Lookup groups.'
         type: '[Group!]!'
         access: "@=hasRole('ROLE_ADMIN')"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupListResolver")'
+        resolve: "@=resolver('groups')"
       proposalForms:
         description: 'Lookup forms.'
         type: '[ProposalForm]!'
@@ -93,7 +93,14 @@ InternalQuery:
             type: 'Float!'
           longitude:
             type: 'Float!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictsForLocalisationResolver", [args["proposalFormId"], args["latitude"], args["longitude"]])'
+        resolve: "@=resolver('query_available_districts_for_location', [args['proposalFormId'], args['latitude'], args['longitude']])"
+      votesByContribution:
+        type: '[InternalProposalVote!]!'
+        description: 'TO BE REMOVED'
+        args:
+          contribution:
+            type: 'ID!'
+        resolve: "@=resolver('votesByContribution', [args])"
       contributions:
         type: '[Opinion!]!'
         description: 'TO BE REMOVED'
@@ -108,10 +115,10 @@ InternalQuery:
         args:
           id:
             type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQueryResolver", [args])'
+        resolve: "@=resolver('query_question', [args])"
       availableQuestionnaires:
         type: '[InternalQuestionnaire!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\AvailableQuestionnaireResolver")'
+        resolve: "@=resolver('query_get_available_questionnaires')"
       projectDistricts:
         description: 'List all the district project in the platform.'
         type: 'ProjectDistrictConnection!'

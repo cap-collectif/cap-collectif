@@ -23,4 +23,3 @@ PublicQuery:
             type: '[ID!]!'
             description: 'The list of node IDs.'
         resolve: "@=resolver('query_nodes', [args['ids'], getUser()])"
-

@@ -2,7 +2,7 @@ Reportable:
   type: interface
   config:
     description: 'A reportable'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
+    resolveType: "@=resolver('contribution_type', [value])"
     fields:
       viewerHasReport:
         access: "@=hasRole('ROLE_USER')"

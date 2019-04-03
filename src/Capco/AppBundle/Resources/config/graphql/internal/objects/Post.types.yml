@@ -32,7 +32,7 @@ Post:
         type: 'Boolean!'
       abstract:
         type: 'String!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostAbstractResolver", [value])'
+        resolve: "@=resolver('post_abstract', [value])"
       adminUrl:
         type: 'URI!'
         description: 'The admin url for this post.'

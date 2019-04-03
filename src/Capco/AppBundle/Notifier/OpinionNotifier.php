@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\GraphQL\Resolver\ConsultationResolver;
 use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;

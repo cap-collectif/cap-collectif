@@ -65,7 +65,7 @@ Version:
       section:
         type: 'Section!'
         description: 'The section of the parent opinion.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionSectionResolver", [value])'
+        resolve: "@=resolver('proposition_section', [value])"
       answer:
         type: 'Answer'
         resolve: '@=value.getAnswer()'

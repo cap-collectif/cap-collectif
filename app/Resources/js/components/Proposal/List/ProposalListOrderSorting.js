@@ -1,12 +1,13 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import Input from '../../Form/Input';
 import LocalStorage from '../../../services/LocalStorageService';
 import { changeOrder } from '../../../redux/modules/proposal';
 import { PROPOSAL_AVAILABLE_ORDERS } from '../../../constants/ProposalConstants';
 import type { Dispatch, State } from '../../../types';
+import Select from '../../Ui/Form/Select/Select';
+import SelectOption from '../../Ui/Form/Select/SelectOption';
 
 type Props = {
   orderByVotes?: boolean,
@@ -59,20 +60,23 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
 
     return (
       <div>
-        <Input
-          id="proposal-sorting"
-          type="select"
-          aria-label={intl.formatMessage({ id: 'global.filter' })}
-          onChange={e => {
-            dispatch(changeOrder(e.target.value));
-          }}
-          value={order}>
+        <Select
+          label={
+            order
+              ? intl.formatMessage({ id: `global.filter_f_${order}` })
+              : intl.formatMessage({ id: 'global.filter' })
+          }
+          id="proposal-filter-sorting-button">
           {displayedOrders.map(choice => (
-            <FormattedMessage key={choice} id={`global.filter_f_${choice}`}>
-              {(message: string) => <option value={choice}>{message}</option>}
-            </FormattedMessage>
+            <SelectOption
+              key={choice}
+              onClick={e => dispatch(changeOrder(e.currentTarget.value))}
+              isSelected={choice === order}
+              value={choice}>
+              {intl.formatMessage({ id: `global.filter_f_${choice}` })}
+            </SelectOption>
           ))}
-        </Input>
+        </Select>
       </div>
     );
   }

@@ -84,7 +84,7 @@ Opinion:
       section:
         type: 'Section!'
         description: 'Where the proposition has been placed.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionSectionResolver", [value])'
+        resolve: "@=resolver('proposition_section', [value])"
       contribuable:
         resolve: '@=value.canContribute(getUser())'
       answer:

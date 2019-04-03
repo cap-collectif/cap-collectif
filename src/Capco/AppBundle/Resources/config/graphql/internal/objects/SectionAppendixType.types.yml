@@ -5,12 +5,12 @@ SectionAppendixType:
     fields:
       id:
         type: 'String'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionAppendixIdResolver", [value])'
+        resolve: "@=resolver('sectionappendixtype_id', [value])"
       position:
         type: 'Int!'
       title:
         type: 'String'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionAppendixTitleResolver", [value])'
+        resolve: "@=resolver('sectionappendixtype_title', [value])"
       helpText:
         type: 'String'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionAppendixHelpTextResolver", [value])'
+        resolve: "@=resolver('sectionappendixtype_helpText', [value])"

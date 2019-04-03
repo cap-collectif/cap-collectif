@@ -1,38 +1,90 @@
 // @flow
-import React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import * as React from 'react';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import ProposalListSearch from './ProposalListSearch';
-import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
 import { changeFilter, changeProposalListView } from '../../../redux/modules/proposal';
 import ProposalListToggleViewBtn from './ProposalListToggleViewBtn';
 import type { ProposalListFilters_step } from '~relay/ProposalListFilters_step.graphql';
+import Select from '../../Ui/Form/Select/Select';
+import SelectOption from '../../Ui/Form/Select/SelectOption';
+
+type Filters = {|
+  types?: string,
+  categories?: string,
+  statuses?: string,
+  themes?: string,
+  districts?: string,
+|};
+
+type defaultOption = {|
+  +id: string,
+  +name: string,
+|};
+
+type themeOption = {|
+  id: string,
+  title: string,
+  slug: string,
+  name: string,
+|};
 
 type Props = {|
   step: ProposalListFilters_step,
   features: FeatureToggles,
   dispatch: Dispatch,
-  filters: Object,
-  types: Array<Object>,
-  themes: Array<Object>,
-  intl: IntlShape,
+  filters: Filters,
+  types: $ReadOnlyArray<defaultOption>,
+  themes: Array<themeOption>,
+|};
+
+type Options = {|
+  types: $ReadOnlyArray<defaultOption>,
+  categories: $ReadOnlyArray<defaultOption>,
+  districts: $ReadOnlyArray<defaultOption>,
+  themes: $ReadOnlyArray<themeOption>,
+  statuses: $ReadOnlyArray<defaultOption>,
 |};
 
 export class ProposalListFilters extends React.Component<Props> {
+  onClickHandler = (e: SyntheticEvent<HTMLButtonElement>, filterName: string) =>
+    this.props.dispatch(changeFilter(filterName, e.currentTarget.value));
+
+  getSelectedValueFromFilterOptions = (
+    defaultMessage: string,
+    options: Options,
+    filters: Filters,
+    filterName: string,
+  ) => {
+    if (!filters[filterName] || filters[filterName] === '0') {
+      return defaultMessage;
+    }
+
+    const selectedOption = options[filterName]
+      .filter(option => option.id == filters[filterName]) // eslint-disable-line eqeqeq
+      .shift();
+
+    if (!selectedOption) {
+      return defaultMessage;
+    }
+
+    return filterName !== 'themes' ? selectedOption.name : selectedOption.title;
+  };
+
   render() {
-    const { dispatch, features, intl, step, filters } = this.props;
+    const { dispatch, features, step, filters, types, themes } = this.props;
 
     const { form } = step;
 
     const options = {
-      types: this.props.types,
+      types,
       categories: form.categories,
       districts: form.districts,
-      themes: this.props.themes,
+      themes,
       statuses: step.statuses,
     };
 
@@ -67,7 +119,7 @@ export class ProposalListFilters extends React.Component<Props> {
             {/* $FlowFixMe please use mapDispatchToProps */}
             <ProposalListSearch />
           </Col>
-          <Col xs={12} sm={6} md={4} lg={3}>
+          <Col xs={12} sm={6} md={4} lg={3} id="proposal-filter-sorting">
             {/* $FlowFixMe please use mapDispatchToProps */}
             <ProposalListOrderSorting
               orderByCost={orderByCost}
@@ -77,24 +129,35 @@ export class ProposalListFilters extends React.Component<Props> {
             />
           </Col>
           {displayedFilters.map((filterName, index) => (
-            <Col xs={12} sm={6} md={4} lg={3} key={index}>
-              <Input
-                type="select"
-                aria-label={intl.formatMessage({ id: 'global.searchIn' }, { filterName })}
-                id={`proposal-filter-${filterName}`}
-                onChange={e => {
-                  dispatch(changeFilter(filterName, e.target.value));
-                }}
-                value={filters[filterName]}>
-                <FormattedMessage id={`global.select_${filterName}`}>
-                  {(message: string) => <option value="0">{message}</option>}
-                </FormattedMessage>
-                {options[filterName].map(choice => (
-                  <option key={choice.id} value={choice.id}>
-                    {choice.title || choice.name}
-                  </option>
-                ))}
-              </Input>
+            <Col xs={12} sm={6} md={4} lg={3} key={index} id={`proposal-filter-${filterName}`}>
+              <FormattedMessage id={`global.select_${filterName}`}>
+                {(message: string) => (
+                  <Select
+                    label={this.getSelectedValueFromFilterOptions(
+                      message,
+                      options,
+                      filters,
+                      filterName,
+                    )}
+                    id={`proposal-filter-${filterName}-button`}>
+                    <SelectOption
+                      onClick={e => this.onClickHandler(e, filterName)}
+                      isSelected={!filters[filterName] || filters[filterName] === '0'}
+                      value="0">
+                      {message}
+                    </SelectOption>
+                    {options[filterName].map(choice => (
+                      <SelectOption
+                        onClick={e => this.onClickHandler(e, filterName)}
+                        isSelected={filters[filterName] == choice.id} // eslint-disable-line eqeqeq
+                        value={choice.id}
+                        key={choice.id}>
+                        {choice.title || choice.name}
+                      </SelectOption>
+                    ))}
+                  </Select>
+                )}
+              </FormattedMessage>
             </Col>
           ))}
         </Row>

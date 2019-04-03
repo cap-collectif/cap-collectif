@@ -28,7 +28,7 @@ InternalUser:
       email:
         type: 'String'
         description: "The user's email."
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEmailResolver", [value])'
+        resolve: "@=resolver('user_email', [value])"
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       # TODO rename this to `avatar`
       media:
@@ -57,7 +57,7 @@ InternalUser:
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       phoneConfirmationSentAt:
         type: 'DateTime'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserPhoneConfirmationSentAtResolver", [value])'
+        resolve: "@=resolver('user_phoneConfirmationSentAt', [value])"
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       gender:
         type: 'GenderValue'
@@ -144,7 +144,7 @@ InternalUser:
       contributionsToDeleteCount:
         type: 'Int!'
         description: 'Provisional number of contributions who will be totally deleted if the user chose to delete his account.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsToDeleteCount", [value])'
+        resolve: "@=resolver('user_contributionsToDeleteCount', [value])"
       sourcesCount:
         type: 'Int!'
       repliesCount:
