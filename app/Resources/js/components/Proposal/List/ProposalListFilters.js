@@ -191,9 +191,6 @@ export default createFragmentContainer(container, {
         name
       }
       form {
-        latMap
-        lngMap
-        zoomMap
         usingDistrict
         usingAddress
         usingThemes
