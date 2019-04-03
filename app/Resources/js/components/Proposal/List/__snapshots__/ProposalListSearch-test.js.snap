@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalListSearch /> should render correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <InjectIntl(ReactBootstrapInput)
+    aria-label="project.searchform.search"
+    buttonAfter={
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        id="proposal-search-button"
+        type="submit"
+      >
+        <i
+          className="cap cap-magnifier"
+        />
+      </Button>
+    }
+    id="proposal-search-input"
+    onChange={[Function]}
+    placeholder="proposal.search"
+    type="text"
+    value="This is some terms"
+  />
+</form>
+`;

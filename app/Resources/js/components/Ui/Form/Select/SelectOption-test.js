@@ -9,7 +9,6 @@ describe('<SelectOption />', () => {
     isSelected: false,
     value: '0',
     onClick: jest.fn(),
-    onClose: jest.fn(),
   };
 
   it('should render', () => {

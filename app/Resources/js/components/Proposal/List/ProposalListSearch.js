@@ -17,7 +17,7 @@ type State = {
   terms: string,
 };
 
-class ProposalListSearch extends React.Component<Props, State> {
+export class ProposalListSearch extends React.Component<Props, State> {
   state = {
     terms: this.props.terms,
   };
