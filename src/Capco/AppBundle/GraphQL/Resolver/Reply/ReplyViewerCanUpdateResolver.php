@@ -10,6 +10,6 @@ class ReplyViewerCanUpdateResolver implements ResolverInterface
 {
     public function __invoke(Reply $reply, User $user): bool
     {
-        return $reply->getAuthor() === $user && $reply->getQuestionnaire()->canContribute();
+        return $reply->getAuthor() === $user && $reply->getQuestionnaire()->canContribute($user);
     }
 }
