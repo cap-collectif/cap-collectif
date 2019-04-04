@@ -8,6 +8,7 @@ Argumentable:
     fields:
       contribuable:
         type: 'Boolean!'
+        resolve: '@=value.canContribute(getUser())'
       arguments:
         description: 'The arguments related to the argumentable.'
         type: 'ArgumentConnection!'

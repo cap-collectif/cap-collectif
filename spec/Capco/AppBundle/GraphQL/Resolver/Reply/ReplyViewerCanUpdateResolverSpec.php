@@ -31,7 +31,7 @@ class ReplyViewerCanUpdateResolverSpec extends ObjectBehavior
     ): void {
         $reply->getAuthor()->willReturn($author);
         $reply->getQuestionnaire()->willReturn($questionnaire);
-        $questionnaire->canContribute($author)->willReturn(false);
+        $questionnaire->canContribute()->willReturn(false);
         $this->__invoke($reply, $author)->shouldReturn(false);
     }
 
@@ -42,7 +42,7 @@ class ReplyViewerCanUpdateResolverSpec extends ObjectBehavior
     ): void {
         $reply->getAuthor()->willReturn($author);
         $reply->getQuestionnaire()->willReturn($questionnaire);
-        $questionnaire->canContribute($author)->willReturn(true);
+        $questionnaire->canContribute()->willReturn(true);
         $this->__invoke($reply, $author)->shouldReturn(true);
     }
 }
