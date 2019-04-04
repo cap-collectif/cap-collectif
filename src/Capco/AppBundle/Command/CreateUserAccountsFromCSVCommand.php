@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Repository\RegistrationFormRepository;
 
 class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
 {
@@ -43,6 +45,10 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
         $writer = Writer::createFromPath($outputFilePath, 'w+');
         $writer->insertOne(['email', 'confirmation_link']);
         $deduplicatedRows = [];
+
+        $registrationForm = $container->get(RegistrationFormRepository::class)->findCurrent();
+        $questions = $registrationForm->getRealQuestions();
+
         // We deduplicate rows by email
         foreach ($rows as $row) {
             $niddle = $row['email'];
@@ -60,6 +66,19 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
                 $user->setConfirmationToken($tokenGenerator->generateToken());
                 $user->setResetPasswordToken($tokenGenerator->generateToken());
                 $user->setEnabled(false);
+
+                // Handle custom questions
+                if ($questions->count() > 0) {
+                    foreach($questions as $question) {
+                        if (isset($row[$question->getTitle()])) {
+                            $value = $row[$question->getTitle()];
+                            $response = new ValueResponse();
+                            $response->setValue($value);
+                            $response->setQuestion($question);
+                            $user->addResponse($response);
+                        }
+                    }
+                }
                 $userManager->updateUser($user);
                 $confirmationUrl = $router->generate(
                     'account_confirm_email',

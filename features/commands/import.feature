@@ -32,14 +32,14 @@ Scenario: Admin wants to import a BP
   And I should see "Creating a new user with a fake email and username: Pierre Michel" in output
 
 @database
-Scenario: Admin wants to create a PJL
-  Given "emails.csv" contains:
+Scenario: Cap Collectif wants to create some users account from a CSV
+  Given "users.csv" contains:
   """
-  email;username
-  user_a@test.com;Jean Michel
-  user_b@test.com;Po Paul
+  email;username;Champ pas facultatif;Champ facultatif;Sangohan / Vegeta ?
+  user_a@test.com;Jean Michel;toto;tata;Sangohan
+  user_b@test.com;Po Paul;popo;popaul;Vegeta
   """
-  Given I run "capco:create-users-account-from-csv vfs://emails.csv vfs://users_created.csv"
+  Given I run "capco:create-users-account-from-csv vfs://users.csv vfs://users_created.csv"
   Then the command exit code should be 0
   And I should see "2 users created." in output
   Then the file "users_created.csv" should exist
@@ -48,6 +48,12 @@ Scenario: Admin wants to create a PJL
   email,confirmation_link
   """
   Then print the contents of file "users_created.csv"
+  And user "user_a@test.com" has response "toto" to question "6"
+  And user "user_a@test.com" has response "tata" to question "7"
+  And user "user_a@test.com" has response "Sangohan" to question "17"
+  And user "user_b@test.com" has response "popo" to question "6"
+  And user "user_b@test.com" has response "popaul" to question "7"
+  And user "user_b@test.com" has response "Vegeta" to question "17"
 
 @database
 Scenario: Admin wants to import users from a CSV

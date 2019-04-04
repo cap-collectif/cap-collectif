@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Behat;
 
 use PHPUnit\Framework\Assert;
 use Capco\AppBundle\Utils\Text;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\AppBundle\Entity\EventRegistration;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -39,13 +41,29 @@ class UserContext extends DefaultContext
     }
 
     /**
+     * @Then user :email has response :value to question :questionId
+     */
+    public function userHasResponseToQuestion(string $email, string $value, int $questionId)
+    {
+        $this->getEntityManager()->clear();
+        $user = $this->getRepository(User::class)->findOneByEmail($email);
+        foreach ($user->getResponses() as $response) {
+            if ($response->getQuestion()->getId() === $questionId) {
+                expect($response->getValue())->toBe($value);
+                return;
+            }
+        }
+        throw new \Exception('userHasResponseToQuestion failed.');
+    }
+
+    /**
      * @Then the question :questionAId should be positioned before :questionBId
      */
     public function questionIsBefore(int $questionAId, int $questionBId)
     {
         $this->getEntityManager()->clear();
-        $qA = $this->getRepository('CapcoAppBundle:Questions\AbstractQuestion')->find($questionAId);
-        $qB = $this->getRepository('CapcoAppBundle:Questions\AbstractQuestion')->find($questionBId);
+        $qA = $this->getRepository(AbstractQuestion::class)->find($questionAId);
+        $qB = $this->getRepository(AbstractQuestion::class)->find($questionBId);
         expect(
             $qB->getQuestionnaireAbstractQuestion()->getPosition() -
                 $qA->getQuestionnaireAbstractQuestion()->getPosition() >
