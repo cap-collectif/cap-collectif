@@ -73,7 +73,6 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
               <Field
                 id={`${member}.destination.id`}
                 name={`${member}.destination.id`}
-                normalize={val => val && parseInt(val, 10)}
                 type="select"
                 component={component}>
                 {questions.map((question, questionIndex) => {

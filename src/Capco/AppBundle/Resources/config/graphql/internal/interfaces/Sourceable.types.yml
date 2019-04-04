@@ -8,7 +8,6 @@ Sourceable:
         type: 'ID!'
       contribuable:
         type: 'Boolean!'
-        resolve: '@=value.canContribute(getUser())'
       step:
         type: 'InternalConsultation!'
       sources:
