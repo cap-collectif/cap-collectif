@@ -81,6 +81,7 @@ export default class UserListField extends React.Component<Props> {
         inputClassName={inputClassName}
         placeholder={placeholder}
         multi
+        autoload
         component={select}
         clearable={false}
         loadOptions={terms => retrieveUsersList(userListToNoSearch, terms)}
