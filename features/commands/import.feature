@@ -36,24 +36,29 @@ Scenario: Cap Collectif wants to create some users account from a CSV
   Given "users.csv" contains:
   """
   email;username;Champ pas facultatif;Champ facultatif;Sangohan / Vegeta ?
-  user_a@test.com;Jean Michel;toto;tata;Sangohan
-  user_b@test.com;Po Paul;popo;popaul;Vegeta
+  user_a@cap-collectif.com;Jean Michel;toto;tata;Sangohan
+  user_b@cap-collectif.com;Po Paul;popo;popaul;Vegeta
+  duplicated@cap-collectif.com;Duplicate;Duplicate;Duplicate;Vegeta
+  duplicated@cap-collectif.com;Duplicate;Duplicate;Duplicate;Vegeta
+  admin@cap-collectif.com;Already Present;Already Present;Already Present;Vegeta
   """
   Given I run "capco:create-users-account-from-csv vfs://users.csv vfs://users_created.csv"
   Then the command exit code should be 0
-  And I should see "2 users created." in output
+  And I should see "Skipping 1 duplicated email(s)." in output
+  And I should see "Skipping existing user: admin@cap-collectif.com" in output
+  And I should see "3 users created." in output
   Then the file "users_created.csv" should exist
   Then "users_created.csv" should start with:
   """
   email,confirmation_link
   """
   Then print the contents of file "users_created.csv"
-  And user "user_a@test.com" has response "toto" to question "6"
-  And user "user_a@test.com" has response "tata" to question "7"
-  And user "user_a@test.com" has response "Sangohan" to question "17"
-  And user "user_b@test.com" has response "popo" to question "6"
-  And user "user_b@test.com" has response "popaul" to question "7"
-  And user "user_b@test.com" has response "Vegeta" to question "17"
+  And user "user_a@cap-collectif.com" has response "toto" to question "6"
+  And user "user_a@cap-collectif.com" has response "tata" to question "7"
+  And user "user_a@cap-collectif.com" has response "Sangohan" to question "17"
+  And user "user_b@cap-collectif.com" has response "popo" to question "6"
+  And user "user_b@cap-collectif.com" has response "popaul" to question "7"
+  And user "user_b@cap-collectif.com" has response "Vegeta" to question "17"
 
 @database
 Scenario: Admin wants to import users from a CSV

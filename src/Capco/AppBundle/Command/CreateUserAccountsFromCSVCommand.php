@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
 use League\Csv\Writer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -12,6 +13,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Repository\RegistrationFormRepository;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
 {
@@ -49,6 +51,8 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
         $registrationForm = $container->get(RegistrationFormRepository::class)->findCurrent();
         $questions = $registrationForm->getRealQuestions();
 
+        $userRepo = $container->get(UserRepository::class);
+
         // We deduplicate rows by email
         foreach ($rows as $row) {
             $niddle = $row['email'];
@@ -57,12 +61,26 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
             }
             $deduplicatedRows[$niddle] = $row;
         }
+        if (\count($rows) > \count($deduplicatedRows)) {
+            $output->write('Skipping ' . (\count($rows) - \count($deduplicatedRows)) . ' duplicated email(s).');
+        }
+
+        $progressBar = new ProgressBar($output, \count($deduplicatedRows));
+        $progressBar->start();
         foreach ($deduplicatedRows as $row) {
+            $progressBar->advance();
+            $email = filter_var($row['email'], FILTER_SANITIZE_EMAIL);
             try {
+                $previousUser = $userRepo->findOneByEmail($email);
+                if ($previousUser) {
+                    $output->write('Skipping existing user: ' . $email);
+                    continue;
+                }
+
                 /** @var User $user */
                 $user = $userManager->createUser();
                 $user->setUsername($row['username']);
-                $user->setEmail(filter_var($row['email'], FILTER_SANITIZE_EMAIL));
+                $user->setEmail($email);
                 $user->setConfirmationToken($tokenGenerator->generateToken());
                 $user->setResetPasswordToken($tokenGenerator->generateToken());
                 $user->setEnabled(false);
@@ -96,9 +114,10 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
                 ++$createdCount;
             } catch (\Exception $e) {
                 $output->write($e->getMessage());
-                $output->write('Failed to create user : ' . $row['email']);
+                $output->write('Failed to create user : ' . $email);
             }
         }
+        $progressBar->finish();
         $output->write($createdCount . ' users created.');
     }
 }
