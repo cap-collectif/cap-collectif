@@ -64,18 +64,20 @@ class ConfirmationController extends Controller
         $user->setEnabled(true);
         $user->setLastLogin(new \DateTime());
 
+        $hasPublishedContributions = $this->confirmUser($user);
+
         // If user has been created via API he has no password yet.
         // That's why we create a reset password request to let him chose a password
         if (null === $user->getPassword()) {
             $user->setPasswordRequestedAt(new \DateTime());
+
+            // This will flush
             $this->userManager->updateUser($user);
 
             return $this->redirectToRoute('fos_user_resetting_reset', [
                 'token' => $user->getResetPasswordToken(),
             ]);
         }
-
-        $hasPublishedContributions = $this->confirmUser($user);
 
         // This will flush
         $this->userManager->updateUser($user);
