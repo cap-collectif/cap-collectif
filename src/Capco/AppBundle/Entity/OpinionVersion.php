@@ -387,7 +387,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return ($this->isPublished() &&
             !$this->isTrashed() &&
             $this->getParent()->canContribute($user)) ||
-            $this->getAuthor() === $user;
+            ($this->getParent()->canContribute($user) && $this->getAuthor() === $user);
     }
 
     public function canBeDeleted($user = null): bool
