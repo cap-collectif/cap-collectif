@@ -104,7 +104,13 @@ class Select extends React.Component<Props, State> {
     const { children, label, id } = this.props;
     const { isOpen } = this.state;
     const childrenWithProps = React.Children.map(children, child =>
-      React.cloneElement(child, { onClose: this.onCloseHandle }),
+      React.cloneElement(child, {
+        // Wrap call to child.onClick to close the window afterward and avoid useless onClose props.
+        onClick: (e: MouseEvent) => {
+          child.props.onClick(e);
+          this.onCloseHandle();
+        },
+      }),
     );
 
     return (
