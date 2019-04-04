@@ -4,7 +4,7 @@ YesNoPairedVote:
     - InternalVote
     - PublicPublishable
   config:
-    resolveType: "@=resolver('contribution_type', [value])"
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
     fields:
       value:
         type: 'YesNoPairedVoteValue!'

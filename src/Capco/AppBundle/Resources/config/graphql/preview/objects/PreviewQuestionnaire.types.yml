@@ -8,7 +8,7 @@ PreviewQuestionnaire:
       questions:
         type: '[PreviewQuestion!]!'
         description: 'List of questions.'
-        resolve: "@=resolver('questionnaire_questions', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", [value])'
       replies:
         type: 'PreviewReplyConnection!'
         argsBuilder: 'Relay::Connection'

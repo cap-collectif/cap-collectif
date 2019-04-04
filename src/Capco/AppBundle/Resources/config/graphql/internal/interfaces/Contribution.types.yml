@@ -4,7 +4,7 @@ Contribution:
     - Node
   config:
     description: 'A contribution with an author'
-    resolveType: "@=resolver('contribution_type', [value])"
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
     fields:
       kind:
         type: 'String!'

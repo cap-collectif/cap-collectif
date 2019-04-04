@@ -4318,9 +4318,6 @@ type Query {
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [ProposalDistrict!]!
 
   # TO BE REMOVED
-  votesByContribution(contribution: ID!): [ProposalVote!]!
-
-  # TO BE REMOVED
   contributions(
     # Returns all contributions of the provided consultation.
     consultation: ID!
