@@ -24,7 +24,7 @@ PreviewProject:
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotesResolver", [value])'
       contributors:
-        type: 'PublicUserConnection!'
+        type: 'PreviewUserConnection!'
         description: 'A list of contributors associated with the project.'
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", [value, args])'

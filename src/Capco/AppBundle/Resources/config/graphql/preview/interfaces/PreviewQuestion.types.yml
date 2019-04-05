@@ -4,6 +4,10 @@ PreviewQuestion:
     name: Question
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Question
       title:
         type: 'String!'
         description: 'Identifies the question title.'

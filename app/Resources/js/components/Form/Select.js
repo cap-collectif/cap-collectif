@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 
 type Options = Array<{ value: string, label: string }>;
 type Value = string | Array<{ value: string }>;
-type OnChangeInput = Array<{ value: string }>;
+type OnChangeInput = { value: string } | Array<{ value: string }>;
 type Props = {
   input: {
     name: string,
@@ -87,6 +87,7 @@ class renderSelect extends React.Component<Props> {
 
     let selectValue = null;
     let selectLabel = null;
+
     if (typeof loadOptions === 'function') {
       selectValue = value;
     } else if (multi) {
@@ -99,6 +100,7 @@ class renderSelect extends React.Component<Props> {
         options && options.filter(option => option && option.value && option.value === value);
       selectValue = value ? selectLabel && selectLabel[0] : null;
     }
+
     return (
       <div className="form-group">
         {label && (
@@ -134,7 +136,13 @@ class renderSelect extends React.Component<Props> {
                 if (typeof onChange === 'function') {
                   onChange();
                 }
-                return input.onChange(newValue);
+                if (multi && Array.isArray(newValue)) {
+                  input.onChange(newValue);
+                  return;
+                }
+                if (!Array.isArray(newValue)) {
+                  input.onChange(newValue ? newValue.value : '');
+                }
               }}
             />
           ) : (
@@ -162,7 +170,12 @@ class renderSelect extends React.Component<Props> {
                 if (typeof onChange === 'function') {
                   onChange();
                 }
-                return input.onChange(newValue);
+                if (multi && Array.isArray(newValue)) {
+                  return input.onChange(newValue);
+                }
+                if (!Array.isArray(newValue)) {
+                  input.onChange(newValue ? newValue.value : '');
+                }
               }}
             />
           )}

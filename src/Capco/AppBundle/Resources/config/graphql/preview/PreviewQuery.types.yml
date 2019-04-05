@@ -6,6 +6,8 @@ PreviewQuery:
     name: Query
     description: 'Root of the schema.'
     fields:
+      viewer:
+        type: 'PreviewUser!'
       projects:
         type: 'PreviewProjectConnection!'
         description: 'Lookup projects.'

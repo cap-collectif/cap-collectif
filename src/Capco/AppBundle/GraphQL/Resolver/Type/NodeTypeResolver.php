@@ -100,8 +100,11 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('Reporting');
         }
         if ($node instanceof User) {
-            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
+            if ('public' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PublicUser');
+            }
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewUser');
             }
 
             return $this->typeResolver->resolve('InternalUser');
@@ -136,8 +139,11 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('QuestionnaireStep');
         }
         if ($node instanceof ConsultationStep) {
-            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
+            if ('public' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PublicConsultation');
+            }
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewConsultation');
             }
 
             return $this->typeResolver->resolve('InternalConsultation');

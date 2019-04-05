@@ -14,3 +14,5 @@ PreviewQuestionnaire:
         argsBuilder: 'Relay::Connection'
         description: 'A list of replies to the questionnaire.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireRepliesResolver", [value, args])'
+      participants:
+        type: 'PreviewUserConnection!'
