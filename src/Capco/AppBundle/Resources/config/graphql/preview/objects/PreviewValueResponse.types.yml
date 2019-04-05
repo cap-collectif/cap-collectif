@@ -12,3 +12,7 @@ PreviewValueResponse:
         type: 'String'
         description: 'The response value which can be a string or a JSON.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\ResponseValueResolver", [value])'
+      formattedValue:
+        type: 'String'
+        description: 'The response value formatted.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\FormattedValueResponseTypeResolver", [value])'

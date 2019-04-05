@@ -12,16 +12,16 @@ import {
 } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ListGroup, ListGroupItem, Panel, ButtonToolbar, Button } from 'react-bootstrap';
+import Fetcher from '../../../services/Fetcher';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import UpdateProposalFusionMutation from '../../../mutations/UpdateProposalFusionMutation';
 import component from '../../Form/Field';
+import select from '../../Form/Select';
 import AlertForm from '../../Alert/AlertForm';
 import ProposalFusionEditModal from './ProposalFusionEditModal';
 import type { ProposalAdminContentForm_proposal } from '~relay/ProposalAdminContentForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql';
-import type { FormValues as FrontendFormValues } from '../Form/ProposalForm';
 import type { Uuid, GlobalState, Dispatch, FeatureToggles } from '../../../types';
-import UserListField from '../../Admin/Field/UserListField';
 import {
   renderResponses,
   formatSubmitResponses,
@@ -38,7 +38,7 @@ type FormValues = {|
   title?: ?string,
   body?: ?string,
   summary?: ?string,
-  author?: { value: Uuid, label: string },
+  author?: ?Uuid,
   theme?: ?Uuid,
   addresstext?: ?string,
   category?: ?Uuid,
@@ -74,7 +74,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdm
     draft: values.draft,
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
     responses: formatSubmitResponses(values.responses, proposal.form.questions),
-    author: isSuperAdmin && values.author ? values.author.value : undefined,
+    author: isSuperAdmin ? values.author : undefined,
     id: proposal.id,
   };
 
@@ -92,7 +92,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdm
 };
 
 export const validateProposalContent = (
-  values: FormValues | FrontendFormValues,
+  values: FormValues,
   // $FlowFixMe $refType
   proposalForm: ProposalForm,
   features: FeatureToggles,
@@ -310,16 +310,34 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 </span>
               }
             />
-            <UserListField
-              disabled={!isSuperAdmin}
-              id="proposal-admin-author"
+            <Field
               name="author"
               label="Auteur"
+              disabled={!isSuperAdmin}
+              id="proposal-admin-author"
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
-              placeholder="Auteur"
-              isAdminField
-              multi={false}
+              component={select}
+              clearable={false}
+              autoload
+              loadOptions={terms =>
+                Fetcher.postToJson(`/users/search`, { terms })
+                  .then(res =>
+                    res.users
+                      .map(u => ({
+                        value: u.id,
+                        label: u.displayName,
+                      }))
+                      .concat([
+                        {
+                          value: proposal.author.id,
+                          label: proposal.author.displayName,
+                        },
+                      ]),
+                  )
+                  // eslint-disable-next-line no-console
+                  .catch(e => console.error(e))
+              }
             />
             {features.themes && form.usingThemes && (
               <Field
@@ -466,10 +484,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => ({
     title: proposal.title,
     body: proposal.body,
     summary: proposal.summary,
-    author: {
-      value: proposal.author.id,
-      label: proposal.author.displayName,
-    },
+    author: proposal.author.id,
     theme:
       state.default.features.themes && proposal.form.usingThemes
         ? proposal.theme

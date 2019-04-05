@@ -1,0 +1,10 @@
+PreviewConsultation:
+  type: object
+  inherits:
+    - PublicConsultation
+  config:
+    description: 'A consultation'
+    name: Consultation
+    fields:
+      contributors:
+        type: 'PreviewUserConnection!'

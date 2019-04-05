@@ -15,6 +15,8 @@ use Capco\AppBundle\Publishable\DoctrineListener;
 
 class ReinitCommand extends ContainerAwareCommand
 {
+    private $env;
+
     protected function configure()
     {
         $this->setName('capco:reinit')
@@ -46,6 +48,8 @@ class ReinitCommand extends ContainerAwareCommand
 
             return;
         }
+
+        $this->env = $input->getOption('env');
 
         $notifier = NotifierFactory::create();
 
@@ -171,6 +175,7 @@ class ReinitCommand extends ContainerAwareCommand
             [
                 'capco:reset-feature-flags' => [
                     '--force' => true,
+                    '--env' => $this->env,
                 ],
             ],
             $output

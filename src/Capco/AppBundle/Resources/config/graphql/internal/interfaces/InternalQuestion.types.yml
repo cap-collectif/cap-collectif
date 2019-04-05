@@ -15,10 +15,6 @@ InternalQuestion:
             type: 'Boolean'
             description: 'Get responses with user not confirmed'
             defaultValue: false
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Question
       number:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
         type: 'Int!'

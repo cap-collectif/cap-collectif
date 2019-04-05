@@ -1,0 +1,1151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GraphQL API OpenDataProposalsQuery 1`] = `
+Object {
+  "node": Object {
+    "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTAy",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:01:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "publishedAt": "2018-03-01 00:01:00",
+            "reference": "1-1",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "souhaitable",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": "souhaitable",
+              },
+              Object {
+                "formattedValue": "250 000 €",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "250 000 €",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Ravalement de la façade de la bibliothèque municipale",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2018-03-01 00:01:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:02:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "publishedAt": "2018-03-01 00:02:00",
+            "reference": "1-2",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "souhaitable",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": "souhaitable",
+              },
+              Object {
+                "formattedValue": "1 million !",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "1 million !",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Rénovation du gymnase",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2018-03-01 00:05:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTAy",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:03:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "publishedAt": "2018-03-01 00:03:00",
+            "reference": "1-3",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "réponse obligatoire",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "réponse obligatoire",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Installation de bancs sur la place de la mairie",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNw==",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:04:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+            "publishedAt": "2018-03-01 00:04:00",
+            "reference": "1-4",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "réponse obligatoire",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "réponse obligatoire",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:07:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+            "publishedAt": "2018-03-01 00:07:00",
+            "reference": "1-7",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Proposition pas encore votable",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2018-03-01 00:07:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:08:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+            "publishedAt": "2018-03-01 00:08:00",
+            "reference": "1-8",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Proposition plus votable",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2018-03-01 00:08:00",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "hasNextPage": false,
+      },
+      "totalCount": 6,
+    },
+  },
+}
+`;
+
+exports[`GraphQL API OpenDataRepliesQuery 1`] = `
+Object {
+  "node": Object {
+    "replies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTAy",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2016-03-01 00:00:00",
+            "id": "reply1",
+            "publishedAt": "2016-03-01 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Trop bien ! On va voir de supers athlètes à Paris !",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "<p>Expedita mollitia illo eum et odit qui aut. Quia laboriosam ut accusantium.</p>",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "<p>Quo assumenda eos ut ipsa voluptatibus ut aut. Illo perferendis qui et ipsum voluptas optio.</p>",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "<p>Qui quia autem deleniti. Quia culpa accusamus ex. Ea hic inventore dolores qui similique est cum.</p>",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "<p>Dolore inventore nam illum ut et. Id aut architecto et et. Vel earum voluptas et expedita.</p>",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "<p>Ullam quia nisi quam est. Dolor in a ducimus.</p>",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "<p>Itaque inventore a sed est eligendi quidem aut. Rem id aut et hic deserunt est qui.</p>",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "<p>Qui dolores perferendis expedita non. Harum enim itaque illum commodi sapiente.</p>",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "<p>Atque distinctio dicta placeat corrupti in ex totam. Iure ipsum dolor cumque ut.</p>",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2016-03-01 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2016-03-01 00:00:00",
+            "id": "reply2",
+            "publishedAt": "2016-03-01 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Youpi ! J'adore des JO",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[\\"Maxime Arrouard\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": "Assez fort (Mon sonotone est mal réglé)",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[\\"Logo 1\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MjA=",
+                  "title": "Comment trouvez-vous cette présentation ?",
+                },
+                "value": "{\\"labels\\":[\\"Au top\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2019-03-01 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTE1",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2016-03-01 00:00:00",
+            "id": "reply6",
+            "publishedAt": "2016-03-01 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": "Pas assez fort (Mon sonotone est en panne)",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MjA=",
+                  "title": "Comment trouvez-vous cette présentation ?",
+                },
+                "value": "{\\"labels\\":[\\"Incohérente\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2019-03-01 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTA2",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2016-03-01 00:00:00",
+            "id": "reply7",
+            "publishedAt": "2016-03-01 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Trop cool ! On va voir Tibo qui cours en slip !",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[\\"Oui\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MjA=",
+                  "title": "Comment trouvez-vous cette présentation ?",
+                },
+                "value": "{\\"labels\\":[\\"Au top\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2019-03-01 00:00:00",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "hasNextPage": false,
+      },
+      "totalCount": 5,
+    },
+  },
+}
+`;
+
+exports[`GraphQL API ViewerQuery 1`] = `
+Object {
+  "viewer": Object {
+    "id": "VXNlcjp1c2VyQWRtaW4=",
+    "username": "admin",
+  },
+}
+`;

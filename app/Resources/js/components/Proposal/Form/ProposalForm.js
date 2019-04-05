@@ -107,9 +107,10 @@ type Props = {|
   +responses: ResponsesInReduxForm,
 |};
 
-export type FormValues = {|
+type FormValues = {|
   title: ?string,
   summary?: ?string,
+  author?: ?string,
   body: ?string,
   address?: ?string,
   addresstext?: ?string,

@@ -6,5 +6,10 @@
                 "./app/Resources/js/__generated__/~relay/*"
             ]
         }
-    }
+    },
+    "exclude": [
+        "node_modules",
+        "app/Resources/assets/",
+        "web/js/",
+    ]
 }
