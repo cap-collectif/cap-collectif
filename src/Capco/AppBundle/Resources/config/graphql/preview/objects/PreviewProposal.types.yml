@@ -25,9 +25,9 @@ PreviewProposal:
         type: 'String!'
         description: 'Identifies the proposal title.'
       author:
-        type: 'PreviewUser!'
+        type: 'PublicUser!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAuthorResolver", [value])'
-        description: 'Identifies the author of the contribution.'
+        description: 'The author of the contribution.'
       body:
         type: 'HTML'
         description: 'Identifies the body of the proposal.'
@@ -35,7 +35,3 @@ PreviewProposal:
         type: '[PreviewResponse]!'
         description: 'Identifies the responses of the proposal.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", [value, getUser(), context])'
-      reference:
-        type: 'String!'
-        description: 'Identifies the unique reference of the proposal.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReferenceResolver", [value])'

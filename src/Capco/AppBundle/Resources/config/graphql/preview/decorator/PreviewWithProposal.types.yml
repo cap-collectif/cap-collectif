@@ -10,10 +10,6 @@ PreviewWithProposals:
           first:
             type: 'Int'
             defaultValue: 100
-          trashedStatus:
-            type: 'ProposalTrashedStatus'
-            description: 'If non-null, filters proposals with the given trashed status.'
-            defaultValue: 'NOT_TRASHED'
           district:
             type: 'ID'
             description: 'If non-null, filters proposals with the given district.'

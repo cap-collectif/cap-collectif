@@ -16,5 +16,5 @@ PreviewReply:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value, getUser()])'
         description: 'The responses of the reply.'
       author:
-        type: 'PreviewUser!'
+        type: 'PublicUser!'
         description: 'The author of the contribution.'

@@ -893,9 +893,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters proposals with the given trashed status.
-    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
-
     # If non-null, filters proposals with the given district.
     district: ID
 
@@ -925,6 +922,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The title of the step.
@@ -1883,16 +1883,13 @@ type Event implements Node & Commentable {
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
-  # Identifies the author of the event.
-  author: User
-
-  # Identifies the title of the event.
+  # The title of the event.
   title: String!
 
-  # Identifies the start of the event.
+  # The start of the event.
   startAt: DateTime
 
-  # Identifies the end of the event.
+  # The end of the event.
   endAt: DateTime
 
   # Identifies the body of the event.
@@ -1900,21 +1897,6 @@ type Event implements Node & Commentable {
 
   # Identifies if the event is published.
   enabled: Boolean!
-
-  # Identifies the latitude of the event.
-  lat: Float
-
-  # Identifies the longitude of the event.
-  lng: Float
-
-  # Identifies the registration link of the event.
-  link: URI
-
-  # Identifies the zip code of the event.
-  zipCode: String
-
-  # Identifies the address of the event.
-  fullAddress: String
 
   # The comments related to the commentable.
   comments(
@@ -1951,11 +1933,17 @@ type Event implements Node & Commentable {
   ): ParticipantConnection!
   themes: [Theme!]!
   projects: [Project!]!
+  author: User
   commentable: Boolean!
+  link: URI
   media: Media
   address: String
+  fullAddress: String
+  zipCode: String
   city: String
   country: String
+  lat: Float
+  lng: Float
   registrationEnable: Boolean!
   metaDescription: String
   customCode: String
@@ -2363,9 +2351,6 @@ type Media implements UniformResourceLocatable {
 
 # A media question.
 type MediaQuestion implements Question & Node {
-  # The ID of an object
-  id: ID!
-
   # Identifies the question title.
   title: String!
 
@@ -2386,6 +2371,9 @@ type MediaQuestion implements Question & Node {
     # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ResponseConnection!
+
+  # The ID of an object
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -2434,9 +2422,6 @@ type MediaResponse implements Response {
 
 # A multiple choice question
 type MultipleChoiceQuestion implements Question & Node {
-  # The ID of an object
-  id: ID!
-
   # Identifies the question title.
   title: String!
 
@@ -2457,6 +2442,9 @@ type MultipleChoiceQuestion implements Question & Node {
     # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ResponseConnection!
+
+  # The ID of an object
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -3282,9 +3270,6 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters proposals with the given trashed status.
-    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
-
     # If non-null, filters proposals with the given district.
     district: ID
 
@@ -3314,6 +3299,9 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -3531,7 +3519,7 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   # Identifies the proposal title.
   title: String!
 
-  # Identifies the author of the contribution.
+  # The author of the contribution.
   author: User!
 
   # Identifies the body of the proposal.
@@ -3539,9 +3527,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
 
   # Identifies the responses of the proposal.
   responses: [Response]!
-
-  # Identifies the unique reference of the proposal.
-  reference: String!
 
   # The kind of contribution.
   kind: String!
@@ -3652,6 +3637,9 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
 
   # The publication status for this proposal.
   publicationStatus: ProposalPublicationStatus!
+
+  # The unique reference of proposal
+  reference: String!
 
   # Identifies the body of the contribution rendered to text.
   bodyText: String!
@@ -3780,9 +3768,6 @@ type ProposalForm implements Node & UniformResourceLocatable {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters proposals with the given trashed status.
-    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
-
     # If non-null, filters proposals with the given district.
     district: ID
 
@@ -3812,6 +3797,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -3981,9 +3969,6 @@ interface ProposalStep {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters proposals with the given trashed status.
-    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
-
     # If non-null, filters proposals with the given district.
     district: ID
 
@@ -4013,6 +3998,9 @@ interface ProposalStep {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -4384,9 +4372,6 @@ type Query {
 
 # Fetches an object given its ID
 interface Question {
-  # The ID of an object
-  id: ID!
-
   # Identifies the question title.
   title: String!
 
@@ -4407,6 +4392,9 @@ interface Question {
     # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ResponseConnection!
+
+  # The ID of an object
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -5200,9 +5188,6 @@ enum SectionOrderBy {
 
 # A section is just a title in a quiz without any possible answer.
 type SectionQuestion implements Question & Node {
-  # The ID of an object
-  id: ID!
-
   # Identifies the question title.
   title: String!
 
@@ -5223,6 +5208,9 @@ type SectionQuestion implements Question & Node {
     # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ResponseConnection!
+
+  # The ID of an object
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -5322,9 +5310,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters proposals with the given trashed status.
-    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
-
     # If non-null, filters proposals with the given district.
     district: ID
 
@@ -5354,6 +5339,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -5474,9 +5462,6 @@ type SetEvaluationFormInProposalFormPayload {
 
 # A simple question
 type SimpleQuestion implements Question & Node {
-  # The ID of an object
-  id: ID!
-
   # Identifies the question title.
   title: String!
 
@@ -5497,6 +5482,9 @@ type SimpleQuestion implements Question & Node {
     # Get responses with user not confirmed
     withNotConfirmedUser: Boolean = false
   ): ResponseConnection!
+
+  # The ID of an object
+  id: ID!
   number: Int!
   type: QuestionTypeValue!
 
@@ -6378,24 +6366,6 @@ type User implements Node & UniformResourceLocatable {
   # Whether or not this user is the authenticated user.
   isViewer: Boolean!
 
-  # The type of the person.
-  userType: UserType
-
-  # The responses answered by user.
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
-
   # Expose Primary Key, do not use it, except for testing purpose.
   _id: ID
 
@@ -6477,6 +6447,9 @@ type User implements Node & UniformResourceLocatable {
   postCommentsCount: Int!
   eventCommentsCount: Int!
   projectsCount: Int!
+
+  # The type of the person.
+  userType: UserType
 
   # Is user accepted the external communication during the registration.
   consentExternalCommunication: Boolean!
@@ -6661,6 +6634,21 @@ type User implements Node & UniformResourceLocatable {
     # Returns the last `n` elements from the list.
     last: Int
   ): ArgumentConnection!
+
+  # The responses answered by user.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ResponseConnection!
 }
 
 # A connection to a list of items.
@@ -6732,8 +6720,6 @@ type ValueResponse implements Response {
 
   # The response value which can be a string or a JSON.
   value: String
-
-  # The response value formatted.
   formattedValue: String
 }
 

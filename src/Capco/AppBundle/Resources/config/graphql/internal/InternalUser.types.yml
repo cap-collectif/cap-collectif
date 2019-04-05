@@ -1,7 +1,7 @@
 InternalUser:
   type: object
   inherits:
-    - PreviewUser
+    - PublicUser
     - InternalPrimaryKey
     - UniformResourceLocatable
   config:
@@ -156,6 +156,9 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventCommentsCountResolver", [value])'
       projectsCount:
         type: 'Int!'
+      userType:
+        type: 'UserType'
+        description: 'The type of the person.'
       consentExternalCommunication:
         type: 'Boolean!'
         description: 'Is user accepted the external communication during the registration.'
@@ -308,5 +311,8 @@ InternalUser:
         argsBuilder: 'Relay::Connection'
       responses:
         type: 'InternalResponseConnection!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserResponsesResolver", [value])'
+        description: 'The responses answered by user.'
+        argsBuilder: 'Relay::Connection'
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserUrlResolver", [value])'

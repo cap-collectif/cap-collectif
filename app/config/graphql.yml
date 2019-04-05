@@ -38,7 +38,7 @@ overblog_graphql:
         types:
           - PublicConsultation
           - PublicQuestionnaire
-      # This is our preview schema (for beta testers)
+      # This is our preview schema
       preview:
         query: PreviewQuery
         #mutation: PreviewMutation
@@ -46,7 +46,7 @@ overblog_graphql:
         # by graphql-php during static schema analysis.
         # These types names should be explicitly declare here
         types:
-          - PreviewConsultation
+          - PublicConsultation
           - PreviewQuestionnaire
           - PreviewProject
           - PreviewEvent
@@ -59,7 +59,7 @@ overblog_graphql:
           - PreviewMultipleChoiceQuestion
           - PreviewSectionQuestion
           - PreviewMediaQuestion
-      # This is our internal schema (used by our own clients)
+      # This is our internal schema (used by our clients)
       internal:
         query: InternalQuery
         mutation: InternalMutation

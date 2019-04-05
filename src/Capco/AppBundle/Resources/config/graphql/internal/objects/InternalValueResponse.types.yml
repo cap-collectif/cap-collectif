@@ -10,3 +10,6 @@ InternalValueResponse:
     fields:
       question:
         type: 'InternalQuestion!'
+      formattedValue:
+        type: 'String'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\FormattedValueResponseTypeResolver", [value])'

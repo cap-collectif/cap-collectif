@@ -109,6 +109,10 @@ InternalProposal:
         type: 'ProposalPublicationStatus!'
         description: 'The publication status for this proposal.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPublicationStatusResolver", [value])'
+      reference:
+        type: 'String!'
+        description: 'The unique reference of proposal'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReferenceResolver", [value])'
       bodyText:
         type: 'String!'
         description: 'Identifies the body of the contribution rendered to text.'
