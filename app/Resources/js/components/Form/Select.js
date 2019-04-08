@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 
 type Options = Array<{ value: string, label: string }>;
 type Value = string | Array<{ value: string }>;
-type OnChangeInput = { value: string } | Array<{ value: string }>;
+type OnChangeInput = Array<{ value: string }>;
 type Props = {
   input: {
     name: string,
@@ -31,6 +31,7 @@ type Props = {
   onChange: () => void,
   labelClassName?: string,
   inputClassName?: string,
+  isAdminField?: boolean,
 };
 
 const ClearIndicator = props => {
@@ -79,6 +80,7 @@ class renderSelect extends React.Component<Props> {
       placeholder,
       loadOptions,
       filterOption,
+      isAdminField,
       id,
       help,
       meta: { touched, error },
@@ -100,7 +102,6 @@ class renderSelect extends React.Component<Props> {
         options && options.filter(option => option && option.value && option.value === value);
       selectValue = value ? selectLabel && selectLabel[0] : null;
     }
-
     return (
       <div className="form-group">
         {label && (
@@ -136,7 +137,7 @@ class renderSelect extends React.Component<Props> {
                 if (typeof onChange === 'function') {
                   onChange();
                 }
-                if (multi && Array.isArray(newValue)) {
+                if ((multi && Array.isArray(newValue)) || isAdminField) {
                   input.onChange(newValue);
                   return;
                 }
@@ -170,7 +171,7 @@ class renderSelect extends React.Component<Props> {
                 if (typeof onChange === 'function') {
                   onChange();
                 }
-                if (multi && Array.isArray(newValue)) {
+                if ((multi && Array.isArray(newValue)) || isAdminField) {
                   return input.onChange(newValue);
                 }
                 if (!Array.isArray(newValue)) {

@@ -487,7 +487,6 @@ class ProposalMutation implements ContainerAwareInterface
             }
             $form->remove('author');
         }
-
         $this->logger->info(__METHOD__ . ' : ' . var_export($values, true));
         $form->submit($values, false);
 

@@ -13,6 +13,9 @@ type Props = {
   inputClassName: ?string,
   placeholder: ?string,
   userListToNoSearch?: ?Array<string>,
+  disabled?: boolean,
+  isAdminField?: boolean,
+  multi?: boolean,
 };
 
 export default class UserListField extends React.Component<Props> {
@@ -47,6 +50,9 @@ export default class UserListField extends React.Component<Props> {
       inputClassName,
       placeholder,
       userListToNoSearch,
+      disabled,
+      isAdminField,
+      multi,
     } = this.props;
 
     const retrieveUsersList = (usersIds: ?Array<string>, terms: ?string) => {
@@ -80,7 +86,10 @@ export default class UserListField extends React.Component<Props> {
         labelClassName={labelClassName}
         inputClassName={inputClassName}
         placeholder={placeholder}
-        multi
+        multi={multi}
+        autoload
+        disabled={disabled}
+        isAdminField={isAdminField}
         component={select}
         clearable={false}
         loadOptions={terms => retrieveUsersList(userListToNoSearch, terms)}
