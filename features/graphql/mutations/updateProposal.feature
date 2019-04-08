@@ -313,7 +313,7 @@ Scenario: Super Admin GraphQL client wants to update a proposal
               "title":"NewTitle",
               "body":"NewBody",
               "author":{
-                 "_id":"user5"
+                 "_id":"userAdmin"
               },
               "theme":{
                  "id":"theme1"
