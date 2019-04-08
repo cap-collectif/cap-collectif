@@ -141,7 +141,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         }
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
