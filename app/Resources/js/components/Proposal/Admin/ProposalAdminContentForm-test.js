@@ -12,7 +12,7 @@ describe('<ProposalAdminContentForm />', () => {
     features,
     handleSubmit: jest.fn(),
     intl: intlMock,
-    isSuperAdmin: true,
+    isAdmin: true,
     themes: [{ id: 'theme-1', title: 'Theme 1' }, { id: 'theme-2', title: 'Theme 2' }],
     proposal: {
       $refType,

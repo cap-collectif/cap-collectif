@@ -14,7 +14,7 @@ type Props = {
   placeholder: ?string,
   userListToNoSearch?: ?Array<string>,
   disabled?: boolean,
-  isAdminField?: boolean,
+  selectFieldIsObject?: boolean,
   multi?: boolean,
 };
 
@@ -51,7 +51,7 @@ export default class UserListField extends React.Component<Props> {
       placeholder,
       userListToNoSearch,
       disabled,
-      isAdminField,
+      selectFieldIsObject,
       multi,
     } = this.props;
 
@@ -89,7 +89,7 @@ export default class UserListField extends React.Component<Props> {
         multi={multi}
         autoload
         disabled={disabled}
-        isAdminField={isAdminField}
+        selectFieldIsObject={selectFieldIsObject}
         component={select}
         clearable={false}
         loadOptions={terms => retrieveUsersList(userListToNoSearch, terms)}

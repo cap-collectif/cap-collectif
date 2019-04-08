@@ -56,13 +56,13 @@ type Props = {|
   +themes: Array<{ id: Uuid, title: string }>,
   +features: FeatureToggles,
   +intl: IntlShape,
-  +isSuperAdmin: boolean,
+  +isAdmin: boolean,
   +responses: ResponsesInReduxForm,
 |};
 
 const formName = 'proposal-admin-edit';
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdmin }: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isAdmin }: Props) => {
   const input = {
     title: values.title,
     summary: values.summary,
@@ -74,7 +74,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdm
     draft: values.draft,
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
     responses: formatSubmitResponses(values.responses, proposal.form.questions),
-    author: isSuperAdmin && values.author ? values.author.value : undefined,
+    author: isAdmin && values.author ? values.author.value : undefined,
     id: proposal.id,
   };
 
@@ -173,7 +173,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
       proposal,
       features,
       submitting,
-      isSuperAdmin,
+      isAdmin,
       themes,
       handleSubmit,
       intl,
@@ -311,14 +311,14 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               }
             />
             <UserListField
-              disabled={!isSuperAdmin}
+              disabled={!isAdmin}
               id="proposal-admin-author"
               name="author"
               label="Auteur"
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
               placeholder="Auteur"
-              isAdminField
+              selectFieldIsObject
               multi={false}
             />
             {features.themes && form.usingThemes && (
@@ -458,7 +458,7 @@ const form = reduxForm({
 })(ProposalAdminContentForm);
 
 const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => ({
-  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  isAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_ADMIN')),
   features: state.default.features,
   themes: state.default.themes,
   initialValues: {

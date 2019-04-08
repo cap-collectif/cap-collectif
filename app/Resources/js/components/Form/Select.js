@@ -31,7 +31,7 @@ type Props = {
   onChange: () => void,
   labelClassName?: string,
   inputClassName?: string,
-  isAdminField?: boolean,
+  selectFieldIsObject?: boolean,
 };
 
 const ClearIndicator = props => {
@@ -80,7 +80,7 @@ class renderSelect extends React.Component<Props> {
       placeholder,
       loadOptions,
       filterOption,
-      isAdminField,
+      selectFieldIsObject,
       id,
       help,
       meta: { touched, error },
@@ -137,7 +137,7 @@ class renderSelect extends React.Component<Props> {
                 if (typeof onChange === 'function') {
                   onChange();
                 }
-                if ((multi && Array.isArray(newValue)) || isAdminField) {
+                if ((multi && Array.isArray(newValue)) || selectFieldIsObject) {
                   input.onChange(newValue);
                   return;
                 }
@@ -171,7 +171,7 @@ class renderSelect extends React.Component<Props> {
                 if (typeof onChange === 'function') {
                   onChange();
                 }
-                if ((multi && Array.isArray(newValue)) || isAdminField) {
+                if ((multi && Array.isArray(newValue)) || selectFieldIsObject) {
                   return input.onChange(newValue);
                 }
                 if (!Array.isArray(newValue)) {
