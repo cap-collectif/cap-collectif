@@ -33,12 +33,12 @@ const devConf = {
         webpackConfig.nodeModulesDir,
         'bootstrap-sass/assets/javascripts/bootstrap/tooltip.js',
       ),
-      path.join(webpackConfig.nodeModulesDir, 'es6-promise/lib/es6-promise.js'),
-      path.join(webpackConfig.nodeModulesDir, 'fetch/fetch.js'),
       path.join(webpackConfig.appDir, 'Resources/js/jsapi.js'),
+      path.join(webpackConfig.nodeModulesDir, 'fetch/fetch.js'),
+      path.join(webpackConfig.appDir, 'Resources/js/modernizr.js'),
       path.join(webpackConfig.appDir, 'Resources/js/googleCharts.js'),
       path.join(webpackConfig.appDir, 'Resources/js/browserUpdate.js'),
-      path.join(webpackConfig.appDir, 'Resources/js/modernizr.js'),
+      path.join(webpackConfig.nodeModulesDir, 'es6-promise/lib/es6-promise.js'),
     ],
 
     // Main file for JS/CSS
@@ -48,6 +48,7 @@ const devConf = {
       path.join(webpackConfig.appDir, 'Resources/js/registration.js'),
       path.join(webpackConfig.nodeModulesDir, 'react-toggle/style.css'),
       path.join(webpackConfig.nodeModulesDir, 'leaflet/dist/leaflet.css'),
+      path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),
       path.join(webpackConfig.appDir, 'Resources/assets/js/fancybox/jquery.fancybox.css'),
     ],
 
@@ -59,7 +60,6 @@ const devConf = {
     'style-admin': [
       path.join(webpackConfig.nodeModulesDir, 'react-toggle/style.css'),
       path.join(webpackConfig.appDir, 'Resources/scss/style-admin.scss'),
-      path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),
       path.join(webpackConfig.nodeModulesDir, 'react-datetime/css/react-datetime.css'),
       path.join(webpackConfig.nodeModulesDir, 'jquery-minicolors/jquery.minicolors.css'),
