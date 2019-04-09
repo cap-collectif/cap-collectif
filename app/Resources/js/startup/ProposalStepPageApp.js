@@ -6,8 +6,8 @@ import IntlProvider from './IntlProvider';
 import ProposalStepPage from '../components/Page/ProposalStepPage';
 
 type Props = {|
-  +stepId: string,
-  +count: number,
+  stepId: string,
+  count: number,
 |};
 
 const mainNode = (props: Props) => {
@@ -15,7 +15,7 @@ const mainNode = (props: Props) => {
 
   return (
     <Provider store={store}>
-      <IntlProvider timeZone={window.timeZone}>
+      <IntlProvider>
         {/* $FlowFixMe  */}
         <ProposalStepPage {...props} />
       </IntlProvider>

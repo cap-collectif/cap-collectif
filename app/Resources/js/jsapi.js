@@ -118,10 +118,10 @@ if (!window['google']['loader']) {
             (!E('msie') && !E('safari') && !E('konqueror') && E('mozilla')) || d.opera
               ? d.addEventListener('DOMContentLoaded', R, !1)
               : E('msie')
-              ? h.write(
-                  "<script defer onreadystatechange='google.loader.domReady()' src=//:>\x3c/script>",
-                )
-              : (E('safari') || E('konqueror')) && d[v](aa, 10)),
+                ? h.write(
+                    "<script defer onreadystatechange='google.loader.domReady()' src=//:>\x3c/script>",
+                  )
+                : (E('safari') || E('konqueror')) && d[v](aa, 10)),
           P[z](a))
         : Q(d, 'load', a);
     };
@@ -366,8 +366,8 @@ if (!window['google']['loader']) {
           a.params[f]
             ? (e += `&${X(a.params[f], c[f])}`)
             : 'other_params' == f
-            ? (e += `&${c[f]}`)
-            : 'base_domain' == f && (b = `http://${c[f]}${a.uri[x](a.uri[u]('/', 7))}`);
+              ? (e += `&${c[f]}`)
+              : 'base_domain' == f && (b = `http://${c[f]}${a.uri[x](a.uri[u]('/', 7))}`);
       google[this[n]] = {};
       -1 == b[u]('?') && e && (e = `?${e[x](1)}`);
       return b + e;

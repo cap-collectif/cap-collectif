@@ -64,7 +64,7 @@ export class NavbarRight extends React.Component<Props> {
             )}
             {features.profiles && (
               <MenuItem key={3.2} eventKey={3.2} href={`/profile/${user.uniqueId}`}>
-                <i className="cap cap-id-8 mr-10" aria-hidden="true" />
+                <i className="cap cap-id-8 mr-10" aria-hidden="true"/>
                 <FormattedMessage id="navbar.profile" />
               </MenuItem>
             )}
@@ -74,16 +74,19 @@ export class NavbarRight extends React.Component<Props> {
                 <FormattedMessage id="evaluations.index.page_title" />
               </MenuItem>
             )}
-            <MenuItem
-              key={3.4}
-              eventKey={3.4}
-              href={`/profile/${features.profiles ? 'edit-profile' : 'edit-profile#account'}`}>
-              <i className="cap cap-setting-adjustment mr-10" aria-hidden="true" />
-              <FormattedMessage id="navbar.user_settings" />
-            </MenuItem>
-            <MenuItem key={3.5} divider aria-hidden="true" />
+              <MenuItem
+                key={3.4}
+                eventKey={3.4}
+                href={`/profile/${features.profiles ? 'edit-profile' : 'edit-profile#account'}`}>
+                <i
+                  className="cap cap-setting-adjustment mr-10"
+                  aria-hidden="true"
+                />
+                <FormattedMessage id="navbar.user_settings" />
+              </MenuItem>
+              <MenuItem key={3.5} divider aria-hidden="true" />
             <MenuItem key={3.6} eventKey={3.6} id="logout-button" onClick={this.logout}>
-              <i className="cap cap-power-1 mr-10" aria-hidden="true" />
+              <i className="cap cap-power-1 mr-10" aria-hidden="true"/>
               <FormattedMessage id="global.logout" />
             </MenuItem>
           </NavDropdown>

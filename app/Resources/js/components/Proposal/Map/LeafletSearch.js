@@ -6,7 +6,7 @@ import config from '../../../config';
 
 type Props = {
   intl: IntlShape,
-  messageSearch: ?string,
+  messageSearch: ?string
 };
 
 export class LeafletSearch extends MapControl<Props> {

@@ -374,10 +374,16 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException($error);
         }
 
+        $serializer = $this->get('serializer');
+
+        $stepProps = $serializer->serialize(['step' => $currentStep], 'json', [
+            'groups' => ['ConsultationSteps', 'Steps', 'UserVotes'],
+        ]);
+
         return [
             'project' => $project,
             'currentStep' => $currentStep,
-            'stepProps' => ['id' => GlobalId::toGlobalId('Consultation', $currentStep->getId())],
+            'stepProps' => $stepProps,
         ];
     }
 }

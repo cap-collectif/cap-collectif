@@ -45,9 +45,10 @@ class ElementTitle extends React.Component<Props> {
       return (
         <span style={style} className={className} onClick={onClick}>
           {this.renderTitle()}
-          {this.props.className === '' && element.childrenCount > 0 && (
-            <span style={{ color: 'black' }}>{` (${element.childrenCount})`}</span>
-          )}
+          {this.props.className === '' &&
+            element.childrenCount > 0 && (
+              <span style={{ color: 'black' }}>{` (${element.childrenCount})`}</span>
+            )}
         </span>
       );
     }

@@ -6,12 +6,12 @@ import type { ConsultationPlanItem_section } from '~relay/ConsultationPlanItem_s
 import config from '../../config';
 import type { State } from '../../types';
 
-type Props = {|
-  +section: ConsultationPlanItem_section,
-  +level: number,
-  +activeItems: Array<string>,
-  +onCollapse: (collapseItem: boolean) => {},
-|};
+type Props = {
+  section: ConsultationPlanItem_section,
+  level: number,
+  activeItems: Array<string>,
+  onCollapse: (collapseItem: boolean) => {},
+};
 
 export class ConsultationPlanItem extends React.Component<Props> {
   constructor(props: Props) {

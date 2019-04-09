@@ -41,7 +41,7 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
   };
 
   render() {
-    const { isLink, analyticsJs, adJs, bannerTrad, cookieTrad } = this.props;
+    const { isLink, analyticsJs, adJs, bannerTrad,cookieTrad } = this.props;
     const { showModal } = this.state;
     return (
       <div className="cookie-manager">

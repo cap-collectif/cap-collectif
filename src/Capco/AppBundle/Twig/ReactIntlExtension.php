@@ -19,19 +19,11 @@ class ReactIntlExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return [
-            new \Twig_SimpleFunction('intl_locale', [$this, 'getLocale']),
-            new \Twig_SimpleFunction('intl_timeZone', [$this, 'getTimeZone'])
-        ];
+        return [new \Twig_SimpleFunction('intl_locale', [$this, 'getLocale'])];
     }
 
     public function getLocale(): string
     {
         return $this->resolver->getValue('global.locale');
-    }
-
-    public function getTimeZone(): string
-    {
-        return $this->resolver->getValue('global.timezone');
     }
 }

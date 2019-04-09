@@ -3,14 +3,14 @@ import * as React from 'react';
 import { Collapse, Nav } from 'react-bootstrap';
 import ConsultationPlanItem from './ConsultationPlanItem';
 
-type Props = {|
-  +section: Object,
-  +level: number,
-|};
+type Props = {
+  section: Object,
+  level: number,
+};
 
-type State = {|
-  +isOpen: boolean,
-|};
+type State = {
+  isOpen: boolean,
+};
 
 export class ConsultationPlanItems extends React.Component<Props, State> {
   state = {
@@ -26,7 +26,6 @@ export class ConsultationPlanItems extends React.Component<Props, State> {
 
     return (
       <Nav>
-        {/* Using `li` instead of here NavItem throws a warning, we well see with react-bootstrap 4 */}
         <li>
           <ConsultationPlanItem
             section={section}

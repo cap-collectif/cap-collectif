@@ -5,8 +5,8 @@ export const scrollToAnchor = (fallback?: string) => {
     const element = document.querySelector(hash)
       ? document.querySelector(hash)
       : fallback
-      ? document.querySelector(fallback)
-      : null;
+        ? document.querySelector(fallback)
+        : null;
     if (element) {
       element.scrollIntoView(false);
     }

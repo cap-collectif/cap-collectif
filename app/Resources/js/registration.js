@@ -1,5 +1,5 @@
 // @flow
-import moment from 'moment-timezone';
+import moment from 'moment';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactOnRails from 'react-on-rails';
@@ -86,9 +86,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Use window.locale to set the current locale data
-const { locale, timeZone } = window;
-moment.tz.setDefault(timeZone);
-
+const { locale } = window;
 if (locale) {
   let localeData = frLocaleData;
   switch (locale) {

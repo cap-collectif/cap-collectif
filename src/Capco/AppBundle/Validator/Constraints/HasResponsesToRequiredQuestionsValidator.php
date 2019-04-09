@@ -35,6 +35,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                     ->atPath('responses')
                     ->setParameter('missing', $question->getId())
                     ->addViolation();
+
                 return;
             }
         }
@@ -67,7 +68,10 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                     return true;
                 }
 
-                if (\is_array($value) && \count($value['labels']) > 0) {
+                if (
+                    \is_array($value) &&
+                    (\count($value['labels']) > 0 || null !== $value['other'])
+                ) {
                     return true;
                 }
                 if (\is_string($value) && '' !== $value) {

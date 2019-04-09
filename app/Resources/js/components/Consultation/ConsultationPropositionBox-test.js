@@ -6,20 +6,37 @@ import { ConsultationPropositionBox } from './ConsultationPropositionBox';
 
 describe('<ConsultationPropositionBox />', () => {
   const props = {
-    id: 'stepId',
+    step: {
+      id: 'stepId',
+      title: 'stepTitle',
+      startAt: '2014-08-14T00:00:00+0200',
+      endAt: '2014-09-27T00:00:00+0200',
+      timeless: false,
+      status: 'OPENED',
+    },
     dispatch: jest.fn(),
     showConsultationPlan: true,
     isAuthenticated: false,
   };
 
+  const consultationPlanIsEnabled = {
+    consultationPlanEnabled: true,
+  };
+
+  const consultationPlanIsNotEnabled = {
+    consultationPlanEnabled: false,
+  };
+
   it('renders correctly with plan', () => {
-    const wrapper = shallow(<ConsultationPropositionBox {...props} consultationPlanEnabled />);
+    const wrapper = shallow(
+      <ConsultationPropositionBox {...consultationPlanIsEnabled} {...props} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly without plan', () => {
     const wrapper = shallow(
-      <ConsultationPropositionBox {...props} consultationPlanEnabled={false} />,
+      <ConsultationPropositionBox {...consultationPlanIsNotEnabled} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

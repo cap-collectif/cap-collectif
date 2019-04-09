@@ -4,17 +4,72 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
 <div
   className="row"
 >
-  <ReactRelayQueryRenderer
-    environment={"RelayModernEnvironment()"}
-    query={[Function]}
-    render={[Function]}
-    variables={
-      Object {
-        "consultationId": "stepId",
-        "isAuthenticated": false,
+  <div
+    className="consultation-plan sticky col-md-3 col-sm-12"
+    id="consultation-plan"
+  >
+    <ConsultationPlan
+      step={
+        Object {
+          "endAt": "2014-09-27T00:00:00+0200",
+          "id": "stepId",
+          "startAt": "2014-08-14T00:00:00+0200",
+          "status": "OPENED",
+          "timeless": false,
+          "title": "stepTitle",
+        }
       }
-    }
-  />
+    />
+  </div>
+  <div
+    className="col-md-9"
+    id="scroll-content"
+  >
+    <h2
+      className="text-center"
+    >
+      stepTitle
+    </h2>
+    <div
+      className="mb-30 project__step-dates text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-calendar-2-1"
+        />
+         
+        <DatesInterval
+          endAt="2014-09-27T00:00:00+0200"
+          fullDay={true}
+          startAt="2014-08-14T00:00:00+0200"
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-hourglass-1"
+        />
+         
+        <RemainingTime
+          endAt="2014-09-27T00:00:00+0200"
+        />
+      </div>
+    </div>
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={[Function]}
+      render={[Function]}
+      variables={
+        Object {
+          "consultationId": "stepId",
+          "isAuthenticated": false,
+        }
+      }
+    />
+  </div>
 </div>
 `;
 
@@ -22,16 +77,54 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
 <div
   className="row"
 >
-  <ReactRelayQueryRenderer
-    environment={"RelayModernEnvironment()"}
-    query={[Function]}
-    render={[Function]}
-    variables={
-      Object {
-        "consultationId": "stepId",
-        "isAuthenticated": false,
+  <div
+    className="col-md-10 col-md-offset-1"
+    id="scroll-content"
+  >
+    <h2
+      className="text-center"
+    >
+      stepTitle
+    </h2>
+    <div
+      className="mb-30 project__step-dates text-center"
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-calendar-2-1"
+        />
+         
+        <DatesInterval
+          endAt="2014-09-27T00:00:00+0200"
+          fullDay={true}
+          startAt="2014-08-14T00:00:00+0200"
+        />
+      </div>
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-hourglass-1"
+        />
+         
+        <RemainingTime
+          endAt="2014-09-27T00:00:00+0200"
+        />
+      </div>
+    </div>
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={[Function]}
+      render={[Function]}
+      variables={
+        Object {
+          "consultationId": "stepId",
+          "isAuthenticated": false,
+        }
       }
-    }
-  />
+    />
+  </div>
 </div>
 `;
