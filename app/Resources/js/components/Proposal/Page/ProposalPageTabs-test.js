@@ -26,6 +26,10 @@ describe('<ProposalPageTabs />', () => {
     project: {
       opinionCanBeFollowed: true,
     },
+    form: {
+      usingThemes: true,
+      usingCategories: true,
+    },
   };
 
   const props = {
@@ -39,10 +43,6 @@ describe('<ProposalPageTabs />', () => {
     step: {
       $refType,
       $fragmentRefs,
-      form: {
-        usingThemes: true,
-        usingCategories: true,
-      },
     },
     features: {
       ...features,
