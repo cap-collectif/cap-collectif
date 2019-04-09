@@ -15,8 +15,8 @@ coverage:
       default: off
       jest:
         flags: jest
-        target: auto
-        threshold: null
+        target: 70%
+        threshold: 0
       php:
         flags: php
         target: 0
@@ -29,7 +29,7 @@ coverage:
       default: off
       jest:
         flags: jest
-        target: 35
+        target: auto
       php:
         flags: php
         target: 1
