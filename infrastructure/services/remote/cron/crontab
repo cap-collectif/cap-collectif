@@ -1,34 +1,42 @@
 # /etc/cron.d/crontab
 
-# Recalculate counters that have changed every 2 minutes
+### Please go here to check your values :
+### Go use https://crontab.guru
+
+
+# Recalculate counters that have changed at every 2nd minute.
 */2 * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --env=prod
+
+# Recalculate counters that have changed at every 2nd minute from 1 through 59.
 1-59/2 * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:counters --env=prod
 
-# Recalculate rankings
+# Recalculate rankings at every 5th minute.
 */5 * * * * /usr/bin/timeout 4m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:rankings --env=prod
 
-# Recalculate the counters from scratch
+# Recalculate users counters from scratch at 04:00.
 0 4 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --force --env=prod
+
+# Recalculate counters from scratch at 05:00.
 0 5 * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:counters --force --env=prod
 
-# Update synthesis data (disabled for now)
+# Update synthesis data (disabled for now).
 #0 4 * * * /usr/bin/timeout 2h /usr/local/bin/gosu capco php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:update --env=prod
 #0 3 * * * /usr/bin/timeout 2h /usr/local/bin/gosu capco php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:counters --env=prod
 
-# Generate exports every hour
+# Generate exports at minute 0 every hour.
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:proposalStep --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:users --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:events --env=prod --quiet
 
-# Generate export for projects contributors every 10 hours
-0 0 0/10 1/1 * ? * /usr/bin/timeout 480m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:projects-contributors --env=prod --quiet
+# At minute 0 past every 12th hour.
+0 */12 * * * /usr/bin/timeout 480m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:projects-contributors --env=prod --quiet
 
-# Remind users to confirm their account every hour
+# Remind users to confirm their account at minute 0 every hour.
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:remind-user-account-confirmation --env=prod
 
-# Delete user archives every hour
+# Delete user archives at minute 0 every hour.
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:user_archives:delete --env=prod
 
 # Send activities email to follower, every day at 9 AM

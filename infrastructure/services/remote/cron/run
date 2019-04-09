@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 function test_phpfpm {
   /etc/init.d/php7.1-fpm status > /dev/null
@@ -25,7 +26,8 @@ env | while read -r LINE; do
     echo "${VAR} DEFAULT=\"${VAL}\"" >> /etc/security/pam_env.conf
 done
 
-echo "[$(date -u)][CRONTAB] Started!"
+echo "[$(date -u)][CRONTAB] Installing…"
 crontab -uroot /etc/cron.d/crontab
 
+echo "[$(date -u)][CRONTAB] Started!"
 exec cron -f
