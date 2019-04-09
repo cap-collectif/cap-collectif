@@ -272,4 +272,8 @@ RUN yarn global add bower@1.8.8 babel-cli \
     && gosu capco yarn cache clean \
     && rm -rf node_modules bower_components
 
+# Install crontab
+RUN set -ex; \
+    crontab /etc/cron.d/crontab
+
 CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]
