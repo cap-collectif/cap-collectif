@@ -458,7 +458,10 @@ const form = reduxForm({
 })(ProposalAdminContentForm);
 
 const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => ({
-  isAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_ADMIN')),
+  isAdmin: !!(
+    (state.user.user && state.user.user.roles.includes('ROLE_ADMIN')) ||
+    (state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'))
+  ),
   features: state.default.features,
   themes: state.default.themes,
   initialValues: {

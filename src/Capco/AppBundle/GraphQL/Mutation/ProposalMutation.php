@@ -478,9 +478,9 @@ class ProposalMutation implements ContainerAwareInterface
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
         ]);
 
-        if (!$user->isSuperAdmin()) {
+        if (!$user->isAdmin()) {
             if (isset($values['author'])) {
-                $error = 'Only a user with role ROLE_SUPER_ADMIN can update an author.';
+                $error = 'Only a user with role ROLE_ADMIN can update an author.';
                 $this->logger->error($error);
                 // For now we only log an error and unset the submitted value…
                 unset($values['author']);
