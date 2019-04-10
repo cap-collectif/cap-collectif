@@ -8,14 +8,14 @@ import type { ProposalResponse_response } from '~relay/ProposalResponse_response
 import PrivateBox from '../../Ui/Boxes/PrivateBox';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
-type Props = {|
-  +response: ProposalResponse_response,
-|};
+type Props = {
+  response: ProposalResponse_response,
+};
 
-type RadioType = {|
-  +labels: [string],
-  +other: string,
-|};
+type radioLabelsType = {
+  labels: [string],
+  other: string,
+};
 
 export class ProposalResponse extends React.PureComponent<Props> {
   isHTML = () => {
@@ -23,7 +23,7 @@ export class ProposalResponse extends React.PureComponent<Props> {
     return response.value && /<[a-z][\s\S]*>/i.test(response.value);
   };
 
-  renderUniqueLabel = (radioLabels: ?RadioType) => {
+  renderUniqueLabel = (radioLabels: radioLabelsType) => {
     if (!radioLabels) {
       return null;
     }
@@ -53,9 +53,13 @@ export class ProposalResponse extends React.PureComponent<Props> {
   };
 
   render() {
-    const { response } = this.props;
+    const response = this.props.response;
     const questionType = response.question.type;
-    const responseWithJSON = response.question.__typename === 'MultipleChoiceQuestion';
+    const responseWithJSON =
+      questionType === 'button' ||
+      questionType === 'radio' ||
+      questionType === 'checkbox' ||
+      questionType === 'ranking';
     const defaultEditorEmptyValue = '<p><br></p>';
     let value = '';
 
@@ -76,16 +80,7 @@ export class ProposalResponse extends React.PureComponent<Props> {
     }
 
     if (responseWithJSON && response.value) {
-      let responseValue = null;
-      try {
-        responseValue = JSON.parse(response.value);
-      } catch (e) {
-        // console.error('Could not parse JSON.');
-      }
-      if (!responseValue) {
-        // In case JSON is not valid, we show an empty response.
-        return this.getEmptyResponseValue();
-      }
+      const responseValue = JSON.parse(response.value);
       const labelsValue = responseValue.labels.filter(el => el != null);
       const otherValue = responseValue.other;
 
@@ -169,7 +164,6 @@ export default createFragmentContainer(
   graphql`
     fragment ProposalResponse_response on Response {
       question {
-        __typename
         ...responsesHelper_question @relay(mask: false)
       }
       ... on ValueResponse {

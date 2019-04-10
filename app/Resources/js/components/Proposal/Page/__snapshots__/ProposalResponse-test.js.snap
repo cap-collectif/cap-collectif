@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalResponse /> should render a not valid JSON radio response 1`] = `
+exports[`<ProposalResponse /> should render correct with empty answer 1`] = `
 <div
   className="block"
 >
   <h3
     className="h3"
   >
-    Etes vous ok et dispo pour l'entretenir vous même ?
+    Question invisible?
   </h3>
   <p
     className="excerpt"
@@ -20,60 +20,14 @@ exports[`<ProposalResponse /> should render a not valid JSON radio response 1`] 
 </div>
 `;
 
-exports[`<ProposalResponse /> should render a number response 1`] = `
-<PrivateBox
-  divClassName="block"
-  message="global.form.private"
-  show={false}
->
-  <div>
-    <h3
-      className="h3"
-    >
-      Coût (estimation)
-    </h3>
-    <p>
-      300
-    </p>
-  </div>
-</PrivateBox>
-`;
-
-exports[`<ProposalResponse /> should render a radio response 1`] = `
-<PrivateBox
-  divClassName="block"
-  message="global.form.private"
-  show={false}
->
-  <div>
-    <h3
-      className="h3"
-    >
-      Cet objet nécessite de l'entretien ?
-    </h3>
-    <p>
-      Non
-    </p>
-  </div>
-</PrivateBox>
-`;
-
-exports[`<ProposalResponse /> should render a section response 1`] = `
-<div>
-  <Connect(ComponentWithColors)>
-    Section
-  </Connect(ComponentWithColors)>
-</div>
-`;
-
-exports[`<ProposalResponse /> should render a select response 1`] = `
+exports[`<ProposalResponse /> should render correct with question type number 1`] = `
 <div
   className="block"
 >
   <h3
     className="h3"
   >
-    Zone de la terrasse concernée
+    Question type number ?
   </h3>
   <p
     className="excerpt"
@@ -84,23 +38,4 @@ exports[`<ProposalResponse /> should render a select response 1`] = `
     />
   </p>
 </div>
-`;
-
-exports[`<ProposalResponse /> should render a text response 1`] = `
-<PrivateBox
-  divClassName="block"
-  message="global.form.private"
-  show={false}
->
-  <div>
-    <h3
-      className="h3"
-    >
-      Référence
-    </h3>
-    <p>
-      Leroy merlin lisa
-    </p>
-  </div>
-</PrivateBox>
 `;
