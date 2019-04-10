@@ -149,6 +149,7 @@ export class EventListFilters extends React.Component<Props, State> {
         name="author"
         authorOfEvent
         clearable
+        autoload={false}
         labelClassName="control-label"
         inputClassName="fake-inputClassName"
         placeholder={intl.formatMessage({ id: 'project_download.label.author' })}

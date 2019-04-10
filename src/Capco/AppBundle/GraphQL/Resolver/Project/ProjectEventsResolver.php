@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 
-class ProjectEventResolver implements ResolverInterface
+class ProjectEventsResolver implements ResolverInterface
 {
     private $logger;
     private $eventRepository;

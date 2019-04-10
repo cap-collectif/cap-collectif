@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\UserBundle\Repository\UserRepository;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
@@ -17,7 +18,7 @@ class UserQueryResolver implements ResolverInterface
         $this->userRepo = $userRepo;
     }
 
-    public function __invoke(Argument $args)
+    public function __invoke(Argument $args): Connection
     {
         if (isset($args['id'])) {
             $paginator = new Paginator(function () use ($args) {

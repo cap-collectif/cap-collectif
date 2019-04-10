@@ -29,9 +29,9 @@ class UserSearch extends Search
 
     public function searchAllUsers(
         $terms = null,
-        $notInIds = [],
-        $authorsOfEventOnly = false,
-        $onlyUsers = false
+        ?array $notInIds = [],
+        bool $authorsOfEventOnly = false,
+        bool $onlyUsers = false
     ): array {
         $query = new Query\BoolQuery();
 
@@ -77,9 +77,9 @@ class UserSearch extends Search
 
     public function searchUsers(
         $terms = null,
-        $fields = [],
-        $notInIds = [],
-        $onlyUsers = false
+        ?array $fields = [],
+        ?array $notInIds = [],
+        bool $onlyUsers = false
     ): array {
         $query = new Query\BoolQuery();
 

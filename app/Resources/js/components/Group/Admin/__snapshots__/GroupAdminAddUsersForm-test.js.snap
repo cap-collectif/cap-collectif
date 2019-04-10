@@ -8,6 +8,7 @@ exports[`<GroupAdminAddUsersForm /> render correctly 1`] = `
     <UserListField
       ariaControls="GroupAdminAddUsersForm-filter-user-listbox"
       authorOfEvent={false}
+      autoload={false}
       className=""
       clearable={false}
       id="group-users-users"

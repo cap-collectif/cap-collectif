@@ -89,6 +89,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                   <UserListField
                     ariaControls="EventListFilters-filter-author-listbox"
                     authorOfEvent={true}
+                    autoload={false}
                     className=""
                     clearable={true}
                     id="EventListFilters-filter-authors"
@@ -311,6 +312,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                   <UserListField
                     ariaControls="EventListFilters-filter-author-listbox"
                     authorOfEvent={true}
+                    autoload={false}
                     className=""
                     clearable={true}
                     id="EventListFilters-filter-authors"

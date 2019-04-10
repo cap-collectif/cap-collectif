@@ -87,6 +87,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
           <UserListField
             ariaControls="ProposalAdminNotationForm-filter-user-listbox"
             authorOfEvent={false}
+            autoload={false}
             className=""
             clearable={false}
             id="likers"

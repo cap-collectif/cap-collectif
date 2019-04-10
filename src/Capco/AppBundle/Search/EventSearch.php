@@ -70,8 +70,8 @@ class EventSearch extends Search
                 // FUTURE and current
                 case self::LAST:
                     $dateBoolQuery = new Query\BoolQuery();
-                    $dateBoolQuery->addShould(new Query\Range('startAt', ['gt' => 'now/d']));
-                    $dateBoolQuery->addShould(new Query\Range('endAt', ['gt' => 'now/d']));
+                    $dateBoolQuery->addShould(new Query\Range('startAt', ['gte' => 'now/d']));
+                    $dateBoolQuery->addShould(new Query\Range('endAt', ['gte' => 'now/d']));
                     $boolQuery->addMust($dateBoolQuery);
 
                     break;
@@ -114,7 +114,7 @@ class EventSearch extends Search
         ];
     }
 
-    public function getAllAuthorOfEvent($terms): array
+    public function getAllAuthorOfEvent(string $terms = null): array
     {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(

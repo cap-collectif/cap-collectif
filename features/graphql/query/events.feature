@@ -36,7 +36,7 @@ Scenario: GraphQL client wants to list events
               },
               {
                  "node":{
-                    "_id":"evenementSansDateDeFin"
+                    "_id":"evenementPresentSansDateDeFin"
                  }
               },
               {

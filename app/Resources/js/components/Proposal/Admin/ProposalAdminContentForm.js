@@ -321,6 +321,8 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               placeholder="Auteur"
               selectFieldIsObject
               multi={false}
+              autoload={false}
+              clearable={false}
             />
             {features.themes && form.usingThemes && (
               <Field

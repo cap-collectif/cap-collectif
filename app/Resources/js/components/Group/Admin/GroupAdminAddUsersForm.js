@@ -71,6 +71,8 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
             placeholder={intl.formatMessage({ id: 'select-a-user' })}
             userListToNoSearch={usersInGroup}
             multi
+            autoload={false}
+            clearable={false}
           />
         </div>
       </form>

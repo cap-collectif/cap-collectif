@@ -18,7 +18,7 @@ type Props = {
   disabled?: boolean,
   selectFieldIsObject?: boolean,
   multi?: boolean,
-  autoload?: boolean,
+  autoload: boolean,
   authorOfEvent: boolean,
   clearable: boolean,
 };
@@ -27,7 +27,6 @@ export default class UserListField extends React.Component<Props> {
   static defaultProps = {
     className: '',
     authorOfEvent: false,
-    clearable: false,
   };
 
   render() {

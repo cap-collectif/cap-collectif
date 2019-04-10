@@ -262,6 +262,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
       <UserListField
         ariaControls="ProposalAdminContentForm-filter-user-listbox"
         authorOfEvent={false}
+        autoload={false}
         className=""
         clearable={false}
         disabled={false}

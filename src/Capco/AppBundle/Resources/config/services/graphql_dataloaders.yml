@@ -139,11 +139,3 @@ services:
       $cacheTtl: 120
       $debug: '%kernel.debug%'
       $enableCache: true
-
-  Capco\AppBundle\GraphQL\DataLoader\User\UserAuthorsOfEventDataLoader:
-    autowire: true
-    arguments:
-      $cachePrefix: UserAuthorsOfEventDataLoader
-      $cacheTtl: 60
-      $debug: '%kernel.debug%'
-      $enableCache: false
