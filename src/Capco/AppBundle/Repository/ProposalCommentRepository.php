@@ -76,15 +76,30 @@ class ProposalCommentRepository extends EntityRepository
         Project $project,
         int $first = 0,
         int $offset = 100,
-        bool $onlyTrashed = false
+        bool $onlyTrashed = false,
+        string $field,
+        string $direction
     ): Paginator {
-        $query = $this->getQueryCommentWithProject($onlyTrashed)
+        $qb = $this->getQueryCommentWithProject($onlyTrashed)
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)
             ->setFirstResult($first)
             ->setMaxResults($offset);
 
-        return new Paginator($query);
+            if ('PUBLISHED_AT' === $field) {
+                $qb->addOrderBy('c.publishedAt', $direction);
+                $qb->addOrderBy('c.createdAt', $direction);
+            }
+    
+            if ('UPDATED_AT' === $field) {
+                $qb->addOrderBy('c.updatedAt', $direction);
+            }
+    
+            if ('POPULARITY' === $field) {
+                $qb->addOrderBy('c.votesCount', $direction);
+            }
+
+        return new Paginator($qb);
     }
 
     public function countByProject(Project $project, bool $onlyTrashed = false): int

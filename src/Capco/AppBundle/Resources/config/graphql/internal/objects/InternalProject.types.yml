@@ -77,3 +77,6 @@ InternalProject:
             type: 'Boolean'
             description: 'The connection will return only the trashed results.'
             defaultValue: false
+          orderBy:
+            type: 'CommentOrder'
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }

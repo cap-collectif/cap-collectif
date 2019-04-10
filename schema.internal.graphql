@@ -3382,6 +3382,7 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
 
     # The connection will return only the trashed results.
     onlyTrashed: Boolean = false
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
 }
 

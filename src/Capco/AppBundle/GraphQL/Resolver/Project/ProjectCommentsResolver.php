@@ -27,18 +27,20 @@ class ProjectCommentsResolver implements ResolverInterface
     {
         $totalCount = 0;
         $onlyTrashed = $args->offsetGet('onlyTrashed');
+        $orderBy = $args->offsetGet('orderBy');
 
         try {
             $paginator = new Paginator(function (?int $offset, ?int $limit) use (
                 $project,
-                $onlyTrashed
+                $onlyTrashed,
+                $orderBy
             ) {
                 if (0 === $offset && 0 === $limit) {
                     return [];
                 }
 
                 return $this->proposalCommentRepository
-                    ->getByProject($project, $offset, $limit, $onlyTrashed)
+                    ->getByProject($project, $offset, $limit, $onlyTrashed, $orderBy['field'], $orderBy['direction'])
                     ->getIterator()
                     ->getArrayCopy();
             });

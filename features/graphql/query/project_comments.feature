@@ -3,14 +3,14 @@ Feature: Project
 
 Scenario: GraphQL user wants to get list of trashed comments.
   Given I am logged in to graphql as pierre
-  Given I send a GraphQL POST request:
+  And I send a GraphQL POST request:
   """
   {
-    "query": "query getTrashedComments($projectId: ID!, $first: Int, $onlyTrashed: Boolean) {
+    "query": "query getTrashedComments($projectId: ID!, $first: Int, $onlyTrashed: Boolean, $orderBy: CommentOrder!) {
       node(id: $projectId) {
         id
         ... on Project {
-          comments(first: $first, onlyTrashed: $onlyTrashed) {
+          comments(first: $first, onlyTrashed: $onlyTrashed, orderBy: $orderBy) {
             totalCount
             edges {
               node {
@@ -24,7 +24,8 @@ Scenario: GraphQL user wants to get list of trashed comments.
     "variables": {
       "projectId": "project6",
       "first": 10,
-      "onlyTrashed": true
+      "onlyTrashed": true,
+      "orderBy": { "field": "PUBLISHED_AT", "direction": "DESC" }
     }
   }
   """
