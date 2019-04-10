@@ -72,7 +72,6 @@ export class ProposalPageTabs extends React.Component<Props, State> {
     const votesCount = proposal.allVotes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
     const showFollowersTab = project && project.opinionCanBeFollowed;
-
     return (
       <Tab.Container
         id="proposal-page-tabs"
@@ -135,11 +134,11 @@ export class ProposalPageTabs extends React.Component<Props, State> {
                       <ProposalPageMetadata
                         proposal={proposal}
                         showDistricts={features.districts}
-                        showCategories={step && step.form.usingCategories}
+                        showCategories={proposal && proposal.form.usingCategories}
                         showNullEstimation={
                           !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
                         }
-                        showThemes={features.themes && (step && step.form.usingThemes)}
+                        showThemes={features.themes && (proposal && proposal.form.usingThemes)}
                       />
                       <br />
                       {currentVotableStep !== null &&
@@ -210,10 +209,6 @@ export default createFragmentContainer(ProposalPageTabs, {
   step: graphql`
     fragment ProposalPageTabs_step on ProposalStep {
       ...ProposalPageContent_step
-      form {
-        usingCategories
-        usingThemes
-      }
     }
   `,
   viewer: graphql`
@@ -236,6 +231,10 @@ export default createFragmentContainer(ProposalPageTabs, {
       ...TrashedMessage_contribution
       allVotes: votes(first: 0) {
         totalCount
+      }
+      form {
+        usingCategories
+        usingThemes
       }
       news {
         totalCount

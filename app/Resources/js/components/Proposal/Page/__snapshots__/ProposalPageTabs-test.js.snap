@@ -121,6 +121,10 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                   "totalCount": 1,
                 },
                 "currentVotableStep": null,
+                "form": Object {
+                  "usingCategories": true,
+                  "usingThemes": true,
+                },
                 "id": "1",
                 "news": Object {
                   "totalCount": 1,
@@ -155,6 +159,10 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                         "totalCount": 1,
                       },
                       "currentVotableStep": null,
+                      "form": Object {
+                        "usingCategories": true,
+                        "usingThemes": true,
+                      },
                       "id": "1",
                       "news": Object {
                         "totalCount": 1,
@@ -179,6 +187,10 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                         "totalCount": 1,
                       },
                       "currentVotableStep": null,
+                      "form": Object {
+                        "usingCategories": true,
+                        "usingThemes": true,
+                      },
                       "id": "1",
                       "news": Object {
                         "totalCount": 1,
@@ -203,6 +215,10 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                         "totalCount": 1,
                       },
                       "currentVotableStep": null,
+                      "form": Object {
+                        "usingCategories": true,
+                        "usingThemes": true,
+                      },
                       "id": "1",
                       "news": Object {
                         "totalCount": 1,
@@ -218,10 +234,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     Object {
                       "$fragmentRefs": null,
                       "$refType": null,
-                      "form": Object {
-                        "usingCategories": true,
-                        "usingThemes": true,
-                      },
                     }
                   }
                   viewer={null}
@@ -245,6 +257,10 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                         "totalCount": 1,
                       },
                       "currentVotableStep": null,
+                      "form": Object {
+                        "usingCategories": true,
+                        "usingThemes": true,
+                      },
                       "id": "1",
                       "news": Object {
                         "totalCount": 1,
@@ -274,6 +290,10 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                         "totalCount": 1,
                       },
                       "currentVotableStep": null,
+                      "form": Object {
+                        "usingCategories": true,
+                        "usingThemes": true,
+                      },
                       "id": "1",
                       "news": Object {
                         "totalCount": 1,
@@ -306,6 +326,10 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                   "totalCount": 1,
                 },
                 "currentVotableStep": null,
+                "form": Object {
+                  "usingCategories": true,
+                  "usingThemes": true,
+                },
                 "id": "1",
                 "news": Object {
                   "totalCount": 1,
@@ -335,6 +359,10 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                   "totalCount": 1,
                 },
                 "currentVotableStep": null,
+                "form": Object {
+                  "usingCategories": true,
+                  "usingThemes": true,
+                },
                 "id": "1",
                 "news": Object {
                   "totalCount": 1,
@@ -365,6 +393,10 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                   "totalCount": 1,
                 },
                 "currentVotableStep": null,
+                "form": Object {
+                  "usingCategories": true,
+                  "usingThemes": true,
+                },
                 "id": "1",
                 "news": Object {
                   "totalCount": 1,
@@ -489,6 +521,10 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                   "totalCount": 1,
                 },
                 "currentVotableStep": null,
+                "form": Object {
+                  "usingCategories": true,
+                  "usingThemes": true,
+                },
                 "id": "1",
                 "news": Object {
                   "totalCount": 0,
@@ -523,6 +559,10 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                         "totalCount": 1,
                       },
                       "currentVotableStep": null,
+                      "form": Object {
+                        "usingCategories": true,
+                        "usingThemes": true,
+                      },
                       "id": "1",
                       "news": Object {
                         "totalCount": 0,
@@ -547,6 +587,10 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                         "totalCount": 1,
                       },
                       "currentVotableStep": null,
+                      "form": Object {
+                        "usingCategories": true,
+                        "usingThemes": true,
+                      },
                       "id": "1",
                       "news": Object {
                         "totalCount": 0,
@@ -562,10 +606,6 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                     Object {
                       "$fragmentRefs": null,
                       "$refType": null,
-                      "form": Object {
-                        "usingCategories": true,
-                        "usingThemes": true,
-                      },
                     }
                   }
                   viewer={null}
@@ -589,6 +629,10 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                         "totalCount": 1,
                       },
                       "currentVotableStep": null,
+                      "form": Object {
+                        "usingCategories": true,
+                        "usingThemes": true,
+                      },
                       "id": "1",
                       "news": Object {
                         "totalCount": 0,
@@ -618,6 +662,10 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                         "totalCount": 1,
                       },
                       "currentVotableStep": null,
+                      "form": Object {
+                        "usingCategories": true,
+                        "usingThemes": true,
+                      },
                       "id": "1",
                       "news": Object {
                         "totalCount": 0,
@@ -650,6 +698,10 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                   "totalCount": 1,
                 },
                 "currentVotableStep": null,
+                "form": Object {
+                  "usingCategories": true,
+                  "usingThemes": true,
+                },
                 "id": "1",
                 "news": Object {
                   "totalCount": 0,
@@ -680,6 +732,10 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
                   "totalCount": 1,
                 },
                 "currentVotableStep": null,
+                "form": Object {
+                  "usingCategories": true,
+                  "usingThemes": true,
+                },
                 "id": "1",
                 "news": Object {
                   "totalCount": 0,
