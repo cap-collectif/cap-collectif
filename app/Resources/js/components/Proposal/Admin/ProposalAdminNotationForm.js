@@ -223,7 +223,6 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   labelClassName="control-label"
                   inputClassName="fake-inputClassName"
                   placeholder="Sélectionnez un coup de coeur"
-                  multi
                 />
               </div>
               {evaluationForm && (

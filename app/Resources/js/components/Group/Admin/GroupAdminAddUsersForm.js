@@ -69,7 +69,6 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
             inputClassName="fake-inputClassName"
             placeholder="Sélectionnez un utilisateur"
             userListToNoSearch={usersInGroup}
-            multi
           />
         </div>
       </form>
