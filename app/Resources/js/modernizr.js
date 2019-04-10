@@ -59,8 +59,8 @@ global.Modernizr = (function(e, n, t) {
     return 'function' != typeof n.createElement
       ? n.createElement(arguments[0])
       : x
-        ? n.createElementNS.call(n, 'http://www.w3.org/2000/svg', arguments[0])
-        : n.createElement.apply(n, arguments);
+      ? n.createElementNS.call(n, 'http://www.w3.org/2000/svg', arguments[0])
+      : n.createElement.apply(n, arguments);
   }
   function u(e, n) {
     return !!~`${e}`.indexOf(n);

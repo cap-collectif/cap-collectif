@@ -10,29 +10,27 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import RemainingTime from '../Utils/RemainingTime';
 import DatesInterval from '../Utils/DatesInterval';
 import StepInfos from '../Steps/Page/StepInfos';
-import type { ConsultationPropositionBoxQueryResponse } from '~relay/ConsultationPropositionBoxQuery.graphql';
+import type {
+  ConsultationPropositionBoxQueryResponse,
+  ConsultationPropositionBoxQueryVariables,
+} from '~relay/ConsultationPropositionBoxQuery.graphql';
 import ConsultationPlan from './ConsultationPlan';
 
-type Step = {
-  id: string,
-  title: string,
-  startAt: ?string,
-  endAt: ?string,
-  timeless: boolean,
-  status: string,
-};
+export type OwnProps = {|
+  +id: string,
+|};
 
-type Props = {
-  step: Step,
-  showConsultationPlan: boolean,
-  dispatch: Dispatch,
-  consultationPlanEnabled: boolean,
-  isAuthenticated: boolean,
-};
+type Props = {|
+  ...OwnProps,
+  +showConsultationPlan: boolean,
+  +dispatch: Dispatch,
+  +consultationPlanEnabled: boolean,
+  +isAuthenticated: boolean,
+|};
 
-type State = {
-  currentActiveItems: Array<string>,
-};
+type State = {|
+  +currentActiveItems: Array<string>,
+|};
 
 let Stickyfill;
 
@@ -87,24 +85,58 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
   };
 
   render() {
-    const { step, showConsultationPlan, consultationPlanEnabled, isAuthenticated } = this.props;
+    const { id, showConsultationPlan, consultationPlanEnabled, isAuthenticated } = this.props;
 
     const renderSectionRecursiveList = ({
       error,
       props,
-    }: { props: ?ConsultationPropositionBoxQueryResponse } & ReadyState) => {
+    }: { props?: ?ConsultationPropositionBoxQueryResponse } & ReadyState) => {
       if (error) {
         console.log(error); // eslint-disable-line no-console
         return graphqlError;
       }
       if (props) {
         if (props.consultation) {
+          const step = props.consultation;
           return (
             <div>
-              {/* $FlowFixMe $refType */}
-              <StepInfos step={props.consultation} />
-              {/* $FlowFixMe */}
-              <SectionRecursiveList consultation={props.consultation} />
+              {consultationPlanEnabled && (
+                <div
+                  className={
+                    showConsultationPlan
+                      ? 'consultation-plan sticky col-md-3 col-sm-12'
+                      : 'consultation-plan sticky'
+                  }
+                  id="consultation-plan">
+                  <ConsultationPlan consultation={step} />
+                </div>
+              )}
+              <div
+                id="scroll-content"
+                className={
+                  consultationPlanEnabled && showConsultationPlan
+                    ? 'col-md-9'
+                    : 'col-md-10 col-md-offset-1'
+                }>
+                <h2 className="text-center">{step.title}</h2>
+                <div className="mb-30 project__step-dates text-center">
+                  {(step.startAt || step.endAt) && (
+                    <div className="mr-15 d-ib">
+                      <i className="cap cap-calendar-2-1" />{' '}
+                      <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
+                    </div>
+                  )}
+                  {step.endAt && step.status === 'OPENED' && !step.timeless && (
+                    <div className="mr-15 d-ib">
+                      <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
+                    </div>
+                  )}
+                </div>
+                {/* $FlowFixMe $refType */}
+                <StepInfos step={step} />
+                {/* $FlowFixMe */}
+                <SectionRecursiveList consultation={step} />
+              </div>
             </div>
           );
         }
@@ -115,58 +147,36 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
 
     return (
       <div className="row">
-        {consultationPlanEnabled && (
-          <div
-            className={
-              showConsultationPlan
-                ? 'consultation-plan sticky col-md-3 col-sm-12'
-                : 'consultation-plan sticky'
-            }
-            id="consultation-plan">
-            <ConsultationPlan step={step} />
-          </div>
-        )}
-        <div
-          id="scroll-content"
-          className={
-            consultationPlanEnabled && showConsultationPlan
-              ? 'col-md-9'
-              : 'col-md-10 col-md-offset-1'
-          }>
-          <h2 className="text-center">{step.title}</h2>
-          <div className="mb-30 project__step-dates text-center">
-            {(step.startAt || step.endAt) && (
-              <div className="mr-15 d-ib">
-                <i className="cap cap-calendar-2-1" />{' '}
-                <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
-              </div>
-            )}
-            {step.endAt && step.status === 'OPENED' && !step.timeless && (
-              <div className="mr-15 d-ib">
-                <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
-              </div>
-            )}
-          </div>
-          <QueryRenderer
-            environment={environment}
-            query={graphql`
-              query ConsultationPropositionBoxQuery(
-                $consultationId: ID!
-                $isAuthenticated: Boolean!
-              ) {
-                consultation: node(id: $consultationId) {
-                  ...StepInfos_step
-                  ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query ConsultationPropositionBoxQuery(
+              $consultationId: ID!
+              $isAuthenticated: Boolean!
+            ) {
+              consultation: node(id: $consultationId) {
+                ... on Consultation {
+                  id
+                  startAt
+                  endAt
+                  title
+                  status
+                  timeless
                 }
+                ...ConsultationPlan_consultation
+                ...StepInfos_step
+                ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
               }
-            `}
-            variables={{
-              consultationId: step.id,
+            }
+          `}
+          variables={
+            ({
+              consultationId: id,
               isAuthenticated,
-            }}
-            render={renderSectionRecursiveList}
-          />
-        </div>
+            }: ConsultationPropositionBoxQueryVariables)
+          }
+          render={renderSectionRecursiveList}
+        />
       </div>
     );
   }
@@ -174,8 +184,8 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
 
 const mapStateToProps = (state: GlobalState, props: Props) => ({
   showConsultationPlan:
-    props.step.id in state.project.showConsultationPlanById
-      ? state.project.showConsultationPlanById[props.step.id]
+    props.id in state.project.showConsultationPlanById
+      ? state.project.showConsultationPlanById[props.id]
       : true,
   consultationPlanEnabled: state.default.features.consultation_plan,
   isAuthenticated: !!state.user.user,

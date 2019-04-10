@@ -55,9 +55,8 @@
     {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
     <script type="text/javascript">
         window.locale = "{{ intl_locale() }}";
-
+        window.timeZone = "{{ intl_timeZone() }}";
         window.recaptchaOptions = {lang: "{{ intl_locale() }}"};
-
         window._capco_executeAnalyticScript = function () {
             {% if analytic_js is not null %}
             var script = document.createElement("script");
@@ -65,7 +64,6 @@
             document.body.appendChild(script);
             {% endif %}
         };
-
         window._capco_executeAdsScript = function () {
             {% if ads_js is not null %}
             var script = document.createElement("script");

@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
 import { FormattedDate, FormattedTime, FormattedMessage } from 'react-intl';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
-type Props = {
-  startAt?: ?string,
-  endAt?: ?string,
-  fullDay?: boolean,
-};
+type Props = {|
+  +startAt?: ?string,
+  +endAt?: ?string,
+  +fullDay?: boolean,
+|};
 
 export class DatesInterval extends React.Component<Props> {
   lastOneDay(): boolean {

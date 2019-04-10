@@ -1,103 +1,118 @@
 // @flow
 /* eslint-env jest */
 import React from 'react';
+import moment from 'moment-timezone';
 import { shallow } from 'enzyme';
 import { DatesInterval } from './DatesInterval';
 
 describe('<DatesInterval />', () => {
+  beforeEach(() => {
+    moment.locale('fr');
+    moment.tz.setDefault('Europe/Paris');
+    // $FlowFixMe console.log is not writable
+    console.log = jest.fn();
+    // TODO use render and IntlProvider
+    // store = {
+    //   subscribe: jest.fn(),
+    //   dispatch: jest.fn(),
+    //   getState: jest.fn().mockReturnValueOnce({ intl: { locale: 'fr' } }),
+    // };
+  });
+
   const props1 = {
-    startAt: '2018-01-26T03:00:00+01:00',
-    endAt: '2018-02-04T00:03:00+01:00',
+    startAt: '2019-03-08 09:39:58',
+    endAt: '2019-04-10 02:46:47',
     fullDay: true,
   };
 
-  const props2 = {
-    startAt: '2018-01-26T03:00:00+01:00',
-    endAt: '2018-02-04T00:00:00+01:00',
-    fullDay: true,
-  };
-
-  const props3 = {
-    startAt: '2018-01-26T00:00:00+01:00',
-    endAt: '2018-02-04T04:00:00+01:00',
-    fullDay: true,
-  };
-
-  const props4 = {
-    startAt: '2018-01-26T00:00:00+01:00',
-    endAt: '2018-02-04T00:00:00+01:00',
-    fullDay: true,
-  };
-
-  const props5 = {
-    startAt: '2018-01-26T03:00:00+01:00',
-    fullDay: true,
-  };
-
-  const props6 = {
-    endAt: '2018-02-10T09:00:24+00:00',
-    fullDay: true,
-  };
-
-  const props7 = {
-    endAt: '2018-02-10T00:00:00+00:00',
-    fullDay: true,
-  };
-
-  const props8 = {
-    endAt: '2017-02-01T00:00:00+00:00',
-    fullDay: true,
-  };
-
-  const props9 = {
-    fullDay: true,
-  };
-
-  it('should render a full date', () => {
+  it('should shallow a full date', () => {
     const wrapper = shallow(<DatesInterval {...props1} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a full date without end time', () => {
+  // TODO find a way to properly test timezones…
+  //
+  // it('should shallow a full date with timeZone support', () => {
+  //   const timeZone = 'America/New York';
+  //   moment.tz.setDefault(timeZone);
+  //   const wrapper = shallow(<DatesInterval {...props1} />);
+  //   expect(wrapper).toMatchSnapshot();
+  // });
+
+  it('should shallow a full date without end time', () => {
+    const props2 = {
+      startAt: '2018-01-26T03:00:00+01:00',
+      endAt: '2018-02-04T00:00:00+01:00',
+      fullDay: true,
+    };
     const wrapper = shallow(<DatesInterval {...props2} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a full date without start time', () => {
-    const wrapper = shallow(<DatesInterval {...props3} />);
+  it('should shallow a full date without start time', () => {
+    const props = {
+      startAt: '2018-01-26T00:00:00+01:00',
+      endAt: '2018-02-04T04:00:00+01:00',
+      fullDay: true,
+    };
+    const wrapper = shallow(<DatesInterval {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a full date without end & start time', () => {
-    const wrapper = shallow(<DatesInterval {...props4} />);
+  it('should shallow a full date without end & start time', () => {
+    const props = {
+      startAt: '2018-01-26T00:00:00+01:00',
+      endAt: '2018-02-04T00:00:00+01:00',
+      fullDay: true,
+    };
+    const wrapper = shallow(<DatesInterval {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly start date', () => {
-    const wrapper = shallow(<DatesInterval {...props5} />);
+  it('should shallow correctly start date', () => {
+    const props = {
+      startAt: '2018-01-26T03:00:00+01:00',
+      fullDay: true,
+    };
+    const wrapper = shallow(<DatesInterval {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly end date', () => {
+  it('should shallow correctly end date', () => {
+    const props = {
+      endAt: '2018-02-10T09:00:24+00:00',
+      fullDay: true,
+    };
     (Date: any).now = jest.fn(() => 1517848349000); // 5/02/2018
-    const wrapper = shallow(<DatesInterval {...props6} />); // 10/02/2018
+    const wrapper = shallow(<DatesInterval {...props} />); // 10/02/2018
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly end date without end time', () => {
+  it('should shallow correctly end date without end time', () => {
+    const props = {
+      endAt: '2018-02-10T00:00:00+00:00',
+      fullDay: true,
+    };
     (Date: any).now = jest.fn(() => 1517848349000); // 5/02/2018
-    const wrapper = shallow(<DatesInterval {...props7} />); // 10/02/2018
+    const wrapper = shallow(<DatesInterval {...props} />); // 10/02/2018
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly past date', () => {
+  it('should shallow correctly past date', () => {
+    const props = {
+      endAt: '2017-02-01T00:00:00+00:00',
+      fullDay: true,
+    };
     (Date: any).now = jest.fn(() => 1517848349000); // 5/02/2018
-    const wrapper = shallow(<DatesInterval {...props8} />); // 01/02/2018
+    const wrapper = shallow(<DatesInterval {...props} />); // 01/02/2018
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render null', () => {
-    const wrapper = shallow(<DatesInterval {...props9} />);
+  it('should shallow null', () => {
+    const props = {
+      fullDay: true,
+    };
+    const wrapper = shallow(<DatesInterval {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

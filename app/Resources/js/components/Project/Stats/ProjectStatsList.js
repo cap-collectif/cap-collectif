@@ -165,20 +165,19 @@ export class ProjectStatsList extends React.Component<Props, State> {
             )}
           </ListGroup>
         )}
-        {haveData &&
-          data.total > data.values.length && (
-            <ProjectStatsModal
-              type={type}
-              stepId={stepId}
-              data={data}
-              label={label}
-              icon={icon}
-              showPercentage={this.state.showPercentage}
-              isCurrency={isCurrency}
-              theme={this.state.theme}
-              district={this.state.district}
-            />
-          )}
+        {haveData && data.total > data.values.length && (
+          <ProjectStatsModal
+            type={type}
+            stepId={stepId}
+            data={data}
+            label={label}
+            icon={icon}
+            showPercentage={this.state.showPercentage}
+            isCurrency={isCurrency}
+            theme={this.state.theme}
+            district={this.state.district}
+          />
+        )}
       </div>
     );
   }

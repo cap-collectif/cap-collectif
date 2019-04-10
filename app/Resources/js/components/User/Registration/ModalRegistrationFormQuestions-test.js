@@ -21,11 +21,11 @@ describe('<ModalRegistrationFormQuestions/>', () => {
         slug: 'champ-pas-facultatif',
         id: 6,
       },
-    ]
+    ],
   };
 
   it('renders a form with dynamic fields', () => {
-    const wrapper = shallow(<ModalRegistrationFormQuestions {...props}/>)
-    expect(wrapper).toMatchSnapshot()
+    const wrapper = shallow(<ModalRegistrationFormQuestions {...props} />);
+    expect(wrapper).toMatchSnapshot();
   });
 });
