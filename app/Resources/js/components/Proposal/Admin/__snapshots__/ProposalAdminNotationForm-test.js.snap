@@ -90,6 +90,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             inputClassName="fake-inputClassName"
             label="Coup(s) de coeur"
             labelClassName="control-label"
+            multi={true}
             name="likers"
             placeholder="Sélectionnez un coup de coeur"
           />

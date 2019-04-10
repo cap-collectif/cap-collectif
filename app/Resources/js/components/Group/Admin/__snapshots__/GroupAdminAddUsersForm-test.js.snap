@@ -11,6 +11,7 @@ exports[`<GroupAdminAddUsersForm /> render correctly 1`] = `
       inputClassName="fake-inputClassName"
       label="group.admin.form.users"
       labelClassName="control-label"
+      multi={true}
       name="users"
       placeholder="Sélectionnez un utilisateur"
       userListToNoSearch={Array []}
