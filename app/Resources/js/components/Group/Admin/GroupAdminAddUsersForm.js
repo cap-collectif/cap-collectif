@@ -62,12 +62,13 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
       <form onSubmit={handleSubmit}>
         <div>
           <UserListField
+            ariaControls="GroupAdminAddUsersForm-filter-user-listbox"
             id="group-users-users"
             name="users"
             label={intl.formatMessage({ id: 'group.admin.form.users' })}
             labelClassName="control-label"
             inputClassName="fake-inputClassName"
-            placeholder="Sélectionnez un utilisateur"
+            placeholder={intl.formatMessage({ id: 'select-a-user' })}
             userListToNoSearch={usersInGroup}
             multi
           />

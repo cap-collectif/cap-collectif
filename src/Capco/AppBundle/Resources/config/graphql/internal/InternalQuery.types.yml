@@ -58,10 +58,6 @@ InternalQuery:
             type: 'Boolean'
             defaultValue: false
             description: 'Remove super admin from export.'
-          authorsOfEventOnly:
-            type: 'Boolean'
-            defaultValue: false
-            description: 'If true, get all distinct author of events'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserQueryResolver", [args])'
       userSearch:
         type: '[InternalUser]'
@@ -74,6 +70,10 @@ InternalQuery:
             type: '[String]'
             defaultValue: null
             description: 'Return all users except the ones in the array.'
+          authorsOfEventOnly:
+            type: 'Boolean'
+            defaultValue: false
+            description: 'If true, get all distinct author of events'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserSearchQueryResolver", [args])'
       consultationSteps:
         type: '[InternalConsultationStep!]!'

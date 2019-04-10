@@ -6,7 +6,6 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRepository;
 use Elastica\Index;
 use Elastica\Query;
-use Elastica\Aggregation;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\Result;
@@ -115,21 +114,24 @@ class EventSearch extends Search
         ];
     }
 
-    public function getDistinctAllAuthorsId(): array
+    public function getAllAuthorOfEvent($terms): array
     {
-        $query = new Query();
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery = $this->searchTermsInMultipleFields(
+            $boolQuery,
+            ['author.username', 'author.username.std'],
+            $terms,
+            'phrase_prefix'
+        );
 
-        $authorsOnlyAggQuery = new Aggregation\Terms('authorsOnly');
-        $authorsOnlyAggQuery->setField('author.id');
-        $query->addAggregation($authorsOnlyAggQuery);
-
+        $query = new Query($boolQuery);
         $resultSet = $this->index->getType($this->type)->search($query);
 
-        $ids = array_map(function (array $result) {
-            return $result['key'];
-        }, $resultSet->getAggregation('authorsOnly')['buckets']);
+        $authorIds = array_map(function (Result $result) {
+            return $result->getData()['author']['id'];
+        }, $resultSet->getResults());
 
-        return $ids;
+        return array_unique($authorIds);
     }
 
     public function getHydratedResults(array $ids): array
@@ -182,9 +184,6 @@ class EventSearch extends Search
         }
         if (isset($providedFilters['isRegistrable'])) {
             $filters['isRegistrable'] = $providedFilters['isRegistrable'];
-        }
-        if (isset($providedFilters['author'])) {
-            $filters['author.id'] = $providedFilters['author'];
         }
         if (isset($providedFilters['projects'])) {
             $filters['projects.id'] = $providedFilters['projects'];

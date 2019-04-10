@@ -4432,9 +4432,6 @@ type Query {
 
     # Remove super admin from export.
     superAdmin: Boolean = false
-
-    # If true, get all distinct author of events
-    authorsOfEventOnly: Boolean = false
   ): UserConnection!
   userSearch(
     # Filter by displayName.
@@ -4442,6 +4439,9 @@ type Query {
 
     # Return all users except the ones in the array.
     notInIds: [String] = null
+
+    # If true, get all distinct author of events
+    authorsOfEventOnly: Boolean = false
   ): [User]
   consultationSteps(
     # If omitted, returns all consultations steps. If provided, returns the consultation step of the particular id.

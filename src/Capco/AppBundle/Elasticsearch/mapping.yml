@@ -98,6 +98,8 @@ mappings:
         type: object
         properties:
           id: { type: keyword }
+          username: *text_analysis_highlighted
+          email: *text_analysis_highlighted
           userType:
             type: object
             properties:

@@ -17,12 +17,12 @@ import FiltersContainer from '../../Filters/FiltersContainer';
 import environment from '../../../createRelayEnvironment';
 import EventListCounter from './EventListCounter';
 import EventListStatusFilter from './EventListStatusFilter';
+import UserListField from '../../Admin/Field/UserListField';
 import type { EventListFilters_query } from '~relay/EventListFilters_query.graphql';
 
 type State = {
   projectOptions: Array<Object>,
   themeOptions: Array<Object>,
-  authorsOptions: Array<Object>,
 };
 type Props = {|
   ...FormProps,
@@ -33,6 +33,7 @@ type Props = {|
   project: ?string,
   userType: ?string,
   search: ?string,
+  author: ?string,
   intl: IntlShape,
   addToggleViewButton: ?boolean,
   userTypes: Array<Object>,
@@ -42,9 +43,13 @@ const countFilters = (
   theme: ?string,
   project: ?string,
   search: ?string,
+  author: ?string,
   userType: ?string,
 ): number => {
   let nbFilter = 0;
+  if (author) {
+    nbFilter++;
+  }
   if (theme) {
     nbFilter++;
   }
@@ -83,18 +88,6 @@ const themeQuery = graphql`
     }
   }
 `;
-const eventsAuthorQuery = graphql`
-  query EventListFiltersAuthorsQuery($authorsOfEventOnly: Boolean) {
-    users(authorsOfEventOnly: $authorsOfEventOnly) {
-      edges {
-        node {
-          id
-          username
-        }
-      }
-    }
-  }
-`;
 const StatusContainer = styled(Col)`
   color: white;
   display: flex;
@@ -108,7 +101,7 @@ const FiltersWrapper = styled(Col)`
 `;
 
 export class EventListFilters extends React.Component<Props, State> {
-  state = { projectOptions: [], themeOptions: [], authorsOptions: [] };
+  state = { projectOptions: [], themeOptions: [] };
 
   componentDidMount() {
     fetchQuery(environment, projectQuery, { withEventOnly: true })
@@ -126,23 +119,11 @@ export class EventListFilters extends React.Component<Props, State> {
       .then(themeOptions => {
         this.setState({ themeOptions });
       });
-    if (this.state.authorsOptions.length === 0) {
-      fetchQuery(environment, eventsAuthorQuery, { authorsOfEventOnly: true })
-        .then(res =>
-          res.users.edges.map(edge => ({
-            value: edge.node.id,
-            label: edge.node.username,
-          })),
-        )
-        .then(authorsOptions => {
-          this.setState({ authorsOptions });
-        });
-    }
   }
 
   getFilters(nbFilter: number): [] {
     const { features, theme, project, userTypes, intl, dispatch } = this.props;
-    const { themeOptions, projectOptions, authorsOptions } = this.state;
+    const { themeOptions, projectOptions } = this.state;
     const filters = [];
     filters.push(
       <Field
@@ -163,16 +144,15 @@ export class EventListFilters extends React.Component<Props, State> {
       />,
     );
     filters.push(
-      <Field
-        component={select}
+      <UserListField
         id="EventListFilters-filter-authors"
         name="author"
-        role="combobox"
-        aria-autocomplete="list"
-        aria-haspopup="true"
-        aria-controls="EventListFilters-filter-author-listbox"
+        authorOfEvent
+        clearable
+        labelClassName="control-label"
+        inputClassName="fake-inputClassName"
         placeholder={intl.formatMessage({ id: 'project_download.label.author' })}
-        options={authorsOptions}
+        ariaControls="EventListFilters-filter-author-listbox"
       />,
     );
     filters.push(
@@ -282,6 +262,7 @@ export class EventListFilters extends React.Component<Props, State> {
       theme,
       project,
       search,
+      author,
       userType,
       intl,
       addToggleViewButton,
@@ -289,7 +270,7 @@ export class EventListFilters extends React.Component<Props, State> {
       query,
     } = this.props;
 
-    const nbFilter = countFilters(theme, project, search, userType);
+    const nbFilter = countFilters(theme, project, search, author, userType);
 
     const popoverBottom = this.getPopoverBottom(nbFilter);
 

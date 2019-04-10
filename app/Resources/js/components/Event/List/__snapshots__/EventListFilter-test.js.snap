@@ -86,16 +86,16 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                 componentClass="div"
               >
                 <div>
-                  <Field
-                    aria-autocomplete="list"
-                    aria-controls="EventListFilters-filter-author-listbox"
-                    aria-haspopup="true"
-                    component={[Function]}
+                  <UserListField
+                    ariaControls="EventListFilters-filter-author-listbox"
+                    authorOfEvent={true}
+                    className=""
+                    clearable={true}
                     id="EventListFilters-filter-authors"
+                    inputClassName="fake-inputClassName"
+                    labelClassName="control-label"
                     name="author"
-                    options={Array []}
                     placeholder="project_download.label.author"
-                    role="combobox"
                   />
                 </div>
               </Col>
@@ -308,16 +308,16 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                 componentClass="div"
               >
                 <div>
-                  <Field
-                    aria-autocomplete="list"
-                    aria-controls="EventListFilters-filter-author-listbox"
-                    aria-haspopup="true"
-                    component={[Function]}
+                  <UserListField
+                    ariaControls="EventListFilters-filter-author-listbox"
+                    authorOfEvent={true}
+                    className=""
+                    clearable={true}
                     id="EventListFilters-filter-authors"
+                    inputClassName="fake-inputClassName"
+                    labelClassName="control-label"
                     name="author"
-                    options={Array []}
                     placeholder="project_download.label.author"
-                    role="combobox"
                   />
                 </div>
               </Col>
