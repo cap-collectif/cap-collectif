@@ -12,6 +12,7 @@ use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Resolver\EventResolver;
+use Capco\AppBundle\Resolver\ProjectStatsResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -71,9 +72,7 @@ class ProjectController extends Controller
     {
         $serializer = $this->get('serializer');
 
-        $steps = $this->get(
-            'Capco\AppBundle\Resolver\ProjectStatsResolver'
-        )->getStepsWithStatsForProject($project);
+        $steps = $this->get(ProjectStatsResolver::class)->getStepsWithStatsForProject($project);
         $props = $serializer->serialize(
             ['projectId' => $project->getId(), 'steps' => $steps],
             'json'

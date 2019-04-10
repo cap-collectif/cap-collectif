@@ -25,7 +25,6 @@
 {% block body %}
     {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
     {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
-     {% set bannerTrad = '' %}
     {% if analytic_js is not empty and ads_js is empty %}
         {% set bannerTrad =  'text-audience-cookie'|trans({}, 'CapcoAppBundle') %}
     {% elseif ads_js  is not empty and analytic_js is empty %}
@@ -38,7 +37,6 @@
         <div class="container" style="max-width: 660px">
             {{ 'texte-cookies-page-1' | trans({}, 'CapcoAppBundle')|raw }}
             {{ cookiesList|raw }}
-            {% if bannerTrad is defined and bannerTrad is not empty %}
             <p>
                 {{ react_render_component('CookieApp', {
                     'props': {
@@ -48,7 +46,6 @@
                     }
                 }) }}
             </p>
-            {% endif %}
             {{ 'texte-cookies-page-2' | trans({}, 'CapcoAppBundle')|raw }}
         </div>
     </section>

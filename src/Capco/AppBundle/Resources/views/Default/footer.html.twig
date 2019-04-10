@@ -45,10 +45,10 @@
                 <li>
                     <a href="{{ path('app_cookies') }}">
                         {{ 'cookies'|trans({}, 'CapcoAppBundle') }}
-                    </a> {% if bannerTrad is defined and bannerTrad is not empty %}|{% endif %}
+                    </a> |
                 </li>
                 <li>
-                {% if bannerTrad is defined and bannerTrad is not empty %}
+                {% if bannerTrad is defined %}
                     {{ react_render_component('CookieApp', {
                         'props': {
                             'bannerTrad':  bannerTrad,
