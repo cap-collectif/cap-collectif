@@ -32,7 +32,7 @@ export const Container = styled.div.attrs({
     margin-bottom: 5px;
   }
 
-  button:not(.ql-*) {
+  button:not(.ql-editor-button) {
     margin-top: 15px;
   }
 

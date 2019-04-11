@@ -21,33 +21,42 @@ class QuillToolbar extends React.Component<Props> {
             <option value="large">{intl.formatMessage({ id: 'editor.size.large' })}</option>
           </select>
         </span>
-        <span className="ql-formats">
-          <button aria-label={intl.formatMessage({ id: 'global.bold' })} className="ql-bold" />
-          <button aria-label={intl.formatMessage({ id: 'global.italic' })} className="ql-italic" />
+        <span className="ql-formats ql-editor-button">
+          <button
+            aria-label={intl.formatMessage({ id: 'global.bold' })}
+            className="ql-bold ql-editor-button"
+          />
+          <button
+            aria-label={intl.formatMessage({ id: 'global.italic' })}
+            className="ql-italic ql-editor-button"
+          />
           <button
             aria-label={intl.formatMessage({ id: 'global.underline' })}
-            className="ql-underline"
+            className="ql-underline ql-editor-button"
           />
-          <button aria-label={intl.formatMessage({ id: 'global.strike' })} className="ql-strike" />
+          <button
+            aria-label={intl.formatMessage({ id: 'global.strike' })}
+            className="ql-strike ql-editor-button"
+          />
         </span>
         <span className="ql-formats">
           <button
-            className="ql-list"
+            className="ql-list ql-editor-button"
             value="ordered"
             aria-label={intl.formatMessage({ id: 'editor.list' })}
           />
           <button
-            className="ql-list"
+            className="ql-list ql-editor-button"
             value="bullet"
             aria-label={intl.formatMessage({ id: 'editor.bullet' })}
           />
           <button
-            className="ql-indent"
+            className="ql-indent ql-editor-button"
             value="-1"
             aria-label={intl.formatMessage({ id: 'global.delete.indent' })}
           />
           <button
-            className="ql-indent"
+            className="ql-indent ql-editor-button"
             value="+1"
             aria-label={intl.formatMessage({ id: 'global.indent' })}
           />
@@ -64,8 +73,14 @@ class QuillToolbar extends React.Component<Props> {
           </select>
         </span>
         <span className="ql-formats">
-          <button aria-label={intl.formatMessage({ id: 'editor.link' })} className="ql-link" />
-          <button aria-label={intl.formatMessage({ id: 'editor.image' })} className="ql-image" />
+          <button
+            aria-label={intl.formatMessage({ id: 'editor.link' })}
+            className="ql-link ql-editor-button"
+          />
+          <button
+            aria-label={intl.formatMessage({ id: 'editor.image' })}
+            className="ql-image ql-editor-button"
+          />
         </span>
       </React.Fragment>
     );
