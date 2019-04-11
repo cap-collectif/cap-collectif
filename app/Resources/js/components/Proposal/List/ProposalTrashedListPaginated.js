@@ -5,12 +5,12 @@ import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import { TRASHED_PROPOSAL_PAGINATOR_COUNT } from '../../Project/ProjectTrashProposal';
-import type { ProposalTrashedListPaginatedQuery_project } from '~relay/ProposalTrashedListPaginatedQuery.graphql';
+import type { ProposalTrashedListPaginated_project } from '~relay/ProposalTrashedListPaginated_project.graphql';
 import ProposalPreview from '../Preview/ProposalPreview';
 
 type Props = {|
   +relay: RelayPaginationProp,
-  +project: ProposalTrashedListPaginatedQuery_project,
+  +project: ProposalTrashedListPaginated_project,
 |};
 
 type State = {|
@@ -33,7 +33,7 @@ export class ProposalTrashedListPaginated extends React.Component<Props, State> 
   render() {
     const { project, relay } = this.props;
     const { isLoading } = this.state;
-    if (!project.proposals || project.proposals.totalCount === 0) {
+    if (project.proposals.totalCount === 0) {
       return null;
     }
 
@@ -46,7 +46,7 @@ export class ProposalTrashedListPaginated extends React.Component<Props, State> 
           }}
           tagName="h3"
         />
-        <ListGroup bsClass="media-list" componentClass="ul">
+        <ListGroup bsClass="media-list proposal-preview-list" componentClass="ul">
           {project &&
             project.proposals &&
             project.proposals.edges &&
@@ -55,20 +55,24 @@ export class ProposalTrashedListPaginated extends React.Component<Props, State> 
               .map(edge => edge.node)
               .filter(Boolean)
               .map(node => (
+                // $FlowFixMe $refType
                 <ProposalPreview key={node.id} proposal={node} step={null} viewer={null} />
               ))}
-          {relay.hasMore() && (
-            <ListGroupItem style={{ textAlign: 'center' }}>
-              {isLoading ? (
-                <Loader />
-              ) : (
-                <Button bsStyle="link" onClick={this.handleLoadMore}>
-                  <FormattedMessage id="global.more" />
-                </Button>
-              )}
-            </ListGroupItem>
-          )}
         </ListGroup>
+        {relay.hasMore() && (
+          <ListGroupItem style={{ textAlign: 'center' }}>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <Button
+                id="ProposalTrashedListPaginated-loadMore"
+                bsStyle="link"
+                onClick={this.handleLoadMore}>
+                <FormattedMessage id="global.more" />
+              </Button>
+            )}
+          </ListGroupItem>
+        )}
       </React.Fragment>
     );
   }

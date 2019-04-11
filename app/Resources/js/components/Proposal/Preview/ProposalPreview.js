@@ -4,17 +4,17 @@ import { Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
-import ProposalStatus from './ProposalStatus';
+import ProposalPreviewStatus from './ProposalPreviewStatus';
 import { Card } from '../../Ui/Card/Card';
 import type { ProposalPreview_proposal } from '~relay/ProposalPreview_proposal.graphql';
 import type { ProposalPreview_step } from '~relay/ProposalPreview_step.graphql';
 import type { ProposalPreview_viewer } from '~relay/ProposalPreview_viewer.graphql';
 
-type Props = {
-  proposal: ProposalPreview_proposal,
-  step: ?ProposalPreview_step,
-  viewer: ?ProposalPreview_viewer,
-};
+type Props = {|
+  +proposal: ProposalPreview_proposal,
+  +step: ?ProposalPreview_step,
+  +viewer: ?ProposalPreview_viewer,
+|};
 
 export class ProposalPreview extends React.Component<Props> {
   render() {
@@ -31,7 +31,7 @@ export class ProposalPreview extends React.Component<Props> {
           {/* $FlowFixMe */}
           {step && <ProposalPreviewFooter step={step} proposal={proposal} />}
           {/* $FlowFixMe */}
-          <ProposalStatus proposal={proposal} />
+          <ProposalPreviewStatus proposal={proposal} />
         </Card>
       </Col>
     );
@@ -65,7 +65,7 @@ export default createFragmentContainer(ProposalPreview, {
       ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       ...ProposalPreviewBody_proposal
         @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView)
-      ...ProposalStatus_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
+      ...ProposalPreviewStatus_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
     }
   `,
 });

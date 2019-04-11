@@ -25,9 +25,11 @@ export class LastProposals extends React.Component<Props> {
           query={graphql`
             query LastProposalsQuery($ids: [ID!]!, $stepId: ID!) {
               proposals: nodes(ids: $ids) {
-                id
-                ...ProposalPreview_proposal
-                  @arguments(stepId: "", isAuthenticated: false, isProfileView: true)
+                ... on Proposal {
+                  id
+                  ...ProposalPreview_proposal
+                    @arguments(stepId: "", isAuthenticated: false, isProfileView: true)
+                }
               }
             }
           `}
@@ -47,18 +49,22 @@ export class LastProposals extends React.Component<Props> {
             }
 
             const { proposals } = props;
-            // $FlowFixMe $refType
-            const classes = classNames({
-              'media-list': true,
-              'proposal-preview-list': true,
-              opinion__list: true,
-            });
             return (
               <Row>
-                <ul className={classes}>
-                  {proposals.map(proposal => (
+                <ul
+                  className={classNames({
+                    'media-list': true,
+                    'proposal-preview-list': true,
+                    opinion__list: true,
+                  })}>
+                  {proposals.filter(Boolean).map(proposal => (
                     /* $FlowFixMe $refType */
-                    <ProposalPreview proposal={proposal} step={null} viewer={null} />
+                    <ProposalPreview
+                      key={proposal.id}
+                      proposal={proposal}
+                      step={null}
+                      viewer={null}
+                    />
                   ))}
                 </ul>
               </Row>

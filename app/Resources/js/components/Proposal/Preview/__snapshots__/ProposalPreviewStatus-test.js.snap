@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPreviewStatus /> render a status when proposal has a status 1`] = `
+<Status
+  bgColor="success"
+>
+  Projet retenu
+</Status>
+`;
+
+exports[`<ProposalPreviewStatus /> render a trashed status for a trashed invisible proposal 1`] = `
+<Fragment>
+  <ProposalPreviewStatus__TrashedReasonContainer>
+    <p
+      className="px-15"
+    >
+      <FormattedMessage
+        id="proposal.show.trashed.shortReason"
+        values={Object {}}
+      />
+      <br />
+      <span
+        className="excerpt"
+      >
+        propos illégaux
+      </span>
+    </p>
+  </ProposalPreviewStatus__TrashedReasonContainer>
+  <Status
+    bgColor="default"
+  >
+    <FormattedMessage
+      id="proposal.show.trashed.reason.deleted"
+      values={Object {}}
+    />
+  </Status>
+</Fragment>
+`;
+
+exports[`<ProposalPreviewStatus /> render a trashed status for a trashed visible proposal 1`] = `
+<Fragment>
+  <ProposalPreviewStatus__TrashedReasonContainer>
+    <p
+      className="px-15"
+    >
+      <FormattedMessage
+        id="proposal.show.trashed.shortReason"
+        values={Object {}}
+      />
+      <br />
+      <span
+        className="excerpt"
+      >
+        spam
+      </span>
+    </p>
+  </ProposalPreviewStatus__TrashedReasonContainer>
+  <Status
+    bgColor="default"
+  >
+    <FormattedMessage
+      id="proposal.show.trashed.reason.moderated"
+      values={Object {}}
+    />
+  </Status>
+</Fragment>
+`;
+
+exports[`<ProposalPreviewStatus /> render null when no status 1`] = `""`;

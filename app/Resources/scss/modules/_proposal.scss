@@ -1,14 +1,10 @@
-.proposal-preview-list, .proposal-preview-trash_list {
+.proposal-preview-list {
     display: flex;
     flex-wrap: wrap;
 
     > li {
         display: flex;
     }
-}
-
-.proposal-preview-trash_list > div {
-    display: flex;
 }
 
 .proposal__step-page .PrivateList {
@@ -111,12 +107,6 @@
                     font-size: 18px;
                 }
             }
-        }
-
-        .proposal__trashed-reason {
-            padding: 5px;
-            background-color: $page-bgc;
-            border-top: 1px solid $border-color;
         }
     }
 

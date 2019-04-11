@@ -46,7 +46,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
         }
       }
     />
-    <ForwardRef(Relay(ProposalStatus))
+    <ForwardRef(Relay(ProposalPreviewStatus))
       proposal={
         Object {
           "$refType": null,
@@ -107,7 +107,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
         }
       }
     />
-    <ForwardRef(Relay(ProposalStatus))
+    <ForwardRef(Relay(ProposalPreviewStatus))
       proposal={
         Object {
           "$refType": null,

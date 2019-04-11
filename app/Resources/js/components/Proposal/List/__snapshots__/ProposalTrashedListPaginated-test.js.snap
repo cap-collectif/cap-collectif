@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ProposalTrashedListPaginated /> render null 1`] = `""`;
+
 exports[`<ProposalTrashedListPaginated /> should render correctly 1`] = `
 <Fragment>
   <FormattedMessage
@@ -12,7 +14,7 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 1`] = `
     }
   />
   <ListGroup
-    bsClass="media-list"
+    bsClass="media-list proposal-preview-list"
     componentClass="ul"
   >
     <ForwardRef(Relay(ProposalPreview))
@@ -49,5 +51,114 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 1`] = `
       viewer={null}
     />
   </ListGroup>
+  <ListGroupItem
+    bsClass="list-group-item"
+    listItem={false}
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      disabled={false}
+      id="ProposalTrashedListPaginated-loadMore"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="global.more"
+        values={Object {}}
+      />
+    </Button>
+  </ListGroupItem>
 </Fragment>
+`;
+
+exports[`<ProposalTrashedListPaginated /> should render correctly 2`] = `
+<Fragment>
+  <FormattedMessage
+    id="count-proposal"
+    tagName="h3"
+    values={
+      Object {
+        "num": 3,
+      }
+    }
+  />
+  <ListGroup
+    bsClass="media-list proposal-preview-list"
+    componentClass="ul"
+  >
+    <ForwardRef(Relay(ProposalPreview))
+      key="proposal1"
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "id": "proposal1",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+    <ForwardRef(Relay(ProposalPreview))
+      key="proposal2"
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "id": "proposal2",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+    <ForwardRef(Relay(ProposalPreview))
+      key="proposal3"
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "id": "proposal3",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+  </ListGroup>
+  <ListGroupItem
+    bsClass="list-group-item"
+    listItem={false}
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    <Loader
+      color="#333333"
+      inline={false}
+      show={true}
+      size={40}
+    />
+  </ListGroupItem>
+</Fragment>
+`;
+
+exports[`<ProposalTrashedListPaginated /> should render correctly 3`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      20,
+      [Function],
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
 `;
