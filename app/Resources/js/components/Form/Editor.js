@@ -8,7 +8,6 @@ import { selectLocalImage } from './EditorImageUpload';
 
 type Props = {
   intl: IntlShape,
-  valueLink?: Object,
   value?: any,
   onChange: Function,
   onBlur: Function,
@@ -17,7 +16,7 @@ type Props = {
   disabled?: boolean,
 };
 
-class Editor extends React.Component<Props> {
+export class Editor extends React.Component<Props> {
   static defaultProps = {
     id: '',
     className: '',
@@ -36,7 +35,7 @@ class Editor extends React.Component<Props> {
   toolbarRef: { current: null | HTMLDivElement };
 
   componentDidMount() {
-    const { disabled, valueLink, onBlur, onChange, value, intl } = this.props;
+    const { disabled, onBlur, onChange, value, intl } = this.props;
 
     const options = {
       modules: {
@@ -89,35 +88,23 @@ class Editor extends React.Component<Props> {
         }
       }
 
-      if (valueLink) {
-        const defaultValue = valueLink.value;
-
-        if (defaultValue) {
-          quill.clipboard.dangerouslyPasteHTML(defaultValue);
-        }
-
-        quill.on('text-change', () => {
-          valueLink.requestChange(quill.root.innerHTML);
-        });
-      } else {
-        const defaultValue = value;
-        if (defaultValue) {
-          quill.clipboard.dangerouslyPasteHTML(defaultValue);
-        }
-        quill.on('selection-change', range => {
-          if (!range) {
-            onBlur(quill.root.innerHTML);
-          }
-        });
-        quill.on('text-change', () => {
-          onChange(quill.root.innerHTML);
-        });
+      const defaultValue = value;
+      if (defaultValue) {
+        quill.clipboard.dangerouslyPasteHTML(defaultValue);
       }
+      quill.on('selection-change', range => {
+        if (!range) {
+          onBlur(quill.root.innerHTML);
+        }
+      });
+      quill.on('text-change', () => {
+        onChange(quill.root.innerHTML);
+      });
     }
   }
 
   render() {
-    const { className, disabled, id } = this.props;
+    const { className, disabled, id, value } = this.props;
 
     const classes = {
       editor: !disabled,
@@ -125,7 +112,14 @@ class Editor extends React.Component<Props> {
       [className]: true,
     };
     if (disabled) {
-      return <textarea id={id} className={classNames(classes)} disabled />;
+      return (
+        <div
+          contentEditable={false}
+          id={id}
+          className={classNames(classes)}
+          dangerouslySetInnerHTML={{ __html: value }}
+        />
+      );
     }
     return (
       <div id={id} className={classNames(classes)}>

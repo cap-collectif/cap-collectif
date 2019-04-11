@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`q<Editor /> should render correctly with defaultProps 1`] = `
+<div
+  className="form-control test"
+  contentEditable={false}
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "test",
+    }
+  }
+  id="azerty"
+/>
+`;
