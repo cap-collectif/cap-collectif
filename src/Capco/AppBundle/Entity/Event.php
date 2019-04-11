@@ -39,12 +39,6 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         SluggableTitleTrait;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
-     * @ORM\Column(length=255, nullable=false, unique=true)
-     */
-     protected $slug;
-
-    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */

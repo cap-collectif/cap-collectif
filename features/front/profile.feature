@@ -9,7 +9,7 @@ Scenario: Logged in user wants to change his username
   Given feature "user_type" is enabled
   Given I am logged in as user
   And I visited "edit profile page"
-  And I wait "#account-tabs-pane-profile" to appear on current page
+  And I wait 2 seconds
   And I fill in the following:
     | profile-form-username | user3 |
   And I wait 1 seconds
@@ -22,7 +22,7 @@ Scenario: Logged in user wants to change his user type
   Given feature "user_type" is enabled
   And I am logged in as user
   And I visited "edit profile page"
-  And I wait "#account-tabs-pane-profile" to appear on current page
+  And I wait 1 seconds
   And I select "Organisation à but non lucratif" from "profile-form-userType"
   And I press "profile-form-save"
   And I wait 1 seconds

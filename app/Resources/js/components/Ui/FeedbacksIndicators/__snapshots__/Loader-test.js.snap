@@ -4,7 +4,7 @@ exports[`<Loader /> renders Loader 1`] = `
 <Loader__Container
   inline={false}
 >
-  <__styled-spinkit__Circle
+  <Component
     color="#333333"
     size={40}
   />
@@ -15,7 +15,7 @@ exports[`<Loader /> renders Loader with a color and a small size 1`] = `
 <Loader__Container
   inline={false}
 >
-  <__styled-spinkit__Circle
+  <Component
     color="white"
     size={20}
   />
@@ -26,7 +26,7 @@ exports[`<Loader /> renders Loader with a white color 1`] = `
 <Loader__Container
   inline={false}
 >
-  <__styled-spinkit__Circle
+  <Component
     color="white"
     size={40}
   />
@@ -58,7 +58,7 @@ exports[`<Loader /> renders an inline Loader 1`] = `
 <Loader__Container
   inline={true}
 >
-  <__styled-spinkit__Circle
+  <Component
     color="#333333"
     size={40}
   />

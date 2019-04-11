@@ -3,7 +3,6 @@
 exports[`<CommentForm /> should render correctly 1`] = `
 <div
   className=""
-  id="CommentForm"
   style={
     Object {
       "padding": "5px",
@@ -136,7 +135,6 @@ exports[`<CommentForm /> should render correctly 1`] = `
 exports[`<CommentForm /> should render correctly with user 1`] = `
 <div
   className=""
-  id="CommentForm"
   style={
     Object {
       "padding": "5px",

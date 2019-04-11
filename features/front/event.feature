@@ -75,7 +75,7 @@ Scenario: Archived events can be filtered by title
 Scenario: Anonymous wants to comment an event
   Given I visited eventpage with:
     | slug | event-with-registrations |
-  And I wait "#CommentForm" to appear on current page
+  And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
   And I fill in the following:
@@ -90,7 +90,7 @@ Scenario: Logged in user wants to comment an event
   Given I am logged in as user
   And I visited eventpage with:
     | slug | event-with-registrations |
-  And I wait "#CommentForm" to appear on current page
+  And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
   And I should not see "comment.with_my_account"
@@ -99,7 +99,7 @@ Scenario: Logged in user wants to comment an event
 Scenario: Anonymous wants to comment an event without email
   Given I visited eventpage with:
     | slug | event-with-registrations |
-  And I wait "#CommentForm" to appear on current page
+  And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
   And I fill in the following:

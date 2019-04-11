@@ -83,7 +83,7 @@ class EventController extends Controller
 
     /**
      * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flags" = "calendar"})
-     * @ParamConverter("event", options={"mapping": {"slug": "slug"}, "repository_method" = "getOneBySlug", "map_method_signature" = true})
+     * @ParamConverter("event", options={"mapping": {"slug": "slug"}, "repository_method" = "getOne"})
      * @Template("CapcoAppBundle:Event:show.html.twig")
      */
     public function showAction(Request $request, Event $event)
