@@ -12,6 +12,7 @@ use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
+use Capco\AppBundle\Utils\Text;
 use Overblog\GraphQLBundle\Request\Executor;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;

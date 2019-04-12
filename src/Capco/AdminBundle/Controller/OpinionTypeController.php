@@ -12,19 +12,13 @@ class OpinionTypeController extends Controller
         $url = false;
         $request = $this->getRequest()->request;
 
-        $consultationId = $object->getConsultation()
-            ? $object->getConsultation()->getId()
-            : $request->get('consultation_id');
+        $consultationId = $object->getConsultation() ? $object->getConsultation()->getId() : $request->get('consultation_id');
 
         if ($request && null !== $request->get('btn_update_and_list')) {
-            $url = $this->generateUrl('admin_capco_app_consultation_edit', [
-                'id' => $consultationId,
-            ]);
+            $url = $this->generateUrl('admin_capco_app_steps_consultation_edit', ['id' => $consultationId]);
         }
         if ($request && null !== $request->get('btn_create_and_list')) {
-            $url = $this->generateUrl('admin_capco_app_consultation_edit', [
-                'id' => $consultationId,
-            ]);
+            $url = $this->generateUrl('admin_capco_app_steps_consultation_edit', ['id' => $consultationId]);
         }
 
         if ($request && null !== $request->get('btn_create_and_create')) {
@@ -37,9 +31,7 @@ class OpinionTypeController extends Controller
 
         if ($request && 'DELETE' === $this->getRestMethod($request)) {
             $consultationId = $request->get('consultation_id');
-            $url = $this->generateUrl('admin_capco_app_consultation_edit', [
-                'id' => $consultationId,
-            ]);
+            $url = $this->generateUrl('admin_capco_app_steps_consultation_edit', ['id' => $consultationId]);
         }
 
         if (!$url) {
