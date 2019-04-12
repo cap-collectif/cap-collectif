@@ -303,13 +303,6 @@ class ReinitCommand extends ContainerAwareCommand
             ],
             $output
         );
-
-        $this->runCommands(
-            [
-                'hautelook:fixtures:load' => ['-e' => $env, '--append' => true],
-            ],
-            $output
-        );
     }
 
     protected function loadToggles(OutputInterface $output)
