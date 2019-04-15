@@ -183,9 +183,8 @@ export class OpinionFollowButton extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(
-  OpinionFollowButton,
-  graphql`
+export default createFragmentContainer(OpinionFollowButton, {
+  opinion: graphql`
     fragment OpinionFollowButton_opinion on Opinion
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
@@ -193,4 +192,4 @@ export default createFragmentContainer(
       viewerFollowingConfiguration @include(if: $isAuthenticated)
     }
   `,
-);
+});

@@ -17,9 +17,8 @@ const OpinionSourceTitle = ({ source }: Props) => (
   </h3>
 );
 
-export default createFragmentContainer(
-  OpinionSourceTitle,
-  graphql`
+export default createFragmentContainer(OpinionSourceTitle, {
+  source: graphql`
     fragment OpinionSourceTitle_source on Source {
       id
       title
@@ -29,4 +28,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

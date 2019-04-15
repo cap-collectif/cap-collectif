@@ -23,9 +23,8 @@ export class ArgumentVoteBox extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  ArgumentVoteBox,
-  graphql`
+export default createFragmentContainer(ArgumentVoteBox, {
+  argument: graphql`
     fragment ArgumentVoteBox_argument on Argument
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       votes(first: 0) {
@@ -34,4 +33,4 @@ export default createFragmentContainer(
       ...ArgumentVoteButton_argument @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
-);
+});

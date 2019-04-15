@@ -29,9 +29,8 @@ class OpinionSourceVoteBox extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  OpinionSourceVoteBox,
-  graphql`
+export default createFragmentContainer(OpinionSourceVoteBox, {
+  source: graphql`
     fragment OpinionSourceVoteBox_source on Source
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
@@ -47,4 +46,4 @@ export default createFragmentContainer(
       ...OpinionSourceVoteButton_source @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
-);
+});

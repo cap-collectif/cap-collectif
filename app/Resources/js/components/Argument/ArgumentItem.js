@@ -104,9 +104,8 @@ export class ArgumentItem extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  ArgumentItem,
-  graphql`
+export default createFragmentContainer(ArgumentItem, {
+  argument: graphql`
     fragment ArgumentItem_argument on Argument
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       ...TrashedMessage_contribution
@@ -139,4 +138,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

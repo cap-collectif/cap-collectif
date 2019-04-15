@@ -131,9 +131,8 @@ export class FollowingsTab extends Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(
-  FollowingsTab,
-  graphql`
+export default createFragmentContainer(FollowingsTab, {
+  viewer: graphql`
     fragment FollowingsTab_viewer on User
       @argumentDefinitions(
         count: { type: "Int", defaultValue: 1000 }
@@ -171,4 +170,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

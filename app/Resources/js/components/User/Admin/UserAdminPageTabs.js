@@ -47,9 +47,8 @@ export class UserAdminPageTabs extends Component<Props, State> {
 
 const container = injectIntl(UserAdminPageTabs);
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  user: graphql`
     fragment UserAdminPageTabs_user on User {
       username
       url
@@ -59,4 +58,4 @@ export default createFragmentContainer(
       ...UserAdminPassword_user
     }
   `,
-);
+});

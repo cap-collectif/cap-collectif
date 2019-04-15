@@ -61,13 +61,12 @@ export class OpinionRow extends Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(
-  OpinionRow,
-  graphql`
+export default createFragmentContainer(OpinionRow, {
+  opinion: graphql`
     fragment OpinionRow_opinion on Opinion {
       id
       title
       url
     }
   `,
-);
+});

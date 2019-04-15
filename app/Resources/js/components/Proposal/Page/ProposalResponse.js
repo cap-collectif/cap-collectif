@@ -164,9 +164,8 @@ export class ProposalResponse extends React.PureComponent<Props> {
   }
 }
 
-export default createFragmentContainer(
-  ProposalResponse,
-  graphql`
+export default createFragmentContainer(ProposalResponse, {
+  response: graphql`
     fragment ProposalResponse_response on Response {
       question {
         __typename
@@ -182,4 +181,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

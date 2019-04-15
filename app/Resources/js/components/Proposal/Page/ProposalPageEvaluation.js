@@ -143,9 +143,8 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
 
 const container = connect(mapStateToProps)(form);
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  proposal: graphql`
     fragment ProposalPageEvaluation_proposal on Proposal {
       id
       viewerIsAnEvaluer
@@ -165,4 +164,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

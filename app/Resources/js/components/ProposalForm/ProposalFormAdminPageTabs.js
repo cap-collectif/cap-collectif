@@ -60,9 +60,8 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
 
 const container = injectIntl(ProposalFormAdminPageTabs);
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  proposalForm: graphql`
     fragment ProposalFormAdminPageTabs_proposalForm on ProposalForm {
       url
       reference
@@ -72,4 +71,4 @@ export default createFragmentContainer(
       ...ProposalFormAdminEvaluationForm_proposalForm
     }
   `,
-);
+});

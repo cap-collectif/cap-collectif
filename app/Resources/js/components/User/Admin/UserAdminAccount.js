@@ -217,9 +217,8 @@ const mapStateToProps = (state: GlobalState, { user }: RelayProps) => ({
 
 const container = connect(mapStateToProps)(injectIntl(form));
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  user: graphql`
     fragment UserAdminAccount_user on User {
       id
       isViewer
@@ -232,4 +231,4 @@ export default createFragmentContainer(
       ...DeleteAccountModal_viewer
     }
   `,
-);
+});

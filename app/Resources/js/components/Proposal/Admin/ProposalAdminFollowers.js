@@ -83,9 +83,8 @@ export class ProposalAdminFollowers extends React.Component<Props> {
 
 const container = injectIntl(ProposalAdminFollowers);
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  proposal: graphql`
     fragment ProposalAdminFollowers_proposal on Proposal {
       ...ProposalPageFollowers_proposal @arguments(count: $count, cursor: $cursor)
       id
@@ -94,4 +93,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

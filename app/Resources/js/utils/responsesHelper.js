@@ -18,24 +18,26 @@ import type {
 } from '~relay/responsesHelper_question.graphql';
 
 // eslint-disable-next-line no-unused-vars
-const ResponseFragment = graphql`
-  fragment responsesHelper_response on Response {
-    question {
-      id
-    }
-    ... on ValueResponse {
-      value
-    }
-    ... on MediaResponse {
-      medias {
+const ResponseFragment = {
+  response: graphql`
+    fragment responsesHelper_response on Response {
+      question {
         id
-        name
-        size
-        url
+      }
+      ... on ValueResponse {
+        value
+      }
+      ... on MediaResponse {
+        medias {
+          id
+          name
+          size
+          url
+        }
       }
     }
-  }
-`;
+  `,
+};
 
 /**
  * Ok we have two shared fragment for questions :
@@ -49,123 +51,127 @@ const ResponseFragment = graphql`
  */
 
 // eslint-disable-next-line no-unused-vars
-const QuestionAdminFragment = graphql`
-  fragment responsesHelper_adminQuestion on Question {
-    id
-    title
-    number
-    private
-    position
-    required
-    helpText
-    jumps {
+const QuestionAdminFragment = {
+  adminQuestion: graphql`
+    fragment responsesHelper_adminQuestion on Question {
       id
-      always
-      origin {
+      title
+      number
+      private
+      position
+      required
+      helpText
+      jumps {
         id
-      }
-      destination {
-        id
-        title
-        number
-      }
-      conditions {
-        id
-        operator
-        question {
+        always
+        origin {
+          id
+        }
+        destination {
           id
           title
+          number
         }
-        ... on MultipleChoiceQuestionLogicJumpCondition {
-          value {
+        conditions {
+          id
+          operator
+          question {
             id
             title
+          }
+          ... on MultipleChoiceQuestionLogicJumpCondition {
+            value {
+              id
+              title
+            }
+          }
+        }
+      }
+      description
+      type
+      ... on MultipleChoiceQuestion {
+        isOtherAllowed
+        randomQuestionChoices
+        validationRule {
+          type
+          number
+        }
+        choices(allowRandomize: false) {
+          # this is updated
+          id
+          title
+          description
+          color
+          image {
+            id
+            url
           }
         }
       }
     }
-    description
-    type
-    ... on MultipleChoiceQuestion {
-      isOtherAllowed
-      randomQuestionChoices
-      validationRule {
-        type
-        number
-      }
-      choices(allowRandomize: false) {
-        # this is updated
-        id
-        title
-        description
-        color
-        image {
-          id
-          url
-        }
-      }
-    }
-  }
-`;
+  `,
+};
 
 // eslint-disable-next-line no-unused-vars
-const QuestionFragment = graphql`
-  fragment responsesHelper_question on Question {
-    id
-    title
-    number
-    private
-    position
-    required
-    helpText
-    jumps {
+const QuestionFragment = {
+  question: graphql`
+    fragment responsesHelper_question on Question {
       id
-      always
-      origin {
+      title
+      number
+      private
+      position
+      required
+      helpText
+      jumps {
         id
-      }
-      destination {
-        id
-        title
-        number
-      }
-      conditions {
-        id
-        operator
-        question {
+        always
+        origin {
+          id
+        }
+        destination {
           id
           title
+          number
         }
-        ... on MultipleChoiceQuestionLogicJumpCondition {
-          value {
+        conditions {
+          id
+          operator
+          question {
             id
             title
+          }
+          ... on MultipleChoiceQuestionLogicJumpCondition {
+            value {
+              id
+              title
+            }
+          }
+        }
+      }
+      description
+      type
+      ... on MultipleChoiceQuestion {
+        isOtherAllowed
+        randomQuestionChoices
+        validationRule {
+          type
+          number
+        }
+        choices(allowRandomize: true) {
+          id
+          title
+          description
+          color
+          image {
+            id
+            url
           }
         }
       }
     }
-    description
-    type
-    ... on MultipleChoiceQuestion {
-      isOtherAllowed
-      randomQuestionChoices
-      validationRule {
-        type
-        number
-      }
-      choices(allowRandomize: true) {
-        id
-        title
-        description
-        color
-        image {
-          id
-          url
-        }
-      }
-    }
-  }
-`;
+  `,
+};
 
 // This is a cp/paster of
 // responsesHelper_question without $refType

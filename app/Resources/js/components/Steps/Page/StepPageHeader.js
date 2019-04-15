@@ -60,9 +60,8 @@ export class StepPageHeader extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  StepPageHeader,
-  graphql`
+export default createFragmentContainer(StepPageHeader, {
+  step: graphql`
     fragment StepPageHeader_step on Step {
       ...StepInfos_step
       ... on SelectionStep {
@@ -77,4 +76,4 @@ export default createFragmentContainer(
       type
     }
   `,
-);
+});

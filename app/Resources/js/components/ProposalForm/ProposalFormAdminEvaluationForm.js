@@ -156,9 +156,8 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
 const container = connect(mapStateToProps)(form);
 const intlContainer = injectIntl(container);
 
-export default createFragmentContainer(
-  intlContainer,
-  graphql`
+export default createFragmentContainer(intlContainer, {
+  proposalForm: graphql`
     fragment ProposalFormAdminEvaluationForm_proposalForm on ProposalForm {
       id
       evaluationForm {
@@ -167,4 +166,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

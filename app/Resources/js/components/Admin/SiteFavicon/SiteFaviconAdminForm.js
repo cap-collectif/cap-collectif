@@ -106,9 +106,8 @@ const form = reduxForm({
 
 const container = connect(mapStateToProps)(form);
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  siteFavicon: graphql`
     fragment SiteFaviconAdminForm_siteFavicon on SiteImage {
       id
       media {
@@ -118,4 +117,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});
