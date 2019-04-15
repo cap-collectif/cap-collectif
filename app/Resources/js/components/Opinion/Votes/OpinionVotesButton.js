@@ -2,7 +2,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
@@ -12,11 +12,10 @@ import AddOpinionVoteMutation from '../../../mutations/AddOpinionVoteMutation';
 import RemoveOpinionVoteMutation from '../../../mutations/RemoveOpinionVoteMutation';
 import RequirementsFormModal from '../../Requirements/RequirementsModal';
 import type { OpinionVotesButton_opinion } from '~relay/OpinionVotesButton_opinion.graphql';
-import type { Dispatch } from '../../../types';
 
-type RelayProps = {|
-  +opinion: OpinionVotesButton_opinion,
-|};
+type RelayProps = {
+  opinion: OpinionVotesButton_opinion,
+};
 
 type YesNoPairedVoteValue = 'MITIGE' | 'NO' | 'YES';
 
@@ -42,18 +41,15 @@ const valueToObject = (value: YesNoPairedVoteValue): Object => {
   };
 };
 
-type Props = {|
-  ...RelayProps,
-  dispatch: Dispatch,
-  intl: IntlShape,
-  +style: Object,
-  +value: YesNoPairedVoteValue,
-|};
+type Props = {
+  style: Object,
+  value: YesNoPairedVoteValue,
+} & RelayProps;
 
-type State = {|
-  +isLoading: boolean,
-  +showModal: boolean,
-|};
+type State = {
+  isLoading: boolean,
+  showModal: boolean,
+};
 
 export class OpinionVotesButton extends React.Component<Props, State> {
   static defaultProps = { style: {} };
@@ -173,7 +169,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
   };
 
   render() {
-    const { intl, opinion, value, style } = this.props;
+    const { opinion, value, style } = this.props;
     const { isLoading, showModal } = this.state;
     if (
       !this.voteIsEnabled() ||
@@ -203,7 +199,11 @@ export class OpinionVotesButton extends React.Component<Props, State> {
             className="btn--outline"
             onClick={this.voteAction}
             active={active}
-            aria-label={intl.formatMessage({id: active ? `vote.aria_label_active.${data.str}` : `vote.aria_label.${data.str}` })}
+            aria-label={
+              <FormattedMessage
+                id={active ? `vote.aria_label_active.${data.str}` : `vote.aria_label.${data.str}`}
+              />
+            }
             disabled={disabled || isLoading}>
             {active /* $FlowFixMe */ && (
               <UnpublishedTooltip
@@ -219,7 +219,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(injectIntl(OpinionVotesButton), {
+export default createFragmentContainer(OpinionVotesButton, {
   opinion: graphql`
     fragment OpinionVotesButton_opinion on OpinionOrVersion
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {

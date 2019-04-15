@@ -13,3 +13,7 @@ Capco\AppBundle\Entity\Argument:
     Author:
       serialized_name: author
       groups: [Opinions, OpinionVersions, UserMedias]
+    step:
+      groups: [Elasticsearch]
+    project:
+      groups: [Elasticsearch]

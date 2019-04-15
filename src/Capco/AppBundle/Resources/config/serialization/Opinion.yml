@@ -49,4 +49,8 @@ Capco\AppBundle\Entity\Opinion:
     getStep:
       type: object
       serialized_name: step
-      groups: [Opinions]
+      groups: [Elasticsearch]
+    getProject:
+      type: object
+      serialized_name: project
+      groups: [Elasticsearch]

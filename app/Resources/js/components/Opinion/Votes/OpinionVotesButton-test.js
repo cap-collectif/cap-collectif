@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { $refType, $fragmentRefs, intlMock } from '../../../mocks';
+import { $refType, $fragmentRefs } from '../../../mocks';
 import { OpinionVotesButton } from './OpinionVotesButton';
 import {
   VOTE_WIDGET_DISABLED,
@@ -20,7 +20,6 @@ const defaultStep = {
 describe('<OpinionVotesButton />', () => {
   const defaultProps = {
     dispatch: jest.fn(),
-    intl: intlMock,
   };
   const opinionVoteBoth = {
     $refType,
