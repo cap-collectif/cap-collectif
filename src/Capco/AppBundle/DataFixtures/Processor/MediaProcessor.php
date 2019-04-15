@@ -6,18 +6,19 @@ namespace Capco\AppBundle\DataFixtures\Processor;
 
 use Capco\MediaBundle\Entity\Media;
 use Fidry\AliceDataFixtures\ProcessorInterface;
+use Sonata\ClassificationBundle\Model\ContextInterface;
 
 class MediaProcessor implements ProcessorInterface
 {
     public function preProcess(string $id, $object): void
     {
         if ($object instanceof Media) {
+            $object->setContext(ContextInterface::DEFAULT_CONTEXT);
             $object->setBinaryContent(
                 realpath(__DIR__) . '/../files/' . $object->getBinaryContent()
             );
             $object->setEnabled(true);
             $object->setProviderName($this->resolveProviderName($object));
-            $object->setContext('default');
         }
     }
 
