@@ -87,35 +87,37 @@ export class ProposalVotes extends React.Component<Props, State> {
 
 export default createPaginationContainer(
   ProposalVotes,
-  graphql`
-    fragment ProposalVotes_proposal on Proposal
-      @argumentDefinitions(
-        count: { type: "Int", defaultValue: 50 }
-        cursor: { type: "String", defaultValue: null }
-        stepId: { type: "ID!", nonNull: true }
-      ) {
-      id
-      votes(first: $count, after: $cursor, stepId: $stepId)
-        @connection(key: "ProposalVotes_votes", filters: ["stepId"]) {
-        edges {
-          node {
-            author {
-              id
-              ...UserBox_user
+  {
+    proposal: graphql`
+      fragment ProposalVotes_proposal on Proposal
+        @argumentDefinitions(
+          count: { type: "Int", defaultValue: 50 }
+          cursor: { type: "String", defaultValue: null }
+          stepId: { type: "ID!", nonNull: true }
+        ) {
+        id
+        votes(first: $count, after: $cursor, stepId: $stepId)
+          @connection(key: "ProposalVotes_votes", filters: ["stepId"]) {
+          edges {
+            node {
+              author {
+                id
+                ...UserBox_user
+              }
             }
+            cursor
           }
-          cursor
+          pageInfo {
+            hasNextPage
+            endCursor
+            startCursor
+            hasPreviousPage
+          }
+          totalCount
         }
-        pageInfo {
-          hasNextPage
-          endCursor
-          startCursor
-          hasPreviousPage
-        }
-        totalCount
       }
-    }
-  `,
+    `,
+  },
   {
     direction: 'forward',
     getConnectionFromProps(props: Props) {

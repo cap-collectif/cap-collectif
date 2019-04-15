@@ -28,9 +28,8 @@ export class ProposalPageBlog extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  ProposalPageBlog,
-  graphql`
+export default createFragmentContainer(ProposalPageBlog, {
+  proposal: graphql`
     fragment ProposalPageBlog_proposal on Proposal {
       news {
         totalCount
@@ -42,4 +41,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

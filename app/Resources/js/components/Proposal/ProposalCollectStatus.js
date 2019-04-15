@@ -22,9 +22,8 @@ export class ProposalCollectStatus extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  ProposalCollectStatus,
-  graphql`
+export default createFragmentContainer(ProposalCollectStatus, {
+  proposal: graphql`
     fragment ProposalCollectStatus_proposal on Proposal {
       status {
         color
@@ -32,4 +31,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

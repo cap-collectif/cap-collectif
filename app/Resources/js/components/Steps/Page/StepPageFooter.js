@@ -25,11 +25,10 @@ class StepPageFooter extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  StepPageFooter,
-  graphql`
+export default createFragmentContainer(StepPageFooter, {
+  step: graphql`
     fragment StepPageFooter_step on QuestionnaireStep {
       footer
     }
   `,
-);
+});

@@ -86,9 +86,8 @@ export class OpinionSourceVoteButton extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(
-  OpinionSourceVoteButton,
-  graphql`
+export default createFragmentContainer(OpinionSourceVoteButton, {
+  source: graphql`
     fragment OpinionSourceVoteButton_source on Source
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
@@ -108,4 +107,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

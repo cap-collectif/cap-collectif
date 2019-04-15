@@ -83,13 +83,12 @@ class ArgumentDeleteModal extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(
-  ArgumentDeleteModal,
-  graphql`
+export default createFragmentContainer(ArgumentDeleteModal, {
+  argument: graphql`
     fragment ArgumentDeleteModal_argument on Argument {
       id
       type
       published
     }
   `,
-);
+});

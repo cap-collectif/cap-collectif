@@ -77,37 +77,39 @@ export class ProposalFormEvaluationList extends Component<Props> {
 
 export default createPaginationContainer(
   ProposalFormEvaluationList,
-  graphql`
-    fragment ProposalFormEvaluationList_proposalForm on ProposalForm
-      @argumentDefinitions(
-        count: { type: "Int", defaultValue: 10 }
-        cursor: { type: "String", defaultValue: null }
-      ) {
-      id
-      step {
-        title
-        project {
+  {
+    proposalForm: graphql`
+      fragment ProposalFormEvaluationList_proposalForm on ProposalForm
+        @argumentDefinitions(
+          count: { type: "Int", defaultValue: 10 }
+          cursor: { type: "String", defaultValue: null }
+        ) {
+        id
+        step {
           title
+          project {
+            title
+          }
         }
-      }
-      proposals(first: $count, after: $cursor, affiliations: [EVALUER])
-        @connection(key: "ProposalFormEvaluationList_proposals") {
-        totalCount
-        pageInfo {
-          endCursor
-          hasNextPage
-          hasPreviousPage
-          startCursor
-        }
-        edges {
-          node {
-            id
-            ...ProposalFormEvaluationRow_proposal
+        proposals(first: $count, after: $cursor, affiliations: [EVALUER])
+          @connection(key: "ProposalFormEvaluationList_proposals") {
+          totalCount
+          pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+          }
+          edges {
+            node {
+              id
+              ...ProposalFormEvaluationRow_proposal
+            }
           }
         }
       }
-    }
-  `,
+    `,
+  },
   {
     direction: 'forward',
     getConnectionFromProps(props: Props) {

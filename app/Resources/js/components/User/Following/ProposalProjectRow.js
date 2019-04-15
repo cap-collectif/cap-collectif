@@ -73,9 +73,8 @@ export class ProposalProjectRow extends Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(
-  ProposalProjectRow,
-  graphql`
+export default createFragmentContainer(ProposalProjectRow, {
+  viewer: graphql`
     fragment ProposalProjectRow_viewer on User
       @argumentDefinitions(
         count: { type: "Int", defaultValue: 1000 }
@@ -96,4 +95,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});
