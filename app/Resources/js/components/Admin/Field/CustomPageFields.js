@@ -6,19 +6,20 @@ import { FormattedMessage } from 'react-intl';
 
 import component from '../../Form/Field';
 
-type Props = {
-  name?: string,
+export type FormValues = {
   customCode?: string,
   socialMedias?: string,
   metadatas?: string,
 };
 
+type Props = {
+  ...FormValues,
+};
+
 export default class CustomPageFields extends React.Component<Props> {
   render() {
-    const { name } = this.props;
-
     return (
-      <FormSection name={`${name || 'name'}.custom`}>
+      <FormSection name="custom">
         <Field
           name="metadatas"
           type="text"

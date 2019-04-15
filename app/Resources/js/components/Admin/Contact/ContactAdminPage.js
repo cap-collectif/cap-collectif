@@ -11,12 +11,14 @@ import type { State } from '../../../types';
 import ContactAdminList from './ContactAdminList';
 import ContactAdminForm from './ContactAdminForm';
 import CustomPageFields from '../Field/CustomPageFields';
+import type { FormValues as CustomFormValues } from '../Field/CustomPageFields';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import UpdateContactPageMutation from '../../../mutations/UpdateContactPageMutation';
 
 type Props = {
   ...FormProps,
+  ...CustomFormValues,
 };
 
 const formName = 'contact-admin-form';
@@ -28,6 +30,8 @@ type FormValues = {
 
 const validate = (values: FormValues) => {
   const errors = {};
+  console.log('values***************************************************');
+  console.log(values);
   if (values.title === undefined || values.title.trim() === '') {
     errors.title = 'fill-field';
   }
@@ -73,6 +77,8 @@ export class ContactAdminPage extends React.Component<Props> {
             </h3>
           </div>
           <div className="box-content">
+            {/* TODO: Fix Flow here */}
+            {/* $FlowFixMe */}
             <ContactAdminForm {...this.props} formName={formName} />
             <QueryRenderer
               environment={environment}
@@ -93,7 +99,7 @@ export class ContactAdminPage extends React.Component<Props> {
               <FormattedMessage id="admin.fields.project.advanced" />
             </h3>
           </div>
-          <CustomPageFields />
+          <CustomPageFields formName={formName} />
         </div>
 
         <div className="box no-border">
