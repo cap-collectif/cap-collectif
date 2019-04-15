@@ -26,14 +26,14 @@ class ProjectAbstractStep
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="steps", cascade={"persist"})
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * @Assert\NotNull()
-     **/
+     */
     protected $project;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="projectAbstractStep", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * @Assert\NotNull()
-     **/
+     */
     protected $step;
 
     public function __toString()
@@ -52,7 +52,7 @@ class ProjectAbstractStep
      *
      * @return ProjectAbstractStep
      */
-    public function setProject(Project $project)
+    public function setProject(Project $project): self
     {
         $this->project = $project;
 

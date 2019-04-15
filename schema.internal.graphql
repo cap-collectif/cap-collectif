@@ -3384,6 +3384,9 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
     onlyTrashed: Boolean = false
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
+  isVotesCounterDisplayable: Boolean!
+  isContributionsCounterDisplayable: Boolean!
+  isParticipantsCounterDisplayable: Boolean!
 }
 
 # A connection to a list of items.
