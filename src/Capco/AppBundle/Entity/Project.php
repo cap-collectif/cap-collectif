@@ -7,10 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
@@ -997,57 +994,6 @@ class Project implements IndexableInterface
         }
 
         return $this;
-    }
-
-    public function isVotesCounterDisplayable(): bool
-    {
-        $steps = $this->getRealSteps();
-        foreach ($steps as $step) {
-            if (
-                $step instanceof ConsultationStep ||
-                $step instanceof SelectionStep ||
-                $step instanceof CollectStep
-            ) {
-                return $step->isVotable();
-            }
-        }
-
-        return false;
-    }
-
-    public function isContributionsCounterDisplayable(): bool
-    {
-        $steps = $this->getRealSteps();
-        foreach ($steps as $step) {
-            if (
-                $step instanceof ConsultationStep ||
-                $step instanceof QuestionnaireStep ||
-                $step instanceof CollectStep
-            ) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function isParticipantsCounterDisplayable(): bool
-    {
-        $steps = $this->getRealSteps();
-        foreach ($steps as $step) {
-            if ($step instanceof SelectionStep) {
-                return $step->isVotable();
-            }
-            if (
-                $step instanceof CollectStep ||
-                $step instanceof ConsultationStep ||
-                $step instanceof QuestionnaireStep
-            ) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

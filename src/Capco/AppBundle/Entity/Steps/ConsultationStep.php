@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
-use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -439,21 +438,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
         $this->titleHelpText = $titleHelpText;
 
         return $this;
-    }
-
-    public function isVotable(): bool
-    {
-        /** @var ConsultationStepType $consultationStepType */
-        $consultationStepType = $this->consultationStepType;
-
-        /** @var OpinionType $opinionType */
-        foreach ($consultationStepType->getOpinionTypes() as $opinionType) {
-            if (OpinionType::VOTE_WIDGET_DISABLED !== $opinionType->getVoteWidgetType()) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

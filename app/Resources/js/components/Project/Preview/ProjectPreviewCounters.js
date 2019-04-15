@@ -25,29 +25,23 @@ export class ProjectPreviewCounters extends React.Component<Props> {
 
     return (
       <TagsList>
-        {project.isContributionsCounterDisplayable && (
-          <ProjectPreviewCounter
-            value={project.contributionsCount ? project.contributionsCount : 0}
-            label="project.preview.counters.contributions"
-            showZero
-            icon="cap-baloon-1"
-          />
-        )}
-        {project.isVotesCounterDisplayable && (
-          <ProjectPreviewCounter
-            value={project.votes.totalCount}
-            label="project.preview.counters.votes"
-            icon="cap-hand-like-2-1"
-          />
-        )}
-        {project.isParticipantsCounterDisplayable && (
-          <ProjectPreviewCounter
-            value={project.contributors.totalCount + project.contributors.anonymousCount}
-            label="project.preview.counters.contributors"
-            showZero
-            icon="cap-user-2-1"
-          />
-        )}
+        <ProjectPreviewCounter
+          value={project.contributionsCount ? project.contributionsCount : 0}
+          label="project.preview.counters.contributions"
+          showZero
+          icon="cap-baloon-1"
+        />
+        <ProjectPreviewCounter
+          value={project.votes.totalCount}
+          label="project.preview.counters.votes"
+          icon="cap-hand-like-2-1"
+        />
+        <ProjectPreviewCounter
+          value={project.contributors.totalCount + project.contributors.anonymousCount}
+          label="project.preview.counters.contributors"
+          showZero
+          icon="cap-user-2-1"
+        />
         {project.districts && project.districts.length > 0 && (
           <div className="tags-list__tag">
             <i className="cap cap-marker-1-1" />
@@ -73,9 +67,6 @@ export default createFragmentContainer(ProjectPreviewCounters, {
   project: graphql`
     fragment ProjectPreviewCounters_project on Project {
       id
-      isVotesCounterDisplayable
-      isContributionsCounterDisplayable
-      isParticipantsCounterDisplayable
       districts {
         name
       }
