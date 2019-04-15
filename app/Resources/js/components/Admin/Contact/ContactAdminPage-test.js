@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { ContactAdminForm } from './ContactAdminForm';
+import { ContactAdminPage } from './ContactAdminPage';
 import { formMock } from '../../../mocks';
 
 describe('<ContactAdminForm />', () => {
@@ -11,7 +11,7 @@ describe('<ContactAdminForm />', () => {
   };
 
   it('renders correctly', () => {
-    const wrapper = shallow(<ContactAdminForm {...props} />);
+    const wrapper = shallow(<ContactAdminPage {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

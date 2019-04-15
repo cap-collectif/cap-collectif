@@ -50,7 +50,7 @@ describe('<ProposalListTable />', () => {
           updatedAt: null,
           status: null,
           likers: [],
-          url: null,
+          url: 'https://capco.dev',
         },
       },
       {
@@ -69,7 +69,7 @@ describe('<ProposalListTable />', () => {
           progressSteps: [],
           updatedAt: null,
           likers: [],
-          url: null,
+          url: 'https://capco.dev',
         },
       },
     ],

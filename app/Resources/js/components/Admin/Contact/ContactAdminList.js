@@ -30,7 +30,7 @@ class ContactAdminList extends React.Component<Props> {
 
   render() {
     return (
-      <div>
+      <div className="form-group">
         <h4>
           <strong>
             <FormattedMessage id="forms-list" />

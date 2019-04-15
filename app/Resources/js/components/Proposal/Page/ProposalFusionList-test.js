@@ -12,12 +12,12 @@ describe('<ProposalFusionList />', () => {
     mergedIn: [
       {
         id: 'proposal2',
-        url: true,
+        url: 'https://capco.dev/proposals/2',
         title: 'Title Proposal 2',
       },
       {
         id: 'proposal3',
-        url: true,
+        url: 'https://capco.dev/proposals/3',
         title: 'Title Proposal 3',
       },
     ],
@@ -30,12 +30,12 @@ describe('<ProposalFusionList />', () => {
     mergedFrom: [
       {
         id: 'proposal2',
-        url: true,
+        url: 'https://capco.dev/proposals/2',
         title: 'Title Proposal 2',
       },
       {
         id: 'proposal3',
-        url: true,
+        url: 'https://capco.dev/proposals/3',
         title: 'Title Proposal 3',
       },
     ],

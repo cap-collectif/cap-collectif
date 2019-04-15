@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SSOSwitchUserPage /> renders with a user 1`] = `
+<div
+  className="col-md-4 col-md-offset-4 panel panel-default bg-white"
+>
+  <div
+    className="panel-body"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      className="w-100"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <FormattedHTMLMessage
+        id="continue-as-sso-connected-user"
+        values={
+          Object {
+            "SsoConnectedUsername": "Enjoy Phoenix",
+          }
+        }
+      />
+    </Button>
+    <p
+      className="mt-15 mb-0 text-center"
+    >
+      <a
+        href="/logout?ssoSwitchUser=true"
+      >
+        <FormattedMessage
+          id="change-user"
+          values={Object {}}
+        />
+      </a>
+    </p>
+  </div>
+</div>
+`;
+
+exports[`<SSOSwitchUserPage /> renders without a user 1`] = `
+<div
+  className="col-md-4 col-md-offset-4 panel panel-default bg-white"
+>
+  <div
+    className="panel-body"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      className="w-100"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <FormattedHTMLMessage
+        id="continue-as-sso-connected-user"
+        values={
+          Object {
+            "SsoConnectedUsername": "",
+          }
+        }
+      />
+    </Button>
+    <p
+      className="mt-15 mb-0 text-center"
+    >
+      <a
+        href="/logout?ssoSwitchUser=true"
+      >
+        <FormattedMessage
+          id="change-user"
+          values={Object {}}
+        />
+      </a>
+    </p>
+  </div>
+</div>
+`;

@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ContactAdminForm /> renders correctly 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="admin.group.content"
+        values={Object {}}
+      />
+    </h3>
+  </div>
+  <div
+    className="box-content"
+  >
+    <ContactAdminForm
+      anyTouched={false}
+      array={
+        Object {
+          "insert": [MockFunction],
+          "move": [MockFunction],
+          "pop": [MockFunction],
+          "push": [MockFunction],
+          "remove": [MockFunction],
+          "removeAll": [MockFunction],
+          "shift": [MockFunction],
+          "splice": [MockFunction],
+          "swap": [MockFunction],
+          "unshift": [MockFunction],
+        }
+      }
+      asyncValidate={[MockFunction]}
+      asyncValidating={false}
+      autofill={[MockFunction]}
+      blur={[MockFunction]}
+      change={[MockFunction]}
+      clearAsyncError={[MockFunction]}
+      clearSubmit={[MockFunction]}
+      destroy={[MockFunction]}
+      dirty={false}
+      dispatch={[MockFunction]}
+      error={null}
+      form="formName"
+      formName="contact-admin-form"
+      handleSubmit={[MockFunction]}
+      initialValues={Object {}}
+      initialize={[MockFunction]}
+      initialized={true}
+      invalid={false}
+      pristine={true}
+      reset={[MockFunction]}
+      submitFailed={false}
+      submitSucceeded={false}
+      submitting={false}
+      touch={[MockFunction]}
+      untouch={[MockFunction]}
+      valid={true}
+      warning={null}
+    />
+     
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={[Function]}
+      render={[Function]}
+      variables={Object {}}
+    />
+     
+  </div>
+  <div
+    className="box-content"
+  >
+    <CustomPageFields />
+  </div>
+</div>
+`;
