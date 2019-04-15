@@ -169,7 +169,7 @@ Scenario: GraphQL client wants to list event in project
       }
     }",
     "variables": {
-      "projectId": "project1",
+      "projectId": "UHJvamVjdDpwcm9qZWN0MQ==",
       "first": 5
     }
   }
@@ -186,7 +186,7 @@ Scenario: GraphQL client wants to list event in project
                   "_id":"evenementPasseSansDateDeFin",
                   "projects":[
                      {
-                        "id":"project1"
+                        "id":"UHJvamVjdDpwcm9qZWN0MQ=="
                      }
                   ]
                }
@@ -196,7 +196,7 @@ Scenario: GraphQL client wants to list event in project
                   "_id":"event1",
                   "projects":[
                      {
-                        "id":"project1"
+                        "id":"UHJvamVjdDpwcm9qZWN0MQ=="
                      }
                   ]
                }
@@ -206,7 +206,7 @@ Scenario: GraphQL client wants to list event in project
                   "_id":"event2",
                   "projects":[
                      {
-                        "id":"project1"
+                        "id":"UHJvamVjdDpwcm9qZWN0MQ=="
                      }
                   ]
                }
@@ -216,7 +216,7 @@ Scenario: GraphQL client wants to list event in project
                   "_id":"event3",
                   "projects":[
                      {
-                        "id":"project1"
+                        "id":"UHJvamVjdDpwcm9qZWN0MQ=="
                      }
                   ]
                }

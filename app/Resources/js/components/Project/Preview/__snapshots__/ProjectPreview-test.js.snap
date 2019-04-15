@@ -12,14 +12,14 @@ exports[`<ProjectPreview /> should render correctly project with participative s
 >
   <Card
     className="project-preview"
-    id="project-preview-project1"
+    id="project-preview-UHJvamVjdDpwcm9qZWN0MQ=="
   >
     <ForwardRef(Relay(ProjectType))
       project={
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "id": "project1",
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
         }
       }
     />
@@ -28,7 +28,7 @@ exports[`<ProjectPreview /> should render correctly project with participative s
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "id": "project1",
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
         }
       }
     />
@@ -37,7 +37,7 @@ exports[`<ProjectPreview /> should render correctly project with participative s
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "id": "project1",
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
         }
       }
     />

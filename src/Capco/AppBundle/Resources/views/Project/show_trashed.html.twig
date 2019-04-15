@@ -47,7 +47,7 @@
                 {{
                     react_render_component('ProjectTrashProposalApp', {
                         'props': {
-                            'projectId': project.id,
+                            'projectId': project.id|toGlobalId('Project'),
                             'isAuthenticated': is_granted('ROLE_USER'),
                         },
                         'rendering': 'client_side'
@@ -56,7 +56,7 @@
                 {{
                     react_render_component('ProjectTrashCommentApp', {
                         'props': {
-                            'projectId': project.id,
+                            'projectId': project.id|toGlobalId('Project'),
                             'isAuthenticated': is_granted('ROLE_USER'),
                         },
                         'rendering': 'client_side'

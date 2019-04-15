@@ -11,7 +11,7 @@ describe('<OpinionCreateForm />', () => {
     $fragmentRefs,
     id: '1',
     project: {
-      id: '1',
+      _id: 'project1',
     },
     titleHelpText: null,
     descriptionHelpText: null,

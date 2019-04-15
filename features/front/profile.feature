@@ -81,11 +81,11 @@ Scenario: Logged in user wants to manage his followings and unfollow the first p
   Given I am logged in as user
   And I visited "manage followings page"
   And I wait 2 seconds
-  Then I click the "#profile-project-unfollow-button-project6" element
-  And the "div#profile-project-collapse-project6" element should not contain "class=\"capco-panel-list collapse in panel panel-default\""
+  Then I click the "[id='profile-project-unfollow-button-UHJvamVjdDpwcm9qZWN0Ng==']" element
+  And the "[id='profile-project-collapse-UHJvamVjdDpwcm9qZWN0Ng==']" element should not contain "class=\"capco-panel-list collapse in panel panel-default\""
   And I wait 2 seconds
   And I reload the page
-  Then I should not see an "#profile-project-collapse-project6" element
+  Then I should not see an "[id='profile-project-collapse-UHJvamVjdDpwcm9qZWN0Ng==']" element
 
 @database
 Scenario: Logged in user wants to manage his followings and unfollow the first proposal and stay unfollow after refresh
@@ -111,7 +111,7 @@ Scenario: Logged in user wants to manage his followings and click on a project
   Given I am logged in as user
   And I visited "manage followings page"
   And I wait 2 seconds
-  When I click the "#profile-project-link-project6" element
+  When I click the "[id='profile-project-link-UHJvamVjdDpwcm9qZWN0Ng==']" element
   Then I should be redirected to "/project/budget-participatif-rennes/collect/collecte-des-propositions"
 
 @database

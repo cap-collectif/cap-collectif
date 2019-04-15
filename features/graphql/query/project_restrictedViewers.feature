@@ -24,7 +24,7 @@ Scenario: GraphQL client wants to get list of users groups who can access to cur
       }
     }",
     "variables": {
-      "projectId": "ProjectWithCustomAccess",
+      "projectId": "UHJvamVjdDpQcm9qZWN0V2l0aEN1c3RvbUFjY2Vzcw==",
       "count": 32,
       "cursor": null
     }

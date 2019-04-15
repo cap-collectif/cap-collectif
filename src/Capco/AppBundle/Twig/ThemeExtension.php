@@ -135,10 +135,12 @@ class ThemeExtension extends \Twig_Extension
                     ],
                 ]);
 
+                $projectId = GlobalId::toGlobalId('Project', $project->getId());
                 $projectData = json_decode($projectSerialized, true);
+                $projectData['id'] = $projectId;
                 $projectData['steps'] = $projectStepsData;
                 $projectData['stepsById'] = $projectStepsByIdData;
-                $data[$project->getId()] = $projectData;
+                $data[$projectId] = $projectData;
             }
 
             $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);

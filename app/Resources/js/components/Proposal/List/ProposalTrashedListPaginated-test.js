@@ -10,7 +10,7 @@ describe('<ProposalTrashedListPaginated />', () => {
     relay: { ...relayPaginationMock, hasMore: () => true },
     project: {
       $refType,
-      id: 'project1',
+      id: 'UHJvamVjdDpwcm9qZWN0MQ==',
       proposals: {
         totalCount: 3,
         edges: [

@@ -3,10 +3,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFusionList } from './ProposalFusionList';
+import { $refType } from '../../../mocks';
 
 describe('<ProposalFusionList />', () => {
-  // $FlowFixMe $refType
   const proposalFusionnedMergedIn = {
+    $refType,
     id: 'proposal1',
     mergedIn: [
       {
@@ -22,8 +23,8 @@ describe('<ProposalFusionList />', () => {
     ],
     mergedFrom: [],
   };
-  // $FlowFixMe $refType
   const proposalFusionnedMergedFrom = {
+    $refType,
     id: 'proposal1',
     mergedIn: [],
     mergedFrom: [
@@ -39,20 +40,14 @@ describe('<ProposalFusionList />', () => {
       },
     ],
   };
-  const props = {
-    className: '',
-    referer: 'http://capco.test',
-  };
 
   it('should render a list of proposal merged from other proposal', () => {
-    const wrapper = shallow(<ProposalFusionList proposal={proposalFusionnedMergedIn} {...props} />);
+    const wrapper = shallow(<ProposalFusionList proposal={proposalFusionnedMergedIn} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a list of proposal of merged in other proposal', () => {
-    const wrapper = shallow(
-      <ProposalFusionList proposal={proposalFusionnedMergedFrom} {...props} />,
-    );
+    const wrapper = shallow(<ProposalFusionList proposal={proposalFusionnedMergedFrom} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

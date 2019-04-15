@@ -8,7 +8,7 @@ exports[`<ProjectHeaderDistricts /> should render correctly 1`] = `
     render={[Function]}
     variables={
       Object {
-        "projectId": "project1",
+        "projectId": "UHJvamVjdDpwcm9qZWN0MQ==",
       }
     }
   />

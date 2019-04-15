@@ -15,15 +15,19 @@ import type { OpinionCreateModal_section } from '~relay/OpinionCreateModal_secti
 import type { OpinionCreateModal_consultation } from '~relay/OpinionCreateModal_consultation.graphql';
 import { formName as requirementsFormName } from '../../Requirements/RequirementsForm';
 
-type Props = {
-  intl: IntlShape,
-  show: boolean,
+type RelayProps = {|
   section: OpinionCreateModal_section,
   consultation: OpinionCreateModal_consultation,
+|};
+
+type Props = {|
+  ...RelayProps,
+  intl: IntlShape,
+  show: boolean,
   submitting: boolean,
   dispatch: Dispatch,
   invalidRequirements: boolean,
-};
+|};
 
 export class OpinionCreateModal extends React.Component<Props> {
   render() {
@@ -84,7 +88,7 @@ export class OpinionCreateModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: Object) => ({
+const mapStateToProps = (state: State, props: RelayProps) => ({
   show: state.opinion.showOpinionCreateModal === props.section.id,
   submitting: isSubmitting(formName)(state),
   invalidRequirements: isInvalid(requirementsFormName)(state),

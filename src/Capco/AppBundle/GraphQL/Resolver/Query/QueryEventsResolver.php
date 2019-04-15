@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Search\EventSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -50,7 +51,9 @@ class QueryEventsResolver implements ResolverInterface
                     $filters['themes'] = $args->offsetGet('theme');
                 }
                 if ($args->offsetExists('project')) {
-                    $filters['projects'] = $args->offsetGet('project');
+                    $filters['projects'] = GlobalId::fromGlobalId($args->offsetGet('project'))[
+                        'id'
+                    ];
                 }
                 if ($args->offsetExists('isFuture')) {
                     $filters['isFuture'] = $args->offsetGet('isFuture');

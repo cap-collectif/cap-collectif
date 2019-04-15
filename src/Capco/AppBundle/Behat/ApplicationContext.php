@@ -452,21 +452,23 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @Then I wait :element to appear on current page
-     * @Then I wait :element to appear on current page maximum :timeout
+     * @Then I wait :selector to appear on current page
+     * @Then I wait :selector to appear on current page maximum :timeout
      */
-    public function iWaitElementToAppearOnPage(string $element, int $timeout = 5000)
+    public function iWaitElementToAppearOnPage(string $selector, int $timeout = 5000)
     {
-        expect($this->getSession()->wait($timeout, "$('" . $element . "').length > 0"))->toBe(true);
+        expect($this->getSession()->wait($timeout, '$("' . $selector . '").length > 0'))->toBe(
+            true
+        );
     }
 
     /**
-     * @Then I wait :element to disappear on current page
-     * @Then I wait :element to disappear on current page maximum :timeout
+     * @Then I wait :selector to disappear on current page
+     * @Then I wait :selector to disappear on current page maximum :timeout
      */
-    public function iWaitElementToDisappearOnPage(string $element, int $timeout = 3000)
+    public function iWaitElementToDisappearOnPage(string $selector, int $timeout = 3000)
     {
-        $this->getSession()->wait($timeout, "$('" . $element . "').length == 0");
+        $this->getSession()->wait($timeout, '$("' . $selector . '").length == 0');
     }
 
     /**

@@ -3331,6 +3331,9 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
     last: Int
   ): ProposalConnection
 
+  # Expose Primary Key, do not use it, except for testing purpose.
+  _id: ID!
+
   # Slug of a project
   slug: String!
   steps: [Step!]!

@@ -31,15 +31,19 @@ trait AdminTrait
      */
     public function iFillTheProposalMergeForm()
     {
-        // Select a project
+        // Select the project "Dépot avec selection vote budget"
         $this->getSession()
             ->getPage()
             ->find('css', '#ProposalFusionForm-project .react-select__input input')
-            ->setValue('7');
+            ->setValue('UHJvamVjdDpwcm9qZWN0Nw==');
         $this->iWait(3);
+
         // Select 2 distinct proposals from the project
-        $proposals = ['', 'pas'];
-        foreach ($proposals as $search) {
+        $searchValues = [
+            '', // Proposition gratuite
+            'pas', // Proposition pas chère
+        ];
+        foreach ($searchValues as $search) {
             $this->getSession()
                 ->getPage()
                 ->find('css', '#ProposalFusionForm-fromProposals')
@@ -62,7 +66,7 @@ trait AdminTrait
             if ($option) {
                 $option->click();
             } else {
-                throw new \Exception('Could not find option');
+                throw new \RuntimeException('Could not find option for search : "' . $search . '"');
             }
             $this->iWait(2);
         }
@@ -92,6 +96,7 @@ trait AdminTrait
     public function iSubmitTheCreateMergeForm()
     {
         $this->getCurrentPage()->clickSubmitProposalMergeButton();
+        $this->iWait(3);
     }
 
     /**

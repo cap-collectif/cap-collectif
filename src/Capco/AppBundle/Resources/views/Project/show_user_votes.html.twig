@@ -13,5 +13,5 @@
 {% endblock %}
 
 {% block body %}
-    {{ react_render_component('ProposalsUserVotesPageApp', {'props': { 'projectId': project.id } }) }}
+    {{ react_render_component('ProposalsUserVotesPageApp', {'props': { 'projectId': project.id|toGlobalId('Project') } }) }}
 {% endblock %}

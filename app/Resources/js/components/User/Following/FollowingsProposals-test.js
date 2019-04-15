@@ -15,7 +15,7 @@ describe('<FollowingsProposals />', () => {
             id: 'proposal1',
             title: "Une carte de l'internet",
             project: {
-              id: 'project1',
+              id: 'UHJvamVjdDpwcm9qZWN0MQ==',
             },
           },
         },
@@ -25,7 +25,7 @@ describe('<FollowingsProposals />', () => {
             id: 'proposal2',
             title: "Un GPS de l'internet",
             project: {
-              id: 'project1',
+              id: 'UHJvamVjdDpwcm9qZWN0MQ==',
             },
           },
         },
