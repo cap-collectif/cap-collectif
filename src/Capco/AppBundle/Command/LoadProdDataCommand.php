@@ -70,6 +70,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class LoadProdDataCommand extends ContainerAwareCommand
 {
+    private $env;
+
     private $doctrine;
 
     public function __construct(string $name, ManagerRegistry $managerRegistry)
@@ -101,6 +103,8 @@ class LoadProdDataCommand extends ContainerAwareCommand
 
             return;
         }
+        $this->env = $input->getOption('env');
+
         $this->loadFixtures($output, $input->getOption('env'));
         $this->loadToggles($output);
 
@@ -180,6 +184,13 @@ class LoadProdDataCommand extends ContainerAwareCommand
         $this->runCommands(
             [
                 'hautelook:fixtures:load' => ['-e' => $env],
+            ],
+            $output
+        );
+
+        $this->runCommands(
+            [
+                'hautelook:fixtures:load' => ['-e' => $env, '--append' => true],
             ],
             $output
         );
