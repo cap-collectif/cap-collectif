@@ -101,13 +101,14 @@ class LoadProdDataCommand extends ContainerAwareCommand
 
             return;
         }
-        $this->loadFixtures($output, $input->getOption('env'));
-        $this->loadToggles($output);
+        $env = $input->getOption('env');
+        $this->loadFixtures($output, $env);
+        $this->loadToggles($output, $env);
 
         $output->writeln('Load prod data completed');
     }
 
-    protected function loadFixtures(OutputInterface $output, $env = 'dev')
+    protected function loadFixtures(OutputInterface $output, string $env = 'dev')
     {
         $manager = $this->doctrine->getManager();
         $classesDev = [
@@ -185,11 +186,12 @@ class LoadProdDataCommand extends ContainerAwareCommand
         );
     }
 
-    protected function loadToggles(OutputInterface $output)
+    protected function loadToggles(OutputInterface $output, string $env = 'dev')
     {
         $command = $this->getApplication()->find('capco:reset-feature-flags');
         $input = new ArrayInput([
             '--force' => true,
+            '--env' => $env,
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
