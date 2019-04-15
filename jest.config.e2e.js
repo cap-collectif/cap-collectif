@@ -5,5 +5,6 @@ module.exports = {
     transform: {
       '.*': 'babel-jest',
     },
+  setupFiles: ['<rootDir>/jest-setup.e2e.js'],
   };
   

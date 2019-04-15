@@ -156,7 +156,7 @@ class ReinitCommand extends ContainerAwareCommand
             $this->createSchema($output);
             $this->mockMigrations($output);
         }
-        $this->loadFixtures($output, $this->env);
+        $this->loadFixtures($output, $input->getOption('env'));
         if (!$input->getOption('no-toggles')) {
             $this->loadToggles($output);
         }
@@ -300,6 +300,13 @@ class ReinitCommand extends ContainerAwareCommand
         $this->runCommands(
             [
                 'hautelook:fixtures:load' => ['-e' => $env],
+            ],
+            $output
+        );
+
+        $this->runCommands(
+            [
+                'hautelook:fixtures:load' => ['-e' => $env, '--append' => true],
             ],
             $output
         );

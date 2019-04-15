@@ -80,9 +80,3 @@ InternalProject:
           orderBy:
             type: 'CommentOrder'
             defaultValue: { field: PUBLISHED_AT, direction: DESC }
-      isVotesCounterDisplayable:
-        type: 'Boolean!'
-      isContributionsCounterDisplayable:
-        type: 'Boolean!'
-      isParticipantsCounterDisplayable:
-        type: 'Boolean!'

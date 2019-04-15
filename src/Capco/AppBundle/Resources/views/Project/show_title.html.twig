@@ -110,18 +110,16 @@
 
         {% if project.hasParticipativeStep %}
             <ul class="nav nav-pills counters-nav counters-nav--project hidden-print">
-                {% if project.isContributionsCounterDisplayable %}
-                    <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
-                        <i class="cap cap-file-edit-1"></i>
-                        <span class="value">{{ contributionsCount }}</span>
-                        <span class="excerpt category">
-                        {% transchoice contributionsCount with {'%count%': contributionsCount} from 'CapcoAppBundle' %}
-                            project.show.meta.total_count
-                        {% endtranschoice %}
-                        </span>
-                    </li>
-                {% endif %}
-                {% if votesCount > 0 and project.isVotesCounterDisplayable %}
+                <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
+                    <i class="cap cap-file-edit-1"></i>
+                    <span class="value">{{ contributionsCount }}</span>
+                    <span class="excerpt category">
+                    {% transchoice contributionsCount with {'%count%': contributionsCount} from 'CapcoAppBundle' %}
+                        project.show.meta.total_count
+                    {% endtranschoice %}
+                </span>
+                </li>
+                {% if votesCount > 0 %}
                     <li id="votes-counter-pill">
                         <i class="cap cap-hand-like-2-1"></i>
                         <span class="value">{{ votesCount }}</span>
@@ -132,18 +130,16 @@
                     </span>
                     </li>
                 {% endif %}
-                {% if project.isParticipantsCounterDisplayable %}
-                    <li id="contributors-counter-pill">
-                        {# Restore link when fixed {{ path('app_project_show_contributors', {'projectSlug': project.slug}) }} #}
-                        <i class="cap cap-contacts-1"></i>
-                        <span class="value">{{ contributorsCount }}</span>
-                        <span class="excerpt category">
-                        {% transchoice contributorsCount with {'%count%': contributorsCount} from 'CapcoAppBundle' %}
-                            project.show.meta.contributors_count
-                        {% endtranschoice %}
-                        </span>
-                    </li>
-                {% endif %}
+                <li id="contributors-counter-pill">
+                    {# Restore link when fixed {{ path('app_project_show_contributors', {'projectSlug': project.slug}) }} #}
+                    <i class="cap cap-contacts-1"></i>
+                    <span class="value">{{ contributorsCount }}</span>
+                    <span class="excerpt category">
+                    {% transchoice contributorsCount with {'%count%': contributorsCount} from 'CapcoAppBundle' %}
+                        project.show.meta.contributors_count
+                    {% endtranschoice %}
+                    </span>
+                </li>
             </ul>
         {% endif %}
 

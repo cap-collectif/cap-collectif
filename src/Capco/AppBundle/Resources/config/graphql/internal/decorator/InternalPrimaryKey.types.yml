@@ -3,6 +3,6 @@ InternalPrimaryKey:
   config:
     fields:
       _id:
-        type: 'ID!'
+        type: 'ID'
         description: 'Expose Primary Key, do not use it, except for testing purpose.'
         resolve: '@=value.getId()'

@@ -1274,7 +1274,7 @@ interface Commentable {
 # A consultation
 type Consultation implements Node & Step & RequirementStep {
   # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID!
+  _id: ID
 
   # The ID of an object
   id: ID!
@@ -1933,7 +1933,7 @@ type Event implements Node & Commentable {
   ): CommentConnection!
 
   # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID!
+  _id: ID
 
   # A list of Users that are participating to the event.
   participants(
@@ -2275,7 +2275,7 @@ type MapToken implements Node {
   id: ID!
 
   # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID!
+  _id: ID
 
   # The public token
   publicToken: String!
@@ -3384,9 +3384,6 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
     onlyTrashed: Boolean = false
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
-  isVotesCounterDisplayable: Boolean!
-  isContributionsCounterDisplayable: Boolean!
-  isParticipantsCounterDisplayable: Boolean!
 }
 
 # A connection to a list of items.
@@ -4593,7 +4590,7 @@ type Questionnaire implements Node {
   ): ReplyConnection!
 
   # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID!
+  _id: ID
   step: QuestionnaireStep
   anonymousAllowed: Boolean!
   description: String
@@ -6401,7 +6398,7 @@ type User implements Node & UniformResourceLocatable {
   ): ResponseConnection!
 
   # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID!
+  _id: ID
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
