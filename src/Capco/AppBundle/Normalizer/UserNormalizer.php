@@ -17,12 +17,17 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
     use SerializerAwareTrait;
+
     private $router;
     private $normalizer;
     private $manager;
     private $contributionProjectResolver;
     private $contributionStepResolver;
     private $projectRepository;
+
+    // local "state" for data used on every User
+    private $_capcoProfileEdit;
+    private $_allProjects;
 
     public function __construct(
         UrlGeneratorInterface $router,
@@ -38,6 +43,8 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->contributionProjectResolver = $contributionProjectResolver;
         $this->contributionStepResolver = $contributionStepResolver;
         $this->projectRepository = $projectRepository;
+
+        $this->_capcoProfileEdit = $this->router->generate('capco_profile_edit', [], true);
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -63,7 +70,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         if (\in_array('Elasticsearch', $groups)) {
             $contributionsCountByProject = [];
             $contributionsCountByStep = [];
-            foreach ($this->projectRepository->findAll() as $project) {
+            foreach ($this->getAllProjects() as $project) {
                 $count = $this->contributionProjectResolver->__invoke(
                     $object,
                     $project,
@@ -111,7 +118,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         }
 
         $links = [
-            'settings' => $this->router->generate('capco_profile_edit', [], true),
+            'settings' => $this->_capcoProfileEdit,
         ];
 
         if ($this->manager->isActive('profiles')) {
@@ -130,5 +137,18 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof User;
+    }
+
+    private function getAllProjects()
+    {
+        if (!$this->_allProjects) {
+            $qb = $this->projectRepository->createQueryBuilder('p');
+            $qb->leftJoin('p.steps', 'steps');
+            $qb->addSelect('steps');
+
+            $this->_allProjects = $qb->getQuery()->execute();
+        }
+
+        return $this->_allProjects;
     }
 }

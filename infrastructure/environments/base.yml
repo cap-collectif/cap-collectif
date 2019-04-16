@@ -53,6 +53,13 @@ elasticsearch:
       hard: -1
   mem_limit: 1g
 
+cerebro:
+  image: lmenezes/cerebro
+  links:
+    - elasticsearch
+  ports:
+    - '9000:9000'
+
 kibana:
   image: kibana:5
   links:
