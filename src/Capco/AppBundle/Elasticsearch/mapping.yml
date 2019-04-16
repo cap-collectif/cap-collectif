@@ -61,7 +61,7 @@ mappings:
       contributionsCountByProject:
         type: nested
         properties:
-          project: &Project
+          project:
             type: object
             properties:
               id: { type: keyword }
@@ -70,7 +70,7 @@ mappings:
       contributionsCountByStep:
         type: nested
         properties:
-          step: &Step
+          step:
             type: object
             properties:
               id: { type: keyword }
@@ -92,8 +92,6 @@ mappings:
       body: *text_analysis_highlighted
       createdAt: { type: date }
       updatedAt: { type: date }
-      project: *Project
-      step: *Step
       Author: &Author
         type: object
         properties:
@@ -202,7 +200,10 @@ mappings:
       selections:
         type: object
         properties:
-          step: *Step
+          step:
+            type: object
+            properties:
+              id: { type: keyword }
           status:
             type: object
             properties:
@@ -211,12 +212,12 @@ mappings:
       votesCountByStep:
         type: nested
         properties:
-          step: *Step
+          step:
+            type: object
+            properties:
+              id: { type: keyword }
           count:
             type: long
-      project: *Project
-      step: *Step
-
   opinion:
     properties:
       id: { type: keyword }
@@ -225,8 +226,6 @@ mappings:
       body: *text_analysis_highlighted
       createdAt: { type: date }
       updatedAt: { type: date }
-      step: *Step
-      project: *Project
       Author: *Author
       type:
         type: object
@@ -242,8 +241,6 @@ mappings:
       createdAt: { type: date }
       updatedAt: { type: date }
       Author: *Author
-      step: *Step
-      project: *Project
 
   post:
     properties:

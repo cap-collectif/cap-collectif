@@ -9,11 +9,3 @@ Capco\AppBundle\Entity\OpinionVersion:
       groups: [Elasticsearch]
     createdAt:
       groups: [Elasticsearch]
-    getStep:
-      type: object
-      serialized_name: step
-      groups: [Elasticsearch]
-    getProject:
-      type: object
-      serialized_name: project
-      groups: [Elasticsearch]

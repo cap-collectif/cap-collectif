@@ -18,14 +18,13 @@ class ReplyRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
 
-    // TODO draft are accounted here but should not.
     public function countPublishedForQuestionnaire(Questionnaire $questionnaire): int
     {
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('sclr', 'sclr');
         $query = $this->_em
             ->createNativeQuery(
-                'SELECT COUNT(r.id) as sclr FROM reply r USE INDEX (idx_questionnaire_published) WHERE r.published = 1 AND r.questionnaire_id = :questionnaireId',
+                'SELECT COUNT(r.id) as sclr FROM reply r USE INDEX (idx_questionnaire_published) WHERE r.published = 1 AND r.is_draft = 0 AND r.questionnaire_id = :questionnaireId',
                 $rsm
             )
             ->setParameter('questionnaireId', $questionnaire->getId());
