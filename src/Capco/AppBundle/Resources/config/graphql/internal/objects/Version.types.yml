@@ -75,7 +75,6 @@ Version:
         type: 'Opinion!'
       viewerVote:
         type: 'OpinionVote'
-        access: "@=hasRole('ROLE_USER')"
         description: 'The viewer vote.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVoteResolver", [value, getUser()])'
       diff:

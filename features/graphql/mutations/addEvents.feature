@@ -1,7 +1,6 @@
 @addEvents
 Feature: Add events.
 
-@database
 Scenario: An admin wants to add a list of events with dry run
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -44,7 +43,7 @@ Scenario: An admin wants to add a list of events with dry run
             "endAt": "2018-03-16 00:00:00",
             "authorEmail": "aurelien@cap-collectif.com",
             "themes": ["theme1"],
-            "projects": ["UHJvamVjdDpwcm9qZWN0MQ==","UHJvamVjdDpwcm9qZWN0Mg=="],
+            "projects": ["project1","project2"],
             "address": "25 rue Claude Tillier",
             "zipCode": "75012",
             "commentable": false,
@@ -84,10 +83,10 @@ Scenario: An admin wants to add a list of events with dry run
             ],
             "projects": [
               {
-                "id": "UHJvamVjdDpwcm9qZWN0MQ=="
+                "id": "project1"
               },
               {
-                "id": "UHJvamVjdDpwcm9qZWN0Mg=="
+                "id": "project2"
               }
             ],
             "commentable": false,

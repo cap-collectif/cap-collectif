@@ -138,10 +138,6 @@ class GlobalIdResolver
                     $node = $this->container->get(ContactFormRepository::class)->find($uuid);
 
                     break;
-                case 'Project':
-                    $node = $this->container->get(ProjectRepository::class)->find($uuid);
-
-                    break;
                 default:
                     break;
             }
@@ -184,6 +180,10 @@ class GlobalIdResolver
 
         if (!$node) {
             $node = $this->container->get(CommentRepository::class)->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get(ProjectRepository::class)->find($uuid);
         }
 
         if (!$node) {

@@ -113,7 +113,7 @@ exports[`<ProjectPreviewProgressBar /> should render correctly counters without 
             "totalCount": 48,
           },
           "districts": Array [],
-          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "id": "project1",
           "isContributionsCounterDisplayable": true,
           "isParticipantsCounterDisplayable": true,
           "isVotesCounterDisplayable": true,

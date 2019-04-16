@@ -9,12 +9,12 @@ import { openOpinionCreateModal } from '../../redux/modules/opinion';
 import type { NewOpinionButton_section } from '~relay/NewOpinionButton_section.graphql';
 import type { NewOpinionButton_consultation } from '~relay/NewOpinionButton_consultation.graphql';
 
-type Props = {|
+type Props = {
   section: NewOpinionButton_section,
   consultation: NewOpinionButton_consultation,
   label: string,
   dispatch: Function,
-|};
+};
 
 class NewOpinionButton extends React.Component<Props> {
   render() {

@@ -4,7 +4,6 @@ InternalProject:
     - PreviewProject
     - UniformResourceAdminLocatable
     - InternalWithProposals
-    - InternalPrimaryKey
   config:
     name: Project
     interfaces:

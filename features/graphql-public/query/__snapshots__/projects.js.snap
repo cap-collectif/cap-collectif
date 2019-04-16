@@ -9,7 +9,7 @@ Object {
           "contributors": Object {
             "totalCount": 41,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "id": "project1",
           "title": "Croissance, innovation, disruption",
           "votes": Object {
             "totalCount": 10,
@@ -21,7 +21,7 @@ Object {
           "contributors": Object {
             "totalCount": 5,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0Mg==",
+          "id": "project2",
           "title": "Stratégie technologique de l'Etat et services publics",
           "votes": Object {
             "totalCount": 1,
@@ -33,7 +33,7 @@ Object {
           "contributors": Object {
             "totalCount": 3,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0Mw==",
+          "id": "project3",
           "title": "Transformation numérique des relations",
           "votes": Object {
             "totalCount": 0,
@@ -45,7 +45,7 @@ Object {
           "contributors": Object {
             "totalCount": 0,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0NA==",
+          "id": "project4",
           "title": "Projet vide",
           "votes": Object {
             "totalCount": 0,
@@ -57,7 +57,7 @@ Object {
           "contributors": Object {
             "totalCount": 80,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0NQ==",
+          "id": "project5",
           "title": "Projet de loi Renseignement",
           "votes": Object {
             "totalCount": 134,
@@ -69,7 +69,7 @@ Object {
           "contributors": Object {
             "totalCount": 49,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+          "id": "project6",
           "title": "Budget Participatif Rennes",
           "votes": Object {
             "totalCount": 49,
@@ -81,7 +81,7 @@ Object {
           "contributors": Object {
             "totalCount": 1,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0Nw==",
+          "id": "project7",
           "title": "Dépot avec selection vote budget",
           "votes": Object {
             "totalCount": 1,
@@ -93,7 +93,7 @@ Object {
           "contributors": Object {
             "totalCount": 4,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0OA==",
+          "id": "project8",
           "title": "Projet avec questionnaire",
           "votes": Object {
             "totalCount": 0,
@@ -105,7 +105,7 @@ Object {
           "contributors": Object {
             "totalCount": 50,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0OQ==",
+          "id": "project9",
           "title": "Appel à projets",
           "votes": Object {
             "totalCount": 50,
@@ -117,7 +117,7 @@ Object {
           "contributors": Object {
             "totalCount": 1,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0MTA=",
+          "id": "project10",
           "title": "Dépôt avec selection vote simple",
           "votes": Object {
             "totalCount": 0,
@@ -129,7 +129,7 @@ Object {
           "contributors": Object {
             "totalCount": 3,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0MTE=",
+          "id": "project11",
           "title": "Budget avec vote limité",
           "votes": Object {
             "totalCount": 3,
@@ -141,7 +141,7 @@ Object {
           "contributors": Object {
             "totalCount": 0,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0MTI=",
+          "id": "project12",
           "title": "Projet sans étapes participatives",
           "votes": Object {
             "totalCount": 0,
@@ -153,7 +153,7 @@ Object {
           "contributors": Object {
             "totalCount": 0,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0MTM=",
+          "id": "project13",
           "title": "Projet avec une étape de participation en continue",
           "votes": Object {
             "totalCount": 0,
@@ -165,7 +165,7 @@ Object {
           "contributors": Object {
             "totalCount": 0,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
+          "id": "project14",
           "title": "Projet à venir",
           "votes": Object {
             "totalCount": 0,
@@ -177,7 +177,7 @@ Object {
           "contributors": Object {
             "totalCount": 2,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0MTU=",
+          "id": "project15",
           "title": "BP avec vote classement",
           "votes": Object {
             "totalCount": 3,
@@ -189,7 +189,7 @@ Object {
           "contributors": Object {
             "totalCount": 0,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0MTY=",
+          "id": "project16",
           "title": "Le P16 un projet à base de riz",
           "votes": Object {
             "totalCount": 0,
@@ -201,7 +201,7 @@ Object {
           "contributors": Object {
             "totalCount": 3,
           },
-          "id": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvckFkbWluT25seQ==",
+          "id": "ProjectAccessibleForAdminOnly",
           "title": "Qui doit conquérir le monde ? | Visible par les admins seulement",
           "votes": Object {
             "totalCount": 0,
@@ -213,7 +213,7 @@ Object {
           "contributors": Object {
             "totalCount": 1,
           },
-          "id": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4=",
+          "id": "ProjectAccessibleForMeOnlyByAdmin",
           "title": "Project pour la création de la capCoBeer (visible par admin seulement)",
           "votes": Object {
             "totalCount": 0,
@@ -225,7 +225,7 @@ Object {
           "contributors": Object {
             "totalCount": 1,
           },
-          "id": "UHJvamVjdDpQcm9qZWN0V2l0aEN1c3RvbUFjY2Vzcw==",
+          "id": "ProjectWithCustomAccess",
           "title": "Un avenir meilleur pour les nains de jardins (custom access)",
           "votes": Object {
             "totalCount": 0,
@@ -237,7 +237,7 @@ Object {
           "contributors": Object {
             "totalCount": 3,
           },
-          "id": "UHJvamVjdDpwcm9qZWN0MjE=",
+          "id": "project21",
           "title": "Questions/Responses",
           "votes": Object {
             "totalCount": 3,

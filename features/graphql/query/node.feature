@@ -55,7 +55,7 @@ Scenario: GraphQL client want to get a node of all available types
     "variables": {
       "opinionId": "opinion1",
       "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
-      "projectId": "UHJvamVjdDpwcm9qZWN0MQ==",
+      "projectId": "project1",
       "groupId": "group1",
       "proposalFormId": "proposalForm1",
       "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
@@ -119,7 +119,7 @@ Scenario: Admin GraphQL client want to get nodes from a restricted project
     }",
     "variables": {
       "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwzNA==",
-      "projectId": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4="
+      "projectId": "ProjectAccessibleForMeOnlyByAdmin"
     }
   }
   """
@@ -155,7 +155,7 @@ Scenario: Anonymous GraphQL client want to get nodes from a private project
     }",
     "variables": {
       "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwzNA==",
-      "projectId": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4="
+      "projectId": "ProjectAccessibleForMeOnlyByAdmin"
     }
   }
   """
@@ -188,7 +188,7 @@ Scenario: Not allowed GraphQL client want to get nodes from a private project
     }",
     "variables": {
       "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwzNA==",
-      "projectId": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4="
+      "projectId": "ProjectAccessibleForMeOnlyByAdmin"
     }
   }
   """
@@ -221,7 +221,7 @@ Scenario: Super Admin GraphQL client want to get nodes from a private project
     }",
     "variables": {
       "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwzNA==",
-      "projectId": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4="
+      "projectId": "ProjectAccessibleForMeOnlyByAdmin"
     }
   }
   """

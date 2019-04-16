@@ -4,6 +4,7 @@ Feature: Export Commands
 Background:
   Given feature "export" is enabled
 
+@parallel-scenario
 Scenario: Admin wants to export projects contributors
   Given I run "capco:export:projects-contributors"
   Then the command exit code should be 0

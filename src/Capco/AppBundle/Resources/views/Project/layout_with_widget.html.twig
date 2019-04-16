@@ -30,7 +30,7 @@
     {% if project.isPublic == false %}
         {{ react_render_component('ProjectRestrictedAccessAlertApp', {
             'props': {
-                'projectId': project.id|toGlobalId('Project'),
+                'projectId': project.id,
             },
         }) }}
     {% endif %}

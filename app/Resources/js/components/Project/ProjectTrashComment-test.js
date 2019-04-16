@@ -6,7 +6,7 @@ import { ProjectTrashComment } from './ProjectTrashComment';
 
 describe('<ProjectTrashComment />', () => {
   const props = {
-    projectId: 'UHJvamVjdDpwcm9qZWN0MQ==',
+    projectId: 'project1',
     isAuthenticated: true,
   };
 

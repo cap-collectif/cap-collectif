@@ -22,7 +22,7 @@ Scenario: GraphQL user wants to get list of trashed comments.
       }
     }",
     "variables": {
-      "projectId": "UHJvamVjdDpwcm9qZWN0Ng==",
+      "projectId": "project6",
       "first": 10,
       "onlyTrashed": true,
       "orderBy": { "field": "PUBLISHED_AT", "direction": "DESC" }
@@ -34,7 +34,7 @@ Scenario: GraphQL user wants to get list of trashed comments.
   {
     "data":{
       "node": {
-        "id":"UHJvamVjdDpwcm9qZWN0Ng==",
+        "id":"project6",
         "comments":{
           "totalCount":70,
           "edges":[

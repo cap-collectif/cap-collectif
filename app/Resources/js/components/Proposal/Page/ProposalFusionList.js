@@ -5,9 +5,9 @@ import { Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import type { ProposalFusionList_proposal } from '~relay/ProposalFusionList_proposal.graphql';
 
-type Props = {|
-  +proposal: ProposalFusionList_proposal,
-|};
+type Props = {
+  proposal: ProposalFusionList_proposal,
+};
 
 export class ProposalFusionList extends React.Component<Props> {
   render() {

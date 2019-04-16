@@ -10,7 +10,7 @@ exports[`<ProjectRestrictedAccess /> should render correctly 1`] = `
       Object {
         "count": 10,
         "cursor": null,
-        "projectId": "UHJvamVjdDpwcm9qZWN0MQ==",
+        "projectId": "project1",
       }
     }
   />

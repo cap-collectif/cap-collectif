@@ -16,7 +16,7 @@ describe('<FollowingsTab />', () => {
             id: 'opinion1',
             title: "Une carte de l'internet",
             project: {
-              id: 'UHJvamVjdDpwcm9qZWN0MQ==',
+              id: 'project1',
             },
           },
         },
@@ -26,7 +26,7 @@ describe('<FollowingsTab />', () => {
             id: 'opinion2',
             title: "Un GPS de l'internet",
             project: {
-              id: 'UHJvamVjdDpwcm9qZWN0MQ==',
+              id: 'project1',
             },
           },
         },
@@ -50,7 +50,7 @@ describe('<FollowingsTab />', () => {
             id: 'proposal1',
             title: "Une carte de l'internet",
             project: {
-              id: 'UHJvamVjdDpwcm9qZWN0MQ==',
+              id: 'project1',
             },
           },
         },
@@ -60,7 +60,7 @@ describe('<FollowingsTab />', () => {
             id: 'proposal2',
             title: "Un GPS de l'internet",
             project: {
-              id: 'UHJvamVjdDpwcm9qZWN0MQ==',
+              id: 'project1',
             },
           },
         },

@@ -7,7 +7,7 @@ import { $fragmentRefs, $refType, relayPaginationMock, intlMock } from '../../..
 
 describe('<UserGroupModal />', () => {
   const noGroup = {
-    id: 'UHJvamVjdDpwcm9qZWN0MQ==',
+    id: 'project1',
     restrictedViewers: {
       edges: [],
       pageInfo: {

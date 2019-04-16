@@ -31,14 +31,15 @@ const onSubmit = (data: FormValues, dispatch: Dispatch, props: Props) => {
         .filter(type => data[type.title] && data[type.title].length > 0)
         .map(type => ({ appendixType: type.id, body: data[type.title] }))
     : [];
-  const { project } = consultation;
   const form = {
     title: data.title,
     body: data.body,
     appendices,
   };
   return Fetcher.post(
-    `/projects/${project._id}/steps/${consultation.id}/opinion_types/${section.id}/opinions`,
+    `/projects/${consultation.project.id}/steps/${consultation.id}/opinion_types/${
+      section.id
+    }/opinions`,
     form,
   )
     .then(json)
@@ -177,7 +178,7 @@ export default createFragmentContainer(container, {
       titleHelpText
       descriptionHelpText
       project {
-        _id
+        id
       }
       requirements {
         viewerMeetsTheRequirements @include(if: $isAuthenticated)

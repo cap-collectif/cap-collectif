@@ -13,7 +13,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
         "count": 20,
         "cursor": null,
         "isAuthenticated": true,
-        "projectId": "UHJvamVjdDpwcm9qZWN0MQ==",
+        "projectId": "project1",
       }
     }
   />

@@ -17,7 +17,7 @@ Scenario: Events can be filtered by projects
   And I visited "events page"
   And I wait ".event" to appear on current page
   And I click the "#event-button-filter" element
-  And I select "UHJvamVjdDpwcm9qZWN0MQ==" from react "#EventListFilters-filter-project"
+  And I select "project1" from react "#EventListFilters-filter-project"
   And I wait 1 seconds
   Then I should see 3 ".event" elements
   And I click the "#event-status-filter-button-desktop" element

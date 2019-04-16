@@ -11,15 +11,15 @@ import SubmitButton from '../../Form/SubmitButton';
 import type { State, Dispatch } from '../../../types';
 import type { ProposalFusionEditModal_proposal } from '~relay/ProposalFusionEditModal_proposal.graphql';
 
-type Props = {|
-  +proposal: ProposalFusionEditModal_proposal,
-  +show: boolean,
-  +submitting: boolean,
-  +pristine: boolean,
-  +invalid: boolean,
-  +onClose: () => void,
-  +submitForm: () => void,
-|};
+type Props = {
+  proposal: ProposalFusionEditModal_proposal,
+  show: boolean,
+  submitting: boolean,
+  pristine: boolean,
+  invalid: boolean,
+  onClose: () => void,
+  submitForm: () => void,
+};
 
 export class ProposalFusionEditModal extends React.Component<Props> {
   render() {

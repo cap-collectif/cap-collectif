@@ -8,11 +8,6 @@
     {% endif %}
 {% endif %}
 
-{% set currentProjectById = null %}
-{% if project is defined %}
-    {% set currentProjectById = project.id|toGlobalId('Project') %}
-{% endif %}
-
 {% set state = {
     'default': {
         'themes': themes_list(),
@@ -51,9 +46,11 @@
     'project': {
         'showConsultationPlanById': {},
         'selectedActiveItems': [],
+
         'currentProjectStepById': stepId,
-        'currentProjectById': currentProjectById,
+        'currentProjectById': project.id|default(null),
         'projectsById': list_projectsById(),
+
         'limit': projectReducerData.limit|default(null),
         'orderBy': projectReducerData.orderBy|default(null),
         'term': projectReducerData.term|default(null),

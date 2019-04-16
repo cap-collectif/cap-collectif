@@ -26,7 +26,7 @@ Scenario: GraphQL client want to get the list of contributors
       }
     }",
     "variables": {
-      "project": "UHJvamVjdDpwcm9qZWN0MQ=="
+      "project": "project1"
     }
   }
   """

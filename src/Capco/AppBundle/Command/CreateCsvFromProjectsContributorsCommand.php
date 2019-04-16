@@ -3,20 +3,19 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Utils\Arr;
 use Box\Spout\Writer\WriterFactory;
-use Capco\AppBundle\Toggle\Manager;
 use Box\Spout\Writer\WriterInterface;
-use Overblog\GraphQLBundle\Request\Executor;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Utils\Arr;
+use Overblog\GraphQLBundle\Request\Executor;
+use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 class CreateCsvFromProjectsContributorsCommand extends ContainerAwareCommand
 {
@@ -117,11 +116,9 @@ class CreateCsvFromProjectsContributorsCommand extends ContainerAwareCommand
 
         $projects = $this->projectRepository->findAllIdsWithSlugs();
         foreach ($projects as $p) {
-            $id = GlobalId::toGlobalId('Project', $p['id']);
-
             $project = $this->executor
                 ->execute('internal', [
-                    'query' => $this->getContributorsProjectGraphQLQuery($id),
+                    'query' => $this->getContributorsProjectGraphQLQuery($p['id']),
                     'variables' => [],
                 ])
                 ->toArray();

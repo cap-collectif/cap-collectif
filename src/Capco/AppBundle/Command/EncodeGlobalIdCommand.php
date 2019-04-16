@@ -28,7 +28,6 @@ class EncodeGlobalIdCommand extends Command
             'Event',
             'Requirement',
             'Proposal',
-            'Project',
             'CollectStep',
             'SelectionStep',
             'Question',
