@@ -54,3 +54,7 @@ Capco\AppBundle\Entity\Proposal:
     isTrashed:
       serialized_name: trashed
       groups: [Proposals, Elasticsearch]
+    step:
+      groups: [Elasticsearch]
+    project:
+      groups: [Elasticsearch]
