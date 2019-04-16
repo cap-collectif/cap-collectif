@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { fetchQuery, graphql } from 'react-relay';
 import { Field } from 'redux-form';
-import { debounce } from 'lodash';
 import select from '../../Form/Select';
 import environment from '../../../createRelayEnvironment';
 
@@ -73,7 +72,7 @@ export default class UserListField extends React.Component<Props> {
       multi,
     } = this.props;
 
-    const retrieveUsersList = debounce((usersIds: ?Array<string>, terms: ?string) => {
+    const retrieveUsersList = (usersIds: ?Array<string>, terms: ?string) => {
       if (usersIds) {
         return fetchQuery(environment, getUsersListWithoutIds, {
           notInIds: usersIds,
@@ -96,7 +95,7 @@ export default class UserListField extends React.Component<Props> {
           label: u.displayName,
         })),
       );
-    }, 250);
+    };
 
     return (
       <Field
