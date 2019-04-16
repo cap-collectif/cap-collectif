@@ -1,0 +1,402 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OpenDataProposalsQuery OpenDataProposalsQuery 1`] = `
+Object {
+  "node": Object {
+    "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTAy",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:01:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "publishedAt": "2018-03-01 00:01:00",
+            "reference": "1-1",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "souhaitable",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": "souhaitable",
+              },
+              Object {
+                "formattedValue": "250 000 €",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "250 000 €",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Ravalement de la façade de la bibliothèque municipale",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2018-03-01 00:01:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:02:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "publishedAt": "2018-03-01 00:02:00",
+            "reference": "1-2",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "souhaitable",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": "souhaitable",
+              },
+              Object {
+                "formattedValue": "1 million !",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "1 million !",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Rénovation du gymnase",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2018-03-01 00:05:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTAy",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:03:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "publishedAt": "2018-03-01 00:03:00",
+            "reference": "1-3",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "réponse obligatoire",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "réponse obligatoire",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Installation de bancs sur la place de la mairie",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNw==",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:04:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+            "publishedAt": "2018-03-01 00:04:00",
+            "reference": "1-4",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": "réponse obligatoire",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": "réponse obligatoire",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:07:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+            "publishedAt": "2018-03-01 00:07:00",
+            "reference": "1-7",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Proposition pas encore votable",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2018-03-01 00:07:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-03-01 00:08:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+            "publishedAt": "2018-03-01 00:08:00",
+            "reference": "1-8",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Proposition plus votable",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2018-03-01 00:08:00",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "hasNextPage": false,
+      },
+      "totalCount": 6,
+    },
+  },
+}
+`;
