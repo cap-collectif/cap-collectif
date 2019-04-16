@@ -3,185 +3,185 @@ Capco\AppBundle\Entity\Follower:
   follower1:
     proposal: '@proposal1'
     user: '@user1'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 50 days'))>
     notifiedOf: 'ESSENTIAL'
   follower2:
     proposal: '@proposal1'
     user: '@user2'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 48 days'))>
     notifiedOf: 'ALL'
   follower4:
     proposal: '@proposal1'
     user: '@user4'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 46 days'))>
     notifiedOf: 'ALL'
   follower5:
     proposal: '@proposal1'
     user: '@user5'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 44 days'))>
     notifiedOf: 'ALL'
   follower7:
     proposal: '@proposal1'
     user: '@user6'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 42 days'))>
     notifiedOf: 'ESSENTIAL'
   follower9:
     proposal: '@proposal1'
     user: '@user7'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 40 days'))>
     notifiedOf: 'ESSENTIAL'
   follower11:
     proposal: '@proposal1'
     user: '@user8'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 38 days'))>
     notifiedOf: 'ALL'
   follower12:
     proposal: '@proposal1'
     user: '@user9'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 36 days'))>
     notifiedOf: 'ALL'
   follower13:
     proposal: '@proposal1'
     user: '@user10'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 34 days'))>
     notifiedOf: 'ALL'
   follower15:
     proposal: '@proposal2'
     user: '@user1'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 33 days'))>
     notifiedOf: 'ALL'
   follower16:
     proposal: '@proposal2'
     user: '@user2'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 32 days'))>
     notifiedOf: 'MINIMAL'
   follower17:
     proposal: '@proposal2'
     user: '@user4'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 31 days'))>
     notifiedOf: 'ESSENTIAL'
   follower18:
     proposal: '@proposal2'
     user: '@user6'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 30 days'))>
     notifiedOf: 'ALL'
   follower19:
     proposal: '@proposal2'
     user: '@user7'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 29 days'))>
     notifiedOf: 'MINIMAL'
   follower20:
     proposal: '@proposal2'
     user: '@user8'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 28 days'))>
     notifiedOf: 'MINIMAL'
   follower21:
     proposal: '@proposal2'
     user: '@user9'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 27 days'))>
     notifiedOf: 'ESSENTIAL'
   follower22:
     proposal: '@proposal2'
     user: '@user10'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 26 days'))>
     notifiedOf: 'ALL'
   follower23:
     proposal: '@proposal2'
     user: '@user11'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 25 days'))>
     notifiedOf: 'ALL'
   follower{24..80}:
     proposal: '@proposal1'
     user: '@user<current()>'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 24 days'))>
     notifiedOf: 'ALL'
   follower201:
     proposal: '@proposal3'
     user: '@user5'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 23 days'))>
     notifiedOf: 'ALL'
   follower213:
     proposal: '@proposal10'
     user: '@user1'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 22 days'))>
     notifiedOf: 'ALL'
   follower214:
     proposal: '@proposal10'
     user: '@user2'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 21 days'))>
     notifiedOf: 'ALL'
   follower215:
     proposal: '@proposal8'
     user: '@user1'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 20 days'))>
     notifiedOf: 'ALL'
   follower217:
     proposal: '@proposal8'
     user: '@user5'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 19 days'))>
     notifiedOf: 'ALL'
   follower219:
     proposal: '@proposal9'
     user: '@user1'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 18 days'))>
     notifiedOf: 'MINIMAL'
 
   # Opinion
   follower220:
     opinion: '@opinion6'
     user: '@user11'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 17 days'))>
     notifiedOf: 'MINIMAL'
   follower221:
     opinion: '@opinion6'
     user: '@user5'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 16 days'))>
     notifiedOf: 'MINIMAL'
   follower222:
     opinion: '@opinion6'
     user: '@user10'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 15 days'))>
     notifiedOf: 'MINIMAL'
   follower223:
     opinion: '@opinion6'
     user: '@user12'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 14 days'))>
     notifiedOf: 'MINIMAL'
   follower224:
     opinion: '@opinion7'
     user: '@user11'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 13 days'))>
     notifiedOf: 'MINIMAL'
   follower225:
     opinion: '@opinion7'
     user: '@user10'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 12 days'))>
     notifiedOf: 'MINIMAL'
   follower226:
     opinion: '@opinion7'
     user: '@user5'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 11 days'))>
     notifiedOf: 'MINIMAL'
   follower227:
     opinion: '@opinion8'
     user: '@user11'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 10 days'))>
     notifiedOf: 1
   follower2{28..60}:
     opinion: '@opinion6'
     user: '@user<current()>'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 9 days'))>
     notifiedOf: 'ALL'
 
   follower2{68..79}:
     opinion: '@opinion69'
     user: '@user<current()>'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 8 days'))>
     notifiedOf: 'ALL'
 
   # Subscribe to trashed yesterday opinions
   follower2{80..85}:
     opinion: '@opinion<numberBetween(74, 79)>'
     user: '@user<current()>'
-    followedAt: <dateTimeBetween('-50 days', 'now')>
+    followedAt: <(new \DateTime('now - 7 days'))>
     notifiedOf: 'ALL'

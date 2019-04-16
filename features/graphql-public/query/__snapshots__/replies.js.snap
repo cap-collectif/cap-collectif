@@ -26,159 +26,7 @@ Object {
                   "id": "UXVlc3Rpb246MTM=",
                   "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
                 },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "<p>Aut saepe non veniam nihil unde. Fuga reiciendis recusandae repellat ipsum repellendus.</p>",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "<p>Quos aspernatur et minus eaque saepe. Eum voluptatem maxime natus voluptates corrupti.</p>",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "<p>Nemo laborum voluptatem neque deleniti. Sed sit minus et atque et reprehenderit.</p>",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "<p>Est voluptatum aut dolor sunt voluptatum tenetur. Cum voluptatem voluptatem minus illum.</p>",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "<p>Qui vel accusamus dolor. Quam et culpa explicabo velit ea nam.</p>",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "<p>Accusamus et consequatur quis eveniet nostrum accusantium corrupti. Eum non et qui aperiam amet.</p>",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "<p>Rem non hic illo nostrum enim. Rerum nesciunt doloribus quia. Recusandae ex voluptas nisi harum.</p>",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "<p>Laboriosam quam aut est et rerum ut fugit. Ut ducimus cumque deleniti sunt eum officiis dolores.</p>",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "<p>Fuga eveniet ratione mollitia voluptatem. Est quo ut consequatur. Totam adipisci sed officiis est.</p>",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":null}",
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Guild Wars 2\\"}",
               },
               Object {
                 "question": Object {
@@ -301,87 +149,7 @@ Object {
                   "id": "UXVlc3Rpb246MTM=",
                   "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
                 },
-                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":null}",
+                "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":\\"Civilization 6\\"}",
               },
               Object {
                 "question": Object {
@@ -460,91 +228,19 @@ Object {
               },
               Object {
                 "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
                   "__typename": "SimpleQuestion",
                   "id": "UXVlc3Rpb246Mg==",
                   "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
                 },
                 "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
               Object {
                 "question": Object {
@@ -643,79 +339,7 @@ Object {
                   "id": "UXVlc3Rpb246MTM=",
                   "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
                 },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Response of user not confirmed\\",\\"Sports collectifs\\"],\\"other\\":null}",
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
               Object {
                 "question": Object {

@@ -23,13 +23,12 @@ Capco\AppBundle\Entity\Opinion:
     OpinionType: '@opinionType9'
   opinion3:
     id: 'opinion3'
+    Author: '@user5'
     step: '@cstep1'
     title: Opinion 3
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
-      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
-    Author: '@user5'
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     OpinionType: '@opinionType10'
   opinion4:
     id: 'opinion4'
@@ -37,7 +36,7 @@ Capco\AppBundle\Entity\Opinion:
     title: Opinion 4
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user2'
     OpinionType: '@opinionType10'
   opinion5:
@@ -46,7 +45,7 @@ Capco\AppBundle\Entity\Opinion:
     title: Opinion sans sources
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user3'
     OpinionType: '@opinionType9'
   opinion{6..40}:
@@ -55,7 +54,7 @@ Capco\AppBundle\Entity\Opinion:
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     title: Opinion <current()>
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     pinned: <boolean()>
     Author: '@user<current()>'
     OpinionType: '@opinionType9'
@@ -64,7 +63,7 @@ Capco\AppBundle\Entity\Opinion:
     step: '@cstep1'
     title: Opinion <current()>
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     pinned: <boolean()>
     Author: '@user_not_confirmed_with_contributions'
     OpinionType: '@opinionType10'
@@ -75,7 +74,7 @@ Capco\AppBundle\Entity\Opinion:
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     title: Opinion 51
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user5'
     OpinionType: '@opinionType12'
 
@@ -96,7 +95,7 @@ Capco\AppBundle\Entity\Opinion:
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     title: Opinion 53
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user2'
     OpinionType: '@opinionType12'
 
@@ -106,7 +105,7 @@ Capco\AppBundle\Entity\Opinion:
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     title: Opinion 54
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user5'
     OpinionType: '@opinionType8'
 
@@ -116,7 +115,7 @@ Capco\AppBundle\Entity\Opinion:
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     title: Opinion 55
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user4'
     OpinionType: '@opinionType9'
   opinion56:
@@ -125,7 +124,7 @@ Capco\AppBundle\Entity\Opinion:
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     title: Opinion 56
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user2'
     OpinionType: '@opinionType10'
 
@@ -136,7 +135,7 @@ Capco\AppBundle\Entity\Opinion:
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     title: Article 1
     slug: article-1
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     OpinionType: '@opinionType5'
     position: 1
     Author: '@user2'
@@ -148,7 +147,7 @@ Capco\AppBundle\Entity\Opinion:
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     title: Article 3
     slug: article-3
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user5'
     OpinionType: '@opinionType5'
     position: 3
@@ -160,7 +159,7 @@ Capco\AppBundle\Entity\Opinion:
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     title: Article 2
     slug: article-2
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user2'
     OpinionType: '@opinionType5'
     position: 2
@@ -186,7 +185,7 @@ Capco\AppBundle\Entity\Opinion:
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     title: Lié à article
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user2'
     OpinionType: '@opinionType6'
     position: 1
@@ -196,7 +195,7 @@ Capco\AppBundle\Entity\Opinion:
     step: '@cstep5'
     title: Très lié à article
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user2'
     OpinionType: '@opinionType6'
     position: 1
@@ -220,7 +219,7 @@ Capco\AppBundle\Entity\Opinion:
     step: '@cstep2'
     createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
     title: Opinion <current()> non publié à temps
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user5'
     OpinionType: '@opinionType12'
 
@@ -231,7 +230,7 @@ Capco\AppBundle\Entity\Opinion:
     updatedAt: <(new \DateTime('2018-02-20 00:00:00'))>
     publishedAt: <(new \DateTime('2018-02-20 00:00:00'))>
     title: 'Opinion d hier <current()>'
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user5'
     OpinionType: '@opinionType6'
     position: 1
@@ -246,6 +245,6 @@ Capco\AppBundle\Entity\Opinion:
     trashedStatus: 'visible'
     trashedReason: reporting.status.spam
     title: 'Opinion mis a la corbeille hier <current()>'
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user1'
     OpinionType: '@opinionType5'
