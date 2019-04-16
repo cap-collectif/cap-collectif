@@ -3,12 +3,15 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Project;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class EventType extends AbstractType
 {
@@ -41,7 +44,10 @@ class EventType extends AbstractType
             ->add('customCode')
             ->add('city')
             ->add('country')
-            ->add('projects')
+            ->add('projects', RelayNodeType::class, [
+                'multiple' => true,
+                'class' => Project::class
+            ])
             ->add('themes');
     }
 

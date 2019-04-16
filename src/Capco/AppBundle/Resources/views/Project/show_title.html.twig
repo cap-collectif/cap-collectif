@@ -85,7 +85,7 @@
                                 <span>· </span>  
                                 {{ react_render_component('ProjectHeaderDistrictsApp', {
                                     'props': {
-                                        'projectId': project.id,
+                                        'projectId': project.id|toGlobalId('Project'),
                                     }
                                 })}}
                             {% endif %}
@@ -97,7 +97,7 @@
         {% if project.visibility == 3 %}
             {{ react_render_component('ProjectRestrictedAccessApp', {
                 'props': {
-                    'projectId': project.id,
+                    'projectId': project.id|toGlobalId('Project'),
                 },
             })
             }}

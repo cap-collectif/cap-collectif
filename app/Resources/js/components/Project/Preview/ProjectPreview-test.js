@@ -10,7 +10,7 @@ const defaultProject = {
   project: {
     $refType,
     $fragmentRefs,
-    id: 'project1',
+    id: 'UHJvamVjdDpwcm9qZWN0MQ==',
   },
 };
 

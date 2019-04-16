@@ -279,7 +279,7 @@ Scenario: GraphQL client wants to get question's participants with users not con
      "data":{
         "questionnaire":{
            "participants":{
-              "totalCount":4
+              "totalCount":5
            },
            "questions":[
               {
@@ -368,7 +368,7 @@ Scenario: GraphQL client wants to get question's participants
     "data": {
       "questionnaire": {
         "participants": {
-          "totalCount": 4
+          "totalCount": 5
         },
         "questions": [
           {

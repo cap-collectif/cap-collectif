@@ -56,7 +56,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
           key="0"
           project={
             Object {
-              "id": "project1",
+              "id": "UHJvamVjdDpwcm9qZWN0MQ==",
             }
           }
           viewer={
@@ -68,7 +68,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
                     "node": Object {
                       "id": "opinion1",
                       "project": Object {
-                        "id": "project1",
+                        "id": "UHJvamVjdDpwcm9qZWN0MQ==",
                       },
                       "title": "Une carte de l'internet",
                       "url": "http://carte.perdu.com",
@@ -78,7 +78,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
                     "node": Object {
                       "id": "opinion2",
                       "project": Object {
-                        "id": "project1",
+                        "id": "UHJvamVjdDpwcm9qZWN0MQ==",
                       },
                       "title": "Un GPS de l'internet",
                       "url": "http://gps.perdu.com",
@@ -102,7 +102,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
                     "node": Object {
                       "id": "proposal1",
                       "project": Object {
-                        "id": "project1",
+                        "id": "UHJvamVjdDpwcm9qZWN0MQ==",
                       },
                       "title": "Une carte de l'internet",
                       "url": "http://carte.perdu.com",
@@ -112,7 +112,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
                     "node": Object {
                       "id": "proposal2",
                       "project": Object {
-                        "id": "project1",
+                        "id": "UHJvamVjdDpwcm9qZWN0MQ==",
                       },
                       "title": "Un GPS de l'internet",
                       "url": "http://gps.perdu.com",
@@ -149,7 +149,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
                     "node": Object {
                       "id": "opinion1",
                       "project": Object {
-                        "id": "project1",
+                        "id": "UHJvamVjdDpwcm9qZWN0MQ==",
                       },
                       "title": "Une carte de l'internet",
                       "url": "http://carte.perdu.com",
@@ -159,7 +159,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
                     "node": Object {
                       "id": "opinion2",
                       "project": Object {
-                        "id": "project1",
+                        "id": "UHJvamVjdDpwcm9qZWN0MQ==",
                       },
                       "title": "Un GPS de l'internet",
                       "url": "http://gps.perdu.com",
@@ -183,7 +183,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
                     "node": Object {
                       "id": "proposal1",
                       "project": Object {
-                        "id": "project1",
+                        "id": "UHJvamVjdDpwcm9qZWN0MQ==",
                       },
                       "title": "Une carte de l'internet",
                       "url": "http://carte.perdu.com",
@@ -193,7 +193,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
                     "node": Object {
                       "id": "proposal2",
                       "project": Object {
-                        "id": "project1",
+                        "id": "UHJvamVjdDpwcm9qZWN0MQ==",
                       },
                       "title": "Un GPS de l'internet",
                       "url": "http://gps.perdu.com",

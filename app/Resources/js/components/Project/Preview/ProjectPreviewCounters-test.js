@@ -10,7 +10,7 @@ const props = {
   project: {
     $fragmentRefs,
     $refType,
-    id: 'project1',
+    id: 'UHJvamVjdDpwcm9qZWN0MQ==',
     districts: [],
     contributors: { totalCount: 48, anonymousCount: 2 },
     votes: { totalCount: 48 },

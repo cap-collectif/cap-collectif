@@ -6,7 +6,7 @@ import { ProjectHeaderDistricts } from './ProjectHeaderDistricts';
 
 describe('<ProjectHeaderDistricts />', () => {
   const props = {
-    projectId: 'project1',
+    projectId: 'UHJvamVjdDpwcm9qZWN0MQ==',
   };
 
   it('should render correctly', () => {

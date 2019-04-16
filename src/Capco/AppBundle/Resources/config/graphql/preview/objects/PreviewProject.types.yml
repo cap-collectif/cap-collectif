@@ -10,11 +10,10 @@ PreviewProject:
       - UniformResourceLocatable
     description: 'A participatory project.'
     fields:
-      # TODO https://github.com/cap-collectif/platform/issues/7135
-      # id:
-      #   builder: 'Relay::GlobalId'
-      #   builderConfig:
-      #     typeName: Project
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Project
       title:
         type: 'String!'
         description: 'The title of the project.'
