@@ -28,8 +28,8 @@ class Page
     private $title;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false)
-     * @ORM\Column(length=255)
+     * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
+     * @ORM\Column(name="slug", unique=true, type="string", length=255)
      */
     private $slug;
 

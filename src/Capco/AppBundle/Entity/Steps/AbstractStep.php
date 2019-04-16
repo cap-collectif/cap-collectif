@@ -18,8 +18,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * AbstractStep.
- *
  * @ORM\Table(name="step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractStepRepository")
  * @CapcoAssert\EndAfterStart()
@@ -88,8 +86,13 @@ abstract class AbstractStep implements DisplayableInBOInterface
     private $title;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false)
-     * @ORM\Column(length=255)
+     * This slug must be unique by project.
+     * We could use a validator or custom generator here.
+     *
+     * It's not updatable to avoid 404s.
+     *
+     * @Gedmo\Slug(fields={"title"}, updatable=false, unique=false)
+     * @ORM\Column(length=255, nullable=false, unique=false)
      */
     private $slug;
 

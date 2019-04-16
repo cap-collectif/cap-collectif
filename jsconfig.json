@@ -9,6 +9,7 @@
     },
     "exclude": [
         "node_modules",
+        "vendor",
         "app/Resources/assets/",
         "web/js/",
     ]

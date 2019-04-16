@@ -16,15 +16,12 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class StepController extends Controller
 {
@@ -33,9 +30,13 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
      * @ParamConverter("project", class="Capco\AppBundle\Entity\Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\OtherStep", options={"mapping": {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
      */
-    public function showStepAction(Request $request, Project $project, OtherStep $step)
+    public function showStepAction(Project $project, OtherStep $step)
     {
         if (!$project->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
@@ -52,13 +53,14 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/presentation/{stepSlug}", name="app_consultation_show_presentation")
      * @Template("CapcoAppBundle:Step:presentation.html.twig")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\PresentationStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
      */
-    public function showPresentationAction(
-        Request $request,
-        Project $project,
-        PresentationStep $step
-    ) {
+    public function showPresentationAction(Project $project, PresentationStep $step)
+    {
         if (!$project->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
@@ -67,13 +69,6 @@ class StepController extends Controller
         $posts = $this->get(PostRepository::class)->getLastPublishedByProject($projectSlug, 2);
         $nbEvents = $this->get(EventResolver::class)->countEvents(null, null, $projectSlug, null);
         $nbPosts = $this->get(PostRepository::class)->countSearchResults(null, $projectSlug);
-
-        $projectContributorResolver = $this->get(ProjectContributorResolver::class);
-
-        $contributorsConnection = $projectContributorResolver->__invoke(
-            $project,
-            new Argument(['first' => 10])
-        );
 
         $showVotes = $this->get(ProjectHelper::class)->hasStepWithVotes($project);
 
@@ -93,9 +88,13 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
      * @Template("CapcoAppBundle:Step:ranking.html.twig")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
      */
-    public function showRankingAction(Request $request, Project $project, RankingStep $step)
+    public function showRankingAction(Project $project, RankingStep $step)
     {
         if (!$project->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
@@ -136,14 +135,14 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_consultation_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:opinions_ranking.html.twig")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
      */
-    public function showOpinionsRankingAction(
-        Request $request,
-        Project $project,
-        RankingStep $step,
-        $page = 1
-    ) {
+    public function showOpinionsRankingAction(Project $project, RankingStep $step, $page = 1)
+    {
         if (!$project->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
@@ -174,14 +173,14 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/versions/{page}", name="app_consultation_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:versions_ranking.html.twig")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
      */
-    public function showVersionsRankingAction(
-        Request $request,
-        Project $project,
-        RankingStep $step,
-        $page = 1
-    ) {
+    public function showVersionsRankingAction(Project $project, RankingStep $step, $page = 1)
+    {
         if (!$project->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
@@ -212,9 +211,13 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}", name="app_consultation_show_synthesis")
      * @Template("CapcoAppBundle:Step:synthesis.html.twig")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
      */
-    public function showSynthesisAction(Request $request, Project $project, SynthesisStep $step)
+    public function showSynthesisAction(Project $project, SynthesisStep $step)
     {
         if (!$project->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
@@ -237,10 +240,14 @@ class StepController extends Controller
     /**
      * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\CollectStep", options={"mapping" = {"stepSlug": "slug"}, "repository_method"= "getOneBySlug", "map_method_signature" = true})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
      * @Template("CapcoAppBundle:Step:collect.html.twig")
      */
-    public function showCollectStepAction(Request $request, Project $project, CollectStep $step)
+    public function showCollectStepAction(Project $project, CollectStep $step)
     {
         if (!$project->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
@@ -259,14 +266,15 @@ class StepController extends Controller
     /**
      * @Route("/project/{projectSlug}/questionnaire/{stepSlug}", name="app_project_show_questionnaire")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\QuestionnaireStep", options={"mapping" = {"stepSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
      * @Template("CapcoAppBundle:Step:questionnaire.html.twig")
      */
-    public function showQuestionnaireStepAction(
-        Request $request,
-        Project $project,
-        QuestionnaireStep $step
-    ) {
+    public function showQuestionnaireStepAction(Project $project, QuestionnaireStep $step)
+    {
         if (!$project->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
@@ -295,10 +303,14 @@ class StepController extends Controller
     /**
      * @Route("/project/{projectSlug}/selection/{stepSlug}", name="app_project_show_selection")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\SelectionStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
      * @Template("CapcoAppBundle:Step:selection.html.twig")
      */
-    public function showSelectionStepAction(Request $request, Project $project, SelectionStep $step)
+    public function showSelectionStepAction(Project $project, SelectionStep $step)
     {
         if (!$project->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
@@ -316,9 +328,13 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}/edition", name="app_consultation_edit_synthesis")
      * @Template("CapcoAppBundle:Synthesis:main.html.twig")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
      */
-    public function editSynthesisAction(Request $request, Project $project, SynthesisStep $step)
+    public function editSynthesisAction(Project $project, SynthesisStep $step)
     {
         if (!$project->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
@@ -355,16 +371,16 @@ class StepController extends Controller
      *    "repository_method"="getOneWithoutVisibility",
      *    "map_method_signature" = true
      * })
-     * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={
-     *    "mapping": {"stepSlug": "slug"},
-     *    "repository_method"="getOne",
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
      * })
      * @Template("CapcoAppBundle:Consultation:show.html.twig")
      */
-    public function showConsultationAction(Project $project, ConsultationStep $currentStep)
+    public function showConsultationAction(Project $project, ConsultationStep $step)
     {
-        if (!$currentStep->canDisplay($this->getUser())) {
+        if (!$step->canDisplay($this->getUser())) {
             $error = $this->get('translator')->trans(
                 'project.error.not_found',
                 [],
@@ -376,8 +392,8 @@ class StepController extends Controller
 
         return [
             'project' => $project,
-            'currentStep' => $currentStep,
-            'stepProps' => ['id' => GlobalId::toGlobalId('Consultation', $currentStep->getId())],
+            'currentStep' => $step,
+            'stepProps' => ['id' => GlobalId::toGlobalId('Consultation', $step->getId())],
         ];
     }
 }

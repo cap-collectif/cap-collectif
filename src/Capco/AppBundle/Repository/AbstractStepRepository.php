@@ -7,6 +7,22 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 
 class AbstractStepRepository extends EntityRepository
 {
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOneBySlugAndProjectSlug(string $slug, string $projectSlug): ?AbstractStep
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->leftJoin('s.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->andWhere('s.slug = :slug')
+            ->andWhere('p.slug = :projectSlug')
+            ->setParameter('slug', $slug)
+            ->setParameter('projectSlug', $projectSlug);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function getByIdWithCache(string $id): ?AbstractStep
     {
         $qb = $this->createQueryBuilder('s')
@@ -20,14 +36,7 @@ class AbstractStepRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
-    /**
-     * Get steps by project.
-     *
-     * @param $slug
-     *
-     * @return array
-     */
-    public function getByProjectSlug(string $slug)
+    public function getByProjectSlug(string $slug): array
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('p', 'pas')

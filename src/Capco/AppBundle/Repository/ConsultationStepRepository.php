@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
@@ -26,6 +27,7 @@ class ConsultationStepRepository extends EntityRepository
             ->innerJoin('cs.opinions', 'opinions')
             ->andWhere('opinions.id = :opinionId')
             ->setParameter('opinionId', $opinionId);
+
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -123,23 +125,6 @@ class ConsultationStepRepository extends EntityRepository
         }
 
         return $qb->getQuery()->execute();
-    }
-
-    /**
-     * Get one by slug.
-     *
-     * @param $slug
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     *
-     * @return mixed
-     */
-    public function getOne($slug)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->andWhere('cs.slug = :slug')
-            ->setParameter('slug', $slug);
-        return $qb->getQuery()->getOneOrNullResult();
     }
 
     protected function getIsEnabledQueryBuilder()

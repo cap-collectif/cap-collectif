@@ -10,8 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class ConsultationStep.
- *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationStepRepository")
  */
 class ConsultationStep extends AbstractStep implements ParticipativeStepInterface

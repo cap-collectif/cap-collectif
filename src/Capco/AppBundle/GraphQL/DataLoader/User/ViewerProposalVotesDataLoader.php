@@ -136,7 +136,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
                 $step
             );
         } else {
-            throw new \RuntimeException('Unknown step type.');
+            throw new \RuntimeException('Expected a proposal step got :' . \get_class($step));
         }
         $connection = $paginator->auto($args, $totalCount);
 

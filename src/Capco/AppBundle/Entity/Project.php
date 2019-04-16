@@ -82,14 +82,14 @@ class Project implements IndexableInterface
     private $externalLink;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false)
-     * @ORM\Column(length=255)
+     * It's not updatable to avoid 404s.
+     *
+     * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
+     * @ORM\Column(length=255, nullable=false, unique=true)
      */
     private $slug;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="exportable", type="boolean")
      */
     private $exportable = false;

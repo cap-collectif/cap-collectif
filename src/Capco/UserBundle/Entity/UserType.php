@@ -7,8 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * UserType.
- *
  * @ORM\HasLifecycleCallbacks()
  */
 class UserType
@@ -23,8 +21,10 @@ class UserType
     private $name;
 
     /**
-     * @var string
-     * @Gedmo\Slug(fields={"name"}, updatable=false)
+     * TODO: is this used ?
+     *
+     * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
+     * @ORM\Column(name="slug", unique=true, type="string", length=255)
      */
     private $slug;
 
