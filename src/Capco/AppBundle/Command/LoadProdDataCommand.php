@@ -70,8 +70,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class LoadProdDataCommand extends ContainerAwareCommand
 {
-    private $env;
-
     private $doctrine;
 
     public function __construct(string $name, ManagerRegistry $managerRegistry)
@@ -103,15 +101,14 @@ class LoadProdDataCommand extends ContainerAwareCommand
 
             return;
         }
-        $this->env = $input->getOption('env');
-
-        $this->loadFixtures($output, $input->getOption('env'));
-        $this->loadToggles($output);
+        $env = $input->getOption('env');
+        $this->loadFixtures($output, $env);
+        $this->loadToggles($output, $env);
 
         $output->writeln('Load prod data completed');
     }
 
-    protected function loadFixtures(OutputInterface $output, $env = 'dev')
+    protected function loadFixtures(OutputInterface $output, string $env = 'dev')
     {
         $manager = $this->doctrine->getManager();
         $classesDev = [
@@ -187,20 +184,14 @@ class LoadProdDataCommand extends ContainerAwareCommand
             ],
             $output
         );
-
-        $this->runCommands(
-            [
-                'hautelook:fixtures:load' => ['-e' => $env, '--append' => true],
-            ],
-            $output
-        );
     }
 
-    protected function loadToggles(OutputInterface $output)
+    protected function loadToggles(OutputInterface $output, string $env = 'dev')
     {
         $command = $this->getApplication()->find('capco:reset-feature-flags');
         $input = new ArrayInput([
             '--force' => true,
+            '--env' => $env,
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);

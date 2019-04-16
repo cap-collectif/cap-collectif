@@ -36,14 +36,9 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
 
     private function installProdFixtures()
     {
-        if (0 === $this->step) {
-            ++$this->step;
-
-            return $this->getPreInstallFixtures('Prod');
-        }
-        $this->step = 0;
-
         return [
+            __DIR__ . '/Prod/MediaContext.yml',
+            __DIR__ . '/Prod/MediaCategory.yml',
             __DIR__ . '/Prod/ContactForm.yml',
             __DIR__ . '/Prod/RegistrationForm.yml',
             __DIR__ . '/Prod/Media.yml',
@@ -71,25 +66,9 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
 
     private function installDevFixtures()
     {
-        if (0 === $this->step) {
-            ++$this->step;
-
-            return $this->getPreInstallFixtures('Dev');
-        }
-        $this->step = 0;
-
-        return $this->getDevFixtures();
-    }
-
-    /** TODO load all files in on time */
-    private function getPreInstallFixtures($env)
-    {
-        return [__DIR__ . "/${env}/MediaContext.yml", __DIR__ . "/${env}/MediaCategory.yml"];
-    }
-
-    private function getDevFixtures(): array
-    {
         return [
+            __DIR__ . '/Dev/MediaContext.yml',
+            __DIR__ . '/Dev/MediaCategory.yml',
             __DIR__ . '/Dev/Media.yml',
             __DIR__ . '/Dev/RegistrationForm.yml',
             __DIR__ . '/Dev/Group.yml',

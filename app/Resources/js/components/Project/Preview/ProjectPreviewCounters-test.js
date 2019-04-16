@@ -15,6 +15,9 @@ const props = {
     contributors: { totalCount: 48, anonymousCount: 2 },
     votes: { totalCount: 48 },
     contributionsCount: 71,
+    isVotesCounterDisplayable: true,
+    isContributionsCounterDisplayable: true,
+    isParticipantsCounterDisplayable: true,
   },
 };
 
@@ -27,6 +30,9 @@ const propsWithDistricts = {
     contributors: { totalCount: 54, anonymousCount: 0 },
     votes: { totalCount: 54 },
     contributionsCount: 89,
+    isVotesCounterDisplayable: true,
+    isContributionsCounterDisplayable: true,
+    isParticipantsCounterDisplayable: true,
   },
 };
 
