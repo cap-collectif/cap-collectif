@@ -27,12 +27,7 @@ exports[`<OpinionVotesButton /> should render a green button when value is 1 and
   <Connect(LoginOverlay)>
     <Button
       active={null}
-      aria-label={
-        <FormattedMessage
-          id="vote.aria_label.ok"
-          values={Object {}}
-        />
-      }
+      aria-label="vote.aria_label.ok"
       block={false}
       bsClass="btn"
       bsStyle="success"
@@ -73,12 +68,7 @@ exports[`<OpinionVotesButton /> should render a red button when value is -1 and 
   <Connect(LoginOverlay)>
     <Button
       active={null}
-      aria-label={
-        <FormattedMessage
-          id="vote.aria_label.nok"
-          values={Object {}}
-        />
-      }
+      aria-label="vote.aria_label.nok"
       block={false}
       bsClass="btn"
       bsStyle="danger"
@@ -117,12 +107,7 @@ exports[`<OpinionVotesButton /> should render an orange button when value is 0 a
   <Connect(LoginOverlay)>
     <Button
       active={null}
-      aria-label={
-        <FormattedMessage
-          id="vote.aria_label.mitige"
-          values={Object {}}
-        />
-      }
+      aria-label="vote.aria_label.mitige"
       block={false}
       bsClass="btn"
       bsStyle="warning"
