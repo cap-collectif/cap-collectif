@@ -19,7 +19,9 @@ trait TextableTrait
 
     public function getBodyText(): ?string
     {
-        return Text::htmlToString($this->body);
+        $result = Text::cleanNewline($this->body);
+
+        return Text::htmlToString($result);
     }
 
     public function setBody(string $body = null): self

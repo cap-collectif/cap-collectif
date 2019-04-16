@@ -383,7 +383,6 @@ EOF;
 
     protected function configure(): void
     {
-        parent::configure();
         $this->setDescription('Create csv file from consultation step data');
     }
 
@@ -627,11 +626,11 @@ EOF;
 
         // we add a row for 1 Opinion.
         foreach ($this->contributionHeaderMap as $path => $columnName) {
-            $row[] = isset($this->contributionHeaderMap[$path])
-                ? $this->exportUtils->parseCellValue(
-                    Arr::path($contribution, $this->contributionHeaderMap[$path])
-                )
-                : '';
+            if (isset($this->contributionHeaderMap[$path])) {
+                $value = Arr::path($contribution, $this->contributionHeaderMap[$path]);
+                $cleanValue = Text::cleanNewline($value);
+                $row[] = $this->exportUtils->parseCellValue($cleanValue);
+            }
         }
         $this->writer->addRow($row);
 
@@ -939,7 +938,9 @@ EOF;
 
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             if (isset($headerMap[$path])) {
-                $row[] = $this->exportUtils->parseCellValue(Arr::path($node, $headerMap[$path]));
+                $value = Arr::path($node, $headerMap[$path]);
+                $cleanValue = Text::cleanNewline($value);
+                $row[] = $this->exportUtils->parseCellValue($cleanValue);
             } elseif (isset($this->contributionHeaderMap[$columnName])) {
                 $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
             } else {
