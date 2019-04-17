@@ -3,7 +3,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Capco\AppBundle\Entity\Consultation;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
@@ -39,15 +39,15 @@ class OpinionTypeRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getOrderedRootNodesQuery(ConsultationStepType $stepType = null)
+    public function getOrderedRootNodesQuery(Consultation $consultation = null)
     {
         $qb = $this->createQueryBuilder('ot')
             ->andWhere('ot.parent is NULL')
             ->orderBy('ot.position', 'ASC');
-        if ($stepType) {
-            $qb->andWhere('ot.consultationStepType = :ct')->setParameter('ct', $stepType);
+        if ($consultation) {
+            $qb->andWhere('ot.consultation = :c')->setParameter('c', $consultation);
         } else {
-            $qb->andWhere('ot.consultationStepType IS NULL');
+            $qb->andWhere('ot.consultation IS NULL');
         }
 
         return $qb->getQuery();
@@ -161,8 +161,8 @@ class OpinionTypeRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getLinkableOpinionTypesForConsultationStepType(
-        ConsultationStepType $consultationStepType
+    public function getLinkableOpinionTypesForConsultation(
+        Consultation $consultation
     ) {
         $qb = $this->createQueryBuilder('ot')
             ->addSelect('otat', 'at')
@@ -170,10 +170,10 @@ class OpinionTypeRepository extends EntityRepository
             ->leftJoin('otat.appendixType', 'at')
             ->andWhere('ot.isEnabled = :enabled')
             ->andWhere('ot.linkable = :linkable')
-            ->andWhere('ot.consultationStepType = :type')
+            ->andWhere('ot.consultation = :consultation')
             ->setParameter('enabled', true)
             ->setParameter('linkable', true)
-            ->setParameter('type', $consultationStepType);
+            ->setParameter('consultation', $consultation);
         return $qb->getQuery()->getResult();
     }
 }

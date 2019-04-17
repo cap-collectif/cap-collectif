@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -28,7 +28,7 @@ class OpinionTypesResolver
 
     public function findByStepAndSlug(ConsultationStep $step, string $slug): OpinionType
     {
-        foreach ($step->getConsultationStepType()->getOpinionTypes() as $section) {
+        foreach ($step->getConsultation()->getOpinionTypes() as $section) {
             if ($section->getSlug() === $slug) {
                 return $section;
             }
@@ -37,11 +37,11 @@ class OpinionTypesResolver
         throw new NotFoundHttpException('This type does not exist for this consultation step');
     }
 
-    public function getAvailableLinkTypesForConsultationStepType(
-        ConsultationStepType $consultationStepType
+    public function getAvailableLinkTypesForConsultation(
+        Consultation $consultation
     ) {
-        return $this->opinionTypeRepo->getLinkableOpinionTypesForConsultationStepType(
-            $consultationStepType
+        return $this->opinionTypeRepo->getLinkableOpinionTypesForConsultation(
+            $consultation
         );
     }
 }

@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\Steps\ConsultationStepType:
+Capco\AppBundle\Entity\Consultation:
   typeAll:
     id: typeAll
     title: Toutes

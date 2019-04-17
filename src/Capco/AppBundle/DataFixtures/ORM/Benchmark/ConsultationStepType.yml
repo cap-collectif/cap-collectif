@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\Steps\ConsultationStepType:
+Capco\AppBundle\Entity\Consultation:
   typeDefault:
     id: typeDefault
     title: Défaut

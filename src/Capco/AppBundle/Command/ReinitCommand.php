@@ -44,11 +44,16 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\RegistrationForm;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\Styles\BorderStyle;
@@ -59,17 +64,13 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Publishable\DoctrineListener;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Styles\BackgroundStyle;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Symfony\Component\Console\Input\InputInterface;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Questions\SectionQuestion;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Symfony\Component\Console\Output\OutputInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
@@ -256,7 +257,7 @@ class ReinitCommand extends ContainerAwareCommand
             Project::class,
             QuestionnaireStep::class,
             OtherStep::class,
-            ConsultationStepType::class,
+            Consultation::class,
             ConsultationStep::class,
             Comment::class,
             ProposalComment::class,

@@ -37,8 +37,8 @@ class OpinionTypeNormalizer implements NormalizerInterface, SerializerAwareInter
             return $data;
         }
         if (\in_array('OpinionTypeLinks', $groups)) {
-            $availableTypes = $this->resolver->getAvailableLinkTypesForConsultationStepType(
-                $object->getConsultationStepType()
+            $availableTypes = $this->resolver->getAvailableLinkTypesForConsultation(
+                $object->getConsultation()
             );
 
             $serializedTypes = [];

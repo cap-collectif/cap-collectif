@@ -67,7 +67,7 @@ class ConsultationStepExtractor
             return $synthesis;
         }
 
-        if (!$consultationStep->getConsultationStepType()) {
+        if (!$consultationStep->getConsultation()) {
             return $synthesis;
         }
 
@@ -76,7 +76,7 @@ class ConsultationStepExtractor
         $this->previousElements = $synthesis->getElements();
 
         // First we get the opinion types allowed by the consultation step
-        $opinionTypes = $consultationStep->getConsultationStepType()->getRootOpinionTypes();
+        $opinionTypes = $consultationStep->getConsultation()->getRootOpinionTypes();
         // Then we start creating or updating the elements from these opinion types
         $this->createElementsFromOpinionTypes($opinionTypes);
 

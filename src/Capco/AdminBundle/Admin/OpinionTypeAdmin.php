@@ -4,7 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
+use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -34,8 +34,8 @@ class OpinionTypeAdmin extends AbstractAdmin
     public function getPersistentParameters()
     {
         $subject = $this->getSubject();
-        $consultationStepTypeId = null;
-        $consultationStepTypeName = null;
+        $consultationId = null;
+        $consultationName = null;
 
         if (
             $this->hasParentFieldDescription() &&
@@ -43,27 +43,27 @@ class OpinionTypeAdmin extends AbstractAdmin
                 ->getAdmin()
                 ->getSubject()
         ) {
-            $consultationStepTypeId = $this->getParentFieldDescription()
+            $consultationId = $this->getParentFieldDescription()
                 ->getAdmin()
                 ->getSubject()
                 ->getId();
-        } elseif ($subject && $subject->getConsultationStepType()) {
-            $consultationStepTypeId = $subject->getConsultationStepType()->getId();
+        } elseif ($subject && $subject->getConsultation()) {
+            $consultationId = $subject->getConsultation()->getId();
         } elseif ($subject && $subject->getParent()) {
             $root = $subject->getParent();
-            $cst = $root->getConsultationStepType();
-            $consultationStepTypeId = $cst ? $cst->getId() : null;
+            $cst = $root->getConsultation();
+            $consultationId = $cst ? $cst->getId() : null;
         }
 
-        if (null === $consultationStepTypeId) {
-            $consultationStepTypeId = $this->getRequest()->get('consultation_step_type_id');
+        if (null === $consultationId) {
+            $consultationId = $this->getRequest()->get('consultation_id');
         }
 
-        $consultationStepTypeName = $this->getRequest()->get('consultation_step_type_name');
+        $consultationName = $this->getRequest()->get('consultation_name');
 
         return [
-            'consultation_step_type_id' => $consultationStepTypeId,
-            'consultation_step_type_name' => $consultationStepTypeName,
+            'consultation_id' => $consultationId,
+            'consultation_name' => $consultationName,
         ];
     }
 
@@ -78,13 +78,13 @@ class OpinionTypeAdmin extends AbstractAdmin
 
     public function prePersist($type)
     {
-        if (!$type->getConsultationStepType()) {
-            $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
-            $consultationStepType = $this->getConfigurationPool()
+        if (!$type->getConsultation()) {
+            $consultationId = $this->getPersistentParameter('consultation_id');
+            $consultation = $this->getConfigurationPool()
                 ->getContainer()
-                ->get(ConsultationStepTypeRepository::class)
-                ->find($consultationStepTypeId);
-            $type->setConsultationStepType($consultationStepType);
+                ->get(ConsultationRepository::class)
+                ->find($consultationId);
+            $type->setConsultation($consultation);
         }
     }
 
@@ -220,15 +220,15 @@ class OpinionTypeAdmin extends AbstractAdmin
 
     private function createQueryForParent()
     {
-        $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
+        $consultationId = $this->getPersistentParameter('consultation_id');
 
         $qb = $this->getConfigurationPool()
             ->getContainer()
             ->get(OpinionTypeRepository::class)
             ->createQueryBuilder('ot')
-            ->leftJoin('ot.consultationStepType', 'consultationStepType')
-            ->where('consultationStepType.id = :consultationStepTypeId')
-            ->setParameter('consultationStepTypeId', $consultationStepTypeId);
+            ->leftJoin('ot.consultation', 'consultation')
+            ->where('consultation.id = :consultationId')
+            ->setParameter('consultationId', $consultationId);
 
         if ($this->getSubject()->getId()) {
             $qb->andWhere('ot.id != :otId')->setParameter('otId', $this->getSubject()->getId());

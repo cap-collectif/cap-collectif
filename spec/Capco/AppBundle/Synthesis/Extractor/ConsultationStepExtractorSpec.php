@@ -2,10 +2,8 @@
 
 namespace spec\Capco\AppBundle\Synthesis\Extractor;
 
-use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
-use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\UserBundle\Entity\User;
@@ -100,11 +98,11 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
             ->getElements()
             ->willReturn($currentElements)
             ->shouldBeCalled();
-        $consultationStepType = new ConsultationStepType();
+        $consultation = new Consultation();
         $consultationStep->getIsEnabled()->willReturn(true);
         $consultationStep
-            ->getConsultationStepType()
-            ->willReturn($consultationStepType)
+            ->getConsultation()
+            ->willReturn($consultation)
             ->shouldBeCalled();
 
         $updatedSynthesis = $this->createOrUpdateElementsFromConsultationStep(

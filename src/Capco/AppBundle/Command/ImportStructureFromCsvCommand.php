@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
-use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -76,9 +76,9 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
             ->getRepository('CapcoAppBundle:AppendixType')
             ->findOneBySlug('expose-des-motifs');
 
-        $consultationStepType = new ConsultationStepType();
-        $consultationStepType->setTitle($name);
-        $em->persist($consultationStepType);
+        $consultation = new Consultation();
+        $consultation->setTitle($name);
+        $em->persist($consultation);
         $em->flush();
 
         $data = $this->getOpinionTypes();
@@ -105,7 +105,7 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
                 $parent->addChild($opinionType);
             }
 
-            $opinionType->setConsultationStepType($consultationStepType);
+            $opinionType->setConsultation($consultation);
 
             $em->persist($opinionType);
             $em->flush();

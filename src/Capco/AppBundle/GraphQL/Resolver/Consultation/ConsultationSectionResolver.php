@@ -13,8 +13,8 @@ class ConsultationSectionResolver implements ResolverInterface
     public function __invoke(ConsultationStep $consultation, Arg $argument): \Traversable
     {
         /** @var Collection $sections */
-        $sections = $consultation->getConsultationStepType()
-            ? $consultation->getConsultationStepType()->getOpinionTypes()
+        $sections = $consultation->getConsultation()
+            ? $consultation->getConsultation()->getOpinionTypes()
             : new ArrayCollection();
 
         $iterator = $sections->getIterator();

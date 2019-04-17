@@ -1,7 +1,8 @@
 <?php
 
-namespace Capco\AppBundle\Entity\Steps;
+namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,10 +11,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="consultation_step_type")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationStepTypeRepository")
+ * @ORM\Table(name="consultation")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
  */
-class ConsultationStepType
+class Consultation
 {
     use UuidTrait;
 
@@ -41,13 +42,13 @@ class ConsultationStepType
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="consultationStepType", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="consultation", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $opinionTypes;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="consultationStepType")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="consultation")
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $step;

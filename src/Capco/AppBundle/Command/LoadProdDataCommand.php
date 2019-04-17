@@ -43,7 +43,7 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
@@ -133,7 +133,7 @@ class LoadProdDataCommand extends ContainerAwareCommand
             Project::class,
             QuestionnaireStep::class,
             OtherStep::class,
-            ConsultationStepType::class,
+            Consultation::class,
             ConsultationStep::class,
             Comment::class,
             ProposalComment::class,

@@ -13,7 +13,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\Repository\ConsultationStepTypeRepository;
+use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\StatusRepository;
@@ -159,11 +159,11 @@ class StepAdmin extends CapcoAdmin
                     'label' => 'admin.fields.step.body',
                     'required' => false,
                 ])
-                ->add('consultationStepType', 'sonata_type_model', [
-                    'label' => 'admin.fields.project.consultation_step_type',
+                ->add('consultation', 'sonata_type_model', [
+                    'label' => 'admin.fields.project.consultation',
                     'required' => true,
                     'btn_add' => false,
-                    'query' => $this->createQueryForConsultationStepType(),
+                    'query' => $this->createQueryForConsultation(),
                     'choices_as_values' => true,
                 ])
                 ->add('opinionCountShownBySection', null, [
@@ -453,12 +453,12 @@ class StepAdmin extends CapcoAdmin
         $collection->clearExcept(['create', 'edit', 'delete']);
     }
 
-    private function createQueryForConsultationStepType()
+    private function createQueryForConsultation()
     {
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get(ConsultationStepTypeRepository::class)
+            ->get(ConsultationRepository::class)
             ->createQueryBuilder('f')
             ->where('f.step IS NULL OR f.step = :step')
             ->setParameter('step', $subject);

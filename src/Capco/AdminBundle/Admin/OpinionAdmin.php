@@ -259,14 +259,14 @@ class OpinionAdmin extends CapcoAdmin
             throw new \InvalidArgumentException('Invalid opinion type.');
         }
 
-        $consultationStepType = $opinionType->getConsultationStepType();
+        $consultation = $opinionType->getConsultation();
 
         return $this->getConfigurationPool()
             ->getContainer()
             ->get(ConsultationStepRepository::class)
             ->createQueryBuilder('cs')
-            ->join('cs.consultationStepType', 'type')
+            ->join('cs.consultation', 'type')
             ->where('type = :stepType')
-            ->setParameter('stepType', $consultationStepType);
+            ->setParameter('stepType', $consultation);
     }
 }

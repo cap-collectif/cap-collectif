@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Traits\TimelessStepTrait;
@@ -78,9 +79,9 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     private $opinions;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStepType", mappedBy="step")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="step")
      */
-    private $consultationStepType;
+    private $consultation;
 
     /**
      * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
@@ -356,20 +357,20 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     }
 
     /**
-     * @return null|ConsultationStepType
+     * @return null|Consultation
      */
-    public function getConsultationStepType(): ?ConsultationStepType
+    public function getConsultation(): ?Consultation
     {
-        return $this->consultationStepType;
+        return $this->consultation;
     }
 
-    public function setConsultationStepType(ConsultationStepType $consultationStepType = null)
+    public function setConsultation(Consultation $consultation = null)
     {
-        if ($this->consultationStepType) {
-            $this->consultationStepType->setStep(null);
+        if ($this->consultation) {
+            $this->consultation->setStep(null);
         }
-        if ($consultationStepType) {
-            $consultationStepType->setStep($this);
+        if ($consultation) {
+            $consultation->setStep($this);
         }
     }
 
@@ -441,11 +442,11 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
 
     public function isVotable(): bool
     {
-        /** @var ConsultationStepType $consultationStepType */
-        $consultationStepType = $this->consultationStepType;
+        /** @var Consultation $consultation */
+        $consultation = $this->consultation;
 
         /** @var OpinionType $opinionType */
-        foreach ($consultationStepType->getOpinionTypes() as $opinionType) {
+        foreach ($consultation->getOpinionTypes() as $opinionType) {
             if (OpinionType::VOTE_WIDGET_DISABLED !== $opinionType->getVoteWidgetType()) {
                 return true;
             }

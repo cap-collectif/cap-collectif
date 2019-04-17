@@ -64,10 +64,10 @@ class OpinionType
     protected $children;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStepType", inversedBy="opinionTypes", cascade={"persist"})
-     * @ORM\JoinColumn(name="consultation_step_type_id", nullable=false, onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="opinionTypes", cascade={"persist"})
+     * @ORM\JoinColumn(name="consultation_id", nullable=false, onDelete="CASCADE")
      */
-    protected $consultationStepType;
+    protected $consultation;
 
     /**
      * @ORM\Column(name="title", type="string", length=255)
@@ -202,15 +202,10 @@ class OpinionType
         return $this->getId() ? $this->getTitle() : 'New opinion type';
     }
 
-    public function getConsultation(): ?ConsultationStep
-    {
-        return $this->getStep();
-    }
-
     public function getStep(): ?ConsultationStep
     {
-        return $this->getConsultationStepType()
-            ? $this->getConsultationStepType()->getStep()
+        return $this->getConsultation()
+            ? $this->getConsultation()->getStep()
             : null;
     }
 
@@ -599,22 +594,14 @@ class OpinionType
         $child->setParent(null);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getConsultationStepType()
+    public function getConsultation(): Consultation
     {
-        return $this->consultationStepType;
+        return $this->consultation;
     }
 
-    /**
-     * @param mixed $consultationStepType
-     *
-     * @return $this
-     */
-    public function setConsultationStepType($consultationStepType)
+    public function setConsultation(Consultation $consultation): self
     {
-        $this->consultationStepType = $consultationStepType;
+        $this->consultation = $consultation;
 
         return $this;
     }

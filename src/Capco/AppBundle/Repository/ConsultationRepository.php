@@ -6,9 +6,9 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * ConsultationStepTypeRepository.
+ * ConsultationRepository.
  */
-class ConsultationStepTypeRepository extends EntityRepository
+class ConsultationRepository extends EntityRepository
 {
     /**
      * Get opinion types by id of consultation step type.
@@ -23,8 +23,8 @@ class ConsultationStepTypeRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('ot.id')
-            ->leftJoin('ct.opinionTypes', 'ot')
-            ->andWhere('ct.id = :id')
+            ->leftJoin('c.opinionTypes', 'ot')
+            ->andWhere('c.id = :id')
             ->setParameter('id', $id)
         ;
 
@@ -39,8 +39,8 @@ class ConsultationStepTypeRepository extends EntityRepository
      */
     protected function getIsEnabledQueryBuilder()
     {
-        return $this->createQueryBuilder('ct')
-            ->andWhere('ct.enabled = :enabled')
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.enabled = :enabled')
             ->setParameter('enabled', true);
     }
 }

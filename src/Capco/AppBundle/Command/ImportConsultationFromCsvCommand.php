@@ -94,7 +94,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             return 1;
         }
 
-        if (!$consultationStep->getConsultationStepType()) {
+        if (!$consultationStep->getConsultation()) {
             $output->writeln(
                 '<error>Consultation step' .
                     $consultationStepSlug .
@@ -133,7 +133,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                         ->findOneBy([
                             'title' => $ot,
                             'parent' => null,
-                            'consultationStepType' => $consultationStep->getConsultationStepType(),
+                            'consultation' => $consultationStep->getConsultation(),
                         ]);
                 } else {
                     $opinionType = $this->getContainer()

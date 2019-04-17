@@ -490,14 +490,14 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  Capco\AdminBundle\Admin\ConsultationStepTypeAdmin:
-    arguments: [~, Capco\AppBundle\Entity\Steps\ConsultationStepType, SonataAdminBundle:CRUD]
+  Capco\AdminBundle\Admin\ConsultationAdmin:
+    arguments: [~, Capco\AppBundle\Entity\Consultation, SonataAdminBundle:CRUD]
     tags:
       - {
           name: sonata.admin,
           manager_type: orm,
           group: admin.group.project,
-          label: admin.label.consultation_step_type,
+          label: admin.label.consultation,
         }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]

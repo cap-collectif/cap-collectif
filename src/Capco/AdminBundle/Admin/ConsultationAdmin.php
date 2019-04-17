@@ -10,7 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class ConsultationStepTypeAdmin extends AbstractAdmin
+class ConsultationAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -20,7 +20,7 @@ class ConsultationStepTypeAdmin extends AbstractAdmin
     public function getTemplate($name)
     {
         if ('edit' === $name) {
-            return 'CapcoAdminBundle:ConsultationStepType:edit.html.twig';
+            return 'CapcoAdminBundle:Consultation:edit.html.twig';
         }
 
         return $this->getTemplateRegistry()->getTemplate($name);
@@ -33,16 +33,16 @@ class ConsultationStepTypeAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.consultation_step_type.title',
+                'label' => 'admin.fields.consultation.title',
             ])
             ->add('opinionTypes', null, [
-                'label' => 'admin.fields.consultation_step_type.opinion_types',
+                'label' => 'admin.fields.consultation.opinion_types',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.consultation_step_type.updated_at',
+                'label' => 'admin.fields.consultation.updated_at',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.consultation_step_type.created_at',
+                'label' => 'admin.fields.consultation.created_at',
             ]);
     }
 
@@ -55,16 +55,16 @@ class ConsultationStepTypeAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.consultation_step_type.title',
+                'label' => 'admin.fields.consultation.title',
             ])
             ->add('step', null, [
-                'label' => 'admin.fields.consultation_step_type.step',
+                'label' => 'admin.fields.consultation.step',
             ])
             ->add('opinionTypes', 'sonata_type_model', [
-                'label' => 'admin.fields.consultation_step_type.opinion_types',
+                'label' => 'admin.fields.consultation.opinion_types',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.consultation_step_type.updated_at',
+                'label' => 'admin.fields.consultation.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -81,11 +81,11 @@ class ConsultationStepTypeAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('title', null, [
-            'label' => 'admin.fields.consultation_step_type.title',
+            'label' => 'admin.fields.consultation.title',
         ]);
         if ($this->getSubject()->getId()) {
             $formMapper->add('opinionTypes', ModelType::class, [
-                'label' => 'admin.fields.consultation_step_type.opinion_types',
+                'label' => 'admin.fields.consultation.opinion_types',
                 'query' => $this->createQueryForOpinionTypes(),
                 'by_reference' => false,
                 'multiple' => true,
@@ -105,16 +105,16 @@ class ConsultationStepTypeAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.consultation_step_type.title',
+                'label' => 'admin.fields.consultation.title',
             ])
             ->add('opinionTypes', null, [
-                'label' => 'admin.fields.consultation_step_type.opinion_types',
+                'label' => 'admin.fields.consultation.opinion_types',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.consultation_step_type.updated_at',
+                'label' => 'admin.fields.consultation.updated_at',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.consultation_step_type.created_at',
+                'label' => 'admin.fields.consultation.created_at',
             ]);
     }
 

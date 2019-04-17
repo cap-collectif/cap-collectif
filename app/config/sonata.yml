@@ -57,7 +57,7 @@ sonata_admin:
           - Capco\AdminBundle\Admin\ProjectAdmin
           - Capco\AdminBundle\Admin\AppendixTypeAdmin
           - Capco\AdminBundle\Admin\CategoryAdmin
-          - Capco\AdminBundle\Admin\ConsultationStepTypeAdmin
+          - Capco\AdminBundle\Admin\ConsultationAdmin
           - Capco\AdminBundle\Admin\ProposalFormAdmin
           - Capco\AdminBundle\Admin\QuestionnaireAdmin
           - Capco\AdminBundle\Admin\ProjectTypeAdmin
