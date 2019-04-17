@@ -40,12 +40,12 @@
                     <h4 class="modal-title">Choisissez le type de proposition à créer</h4>
                 </div>
                 <div class="modal-body">
-                    {% if consultationStepTypes | length > 0 %}
+                    {% if consultations | length > 0 %}
                         <ul style="list-style-type: none;">
-                            {% for consultationStepType, opinionTypes in consultationStepTypes %}
+                            {% for consultation, opinionTypes in consultations %}
                                 <li>
                                     <span class="dropdown-header" style="padding: 15px 0px 5px;">
-                                        {{ consultationStepType }}
+                                        {{ consultation }}
                                     </span>
                                 </li>
                                 <ul>

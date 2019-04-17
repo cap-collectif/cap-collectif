@@ -44,9 +44,9 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\CollectStep']
 
-  Capco\AppBundle\Repository\ConsultationStepTypeRepository:
+  Capco\AppBundle\Repository\ConsultationRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Steps\ConsultationStepType']
+    arguments: ['CapcoAppBundle:Consultation']
 
   Capco\AppBundle\Repository\ProposalDistrictRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
