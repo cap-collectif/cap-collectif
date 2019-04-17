@@ -30,6 +30,7 @@ type Props = {|
   features: FeatureToggles,
   dispatch: Dispatch,
   theme: ?string,
+  isRegistrable: ?string,
   project: ?string,
   userType: ?string,
   search: ?string,
@@ -45,6 +46,7 @@ const countFilters = (
   search: ?string,
   author: ?string,
   userType: ?string,
+  isRegistrable: ?string,
 ): number => {
   let nbFilter = 0;
   if (author) {
@@ -57,6 +59,9 @@ const countFilters = (
     nbFilter++;
   }
   if (userType) {
+    nbFilter++;
+  }
+  if (isRegistrable) {
     nbFilter++;
   }
 
@@ -134,7 +139,7 @@ export class EventListFilters extends React.Component<Props, State> {
         role="combobox"
         aria-autocomplete="list"
         aria-haspopup="true"
-        clearable={false}
+        clearable
         aria-controls="EventListFilters-filter-isRegistrable-listbox"
         options={[
           { value: 'all', label: intl.formatMessage({ id: 'indifferent' }) },
@@ -266,6 +271,7 @@ export class EventListFilters extends React.Component<Props, State> {
       project,
       search,
       author,
+      isRegistrable,
       userType,
       intl,
       addToggleViewButton,
@@ -273,7 +279,7 @@ export class EventListFilters extends React.Component<Props, State> {
       query,
     } = this.props;
 
-    const nbFilter = countFilters(theme, project, search, author, userType);
+    const nbFilter = countFilters(theme, project, search, author, userType, isRegistrable);
 
     const popoverBottom = this.getPopoverBottom(nbFilter);
 

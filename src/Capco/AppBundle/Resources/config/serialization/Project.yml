@@ -30,4 +30,4 @@ Capco\AppBundle\Entity\Project:
     publishedAt:
       groups: [Projects, Elasticsearch]
     events:
-      groups: [Projects, Elasticasearch, Events]
+      groups: [Elasticasearch]

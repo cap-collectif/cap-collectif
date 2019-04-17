@@ -20,6 +20,7 @@ const defaultProps = {
   userType: null,
   project: 'UHJvamVjdDpwcm9qZWN0MQ==',
   author: null,
+  isRegistrable: 'all',
   features: {
     ...features,
     themes: true,

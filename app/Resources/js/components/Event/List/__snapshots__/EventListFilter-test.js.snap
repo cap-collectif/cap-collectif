@@ -33,7 +33,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
       className="pull-right"
     >
       <FiltersContainer
-        filterCount={2}
+        filterCount={3}
         overlay={
           <div>
             <p>
@@ -55,7 +55,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                     aria-autocomplete="list"
                     aria-controls="EventListFilters-filter-isRegistrable-listbox"
                     aria-haspopup="true"
-                    clearable={false}
+                    clearable={true}
                     component={[Function]}
                     id="EventListFilters-filter-isRegistrable"
                     name="isRegistrable"
@@ -259,7 +259,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
       className="pull-right"
     >
       <FiltersContainer
-        filterCount={2}
+        filterCount={3}
         overlay={
           <div>
             <p>
@@ -281,7 +281,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                     aria-autocomplete="list"
                     aria-controls="EventListFilters-filter-isRegistrable-listbox"
                     aria-haspopup="true"
-                    clearable={false}
+                    clearable={true}
                     component={[Function]}
                     id="EventListFilters-filter-isRegistrable"
                     name="isRegistrable"
