@@ -30,4 +30,10 @@ harum modi tempore quis numquam.</p>';
         $this->setBody($testString);
         $this->getBodyText()->shouldReturn('Magni voluptates harum modi tempore quis numquam.');
     }
+
+    public function it_bodyText_handle_null_value()
+    {
+        $this->setBody(null);
+        $this->getBodyText()->shouldReturn('');
+    }
 }
