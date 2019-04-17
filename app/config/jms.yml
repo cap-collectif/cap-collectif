@@ -8,16 +8,17 @@ jms_serializer:
     directories:
       App:
         namespace_prefix: "Capco\\AppBundle\\Entity"
-        path: '@CapcoAppBundle/Resources/config/serialization'
+        path: '%kernel.root_dir%/Resources/serializer'
       User:
         namespace_prefix: "Capco\\UserBundle"
         path: '@CapcoUserBundle/Resources/config/serializer'
       Media:
         namespace_prefix: "Capco\\MediaBundle"
-        path: '@CapcoMediaBundle/Resources/config/serialization'
+        path: '@CapcoMediaBundle/Resources/config/serializer'
       FOSUserBundle:
         namespace_prefix: "FOS\\UserBundle"
         path: '@CapcoUserBundle/Resources/config/serializer/FOSUserBundle'
-#      GedmoLoggable:
-#        namespace_prefix: "Gedmo\\Loggable"
-#        path: '@CapcoAppBundle/Resources/config/serializer/GedmoLoggable'
+      GedmoLoggable:
+        namespace_prefix: "Gedmo\\Loggable"
+        path: '@CapcoAppBundle/Resources/config/serializer/GedmoLoggable'
+  enable_short_alias: false

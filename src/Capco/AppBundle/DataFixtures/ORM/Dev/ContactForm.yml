@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\ContactForm:
   ContactForm1:
     id: contactForm1
     title: Contact form 1
-    body: <stripslashes('\<p>This is a contact form body</p>\')>
+    body: <stripslashes('\<p>This is a contact form body</p>')>
     slug: contact-form-2
     interlocutor: Cap Collectif
     email: admin1@email.com
