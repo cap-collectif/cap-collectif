@@ -11,6 +11,7 @@ exports[`<GroupAdminAddUsersForm /> render correctly 1`] = `
       autoload={false}
       className=""
       clearable={false}
+      debounce={false}
       id="group-users-users"
       inputClassName="fake-inputClassName"
       label="group.admin.form.users"

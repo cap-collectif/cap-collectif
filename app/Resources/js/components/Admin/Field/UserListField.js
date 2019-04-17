@@ -18,60 +18,47 @@ type Props = {
   selectFieldIsObject?: boolean,
   multi?: boolean,
   autoload: boolean,
+  debounce: boolean,
   authorOfEvent: boolean,
   clearable: boolean,
 };
+
+const getUsersList = graphql`
+  query UserListFieldQuery($displayName: String, $authorOfEventOnly: Boolean) {
+    userSearch(displayName: $displayName, authorsOfEventOnly: $authorOfEventOnly) {
+      id
+      displayName
+    }
+  }
+`;
+
+const getUsersListWithoutIds = graphql`
+  query UserListFieldNotInIdsQuery(
+    $notInIds: [String]
+    $displayName: String
+    $authorOfEventOnly: Boolean
+  ) {
+    userSearch(
+      notInIds: $notInIds
+      displayName: $displayName
+      authorsOfEventOnly: $authorOfEventOnly
+    ) {
+      id
+      displayName
+    }
+  }
+`;
 
 export default class UserListField extends React.Component<Props> {
   static defaultProps = {
     className: '',
     authorOfEvent: false,
+    multi: false,
+    debounce: false,
   };
 
-  render() {
-    const getUsersList = graphql`
-      query UserListFieldQuery($displayName: String, $authorOfEventOnly: Boolean) {
-        userSearch(displayName: $displayName, authorsOfEventOnly: $authorOfEventOnly) {
-          id
-          displayName
-        }
-      }
-    `;
-
-    const getUsersListWithoutIds = graphql`
-      query UserListFieldNotInIdsQuery(
-        $notInIds: [String]
-        $displayName: String
-        $authorOfEventOnly: Boolean
-      ) {
-        userSearch(
-          notInIds: $notInIds
-          displayName: $displayName
-          authorsOfEventOnly: $authorOfEventOnly
-        ) {
-          id
-          displayName
-        }
-      }
-    `;
-
-    const {
-      id,
-      name,
-      label,
-      labelClassName,
-      inputClassName,
-      clearable,
-      autoload,
-      placeholder,
-      ariaControls,
-      userListToNoSearch,
-      authorOfEvent,
-      disabled,
-      selectFieldIsObject,
-      multi,
-    } = this.props;
-
+  loadOptions = (search: string) => {
+    const { userListToNoSearch, authorOfEvent } = this.props;
     const retrieveUsersList = (usersIds: ?Array<string>, terms: ?string) => {
       if (usersIds) {
         return fetchQuery(environment, getUsersListWithoutIds, {
@@ -97,6 +84,26 @@ export default class UserListField extends React.Component<Props> {
       );
     };
 
+    return retrieveUsersList(userListToNoSearch, search);
+  };
+
+  render() {
+    const {
+      id,
+      name,
+      label,
+      labelClassName,
+      inputClassName,
+      clearable,
+      autoload,
+      placeholder,
+      ariaControls,
+      disabled,
+      selectFieldIsObject,
+      debounce,
+      multi,
+    } = this.props;
+
     return (
       <Field
         name={name}
@@ -110,12 +117,13 @@ export default class UserListField extends React.Component<Props> {
         aria-autocomplete="list"
         aria-haspopup="true"
         role="combobox"
+        debounce={debounce}
         autoload={autoload}
         disabled={disabled}
         selectFieldIsObject={selectFieldIsObject}
         component={select}
         clearable={clearable}
-        loadOptions={terms => retrieveUsersList(userListToNoSearch, terms)}
+        loadOptions={this.loadOptions}
       />
     );
   }

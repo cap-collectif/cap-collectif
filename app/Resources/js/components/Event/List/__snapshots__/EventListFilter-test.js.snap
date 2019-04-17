@@ -62,20 +62,20 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                     options={
                       Array [
                         Object {
-                          "label": "all-events",
+                          "label": "indifferent",
                           "value": "all",
                         },
                         Object {
-                          "label": "open",
+                          "label": "global.yes",
                           "value": "true",
                         },
                         Object {
-                          "label": "closed",
+                          "label": "global.no",
                           "value": "false",
                         },
                       ]
                     }
-                    placeholder="global.registration"
+                    placeholder="registration-required"
                     role="combobox"
                   />
                 </div>
@@ -92,11 +92,14 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                     autoload={false}
                     className=""
                     clearable={true}
+                    debounce={true}
                     id="EventListFilters-filter-authors"
                     inputClassName="fake-inputClassName"
                     labelClassName="control-label"
+                    multi={false}
                     name="author"
                     placeholder="project_download.label.author"
+                    selectFieldIsObject={true}
                   />
                 </div>
               </Col>
@@ -285,20 +288,20 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                     options={
                       Array [
                         Object {
-                          "label": "all-events",
+                          "label": "indifferent",
                           "value": "all",
                         },
                         Object {
-                          "label": "open",
+                          "label": "global.yes",
                           "value": "true",
                         },
                         Object {
-                          "label": "closed",
+                          "label": "global.no",
                           "value": "false",
                         },
                       ]
                     }
-                    placeholder="global.registration"
+                    placeholder="registration-required"
                     role="combobox"
                   />
                 </div>
@@ -315,11 +318,14 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                     autoload={false}
                     className=""
                     clearable={true}
+                    debounce={true}
                     id="EventListFilters-filter-authors"
                     inputClassName="fake-inputClassName"
                     labelClassName="control-label"
+                    multi={false}
                     name="author"
                     placeholder="project_download.label.author"
+                    selectFieldIsObject={true}
                   />
                 </div>
               </Col>

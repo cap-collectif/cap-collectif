@@ -130,16 +130,16 @@ export class EventListFilters extends React.Component<Props, State> {
         component={select}
         id="EventListFilters-filter-isRegistrable"
         name="isRegistrable"
-        placeholder={intl.formatMessage({ id: 'global.registration' })}
+        placeholder={intl.formatMessage({ id: 'registration-required' })}
         role="combobox"
         aria-autocomplete="list"
         aria-haspopup="true"
         clearable={false}
         aria-controls="EventListFilters-filter-isRegistrable-listbox"
         options={[
-          { value: 'all', label: intl.formatMessage({ id: 'all-events' }) },
-          { value: 'true', label: intl.formatMessage({ id: 'open' }) },
-          { value: 'false', label: intl.formatMessage({ id: 'closed' }) },
+          { value: 'all', label: intl.formatMessage({ id: 'indifferent' }) },
+          { value: 'true', label: intl.formatMessage({ id: 'global.yes' }) },
+          { value: 'false', label: intl.formatMessage({ id: 'global.no' }) },
         ]}
       />,
     );
@@ -149,6 +149,8 @@ export class EventListFilters extends React.Component<Props, State> {
         name="author"
         authorOfEvent
         clearable
+        selectFieldIsObject
+        debounce
         autoload={false}
         labelClassName="control-label"
         inputClassName="fake-inputClassName"

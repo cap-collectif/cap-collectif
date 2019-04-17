@@ -265,6 +265,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         autoload={false}
         className=""
         clearable={false}
+        debounce={false}
         disabled={false}
         id="proposal-admin-author"
         inputClassName="fake-inputClassName"

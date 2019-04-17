@@ -19,7 +19,7 @@ type Props = {
   userType: ?string,
   status: ?boolean,
   isRegistrable: ?boolean,
-  author: ?string,
+  author: ?{ value: string },
 };
 
 type State = {
@@ -58,7 +58,7 @@ export class EventRefetch extends React.Component<Props, State> {
       project: this.props.project || null,
       userType: this.props.userType || null,
       isFuture: this.props.status === 'all' ? null : this.props.status === 'ongoing-and-future',
-      author: this.props.author || null,
+      author: this.props.author && this.props.author.value ? this.props.author.value : null,
       isRegistrable:
         this.props.isRegistrable === 'all' || typeof this.props.isRegistrable === 'undefined'
           ? null
