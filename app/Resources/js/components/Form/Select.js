@@ -4,6 +4,7 @@ import { HelpBlock } from 'react-bootstrap';
 import Select from 'react-select';
 import Async from 'react-select/lib/Async';
 import { FormattedMessage } from 'react-intl';
+import debouncePromise from 'debounce-promise';
 
 type Options = Array<{ value: string, label: string }>;
 type Value = string | Array<{ value: string }>;
@@ -32,6 +33,7 @@ type Props = {
   labelClassName?: string,
   inputClassName?: string,
   selectFieldIsObject?: boolean,
+  debounce: boolean,
 };
 
 const ClearIndicator = props => {
@@ -48,15 +50,23 @@ const ClearIndicator = props => {
 class renderSelect extends React.Component<Props> {
   myRef: any;
 
+  debouncedLoadOptions: any;
+
   constructor(props: Props) {
     super(props);
     this.myRef = React.createRef();
+
+    const wait = 500; // milliseconds
+    this.debouncedLoadOptions = debouncePromise(props.loadOptions, wait, {
+      leading: true,
+    });
   }
 
   static defaultProps = {
     multi: false,
     disabled: false,
     autoload: false,
+    debounce: false,
     clearable: true,
   };
 
@@ -80,6 +90,7 @@ class renderSelect extends React.Component<Props> {
       placeholder,
       loadOptions,
       filterOption,
+      debounce,
       selectFieldIsObject,
       id,
       help,
@@ -122,7 +133,9 @@ class renderSelect extends React.Component<Props> {
               placeholder={
                 placeholder || <FormattedMessage id="admin.fields.menu_item.parent_empty" />
               }
-              loadOptions={loadOptions}
+              loadOptions={
+                debounce ? inputValue => this.debouncedLoadOptions(inputValue) : loadOptions
+              }
               cacheOptions={false}
               value={selectValue}
               className="react-select-container"
