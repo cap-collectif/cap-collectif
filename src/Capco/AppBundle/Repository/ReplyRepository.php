@@ -143,6 +143,7 @@ class ReplyRepository extends EntityRepository
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.step IN (:steps)')
             ->andWhere('reply.author = :author')
+            ->andWhere('reply.draft = false')
             ->setParameter(
                 'steps',
                 array_filter($project->getRealSteps(), function ($step) {
@@ -164,6 +165,7 @@ class ReplyRepository extends EntityRepository
         $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT(reply)')
             ->leftJoin('reply.questionnaire', 'questionnaire')
+            ->andWhere('reply.draft = false')
             ->andWhere('questionnaire.step = :step')
             ->andWhere('reply.author = :author')
             ->setParameter('step', $step)
