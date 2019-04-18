@@ -594,7 +594,7 @@ class OpinionType
         $child->setParent(null);
     }
 
-    public function getConsultation(): Consultation
+    public function getConsultation(): ?Consultation
     {
         return $this->consultation;
     }
