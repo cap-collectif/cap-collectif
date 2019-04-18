@@ -265,17 +265,17 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
 
     public function getPosition(): int
     {
-        return $this->questionnaireAbstractQuestion->getPosition();
+        return $this->getQuestionnaireAbstractQuestion() ? $this->getQuestionnaireAbstractQuestion()->getPosition() : 0;
     }
 
     public function getQuestionnaire(): ?Questionnaire
     {
-        return $this->questionnaireAbstractQuestion->getQuestionnaire();
+        return $this->getQuestionnaireAbstractQuestion() ? $this->getQuestionnaireAbstractQuestion()->getQuestionnaire() : null;
     }
 
-    public function getQuestion(): ?self
+    public function getQuestion(): ?AbstractQuestion
     {
-        return $this->questionnaireAbstractQuestion->getQuestion();
+        return $this->getQuestionnaireAbstractQuestion() ? $this->getQuestionnaireAbstractQuestion()->getQuestion() : null;
     }
 
     public function getQuestionnaireId(): ?int
