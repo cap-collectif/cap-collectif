@@ -1,0 +1,31 @@
+{% set page_class = "legal" %}
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block canonical_link %}{{ url('app_legal') }}{% endblock %}
+
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title': ('legal-mentions'|trans({}, 'CapcoAppBundle')),
+        'url':   url('app_legal')
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ 'legal-mentions' | trans({}, 'CapcoAppBundle') }}
+{% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1>{{ 'legal-mentions' | trans({}, 'CapcoAppBundle') }}</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <section class="section--custom">
+        <div class="container" style="max-width: 660px">
+            {{ legal|raw }}
+        </div>
+    </section>
+{% endblock %}

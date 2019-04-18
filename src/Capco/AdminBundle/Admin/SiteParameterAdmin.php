@@ -63,6 +63,8 @@ class SiteParameterAdmin extends AbstractAdmin
         ]);
         /** @var SiteParameter $subject */
         $subject = $this->getSubject();
+        // Decode the html to be display in BO
+        $subject->setValue(html_entity_decode($subject->getValue()));
         $types = SiteParameter::$types;
 
         if ($subject->getType() === $types['simple_text']) {

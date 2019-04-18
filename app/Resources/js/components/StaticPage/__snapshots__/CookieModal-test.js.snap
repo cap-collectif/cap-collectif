@@ -5,6 +5,9 @@ exports[`<CookieModal /> should render correctly close 1`] = `
   className="cookie-manager"
 >
   <div>
+    <span>
+      | 
+    </span>
     <Button
       active={false}
       block={false}
@@ -110,6 +113,9 @@ exports[`<CookieModal /> should render correctly open 1`] = `
   className="cookie-manager"
 >
   <div>
+    <span>
+      | 
+    </span>
     <Button
       active={false}
       block={false}

@@ -11,6 +11,7 @@ describe('<CookieModal />', () => {
     bannerTrad: 'banner-trad',
     cookieTrad: 'cookie-trad',
     isLink: true,
+    withListSeparator: true,
   };
   it('should render correctly open', () => {
     const wrapper = shallow(<CookieModal {...props} />);

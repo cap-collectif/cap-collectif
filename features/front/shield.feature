@@ -18,6 +18,7 @@ Scenario: Anonymous should see shield, can't register but can connect
 Scenario: Anonymous should see shield and can register
   Given feature "registration" is enabled
   And I visited "home page"
+  And I wait 2 seconds
   Then I should see the shield
 
 Scenario: Registered but not validated user wants to connect when shield mode enabled

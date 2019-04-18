@@ -20,11 +20,8 @@ class DefaultController extends Controller
             $this->get(Manager::class)->isActive('shield_mode') &&
             !$this->getUser()->isEmailConfirmed()
         ) {
-            $this->get('security.token_storage')->setToken();
-
-            if ($request->getSession()) {
-                $request->getSession()->invalidate();
-            }
+            $this->get('security.token_storage')->setToken(null);
+            $request->getSession()->invalidate();
 
             return $this->json([
                 'success' => false,
@@ -83,8 +80,52 @@ class DefaultController extends Controller
             'isEnabled' => 1,
         ]);
 
+        if (!$cookiesList) {
+            return $this->createNotFoundException();
+        }
+
         return [
-            'cookiesList' => $cookiesList ? $cookiesList->getValue() : '',
+            'cookiesList' => html_entity_decode($cookiesList->getValue()),
+        ];
+    }
+
+    /**
+     * @Route("/privacy", name="app_privacy")
+     * @Template("CapcoAppBundle:Default:privacyPolicy.html.twig")
+     */
+    public function privacyPolicyAction(Request $request)
+    {
+        $policy = $this->get(SiteParameterRepository::class)->findOneBy([
+            'keyname' => 'privacy-policy',
+            'isEnabled' => 1,
+        ]);
+
+        if (!$policy) {
+            return $this->createNotFoundException();
+        }
+
+        return [
+            'privacy' => html_entity_decode($policy->getValue()),
+        ];
+    }
+
+    /**
+     * @Route("/legal", name="app_legal")
+     * @Template("CapcoAppBundle:Default:legalMentions.html.twig")
+     */
+    public function legalMentionsAction(Request $request)
+    {
+        $legal = $this->get(SiteParameterRepository::class)->findOneBy([
+            'keyname' => 'legal-mentions',
+            'isEnabled' => 1,
+        ]);
+
+        if (!$legal) {
+            return $this->createNotFoundException();
+        }
+
+        return [
+            'legal' => html_entity_decode($legal->getValue()),
         ];
     }
 }

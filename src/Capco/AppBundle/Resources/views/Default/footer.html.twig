@@ -29,34 +29,51 @@
             </div>
         </div>
     </div>
-
     <div class="footer__links">
         <div class="container">
             <ul>
                 {% set footerLinks = getFooterLinks() %}
+                {% set footerLegals = getLegalsPages() %}
                 {% for footerLink in footerLinks %}
                     <li>
                         <a href="{{ menu_url(footerLink) }}">
                             {{ footerLink.title }}
                         </a>
-                        |
+                        {% if false == loop.last %}|{% endif %}
                     </li>
                 {% endfor %}
-                <li>
+                {% if true == footerLegals['cookies']%}
+                <li> |
                     <a href="{{ path('app_cookies') }}">
                         {{ 'cookies'|trans({}, 'CapcoAppBundle') }}
-                    </a> {% if bannerTrad is defined and bannerTrad is not empty %}|{% endif %}
+                    </a>
                 </li>
-                <li>
+                {% endif %}
+                {% if true == footerLegals['privacy']%}
+                <li> |
+                    <a href="{{ path('app_privacy') }}">
+                        {{ 'privacy-policy'|trans({}, 'CapcoAppBundle') }}
+                    </a>
+                </li>
+                {% endif %}
+                {% if true == footerLegals['legal'] %}
+                <li> |
+                    <a href="{{ path('app_legal') }}">
+                        {{ 'legal-mentions'|trans({}, 'CapcoAppBundle') }}
+                    </a>
+                </li>
+                {% endif %}
                 {% if bannerTrad is defined and bannerTrad is not empty %}
+                <li>
                     {{ react_render_component('CookieApp', {
                         'props': {
                             'bannerTrad':  bannerTrad,
                             'isLink':  true,
+                            'withListSeparator':  true,
                         }
                     }) }}
-                {% endif %}
                 </li>
+                {% endif %}
             </ul>
             <div class="capco-powered">
                 <p>

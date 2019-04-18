@@ -1,0 +1,31 @@
+{% set page_class = "privacy" %}
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block canonical_link %}{{ url('app_privacy') }}{% endblock %}
+
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title': ('cookies'|trans({}, 'CapcoAppBundle')),
+        'url':   url('app_privacy')
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ 'privacy-policy' | trans({}, 'CapcoAppBundle') }}
+{% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1>{{ 'privacy-policy' | trans({}, 'CapcoAppBundle') }}</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <section class="section--custom">
+        <div class="container" style="max-width: 660px">
+            {{ privacy|raw }}
+        </div>
+    </section>
+{% endblock %}

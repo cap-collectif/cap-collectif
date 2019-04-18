@@ -14,6 +14,7 @@ type Props = {
   bannerTrad: string,
   cookieTrad?: ?string,
   isLink: boolean,
+  withListSeparator: boolean,
 };
 
 type CookieModalState = {
@@ -23,6 +24,7 @@ type CookieModalState = {
 export class CookieModal extends React.Component<Props, CookieModalState> {
   static defaultProps = {
     isLink: false,
+    withListSeparator: false,
   };
 
   cookie: any;
@@ -68,12 +70,13 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
   };
 
   render() {
-    const { isLink, analyticsJs, adJs, bannerTrad, cookieTrad } = this.props;
+    const { isLink, analyticsJs, adJs, bannerTrad, cookieTrad, withListSeparator } = this.props;
     const { showModal } = this.state;
     return (
       <div className="cookie-manager">
         {isLink ? (
           <div>
+            {withListSeparator && <span>| </span>}
             <Button
               variant="link"
               bsStyle="link"
