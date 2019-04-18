@@ -1,0 +1,30 @@
+InternalConsultation:
+  type: object
+  inherits:
+    - InternalPrimaryKey
+    - PublicConsultation
+    - Node
+  config:
+    interfaces: [Node]
+    description: 'A consultation'
+    name: Consultation
+    fields:
+      # Should stay an array ?
+      sections:
+        type: '[Section]'
+        description: 'List of sections.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationSectionResolver", [value, args])'
+      viewerOpinionsUnpublished:
+        access: "@=hasRole('ROLE_USER')"
+        type: 'OpinionConnection'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", [value, args, getUser()])'
+      contribuable:
+        type: 'Boolean!'
+        description: 'Contributions are allowed right now.'
+        resolve: '@=value.canContribute(getUser())'
+      opinionCountShownBySection:
+        type: 'Int'
+      step:
+        type: 'InternalConsultationStep!'
+        description: 'The associated consultation step in which belongs this consultation'

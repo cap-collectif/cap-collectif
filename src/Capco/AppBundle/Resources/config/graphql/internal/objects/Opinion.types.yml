@@ -37,7 +37,7 @@ Opinion:
       viewerHasReport:
         resolve: '@=value.userHasReport(getUser())'
       step:
-        type: 'InternalConsultation!'
+        type: 'InternalConsultationStep!'
       viewerVote:
         type: 'OpinionVote'
         description: 'The viewer vote.'

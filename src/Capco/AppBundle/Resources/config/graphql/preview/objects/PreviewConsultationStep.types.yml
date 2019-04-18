@@ -1,0 +1,10 @@
+PreviewConsultationStep:
+  type: object
+  inherits:
+    - PublicConsultationStep
+  config:
+    description: 'A consultation step'
+    name: ConsultationStep
+    fields:
+      contributors:
+        type: 'PreviewUserConnection!'

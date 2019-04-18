@@ -22,7 +22,7 @@ Source:
       - UniformResourceLocatable
     fields:
       step:
-        type: 'InternalConsultation!'
+        type: 'InternalConsultationStep!'
       createdAt:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'

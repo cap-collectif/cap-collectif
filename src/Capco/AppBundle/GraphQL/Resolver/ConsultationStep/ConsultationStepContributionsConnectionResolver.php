@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
+namespace Capco\AppBundle\GraphQL\Resolver\ConsultationStep;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class ConsultationContributionsConnectionResolver implements ResolverInterface
+class ConsultationStepContributionsConnectionResolver implements ResolverInterface
 {
     private $opinionRepo;
 
@@ -18,16 +18,16 @@ class ConsultationContributionsConnectionResolver implements ResolverInterface
         $this->opinionRepo = $opinionRepo;
     }
 
-    public function __invoke(ConsultationStep $consultation, Argument $args): Connection
+    public function __invoke(ConsultationStep $consultationStep, Argument $args): Connection
     {
         $includeTrashed = $args->offsetGet('includeTrashed');
 
         $paginator = new Paginator(function ($offset, $limit) use (
-            $consultation,
+            $consultationStep,
             $args,
             $includeTrashed
         ) {
-            $criteria = ['step' => $consultation, 'trashed' => false];
+            $criteria = ['step' => $consultationStep, 'trashed' => false];
 
             if ($includeTrashed) {
                 unset($criteria['trashed']);
@@ -44,7 +44,7 @@ class ConsultationContributionsConnectionResolver implements ResolverInterface
                 ->getArrayCopy();
         });
 
-        $totalCount = $this->opinionRepo->countByStep($consultation, $includeTrashed);
+        $totalCount = $this->opinionRepo->countByStep($consultationStep, $includeTrashed);
 
         return $paginator->auto($args, $totalCount);
     }

@@ -1,5 +1,6 @@
 <?php
-namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
+
+namespace Capco\AppBundle\GraphQL\Resolver\ConsultationStep;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
@@ -11,7 +12,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
 
-class ConsultationUserHasVoteResolver implements ResolverInterface
+class ConsultationStepUserHasVoteResolver implements ResolverInterface
 {
     private $userRepo;
     private $opinionVoteRepo;

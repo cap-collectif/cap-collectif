@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Repository\ConsultationRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -107,6 +108,10 @@ class GlobalIdResolver
 
                     break;
                 case 'Consultation':
+                    $node = $this->container->get(ConsultationRepository::class)->find($uuid);
+
+                    break;
+                case 'ConsultationStep':
                     $node = $this->container->get(ConsultationStepRepository::class)->find($uuid);
 
                     break;
@@ -176,6 +181,10 @@ class GlobalIdResolver
 
         if (!$node) {
             $node = $this->container->get(ProposalRepository::class)->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get(ConsultationRepository::class)->find($uuid);
         }
 
         if (!$node) {

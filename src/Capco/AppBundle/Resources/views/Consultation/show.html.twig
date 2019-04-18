@@ -35,6 +35,7 @@
     {% endif %}
 
     {% block content %}
+        {% dump stepProps %}
         {{ react_render_component('ConsultationPageApp', { 'props': stepProps }) }}
     {% endblock %}
 {% endblock %}

@@ -47,7 +47,22 @@ type Consultation implements Node {
   # The ID of an object
   id: ID!
 
-  # A list of contributor associated with the consultation.
+  # The title of the consultation.
+  title: String!
+}
+
+# A consultation step
+type ConsultationStep implements Node {
+  # The ID of an object
+  id: ID!
+
+  # The type of step. Returns "consultation".
+  kind: String!
+
+  # The related consultation of this step.
+  consultation: Consultation
+
+  # A list of contributor associated with the consultation step.
   contributors(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -62,17 +77,14 @@ type Consultation implements Node {
     last: Int
   ): UserConnection!
 
-  # The title of the consultation.
-  title: String!
+  # The number of votes in this consultation.
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
 
-  # Whether the user has vote for a contribution in this consultation.
+  # Whether the user has vote for a contribution in this consultation step.
   userHasVote(
     # The user's login (for example, an email).
     login: String!
   ): Boolean!
-
-  # The number of votes in this consultation.
-  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
 }
 
 # A string containing a datetime.

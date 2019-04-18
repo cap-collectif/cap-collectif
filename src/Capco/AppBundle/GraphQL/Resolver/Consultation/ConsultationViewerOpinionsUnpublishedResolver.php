@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -19,12 +19,15 @@ class ConsultationViewerOpinionsUnpublishedResolver implements ResolverInterface
         $this->opinionRepo = $opinionRepo;
     }
 
-    public function __invoke(ConsultationStep $step, Argument $args, $viewer): Connection
+    public function __invoke(Consultation $consultation, Argument $args, $viewer): Connection
     {
         if (!$viewer instanceof User) {
             return ConnectionBuilder::empty();
         }
-        $unpublished = $this->opinionRepo->getUnpublishedByConsultationAndAuthor($step, $viewer);
+        $unpublished = $this->opinionRepo->getUnpublishedByConsultationAndAuthor(
+            $consultation,
+            $viewer
+        );
         $connection = ConnectionBuilder::connectionFromArray($unpublished, $args);
         $connection->totalCount = \count($unpublished);
 

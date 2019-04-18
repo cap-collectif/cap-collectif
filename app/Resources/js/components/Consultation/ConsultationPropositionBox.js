@@ -96,8 +96,8 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
         return graphqlError;
       }
       if (props) {
-        if (props.consultation) {
-          const step = props.consultation;
+        if (props.consultationStep) {
+          const step = props.consultationStep;
           return (
             <div>
               {consultationPlanEnabled && (
@@ -108,7 +108,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
                       : 'consultation-plan sticky'
                   }
                   id="consultation-plan">
-                  <ConsultationPlan consultation={step} />
+                  <ConsultationPlan consultation={step.consultation} />
                 </div>
               )}
               <div
@@ -135,7 +135,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
                 {/* $FlowFixMe $refType */}
                 <StepInfos step={step} />
                 {/* $FlowFixMe */}
-                <SectionRecursiveList consultation={step} />
+                <SectionRecursiveList consultation={step.consultation} />
               </div>
             </div>
           );
@@ -151,27 +151,30 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
           environment={environment}
           query={graphql`
             query ConsultationPropositionBoxQuery(
-              $consultationId: ID!
+              $consultationStepId: ID!
               $isAuthenticated: Boolean!
             ) {
-              consultation: node(id: $consultationId) {
-                ... on Consultation {
+              consultationStep: node(id: $consultationStepId) {
+                ... on ConsultationStep {
                   id
                   startAt
                   endAt
                   title
                   status
                   timeless
+                  consultation {
+                    ...ConsultationPlan_consultation
+                    ...SectionRecursiveList_consultation
+                      @arguments(isAuthenticated: $isAuthenticated)
+                  }
                 }
-                ...ConsultationPlan_consultation
                 ...StepInfos_step
-                ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
               }
             }
           `}
           variables={
             ({
-              consultationId: id,
+              consultationStepId: id,
               isAuthenticated,
             }: ConsultationPropositionBoxQueryVariables)
           }

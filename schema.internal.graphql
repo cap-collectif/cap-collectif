@@ -410,7 +410,7 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   viewerHasVote: Boolean!
   viewerVote: ArgumentVote
   contribuable: Boolean!
-  step: Consultation!
+  step: ConsultationStep!
 }
 
 # A connection to a list of items.
@@ -1272,14 +1272,55 @@ interface Commentable {
 }
 
 # A consultation
-type Consultation implements Node & Step & RequirementStep {
+type Consultation implements Node {
   # Expose Primary Key, do not use it, except for testing purpose.
   _id: ID!
 
   # The ID of an object
   id: ID!
 
-  # A list of contributor associated with the consultation.
+  # The title of the consultation.
+  title: String!
+
+  # List of sections.
+  sections: [Section]
+  viewerOpinionsUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): OpinionConnection
+
+  # Contributions are allowed right now.
+  contribuable: Boolean!
+  opinionCountShownBySection: Int
+
+  # The associated consultation step in which belongs this consultation
+  step: ConsultationStep!
+}
+
+# A consultation step
+type ConsultationStep implements Node & Step & RequirementStep {
+  # Expose Primary Key, do not use it, except for testing purpose.
+  _id: ID!
+
+  # The ID of an object
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # Get the associated consultation of this consultation step
+  consultation: Consultation
+
+  # A list of contributor associated with the consultation step.
   contributors(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -1294,17 +1335,14 @@ type Consultation implements Node & Step & RequirementStep {
     last: Int
   ): UserConnection!
 
-  # The title of the step.
-  title: String!
+  # The number of votes in this consultation.
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
 
-  # Whether the user has vote for a contribution in this consultation.
+  # Whether the user has vote for a contribution in this consultation step.
   userHasVote(
     # The user's login (for example, an email).
     login: String!
   ): Boolean!
-
-  # The number of votes in this consultation.
-  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
 
   # The requirements to vote on this step.
   requirements(
@@ -1321,9 +1359,6 @@ type Consultation implements Node & Step & RequirementStep {
     last: Int
   ): RequirementConnection!
 
-  # The kind of the step
-  kind: String!
-
   # The status of the step
   status: StepStatus
 
@@ -1338,6 +1373,9 @@ type Consultation implements Node & Step & RequirementStep {
 
   # End date of the step.
   endAt: DateTime
+
+  # The title of the step.
+  title: String!
 
   # The url of the step
   url: String!
@@ -1356,22 +1394,6 @@ type Consultation implements Node & Step & RequirementStep {
 
   # Contributions are allowed right now.
   contribuable: Boolean!
-
-  # List of sections.
-  sections: [Section]
-  viewerOpinionsUnpublished(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): OpinionConnection
   contributionConnection(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -2748,7 +2770,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection
-  step: Consultation!
+  step: ConsultationStep!
 
   # The sources related to the sourceable.
   sources(
@@ -4323,9 +4345,9 @@ type Query {
     notInIds: [String] = null
   ): [User]
   consultations(
-    # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
+    # If omitted, returns all consultations steps. If provided, returns the consultation step of the particular id.
     id: ID
-  ): [Consultation!]!
+  ): [ConsultationStep!]!
 
   # Lookup groups.
   groups: [Group!]!
@@ -5129,6 +5151,8 @@ type Section implements Node & UniformResourceLocatable {
 
   # The id of the section.
   id: ID!
+
+  # Get the associated consultation of this section
   consultation: Consultation
 
   # The slug of the section.
@@ -5632,7 +5656,7 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
-  step: Consultation!
+  step: ConsultationStep!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -5762,7 +5786,7 @@ type SourceVoteEdge {
 interface Sourceable {
   id: ID!
   contribuable: Boolean!
-  step: Consultation!
+  step: ConsultationStep!
 
   # The sources related to the sourceable.
   sources(
@@ -6782,7 +6806,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   # The URL to this resource.
   url: URI!
   contribuable: Boolean!
-  step: Consultation!
+  step: ConsultationStep!
 
   # The sources related to the sourceable.
   sources(

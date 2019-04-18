@@ -9,7 +9,12 @@ describe('<OpinionCreateModal />', () => {
   const defaultProps = {
     intl: intlMock,
     show: true,
-    consultation: { $refType, $fragmentRefs },
+    consultation: {
+      $refType,
+      step: {
+        $fragmentRefs,
+      },
+    },
     section: { $refType, $fragmentRefs, id: 'opinionTypeId' },
     submitting: true,
     dispatch: jest.fn(),

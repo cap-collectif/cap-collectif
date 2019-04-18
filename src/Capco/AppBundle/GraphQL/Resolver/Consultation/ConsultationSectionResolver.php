@@ -2,20 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Doctrine\Common\Collections\ArrayCollection;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ConsultationSectionResolver implements ResolverInterface
 {
-    public function __invoke(ConsultationStep $consultation, Arg $argument): \Traversable
+    public function __invoke(Consultation $consultation, Arg $argument): \Traversable
     {
         /** @var Collection $sections */
-        $sections = $consultation->getConsultation()
-            ? $consultation->getConsultation()->getOpinionTypes()
-            : new ArrayCollection();
+        $sections = $consultation->getOpinionTypes();
 
         $iterator = $sections->getIterator();
 

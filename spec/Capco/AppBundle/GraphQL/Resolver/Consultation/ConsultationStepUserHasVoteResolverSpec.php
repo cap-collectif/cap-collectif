@@ -1,8 +1,9 @@
 <?php
+
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Consultation;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\GraphQL\Resolver\Consultation\ConsultationUserHasVoteResolver;
+use Capco\AppBundle\GraphQL\Resolver\Consultation\ConsultationStepUserHasVoteResolver;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
 use Capco\AppBundle\Repository\OpinionVoteRepository;
@@ -12,9 +13,9 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 
-class ConsultationUserHasVoteResolverSpec extends ObjectBehavior
+class ConsultationStepUserHasVoteResolverSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         UserRepository $userRepo,
         OpinionVoteRepository $opinionVoteRepo,
         ArgumentVoteRepository $argumentVoteRepo,
@@ -32,12 +33,12 @@ class ConsultationUserHasVoteResolverSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
-        $this->shouldHaveType(ConsultationUserHasVoteResolver::class);
+        $this->shouldHaveType(ConsultationStepUserHasVoteResolver::class);
     }
 
-    function it_return_false_if_user_not_found(
+    public function it_return_false_if_user_not_found(
         UserRepository $userRepo,
         ConsultationStep $step,
         Arg $args

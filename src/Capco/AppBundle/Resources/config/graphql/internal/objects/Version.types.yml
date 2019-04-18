@@ -39,7 +39,7 @@ Version:
         type: 'String'
         description: 'Explenation.'
       step:
-        type: 'InternalConsultation!'
+        type: 'InternalConsultationStep!'
       votes:
         type: 'YesNoPairedVoteConnection!'
         argsBuilder: 'Relay::Connection'

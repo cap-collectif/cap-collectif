@@ -9,12 +9,12 @@ import renderInput from '../../Form/Field';
 import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 import type { Dispatch } from '../../../types';
 import type { OpinionCreateForm_section } from '~relay/OpinionCreateForm_section.graphql';
-import type { OpinionCreateForm_consultation } from '~relay/OpinionCreateForm_consultation.graphql';
+import type { OpinionCreateForm_consultationStep } from '~relay/OpinionCreateForm_consultationStep.graphql';
 import RequirementsForm from '../../Requirements/RequirementsForm';
 
 type RelayProps = {|
   section: OpinionCreateForm_section,
-  consultation: OpinionCreateForm_consultation,
+  consultationStep: OpinionCreateForm_consultationStep,
 |};
 type FormValues = Object;
 type Props = {|
@@ -24,21 +24,21 @@ type Props = {|
 
 export const formName = 'opinion-create-form';
 const onSubmit = (data: FormValues, dispatch: Dispatch, props: Props) => {
-  const { section, consultation } = props;
+  const { section, consultationStep } = props;
   const appendices = section.appendixTypes
     ? section.appendixTypes
         .filter(Boolean)
         .filter(type => data[type.title] && data[type.title].length > 0)
         .map(type => ({ appendixType: type.id, body: data[type.title] }))
     : [];
-  const { project } = consultation;
+  const { project } = consultationStep;
   const form = {
     title: data.title,
     body: data.body,
     appendices,
   };
   return Fetcher.post(
-    `/projects/${project._id}/steps/${consultation.id}/opinion_types/${section.id}/opinions`,
+    `/projects/${project._id}/steps/${consultationStep.id}/opinion_types/${section.id}/opinions`,
     form,
   )
     .then(json)
@@ -67,22 +67,22 @@ const validate = ({ title, body }: FormValues) => {
 
 export class OpinionCreateForm extends React.Component<Props> {
   renderRequirements() {
-    const { consultation } = this.props;
+    const { consultationStep } = this.props;
 
     return (
       <Panel id="required-conditions" bsStyle="primary">
         <Panel.Heading>
           <FormattedMessage id="requirements" />{' '}
-          {consultation.requirements.viewerMeetsTheRequirements && (
+          {consultationStep.requirements.viewerMeetsTheRequirements && (
             <Label bsStyle="primary">
               <FormattedMessage id="filled" />
             </Label>
           )}
         </Panel.Heading>
-        {!consultation.requirements.viewerMeetsTheRequirements && (
+        {!consultationStep.requirements.viewerMeetsTheRequirements && (
           <Panel.Body>
-            <p>{consultation.requirements.reason}</p>
-            <RequirementsForm step={consultation} />
+            <p>{consultationStep.requirements.reason}</p>
+            <RequirementsForm step={consultationStep} />
           </Panel.Body>
         )}
       </Panel>
@@ -90,7 +90,7 @@ export class OpinionCreateForm extends React.Component<Props> {
   }
 
   render() {
-    const { section, consultation, handleSubmit, error, dispatch } = this.props;
+    const { section, consultationStep, handleSubmit, error, dispatch } = this.props;
     if (!section) return null;
     return (
       <form id="opinion-create-form" onSubmit={handleSubmit}>
@@ -114,13 +114,13 @@ export class OpinionCreateForm extends React.Component<Props> {
             )}
           </Alert>
         )}
-        {consultation.requirements.totalCount > 0 && this.renderRequirements()}
+        {consultationStep.requirements.totalCount > 0 && this.renderRequirements()}
         <Field
           name="title"
           type="text"
           id="opinion_title"
           component={renderInput}
-          help={consultation.titleHelpText}
+          help={consultationStep.titleHelpText}
           autoFocus
           label={<FormattedMessage id="opinion.title" />}
         />
@@ -129,7 +129,7 @@ export class OpinionCreateForm extends React.Component<Props> {
           type="editor"
           id="opinion_body"
           component={renderInput}
-          help={consultation.descriptionHelpText}
+          help={consultationStep.descriptionHelpText}
           label={<FormattedMessage id="opinion.body" />}
         />
         {section.appendixTypes &&
@@ -168,8 +168,8 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-  consultation: graphql`
-    fragment OpinionCreateForm_consultation on Consultation
+  consultationStep: graphql`
+    fragment OpinionCreateForm_consultationStep on ConsultationStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
 

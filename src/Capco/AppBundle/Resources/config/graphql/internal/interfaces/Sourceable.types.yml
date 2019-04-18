@@ -10,7 +10,7 @@ Sourceable:
         type: 'Boolean!'
         resolve: '@=value.canContribute(getUser())'
       step:
-        type: 'InternalConsultation!'
+        type: 'InternalConsultationStep!'
       sources:
         description: 'The sources related to the sourceable.'
         type: 'SourceConnection!'

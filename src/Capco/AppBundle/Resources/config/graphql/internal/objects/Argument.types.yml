@@ -53,4 +53,4 @@ Argument:
         type: 'Boolean!'
         resolve: '@=value.canContribute(getUser())'
       step:
-        type: 'InternalConsultation!'
+        type: 'InternalConsultationStep!'

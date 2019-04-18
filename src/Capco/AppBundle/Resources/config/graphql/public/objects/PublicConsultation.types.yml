@@ -11,23 +11,6 @@ PublicConsultation:
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: Consultation
-      contributors:
-        type: 'PublicUserConnection!'
-        description: 'A list of contributor associated with the consultation.'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
       title:
         type: 'String!'
         description: 'The title of the consultation.'
-      userHasVote:
-        type: 'Boolean!'
-        description: 'Whether the user has vote for a contribution in this consultation.'
-        args:
-          login:
-            type: 'String!'
-            description: "The user's login (for example, an email)."
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationUserHasVoteResolver", [value, args])'
-      votesCount:
-        type: 'Int'
-        description: 'The number of votes in this consultation.'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-01-01", reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `votesCount` will be removed.", supersededBy: "Use `votes.totalCount` instead."})'

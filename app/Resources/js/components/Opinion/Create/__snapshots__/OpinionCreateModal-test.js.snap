@@ -59,10 +59,9 @@ exports[`<OpinionCreateModal /> renders correctly 1`] = `
       </p>
     </div>
     <ForwardRef(Relay(ReduxForm))
-      consultation={
+      consultationStep={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
         }
       }
       section={
@@ -152,10 +151,9 @@ exports[`<OpinionCreateModal /> renders correctly when requirements not meet 1`]
       </p>
     </div>
     <ForwardRef(Relay(ReduxForm))
-      consultation={
+      consultationStep={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
         }
       }
       section={

@@ -68,10 +68,10 @@ InternalQuery:
             description: 'Return all users except the ones in the array.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserSearchQueryResolver", [args])'
       consultations:
-        type: '[InternalConsultation!]!'
+        type: '[InternalConsultationStep!]!'
         args:
           id:
-            description: 'If omitted, returns all consultations. If provided, returns the consultation of the particular id.'
+            description: 'If omitted, returns all consultations steps. If provided, returns the consultation step of the particular id.'
             type: 'ID'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationQueryResolver", [args])'
       groups:

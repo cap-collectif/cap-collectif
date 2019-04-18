@@ -10,6 +10,7 @@ Section:
         description: 'The id of the section.'
       consultation:
         type: 'InternalConsultation'
+        description: 'Get the associated consultation of this section'
       slug:
         type: 'String!'
         description: 'The slug of the section.'

@@ -1,20 +1,16 @@
-InternalConsultation:
+InternalConsultationStep:
   type: object
   inherits:
     - InternalPrimaryKey
-    - PublicConsultation
     - Node
+    - PublicConsultationStep
     - RequirementStep
     - Step
   config:
     interfaces: [Node, Step, RequirementStep]
-    description: 'A consultation'
-    name: Consultation
+    description: 'A consultation step'
+    name: ConsultationStep
     fields:
-      # TODO remove
-      kind:
-        resolve: 'consultation'
-      # TODO internal
       opinionCountShownBySection:
         type: 'Int'
       project:
@@ -32,19 +28,11 @@ InternalConsultation:
         type: 'Boolean!'
         description: 'Contributions are allowed right now.'
         resolve: '@=value.canContribute(getUser())'
-      # Should stay an array ?
-      sections:
-        type: '[Section]'
-        description: 'List of sections.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationSectionResolver", [value, args])'
+      consultation:
+        type: 'InternalConsultation'
+        description: 'Get the associated consultation of this consultation step'
       contributors:
         type: 'InternalUserConnection!'
-      # TODO internal
-      viewerOpinionsUnpublished:
-        access: "@=hasRole('ROLE_USER')"
-        type: 'OpinionConnection'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", [value, args, getUser()])'
       # TODO rename to `contributions`
       contributionConnection:
         type: 'ContributionConnection'
@@ -58,4 +46,4 @@ InternalConsultation:
             type: 'Boolean'
             description: 'The connection will return the trashed results too.'
             defaultValue: false
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributionsConnectionResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepContributionsConnectionResolver", [value, args])'

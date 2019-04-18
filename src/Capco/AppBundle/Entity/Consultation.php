@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -71,7 +72,19 @@ class Consultation
         return 'New consultation step type';
     }
 
-    public function getStep()
+    // TODO: using step values before we definitely move those values in Consultation entity
+    public function canContribute(?User $user): bool
+    {
+        return $this->getStep()->canContribute($user);
+    }
+
+    // TODO: using step values before we definitely move those values in Consultation entity
+    public function getOpinionCountShownBySection(): int
+    {
+        return $this->getStep()->getOpinionCountShownBySection();
+    }
+
+    public function getStep(): ?ConsultationStep
     {
         return $this->step;
     }

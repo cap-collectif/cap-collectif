@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Group;
@@ -138,15 +139,22 @@ class NodeTypeResolver implements ResolverInterface
         if ($node instanceof QuestionnaireStep) {
             return $this->typeResolver->resolve('QuestionnaireStep');
         }
-        if ($node instanceof ConsultationStep) {
+        if ($node instanceof Consultation) {
             if ('public' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PublicConsultation');
             }
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewConsultation');
-            }
 
             return $this->typeResolver->resolve('InternalConsultation');
+        }
+        if ($node instanceof ConsultationStep) {
+            if ('public' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PublicConsultationStep');
+            }
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewConsultationStep');
+            }
+
+            return $this->typeResolver->resolve('InternalConsultationStep');
         }
         if ($node instanceof OtherStep) {
             return $this->typeResolver->resolve('OtherStep');

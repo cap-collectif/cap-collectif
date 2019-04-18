@@ -6,7 +6,7 @@ import { OpinionCreateForm } from './OpinionCreateForm';
 import { formMock, $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<OpinionCreateForm />', () => {
-  const defaultConsultation = {
+  const defaultConsultationStep = {
     $refType,
     $fragmentRefs,
     id: '1',
@@ -23,7 +23,7 @@ describe('<OpinionCreateForm />', () => {
   };
   const props = {
     ...formMock,
-    consultation: defaultConsultation,
+    consultationStep: defaultConsultationStep,
     section: {
       $refType,
       id: 'section1',
@@ -45,8 +45,8 @@ describe('<OpinionCreateForm />', () => {
   it('renders correctly with requirements', () => {
     const propsWithRequirements = {
       ...props,
-      consultation: {
-        ...defaultConsultation,
+      consultationStep: {
+        ...defaultConsultationStep,
         requirements: {
           reason: 'Ceci est une très bonne raison',
           totalCount: 12,

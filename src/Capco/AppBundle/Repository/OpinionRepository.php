@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Enum\OpinionOrderField;
@@ -458,7 +459,7 @@ class OpinionRepository extends EntityRepository
     }
 
     public function getUnpublishedByConsultationAndAuthor(
-        ConsultationStep $step,
+        Consultation $consultation,
         User $author
     ): array {
         return $this->createQueryBuilder('o')
@@ -466,7 +467,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.Author = :author')
             ->andWhere('o.step = :step')
             ->setParameter('author', $author)
-            ->setParameter('step', $step)
+            ->setParameter('step', $consultation->getStep())
             ->getQuery()
             ->getResult();
     }
