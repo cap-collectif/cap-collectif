@@ -20,7 +20,7 @@ use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use DeepCopy\DeepCopy;
 
 class ViewerProposalVotesDataLoader extends BatchDataLoader
@@ -192,10 +192,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
             $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $user);
 
             if (!$step) {
-                $connection = ConnectionBuilder::connectionFromArray([], $args);
-                $connection->totalCount = 0;
-
-                return $connection;
+                return ConnectionBuilder::empty();
             }
 
             return $this->getConnectionForStepAndUser($step, $user, $args);

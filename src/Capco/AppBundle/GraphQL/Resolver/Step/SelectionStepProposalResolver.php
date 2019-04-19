@@ -8,7 +8,7 @@ use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -35,11 +35,7 @@ class SelectionStepProposalResolver implements ResolverInterface
             $args->offsetExists('includeUnpublishedOnly') &&
             true === $args->offsetGet('includeUnpublishedOnly')
         ) {
-            $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
-            $emptyConnection->totalCount = 0;
-            $emptyConnection->{'fusionCount'} = 0;
-
-            return $emptyConnection;
+            return ConnectionBuilder::empty(['fusionCount' => 0]);
         }
         $totalCount = 0;
         $term = null;
