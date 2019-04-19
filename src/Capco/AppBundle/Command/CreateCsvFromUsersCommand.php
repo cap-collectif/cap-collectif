@@ -148,6 +148,8 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         if (!$container->get(Manager::class)->isActive('export')) {
+            $output->writeln('Feature "export" must be enabled.');
+
             return;
         }
         $fileName = 'users.csv';

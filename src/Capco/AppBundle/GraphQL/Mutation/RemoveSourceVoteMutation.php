@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\SourceVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -55,8 +54,7 @@ class RemoveSourceVoteMutation implements MutationInterface
             throw new UserError('You dont meets all the requirements.');
         }
 
-        $typeName = 'SourceVote';
-        $deletedVoteId = GlobalId::toGlobalId($typeName, $vote->getId());
+        $deletedVoteId = $vote->getId();
 
         $this->em->remove($vote);
         $this->em->flush();

@@ -1,7 +1,6 @@
 @allContributions
 Feature: Comment
 
-@read-only
 Scenario: GraphQL admin want to get users including superadmin
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -17,7 +16,7 @@ Scenario: GraphQL admin want to get users including superadmin
   """
   {
     "data": {
-      "allContributions": 434
+      "allContributions": 436
     }
   }
   """

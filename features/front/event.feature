@@ -9,7 +9,7 @@ Background:
 Scenario: Anonymous wants to list events
   Given I visited "events page"
   And I wait ".event" to appear on current page
-  Then I should see 10 ".event" elements
+  Then I should see 11 ".event" elements
   And I should see "1 rue chevrière, 07400 Meysse"
 
 Scenario: Events can be filtered by projects

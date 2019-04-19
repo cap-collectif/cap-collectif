@@ -110,7 +110,7 @@ Scenario: Logged in API client wants to update an existing vote
         "vote": {
           "id": @string@
         },
-        "previousVoteId": "T3BpbmlvblZvdGU6MzQ="
+        "previousVoteId": "T3BpbmlvblZvdGU6NA=="
       }
     }
   }

@@ -1,5 +1,6 @@
 Capco\AppBundle\Entity\OpinionVersionVote:
   opinionVersionVote{1..50}:
+    id: 7000<current()>
     opinionVersion: '@version2'
     value: <numberBetween(-1, 1)>
     user: '@user<current()>'
@@ -7,6 +8,7 @@ Capco\AppBundle\Entity\OpinionVersionVote:
     updatedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>
   opinionVersionVote51:
+    id: 700051
     opinionVersion: '@version11'
     value: <numberBetween(-1, 1)>
     user: '@user_not_confirmed_with_contributions'
