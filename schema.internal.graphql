@@ -1282,6 +1282,21 @@ type Consultation implements Node {
   # The title of the consultation.
   title: String!
 
+  # A list of contributor associated with the consultation.
+  contributors(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+
   # List of sections.
   sections: [Section]
   viewerOpinionsUnpublished(
@@ -1386,9 +1401,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   # The project
   project: Project!
-
-  # The id of the related project.
-  projectId: String!
   titleHelpText: String
   descriptionHelpText: String
 

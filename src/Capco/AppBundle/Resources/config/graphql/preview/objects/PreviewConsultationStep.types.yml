@@ -8,3 +8,5 @@ PreviewConsultationStep:
     fields:
       contributors:
         type: 'PreviewUserConnection!'
+      consultation:
+        type: 'PreviewConsultation'

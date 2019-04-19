@@ -6,10 +6,11 @@ InternalConsultation:
     - Node
   config:
     interfaces: [Node]
-    description: 'A consultation'
     name: Consultation
     fields:
       # Should stay an array ?
+      contributors:
+        type: 'InternalUserConnection!'
       sections:
         type: '[Section]'
         description: 'List of sections.'

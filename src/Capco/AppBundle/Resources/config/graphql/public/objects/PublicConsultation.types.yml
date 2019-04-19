@@ -14,3 +14,8 @@ PublicConsultation:
       title:
         type: 'String!'
         description: 'The title of the consultation.'
+      contributors:
+        type: 'PublicUserConnection!'
+        description: 'A list of contributor associated with the consultation.'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value.getStep(), args])'

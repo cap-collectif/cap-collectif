@@ -16,10 +16,6 @@ InternalConsultationStep:
       project:
         type: 'InternalProject!'
         description: 'The project'
-      # TODO remove
-      projectId:
-        type: 'String!'
-        description: 'The id of the related project.'
       titleHelpText:
         type: 'String'
       descriptionHelpText:
