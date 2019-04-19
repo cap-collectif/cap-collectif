@@ -2,7 +2,7 @@
 Feature: mutation addSourceVote
 
 @database
-Scenario: Logged in API client wants to vote for a source
+Scenario: Logged in API client wants to vote for a comment
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
   """
@@ -28,19 +28,17 @@ Scenario: Logged in API client wants to vote for a source
   """
   {
     "data":{
-      "addSourceVote": {
-        "voteEdge": {
-          "node": {
-            "id":@string@,
-            "published":true
-          }
+      "addSourceVote":{
+        "voteEdge":{
+          "node":{"id":"50267","published":true}
         }
       }
     }
   }
   """
 
-Scenario: Logged in API client wants to vote for a source
+@database
+Scenario: Logged in API client wants to vote for a comment
   Given I am logged in to graphql as jean
   And I send a GraphQL POST request:
   """

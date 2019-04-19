@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\Event:
     city: Lyon
     enabled: true
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 1 days'))>
+    startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
     author: '@user<numberBetween(1, 5)>'
     registrationEnable: true
@@ -24,7 +24,7 @@ Capco\AppBundle\Entity\Event:
     zipCode: 75007
     city: Paris
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 2 days'))>
+    startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
     author: '@user<numberBetween(1, 5)>'
     link: http://www.phptour2014.fr
@@ -40,7 +40,7 @@ Capco\AppBundle\Entity\Event:
     city: Grenoble
     zipCode: 38000
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 3 days'))>
+    startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
     author: '@user<numberBetween(1, 5)>'
     media: '@MediaProject3'
@@ -53,7 +53,7 @@ Capco\AppBundle\Entity\Event:
     lat: 45.747947
     lng: 4.838041
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 4 days'))>
+    startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
     author: '@user<numberBetween(1, 5)>'
     link: http://www.symfonyLive2015.fr
@@ -82,48 +82,24 @@ Capco\AppBundle\Entity\Event:
     city: Lyon
     enabled: true
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 5 days'))>
+    startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
     author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
-  event7:
-    id: 'event7'
+  event{7..10}:
+    id: 'event<current()>'
     title: <text(30)>
     enabled: true
     body: <text(1000)>
-    startAt: <(new \DateTime('now + 6 days'))>
-    endAt: <dateTimeBetween('+10 days', '+40 days')>
-    author: '@user<numberBetween(1, 5)>'
-  event8:
-    id: 'event8'
-    title: <text(30)>
-    enabled: true
-    body: <text(1000)>
-    startAt: <(new \DateTime('now + 7 days'))>
-    endAt: <dateTimeBetween('+10 days', '+40 days')>
-    author: '@user<numberBetween(1, 5)>'
-  event9:
-    id: 'event9'
-    title: <text(30)>
-    enabled: true
-    body: <text(1000)>
-    startAt: <(new \DateTime('now + 8 days'))>
-    endAt: <dateTimeBetween('+10 days', '+40 days')>
-    author: '@user<numberBetween(1, 5)>'
-  event10:
-    id: 'event10'
-    title: <text(30)>
-    enabled: true
-    body: <text(1000)>
-    startAt: <(new \DateTime('now + 9 days'))>
-    endAt: <dateTimeBetween('+10 days', '+40 days')>
+    startAt: <dateTimeBetween('-40 days', '-10 days')>
+    endAt: <dateTimeBetween('+1 days', '+40 days')>
     author: '@user<numberBetween(1, 5)>'
   event11:
     id: event11
     title: ParisWeb2016
     enabled: false
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 6 days'))>
+    startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
     author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
@@ -132,7 +108,7 @@ Capco\AppBundle\Entity\Event:
     title: EvenementPresentSansDateDeFin
     enabled: true
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now'))>
+    startAt: <dateTime('now')>
     author: '@user<numberBetween(1, 5)>'
     link: http://www.lavie.fr
   event13:
@@ -140,7 +116,7 @@ Capco\AppBundle\Entity\Event:
     title: evenementPasseSansDateDeFin
     enabled: true
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now - 10 days'))>
+    startAt: <dateTimeBetween('-10 days', '-2 days')>
     author: '@user<numberBetween(1, 5)>'
     link: http://www.lavie.fr
     projects: ['@p1']
@@ -150,7 +126,7 @@ Capco\AppBundle\Entity\Event:
     title: evenementFutureSansDateDeFin
     enabled: true
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 10 days'))>
+    startAt: <dateTimeBetween('+10 days', '+50 days')>
     author: '@user<numberBetween(1, 5)>'
     link: http://www.lavie.fr
     zipCode: '07400'

@@ -21,7 +21,7 @@ Scenario: Logged in API client wants to vote for a comment
   """
   Then the JSON response should match:
   """
-  {"data":{"removeSourceVote":{"deletedVoteId":"60003"}}}
+  {"data":{"removeSourceVote":{"deletedVoteId":"U291cmNlVm90ZTo1MDI2Ng=="}}}
   """
 
 @database

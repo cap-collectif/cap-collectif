@@ -35,7 +35,6 @@ Scenario: GraphQL client wants to retrieve questions
     }
   }
   """
-
 Scenario: GraphQL client wants to retrieve replies
   Given I am logged in to graphql as admin
   When I send a GraphQL request:

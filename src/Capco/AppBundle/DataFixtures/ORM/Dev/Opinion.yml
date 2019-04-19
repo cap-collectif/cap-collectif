@@ -56,7 +56,7 @@ Capco\AppBundle\Entity\Opinion:
     body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     pinned: <boolean()>
     Author: '@user<current()>'
-    OpinionType: '@opinionType9'
+    OpinionType: '@opinionType<numberBetween(9, 10)>'
   opinion{41..50}:
     id: 'opinion<current()>'
     step: '@cstep1'
@@ -65,7 +65,7 @@ Capco\AppBundle\Entity\Opinion:
     body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
     pinned: <boolean()>
     Author: '@user_not_confirmed_with_contributions'
-    OpinionType: '@opinionType10'
+    OpinionType: '@opinionType<numberBetween(9, 10)>'
 
   opinion51:
     id: 'opinion51'

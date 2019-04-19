@@ -95,7 +95,7 @@ Scenario: Logged in API client wants to remove a vote
         "contribution": {
           "id": "opinion57"
         },
-        "deletedVoteId": "T3BpbmlvblZvdGU6NA=="
+        "deletedVoteId": "T3BpbmlvblZvdGU6MzQ="
       }
     }
   }

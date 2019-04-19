@@ -76,31 +76,31 @@ Scenario: GraphQL client wants to list current and future events
   {
      "data":{
         "events":{
-           "totalCount": 11,
+           "totalCount":10,
            "edges":[
               {
                  "node":{
-                    "_id":"evenementSansDateDeFin"
+                    "_id":"event9"
                  }
               },
               {
                  "node":{
-                    "_id":"event1"
+                    "_id":"event10"
                  }
               },
               {
                  "node":{
-                    "_id":"event2"
+                    "_id":"event8"
+                 }
+              },
+              {
+                 "node":{
+                    "_id":"event7"
                  }
               },
               {
                  "node":{
                     "_id":"event3"
-                 }
-              },
-              {
-                 "node":{
-                    "_id":"event4"
                  }
               }
            ]
@@ -130,7 +130,7 @@ Scenario: GraphQL client wants to list passed events
   {
      "data":{
         "events":{
-           "totalCount": 2,
+           "totalCount":3,
            "edges":[
               {
                  "node":{
@@ -140,6 +140,11 @@ Scenario: GraphQL client wants to list passed events
               {
                  "node":{
                     "_id":"evenementPasseSansDateDeFin"
+                 }
+              },
+              {
+                 "node":{
+                    "_id":"evenementSansDateDeFin"
                  }
               }
            ]

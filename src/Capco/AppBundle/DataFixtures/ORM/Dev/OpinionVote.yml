@@ -1,6 +1,5 @@
 Capco\AppBundle\Entity\OpinionVote:
   opinionVote1:
-    id: 1
     Opinion: '@opinion3'
     value: <numberBetween(-1, 1)>
     user: '@user4'
@@ -8,7 +7,6 @@ Capco\AppBundle\Entity\OpinionVote:
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote2:
-    id: 2
     Opinion: '@opinion57'
     value: -1
     user: '@user2'
@@ -16,7 +14,6 @@ Capco\AppBundle\Entity\OpinionVote:
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote3:
-    id: 3
     Opinion: '@opinion57'
     value: 1
     user: '@user3'
@@ -24,7 +21,6 @@ Capco\AppBundle\Entity\OpinionVote:
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote4:
-    id: 4
     Opinion: '@opinion57'
     value: 1
     user: '@user4'
@@ -32,7 +28,6 @@ Capco\AppBundle\Entity\OpinionVote:
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote5:
-    id: 5
     Opinion: '@opinion57'
     value: 0
     user: '@user5'
@@ -40,7 +35,6 @@ Capco\AppBundle\Entity\OpinionVote:
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote{6..50}:
-    id: <current()>
     Opinion: '@opinion59'
     value: <numberBetween(-1, 1)>
     user: '@user<current()>'
@@ -48,7 +42,6 @@ Capco\AppBundle\Entity\OpinionVote:
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote51:
-    id: 51
     Opinion: '@opinion59'
     value: <numberBetween(-1, 1)>
     user: '@user_not_confirmed_with_contributions'
@@ -56,7 +49,6 @@ Capco\AppBundle\Entity\OpinionVote:
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote{52..80}:
-    id: <current()>
     Opinion: '@opinion69'
     value: <numberBetween(-1, 1)>
     user: '@user<current()>'
@@ -64,7 +56,6 @@ Capco\AppBundle\Entity\OpinionVote:
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote81:
-    id: 81
     Opinion: '@opinion1'
     value: <numberBetween(-1, 1)>
     user: '@user519'
