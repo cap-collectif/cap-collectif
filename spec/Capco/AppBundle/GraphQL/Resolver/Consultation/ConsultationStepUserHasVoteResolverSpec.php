@@ -3,7 +3,7 @@
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Consultation;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\GraphQL\Resolver\Consultation\ConsultationStepUserHasVoteResolver;
+use Capco\AppBundle\GraphQL\Resolver\ConsultationStep\ConsultationStepUserHasVoteResolver;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
 use Capco\AppBundle\Repository\OpinionVoteRepository;
