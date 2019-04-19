@@ -1346,7 +1346,7 @@ type Consultation implements Node {
 
     # The connection will return the trashed results too.
     includeTrashed: Boolean = false
-  ): ContributionConnection @deprecated(reason: "Field `contributionConnection` will be removed. Use `contributions` instead. This field use a deprecated name. Removal on 2019-01-01 UTC.")
+  ): ContributionConnection @deprecated(reason: "Field `contributionConnection` will be removed. Use `contributions` instead. This field use a deprecated name. Removal on 2019-09-01 UTC.")
   contributions(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -1471,7 +1471,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
     # The connection will return the trashed results too.
     includeTrashed: Boolean = false
-  ): ContributionConnection @deprecated(reason: "Field `contributionConnection` will be removed. Use `contributions` instead. This field use a deprecated name. Removal on 2019-01-01 UTC.")
+  ): ContributionConnection @deprecated(reason: "Field `contributionConnection` will be removed. Use `contributions` instead. This field use a deprecated name. Removal on 2019-09-01 UTC.")
   contributions(
     # Returns the elements in the list that come after the specified cursor.
     after: String
