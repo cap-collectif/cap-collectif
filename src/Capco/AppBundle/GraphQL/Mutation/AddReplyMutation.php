@@ -5,10 +5,8 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
-use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
-use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
@@ -20,10 +18,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Error\UserErrors;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 
 class AddReplyMutation implements MutationInterface
 {
@@ -36,7 +33,6 @@ class AddReplyMutation implements MutationInterface
     private $replyRepo;
     private $userNotifier;
     private $stepUrlResolver;
-    private $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -47,8 +43,7 @@ class AddReplyMutation implements MutationInterface
         ResponsesFormatter $responsesFormatter,
         LoggerInterface $logger,
         UserNotifier $userNotifier,
-        StepUrlResolver $stepUrlResolver,
-        Publisher $publisher
+        StepUrlResolver $stepUrlResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -59,7 +54,6 @@ class AddReplyMutation implements MutationInterface
         $this->logger = $logger;
         $this->userNotifier = $userNotifier;
         $this->stepUrlResolver = $stepUrlResolver;
-        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -101,7 +95,6 @@ class AddReplyMutation implements MutationInterface
 
         $this->em->persist($reply);
         $this->em->flush();
-
         $this->redisStorageHelper->recomputeUserCounters($user);
         if (
             $questionnaire->isAcknowledgeReplies() &&
@@ -112,19 +105,15 @@ class AddReplyMutation implements MutationInterface
             $project = $step->getProject();
             $endAt = $step->getEndAt();
             $stepUrl = $this->stepUrlResolver->__invoke($step);
-            if ($questionnaire->isNotifyResponseCreate()) {
-                $this->publisher->publish(
-                    'questionnaire.reply',
-                    new Message(
-                        json_encode([
-                            'replyId' => $reply->getId(),
-                            'stepUrl' => $stepUrl,
-                            'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE,
-                        ])
-                    )
-                );
-            }
-            $this->userNotifier->acknowledgeReply($project, $reply, $endAt, $stepUrl, $step, $user);
+            $this->userNotifier->acknowledgeReply(
+                $project,
+                $reply,
+                $endAt,
+                $stepUrl,
+                $step,
+                $user,
+                false
+            );
         }
 
         return ['questionnaire' => $questionnaire, 'reply' => $reply];

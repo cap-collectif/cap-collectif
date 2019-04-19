@@ -113,21 +113,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
      */
     private $privateResult = true;
 
-    /**
-     * @ORM\Column(name="notify_response_create", type="boolean", nullable=false, options={"default" = false})
-     */
-    private $notifyResponseCreate = false;
-
-    /**
-     * @ORM\Column(name="notify_response_update", type="boolean", nullable=false, options={"default" = false})
-     */
-    private $notifyResponseUpdate = false;
-
-    /**
-     * @ORM\Column(name="notify_response_delete", type="boolean", nullable=false, options={"default" = false})
-     */
-    private $notifyResponseDelete = false;
-
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -483,42 +468,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     public function setPrivateResult(bool $privateResult): self
     {
         $this->privateResult = $privateResult;
-
-        return $this;
-    }
-
-    public function isNotifyResponseCreate(): bool
-    {
-        return $this->notifyResponseCreate;
-    }
-
-    public function setNotifyResponseCreate(bool $value): self
-    {
-        $this->notifyResponseCreate = $value;
-
-        return $this;
-    }
-
-    public function isNotifyResponseUpdate(): bool
-    {
-        return $this->notifyResponseUpdate;
-    }
-
-    public function setNotifyResponseUpdate(bool $value): self
-    {
-        $this->notifyResponseUpdate = $value;
-
-        return $this;
-    }
-
-    public function isNotifyResponseDelete(): bool
-    {
-        return $this->notifyResponseDelete;
-    }
-
-    public function setNotifyResponseDelete(bool $value): self
-    {
-        $this->notifyResponseDelete = $value;
 
         return $this;
     }

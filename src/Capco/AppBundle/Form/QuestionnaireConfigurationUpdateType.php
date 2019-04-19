@@ -38,10 +38,7 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
                         null === $questionnaireAbstractQuestion->getQuestion() ||
                         empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
                 },
-            ])
-            ->add('notifyResponseCreate')
-            ->add('notifyResponseUpdate')
-            ->add('notifyResponseDelete');
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -31,6 +31,3 @@ services:
 
   Capco\AppBundle\Notifier\FollowerNotifier:
     public: true
-
-  Capco\AppBundle\Notifier\QuestionnaireReplyNotifier:
-    public: true

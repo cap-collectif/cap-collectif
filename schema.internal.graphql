@@ -4612,15 +4612,6 @@ type Questionnaire implements Node {
   type: QuestionnaireType!
   phoneConfirmation: Boolean!
 
-  # Notify when a response is created for this questionnaire
-  notifyResponseCreate: Boolean!
-
-  # Notify when a response is updated for this questionnaire
-  notifyResponseUpdate: Boolean!
-
-  # Notify when a response is deleted for this questionnaire
-  notifyResponseDelete: Boolean!
-
   # Results of survey are private
   privateResult: Boolean!
 }
@@ -6295,23 +6286,8 @@ type UpdateProposalVotesPayload {
 
 input UpdateQuestionnaireConfigurationInput {
   questionnaireId: ID!
-
-  # The new title of the questionnaire.
   title: String
-
-  # The new description of the questionnaire.
   description: String
-
-  # Do we notify when a response is created?
-  notifyResponseCreate: Boolean
-
-  # Do we notify when a response is updated?
-  notifyResponseUpdate: Boolean
-
-  # Do we notify when a response is deleted?
-  notifyResponseDelete: Boolean
-
-  # The new list of available questions for this questionnaire
   questions: [QuestionnaireAbstractQuestionInput!]
   clientMutationId: String
 }
