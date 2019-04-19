@@ -424,12 +424,12 @@ EOF;
             ])
             ->toArray();
 
-        $totalCount = Arr::path($contributions, 'data.node.contributionConnection.totalCount');
+        $totalCount = Arr::path($contributions, 'data.node.contributions.totalCount');
         $progress = new ProgressBar($output, $totalCount);
 
         $this->connectionTraversor->traverse(
             $contributions,
-            'contributionConnection',
+            'contributions',
             function ($edge) use ($progress) {
                 $progress->advance();
                 $contribution = $edge['node'];
@@ -481,8 +481,8 @@ ${sourceFragment}
 ${versionFragment}
 {
   node(id: "{$consultationStep->getId()}") {
-    ... on Consultation {
-      contributionConnection(orderBy: {field: PUBLISHED_AT, direction: DESC}, first: ${contributionPerPage}${contributionAfter}, includeTrashed: true) {
+    ... on ConsultationStep {
+      contributions(orderBy: {field: PUBLISHED_AT, direction: DESC}, first: ${contributionPerPage}${contributionAfter}, includeTrashed: true) {
         totalCount
         pageInfo {
           startCursor
