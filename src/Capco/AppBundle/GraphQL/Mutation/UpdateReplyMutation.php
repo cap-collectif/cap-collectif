@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ReplyType;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -26,6 +27,7 @@ class UpdateReplyMutation implements MutationInterface
     private $replyRepo;
     private $userNotifier;
     private $stepUrlResolver;
+    private $questionnaireReplyNotifier;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -34,7 +36,8 @@ class UpdateReplyMutation implements MutationInterface
         RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
         UserNotifier $userNotifier,
-        StepUrlResolver $stepUrlResolver
+        StepUrlResolver $stepUrlResolver,
+        QuestionnaireReplyNotifier $questionnaireReplyNotifier
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -43,6 +46,7 @@ class UpdateReplyMutation implements MutationInterface
         $this->responsesFormatter = $responsesFormatter;
         $this->userNotifier = $userNotifier;
         $this->stepUrlResolver = $stepUrlResolver;
+        $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -80,6 +84,7 @@ class UpdateReplyMutation implements MutationInterface
             $project = $step->getProject();
             $endAt = $step->getEndAt();
             $stepUrl = $this->stepUrlResolver->__invoke($step);
+            $this->questionnaireReplyNotifier->onUpdate($reply, $stepUrl);
             $this->userNotifier->acknowledgeReply(
                 $project,
                 $reply,
@@ -92,6 +97,7 @@ class UpdateReplyMutation implements MutationInterface
         }
 
         $this->em->flush();
+
         $this->redisStorageHelper->recomputeUserCounters($user);
 
         return ['reply' => $reply];

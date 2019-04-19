@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
@@ -33,6 +34,7 @@ class AddReplyMutation implements MutationInterface
     private $replyRepo;
     private $userNotifier;
     private $stepUrlResolver;
+    private $questionnaireReplyNotifier;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -43,7 +45,8 @@ class AddReplyMutation implements MutationInterface
         ResponsesFormatter $responsesFormatter,
         LoggerInterface $logger,
         UserNotifier $userNotifier,
-        StepUrlResolver $stepUrlResolver
+        StepUrlResolver $stepUrlResolver,
+        QuestionnaireReplyNotifier $questionnaireReplyNotifier
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -54,6 +57,7 @@ class AddReplyMutation implements MutationInterface
         $this->logger = $logger;
         $this->userNotifier = $userNotifier;
         $this->stepUrlResolver = $stepUrlResolver;
+        $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -95,6 +99,7 @@ class AddReplyMutation implements MutationInterface
 
         $this->em->persist($reply);
         $this->em->flush();
+
         $this->redisStorageHelper->recomputeUserCounters($user);
         if (
             $questionnaire->isAcknowledgeReplies() &&
@@ -105,6 +110,7 @@ class AddReplyMutation implements MutationInterface
             $project = $step->getProject();
             $endAt = $step->getEndAt();
             $stepUrl = $this->stepUrlResolver->__invoke($step);
+            $this->questionnaireReplyNotifier->onCreation($reply, $stepUrl);
             $this->userNotifier->acknowledgeReply(
                 $project,
                 $reply,

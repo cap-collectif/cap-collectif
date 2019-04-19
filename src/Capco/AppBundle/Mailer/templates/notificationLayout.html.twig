@@ -1,0 +1,57 @@
+{#{% extends "@CapcoMail/standardLayout.html.twig" %}#}
+
+{#{% block html_title %}#}
+    {#{{ 'acknowledgment-of-receipt'|trans({},'CapcoAppBundle') }}#}
+{#{% endblock %}#}
+
+{#{% block core_mail %}#}
+    {#<h2 style="color: #666;"> Titre de la plateforme </h2>#}
+    {#<tr>#}
+        {#<td class="resp-full-td" valign="top" style="margin:0 20px;background-color: #666; border-radius: 7px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">#}
+            {#<div style="padding: 10px;">#}
+                {#<div class="resp-punchline" style="color:#FFFFFF; text-decoration:none; font-size:15px; font-family:helvetica, arial, sans-serif; text-align:left; float: left; margin-right: 10px;margin-bottom: 10px;">#}
+                    {#<span>#}
+                        {#Projet#}
+                    {#</span>#}
+                    {#<br>#}
+                    {#<span>#}
+                        {#Nom du projet#}
+                    {#</span>#}
+                {#</div>#}
+            {#</div>#}
+        {#</td>#}
+    {#</tr>#}
+    {#<tr>#}
+        {#<td class="resp-full-td" valign="top" style="margin:0 20px;background-color: #FFFFFF;border-radius: 7px; padding: 10px; border: 1px solid #ccc; border-top-left-radius: 0px; border-top-right-radius: 0px;">#}
+            {#<div>#}
+                {#<div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">#}
+                    {#<h4 style="margin-bottom: 20px;">#}
+                        {#Titre#}
+                    {#</h4>#}
+                    {#<p style="font-size: 14px">#}
+                        {#Description#}
+                    {#</p>#}
+                {#</div>#}
+                {#<div style="color:#FFFFFF; margin-top: 30px; margin-bottom: 10px; font-family:helvetica, arial, sans-serif; font-size: 13px;">#}
+                    {#<a style="background-color: #0d71bb; padding: 10px; border-radius: 5px; color:#FFFFFF; margin-right: 10px;" href="#">#}
+                        {#Primary#}
+                    {#</a>#}
+                    {#<a style="background-color: #666; padding: 10px;border-radius: 5px; color:#FFFFFF;" href="#">#}
+                        {#Secondary#}
+                    {#</a>#}
+                {#</div>#}
+            {#</div>#}
+        {#</td>#}
+    {#</tr>#}
+{#{% endblock %}#}
+
+{#{% block footer_mail %}#}
+    {#<p style="font-size:13px; font-family:helvetica, arial, sans-serif; color:#999999">#}
+        {#Ce message vous a été adressé automatiquement par#}
+        {#<a href="#">#}
+            {#La métro c'est vous !#}
+        {#</a>#}
+        {#<br>#}
+        {#<span>Propulsé par Cap Collectif</span>#}
+    {#</p>#}
+{#{% endblock %}#}

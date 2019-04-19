@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,19 +16,23 @@ class DeleteReplyMutation implements MutationInterface
     private $em;
     private $replyRepo;
     private $redisStorageHelper;
+    private $questionnaireReplyNotifier;
 
     public function __construct(
         EntityManagerInterface $em,
         ReplyRepository $replyRepo,
-        RedisStorageHelper $redisStorageHelper
+        RedisStorageHelper $redisStorageHelper,
+        QuestionnaireReplyNotifier $questionnaireReplyNotifier
     ) {
         $this->em = $em;
         $this->replyRepo = $replyRepo;
         $this->redisStorageHelper = $redisStorageHelper;
+        $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
     }
 
     public function __invoke(string $id, User $user): array
     {
+        /** @var Reply $reply */
         $reply = $this->replyRepo->find($id);
 
         if (!$reply) {
@@ -40,7 +46,9 @@ class DeleteReplyMutation implements MutationInterface
         $questionnaire = $reply->getQuestionnaire();
 
         $this->em->remove($reply);
+        $this->questionnaireReplyNotifier->onDelete($reply);
         $this->em->flush();
+
         $this->redisStorageHelper->recomputeUserCounters($user);
 
         return ['questionnaire' => $questionnaire];

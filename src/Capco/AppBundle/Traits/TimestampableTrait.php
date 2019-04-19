@@ -35,11 +35,13 @@ trait TimestampableTrait
         return $this;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         if (property_exists($this, 'updatedAt')) {
             return $this->updatedAt;
         }
+
+        return null;
     }
 
     public function isUpdatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
