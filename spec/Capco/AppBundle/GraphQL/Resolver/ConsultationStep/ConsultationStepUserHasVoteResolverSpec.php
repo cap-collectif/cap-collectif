@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Capco\AppBundle\GraphQL\Resolver\Consultation;
+namespace spec\Capco\AppBundle\GraphQL\Resolver\ConsultationStep;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\GraphQL\Resolver\ConsultationStep\ConsultationStepUserHasVoteResolver;
