@@ -84,6 +84,12 @@ class Consultation
         return $this->getStep()->getOpinionCountShownBySection();
     }
 
+    // TODO: using step values before we definitely move those values in Consultation entity
+    public function getVotesCount(): int
+    {
+        return $this->getStep()->getVotesCount();
+    }
+
     public function getStep(): ?ConsultationStep
     {
         return $this->step;

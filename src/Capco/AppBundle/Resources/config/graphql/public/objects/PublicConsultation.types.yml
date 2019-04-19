@@ -27,3 +27,7 @@ PublicConsultation:
             type: 'String!'
             description: "The user's login (for example, an email)."
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepUserHasVoteResolver", [value.getStep(), args])'
+      votesCount:
+        type: 'Int'
+        description: 'The number of votes in the related step of this consultation.'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-01-01", reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `votesCount` will be removed.", supersededBy: "Use `votes.totalCount` instead."})'
