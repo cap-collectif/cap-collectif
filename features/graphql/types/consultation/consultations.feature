@@ -41,10 +41,10 @@ Scenario: GraphQL client wants to list contributions in a consultation
   When I send a GraphQL request:
   """
   query {
-     consultations(id: "Q29uc3VsdGF0aW9uOmNzdGVwNQ==") {
+     consultations(id: "Q29uc3VsdGF0aW9uOnR5cGVQSkw=") {
       id
       title
-      contributionConnection(first: 5, orderBy: {field: VOTE_COUNT, direction: DESC}) {
+      contributions(first: 5, orderBy: {field: VOTE_COUNT, direction: DESC}) {
         totalCount
         edges {
           cursor
@@ -65,9 +65,9 @@ Scenario: GraphQL client wants to list contributions in a consultation
   "data": {
     "consultations": [
       {
-        "id": "Q29uc3VsdGF0aW9uOmNzdGVwNQ==",
-        "title": "Elaboration de la Loi",
-        "contributionConnection": {
+        "id": "Q29uc3VsdGF0aW9uOnR5cGVQSkw=",
+        "title": "Projet de loi",
+        "contributions": {
           "totalCount": 11,
           "edges": [
             {
@@ -90,10 +90,10 @@ Scenario: GraphQL client wants to list contributions in a consultation including
   When I send a GraphQL request:
   """
   query {
-     consultations(id: "Q29uc3VsdGF0aW9uOmNzdGVwNQ==") {
+     consultations(id: "Q29uc3VsdGF0aW9uOnR5cGVQSkw=") {
       id
       title
-      contributionConnection(first: 5, orderBy: {field: VOTE_COUNT, direction: DESC}, includeTrashed: true) {
+      contributions(first: 5, orderBy: {field: VOTE_COUNT, direction: DESC}, includeTrashed: true) {
         totalCount
       }
     }
@@ -105,9 +105,9 @@ Scenario: GraphQL client wants to list contributions in a consultation including
   "data": {
     "consultations": [
       {
-        "id": "Q29uc3VsdGF0aW9uOmNzdGVwNQ==",
-        "title": "Elaboration de la Loi",
-        "contributionConnection": {
+        "id": "Q29uc3VsdGF0aW9uOnR5cGVQSkw=",
+        "title": "Projet de loi",
+        "contributions": {
           "totalCount": 19
         }
       }

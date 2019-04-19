@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
-class ConsultationQueryResolver implements ResolverInterface
+class ConsultationStepsQueryResolver implements ResolverInterface
 {
     private $consultationStepRepository;
 

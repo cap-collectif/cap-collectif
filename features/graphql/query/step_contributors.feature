@@ -25,7 +25,7 @@ Scenario: GraphQL client want to get the list of contributors of a consultation
       }
     }",
     "variables": {
-      "consultation": "Q29uc3VsdGF0aW9uOmNzdGVwMQ=="
+      "consultation": "Q29uc3VsdGF0aW9uOnR5cGVEZWZhdWx0"
     }
   }
   """
