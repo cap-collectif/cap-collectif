@@ -64,6 +64,12 @@ type Consultation implements Node {
     # Returns the last `n` elements from the list.
     last: Int
   ): UserConnection!
+
+  # Whether the user has vote for a contribution in the related step of this consultation.
+  userHasVote(
+    # The user's login (for example, an email).
+    login: String!
+  ): Boolean!
 }
 
 # A consultation step

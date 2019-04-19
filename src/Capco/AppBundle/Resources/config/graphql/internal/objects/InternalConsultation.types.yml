@@ -8,9 +8,9 @@ InternalConsultation:
     interfaces: [Node]
     name: Consultation
     fields:
-      # Should stay an array ?
       contributors:
         type: 'InternalUserConnection!'
+      # Should stay an array ?
       sections:
         type: '[Section]'
         description: 'List of sections.'
