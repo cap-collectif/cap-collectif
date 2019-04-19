@@ -197,6 +197,7 @@ Scenario: Author of a proposal wants to delete it
   And I confirm proposal deletion
   And I wait 3 seconds
   And I should not see my proposal anymore
+  And I wait 1 seconds
   And there should be 5 proposals
 
 @database

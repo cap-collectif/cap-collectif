@@ -1,8 +1,14 @@
 {
+  "name": "Cap Collectif Schema",  
   "schemaPath": "schema.internal.graphql",
   "extensions": {
     "endpoints": {
-      "dev": "http://capco.dev/graphql"
+      "Default GraphQL Endpoint": {
+        "url": "http://capco.dev/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        }
+      }
     }
   }
 }

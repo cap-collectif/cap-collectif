@@ -21,7 +21,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
   </p>
   <Uncontrolled(Tabs)
     defaultActiveKey={1}
-    id="user-admin-page-tabs"
+    id="UserAdminPageTabs"
   >
     <Tab
       eventKey={1}
@@ -31,7 +31,6 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
         user={
           Object {
             "url": "https://fr.wikipedia.org/wiki/Dahu",
-            "username": "dahu",
           }
         }
       />
@@ -44,7 +43,6 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
         user={
           Object {
             "url": "https://fr.wikipedia.org/wiki/Dahu",
-            "username": "dahu",
           }
         }
       />
@@ -57,7 +55,6 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
         user={
           Object {
             "url": "https://fr.wikipedia.org/wiki/Dahu",
-            "username": "dahu",
           }
         }
       />
@@ -70,7 +67,6 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
         user={
           Object {
             "url": "https://fr.wikipedia.org/wiki/Dahu",
-            "username": "dahu",
           }
         }
       />

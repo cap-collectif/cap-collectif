@@ -4,10 +4,7 @@
 {% endblock %}
 
 {% block form %}
-    {% include '@CapcoApp/redux_store.html.twig' with {
-        'data' : {
-        }
-    } %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
     {{ react_render_component('UserAdminPageApp', {
         'props': {
             'userId': admin.subject.id|toGlobalId('User'),

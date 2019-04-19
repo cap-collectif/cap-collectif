@@ -72,7 +72,12 @@ parameters:
   openid_userinfo_url: '%env(SYMFONY_OPENID_USERINFO_URL)%'
   prometheus_bearer_token: '%env(SYMFONY_PROMETHEUS_BEARER_TOKEN)%'
   mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
-
+  #
+  # This will ensure we get the same data between two fixtures loadings.
+  #
+  # See https://github.com/nelmio/alice/blob/master/doc/customizing-data-generation.md
+  nelmio_alice.seed: 1
+  
   # Default values
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
   env(SYMFONY_DATABASE_HOST): 127.0.0.1

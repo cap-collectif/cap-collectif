@@ -9,13 +9,9 @@ import UserAdminPageTabs_user from '~relay/UserAdminPageTabs_user.graphql';
 import UserAdminPersonalData from './UserAdminPersonalData';
 import UserAdminPassword from './UserAdminPassword';
 
-type DefaultProps = void;
-type Props = { user: UserAdminPageTabs_user, intl: IntlShape };
-type State = void;
+type Props = {| +user: UserAdminPageTabs_user, +intl: IntlShape |};
 
-export class UserAdminPageTabs extends Component<Props, State> {
-  static defaultProps: DefaultProps;
-
+export class UserAdminPageTabs extends Component<Props> {
   render() {
     const { intl, user } = this.props;
     return (
@@ -26,7 +22,7 @@ export class UserAdminPageTabs extends Component<Props, State> {
           </strong>{' '}
           <a href={user.url}>{user.url}</a>{' '}
         </p>
-        <Tabs defaultActiveKey={1} id="user-admin-page-tabs">
+        <Tabs defaultActiveKey={1} id="UserAdminPageTabs">
           <Tab eventKey={1} title={intl.formatMessage({ id: 'user.profile.edit.account' })}>
             <UserAdminAccount user={user} />
           </Tab>
@@ -50,7 +46,6 @@ const container = injectIntl(UserAdminPageTabs);
 export default createFragmentContainer(container, {
   user: graphql`
     fragment UserAdminPageTabs_user on User {
-      username
       url
       ...UserAdminAccount_user
       ...UserAdminProfile_user

@@ -15,7 +15,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class ProposalFormProposalsDataLoader extends BatchDataLoader
 {
@@ -128,7 +128,9 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $term = $args->offsetGet('term');
         }
 
-        $emptyConnection = ConnectionBuilder::empty(['fusionCount' => 0]);
+        $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
+        $emptyConnection->totalCount = 0;
+        $emptyConnection->{'fusionCount'} = 0;
 
         if (!$form->getStep()) {
             return $emptyConnection;

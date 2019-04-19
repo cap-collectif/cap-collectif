@@ -21,12 +21,15 @@ all=warn
 [libs]
 flow-typed
 
+[strict]
+
 [options]
 emoji=true
 module.use_strict=true
 
 module.system.node.resolve_dirname=node_modules
 module.system.node.resolve_dirname=__generated__
+module.system.node.resolve_dirname=app/Resources/js/__generated__
 
 ; This enforce a good practice
 experimental.const_params=true

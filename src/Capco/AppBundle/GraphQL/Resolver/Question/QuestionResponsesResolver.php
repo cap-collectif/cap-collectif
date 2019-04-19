@@ -13,7 +13,7 @@ use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class QuestionResponsesResolver implements ResolverInterface
 {
@@ -33,7 +33,8 @@ class QuestionResponsesResolver implements ResolverInterface
 
     public function __invoke(AbstractQuestion $question, Arg $args, $viewer)
     {
-        $emptyConnection = ConnectionBuilder::empty();
+        $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
+        $emptyConnection->totalCount = 0;
 
         if (
             $question->getQuestionnaire() &&
@@ -55,7 +56,10 @@ class QuestionResponsesResolver implements ResolverInterface
 
         // Schema design is wrong but let's return empty connection for now…
         if ($question instanceof SectionQuestion) {
-            return $emptyConnection;
+            $connection = ConnectionBuilder::connectionFromArray([], $args);
+            $connection->totalCount = 0;
+
+            return $connection;
         }
 
         if ($question instanceof MultipleChoiceQuestion || $question instanceof SimpleQuestion) {

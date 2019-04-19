@@ -28,6 +28,20 @@ class ProjectRepository extends EntityRepository
             ->getArrayResult();
     }
 
+    public function findAllWithSteps()
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        return $qb
+            ->addSelect('pas', 'step', 'status', 'theme')
+            ->leftJoin('p.steps', 'pas')
+            ->leftJoin('pas.step', 'step')
+            ->leftJoin('step.statuses', 'status')
+            ->leftJoin('p.themes', 'theme')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function hydrateFromIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('p');

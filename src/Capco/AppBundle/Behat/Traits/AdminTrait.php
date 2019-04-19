@@ -123,7 +123,7 @@ trait AdminTrait
     public function iGoToTheAdminUserPageWithId(string $userId)
     {
         $this->visitPageWithParams('admin user page', ['userId' => $userId]);
-        $this->getSession()->wait(3000, "$('#user-admin-page-tabs').length > 0");
+        $this->getSession()->wait(3000, "$('#UserAdminPageTabs').length > 0");
     }
 
     /**

@@ -1,7 +1,7 @@
 @section
 Feature: Opinion types
 
-@read-only
+@read-only 
 Scenario: GraphQL client wants to list consultations ordered by positions
   When I send a GraphQL request:
   """
@@ -27,7 +27,7 @@ Scenario: GraphQL client wants to list consultations ordered by positions
      "data":{
         "node": {
         "opinions": {
-          "totalCount": 21,
+          "totalCount": 3,
           "edges": [
             { 
               "node": {
@@ -72,7 +72,7 @@ Scenario: GraphQL client wants to list consultations ordered by votes
      "data":{
         "node": {
         "opinions": {
-          "totalCount": 21,
+          "totalCount": 3,
           "edges": [
             { 
               "node": {
@@ -120,7 +120,7 @@ Scenario: GraphQL client wants to list consultations ordered by favorites
      "data":{
         "node": {
         "opinions": {
-          "totalCount": 21,
+          "totalCount": 3,
           "edges": [
             { 
               "node": {
@@ -168,7 +168,7 @@ Scenario: GraphQL client wants to list consultations ordered by comments
      "data":{
         "node": {
         "opinions": {
-          "totalCount": 21,
+          "totalCount": 3,
           "edges": [
             { 
               "node": {

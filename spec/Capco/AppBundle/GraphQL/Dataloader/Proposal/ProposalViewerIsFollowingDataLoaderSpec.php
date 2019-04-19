@@ -70,12 +70,11 @@ class ProposalViewerIsFollowingDataLoaderSpec extends ObjectBehavior
             ->getByProposalIdsAndUser(['proposal1', 'proposal2'], $viewer)
             ->willReturn([$follower1, $follower2]);
 
-        $promise = new Promise(null, new SyncPromiseAdapter());
+        $adapter = new SyncPromiseAdapter();
         $promiseFactory
             ->createAll([true, true])
             ->shouldBeCalled()
-            ->willReturn($promise);
-
-        $this->all($keys)->shouldReturn($promise);
+            ->willReturn(new Promise(null, $adapter));
+        $this->all($keys);
     }
 }

@@ -12,9 +12,9 @@ class AdminUserPage extends Page
     protected $path = '/admin/capco/user/user/{userId}/edit';
 
     protected $elements = [
-        'user profile tab' => '#user-admin-page-tabs-tab-2',
-        'user data tab' => '#user-admin-page-tabs-tab-3',
-        'user password tab' => '#user-admin-page-tabs-tab-4',
+        'user profile tab' => '#UserAdminPageTabs-tab-2',
+        'user data tab' => '#UserAdminPageTabs-tab-3',
+        'user password tab' => '#UserAdminPageTabs-tab-4',
     ];
 
     public function clickSaveUserContentButton()

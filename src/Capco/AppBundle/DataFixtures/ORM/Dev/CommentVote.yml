@@ -1,16 +1,19 @@
 Capco\AppBundle\Entity\CommentVote:
-  evCommentVote1:
+  commentVote1:
+    id: 90001
     comment: '@evComment1'
     user: '@user1'
     publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>
-  evCommentVote{2..50}:
-    comment: '@evComment<numberBetween(1, 50)>'
+  commentVote{2..50}:
+    id: 9000<current()>
+    comment: '@evComment<current()>'
     user: '@user<current()>'
     publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>
-  pCommentVote{1..150}:
-    comment: '@pComment<numberBetween(1, 50)>'
+  proposalCommentVote{1..50}:
+    id: 9100<current()>
+    comment: '@proposalComment<current()>'
     user: '@user<current()>'
     publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>

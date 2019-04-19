@@ -4,7 +4,6 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is private 1`
 <div>
   <Uncontrolled(Tabs)
     defaultActiveKey={1}
-    id="user-admin-page-tabs"
   >
     <Tab
       eventKey={1}

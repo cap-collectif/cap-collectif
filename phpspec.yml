@@ -1,5 +1,3 @@
-matchers:
-  - spec\Matcher\BeAnEmptyConnectionMatcher
 extensions:
   LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
     format: [clover, html]

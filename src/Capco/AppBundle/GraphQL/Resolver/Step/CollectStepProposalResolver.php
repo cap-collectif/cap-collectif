@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class CollectStepProposalResolver implements ResolverInterface
 {
@@ -27,13 +26,9 @@ class CollectStepProposalResolver implements ResolverInterface
         Argument $args,
         $viewer,
         RequestStack $request
-    ) {
-        /*: Promise or Connection */ $this->protectArguments($args);
+    ): Promise {
+        $this->protectArguments($args);
         $form = $collectStep->getProposalForm();
-
-        if (!$form) {
-            return ConnectionBuilder::empty();
-        }
 
         return $this->dataLoader->load(compact('form', 'args', 'viewer', 'request'));
     }

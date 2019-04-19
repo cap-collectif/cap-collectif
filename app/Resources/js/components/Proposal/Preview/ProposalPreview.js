@@ -19,7 +19,6 @@ type Props = {|
 export class ProposalPreview extends React.Component<Props> {
   render() {
     const { proposal, step, viewer } = this.props;
-
     return (
       <Col componentClass="li" xs={12} sm={6} md={4} lg={3}>
         <Card
@@ -61,7 +60,6 @@ export default createFragmentContainer(ProposalPreview, {
       author {
         vip
       }
-
       ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       ...ProposalPreviewBody_proposal
         @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView)

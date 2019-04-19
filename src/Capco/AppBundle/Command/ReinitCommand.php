@@ -2,76 +2,80 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
-use Capco\AppBundle\Entity\AppendixType;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\ArgumentVote;
-use Capco\AppBundle\Entity\Category;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\ContactForm;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
-use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Joli\JoliNotif\Notification;
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\Group;
-use Capco\AppBundle\Entity\LogicJump;
-use Capco\AppBundle\Entity\MapToken;
-use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionAppendix;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Entity\PostComment;
-use Capco\AppBundle\Entity\ProgressStep;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalCategory;
-use Capco\AppBundle\Entity\ProposalCollectVote;
-use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\ProposalSelectionVote;
-use Capco\AppBundle\Entity\QuestionChoice;
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Capco\AppBundle\Entity\Questions\SectionQuestion;
-use Capco\AppBundle\Entity\Questions\SimpleQuestion;
-use Capco\AppBundle\Entity\RegistrationForm;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\Requirement;
+use Capco\AppBundle\Entity\Theme;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Status;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStepType;
-use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Steps\RankingStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Styles\BackgroundStyle;
-use Capco\AppBundle\Entity\Styles\BorderStyle;
-use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Entity\UserArchive;
-use Capco\AppBundle\Entity\ProjectType;
-use Capco\ClassificationBundle\Entity\Context;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Project;
 use Capco\MediaBundle\Entity\Media;
-use Capco\UserBundle\Entity\User;
+use Joli\JoliNotif\NotifierFactory;
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Category;
+use Capco\AppBundle\Entity\MapToken;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\LogicJump;
+use Capco\AppBundle\Entity\Reporting;
 use Capco\UserBundle\Entity\UserType;
+use Capco\AppBundle\Entity\SourceVote;
 use Doctrine\DBAL\ConnectionException;
 use Doctrine\ORM\Id\AssignedGenerator;
+use Capco\AppBundle\Entity\CommentVote;
+use Capco\AppBundle\Entity\ContactForm;
+use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\OpinionVote;
+use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Entity\ProjectType;
+use Capco\AppBundle\Entity\Requirement;
+use Capco\AppBundle\Entity\UserArchive;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Joli\JoliNotif\Notification;
-use Joli\JoliNotif\NotifierFactory;
+use Capco\AppBundle\Entity\AppendixType;
+use Capco\AppBundle\Entity\ArgumentVote;
+use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\ProgressStep;
+use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\AppBundle\Entity\OpinionAppendix;
+use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\ProposalCategory;
+use Capco\AppBundle\Entity\RegistrationForm;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\RankingStep;
+use Capco\AppBundle\Entity\OpinionVersionVote;
+use Capco\AppBundle\Entity\Styles\BorderStyle;
+use Capco\ClassificationBundle\Entity\Context;
+use Capco\AppBundle\Entity\ProposalCollectVote;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Publishable\DoctrineListener;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Styles\BackgroundStyle;
+use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Symfony\Component\Console\Input\InputInterface;
+use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\Questions\SimpleQuestion;
+use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\Entity\Questions\SectionQuestion;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Symfony\Component\Console\Output\OutputInterface;
+use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
 
 class ReinitCommand extends ContainerAwareCommand
 {
@@ -264,6 +268,7 @@ class ReinitCommand extends ContainerAwareCommand
             Theme::class,
             Source::class,
             SimpleQuestion::class,
+            CommentVote::class,
             MultipleChoiceQuestion::class,
             MediaQuestion::class,
             SectionQuestion::class,
@@ -271,6 +276,9 @@ class ReinitCommand extends ContainerAwareCommand
             UserArchive::class,
             Requirement::class,
             Reporting::class,
+            OpinionVote::class,
+            OpinionVersionVote::class,
+            SourceVote::class,
             ProposalSelectionVote::class,
             ProposalCollectVote::class,
             ProjectType::class,

@@ -7,7 +7,6 @@
             "**/Behat/"
         ],
         "psr-4": {
-            "spec\\": "spec/",
             "Capco\\AppBundle\\": "src/Capco/AppBundle",
             "Capco\\AdminBundle\\": "src/Capco/AdminBundle",
             "Capco\\ClassificationBundle\\": "src/Capco/ClassificationBundle",

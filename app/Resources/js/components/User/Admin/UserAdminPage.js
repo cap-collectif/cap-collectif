@@ -12,7 +12,7 @@ import type {
   UserAdminPageQueryVariables,
 } from '~relay/UserAdminPageQuery.graphql';
 
-export type Props = { userId: string, dirty: boolean };
+export type Props = {| +userId: string, +dirty: boolean |};
 
 const onUnload = e => {
   e.returnValue = true;
