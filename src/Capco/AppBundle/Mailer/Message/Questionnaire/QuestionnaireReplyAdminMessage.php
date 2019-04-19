@@ -22,7 +22,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         return new self(
             $reply->getAuthor()->getEmail(),
             null,
-            'testfdp',
+            "${authorUsername} a ${state} sa réponse au questionnaire \"${questionnaireTitle}\"",
             self::getMySubjectVars($questionnaireTitle, $authorUsername),
             '@CapcoMail/notifyQuestionnaireReply.html.twig',
             self::getMyTemplateVars(
