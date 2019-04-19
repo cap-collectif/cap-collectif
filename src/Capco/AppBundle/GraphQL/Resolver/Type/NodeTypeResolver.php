@@ -143,6 +143,9 @@ class NodeTypeResolver implements ResolverInterface
             if ('public' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PublicConsultation');
             }
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewConsultation');
+            }
 
             return $this->typeResolver->resolve('InternalConsultation');
         }
