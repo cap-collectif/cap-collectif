@@ -4376,7 +4376,8 @@ type Query {
     # If non-null, filters events with the given string to look for.
     search: String
 
-    # If non-null, filters events with the given registration type
+    # If true, filter the events with registration link or internal registration
+    # enable, if false  filter the events with both registration type at false
     isRegistrable: Boolean
   ): EventConnection!
 

@@ -136,6 +136,7 @@ export class EventListFilters extends React.Component<Props, State> {
         id="EventListFilters-filter-isRegistrable"
         name="isRegistrable"
         placeholder={intl.formatMessage({ id: 'registration-required' })}
+        label={intl.formatMessage({ id: 'registration-required' })}
         role="combobox"
         aria-autocomplete="list"
         aria-haspopup="true"
@@ -160,6 +161,7 @@ export class EventListFilters extends React.Component<Props, State> {
         labelClassName="control-label"
         inputClassName="fake-inputClassName"
         placeholder={intl.formatMessage({ id: 'project_download.label.author' })}
+        label={intl.formatMessage({ id: 'project_download.label.author' })}
         ariaControls="EventListFilters-filter-author-listbox"
       />,
     );
@@ -177,6 +179,7 @@ export class EventListFilters extends React.Component<Props, State> {
           addonAfter={<i className="cap cap-magnifier" />}
           component={component}
           placeholder={intl.formatMessage({ id: 'proposal-search' })}
+          label={intl.formatMessage({ id: 'proposal-search' })}
           groupClassName="event-search-group pull-right"
         />
       </div>,
@@ -189,6 +192,7 @@ export class EventListFilters extends React.Component<Props, State> {
           id="EventListFilters-filter-theme"
           name="theme"
           placeholder={intl.formatMessage({ id: 'type-theme' })}
+          label={intl.formatMessage({ id: 'type-theme' })}
           options={themeOptions}
           role="combobox"
           aria-autocomplete="list"
@@ -204,6 +208,7 @@ export class EventListFilters extends React.Component<Props, State> {
           id="EventListFilters-filter-project"
           name="project"
           placeholder={intl.formatMessage({ id: 'type-project' })}
+          label={intl.formatMessage({ id: 'type-project' })}
           options={projectOptions}
           role="combobox"
           aria-autocomplete="list"
@@ -224,6 +229,7 @@ export class EventListFilters extends React.Component<Props, State> {
           id="EventListFilters-filter-userType"
           aria-controls="EventListFilters-filter-userType-listbox"
           placeholder={intl.formatMessage({ id: 'filter-userType' })}
+          label={intl.formatMessage({ id: 'filter-userType' })}
           options={userTypes.map(u => ({ value: u.id, label: u.name }))}
         />,
       );
@@ -248,11 +254,6 @@ export class EventListFilters extends React.Component<Props, State> {
 
     return (
       <div>
-        <p>
-          <b>
-            <FormattedMessage id="filter-by" />
-          </b>
-        </p>
         <form>
           {filters.map((filter, index) => (
             <Col key={index} className="mt-5">
