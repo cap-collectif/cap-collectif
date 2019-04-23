@@ -2,16 +2,16 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, FieldArray, type FormProps } from 'redux-form';
-import { ButtonToolbar, Button } from 'react-bootstrap';
+import { Field, FieldArray, type FormProps, reduxForm } from 'redux-form';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { submitQuestion, type QuestionsInReduxForm } from '../../utils/submitQuestion';
+import { type QuestionsInReduxForm, submitQuestion } from '../../utils/submitQuestion';
 import AlertForm from '../Alert/AlertForm';
 import component from '../Form/Field';
 import UpdateQuestionnaireConfigurationMutation from '../../mutations/UpdateQuestionnaireConfigurationMutation';
 import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestions';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
-import type { State, FeatureToggles } from '../../types';
+import type { FeatureToggles, State } from '../../types';
 
 type RelayProps = {| questionnaire: QuestionnaireAdminConfigurationForm_questionnaire |};
 type Props = {|
@@ -151,27 +151,30 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
               <h3 className="box-title">
                 <FormattedMessage id="admin.label.settings.notifications" />
               </h3>
+              <h4 className="mb-3 mt-0">
+                <FormattedMessage id="notification.answer.created" />
+              </h4>
               <Field
                 name="notifyResponseCreate"
                 component={component}
                 type="checkbox"
-                id="notify_response_create"
-                label={<FormattedMessage id="depose" />}
-              />
+                id="notify_response_create">
+                <FormattedMessage id="proposal_form.notifications.on_create" />
+              </Field>
               <Field
                 name="notifyResponseUpdate"
                 component={component}
                 type="checkbox"
-                id="notify_response_update"
-                label={<FormattedMessage id="update" />}
-              />
+                id="notify_response_update">
+                <FormattedMessage id="admin.fields.proposal_form.notification.on_update" />
+              </Field>
               <Field
                 name="notifyResponseDelete"
                 component={component}
                 type="checkbox"
-                id="notify_response_delete"
-                label={<FormattedMessage id="delete" />}
-              />
+                id="notify_response_delete">
+                <FormattedMessage id="admin.fields.proposal_form.notification.on_delete" />
+              </Field>
             </div>
             <ButtonToolbar className="box-content__toolbar">
               <Button
