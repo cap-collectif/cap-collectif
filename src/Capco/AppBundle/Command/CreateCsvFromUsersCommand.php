@@ -5,18 +5,17 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Writer\WriterInterface;
-use Capco\AppBundle\Command\Utils\exportUtils;
+use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
 use Overblog\GraphQLBundle\Request\Executor;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateCsvFromUsersCommand extends ContainerAwareCommand
+class CreateCsvFromUsersCommand extends BaseExportCommand
 {
     private const VALUE_RESPONSE_TYPENAME = 'ValueResponse';
     private const MEDIA_RESPONSE_TYPENAME = 'MediaResponse';
@@ -123,9 +122,12 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         'projectsCount',
         'deletedAccountAt',
     ];
+    private $toggleManager;
 
     public function __construct(
         GraphQlAclListener $listener,
+        ExportUtils $exportUtils,
+        Manager $toggleManager,
         ConnectionTraversor $connectionTraversor,
         Executor $executor,
         string $projectRootDir
@@ -134,11 +136,13 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         $this->connectionTraversor = $connectionTraversor;
         $this->executor = $executor;
         $this->projectRootDir = $projectRootDir;
-        parent::__construct();
+        $this->toggleManager = $toggleManager;
+        parent::__construct($exportUtils);
     }
 
     protected function configure(): void
     {
+        parent::configure();
         $this->setName('capco:export:users')->setDescription(
             'Create csv file from consultation step data'
         );
@@ -146,10 +150,8 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-        if (!$container->get(Manager::class)->isActive('export')) {
+        if (!$this->toggleManager->isActive('export')) {
             $output->writeln('Feature "export" must be enabled.');
-
             return;
         }
         $fileName = 'users.csv';
@@ -195,7 +197,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         $row = [];
         foreach ($this->userHeaderMap as $path => $columnName) {
             $row[] = isset($this->userHeaderMap[$path])
-                ? exportUtils::parseCellValue(Arr::path($user, $this->userHeaderMap[$path]))
+                ? $this->exportUtils->parseCellValue(Arr::path($user, $this->userHeaderMap[$path]))
                 : '';
         }
         $customQuestions = $this->generateSheetHeaderQuestions($user);
@@ -205,7 +207,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
             }, Arr::path($user, 'responses.edges'));
 
             foreach ($responses as $response) {
-                $row[] = exportUtils::parseCellValue($this->addCustomResponse($response));
+                $row[] = $this->exportUtils->parseCellValue($this->addCustomResponse($response));
             }
         }
         $this->writer->addRow($row);

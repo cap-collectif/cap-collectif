@@ -35,11 +35,11 @@ def graphql_schemas(checkSame=False):
 @task(environments=['local'])
 def snapshots():
     commands = [
-        'capco:export:users',
-        'capco:export:consultation',
-        'capco:export:projects-contributors',
-        'capco:export:proposalStep',
-        'capco:export:questionnaire',
+        'capco:export:users --snapshot',
+        'capco:export:consultation --snapshot',
+        'capco:export:projects-contributors --snapshot',
+        'capco:export:proposalStep --snapshot',
+        'capco:export:questionnaire --snapshot',
     ]
     extensions = [
         'csv',
