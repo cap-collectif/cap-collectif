@@ -20,8 +20,8 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         return new self(
             $reply->getAuthor()->getEmail(),
             null,
-            "${authorUsername} a ${state} sa réponse au questionnaire \"${questionnaireTitle}\"",
-            self::getMySubjectVars($questionnaireTitle, $authorUsername),
+            "email.notification.questionnaire.reply.subject.${state}",
+            self::getMySubjectVars($authorUsername, $questionnaireTitle),
             '@CapcoMail/notifyQuestionnaireReply.html.twig',
             self::getMyTemplateVars(
                 $projectTitle,
@@ -57,8 +57,8 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
     private static function getMySubjectVars(string $authorName, string $questionnaireTitle): array
     {
         return [
-            'authorName' => self::escape($authorName),
-            'questionnaireTitle' => self::escape($questionnaireTitle),
+            '{authorName}' => self::escape($authorName),
+            '{questionnaireTitle}' => self::escape($questionnaireTitle),
         ];
     }
 }

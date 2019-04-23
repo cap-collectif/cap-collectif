@@ -4,6 +4,7 @@
     {{ 'acknowledgment-of-receipt'|trans({},'CapcoAppBundle') }}
 {% endblock %}
 
+{% set favicons = site_favicons() %}
 {% set timezone = date.timezone %}
 {% set dateLocalized =  date|localizeddate('long', 'none', 'fr_FR', timezone)  %}
 {% set time =  date|date('H:i:s') %}
@@ -11,7 +12,11 @@
 
 {% block core_mail %}
     <div style="height: 35px; margin-bottom: 10px;">
-        <img style="width: 30px; height: 30px; float: left;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" />
+        {% if favicons is not null %}
+            <img style="width: 30px; height: 30px; float: left;" src="{{ favicons['favicon_32'] }}" />
+        {% else %}
+            <img style="width: 30px; height: 30px; float: left;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" />
+        {% endif %}
         <h2 style="color: #666; float: left; margin: 8px 0 0 8px;">
             {{ siteName }}
         </h2>

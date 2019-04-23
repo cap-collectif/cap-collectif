@@ -113,15 +113,7 @@ class AddReplyMutation implements MutationInterface
             if ($questionnaire->isNotifyResponseCreate()) {
                 $this->questionnaireReplyNotifier->onCreation($reply, $stepUrl);
             }
-            $this->userNotifier->acknowledgeReply(
-                $project,
-                $reply,
-                $endAt,
-                $stepUrl,
-                $step,
-                $user,
-                false
-            );
+            $this->userNotifier->acknowledgeReply($project, $reply, $endAt, $stepUrl, $step, $user);
         }
 
         return ['questionnaire' => $questionnaire, 'reply' => $reply];
