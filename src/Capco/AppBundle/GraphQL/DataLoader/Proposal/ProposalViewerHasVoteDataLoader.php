@@ -13,6 +13,7 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use GraphQL\Executor\Promise\Promise;
 
 class ProposalViewerHasVoteDataLoader extends BatchDataLoader
 {
@@ -57,7 +58,7 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         $this->cache->invalidateTags([$proposal->getId()]);
     }
 
-    public function all(array $keys)
+    public function all(array $keys): Promise
     {
         if ($this->debug) {
             $this->logger->info(

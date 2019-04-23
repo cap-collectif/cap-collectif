@@ -83,11 +83,12 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
             ->getByProposalIdsAndStepAndUser(['proposal1', 'proposal2'], $step, $user1)
             ->willReturn([$vote1, $vote2]);
 
-        $adapter = new SyncPromiseAdapter();
+        $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
             ->createAll([$vote2, $vote1])
             ->shouldBeCalled()
-            ->willReturn(new Promise(null, $adapter));
-        $this->all($keys);
+            ->willReturn($promise);
+
+        $this->all($keys)->shouldReturn($promise);
     }
 }

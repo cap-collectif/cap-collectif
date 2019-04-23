@@ -12,7 +12,7 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class ProjectProposalsDataLoader extends BatchDataLoader
 {
@@ -71,9 +71,7 @@ class ProjectProposalsDataLoader extends BatchDataLoader
 
     private function resolveWithoutBatch(Project $project, Argument $args): Connection
     {
-        $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
-        $emptyConnection->totalCount = 0;
-        $data = $emptyConnection;
+        $data = ConnectionBuilder::empty();
 
         // For now, to simplify, we consider that only one collect step is possible on a project.
         $step = $project->getFirstCollectStep();
