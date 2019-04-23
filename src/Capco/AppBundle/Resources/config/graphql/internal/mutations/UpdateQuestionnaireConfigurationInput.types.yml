@@ -9,5 +9,11 @@ UpdateQuestionnaireConfigurationInput:
         type: 'String'
       description:
         type: 'String'
+      notifyResponseCreate:
+        type: 'Boolean'
+      notifyResponseUpdate:
+        type: 'Boolean'
+      notifyResponseDelete:
+        type: 'Boolean'
       questions:
         type: '[QuestionnaireAbstractQuestionInput!]'

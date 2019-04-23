@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
@@ -21,7 +22,6 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 
 class AddReplyMutation implements MutationInterface
 {
@@ -110,7 +110,9 @@ class AddReplyMutation implements MutationInterface
             $project = $step->getProject();
             $endAt = $step->getEndAt();
             $stepUrl = $this->stepUrlResolver->__invoke($step);
-            $this->questionnaireReplyNotifier->onCreation($reply, $stepUrl);
+            if ($questionnaire->isNotifyResponseCreate()) {
+                $this->questionnaireReplyNotifier->onCreation($reply, $stepUrl);
+            }
             $this->userNotifier->acknowledgeReply(
                 $project,
                 $reply,

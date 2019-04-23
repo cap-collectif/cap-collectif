@@ -8,25 +8,25 @@ use Gedmo\Mapping\Annotation as Gedmo;
 trait TimestampableTrait
 {
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
 
-    public function setCreatedAt(\DateTime $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): self
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         if (property_exists($this, 'updatedAt')) {
             $this->updatedAt = $updatedAt;
@@ -35,7 +35,7 @@ trait TimestampableTrait
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         if (property_exists($this, 'updatedAt')) {
             return $this->updatedAt;
@@ -44,7 +44,7 @@ trait TimestampableTrait
         return null;
     }
 
-    public function isUpdatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
+    public function isUpdatedInLastInterval(\DateTimeInterface $to, \DateInterval $interval): bool
     {
         if (property_exists($this, 'updatedAt') && $this->updatedAt) {
             $diff = $this->updatedAt->diff($to);
@@ -55,7 +55,7 @@ trait TimestampableTrait
         return false;
     }
 
-    public function isDeletedInLastInterval(\DateTime $to, \DateInterval $interval): bool
+    public function isDeletedInLastInterval(\DateTimeInterface $to, \DateInterval $interval): bool
     {
         if (method_exists($this, 'isDeleted')) {
             if ($this->isDeleted() && isset($this->deletedAt)) {

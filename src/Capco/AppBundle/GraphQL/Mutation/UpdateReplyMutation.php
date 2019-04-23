@@ -84,7 +84,9 @@ class UpdateReplyMutation implements MutationInterface
             $project = $step->getProject();
             $endAt = $step->getEndAt();
             $stepUrl = $this->stepUrlResolver->__invoke($step);
-            $this->questionnaireReplyNotifier->onUpdate($reply, $stepUrl);
+            if ($questionnaire->isNotifyResponseUpdate()) {
+                $this->questionnaireReplyNotifier->onUpdate($reply, $stepUrl);
+            }
             $this->userNotifier->acknowledgeReply(
                 $project,
                 $reply,

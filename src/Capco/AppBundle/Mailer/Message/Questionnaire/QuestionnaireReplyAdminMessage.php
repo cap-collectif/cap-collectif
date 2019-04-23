@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Mailer\Message\Questionnaire;
 
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Mailer\Message\DefaultMessage;
-use Symfony\Component\Routing\RouterInterface;
 
 final class QuestionnaireReplyAdminMessage extends DefaultMessage
 {
@@ -15,7 +14,6 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $authorUsername,
         \DateTime $replyUpdatedAt,
         string $siteName,
-        RouterInterface $router,
         string $state,
         string $stepUrl = '#'
     ): self {

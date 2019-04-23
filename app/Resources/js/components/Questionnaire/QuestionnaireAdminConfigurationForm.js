@@ -147,6 +147,32 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
               component={ProposalFormAdminQuestions}
               formName={formName}
             />
+            <div className="box-header">
+              <h3 className="box-title">
+                <FormattedMessage id="admin.label.settings.notifications" />
+              </h3>
+              <Field
+                name="notifyResponseCreate"
+                component={component}
+                type="checkbox"
+                id="notify_response_create"
+                label={<FormattedMessage id="depose" />}
+              />
+              <Field
+                name="notifyResponseUpdate"
+                component={component}
+                type="checkbox"
+                id="notify_response_update"
+                label={<FormattedMessage id="update" />}
+              />
+              <Field
+                name="notifyResponseDelete"
+                component={component}
+                type="checkbox"
+                id="notify_response_delete"
+                label={<FormattedMessage id="delete" />}
+              />
+            </div>
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}
@@ -193,6 +219,9 @@ export default createFragmentContainer(intlContainer, {
       id
       title
       description
+      notifyResponseCreate
+      notifyResponseUpdate
+      notifyResponseDelete
       questions {
         id
         ...responsesHelper_adminQuestion @relay(mask: false)
