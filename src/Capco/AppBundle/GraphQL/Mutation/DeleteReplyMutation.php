@@ -57,6 +57,7 @@ class DeleteReplyMutation implements MutationInterface
                     json_encode([
                         'reply' => [
                             'author_email' => $reply->getAuthor()->getEmail(),
+                            'author_slug' => $reply->getAuthor()->getSlug(),
                             'deleted_at' => (new \DateTimeImmutable('now'))->format('Y-m-d H:i:s'),
                             'project_title' => $reply
                                 ->getStep()

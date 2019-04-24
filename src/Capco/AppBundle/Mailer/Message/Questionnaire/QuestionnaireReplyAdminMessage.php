@@ -15,6 +15,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         \DateTimeInterface $replyUpdatedAt,
         string $siteName,
         string $state,
+        string $userUrl,
         string $baseUrl,
         string $stepUrl = '#'
     ): self {
@@ -30,6 +31,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
                 $siteName,
                 $reply,
                 $state,
+                $userUrl,
                 $baseUrl,
                 $stepUrl
             )
@@ -44,6 +46,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $replyDeletedAt,
         string $siteName,
         string $state,
+        string $userUrl,
         string $baseUrl,
         string $stepUrl = '#'
     ): self {
@@ -59,6 +62,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
                 $siteName,
                 $reply,
                 $state,
+                $userUrl,
                 $baseUrl,
                 $stepUrl
             )
@@ -71,6 +75,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $siteName,
         Reply $reply,
         string $state,
+        string $userUrl,
         string $baseUrl,
         string $stepUrl
     ): array {
@@ -81,8 +86,9 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             'date' => $reply->getCreatedAt(),
             'authorName' => $reply->getAuthor()->getUsername(),
             'questionnaireTitle' => $reply->getQuestionnaire()->getTitle(),
-            'baseUrl' => $baseUrl,
             'state' => $state,
+            'userUrl' => $userUrl,
+            'baseUrl' => $baseUrl,
             'stepUrl' => $stepUrl,
         ];
     }
@@ -93,6 +99,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $siteName,
         array $reply,
         string $state,
+        string $userUrl,
         string $baseUrl,
         string $stepUrl
     ): array {
@@ -103,6 +110,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             'authorName' => $reply['author_name'],
             'questionnaireTitle' => $reply['questionnaire_title'],
             'state' => $state,
+            'userUrl' => $userUrl,
             'baseUrl' => $baseUrl,
             'stepUrl' => $stepUrl,
         ];

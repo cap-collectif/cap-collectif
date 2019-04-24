@@ -43,7 +43,7 @@
                     <p style="font-size: 16px">
                         {% if state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE') %}
                         {{ 'email.notification.questionnaire.reply.create'|trans({
-                            '{userUrl}': "#",
+                            '{userUrl}': userUrl,
                             '{userName}': authorName,
                             '{questionnaireTitle}': questionnaireTitle,
                             '{date}': dateLocalized,
@@ -51,7 +51,7 @@
                         }, 'CapcoAppBundle') | raw }}
                         {% elseif  state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE') %}
                         {{ 'email.notification.questionnaire.reply.update'|trans({
-                            '{userUrl}': "#",
+                            '{userUrl}': userUrl,
                             '{userName}': authorName,
                             '{questionnaireTitle}': questionnaireTitle,
                             '{date}': dateLocalized,
@@ -59,7 +59,7 @@
                         }, 'CapcoAppBundle') | raw }}
                         {% else %}
                         {{ 'email.notification.questionnaire.reply.delete'|trans({
-                            '{userUrl}': "#",
+                            '{userUrl}': userUrl,
                             '{userName}': authorName,
                             '{questionnaireTitle}': questionnaireTitle,
                             '{date}': dateLocalized,
