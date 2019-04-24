@@ -80,7 +80,7 @@ Scenario: GraphQL client wants to list current and future events
            "edges":[
               {
                  "node":{
-                    "_id":"evenementSansDateDeFin"
+                    "_id":"evenementPresentSansDateDeFin"
                  }
               },
               {
