@@ -6114,10 +6114,19 @@ type UpdateContactFormPayload {
 
 input UpdateContactPageInput {
   # The title of the contact page.
-  title: String!
+  title: String
 
   # The description of the contact page.
   description: HTML
+
+  # The description of the contact page.
+  picto: HTML
+
+  # The description of the contact page.
+  metadescription: String
+
+  # The description of the contact page.
+  customcode: String
   clientMutationId: String
 }
 
@@ -6127,6 +6136,15 @@ type UpdateContactPagePayload {
 
   # The description of the contact page.
   description: HTML
+
+  # The picto of the contact page.
+  picto: SiteImage
+
+  # The metadescription of the contact page.
+  metadescription: String
+
+  # The customcode of the contact page.
+  customcode: String
   clientMutationId: String
 }
 

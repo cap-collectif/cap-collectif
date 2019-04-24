@@ -18,7 +18,6 @@ import UpdateContactPageMutation from '../../../mutations/UpdateContactPageMutat
 
 type Props = {
   ...FormProps,
-  ...CustomFormValues,
 };
 
 const formName = 'contact-admin-form';
@@ -26,12 +25,13 @@ const formName = 'contact-admin-form';
 type FormValues = {
   title: string,
   description: ?string,
+  customCode: ?CustomFormValues,
+  picto: ?any,
+  metadescription: ?any,
 };
 
 const validate = (values: FormValues) => {
   const errors = {};
-  console.log('values***************************************************');
-  console.log(values);
   if (values.title === undefined || values.title.trim() === '') {
     errors.title = 'fill-field';
   }
@@ -40,10 +40,13 @@ const validate = (values: FormValues) => {
 };
 
 const onSubmit = (values: FormValues) => {
-  const { title, description } = values;
+  const { title, description, customCode, picto, metadescription } = values;
   const input = {
     title,
     description,
+    customCode,
+    picto,
+    metadescription,
   };
   return UpdateContactPageMutation.commit({ input });
 };

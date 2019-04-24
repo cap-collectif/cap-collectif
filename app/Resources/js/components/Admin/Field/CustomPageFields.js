@@ -5,10 +5,11 @@ import { Field, FormSection } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 
 import component from '../../Form/Field';
+import type { Uuid } from '../../../types';
 
 export type FormValues = {
   customCode?: string,
-  socialMedias?: string,
+  socialMedias?: ?{ id: Uuid, name: string, url: string },
   metadatas?: string,
 };
 

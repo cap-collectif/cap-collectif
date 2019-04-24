@@ -4,8 +4,17 @@ UpdateContactPageInput:
     description: 'The input associated to the updateContactPage mutatiopn.'
     fields:
       title:
-        type: 'String!'
+        type: 'String'
         description: 'The title of the contact page.'
       description:
         type: 'HTML'
+        description: 'The description of the contact page.'
+      picto:
+        type: 'HTML'
+        description: 'The description of the contact page.'
+      metadescription:
+        type: 'String'
+        description: 'The description of the contact page.'
+      customcode:
+        type: 'String'
         description: 'The description of the contact page.'
