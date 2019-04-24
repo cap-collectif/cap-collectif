@@ -6,6 +6,8 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ReplyType;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Notifier\UserNotifier;
@@ -27,7 +29,7 @@ class UpdateReplyMutation implements MutationInterface
     private $replyRepo;
     private $userNotifier;
     private $stepUrlResolver;
-    private $questionnaireReplyNotifier;
+    private $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -37,7 +39,7 @@ class UpdateReplyMutation implements MutationInterface
         ResponsesFormatter $responsesFormatter,
         UserNotifier $userNotifier,
         StepUrlResolver $stepUrlResolver,
-        QuestionnaireReplyNotifier $questionnaireReplyNotifier
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -46,7 +48,7 @@ class UpdateReplyMutation implements MutationInterface
         $this->responsesFormatter = $responsesFormatter;
         $this->userNotifier = $userNotifier;
         $this->stepUrlResolver = $stepUrlResolver;
-        $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -85,7 +87,16 @@ class UpdateReplyMutation implements MutationInterface
             $endAt = $step->getEndAt();
             $stepUrl = $this->stepUrlResolver->__invoke($step);
             if ($questionnaire->isNotifyResponseUpdate()) {
-                $this->questionnaireReplyNotifier->onUpdate($reply, $stepUrl);
+                $this->publisher->publish(
+                    'questionnaire.reply',
+                    new Message(
+                        json_encode([
+                            'replyId' => $reply->getId(),
+                            'stepUrl' => $stepUrl,
+                            'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE,
+                        ])
+                    )
+                );
             }
             $this->userNotifier->acknowledgeReply(
                 $project,

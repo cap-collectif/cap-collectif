@@ -12,9 +12,10 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $projectTitle,
         string $questionnaireTitle,
         string $authorUsername,
-        \DateTime $replyUpdatedAt,
+        \DateTimeInterface $replyUpdatedAt,
         string $siteName,
         string $state,
+        string $baseUrl,
         string $stepUrl = '#'
     ): self {
         return new self(
@@ -29,6 +30,36 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
                 $siteName,
                 $reply,
                 $state,
+                $baseUrl,
+                $stepUrl
+            )
+        );
+    }
+
+    public static function createFromDeletedReply(
+        array $reply,
+        string $projectTitle,
+        string $questionnaireTitle,
+        string $authorUsername,
+        string $replyDeletedAt,
+        string $siteName,
+        string $state,
+        string $baseUrl,
+        string $stepUrl = '#'
+    ): self {
+        return new self(
+            $reply['author_email'],
+            null,
+            "email.notification.questionnaire.reply.subject.${state}",
+            self::getMySubjectVars($authorUsername, $questionnaireTitle),
+            '@CapcoMail/notifyQuestionnaireReply.html.twig',
+            self::getMyTemplateForDeletedReplyVars(
+                $projectTitle,
+                $replyDeletedAt,
+                $siteName,
+                $reply,
+                $state,
+                $baseUrl,
                 $stepUrl
             )
         );
@@ -36,10 +67,11 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
 
     private static function getMyTemplateVars(
         string $title,
-        \DateTime $updatedAt,
+        \DateTimeInterface $updatedAt,
         string $siteName,
         Reply $reply,
         string $state,
+        string $baseUrl,
         string $stepUrl
     ): array {
         return [
@@ -49,7 +81,29 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             'date' => $reply->getCreatedAt(),
             'authorName' => $reply->getAuthor()->getUsername(),
             'questionnaireTitle' => $reply->getQuestionnaire()->getTitle(),
+            'baseUrl' => $baseUrl,
             'state' => $state,
+            'stepUrl' => $stepUrl,
+        ];
+    }
+
+    private static function getMyTemplateForDeletedReplyVars(
+        string $title,
+        string $replyDeletedAt,
+        string $siteName,
+        array $reply,
+        string $state,
+        string $baseUrl,
+        string $stepUrl
+    ): array {
+        return [
+            'projectTitle' => self::escape($title),
+            'siteName' => self::escape($siteName),
+            'date' => \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $replyDeletedAt),
+            'authorName' => $reply['author_name'],
+            'questionnaireTitle' => $reply['questionnaire_title'],
+            'state' => $state,
+            'baseUrl' => $baseUrl,
             'stepUrl' => $stepUrl,
         ];
     }

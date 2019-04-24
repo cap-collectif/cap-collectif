@@ -20,6 +20,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Error\UserErrors;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -34,7 +36,7 @@ class AddReplyMutation implements MutationInterface
     private $replyRepo;
     private $userNotifier;
     private $stepUrlResolver;
-    private $questionnaireReplyNotifier;
+    private $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -46,7 +48,7 @@ class AddReplyMutation implements MutationInterface
         LoggerInterface $logger,
         UserNotifier $userNotifier,
         StepUrlResolver $stepUrlResolver,
-        QuestionnaireReplyNotifier $questionnaireReplyNotifier
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -57,7 +59,7 @@ class AddReplyMutation implements MutationInterface
         $this->logger = $logger;
         $this->userNotifier = $userNotifier;
         $this->stepUrlResolver = $stepUrlResolver;
-        $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -111,7 +113,16 @@ class AddReplyMutation implements MutationInterface
             $endAt = $step->getEndAt();
             $stepUrl = $this->stepUrlResolver->__invoke($step);
             if ($questionnaire->isNotifyResponseCreate()) {
-                $this->questionnaireReplyNotifier->onCreation($reply, $stepUrl);
+                $this->publisher->publish(
+                    'questionnaire.reply',
+                    new Message(
+                        json_encode([
+                            'replyId' => $reply->getId(),
+                            'stepUrl' => $stepUrl,
+                            'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE,
+                        ])
+                    )
+                );
             }
             $this->userNotifier->acknowledgeReply($project, $reply, $endAt, $stepUrl, $step, $user);
         }

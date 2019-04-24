@@ -8,7 +8,6 @@
 {% set timezone = date.timezone %}
 {% set dateLocalized =  date|localizeddate('long', 'none', 'fr_FR', timezone)  %}
 {% set time =  date|date('H:i:s') %}
-{% set baseUrl = app.request.scheme ~ '://' ~ app.request.httpHost %}
 
 {% block core_mail %}
     <div style="height: 35px; margin-bottom: 10px;">
@@ -42,7 +41,7 @@
             <div>
                 <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
                     <p style="font-size: 16px">
-                        {% if state == 'create' %}
+                        {% if state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE') %}
                         {{ 'email.notification.questionnaire.reply.create'|trans({
                             '{userUrl}': "#",
                             '{userName}': authorName,
@@ -50,7 +49,7 @@
                             '{date}': dateLocalized,
                             '{time}': time,
                         }, 'CapcoAppBundle') | raw }}
-                        {% elseif  state == 'update' %}
+                        {% elseif  state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE') %}
                         {{ 'email.notification.questionnaire.reply.update'|trans({
                             '{userUrl}': "#",
                             '{userName}': authorName,
@@ -69,7 +68,10 @@
                         {% endif %}
                     </p>
                 </div>
-                {% if state == 'create' or state == 'update' %}
+                {% if
+                    state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE') or
+                    state == constant('Capco\\AppBundle\\Notifier\\QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE')
+                %}
                 <div style="color:#FFFFFF; margin-top: 30px; margin-bottom: 10px; font-family:helvetica, arial, sans-serif; font-size: 13px;">
                     <a style="background-color: #0d71bb; padding: 10px; border-radius: 5px; color:#FFFFFF; margin-right: 8px;" href="{{ stepUrl }}">
                         Afficher
