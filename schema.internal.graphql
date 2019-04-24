@@ -6295,11 +6295,23 @@ type UpdateProposalVotesPayload {
 
 input UpdateQuestionnaireConfigurationInput {
   questionnaireId: ID!
+
+  # The new title of the questionnaire.
   title: String
+
+  # The new description of the questionnaire.
   description: String
+
+  # Do we notify when a response is created?
   notifyResponseCreate: Boolean
+
+  # Do we notify when a response is updated?
   notifyResponseUpdate: Boolean
+
+  # Do we notify when a response is deleted?
   notifyResponseDelete: Boolean
+
+  # The new list of available questions for this questionnaire
   questions: [QuestionnaireAbstractQuestionInput!]
   clientMutationId: String
 }
