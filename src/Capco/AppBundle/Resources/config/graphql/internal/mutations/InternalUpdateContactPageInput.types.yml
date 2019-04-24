@@ -1,7 +1,8 @@
-UpdateContactPageInput:
+InternalUpdateContactPageInput:
   type: relay-mutation-input
   config:
-    description: 'The input associated to the updateContactPage mutatiopn.'
+    name: UpdateContactPageInput
+    description: 'The input associated to the updateContactPage mutation.'
     fields:
       title:
         type: 'String'
@@ -10,11 +11,11 @@ UpdateContactPageInput:
         type: 'HTML'
         description: 'The description of the contact page.'
       picto:
-        type: 'HTML'
-        description: 'The description of the contact page.'
+        type: 'ID'
+        description: 'The picto of the contact page.'
       metadescription:
         type: 'String'
-        description: 'The description of the contact page.'
+        description: 'The metadescription of the contact page.'
       customcode:
         type: 'String'
-        description: 'The description of the contact page.'
+        description: 'The customcode of the contact page.'

@@ -6,6 +6,7 @@ use Capco\AppBundle\Cache\RedisCache;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Twig\SiteParameterExtension;
+use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -22,17 +23,20 @@ class UpdateContactPageMutation implements MutationInterface
     private $imageRepository;
     private $em;
     private $cache;
+    private $mediaRepository;
 
     public function __construct(
         SiteParameterRepository $siteParameterRepository,
         EntityManagerInterface $em,
         RedisCache $cache,
+        MediaRepository $mediaRepository,
         SiteImageRepository $imageRepository
     ) {
-        $this->siteParameterRepository = $siteParameterRepository;
         $this->em = $em;
         $this->cache = $cache;
         $this->imageRepository = $imageRepository;
+        $this->mediaRepository = $mediaRepository;
+        $this->siteParameterRepository = $siteParameterRepository;
     }
 
     public function __invoke(Argument $args): array
@@ -80,7 +84,11 @@ class UpdateContactPageMutation implements MutationInterface
                 $codeParameter->setValue($customcode);
             }
             if ($picto) {
-                $pictoParameter->setValue($picto);
+                $media = $this->mediaRepository->find($picto);
+
+                if ($media) {
+                    $pictoParameter->setMedia($media);
+                }
             }
         } else {
             throw new \RuntimeException('Site parameters not found');

@@ -442,8 +442,8 @@ InternalMutation:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
-          inputType: UpdateContactPageInput
-          payloadType: UpdateContactPagePayload
+          inputType: InternalUpdateContactPageInput
+          payloadType: InternalUpdateContactPagePayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateContactPageMutation", [value])'
       sendContactForm:
         builder: 'Relay::Mutation'

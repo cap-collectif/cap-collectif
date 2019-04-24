@@ -6119,13 +6119,13 @@ input UpdateContactPageInput {
   # The description of the contact page.
   description: HTML
 
-  # The description of the contact page.
-  picto: HTML
+  # The picto of the contact page.
+  picto: ID
 
-  # The description of the contact page.
+  # The metadescription of the contact page.
   metadescription: String
 
-  # The description of the contact page.
+  # The customcode of the contact page.
   customcode: String
   clientMutationId: String
 }

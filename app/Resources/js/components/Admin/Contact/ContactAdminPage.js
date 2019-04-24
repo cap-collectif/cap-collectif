@@ -25,14 +25,12 @@ const formName = 'contact-admin-form';
 type FormValues = {
   title: string,
   description: ?string,
-  customCode: ?CustomFormValues,
-  picto: ?any,
-  metadescription: ?any,
+  custom: CustomFormValues,
 };
 
 const validate = (values: FormValues) => {
   const errors = {};
-  if (values.title === undefined || values.title.trim() === '') {
+  if (values.title === undefined) {
     errors.title = 'fill-field';
   }
 
@@ -40,12 +38,13 @@ const validate = (values: FormValues) => {
 };
 
 const onSubmit = (values: FormValues) => {
-  const { title, description, customCode, picto, metadescription } = values;
+  const { title, description, custom } = values;
+  const { customcode, picto, metadescription } = custom;
   const input = {
     title,
     description,
-    customCode,
-    picto,
+    customcode,
+    picto: picto ? picto.id : null,
     metadescription,
   };
   return UpdateContactPageMutation.commit({ input });

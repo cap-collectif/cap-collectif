@@ -7,7 +7,7 @@ Scenario: Admin wants to update contact page informations
   And I send a GraphQL POST request:
    """
    {
-    "query": "mutation ($input: UpdateContactPageInput!) {
+    "query": "mutation ($input: InternalUpdateContactPageInput!) {
       updateContactPage(input: $input) {
         title
         description
@@ -39,7 +39,7 @@ Scenario: Normal user wants to update contact page informations
   And I send a GraphQL POST request:
    """
    {
-    "query": "mutation ($input: UpdateContactPageInput!) {
+    "query": "mutation ($input: InternalUpdateContactPageInput!) {
       updateContactPage(input: $input) {
         title
         description

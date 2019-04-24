@@ -1,6 +1,7 @@
-UpdateContactPagePayload:
+InternalUpdateContactPagePayload:
   type: relay-mutation-payload
   config:
+    name: UpdateContactPagePayload
     description: 'The payload of the updateContactPage'
     fields:
       title:

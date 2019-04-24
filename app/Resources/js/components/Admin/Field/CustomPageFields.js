@@ -8,9 +8,9 @@ import component from '../../Form/Field';
 import type { Uuid } from '../../../types';
 
 export type FormValues = {
-  customCode?: string,
-  socialMedias?: ?{ id: Uuid, name: string, url: string },
-  metadatas?: string,
+  customcode?: string,
+  picto?: ?{ id: Uuid, name: string, url: string },
+  metadescription?: string,
 };
 
 type Props = {
@@ -22,21 +22,21 @@ export default class CustomPageFields extends React.Component<Props> {
     return (
       <FormSection name="custom">
         <Field
-          name="metadatas"
+          name="metadescription"
           type="text"
           label={<FormattedMessage id="page.metadescription" />}
           component={component}
         />
 
         <Field
-          name="customCode"
+          name="customcode"
           type="textarea"
           label={<FormattedMessage id="admin.customcode" />}
           component={component}
         />
 
         <Field
-          name="socialMedias"
+          name="picto"
           type="image"
           label={<FormattedMessage id="registration.admin.topText" />}
           component={component}
