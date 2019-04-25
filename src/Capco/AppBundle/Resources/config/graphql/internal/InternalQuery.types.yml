@@ -73,7 +73,7 @@ InternalQuery:
           authorsOfEventOnly:
             type: 'Boolean'
             defaultValue: false
-            description: 'If true, get all distinct author of events'
+            description: 'If true, retrieve only users that created an event.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserSearchQueryResolver", [args])'
       consultationSteps:
         type: '[InternalConsultationStep!]!'

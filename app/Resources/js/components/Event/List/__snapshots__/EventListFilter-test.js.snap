@@ -60,15 +60,15 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                         },
                         Object {
                           "label": "global.yes",
-                          "value": "true",
+                          "value": "yes",
                         },
                         Object {
                           "label": "global.no",
-                          "value": "false",
+                          "value": "no",
                         },
                       ]
                     }
-                    placeholder="registration-required"
+                    placeholder="indifferent"
                     role="combobox"
                   />
                 </div>
@@ -92,7 +92,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                     labelClassName="control-label"
                     multi={false}
                     name="author"
-                    placeholder="project_download.label.author"
+                    placeholder="all-the-authors"
                     selectFieldIsObject={true}
                   />
                 </div>
@@ -154,7 +154,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                         },
                       ]
                     }
-                    placeholder="filter-userType"
+                    placeholder="global.select_project_types"
                     role="combobox"
                   />
                 </div>
@@ -282,15 +282,15 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                         },
                         Object {
                           "label": "global.yes",
-                          "value": "true",
+                          "value": "yes",
                         },
                         Object {
                           "label": "global.no",
-                          "value": "false",
+                          "value": "no",
                         },
                       ]
                     }
-                    placeholder="registration-required"
+                    placeholder="indifferent"
                     role="combobox"
                   />
                 </div>
@@ -314,7 +314,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                     labelClassName="control-label"
                     multi={false}
                     name="author"
-                    placeholder="project_download.label.author"
+                    placeholder="all-the-authors"
                     selectFieldIsObject={true}
                   />
                 </div>
@@ -376,7 +376,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                         },
                       ]
                     }
-                    placeholder="filter-userType"
+                    placeholder="global.select_project_types"
                     role="combobox"
                   />
                 </div>

@@ -36,7 +36,7 @@ class UserSearch extends Search
         $query = new Query\BoolQuery();
 
         if ($terms && $authorsOfEventOnly) {
-            $authorIds = $this->eventSearch->getAllAuthorOfEvent($terms);
+            $authorIds = $this->eventSearch->getAllIdsOfAuthorOfEvent($terms);
             $users = $this->getHydratedResults($authorIds);
 
             if ($onlyUsers) {

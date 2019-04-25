@@ -18,7 +18,7 @@ type Props = {
   project: ?string,
   userType: ?string,
   status: ?boolean,
-  isRegistrable: ?boolean,
+  isRegistrable: ?string,
   author: ?{ value: string },
 };
 
@@ -62,7 +62,7 @@ export class EventRefetch extends React.Component<Props, State> {
       isRegistrable:
         this.props.isRegistrable === 'all' || typeof this.props.isRegistrable === 'undefined'
           ? null
-          : this.props.isRegistrable === 'true',
+          : this.props.isRegistrable === 'yes',
     });
 
     this.props.relay.refetch(

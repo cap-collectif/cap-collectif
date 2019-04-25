@@ -114,7 +114,7 @@ class EventSearch extends Search
         ];
     }
 
-    public function getAllAuthorOfEvent(string $terms = null): array
+    public function getAllIdsOfAuthorOfEvent(string $terms = null): array
     {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(

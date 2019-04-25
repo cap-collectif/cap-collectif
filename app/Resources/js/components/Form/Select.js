@@ -33,7 +33,7 @@ type Props = {
   labelClassName?: string,
   inputClassName?: string,
   selectFieldIsObject?: boolean,
-  debounce: boolean,
+  debounce?: boolean, // add delay in async load
 };
 
 const ClearIndicator = props => {

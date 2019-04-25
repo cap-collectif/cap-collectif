@@ -4426,7 +4426,7 @@ type Query {
     # Return all users except the ones in the array.
     notInIds: [String] = null
 
-    # If true, get all distinct author of events
+    # If true, retrieve only users that created an event.
     authorsOfEventOnly: Boolean = false
   ): [User]
   consultationSteps(

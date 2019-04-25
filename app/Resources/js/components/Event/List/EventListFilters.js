@@ -24,13 +24,16 @@ type State = {
   projectOptions: Array<Object>,
   themeOptions: Array<Object>,
 };
+
+type Registrable = 'all' | 'yes' | 'no';
+
 type Props = {|
   ...FormProps,
   query: EventListFilters_query,
   features: FeatureToggles,
   dispatch: Dispatch,
   theme: ?string,
-  isRegistrable: ?string,
+  isRegistrable: ?Registrable,
   project: ?string,
   userType: ?string,
   search: ?string,
@@ -46,7 +49,7 @@ const countFilters = (
   search: ?string,
   author: ?string,
   userType: ?string,
-  isRegistrable: ?string,
+  isRegistrable: ?Registrable,
 ): number => {
   let nbFilter = 0;
   if (author) {
@@ -135,7 +138,7 @@ export class EventListFilters extends React.Component<Props, State> {
         component={select}
         id="EventListFilters-filter-isRegistrable"
         name="isRegistrable"
-        placeholder={intl.formatMessage({ id: 'registration-required' })}
+        placeholder={intl.formatMessage({ id: 'indifferent' })}
         label={intl.formatMessage({ id: 'registration-required' })}
         role="combobox"
         aria-autocomplete="list"
@@ -144,8 +147,8 @@ export class EventListFilters extends React.Component<Props, State> {
         aria-controls="EventListFilters-filter-isRegistrable-listbox"
         options={[
           { value: 'all', label: intl.formatMessage({ id: 'indifferent' }) },
-          { value: 'true', label: intl.formatMessage({ id: 'global.yes' }) },
-          { value: 'false', label: intl.formatMessage({ id: 'global.no' }) },
+          { value: 'yes', label: intl.formatMessage({ id: 'global.yes' }) },
+          { value: 'no', label: intl.formatMessage({ id: 'global.no' }) },
         ]}
       />,
     );
@@ -160,7 +163,7 @@ export class EventListFilters extends React.Component<Props, State> {
         autoload={false}
         labelClassName="control-label"
         inputClassName="fake-inputClassName"
-        placeholder={intl.formatMessage({ id: 'project_download.label.author' })}
+        placeholder={intl.formatMessage({ id: 'all-the-authors' })}
         label={intl.formatMessage({ id: 'project_download.label.author' })}
         ariaControls="EventListFilters-filter-author-listbox"
       />,
@@ -191,7 +194,7 @@ export class EventListFilters extends React.Component<Props, State> {
           component={select}
           id="EventListFilters-filter-theme"
           name="theme"
-          placeholder={intl.formatMessage({ id: 'type-theme' })}
+          placeholder={intl.formatMessage({ id: 'project.searchform.all_themes' })}
           label={intl.formatMessage({ id: 'type-theme' })}
           options={themeOptions}
           role="combobox"
@@ -207,7 +210,7 @@ export class EventListFilters extends React.Component<Props, State> {
           component={select}
           id="EventListFilters-filter-project"
           name="project"
-          placeholder={intl.formatMessage({ id: 'type-project' })}
+          placeholder={intl.formatMessage({ id: 'admin.label.project' })}
           label={intl.formatMessage({ id: 'type-project' })}
           options={projectOptions}
           role="combobox"
@@ -228,7 +231,7 @@ export class EventListFilters extends React.Component<Props, State> {
           aria-haspopup="true"
           id="EventListFilters-filter-userType"
           aria-controls="EventListFilters-filter-userType-listbox"
-          placeholder={intl.formatMessage({ id: 'filter-userType' })}
+          placeholder={intl.formatMessage({ id: 'global.select_project_types' })}
           label={intl.formatMessage({ id: 'filter-userType' })}
           options={userTypes.map(u => ({ value: u.id, label: u.name }))}
         />,
