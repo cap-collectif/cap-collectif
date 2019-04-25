@@ -13,6 +13,10 @@ services:
     tags:
       - { name: twig.extension }
 
+  Capco\AppBundle\Twig\SiteImageExtension:
+    arguments:
+      $kernelEnvironment: '%kernel.environment%'
+
   Capco\AppBundle\Twig\ReactIntlExtension:
     arguments:
       $translationFolder: '%kernel.root_dir%/../translations/'
