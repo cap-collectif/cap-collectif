@@ -16,6 +16,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $siteName,
         string $state,
         string $userUrl,
+        string $configUrl,
         string $baseUrl,
         string $stepUrl = '#'
     ): self {
@@ -32,6 +33,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
                 $reply,
                 $state,
                 $userUrl,
+                $configUrl,
                 $baseUrl,
                 $stepUrl
             )
@@ -47,6 +49,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $siteName,
         string $state,
         string $userUrl,
+        string $configUrl,
         string $baseUrl,
         string $stepUrl = '#'
     ): self {
@@ -63,6 +66,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
                 $reply,
                 $state,
                 $userUrl,
+                $configUrl,
                 $baseUrl,
                 $stepUrl
             )
@@ -76,6 +80,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         Reply $reply,
         string $state,
         string $userUrl,
+        string $configUrl,
         string $baseUrl,
         string $stepUrl
     ): array {
@@ -88,6 +93,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             'questionnaireTitle' => $reply->getQuestionnaire()->getTitle(),
             'state' => $state,
             'userUrl' => $userUrl,
+            'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
             'stepUrl' => $stepUrl,
         ];
@@ -100,6 +106,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         array $reply,
         string $state,
         string $userUrl,
+        string $configUrl,
         string $baseUrl,
         string $stepUrl
     ): array {
@@ -111,6 +118,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             'questionnaireTitle' => $reply['questionnaire_title'],
             'state' => $state,
             'userUrl' => $userUrl,
+            'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
             'stepUrl' => $stepUrl,
         ];

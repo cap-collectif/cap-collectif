@@ -31,13 +31,19 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
     public function onCreate(Reply $reply, string $stepUrl): bool
     {
+        $questionnaire = $reply->getQuestionnaire();
+        $step = $questionnaire->getStep();
+
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
             ['slug' => $reply->getAuthor()->getSlug()],
             RouterInterface::ABSOLUTE_URL
         );
-        $questionnaire = $reply->getQuestionnaire();
-        $step = $questionnaire->getStep();
+        $configUrl = $this->router->generate(
+            'admin_capco_app_questionnaire_edit',
+            ['id' => $questionnaire->getId()],
+            RouterInterface::ABSOLUTE_URL
+        );
 
         return $this->mailer->sendMessage(
             QuestionnaireReplyAdminMessage::create(
@@ -49,6 +55,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $this->siteParams->getValue('global.site.fullname'),
                 self::QUESTIONNAIRE_REPLY_CREATE_STATE,
                 $userUrl,
+                $configUrl,
                 $this->baseUrl,
                 $stepUrl
             )
@@ -57,13 +64,19 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
     public function onUpdate(Reply $reply, string $stepUrl): bool
     {
+        $questionnaire = $reply->getQuestionnaire();
+        $step = $questionnaire->getStep();
+
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
             ['slug' => $reply->getAuthor()->getSlug()],
             RouterInterface::ABSOLUTE_URL
         );
-        $questionnaire = $reply->getQuestionnaire();
-        $step = $questionnaire->getStep();
+        $configUrl = $this->router->generate(
+            'admin_capco_app_questionnaire_edit',
+            ['id' => $questionnaire->getId()],
+            RouterInterface::ABSOLUTE_URL
+        );
 
         return $this->mailer->sendMessage(
             QuestionnaireReplyAdminMessage::create(
@@ -75,6 +88,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $this->siteParams->getValue('global.site.fullname'),
                 self::QUESTIONNAIRE_REPLY_UPDATE_STATE,
                 $userUrl,
+                $configUrl,
                 $this->baseUrl,
                 $stepUrl
             )
@@ -88,6 +102,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
      *                     [
      *                     'author_email' => string,
      *                     'author_slug' => string,
+     *                     'questionnaire_id' => string,
      *                     'project_title' => string,
      *                     'deleted_at' => string, which will be transformed into a \DateTimeInterface
      *                     'questionnaire_title' => string,
@@ -105,6 +120,11 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             ['slug' => $reply['author_slug']],
             RouterInterface::ABSOLUTE_URL
         );
+        $configUrl = $this->router->generate(
+            'admin_capco_app_questionnaire_edit',
+            ['id' => $reply['questionnaire_id']],
+            RouterInterface::ABSOLUTE_URL
+        );
 
         return $this->mailer->sendMessage(
             QuestionnaireReplyAdminMessage::createFromDeletedReply(
@@ -116,6 +136,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $this->siteParams->getValue('global.site.fullname'),
                 self::QUESTIONNAIRE_REPLY_DELETE_STATE,
                 $userUrl,
+                $configUrl,
                 $this->baseUrl
             )
         );

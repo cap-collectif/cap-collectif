@@ -40,6 +40,7 @@ Scenario: Email should be sent to admin if a user delete a reply in a questionna
       "deleted_at": "2019-04-24 11:40:34",
       "project_title": "Projet avec questionnaire",
       "questionnaire_title": "Votre avis sur les JO 2024",
+      "questionnaire_id": "questionnaire1",
       "author_name": "welcomattic"
     },
     "state": "delete"

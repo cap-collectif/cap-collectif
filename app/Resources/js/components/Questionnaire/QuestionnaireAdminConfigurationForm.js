@@ -158,7 +158,6 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
                 name="notifyResponseCreate"
                 component={component}
                 type="checkbox"
-                label={<FormattedMessage id="proposal_form.notifications.on_create" />}
                 id="notify_response_create">
                 <FormattedMessage id="proposal_form.notifications.on_create" />
               </Field>
@@ -166,7 +165,6 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
                 name="notifyResponseUpdate"
                 component={component}
                 type="checkbox"
-                label={<FormattedMessage id="admin.fields.proposal_form.notification.on_update" />}
                 id="notify_response_update">
                 <FormattedMessage id="admin.fields.proposal_form.notification.on_update" />
               </Field>
@@ -174,7 +172,6 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
                 name="notifyResponseDelete"
                 component={component}
                 type="checkbox"
-                label={<FormattedMessage id="admin.fields.proposal_form.notification.on_delete" />}
                 id="notify_response_delete">
                 <FormattedMessage id="admin.fields.proposal_form.notification.on_delete" />
               </Field>
