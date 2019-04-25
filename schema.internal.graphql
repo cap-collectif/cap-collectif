@@ -4396,6 +4396,12 @@ type Query {
   # Get the current favicon
   siteFavicon: SiteImage!
 
+  # Get a site image
+  siteImage(
+    # The site image keyname
+    keyname: String
+  ): SiteImage
+
   # Get the current registration form
   registrationForm: RegistrationForm
 

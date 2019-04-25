@@ -20,7 +20,7 @@ type Props = {
 export default class CustomPageFields extends React.Component<Props> {
   render() {
     return (
-      <FormSection name="custom">
+      <FormSection name="custom" className="custom-page-fields">
         <Field
           name="metadescription"
           type="text"

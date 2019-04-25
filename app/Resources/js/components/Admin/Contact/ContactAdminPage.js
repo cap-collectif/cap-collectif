@@ -5,7 +5,8 @@ import { reduxForm } from 'redux-form';
 import { Button } from 'react-bootstrap';
 import type { FormProps } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
+import { type ReadyState, QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
+import type { ContactAdminPage_query } from '~relay/ContactAdminPage_query.graphql';
 
 import type { State } from '../../../types';
 import ContactAdminList from './ContactAdminList';
@@ -18,6 +19,7 @@ import UpdateContactPageMutation from '../../../mutations/UpdateContactPageMutat
 
 type Props = {
   ...FormProps,
+  query: ContactAdminPage_query,
 };
 
 const formName = 'contact-admin-form';
@@ -70,6 +72,7 @@ const renderContactList = ({
 export class ContactAdminPage extends React.Component<Props> {
   render() {
     const { invalid, pristine, submitting, handleSubmit } = this.props;
+
     return (
       <form onSubmit={handleSubmit}>
         <div className="box box-primary container-fluid">
@@ -79,7 +82,6 @@ export class ContactAdminPage extends React.Component<Props> {
             </h3>
           </div>
           <div className="box-content">
-            {/* TODO: Fix Flow here */}
             {/* $FlowFixMe */}
             <ContactAdminForm {...this.props} formName={formName} />
             <QueryRenderer
@@ -101,7 +103,7 @@ export class ContactAdminPage extends React.Component<Props> {
               <FormattedMessage id="admin.fields.project.advanced" />
             </h3>
           </div>
-          <CustomPageFields formName={formName} />
+          <CustomPageFields formName={formName} {...this.props} />
         </div>
 
         <div className="box no-border">
@@ -122,10 +124,15 @@ export class ContactAdminPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: State, props: any) => ({
   initialValues: {
     title: state.default.parameters['contact.title'],
     description: state.default.parameters['contact.content.body'],
+    custom: {
+      metadescription: state.default.parameters['contact.metadescription'],
+      picto: props.query.siteImage.media,
+      customcode: state.default.parameters['contact.customcode'],
+    },
   },
 });
 
@@ -135,4 +142,17 @@ const form = reduxForm({
   form: formName,
 })(ContactAdminPage);
 
-export default connect(mapStateToProps)(form);
+export default createFragmentContainer(connect(mapStateToProps)(form), {
+  query: graphql`
+    fragment ContactAdminPage_query on Query {
+      siteImage(keyname: "contact.picto") {
+        id
+        media {
+          id
+          name
+          url
+        }
+      }
+    }
+  `,
+});

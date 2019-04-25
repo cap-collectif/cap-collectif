@@ -14,16 +14,7 @@ type Props = {
 };
 
 const ContactAdminForm = (props: Props) => {
-  const {
-    error,
-    valid,
-
-    formName,
-    submitting,
-    handleSubmit,
-    submitFailed,
-    submitSucceeded,
-  } = props;
+  const { error, valid, formName, submitting, handleSubmit, submitFailed, submitSucceeded } = props;
   const optional = (
     <span className="excerpt">
       <FormattedMessage id="global.form.optional" />
