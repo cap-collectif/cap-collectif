@@ -47,6 +47,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
         return $this->mailer->sendMessage(
             QuestionnaireReplyAdminMessage::create(
+                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                 $reply,
                 $step->getProject()->getTitle(),
                 $questionnaire->getTitle(),
@@ -80,6 +81,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
         return $this->mailer->sendMessage(
             QuestionnaireReplyAdminMessage::create(
+                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                 $reply,
                 $step->getProject()->getTitle(),
                 $questionnaire->getTitle(),
@@ -100,7 +102,6 @@ class QuestionnaireReplyNotifier extends BaseNotifier
      *                     The reply is an array because a Reply entity doesn't have soft delete
      *                     The array looks like this :
      *                     [
-     *                     'author_email' => string,
      *                     'author_slug' => string,
      *                     'questionnaire_id' => string,
      *                     'project_title' => string,
@@ -128,6 +129,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
         return $this->mailer->sendMessage(
             QuestionnaireReplyAdminMessage::createFromDeletedReply(
+                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                 $reply,
                 $reply['project_title'],
                 $reply['questionnaire_title'],

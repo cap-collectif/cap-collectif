@@ -8,6 +8,7 @@ use Capco\AppBundle\Mailer\Message\DefaultMessage;
 final class QuestionnaireReplyAdminMessage extends DefaultMessage
 {
     public static function create(
+        string $recipientEmail,
         Reply $reply,
         string $projectTitle,
         string $questionnaireTitle,
@@ -21,7 +22,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $stepUrl = '#'
     ): self {
         return new self(
-            $reply->getAuthor()->getEmail(),
+            $recipientEmail,
             null,
             "email.notification.questionnaire.reply.subject.${state}",
             self::getMySubjectVars($authorUsername, $questionnaireTitle),
@@ -41,6 +42,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
     }
 
     public static function createFromDeletedReply(
+        string $recipientEmail,
         array $reply,
         string $projectTitle,
         string $questionnaireTitle,
@@ -54,7 +56,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $stepUrl = '#'
     ): self {
         return new self(
-            $reply['author_email'],
+            $recipientEmail,
             null,
             "email.notification.questionnaire.reply.subject.${state}",
             self::getMySubjectVars($authorUsername, $questionnaireTitle),

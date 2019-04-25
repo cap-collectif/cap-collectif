@@ -35,7 +35,6 @@ Scenario: Email should be sent to admin if a user delete a reply in a questionna
   """
   {
     "reply": {
-      "author_email": "msantostefano@jolicode.com",
       "author_slug": "welcomattic",
       "deleted_at": "2019-04-24 11:40:34",
       "project_title": "Projet avec questionnaire",
