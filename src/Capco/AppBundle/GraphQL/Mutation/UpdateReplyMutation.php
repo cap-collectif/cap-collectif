@@ -3,8 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ReplyType;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Notifier\UserNotifier;
@@ -26,6 +29,7 @@ class UpdateReplyMutation implements MutationInterface
     private $replyRepo;
     private $userNotifier;
     private $stepUrlResolver;
+    private $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -34,7 +38,8 @@ class UpdateReplyMutation implements MutationInterface
         RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
         UserNotifier $userNotifier,
-        StepUrlResolver $stepUrlResolver
+        StepUrlResolver $stepUrlResolver,
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -43,6 +48,7 @@ class UpdateReplyMutation implements MutationInterface
         $this->responsesFormatter = $responsesFormatter;
         $this->userNotifier = $userNotifier;
         $this->stepUrlResolver = $stepUrlResolver;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -80,6 +86,18 @@ class UpdateReplyMutation implements MutationInterface
             $project = $step->getProject();
             $endAt = $step->getEndAt();
             $stepUrl = $this->stepUrlResolver->__invoke($step);
+            if ($questionnaire->isNotifyResponseUpdate()) {
+                $this->publisher->publish(
+                    'questionnaire.reply',
+                    new Message(
+                        json_encode([
+                            'replyId' => $reply->getId(),
+                            'stepUrl' => $stepUrl,
+                            'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE,
+                        ])
+                    )
+                );
+            }
             $this->userNotifier->acknowledgeReply(
                 $project,
                 $reply,
@@ -92,6 +110,7 @@ class UpdateReplyMutation implements MutationInterface
         }
 
         $this->em->flush();
+
         $this->redisStorageHelper->recomputeUserCounters($user);
 
         return ['reply' => $reply];

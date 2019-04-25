@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Writer\WriterInterface;
-use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\Command\Utils\exportUtils;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
@@ -13,11 +13,12 @@ use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
 use Overblog\GraphQLBundle\Request\Executor;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateCsvFromConsultationStepCommand extends BaseExportCommand
+class CreateCsvFromConsultationStepCommand extends Command
 {
     protected const CONTRIBUTION_PER_PAGE = 100;
     protected const VOTE_PER_PAGE = 100;
@@ -365,7 +366,6 @@ EOF;
     public function __construct(
         Manager $toggleManager,
         ConsultationStepRepository $consultationStepRepository,
-        ExportUtils $exportUtils,
         Executor $executor,
         GraphQlAclListener $listener,
         ConnectionTraversor $connectionTraversor,
@@ -377,12 +377,11 @@ EOF;
         $this->consultationStepRepository = $consultationStepRepository;
         $this->projectRootDir = $projectRootDir;
         $this->connectionTraversor = $connectionTraversor;
-        parent::__construct($exportUtils);
+        parent::__construct();
     }
 
     protected function configure(): void
     {
-        parent::configure();
         $this->setDescription('Create csv file from consultation step data');
     }
 
@@ -627,7 +626,7 @@ EOF;
         // we add a row for 1 Opinion.
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             $row[] = isset($this->contributionHeaderMap[$path])
-                ? $this->exportUtils->parseCellValue(
+                ? exportUtils::parseCellValue(
                     Arr::path($contribution, $this->contributionHeaderMap[$path])
                 )
                 : '';
@@ -938,7 +937,7 @@ EOF;
 
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             if (isset($headerMap[$path])) {
-                $row[] = $this->exportUtils->parseCellValue(Arr::path($node, $headerMap[$path]));
+                $row[] = exportUtils::parseCellValue(Arr::path($node, $headerMap[$path]));
             } elseif (isset($this->contributionHeaderMap[$columnName])) {
                 $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
             } else {

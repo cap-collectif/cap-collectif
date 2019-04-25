@@ -21,6 +21,17 @@ class SiteImageRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
+    public function getAppLogo(): ?SiteImage
+    {
+        $qb = $this->createQueryBuilder('si');
+
+        return $qb
+            ->andWhere($qb->expr()->eq('si.keyname', ':keyname'))
+            ->setParameter('keyname', 'image.logo')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function getValuesIfEnabled()
     {
         return $this->getEntityManager()

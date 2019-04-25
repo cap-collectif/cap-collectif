@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Helper\EnvHelper;
@@ -76,10 +75,8 @@ class ProjectDownloadResolver
         return $headers;
     }
 
-    public function getContent(
-        AbstractStep $step,
-        ExportUtils $exportUtils
-    ): \PHPExcel_Writer_IWriter {
+    public function getContent(AbstractStep $step): \PHPExcel_Writer_IWriter
+    {
         if (!$step) {
             throw new NotFoundHttpException('Step not found');
         }
@@ -95,7 +92,7 @@ class ProjectDownloadResolver
 
         foreach ($data as &$d) {
             foreach ($d as $key => $value) {
-                $d[$key] = $exportUtils->parseCellValue($this->formatText($value));
+                $d[$key] = $this->formatText($value);
             }
         }
 

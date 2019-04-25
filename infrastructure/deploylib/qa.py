@@ -32,31 +32,6 @@ def graphql_schemas(checkSame=False):
     if checkSame:
         local('if [[ $(git diff -G. --name-only *.graphql | wc -c) -ne 0 ]]; then git --no-pager diff *.graphql && echo "\n\033[31mThe following schemas are not up to date:\033[0m" && git diff --name-only *.graphql && echo "\033[31mYou should run \'yarn generate-graphql-files\' to update your *.graphql files !\033[0m" && exit 1; fi',  capture=False, shell='/bin/bash')
 
-@task(environments=['local'])
-def snapshots():
-    commands = [
-        'capco:export:users --snapshot',
-        'capco:export:consultation --snapshot',
-        'capco:export:projects-contributors --snapshot',
-        'capco:export:proposalStep --snapshot',
-        'capco:export:questionnaire --snapshot',
-    ]
-    extensions = [
-        'csv',
-        'xlsx',
-        'xls',
-    ]
-    env.service_command('bin/console capco:toggle:enable export --env test --no-debug', 'application', env.www_app)
-    for extension in extensions:
-        env.service_command('rm -rf var/www/web/export/*.' + extension , 'application', env.www_app, 'root')
-
-    for command in commands:
-        env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
-
-    env.service_command('rm -rf var/www/features/commands/__snapshots__/*', 'application', env.www_app, 'root')
-    for extension in extensions:
-        env.service_command('cp web/export/*.' + extension + ' features/commands/__snapshots__/ 2>/dev/null || :', 'application', env.www_app)
-
 @task(environments=['local', 'ci'])
 def behat(fast_failure='true', profile=False, suite='false', tags='false', timer='true'):
     "Run Gherkin Tests"
@@ -68,10 +43,10 @@ def behat(fast_failure='true', profile=False, suite='false', tags='false', timer
 
     for job in profiles:
         command = ('php -d memory_limit=-1 ./bin/behat'
-            + ('', ' --log-step-times')[timer != 'false']
-            + ' -p ' + job
-            + ('', '  --suite=' + suite)[suite != 'false']
-            + ('', '  --tags=' + tags)[tags != 'false']
+            + ('', ' --log-step-times')[timer != 'false'] 
+            + ' -p ' + job 
+            + ('', '  --suite=' + suite)[suite != 'false'] 
+            + ('', '  --tags=' + tags)[tags != 'false'] 
             + ('', '  --stop-on-failure')[fast_failure == 'true'])
         env.service_command(command, 'application', env.www_app)
 

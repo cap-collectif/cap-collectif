@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
-use Capco\AppBundle\Command\Utils\ExportUtils;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Arr;
 use Box\Spout\Writer\WriterFactory;
@@ -17,8 +16,9 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
-class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
+class CreateCsvFromProjectsContributorsCommand extends ContainerAwareCommand
 {
     private const USER_FRAGMENT = '
     id
@@ -86,7 +86,6 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
     public function __construct(
         GraphQlAclListener $listener,
         ConnectionTraversor $connectionTraversor,
-        ExportUtils $exportUtils,
         Executor $executor,
         Manager $toggleManager,
         string $projectRootDir,
@@ -100,12 +99,11 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         $this->toggleManager = $toggleManager;
         $this->projectRootDir = $projectRootDir;
         $this->projectRepository = $repository;
-        parent::__construct($exportUtils);
+        parent::__construct();
     }
 
     protected function configure(): void
     {
-        parent::configure();
         $this->setName('capco:export:projects-contributors')->setDescription(
             'Create csv file from projects contributors data'
         );
@@ -148,34 +146,30 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                 'contributors',
                 function ($edge) use ($progress) {
                     $contributor = $edge['node'];
-                    $row = array_map(
-                        [$this->exportUtils, 'parseCellValue'],
-                        [
-                            $contributor['id'],
-                            $contributor['email'],
-                            $contributor['username'],
-                            $contributor['userType'] ? $contributor['userType']['name'] : null,
-                            $contributor['createdAt'],
-                            $contributor['updatedAt'],
-                            $contributor['lastLogin'],
-                            $contributor['rolesText'],
-                            $contributor['consentExternalCommunication'],
-                            $contributor['enabled'],
-                            $contributor['isEmailConfirmed'],
-                            $contributor['locked'],
-                            $contributor['phoneConfirmed'],
-                            $contributor['gender'],
-                            $contributor['dateOfBirth'],
-                            $contributor['website'],
-                            $contributor['biography'],
-                            $contributor['address'],
-                            $contributor['zipCode'],
-                            $contributor['city'],
-                            $contributor['phone'],
-                            $contributor['url'],
-                        ]
-                    );
-                    $this->writer->addRow($row);
+                    $this->writer->addRow([
+                        $contributor['id'],
+                        $contributor['email'],
+                        $contributor['username'],
+                        $contributor['userType'] ? $contributor['userType']['name'] : null,
+                        $contributor['createdAt'],
+                        $contributor['updatedAt'],
+                        $contributor['lastLogin'],
+                        $contributor['rolesText'],
+                        $contributor['consentExternalCommunication'],
+                        $contributor['enabled'],
+                        $contributor['isEmailConfirmed'],
+                        $contributor['locked'],
+                        $contributor['phoneConfirmed'],
+                        $contributor['gender'],
+                        $contributor['dateOfBirth'],
+                        $contributor['website'],
+                        $contributor['biography'],
+                        $contributor['address'],
+                        $contributor['zipCode'],
+                        $contributor['city'],
+                        $contributor['phone'],
+                        $contributor['url'],
+                    ]);
                     $progress->advance();
                 },
                 function ($pageInfo) use ($p) {

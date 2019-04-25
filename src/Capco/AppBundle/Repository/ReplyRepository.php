@@ -14,6 +14,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 
+/**
+ * @method Reply|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Reply|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Reply[]    findAll()
+ * @method Reply[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) */
 class ReplyRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;

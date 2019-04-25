@@ -38,6 +38,15 @@ InternalQuestionnaire:
         type: 'Boolean!'
       participants:
         type: 'InternalUserConnection!'
+      notifyResponseCreate:
+        description: 'Notify when a response is created for this questionnaire'
+        type: 'Boolean!'
+      notifyResponseUpdate:
+        description: 'Notify when a response is updated for this questionnaire'
+        type: 'Boolean!'
+      notifyResponseDelete:
+        description: 'Notify when a response is deleted for this questionnaire'
+        type: 'Boolean!'
       replies:
         type: 'InternalReplyConnection!'
         argsBuilder: 'Relay::Connection'
