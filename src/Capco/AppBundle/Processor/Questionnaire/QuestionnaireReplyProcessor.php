@@ -26,15 +26,15 @@ class QuestionnaireReplyProcessor implements ProcessorInterface
         switch ($state) {
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE:
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE:
-                list($replyId, $stepUrl) = [$json['replyId'], $json['stepUrl']];
+                $replyId = $json['replyId'];
                 $reply = $this->repository->find($replyId);
                 if (!$reply) {
                     throw new \RuntimeException('Unable to find reply with id : ' . $replyId);
                 }
 
                 return QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE === $state
-                    ? $this->notifier->onCreate($reply, $stepUrl)
-                    : $this->notifier->onUpdate($reply, $stepUrl);
+                    ? $this->notifier->onCreate($reply)
+                    : $this->notifier->onUpdate($reply);
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_DELETE_STATE:
                 $reply = $json['reply'];
 

@@ -19,7 +19,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $stepUrl = '#'
+        string $replyShowUrl = '#'
     ): self {
         return new self(
             $recipientEmail,
@@ -36,7 +36,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
                 $userUrl,
                 $configUrl,
                 $baseUrl,
-                $stepUrl
+                $replyShowUrl
             )
         );
     }
@@ -53,7 +53,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $stepUrl = '#'
+        string $replyShowUrl = '#'
     ): self {
         return new self(
             $recipientEmail,
@@ -70,7 +70,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
                 $userUrl,
                 $configUrl,
                 $baseUrl,
-                $stepUrl
+                $replyShowUrl
             )
         );
     }
@@ -84,7 +84,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $stepUrl
+        string $replyShowUrl
     ): array {
         return [
             'projectTitle' => self::escape($title),
@@ -97,7 +97,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             'userUrl' => $userUrl,
             'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
-            'stepUrl' => $stepUrl,
+            'replyShowUrl' => $replyShowUrl,
         ];
     }
 
@@ -110,7 +110,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $userUrl,
         string $configUrl,
         string $baseUrl,
-        string $stepUrl
+        string $replyShowUrl
     ): array {
         return [
             'projectTitle' => self::escape($title),
@@ -122,7 +122,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             'userUrl' => $userUrl,
             'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
-            'stepUrl' => $stepUrl,
+            'replyShowUrl' => $replyShowUrl,
         ];
     }
 

@@ -7,7 +7,6 @@ Scenario: Email should be sent to admin if a user create a reply in a questionna
   """
   {
     "replyId": "reply1",
-    "stepUrl": "https://capco.dev/project/projet-avec-questionnaire/questionnaire/questionnaire-des-jo-2024",
     "state": "create"
   }
   """
@@ -21,7 +20,6 @@ Scenario: Email should be sent to admin if a user update a reply in a questionna
   """
   {
     "replyId": "reply1",
-    "stepUrl": "https://capco.dev/project/projet-avec-questionnaire/questionnaire/questionnaire-des-jo-2024",
     "state": "update"
   }
   """

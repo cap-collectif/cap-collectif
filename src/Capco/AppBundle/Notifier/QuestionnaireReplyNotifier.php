@@ -29,7 +29,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         parent::__construct($mailer, $siteParams, $userResolver);
     }
 
-    public function onCreate(Reply $reply, string $stepUrl): bool
+    public function onCreate(Reply $reply): bool
     {
         $questionnaire = $reply->getQuestionnaire();
         $step = $questionnaire->getStep();
@@ -42,6 +42,11 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         $configUrl = $this->router->generate(
             'admin_capco_app_questionnaire_edit',
             ['id' => $questionnaire->getId()],
+            RouterInterface::ABSOLUTE_URL
+        );
+        $replyShowUrl = $this->router->generate(
+            'admin_capco_app_reply_show',
+            ['id' => $reply->getId()],
             RouterInterface::ABSOLUTE_URL
         );
 
@@ -58,12 +63,12 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $userUrl,
                 $configUrl,
                 $this->baseUrl,
-                $stepUrl
+                $replyShowUrl
             )
         );
     }
 
-    public function onUpdate(Reply $reply, string $stepUrl): bool
+    public function onUpdate(Reply $reply): bool
     {
         $questionnaire = $reply->getQuestionnaire();
         $step = $questionnaire->getStep();
@@ -76,6 +81,11 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         $configUrl = $this->router->generate(
             'admin_capco_app_questionnaire_edit',
             ['id' => $questionnaire->getId()],
+            RouterInterface::ABSOLUTE_URL
+        );
+        $replyShowUrl = $this->router->generate(
+            'admin_capco_app_reply_show',
+            ['id' => $reply->getId()],
             RouterInterface::ABSOLUTE_URL
         );
 
@@ -92,7 +102,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $userUrl,
                 $configUrl,
                 $this->baseUrl,
-                $stepUrl
+                $replyShowUrl
             )
         );
     }
