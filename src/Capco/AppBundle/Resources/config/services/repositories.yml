@@ -234,7 +234,7 @@ services:
 
   Capco\AppBundle\Repository\QuestionnaireStepRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:QuestionnaireStep']
+    arguments: ['CapcoAppBundle:Steps\QuestionnaireStep']
 
   Capco\AppBundle\Repository\FollowerRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
