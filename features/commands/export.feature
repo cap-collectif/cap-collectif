@@ -4,8 +4,9 @@ Feature: Export Commands
 Background:
   Given feature "export" is enabled
 
+@database
 Scenario: Admin wants to export projects contributors
-  Given I run "capco:export:projects-contributors"
+  Given I run "capco:export:projects-contributors --snapshot"
   Then the command exit code should be 0
   And exported "csv" file with name "participants_appel-a-projets.csv" should match its snapshot
   And exported "csv" file with name "participants_bp-avec-vote-classement.csv" should match its snapshot
@@ -31,7 +32,7 @@ Scenario: Admin wants to export projects contributors
 
 @parallel-scenario
 Scenario: Admin wants to export consultation steps
-  Given I run "capco:export:consultation"
+  Given I run "capco:export:consultation --snapshot"
   Then the command exit code should be 0
   And exported "csv" file with name "croissance-innovation-disruption_collecte-des-avis.csv" should match its snapshot
   And exported "csv" file with name "projet-de-loi-renseignement_elaboration-de-la-loi.csv" should match its snapshot
@@ -41,7 +42,7 @@ Scenario: Admin wants to export consultation steps
 
 @parallel-scenario
 Scenario: Admin wants to export collect steps
-  Given I run "capco:export:proposalStep"
+  Given I run "capco:export:proposalStep --snapshot"
   Then the command exit code should be 0
   And exported "csv" file with name "budget-participatif-rennes_depot-avec-vote.csv" should match its snapshot
   And exported "csv" file with name "appel-a-projets_collecte-des-propositions-avec-vote-simple.csv" should match its snapshot
@@ -69,7 +70,7 @@ Scenario: Admin wants to export collect steps
 
 @database
 Scenario: Admin wants to export questionnaire steps
-  Given I run "capco:export:questionnaire"
+  Given I run "capco:export:questionnaire --snapshot"
   Then the command exit code should be 0
   And exported "xlsx" file with name "projet-avec-questionnaire_essais-de-sauts-conditionnels.xlsx" should match its snapshot
   And exported "xlsx" file with name "projet-avec-questionnaire_etape-de-questionnaire-avec-questionnaire-sauts-conditionnels.xlsx" should match its snapshot
@@ -79,7 +80,7 @@ Scenario: Admin wants to export questionnaire steps
 
 @database
 Scenario: User want to export his datas and 7 days after the cron delete the zip archive
-  Given I run "capco:export:user userAdmin"
+  Given I run "capco:export:user userAdmin --snapshot"
   And the command exit code should be 0
   Then there should be a personal data archive for user "userAdmin"
   And I run "capco:user_archives:delete"
@@ -88,6 +89,6 @@ Scenario: User want to export his datas and 7 days after the cron delete the zip
 
 @parallel-scenario
 Scenario: Admin wants to export users
-  Given I run "capco:export:users"
+  Given I run "capco:export:users --snapshot"
   And exported "csv" file with name "users.csv" should match its snapshot
   Then the command exit code should be 0

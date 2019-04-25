@@ -1,5 +1,5 @@
 ﻿id,email,userName,typeName,createdAt,updatedAt,lastLogin,rolesText,consentExternalCommunication,enabled,isEmailConfirmed,locked,phoneConfirmed,gender,dateOfBirth,websiteUrl,biography,address,zipCode,city,phone,profileUrl
-VXNlcjp1c2VyNTAy,msantostefano@jolicode.com,welcomattic,Citoyen,"2015-01-01 00:00:01",,,"Super Admin|Utilisateur",,1,1,,,,,,,,,,,https://capco.dev/profile/welcomattic
-VXNlcjp1c2VyNTA2,user_not_confirmed@test.com,user_not_confirmed,Citoyen,"2019-04-02 04:12:03",,,Utilisateur,,1,,,,,,,,,,,+33628353289,https://capco.dev/profile/usernotconfirmed
-VXNlcjp1c2VyNTE1,user_updating_email@test.com,user_updating_email,Citoyen,"2015-01-01 00:00:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/userupdatingemail
-VXNlcjp1c2VyQWRtaW4=,admin@test.com,admin,Citoyen,"2015-01-01 00:00:05",,,Administrateur|Utilisateur,,1,1,,1,,,,,,,,+33675492871,https://capco.dev/profile/admin
+VXNlcjp1c2VyNTAy,msantostefano@jolicode.com,welcomattic,Citoyen,@datetime@,,,"Super Admin|Utilisateur",No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/welcomattic
+VXNlcjp1c2VyNTA2,user_not_confirmed@test.com,user_not_confirmed,Citoyen,@datetime@,,,Utilisateur,No,Yes,No,No,No,,,,,,,,+33628353289,https://capco.dev/profile/usernotconfirmed
+VXNlcjp1c2VyNTE1,user_updating_email@test.com,user_updating_email,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/userupdatingemail
+VXNlcjp1c2VyQWRtaW4=,admin@test.com,admin,Citoyen,@datetime@,,,Administrateur|Utilisateur,No,Yes,Yes,No,Yes,,,,,,,,+33675492871,https://capco.dev/profile/admin
