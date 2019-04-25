@@ -80,7 +80,7 @@ Scenario: Admin wants to export questionnaire steps
 
 @database
 Scenario: User want to export his datas and 7 days after the cron delete the zip archive
-  Given I run "capco:export:user userAdmin --snapshot"
+  Given I run "capco:export:user userAdmin"
   And the command exit code should be 0
   Then there should be a personal data archive for user "userAdmin"
   And I run "capco:user_archives:delete"

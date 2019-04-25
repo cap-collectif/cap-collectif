@@ -46,11 +46,14 @@ def snapshots():
         'xlsx',
         'xls',
     ]
-    env.service_command('bin/console capco:toggle:enable export --env dev --no-debug', 'application', env.www_app)
-    for command in commands:
-        env.service_command('bin/console ' + command + ' --env dev --no-debug', 'application', env.www_app)
+    env.service_command('bin/console capco:toggle:enable export --env test --no-debug', 'application', env.www_app)
+    for extension in extensions:
+        env.service_command('rm -rf var/www/web/export/*.' + extension , 'application', env.www_app, 'root')
 
-    env.service_command('rm -rf var/www/features/commands/__snapshots__', 'application', env.www_app, 'root')
+    for command in commands:
+        env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
+
+    env.service_command('rm -rf var/www/features/commands/__snapshots__/*', 'application', env.www_app, 'root')
     for extension in extensions:
         env.service_command('cp web/export/*.' + extension + ' features/commands/__snapshots__/ 2>/dev/null || :', 'application', env.www_app)
 
