@@ -11,31 +11,32 @@
         ["@babel/preset-react", {
             // Adds component stack to warning messages
             // Adds __self attribute to JSX which React will use for some warnings
-            development: false,
+            "development": false,
             // Will use the native built-in instead of trying to polyfill
             // behavior for any plugins that require one.
-            useBuiltIns: true,
+            "useBuiltIns": true,
         }],
         "@babel/preset-flow",
         // Latest stable ECMAScript features
         ["@babel/preset-env", {
             // We want to be IE 11 compatible
-            targets: {
-              ie: 11,
+            "targets": {
+              "ie": 11
             },
             // Users cannot override this behavior because this Babel
             // configuration is highly tuned for ES5 support
-            ignoreBrowserslistConfig: true,
+            "ignoreBrowserslistConfig": true,
             // If users import all core-js they're probably not concerned with
             // bundle size. We shouldn't rely on magic to try and shrink it.
-            useBuiltIns: false,
+            "useBuiltIns": false,
             // Do not transform modules to CJS
-            modules: false,
+            "modules": false,
             // Exclude transforms that make all code slower
-            exclude: ['transform-typeof-symbol'],
+            "exclude": ["transform-typeof-symbol"]
         }]
     ],
     "plugins": [
+        "@babel/plugin-transform-arrow-functions",
         "@babel/plugin-proposal-nullish-coalescing-operator",
         "@babel/plugin-proposal-class-properties",
         "styled-components",
