@@ -86,18 +86,6 @@ class UpdateReplyMutation implements MutationInterface
             $project = $step->getProject();
             $endAt = $step->getEndAt();
             $stepUrl = $this->stepUrlResolver->__invoke($step);
-            if ($questionnaire->isNotifyResponseUpdate()) {
-                $this->publisher->publish(
-                    'questionnaire.reply',
-                    new Message(
-                        json_encode([
-                            'replyId' => $reply->getId(),
-                            'stepUrl' => $stepUrl,
-                            'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE,
-                        ])
-                    )
-                );
-            }
             $this->userNotifier->acknowledgeReply(
                 $project,
                 $reply,
@@ -110,6 +98,18 @@ class UpdateReplyMutation implements MutationInterface
         }
 
         $this->em->flush();
+
+        if ($questionnaire && !$reply->isDraft() && $questionnaire->isNotifyResponseUpdate()) {
+            $this->publisher->publish(
+                'questionnaire.reply',
+                new Message(
+                    json_encode([
+                        'replyId' => $reply->getId(),
+                        'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE,
+                    ])
+                )
+            );
+        }
 
         $this->redisStorageHelper->recomputeUserCounters($user);
 
