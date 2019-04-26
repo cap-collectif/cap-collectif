@@ -113,12 +113,12 @@ parameters:
   env(SYMFONY_TWILIO_NUMBER): +***REMOVED***
   env(SYMFONY_DISABLE_MAIL_DELIVERY): false
   env(SYMFONY_SENTRY_DSN): ~
-  env(SYMFONY_OPENID_CLIENT_ID): account
-  env(SYMFONY_OPENID_SECRET): ***REMOVED***
-  env(SYMFONY_OPENID_AUTHORIZATION_URL): http://192.168.64.2:8080/auth/realms/master/protocol/openid-connect/auth
-  env(SYMFONY_OPENID_ACCESS_TOKEN_URL): http://192.168.64.2:8080/auth/realms/master/protocol/openid-connect/token
-  env(SYMFONY_OPENID_USERINFO_URL): http://192.168.64.2:8080/auth/realms/master/protocol/openid-connect/userinfo
-  env(SYMFONY_OPENID_LOGOUT_URL): http://192.168.64.2:8080/auth/realms/master/protocol/openid-connect/logout
+  env(SYMFONY_OPENID_CLIENT_ID): ~
+  env(SYMFONY_OPENID_SECRET): ~
+  env(SYMFONY_OPENID_AUTHORIZATION_URL): ~
+  env(SYMFONY_OPENID_ACCESS_TOKEN_URL): ~
+  env(SYMFONY_OPENID_USERINFO_URL): ~
+  env(SYMFONY_OPENID_LOGOUT_URL): ~
   env(SYMFONY_PROMETHEUS_BEARER_TOKEN): ~
   env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
 

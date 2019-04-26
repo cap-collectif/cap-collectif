@@ -15,7 +15,6 @@ import config from '../../config';
 
 const initialState: State = {
   showLoginModal: false,
-  showOpenIDLoginModal: false,
   showRegistrationModal: false,
   isSubmittingAccountForm: false,
   confirmationEmailResent: false,

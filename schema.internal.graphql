@@ -2791,21 +2791,6 @@ type NotificationsConfiguration {
   onCommentDelete: Boolean!
 }
 
-# A user personal open Id informations.
-type OpenIDUserInfos {
-  # First name from open ID server.
-  firstName: String
-
-  # Last name from open ID server.
-  lastName: String
-
-  # Email from open ID server.
-  email: String
-
-  # Nick name from open ID server.
-  nickName: String
-}
-
 # A contribution
 type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & Trashable & ContributionWithAuthor & EditableContribution {
   # The ID of an object
@@ -4513,9 +4498,6 @@ type Query {
     # Returns the last `n` elements from the list.
     last: Int
   ): VoteConnection!
-
-  # An object representation of information gathered from OpenID server.
-  openIDUserInfos: OpenIDUserInfos!
 }
 
 # Fetches an object given its ID

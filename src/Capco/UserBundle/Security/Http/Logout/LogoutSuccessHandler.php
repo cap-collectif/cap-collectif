@@ -23,7 +23,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         RouterInterface $router,
         Manager $toggleManager,
         OpenAmClient $client,
-        ?string $logoutUrlSSO,
+        ?string $logoutUrlSSO = null,
         ?Simple $samlAuth = null
     ) {
         $this->samlAuth = $samlAuth;
