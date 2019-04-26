@@ -5,18 +5,16 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginModal from './LoginModal';
 import { baseUrl } from '../../../config';
-import { showLoginModal, showOpenIDLoginModal } from '../../../redux/modules/user';
+import { showLoginModal } from '../../../redux/modules/user';
 import type { State } from '../../../types';
-import OpenIDLoginModal from './OpenIDLoginModal';
 
-type Action = typeof showLoginModal | typeof showOpenIDLoginModal;
+type Action = typeof showLoginModal;
 
 type StateProps = {|
   loginWithMonCompteParis: boolean,
   loginWithOpenId: boolean,
-  changeUserOpenId: boolean,
+  switchUserOpenId: boolean,
   openLoginModal: typeof showLoginModal,
-  openOpenIDLoginModal: typeof showOpenIDLoginModal,
 |};
 
 type Props = {|
@@ -38,10 +36,9 @@ export class LoginButton extends React.Component<Props> {
   render() {
     const {
       openLoginModal,
-      openOpenIDLoginModal,
       loginWithMonCompteParis,
+      switchUserOpenId,
       loginWithOpenId,
-      changeUserOpenId,
       style,
       bsStyle,
       className,
@@ -65,12 +62,10 @@ export class LoginButton extends React.Component<Props> {
                 `width=${wW},height=${wH},scrollbars=yes,status=yes,resizable=yes,toolbar=0,menubar=0,location=0,screenx=0,screeny=0`,
               );
             } else if (loginWithOpenId) {
-              if (changeUserOpenId) {
-                openOpenIDLoginModal();
-              } else {
-                window.location.href = `/login/openid?_destination=${window &&
-                  window.location.href}`;
-              }
+              const redirectUri = switchUserOpenId
+                ? `${baseUrl}/sso/switch-user`
+                : `${window && window.location.href}`;
+              window.location.href = `/login/openid?_destination=${redirectUri}`;
             } else {
               openLoginModal();
             }
@@ -79,7 +74,6 @@ export class LoginButton extends React.Component<Props> {
           <FormattedMessage id="global.login" />
         </Button>
         <LoginModal />
-        {changeUserOpenId && <OpenIDLoginModal />}
       </span>
     );
   }
@@ -88,12 +82,11 @@ export class LoginButton extends React.Component<Props> {
 const mapStateToProps = state => ({
   loginWithMonCompteParis: state.default.features.login_paris,
   loginWithOpenId: state.default.features.login_openid,
-  changeUserOpenId: state.default.features.disconnect_openid,
+  switchUserOpenId: state.default.features.disconnect_openid,
 });
 
 const mapDispatchToProps = dispatch => ({
   openLoginModal: () => dispatch(showLoginModal()),
-  openOpenIDLoginModal: () => dispatch(showOpenIDLoginModal()),
 });
 
 const container = connect<Props, State, Action, _, _>(

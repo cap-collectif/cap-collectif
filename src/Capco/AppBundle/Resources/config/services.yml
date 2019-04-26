@@ -73,6 +73,10 @@ services:
     autowire: true
     public: true
 
+  Capco\AppBundle\Controller\Site\SSOController:
+    autoconfigure: true
+    autowire: true
+
   Capco\AppBundle\Controller\Api\GraphQLController:
     autowire: true
     public: true

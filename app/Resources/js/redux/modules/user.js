@@ -39,7 +39,6 @@ export type MapTokens = {
 
 export type State = {
   +showLoginModal: boolean,
-  +showOpenIDLoginModal: boolean,
   +displayChartModal: boolean,
   +showRegistrationModal: boolean,
   +isSubmittingAccountForm: boolean,
@@ -83,9 +82,7 @@ type UpdateRegistrationFieldAction = {
 type CloseRegistrationModalAction = {| type: 'CLOSE_REGISTRATION_MODAL' |};
 type ShowRegistrationModalAction = { type: 'SHOW_REGISTRATION_MODAL' };
 type CloseLoginModalAction = { type: 'CLOSE_LOGIN_MODAL' };
-type CloseOpenIDLoginModalAction = { type: 'CLOSE_OPENID_LOGIN_MODAL' };
 type ShowLoginModalAction = { type: 'SHOW_LOGIN_MODAL' };
-type ShowOpenIDLoginModalAction = { type: 'SHOW_OPENID_LOGIN_MODAL' };
 type DisplayChartModalAction = { type: 'DISPLAY_CHART_MODAL' };
 type HideChartModalAction = {| type: 'HIDE_CHART_MODAL' |};
 type UserRequestEmailChangeAction = { type: 'USER_REQUEST_EMAIL_CHANGE', email: string };
@@ -114,11 +111,9 @@ export type UserAction =
   | ShowRegistrationModalAction
   | CloseRegistrationModalAction
   | ShowLoginModalAction
-  | ShowOpenIDLoginModalAction
   | DisplayChartModalAction
   | HideChartModalAction
   | CloseLoginModalAction
-  | CloseOpenIDLoginModalAction
   | StartSubmittingAccountFormAction
   | ConfirmPasswordAction
   | StopSubmittingAccountFormAction
@@ -134,7 +129,6 @@ export type UserAction =
 
 const initialState: State = {
   showLoginModal: false,
-  showOpenIDLoginModal: false,
   displayChartModal: false,
   showRegistrationModal: false,
   isSubmittingAccountForm: false,
@@ -178,13 +172,7 @@ export const closeRegistrationModal = (): CloseRegistrationModalAction => ({
   type: 'CLOSE_REGISTRATION_MODAL',
 });
 export const closeLoginModal = (): CloseLoginModalAction => ({ type: 'CLOSE_LOGIN_MODAL' });
-export const closeOpenIDLoginModal = (): CloseOpenIDLoginModalAction => ({
-  type: 'CLOSE_OPENID_LOGIN_MODAL',
-});
 export const showLoginModal = (): ShowLoginModalAction => ({ type: 'SHOW_LOGIN_MODAL' });
-export const showOpenIDLoginModal = (): ShowOpenIDLoginModalAction => ({
-  type: 'SHOW_OPENID_LOGIN_MODAL',
-});
 export const displayChartModal = (): DisplayChartModalAction => ({ type: 'DISPLAY_CHART_MODAL' });
 export const hideChartModal = (): HideChartModalAction => ({ type: 'HIDE_CHART_MODAL' });
 export const confirmPassword = (): ConfirmPasswordAction => ({
@@ -403,12 +391,8 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, showRegistrationModal: false };
     case 'SHOW_LOGIN_MODAL':
       return { ...state, showLoginModal: true };
-    case 'SHOW_OPENID_LOGIN_MODAL':
-      return { ...state, showOpenIDLoginModal: true };
     case 'CLOSE_LOGIN_MODAL':
       return { ...state, showLoginModal: false };
-    case 'CLOSE_OPENID_LOGIN_MODAL':
-      return { ...state, showOpenIDLoginModal: false };
     case 'CANCEL_EMAIL_CHANGE':
       return {
         ...state,
