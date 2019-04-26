@@ -35,6 +35,29 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
     this.cookie = React.createRef();
   }
 
+  componentDidMount() {
+    if(this.props.isLink === true) {
+      window.addEventListener("hashchange", this.changeShowModalState, false);
+    }
+  }
+
+  componentWillUnmount() {
+    if(this.props.isLink === true) {
+      window.removeEventListener("hashchange", this.changeShowModalState, false);
+    }
+  }
+
+  changeShowModalState = (event: SyntheticEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const hash = window.location.href.split('#');
+    if(hash[1] ==='cookiesManagement' && this.state.showModal === false){
+      this.setState({ showModal: true });
+      window.location.href=hash[0];
+    }
+  };
+
   saveCookie = () => {
     this.cookie.current.saveCookiesConfiguration();
     this.setState({ showModal: false });

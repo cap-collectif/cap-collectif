@@ -25,31 +25,26 @@
 {% block body %}
     {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
     {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
+     {% set Cookietype = 0 %}
      {% set bannerTrad = '' %}
     {% if analytic_js is not empty and ads_js is empty %}
         {% set bannerTrad =  'text-audience-cookie'|trans({}, 'CapcoAppBundle') %}
     {% elseif ads_js  is not empty and analytic_js is empty %}
+        {% set Cookietype = 1 %}
         {% set bannerTrad =  'text-cookie-communication'|trans({}, 'CapcoAppBundle') %}
     {% elseif ads_js is not empty and analytic_js is not empty %}
+        {% set Cookietype = 2 %}
         {% set bannerTrad =  'texte-cookie-audience-communication'|trans({}, 'CapcoAppBundle') %}
     {% endif %}
 
     <section class="section--custom">
         <div class="container" style="max-width: 660px">
-            {{ 'texte-cookies-page-1' | trans({}, 'CapcoAppBundle')|raw }}
+            {{ 'cookies-page-texte-part1' | trans({'{platformLink}':app.request.schemeAndHttpHost}, 'CapcoAppBundle')|raw }}
+            {{ 'cookies-page-texte-part1-1' | transchoice(Cookietype, {}, 'CapcoAppBundle')|raw }}
+            {{ 'cookies-page-texte-part1-2' | trans({'{platformLink}': app.request.schemeAndHttpHost}, 'CapcoAppBundle')|raw }}
+            {{ 'cookies-page-texte-part1-3' | transchoice(Cookietype, {'{platformLink}': app.request.schemeAndHttpHost}, 'CapcoAppBundle')|raw }}
             {{ cookiesList|raw }}
-            {% if bannerTrad is defined and bannerTrad is not empty %}
-            <p>
-                {{ react_render_component('CookieApp', {
-                    'props': {
-                        'bannerTrad': bannerTrad,
-                        'isLink': true,
-                        'cookieTrad': 'set-up-cookies',
-                    }
-                }) }}
-            </p>
-            {% endif %}
-            {{ 'texte-cookies-page-2' | trans({}, 'CapcoAppBundle')|raw }}
+            {{ 'cookies-page-texte-part2' | trans({}, 'CapcoAppBundle')|raw}}
         </div>
     </section>
 {% endblock %}
