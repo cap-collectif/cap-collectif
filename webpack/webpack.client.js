@@ -33,8 +33,6 @@ const devConf = {
         webpackConfig.nodeModulesDir,
         'bootstrap-sass/assets/javascripts/bootstrap/tooltip.js',
       ),
-      path.join(webpackConfig.nodeModulesDir, 'es6-promise/lib/es6-promise.js'),
-      path.join(webpackConfig.nodeModulesDir, 'fetch/fetch.js'),
       path.join(webpackConfig.appDir, 'Resources/js/jsapi.js'),
       path.join(webpackConfig.appDir, 'Resources/js/googleCharts.js'),
       path.join(webpackConfig.appDir, 'Resources/js/browserUpdate.js'),

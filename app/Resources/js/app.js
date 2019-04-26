@@ -14,6 +14,8 @@ require('fancybox')($);
 require('./jsapi');
 require('./googleCharts');
 require('./modernizr');
+require('es6-promise');
+require('fetch');
 
 if (!Modernizr.intl) {
   require('./browserUpdate');

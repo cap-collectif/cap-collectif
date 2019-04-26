@@ -1,15 +1,11 @@
-const path = require('path');
-const webpackConfig = require('../config');
-
 function getRulesConf() {
   return {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.(js|jsx)$/i,
           exclude: [
-            path.join(webpackConfig.absoluteBase, 'node_modules'),
-            /(\-test\.js|\.snap|\-stories\.js)$/,
+            /(-test\.js|\.snap|-stories\.js)$/,
           ],
           use: [
             {
