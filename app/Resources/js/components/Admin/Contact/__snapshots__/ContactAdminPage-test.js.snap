@@ -178,5 +178,13 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
       />
     </Button>
   </div>
+  <AlertForm
+    errorMessage={null}
+    invalid={false}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    valid={true}
+  />
 </form>
 `;

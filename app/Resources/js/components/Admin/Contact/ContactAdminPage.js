@@ -9,13 +9,14 @@ import { type ReadyState, QueryRenderer, graphql, createFragmentContainer } from
 import type { ContactAdminPage_query } from '~relay/ContactAdminPage_query.graphql';
 
 import type { State } from '../../../types';
+import AlertForm from '../../Alert/AlertForm';
 import ContactAdminList from './ContactAdminList';
 import ContactAdminForm from './ContactAdminForm';
 import CustomPageFields from '../Field/CustomPageFields';
-import type { FormValues as CustomFormValues } from '../Field/CustomPageFields';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import UpdateContactPageMutation from '../../../mutations/UpdateContactPageMutation';
+import type { FormValues as CustomFormValues } from '../Field/CustomPageFields';
 
 type Props = {
   ...FormProps,
@@ -32,7 +33,7 @@ type FormValues = {
 
 const validate = (values: FormValues) => {
   const errors = {};
-  if (values.title === undefined) {
+  if (!values.title || values.title === '') {
     errors.title = 'fill-field';
   }
 
@@ -71,7 +72,16 @@ const renderContactList = ({
 
 export class ContactAdminPage extends React.Component<Props> {
   render() {
-    const { invalid, pristine, submitting, handleSubmit } = this.props;
+    const {
+      invalid,
+      pristine,
+      submitting,
+      handleSubmit,
+      error,
+      valid,
+      submitFailed,
+      submitSucceeded,
+    } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -119,18 +129,26 @@ export class ContactAdminPage extends React.Component<Props> {
             )}
           </Button>
         </div>
+        <AlertForm
+          valid={valid}
+          invalid={false}
+          submitting={submitting}
+          submitSucceeded={submitSucceeded}
+          submitFailed={submitFailed}
+          errorMessage={error}
+        />
       </form>
     );
   }
 }
 
-const mapStateToProps = (state: State, props: any) => ({
+const mapStateToProps = (state: State, props: Props) => ({
   initialValues: {
     title: state.default.parameters['contact.title'],
     description: state.default.parameters['contact.content.body'],
     custom: {
       metadescription: state.default.parameters['contact.metadescription'],
-      picto: props.query.siteImage.media,
+      picto: props && props.query.siteImage ? props.query.siteImage.media : '',
       customcode: state.default.parameters['contact.customcode'],
     },
   },
