@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
+use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Entity\User;
 use Box\Spout\Writer\WriterFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\InfoResolver;
 use Overblog\GraphQLBundle\Request\Executor;
-use Symfony\Component\Console\Command\Command;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,7 +18,7 @@ use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\Repository\UserArchiveRepository;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateCsvFromUserCommand extends Command
+class CreateCsvFromUserCommand extends BaseExportCommand
 {
     protected static $defaultName = 'capco:export:user';
 
@@ -35,6 +35,7 @@ class CreateCsvFromUserCommand extends Command
         EntityManagerInterface $em,
         Executor $executor,
         GraphQlAclListener $listener,
+        ExportUtils $exportUtils,
         string $kernelRootDir
     ) {
         $listener->disableAcl();
@@ -45,11 +46,12 @@ class CreateCsvFromUserCommand extends Command
         $this->listener = $listener;
         $this->kernelRootDir = $kernelRootDir;
 
-        parent::__construct();
+        parent::__construct($exportUtils);
     }
 
     protected function configure(): void
     {
+        parent::configure();
         $this->setDescription('Create csv file from user data')->addArgument(
             'userId',
             InputArgument::REQUIRED,
@@ -193,6 +195,8 @@ class CreateCsvFromUserCommand extends Command
                 $rows[] = $value;
             }
         }
+
+        $rows = array_map([$this->exportUtils, 'parseCellValue'], $rows);
 
         if (!empty($rows) && \is_array($rows[0])) {
             $writer->addRows($rows);

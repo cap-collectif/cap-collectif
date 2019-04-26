@@ -2,19 +2,40 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Repository\QuestionnaireStepRepository;
 use Capco\AppBundle\Resolver\ProjectDownloadResolver;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateCsvFromQuestionnaireStepCommand extends ContainerAwareCommand
+class CreateCsvFromQuestionnaireStepCommand extends BaseExportCommand
 {
-    protected function configure()
+    private $toggleManager;
+    private $projectDownloadResolver;
+    private $questionnaireStepRepository;
+    private $projectRootDir;
+
+    public function __construct(
+        ExportUtils $exportUtils,
+        ProjectDownloadResolver $projectDownloadResolver,
+        QuestionnaireStepRepository $questionnaireStepRepository,
+        string $projectRootDir,
+        Manager $manager
+    ) {
+        $this->toggleManager = $manager;
+        $this->projectDownloadResolver = $projectDownloadResolver;
+        $this->questionnaireStepRepository = $questionnaireStepRepository;
+        $this->projectRootDir = $projectRootDir;
+        parent::__construct($exportUtils);
+    }
+
+    protected function configure(): void
     {
+        parent::configure();
         $this->setName('capco:export:questionnaire')
             ->setDescription('Create csv file from questionnaire step data')
             ->addArgument(
@@ -32,33 +53,26 @@ class CreateCsvFromQuestionnaireStepCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-        if (!$input->getOption('force') && !$container->get(Manager::class)->isActive('export')) {
+        if (!$input->getOption('force') && !$this->toggleManager->isActive('export')) {
             $output->writeln('Please enable "export" feature to run this command');
 
             return;
         }
 
-        $resolver = $container->get(ProjectDownloadResolver::class);
-
         if (($questionnaireStep = $this->getQuestionnaireStep($input))) {
             $steps = [$questionnaireStep];
         } else {
-            $steps = $container
-                ->get('doctrine')
-                ->getRepository('CapcoAppBundle:Steps\QuestionnaireStep')
-                ->findAll();
+            $steps = $this->questionnaireStepRepository->findAll();
         }
 
         foreach ($steps as $qs) {
-            $writer = $resolver->getContent($qs);
+            $writer = $this->projectDownloadResolver->getContent($qs, $this->exportUtils);
             $filename = '';
             if ($qs->getProject()) {
                 $filename .= $qs->getProject()->getSlug() . '_';
             }
             $filename .= $qs->getSlug() . '.xlsx';
-            $path = $container->getParameter('kernel.project_dir');
-            $writer->save($path . '/web/export/' . $filename);
+            $writer->save($this->projectRootDir . '/web/export/' . $filename);
             $output->writeln('The export file "' . $filename . '" has been created.');
         }
     }
@@ -69,9 +83,6 @@ class CreateCsvFromQuestionnaireStepCommand extends ContainerAwareCommand
             return null;
         }
 
-        return $this->getContainer()
-            ->get('doctrine')
-            ->getRepository('CapcoAppBundle:Steps\QuestionnaireStep')
-            ->find($input->getArgument('questionnaireStepId'));
+        return $this->questionnaireStepRepository->find($input->getArgument('questionnaireStepId'));
     }
 }
