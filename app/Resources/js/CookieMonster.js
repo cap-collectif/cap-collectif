@@ -74,8 +74,13 @@ class CookieMonster {
       }
     }
 
-    this.cookieBanner.classList.add('active');
-    this.cookieConsent.addEventListener('click', this.removeCookieConsent, false);
+    if (this.cookieBanner) {
+      this.cookieBanner.classList.add('active');
+    }
+    if (this.cookieConsent) {
+      this.cookieConsent.addEventListener('click', this.removeCookieConsent, false);
+    }
+
     document.addEventListener('click', this.onDocumentClick, false);
     document.addEventListener('scroll', this.onDocumentScroll, false);
   };
