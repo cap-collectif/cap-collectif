@@ -1,4 +1,8 @@
 ﻿id,email,userName,typeName,createdAt,updatedAt,lastLogin,rolesText,consentExternalCommunication,enabled,isEmailConfirmed,locked,phoneConfirmed,gender,dateOfBirth,websiteUrl,biography,address,zipCode,city,phone,profileUrl
+VXNlcjp1c2VyMQ==,lbrunet@jolicode.com,lbrunet,Citoyen,@datetime@,,,"Super Admin|Utilisateur",No,Yes,Yes,No,No,,,,,,,,+3300000000,https://capco.dev/profile/lbrunet
+VXNlcjp1c2VyMTA=,user10@cap-collectif.com,user10,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user10
+VXNlcjp1c2VyMTE=,user11@cap-collectif.com,user11,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user11
+VXNlcjp1c2VyMTI=,user12@cap-collectif.com,user12,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user12
 VXNlcjp1c2VyMTM=,user13@cap-collectif.com,user13,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user13
 VXNlcjp1c2VyMTQ=,user14@cap-collectif.com,user14,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user14
 VXNlcjp1c2VyMTU=,user15@cap-collectif.com,user15,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user15
@@ -43,8 +47,4 @@ VXNlcjp1c2VyNg==,user6@cap-collectif.com,user6,Citoyen,@datetime@,,,Utilisateur,
 VXNlcjp1c2VyNw==,user7@cap-collectif.com,user7,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user7
 VXNlcjp1c2VyOA==,user8@cap-collectif.com,user8,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user8
 VXNlcjp1c2VyOQ==,user9@cap-collectif.com,user9,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user9
-VXNlcjp1c2VyQWRtaW4=,admin@test.com,admin,Citoyen,@datetime@,@datetime@,@datetime@,Administrateur|Utilisateur,No,Yes,Yes,No,Yes,,,,,,,,+33675492871,https://capco.dev/profile/admin
-VXNlcjp1c2VyMQ==,lbrunet@jolicode.com,lbrunet,Citoyen,@datetime@,,,"Super Admin|Utilisateur",No,Yes,Yes,No,No,,,,,,,,+3300000000,https://capco.dev/profile/lbrunet
-VXNlcjp1c2VyMTA=,user10@cap-collectif.com,user10,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user10
-VXNlcjp1c2VyMTE=,user11@cap-collectif.com,user11,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user11
-VXNlcjp1c2VyMTI=,user12@cap-collectif.com,user12,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user12
+VXNlcjp1c2VyQWRtaW4=,admin@test.com,admin,Citoyen,@datetime@,,,Administrateur|Utilisateur,No,Yes,Yes,No,Yes,,,,,,,,+33675492871,https://capco.dev/profile/admin
