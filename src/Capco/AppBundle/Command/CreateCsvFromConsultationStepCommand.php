@@ -383,6 +383,7 @@ EOF;
 
     protected function configure(): void
     {
+        parent::configure();
         $this->setDescription('Create csv file from consultation step data');
     }
 
