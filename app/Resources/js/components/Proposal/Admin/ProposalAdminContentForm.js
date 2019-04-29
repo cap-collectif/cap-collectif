@@ -314,15 +314,12 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               disabled={!isAdmin}
               id="proposal-admin-author"
               name="author"
-              ariaControls="ProposalAdminContentForm-filter-user-listbox"
               label="Auteur"
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
               placeholder="Auteur"
               selectFieldIsObject
               multi={false}
-              autoload={false}
-              clearable={false}
             />
             {features.themes && form.usingThemes && (
               <Field

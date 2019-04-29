@@ -219,11 +219,8 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 <UserListField
                   id="likers"
                   name="likers"
-                  ariaControls="ProposalAdminNotationForm-filter-user-listbox"
                   label="Coup(s) de coeur"
                   labelClassName="control-label"
-                  autoload={false}
-                  clearable={false}
                   inputClassName="fake-inputClassName"
                   placeholder="Sélectionnez un coup de coeur"
                   multi

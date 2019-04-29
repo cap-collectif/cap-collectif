@@ -40,10 +40,6 @@ InternalQuery:
         type: 'InternalProjectConnection!'
       events:
         type: 'InternalEventConnection!'
-        args:
-          isRegistrable:
-            type: 'Boolean'
-            description: 'If true, filter the events with registration link or internal registration enable, if false  filter the events with both registration type at false'
       projectAuthors:
         type: '[InternalUser!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAuthorsResolver", [args, getUser()])'
@@ -70,10 +66,6 @@ InternalQuery:
             type: '[String]'
             defaultValue: null
             description: 'Return all users except the ones in the array.'
-          authorsOfEventOnly:
-            type: 'Boolean'
-            defaultValue: false
-            description: 'If true, retrieve only users that created an event.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserSearchQueryResolver", [args])'
       consultationSteps:
         type: '[InternalConsultationStep!]!'

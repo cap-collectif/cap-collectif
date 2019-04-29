@@ -6,19 +6,14 @@ exports[`<GroupAdminAddUsersForm /> render correctly 1`] = `
 >
   <div>
     <UserListField
-      ariaControls="GroupAdminAddUsersForm-filter-user-listbox"
-      authorOfEvent={false}
-      autoload={false}
       className=""
-      clearable={false}
-      debounce={false}
       id="group-users-users"
       inputClassName="fake-inputClassName"
       label="group.admin.form.users"
       labelClassName="control-label"
       multi={true}
       name="users"
-      placeholder="select-a-user"
+      placeholder="Sélectionnez un utilisateur"
       userListToNoSearch={Array []}
     />
   </div>

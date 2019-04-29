@@ -24,8 +24,6 @@ export default createFragmentContainer(EventListCounter, {
         search: { type: "String" }
         userType: { type: "ID" }
         isFuture: { type: "Boolean" }
-        author: { type: "ID" }
-        isRegistrable: { type: "Boolean" }
       ) {
       events(
         first: $count
@@ -35,8 +33,6 @@ export default createFragmentContainer(EventListCounter, {
         search: $search
         userType: $userType
         isFuture: $isFuture
-        author: $author
-        isRegistrable: $isRegistrable
       ) @connection(key: "EventListPaginated_events", filters: []) {
         edges {
           node {

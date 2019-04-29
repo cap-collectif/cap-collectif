@@ -494,18 +494,4 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
 
         return ltrim(trim($address), ' ,');
     }
-
-    public function getIsRegistrable(): bool
-    {
-        return $this->isRegistrable();
-    }
-
-    public function isRegistrable(): bool
-    {
-        if (!empty($this->link) || $this->registrationEnable) {
-            return true;
-        }
-
-        return false;
-    }
 }

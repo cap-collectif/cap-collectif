@@ -61,12 +61,7 @@ class QueryEventsResolver implements ResolverInterface
                 if ($args->offsetExists('userType')) {
                     $filters['userType'] = $args->offsetGet('userType');
                 }
-                if ($args->offsetExists('author')) {
-                    $filters['author'] = $args->offsetGet('author');
-                }
-                if ($args->offsetExists('isRegistrable')) {
-                    $filters['isRegistrable'] = $args->offsetGet('isRegistrable');
-                }
+
                 $results = $this->eventSearch->searchEvents(
                     $offset,
                     $limit + self::FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR,

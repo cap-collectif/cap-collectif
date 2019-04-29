@@ -17,37 +17,17 @@ class UserSearch extends Search
     const SEARCH_FIELDS = ['username', 'username.std'];
 
     private $userRepo;
-    private $eventSearch;
 
-    public function __construct(Index $index, UserRepository $userRepo, EventSearch $eventSearch)
+    public function __construct(Index $index, UserRepository $userRepo)
     {
         parent::__construct($index);
         $this->userRepo = $userRepo;
-        $this->eventSearch = $eventSearch;
         $this->type = 'user';
     }
 
-    public function searchAllUsers(
-        $terms = null,
-        ?array $notInIds = [],
-        bool $authorsOfEventOnly = false,
-        bool $onlyUsers = false
-    ): array {
+    public function searchAllUsers($terms = null, $notInIds = [], $onlyUsers = false): array
+    {
         $query = new Query\BoolQuery();
-
-        if ($terms && $authorsOfEventOnly) {
-            $authorIds = $this->eventSearch->getAllIdsOfAuthorOfEvent($terms);
-            $users = $this->getHydratedResults($authorIds);
-
-            if ($onlyUsers) {
-                return $users;
-            }
-
-            return [
-                'users' => $users,
-                'count' => \count($authorIds),
-            ];
-        }
 
         if ($terms) {
             $query = $this->searchTermsInMultipleFields(
@@ -57,7 +37,6 @@ class UserSearch extends Search
                 'phrase_prefix'
             );
         }
-
         if (\count($notInIds) > 0) {
             $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
         }
@@ -77,9 +56,9 @@ class UserSearch extends Search
 
     public function searchUsers(
         $terms = null,
-        ?array $fields = [],
-        ?array $notInIds = [],
-        bool $onlyUsers = false
+        $fields = [],
+        $notInIds = [],
+        $onlyUsers = false
     ): array {
         $query = new Query\BoolQuery();
 

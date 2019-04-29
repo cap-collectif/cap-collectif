@@ -56,22 +56,3 @@ Scenario: GraphQL admin want to get users including superadmin
       }
     }
     """
-
-@read-only
-Scenario: Graphql anonymous want to search user author of event
-  Given I send a GraphQL POST request:
-  """
-  {
-      "query": "query UserListFieldQuery($displayName: String, $authorOfEventOnly: Boolean) {
-          userSearch(displayName: $displayName, authorsOfEventOnly: $authorOfEventOnly) {
-            id
-            displayName
-          }
-      }",
-    "variables": {"displayName":"xlac","authorOfEventOnly":true}
-  }
-  """
-  Then the JSON response should match:
-  """
-  {"data":{"userSearch":[{"id":"VXNlcjp1c2VyMw==","displayName":"xlacot"}]}}
-  """

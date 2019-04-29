@@ -128,7 +128,7 @@ Capco\AppBundle\Entity\Event:
     author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
   event12:
-    id: evenementPresentSansDateDeFin
+    id: evenementSansDateDeFin
     title: EvenementPresentSansDateDeFin
     enabled: true
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>

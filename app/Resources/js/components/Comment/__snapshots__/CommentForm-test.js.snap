@@ -115,7 +115,6 @@ exports[`<CommentForm /> should render correctly 1`] = `
                 bsStyle="primary"
                 className="btn--comment"
                 disabled={true}
-                id="comment-submit"
                 type="submit"
               >
                 <FormattedMessage

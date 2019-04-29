@@ -253,18 +253,6 @@ class EventRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getByProject(Project $project, int $first = 0, int $offset = 100): Paginator
-    {
-        $query = $this->createQueryBuilder('e')
-            ->leftJoin('e.projects', 'p')
-            ->andWhere('p.id = :project')
-            ->setParameter('project', $project->getId())
-            ->setFirstResult($first)
-            ->setMaxResults($offset);
-
-        return new Paginator($query);
-    }
-
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('e')->andWhere('e.enabled = true');

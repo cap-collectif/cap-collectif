@@ -187,7 +187,6 @@ export class CommentForm extends React.Component<Props, State> {
                 disabled={pristine || invalid || submitting}
                 type="submit"
                 bsStyle="primary"
-                id="comment-submit"
                 className="btn--comment">
                 {submitting ? (
                   <FormattedMessage id="global.loading" />

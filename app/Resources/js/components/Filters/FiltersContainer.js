@@ -29,7 +29,7 @@ export default class FiltersContainer extends React.Component<Props, State> {
   componentDidUpdate() {
     setTimeout(() => {
       const queryAll = document.querySelectorAll('.popover.bottom');
-      if (queryAll && queryAll.length > 0) {
+      if (queryAll !== null) {
         queryAll.forEach(el => el.removeAttribute('role'));
       }
     }, 500);
