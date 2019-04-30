@@ -54,14 +54,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
  * @CapcoAssert\HasAddressIfMandatory()
  */
-class Proposal implements
-    Publishable,
-    Contribution,
-    Trashable,
-    CommentableInterface,
-    SelfLinkableInterface,
-    SoftDeleteable,
-    DisplayableInBOInterface
+class Proposal implements Publishable, Contribution, Trashable, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface
 {
     use UuidTrait;
     use ReferenceTrait;
@@ -80,6 +73,12 @@ class Proposal implements
     use CommentableWithoutCounterTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
+
+    /**
+     * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
+     * @ORM\Column(length=255, nullable=false, unique=true)
+     */
+    protected $slug;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
@@ -912,7 +911,7 @@ class Proposal implements
 
     public function getFullReference(): string
     {
-        return $this->getProposalForm()->getReference() . '-' . $this->getReference();
+        return $this->getProposalForm()->getReference().'-'.$this->getReference();
     }
 
     /**

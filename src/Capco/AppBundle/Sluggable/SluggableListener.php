@@ -23,6 +23,13 @@ use Gedmo\Sluggable\Handler\SlugHandlerWithUniqueCallbackInterface;
 class SluggableListener extends Base
 {
     /**
+     * List of event adapters used for this listener.
+     *
+     * @var array
+     */
+    private $adapters = [];
+
+    /**
      * The power exponent to jump
      * the slug unique number by tens.
      *
@@ -224,24 +231,30 @@ class SluggableListener extends Base
     }
 
     /**
-     * This is overriden by @spyl94.
+     * Get an event adapter to handle event specific
+     * methods.
      *
-     * Generates the unique slug
+     * @param EventArgs $args
+     *
+     * @throws \Gedmo\Exception\InvalidArgumentException - if event is not recognized
+     *
+     * @return \Gedmo\Mapping\Event\AdapterInterface
      */
-    private function makeUniqueSlug(
-        SluggableAdapter $ea,
-        $object,
-        $preferredSlug,
-        $recursing = false,
-        $config = []
-    ) {
-        // We don't want to match similar slugs.
-        // This can cause perf issues, so we use a random slug instead.
-        if ($object instanceof Proposal) {
-            return $preferredSlug . uniqid($config['separator']);
+    protected function getEventAdapter(EventArgs $args)
+    {
+        $class = \get_class($args);
+        if (preg_match('@Doctrine\\\([^\\\]+)@', $class, $m) && \in_array($m[1], ['ODM', 'ORM'])) {
+            if (!isset($this->adapters[$m[1]])) {
+                $this->adapters[$m[1]] = new CapcoORMSluggableAdapter();
+            }
+            $this->adapters[$m[1]]->setEventArgs($args);
+
+            return $this->adapters[$m[1]];
         }
 
-        return $this->makeUniqueSlugFromSimilars($ea, $object, $preferredSlug, $recursing, $config);
+        throw new \Gedmo\Exception\InvalidArgumentException(
+            'Event mapper does not support event arg class: ' . $class
+        );
     }
 
     /**
@@ -426,6 +439,7 @@ class SluggableListener extends Base
 
     /**
      * Generates the unique slug.
+     * This is overriden by @spyl94.
      *
      * @param SluggableAdapter $ea
      * @param object           $object
@@ -435,7 +449,7 @@ class SluggableListener extends Base
      *
      * @return string - unique slug
      */
-    private function makeUniqueSlugFromSimilars(
+    private function makeUniqueSlug(
         SluggableAdapter $ea,
         $object,
         $preferredSlug,
@@ -450,6 +464,7 @@ class SluggableListener extends Base
         if ($config['unique'] && isset($config['unique_base'])) {
             $base = $meta->getReflectionProperty($config['unique_base'])->getValue($object);
         }
+
         // collect similar persisted slugs during this flush
         if (isset($this->persisted[($class = $ea->getRootObjectClass($meta))])) {
             foreach ($this->persisted[$class] as $obj) {
@@ -488,6 +503,12 @@ class SluggableListener extends Base
             }
         }
         if ($result) {
+            // We don't want to match similar slugs.
+            // This can cause perf issues, so we use a random slug instead.
+            if ($object instanceof Proposal) {
+                return $preferredSlug . uniqid($config['separator']);
+            }
+
             $generatedSlug = $preferredSlug;
             $sameSlugs = [];
             foreach ((array) $result as $list) {

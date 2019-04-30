@@ -8,6 +8,7 @@ use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Resolver\StepResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Routing\Annotation\Route;

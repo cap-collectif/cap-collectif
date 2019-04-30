@@ -204,9 +204,7 @@ class OpinionType
 
     public function getStep(): ?ConsultationStep
     {
-        return $this->getConsultation()
-            ? $this->getConsultation()->getStep()
-            : null;
+        return $this->getConsultation() ? $this->getConsultation()->getStep() : null;
     }
 
     /**

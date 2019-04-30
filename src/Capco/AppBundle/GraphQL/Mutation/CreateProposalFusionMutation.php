@@ -40,9 +40,8 @@ class CreateProposalFusionMutation implements MutationInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Argument $input, User $author)
+    public function __invoke(Argument $input, User $author): array
     {
-        $title = $this->translator->trans('untitled-proposal', [], 'CapcoAppBundle');
         $proposalIds = array_unique($input->getRawArguments()['fromProposals']);
 
         if (\count($proposalIds) < 2) {
@@ -50,12 +49,11 @@ class CreateProposalFusionMutation implements MutationInterface
         }
 
         $proposalForm = null;
-        $this->logger->info(str_repeat('*', 150));
         $proposalUuids = [];
         foreach ($proposalIds as $key => $id) {
             $child = $this->globalIdResolver->resolve($id, $author);
             if (!$child) {
-                throw new UserError('Unknown proposal to merge with id: ' . var_export($id, true));
+                throw new UserError('Unknown proposal to merge with id: '.var_export($id, true));
             }
             $proposalUuids[] = $child->getId();
             if (0 === $key) {
@@ -65,9 +63,11 @@ class CreateProposalFusionMutation implements MutationInterface
             }
         }
 
+        $defaultTitle = $this->translator->trans('untitled-proposal', [], 'CapcoAppBundle');
+
         $proposal = (new Proposal())
             ->setAuthor($author)
-            ->setTitle($title)
+            ->setTitle($defaultTitle)
             ->setProposalForm($proposalForm);
         $form = $this->formFactory->create(ProposalFusionType::class, $proposal, [
             'proposalForm' => $proposalForm,

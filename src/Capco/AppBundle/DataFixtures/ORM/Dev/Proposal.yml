@@ -334,7 +334,7 @@ Capco\AppBundle\Entity\Proposal:
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal23:
     id: proposal23
-    title: Proposition vraiment intéressante 2
+    title: Proposition très intéressante
     body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
     author: '@user4'
     proposalForm: '@proposalFormVote'
@@ -508,7 +508,7 @@ Capco\AppBundle\Entity\Proposal:
     updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal{40..100}:
     id: 'proposal<current()>'
-    title: <text(6)>
+    title: Proposal <current()>
     body: <text(200)>
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
@@ -516,6 +516,16 @@ Capco\AppBundle\Entity\Proposal:
     reference: '1<current()>'
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+  proposal101:
+    id: 'proposal101'
+    slug: proposition-sans-titre
+    title: Proposition sans titre
+    body: Je suis une proposition crée en tant que fusion avec mon titre (FR) par défaut
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    author: '@user1'
+    proposalForm: '@proposalform15'
+    reference: '101'
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
   question1:
     id: question1
     title: Comment faire de l'électricité ?
