@@ -18,6 +18,8 @@ type Props = {
   project: ?string,
   userType: ?string,
   status: ?boolean,
+  isRegistrable: ?string,
+  author: ?{ value: string },
 };
 
 type State = {
@@ -37,7 +39,9 @@ export class EventRefetch extends React.Component<Props, State> {
       prevProps.project !== this.props.project ||
       prevProps.search !== this.props.search ||
       prevProps.status !== this.props.status ||
-      prevProps.userType !== this.props.userType
+      prevProps.userType !== this.props.userType ||
+      prevProps.author !== this.props.author ||
+      prevProps.isRegistrable !== this.props.isRegistrable
     ) {
       this._refetch();
     }
@@ -54,6 +58,11 @@ export class EventRefetch extends React.Component<Props, State> {
       project: this.props.project || null,
       userType: this.props.userType || null,
       isFuture: this.props.status === 'all' ? null : this.props.status === 'ongoing-and-future',
+      author: this.props.author && this.props.author.value ? this.props.author.value : null,
+      isRegistrable:
+        this.props.isRegistrable === 'all' || typeof this.props.isRegistrable === 'undefined'
+          ? null
+          : this.props.isRegistrable === 'yes',
     });
 
     this.props.relay.refetch(
@@ -93,6 +102,8 @@ const mapStateToProps = (state: GlobalState) => ({
   search: selector(state, 'search'),
   userType: selector(state, 'userType'),
   status: selector(state, 'status'),
+  author: selector(state, 'author'),
+  isRegistrable: selector(state, 'isRegistrable'),
 });
 
 const container = connect(mapStateToProps)(EventRefetch);
@@ -110,6 +121,8 @@ export default createRefetchContainer(
           search: { type: "String" }
           userType: { type: "ID" }
           isFuture: { type: "Boolean" }
+          author: { type: "ID" }
+          isRegistrable: { type: "Boolean" }
         ) {
         ...EventListPaginated_query
           @arguments(
@@ -120,6 +133,8 @@ export default createRefetchContainer(
             search: $search
             userType: $userType
             isFuture: $isFuture
+            author: $author
+            isRegistrable: $isRegistrable
           )
       }
     `,
@@ -133,6 +148,8 @@ export default createRefetchContainer(
       $userType: ID
       $search: String
       $isFuture: Boolean
+      $author: ID
+      $isRegistrable: Boolean
     ) {
       ...EventRefetch_query
         @arguments(
@@ -143,6 +160,8 @@ export default createRefetchContainer(
           userType: $userType
           search: $search
           isFuture: $isFuture
+          author: $author
+          isRegistrable: $isRegistrable
         )
       events(
         first: $count
@@ -152,6 +171,8 @@ export default createRefetchContainer(
         search: $search
         userType: $userType
         isFuture: $isFuture
+        author: $author
+        isRegistrable: $isRegistrable
       ) @connection(key: "EventListPaginated_events", filters: []) {
         edges {
           node {

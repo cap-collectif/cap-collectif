@@ -19,6 +19,8 @@ const defaultProps = {
   theme: 'theme-1',
   userType: null,
   project: 'UHJvamVjdDpwcm9qZWN0MQ==',
+  author: null,
+  isRegistrable: 'all',
   features: {
     ...features,
     themes: true,

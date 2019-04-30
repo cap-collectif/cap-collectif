@@ -33,18 +33,70 @@ exports[`<EventListFilters /> renders correctly 1`] = `
       className="pull-right"
     >
       <FiltersContainer
-        filterCount={2}
+        filterCount={3}
         overlay={
           <div>
-            <p>
-              <b>
-                <FormattedMessage
-                  id="filter-by"
-                  values={Object {}}
-                />
-              </b>
-            </p>
             <form>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-isRegistrable-listbox"
+                    aria-haspopup="true"
+                    clearable={true}
+                    component={[Function]}
+                    id="EventListFilters-filter-isRegistrable"
+                    label="registration-required"
+                    name="isRegistrable"
+                    options={
+                      Array [
+                        Object {
+                          "label": "indifferent",
+                          "value": "all",
+                        },
+                        Object {
+                          "label": "global.yes",
+                          "value": "yes",
+                        },
+                        Object {
+                          "label": "global.no",
+                          "value": "no",
+                        },
+                      ]
+                    }
+                    placeholder="indifferent"
+                    role="combobox"
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <UserListField
+                    ariaControls="EventListFilters-filter-author-listbox"
+                    authorOfEvent={true}
+                    autoload={false}
+                    className=""
+                    clearable={true}
+                    debounce={true}
+                    id="EventListFilters-filter-authors"
+                    inputClassName="fake-inputClassName"
+                    label="project_download.label.author"
+                    labelClassName="control-label"
+                    multi={false}
+                    name="author"
+                    placeholder="all-the-authors"
+                    selectFieldIsObject={true}
+                  />
+                </div>
+              </Col>
               <Col
                 bsClass="col"
                 className="mt-5"
@@ -67,6 +119,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                       component={[Function]}
                       groupClassName="event-search-group pull-right"
                       id="event-search-input"
+                      label="proposal-search"
                       name="search"
                       placeholder="proposal-search"
                       role="combobox"
@@ -87,6 +140,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                     aria-haspopup="true"
                     component={[Function]}
                     id="EventListFilters-filter-userType"
+                    label="filter-userType"
                     name="userType"
                     options={
                       Array [
@@ -100,7 +154,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                         },
                       ]
                     }
-                    placeholder="filter-userType"
+                    placeholder="global.select_project_types"
                     role="combobox"
                   />
                 </div>
@@ -201,18 +255,70 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
       className="pull-right"
     >
       <FiltersContainer
-        filterCount={2}
+        filterCount={3}
         overlay={
           <div>
-            <p>
-              <b>
-                <FormattedMessage
-                  id="filter-by"
-                  values={Object {}}
-                />
-              </b>
-            </p>
             <form>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-isRegistrable-listbox"
+                    aria-haspopup="true"
+                    clearable={true}
+                    component={[Function]}
+                    id="EventListFilters-filter-isRegistrable"
+                    label="registration-required"
+                    name="isRegistrable"
+                    options={
+                      Array [
+                        Object {
+                          "label": "indifferent",
+                          "value": "all",
+                        },
+                        Object {
+                          "label": "global.yes",
+                          "value": "yes",
+                        },
+                        Object {
+                          "label": "global.no",
+                          "value": "no",
+                        },
+                      ]
+                    }
+                    placeholder="indifferent"
+                    role="combobox"
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <UserListField
+                    ariaControls="EventListFilters-filter-author-listbox"
+                    authorOfEvent={true}
+                    autoload={false}
+                    className=""
+                    clearable={true}
+                    debounce={true}
+                    id="EventListFilters-filter-authors"
+                    inputClassName="fake-inputClassName"
+                    label="project_download.label.author"
+                    labelClassName="control-label"
+                    multi={false}
+                    name="author"
+                    placeholder="all-the-authors"
+                    selectFieldIsObject={true}
+                  />
+                </div>
+              </Col>
               <Col
                 bsClass="col"
                 className="mt-5"
@@ -235,6 +341,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                       component={[Function]}
                       groupClassName="event-search-group pull-right"
                       id="event-search-input"
+                      label="proposal-search"
                       name="search"
                       placeholder="proposal-search"
                       role="combobox"
@@ -255,6 +362,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                     aria-haspopup="true"
                     component={[Function]}
                     id="EventListFilters-filter-userType"
+                    label="filter-userType"
                     name="userType"
                     options={
                       Array [
@@ -268,7 +376,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                         },
                       ]
                     }
-                    placeholder="filter-userType"
+                    placeholder="global.select_project_types"
                     role="combobox"
                   />
                 </div>

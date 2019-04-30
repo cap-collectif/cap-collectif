@@ -7,17 +7,6 @@ const GTAG_COOKIE_NAMES = ['_gcl_au'];
 
 const PK_COOKIE_NAMES = ['_pk_ref', '_pk_cvar', '_pk_id', '_pk_ses', '_pk_hsr'];
 
-const ATI_COOKIE_NAMES = [
-  'atidvisitor',
-  'atreman',
-  'atredir',
-  'atsession',
-  'atuserid',
-  'attvtreman',
-  'attvtsession',
-  'atwebosession',
-];
-
 const SCROLL_VALUE_TO_CONSENT = 2000;
 
 class CookieMonster {
@@ -207,11 +196,6 @@ class CookieMonster {
         this.expireCookie(name, this.getCookieDomain(), expire);
       }
     });
-    ATI_COOKIE_NAMES.forEach(name => {
-      if (typeof Cookies.get(name) !== 'undefined') {
-        this.expireCookie(name, this.getCookieDomain(), expire);
-      }
-    });
   };
 
   toggleCookie = (value: boolean, type: string) => {
@@ -223,13 +207,6 @@ class CookieMonster {
       } else {
         this.changeGaExpireAt(new Date().toUTCString());
         PK_COOKIE_NAMES.forEach(name => {
-          cookies.forEach(cookie => {
-            if (cookie.startsWith(name)) {
-              this.expireCookie(cookie, null, new Date().toUTCString());
-            }
-          });
-        });
-        ATI_COOKIE_NAMES.forEach(name => {
           cookies.forEach(cookie => {
             if (cookie.startsWith(name)) {
               this.expireCookie(cookie, null, new Date().toUTCString());

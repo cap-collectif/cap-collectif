@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -113,7 +114,27 @@ class EventSearch extends Search
         ];
     }
 
-    private function getHydratedResults(array $ids): array
+    public function getAllIdsOfAuthorOfEvent(string $terms = null): array
+    {
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery = $this->searchTermsInMultipleFields(
+            $boolQuery,
+            ['author.username', 'author.username.std'],
+            $terms,
+            'phrase_prefix'
+        );
+
+        $query = new Query($boolQuery);
+        $resultSet = $this->index->getType($this->type)->search($query);
+
+        $authorIds = array_map(function (Result $result) {
+            return $result->getData()['author']['id'];
+        }, $resultSet->getResults());
+
+        return array_unique($authorIds);
+    }
+
+    public function getHydratedResults(array $ids): array
     {
         // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
@@ -161,14 +182,19 @@ class EventSearch extends Search
         if (isset($providedFilters['themes'])) {
             $filters['themes.id'] = $providedFilters['themes'];
         }
-        if (isset($providedFilters['author'])) {
-            $filters['author.id'] = $providedFilters['author'];
+        if (isset($providedFilters['isRegistrable'])) {
+            $filters['isRegistrable'] = $providedFilters['isRegistrable'];
         }
         if (isset($providedFilters['projects'])) {
             $filters['projects.id'] = $providedFilters['projects'];
         }
         if (isset($providedFilters['userType'])) {
             $filters['author.userType.id'] = $providedFilters['userType'];
+        }
+        if (isset($providedFilters['author'])) {
+            $filters['author.id'] = GlobalIdResolver::getDecodedId($providedFilters['author'])[
+                'id'
+            ];
         }
 
         return $filters;

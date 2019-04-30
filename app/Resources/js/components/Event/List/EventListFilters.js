@@ -17,18 +17,27 @@ import FiltersContainer from '../../Filters/FiltersContainer';
 import environment from '../../../createRelayEnvironment';
 import EventListCounter from './EventListCounter';
 import EventListStatusFilter from './EventListStatusFilter';
+import UserListField from '../../Admin/Field/UserListField';
 import type { EventListFilters_query } from '~relay/EventListFilters_query.graphql';
 
-type State = { projectOptions: Array<Object>, themeOptions: Array<Object> };
+type State = {
+  projectOptions: Array<Object>,
+  themeOptions: Array<Object>,
+};
+
+type Registrable = 'all' | 'yes' | 'no';
+
 type Props = {|
   ...FormProps,
   query: EventListFilters_query,
   features: FeatureToggles,
   dispatch: Dispatch,
   theme: ?string,
+  isRegistrable: ?Registrable,
   project: ?string,
   userType: ?string,
   search: ?string,
+  author: ?string,
   intl: IntlShape,
   addToggleViewButton: ?boolean,
   userTypes: Array<Object>,
@@ -38,9 +47,14 @@ const countFilters = (
   theme: ?string,
   project: ?string,
   search: ?string,
+  author: ?string,
   userType: ?string,
+  isRegistrable: ?Registrable,
 ): number => {
   let nbFilter = 0;
+  if (author) {
+    nbFilter++;
+  }
   if (theme) {
     nbFilter++;
   }
@@ -48,6 +62,9 @@ const countFilters = (
     nbFilter++;
   }
   if (userType) {
+    nbFilter++;
+  }
+  if (isRegistrable) {
     nbFilter++;
   }
 
@@ -79,7 +96,6 @@ const themeQuery = graphql`
     }
   }
 `;
-
 const StatusContainer = styled(Col)`
   color: white;
   display: flex;
@@ -116,9 +132,42 @@ export class EventListFilters extends React.Component<Props, State> {
   getFilters(nbFilter: number): [] {
     const { features, theme, project, userTypes, intl, dispatch } = this.props;
     const { themeOptions, projectOptions } = this.state;
-
     const filters = [];
-
+    filters.push(
+      <Field
+        component={select}
+        id="EventListFilters-filter-isRegistrable"
+        name="isRegistrable"
+        placeholder={intl.formatMessage({ id: 'indifferent' })}
+        label={intl.formatMessage({ id: 'registration-required' })}
+        role="combobox"
+        aria-autocomplete="list"
+        aria-haspopup="true"
+        clearable
+        aria-controls="EventListFilters-filter-isRegistrable-listbox"
+        options={[
+          { value: 'all', label: intl.formatMessage({ id: 'indifferent' }) },
+          { value: 'yes', label: intl.formatMessage({ id: 'global.yes' }) },
+          { value: 'no', label: intl.formatMessage({ id: 'global.no' }) },
+        ]}
+      />,
+    );
+    filters.push(
+      <UserListField
+        id="EventListFilters-filter-authors"
+        name="author"
+        authorOfEvent
+        clearable
+        selectFieldIsObject
+        debounce
+        autoload={false}
+        labelClassName="control-label"
+        inputClassName="fake-inputClassName"
+        placeholder={intl.formatMessage({ id: 'all-the-authors' })}
+        label={intl.formatMessage({ id: 'project_download.label.author' })}
+        ariaControls="EventListFilters-filter-author-listbox"
+      />,
+    );
     filters.push(
       <div className="visible-xs-block visible-sm-block">
         <Field
@@ -133,6 +182,7 @@ export class EventListFilters extends React.Component<Props, State> {
           addonAfter={<i className="cap cap-magnifier" />}
           component={component}
           placeholder={intl.formatMessage({ id: 'proposal-search' })}
+          label={intl.formatMessage({ id: 'proposal-search' })}
           groupClassName="event-search-group pull-right"
         />
       </div>,
@@ -144,7 +194,8 @@ export class EventListFilters extends React.Component<Props, State> {
           component={select}
           id="EventListFilters-filter-theme"
           name="theme"
-          placeholder={intl.formatMessage({ id: 'type-theme' })}
+          placeholder={intl.formatMessage({ id: 'project.searchform.all_themes' })}
+          label={intl.formatMessage({ id: 'type-theme' })}
           options={themeOptions}
           role="combobox"
           aria-autocomplete="list"
@@ -159,7 +210,8 @@ export class EventListFilters extends React.Component<Props, State> {
           component={select}
           id="EventListFilters-filter-project"
           name="project"
-          placeholder={intl.formatMessage({ id: 'type-project' })}
+          placeholder={intl.formatMessage({ id: 'admin.label.project' })}
+          label={intl.formatMessage({ id: 'type-project' })}
           options={projectOptions}
           role="combobox"
           aria-autocomplete="list"
@@ -179,7 +231,8 @@ export class EventListFilters extends React.Component<Props, State> {
           aria-haspopup="true"
           id="EventListFilters-filter-userType"
           aria-controls="EventListFilters-filter-userType-listbox"
-          placeholder={intl.formatMessage({ id: 'filter-userType' })}
+          placeholder={intl.formatMessage({ id: 'global.select_project_types' })}
+          label={intl.formatMessage({ id: 'filter-userType' })}
           options={userTypes.map(u => ({ value: u.id, label: u.name }))}
         />,
       );
@@ -204,11 +257,6 @@ export class EventListFilters extends React.Component<Props, State> {
 
     return (
       <div>
-        <p>
-          <b>
-            <FormattedMessage id="filter-by" />
-          </b>
-        </p>
         <form>
           {filters.map((filter, index) => (
             <Col key={index} className="mt-5">
@@ -226,6 +274,8 @@ export class EventListFilters extends React.Component<Props, State> {
       theme,
       project,
       search,
+      author,
+      isRegistrable,
       userType,
       intl,
       addToggleViewButton,
@@ -233,7 +283,7 @@ export class EventListFilters extends React.Component<Props, State> {
       query,
     } = this.props;
 
-    const nbFilter = countFilters(theme, project, search, userType);
+    const nbFilter = countFilters(theme, project, search, author, userType, isRegistrable);
 
     const popoverBottom = this.getPopoverBottom(nbFilter);
 
@@ -295,6 +345,8 @@ const mapStateToProps = (state: GlobalState) => ({
   search: selector(state, 'search'),
   userType: selector(state, 'userType'),
   userTypes: state.default.userTypes,
+  author: selector(state, 'author'),
+  isRegistrable: selector(state, 'isRegistrable'),
 });
 
 const container = connect(mapStateToProps)(injectIntl(EventListFilters));
@@ -310,6 +362,8 @@ export default createFragmentContainer(container, {
         search: { type: "String" }
         userType: { type: "ID" }
         isFuture: { type: "Boolean" }
+        author: { type: "ID" }
+        isRegistrable: { type: "Boolean" }
       ) {
       ...EventListCounter_query
         @arguments(
@@ -320,6 +374,8 @@ export default createFragmentContainer(container, {
           project: $project
           userType: $userType
           isFuture: $isFuture
+          author: $author
+          isRegistrable: $isRegistrable
         )
     }
   `,

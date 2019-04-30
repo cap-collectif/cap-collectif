@@ -4375,6 +4375,10 @@ type Query {
 
     # If non-null, filters events with the given string to look for.
     search: String
+
+    # If true, filter the events with registration link or internal registration
+    # enable, if false  filter the events with both registration type at false
+    isRegistrable: Boolean
   ): EventConnection!
 
   # Lookup themes.
@@ -4421,6 +4425,9 @@ type Query {
 
     # Return all users except the ones in the array.
     notInIds: [String] = null
+
+    # If true, retrieve only users that created an event.
+    authorsOfEventOnly: Boolean = false
   ): [User]
   consultationSteps(
     # If omitted, returns all consultations steps. If provided, returns the consultation step of the particular id.

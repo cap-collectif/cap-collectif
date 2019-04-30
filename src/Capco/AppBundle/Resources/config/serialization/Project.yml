@@ -29,3 +29,5 @@ Capco\AppBundle\Entity\Project:
       serialized_name: hasParticipativeStep
     publishedAt:
       groups: [Projects, Elasticsearch]
+    events:
+      groups: [Elasticasearch]

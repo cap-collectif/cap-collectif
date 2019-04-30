@@ -28,13 +28,16 @@ class EventNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->mediaExtension = $mediaExtension;
     }
 
+    /** @var Event $object */
     public function normalize($object, $format = null, array $context = [])
     {
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (\in_array('Elasticsearch', $groups, true)) {
+        if (\in_array('Elasticsearch', $groups)) {
+            $data['isRegistrable'] = $object->isRegistrable();
+
             return $data;
         }
 

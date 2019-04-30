@@ -159,6 +159,8 @@ export default createPaginationContainer(
           userType: { type: "ID" }
           isFuture: { type: "Boolean" }
           previewCount: { type: "Int", defaultValue: 5 }
+          author: { type: "ID" }
+          isRegistrable: { type: "Boolean" }
         ) {
         previewPassedEvents: events(first: $previewCount, isFuture: false) {
           totalCount
@@ -173,6 +175,8 @@ export default createPaginationContainer(
             search: $search
             userType: $userType
             isFuture: $isFuture
+            author: $author
+            isRegistrable: $isRegistrable
           )
         events(
           first: $count
@@ -182,6 +186,8 @@ export default createPaginationContainer(
           search: $search
           userType: $userType
           isFuture: $isFuture
+          author: $author
+          isRegistrable: $isRegistrable
         ) @connection(key: "EventListPaginated_events", filters: []) {
           totalCount
           edges {
@@ -226,6 +232,8 @@ export default createPaginationContainer(
         $search: String
         $userType: ID
         $isFuture: Boolean
+        $author: ID
+        $isRegistrable: Boolean
       ) {
         ...EventListPaginated_query
           @arguments(
@@ -236,6 +244,8 @@ export default createPaginationContainer(
             search: $search
             userType: $userType
             isFuture: $isFuture
+            author: $author
+            isRegistrable: $isRegistrable
           )
       }
     `,
