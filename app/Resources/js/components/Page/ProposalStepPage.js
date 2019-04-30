@@ -175,17 +175,16 @@ export class ProposalStepPage extends React.Component<Props> {
                   {/* $FlowFixMe please use mapDispatchToProps */}
                   <ProposalListFilters step={step} />
                   {step && !step.private && features.display_map ? (
-                    <div className="zi-0">
-                      {/* $FlowFixMe please use mapDispatchToProps */}
-                      <LeafletMap
-                        geoJsons={geoJsons}
-                        defaultMapOptions={{
-                          center: { lat: form.latMap ?? 48.8586047, lng: form.lngMap ?? 2.3137325 },
-                          zoom: form.zoomMap ?? 10,
-                        }}
-                        visible={selectedViewByStep === 'map'}
-                      />
-                    </div>
+                    /* $FlowFixMe please use mapDispatchToProps */
+                    <LeafletMap
+                      className="zi-0"
+                      geoJsons={geoJsons}
+                      defaultMapOptions={{
+                        center: { lat: form.latMap ?? 48.8586047, lng: form.lngMap ?? 2.3137325 },
+                        zoom: form.zoomMap ?? 10,
+                      }}
+                      visible={selectedViewByStep === 'map'}
+                    />
                   ) : null}
                   {/* $FlowFixMe $refType */}
                   <ProposalListView
