@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Faker\Factory;
 use Faker\Generator;
-use Gedmo\Sluggable\SluggableListener;
+use Capco\AppBundle\Sluggable\SluggableListener;
 use Gedmo\Timestampable\TimestampableListener;
 use League\Csv\Reader;
 use Sonata\EasyExtendsBundle\Mapper\DoctrineORMMapper;

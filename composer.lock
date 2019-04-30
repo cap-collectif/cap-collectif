@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b90ef91097af8326a9e47c7659108e21",
+    "content-hash": "c53d6bd5ced181c0b54281d9016e5a1e",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -15870,9 +15870,9 @@
         "overblog/graphql-bundle": 20,
         "webfactory/icu-translation-bundle": 20,
         "tweedegolf/prometheus-bundle": 20,
-        "egeloen/json-builder": 20,
         "symfony/security-acl": 20,
         "egeloen/ckeditor-bundle": 20,
+        "egeloen/json-builder": 20,
         "tonicforhealth/behat-parallel-scenario": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "alexandresalome/mailcatcher": 20,
