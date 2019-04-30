@@ -70,8 +70,8 @@ export default createPaginationContainer(
           isAuthenticated: { type: "Boolean!" }
           count: { type: "Int!" }
           cursor: { type: "String" }
-          type: { type: "ArgumentValue!", nonNull: true }
-          orderBy: { type: "ArgumentOrder!", nonNull: true }
+          type: { type: "ArgumentValue!" }
+          orderBy: { type: "ArgumentOrder!" }
         ) {
         id
         arguments(first: $count, after: $cursor, type: $type, orderBy: $orderBy)

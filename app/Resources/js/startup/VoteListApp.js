@@ -13,13 +13,13 @@ export default ({ userId }: { userId: string }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <QueryRenderer
-        variables={{ userId, count: 5 }}
+        variables={{ userId, count: 5, cursor: null }}
         environment={environment}
         query={graphql`
-          query VoteListAppQuery($userId: ID!, $count: Int, $after: String) {
+          query VoteListAppQuery($userId: ID!, $count: Int, $cursor: String) {
             node(id: $userId) {
               id
-              ...VoteListProfile_voteList @arguments(count: $count, after: $after)
+              ...VoteListProfile_voteList @arguments(count: $count, cursor: $cursor)
             }
           }
         `}

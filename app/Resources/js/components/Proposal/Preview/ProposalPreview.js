@@ -52,7 +52,7 @@ export default createFragmentContainer(ProposalPreview, {
   proposal: graphql`
     fragment ProposalPreview_proposal on Proposal
       @argumentDefinitions(
-        stepId: { type: "ID", nonNull: false }
+        stepId: { type: "ID" }
         isAuthenticated: { type: "Boolean!" }
         isProfileView: { type: "Boolean", defaultValue: false }
       ) {

@@ -267,7 +267,7 @@ const container = connect(mapStateToProps)(ProposalVoteModal);
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalVoteModal_proposal on Proposal
-      @argumentDefinitions(stepId: { type: "ID!", nonNull: true }) {
+      @argumentDefinitions(stepId: { type: "ID!" }) {
       id
       viewerHasVote(step: $stepId)
     }

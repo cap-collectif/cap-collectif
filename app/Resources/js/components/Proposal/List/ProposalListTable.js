@@ -387,7 +387,7 @@ export default createFragmentContainer(ProposalListTable, {
   `,
   proposals: graphql`
     fragment ProposalListTable_proposals on ProposalConnection
-      @argumentDefinitions(stepId: { type: "ID", nonNull: false }) {
+      @argumentDefinitions(stepId: { type: "ID" }) {
       edges {
         node {
           id

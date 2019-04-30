@@ -77,7 +77,7 @@ export default createRefetchContainer(
           isAuthenticated: { type: "Boolean!" }
           count: { type: "Int!", defaultValue: 25 }
           cursor: { type: "String", defaultValue: null }
-          type: { type: "ArgumentValue!", nonNull: true }
+          type: { type: "ArgumentValue!" }
           orderBy: { type: "ArgumentOrder", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
         ) {
         id

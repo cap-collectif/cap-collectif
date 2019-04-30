@@ -19,13 +19,13 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
           query ArgumentListAppQuery(
             $userId: ID!
             $count: Int
-            $after: String
+            $cursor: String
             $isAuthenticated: Boolean!
           ) {
             node(id: $userId) {
               id
               ...ArgumentListProfile_argumentList
-                @arguments(count: $count, after: $after, isAuthenticated: $isAuthenticated)
+                @arguments(count: $count, cursor: $cursor, isAuthenticated: $isAuthenticated)
             }
           }
         `}

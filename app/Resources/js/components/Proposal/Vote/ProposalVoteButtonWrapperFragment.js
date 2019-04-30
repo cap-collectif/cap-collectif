@@ -107,7 +107,7 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
     fragment ProposalVoteButtonWrapperFragment_proposal on Proposal
       @argumentDefinitions(
         isAuthenticated: { type: "Boolean", defaultValue: true }
-        stepId: { type: "ID!", nonNull: true }
+        stepId: { type: "ID!" }
       ) {
       id
       estimation
@@ -119,7 +119,7 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
     fragment ProposalVoteButtonWrapperFragment_viewer on User
       @argumentDefinitions(
         isAuthenticated: { type: "Boolean", defaultValue: true }
-        stepId: { type: "ID!", nonNull: true }
+        stepId: { type: "ID!" }
       ) {
       id
       proposalVotes(stepId: $stepId) @include(if: $isAuthenticated) {

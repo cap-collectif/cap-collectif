@@ -65,7 +65,7 @@ export default createFragmentContainer(ProposalPreviewFooter, {
   proposal: graphql`
     fragment ProposalPreviewFooter_proposal on Proposal
       @argumentDefinitions(
-        stepId: { type: "ID!", nonNull: true }
+        stepId: { type: "ID!" }
         isProfileView: { type: "Boolean", defaultValue: false }
       ) {
       id

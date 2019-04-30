@@ -61,7 +61,7 @@ export default createFragmentContainer(ProposalPreviewStatus, {
   proposal: graphql`
     fragment ProposalPreviewStatus_proposal on Proposal
       @argumentDefinitions(
-        stepId: { type: "ID", nonNull: true }
+        stepId: { type: "ID" }
         isProfileView: { type: "Boolean", defaultValue: false }
       ) {
       trashed

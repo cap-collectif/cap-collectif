@@ -173,7 +173,7 @@ export default createFragmentContainer(ProposalVoteBasketWidget, {
   `,
   viewer: graphql`
     fragment ProposalVoteBasketWidget_viewer on User
-      @argumentDefinitions(stepId: { type: "ID!", nonNull: true }) {
+      @argumentDefinitions(stepId: { type: "ID!" }) {
       id
       proposalVotes(stepId: $stepId) {
         totalCount

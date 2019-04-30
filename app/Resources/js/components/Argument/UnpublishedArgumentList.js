@@ -59,7 +59,7 @@ export default createFragmentContainer(UnpublishedArgumentList, {
         edges {
           node {
             id
-            ...ArgumentItem_argument @arguments(isAuthenticated: $isAuthenticated, type: $type)
+            ...ArgumentItem_argument @arguments(isAuthenticated: $isAuthenticated)
           }
         }
       }

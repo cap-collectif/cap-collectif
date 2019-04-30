@@ -93,7 +93,7 @@ export default createPaginationContainer(
         @argumentDefinitions(
           count: { type: "Int", defaultValue: 50 }
           cursor: { type: "String", defaultValue: null }
-          stepId: { type: "ID!", nonNull: true }
+          stepId: { type: "ID!" }
         ) {
         id
         votes(first: $count, after: $cursor, stepId: $stepId)

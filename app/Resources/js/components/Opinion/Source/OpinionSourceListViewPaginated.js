@@ -76,7 +76,7 @@ export default createPaginationContainer(
           isAuthenticated: { type: "Boolean!", defaultValue: true }
           count: { type: "Int!" }
           cursor: { type: "String" }
-          orderBy: { type: "SourceOrder!", nonNull: true }
+          orderBy: { type: "SourceOrder!" }
         ) {
         id
         sources(first: $count, after: $cursor, orderBy: $orderBy)

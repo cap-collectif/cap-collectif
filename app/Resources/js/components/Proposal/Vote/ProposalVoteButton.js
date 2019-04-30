@@ -109,7 +109,7 @@ export default createFragmentContainer(container, {
     fragment ProposalVoteButton_proposal on Proposal
       @argumentDefinitions(
         isAuthenticated: { type: "Boolean", defaultValue: true }
-        stepId: { type: "ID!", nonNull: true }
+        stepId: { type: "ID!" }
       ) {
       id
       viewerHasVote(step: $stepId) @include(if: $isAuthenticated)

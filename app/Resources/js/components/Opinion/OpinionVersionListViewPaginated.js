@@ -76,7 +76,7 @@ export default createPaginationContainer(
           isAuthenticated: { type: "Boolean", defaultValue: true }
           count: { type: "Int!" }
           cursor: { type: "String" }
-          orderBy: { type: "VersionOrder!", nonNull: true }
+          orderBy: { type: "VersionOrder!" }
         ) {
         id
         versions(first: $count, after: $cursor, orderBy: $orderBy)
@@ -85,7 +85,7 @@ export default createPaginationContainer(
           edges {
             node {
               id
-              ...OpinionVersion_version @arguments(isAuthenticated: $isAuthenticated)
+              ...OpinionVersion_version
             }
           }
           pageInfo {
