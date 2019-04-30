@@ -55,6 +55,7 @@ type Props = {
   stepId: string,
   stepType: string,
   dispatch: Dispatch,
+  className?: string,
 };
 
 let L;
@@ -123,7 +124,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
   }
 
   render() {
-    const { geoJsons, defaultMapOptions, markers, visible, mapTokens } = this.props;
+    const { geoJsons, defaultMapOptions, markers, visible, mapTokens, className } = this.props;
     const { loaded } = this.state;
     const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
 
@@ -139,7 +140,8 @@ export class LeafletMap extends Component<Props, ComponentState> {
         style={{
           width: '100%',
           height: '50vw',
-        }}>
+        }}
+        className={className}>
         <TileLayer
           attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
           url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
