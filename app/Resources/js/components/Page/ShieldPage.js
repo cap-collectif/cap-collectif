@@ -28,12 +28,10 @@ export class ShieldPage extends React.Component<Props> {
     }: Props = this.props;
     if (showRegistration) {
       return (
-        <div
-          style={{ background: 'white' }}
-          className="col-md-4 col-md-offset-4 panel panel-default">
+        <div id="shield-agent" className="bg-white col-md-4 col-md-offset-4 panel panel-default">
           <div className="panel-body">
             <LoginButton className="btn--connection btn-block" />
-            <div style={{ marginTop: 10 }} />
+            <div className="mt-10" />
             <RegistrationButton chartBody={chartBody} className="btn-block" />
           </div>
         </div>
@@ -50,8 +48,7 @@ export class ShieldPage extends React.Component<Props> {
               <Button
                 id="confirm-login"
                 type="submit"
-                style={{ marginTop: 10 }}
-                className="btn-block btn-success"
+                className="mt-10 btn-block btn-success"
                 disabled={submitting}
                 bsStyle="primary">
                 {submitting ? (

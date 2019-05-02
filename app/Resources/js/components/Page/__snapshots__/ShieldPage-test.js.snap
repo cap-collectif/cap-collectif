@@ -22,14 +22,9 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
         block={false}
         bsClass="btn"
         bsStyle="primary"
-        className="btn-block btn-success"
+        className="mt-10 btn-block btn-success"
         disabled={false}
         id="confirm-login"
-        style={
-          Object {
-            "marginTop": 10,
-          }
-        }
         type="submit"
       >
         <FormattedMessage
@@ -44,12 +39,8 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
 
 exports[`<ShieldPage /> renders with registration enabled 1`] = `
 <div
-  className="col-md-4 col-md-offset-4 panel panel-default"
-  style={
-    Object {
-      "background": "white",
-    }
-  }
+  className="bg-white col-md-4 col-md-offset-4 panel panel-default"
+  id="shield-agent"
 >
   <div
     className="panel-body"
@@ -58,11 +49,7 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
       className="btn--connection btn-block"
     />
     <div
-      style={
-        Object {
-          "marginTop": 10,
-        }
-      }
+      className="mt-10"
     />
     <Connect(InjectIntl(RegistrationButton))
       chartBody="Super charte !!"
