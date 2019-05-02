@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ChangePasswordFormType;
@@ -14,15 +15,18 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UpdateProfilePasswordMutation extends BaseUpdateProfile
 {
     private $userManager;
+    private $userNotifier;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         UserRepository $userRepository,
-        UserManager $userManager
+        UserManager $userManager,
+        UserNotifier $userNotifier
     ) {
         $this->userManager = $userManager;
+        $this->userNotifier = $userNotifier;
         parent::__construct($em, $formFactory, $logger, $userRepository);
     }
 
@@ -42,6 +46,8 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
 
         $user->setPlainPassword($arguments['new']);
         $this->userManager->updateUser($user);
+
+        $this->userNotifier->passwordChangeConfirmation($user);
 
         return [self::USER => $user];
     }

@@ -3,6 +3,10 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\GraphQL\Resolver\UserResolver;
+use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Mailer\Message\User\UserNewPasswordConfirmationMessage;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -11,9 +15,24 @@ use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationReminderMessage;
 use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
+use Symfony\Component\Routing\RouterInterface;
 
 final class UserNotifier extends BaseNotifier
 {
+    private $baseUrl;
+    private $router;
+
+    public function __construct(
+        RouterInterface $router,
+        MailerService $mailer,
+        Resolver $siteParams,
+        UserResolver $userResolver
+    ) {
+        $this->router = $router;
+        $this->baseUrl = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
+        parent::__construct($mailer, $siteParams, $userResolver);
+    }
+
     public function acknowledgeReply(
         Project $project,
         Reply $reply,
@@ -73,6 +92,19 @@ final class UserNotifier extends BaseNotifier
                 $user,
                 $this->userResolver->resolveRegistrationConfirmationUrl($user),
                 $user->getNewEmailToConfirm()
+            )
+        );
+    }
+
+    public function passwordChangeConfirmation(User $user): void
+    {
+        $this->mailer->sendMessage(
+            UserNewPasswordConfirmationMessage::create(
+                $user,
+                new \DateTime(),
+                $this->siteParams->getValue('global.site.fullname'),
+                $this->baseUrl,
+                $user->getEmail()
             )
         );
     }
