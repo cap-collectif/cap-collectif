@@ -83,10 +83,18 @@ export class ContactAdminListItem extends React.Component<Props, State> {
           </Col>
           <Col xs={6}>
             <ButtonToolbar className="pull-right">
-              <Button className="mt-5" bsStyle="warning" onClick={this.openEditModal}>
+              <Button
+                id={`UpdateContact-${contactForm.id}`}
+                className="mt-5"
+                bsStyle="warning"
+                onClick={this.openEditModal}>
                 <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
               </Button>
-              <Button className="mt-5" bsStyle="danger" onClick={this.openRemoveModal}>
+              <Button
+                id={`DeleteContact-${contactForm.id}`}
+                className="mt-5"
+                bsStyle="danger"
+                onClick={this.openRemoveModal}>
                 <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
               </Button>
             </ButtonToolbar>
