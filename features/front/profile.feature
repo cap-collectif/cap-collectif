@@ -63,7 +63,8 @@ Scenario: Logged in user wants to change his password
     | password-form-confirmation | toto12345   |
   And I press "profile-password-save"
   And I wait 2 seconds
-  Then I should see "global.saved"
+  And I should see "global.saved"
+  Then I should see mail with subject "email.notification.password.change.subject"
 
 @database
 Scenario: Logged in user wants to manage his followings and unfollow all and stay unfollow after refresh
