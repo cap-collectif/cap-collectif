@@ -2,10 +2,13 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\MediaBundle\Entity\Media;
 use Symfony\Component\Form\AbstractType;
 use Capco\UserBundle\Form\Type\ReCaptchaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -57,6 +60,39 @@ class ContactType extends AbstractType
                     'cols' => '30',
                 ],
                 'constraints' => [new NotBlank(['message' => 'contact.no_message'])],
+            ])
+            ->add('customCode', TextType::class, [
+                'label' => 'contact.form.body',
+                'required' => false,
+                'purify_html' => false,
+                'purify_html_profile' => 'default',
+                'attr' => [
+                    'rows' => '10',
+                    'cols' => '30',
+                ],
+                'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
+            ])
+            ->add('metadatas', TextType::class, [
+                'label' => 'contact.form.body',
+                'required' => false,
+                'purify_html' => false,
+                'purify_html_profile' => 'default',
+                'attr' => [
+                    'rows' => '10',
+                    'cols' => '30',
+                ],
+                'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
+            ])
+            ->add('socialMedias', EntityType::class, [
+                'class' => Media::class,
+                'multiple' => false,
+                'required' => false,
+                'constraints' => [
+                    new Count([
+                        'max' => 1,
+                        'maxMessage' => 'You must add one file or none.',
+                    ]),
+                ],
             ]);
     }
 

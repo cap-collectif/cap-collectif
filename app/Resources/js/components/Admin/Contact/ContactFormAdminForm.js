@@ -162,7 +162,6 @@ export class ContactFormAdminForm extends React.Component<Props> {
           />
           <div className="btn-group">
             <SubmitButton
-              type="submit"
               id={`${form}-submit-create-contact`}
               bsStyle="info"
               disabled={submitting || pristine}
