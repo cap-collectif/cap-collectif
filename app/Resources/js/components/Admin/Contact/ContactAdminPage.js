@@ -18,7 +18,7 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import UpdateContactPageMutation from '../../../mutations/UpdateContactPageMutation';
 import type { FormValues as CustomFormValues } from '../Field/CustomPageFields';
 
-type Props = {|
+export type Props = {|
   ...FormProps,
   query: ContactAdminPage_query,
 |};
@@ -91,8 +91,7 @@ export class ContactAdminPage extends React.Component<Props> {
             </h3>
           </div>
           <div className="box-content">
-            {/* $FlowFixMe */}
-            <ContactAdminForm {...this.props} formName={formName} />
+            <ContactAdminForm formName={formName} {...this.props} />
             <QueryRenderer
               environment={environment}
               query={graphql`

@@ -5,9 +5,11 @@ import type { FormProps } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 
 import renderComponent from '../../Form/Field';
+import type {Props as ContactAdminPageProps} from './ContactAdminPage';
 
 type Props = {|
   ...FormProps,
+  ...ContactAdminPageProps,
   handleSubmit: () => void,
   formName: string,
 |};
