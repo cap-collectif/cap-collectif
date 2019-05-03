@@ -59,82 +59,95 @@ class ThemeExtension extends \Twig_Extension
      */
     public function listProjects(): array
     {
-        $projects = $this->projectRepo->findAllWithSteps();
-        $data = [];
+        $cachedItem = $this->cache->getItem(self::LIST_PROJECTS_CACHE_KEY);
 
-        foreach ($projects as $project) {
-            $projectStepsData = [];
-            $projectStepsByIdData = [];
-            foreach ($project->getSteps() as $step) {
-                $realStep = $step->getStep();
-                $projectStepsStatus = [];
-                foreach ($realStep->getStatuses() as $status) {
-                    $projectStepsStatus[] = [
-                        'id' => $status->getId(),
-                        'name' => $status->getName(),
+        if (!$cachedItem->isHit()) {
+            $projects = $this->projectRepo->findAllWithSteps();
+            $data = [];
+
+            foreach ($projects as $project) {
+                $projectStepsData = [];
+                $projectStepsByIdData = [];
+                foreach ($project->getSteps() as $step) {
+                    $realStep = $step->getStep();
+                    $projectStepsStatus = [];
+                    foreach ($realStep->getStatuses() as $status) {
+                        $projectStepsStatus[] = [
+                            'id' => $status->getId(),
+                            'name' => $status->getName(),
+                        ];
+                    }
+
+                    $stepData = [
+                        'id' => $this->getStepId($realStep),
+                        'title' => $realStep->getTitle(),
+                        'label' => $realStep->getLabel(),
+                        'slug' => $realStep->getSlug(),
+                        'startAt' => $realStep->getStartAt()
+                            ? $realStep->getStartAt()->format(\DateTime::ATOM)
+                            : null,
+                        'endAt' => $realStep->getEndAt()
+                            ? $realStep->getEndAt()->format(\DateTime::ATOM)
+                            : null,
+                        'position' => $realStep->getPosition(),
+                        'type' => $realStep->getType(),
+                        'enabled' => $realStep->getIsEnabled(),
+                        'showProgressSteps' => method_exists($realStep, 'isAllowingProgressSteps')
+                            ? $realStep->isAllowingProgressSteps()
+                            : false,
+                        'statuses' => $projectStepsStatus,
+                        'status' => $this->stepHelper->getStatus($realStep),
+                        'open' => $realStep->isOpen(),
+                        'timeless' => $realStep->isTimeless(),
+                        'titleHelpText' => method_exists($realStep, 'getTitleHelpText')
+                            ? $realStep->getTitleHelpText()
+                            : null,
+                        'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText')
+                            ? $realStep->getDescriptionHelpText()
+                            : null,
+                        '_links' => [
+                            'show' => $this->urlResolver->getStepUrl($realStep, true),
+                            'stats' => $this->router->generate(
+                                'app_project_show_stats',
+                                ['projectSlug' => $project->getSlug()],
+                                true
+                            ),
+                            'editSynthesis' => $this->router->generate(
+                                'app_project_edit_synthesis',
+                                [
+                                    'projectSlug' => $project->getSlug(),
+                                    'stepSlug' => $realStep->getSlug(),
+                                ],
+                                true
+                            ),
+                        ],
                     ];
+                    $projectStepsData[] = $stepData;
+                    $projectStepsByIdData[$stepData['id']] = $stepData;
                 }
-
-                $stepData = [
-                    'id' => $this->getStepId($realStep),
-                    'title' => $realStep->getTitle(),
-                    'label' => $realStep->getLabel(),
-                    'slug' => $realStep->getSlug(),
-                    'startAt' => $realStep->getStartAt()
-                        ? $realStep->getStartAt()->format(\DateTime::ATOM)
-                        : null,
-                    'endAt' => $realStep->getEndAt()
-                        ? $realStep->getEndAt()->format(\DateTime::ATOM)
-                        : null,
-                    'position' => $realStep->getPosition(),
-                    'type' => $realStep->getType(),
-                    'enabled' => $realStep->getIsEnabled(),
-                    'showProgressSteps' => method_exists($realStep, 'isAllowingProgressSteps')
-                        ? $realStep->isAllowingProgressSteps()
-                        : false,
-                    'statuses' => $projectStepsStatus,
-                    'status' => $this->stepHelper->getStatus($realStep),
-                    'open' => $realStep->isOpen(),
-                    'timeless' => $realStep->isTimeless(),
-                    'titleHelpText' => method_exists($realStep, 'getTitleHelpText')
-                        ? $realStep->getTitleHelpText()
-                        : null,
-                    'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText')
-                        ? $realStep->getDescriptionHelpText()
-                        : null,
-                    '_links' => [
-                        'show' => $this->urlResolver->getStepUrl($realStep, true),
-                        'stats' => $this->router->generate(
-                            'app_project_show_stats',
-                            ['projectSlug' => $project->getSlug()],
-                            true
-                        ),
-                        'editSynthesis' => $this->router->generate(
-                            'app_project_edit_synthesis',
-                            [
-                                'projectSlug' => $project->getSlug(),
-                                'stepSlug' => $realStep->getSlug(),
-                            ],
-                            true
-                        ),
+                $projectSerialized = $this->serializer->serialize($project, 'json', [
+                    'groups' => [
+                        'Projects',
+                        'UserDetails',
+                        'UserVotes',
+                        'ThemeDetails',
+                        'ProjectType',
                     ],
-                ];
-                $projectStepsData[] = $stepData;
-                $projectStepsByIdData[$stepData['id']] = $stepData;
-            }
-            $projectSerialized = $this->serializer->serialize($project, 'json', [
-                'groups' => ['Projects', 'UserDetails', 'UserVotes', 'ThemeDetails', 'ProjectType'],
-            ]);
+                ]);
 
-            $projectId = GlobalId::toGlobalId('Project', $project->getId());
-            $projectData = json_decode($projectSerialized, true);
-            $projectData['id'] = $projectId;
-            $projectData['steps'] = $projectStepsData;
-            $projectData['stepsById'] = $projectStepsByIdData;
-            $data[$projectId] = $projectData;
+                $projectId = GlobalId::toGlobalId('Project', $project->getId());
+                $projectData = json_decode($projectSerialized, true);
+                $projectData['id'] = $projectId;
+                $projectData['steps'] = $projectStepsData;
+                $projectData['stepsById'] = $projectStepsByIdData;
+                $data[$projectId] = $projectData;
+            }
+
+            $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
+            $this->cache->save($cachedItem);
         }
 
-        return $data;
+        return $cachedItem->get();
     }
 
     public function listThemes(): array

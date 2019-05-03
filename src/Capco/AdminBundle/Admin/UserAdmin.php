@@ -2,23 +2,14 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
 
 class UserAdmin extends BaseAdmin
 {
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
-
-    public function getTemplate($name)
-    {
-        if ('edit' === $name) {
-            return 'CapcoAdminBundle:User:edit.html.twig';
-        }
-
-        return parent::getTemplate($name);
-    }
 
     public function getBatchActions()
     {
@@ -51,8 +42,7 @@ class UserAdmin extends BaseAdmin
             ])
             ->add('locked', null, ['editable' => true])
             ->add('updatedAt', null, ['label' => 'admin.fields.group.created_at'])
-            ->add('deletedAccountAt', null, ['label' => 'admin.fields.proposal.deleted_at'])
-            ->add('_action', 'actions', ['actions' => ['show' => [], 'delete' => []]]);
+            ->add('deletedAccountAt', null, ['label' => 'admin.fields.proposal.deleted_at']);
     }
 
     protected function configureDatagridFilters(DatagridMapper $filterMapper): void
@@ -68,6 +58,6 @@ class UserAdmin extends BaseAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['batch', 'list', 'edit', 'show', 'export']);
+        $collection->clearExcept(['batch', 'list', 'edit', 'export']);
     }
 }

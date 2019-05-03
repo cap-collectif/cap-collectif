@@ -1,9 +1,15 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
+{% block title %}
+    {{ "title_edit"|trans({'%name%': admin.subject.displayName|truncate(15) }, 'SonataAdminBundle') }}
+{% endblock %}
+
 {% block sonata_breadcrumb %}
+    {# empty to override #}
 {% endblock %}
 
 {% block form %}
+    {# override sonata's form to render a react component instead #}
     {% include '@CapcoApp/redux_store.html.twig' %}
     {{ react_render_component('UserAdminPageApp', {
         'props': {
@@ -11,8 +17,4 @@
         },
         'rendering': 'client_side'
     }) }}
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
 {% endblock %}
