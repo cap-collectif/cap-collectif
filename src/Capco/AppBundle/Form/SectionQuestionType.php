@@ -28,7 +28,8 @@ class SectionQuestionType extends AbstractType
             'purify_html' => true,
             'purify_html_profile' => 'default',
         ]);
-        $builder->add('description', TextType::class, [
+        $builder->add('description', PurifiedTextType::class, [
+            'strip_tags' => true,
             'purify_html' => true,
             'purify_html_profile' => 'default',
         ]);

@@ -109,7 +109,7 @@ Scenario: GraphQL admin wants to reorder questions
         "questions": [
           {
             "question": {
-              "description": "<p><strong>Youpla</strong></p>",
+              "description": "Youpla",
               "helpText": "text",
               "id": "UXVlc3Rpb246NjY2",
               "private": false,
@@ -145,7 +145,7 @@ Scenario: GraphQL admin wants to reorder questions
               "id": "UXVlc3Rpb246NjY2",
               "title": "Luffy ou Zoro ?",
               "helpText": "text",
-              "description": "<p><strong>Youpla</strong></p>",
+              "description": "Youpla",
               "type": "text",
               "private": false,
               "required": true
