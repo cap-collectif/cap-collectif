@@ -121,11 +121,7 @@ class ProjectController extends Controller
      * @Route("/projects/{projectSlug}/step/{stepSlug}/download", name="app_project_download")
      * @Security("has_role('ROLE_ADMIN')")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
-     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
-     *    "repository_method"="getOneBySlugAndProjectSlug",
-     *    "map_method_signature"=true
-     * })
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={"mapping": {"stepSlug": "slug"}})
      */
     public function downloadAction(Request $request, Project $project, AbstractStep $step)
     {
