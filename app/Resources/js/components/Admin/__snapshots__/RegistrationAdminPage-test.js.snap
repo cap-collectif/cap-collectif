@@ -155,7 +155,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
   >
     <Toggle
       checked={false}
-      disabled={true}
+      disabled={false}
       icons={true}
       onChange={[Function]}
     />
@@ -367,7 +367,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         bsStyle="info"
         closeLabel="Close alert"
       >
-        Cette section est modifiable uniquement par votre administrateur cap-collectif.
+        <FormattedMessage
+          id="only-super-admin-can-edit"
+          values={Object {}}
+        />
       </Alert>
       <strong>
         <FormattedMessage

@@ -70,6 +70,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
             $toggleManager->activate('display_map');
             $toggleManager->activate('privacy_policy');
             $toggleManager->activate('public_api');
+            $toggleManager->activate('consent_internal_communication');
         }
 
         if ('test' == $env) {
@@ -88,6 +89,9 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
             $toggleManager->deactivate('login_saml');
             $toggleManager->deactivate('login_paris');
             $toggleManager->deactivate('public_api');
+            $toggleManager->activate('captcha');
+            $toggleManager->activate('consent_internal_communication');
+
             $toggleManager->activate('export');
 
             $toggleManager->activate('shield_mode');
