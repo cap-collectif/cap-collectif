@@ -116,7 +116,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
           <p style={{ marginTop: 10 }}>
             {!isSuperAdmin && (
               <Alert bsStyle="info">
-                <FormattedMessage id="only-super-admin-can-edit" />
+                Cette section est modifiable uniquement par votre administrateur cap-collectif.
               </Alert>
             )}
             <strong>
@@ -139,7 +139,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <div className="d-flex align-items-center mb-15 mt-15">
           <Toggle
             icons
-            disabled={!isSuperAdmin}
+            disabled
             checked={features.consent_internal_communication}
             onChange={() =>
               onToggle('consent_internal_communication', !features.consent_internal_communication)
