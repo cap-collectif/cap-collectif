@@ -234,7 +234,7 @@ export class CommentForm extends React.Component<Props, State> {
     });
 
     return (
-      <div className={classes} style={{ padding: '5px' }}>
+      <div id="CommentForm" className={classes} style={{ padding: '5px' }}>
         <UserAvatar user={user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock">
           <form onSubmit={this.onSubmit}>
