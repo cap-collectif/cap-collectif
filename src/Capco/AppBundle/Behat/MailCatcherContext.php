@@ -39,7 +39,7 @@ class MailCatcherContext extends Base
         if (false === strpos($content, $text)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Unable to find text \"%s\" in current message:\n%s, if you want to updateSnapshot, pass writeSnapshot to true",
+                    "Unable to find text \"%s\" in current message:\n%s, if you want to update snapshots, use 'fab local.qa.snapshots:emails'.",
                     $text,
                     $message->getContent()
                 )
