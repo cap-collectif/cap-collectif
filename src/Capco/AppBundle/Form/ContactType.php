@@ -55,10 +55,6 @@ class ContactType extends AbstractType
                 'required' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
-                'attr' => [
-                    'rows' => '10',
-                    'cols' => '30',
-                ],
                 'constraints' => [new NotBlank(['message' => 'contact.no_message'])],
             ])
             ->add('customCode', TextType::class, [
@@ -66,10 +62,6 @@ class ContactType extends AbstractType
                 'required' => false,
                 'purify_html' => false,
                 'purify_html_profile' => 'default',
-                'attr' => [
-                    'rows' => '10',
-                    'cols' => '30',
-                ],
                 'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
             ])
             ->add('metadatas', TextType::class, [
@@ -77,10 +69,6 @@ class ContactType extends AbstractType
                 'required' => false,
                 'purify_html' => false,
                 'purify_html_profile' => 'default',
-                'attr' => [
-                    'rows' => '10',
-                    'cols' => '30',
-                ],
                 'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
             ])
             ->add('socialMedias', EntityType::class, [

@@ -22,5 +22,7 @@ class SiteImageQueryResolver implements ResolverInterface
         if ($keyname) {
             return $this->repository->findOneByKeyname($keyname);
         }
+
+        return null;
     }
 }

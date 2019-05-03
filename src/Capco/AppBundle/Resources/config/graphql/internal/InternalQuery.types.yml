@@ -34,7 +34,7 @@ InternalQuery:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteImageQueryResolver", [args])'
         args:
           keyname:
-            type: 'String'
+            type: 'String!'
             description: 'The site image keyname'
       registrationForm:
         type: 'InternalRegistrationForm'
