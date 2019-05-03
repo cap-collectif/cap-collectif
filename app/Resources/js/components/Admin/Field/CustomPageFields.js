@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-// $FlowFixMe
+// $FlowFixMe FormSection is not updated in redux-form typedef
 import { Field, FormSection } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -13,9 +13,7 @@ export type FormValues = {|
   metadescription?: string,
 |};
 
-type Props = {|
-  ...FormValues,
-|};
+type Props = {||};
 
 export default class CustomPageFields extends React.Component<Props> {
   render() {

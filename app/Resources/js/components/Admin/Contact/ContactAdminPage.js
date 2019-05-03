@@ -111,8 +111,7 @@ export class ContactAdminPage extends React.Component<Props> {
               <FormattedMessage id="admin.fields.project.advanced" />
             </h3>
           </div>
-          {/* $FlowFixMe */}
-          <CustomPageFields formName={formName} {...this.props} />
+          <CustomPageFields />
         </div>
 
         <div className="box no-border">
