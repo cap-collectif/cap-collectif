@@ -59,7 +59,7 @@ Scenario: Not confirmed logged in API client wants resend a confirmation email
   """
   And 0 mail should be sent
 
-@database
+@database @snapshot
 Scenario: Not confirmed logged in API client can receive a new confirmation email
   Given feature "registration" is enabled
   And I am logged in to api as user_not_confirmed
@@ -87,7 +87,7 @@ Scenario: Not confirmed logged in API client wants to mass spam confirmation ema
   """
   And 0 mail should be sent
 
-@database
+@database @snapshot
 Scenario: Logged in API client can update his email
   And I am logged in to api as user
   And I send a PUT request to "/api/users/me" with json:

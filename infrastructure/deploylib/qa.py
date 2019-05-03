@@ -33,7 +33,7 @@ def graphql_schemas(checkSame=False):
         local('if [[ $(git diff -G. --name-only *.graphql | wc -c) -ne 0 ]]; then git --no-pager diff *.graphql && echo "\n\033[31mThe following schemas are not up to date:\033[0m" && git diff --name-only *.graphql && echo "\033[31mYou should run \'yarn generate-graphql-files\' to update your *.graphql files !\033[0m" && exit 1; fi',  capture=False, shell='/bin/bash')
 
 @task(environments=['local'])
-def snapshots():
+def snapshots(emails=False):
     commands = [
         'capco:export:users --snapshot',
         'capco:export:consultation --snapshot',
@@ -46,6 +46,12 @@ def snapshots():
         'xlsx',
         'xls',
     ]
+
+    if emails:
+        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p api --tags=snapshot', 'application', env.www_app)
+        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p e2e --tags=snapshot', 'application', env.www_app)
+        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p commands --tags=snapshot', 'application', env.www_app)
+
     env.service_command('bin/console capco:toggle:enable export --env test --no-debug', 'application', env.www_app)
     for extension in extensions:
         env.service_command('rm -rf var/www/web/export/*.' + extension , 'application', env.www_app, 'root')

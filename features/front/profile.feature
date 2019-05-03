@@ -52,7 +52,7 @@ Scenario: Logged in user wants to change his password to a too short password
   And I should see "fos_user.new_password.short"
   And I should see "global.invalid.form"
 
-@database
+@database @snapshot
 Scenario: Logged in user wants to change his password
   Given I am logged in as user
   And I visited "change password page"
@@ -64,7 +64,8 @@ Scenario: Logged in user wants to change his password
   And I press "profile-password-save"
   And I wait 2 seconds
   And I should see "global.saved"
-  Then I should see mail with subject "email.notification.password.change.subject"
+  And I open mail with subject "email.notification.password.change.subject"
+  Then email should match snapshot 'confirmPasswordChange.html'
 
 @database
 Scenario: Logged in user wants to manage his followings and unfollow all and stay unfollow after refresh

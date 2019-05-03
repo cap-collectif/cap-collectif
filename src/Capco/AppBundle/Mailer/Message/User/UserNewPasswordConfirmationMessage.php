@@ -25,8 +25,12 @@ final class UserNewPasswordConfirmationMessage extends DefaultMessage
         );
     }
 
-    private static function getMyTemplateVars($user, $date, $siteName, $baseUrl): array
-    {
+    private static function getMyTemplateVars(
+        User $user,
+        \DateTime $date,
+        string $siteName,
+        string $baseUrl
+    ): array {
         return [
             'user' => $user,
             'date' => $date,

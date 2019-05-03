@@ -9,8 +9,10 @@ class MailCatcherContext extends Base
     /**
      * @Then email should match snapshot :file
      */
-    public function emailContentShouldMatch($file, $writeSnapshot = false)
+    public function emailContentShouldMatch($file)
     {
+        $writeSnapshot = getenv('SNAPSHOTS');
+
         $message = $this->getCurrentMessage();
 
         if (!$message->isMultipart()) {
@@ -24,11 +26,12 @@ class MailCatcherContext extends Base
         }
 
         if ($writeSnapshot) {
-            $newSnapshot = fopen(__DIR__ . '/snapshots/' . $file, 'wb');
+            $newSnapshot = fopen(__DIR__ . '/snapshots/' . $file, 'w');
             fwrite($newSnapshot, $content);
             fclose($newSnapshot);
+            echo "\"Snapshot writen at ${file}, you can now relaunch the testsuite.\"";
 
-            throw new \Exception("Snapshot writen at ${file}, you can now relaunch the testsuite.");
+            return;
         }
 
         $text = file_get_contents(__DIR__ . '/snapshots/' . $file);

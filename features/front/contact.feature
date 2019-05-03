@@ -38,6 +38,7 @@ Scenario: User wants to send a message via the first form by filling empty field
   Then I should see "contact.no_email"
   Then I should see "contact.no_description"
 
+@snapshot
 Scenario: The email sent to the interlocutor should be sent
   Given I visited "contact page"
   When I wait ".contact__form__list button:first-of-type" to appear on current page
