@@ -4399,7 +4399,7 @@ type Query {
   # Get a site image
   siteImage(
     # The site image keyname
-    keyname: String
+    keyname: String!
   ): SiteImage
 
   # Get the current registration form
