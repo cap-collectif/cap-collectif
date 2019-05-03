@@ -8,12 +8,13 @@ import IntlProvider from './IntlProvider';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import ContactAdminPage from '../components/Admin/Contact/ContactAdminPage';
+import type { ContactAdminPage_query } from '~relay/ContactAdminPage_query.graphql';
 
 const renderContactAdminPage = ({
   error,
   props,
 }: {
-  props: any,
+  props: ?ContactAdminPage_query,
 } & ReadyState) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
