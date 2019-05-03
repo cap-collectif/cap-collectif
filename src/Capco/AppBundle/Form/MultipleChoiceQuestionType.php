@@ -30,8 +30,7 @@ class MultipleChoiceQuestionType extends AbstractType
             'purify_html' => true,
             'purify_html_profile' => 'default',
         ]);
-        $builder->add('description', PurifiedTextType::class, [
-            'strip_tags' => true,
+        $builder->add('description', TextType::class, [
             'purify_html' => true,
             'purify_html_profile' => 'default',
         ]);
