@@ -7,15 +7,15 @@ import { FormattedMessage } from 'react-intl';
 import component from '../../Form/Field';
 import type { Uuid } from '../../../types';
 
-export type FormValues = {
+export type FormValues = {|
   customcode?: string,
   picto?: ?{ id: Uuid, name: string, url: string },
   metadescription?: string,
-};
+|};
 
-type Props = {
+type Props = {|
   ...FormValues,
-};
+|};
 
 export default class CustomPageFields extends React.Component<Props> {
   render() {

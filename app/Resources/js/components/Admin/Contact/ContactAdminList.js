@@ -7,9 +7,9 @@ import type { ContactAdminList_query } from '~relay/ContactAdminList_query.graph
 import ContactAdminListItem from './ContactAdminListItem';
 import ContactFormAdminAdd from './ContactFormAdminAdd';
 
-type Props = {
+type Props = {|
   query: ContactAdminList_query,
-};
+|};
 
 class ContactAdminList extends React.Component<Props> {
   renderContactsList() {

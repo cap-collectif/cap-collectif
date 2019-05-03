@@ -6,11 +6,11 @@ import { FormattedMessage } from 'react-intl';
 
 import renderComponent from '../../Form/Field';
 
-type Props = {
+type Props = {|
   ...FormProps,
   handleSubmit: () => void,
   formName: string,
-};
+|};
 
 const ContactAdminForm = (props: Props) => {
   const { formName, handleSubmit } = props;

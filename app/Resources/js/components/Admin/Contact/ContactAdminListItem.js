@@ -10,9 +10,9 @@ import ContactFormAdminModal from './ContactFormAdminModal';
 import RemoveContactFormMutation from '../../../mutations/RemoveContactFormMutation';
 import type { ContactAdminListItem_contactForm } from '~relay/ContactAdminListItem_contactForm.graphql';
 
-type Props = {
+type Props = {|
   contactForm: ContactAdminListItem_contactForm,
-};
+|};
 
 type State = {
   showRemoveContactFormModal: boolean,
@@ -71,11 +71,6 @@ export class ContactAdminListItem extends React.Component<Props, State> {
           contactForm={contactForm}
           onClose={this.closeEditModal}
           show={showEditContactFormModal}
-          deleteElement={() => {
-            onDelete(contactForm.id);
-          }}
-          deleteModalTitle="group.admin.contactForm.modal.delete.title"
-          deleteModalContent="group.admin.contactForm.modal.delete.content"
         />
         <Row>
           <Col xs={6}>

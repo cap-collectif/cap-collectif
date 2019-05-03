@@ -3,11 +3,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import CustomPageFields from './CustomPageFields';
-import { formMock } from '../../../mocks';
 
 describe('<CustomPageFields />', () => {
   const defaultProps = {
-    ...formMock,
     customcode: 'string',
     picto: { id: 'Uuid', name: 'string', url: 'string' },
     metadescription: 'string',

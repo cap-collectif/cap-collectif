@@ -18,18 +18,18 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import UpdateContactPageMutation from '../../../mutations/UpdateContactPageMutation';
 import type { FormValues as CustomFormValues } from '../Field/CustomPageFields';
 
-type Props = {
+type Props = {|
   ...FormProps,
   query: ContactAdminPage_query,
-};
+|};
 
 const formName = 'contact-admin-form';
 
-type FormValues = {
+type FormValues = {|
   title: string,
   description: ?string,
   custom: CustomFormValues,
-};
+|};
 
 const validate = (values: FormValues) => {
   const errors = {};
@@ -64,7 +64,6 @@ const renderContactList = ({
     return graphqlError;
   }
   if (props) {
-    // $FlowFixMe
     return <ContactAdminList query={props} />;
   }
   return <Loader />;
@@ -113,6 +112,7 @@ export class ContactAdminPage extends React.Component<Props> {
               <FormattedMessage id="admin.fields.project.advanced" />
             </h3>
           </div>
+          {/* $FlowFixMe */}
           <CustomPageFields formName={formName} {...this.props} />
         </div>
 

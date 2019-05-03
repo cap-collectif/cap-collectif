@@ -21,12 +21,12 @@ type Props = {|
   +intl: IntlShape,
 |};
 
-type FormValues = {
+type FormValues = {|
   body: string,
   email: string,
   title: string,
   interlocutor: string,
-};
+|};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { contactForm, onClose } = props;
