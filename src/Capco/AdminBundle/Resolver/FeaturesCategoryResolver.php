@@ -131,6 +131,10 @@ class FeaturesCategoryResolver
 
         if ('settings.modules' === $category && EnvHelper::get('SYMFONY_LOGIN_OPENID_ALLOWED')) {
             $toggles['login_openid'] = $this->manager->isActive('login_openid');
+
+            if ($this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
+                $toggles['disconnect_openid'] = $this->manager->isActive('disconnect_openid');
+            }
         }
 
         return $toggles;

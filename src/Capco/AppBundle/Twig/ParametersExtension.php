@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\SiteColor\Resolver as SiteColorResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Capco\AppBundle\Cache\RedisCache;
 
 class ParametersExtension extends \Twig_Extension
 {
@@ -45,17 +45,17 @@ class ParametersExtension extends \Twig_Extension
         ];
     }
 
-    public function getIsFeatureEnabled($flag)
+    public function getIsFeatureEnabled($flag): bool
     {
         return $this->manager->isActive($flag);
     }
 
-    public function getHasFeatureEnabled($flags)
+    public function getHasFeatureEnabled($flags): bool
     {
         return $this->manager->hasOneActive($flags);
     }
 
-    public function getFeatures()
+    public function getFeatures(): array
     {
         return $this->manager->all();
     }
@@ -80,7 +80,7 @@ class ParametersExtension extends \Twig_Extension
             $exposedParameters = [];
             foreach ($keys as $key) {
                 $value = $this->siteParameterResolver->getValue($key);
-                $exposedParameters[$key] = $value && \strlen($value) > 0 ? $value : null;
+                $exposedParameters[$key] = $value && '' !== $value ? $value : null;
             }
             $exposedParameters['signin.cgu.name'] = $this->translator->trans(
                 'the-charter',
@@ -96,7 +96,7 @@ class ParametersExtension extends \Twig_Extension
 
             foreach ($colors as $color) {
                 $value = $this->siteColorResolver->getValue($color);
-                $exposedParameters[$color] = $value && \strlen($value) > 0 ? $value : null;
+                $exposedParameters[$color] = $value && '' !== $value ? $value : null;
             }
 
             $cachedItem->set($exposedParameters)->expiresAfter(RedisCache::ONE_MINUTE);

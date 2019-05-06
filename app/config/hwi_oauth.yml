@@ -36,3 +36,4 @@ hwi_oauth:
       access_token_url: '%openid_access_token_url%'
       authorization_url: '%openid_authorization_url%'
       infos_url: '%openid_userinfo_url%'
+      logout_url: '%openid_logout_url%'

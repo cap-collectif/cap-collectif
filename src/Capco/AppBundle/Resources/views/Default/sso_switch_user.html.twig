@@ -1,0 +1,14 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block mainContent %}
+<style>body { background-color: #F6F6F6 }</style>
+<div id="shield-mode" class="container" style="margin-top: 50px">
+    <div class="text-center" style="margin-bottom: 10px">
+    </div>
+    <div class="row">
+      {{ react_render_component('SSOSwitchUserApp',
+          {'rendering': 'client_side' }
+      ) }}
+    </div>
+</div>
+{% endblock %}
