@@ -3,15 +3,16 @@
 namespace Capco\AppBundle\Behat;
 
 use Alex\MailCatcher\Behat\MailCatcherContext as Base;
+use Capco\AppBundle\Helper\EnvHelper;
 
 class MailCatcherContext extends Base
 {
     /**
      * @Then email should match snapshot :file
      */
-    public function emailContentShouldMatch($file)
+    public function emailContentShouldMatch(string $file)
     {
-        $writeSnapshot = getenv('SNAPSHOTS');
+        $writeSnapshot = EnvHelper::get('SNAPSHOTS');
 
         $message = $this->getCurrentMessage();
 
