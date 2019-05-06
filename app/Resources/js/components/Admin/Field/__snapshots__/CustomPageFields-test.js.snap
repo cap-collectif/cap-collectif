@@ -32,7 +32,7 @@ exports[`<CustomPageFields /> renders correctly with no props 1`] = `
     component={[Function]}
     label={
       <FormattedMessage
-        id="registration.admin.topText"
+        id="admin.fields.page.cover"
         values={Object {}}
       />
     }

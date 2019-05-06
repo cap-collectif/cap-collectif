@@ -36,7 +36,7 @@ export default class CustomPageFields extends React.Component<Props> {
         <Field
           name="picto"
           type="image"
-          label={<FormattedMessage id="registration.admin.topText" />}
+          label={<FormattedMessage id="admin.fields.page.cover" />}
           component={component}
         />
       </FormSection>
