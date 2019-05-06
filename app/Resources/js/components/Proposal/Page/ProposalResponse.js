@@ -58,7 +58,6 @@ export class ProposalResponse extends React.PureComponent<Props> {
     const responseWithJSON = response.question.__typename === 'MultipleChoiceQuestion';
     const defaultEditorEmptyValue = '<p><br></p>';
     let value = '';
-
     if (questionType === 'section') {
       return (
         <div>
@@ -148,13 +147,21 @@ export class ProposalResponse extends React.PureComponent<Props> {
           } catch (e) {
             responseValue = response.value || '';
           }
+          responseValue = (
+            <WYSIWYGRender
+              value={(responseValue && responseValue.replace(/\n/g, '<br />')) || ''}
+            />
+          );
+        } else {
+          // it's a number
+          responseValue = response.value || '';
+          responseValue = <p>{responseValue}</p>;
         }
-        responseValue = response.value || '';
 
         value = (
           <div>
             <h3 className="h3">{response.question.title}</h3>
-            {this.isHTML() ? <WYSIWYGRender value={response.value} /> : <p>{responseValue}</p>}
+            {this.isHTML() ? <WYSIWYGRender value={response.value} /> : responseValue}
           </div>
         );
       }

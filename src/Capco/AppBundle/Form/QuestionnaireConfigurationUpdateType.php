@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
@@ -21,8 +22,7 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
-            ->add('description', PurifiedTextType::class, [
-                'strip_tags' => true,
+            ->add('description', TextType::class, [
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])

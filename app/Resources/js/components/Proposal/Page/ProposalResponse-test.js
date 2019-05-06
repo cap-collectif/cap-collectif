@@ -169,7 +169,7 @@ describe('<ProposalResponse />', () => {
           private: false,
           required: false,
         },
-        value: 'Leroy merlin lisa',
+        value: 'Leroy merlin lisa \n test',
       },
     };
     const wrapper = shallow(<ProposalResponse {...props} />);

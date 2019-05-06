@@ -98,9 +98,9 @@ exports[`<ProposalResponse /> should render a text response 1`] = `
     >
       Référence
     </h3>
-    <p>
-      Leroy merlin lisa
-    </p>
+    <WYSIWYGRender
+      value="Leroy merlin lisa <br /> test"
+    />
   </div>
 </PrivateBox>
 `;

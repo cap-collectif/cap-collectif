@@ -30,7 +30,7 @@ Scenario: GraphQL client wants to update a questionnaire
       "input": {
         "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
         "title": "New title",
-        "description": "New description"
+        "description": "<p>New description</p>"
       }
     }
   }
@@ -43,7 +43,7 @@ Scenario: GraphQL client wants to update a questionnaire
            "questionnaire":{
               "id":"UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
               "title":"New title",
-              "description":"New description",
+              "description":"\u003Cp\u003ENew description\u003C\/p\u003E",
               "questions":[
                  {
                     "id":"UXVlc3Rpb246NA==",
