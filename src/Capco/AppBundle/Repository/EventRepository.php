@@ -6,13 +6,11 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Theme;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Event;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-/**
- * EventRepository.
- */
 class EventRepository extends EntityRepository
 {
     public function hydrateFromIds(array $ids): array
@@ -150,14 +148,8 @@ class EventRepository extends EntityRepository
 
     /**
      * Get one event by slug.
-     *
-     * @param $slug
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     *
-     * @return mixed
      */
-    public function getOne($slug)
+    public function getOneBySlug(string $slug): ?Event
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 't', 'media', 'registration', 'c')
@@ -168,9 +160,7 @@ class EventRepository extends EntityRepository
             ->leftJoin('e.registrations', 'registration', 'WITH', 'registration.confirmed = true')
             ->andWhere('e.slug = :slug')
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
-            ->setParameter('slug', $slug)
-            ->orderBy('e.startAt', 'ASC')
-            ->addOrderBy('registration.updatedAt', 'DESC');
+            ->setParameter('slug', $slug);
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -206,30 +196,7 @@ class EventRepository extends EntityRepository
         return new Paginator($qb, ($fetchJoin = true));
     }
 
-    /**
-     * Get Events by theme.
-     *
-     * @param theme
-     * @param mixed $theme
-     *
-     * @return mixed
-     */
-    public function getByTheme($theme)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'media', 't', 'c')
-            ->leftJoin('e.themes', 't')
-            ->leftJoin('e.projects', 'c')
-            ->leftJoin('e.author', 'a')
-            ->leftJoin('e.media', 'media')
-            ->andWhere('t.id = :theme')
-            ->setParameter('theme', $theme)
-            ->orderBy('e.startAt', 'ASC');
-
-        return $qb->getQuery()->execute();
-    }
-
-    public function countByProject($projectId): int
+    public function countByProject(string $projectId): int
     {
         $query = $this->createQueryBuilder('e')->select('COUNT(e.id)');
 
@@ -239,18 +206,6 @@ class EventRepository extends EntityRepository
             ->setParameter('project', $projectId)
             ->getQuery()
             ->getSingleScalarResult();
-    }
-
-    public function getEventsEnabledByIds(array $ids): array
-    {
-        $qb = $this->createQueryBuilder('e')
-            ->addSelect('themes')
-            ->where('e.enabled = true')
-            ->andWhere('e.id IN (:ids)')
-            ->leftJoin('e.themes', 'themes')
-            ->setParameter(':ids', $ids);
-
-        return $qb->getQuery()->getResult();
     }
 
     public function getByProject(Project $project, int $first = 0, int $offset = 100): Paginator
