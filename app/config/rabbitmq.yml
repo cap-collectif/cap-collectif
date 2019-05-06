@@ -107,3 +107,9 @@
       bindings:
         - exchange: capco_direct_exchange
           routing_key: questionnaire_reply
+    user_password:
+      durable: true
+      retries: [25, 125, 625]
+      bindings:
+        - exchange: capco_direct_exchange
+          routing_key: user_password

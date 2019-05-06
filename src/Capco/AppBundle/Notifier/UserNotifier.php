@@ -101,7 +101,7 @@ final class UserNotifier extends BaseNotifier
         $this->mailer->sendMessage(
             UserNewPasswordConfirmationMessage::create(
                 $user,
-                new \DateTime(),
+                $user->getUpdatedAt(),
                 $this->siteParams->getValue('global.site.fullname'),
                 $this->baseUrl,
                 $user->getEmail()

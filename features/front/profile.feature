@@ -52,7 +52,7 @@ Scenario: Logged in user wants to change his password to a too short password
   And I should see "fos_user.new_password.short"
   And I should see "global.invalid.form"
 
-@database @snapshot
+@database
 Scenario: Logged in user wants to change his password
   Given I am logged in as user
   And I visited "change password page"
@@ -64,8 +64,8 @@ Scenario: Logged in user wants to change his password
   And I press "profile-password-save"
   And I wait 2 seconds
   And I should see "global.saved"
-  And I open mail with subject "email.notification.password.change.subject"
-  Then email should match snapshot 'confirmPasswordChange.html'
+  Then the queue associated to "user_password" producer has messages below:
+    | 0 | {"userId": "user5"} |
 
 @database
 Scenario: Logged in user wants to manage his followings and unfollow all and stay unfollow after refresh

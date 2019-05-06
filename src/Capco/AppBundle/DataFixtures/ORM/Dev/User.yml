@@ -102,6 +102,7 @@ Capco\UserBundle\Entity\User:
     gender: 'f'
     enabled: true
     createdAt: <(new \DateTime('2015-01-01'))>
+    updatedAt: <(new \DateTime('2016-01-01'))>
 
   user_drupal:
     id: 'user_drupal'

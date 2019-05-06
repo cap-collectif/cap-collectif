@@ -10,12 +10,15 @@ use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProfilePasswordMutation extends BaseUpdateProfile
 {
     private $userManager;
     private $userNotifier;
+    private $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -23,10 +26,12 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
         LoggerInterface $logger,
         UserRepository $userRepository,
         UserManager $userManager,
-        UserNotifier $userNotifier
+        UserNotifier $userNotifier,
+        Publisher $publisher
     ) {
         $this->userManager = $userManager;
         $this->userNotifier = $userNotifier;
+        $this->publisher = $publisher;
         parent::__construct($em, $formFactory, $logger, $userRepository);
     }
 
@@ -46,8 +51,14 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
 
         $user->setPlainPassword($arguments['new']);
         $this->userManager->updateUser($user);
-
-        $this->userNotifier->passwordChangeConfirmation($user);
+        $this->publisher->publish(
+            'user.password',
+            new Message(
+                json_encode([
+                    'userId' => $user->getId(),
+                ])
+            )
+        );
 
         return [self::USER => $user];
     }
