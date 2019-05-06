@@ -2,12 +2,7 @@
 
 exports[`<SSOSwitchUserPage /> renders with a user 1`] = `
 <div
-  className="col-md-4 col-md-offset-4 panel panel-default"
-  style={
-    Object {
-      "background": "white",
-    }
-  }
+  className="col-md-4 col-md-offset-4 panel panel-default bg-white"
 >
   <div
     className="panel-body"
@@ -34,7 +29,7 @@ exports[`<SSOSwitchUserPage /> renders with a user 1`] = `
       className="mt-15 mb-0 text-center"
     >
       <a
-        href="/logout"
+        href="/logout?ssoSwitchUser=true"
       >
         <FormattedMessage
           id="change-user"
@@ -48,12 +43,7 @@ exports[`<SSOSwitchUserPage /> renders with a user 1`] = `
 
 exports[`<SSOSwitchUserPage /> renders without a user 1`] = `
 <div
-  className="col-md-4 col-md-offset-4 panel panel-default"
-  style={
-    Object {
-      "background": "white",
-    }
-  }
+  className="col-md-4 col-md-offset-4 panel panel-default bg-white"
 >
   <div
     className="panel-body"
@@ -80,7 +70,7 @@ exports[`<SSOSwitchUserPage /> renders without a user 1`] = `
       className="mt-15 mb-0 text-center"
     >
       <a
-        href="/logout"
+        href="/logout?ssoSwitchUser=true"
       >
         <FormattedMessage
           id="change-user"

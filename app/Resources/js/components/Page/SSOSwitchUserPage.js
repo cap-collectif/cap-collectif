@@ -25,7 +25,7 @@ export class SSOSwitchUserPage extends React.Component<Props> {
     }
 
     return (
-      <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 panel panel-default">
+      <div className="col-md-4 col-md-offset-4 panel panel-default bg-white">
         <div className="panel-body">
           <Button
             bsStyle="primary"
@@ -41,7 +41,7 @@ export class SSOSwitchUserPage extends React.Component<Props> {
             }
           </Button>
           <p className="mt-15 mb-0 text-center">
-            <a href="/logout">{<FormattedMessage id="change-user" />}</a>
+            <a href="/logout?ssoSwitchUser=true">{<FormattedMessage id="change-user" />}</a>
           </p>
         </div>
       </div>

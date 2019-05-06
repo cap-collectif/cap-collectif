@@ -63,16 +63,10 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
             );
         }
 
-        $ssoSwitchUserUrl = $this->router->generate(
-            'app_sso_switch_user',
-            [],
-            RouterInterface::ABSOLUTE_URL
-        );
-
         if (
             $this->toggleManager->isActive('login_openid') &&
             $this->toggleManager->isActive('disconnect_openid') &&
-            $request->headers->get('referer') === $ssoSwitchUserUrl
+            true === $request->request->get('ssoSwitchUser', false)
         ) {
             $homepageUrl = $this->router->generate(
                 'app_homepage',
