@@ -78,3 +78,13 @@ Scenario: An anonymous accept cookies then change is mind and the cookies should
   And I toggle performance cookies
   And I click on button "#cookies-save"
   Then I should not see a cookie named "_pk_id.2733"
+
+@read-only
+Scenario: An anonymous visit privacy page
+  Given I visited "privacy page" with cookies not accepted
+  And I should not see "error.500"
+
+@read-only
+Scenario: An anonymous visit legal page
+  Given I visited "legal page" with cookies not accepted
+  And I should not see "error.500"
