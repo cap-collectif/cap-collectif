@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
@@ -21,8 +22,7 @@ class CollectPage extends Page
         'create proposal button' => '#add-proposal',
         'proposal form submit button' => '#confirm-proposal-create',
         'proposal form submit draft button' => '#confirm-proposal-create-as-draft',
-        'sorting select' => 'select#proposal-sorting',
-        'selected sorting option' => '#proposal-sorting option[selected]',
+        'sorting select' => 'select#proposal-filter-sorting-button',
         'follow proposal button' => '.proposal__button__follow',
         'type of follow proposal' => '.proposal__follow',
         'my votes' => '.widget__button.navbar-btn.pull-right.btn.btn-default',
@@ -86,18 +86,41 @@ class CollectPage extends Page
         return $this->getElement('my votes')->click();
     }
 
-    public function isFollowedAs($type)
+    public function isFollowedAs(string $type)
     {
-        $element = $this->elements['type of follow proposal'] . "__$type";
+        $element = $this->elements['type of follow proposal'] . "__${type}";
 
         return $this->find('css', $element)->isChecked();
     }
 
-    public function changeTypeOfProposalFollow($type)
+    public function changeTypeOfProposalFollow(string $type)
     {
-        $element = $this->elements['type of follow proposal'] . "__$type";
+        $element = $this->elements['type of follow proposal'] . "__${type}";
 
         return $this->find('css', $element)->click();
+    }
+
+    public function clickOnRestrictedAccess()
+    {
+        $this->waitAndThrowOnFailure(
+            3000,
+            "$('" . $this->getSelector('restricted-access') . "').length > 0"
+        );
+        $this->getElement('restricted-access')->click();
+
+        return $this->getElement('restricted-access-link')->click();
+    }
+
+    public function iClickOnUserGroupModal(string $groupId)
+    {
+        $selector = "#${groupId}" . $this->getSelector('restricted-group-link');
+
+        $element = $this->find('css', $selector);
+        if (!$element) {
+            throw new \RuntimeException('Could not find: ' . $selector);
+        }
+
+        return $element->click();
     }
 
     protected function verifyUrl(array $urlParameters = [])
@@ -117,27 +140,5 @@ class CollectPage extends Page
                 );
             }
         }
-    }
-
-    public function clickOnRestrictedAccess()
-    {
-        $this->getSession()->wait(
-            3000,
-            "$('" . $this->getSelector('restricted-access') . "').length > 0"
-        );
-        $this->getElement('restricted-access')->click();
-        return $this->getElement('restricted-access-link')->click();
-    }
-
-    public function iClickOnUserGroupModal(string $groupId)
-    {
-        $selector = "#$groupId" . $this->getSelector('restricted-group-link');
-
-        $element = $this->find('css', $selector);
-        if (!$element) {
-            throw new \RuntimeException('Could not find: ' . $selector);
-        }
-
-        return $element->click();
     }
 }

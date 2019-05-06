@@ -3,6 +3,7 @@
 exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
 <div
   className="proposal__content "
+  id="ProposalPageContent"
 >
   <div
     className="block"

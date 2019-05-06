@@ -100,12 +100,12 @@ trait AdminTrait
     }
 
     /**
-     * @When I go to the admin proposal page with proposalid :proposalid
+     * @When I go to the admin proposal page with proposalid :proposalId
      */
-    public function iGoToTheAdminProposalPageWithId(string $proposalid)
+    public function iGoToTheAdminProposalPageWithId(string $proposalId)
     {
-        $this->visitPageWithParams('admin proposal page', ['proposalid' => $proposalid]);
-        $this->getSession()->wait(2000, "$('#main').length > 0");
+        $this->visitPageWithParams('admin proposal page', ['proposalid' => $proposalId]);
+        $this->waitAndThrowOnFailure(3000, "$('#proposal-admin-page-tabs').length > 0");
     }
 
     /**
@@ -114,7 +114,7 @@ trait AdminTrait
     public function iGoToTheAdminProposalFormPageWithId(string $id)
     {
         $this->visitPageWithParams('admin proposal form page', ['id' => $id]);
-        $this->getSession()->wait(2000, "$('#proposal-form-admin-page-tabs-tab-1').length > 0");
+        $this->waitAndThrowOnFailure(2000, "$('#proposal-form-admin-page-tabs-tab-1').length > 0");
     }
 
     /**
@@ -123,7 +123,7 @@ trait AdminTrait
     public function iGoToTheAdminUserPageWithId(string $userId)
     {
         $this->visitPageWithParams('admin user page', ['userId' => $userId]);
-        $this->getSession()->wait(3000, "$('#UserAdminPageTabs').length > 0");
+        $this->waitAndThrowOnFailure(5000, "$('#UserAdminPageTabs').length > 0");
     }
 
     /**
@@ -132,7 +132,7 @@ trait AdminTrait
     public function iGoToTheAdminUserListPage()
     {
         $this->visitPageWithParams('admin user list page');
-        $this->getSession()->wait(3000, "$('div#add-a-user').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('div#add-a-user').length > 0");
     }
 
     /**

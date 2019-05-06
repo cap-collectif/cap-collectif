@@ -30,7 +30,7 @@ trait AdminProposalTrait
         // Wait alert to disappear
         $this->iWait(5);
         // Wait tab to appear
-        $this->getSession()->wait(
+        $this->waitAndThrowOnFailure(
             5000,
             "$('" . $page->getSelector('proposal ' . $tab . ' tab') . "').length > 0"
         );
@@ -72,9 +72,9 @@ trait AdminProposalTrait
      */
     public function iFillProposalContentAddressWith(string $address)
     {
-        $this->getSession()->wait(3000, "$('#proposal_address').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('#proposal_address').length > 0");
         $this->fillField('proposal_address', $address);
-        $this->getSession()->wait(
+        $this->waitAndThrowOnFailure(
             3000,
             "$('#PlacesAutocomplete__autocomplete-container > div:first-child').length > 0"
         );

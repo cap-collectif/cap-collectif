@@ -55,7 +55,7 @@ export class ProposalPageContent extends React.Component<Props> {
     const proposalForm = proposal.form;
 
     return (
-      <div className={classNames(classes)}>
+      <div id="ProposalPageContent" className={classNames(classes)}>
         <div className="block">
           {viewer && viewer.id === proposal.author.id && (
             <div className="actions">

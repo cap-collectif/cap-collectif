@@ -128,15 +128,13 @@ trait ProposalStepsTrait
     /** @var array */
     protected $currentCollectsStep = [];
 
-    // ********************************* Proposals *********************************************
-
     /**
      * @When I go to an open collect step
      */
     public function iGoToAnOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepOpenParams);
-        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -145,7 +143,7 @@ trait ProposalStepsTrait
     public function iGoToANotifiableOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepNotifiable);
-        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -154,7 +152,7 @@ trait ProposalStepsTrait
     public function iGoToASelectionStep()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepOpenParams);
-        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -163,7 +161,7 @@ trait ProposalStepsTrait
     public function iGoToAPrivateOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepOpenPrivateParams);
-        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -172,7 +170,7 @@ trait ProposalStepsTrait
     public function iGoToAClosedCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepClosedParams);
-        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -181,10 +179,7 @@ trait ProposalStepsTrait
     public function iGoToAProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithSimpleVoteParams);
-        $this->getSession()->wait(
-            5000,
-            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
-        );
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -193,10 +188,7 @@ trait ProposalStepsTrait
     public function iGoToAProposalMadeByMSantoStefano()
     {
         $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano);
-        $this->getSession()->wait(
-            2000,
-            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
-        );
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -205,10 +197,7 @@ trait ProposalStepsTrait
     public function iGoToAProposalWithLotOfComments()
     {
         $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano, false);
-        $this->getSession()->wait(
-            2000,
-            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
-        );
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -217,10 +206,7 @@ trait ProposalStepsTrait
     public function iGoToAProposalFollowedByUser()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithOneFollower);
-        $this->getSession()->wait(
-            5000,
-            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
-        );
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -229,10 +215,7 @@ trait ProposalStepsTrait
     public function iGoToAProposalMadeByUser()
     {
         $this->visitPageWithParams('proposal page', self::$proposalsByUserTest);
-        $this->getSession()->wait(
-            5000,
-            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
-        );
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -240,7 +223,7 @@ trait ProposalStepsTrait
      */
     public function iGoToACommentNotifiableProposal()
     {
-        $this->getSession()->wait(3000, "$('.comments__section').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('.comments__section').length > 0");
 
         $this->visitPageWithParams('proposal page', self::$proposalCommentNotifiable);
     }
@@ -250,7 +233,7 @@ trait ProposalStepsTrait
      */
     public function iGoToAProposalNotCommentNotifiable()
     {
-        $this->getSession()->wait(3000, "$('.comments__section').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('.comments__section').length > 0");
         $this->visitPageWithParams('proposal page', self::$proposalCommentNotNotifiable);
     }
 
@@ -260,6 +243,7 @@ trait ProposalStepsTrait
     public function iGoToANotifiableProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalNotifiable);
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -268,6 +252,7 @@ trait ProposalStepsTrait
     public function iGoToANotifiableProposalOfMine()
     {
         $this->visitPageWithParams('proposal page', self::$proposalNotifiableOfMine);
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -275,8 +260,8 @@ trait ProposalStepsTrait
      */
     public function iGoToANotNotifiableProposal()
     {
-        $this->getSession()->wait(3000, "$('#proposal-delete-button').length > 0");
         $this->visitPageWithParams('proposal page', self::$proposalNotNotifiable);
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -285,6 +270,7 @@ trait ProposalStepsTrait
     public function iGoToAProposalNotYetVotable()
     {
         $this->visitPageWithParams('proposal page', self::$proposalNotYetVotable);
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -293,21 +279,19 @@ trait ProposalStepsTrait
     public function iGoToAProposalNotVotableAnymore()
     {
         $this->visitPageWithParams('proposal page', self::$proposalNotVotableAnymore);
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
      * @Then there should be :nb proposals
-     *
-     * @param int $nb
      */
     public function thereShouldBeNbProposals(int $nb)
     {
-        $this->getSession()->wait(10000, "$('.proposal-preview').length > 0");
+        $proposalSelector = $this->getCurrentPage()->getProposalSelector();
+        $this->waitAndThrowOnFailure(10000, "$('" . $proposalSelector . "').length === " . $nb);
         $this->assertPageMatchesText(
             '/(proposal.count_with_total {"num":' . $nb . '|proposal.count {"num":' . $nb . '})/'
         );
-        $proposalSelector = $this->getCurrentPage()->getProposalSelector();
-        $this->assertNumElements($nb, $proposalSelector);
     }
 
     /**
@@ -397,11 +381,11 @@ trait ProposalStepsTrait
         );
     }
 
-    public function assertIfFilterSortedBy($type)
+    public function assertIfFilterSortedBy(string $type)
     {
-        $this->getSession()->wait(
+        $this->waitAndThrowOnFailure(
             3000,
-            "$('#proposal-sorting[aria-label=\"global.filter_f_${type}\"]').length > 0"
+            "$('#proposal-filter-sorting-button[aria-label=\"global.filter_f_${type}\"]').length > 0"
         );
     }
 
@@ -410,7 +394,7 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeOrderedRandomly()
     {
-        $this->getSession()->wait(3000, "$('#proposal-sorting').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('#proposal-filter-sorting-button').length > 0");
         $this->assertIfFilterSortedBy('random');
     }
 
@@ -556,7 +540,7 @@ trait ProposalStepsTrait
     {
         $this->navigationContext->getPage('collect page')->submitProposalForm();
         // We wait for page reloading and new proposal show up
-        $this->getSession()->wait(8000, "document.getElementById('proposal.infos.header')");
+        $this->waitAndThrowOnFailure(8000, "$('#ProposalPageHeader').length > 0");
     }
 
     /**
@@ -565,7 +549,7 @@ trait ProposalStepsTrait
     public function iSubmitTheCommentForm()
     {
         $this->navigationContext->getPage('proposal page')->submitCommentForm();
-        $this->getSession()->wait(3000, "$('#current-alert').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('#current-alert').length > 0");
     }
 
     /**
@@ -654,7 +638,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheDeleteProposalButton()
     {
-        $this->getSession()->wait(3000, "$('#proposal-delete-button').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('#proposal-delete-button').length > 0");
         $this->navigationContext->getPage('proposal page')->clickDeleteProposalButton();
     }
 
@@ -663,7 +647,7 @@ trait ProposalStepsTrait
      */
     public function iConfirmProposalDeletion()
     {
-        $this->getSession()->wait(3000, "$('#confirm-proposal-delete').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('#confirm-proposal-delete').length > 0");
         $this->navigationContext->getPage('proposal page')->clickConfirmDeleteProposalButton();
         $this->iWait(3);
         $this->currentPage = 'collect page';
@@ -728,7 +712,7 @@ trait ProposalStepsTrait
     public function iGoToTheVotesDetailsOfProjectWithRequirementsPage()
     {
         $this->visitPageWithParams('project user votes page', self::$bpVoteClassement);
-        $this->getSession()->wait(3000, '$(".media-list proposal-preview-list").length > 0');
+        $this->waitAndThrowOnFailure(3000, '$(".media-list proposal-preview-list").length > 0');
     }
 
     /**
@@ -737,6 +721,7 @@ trait ProposalStepsTrait
     public function iGoToASelectionStepWithSimpleVoteEnabled()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepWithSimpleVoteParams);
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -745,6 +730,7 @@ trait ProposalStepsTrait
     public function iGoToASelectionStepWithBudgetVoteEnabled()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepWithBudgetVoteParams);
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -756,6 +742,7 @@ trait ProposalStepsTrait
             'selection page',
             self::$selectionStepWithBudgetVoteLimitedParams
         );
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -764,6 +751,7 @@ trait ProposalStepsTrait
     public function iGoToASelectionStepNotYetOpen()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepNotYetOpen);
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -772,6 +760,7 @@ trait ProposalStepsTrait
     public function iGoToAClosedSelectionStep()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepClosed);
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -780,6 +769,7 @@ trait ProposalStepsTrait
     public function iGoToAProposalWithBudgetVoteEnabled()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithBudgetVoteParams);
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -788,7 +778,7 @@ trait ProposalStepsTrait
     public function iGoBPWithVoteRankingPage()
     {
         $this->visitPageWithParams('collect page', self::$bpVoteClassement);
-        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
+        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -856,10 +846,10 @@ trait ProposalStepsTrait
      */
     public function iConfirmMyVote()
     {
-        $this->getSession()->wait(2000, "$('#confirm-proposal-vote').length > 0");
+        $this->waitAndThrowOnFailure(2000, "$('#confirm-proposal-vote').length > 0");
         $this->buttonShouldNotBeDisabled('global.validate');
         $this->iClickOnButton('#confirm-proposal-vote');
-        $this->getSession()->wait(
+        $this->waitAndThrowOnFailure(
             2000,
             "$('.button__vote.btn.btn-success.btn-default.active').length > 0"
         );
@@ -874,7 +864,7 @@ trait ProposalStepsTrait
             ->getPage()
             ->find('css', '#confirm-proposal-vote')
             ->click();
-        $this->getSession()->wait(2000, "$('#contained-modal-title-lg').length > 0");
+        $this->waitAndThrowOnFailure(2000, "$('#contained-modal-title-lg').length > 0");
     }
 
     /**
@@ -898,7 +888,7 @@ trait ProposalStepsTrait
      */
     public function iShouldHaveNbVotes(int $nb)
     {
-        $this->getSession()->wait(3000, "$('.proposals-user-votes__table').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('.proposals-user-votes__table').length > 0");
         $count = $this->navigationContext->getPage('project user votes page')->countVotes();
         expect($count)->toBe($nb);
     }
@@ -1105,7 +1095,7 @@ trait ProposalStepsTrait
     public function iSubmitTheProposalVoteForm()
     {
         $page = $this->getCurrentPage()->submitProposalVoteForm();
-        $this->getSession()->wait(5000, "$('#confirm-proposal-vote').length == 0");
+        $this->waitAndThrowOnFailure(5000, "$('#confirm-proposal-vote').length == 0");
     }
 
     /**
@@ -1138,7 +1128,7 @@ trait ProposalStepsTrait
         $id = $id ? GlobalId::toGlobalId('Proposal', $id) : $this->getProposalId();
 
         $search = "[id='proposal-${id}']";
-        $this->getSession()->wait(2000, '$("' . $search . '").length > 0');
+        $this->waitAndThrowOnFailure(2000, '$("' . $search . '").length > 0');
         $button = $this->getCurrentPage()->getVoteButton($id);
 
         Assert::assertTrue(
@@ -1159,7 +1149,7 @@ trait ProposalStepsTrait
 
         try {
             $search = "[id='proposal-${id}']";
-            $this->getSession()->wait(2000, '$("' . $search . '").length > 0');
+            $this->waitAndThrowOnFailure(2000, '$("' . $search . '").length > 0');
 
             $button = $this->getCurrentPage()->getVoteButton($this->getProposalId());
         } catch (\Exception $e) {
@@ -1264,7 +1254,10 @@ trait ProposalStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
-        $this->getSession()->wait(3000, "$('" . $page->getSelector('votes tab') . "').length > 0");
+        $this->waitAndThrowOnFailure(
+            3000,
+            "$('" . $page->getSelector('votes tab') . "').length > 0"
+        );
         $page->clickVotesTab();
         $this->iWait(1);
     }
@@ -1276,7 +1269,7 @@ trait ProposalStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
-        $this->getSession()->wait(
+        $this->waitAndThrowOnFailure(
             3000,
             "$('" . $page->getSelector('followers tab') . "').length > 0"
         );
@@ -1354,7 +1347,7 @@ trait ProposalStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
-        $this->getSession()->wait(
+        $this->waitAndThrowOnFailure(
             3000,
             "$('" . $page->getSelector('comments tab') . "').length > 0"
         );
@@ -1534,13 +1527,13 @@ trait ProposalStepsTrait
 
     protected function fillComment($body)
     {
-        $this->getSession()->wait(3000, "$('textarea[name=body]').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('textarea[name=body]').length > 0");
         $this->fillField('body', $body);
     }
 
     protected function fillAnonymousComment($body, $name, $email)
     {
-        $this->getSession()->wait(3000, "$('input[name=authorEmail]').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('input[name=authorEmail]').length > 0");
         $this->fillField('body', $body);
         $this->fillField('authorName', $name);
         $this->fillField('authorEmail', $email);
@@ -1611,7 +1604,7 @@ trait ProposalStepsTrait
     {
         $page = $this->getCurrentPage();
         $proposalId = $id ?: $this->getProposalId();
-        $this->getSession()->wait(2000, "$('" . $proposalId . "').length > 0");
+        $this->waitAndThrowOnFailure(2000, "$('" . $proposalId . "').length > 0");
 
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
         Assert::assertEquals(
@@ -1674,5 +1667,23 @@ trait ProposalStepsTrait
             ->getPage('proposal page')
             ->getLastSelector('follower');
         $this->assertElementNotOnPage($lastFollowerSelector);
+    }
+
+    private function iWaitUntilProposalPageFullyLoaded()
+    {
+        $this->waitAndThrowOnFailure(5000, "$('#ProposalPageContent').length > 0");
+    }
+
+    // ********************************* Proposals *********************************************
+
+    /**
+     * @When I wait proposal step page to fully load
+     */
+    private function iWaitUntilProposalStepHasFullyLoaded()
+    {
+        $this->waitAndThrowOnFailure(
+            5000,
+            "window.jQuery && $('#ProposalStepPage-rendered').length > 0"
+        );
     }
 }

@@ -221,7 +221,7 @@ trait QuestionnaireStepsTrait
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
             ->getSelectorForUserReply();
-        $this->getSession()->wait(2000, "$('" . $userReplySelector . "').length == 0");
+        $this->waitAndThrowOnFailure(2000, "$('" . $userReplySelector . "').length == 0");
 
         $this->iShouldSeeNbElementOnPage(0, $userReplySelector);
     }
@@ -373,7 +373,7 @@ trait QuestionnaireStepsTrait
     protected function fillQuestionnaireForm($edition = false)
     {
         $page = $this->navigationContext->getPage('questionnaire page');
-        $this->getSession()->wait(
+        $this->waitAndThrowOnFailure(
             2000,
             "$('" . $page->getSelector('questionnaire form') . "').length > 0"
         );

@@ -331,9 +331,9 @@ class ApplicationContext extends UserContext
     /**
      * @Then I should be redirected to :url
      */
-    public function assertRedirect(string $url)
+    public function assertRedirect(string $url): void
     {
-        $this->getSession()->wait(1000);
+        $this->iWait(1000);
 
         $this->assertPageAddress($url);
     }
@@ -345,7 +345,7 @@ class ApplicationContext extends UserContext
      */
     public function assertNotRedirect($url)
     {
-        $this->getSession()->wait(1000);
+        $this->iWait(1000);
 
         $this->assertSession()->addressNotEquals($this->locatePath($url));
     }
@@ -433,7 +433,7 @@ class ApplicationContext extends UserContext
     public function iShouldSeeElementOnPageDisabled(string $element, string $pageSlug)
     {
         $page = $this->navigationContext->getPage($pageSlug);
-        $this->getSession()->wait(2000, "$('" . $page->getSelector($element) . "').length > 0");
+        $this->waitAndThrowOnFailure(2000, "$('" . $page->getSelector($element) . "').length > 0");
         expect($page->getElement($element)->hasAttribute('disabled'))->toBe(true);
     }
 
@@ -457,9 +457,7 @@ class ApplicationContext extends UserContext
      */
     public function iWaitElementToAppearOnPage(string $selector, int $timeout = 5000)
     {
-        expect($this->getSession()->wait($timeout, '$("' . $selector . '").length > 0'))->toBe(
-            true
-        );
+        $this->waitAndThrowOnFailure($timeout, '$("' . $selector . '").length > 0');
     }
 
     /**
@@ -468,7 +466,7 @@ class ApplicationContext extends UserContext
      */
     public function iWaitElementToDisappearOnPage(string $selector, int $timeout = 3000)
     {
-        $this->getSession()->wait($timeout, '$("' . $selector . '").length == 0');
+        $this->waitAndThrowOnFailure($timeout, '$("' . $selector . '").length == 0');
     }
 
     /**
@@ -882,8 +880,7 @@ class ApplicationContext extends UserContext
             "document.getElementById('cookie-banner') != null"
         );
         if (!$isPresent) {
-            echo 'No cookie banner is present.';
-
+            // No cookie banner is present.
             return;
         }
         $isBannerVisible = $this->getSession()->evaluateScript(

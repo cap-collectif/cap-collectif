@@ -45,8 +45,7 @@ class SelectionPage extends Page
             '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counters__item--comments .card__counters__value',
         'proposal' => '.proposal-preview',
         'proposal vote button to hover' => '#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwx',
-        'sorting select' => 'select#proposal-sorting',
-        'selected sorting option' => '#proposal-sorting option[selected]',
+        'sorting select' => 'select#proposal-filter-sorting-button',
         'proposal vote form submit button' => '#confirm-proposal-vote',
         'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxOA==' =>
             "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxOA==']",

@@ -9,7 +9,7 @@ trait ReportingStepsTrait
      */
     public function iFillTheReportingFormFromTheModal()
     {
-        $this->getSession()->wait(2000, "$('#reportBody').length > 0");
+        $this->waitAndThrowOnFailure(2000, "$('#reportBody').length > 0");
         $this->fillField('reportBody', 'Pas terrible tout ça...');
         $this->selectOption('reportType', 'reporting.status.spam');
     }

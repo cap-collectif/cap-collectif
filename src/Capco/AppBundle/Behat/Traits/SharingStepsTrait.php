@@ -60,7 +60,7 @@ trait SharingStepsTrait
      */
     public function iShouldSeeTheShareLinkModal()
     {
-        $this->getSession()->wait(3000, "$('.modal--share-link').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('.modal--share-link').length > 0");
         $this->assertElementOnPage('.modal--share-link');
     }
 }

@@ -63,7 +63,7 @@ trait AdminProposalFormTrait
     {
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
-        $this->getSession()->wait(3000, "$('" . $page->getSelector('proposal form ' . $tab . ' tab') . "').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('" . $page->getSelector('proposal form ' . $tab . ' tab') . "').length > 0");
         $page->clickOnTab($tab);
         $this->iWait(1);
     }

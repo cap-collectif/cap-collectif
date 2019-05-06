@@ -12,7 +12,7 @@ trait AdminUserTrait
     public function iGoToTheAdminUserTab($tab)
     {
         $page = $this->getCurrentPage();
-        $this->getSession()->wait(3000, "$('" . $page->getSelector('user ' . $tab . ' tab') . "').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('" . $page->getSelector('user ' . $tab . ' tab') . "').length > 0");
         $page->clickOnTab("user $tab");
         $this->iWait(1);
     }

@@ -3,6 +3,7 @@
 exports[`<ProposalPageHeader /> should not render theme if proposal has none and form type is question 1`] = `
 <div
   className="proposal__header "
+  id="ProposalPageHeader"
 >
   <div>
     <a
@@ -197,6 +198,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
 exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 1`] = `
 <div
   className="proposal__header "
+  id="ProposalPageHeader"
 >
   <div>
     <a

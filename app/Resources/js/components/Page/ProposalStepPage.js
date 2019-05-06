@@ -160,7 +160,7 @@ export class ProposalStepPage extends React.Component<Props> {
                 }
               }
               return (
-                <div id="proposal__step-page-rendered">
+                <div id="ProposalStepPage-rendered">
                   {/* $FlowFixMe $refType */}
                   <StepPageHeader step={step} />
                   {isAuthenticated &&

@@ -47,7 +47,7 @@ export class OpinionBox extends React.Component<Props> {
     return (
       /* $FlowFixMe $refType */
       <TrashedMessage className="mb-15" contribution={opinion}>
-        <div className="block block--bordered opinion__details">
+        <div id="OpinionBox" className="block block--bordered opinion__details">
           <div className={colorClass}>
             <div className="opinion__header opinion__header--centered" style={{ height: 'auto' }}>
               <a className="pull-left btn btn-default opinion__header__back" href={backLink}>

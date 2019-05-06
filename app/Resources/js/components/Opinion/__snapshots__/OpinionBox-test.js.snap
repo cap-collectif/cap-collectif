@@ -19,6 +19,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
 >
   <div
     className="block block--bordered opinion__details"
+    id="OpinionBox"
   >
     <div
       className="opinion opinion--info opinion--current"

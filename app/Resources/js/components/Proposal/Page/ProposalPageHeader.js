@@ -62,7 +62,7 @@ export class ProposalPageHeader extends React.Component<Props> {
     const tradKeyToBack = proposal.form.isProposalForm ? 'proposal.back' : 'questions-list';
 
     return (
-      <div className={classNames(classes)}>
+      <div id="ProposalPageHeader" className={classNames(classes)}>
         <div>
           <a style={{ textDecoration: 'none' }} href={referer || proposal.url}>
             <i className="cap cap-arrow-65-1 icon--black" /> <FormattedMessage id={tradKeyToBack} />

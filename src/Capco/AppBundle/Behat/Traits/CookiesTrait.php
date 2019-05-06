@@ -9,7 +9,7 @@ trait CookiesTrait
      */
     public function iTogglePerformanceCookies()
     {
-        $this->getSession()->wait(3000, "$('#cookies-performance').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('#cookies-performance').length > 0");
 
         $this->getCurrentPage()->togglePerformance();
     }
@@ -19,7 +19,7 @@ trait CookiesTrait
      */
     public function iToggleAdvertisingCookies()
     {
-        $this->getSession()->wait(3000, "$('#cookies-advertising').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('#cookies-advertising').length > 0");
 
         $this->getCurrentPage()->toggleAdvertising();
     }

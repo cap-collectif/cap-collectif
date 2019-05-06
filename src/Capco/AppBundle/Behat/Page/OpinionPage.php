@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
@@ -123,9 +124,14 @@ class OpinionPage extends Page
         return $this->getElement('argument votes counter');
     }
 
-    public function getArgumentVotesCount()
+    public function getArgumentVotesCountSelector(): string
     {
-        return (int) ($this->getArgumentVotesCounter()->getText());
+        return $this->getSelector('argument votes counter');
+    }
+
+    public function getArgumentVotesCount(): int
+    {
+        return (int) $this->getArgumentVotesCounter()->getText();
     }
 
     public function clickArgumentEditButton()
@@ -148,9 +154,19 @@ class OpinionPage extends Page
         $this->getElement('argument edit submit button')->click();
     }
 
+    public function getArgumentDeleteButtonSelector(): string
+    {
+        return $this->getSelector('argument delete button');
+    }
+
     public function clickArgumentDeleteButton()
     {
         $this->getElement('argument delete button')->click();
+    }
+
+    public function getArgumentConfirmDeletionButtonSelector(): string
+    {
+        return $this->getSelector('argument confirm delete button');
     }
 
     public function clickArgumentConfirmDeletionButton()
@@ -167,6 +183,11 @@ class OpinionPage extends Page
         return $this->getElement('argument vote button');
     }
 
+    public function getArgumentVoteButtonSelector(): string
+    {
+        return $this->getSelector('argument vote button');
+    }
+
     public function clickArgumentVoteButton()
     {
         return $this->getArgumentVoteButton()->click();
@@ -179,8 +200,8 @@ class OpinionPage extends Page
 
     public function submitArgument($type, $text)
     {
-        $field = $this->getElement("argument $type field");
-        $button = $this->getElement("argument $type button");
+        $field = $this->getElement("argument ${type} field");
+        $button = $this->getElement("argument ${type} button");
         $field->setValue($text);
         $button->press();
     }
@@ -202,10 +223,11 @@ class OpinionPage extends Page
         return $this->getElement('first source vote count');
     }
 
-    public function getSourceVotesCount()
+    public function getSourceVotesCount(): int
     {
-        return (int) ($this->getFirstSourceVotesCounter()->getText());
+        return (int) $this->getFirstSourceVotesCounter()->getText();
     }
+
     public function clickSourceVoteButton()
     {
         $this->getElement('source vote button')->click();

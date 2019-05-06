@@ -49,6 +49,20 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
     }
 
     /**
+     * Waits some time or until JS condition turns true.
+     *
+     * @throws \RuntimeException when the condition failed after timeout
+     */
+    public function waitAndThrowOnFailure(int $timeout, string $condition): void
+    {
+        if (!$this->getSession()->wait($timeout, $condition)) {
+            throw new \RuntimeException(
+                'Condition "' . $condition . '" failed after ' . $timeout . 'ms.'
+            );
+        }
+    }
+
+    /**
      * Get entity manager.
      *
      * @return ObjectManager
