@@ -24,7 +24,7 @@ describe('<ProposalAdminSelections />', () => {
     proposal: {
       id: '1',
       status: { id: '1' },
-      progressSteps: [{ id: '1', title: 'title', startAt: null, endAt: null }],
+      progressSteps: [{ id: '1', title: 'title', startAt: '2018-08-16 15:15:39', endAt: null }],
       selections: [{ step: { id: '2' }, status: { id: '1' } }],
       project: {
         steps: [

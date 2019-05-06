@@ -24,7 +24,7 @@ exports[`<ProposalFusionList /> should render a list of proposal merged from oth
         key="proposal2"
       >
         <a
-          href={true}
+          href="https://capco.dev/proposals/2"
         >
           Title Proposal 2
         </a>
@@ -33,7 +33,7 @@ exports[`<ProposalFusionList /> should render a list of proposal merged from oth
         key="proposal3"
       >
         <a
-          href={true}
+          href="https://capco.dev/proposals/3"
         >
           Title Proposal 3
         </a>
@@ -67,7 +67,7 @@ exports[`<ProposalFusionList /> should render a list of proposal of merged in ot
         key="proposal2"
       >
         <a
-          href={true}
+          href="https://capco.dev/proposals/2"
         >
           Title Proposal 2
         </a>
@@ -76,7 +76,7 @@ exports[`<ProposalFusionList /> should render a list of proposal of merged in ot
         key="proposal3"
       >
         <a
-          href={true}
+          href="https://capco.dev/proposals/3"
         >
           Title Proposal 3
         </a>

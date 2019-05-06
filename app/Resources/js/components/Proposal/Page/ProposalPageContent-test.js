@@ -25,7 +25,7 @@ describe('<ProposalPageContent />', () => {
     },
     responses: [],
     publicationStatus: 'PUBLISHED',
-    url: true,
+    url: 'http://capco.dev/url',
     summary: 'Summary',
     currentVotableStep: null,
   };
