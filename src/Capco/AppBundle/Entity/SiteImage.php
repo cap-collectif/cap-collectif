@@ -124,7 +124,7 @@ class SiteImage
      *
      * @param mixed $media
      */
-    public function setMedia(?Media $media)
+    public function setMedia($media)
     {
         $this->media = $media;
     }

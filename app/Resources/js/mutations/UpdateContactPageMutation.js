@@ -12,11 +12,6 @@ const mutation = graphql`
     updateContactPage(input: $input) {
       title
       description
-      metadescription
-      customcode
-      picto {
-        id
-      }
     }
   }
 `;

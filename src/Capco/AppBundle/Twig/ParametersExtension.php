@@ -2,41 +2,37 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Cache\RedisCache;
-use Capco\AppBundle\SiteParameter\Resolver;
-use Symfony\Component\Routing\RouterInterface;
-use Sonata\MediaBundle\Twig\Extension\MediaExtension;
-use Symfony\Component\Translation\TranslatorInterface;
 use Capco\AppBundle\SiteColor\Resolver as SiteColorResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ParametersExtension extends \Twig_Extension
 {
     public const CACHE_KEY = 'site-parameters';
-    protected $cache;
-    protected $router;
     protected $manager;
-    protected $translator;
-    protected $mediaExtension;
-    protected $siteColorResolver;
     protected $siteParameterResolver;
+    protected $translator;
+    protected $router;
+    protected $siteColorResolver;
+    protected $cache;
 
     public function __construct(
         Manager $manager,
-        RedisCache $cache,
-        RouterInterface $router,
-        MediaExtension $mediaExtension,
         Resolver $siteParameterResolver,
         TranslatorInterface $translator,
-        SiteColorResolver $siteColorResolver
+        RouterInterface $router,
+        SiteColorResolver $siteColorResolver,
+        RedisCache $cache
     ) {
-        $this->cache = $cache;
-        $this->router = $router;
         $this->manager = $manager;
-        $this->translator = $translator;
-        $this->mediaExtension = $mediaExtension;
-        $this->siteColorResolver = $siteColorResolver;
         $this->siteParameterResolver = $siteParameterResolver;
+        $this->translator = $translator;
+        $this->router = $router;
+        $this->siteColorResolver = $siteColorResolver;
+        $this->cache = $cache;
     }
 
     public function getFunctions(): array
@@ -74,9 +70,7 @@ class ParametersExtension extends \Twig_Extension
                 'login.text.top',
                 'login.text.bottom',
                 'contact.title',
-                'contact.customcode',
                 'contact.content.body',
-                'contact.metadescription',
                 'global.site.organization_name',
                 'global.site.communication_from',
                 'snalytical-tracking-scripts-on-all-pages',

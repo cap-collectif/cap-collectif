@@ -3,106 +3,50 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Repository\SiteParameterRepository;
+use Capco\AppBundle\Twig\SiteParameterExtension;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Twig\SiteParameterExtension;
-use Capco\MediaBundle\Repository\MediaRepository;
-use Capco\AppBundle\Repository\SiteImageRepository;
-use Capco\AppBundle\Repository\SiteParameterRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UpdateContactPageMutation implements MutationInterface
 {
     private const CONTACT_PAGE_TITLE_KEYNAME = 'contact.title';
     private const CONTACT_PAGE_DESCRIPTION_KEYNAME = 'contact.content.body';
-    private const CONTACT_PAGE_PICTO_KEYNAME = 'contact.picto';
-    private const CONTACT_PAGE_META_KEYNAME = 'contact.metadescription';
-    private const CONTACT_PAGE_CODE_KEYNAME = 'contact.customcode';
-
-    private $siteParameterRepository;
-    private $imageRepository;
+    private $repository;
     private $em;
     private $cache;
-    private $mediaRepository;
 
     public function __construct(
-        SiteParameterRepository $siteParameterRepository,
+        SiteParameterRepository $repository,
         EntityManagerInterface $em,
-        RedisCache $cache,
-        MediaRepository $mediaRepository,
-        SiteImageRepository $imageRepository
+        RedisCache $cache
     ) {
+        $this->repository = $repository;
         $this->em = $em;
         $this->cache = $cache;
-        $this->imageRepository = $imageRepository;
-        $this->mediaRepository = $mediaRepository;
-        $this->siteParameterRepository = $siteParameterRepository;
     }
 
     public function __invoke(Argument $args): array
     {
-        list($title, $description, $picto, $metadescription, $customcode) = [
-            $args->offsetGet('title'),
-            $args->offsetGet('description'),
-            $args->offsetGet('picto'),
-            $args->offsetGet('metadescription'),
-            $args->offsetGet('customcode'),
-        ];
-        $titleParameter = $this->siteParameterRepository->findOneBy([
+        list($title, $description) = [$args->offsetGet('title'), $args->offsetGet('description')];
+        $titleParameter = $this->repository->findOneBy([
             'keyname' => self::CONTACT_PAGE_TITLE_KEYNAME,
         ]);
-        $descriptionParameter = $this->siteParameterRepository->findOneBy([
+        $descriptionParameter = $this->repository->findOneBy([
             'keyname' => self::CONTACT_PAGE_DESCRIPTION_KEYNAME,
         ]);
-        $metadatasParameter = $this->siteParameterRepository->findOneBy([
-            'keyname' => self::CONTACT_PAGE_META_KEYNAME,
-        ]);
-        $pictoParameter = $this->imageRepository->findOneBy([
-            'keyname' => self::CONTACT_PAGE_PICTO_KEYNAME,
-        ]);
-        $codeParameter = $this->siteParameterRepository->findOneBy([
-            'keyname' => self::CONTACT_PAGE_CODE_KEYNAME,
-        ]);
 
-        if (
-            $titleParameter &&
-            $descriptionParameter &&
-            $metadatasParameter &&
-            $codeParameter &&
-            $pictoParameter
-        ) {
-            if ($title) {
-                $titleParameter->setValue($title);
-            }
-            if ($description) {
-                $descriptionParameter->setValue($description);
-            }
-            if ($metadescription) {
-                $metadatasParameter->setValue($metadescription);
-            }
-            if ($customcode) {
-                $codeParameter->setValue($customcode);
-            }
-            if ($picto) {
-                $media = $this->mediaRepository->find($picto);
-
-                if ($media) {
-                    $pictoParameter->setMedia($media);
-                }
-            }
+        if ($titleParameter && $descriptionParameter) {
+            $titleParameter->setValue($title);
+            $descriptionParameter->setValue($description);
         } else {
             throw new \RuntimeException('Site parameters not found');
         }
 
         $this->em->flush();
         foreach (
-            [
-                self::CONTACT_PAGE_META_KEYNAME,
-                self::CONTACT_PAGE_CODE_KEYNAME,
-                self::CONTACT_PAGE_TITLE_KEYNAME,
-                self::CONTACT_PAGE_PICTO_KEYNAME,
-                self::CONTACT_PAGE_DESCRIPTION_KEYNAME,
-            ]
+            [self::CONTACT_PAGE_DESCRIPTION_KEYNAME, self::CONTACT_PAGE_TITLE_KEYNAME]
             as $item
         ) {
             $this->cache->deleteItem(SiteParameterExtension::CACHE_KEY . $item);
@@ -111,9 +55,6 @@ class UpdateContactPageMutation implements MutationInterface
         return [
             'title' => $titleParameter->getValue(),
             'description' => $descriptionParameter->getValue(),
-            'metadescription' => $metadatasParameter->getValue(),
-            'customcode' => $codeParameter->getValue(),
-            'picto' => $pictoParameter,
         ];
     }
 }

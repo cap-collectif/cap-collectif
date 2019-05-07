@@ -4,11 +4,11 @@ import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import ContactFormAdminModal from './ContactFormAdminModal';
 
-type Props = {||};
+type Props = {};
 
-type State = {|
+type State = {
   showAddContactFormModal: boolean,
-|};
+};
 
 export default class ContactFormAdminAdd extends React.Component<Props, State> {
   state = { showAddContactFormModal: false };
@@ -26,7 +26,12 @@ export default class ContactFormAdminAdd extends React.Component<Props, State> {
     const { showAddContactFormModal } = this.state;
     return (
       <div>
-        <ContactFormAdminModal onClose={this.closeAddModal} show={showAddContactFormModal} />
+        <ContactFormAdminModal
+          onClose={this.closeAddModal}
+          show={showAddContactFormModal}
+          deleteModalTitle="group.admin.contactForm.modal.delete.title"
+          deleteModalContent="group.admin.contactForm.modal.delete.content"
+        />
         <Button
           type="submit"
           id="openAddModalButton"

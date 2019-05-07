@@ -7,11 +7,11 @@ import { type ContactFormAdminModal_contactForm } from '~relay/ContactFormAdminM
 import CloseButton from '../../Form/CloseButton';
 import ContactFormAdminForm from './ContactFormAdminForm';
 
-type Props = {|
+type Props = {
   show: boolean,
   contactForm?: ContactFormAdminModal_contactForm,
   onClose: Function,
-|};
+};
 
 const ContactFormAdminModal = ({ contactForm, show, onClose }: Props) => (
   <Modal
