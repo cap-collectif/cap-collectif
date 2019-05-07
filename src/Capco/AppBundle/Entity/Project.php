@@ -386,7 +386,7 @@ class Project implements IndexableInterface
      */
     public function setAuthor($Author)
     {
-        $this->Author = $Author;
+        $this->Author = [$Author];
 
         return $this;
     }
