@@ -47,6 +47,7 @@ class Manager
         'consultation_plan',
         'display_map',
         'consent_internal_communication',
+        'disconnect_openid',
     ];
 
     protected $context;

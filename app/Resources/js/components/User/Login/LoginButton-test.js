@@ -12,6 +12,7 @@ describe('<LoginButton />', () => {
     loginWithOpenId: false,
     openLoginModal: jest.fn(),
     intl: intlMock,
+    switchUserOpenId: false,
   };
 
   it('renders a button', () => {

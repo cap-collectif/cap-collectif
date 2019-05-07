@@ -74,10 +74,10 @@ import EventListApp from './startup/EventListApp';
 import ContactsListPage from './startup/ContactsListPage';
 import ContactPage from './startup/ContactPage';
 import SectionPageApp from './startup/SectionPageApp';
-import LastProposalsApp from './startup/LastProposalsApp';
-
-import appStore from './stores/AppStore';
 import MapAdminPageApp from './startup/MapAdminPageApp';
+import SSOSwitchUserApp from './startup/SSOSwitchUserApp';
+import LastProposalsApp from './startup/LastProposalsApp';
+import appStore from './stores/AppStore';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -177,4 +177,5 @@ ReactOnRails.register({
   ProjectTrashProposalApp,
   AdminExportButtonApp,
   EventListApp,
+  SSOSwitchUserApp,
 });
