@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Project:
   p1:
     title: Projet participatif
-    Author: '@user1'
+    Author: ['@user1']
     Cover: '@MediaProject1'
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     exportable: false

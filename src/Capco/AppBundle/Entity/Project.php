@@ -118,8 +118,8 @@ class Project implements IndexableInterface
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinTable(name="author_project")
      */
     private $Author;
 
@@ -378,12 +378,10 @@ class Project implements IndexableInterface
      */
     public function getAuthor()
     {
-        return $this->Author;
+        return $this->Author->first();
     }
 
     /**
-     * @param $Author
-     *
      * @return $this
      */
     public function setAuthor($Author)
