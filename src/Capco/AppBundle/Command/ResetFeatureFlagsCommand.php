@@ -36,7 +36,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
 
         $toggleManager = $this->getContainer()->get(Manager::class);
 
-        if ('dev' === $env) {
+        if ('dev' == $env) {
             $toggleManager->activate('blog');
             $toggleManager->activate('calendar');
             $toggleManager->activate('newsletter');
@@ -66,7 +66,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
             $toggleManager->activate('indexation');
             $toggleManager->activate('developer_documentation');
             $toggleManager->deactivate('login_openid');
-            $toggleManager->deactivate('disconnect_openid');
             $toggleManager->activate('consultation_plan');
             $toggleManager->activate('display_map');
             $toggleManager->activate('privacy_policy');
@@ -74,13 +73,13 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
             $toggleManager->activate('consent_internal_communication');
         }
 
-        if ('test' === $env) {
+        if ('test' == $env) {
             $toggleManager->deactivate('shield_mode');
             $toggleManager->activate('public_api');
             $toggleManager->activate('indexation');
         }
 
-        if ('prod' === $env) {
+        if ('prod' == $env) {
             $toggleManager->deactivate('registration');
             $toggleManager->deactivate('login_facebook');
             $toggleManager->deactivate('login_gplus');
@@ -89,8 +88,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
 
             $toggleManager->deactivate('login_saml');
             $toggleManager->deactivate('login_paris');
-            $toggleManager->deactivate('login_openid');
-            $toggleManager->deactivate('disconnect_openid');
             $toggleManager->deactivate('public_api');
             $toggleManager->activate('captcha');
             $toggleManager->activate('consent_internal_communication');

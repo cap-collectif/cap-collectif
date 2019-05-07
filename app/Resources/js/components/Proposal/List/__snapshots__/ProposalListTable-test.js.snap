@@ -70,7 +70,7 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
           "text": "question-title",
           "value": Object {
             "displayTitle": "Installation de bancs",
-            "url": "https://capco.dev",
+            "url": null,
           },
           "width": "250px",
         },
@@ -144,7 +144,7 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
           "text": "question-title",
           "value": Object {
             "displayTitle": "Proposition plus votable",
-            "url": "https://capco.dev",
+            "url": null,
           },
           "width": "250px",
         },
@@ -360,7 +360,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         key="0"
       >
         <a
-          href="https://capco.dev"
+          href={null}
         >
           Installation de bancs
         </a>
@@ -418,7 +418,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         key="0"
       >
         <a
-          href="https://capco.dev"
+          href={null}
         >
           Proposition plus votable
         </a>

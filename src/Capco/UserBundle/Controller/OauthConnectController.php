@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 /**
  * ConnectController.
@@ -39,9 +38,10 @@ class OauthConnectController extends ConnectController
     public function connectAction(Request $request)
     {
         $connect = $this->container->getParameter('hwi_oauth.connect');
-        $hasUser = $this->getUser()
-            ? $this->isGranted($this->container->getParameter('hwi_oauth.grant_rule'))
-            : false;
+        $hasUser = $this->container->get('security.token_storage')
+            ->getToken()
+            ->getUser();
+        $hasUser = is_object($user) ? $user->isGranted('IS_AUTHENTICATED_REMEMBERED') : false;
 
         $error = $this->getErrorForRequest($request);
 
@@ -49,22 +49,16 @@ class OauthConnectController extends ConnectController
         if ($connect && !$hasUser && $error instanceof AccountNotLinkedException) {
             $key = time();
             $session = $request->getSession();
-            if (!$session->isStarted()) {
-                $session->start();
-            }
-
             $session->set('_hwi_oauth.registration_error.' . $key, $error);
 
-            return $this->redirectToRoute('hwi_oauth_connect_registration', ['key' => $key]);
+            return new RedirectResponse(
+                $this->generateUrl('hwi_oauth_connect_registration', ['key' => $key])
+            );
         }
 
         if ($error) {
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
-            if ($error instanceof AuthenticationException) {
-                $error = $error->getMessageKey();
-            } else {
-                $error = $error->getMessage();
-            }
+            $error = $error->getMessage();
         }
 
         return new RedirectResponse($this->generateUrl('app_homepage'));
@@ -74,7 +68,7 @@ class OauthConnectController extends ConnectController
      * Connects a user to a given account if the user is logged in and connect is enabled.
      *
      * @param Request $request The active request
-     * @param string  $service Name of the resource owner to connect to
+     * @param string $service Name of the resource owner to connect to
      *
      * @throws NotFoundHttpException if features associated to web service are not enabled
      *
@@ -83,10 +77,11 @@ class OauthConnectController extends ConnectController
     public function connectServiceAction(Request $request, $service)
     {
         if (!$this->serviceHasEnabledFeature($service)) {
-            $message = $this->container
-                ->get('translator')
-                ->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
-
+            $message = $this->container->get('translator')->trans(
+                'error.feature_not_enabled',
+                [],
+                'CapcoAppBundle'
+            );
             throw new NotFoundHttpException($message);
         }
 
@@ -95,7 +90,7 @@ class OauthConnectController extends ConnectController
 
     /**
      * @param Request $request
-     * @param string  $service
+     * @param string $service
      *
      * @throws NotFoundHttpException if features associated to web service are not enabled
      *
@@ -104,10 +99,11 @@ class OauthConnectController extends ConnectController
     public function redirectToServiceAction(Request $request, $service)
     {
         if (!$this->serviceHasEnabledFeature($service)) {
-            $message = $this->container
-                ->get('translator')
-                ->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
-
+            $message = $this->container->get('translator')->trans(
+                'error.feature_not_enabled',
+                [],
+                'CapcoAppBundle'
+            );
             throw new NotFoundHttpException($message);
         }
 
