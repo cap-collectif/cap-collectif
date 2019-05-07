@@ -423,7 +423,7 @@ class Project implements IndexableInterface
      *
      * @return $this
      */
-    public function removeAuthor(Theme $author)
+    public function removeAuthor(User $author)
     {
         $this->authors->removeElement($author);
 
