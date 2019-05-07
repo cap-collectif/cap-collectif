@@ -1,0 +1,21 @@
+InternalUpdateContactPagePayload:
+  type: relay-mutation-payload
+  config:
+    name: UpdateContactPagePayload
+    description: 'The payload of the updateContactPage'
+    fields:
+      title:
+        type: 'String!'
+        description: 'The title of the contact page.'
+      description:
+        type: 'HTML'
+        description: 'The description of the contact page.'
+      picto:
+        type: 'SiteImage'
+        description: 'The picto of the contact page.'
+      metadescription:
+        type: 'String'
+        description: 'The metadescription of the contact page.'
+      customcode:
+        type: 'String'
+        description: 'The customcode of the contact page.'

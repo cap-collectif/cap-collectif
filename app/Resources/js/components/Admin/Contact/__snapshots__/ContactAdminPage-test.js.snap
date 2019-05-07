@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ContactAdminForm /> renders correctly 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="admin.group.content"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <div
+      className="box-content"
+    >
+      <ContactAdminForm
+        anyTouched={false}
+        array={
+          Object {
+            "insert": [MockFunction],
+            "move": [MockFunction],
+            "pop": [MockFunction],
+            "push": [MockFunction],
+            "remove": [MockFunction],
+            "removeAll": [MockFunction],
+            "shift": [MockFunction],
+            "splice": [MockFunction],
+            "swap": [MockFunction],
+            "unshift": [MockFunction],
+          }
+        }
+        asyncValidate={[MockFunction]}
+        asyncValidating={false}
+        autofill={[MockFunction]}
+        blur={[MockFunction]}
+        change={[MockFunction]}
+        clearAsyncError={[MockFunction]}
+        clearSubmit={[MockFunction]}
+        destroy={[MockFunction]}
+        dirty={false}
+        dispatch={[MockFunction]}
+        error={null}
+        form="formName"
+        formName="contact-admin-form"
+        handleSubmit={[MockFunction]}
+        initialValues={Object {}}
+        initialize={[MockFunction]}
+        initialized={true}
+        invalid={false}
+        pristine={true}
+        query={
+          Object {
+            "$refType": null,
+            "siteImage": Object {
+              "id": "image1",
+              "media": Object {
+                "id": "IDimage1",
+                "name": "image1.jpg",
+                "url": "capco/image1.jpg",
+              },
+            },
+          }
+        }
+        reset={[MockFunction]}
+        submitFailed={false}
+        submitSucceeded={false}
+        submitting={false}
+        touch={[MockFunction]}
+        untouch={[MockFunction]}
+        valid={true}
+        warning={null}
+      />
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={[Function]}
+        render={[Function]}
+        variables={Object {}}
+      />
+    </div>
+  </div>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="admin.fields.project.advanced"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <CustomPageFields />
+  </div>
+  <div
+    className="box no-border"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      className="m-15"
+      disabled={true}
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+  </div>
+  <AlertForm
+    errorMessage={null}
+    invalid={false}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    valid={true}
+  />
+</form>
+`;
