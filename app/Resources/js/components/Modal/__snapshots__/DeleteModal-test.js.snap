@@ -75,7 +75,6 @@ exports[`<DeleteModal /> render correctly Delete Modal 1`] = `
       bsClass="btn"
       bsStyle="danger"
       disabled={false}
-      id="delete-modal-button-delete"
       onClick={[Function]}
     >
       <FormattedMessage

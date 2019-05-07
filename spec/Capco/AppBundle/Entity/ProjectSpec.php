@@ -91,6 +91,22 @@ class ProjectSpec extends ObjectBehavior
         $this->isParticipantsCounterDisplayable()->shouldReturn(true);
     }
 
+    public function it_display_votes_counter_when_one_consultation_votable(
+        QuestionnaireStep $questionnaireStep,
+        ConsultationStep $consultationStep,
+        ProjectAbstractStep $abs
+    ) {
+        $abs->getStep()->willReturn($questionnaireStep);
+        $abs->setProject($this)->willReturn($abs);
+        $consultationStep->isVotable()->willReturn(false);
+        $this->addStep($abs);
+        $abs->getStep()->willReturn($consultationStep);
+        $abs->setProject($this)->willReturn($abs);
+        $consultationStep->isVotable()->willReturn(true);
+        $this->addStep($abs);
+        $this->isVotesCounterDisplayable()->shouldReturn(true);
+    }
+
     public function it_display_votes_counter_when_consultations_votable(
         ConsultationStep $consultationStep,
         ProjectAbstractStep $abs

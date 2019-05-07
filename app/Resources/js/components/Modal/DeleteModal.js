@@ -46,7 +46,7 @@ export class DeleteModal extends React.Component<Props> {
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={closeDeleteModal} />
-          <Button id="delete-modal-button-delete" onClick={onDelete} bsStyle="danger">
+          <Button onClick={onDelete} bsStyle="danger">
             {buttonConfirmMessage ? (
               <FormattedMessage id={buttonConfirmMessage} />
             ) : (

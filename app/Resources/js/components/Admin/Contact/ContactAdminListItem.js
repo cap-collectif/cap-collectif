@@ -10,9 +10,9 @@ import ContactFormAdminModal from './ContactFormAdminModal';
 import RemoveContactFormMutation from '../../../mutations/RemoveContactFormMutation';
 import type { ContactAdminListItem_contactForm } from '~relay/ContactAdminListItem_contactForm.graphql';
 
-type Props = {|
+type Props = {
   contactForm: ContactAdminListItem_contactForm,
-|};
+};
 
 type State = {
   showRemoveContactFormModal: boolean,
@@ -71,6 +71,11 @@ export class ContactAdminListItem extends React.Component<Props, State> {
           contactForm={contactForm}
           onClose={this.closeEditModal}
           show={showEditContactFormModal}
+          deleteElement={() => {
+            onDelete(contactForm.id);
+          }}
+          deleteModalTitle="group.admin.contactForm.modal.delete.title"
+          deleteModalContent="group.admin.contactForm.modal.delete.content"
         />
         <Row>
           <Col xs={6}>
@@ -78,18 +83,10 @@ export class ContactAdminListItem extends React.Component<Props, State> {
           </Col>
           <Col xs={6}>
             <ButtonToolbar className="pull-right">
-              <Button
-                id={`UpdateContact-${contactForm.id}`}
-                className="mt-5"
-                bsStyle="warning"
-                onClick={this.openEditModal}>
+              <Button className="mt-5" bsStyle="warning" onClick={this.openEditModal}>
                 <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
               </Button>
-              <Button
-                id={`DeleteContact-${contactForm.id}`}
-                className="mt-5"
-                bsStyle="danger"
-                onClick={this.openRemoveModal}>
+              <Button className="mt-5" bsStyle="danger" onClick={this.openRemoveModal}>
                 <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
               </Button>
             </ButtonToolbar>

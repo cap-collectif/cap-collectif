@@ -21,12 +21,12 @@ type Props = {|
   +intl: IntlShape,
 |};
 
-type FormValues = {|
+type FormValues = {
   body: string,
   email: string,
   title: string,
   interlocutor: string,
-|};
+};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { contactForm, onClose } = props;
@@ -162,6 +162,7 @@ export class ContactFormAdminForm extends React.Component<Props> {
           />
           <div className="btn-group">
             <SubmitButton
+              type="submit"
               id={`${form}-submit-create-contact`}
               bsStyle="info"
               disabled={submitting || pristine}

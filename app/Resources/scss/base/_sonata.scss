@@ -30,11 +30,6 @@ svg.avatar {
         color: $alert-info-text;
         border-color: $alert-info-border;
     }
-
-    .custom-page-fields textarea {
-        resize: none;
-        width: 100%;
-    }
 }
 
 .sonata-ba-form {
@@ -150,4 +145,3 @@ svg.avatar {
 .tab-pane.active .checkbox label, .modal-body .checkbox label, .tab-pane.active .radio label, .modal-body .radio label {
     padding-left: 40px;
 }
-
