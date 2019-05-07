@@ -20,11 +20,8 @@ class DefaultController extends Controller
             $this->get(Manager::class)->isActive('shield_mode') &&
             !$this->getUser()->isEmailConfirmed()
         ) {
-            $this->get('security.token_storage')->setToken();
-
-            if ($request->getSession()) {
-                $request->getSession()->invalidate();
-            }
+            $this->get('security.token_storage')->setToken(null);
+            $request->getSession()->invalidate();
 
             return $this->json([
                 'success' => false,

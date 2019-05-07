@@ -39,7 +39,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
       <Connect(ShareButtonDropdown)
         id="proposal-share-button"
         title="Titre proposition"
-        url="http://capco.dev/url"
+        url={true}
       />
       <ForwardRef(Relay(Connect(ProposalReportButton)))
         proposal={
@@ -64,7 +64,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
             "responses": Array [],
             "summary": "Summary",
             "title": "Titre proposition",
-            "url": "http://capco.dev/url",
+            "url": true,
           }
         }
       />
@@ -93,7 +93,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
         "responses": Array [],
         "summary": "Summary",
         "title": "Titre proposition",
-        "url": "http://capco.dev/url",
+        "url": true,
       }
     }
   />
@@ -120,7 +120,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
         "responses": Array [],
         "summary": "Summary",
         "title": "Titre proposition",
-        "url": "http://capco.dev/url",
+        "url": true,
       }
     }
   />
@@ -147,7 +147,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
         "responses": Array [],
         "summary": "Summary",
         "title": "Titre proposition",
-        "url": "http://capco.dev/url",
+        "url": true,
       }
     }
   />

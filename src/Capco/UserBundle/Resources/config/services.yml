@@ -59,9 +59,3 @@ services:
     public: true
     arguments:
       $class: '%fos_user.model.user.class%'
-
-  Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler:
-    autowire: true
-    autoconfigure: true
-    arguments:
-      $logoutUrlSSO: '%openid_logout_url%'

@@ -4,7 +4,7 @@ import { FormattedDate } from 'react-intl';
 import moment from 'moment';
 
 type Props = {
-  startAt: ?Date | ?string,
+  startAt: ?Date,
 };
 
 export class DateIcon extends React.Component<Props> {
