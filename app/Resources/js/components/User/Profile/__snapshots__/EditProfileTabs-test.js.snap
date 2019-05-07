@@ -372,6 +372,25 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             <NavItem
               active={false}
               disabled={false}
+              eventKey="profile"
+              href="#profile"
+            >
+              <ListGroupItem
+                bsClass="list-group-item"
+                listItem={false}
+              >
+                <span
+                  className="icon cap-id-8"
+                />
+                <FormattedMessage
+                  id="user.profile.title"
+                  values={Object {}}
+                />
+              </ListGroupItem>
+            </NavItem>
+            <NavItem
+              active={false}
+              disabled={false}
               eventKey="personal-data"
               href="#personal-data"
             >
@@ -449,7 +468,20 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
         <TabPane
           bsClass="tab-pane"
           eventKey="profile"
-        />
+        >
+          <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+            viewer={
+              Object {
+                "displayName": "iAmAUser",
+                "media": Object {
+                  "url": "http://monimage.com/image1.jpg",
+                },
+                "url": "http://monprofil/profil",
+                "username": "user",
+              }
+            }
+          />
+        </TabPane>
         <TabPane
           bsClass="tab-pane"
           eventKey="account"
@@ -587,6 +619,25 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             <NavItem
               active={false}
               disabled={false}
+              eventKey="profile"
+              href="#profile"
+            >
+              <ListGroupItem
+                bsClass="list-group-item"
+                listItem={false}
+              >
+                <span
+                  className="icon cap-id-8"
+                />
+                <FormattedMessage
+                  id="user.profile.title"
+                  values={Object {}}
+                />
+              </ListGroupItem>
+            </NavItem>
+            <NavItem
+              active={false}
+              disabled={false}
               eventKey="personal-data"
               href="#personal-data"
             >
@@ -664,7 +715,20 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
         <TabPane
           bsClass="tab-pane"
           eventKey="profile"
-        />
+        >
+          <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+            viewer={
+              Object {
+                "displayName": "iAmAUser",
+                "media": Object {
+                  "url": "http://monimage.com/image1.jpg",
+                },
+                "url": "http://monprofil/profil",
+                "username": "user",
+              }
+            }
+          />
+        </TabPane>
         <TabPane
           bsClass="tab-pane"
           eventKey="account"

@@ -1,7 +1,7 @@
 <?php
+
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
-use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
@@ -10,21 +10,16 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\EventType;
 use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\ProposalEvent;
-use Overblog\GraphQLBundle\Error\UserError;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Capco\AppBundle\GraphQL\Mutation\ChangeEventMutation;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormError;
 
 class ChangeEventMutationSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         FormFactory $formFactory,
@@ -33,12 +28,12 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $this->beConstructedWith($globalIdResolver, $em, $formFactory, $logger);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(ChangeEventMutation::class);
     }
 
-    function it_updates_an_event(
+    public function it_updates_an_event(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         FormFactory $formFactory,
@@ -47,12 +42,12 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Form $form,
         Event $event
     ) {
-        $values = ['id' => 'base64id', "body" => "My body"];
+        $values = ['id' => 'base64id', 'body' => 'My body'];
         $arguments->getRawArguments()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
 
         $formFactory->create(EventType::class, $event)->willReturn($form);
-        $form->submit(["body" => "My body"], false)->willReturn(null);
+        $form->submit(['body' => 'My body'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
 
@@ -63,12 +58,12 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $payload['eventEdge']->node->shouldBe($event);
     }
 
-    function it_resolve_userErrors_on_unknown_id(
+    public function it_resolve_userErrors_on_unknown_id(
         GlobalIdResolver $globalIdResolver,
         Arg $arguments,
         User $viewer
     ) {
-        $values = ['id' => 'base64id', "body" => "My body"];
+        $values = ['id' => 'base64id', 'body' => 'My body'];
         $arguments->getRawArguments()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn(null);
         $this->__invoke($arguments, $viewer)->shouldBe([
@@ -77,7 +72,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         ]);
     }
 
-    function it_throws_error_on_invalid_form(
+    public function it_throws_error_on_invalid_form(
         GlobalIdResolver $globalIdResolver,
         Arg $arguments,
         FormFactory $formFactory,
@@ -86,20 +81,20 @@ class ChangeEventMutationSpec extends ObjectBehavior
         User $viewer,
         Event $event
     ) {
-        $values = ['id' => 'base64id', "body" => ""];
+        $values = ['id' => 'base64id', 'body' => ''];
         $arguments->getRawArguments()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $formFactory->create(EventType::class, $event)->willReturn($form);
-        
-        $form->submit(["body" => ""], false)->willReturn(null);
+
+        $form->submit(['body' => ''], false)->willReturn(null);
         $error->getMessage()->willReturn('Invalid data.');
         $form->getErrors()->willReturn([$error]);
         $form->all()->willReturn([]);
         $form->isValid()->willReturn(false);
 
-        $this->shouldThrow(GraphQLException::fromString('Invalid data.'))->during(
-            '__invoke',
-            [$arguments, $viewer]
-        );
+        $this->shouldThrow(GraphQLException::fromString('Invalid data.'))->during('__invoke', [
+            $arguments,
+            $viewer,
+        ]);
     }
 }

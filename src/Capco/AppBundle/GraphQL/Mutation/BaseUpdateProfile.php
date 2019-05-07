@@ -39,16 +39,22 @@ abstract class BaseUpdateProfile implements MutationInterface
     public function __invoke(Argument $input, User $viewer)
     {
         $this->arguments = $input->getRawArguments();
-
-        if (!$viewer->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID])) {
-            throw new UserError(
-                'Only a SUPER_ADMIN can edit data from another user. Or the account owner'
-            );
-        }
         $this->user = $viewer;
+        $userId = GlobalId::fromGlobalId($this->arguments[self::USER_ID])['id'];
+        if (!empty($this->arguments[self::USER_ID])) {
+            if ($viewer->isAdmin() && !$viewer->isSuperAdmin() && $viewer->getId() !== $userId) {
+                throw new UserError(
+                    'Only a SUPER_ADMIN can edit data from another user. Or the account owner'
+                );
+            }
+            if (!$viewer->isAdmin() && !$viewer->isSuperAdmin() && $viewer->getId() !== $userId) {
+                throw new UserError(
+                    'Only a SUPER_ADMIN can edit data from another user. Or the account owner'
+                );
+            }
+        }
 
-        if ($viewer->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID])) {
-            $userId = GlobalId::fromGlobalId($this->arguments[self::USER_ID])['id'];
+        if ($viewer->isSuperAdmin() && !empty($this->arguments[self::USER_ID])) {
             $user = $this->userRepository->find($userId);
             if ($user && $user->getId() !== $viewer->getId()) {
                 $this->user = $user;

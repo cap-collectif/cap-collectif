@@ -168,7 +168,7 @@
         "box/spout": "^2.7",
         "webfactory/icu-translation-bundle": "dev-master",
         "ruflin/elastica": "~5",
-        "tweedegolf/prometheus-client": "^0.3.0",
+        "tweedegolf/prometheus-client": "^0.2.3",
         "symfony/polyfill-php55": "^1.7.0",
         "sentry/sentry-symfony": "^2.0",
         "tweedegolf/prometheus-bundle": "dev-master",
