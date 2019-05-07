@@ -28,6 +28,14 @@ InternalQuery:
         type: 'SiteImage!'
         description: 'Get the current favicon'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteFaviconQueryResolver")'
+      siteImage:
+        type: 'SiteImage'
+        description: 'Get a site image'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteImageQueryResolver", [args])'
+        args:
+          keyname:
+            type: 'String!'
+            description: 'The site image keyname'
       registrationForm:
         type: 'InternalRegistrationForm'
         description: 'Get the current registration form'

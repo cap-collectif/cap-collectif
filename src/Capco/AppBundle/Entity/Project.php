@@ -1008,9 +1008,7 @@ class Project implements IndexableInterface
                 $step instanceof SelectionStep ||
                 $step instanceof CollectStep
             ) {
-                if ($step->isVotable()) {
-                    return true;
-                }
+                return $step->isVotable();
             }
         }
 
@@ -1038,9 +1036,7 @@ class Project implements IndexableInterface
         $steps = $this->getRealSteps();
         foreach ($steps as $step) {
             if ($step instanceof SelectionStep) {
-                if ($step->isVotable()) {
-                    return true;
-                }
+                return $step->isVotable();
             }
             if (
                 $step instanceof CollectStep ||

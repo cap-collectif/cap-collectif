@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CustomPageFields /> renders correctly with no props 1`] = `
+<FormSection
+  className="custom-page-fields"
+  component="div"
+  name="custom"
+>
+  <Field
+    component={[Function]}
+    label={
+      <FormattedMessage
+        id="page.metadescription"
+        values={Object {}}
+      />
+    }
+    name="metadescription"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    label={
+      <FormattedMessage
+        id="admin.customcode"
+        values={Object {}}
+      />
+    }
+    name="customcode"
+    type="textarea"
+  />
+  <Field
+    component={[Function]}
+    label={
+      <FormattedMessage
+        id="admin.fields.page.cover"
+        values={Object {}}
+      />
+    }
+    name="picto"
+    type="image"
+  />
+</FormSection>
+`;
