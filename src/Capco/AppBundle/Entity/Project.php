@@ -112,7 +112,7 @@ class Project implements IndexableInterface
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "Author", "themes", "steps", "media"})
+     * @Gedmo\Timestampable(on="change", field={"title", "authors", "themes", "steps", "media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -121,7 +121,7 @@ class Project implements IndexableInterface
      * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinTable(name="author_project")
      */
-    private $Author;
+    private $authors;
 
     /**
      * @var
@@ -238,6 +238,7 @@ class Project implements IndexableInterface
     {
         $this->restrictedViewerGroups = new ArrayCollection();
         $this->themes = new ArrayCollection();
+        $this->authors = new ArrayCollection();
         $this->steps = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
@@ -378,15 +379,53 @@ class Project implements IndexableInterface
      */
     public function getAuthor()
     {
-        return $this->Author->first();
+        return $this->authors->first();
     }
 
     /**
      * @return $this
      */
-    public function setAuthor($Author)
+    public function setAuthor($author)
     {
-        $this->Author = [$Author];
+        $this->authors = [$author];
+
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
+     * Add author.
+     *
+     * @param \Capco\AppBundle\Entity\User $author
+     *
+     * @return Project
+     */
+    public function addAuthor(User $author)
+    {
+        if (!$this->authors->contains($author)) {
+            $this->authors->add($author);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove author.
+     *
+     * @param \Capco\AppBundle\Entity\User $author
+     *
+     * @return $this
+     */
+    public function removeAuthor(Theme $author)
+    {
+        $this->authors->removeElement($author);
 
         return $this;
     }
