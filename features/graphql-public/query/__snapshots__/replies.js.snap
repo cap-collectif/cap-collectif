@@ -17,7 +17,7 @@ Object {
               },
             },
             "createdAt": "2016-03-01 00:00:00",
-            "id": "UmVwbHk6cmVwbHkx",
+            "id": "reply1",
             "publishedAt": "2016-03-01 00:00:00",
             "responses": Array [
               Object {
@@ -108,7 +108,7 @@ Object {
               },
             },
             "createdAt": "2016-03-01 00:00:00",
-            "id": "UmVwbHk6cmVwbHky",
+            "id": "reply2",
             "publishedAt": "2016-03-01 00:00:00",
             "responses": Array [
               Object {
@@ -207,7 +207,7 @@ Object {
               },
             },
             "createdAt": "2016-03-01 00:00:00",
-            "id": "UmVwbHk6cmVwbHk2",
+            "id": "reply6",
             "publishedAt": "2016-03-01 00:00:00",
             "responses": Array [
               Object {
@@ -306,7 +306,7 @@ Object {
               },
             },
             "createdAt": "2016-03-01 00:00:00",
-            "id": "UmVwbHk6cmVwbHk3",
+            "id": "reply7",
             "publishedAt": "2016-03-01 00:00:00",
             "responses": Array [
               Object {

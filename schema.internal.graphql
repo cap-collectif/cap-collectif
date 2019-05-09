@@ -330,7 +330,7 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   # The ID of an object
   id: ID!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -368,7 +368,7 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  # Whether or not the contribution is trashed.
+  # `true` if the contribution is trashed.
   trashed: Boolean!
 
   # Identifies the trashed visibility.
@@ -465,7 +465,7 @@ type ArgumentVote implements Vote & Publishable {
   # The ID of an object
   id: ID!
 
-  # The date of the vote.
+  # Date of vote.
   createdAt: DateTime!
 
   # The author of the contribution.
@@ -477,7 +477,7 @@ type ArgumentVote implements Vote & Publishable {
   # Returns Type of vote
   kind: String!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -1050,7 +1050,7 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   # The ID of an object
   id: ID!
 
-  # Whether or not the contribution is trashed.
+  # `true` if the contribution is trashed.
   trashed: Boolean!
 
   # Identifies the trashed visibility.
@@ -1079,7 +1079,7 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -1203,7 +1203,7 @@ type CommentVote implements Node & Vote & Publishable {
   # The ID of an object
   id: ID!
 
-  # The date of the vote.
+  # Date of vote.
   createdAt: DateTime!
 
   # The author of the contribution.
@@ -1215,7 +1215,7 @@ type CommentVote implements Node & Vote & Publishable {
   # Returns 'commentVote'.
   kind: String!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -2796,7 +2796,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   # The ID of an object
   id: ID!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -2910,7 +2910,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   # Url of the contribution
   url: URI!
 
-  # Whether or not the contribution is trashed.
+  # `true` if the contribution is trashed.
   trashed: Boolean!
 
   # Identifies the trashed visibility.
@@ -3099,7 +3099,7 @@ type OpinionVote implements YesNoPairedVote & Publishable & Vote {
   # The ID of an object
   id: ID!
 
-  # The date of the vote.
+  # Date of vote.
   createdAt: DateTime!
 
   # The author of the contribution.
@@ -3111,7 +3111,7 @@ type OpinionVote implements YesNoPairedVote & Publishable & Vote {
   # Returns 'opinionVote'.
   kind: String!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -3310,7 +3310,7 @@ type PresentationStep implements Step {
 }
 
 interface PrivatableVote {
-  # Whether the vote is anonymous or not.
+  # Anonymous or not.
   private: Boolean
 }
 
@@ -3602,7 +3602,7 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   # The ID of an object
   id: ID!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -3617,7 +3617,7 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   # Url of the contribution
   url: URI!
 
-  # Whether or not the contribution is trashed.
+  # `true` if the contribution is trashed.
   trashed: Boolean!
 
   # Identifies the trashed visibility.
@@ -4202,7 +4202,7 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
   # The ID of an object
   id: ID!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -4214,7 +4214,7 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
-  # Whether the vote is anonymous or not.
+  # Anonymous or not.
   private: Boolean
 
   # Date of vote.
@@ -4275,7 +4275,7 @@ interface Publishable {
   # The ID of an object
   id: ID!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -4696,7 +4696,7 @@ type Questionnaire implements Node {
     last: Int
   ): UserConnection!
 
-  # The list of questions of the questionnaire.
+  # List of questions.
   questions: [Question!]!
 
   # A list of replies to the questionnaire.
@@ -4949,7 +4949,7 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
   # The ID of an object
   id: ID!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -5698,7 +5698,7 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
   # The ID of an object
   id: ID!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -5736,7 +5736,7 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  # Whether or not the contribution is trashed.
+  # `true` if the contribution is trashed.
   trashed: Boolean!
 
   # Identifies the trashed visibility.
@@ -5834,7 +5834,7 @@ type SourceVote implements Vote & Publishable {
   # The ID of an object
   id: ID!
 
-  # The date of the vote.
+  # Date of vote.
   createdAt: DateTime!
 
   # The author of the contribution.
@@ -5846,7 +5846,7 @@ type SourceVote implements Vote & Publishable {
   # Returns 'sourceVote'.
   kind: String!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -6015,7 +6015,7 @@ type Theme implements UniformResourceLocatable {
 
 # Entities that can be trashed.
 interface Trashable {
-  # Whether or not the contribution is trashed.
+  # `true` if the contribution is trashed.
   trashed: Boolean!
 
   # Identifies the trashed visibility.
@@ -7026,7 +7026,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
     type: ArgumentValue
   ): ArgumentConnection
 
-  # Whether or not the contribution is trashed.
+  # `true` if the contribution is trashed.
   trashed: Boolean!
 
   # Identifies the trashed visibility.
@@ -7038,7 +7038,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   # Identifies the reason why the moderator trashed the contribution.
   trashedReason: String
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -7154,7 +7154,7 @@ type VersionVote implements YesNoPairedVote & Publishable & Vote {
   # The ID of an object
   id: ID!
 
-  # The date of the vote.
+  # Date of vote.
   createdAt: DateTime!
 
   # The author of the contribution.
@@ -7166,7 +7166,7 @@ type VersionVote implements YesNoPairedVote & Publishable & Vote {
   # Returns 'vote'.
   kind: String!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -7183,7 +7183,7 @@ type VersionVote implements YesNoPairedVote & Publishable & Vote {
 interface Vote {
   id: ID!
 
-  # The date of the vote.
+  # Date of vote.
   createdAt: DateTime!
 
   # The author of the contribution.
@@ -7245,7 +7245,7 @@ interface YesNoPairedVote {
   # The ID of an object
   id: ID!
 
-  # The date of the vote.
+  # Date of vote.
   createdAt: DateTime!
 
   # The author of the contribution.
@@ -7257,7 +7257,7 @@ interface YesNoPairedVote {
   # Returns Type of vote
   kind: String!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.

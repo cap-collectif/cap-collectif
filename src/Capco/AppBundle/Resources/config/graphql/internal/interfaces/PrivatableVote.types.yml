@@ -4,6 +4,5 @@ PrivatableVote:
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", [value])'
     fields:
       private:
-        # TODO This should probably be non-null
         type: 'Boolean'
-        description: 'Whether the vote is anonymous or not.'
+        description: 'Anonymous or not.'

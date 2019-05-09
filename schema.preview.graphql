@@ -300,7 +300,7 @@ type PageInfo {
 }
 
 interface PrivatableVote {
-  # Whether the vote is anonymous or not.
+  # Anonymous or not.
   private: Boolean
 }
 
@@ -389,7 +389,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   # The ID of an object
   id: ID!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -404,7 +404,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   # The URL to this resource.
   url: URI!
 
-  # Whether or not the contribution is trashed.
+  # `true` if the contribution is trashed.
   trashed: Boolean!
 
   # Identifies the trashed visibility.
@@ -499,7 +499,7 @@ type ProposalVote implements Publishable & Vote & PrivatableVote {
   # The ID of an object
   id: ID!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -511,7 +511,7 @@ type ProposalVote implements Publishable & Vote & PrivatableVote {
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
-  # Whether the vote is anonymous or not.
+  # Anonymous or not.
   private: Boolean
 
   # Date of vote.
@@ -526,7 +526,7 @@ interface Publishable {
   # The ID of an object
   id: ID!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -720,7 +720,7 @@ type Questionnaire implements Node {
     last: Int
   ): UserConnection!
 
-  # The list of questions of the questionnaire.
+  # List of questions.
   questions: [Question!]!
 
   # A list of replies to the questionnaire.
@@ -744,7 +744,7 @@ type Reply implements Node & Publishable {
   # The ID of an object
   id: ID!
 
-  # Whether or not the entity is published.
+  # `true` if the object is published.
   published: Boolean!
 
   # Identifies when the entity can no more be published.
@@ -870,7 +870,7 @@ type SimpleQuestion implements Question {
 
 # Entities that can be trashed.
 interface Trashable {
-  # Whether or not the contribution is trashed.
+  # `true` if the contribution is trashed.
   trashed: Boolean!
 
   # Identifies the trashed visibility.

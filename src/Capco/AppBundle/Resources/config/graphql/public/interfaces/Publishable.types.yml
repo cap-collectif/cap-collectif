@@ -9,7 +9,7 @@ PublicPublishable:
     fields:
       published:
         type: 'Boolean!'
-        description: 'Whether or not the entity is published.'
+        description: '`true` if the object is published.'
         resolve: '@=value.isPublished()'
       publishableUntil:
         type: 'DateTime'
