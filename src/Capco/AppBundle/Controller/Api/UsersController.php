@@ -356,12 +356,6 @@ class UsersController extends FOSRestController
         // We generate a confirmation token to validate the new email
         $token = $this->get('fos_user.util.token_generator')->generateToken();
 
-        $user->setNewEmailConfirmationToken($token);
-
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
-
         $this->get('swarrot.publisher')->publish(
             'user.email',
             new Message(
@@ -370,5 +364,10 @@ class UsersController extends FOSRestController
                 ])
             )
         );
+
+        $user->setNewEmailConfirmationToken($token);
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
     }
 }
