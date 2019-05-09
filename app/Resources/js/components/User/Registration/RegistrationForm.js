@@ -108,7 +108,7 @@ export class RegistrationForm extends React.Component<Props> {
       <FormattedHTMLMessage
         id="and-the-privacy-policy"
         values={{
-          url: `${baseUrl}/pages/politique-de-confidentialite`,
+          url: `${baseUrl}/privacy`,
         }}
       />
     ) : null;
