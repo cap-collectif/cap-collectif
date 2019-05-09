@@ -1,26 +1,30 @@
 // @flow
-import type { ComponentType } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
 type Props = {
-  separator?: string,
+  margin: boolean,
+  children: ?React.Node,
+  className?: string,
 };
 
-const InlineList: ComponentType<Props> = styled.ul`
+const Container = styled.ul.attrs({
+  className: 'inline-list',
+})`
   padding: 0;
-  margin: 0;
-
+  margin: ${props => (props.margin === true ? '0 0 10px' : '0')};
+  
   li {
-    display: inline;
+    display: inline-block;
 
-    a {
-      color: ${colors.darkGray};
-    }
+    // a {
+    //   color: ${colors.darkGray};
+    // }
 
     &::after {
-      content: ${props => (props.separator ? `"${props.separator}"` : `"•"`)};
-      padding: ${props => (props.separator === ',' ? '0 5px 0 0' : '0 5px')};
+      content: '•';
+      padding: 0 5px;
     }
 
     &:last-child::after {
@@ -29,5 +33,20 @@ const InlineList: ComponentType<Props> = styled.ul`
     }
   }
 `;
+
+export const InlineList = (props: Props) => {
+  const { children, margin, className } = props;
+
+  return (
+    <Container className={className} margin={margin}>
+      {children}
+    </Container>
+  );
+};
+
+InlineList.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
+  margin: true,
+};
 
 export default InlineList;

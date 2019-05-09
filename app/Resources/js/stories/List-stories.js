@@ -10,6 +10,8 @@ import Tag from '../components/Ui/Labels/Tag';
 import ProgressListItem from '../components/Ui/List/ProgressListItem';
 import ProgressList from '../components/Ui/List/ProgressList';
 import ListGroupFlush from '../components/Ui/List/ListGroupFlush';
+import ListGroup from '../components/Ui/List/ListGroup';
+import Media from '../components/Ui/Medias/Media/Media';
 
 const author = {
   username: 'Karim',
@@ -26,7 +28,9 @@ storiesOf('List', module)
     () => (
       <InlineList>
         <li>5 projets</li>
-        <li>10 articles</li>
+        <li>
+          <a href="https://ui.cap-collectif.com/?selectedKind=List">10 articles</a>
+        </li>
         <li>2 évènements</li>
       </InlineList>
     ),
@@ -80,28 +84,32 @@ storiesOf('List', module)
   .add(
     'List Group',
     () => (
-      <ListGroup className="list-group-custom">
+      <ListGroup>
         <ListGroupItem>Paragraph</ListGroupItem>
-        <ListGroupItem>
+        <ListGroupItem className="d-flex justify-content-between align-items-center">
           <div>Left block</div>
           <div>Center block</div>
           <div>Right block</div>
         </ListGroupItem>
         <ListGroupItem className="list-group-item__opinion">
-          <div className="left-block">
-            <UserAvatar user={author} />
-            <div>
+          <Media>
+            <Media.Left>
+              <UserAvatar user={author} />
+            </Media.Left>
+            <Media.Body>
               <p>
-                {/* <a href="#" className="author-name"> */}
-                {/* Lorem ipsum */}
-                {/* </a>{' '} */}
-                <span className="excerpt">3 juin 2014</span>
+                <a
+                  href="https://ui.cap-collectif.com/?selectedKind=List"
+                  className="author-name excerpt_dark">
+                  Lorem ipsum
+                </a>{' '}
+                <span className="excerpt small">3 juin 2014</span>
               </p>
-              <h3 className="title">
+              <a href="https://ui.cap-collectif.com/?selectedKind=List" className="title">
                 consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
                 magna aliqua.
-              </h3>
-              <InlineList>
+              </a>
+              <InlineList className="excerpt small">
                 <li>Item 1</li>
                 <li>Item 2</li>
               </InlineList>
@@ -111,8 +119,8 @@ storiesOf('List', module)
                   Agree
                 </Button>
               </div>
-            </div>
-          </div>
+            </Media.Body>
+          </Media>
           <div className="right-block">Right block ...</div>
         </ListGroupItem>
       </ListGroup>
