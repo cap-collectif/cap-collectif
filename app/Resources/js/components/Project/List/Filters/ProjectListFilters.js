@@ -19,6 +19,7 @@ type Props = {
   projectTypes: ProjectType[],
   projectAuthors: ProjectAuthor[],
   theme: ?string,
+  status: ?string,
   themes: ProjectTheme[],
 };
 
@@ -41,10 +42,8 @@ class ProjectListFilters extends React.Component<Props> {
   }
 
   renderThemeStatus() {
-    const { features, theme, intl } = this.props;
-    if (features.themes) {
-      return <ProjectsListFilterStatus intl={intl} status={theme} />;
-    }
+    const { status, intl } = this.props;
+    return <ProjectsListFilterStatus intl={intl} status={status} />;
   }
 
   render() {
