@@ -2,45 +2,40 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Capco\UserBundle\Repository\UserRepository;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class UserController extends Controller
 {
     /**
-     * @Security("has_role('ROLE_ADMIN')")
-     *
      * Edit action.
      *
+     * @param int|string|null $id
+     * @param Request         $request
+     *
+     * @throws NotFoundHttpException If the object does not exist
      * @throws AccessDeniedException If access is not granted
+     *
+     * @return Response|RedirectResponse
      */
-    public function editAction($id = null): Response
+    public function editAction($id = null, Request $request = null)
     {
-        $object = $this->get(UserRepository::class)->findOneBySlug($id);
+        $id = $request->get($this->admin->getIdParameter());
+        $object = $this->admin->getObject($id);
 
-        if (!$object) {
-            throw $this->createNotFoundException();
+        if (!$this->isGranted('ROLE_ADMIN') && $object->hasRole('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException();
         }
 
-        return $this->renderWithExtraParams(
-            'CapcoAdminBundle:User:edit.html.twig',
-            [
-                'action' => 'edit',
-                'form' => null,
-                'object' => $object,
-                'objectId' => $object->getId(),
-            ],
-            null
-        );
+        return parent::editAction($id, $request);
     }
 
-    public function exportAction(Request $request): Response
+    public function exportAction(Request $request)
     {
         $this->admin->checkAccess('export');
         $trans = $this->get('translator');

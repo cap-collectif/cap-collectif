@@ -2,38 +2,45 @@
 
 namespace Capco\AppBundle\Mailer\Message\User;
 
-use Capco\AppBundle\Mailer\Message\ExternalMessage;
+use Capco\AppBundle\Mailer\Message\DefaultMessage;
 use Capco\UserBundle\Entity\User;
 
-final class UserConfirmEmailChangedMessage extends ExternalMessage
+final class UserConfirmEmailChangedMessage extends DefaultMessage
 {
     public static function create(
         User $user,
-        string $recipientEmail,
+        \DateTime $currentDate,
+        string $siteName,
+        string $baseUrl,
+        string $recipentEmail,
         string $recipientName = null
     ): self {
         return new self(
-            $recipientEmail,
+            $recipentEmail,
             $recipientName,
-            'email.confirmEmailChanged.subject',
-            static::getMySubjectVars($user->getUsername()),
-            'email-content-mail-changed',
-            static::getMyTemplateVars($user->getNewEmailToConfirm(), $user->getUsername())
+            'email.notification.email.change.subject',
+            static::getMySubjectVars(),
+            '@CapcoMail/confirmEmailChange.html.twig',
+            static::getMyTemplateVars($user, $currentDate, $siteName, $baseUrl)
         );
     }
 
-    private static function getMyTemplateVars($newEmailToConfirm, $username): array
-    {
+    private static function getMyTemplateVars(
+        User $user,
+        \DateTime $date,
+        string $siteName,
+        string $baseUrl
+    ): array {
         return [
-            '{newEmailToConfirm}' => $newEmailToConfirm,
-            '{username}' => $username,
+            'user' => $user,
+            'date' => $date,
+            'siteName' => $siteName,
+            'baseUrl' => $baseUrl,
         ];
     }
 
-    private static function getMySubjectVars(string $username): array
+    private static function getMySubjectVars(): array
     {
-        return [
-            '%username%' => $username,
-        ];
+        return [];
     }
 }
