@@ -55,8 +55,8 @@ module.exports = {
     'react/no-unused-state': 'warn',
     // TODO set this to error
     'react/sort-comp': 'warn',
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
     'graphql/named-operations': [
       'error',
       {
@@ -89,7 +89,7 @@ module.exports = {
     camelcase: 'off',
     // Fix doesn't seem to work yet
     // Spread in Flow types declaration seems not work yet (See OpinionTabs.js for example).
-    'relay/generated-flow-types': ['warn', {fix: false}],
+    'relay/generated-flow-types': ['warn', { fix: false }],
     // TODO: https://github.com/cap-collectif/platform/issues/5966
     'react/require-default-props': 'off',
     // TODO: https://github.com/cap-collectif/platform/issues/5967
@@ -117,7 +117,7 @@ module.exports = {
     // TODO turn this into an error to prepare for React 17
     'react/no-string-refs': 'warn',
     // We use .js instead of .jsx
-    'react/jsx-filename-extension': ['error', {extensions: ['.js']}],
+    'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
     // TODO enable this
     'react/jsx-no-bind': 'off',
     // TODO enable this
@@ -136,6 +136,18 @@ module.exports = {
     'consistent-return': 'off',
     // Maybe enable this
     'array-callback-return': 'off',
+    'no-restricted-imports': [
+      'error',
+      {
+        paths: [
+          {
+            name: 'react-bootstrap',
+            importNames: ['ListGroup'],
+            message: 'Please use ListGroup from "/Ui/List/ListGroup" instead.',
+          },
+        ],
+      },
+    ],
   },
   settings: {
     flowtype: {
@@ -143,10 +155,8 @@ module.exports = {
     },
     'import/resolver': {
       alias: {
-        map: [
-          ['~relay', './app/Resources/js/__generated__/~relay']
-        ],
-      }
-    }
+        map: [['~relay', './app/Resources/js/__generated__/~relay']],
+      },
+    },
   },
 };

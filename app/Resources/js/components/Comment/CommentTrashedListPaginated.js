@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import Comment from './Comment';

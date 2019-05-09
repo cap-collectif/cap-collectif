@@ -3,6 +3,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector, arrayPush } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
 import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import ProposalFormAdminDistrictModal from './ProposalFormAdminDistrictModal';
 import type { GlobalState, Dispatch } from '../../types';

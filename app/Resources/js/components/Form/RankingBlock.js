@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
 import { Row, Col, ListGroup } from 'react-bootstrap';
 import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';

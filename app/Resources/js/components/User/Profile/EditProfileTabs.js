@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
 import { Row, Col, Tab, Nav, NavItem, Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
 import AccountBox from './AccountBox';
 import type { State, FeatureToggles } from '../../../types';

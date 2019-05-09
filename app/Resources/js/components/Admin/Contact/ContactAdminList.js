@@ -2,6 +2,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
 import { ListGroup } from 'react-bootstrap';
 import type { ContactAdminList_query } from '~relay/ContactAdminList_query.graphql';
 import ContactAdminListItem from './ContactAdminListItem';

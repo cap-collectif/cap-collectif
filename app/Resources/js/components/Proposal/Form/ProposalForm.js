@@ -13,6 +13,8 @@ import {
 } from 'redux-form';
 import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 import { debounce } from 'lodash';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
 import {
   Alert,
   Collapse,

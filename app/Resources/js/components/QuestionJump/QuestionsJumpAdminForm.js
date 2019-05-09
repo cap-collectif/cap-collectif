@@ -3,6 +3,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { FieldArray, formValueSelector } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
 import { ListGroup, Button } from 'react-bootstrap';
 import QuestionJumpConditionsAdminForm from './QuestionJumpConditionsAdminForm';
 import type { GlobalState } from '../../types';

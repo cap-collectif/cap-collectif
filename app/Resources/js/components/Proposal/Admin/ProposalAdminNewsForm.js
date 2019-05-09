@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
 import { ButtonToolbar, Button, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { baseUrl } from '../../../config';
 import type { ProposalAdminNewsForm_proposal } from '~relay/ProposalAdminNewsForm_proposal.graphql';

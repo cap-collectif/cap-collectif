@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import ProjectStatsListItem from './ProjectStatsListItem';
 import ProjectStatsModal from './ProjectStatsModal';

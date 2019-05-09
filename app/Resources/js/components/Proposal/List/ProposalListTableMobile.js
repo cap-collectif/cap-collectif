@@ -1,12 +1,13 @@
 // @flow
 import * as React from 'react';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
 import ProgressList from '../../Ui/List/ProgressList';
 import CroppedLabel from '../../Ui/Labels/CroppedLabel';
 import ImplementationStepTitle from '../ImplementationStepTitle';
 import ProgressListItem from '../../Ui/List/ProgressListItem';
 import type { ImplementationStepTitle_progressSteps } from '~relay/ImplementationStepTitle_progressSteps.graphql';
+import ListGroup from '../../Ui/List/ListGroup';
 
 type Props = {
   data: Array<Object>,
@@ -21,7 +22,7 @@ export class ProposalListTableMobile extends React.Component<Props> {
     const { data } = this.props;
 
     return (
-      <ListGroup className="list-group-custom">
+      <ListGroup>
         {data.map((item, key) => {
           const { value } = item.implementationPhase;
           const openSteps = value.list.filter(step => moment().isBetween(step.startAt, step.endAt));

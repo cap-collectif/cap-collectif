@@ -11,6 +11,8 @@ import {
   formValueSelector,
 } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
 import { ListGroup, ListGroupItem, Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import UpdateProposalFusionMutation from '../../../mutations/UpdateProposalFusionMutation';

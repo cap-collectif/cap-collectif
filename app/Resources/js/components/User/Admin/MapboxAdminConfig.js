@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
 import { Button, ListGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Field, type FormProps, reduxForm, SubmissionError } from 'redux-form';
