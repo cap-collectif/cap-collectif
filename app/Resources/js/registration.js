@@ -19,7 +19,6 @@ import ProjectsListApp from './startup/ProjectsListAppClient';
 import ProposalStepPageApp from './startup/ProposalStepPageApp';
 import NavbarApp from './startup/NavbarAppClient';
 import EmailNotConfirmedApp from './startup/EmailNotConfirmedAppClient';
-import NewOpinionApp from './startup/NewOpinionAppClient';
 import ProjectTrashButtonApp from './startup/ProjectTrashButtonApp';
 import ProjectStepTabsApp from './startup/ProjectStepTabsApp';
 import CarouselApp from './startup/CarouselApp';
@@ -133,7 +132,6 @@ ReactOnRails.register({
   ProposalStepPageApp,
   NavbarApp,
   EmailNotConfirmedApp,
-  NewOpinionApp,
   AdminImportEventsApp,
   SectionPageApp,
   AccountProfileApp,

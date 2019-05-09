@@ -5,7 +5,7 @@ import { darken } from 'polished';
 import colors, { CardHeaderColors } from '../../../utils/colors';
 
 type Props = {
-  bgColor: 'gray' | 'white' | 'green' | 'blueDark' | 'blue' | 'orange' | 'red' | 'default',
+  bgColor: 'gray' | 'white' | 'green' | 'bluedark' | 'blue' | 'orange' | 'red' | 'default',
   children: React.Node,
 };
 
@@ -22,9 +22,7 @@ const Container = styled.div.attrs({
 
 export const Header = (props: Props) => {
   const { bgColor, children } = props;
-
-  const getBgColor = CardHeaderColors[bgColor];
-
+  const getBgColor = CardHeaderColors[bgColor] || CardHeaderColors.default;
   return <Container bgColor={getBgColor}>{children}</Container>;
 };
 

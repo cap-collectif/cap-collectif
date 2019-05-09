@@ -3,12 +3,10 @@
 exports[`<Opinion /> renders correcty 1`] = `
 <ListGroupItem
   bsClass="list-group-item"
-  className="list-group-item__opinion has-chart"
+  className="list-group-item__opinion text-left has-chart"
   listItem={false}
 >
-  <div
-    className="left-block"
-  >
+  <Media>
     <ForwardRef(Relay(OpinionPreview))
       opinion={
         Object {
@@ -38,6 +36,6 @@ exports[`<Opinion /> renders correcty 1`] = `
       }
       showUpdatedDate={false}
     />
-  </div>
+  </Media>
 </ListGroupItem>
 `;

@@ -21,12 +21,12 @@ export class Section extends React.Component<Props> {
   render() {
     const { enablePagination, consultation, section, level } = this.props;
     return (
-      <div
-        id={`opinion-type--${section.slug}`}
-        className={`anchor-offset text-center opinion-type__title level--${level}`}>
-        {section.title}
-        <br />
-        {section.subtitle && <span className="small excerpt">{section.subtitle}</span>}
+      <div id={`opinion-type--${section.slug}`} className="anchor-offset text-center">
+        <div className={`opinion-type__title level--${level}`}>
+          {section.title}
+          <br />
+          {section.subtitle && <span className="small excerpt">{section.subtitle}</span>}
+        </div>
         {section.description && (
           <WYSIWYGRender className="opinion-type__description" value={section.description} />
         )}

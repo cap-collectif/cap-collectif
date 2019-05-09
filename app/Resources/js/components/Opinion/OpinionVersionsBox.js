@@ -2,7 +2,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
-import { Row, Col, Panel, ListGroup } from 'react-bootstrap';
+import { Row, Col, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import OpinionVersionListView, { type VersionOrder } from './OpinionVersionListView';
@@ -15,6 +15,7 @@ import type {
   OpinionVersionsBoxQueryResponse,
 } from '~relay/OpinionVersionsBoxQuery.graphql';
 import type { OpinionVersionsBox_opinion } from '~relay/OpinionVersionsBox_opinion.graphql';
+import ListGroup from '../Ui/List/ListGroup';
 
 type Props = {
   opinion: OpinionVersionsBox_opinion,
@@ -93,7 +94,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
                 <FormattedMessage id="awaiting-publication-lowercase" />
               </Panel.Title>
             </Panel.Heading>
-            <ListGroup className="list-group-custom">
+            <ListGroup>
               {opinion.viewerVersionsUnpublished.edges &&
                 opinion.viewerVersionsUnpublished.edges
                   .filter(Boolean)

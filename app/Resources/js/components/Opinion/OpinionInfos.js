@@ -34,7 +34,7 @@ class OpinionInfos extends React.Component<Props> {
     const sameYear = moment(opinion.publishedAt).isSame(Date.now(), 'year');
 
     return (
-      <span className="excerpt" title={moment(opinion.publishedAt).format('LLL')}>
+      <span className="excerpt small" title={moment(opinion.publishedAt).format('LLL')}>
         {' • '}
         <FormattedDate
           value={moment(opinion.publishedAt).toDate()}
@@ -133,7 +133,7 @@ class OpinionInfos extends React.Component<Props> {
     const { opinion } = this.props;
     return (
       <div className="opinion__user">
-        {opinion.author && <UserLink user={opinion.author} className="author-name" />}
+        {opinion.author && <UserLink user={opinion.author} className="excerpt_dark" />}
         {this.renderDate()}
         {this.renderEditionDate()}
         <PinnedLabel show={opinion.pinned || false} type="opinion" />

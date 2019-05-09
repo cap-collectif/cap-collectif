@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Panel, Row, Col, ListGroup } from 'react-bootstrap';
+import { Panel, Row, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
@@ -14,6 +14,7 @@ import OpinionSource from './OpinionSource';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import Filter from '../../Utils/Filter';
 import type { OpinionSourceBox_sourceable } from '~relay/OpinionSourceBox_sourceable.graphql';
+import ListGroup from '../../Ui/List/ListGroup';
 
 type Props = {
   sourceable: OpinionSourceBox_sourceable,
@@ -55,7 +56,7 @@ export class OpinionSourceBox extends React.Component<Props, State> {
                 <FormattedMessage id="awaiting-publication-lowercase" />
               </Panel.Title>
             </Panel.Heading>
-            <ListGroup className="list-group-custom">
+            <ListGroup>
               {sourceable.viewerSourcesUnpublished.edges &&
                 sourceable.viewerSourcesUnpublished.edges
                   .filter(Boolean)

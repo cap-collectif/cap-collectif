@@ -42,10 +42,7 @@ exports[`<ProposalProjectRow /> should render close collapse 1`] = `
         />
       </Button>
     </PanelHeading>
-    <ListGroup
-      bsClass="list-group"
-      className="list-group-custom"
-    />
+    <ListGroup />
   </Uncontrolled(Panel)>
 </Collapse>
 `;
@@ -92,10 +89,7 @@ exports[`<ProposalProjectRow /> should render the project 1 with his proposal di
         />
       </Button>
     </PanelHeading>
-    <ListGroup
-      bsClass="list-group"
-      className="list-group-custom"
-    >
+    <ListGroup>
       <ForwardRef(Relay(ProposalRow))
         key="0"
         proposal={
@@ -169,10 +163,7 @@ exports[`<ProposalProjectRow /> should render the project 2 with his proposal di
         />
       </Button>
     </PanelHeading>
-    <ListGroup
-      bsClass="list-group"
-      className="list-group-custom"
-    >
+    <ListGroup>
       <ForwardRef(Relay(ProposalRow))
         key="0"
         proposal={

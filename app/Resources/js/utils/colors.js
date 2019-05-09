@@ -43,7 +43,7 @@ export const CardHeaderColors = {
   gray: colors.borderColor,
   white: colors.white,
   green: '#d4edda',
-  blueDark: '#87c1ff',
+  bluedark: '#87c1ff',
   blue: '#cce5ff',
   orange: '#fff3cd',
   red: '#f8d7da',

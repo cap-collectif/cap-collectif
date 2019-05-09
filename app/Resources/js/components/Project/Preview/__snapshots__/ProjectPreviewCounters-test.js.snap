@@ -25,6 +25,7 @@ exports[`<ProjectPreviewProgressBar /> should render correctly counters with dis
   >
     <InlineList
       className="d-i"
+      margin={true}
       separator=","
     >
       <li

@@ -4,11 +4,12 @@
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Button, Collapse, Panel, ListGroup } from 'react-bootstrap';
+import { Button, Collapse, Panel } from 'react-bootstrap';
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
 import type OpinionProjectRow_viewer from '~relay/OpinionProjectRow_viewer.graphql';
 import OpinionRow from './OpinionRow';
 import type { Uuid } from '../../../types';
+import ListGroup from '../../Ui/List/ListGroup';
 
 type Props = {
   project: { id: Uuid, url: string, title: string },
@@ -60,7 +61,7 @@ export class OpinionProjectRow extends Component<Props, State> {
               <FormattedMessage id="unfollow-this-project" />
             </Button>
           </Panel.Heading>
-          <ListGroup className="list-group-custom">
+          <ListGroup>
             {viewer.followingOpinions.edges &&
               viewer.followingOpinions.edges
                 .filter(Boolean)

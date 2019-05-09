@@ -67,29 +67,26 @@ exports[`<OpinionListPaginated /> renders correcty with pagination enabled 1`] =
     }
     showUpdatedDate={false}
   />
-  <div
-    className="text-center"
+  <ListGroupItem
+    bsClass="list-group-item"
+    className="bg-white"
+    listItem={false}
   >
-    <PanelFooter
-      bsClass="panel"
-      className="bg-white"
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      disabled={false}
+      id="OpinionListPaginated-loadmore"
+      onClick={[Function]}
     >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        disabled={false}
-        id="OpinionListPaginated-loadmore"
-        onClick={[Function]}
-      >
-        <FormattedMessage
-          id="see-more-proposals"
-          values={Object {}}
-        />
-      </Button>
-    </PanelFooter>
-  </div>
+      <FormattedMessage
+        id="see-more-proposals"
+        values={Object {}}
+      />
+    </Button>
+  </ListGroupItem>
 </Fragment>
 `;
 
@@ -125,28 +122,25 @@ exports[`<OpinionListPaginated /> renders correcty with pagination enabled 2`] =
     }
     showUpdatedDate={false}
   />
-  <div
-    className="text-center"
+  <ListGroupItem
+    bsClass="list-group-item"
+    className="bg-white"
+    listItem={false}
   >
-    <PanelFooter
-      bsClass="panel"
-      className="bg-white"
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      disabled={true}
+      id="OpinionListPaginated-loadmore"
+      onClick={[Function]}
     >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        disabled={true}
-        id="OpinionListPaginated-loadmore"
-        onClick={[Function]}
-      >
-        <FormattedMessage
-          id="global.loading"
-          values={Object {}}
-        />
-      </Button>
-    </PanelFooter>
-  </div>
+      <FormattedMessage
+        id="global.loading"
+        values={Object {}}
+      />
+    </Button>
+  </ListGroupItem>
 </Fragment>
 `;

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionTypeLabel from './OpinionTypeLabel';
 import type { OpinionPreviewTitle_opinion } from '~relay/OpinionPreviewTitle_opinion.graphql';
+import Card from '../Ui/Card/Card';
 
 type Props = {
   opinion: OpinionPreviewTitle_opinion,
@@ -13,12 +14,12 @@ export class OpinionPreviewTitle extends React.Component<Props> {
   render() {
     const { opinion, showTypeLabel } = this.props;
     return (
-      <h3 className="title">
+      <Card.Title tagName="div" firstElement={false}>
         {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
         {showTypeLabel ? <OpinionTypeLabel section={opinion.section || null} /> : null}
         {showTypeLabel ? ' ' : null}
         <a href={opinion.url}>{opinion.title}</a>
-      </h3>
+      </Card.Title>
     );
   }
 }

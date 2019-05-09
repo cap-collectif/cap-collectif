@@ -2,7 +2,7 @@
 import React from 'react';
 import { QueryRenderer, graphql, createFragmentContainer, type ReadyState } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { ListGroup, Panel } from 'react-bootstrap';
+import { ListGroupItem } from 'react-bootstrap';
 import OpinionListPaginated from './OpinionListPaginated';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -14,6 +14,8 @@ import type {
   OpinionListQueryVariables,
   OpinionOrder,
 } from '~relay/OpinionListQuery.graphql';
+import ListGroup from '../Ui/List/ListGroup';
+import Card from '../Ui/Card/Card';
 
 type Props = {|
   +section: OpinionList_section,
@@ -77,19 +79,20 @@ export class OpinionList extends React.Component<Props, State> {
 
   render() {
     const { enablePagination, section, consultation, intl } = this.props;
-
     return (
-      <div id={`opinions--test17${section.slug}`} className="anchor-offset">
-        <Panel className={`opinion panel--${section.color} panel--default panel-custom`}>
-          <Panel.Heading>
-            <p>
+      <Card id={`opinions--test17${section.slug}`} className="anchor-offset">
+        <Card.Header
+          // $FlowFixMe color type from GraphQL
+          bgColor={section.color}>
+          <div className="opinion d-flex align-items-center justify-content-between">
+            <span className="excerpt_dark">
               <FormattedMessage
                 id="global.opinionsCount"
                 values={{ num: section.contributionsCount }}
               />
-            </p>
-            <div className="panel-heading__actions">
-              {section.contributionsCount > 1 && (
+            </span>
+            {section.contributionsCount > 1 && (
+              <form className="form-inline">
                 <select
                   defaultValue={section.defaultOrderBy}
                   className="form-control"
@@ -112,86 +115,83 @@ export class OpinionList extends React.Component<Props, State> {
                     {intl.formatMessage({ id: 'opinion.sort.comments' })}
                   </option>
                 </select>
-              )}
-              {section.contribuable && (
-                <NewOpinionButton
-                  section={section}
-                  consultation={consultation}
-                  label={intl.formatMessage({ id: 'opinion.create.button' })}
-                />
-              )}
-            </div>
-          </Panel.Heading>
-          {section.contributionsCount > 0 && (
-            <ListGroup className="list-group-custom">
-              <QueryRenderer
-                environment={environment}
-                query={graphql`
-                  query OpinionListQuery(
-                    $sectionId: ID!
-                    $count: Int!
-                    $cursor: String
-                    $orderBy: OpinionOrder!
-                  ) {
-                    section: node(id: $sectionId) {
-                      id
-                      ...OpinionListPaginated_section
-                        @arguments(count: $count, cursor: $cursor, orderBy: $orderBy)
-                    }
+              </form>
+            )}
+            {section.contribuable && (
+              <NewOpinionButton
+                section={section}
+                consultation={consultation}
+                label={intl.formatMessage({ id: 'opinion.create.button' })}
+              />
+            )}
+          </div>
+        </Card.Header>
+        {section.contributionsCount > 0 ? (
+          <ListGroup>
+            <QueryRenderer
+              environment={environment}
+              query={graphql`
+                query OpinionListQuery(
+                  $sectionId: ID!
+                  $count: Int!
+                  $cursor: String
+                  $orderBy: OpinionOrder!
+                ) {
+                  section: node(id: $sectionId) {
+                    id
+                    ...OpinionListPaginated_section
+                      @arguments(count: $count, cursor: $cursor, orderBy: $orderBy)
                   }
-                `}
-                variables={
-                  ({
-                    sectionId: section.id,
-                    orderBy: this.getOrderBy(),
-                    cursor: null,
-                    count: enablePagination
-                      ? INITIAL_PAGINATION_COUNT
-                      : consultation.opinionCountShownBySection ?? INITIAL_PREVIEW_COUNT,
-                  }: OpinionListQueryVariables)
                 }
-                render={({
-                  error,
-                  props,
-                }: {
-                  props: ?OpinionListQueryResponse,
-                } & ReadyState) => {
-                  if (error) {
-                    console.log(error); // eslint-disable-line no-console
+              `}
+              variables={
+                ({
+                  sectionId: section.id,
+                  orderBy: this.getOrderBy(),
+                  cursor: null,
+                  count: enablePagination
+                    ? INITIAL_PAGINATION_COUNT
+                    : consultation.opinionCountShownBySection ?? INITIAL_PREVIEW_COUNT,
+                }: OpinionListQueryVariables)
+              }
+              render={({
+                error,
+                props,
+              }: {
+                props: ?OpinionListQueryResponse,
+              } & ReadyState) => {
+                if (error) {
+                  console.log(error); // eslint-disable-line no-console
+                  return graphqlError;
+                }
+                if (props) {
+                  if (!props.section) {
                     return graphqlError;
                   }
-                  if (props) {
-                    if (!props.section) {
-                      return graphqlError;
-                    }
-                    return (
-                      // $FlowFixMe $refType
-                      <OpinionListPaginated
-                        enablePagination={enablePagination}
-                        section={props.section}
-                      />
-                    );
-                  }
-                  return <Loader />;
-                }}
-              />
-            </ListGroup>
-          )}
-          {!enablePagination &&
-          section.contributionsCount &&
-          consultation.opinionCountShownBySection &&
-          section.contributionsCount > consultation.opinionCountShownBySection ? (
-            <Panel.Footer className="bg-white">
-              <a
-                href={section.url}
-                className="text-center"
-                style={{ display: 'block', backgroundColor: '#fff' }}>
-                <FormattedMessage id="opinion.show.all" />
-              </a>
-            </Panel.Footer>
-          ) : null}
-        </Panel>
-      </div>
+                  return (
+                    // $FlowFixMe $refType
+                    <OpinionListPaginated
+                      enablePagination={enablePagination}
+                      section={props.section}
+                    />
+                  );
+                }
+                return <Loader />;
+              }}
+            />
+            {!enablePagination &&
+            section.contributionsCount &&
+            consultation.opinionCountShownBySection &&
+            section.contributionsCount > consultation.opinionCountShownBySection ? (
+              <ListGroupItem className="text-center">
+                <a href={section.url} style={{ display: 'block', backgroundColor: '#fff' }}>
+                  <FormattedMessage id="opinion.show.all" />
+                </a>
+              </ListGroupItem>
+            ) : null}
+          </ListGroup>
+        ) : null}
+      </Card>
     );
   }
 }

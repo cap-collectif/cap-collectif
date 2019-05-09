@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Panel, ListGroup } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import Opinion from './Opinion';
 import type { UnpublishedOpinionList_consultation } from '~relay/UnpublishedOpinionList_consultation.graphql';
+import ListGroup from '../Ui/List/ListGroup';
 
 type Props = {|
   +consultation: UnpublishedOpinionList_consultation,
@@ -43,7 +44,7 @@ export class UnpublishedOpinionList extends React.Component<Props> {
             />
           </Panel.Title>
         </Panel.Heading>
-        <ListGroup className="list-group-custom">
+        <ListGroup>
           {consultation.viewerOpinionsUnpublished &&
             consultation.viewerOpinionsUnpublished.edges &&
             consultation.viewerOpinionsUnpublished.edges

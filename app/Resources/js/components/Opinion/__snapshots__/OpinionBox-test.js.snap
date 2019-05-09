@@ -72,8 +72,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         </h2>
       </div>
       <ListGroup
-        bsClass="list-group"
-        className="list-group-custom mb-0"
+        className="mb-0"
       >
         <ListGroupItem
           bsClass="list-group-item"

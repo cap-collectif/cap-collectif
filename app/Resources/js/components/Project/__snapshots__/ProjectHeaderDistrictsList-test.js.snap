@@ -3,6 +3,7 @@
 exports[`<ProjectHeaderDistrictsList /> should render correctly 1`] = `
 <InlineList
   className="d-i"
+  margin={true}
   separator=","
 >
   <li

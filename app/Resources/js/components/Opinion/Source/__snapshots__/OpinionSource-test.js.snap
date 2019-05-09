@@ -87,7 +87,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
         }
       />
       <div
-        className="actions small"
+        className="small"
       >
         <ForwardRef(Relay(Connect(OpinionSourceButtons)))
           source={
@@ -205,7 +205,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
         }
       />
       <div
-        className="actions small"
+        className="small"
       >
         <ForwardRef(Relay(Connect(OpinionSourceButtons)))
           source={

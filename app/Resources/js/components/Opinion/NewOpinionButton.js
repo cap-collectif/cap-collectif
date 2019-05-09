@@ -10,10 +10,10 @@ import type { NewOpinionButton_section } from '~relay/NewOpinionButton_section.g
 import type { NewOpinionButton_consultation } from '~relay/NewOpinionButton_consultation.graphql';
 
 type Props = {|
-  section: NewOpinionButton_section,
-  consultation: NewOpinionButton_consultation,
-  label: string,
-  dispatch: Function,
+  +section: NewOpinionButton_section,
+  +consultation: NewOpinionButton_consultation,
+  +label: string,
+  +dispatch: Function,
 |};
 
 class NewOpinionButton extends React.Component<Props> {

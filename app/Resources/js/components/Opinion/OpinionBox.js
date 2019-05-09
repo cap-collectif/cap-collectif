@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroupItem } from 'react-bootstrap';
 import OpinionPreview from './OpinionPreview';
 import OpinionAnswer from './OpinionAnswer';
 import OpinionButtons from './OpinionButtons';
@@ -11,6 +11,7 @@ import OpinionBody from './OpinionBody';
 import OpinionVotesBox from './Votes/OpinionVotesBox';
 import type { OpinionBox_opinion } from '~relay/OpinionBox_opinion.graphql';
 import TrashedMessage from '../Trashed/TrashedMessage';
+import ListGroup from '../Ui/List/ListGroup';
 
 type Props = {
   +opinion: OpinionBox_opinion,
@@ -65,7 +66,7 @@ export class OpinionBox extends React.Component<Props> {
                 </p>
               </h2>
             </div>
-            <ListGroup className="list-group-custom mb-0">
+            <ListGroup className="mb-0">
               <ListGroupItem className="list-group-item__opinion no-border">
                 <div className="left-block">
                   {/* $FlowFixMe */}

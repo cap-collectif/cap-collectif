@@ -37,7 +37,7 @@ export class OpinionSource extends React.Component<Props> {
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionSourceContent source={source} />
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-            <div className="actions small">
+            <div className="small">
               <OpinionSourceButtons sourceable={sourceable} source={source} />
             </div>
           </TrashedMessage>

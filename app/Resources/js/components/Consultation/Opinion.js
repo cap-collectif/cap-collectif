@@ -5,6 +5,7 @@ import { ListGroupItem } from 'react-bootstrap';
 import OpinionPreview from '../Opinion/OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
 import type { Opinion_opinion } from '~relay/Opinion_opinion.graphql';
+import Media from '../Ui/Medias/Media/Media';
 
 type Props = {|
   +opinion: Opinion_opinion,
@@ -21,11 +22,13 @@ export class Opinion extends React.Component<Props> {
     const { author } = opinion;
     return (
       <ListGroupItem
-        className={`list-group-item__opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
-        <div className="left-block">
+        className={`list-group-item__opinion text-left has-chart${
+          author && author.vip ? ' bg-vip' : ''
+        }`}>
+        <Media>
           {/* $FlowFixMe */}
           <OpinionPreview opinion={opinion} showUpdatedDate={showUpdatedDate} />
-        </div>
+        </Media>
         {opinion.votes && opinion.votes.totalCount > 0 ? (
           /* $FlowFixMe */
           <VotePiechart

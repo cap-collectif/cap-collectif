@@ -2,16 +2,20 @@
 
 exports[`<Section /> renders correcty 1`] = `
 <div
-  className="anchor-offset text-center opinion-type__title level--0"
+  className="anchor-offset text-center"
   id="opinion-type--slug"
 >
-  title
-  <br />
-  <span
-    className="small excerpt"
+  <div
+    className="opinion-type__title level--0"
   >
-    subtitle
-  </span>
+    title
+    <br />
+    <span
+      className="small excerpt"
+    >
+      subtitle
+    </span>
+  </div>
   <WYSIWYGRender
     className="opinion-type__description"
     value="description"

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Button, Panel } from 'react-bootstrap';
+import { Button, ListGroupItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { OpinionListPaginated_section } from '~relay/OpinionListPaginated_section.graphql';
@@ -33,25 +33,21 @@ export class OpinionListPaginated extends React.Component<Props, State> {
             // $FlowFixMe $refType
             <Opinion key={index} opinion={edge.node} showUpdatedDate={false} />
           ))}
-        {enablePagination ? (
-          <div className="text-center">
-            {relay.hasMore() && (
-              <Panel.Footer className="bg-white">
-                <Button
-                  id="OpinionListPaginated-loadmore"
-                  bsStyle="link"
-                  disabled={loading}
-                  onClick={() => {
-                    this.setState({ loading: true });
-                    relay.loadMore(PAGINATION_COUNT, () => {
-                      this.setState({ loading: false });
-                    });
-                  }}>
-                  <FormattedMessage id={loading ? 'global.loading' : 'see-more-proposals'} />
-                </Button>
-              </Panel.Footer>
-            )}
-          </div>
+        {enablePagination && relay.hasMore() ? (
+          <ListGroupItem className="bg-white">
+            <Button
+              id="OpinionListPaginated-loadmore"
+              bsStyle="link"
+              disabled={loading}
+              onClick={() => {
+                this.setState({ loading: true });
+                relay.loadMore(PAGINATION_COUNT, () => {
+                  this.setState({ loading: false });
+                });
+              }}>
+              <FormattedMessage id={loading ? 'global.loading' : 'see-more-proposals'} />
+            </Button>
+          </ListGroupItem>
         ) : null}
       </React.Fragment>
     );

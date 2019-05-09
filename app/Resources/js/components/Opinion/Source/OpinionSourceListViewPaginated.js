@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import { ListGroup, ListGroupItem, Button, Panel } from 'react-bootstrap';
+import { ListGroupItem, Button, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import OpinionSource from './OpinionSource';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { OpinionSourceListViewPaginated_sourceable } from '~relay/OpinionSourceListViewPaginated_sourceable.graphql';
+import ListGroup from '../../Ui/List/ListGroup';
 
 type Props = {|
   relay: RelayPaginationProp,
@@ -35,7 +36,7 @@ class OpinionSourceListViewPaginated extends React.Component<Props, State> {
     }
 
     return (
-      <ListGroup id="sources-list" className="list-group-custom">
+      <ListGroup id="sources-list">
         {sourceable.sources.edges
           .filter(Boolean)
           .map(edge => edge.node)

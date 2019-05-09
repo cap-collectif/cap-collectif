@@ -6,6 +6,7 @@ import OpinionInfos from './OpinionInfos';
 import OpinionPreviewTitle from './OpinionPreviewTitle';
 import OpinionPreviewCounters from './OpinionPreviewCounters';
 import type { OpinionPreview_opinion } from '~relay/OpinionPreview_opinion.graphql';
+import Media from '../Ui/Medias/Media/Media';
 
 type Props = {
   showUpdatedDate: boolean,
@@ -23,9 +24,12 @@ class OpinionPreview extends React.Component<Props> {
 
     return (
       <React.Fragment>
-        {/* $FlowFixMe Will be a fragment soon */}
-        <UserAvatar user={opinion.author} />
-        <div>
+        <Media.Left>
+          {/* $FlowFixMe Will be a fragment soon */}
+          <UserAvatar user={opinion.author} />
+        </Media.Left>
+
+        <Media.Body>
           {/* $FlowFixMe */}
           <OpinionInfos
             rankingThreshold={rankingThreshold}
@@ -36,7 +40,7 @@ class OpinionPreview extends React.Component<Props> {
           <OpinionPreviewTitle opinion={opinion} showTypeLabel={false} />
           {/* $FlowFixMe */}
           <OpinionPreviewCounters opinion={opinion} />
-        </div>
+        </Media.Body>
       </React.Fragment>
     );
   }

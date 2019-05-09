@@ -18,7 +18,7 @@ const headerOption = {
   Gray: 'gray',
   White: 'white',
   Green: 'green',
-  BlueDark: 'blueDark',
+  BlueDark: 'bluedark',
   Blue: 'blue',
   Orange: 'orange',
   Red: 'red',
