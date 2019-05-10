@@ -14,7 +14,7 @@ type Props = {
   projectTypes: ProjectType[],
 };
 
-class ProjectsListFilterTypes extends React.Component<Props> {
+export class ProjectsListFilterTypes extends React.Component<Props> {
   render() {
     const { type, projectTypes, intl } = this.props;
     if (projectTypes.length > 0) {

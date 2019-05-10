@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectsListFilterStatus /> should render correctly 1`] = `
+<Field
+  clearable={true}
+  component={[Function]}
+  componentClass="select"
+  id="project-status"
+  name="status"
+  options={
+    Array [
+      Object {
+        "label": "step.status.future",
+        "value": -1,
+      },
+      Object {
+        "label": "step.status.open",
+        "value": 1,
+      },
+      Object {
+        "label": "step.status.closed",
+        "value": 2,
+      },
+    ]
+  }
+  placeholder="admin.fields.proposal.status"
+  type="select"
+  value={null}
+/>
+`;
+
+exports[`<ProjectsListFilterStatus /> should render correctly with a selected status 1`] = `
+<Field
+  clearable={true}
+  component={[Function]}
+  componentClass="select"
+  id="project-status"
+  name="status"
+  options={
+    Array [
+      Object {
+        "label": "step.status.future",
+        "value": -1,
+      },
+      Object {
+        "label": "step.status.open",
+        "value": 1,
+      },
+      Object {
+        "label": "step.status.closed",
+        "value": 2,
+      },
+    ]
+  }
+  placeholder="admin.fields.proposal.status"
+  type="select"
+  value="1"
+/>
+`;

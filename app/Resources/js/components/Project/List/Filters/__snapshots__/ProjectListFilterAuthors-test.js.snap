@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectsListFilterAuthors /> should render correctly 1`] = `
+<Field
+  clearable={true}
+  component={[Function]}
+  componentClass="select"
+  id="project-type"
+  name="author"
+  options={
+    Array [
+      Object {
+        "ariaLabel": "SarahKonor",
+        "label": "SarahKonor",
+        "value": "Sarah1",
+      },
+      Object {
+        "ariaLabel": "SarahCroche",
+        "label": "SarahCroche",
+        "value": "Sarah2",
+      },
+      Object {
+        "ariaLabel": "SarahPelle",
+        "label": "SarahPelle",
+        "value": "Sarah3",
+      },
+      Object {
+        "ariaLabel": "SarahZin",
+        "label": "SarahZin",
+        "value": "Sarah4",
+      },
+    ]
+  }
+  placeholder="td_username"
+  type="select"
+  value={null}
+/>
+`;
+
+exports[`<ProjectsListFilterAuthors /> should render correctly with a selected author 1`] = `
+<Field
+  clearable={true}
+  component={[Function]}
+  componentClass="select"
+  id="project-type"
+  name="author"
+  options={
+    Array [
+      Object {
+        "ariaLabel": "SarahKonor",
+        "label": "SarahKonor",
+        "value": "Sarah1",
+      },
+      Object {
+        "ariaLabel": "SarahCroche",
+        "label": "SarahCroche",
+        "value": "Sarah2",
+      },
+      Object {
+        "ariaLabel": "SarahPelle",
+        "label": "SarahPelle",
+        "value": "Sarah3",
+      },
+      Object {
+        "ariaLabel": "SarahZin",
+        "label": "SarahZin",
+        "value": "Sarah4",
+      },
+    ]
+  }
+  placeholder="td_username"
+  type="select"
+  value="PierreK"
+/>
+`;

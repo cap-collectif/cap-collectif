@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectsListFilterTypes /> should render correctly 1`] = `
+<Field
+  clearable={true}
+  component={[Function]}
+  componentClass="select"
+  id="project-type"
+  name="type"
+  options={
+    Array [
+      Object {
+        "ariaLabel": "SarahKonor",
+        "label": "SarahKonor",
+        "value": "1",
+      },
+      Object {
+        "ariaLabel": "SarahCroche",
+        "label": "SarahCroche",
+        "value": "2",
+      },
+      Object {
+        "ariaLabel": "SarahPelle",
+        "label": "SarahPelle",
+        "value": "3",
+      },
+      Object {
+        "ariaLabel": "SarahZin",
+        "label": "SarahZin",
+        "value": "4",
+      },
+    ]
+  }
+  placeholder="project"
+  type="select"
+  value={null}
+/>
+`;
+
+exports[`<ProjectsListFilterTypes /> should render correctly with a selected theme 1`] = `
+<Field
+  clearable={true}
+  component={[Function]}
+  componentClass="select"
+  id="project-type"
+  name="type"
+  options={
+    Array [
+      Object {
+        "ariaLabel": "SarahKonor",
+        "label": "SarahKonor",
+        "value": "1",
+      },
+      Object {
+        "ariaLabel": "SarahCroche",
+        "label": "SarahCroche",
+        "value": "2",
+      },
+      Object {
+        "ariaLabel": "SarahPelle",
+        "label": "SarahPelle",
+        "value": "3",
+      },
+      Object {
+        "ariaLabel": "SarahZin",
+        "label": "SarahZin",
+        "value": "4",
+      },
+    ]
+  }
+  placeholder="project"
+  type="select"
+  value="1"
+/>
+`;
