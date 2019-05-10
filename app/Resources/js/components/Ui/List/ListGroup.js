@@ -73,13 +73,14 @@ const Container = styled(ListGroupBtsp).attrs({
 
 type Props = {
   children: ?React.Node,
+  id?: string,
 };
 
 export class ListGroup extends React.Component<Props> {
   render() {
-    const { children } = this.props;
+    const { children, id } = this.props;
 
-    return <Container>{children}</Container>;
+    return <Container id={id}>{children}</Container>;
   }
 }
 
