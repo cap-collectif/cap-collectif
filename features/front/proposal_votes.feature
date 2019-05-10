@@ -23,7 +23,7 @@ Scenario: Logged in user wants to vote and unvote for a proposal in a selection 
 Scenario: Logged in user wants to vote when he has not enough credits left in a selection step
   Given I am logged in as admin
   When I go to a selection step with budget vote enabled
-  Then the proposal vote button must be disabled
+  Then the proposal "proposal8" vote button must be disabled
   # This only work on hover
   # When I click the proposal "proposal8" vote button
   # And I should see the proposal vote tooltip
@@ -57,9 +57,7 @@ Scenario: Logged in user wants to vote and unvote for a proposal
   And the proposal should have 2 votes
   And I go to the proposal votes tab
   And I should see my vote in the proposal votes list
-  And I wait "#global-alert-box" to disappear on current page
   When I click the proposal unvote button
-  And I wait "#global-alert-box" to appear on current page
   And I should see "proposal.request.delete_vote.success" in the "#global-alert-box" element
   And the proposal should have 1 votes
   And I should not see my vote in the proposal votes list

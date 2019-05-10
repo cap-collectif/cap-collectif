@@ -223,9 +223,8 @@ trait ProposalStepsTrait
      */
     public function iGoToACommentNotifiableProposal()
     {
-        $this->waitAndThrowOnFailure(3000, "$('.comments__section').length > 0");
-
         $this->visitPageWithParams('proposal page', self::$proposalCommentNotifiable);
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -540,7 +539,7 @@ trait ProposalStepsTrait
     {
         $this->navigationContext->getPage('collect page')->submitProposalForm();
         // We wait for page reloading and new proposal show up
-        $this->waitAndThrowOnFailure(8000, "$('#ProposalPageHeader').length > 0");
+        $this->iWait(8);
     }
 
     /**
@@ -712,7 +711,7 @@ trait ProposalStepsTrait
     public function iGoToTheVotesDetailsOfProjectWithRequirementsPage()
     {
         $this->visitPageWithParams('project user votes page', self::$bpVoteClassement);
-        $this->waitAndThrowOnFailure(3000, '$(".media-list proposal-preview-list").length > 0');
+        $this->waitAndThrowOnFailure(3000, '$("#ProposalsUserVotesPage").length > 0');
     }
 
     /**
@@ -769,7 +768,7 @@ trait ProposalStepsTrait
     public function iGoToAProposalWithBudgetVoteEnabled()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithBudgetVoteParams);
-        $this->iWaitUntilProposalStepHasFullyLoaded();
+        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -849,7 +848,7 @@ trait ProposalStepsTrait
         $this->waitAndThrowOnFailure(2000, "$('#confirm-proposal-vote').length > 0");
         $this->buttonShouldNotBeDisabled('global.validate');
         $this->iClickOnButton('#confirm-proposal-vote');
-        $this->waitAndThrowOnFailure(
+        $this->getSession()->wait(
             2000,
             "$('.button__vote.btn.btn-success.btn-default.active').length > 0"
         );
@@ -1123,11 +1122,15 @@ trait ProposalStepsTrait
      * @Then the proposal vote button must be disabled
      * @Then the proposal :id vote button must be disabled
      */
-    public function theProposalVoteButtonMustBeDisabled(string $id = null)
+    public function theProposalVoteButtonMustBeDisabled(string $id = null): void
     {
-        $id = $id ? GlobalId::toGlobalId('Proposal', $id) : $this->getProposalId();
+        if ($id) {
+            $id = $id ? GlobalId::toGlobalId('Proposal', $id) : $this->getProposalId();
+            $search = "[id='proposal-vote-btn-${id}']";
+        } else {
+            $search = "[id='proposal-vote-btn']";
+        }
 
-        $search = "[id='proposal-${id}']";
         $this->waitAndThrowOnFailure(2000, '$("' . $search . '").length > 0');
         $button = $this->getCurrentPage()->getVoteButton($id);
 
@@ -1143,17 +1146,17 @@ trait ProposalStepsTrait
      */
     public function theProposalVoteButtonWithIdMustNotBePresent(string $id = null)
     {
-        $execpetionMessage = $id
+        $exceptionMessage = $id
             ? '"proposal vote button ' . $id . '" element is not present on the page'
             : '"proposal vote button" element is not present on the page';
 
         try {
             $search = "[id='proposal-${id}']";
-            $this->waitAndThrowOnFailure(2000, '$("' . $search . '").length > 0');
 
+            $this->getSession()->wait(2000, '$("' . $search . '").length > 0');
             $button = $this->getCurrentPage()->getVoteButton($this->getProposalId());
         } catch (\Exception $e) {
-            Assert::assertSame($execpetionMessage, $e->getMessage());
+            Assert::assertSame($exceptionMessage, $e->getMessage());
         }
     }
 
@@ -1454,6 +1457,19 @@ trait ProposalStepsTrait
         Assert::assertSame($filesNumber, $filesCount);
     }
 
+    // ********************************* Proposals *********************************************
+
+    /**
+     * @When I wait proposal step page to fully load
+     */
+    public function iWaitUntilProposalStepHasFullyLoaded()
+    {
+        $this->waitAndThrowOnFailure(
+            5000,
+            "window.jQuery && $('#ProposalStepPage-rendered').length > 0"
+        );
+    }
+
     protected function openCollectStepIsOpen()
     {
         return $this->navigationContext
@@ -1533,7 +1549,6 @@ trait ProposalStepsTrait
 
     protected function fillAnonymousComment($body, $name, $email)
     {
-        $this->waitAndThrowOnFailure(3000, "$('input[name=authorEmail]').length > 0");
         $this->fillField('body', $body);
         $this->fillField('authorName', $name);
         $this->fillField('authorEmail', $email);
@@ -1604,7 +1619,6 @@ trait ProposalStepsTrait
     {
         $page = $this->getCurrentPage();
         $proposalId = $id ?: $this->getProposalId();
-        $this->waitAndThrowOnFailure(2000, "$('" . $proposalId . "').length > 0");
 
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
         Assert::assertEquals(
@@ -1672,18 +1686,5 @@ trait ProposalStepsTrait
     private function iWaitUntilProposalPageFullyLoaded()
     {
         $this->waitAndThrowOnFailure(5000, "$('#ProposalPageContent').length > 0");
-    }
-
-    // ********************************* Proposals *********************************************
-
-    /**
-     * @When I wait proposal step page to fully load
-     */
-    private function iWaitUntilProposalStepHasFullyLoaded()
-    {
-        $this->waitAndThrowOnFailure(
-            5000,
-            "window.jQuery && $('#ProposalStepPage-rendered').length > 0"
-        );
     }
 }

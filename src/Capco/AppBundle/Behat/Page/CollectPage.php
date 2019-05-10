@@ -102,10 +102,6 @@ class CollectPage extends Page
 
     public function clickOnRestrictedAccess()
     {
-        $this->waitAndThrowOnFailure(
-            3000,
-            "$('" . $this->getSelector('restricted-access') . "').length > 0"
-        );
         $this->getElement('restricted-access')->click();
 
         return $this->getElement('restricted-access-link')->click();

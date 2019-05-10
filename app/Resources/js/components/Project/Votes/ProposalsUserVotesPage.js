@@ -14,7 +14,7 @@ class ProposalsUserVotesPage extends React.Component<Props> {
     const { project } = this.props;
 
     return (
-      <section className="section--custom">
+      <section id="ProposalsUserVotesPage" className="section--custom">
         <div className="container text-center">
           <h1 className="mb-0">
             <FormattedMessage id="project.votes.title" />

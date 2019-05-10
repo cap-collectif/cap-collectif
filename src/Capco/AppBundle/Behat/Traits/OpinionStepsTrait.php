@@ -419,7 +419,10 @@ trait OpinionStepsTrait
     public function iClickTheArgumentVoteButton()
     {
         $page = $this->getCurrentPage();
-        $this->waitAndThrowOnFailure(7000, "$('".$page->getArgumentVoteButtonSelector()."').length > 0");
+        $this->waitAndThrowOnFailure(
+            7000,
+            "$('" . $page->getArgumentVoteButtonSelector() . "').length > 0"
+        );
         $this->clickArgumentVoteButtonWithLabel('vote.ok');
     }
 
@@ -433,7 +436,10 @@ trait OpinionStepsTrait
         $page = $this->getCurrentPage();
         $inClosedStep =
             $this->opinionPageInClosedStepIsOpen() || $this->versionPageInClosedStepIsOpen();
-        $this->waitAndThrowOnFailure(7000, "$('".$page->getArgumentVoteButtonSelector()."').length > 0");
+        $this->waitAndThrowOnFailure(
+            7000,
+            "$('" . $page->getArgumentVoteButtonSelector($inClosedStep) . "').length > 0"
+        );
         $button = $page->getArgumentVoteButton($inClosedStep);
         Assert::assertTrue($button->hasAttribute('disabled'));
     }
@@ -723,14 +729,11 @@ trait OpinionStepsTrait
     }
 
     /**
-     * I click the delete version button.
-     *
      * @When I click the delete version button
      */
     public function iClickTheDeleteVersionButton()
     {
-        $link = 'a.btn.btn-danger[href*="/delete"]';
-        $this->waitAndThrowOnFailure(3000, "$('${link}').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('#opinion-delete').length > 0");
         $this->navigationContext->getPage('opinion version page')->clickDeleteButton();
     }
 
@@ -768,13 +771,11 @@ trait OpinionStepsTrait
     }
 
     /**
-     * I click the reporting opinion version button.
-     *
      * @When I click the reporting opinion version button
      */
     public function iClickTheReportingOpinionVersionButton()
     {
-        $this->waitAndThrowOnFailure(3000, "$('#opinion-votes-show-all').length > 0");
+        $this->iWait(3);
         $this->navigationContext->getPage('opinion version page')->clickReportButton();
     }
 

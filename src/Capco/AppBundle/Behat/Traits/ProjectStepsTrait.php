@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Behat\Traits;
 
 use Capco\AppBundle\Entity\Project;
@@ -218,7 +219,12 @@ trait ProjectStepsTrait
      */
     public function iOpenRestrictedAccessModal()
     {
-        $this->navigationContext->getPage('collect page')->clickOnRestrictedAccess();
+        $page = $this->navigationContext->getPage('collect page');
+        $this->waitAndThrowOnFailure(
+            3000,
+            "$('" . $page->getSelector('restricted-access') . "').length > 0"
+        );
+        $page->clickOnRestrictedAccess();
         $this->iWait(1);
     }
 

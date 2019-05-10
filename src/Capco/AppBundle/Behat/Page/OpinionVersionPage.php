@@ -133,6 +133,7 @@ class OpinionVersionPage extends Page
         return $this->getElement('argument votes counter');
     }
 
+    
     public function getArgumentVotesCountSelector(): string
     {
         return $this->getSelector('argument votes counter');
@@ -166,6 +167,15 @@ class OpinionVersionPage extends Page
     public function getArgumentDeleteButtonSelector(): string
     {
         return $this->getSelector('argument delete button');
+    }
+
+    public function getArgumentVoteButtonSelector(bool $inClosedStep = false): string
+    {
+        if ($inClosedStep) {
+            return $this->getSelector('argument vote button in closed step');
+        }
+
+        return $this->getSelector('argument vote button');
     }
 
     public function clickArgumentDeleteButton()

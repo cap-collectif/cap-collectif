@@ -1,6 +1,7 @@
 @project @read-only
 Feature: Project
 
+@randomly-failing
 Scenario: GraphQL user wants to get list of trashed comments.
   Given I am logged in to graphql as pierre
   And I send a GraphQL POST request:

@@ -183,8 +183,12 @@ class OpinionPage extends Page
         return $this->getElement('argument vote button');
     }
 
-    public function getArgumentVoteButtonSelector(): string
+    public function getArgumentVoteButtonSelector(bool $inClosedStep = false): string
     {
+        if ($inClosedStep) {
+            return $this->getSelector('argument vote button in closed step');
+        }
+
         return $this->getSelector('argument vote button');
     }
 

@@ -333,19 +333,17 @@ class ApplicationContext extends UserContext
      */
     public function assertRedirect(string $url): void
     {
-        $this->iWait(1000);
+        $this->iWait(1);
 
         $this->assertPageAddress($url);
     }
 
     /**
      * @Then I should not be redirected to :url
-     *
-     * @param mixed $url
      */
-    public function assertNotRedirect($url)
+    public function assertNotRedirect(string $url)
     {
-        $this->iWait(1000);
+        $this->iWait(1);
 
         $this->assertSession()->addressNotEquals($this->locatePath($url));
     }
@@ -464,7 +462,7 @@ class ApplicationContext extends UserContext
      * @Then I wait :selector to disappear on current page
      * @Then I wait :selector to disappear on current page maximum :timeout
      */
-    public function iWaitElementToDisappearOnPage(string $selector, int $timeout = 3000)
+    public function iWaitElementToDisappearOnPage(string $selector, int $timeout = 10000)
     {
         $this->waitAndThrowOnFailure($timeout, '$("' . $selector . '").length == 0');
     }

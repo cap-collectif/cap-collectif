@@ -177,11 +177,6 @@ Scenario: Logged in user wants to vote for an argument on an opinion in a closed
   And I go to an opinion in a closed step
   Then the argument vote button should be disabled
 
-@security
-Scenario: Anonymous user wants to vote for an argument on an opinion
-  Given I go to an opinion
-  When I click the argument vote button
-  Then I should see a "#login-popover" element
 
 ## Votes from version
 
@@ -205,12 +200,6 @@ Scenario: Logged in user wants to vote for an argument on a version in a closed 
   Given I am logged in as user
   And I go to an opinion version in a closed step
   Then the argument vote button should be disabled
-
-@security
-Scenario: Anonymous user wants to vote for an argument on a version
-  Given I go to a version
-  When I click the argument vote button
-  Then I should see a "#login-popover" element
 
 # Reporting
 
