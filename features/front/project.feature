@@ -91,6 +91,20 @@ Scenario: Project can be filtered by title
   And I should not see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Projet vide"
 
+Scenario: Project can be filtered by status
+  And feature "projects_form" is enabled
+  And I visited "projects page"
+  And I click the "#project-button-filter" element
+  And I wait "#project-status" to appear on current page
+  And I select "step.status.open" from react "#project-status"
+  And I wait ".project-preview" to appear on current page
+  Then I should see 13 ".project-preview" elements
+  And I select "step.status.closed" from react "#project-status"
+  And I wait ".project-preview" to appear on current page
+  Then I should see 4 ".project-preview" elements
+  And I select "step.status.future" from react "#project-status"
+  Then I should see 0 ".project-preview" elements
+
 @read-only
 Scenario: Restricted project should display in projects list
   Given feature "projects_form" is enabled
