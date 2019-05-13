@@ -14,3 +14,46 @@ PreviewUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserResponsesResolver", [value])'
         description: 'The responses answered by user.'
         argsBuilder: 'Relay::Connection'
+      email:
+        type: 'Email'
+        description: "The user's personal email."
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEmailResolver", [value])'
+        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      updatedAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when the object was last updated.'
+        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      consentInternalCommunication:
+        type: 'Boolean!'
+        description: 'Whether or not this user consent internal communication.'
+        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      facebookUrl:
+        type: 'URI'
+        description: "A URL pointing to the user's Facebook account."
+      twitterUrl:
+        type: 'URI'
+        description: "A URL pointing to the user's Twitter account."
+      linkedInUrl:
+        type: 'URI'
+        description: "A URL pointing to the user's LinkedIn account."
+      avatarUrl:
+        type: 'URI'
+        description: "The user's public avatar URL."
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserAvatarUrlResolver", [value])'
+      websiteUrl:
+        type: 'URI'
+        description: "A URL pointing to the user's public website/blog."
+        resolve: '@=value.getWebsite()'
+      biography:
+        type: 'String'
+        description: "The user's public profile biography."
+      enabled:
+        type: 'Boolean!'
+        description: 'Whether or not this user has a confirmed account.'
+      deletedAccountAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when this user account was deleted.'
