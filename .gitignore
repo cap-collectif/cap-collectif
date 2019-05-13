@@ -15,6 +15,7 @@ schema.internal.json
 
 app/Resources/fonts
 app/Resources/assets/fonts
+app/bootstrap.php.cache
 
 translations/*
 !translations/README.md
