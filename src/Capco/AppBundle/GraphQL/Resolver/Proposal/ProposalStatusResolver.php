@@ -17,8 +17,12 @@ class ProposalStatusResolver implements ResolverInterface
         $this->dataLoader = $dataLoader;
     }
 
-    public function __invoke(Proposal $proposal, Argument $args, $viewer): Promise
-    {
-        return $this->dataLoader->load(compact('proposal', 'args', 'viewer'));
+    public function __invoke(
+        Proposal $proposal,
+        Argument $args,
+        $viewer,
+        \ArrayObject $context
+    ): Promise {
+        return $this->dataLoader->load(compact('proposal', 'args', 'viewer', 'context'));
     }
 }
