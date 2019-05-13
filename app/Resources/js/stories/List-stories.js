@@ -12,6 +12,8 @@ import ProgressList from '../components/Ui/List/ProgressList';
 import ListGroupFlush from '../components/Ui/List/ListGroupFlush';
 import ListGroup from '../components/Ui/List/ListGroup';
 import Media from '../components/Ui/Medias/Media/Media';
+import Card from '../components/Ui/Card/Card';
+import PieChart from '../components/Ui/Chart/PieChart';
 
 const author = {
   username: 'Karim',
@@ -19,7 +21,26 @@ const author = {
     url: 'https://source.unsplash.com/collection/181462',
   },
   _links: {},
+  vip: false,
 };
+
+const opinion = {
+  url: 'https://ui.cap-collectif.com/',
+  title: 'Title',
+  user: author,
+  createdAt: ' • 1 mars 2018',
+  pinned: true,
+  publishedAt: ' • 1 mars 2018',
+  votes: { totalCount: 4 },
+  versions: { totalCount: 3 },
+  arguments: { totalCount: 4 },
+  sources: { totalCount: 0 },
+  votesMitige: { totalCount: 1 },
+  votesNok: { totalCount: 1 },
+  votesOk: { totalCount: 2 },
+};
+
+const opinions = [{ ...opinion }, { ...opinion }, { ...opinion, votes: { totalCount: 0 } }];
 
 storiesOf('List', module)
   .addDecorator(withKnobs)
@@ -153,4 +174,61 @@ storiesOf('List', module)
         `,
       },
     },
-  );
+  )
+  .add('Opinion list', () => (
+    <ListGroup>
+      {opinions.map((item, index) => (
+        <ListGroupItem
+          key={index}
+          className={`list-group-item__opinion text-left has-chart${
+            item.user && item.user.vip ? ' bg-vip' : ''
+          }`}>
+          <Media>
+            <Media.Left>
+              <UserAvatar user={item.user} />
+            </Media.Left>
+            <Media.Body>
+              <div className="opinion__user">
+                <a href="https://ui.cap-collectif.com" className="excerpt_dark">
+                  {item.user.username}
+                </a>
+                <span className="excerpt small">{item.createdAt}</span>
+                {item.pinned && (
+                  <span className="opinion__label opinion__label--blue">
+                    <i className="cap cap-pin-1" /> Label
+                  </span>
+                )}
+                <span className="text-label text-label--green ml-10">
+                  <i className="cap cap-trophy" /> Label
+                </span>
+              </div>
+              <Card.Title tagName="div" firstElement={false}>
+                <a href={opinion.url}>{opinion.title}</a>
+              </Card.Title>
+              <InlineList className="excerpt small">
+                <li>{`${item.votes.totalCount} votes`}</li>
+                <li>{`${item.versions.totalCount} amendements`}</li>
+                <li>{`${item.arguments.totalCount} arguments`}</li>
+                <li>{`${item.sources.totalCount} source`}</li>
+              </InlineList>
+            </Media.Body>
+          </Media>
+          {item.votes.totalCount > 0 && (
+            <PieChart
+              data={[
+                { name: "D'accord", value: item.votesOk.totalCount },
+                { name: 'Mitigé', value: item.votesMitige.totalCount },
+                { name: "Pas d'accord", value: item.votesNok.totalCount },
+              ]}
+              colors={['#5cb85c', '#f0ad4e', '#d9534f']}
+            />
+          )}
+        </ListGroupItem>
+      ))}
+      <ListGroupItem className="bg-white">
+        <Button id="OpinionListPaginated-loadmore" bsStyle="link" onClick={() => {}}>
+          Voir toutes les propositions
+        </Button>
+      </ListGroupItem>
+    </ListGroup>
+  ));
