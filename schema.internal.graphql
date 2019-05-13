@@ -4381,24 +4381,6 @@ type Query {
     isRegistrable: Boolean
   ): EventConnection!
 
-  # Lookup users.
-  users(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-
-    # Remove super admin from export.
-    superAdmin: Boolean = false
-  ): UserConnection!
-
   # Lookup themes.
   themes: [Theme!]!
 
@@ -4427,6 +4409,22 @@ type Query {
   contactForms: [ContactForm!]
   projectAuthors: [User!]!
   projectTypes: [ProjectType!]!
+  users(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Remove super admin from export.
+    superAdmin: Boolean = false
+  ): UserConnection!
   userSearch(
     # Filter by displayName.
     displayName: String = null
