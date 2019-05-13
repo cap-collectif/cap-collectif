@@ -377,7 +377,7 @@ class Project implements IndexableInterface
     /**
      * @return User
      */
-    public function getAuthor()
+    public function getFirstAuthor()
     {
         return $this->authors->first();
     }
@@ -425,7 +425,9 @@ class Project implements IndexableInterface
      */
     public function removeAuthor(User $author)
     {
-        $this->authors->removeElement($author);
+        if ($this->authors->contains($author)) {
+            $this->authors->removeElement($author);
+        }
 
         return $this;
     }
@@ -1185,7 +1187,7 @@ class Project implements IndexableInterface
             return true;
         }
 
-        if (($viewer && $viewer->isSuperAdmin()) || $this->getAuthor() === $viewer) {
+        if (($viewer && $viewer->isSuperAdmin()) || \in_array($this->getAuthors(), $viewer)) {
             return true;
         }
 
