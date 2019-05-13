@@ -66,7 +66,6 @@ InternalQuery:
             type: 'Boolean'
             defaultValue: false
             description: 'Remove super admin from export.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserQueryResolver", [args])'
       userSearch:
         type: '[InternalUser]'
         args:
