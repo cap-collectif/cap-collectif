@@ -20,7 +20,6 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -1615,8 +1614,6 @@ EOF;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
         $VOTE_INFOS_FRAGMENT = self::PROPOSAL_VOTE_INFOS_FRAGMENT;
         $COMMENT_VOTE_INFOS = self::COMMENT_VOTE_INFOS;
-
-        $globalIdStep = GlobalId::toGlobalId('CollectStep', $proposalStep->getId());
 
         if ($proposalAfter) {
             $proposalAfter = ', after: "' . $proposalAfter . '"';
