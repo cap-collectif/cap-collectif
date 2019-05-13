@@ -2,9 +2,10 @@
 
 namespace spec\Capco\AppBundle\Traits;
 
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Traits\ProjectVisibilityStub;
 
 class ProjectVisibilityStubSpec extends ObjectBehavior
@@ -38,8 +39,9 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
         $author->hasRole('ROLE_SUPER_ADMIN')->willReturn(false);
         $author->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN']);
 
-        $this->setAuthor($author);
-        $this->getFirstAuthor()->shouldReturn($author);
+        $authors = new ArrayCollection([$author]);
+        $this->setAuthors($authors);
+        $this->getAuthors()->shouldReturn($authors);
 
         $this->getVisibilityForViewer($viewer)->shouldReturn([2]);
         $this->getVisibilityForViewer(null)->shouldReturn([2]);
@@ -62,8 +64,9 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
         $author->hasRole('ROLE_SUPER_ADMIN')->willReturn(false);
         $author->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN']);
 
-        $this->setAuthor($author);
-        $this->getAuthors()->shouldReturn([$author]);
+        $authors = new ArrayCollection([$author]);
+        $this->setAuthors($authors);
+        $this->getAuthors()->shouldReturn($authors);
 
         $this->getVisibilityForViewer($viewer)->shouldReturn([2]);
         $this->getVisibilityForViewer(null)->shouldReturn([2]);
@@ -94,8 +97,9 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
         $author->hasRole('ROLE_SUPER_ADMIN')->willReturn(false);
         $author->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN']);
 
-        $this->setAuthor($author);
-        $this->getFirstAuthor()->shouldReturn($author);
+        $authors = new ArrayCollection([$author]);
+        $this->setAuthors($authors);
+        $this->getAuthors()->shouldReturn($authors);
 
         $this->getVisibilityForViewer($author)->shouldReturn([2, 1]);
         $this->getVisibilityForViewer($viewer)->shouldReturn([2]);

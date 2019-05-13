@@ -106,7 +106,7 @@ final class ProjectAdmin extends CapcoAdmin
             $query
                 ->expr()
                 ->andX(
-                    $query->expr()->eq($query->getRootAliases()[0] . '.Author', ':author'),
+                    $query->expr()->in($query->getRootAliases()[0] . '.authors', ':author'),
                     $query->expr()->eq($query->getRootAliases()[0] . '.visibility', 0)
                 )
         );
@@ -124,7 +124,7 @@ final class ProjectAdmin extends CapcoAdmin
         $datagridMapper
             ->add('title', null, ['label' => 'admin.fields.project.title'])
             ->add(
-                'Author',
+                'authors',
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.project.author'],
                 null,
@@ -168,7 +168,7 @@ final class ProjectAdmin extends CapcoAdmin
     {
         $listMapper
             ->addIdentifier('title', null, ['label' => 'admin.fields.project.title'])
-            ->add('Author', 'sonata_type_model', ['label' => 'admin.fields.project.author']);
+            ->add('authors', 'sonata_type_model', ['label' => 'admin.fields.project.author']);
 
         if (
             $this->getConfigurationPool()
@@ -252,7 +252,7 @@ final class ProjectAdmin extends CapcoAdmin
                 'attr' => ['placeholder' => 'admin.help.project.type'],
                 'choices_as_values' => true,
             ])
-            ->add('Author', 'sonata_type_model_autocomplete', [
+            ->add('authors', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.project.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
@@ -430,7 +430,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
             ->add('exportable', null, ['label' => 'admin.fields.project.exportable'])
             ->add('publishedAt', null, ['label' => 'admin.fields.project.published_at'])
-            ->add('Author', null, ['label' => 'admin.fields.project.author'])
+            ->add('authors', null, ['label' => 'admin.fields.project.author'])
             ->add('Cover', null, [
                 'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
                 'label' => 'admin.fields.project.cover',

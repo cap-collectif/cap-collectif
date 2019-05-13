@@ -49,7 +49,7 @@ class ArgumentAdmin extends AbstractAdmin
                 $query
                     ->expr()
                     ->andX(
-                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->in('p.authors', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );

@@ -118,8 +118,7 @@ class Project implements IndexableInterface
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
-     * @ORM\JoinTable(name="author_project")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProjectAuthor", cascade={"persist"}, mappedBy="project")
      */
     private $authors;
 
@@ -375,11 +374,15 @@ class Project implements IndexableInterface
     }
 
     /**
-     * @return User
+     * @return ?User
      */
     public function getFirstAuthor()
     {
-        return $this->authors->first();
+        if ($this->authors && isset($this->authors[0])) {
+            return $this->authors[0]->getUser();
+        }
+
+        return null;
     }
 
     /**
@@ -397,7 +400,12 @@ class Project implements IndexableInterface
      */
     public function getAuthors()
     {
-        return $this->authors;
+        $authors = [];
+        foreach ($this->authors as $projectAuthor) {
+            $authors[] = $projectAuthor->getUser();
+        }
+
+        return $authors;
     }
 
     /**
@@ -1187,7 +1195,7 @@ class Project implements IndexableInterface
             return true;
         }
 
-        if (($viewer && $viewer->isSuperAdmin()) || \in_array($this->getAuthors(), $viewer)) {
+        if ($viewer && ($viewer->isSuperAdmin() || \in_array($this->getAuthors(), $viewer))) {
             return true;
         }
 

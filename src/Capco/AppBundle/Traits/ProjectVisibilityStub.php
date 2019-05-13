@@ -1,14 +1,14 @@
 <?php
+
 namespace Capco\AppBundle\Traits;
 
-use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\Collection;
 
 class ProjectVisibilityStub
 {
-    protected $visibility;
-    protected $author;
-
     use ProjectVisibilityTrait;
+    protected $visibility;
+    protected $authors;
 
     public function __construct()
     {
@@ -19,9 +19,9 @@ class ProjectVisibilityStub
         return $this->visibility;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthors(): Collection
     {
-        return $this->author;
+        return $this->authors;
     }
 
     public function setVisibility($visibility)
@@ -29,8 +29,8 @@ class ProjectVisibilityStub
         $this->visibility = $visibility;
     }
 
-    public function setAuthor(?User $author)
+    public function setAuthors(Collection $authors)
     {
-        $this->author = $author;
+        $this->authors = $authors;
     }
 }
