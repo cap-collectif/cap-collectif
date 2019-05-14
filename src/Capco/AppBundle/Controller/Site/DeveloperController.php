@@ -63,12 +63,10 @@ class DeveloperController extends Controller
 
         // Public types with Preview types should be here :
         $blackList = [
-            'PublicQuery',
             'PublicQuestionnaire',
-            'PublicUser',
-            'PublicConsultation',
-            'PublicConsultationStep',
-            'PublicUserConnection',
+            // TODO: remove me
+            'PreviewQuestionnaire',
+            'PreviewReply',
         ];
 
         // Public types hard to guess :
