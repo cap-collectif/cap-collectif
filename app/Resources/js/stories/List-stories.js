@@ -13,7 +13,6 @@ import ListGroupFlush from '../components/Ui/List/ListGroupFlush';
 import ListGroup from '../components/Ui/List/ListGroup';
 import Media from '../components/Ui/Medias/Media/Media';
 import Card from '../components/Ui/Card/Card';
-import PieChart from '../components/Ui/Chart/PieChart';
 
 const author = {
   username: 'admin',
@@ -24,27 +23,6 @@ const author = {
   vip: false,
   isViewer: false,
 };
-
-const opinionVersion = {
-  url: 'https://ui.cap-collectif.com/',
-  title: 'Opinion version',
-  user: author,
-  createdAt: ' • 3 janvier 2015',
-  pinned: true,
-  publishedAt: ' • 3 janvier 2015',
-  votes: { totalCount: 50 },
-  arguments: { totalCount: 4 },
-  sources: { totalCount: 0 },
-  votesMitige: { totalCount: 1 },
-  votesNok: { totalCount: 1 },
-  votesOk: { totalCount: 2 },
-};
-
-const opinionVersions = [
-  { ...opinionVersion },
-  { ...opinionVersion, user: { ...opinionVersion.user, vip: true } },
-  { ...opinionVersion, votes: { totalCount: 0 } },
-];
 
 const argument = {
   user: author,
@@ -207,62 +185,6 @@ storiesOf('List', module)
       },
     },
   )
-  .add('Opinion version list', () => (
-    <ListGroup>
-      {opinionVersions.map((item, index) => (
-        <ListGroupItem
-          key={index}
-          className={`list-group-item__opinion text-left has-chart${
-            item.user && item.user.vip ? ' bg-vip' : ''
-          }`}>
-          <Media>
-            <Media.Left>
-              <UserAvatar user={item.user} />
-            </Media.Left>
-            <Media.Body>
-              <div className="opinion__user">
-                <a href="https://ui.cap-collectif.com" className="excerpt_dark">
-                  {item.user.username}
-                </a>
-                <span className="excerpt small">{item.createdAt}</span>
-                {item.pinned && (
-                  <span className="opinion__label opinion__label--blue">
-                    <i className="cap cap-pin-1" /> Label
-                  </span>
-                )}
-                <span className="text-label text-label--green ml-10">
-                  <i className="cap cap-trophy" /> Label
-                </span>
-              </div>
-              <Card.Title tagName="div" firstElement={false}>
-                <a href={opinionVersion.url}>{opinionVersion.title}</a>
-              </Card.Title>
-              <InlineList className="excerpt small">
-                <li>{`${item.votes.totalCount} votes`}</li>
-                <li>{`${item.arguments.totalCount} arguments`}</li>
-                <li>{`${item.sources.totalCount} source`}</li>
-              </InlineList>
-            </Media.Body>
-          </Media>
-          {item.votes.totalCount > 0 && (
-            <PieChart
-              data={[
-                { name: "D'accord", value: item.votesOk.totalCount },
-                { name: 'Mitigé', value: item.votesMitige.totalCount },
-                { name: "Pas d'accord", value: item.votesNok.totalCount },
-              ]}
-              colors={['#5cb85c', '#f0ad4e', '#d9534f']}
-            />
-          )}
-        </ListGroupItem>
-      ))}
-      <ListGroupItem className="bg-white">
-        <Button id="OpinionListPaginated-loadmore" bsStyle="link" onClick={() => {}}>
-          Voir toutes les amendements
-        </Button>
-      </ListGroupItem>
-    </ListGroup>
-  ))
   .add('Argument list', () => (
     <ListGroup>
       {argumentsData.map((item, index) => (
