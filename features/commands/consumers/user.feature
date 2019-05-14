@@ -6,7 +6,7 @@ Scenario: Email should be sent to the user who change his password
   Given I publish in "user_password" with message below:
   """
   {
-    "userId": "user5"
+    "userId": "user515"
   }
   """
   And I consume "user_password"
@@ -18,7 +18,7 @@ Scenario: Email should be sent to the user who change his email
   Given I publish in "user_email" with message below:
   """
   {
-    "userId": "user5"
+    "userId": "user515"
   }
   """
   And I consume "user_email"
