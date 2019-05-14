@@ -21,7 +21,6 @@ export const opinion = {
 export const opinions = [
   { ...opinion },
   { ...opinion, user: { ...opinion.user, vip: true } },
-  { ...opinion, user: { ...opinion.user, vip: true } },
   { ...opinion, user: null },
   { ...opinion, votes: { totalCount: 0 } },
   { ...opinion, updatedAt: '15 mars 2018' },

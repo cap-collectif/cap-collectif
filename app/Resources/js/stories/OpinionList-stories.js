@@ -38,6 +38,7 @@ const OpinionItem = ({ item, typeLabel }) => (
               {item.user.username}
             </a>
           )}
+          {!item.user && <span>Utilisateur supprimé</span>}
           <span className="excerpt small" title={item.createdAt}>
             {' • '} {item.createdAt}
           </span>
@@ -151,7 +152,8 @@ const OpinionList = ({ section, opinions }) => (
             key={index}
             className={`list-group-item__opinion text-left has-chart${
               item.user && item.user.vip ? ' bg-vip' : ''
-            }`}>
+            }`}
+            style={{ backgroundColor: item.user && item.user.vip ? '#F7F7F7' : undefined }}>
             <OpinionItem item={item} typeLabel={section.typeLabel || null} />
           </ListGroupItem>
         ))}
