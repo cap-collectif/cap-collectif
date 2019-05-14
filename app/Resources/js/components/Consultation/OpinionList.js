@@ -16,6 +16,7 @@ import type {
 } from '~relay/OpinionListQuery.graphql';
 import ListGroup from '../Ui/List/ListGroup';
 import Card from '../Ui/Card/Card';
+import colors from '../../utils/colors';
 
 type Props = {|
   +section: OpinionList_section,
@@ -83,7 +84,8 @@ export class OpinionList extends React.Component<Props, State> {
       <Card id={`opinions--test17${section.slug}`} className="anchor-offset" style={{ border: 0 }}>
         <Card.Header
           // $FlowFixMe color type from GraphQL
-          bgColor={section.color}>
+          bgColor={section.color}
+          style={{ border: `1px solid ${colors.borderColor}`, borderBottom: 0 }}>
           <div className="opinion d-flex align-items-center justify-content-between">
             <span className="excerpt_dark">
               <FormattedMessage
@@ -119,6 +121,7 @@ export class OpinionList extends React.Component<Props, State> {
             )}
             {section.contribuable && (
               <NewOpinionButton
+                style={{ margin: 0 }}
                 section={section}
                 consultation={consultation}
                 label={intl.formatMessage({ id: 'opinion.create.button' })}
@@ -127,7 +130,7 @@ export class OpinionList extends React.Component<Props, State> {
           </div>
         </Card.Header>
         {section.contributionsCount > 0 ? (
-          <ListGroup>
+          <ListGroup style={{ margin: 0 }}>
             <QueryRenderer
               environment={environment}
               query={graphql`

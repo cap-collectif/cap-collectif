@@ -13,12 +13,13 @@ type Props = {|
   +section: NewOpinionButton_section,
   +consultation: NewOpinionButton_consultation,
   +label: string,
+  +style: Object,
   +dispatch: Function,
 |};
 
 class NewOpinionButton extends React.Component<Props> {
   render() {
-    const { dispatch, label, consultation, section } = this.props;
+    const { dispatch, label, consultation, section, style } = this.props;
     const disabled = !consultation.contribuable;
     return (
       <React.Fragment>
@@ -27,6 +28,7 @@ class NewOpinionButton extends React.Component<Props> {
             bsStyle="primary"
             disabled={disabled}
             id={`btn-add--${section.slug}`}
+            style={style}
             onClick={() => {
               dispatch(openOpinionCreateModal(section.id));
             }}>
