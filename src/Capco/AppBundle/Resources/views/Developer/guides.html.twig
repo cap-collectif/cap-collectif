@@ -22,9 +22,9 @@
     {% if graphql_list_collect_steps()|length %}
         <li><p><a href="{{ path('app_developer_guide', { 'slug': 'proposals' }) }}">Look up proposals</a>: A guide to get a step's proposals</p></li>
     {% endif %}
-    {# {% if graphql_list_questionnaires()|length %}
+    {% if graphql_list_questionnaires()|length %}
         <li><p><a href="{{ path('app_developer_guide', { 'slug': 'questionnaires' }) }}">Look up questionnaires</a>: A guide to get a questionnaire's responses</p></li>
-    {% endif %} #}
+    {% endif %}
 </ul>
 
 </div>
