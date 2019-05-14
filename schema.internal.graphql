@@ -6769,7 +6769,21 @@ type User implements Node & UniformResourceLocatable {
   # Provisional number of contributions who will be totally deleted if the user chose to delete his account.
   contributionsToDeleteCount: Int!
   sourcesCount: Int!
-  repliesCount: Int!
+
+  # A list of replies associated to the user.
+  replies(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ReplyConnection!
   postCommentsCount: Int!
   eventCommentsCount: Int!
   projectsCount: Int!

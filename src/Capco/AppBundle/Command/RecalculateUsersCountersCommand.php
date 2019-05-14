@@ -69,14 +69,6 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         $redis->del($redisKey);
 
         $this->compute(
-            'UPDATE CapcoUserBundle:User u set u.repliesCount = (
-          SELECT count(r.id) from CapcoAppBundle:Reply r
-          WHERE r.author = u AND r.published = 1 AND r.private = 0 AND r.draft = 0
-          GROUP BY r.author
-        )'
-        );
-
-        $this->compute(
             'UPDATE CapcoUserBundle:User u set u.proposalsCount = (
           SELECT count(p.id) FROM CapcoAppBundle:Proposal p
           WHERE p.author = u AND p.published = 1 AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL

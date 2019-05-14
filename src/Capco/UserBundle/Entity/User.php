@@ -127,11 +127,6 @@ class User extends BaseUser implements
     /**
      * @var int
      */
-    protected $repliesCount = 0;
-
-    /**
-     * @var int
-     */
     protected $opinionsCount = 0;
 
     /**
@@ -824,26 +819,6 @@ class User extends BaseUser implements
     public function setProposalsCount($proposalsCount)
     {
         $this->proposalsCount = $proposalsCount;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRepliesCount()
-    {
-        return $this->repliesCount;
-    }
-
-    /**
-     * @param int $repliesCount
-     *
-     * @return $this
-     */
-    public function setRepliesCount($repliesCount)
-    {
-        $this->repliesCount = $repliesCount;
 
         return $this;
     }

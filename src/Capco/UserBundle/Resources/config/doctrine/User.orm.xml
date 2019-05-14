@@ -132,7 +132,6 @@
 
         <field name="projectsCount" column="projects_count" type="integer" nullable="false" />
         <field name="proposalsCount" column="proposals_count" type="integer" nullable="false" />
-        <field name="repliesCount" column="replies_count" type="integer" nullable="false" />
         <field name="argumentsCount" column="arguments_count" type="integer" nullable="false" />
         <field name="sourcesCount" column="sources_count" type="integer" nullable="false" />
         <field name="opinionsCount" column="opinions_count" type="integer" nullable="false" />

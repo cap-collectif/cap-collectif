@@ -6,7 +6,7 @@
         "test:ci": "NODE_ENV=test jest -c jest.config.js --coverage --ci --runInBand",
         "test:watch": "NODE_ENV=test jest -c jest.config.js --watchAll",
         "test-e2e": "NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --ci --runInBand",
-        "test-e2e:watch": "fab local.app.toggle_enable && NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --watchAll",
+        "test-e2e:watch": "fab local.app.toggle_enable && NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --watchAll --runInBand",
         "flow": "flow",
         "flow:coverage": "flow-coverage-report",
         "build": "NODE_ENV=development node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --config webpack/webpack.client.js",
@@ -36,6 +36,7 @@
         "deploy-storybook": "rm -fr .out && yarn run build-storybook -c .storybook -o .out && mkdir -p .out/.circleci && touch .out/.circleci/config.yml && echo 'version: 2\njobs:\n   build:\n      machine: true\n      branches:\n         ignore: gh-pages\n      steps:\n         - run: echo Skipping tests on gh-pages branch' > '.out/.circleci/config.yml'  && echo 'ui.cap-collectif.com' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
         "prettier:js": "prettier --parser flow --write 'app/Resources/js/**/*.js'",
         "prettier:php": "prettier --parser php --write 'src/**/*.php'",
+        "prettier:yaml": "prettier --parser yaml --write 'src/**/*.yml' 'app/**/*.yml' 'infrastructure/**/*.yml'",
         "prettier": "yarn run prettier:js",
         "precommit": "flow status && lint-staged"
     },

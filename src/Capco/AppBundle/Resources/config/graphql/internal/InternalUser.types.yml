@@ -127,8 +127,11 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsToDeleteCount", [value])'
       sourcesCount:
         type: 'Int!'
-      repliesCount:
-        type: 'Int!'
+      replies:
+        type: 'InternalReplyConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'A list of replies associated to the user.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRepliesResolver", [value])'
       postCommentsCount:
         type: 'Int!'
       eventCommentsCount:

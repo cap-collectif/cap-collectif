@@ -32,7 +32,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     private $verification = 'none';
 
     /**
-     * @var int
+     * TODO: remove this.
      *
      * @ORM\Column(name="replies_count", type="integer")
      */
@@ -74,10 +74,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
         return true;
     }
 
-    /**
-     * @return int
-     */
-    public function getRepliesCount()
+    public function getRepliesCount(): int
     {
         return $this->repliesCount;
     }
@@ -94,12 +91,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
         return $this->verification;
     }
 
-    /**
-     * @param int $repliesCount
-     *
-     * @return $this
-     */
-    public function setRepliesCount($repliesCount)
+    public function setRepliesCount(int $repliesCount): self
     {
         $this->repliesCount = $repliesCount;
 

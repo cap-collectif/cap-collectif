@@ -193,7 +193,7 @@ class ProfileController extends Controller
         $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
 
         $projectsProps = $serializer->serialize(['projects' => $projectsRaw], 'json', [
-            'groups' => ['Projects', 'UserDetails', 'Steps', 'ThemeDetails', 'ProjectType'],
+            'groups' => ['Projects', 'UserDetails', 'Steps', 'ThemeDetails', 'ProjectType']
         ]);
         $projectsCount = \count($projectsRaw);
 
@@ -201,11 +201,7 @@ class ProfileController extends Controller
         $versions = $this->get(OpinionVersionRepository::class)->getByUser($user);
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
 
-        $replies = $this->get(ReplyRepository::class)->findBy([
-            'author' => $user,
-            'private' => false,
-            'draft' => false,
-        ]);
+        $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
 
         $sources = $this->get(SourceRepository::class)->getByUser($user);
         $comments = $this->get(CommentRepository::class)->getByUser($user);
@@ -225,7 +221,7 @@ class ProfileController extends Controller
                 'sources' => $sources,
                 'comments' => $comments,
                 'votes' => $votes,
-                'argumentsLabels' => Argument::$argumentTypesLabels,
+                'argumentsLabels' => Argument::$argumentTypesLabels
             ],
             $this->getProposalsProps($user)
         );
@@ -241,7 +237,7 @@ class ProfileController extends Controller
         $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
 
         $projectsProps = $serializer->serialize(['projects' => $projectsRaw], 'json', [
-            'groups' => ['Projects', 'Steps', 'ThemeDetails'],
+            'groups' => ['Projects', 'Steps', 'ThemeDetails']
         ]);
         $projectsCount = \count($projectsRaw);
         $eventsCount = $this->getEventsCount($user);
@@ -250,7 +246,7 @@ class ProfileController extends Controller
             'user' => $user,
             'projectsProps' => $projectsProps,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
+            'eventsCount' => $eventsCount
         ];
     }
 
@@ -273,7 +269,7 @@ class ProfileController extends Controller
             'user' => $user,
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
+            'eventsCount' => $eventsCount
         ];
     }
 
@@ -301,7 +297,7 @@ class ProfileController extends Controller
             [
                 'user' => $user,
                 'projectsCount' => $projectsCount,
-                'eventsCount' => $eventsCount,
+                'eventsCount' => $eventsCount
             ],
             $this->getProposalsProps($user)
         );
@@ -310,17 +306,10 @@ class ProfileController extends Controller
     /**
      * @Route("/{slug}/replies", name="capco_user_profile_show_replies", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserReplies.html.twig")
-     *
-     * @param User $user
-     *
-     * @return array
      */
     public function showRepliesAction(User $user)
     {
-        $replies = $this->get(ReplyRepository::class)->findBy([
-            'author' => $user,
-            'private' => false,
-        ]);
+        $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
 
@@ -328,7 +317,7 @@ class ProfileController extends Controller
             'user' => $user,
             'replies' => $replies,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
+            'eventsCount' => $eventsCount
         ];
     }
 
@@ -348,7 +337,7 @@ class ProfileController extends Controller
             'arguments' => $arguments,
             'argumentsLabels' => Argument::$argumentTypesLabels,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
+            'eventsCount' => $eventsCount
         ];
     }
 
@@ -367,7 +356,7 @@ class ProfileController extends Controller
             'user' => $user,
             'sources' => $sources,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
+            'eventsCount' => $eventsCount
         ];
     }
 
@@ -386,7 +375,7 @@ class ProfileController extends Controller
             'user' => $user,
             'comments' => $comments,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
+            'eventsCount' => $eventsCount
         ];
     }
 
@@ -405,7 +394,7 @@ class ProfileController extends Controller
             'user' => $user,
             'votes' => $votes,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
+            'eventsCount' => $eventsCount
         ];
     }
 
@@ -421,7 +410,7 @@ class ProfileController extends Controller
         return [
             'user' => $user,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
+            'eventsCount' => $eventsCount
         ];
     }
 
@@ -445,8 +434,8 @@ class ProfileController extends Controller
                         'PrivateProposals',
                         'ProposalResponses',
                         'UsersInfos',
-                        'UserMedias',
-                    ],
+                        'UserMedias'
+                    ]
                 ]),
                 true
             );
@@ -454,7 +443,7 @@ class ProfileController extends Controller
 
         return [
             'proposalsPropsBySteps' => $proposalsPropsBySteps,
-            'proposalsCount' => $proposalsCount,
+            'proposalsCount' => $proposalsCount
         ];
     }
 

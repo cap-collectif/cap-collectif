@@ -26,7 +26,6 @@ application:
     - redis:redis
     - seleniumhub:selenium
     - mailcatcher:mailcatchersmtp
-    - cerebro:cerebro
   extra_hosts: # Used to ban varnish cache
     - 'capco.test:0.0.0.0'
 
@@ -76,13 +75,6 @@ mailcatcher:
   build: ../services/mailcatcher
   ports:
     - '25:25'
-
-cerebro:
-  image: lmenezes/cerebro
-  links:
-    - elasticsearch
-  ports:
-    - '9000:9000'
 
 chrome:
   build: ../services/chrome

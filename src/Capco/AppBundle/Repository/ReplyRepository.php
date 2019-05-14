@@ -57,15 +57,19 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
-    public function countAllByAuthor(User $user): int
+    public function countAllByAuthor(User $author): int
     {
-        $qb = $this->createQueryBuilder('r');
-        $qb
-            ->select('count(DISTINCT r)')
-            ->andWhere('r.author = :author')
-            ->setParameter('author', $user);
+        $qb = $this->getPublicPublishedNonDraftByAuthorQueryBuilder($author);
+        $qb->select('count(reply)');
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getByAuthor(User $author): iterable
+    {
+        $qb = $this->getPublicPublishedNonDraftByAuthorQueryBuilder($author);
+
+        return $qb->getQuery()->getResult();
     }
 
     public function hydrateFromIds(array $ids): array
@@ -194,5 +198,15 @@ class ReplyRepository extends EntityRepository
     protected function getPublishedQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('reply')->andWhere('reply.published = true');
+    }
+
+    private function getPublicPublishedNonDraftByAuthorQueryBuilder(User $author): QueryBuilder
+    {
+        return $this->createQueryBuilder('reply')
+            ->andWhere('reply.published = true')
+            ->andWhere('reply.author = :author')
+            ->andWhere('reply.private = false')
+            ->andWhere('reply.draft = false')
+            ->setParameter('author', $author);
     }
 }

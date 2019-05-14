@@ -10,6 +10,7 @@ twig:
     google_maps_key: '%google_maps_key%'
     # Register here any services accessibles in templates
     opinionVersionsResolver: '@Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionVersionsResolver'
+    userRepliesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserRepliesResolver'
     projectProposalsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectProposalsResolver'
     projectVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotesResolver'
     projectContributorsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver'

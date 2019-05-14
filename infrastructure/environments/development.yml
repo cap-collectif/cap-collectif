@@ -24,6 +24,13 @@ application:
     - mailcatcher:mailcatchersmtp
     - cerebro:cerebro
 
+cerebro:
+  image: lmenezes/cerebro
+  links:
+    - elasticsearch
+  ports:
+    - '9000:9000'
+
 builder:
   build: ../services/builder
   volumes:
