@@ -85,7 +85,10 @@ export class OpinionList extends React.Component<Props, State> {
         <Card.Header
           // $FlowFixMe color type from GraphQL
           bgColor={section.color}
-          style={{ border: `1px solid ${colors.borderColor}`, borderBottom: 0 }}>
+          style={{
+            border: `1px solid ${colors.borderColor}`,
+            borderBottom: section.contributionsCount > 0 ? 0 : undefined,
+          }}>
           <div className="opinion d-flex align-items-center justify-content-between">
             <span className="excerpt_dark">
               <FormattedMessage
