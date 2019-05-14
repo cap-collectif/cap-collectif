@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { ListGroupItem } from 'react-bootstrap';
+import { Media, ListGroupItem } from 'react-bootstrap';
 import UserAvatar from '../../User/UserAvatar';
 import OpinionInfos from '../OpinionInfos';
 import OpinionSourceTitle from './OpinionSourceTitle';
@@ -25,23 +25,27 @@ export class OpinionSource extends React.Component<Props> {
           source.author && source.author.vip ? ' bg-vip' : ''
         }`}
         id={`source-${source.id}`}>
-        <div className="left-block">
-          {/* $FlowFixMe Will be a fragment soon */}
-          <UserAvatar user={source.author} />
-          {/* $FlowFixMe $refType */}
-          <TrashedMessage contribution={source}>
-            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-            <OpinionInfos rankingThreshold={null} opinion={source} />
-            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-            <OpinionSourceTitle source={source} />
-            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-            <OpinionSourceContent source={source} />
-            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-            <div className="small">
-              <OpinionSourceButtons sourceable={sourceable} source={source} />
-            </div>
-          </TrashedMessage>
-        </div>
+        <Media>
+          <Media.Left>
+            {/* $FlowFixMe Will be a fragment soon */}
+            <UserAvatar user={source.author} />
+          </Media.Left>
+          <Media.Body>
+            {/* $FlowFixMe $refType */}
+            <TrashedMessage contribution={source}>
+              {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+              <OpinionInfos rankingThreshold={null} opinion={source} />
+              {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+              <OpinionSourceTitle source={source} />
+              {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+              <OpinionSourceContent source={source} />
+              {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+              <div className="small">
+                <OpinionSourceButtons sourceable={sourceable} source={source} />
+              </div>
+            </TrashedMessage>
+          </Media.Body>
+        </Media>
       </ListGroupItem>
     );
   }

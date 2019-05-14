@@ -20,7 +20,7 @@ class OpinionSourceVoteBox extends React.Component<Props> {
             source={source}
             disabled={!source.contribuable || source.author.isViewer}
           />
-        </form>
+        </form>{' '}
         <Button className="btn--outline btn-dark-gray btn-xs opinion__votes-nb">
           {source.votes ? source.votes.totalCount : 0}
         </Button>

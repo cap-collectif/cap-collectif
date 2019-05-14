@@ -9,7 +9,16 @@ type Props = {
 };
 
 const OpinionSourceContent = ({ source }: Props) => (
-  <WYSIWYGRender className="excerpt" value={source.body} />
+  <p
+    className="opinion__text excerpt"
+    style={{
+      overflow: 'hidden',
+      float: 'left',
+      width: '100%',
+      wordWrap: 'break-word',
+    }}>
+    <WYSIWYGRender className="excerpt" value={source.body} />
+  </p>
 );
 
 export default createFragmentContainer(OpinionSourceContent, {

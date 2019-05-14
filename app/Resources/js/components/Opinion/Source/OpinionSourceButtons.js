@@ -40,8 +40,8 @@ class OpinionSourceButtons extends React.Component<Props, State> {
     return (
       <div>
         {/* $FlowFixMe */}
-        <OpinionSourceVoteBox source={source} />
-        <OpinionSourceReportButton sourceable={sourceable} source={source} />
+        <OpinionSourceVoteBox source={source} />{' '}
+        <OpinionSourceReportButton sourceable={sourceable} source={source} />{' '}
         <EditButton
           onClick={() => {
             dispatch(showSourceEditModal(source.id));
@@ -49,7 +49,7 @@ class OpinionSourceButtons extends React.Component<Props, State> {
           author={{ uniqueId: source.author.slug }}
           editable={source.contribuable}
           className="btn-xs btn--outline source__btn--edit"
-        />
+        />{' '}
         <OpinionSourceFormModal sourceable={sourceable} source={source} />
         <DeleteButton
           onClick={this.openDeleteModal}
