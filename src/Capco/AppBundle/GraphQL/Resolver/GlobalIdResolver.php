@@ -53,18 +53,23 @@ class GlobalIdResolver
         $this->logger = $logger;
     }
 
-    public function resolveMultiple(array $array, $user): array
+    public function resolveMultiple(array $array, $user, \ArrayObject $context): array
     {
         $results = [];
         foreach ($array as $value) {
-            $results[] = $this->resolve($value, $user);
+            $results[] = $this->resolve($value, $user, $context);
         }
 
         return $results;
     }
 
-    public function resolve(string $uuidOrGlobalId, $userOrAnon)
+    public function resolve(string $uuidOrGlobalId, $userOrAnon, ?\ArrayObject $context = null)
     {
+        $skipVerification =
+            $context &&
+            $context->offsetExists('disable_acl') &&
+            true === $context->offsetGet('disable_acl');
+
         $user = null;
         if (empty($uuidOrGlobalId)) {
             return null;
@@ -158,7 +163,7 @@ class GlobalIdResolver
                 return null;
             }
 
-            return $this->viewerCanSee($node, $user) ? $node : null;
+            return $this->viewerCanSee($node, $user, $skipVerification) ? $node : null;
         }
 
         // Arf we could not decode, it's a legacy UUID
@@ -218,7 +223,7 @@ class GlobalIdResolver
             return null;
         }
 
-        return $this->viewerCanSee($node, $user) ? $node : null;
+        return $this->viewerCanSee($node, $user, $skipVerification) ? $node : null;
     }
 
     public static function getDecodedId(string $uuidOrGlobalId)
@@ -262,7 +267,7 @@ class GlobalIdResolver
         return $node;
     }
 
-    private function viewerCanSee($node, User $user = null): bool
+    private function viewerCanSee($node, User $user = null, bool $skipVerification): bool
     {
         $projectContributionClass = [
             Project::class,
@@ -277,6 +282,9 @@ class GlobalIdResolver
         ];
 
         foreach ($projectContributionClass as $object) {
+            if ($skipVerification) {
+                return true;
+            }
             if ($node instanceof Proposal) {
                 return $node->viewerCanSee($user);
             }

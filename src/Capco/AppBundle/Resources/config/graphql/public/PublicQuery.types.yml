@@ -14,7 +14,7 @@ PublicQuery:
         description: 'The ID of an object.'
         builderConfig:
           nodeInterfaceType: Node
-          idFetcher: '@=resolver("query_node", [value, getUser()])'
+          idFetcher: '@=resolver("query_node", [value, getUser(), context])'
       nodes:
         type: '[Node]!'
         description: 'Lookup nodes by a list of IDs.'
@@ -22,5 +22,5 @@ PublicQuery:
           ids:
             type: '[ID!]!'
             description: 'The list of node IDs.'
-        resolve: "@=resolver('query_nodes', [args['ids'], getUser()])"
+        resolve: "@=resolver('query_nodes', [args['ids'], getUser(), context])"
 
