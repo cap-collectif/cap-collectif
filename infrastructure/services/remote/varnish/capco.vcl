@@ -131,8 +131,3 @@ sub vcl_backend_fetch {
         set bereq.method = "POST";
     }
 }
-
-# Remove from response headers verbose things such as Varnish version.
-sub vcl_deliver {
-    remove resp.http.Via;
-}
