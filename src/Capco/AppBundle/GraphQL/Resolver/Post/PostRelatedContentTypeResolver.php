@@ -27,7 +27,7 @@ class PostRelatedContentTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalProposal');
         }
         if ($node instanceof Project) {
-            return $this->typeResolver->resolve('InternalProject');
+            return $this->typeResolver->resolve('Project');
         }
 
         throw new UserError('Could not resolve type of the related post content.');

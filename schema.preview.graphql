@@ -114,6 +114,9 @@ type ConsultationStep implements Node {
 # A string containing a datetime.
 scalar DateTime
 
+# A string containing an email.
+scalar Email
+
 # Represents a calendar event.
 type Event implements Node & UniformResourceLocatable {
   # The ID of an object
@@ -929,6 +932,42 @@ type User implements Node & UniformResourceLocatable {
     # Returns the last `n` elements from the list.
     last: Int
   ): ResponseConnection!
+
+  # The user's personal email.
+  email: Email
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Whether or not this user consent internal communication.
+  consentInternalCommunication: Boolean!
+
+  # A URL pointing to the user's Facebook account.
+  facebookUrl: URI
+
+  # A URL pointing to the user's Twitter account.
+  twitterUrl: URI
+
+  # A URL pointing to the user's LinkedIn account.
+  linkedInUrl: URI
+
+  # The user's public avatar URL.
+  avatarUrl: URI
+
+  # A URL pointing to the user's public website/blog.
+  websiteUrl: URI
+
+  # The user's public profile biography.
+  biography: String
+
+  # Whether or not this user has a confirmed account.
+  enabled: Boolean!
+
+  # Identifies the date and time when this user account was deleted.
+  deletedAccountAt: DateTime
 }
 
 # A connection to a list of items.

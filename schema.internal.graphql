@@ -6566,35 +6566,62 @@ type User implements Node & UniformResourceLocatable {
     last: Int
   ): ResponseConnection!
 
-  # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID!
+  # The user's personal email.
+  email: Email
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Whether or not this user consent internal communication.
+  consentInternalCommunication: Boolean!
+
+  # A URL pointing to the user's Facebook account.
+  facebookUrl: URI
+
+  # A URL pointing to the user's Twitter account.
+  twitterUrl: URI
+
+  # A URL pointing to the user's LinkedIn account.
+  linkedInUrl: URI
+
+  # The user's public avatar URL.
+  avatarUrl: URI
+
+  # A URL pointing to the user's public website/blog.
+  websiteUrl: URI
+
+  # The user's public profile biography.
+  biography: String
+
+  # Whether or not this user has a confirmed account.
+  enabled: Boolean!
+
+  # Identifies the date and time when this user account was deleted.
+  deletedAccountAt: DateTime
+
+  # Expose Primary Key, do not use it, except for testing purpose.
+  _id: ID!
+
+  # TODO remove me
+  website: String @deprecated(reason: "use `websiteUrl` instead.")
+
+  # The user's public avatar file.
+  media: Media
+
   # The user's public profile name.
   displayName: String!
 
-  # Whether or not this user is a vip.
+  # Whether or not this user is a VIP.
   vip: Boolean!
 
   # The user's slug (unique).
   slug: String!
 
-  # The user's email.
-  email: String
-
-  # The user's public avatar.
-  media: Media
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
   # Last connection of the user.
   lastLogin: DateTime
-
-  # Is user is activated.
-  enabled: Boolean!
 
   # A user notifications preferences
   notificationsConfiguration: UserNotificationsConfiguration!
@@ -6620,8 +6647,6 @@ type User implements Node & UniformResourceLocatable {
 
   # Is the personal archive of the user is being asked for the first time?
   firstArchive: Boolean!
-  website: String
-  biography: String
   address: String
   address2: String
   zipCode: String
@@ -6648,11 +6673,8 @@ type User implements Node & UniformResourceLocatable {
   eventCommentsCount: Int!
   projectsCount: Int!
 
-  # Is user accepted the external communication during the registration.
+  # Whether or not this user consent external communication.
   consentExternalCommunication: Boolean!
-
-  # Has user approved internal communication during the registration.
-  consentInternalCommunication: Boolean!
 
   # Array of proposals followed by current user.
   followingProposals(
@@ -6693,16 +6715,7 @@ type User implements Node & UniformResourceLocatable {
   # Total of contributions count
   contributionsCount: Int!
 
-  # Your facebook url
-  facebookUrl: String
-
-  # Your twitter url
-  twitterUrl: String
-
-  # Your linkedIn url
-  linkedInUrl: String
-
-  # Is your profile indexed or not
+  # Whether or not this user profile page is indexed.
   profilePageIndexed: Boolean
 
   # Your localisation
@@ -6723,7 +6736,6 @@ type User implements Node & UniformResourceLocatable {
     # (ROLE_SUPER_ADMIN only) Select also unpublished votes.
     includeUnpublished: Boolean = false
   ): ProposalVoteConnection!
-  deletedAccountAt: DateTime
 
   # Get all medias the user has published.
   medias: [Media]!

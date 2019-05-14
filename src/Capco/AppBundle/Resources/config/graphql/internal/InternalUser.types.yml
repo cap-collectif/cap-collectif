@@ -9,46 +9,34 @@ InternalUser:
     interfaces: [Node, UniformResourceLocatable]
     name: User
     fields:
-      # TODO We need to check with RGPD if we can expose this data
-      # Ex: github is doing it
-      createdAt:
-        type: 'DateTime!'
-        description: 'Identifies the date and time when the object was created.'
-        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      website:
+        type: 'String'
+        description: 'TODO remove me'
+        deprecationReason: 'use `websiteUrl` instead.'
+      media:
+        type: 'InternalMedia'
+        description: "The user's public avatar file."
       # TODO rename this to `name`
       displayName:
         type: 'String!'
         description: "The user's public profile name."
+      # TODO rename this to `isVip`
       vip:
         type: 'Boolean!'
-        description: 'Whether or not this user is a vip.'
+        description: 'Whether or not this user is a VIP.'
       slug:
         type: 'String!'
         description: "The user's slug (unique)."
-      email:
-        type: 'String'
-        description: "The user's email."
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEmailResolver", [value])'
-        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
-      # TODO rename this to `avatar`
-      media:
-        type: 'InternalMedia'
-        description: "The user's public avatar."
-      updatedAt:
-        type: 'DateTime'
-        description: 'Identifies the date and time when the object was last updated.'
-        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      # TODO rename this to `lastLoginAt`
       lastLogin:
         type: 'DateTime'
         description: 'Last connection of the user.'
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
-      enabled:
-        type: 'Boolean!'
-        description: 'Is user is activated.'
       notificationsConfiguration:
         type: 'UserNotificationsConfiguration!'
         description: 'A user notifications preferences'
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      # TODO rename this to `isLocked`
       locked:
         type: 'Boolean!'
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
@@ -95,10 +83,6 @@ InternalUser:
         type: 'Boolean!'
         description: 'Is the personal archive of the user is being asked for the first time?'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveFirstResolver", [getUser()])'
-      website:
-        type: 'String'
-      biography:
-        type: 'String'
       address:
         type: 'String'
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
@@ -158,11 +142,7 @@ InternalUser:
         type: 'Int!'
       consentExternalCommunication:
         type: 'Boolean!'
-        description: 'Is user accepted the external communication during the registration.'
-        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
-      consentInternalCommunication:
-        type: 'Boolean!'
-        description: 'Has user approved internal communication during the registration.'
+        description: 'Whether or not this user consent external communication.'
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       followingProposals:
         type: 'InternalProposalConnection!'
@@ -198,18 +178,9 @@ InternalUser:
         type: 'Int!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsCountResolver", [value])'
         description: 'Total of contributions count'
-      facebookUrl:
-        type: 'String'
-        description: 'Your facebook url'
-      twitterUrl:
-        type: 'String'
-        description: 'Your twitter url'
-      linkedInUrl:
-        type: 'String'
-        description: 'Your linkedIn url'
       profilePageIndexed:
         type: 'Boolean'
-        description: 'Is your profile indexed or not'
+        description: 'Whether or not this user profile page is indexed.'
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       neighborhood:
         type: 'String'
@@ -232,8 +203,6 @@ InternalUser:
             type: 'Boolean'
             description: '(ROLE_SUPER_ADMIN only) Select also unpublished votes.'
             defaultValue: false
-      deletedAccountAt:
-        type: 'DateTime'
       medias:
         type: '[InternalMedia]!'
         description: 'Get all medias the user has published.'

@@ -2,8 +2,6 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Repository\ProjectRepository;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
@@ -39,27 +37,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $globalId = GlobalId::toGlobalId('Event', 'event1');
 
         $this->resolve($globalId, null)->shouldReturn($event);
-    }
-
-    public function it_always_resolve_when_acl_disabled(
-        ContainerInterface $container,
-        LoggerInterface $logger,
-        ProjectRepository $projectRepository,
-        Project $project
-    ) {
-        $projectRepository->find('ProjectAccessibleForMeOnly')->willReturn($project);
-        $container->get(ProjectRepository::class)->willReturn($projectRepository);
-        $this->beConstructedWith($container, $logger);
-        $globalId = GlobalId::toGlobalId('Project', 'ProjectAccessibleForMeOnly');
-
-        $context = new \ArrayObject(
-            [
-                'disable_acl' => true,
-            ],
-            \ArrayObject::STD_PROP_LIST
-        );
-
-        $this->resolve($globalId, null, $context)->shouldReturn($project);
     }
 
     public function it_can_resolve_a_requirement(

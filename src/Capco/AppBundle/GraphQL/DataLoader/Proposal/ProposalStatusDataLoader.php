@@ -82,7 +82,6 @@ class ProposalStatusDataLoader extends BatchDataLoader
         return [
             'proposalId' => $key['proposal']->getId(),
             'args' => $key['args']->getRawArguments(),
-            'context' => $key['context'],
         ];
     }
 
@@ -96,26 +95,17 @@ class ProposalStatusDataLoader extends BatchDataLoader
     {
         $statuses = [];
         foreach ($keys as $key) {
-            $statuses[] = $this->resolve(
-                $key['proposal'],
-                $key['args'],
-                $key['viewer'],
-                $key['context']
-            );
+            $statuses[] = $this->resolve($key['proposal'], $key['args'], $key['viewer']);
         }
 
         return $statuses;
     }
 
-    private function resolve(
-        Proposal $proposal,
-        Argument $args,
-        $viewer,
-        \ArrayObject $context
-    ): ?Status {
+    private function resolve(Proposal $proposal, Argument $args, $viewer): ?Status
+    {
         if ($args->offsetExists('step') && $args->offsetGet('step')) {
             $stepId = $args->offsetGet('step');
-            $step = $this->globalIdResolver->resolve($stepId, $viewer, $context);
+            $step = $this->globalIdResolver->resolve($stepId, $viewer);
 
             if ($step instanceof CollectStep) {
                 return $proposal->getStatus();
@@ -130,7 +120,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
                 }
             }
 
-            throw new UserError('Unknown step with id:' . $step->getId());
+            throw new UserError('Unknown step');
         }
 
         return $proposal->getStatus();
