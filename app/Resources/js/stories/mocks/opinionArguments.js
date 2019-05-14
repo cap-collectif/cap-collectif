@@ -1,7 +1,7 @@
 // @flow
 import { author } from './users';
 
-export const argument = {
+export const opinionArgument = {
   user: author,
   trashedStatus: '',
   createdAt: '1 mars 2016 à 00:00',
@@ -11,9 +11,9 @@ export const argument = {
   votes: { totalCount: 50 },
 };
 
-export const argumentsData = [
-  { ...argument, user: { ...argument.user, vip: true } },
-  { ...argument },
-  { ...argument, trashedStatus: 'INVISIBLE' },
-  { ...argument },
+export const opinionArguments = [
+  { ...opinionArgument, user: { ...opinionArgument.user, vip: true } },
+  { ...opinionArgument },
+  { ...opinionArgument, trashedStatus: 'INVISIBLE' },
+  { ...opinionArgument },
 ];

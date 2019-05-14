@@ -6,7 +6,7 @@ import { Button, ListGroupItem, Panel, DropdownButton, MenuItem } from 'react-bo
 import Input from '../components/Form/Input';
 import { UserAvatar } from '../components/User/UserAvatar';
 import ListGroup from '../components/Ui/List/ListGroup';
-import { argumentsData } from './mocks/arguments';
+import { opinionArguments } from './mocks/opinionArguments';
 
 const argumentTypes = {
   for: 'FOR',
@@ -14,7 +14,7 @@ const argumentTypes = {
   simple: 'SIMPLE',
 };
 
-storiesOf('ArgumentList', module)
+storiesOf('OpinionArgumentList', module)
   .addDecorator(withKnobs)
   .add('default case', () => {
     const sectionPaginationEnable = boolean('Pagination enabled', true, 'Section');
@@ -40,7 +40,7 @@ storiesOf('ArgumentList', module)
             </div>
           </Panel.Heading>
           <ListGroup>
-            {argumentsData.map((item, index) => (
+            {opinionArguments.map((item, index) => (
               <ListGroupItem
                 key={index}
                 className={`opinion opinion--argument ${
