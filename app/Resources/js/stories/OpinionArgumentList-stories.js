@@ -212,7 +212,7 @@ const OpinionArgumentList = ({ section, isProfile, opinionArguments }) => (
                 <ListGroupItem style={{ textAlign: 'center' }}>
                   {section.isLoadingMore && <Loader />}
                   {!section.isLoadingMore && (
-                    <Button id="OpinionListPaginated-loadmore" bsStyle="link" onClick={() => {}}>
+                    <Button bsStyle="link" onClick={() => {}}>
                       Voir plus
                     </Button>
                   )}
