@@ -145,36 +145,37 @@ const OpinionVersionList = ({ section, opinionVersions }) => (
       </Row>
     </Panel.Heading>
     {section.isLoading && <Loader />}
-    {!section.isLoading && opinionVersions.length === 0 ? (
-      <Panel.Body className="text-center">
-        <i className="cap-32 cap-baloon-1" />
-        <br />
-        Aucun amendement proposé
-      </Panel.Body>
-    ) : (
-      <ListGroup>
-        {opinionVersions.map((item, index) => (
-          <ListGroupItem
-            key={index}
-            className={`list-group-item__opinion text-left has-chart${
-              item.user && item.user.vip ? ' bg-vip' : ''
-            }`}
-            style={{ backgroundColor: item.user && item.user.vip ? '#F7F7F7' : undefined }}>
-            <OpinionVersion item={item} typeLabel={section.typeLabel || null} />
-          </ListGroupItem>
-        ))}
-        {!section.isLoading && section.paginationEnable && (
-          <ListGroupItem style={{ textAlign: 'center' }}>
-            {section.isLoadingMore && <Loader />}
-            {!section.isLoadingMore && (
-              <Button id="OpinionListPaginated-loadmore" bsStyle="link" onClick={() => {}}>
-                Voir plus
-              </Button>
-            )}
-          </ListGroupItem>
-        )}
-      </ListGroup>
-    )}
+    {!section.isLoading &&
+      (opinionVersions.length === 0 ? (
+        <Panel.Body className="text-center">
+          <i className="cap-32 cap-baloon-1" />
+          <br />
+          Aucun amendement proposé
+        </Panel.Body>
+      ) : (
+        <ListGroup>
+          {opinionVersions.map((item, index) => (
+            <ListGroupItem
+              key={index}
+              className={`list-group-item__opinion text-left has-chart${
+                item.user && item.user.vip ? ' bg-vip' : ''
+              }`}
+              style={{ backgroundColor: item.user && item.user.vip ? '#F7F7F7' : undefined }}>
+              <OpinionVersion item={item} typeLabel={section.typeLabel || null} />
+            </ListGroupItem>
+          ))}
+          {!section.isLoading && section.paginationEnable && (
+            <ListGroupItem style={{ textAlign: 'center' }}>
+              {section.isLoadingMore && <Loader />}
+              {!section.isLoadingMore && (
+                <Button id="OpinionListPaginated-loadmore" bsStyle="link" onClick={() => {}}>
+                  Voir plus
+                </Button>
+              )}
+            </ListGroupItem>
+          )}
+        </ListGroup>
+      ))}
   </Panel>
 );
 
@@ -191,7 +192,7 @@ storiesOf('OpinionVersionList', module)
   })
   .add('with single opinion version', () => {
     const section = {
-      paginationEnable: boolean('Pagination enabled', true, 'Section'),
+      paginationEnable: boolean('Pagination enabled', false, 'Section'),
       isLoading: boolean('Is loading', false, 'Section'),
       isLoadingMore: boolean('Is loading more', false, 'Section'),
     };
@@ -200,7 +201,7 @@ storiesOf('OpinionVersionList', module)
   })
   .add('empty', () => {
     const section = {
-      paginationEnable: boolean('Pagination enabled', true, 'Section'),
+      paginationEnable: boolean('Pagination enabled', false, 'Section'),
       isLoading: boolean('Is loading', false, 'Section'),
     };
 
