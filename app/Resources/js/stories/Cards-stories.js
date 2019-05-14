@@ -118,43 +118,43 @@ storiesOf('Card', module)
     },
     {
       info: {
-        text: `          
+        text: `
           <p>Emplacement : <code>import Avatar from ‘../Ui/Card/Card’;</code></p>
-         
+
           <p class="mb-20">
             <h5><b>Project card</b></h5>
-            Cette carte est composée des éléments suivant : 
+            Cette carte est composée des éléments suivant :
             <ul>
               <li>Card.Type,</li>
               <li>Card.Cover,</li>
               <li>Card.Body avec à l'intérieur : InlineList, Card.Title, TagsList, ProgressBar.</li>
             </ul>
           </p>
-          
+
           <p class="mb-20">
             <h5><b>Proposal card</b></h5>
-            Cette carte est composée des éléments suivant : 
+            Cette carte est composée des éléments suivant :
             <ul>
               <li>Card.Body avec à l'intérieur : Media, Card.Title, TagsList, ButtonToolbar.</li>
               <li>Card.Counters</li>
               <li>Card.Status</li>
             </ul>
           </p>
-          
-          
+
+
           <p class="mb-20">
             <h5><b>Theme card</b></h5>
-            Cette carte est composée des éléments suivant : 
+            Cette carte est composée des éléments suivant :
             <ul>
               <li>Card.Cover</li>
               <li>Card.Body avec à l'intérieur : Card.Title, InlineList, Label.</li>
             </ul>
           </p>
-          
-          
+
+
           <p class="mb-20">
             <h5><b>Event card</b></h5>
-            Cette carte est composée des éléments suivant : 
+            Cette carte est composée des éléments suivant :
             <ul>
               <li>Card.Cover</li>
               <li>Card.Body avec à l'intérieur : Card.Title, InlineList, Label.</li>

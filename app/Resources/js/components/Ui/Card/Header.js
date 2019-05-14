@@ -6,6 +6,7 @@ import colors, { CardHeaderColors } from '../../../utils/colors';
 
 type Props = {
   bgColor: 'gray' | 'white' | 'green' | 'bluedark' | 'blue' | 'orange' | 'red' | 'default',
+  style?: Object,
   children: React.Node,
 };
 
@@ -21,9 +22,13 @@ const Container = styled.div.attrs({
 `;
 
 export const Header = (props: Props) => {
-  const { bgColor, children } = props;
+  const { bgColor, style, children } = props;
   const getBgColor = CardHeaderColors[bgColor] || CardHeaderColors.default;
-  return <Container bgColor={getBgColor}>{children}</Container>;
+  return (
+    <Container bgColor={getBgColor} style={style}>
+      {children}
+    </Container>
+  );
 };
 
 Header.defaultProps = {

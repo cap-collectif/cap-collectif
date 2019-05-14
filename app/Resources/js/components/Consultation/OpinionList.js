@@ -80,7 +80,7 @@ export class OpinionList extends React.Component<Props, State> {
   render() {
     const { enablePagination, section, consultation, intl } = this.props;
     return (
-      <Card id={`opinions--test17${section.slug}`} className="anchor-offset">
+      <Card id={`opinions--test17${section.slug}`} className="anchor-offset" style={{ border: 0 }}>
         <Card.Header
           // $FlowFixMe color type from GraphQL
           bgColor={section.color}>

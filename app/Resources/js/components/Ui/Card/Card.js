@@ -13,6 +13,7 @@ import { Header } from './Header';
 type Props = {
   children?: any,
   className?: string,
+  style?: Object,
   id?: string,
 };
 
@@ -60,10 +61,10 @@ export class Card extends React.PureComponent<Props> {
   static Status = Status;
 
   render() {
-    const { children, className, id } = this.props;
+    const { children, className, style, id } = this.props;
 
     return (
-      <Container className={className} id={id}>
+      <Container className={className} style={style} id={id}>
         {children}
       </Container>
     );
