@@ -330,7 +330,7 @@ export default createFragmentContainer(container, {
       url
       username
       biography
-      website: websiteUrl
+      website
       facebookUrl
       linkedInUrl
       twitterUrl

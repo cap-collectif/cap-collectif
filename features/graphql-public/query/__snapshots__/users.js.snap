@@ -1,0 +1,615 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OpenDataUsersQuery OpenDataUsersQuery 1`] = `
+Object {
+  "users": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "id": "VXNlcjphZG1pbkNhcGNv",
+          "username": "adminpro",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyX2RydXBhbA==",
+          "username": "drupal",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTA=",
+          "username": "user10",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTAw",
+          "username": "user100",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTAx",
+          "username": "user101",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTAy",
+          "username": "user102",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTAz",
+          "username": "user103",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTA0",
+          "username": "user104",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTA1",
+          "username": "user105",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTA2",
+          "username": "user106",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTA3",
+          "username": "user107",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTA4",
+          "username": "user108",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTA5",
+          "username": "user109",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTE=",
+          "username": "user11",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTEw",
+          "username": "user110",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTEx",
+          "username": "user111",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTEy",
+          "username": "user112",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTEz",
+          "username": "user113",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTE0",
+          "username": "user114",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTE1",
+          "username": "user115",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTE2",
+          "username": "user116",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTE3",
+          "username": "user117",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTE4",
+          "username": "user118",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTE5",
+          "username": "user119",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTI=",
+          "username": "user12",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTIw",
+          "username": "user120",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTIx",
+          "username": "user121",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTIy",
+          "username": "user122",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTIz",
+          "username": "user123",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTI0",
+          "username": "user124",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTI1",
+          "username": "user125",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTI2",
+          "username": "user126",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTI3",
+          "username": "user127",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTI4",
+          "username": "user128",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTI5",
+          "username": "user129",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTM=",
+          "username": "user13",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTMw",
+          "username": "user130",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTMx",
+          "username": "user131",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTMy",
+          "username": "user132",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTMz",
+          "username": "user133",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTM0",
+          "username": "user134",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTM1",
+          "username": "user135",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTM2",
+          "username": "user136",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTM3",
+          "username": "user137",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTM4",
+          "username": "user138",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTM5",
+          "username": "user139",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTQ=",
+          "username": "user14",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTQw",
+          "username": "user140",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTQx",
+          "username": "user141",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTQy",
+          "username": "user142",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTQz",
+          "username": "user143",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTQ0",
+          "username": "user144",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTQ1",
+          "username": "user145",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTQ2",
+          "username": "user146",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTQ3",
+          "username": "user147",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTQ4",
+          "username": "user148",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTQ5",
+          "username": "user149",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTU=",
+          "username": "user15",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTUw",
+          "username": "user150",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTUx",
+          "username": "user151",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTUy",
+          "username": "user152",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTUz",
+          "username": "user153",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTU0",
+          "username": "user154",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTU1",
+          "username": "user155",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTU2",
+          "username": "user156",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTU3",
+          "username": "user157",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTU4",
+          "username": "user158",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTU5",
+          "username": "user159",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTY=",
+          "username": "user16",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTYw",
+          "username": "user160",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTYx",
+          "username": "user161",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTYy",
+          "username": "user162",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTYz",
+          "username": "user163",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTY0",
+          "username": "user164",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTY1",
+          "username": "user165",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTY2",
+          "username": "user166",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTY3",
+          "username": "user167",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTY4",
+          "username": "user168",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTY5",
+          "username": "user169",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTc=",
+          "username": "user17",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTcw",
+          "username": "user170",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTcx",
+          "username": "user171",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTcy",
+          "username": "user172",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTcz",
+          "username": "user173",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTc0",
+          "username": "user174",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTc1",
+          "username": "user175",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTc2",
+          "username": "user176",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTc3",
+          "username": "user177",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTc4",
+          "username": "user178",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTc5",
+          "username": "user179",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTg=",
+          "username": "user18",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTgw",
+          "username": "user180",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTgx",
+          "username": "user181",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTgy",
+          "username": "user182",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTgz",
+          "username": "user183",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTg0",
+          "username": "user184",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTg1",
+          "username": "user185",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTg2",
+          "username": "user186",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlcjp1c2VyMTg3",
+          "username": "user187",
+        },
+      },
+    ],
+    "pageInfo": Object {
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
+      "hasNextPage": true,
+    },
+    "totalCount": 218,
+  },
+}
+`;

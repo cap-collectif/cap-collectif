@@ -65,3 +65,8 @@ PreviewQuery:
             type: 'String'
             description: 'If non-null, filters events with the given string to look for.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", [args])'
+      users:
+        type: 'PreviewUserConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Lookup users.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUsersResolver", [args])'

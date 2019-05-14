@@ -6,17 +6,6 @@ const ViewerQuery = /* GraphQL */ `
     viewer {
       id
       username
-      email
-      createdAt
-      consentInternalCommunication
-      avatarUrl
-      websiteUrl
-      facebookUrl
-      twitterUrl
-      linkedInUrl
-      biography
-      enabled
-      deletedAccountAt
     }
   }
 `;

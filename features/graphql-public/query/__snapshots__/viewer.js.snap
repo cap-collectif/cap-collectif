@@ -3,19 +3,8 @@
 exports[`ViewerQuery resolves an admin 1`] = `
 Object {
   "viewer": Object {
-    "avatarUrl": null,
-    "biography": null,
-    "consentInternalCommunication": false,
-    "createdAt": "2015-01-01 00:00:05",
-    "deletedAccountAt": null,
-    "email": "admin@test.com",
-    "enabled": true,
-    "facebookUrl": null,
     "id": "VXNlcjp1c2VyQWRtaW4=",
-    "linkedInUrl": null,
-    "twitterUrl": null,
     "username": "admin",
-    "websiteUrl": null,
   },
 }
 `;
