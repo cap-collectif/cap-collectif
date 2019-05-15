@@ -22,7 +22,6 @@ application:
     - redis:redis
     - seleniumhub:selenium
     - mailcatcher:mailcatchersmtp
-    - cerebro:cerebro
 
 builder:
   build: ../services/builder

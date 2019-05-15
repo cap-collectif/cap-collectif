@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
-use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputOption;
 use Capco\AppBundle\Resolver\ContributionResolver;
@@ -42,7 +41,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $this->entityManager = $container->get('doctrine')->getManager();
         $contributionResolver = $container->get(ContributionResolver::class);
 
-        $repliesResolver = $container->get(QuestionnaireRepliesResolver::class);
         $this->force = $input->getOption('force');
 
         // ****************************** Opinion counters **********************************************
@@ -309,6 +307,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $questionnaireSteps = $this->entityManager
             ->getRepository('CapcoAppBundle:Steps\QuestionnaireStep')
             ->findAll();
+        $repliesResolver = $container->get(QuestionnaireRepliesResolver::class);
 
         foreach ($questionnaireSteps as $qs) {
             if ($qs->isOpen() || $this->force) {
@@ -332,11 +331,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $selectionSteps = $container->get(SelectionStepRepository::class)->findAll();
         foreach ($selectionSteps as $ss) {
             if ($ss->isOpen() || $this->force) {
-                $anonymousParticipants = $container
-                    ->get(UserRepository::class)
-                    ->countSelectionStepProposalAnonymousVoters($ss);
-                $participants =
-                    $contributionResolver->countStepContributors($ss) + $anonymousParticipants;
+                $participants = $contributionResolver->countStepContributors($ss);
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\SelectionStep ss
                     set ss.contributorsCount = ' .

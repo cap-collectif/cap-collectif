@@ -13,22 +13,16 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Routing\RouterInterface;
 
 class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
     use SerializerAwareTrait;
-
     private $router;
     private $normalizer;
     private $manager;
     private $contributionProjectResolver;
     private $contributionStepResolver;
     private $projectRepository;
-
-    // local "state" for data used on every User
-    private $_capcoProfileEdit;
-    private $_allProjects;
 
     public function __construct(
         UrlGeneratorInterface $router,
@@ -48,10 +42,6 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
 
     public function normalize($object, $format = null, array $context = [])
     {
-        if (!$this->_capcoProfileEdit) {
-            $this->_capcoProfileEdit = $this->router->generate('capco_profile_edit', [], true);
-        }
-
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
 
@@ -63,7 +53,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                 'email' => $object->getEmail(),
                 'userType' => $object->getUserType()
                     ? ['id' => $object->getUserType()->getId()]
-                    : null
+                    : null,
             ];
         }
 
@@ -73,17 +63,17 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         if (\in_array('Elasticsearch', $groups)) {
             $contributionsCountByProject = [];
             $contributionsCountByStep = [];
-            foreach ($this->getAllProjects() as $project) {
+            foreach ($this->projectRepository->findAll() as $project) {
                 $count = $this->contributionProjectResolver->__invoke(
                     $object,
                     $project,
                     new Argument([
-                        'first' => 0
+                        'first' => 0,
                     ])
                 )->totalCount;
                 $contributionsCountByProject[] = [
                     'project' => ['id' => $project->getId()],
-                    'count' => $count
+                    'count' => $count,
                 ];
                 foreach ($project->getRealSteps() as $step) {
                     $contributionsCountByStep[] = [
@@ -95,9 +85,9 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                                     $object,
                                     $step,
                                     new Argument([
-                                        'first' => 0
+                                        'first' => 0,
                                     ])
-                                )->totalCount
+                                )->totalCount,
                     ];
                 }
             }
@@ -121,14 +111,14 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         }
 
         $links = [
-            'settings' => $this->_capcoProfileEdit
+            'settings' => $this->router->generate('capco_profile_edit', [], true),
         ];
 
         if ($this->manager->isActive('profiles')) {
             $links['profile'] = $this->router->generate(
                 'capco_user_profile_show_all',
                 ['slug' => $object->getSlug()],
-                RouterInterface::ABSOLUTE_URL
+                true
             );
         }
 
@@ -140,18 +130,5 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof User;
-    }
-
-    private function getAllProjects()
-    {
-        if (!$this->_allProjects) {
-            $qb = $this->projectRepository->createQueryBuilder('p');
-            $qb->leftJoin('p.steps', 'steps');
-            $qb->addSelect('steps');
-
-            $this->_allProjects = $qb->getQuery()->execute();
-        }
-
-        return $this->_allProjects;
     }
 }

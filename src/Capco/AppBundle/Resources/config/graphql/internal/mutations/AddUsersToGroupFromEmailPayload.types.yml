@@ -10,4 +10,5 @@ AddUsersToGroupFromEmailPayload:
         description: "List of emails that didn't match an existing user."
       alreadyImportedUsers:
         type: '[InternalUser]!'
-        description: 'If an email from your list is already associated to a user who is in the chosen group, it will be in this field.'
+        description:
+          'If an email from your list is already associated to a user who is in the chosen group, it will be in this field.'

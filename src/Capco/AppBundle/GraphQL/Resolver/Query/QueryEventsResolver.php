@@ -17,6 +17,7 @@ class QueryEventsResolver implements ResolverInterface
 {
     use ResolverTrait;
 
+    public const FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR = 100;
     private $eventSearch;
     private $logger;
     private $queryAnalyzer;
@@ -76,7 +77,7 @@ class QueryEventsResolver implements ResolverInterface
                 }
                 $results = $this->eventSearch->searchEvents(
                     $offset,
-                    $limit,
+                    $limit + self::FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR,
                     $order,
                     $search,
                     $filters

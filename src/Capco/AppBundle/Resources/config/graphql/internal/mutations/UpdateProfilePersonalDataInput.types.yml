@@ -5,7 +5,8 @@ UpdateProfilePersonalDataInput:
     fields:
       userId:
         type: 'ID'
-        description: '(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.'
+        description:
+          '(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.'
       firstname:
         type: 'String'
         description: 'Your firstname'

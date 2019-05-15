@@ -1,6 +1,6 @@
 # The real docker-compose file is auto-generated, see (https://github.com/jolicode/CapCollectif-DeploymentTools/blob/master/api/app/Resources/views/docker-compose.yml.twig)
 
 application:
-  build: ../services/remote
-  volumes:
-    - ../../:/var/www
+    build: ../services/remote
+    volumes:
+        - ../../:/var/www
