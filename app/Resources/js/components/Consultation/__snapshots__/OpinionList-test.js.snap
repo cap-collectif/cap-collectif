@@ -4,9 +4,20 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
 <Card
   className="anchor-offset"
   id="opinions--test17slug"
+  style={
+    Object {
+      "border": 0,
+    }
+  }
 >
   <Header
     bgColor="red"
+    style={
+      Object {
+        "border": "1px solid #e3e3e3",
+        "borderBottom": 0,
+      }
+    }
   >
     <div
       className="opinion d-flex align-items-center justify-content-between"
@@ -93,10 +104,21 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
             "url": "https://capco.dev",
           }
         }
+        style={
+          Object {
+            "margin": 0,
+          }
+        }
       />
     </div>
   </Header>
-  <ListGroup>
+  <ListGroup
+    style={
+      Object {
+        "margin": 0,
+      }
+    }
+  >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
       query={[Function]}
@@ -141,9 +163,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
 <Card
   className="anchor-offset"
   id="opinions--test17slug"
+  style={
+    Object {
+      "border": 0,
+    }
+  }
 >
   <Header
     bgColor="red"
+    style={
+      Object {
+        "border": "1px solid #e3e3e3",
+        "borderBottom": 0,
+      }
+    }
   >
     <div
       className="opinion d-flex align-items-center justify-content-between"
@@ -230,10 +263,21 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
             "url": "https://capco.dev",
           }
         }
+        style={
+          Object {
+            "margin": 0,
+          }
+        }
       />
     </div>
   </Header>
-  <ListGroup>
+  <ListGroup
+    style={
+      Object {
+        "margin": 0,
+      }
+    }
+  >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
       query={[Function]}
@@ -258,9 +302,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
 <Card
   className="anchor-offset"
   id="opinions--test17slug"
+  style={
+    Object {
+      "border": 0,
+    }
+  }
 >
   <Header
     bgColor="red"
+    style={
+      Object {
+        "border": "1px solid #e3e3e3",
+        "borderBottom": 0,
+      }
+    }
   >
     <div
       className="opinion d-flex align-items-center justify-content-between"
@@ -347,10 +402,21 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
             "url": "https://capco.dev",
           }
         }
+        style={
+          Object {
+            "margin": 0,
+          }
+        }
       />
     </div>
   </Header>
-  <ListGroup>
+  <ListGroup
+    style={
+      Object {
+        "margin": 0,
+      }
+    }
+  >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
       query={[Function]}
@@ -375,9 +441,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
 <Card
   className="anchor-offset"
   id="opinions--test17slug"
+  style={
+    Object {
+      "border": 0,
+    }
+  }
 >
   <Header
     bgColor="red"
+    style={
+      Object {
+        "border": "1px solid #e3e3e3",
+        "borderBottom": 0,
+      }
+    }
   >
     <div
       className="opinion d-flex align-items-center justify-content-between"
@@ -464,10 +541,21 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
             "url": "https://capco.dev",
           }
         }
+        style={
+          Object {
+            "margin": 0,
+          }
+        }
       />
     </div>
   </Header>
-  <ListGroup>
+  <ListGroup
+    style={
+      Object {
+        "margin": 0,
+      }
+    }
+  >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
       query={[Function]}
@@ -492,9 +580,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
 <Card
   className="anchor-offset"
   id="opinions--test17slug"
+  style={
+    Object {
+      "border": 0,
+    }
+  }
 >
   <Header
     bgColor="red"
+    style={
+      Object {
+        "border": "1px solid #e3e3e3",
+        "borderBottom": 0,
+      }
+    }
   >
     <div
       className="opinion d-flex align-items-center justify-content-between"
@@ -581,10 +680,21 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
             "url": "https://capco.dev",
           }
         }
+        style={
+          Object {
+            "margin": 0,
+          }
+        }
       />
     </div>
   </Header>
-  <ListGroup>
+  <ListGroup
+    style={
+      Object {
+        "margin": 0,
+      }
+    }
+  >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
       query={[Function]}
@@ -609,9 +719,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
 <Card
   className="anchor-offset"
   id="opinions--test17slug"
+  style={
+    Object {
+      "border": 0,
+    }
+  }
 >
   <Header
     bgColor="red"
+    style={
+      Object {
+        "border": "1px solid #e3e3e3",
+        "borderBottom": 0,
+      }
+    }
   >
     <div
       className="opinion d-flex align-items-center justify-content-between"
@@ -698,10 +819,21 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
             "url": "https://capco.dev",
           }
         }
+        style={
+          Object {
+            "margin": 0,
+          }
+        }
       />
     </div>
   </Header>
-  <ListGroup>
+  <ListGroup
+    style={
+      Object {
+        "margin": 0,
+      }
+    }
+  >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
       query={[Function]}
@@ -726,9 +858,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
 <Card
   className="anchor-offset"
   id="opinions--test17slug"
+  style={
+    Object {
+      "border": 0,
+    }
+  }
 >
   <Header
     bgColor="red"
+    style={
+      Object {
+        "border": "1px solid #e3e3e3",
+        "borderBottom": 0,
+      }
+    }
   >
     <div
       className="opinion d-flex align-items-center justify-content-between"
@@ -815,10 +958,21 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
             "url": "https://capco.dev",
           }
         }
+        style={
+          Object {
+            "margin": 0,
+          }
+        }
       />
     </div>
   </Header>
-  <ListGroup>
+  <ListGroup
+    style={
+      Object {
+        "margin": 0,
+      }
+    }
+  >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
       query={[Function]}
@@ -843,9 +997,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
 <Card
   className="anchor-offset"
   id="opinions--test17slug"
+  style={
+    Object {
+      "border": 0,
+    }
+  }
 >
   <Header
     bgColor="red"
+    style={
+      Object {
+        "border": "1px solid #e3e3e3",
+        "borderBottom": 0,
+      }
+    }
   >
     <div
       className="opinion d-flex align-items-center justify-content-between"
@@ -932,10 +1097,21 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
             "url": "https://capco.dev",
           }
         }
+        style={
+          Object {
+            "margin": 0,
+          }
+        }
       />
     </div>
   </Header>
-  <ListGroup>
+  <ListGroup
+    style={
+      Object {
+        "margin": 0,
+      }
+    }
+  >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
       query={[Function]}

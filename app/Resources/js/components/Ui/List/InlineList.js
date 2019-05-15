@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
-import colors from '../../../utils/colors';
 
 type Props = {
   margin: boolean,
@@ -14,13 +13,9 @@ const Container = styled.ul.attrs({
 })`
   padding: 0;
   margin: ${props => (props.margin === true ? '0 0 10px' : '0')};
-  
+
   li {
     display: inline-block;
-
-    // a {
-    //   color: ${colors.darkGray};
-    // }
 
     &::after {
       content: '•';
