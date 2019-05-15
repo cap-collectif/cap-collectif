@@ -29,7 +29,7 @@ class OpinionVersion extends React.Component<Props> {
         className={`list-group-item__opinion has-chart${
           version.author && version.author.vip ? ' bg-vip' : ''
         }`}>
-        <div className="left-block">
+        <div>
           {/* $FlowFixMe */}
           <OpinionPreview opinion={version} rankingThreshold={rankingThreshold} />
         </div>
