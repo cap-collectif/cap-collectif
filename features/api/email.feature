@@ -87,7 +87,7 @@ Scenario: Not confirmed logged in API client wants to mass spam confirmation ema
   """
   And 0 mail should be sent
 
-@database @snapshot
+@database
 Scenario: Logged in API client can update his email
   And I am logged in to api as user
   And I send a PUT request to "/api/users/me" with json:
@@ -99,13 +99,8 @@ Scenario: Logged in API client can update his email
   """
   Then the JSON response status code should be 204
   And I wait 2 seconds
-  And 2 mail should be sent
-  And I open mail with subject 'email.confirmNewEmail.subject'
-  Then I should see "user.register.confirmation_message.validate" in mail
-  Then I should see "/account/new_email_confirmation/" in mail
-  And I open mail with subject 'email.confirmEmailChanged.subject {"%username%":"user"}'
-  Then I should see "email-content-mail-changed" in mail
-  Then email should match snapshot 'confirmEmailChanged.html'
+  Then the queue associated to "user_email" producer has messages below:
+    | 0 | {"userId": "user5"} |
 
 @security
 Scenario: Logged in API client can't update his email, to an existing email

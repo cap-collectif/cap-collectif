@@ -48,6 +48,14 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         // ****************************** Opinion counters **********************************************
 
         $this->executeQuery(
+            'UPDATE CapcoAppBundle:Opinion o set o.versionsCount = (
+            select count(DISTINCT ov.id)
+            from CapcoAppBundle:OpinionVersion ov
+            where ov.published = 1 AND ov.trashedAt IS NULL AND ov.parent = o
+        )'
+        );
+
+        $this->executeQuery(
             'UPDATE CapcoAppBundle:Opinion o set o.argumentsCount = (
           select count(DISTINCT a.id)
           from CapcoAppBundle:Argument a

@@ -68,12 +68,12 @@
                         <ul class="media-list  opinion__list">
                             {% if opinions|length > 0 %}
                                 {% for opinion in opinions %}
-                                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType} %}
+                                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType} only %}
                                 {% endfor %}
                             {% endif %}
                             {% if versions|length > 0 %}
                                 {% for version in versions %}
-                                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': version, 'isVersion': true} %}
+                                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': version, 'isVersion': true} only %}
                                 {% endfor %}
                             {% endif %}
                             {% if arguments|length > 0 %}

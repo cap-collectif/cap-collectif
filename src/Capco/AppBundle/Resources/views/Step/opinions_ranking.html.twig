@@ -42,7 +42,7 @@
         {% if opinions | length > 0 %}
             <ul class="media-list  opinion__list">
                 {% for opinion in opinions %}
-                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'showRanking': true, 'opinionTerm': project.opinionTerm} %}
+                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'showRanking': true, 'opinionTerm': project.opinionTerm} only %}
                 {% endfor %}
             </ul>
         {% endif %}

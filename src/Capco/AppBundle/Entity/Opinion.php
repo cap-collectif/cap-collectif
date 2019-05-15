@@ -69,6 +69,11 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     protected $position;
 
     /**
+     * @ORM\Column(name="versions_count", type="integer")
+     */
+    protected $versionsCount = 0;
+
+    /**
      * @ORM\Column(name="sources_count", type="integer")
      */
     protected $sourcesCount = 0;
@@ -192,6 +197,18 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
+    }
+
+    public function getVersionsCount(): int
+    {
+        return $this->versionsCount;
+    }
+
+    public function setVersionsCount(int $versionsCount): self
+    {
+        $this->versionsCount = $versionsCount;
+
+        return $this;
     }
 
     public function getSourcesCount(): int
