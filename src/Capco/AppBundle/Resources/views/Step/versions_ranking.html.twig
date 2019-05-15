@@ -41,7 +41,7 @@
         {% if versions | length > 0 %}
             <ul class="media-list  opinion__list">
                 {% for version in versions %}
-                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': version, 'isVersion': true, 'showRanking': true} only %}
+                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': version, 'isVersion': true, 'showRanking': true} %}
                 {% endfor %}
             </ul>
         {% endif %}

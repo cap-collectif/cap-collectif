@@ -23,12 +23,10 @@ class RemindUserAccountConfirmationCommand extends ContainerAwareCommand
         $em = $container->get('doctrine')->getManager();
         $notifier = $container->get(UserNotifier::class);
         $logger = $container->get('logger');
-        $userRepository = $container->get(UserRepository::class);
 
-        $userIds = $userRepository->findNotEmailConfirmedUserIdsSince24Hours();
+        $users = $container->get(UserRepository::class)->findNotEmailConfirmedUsersSince24Hours();
 
-        foreach ($userIds as $id) {
-            $user = $userRepository->find($id);
+        foreach ($users as $user) {
             $email = $user->getEmail();
             if ($email && filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $notifier->remingAccountConfirmation($user);
@@ -43,6 +41,6 @@ class RemindUserAccountConfirmationCommand extends ContainerAwareCommand
             $em->flush();
         }
 
-        $output->writeln(sprintf('%d user(s) reminded.', \count($userIds)));
+        $output->writeln(sprintf('%d user(s) reminded.', \count($users)));
     }
 }
