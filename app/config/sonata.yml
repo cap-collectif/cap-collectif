@@ -274,10 +274,13 @@ sonata_media:
       create: true
 
 sonata_user:
+  # Why is this enabled ?
   security_acl: true
+  # Entity Classes
   class:
     user: Capco\UserBundle\Entity\User
     group: Capco\UserBundle\Entity\Group
+  # Admin Classes
   admin:
     user:
       class: Capco\AdminBundle\Admin\UserAdmin

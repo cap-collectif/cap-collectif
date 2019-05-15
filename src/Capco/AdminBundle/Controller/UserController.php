@@ -7,25 +7,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sonata\AdminBundle\Controller\CRUDController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-class UserController extends Controller
+/**
+ * @Security("has_role('ROLE_ADMIN')")
+ */
+class UserController extends CRUDController
 {
-    /**
-     * @Security("has_role('ROLE_ADMIN')")
-     *
-     * Edit action.
-     *
-     * @throws AccessDeniedException If access is not granted
-     */
     public function editAction($id = null): Response
     {
-        $object = $this->get(UserRepository::class)->findOneBySlug($id);
+        $object = $this->get(UserRepository::class)->find($id);
 
         if (!$object) {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException(
+                'The user corresponding to this id doesn\'t exist.'
+            );
         }
 
         return $this->renderWithExtraParams(

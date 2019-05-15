@@ -19,7 +19,7 @@ class UserIsGrantedResolver
 
     public function isGranted(
         $user,
-        $userRequest = null,
+        $viewer = null,
         \ArrayObject $context = null,
         array $roleRequest = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']
     ): bool {
@@ -44,8 +44,8 @@ class UserIsGrantedResolver
             }
         }
 
-        if ($userRequest && $userRequest instanceof User) {
-            if ($user->hasRole('ROLE_USER') && $user->getId() === $userRequest->getId()) {
+        if ($viewer && $viewer instanceof User) {
+            if ($user->hasRole('ROLE_USER') && $user->getId() === $viewer->getId()) {
                 return true;
             }
 
@@ -67,7 +67,7 @@ class UserIsGrantedResolver
         return false;
     }
 
-    public function isViewer($user, $userRequest = null): bool
+    public function isViewer($user, $viewer = null): bool
     {
         if (!$user instanceof User) {
             return false;
@@ -77,8 +77,8 @@ class UserIsGrantedResolver
             return false;
         }
 
-        if ($userRequest && $userRequest instanceof User) {
-            if ($user->hasRole('ROLE_USER') && $user->getId() === $userRequest->getId()) {
+        if ($viewer && $viewer instanceof User) {
+            if ($user->hasRole('ROLE_USER') && $user->getId() === $viewer->getId()) {
                 return true;
             }
 
