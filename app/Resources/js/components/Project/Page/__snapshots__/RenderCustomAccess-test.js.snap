@@ -1,50 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RenderCustomAccess /> should render correctly 1`] = `
-<div>
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    overlay={
-      <Tooltip
-        bsClass="tooltip"
-        id="tooltip"
-        placement="right"
-      >
-        <FormattedMessage
-          id="only-visible-by"
-          values={
-            Object {
-              "num": 15,
-            }
-          }
-        />
-      </Tooltip>
-    }
-    placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
-    }
+<Fragment>
+  <Tag
+    as="button"
+    icon="cap cap-lock-2 mr-1"
+    onClick={[Function]}
   >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="link"
-      disabled={false}
-      onClick={[Function]}
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      overlay={
+        <Tooltip
+          bsClass="tooltip"
+          id="tooltip"
+          placement="right"
+        >
+          <FormattedMessage
+            id="only-visible-by"
+            values={
+              Object {
+                "num": 15,
+              }
+            }
+          />
+        </Tooltip>
+      }
+      placement="top"
+      trigger={
+        Array [
+          "hover",
+          "focus",
+        ]
+      }
     >
-      <i
-        className="cap cap-lock-2 mr-1"
-      />
       <FormattedMessage
         id="restrictedaccess"
         values={Object {}}
       />
-    </Button>
-  </OverlayTrigger>
+    </OverlayTrigger>
+  </Tag>
   <div>
     <ForwardRef(Relay(InjectIntl(UserGroupModal)))
       handleClose={[Function]}
@@ -60,5 +54,5 @@ exports[`<RenderCustomAccess /> should render correctly 1`] = `
       show={false}
     />
   </div>
-</div>
+</Fragment>
 `;
