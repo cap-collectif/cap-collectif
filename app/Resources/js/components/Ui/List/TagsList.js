@@ -1,34 +1,49 @@
 // @flow
-import * as React from 'react';
 import styled from 'styled-components';
 
-const TagsListWrapper = styled.div`
-  padding: 0;
-  margin: 0;
-`;
+const TagsList = styled.div.attrs({
+  className: 'ellipsis',
+})`
+  font-size: 14px;
 
-const TagsListItem = styled.div`
-  & + & {
-    margin-top: 1px;
+  .tags-list__tag {
+    padding: 5px 0 0 5px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:first-child {
+      padding: 0 0 0 5px;
+    }
+
+    .cap {
+      padding-right: 5px;
+    }
+
+    button {
+      padding: 0;
+      margin: 0;
+      color: inherit;
+
+      &:hover {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+      }
+    }
+  }
+
+  a.tags-list__tag {
+    &:not(:hover) {
+      color: inherit;
+    }
+
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
   }
 `;
-
-type Props = {
-  children: any,
-};
-
-export class TagsList extends React.Component<Props> {
-  render() {
-    const { children, ...rest } = this.props;
-
-    return (
-      <TagsListWrapper className="tags-list ellipsis" {...rest}>
-        {children.map((child, index) => (
-          <TagsListItem key={index}>{child}</TagsListItem>
-        ))}
-      </TagsListWrapper>
-    );
-  }
-}
 
 export default TagsList;

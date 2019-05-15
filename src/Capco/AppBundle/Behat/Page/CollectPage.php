@@ -27,9 +27,26 @@ class CollectPage extends Page
         'type of follow proposal' => '.proposal__follow',
         'my votes' => '.widget__button.navbar-btn.pull-right.btn.btn-default',
         'restricted-access' => '#restricted-access',
-        'restricted-access-link' => '#restricted-access > button',
+        'restricted-access-link' => '#restricted-access > div > button',
         'restricted-group-link' => ' > button',
     ];
+
+    /**
+     * Overload to verify if we're on an expected page. Throw an exception otherwise.
+     */
+    public function verifyPage()
+    {
+        if (
+            !$this->getSession()->wait(
+                10000,
+                "window.jQuery && $('#ProposalStepPage-rendered').length > 0"
+            )
+        ) {
+            throw new \RuntimeException(
+                'CollectPage did not fully load, check selector in "verifyPage".'
+            );
+        }
+    }
 
     public function sortByDate()
     {

@@ -134,7 +134,6 @@ trait ProposalStepsTrait
     public function iGoToAnOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepOpenParams);
-        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -143,7 +142,6 @@ trait ProposalStepsTrait
     public function iGoToANotifiableOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepNotifiable);
-        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -152,7 +150,6 @@ trait ProposalStepsTrait
     public function iGoToASelectionStep()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepOpenParams);
-        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -161,7 +158,6 @@ trait ProposalStepsTrait
     public function iGoToAPrivateOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepOpenPrivateParams);
-        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -170,7 +166,6 @@ trait ProposalStepsTrait
     public function iGoToAClosedCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepClosedParams);
-        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -179,7 +174,6 @@ trait ProposalStepsTrait
     public function iGoToAProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithSimpleVoteParams);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -188,7 +182,6 @@ trait ProposalStepsTrait
     public function iGoToAProposalMadeByMSantoStefano()
     {
         $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -197,7 +190,6 @@ trait ProposalStepsTrait
     public function iGoToAProposalWithLotOfComments()
     {
         $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano, false);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -206,7 +198,6 @@ trait ProposalStepsTrait
     public function iGoToAProposalFollowedByUser()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithOneFollower);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -215,7 +206,6 @@ trait ProposalStepsTrait
     public function iGoToAProposalMadeByUser()
     {
         $this->visitPageWithParams('proposal page', self::$proposalsByUserTest);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -224,7 +214,6 @@ trait ProposalStepsTrait
     public function iGoToACommentNotifiableProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalCommentNotifiable);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -242,7 +231,6 @@ trait ProposalStepsTrait
     public function iGoToANotifiableProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalNotifiable);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -251,7 +239,6 @@ trait ProposalStepsTrait
     public function iGoToANotifiableProposalOfMine()
     {
         $this->visitPageWithParams('proposal page', self::$proposalNotifiableOfMine);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -260,7 +247,6 @@ trait ProposalStepsTrait
     public function iGoToANotNotifiableProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalNotNotifiable);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -269,7 +255,6 @@ trait ProposalStepsTrait
     public function iGoToAProposalNotYetVotable()
     {
         $this->visitPageWithParams('proposal page', self::$proposalNotYetVotable);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -278,7 +263,6 @@ trait ProposalStepsTrait
     public function iGoToAProposalNotVotableAnymore()
     {
         $this->visitPageWithParams('proposal page', self::$proposalNotVotableAnymore);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -720,7 +704,6 @@ trait ProposalStepsTrait
     public function iGoToASelectionStepWithSimpleVoteEnabled()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepWithSimpleVoteParams);
-        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -729,7 +712,6 @@ trait ProposalStepsTrait
     public function iGoToASelectionStepWithBudgetVoteEnabled()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepWithBudgetVoteParams);
-        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -741,7 +723,6 @@ trait ProposalStepsTrait
             'selection page',
             self::$selectionStepWithBudgetVoteLimitedParams
         );
-        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -750,7 +731,6 @@ trait ProposalStepsTrait
     public function iGoToASelectionStepNotYetOpen()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepNotYetOpen);
-        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -759,7 +739,6 @@ trait ProposalStepsTrait
     public function iGoToAClosedSelectionStep()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepClosed);
-        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -768,7 +747,6 @@ trait ProposalStepsTrait
     public function iGoToAProposalWithBudgetVoteEnabled()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithBudgetVoteParams);
-        $this->iWaitUntilProposalPageFullyLoaded();
     }
 
     /**
@@ -777,7 +755,6 @@ trait ProposalStepsTrait
     public function iGoBPWithVoteRankingPage()
     {
         $this->visitPageWithParams('collect page', self::$bpVoteClassement);
-        $this->iWaitUntilProposalStepHasFullyLoaded();
     }
 
     /**
@@ -1459,17 +1436,6 @@ trait ProposalStepsTrait
 
     // ********************************* Proposals *********************************************
 
-    /**
-     * @When I wait proposal step page to fully load
-     */
-    public function iWaitUntilProposalStepHasFullyLoaded()
-    {
-        $this->waitAndThrowOnFailure(
-            5000,
-            "window.jQuery && $('#ProposalStepPage-rendered').length > 0"
-        );
-    }
-
     protected function openCollectStepIsOpen()
     {
         return $this->navigationContext
@@ -1681,10 +1647,5 @@ trait ProposalStepsTrait
             ->getPage('proposal page')
             ->getLastSelector('follower');
         $this->assertElementNotOnPage($lastFollowerSelector);
-    }
-
-    private function iWaitUntilProposalPageFullyLoaded()
-    {
-        $this->waitAndThrowOnFailure(5000, "$('#ProposalPageContent').length > 0");
     }
 }
