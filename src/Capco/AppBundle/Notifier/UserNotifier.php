@@ -80,15 +80,8 @@ final class UserNotifier extends BaseNotifier
                 $user->getNewEmailToConfirm()
             )
         );
-
         $this->mailer->sendMessage(
-            UserConfirmEmailChangedMessage::create(
-                $user,
-                $user->getUpdatedAt(),
-                $this->siteParams->getValue('global.site.fullname'),
-                $this->baseUrl,
-                $user->getEmail()
-            )
+            UserConfirmEmailChangedMessage::create($user, $user->getEmail())
         );
     }
 

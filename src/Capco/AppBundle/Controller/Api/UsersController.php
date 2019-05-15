@@ -13,7 +13,6 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -188,14 +187,7 @@ class UsersController extends FOSRestController
         }
 
         if ($user->getNewEmailToConfirm()) {
-            $this->get('swarrot.publisher')->publish(
-                'user.email',
-                new Message(
-                    json_encode([
-                        'userId' => $user->getId(),
-                    ])
-                )
-            );
+            $this->get(UserNotifier::class)->newEmailConfirmation($user);
         } else {
             $this->get(FOSNotifier::class)->sendConfirmationEmailMessage($user);
         }
@@ -356,16 +348,9 @@ class UsersController extends FOSRestController
         // We generate a confirmation token to validate the new email
         $token = $this->get('fos_user.util.token_generator')->generateToken();
 
-        $this->get('swarrot.publisher')->publish(
-            'user.email',
-            new Message(
-                json_encode([
-                    'userId' => $user->getId(),
-                ])
-            )
-        );
-
         $user->setNewEmailConfirmationToken($token);
+        $this->get(UserNotifier::class)->newEmailConfirmation($user);
+
         $this->getDoctrine()
             ->getManager()
             ->flush();

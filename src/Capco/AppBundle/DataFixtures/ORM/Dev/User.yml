@@ -310,7 +310,6 @@ Capco\UserBundle\Entity\User:
     newEmailConfirmationToken: check-my-new-email-token
     enabled: true
     createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2016-01-01'))>
 
   user516:
     id: 'user516'

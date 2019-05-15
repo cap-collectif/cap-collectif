@@ -113,9 +113,3 @@
       bindings:
         - exchange: capco_direct_exchange
           routing_key: user_password
-    user_email:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: user_email
