@@ -286,7 +286,7 @@
         "storybook-addon-intl": "^2.3.1",
         "style-loader": "^0.23.1",
         "styled-components": "^3.4.10",
-        "styled-spinkit": "^0.6.1",
+        "styled-spinkit": "https://github.com/cap-collectif/styled-spinkit.git",
         "tar": "^4.4.8",
         "terser-webpack-plugin": "^1.2.3",
         "uglifyjs-3-webpack-plugin": "^1.2.4",
