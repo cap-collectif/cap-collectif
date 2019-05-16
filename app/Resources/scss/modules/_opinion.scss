@@ -158,15 +158,24 @@
             margin-top: 11px;
         }
 
+        .opinion__votes-button {
+            display: inline-block;
+        }
+
         .opinion__votes-nb {
             display: inline-block;
             vertical-align: middle;
-            padding: 1px 6px;
+            color: $dark-gray;
+            padding: 1px 6px 1px 8px;
             border: 1px solid $dark-gray;
+            border-left: 0;
             font-size: 12px;
             line-height: 1.5;
             border-radius: 3px;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
             margin-right: 4px;
+            transform: translateX(-2px);
         }
     }
 
@@ -499,14 +508,26 @@
 
 #opinion__arguments--FOR,
 #opinion__arguments--SIMPLE {
+    .panel-heading {
+        min-height: 55px;
+        background-color: $success-color;
+    }
+
     .opinion__header__title {
-        color: $success-color;
+        color: $white;
+        font-weight: bold;
     }
 }
 
 #opinion__arguments--AGAINST {
+    .panel-heading {
+        min-height: 55px;
+        background-color: $brand-danger;
+    }
+
     .opinion__header__title {
-        color: $brand-danger;
+        color: $white;
+        font-weight: bold;
     }
 }
 

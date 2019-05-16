@@ -30,12 +30,14 @@ export class Opinion extends React.Component<Props> {
           <OpinionPreview opinion={opinion} showUpdatedDate={showUpdatedDate} />
         </Media>
         {opinion.votes && opinion.votes.totalCount > 0 ? (
-          /* $FlowFixMe */
-          <VotePiechart
-            ok={opinion.votesOk.totalCount}
-            nok={opinion.votesNok.totalCount}
-            mitige={opinion.votesMitige.totalCount}
-          />
+          <div className="hidden-xs">
+            {/* $FlowFixMe */}
+            <VotePiechart
+              ok={opinion.votesOk.totalCount}
+              nok={opinion.votesNok.totalCount}
+              mitige={opinion.votesMitige.totalCount}
+            />
+          </div>
         ) : null}
       </ListGroupItem>
     );

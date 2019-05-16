@@ -41,9 +41,12 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
   };
 
   renderFilter = () => {
-    if (this.props.opinion.allVersions.totalCount > 1) {
+    const { opinion } = this.props;
+    const { order } = this.state;
+
+    if (opinion.allVersions.totalCount > 1) {
       return (
-        <form>
+        <form className="form-inline">
           <label htmlFor="filter-opinion-version" className="control-label sr-only">
             <FormattedMessage id="opinion.version.filter" />
           </label>
@@ -51,24 +54,24 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
             id="filter-opinion-version"
             ref="filter"
             className="form-control pull-right"
-            value={this.state.order}
+            value={order}
             onBlur={() => this.updateSelectedValue()}>
             <FormattedMessage id="global.filter_random">
               {(message: string) => <option value="random">{message}</option>}
             </FormattedMessage>
-            <FormattedMessage id="global.filter_last">
+            <FormattedMessage id="opinion.sort.last">
               {(message: string) => <option value="last">{message}</option>}
             </FormattedMessage>
-            <FormattedMessage id="global.filter_old">
+            <FormattedMessage id="opinion.sort.old">
               {(message: string) => <option value="old">{message}</option>}
             </FormattedMessage>
-            <FormattedMessage id="global.filter_favorable">
+            <FormattedMessage id="opinion.sort.favorable">
               {(message: string) => <option value="favorable">{message}</option>}
             </FormattedMessage>
-            <FormattedMessage id="global.filter_votes">
+            <FormattedMessage id="opinion.sort.votes">
               {(message: string) => <option value="votes">{message}</option>}
             </FormattedMessage>
-            <FormattedMessage id="global.filter_comments">
+            <FormattedMessage id="opinion.sort.comments">
               {(message: string) => <option value="comments">{message}</option>}
             </FormattedMessage>
           </select>

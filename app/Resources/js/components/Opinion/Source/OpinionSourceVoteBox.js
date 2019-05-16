@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Button } from 'react-bootstrap';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
 import type { OpinionSourceVoteBox_source } from '~relay/OpinionSourceVoteBox_source.graphql';
 
@@ -14,16 +13,14 @@ class OpinionSourceVoteBox extends React.Component<Props> {
     const { source } = this.props;
     return (
       <span>
-        <form style={{ display: 'inline-block' }}>
+        <form className="opinion__votes-button">
           {/* $FlowFixMe */}
           <OpinionSourceVoteButton
             source={source}
             disabled={!source.contribuable || source.author.isViewer}
           />
-        </form>{' '}
-        <Button className="btn--outline btn-dark-gray btn-xs opinion__votes-nb">
-          {source.votes ? source.votes.totalCount : 0}
-        </Button>
+        </form>
+        <span className="opinion__votes-nb">{source.votes ? source.votes.totalCount : 0}</span>
       </span>
     );
   }

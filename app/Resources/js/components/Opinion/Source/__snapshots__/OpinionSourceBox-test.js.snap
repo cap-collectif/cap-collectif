@@ -160,11 +160,36 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
           sm={6}
           xs={12}
         >
-          <InjectIntl(Filter)
-            onChange={[Function]}
-            show={true}
-            value="last"
-          />
+          <form
+            className="form-inline"
+          >
+            <select
+              className="form-control pull-right"
+              id="filter-opinion-source"
+              onBlur={[Function]}
+              onChange={[Function]}
+              value="last"
+            >
+              <FormattedMessage
+                id="argument.sort.popularity"
+                values={Object {}}
+              >
+                <Component />
+              </FormattedMessage>
+              <FormattedMessage
+                id="step.sort.last"
+                values={Object {}}
+              >
+                <Component />
+              </FormattedMessage>
+              <FormattedMessage
+                id="step.sort.old"
+                values={Object {}}
+              >
+                <Component />
+              </FormattedMessage>
+            </select>
+          </form>
         </Col>
       </Row>
     </PanelHeading>

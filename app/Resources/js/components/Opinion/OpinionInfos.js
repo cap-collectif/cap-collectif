@@ -76,7 +76,7 @@ class OpinionInfos extends React.Component<Props> {
     );
 
     return (
-      <span className="excerpt">
+      <span className="excerpt small">
         {' • '}
         <OverlayTrigger placement="top" overlay={OpinionUpdatedTooltip}>
           <span>

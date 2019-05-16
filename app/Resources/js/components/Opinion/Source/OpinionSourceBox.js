@@ -12,7 +12,6 @@ import OpinionSourceListView from './OpinionSourceListView';
 import OpinionSourceAdd from './OpinionSourceAdd';
 import OpinionSource from './OpinionSource';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import Filter from '../../Utils/Filter';
 import type { OpinionSourceBox_sourceable } from '~relay/OpinionSourceBox_sourceable.graphql';
 import ListGroup from '../../Ui/List/ListGroup';
 
@@ -77,8 +76,25 @@ export class OpinionSourceBox extends React.Component<Props, State> {
               </Col>
               {totalCount > 1 && (
                 <Col xs={12} sm={6} md={6}>
-                  {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-                  <Filter show value={order} onChange={this.handleFilterChange} />
+                  <form className="form-inline">
+                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                    <select
+                      id="filter-opinion-source"
+                      className="form-control pull-right"
+                      value={order}
+                      onChange={this.handleFilterChange}
+                      onBlur={this.handleFilterChange}>
+                      <FormattedMessage id="argument.sort.popularity">
+                        {(message: string) => <option value="popular">{message}</option>}
+                      </FormattedMessage>
+                      <FormattedMessage id="step.sort.last">
+                        {(message: string) => <option value="last">{message}</option>}
+                      </FormattedMessage>
+                      <FormattedMessage id="step.sort.old">
+                        {(message: string) => <option value="old">{message}</option>}
+                      </FormattedMessage>
+                    </select>
+                  </form>
                 </Col>
               )}
             </Row>

@@ -5,6 +5,7 @@ export const opinionVersion = {
   url: 'https://ui.cap-collectif.com/',
   title: 'Opinion version',
   user: author,
+  trashedStatus: '',
   createdAt: '3 janvier 2015',
   publishedAt: '3 janvier 2015',
   published: true,
@@ -15,6 +16,10 @@ export const opinionVersion = {
   votesMitige: { totalCount: 1 },
   votesNok: { totalCount: 1 },
   votesOk: { totalCount: 2 },
+  related: {
+    url: 'https://ui.cap-collectif.com/',
+    title: 'Opinion XXX',
+  },
 };
 
 export const opinionVersions = [
@@ -28,6 +33,7 @@ export const opinionVersions = [
   { ...opinionVersion, updatedAt: '15 mars 2018', ranking: 'Label' },
   { ...opinionVersion, updatedAt: '15 mars 2018', pinned: true, ranking: 'Label' },
   { ...opinionVersion, votes: { totalCount: 0 } },
+  { ...opinionVersion, trashedStatus: 'INVISIBLE' },
   { ...opinionVersion, published: false },
   { ...opinionVersion, user: null },
 ];

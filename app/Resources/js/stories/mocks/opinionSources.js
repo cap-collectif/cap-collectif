@@ -9,6 +9,10 @@ export const opinionSource = {
   publishedAt: ' • 1 mars 2016',
   title: 'Source title',
   category: 'Politique',
+  related: {
+    url: 'https://ui.cap-collectif.com/',
+    title: 'Opinion XXX',
+  },
   body:
     'In placeat reiciendis ut. Officiis praesentium quia minima ut tenetur officiis. Eaque fugit voluptates temporibus suscipit provident culpa culpa. Magni recusandae dolorem aut id.',
   votes: { totalCount: 2 },

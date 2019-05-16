@@ -35,6 +35,7 @@ export class ArgumentListProfile extends Component<Props, State> {
 
   render() {
     const { argumentList, relay } = this.props;
+    const { loading } = this.state;
 
     return (
       <ListGroup bsClass="media-list">
@@ -49,11 +50,11 @@ export class ArgumentListProfile extends Component<Props, State> {
               <ArgumentItem key={argument.id} argument={argument} isProfile />
             ))}
         {relay.hasMore() && (
-          <ListGroupItem style={{ textAlign: 'center' }}>
-            {this.state.loading ? (
-              <Loader />
+          <ListGroupItem>
+            {loading ? (
+              <Loader size={25} inline />
             ) : (
-              <Button bsStyle="link" onClick={this.handleLoadMore}>
+              <Button block bsStyle="link" onClick={this.handleLoadMore}>
                 <FormattedMessage id="global.more" />
               </Button>
             )}

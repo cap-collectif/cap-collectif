@@ -27,7 +27,7 @@ class OpinionVersionListViewPaginated extends React.Component<Props, State> {
     const { edges } = opinion.versions;
     if (!edges || edges.length === 0) {
       return (
-        <Panel.Body className="text-center">
+        <Panel.Body className="text-center excerpt">
           <i className="cap-32 cap-baloon-1" />
           <br />
           <FormattedMessage id="opinion.no_new_version" />
@@ -46,11 +46,12 @@ class OpinionVersionListViewPaginated extends React.Component<Props, State> {
             <OpinionVersion key={version.id} version={version} />
           ))}
         {relay.hasMore() && (
-          <ListGroupItem className="text-center">
+          <ListGroupItem>
             {loading ? (
-              <Loader />
+              <Loader size={25} inline />
             ) : (
               <Button
+                block
                 bsStyle="link"
                 onClick={() => {
                   this.setState({ loading: true });
@@ -58,7 +59,7 @@ class OpinionVersionListViewPaginated extends React.Component<Props, State> {
                     this.setState({ loading: false });
                   });
                 }}>
-                <FormattedMessage id="global.more" />
+                <FormattedMessage id="see-more-amendments" />
               </Button>
             )}
           </ListGroupItem>

@@ -25,7 +25,7 @@ export class UnpublishedLabel extends React.Component<Props> {
         <Popover
           id={`publishable-${publishable.id}-not-accounted-popover`}
           title={
-            <strong>
+            <strong className="excerpt_dark">
               <FormattedMessage id="account-pending-confirmation" />
             </strong>
           }>
@@ -56,7 +56,7 @@ export class UnpublishedLabel extends React.Component<Props> {
         <Popover
           id={`publishable-${publishable.id}-not-accounted-popover`}
           title={
-            <strong>
+            <strong className="excerpt_dark">
               <FormattedMessage id="account-not-confirmed-in-time" />
             </strong>
           }>
@@ -69,7 +69,7 @@ export class UnpublishedLabel extends React.Component<Props> {
         <Popover
           id={`publishable-${publishable.id}-not-accounted-popover`}
           title={
-            <strong>
+            <strong className="excerpt_dark">
               <FormattedMessage id="account-confirmed-too-late" />
             </strong>
           }>

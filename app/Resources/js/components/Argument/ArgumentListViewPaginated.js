@@ -2,7 +2,7 @@
 import * as React from 'react';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Button, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { ArgumentListViewPaginated_argumentable } from '~relay/ArgumentListViewPaginated_argumentable.graphql';
@@ -12,6 +12,7 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 type Props = {
   relay: RelayPaginationProp,
   argumentable: ArgumentListViewPaginated_argumentable,
+  type: 'FOR' | 'AGAINST' | 'SIMPLE',
 };
 
 type State = {
@@ -26,10 +27,19 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
   };
 
   render() {
-    const { argumentable, relay } = this.props;
+    const { argumentable, relay, type } = this.props;
+    const { loading } = this.state;
+
     if (!argumentable.arguments.edges || argumentable.arguments.edges.length === 0) {
-      return null;
+      return (
+        <Panel.Body className="text-center excerpt">
+          <i className="cap-32 cap-baloon-1" />
+          <br />
+          <FormattedMessage id={`no-argument-${type.toLowerCase()}`} />
+        </Panel.Body>
+      );
     }
+
     return (
       <ListGroup>
         {argumentable.arguments.edges
@@ -41,11 +51,12 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
             <ArgumentItem key={argument.id} argument={argument} />
           ))}
         {relay.hasMore() && (
-          <ListGroupItem className="text-center">
-            {this.state.loading ? (
-              <Loader />
+          <ListGroupItem>
+            {loading ? (
+              <Loader size={25} inline />
             ) : (
               <Button
+                block
                 bsStyle="link"
                 onClick={() => {
                   this.setState({ loading: true });
@@ -53,7 +64,7 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
                     this.setState({ loading: false });
                   });
                 }}>
-                <FormattedMessage id="global.more" />
+                <FormattedMessage id={`see-more-arguments-${type.toLowerCase()}`} />
               </Button>
             )}
           </ListGroupItem>

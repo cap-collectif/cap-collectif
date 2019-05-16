@@ -37,6 +37,10 @@ export const Container = styled.div.attrs({
     margin-top: 15px;
   }
 
+  form + button {
+    margin-left: 5px;
+  }
+
   .m-0 {
     margin-top: 0 !important;
   }

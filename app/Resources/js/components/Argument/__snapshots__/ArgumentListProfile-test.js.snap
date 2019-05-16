@@ -60,15 +60,10 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 1`] = `
   <ListGroupItem
     bsClass="list-group-item"
     listItem={false}
-    style={
-      Object {
-        "textAlign": "center",
-      }
-    }
   >
     <Button
       active={false}
-      block={false}
+      block={true}
       bsClass="btn"
       bsStyle="link"
       disabled={false}

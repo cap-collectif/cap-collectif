@@ -3,7 +3,7 @@
 exports[`<OpinionSource /> should render a li bordered 1`] = `
 <ListGroupItem
   bsClass="list-group-item"
-  className="list-group-item__opinion  bg-vip"
+  className="opinion list-group-item__opinion  bg-vip"
   id="source-1"
   listItem={false}
 >
@@ -28,8 +28,26 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
     </MediaLeft>
     <MediaBody
       bsClass="media-body"
+      className="opinion__body"
       componentClass="div"
     >
+      <ForwardRef(Relay(OpinionInfos))
+        opinion={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "author1",
+              "id": "author1",
+              "media": null,
+              "url": "https://capco/dev/profile/author1",
+              "vip": true,
+            },
+            "id": "1",
+          }
+        }
+        rankingThreshold={null}
+      />
       <ForwardRef(Relay(TrashedMessage))
         contribution={
           Object {
@@ -46,23 +64,6 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
           }
         }
       >
-        <ForwardRef(Relay(OpinionInfos))
-          opinion={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "author1",
-                "id": "author1",
-                "media": null,
-                "url": "https://capco/dev/profile/author1",
-                "vip": true,
-              },
-              "id": "1",
-            }
-          }
-          rankingThreshold={null}
-        />
         <ForwardRef(Relay(OpinionSourceTitle))
           source={
             Object {
@@ -95,34 +96,34 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
             }
           }
         />
-        <div
-          className="small"
-        >
-          <ForwardRef(Relay(Connect(OpinionSourceButtons)))
-            source={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "author1",
-                  "id": "author1",
-                  "media": null,
-                  "url": "https://capco/dev/profile/author1",
-                  "vip": true,
-                },
-                "id": "1",
-              }
-            }
-            sourceable={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "id": "sourceableId",
-              }
-            }
-          />
-        </div>
       </ForwardRef(Relay(TrashedMessage))>
+      <div
+        className="small"
+      >
+        <ForwardRef(Relay(Connect(OpinionSourceButtons)))
+          source={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "author1",
+                "id": "author1",
+                "media": null,
+                "url": "https://capco/dev/profile/author1",
+                "vip": true,
+              },
+              "id": "1",
+            }
+          }
+          sourceable={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "sourceableId",
+            }
+          }
+        />
+      </div>
     </MediaBody>
   </Media>
 </ListGroupItem>
@@ -131,7 +132,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
 exports[`<OpinionSource /> should render a white li if not vip 1`] = `
 <ListGroupItem
   bsClass="list-group-item"
-  className="list-group-item__opinion "
+  className="opinion list-group-item__opinion "
   id="source-1"
   listItem={false}
 >
@@ -156,8 +157,26 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
     </MediaLeft>
     <MediaBody
       bsClass="media-body"
+      className="opinion__body"
       componentClass="div"
     >
+      <ForwardRef(Relay(OpinionInfos))
+        opinion={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "author1",
+              "id": "author1",
+              "media": null,
+              "url": "https://capco/dev/profile/author1",
+              "vip": false,
+            },
+            "id": "1",
+          }
+        }
+        rankingThreshold={null}
+      />
       <ForwardRef(Relay(TrashedMessage))
         contribution={
           Object {
@@ -174,23 +193,6 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
           }
         }
       >
-        <ForwardRef(Relay(OpinionInfos))
-          opinion={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "author1",
-                "id": "author1",
-                "media": null,
-                "url": "https://capco/dev/profile/author1",
-                "vip": false,
-              },
-              "id": "1",
-            }
-          }
-          rankingThreshold={null}
-        />
         <ForwardRef(Relay(OpinionSourceTitle))
           source={
             Object {
@@ -223,34 +225,34 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
             }
           }
         />
-        <div
-          className="small"
-        >
-          <ForwardRef(Relay(Connect(OpinionSourceButtons)))
-            source={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "author1",
-                  "id": "author1",
-                  "media": null,
-                  "url": "https://capco/dev/profile/author1",
-                  "vip": false,
-                },
-                "id": "1",
-              }
-            }
-            sourceable={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "id": "sourceableId",
-              }
-            }
-          />
-        </div>
       </ForwardRef(Relay(TrashedMessage))>
+      <div
+        className="small"
+      >
+        <ForwardRef(Relay(Connect(OpinionSourceButtons)))
+          source={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "author1",
+                "id": "author1",
+                "media": null,
+                "url": "https://capco/dev/profile/author1",
+                "vip": false,
+              },
+              "id": "1",
+            }
+          }
+          sourceable={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "sourceableId",
+            }
+          }
+        />
+      </div>
     </MediaBody>
   </Media>
 </ListGroupItem>

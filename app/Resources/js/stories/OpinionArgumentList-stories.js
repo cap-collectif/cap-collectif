@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { boolean, select, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import {
   Button,
@@ -18,71 +18,72 @@ import ListGroup from '../components/Ui/List/ListGroup';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 import { opinionArguments as opinionArgumentsMock } from './mocks/opinionArguments';
 
-const OpinionArgumentItem = ({ item, argumentType, isProfile }) => (
+// eslint-disable-next-line react/prop-types
+const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
   <React.Fragment>
     <div className="opinion__body">
+      {isProfile && item.related && (
+        <p>
+          {'Lié à la proposition : '}
+          <a href={item.related.url}>{item.related.title}</a>
+        </p>
+      )}
       <UserAvatar user={item.user} className="pull-left" />
+
+      <div className="opinion__data">
+        <p className="h5 opinion__user">
+          {item.user && (
+            <a href="https://ui.cap-collectif.com" className="excerpt_dark">
+              {item.user.username}
+            </a>
+          )}
+          {!item.user && <span>Utilisateur supprimé</span>}
+          {isProfile && (
+            <Label bsStyle={argumentType === 'FOR' ? 'success' : 'danger'} className="label--right">
+              {argumentType === 'FOR' ? 'pour' : 'contre'}
+            </Label>
+          )}
+        </p>
+        <p className="excerpt opinion__date">{item.createdAt || item.publishedAt}</p>
+        {!item.published && (
+          <React.Fragment>
+            {' '}
+            <OverlayTrigger
+              placement="top"
+              overlay={
+                <Popover title={<strong>Compte en attente de confirmation</strong>}>
+                  <p>
+                    {
+                      'Votre opinion n’a pas été publié, car votre compte a été confirmé après la date de fin de l’étape.'
+                    }
+                  </p>
+                </Popover>
+              }>
+              <Label bsStyle="danger" className="ellipsis d-ib mw-100 mt-5">
+                <i className="cap cap-delete-2" /> Non comptabilisé
+              </Label>
+            </OverlayTrigger>
+          </React.Fragment>
+        )}
+      </div>
+      {typeLabel && <Label>{typeLabel}</Label>}
       {item.trashedStatus === 'INVISIBLE' ? (
         <div>[Contenu masqué]</div>
       ) : (
-        <div className="opinion__data">
-          <p className="h5 opinion__user">
-            {item.user && (
-              <a href="https://ui.cap-collectif.com" className="excerpt_dark">
-                {item.user.username}
-              </a>
-            )}
-            {!item.user && <span>Utilisateur supprimé</span>}
-            {isProfile && (
-              <Label
-                bsStyle={argumentType === 'FOR' ? 'success' : 'danger'}
-                className="label--right">
-                {argumentType === 'FOR' ? 'pour' : 'contre'}
-              </Label>
-            )}
-          </p>
-          <p className="excerpt opinion__date">{item.createdAt || item.publishedAt}</p>
-          {!item.published && (
-            <React.Fragment>
-              {' '}
-              <OverlayTrigger
-                placement="top"
-                overlay={
-                  <Popover title={<strong>Compte en attente de confirmation</strong>}>
-                    <p>
-                      {
-                        'Votre opinion n’a pas été publié, car votre compte a été confirmé après la date de fin de l’étape.'
-                      }
-                    </p>
-                  </Popover>
-                }>
-                <Label bsStyle="danger" className="ellipsis d-ib mw-100 mt-5">
-                  <i className="cap cap-delete-2" /> Non comptabilisé
-                </Label>
-              </OverlayTrigger>
-            </React.Fragment>
-          )}
-          {isProfile && item.related && (
-            <p>
-              {'Lié à la proposition : '}
-              <a href={item.related.url}>{item.related.title}</a>
-            </p>
-          )}
-        </div>
+        <p
+          className="opinion__text"
+          style={{
+            overflow: 'hidden',
+            float: 'left',
+            width: '100%',
+            wordWrap: 'break-word',
+          }}>
+          {item.body}
+        </p>
       )}
-      <p
-        className="opinion__text"
-        style={{
-          overflow: 'hidden',
-          float: 'left',
-          width: '100%',
-          wordWrap: 'break-word',
-        }}>
-        {item.body}
-      </p>
       <div>
         <span>
-          <form style={{ display: 'inline-block' }}>
+          <form className="opinion__votes-button">
             <Button
               disabled={!item.contribuable || (item.user && item.user.isViewer)}
               bsStyle={item.viewerHasVote ? 'danger' : 'success'}
@@ -97,7 +98,7 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile }) => (
                 </span>
               )}
             </Button>
-          </form>{' '}
+          </form>
           <span className="opinion__votes-nb">{item.votes.totalCount}</span>
         </span>
         {item.user && !item.user.isViewer && (
@@ -164,6 +165,7 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile }) => (
   </React.Fragment>
 );
 
+// eslint-disable-next-line react/prop-types
 const OpinionArgumentList = ({ section, isProfile, opinionArguments }) => (
   <div id={`opinion__arguments--${section.argumentType}`} className="block--tablet">
     {section.isLoading ? (
@@ -182,9 +184,9 @@ const OpinionArgumentList = ({ section, isProfile, opinionArguments }) => (
                 label={<span className="sr-only">Label</span>}
                 className="form-control pull-right"
                 onChange={() => {}}>
-                <option value="last">Récents</option>
-                <option value="old">Anciens</option>
-                <option value="popular">Populaire</option>
+                <option value="last">Les plus récents</option>
+                <option value="old">Les plus anciens</option>
+                <option value="popular">Les plus populaires</option>
               </Input>
             </div>
           )}
@@ -205,15 +207,16 @@ const OpinionArgumentList = ({ section, isProfile, opinionArguments }) => (
                     item={item}
                     isProfile={isProfile}
                     argumentType={section.argumentType}
+                    typeLabel={section.typeLabel}
                   />
                 </ListGroupItem>
               ))}
               {!section.isLoading && section.paginationEnable && (
                 <ListGroupItem className="text-center">
-                  {section.isLoadingMore && <Loader />}
+                  {section.isLoadingMore && <Loader size={25} inline />}
                   {!section.isLoadingMore && (
-                    <Button bsStyle="link" onClick={() => {}}>
-                      Voir plus
+                    <Button bsStyle="link" block onClick={() => {}}>
+                      {"Voir plus d'arguments"}
                     </Button>
                   )}
                 </ListGroupItem>
@@ -288,5 +291,23 @@ storiesOf('OpinionArgumentList', module)
 
     return (
       <OpinionArgumentList section={section} opinionArguments={opinionArgumentsMock} isProfile />
+    );
+  })
+  .add('in trash', () => {
+    const section = {
+      paginationEnable: boolean('Pagination enabled', true, 'Section'),
+      argumentType: select('Argument type', argumentTypes, 'FOR', 'Section'),
+      typeLabel: text('Type label', 'Dans la corbeille', 'Section'),
+      isLoading: boolean('Is loading', false, 'Section'),
+      isRefetching: boolean('Is refetching', false, 'Section'),
+      isLoadingMore: boolean('Is loading more', false, 'Section'),
+    };
+
+    return (
+      <OpinionArgumentList
+        section={section}
+        opinionArguments={opinionArgumentsMock}
+        isProfile={false}
+      />
     );
   });

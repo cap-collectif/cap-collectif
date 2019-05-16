@@ -12,11 +12,16 @@ type Props = {
   version: OpinionVersion_version,
   rankingThreshold: ?number,
   intl: IntlShape,
+  isProfile: boolean,
 };
 
 class OpinionVersion extends React.Component<Props> {
+  static defaultProps = {
+    isProfile: false,
+  };
+
   render() {
-    const { version, rankingThreshold, intl } = this.props;
+    const { version, rankingThreshold, isProfile, intl } = this.props;
 
     const data = [
       { name: intl.formatMessage({ id: 'vote.ok' }), value: version.votesOk.totalCount },
@@ -31,10 +36,16 @@ class OpinionVersion extends React.Component<Props> {
         }`}>
         <div>
           {/* $FlowFixMe */}
-          <OpinionPreview opinion={version} rankingThreshold={rankingThreshold} />
+          <OpinionPreview
+            opinion={version}
+            rankingThreshold={rankingThreshold}
+            isProfile={isProfile}
+          />
         </div>
         {version.votes && version.votes.totalCount > 0 ? (
-          <PieChart data={data} colors={colors.votes} />
+          <div className="hidden-xs">
+            <PieChart data={data} colors={colors.votes} />
+          </div>
         ) : null}
       </ListGroupItem>
     );

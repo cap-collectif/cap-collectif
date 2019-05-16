@@ -35,7 +35,8 @@ export class ArgumentList extends React.Component<Props, State> {
   };
 
   render() {
-    const { type, isAuthenticated } = this.props;
+    const { type, argumentable, isAuthenticated } = this.props;
+    const { order } = this.state;
     return (
       <div id={`opinion__arguments--${type}`} className="block--tablet">
         <QueryRenderer
@@ -68,7 +69,7 @@ export class ArgumentList extends React.Component<Props, State> {
           `}
           variables={{
             isAuthenticated,
-            argumentableId: this.props.argumentable.id,
+            argumentableId: argumentable.id,
             type: type === 'SIMPLE' ? 'FOR' : type,
           }}
           render={({ error, props }: { props?: ?ArgumentListQueryResponse } & ReadyState) => {
@@ -76,11 +77,10 @@ export class ArgumentList extends React.Component<Props, State> {
               return graphqlError;
             }
             if (props) {
-              const { argumentable } = props;
-              if (!argumentable || !argumentable.allArguments) {
+              if (!props.argumentable || !props.argumentable.allArguments) {
                 return graphqlError;
               }
-              const { totalCount } = argumentable.allArguments;
+              const { totalCount } = props.argumentable.allArguments;
               const htmlFor = `filter-arguments-${type}`;
               return (
                 <Panel className="panel--white panel-custom">
@@ -107,15 +107,15 @@ export class ArgumentList extends React.Component<Props, State> {
                           }
                           className="form-control pull-right"
                           type="select"
-                          value={this.state.order}
+                          value={order}
                           onChange={this.updateOrderBy}>
-                          <FormattedMessage id="global.filter_last">
+                          <FormattedMessage id="project.sort.last">
                             {(message: string) => <option value="last">{message}</option>}
                           </FormattedMessage>
-                          <FormattedMessage id="global.filter_old">
+                          <FormattedMessage id="opinion.sort.old">
                             {(message: string) => <option value="old">{message}</option>}
                           </FormattedMessage>
-                          <FormattedMessage id="global.filter_popular">
+                          <FormattedMessage id="argument.sort.popularity">
                             {(message: string) => <option value="popular">{message}</option>}
                           </FormattedMessage>
                         </Input>
@@ -123,7 +123,7 @@ export class ArgumentList extends React.Component<Props, State> {
                     ) : null}
                   </Panel.Heading>
                   {/* $FlowFixMe */}
-                  <ArgumentListView order={this.state.order} argumentable={argumentable} />
+                  <ArgumentListView order={order} argumentable={props.argumentable} type={type} />
                 </Panel>
               );
             }

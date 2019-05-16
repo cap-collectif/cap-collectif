@@ -23,12 +23,16 @@ export class OpinionVersionListView extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.order !== this.props.order) {
-      this._refetch(this.props.order);
+    const { order } = this.props;
+
+    if (prevProps.order !== order) {
+      this._refetch(order);
     }
   }
 
   _refetch = (newOrder: VersionOrder) => {
+    const { opinion, relay } = this.props;
+
     this.setState({ isRefetching: true });
 
     let direction = 'DESC';
@@ -64,13 +68,13 @@ export class OpinionVersionListView extends React.Component<Props, State> {
     };
 
     const refetchVariables = fragmentVariables => ({
-      opinionId: this.props.opinion.id,
+      opinionId: opinion.id,
       count: fragmentVariables.count,
       cursor: null,
       orderBy,
     });
 
-    this.props.relay.refetch(
+    relay.refetch(
       refetchVariables,
       null,
       () => {
@@ -82,8 +86,9 @@ export class OpinionVersionListView extends React.Component<Props, State> {
 
   render() {
     const { opinion } = this.props;
+    const { isRefetching } = this.state;
 
-    if (this.state.isRefetching) {
+    if (isRefetching) {
       return <Loader />;
     }
 

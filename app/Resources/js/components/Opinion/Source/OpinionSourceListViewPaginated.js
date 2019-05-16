@@ -27,7 +27,7 @@ class OpinionSourceListViewPaginated extends React.Component<Props, State> {
     const { loading } = this.state;
     if (!sourceable.sources.edges || sourceable.sources.edges.length === 0) {
       return (
-        <Panel.Body className="text-center">
+        <Panel.Body className="text-center excerpt">
           <i className="cap-32 cap-baloon-1" />
           <br />
           <FormattedMessage id="opinion.no_new_source" />
@@ -46,19 +46,20 @@ class OpinionSourceListViewPaginated extends React.Component<Props, State> {
             <OpinionSource key={source.id} source={source} sourceable={sourceable} />
           ))}
         {relay.hasMore() && (
-          <ListGroupItem className="text-center">
+          <ListGroupItem>
             {loading ? (
-              <Loader />
+              <Loader size={25} inline />
             ) : (
               <Button
                 bsStyle="link"
+                block
                 onClick={() => {
                   this.setState({ loading: true });
                   relay.loadMore(50, () => {
                     this.setState({ loading: false });
                   });
                 }}>
-                <FormattedMessage id="global.more" />
+                <FormattedMessage id="see-more-sources" />
               </Button>
             )}
           </ListGroupItem>

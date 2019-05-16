@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
 import { Media, ListGroupItem } from 'react-bootstrap';
 import UserAvatar from '../../User/UserAvatar';
 import OpinionInfos from '../OpinionInfos';
@@ -14,36 +15,48 @@ import TrashedMessage from '../../Trashed/TrashedMessage';
 type Props = {
   source: OpinionSource_source,
   sourceable: OpinionSource_sourceable,
+  isProfile: boolean,
 };
 
 export class OpinionSource extends React.Component<Props> {
+  static defaultProps = {
+    isProfile: false,
+  };
+
   render() {
-    const { source, sourceable } = this.props;
+    const { source, sourceable, isProfile } = this.props;
     return (
       <ListGroupItem
-        className={`list-group-item__opinion ${
+        className={`opinion list-group-item__opinion ${
           source.author && source.author.vip ? ' bg-vip' : ''
         }`}
         id={`source-${source.id}`}>
         <Media>
+          {isProfile && (
+            <p>
+              <FormattedMessage id="admin.fields.opinion.link" />
+              {' : '}
+              <a href={sourceable ? sourceable.url : ''}>{sourceable ? sourceable.title : ''}</a>
+            </p>
+          )}
           <Media.Left>
             {/* $FlowFixMe Will be a fragment soon */}
             <UserAvatar user={source.author} />
           </Media.Left>
-          <Media.Body>
+          <Media.Body className="opinion__body">
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+            <OpinionInfos rankingThreshold={null} opinion={source} />
             {/* $FlowFixMe $refType */}
             <TrashedMessage contribution={source}>
-              {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-              <OpinionInfos rankingThreshold={null} opinion={source} />
               {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
               <OpinionSourceTitle source={source} />
               {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
               <OpinionSourceContent source={source} />
-              {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-              <div className="small">
-                <OpinionSourceButtons sourceable={sourceable} source={source} />
-              </div>
             </TrashedMessage>
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+            <div className="small">
+              <OpinionSourceButtons sourceable={sourceable} source={source} />
+            </div>
           </Media.Body>
         </Media>
       </ListGroupItem>
@@ -77,6 +90,14 @@ export default createFragmentContainer(OpinionSource, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       ...OpinionSourceButtons_sourceable @arguments(isAuthenticated: $isAuthenticated)
+      ... on Opinion {
+        title
+        url
+      }
+      ... on Version {
+        title
+        url
+      }
     }
   `,
 });

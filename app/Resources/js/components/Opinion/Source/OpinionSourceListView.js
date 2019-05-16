@@ -23,12 +23,16 @@ export class OpinionSourceListView extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.order !== this.props.order) {
-      this._refetch(this.props.order);
+    const { order } = this.props;
+
+    if (prevProps.order !== order) {
+      this._refetch(order);
     }
   }
 
   _refetch = (newOrder: OpinionSourceOrder) => {
+    const { sourceable, relay } = this.props;
+
     this.setState({ isRefetching: true });
 
     const direction = newOrder === 'old' ? 'ASC' : 'DESC';
@@ -40,13 +44,13 @@ export class OpinionSourceListView extends React.Component<Props, State> {
     };
 
     const refetchVariables = fragmentVariables => ({
-      sourceableId: this.props.sourceable.id,
+      sourceableId: sourceable.id,
       count: fragmentVariables.count,
       cursor: null,
       orderBy,
     });
 
-    this.props.relay.refetch(
+    relay.refetch(
       refetchVariables,
       null,
       () => {
@@ -58,8 +62,9 @@ export class OpinionSourceListView extends React.Component<Props, State> {
 
   render() {
     const { sourceable } = this.props;
+    const { isRefetching } = this.state;
 
-    if (this.state.isRefetching) {
+    if (isRefetching) {
       return <Loader />;
     }
 

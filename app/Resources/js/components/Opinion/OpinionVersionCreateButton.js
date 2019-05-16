@@ -29,18 +29,17 @@ class OpinionVersionCreateButton extends React.Component<Props> {
     }
     return (
       <div className={className} style={style}>
-        {opinion.contribuable && (
-          <LoginOverlay>
-            <Button
-              bsStyle="primary"
-              onClick={() => {
-                dispatch(showOpinionVersionCreateModal());
-              }}>
-              <i className="cap cap-add-1" />
-              <FormattedMessage id="opinion.add_new_version" />
-            </Button>
-          </LoginOverlay>
-        )}
+        <LoginOverlay>
+          <Button
+            bsStyle="primary"
+            disabled={!opinion.contribuable}
+            onClick={() => {
+              dispatch(showOpinionVersionCreateModal());
+            }}>
+            <i className="cap cap-add-1" />
+            <FormattedMessage id="opinion.add_new_version" />
+          </Button>
+        </LoginOverlay>
       </div>
     );
   }

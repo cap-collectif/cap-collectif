@@ -40,7 +40,7 @@ class OpinionSourceButtons extends React.Component<Props, State> {
     return (
       <div>
         {/* $FlowFixMe */}
-        <OpinionSourceVoteBox source={source} />{' '}
+        <OpinionSourceVoteBox source={source} />
         <OpinionSourceReportButton sourceable={sourceable} source={source} />{' '}
         <EditButton
           onClick={() => {

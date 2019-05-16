@@ -43,7 +43,7 @@ const OpinionItem = ({ item, typeLabel }) => (
             {' • '} {item.createdAt}
           </span>
           {item.updatedAt && (
-            <span className="excerpt">
+            <span className="excerpt small">
               {' • '}
               <OverlayTrigger
                 placement="top"
@@ -59,7 +59,8 @@ const OpinionItem = ({ item, typeLabel }) => (
           <PinnedLabel show={item.pinned || false} type="opinion" />
           {item.ranking && (
             <span className="text-label text-label--green ml-10">
-              <i className="cap cap-trophy" /> {item.ranking}
+              <i className="cap cap-trophy" />
+              {item.ranking}
             </span>
           )}
           {!item.published && (
@@ -68,7 +69,10 @@ const OpinionItem = ({ item, typeLabel }) => (
               <OverlayTrigger
                 placement="top"
                 overlay={
-                  <Popover title={<strong>Compte en attente de confirmation</strong>}>
+                  <Popover
+                    title={
+                      <strong className="excerpt_dark">Compte en attente de confirmation</strong>
+                    }>
                     <p>
                       {
                         'Votre opinion n’a pas été publié, car votre compte a été confirmé après la date de fin de l’étape.'
@@ -83,14 +87,18 @@ const OpinionItem = ({ item, typeLabel }) => (
             </React.Fragment>
           )}
         </div>
-        <Card.Title tagName="div" firstElement={false}>
-          {typeLabel && (
-            <React.Fragment>
-              <Label>{typeLabel}</Label>{' '}
-            </React.Fragment>
-          )}
-          <a href={item.url}>{item.title}</a>
-        </Card.Title>
+        {item.trashedStatus === 'INVISIBLE' ? (
+          <div>[Contenu masqué]</div>
+        ) : (
+          <Card.Title tagName="div" firstElement={false}>
+            {typeLabel && (
+              <React.Fragment>
+                <Label>{typeLabel}</Label>{' '}
+              </React.Fragment>
+            )}
+            <a href={item.url}>{item.title}</a>
+          </Card.Title>
+        )}
         <InlineList className="excerpt small">
           <li>{`${item.votes.totalCount} votes`}</li>
           <li>{`${item.versions.totalCount} amendements`}</li>
@@ -99,16 +107,18 @@ const OpinionItem = ({ item, typeLabel }) => (
         </InlineList>
       </Media.Body>
     </Media>
-    {item.votes.totalCount > 0 && (
-      <PieChart
-        data={[
-          { name: "D'accord", value: item.votesOk.totalCount },
-          { name: 'Mitigé', value: item.votesMitige.totalCount },
-          { name: "Pas d'accord", value: item.votesNok.totalCount },
-        ]}
-        colors={['#5cb85c', '#f0ad4e', '#d9534f']}
-      />
-    )}
+    <div className="hidden-xs">
+      {item.votes.totalCount > 0 && (
+        <PieChart
+          data={[
+            { name: "D'accord", value: item.votesOk.totalCount },
+            { name: 'Mitigé', value: item.votesMitige.totalCount },
+            { name: "Pas d'accord", value: item.votesNok.totalCount },
+          ]}
+          colors={['#5cb85c', '#f0ad4e', '#d9534f']}
+        />
+      )}
+    </div>
   </React.Fragment>
 );
 
@@ -119,30 +129,36 @@ const OpinionList = ({ section, opinions }) => (
       bgColor={section.bgColor}
       style={{ border: '1px solid #e3e3e3', borderBottom: opinions.length > 0 ? 0 : undefined }}>
       <div className="opinion d-flex align-items-center justify-content-between">
-        <span className="excerpt_dark">{`${opinions.length} propositions`}</span>
-        {opinions.length > 1 && (
-          <form className="form-inline">
-            <select
-              defaultChecked="positions"
-              className="form-control"
-              aria-label="Trier"
-              onChange={() => {}}
-              onBlur={() => {}}>
-              <option value="positions">Tri ordonné puis aléatoire</option>
-              <option value="random">Aléatoire</option>
-              <option value="last">Les plus récents</option>
-              <option value="old">Les plus anciens</option>
-              <option value="favorable">Les plus favorables</option>
-              <option value="votes">Les plus votés</option>
-              <option value="comments">Les plus commentés</option>
-            </select>
-          </form>
-        )}
-        {section.contribuable && (
-          <Button bsStyle="primary" id="btn-add--" onClick={() => {}} className="m-0">
-            <i className="cap cap-add-1" /> <span className="hidden-xs">Nouvelle proposition</span>
+        <strong className="excerpt_dark">{`${opinions.length} propositions`}</strong>
+        <div className="d-flex align-items-center justify-content-between">
+          {opinions.length > 1 && (
+            <form className="form-inline">
+              <select
+                defaultChecked="positions"
+                className="form-control"
+                aria-label="Trier"
+                onChange={() => {}}
+                onBlur={() => {}}>
+                <option value="positions">Tri ordonné puis aléatoire</option>
+                <option value="random">Aléatoire</option>
+                <option value="last">Les plus récents</option>
+                <option value="old">Les plus anciens</option>
+                <option value="favorable">Les plus favorables</option>
+                <option value="votes">Les plus votés</option>
+                <option value="comments">Les plus commentés</option>
+              </select>
+            </form>
+          )}
+          <Button
+            bsStyle="primary"
+            id="btn-add--"
+            onClick={() => {}}
+            className="m-0"
+            disable={section.contribuable}>
+            <i className="cap cap-add-1" />
+            <span className="hidden-xs"> Nouvelle proposition</span>
           </Button>
-        )}
+        </div>
       </div>
     </Card.Header>
     {opinions.length > 0 && (
@@ -158,10 +174,10 @@ const OpinionList = ({ section, opinions }) => (
           </ListGroupItem>
         ))}
         {section.paginationEnable && (
-          <ListGroupItem className="text-center">
-            <a href="https://ui.cap-collectif.com" className="d-block bg-white">
+          <ListGroupItem>
+            <Button block componentClass="a" bsStyle="link" href="https://ui.cap-collectif.com">
               Voir toutes les propositions
-            </a>
+            </Button>
           </ListGroupItem>
         )}
       </ListGroup>

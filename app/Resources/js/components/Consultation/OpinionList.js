@@ -2,7 +2,7 @@
 import React from 'react';
 import { QueryRenderer, graphql, createFragmentContainer, type ReadyState } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { ListGroupItem } from 'react-bootstrap';
+import { ListGroupItem, Button } from 'react-bootstrap';
 import OpinionListPaginated from './OpinionListPaginated';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -90,46 +90,48 @@ export class OpinionList extends React.Component<Props, State> {
             borderBottom: section.contributionsCount > 0 ? 0 : undefined,
           }}>
           <div className="opinion d-flex align-items-center justify-content-between">
-            <span className="excerpt_dark">
+            <strong className="excerpt_dark ellipsis">
               <FormattedMessage
                 id="global.opinionsCount"
                 values={{ num: section.contributionsCount }}
               />
-            </span>
-            {section.contributionsCount > 1 && (
-              <form className="form-inline">
-                <select
-                  defaultValue={section.defaultOrderBy}
-                  className="form-control"
-                  aria-label={intl.formatMessage({ id: 'global.filter' })}
-                  onChange={this.sort}
-                  onBlur={this.sort}>
-                  <option value="positions">
-                    {intl.formatMessage({ id: 'opinion.sort.positions' })}
-                  </option>
-                  <option value="random">
-                    {intl.formatMessage({ id: 'opinion.sort.random' })}
-                  </option>
-                  <option value="last">{intl.formatMessage({ id: 'opinion.sort.last' })}</option>
-                  <option value="old">{intl.formatMessage({ id: 'opinion.sort.old' })}</option>
-                  <option value="favorable">
-                    {intl.formatMessage({ id: 'opinion.sort.favorable' })}
-                  </option>
-                  <option value="votes">{intl.formatMessage({ id: 'opinion.sort.votes' })}</option>
-                  <option value="comments">
-                    {intl.formatMessage({ id: 'opinion.sort.comments' })}
-                  </option>
-                </select>
-              </form>
-            )}
-            {section.contribuable && (
+            </strong>
+            <div className="d-flex align-items-center justify-content-between">
+              {section.contributionsCount > 1 && (
+                <form className="form-inline">
+                  <select
+                    defaultValue={section.defaultOrderBy}
+                    className="form-control"
+                    aria-label={intl.formatMessage({ id: 'global.filter' })}
+                    onChange={this.sort}
+                    onBlur={this.sort}>
+                    <option value="positions">
+                      {intl.formatMessage({ id: 'opinion.sort.positions' })}
+                    </option>
+                    <option value="random">
+                      {intl.formatMessage({ id: 'global.filter_random' })}
+                    </option>
+                    <option value="last">{intl.formatMessage({ id: 'opinion.sort.last' })}</option>
+                    <option value="old">{intl.formatMessage({ id: 'opinion.sort.old' })}</option>
+                    <option value="favorable">
+                      {intl.formatMessage({ id: 'opinion.sort.favorable' })}
+                    </option>
+                    <option value="votes">
+                      {intl.formatMessage({ id: 'opinion.sort.votes' })}
+                    </option>
+                    <option value="comments">
+                      {intl.formatMessage({ id: 'opinion.sort.comments' })}
+                    </option>
+                  </select>
+                </form>
+              )}
               <NewOpinionButton
                 className="m-0"
                 section={section}
                 consultation={consultation}
                 label={intl.formatMessage({ id: 'opinion.create.button' })}
               />
-            )}
+            </div>
           </div>
         </Card.Header>
         {section.contributionsCount > 0 ? (
@@ -170,31 +172,36 @@ export class OpinionList extends React.Component<Props, State> {
                   console.log(error); // eslint-disable-line no-console
                   return graphqlError;
                 }
+
                 if (props) {
                   if (!props.section) {
                     return graphqlError;
                   }
+
                   return (
-                    // $FlowFixMe $refType
-                    <OpinionListPaginated
-                      enablePagination={enablePagination}
-                      section={props.section}
-                    />
+                    <React.Fragment>
+                      {/* $FlowFixMe $refType */}
+                      <OpinionListPaginated
+                        enablePagination={enablePagination}
+                        section={props.section}
+                      />
+                      {!enablePagination &&
+                      section.contributionsCount &&
+                      consultation.opinionCountShownBySection &&
+                      section.contributionsCount > consultation.opinionCountShownBySection ? (
+                        <ListGroupItem>
+                          <Button block componentClass="a" bsStyle="link" href={section.url}>
+                            <FormattedMessage id="opinion.show.all" />
+                          </Button>
+                        </ListGroupItem>
+                      ) : null}
+                    </React.Fragment>
                   );
                 }
+
                 return <Loader />;
               }}
             />
-            {!enablePagination &&
-            section.contributionsCount &&
-            consultation.opinionCountShownBySection &&
-            section.contributionsCount > consultation.opinionCountShownBySection ? (
-              <ListGroupItem className="text-center">
-                <a href={section.url} className="d-block bg-white">
-                  <FormattedMessage id="opinion.show.all" />
-                </a>
-              </ListGroupItem>
-            ) : null}
           </ListGroup>
         ) : null}
       </Card>

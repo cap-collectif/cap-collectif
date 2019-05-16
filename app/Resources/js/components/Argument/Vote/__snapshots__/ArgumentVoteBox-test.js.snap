@@ -3,11 +3,7 @@
 exports[`<ArgumentVoteBox /> renders correctly 1`] = `
 <span>
   <form
-    style={
-      Object {
-        "display": "inline-block",
-      }
-    }
+    className="opinion__votes-button"
   >
     <ForwardRef(Relay(ArgumentVoteButton))
       argument={
@@ -21,7 +17,6 @@ exports[`<ArgumentVoteBox /> renders correctly 1`] = `
       }
     />
   </form>
-   
   <span
     className="opinion__votes-nb"
   >

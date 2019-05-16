@@ -11,7 +11,9 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
         id="publishable-id1-not-accounted-popover"
         placement="right"
         title={
-          <strong>
+          <strong
+            className="excerpt_dark"
+          >
             <FormattedMessage
               id="account-confirmed-too-late"
               values={Object {}}
@@ -62,7 +64,9 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
         id="publishable-id1-not-accounted-popover"
         placement="right"
         title={
-          <strong>
+          <strong
+            className="excerpt_dark"
+          >
             <FormattedMessage
               id="account-not-confirmed-in-time"
               values={Object {}}
@@ -113,7 +117,9 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
         id="publishable-id1-not-accounted-popover"
         placement="right"
         title={
-          <strong>
+          <strong
+            className="excerpt_dark"
+          >
             <FormattedMessage
               id="account-pending-confirmation"
               values={Object {}}

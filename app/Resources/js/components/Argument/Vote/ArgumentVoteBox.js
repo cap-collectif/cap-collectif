@@ -13,10 +13,10 @@ export class ArgumentVoteBox extends React.Component<Props> {
     const { argument } = this.props;
     return (
       <span>
-        <form style={{ display: 'inline-block' }}>
+        <form className="opinion__votes-button">
           {/* $FlowFixMe */}
           <ArgumentVoteButton argument={argument} />
-        </form>{' '}
+        </form>
         <span className="opinion__votes-nb">{argument.votes.totalCount}</span>
       </span>
     );

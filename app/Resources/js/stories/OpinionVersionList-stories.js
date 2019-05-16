@@ -23,9 +23,16 @@ import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 import PinnedLabel from '../components/Utils/PinnedLabel';
 import { opinionVersions as opinionVersionsMock } from './mocks/opinionVersions';
 
-const OpinionVersion = ({ item, typeLabel }) => (
+// eslint-disable-next-line react/prop-types
+const OpinionVersion = ({ item, typeLabel, isProfile }) => (
   <React.Fragment>
     <Media>
+      {isProfile && item.related && (
+        <p>
+          {'Lié à la proposition : '}
+          <a href={item.related.url}>{item.related.title}</a>
+        </p>
+      )}
       <Media.Left>
         <UserAvatar user={item.user} />
       </Media.Left>
@@ -41,7 +48,7 @@ const OpinionVersion = ({ item, typeLabel }) => (
             {' • '} {item.createdAt}
           </span>
           {item.updatedAt && (
-            <span className="excerpt">
+            <span className="excerpt small">
               {' • '}
               <OverlayTrigger
                 placement="top"
@@ -57,7 +64,8 @@ const OpinionVersion = ({ item, typeLabel }) => (
           <PinnedLabel show={item.pinned || false} type="opinion" />
           {item.ranking && (
             <span className="text-label text-label--green ml-10">
-              <i className="cap cap-trophy" /> {item.ranking}
+              <i className="cap cap-trophy" />
+              {item.ranking}
             </span>
           )}
           {!item.published && (
@@ -81,14 +89,18 @@ const OpinionVersion = ({ item, typeLabel }) => (
             </React.Fragment>
           )}
         </div>
-        <Card.Title tagName="div" firstElement={false}>
-          {typeLabel && (
-            <React.Fragment>
-              <Label>{typeLabel}</Label>{' '}
-            </React.Fragment>
-          )}
-          <a href={item.url}>{item.title}</a>
-        </Card.Title>
+        {item.trashedStatus === 'INVISIBLE' ? (
+          <div>[Contenu masqué]</div>
+        ) : (
+          <Card.Title tagName="div" firstElement={false}>
+            {typeLabel && (
+              <React.Fragment>
+                <Label>{typeLabel}</Label>{' '}
+              </React.Fragment>
+            )}
+            <a href={item.url}>{item.title}</a>
+          </Card.Title>
+        )}
         <InlineList className="excerpt small">
           <li>{`${item.votes.totalCount} votes`}</li>
           <li>{`${item.arguments.totalCount} arguments`}</li>
@@ -109,7 +121,8 @@ const OpinionVersion = ({ item, typeLabel }) => (
   </React.Fragment>
 );
 
-const OpinionVersionList = ({ section, opinionVersions }) => (
+// eslint-disable-next-line react/prop-types
+const OpinionVersionList = ({ section, opinionVersions, isProfile }) => (
   <Panel>
     <Panel.Heading>
       <Row>
@@ -132,7 +145,7 @@ const OpinionVersionList = ({ section, opinionVersions }) => (
                 onChange={() => {}}
                 onBlur={() => {}}>
                 <option value="positions">Tri ordonné puis aléatoire</option>
-                <option value="random">Aléatoire</option>
+                <option value="random">Tri aléatoire</option>
                 <option value="last">Les plus récents</option>
                 <option value="old">Les plus anciens</option>
                 <option value="favorable">Les plus favorables</option>
@@ -161,15 +174,19 @@ const OpinionVersionList = ({ section, opinionVersions }) => (
                 item.user && item.user.vip ? ' bg-vip' : ''
               }`}
               style={{ backgroundColor: item.user && item.user.vip ? '#F7F7F7' : undefined }}>
-              <OpinionVersion item={item} typeLabel={section.typeLabel || null} />
+              <OpinionVersion
+                item={item}
+                typeLabel={section.typeLabel || null}
+                isProfile={isProfile}
+              />
             </ListGroupItem>
           ))}
           {!section.isLoading && section.paginationEnable && (
             <ListGroupItem className="text-center">
-              {section.isLoadingMore && <Loader />}
+              {section.isLoadingMore && <Loader size={25} inline />}
               {!section.isLoadingMore && (
-                <Button id="OpinionListPaginated-loadmore" bsStyle="link" onClick={() => {}}>
-                  Voir plus
+                <Button block bsStyle="link" onClick={() => {}}>
+                  {"Voir plus d'amendements"}
                 </Button>
               )}
             </ListGroupItem>
@@ -188,7 +205,13 @@ storiesOf('OpinionVersionList', module)
       isLoadingMore: boolean('Is loading more', false, 'Section'),
     };
 
-    return <OpinionVersionList section={section} opinionVersions={opinionVersionsMock} />;
+    return (
+      <OpinionVersionList
+        section={section}
+        opinionVersions={opinionVersionsMock}
+        isProfile={false}
+      />
+    );
   })
   .add('with single opinion version', () => {
     const section = {
@@ -197,7 +220,13 @@ storiesOf('OpinionVersionList', module)
       isLoadingMore: boolean('Is loading more', false, 'Section'),
     };
 
-    return <OpinionVersionList section={section} opinionVersions={[opinionVersionsMock[0]]} />;
+    return (
+      <OpinionVersionList
+        section={section}
+        opinionVersions={[opinionVersionsMock[0]]}
+        isProfile={false}
+      />
+    );
   })
   .add('empty', () => {
     const section = {
@@ -205,7 +234,16 @@ storiesOf('OpinionVersionList', module)
       isLoading: boolean('Is loading', false, 'Section'),
     };
 
-    return <OpinionVersionList section={section} opinionVersions={[]} />;
+    return <OpinionVersionList section={section} opinionVersions={[]} isProfile={false} />;
+  })
+  .add('in profile', () => {
+    const section = {
+      paginationEnable: boolean('Pagination enabled', true, 'Section'),
+      isLoading: boolean('Is loading', false, 'Section'),
+      isLoadingMore: boolean('Is loading more', false, 'Section'),
+    };
+
+    return <OpinionVersionList section={section} opinionVersions={opinionVersionsMock} isProfile />;
   })
   .add('in trash', () => {
     const section = {
@@ -215,5 +253,11 @@ storiesOf('OpinionVersionList', module)
       typeLabel: text('Type label', 'Dans la corbeille', 'Section'),
     };
 
-    return <OpinionVersionList section={section} opinionVersions={opinionVersionsMock} />;
+    return (
+      <OpinionVersionList
+        section={section}
+        opinionVersions={opinionVersionsMock}
+        isProfile={false}
+      />
+    );
   });

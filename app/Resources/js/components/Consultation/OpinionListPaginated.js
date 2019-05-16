@@ -4,6 +4,7 @@ import { Button, ListGroupItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { OpinionListPaginated_section } from '~relay/OpinionListPaginated_section.graphql';
+import Loader from '../Ui/FeedbacksIndicators/Loader';
 import Opinion from './Opinion';
 
 type Props = {|
@@ -26,6 +27,17 @@ export class OpinionListPaginated extends React.Component<Props, State> {
   render() {
     const { enablePagination, section, relay } = this.props;
     const { loading } = this.state;
+
+    if (!section.opinions.edges || section.opinions.edges.length === 0) {
+      return (
+        <ListGroupItem className="text-center excerpt">
+          <i className="cap-32 cap-baloon-1" />
+          <br />
+          <FormattedMessage id="opinion.no_new_link" />
+        </ListGroupItem>
+      );
+    }
+
     return (
       <React.Fragment>
         {section.opinions.edges &&
@@ -34,19 +46,23 @@ export class OpinionListPaginated extends React.Component<Props, State> {
             <Opinion key={index} opinion={edge.node} showUpdatedDate={false} />
           ))}
         {enablePagination && relay.hasMore() ? (
-          <ListGroupItem className="bg-white">
-            <Button
-              id="OpinionListPaginated-loadmore"
-              bsStyle="link"
-              disabled={loading}
-              onClick={() => {
-                this.setState({ loading: true });
-                relay.loadMore(PAGINATION_COUNT, () => {
-                  this.setState({ loading: false });
-                });
-              }}>
-              <FormattedMessage id={loading ? 'global.loading' : 'see-more-proposals'} />
-            </Button>
+          <ListGroupItem>
+            {loading ? (
+              <Loader size={25} inline />
+            ) : (
+              <Button
+                block
+                id="OpinionListPaginated-loadmore"
+                bsStyle="link"
+                onClick={() => {
+                  this.setState({ loading: true });
+                  relay.loadMore(PAGINATION_COUNT, () => {
+                    this.setState({ loading: false });
+                  });
+                }}>
+                <FormattedMessage id="see-more-proposals" />
+              </Button>
+            )}
           </ListGroupItem>
         ) : null}
       </React.Fragment>

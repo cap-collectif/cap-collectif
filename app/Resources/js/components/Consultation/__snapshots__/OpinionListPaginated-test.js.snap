@@ -69,12 +69,11 @@ exports[`<OpinionListPaginated /> renders correcty with pagination enabled 1`] =
   />
   <ListGroupItem
     bsClass="list-group-item"
-    className="bg-white"
     listItem={false}
   >
     <Button
       active={false}
-      block={false}
+      block={true}
       bsClass="btn"
       bsStyle="link"
       disabled={false}
@@ -124,23 +123,14 @@ exports[`<OpinionListPaginated /> renders correcty with pagination enabled 2`] =
   />
   <ListGroupItem
     bsClass="list-group-item"
-    className="bg-white"
     listItem={false}
   >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="link"
-      disabled={true}
-      id="OpinionListPaginated-loadmore"
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="global.loading"
-        values={Object {}}
-      />
-    </Button>
+    <Loader
+      color="#333333"
+      inline={true}
+      show={true}
+      size={25}
+    />
   </ListGroupItem>
 </Fragment>
 `;
