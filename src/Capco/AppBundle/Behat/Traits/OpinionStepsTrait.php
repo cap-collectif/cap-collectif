@@ -51,8 +51,8 @@ trait OpinionStepsTrait
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
         'opinionTypeSlug' =>
-            'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
-        'opinionSlug' => 'article-2',
+            'chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
+        'opinionSlug' => 'article-1',
         'versionSlug' => 'modification-2',
     ];
 
@@ -702,8 +702,6 @@ trait OpinionStepsTrait
     }
 
     /**
-     * Go to a opinion version with loads of votes.
-     *
      * @When I go to an opinion version with loads of votes
      */
     public function iGoToAnOpinionVersionWithLoadsOfVote()
@@ -766,8 +764,9 @@ trait OpinionStepsTrait
      */
     public function iClickTheShowAllOpinionVersionVotesButton()
     {
-        $this->waitAndThrowOnFailure(3000, "$('#opinion-votes-show-all').length > 0");
+        $this->waitAndThrowOnFailure(10000, "$('#opinion-votes-show-all').length > 0");
         $this->navigationContext->getPage('opinion version page')->clickShowAllVotesButton();
+        $this->iWait(1);
     }
 
     /**

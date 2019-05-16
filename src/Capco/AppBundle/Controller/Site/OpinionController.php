@@ -3,17 +3,15 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class OpinionController extends Controller
 {
@@ -27,60 +25,86 @@ class OpinionController extends Controller
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}/", name="legacy_app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
      * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="legacy_app_consultation_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
      * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}", name="legacy_app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
+     *
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={
+     *      "mapping" = {"projectSlug": "slug"},
+     *      "repository_method"= "getOneWithoutVisibility",
+     *      "map_method_signature" = true
+     * })
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
      * @Template("CapcoAppBundle:Consultation:SectionPage.html.twig")
      */
     public function sectionPageAction(
         Project $project,
         string $opinionTypeSlug,
-        Request $request,
-        ConsultationStep $currentStep
+        ConsultationStep $step
     ) {
-        if (!$currentStep->canDisplay($this->getUser())) {
+        if (!$step->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
 
         $opinionTypesResolver = $this->get(OpinionTypesResolver::class);
-        $opinionType = $opinionTypesResolver->findByStepAndSlug($currentStep, $opinionTypeSlug);
+        $opinionType = $opinionTypesResolver->findByStepAndSlug($step, $opinionTypeSlug);
 
         return [
             'project' => $project,
             'opinionType' => $opinionType,
-            'currentStep' => $currentStep,
+            'currentStep' => $step,
         ];
     }
 
     /**
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_project_show_opinion_version", requirements={"opinionTypeSlug" = ".+"})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_consultation_show_opinion_version", requirements={"opinionTypeSlug" = ".+"})
+     *
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={
+     *      "mapping" = {"projectSlug": "slug"},
+     *      "repository_method"= "getOneWithoutVisibility",
+     *      "map_method_signature" = true
+     * })
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
+     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={
+     *      "mapping" = {"opinionSlug": "slug", "stepSlug": "stepSlug", "projectSlug": "projectSlug"},
+     *      "repository_method"= "getOneBySlugAndProjectSlugAndStepSlug",
+     *      "map_method_signature" = true
+     * })
+     * @ParamConverter("version", class="CapcoAppBundle:OpinionVersion", options={
+     *  "mapping" = {
+     *      "versionSlug": "slug",
+     *      "opinionSlug": "opinionSlug",
+     *      "stepSlug": "stepSlug",
+     *      "projectSlug": "projectSlug"
+     *  },
+     *  "repository_method"= "getOneBySlugAndProjectSlugAndStepSlugAndOpinionSlug",
+     *  "map_method_signature" = true
+     * })
+     *
      * @Template("CapcoAppBundle:Opinion:show_version.html.twig")
      */
     public function showOpinionVersionAction(
-        string $projectSlug,
-        string $stepSlug,
+        Project $project,
+        ConsultationStep $step,
         string $opinionTypeSlug,
-        string $opinionSlug,
-        string $versionSlug
+        Opinion $opinion,
+        OpinionVersion $version
     ) {
-        $opinion = $this->get(OpinionRepository::class)->findOneBySlug($opinionSlug);
-        $version = $this->get(OpinionVersionRepository::class)->findOneBySlug($versionSlug);
-
-        if (!$opinion || !$version) {
-            throw $this->createNotFoundException(
-                $this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle')
-            );
-        }
         if (!$version->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
-        $currentStep = $opinion->getStep();
 
         return [
             'version' => $version,
             'opinion' => $opinion,
-            'currentStep' => $currentStep,
-            'project' => $currentStep->getProject(),
+            'currentStep' => $step,
+            'project' => $project,
             'opinionType' => $opinion->getOpinionType(),
         ];
     }
@@ -90,30 +114,34 @@ class OpinionController extends Controller
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}", name="app_consultation_show_opinion", requirements={"opinionTypeSlug" = ".+"})
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_project_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date", "opinionTypeSlug" = ".+"})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_consultation_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date", "opinionTypeSlug" = ".+"})
+     *
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={
+     *      "mapping" = {"projectSlug": "slug"},
+     *      "repository_method"= "getOneWithoutVisibility",
+     *      "map_method_signature" = true
+     * })
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
+     * @ParamConverter("opinion", class="CapcoAppBundle:Opinion", options={"mapping" = {"opinionSlug": "slug", "stepSlug": "stepSlug", "projectSlug": "projectSlug"}, "repository_method"= "getOneBySlugAndProjectSlugAndStepSlug", "map_method_signature" = true})
+     *
      * @Template("CapcoAppBundle:Opinion:show.html.twig")
      */
     public function showOpinionAction(
-        string $projectSlug,
-        string $stepSlug,
+        Project $project,
+        ConsultationStep $step,
         string $opinionTypeSlug,
-        string $opinionSlug
+        Opinion $opinion
     ) {
-        /** @var Opinion $opinion */
-        $opinion = $this->get(OpinionRepository::class)->findOneBySlug($opinionSlug);
-
-        if (!$opinion) {
-            throw $this->createNotFoundException(
-                $this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle')
-            );
-        }
         if (!$opinion->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
-        $currentStep = $opinion->getStep();
 
         return [
-            'currentStep' => $currentStep,
-            'project' => $currentStep->getProject(),
+            'currentStep' => $step,
+            'project' => $project,
             'opinion' => $opinion,
             'opinionType' => $opinion->getOpinionType(),
         ];

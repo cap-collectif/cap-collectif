@@ -81,24 +81,23 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get one opinion by slug.
-     *
-     * @param $opinion
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
-     *
-     * @return mixed
      */
-    public function getOneBySlug($opinion)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'ot', 's')
-            ->leftJoin('o.Author', 'a')
-            ->leftJoin('a.media', 'm')
-            ->leftJoin('o.OpinionType', 'ot')
+    public function getOneBySlugAndProjectSlugAndStepSlug(
+        string $slug,
+        string $projectSlug,
+        string $stepSlug
+    ): ?Opinion {
+        $qb = $this->createQueryBuilder('o')
             ->leftJoin('o.step', 's')
-            ->andWhere('o.slug = :opinion')
-            ->setParameter('opinion', $opinion);
+            ->leftJoin('s.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->andWhere('o.slug = :slug')
+            ->andWhere('s.slug = :stepSlug')
+            ->andWhere('p.slug = :projectSlug')
+            ->setParameter('slug', $slug)
+            ->setParameter('stepSlug', $stepSlug)
+            ->setParameter('projectSlug', $projectSlug);
 
         return $qb->getQuery()->getOneOrNullResult();
     }
