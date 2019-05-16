@@ -134,6 +134,5 @@ sub vcl_backend_fetch {
 
 # Remove from response headers verbose things such as Varnish version.
 sub vcl_deliver {
-    unset resp.http.Via;
-    return(deliver);
+    remove resp.http.Via;
 }
