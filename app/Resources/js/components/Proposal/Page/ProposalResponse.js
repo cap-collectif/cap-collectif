@@ -147,9 +147,10 @@ export class ProposalResponse extends React.PureComponent<Props> {
           } catch (e) {
             responseValue = response.value || '';
           }
+
           responseValue = (
             <WYSIWYGRender
-              value={(responseValue && responseValue.replace(/\n/g, '<br />')) || ''}
+              value={(responseValue && responseValue.toString().replace(/\n/g, '<br />')) || ''}
             />
           );
         } else {
