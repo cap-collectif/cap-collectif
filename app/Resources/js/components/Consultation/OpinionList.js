@@ -124,7 +124,7 @@ export class OpinionList extends React.Component<Props, State> {
             )}
             {section.contribuable && (
               <NewOpinionButton
-                style={{ margin: 0 }}
+                className="m-0"
                 section={section}
                 consultation={consultation}
                 label={intl.formatMessage({ id: 'opinion.create.button' })}
@@ -133,7 +133,7 @@ export class OpinionList extends React.Component<Props, State> {
           </div>
         </Card.Header>
         {section.contributionsCount > 0 ? (
-          <ListGroup style={{ margin: 0 }}>
+          <ListGroup className="m-0">
             <QueryRenderer
               environment={environment}
               query={graphql`
@@ -190,7 +190,7 @@ export class OpinionList extends React.Component<Props, State> {
             consultation.opinionCountShownBySection &&
             section.contributionsCount > consultation.opinionCountShownBySection ? (
               <ListGroupItem className="text-center">
-                <a href={section.url} style={{ display: 'block', backgroundColor: '#fff' }}>
+                <a href={section.url} className="d-block bg-white">
                   <FormattedMessage id="opinion.show.all" />
                 </a>
               </ListGroupItem>

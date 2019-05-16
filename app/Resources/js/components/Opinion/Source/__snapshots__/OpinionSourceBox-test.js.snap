@@ -30,7 +30,9 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
         />
       </PanelTitle>
     </PanelHeading>
-    <ListGroup>
+    <ListGroup
+      className=""
+    >
       <ForwardRef(Relay(OpinionSource))
         key="source1"
         source={

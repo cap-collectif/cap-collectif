@@ -42,7 +42,9 @@ exports[`<OpinionProjectRow /> should render close collapse 1`] = `
         />
       </Button>
     </PanelHeading>
-    <ListGroup />
+    <ListGroup
+      className=""
+    />
   </Uncontrolled(Panel)>
 </Collapse>
 `;
@@ -89,7 +91,9 @@ exports[`<OpinionProjectRow /> should render the project 1 with its proposal dis
         />
       </Button>
     </PanelHeading>
-    <ListGroup>
+    <ListGroup
+      className=""
+    >
       <ForwardRef(Relay(OpinionRow))
         key="0"
         opinion={
@@ -163,7 +167,9 @@ exports[`<OpinionProjectRow /> should render the project 2 with its proposal dis
         />
       </Button>
     </PanelHeading>
-    <ListGroup>
+    <ListGroup
+      className=""
+    >
       <ForwardRef(Relay(OpinionRow))
         key="0"
         opinion={

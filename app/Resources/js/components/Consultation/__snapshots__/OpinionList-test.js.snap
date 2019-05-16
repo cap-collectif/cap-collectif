@@ -82,6 +82,7 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
         </select>
       </form>
       <ForwardRef(Relay(Connect(NewOpinionButton)))
+        className="m-0"
         consultation={
           Object {
             "$fragmentRefs": null,
@@ -104,20 +105,11 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
             "url": "https://capco.dev",
           }
         }
-        style={
-          Object {
-            "margin": 0,
-          }
-        }
       />
     </div>
   </Header>
   <ListGroup
-    style={
-      Object {
-        "margin": 0,
-      }
-    }
+    className="m-0"
   >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
@@ -141,13 +133,8 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
       listItem={false}
     >
       <a
+        className="d-block bg-white"
         href="https://capco.dev"
-        style={
-          Object {
-            "backgroundColor": "#fff",
-            "display": "block",
-          }
-        }
       >
         <FormattedMessage
           id="opinion.show.all"
@@ -241,6 +228,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
         </select>
       </form>
       <ForwardRef(Relay(Connect(NewOpinionButton)))
+        className="m-0"
         consultation={
           Object {
             "$fragmentRefs": null,
@@ -263,20 +251,11 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
             "url": "https://capco.dev",
           }
         }
-        style={
-          Object {
-            "margin": 0,
-          }
-        }
       />
     </div>
   </Header>
   <ListGroup
-    style={
-      Object {
-        "margin": 0,
-      }
-    }
+    className="m-0"
   >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
@@ -380,6 +359,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
         </select>
       </form>
       <ForwardRef(Relay(Connect(NewOpinionButton)))
+        className="m-0"
         consultation={
           Object {
             "$fragmentRefs": null,
@@ -402,20 +382,11 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
             "url": "https://capco.dev",
           }
         }
-        style={
-          Object {
-            "margin": 0,
-          }
-        }
       />
     </div>
   </Header>
   <ListGroup
-    style={
-      Object {
-        "margin": 0,
-      }
-    }
+    className="m-0"
   >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
@@ -519,6 +490,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
         </select>
       </form>
       <ForwardRef(Relay(Connect(NewOpinionButton)))
+        className="m-0"
         consultation={
           Object {
             "$fragmentRefs": null,
@@ -541,20 +513,11 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
             "url": "https://capco.dev",
           }
         }
-        style={
-          Object {
-            "margin": 0,
-          }
-        }
       />
     </div>
   </Header>
   <ListGroup
-    style={
-      Object {
-        "margin": 0,
-      }
-    }
+    className="m-0"
   >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
@@ -658,6 +621,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
         </select>
       </form>
       <ForwardRef(Relay(Connect(NewOpinionButton)))
+        className="m-0"
         consultation={
           Object {
             "$fragmentRefs": null,
@@ -680,20 +644,11 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
             "url": "https://capco.dev",
           }
         }
-        style={
-          Object {
-            "margin": 0,
-          }
-        }
       />
     </div>
   </Header>
   <ListGroup
-    style={
-      Object {
-        "margin": 0,
-      }
-    }
+    className="m-0"
   >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
@@ -797,6 +752,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
         </select>
       </form>
       <ForwardRef(Relay(Connect(NewOpinionButton)))
+        className="m-0"
         consultation={
           Object {
             "$fragmentRefs": null,
@@ -819,20 +775,11 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
             "url": "https://capco.dev",
           }
         }
-        style={
-          Object {
-            "margin": 0,
-          }
-        }
       />
     </div>
   </Header>
   <ListGroup
-    style={
-      Object {
-        "margin": 0,
-      }
-    }
+    className="m-0"
   >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
@@ -936,6 +883,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
         </select>
       </form>
       <ForwardRef(Relay(Connect(NewOpinionButton)))
+        className="m-0"
         consultation={
           Object {
             "$fragmentRefs": null,
@@ -958,20 +906,11 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
             "url": "https://capco.dev",
           }
         }
-        style={
-          Object {
-            "margin": 0,
-          }
-        }
       />
     </div>
   </Header>
   <ListGroup
-    style={
-      Object {
-        "margin": 0,
-      }
-    }
+    className="m-0"
   >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
@@ -1075,6 +1014,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
         </select>
       </form>
       <ForwardRef(Relay(Connect(NewOpinionButton)))
+        className="m-0"
         consultation={
           Object {
             "$fragmentRefs": null,
@@ -1097,20 +1037,11 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
             "url": "https://capco.dev",
           }
         }
-        style={
-          Object {
-            "margin": 0,
-          }
-        }
       />
     </div>
   </Header>
   <ListGroup
-    style={
-      Object {
-        "margin": 0,
-      }
-    }
+    className="m-0"
   >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}

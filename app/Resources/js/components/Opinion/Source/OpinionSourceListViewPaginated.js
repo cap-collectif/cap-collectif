@@ -46,7 +46,7 @@ class OpinionSourceListViewPaginated extends React.Component<Props, State> {
             <OpinionSource key={source.id} source={source} sourceable={sourceable} />
           ))}
         {relay.hasMore() && (
-          <ListGroupItem style={{ textAlign: 'center' }}>
+          <ListGroupItem className="text-center">
             {loading ? (
               <Loader />
             ) : (

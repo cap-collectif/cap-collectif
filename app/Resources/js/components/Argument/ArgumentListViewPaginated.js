@@ -41,7 +41,7 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
             <ArgumentItem key={argument.id} argument={argument} />
           ))}
         {relay.hasMore() && (
-          <ListGroupItem style={{ textAlign: 'center' }}>
+          <ListGroupItem className="text-center">
             {this.state.loading ? (
               <Loader />
             ) : (

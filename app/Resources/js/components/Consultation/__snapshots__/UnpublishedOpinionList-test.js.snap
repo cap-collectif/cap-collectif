@@ -34,7 +34,9 @@ exports[`<UnpublishedOpinionList /> renders correcty 1`] = `
       />
     </PanelTitle>
   </PanelHeading>
-  <ListGroup>
+  <ListGroup
+    className=""
+  >
     <ForwardRef(Relay(Opinion))
       key="0"
       opinion={

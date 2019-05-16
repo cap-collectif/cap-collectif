@@ -9,14 +9,7 @@ type Props = {
 };
 
 const OpinionSourceContent = ({ source }: Props) => (
-  <p
-    className="opinion__text excerpt"
-    style={{
-      overflow: 'hidden',
-      float: 'left',
-      width: '100%',
-      wordWrap: 'break-word',
-    }}>
+  <p className="opinion__text float-left excerpt">
     <WYSIWYGRender className="excerpt" value={source.body} />
   </p>
 );

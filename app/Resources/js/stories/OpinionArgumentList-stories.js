@@ -209,7 +209,7 @@ const OpinionArgumentList = ({ section, isProfile, opinionArguments }) => (
                 </ListGroupItem>
               ))}
               {!section.isLoading && section.paginationEnable && (
-                <ListGroupItem style={{ textAlign: 'center' }}>
+                <ListGroupItem className="text-center">
                   {section.isLoadingMore && <Loader />}
                   {!section.isLoadingMore && (
                     <Button bsStyle="link" onClick={() => {}}>

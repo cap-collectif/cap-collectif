@@ -33,14 +33,7 @@ const OpinionSourceItem = ({ item }) => (
             )}
             <a href={item.url}>{item.title}</a>
           </Card.Title>
-          <p
-            className="opinion__text excerpt"
-            style={{
-              overflow: 'hidden',
-              float: 'left',
-              width: '100%',
-              wordWrap: 'break-word',
-            }}>
+          <p className="opinion__text float-left excerpt">
             <div className="ql-editor">{item.body}</div>
           </p>
           <div className="small">
@@ -151,7 +144,7 @@ const OpinionSourceList = ({ section, opinionSources }) => (
               </ListGroupItem>
             ))}
             {!section.isLoading && section.paginationEnable && (
-              <ListGroupItem style={{ textAlign: 'center' }}>
+              <ListGroupItem className="text-center">
                 {section.isLoadingMore && <Loader />}
                 {!section.isLoadingMore && (
                   <Button bsStyle="link" onClick={() => {}}>

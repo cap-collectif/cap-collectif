@@ -139,14 +139,14 @@ const OpinionList = ({ section, opinions }) => (
           </form>
         )}
         {section.contribuable && (
-          <Button bsStyle="primary" id="btn-add--" onClick={() => {}} style={{ margin: 0 }}>
+          <Button bsStyle="primary" id="btn-add--" onClick={() => {}} className="m-0">
             <i className="cap cap-add-1" /> <span className="hidden-xs">Nouvelle proposition</span>
           </Button>
         )}
       </div>
     </Card.Header>
     {opinions.length > 0 && (
-      <ListGroup style={{ margin: 0 }}>
+      <ListGroup className="m-0">
         {opinions.map((item, index) => (
           <ListGroupItem
             key={index}
@@ -159,9 +159,7 @@ const OpinionList = ({ section, opinions }) => (
         ))}
         {section.paginationEnable && (
           <ListGroupItem className="text-center">
-            <a
-              href="https://ui.cap-collectif.com"
-              style={{ display: 'block', backgroundColor: '#fff' }}>
+            <a href="https://ui.cap-collectif.com" className="d-block bg-white">
               Voir toutes les propositions
             </a>
           </ListGroupItem>

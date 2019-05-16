@@ -4,17 +4,11 @@ import styled from 'styled-components';
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup as ListGroupBtsp } from 'react-bootstrap';
 
-const Container = styled(ListGroupBtsp).attrs({
-  className: 'list-group',
-})`
+const Container = styled(ListGroupBtsp)`
   .list-group-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    // p {
-    //   margin: 0;
-    // }
 
     &__opinion {
       font-size: 16px;
@@ -34,10 +28,6 @@ const Container = styled(ListGroupBtsp).attrs({
           font-weight: 500;
         }
 
-        // .excerpt {
-        //   font-size: 14px;
-        // }
-
         .actions {
           margin-top: 10px;
 
@@ -52,12 +42,6 @@ const Container = styled(ListGroupBtsp).attrs({
         margin: auto 0;
       }
     }
-
-    // h4, h3 {
-    //   margin: auto 15px auto 0;
-    //   font-size: 16px;
-    //   font-weight: 400;
-    // }
   }
 
   @media (max-width: $screen-xs-max) {
@@ -73,16 +57,20 @@ const Container = styled(ListGroupBtsp).attrs({
 
 type Props = {
   children: ?React.Node,
-  style?: Object,
+  className: string,
   id?: string,
 };
 
 export class ListGroup extends React.Component<Props> {
+  static defaultProps = {
+    className: '',
+  };
+
   render() {
-    const { children, id, style } = this.props;
+    const { children, id, className } = this.props;
 
     return (
-      <Container id={id} style={style}>
+      <Container id={id} className={`list-group ${className}`}>
         {children}
       </Container>
     );

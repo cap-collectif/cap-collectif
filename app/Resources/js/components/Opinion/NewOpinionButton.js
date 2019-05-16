@@ -8,18 +8,19 @@ import OpinionCreateModal from './Create/OpinionCreateModal';
 import { openOpinionCreateModal } from '../../redux/modules/opinion';
 import type { NewOpinionButton_section } from '~relay/NewOpinionButton_section.graphql';
 import type { NewOpinionButton_consultation } from '~relay/NewOpinionButton_consultation.graphql';
+import type { Dispatch } from '../../types';
 
 type Props = {|
   +section: NewOpinionButton_section,
   +consultation: NewOpinionButton_consultation,
   +label: string,
-  +style: Object,
-  +dispatch: Function,
+  +className: string,
+  +dispatch: Dispatch,
 |};
 
 class NewOpinionButton extends React.Component<Props> {
   render() {
-    const { dispatch, label, consultation, section, style } = this.props;
+    const { dispatch, label, consultation, section, className } = this.props;
     const disabled = !consultation.contribuable;
     return (
       <React.Fragment>
@@ -28,7 +29,7 @@ class NewOpinionButton extends React.Component<Props> {
             bsStyle="primary"
             disabled={disabled}
             id={`btn-add--${section.slug}`}
-            style={style}
+            className={className}
             onClick={() => {
               dispatch(openOpinionCreateModal(section.id));
             }}>

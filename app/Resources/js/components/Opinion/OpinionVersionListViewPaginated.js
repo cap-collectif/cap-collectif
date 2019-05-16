@@ -46,7 +46,7 @@ class OpinionVersionListViewPaginated extends React.Component<Props, State> {
             <OpinionVersion key={version.id} version={version} />
           ))}
         {relay.hasMore() && (
-          <ListGroupItem style={{ textAlign: 'center' }}>
+          <ListGroupItem className="text-center">
             {loading ? (
               <Loader />
             ) : (

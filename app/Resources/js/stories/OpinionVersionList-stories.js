@@ -165,7 +165,7 @@ const OpinionVersionList = ({ section, opinionVersions }) => (
             </ListGroupItem>
           ))}
           {!section.isLoading && section.paginationEnable && (
-            <ListGroupItem style={{ textAlign: 'center' }}>
+            <ListGroupItem className="text-center">
               {section.isLoadingMore && <Loader />}
               {!section.isLoadingMore && (
                 <Button id="OpinionListPaginated-loadmore" bsStyle="link" onClick={() => {}}>
