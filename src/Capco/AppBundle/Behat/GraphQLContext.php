@@ -12,6 +12,7 @@ class GraphQLContext implements Context
 {
     public $client;
     public $response;
+    public $rawResponse;
 
     public $resultChecker = '';
 
@@ -99,6 +100,14 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @Then request header :header contains :value
+     */
+    public function headerContainsValue(string $header, string $value)
+    {
+        expect($this->rawResponse->getHeaders()[$header][0])->toBe($value);
+    }
+
+    /**
      * @Given I store the result
      */
     public function iStoreTheResult()
@@ -118,11 +127,45 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @Given I send a public GraphQL OPTIONS request with origin :origin :
+     */
+    public function iSendAPreflightPublicGraphQLPostRequest(string $origin, PyStringNode $string)
+    {
+        $this->iSendAGraphQLPostRequest('public', $string, 'OPTIONS', $origin);
+    }
+
+    /**
+     * @Given /^I send an internal GraphQL OPTIONS request:$/
+     */
+    public function iSendAPreflightInternalGraphQLPostRequest(PyStringNode $string)
+    {
+        $this->iSendAGraphQLPostRequest('internal', $string, 'OPTIONS');
+    }
+
+    /**
      * @When /^I send a GraphQL POST request:$/
      */
     public function iSendAnInternalGraphQLPostRequest(PyStringNode $string)
     {
         $this->iSendAGraphQLPostRequest('internal', $string);
+    }
+
+    /**
+     * @When I send a public GraphQL POST request with origin :origin :
+     */
+    public function iSendAPublicGraphQLPostRequestWithOrigin(string $origin, PyStringNode $string)
+    {
+        $this->iSendAGraphQLPostRequest('public', $string, 'POST', $origin);
+    }
+
+    /**
+     * @When I send an internal GraphQL POST request with origin :origin :
+     */
+    public function iSendAnInternalGraphQLPostRequestWithOrigin(
+        string $origin,
+        PyStringNode $string
+    ) {
+        $this->iSendAGraphQLPostRequest('internal', $string, 'POST', $origin);
     }
 
     /**
@@ -158,23 +201,37 @@ class GraphQLContext implements Context
         ]);
     }
 
-    private function iSendAGraphQLPostRequest(string $schemaName, PyStringNode $string)
-    {
+    private function iSendAGraphQLPostRequest(
+        string $schemaName,
+        PyStringNode $string,
+        string $method = 'POST',
+        string $origin = 'https://capco.dev'
+    ) {
         $endpoint = 'internal' === $schemaName ? '/graphql/internal' : '/graphql';
         $accept =
             'preview' === $schemaName
                 ? 'application/vnd.cap-collectif.preview+json'
                 : 'application/json';
 
+        $headers = [
+            'Content-Type' => 'application/json',
+            'Accept' => $accept,
+            'Origin' => $origin,
+        ];
+
+        if ('OPTIONS' === $method) {
+            // See https://github.com/nelmio/NelmioCorsBundle/issues/21#issuecomment-418023782
+            $headers['Access-Control-Request-Method'] = 'POST';
+            $headers['Access-Control-Request-Headers'] = 'test';
+        }
+
         // https://stackoverflow.com/questions/1176904/php-how-to-remove-all-non-printable-characters-in-a-string
         $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
-        $response = $this->client->request('POST', $endpoint, [
+        $response = $this->client->request($method, $endpoint, [
             'json' => json_decode($string, true),
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Accept' => $accept,
-            ],
+            'headers' => $headers,
         ]);
         $this->response = (string) $response->getBody();
+        $this->rawResponse = $response;
     }
 }
