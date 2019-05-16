@@ -100,6 +100,8 @@ Scenario: GraphQL client wants to get a project with specify term, theme and typ
             type {
               id
             }
+            url
+            contributionsCount
           }
         }
       }
@@ -114,30 +116,32 @@ Scenario: GraphQL client wants to get a project with specify term, theme and typ
   Then the JSON response should match:
   """
   {
-     "data": {
-        "projects": {
-           "edges": [
+     "data":{
+        "projects":{
+           "edges":[
               {
-                 "node": {
-                    "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-                    "title": "Croissance, innovation, disruption",
-                    "themes": [
+                 "node":{
+                    "id":"UHJvamVjdDpwcm9qZWN0MQ==",
+                    "title":"Croissance, innovation, disruption",
+                    "themes":[
                        {
-                          "id": "theme1"
+                          "id":"theme1"
                        },
                        {
-                          "id": "theme2"
+                          "id":"theme2"
                        }
                     ],
-                    "author": {
-                       "username": "admin"
+                    "author":{
+                       "username":"admin"
                     },
-                    "type": {
-                       "id": "3"
-                    }
+                    "type":{
+                       "id":"3"
+                    },
+                    "url":"https:\/\/capco.test\/consultation\/croissance-innovation-disruption\/presentation\/presentation-1",
+                    "contributionsCount": 255
                  }
               }
-            ]
+           ]
         }
      }
   }

@@ -15,16 +15,11 @@ class ReplyResponsesResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Reply $reply, $viewer, \ArrayObject $context): iterable
+    public function __invoke(Reply $reply, $viewer): iterable
     {
-        $skipVerification =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
-
+        $questionnaire = $reply->getQuestionnaire();
         if (
-            !$skipVerification &&
-            $reply->getQuestionnaire()->isPrivateResult() &&
+            $questionnaire->isPrivateResult() &&
             (!$viewer || (!$viewer->isAdmin() && $viewer->getId() !== $reply->getAuthor()->getId()))
         ) {
             $this->logger->warn('Tried to access private responses on a reply.');

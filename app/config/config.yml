@@ -78,6 +78,7 @@ parameters:
   #
   # See https://github.com/nelmio/alice/blob/master/doc/customizing-data-generation.md
   nelmio_alice.seed: 1
+  
   # Default values
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
   env(SYMFONY_DATABASE_HOST): 127.0.0.1

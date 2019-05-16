@@ -38,7 +38,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response10:
     question: '@multiplequestion1'
     reply: '@reply1'
-    value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Guild Wars 2' }
+    value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': null }
   response11:
     question: '@simplequestion2'
     reply: '@reply2'
@@ -46,7 +46,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response12:
     question: '@multiplequestion1'
     reply: '@reply2'
-    value: { 'labels': ['Natation', 'Sports collectifs'], 'other': 'Civilization 6' }
+    value: { 'labels': ['Natation', 'Sports collectifs'], 'other': null }
   response13:
     question: '@multiplequestion2'
     reply: '@reply2'
@@ -132,43 +132,63 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@multiplequestion5'
     value: 'Sangohan'
     user: '@user666'
-  response32:
+  reply{32..40}:
+    question: '@simplequestion2'
+    reply: '@reply1'
+    value: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
+  reply{41..50}:
+    question: '@multiplequestion1'
+    reply: '@reply1'
+    value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': null }
+  reply{51..60}:
+    question: '@multiplequestion1'
+    reply: '@reply2'
+    value: { 'labels': ['Natation', 'Sports collectifs'], 'other': null }
+  response{61..70}:
+    question: '@multiplequestion1'
+    reply: '@reply6'
+    value: { 'labels': ['Response of user not confirmed'], 'other': null }
+  response{71..80}:
+    question: '@multiplequestion1'
+    reply: '@reply7'
+    value: { 'labels': ['Response of user not confirmed', 'Sports collectifs'], 'other': null }
+  response81:
     question: '@simplequestion2'
     reply: '@reply7'
     value: Trop cool ! On va voir Tibo qui cours en slip !
-  response33:
+  response82:
     question: '@multiplequestion3'
     reply: '@reply2'
     value: 'Assez fort (Mon sonotone est mal réglé)'
-  response34:
+  response83:
     question: '@multiplequestion6'
     reply: '@reply2'
     value: { 'labels': ['Logo 1'], 'other': null }
-  response35:
+  response84:
     question: '@multiplequestion3'
     reply: '@reply6'
     value: 'Pas assez fort (Mon sonotone est en panne)'
-  response36:
+  response85:
     question: '@multiplequestion7'
     reply: '@reply7'
     value: { 'labels': ['Oui'], 'other': null }
-  response37:
+  response86:
     question: '@multiplequestion8'
     reply: '@reply2'
     value: { 'labels': ['Au top'], 'other': null }
-  response38:
+  response87:
     question: '@multiplequestion7'
     reply: '@reply2'
     value: { 'labels': ['Il bluffe'], 'other': null }
-  response39:
+  response88:
     question: '@multiplequestion8'
     reply: '@reply6'
     value: { 'labels': ['Incohérente'], 'other': null }
-  response40:
+  response89:
     question: '@multiplequestion8'
     reply: '@reply7'
     value: { 'labels': ['Au top'], 'other': null }
-  response41:
+  response90:
     question: '@simplequestion14'
     reply: '@reply8'
     value: 'secret'

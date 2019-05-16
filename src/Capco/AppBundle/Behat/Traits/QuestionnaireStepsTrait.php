@@ -425,6 +425,7 @@ trait QuestionnaireStepsTrait
             'UpdateReplyForm-reply2-responses[0]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
+        $this->checkOption('UpdateReplyForm-reply2-responses[1]_choice-questionchoice1');
 
         $this->iClickOneRankingChoiceRightArrowUpdate();
         $this->iClickOneRankingChoiceRightArrowUpdate();

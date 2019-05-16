@@ -2,7 +2,8 @@
 Feature: Comment
 
 Scenario: GraphQL admin want to get users including superadmin
-  Given I send a GraphQL POST request:
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
   """
   {
     "query": "{
@@ -15,7 +16,7 @@ Scenario: GraphQL admin want to get users including superadmin
   """
   {
     "data": {
-      "allContributions": 433
+      "allContributions": 436
     }
   }
   """

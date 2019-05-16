@@ -192,21 +192,11 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalSimpleQuestion');
         }
         if ($node instanceof MediaQuestion) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewMediaQuestion');
-            }
-
-            return $this->typeResolver->resolve('InternalMediaQuestion');
+            return $this->typeResolver->resolve('MediaQuestion');
         }
-
         if ($node instanceof MultipleChoiceQuestion) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewMultipleChoiceQuestion');
-            }
-
-            return $this->typeResolver->resolve('InternalMultipleChoiceQuestion');
+            return $this->typeResolver->resolve('MultipleChoiceQuestion');
         }
-
         if ($node instanceof SectionQuestion) {
             return $this->typeResolver->resolve('SectionQuestion');
         }

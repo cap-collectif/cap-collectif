@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform1:
     id: proposalForm1
     title: Collecte des propositions pour le budget 2016 de la Ville de Rennes
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectstep1'
     notificationsConfiguration: '@proposalFormNotificationConfiguration1'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -31,14 +31,14 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform2:
     id: proposalForm2
     title: Formulaire de la collecte 2
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+    description: <text(100)>
     step: '@collectstep2'
     notificationsConfiguration: '@proposalFormNotificationConfiguration2'
     reference: 2
   proposalform3:
     id: proposalForm3
     title: Formulaire de la collecte 3
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+    description: <text(100)>
     step: '@collectstep3'
     notificationsConfiguration: '@proposalFormNotificationConfiguration3'
     usingCategories: true
@@ -48,42 +48,42 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform4:
     id: proposalForm4
     title: Formulaire de la collecte 4
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+    description: <text(100)>
     step: '@collectstep4'
     notificationsConfiguration: '@proposalFormNotificationConfiguration4'
     reference: 4
   proposalform5:
     id: proposalForm5
     title: Formulaire de la collecte 5
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+    description: <text(100)>
     step: '@collectstep5'
     notificationsConfiguration: '@proposalFormNotificationConfiguration5'
     reference: 5
   proposalform6:
     id: proposalForm6
     title: Formulaire du dépôt fermé
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+    description: <text(100)>
     step: '@collectstep6'
     notificationsConfiguration: '@proposalFormNotificationConfiguration6'
     reference: 6
   proposalform7:
     id: proposalForm7
     title: Formulaire de la collecte 7
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+    description: <text(100)>
     step: '@collectstep7'
     notificationsConfiguration: '@proposalFormNotificationConfiguration7'
     reference: 7
   proposalform8:
     id: proposalForm8
     title: Formulaire de la collecte 8
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+    description: <text(100)>
     step: '@collectstep8'
     notificationsConfiguration: '@proposalFormNotificationConfiguration8'
     reference: 8
   proposalFormVote:
     id: proposalFormVote
     title: Collecte des propositions de vote pour le budget 2016 de la Ville de Rennes
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectStepWithVote'
     notificationsConfiguration: '@proposalFormNotificationConfiguration9'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -116,7 +116,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform9:
     id: proposalForm9
     title: Collecte des propositions pour le budget 2018 de la Ville de La Force
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectstep9'
     notificationsConfiguration: '@proposalFormNotificationConfiguration11'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -145,7 +145,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform10:
     id: proposalform10
     title: Qui ? Quoi ? Comment conquerir le monde ?
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectstep10'
     notificationsConfiguration: '@proposalFormNotificationConfiguration12'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -169,7 +169,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform11:
     id: proposalform11
     title: CapcoBeer ?
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectstep11'
     notificationsConfiguration: '@proposalFormNotificationConfiguration13'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -194,7 +194,7 @@ Capco\AppBundle\Entity\ProposalForm:
     id: proposalform12
     title: Collect des propositions
     slug: collect-des-propositions
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectstep12'
     notificationsConfiguration: '@proposalFormNotificationConfiguration14'
     titleHelpText: Choisissez un titre pour votre proposition
@@ -218,7 +218,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform13:
     id: proposalform13
     title: Formulaire attaché à aucun projet
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     titleHelpText: Choisissez un titre pour votre proposition
     themeHelpText: Sélectionnez un thème
     districtHelpText: Sélectionnez une zone géographique
@@ -239,7 +239,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalform14:
     id: proposalForm14
     title: Poser une question
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@collectQuestionVoteAvecClassement'
     notificationsConfiguration: '@proposalFormNotificationConfiguration15'
     titleHelpText: Choisissez un titre pour votre question
@@ -265,7 +265,7 @@ Capco\AppBundle\Entity\ProposalForm:
     id: proposalform15
     step: '@collectstepWithQuestions'
     title: Formulaire attaché à une étape de collecte avec questions
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     titleHelpText: Choisissez un titre pour votre proposition
     themeHelpText: Sélectionnez un thème
     districtHelpText: Sélectionnez une zone géographique

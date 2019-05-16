@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('now', '+10 days')>
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     opinionCount: 0
     votesCount: 10
     requirementsReason: Vous devez avoir un numéro de téléphone.
@@ -39,7 +39,7 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     title: Elaboration de la Loi
     label: Consultation
     isEnabled: true
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+    body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('+1 days', '+10 days')>
     opinionCount: 0

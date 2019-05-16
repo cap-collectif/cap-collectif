@@ -11,14 +11,3 @@ global.client = new GraphQLClient(endpoint, {
     accept: 'application/vnd.cap-collectif.preview+json',
   },
 });
-
-global.internalClient = new GraphQLClient('https://capco.test/graphql/internal', {
-  headers: {
-    accept: 'application/json',
-  },
-  cookies: true,
-});
-
-global.toGlobalId = (type, id) => {
-  return Buffer.from(type + ':' + id).toString('base64');
-};

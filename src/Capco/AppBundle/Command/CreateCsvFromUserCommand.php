@@ -260,15 +260,10 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         int $columnKey,
         array $rows
     ): array {
-        // A question can have multiple responses so we insert a line for each response
-        $emptyRow = array_fill(0, $columnKey - 1, null);
-
+        //a question can have multiple responses so we insert a line for each response
+        $emptyRow = [null, null, null, null, null, null, null];
         foreach ($responses['node']['responses'] as $response) {
-            if (
-                $response['question']['title'] &&
-                'ValueResponse' === $response['__typename'] &&
-                null !== $response['formattedValue']
-            ) {
+            if ($response['question']['title'] && $response['formattedValue']) {
                 $rows[$rowCounter][$columnKey] = $response['question']['title'];
                 $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
                 ++$rowCounter;
@@ -300,30 +295,25 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     protected function getCleanHeadersName($data, string $type): array
     {
         $infoResolver = new InfoResolver();
-        $header = array_map(
-            function (string $header) use ($type) {
-                $header = str_replace('data_node_', '', $header);
+        $header = array_map(function ($item) use ($type) {
+            $item = str_replace('data_node_', '', $item);
 
-                if ('medias' === $type) {
-                    $header = str_replace('medias_', '', $header);
-                } elseif ('groups' === $type) {
-                    $header = str_replace('groups_edges_node_', '', $header);
-                } elseif ('reports' === $type) {
-                    $header = str_replace('reports_edges_node_', '', $header);
-                } elseif ('events' === $type) {
-                    $header = str_replace('events_edges_node_', '', $header);
-                } elseif ('votes' === $type) {
-                    $header = str_replace('votes_edges_node_', '', $header);
-                } else {
-                    $header = str_replace('contributions_edges_node_', '', $header);
-                }
+            if ('medias' === $type) {
+                $item = str_replace('medias_', '', $item);
+            } elseif ('groups' === $type) {
+                $item = str_replace('groups_edges_node_', '', $item);
+            } elseif ('reports' === $type) {
+                $item = str_replace('reports_edges_node_', '', $item);
+            } elseif ('events' === $type) {
+                $item = str_replace('events_edges_node_', '', $item);
+            } elseif ('votes' === $type) {
+                $item = str_replace('votes_edges_node_', '', $item);
+            } else {
+                $item = str_replace('contributions_edges_node_', '', $item);
+            }
 
-                return $header;
-            },
-            array_filter($infoResolver->guessHeadersFromFields($data), function (string $header) {
-                return 'data_node_contributions_edges_node_responses___typename' !== $header;
-            })
-        );
+            return $item;
+        }, $infoResolver->guessHeadersFromFields($data));
 
         return $header;
     }
@@ -596,20 +586,16 @@ EOF;
               questionnaire {
                 title
               }
-              createdAt
+              url
               updatedAt
               responses {
-                __typename
+                question {
+                  title
+                }
                 ... on ValueResponse {
-                  question {
-                    title
-                  }
                   formattedValue
                 }
                 ... on MediaResponse {
-                  question {
-                    title
-                  }
                   medias {
                     url
                   }
@@ -755,23 +741,6 @@ EOF;
               updatedAt
               trashedAt
               trashedReason
-              responses {
-                __typename
-                ... on ValueResponse {
-                    question {
-                        title
-                    }
-                    formattedValue
-                }
-                ... on MediaResponse {
-                    question {
-                        title
-                    }
-                    medias {
-                      url
-                    }
-                }
-              }
             }
           }
         }
