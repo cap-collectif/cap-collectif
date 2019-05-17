@@ -8,6 +8,7 @@ import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
+import Tag from '../../Ui/Labels/Tag';
 import TagsList from '../../Ui/List/TagsList';
 import type { State, FeatureToggles } from '../../../types';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
@@ -51,22 +52,13 @@ export class ProposalPreviewBody extends React.Component<Props> {
           )}
           <TagsList>
             {features.themes && showThemes && proposal.theme && (
-              <div className="tags-list__tag">
-                <i className="cap cap-tag-1-1 icon--blue" />
-                {proposal.theme.title}
-              </div>
+              <Tag icon="cap cap-tag-1-1 icon--blue">{proposal.theme.title}</Tag>
             )}
             {proposal.category && (
-              <div className="tags-list__tag">
-                <i className="cap cap-tag-1-1 icon--blue" />
-                {proposal.category.name}
-              </div>
+              <Tag icon="cap cap-tag-1-1 icon--blue">{proposal.category.name}</Tag>
             )}
             {features.districts && proposal.district && (
-              <div className="tags-list__tag">
-                <i className="cap cap-marker-1-1 icon--blue" />
-                {proposal.district.name}
-              </div>
+              <Tag icon="cap cap-marker-1-1 icon--blue">{proposal.district.name}</Tag>
             )}
             {/* $FlowFixMe */}
             <ProposalDetailEstimation
