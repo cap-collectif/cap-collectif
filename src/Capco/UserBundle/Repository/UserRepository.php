@@ -848,7 +848,8 @@ class UserRepository extends EntityRepository
             ->andWhere('p.deletedAt IS NULL')
             ->setParameter('proposal', $proposal)
             ->setMaxResults($offset)
-            ->setFirstResult($first);
+            ->setFirstResult($first)
+            ->addOrderBy('f.followedAt', 'ASC');
 
         return new Paginator($query);
     }
@@ -864,7 +865,8 @@ class UserRepository extends EntityRepository
             ->andWhere('f.opinion = :opinion')
             ->setParameter('opinion', $opinion)
             ->setMaxResults($offset)
-            ->setFirstResult($first);
+            ->setFirstResult($first)
+            ->addOrderBy('f.followedAt', 'ASC');
 
         return new Paginator($query);
     }

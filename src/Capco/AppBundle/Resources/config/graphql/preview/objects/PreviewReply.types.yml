@@ -13,7 +13,7 @@ PreviewReply:
     fields:
       responses:
         type: '[PreviewResponse]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value, getUser()])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value, getUser(), context])'
         description: 'The responses of the reply.'
       author:
         type: 'PreviewUser!'

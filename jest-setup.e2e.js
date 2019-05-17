@@ -11,3 +11,22 @@ global.client = new GraphQLClient(endpoint, {
     accept: 'application/vnd.cap-collectif.preview+json',
   },
 });
+
+global.internalClient = new GraphQLClient('https://capco.test/graphql/internal', {
+  headers: {
+    accept: 'application/json',
+  },
+  cookies: true,
+});
+
+global.toGlobalId = (type, id) => {
+  return Buffer.from(type + ':' + id).toString('base64');
+};
+
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}
+
+global.asyncForEach = asyncForEach;

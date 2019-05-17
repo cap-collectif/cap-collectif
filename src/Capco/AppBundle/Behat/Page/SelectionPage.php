@@ -53,23 +53,6 @@ class SelectionPage extends Page
             "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxNw==']",
     ];
 
-    /**
-     * Overload to verify if we're on an expected page. Throw an exception otherwise.
-     */
-    public function verifyPage()
-    {
-        if (
-            !$this->getSession()->wait(
-                10000,
-                "window.jQuery && $('#ProposalStepPage-rendered').length > 0"
-            )
-        ) {
-            throw new \RuntimeException(
-                'SelectionPage did not fully load, check selector in "verifyPage".'
-            );
-        }
-    }
-
     public function sortByDate()
     {
         $this->getElement('sorting select')->selectOption('global.filter_f_last');

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultipleChoiceQuestion_choices it resolves a question's choices and the number of answers to each of them: 13 1`] = `
+Object {
+  "node": Object {
+    "choices": Array [
+      Object {
+        "responses": Object {
+          "totalCount": 1,
+        },
+        "title": "Athlétisme",
+      },
+      Object {
+        "responses": Object {
+          "totalCount": 1,
+        },
+        "title": "Natation",
+      },
+      Object {
+        "responses": Object {
+          "totalCount": 2,
+        },
+        "title": "Sports collectifs",
+      },
+      Object {
+        "responses": Object {
+          "totalCount": 0,
+        },
+        "title": "Sports individuels",
+      },
+    ],
+  },
+}
+`;

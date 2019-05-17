@@ -48,23 +48,6 @@ class OpinionVersionPage extends Page
      */
     protected $path = '/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}';
 
-    /**
-     * Overload to verify if we're on an expected page. Throw an exception otherwise.
-     */
-    public function verifyPage()
-    {
-        if (
-            !$this->getSession()->wait(
-                5000,
-                "$('#OpinionBox').length > 0 && $('#opinion__arguments--AGAINST').length > 0 && $('#opinion-page-tabs').length > 0"
-            )
-        ) {
-            throw new \RuntimeException(
-                'OpinionVersionPage did not fully load, check selector in "verifyPage".'
-            );
-        }
-    }
-
     public function clickSourcesTab()
     {
         $this->getElement('sources tab')->click();
@@ -150,6 +133,7 @@ class OpinionVersionPage extends Page
         return $this->getElement('argument votes counter');
     }
 
+    
     public function getArgumentVotesCountSelector(): string
     {
         return $this->getSelector('argument votes counter');

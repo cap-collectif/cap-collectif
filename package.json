@@ -7,7 +7,7 @@
         "test:ci": "NODE_ENV=test jest -c jest.config.js --coverage --ci --runInBand",
         "test:watch": "NODE_ENV=test jest -c jest.config.js --watchAll",
         "test-e2e": "NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --ci --runInBand",
-        "test-e2e:watch": "NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --watchAll",
+        "test-e2e:watch": "fab local.app.toggle_enable && NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --watchAll",
         "flow": "flow",
         "flow:coverage": "flow-coverage-report",
         "build": "NODE_ENV=development webpack --config webpack/webpack.client.js",

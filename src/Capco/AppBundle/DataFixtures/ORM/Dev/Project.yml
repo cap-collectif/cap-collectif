@@ -7,7 +7,7 @@ Capco\AppBundle\Entity\Project:
     Cover: '@MediaProject1'
     video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
     themes: ['@theme1', '@theme2']
-    publishedAt: <dateTimeBetween('-1 days', 'now')>
+    publishedAt: <(new \DateTime('now - 1 days'))>
     exportable: true
     opinionsRankingThreshold: 60
     versionsRankingThreshold: 20
@@ -20,7 +20,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user4'
     Cover: '@MediaProject2'
     themes: ['@theme1', '@theme3']
-    publishedAt: <dateTimeBetween('-3 days', '-2 days')>
+    publishedAt: <(new \DateTime('now - 2 days'))>
     visibility: 2
   p3:
     id: 'project3'
@@ -29,14 +29,14 @@ Capco\AppBundle\Entity\Project:
     Author: '@user4'
     themes: ['@theme2', '@theme3']
     visibility: 2
-    publishedAt: <dateTimeBetween('-5 days', '- 4 days')>
+    publishedAt: <(new \DateTime('now - 4 days'))>
   p4:
     id: 'project4'
     title: Projet vide
     projectType: '@projectType2'
     Author: '@user4'
     themes: ['@theme2', '@theme3']
-    publishedAt: <dateTimeBetween('-7 days', '-6 days')>
+    publishedAt: <(new \DateTime('now - 6 days'))>
     visibility: 2
   p5:
     id: 'project5'
@@ -46,7 +46,7 @@ Capco\AppBundle\Entity\Project:
     Cover: '@MediaProject1'
     video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
     themes: ['@theme1', '@theme3']
-    publishedAt: <dateTimeBetween('-9 days', '-8 days')>
+    publishedAt: <(new \DateTime('now - 8 days'))>
     exportable: true
     opinionsRankingThreshold: 60
     versionsRankingThreshold: 20
@@ -58,7 +58,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user502'
     themes: ['@theme3']
     exportable: true
-    publishedAt: <dateTimeBetween('-11 days', '-10 days')>
+    publishedAt: <(new \DateTime('now - 10 days'))>
     visibility: 2
     opinionCanBeFollowed: true
   p7:
@@ -68,7 +68,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user4'
     themes: ['@theme3']
     exportable: true
-    publishedAt: <dateTimeBetween('-13 days', '-12 days')>
+    publishedAt: <(new \DateTime('now - 12 days'))>
     visibility: 2
   p8:
     id: 'project8'
@@ -77,7 +77,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user502'
     themes: ['@theme3']
     exportable: true
-    publishedAt: <dateTimeBetween('-15 days', '-14 days')>
+    publishedAt: <(new \DateTime('now - 14 days'))>
     visibility: 2
   p9:
     id: 'project9'
@@ -86,7 +86,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user1'
     themes: []
     exportable: true
-    publishedAt: <dateTimeBetween('-17 days', '-16 days')>
+    publishedAt: <(new \DateTime('now - 16 days'))>
     visibility: 2
   p10:
     id: 'project10'
@@ -95,7 +95,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user4'
     themes: ['@theme3']
     exportable: true
-    publishedAt: <dateTimeBetween('-19 days', '-18 days')>
+    publishedAt: <(new \DateTime('now - 18 days'))>
     visibility: 2
   p11:
     id: 'project11'
@@ -103,7 +103,7 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     Author: '@user4'
     exportable: true
-    publishedAt: <dateTimeBetween('-21 days', '-20 days')>
+    publishedAt: <(new \DateTime('now - 20 days'))>
     visibility: 2
   p12:
     id: 'project12'
@@ -113,7 +113,7 @@ Capco\AppBundle\Entity\Project:
     Cover: '@MediaProject4'
     themes: ['@theme2']
     exportable: true
-    publishedAt: <dateTimeBetween('-23 days', '-22 days')>
+    publishedAt: <(new \DateTime('now - 22 days'))>
     visibility: 2
   p13:
     id: 'project13'
@@ -122,7 +122,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user3'
     themes: ['@theme1']
     exportable: true
-    publishedAt: <dateTimeBetween('-25 days', '-24 days')>
+    publishedAt: <(new \DateTime('now - 24 days'))>
     visibility: 2
   p14:
     id: 'project14'
@@ -131,7 +131,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user4'
     themes: ['@theme1']
     exportable: true
-    publishedAt: <dateTimeBetween('-27 days', '-26 days')>
+    publishedAt: <(new \DateTime('now - 26 days'))>
     visibility: 2
   p15:
     id: 'project15'
@@ -140,7 +140,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user4'
     themes: []
     exportable: true
-    publishedAt: <dateTimeBetween('-29 days', '-28 days')>
+    publishedAt: <(new \DateTime('now - 28 days'))>
     visibility: 2
   p16:
     id: 'project16'
@@ -149,7 +149,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user4'
     themes: ['@theme3']
     exportable: true
-    publishedAt: <dateTimeBetween('-31 days', '-30 days')>
+    publishedAt: <(new \DateTime('now - 30 days'))>
     visibility: 2
   p17:
     id: 'ProjectAccessibleForMeOnly'
@@ -158,7 +158,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user516'
     themes: ['@theme3']
     exportable: true
-    publishedAt: <dateTimeBetween('-33 days', '-32 days')>
+    publishedAt: <(new \DateTime('now - 32 days'))>
     visibility: 0
   p18:
     id: 'ProjectAccessibleForAdminOnly'
@@ -167,7 +167,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user516'
     themes: ['@theme2']
     exportable: true
-    publishedAt: <dateTimeBetween('-35 days', '-34 days')>
+    publishedAt: <(new \DateTime('now - 34 days'))>
     visibility: 1
   p19:
     id: 'ProjectAccessibleForMeOnlyByAdmin'
@@ -176,7 +176,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user4'
     themes: ['@theme3']
     exportable: true
-    publishedAt: <dateTimeBetween('-37 days', '-36 days')>
+    publishedAt: <(new \DateTime('now - 36 days'))>
     visibility: 0
   p20:
     id: 'ProjectWithCustomAccess'
@@ -185,7 +185,7 @@ Capco\AppBundle\Entity\Project:
     Author: '@user4'
     themes: ['@theme2']
     exportable: true
-    publishedAt: <dateTimeBetween('-39 days', '-38 days')>
+    publishedAt: <(new \DateTime('now - 38 days'))>
     visibility: 3
     restrictedViewerGroups: ['@group2', '@group3']
   p21:
@@ -195,5 +195,5 @@ Capco\AppBundle\Entity\Project:
     Author: '@user4'
     themes: []
     exportable: true
-    publishedAt: <dateTimeBetween('-41 days', '-40 days')>
+    publishedAt: <(new \DateTime('now - 40 days'))>
     visibility: 2

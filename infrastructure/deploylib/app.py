@@ -20,6 +20,13 @@ def deploy(environment='dev', user='capco'):
     env.service_command('php bin/console assets:install --symlink', 'application', env.www_app)
 
 
+@task(environments=['local', 'ci'])
+def toggle_enable(toggle='public_api', environment='test'):
+    "Enable a feature toggle."
+    env.service_command('php bin/console capco:toggle:enable ' + toggle
+     + ' --env=' + environment, 'application', env.www_app)
+
+
 @task(environments=['ci'])
 def build(environment='prod', user='capco'):
     "Build"

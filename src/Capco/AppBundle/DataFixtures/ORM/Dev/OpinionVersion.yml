@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>
     title: Modification 1
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user5'
     parent: '@opinion57'
     comment: bououh
@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     publishedAt: <(new \DateTime('2015-01-02'))>
     createdAt: <(new \DateTime('2015-01-02'))>
     title: Modification 2
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user2'
     parent: '@opinion57'
     comment: bououh
@@ -26,7 +26,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     publishedAt: <(new \DateTime('2015-01-03'))>
     createdAt: <(new \DateTime('2015-01-03'))>
     title: Modification 3
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user2'
     parent: '@opinion57'
     comment: bououh
@@ -37,7 +37,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     createdAt: <(new \DateTime('2015-01-03'))>
     trashedAt: <(new \DateTime('2016-01-03'))>
     title: Modification <current()>
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     trashedStatus: 'visible'
     author: '@user2'
     parent: '@opinion<numberBetween(57,59)>'
@@ -48,7 +48,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     publishedAt: <(new \DateTime('2015-01-03'))>
     createdAt: <(new \DateTime('2015-01-03'))>
     title: Version sur une étape fermée
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user5'
     parent: '@opinion51'
 
@@ -56,6 +56,6 @@ Capco\AppBundle\Entity\OpinionVersion:
     id: 'version<current()>'
     title: Version non publiée n°<current()>
     createdAt: <(new \DateTime('2015-01-03'))>
-    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>      <stripslashes('\<p>\')><text(300)><stripslashes('\</p>\')>
+    body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     author: '@user_not_confirmed_with_contributions'
     parent: '@opinion57'
