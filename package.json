@@ -22,7 +22,7 @@
         "download-translations": "bin/console translation:download app --no-debug",
         "update-js-translation": "node --experimental-modules ./xlf2-to-json.mjs",
         "trad": "yarn run download-translations && yarn run update-js-translation && yarn run clean-cache",
-        "fonts": "cd app/Resources; rm -rf fonts; git clone --depth 1 git@github.com:cap-collectif/fonts.git; cp -r fonts/fonts/. assets/fonts",
+        "fonts": "cd app/Resources; rm -rf fonts; git clone --depth 1 git@github.com:cap-collectif/fonts.git; cp -r fonts/fonts/. assets/fonts; cp -r fonts/fonts/. ../../web/fonts",
         "compile-graphql": "fab local.app.cmd:'graphql:compile --no-debug' && composer dump-autoload",
         "dump-graphql-schemas": "fab local.qa.graphql_schemas",
         "clean-cache": "rm -rf var/cache/* && fab local.app.clear_cache",

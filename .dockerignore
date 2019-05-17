@@ -21,19 +21,21 @@ jest-setup.js
 .storybook
 behat.yml
 app/config/parameters.yml
+
+# We don't ignore web/fonts folder to keep non-generated fonts public   
 /web/bundles/
 /web/images/*
-/web/fonts/*
 /web/css/*
 /web/js/*
 /web/media/*
 /web/uploads/*
 /web/export/*
+/web/app_dev.php
+/web/app_test.php
+
 translations/*
 app/config/parameters.ini
 app/config/parameters/*
-/web/app_dev.php
-/web/app_test.php
 
 # ide config
 jsconfig.json
