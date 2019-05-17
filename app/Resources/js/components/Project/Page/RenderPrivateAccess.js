@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import Tag from '../../Ui/Labels/Tag';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { RenderPrivateAccess_project } from '~relay/RenderPrivateAccess_project.graphql';
@@ -26,14 +27,11 @@ export class RenderPrivateAccess extends React.Component<Props> {
     );
 
     return (
-      <div>
-        <OverlayTrigger placement="top" overlay={tooltip}>
-          <span>
-            <i className={`cap ${lock} mr-1`} />
-            <FormattedMessage id="restrictedaccess" />
-          </span>
-        </OverlayTrigger>
-      </div>
+      <OverlayTrigger placement="top" overlay={tooltip}>
+        <Tag icon={`cap ${lock} mr-1`}>
+          <FormattedMessage id="restrictedaccess" />
+        </Tag>
+      </OverlayTrigger>
     );
   }
 }

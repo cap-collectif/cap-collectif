@@ -1,8 +1,7 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 import { Col } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
 import config from '../../config';
 
 type Props = {
@@ -14,7 +13,7 @@ type Props = {
   yearId: string,
   dayDefaultValue: string,
   input: Object,
-  label: string,
+  label: React.Node,
   componentId: string,
   labelClassName: string,
   divClassName: string,
@@ -56,7 +55,7 @@ if (config.canUseDOM && window.locale) {
   wLocale = global.locale;
 }
 
-export class DateDropdownPicker extends Component<Props, DateState> {
+export class DateDropdownPicker extends React.Component<Props, DateState> {
   static defaultProps = {
     dayDefaultValue: 'Jour',
     monthDefaultValue: 'Mois',
@@ -115,7 +114,7 @@ export class DateDropdownPicker extends Component<Props, DateState> {
     return (
       <div className={globalClassName}>
         <label htmlFor={dayId} className={labelClassName}>
-          <FormattedMessage id={label} />
+          {label}
         </label>
         <div className={divClassName} id={componentId}>
           <Col sm={2} md={2} id={dayId}>

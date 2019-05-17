@@ -404,7 +404,12 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                   dayId="personal-data-date-of-birth-day"
                   divClassName="col-sm-6"
                   id="dateOfBirth"
-                  label="form.label_date_of_birth"
+                  label={
+                    <FormattedMessage
+                      id="form.label_date_of_birth"
+                      values={Object {}}
+                    />
+                  }
                   labelClassName="col-sm-3 control-label"
                   locale="fr-FR"
                   monthId="personal-data-date-of-birth-month"
@@ -1683,7 +1688,12 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   dayId="personal-data-date-of-birth-day"
                   divClassName="col-sm-6"
                   id="dateOfBirth"
-                  label="form.label_date_of_birth"
+                  label={
+                    <FormattedMessage
+                      id="form.label_date_of_birth"
+                      values={Object {}}
+                    />
+                  }
                   labelClassName="col-sm-3 control-label"
                   locale="fr-FR"
                   monthId="personal-data-date-of-birth-month"

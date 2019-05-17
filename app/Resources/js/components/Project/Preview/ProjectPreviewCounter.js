@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import Tag from '../../Ui/Labels/Tag';
 
 type Props = {
   value: number,
@@ -18,10 +19,9 @@ export class ProjectPreviewCounter extends React.Component<Props> {
     const { value, label, showZero, icon } = this.props;
     if (value > 0 || showZero) {
       return (
-        <div className="tags-list__tag">
-          {icon && <i className={`cap ${icon}`} />}
+        <Tag icon={icon ? `cap ${icon}` : undefined}>
           {value} <FormattedMessage id={label} values={{ num: value }} />
-        </div>
+        </Tag>
       );
     }
     return null;

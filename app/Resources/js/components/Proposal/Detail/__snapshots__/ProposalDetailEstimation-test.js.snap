@@ -3,33 +3,27 @@
 exports[`<ProposalDetailEstimation /> should not render a div when estimation is null and showNullEstimation is false 1`] = `""`;
 
 exports[`<ProposalDetailEstimation /> should render a div when estimation is not null 1`] = `
-<div
-  className="tags-list__tag ellipsis"
+<Tag
+  icon="cap cap-coins-2-1 icon--blue"
 >
-  <i
-    className="cap cap-coins-2-1 icon--blue"
-  />
   <FormattedNumber
     currency="EUR"
     minimumFractionDigits={0}
     style="currency"
     value={100}
   />
-</div>
+</Tag>
 `;
 
 exports[`<ProposalDetailEstimation /> should render a div when estimation is null and showNullEstimation is true 1`] = `
-<div
-  className="tags-list__tag ellipsis"
+<Tag
+  icon="cap cap-coins-2-1 icon--blue"
 >
-  <i
-    className="cap cap-coins-2-1 icon--blue"
-  />
   <FormattedNumber
     currency="EUR"
     minimumFractionDigits={0}
     style="currency"
     value={0}
   />
-</div>
+</Tag>
 `;
