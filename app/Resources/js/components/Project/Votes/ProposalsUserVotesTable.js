@@ -115,7 +115,7 @@ const renderDraggableMembers = ({ fields, votes, step, deletable, intl }: VotesP
                     usePortal ? 'item-in-portal' : ''
                   }`}>
                   <DraggableItem
-                    ref={provided.innerRef}
+                    innerRef={provided.innerRef}
                     isDragging={snapshot.isDragging}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -266,7 +266,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
             {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
               <Wrapper
                 isDraggingOver={snapshot.isDraggingOver}
-                ref={provided.innerRef}
+                innerRef={provided.innerRef}
                 {...provided.droppableProps}>
                 <FieldArray
                   step={step}

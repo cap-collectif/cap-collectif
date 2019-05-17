@@ -4,26 +4,29 @@ exports[`<ProposalDetailLikers /> should not render anything when proposal has n
 
 exports[`<ProposalDetailLikers /> should render a <Modal /> when proposal has likers 1`] = `
 <Fragment>
-  <ForwardRef(Relay(ProposalDetailLikersLabel))
-    componentClass="a"
+  <a
+    className="tags-list__tag"
     onClick={[Function]}
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "id": "1",
-        "likers": Array [
-          Object {
-            "id": "1",
-          },
-          Object {
-            "id": "2",
-          },
-        ],
-      }
-    }
     title="list-of-favorites"
-  />
+  >
+    <ForwardRef(Relay(ProposalDetailLikersLabel))
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "1",
+          "likers": Array [
+            Object {
+              "id": "1",
+            },
+            Object {
+              "id": "2",
+            },
+          ],
+        }
+      }
+    />
+  </a>
   <ForwardRef(Relay(Connect(InjectIntl(ProposalDetailLikersModal))))
     proposal={
       Object {
@@ -47,26 +50,29 @@ exports[`<ProposalDetailLikers /> should render a <Modal /> when proposal has li
 
 exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
 <Fragment>
-  <ForwardRef(Relay(ProposalDetailLikersLabel))
-    componentClass="div"
+  <div
+    className="tags-list__tag"
     onClick={[Function]}
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "id": "1",
-        "likers": Array [
-          Object {
-            "id": "1",
-          },
-          Object {
-            "id": "2",
-          },
-        ],
-      }
-    }
     title="list-of-favorites"
-  />
+  >
+    <ForwardRef(Relay(ProposalDetailLikersLabel))
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "1",
+          "likers": Array [
+            Object {
+              "id": "1",
+            },
+            Object {
+              "id": "2",
+            },
+          ],
+        }
+      }
+    />
+  </div>
   <ForwardRef(Relay(Connect(InjectIntl(ProposalDetailLikersModal))))
     proposal={
       Object {

@@ -36,27 +36,17 @@ describe('<ProposalDetailLikersLabel />', () => {
   };
 
   it('should render truncated liker name when only one liker', () => {
-    const wrapper = shallow(
-      <ProposalDetailLikersLabel title="test" onClick={() => {}} proposal={proposal} />,
-    );
+    const wrapper = shallow(<ProposalDetailLikersLabel proposal={proposal} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a <FormattedMessage/> when several likers', () => {
-    const wrapper = shallow(
-      <ProposalDetailLikersLabel title="test" onClick={() => {}} proposal={proposalWithLikers} />,
-    );
+    const wrapper = shallow(<ProposalDetailLikersLabel proposal={proposalWithLikers} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render nothing when no likers', () => {
-    const wrapper = shallow(
-      <ProposalDetailLikersLabel
-        title="test"
-        onClick={() => {}}
-        proposal={proposalWithoutLikers}
-      />,
-    );
+    const wrapper = shallow(<ProposalDetailLikersLabel proposal={proposalWithoutLikers} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

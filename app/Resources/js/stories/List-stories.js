@@ -2,11 +2,10 @@
 import * as React from 'react';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { Button, ListGroup, ListGroupItem, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { UserAvatar } from '../components/User/UserAvatar';
 import InlineList from '../components/Ui/List/InlineList';
 import TagsList from '../components/Ui/List/TagsList';
-import Tag from '../components/Ui/Labels/Tag';
 import ProgressListItem from '../components/Ui/List/ProgressListItem';
 import ProgressList from '../components/Ui/List/ProgressList';
 import ListGroupFlush from '../components/Ui/List/ListGroupFlush';
@@ -42,11 +41,13 @@ storiesOf('List', module)
     'Tags list',
     () => (
       <TagsList>
-        <Tag icon="cap cap-marker-1-1 icon--blue">5 projets</Tag>
-        <Tag icon="cap cap-tag-1-1 icon--blue">10 articles</Tag>
-        <OverlayTrigger placement="top" overlay={<Tooltip>Exemple tooltip</Tooltip>}>
-          <Tag icon="cap cap-lock-2-1 mr-1">Accès restreint</Tag>
-        </OverlayTrigger>
+        <div className="tags-list__tag">
+          <i className="cap cap-marker-1-1 icon--blue" />5 projets
+        </div>
+        <div className="tags-list__tag">
+          <i className="cap cap-tag-1-1 icon--blue" />
+          10 articles
+        </div>
       </TagsList>
     ),
     {
