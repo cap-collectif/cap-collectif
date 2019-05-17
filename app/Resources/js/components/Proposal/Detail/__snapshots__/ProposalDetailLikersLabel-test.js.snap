@@ -1,15 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalDetailLikersLabel /> should render a <FormattedMessage/> when several likers 1`] = `
-<span
-  onBlur={[Function]}
-  onFocus={[Function]}
-  onMouseOut={[Function]}
-  onMouseOver={[Function]}
+<Tag
+  as="a"
+  icon="cap cap-heart-1 icon--red"
+  onClick={[Function]}
+  title="test"
 >
-  <i
-    className="cap cap-heart-1 icon--red"
-  />
   <FormattedMessage
     id="proposal.likers.count"
     values={
@@ -18,21 +15,18 @@ exports[`<ProposalDetailLikersLabel /> should render a <FormattedMessage/> when 
       }
     }
   />
-</span>
+</Tag>
 `;
 
 exports[`<ProposalDetailLikersLabel /> should render nothing when no likers 1`] = `""`;
 
 exports[`<ProposalDetailLikersLabel /> should render truncated liker name when only one liker 1`] = `
-<span
-  onBlur={[Function]}
-  onFocus={[Function]}
-  onMouseOut={[Function]}
-  onMouseOver={[Function]}
+<Tag
+  as="a"
+  icon="cap cap-heart-1 icon--red"
+  onClick={[Function]}
+  title="test"
 >
-  <i
-    className="cap cap-heart-1 icon--red"
-  />
   <FormattedMessage
     id="proposal.likers.count"
     values={
@@ -41,5 +35,5 @@ exports[`<ProposalDetailLikersLabel /> should render truncated liker name when o
       }
     }
   />
-</span>
+</Tag>
 `;
