@@ -17,8 +17,8 @@
         "build:prod": "NODE_ENV=production webpack --config webpack/webpack.prod.client.js",
         "build-server-bundle": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack/webpack.config.serverside.legacy.js",
         "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack/webpack.config.serverside.legacy.js",
-        "build-relay-schema": "node node_modules/relay-compiler/lib/RelayCompilerBin.js --artifactDirectory ./app/Resources/js/__generated__/~relay --watchman false --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums",
-        "build-relay-schema:watch": "node node_modules/relay-compiler/lib/RelayCompilerBin.js --artifactDirectory ./app/Resources/js/__generated__/~relay --watch --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums",
+        "build-relay-schema": "node node_modules/relay-compiler/lib/RelayCompilerBin.js --artifactDirectory ./app/Resources/js/__generated__/~relay --watchman false --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums --language js-flow-uncommented",
+        "build-relay-schema:watch": "node node_modules/relay-compiler/lib/RelayCompilerBin.js --artifactDirectory ./app/Resources/js/__generated__/~relay --watch --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums --language js-flow-uncommented",
         "download-translations": "bin/console translation:download app --no-debug",
         "update-js-translation": "node --experimental-modules ./xlf2-to-json.mjs",
         "trad": "yarn run download-translations && yarn run update-js-translation && yarn run clean-cache",
@@ -312,6 +312,7 @@
         "node-gyp": "^4.0.0"
     },
     "devDependencies": {
-        "flow-typed": "^2.5.1"
+        "flow-typed": "^2.5.1",
+        "relay-compiler-language-js-flow-uncommented": "^1.1.0"
     }
 }

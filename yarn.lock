@@ -12689,6 +12689,11 @@ relateurl@0.2.x:
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
 
+relay-compiler-language-js-flow-uncommented@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/relay-compiler-language-js-flow-uncommented/-/relay-compiler-language-js-flow-uncommented-1.1.0.tgz#aac5aa7051110a533829d19d4a27fec76f9a62db"
+  integrity sha512-BxTIUl93HWTTK+euGfZ9vyb/lUjcmZ/dKbWbQs3y7/8iG8U6lII21ay9/p1UwujzgN/x8Q8RPmk8J6uhYYpoow==
+
 relay-compiler@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/relay-compiler/-/relay-compiler-4.0.0.tgz#d97dd2819d3b92669599c9cfec8049c9b487be67"
