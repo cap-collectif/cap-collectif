@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
@@ -15,32 +14,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class OpinionVersionRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
-
-    /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function getOneBySlugAndProjectSlugAndStepSlugAndOpinionSlug(
-        string $slug,
-        string $projectSlug,
-        string $stepSlug,
-        string $opinionSlug
-    ): ?OpinionVersion {
-        $qb = $this->createQueryBuilder('v')
-            ->leftJoin('v.parent', 'o')
-            ->leftJoin('o.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pas')
-            ->leftJoin('pas.project', 'p')
-            ->andWhere('v.slug = :slug')
-            ->andWhere('o.slug = :opinionSlug')
-            ->andWhere('s.slug = :stepSlug')
-            ->andWhere('p.slug = :projectSlug')
-            ->setParameter('slug', $slug)
-            ->setParameter('stepSlug', $stepSlug)
-            ->setParameter('projectSlug', $projectSlug)
-            ->setParameter('opinionSlug', $opinionSlug);
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
 
     public function getAllIds()
     {
