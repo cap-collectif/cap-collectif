@@ -1,10 +1,9 @@
 // @flow
 import React from 'react';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Tooltip, OverlayTrigger, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserGroupModal from './UserGroupModal';
-import Tag from '../../Ui/Labels/Tag';
 import type { RenderCustomAccess_project } from '~relay/RenderCustomAccess_project.graphql';
 
 type Props = {
@@ -48,12 +47,13 @@ export class RenderCustomAccess extends React.Component<Props, State> {
     );
 
     return (
-      <React.Fragment>
-        <Tag as="button" icon={`cap ${lock} mr-1`} onClick={this.showModal}>
-          <OverlayTrigger placement="top" overlay={tooltip}>
+      <div>
+        <OverlayTrigger placement="top" overlay={tooltip}>
+          <Button bsStyle="link" onClick={this.showModal}>
+            <i className={`cap ${lock} mr-1`} />
             <FormattedMessage id="restrictedaccess" />
-          </OverlayTrigger>
-        </Tag>
+          </Button>
+        </OverlayTrigger>
         <div>
           {/* $FlowFixMe */}
           <UserGroupModal
@@ -62,7 +62,7 @@ export class RenderCustomAccess extends React.Component<Props, State> {
             handleClose={this.hideModal}
           />
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

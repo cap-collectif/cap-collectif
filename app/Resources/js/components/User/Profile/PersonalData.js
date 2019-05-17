@@ -417,7 +417,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               dayId="personal-data-date-of-birth-day"
                               monthId="personal-data-date-of-birth-month"
                               yearId="personal-data-date-of-birth-year"
-                              label={<FormattedMessage id="form.label_date_of_birth" />}
+                              label="form.label_date_of_birth"
                               componentId="personal-data-date-of-birth"
                               labelClassName="col-sm-3 control-label"
                               divClassName="col-sm-6"

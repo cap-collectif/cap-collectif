@@ -139,12 +139,7 @@ exports[`<UserAdminPersonalData/> should render when user is confirmed by email 
         disabled={false}
         globalClassName="col-sm-4 form-group"
         id="dateOfBirth"
-        label={
-          <FormattedMessage
-            id="form.label_date_of_birth"
-            values={Object {}}
-          />
-        }
+        label="form.label_date_of_birth"
         monthId="personal-data-date-of-birth-month"
         name="dateOfBirth"
         yearId="personal-data-date-of-birth-year"
@@ -424,12 +419,7 @@ exports[`<UserAdminPersonalData/> should render when user is not confirmed by em
         disabled={true}
         globalClassName="col-sm-4 form-group"
         id="dateOfBirth"
-        label={
-          <FormattedMessage
-            id="form.label_date_of_birth"
-            values={Object {}}
-          />
-        }
+        label="form.label_date_of_birth"
         monthId="personal-data-date-of-birth-month"
         name="dateOfBirth"
         yearId="personal-data-date-of-birth-year"
