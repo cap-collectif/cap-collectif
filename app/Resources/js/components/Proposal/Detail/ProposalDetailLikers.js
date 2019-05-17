@@ -30,7 +30,6 @@ export class ProposalDetailLikers extends React.Component<Props> {
 
   render() {
     const { proposal, componentClass, showModal, intl } = this.props;
-    const Component = componentClass;
 
     if (proposal.likers.length === 0) {
       return null;
@@ -38,13 +37,13 @@ export class ProposalDetailLikers extends React.Component<Props> {
 
     return (
       <React.Fragment>
-        <Component
-          className="tags-list__tag"
+        {/* $FlowFixMe */}
+        <ProposalDetailLikersLabel
+          proposal={proposal}
           title={intl.formatMessage({ id: 'list-of-favorites' })}
-          onClick={this.handleClick}>
-          {/* $FlowFixMe */}
-          <ProposalDetailLikersLabel proposal={proposal} />
-        </Component>
+          componentClass={componentClass}
+          onClick={this.handleClick}
+        />
         {/* $FlowFixMe */}
         <ProposalDetailLikersModal show={showModal} proposal={proposal} />
       </React.Fragment>

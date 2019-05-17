@@ -20,12 +20,9 @@ exports[`<ProjectPreviewProgressBar /> should render correctly counters with dis
     showZero={true}
     value={54}
   />
-  <div
-    className="tags-list__tag"
+  <Tag
+    icon="cap cap-marker-1-1"
   >
-    <i
-      className="cap cap-marker-1-1"
-    />
     <InlineList
       className="d-i"
       separator=","
@@ -41,40 +38,36 @@ exports[`<ProjectPreviewProgressBar /> should render correctly counters with dis
         rive droite
       </li>
     </InlineList>
-  </div>
-  <div
-    className="tags-list__tag"
-  >
-    <ForwardRef(Relay(ProjectRestrictedAccessFragment))
-      icon="cap-lock-2-1"
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "contributionsCount": 89,
-          "contributors": Object {
-            "anonymousCount": 0,
-            "totalCount": 54,
+  </Tag>
+  <ForwardRef(Relay(ProjectRestrictedAccessFragment))
+    icon="cap-lock-2-1"
+    project={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "contributionsCount": 89,
+        "contributors": Object {
+          "anonymousCount": 0,
+          "totalCount": 54,
+        },
+        "districts": Array [
+          Object {
+            "name": "rive gauche",
           },
-          "districts": Array [
-            Object {
-              "name": "rive gauche",
-            },
-            Object {
-              "name": "rive droite",
-            },
-          ],
-          "id": "project2",
-          "isContributionsCounterDisplayable": true,
-          "isParticipantsCounterDisplayable": true,
-          "isVotesCounterDisplayable": true,
-          "votes": Object {
-            "totalCount": 54,
+          Object {
+            "name": "rive droite",
           },
-        }
+        ],
+        "id": "project2",
+        "isContributionsCounterDisplayable": true,
+        "isParticipantsCounterDisplayable": true,
+        "isVotesCounterDisplayable": true,
+        "votes": Object {
+          "totalCount": 54,
+        },
       }
-    />
-  </div>
+    }
+  />
 </TagsList>
 `;
 
@@ -98,31 +91,27 @@ exports[`<ProjectPreviewProgressBar /> should render correctly counters without 
     showZero={true}
     value={50}
   />
-  <div
-    className="tags-list__tag"
-  >
-    <ForwardRef(Relay(ProjectRestrictedAccessFragment))
-      icon="cap-lock-2-1"
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "contributionsCount": 71,
-          "contributors": Object {
-            "anonymousCount": 2,
-            "totalCount": 48,
-          },
-          "districts": Array [],
-          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-          "isContributionsCounterDisplayable": true,
-          "isParticipantsCounterDisplayable": true,
-          "isVotesCounterDisplayable": true,
-          "votes": Object {
-            "totalCount": 48,
-          },
-        }
+  <ForwardRef(Relay(ProjectRestrictedAccessFragment))
+    icon="cap-lock-2-1"
+    project={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "contributionsCount": 71,
+        "contributors": Object {
+          "anonymousCount": 2,
+          "totalCount": 48,
+        },
+        "districts": Array [],
+        "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+        "isContributionsCounterDisplayable": true,
+        "isParticipantsCounterDisplayable": true,
+        "isVotesCounterDisplayable": true,
+        "votes": Object {
+          "totalCount": 48,
+        },
       }
-    />
-  </div>
+    }
+  />
 </TagsList>
 `;

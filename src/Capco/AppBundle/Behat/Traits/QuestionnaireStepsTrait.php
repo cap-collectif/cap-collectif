@@ -72,14 +72,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * @When I fill the questionnaire form with integers in single input text
-     */
-    public function iFillTheQuestionnaireWithIntegerInSingleInputTextForm()
-    {
-        $this->fillQuestionnaireFormWithInteger();
-    }
-
-    /**
      * @When I fill the questionnaire form with wrong values
      */
     public function iFillTheQuestionnaireFormWithWrongValues()
@@ -261,7 +253,6 @@ trait QuestionnaireStepsTrait
     {
         $this->assertElementContainsText('.ranking__choice-box__choices', '1. Choix');
     }
-
     // ************************************************* Update *************************************************
 
     /**
@@ -402,20 +393,6 @@ trait QuestionnaireStepsTrait
             'CreateReplyForm-responses[0]',
             'En fait c\'est nul, je ne veux pas des JO à Paris'
         );
-    }
-
-    protected function fillQuestionnaireFormWithInteger()
-    {
-        $page = $this->navigationContext->getPage('questionnaire page');
-        $this->waitAndThrowOnFailure(
-            2000,
-            "$('" . $page->getSelector('questionnaire form') . "').length > 0"
-        );
-        $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
-        $this->fillField('CreateReplyForm-responses[0]', '99876');
-        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
-        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice2');
-        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice3');
     }
 
     protected function fillUpdateQuestionnaireForm()

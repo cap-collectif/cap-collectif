@@ -162,19 +162,6 @@ Scenario: Logged in user wants to create a proposal in closed collect step
   Then I should see "step.collect.alert.ended.text"
   And the create proposal button should be disabled
 
-@database
-Scenario: Logged in user wants to add another reply when multiple replies is allowed
-  Given I am logged in as admin
-  When I go to a questionnaire step
-  And I fill the questionnaire form with integers in single input text
-  And I submit my reply
-  And I wait "#global-alert-box .alert-success" to appear on current page
-  Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  When I wait 1 seconds
-  And I should see my reply
-  And I go to a proposal
-  And I should see the proposal private field
-
 @security
 Scenario: Anonymous user wants to create a proposal
   Given I go to an open collect step
