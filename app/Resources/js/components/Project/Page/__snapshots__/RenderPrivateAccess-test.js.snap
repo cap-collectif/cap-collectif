@@ -1,69 +1,75 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RenderPrivateAccess /> should render correctly for admin only 1`] = `
-<OverlayTrigger
-  defaultOverlayShown={false}
-  overlay={
-    <Tooltip
-      bsClass="tooltip"
-      id="tooltip"
-      placement="right"
-    >
+<div>
+  <OverlayTrigger
+    defaultOverlayShown={false}
+    overlay={
+      <Tooltip
+        bsClass="tooltip"
+        id="tooltip"
+        placement="right"
+      >
+        <FormattedMessage
+          id="only-visible-by-administrators"
+          values={Object {}}
+        />
+      </Tooltip>
+    }
+    placement="top"
+    trigger={
+      Array [
+        "hover",
+        "focus",
+      ]
+    }
+  >
+    <span>
+      <i
+        className="cap cap-lock-2 mr-1"
+      />
       <FormattedMessage
-        id="only-visible-by-administrators"
+        id="restrictedaccess"
         values={Object {}}
       />
-    </Tooltip>
-  }
-  placement="top"
-  trigger={
-    Array [
-      "hover",
-      "focus",
-    ]
-  }
->
-  <Tag
-    icon="cap cap-lock-2 mr-1"
-  >
-    <FormattedMessage
-      id="restrictedaccess"
-      values={Object {}}
-    />
-  </Tag>
-</OverlayTrigger>
+    </span>
+  </OverlayTrigger>
+</div>
 `;
 
 exports[`<RenderPrivateAccess /> should render correctly for me only 1`] = `
-<OverlayTrigger
-  defaultOverlayShown={false}
-  overlay={
-    <Tooltip
-      bsClass="tooltip"
-      id="tooltip"
-      placement="right"
-    >
+<div>
+  <OverlayTrigger
+    defaultOverlayShown={false}
+    overlay={
+      <Tooltip
+        bsClass="tooltip"
+        id="tooltip"
+        placement="right"
+      >
+        <FormattedMessage
+          id="global.draft.only_visible_by_you"
+          values={Object {}}
+        />
+      </Tooltip>
+    }
+    placement="top"
+    trigger={
+      Array [
+        "hover",
+        "focus",
+      ]
+    }
+  >
+    <span>
+      <i
+        className="cap cap-lock-1 mr-1"
+      />
       <FormattedMessage
-        id="global.draft.only_visible_by_you"
+        id="restrictedaccess"
         values={Object {}}
       />
-    </Tooltip>
-  }
-  placement="top"
-  trigger={
-    Array [
-      "hover",
-      "focus",
-    ]
-  }
->
-  <Tag
-    icon="cap cap-lock-1 mr-1"
-  >
-    <FormattedMessage
-      id="restrictedaccess"
-      values={Object {}}
-    />
-  </Tag>
-</OverlayTrigger>
+    </span>
+  </OverlayTrigger>
+</div>
 `;

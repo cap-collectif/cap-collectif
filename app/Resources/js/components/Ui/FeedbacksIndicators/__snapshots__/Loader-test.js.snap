@@ -34,33 +34,23 @@ exports[`<Loader /> renders Loader with a white color 1`] = `
 `;
 
 exports[`<Loader /> renders LoaderContainer 1`] = `
-<StyledComponent
-  forwardedComponent={
-    Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "attrs": Array [],
-      "componentStyle": ComponentStyle {
-        "componentId": "Loader__Container-n28z5b-0",
-        "isStatic": false,
-        "rules": Array [
-          "text-align:center;display:",
-          [Function],
-          ";",
-          [Function],
-          ";width:100%;div{margin:auto;}",
-        ],
-      },
-      "displayName": "Loader__Container",
-      "foldedComponentIds": Array [],
-      "render": [Function],
-      "styledComponentId": "Loader__Container-n28z5b-0",
-      "target": "div",
-      "toString": [Function],
-      "warnTooManyClasses": [Function],
-      "withComponent": [Function],
-    }
-  }
-  forwardedRef={null}
+.c0 {
+  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  width: 100%;
+}
+
+.c0 div {
+  margin: auto;
+}
+
+<div
+  className="c0"
 />
 `;
 
