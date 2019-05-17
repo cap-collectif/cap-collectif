@@ -36,7 +36,7 @@ const OpinionVersion = ({ item, typeLabel, isProfile }) => (
       <Media.Left>
         <UserAvatar user={item.user} />
       </Media.Left>
-      <Media.Body>
+      <Media.Body className="opinion__body">
         <div className="opinion__user">
           {item.user && (
             <a href="https://ui.cap-collectif.com" className="excerpt_dark">
@@ -82,10 +82,16 @@ const OpinionVersion = ({ item, typeLabel, isProfile }) => (
                     </p>
                   </Popover>
                 }>
-                <Label bsStyle="danger" className="ellipsis d-ib mw-100 mt-5">
+                <Label bsStyle="danger" className="ellipsis">
                   <i className="cap cap-delete-2" /> Non comptabilisé
                 </Label>
               </OverlayTrigger>
+            </React.Fragment>
+          )}
+          {typeLabel && (
+            <React.Fragment>
+              {' '}
+              <Label>{typeLabel}</Label>
             </React.Fragment>
           )}
         </div>
@@ -93,11 +99,6 @@ const OpinionVersion = ({ item, typeLabel, isProfile }) => (
           <div>[Contenu masqué]</div>
         ) : (
           <Card.Title tagName="div" firstElement={false}>
-            {typeLabel && (
-              <React.Fragment>
-                <Label>{typeLabel}</Label>{' '}
-              </React.Fragment>
-            )}
             <a href={item.url}>{item.title}</a>
           </Card.Title>
         )}
@@ -160,7 +161,7 @@ const OpinionVersionList = ({ section, opinionVersions, isProfile }) => (
     {section.isLoading && <Loader />}
     {!section.isLoading &&
       (opinionVersions.length === 0 ? (
-        <Panel.Body className="text-center">
+        <Panel.Body className="text-center excerpt">
           <i className="cap-32 cap-baloon-1" />
           <br />
           Aucun amendement proposé
@@ -170,7 +171,7 @@ const OpinionVersionList = ({ section, opinionVersions, isProfile }) => (
           {opinionVersions.map((item, index) => (
             <ListGroupItem
               key={index}
-              className={`list-group-item__opinion text-left has-chart${
+              className={`list-group-item__opinion opinion text-left has-chart${
                 item.user && item.user.vip ? ' bg-vip' : ''
               }`}
               style={{ backgroundColor: item.user && item.user.vip ? '#F7F7F7' : undefined }}>
@@ -183,7 +184,7 @@ const OpinionVersionList = ({ section, opinionVersions, isProfile }) => (
           ))}
           {!section.isLoading && section.paginationEnable && (
             <ListGroupItem className="text-center">
-              {section.isLoadingMore && <Loader size={25} inline />}
+              {section.isLoadingMore && <Loader size={28} inline />}
               {!section.isLoadingMore && (
                 <Button block bsStyle="link" onClick={() => {}}>
                   {"Voir plus d'amendements"}

@@ -19,7 +19,7 @@ const OpinionSourceItem = ({ item, isProfile, typeLabel }) => (
       </p>
     )}
     <Media.Left>
-      <UserAvatar user={item.user} className="pull-left" />
+      <UserAvatar user={item.user} />
     </Media.Left>
     <Media.Body className="opinion__body">
       <div className="opinion__user">
@@ -27,6 +27,12 @@ const OpinionSourceItem = ({ item, isProfile, typeLabel }) => (
           {item.user.username}
         </a>
         <span className="excerpt small">{item.createdAt}</span>
+        {typeLabel && (
+          <React.Fragment>
+            {' '}
+            <Label>{typeLabel}</Label>
+          </React.Fragment>
+        )}
       </div>
       {item.trashedStatus === 'INVISIBLE' ? (
         <div className="opinion__text">[Contenu masqué]</div>
@@ -40,8 +46,7 @@ const OpinionSourceItem = ({ item, isProfile, typeLabel }) => (
             )}
             <a href={item.url}>{item.title}</a>
           </Card.Title>
-          {typeLabel && <Label>{typeLabel}</Label>}
-          <p className="opinion__text float-left excerpt">
+          <p className="opinion__text">
             <div className="ql-editor">{item.body}</div>
           </p>
         </React.Fragment>
@@ -134,7 +139,7 @@ const OpinionSourceList = ({ section, opinionSources, isProfile }) => (
       {section.isLoading && <Loader />}
       {!section.isLoading &&
         (opinionSources.length === 0 ? (
-          <Panel.Body className="text-center">
+          <Panel.Body className="text-center excerpt">
             <i className="cap-32 cap-baloon-1" />
             <br />
             Aucune source proposée
@@ -158,7 +163,7 @@ const OpinionSourceList = ({ section, opinionSources, isProfile }) => (
             ))}
             {!section.isLoading && section.paginationEnable && (
               <ListGroupItem className="text-center">
-                {section.isLoadingMore && <Loader size={25} inline />}
+                {section.isLoadingMore && <Loader size={28} inline />}
                 {!section.isLoadingMore && (
                   <Button bsStyle="link" block onClick={() => {}}>
                     {'Voir plus de sources'}

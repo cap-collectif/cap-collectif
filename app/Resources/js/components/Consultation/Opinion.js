@@ -22,7 +22,7 @@ export class Opinion extends React.Component<Props> {
     const { author } = opinion;
     return (
       <ListGroupItem
-        className={`list-group-item__opinion text-left has-chart${
+        className={`list-group-item__opinion opinion text-left has-chart${
           author && author.vip ? ' bg-vip' : ''
         }`}>
         <Media>

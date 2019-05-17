@@ -82,7 +82,7 @@ export class UnpublishedLabel extends React.Component<Props> {
       <React.Fragment>
         {' '}
         <OverlayTrigger placement="top" overlay={overlay}>
-          <Label bsStyle="danger" className="ellipsis d-ib mw-100 mt-5">
+          <Label bsStyle="danger" bsSize="xs" className="ellipsis">
             <i className="cap cap-delete-2" />{' '}
             <FormattedMessage
               id={

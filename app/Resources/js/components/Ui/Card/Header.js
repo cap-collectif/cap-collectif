@@ -15,7 +15,8 @@ const Container = styled.div.attrs({
 })`
   background-color: ${props => props.bgColor};
   color: ${props => (props.bgColor === colors.pageBgc ? colors.dark : darken(0.6, props.bgColor))};
-  border-bottom: 1px solid ${colors.borderColor};
+  border: 1px solid ${colors.borderColor};
+  border-bottom: 0;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
   padding: 10px 15px;

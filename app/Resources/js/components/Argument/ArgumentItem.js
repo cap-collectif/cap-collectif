@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import moment from 'moment';
 import Linkify from 'react-linkify';
 import { Label, ListGroupItem } from 'react-bootstrap';
+import Media from '../Ui/Medias/Media/Media';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
@@ -31,7 +32,8 @@ export class ArgumentItem extends React.Component<Props> {
     }
 
     return (
-      <p className="excerpt opinion__date">
+      <span className="excerpt small">
+        {' • '}
         <FormattedDate
           value={moment(argument.publishedAt ? argument.publishedAt : argument.createdAt)}
           day="numeric"
@@ -40,7 +42,7 @@ export class ArgumentItem extends React.Component<Props> {
           hour="numeric"
           minute="numeric"
         />
-      </p>
+      </span>
     );
   };
 
@@ -48,7 +50,6 @@ export class ArgumentItem extends React.Component<Props> {
     const { argument, isProfile } = this.props;
     const classes = classNames({
       opinion: true,
-      'opinion--argument': true,
       'bg-vip': argument.author && argument.author.vip,
     });
 
@@ -58,48 +59,47 @@ export class ArgumentItem extends React.Component<Props> {
 
     return (
       <ListGroupItem className={classes} id={`arg-${argument.id}`}>
-        <div className="opinion__body">
-          {isProfile && (
-            <p>
-              <FormattedMessage id="admin.fields.opinion.link" />
-              {' : '}
-              <a href={argument.related ? argument.related.url : ''}>
-                {argument.related ? argument.related.title : ''}
-              </a>
-            </p>
-          )}
-          {/* $FlowFixMe Will be a fragment soon */}
-          <UserAvatar user={argument.author} className="pull-left" />
+        {isProfile && (
+          <p>
+            <FormattedMessage id="admin.fields.opinion.link" />
+            {' : '}
+            <a href={argument.related ? argument.related.url : ''}>
+              {argument.related ? argument.related.title : ''}
+            </a>
+          </p>
+        )}
+        <Media>
+          <Media.Left>
+            {/* $FlowFixMe Will be a fragment soon */}
+            <UserAvatar user={argument.author} className="excerpt_dark" />
+          </Media.Left>
+          <Media.Body className="opinion__body">
+            <div className="opinion__data">
+              <div className="opinion__user">
+                <UserLink user={argument.author} />
+                {this.renderDate()}
+                <UnpublishedLabel publishable={argument} />
+                {isProfile && (
+                  <React.Fragment>
+                    {' '}
+                    <Label bsStyle={labelStyle} bsSize="xs">
+                      <FormattedMessage id={labelValueTranslateId} />
+                    </Label>
+                  </React.Fragment>
+                )}
+              </div>
+            </div>
 
-          <div className="opinion__data">
-            <p className="h5 opinion__user">
-              <UserLink user={argument.author} />
-              {isProfile && (
-                <Label bsStyle={labelStyle} className="label--right">
-                  <FormattedMessage id={labelValueTranslateId} />
-                </Label>
-              )}
-            </p>
-            {this.renderDate()}
-            <UnpublishedLabel publishable={argument} />
-          </div>
-
-          {/* $FlowFixMe $refType */}
-          <TrashedMessage contribution={argument}>
-            <p
-              className="opinion__text"
-              style={{
-                overflow: 'hidden',
-                float: 'left',
-                width: '100%',
-                wordWrap: 'break-word',
-              }}>
-              <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
-            </p>
-          </TrashedMessage>
-          {/* $FlowFixMe */}
-          <ArgumentButtons argument={argument} />
-        </div>
+            {/* $FlowFixMe $refType */}
+            <TrashedMessage contribution={argument}>
+              <p className="opinion__text">
+                <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
+              </p>
+            </TrashedMessage>
+            {/* $FlowFixMe */}
+            <ArgumentButtons argument={argument} />
+          </Media.Body>
+        </Media>
       </ListGroupItem>
     );
   }

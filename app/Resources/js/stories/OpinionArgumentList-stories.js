@@ -14,155 +14,164 @@ import {
 } from 'react-bootstrap';
 import Input from '../components/Form/Input';
 import { UserAvatar } from '../components/User/UserAvatar';
+import Media from '../components/Ui/Medias/Media/Media';
 import ListGroup from '../components/Ui/List/ListGroup';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 import { opinionArguments as opinionArgumentsMock } from './mocks/opinionArguments';
 
 // eslint-disable-next-line react/prop-types
 const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
-  <React.Fragment>
-    <div className="opinion__body">
-      {isProfile && item.related && (
-        <p>
-          {'Lié à la proposition : '}
-          <a href={item.related.url}>{item.related.title}</a>
-        </p>
-      )}
-      <UserAvatar user={item.user} className="pull-left" />
-
-      <div className="opinion__data">
-        <p className="h5 opinion__user">
-          {item.user && (
-            <a href="https://ui.cap-collectif.com" className="excerpt_dark">
-              {item.user.username}
-            </a>
-          )}
-          {!item.user && <span>Utilisateur supprimé</span>}
-          {isProfile && (
-            <Label bsStyle={argumentType === 'FOR' ? 'success' : 'danger'} className="label--right">
-              {argumentType === 'FOR' ? 'pour' : 'contre'}
-            </Label>
-          )}
-        </p>
-        <p className="excerpt opinion__date">{item.createdAt || item.publishedAt}</p>
-        {!item.published && (
-          <React.Fragment>
-            {' '}
-            <OverlayTrigger
-              placement="top"
-              overlay={
-                <Popover title={<strong>Compte en attente de confirmation</strong>}>
-                  <p>
-                    {
-                      'Votre opinion n’a pas été publié, car votre compte a été confirmé après la date de fin de l’étape.'
-                    }
-                  </p>
-                </Popover>
-              }>
-              <Label bsStyle="danger" className="ellipsis d-ib mw-100 mt-5">
-                <i className="cap cap-delete-2" /> Non comptabilisé
-              </Label>
-            </OverlayTrigger>
-          </React.Fragment>
-        )}
-      </div>
-      {typeLabel && <Label>{typeLabel}</Label>}
-      {item.trashedStatus === 'INVISIBLE' ? (
-        <div>[Contenu masqué]</div>
-      ) : (
-        <p
-          className="opinion__text"
-          style={{
-            overflow: 'hidden',
-            float: 'left',
-            width: '100%',
-            wordWrap: 'break-word',
-          }}>
-          {item.body}
-        </p>
-      )}
-      <div>
-        <span>
-          <form className="opinion__votes-button">
-            <Button
-              disabled={!item.contribuable || (item.user && item.user.isViewer)}
-              bsStyle={item.viewerHasVote ? 'danger' : 'success'}
-              className={`argument__btn--vote${item.viewerHasVote ? '' : ' btn--outline'}`}
-              bsSize="xsmall"
-              onClick={() => {}}>
-              {item.viewerHasVote ? (
-                <span>Annuler</span>
-              ) : (
-                <span>
-                  <i className="cap cap-hand-like-2" /> {"D'accord"}
-                </span>
-              )}
-            </Button>
-          </form>
-          <span className="opinion__votes-nb">{item.votes.totalCount}</span>
-        </span>
-        {item.user && !item.user.isViewer && (
-          <React.Fragment>
-            <span>
-              <Button
-                className="btn--outline btn-dark-gray argument__btn--report"
-                active={item.reported}
-                disabled={item.reported}
-                bsSize="xs"
-                onClick={() => {}}>
-                <i className="cap cap-flag-1" /> {item.reported ? 'Signalé' : 'Signaler'}
-              </Button>
-            </span>{' '}
-          </React.Fragment>
-        )}
-        {item.user && item.user.isViewer && (
-          <React.Fragment>
-            <button
-              className="argument__btn--edit btn btn-xs btn-dark-gray btn--outline"
-              onClick={() => {}}>
-              <i className="cap cap-pencil-1" /> Modifier
-            </button>{' '}
-          </React.Fragment>
-        )}
-        {item.user && item.user.isViewer && (
-          <React.Fragment>
-            <button
-              className="argument__btn--delete btn btn-xs btn-danger btn--outline"
-              onClick={() => {}}>
-              <i className="cap cap-bin-2" /> Supprimer
-            </button>{' '}
-          </React.Fragment>
-        )}
-        <div className="share-button-dropdown">
-          <DropdownButton
-            className="argument__btn--share btn-dark-gray btn--outline btn btn-xs dropdown--custom"
-            bsSize="xs"
-            onClick={() => {}}
-            title={
-              <span>
-                <i className="cap cap-link" /> {'Partager'}
-              </span>
-            }>
-            <MenuItem eventKey="1">
-              <i className="cap cap-mail-2-1" /> {'Mail'}
-            </MenuItem>
-            <MenuItem eventKey="2">
-              <i className="cap cap-facebook" /> {'Facebook'}
-            </MenuItem>
-            <MenuItem eventKey="3">
-              <i className="cap cap-twitter" /> {'Twitter'}
-            </MenuItem>
-            <MenuItem eventKey="4">
-              <i className="cap cap-linkedin" /> {'LinkedIn'}
-            </MenuItem>
-            <MenuItem eventKey="5">
-              <i className="cap cap-link-1" /> {'Link'}
-            </MenuItem>
-          </DropdownButton>
+  <div className="w-100">
+    {isProfile && item.related && (
+      <p>
+        {'Lié à la proposition : '}
+        <a href={item.related.url}>{item.related.title}</a>
+      </p>
+    )}
+    <Media>
+      <Media.Left>
+        <UserAvatar user={item.user} />
+      </Media.Left>
+      <Media.Body className="opinion__body">
+        <div className="opinion__data">
+          <div className="opinion__user">
+            {item.user && (
+              <a href="https://ui.cap-collectif.com" className="excerpt_dark">
+                {item.user.username}
+              </a>
+            )}
+            {!item.user && <span>Utilisateur supprimé</span>}
+            <span className="excerpt small">
+              {' • '}
+              {item.createdAt || item.publishedAt}
+            </span>
+            {!item.published && (
+              <React.Fragment>
+                {' '}
+                <OverlayTrigger
+                  placement="top"
+                  overlay={
+                    <Popover
+                      title={
+                        <strong className="excerpt_dark">Compte en attente de confirmation</strong>
+                      }>
+                      <p>
+                        {
+                          'Votre opinion n’a pas été publié, car votre compte a été confirmé après la date de fin de l’étape.'
+                        }
+                      </p>
+                    </Popover>
+                  }>
+                  <Label bsStyle="danger" bsSize="xs">
+                    <i className="cap cap-delete-2" /> Non comptabilisé
+                  </Label>
+                </OverlayTrigger>
+              </React.Fragment>
+            )}
+            {typeLabel && (
+              <React.Fragment>
+                {' '}
+                <Label>{typeLabel}</Label>
+              </React.Fragment>
+            )}
+            {isProfile && (
+              <React.Fragment>
+                {' '}
+                <Label bsStyle={argumentType === 'FOR' ? 'success' : 'danger'} bsSize="xs">
+                  {argumentType === 'FOR' ? 'pour' : 'contre'}
+                </Label>
+              </React.Fragment>
+            )}
+          </div>
         </div>
-      </div>
-    </div>
-  </React.Fragment>
+        {item.trashedStatus === 'INVISIBLE' ? (
+          <div className="opinion__text">[Contenu masqué]</div>
+        ) : (
+          <p className="opinion__text">{item.body}</p>
+        )}
+        <div className="small">
+          <span>
+            <form className="opinion__votes-button">
+              <Button
+                disabled={!item.contribuable || (item.user && item.user.isViewer)}
+                bsStyle={item.viewerHasVote ? 'danger' : 'success'}
+                className={`argument__btn--vote${item.viewerHasVote ? '' : ' btn--outline'}`}
+                bsSize="xsmall"
+                onClick={() => {}}>
+                {item.viewerHasVote ? (
+                  <span>Annuler</span>
+                ) : (
+                  <span>
+                    <i className="cap cap-hand-like-2" /> {"D'accord"}
+                  </span>
+                )}
+              </Button>
+            </form>
+            <span className="opinion__votes-nb">{item.votes.totalCount}</span>
+          </span>
+          {item.user && !item.user.isViewer && (
+            <React.Fragment>
+              <span>
+                <Button
+                  className="btn--outline btn-dark-gray argument__btn--report"
+                  active={item.reported}
+                  disabled={item.reported}
+                  bsSize="xs"
+                  onClick={() => {}}>
+                  <i className="cap cap-flag-1" /> {item.reported ? 'Signalé' : 'Signaler'}
+                </Button>
+              </span>{' '}
+            </React.Fragment>
+          )}
+          {item.user && item.user.isViewer && (
+            <React.Fragment>
+              <button
+                className="argument__btn--edit btn btn-xs btn-dark-gray btn--outline"
+                onClick={() => {}}>
+                <i className="cap cap-pencil-1" /> Modifier
+              </button>{' '}
+            </React.Fragment>
+          )}
+          {item.user && item.user.isViewer && (
+            <React.Fragment>
+              <button
+                className="argument__btn--delete btn btn-xs btn-danger btn--outline"
+                onClick={() => {}}>
+                <i className="cap cap-bin-2" /> Supprimer
+              </button>{' '}
+            </React.Fragment>
+          )}
+          <div className="share-button-dropdown">
+            <DropdownButton
+              className="argument__btn--share btn-dark-gray btn--outline btn btn-xs dropdown--custom"
+              bsSize="xs"
+              onClick={() => {}}
+              title={
+                <span>
+                  <i className="cap cap-link" /> {'Partager'}
+                </span>
+              }>
+              <MenuItem eventKey="1">
+                <i className="cap cap-mail-2-1" /> {'Mail'}
+              </MenuItem>
+              <MenuItem eventKey="2">
+                <i className="cap cap-facebook" /> {'Facebook'}
+              </MenuItem>
+              <MenuItem eventKey="3">
+                <i className="cap cap-twitter" /> {'Twitter'}
+              </MenuItem>
+              <MenuItem eventKey="4">
+                <i className="cap cap-linkedin" /> {'LinkedIn'}
+              </MenuItem>
+              <MenuItem eventKey="5">
+                <i className="cap cap-link-1" /> {'Link'}
+              </MenuItem>
+            </DropdownButton>
+          </div>
+        </div>
+      </Media.Body>
+    </Media>
+  </div>
 );
 
 // eslint-disable-next-line react/prop-types
@@ -193,13 +202,19 @@ const OpinionArgumentList = ({ section, isProfile, opinionArguments }) => (
         </Panel.Heading>
         {section.isRefetching && <Loader />}
         {!section.isRefetching &&
-          (opinionArguments.length === 0 ? null : (
+          (opinionArguments.length === 0 ? (
+            <Panel.Body className="text-center excerpt">
+              <i className="cap-32 cap-baloon-1" />
+              <br />
+              Aucun argument {section.argumentType} proposé
+            </Panel.Body>
+          ) : (
             <ListGroup>
               {opinionArguments.map((item, index) => (
                 <ListGroupItem
                   key={index}
                   id={`arg-${index}`}
-                  className={`opinion opinion--argument ${
+                  className={`list-group-item__opinion opinion ${
                     item.user && item.user.vip ? ' bg-vip' : ''
                   }`}
                   style={{ backgroundColor: item.user && item.user.vip ? '#F7F7F7' : undefined }}>
@@ -212,8 +227,8 @@ const OpinionArgumentList = ({ section, isProfile, opinionArguments }) => (
                 </ListGroupItem>
               ))}
               {!section.isLoading && section.paginationEnable && (
-                <ListGroupItem className="text-center">
-                  {section.isLoadingMore && <Loader size={25} inline />}
+                <ListGroupItem>
+                  {section.isLoadingMore && <Loader size={28} inline />}
                   {!section.isLoadingMore && (
                     <Button bsStyle="link" block onClick={() => {}}>
                       {"Voir plus d'arguments"}

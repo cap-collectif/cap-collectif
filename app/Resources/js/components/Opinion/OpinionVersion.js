@@ -31,7 +31,7 @@ class OpinionVersion extends React.Component<Props> {
 
     return (
       <ListGroupItem
-        className={`list-group-item__opinion has-chart${
+        className={`list-group-item__opinion opinion has-chart${
           version.author && version.author.vip ? ' bg-vip' : ''
         }`}>
         <div>

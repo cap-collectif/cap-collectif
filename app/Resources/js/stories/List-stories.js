@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { Button, ListGroup, ListGroupItem, Tooltip, MenuItem, OverlayTrigger } from 'react-bootstrap';
+import { Button, ListGroupItem, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { UserAvatar } from '../components/User/UserAvatar';
 import InlineList from '../components/Ui/List/InlineList';
 import TagsList from '../components/Ui/List/TagsList';

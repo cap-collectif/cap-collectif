@@ -129,7 +129,7 @@ exports[`<OpinionListPaginated /> renders correcty with pagination enabled 2`] =
       color="#333333"
       inline={true}
       show={true}
-      size={25}
+      size={28}
     />
   </ListGroupItem>
 </Fragment>

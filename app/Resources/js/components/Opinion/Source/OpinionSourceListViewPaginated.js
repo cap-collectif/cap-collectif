@@ -48,7 +48,7 @@ class OpinionSourceListViewPaginated extends React.Component<Props, State> {
         {relay.hasMore() && (
           <ListGroupItem>
             {loading ? (
-              <Loader size={25} inline />
+              <Loader size={28} inline />
             ) : (
               <Button
                 bsStyle="link"

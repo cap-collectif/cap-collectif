@@ -31,7 +31,7 @@ const OpinionItem = ({ item, typeLabel }) => (
       <Media.Left>
         <UserAvatar user={item.user} />
       </Media.Left>
-      <Media.Body>
+      <Media.Body className="opinion__body">
         <div className="opinion__user">
           {item.user && (
             <a href="https://ui.cap-collectif.com" className="excerpt_dark">
@@ -80,10 +80,16 @@ const OpinionItem = ({ item, typeLabel }) => (
                     </p>
                   </Popover>
                 }>
-                <Label bsStyle="danger" className="ellipsis d-ib mw-100 mt-5">
+                <Label bsStyle="danger" bsSize="xs">
                   <i className="cap cap-delete-2" /> Non comptabilisé
                 </Label>
               </OverlayTrigger>
+            </React.Fragment>
+          )}
+          {typeLabel && (
+            <React.Fragment>
+              {' '}
+              <Label>{typeLabel}</Label>
             </React.Fragment>
           )}
         </div>
@@ -91,11 +97,6 @@ const OpinionItem = ({ item, typeLabel }) => (
           <div>[Contenu masqué]</div>
         ) : (
           <Card.Title tagName="div" firstElement={false}>
-            {typeLabel && (
-              <React.Fragment>
-                <Label>{typeLabel}</Label>{' '}
-              </React.Fragment>
-            )}
             <a href={item.url}>{item.title}</a>
           </Card.Title>
         )}
@@ -125,9 +126,7 @@ const OpinionItem = ({ item, typeLabel }) => (
 // eslint-disable-next-line react/prop-types
 const OpinionList = ({ section, opinions }) => (
   <Card id="opinions--test17" className="anchor-offset" style={{ border: 0 }}>
-    <Card.Header
-      bgColor={section.bgColor}
-      style={{ border: '1px solid #e3e3e3', borderBottom: opinions.length > 0 ? 0 : undefined }}>
+    <Card.Header bgColor={section.bgColor}>
       <div className="opinion d-flex align-items-center justify-content-between">
         <strong className="excerpt_dark">{`${opinions.length} propositions`}</strong>
         <div className="d-flex align-items-center justify-content-between">
@@ -161,12 +160,18 @@ const OpinionList = ({ section, opinions }) => (
         </div>
       </div>
     </Card.Header>
-    {opinions.length > 0 && (
+    {opinions.length === 0 ? (
+      <ListGroupItem className="text-center excerpt">
+        <i className="cap-32 cap-baloon-1" />
+        <br />
+        Aucune proposition
+      </ListGroupItem>
+    ) : (
       <ListGroup className="m-0">
         {opinions.map((item, index) => (
           <ListGroupItem
             key={index}
-            className={`list-group-item__opinion text-left has-chart${
+            className={`list-group-item__opinion opinion text-left has-chart${
               item.user && item.user.vip ? ' bg-vip' : ''
             }`}
             style={{ backgroundColor: item.user && item.user.vip ? '#F7F7F7' : undefined }}>

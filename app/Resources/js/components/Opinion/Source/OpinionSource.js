@@ -27,7 +27,7 @@ export class OpinionSource extends React.Component<Props> {
     const { source, sourceable, isProfile } = this.props;
     return (
       <ListGroupItem
-        className={`opinion list-group-item__opinion ${
+        className={`list-group-item__opinion opinion ${
           source.author && source.author.vip ? ' bg-vip' : ''
         }`}
         id={`source-${source.id}`}>

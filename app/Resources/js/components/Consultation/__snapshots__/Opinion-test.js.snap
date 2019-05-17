@@ -3,7 +3,7 @@
 exports[`<Opinion /> renders correcty 1`] = `
 <ListGroupItem
   bsClass="list-group-item"
-  className="list-group-item__opinion text-left has-chart"
+  className="list-group-item__opinion opinion text-left has-chart"
   listItem={false}
 >
   <Media>

@@ -52,7 +52,7 @@ export class ArgumentListProfile extends Component<Props, State> {
         {relay.hasMore() && (
           <ListGroupItem>
             {loading ? (
-              <Loader size={25} inline />
+              <Loader size={28} inline />
             ) : (
               <Button block bsStyle="link" onClick={this.handleLoadMore}>
                 <FormattedMessage id="global.more" />

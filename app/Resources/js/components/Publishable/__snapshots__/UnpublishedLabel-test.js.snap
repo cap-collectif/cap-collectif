@@ -37,8 +37,9 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
   >
     <Label
       bsClass="label"
+      bsSize="xs"
       bsStyle="danger"
-      className="ellipsis d-ib mw-100 mt-5"
+      className="ellipsis"
     >
       <i
         className="cap cap-delete-2"
@@ -90,8 +91,9 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
   >
     <Label
       bsClass="label"
+      bsSize="xs"
       bsStyle="danger"
-      className="ellipsis d-ib mw-100 mt-5"
+      className="ellipsis"
     >
       <i
         className="cap cap-delete-2"
@@ -150,8 +152,9 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
   >
     <Label
       bsClass="label"
+      bsSize="xs"
       bsStyle="danger"
-      className="ellipsis d-ib mw-100 mt-5"
+      className="ellipsis"
     >
       <i
         className="cap cap-delete-2"

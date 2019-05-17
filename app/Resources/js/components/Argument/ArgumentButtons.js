@@ -42,7 +42,7 @@ class ArgumentButtons extends React.Component<Props, State> {
   render() {
     const { argument, dispatch } = this.props;
     return (
-      <div>
+      <div className="small">
         {/* $FlowFixMe */}
         <ArgumentVoteBox argument={argument} />
         {/* $FlowFixMe */}

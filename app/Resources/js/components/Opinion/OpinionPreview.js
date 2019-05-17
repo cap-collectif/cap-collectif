@@ -42,7 +42,7 @@ class OpinionPreview extends React.Component<Props> {
           <UserAvatar user={opinion.author} />
         </Media.Left>
 
-        <Media.Body>
+        <Media.Body className="opinion__body">
           {/* $FlowFixMe */}
           <OpinionInfos
             rankingThreshold={rankingThreshold}

@@ -100,7 +100,7 @@
 
         .opinion__user {
             position: relative;
-            margin: 0 0 5px;
+            margin: 0 0 10px;
 
             &.excerpt {
                 a {
@@ -160,6 +160,7 @@
 
         .opinion__votes-button {
             display: inline-block;
+            transform: translateX(2px);
         }
 
         .opinion__votes-nb {
@@ -175,7 +176,7 @@
             border-bottom-left-radius: 0;
             border-top-left-radius: 0;
             margin-right: 4px;
-            transform: translateX(-2px);
+            background-color: $page-bgc;
         }
     }
 
@@ -510,11 +511,11 @@
 #opinion__arguments--SIMPLE {
     .panel-heading {
         min-height: 55px;
-        background-color: $success-color;
+        background-color: $sucess-bg;
     }
 
     .opinion__header__title {
-        color: $white;
+        color: $black;
         font-weight: bold;
     }
 }
@@ -522,11 +523,11 @@
 #opinion__arguments--AGAINST {
     .panel-heading {
         min-height: 55px;
-        background-color: $brand-danger;
+        background-color: $danger-bg;
     }
 
     .opinion__header__title {
-        color: $white;
+        color: $black;
         font-weight: bold;
     }
 }

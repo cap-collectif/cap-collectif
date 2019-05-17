@@ -3,7 +3,7 @@
 exports[`<OpinionSource /> should render a li bordered 1`] = `
 <ListGroupItem
   bsClass="list-group-item"
-  className="opinion list-group-item__opinion  bg-vip"
+  className="list-group-item__opinion opinion  bg-vip"
   id="source-1"
   listItem={false}
 >
@@ -132,7 +132,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
 exports[`<OpinionSource /> should render a white li if not vip 1`] = `
 <ListGroupItem
   bsClass="list-group-item"
-  className="opinion list-group-item__opinion "
+  className="list-group-item__opinion opinion "
   id="source-1"
   listItem={false}
 >
