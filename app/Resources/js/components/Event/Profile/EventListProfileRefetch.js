@@ -5,10 +5,10 @@ import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { Row, Col } from 'react-bootstrap';
 import EventPreview from '../EventPreview';
-import { EventListProfileQuery_user } from '~relay/EventListProfileQuery.graphql';
+import type { EventListProfileRefetch_user } from '~relay/EventListProfileRefetch_user.graphql';
 
 type Props = {
-  user: EventListProfileQuery_user,
+  user: EventListProfileRefetch_user,
   relay: RelayRefetchProp,
 };
 
@@ -69,15 +69,17 @@ export class EventListProfileRefetch extends React.Component<Props> {
           </Col>
         </RowCustom>
         <RowList>
-          {user.events.edges
-            .filter(Boolean)
-            .map(edge => edge.node)
-            .filter(Boolean)
-            .map((node, key) => (
-              <Col key={key} md={6} xs={12} className="d-flex">
-                <EventPreview event={node} isHighlighted={false} isAuthorDisplay={false} />
-              </Col>
-            ))}
+          {user.events.edges &&
+            user.events.edges
+              .filter(Boolean)
+              .map(edge => edge.node)
+              .filter(Boolean)
+              .map((node, key) => (
+                <Col key={key} md={6} xs={12} className="d-flex">
+                  {/* $FlowFixMe */}
+                  <EventPreview event={node} isHighlighted={false} isAuthorDisplay={false} />
+                </Col>
+              ))}
         </RowList>
       </React.Fragment>
     );
