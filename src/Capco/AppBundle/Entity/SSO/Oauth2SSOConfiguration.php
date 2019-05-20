@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Use this class for both OpenID and Oauth2 configuration.
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository")
  */
 class Oauth2SSOConfiguration extends AbstractSSOConfiguration
 {

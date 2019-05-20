@@ -4,6 +4,6 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class AbstractSSOConfigurationRepository extends EntityRepository
+class Oauth2SSOConfigurationRepository extends EntityRepository
 {
 }

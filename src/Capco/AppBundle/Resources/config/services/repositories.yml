@@ -295,6 +295,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoMediaBundle:Media']
 
-  Capco\AppBundle\Repository\AbstractSSOConfigurationRepository:
+  Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:SSO\AbstractSSOConfiguration']
+    arguments: ['CapcoAppBundle:SSO\Oauth2SSOConfiguration']
