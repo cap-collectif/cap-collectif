@@ -10,12 +10,12 @@ import type { OpinionPreview_opinion } from '~relay/OpinionPreview_opinion.graph
 import TrashedMessage from '../Trashed/TrashedMessage';
 import Media from '../Ui/Medias/Media/Media';
 
-type Props = {
-  showUpdatedDate: boolean,
-  opinion: OpinionPreview_opinion,
-  rankingThreshold?: ?number,
-  isProfile: boolean,
-};
+type Props = {|
+  +showUpdatedDate: boolean,
+  +opinion: OpinionPreview_opinion,
+  +rankingThreshold?: ?number,
+  +isProfile: boolean,
+|};
 
 class OpinionPreview extends React.Component<Props> {
   static defaultProps = {

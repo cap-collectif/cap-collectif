@@ -6,13 +6,13 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 import UnpublishedArgumentList from './UnpublishedArgumentList';
 import type { UnpublishedArgumentListRendererQueryResponse } from '~relay/UnpublishedArgumentListRendererQuery.graphql';
 import type { UnpublishedArgumentListRenderer_argumentable } from '~relay/UnpublishedArgumentListRenderer_argumentable.graphql';
-import type { State } from '../../types';
+import type { ArgumentType, State } from '../../types';
 
-type Props = {
-  argumentable: UnpublishedArgumentListRenderer_argumentable,
-  isAuthenticated: boolean,
-  type: 'FOR' | 'AGAINST' | 'SIMPLE',
-};
+type Props = {|
+  +argumentable: UnpublishedArgumentListRenderer_argumentable,
+  +isAuthenticated: boolean,
+  +type: ArgumentType,
+|};
 
 export class UnpublishedArgumentListRenderer extends React.Component<Props> {
   render() {

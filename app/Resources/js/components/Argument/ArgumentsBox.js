@@ -7,13 +7,14 @@ import UnpublishedArgumentListRenderer from './UnpublishedArgumentListRenderer';
 import ArgumentList from './ArgumentList';
 import ArgumentCreate from './Creation/ArgumentCreate';
 import type { ArgumentsBox_opinion } from '~relay/ArgumentsBox_opinion.graphql';
+import type { ArgumentType } from '../../types';
 
 type Props = {
   opinion: ArgumentsBox_opinion,
 };
 
 class ArgumentsBox extends React.Component<Props> {
-  renderArgumentsForType = (type: 'FOR' | 'AGAINST' | 'SIMPLE') => {
+  renderArgumentsForType = (type: ArgumentType) => {
     const argumentable = this.props.opinion;
     return (
       <div id={`arguments-col--${type}`}>

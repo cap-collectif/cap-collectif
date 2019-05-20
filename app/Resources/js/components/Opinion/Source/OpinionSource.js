@@ -12,11 +12,11 @@ import type { OpinionSource_source } from '~relay/OpinionSource_source.graphql';
 import type { OpinionSource_sourceable } from '~relay/OpinionSource_sourceable.graphql';
 import TrashedMessage from '../../Trashed/TrashedMessage';
 
-type Props = {
-  source: OpinionSource_source,
-  sourceable: OpinionSource_sourceable,
-  isProfile: boolean,
-};
+type Props = {|
+  +source: OpinionSource_source,
+  +sourceable: OpinionSource_sourceable,
+  +isProfile: boolean,
+|};
 
 export class OpinionSource extends React.Component<Props> {
   static defaultProps = {
@@ -36,7 +36,9 @@ export class OpinionSource extends React.Component<Props> {
             <p>
               <FormattedMessage id="admin.fields.opinion.link" />
               {' : '}
-              <a href={sourceable ? sourceable.url : ''}>{sourceable ? sourceable.title : ''}</a>
+              <a href={sourceable && sourceable.url ? sourceable.url : ''}>
+                {sourceable && sourceable.title ? sourceable.title : ''}
+              </a>
             </p>
           )}
           <Media.Left>

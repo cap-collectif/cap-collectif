@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import component from '../../Form/Field';
 import AddArgumentMutation from '../../../mutations/AddArgumentMutation';
-import type { State, Dispatch } from '../../../types';
+import type { ArgumentType, State, Dispatch } from '../../../types';
 import type { ArgumentCreate_argumentable } from '~relay/ArgumentCreate_argumentable.graphql';
 import RequirementsFormModal from '../../Requirements/RequirementsModal';
 
@@ -24,7 +24,7 @@ type FormValidValues = { body: string };
 
 type Props = {|
   ...FormProps,
-  type: 'FOR' | 'AGAINST' | 'SIMPLE',
+  type: ArgumentType,
   argumentable: ArgumentCreate_argumentable,
   user: { id: string, isEmailConfirmed: boolean },
   submitting: boolean,

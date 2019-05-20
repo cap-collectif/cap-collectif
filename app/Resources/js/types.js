@@ -15,6 +15,8 @@ export type Uri = string;
 export type Opinion = { id: Uuid };
 export type Version = { id: Uuid, parent: Object };
 
+export type ArgumentType = 'FOR' | 'AGAINST' | 'SIMPLE';
+
 export type MediaFromAPI = {|
   +id: Uuid,
   +name: string,

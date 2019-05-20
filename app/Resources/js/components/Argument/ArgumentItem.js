@@ -14,10 +14,10 @@ import UnpublishedLabel from '../Publishable/UnpublishedLabel';
 import type { ArgumentItem_argument } from '~relay/ArgumentItem_argument.graphql';
 import TrashedMessage from '../Trashed/TrashedMessage';
 
-type Props = {
-  argument: ArgumentItem_argument,
-  isProfile: boolean,
-};
+type Props = {|
+  +argument: ArgumentItem_argument,
+  +isProfile: boolean,
+|};
 
 export class ArgumentItem extends React.Component<Props> {
   static defaultProps = {
@@ -96,7 +96,7 @@ export class ArgumentItem extends React.Component<Props> {
                 <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
               </p>
             </TrashedMessage>
-            {/* $FlowFixMe */}
+            {/* $FlowFixMe $refType */}
             <ArgumentButtons argument={argument} />
           </Media.Body>
         </Media>

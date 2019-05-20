@@ -8,16 +8,17 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 import type { ArgumentListViewPaginated_argumentable } from '~relay/ArgumentListViewPaginated_argumentable.graphql';
 import ArgumentItem from './ArgumentItem';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
+import type { ArgumentType } from '../../types';
 
-type Props = {
-  relay: RelayPaginationProp,
-  argumentable: ArgumentListViewPaginated_argumentable,
-  type: 'FOR' | 'AGAINST' | 'SIMPLE',
-};
+type Props = {|
+  +relay: RelayPaginationProp,
+  +argumentable: ArgumentListViewPaginated_argumentable,
+  +type: ArgumentType,
+|};
 
-type State = {
-  loading: boolean,
-};
+type State = {|
+  +loading: boolean,
+|};
 
 const ARGUMENTS_PAGINATION = 25;
 

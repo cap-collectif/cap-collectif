@@ -10,17 +10,17 @@ import ArgumentListView, { type ArgumentOrder } from './ArgumentListView';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { ArgumentListQueryResponse } from '~relay/ArgumentListQuery.graphql';
 import type { ArgumentList_argumentable } from '~relay/ArgumentList_argumentable.graphql';
-import type { GlobalState } from '../../types';
+import type { ArgumentType, GlobalState } from '../../types';
 
-type Props = {
-  argumentable: ArgumentList_argumentable,
-  isAuthenticated: boolean,
-  type: 'FOR' | 'AGAINST' | 'SIMPLE',
-};
+type Props = {|
+  +argumentable: ArgumentList_argumentable,
+  +isAuthenticated: boolean,
+  +type: ArgumentType,
+|};
 
-type State = {
-  order: ArgumentOrder,
-};
+type State = {|
+  +order: ArgumentOrder,
+|};
 
 export class ArgumentList extends React.Component<Props, State> {
   state = {

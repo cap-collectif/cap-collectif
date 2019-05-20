@@ -7,11 +7,12 @@ import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ArgumentItem from './ArgumentItem';
 import type { UnpublishedArgumentList_argumentable } from '~relay/UnpublishedArgumentList_argumentable.graphql';
+import type { ArgumentType } from '../../types';
 
-type Props = {
-  argumentable: UnpublishedArgumentList_argumentable,
-  type: 'FOR' | 'AGAINST' | 'SIMPLE',
-};
+type Props = {|
+  +argumentable: UnpublishedArgumentList_argumentable,
+  +type: ArgumentType,
+|};
 
 export class UnpublishedArgumentList extends React.Component<Props> {
   render() {

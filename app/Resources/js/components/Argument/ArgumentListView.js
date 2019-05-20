@@ -4,6 +4,7 @@ import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-re
 import type { ArgumentListView_argumentable } from '~relay/ArgumentListView_argumentable.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import ArgumentListViewPaginated from './ArgumentListViewPaginated';
+import type { ArgumentType } from '../../types';
 
 export type ArgumentOrder = 'old' | 'last' | 'popular';
 
@@ -11,7 +12,7 @@ type Props = {
   order: ArgumentOrder,
   relay: RelayRefetchProp,
   argumentable: ArgumentListView_argumentable,
-  type: 'FOR' | 'AGAINST' | 'SIMPLE',
+  type: ArgumentType,
 };
 
 type State = {

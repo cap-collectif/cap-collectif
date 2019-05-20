@@ -26,12 +26,12 @@ export class Opinion extends React.Component<Props> {
           author && author.vip ? ' bg-vip' : ''
         }`}>
         <Media>
-          {/* $FlowFixMe */}
+          {/* $FlowFixMe $refType */}
           <OpinionPreview opinion={opinion} showUpdatedDate={showUpdatedDate} />
         </Media>
         {opinion.votes && opinion.votes.totalCount > 0 ? (
           <div className="hidden-xs">
-            {/* $FlowFixMe */}
+            {/* $FlowFixMe $refType */}
             <VotePiechart
               ok={opinion.votesOk.totalCount}
               nok={opinion.votesNok.totalCount}
