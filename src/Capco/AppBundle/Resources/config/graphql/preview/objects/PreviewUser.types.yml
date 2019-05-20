@@ -11,7 +11,7 @@ PreviewUser:
         description: 'The type of the person.'
       responses:
         type: 'PreviewResponseConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserResponsesResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserResponsesResolver", [value,getUser(),context])'
         description: 'The responses answered by user.'
         argsBuilder: 'Relay::Connection'
       email:
@@ -22,13 +22,11 @@ PreviewUser:
       createdAt:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
-        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       updatedAt:
         type: 'DateTime'
         description: 'Identifies the date and time when the object was last updated.'
-        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       consentInternalCommunication:
-        type: 'Boolean!'
+        type: 'Boolean'
         description: 'Whether or not this user consent internal communication.'
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       facebookUrl:

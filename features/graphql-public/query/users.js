@@ -9,6 +9,31 @@ const OpenDataUsersQuery = /* GraphQL */ `
         node {
           id
           username
+          email
+          consentInternalCommunication
+          linkedInUrl
+          twitterUrl
+          websiteUrl
+          facebookUrl
+          createdAt
+          updatedAt
+          deletedAccountAt
+          enabled
+          biography
+          url
+          userType {
+            name
+          }
+          responses {
+            edges {
+              node {
+                ... on ValueResponse {
+                  value
+                  formattedValue
+                }
+              }
+            }
+          }
         }
       }
       pageInfo {
@@ -24,7 +49,7 @@ describe('OpenDataUsersQuery', () => {
     'OpenDataUsersQuery',
     async () => {
       await expect(
-        global.client.request(OpenDataUsersQuery, {
+        global.anonymousClient.request(OpenDataUsersQuery, {
           count: 100,
         }),
       ).resolves.toMatchSnapshot();

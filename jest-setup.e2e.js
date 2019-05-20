@@ -12,6 +12,12 @@ global.client = new GraphQLClient(endpoint, {
   },
 });
 
+global.anonymousClient = new GraphQLClient(endpoint, {
+  headers: {
+    accept: 'application/vnd.cap-collectif.preview+json',
+  },
+});
+
 global.internalClient = new GraphQLClient('https://capco.test/graphql/internal', {
   headers: {
     accept: 'application/json',

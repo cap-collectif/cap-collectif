@@ -943,7 +943,7 @@ type User implements Node & UniformResourceLocatable {
   updatedAt: DateTime
 
   # Whether or not this user consent internal communication.
-  consentInternalCommunication: Boolean!
+  consentInternalCommunication: Boolean
 
   # A URL pointing to the user's Facebook account.
   facebookUrl: URI
