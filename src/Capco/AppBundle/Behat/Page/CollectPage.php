@@ -31,6 +31,23 @@ class CollectPage extends Page
         'restricted-group-link' => ' > button',
     ];
 
+    /**
+     * Overload to verify if we're on an expected page. Throw an exception otherwise.
+     */
+    public function verifyPage()
+    {
+        if (
+            !$this->getSession()->wait(
+                10000,
+                "window.jQuery && $('#ProposalStepPage-rendered').length > 0"
+            )
+        ) {
+            throw new \RuntimeException(
+                'CollectPage did not fully load, check selector in "verifyPage".'
+            );
+        }
+    }
+
     public function sortByDate()
     {
         $this->getElement('sorting select')->selectOption('global.filter_f_last');

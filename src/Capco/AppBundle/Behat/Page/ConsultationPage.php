@@ -12,6 +12,19 @@ class ConsultationPage extends Page
 
     protected $path = '/project/{projectSlug}/consultation/{stepSlug}';
 
+    /**
+     * Overload to verify if we're on an expected page. Throw an exception otherwise.
+     */
+    public function verifyPage()
+    {
+        // TODO: replace this by a real condition to optimize loading time
+        if (!$this->getSession()->wait(2000, 'true')) {
+            throw new \RuntimeException(
+                'ConsultationPage did not fully load, check selector in "verifyPage".'
+            );
+        }
+    }
+
     protected function verifyUrl(array $urlParameters = [])
     {
         $expectedUrl = $this->getUrl($urlParameters);

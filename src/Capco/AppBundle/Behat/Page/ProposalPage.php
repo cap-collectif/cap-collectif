@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
@@ -37,6 +38,18 @@ class ProposalPage extends Page
         'proposal follow essential' => '#proposal-follow-btn-essential',
         'proposal follow all' => '#proposal-follow-btn-all',
     ];
+
+    /**
+     * Overload to verify if we're on an expected page. Throw an exception otherwise.
+     */
+    public function verifyPage()
+    {
+        if (!$this->getSession()->wait(5000, "$('#ProposalPageContent').length > 0")) {
+            throw new \RuntimeException(
+                'Proposal page did not fully load, check selector in "verifyPage".'
+            );
+        }
+    }
 
     public function getDeleteButtonSelector()
     {
@@ -90,12 +103,12 @@ class ProposalPage extends Page
 
     public function getFirstSelector($selector)
     {
-        return $this->getSelector("first $selector");
+        return $this->getSelector("first ${selector}");
     }
 
     public function getLastSelector($selector)
     {
-        return $this->getSelector("last $selector");
+        return $this->getSelector("last ${selector}");
     }
 
     public function getVoteButton()
@@ -182,42 +195,42 @@ class ProposalPage extends Page
 
     public function followMinimalIsChecked(string $proposalId)
     {
-        $element = $this->elements['proposal follow minimal'] . "-$proposalId";
+        $element = $this->elements['proposal follow minimal'] . "-${proposalId}";
 
         return $this->find('css', $element)->isChecked();
     }
 
     public function followEssentialIsChecked(string $proposalId)
     {
-        $element = $this->elements['proposal follow essential'] . "-$proposalId";
+        $element = $this->elements['proposal follow essential'] . "-${proposalId}";
 
         return $this->find('css', $element)->isChecked();
     }
 
     public function followAllIsChecked(string $proposalId)
     {
-        $element = $this->elements['proposal follow all'] . "-$proposalId";
+        $element = $this->elements['proposal follow all'] . "-${proposalId}";
 
         return $this->find('css', $element)->isChecked();
     }
 
     public function clickFollowChoice(string $choice, $proposalId)
     {
-        $element = $this->elements[$choice] . "-$proposalId";
+        $element = $this->elements[$choice] . "-${proposalId}";
 
         return $this->find('css', $element)->click();
     }
 
     public function clickFollowButton(string $proposalId)
     {
-        $element = $this->elements['proposal follow button'] . "-$proposalId";
+        $element = $this->elements['proposal follow button'] . "-${proposalId}";
 
         return $this->find('css', $element)->click();
     }
 
     public function clickUnfollowButton(string $proposalId)
     {
-        $element = $this->elements['proposal unfollow button'] . "-$proposalId";
+        $element = $this->elements['proposal unfollow button'] . "-${proposalId}";
 
         return $this->find('css', $element)->click();
     }

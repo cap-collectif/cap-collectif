@@ -78,7 +78,6 @@ trait OpinionStepsTrait
     public function iGoToAnOpinion()
     {
         $this->visitPageWithParams('opinion page', self::$opinion);
-        $this->iWaitUntilOpinionPageHasFullyLoaded();
     }
 
     /**
@@ -87,7 +86,6 @@ trait OpinionStepsTrait
     public function iGoToAnOpinionInAClosedStep()
     {
         $this->visitPageWithParams('opinion page', self::$opinionInClosedStep);
-        $this->iWaitUntilOpinionPageHasFullyLoaded();
     }
 
     /**
@@ -100,7 +98,6 @@ trait OpinionStepsTrait
             self::$opinionWithLoadsOfVotes,
             'opinion-page-tabs'
         );
-        $this->iWaitUntilOpinionPageHasFullyLoaded();
     }
 
     /**
@@ -113,7 +110,6 @@ trait OpinionStepsTrait
             self::$opinionWithNoSources,
             'opinion-page-tabs'
         );
-        $this->iWaitUntilOpinionPageHasFullyLoaded();
     }
 
     /**
@@ -677,7 +673,6 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionWithVersions()
     {
-        $this->waitAndThrowOnFailure(3000, "$('#opinion-page-tabs').length > 0");
         $this->visitPageWithParams('opinion page', self::$opinionWithVersions);
     }
 
@@ -690,14 +685,10 @@ trait OpinionStepsTrait
     }
 
     /**
-     * Go to a version in a closed step.
-     *
      * @When I go to an opinion version in a closed step
      */
     public function iGoToAnOpinionVersionInAClosedStep()
     {
-        $this->waitAndThrowOnFailure(3000, "$('#opinion-page-tabs').length > 0");
-
         $this->visitPageWithParams('opinion version page', self::$versionInClosedStep);
     }
 
@@ -736,8 +727,6 @@ trait OpinionStepsTrait
     }
 
     /**
-     * I confirm version deletion.
-     *
      * @When I confirm version deletion
      */
     public function iConfirmVersionDeletion()
@@ -747,8 +736,6 @@ trait OpinionStepsTrait
     }
 
     /**
-     * I should not see my version anymore.
-     *
      * @Then I should not see my version anymore
      */
     public function iShouldNotSeeMyVersionAnymore()
@@ -758,8 +745,6 @@ trait OpinionStepsTrait
     }
 
     /**
-     * I click the show all opinion version votes button.
-     *
      * @When I click the show all opinion version votes button
      */
     public function iClickTheShowAllOpinionVersionVotesButton()
@@ -848,15 +833,5 @@ trait OpinionStepsTrait
         return $this->navigationContext
             ->getPage('opinion version page')
             ->isOpen(self::$versionInClosedStep);
-    }
-
-    // ************************************ Opinion **************************************************
-
-    private function iWaitUntilOpinionPageHasFullyLoaded()
-    {
-        $this->waitAndThrowOnFailure(
-            5000,
-            "$('#OpinionBox').length > 0 && $('#opinion__arguments--AGAINST').length > 0 && $('#opinion-page-tabs').length > 0"
-        );
     }
 }

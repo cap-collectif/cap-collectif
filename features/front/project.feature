@@ -179,47 +179,32 @@ Scenario: Users can't see privates project
   Then I should not see "Qui doit conquérir le monde ? | Visible par les admins seulement"
 
 Scenario: Anonymous can't access to a private project
-  Given feature "projects_form" is enabled
-  And I visited "collect page" with:
-    | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
-    | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
+  Given I go to "https://capco.test/project/qui-doit-conquerir-le-monde-visible-par-les-admins-seulement/collect/collecte-des-propositions-pour-conquerir-le-monde"
   Then I should see "unauthorized-access"
   And I should see "restricted-access"
   When I follow "error.to_homepage"
   Then I should be redirected to "/"
 
 Scenario: Anonymous try to access to a wrong page
-  Given feature "projects_form" is enabled
-  And I visited "collect page" with:
-    | projectSlug | qui-doit-conquerir-fautedefrappe-visible-par-les-admins-seulement |
-    | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
+  Given I go to "https://capco.test/project/qui-doit-conquerir-fautedefrappe-visible-par-les-admins-seulement-seulement/collect/collecte-des-propositions-pour-conquerir-le-monde"
   Then I should see "error.404.title"
 
-Scenario: user try to access to a project with restricted access
-  Given feature "projects_form" is enabled
-  When I visited "collect page" with:
-    | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
-    | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
+Scenario: Anonymous try to access to a project with restricted access
+  Given I go to "https://capco.test/project/un-avenir-meilleur-pour-les-nains-de-jardins-custom-access/collect/collecte-des-propositions-liberer-les-nains-de-jardin"
   And I wait ".error-page" to appear on current page
   Then I should see 'restricted-access'
 
 Scenario: Not allowed user can't access to a private project
-  Given feature "projects_form" is enabled
-  And I am logged in as user
-  When I visited "collect page" with:
-    | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
-    | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
+  Given I am logged in as user
+  And I go to "https://capco.test/project/qui-doit-conquerir-le-monde-visible-par-les-admins-seulement/collect/collecte-des-propositions-pour-conquerir-le-monde"
   And I wait ".error-page" to appear on current page
   Then I should see 'restricted-access'
   When I follow "error.report"
   Then I should be redirected to "/contact"
 
-Scenario: user try to access to a project with restricted access
-  Given feature "projects_form" is enabled
-  And I am logged in as user
-  When I visited "collect page" with:
-    | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
-    | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
+Scenario: User try to access to a project with restricted access
+  Given I am logged in as user
+  And I go to "https://capco.test/project/un-avenir-meilleur-pour-les-nains-de-jardins-custom-access/collect/collecte-des-propositions-liberer-les-nains-de-jardin"
   And I wait ".error-page" to appear on current page
   Then I should see 'restricted-access'
 
@@ -229,52 +214,41 @@ Scenario: Super Admin can access to all private projects
   And I visited "collect page" with:
     | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
     | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
-  And I wait proposal step page to fully load
   Then I should see "Collecte des propositions pour conquérir le monde"
   And I should see "only-visible-by-administrators"
   When I visited "collect page" with:
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-capcobeer                          |
-  And I wait proposal step page to fully load
   Then I should see "Collecte des propositions pour la capcoBeer"
   And I should see "global.draft.only_visible_by_you"
   When I visited "collect page" with:
     | projectSlug | project-pour-la-force-visible-par-mauriau-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-force             |
-  And I wait proposal step page to fully load
   Then I should see "Collecte des propositions pour La Force"
   And I should see "global.draft.only_visible_by_you"
   When I visited "collect page" with:
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
-  And I wait proposal step page to fully load
   Then I should see "Un avenir meilleur pour les nains de jardins (custom access)"
 
 Scenario: An admin can't access a private project of an other admin
-  Given feature "projects_form" is enabled
-  And I am logged in as admin
-  When I visited "collect page" with:
-    | projectSlug | project-pour-la-force-visible-par-mauriau-seulement |
-    | stepSlug    | collecte-des-propositions-pour-la-force             |
+  Given I am logged in as admin
+  And I go to "https://capco.test/project/project-pour-la-force-visible-par-mauriau-seulement/collect/collecte-des-propositions-pour-la-force"
   Then I should see 'restricted-access'
 
 Scenario: Admin access to a project accessible for admins only
-  Given feature "projects_form" is enabled
-  And I am logged in as admin
+  Given I am logged in as admin
   And I visited "collect page" with:
     | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
     | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
-  And I wait proposal step page to fully load
   Then I should see "Collecte des propositions pour conquérir le monde"
   And I should see "only-visible-by-administrators"
 
 Scenario: Admin access to his project and click to edit it
-  Given feature "projects_form" is enabled
-  And I am logged in as admin
+  Given I am logged in as admin
   When I visited "collect page" with:
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-capcobeer                          |
-  And I wait 1 seconds
   Then I should see "Collecte des propositions pour la capcoBeer"
   And I should see "project.show.published_by admin"
   And I should see "global.draft.only_visible_by_you"

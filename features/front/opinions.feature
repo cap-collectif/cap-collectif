@@ -7,7 +7,6 @@ Scenario: Can create an opinion of contribuable type in opened project
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  And I wait 2 seconds
   When I click the "#btn-add--les-causes" element
   And I fill in the following:
     | opinion_title | Titre                           |
@@ -22,7 +21,6 @@ Scenario: An anonymous can paginate opinions inside a section
     | projectSlug | projet-de-loi-renseignement |
     | stepSlug    | elaboration-de-la-loi       |
     | sectionSlug | chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1       |
-  And I wait 2 seconds
   Then I should see 5 ".list-group-item__opinion" element
   When I click the "#OpinionListPaginated-loadmore" element
   And I wait 2 seconds
@@ -34,7 +32,6 @@ Scenario: Can not create an opinion of non-contribuable type
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  And I wait 2 seconds
   Then I should see 0 "#opinions--le-probleme-constate" element
 
 @security
@@ -52,7 +49,6 @@ Scenario: Can not create an opinion when not logged in
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  And I wait 2 seconds
   When I click the "#btn-add--les-causes" element
   Then I should see a "#login-popover" element
 
@@ -74,7 +70,6 @@ Scenario: Author of an opinion loose their votes when updating it
     | stepSlug         | collecte-des-avis                |
     | opinionTypeSlug  | enjeux                           |
     | opinionSlug      | opinion-3                        |
-  And I wait 1 seconds
   And I should see 'global.votes {"num":1}'
   When I press "global.edit"
   And I wait 1 seconds
@@ -95,12 +90,10 @@ Scenario: Non author of an opinion wants to update it
     | stepSlug         | collecte-des-avis                |
     | opinionTypeSlug  | enjeux                           |
     | opinionSlug      | opinion-3                        |
-  And I wait ".opinion__description .opinion__buttons" to appear on current page
   Then I should not see "global.edit" in the ".opinion__description .opinion__buttons" element
 
 Scenario: Anonymous wants to see opinion appendix
   Given I go to an opinion with versions
-  And I wait 1 seconds
   Then I should see "Motifs 1"
   And I press "Exposé des motifs"
   And I wait 1 seconds
