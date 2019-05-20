@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\OpenID\OptionsModifier;
 
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use HWI\Bundle\OAuthBundle\OAuth\OptionsModifier\AbstractOptionsModifier;
 use HWI\Bundle\OAuthBundle\OAuth\OptionsModifier\OptionsModifierInterface;
@@ -9,30 +10,46 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 
 class OpenIDOptionsModifier extends AbstractOptionsModifier implements OptionsModifierInterface
 {
-    protected $oauthSsoConfigurationRepository;
+    protected const REDIS_CACHE_KEY = 'SSOConfiguration';
 
-    public function __construct(Oauth2SSOConfigurationRepository $oauthSsoConfigurationRepository)
-    {
+    protected $oauthSsoConfigurationRepository;
+    protected $redisCache;
+
+    public function __construct(
+        Oauth2SSOConfigurationRepository $oauthSsoConfigurationRepository,
+        RedisCache $redisCache
+    ) {
         $this->oauthSsoConfigurationRepository = $oauthSsoConfigurationRepository;
+        $this->redisCache = $redisCache;
     }
 
     public function modifyOptions(array $options, ResourceOwnerInterface $resourceOwner): array
     {
-        $ssoConfiguration = $this->oauthSsoConfigurationRepository->findOneBy([
-            'enabled' => true,
-        ]);
+        $ssoConfigurationCachedItem = $this->redisCache->getItem(
+            self::REDIS_CACHE_KEY . ' - ' . $resourceOwner->getName()
+        );
 
-        if (!$ssoConfiguration) {
-            throw new \RuntimeException('Could not find SSO configuration.');
+        if (!$ssoConfigurationCachedItem->isHit()) {
+            $newSsoConfiguration = $this->oauthSsoConfigurationRepository->findOneBy([
+                'enabled' => true,
+            ]);
+
+            if (!$newSsoConfiguration) {
+                throw new \RuntimeException('Could not find SSO configuration.');
+            }
+
+            $ssoConfigurationCachedItem
+                ->set([
+                    'client_id' => $newSsoConfiguration->getClientId(),
+                    'client_secret' => $newSsoConfiguration->getSecret(),
+                    'access_token_url' => $newSsoConfiguration->getAccessTokenUrlId(),
+                    'authorization_url' => $newSsoConfiguration->getAuthorizationUrl(),
+                    'infos_url' => $newSsoConfiguration->getUserInfoUrl(),
+                    'logout_url' => $newSsoConfiguration->getLogoutUrl(),
+                ])
+                ->expiresAfter($this->redisCache::ONE_DAY);
         }
 
-        return array_merge($options, [
-            'client_id' => $ssoConfiguration->getClientId(),
-            'client_secret' => $ssoConfiguration->getSecret(),
-            'access_token_url' => $ssoConfiguration->getAccessTokenUrlId(),
-            'authorization_url' => $ssoConfiguration->getAuthorizationUrl(),
-            'infos_url' => $ssoConfiguration->getUserInfoUrl(),
-            'logout_url' => $ssoConfiguration->getLogoutUrl(),
-        ]);
+        return array_merge($options, $ssoConfigurationCachedItem->get());
     }
 }
