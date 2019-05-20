@@ -27,7 +27,7 @@ class Oauth2SSOConfiguration extends AbstractSSOConfiguration
     protected $authorizationUrl;
 
     /**
-     * @ORM\Column(name="access_token_url_id", type="text", nullable=false)
+     * @ORM\Column(name="access_token_url", type="text", nullable=false)
      */
     protected $accessTokenUrlId;
 
