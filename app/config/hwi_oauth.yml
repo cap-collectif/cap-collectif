@@ -38,4 +38,5 @@ hwi_oauth:
       access_token_url: 'fake'
       authorization_url: 'fake'
       infos_url: 'fake'
-      logout_url: 'fake'
+      options:
+        logout_url: 'fake'
