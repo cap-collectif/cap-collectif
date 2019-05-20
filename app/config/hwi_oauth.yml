@@ -32,7 +32,7 @@ hwi_oauth:
       class: Capco\UserBundle\OpenID\OpenIDResourceOwner
       type: oauth2
       options_modifier: Capco\UserBundle\OpenID\OptionsModifier\OpenIDOptionsModifier
-      # Above parameters need to be set and must be a non-empty string because of options resolver's validation from library.
+      # Parameters below need to be set and must be a non-empty string because of options resolver's validation from library.
       client_id: 'fake'
       client_secret: 'fake'
       access_token_url: 'fake'
