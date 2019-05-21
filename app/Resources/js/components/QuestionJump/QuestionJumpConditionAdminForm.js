@@ -97,7 +97,6 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
         <Field
           id={`${member}.question.id`}
           name={`${member}.question.id`}
-          normalize={val => val && parseInt(val, 10)}
           type="select"
           onChange={e => {
             this.handleQuestionChange(e);
