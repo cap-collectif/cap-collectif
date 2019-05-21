@@ -27,6 +27,7 @@ class QuestionnaireReplyProcessor implements ProcessorInterface
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE:
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE:
                 $replyId = $json['replyId'];
+
                 $reply = $this->repository->find($replyId);
                 if (!$reply) {
                     throw new \RuntimeException('Unable to find reply with id : ' . $replyId);

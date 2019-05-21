@@ -9,6 +9,8 @@ Capco\AppBundle\Entity\Questionnaire:
     acknowledgeReplies: true
     type: 'QUESTIONNAIRE'
     privateResult: false
+    notifyResponseCreate: 1
+    notifyResponseUpdate: 1
   questionnaire2:
     id: questionnaire2
     title: Questionnaire de test
