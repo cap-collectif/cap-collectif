@@ -1376,12 +1376,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
   # The ID of an object
   id: ID!
 
-  # The kind of the step
-  kind: String!
-
-  # Get the associated consultation of this consultation step
-  consultation: Consultation
-
   # A list of contributor associated with the consultation step.
   contributors(
     # Returns the elements in the list that come after the specified cursor.
@@ -1421,6 +1415,9 @@ type ConsultationStep implements Node & Step & RequirementStep {
     last: Int
   ): RequirementConnection!
 
+  # The kind of the step
+  kind: String!
+
   # The status of the step
   status: StepStatus
 
@@ -1453,6 +1450,9 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   # Contributions are allowed right now.
   contribuable: Boolean!
+
+  # Get the associated consultation of this consultation step
+  consultation: Consultation
   contributionConnection(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -6548,6 +6548,30 @@ type User implements Node & UniformResourceLocatable {
   # Whether or not this user is the authenticated user.
   isViewer: Boolean!
 
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # A URL pointing to the user's Facebook account.
+  facebookUrl: URI
+
+  # A URL pointing to the user's Twitter account.
+  twitterUrl: URI
+
+  # A URL pointing to the user's LinkedIn account.
+  linkedInUrl: URI
+
+  # A URL pointing to the user's public website/blog.
+  websiteUrl: URI
+
+  # The user's public profile biography.
+  biography: String
+
+  # Identifies the date and time when this user account was deleted.
+  deletedAccountAt: DateTime
+
   # The type of the person.
   userType: UserType
 
@@ -6569,38 +6593,14 @@ type User implements Node & UniformResourceLocatable {
   # The user's personal email.
   email: Email
 
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
   # Whether or not this user consent internal communication.
   consentInternalCommunication: Boolean
-
-  # A URL pointing to the user's Facebook account.
-  facebookUrl: URI
-
-  # A URL pointing to the user's Twitter account.
-  twitterUrl: URI
-
-  # A URL pointing to the user's LinkedIn account.
-  linkedInUrl: URI
 
   # The user's public avatar URL.
   avatarUrl: URI
 
-  # A URL pointing to the user's public website/blog.
-  websiteUrl: URI
-
-  # The user's public profile biography.
-  biography: String
-
   # Whether or not this user has a confirmed account.
   enabled: Boolean!
-
-  # Identifies the date and time when this user account was deleted.
-  deletedAccountAt: DateTime
 
   # Expose Primary Key, do not use it, except for testing purpose.
   _id: ID!
