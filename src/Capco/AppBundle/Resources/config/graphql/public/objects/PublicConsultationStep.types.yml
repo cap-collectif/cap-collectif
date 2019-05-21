@@ -3,7 +3,7 @@ PublicConsultationStep:
   inherits:
     - Node
   config:
-    interfaces: 
+    interfaces:
       - Node
     description: 'A consultation step'
     name: ConsultationStep

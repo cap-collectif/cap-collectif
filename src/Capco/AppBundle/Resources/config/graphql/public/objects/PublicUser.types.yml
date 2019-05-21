@@ -1,11 +1,11 @@
 PublicUser:
   type: object
-  inherits: 
+  inherits:
     - Node
     - UniformResourceLocatable
   config:
     description: "A user is an individual's account."
-    interfaces: 
+    interfaces:
       - Node
       - UniformResourceLocatable
     name: User
