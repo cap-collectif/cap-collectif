@@ -6,6 +6,10 @@ PreviewQuestionChoice:
     fields:
       id:
         type: 'ID!'
+        # TODO: this need to be a GlobalId
+        # builder: 'Relay::GlobalId'
+        # builderConfig:
+        #   typeName: QuestionChoice
         description: 'The ID of an object.'
       title:
         type: 'String!'

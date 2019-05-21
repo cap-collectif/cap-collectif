@@ -71,7 +71,10 @@ class FeaturesCategoryResolver
         return $this->manager->hasOneActive(self::$categories[$category]['conditions']);
     }
 
-    public function isAdminEnabled(/* User */ $admin): bool
+    /**
+     * @param User $admin
+     */
+    public function isAdminEnabled($admin): bool
     {
         if (method_exists($admin, 'getFeatures')) {
             return $this->manager->hasOneActive($admin->getFeatures());
@@ -126,12 +129,12 @@ class FeaturesCategoryResolver
             $toggles['login_paris'] = $this->manager->isActive('login_paris');
         }
 
-        if (
-            'settings.modules' === $category &&
-            $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')
-        ) {
+        if ('settings.modules' === $category && EnvHelper::get('SYMFONY_LOGIN_OPENID_ALLOWED')) {
             $toggles['login_openid'] = $this->manager->isActive('login_openid');
-            $toggles['disconnect_openid'] = $this->manager->isActive('disconnect_openid');
+
+            if ($this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
+                $toggles['disconnect_openid'] = $this->manager->isActive('disconnect_openid');
+            }
         }
 
         return $toggles;
@@ -186,7 +189,5 @@ class FeaturesCategoryResolver
         if (0 === strrpos($category, 'pages.')) {
             return 'admin.group.pages';
         }
-
-        return null;
     }
 }

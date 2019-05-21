@@ -65,6 +65,12 @@ parameters:
   locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE']
   google_maps_key_server: '***REMOVED***'
   jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
+  openid_client_id: '%env(SYMFONY_OPENID_CLIENT_ID)%'
+  openid_secret: '%env(SYMFONY_OPENID_SECRET)%'
+  openid_authorization_url: '%env(SYMFONY_OPENID_AUTHORIZATION_URL)%'
+  openid_access_token_url: '%env(SYMFONY_OPENID_ACCESS_TOKEN_URL)%'
+  openid_userinfo_url: '%env(SYMFONY_OPENID_USERINFO_URL)%'
+  openid_logout_url: '%env(SYMFONY_OPENID_LOGOUT_URL)%'
   prometheus_bearer_token: '%env(SYMFONY_PROMETHEUS_BEARER_TOKEN)%'
   mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
   #
@@ -106,6 +112,12 @@ parameters:
   env(SYMFONY_TWILIO_NUMBER): +***REMOVED***
   env(SYMFONY_DISABLE_MAIL_DELIVERY): false
   env(SYMFONY_SENTRY_DSN): ~
+  env(SYMFONY_OPENID_CLIENT_ID): ~
+  env(SYMFONY_OPENID_SECRET): ~
+  env(SYMFONY_OPENID_AUTHORIZATION_URL): ~
+  env(SYMFONY_OPENID_ACCESS_TOKEN_URL): ~
+  env(SYMFONY_OPENID_USERINFO_URL): ~
+  env(SYMFONY_OPENID_LOGOUT_URL): ~
   env(SYMFONY_PROMETHEUS_BEARER_TOKEN): ~
   env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
 

@@ -3,21 +3,22 @@ PublicConsultationStep:
   inherits:
     - Node
   config:
-    interfaces: [Node]
+    interfaces: 
+      - Node
     description: 'A consultation step'
     name: ConsultationStep
     fields:
-      kind:
-        type: 'String!'
-        description: 'The type of step. Returns "consultation".'
-        resolve: 'consultation'
+      # kind:
+      #   type: 'String!'
+      #   description: 'The type of step. Returns "consultation".'
+      #   resolve: 'consultation'
       id:
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: ConsultationStep
-      consultation:
-        type: 'PublicConsultation'
-        description: 'The related consultation of this step.'
+      # consultation:
+      #   type: 'PublicConsultation'
+      #   description: 'The related consultation of this step.'
       contributors:
         type: 'PublicUserConnection!'
         description: 'A list of contributor associated with the consultation step.'

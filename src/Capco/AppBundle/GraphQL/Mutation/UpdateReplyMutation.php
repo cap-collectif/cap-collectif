@@ -2,23 +2,24 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ReplyType;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Notifier\UserNotifier;
 use Overblog\GraphQLBundle\Error\UserError;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UpdateReplyMutation implements MutationInterface
 {
@@ -51,18 +52,18 @@ class UpdateReplyMutation implements MutationInterface
         $this->publisher = $publisher;
     }
 
-    public function __invoke(Argument $input, User $user): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $values = $input->getRawArguments();
         /** @var Reply $reply */
-        $reply = $this->replyRepo->find($values['replyId']);
+        $reply = $this->replyRepo->find(GlobalId::fromGlobalId($values['replyId'])['id']);
         unset($values['replyId']);
 
         if (!$reply) {
             throw new UserError('Reply not found.');
         }
 
-        if ($reply->getAuthor() == !$user) {
+        if ($reply->getAuthor() == !$viewer) {
             throw new UserError('You are not allowed to update this reply.');
         }
 
@@ -92,7 +93,7 @@ class UpdateReplyMutation implements MutationInterface
                 $endAt,
                 $stepUrl,
                 $step,
-                $user,
+                $viewer,
                 true
             );
         }
@@ -111,7 +112,7 @@ class UpdateReplyMutation implements MutationInterface
             );
         }
 
-        $this->redisStorageHelper->recomputeUserCounters($user);
+        $this->redisStorageHelper->recomputeUserCounters($viewer);
 
         return ['reply' => $reply];
     }
