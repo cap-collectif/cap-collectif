@@ -30,7 +30,7 @@
             <i class="cap cap-arrow-66"></i>Overview
         </a>
 
-        <div class="list-group_collapse collapse" id="overview">
+        <div class="list-group_collapse collapse {% if category == "previews" or category == "breaking_changes" %}in{% endif %}" id="overview">
             <a href="{{ path('app_developer_category', { 'category': 'previews' })}}" class="list-group-item">Schema Previews</a>
             <a href="{{ path('app_developer_category', { 'category': 'breaking_changes' })}}" class="list-group-item">Breaking Changes</a>
         </div>
