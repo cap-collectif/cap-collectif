@@ -38,6 +38,7 @@ import UserAdminCreateButtonApp from '../js/startup/UserAdminCreateButtonApp';
 import ParisUserNotValidApp from '../js/startup/ParisUserNotValidApp';
 import EditProfileApp from '../js/startup/EditProfileApp';
 import CookieApp from '../js/startup/CookieApp';
+import CookieManagerApp from '../js/startup/CookieManagerApp';
 import UserAdminPageApp from '../js/startup/UserAdminPageApp';
 import ProjectRestrictedAccessAlertApp from '../js/startup/ProjectRestrictedAccessAlertApp';
 import ProjectRestrictedAccessApp from '../js/startup/ProjectRestrictedAccessApp';
@@ -96,6 +97,7 @@ ReactOnRails.register({
   UserAdminCreateButtonApp,
   ParisUserNotValidApp,
   EditProfileApp,
+  CookieManagerApp,
   CookieApp,
   UserAdminPageApp,
   ProjectRestrictedAccessAlertApp,

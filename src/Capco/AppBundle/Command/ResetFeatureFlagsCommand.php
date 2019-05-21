@@ -36,43 +36,42 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
 
         $toggleManager = $this->getContainer()->get(Manager::class);
 
-        if ('dev' === $env) {
-            $toggleManager->activate('blog');
-            $toggleManager->activate('calendar');
-            $toggleManager->activate('newsletter');
-            $toggleManager->activate('captcha');
-            $toggleManager->activate('versions');
-            $toggleManager->activate('themes');
-            $toggleManager->activate('registration');
-            $toggleManager->activate('login_facebook');
-            $toggleManager->activate('login_gplus');
-            $toggleManager->activate('user_type');
-            $toggleManager->activate('members_list');
-            $toggleManager->activate('projects_form');
-            $toggleManager->activate('share_buttons');
-            $toggleManager->activate('project_trash');
-            $toggleManager->activate('reporting');
-            $toggleManager->activate('search');
-            $toggleManager->activate('districts');
-            $toggleManager->activate('phone_confirmation');
-            $toggleManager->activate('server_side_rendering');
-            $toggleManager->activate('profiles');
-            $toggleManager->deactivate('export');
-            $toggleManager->deactivate('zipcode_at_register');
-            $toggleManager->deactivate('shield_mode');
-            $toggleManager->deactivate('login_saml');
-            $toggleManager->deactivate('restrict_registration_via_email_domain');
-            $toggleManager->deactivate('login_paris');
-            $toggleManager->activate('indexation');
-            $toggleManager->activate('developer_documentation');
-            $toggleManager->deactivate('login_openid');
-            $toggleManager->deactivate('disconnect_openid');
-            $toggleManager->activate('consultation_plan');
-            $toggleManager->activate('display_map');
-            $toggleManager->activate('privacy_policy');
-            $toggleManager->activate('public_api');
-            $toggleManager->activate('consent_internal_communication');
-        }
+        $toggleManager->activate('blog');
+        $toggleManager->activate('calendar');
+        $toggleManager->activate('newsletter');
+        $toggleManager->activate('captcha');
+        $toggleManager->activate('versions');
+        $toggleManager->activate('themes');
+        $toggleManager->activate('registration');
+        $toggleManager->activate('login_facebook');
+        $toggleManager->activate('login_gplus');
+        $toggleManager->activate('user_type');
+        $toggleManager->activate('members_list');
+        $toggleManager->activate('projects_form');
+        $toggleManager->activate('share_buttons');
+        $toggleManager->activate('project_trash');
+        $toggleManager->activate('reporting');
+        $toggleManager->activate('search');
+        $toggleManager->activate('districts');
+        $toggleManager->activate('phone_confirmation');
+        $toggleManager->activate('server_side_rendering');
+        $toggleManager->activate('profiles');
+        $toggleManager->deactivate('export');
+        $toggleManager->deactivate('zipcode_at_register');
+        $toggleManager->deactivate('shield_mode');
+        $toggleManager->deactivate('login_saml');
+        $toggleManager->deactivate('restrict_registration_via_email_domain');
+        $toggleManager->deactivate('login_paris');
+        $toggleManager->activate('indexation');
+        $toggleManager->activate('developer_documentation');
+        $toggleManager->deactivate('login_openid');
+        $toggleManager->deactivate('disconnect_openid');
+        $toggleManager->activate('consultation_plan');
+        $toggleManager->activate('display_map');
+        $toggleManager->activate('privacy_policy');
+        $toggleManager->activate('public_api');
+        $toggleManager->activate('consent_internal_communication');
+        $toggleManager->activate('new_feature_questionnaire_result');
 
         if ('test' === $env) {
             $toggleManager->deactivate('shield_mode');
@@ -86,12 +85,13 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
             $toggleManager->deactivate('login_gplus');
             $toggleManager->deactivate('server_side_rendering');
             $toggleManager->deactivate('developer_documentation');
-
             $toggleManager->deactivate('login_saml');
             $toggleManager->deactivate('login_paris');
             $toggleManager->deactivate('login_openid');
             $toggleManager->deactivate('disconnect_openid');
             $toggleManager->deactivate('public_api');
+            $toggleManager->deactivate('search');
+
             $toggleManager->activate('captcha');
             $toggleManager->activate('consent_internal_communication');
 

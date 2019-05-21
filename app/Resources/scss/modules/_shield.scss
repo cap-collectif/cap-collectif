@@ -1,0 +1,37 @@
+#shield-mode {
+  #link_shield {
+    color: $dark-gray;
+
+    .container {
+      padding: 15px 30px;
+
+      @media (max-width: $screen-xs-max) {
+        padding: 15px;
+      }
+    }
+
+    ul {
+      @include reset-ul();
+      @include ul-list-inline();
+
+      li.list-style-none {
+        @include inline-block();
+        margin-bottom: 10px;
+        color: $dark-gray;
+
+        & a {
+          padding: 0 5px;
+          @include inline-block();
+          color: $dark-gray;
+        }
+
+        & a:hover {
+          color: $dark-gray;
+        }
+      }
+    }
+    .btn.btn-link{
+      color: $dark-gray;
+    }
+  }
+}

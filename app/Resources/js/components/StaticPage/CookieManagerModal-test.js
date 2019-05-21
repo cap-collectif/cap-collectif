@@ -2,22 +2,24 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { CookieModal } from './CookieModal';
+import { CookieManagerModal } from './CookieManagerModal';
 
-describe('<CookieModal />', () => {
+describe('<CookieManagerModal />', () => {
   const props = {
     analyticsJs: 'here your js to analyse the website',
     adJs: 'here your js code bullshit the users',
-    platformLink: 'http://test.com',
+    bannerTrad: 'banner-trad',
+    cookieTrad: 'cookie-trad',
+    isLink: true,
     withListSeparator: true,
   };
   it('should render correctly open', () => {
-    const wrapper = shallow(<CookieModal {...props} />);
+    const wrapper = shallow(<CookieManagerModal {...props} />);
     wrapper.setState({ open: true });
     expect(wrapper).toMatchSnapshot();
   });
   it('should render correctly close', () => {
-    const wrapper = shallow(<CookieModal {...props} />);
+    const wrapper = shallow(<CookieManagerModal {...props} />);
     wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();
   });
