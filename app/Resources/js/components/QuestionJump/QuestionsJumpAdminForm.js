@@ -1,27 +1,37 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FieldArray, formValueSelector } from 'redux-form';
+import { Field, FieldArray, formValueSelector } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup, Button } from 'react-bootstrap';
 import QuestionJumpConditionsAdminForm from './QuestionJumpConditionsAdminForm';
 import type { GlobalState } from '../../types';
+import component from '../Form/Field';
+import type { responsesHelper_adminQuestion } from '~relay/responsesHelper_adminQuestion.graphql';
+import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
 
 type ParentProps = {
   formName: string,
   oldMember: string,
 };
-type Props = {
+type Props = ParentProps & {
   fields: { length: number, map: Function, remove: Function, push: Function },
+  jumps: $PropertyType<responsesHelper_adminQuestion, 'jumps'>,
+  questions: $PropertyType<QuestionnaireAdminConfigurationForm_questionnaire, 'questions'>,
   formName: string,
   currentQuestion: Object,
 };
 
 export class QuestionsJumpAdminForm extends React.Component<Props> {
+  handleAlwaysJumpChange(e: SyntheticInputEvent<HTMLSelectElement>) {
+    console.log(e.target.value);
+  }
+
   render() {
-    const { fields, formName, currentQuestion } = this.props;
+    const { fields, jumps, questions, oldMember, formName, currentQuestion } = this.props;
+    console.log(questions);
     return (
       <div className="form-group" id="questions_choice_panel_personal">
         <ListGroup>
@@ -78,6 +88,26 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
           }}>
           <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
         </Button>
+        <div className="movable-element">
+          <div className="mb-10">
+            <h4 className="panel-title">
+              <FormattedMessage
+                id={jumps && jumps.length === 0 ? 'always-go-to' : 'jump-other-goto'}
+              />
+            </h4>
+            <Field
+              id={`${oldMember}.alwaysJump`}
+              name={`${oldMember}.alwaysJump`}
+              type="select"
+              onChange={this.handleAlwaysJumpChange}
+              component={component}>
+              <option value="" />
+              {questions.map((question, i) => (
+                <option value={question.id}>{`${i}. ${question.title}`}</option>
+              ))}
+            </Field>
+          </div>
+        </div>
       </div>
     );
   }
@@ -87,6 +117,8 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   const selector = formValueSelector(props.formName);
   return {
     currentQuestion: selector(state, `${props.oldMember}`),
+    jumps: selector(state, `${props.oldMember}.jumps`),
+    questions: selector(state, 'questions'),
   };
 };
 
