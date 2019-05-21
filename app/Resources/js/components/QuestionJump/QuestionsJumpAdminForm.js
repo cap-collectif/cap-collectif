@@ -99,6 +99,7 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
               id={`${oldMember}.alwaysJump`}
               name={`${oldMember}.alwaysJump`}
               type="select"
+              normalize={val => (val !== '' ? val : null)}
               onChange={this.handleAlwaysJumpChange}
               component={component}>
               <option value="" />
