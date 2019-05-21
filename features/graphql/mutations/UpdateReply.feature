@@ -25,7 +25,7 @@ Scenario: User wants to update a reply
     }",
     "variables": {
       "input": {
-        "replyId": "reply2",
+        "replyId": "UmVwbHk6cmVwbHky",
         "draft": false,
         "responses": [
             {
@@ -47,7 +47,7 @@ Scenario: User wants to update a reply
    "data":{
       "updateReply":{
          "reply":{
-            "id":"reply2",
+            "id":"UmVwbHk6cmVwbHky",
             "published":true,
             "responses":[
                {

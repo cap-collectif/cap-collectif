@@ -2,16 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Helper\RedisStorageHelper;
-use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
-use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Repository\ReplyRepository;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class DeleteReplyMutation implements MutationInterface
 {
@@ -32,16 +33,16 @@ class DeleteReplyMutation implements MutationInterface
         $this->publisher = $publisher;
     }
 
-    public function __invoke(string $id, User $user): array
+    public function __invoke(string $id, User $viewer): array
     {
         /** @var Reply $reply */
-        $reply = $this->replyRepo->find($id);
+        $reply = $this->replyRepo->find(GlobalId::fromGlobalId($id)['id']);
 
         if (!$reply) {
             throw new UserError('Reply not found');
         }
 
-        if ($user->getId() !== $reply->getAuthor()->getId()) {
+        if ($viewer->getId() !== $reply->getAuthor()->getId()) {
             throw new UserError('You are not the author of this reply');
         }
 
@@ -72,7 +73,7 @@ class DeleteReplyMutation implements MutationInterface
             );
         }
 
-        $this->redisStorageHelper->recomputeUserCounters($user);
+        $this->redisStorageHelper->recomputeUserCounters($viewer);
 
         return ['questionnaire' => $questionnaire];
     }

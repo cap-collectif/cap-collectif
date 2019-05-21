@@ -19,7 +19,7 @@ Scenario: User can delete his reply
     }",
     "variables": {
       "input": {
-        "id": "reply2"
+        "id": "UmVwbHk6cmVwbHky"
       }
     }
   }
@@ -31,7 +31,7 @@ Scenario: User can delete his reply
       "deleteReply": {
         "questionnaire": {
           "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
-          "viewerReplies": [{"id":"reply5"}]
+          "viewerReplies": [{"id":"UmVwbHk6cmVwbHk1"}]
         }
       }
     }
@@ -53,7 +53,7 @@ Scenario: User can not delete the reply of someone else
     }",
     "variables": {
       "input": {
-        "id": "reply2"
+        "id": "UmVwbHk6cmVwbHky"
       }
     }
   }

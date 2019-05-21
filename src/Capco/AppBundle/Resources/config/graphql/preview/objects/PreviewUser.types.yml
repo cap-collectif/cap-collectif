@@ -9,6 +9,9 @@ PreviewUser:
       userType:
         type: 'UserType'
         description: 'The type of the person.'
+      # This is currently a connection
+      # But in Proposal and Reply we use a simple array
+      # We must find what's the best. 
       responses:
         type: 'PreviewResponseConnection!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserResponsesResolver", [value,getUser(),context])'
