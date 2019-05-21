@@ -31,6 +31,11 @@ class ProjectAuthor
      */
     private $project;
 
+    public function __toString()
+    {
+        return 'lolilol';
+    }
+
     public function getUser(): User
     {
         return $this->user;

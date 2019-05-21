@@ -76,11 +76,12 @@ class PostAdmin extends CapcoAdmin
         $query = parent::createQuery($context);
         $query
             ->leftJoin($query->getRootAliases()[0] . '.projects', 'p')
+            ->leftJoin('p.authors', 'authors')
             ->andWhere(
                 $query
                     ->expr()
                     ->andX(
-                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('authors.user', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );

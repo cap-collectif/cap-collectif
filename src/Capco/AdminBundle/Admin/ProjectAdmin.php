@@ -2,21 +2,22 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\AppBundle\Toggle\Manager;
 use Doctrine\ORM\QueryBuilder;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Toggle\Manager;
+use Sonata\CoreBundle\Model\Metadata;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Required;
@@ -102,14 +103,16 @@ final class ProjectAdmin extends CapcoAdmin
 
         /** @var QueryBuilder $query */
         $query = parent::createQuery($context);
-        $query->andWhere(
-            $query
-                ->expr()
-                ->andX(
-                    $query->expr()->in($query->getRootAliases()[0] . '.authors', ':author'),
-                    $query->expr()->eq($query->getRootAliases()[0] . '.visibility', 0)
-                )
-        );
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.authors', 'authors')
+            ->andWhere(
+                $query
+                    ->expr()
+                    ->andX(
+                        $query->expr()->eq('authors.user', ':author'),
+                        $query->expr()->eq($query->getRootAliases()[0] . '.visibility', 0)
+                    )
+            );
         $query->orWhere($query->expr()->gte($query->getRootAliases()[0] . '.visibility', 1));
         $query->setParameter('author', $user);
 
@@ -121,20 +124,23 @@ final class ProjectAdmin extends CapcoAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper
-            ->add('title', null, ['label' => 'admin.fields.project.title'])
-            ->add(
-                'authors',
-                'doctrine_orm_model_autocomplete',
-                ['label' => 'admin.fields.project.author'],
-                null,
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => function ($enitity, $property) {
-                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
-                ]
-            );
+        $datagridMapper->add(
+            'title',
+            null,
+            ['label' => 'admin.fields.project.title']
+            // ->add(
+            //     'authors',
+            //     'doctrine_orm_model_autocomplete',
+            //     ['label' => 'admin.fields.project.author'],
+            //     null,
+            //     [
+            //         'property' => 'email,username',
+            //         'to_string_callback' => function ($entity, $property) {
+            //             return $entity->getEmail() . ' - ' . $entity->getUsername();
+            //         },
+            //     ]
+            // )
+        );
 
         if (
             $this->getConfigurationPool()
@@ -166,9 +172,12 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper
-            ->addIdentifier('title', null, ['label' => 'admin.fields.project.title'])
-            ->add('authors', 'sonata_type_model', ['label' => 'admin.fields.project.author']);
+        $listMapper->addIdentifier(
+            'title',
+            null,
+            ['label' => 'admin.fields.project.title']
+            // ->add('authors', 'sonata_type_model', ['label' => 'admin.fields.project.author'])
+        );
 
         if (
             $this->getConfigurationPool()
@@ -243,6 +252,14 @@ final class ProjectAdmin extends CapcoAdmin
             ->with('group.admin.parameters', ['class' => 'col-md-6'])
             ->end();
         // Content
+        // ->add('authors', 'sonata_type_model_autocomplete', [
+        //     'label' => 'admin.fields.project.author',
+        //     'property' => 'user',
+        //     'multiple' => true,
+        //     'to_string_callback' => function ($entity, $property) {
+        //         return $entity->getUser()->getEmail() . ' - ' . $entity->getUser()->getUsername();
+        //     },
+        // ])
         $formMapper
             ->with('admin.fields.project.group_content')
             ->add('title', null, ['label' => 'admin.fields.project.title'])
@@ -424,13 +441,13 @@ final class ProjectAdmin extends CapcoAdmin
     {
         $showMapper->with('admin.fields.project.general')->end();
 
+        // ->add('authors', null, ['label' => 'admin.fields.project.author'])
         $showMapper
             ->with('admin.fields.project.general')
             ->add('title', null, ['label' => 'admin.fields.project.title'])
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
             ->add('exportable', null, ['label' => 'admin.fields.project.exportable'])
             ->add('publishedAt', null, ['label' => 'admin.fields.project.published_at'])
-            ->add('authors', null, ['label' => 'admin.fields.project.author'])
             ->add('Cover', null, [
                 'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
                 'label' => 'admin.fields.project.cover',
