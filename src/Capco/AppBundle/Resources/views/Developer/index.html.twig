@@ -47,9 +47,12 @@
             <a href="#mutations" class="list-group-item" data-toggle="collapse">
                 <i class="cap cap-arrow-66"></i>Mutations
             </a>
-            <div class="list-group_collapse collapse {% if category == "mutations" %}in{% endif %}" id="mutations">
+            <div class="list-group_collapse collapse {% if category == "mutation" %}in{% endif %}" id="mutations">
                 {% for field in mutation.fields|usort %}
-                    <a href="{{ path('app_developer_category_type', { 'category': 'mutation', 'type': field.name })}}" class="list-group-item {% if selection and selection.name == field.name %}active{% endif %}">{{ field.name }}</a>
+                    <a href="{{ path('app_developer_category_type', { 'category': 'mutation', 'type': field.name })}}" class="list-group-item {% if selection and selection.name == field.name %}active{% endif %}">
+                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': mutation} %}
+                        {{ field.name }}
+                    </a>
                 {% endfor %}
             </div>
         {% endif %}
@@ -251,7 +254,7 @@
         <span class="label label-info">ROLE_ADMIN</span>
         {% endif %}
         </h2>
-        {% if selection.type.getNullableType(selection.type).preview is defined and selection.type.getNullableType(field.type).preview %}
+        {% if selection.type.getNullableType(selection.type).preview is defined and selection.type.getNullableType(selection.type).preview %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
         {% endif %}        
         <p>{{selection.description}}</p>
