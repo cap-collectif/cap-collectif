@@ -39,7 +39,6 @@ $share-color: #333333;
 $gplus-color: #d73d32;
 $rss-color: #fdac61;
 $saml-color: #7498c0;
-$openid-color: #7498c0;
 
 // = Social Networks
 // ------------------------------
@@ -49,7 +48,6 @@ $social-colors: // name color icon
         (googleplus $gplus-color "m")
         (linkedin $linkedin-color "f")
         (saml $saml-color "\e00b")
-        (openid $openid-color "\e00b")
         (rss $rss-color "g");
 
 // = size

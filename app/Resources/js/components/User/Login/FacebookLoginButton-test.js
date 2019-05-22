@@ -3,33 +3,27 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import FacebookLoginButton from './FacebookLoginButton';
-import { features } from '../../../redux/modules/default';
 
 describe('<FacebookLoginButton />', () => {
-  const props = {
-    features: { ...features },
-  };
-  const propsWithFeatureFacebookLoginActivated = {
-    features: { ...features, login_facebook: true },
-  };
-  const propsWithFeatureFacebookLoginActivatedAndRegistrationPrefix = {
-    features: { ...features, login_facebook: true },
-    prefix: 'registration.',
-  };
+  const props = {};
 
   it('renders nothing if login_facebook is not activated', () => {
-    const wrapper = shallow(<FacebookLoginButton {...props} />);
+    const wrapper = shallow(
+      <FacebookLoginButton features={{ login_facebook: false }} prefix="login." {...props} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a button if feature is active', () => {
-    const wrapper = shallow(<FacebookLoginButton {...propsWithFeatureFacebookLoginActivated} />);
+    const wrapper = shallow(
+      <FacebookLoginButton features={{ login_facebook: true }} prefix="login." {...props} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders a button with correct registration label', () => {
+  it('renders a button with correct label', () => {
     const wrapper = shallow(
-      <FacebookLoginButton {...propsWithFeatureFacebookLoginActivatedAndRegistrationPrefix} />,
+      <FacebookLoginButton features={{ login_facebook: true }} prefix="registration." {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

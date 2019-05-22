@@ -4,7 +4,6 @@ namespace Capco\UserBundle\Security\Http\Logout;
 
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\MonCompteParis\OpenAmClient;
-use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use SimpleSAML\Auth\Simple;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,20 +16,20 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     protected $router;
     protected $toggleManager;
     protected $client;
-    protected $resourceOwner;
+    protected $logoutUrlSSO;
 
     public function __construct(
         RouterInterface $router,
         Manager $toggleManager,
         OpenAmClient $client,
-        ResourceOwnerInterface $resourceOwner,
+        ?string $logoutUrlSSO = null,
         ?Simple $samlAuth = null
     ) {
         $this->samlAuth = $samlAuth;
         $this->router = $router;
         $this->toggleManager = $toggleManager;
         $this->client = $client;
-        $this->resourceOwner = $resourceOwner;
+        $this->logoutUrlSSO = $logoutUrlSSO;
     }
 
     public function onLogoutSuccess(Request $request)
@@ -67,8 +66,6 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
             $this->toggleManager->isActive('disconnect_openid') &&
             $request->query->get('ssoSwitchUser')
         ) {
-            $logoutURL = $this->resourceOwner->getOption('logout_url');
-
             $homepageUrl = $this->router->generate(
                 'app_homepage',
                 [],
@@ -77,7 +74,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
             $redirectUri = $homepageUrl . '/login/openid?_destination=' . $homepageUrl;
 
             $response = new RedirectResponse(
-                $logoutURL . '?redirect_uri=' . utf8_encode($redirectUri) ?? '/'
+                $this->logoutUrlSSO . '?redirect_uri=' . utf8_encode($redirectUri) ?? '/'
             );
         }
 

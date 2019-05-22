@@ -3,7 +3,7 @@ InternalConsultationStep:
   inherits:
     - InternalPrimaryKey
     - Node
-    - PublicConsultationStep
+    - PreviewConsultationStep
     - RequirementStep
     - Step
   config:
@@ -11,6 +11,10 @@ InternalConsultationStep:
     description: 'A consultation step'
     name: ConsultationStep
     fields:
+      kind:
+        type: 'String!'
+        description: 'The type of step. Returns "consultation".'
+        resolve: 'consultation'
       opinionCountShownBySection:
         type: 'Int'
       project:

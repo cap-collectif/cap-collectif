@@ -1,12 +1,32 @@
 PreviewConsultationStep:
   type: object
   inherits:
-    - PublicConsultationStep
+    - Node
   config:
     description: 'A consultation step'
     name: ConsultationStep
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: ConsultationStep
+      # consultation:
+      #   type: 'PreviewConsultation'
+      #   description: 'The related consultation of this step.'
       contributors:
+        description: 'A list of contributor associated with the consultation step.'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
         type: 'PreviewUserConnection!'
-      consultation:
-        type: 'PreviewConsultation'
+      votesCount:
+        type: 'Int'
+        description: 'The number of votes in this consultation.'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-09-01", reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `votesCount` will be removed.", supersededBy: "Use `votes.totalCount` instead."})'
+      userHasVote:
+        type: 'Boolean!'
+        description: 'Whether the user has vote for a contribution in this consultation step.'
+        args:
+          login:
+            type: 'String!'
+            description: "The user's login (for example, an email)."
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepUserHasVoteResolver", [value, args])'

@@ -47,10 +47,10 @@ Scenario: User wants to add a reply
     "data": {
       "addReply": {
           "reply": {
-              "id": @uuid@,
+              "id": @string@,
               "published": true,
               "responses": [
-                {"question": {"id":"UXVlc3Rpb246Mg==" }, "value": "Je pense que c\u0027est la ville parfaite pour organiser les JO"},
+                {"question": {"id":"UXVlc3Rpb246Mg=="}, "value": "Je pense que c\u0027est la ville parfaite pour organiser les JO"},
                 {"question": {"id":"UXVlc3Rpb246MTM="}, "value": "{\"labels\":[\"Athl\u00e9tisme\",\"Sports collectifs\"],\"other\":\"Emb\u00eater Maxime\"}"},
                 {"question": {"id":"UXVlc3Rpb246MTQ="}, "value": "{\"labels\":[],\"other\":null}"},
                 {"question": {"id":"UXVlc3Rpb246MTU="}, "value": @null@ },

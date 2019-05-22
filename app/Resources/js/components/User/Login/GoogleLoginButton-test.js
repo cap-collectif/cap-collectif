@@ -3,33 +3,27 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import GoogleLoginButton from './GoogleLoginButton';
-import { features } from '../../../redux/modules/default';
 
 describe('<GoogleLoginButton />', () => {
-  const props = {
-    features: { ...features },
-  };
-  const propsWithFeatureGoogleLoginActivated = {
-    features: { ...features, login_gplus: true },
-  };
-  const propsWithFeatureGoogleLoginActivatedAndRegistrationPrefix = {
-    features: { ...features, login_gplus: true },
-    prefix: 'registration.',
-  };
+  const props = {};
 
   it('renders nothing if login_gplus is not activate', () => {
-    const wrapper = shallow(<GoogleLoginButton {...props} />);
+    const wrapper = shallow(
+      <GoogleLoginButton features={{ login_gplus: false }} prefix="login." {...props} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a button if feature is active', () => {
-    const wrapper = shallow(<GoogleLoginButton {...propsWithFeatureGoogleLoginActivated} />);
+    const wrapper = shallow(
+      <GoogleLoginButton features={{ login_gplus: true }} prefix="login." {...props} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders a button with correct registration label', () => {
+  it('renders a button with correct label', () => {
     const wrapper = shallow(
-      <GoogleLoginButton {...propsWithFeatureGoogleLoginActivatedAndRegistrationPrefix} />,
+      <GoogleLoginButton features={{ login_gplus: true }} prefix="registration." {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

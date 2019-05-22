@@ -87,10 +87,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/pgodel/ivory-json-builder"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/cap-collectif/HWIOAuthBundle"
         }
     ],
     "require": {
@@ -120,7 +116,7 @@
         "sonata-project/doctrine-extensions": "^1.0",
         "sonata-project/intl-bundle": "2.4.0",
         "sonata-project/notification-bundle": "^3.0",
-        "hwi/oauth-bundle": "dev-master#c1802bc31abc3f311301f63cd2cb35b9ca050fee",
+        "hwi/oauth-bundle": "^0.6",
         "qandidate/toggle-bundle": "~1.0",
         "predis/predis": "^1.0",
         "willdurand/geocoder": "~3.0",

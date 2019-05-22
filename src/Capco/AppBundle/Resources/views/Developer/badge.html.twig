@@ -1,0 +1,5 @@
+{% if type.preview and not type.previewHasAPublicType %}
+    <span class="badge">Preview</span>
+{% else %}
+    <span class="badge badge-success">Public</span>
+{% endif %}

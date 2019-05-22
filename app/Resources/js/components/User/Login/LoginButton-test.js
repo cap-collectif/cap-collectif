@@ -9,8 +9,10 @@ describe('<LoginButton />', () => {
   const props = {
     className: 'btn-darkest-gray navbar-btn btn--connection',
     loginWithMonCompteParis: false,
+    loginWithOpenId: false,
     openLoginModal: jest.fn(),
     intl: intlMock,
+    switchUserOpenId: false,
   };
 
   it('renders a button', () => {

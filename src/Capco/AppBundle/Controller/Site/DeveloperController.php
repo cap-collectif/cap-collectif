@@ -12,6 +12,7 @@ use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\InputObjectType;
 use GraphQL\Type\Definition\UnionType;
 use GraphQL\Type\Definition\EnumType;
+use GraphQL\Type\Definition\FieldDefinition;
 
 class DeveloperController extends Controller
 {
@@ -44,13 +45,15 @@ class DeveloperController extends Controller
     /**
      * @Route("/developer", name="app_developer", defaults={"_feature_flags" = "developer_documentation"})
      * @Route("/developer/{category}/", name="app_developer_category", requirements={"category" = "query|previews|breaking_changes"}, defaults={"_feature_flags" = "developer_documentation"})
-     * @Route("/developer/{category}/{selection}", name="app_developer_category_type", requirements={"category" = "mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"})
+     * @Route("/developer/{category}/{type}", name="app_developer_category_type", requirements={"category" = "mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"})
      * @Template("CapcoAppBundle:Developer:index.html.twig")
      */
-    public function indexAction(Request $request, $category = null, $selection = null)
+    public function indexAction(Request $request, $category = null, $type = null)
     {
         $typeResolver = $this->get('overblog_graphql.type_resolver');
         $typeResolver->setCurrentSchemaName('public');
+
+        $selection = null;
 
         $scalars = [];
         $objects = [];
@@ -66,8 +69,8 @@ class DeveloperController extends Controller
             'PublicQuery',
             'PublicQuestionnaire',
             'PublicUser',
+            'PublicProject',
             'PublicConsultation',
-            'PublicConsultationStep',
             'PublicUserConnection',
         ];
 
@@ -98,9 +101,13 @@ class DeveloperController extends Controller
             $solution->{'preview'} = false;
             if ('Preview' === substr($aliases[0], 0, 7)) {
                 $solution->{'preview'} = true;
+                $solution->{'previewHasAPublicType'} = \in_array(
+                    str_replace('Preview', 'Public', $aliases[0]),
+                    $blackList
+                );
             }
 
-            // We remove everything in black list
+            // // We remove everything in black list
             if (\in_array($aliases[0], $blackList)) {
                 continue;
             }
@@ -112,6 +119,21 @@ class DeveloperController extends Controller
                 'Public' !== substr($aliases[0], 0, 6)
             ) {
                 continue;
+            }
+
+            // We hydrate current selection
+            if (($type && $solution->name === $type) || 'query' === $category) {
+                if ($solution->{'preview'}) {
+                    $publicSelection = isset(
+                        $typeResolver->getSolutions()[str_replace('Preview', 'Public', $solutionID)]
+                    )
+                        ? $typeResolver->getSolutions()[
+                            str_replace('Preview', 'Public', $solutionID)
+                        ]
+                        : null;
+                    $solution->{'publicSelection'} = $publicSelection;
+                }
+                $selection = $solution;
             }
 
             if ($solution instanceof EnumType) {
@@ -136,6 +158,19 @@ class DeveloperController extends Controller
                 }
                 if ('Mutation' === $solution->name) {
                     $mutation = $solution;
+
+                    // We hydrate current selection for mutations.
+                    if ('mutation' === $category && $type) {
+                        // dump($mutation->getFields());
+                        // die();
+                        $selection = array_values(
+                            array_filter($mutation->getFields(), function (
+                                FieldDefinition $field
+                            ) use ($type) {
+                                return $field->name == $type;
+                            })
+                        )[0];
+                    }
 
                     continue;
                 }

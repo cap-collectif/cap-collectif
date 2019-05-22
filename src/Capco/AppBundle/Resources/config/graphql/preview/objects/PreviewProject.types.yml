@@ -3,20 +3,13 @@ PreviewProject:
   inherits:
     - Node
     - UniformResourceLocatable
+    - PublicProject
   config:
     name: Project
     interfaces:
       - Node
       - UniformResourceLocatable
-    description: 'A participatory project.'
     fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Project
-      title:
-        type: 'String!'
-        description: 'The title of the project.'
       votes:
         description: 'A list of votes associated with the project.'
         type: 'PreviewVoteConnection!'

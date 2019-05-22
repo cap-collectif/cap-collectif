@@ -12,7 +12,7 @@ describe('<UpdateReplyModal />', () => {
     reply: {
       $refType,
       $fragmentRefs,
-      id: 'reply2',
+      id: 'UmVwbHk6cmVwbHky',
       createdAt: '2016-03-01 00:00:00',
       questionnaire: {
         $fragmentRefs,
@@ -26,11 +26,11 @@ describe('<UpdateReplyModal />', () => {
   const questionnaireWithReplies = {
     viewerReplies: [
       {
-        id: 'reply2',
+        id: 'UmVwbHk6cmVwbHky',
         $fragmentRefs,
       },
       {
-        id: 'reply5',
+        id: 'UmVwbHk6cmVwbHk1',
         $fragmentRefs,
       },
     ],
