@@ -25,13 +25,9 @@ type Props = ParentProps & {
 };
 
 export class QuestionsJumpAdminForm extends React.Component<Props> {
-  handleAlwaysJumpChange(e: SyntheticInputEvent<HTMLSelectElement>) {
-    console.log(e.target.value);
-  }
-
   render() {
     const { fields, jumps, questions, oldMember, formName, currentQuestion } = this.props;
-    console.log(questions);
+    console.log(fields);
     return (
       <div className="form-group" id="questions_choice_panel_personal">
         <ListGroup>
@@ -100,7 +96,6 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
               name={`${oldMember}.alwaysJump`}
               type="select"
               normalize={val => (val !== '' ? val : null)}
-              onChange={this.handleAlwaysJumpChange}
               component={component}>
               <option value="" />
               {questions.map((question, i) => (
