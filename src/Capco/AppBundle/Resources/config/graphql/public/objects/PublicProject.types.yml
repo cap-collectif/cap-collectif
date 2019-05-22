@@ -16,4 +16,4 @@ PublicProject:
           typeName: Project
       title:
         type: 'String!'
-        description: 'The title of the project.'
+        description: 'Identifies the title of the project.'

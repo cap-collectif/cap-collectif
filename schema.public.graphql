@@ -60,7 +60,7 @@ type Project implements Node & UniformResourceLocatable {
   # The URL to this resource.
   url: URI!
 
-  # The title of the project.
+  # Identifies the title of the project.
   title: String!
 }
 
