@@ -1304,7 +1304,7 @@ type Consultation implements Node {
   ): Boolean!
 
   # The number of votes in the related step of this consultation.
-  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-09-01 UTC.")
 
   # List of sections.
   sections: [Section]
@@ -1392,7 +1392,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
   ): UserConnection!
 
   # The number of votes in this consultation.
-  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-09-01 UTC.")
 
   # Whether the user has vote for a contribution in this consultation step.
   userHasVote(
