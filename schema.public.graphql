@@ -52,6 +52,18 @@ type PageInfo {
   endCursor: String
 }
 
+# A participatory project.
+type Project implements Node & UniformResourceLocatable {
+  # The ID of an object
+  id: ID!
+
+  # The URL to this resource.
+  url: URI!
+
+  # The title of the project.
+  title: String!
+}
+
 # Root of the schema.
 type Query {
   # The currently authenticated user.

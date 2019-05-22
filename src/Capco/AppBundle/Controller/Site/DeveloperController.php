@@ -69,6 +69,7 @@ class DeveloperController extends Controller
             'PublicQuery',
             'PublicQuestionnaire',
             'PublicUser',
+            'PublicProject',
             'PublicConsultation',
             'PublicConsultationStep',
             'PublicUserConnection',

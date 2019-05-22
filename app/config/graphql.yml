@@ -38,6 +38,7 @@ overblog_graphql:
         types:
           - PublicConsultationStep
           - PublicQuestionnaire
+          - PublicProject
       # This is our preview schema (for beta testers)
       preview:
         query: PreviewQuery
