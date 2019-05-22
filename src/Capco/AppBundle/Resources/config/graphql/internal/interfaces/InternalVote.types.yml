@@ -6,9 +6,13 @@ InternalVote:
     fields:
       id:
         type: 'ID!'
+        # TODO: this need to be a GlobalId
+        # builder: 'Relay::GlobalId'
+        # builderConfig:
+        #   typeName: Vote
       createdAt:
         type: 'DateTime!'
-        description: 'Date of vote.'
+        description: 'The date of the vote.'
       author:
         type: 'InternalUser'
         description: 'The author of the contribution.'

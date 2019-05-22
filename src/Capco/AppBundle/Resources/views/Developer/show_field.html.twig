@@ -4,8 +4,14 @@
         {# We need a way to get info about the required access #}
         <span class="label label-info">ROLE_USER</span>
     {% endif %}
-    {% if field.type.getNullableType(field.type).preview is defined and field.type.getNullableType(field.type).preview %}
-      {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
+    {% if parent is defined and parent and parent.previewHasAPublicType is defined %}
+        {% if parent.publicSelection is defined and parent.publicSelection is not null and field.name not in parent.publicSelection.fields|keys %}
+          {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
+        {% endif %}
+    {# {% else %}
+        {% if field.type.getNullableType(field.type).preview is defined and field.type.getNullableType(field.type).preview %}
+          {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
+        {% endif %} #}
     {% endif %}
     <p>{{ field.description|default('') }}</p>
 
