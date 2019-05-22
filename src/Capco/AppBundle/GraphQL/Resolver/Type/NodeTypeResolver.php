@@ -58,10 +58,6 @@ class NodeTypeResolver implements ResolverInterface
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
         if ($node instanceof Project) {
-            if ('public' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PublicProject');
-            }
-
             if ('preview' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PreviewProject');
             }

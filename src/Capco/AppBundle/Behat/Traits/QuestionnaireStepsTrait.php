@@ -106,11 +106,8 @@ trait QuestionnaireStepsTrait
      */
     public function iUpdateTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
-        $this->fillField(
-            'UpdateReplyForm-UmVwbHk6cmVwbHk1-responses[0]',
-            'This biscuit bless your soul'
-        );
-        $this->checkOption('UpdateReplyForm-UmVwbHk6cmVwbHk1-responses[1]_choice-questionchoice3');
+        $this->fillField('UpdateReplyForm-reply5-responses[0]', 'This biscuit bless your soul');
+        $this->checkOption('UpdateReplyForm-reply5-responses[1]_choice-questionchoice3');
     }
 
     /**
@@ -250,7 +247,7 @@ trait QuestionnaireStepsTrait
 
     public function iClickOneRankingChoiceRightArrowUpdate()
     {
-        $this->scrollToElement('UpdateReplyForm-UmVwbHk6cmVwbHky-responses[4]');
+        $this->scrollToElement('UpdateReplyForm-reply2-responses[4]');
         $this->navigationContext
             ->getPage('questionnaire page')
             ->clickFirstRankingChoiceRightArrowUpdate();
@@ -280,9 +277,9 @@ trait QuestionnaireStepsTrait
      */
     public function iUpdateTheQuestionnaireFormWithWrongValues()
     {
-        $this->scrollToElement('UpdateReplyForm-UmVwbHk6cmVwbHky-responses[2]');
+        $this->scrollToElement('UpdateReplyForm-reply2-responses[2]');
         $this->fillField(
-            'UpdateReplyForm-UmVwbHk6cmVwbHky-responses[2]',
+            'UpdateReplyForm-reply2-responses[2]',
             'I am not the right answer you are looking for'
         );
     }
@@ -292,9 +289,9 @@ trait QuestionnaireStepsTrait
      */
     public function iUpdateTheDraftFormWithWrongValues()
     {
-        $this->scrollToElement('UpdateReplyForm-UmVwbHk6cmVwbHk1-responses[2]');
+        $this->scrollToElement('UpdateReplyForm-reply5-responses[2]');
         $this->fillField(
-            'UpdateReplyForm-UmVwbHk6cmVwbHk1-responses[2]',
+            'UpdateReplyForm-reply5-responses[2]',
             'I am not the right answer you are looking for'
         );
     }
@@ -425,7 +422,7 @@ trait QuestionnaireStepsTrait
     {
         $this->iShouldSeeElementOnPage('user reply modal', 'questionnaire page');
         $this->fillField(
-            'UpdateReplyForm-UmVwbHk6cmVwbHky-responses[0]',
+            'UpdateReplyForm-reply2-responses[0]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
 

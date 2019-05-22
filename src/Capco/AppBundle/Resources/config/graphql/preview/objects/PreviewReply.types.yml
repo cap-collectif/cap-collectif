@@ -11,10 +11,6 @@ PreviewReply:
       - Node
       - PublicPublishable
     fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Reply
       responses:
         type: '[PreviewResponse]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value, getUser(), context])'

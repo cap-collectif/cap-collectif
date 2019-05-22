@@ -57,10 +57,10 @@ Scenario: GraphQL client wants to retrieve replies
       "questionnaire":{
          "viewerReplies":[
             {
-               "id": "UmVwbHk6cmVwbHky"
+               "id": "reply2"
             },
             {
-               "id": "UmVwbHk6cmVwbHk1"
+               "id": "reply5"
             }
          ]
       }

@@ -6,7 +6,7 @@ Trashable:
     fields:
       trashed:
         type: 'Boolean!'
-        description: 'Whether or not the contribution is trashed.'
+        description: '`true` if the contribution is trashed.'
       trashedStatus:
         type: 'TrashableStatus'
         description: 'Identifies the trashed visibility.'

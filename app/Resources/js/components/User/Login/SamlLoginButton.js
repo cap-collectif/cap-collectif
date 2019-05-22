@@ -1,19 +1,23 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import type { State } from '../../../types';
+import type { FeatureToggles } from '../../../types';
+import type { LabelPrefix } from './LoginSocialButtons';
 
-type Props = { show: boolean };
+type Props = {|
+  features: FeatureToggles,
+  prefix?: LabelPrefix,
+|};
 
 export class SamlLoginButton extends React.Component<Props> {
   static displayName = 'SamlLoginButton';
 
   render() {
-    const { show } = this.props;
-    if (!show) {
+    const { features } = this.props;
+    if (!features.login_saml) {
       return null;
     }
+
     const title = <FormattedMessage id="login.saml" />;
     return (
       <a
@@ -26,8 +30,4 @@ export class SamlLoginButton extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
-  show: state.default.features.login_saml,
-});
-
-export default connect(mapStateToProps)(SamlLoginButton);
+export default SamlLoginButton;

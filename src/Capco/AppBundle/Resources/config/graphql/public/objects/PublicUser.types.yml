@@ -1,13 +1,9 @@
 PublicUser:
   type: object
-  inherits:
-    - Node
-    - UniformResourceLocatable
+  inherits: [Node, UniformResourceLocatable]
   config:
     description: "A user is an individual's account."
-    interfaces:
-      - Node
-      - UniformResourceLocatable
+    interfaces: [Node, UniformResourceLocatable]
     name: User
     fields:
       id:
@@ -24,28 +20,3 @@ PublicUser:
         access: "@=hasRole('ROLE_USER')"
         resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isViewer(getUser(), value)'
         description: 'Whether or not this user is the authenticated user.'
-      createdAt:
-        type: 'DateTime!'
-        description: 'Identifies the date and time when the object was created.'
-      updatedAt:
-        type: 'DateTime'
-        description: 'Identifies the date and time when the object was last updated.'
-      facebookUrl:
-        type: 'URI'
-        description: "A URL pointing to the user's Facebook account."
-      twitterUrl:
-        type: 'URI'
-        description: "A URL pointing to the user's Twitter account."
-      linkedInUrl:
-        type: 'URI'
-        description: "A URL pointing to the user's LinkedIn account."
-      websiteUrl:
-        type: 'URI'
-        description: "A URL pointing to the user's public website/blog."
-        resolve: '@=value.getWebsite()'
-      biography:
-        type: 'String'
-        description: "The user's public profile biography."
-      deletedAccountAt:
-        type: 'DateTime'
-        description: 'Identifies the date and time when this user account was deleted.'

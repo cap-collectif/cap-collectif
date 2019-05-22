@@ -11,7 +11,7 @@ exports[`<UpdateReplyModal /> should render correctly with minimal props 1`] = `
   className="reply__modal--show"
   dialogComponentClass={[Function]}
   enforceFocus={true}
-  id="show-reply-modal-UmVwbHk6cmVwbHky"
+  id="show-reply-modal-reply2"
   keyboard={true}
   manager={
     ModalManager {
@@ -64,7 +64,7 @@ exports[`<UpdateReplyModal /> should render correctly with minimal props 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "createdAt": "2016-03-01 00:00:00",
-            "id": "UmVwbHk6cmVwbHky",
+            "id": "reply2",
             "questionnaire": Object {
               "$fragmentRefs": null,
             },
@@ -89,7 +89,7 @@ exports[`<UpdateReplyModal /> should render correctly with minimal props 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "createdAt": "2016-03-01 00:00:00",
-          "id": "UmVwbHk6cmVwbHky",
+          "id": "reply2",
           "questionnaire": Object {
             "$fragmentRefs": null,
           },
@@ -120,7 +120,7 @@ exports[`<UpdateReplyModal /> should render correctly with replies 1`] = `
   className="reply__modal--show"
   dialogComponentClass={[Function]}
   enforceFocus={true}
-  id="show-reply-modal-UmVwbHk6cmVwbHky"
+  id="show-reply-modal-reply2"
   keyboard={true}
   manager={
     ModalManager {
@@ -173,7 +173,7 @@ exports[`<UpdateReplyModal /> should render correctly with replies 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "createdAt": "2016-03-01 00:00:00",
-            "id": "UmVwbHk6cmVwbHky",
+            "id": "reply2",
             "questionnaire": Object {
               "$fragmentRefs": null,
             },
@@ -198,7 +198,7 @@ exports[`<UpdateReplyModal /> should render correctly with replies 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "createdAt": "2016-03-01 00:00:00",
-          "id": "UmVwbHk6cmVwbHky",
+          "id": "reply2",
           "questionnaire": Object {
             "$fragmentRefs": null,
           },

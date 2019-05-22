@@ -433,24 +433,11 @@ svg.avatar-group {
         font-size: 14px;
 
         .list-group-item {
-            padding-left: 26px;
+            padding-left: 40px;
             background-color: $page-bgc;
-            color: #4183C4;
-            cursor: pointer;
 
             &:hover {
                 background-color: darken($page-bgc, 3%);
-            }
-
-            &.active {
-                color: #333;
-                background-color: darken($page-bgc, 3%);
-                border-right: 2px solid #d26911;
-
-                .badge {
-                    color: #fff;
-                    background-color: #00acc1;
-                }
             }
         }
 

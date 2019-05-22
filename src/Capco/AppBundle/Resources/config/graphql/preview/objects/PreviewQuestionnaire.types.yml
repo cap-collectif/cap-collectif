@@ -7,7 +7,7 @@ PreviewQuestionnaire:
     fields:
       questions:
         type: '[PreviewQuestion!]!'
-        description: 'The list of questions of the questionnaire.'
+        description: 'List of questions.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", [value])'
       replies:
         type: 'PreviewReplyConnection!'

@@ -11,7 +11,6 @@ import RegistrationButton from '../User/Registration/RegistrationButton';
 
 type Props = {
   showRegistration: boolean,
-  loginWithOpenId: boolean,
   submitting: boolean,
   onSubmit: (e: Event) => void,
   chartBody: ?string,
@@ -19,13 +18,7 @@ type Props = {
 
 export class ShieldPage extends React.Component<Props> {
   render() {
-    const {
-      showRegistration,
-      submitting,
-      onSubmit,
-      chartBody,
-      loginWithOpenId,
-    }: Props = this.props;
+    const { showRegistration, submitting, onSubmit, chartBody }: Props = this.props;
     if (showRegistration) {
       return (
         <div id="shield-agent" className="bg-white col-md-4 col-md-offset-4 panel panel-default">
@@ -40,25 +33,21 @@ export class ShieldPage extends React.Component<Props> {
     return (
       <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 panel panel-default">
         <div className="panel-body">
-          {loginWithOpenId ? (
-            <LoginButton className="btn--connection btn-block" />
-          ) : (
-            <form id="login-form" onSubmit={onSubmit}>
-              <LoginBox />
-              <Button
-                id="confirm-login"
-                type="submit"
-                className="mt-10 btn-block btn-success"
-                disabled={submitting}
-                bsStyle="primary">
-                {submitting ? (
-                  <FormattedMessage id="global.loading" />
-                ) : (
-                  <FormattedMessage id="global.login_me" />
-                )}
-              </Button>
-            </form>
-          )}
+          <form id="login-form" onSubmit={onSubmit}>
+            <LoginBox />
+            <Button
+              id="confirm-login"
+              type="submit"
+              className="mt-10 btn-block btn-success"
+              disabled={submitting}
+              bsStyle="primary">
+              {submitting ? (
+                <FormattedMessage id="global.loading" />
+              ) : (
+                <FormattedMessage id="global.login_me" />
+              )}
+            </Button>
+          </form>
         </div>
       </div>
     );
@@ -67,7 +56,6 @@ export class ShieldPage extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   showRegistration: state.default.features.registration,
-  loginWithOpenId: state.default.features.login_openid,
   submitting: isSubmitting('login')(state),
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
