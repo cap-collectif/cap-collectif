@@ -117,7 +117,7 @@ Scenario: Logged in user wants to see the list of his replies
   Then I should see my reply
 
 ## Update
-@database
+@database @rabbitmq
 Scenario: Logged in user wants to update a reply
   Given I am logged in as admin
   When I go to a questionnaire step
@@ -130,7 +130,7 @@ Scenario: Logged in user wants to update a reply
   When I wait 1 seconds
   And I should see my reply
   Then the queue associated to "questionnaire_reply" producer has messages below:
-    | 0 | {"replyId": "e288f06f-7be3-11e9-862e-0242ac110004"} |
+    | 0 | {"replyId": "reply2"} |
 
 @database @draft
 Scenario: Logged in user wants to add a draft to a questionnaire with wrong values
