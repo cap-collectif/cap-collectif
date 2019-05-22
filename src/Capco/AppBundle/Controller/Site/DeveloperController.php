@@ -107,7 +107,7 @@ class DeveloperController extends Controller
                 );
             }
 
-            // // We remove everything in black list
+            // We remove everything in black list
             if (\in_array($aliases[0], $blackList)) {
                 continue;
             }
