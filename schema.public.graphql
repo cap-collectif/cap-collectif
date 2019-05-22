@@ -1,7 +1,46 @@
+# A consultation
+type Consultation implements Node {
+  # The ID of an object
+  id: ID!
+
+  # The title of the consultation.
+  title: String!
+
+  # A list of contributor associated with the consultation.
+  contributors(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+
+  # Whether the user has vote for a contribution in the related step of this consultation.
+  userHasVote(
+    # The user's login (for example, an email).
+    login: String!
+  ): Boolean!
+
+  # The number of votes in the related step of this consultation.
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
+}
+
 # A consultation step
 type ConsultationStep implements Node {
   # The ID of an object
   id: ID!
+
+  # The type of step. Returns "consultation".
+  kind: String!
+
+  # The related consultation of this step.
+  consultation: Consultation
 
   # A list of contributor associated with the consultation step.
   contributors(
@@ -27,9 +66,6 @@ type ConsultationStep implements Node {
     login: String!
   ): Boolean!
 }
-
-# A string containing a datetime.
-scalar DateTime
 
 # Fetches an object given its ID
 interface Node {
@@ -122,30 +158,6 @@ type User implements Node & UniformResourceLocatable {
 
   # Whether or not this user is the authenticated user.
   isViewer: Boolean!
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # A URL pointing to the user's Facebook account.
-  facebookUrl: URI
-
-  # A URL pointing to the user's Twitter account.
-  twitterUrl: URI
-
-  # A URL pointing to the user's LinkedIn account.
-  linkedInUrl: URI
-
-  # A URL pointing to the user's public website/blog.
-  websiteUrl: URI
-
-  # The user's public profile biography.
-  biography: String
-
-  # Identifies the date and time when this user account was deleted.
-  deletedAccountAt: DateTime
 }
 
 # A connection to a list of items.
