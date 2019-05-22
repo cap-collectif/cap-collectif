@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 1 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 1 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -11,7 +11,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 2 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 2 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -38,7 +38,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 3 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 3 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -49,7 +49,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 4 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 4 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -60,7 +60,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 5 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 5 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -71,7 +71,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 6 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 6 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -82,7 +82,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 7 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 7 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -93,7 +93,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 8 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 8 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -104,7 +104,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 9 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 9 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -115,7 +115,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 10 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 10 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -126,7 +126,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 666 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 666 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -137,7 +137,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 1313 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 1313 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -148,7 +148,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 1314 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 1314 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -159,7 +159,7 @@ Object {
 }
 `;
 
-exports[`SimpleQuestion_responses it resolves a simple question's responses: 1315 1`] = `
+exports[`SimpleQuestion.responses array fetches a simple question's responses: 1315 1`] = `
 Object {
   "node": Object {
     "responses": Object {

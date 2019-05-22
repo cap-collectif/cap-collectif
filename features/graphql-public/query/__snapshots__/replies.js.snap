@@ -1,11 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GraphQL API OpenDataRepliesQuery 1`] = `
+exports[`Questionnaire.replies connection fetches the first hundred replies with a cursor 1`] = `
 Object {
   "node": Object {
     "replies": Object {
       "edges": Array [
         Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNTAy",
@@ -97,6 +98,7 @@ Object {
           },
         },
         Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -196,6 +198,7 @@ Object {
           },
         },
         Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNTE1",
@@ -295,6 +298,7 @@ Object {
           },
         },
         Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNTA2",

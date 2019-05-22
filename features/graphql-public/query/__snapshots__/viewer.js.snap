@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ViewerQuery resolves an admin 1`] = `
+exports[`Query.viewer can not access if not authenticated 1`] = `Array []`;
+
+exports[`Query.viewer fetches an admin 1`] = `
 Object {
   "viewer": Object {
     "avatarUrl": null,

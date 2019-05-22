@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Query.node gets the correct ID and type name for consultation steps 1`] = `
+Object {
+  "node": Object {
+    "__typename": "ConsultationStep",
+    "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+  },
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for consultations 1`] = `
+Object {
+  "node": Object {
+    "__typename": "Consultation",
+    "id": "Q29uc3VsdGF0aW9uOnR5cGVBbGw=",
+  },
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for events 1`] = `
+Object {
+  "node": Object {
+    "__typename": "Event",
+    "id": "RXZlbnQ6ZXZlbnQx",
+  },
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for projects 1`] = `
+Object {
+  "node": Object {
+    "__typename": "Project",
+    "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+  },
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for proposals 1`] = `
+Object {
+  "node": Object {
+    "__typename": "Proposal",
+    "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+  },
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for questionnaires 1`] = `
+Object {
+  "node": Object {
+    "__typename": "Questionnaire",
+    "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+  },
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for questions 1`] = `
+Object {
+  "node": null,
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for replies 1`] = `
+Object {
+  "node": null,
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for users 1`] = `
+Object {
+  "node": Object {
+    "__typename": "User",
+    "id": "VXNlcjp1c2VyMQ==",
+  },
+}
+`;
+
+exports[`Query.node returns null for bad IDs 1`] = `
+Object {
+  "node": null,
+}
+`;

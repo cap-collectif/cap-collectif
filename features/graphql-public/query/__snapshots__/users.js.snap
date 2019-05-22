@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OpenDataUsersQuery OpenDataUsersQuery 1`] = `
+exports[`Query.users connection fetches the first hundred users with a cursor 1`] = `
 Object {
   "users": Object {
     "edges": Array [
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -48,6 +49,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -72,6 +74,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -96,6 +99,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -120,6 +124,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -144,6 +149,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -168,6 +174,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -192,6 +199,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -216,6 +224,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -240,6 +249,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -264,6 +274,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -288,6 +299,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -312,6 +324,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -336,6 +349,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -360,6 +374,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -384,6 +399,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -408,6 +424,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -432,6 +449,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -456,6 +474,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -480,6 +499,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -504,6 +524,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -528,6 +549,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -552,6 +574,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -576,6 +599,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIz",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -600,6 +624,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI0",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -624,6 +649,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI1",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -648,6 +674,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI2",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -672,6 +699,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI3",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -696,6 +724,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI4",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -720,6 +749,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI5",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -744,6 +774,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjMw",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -768,6 +799,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjMx",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -792,6 +824,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjMy",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -816,6 +849,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjMz",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -840,6 +874,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM0",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -864,6 +899,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM1",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -888,6 +924,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM2",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -912,6 +949,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM3",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -936,6 +974,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM4",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -960,6 +999,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM5",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -984,6 +1024,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQw",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1008,6 +1049,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQx",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1032,6 +1074,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQy",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1056,6 +1099,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQz",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1080,6 +1124,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ0",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1104,6 +1149,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ1",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1128,6 +1174,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ2",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1152,6 +1199,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ3",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1176,6 +1224,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ4",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1200,6 +1249,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ5",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1224,6 +1274,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjUw",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1248,6 +1299,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjUx",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1272,6 +1324,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjUy",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1296,6 +1349,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjUz",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1320,6 +1374,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU0",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1344,6 +1399,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU1",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1368,6 +1424,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU2",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1392,6 +1449,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU3",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1416,6 +1474,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU4",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1440,6 +1499,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU5",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1464,6 +1524,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjYw",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1488,6 +1549,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjYx",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1512,6 +1574,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjYy",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1536,6 +1599,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjYz",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1560,6 +1624,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY0",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1584,6 +1649,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY1",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1608,6 +1674,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY2",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1632,6 +1699,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY3",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1656,6 +1724,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY4",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1680,6 +1749,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY5",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1704,6 +1774,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjcw",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1728,6 +1799,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjcx",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1752,6 +1824,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjcy",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1776,6 +1849,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjcz",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1800,6 +1874,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc0",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1824,6 +1899,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc1",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1848,6 +1924,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc2",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1872,6 +1949,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc3",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1896,6 +1974,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc4",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1920,6 +1999,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc5",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1944,6 +2024,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjgw",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1968,6 +2049,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjgx",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -1992,6 +2074,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjgy",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2016,6 +2099,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjgz",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2040,6 +2124,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg0",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2064,6 +2149,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg1",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2088,6 +2174,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg2",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2112,6 +2199,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg3",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2136,6 +2224,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg4",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2160,6 +2249,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg5",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2184,6 +2274,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjkw",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2208,6 +2299,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjkx",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2232,6 +2324,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjky",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2256,6 +2349,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjkz",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2280,6 +2374,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk0",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2304,6 +2399,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk1",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2328,6 +2424,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk2",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2352,6 +2449,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk3",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2376,6 +2474,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk4",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2400,6 +2499,7 @@ Object {
         },
       },
       Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk5",
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
@@ -2427,6 +2527,99 @@ Object {
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
+      "hasPreviousPage": false,
+      "startCursor": "YXJyYXljb25uZWN0aW9uOjA=",
+    },
+    "totalCount": 218,
+  },
+}
+`;
+
+exports[`Query.users connection fetches the next three users with a cursor 1`] = `
+Object {
+  "users": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEwMA==",
+        "node": Object {
+          "biography": null,
+          "consentInternalCommunication": null,
+          "createdAt": "2015-01-01 00:00:00",
+          "deletedAccountAt": null,
+          "email": null,
+          "enabled": true,
+          "facebookUrl": null,
+          "id": "VXNlcjp1c2VyMTg4",
+          "linkedInUrl": null,
+          "responses": Object {
+            "edges": Array [],
+          },
+          "twitterUrl": null,
+          "updatedAt": null,
+          "url": "https://capco.test/profile/user188",
+          "userType": Object {
+            "name": "Citoyen",
+          },
+          "username": "user188",
+          "websiteUrl": null,
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEwMQ==",
+        "node": Object {
+          "biography": null,
+          "consentInternalCommunication": null,
+          "createdAt": "2015-01-01 00:00:00",
+          "deletedAccountAt": null,
+          "email": null,
+          "enabled": true,
+          "facebookUrl": null,
+          "id": "VXNlcjp1c2VyMTg5",
+          "linkedInUrl": null,
+          "responses": Object {
+            "edges": Array [],
+          },
+          "twitterUrl": null,
+          "updatedAt": null,
+          "url": "https://capco.test/profile/user189",
+          "userType": Object {
+            "name": "Citoyen",
+          },
+          "username": "user189",
+          "websiteUrl": null,
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEwMg==",
+        "node": Object {
+          "biography": null,
+          "consentInternalCommunication": null,
+          "createdAt": "2015-01-01 00:00:00",
+          "deletedAccountAt": null,
+          "email": null,
+          "enabled": true,
+          "facebookUrl": null,
+          "id": "VXNlcjp1c2VyMTk=",
+          "linkedInUrl": null,
+          "responses": Object {
+            "edges": Array [],
+          },
+          "twitterUrl": null,
+          "updatedAt": null,
+          "url": "https://capco.test/profile/user19",
+          "userType": Object {
+            "name": "Citoyen",
+          },
+          "username": "user19",
+          "websiteUrl": null,
+        },
+      },
+    ],
+    "pageInfo": Object {
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjEwMg==",
+      "hasNextPage": true,
+      "hasPreviousPage": false,
+      "startCursor": "YXJyYXljb25uZWN0aW9uOjEwMA==",
     },
     "totalCount": 218,
   },
