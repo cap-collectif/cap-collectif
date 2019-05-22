@@ -30,7 +30,7 @@
             <i class="cap cap-arrow-66"></i>Overview
         </a>
 
-        <div class="list-group_collapse collapse {% if category == "previews" or category == "breaking_changes" %}in{% endif %}" id="overview">
+        <div class="list-group_collapse collapse {% if category == "previews" or category == "breaking_changes" or category is null %}in{% endif %}" id="overview">
             <a href="{{ path('app_developer_category', { 'category': 'previews' })}}" class="list-group-item">Schema Previews</a>
             <a href="{{ path('app_developer_category', { 'category': 'breaking_changes' })}}" class="list-group-item">Breaking Changes</a>
         </div>
@@ -171,7 +171,7 @@
         
     {% if app.user and publicApiKeyRepo.findPublicApiTokensByUser(app.user) is not empty %}
     <p>These tokens are like passwords; guard them carefully.</p>
-    <p>Right now, you can't revoke an API Key. Contact <a href="mailto:coucou@cap-collectif.com">coucou@cap-collectif.com</a> if needed.</p>
+    <p>Right now, you can't revoke an API Key. Contact <a href="mailto:api@cap-collectif.com">api@cap-collectif.com</a> if needed.</p>
     <ul>
         {% for token in publicApiKeyRepo.findPublicApiTokensByUser(app.user) %}
         <li>
@@ -181,7 +181,7 @@
     </ul>
     {% endif %}
 
-    <p>Right now, you can't generate an API Key. Contact <a href="mailto:coucou@cap-collectif.com">coucou@cap-collectif.com</a> if needed.</p>
+    <p>Right now, you can't generate an API Key. Contact <a href="mailto:api@cap-collectif.com">api@cap-collectif.com</a> if needed.</p>
 
     <h4>How to use an API Key</h4>
 
