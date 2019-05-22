@@ -3,18 +3,18 @@ import React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import type { State } from '../../types';
+import { baseUrl } from '../../config';
 
 type Props = {
   analyticsJs: ?string,
   adJs: ?string,
   cookiesList: string,
-  platformLink: string,
   cookiesList: string,
 };
 
 export class CookieContent extends React.Component<Props, State> {
   render() {
-    const { analyticsJs, adJs, platformLink, cookiesList } = this.props;
+    const { analyticsJs, adJs, cookiesList } = this.props;
     let cookieType = -1;
     let nbCookies = 0;
 
@@ -35,21 +35,24 @@ export class CookieContent extends React.Component<Props, State> {
           <div>
             <FormattedHTMLMessage
               id="cookies-page-texte-tmp-part1"
-              values={{ platformLink, cookieType }}
+              values={{ platformLink: baseUrl, cookieType }}
             />
           </div>
         ) : (
           <div>
-            <FormattedHTMLMessage id="cookies-page-texte-part1" values={{ platformLink }} />
+            <FormattedHTMLMessage
+              id="cookies-page-texte-part1"
+              values={{ platformLink: baseUrl }}
+            />
           </div>
         )}
-        <FormattedHTMLMessage id="cookies-page-texte-part1-2" values={{ platformLink }} />
+        <FormattedHTMLMessage id="cookies-page-texte-part1-2" values={{ platformLink: baseUrl }} />
         <FormattedHTMLMessage
           id="cookies-page-texte-tmp-part1-3"
-          values={{ platformLink, nbCookies }}
+          values={{ platformLink: baseUrl, nbCookies }}
         />
         <div className="content" dangerouslySetInnerHTML={{ __html: cookiesList }} />
-        <FormattedHTMLMessage id="cookies-page-texte-part2" values={{ platformLink }} />
+        <FormattedHTMLMessage id="cookies-page-texte-part2" values={{ platformLink: baseUrl }} />
       </div>
     );
   }

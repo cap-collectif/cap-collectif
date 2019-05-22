@@ -2,19 +2,19 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { CookieModal } from './CookieModal';
+import { PrivacyModal } from './PrivacyModal';
 
-describe('<CookieModal />', () => {
+describe('<PrivacyModal />', () => {
   const props = {
-    separator: '',
+    privacyContent: '<p>Privacy content</p>',
   };
   it('should render correctly open', () => {
-    const wrapper = shallow(<CookieModal {...props} />);
+    const wrapper = shallow(<PrivacyModal {...props} />);
     wrapper.setState({ open: true });
     expect(wrapper).toMatchSnapshot();
   });
   it('should render correctly close', () => {
-    const wrapper = shallow(<CookieModal {...props} />);
+    const wrapper = shallow(<PrivacyModal {...props} />);
     wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();
   });

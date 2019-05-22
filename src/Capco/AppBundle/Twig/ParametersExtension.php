@@ -82,6 +82,7 @@ class ParametersExtension extends \Twig_Extension
                 'snalytical-tracking-scripts-on-all-pages',
                 'ad-scripts-on-all-pages',
                 'cookies-list',
+                'privacy-policy',
             ];
 
             $exposedParameters = [];

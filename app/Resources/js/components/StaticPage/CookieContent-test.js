@@ -7,40 +7,36 @@ import { CookieContent } from './CookieContent';
 describe('<CookieContent />', () => {
   it('should render correctly with 2 cookies type', () => {
     const props = {
-      platformLink: 'http://test.com',
       analyticsJs: 'console.log("analyticsjs")',
       adJs: 'console.log("adJs")',
-      cookiesList: 'cookiecontent',
+      cookiesList: '<p>cookieContent</p>',
     };
     const wrapper = shallow(<CookieContent {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
-  it('should render correctly with 1 cookies type', () => {
+  it('should render correctly with statistic cookie type', () => {
     const props = {
-      platformLink: 'http://test.com',
-      analyticsJs: '',
-      adJs: 'console.log("adJs)"',
-      cookiesList: 'cookiecontent',
+      analyticsJs: 'console.log("analyticsJs")',
+      adJs: '',
+      cookiesList: '<p>cookieContent</p>',
     };
     const wrapper = shallow(<CookieContent {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
-  it('should render correctly with 1 cookie type', () => {
+  it('should render correctly with ads cookie type', () => {
     const props = {
-      platformLink: 'http://test.com',
       analyticsJs: '',
       adJs: 'console.log("adJs")',
-      cookiesList: 'cookiecontent',
+      cookiesList: '<p>cookieContent</p>',
     };
     const wrapper = shallow(<CookieContent {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
-  it('should render correctly with 0 cookies type', () => {
+  it('should render correctly with 0 cookie type', () => {
     const props = {
-      platformLink: 'http://test.com',
       analyticsJs: '',
       adJs: '',
-      cookiesList: 'cookiecontent',
+      cookiesList: '<p>cookieContent</p>',
     };
     const wrapper = shallow(<CookieContent {...props} />);
     expect(wrapper).toMatchSnapshot();

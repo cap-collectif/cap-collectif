@@ -35,11 +35,7 @@
     {% endif %}
     <section class="section--custom">
         <div class="container" style="max-width: 660px">
-            {{ react_render_component('CookieContentApp', {
-                'props': {
-                    'platformLink':  app.request.schemeAndHttpHost,
-                }
-            }) }}
+            {{ react_render_component('CookieContentApp') }}
         </div>
     </section>
 {% endblock %}

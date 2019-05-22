@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CookieContent /> should render correctly with 0 cookies type 1`] = `
+exports[`<CookieContent /> should render correctly with 0 cookie type 1`] = `
 <div>
   <div>
     <FormattedHTMLMessage
       id="cookies-page-texte-part1"
       values={
         Object {
-          "platformLink": "http://test.com",
+          "platformLink": "http://localhost",
         }
       }
     />
@@ -16,7 +16,7 @@ exports[`<CookieContent /> should render correctly with 0 cookies type 1`] = `
     id="cookies-page-texte-part1-2"
     values={
       Object {
-        "platformLink": "http://test.com",
+        "platformLink": "http://localhost",
       }
     }
   />
@@ -25,7 +25,7 @@ exports[`<CookieContent /> should render correctly with 0 cookies type 1`] = `
     values={
       Object {
         "nbCookies": 0,
-        "platformLink": "http://test.com",
+        "platformLink": "http://localhost",
       }
     }
   />
@@ -33,7 +33,7 @@ exports[`<CookieContent /> should render correctly with 0 cookies type 1`] = `
     className="content"
     dangerouslySetInnerHTML={
       Object {
-        "__html": "cookiecontent",
+        "__html": "<p>cookieContent</p>",
       }
     }
   />
@@ -41,105 +41,7 @@ exports[`<CookieContent /> should render correctly with 0 cookies type 1`] = `
     id="cookies-page-texte-part2"
     values={
       Object {
-        "platformLink": "http://test.com",
-      }
-    }
-  />
-</div>
-`;
-
-exports[`<CookieContent /> should render correctly with 1 cookie type 1`] = `
-<div>
-  <div>
-    <FormattedHTMLMessage
-      id="cookies-page-texte-tmp-part1"
-      values={
-        Object {
-          "cookieType": 2,
-          "platformLink": "http://test.com",
-        }
-      }
-    />
-  </div>
-  <FormattedHTMLMessage
-    id="cookies-page-texte-part1-2"
-    values={
-      Object {
-        "platformLink": "http://test.com",
-      }
-    }
-  />
-  <FormattedHTMLMessage
-    id="cookies-page-texte-tmp-part1-3"
-    values={
-      Object {
-        "nbCookies": 1,
-        "platformLink": "http://test.com",
-      }
-    }
-  />
-  <div
-    className="content"
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "cookiecontent",
-      }
-    }
-  />
-  <FormattedHTMLMessage
-    id="cookies-page-texte-part2"
-    values={
-      Object {
-        "platformLink": "http://test.com",
-      }
-    }
-  />
-</div>
-`;
-
-exports[`<CookieContent /> should render correctly with 1 cookies type 1`] = `
-<div>
-  <div>
-    <FormattedHTMLMessage
-      id="cookies-page-texte-tmp-part1"
-      values={
-        Object {
-          "cookieType": 2,
-          "platformLink": "http://test.com",
-        }
-      }
-    />
-  </div>
-  <FormattedHTMLMessage
-    id="cookies-page-texte-part1-2"
-    values={
-      Object {
-        "platformLink": "http://test.com",
-      }
-    }
-  />
-  <FormattedHTMLMessage
-    id="cookies-page-texte-tmp-part1-3"
-    values={
-      Object {
-        "nbCookies": 1,
-        "platformLink": "http://test.com",
-      }
-    }
-  />
-  <div
-    className="content"
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "cookiecontent",
-      }
-    }
-  />
-  <FormattedHTMLMessage
-    id="cookies-page-texte-part2"
-    values={
-      Object {
-        "platformLink": "http://test.com",
+        "platformLink": "http://localhost",
       }
     }
   />
@@ -154,7 +56,7 @@ exports[`<CookieContent /> should render correctly with 2 cookies type 1`] = `
       values={
         Object {
           "cookieType": 3,
-          "platformLink": "http://test.com",
+          "platformLink": "http://localhost",
         }
       }
     />
@@ -163,7 +65,7 @@ exports[`<CookieContent /> should render correctly with 2 cookies type 1`] = `
     id="cookies-page-texte-part1-2"
     values={
       Object {
-        "platformLink": "http://test.com",
+        "platformLink": "http://localhost",
       }
     }
   />
@@ -172,7 +74,7 @@ exports[`<CookieContent /> should render correctly with 2 cookies type 1`] = `
     values={
       Object {
         "nbCookies": 2,
-        "platformLink": "http://test.com",
+        "platformLink": "http://localhost",
       }
     }
   />
@@ -180,7 +82,7 @@ exports[`<CookieContent /> should render correctly with 2 cookies type 1`] = `
     className="content"
     dangerouslySetInnerHTML={
       Object {
-        "__html": "cookiecontent",
+        "__html": "<p>cookieContent</p>",
       }
     }
   />
@@ -188,7 +90,104 @@ exports[`<CookieContent /> should render correctly with 2 cookies type 1`] = `
     id="cookies-page-texte-part2"
     values={
       Object {
-        "platformLink": "http://test.com",
+        "platformLink": "http://localhost",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<CookieContent /> should render correctly with ads cookie type 1`] = `
+<div>
+  <div>
+    <FormattedHTMLMessage
+      id="cookies-page-texte-tmp-part1"
+      values={
+        Object {
+          "cookieType": 2,
+          "platformLink": "http://localhost",
+        }
+      }
+    />
+  </div>
+  <FormattedHTMLMessage
+    id="cookies-page-texte-part1-2"
+    values={
+      Object {
+        "platformLink": "http://localhost",
+      }
+    }
+  />
+  <FormattedHTMLMessage
+    id="cookies-page-texte-tmp-part1-3"
+    values={
+      Object {
+        "nbCookies": 1,
+        "platformLink": "http://localhost",
+      }
+    }
+  />
+  <div
+    className="content"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<p>cookieContent</p>",
+      }
+    }
+  />
+  <FormattedHTMLMessage
+    id="cookies-page-texte-part2"
+    values={
+      Object {
+        "platformLink": "http://localhost",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<CookieContent /> should render correctly with statistic cookie type 1`] = `
+<div>
+  <div>
+    <FormattedHTMLMessage
+      id="cookies-page-texte-part1"
+      values={
+        Object {
+          "platformLink": "http://localhost",
+        }
+      }
+    />
+  </div>
+  <FormattedHTMLMessage
+    id="cookies-page-texte-part1-2"
+    values={
+      Object {
+        "platformLink": "http://localhost",
+      }
+    }
+  />
+  <FormattedHTMLMessage
+    id="cookies-page-texte-tmp-part1-3"
+    values={
+      Object {
+        "nbCookies": 1,
+        "platformLink": "http://localhost",
+      }
+    }
+  />
+  <div
+    className="content"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<p>cookieContent</p>",
+      }
+    }
+  />
+  <FormattedHTMLMessage
+    id="cookies-page-texte-part2"
+    values={
+      Object {
+        "platformLink": "http://localhost",
       }
     }
   />

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CookieModal /> should render correctly close 1`] = `
+exports[`<PrivacyModal /> should render correctly close 1`] = `
 <div
-  className="cookie-policy"
+  className="privacy-policy"
 >
   <div>
     <Button
@@ -12,13 +12,13 @@ exports[`<CookieModal /> should render correctly close 1`] = `
       bsStyle="link"
       className="p-0"
       disabled={false}
-      id="cookies-management"
-      name="cookies"
+      id="privacy-policy"
+      name="privacy"
       onClick={[Function]}
       variant="link"
     >
       <FormattedMessage
-        id="cookies"
+        id="confidentialite.title"
         values={Object {}}
       />
     </Button>
@@ -30,10 +30,10 @@ exports[`<CookieModal /> should render correctly close 1`] = `
     backdrop={true}
     bsClass="modal"
     bsSize="large"
-    className="cookie-policy"
+    className="privacy-policy"
     dialogComponentClass={[Function]}
     enforceFocus={true}
-    id="cookies-modal"
+    id="privacy-modal"
     keyboard={true}
     manager={
       ModalManager {
@@ -54,18 +54,18 @@ exports[`<CookieModal /> should render correctly close 1`] = `
   >
     <ModalHeader
       bsClass="modal-header"
-      className="cookie-policy"
+      className="privacy-policy"
       closeButton={true}
       closeLabel="Close"
     >
       <ModalTitle
         bsClass="modal-title"
-        className="cookie-policy"
+        className="privacy-policy"
         componentClass="h4"
         id="contained-modal-title-lg"
       >
         <FormattedMessage
-          id="cookies"
+          id="privacy-policy"
           values={Object {}}
         />
       </ModalTitle>
@@ -74,13 +74,18 @@ exports[`<CookieModal /> should render correctly close 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <div>
-        <Connect(CookieContent) />
-      </div>
+      <div
+        className="content"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<p>Privacy content</p>",
+          }
+        }
+      />
     </ModalBody>
     <ModalFooter
       bsClass="modal-footer"
-      className="cookie-policy"
+      className="privacy-policy"
       componentClass="div"
     >
       <CloseButton
@@ -93,9 +98,9 @@ exports[`<CookieModal /> should render correctly close 1`] = `
 </div>
 `;
 
-exports[`<CookieModal /> should render correctly open 1`] = `
+exports[`<PrivacyModal /> should render correctly open 1`] = `
 <div
-  className="cookie-policy"
+  className="privacy-policy"
 >
   <div>
     <Button
@@ -105,13 +110,13 @@ exports[`<CookieModal /> should render correctly open 1`] = `
       bsStyle="link"
       className="p-0"
       disabled={false}
-      id="cookies-management"
-      name="cookies"
+      id="privacy-policy"
+      name="privacy"
       onClick={[Function]}
       variant="link"
     >
       <FormattedMessage
-        id="cookies"
+        id="confidentialite.title"
         values={Object {}}
       />
     </Button>
@@ -123,10 +128,10 @@ exports[`<CookieModal /> should render correctly open 1`] = `
     backdrop={true}
     bsClass="modal"
     bsSize="large"
-    className="cookie-policy"
+    className="privacy-policy"
     dialogComponentClass={[Function]}
     enforceFocus={true}
-    id="cookies-modal"
+    id="privacy-modal"
     keyboard={true}
     manager={
       ModalManager {
@@ -147,18 +152,18 @@ exports[`<CookieModal /> should render correctly open 1`] = `
   >
     <ModalHeader
       bsClass="modal-header"
-      className="cookie-policy"
+      className="privacy-policy"
       closeButton={true}
       closeLabel="Close"
     >
       <ModalTitle
         bsClass="modal-title"
-        className="cookie-policy"
+        className="privacy-policy"
         componentClass="h4"
         id="contained-modal-title-lg"
       >
         <FormattedMessage
-          id="cookies"
+          id="privacy-policy"
           values={Object {}}
         />
       </ModalTitle>
@@ -167,13 +172,18 @@ exports[`<CookieModal /> should render correctly open 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <div>
-        <Connect(CookieContent) />
-      </div>
+      <div
+        className="content"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<p>Privacy content</p>",
+          }
+        }
+      />
     </ModalBody>
     <ModalFooter
       bsClass="modal-footer"
-      className="cookie-policy"
+      className="privacy-policy"
       componentClass="div"
     >
       <CloseButton

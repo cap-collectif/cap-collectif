@@ -28,39 +28,38 @@
     <div style="position: fixed; width: 60%; left: 20%; z-index: 1030;">
         {{ react_render_component('AlertBoxApp') }}
     </div>
-    <div id="shield-mode" class="container" style="margin-top: 50px">
-        <div class="text-center" style="margin-bottom: 10px">
+    <div id="shield-mode" class="container mt-50">
+        <div class="text-center mb-10">
             <img src="{{ media_public_url(capco_site_image_media('image.shield'), 'default_shield') }}"/>
-            <div style="margin-top: 30px"></div>
+            <div class="mt-30"></div>
             {{ capco_site_parameter_value('shield.introduction')|raw }}
-            <div style="margin-top: 30px"></div>
+            <div class="mt-30"></div>
         </div>
         <div class="row">
             {{ react_render_component('ShieldApp', {'rendering': 'client_side' , 'props' : {'chartBody': capco_site_parameter_value('charter.body') }}) }}
         </div>
-        <div class="container" id="link_shield">
+    </div>
+    <div class="container" id="link_shield">
+        <div class="list-center">
             <ul class="list-inline text-center">
+                {% if true == footerLegals['privacy'] %}
+                    <li>
+                        {{ react_render_component('PrivacyApp') }}
+                    </li>
+                {% endif %}
                 {% if true == footerLegals['cookies'] %}
-                    <li class="list-style-none">
+                    <span class="list-separator">•</span>
+                    <li>
                         {{ react_render_component('CookieApp', {
                             'props': {
                                 'withListSeparator':  false,
-                                'platformLink': app.request.schemeAndHttpHost
                             }
                         }) }}
                     </li>
                 {% endif %}
-                {% if true == footerLegals['privacy'] %}
-                    <span class="list-separator">•</span>
-                    <li class="list-style-none">
-                        <a href="{{ path('app_privacy') }}">
-                            {{ 'privacy-policy'|trans({}, 'CapcoAppBundle') }}
-                        </a>
-                    </li>
-                {% endif %}
                 {% if bannerTrad is defined and bannerTrad is not empty %}
                     <span class="list-separator">•</span>
-                    <li class="list-style-none">
+                    <li>
                         {{ react_render_component('CookieManagerApp', {
                             'props': {
                                 'bannerTrad':  bannerTrad,
@@ -71,10 +70,14 @@
                     </li>
                 {% endif %}
             </ul>
-            <div class="capco-powered">
-                <p>
-                    {{ 'email.propulsed.by.capco' | trans({}, 'CapcoAppBundle') | raw }}
-                </p>
+        </div>
+        <div class="footer__links">
+            <div class="container">
+                <div class="capco-powered">
+                    <p>
+                        {{ 'email.propulsed.by.capco'|trans({'{logoUrl}':  asset('capco-logo-mail.png'),}, 'CapcoAppBundle') | raw }}
+                    </p>
+                </div>
             </div>
         </div>
     </div>
