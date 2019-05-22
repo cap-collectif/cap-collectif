@@ -12,8 +12,6 @@ type Action = typeof showLoginModal;
 
 type StateProps = {|
   loginWithMonCompteParis: boolean,
-  loginWithOpenId: boolean,
-  switchUserOpenId: boolean,
   openLoginModal: typeof showLoginModal,
 |};
 
@@ -34,16 +32,7 @@ export class LoginButton extends React.Component<Props> {
   };
 
   render() {
-    const {
-      openLoginModal,
-      loginWithMonCompteParis,
-      switchUserOpenId,
-      loginWithOpenId,
-      style,
-      bsStyle,
-      className,
-      intl,
-    } = this.props;
+    const { openLoginModal, loginWithMonCompteParis, style, bsStyle, className, intl } = this.props;
 
     return (
       <span style={style}>
@@ -61,11 +50,6 @@ export class LoginButton extends React.Component<Props> {
                 '_blank',
                 `width=${wW},height=${wH},scrollbars=yes,status=yes,resizable=yes,toolbar=0,menubar=0,location=0,screenx=0,screeny=0`,
               );
-            } else if (loginWithOpenId) {
-              const redirectUri = switchUserOpenId
-                ? `${baseUrl}/sso/switch-user`
-                : `${window && window.location.href}`;
-              window.location.href = `/login/openid?_destination=${redirectUri}`;
             } else {
               openLoginModal();
             }
@@ -81,8 +65,6 @@ export class LoginButton extends React.Component<Props> {
 
 const mapStateToProps = state => ({
   loginWithMonCompteParis: state.default.features.login_paris,
-  loginWithOpenId: state.default.features.login_openid,
-  switchUserOpenId: state.default.features.disconnect_openid,
 });
 
 const mapDispatchToProps = dispatch => ({

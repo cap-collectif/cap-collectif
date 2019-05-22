@@ -64,4 +64,8 @@ services:
     autowire: true
     autoconfigure: true
     arguments:
-      $logoutUrlSSO: '%openid_logout_url%'
+      $resourceOwner: '@hwi_oauth.resource_owner.openid'
+
+  Capco\UserBundle\OpenID\OptionsModifier\OpenIDOptionsModifier:
+    autowire: true
+    autoconfigure: true

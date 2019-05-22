@@ -1,26 +1,34 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import type { FeatureToggles } from '../../../types';
+import type { LabelPrefix } from './LoginSocialButtons';
 
-type Props = {
-  features: Object,
-  prefix: string,
-};
+type Props = {|
+  features: FeatureToggles,
+  prefix?: LabelPrefix,
+|};
 
 class FacebookLoginButton extends React.Component<Props> {
   static displayName = 'FacebookLoginButton';
+
+  static defaultProps = {
+    prefix: 'login.',
+  };
 
   render() {
     const { features, prefix } = this.props;
     if (!features.login_facebook) {
       return null;
     }
-    const label = `${prefix}facebook`;
+
+    const title = <FormattedMessage id={`${prefix || 'login.'}facebook`} />;
     return (
       <a
         href={`/login/facebook?_destination=${window && window.location.href}`}
-        className="btn login__social-btn login__social-btn--facebook">
-        <FormattedMessage id={label} />
+        className="btn login__social-btn login__social-btn--facebook"
+        title={title}>
+        {title}
       </a>
     );
   }

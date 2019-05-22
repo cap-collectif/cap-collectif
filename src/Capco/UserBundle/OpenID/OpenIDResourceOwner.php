@@ -28,8 +28,10 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults([
-            'scope' => 'openid email profile',
-        ]);
+        $resolver
+            ->setDefaults([
+                'scope' => 'openid email profile',
+            ])
+            ->setRequired('logout_url');
     }
 }

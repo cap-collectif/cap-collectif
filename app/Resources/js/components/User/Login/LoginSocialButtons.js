@@ -1,25 +1,33 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import FacebookLoginButton from './FacebookLoginButton';
 import GoogleLoginButton from './GoogleLoginButton';
 import SamlLoginButton from './SamlLoginButton';
-import type { State } from '../../../types';
+import OpenIDLoginButton from './OpenIDLoginButton';
+import type { FeatureToggles, State } from '../../../types';
 
-type Props = {
-  features: Object,
-  prefix?: string,
-};
+export type LabelPrefix = 'registration.' | 'login.';
+
+type StateProps = {|
+  features: FeatureToggles,
+|};
+
+type Props = {|
+  ...StateProps,
+  prefix?: LabelPrefix,
+|};
 
 export class LoginSocialButtons extends React.Component<Props> {
-  static defaultProps = {
-    prefix: 'login.',
-  };
-
   render() {
     const { features } = this.props;
-    if (!features.login_facebook && !features.login_gplus && !features.login_saml) {
+    if (
+      !features.login_facebook &&
+      !features.login_gplus &&
+      !features.login_saml &&
+      !features.login_openid
+    ) {
       return null;
     }
     return (
@@ -27,6 +35,7 @@ export class LoginSocialButtons extends React.Component<Props> {
         <FacebookLoginButton {...this.props} />
         <GoogleLoginButton {...this.props} />
         <SamlLoginButton {...this.props} />
+        <OpenIDLoginButton {...this.props} />
         <p className="p--centered">
           <span>{<FormattedMessage id="login.or" />}</span>
         </p>

@@ -4,6 +4,12 @@ exports[`<FacebookLoginButton /> renders a button if feature is active 1`] = `
 <a
   className="btn login__social-btn login__social-btn--facebook"
   href="/login/facebook?_destination=http://localhost/"
+  title={
+    <FormattedMessage
+      id="login.facebook"
+      values={Object {}}
+    />
+  }
 >
   <FormattedMessage
     id="login.facebook"
@@ -12,10 +18,16 @@ exports[`<FacebookLoginButton /> renders a button if feature is active 1`] = `
 </a>
 `;
 
-exports[`<FacebookLoginButton /> renders a button with correct label 1`] = `
+exports[`<FacebookLoginButton /> renders a button with correct registration label 1`] = `
 <a
   className="btn login__social-btn login__social-btn--facebook"
   href="/login/facebook?_destination=http://localhost/"
+  title={
+    <FormattedMessage
+      id="registration.facebook"
+      values={Object {}}
+    />
+  }
 >
   <FormattedMessage
     id="registration.facebook"
