@@ -42,8 +42,8 @@ type CollectStep implements Node {
   title: String!
 }
 
-# A consultation step
-type ConsultationStep {
+# A step with consultation.
+type ConsultationStep implements Node {
   # The ID of an object
   id: ID!
 

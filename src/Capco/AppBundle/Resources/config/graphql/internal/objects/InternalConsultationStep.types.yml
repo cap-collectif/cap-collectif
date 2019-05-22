@@ -7,7 +7,10 @@ InternalConsultationStep:
     - RequirementStep
     - Step
   config:
-    interfaces: [Node, Step, RequirementStep]
+    interfaces: 
+      - Node
+      - Step
+      - RequirementStep
     description: 'A consultation step'
     name: ConsultationStep
     fields:

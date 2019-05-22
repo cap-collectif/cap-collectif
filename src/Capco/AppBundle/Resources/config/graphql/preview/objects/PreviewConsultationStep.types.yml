@@ -3,7 +3,9 @@ PreviewConsultationStep:
   inherits:
     - Node
   config:
-    description: 'A consultation step'
+    interfaces:
+      - Node
+    description: 'A step with consultation.'
     name: ConsultationStep
     fields:
       id:

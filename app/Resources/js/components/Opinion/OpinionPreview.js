@@ -66,6 +66,7 @@ export default createFragmentContainer(OpinionPreview, {
   opinion: graphql`
     fragment OpinionPreview_opinion on OpinionOrVersion {
       __typename
+      ...TrashedMessage_contribution
       ...OpinionInfos_opinion
       ...OpinionPreviewTitle_opinion
       ...OpinionPreviewCounters_opinion
