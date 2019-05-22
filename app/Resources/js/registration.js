@@ -54,6 +54,7 @@ import ParisUserNotValidApp from './startup/ParisUserNotValidApp';
 import AccountProfileFollowingsApp from './startup/AccountProfileFollowingsApp';
 import UserAdminCreateButtonApp from './startup/UserAdminCreateButtonApp';
 import EditProfileApp from './startup/EditProfileApp';
+import CookieContentApp from './startup/CookieContentApp';
 import CookieManagerApp from './startup/CookieManagerApp';
 import CookieApp from './startup/CookieApp';
 import UserAdminPageApp from './startup/UserAdminPageApp';
@@ -165,6 +166,7 @@ ReactOnRails.register({
   EditProfileApp,
   CookieManagerApp,
   CookieApp,
+  CookieContentApp,
   UserAdminPageApp,
   MapAdminPageApp,
   ProjectRestrictedAccessAlertApp,

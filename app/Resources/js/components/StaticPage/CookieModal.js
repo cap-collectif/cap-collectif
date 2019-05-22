@@ -1,14 +1,11 @@
 // @flow
 import React from 'react';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import CloseButton from '../Form/CloseButton';
-import type { State } from '../../types';
+import CookieContent from './CookieContent';
 
 type Props = {
-  analyticsJs: ?string,
-  adJs: ?string,
   separator?: string,
   platformLink: string,
 };
@@ -18,8 +15,6 @@ type CookieModalState = {
 };
 
 export class CookieModal extends React.Component<Props, CookieModalState> {
-  cookie: any;
-
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -28,18 +23,8 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
   }
 
   render() {
-    const { analyticsJs, adJs, separator, platformLink } = this.props;
+    const { separator, platformLink } = this.props;
     const { showModal } = this.state;
-
-    let CookieType = -1;
-
-    if (analyticsJs !== '' && adJs === '') {
-      CookieType = 0;
-    } else if (adJs !== '' && analyticsJs === '') {
-      CookieType = 2;
-    } else if (adJs !== '' && analyticsJs !== '') {
-      CookieType = 3;
-    }
 
     return (
       <div className="cookie-policy">
@@ -74,19 +59,7 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
           </Modal.Header>
           <Modal.Body>
             <div>
-              <section className="section--custom">
-                {CookieType > 0 ? (
-                  <div>
-                    <FormattedHTMLMessage id="cookies-page-texte-part1" values={{ platformLink }} />
-                  </div>
-                ) : (
-                  <div>
-                    <FormattedHTMLMessage id="cookies-page-texte-part1" values={{ platformLink }} />
-                  </div>
-                )}
-                <FormattedHTMLMessage id="cookies-page-texte-part1-2" values={{ platformLink }} />
-                <FormattedHTMLMessage id="cookies-page-texte-part2" values={{ platformLink }} />
-              </section>
+              <CookieContent platformLink={platformLink} />
             </div>
           </Modal.Body>
           <Modal.Footer className="cookie-policy">
@@ -103,9 +76,4 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
-  analyticsJs: state.default.parameters['snalytical-tracking-scripts-on-all-pages'],
-  adJs: state.default.parameters['ad-scripts-on-all-pages'],
-});
-
-export default connect(mapStateToProps)(CookieModal);
+export default CookieModal;

@@ -25,35 +25,21 @@
 {% block body %}
     {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
     {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
-    {% set Cookietype = -1 %}
-    {% set nbCookies = 0 %}
     {% set bannerTrad = '' %}
     {% if analytic_js is not empty and ads_js is empty %}
-        {% set Cookietype = 0 %}
-        {% set nbCookies = 1 %}
         {% set bannerTrad =  'text-audience-cookie'|trans({}, 'CapcoAppBundle') %}
     {% elseif ads_js  is not empty and analytic_js is empty %}
-        {% set nbCookies = 2 %}
-        {% set Cookietype = 1 %}
         {% set bannerTrad =  'text-cookie-communication'|trans({}, 'CapcoAppBundle') %}
     {% elseif ads_js is not empty and analytic_js is not empty %}
-        {% set Cookietype = 3 %}
-        {% set nbCookies = 2 %}
         {% set bannerTrad =  'texte-cookie-audience-communication'|trans({}, 'CapcoAppBundle') %}
     {% endif %}
-
     <section class="section--custom">
         <div class="container" style="max-width: 660px">
-            {% if Cookietype > -1 %}
-                {{ 'cookies-page-texte-part1' | trans({'{platformLink}':app.request.schemeAndHttpHost}, 'CapcoAppBundle')|raw }}
-                {{ 'cookies-page-texte-part1-1' | transchoice(Cookietype, {}, 'CapcoAppBundle')|raw }}.
-            {% else %}
-                {{ 'cookies-page-texte-part1' | trans({'{platformLink}':app.request.schemeAndHttpHost}, 'CapcoAppBundle')|raw }}.
-            {% endif %}
-            {{ 'cookies-page-texte-part1-2' | trans({'{platformLink}': app.request.schemeAndHttpHost}, 'CapcoAppBundle')|raw }}
-            {{ 'cookies-page-texte-part1-3' | transchoice(nbCookies, {'{platformLink}': app.request.schemeAndHttpHost}, 'CapcoAppBundle')|raw }}
-            {{ cookiesList|raw }}
-            {{ 'cookies-page-texte-part2' | trans({}, 'CapcoAppBundle')|raw }}
+            {{ react_render_component('CookieContentApp', {
+                'props': {
+                    'platformLink':  app.request.schemeAndHttpHost,
+                }
+            }) }}
         </div>
     </section>
 {% endblock %}

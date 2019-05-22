@@ -75,36 +75,9 @@ exports[`<CookieModal /> should render correctly close 1`] = `
       componentClass="div"
     >
       <div>
-        <section
-          className="section--custom"
-        >
-          <div>
-            <FormattedHTMLMessage
-              id="cookies-page-texte-part1"
-              values={
-                Object {
-                  "platformLink": "http://test.com",
-                }
-              }
-            />
-          </div>
-          <FormattedHTMLMessage
-            id="cookies-page-texte-part1-2"
-            values={
-              Object {
-                "platformLink": "http://test.com",
-              }
-            }
-          />
-          <FormattedHTMLMessage
-            id="cookies-page-texte-part2"
-            values={
-              Object {
-                "platformLink": "http://test.com",
-              }
-            }
-          />
-        </section>
+        <Connect(CookieContent)
+          platformLink="http://test.com"
+        />
       </div>
     </ModalBody>
     <ModalFooter
@@ -197,36 +170,9 @@ exports[`<CookieModal /> should render correctly open 1`] = `
       componentClass="div"
     >
       <div>
-        <section
-          className="section--custom"
-        >
-          <div>
-            <FormattedHTMLMessage
-              id="cookies-page-texte-part1"
-              values={
-                Object {
-                  "platformLink": "http://test.com",
-                }
-              }
-            />
-          </div>
-          <FormattedHTMLMessage
-            id="cookies-page-texte-part1-2"
-            values={
-              Object {
-                "platformLink": "http://test.com",
-              }
-            }
-          />
-          <FormattedHTMLMessage
-            id="cookies-page-texte-part2"
-            values={
-              Object {
-                "platformLink": "http://test.com",
-              }
-            }
-          />
-        </section>
+        <Connect(CookieContent)
+          platformLink="http://test.com"
+        />
       </div>
     </ModalBody>
     <ModalFooter
