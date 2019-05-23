@@ -51,9 +51,3 @@ InternalQuestion:
       jumps:
         description: 'The associated logic jumps to this question.'
         type: '[LogicJump]'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionJumpsResolver", [value, args])'
-        args:
-          always:
-            type: 'Boolean'
-            description: 'Filter only by always jump or not'
-            defaultValue: false
