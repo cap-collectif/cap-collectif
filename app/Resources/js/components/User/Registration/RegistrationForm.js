@@ -1,17 +1,17 @@
 // @flow
 import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm, type FormProps, formValueSelector } from 'redux-form';
 import { isEmail } from '../../../services/Validator';
 import type { Dispatch, State } from '../../../types';
-import { baseUrl } from '../../../config';
 import { register as onSubmit, displayChartModal } from '../../../redux/modules/user';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
 import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
 import { validateResponses } from '../../../utils/responsesHelper';
+import PrivacyModal from '../../StaticPage/PrivacyModal';
 
 type Props = {|
   ...FormProps,
@@ -104,14 +104,7 @@ export class RegistrationForm extends React.Component<Props> {
       dispatch,
     } = this.props;
 
-    const privacyPolicyComponent = privacyPolicyRequired ? (
-      <FormattedHTMLMessage
-        id="and-the-privacy-policy"
-        values={{
-          url: `${baseUrl}/privacy`,
-        }}
-      />
-    ) : null;
+    const privacyPolicyComponent = privacyPolicyRequired ? <PrivacyModal /> : null;
 
     const chartLinkComponent = shieldEnabled ? (
       <FormattedMessage

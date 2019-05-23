@@ -97,14 +97,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
         }
       />
        
-      <FormattedHTMLMessage
-        id="and-the-privacy-policy"
-        values={
-          Object {
-            "url": "http://localhost/privacy",
-          }
-        }
-      />
+      <Connect(PrivacyModal) />
     </span>
   </Field>
   <Field
@@ -239,14 +232,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         }
       />
        
-      <FormattedHTMLMessage
-        id="and-the-privacy-policy"
-        values={
-          Object {
-            "url": "http://localhost/privacy",
-          }
-        }
-      />
+      <Connect(PrivacyModal) />
     </span>
   </Field>
   <Field
@@ -418,14 +404,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         }
       />
        
-      <FormattedHTMLMessage
-        id="and-the-privacy-policy"
-        values={
-          Object {
-            "url": "http://localhost/privacy",
-          }
-        }
-      />
+      <Connect(PrivacyModal) />
     </span>
   </Field>
   <Field
@@ -585,14 +564,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         }
       />
        
-      <FormattedHTMLMessage
-        id="and-the-privacy-policy"
-        values={
-          Object {
-            "url": "http://localhost/privacy",
-          }
-        }
-      />
+      <Connect(PrivacyModal) />
     </span>
   </Field>
   <Field
