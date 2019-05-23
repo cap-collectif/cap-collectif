@@ -16,14 +16,18 @@ const MultipleChoiceQuestionChoicesQuery = /* GraphQL */ `
   }
 `;
 
-describe('MultipleChoiceQuestion_choices', () => {
-  test(
-    "it resolves a question's choices and the number of answers to each of them",
+describe('MultipleChoiceQuestion.choices array', () => {
+  it(
+    "fetches a question's choices and the number of answers to each of them",
     async () => {
       await expect(
-        global.internalClient.request(MultipleChoiceQuestionChoicesQuery, {
-          id: global.toGlobalId('Question', '13'),
-        }),
+        graphql(
+          MultipleChoiceQuestionChoicesQuery,
+          {
+            id: global.toGlobalId('Question', '13'),
+          },
+          'internal',
+        ),
       ).resolves.toMatchSnapshot('13');
     },
     TIMEOUT,

@@ -7,7 +7,7 @@ InternalConsultationStep:
     - RequirementStep
     - Step
   config:
-    interfaces: 
+    interfaces:
       - Node
       - Step
       - RequirementStep

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 13 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 13 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -22,7 +22,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 14 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 14 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -39,7 +39,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 15 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 15 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -61,7 +61,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 16 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 16 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -72,7 +72,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 17 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 17 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -83,7 +83,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 18 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 18 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -100,7 +100,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 19 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 19 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -122,7 +122,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 20 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 20 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -133,7 +133,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 21 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 21 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -144,7 +144,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 22 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 22 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -155,7 +155,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 23 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 23 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -166,7 +166,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 24 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 24 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -177,7 +177,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 25 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 25 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -188,7 +188,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 26 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 26 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -199,7 +199,7 @@ Object {
 }
 `;
 
-exports[`MultipleChoiceQuestion_responses it resolves a multiple choice question's responses: 27 1`] = `
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 27 1`] = `
 Object {
   "node": Object {
     "responses": Object {

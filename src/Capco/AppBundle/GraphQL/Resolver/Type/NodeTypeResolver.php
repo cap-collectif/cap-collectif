@@ -153,10 +153,8 @@ class NodeTypeResolver implements ResolverInterface
 
             return $this->typeResolver->resolve('InternalConsultation');
         }
+
         if ($node instanceof ConsultationStep) {
-            if ('public' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PublicConsultationStep');
-            }
             if ('preview' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PreviewConsultationStep');
             }
@@ -179,9 +177,15 @@ class NodeTypeResolver implements ResolverInterface
 
             return $this->typeResolver->resolve('InternalEvent');
         }
+
         if ($node instanceof Reply) {
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewReply');
+            }
+
             return $this->typeResolver->resolve('InternalReply');
         }
+
         if ($node instanceof Follower) {
             return $this->typeResolver->resolve('Follower');
         }
@@ -212,8 +216,13 @@ class NodeTypeResolver implements ResolverInterface
         }
 
         if ($node instanceof SectionQuestion) {
-            return $this->typeResolver->resolve('SectionQuestion');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewSectionQuestion');
+            }
+
+            return $this->typeResolver->resolve('InternalSectionQuestion');
         }
+
         if ($node instanceof Requirement) {
             return $this->requirementTypeResolver->__invoke($node);
         }

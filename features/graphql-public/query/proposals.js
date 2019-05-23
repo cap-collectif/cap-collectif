@@ -15,6 +15,7 @@ const OpenDataProposalsQuery = /* GraphQL */ `
         proposals(trashedStatus: $trashedStatus, orderBy: $orderBy, first: $count, after: $cursor) {
           totalCount
           edges {
+            cursor
             node {
               id
               reference
@@ -62,12 +63,12 @@ const OpenDataProposalsQuery = /* GraphQL */ `
   }
 `;
 
-describe('OpenDataProposalsQuery', () => {
-  test(
-    'OpenDataProposalsQuery',
+describe('Query.proposals connection', () => {
+  it(
+    'fetches the first hundred proposals with a cursor',
     async () => {
       await expect(
-        global.client.request(OpenDataProposalsQuery, {
+        graphql(OpenDataProposalsQuery, {
           id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
           count: 100,
           orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },

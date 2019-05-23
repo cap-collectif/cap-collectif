@@ -3,7 +3,8 @@ PublicConsultation:
   inherits:
     - Node
   config:
-    interfaces: [Node]
+    interfaces:
+      - Node
     description: 'A consultation'
     name: Consultation
     fields:

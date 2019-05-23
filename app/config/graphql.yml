@@ -47,6 +47,7 @@ overblog_graphql:
         # by graphql-php during static schema analysis.
         # These types names should be explicitly declare here
         types:
+          - PreviewConsultation
           - PreviewConsultationStep
           - PreviewQuestionnaire
           - PreviewProject

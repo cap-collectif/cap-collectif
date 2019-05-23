@@ -12,6 +12,7 @@ const OpenDataRepliesQuery = /* GraphQL */ `
             endCursor
           }
           edges {
+            cursor
             node {
               id
               createdAt
@@ -55,12 +56,12 @@ const OpenDataRepliesQuery = /* GraphQL */ `
   }
 `;
 
-describe('GraphQL API', () => {
-  test(
-    'OpenDataRepliesQuery',
+describe('Questionnaire.replies connection', () => {
+  it(
+    'fetches the first hundred replies with a cursor',
     async () => {
       await expect(
-        global.client.request(OpenDataRepliesQuery, {
+        graphql(OpenDataRepliesQuery, {
           id: 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==',
           count: 100,
         }),

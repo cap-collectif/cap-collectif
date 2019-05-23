@@ -2645,6 +2645,7 @@ enum MultipleChoiceQuestionValidationRulesTypes {
   MAX
 }
 
+# This is the entry point into performing writes in the schema.
 type Mutation {
   addEvent(input: AddEventInput!): AddEventPayload
   changeEvent(input: ChangeEventInput!): ChangeEventPayload

@@ -6,4 +6,5 @@ PreviewSimpleQuestion:
     name: SimpleQuestion
     interfaces:
       - PreviewQuestion
+      - Node
     description: 'A simple question'
