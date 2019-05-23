@@ -124,33 +124,6 @@ final class ProjectAdmin extends CapcoAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add(
-            'title',
-            null,
-            ['label' => 'admin.fields.project.title']
-            // ->add(
-            //     'authors',
-            //     'doctrine_orm_model_autocomplete',
-            //     ['label' => 'admin.fields.project.author'],
-            //     null,
-            //     [
-            //         'property' => 'email,username',
-            //         'to_string_callback' => function ($entity, $property) {
-            //             return $entity->getEmail() . ' - ' . $entity->getUsername();
-            //         },
-            //     ]
-            // )
-        );
-
-        if (
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get(Manager::class)
-                ->isActive('themes')
-        ) {
-            $datagridMapper->add('themes', null, ['label' => 'admin.fields.project.themes']);
-        }
-
         $datagridMapper
             ->add('steps', null, ['label' => 'admin.fields.project.steps'])
             ->add('events', null, ['label' => 'admin.fields.project.events'])
@@ -172,22 +145,6 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier(
-            'title',
-            null,
-            ['label' => 'admin.fields.project.title']
-            // ->add('authors', 'sonata_type_model', ['label' => 'admin.fields.project.author'])
-        );
-
-        if (
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get(Manager::class)
-                ->isActive('themes')
-        ) {
-            $listMapper->add('themes', null, ['label' => 'admin.fields.project.themes']);
-        }
-
         $listMapper
             ->add('visibility', ChoiceType::class, [
                 'template' => 'CapcoAdminBundle:Project:visibility_list_field.html.twig',
