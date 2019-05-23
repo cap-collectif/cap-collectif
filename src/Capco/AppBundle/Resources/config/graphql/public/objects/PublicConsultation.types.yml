@@ -9,6 +9,7 @@ PublicConsultation:
     name: Consultation
     fields:
       id:
+        description: 'The ID of an object.'
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: Consultation

@@ -6,7 +6,12 @@ import { CookieModal } from './CookieModal';
 
 describe('<CookieModal />', () => {
   const props = {
-    separator: '',
+    analyticsJs: 'here your js to analyse the website',
+    adJs: 'here your js code bullshit the users',
+    bannerTrad: 'banner-trad',
+    cookieTrad: 'cookie-trad',
+    isLink: true,
+    withListSeparator: true,
   };
   it('should render correctly open', () => {
     const wrapper = shallow(<CookieModal {...props} />);

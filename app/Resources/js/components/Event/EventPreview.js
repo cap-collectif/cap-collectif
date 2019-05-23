@@ -81,6 +81,8 @@ export class EventPreview extends React.Component<Props> {
   }
 }
 
+// No alternative to fullAddress for now…
+/* eslint-disable graphql/no-deprecated-fields */
 export default createFragmentContainer(EventPreview, {
   event: graphql`
     fragment EventPreview_event on Event {

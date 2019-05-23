@@ -2,7 +2,7 @@ InternalProposalVote:
   type: object
   inherits:
     - PublicPublishable
-    - PrivatableVote
+    - PreviewPrivatableVote
     - InternalVote
     - PreviewProposalVote
   config:
@@ -10,7 +10,7 @@ InternalProposalVote:
     interfaces:
       - InternalVote
       - PublicPublishable
-      - PrivatableVote
+      - PreviewPrivatableVote
     fields:
       proposal:
         type: 'InternalProposal!'

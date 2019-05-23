@@ -65,11 +65,11 @@
                 {% endif %}
                 {% if bannerTrad is defined and bannerTrad is not empty %}
                 <li>
-                    {{ react_render_component('CookieManagerApp', {
+                    {{ react_render_component('CookieApp', {
                         'props': {
                             'bannerTrad':  bannerTrad,
                             'isLink':  true,
-                            'separator': '|',
+                            'withListSeparator':  true,
                         }
                     }) }}
                 </li>

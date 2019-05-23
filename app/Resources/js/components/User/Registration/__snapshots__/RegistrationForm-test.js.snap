@@ -87,26 +87,23 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
         id="registration.charte"
         values={
           Object {
-            "link": <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="link"
-              className="p-0 text-decoration-none"
-              disabled={false}
-              onClick={[Function]}
-              variant="link"
+            "link": <a
+              className="external-link"
+              href="/charte"
             >
               la charte
-            </Button>,
+            </a>,
           }
         }
       />
        
-      <Connect(PrivacyModal)
-        className="text-decoration-none"
-        linkKeyword="and-the"
-        title="capco.module.privacy_policy"
+      <FormattedHTMLMessage
+        id="and-the-privacy-policy"
+        values={
+          Object {
+            "url": "http://localhost/privacy",
+          }
+        }
       />
     </span>
   </Field>
@@ -232,26 +229,23 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         id="registration.charte"
         values={
           Object {
-            "link": <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="link"
-              className="p-0 text-decoration-none"
-              disabled={false}
-              onClick={[Function]}
-              variant="link"
+            "link": <a
+              className="external-link"
+              href="/charte"
             >
               la charte
-            </Button>,
+            </a>,
           }
         }
       />
        
-      <Connect(PrivacyModal)
-        className="text-decoration-none"
-        linkKeyword="and-the"
-        title="capco.module.privacy_policy"
+      <FormattedHTMLMessage
+        id="and-the-privacy-policy"
+        values={
+          Object {
+            "url": "http://localhost/privacy",
+          }
+        }
       />
     </span>
   </Field>
@@ -414,26 +408,23 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         id="registration.charte"
         values={
           Object {
-            "link": <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="link"
-              className="p-0 text-decoration-none"
-              disabled={false}
-              onClick={[Function]}
-              variant="link"
+            "link": <a
+              className="external-link"
+              href="/charte"
             >
               la charte
-            </Button>,
+            </a>,
           }
         }
       />
        
-      <Connect(PrivacyModal)
-        className="text-decoration-none"
-        linkKeyword="and-the"
-        title="capco.module.privacy_policy"
+      <FormattedHTMLMessage
+        id="and-the-privacy-policy"
+        values={
+          Object {
+            "url": "http://localhost/privacy",
+          }
+        }
       />
     </span>
   </Field>
@@ -584,26 +575,23 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         id="registration.charte"
         values={
           Object {
-            "link": <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="link"
-              className="p-0 text-decoration-none"
-              disabled={false}
-              onClick={[Function]}
-              variant="link"
+            "link": <a
+              className="external-link"
+              href="/charte"
             >
               la charte
-            </Button>,
+            </a>,
           }
         }
       />
        
-      <Connect(PrivacyModal)
-        className="text-decoration-none"
-        linkKeyword="and-the"
-        title="capco.module.privacy_policy"
+      <FormattedHTMLMessage
+        id="and-the-privacy-policy"
+        values={
+          Object {
+            "url": "http://localhost/privacy",
+          }
+        }
       />
     </span>
   </Field>

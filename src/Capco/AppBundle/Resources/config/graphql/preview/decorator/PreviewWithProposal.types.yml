@@ -9,30 +9,18 @@ PreviewWithProposals:
         args:
           first:
             type: 'Int'
+            description: Returns the first `n` elements from the list.
             defaultValue: 100
           trashedStatus:
             type: 'ProposalTrashedStatus'
-            description: 'If non-null, filters proposals with the given trashed status.'
+            description: 'If non-null, filters proposals with the given trashed status (eg: visible, not visible).'
             defaultValue: 'NOT_TRASHED'
-          district:
-            type: 'ID'
-            description: 'If non-null, filters proposals with the given district.'
-          userType:
-            type: 'ID'
-            description: 'If non-null, filters proposals with the given type of author.'
-          category:
-            type: 'ID'
-            description: 'If non-null, filters proposals with the given category.'
           author:
             type: 'ID'
-            description: 'If non-null, filters proposals with the given author.'
-          theme:
-            type: 'ID'
-            description: 'If non-null, filters proposals with the given theme.'
-          term:
-            type: 'String'
-            description: 'If non-null, filters proposals with the given string to look for.'
+            description: 'ID of a User to filter by. If non-null, only proposals authored by this user will be returned.'
           orderBy:
+            # TODO we can change to an array to allow multiple orderBy (first by comment, then by votes if equal)
+            # but this is not a BC thanks to the GraphQL spec
             type: 'PreviewProposalOrder'
             description: 'Ordering options for proposals returned from the connection.'
             defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }

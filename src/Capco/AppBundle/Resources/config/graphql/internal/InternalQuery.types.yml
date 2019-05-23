@@ -46,9 +46,75 @@ InternalQuery:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ContactFormQueryResolver")'
       projects:
         type: 'InternalProjectConnection!'
+        args:
+          # TODO
+          # Support multi-authors
+          author:
+            type: 'ID'
+            description: 'ID of a User to filter by. If non-null, only projects authored by this user will be returned.'
+          # TODO before preview
+          # Not sure if "term" is a good name
+          # "query" looks better
+          term:
+            type: 'String'
+            description: 'If provided, searches projects by title.'
+          # TODO before preview
+          # Not sure if "status" is a good name
+          status:
+            type: 'ID'
+            description: 'ID of a Status to filter by. If non-null, filter projects by statuses.'
+          # TODO before preview
+          # Release Theme to preview schema
+          theme:
+            type: 'ID'
+            description: 'ID of a Theme to filter by. If non-null, filter projects by themes'
+          # TODO before preview
+          # Release ProjectType to preview schema
+          type:
+            type: 'ID'
+            description: 'ID of a ProjectType to filter by. If non-null, filter projects by types'
+          # TODO before preview
+          # rename "withEventsOnly"
+          withEventOnly:
+            type: 'Boolean'
+            description: 'If true, only projects with at least 1 event will be returned.'
+            defaultValue: false
+          # TODO before preview
+          # Change this to an enum filter "ProjectVisibilityMode"
+          onlyPublic:
+            type: 'Boolean'
+            description: 'If true, only projects with public visibility will be returned.'
+            defaultValue: false
       events:
         type: 'InternalEventConnection!'
         args:
+          # TODO
+          # rename to query.
+          search:
+            type: 'String'
+            description: 'If provided, searches events by title and description.'
+          # TODO
+          # dont know if right way
+          isFuture:
+            type: 'Boolean'
+            description: 'If non-null, filters events by comparing the start date with present.'
+          # TODO before preview
+          # Release Theme to preview schema
+          theme:
+            type: 'ID'
+            description: 'If non-null, filters events with the given theme.'
+          # TODO
+          # Support multi-authors
+          author:
+            type: 'ID'
+            description: 'If non-null, filters events with the given author.'
+          # TODO before preview
+          # Release UserType to preview schema
+          userType:
+            type: 'ID'
+            description: 'If non-null, filters events with the given author type.'
+          # TODO
+          # dont know if right way
           isRegistrable:
             type: 'Boolean'
             description: 'If true, filter the events with registration link or internal registration enable, if false  filter the events with both registration type at false'

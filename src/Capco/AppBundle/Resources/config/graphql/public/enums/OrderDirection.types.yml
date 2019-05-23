@@ -1,11 +1,11 @@
 OrderDirection:
   type: enum
   config:
-    description: 'Possible directions in which to order a list of items when provided an orderBy argument.'
+    description: 'Possible directions in which to order a list of items when provided an `orderBy` argument.'
     values:
       ASC:
         value: 'ASC'
-        description: 'Specifies an ascending order for a given orderBy argument.'
+        description: 'Specifies an ascending order for a given `orderBy` argument.'
       DESC:
         value: 'DESC'
-        description: 'Specifies a descending order for a given orderBy argument.'
+        description: 'Specifies a descending order for a given `orderBy` argument.'

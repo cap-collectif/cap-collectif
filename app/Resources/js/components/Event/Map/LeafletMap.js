@@ -48,6 +48,8 @@ type State = {|
 
 let L;
 
+// No alternative to fullAddress for now…
+/* eslint-disable graphql/no-deprecated-fields */
 const eventMapPreviewQuery = graphql`
   query LeafletMapQuery($id: ID!) {
     node(id: $id) {

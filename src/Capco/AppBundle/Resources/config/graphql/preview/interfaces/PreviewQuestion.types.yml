@@ -5,6 +5,7 @@ PreviewQuestion:
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
     fields:
       id:
+        description: 'The ID of an object.'
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: Question

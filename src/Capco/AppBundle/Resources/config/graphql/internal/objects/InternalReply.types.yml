@@ -16,6 +16,11 @@ InternalReply:
       - Contribution
       - UniformResourceLocatable
     fields:
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Reply
       private:
         type: 'Boolean!'
       publicationStatus:

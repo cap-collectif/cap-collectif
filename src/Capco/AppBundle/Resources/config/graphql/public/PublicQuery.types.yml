@@ -11,7 +11,11 @@ PublicQuery:
         resolve: '@=getUser()'
       node:
         builder: 'Relay::Node'
-        description: 'The ID of an object.'
+        description: "Lookup a node by its ID."
+        args:
+          id:
+            type: 'ID!'
+            description: 'The ID of an object.'
         builderConfig:
           nodeInterfaceType: Node
           idFetcher: '@=resolver("query_node", [value, getUser(), context])'

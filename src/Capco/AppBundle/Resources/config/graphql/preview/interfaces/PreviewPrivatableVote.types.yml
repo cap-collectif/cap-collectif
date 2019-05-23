@@ -1,0 +1,15 @@
+PreviewPrivatableVote:
+  type: interface
+  config:
+    name: PrivatableVote
+    description: 'A vote that can be anonymous.'
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", [value])'
+    fields:
+      private:
+        type: 'Boolean'
+        description: 'Whether the author of the vote is anonymous or not.'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-09-01", reason: "This field has been renamed.", description: "Field `private` will be removed.", supersededBy: "Use `anonymous` instead."})'
+      anonymous:
+        type: 'Boolean!'
+        description: 'Whether the author of the vote is anonymous or not.'
+        resolve: '@=value.isPrivate()'

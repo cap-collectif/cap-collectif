@@ -2,9 +2,12 @@
 
 exports[`<CookieModal /> should render correctly close 1`] = `
 <div
-  className="cookie-policy"
+  className="cookie-manager"
 >
   <div>
+    <span>
+      | 
+    </span>
     <Button
       active={false}
       block={false}
@@ -13,91 +16,106 @@ exports[`<CookieModal /> should render correctly close 1`] = `
       className="p-0"
       disabled={false}
       id="cookies-management"
-      name="cookies"
       onClick={[Function]}
       variant="link"
     >
       <FormattedMessage
-        id="cookies"
+        id="cookie-trad"
         values={Object {}}
       />
     </Button>
   </div>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    bsSize="large"
-    className="cookie-policy"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    id="cookies-modal"
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
+  <div>
+    <Modal
+      animation={false}
+      aria-labelledby="contained-modal-title-lg"
+      autoFocus={true}
+      backdrop={true}
+      bsClass="modal"
+      bsSize="large"
+      className="cookie-manager"
+      dialogComponentClass={[Function]}
+      enforceFocus={true}
+      id="cookies-modal"
+      keyboard={true}
+      manager={
+        ModalManager {
+          "add": [Function],
+          "containers": Array [],
+          "data": Array [],
+          "handleContainerOverflow": true,
+          "hideSiblingNodes": true,
+          "isTopModal": [Function],
+          "modals": Array [],
+          "remove": [Function],
+        }
       }
-    }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={false}
-  >
-    <ModalHeader
-      bsClass="modal-header"
-      className="cookie-policy"
-      closeButton={true}
-      closeLabel="Close"
+      onHide={[Function]}
+      renderBackdrop={[Function]}
+      restoreFocus={true}
+      show={false}
     >
-      <ModalTitle
-        bsClass="modal-title"
-        className="cookie-policy"
-        componentClass="h4"
-        id="contained-modal-title-lg"
+      <ModalHeader
+        bsClass="modal-header"
+        className="cookie-manager"
+        closeButton={true}
+        closeLabel="Close"
       >
-        <FormattedMessage
-          id="cookies"
-          values={Object {}}
+        <ModalTitle
+          bsClass="modal-title"
+          className="cookie-manager"
+          componentClass="h4"
+          id="contained-modal-title-lg"
+        >
+          <FormattedMessage
+            id="cookies-management"
+            values={Object {}}
+          />
+        </ModalTitle>
+      </ModalHeader>
+      <ModalBody
+        bsClass="modal-body"
+        componentClass="div"
+      >
+        <Cookie
+          adJs="here your js code bullshit the users"
+          analyticsJs="here your js to analyse the website"
         />
-      </ModalTitle>
-    </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <div>
-        <Connect(CookieContent) />
-      </div>
-    </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      className="cookie-policy"
-      componentClass="div"
-    >
-      <CloseButton
-        buttonId="cookies-cancel"
-        label="global.cancel"
-        onClose={[Function]}
-      />
-    </ModalFooter>
-  </Modal>
+      </ModalBody>
+      <ModalFooter
+        bsClass="modal-footer"
+        className="cookie-manager"
+        componentClass="div"
+      >
+        <CloseButton
+          buttonId="cookies-cancel"
+          label="global.cancel"
+          onClose={[Function]}
+        />
+        <button
+          className="ml-15 btn btn-primary"
+          id="cookies-save"
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </button>
+      </ModalFooter>
+    </Modal>
+  </div>
 </div>
 `;
 
 exports[`<CookieModal /> should render correctly open 1`] = `
 <div
-  className="cookie-policy"
+  className="cookie-manager"
 >
   <div>
+    <span>
+      | 
+    </span>
     <Button
       active={false}
       block={false}
@@ -106,82 +124,94 @@ exports[`<CookieModal /> should render correctly open 1`] = `
       className="p-0"
       disabled={false}
       id="cookies-management"
-      name="cookies"
       onClick={[Function]}
       variant="link"
     >
       <FormattedMessage
-        id="cookies"
+        id="cookie-trad"
         values={Object {}}
       />
     </Button>
   </div>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    bsSize="large"
-    className="cookie-policy"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    id="cookies-modal"
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
+  <div>
+    <Modal
+      animation={false}
+      aria-labelledby="contained-modal-title-lg"
+      autoFocus={true}
+      backdrop={true}
+      bsClass="modal"
+      bsSize="large"
+      className="cookie-manager"
+      dialogComponentClass={[Function]}
+      enforceFocus={true}
+      id="cookies-modal"
+      keyboard={true}
+      manager={
+        ModalManager {
+          "add": [Function],
+          "containers": Array [],
+          "data": Array [],
+          "handleContainerOverflow": true,
+          "hideSiblingNodes": true,
+          "isTopModal": [Function],
+          "modals": Array [],
+          "remove": [Function],
+        }
       }
-    }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={false}
-  >
-    <ModalHeader
-      bsClass="modal-header"
-      className="cookie-policy"
-      closeButton={true}
-      closeLabel="Close"
+      onHide={[Function]}
+      renderBackdrop={[Function]}
+      restoreFocus={true}
+      show={false}
     >
-      <ModalTitle
-        bsClass="modal-title"
-        className="cookie-policy"
-        componentClass="h4"
-        id="contained-modal-title-lg"
+      <ModalHeader
+        bsClass="modal-header"
+        className="cookie-manager"
+        closeButton={true}
+        closeLabel="Close"
       >
-        <FormattedMessage
-          id="cookies"
-          values={Object {}}
+        <ModalTitle
+          bsClass="modal-title"
+          className="cookie-manager"
+          componentClass="h4"
+          id="contained-modal-title-lg"
+        >
+          <FormattedMessage
+            id="cookies-management"
+            values={Object {}}
+          />
+        </ModalTitle>
+      </ModalHeader>
+      <ModalBody
+        bsClass="modal-body"
+        componentClass="div"
+      >
+        <Cookie
+          adJs="here your js code bullshit the users"
+          analyticsJs="here your js to analyse the website"
         />
-      </ModalTitle>
-    </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <div>
-        <Connect(CookieContent) />
-      </div>
-    </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      className="cookie-policy"
-      componentClass="div"
-    >
-      <CloseButton
-        buttonId="cookies-cancel"
-        label="global.cancel"
-        onClose={[Function]}
-      />
-    </ModalFooter>
-  </Modal>
+      </ModalBody>
+      <ModalFooter
+        bsClass="modal-footer"
+        className="cookie-manager"
+        componentClass="div"
+      >
+        <CloseButton
+          buttonId="cookies-cancel"
+          label="global.cancel"
+          onClose={[Function]}
+        />
+        <button
+          className="ml-15 btn btn-primary"
+          id="cookies-save"
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </button>
+      </ModalFooter>
+    </Modal>
+  </div>
 </div>
 `;

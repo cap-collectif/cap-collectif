@@ -395,24 +395,27 @@ svg.avatar-group {
                border-bottom: 1px solid transparent;
            }
        }
-
-
     }
 
     .list-group {
         border-bottom: 1px solid $border-color;
 
         > .list-group-item {
-            &:hover, &:focus, &:active {
-                background-color: transparent;
+            a {
+                color: $dark-text;
+                text-decoration: none;
+            }
 
-                i {
-                    color: $dark-text;
-                }
+            &:hover, &:focus, &:active {
+                background-color: darken($page-bgc, 3%);
+            }
+
+            i:hover, a:hover {
+                color: #4183C4;
             }
         }
 
-        .list-group-item[aria-expanded="true"] i::before {
+        .list-group-item a[aria-expanded="true"] i::before {
             transform: rotate(90deg);
             transition: all 0.1s ease-in;
         }
@@ -440,6 +443,7 @@ svg.avatar-group {
 
             &:hover {
                 background-color: darken($page-bgc, 3%);
+                color: darken(#4183C4, 3%);
             }
 
             &.active {

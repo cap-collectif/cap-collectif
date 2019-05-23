@@ -9,6 +9,11 @@ InternalEvent:
     interfaces: [Node, Commentable]
     name: Event
     fields:
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Event
       participants:
         type: 'ParticipantConnection!'
         description: 'A list of Users that are participating to the event.'

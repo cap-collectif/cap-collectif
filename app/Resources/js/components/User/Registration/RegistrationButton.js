@@ -15,6 +15,7 @@ type Props = {
   bsStyle: ?string,
   buttonStyle: ?Object,
   openRegistrationModal: () => void,
+  chartBody?: ?string,
   intl: IntlShape,
 };
 
@@ -38,6 +39,7 @@ export class RegistrationButton extends React.Component<Props> {
       user,
       intl,
       openRegistrationModal,
+      chartBody,
     } = this.props;
     if (!features.registration || !!user) {
       return null;
@@ -53,7 +55,7 @@ export class RegistrationButton extends React.Component<Props> {
           <FormattedMessage id="global.registration" />
         </Button>
         {/* $FlowFixMe please fix */}
-        <RegistrationModal />
+        <RegistrationModal chartBody={chartBody} />
       </span>
     );
   }

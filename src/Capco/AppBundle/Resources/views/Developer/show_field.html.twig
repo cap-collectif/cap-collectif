@@ -1,5 +1,5 @@
 <div style="margin-bottom: 32px">
-    <strong>{{ field.name }} (<code><a href="#">{{field.type}}</a></code>)</strong>
+    <strong>{{ field.name }} (<code><a href="{{ field.type|capco_developer_type_url}}">{{field.type}}</a></code>)</strong>
     {% if field.config.access|default(false) %}
         {# We need a way to get info about the required access #}
         <span class="label label-info">ROLE_USER</span>
@@ -9,13 +9,13 @@
           {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
         {% endif %}
     {% endif %}
-    <p>{{ field.description|default('') }}</p>
+    <p>{{ field.description|default('')|graphql_description|raw }}</p>
 
     {% if field.deprecated|default(false) %}
       <div class="alert alert-danger">
         <strong>Deprecation notice</strong>
         <p>
-          {{ field.deprecationReason }}
+          {{ field.deprecationReason|graphql_description|raw }}
         </p>
       </div>
     {% endif %}
@@ -34,11 +34,17 @@
  <tr>
   <td><code class="anchored">{{argument.name}}</code></td>
   <td>
-    <code><a href="/scalar/{{argument.type}}">{{argument.type}}</a></code>
+    <code><a href="{{ argument.type|capco_developer_type_url }}">{{argument.type}}</a></code>
   </td>
   <td>
     <p>
-        {{argument.description}}
+        {{argument.description|graphql_description|raw}}
+
+        {% if argument.defaultValueExists %}
+            <br />
+            <br />
+            The default value is <code class="anchored">{{argument.defaultValue|json_encode(constant('JSON_PRETTY_PRINT'))}}</code>.
+        {% endif %}
     </p>
    </td>
   </tr>

@@ -17,6 +17,7 @@ describe('<RegistrationForm />', () => {
     ...formMock,
     intl: intlMock,
     cguName: 'la charte',
+    cguLink: '/charte',
     hasQuestions: false,
     responses: [],
     organizationName: 'Cap Collectif',
