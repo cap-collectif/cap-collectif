@@ -594,7 +594,14 @@ InternalMutation:
           inputType: UpdateQuestionnaireConfigurationInput
           payloadType: UpdateQuestionnaireConfigurationPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireConfigurationMutation", [value])'
-
+      # Project
+      createProject:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: CreateProjectInput
+          payloadType: CreateProjectPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProjectMutation", [value])'
       # Project District
       createProjectDistrict:
         access: "@=hasRole('ROLE_ADMIN')"

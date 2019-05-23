@@ -1618,6 +1618,21 @@ type CreateProjectDistrictPayload {
   clientMutationId: String
 }
 
+input CreateProjectInput {
+  # The user's username
+  title: String
+
+  # The user's email
+  email: String!
+  clientMutationId: String
+}
+
+type CreateProjectPayload {
+  # The created project
+  project: Project
+  clientMutationId: String
+}
+
 input CreateProposalFormInput {
   # The proposal form title
   title: String!
@@ -2758,6 +2773,7 @@ type Mutation {
   createQuestionnaire(input: CreateQuestionnaireInput!): CreateQuestionnairePayload
   updateQuestionnaireParameters(input: UpdateQuestionnaireParametersInput!): UpdateQuestionnaireParametersPayload
   updateQuestionnaireConfiguration(input: UpdateQuestionnaireConfigurationInput!): UpdateQuestionnaireConfigurationPayload
+  createProject(input: CreateProjectInput!): CreateProjectPayload
   createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
   deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
   updateProjectDistrict(input: UpdateProjectDistrictInput!): CreateProjectDistrictPayload

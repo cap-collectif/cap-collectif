@@ -1,0 +1,8 @@
+CreateProjectInput:
+  type: relay-mutation-input
+  config:
+    description: 'Create a project'
+    fields:
+      title:
+        type: 'String'
+        description: "The user's username"
