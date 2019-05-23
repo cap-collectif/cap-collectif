@@ -210,7 +210,17 @@ const form = reduxForm({
 })(QuestionnaireAdminConfigurationForm);
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
-  initialValues: { ...props.questionnaire, id: undefined },
+  initialValues: {
+    ...props.questionnaire,
+    questions: props.questionnaire.questions.map(question => {
+      const jump = question.jumps && question.jumps.find(j => j && j.always);
+      return {
+        ...question,
+        alwaysJump: jump ? jump.destination.id : null,
+      };
+    }),
+    id: undefined,
+  },
 });
 
 const container = connect(mapStateToProps)(form);

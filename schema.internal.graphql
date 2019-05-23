@@ -2708,7 +2708,10 @@ type MediaQuestion implements Question & Node {
   ): ParticipantConnection!
 
   # The associated logic jumps to this question.
-  jumps: [LogicJump]
+  jumps(
+    # Filter only by always jump or not
+    always: Boolean = false
+  ): [LogicJump]
 }
 
 # A response
@@ -2779,7 +2782,10 @@ type MultipleChoiceQuestion implements Question & Node {
   ): ParticipantConnection!
 
   # The associated logic jumps to this question.
-  jumps: [LogicJump]
+  jumps(
+    # Filter only by always jump or not
+    always: Boolean = false
+  ): [LogicJump]
   isOtherAllowed: Boolean!
 
   # Responses of the `other` question choice.
@@ -4830,7 +4836,10 @@ interface Question {
   ): ParticipantConnection!
 
   # The associated logic jumps to this question.
-  jumps: [LogicJump]
+  jumps(
+    # Filter only by always jump or not
+    always: Boolean = false
+  ): [LogicJump]
 }
 
 # A possible choice of a question.
@@ -5672,7 +5681,10 @@ type SectionQuestion implements Question & Node {
   ): ParticipantConnection!
 
   # The associated logic jumps to this question.
-  jumps: [LogicJump]
+  jumps(
+    # Filter only by always jump or not
+    always: Boolean = false
+  ): [LogicJump]
 }
 
 input SelectProposalInput {
@@ -5957,7 +5969,10 @@ type SimpleQuestion implements Question & Node {
   ): ParticipantConnection!
 
   # The associated logic jumps to this question.
-  jumps: [LogicJump]
+  jumps(
+    # Filter only by always jump or not
+    always: Boolean = false
+  ): [LogicJump]
 }
 
 # A site image
