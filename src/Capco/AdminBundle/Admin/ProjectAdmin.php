@@ -13,10 +13,12 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Validator\Constraints\Required;
 
-class ProjectAdmin extends CapcoAdmin
+final class ProjectAdmin extends CapcoAdmin
 {
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'publishedAt'];
 
@@ -34,6 +36,17 @@ class ProjectAdmin extends CapcoAdmin
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
         $this->indexer = $indexer;
+    }
+
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        if (empty($object->getAuthor())) {
+            $errorElement
+                ->with('Author')
+                ->addConstraint(new Required())
+                ->addViolation('global.required')
+                ->end();
+        }
     }
 
     public function preRemove($object)
@@ -233,6 +246,7 @@ class ProjectAdmin extends CapcoAdmin
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
                 },
+                'required' => true,
             ])
             ->add('opinionTerm', 'choice', [
                 'label' => 'admin.fields.project.opinion_term',

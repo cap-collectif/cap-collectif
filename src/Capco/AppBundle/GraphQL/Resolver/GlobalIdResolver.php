@@ -144,10 +144,6 @@ class GlobalIdResolver
                     $node = $this->container->get(AbstractQuestionRepository::class)->find($uuid);
 
                     break;
-                case 'Reply':
-                    $node = $this->container->get(ReplyRepository::class)->find($uuid);
-
-                    break;
                 case 'ContactForm':
                     $node = $this->container->get(ContactFormRepository::class)->find($uuid);
 
@@ -189,6 +185,10 @@ class GlobalIdResolver
         }
 
         if (!$node) {
+            $node = $this->container->get(ProposalRepository::class)->find($uuid);
+        }
+
+        if (!$node) {
             $node = $this->container->get(ProposalFormRepository::class)->find($uuid);
         }
 
@@ -208,15 +208,10 @@ class GlobalIdResolver
             $node = $this->container->get(FollowerRepository::class)->find($uuid);
         }
 
-        // TODO remove me.
-        if (!$node) {
-            $node = $this->container->get(ProposalRepository::class)->find($uuid);
-        }
-        // TODO remove me.
         if (!$node) {
             $node = $this->container->get(AbstractQuestionRepository::class)->find($uuid);
         }
-        // TODO remove me.
+
         if (!$node) {
             $node = $this->container->get(ReplyRepository::class)->find($uuid);
         }

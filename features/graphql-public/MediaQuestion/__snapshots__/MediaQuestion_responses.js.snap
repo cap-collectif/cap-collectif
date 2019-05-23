@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MediaQuestion.responses array it fetches a media question's responses: 11 1`] = `
+exports[`MediaQuestion_responses it resolves a media question's responses: 11 1`] = `
 Object {
   "node": Object {
     "responses": Object {
@@ -11,7 +11,7 @@ Object {
 }
 `;
 
-exports[`MediaQuestion.responses array it fetches a media question's responses: 12 1`] = `
+exports[`MediaQuestion_responses it resolves a media question's responses: 12 1`] = `
 Object {
   "node": Object {
     "responses": Object {

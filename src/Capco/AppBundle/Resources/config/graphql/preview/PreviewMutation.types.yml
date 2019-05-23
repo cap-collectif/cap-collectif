@@ -1,7 +1,6 @@
 PreviewMutation:
   type: object
   config:
-    description: 'This is the entry point into performing writes in the schema.'
     name: Mutation
     fields:
       addEvent:

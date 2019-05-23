@@ -6,7 +6,6 @@ const OpenDataUsersQuery = /* GraphQL */ `
     users(first: $count, after: $cursor) {
       totalCount
       edges {
-        cursor
         node {
           id
           username
@@ -38,8 +37,6 @@ const OpenDataUsersQuery = /* GraphQL */ `
         }
       }
       pageInfo {
-        startCursor
-        hasPreviousPage
         hasNextPage
         endCursor
       }
@@ -47,25 +44,13 @@ const OpenDataUsersQuery = /* GraphQL */ `
   }
 `;
 
-describe('Query.users connection', () => {
-  it(
-    'fetches the first hundred users with a cursor',
+describe('OpenDataUsersQuery', () => {
+  test(
+    'OpenDataUsersQuery',
     async () => {
       await expect(
-        graphql(OpenDataUsersQuery, {
+        global.anonymousClient.request(OpenDataUsersQuery, {
           count: 100,
-        }),
-      ).resolves.toMatchSnapshot();
-    },
-    TIMEOUT,
-  );
-  it(
-    'fetches the next three users with a cursor',
-    async () => {
-      await expect(
-        graphql(OpenDataUsersQuery, {
-          count: 3,
-          cursor: 'YXJyYXljb25uZWN0aW9uOjk5',
         }),
       ).resolves.toMatchSnapshot();
     },

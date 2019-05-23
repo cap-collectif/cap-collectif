@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Query.proposals connection fetches the first hundred proposals with a cursor 1`] = `
+exports[`OpenDataProposalsQuery OpenDataProposalsQuery 1`] = `
 Object {
   "node": Object {
     "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNTAy",
@@ -31,6 +30,15 @@ Object {
                   "title": "Nouvelle section 3",
                 },
                 "value": null,
+              },
+              Object {
+                "formattedValue": "souhaitable",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": "souhaitable",
               },
               Object {
                 "formattedValue": "250 000 €",
@@ -63,7 +71,6 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNQ==",
@@ -87,6 +94,15 @@ Object {
                   "title": "Nouvelle section 3",
                 },
                 "value": null,
+              },
+              Object {
+                "formattedValue": "souhaitable",
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
+                },
+                "value": "souhaitable",
               },
               Object {
                 "formattedValue": "1 million !",
@@ -119,7 +135,6 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNTAy",
@@ -141,6 +156,15 @@ Object {
                   "__typename": "SectionQuestion",
                   "id": "UXVlc3Rpb246MzAz",
                   "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
                 },
                 "value": null,
               },
@@ -175,7 +199,6 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNw==",
@@ -197,6 +220,15 @@ Object {
                   "__typename": "SectionQuestion",
                   "id": "UXVlc3Rpb246MzAz",
                   "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
                 },
                 "value": null,
               },
@@ -231,7 +263,6 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -253,6 +284,15 @@ Object {
                   "__typename": "SectionQuestion",
                   "id": "UXVlc3Rpb246MzAz",
                   "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
                 },
                 "value": null,
               },
@@ -287,7 +327,6 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -309,6 +348,15 @@ Object {
                   "__typename": "SectionQuestion",
                   "id": "UXVlc3Rpb246MzAz",
                   "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246MQ==",
+                  "title": "Evaluez l'importance de votre proposition",
                 },
                 "value": null,
               },

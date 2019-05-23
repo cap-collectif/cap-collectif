@@ -67,7 +67,7 @@ type Project implements Node & UniformResourceLocatable {
   title: String!
 }
 
-# This is entry point into the schema.
+# Root of the schema.
 type Query {
   # The currently authenticated user.
   viewer: User!

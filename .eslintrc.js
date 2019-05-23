@@ -31,9 +31,6 @@ module.exports = {
     // Flow vars
     HTMLInputElement: true,
     Element: true,
-    // Jest e2e
-    graphql: true,
-    toGlobalId: true,
   },
   rules: {
     // TODO set this to error

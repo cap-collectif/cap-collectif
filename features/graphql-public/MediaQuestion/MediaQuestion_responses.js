@@ -23,20 +23,16 @@ const MediaQuestionResponsesQuery = /* GraphQL */ `
   }
 `;
 
-describe('MediaQuestion.responses array', () => {
-  it(
-    "it fetches a media question's responses",
+describe('MediaQuestion_responses', () => {
+  test(
+    "it resolves a media question's responses",
     async () => {
       await Promise.all(
         ['11', '12'].map(async id => {
           await expect(
-            graphql(
-              MediaQuestionResponsesQuery,
-              {
-                id: global.toGlobalId('Question', id),
-              },
-              'internal',
-            ),
+            global.internalClient.request(MediaQuestionResponsesQuery, {
+              id: global.toGlobalId('Question', id),
+            }),
           ).resolves.toMatchSnapshot(id);
         }),
       );

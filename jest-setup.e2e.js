@@ -5,20 +5,20 @@ import 'whatwg-fetch';
 const GraphQLClient = require('graphql-request').GraphQLClient;
 
 const endpoint = 'https://capco.test/graphql';
-const adminClient = new GraphQLClient(endpoint, {
+global.client = new GraphQLClient(endpoint, {
   headers: {
     authorization: 'Bearer iamthetokenofadmin',
     accept: 'application/vnd.cap-collectif.preview+json',
   },
 });
 
-const anonymousClient = new GraphQLClient(endpoint, {
+global.anonymousClient = new GraphQLClient(endpoint, {
   headers: {
     accept: 'application/vnd.cap-collectif.preview+json',
   },
 });
 
-const internalClient = new GraphQLClient('https://capco.test/graphql/internal', {
+global.internalClient = new GraphQLClient('https://capco.test/graphql/internal', {
   headers: {
     accept: 'application/json',
   },
@@ -35,15 +35,4 @@ async function asyncForEach(array, callback) {
   }
 }
 
-global.graphql = (query, variables, client = 'anonymous') => {
-  switch (client) {
-    case 'admin':
-      return adminClient.request(query, variables);
-    case 'internal':
-      return internalClient.request(query, variables);
-    case 'anonymous':
-    default:
-  }
-  return anonymousClient.request(query, variables);
-};
 global.asyncForEach = asyncForEach;

@@ -48,9 +48,9 @@ const OpenDataEventsQuery = /* GraphQL */ `
   }
 `;
 
-describe('Query.events connection', () => {
-  it(
-    'fetches the first hundred events with a cursor',
+describe('GraphQL API', () => {
+  test(
+    'OpenDataEventsQuery',
     async () => {
       expect(true).toBe(true);
       // TODO https://github.com/cap-collectif/platform/issues/7544

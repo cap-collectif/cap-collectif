@@ -6,7 +6,6 @@ PreviewMultipleChoiceQuestion:
     name: MultipleChoiceQuestion
     interfaces:
       - PreviewQuestion
-      - Node
     description: 'A question with multiple choices available.'
     fields:
       choices:

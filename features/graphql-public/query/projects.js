@@ -10,7 +10,6 @@ const ProjectsQuery = /* GraphQL */ `
         endCursor
       }
       edges {
-        cursor
         node {
           id
           title
@@ -26,30 +25,14 @@ const ProjectsQuery = /* GraphQL */ `
   }
 `;
 
-describe('Query.projects connection', () => {
-  it(
-    'fetches the public projects with a cursor',
+describe('ProjectsQuery', () => {
+  test(
+    'returns correctly',
     async () => {
       await expect(
-        graphql(ProjectsQuery, {
+        global.client.request(ProjectsQuery, {
           count: 100,
         }),
-      ).resolves.toMatchSnapshot();
-    },
-    TIMEOUT,
-  );
-
-  it(
-    'fetches the public and private projects with a cursor',
-    async () => {
-      await expect(
-        graphql(
-          ProjectsQuery,
-          {
-            count: 100,
-          },
-          'admin',
-        ),
       ).resolves.toMatchSnapshot();
     },
     TIMEOUT,

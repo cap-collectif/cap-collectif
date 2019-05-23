@@ -2,7 +2,7 @@ PublicQuery:
   type: object
   config:
     name: Query
-    description: 'This is entry point into the schema.'
+    description: 'Root of the schema.'
     fields:
       viewer:
         access: "@=hasRole('ROLE_USER')"
@@ -23,3 +23,4 @@ PublicQuery:
             type: '[ID!]!'
             description: 'The list of node IDs.'
         resolve: "@=resolver('query_nodes', [args['ids'], getUser(), context])"
+

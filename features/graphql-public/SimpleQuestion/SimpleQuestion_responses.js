@@ -20,21 +20,17 @@ const SimpleQuestionResponsesQuery = /* GraphQL */ `
   }
 `;
 
-describe('SimpleQuestion.responses array', () => {
-  it(
-    "fetches a simple question's responses",
+describe('SimpleQuestion_responses', () => {
+  test(
+    "it resolves a simple question's responses",
     async () => {
       await Promise.all(
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '666', '1313', '1314', '1315'].map(
           async id => {
             await expect(
-              graphql(
-                SimpleQuestionResponsesQuery,
-                {
-                  id: global.toGlobalId('Question', id),
-                },
-                'internal',
-              ),
+              global.internalClient.request(SimpleQuestionResponsesQuery, {
+                id: global.toGlobalId('Question', id),
+              }),
             ).resolves.toMatchSnapshot(id);
           },
         ),

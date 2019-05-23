@@ -6,5 +6,4 @@ PreviewSectionQuestion:
     name: SectionQuestion
     interfaces:
       - PreviewQuestion
-      - Node
     description: 'A section is just a title in a quiz without any possible answer.'

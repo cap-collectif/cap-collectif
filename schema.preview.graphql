@@ -42,39 +42,6 @@ type CollectStep implements Node {
   title: String!
 }
 
-# A consultation
-type Consultation implements Node {
-  # The ID of an object
-  id: ID!
-
-  # The title of the consultation.
-  title: String!
-
-  # A list of contributor associated with the consultation.
-  contributors(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): UserConnection!
-
-  # Whether the user has vote for a contribution in the related step of this consultation.
-  userHasVote(
-    # The user's login (for example, an email).
-    login: String!
-  ): Boolean!
-
-  # The number of votes in the related step of this consultation.
-  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-09-01 UTC.")
-}
-
 # A step with consultation.
 type ConsultationStep implements Node {
   # The ID of an object
@@ -189,7 +156,7 @@ type Media implements UniformResourceLocatable {
 }
 
 # A question which accept document only.
-type MediaQuestion implements Question & Node {
+type MediaQuestion implements Question {
   # The ID of an object
   id: ID!
 
@@ -225,7 +192,7 @@ type MediaResponse implements Response {
 }
 
 # A question with multiple choices available.
-type MultipleChoiceQuestion implements Question & Node {
+type MultipleChoiceQuestion implements Question {
   # The ID of an object
   id: ID!
 
@@ -815,7 +782,7 @@ type ResponseEdge {
 }
 
 # A section is just a title in a quiz without any possible answer.
-type SectionQuestion implements Question & Node {
+type SectionQuestion implements Question {
   # The ID of an object
   id: ID!
 
@@ -839,7 +806,7 @@ type SectionQuestion implements Question & Node {
 }
 
 # A simple question
-type SimpleQuestion implements Question & Node {
+type SimpleQuestion implements Question {
   # The ID of an object
   id: ID!
 
