@@ -100,10 +100,40 @@ describe('Query.node', () => {
   );
 
   it(
-    'gets the correct ID and type name for questions',
+    'gets the correct ID and type name for simple questions',
     async () => {
       await expect(
-        graphql(NodeQuery, { id: toGlobalId('Question', 'simplequestion1') }),
+        graphql(NodeQuery, { id: toGlobalId('Question', 1) }),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
+
+  it(
+    'gets the correct ID and type name for multiple choice questions',
+    async () => {
+      await expect(
+        graphql(NodeQuery, { id: toGlobalId('Question', 13) }),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
+
+  it(
+    'gets the correct ID and type name for section questions',
+    async () => {
+      await expect(
+        graphql(NodeQuery, { id: toGlobalId('Question', 301) }),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
+
+  it(
+    'gets the correct ID and type name for media questions',
+    async () => {
+      await expect(
+        graphql(NodeQuery, { id: toGlobalId('Question', 11) }),
       ).resolves.toMatchSnapshot();
     },
     TIMEOUT,

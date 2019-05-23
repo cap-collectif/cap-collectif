@@ -189,7 +189,7 @@ type Media implements UniformResourceLocatable {
 }
 
 # A question which accept document only.
-type MediaQuestion implements Question {
+type MediaQuestion implements Question & Node {
   # The ID of an object
   id: ID!
 
@@ -225,7 +225,7 @@ type MediaResponse implements Response {
 }
 
 # A question with multiple choices available.
-type MultipleChoiceQuestion implements Question {
+type MultipleChoiceQuestion implements Question & Node {
   # The ID of an object
   id: ID!
 
@@ -815,7 +815,7 @@ type ResponseEdge {
 }
 
 # A section is just a title in a quiz without any possible answer.
-type SectionQuestion implements Question {
+type SectionQuestion implements Question & Node {
   # The ID of an object
   id: ID!
 
@@ -839,7 +839,7 @@ type SectionQuestion implements Question {
 }
 
 # A simple question
-type SimpleQuestion implements Question {
+type SimpleQuestion implements Question & Node {
   # The ID of an object
   id: ID!
 

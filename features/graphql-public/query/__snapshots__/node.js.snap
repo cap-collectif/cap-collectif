@@ -27,6 +27,24 @@ Object {
 }
 `;
 
+exports[`Query.node gets the correct ID and type name for media questions 1`] = `
+Object {
+  "node": Object {
+    "__typename": "MediaQuestion",
+    "id": "UXVlc3Rpb246MTE=",
+  },
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for multiple choice questions 1`] = `
+Object {
+  "node": Object {
+    "__typename": "MultipleChoiceQuestion",
+    "id": "UXVlc3Rpb246MTM=",
+  },
+}
+`;
+
 exports[`Query.node gets the correct ID and type name for projects 1`] = `
 Object {
   "node": Object {
@@ -54,15 +72,30 @@ Object {
 }
 `;
 
-exports[`Query.node gets the correct ID and type name for questions 1`] = `
+exports[`Query.node gets the correct ID and type name for replies 1`] = `
 Object {
-  "node": null,
+  "node": Object {
+    "__typename": "Reply",
+    "id": "UmVwbHk6cmVwbHkx",
+  },
 }
 `;
 
-exports[`Query.node gets the correct ID and type name for replies 1`] = `
+exports[`Query.node gets the correct ID and type name for section questions 1`] = `
 Object {
-  "node": null,
+  "node": Object {
+    "__typename": "SectionQuestion",
+    "id": "UXVlc3Rpb246MzAx",
+  },
+}
+`;
+
+exports[`Query.node gets the correct ID and type name for simple questions 1`] = `
+Object {
+  "node": Object {
+    "__typename": "SimpleQuestion",
+    "id": "UXVlc3Rpb246MQ==",
+  },
 }
 `;
 
