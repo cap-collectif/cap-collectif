@@ -34,7 +34,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         parent::__construct($mailer, $siteParams, $userResolver);
     }
 
-    public function onCreate(Reply $reply): bool
+    public function onCreate(Reply $reply): void
     {
         $questionnaire = $reply->getQuestionnaire();
         $step = $questionnaire->getStep();
@@ -58,7 +58,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         if ($questionnaire->isNotifyResponseCreate()) {
             $this->mailer->sendMessage(
                 QuestionnaireReplyAdminMessage::create(
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                    $reply->getAuthor()->getEmail(),
                     $reply,
                     $step->getProject()->getTitle(),
                     $questionnaire->getTitle(),
@@ -74,21 +74,23 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             );
         }
 
-        return $this->mailer->sendMessage(
-            QuestionnaireAcknowledgeReplyMessage::create(
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                $reply,
-                $step->getProject()->getTitle(),
-                $reply->getUpdatedAt(),
-                $this->siteParams->getValue('global.site.fullname'),
-                self::QUESTIONNAIRE_REPLY_CREATE_STATE,
-                $userUrl,
-                $configUrl,
-                $this->baseUrl,
-                $this->stepUrlResolver->__invoke($step),
-                $questionnaire->getTitle()
-            )
-        );
+        if ($questionnaire->isAcknowledgeReplies()) {
+            $this->mailer->sendMessage(
+                QuestionnaireAcknowledgeReplyMessage::create(
+                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                    $reply,
+                    $step->getProject()->getTitle(),
+                    $reply->getUpdatedAt(),
+                    $this->siteParams->getValue('global.site.fullname'),
+                    self::QUESTIONNAIRE_REPLY_CREATE_STATE,
+                    $userUrl,
+                    $configUrl,
+                    $this->baseUrl,
+                    $this->stepUrlResolver->__invoke($step),
+                    $questionnaire->getTitle()
+                )
+            );
+        }
     }
 
     public function onUpdate(Reply $reply): bool
@@ -115,7 +117,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         if ($questionnaire->isNotifyResponseUpdate()) {
             $this->mailer->sendMessage(
                 QuestionnaireReplyAdminMessage::create(
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                    $reply->getAuthor()->getEmail(),
                     $reply,
                     $step->getProject()->getTitle(),
                     $questionnaire->getTitle(),
@@ -130,22 +132,23 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 )
             );
         }
-
-        return $this->mailer->sendMessage(
-            QuestionnaireAcknowledgeReplyMessage::create(
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                $reply,
-                $step->getProject()->getTitle(),
-                $reply->getUpdatedAt(),
-                $this->siteParams->getValue('global.site.fullname'),
-                self::QUESTIONNAIRE_REPLY_UPDATE_STATE,
-                $userUrl,
-                $configUrl,
-                $this->baseUrl,
-                $this->stepUrlResolver->__invoke($step),
-                $questionnaire->getTitle()
-            )
-        );
+        if ($questionnaire->isAcknowledgeReplies()) {
+            $this->mailer->sendMessage(
+                QuestionnaireAcknowledgeReplyMessage::create(
+                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                    $reply,
+                    $step->getProject()->getTitle(),
+                    $reply->getUpdatedAt(),
+                    $this->siteParams->getValue('global.site.fullname'),
+                    self::QUESTIONNAIRE_REPLY_UPDATE_STATE,
+                    $userUrl,
+                    $configUrl,
+                    $this->baseUrl,
+                    $this->stepUrlResolver->__invoke($step),
+                    $questionnaire->getTitle()
+                )
+            );
+        }
     }
 
     /**
@@ -178,7 +181,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             RouterInterface::ABSOLUTE_URL
         );
 
-        return $this->mailer->sendMessage(
+        $this->mailer->sendMessage(
             QuestionnaireReplyAdminMessage::createFromDeletedReply(
                 $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                 $reply,
