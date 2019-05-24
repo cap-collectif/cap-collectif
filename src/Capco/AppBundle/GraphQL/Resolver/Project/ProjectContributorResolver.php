@@ -44,20 +44,32 @@ class ProjectContributorResolver implements ResolverInterface
         if (!$args) {
             $args = new Arg(['first' => 0]);
         }
+        if (empty($project->getExternalLink())) {
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                &$totalCount,
+                $project
+            ) {
+                if ($this->useElasticsearch) {
+                    $value = $this->userSearch->getContributorByProject($project, $offset, $limit);
+                    $contributors = $value['results'];
+                    $totalCount = $value['totalCount'];
 
-        $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount, $project) {
-            if ($this->useElasticsearch) {
-                $value = $this->userSearch->getContributorByProject($project, $offset, $limit);
-                $contributors = $value['results'];
-                $totalCount = $value['totalCount'];
+                    return $contributors;
+                }
+                $contributors = $this->contributionsResolver->getProjectContributorsOrdered(
+                    $project
+                );
+                $totalCount = \count($contributors);
 
-                return $contributors;
-            }
-            $contributors = $this->contributionsResolver->getProjectContributorsOrdered($project);
-            $totalCount = \count($contributors);
+                return [];
+            });
+        } else {
+            $paginator = new Paginator(function () use (&$totalCount, $project) {
+                $totalCount = $project->getContributionsCount();
 
-            return [];
-        });
+                return [];
+            });
+        }
 
         $connection = $paginator->auto($args, $totalCount);
         $connection->{'anonymousCount'} = $this->getAnonymousCount($project);
@@ -68,7 +80,7 @@ class ProjectContributorResolver implements ResolverInterface
 
     private function getAnonymousCount(Project $project): int
     {
-        if (!$project->hasVotableStep()) {
+        if (!$project->hasVotableStep() || !empty($project->getExternalLink())) {
             return 0;
         }
 

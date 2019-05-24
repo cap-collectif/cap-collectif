@@ -117,8 +117,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
   getTitleContent = () => {
     const { project } = this.props;
-    const externalLink = project.links ? project.links.external : null;
-    const link = externalLink || project.url;
+    const link = project.externalLink || project.url;
     const tooltip = <Tooltip id={`project-${project.id}-tooltip`}>{project.title}</Tooltip>;
 
     return (
@@ -126,7 +125,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
         <a href={link}>
           <div style={{ width: '98%' }}>
             <Truncate lines={3}>{project.title}</Truncate>
-            {externalLink && (
+            {project.externalLink && (
               <svg
                 style={{
                   marginLeft: 5,
@@ -218,9 +217,7 @@ export default createFragmentContainer(ProjectPreviewBody, {
       id
       title
       hasParticipativeStep
-      links {
-        external
-      }
+      externalLink
       url
       steps {
         title

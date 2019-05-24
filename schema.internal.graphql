@@ -3451,7 +3451,6 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
   cover: Media
   contributionsCount: Int!
   hasParticipativeStep: Boolean!
-  links: ProjectLinks!
   type: ProjectType
   themes: [Theme!]
   votableSteps: [ProposalStep!]!
@@ -3499,6 +3498,9 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
   isVotesCounterDisplayable: Boolean!
   isContributionsCounterDisplayable: Boolean!
   isParticipantsCounterDisplayable: Boolean!
+
+  # If it s an external project
+  externalLink: String
 }
 
 # A connection to a list of items.
@@ -3550,12 +3552,6 @@ type ProjectEdge {
 
   # A cursor for use in pagination.
   cursor: String!
-}
-
-# Links
-type ProjectLinks {
-  show: String
-  external: String
 }
 
 # Ways in which project can be ordered.

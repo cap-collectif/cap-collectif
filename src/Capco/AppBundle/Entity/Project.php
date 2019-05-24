@@ -214,6 +214,16 @@ class Project implements IndexableInterface
      */
     private $districts;
 
+    /**
+     * @ORM\Column(name="participants_count", type="integer", nullable=false)
+     */
+    private $participantsCount = 0;
+
+    /**
+     * @ORM\Column(name="contributions_count", type="integer", nullable=false)
+     */
+    private $contributionsCount = 0;
+
     public function __construct()
     {
         $this->restrictedViewerGroups = new ArrayCollection();
@@ -1052,6 +1062,33 @@ class Project implements IndexableInterface
         }
 
         return false;
+    }
+
+    /**
+     * If it's an external project we set manually the counter of participant and contributions.
+     */
+    public function getParticipantsCount(): int
+    {
+        return $this->participantsCount;
+    }
+
+    public function setParticipantsCount(int $participantsCount): self
+    {
+        $this->participantsCount = $participantsCount;
+
+        return $this;
+    }
+
+    public function getContributionsCount(): int
+    {
+        return $this->contributionsCount;
+    }
+
+    public function setContributionsCount(int $contributionsCount = null): self
+    {
+        $this->contributionsCount = $contributionsCount;
+
+        return $this;
     }
 
     /**
