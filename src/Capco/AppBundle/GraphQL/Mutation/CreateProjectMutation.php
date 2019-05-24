@@ -6,7 +6,7 @@ use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Driver\DriverException;
-use Capco\UserBundle\Form\Type\UserFormType;
+use Capco\UserBundle\Form\Type\ProjectFormType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
@@ -33,9 +33,8 @@ class CreateProjectMutation implements MutationInterface
     {
         $arguments = $input->getRawArguments();
 
-        $user = new Project();
-
-        $form = $this->formFactory->create(UserFormType::class, $user, [
+        $project = new Project();
+        $form = $this->formFactory->create(ProjectFormType::class, $project, [
             'csrf_protection' => false,
         ]);
 
@@ -47,7 +46,7 @@ class CreateProjectMutation implements MutationInterface
         }
 
         try {
-            $this->em->persist($user);
+            $this->em->persist($project);
             $this->em->flush();
         } catch (DriverException $e) {
             $this->logger->error(
@@ -57,6 +56,6 @@ class CreateProjectMutation implements MutationInterface
             throw new BadRequestHttpException('Sorry, please retry.');
         }
 
-        return ['user' => $user];
+        return ['project' => $project];
     }
 }

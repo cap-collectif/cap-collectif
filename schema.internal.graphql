@@ -1619,11 +1619,8 @@ type CreateProjectDistrictPayload {
 }
 
 input CreateProjectInput {
-  # The user's username
+  # The project's title
   title: String
-
-  # The user's email
-  email: String!
   clientMutationId: String
 }
 

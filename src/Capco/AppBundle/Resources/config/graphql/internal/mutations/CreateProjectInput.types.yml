@@ -5,4 +5,4 @@ CreateProjectInput:
     fields:
       title:
         type: 'String'
-        description: "The user's username"
+        description: "The project's title"
