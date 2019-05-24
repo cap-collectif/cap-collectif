@@ -91,7 +91,7 @@ class UpdateReplyMutation implements MutationInterface
         }
 
         $this->em->flush();
-        $this->redisStorageHelper->recomputeUserCounters($user);
+        $this->redisStorageHelper->recomputeUserCounters($viewer);
 
         return ['reply' => $reply];
     }
