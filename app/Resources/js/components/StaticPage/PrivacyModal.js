@@ -8,6 +8,8 @@ import type { State } from '../../types';
 
 type Props = {
   privacyContent: string,
+  title: string,
+  linkKeyword?: string,
 };
 
 type PrivacyModalState = {
@@ -15,6 +17,10 @@ type PrivacyModalState = {
 };
 
 export class PrivacyModal extends React.Component<Props, PrivacyModalState> {
+  static defaultProps = {
+    title: 'confidentialite.title',
+  };
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -23,11 +29,12 @@ export class PrivacyModal extends React.Component<Props, PrivacyModalState> {
   }
 
   render() {
-    const { privacyContent } = this.props;
+    const { privacyContent, title, linkKeyword } = this.props;
     const { showModal } = this.state;
     return (
       <div className="privacy-policy">
         <div>
+          {linkKeyword && <FormattedMessage id={linkKeyword} />}&nbsp;
           <Button
             id="privacy-policy"
             className="p-0"
@@ -37,7 +44,7 @@ export class PrivacyModal extends React.Component<Props, PrivacyModalState> {
               this.setState({ showModal: true });
             }}
             name="privacy">
-            <FormattedMessage id="confidentialite.title" />
+            <FormattedMessage id={title} />
           </Button>
         </div>
         <Modal

@@ -87,17 +87,27 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
         id="registration.charte"
         values={
           Object {
-            "link": <a
-              className="external-link"
-              href="/charte"
+            "link": <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              className="p-0 text-decoration-none"
+              disabled={false}
+              onClick={[Function]}
+              variant="link"
             >
               la charte
-            </a>,
+            </Button>,
           }
         }
       />
        
-      <Connect(PrivacyModal) />
+      <Connect(PrivacyModal)
+        className="text-decoration-none"
+        linkKeyword="and-the"
+        title="capco.module.privacy_policy"
+      />
     </span>
   </Field>
   <Field
@@ -222,17 +232,27 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         id="registration.charte"
         values={
           Object {
-            "link": <a
-              className="external-link"
-              href="/charte"
+            "link": <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              className="p-0 text-decoration-none"
+              disabled={false}
+              onClick={[Function]}
+              variant="link"
             >
               la charte
-            </a>,
+            </Button>,
           }
         }
       />
        
-      <Connect(PrivacyModal) />
+      <Connect(PrivacyModal)
+        className="text-decoration-none"
+        linkKeyword="and-the"
+        title="capco.module.privacy_policy"
+      />
     </span>
   </Field>
   <Field
@@ -394,17 +414,27 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         id="registration.charte"
         values={
           Object {
-            "link": <a
-              className="external-link"
-              href="/charte"
+            "link": <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              className="p-0 text-decoration-none"
+              disabled={false}
+              onClick={[Function]}
+              variant="link"
             >
               la charte
-            </a>,
+            </Button>,
           }
         }
       />
        
-      <Connect(PrivacyModal) />
+      <Connect(PrivacyModal)
+        className="text-decoration-none"
+        linkKeyword="and-the"
+        title="capco.module.privacy_policy"
+      />
     </span>
   </Field>
   <Field
@@ -554,17 +584,27 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         id="registration.charte"
         values={
           Object {
-            "link": <a
-              className="external-link"
-              href="/charte"
+            "link": <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              className="p-0 text-decoration-none"
+              disabled={false}
+              onClick={[Function]}
+              variant="link"
             >
               la charte
-            </a>,
+            </Button>,
           }
         }
       />
        
-      <Connect(PrivacyModal) />
+      <Connect(PrivacyModal)
+        className="text-decoration-none"
+        linkKeyword="and-the"
+        title="capco.module.privacy_policy"
+      />
     </span>
   </Field>
   <Field

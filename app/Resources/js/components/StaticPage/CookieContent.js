@@ -11,31 +11,45 @@ type Props = {
   cookiesList: string,
   cookiesList: string,
 };
+type cookieType = { cookieType: number, nbCookies: number };
+
+function getCookieType(analyticsJs: ?string, adJs: ?string): cookieType {
+  if (analyticsJs !== '' && adJs === '') {
+    return {
+      cookieType: 0,
+      nbCookies: 1,
+    };
+  }
+  if (adJs !== '' && analyticsJs === '') {
+    return {
+      cookieType: 2,
+      nbCookies: 1,
+    };
+  }
+  if (adJs !== '' && analyticsJs !== '') {
+    return {
+      cookieType: 3,
+      nbCookies: 2,
+    };
+  }
+  return {
+    cookieType: -1,
+    nbCookies: 0,
+  };
+}
 
 export class CookieContent extends React.Component<Props, State> {
   render() {
     const { analyticsJs, adJs, cookiesList } = this.props;
-    let cookieType = -1;
-    let nbCookies = 0;
-
-    if (analyticsJs !== '' && adJs === '') {
-      cookieType = 0;
-      nbCookies = 1;
-    } else if (adJs !== '' && analyticsJs === '') {
-      cookieType = 2;
-      nbCookies = 1;
-    } else if (adJs !== '' && analyticsJs !== '') {
-      cookieType = 3;
-      nbCookies = 2;
-    }
+    const cookies = getCookieType(analyticsJs, adJs);
 
     return (
       <div>
-        {cookieType > 0 ? (
+        {cookies.cookieType > 0 ? (
           <div>
             <FormattedHTMLMessage
               id="cookies-page-texte-tmp-part1"
-              values={{ platformLink: baseUrl, cookieType }}
+              values={{ platformLink: baseUrl, cookieType: cookies.cookieType }}
             />
           </div>
         ) : (
@@ -49,7 +63,7 @@ export class CookieContent extends React.Component<Props, State> {
         <FormattedHTMLMessage id="cookies-page-texte-part1-2" values={{ platformLink: baseUrl }} />
         <FormattedHTMLMessage
           id="cookies-page-texte-tmp-part1-3"
-          values={{ platformLink: baseUrl, nbCookies }}
+          values={{ platformLink: baseUrl, nbCookies: cookies.nbCookies }}
         />
         <div className="content" dangerouslySetInnerHTML={{ __html: cookiesList }} />
         <FormattedHTMLMessage id="cookies-page-texte-part2" values={{ platformLink: baseUrl }} />

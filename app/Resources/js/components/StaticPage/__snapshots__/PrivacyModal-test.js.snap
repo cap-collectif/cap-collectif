@@ -5,6 +5,11 @@ exports[`<PrivacyModal /> should render correctly close 1`] = `
   className="privacy-policy"
 >
   <div>
+    <FormattedMessage
+      id="and-the"
+      values={Object {}}
+    />
+     
     <Button
       active={false}
       block={false}
@@ -103,6 +108,7 @@ exports[`<PrivacyModal /> should render correctly open 1`] = `
   className="privacy-policy"
 >
   <div>
+     
     <Button
       active={false}
       block={false}
@@ -116,7 +122,7 @@ exports[`<PrivacyModal /> should render correctly open 1`] = `
       variant="link"
     >
       <FormattedMessage
-        id="confidentialite.title"
+        id="new-title"
         values={Object {}}
       />
     </Button>
