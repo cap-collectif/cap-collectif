@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Driver\DriverException;
 use Capco\UserBundle\Form\Type\ProjectFormType;
+use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
@@ -18,15 +19,18 @@ class CreateProjectMutation implements MutationInterface
     private $em;
     private $formFactory;
     private $logger;
+    private $userRepository;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        UserRepository $userRepository
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
+        $this->userRepository = $userRepository;
     }
 
     public function __invoke(Argument $input): array
@@ -34,6 +38,12 @@ class CreateProjectMutation implements MutationInterface
         $arguments = $input->getRawArguments();
 
         $project = new Project();
+        $project->setTitle($arguments['title']);
+
+        $project->setAuthors($this->userRepository->hydrateFromIds($arguments['authors']));
+        $project->setProjectType($arguments['projectType']);
+        $project->setTitle($arguments['title']);
+
         $form = $this->formFactory->create(ProjectFormType::class, $project, [
             'csrf_protection' => false,
         ]);

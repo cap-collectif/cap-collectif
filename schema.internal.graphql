@@ -1620,7 +1620,16 @@ type CreateProjectDistrictPayload {
 
 input CreateProjectInput {
   # The project's title
-  title: String
+  title: String!
+
+  # The project's authors
+  authors: [String!]!
+
+  # The project's usage
+  usage: String!
+
+  # The project's type
+  type: String!
   clientMutationId: String
 }
 

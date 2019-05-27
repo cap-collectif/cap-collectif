@@ -13,7 +13,7 @@ const ProjectContentAdminPage = () => (
           </h4>
         </div>
         <div className="box-content">
-          <ProjectContentAdminForm formName="lol" />
+          <ProjectContentAdminForm />
         </div>
       </div>
     </form>

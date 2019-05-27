@@ -400,10 +400,10 @@ class Project implements IndexableInterface
      */
     public function getAuthors()
     {
-        // $authors = [];
-        // foreach ($this->authors as $projectAuthor) {
-        //     $authors[] = $projectAuthor->getUser();
-        // }
+        $authors = [];
+        foreach ($this->authors as $projectAuthor) {
+            $authors[] = $projectAuthor->getUser();
+        }
 
         return $this->authors;
     }

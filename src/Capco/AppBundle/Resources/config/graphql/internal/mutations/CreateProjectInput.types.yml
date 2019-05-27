@@ -4,5 +4,14 @@ CreateProjectInput:
     description: 'Create a project'
     fields:
       title:
-        type: 'String'
+        type: 'String!'
         description: "The project's title"
+      authors:
+        type: '[String!]!'
+        description: "The project's authors"
+      usage:
+        type: 'String!'
+        description: "The project's usage"
+      type:
+        type: 'String!'
+        description: "The project's type"

@@ -1,10 +1,13 @@
 // @flow
 import React from 'react';
+import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import { type FormProps, reduxForm, Field } from 'redux-form';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
 import renderComponent from '../../Form/Field';
 import UserListField from '../Field/UserListField';
+import ProjectTypeListField from '../Field/ProjectTypeListField';
 
 type Props = {|
   ...FormProps,
@@ -24,21 +27,19 @@ const projectTerms = [
   },
 ];
 
-const onSubmit = () => {};
-
-const validate = ({ title }: any) => {
+const onSubmit = (values: any) => {
+  console.log(values);
+};
+const validate = () => {
   const errors = {};
 
-  if (!title) {
-    errors.title = 'global.required';
-  } else if (title.length < 2) {
-    errors.title = 'global.required';
-  }
   return errors;
 };
 
+const formName = 'projectAdmin';
+
 const ProjectContentAdminForm = (props: Props) => {
-  const { formName, handleSubmit, intl } = props;
+  const { handleSubmit, intl, invalid, submitting, pristine } = props;
 
   return (
     <form onSubmit={handleSubmit} id={formName}>
@@ -50,11 +51,12 @@ const ProjectContentAdminForm = (props: Props) => {
       />
       <UserListField
         id="project-author"
-        name="author"
+        name="authors"
         clearable
         selectFieldIsObject
         debounce
         autoload={false}
+        multi
         labelClassName="control-label"
         inputClassName="fake-inputClassName"
         placeholder={intl.formatMessage({ id: 'all-the-authors' })}
@@ -62,20 +64,7 @@ const ProjectContentAdminForm = (props: Props) => {
         ariaControls="EventListFilters-filter-author-listbox"
       />
 
-      <Field
-        name="type"
-        type="select"
-        component={renderComponent}
-        label={
-          <span>
-            <FormattedMessage id="admin.fields.project.type.title" />
-          </span>
-        }>
-        <FormattedMessage id="admin.help.project.type">
-          {(message: string) => <option value="">{message}</option>}
-        </FormattedMessage>
-      </Field>
-
+      <ProjectTypeListField />
       <Field
         name="usage"
         type="select"
@@ -91,13 +80,23 @@ const ProjectContentAdminForm = (props: Props) => {
           </option>
         ))}
       </Field>
+      <Button type="submit" disabled={invalid || submitting || pristine} bsStyle="primary">
+        {submitting ? (
+          <FormattedMessage id="global.loading" />
+        ) : (
+          <FormattedMessage id="global.save" />
+        )}
+      </Button>
     </form>
   );
 };
 
-export default injectIntl(
+const form = injectIntl(
   reduxForm({
     validate,
     onSubmit,
+    form: formName,
   })(ProjectContentAdminForm),
 );
+
+export default connect()(form);
