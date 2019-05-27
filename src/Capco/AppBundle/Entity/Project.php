@@ -229,6 +229,11 @@ class Project implements IndexableInterface
      */
     private $externalContributionsCount;
 
+    /**
+     * @ORM\Column(name="external_votes_count", type="integer", nullable=true)
+     */
+    private $externalVotesCount;
+
     public function __construct()
     {
         $this->restrictedViewerGroups = new ArrayCollection();
@@ -1086,6 +1091,9 @@ class Project implements IndexableInterface
         if ($isExternal && null === $this->externalContributionsCount) {
             $this->externalContributionsCount = 0;
         }
+        if ($isExternal && null === $this->externalVotesCount) {
+            $this->externalVotesCount = 0;
+        }
 
         return $this;
     }
@@ -1095,7 +1103,7 @@ class Project implements IndexableInterface
         return $this->isExternal;
     }
 
-    public function getExternalParticipantsCount(): int
+    public function getExternalParticipantsCount(): ?int
     {
         return $this->externalParticipantsCount;
     }
@@ -1115,6 +1123,18 @@ class Project implements IndexableInterface
     public function setExternalContributionsCount(?int $externalContributionsCount = null): self
     {
         $this->externalContributionsCount = $externalContributionsCount;
+
+        return $this;
+    }
+
+    public function getExternalVotesCount(): ?int
+    {
+        return $this->externalVotesCount;
+    }
+
+    public function setExternalVotesCount(?int $externalVotesCount): self
+    {
+        $this->externalVotesCount = $externalVotesCount;
 
         return $this;
     }

@@ -9,6 +9,7 @@ import RemainingTime from '../../Utils/RemainingTime';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
 import ProjectPreviewCounters from './ProjectPreviewCounters';
+import ProjectPreviewExternalCounters from './ProjectPreviewExternalCounters';
 import Card from '../../Ui/Card/Card';
 import type { ProjectPreviewBody_project } from '~relay/ProjectPreviewBody_project.graphql';
 
@@ -190,6 +191,8 @@ export class ProjectPreviewBody extends React.Component<Props> {
           {this.getTitle()}
           {/* $FlowFixMe $fragmentRefs */}
           {project.hasParticipativeStep && <ProjectPreviewCounters project={project} />}
+          {/* $FlowFixMe $fragmentRefs */}
+          {project.isExternal && <ProjectPreviewExternalCounters project={project} />}
         </div>
         {actualStep && (
           <ProjectPreviewProgressBar
@@ -233,6 +236,7 @@ export default createFragmentContainer(ProjectPreviewBody, {
         }
       }
       ...ProjectPreviewCounters_project
+      ...ProjectPreviewExternalCounters_project
       ...ProjectPreviewThemes_project
     }
   `,

@@ -19,32 +19,105 @@ Scenario: GraphQL client wants to list projects by latest
   """
   Then the JSON response should match:
   """
-    {
-      "data": {
-        "projects": {
-          "totalCount":17,
-          "edges": [
-            {"node":{"_id":"project1"}},
-            {"node":{"_id":"project2"}},
-            {"node":{"_id":"project3"}},
-            {"node":{"_id":"project4"}},
-            {"node":{"_id":"project5"}},
-            {"node":{"_id":"project6"}},
-            {"node":{"_id":"project7"}},
-            {"node":{"_id":"project8"}},
-            {"node":{"_id":"project9"}},
-            {"node":{"_id":"project10"}},
-            {"node":{"_id":"project11"}},
-            {"node":{"_id":"project12"}},
-            {"node":{"_id":"project13"}},
-            {"node":{"_id":"project14"}},
-            {"node":{"_id":"project15"}},
-            {"node":{"_id":"project16"}},
-            {"node":{"_id":"project21"}}
-          ]
-        }
+{
+   "data":{
+      "projects":{
+         "totalCount":18,
+         "edges":[
+            {
+               "node":{
+                  "_id":"project1"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project2"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project3"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project4"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project5"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project6"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project7"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project8"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project9"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project10"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project11"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project12"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project13"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project14"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project15"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project16"
+               }
+            },
+            {
+               "node":{
+                  "_id":"externalProject"
+               }
+            },
+            {
+               "node":{
+                  "_id":"project21"
+               }
+            }
+         ]
       }
-    }
+   }
+}
   """
 
 Scenario: GraphQL client wants to list projects order by popularity
@@ -68,13 +141,13 @@ Scenario: GraphQL client wants to list projects order by popularity
   {
    "data":{
       "projects":{
-      "totalCount":17,
+      "totalCount":18,
          "edges":[
             {"node":{"_id":"project1"}},
             {"node":{"_id":"project5"}},
+            {"node":{"_id":"externalProject"}},
             {"node":{"_id":"project2"}},
-            {"node":{"_id":"project3"}},
-            {"node":{"_id":"project10"}}
+            {"node":{"_id":"project3"}}
           ]
          }
       }

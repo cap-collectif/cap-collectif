@@ -266,7 +266,7 @@ final class ProjectAdmin extends CapcoAdmin
             // TODO idea : if the external project is from a capco platform we can get participants an contribution from our API
             $formMapper
                 ->add('isExternal', CheckboxType::class, [
-                    'label' => 'admin.fields.project.externalLink',
+                    'label' => 'external-project',
                     'required' => false,
                 ])
                 ->add('externalLink', UrlType::class, [
@@ -277,6 +277,9 @@ final class ProjectAdmin extends CapcoAdmin
                     'label' => 'admin.fields.project.participantsCount',
                 ])
                 ->add('externalContributionsCount', NumberType::class, [
+                    'label' => 'admin.fields.project.contributionsCount',
+                ])
+                ->add('externalVotesCount', NumberType::class, [
                     'label' => 'admin.fields.project.votesCount',
                 ]);
         }
