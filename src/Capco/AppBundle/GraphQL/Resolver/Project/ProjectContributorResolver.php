@@ -44,7 +44,7 @@ class ProjectContributorResolver implements ResolverInterface
         if (!$args) {
             $args = new Arg(['first' => 0]);
         }
-        if (empty($project->getExternalLink())) {
+        if (!$project->isExternal()) {
             $paginator = new Paginator(function (int $offset, int $limit) use (
                 &$totalCount,
                 $project
@@ -65,7 +65,7 @@ class ProjectContributorResolver implements ResolverInterface
             });
         } else {
             $paginator = new Paginator(function () use (&$totalCount, $project) {
-                $totalCount = $project->getContributionsCount();
+                $totalCount = $project->getExternalParticipantsCount();
 
                 return [];
             });
@@ -80,7 +80,7 @@ class ProjectContributorResolver implements ResolverInterface
 
     private function getAnonymousCount(Project $project): int
     {
-        if (!$project->hasVotableStep() || !empty($project->getExternalLink())) {
+        if (!$project->hasVotableStep() || $project->isExternal()) {
             return 0;
         }
 

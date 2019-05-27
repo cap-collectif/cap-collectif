@@ -11,7 +11,7 @@ type Props = { project: ProjectCover_project };
 class ProjectCover extends React.Component<Props> {
   render() {
     const { project } = this.props;
-    const link = project.externalLink ? project.externalLink : project.url;
+    const link = project.isExternal ? project.externalLink : project.url;
     const linkClasses =
       project.cover && project.cover.url
         ? classNames({
@@ -37,6 +37,7 @@ export default createFragmentContainer(ProjectCover, {
       cover {
         url
       }
+      isExternal
       externalLink
       url
       ...ProjectImage_project

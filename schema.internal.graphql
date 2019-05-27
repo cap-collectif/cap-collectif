@@ -3500,7 +3500,10 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
   isParticipantsCounterDisplayable: Boolean!
 
   # If it s an external project
-  externalLink: String
+  isExternal: Boolean!
+
+  # Link of external project
+  externalLink: URI
 }
 
 # A connection to a list of items.

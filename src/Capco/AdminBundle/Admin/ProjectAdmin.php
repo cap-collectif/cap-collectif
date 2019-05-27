@@ -14,6 +14,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\CoreBundle\Validator\ErrorElement;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -264,14 +265,18 @@ final class ProjectAdmin extends CapcoAdmin
         ) {
             // TODO idea : if the external project is from a capco platform we can get participants an contribution from our API
             $formMapper
+                ->add('isExternal', CheckboxType::class, [
+                    'label' => 'admin.fields.project.externalLink',
+                    'required' => false,
+                ])
                 ->add('externalLink', UrlType::class, [
                     'label' => 'admin.fields.project.externalLink',
                     'required' => false,
                 ])
-                ->add('participantsCount', NumberType::class, [
+                ->add('externalParticipantsCount', NumberType::class, [
                     'label' => 'admin.fields.project.participantsCount',
                 ])
-                ->add('contributionsCount', NumberType::class, [
+                ->add('externalContributionsCount', NumberType::class, [
                     'label' => 'admin.fields.project.votesCount',
                 ]);
         }

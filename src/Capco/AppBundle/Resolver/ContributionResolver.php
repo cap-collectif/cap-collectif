@@ -271,8 +271,8 @@ class ContributionResolver
 
     public function countProjectContributions(Project $project): int
     {
-        if (!empty($project->getExternalLink())) {
-            return $project->getContributionsCount();
+        if ($project->isExternal()) {
+            return $project->getExternalContributionsCount();
         }
 
         $count = 0;

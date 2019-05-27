@@ -125,7 +125,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
         <a href={link}>
           <div style={{ width: '98%' }}>
             <Truncate lines={3}>{project.title}</Truncate>
-            {project.externalLink && (
+            {project.isExternal && project.externalLink && (
               <svg
                 style={{
                   marginLeft: 5,
@@ -218,6 +218,7 @@ export default createFragmentContainer(ProjectPreviewBody, {
       title
       hasParticipativeStep
       externalLink
+      isExternal
       url
       steps {
         title

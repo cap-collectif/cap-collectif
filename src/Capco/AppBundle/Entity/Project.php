@@ -215,14 +215,19 @@ class Project implements IndexableInterface
     private $districts;
 
     /**
-     * @ORM\Column(name="participants_count", type="integer", nullable=false)
+     * @ORM\Column(name="is_external", type="boolean")
      */
-    private $participantsCount = 0;
+    private $isExternal = false;
 
     /**
-     * @ORM\Column(name="contributions_count", type="integer", nullable=false)
+     * @ORM\Column(name="external_participants_count", type="integer", nullable=true)
      */
-    private $contributionsCount = 0;
+    private $externalParticipantsCount;
+
+    /**
+     * @ORM\Column(name="external_contributions_count", type="integer", nullable=true)
+     */
+    private $externalContributionsCount;
 
     public function __construct()
     {
@@ -1067,26 +1072,49 @@ class Project implements IndexableInterface
     /**
      * If it's an external project we set manually the counter of participant and contributions.
      */
-    public function getParticipantsCount(): int
+    public function getIsExternal(): bool
     {
-        return $this->participantsCount;
+        return $this->isExternal;
     }
 
-    public function setParticipantsCount(int $participantsCount): self
+    public function setIsExternal(bool $isExternal): self
     {
-        $this->participantsCount = $participantsCount;
+        $this->isExternal = $isExternal;
+        if ($isExternal && null === $this->externalParticipantsCount) {
+            $this->externalParticipantsCount = 0;
+        }
+        if ($isExternal && null === $this->externalContributionsCount) {
+            $this->externalContributionsCount = 0;
+        }
 
         return $this;
     }
 
-    public function getContributionsCount(): int
+    public function isExternal(): bool
     {
-        return $this->contributionsCount;
+        return $this->isExternal;
     }
 
-    public function setContributionsCount(int $contributionsCount = null): self
+    public function getExternalParticipantsCount(): int
     {
-        $this->contributionsCount = $contributionsCount;
+        return $this->externalParticipantsCount;
+    }
+
+    public function setExternalParticipantsCount(?int $externalParticipantsCount): self
+    {
+        $this->externalParticipantsCount = $externalParticipantsCount;
+
+        return $this;
+    }
+
+    public function getExternalContributionsCount(): ?int
+    {
+        return $this->externalContributionsCount;
+    }
+
+    public function setExternalContributionsCount(?int $externalContributionsCount = null): self
+    {
+        $this->externalContributionsCount = $externalContributionsCount;
 
         return $this;
     }

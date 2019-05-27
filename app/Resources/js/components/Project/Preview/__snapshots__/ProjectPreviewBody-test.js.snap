@@ -13,6 +13,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "externalLink": "http://test.com",
           "hasParticipativeStep": false,
           "id": "1",
+          "isExternal": true,
           "steps": Array [
             Object {
               "endAt": "2016-12-28T09:00:24+01:00",
@@ -140,6 +141,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "externalLink": "http://test.com",
         "hasParticipativeStep": false,
         "id": "1",
+        "isExternal": true,
         "steps": Array [
           Object {
             "endAt": "2016-12-28T09:00:24+01:00",
@@ -205,6 +207,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "externalLink": "http://test.com",
           "hasParticipativeStep": false,
           "id": "1",
+          "isExternal": true,
           "steps": Array [
             Object {
               "endAt": "2017-12-28T09:00:24+01:00",
@@ -323,6 +326,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "externalLink": "http://test.com",
         "hasParticipativeStep": false,
         "id": "1",
+        "isExternal": true,
         "steps": Array [
           Object {
             "endAt": "2017-12-28T09:00:24+01:00",
@@ -385,6 +389,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "externalLink": "http://test.com",
           "hasParticipativeStep": true,
           "id": "1",
+          "isExternal": true,
           "steps": Array [
             Object {
               "endAt": null,
@@ -508,6 +513,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "externalLink": "http://test.com",
           "hasParticipativeStep": true,
           "id": "1",
+          "isExternal": true,
           "steps": Array [
             Object {
               "endAt": null,
@@ -572,6 +578,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "externalLink": "http://test.com",
         "hasParticipativeStep": true,
         "id": "1",
+        "isExternal": true,
         "steps": Array [
           Object {
             "endAt": null,
@@ -649,6 +656,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "externalLink": "http://test.com",
           "hasParticipativeStep": true,
           "id": "1",
+          "isExternal": true,
           "steps": Array [
             Object {
               "endAt": null,
@@ -772,6 +780,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "externalLink": "http://test.com",
           "hasParticipativeStep": true,
           "id": "1",
+          "isExternal": true,
           "steps": Array [
             Object {
               "endAt": null,
@@ -836,6 +845,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "externalLink": "http://test.com",
         "hasParticipativeStep": true,
         "id": "1",
+        "isExternal": true,
         "steps": Array [
           Object {
             "endAt": null,
@@ -913,6 +923,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "externalLink": "http://test.com",
           "hasParticipativeStep": false,
           "id": "1",
+          "isExternal": true,
           "steps": Array [
             Object {
               "endAt": null,
@@ -1049,6 +1060,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "externalLink": "http://test.com",
         "hasParticipativeStep": false,
         "id": "1",
+        "isExternal": true,
         "steps": Array [
           Object {
             "endAt": null,
@@ -1123,6 +1135,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
           "externalLink": "http://test.com",
           "hasParticipativeStep": false,
           "id": "1",
+          "isExternal": true,
           "steps": Array [
             Object {
               "endAt": "2016-12-28T09:00:24+01:00",
@@ -1241,6 +1254,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
         "externalLink": "http://test.com",
         "hasParticipativeStep": false,
         "id": "1",
+        "isExternal": true,
         "steps": Array [
           Object {
             "endAt": "2016-12-28T09:00:24+01:00",
