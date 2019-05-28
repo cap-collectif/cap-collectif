@@ -14,10 +14,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Required;
 
@@ -263,25 +260,10 @@ final class ProjectAdmin extends CapcoAdmin
                 ->get('security.authorization_checker')
                 ->isGranted('ROLE_SUPER_ADMIN')
         ) {
-            // TODO idea : if the external project is from a capco platform we can get participants an contribution from our API
-            $formMapper
-                ->add('isExternal', CheckboxType::class, [
-                    'label' => 'external-project',
-                    'required' => false,
-                ])
-                ->add('externalLink', UrlType::class, [
-                    'label' => 'admin.fields.project.externalLink',
-                    'required' => false,
-                ])
-                ->add('externalParticipantsCount', NumberType::class, [
-                    'label' => 'admin.fields.project.participantsCount',
-                ])
-                ->add('externalContributionsCount', NumberType::class, [
-                    'label' => 'admin.fields.project.contributionsCount',
-                ])
-                ->add('externalVotesCount', NumberType::class, [
-                    'label' => 'admin.fields.project.votesCount',
-                ]);
+            $formMapper->add('externalLink', null, [
+                'label' => 'admin.fields.project.externalLink',
+                'required' => false,
+            ]);
         }
 
         $formMapper

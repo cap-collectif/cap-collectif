@@ -36,6 +36,9 @@ InternalProject:
       hasParticipativeStep:
         type: Boolean!
         resolve: '@=value.hasParticipativeStep()'
+      links:
+        type: 'ProjectLinks!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectLinksResolver", [value])'
       type:
         type: 'ProjectType'
         resolve: '@=value.getProjectType()'
@@ -84,9 +87,3 @@ InternalProject:
         type: 'Boolean!'
       isParticipantsCounterDisplayable:
         type: 'Boolean!'
-      isExternal:
-        type: 'Boolean!'
-        description: 'If it s an external project'
-      externalLink:
-        type: 'URI'
-        description: 'Link of external project'
