@@ -13,14 +13,6 @@ trait AdminEventTrait
     }
 
     /**
-     * @When I go to the admin comment list page
-     */
-    public function iGoToTheAdminCommentListPage()
-    {
-        $this->iVisitedPage('AdminCommentListPage');
-    }
-
-    /**
      * @When I open the import events modal
      */
     public function iOpenTheImportEventsModal()
