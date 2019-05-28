@@ -33,12 +33,6 @@ class CreateProjectDistrictMutation implements MutationInterface
     {
         $projectDistrict = new ProjectDistrict();
         $values = $input->getRawArguments();
-        if (!$values['border']['enabled']) {
-            unset($values['border']);
-        }
-        if (!$values['background']['enabled']) {
-            unset($values['background']);
-        }
 
         $form = $this->formFactory->create(ProjectDistrictType::class, $projectDistrict);
 
