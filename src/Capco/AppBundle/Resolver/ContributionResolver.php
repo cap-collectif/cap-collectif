@@ -271,10 +271,6 @@ class ContributionResolver
 
     public function countProjectContributions(Project $project): int
     {
-        if ($project->isExternal()) {
-            return $project->getExternalContributionsCount();
-        }
-
         $count = 0;
         foreach ($project->getSteps() as $step) {
             $count += $this->stepContributionsResolver->resolveSync(

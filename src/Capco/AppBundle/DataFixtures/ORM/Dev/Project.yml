@@ -197,17 +197,3 @@ Capco\AppBundle\Entity\Project:
     exportable: true
     publishedAt: <(new \DateTime('now - 40 days'))>
     visibility: 2
-  p22:
-    id: 'externalProject'
-    title: Projet externe
-    projectType: '@projectType4'
-    Author: '@user4'
-    themes: []
-    exportable: true
-    publishedAt: <(new \DateTime('now - 40 days'))>
-    visibility: 2
-    externalVotesCount: 86
-    externalParticipantsCount: 69
-    externalContributionsCount: 51
-    isExternal: true
-    externalLink: 'http://projet.noob.fr'

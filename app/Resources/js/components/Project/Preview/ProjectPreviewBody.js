@@ -9,7 +9,6 @@ import RemainingTime from '../../Utils/RemainingTime';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
 import ProjectPreviewCounters from './ProjectPreviewCounters';
-import ProjectPreviewExternalCounters from './ProjectPreviewExternalCounters';
 import Card from '../../Ui/Card/Card';
 import type { ProjectPreviewBody_project } from '~relay/ProjectPreviewBody_project.graphql';
 
@@ -118,7 +117,8 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
   getTitleContent = () => {
     const { project } = this.props;
-    const link = project.externalLink || project.url;
+    const externalLink = project.links ? project.links.external : null;
+    const link = externalLink || project.url;
     const tooltip = <Tooltip id={`project-${project.id}-tooltip`}>{project.title}</Tooltip>;
 
     return (
@@ -126,7 +126,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
         <a href={link}>
           <div style={{ width: '98%' }}>
             <Truncate lines={3}>{project.title}</Truncate>
-            {project.isExternal && project.externalLink && (
+            {externalLink && (
               <svg
                 style={{
                   marginLeft: 5,
@@ -191,8 +191,6 @@ export class ProjectPreviewBody extends React.Component<Props> {
           {this.getTitle()}
           {/* $FlowFixMe $fragmentRefs */}
           {project.hasParticipativeStep && <ProjectPreviewCounters project={project} />}
-          {/* $FlowFixMe $fragmentRefs */}
-          {project.isExternal && <ProjectPreviewExternalCounters project={project} />}
         </div>
         {actualStep && (
           <ProjectPreviewProgressBar
@@ -220,8 +218,9 @@ export default createFragmentContainer(ProjectPreviewBody, {
       id
       title
       hasParticipativeStep
-      externalLink
-      isExternal
+      links {
+        external
+      }
       url
       steps {
         title
@@ -236,7 +235,6 @@ export default createFragmentContainer(ProjectPreviewBody, {
         }
       }
       ...ProjectPreviewCounters_project
-      ...ProjectPreviewExternalCounters_project
       ...ProjectPreviewThemes_project
     }
   `,

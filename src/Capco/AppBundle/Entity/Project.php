@@ -214,26 +214,6 @@ class Project implements IndexableInterface
      */
     private $districts;
 
-    /**
-     * @ORM\Column(name="is_external", type="boolean")
-     */
-    private $isExternal = false;
-
-    /**
-     * @ORM\Column(name="external_participants_count", type="integer", nullable=true)
-     */
-    private $externalParticipantsCount;
-
-    /**
-     * @ORM\Column(name="external_contributions_count", type="integer", nullable=true)
-     */
-    private $externalContributionsCount;
-
-    /**
-     * @ORM\Column(name="external_votes_count", type="integer", nullable=true)
-     */
-    private $externalVotesCount;
-
     public function __construct()
     {
         $this->restrictedViewerGroups = new ArrayCollection();
@@ -1072,71 +1052,6 @@ class Project implements IndexableInterface
         }
 
         return false;
-    }
-
-    /**
-     * If it's an external project we set manually the counter of participant and contributions.
-     */
-    public function getIsExternal(): bool
-    {
-        return $this->isExternal;
-    }
-
-    public function setIsExternal(bool $isExternal): self
-    {
-        $this->isExternal = $isExternal;
-        if ($isExternal && null === $this->externalParticipantsCount) {
-            $this->externalParticipantsCount = 0;
-        }
-        if ($isExternal && null === $this->externalContributionsCount) {
-            $this->externalContributionsCount = 0;
-        }
-        if ($isExternal && null === $this->externalVotesCount) {
-            $this->externalVotesCount = 0;
-        }
-
-        return $this;
-    }
-
-    public function isExternal(): bool
-    {
-        return $this->isExternal;
-    }
-
-    public function getExternalParticipantsCount(): ?int
-    {
-        return $this->externalParticipantsCount;
-    }
-
-    public function setExternalParticipantsCount(?int $externalParticipantsCount): self
-    {
-        $this->externalParticipantsCount = $externalParticipantsCount;
-
-        return $this;
-    }
-
-    public function getExternalContributionsCount(): ?int
-    {
-        return $this->externalContributionsCount;
-    }
-
-    public function setExternalContributionsCount(?int $externalContributionsCount = null): self
-    {
-        $this->externalContributionsCount = $externalContributionsCount;
-
-        return $this;
-    }
-
-    public function getExternalVotesCount(): ?int
-    {
-        return $this->externalVotesCount;
-    }
-
-    public function setExternalVotesCount(?int $externalVotesCount): self
-    {
-        $this->externalVotesCount = $externalVotesCount;
-
-        return $this;
     }
 
     /**
