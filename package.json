@@ -199,7 +199,7 @@
         "flow-bin": "0.92.1",
         "flow-coverage-report": "https://github.com/cap-collectif/flow-coverage-report/tarball/312a5be1e89451036866ca2bafcb522e49de8e3e",
         "flux": "^3.1.3",
-        "gherkin-lint": "^3.0.3",
+        "gherkin-lint": "^3.3.0",
         "graphql": "^0.13.2",
         "graphql-request": "^1.8.2",
         "graphql-schema-linter": "^0.1.6",

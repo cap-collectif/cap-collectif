@@ -74,7 +74,10 @@ export class NavbarRight extends React.Component<Props> {
                 <FormattedMessage id="evaluations.index.page_title" />
               </MenuItem>
             )}
-            <MenuItem key={3.4} eventKey={3.4} href="/profile/edit-profile">
+            <MenuItem
+              key={3.4}
+              eventKey={3.4}
+              href={`/profile/${features.profiles ? 'edit-profile' : 'edit-profile#account'}`}>
               <i className="cap cap-setting-adjustment mr-10" aria-hidden="true" />
               <FormattedMessage id="navbar.user_settings" />
             </MenuItem>

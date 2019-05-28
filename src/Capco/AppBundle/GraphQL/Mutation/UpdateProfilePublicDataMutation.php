@@ -29,18 +29,16 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
 
     public function __invoke(Argument $input, User $user): array
     {
-        $this->user = $user;
-        $this->arguments = $input->getRawArguments();
-        if (isset($this->arguments[self::USER_ID])) {
-            parent::__invoke($input, $user);
-        }
+        parent::__invoke($input, $user);
 
         if (!$this->toggleManager->isActive('user_type')) {
             // blocking bug, need to throw an exception and catch it into JS
             unset($this->arguments['userType']);
         }
 
-        $form = $this->formFactory->create(PublicDataType::class, $this->user);
+        $form = $this->formFactory->create(PublicDataType::class, $this->user, [
+            'csrf_protection' => false,
+        ]);
 
         try {
             $form->submit($this->arguments, false);

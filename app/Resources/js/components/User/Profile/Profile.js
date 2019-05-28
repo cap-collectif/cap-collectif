@@ -85,22 +85,6 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     });
 };
 
-const renderHeader = (
-  <div className="panel-heading profile-header">
-    <h1>
-      <FormattedMessage id="user.profile.title" />
-    </h1>
-  </div>
-);
-
-const renderFooter = (invalid: boolean, submitting: boolean) => (
-  <div className="col-sm-offset-4">
-    <Button disabled={invalid || submitting} type="submit" bsStyle="primary" id="profile-form-save">
-      <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
-    </Button>
-  </div>
-);
-
 export class Profile extends Component<Props> {
   render() {
     const {
@@ -116,10 +100,30 @@ export class Profile extends Component<Props> {
       error,
     } = this.props;
 
+    const header = (
+      <div className="panel-heading profile-header">
+        <h1>
+          <FormattedMessage id="user.profile.title" />
+        </h1>
+      </div>
+    );
+
+    const footer = (
+      <div className="col-sm-offset-4">
+        <Button
+          disabled={invalid || submitting}
+          type="submit"
+          bsStyle="primary"
+          id="profile-form-save">
+          <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
+        </Button>
+      </div>
+    );
+
     return (
       <form onSubmit={handleSubmit} className="form-horizontal">
         <Panel id="capco_horizontal_form">
-          <Panel.Heading>{renderHeader}</Panel.Heading>
+          <Panel.Heading>{header}</Panel.Heading>
           <Panel.Body>
             <h2 className="page-header">
               <FormattedMessage id="user.edition" />
@@ -303,7 +307,7 @@ export class Profile extends Component<Props> {
               </ButtonToolbar>
             </div>
           </Panel.Body>
-          <Panel.Footer>{renderFooter(invalid, submitting)}</Panel.Footer>
+          <Panel.Footer>{footer}</Panel.Footer>
         </Panel>
       </form>
     );

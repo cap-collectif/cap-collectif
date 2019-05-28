@@ -11,16 +11,9 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
 {
     public function __invoke(Argument $input, User $user): array
     {
-        $this->user = $user;
-        $this->arguments = $input->getRawArguments();
+        parent::__invoke($input, $user);
 
-        // it an update from BO
-        if (isset($this->arguments[self::USER_ID])) {
-            parent::__invoke($input, $user);
-        }
-
-        $form = $this->formFactory->create(PersonalDataFormType::class, $this->user);
-
+        $form = $this->formFactory->create(PersonalDataFormType::class, $this->user, ['csrf_protection' => false]);
         try {
             $form->submit($this->arguments, false);
         } catch (\LogicException $e) {
@@ -29,7 +22,6 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
-
             throw new UserError('Can\'t update !');
         }
 

@@ -16,7 +16,6 @@ import UserLink from '../UserLink';
 import ChangePasswordForm from './ChangePasswordForm';
 import PersonalData from './PersonalData';
 import Profile from './Profile';
-import ChangeUsername from './ChangeUsername';
 import Media from '../../Ui/Medias/Media/Media';
 
 type Props = {
@@ -75,12 +74,14 @@ export class EditProfileTabs extends Component<Props> {
               </Panel.Heading>
               <ListGroup>
                 <Nav bsStyle="pills" stacked>
-                  <NavItem eventKey="profile" href="#profile">
-                    <ListGroupItem>
-                      <span className="icon cap-id-8" />
-                      <FormattedMessage id="user.profile.title" />
-                    </ListGroupItem>
-                  </NavItem>
+                  {features.profiles && (
+                    <NavItem eventKey="profile" href="#profile">
+                      <ListGroupItem>
+                        <span className="icon cap-id-8" />
+                        <FormattedMessage id="user.profile.title" />
+                      </ListGroupItem>
+                    </NavItem>
+                  )}
                   {!features.login_paris && !features.login_openid && (
                     <NavItem eventKey="account" href="#account">
                       <ListGroupItem>
@@ -122,11 +123,7 @@ export class EditProfileTabs extends Component<Props> {
           <Col xs={12} sm={8} md={9}>
             <Tab.Content animation>
               <Tab.Pane eventKey="profile">
-                {features.profiles ? (
-                  <Profile viewer={viewer} />
-                ) : (
-                  <ChangeUsername viewer={viewer} />
-                )}
+                {features.profiles && <Profile viewer={viewer} />}
               </Tab.Pane>
               <Tab.Pane eventKey="account">
                 {!features.login_paris && !features.login_openid && <AccountBox viewer={viewer} />}
@@ -164,7 +161,6 @@ export default createFragmentContainer(container, {
       ...NotificationsForm_viewer
       ...PersonalData_viewer
       ...Profile_viewer
-      ...ChangeUsername_viewer
       ...AccountBox_viewer
       username
       displayName

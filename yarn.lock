@@ -6595,10 +6595,10 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-gherkin-lint@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/gherkin-lint/-/gherkin-lint-3.0.3.tgz#8897ccd44c48a05984d7b71f3b265600b4ceeaa3"
-  integrity sha512-Crj0ZzMYXny7JjOLCxOB6+bket9epOsG1wOflr589fow9egWOhLJMtiEPKRL+nClNgItxteKw52Ka9fzGd7j8Q==
+gherkin-lint@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/gherkin-lint/-/gherkin-lint-3.3.0.tgz#b90c90ba3531ab32578f2710084d441a3f101a22"
+  integrity sha512-g3aLVDFcrlYXDqa+PWYlDpOsW1gboomKCeG20+SxoGIndIZ9hUDvbzi7TzYuzAqHoNQUqKau51mFH8U8RUSvhA==
   dependencies:
     commander "2.18.0"
     gherkin "5.1.0"
