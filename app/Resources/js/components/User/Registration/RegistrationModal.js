@@ -13,7 +13,7 @@ import type { State } from '../../../types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type OwnProps = {|
-  +chartBody?: ?string,
+  +charterBody?: ?string,
 |};
 
 type StateProps = {|
@@ -51,7 +51,7 @@ export class RegistrationModal extends React.Component<Props> {
       textBottom,
       displayChartModal,
       onCloseChart,
-      chartBody,
+      charterBody,
     } = this.props;
 
     if (displayChartModal) {
@@ -70,7 +70,7 @@ export class RegistrationModal extends React.Component<Props> {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <WYSIWYGRender value={chartBody} />
+            <WYSIWYGRender value={charterBody} />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton label="global.close" onClose={onCloseChart} />
@@ -136,6 +136,7 @@ const mapStateToProps = state => ({
   show: state.user.showRegistrationModal,
   displayChartModal: state.user.displayChartModal,
   submitting: isSubmitting(form)(state),
+  charterBody: state.default.parameters['charter.body'],
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -2,18 +2,25 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import CloseButton from '../Form/CloseButton';
-import CookieContent from './CookieContent';
+import type { State } from '../../types';
 
 type Props = {
-  separator?: string,
+  privacyContent: string,
+  title: string,
+  linkKeyword?: string,
 };
 
-type CookieModalState = {
+type PrivacyModalState = {
   showModal: boolean,
 };
 
-export class CookieModal extends React.Component<Props, CookieModalState> {
+export class PrivacyModal extends React.Component<Props, PrivacyModalState> {
+  static defaultProps = {
+    title: 'confidentialite.title',
+  };
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -22,23 +29,22 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
   }
 
   render() {
-    const { separator } = this.props;
+    const { privacyContent, title, linkKeyword } = this.props;
     const { showModal } = this.state;
-
     return (
-      <div className="cookie-policy">
+      <div className="privacy-policy">
         <div>
-          {separator && <span>{separator}</span>}
+          {linkKeyword && <FormattedMessage id={linkKeyword} />}&nbsp;
           <Button
-            id="cookies-management"
+            id="privacy-policy"
             className="p-0"
             variant="link"
             bsStyle="link"
             onClick={() => {
               this.setState({ showModal: true });
             }}
-            name="cookies">
-            <FormattedMessage id="cookies" />
+            name="privacy">
+            <FormattedMessage id={title} />
           </Button>
         </div>
         <Modal
@@ -48,20 +54,18 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
             this.setState({ showModal: false });
           }}
           bsSize="large"
-          id="cookies-modal"
-          className="cookie-policy"
+          id="privacy-modal"
+          className="privacy-policy"
           aria-labelledby="contained-modal-title-lg">
-          <Modal.Header closeButton className="cookie-policy">
-            <Modal.Title id="contained-modal-title-lg" className="cookie-policy">
-              <FormattedMessage id="cookies" />
+          <Modal.Header closeButton className="privacy-policy">
+            <Modal.Title id="contained-modal-title-lg" className="privacy-policy">
+              <FormattedMessage id="privacy-policy" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div>
-              <CookieContent />
-            </div>
+            <div className="content" dangerouslySetInnerHTML={{ __html: privacyContent }} />
           </Modal.Body>
-          <Modal.Footer className="cookie-policy">
+          <Modal.Footer className="privacy-policy">
             <CloseButton
               buttonId="cookies-cancel"
               onClose={() => {
@@ -75,4 +79,8 @@ export class CookieModal extends React.Component<Props, CookieModalState> {
   }
 }
 
-export default CookieModal;
+const mapStateToProps = (state: State) => ({
+  privacyContent: state.default.parameters['privacy-policy'],
+});
+
+export default connect(mapStateToProps)(PrivacyModal);

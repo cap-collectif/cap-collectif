@@ -13,7 +13,7 @@ describe('<RegistrationModal />', () => {
     submitting: false,
     displayChartModal: false,
     onCloseChart: jest.fn(),
-    chartBody: 'Super charte !!',
+    charterBody: 'Super charte !!',
   };
 
   it('renders hidden modal if not shown', () => {

@@ -52,7 +52,6 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
       className="mt-10"
     />
     <Connect(InjectIntl(RegistrationButton))
-      chartBody="Super charte !!"
       className="btn-block"
     />
   </div>

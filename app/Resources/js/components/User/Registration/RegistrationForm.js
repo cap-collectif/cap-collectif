@@ -1,17 +1,18 @@
 // @flow
 import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm, type FormProps, formValueSelector } from 'redux-form';
+import { Button } from 'react-bootstrap';
 import { isEmail } from '../../../services/Validator';
 import type { Dispatch, State } from '../../../types';
-import { baseUrl } from '../../../config';
 import { register as onSubmit, displayChartModal } from '../../../redux/modules/user';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
 import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
 import { validateResponses } from '../../../utils/responsesHelper';
+import PrivacyModal from '../../StaticPage/PrivacyModal';
 
 type Props = {|
   ...FormProps,
@@ -25,7 +26,6 @@ type Props = {|
   addConsentExternalCommunicationField: boolean,
   addConsentInternalCommunicationField: boolean,
   userTypes: Array<Object>,
-  cguLink: string,
   cguName: string,
   handleSubmit: Function,
   organizationName: string,
@@ -84,7 +84,6 @@ export const form = 'registration-form';
 export class RegistrationForm extends React.Component<Props> {
   render() {
     const {
-      cguLink,
       cguName,
       hasQuestions,
       responses,
@@ -99,47 +98,36 @@ export class RegistrationForm extends React.Component<Props> {
       handleSubmit,
       addCaptchaField,
       organizationName,
-      shieldEnabled,
       privacyPolicyRequired,
       dispatch,
     } = this.props;
 
     const privacyPolicyComponent = privacyPolicyRequired ? (
-      <FormattedHTMLMessage
-        id="and-the-privacy-policy"
-        values={{
-          url: `${baseUrl}/privacy`,
-        }}
+      <PrivacyModal
+        title="capco.module.privacy_policy"
+        linkKeyword="and-the"
+        className="text-decoration-none"
       />
     ) : null;
 
-    const chartLinkComponent = shieldEnabled ? (
+    const chartLinkComponent = (
       <FormattedMessage
         id="registration.charte"
         values={{
           link: (
-            <button
+            <Button
+              className="p-0 text-decoration-none"
+              variant="link"
+              bsStyle="link"
               onClick={() => {
                 dispatch(displayChartModal());
               }}>
               {cguName}
-            </button>
-          ),
-        }}
-      />
-    ) : (
-      <FormattedMessage
-        id="registration.charte"
-        values={{
-          link: (
-            <a className="external-link" href={cguLink}>
-              {cguName}
-            </a>
+            </Button>
           ),
         }}
       />
     );
-
     return (
       <form onSubmit={handleSubmit} id="registration-form">
         <Field
@@ -323,7 +311,6 @@ const mapStateToProps = (state: State) => ({
   addConsentInternalCommunicationField: state.default.features.consent_internal_communication,
   userTypes: state.default.userTypes,
   cguName: state.default.parameters['signin.cgu.name'],
-  cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
   internalCommunicationFrom: state.default.parameters['global.site.communication_from'],
   shieldEnabled: state.default.features.shield_mode,

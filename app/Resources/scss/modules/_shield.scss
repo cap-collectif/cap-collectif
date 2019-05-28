@@ -1,0 +1,48 @@
+#link_shield {
+  color: $dark-gray;
+
+  .container {
+    padding: 15px 30px;
+
+    @media (max-width: $screen-xs-max) {
+      padding: 15px;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: disc;
+    list-style-position: outside;
+
+    li {
+      margin-bottom: 10px;
+
+      & a {
+        padding: 0 5px;
+        color: $dark-gray;
+      }
+
+      & a:hover {
+        color: $dark-gray;
+      }
+    }
+  }
+
+  .btn.btn-link {
+    color: $dark-gray;
+  }
+  .footer__links {
+
+    text-align: center;
+    font-size: 13px;
+
+    @media(min-width: $screen-md-max) {
+      padding: 15px;
+      bottom: 0;
+      position: fixed;
+      width: 100%;
+      left: 0;
+    }
+  }
+}
