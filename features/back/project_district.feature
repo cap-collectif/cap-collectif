@@ -7,7 +7,7 @@ Background:
   And I wait 1 seconds
 
 @database
-Scenario: Loggin admin want to add district in project.
+Scenario: Logged in admin wants to add district in project.
   When I click the add button
   And I wait 1 seconds
   Then I should see "district_modal.create.title"
@@ -23,7 +23,19 @@ Scenario: Loggin admin want to add district in project.
   Then I should see "troisième-quartier"
 
 @database
-Scenario: Loggin admin want to delete district from project.
+Scenario: Logged in admin wants to add district without style in project
+  When I click the add button
+  And I wait 1 seconds
+  Then I should see "district_modal.create.title"
+  And I wait 1 seconds
+  And I fill in the following:
+    | projectDistrict.name  | quatrieme-quartier |
+  When I submit the modal
+  And I wait 1 seconds
+  Then I should see "quatrieme-quartier"
+
+@database
+Scenario: Logged in admin wants to delete district from project.
   When I click the delete button
   Then I should see "are-you-sure-you-want-to-delete-this-item"
   When I click the confirm delete popover
@@ -31,7 +43,7 @@ Scenario: Loggin admin want to delete district from project.
   Then I should not see "Deuxième Quartier"
 
 @database
-Scenario: Loggin admin want to edit district in project.
+Scenario: Logged in admin wants to edit district in project.
   When I click the edit button
   And I wait 1 seconds
   And I fill in the following:
