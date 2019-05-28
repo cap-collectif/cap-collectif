@@ -103,7 +103,7 @@ input AddEventInput {
   # The contents of the event endAt.
   endAt: DateTime!
 
-  # Is the event published ?
+  # Whether or not this event is published.
   enabled: Boolean = true
   clientMutationId: String
 }
@@ -570,7 +570,7 @@ input BorderStyleInput {
   size: Int
 }
 
-# Ordering options for categories.
+# Ordering options for categories returned from the connection.
 enum CategoryOrderField {
   ALPHABETICAL
 }
@@ -629,7 +629,7 @@ input ChangeEventInput {
   # The contents of the event endAt.
   endAt: DateTime!
 
-  # Is the event published ?
+  # Whether or not this event is published.
   enabled: Boolean = true
   clientMutationId: String
 
@@ -885,6 +885,8 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
+
+    # Returns the first `n` elements from the list.
     first: Int = 100
 
     # Returns the elements in the list that come before the specified cursor.
@@ -893,32 +895,32 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters proposals with the given trashed status.
+    # If non-null, filters proposals with the given trashed status (eg: visible, not visible).
     trashedStatus: ProposalTrashedStatus = NOT_TRASHED
 
-    # If non-null, filters proposals with the given district.
-    district: ID
-
-    # If non-null, filters proposals with the given type of author.
-    userType: ID
-
-    # If non-null, filters proposals with the given category.
-    category: ID
-
-    # If non-null, filters proposals with the given author.
+    # ID of a User to filter by. If non-null, only proposals authored by this user will be returned.
     author: ID
-
-    # If non-null, filters proposals with the given theme.
-    theme: ID
-
-    # If non-null, filters proposals with the given string to look for.
-    term: String
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
-    # If non-null, filters proposals with the given status.
+    # ID of a ProposalDistrict to filter by. If non-null, filters proposals with the given district.
+    district: ID
+
+    # ID of a UserType to filter by. If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # ID of a ProposalCategory to filter by. If non-null, filters proposals with the given category.
+    category: ID
+
+    # ID of a ProposalStatus to filter by. If non-null, filters proposals with the given status.
     status: ID
+
+    # ID of a Theme to filter by. If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -1171,7 +1173,7 @@ input CommentOrder {
   direction: OrderDirection! = DESC
 }
 
-# Ordering options for comments.
+# Ordering options for comments returned from the connection.
 enum CommentOrderField {
   # Allows ordering a list of comments by when they were published.
   PUBLISHED_AT
@@ -1276,7 +1278,7 @@ type Consultation implements Node {
   # Expose Primary Key, do not use it, except for testing purpose.
   _id: ID!
 
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # The title of the consultation.
@@ -1373,7 +1375,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
   # Expose Primary Key, do not use it, except for testing purpose.
   _id: ID!
 
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # A list of contributor associated with the consultation step.
@@ -1918,7 +1920,7 @@ input DistrictInput {
   background: BackgroundStyleInput
 }
 
-# Ordering options for districts.
+# Ordering options for districts returned from the connection.
 enum DistrictOrderField {
   ALPHABETICAL
   CREATED_AT
@@ -1971,7 +1973,7 @@ type EvaluationForm {
 
 # An event.
 type Event implements Node & Commentable {
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # The URL to this resource.
@@ -1998,7 +2000,7 @@ type Event implements Node & Commentable {
   # Identifies the body of the event.
   body: HTML!
 
-  # Identifies if the event is published.
+  # Whether or not this event is published.
   enabled: Boolean!
 
   # Identifies the latitude of the event.
@@ -2008,13 +2010,13 @@ type Event implements Node & Commentable {
   lng: Float
 
   # Identifies the registration link of the event.
-  link: URI
+  link: URI @deprecated(reason: "Field `link` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   # Identifies the zip code of the event.
-  zipCode: String
+  zipCode: String @deprecated(reason: "Field `zipCode` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   # Identifies the address of the event.
-  fullAddress: String
+  fullAddress: String @deprecated(reason: "Field `fullAddress` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   # The comments related to the commentable.
   comments(
@@ -2101,7 +2103,7 @@ input EventInput {
   country: String
 }
 
-# Ordering options for events.
+# Ordering options for events returned from the connection.
 enum EventOrderField {
   START_AT
 }
@@ -3126,12 +3128,12 @@ type OpinionVote implements YesNoPairedVote & Publishable & Vote {
   value: YesNoPairedVoteValue!
 }
 
-# Possible directions in which to order a list of items when provided an orderBy argument.
+# Possible directions in which to order a list of items when provided an `orderBy` argument.
 enum OrderDirection {
-  # Specifies an ascending order for a given orderBy argument.
+  # Specifies an ascending order for a given `orderBy` argument.
   ASC
 
-  # Specifies a descending order for a given orderBy argument.
+  # Specifies a descending order for a given `orderBy` argument.
   DESC
 }
 
@@ -3310,9 +3312,13 @@ type PresentationStep implements Step {
   body: HTML
 }
 
+# A vote that can be anonymous.
 interface PrivatableVote {
-  # Whether the vote is anonymous or not.
-  private: Boolean
+  # Whether the author of the vote is anonymous or not.
+  private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2019-09-01 UTC.")
+
+  # Whether the author of the vote is anonymous or not.
+  anonymous: Boolean!
 }
 
 # A budget contribution
@@ -3331,7 +3337,7 @@ input ProgressStepInput {
 
 # A participatory project.
 type Project implements UniformResourceLocatable & UniformResourceAdminLocatable & Node {
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # The URL to this resource.
@@ -3375,6 +3381,8 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
+
+    # Returns the first `n` elements from the list.
     first: Int = 100
 
     # Returns the elements in the list that come before the specified cursor.
@@ -3383,32 +3391,32 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters proposals with the given trashed status.
+    # If non-null, filters proposals with the given trashed status (eg: visible, not visible).
     trashedStatus: ProposalTrashedStatus = NOT_TRASHED
 
-    # If non-null, filters proposals with the given district.
-    district: ID
-
-    # If non-null, filters proposals with the given type of author.
-    userType: ID
-
-    # If non-null, filters proposals with the given category.
-    category: ID
-
-    # If non-null, filters proposals with the given author.
+    # ID of a User to filter by. If non-null, only proposals authored by this user will be returned.
     author: ID
-
-    # If non-null, filters proposals with the given theme.
-    theme: ID
-
-    # If non-null, filters proposals with the given string to look for.
-    term: String
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
-    # If non-null, filters proposals with the given status.
+    # ID of a ProposalDistrict to filter by. If non-null, filters proposals with the given district.
+    district: ID
+
+    # ID of a UserType to filter by. If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # ID of a ProposalCategory to filter by. If non-null, filters proposals with the given category.
+    category: ID
+
+    # ID of a ProposalStatus to filter by. If non-null, filters proposals with the given status.
     status: ID
+
+    # ID of a Theme to filter by. If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -3559,7 +3567,7 @@ input ProjectOrder {
   direction: OrderDirection
 }
 
-# Ordering projects.
+# Ordering options for projects returned from the connection.
 enum ProjectOrderField {
   # Allows ordering a list of projects by there number of contributions.
   POPULAR
@@ -3600,7 +3608,7 @@ enum ProjectVisibility {
 
 # Represents a type that can be retrieved by a URL on the admin.
 type Proposal implements Node & Contribution & Commentable & Publishable & Draftable & Reportable & Trashable & UniformResourceLocatable & UniformResourceAdminLocatable {
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # Whether or not the entity is published.
@@ -3880,6 +3888,8 @@ type ProposalForm implements Node & UniformResourceLocatable {
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
+
+    # Returns the first `n` elements from the list.
     first: Int = 100
 
     # Returns the elements in the list that come before the specified cursor.
@@ -3888,32 +3898,32 @@ type ProposalForm implements Node & UniformResourceLocatable {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters proposals with the given trashed status.
+    # If non-null, filters proposals with the given trashed status (eg: visible, not visible).
     trashedStatus: ProposalTrashedStatus = NOT_TRASHED
 
-    # If non-null, filters proposals with the given district.
-    district: ID
-
-    # If non-null, filters proposals with the given type of author.
-    userType: ID
-
-    # If non-null, filters proposals with the given category.
-    category: ID
-
-    # If non-null, filters proposals with the given author.
+    # ID of a User to filter by. If non-null, only proposals authored by this user will be returned.
     author: ID
-
-    # If non-null, filters proposals with the given theme.
-    theme: ID
-
-    # If non-null, filters proposals with the given string to look for.
-    term: String
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
-    # If non-null, filters proposals with the given status.
+    # ID of a ProposalDistrict to filter by. If non-null, filters proposals with the given district.
+    district: ID
+
+    # ID of a UserType to filter by. If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # ID of a ProposalCategory to filter by. If non-null, filters proposals with the given category.
+    category: ID
+
+    # ID of a ProposalStatus to filter by. If non-null, filters proposals with the given status.
     status: ID
+
+    # ID of a Theme to filter by. If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -4008,9 +4018,9 @@ input ProposalOrder {
   direction: OrderDirection! = ASC
 }
 
-# Properties by which proposal connections can be ordered
+# Properties by which proposal connections can be ordered.
 enum ProposalOrderField {
-  # Allows ordering a list of proposals by when they were created.
+  # Allows ordering a list of proposals by when they were published.
   PUBLISHED_AT
 
   # Allows ordering a list of proposals by the number of votes it have.
@@ -4081,6 +4091,8 @@ interface ProposalStep {
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
+
+    # Returns the first `n` elements from the list.
     first: Int = 100
 
     # Returns the elements in the list that come before the specified cursor.
@@ -4089,32 +4101,32 @@ interface ProposalStep {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters proposals with the given trashed status.
+    # If non-null, filters proposals with the given trashed status (eg: visible, not visible).
     trashedStatus: ProposalTrashedStatus = NOT_TRASHED
 
-    # If non-null, filters proposals with the given district.
-    district: ID
-
-    # If non-null, filters proposals with the given type of author.
-    userType: ID
-
-    # If non-null, filters proposals with the given category.
-    category: ID
-
-    # If non-null, filters proposals with the given author.
+    # ID of a User to filter by. If non-null, only proposals authored by this user will be returned.
     author: ID
-
-    # If non-null, filters proposals with the given theme.
-    theme: ID
-
-    # If non-null, filters proposals with the given string to look for.
-    term: String
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
-    # If non-null, filters proposals with the given status.
+    # ID of a ProposalDistrict to filter by. If non-null, filters proposals with the given district.
+    district: ID
+
+    # ID of a UserType to filter by. If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # ID of a ProposalCategory to filter by. If non-null, filters proposals with the given category.
+    category: ID
+
+    # ID of a ProposalStatus to filter by. If non-null, filters proposals with the given status.
     status: ID
+
+    # ID of a Theme to filter by. If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -4215,10 +4227,13 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
-  # Whether the vote is anonymous or not.
-  private: Boolean
+  # Whether the author of the vote is anonymous or not.
+  private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2019-09-01 UTC.")
 
-  # Date of vote.
+  # Whether the author of the vote is anonymous or not.
+  anonymous: Boolean!
+
+  # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
   # The author of the contribution. If null, the vote is anonymous.
@@ -4229,9 +4244,6 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
 
   # Returns 'proposalVote'.
   kind: String!
-
-  # Is the vote anonymous ?
-  anonymous: Boolean!
 
   # Return the proposal.
   proposal: Proposal!
@@ -4294,9 +4306,9 @@ type Query {
   # The currently authenticated user.
   viewer: User!
 
-  # The ID of an object.
+  # Lookup a node by its ID.
   node(
-    # The ID of an object
+    # The ID of an object.
     id: ID!
   ): Node
 
@@ -4323,25 +4335,25 @@ type Query {
     # Ordering options for projects returning from the connection.
     orderBy: ProjectOrder = {field: LATEST, direction: DESC}
 
-    # If non-null, projects with the given string to look for.
-    term: String
-
-    # If non-null, filter projects by statuses.
-    status: ID
-
-    # If non-null, filter projects by themes
-    theme: ID
-
-    # If non-null, filter projects by types
-    type: ID
-
-    # If non-null, filter projects by author
+    # ID of a User to filter by. If non-null, only projects authored by this user will be returned.
     author: ID
 
-    # If true, filter projects with events
+    # If provided, searches projects by title.
+    term: String
+
+    # ID of a Status to filter by. If non-null, filter projects by statuses.
+    status: ID
+
+    # ID of a Theme to filter by. If non-null, filter projects by themes
+    theme: ID
+
+    # ID of a ProjectType to filter by. If non-null, filter projects by types
+    type: ID
+
+    # If true, only projects with at least 1 event will be returned.
     withEventOnly: Boolean = false
 
-    # If true, return only publics projects
+    # If true, only projects with public visibility will be returned.
     onlyPublic: Boolean = false
   ): ProjectConnection!
 
@@ -4359,23 +4371,23 @@ type Query {
     # Returns the last `n` elements from the list.
     last: Int
 
+    # ID of a Project to filter by. If non-null, only events belonging to the project will be returned.
+    project: ID
+
+    # If provided, searches events by title and description.
+    search: String
+
     # If non-null, filters events by comparing the start date with present.
     isFuture: Boolean
 
     # If non-null, filters events with the given theme.
     theme: ID
 
-    # If non-null, filters events with the given project.
-    project: ID
-
     # If non-null, filters events with the given author.
     author: ID
 
     # If non-null, filters events with the given author type.
     userType: ID
-
-    # If non-null, filters events with the given string to look for.
-    search: String
 
     # If true, filter the events with registration link or internal registration
     # enable, if false  filter the events with both registration type at false
@@ -4670,7 +4682,7 @@ enum QuestionTypeValue {
 
 # A questionnaire is a series of questions that users can answer.
 type Questionnaire implements Node {
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # Identifies the questionnaire title.
@@ -4947,7 +4959,7 @@ type RemoveSourceVotePayload {
 
 # Represents a type that can be retrieved by a URL.
 type Reply implements Node & Publishable & Draftable & Contribution & UniformResourceLocatable {
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # Whether or not the entity is published.
@@ -5452,6 +5464,8 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
+
+    # Returns the first `n` elements from the list.
     first: Int = 100
 
     # Returns the elements in the list that come before the specified cursor.
@@ -5460,32 +5474,32 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters proposals with the given trashed status.
+    # If non-null, filters proposals with the given trashed status (eg: visible, not visible).
     trashedStatus: ProposalTrashedStatus = NOT_TRASHED
 
-    # If non-null, filters proposals with the given district.
-    district: ID
-
-    # If non-null, filters proposals with the given type of author.
-    userType: ID
-
-    # If non-null, filters proposals with the given category.
-    category: ID
-
-    # If non-null, filters proposals with the given author.
+    # ID of a User to filter by. If non-null, only proposals authored by this user will be returned.
     author: ID
-
-    # If non-null, filters proposals with the given theme.
-    theme: ID
-
-    # If non-null, filters proposals with the given string to look for.
-    term: String
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
-    # If non-null, filters proposals with the given status.
+    # ID of a ProposalDistrict to filter by. If non-null, filters proposals with the given district.
+    district: ID
+
+    # ID of a UserType to filter by. If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # ID of a ProposalCategory to filter by. If non-null, filters proposals with the given category.
+    category: ID
+
+    # ID of a ProposalStatus to filter by. If non-null, filters proposals with the given status.
     status: ID
+
+    # ID of a Theme to filter by. If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
@@ -6537,7 +6551,7 @@ type UpdateUserAccountPayload {
 
 # A user is an individual's account.
 type User implements Node & UniformResourceLocatable {
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # The URL to this resource.
@@ -7235,7 +7249,7 @@ input VoteOrder {
   direction: OrderDirection! = DESC
 }
 
-# Ordering options for votes.
+# Ordering options for votes returned from the connection.
 enum VoteOrderField {
   PUBLISHED_AT
   POSITION

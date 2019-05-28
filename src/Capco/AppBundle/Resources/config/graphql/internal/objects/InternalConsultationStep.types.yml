@@ -14,6 +14,11 @@ InternalConsultationStep:
     description: 'A consultation step'
     name: ConsultationStep
     fields:
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: ConsultationStep
       kind:
         type: 'String!'
         description: 'The type of step. Returns "consultation".'

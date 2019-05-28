@@ -9,4 +9,4 @@ PreviewVote:
     fields:
       createdAt:
         type: 'DateTime!'
-        description: 'Date of vote.'
+        description: 'Identifies the date and time when the object was created.'

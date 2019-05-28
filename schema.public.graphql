@@ -1,6 +1,6 @@
 # A consultation
 type Consultation implements Node {
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # The title of the consultation.
@@ -57,7 +57,7 @@ type PageInfo {
 
 # A participatory project.
 type Project implements Node & UniformResourceLocatable {
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # The URL to this resource.
@@ -72,9 +72,9 @@ type Query {
   # The currently authenticated user.
   viewer: User!
 
-  # The ID of an object.
+  # Lookup a node by its ID.
   node(
-    # The ID of an object
+    # The ID of an object.
     id: ID!
   ): Node
 
@@ -87,7 +87,7 @@ type Query {
 
 # A questionnaire is a series of questions that users can answer.
 type Questionnaire implements Node {
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # Identifies the questionnaire title.
@@ -126,7 +126,7 @@ interface UniformResourceLocatable {
 
 # A user is an individual's account.
 type User implements Node & UniformResourceLocatable {
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # The URL to this resource.

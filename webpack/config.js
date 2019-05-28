@@ -10,7 +10,7 @@ const config = {
   srcDir: path.join(ABSOLUTE_BASE, 'src'),
   appDir: path.join(ABSOLUTE_BASE, 'app'),
   webpackDir: path.join(ABSOLUTE_BASE, 'webpack'),
-  locales: ['fr-FR', 'es-ES', 'en-GB', 'de-DE'],
+  locales: ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL'],
 };
 
 module.exports = config;
