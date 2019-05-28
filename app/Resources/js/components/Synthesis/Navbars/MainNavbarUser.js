@@ -42,9 +42,7 @@ export class MainNavbarUser extends React.Component<Props> {
                 {<FormattedMessage id="synthesis.edition.navbar.user.profile" />}
               </MenuItem>
             ) : null}
-            <MenuItem
-              eventKey="3"
-              href={`/profile/${features.profiles ? 'edit-profile' : 'edit-profile#account'}`}>
+            <MenuItem eventKey="3" href="/profile/edit-profile">
               {<FormattedMessage id="synthesis.edition.navbar.user.settings" />}
             </MenuItem>
             <MenuItem divider />

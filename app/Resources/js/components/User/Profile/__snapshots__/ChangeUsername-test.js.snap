@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChangeUsername /> it should render 1`] = `
+<form
+  className="form-horizontal"
+  onSubmit={[MockFunction]}
+>
+  <Uncontrolled(Panel)
+    id="capco_horizontal_form"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <div
+        className="panel-heading profile-header"
+      >
+        <h1>
+          <FormattedMessage
+            id="user.profile.title"
+            values={Object {}}
+          />
+        </h1>
+      </div>
+    </PanelHeading>
+    <PanelBody
+      bsClass="panel"
+      collapsible={false}
+    >
+      <h2
+        className="page-header"
+      >
+        <FormattedMessage
+          id="user.edition"
+          values={Object {}}
+        />
+      </h2>
+      <div
+        className="border-0"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="profile-form-username"
+        >
+          <p
+            className="mb-0"
+          >
+            <FormattedMessage
+              id="registration.username"
+              values={Object {}}
+            />
+          </p>
+          <span
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </span>
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            divClassName="col-sm-6"
+            id="profile-form-username"
+            name="username"
+            required={true}
+            type="text"
+          />
+        </div>
+        <div
+          className="col-sm-3"
+        />
+        <ButtonToolbar
+          bsClass="btn-toolbar"
+          className="col-sm-6 pl-0"
+        >
+          <AlertForm
+            errorMessage={null}
+            invalid={false}
+            submitFailed={false}
+            submitSucceeded={false}
+            submitting={false}
+            valid={true}
+          />
+        </ButtonToolbar>
+      </div>
+    </PanelBody>
+    <PanelFooter
+      bsClass="panel"
+    >
+      <div
+        className="col-sm-offset-4"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="profile-form-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+      </div>
+    </PanelFooter>
+  </Uncontrolled(Panel)>
+</form>
+`;

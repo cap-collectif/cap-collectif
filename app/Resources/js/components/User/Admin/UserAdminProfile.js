@@ -100,7 +100,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       }
     })
     .catch(response => {
-      if (response.response.message) {
+      if (response && response.response && response.response.message) {
         throw new SubmissionError({
           _error: response.response.message,
         });
