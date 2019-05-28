@@ -396,9 +396,19 @@ class Project implements IndexableInterface
     }
 
     /**
+     * @return $this
+     */
+    public function setAuthors(array $authors)
+    {
+        $this->authors = new ArrayCollection($authors);
+
+        return $this;
+    }
+
+    /**
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getAuthors()
+    public function getAuthors(): Collection
     {
         $authors = [];
         foreach ($this->authors as $projectAuthor) {
@@ -415,10 +425,13 @@ class Project implements IndexableInterface
      *
      * @return Project
      */
-    public function addAuthor(User $author)
+    public function addAuthor(User $user)
     {
-        if (!$this->authors->contains($author)) {
-            $this->authors->add($author);
+        $projectAuthor = new ProjectAuthor();
+        $projectAuthor->setUser($user);
+        $projectAuthor->setProject($this);
+        if (!$this->authors->contains($projectAuthor)) {
+            $this->authors->add($projectAuthor);
         }
 
         return $this;

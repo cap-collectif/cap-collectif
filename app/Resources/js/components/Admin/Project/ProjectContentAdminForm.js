@@ -28,15 +28,15 @@ const projectTerms = [
 ];
 
 const onSubmit = (values: any) => {
-  console.log(values);
 };
+
 const validate = () => {
   const errors = {};
 
   return errors;
 };
 
-const formName = 'projectAdmin';
+const formName="projectAdmin";
 
 const ProjectContentAdminForm = (props: Props) => {
   const { handleSubmit, intl, invalid, submitting, pristine } = props;
@@ -80,7 +80,10 @@ const ProjectContentAdminForm = (props: Props) => {
           </option>
         ))}
       </Field>
-      <Button type="submit" disabled={invalid || submitting || pristine} bsStyle="primary">
+      <Button
+        type="submit"
+        disabled={invalid || submitting || pristine}
+        bsStyle="primary">
         {submitting ? (
           <FormattedMessage id="global.loading" />
         ) : (
@@ -95,7 +98,7 @@ const form = injectIntl(
   reduxForm({
     validate,
     onSubmit,
-    form: formName,
+    form: formName
   })(ProjectContentAdminForm),
 );
 

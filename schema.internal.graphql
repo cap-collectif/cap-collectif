@@ -1625,11 +1625,11 @@ input CreateProjectInput {
   # The project's authors
   authors: [String!]!
 
-  # The project's usage
-  usage: String!
+  # The project's opinion term
+  opinionTerm: String!
 
   # The project's type
-  type: String!
+  projectType: String!
   clientMutationId: String
 }
 

@@ -12,12 +12,19 @@ class ProjectFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title', PurifiedTextType::class, [
-            'required' => true,
-            'purify_html' => true,
-            'strip_tags' => true,
-            'purify_html_profile' => 'default',
-        ]);
+        $builder
+            ->add('title', PurifiedTextType::class, [
+                'required' => true,
+                'purify_html' => true,
+                'strip_tags' => true,
+                'purify_html_profile' => 'default',
+            ])
+            ->add('opinionTerm', PurifiedTextType::class, [
+                'required' => true,
+                'purify_html' => true,
+                'strip_tags' => true,
+                'purify_html_profile' => 'default',
+            ]);
     }
 
     /**
@@ -25,6 +32,6 @@ class ProjectFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => Project::class]);
+        $resolver->setDefaults(['data_class' => Project::class, 'csrf_protection' => false]);
     }
 }

@@ -9,9 +9,9 @@ CreateProjectInput:
       authors:
         type: '[String!]!'
         description: "The project's authors"
-      usage:
+      opinionTerm:
         type: 'String!'
-        description: "The project's usage"
-      type:
+        description: "The project's opinion term"
+      projectType:
         type: 'String!'
         description: "The project's type"
