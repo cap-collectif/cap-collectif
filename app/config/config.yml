@@ -62,7 +62,7 @@ parameters:
   google_maps_key: ***REMOVED***
   mapbox_secret_key: '%env(SYMFONY_MAPBOX_SECRET_KEY)%'
   loco_key: 5TYY2LOJxU7WgnDpreCQYXkXLAS_hsDII
-  locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE', 'nl-NL']
+  locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE']
   google_maps_key_server: '***REMOVED***'
   jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
   prometheus_bearer_token: '%env(SYMFONY_PROMETHEUS_BEARER_TOKEN)%'

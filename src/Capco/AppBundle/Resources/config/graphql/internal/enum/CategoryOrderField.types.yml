@@ -1,7 +1,7 @@
 CategoryOrderField:
   type: enum
   config:
-    description: 'Ordering options for categories returned from the connection.'
+    description: 'Ordering options for categories.'
     values:
       ALPHABETICAL:
         value: 'ALPHABETICAL'

@@ -155,13 +155,7 @@ class SiteParameterAdmin extends AbstractAdmin
             $formMapper->add('value', ChoiceType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'choices' => [
-                    '🇫🇷 French (France)' => 'fr-FR',
-                    '🇬🇧 English (UK)' => 'en-GB',
-                    '🇩🇪 German (Germany)' => 'de-DE',
-                    '🇳🇱 Dutch (Netherlands)' => 'nl-NL',
-                    '🇪🇸 Spanish (Spain)' => 'es-ES',
-                ],
+                'choices' => ['Français' => 'fr-FR', 'English' => 'en-GB', 'Deutch' => 'de-DE'],
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ('global.timezone' === $subject->getKeyname()) {

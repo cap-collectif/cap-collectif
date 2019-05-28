@@ -15,21 +15,15 @@
 
 <div class="row mt-40">
 
-<h2>API Guides</h2>
-
 <p>These guides provide information on getting started with our API:</p>
 
 <ul>
-    <li><p><a href="{{ path('app_developer_guide', { 'guide': 'intro-to-graphql' }) }}">Introduction to GraphQL</a>: A guide to GraphQL terminology and discovering the API</p></li>
-
-    <li><p><a href="{{ path('app_developer_guide', { 'guide': 'using-global-node-ids' }) }}">Using Global Node IDs</a>: How to use global IDs in GraphQL operations</p></li>
-
-    <li><p><a href="{{ path('app_developer_guide', { 'guide': 'events' }) }}">Look up a paginated list</a>: A guide to get events with pagination</p></li>
+    <li><p><a href="{{ path('app_developer_guide', { 'slug': 'events' }) }}">Look up a paginated list</a>: A guide to get events with pagination</p></li>
     {% if graphql_list_collect_steps()|length %}
-        <li><p><a href="{{ path('app_developer_guide', { 'guide': 'proposals' }) }}">Look up proposals</a>: A guide to get a step's proposals</p></li>
+        <li><p><a href="{{ path('app_developer_guide', { 'slug': 'proposals' }) }}">Look up proposals</a>: A guide to get a step's proposals</p></li>
     {% endif %}
     {% if graphql_list_questionnaires()|length %}
-        <li><p><a href="{{ path('app_developer_guide', { 'guide': 'questionnaires' }) }}">Look up questionnaires</a>: A guide to get a questionnaire's responses</p></li>
+        <li><p><a href="{{ path('app_developer_guide', { 'slug': 'questionnaires' }) }}">Look up questionnaires</a>: A guide to get a questionnaire's responses</p></li>
     {% endif %}
 </ul>
 

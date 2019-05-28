@@ -2,7 +2,7 @@ PreviewProjectOrderField:
   type: enum
   config:
     name: ProjectOrderField
-    description: 'Ordering options for projects returned from the connection.'
+    description: 'Ordering projects.'
     values:
       POPULAR:
         value: 'POPULAR'

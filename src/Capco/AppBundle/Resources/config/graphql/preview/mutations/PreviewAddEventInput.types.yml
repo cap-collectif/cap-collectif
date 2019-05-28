@@ -19,4 +19,4 @@ PreviewAddEventInput:
       enabled:
         type: 'Boolean'
         defaultValue: true
-        description: 'Whether or not this event is published.'
+        description: 'Is the event published ?'

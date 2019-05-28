@@ -8,24 +8,34 @@ InternalWithProposals:
       proposals:
         type: 'InternalProposalConnection!'
         args:
+          first:
+            type: 'Int'
+            defaultValue: 100
           district:
             type: 'ID'
-            description: 'ID of a ProposalDistrict to filter by. If non-null, filters proposals with the given district.'
+            description: 'If non-null, filters proposals with the given district.'
           userType:
             type: 'ID'
-            description: 'ID of a UserType to filter by. If non-null, filters proposals with the given type of author.'
+            description: 'If non-null, filters proposals with the given type of author.'
           category:
             type: 'ID'
-            description: 'ID of a ProposalCategory to filter by. If non-null, filters proposals with the given category.'
+            description: 'If non-null, filters proposals with the given category.'
+          author:
+            type: 'ID'
+            description: 'If non-null, filters proposals with the given author.'
           status:
             type: 'ID'
-            description: 'ID of a ProposalStatus to filter by. If non-null, filters proposals with the given status.'
+            description: 'If non-null, filters proposals with the given status.'
           theme:
             type: 'ID'
-            description: 'ID of a Theme to filter by. If non-null, filters proposals with the given theme.'
+            description: 'If non-null, filters proposals with the given theme.'
           term:
             type: 'String'
             description: 'If non-null, filters proposals with the given string to look for.'
+          orderBy:
+            type: 'PreviewProposalOrder'
+            description: 'Ordering options for proposals returned from the connection.'
+            defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }
           affiliations:
             type: '[ProposalAffiliation]'
             description: 'Affiliation options for proposals returned from the connection.'
@@ -33,6 +43,10 @@ InternalWithProposals:
             type: 'Boolean'
             description: '(ROLE_SUPER_ADMIN only) Select also unpublished proposals.'
             defaultValue: false
+          trashedStatus:
+            type: 'ProposalTrashedStatus'
+            description: 'If non-null, filters proposals with the given trashed status.'
+            defaultValue: 'NOT_TRASHED'
       viewerProposalsUnpublished:
         access: "@=hasRole('ROLE_USER')"
         type: 'InternalProposalConnection'

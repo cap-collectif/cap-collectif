@@ -15,7 +15,7 @@
 
 {% block javascripts %}
 {{ parent() }}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
 {% endblock %}
 
 <div class="container developers__container">
@@ -23,9 +23,124 @@
 {% include 'CapcoAppBundle:Developer:header.html.twig' with {'active': 'reference'} only %}
 
 <div class="row mt-40">
+
     <div class="col-md-4">
-        {% include 'CapcoAppBundle:Developer:sidebar.html.twig' %}
+    <div class="list-group">
+        <a href="#" class="list-group-item" data-toggle="collapse" data-target="#overview">
+            <i class="cap cap-arrow-66"></i>Overview
+        </a>
+
+        <div class="list-group_collapse collapse {% if category == "previews" or category == "breaking_changes" or category is null %}in{% endif %}" id="overview">
+            <a href="{{ path('app_developer_category', { 'category': 'previews' })}}" class="list-group-item">Schema Previews</a>
+            <a href="{{ path('app_developer_category', { 'category': 'breaking_changes' })}}" class="list-group-item">Breaking Changes</a>
+        </div>
+
+        <a href="#" class="list-group-item" data-toggle="collapse" data-target="#query">
+            <i class="cap cap-arrow-66"></i>Query
+        </a>
+        <div class="list-group_collapse collapse {% if category == "query" %}in{% endif %}" id="query">
+            <a href="{{ path('app_developer_category', { 'category': 'query' })}}#connections" class="list-group-item">Connections</a>
+            <a href="{{ path('app_developer_category', { 'category': 'query' })}}#fields" class="list-group-item">Fields</a>
+        </div>
+
+        {% if mutation %}
+            <a href="#mutations" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Mutations
+            </a>
+            <div class="list-group_collapse collapse {% if category == "mutation" %}in{% endif %}" id="mutations">
+                {% for field in mutation.fields|usort %}
+                    <a href="{{ path('app_developer_category_type', { 'category': 'mutation', 'type': field.name })}}" class="list-group-item {% if selection and selection.name == field.name %}active{% endif %}">
+                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': mutation} %}
+                        {{ field.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if objects is not empty %}
+            <a href="#objects" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Objects
+            </a>
+            <div class="list-group_collapse collapse {% if category == "object" %}in{% endif %}" id="objects">
+                {% for type in objects|usort %}
+                    <a href="{{ path('app_developer_category_type', { 'category': 'object', 'type': type.name })}}" class="list-group-item {% if selection and selection.name == type.name %}active{% endif %}">
+                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                        {{ type.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if interfaces is not empty %}
+            <a href="#interfaces" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Interfaces
+            </a>
+            <div class="list-group_collapse collapse {% if category == "interface" %}in{% endif %}" id="interfaces">
+                {% for type in interfaces|usort %}
+                    <a href="{{ path('app_developer_category_type', { 'category': 'interface', 'type': type.name })}}" class="list-group-item {% if selection and selection.name == type.name %}active{% endif %}">
+                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                        {{ type.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if enums is not empty %}
+            <a href="#enums" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Enums
+            </a>
+            <div class="list-group_collapse collapse {% if category == "enum" %}in{% endif %}" id="enums">
+                {% for type in enums|usort %}
+                    <a href="{{ path('app_developer_category_type', { 'category': 'enum', 'type': type.name })}}" class="list-group-item {% if selection and selection.name == type.name %}active{% endif %}">
+                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                        {{ type.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if unions is not empty %}
+            <a href="#unions" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Unions
+            </a>
+            <div class="list-group_collapse collapse {% if category == "union" %}in{% endif %}" id="unions">
+                {% for type in unions|usort %}
+                    <a href="{{ path('app_developer_category_type', { 'category': 'union', 'type': type.name })}}" class="list-group-item {% if selection and selection.name == type.name %}active{% endif %}">
+                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                        {{ type.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if input_objects is not empty %}
+            <a href="#input_objects" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Input Objects
+            </a>
+            <div class="list-group_collapse collapse {% if category == "input_object" %}in{% endif %}" id="input_objects">
+                {% for type in input_objects|usort %}
+                    <a href="{{ path('app_developer_category_type', { 'category': 'input_object', 'type': type.name })}}" class="list-group-item">
+                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                        {{ type.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <a href="#scalars" class="list-group-item" data-toggle="collapse">
+            <i class="cap cap-arrow-66"></i>Scalars
+        </a>
+        <div class="list-group_collapse collapse {% if category == "scalar" %}in{% endif %}" id="scalars">
+            {% for type in scalars|usort %}
+                <a href="{{ path('app_developer_category_type', { 'category': 'scalar', 'type': type.name })}}" class="list-group-item {% if selection and selection.name == type.name %}active{% endif %}">
+                    {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                    {{ type.name }}
+                </a>
+            {% endfor %}
+        </div>
     </div>
+</div>
+
     <div class="col-md-8">
 
     {% if category is null %}
@@ -58,15 +173,15 @@
     <p>These tokens are like passwords; guard them carefully.</p>
     <p>Right now, you can't revoke an API Key. Contact <a href="mailto:api@cap-collectif.com">api@cap-collectif.com</a> if needed.</p>
     <ul>
-        {# {% for token in publicApiKeyRepo.findPublicApiTokensByUser(app.user) %}
+        {% for token in publicApiKeyRepo.findPublicApiTokensByUser(app.user) %}
         <li>
             API Key created at {{ token.createdAt|date }} : <strong>{{ token.value }}</strong>
         </li>
-        {% endfor %} #}
+        {% endfor %}
     </ul>
     {% endif %}
 
-    <p>Right now, you can't generate an API Key. Contact <a href="mailto:api@cap-collectif.com">our API team</a> if needed.</p>
+    <p>Right now, you can't generate an API Key. Contact <a href="mailto:api@cap-collectif.com">api@cap-collectif.com</a> if needed.</p>
 
     <h4>How to use an API Key</h4>
 
@@ -85,25 +200,12 @@
     We currently have no rate limits, but this might be coming soon.
 
     <h3>About the GraphQL schema reference</h3>
-
-    <p>
-        The docs in the sidebar are generated from our GraphQL schema. All calls are validated and executed against the schema. Use these docs to find out what data you can call:
+    The docs in the sidebar are generated from our GraphQL schema. All calls are validated and executed against the schema. Use these docs to find out what data you can call:
 
     <ul>
-        <li>Allowed operations: <a href="{{ path('app_developer_category', { 'category': 'query' })}}">queries</a> and <a href="{{ path('app_developer_category', { 'category': 'mutation' })}}">mutations</a>.</li>
-        <li>Schema-defined types: <a href="{{ path('app_developer_category', { 'category': 'scalar' })}}">scalars</a>, <a href="{{ path('app_developer_category', { 'category': 'object' })}}">objects</a>, <a href="{{ path('app_developer_category', { 'category': 'enum' })}}">enums</a>, <a href="{{ path('app_developer_category', { 'category': 'interface' })}}">interfaces</a>, <a href="{{ path('app_developer_category', { 'category': 'union' })}}">unions</a>, and <a href="{{ path('app_developer_category', { 'category': 'input_object' })}}">input objects</a>.</li>
+        <li>Allowed operations: queries and mutations.</li>
+        <li>Schema-defined types: scalars, objects, enums, interfaces, unions, and input objects.</li>
     </ul>
-
-    You can access this same content via the Explorer Docs sidebar. Note that you may need to rely on both the docs and the schema validation to successfully call the GraphQL API.
-
-    For other information, such as authentication and rate limit details, check out the <a>guides</a>.
-    </p>
-
-    <h3>Requesting support</h3>
-
-    <p>
-        For questions, bug reports, and discussions about API development contact our <a href="mailto:api@cap-collectif.com">API team</a>.
-    </p>
 
     {% endif %}
 
@@ -121,7 +223,7 @@
 
     {% if category == "breaking_changes" %}
     <h2>Breaking changes</h2>
-    <p>We have no breaking change, yet…</p>
+    <p>Coming soon…</p>
     {% endif %}
 
     {% if category == "query" %}
@@ -145,8 +247,7 @@
     {% endfor %}
     {% endif %}
     
-    {% if mutation and category == "mutation" %}
-        {% if selection %}
+    {% if mutation and category == "mutation" and selection is not null %}
         <h2>{{selection.name}}
         {% if selection.config.access|default(false) %}
             {# We need a way to get info about the required access #}
@@ -156,7 +257,7 @@
         {% if selection.type.getNullableType(selection.type).preview is defined and selection.type.getNullableType(selection.type).preview %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
         {% endif %}        
-        <p>{{selection.description|graphql_description|raw}}</p>
+        <p>{{selection.description}}</p>
         <h3>
            Input fields
         </h3>
@@ -167,24 +268,14 @@
         {% for payloadField in selection.type.fields|usort %}
          {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': payloadField} %}
         {% endfor %}
-        {% else %}
-            <h2>Mutations</h2>
-            <p>
-                Every GraphQL schema has a root type for both queries and mutations. The <a href="https://graphql.github.io/graphql-spec/June2018/#sec-Type-System">mutation type</a> defines GraphQL operations that change data on the server. It is analogous to performing HTTP verbs such as <code>POST</code>, <code>PATCH</code>, and <code>DELETE</code>.
-            </p>
-            <p>
-                For more information, see "About mutations."
-            </p>
-        {% endif %}
     {% endif %}
 
     {% if category == "object" %}
-        {% if selection %}
         <h2>{{selection.name}}</h2>
         {% if selection.preview is defined and selection.preview and not selection.previewHasAPublicType %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
         {% endif %}
-        <p>{{selection.description|graphql_description|raw}}</p>
+        <p>{{selection.description}}</p>
 
         {% for interface in selection.interfaces|usort %}
             {% if loop.first %}
@@ -207,18 +298,6 @@
             {% endif %}
             {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field, 'parent': selection } %}
         {% endfor %}
-        {% else %}
-        <h2>Objects</h2>
-        <p>
-        <a href="https://graphql.github.io/graphql-spec/June2018/#sec-Objects">Objects</a> in GraphQL represent the resources you can access. An object can contain a list of fields, which are specifically typed.
-        </p>
-        <p>
-            For example, the <a href="{{ path('app_developer_category_type', { 'category': 'object', 'type': 'User' }) }}"><code>User</code></a> object has a field called <code>username</code>, which is a <a href="{{ path('app_developer_category_type', { 'category': 'scalar', 'type': 'String' }) }}"><code>String</code></a>.
-        </p>
-        <p>
-For more information, see "Introduction to GraphQL."
-        </p>
-        {% endif %}
     {% endif %}
 
     {% if category == "interface" %}
@@ -226,7 +305,7 @@ For more information, see "Introduction to GraphQL."
         {% if selection.preview is defined and selection.preview %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
         {% endif %}
-        <p>{{selection.description|graphql_description|raw}}</p>
+        <p>{{selection.description}}</p>
         <h3>Implemented by</h3>
         <ul>
         {% for object in objects if object.implementsInterface(selection) %}
@@ -247,63 +326,40 @@ For more information, see "Introduction to GraphQL."
 
     {% if category == "enum" %}
         <h2>{{selection.name}}</h2>
-        <p>{{selection.description|graphql_description|raw}}</p>
+        <p>{{selection.description}}</p>
         <h3>Values</h3>
         {% for value in selection.values %}
             <div>
              <h3>{{ value.name }}</h3>
-             <p>{{ value.description|graphql_description|raw }}</p>
+             <p>{{ value.description }}</p>
             </div>
         {% endfor %}
     {% endif %}
 
     {% if category == "union" %}
-        {% if selection %}
         <h2>{{selection.name}}</h2>
-        <p>{{selection.description|graphql_description|raw}}</p>
+        <p>{{selection.description}}</p>
         <h3>Possible Types</h3>
         {% for type in selection.getTypes() %}
              <h3>{{ type.name }}</h3>
         {% endfor %}
-        {% else %}
-        We have no union, yet…
-        {% endif %}
     {% endif %}
 
     {% if category == "input_object" %}
-        {% if selection %}
         <h2>{{selection.name}}</h2>
-        {% if selection.getNullableType(selection).preview is defined and selection.getNullableType(selection).preview %}
+        {% if input_object.getNullableType(input_object).preview is defined and input_object.getNullableType(input_object).preview %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
         {% endif %}        
-        <p>{{selection.description|graphql_description|raw}}</p>
+        <p>{{selection.description}}</p>
         <h3>Input Fields</h3>
         {% for field in selection.fields|usort %}
             {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
         {% endfor %}
-        {% else %}
-        <p>
-        <a href="https://graphql.github.io/graphql-spec/June2018/#sec-Input-Objects">Input objects</a> can be described as "composable objects" because they include a set of input fields that define the object.
-        </p>
-        <p>
-For example, CommitAuthor takes a field called emails. Providing a value for emails transforms CommitAuthor into a list of User objects containing that email address. Note that objects may have input objects, whereas mutations require input objects.
-        </p>
-        {% endif %}
     {% endif %}
 
     {% if category == "scalar" %}
-        {% if selection %}
         <h2>{{selection.name}}</h2>
-        <p>{{selection.description|graphql_description|raw}}</p>
-        {% else %}
-        <h2>Scalars</h2>
-        <p>
-        Scalars are primitive values: <code>Int</code>, <code>Float</code>, <code>String</code>, <code>Boolean</code>, or <code>ID</code>. We also added some custom scalars like <code>URI</code> or <code>HTML</code> to ease usage.
-        </p>
-        <p>
-        When calling the GraphQL API, you must specify nested subfields until you return only scalars.
-        </p>
-        {% endif %}
+        <p>{{selection.description}}</p>
     {% endif %}
 
 </div>

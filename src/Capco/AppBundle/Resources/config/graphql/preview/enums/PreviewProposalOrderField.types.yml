@@ -2,11 +2,11 @@ PreviewProposalOrderField:
   type: enum
   config:
     name: ProposalOrderField
-    description: 'Properties by which proposal connections can be ordered.'
+    description: 'Properties by which proposal connections can be ordered'
     values:
       PUBLISHED_AT:
         value: 'PUBLISHED_AT'
-        description: 'Allows ordering a list of proposals by when they were published.'
+        description: 'Allows ordering a list of proposals by when they were created.'
       VOTES:
         value: 'VOTES'
         description: 'Allows ordering a list of proposals by the number of votes it have.'

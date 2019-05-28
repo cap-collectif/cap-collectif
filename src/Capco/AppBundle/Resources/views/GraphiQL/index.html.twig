@@ -32,24 +32,24 @@
     <p style="margin-left: 15px">
     {% if app.user and (isInternal or publicApiToken) %}
       <div style="margin-left: 15px">
-       Hello <strong>{{app.user.username}}</strong>, you’re ready to explore our GraphQL API with authenticated requests!
+       Signed in as <strong>{{app.user.username}}</strong>. You’re ready to explore real, live, production data!
       </div>
     {% else %}
       {% if app.user %}
         Sorry, we could not find an API key for your account <strong>{{app.user.username}}</strong>. 
         <br />
-        Your API requests are <strong>not authenticated</strong>. Contact <a href="mailto:api@cap-collectif.com">api@cap-collectif.com</a> if you need to use authenticated requests (but you probably don't !). 
+        Your API requests are <strong>not authenticated</strong>. Contact <a href="mailto:coucou@cap-collectif.com">coucou@cap-collectif.com</a> if you need to use authenticated requests (but you probably don't !). 
        {% else %}
-        Welcome to the GraphQL API explorer ! Your API requests are <strong>not authenticated</strong>.
-        {# <br /> #}
-        {# Start exploring GraphQL API queries using your account by <strong>logging in</strong>.  #}
+        Your API requests are <strong>not authenticated</strong>.
+        <br />
+        Start exploring GraphQL API queries using your account by <strong>logging in</strong>. 
        {% endif %}
     {% endif %}
       <div style="margin-left: 15px">
       {% if isInternal %}
          Hello capco dev ! You are querying <strong>Internal</strong> schema.
       {% else %}
-        <a href="{{ path('app_developer_category', { category: 'previews' }) }}">Schema Previews</a> are <strong>enabled</strong> by default in the explorer.
+         Schema Previews are <strong>enabled</strong> by default.
       {% endif %}
       </div>
     </p>

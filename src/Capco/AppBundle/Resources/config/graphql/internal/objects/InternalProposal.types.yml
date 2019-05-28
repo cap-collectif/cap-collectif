@@ -15,21 +15,18 @@ InternalProposal:
   config:
     name: Proposal
     interfaces:
-      - Node
-      - Contribution
-      - Commentable
-      - PublicPublishable
-      - Draftable
-      - Reportable
-      - Trashable
-      - UniformResourceLocatable
-      - UniformResourceAdminLocatable
+      [
+        Node,
+        Contribution,
+        Commentable,
+        PublicPublishable,
+        Draftable,
+        Reportable,
+        Trashable,
+        UniformResourceLocatable,
+        UniformResourceAdminLocatable,
+      ]
     fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Proposal
       adminUrl:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAdminUrlResolver", [value])'
         access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"

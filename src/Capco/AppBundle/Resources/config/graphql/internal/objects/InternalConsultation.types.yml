@@ -9,11 +9,6 @@ InternalConsultation:
       - Node
     name: Consultation
     fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Consultation
       contributors:
         type: 'InternalUserConnection!'
       # Should stay an array ?

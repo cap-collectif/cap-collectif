@@ -1,7 +1,7 @@
 CommentOrderField:
   type: enum
   config:
-    description: 'Ordering options for comments returned from the connection.'
+    description: 'Ordering options for comments.'
     values:
       PUBLISHED_AT:
         value: 'PUBLISHED_AT'

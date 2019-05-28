@@ -16,7 +16,6 @@ PreviewProposal:
       - Trashable
     fields:
       id:
-        description: 'The ID of an object.'
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: Proposal

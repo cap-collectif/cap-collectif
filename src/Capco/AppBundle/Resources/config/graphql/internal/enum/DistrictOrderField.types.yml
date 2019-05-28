@@ -1,7 +1,7 @@
 DistrictOrderField:
   type: enum
   config:
-    description: 'Ordering options for districts returned from the connection.'
+    description: 'Ordering options for districts.'
     values:
       ALPHABETICAL:
         value: 'ALPHABETICAL'

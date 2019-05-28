@@ -1,12 +1,10 @@
 # A step to collect proposals.
 type CollectStep implements Node {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
-
-    # Returns the first `n` elements from the list.
     first: Int = 100
 
     # Returns the elements in the list that come before the specified cursor.
@@ -15,11 +13,26 @@ type CollectStep implements Node {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters proposals with the given trashed status (eg: visible, not visible).
+    # If non-null, filters proposals with the given trashed status.
     trashedStatus: ProposalTrashedStatus = NOT_TRASHED
 
-    # ID of a User to filter by. If non-null, only proposals authored by this user will be returned.
+    # If non-null, filters proposals with the given district.
+    district: ID
+
+    # If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # If non-null, filters proposals with the given category.
+    category: ID
+
+    # If non-null, filters proposals with the given author.
     author: ID
+
+    # If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
 
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
@@ -31,7 +44,7 @@ type CollectStep implements Node {
 
 # A consultation
 type Consultation implements Node {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # The title of the consultation.
@@ -64,7 +77,7 @@ type Consultation implements Node {
 
 # A step with consultation.
 type ConsultationStep implements Node {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # A list of contributor associated with the consultation step.
@@ -100,7 +113,7 @@ scalar Email
 
 # Represents a calendar event.
 type Event implements Node & UniformResourceLocatable {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # The URL to this resource.
@@ -127,7 +140,7 @@ type Event implements Node & UniformResourceLocatable {
   # Identifies the body of the event.
   body: HTML!
 
-  # Whether or not this event is published.
+  # Identifies if the event is published.
   enabled: Boolean!
 
   # Identifies the latitude of the event.
@@ -137,13 +150,13 @@ type Event implements Node & UniformResourceLocatable {
   lng: Float
 
   # Identifies the registration link of the event.
-  link: URI @deprecated(reason: "Field `link` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
+  link: URI
 
   # Identifies the zip code of the event.
-  zipCode: String @deprecated(reason: "Field `zipCode` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
+  zipCode: String
 
   # Identifies the address of the event.
-  fullAddress: String @deprecated(reason: "Field `fullAddress` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
+  fullAddress: String
 }
 
 # A connection to a list of items.
@@ -177,7 +190,7 @@ type Media implements UniformResourceLocatable {
 
 # A question which accept document only.
 type MediaQuestion implements Question & Node {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # Identifies the question title.
@@ -213,7 +226,7 @@ type MediaResponse implements Response {
 
 # A question with multiple choices available.
 type MultipleChoiceQuestion implements Question & Node {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # Identifies the question title.
@@ -256,12 +269,12 @@ enum NotPublishedReason {
   AUTHOR_CONFIRMED_TOO_LATE
 }
 
-# Possible directions in which to order a list of items when provided an `orderBy` argument.
+# Possible directions in which to order a list of items when provided an orderBy argument.
 enum OrderDirection {
-  # Specifies an ascending order for a given `orderBy` argument.
+  # Specifies an ascending order for a given orderBy argument.
   ASC
 
-  # Specifies a descending order for a given `orderBy` argument.
+  # Specifies a descending order for a given orderBy argument.
   DESC
 }
 
@@ -280,9 +293,14 @@ type PageInfo {
   endCursor: String
 }
 
+interface PrivatableVote {
+  # Whether the vote is anonymous or not.
+  private: Boolean
+}
+
 # A participatory project.
 type Project implements Node & UniformResourceLocatable {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # The URL to this resource.
@@ -351,7 +369,7 @@ input ProjectOrder {
   direction: OrderDirection
 }
 
-# Ordering options for projects returned from the connection.
+# Ordering projects.
 enum ProjectOrderField {
   # Allows ordering a list of projects by there number of contributions.
   POPULAR
@@ -362,7 +380,7 @@ enum ProjectOrderField {
 
 # Represents a user's contribution to a collect step.
 type Proposal implements Node & Publishable & UniformResourceLocatable & Trashable {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # Whether or not the entity is published.
@@ -443,9 +461,9 @@ input ProposalOrder {
   direction: OrderDirection! = ASC
 }
 
-# Properties by which proposal connections can be ordered.
+# Properties by which proposal connections can be ordered
 enum ProposalOrderField {
-  # Allows ordering a list of proposals by when they were published.
+  # Allows ordering a list of proposals by when they were created.
   PUBLISHED_AT
 
   # Allows ordering a list of proposals by the number of votes it have.
@@ -471,7 +489,7 @@ enum ProposalTrashedStatus {
 }
 
 # A vote on a proposal for a given step.
-type ProposalVote implements Publishable & Vote {
+type ProposalVote implements Publishable & Vote & PrivatableVote {
   # The ID of an object
   id: ID!
 
@@ -487,14 +505,14 @@ type ProposalVote implements Publishable & Vote {
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
-  # Whether the author of the vote is anonymous or not.
-  private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2019-09-01 UTC.")
+  # Whether the vote is anonymous or not.
+  private: Boolean
 
-  # Whether the author of the vote is anonymous or not.
-  anonymous: Boolean!
-
-  # Identifies the date and time when the object was created.
+  # Date of vote.
   createdAt: DateTime!
+
+  # Is the vote anonymous ?
+  anonymous: Boolean!
 }
 
 # Entities that can be published.
@@ -520,9 +538,9 @@ type Query {
   # The currently authenticated user.
   viewer: User!
 
-  # Lookup a node by its ID.
+  # The ID of an object.
   node(
-    # The ID of an object.
+    # The ID of an object
     id: ID!
   ): Node
 
@@ -548,6 +566,27 @@ type Query {
 
     # Ordering options for projects returning from the connection.
     orderBy: ProjectOrder = {field: LATEST, direction: DESC}
+
+    # If non-null, projects with the given string to look for.
+    term: String
+
+    # If non-null, filter projects by statuses.
+    status: ID
+
+    # If non-null, filter projects by themes
+    theme: ID
+
+    # If non-null, filter projects by types
+    type: ID
+
+    # If non-null, filter projects by author
+    author: ID
+
+    # If true, filter projects with events
+    withEventOnly: Boolean = false
+
+    # If true, return only publics projects
+    onlyPublic: Boolean = false
   ): ProjectConnection!
 
   # Lookup events.
@@ -564,8 +603,23 @@ type Query {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # ID of a Project to filter by. If non-null, only events belonging to the project will be returned.
+    # If non-null, filters events by comparing the start date with present.
+    isFuture: Boolean
+
+    # If non-null, filters events with the given theme.
+    theme: ID
+
+    # If non-null, filters events with the given project.
     project: ID
+
+    # If non-null, filters events with the given author.
+    author: ID
+
+    # If non-null, filters events with the given author type.
+    userType: ID
+
+    # If non-null, filters events with the given string to look for.
+    search: String
   ): EventConnection!
 
   # Lookup users.
@@ -585,7 +639,7 @@ type Query {
 }
 
 interface Question {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # Identifies the question title.
@@ -633,7 +687,7 @@ type QuestionChoice {
 
 # A questionnaire is a series of questions that users can answer.
 type Questionnaire implements Node {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # Identifies the questionnaire title.
@@ -681,7 +735,7 @@ type Questionnaire implements Node {
 
 # Represents a user's answer to a questionnaire.
 type Reply implements Node & Publishable {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # Whether or not the entity is published.
@@ -762,7 +816,7 @@ type ResponseEdge {
 
 # A section is just a title in a quiz without any possible answer.
 type SectionQuestion implements Question & Node {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # Identifies the question title.
@@ -786,7 +840,7 @@ type SectionQuestion implements Question & Node {
 
 # A simple question
 type SimpleQuestion implements Question & Node {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # Identifies the question title.
@@ -843,7 +897,7 @@ interface UniformResourceLocatable {
 
 # A user is an individual's account.
 type User implements Node & UniformResourceLocatable {
-  # The ID of an object.
+  # The ID of an object
   id: ID!
 
   # The URL to this resource.
@@ -959,7 +1013,7 @@ interface Vote {
   # The ID of an object
   id: ID!
 
-  # Identifies the date and time when the object was created.
+  # Date of vote.
   createdAt: DateTime!
 }
 
