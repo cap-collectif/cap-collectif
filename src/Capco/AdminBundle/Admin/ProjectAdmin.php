@@ -8,7 +8,6 @@ use Capco\AppBundle\Toggle\Manager;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\CoreBundle\Model\Metadata;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
@@ -208,15 +207,6 @@ final class ProjectAdmin extends CapcoAdmin
             ->end()
             ->with('group.admin.parameters', ['class' => 'col-md-6'])
             ->end();
-        // Content
-        // ->add('authors', 'sonata_type_model_autocomplete', [
-        //     'label' => 'admin.fields.project.author',
-        //     'property' => 'user',
-        //     'multiple' => true,
-        //     'to_string_callback' => function ($entity, $property) {
-        //         return $entity->getUser()->getEmail() . ' - ' . $entity->getUser()->getUsername();
-        //     },
-        // ])
         $formMapper
             ->with('admin.fields.project.group_content')
             ->add('title', null, ['label' => 'admin.fields.project.title'])
@@ -228,11 +218,13 @@ final class ProjectAdmin extends CapcoAdmin
             ])
             ->add('authors', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.project.author',
-                'property' => 'username,email',
-                'to_string_callback' => function ($enitity, $property) {
-                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                'property' => 'user',
+                'multiple' => true,
+                'to_string_callback' => function ($entity, $property) {
+                    return $entity->getUser()->getEmail() .
+                        ' - ' .
+                        $entity->getUser()->getUsername();
                 },
-                'required' => true,
             ])
             ->add('opinionTerm', 'choice', [
                 'label' => 'admin.fields.project.opinion_term',

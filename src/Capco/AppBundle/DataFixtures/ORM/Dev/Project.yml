@@ -180,7 +180,6 @@ Capco\AppBundle\Entity\Project:
     id: 'externalProject'
     title: Projet externe
     projectType: '@projectType4'
-    Author: '@user4'
     themes: []
     exportable: true
     publishedAt: <(new \DateTime('now - 40 days'))>
