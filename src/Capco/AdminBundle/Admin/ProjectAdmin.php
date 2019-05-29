@@ -144,6 +144,17 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
+        $listMapper->addIdentifier('title', null, ['label' => 'admin.fields.project.title']);
+        // ->add('Author', 'sonata_type_model', ['label' => 'admin.fields.project.author']);
+        if (
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
+        ) {
+            $listMapper->add('themes', null, ['label' => 'admin.fields.project.themes']);
+        }
+
         $listMapper
             ->add('visibility', ChoiceType::class, [
                 'template' => 'CapcoAdminBundle:Project:visibility_list_field.html.twig',

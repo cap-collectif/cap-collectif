@@ -3530,7 +3530,7 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
   # Slug of a project
   slug: String!
   steps: [Step!]!
-  author: User!
+  authors: [User!]!
   video: String
   cover: Media
   contributionsCount: Int!
