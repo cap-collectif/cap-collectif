@@ -3,7 +3,8 @@
 {% block field %}
     <div>
         {% if(object.Author is not null) %}
-            <span><a href="{{ path('admin_capco_user_user_show', {'id': object.Author.id}) }}">{{ object.Author.username }}</a></span>
+{#            TODO: When the show user page in BO will be re enabled, set the path to the show user route (`admin_capco_user_user_show`)  #}
+            <span><a href="{{ path('admin_capco_user_user_edit', {'id': object.Author.id}) }}">{{ object.Author.username }}</a></span>
         {% else %}
             <span>{{ object.authorName }}</span>
         {% endif %}
