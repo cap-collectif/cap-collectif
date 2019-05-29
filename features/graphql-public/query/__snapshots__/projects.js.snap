@@ -255,6 +255,19 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
           "contributors": Object {
+            "totalCount": 69,
+          },
+          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
+          "title": "Projet externe",
+          "votes": Object {
+            "totalCount": 86,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
+        "node": Object {
+          "contributors": Object {
             "totalCount": 3,
           },
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
@@ -266,10 +279,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE5",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjIw",
       "hasNextPage": false,
     },
-    "totalCount": 20,
+    "totalCount": 21,
   },
 }
 `;
@@ -490,6 +503,19 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
           "contributors": Object {
+            "totalCount": 69,
+          },
+          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
+          "title": "Projet externe",
+          "votes": Object {
+            "totalCount": 86,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+        "node": Object {
+          "contributors": Object {
             "totalCount": 3,
           },
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
@@ -501,10 +527,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE2",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE3",
       "hasNextPage": false,
     },
-    "totalCount": 17,
+    "totalCount": 18,
   },
 }
 `;

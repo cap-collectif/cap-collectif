@@ -1,9 +1,0 @@
-ProjectLinks:
-  type: object
-  config:
-    description: 'Links'
-    fields:
-      show:
-        type: 'String'
-      external:
-        type: 'String'
