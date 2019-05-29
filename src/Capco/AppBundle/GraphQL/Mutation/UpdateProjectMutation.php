@@ -11,45 +11,59 @@ use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ProjectTypeRepository;
+use Capco\AppBundle\Repository\ProjectAuthorRepository;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class CreateProjectMutation implements MutationInterface
+class UpdateProjectMutation implements MutationInterface
 {
     private $em;
     private $formFactory;
     private $logger;
     private $userRepository;
     private $projectTypeRepository;
+    private $projectRepository;
+    private $projectAuthorRepository;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         UserRepository $userRepository,
-        ProjectTypeRepository $projectTypeRepository
+        ProjectTypeRepository $projectTypeRepository,
+        ProjectAuthorRepository $projectAuthorRepository,
+        ProjectRepository $projectRepository
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
         $this->userRepository = $userRepository;
+        $this->projectRepository = $projectRepository;
         $this->projectTypeRepository = $projectTypeRepository;
+        $this->projectAuthorRepository = $projectAuthorRepository;
     }
 
     public function __invoke(Argument $input): array
     {
         $arguments = $input->getRawArguments();
 
-        $project = new Project();
+        $project = $this->projectRepository->find(GlobalId::fromGlobalId($arguments['id'])['id']);
+        if (!$project) {
+            throw new BadRequestHttpException('Sorry, please retry.');
+        }
 
         foreach ($arguments['authors'] as $userId) {
             $decodedUserId = GlobalId::fromGlobalId($userId)['id'];
-            $project->addAuthor($this->userRepository->find($decodedUserId));
+            if (!$decodedUserId) {
+                throw new BadRequestHttpException('Sorry, please retry.');
+            }
+            $this->transform($decodedUserId, $project);
         }
 
-        unset($arguments['authors']);
+        unset($arguments['authors'], $arguments['id']);
 
         $form = $this->formFactory->create(ProjectFormType::class, $project);
 
@@ -61,7 +75,6 @@ class CreateProjectMutation implements MutationInterface
         }
 
         try {
-            $this->em->persist($project);
             $this->em->flush();
         } catch (DriverException $e) {
             $this->logger->error(
@@ -72,5 +85,21 @@ class CreateProjectMutation implements MutationInterface
         }
 
         return ['project' => $project];
+    }
+
+    public function transform(string $userId, Project $project)
+    {
+        $user = $this->userRepository->find($userId);
+        if (!$user) {
+            throw new BadRequestHttpException('Sorry, please retry.');
+        }
+
+        $projectAuthor = $this->projectAuthorRepository->findOneBy([
+            'project' => $project,
+            'user' => $user,
+        ]);
+        if (!$projectAuthor) {
+            $project->addAuthor($user);
+        }
     }
 }

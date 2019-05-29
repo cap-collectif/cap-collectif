@@ -2780,6 +2780,7 @@ type Mutation {
   updateQuestionnaireParameters(input: UpdateQuestionnaireParametersInput!): UpdateQuestionnaireParametersPayload
   updateQuestionnaireConfiguration(input: UpdateQuestionnaireConfigurationInput!): UpdateQuestionnaireConfigurationPayload
   createProject(input: CreateProjectInput!): CreateProjectPayload
+  updateProject(input: UpdateProjectInput!): UpdateProjectPayload
   createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
   deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
   updateProjectDistrict(input: UpdateProjectDistrictInput!): CreateProjectDistrictPayload
@@ -6456,6 +6457,30 @@ input UpdateProjectDistrictInput {
 
   # The background style attached to this district.
   background: BackgroundStyleInput
+}
+
+input UpdateProjectInput {
+  # The project's ID
+  id: ID!
+
+  # The project's title
+  title: String!
+
+  # The project's authors
+  authors: [String!]!
+
+  # The project's opinion term
+  opinionTerm: String!
+
+  # The project's type
+  projectType: String!
+  clientMutationId: String
+}
+
+type UpdateProjectPayload {
+  # The created project
+  project: Project
+  clientMutationId: String
 }
 
 input UpdateProposalFormInput {

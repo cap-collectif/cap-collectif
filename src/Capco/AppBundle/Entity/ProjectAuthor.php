@@ -11,7 +11,7 @@ use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
  * Project author.
  *
  * @ORM\Table(name="project_author")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectAuthorRepository")
  */
 class ProjectAuthor
 {
@@ -30,11 +30,6 @@ class ProjectAuthor
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private $project;
-
-    public function __toString()
-    {
-        return 'lolilol';
-    }
 
     public function getUser(): User
     {
