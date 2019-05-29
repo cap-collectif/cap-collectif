@@ -62,15 +62,15 @@
     <div class="col-xs-12 col-sm-7">
         <h1 class="project__header__title  h1">{{ project.title }}</h1>
 
-        {% if project.Author is not null %}
+        {% if project.Authors[0].user is not null %}
             <div class="media d-flex project__header__media" style="align-items: center">
-                {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with {'user': project.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
+                {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with {'user': project.Authors[0].user, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                 <div class="media-body">
                     <span class="media--aligned  excerpt">
                         {% spaceless %}
                             {{ 'project.show.published_by' | trans({}, 'CapcoAppBundle') }}
                             {% if is_feature_enabled('profiles') %}
-                                <a href="{{ path('capco_user_profile_show_all', {'slug': project.Author.slug}) }}">{{ project.Author.username }}</a>
+                                <a href="{{ path('capco_user_profile_show_all', {'slug': project.Authors[0].user.slug}) }}">{{ project.Authors[0].user.username }}</a>
                             {% else %}
                                 {{ project.Author.username }}
                             {% endif %}
