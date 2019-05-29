@@ -27,37 +27,41 @@ type Props = ParentProps & {
 export class QuestionsJumpAdminForm extends React.Component<Props> {
   render() {
     const { fields, jumps, questions, oldMember, formName, currentQuestion } = this.props;
-    console.log(fields);
     return (
       <div className="form-group" id="questions_choice_panel_personal">
         <ListGroup>
-          {fields.map((member, index) => (
-            <div className="panel-custom panel panel-default">
-              <div className="panel-heading">
-                <i
-                  className="cap cap-android-menu"
-                  style={{ color: '#0388CC', fontSize: '20px' }}
-                />
-                <h3 className="panel-title">
-                  <FormattedMessage id="answering-this-question" />
-                </h3>
-                <button
-                  type="button"
-                  style={{ border: 'none', fontSize: '20px', backgroundColor: '#f5f5f5' }}
-                  onClick={() => fields.remove(index)}>
-                  X
-                </button>
-              </div>
-              <div className="panel-body">
-                <FieldArray
-                  name={`${member}.conditions`}
-                  component={QuestionJumpConditionsAdminForm}
-                  formName={formName}
-                  member={member}
-                />
-              </div>
-            </div>
-          ))}
+          {fields.map(
+            (member, index) =>
+              jumps &&
+              jumps[index] &&
+              !jumps[index].always && (
+                <div className="panel-custom panel panel-default">
+                  <div className="panel-heading">
+                    <i
+                      className="cap cap-android-menu"
+                      style={{ color: '#0388CC', fontSize: '20px' }}
+                    />
+                    <h3 className="panel-title">
+                      <FormattedMessage id="answering-this-question" />
+                    </h3>
+                    <button
+                      type="button"
+                      style={{ border: 'none', fontSize: '20px', backgroundColor: '#f5f5f5' }}
+                      onClick={() => fields.remove(index)}>
+                      X
+                    </button>
+                  </div>
+                  <div className="panel-body">
+                    <FieldArray
+                      name={`${member}.conditions`}
+                      component={QuestionJumpConditionsAdminForm}
+                      formName={formName}
+                      member={member}
+                    />
+                  </div>
+                </div>
+              ),
+          )}
         </ListGroup>
         <Button
           bsStyle="primary"
