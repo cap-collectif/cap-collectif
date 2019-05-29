@@ -58,10 +58,10 @@ class ProjectListFiltersContainer extends React.Component<Props, State> {
 
   componentDidMount() {
     fetchQuery(environment, getAvailableProjectTypesAndAuthors, {}).then(
-      (data: ProjectListFiltersContainerQueryResponse) => {
+      ({ projectTypes, projectAuthors }: ProjectListFiltersContainerQueryResponse) => {
         this.setState({
-          projectTypes: data.projectTypes,
-          projectAuthors: data.projectAuthors,
+          projectTypes: projectTypes || [],
+          projectAuthors: projectAuthors || [],
         });
       },
     );

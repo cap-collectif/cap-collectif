@@ -12,6 +12,7 @@ const mutation = graphql`
     createProject(input: $input) {
       project {
         id
+        adminUrl
       }
     }
   }

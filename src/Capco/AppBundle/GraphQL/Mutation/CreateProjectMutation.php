@@ -43,18 +43,12 @@ class CreateProjectMutation implements MutationInterface
 
         $project = new Project();
 
-        $projectType = $this->projectTypeRepository->find($arguments['projectType']);
-
-        if (null !== $projectType) {
-            $project->setProjectType($projectType);
-        }
-
         $users = $this->userRepository->hydrateFromIds($arguments['authors']);
         foreach ($users as $user) {
             $project->addAuthor($user);
         }
 
-        unset($arguments['authors'], $arguments['projectType']);
+        unset($arguments['authors']);
 
         $form = $this->formFactory->create(ProjectFormType::class, $project);
 

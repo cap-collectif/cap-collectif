@@ -3,9 +3,11 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectType;
 use Symfony\Component\Form\AbstractType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProjectFormType extends AbstractType
@@ -18,6 +20,10 @@ class ProjectFormType extends AbstractType
                 'purify_html' => true,
                 'strip_tags' => true,
                 'purify_html_profile' => 'default',
+            ])
+            ->add('projectType', EntityType::class, [
+                'required' => true,
+                'class' => ProjectType::class,
             ])
             ->add('opinionTerm', PurifiedTextType::class, [
                 'required' => true,

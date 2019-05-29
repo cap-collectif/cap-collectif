@@ -5,15 +5,31 @@ import { Button } from 'react-bootstrap';
 import { type FormProps, reduxForm, Field } from 'redux-form';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
+import AlertForm from '../../Alert/AlertForm';
 import renderComponent from '../../Form/Field';
 import UserListField from '../Field/UserListField';
+import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import ProjectTypeListField from '../Field/ProjectTypeListField';
+import { UPDATE_ALERT } from '../../../constants/AlertConstants';
+import CreateProjectMutation from '../../../mutations/CreateProjectMutation';
 
 type Props = {|
   ...FormProps,
   handleSubmit: () => void,
   intl: IntlShape,
   formName: string,
+|};
+
+type Author = {|
+  value: string,
+  label: string,
+|};
+
+type FormValues = {|
+  title: string,
+  authors: Author[],
+  opinionTerm: string,
+  projectType: string,
 |};
 
 const projectTerms = [
@@ -27,19 +43,66 @@ const projectTerms = [
   },
 ];
 
-const onSubmit = (values: any) => {
+const formatAuthors = (authors: Author[]): string[] => authors.map(author => author.value);
+
+const onSubmit = ({ title, authors, opinionTerm, projectType }: FormValues) => {
+  const input = {
+    title,
+    opinionTerm,
+    projectType,
+    authors: formatAuthors(authors),
+  };
+
+  return CreateProjectMutation.commit({ input }).then(data => {
+    if (data.createProject && data.createProject.project) {
+      window.location.href = data.createProject.project.adminUrl;
+      AppDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
+      });
+    }
+  });
 };
 
-const validate = () => {
+const validate = ({ title, authors, opinionTerm, projectType }: FormValues) => {
   const errors = {};
+
+  if (!title) {
+    errors.title = 'global.required';
+  } else if (title.length < 2) {
+    errors.title = 'global.required';
+  }
+
+  if (!authors) {
+    errors.authors = 'global.required';
+  } else if (authors.length <= 0) {
+    errors.authors = 'global.required';
+  }
+
+  if (!projectType) {
+    errors.projectType = 'global.required';
+  }
+
+  if (!opinionTerm) {
+    errors.opinionTerm = 'global.required';
+  }
 
   return errors;
 };
 
-const formName="projectAdmin";
+const formName = 'projectAdmin';
 
 const ProjectContentAdminForm = (props: Props) => {
-  const { handleSubmit, intl, invalid, submitting, pristine } = props;
+  const {
+    handleSubmit,
+    intl,
+    valid,
+    invalid,
+    submitting,
+    pristine,
+    submitSucceeded,
+    submitFailed,
+  } = props;
 
   return (
     <form onSubmit={handleSubmit} id={formName}>
@@ -66,9 +129,10 @@ const ProjectContentAdminForm = (props: Props) => {
 
       <ProjectTypeListField />
       <Field
-        name="usage"
+        name="opinionTerm"
         type="select"
         component={renderComponent}
+        value={projectTerms[0].id}
         label={
           <span>
             <FormattedMessage id="admin.fields.project.opinion_term" />
@@ -80,26 +144,36 @@ const ProjectContentAdminForm = (props: Props) => {
           </option>
         ))}
       </Field>
-      <Button
-        type="submit"
-        disabled={invalid || submitting || pristine}
-        bsStyle="primary">
+      <Button type="submit" disabled={invalid || submitting} bsStyle="primary">
         {submitting ? (
           <FormattedMessage id="global.loading" />
         ) : (
           <FormattedMessage id="global.save" />
         )}
       </Button>
+      <AlertForm
+        valid={valid}
+        invalid={invalid && !pristine}
+        submitSucceeded={submitSucceeded}
+        submitFailed={submitFailed}
+        submitting={submitting}
+      />
     </form>
   );
 };
+
+const mapStateToProps = () => ({
+  initialValues: {
+    opinionTerm: projectTerms[0].id,
+  },
+});
 
 const form = injectIntl(
   reduxForm({
     validate,
     onSubmit,
-    form: formName
+    form: formName,
   })(ProjectContentAdminForm),
 );
 
-export default connect()(form);
+export default connect(mapStateToProps)(form);

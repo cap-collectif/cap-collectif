@@ -1208,7 +1208,7 @@ class Project implements IndexableInterface
             return true;
         }
 
-        if ($viewer && ($viewer->isSuperAdmin() || \in_array($this->getAuthors(), $viewer))) {
+        if ($viewer && ($viewer->isSuperAdmin() || $this->getAuthors()->contains($viewer))) {
             return true;
         }
 
