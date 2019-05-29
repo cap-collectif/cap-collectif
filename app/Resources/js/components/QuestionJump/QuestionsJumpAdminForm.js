@@ -92,7 +92,11 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
           <div className="mb-10">
             <h4 className="panel-title">
               <FormattedMessage
-                id={jumps && jumps.length === 0 ? 'always-go-to' : 'jump-other-goto'}
+                id={
+                  jumps && jumps.filter(Boolean).filter(j => !j.always).length === 0
+                    ? 'always-go-to'
+                    : 'jump-other-goto'
+                }
               />
             </h4>
             <Field

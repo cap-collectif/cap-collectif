@@ -8,40 +8,55 @@ export type QuestionsInReduxForm = $ReadOnlyArray<
   responsesHelper_adminQuestion & { alwaysJump: ?string },
 >;
 
+const convertJump = jump => ({
+  id: jump.id,
+  always: jump.always,
+  conditions:
+    jump.conditions &&
+    jump.conditions.filter(Boolean).map(condition => ({
+      ...condition,
+      question: condition.question.id,
+      value: condition.value ? condition.value.id : null,
+    })),
+  origin: jump.origin.id,
+  destination: jump.destination.id,
+});
+
 export const submitQuestion = (questions: QuestionsInReduxForm) =>
   // $FlowFixMe Missing type annotation for U.
   questions.filter(Boolean).map(question => {
     const questionInput = {
       question: {
         ...question,
-        jumps: question.jumps && [
-          ...(question.alwaysJump
-            ? [
-                {
-                  always: true,
-                  conditions: [],
-                  origin: question.id,
-                  destination: question.alwaysJump,
-                },
-              ]
-            : []),
-          ...question.jumps
-            .filter(jump => jump && !jump.always)
-            .filter(Boolean)
-            .map(jump => ({
-              id: jump.id,
-              always: jump.always,
-              conditions:
-                jump.conditions &&
-                jump.conditions.filter(Boolean).map(condition => ({
-                  ...condition,
-                  question: condition.question.id,
-                  value: condition.value ? condition.value.id : null,
-                })),
-              origin: jump.origin.id,
-              destination: jump.destination.id,
-            })),
-        ],
+        jumps: !question.alwaysJump
+          ? question.jumps &&
+            question.jumps
+              .filter(Boolean)
+              .filter(jump => !jump.always)
+              .map(convertJump)
+          : question.jumps && question.jumps.find(jump => jump && jump.always)
+          ? question.jumps &&
+            question.jumps
+              .filter(Boolean)
+              .map(convertJump)
+              .map(jump => ({
+                ...jump,
+                destination: jump.always ? question.alwaysJump : jump.destination,
+              }))
+          : [
+              ...(question.jumps
+                ? question.jumps
+                    .filter(Boolean)
+                    .filter(jump => !jump.always)
+                    .map(convertJump)
+                : []),
+              {
+                always: true,
+                conditions: [],
+                origin: question.id,
+                destination: question.alwaysJump,
+              },
+            ],
         // Easyfix: this should be refactored
         otherAllowed: question.isOtherAllowed,
         isOtherAllowed: undefined,
