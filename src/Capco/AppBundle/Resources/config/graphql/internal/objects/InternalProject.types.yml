@@ -24,7 +24,8 @@ InternalProject:
         type: '[Step!]!'
         resolve: '@=value.getRealSteps()'
       authors:
-       type: '[InternalUser!]!'
+        type: '[InternalUser!]!'
+        resolve: '@=value.getUserAuthors()'
       video:
         type: 'String'
       cover:

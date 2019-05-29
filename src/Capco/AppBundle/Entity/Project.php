@@ -405,16 +405,21 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAuthors(): Collection
+    public function getUserAuthors(): array
     {
         $authors = [];
         foreach ($this->authors as $projectAuthor) {
             $authors[] = $projectAuthor->getUser();
         }
 
+        return $authors;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAuthors(): Collection
+    {
         return $this->authors;
     }
 

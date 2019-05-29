@@ -12,6 +12,7 @@ Scenario: GraphQL client wants to create a project
           project {
             title
             authors {
+              _id
               username
               email
             }
@@ -30,14 +31,17 @@ Scenario: GraphQL client wants to create a project
   """
   Then the JSON response should match:
   """
-  {
-    "data":{
-      "createProject":{
-        "project":{
-          "id":"UHJvamVjdDo1ZTMyMzAwZi04MjBiLTExZTktYThmNy0wMjQyYWMxMTAwMDQ=",
-          "title":"thisisnotatest"
+    {
+      "data":{
+        "createProject":{
+          "project":{
+            "title": "thisisnotatest",
+            "authors":[
+              {"_id":"user1","username":"lbrunet","email":"lbrunet@jolicode.com"},
+              {"_id":"userAdmin","username":"admin","email":"admin@test.com"}
+            ]
+          }
         }
       }
     }
-  }
   """
