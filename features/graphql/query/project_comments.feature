@@ -33,65 +33,65 @@ Scenario: GraphQL user wants to get list of trashed comments.
   Then the JSON response should match:
   """
   {
-    "data":{
-      "node": {
-        "id":"UHJvamVjdDpwcm9qZWN0Ng==",
-        "comments":{
-          "totalCount":70,
-          "edges":[
-            {
-              "node": {
-                "id": "trashedComment1"
-              }
-            },
-            {
-              "node": {
-                "id": "trashedComment10"
-              }
-            },
-            {
-              "node": {
-                "id": "trashedComment11"
-              }
-            },
-            {
-              "node": {
-                "id": "trashedComment12"
-              }
-            },
-            {
-              "node": {
-                "id": "trashedComment13"
-              }
-            },
-            {
-              "node": {
-                "id": "trashedComment14"
-              }
-            },
-            {
-              "node": {
-                "id": "trashedComment15"
-              }
-            },
-            {
-              "node": {
-                "id": "trashedComment16"
-              }
-            },
-            {
-              "node": {
-                "id": "trashedComment17"
-              }
-            },
-            {
-              "node": {
-                "id": "trashedComment18"
-              }
-            }
-          ]
-        }
+   "data":{
+      "node":{
+         "id":"UHJvamVjdDpwcm9qZWN0Ng==",
+         "comments":{
+            "totalCount":70,
+            "edges":[
+               {
+                  "node":{
+                     "id":"trashedComment1"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment10"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment11"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment12"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment13"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment14"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment15"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment16"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment17"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment18"
+                  }
+               }
+            ]
+         }
       }
-    }
-  }
+   }
+}
 """
