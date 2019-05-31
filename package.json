@@ -164,7 +164,7 @@
         "babel-plugin-transform-runtime": "^6.23.0",
         "babel-polyfill": "^6.26.0",
         "bootstrap-sass": "^3.4.1",
-        "bundlesize": "^0.17.1",
+        "bundlesize": "^0.17.2",
         "classnames": "^2.2.3",
         "codecov": "^3.1.0",
         "convert-source-map": "^1.6.0",
