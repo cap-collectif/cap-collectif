@@ -10,6 +10,7 @@ use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
+use Capco\AppBundle\Utils\Text;
 use Overblog\GraphQLBundle\Request\Executor;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -158,25 +159,25 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         $fileName = 'users.csv';
 
         $requestString = $this->getUsersGraphQLQuery();
-        $datas = $this->executor
+        $data = $this->executor
             ->execute('internal', [
                 'query' => $requestString,
                 'variables' => [],
             ])
             ->toArray();
 
-        $userSample = $datas['data']['users']['edges'][0]['node'];
+        $userSample = $data['data']['users']['edges'][0]['node'];
 
         $this->writer = WriterFactory::create(Type::CSV);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
         $header = $this->generateSheetHeader($userSample);
         $this->writer->addRow($header);
 
-        $totalCount = Arr::path($datas, 'data.users.totalCount');
+        $totalCount = Arr::path($data, 'data.users.totalCount');
         $progress = new ProgressBar($output, $totalCount);
 
         $this->connectionTraversor->traverse(
-            $datas,
+            $data,
             'users',
             function ($edge) use ($progress) {
                 $progress->advance();
@@ -206,9 +207,11 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
             $responses = array_map(function ($edge) {
                 return $edge['node'];
             }, Arr::path($user, 'responses.edges'));
-
             foreach ($responses as $response) {
-                $row[] = $this->exportUtils->parseCellValue($this->addCustomResponse($response));
+                $value = $this->addCustomResponse($response);
+                $cleanValue = Text::cleanNewline($value);
+
+                $row[] = $this->exportUtils->parseCellValue($cleanValue);
             }
         }
         $this->writer->addRow($row);
@@ -319,7 +322,7 @@ EOF;
         return array_merge($this->sheetHeader, $this->generateSheetHeaderQuestions($sampleUser));
     }
 
-    private function addCustomResponse(array $response): ?string
+    private function addCustomResponse(array $response)
     {
         switch ($response['__typename']) {
             case self::VALUE_RESPONSE_TYPENAME:

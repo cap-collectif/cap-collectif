@@ -60,6 +60,7 @@ export class ProposalPageHeader extends React.Component<Props> {
     };
 
     const tradKeyToBack = proposal.form.isProposalForm ? 'proposal.back' : 'questions-list';
+    const tradKeyToDisplayDate = proposal.draft ? 'last-modification-on' : 'global.edited_on';
 
     return (
       <div id="ProposalPageHeader" className={classNames(classes)}>
@@ -88,7 +89,7 @@ export class ProposalPageHeader extends React.Component<Props> {
                 <span>
                   {' • '}
                   <FormattedMessage
-                    id="global.edited_on"
+                    id={tradKeyToDisplayDate}
                     values={{
                       updated: updatedDate,
                     }}
@@ -170,6 +171,7 @@ export default createFragmentContainer(container, {
       }
       createdAt
       publishedAt
+      draft
       updatedAt
       publicationStatus
       url
