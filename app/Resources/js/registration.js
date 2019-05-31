@@ -55,6 +55,7 @@ import ChooseAUsernameApp from './startup/ChooseAUsernameApp';
 import ParisUserNotValidApp from './startup/ParisUserNotValidApp';
 import AccountProfileFollowingsApp from './startup/AccountProfileFollowingsApp';
 import UserAdminCreateButtonApp from './startup/UserAdminCreateButtonApp';
+import ProjectCreateButtonApp from './startup/ProjectCreateButtonApp';
 import EditProfileApp from './startup/EditProfileApp';
 import CookieContentApp from './startup/CookieContentApp';
 import CookieManagerApp from './startup/CookieManagerApp';
@@ -191,4 +192,6 @@ ReactOnRails.register({
   EventListApp,
   SSOSwitchUserApp,
   AuthentificationAdminApp,
+  ShieldAdminApp,
+  ProjectCreateButtonApp,
 });
