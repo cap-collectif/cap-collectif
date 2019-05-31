@@ -1,6 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\Publishable;
 
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Model\Publishable;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
@@ -24,6 +26,9 @@ class DoctrineListener implements EventSubscriber
     {
         $author = $entity->getAuthor();
         if (!$author || $author->isEmailConfirmed()) {
+            if ($entity instanceof Proposal && $entity->isDraft()) {
+                return;
+            }
             $entity->setPublishedAt(new \DateTime());
         }
     }
