@@ -238,7 +238,7 @@
         "react": "^16.8.6",
         "react-addons-shallow-compare": "^15.6.2",
         "react-addons-test-utils": "^15.6.2",
-        "react-async-script": "^0.9.1",
+        "react-async-script": "^1.0.1",
         "react-axe": "^3.0.2",
         "react-beautiful-dnd": "^8.0.2",
         "react-bootstrap": "^0.32.1",

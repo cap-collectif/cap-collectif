@@ -7103,7 +7103,7 @@ hoist-non-react-statics@^2.1.0, hoist-non-react-statics@^2.5.4, hoist-non-react-
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
 
-hoist-non-react-statics@^3.1.0:
+hoist-non-react-statics@^3.0.1, hoist-non-react-statics@^3.1.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
   integrity sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
@@ -11544,12 +11544,13 @@ react-addons-test-utils@^15.6.2:
   resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.6.2.tgz#c12b6efdc2247c10da7b8770d185080a7b047156"
   integrity sha1-wStu/cIkfBDae4dw0YUICnsEcVY=
 
-react-async-script@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/react-async-script/-/react-async-script-0.9.1.tgz#d4a496c726fab0c6ef05998ab16e50c742820b60"
-  integrity sha1-1KSWxyb6sMbvBZmKsW5Qx0KCC2A=
+react-async-script@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-async-script/-/react-async-script-1.0.1.tgz#a3996e313a1352b7e96087405e40ebb877f9caf0"
+  integrity sha512-EosAKCTgHc6oWPx7ONv4IjtaIKRi30DjR71iJfoGfb13+naFYGjLutH6dFC5rRaYX8odW57zmC9ekf/WuLiyOQ==
   dependencies:
-    prop-types ">=15.5.0"
+    hoist-non-react-statics "^3.0.1"
+    prop-types "^15.5.0"
 
 react-axe@^3.0.2:
   version "3.1.0"
