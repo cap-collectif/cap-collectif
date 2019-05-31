@@ -337,7 +337,7 @@ EOF;
         return array_merge($this->sheetHeader, $this->generateSheetHeaderQuestions());
     }
 
-    private function addCustomResponse(array $response): ?string
+    private function addCustomResponse(array $response)
     {
         switch ($response['__typename']) {
             case self::VALUE_RESPONSE_TYPENAME:
