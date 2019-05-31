@@ -13,14 +13,6 @@ type Props = {
 };
 
 export class ProjectPreviewCounters extends React.Component<Props> {
-  getNbCounters = () => {
-    const { project } = this.props;
-    const { votes } = project;
-    let nb = 2;
-    nb += votes.totalCount ? 1 : 0;
-    return nb;
-  };
-
   render() {
     const { project } = this.props;
 
