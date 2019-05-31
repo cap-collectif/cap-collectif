@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { type FormProps, reduxForm, Field } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
 import AlertForm from '../../Alert/AlertForm';
@@ -15,7 +16,7 @@ import CreateProjectMutation from '../../../mutations/CreateProjectMutation';
 
 type Props = {|
   ...FormProps,
-  project: any,
+  project: ?any,
   handleSubmit: () => void,
   intl: IntlShape,
   formName: string,
@@ -163,9 +164,12 @@ const ProjectContentAdminForm = (props: Props) => {
   );
 };
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state, { project }: Props) => ({
   initialValues: {
-    opinionTerm: projectTerms[0].id,
+    opinionTerm: project ? project.projectTerm : null,
+    authors: project ? project.authors : [],
+    title: project ? project.title : null,
+    projectType: project ? project.type.id : null,
   },
 });
 
@@ -177,4 +181,20 @@ const form = injectIntl(
   })(ProjectContentAdminForm),
 );
 
-export default connect(mapStateToProps)(form);
+const container = connect(mapStateToProps)(form);
+
+export default createFragmentContainer(container, {
+  project: graphql`
+    fragment ProjectContentAdminForm_project on Project {
+      id
+      title
+      authors {
+        value: id
+        label: username
+      }
+      type {
+        id
+      }
+    }
+  `,
+});

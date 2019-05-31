@@ -15,18 +15,7 @@ const ProjectAdminPage = ({ projectId }: { projectId: string }) => (
         query={graphql`
           query ProjectAdminAppQuery($projectId: ID!) {
             project: node(id: $projectId) {
-              ... on Project {
-                id
-                title
-                authors {
-                  id
-                }
-                opinionTerm
-                type {
-                  id
-                  title
-                }
-              }
+              ...ProjectContentAdminForm_project
             }
           }
         `}
