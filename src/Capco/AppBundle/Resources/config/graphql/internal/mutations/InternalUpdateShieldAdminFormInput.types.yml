@@ -1,0 +1,13 @@
+InternalUpdateShieldAdminFormInput:
+  type: relay-mutation-input
+  config:
+    fields:
+      shieldMode:
+        type: 'Boolean!'
+        description: 'Enable or disable shield mode.'
+      introduction:
+        type: 'HTML'
+        description: 'Introduction text to show on shield page.'
+      imageId:
+        type: 'ID'
+        description: 'The image id to associate for the shield image.'

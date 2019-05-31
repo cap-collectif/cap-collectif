@@ -234,3 +234,8 @@ InternalQuery:
             defaultValue: 100
         access: "@=hasRole('ROLE_ADMIN')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryVotesResolver", [args])'
+      shieldAdminForm:
+        type: 'InternalShieldAdminForm!'
+        description: 'Get the current shield admin form.'
+        access: "@=hasRole('ROLE_ADMIN')"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ShieldAdminFormQueryResolver")'

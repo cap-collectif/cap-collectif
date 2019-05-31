@@ -17,5 +17,14 @@
                 <span>{{ 'admin.label.pages.shield' | trans({}, 'CapcoAppBundle') }}</span>
             </h3>
         </div>
+        {{
+        react_render_component(
+            'ShieldAdminApp',
+            {
+                'props': {},
+                'rendering': 'client_side'
+            }
+        )
+        }}
     </div>
 {% endblock %}
