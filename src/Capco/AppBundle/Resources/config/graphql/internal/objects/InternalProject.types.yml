@@ -91,3 +91,6 @@ InternalProject:
       externalLink:
         type: 'URI'
         description: 'Link of external project'
+      opinionTerm:
+        type: 'String!'
+        description: 'Opinion term of the project'

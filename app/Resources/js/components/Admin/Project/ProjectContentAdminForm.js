@@ -15,6 +15,7 @@ import CreateProjectMutation from '../../../mutations/CreateProjectMutation';
 
 type Props = {|
   ...FormProps,
+  project: any,
   handleSubmit: () => void,
   intl: IntlShape,
   formName: string,

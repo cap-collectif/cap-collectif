@@ -3589,6 +3589,9 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
 
   # Link of external project
   externalLink: URI
+
+  # Opinion term of the project
+  opinionTerm: String!
 }
 
 # A connection to a list of items.
