@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { type intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import type { State } from '../../../types';
@@ -10,7 +10,7 @@ type Props = {
   onChange: Function,
   mode?: 'mosaic' | 'map' | 'table',
   showMapButton: boolean,
-  intl: IntlShape,
+  intl: intlShape,
 };
 
 export class ProposalListToggleViewBtn extends React.Component<Props> {

@@ -1,11 +1,10 @@
 // @flow
 import { MapControl } from 'react-leaflet';
-import { type IntlShape, injectIntl } from 'react-intl';
+import { intlShape, injectIntl } from 'react-intl';
 import L from 'leaflet';
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min';
 
 type Props = {
-  intl: IntlShape,
   position: ?string,
 };
 
@@ -40,5 +39,9 @@ export class LocateControl extends MapControl<Props> {
     });
   }
 }
+
+LocateControl.propTypes = {
+  intl: intlShape.isRequired,
+};
 
 export default injectIntl(LocateControl);

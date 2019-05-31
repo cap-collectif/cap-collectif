@@ -1,3 +1,4 @@
+// @flow
 /**
  * Original implementation of this file by @marudor at https://github.com/marudor/flowInterfaces
  * Copied here based on intention to merge with flow-typed expressed here:
@@ -107,7 +108,7 @@ declare module "react-intl" {
     | "many"
     | "other";
 
-  // Modify by @spyl94 to allow momentjs dates to be passed to `value` props in FormattedDate component
+  // Modify by @spyl94
   declare type $npm$ReactIntl$DateParseable = number | string | Date | moment$Moment;
   // PropType checker
   declare function intlShape(
@@ -119,8 +120,8 @@ declare module "react-intl" {
     data: $npm$ReactIntl$LocaleData | Array<$npm$ReactIntl$LocaleData>
   ): void;
   declare function defineMessages<
-    T: { [key: string]: $Exact<$npm$ReactIntl$MessageDescriptor> }
-    >(
+    T: { [key: string]: $npm$ReactIntl$MessageDescriptor }
+  >(
     messageDescriptors: T
   ): T;
 
@@ -150,14 +151,14 @@ declare module "react-intl" {
 
   declare type IntlInjectedComponentClass<TOwnProps, TDefaultProps: {} = {}> = Class<
     IntlInjectedComponent<TOwnProps, TDefaultProps>
-    >;
+  >;
 
   declare function injectIntl<P: {}, Component: React$ComponentType<P>>(
     WrappedComponent: Component,
     options?: InjectIntlOptions,
   ): React$ComponentType<
     $Diff<React$ElementConfig<Component>, InjectIntlVoidProps>
-    >;
+  >;
 
   declare function formatMessage(
     messageDescriptor: $npm$ReactIntl$MessageDescriptor,
@@ -193,84 +194,81 @@ declare module "react-intl" {
 
   declare class FormattedMessage extends React$Component<
     $npm$ReactIntl$MessageDescriptor & {
-    values?: Object,
-    tagName?: string,
-    children?:
-      | ((...formattedMessage: Array<React$Node>) => React$Node)
-      | (string => React$Node)
-  }
-    > {}
+      values?: Object,
+      tagName?: string,
+      children?: 
+        | ((...formattedMessage: Array<React$Node>) => React$Node)
+        | (string => React$Node)
+    }
+  > {}
   declare class FormattedHTMLMessage extends React$Component<
     $npm$ReactIntl$DateTimeFormatOptions & {
-    values?: Object,
-    tagName?: string,
-    children?: (...formattedMessage: Array<React$Node>) => React$Node
-  }
-    > {}
+      values?: Object,
+      tagName?: string,
+      children?: (...formattedMessage: Array<React$Node>) => React$Node
+    }
+  > {}
   declare class FormattedDate extends React$Component<
     $npm$ReactIntl$DateTimeFormatOptions & {
-    value: $npm$ReactIntl$DateParseable,
-    format?: string,
-    children?: (formattedDate: string) => React$Node
-  }
-    > {}
+      value: $npm$ReactIntl$DateParseable,
+      format?: string,
+      children?: (formattedDate: string) => React$Node
+    }
+  > {}
   declare class FormattedTime extends React$Component<
     $npm$ReactIntl$DateTimeFormatOptions & {
-    value: $npm$ReactIntl$DateParseable,
-    format?: string,
-    children?: (formattedDate: string) => React$Node
-  }
-    > {}
+      value: $npm$ReactIntl$DateParseable,
+      format?: string,
+      children?: (formattedDate: string) => React$Node
+    }
+  > {}
   declare class FormattedRelative extends React$Component<
     $npm$ReactIntl$RelativeFormatOptions & {
-    value: $npm$ReactIntl$DateParseable,
-    format?: string,
-    updateInterval?: number,
-    initialNow?: $npm$ReactIntl$DateParseable,
-    children?: (formattedDate: string) => React$Node
-  }
-    > {}
+      value: $npm$ReactIntl$DateParseable,
+      format?: string,
+      updateInterval?: number,
+      initialNow?: $npm$ReactIntl$DateParseable,
+      children?: (formattedDate: string) => React$Node
+    }
+  > {}
   declare class FormattedNumber extends React$Component<
     $npm$ReactIntl$NumberFormatOptions & {
-    value: number | string,
-    format?: string,
-    children?: (formattedNumber: string) => React$Node
-  }
-    > {}
+      value: number | string,
+      format?: string,
+      children?: (formattedNumber: string) => React$Node
+    }
+  > {}
   declare class FormattedPlural extends React$Component<
     $npm$ReactIntl$PluralFormatOptions & {
-    value: number | string,
-    other: React$Node,
-    zero?: React$Node,
-    one?: React$Node,
-    two?: React$Node,
-    few?: React$Node,
-    many?: React$Node,
-    children?: (formattedPlural: React$Node) => React$Node
-  }
-    > {}
+      value: number | string,
+      other: React$Node,
+      zero?: React$Node,
+      one?: React$Node,
+      two?: React$Node,
+      few?: React$Node,
+      many?: React$Node,
+      children?: (formattedPlural: React$Node) => React$Node
+    }
+  > {}
   declare class IntlProvider extends React$Component<
     $npm$ReactIntl$IntlProviderConfig & {
-    children?: React$Node,
-    initialNow?: $npm$ReactIntl$DateParseable
-  }
-    > {}
+      children?: React$Node,
+      initialNow?: $npm$ReactIntl$DateParseable
+    }
+  > {}
   declare type IntlShape = $npm$ReactIntl$IntlShape;
   declare type MessageDescriptor = $npm$ReactIntl$MessageDescriptor;
 }
 
-declare module 'react-intl/locale-data/en' {
-  declare module.exports: Array<{ [key: string]: any }>
-}
-
-declare module 'react-intl/locale-data/fr' {
-  declare module.exports: Array<{ [key: string]: any }>
-}
-
-declare module 'react-intl/locale-data/es' {
-  declare module.exports: Array<{ [key: string]: any }>
-}
-
-declare module 'react-intl/locale-data/de' {
-  declare module.exports: Array<{ [key: string]: any }>
-}
+declare module 'react-intl/locale-data/fr' {	
+  declare module.exports: any;	
+}	
+declare module 'react-intl/locale-data/en' {	
+  declare module.exports: any;	
+}	
+declare module 'react-intl/locale-data/es' {	
+  declare module.exports: any;	
+}	
+declare module 'react-intl/locale-data/de' {	
+  declare module.exports: any;	
+} 

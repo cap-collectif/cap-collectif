@@ -16,8 +16,8 @@ class ProjectDistrictType extends AbstractType
         $builder->add('name', TextType::class);
         $builder->add('displayedOnMap', CheckboxType::class);
         $builder->add('geojson', TextType::class);
-        $builder->add('border', BorderStyleType::class, ['required' => false]);
-        $builder->add('background', BackgroundStyleType::class, ['required' => false]);
+        $builder->add('border', BorderStyleType::class);
+        $builder->add('background', BackgroundStyleType::class);
         $builder->addEventSubscriber(new CleanDistrictFieldSubscriber());
     }
 

@@ -1,7 +1,7 @@
 @consultation @opinions
 Feature: Opinions
 
-@database @randomly-failing
+@database
 Scenario: Can create an opinion of contribuable type in opened project
   Given I am logged in as user
   And I visited "consultation page" with:
@@ -14,7 +14,7 @@ Scenario: Can create an opinion of contribuable type in opened project
   And I press "confirm-opinion-create"
   Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/titre"
 
-@read-only @randomly-failing
+@read-only
 Scenario: An anonymous can paginate opinions inside a section
   Given I am logged in as user
   And I visited "section page" with:

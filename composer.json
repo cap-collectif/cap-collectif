@@ -180,7 +180,7 @@
         "friendsofsymfony/http-cache-bundle": "^2.6",
         "ksubileau/color-thief-php": "^1.4",
         "accord/mandrill-swiftmailer-bundle": "^1.3",
-        "php-translation/symfony-bundle": "0.6.2",
+        "php-translation/symfony-bundle": "0.5",
         "php-translation/loco-adapter": "0.5",
         "jolicode/jolinotif": "^2.0",
         "symfony/security-acl": "dev-master",
