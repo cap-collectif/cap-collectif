@@ -221,8 +221,6 @@ final class ProjectAdmin extends CapcoAdmin
         $formMapper
             ->with('admin.fields.project.group_content', ['class' => 'col-md-12'])
             ->end()
-            ->with('admin.fields.project.group_external', ['class' => 'col-md-12'])
-            ->end()
             ->with('admin.fields.project.group_meta', ['class' => 'col-md-6'])
             ->end()
             ->with('admin.fields.project.group_ranking', ['class' => 'col-md-6'])
@@ -267,8 +265,6 @@ final class ProjectAdmin extends CapcoAdmin
         ) {
             // TODO idea : if the external project is from a capco platform we can get participants an contribution from our API
             $formMapper
-                ->end()
-                ->with('admin.fields.project.group_external')
                 ->add('isExternal', CheckboxType::class, [
                     'label' => 'external-project',
                     'required' => false,
@@ -279,15 +275,12 @@ final class ProjectAdmin extends CapcoAdmin
                 ])
                 ->add('externalParticipantsCount', NumberType::class, [
                     'label' => 'admin.fields.project.participantsCount',
-                    'required' => false,
                 ])
                 ->add('externalContributionsCount', NumberType::class, [
                     'label' => 'admin.fields.project.contributionsCount',
-                    'required' => false,
                 ])
                 ->add('externalVotesCount', NumberType::class, [
                     'label' => 'admin.fields.project.votesCount',
-                    'required' => false,
                 ]);
         }
 

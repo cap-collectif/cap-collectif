@@ -11,7 +11,7 @@ PublicQuery:
         resolve: '@=getUser()'
       node:
         builder: 'Relay::Node'
-        description: "Lookup a node by its ID."
+        description: 'Lookup a node by its ID.'
         args:
           id:
             type: 'ID!'
