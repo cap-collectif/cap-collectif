@@ -21,15 +21,16 @@ import type { ProposalFollowButton_proposal } from '~relay/ProposalFollowButton_
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 import LoginOverlay from '../../Utils/LoginOverlay';
 
-type Props = {
-  proposal: ProposalFollowButton_proposal,
-};
+type Props = {|
+  +proposal: ProposalFollowButton_proposal,
+|};
 
 type State = {
   isJustFollowed: boolean,
 };
 
 export class ProposalFollowButton extends React.Component<Props, State> {
+  // We could move this state to relay client store
   state = {
     isJustFollowed: false,
   };

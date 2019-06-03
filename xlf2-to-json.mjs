@@ -27,4 +27,6 @@ for (const locale of config.locales) {
         fs.mkdirSync(dir);
     }
     fs.writeFileSync(bundlePath, `window.intl_messages=${JSON.stringify(translations, null, 2)};`);
+
+    fs.writeFileSync(`${dir}/${locale}-es6.js`, `export default ${JSON.stringify(translations, null, 2)};`);
 }

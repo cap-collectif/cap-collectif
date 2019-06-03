@@ -11,7 +11,7 @@ module.exports = {
   roots: ['app/Resources/js'],
   testEnvironment: 'jsdom',
   testRegex: '\\-test.js$',
-  setupFiles: ['<rootDir>/jest-setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.js'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   transform: {
     '.*': 'babel-jest',

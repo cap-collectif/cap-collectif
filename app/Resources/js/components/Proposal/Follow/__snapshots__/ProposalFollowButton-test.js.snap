@@ -1,229 +1,192 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalFollowButton /> should render a button to follow a proposal 1`] = `
-<Connect(LoginOverlay)>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    className="btn btn-default proposal__button__follow"
+exports[`<ProposalFollowButton /> should render a button to follow a proposal when viewer is not following. 1`] = `
+<span>
+  <button
+    className="btn btn-default proposal__button__follow btn btn-default"
     disabled={false}
     id="proposal-follow-btn-proposal1"
     onClick={[Function]}
+    type="button"
   >
-    <FormattedMessage
-      id="follow"
-      values={Object {}}
-    />
-  </Button>
-</Connect(LoginOverlay)>
+    <span>
+      follow
+    </span>
+  </button>
+</span>
 `;
 
-exports[`<ProposalFollowButton /> should render a button to follow a proposal and user is not connected 1`] = `
-<Connect(LoginOverlay)>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    className="btn btn-default proposal__button__follow"
-    disabled={false}
-    id="proposal-follow-btn-proposal1"
-    onClick={[Function]}
-  >
-    <FormattedMessage
-      id="follow"
-      values={Object {}}
-    />
-  </Button>
-</Connect(LoginOverlay)>
-`;
-
-exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 1`] = `
-<Connect(LoginOverlay)>
+exports[`<ProposalFollowButton /> should render a button to unfollow a proposal when viewer is following. 1`] = `
+<span>
   <span
     className="mb-0 custom-dropdown"
+    onClick={[Function]}
   >
-    <Uncontrolled(Dropdown)
-      className="mb-0 width250 custom-dropdown-bgd dropdown-button"
-      defaultOpen={false}
-      id="proposal-follow-btn-proposal1"
+    <div
+      className="mb-0 width250 custom-dropdown-bgd dropdown-button dropdown btn-group"
     >
-      <DropdownToggle
-        bsClass="dropdown-toggle"
-        bsRole="toggle"
-        className="custom-dropdown-button"
-        open={false}
-        useAnchor={false}
+      <button
+        aria-expanded={false}
+        aria-haspopup={true}
+        className="custom-dropdown-button dropdown-toggle btn btn-default"
+        disabled={false}
+        id="proposal-follow-btn-proposal1"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="button"
+        type="button"
       >
-        <FormattedMessage
-          id="following"
-          values={Object {}}
+        <span>
+          following
+        </span>
+         
+        <span
+          className="caret"
         />
-      </DropdownToggle>
-      <DropdownMenu
-        bsClass="dropdown-menu"
-        bsRole="menu"
-        pullRight={false}
+      </button>
+      <ul
+        aria-labelledby="proposal-follow-btn-proposal1"
+        className="dropdown-menu"
+        role="menu"
       >
-        <Uncontrolled(Panel)
-          className="mb-0 b-none width250"
+        <div
+          className="mb-0 b-none width250 panel panel-default"
+          onKeyDown={[Function]}
+          onSelect={[Function]}
         >
-          <PanelHeading
-            bsClass="panel"
-            componentClass="div"
+          <div
+            className="panel-heading"
           >
-            <FormattedMessage
-              id="to-be-notified-by-email"
-              values={Object {}}
+            <span>
+              to-be-notified-by-email
+            </span>
+            <span
+              className="cap-information ml-30"
+              onBlur={[Function]}
+              onClick={null}
+              onFocus={[Function]}
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
             />
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              overlay={
-                <Popover
-                  bsClass="popover"
-                  className="in"
-                  id="pinned-label"
-                  placement="top"
-                >
-                  <FormattedMessage
-                    id="you-will-receive-a-summary-of-your-notifications-once-a-day"
-                    values={Object {}}
-                  />
-                </Popover>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <span
-                className="cap-information ml-30"
-              />
-            </OverlayTrigger>
-          </PanelHeading>
-          <PanelBody
-            bsClass="panel"
-            collapsible={false}
+          </div>
+          <div
+            className="panel-body"
           >
             <div
               className="b-none mb-0"
               id="proposal-follow-btn-proposal1"
             >
-              <ListGroup
-                bsClass="list-group"
-                className="mb-0"
+              <ul
+                className="mb-0 list-group"
               >
-                <ListGroupItem
-                  bsClass="list-group-item"
-                  listItem={false}
+                <li
+                  className="list-group-item"
                 >
-                  <Radio
-                    bsClass="radio"
-                    checked="checked"
-                    className="proposal__follow__minimal"
-                    disabled={false}
-                    id="proposal-follow-btn-minimal-proposal1"
-                    inline={true}
-                    name="minimal"
-                    onChange={[Function]}
+                  <label
+                    className="proposal__follow__minimal radio-inline"
                     title=""
                   >
+                    <input
+                      checked="checked"
+                      disabled={false}
+                      id="proposal-follow-btn-minimal-proposal1"
+                      name="minimal"
+                      onChange={[Function]}
+                      type="radio"
+                    />
                     <b>
-                      <FormattedMessage
-                        id="essential"
-                        values={Object {}}
-                      />
+                      <span>
+                        essential
+                      </span>
                     </b>
                      
                     <br />
-                    <FormattedMessage
-                      id="updates-and-news"
-                      values={Object {}}
-                    />
-                  </Radio>
-                </ListGroupItem>
-                <ListGroupItem
-                  bsClass="list-group-item"
-                  listItem={false}
+                    <span>
+                      updates-and-news
+                    </span>
+                  </label>
+                </li>
+                <li
+                  className="list-group-item"
                 >
-                  <Radio
-                    bsClass="radio"
-                    checked=""
-                    className="proposal__follow__essential"
-                    disabled={false}
-                    id="proposal-follow-btn-essential-proposal1"
-                    inline={false}
-                    name="essential"
-                    onChange={[Function]}
-                    title=""
+                  <div
+                    className="proposal__follow__essential radio"
                   >
-                    <b>
-                      <FormattedMessage
-                        id="intermediate"
-                        values={Object {}}
+                    <label
+                      title=""
+                    >
+                      <input
+                        checked=""
+                        disabled={false}
+                        id="proposal-follow-btn-essential-proposal1"
+                        name="essential"
+                        onChange={[Function]}
+                        type="radio"
                       />
-                    </b>
-                    <br />
-                    <FormattedMessage
-                      id="updates-news-and-new-contributions"
-                      values={Object {}}
-                    />
-                  </Radio>
-                </ListGroupItem>
-                <ListGroupItem
-                  bsClass="list-group-item"
-                  listItem={false}
+                      <b>
+                        <span>
+                          intermediate
+                        </span>
+                      </b>
+                      <br />
+                      <span>
+                        updates-news-and-new-contributions
+                      </span>
+                    </label>
+                  </div>
+                </li>
+                <li
+                  className="list-group-item"
                 >
-                  <Radio
-                    bsClass="radio"
-                    checked=""
-                    className="proposal__follow__all"
-                    disabled={false}
-                    id="proposal-follow-btn-all-proposal1"
-                    inline={false}
-                    name="all"
-                    onChange={[Function]}
-                    title=""
+                  <div
+                    className="proposal__follow__all radio"
                   >
-                    <b>
-                      <FormattedMessage
-                        id="complete"
-                        values={Object {}}
+                    <label
+                      title=""
+                    >
+                      <input
+                        checked=""
+                        disabled={false}
+                        id="proposal-follow-btn-all-proposal1"
+                        name="all"
+                        onChange={[Function]}
+                        type="radio"
                       />
-                    </b>
-                    <br />
-                    <FormattedMessage
-                      id="updates-news-new-contributions-votes-and-subscriptions"
-                      values={Object {}}
-                    />
-                  </Radio>
-                </ListGroupItem>
-              </ListGroup>
+                      <b>
+                        <span>
+                          complete
+                        </span>
+                      </b>
+                      <br />
+                      <span>
+                        updates-news-new-contributions-votes-and-subscriptions
+                      </span>
+                    </label>
+                  </div>
+                </li>
+              </ul>
             </div>
-          </PanelBody>
-        </Uncontrolled(Panel)>
-        <MenuItem
-          bsClass="dropdown"
+          </div>
+        </div>
+        <li
           className="proposal__unfollow"
-          disabled={false}
-          divider={false}
-          eventKey="1"
-          header={false}
-          id="proposal-unfollow-btn-proposal1"
-          onClick={[Function]}
+          role="presentation"
         >
-          <FormattedMessage
-            id="unfollow"
-            values={Object {}}
-          />
-        </MenuItem>
-      </DropdownMenu>
-    </Uncontrolled(Dropdown)>
+          <a
+            href="#"
+            id="proposal-unfollow-btn-proposal1"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="menuitem"
+            tabIndex="-1"
+          >
+            <span>
+              unfollow
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </span>
-</Connect(LoginOverlay)>
+</span>
 `;

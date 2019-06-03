@@ -1,53 +1,51 @@
 // @flow
 /* eslint-env jest */
-import * as React from 'react';
-import { shallow } from 'enzyme';
-import { ProposalFollowButton } from './ProposalFollowButton';
+import { graphql } from 'react-relay';
+import ProposalFollowButton from './ProposalFollowButton';
 
 describe('<ProposalFollowButton />', () => {
-  // $FlowFixMe $refType
   const proposalViewIsFollowing = {
     id: 'proposal1',
     viewerIsFollowing: true,
     viewerFollowingConfiguration: 'MINIMAL',
   };
-  // $FlowFixMe $refType
   const proposalViewIsNotFollowing = {
     id: 'proposal1',
     viewerIsFollowing: false,
     viewerFollowingConfiguration: null,
   };
 
-  // $FlowFixMe $refType
-  const proposalViewIsNotConnected = {
-    id: 'proposal1',
-    viewerIsFollowing: false,
-    viewerFollowingConfiguration: null,
-  };
-  // $FlowFixMe $refType
-  const props = {
-    className: '',
-    referer: 'http://capco.test',
-  };
+  const query = graphql`
+    query ProposalFollowButtonTestQuery @relay_test_operation {
+      proposal: node(id: "test-id") {
+        ...ProposalFollowButton_proposal
+      }
+    }
+  `;
 
-  it('should render a button to follow a proposal', () => {
-    const wrapper = shallow(
-      <ProposalFollowButton proposal={proposalViewIsNotFollowing} isAuthenticated {...props} />,
-    );
-    expect(wrapper).toMatchSnapshot();
+  it('should render a button to unfollow a proposal when viewer is following.', () => {
+    expect(
+      global.renderWithRelay(ProposalFollowButton, {
+        query,
+        spec: {
+          Proposal() {
+            return proposalViewIsFollowing;
+          },
+        },
+      }),
+    ).toMatchSnapshot();
   });
 
-  it('should render a button to unfollow a proposal', () => {
-    const wrapper = shallow(
-      <ProposalFollowButton proposal={proposalViewIsFollowing} isAuthenticated {...props} />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-  it('should render a button to follow a proposal and user is not connected', () => {
-    const wrapper = shallow(
-      // $FlowFixMe $refType isAuthenticated false
-      <ProposalFollowButton proposal={proposalViewIsNotConnected} {...props} />,
-    );
-    expect(wrapper).toMatchSnapshot();
+  it('should render a button to follow a proposal when viewer is not following.', () => {
+    expect(
+      global.renderWithRelay(ProposalFollowButton, {
+        query,
+        spec: {
+          Proposal() {
+            return proposalViewIsNotFollowing;
+          },
+        },
+      }),
+    ).toMatchSnapshot();
   });
 });
