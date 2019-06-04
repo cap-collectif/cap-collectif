@@ -11239,7 +11239,7 @@ prop-types@15.6.1:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-prop-types@>=15.5.0, prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -11544,7 +11544,7 @@ react-addons-test-utils@^15.6.2:
   resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.6.2.tgz#c12b6efdc2247c10da7b8770d185080a7b047156"
   integrity sha1-wStu/cIkfBDae4dw0YUICnsEcVY=
 
-react-async-script@^1.0.1:
+react-async-script@^1.0.0, react-async-script@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-async-script/-/react-async-script-1.0.1.tgz#a3996e313a1352b7e96087405e40ebb877f9caf0"
   integrity sha512-EosAKCTgHc6oWPx7ONv4IjtaIKRi30DjR71iJfoGfb13+naFYGjLutH6dFC5rRaYX8odW57zmC9ekf/WuLiyOQ==
@@ -11750,12 +11750,13 @@ react-google-charts@^1.0.2:
   dependencies:
     loadjs "^3.3.1"
 
-react-google-recaptcha@^0.9.6:
-  version "0.9.9"
-  resolved "https://registry.yarnpkg.com/react-google-recaptcha/-/react-google-recaptcha-0.9.9.tgz#3b6c32fcf09893cf55200a179e337cf578d4ecd4"
-  integrity sha1-O2wy/PCYk89VIAoXnjN89XjU7NQ=
+react-google-recaptcha@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-google-recaptcha/-/react-google-recaptcha-1.0.5.tgz#fc5a1c5c9fd678ccea11c9a47b22f38a8b9d3c88"
+  integrity sha512-IUIIQVUIKgsG7Ok1AiqBdJZVpFRpIWOM3H/36fAJHMd52l+X0pn4sTxvm2YJEN01QXWR1jg79+93J8mQef7hfw==
   dependencies:
-    prop-types ">=15.5.0"
+    prop-types "^15.5.0"
+    react-async-script "^1.0.0"
 
 react-input-autosize@^2.2.1:
   version "2.2.1"
