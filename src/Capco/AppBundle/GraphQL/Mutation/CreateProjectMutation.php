@@ -9,9 +9,10 @@ use Doctrine\DBAL\Driver\DriverException;
 use Capco\UserBundle\Form\Type\ProjectFormType;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
+use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\Repository\ProjectTypeRepository;
+use Capco\UserBundle\Form\Type\ProjectAuthorsFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -19,21 +20,24 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class CreateProjectMutation implements MutationInterface
 {
     private $em;
-    private $formFactory;
     private $logger;
+    private $transformer;
+    private $formFactory;
     private $userRepository;
     private $projectTypeRepository;
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         UserRepository $userRepository,
+        FormFactoryInterface $formFactory,
+        ProjectAuthorTransformer $transformer,
         ProjectTypeRepository $projectTypeRepository
     ) {
         $this->em = $em;
-        $this->formFactory = $formFactory;
         $this->logger = $logger;
+        $this->transformer = $transformer;
+        $this->formFactory = $formFactory;
         $this->userRepository = $userRepository;
         $this->projectTypeRepository = $projectTypeRepository;
     }
@@ -44,14 +48,10 @@ class CreateProjectMutation implements MutationInterface
 
         $project = new Project();
 
-        foreach ($arguments['authors'] as $userId) {
-            $decodedUserId = GlobalId::fromGlobalId($userId)['id'];
-            $project->addAuthor($this->userRepository->find($decodedUserId));
-        }
-
-        unset($arguments['authors']);
-
         $form = $this->formFactory->create(ProjectFormType::class, $project);
+
+        $dataAuthors = $arguments['authors'];
+        unset($arguments['authors']);
 
         $form->submit($arguments, false);
         if (!$form->isValid()) {
@@ -62,6 +62,28 @@ class CreateProjectMutation implements MutationInterface
 
         try {
             $this->em->persist($project);
+            $this->em->flush();
+        } catch (DriverException $e) {
+            $this->logger->error(
+                __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()
+            );
+
+            throw new BadRequestHttpException('Sorry, please retry.');
+        }
+
+        $this->transformer->setProject($project);
+
+        $form = $this->formFactory->create(ProjectAuthorsFormType::class, $project);
+
+        $form->submit(['authors' => $this->transformer->transformUsers($dataAuthors)], false);
+
+        if (!$form->isValid()) {
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
+
+            throw GraphQLException::fromFormErrors($form);
+        }
+
+        try {
             $this->em->flush();
         } catch (DriverException $e) {
             $this->logger->error(

@@ -218,30 +218,6 @@ final class ProjectAdmin extends CapcoAdmin
             ->end()
             ->with('group.admin.parameters', ['class' => 'col-md-6'])
             ->end();
-        $formMapper
-            ->with('admin.fields.project.group_content')
-            ->add('title', null, ['label' => 'admin.fields.project.title'])
-            ->add('projectType', 'sonata_type_model', [
-                'label' => 'admin.fields.project.type.title',
-                'required' => false,
-                'attr' => ['placeholder' => 'admin.help.project.type'],
-                'choices_as_values' => true,
-            ])
-            ->add('authors', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.project.author',
-                'property' => 'user',
-                'multiple' => true,
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getUser()->getEmail() .
-                        ' - ' .
-                        $entity->getUser()->getUsername();
-                },
-            ])
-            ->add('opinionTerm', 'choice', [
-                'label' => 'admin.fields.project.opinion_term',
-                'choices' => Project::$opinionTermsLabels,
-                'translation_domain' => 'CapcoAppBundle',
-            ]);
 
         if (
             $this->getConfigurationPool()

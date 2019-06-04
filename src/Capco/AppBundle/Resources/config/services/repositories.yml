@@ -191,7 +191,7 @@ services:
   Capco\AppBundle\Repository\ProjectAuthorRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProjectAuthor']
-    
+
   Capco\AppBundle\Repository\ProjectTypeRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProjectType']

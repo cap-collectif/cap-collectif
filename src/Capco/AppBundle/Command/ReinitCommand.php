@@ -40,7 +40,6 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\ProgressStep;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\QuestionChoice;
@@ -296,7 +295,6 @@ class ReinitCommand extends ContainerAwareCommand
             BackgroundStyle::class,
             ArgumentVote::class,
             AppendixType::class,
-            ProjectAuthor::class,
         ];
 
         $classesProd = [Context::class];

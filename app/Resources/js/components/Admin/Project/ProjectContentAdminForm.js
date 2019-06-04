@@ -8,11 +8,13 @@ import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
 import AlertForm from '../../Alert/AlertForm';
 import renderComponent from '../../Form/Field';
+import type { Dispatch } from '../../../types';
 import UserListField from '../Field/UserListField';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import ProjectTypeListField from '../Field/ProjectTypeListField';
 import { UPDATE_ALERT } from '../../../constants/AlertConstants';
 import CreateProjectMutation from '../../../mutations/CreateProjectMutation';
+import UpdateProjectMutation from '../../../mutations/UpdateProjectMutation';
 
 type Props = {|
   ...FormProps,
@@ -47,14 +49,33 @@ const projectTerms = [
 
 const formatAuthors = (authors: Author[]): string[] => authors.map(author => author.value);
 
-const onSubmit = ({ title, authors, opinionTerm, projectType }: FormValues) => {
+const onSubmit = (
+  { title, authors, opinionTerm, projectType }: FormValues,
+  dispatch: Dispatch,
+  props: Props,
+) => {
   const input = {
     title,
     opinionTerm,
     projectType,
     authors: formatAuthors(authors),
   };
-
+  if (props.project) {
+    return UpdateProjectMutation.commit({
+      input: {
+        id: props.project.id,
+        ...input,
+      },
+    }).then(data => {
+      if (data.updateProject && data.updateProject.project) {
+        window.location.href = data.updateProject.project.adminUrl;
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
+        });
+      }
+    });
+  }
   return CreateProjectMutation.commit({ input }).then(data => {
     if (data.createProject && data.createProject.project) {
       window.location.href = data.createProject.project.adminUrl;
@@ -166,7 +187,7 @@ const ProjectContentAdminForm = (props: Props) => {
 
 const mapStateToProps = (state, { project }: Props) => ({
   initialValues: {
-    opinionTerm: project ? project.projectTerm : null,
+    opinionTerm: project ? project.type.id : projectTerms[0].id,
     authors: project ? project.authors : [],
     title: project ? project.title : null,
     projectType: project ? project.type.id : null,

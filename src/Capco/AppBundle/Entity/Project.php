@@ -2,27 +2,27 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Doctrine\ORM\Mapping as ORM;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Traits\UuidTrait;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
-use Capco\AppBundle\Traits\ProjectVisibilityTrait;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Traits\ProjectVisibilityTrait;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 
 /**
  * Project.
@@ -118,7 +118,7 @@ class Project implements IndexableInterface
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProjectAuthor", cascade={"persist"}, mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProjectAuthor", cascade={"persist", "remove"}, mappedBy="project", orphanRemoval=true)
      */
     private $authors;
 
@@ -388,17 +388,7 @@ class Project implements IndexableInterface
     /**
      * @return $this
      */
-    public function setAuthor($author)
-    {
-        $this->authors = [$author];
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function setAuthors(array $authors)
+    public function setAuthors($authors)
     {
         $this->authors = new ArrayCollection($authors);
 
@@ -426,15 +416,12 @@ class Project implements IndexableInterface
     /**
      * Add author.
      *
-     * @param \Capco\AppBundle\Entity\User $author
+     * @param \Capco\AppBundle\Entity\ProjectAuthor $projectAuthor
      *
      * @return Project
      */
-    public function addAuthor(User $user)
+    public function addAuthor(ProjectAuthor $projectAuthor)
     {
-        $projectAuthor = new ProjectAuthor();
-        $projectAuthor->setUser($user);
-        $projectAuthor->setProject($this);
         if (!$this->authors->contains($projectAuthor)) {
             $this->authors->add($projectAuthor);
         }
@@ -445,18 +432,55 @@ class Project implements IndexableInterface
     /**
      * Remove author.
      *
-     * @param \Capco\AppBundle\Entity\User $author
+     * @param \Capco\AppBundle\Entity\ProjectAuthor $projectAuthor
      *
-     * @return $this
+     * @return Project
      */
-    public function removeAuthor(User $author)
+    public function removeAuthor(ProjectAuthor $projectAuthor)
     {
-        if ($this->authors->contains($author)) {
-            $this->authors->removeElement($author);
+        exit();
+
+        if ($this->authors->contains($projectAuthor)) {
+            $this->authors->remove($projectAuthor);
         }
 
         return $this;
     }
+
+    // /**
+    //  * Add author.
+    //  *
+    //  * @param \Capco\AppBundle\Entity\User $author
+    //  *
+    //  * @return Project
+    //  */
+    // public function addAuthor(User $user)
+    // {
+    //     $projectAuthor = new ProjectAuthor();
+    //     $projectAuthor->setUser($user);
+    //     $projectAuthor->setProject($this);
+    //     if (!$this->authors->contains($projectAuthor)) {
+    //         $this->authors->add($projectAuthor);
+    //     }
+
+    //     return $this;
+    // }
+
+    // /**
+    //  * Remove author.
+    //  *
+    //  * @param \Capco\AppBundle\Entity\User $author
+    //  *
+    //  * @return $this
+    //  */
+    // public function removeAuthor(User $author)
+    // {
+    //     if ($this->authors->contains($author)) {
+    //         $this->authors->removeElement($author);
+    //     }
+
+    //     return $this;
+    // }
 
     /**
      * Get themes.

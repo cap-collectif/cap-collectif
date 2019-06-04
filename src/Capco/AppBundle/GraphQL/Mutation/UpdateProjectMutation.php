@@ -3,16 +3,16 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Driver\DriverException;
-use Capco\UserBundle\Form\Type\ProjectFormType;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\Repository\ProjectTypeRepository;
+use Capco\UserBundle\Form\Type\UpdateProjectFormType;
 use Capco\AppBundle\Repository\ProjectAuthorRepository;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -27,6 +27,7 @@ class UpdateProjectMutation implements MutationInterface
     private $projectTypeRepository;
     private $projectRepository;
     private $projectAuthorRepository;
+    private $transformer;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -35,11 +36,13 @@ class UpdateProjectMutation implements MutationInterface
         UserRepository $userRepository,
         ProjectTypeRepository $projectTypeRepository,
         ProjectAuthorRepository $projectAuthorRepository,
+        ProjectAuthorTransformer $transformer,
         ProjectRepository $projectRepository
     ) {
         $this->em = $em;
-        $this->formFactory = $formFactory;
         $this->logger = $logger;
+        $this->formFactory = $formFactory;
+        $this->transformer = $transformer;
         $this->userRepository = $userRepository;
         $this->projectRepository = $projectRepository;
         $this->projectTypeRepository = $projectTypeRepository;
@@ -54,18 +57,13 @@ class UpdateProjectMutation implements MutationInterface
         if (!$project) {
             throw new BadRequestHttpException('Sorry, please retry.');
         }
+        $this->transformer->setProject($project);
 
-        foreach ($arguments['authors'] as $userId) {
-            $decodedUserId = GlobalId::fromGlobalId($userId)['id'];
-            if (!$decodedUserId) {
-                throw new BadRequestHttpException('Sorry, please retry.');
-            }
-            $this->transform($decodedUserId, $project);
-        }
+        $arguments['authors'] = $this->transformer->transformUsers($arguments['authors']);
 
-        unset($arguments['authors'], $arguments['id']);
+        unset($arguments['id']);
 
-        $form = $this->formFactory->create(ProjectFormType::class, $project);
+        $form = $this->formFactory->create(UpdateProjectFormType::class, $project);
 
         $form->submit($arguments, false);
         if (!$form->isValid()) {
@@ -85,21 +83,5 @@ class UpdateProjectMutation implements MutationInterface
         }
 
         return ['project' => $project];
-    }
-
-    public function transform(string $userId, Project $project)
-    {
-        $user = $this->userRepository->find($userId);
-        if (!$user) {
-            throw new BadRequestHttpException('Sorry, please retry.');
-        }
-
-        $projectAuthor = $this->projectAuthorRepository->findOneBy([
-            'project' => $project,
-            'user' => $user,
-        ]);
-        if (!$projectAuthor) {
-            $project->addAuthor($user);
-        }
     }
 }
