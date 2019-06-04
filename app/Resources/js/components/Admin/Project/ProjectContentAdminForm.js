@@ -68,7 +68,6 @@ const onSubmit = (
       },
     }).then(data => {
       if (data.updateProject && data.updateProject.project) {
-        window.location.href = data.updateProject.project.adminUrl;
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
@@ -125,7 +124,9 @@ const ProjectContentAdminForm = (props: Props) => {
     pristine,
     submitSucceeded,
     submitFailed,
+    project,
   } = props;
+  console.log(project);
 
   return (
     <form onSubmit={handleSubmit} id={formName}>
@@ -167,7 +168,7 @@ const ProjectContentAdminForm = (props: Props) => {
           </option>
         ))}
       </Field>
-      <Button type="submit" disabled={invalid || submitting} bsStyle="primary">
+      <Button type="submit" disabled={invalid || submitting || pristine} bsStyle="primary">
         {submitting ? (
           <FormattedMessage id="global.loading" />
         ) : (
@@ -176,7 +177,7 @@ const ProjectContentAdminForm = (props: Props) => {
       </Button>
       <AlertForm
         valid={valid}
-        invalid={invalid && !pristine}
+        invalid={invalid}
         submitSucceeded={submitSucceeded}
         submitFailed={submitFailed}
         submitting={submitting}
