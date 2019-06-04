@@ -32,33 +32,13 @@ Scenario: GraphQL user wants to get list of trashed comments.
   """
   Then the JSON response should match:
   """
-  {
+{
    "data":{
       "node":{
          "id":"UHJvamVjdDpwcm9qZWN0Ng==",
          "comments":{
             "totalCount":70,
             "edges":[
-               {
-                  "node":{
-                     "id":"trashedComment1"
-                  }
-               },
-               {
-                  "node":{
-                     "id":"trashedComment10"
-                  }
-               },
-               {
-                  "node":{
-                     "id":"trashedComment11"
-                  }
-               },
-               {
-                  "node":{
-                     "id":"trashedComment12"
-                  }
-               },
                {
                   "node":{
                      "id":"trashedComment13"
@@ -87,6 +67,26 @@ Scenario: GraphQL user wants to get list of trashed comments.
                {
                   "node":{
                      "id":"trashedComment18"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment19"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment20"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment21"
+                  }
+               },
+               {
+                  "node":{
+                     "id":"trashedComment22"
                   }
                }
             ]

@@ -27,6 +27,7 @@ export class Captcha extends React.PureComponent<Props> {
 
     return (
       <ReCAPTCHA
+        id="recaptcha"
         ref={c => {
           this.captcha = c;
         }}
