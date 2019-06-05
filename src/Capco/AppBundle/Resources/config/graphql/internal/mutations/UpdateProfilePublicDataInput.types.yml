@@ -19,7 +19,7 @@ UpdateProfilePublicDataInput:
         type: 'String'
         description: 'Your neighborhood'
       websiteUrl:
-        type: 'String'
+        type: 'URI'
         description: 'Your website'
       linkedInUrl:
         type: 'String'

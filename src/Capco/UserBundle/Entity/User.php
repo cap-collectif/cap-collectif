@@ -574,19 +574,11 @@ class User extends BaseUser implements
         $this->facebookUrl = $facebookUrl;
     }
 
-    /**
-     * @return string
-     */
     public function getWebsiteUrl(): ?string
     {
         return $this->websiteUrl;
     }
 
-    /**
-     * @param string $websiteUrl
-     *
-     * @return self
-     */
     public function setWebsiteUrl(?string $websiteUrl): self
     {
         $this->websiteUrl = $websiteUrl;

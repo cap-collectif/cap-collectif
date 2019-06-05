@@ -6328,7 +6328,7 @@ input UpdateProfilePublicDataInput {
   neighborhood: String
 
   # Your website
-  websiteUrl: String
+  websiteUrl: URI
 
   # Your linkedIn
   linkedInUrl: String
