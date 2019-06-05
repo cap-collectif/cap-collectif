@@ -17,25 +17,9 @@ const props = {
   },
 };
 
-const propsWithoutCounter = {
-  project: {
-    $fragmentRefs,
-    $refType,
-    id: 'externalProject',
-    contributors: { totalCount: 0 },
-    votes: { totalCount: 0 },
-    contributionsCount: 0,
-  },
-};
-
 describe('<ProjectPreviewProgressBar />', () => {
-  it('should render correctly an external project with counter', () => {
+  it('should render correctly counters without districts', () => {
     const wrapper = shallow(<ProjectPreviewExternalCounters {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly an external project without counters', () => {
-    const wrapper = shallow(<ProjectPreviewExternalCounters {...propsWithoutCounter} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

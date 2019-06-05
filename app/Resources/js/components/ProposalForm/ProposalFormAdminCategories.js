@@ -25,7 +25,6 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
   };
 
   handleClose = (index: number) => {
-    // eslint-disable-next-line react/prop-types
     const { fields, categories } = this.props;
     if (!categories[index].id) {
       fields.remove(index);

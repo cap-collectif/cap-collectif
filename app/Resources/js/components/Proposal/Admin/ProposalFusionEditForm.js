@@ -23,7 +23,6 @@ type FormValues = {
 
 type Props = {|
   ...RelayProps,
-  // eslint-disable-next-line react/no-unused-prop-types
   onClose: () => void,
   intl: IntlShape,
 |};

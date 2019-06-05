@@ -243,7 +243,6 @@ type ResponsesFromAPI = $ReadOnlyArray<?{|
 
 export type ResponsesInReduxForm = $ReadOnlyArray<{|
   question: string,
-  // eslint-disable-next-line flowtype/space-after-type-colon
   value:
     | ?string
     | ?number

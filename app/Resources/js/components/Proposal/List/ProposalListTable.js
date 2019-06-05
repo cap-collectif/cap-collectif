@@ -47,7 +47,6 @@ export class ProposalListTable extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    // eslint-disable-next-line
     this.setState({
       windowWidth: window.innerWidth,
     });

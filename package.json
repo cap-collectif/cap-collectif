@@ -31,7 +31,7 @@
         "relay:watch": "yarn run generate-graphql-files && yarn run build-relay-schema:watch",
         "graphql:lint:public": "graphql-schema-linter --comment-descriptions schema.public.graphql",
         "graphql:lint:internal": "graphql-schema-linter --comment-descriptions schema.internal.graphql",
-        "lint": "eslint --cache --fix app/Resources/js",
+        "lint": "eslint --cache --fix --report-unused-disable-directives app/Resources/js",
         "bundlesize": "bundlesize",
         "storybook": "start-storybook -p 9001 -c .storybook",
         "deploy-storybook": "rm -fr .out && yarn run build-storybook -c .storybook -o .out && mkdir -p .out/.circleci && touch .out/.circleci/config.yml && echo 'version: 2\njobs:\n   build:\n      machine: true\n      branches:\n         ignore: gh-pages\n      steps:\n         - run: echo Skipping tests on gh-pages branch' > '.out/.circleci/config.yml'  && echo 'ui.cap-collectif.com' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
@@ -77,7 +77,7 @@
             "graphql-schema-linter --comment-descriptions"
         ],
         "app/Resources/js/**/*.js": [
-            "eslint --fix",
+            "eslint --fix --report-unused-disable-directives",
             "prettier --parser flow --write",
             "jest --bail --findRelatedTests",
             "git add"

@@ -161,7 +161,6 @@ export class RankingBlock extends React.Component<Props, State> {
 
 export default DragDropContext(HTML5Backend)(
   DropTarget(ITEM_TYPE, itemTarget, connect => ({
-    // eslint-disable-line new-cap
     connectDropTarget: connect.dropTarget(),
   }))(RankingBlock),
 );

@@ -211,17 +211,3 @@ Capco\AppBundle\Entity\Project:
     externalContributionsCount: 51
     isExternal: true
     externalLink: 'http://projet.noob.fr'
-  p23:
-    id: 'externalProjectWithoutCounter'
-    title: Projet externe sans compteur
-    projectType: '@projectType4'
-    Author: '@user4'
-    themes: []
-    exportable: true
-    publishedAt: <(new \DateTime('now - 40 days'))>
-    visibility: 2
-    externalVotesCount: null
-    externalParticipantsCount: null
-    externalContributionsCount: null
-    isExternal: true
-    externalLink: 'http://projet.noob.fr'

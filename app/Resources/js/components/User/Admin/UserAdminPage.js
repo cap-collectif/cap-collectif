@@ -24,7 +24,6 @@ const component = ({ error, props }: { props?: ?UserAdminPageQueryResponse } & R
     return graphqlError;
   }
   if (props) {
-    // eslint-disable-next-line
     if (props.user !== null) {
       return <UserAdminPageTabs {...props} />;
     }

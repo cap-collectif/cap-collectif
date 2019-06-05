@@ -10,7 +10,6 @@ type PassedProps = {
   value: any,
   id: string,
   placeholder: string,
-  // eslint-disable-next-line react/no-unused-prop-types
   formName: string,
 };
 type Props = PassedProps & { updateAddressValue: (value: ?string) => void };

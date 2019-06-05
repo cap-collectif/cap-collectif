@@ -22,7 +22,6 @@ type FormValidValues = {
   confirm?: boolean,
 };
 type Props = {|
-  // eslint-disable-next-line react/no-unused-prop-types
   argument: ArgumentForm_argument,
 |};
 

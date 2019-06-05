@@ -13,7 +13,6 @@ import type { State } from '../../types';
 
 type RelayProps = {|
   isSuperAdmin: boolean,
-  // eslint-disable-next-line react/no-unused-prop-types
   proposalForm: ProposalFormAdminSettingsForm_proposalForm,
 |};
 

@@ -65,7 +65,6 @@ export class ProposalPage extends React.Component<Props> {
               return graphqlError;
             }
             if (props) {
-              // eslint-disable-next-line react/prop-types
               if (props.proposal) {
                 return (
                   <div>

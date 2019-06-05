@@ -120,7 +120,6 @@ export class ProposalPageContent extends React.Component<Props> {
               <Marker
                 position={[address[0].geometry.location.lat, address[0].geometry.location.lng]}
                 icon={L.icon({
-                  // eslint-disable-line
                   iconUrl: '/svg/marker.svg',
                   iconSize: [40, 40],
                   iconAnchor: [20, 40],

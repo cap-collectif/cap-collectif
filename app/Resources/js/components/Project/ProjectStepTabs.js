@@ -17,7 +17,6 @@ export type Props = {
     status?: ?stepStatus,
   }>,
   currentStepId: ?string,
-  // eslint-disable-next-line react/no-unused-prop-types
   projectId: string,
   intl: IntlShape,
 };

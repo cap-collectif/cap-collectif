@@ -21,7 +21,6 @@ const component = ({
     return graphqlError;
   }
   if (props) {
-    // eslint-disable-next-line
     if (props.questionnaire !== null) {
       // $FlowFixMe
       return <QuestionnaireAdminPageTabs questionnaire={props.questionnaire} />;

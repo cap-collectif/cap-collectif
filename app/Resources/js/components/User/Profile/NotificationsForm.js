@@ -14,7 +14,6 @@ import type { NotificationsForm_viewer } from '~relay/NotificationsForm_viewer.g
 import type { State } from '../../../types';
 
 type RelayProps = {|
-  // eslint-disable-next-line react/no-unused-prop-types
   viewer: NotificationsForm_viewer,
 |};
 type FormValues = Object;

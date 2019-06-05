@@ -17,7 +17,6 @@ type Props = {
   disabled?: boolean,
   labelClassName?: string,
   value: Object,
-  // eslint-disable-next-line react/no-unused-prop-types
   other?: $FlowFixMe,
 };
 

@@ -16,28 +16,23 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
 
     return (
       <TagsList>
-        {project.contributionsCount && project.contributionsCount > 0 && (
-          <ProjectPreviewCounter
-            value={project.contributionsCount}
-            label="project.preview.counters.contributions"
-            showZero
-            icon="cap-baloon-1"
-          />
-        )}
-        {project.votes && project.votes.totalCount > 0 && (
-          <ProjectPreviewCounter
-            value={project.votes.totalCount}
-            label="project.preview.counters.votes"
-            icon="cap-hand-like-2-1"
-          />
-        )}
-        {project.contributors && project.contributors.totalCount > 0 && (
-          <ProjectPreviewCounter
-            value={project.contributors.totalCount}
-            label="project.preview.counters.contributors"
-            icon="cap-user-2-1"
-          />
-        )}
+        <ProjectPreviewCounter
+          value={project.contributionsCount ? project.contributionsCount : 0}
+          label="project.preview.counters.contributions"
+          showZero
+          icon="cap-baloon-1"
+        />
+        <ProjectPreviewCounter
+          value={project.votes.totalCount}
+          label="project.preview.counters.votes"
+          icon="cap-hand-like-2-1"
+        />
+        <ProjectPreviewCounter
+          value={project.contributors.totalCount}
+          label="project.preview.counters.contributors"
+          showZero
+          icon="cap-user-2-1"
+        />
 
         {/* $FlowFixMe */}
         <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />

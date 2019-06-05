@@ -12,7 +12,6 @@ import type { ProposalFormAdminNotificationForm_proposalForm } from '~relay/Prop
 import type { State } from '../../types';
 
 type RelayProps = {|
-  // eslint-disable-next-line react/no-unused-prop-types
   proposalForm: ProposalFormAdminNotificationForm_proposalForm,
 |};
 type Props = {|

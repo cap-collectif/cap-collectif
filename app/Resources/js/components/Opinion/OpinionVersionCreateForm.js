@@ -21,7 +21,6 @@ type FormValues = {
   comment: string,
 };
 type RelayProps = {|
-  // eslint-disable-next-line react/no-unused-prop-types
   opinion: OpinionVersionCreateForm_opinion,
 |};
 type Props = {|

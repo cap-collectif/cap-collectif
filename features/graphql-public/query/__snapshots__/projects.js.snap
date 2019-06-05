@@ -268,19 +268,6 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
         "node": Object {
           "contributors": Object {
-            "totalCount": 0,
-          },
-          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3RXaXRob3V0Q291bnRlcg==",
-          "title": "Projet externe sans compteur",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
-        "node": Object {
-          "contributors": Object {
             "totalCount": 3,
           },
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
@@ -292,10 +279,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjIx",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjIw",
       "hasNextPage": false,
     },
-    "totalCount": 22,
+    "totalCount": 21,
   },
 }
 `;
@@ -529,19 +516,6 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
           "contributors": Object {
-            "totalCount": 0,
-          },
-          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3RXaXRob3V0Q291bnRlcg==",
-          "title": "Projet externe sans compteur",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
-        "node": Object {
-          "contributors": Object {
             "totalCount": 3,
           },
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
@@ -553,10 +527,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE3",
       "hasNextPage": false,
     },
-    "totalCount": 19,
+    "totalCount": 18,
   },
 }
 `;
