@@ -927,6 +927,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # Select also draft proposals
+    includeDraft: Boolean = false
   ): ProposalConnection!
 
   # The title of the step.
@@ -3436,6 +3439,9 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # Select also draft proposals
+    includeDraft: Boolean = false
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -3942,6 +3948,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # Select also draft proposals
+    includeDraft: Boolean = false
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -4145,6 +4154,9 @@ interface ProposalStep {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # Select also draft proposals
+    includeDraft: Boolean = false
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -5521,6 +5533,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # Select also draft proposals
+    includeDraft: Boolean = false
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).

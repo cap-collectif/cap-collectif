@@ -58,7 +58,7 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal3
     title: Installation de bancs sur la place de la mairie
     summary: Un beau résumé
-    body: \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.\"
+    body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.\')>
     rating: 3
     annotation: Vérifier les normes de sécurité
     author: '@user502'
@@ -293,7 +293,6 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district3'
     reference: 9
-    publishedAt: <(new \DateTime('2018-03-01 00:10:00'))>
     createdAt: <(new \DateTime('2018-03-01 00:10:00'))>
     updatedAt: <(new \DateTime('2018-03-01 00:10:00'))>
   proposal20:
@@ -308,7 +307,6 @@ Capco\AppBundle\Entity\Proposal:
     reference: 10
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal21:
     id: proposal21
     title: Proposition brouillon 3
@@ -321,7 +319,6 @@ Capco\AppBundle\Entity\Proposal:
     reference: 11
     createdAt: <(new \DateTime('2018-03-01 00:12:00'))>
     updatedAt: <(new \DateTime('2018-03-01 00:12:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:12:00'))>
   proposal22:
     id: proposal22
     title: Proposition vraiment intéressante
@@ -392,7 +389,6 @@ Capco\AppBundle\Entity\Proposal:
     reference: 11
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal29:
     id: proposal29
     title: Annuler les prochains Star-Wars

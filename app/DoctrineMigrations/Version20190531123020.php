@@ -25,7 +25,11 @@ final class Version20190531123020 extends AbstractMigration
         $table = 'proposal';
         $proposalDraft = $this->connection->fetchAll("SELECT id FROM ${table} where is_draft = 1");
         foreach ($proposalDraft as $proposal) {
-            $this->connection->update($table, ['publishedAt' => null], ['id' => $proposal['id']]);
+            $this->connection->update(
+                $table,
+                ['publishedAt' => null, 'published' => false, 'is_indexable' => true],
+                ['id' => $proposal['id']]
+            );
         }
     }
 }
