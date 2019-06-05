@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Query.proposals connection fetches the first hundred proposals (included drafted and not published) with a cursor 1`] = `
+exports[`Query.proposals connection fetches the first hundred proposals (included drafted) with a cursor 1`] = `
 Object {
   "node": Object {
     "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
