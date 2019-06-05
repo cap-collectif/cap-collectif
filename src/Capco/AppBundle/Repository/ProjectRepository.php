@@ -99,10 +99,11 @@ class ProjectRepository extends EntityRepository
     public function getAuthorsId($viewer = null, $order = 'DESC'): array
     {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
-            ->select('a.id')
-            ->leftJoin('p.authors', 'a')
-            ->groupBy('a.id')
-            ->orderBy('a.createdAt', $order);
+            ->addSelect('u.id')
+            ->leftJoin('p.authors', 'pa')
+            ->leftJoin('pa.user', 'u')
+            ->groupBy('u.id')
+            ->orderBy('u.createdAt', $order);
 
         return $qb->getQuery()->execute();
     }
