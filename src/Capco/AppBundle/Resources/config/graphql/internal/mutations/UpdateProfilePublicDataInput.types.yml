@@ -5,8 +5,7 @@ UpdateProfilePublicDataInput:
     fields:
       userId:
         type: 'ID'
-        description:
-          '(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.'
+        description: '(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.'
       username:
         type: 'String!'
         description: 'Your username'
@@ -19,7 +18,7 @@ UpdateProfilePublicDataInput:
       neighborhood:
         type: 'String'
         description: 'Your neighborhood'
-      website:
+      websiteUrl:
         type: 'String'
         description: 'Your website'
       linkedInUrl:

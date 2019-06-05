@@ -57,6 +57,8 @@ class User extends BaseUser implements
 
     protected $facebookUrl;
 
+    protected $websiteUrl;
+
     protected $google_id;
 
     protected $google_access_token;
@@ -570,6 +572,26 @@ class User extends BaseUser implements
     public function setFacebookUrl($facebookUrl)
     {
         $this->facebookUrl = $facebookUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWebsiteUrl(): ?string
+    {
+        return $this->websiteUrl;
+    }
+
+    /**
+     * @param string $websiteUrl
+     *
+     * @return self
+     */
+    public function setWebsiteUrl(?string $websiteUrl): self
+    {
+        $this->websiteUrl = $websiteUrl;
+
+        return $this;
     }
 
     public function getLinkedInUrl(): ?string

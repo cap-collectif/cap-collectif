@@ -246,7 +246,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
             component={[Function]}
             divClassName="col-sm-6"
             id="public-data-form-website"
-            name="website"
+            name="websiteUrl"
             type="text"
           />
         </div>
@@ -625,7 +625,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
             component={[Function]}
             divClassName="col-sm-6"
             id="public-data-form-website"
-            name="website"
+            name="websiteUrl"
             type="text"
           />
         </div>
