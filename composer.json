@@ -152,7 +152,7 @@
         "jolicode/jolitypo": "^1.0",
         "caxy/htmldiff-bundle": "~0.1.2",
         "ocramius/proxy-manager": "2.0.2",
-        "limenius/react-bundle": "^3.0",
+        "limenius/react-bundle": "^1.0",
         "cocur/slugify": "~3.2",
         "phayes/geophp": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
         "pmill/doctrine-array-hydrator": "^0.1.2",
