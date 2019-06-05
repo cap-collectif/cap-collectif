@@ -1,22 +1,31 @@
 /* @flow */
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
+
+import TabsBarDropdown from '../Ui/TabsBar/TabsBarDropdown';
+import { TabsItemContainer, TabsLink, TabsDivider } from '../Ui/TabsBar/styles';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
 import UserAvatar from '../User/UserAvatar';
 import type { State } from '../../types';
 
+const ButtonsContainer = styled.div`
+  padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
+`;
+
 type Props = {
   intl: IntlShape,
   user?: Object,
   features: Object,
+  vertical: boolean,
 };
 
 export class NavbarRight extends React.Component<Props> {
   static defaultProps = {
     user: null,
+    vertical: false,
   };
 
   logout = () => {
@@ -25,74 +34,75 @@ export class NavbarRight extends React.Component<Props> {
   };
 
   render() {
-    const { user, features, intl } = this.props;
+    const { user, features, vertical, intl } = this.props;
     return (
-      <Nav pullRight>
+      <>
         {features.search && (
-          <NavItem
-            eventKey={1}
-            className="navbar__search"
-            href="/search"
+          <TabsItemContainer
+            vertical={vertical}
+            as="div"
             role="search"
             aria-label={intl.formatMessage({ id: 'search.title' })}>
-            <i className="cap cap-magnifier" />{' '}
-            <span className="visible-xs-inline" style={{ whiteSpace: 'nowrap' }}>
-              <FormattedMessage id="navbar.search" />
-            </span>
-          </NavItem>
+            <TabsLink id="navbar-search" eventKey={1} href="/search">
+              <i className="cap cap-magnifier" />{' '}
+              <span className="visible-xs-inline">
+                <FormattedMessage id="navbar.search" />
+              </span>
+            </TabsLink>
+          </TabsItemContainer>
         )}
         {user ? (
-          <NavDropdown
+          <TabsBarDropdown
+            pullRight
+            intl={intl}
             eventKey={3}
-            title={
-              <span>
-                <UserAvatar user={user} size={34} anchor={false} />
-                <span className="hidden-xs">{user.username}</span>
-              </span>
-            }
+            vertical={vertical}
+            id="navbar-username"
             aria-label={intl.formatMessage(
               { id: 'user.account.menu' },
               { username: user.username },
             )}
-            className="navbar__dropdown"
-            id="navbar-username">
+            toggleElement={
+              <span>
+                <UserAvatar user={user} size={34} anchor={false} />
+                <span>{user.username}</span>
+              </span>
+            }>
             {user.isAdmin && (
-              <MenuItem key={3.1} eventKey={3.1} href="/admin">
+              <TabsLink eventKey={3.1} href="/admin">
                 <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
                 <FormattedMessage id="navbar.admin" />
-              </MenuItem>
+              </TabsLink>
             )}
             {features.profiles && (
-              <MenuItem key={3.2} eventKey={3.2} href={`/profile/${user.uniqueId}`}>
+              <TabsLink eventKey={3.2} href={`/profile/${user.uniqueId}`}>
                 <i className="cap cap-id-8 mr-10" aria-hidden="true" />
                 <FormattedMessage id="navbar.profile" />
-              </MenuItem>
+              </TabsLink>
             )}
             {user.isEvaluer && (
-              <MenuItem key={3.3} eventKey={3.3} href="/evaluations">
+              <TabsLink eventKey={3.3} href="/evaluations">
                 <i className="cap cap-edit-write mr-10" aria-hidden="true" />
                 <FormattedMessage id="evaluations.index.page_title" />
-              </MenuItem>
+              </TabsLink>
             )}
-            <MenuItem key={3.4} eventKey={3.4} href="/profile/edit-profile">
+            <TabsLink eventKey={3.4} href="/profile/edit-profile">
               <i className="cap cap-setting-adjustment mr-10" aria-hidden="true" />
               <FormattedMessage id="navbar.user_settings" />
-            </MenuItem>
-            <MenuItem key={3.5} divider aria-hidden="true" />
-            <MenuItem key={3.6} eventKey={3.6} id="logout-button" onClick={this.logout}>
+            </TabsLink>
+            <TabsDivider aria-hidden="true" />
+            <TabsLink eventKey={3.6} id="logout-button" onClick={this.logout}>
               <i className="cap cap-power-1 mr-10" aria-hidden="true" />
               <FormattedMessage id="global.logout" />
-            </MenuItem>
-          </NavDropdown>
+            </TabsLink>
+          </TabsBarDropdown>
         ) : (
-          <React.Fragment>
-            <li>
-              <RegistrationButton className="navbar-btn" />{' '}
-              <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
-            </li>
-          </React.Fragment>
+          <ButtonsContainer vertical={vertical}>
+            <RegistrationButton className="navbar-btn" />{' '}
+            <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
+          </ButtonsContainer>
         )}
-      </Nav>
+      </>
     );
   }
 }

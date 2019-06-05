@@ -1,39 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NavbarRight /> should render correctly 1`] = `
-<Nav
-  bsClass="nav"
-  justified={false}
-  pullLeft={false}
-  pullRight={true}
-  stacked={false}
->
-  <NavDropdown
+<Fragment>
+  <TabsBarDropdown
     aria-label="user.account.menu"
-    className="navbar__dropdown"
     eventKey={3}
     id="navbar-username"
-    title={
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    pullRight={true}
+    toggleElement={
       <span>
         <Connect(UserAvatar)
           anchor={false}
           size={34}
           user={Object {}}
         />
-        <span
-          className="hidden-xs"
-        />
+        <span />
       </span>
     }
+    vertical={false}
   >
-    <MenuItem
-      bsClass="dropdown"
-      disabled={false}
-      divider={false}
+    <styles__TabsLink
       eventKey={3.4}
-      header={false}
       href="/profile/edit-profile"
-      key="3.4"
     >
       <i
         aria-hidden="true"
@@ -43,23 +46,13 @@ exports[`<NavbarRight /> should render correctly 1`] = `
         id="navbar.user_settings"
         values={Object {}}
       />
-    </MenuItem>
-    <MenuItem
+    </styles__TabsLink>
+    <styles__TabsDivider
       aria-hidden="true"
-      bsClass="dropdown"
-      disabled={false}
-      divider={true}
-      header={false}
-      key="3.5"
     />
-    <MenuItem
-      bsClass="dropdown"
-      disabled={false}
-      divider={false}
+    <styles__TabsLink
       eventKey={3.6}
-      header={false}
       id="logout-button"
-      key="3.6"
       onClick={[Function]}
     >
       <i
@@ -70,7 +63,7 @@ exports[`<NavbarRight /> should render correctly 1`] = `
         id="global.logout"
         values={Object {}}
       />
-    </MenuItem>
-  </NavDropdown>
-</Nav>
+    </styles__TabsLink>
+  </TabsBarDropdown>
+</Fragment>
 `;

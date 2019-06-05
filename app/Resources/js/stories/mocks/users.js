@@ -9,6 +9,8 @@ export const author = {
   _links: {},
   vip: false,
   isViewer: false,
+  isAdmin: true,
+  isEvaluer: true,
 };
 
 export const followers = [
