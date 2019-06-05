@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
+<form
+  id="projectAdmin"
+  onSubmit={[MockFunction]}
+>
+  <Field
+    component={[Function]}
+    label={
+      <FormattedMessage
+        id="admin.fields.group.title"
+        values={Object {}}
+      />
+    }
+    name="title"
+    type="text"
+  />
+  <UserListField
+    ariaControls="EventListFilters-filter-author-listbox"
+    authorOfEvent={false}
+    autoload={false}
+    className=""
+    clearable={true}
+    debounce={true}
+    id="project-author"
+    inputClassName="fake-inputClassName"
+    label="admin.fields.project.authors"
+    labelClassName="control-label"
+    multi={true}
+    name="authors"
+    placeholder="all-the-authors"
+    selectFieldIsObject={true}
+  />
+  <InjectIntl(ProjectTypeListField) />
+  <Field
+    component={[Function]}
+    label={
+      <span>
+        <FormattedMessage
+          id="admin.fields.project.opinion_term"
+          values={Object {}}
+        />
+      </span>
+    }
+    name="opinionTerm"
+    type="select"
+    value={0}
+  >
+    <option
+      key="0"
+      value={0}
+    >
+      project.opinion_term.opinion
+    </option>
+    <option
+      key="1"
+      value={1}
+    >
+      project.opinion_term.article
+    </option>
+  </Field>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={true}
+    type="submit"
+  >
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
+  <AlertForm
+    invalid={false}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    valid={true}
+  />
+</form>
+`;
+
+exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
+<form
+  id="projectAdmin"
+  onSubmit={[MockFunction]}
+>
+  <Field
+    component={[Function]}
+    label={
+      <FormattedMessage
+        id="admin.fields.group.title"
+        values={Object {}}
+      />
+    }
+    name="title"
+    type="text"
+  />
+  <UserListField
+    ariaControls="EventListFilters-filter-author-listbox"
+    authorOfEvent={false}
+    autoload={false}
+    className=""
+    clearable={true}
+    debounce={true}
+    id="project-author"
+    inputClassName="fake-inputClassName"
+    label="admin.fields.project.authors"
+    labelClassName="control-label"
+    multi={true}
+    name="authors"
+    placeholder="all-the-authors"
+    selectFieldIsObject={true}
+  />
+  <InjectIntl(ProjectTypeListField) />
+  <Field
+    component={[Function]}
+    label={
+      <span>
+        <FormattedMessage
+          id="admin.fields.project.opinion_term"
+          values={Object {}}
+        />
+      </span>
+    }
+    name="opinionTerm"
+    type="select"
+    value={0}
+  >
+    <option
+      key="0"
+      value={0}
+    >
+      project.opinion_term.opinion
+    </option>
+    <option
+      key="1"
+      value={1}
+    >
+      project.opinion_term.article
+    </option>
+  </Field>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={true}
+    type="submit"
+  >
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
+  <AlertForm
+    invalid={false}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    valid={true}
+  />
+</form>
+`;

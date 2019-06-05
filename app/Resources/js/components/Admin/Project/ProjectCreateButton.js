@@ -13,7 +13,7 @@ type State = {
   showModal: boolean,
 };
 
-class ProjectCreateButton extends Component<Props, State> {
+export class ProjectCreateButton extends Component<Props, State> {
   state = {
     showModal: false,
   };

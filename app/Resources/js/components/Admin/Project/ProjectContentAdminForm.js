@@ -114,7 +114,7 @@ const validate = ({ title, authors, opinionTerm, projectType }: FormValues) => {
 
 const formName = 'projectAdmin';
 
-const ProjectContentAdminForm = (props: Props) => {
+export const ProjectContentAdminForm = (props: Props) => {
   const {
     handleSubmit,
     intl,
@@ -124,9 +124,7 @@ const ProjectContentAdminForm = (props: Props) => {
     pristine,
     submitSucceeded,
     submitFailed,
-    project,
   } = props;
-  console.log(project);
 
   return (
     <form onSubmit={handleSubmit} id={formName}>
