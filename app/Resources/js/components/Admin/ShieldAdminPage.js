@@ -18,7 +18,6 @@ const component = ({
     return graphqlError;
   }
   if (props) {
-    // eslint-disable-next-line
     if (props.shieldAdminForm !== null) {
       return <ShieldAdminForm {...props} />;
     }
