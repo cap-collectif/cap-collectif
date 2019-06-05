@@ -247,7 +247,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "externalLink": "",
+          "externalLink": null,
           "hasParticipativeStep": false,
           "id": "1",
           "isExternal": false,
@@ -338,7 +338,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "externalLink": "",
+        "externalLink": null,
         "hasParticipativeStep": false,
         "id": "1",
         "isExternal": false,
@@ -401,7 +401,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "externalLink": "",
+          "externalLink": null,
           "hasParticipativeStep": true,
           "id": "1",
           "isExternal": false,
@@ -497,7 +497,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "externalLink": "",
+          "externalLink": null,
           "hasParticipativeStep": true,
           "id": "1",
           "isExternal": false,
@@ -562,7 +562,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "externalLink": "",
+        "externalLink": null,
         "hasParticipativeStep": true,
         "id": "1",
         "isExternal": false,
@@ -907,7 +907,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "externalLink": "",
+          "externalLink": null,
           "hasParticipativeStep": false,
           "id": "1",
           "isExternal": false,
@@ -1016,7 +1016,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       Object {
         "$fragmentRefs": null,
         "$refType": null,
-        "externalLink": "",
+        "externalLink": null,
         "hasParticipativeStep": false,
         "id": "1",
         "isExternal": false,
