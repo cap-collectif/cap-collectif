@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import type { ReadyState } from 'react-relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import ShieldAdminForm from './ShieldAdminForm';

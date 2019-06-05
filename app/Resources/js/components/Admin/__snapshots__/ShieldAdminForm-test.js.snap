@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ShieldAdminForm /> renders correctly 1`] = `
+<div
+  className="box-content box-content__content-form"
+>
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <div
+      className="d-flex align-items-center mb-15"
+    >
+      <Field
+        component={[Function]}
+        id="shield-admin-form_shieldMode"
+        label={
+          <span>
+            <FormattedMessage
+              id="capco.module.shield_mode"
+              values={Object {}}
+            />
+          </span>
+        }
+        name="shieldMode"
+      />
+    </div>
+    <Field
+      component={[Function]}
+      id="shield-admin-form_introduction"
+      label={
+        <h4>
+          <FormattedMessage
+            id="shield.introduction"
+            values={Object {}}
+          />
+        </h4>
+      }
+      name="introduction"
+      type="editor"
+    />
+    <Field
+      component={[Function]}
+      id="shield-admin-form_image"
+      label={
+        <h4>
+          <FormattedMessage
+            id="image.shield"
+            values={Object {}}
+          />
+        </h4>
+      }
+      name="image"
+      type="image"
+    />
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={true}
+      id="site_favicon_save"
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+    <AlertForm
+      invalid={false}
+      submitFailed={false}
+      submitSucceeded={false}
+      submitting={false}
+      valid={true}
+    />
+  </form>
+</div>
+`;
