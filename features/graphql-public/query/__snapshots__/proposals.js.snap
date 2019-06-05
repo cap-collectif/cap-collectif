@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Query.proposals connection fetches the first hundred proposals (included drafted) with a cursor 1`] = `
+exports[`Query.proposals connection fetches the first hundred proposals (included drafted and not published) with a cursor 1`] = `
 Object {
   "node": Object {
     "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
@@ -939,68 +939,12 @@ Object {
             "updatedAt": "2018-03-01 00:08:00",
           },
         },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyNTA4",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2018-03-01 00:15:00",
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
-            "publishedAt": null,
-            "reference": "1-35",
-            "responses": Array [
-              Object {
-                "formattedValue": null,
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAz",
-                  "title": "Nouvelle section 3",
-                },
-                "value": null,
-              },
-              Object {
-                "formattedValue": null,
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mw==",
-                  "title": "Evaluez le coût de votre proposition",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTE=",
-                  "title": "Documents",
-                },
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MediaQuestion",
-                  "id": "UXVlc3Rpb246MTI=",
-                  "title": "Bilans",
-                },
-              },
-            ],
-            "title": "Proposition 35 non publiée",
-            "trashed": false,
-            "trashedStatus": null,
-            "updatedAt": "2018-03-01 00:15:00",
-          },
-        },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "hasNextPage": false,
       },
-      "totalCount": 7,
+      "totalCount": 6,
     },
   },
 }
