@@ -66,6 +66,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
     bsClass="btn"
     bsStyle="primary"
     disabled={true}
+    id="submit-project-content"
     type="submit"
   >
     <FormattedMessage
@@ -149,6 +150,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
     bsClass="btn"
     bsStyle="primary"
     disabled={true}
+    id="submit-project-content"
     type="submit"
   >
     <FormattedMessage

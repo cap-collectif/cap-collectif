@@ -166,7 +166,11 @@ export const ProjectContentAdminForm = (props: Props) => {
           </option>
         ))}
       </Field>
-      <Button type="submit" disabled={invalid || submitting || pristine} bsStyle="primary">
+      <Button
+        id="submit-project-content"
+        type="submit"
+        disabled={invalid || submitting || pristine}
+        bsStyle="primary">
         {submitting ? (
           <FormattedMessage id="global.loading" />
         ) : (
