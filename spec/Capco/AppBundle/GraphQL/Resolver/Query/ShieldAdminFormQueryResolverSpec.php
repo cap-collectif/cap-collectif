@@ -44,4 +44,28 @@ class ShieldAdminFormQueryResolverSpec extends ObjectBehavior
             'image' => $media,
         ]);
     }
+
+    public function it should return informations about shield mode even if media does not exist(
+        Manager $toggleManager,
+        SiteImageRepository $siteImageRepository,
+        SiteParameterRepository $siteParameterRepository,
+        SiteParameter $siteParameter,
+        SiteImage $siteImage
+    ) {
+        $siteParameter->getValue()->willReturn('<p>Introduction text in shield mode</p>');
+        $siteImage->getMedia()->willReturn(null);
+
+        $siteParameterRepository
+            ->findOneBy(['keyname' => 'shield.introduction'])
+            ->willReturn($siteParameter);
+        $siteImageRepository->findOneBy(['keyname' => 'image.shield'])->willReturn($siteImage);
+
+        $toggleManager->isActive('shield_mode')->willReturn(true);
+
+        $this->_invoke()->shouldReturn([
+            'shieldMode' => true,
+            'introduction' => '<p>Introduction text in shield mode</p>',
+            'image' => null,
+        ]);
+    }
 }

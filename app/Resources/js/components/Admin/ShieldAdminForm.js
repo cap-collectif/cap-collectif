@@ -53,7 +53,7 @@ export const ShieldAdminForm = (props: Props) => {
 
   return (
     <div className="box-content box-content__content-form">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id={`${formName}`}>
         <div className="d-flex align-items-center mb-15">
           <Field
             id={`${formName}_shieldMode`}

@@ -5,6 +5,7 @@ exports[`<ShieldAdminForm /> renders correctly 1`] = `
   className="box-content box-content__content-form"
 >
   <form
+    id="shield-admin-form"
     onSubmit={[MockFunction]}
   >
     <div

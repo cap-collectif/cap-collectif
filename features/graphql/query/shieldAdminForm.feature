@@ -1,4 +1,4 @@
-@shield
+@shieldAdminForm
 Feature: Shield configuration
 
 Scenario: GraphQL admin client wants to get current configuration of shield
