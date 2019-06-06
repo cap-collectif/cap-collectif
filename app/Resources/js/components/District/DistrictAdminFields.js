@@ -8,10 +8,10 @@ import PanelBackgroundStyle from './Fields/PanelBackgroundStyle';
 import PanelBorderStyle from './Fields/PanelBorderStyle';
 import type { District } from '../../types';
 
-type Props = {
+type Props = {|
   member: string,
   district: District,
-};
+|};
 
 const isBorderEnable = district => district && district.border && district.border.enabled;
 
@@ -43,7 +43,9 @@ const DistrictAdminFields = ({ member, district }: Props) => (
       normalize={val => !!val}
       component={component}
     />
-    <h3>Styles</h3>
+    <h3>
+      <FormattedMessage id="styles" />
+    </h3>
     <hr />
     <Row>
       <Col xs={12} md={6}>
