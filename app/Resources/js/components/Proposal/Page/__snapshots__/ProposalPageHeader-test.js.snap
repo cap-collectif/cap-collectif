@@ -529,36 +529,6 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
             }
           />
         </span>
-        <ForwardRef(Relay(Connect(UnpublishedLabel)))
-          publishable={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "userAdmin",
-                "media": Object {
-                  "url": "http://media.url",
-                },
-                "username": "userAdmin",
-              },
-              "createdAt": "2015-01-01 00:00:00",
-              "draft": true,
-              "form": Object {
-                "isProposalForm": false,
-              },
-              "id": "1",
-              "project": Object {
-                "opinionCanBeFollowed": true,
-              },
-              "publicationStatus": "DRAFT",
-              "publishedAt": null,
-              "theme": null,
-              "title": "titre",
-              "updatedAt": "2015-01-05 00:10:00",
-              "url": "true",
-            }
-          }
-        />
       </p>
     </div>
   </div>

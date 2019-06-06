@@ -60,7 +60,10 @@ export class UnpublishedLabel extends React.Component<Props> {
               <FormattedMessage id="account-not-confirmed-in-time" />
             </strong>
           }>
-          <FormattedMessage id="account-not-confirmed-in-time-message" />
+          <FormattedMessage
+            id="account-not-confirmed-in-time-message"
+            value={{ contentType: 'contribution' }}
+          />
         </Popover>
       );
     }
@@ -73,7 +76,10 @@ export class UnpublishedLabel extends React.Component<Props> {
               <FormattedMessage id="account-confirmed-too-late" />
             </strong>
           }>
-          <FormattedMessage id="account-confirmed-too-late-message" />
+          <FormattedMessage
+            id="account-confirmed-too-late-message"
+            value={{ contentType: 'contribution' }}
+          />
         </Popover>
       );
     }

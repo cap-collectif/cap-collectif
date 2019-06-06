@@ -96,8 +96,10 @@ export class ProposalPageHeader extends React.Component<Props> {
                   />
                 </span>
               )}
-              {/* $FlowFixMe */}
-              <UnpublishedLabel publishable={proposal} />
+              {!proposal.draft && (
+                /* $FlowFixMe */
+                <UnpublishedLabel publishable={proposal} />
+              )}
             </p>
           </div>
         </div>
