@@ -15,10 +15,11 @@ import ProjectTypeListField from '../Field/ProjectTypeListField';
 import { UPDATE_ALERT } from '../../../constants/AlertConstants';
 import CreateProjectMutation from '../../../mutations/CreateProjectMutation';
 import UpdateProjectMutation from '../../../mutations/UpdateProjectMutation';
+import { type ProjectContentAdminForm_project } from '~relay/ProjectContentAdminForm_project.graphql';
 
 type Props = {|
   ...FormProps,
-  project: ?any,
+  project: ?ProjectContentAdminForm_project,
   handleSubmit: () => void,
   intl: IntlShape,
   formName: string,
@@ -190,10 +191,10 @@ export const ProjectContentAdminForm = (props: Props) => {
 
 const mapStateToProps = (state, { project }: Props) => ({
   initialValues: {
-    opinionTerm: project ? project.type.id : projectTerms[0].id,
+    opinionTerm: project ? project.opinionTerm : projectTerms[0].id,
     authors: project ? project.authors : [],
     title: project ? project.title : null,
-    projectType: project ? project.type.id : null,
+    projectType: project && project.type ? project.type.id : null,
   },
 });
 
@@ -216,6 +217,7 @@ export default createFragmentContainer(container, {
         value: id
         label: username
       }
+      opinionTerm
       type {
         id
       }

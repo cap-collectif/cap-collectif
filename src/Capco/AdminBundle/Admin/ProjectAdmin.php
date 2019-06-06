@@ -145,7 +145,6 @@ final class ProjectAdmin extends CapcoAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('title', null, ['label' => 'admin.fields.project.title']);
-        // ->add('Author', 'sonata_type_model', ['label' => 'admin.fields.project.author']);
         if (
             $this->getConfigurationPool()
                 ->getContainer()
@@ -377,7 +376,6 @@ final class ProjectAdmin extends CapcoAdmin
     {
         $showMapper->with('admin.fields.project.general')->end();
 
-        // ->add('authors', null, ['label' => 'admin.fields.project.author'])
         $showMapper
             ->with('admin.fields.project.general')
             ->add('title', null, ['label' => 'admin.fields.project.title'])

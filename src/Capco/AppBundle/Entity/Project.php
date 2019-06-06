@@ -447,41 +447,6 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    // /**
-    //  * Add author.
-    //  *
-    //  * @param \Capco\AppBundle\Entity\User $author
-    //  *
-    //  * @return Project
-    //  */
-    // public function addAuthor(User $user)
-    // {
-    //     $projectAuthor = new ProjectAuthor();
-    //     $projectAuthor->setUser($user);
-    //     $projectAuthor->setProject($this);
-    //     if (!$this->authors->contains($projectAuthor)) {
-    //         $this->authors->add($projectAuthor);
-    //     }
-
-    //     return $this;
-    // }
-
-    // /**
-    //  * Remove author.
-    //  *
-    //  * @param \Capco\AppBundle\Entity\User $author
-    //  *
-    //  * @return $this
-    //  */
-    // public function removeAuthor(User $author)
-    // {
-    //     if ($this->authors->contains($author)) {
-    //         $this->authors->removeElement($author);
-    //     }
-
-    //     return $this;
-    // }
-
     /**
      * Get themes.
      *

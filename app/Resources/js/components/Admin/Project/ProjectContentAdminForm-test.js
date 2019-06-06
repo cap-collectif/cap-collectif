@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectContentAdminForm } from './ProjectContentAdminForm';
-import { formMock, intlMock } from '../../../mocks';
+import { formMock, intlMock, $refType } from '../../../mocks';
 
 describe('<ProjectContentAdminForm />', () => {
   const defaultProps = {
@@ -22,6 +22,7 @@ describe('<ProjectContentAdminForm />', () => {
     const props = {
       ...defaultProps,
       project: {
+        $refType,
         id: '1',
         title: 'project',
         authors: [
@@ -30,6 +31,7 @@ describe('<ProjectContentAdminForm />', () => {
             label: 'username',
           },
         ],
+        opinionTerm: '1',
         type: {
           id: '0',
         },
