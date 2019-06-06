@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectPreviewProgressBar /> should render correctly counters without districts 1`] = `
+exports[`<ProjectPreviewProgressBar /> should render correctly an external project with counter 1`] = `
 <TagsList>
   <ProjectPreviewCounter
     icon="cap-baloon-1"
@@ -17,7 +17,7 @@ exports[`<ProjectPreviewProgressBar /> should render correctly counters without 
   <ProjectPreviewCounter
     icon="cap-user-2-1"
     label="project.preview.counters.contributors"
-    showZero={true}
+    showZero={false}
     value={48}
   />
   <ForwardRef(Relay(ProjectRestrictedAccessFragment))
@@ -33,6 +33,29 @@ exports[`<ProjectPreviewProgressBar /> should render correctly counters without 
         "id": "externalProject",
         "votes": Object {
           "totalCount": 48,
+        },
+      }
+    }
+  />
+</TagsList>
+`;
+
+exports[`<ProjectPreviewProgressBar /> should render correctly an external project without counters 1`] = `
+<TagsList>
+  0
+  <ForwardRef(Relay(ProjectRestrictedAccessFragment))
+    icon="cap-lock-2-1"
+    project={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "contributionsCount": 0,
+        "contributors": Object {
+          "totalCount": 0,
+        },
+        "id": "externalProject",
+        "votes": Object {
+          "totalCount": 0,
         },
       }
     }

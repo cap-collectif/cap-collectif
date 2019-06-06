@@ -22,7 +22,7 @@ Scenario: GraphQL client wants to list projects by latest
 {
    "data":{
       "projects":{
-         "totalCount":18,
+         "totalCount":19,
          "edges":[
             {
                "node":{
@@ -111,6 +111,11 @@ Scenario: GraphQL client wants to list projects by latest
             },
             {
                "node":{
+                  "_id":"externalProjectWithoutCounter"
+               }
+            },
+            {
+               "node":{
                   "_id":"project21"
                }
             }
@@ -141,7 +146,7 @@ Scenario: GraphQL client wants to list projects order by popularity
   {
    "data":{
       "projects":{
-      "totalCount":18,
+      "totalCount":19,
          "edges":[
             {"node":{"_id":"project1"}},
             {"node":{"_id":"project5"}},
