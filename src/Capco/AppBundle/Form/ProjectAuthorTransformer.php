@@ -27,12 +27,14 @@ class ProjectAuthorTransformer
         $this->projectAuthorRepository = $projectAuthorRepository;
     }
 
-    public function setProject(Project $project)
+    public function setProject(Project $project): self
     {
         $this->project = $project;
+
+        return $this;
     }
 
-    public function transformUsers($usersGlobalId)
+    public function transformUsers($usersGlobalId): array
     {
         $data = [];
         foreach ($usersGlobalId as $userId) {

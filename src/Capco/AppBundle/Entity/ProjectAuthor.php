@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 
 /**
  * Project author.
@@ -42,13 +41,6 @@ class ProjectAuthor
         return $this;
     }
 
-    /**
-     * Set project.
-     *
-     * @param \Capco\AppBundle\Entity\Project $project
-     *
-     * @return ProjectAbstractStep
-     */
     public function setProject(Project $project): self
     {
         $this->project = $project;
@@ -58,12 +50,7 @@ class ProjectAuthor
         return $this;
     }
 
-    /**
-     * Get project.
-     *
-     * @return \Capco\AppBundle\Entity\Project
-     */
-    public function getProject()
+    public function getProject(): Project
     {
         return $this->project;
     }

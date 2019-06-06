@@ -373,22 +373,16 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    /**
-     * @return ?User
-     */
-    public function getFirstAuthor()
+    public function getFirstAuthor(): self
     {
         if ($this->authors && isset($this->authors[0])) {
             return $this->authors[0]->getUser();
         }
 
-        return null;
+        return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function setAuthors($authors)
+    public function setAuthors($authors): self
     {
         $this->authors = new ArrayCollection($authors);
 
@@ -405,22 +399,12 @@ class Project implements IndexableInterface
         return $authors;
     }
 
-    /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
     public function getAuthors(): Collection
     {
         return $this->authors;
     }
 
-    /**
-     * Add author.
-     *
-     * @param \Capco\AppBundle\Entity\ProjectAuthor $projectAuthor
-     *
-     * @return Project
-     */
-    public function addAuthor(ProjectAuthor $projectAuthor)
+    public function addAuthor(ProjectAuthor $projectAuthor): self
     {
         if (!$this->authors->contains($projectAuthor)) {
             $this->authors->add($projectAuthor);
@@ -429,17 +413,8 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    /**
-     * Remove author.
-     *
-     * @param \Capco\AppBundle\Entity\ProjectAuthor $projectAuthor
-     *
-     * @return Project
-     */
-    public function removeAuthor(ProjectAuthor $projectAuthor)
+    public function removeAuthor(ProjectAuthor $projectAuthor): self
     {
-        exit();
-
         if ($this->authors->contains($projectAuthor)) {
             $this->authors->remove($projectAuthor);
         }
