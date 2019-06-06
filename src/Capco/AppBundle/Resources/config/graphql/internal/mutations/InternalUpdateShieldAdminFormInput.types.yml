@@ -8,6 +8,6 @@ InternalUpdateShieldAdminFormInput:
       introduction:
         type: 'HTML'
         description: 'Introduction text to show on shield page.'
-      imageId:
+      mediaId:
         type: 'ID'
         description: 'The image id to associate for the shield image.'

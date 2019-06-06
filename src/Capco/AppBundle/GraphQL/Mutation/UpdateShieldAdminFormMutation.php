@@ -39,8 +39,8 @@ class UpdateShieldAdminFormMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        list($imageId, $shieldMode, $introduction) = [
-            $input->offsetGet('imageId'),
+        list($mediaId, $shieldMode, $introduction) = [
+            $input->offsetGet('mediaId'),
             $input->offsetGet('shieldMode'),
             $input->offsetGet('introduction'),
         ];
@@ -53,9 +53,9 @@ class UpdateShieldAdminFormMutation implements MutationInterface
             throw new UserError('Media not found!');
         }
 
-        $image = $imageId ? $this->mediaRepository->find($imageId) : null;
+        $media = $mediaId ? $this->mediaRepository->find($mediaId) : null;
 
-        $siteImage->setMedia($image);
+        $siteImage->setMedia($media);
 
         if ($this->toggleManager->exists(self::SHIELD_MODE_TOGGLE_KEY)) {
             $this->toggleManager->set(self::SHIELD_MODE_TOGGLE_KEY, $shieldMode);
@@ -67,6 +67,6 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         $currentIntroductionParameter->setValue($introduction);
         $this->em->flush();
 
-        return ['shieldAdminForm' => compact('image', 'introduction', 'shieldMode')];
+        return ['shieldAdminForm' => compact('media', 'introduction', 'shieldMode')];
     }
 }

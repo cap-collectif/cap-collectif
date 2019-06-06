@@ -33,7 +33,7 @@ class ShieldAdminFormQueryResolver implements ResolverInterface
         return [
             'shieldMode' => $this->toggleManager->isActive('shield_mode'),
             'introduction' => $introductionText ? $introductionText->getValue() : null,
-            'image' => $logo ? $logo->getMedia() : null,
+            'media' => $logo ? $logo->getMedia() : null,
         ];
     }
 }

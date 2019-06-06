@@ -41,7 +41,7 @@ exports[`<ShieldAdminForm /> renders correctly 1`] = `
     />
     <Field
       component={[Function]}
-      id="shield-admin-form_image"
+      id="shield-admin-form_media"
       label={
         <h4>
           <FormattedMessage
@@ -50,7 +50,7 @@ exports[`<ShieldAdminForm /> renders correctly 1`] = `
           />
         </h4>
       }
-      name="image"
+      name="media"
       type="image"
     />
     <Button

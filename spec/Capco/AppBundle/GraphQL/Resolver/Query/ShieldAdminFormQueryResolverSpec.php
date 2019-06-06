@@ -41,7 +41,7 @@ class ShieldAdminFormQueryResolverSpec extends ObjectBehavior
         $this->_invoke()->shouldReturn([
             'shieldMode' => true,
             'introduction' => '<p>Introduction text in shield mode</p>',
-            'image' => $media,
+            'media' => $media,
         ]);
     }
 
@@ -65,7 +65,7 @@ class ShieldAdminFormQueryResolverSpec extends ObjectBehavior
         $this->_invoke()->shouldReturn([
             'shieldMode' => true,
             'introduction' => '<p>Introduction text in shield mode</p>',
-            'image' => null,
+            'media' => null,
         ]);
     }
 }

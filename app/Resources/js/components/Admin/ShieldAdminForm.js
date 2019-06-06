@@ -15,7 +15,7 @@ import AlertForm from '../Alert/AlertForm';
 type FormValues = {|
   +shieldMode: boolean,
   +introduction: ?string,
-  +image: ?MediaFromAPI,
+  +media: ?MediaFromAPI,
 |};
 
 type RelayProps = {|
@@ -30,10 +30,10 @@ type Props = {|
 const formName = 'shield-admin-form';
 
 const onSubmit = async (values: FormValues) => {
-  const { image, ...rest } = values;
+  const { media, ...rest } = values;
 
   const input = {
-    imageId: image ? image.id : null,
+    mediaId: media ? media.id : null,
     ...rest,
   };
 
@@ -78,8 +78,8 @@ export const ShieldAdminForm = (props: Props) => {
           }
         />
         <Field
-          id={`${formName}_image`}
-          name="image"
+          id={`${formName}_media`}
+          name="media"
           component={component}
           type="image"
           label={
@@ -126,7 +126,7 @@ export default createFragmentContainer(container, {
     fragment ShieldAdminForm_shieldAdminForm on ShieldAdminForm {
       shieldMode
       introduction
-      image {
+      media {
         id
         url
         name

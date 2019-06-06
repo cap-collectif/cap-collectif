@@ -9,6 +9,6 @@ InternalShieldAdminForm:
       introduction:
         description: 'Introduction text to show in shield page.'
         type: 'HTML'
-      image:
+      media:
         description: 'Image to show in shield page.'
         type: 'InternalMedia'

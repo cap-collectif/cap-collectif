@@ -2299,7 +2299,7 @@ input InternalUpdateShieldAdminFormInput {
   introduction: HTML
 
   # The image id to associate for the shield image.
-  imageId: ID
+  mediaId: ID
   clientMutationId: String
 }
 
@@ -5647,7 +5647,7 @@ type ShieldAdminForm {
   introduction: HTML
 
   # Image to show in shield page.
-  image: Media
+  media: Media
 }
 
 # A simple question

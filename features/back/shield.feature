@@ -10,7 +10,7 @@ Scenario: Logged in admin want to update shield configuration
   And I toggle shield mode
   And I fill in the following:
     | shield-admin-form_introduction | Shield intro |
-  And I attach the file "/var/www/features/files/image.jpg" to "image"
+  And I attach the file "/var/www/features/files/image.jpg" to "media"
   And I wait 3 seconds
   Then I save shield admin form
   And I wait ".alert__form_succeeded-message" to appear on current page

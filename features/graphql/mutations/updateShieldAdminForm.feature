@@ -11,7 +11,7 @@ Scenario: GraphQL admin client wants to update configuration of shield mode
       shieldAdminForm {
         shieldMode
         introduction
-        image {
+        media {
           id
           name
           url
@@ -29,7 +29,7 @@ Scenario: GraphQL admin client wants to update configuration of shield mode
       {
         "shieldMode": false,
         "introduction": @string@,
-        "image":
+        "media":
         {
           "id": "media12",
           "name": "Logo",
@@ -47,7 +47,7 @@ Scenario: GraphQL admin client wants to update configuration of shield mode
         shieldAdminForm {
           shieldMode
           introduction
-          image {
+          media {
             id
             name
           }
@@ -56,7 +56,7 @@ Scenario: GraphQL admin client wants to update configuration of shield mode
     }",
     "variables": {
       "input": {
-        "imageId": null,
+        "mediaId": null,
         "shieldMode": true,
         "introduction": "<p>Jean is a great person and he deserve a great wife.</p>"
       }
@@ -74,7 +74,7 @@ Scenario: GraphQL admin client wants to update configuration of shield mode
         {
           "shieldMode": true,
           "introduction": "<p>Jean is a great person and he deserve a great wife.</p>",
-          "image": null
+          "media": null
         }
       }
     }

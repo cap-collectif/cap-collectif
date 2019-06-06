@@ -10,7 +10,7 @@ Scenario: GraphQL admin client wants to get current configuration of shield
       shieldAdminForm {
         shieldMode
         introduction
-        image {
+        media {
           id
           name
           url
@@ -28,7 +28,7 @@ Scenario: GraphQL admin client wants to get current configuration of shield
       {
         "shieldMode": @boolean@,
         "introduction": @string@,
-        "image":
+        "media":
         {
           "id": @string@,
           "name": @string@,
