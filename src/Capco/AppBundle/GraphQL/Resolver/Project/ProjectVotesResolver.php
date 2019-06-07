@@ -44,7 +44,7 @@ class ProjectVotesResolver implements ResolverInterface
     public function countProjectVotes(Project $project): int
     {
         if ($project->isExternal()) {
-            return $project->getExternalVotesCount();
+            return $project->getExternalVotesCount() ?? 0;
         }
 
         $totalCount = 0;

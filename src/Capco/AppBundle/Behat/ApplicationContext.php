@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Behat\Traits\AdminDashboardTait;
 use Capco\AppBundle\Behat\Traits\AdminGeneralTait;
-use Capco\AppBundle\Behat\Traits\AdminShieldTrait;
 use Capco\AppBundle\Elasticsearch\Client;
 use Elastica\Snapshot;
 use PHPUnit\Framework\Assert;
@@ -62,7 +61,6 @@ class ApplicationContext extends UserContext
     use AdminEventTrait;
     use AdminGeneralTait;
     use AdminDashboardTait;
-    use AdminShieldTrait;
 
     protected $dbContainer;
     protected $cookieConsented;
