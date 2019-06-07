@@ -16,6 +16,8 @@ Capco\AppBundle\Entity\Project:
       groups: [Projects, Elasticsearch]
     projectType:
       groups: [Projects, Elasticsearch]
+    authors:
+      groups: [Projects, Elasticsearch]
     video:
       groups: [Projects]
     Cover:
