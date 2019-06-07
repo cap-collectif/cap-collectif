@@ -7,23 +7,23 @@ import { fetchQuery, graphql } from 'react-relay';
 import select from '../../Form/Select';
 import environment from '../../../createRelayEnvironment';
 
-type Props = {
+type Props = {|
   intl: IntlShape,
-};
+|};
 
-type ProjectTypes = {
+type ProjectTypes = {|
   id: string,
   title: string,
-};
+|};
 
-type ProjectTypesOptions = {
+type ProjectTypesOptions = {|
   value: string,
   label: string,
-};
+|};
 
-type State = {
+type State = {|
   projectTypes: ProjectTypes[],
-};
+|};
 
 const getProjectTypeList = graphql`
   query ProjectTypeListFieldQuery {
@@ -63,9 +63,7 @@ class ProjectTypeListField extends React.Component<Props, State> {
         type="select"
         component={select}
         label={
-          <span>
             <FormattedMessage id="admin.fields.project.opinion_term" />
-          </span>
         }
         options={this.renderOptions()}
       />

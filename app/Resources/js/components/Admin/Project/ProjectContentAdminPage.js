@@ -3,9 +3,9 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import ProjectContentAdminForm from './ProjectContentAdminForm';
 
-type Props = {
+type Props = {|
   project: ?string,
-};
+|};
 
 const ProjectContentAdminPage = (props: Props) => (
   <div className="col-md-12">

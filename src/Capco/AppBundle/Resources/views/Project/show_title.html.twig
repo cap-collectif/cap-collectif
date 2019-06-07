@@ -69,7 +69,7 @@
                         {% spaceless %}
                             {{ 'project.show.published_by' | trans({}, 'CapcoAppBundle') }}
                             {% if is_feature_enabled('profiles') %}
-                                <a href="{{ path('capco_user_profile_show_all', {'slug': project.authors[0].user.slug}) }}">{{ project.Authors[0].user.username }}</a>
+                                <a href="{{ path('capco_user_profile_show_all', {'slug': project.authors[0].user.slug}) }}">{{ project.authors[0].user.username }}</a>
                             {% else %}
                                 {{ project.authors[0].user.username }}
                             {% endif %}

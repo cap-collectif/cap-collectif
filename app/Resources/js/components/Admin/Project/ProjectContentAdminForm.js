@@ -90,15 +90,11 @@ const onSubmit = (
 const validate = ({ title, authors, opinionTerm, projectType }: FormValues) => {
   const errors = {};
 
-  if (!title) {
-    errors.title = 'global.required';
-  } else if (title.length < 2) {
+  if (!title || title.length < 2) {
     errors.title = 'global.required';
   }
 
-  if (!authors) {
-    errors.authors = 'global.required';
-  } else if (authors.length <= 0) {
+  if (!authors || authors.length <= 0) {
     errors.authors = 'global.required';
   }
 
@@ -113,7 +109,7 @@ const validate = ({ title, authors, opinionTerm, projectType }: FormValues) => {
   return errors;
 };
 
-const formName = 'projectAdmin';
+const formName = 'projectAdminForm';
 
 export const ProjectContentAdminForm = (props: Props) => {
   const {

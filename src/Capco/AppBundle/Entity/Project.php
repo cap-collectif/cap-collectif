@@ -373,7 +373,7 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    public function getFirstAuthor(): User
+    public function getFirstAuthor(): ?User
     {
         if ($this->authors && isset($this->authors[0])) {
             return $this->authors[0]->getUser();
@@ -382,7 +382,7 @@ class Project implements IndexableInterface
         return null;
     }
 
-    public function setAuthors($authors): self
+    public function setAuthors(array $authors): self
     {
         $this->authors = new ArrayCollection($authors);
 
