@@ -62,9 +62,7 @@ class ProjectTypeListField extends React.Component<Props, State> {
         name="projectType"
         type="select"
         component={select}
-        label={
-            <FormattedMessage id="admin.fields.project.opinion_term" />
-        }
+        label={<FormattedMessage id="admin.fields.project.opinion_term" />}
         options={this.renderOptions()}
       />
     );

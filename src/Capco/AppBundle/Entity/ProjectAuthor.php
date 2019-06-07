@@ -9,6 +9,8 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 
 /**
  * Project author.
+ * This class purpose is to store additional datas on the project author
+ * Ex: When a user has been added as author.
  *
  * @ORM\Table(name="project_author")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectAuthorRepository")

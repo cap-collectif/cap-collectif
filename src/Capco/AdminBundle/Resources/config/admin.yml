@@ -200,13 +200,6 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  Capco\AdminBundle\Admin\ProjectAuthorAdmin:
-    arguments: [~, Capco\AppBundle\Entity\ProjectAuthor, SonataAdminBundle:CRUD]
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: admin.label.projectAuthor }
-    calls:
-      - [setTranslationDomain, [CapcoAppBundle]]
-
   Capco\AdminBundle\Admin\RequirementAdmin:
     arguments: [~, Capco\AppBundle\Entity\Requirement, SonataAdminBundle:CRUD]
     tags:
