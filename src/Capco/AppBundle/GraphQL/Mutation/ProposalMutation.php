@@ -472,7 +472,7 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setDraft($draft);
         $author = $proposal->getAuthor();
 
-        if (($wasDraft && !$proposal->isDraft() && !$author) || $author->isEmailConfirmed()) {
+        if ($wasDraft && !$proposal->isDraft() && $author && $author->isEmailConfirmed()) {
             $proposal->setPublishedAt(new \DateTime());
         }
 

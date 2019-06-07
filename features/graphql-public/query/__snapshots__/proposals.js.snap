@@ -540,6 +540,64 @@ Object {
                 "name": "Citoyen",
               },
             },
+            "createdAt": "2018-03-01 00:12:00",
+            "draft": true,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxEcmFmdFdpdGhOb3RDb25maXJtZWRBdXRob3I=",
+            "published": false,
+            "publishedAt": null,
+            "reference": "1-102",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Proposition brouillon 4",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2018-03-01 00:12:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTA4",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
             "createdAt": "2018-03-01 00:15:00",
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
@@ -588,10 +646,10 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "hasNextPage": false,
       },
-      "totalCount": 10,
+      "totalCount": 11,
     },
   },
 }
