@@ -59,7 +59,7 @@ exports[`<ShieldAdminForm /> renders correctly 1`] = `
       bsClass="btn"
       bsStyle="primary"
       disabled={true}
-      id="site_favicon_save"
+      id="shield-admin-form_submit"
       type="submit"
     >
       <FormattedMessage

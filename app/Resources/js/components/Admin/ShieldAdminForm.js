@@ -90,7 +90,7 @@ export const ShieldAdminForm = (props: Props) => {
         />
         <Button
           type="submit"
-          id="site_favicon_save"
+          id={`${formName}_submit`}
           bsStyle="primary"
           disabled={pristine || invalid || submitting}>
           <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
