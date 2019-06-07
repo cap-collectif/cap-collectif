@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationAdminPage /> renders correctly 1`] = `
+<ReactRelayQueryRenderer
+  environment={"RelayModernEnvironment()"}
+  query={[Function]}
+  render={[Function]}
+  variables={Object {}}
+/>
+`;

@@ -1108,7 +1108,7 @@ class Project implements IndexableInterface
         return $this->externalParticipantsCount;
     }
 
-    public function setExternalParticipantsCount(?int $externalParticipantsCount = null): self
+    public function setExternalParticipantsCount(?int $externalParticipantsCount): self
     {
         $this->externalParticipantsCount = $externalParticipantsCount;
 
@@ -1132,7 +1132,7 @@ class Project implements IndexableInterface
         return $this->externalVotesCount;
     }
 
-    public function setExternalVotesCount(?int $externalVotesCount = null): self
+    public function setExternalVotesCount(?int $externalVotesCount): self
     {
         $this->externalVotesCount = $externalVotesCount;
 

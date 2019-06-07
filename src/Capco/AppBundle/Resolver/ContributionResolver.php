@@ -272,7 +272,7 @@ class ContributionResolver
     public function countProjectContributions(Project $project): int
     {
         if ($project->isExternal()) {
-            return $project->getExternalContributionsCount() ?? 0;
+            return $project->getExternalContributionsCount();
         }
 
         $count = 0;

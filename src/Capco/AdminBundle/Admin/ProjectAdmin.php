@@ -218,18 +218,11 @@ final class ProjectAdmin extends CapcoAdmin
             ->getUser();
 
         // Content
-        $formMapper->with('admin.fields.project.group_content', ['class' => 'col-md-12'])->end();
-        if (
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get('security.authorization_checker')
-                ->isGranted('ROLE_SUPER_ADMIN')
-        ) {
-            $formMapper
-                ->with('admin.fields.project.group_external', ['class' => 'col-md-12'])
-                ->end();
-        }
         $formMapper
+            ->with('admin.fields.project.group_content', ['class' => 'col-md-12'])
+            ->end()
+            ->with('admin.fields.project.group_external', ['class' => 'col-md-12'])
+            ->end()
             ->with('admin.fields.project.group_meta', ['class' => 'col-md-6'])
             ->end()
             ->with('admin.fields.project.group_ranking', ['class' => 'col-md-6'])
@@ -352,6 +345,7 @@ final class ProjectAdmin extends CapcoAdmin
                 'label' => 'proposal_form.districts',
             ])
             ->end()
+
             ->with('admin.fields.project.group_ranking')
             ->add('opinionsRankingThreshold', null, [
                 'label' => 'admin.fields.project.ranking.opinions_threshold',
@@ -366,6 +360,7 @@ final class ProjectAdmin extends CapcoAdmin
                 'required' => false,
             ])
             ->end()
+
             ->with('admin.fields.project.group_steps')
             ->add(
                 'steps',

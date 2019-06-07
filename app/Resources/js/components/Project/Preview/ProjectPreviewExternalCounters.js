@@ -16,10 +16,11 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
 
     return (
       <TagsList>
-        {project.contributionsCount > 0 && (
+        {project.contributionsCount && project.contributionsCount > 0 && (
           <ProjectPreviewCounter
             value={project.contributionsCount}
             label="project.preview.counters.contributions"
+            showZero
             icon="cap-baloon-1"
           />
         )}

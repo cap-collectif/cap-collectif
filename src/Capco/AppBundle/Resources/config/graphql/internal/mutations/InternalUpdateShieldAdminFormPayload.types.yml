@@ -1,0 +1,9 @@
+InternalUpdateShieldAdminFormPayload:
+  type: relay-mutation-payload
+  config:
+    name: UpdateShieldAdminFormPayload
+    description: 'The payload of the updateShieldAdminPage'
+    fields:
+      shieldAdminForm:
+        type: 'InternalShieldAdminForm!'
+        description: 'The shield admin form.'

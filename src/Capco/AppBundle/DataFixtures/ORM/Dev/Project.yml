@@ -220,5 +220,8 @@ Capco\AppBundle\Entity\Project:
     exportable: true
     publishedAt: <(new \DateTime('now - 40 days'))>
     visibility: 2
+    externalVotesCount: null
+    externalParticipantsCount: null
+    externalContributionsCount: null
     isExternal: true
     externalLink: 'http://projet.noob.fr'
