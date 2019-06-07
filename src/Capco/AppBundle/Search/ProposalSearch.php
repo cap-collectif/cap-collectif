@@ -250,10 +250,8 @@ class ProposalSearch extends Search
         if (isset($providedFilters['isPublished'])) {
             $filters['isPublished'] = $providedFilters['isPublished'];
         }
-        if (isset($providedFilters['includeDraft'])) {
-            if (true === $providedFilters['includeDraft']) {
-                unset($filters['isDraft'], $filters['isPublished']);
-            }
+        if (isset($providedFilters['includeDraft']) && true === $providedFilters['includeDraft']) {
+            unset($filters['isDraft'], $filters['isPublished']);
         }
 
         return $filters;
