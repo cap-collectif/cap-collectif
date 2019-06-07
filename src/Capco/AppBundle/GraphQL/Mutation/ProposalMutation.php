@@ -433,6 +433,7 @@ class ProposalMutation implements ContainerAwareInterface
         $formFactory = $this->container->get('form.factory');
 
         $values = $input->getRawArguments();
+        /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['id'], $user);
 
         if (!$proposal) {
