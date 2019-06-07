@@ -193,7 +193,6 @@ Capco\AppBundle\Entity\Project:
     id: 'externalProjectWithoutCounter'
     title: Projet externe sans compteur
     projectType: '@projectType4'
-    Author: '@user4'
     themes: []
     exportable: true
     publishedAt: <(new \DateTime('now - 40 days'))>

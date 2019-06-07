@@ -373,13 +373,13 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    public function getFirstAuthor(): self
+    public function getFirstAuthor(): User
     {
         if ($this->authors && isset($this->authors[0])) {
             return $this->authors[0]->getUser();
         }
 
-        return $this;
+        return null;
     }
 
     public function setAuthors($authors): self
