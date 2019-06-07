@@ -29,7 +29,7 @@ export class EventPreview extends React.Component<Props> {
       <React.Fragment>
         <div className={`d-flex flex-1-1 event block  block--bordered ${detailClasses}`}>
           <div className="col-md-2 col-sm-2 hidden-xs">
-            <DateIcon startAt={event.startAt} />
+            <DateIcon startAt={event.timeRange.startAt} />
           </div>
           <div className="col-md-10 col-sm-10 col-xs-12 event__body box event-js">
             <h3 className="event__title">
@@ -50,7 +50,11 @@ export class EventPreview extends React.Component<Props> {
             )}
             <p className="excerpt">
               <i className="cap-calendar-1 mr-10" />
-              <DatesInterval startAt={event.startAt} endAt={event.endAt} fullDay />
+              <DatesInterval
+                startAt={event.timeRange.startAt}
+                endAt={event.timeRange.endAt}
+                fullDay
+              />
             </p>
             <p className="excerpt">
               {event.fullAddress ? (
@@ -87,8 +91,10 @@ export default createFragmentContainer(EventPreview, {
   event: graphql`
     fragment EventPreview_event on Event {
       id
-      startAt
-      endAt
+      timeRange {
+        startAt
+        endAt
+      }
       title
       fullAddress
       url

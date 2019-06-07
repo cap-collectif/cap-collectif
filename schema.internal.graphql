@@ -1994,11 +1994,8 @@ type Event implements Node & Commentable {
   # Identifies the title of the event.
   title: String!
 
-  # Identifies the start of the event.
-  startAt: DateTime
-
-  # Identifies the end of the event.
-  endAt: DateTime
+  # Time range containing start and end of the event
+  timeRange: PreviewTimeRange!
 
   # Identifies the body of the event.
   body: HTML!
@@ -3326,6 +3323,15 @@ type PresentationStep implements Step {
 
   # The introduction text of the step.
   body: HTML
+}
+
+# A time range that contains start date and end date.
+type PreviewTimeRange {
+  # The start date of the time range.
+  startAt: DateTime!
+
+  # The end date of the time range
+  endAt: DateTime
 }
 
 # A vote that can be anonymous.

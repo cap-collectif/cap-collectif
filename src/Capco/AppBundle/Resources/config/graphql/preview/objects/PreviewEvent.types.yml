@@ -22,12 +22,10 @@ PreviewEvent:
       title:
         type: 'String!'
         description: 'Identifies the title of the event.'
-      startAt:
-        type: 'DateTime'
-        description: 'Identifies the start of the event.'
-      endAt:
-        type: 'DateTime'
-        description: 'Identifies the end of the event.'
+      timeRange:
+        type: 'PreviewTimeRange!'
+        description: 'Time range containing start and end of the event'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\TimeRangeResolver", [value])'
       body:
         type: 'HTML!'
         description: 'Identifies the body of the event.'

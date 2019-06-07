@@ -1,7 +1,0 @@
-TimeRange:
-  type: custom-scalar
-  config:
-    description: 'An array containing two datetimes.'
-    serialize: ["Capco\\AppBundle\\GrapQL\\Type\\TimeRange", 'serialize']
-    parseValue: ["Capco\\AppBundle\\GrapQL\\Type\\TimeRange", 'parseValue']
-    parseLiteral: ["Capco\\AppBundle\\GrapQL\\Type\\TimeRange", 'parseLiteral']
