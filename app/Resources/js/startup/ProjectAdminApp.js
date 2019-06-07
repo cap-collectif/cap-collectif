@@ -1,10 +1,11 @@
 // @flow
 import React from 'react';
-import { graphql, QueryRenderer } from 'react-relay';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
+import { graphql, QueryRenderer } from 'react-relay';
+
 import IntlProvider from './IntlProvider';
-import environment from '../createRelayEnvironment';
+import environment, { graphqlError } from '../createRelayEnvironment';
 import ProjectContentAdminPage from '../components/Admin/Project/ProjectContentAdminPage';
 
 const ProjectAdminPage = ({ projectId }: { projectId: string }) => (
@@ -22,11 +23,13 @@ const ProjectAdminPage = ({ projectId }: { projectId: string }) => (
         variables={{
           projectId,
         }}
-        render={readyState => {
-          if (readyState.props) {
-            return <ProjectContentAdminPage project={readyState.props.project} />;
+        render={({ props, error }) => {
+          if (error) {
+            return graphqlError;
           }
-          return null;
+          if (props) {
+            return <ProjectContentAdminPage project={props.project} />;
+          }
         }}
       />
     </IntlProvider>
