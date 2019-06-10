@@ -37,18 +37,16 @@ class OpinionVotesBox extends React.Component<Props> {
           opinion.votes.totalCount > 0 &&
           widgetType === VOTE_WIDGET_BOTH ? (
             <Col sm={12} md={4}>
-              <div className="pull-right hidden-xs">
-                {/* $FlowFixMe */}
-                <VotePiechart
-                  height="145px"
-                  width="150px"
-                  innerRadius={15}
-                  outerRadius={60}
-                  ok={opinion.votesYes ? opinion.votesYes.totalCount : 0}
-                  nok={opinion.votesNo ? opinion.votesNo.totalCount : 0}
-                  mitige={opinion.votesMitige ? opinion.votesMitige.totalCount : 0}
-                />
-              </div>
+              {/* $FlowFixMe */}
+              <VotePiechart
+                height="145px"
+                width="150px"
+                innerRadius={15}
+                outerRadius={60}
+                ok={opinion.votesYes ? opinion.votesYes.totalCount : 0}
+                nok={opinion.votesNo ? opinion.votesNo.totalCount : 0}
+                mitige={opinion.votesMitige ? opinion.votesMitige.totalCount : 0}
+              />
             </Col>
           ) : null}
         </Row>

@@ -61,6 +61,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
       className="text-center btn btn-secondary"
       disabled={false}
       onClick={[Function]}
+      type="button"
     >
       <FormattedMessage
         id="see-more-followers"
@@ -150,6 +151,10 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower withou
   <div
     className="well well-lg text-center"
   >
+    <i
+      className="cap-32 cap-contacts-1 "
+    />
+    <br />
     <FormattedMessage
       id="no-followers"
       values={Object {}}

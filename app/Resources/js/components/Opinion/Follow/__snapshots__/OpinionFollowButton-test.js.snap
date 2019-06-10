@@ -7,7 +7,7 @@ exports[`<OpinionFollowButton /> should render a button to follow a opinion 1`] 
     block={false}
     bsClass="btn"
     bsStyle="default"
-    className="btn btn--default opinion__button__follow"
+    className="btn btn--outline btn-dark-gray opinion__button__follow"
     disabled={false}
     id="opinion-follow-btn-opinion1"
     onClick={[Function]}
@@ -30,7 +30,7 @@ exports[`<OpinionFollowButton /> should render a button to follow a opinion and 
     block={false}
     bsClass="btn"
     bsStyle="default"
-    className="btn btn--default opinion__button__follow"
+    className="btn btn--outline btn-dark-gray opinion__button__follow"
     disabled={false}
     id="opinion-follow-btn-opinion1"
     onClick={[Function]}

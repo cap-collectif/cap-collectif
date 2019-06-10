@@ -25,7 +25,12 @@ class OpinionAppendices extends React.Component<Props> {
           if (appendix && appendix.body) {
             return (
               // $FlowFixMe
-              <OpinionAppendix key={index} appendix={appendix} />
+              <OpinionAppendix
+                key={index}
+                appendix={appendix}
+                expanded={index === 0}
+                onToggle={() => {}}
+              />
             );
           }
         })}

@@ -90,7 +90,7 @@ export class OpinionBox extends React.Component<Props> {
             <OpinionVotesBox opinion={opinion} />
             <div
               className="opinion__buttons"
-              style={{ marginTop: '15px', marginBottom: 0 }}
+              style={{ marginTop: '15px', marginBottom: '15px' }}
               aria-label={<FormattedMessage id="vote.form" />}>
               <OpinionButtons opinion={opinion} />
             </div>

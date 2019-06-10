@@ -7,24 +7,26 @@ import type { OpinionUserVote_vote } from '~relay/OpinionUserVote_vote.graphql';
 
 type Props = {
   vote: OpinionUserVote_vote,
-  className?: string,
+  style?: Object,
 };
 
 class OpinionUserVote extends React.Component<Props> {
+  static defaultProps = {
+    style: {},
+  };
+
   render() {
-    const { vote, className } = this.props;
+    const { vote, style } = this.props;
     if (!vote.author) return null;
     return (
-      <span className={className}>
-        <OverlayTrigger
-          placement="top"
-          overlay={
-            <Tooltip id={`opinion-vote-tooltip-${vote.id}`}>{vote.author.displayName}</Tooltip>
-          }>
-          {/* $FlowFixMe Will be a fragment soon */}
-          <UserAvatar user={vote.author} className="" />
-        </OverlayTrigger>
-      </span>
+      <OverlayTrigger
+        placement="top"
+        overlay={
+          <Tooltip id={`opinion-vote-tooltip-${vote.id}`}>{vote.author.displayName}</Tooltip>
+        }>
+        {/* $FlowFixMe Will be a fragment soon */}
+        <UserAvatar user={vote.author} style={style} />
+      </OverlayTrigger>
     );
   }
 }
