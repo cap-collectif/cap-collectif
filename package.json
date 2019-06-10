@@ -39,6 +39,9 @@
         "prettier": "yarn run prettier:js",
         "precommit": "flow status && lint-staged"
     },
+    "workspaces": [
+        "packages/*"
+    ],
     "pre-commit": "precommit",
     "flow-coverage-report": {
         "threshold": 70,
