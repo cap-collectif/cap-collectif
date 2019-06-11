@@ -2,7 +2,6 @@
 import { author } from './users';
 
 export const opinion = {
-  id: 'opinion1',
   url: 'https://ui.cap-collectif.com/',
   title: 'Opinion',
   user: author,
@@ -18,18 +17,6 @@ export const opinion = {
   votesMitige: { totalCount: 1 },
   votesNok: { totalCount: 1 },
   votesOk: { totalCount: 2 },
-  previewVotes: [author, author, author, author],
-  body:
-    'Lorem ipsum dolor amet direct trade cornhole exercitation hashtag mixtape, master cleanse vexillologist. Irure kickstarter single-origin coffee fashion axe vexillologist viral. Selfies etsy cloud bread heirloom, sunt craft beer fixie palo santo asymmetrical.',
-  project: {
-    opinionCanBeFollowed: true,
-  },
-  section: {
-    votesThreshold: null,
-    voteWidgetType: 2,
-  },
-  appendices: [],
-  answer: null,
 };
 
 export const opinions = [

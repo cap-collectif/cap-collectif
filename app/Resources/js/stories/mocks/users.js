@@ -1,7 +1,6 @@
 // @flow
 
 export const author = {
-  id: 'user1',
   username: 'admin',
   media: {
     url: 'https://source.unsplash.com/collection/181462',
