@@ -180,8 +180,8 @@ mappings:
       updatedAt: { type: date }
       deletedAt: { type: date }
       trashed: { type: boolean }
-      isDraft: { type: boolean }
-      isPublished: { type: boolean }
+      draft: { type: boolean }
+      published: { type: boolean }
       commentsCount: { type: long }
       estimation: { type: float }
       district:

@@ -524,7 +524,7 @@ Capco\AppBundle\Entity\Proposal:
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal102:
     id: proposalDraftWithNotConfirmedAuthor
-    title: Proposition brouillon 4
+    title: Proposition brouillon avec un auteur non confirmé
     body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
     draft: true
     author: '@user_not_confirmed_with_contributions'

@@ -208,8 +208,8 @@ class ProposalSearch extends Search
     private function getFilters(array $providedFilters): array
     {
         $filters = [];
-        $filters['isDraft'] = false;
-        $filters['isPublished'] = true;
+        $filters['draft'] = false;
+        $filters['published'] = true;
 
         if (isset($providedFilters['trashedStatus'])) {
             if (ProposalTrashedStatus::TRASHED === $providedFilters['trashedStatus']) {
@@ -247,11 +247,11 @@ class ProposalSearch extends Search
         if (isset($providedFilters['author'])) {
             $filters['author.id'] = $providedFilters['author'];
         }
-        if (isset($providedFilters['isPublished'])) {
-            $filters['isPublished'] = $providedFilters['isPublished'];
+        if (isset($providedFilters['published'])) {
+            $filters['published'] = $providedFilters['published'];
         }
         if (isset($providedFilters['includeDraft']) && true === $providedFilters['includeDraft']) {
-            unset($filters['isDraft'], $filters['isPublished']);
+            unset($filters['draft'], $filters['published']);
         }
 
         return $filters;
