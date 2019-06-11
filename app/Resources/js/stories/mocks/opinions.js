@@ -1,7 +1,7 @@
-// @flow
 import { author } from './users';
 
 export const opinion = {
+  id: 'opinion1',
   url: 'https://ui.cap-collectif.com/',
   title: 'Opinion',
   user: author,
@@ -10,13 +10,24 @@ export const opinion = {
   publishedAt: '1 mars 2018',
   published: true,
   pinned: false,
-  votes: { totalCount: 4 },
+  votes: { totalCount: 8 },
   versions: { totalCount: 3 },
   arguments: { totalCount: 4 },
   sources: { totalCount: 0 },
   votesMitige: { totalCount: 1 },
-  votesNok: { totalCount: 1 },
-  votesOk: { totalCount: 2 },
+  votesNok: { totalCount: 3 },
+  votesOk: { totalCount: 4 },
+  previewVotes: new Array(8).fill(author),
+  body:
+    'Lorem ipsum dolor amet direct trade cornhole exercitation hashtag mixtape, master cleanse vexillologist. Irure kickstarter single-origin coffee fashion axe vexillologist viral. Selfies etsy cloud bread heirloom, sunt craft beer fixie palo santo asymmetrical.',
+  project: {
+    opinionCanBeFollowed: true,
+  },
+  section: {
+    voteWidgetType: 2,
+  },
+  appendices: [],
+  answer: null,
 };
 
 export const opinions = [

@@ -12,7 +12,7 @@ exports[`<UserAvatar /> renders correctly 1`] = `
 >
   <img
     alt=""
-    className="img-circle mr-10 object-cover"
+    className="img-circle object-cover"
     src="http://media12/profileAvatar.jpg"
     style={
       Object {
@@ -53,7 +53,7 @@ exports[`<UserAvatar /> renders correctly with custom default avatar 1`] = `
 >
   <img
     alt=""
-    className="img-circle mr-10 object-cover"
+    className="img-circle object-cover"
     src="http://avatar/customAvatar.jpg"
     style={
       Object {

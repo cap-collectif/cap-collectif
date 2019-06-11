@@ -30,22 +30,10 @@ class SettingsController extends Controller
     }
 
     /**
-     * @Route("/admin/settings/pages.shield/list", name="capco_admin_settings_shield")
-     * @Template("@CapcoAdmin/Settings/shield.html.twig")
-     * @Security("has_role('ROLE_ADMIN')")
-     */
-    public function shieldAction(Request $request)
-    {
-        $adminPool = $this->get('sonata.admin.pool');
-
-        return [
-            'admin_pool' => $adminPool,
-        ];
-    }
-
-    /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
      * @Template("CapcoAdminBundle:Settings:list.html.twig")
+     *
+     * @param mixed $category
      */
     public function listAction(Request $request, $category)
     {
@@ -109,7 +97,7 @@ class SettingsController extends Controller
         }
 
         if (
-            'display_map' === $toggle &&
+            'display_map' == $toggle &&
             !$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')
         ) {
             throw $this->createAccessDeniedException();

@@ -117,7 +117,7 @@ exports[`<OpinionVotesButton /> should render an orange button when value is 0 a
       style={Object {}}
     >
       <i
-        className="cap cap-hand-like-2 icon-rotate"
+        className="cap cap-hand-like-2-1 icon-rotate"
       />
        
       <FormattedMessage

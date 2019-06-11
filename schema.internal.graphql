@@ -2291,18 +2291,6 @@ type InternalRemoveSiteFaviconPayload {
   clientMutationId: String
 }
 
-input InternalUpdateShieldAdminFormInput {
-  # Enable or disable shield mode.
-  shieldMode: Boolean!
-
-  # Introduction text to show on shield page.
-  introduction: HTML
-
-  # The image id to associate for the shield image.
-  mediaId: ID
-  clientMutationId: String
-}
-
 # A string containing JSON code.
 scalar JSON
 
@@ -2747,7 +2735,6 @@ type Mutation {
   createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
   deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
   updateProjectDistrict(input: UpdateProjectDistrictInput!): CreateProjectDistrictPayload
-  updateShieldAdminForm(input: InternalUpdateShieldAdminFormInput!): UpdateShieldAdminFormPayload
 }
 
 # A connection to a list of items.
@@ -4531,9 +4518,6 @@ type Query {
     # Returns the last `n` elements from the list.
     last: Int
   ): VoteConnection!
-
-  # Get the current shield admin form.
-  shieldAdminForm: ShieldAdminForm!
 }
 
 # Fetches an object given its ID
@@ -5639,17 +5623,6 @@ type SetEvaluationFormInProposalFormPayload {
   clientMutationId: String
 }
 
-type ShieldAdminForm {
-  # Is shield mode is active?
-  shieldMode: Boolean!
-
-  # Introduction text to show in shield page.
-  introduction: HTML
-
-  # Image to show in shield page.
-  media: Media
-}
-
 # A simple question
 type SimpleQuestion implements Question & Node {
   # The ID of an object
@@ -6556,12 +6529,6 @@ input UpdateRequirementInput {
 type UpdateRequirementPayload {
   viewer: User
   requirement: Requirement
-  clientMutationId: String
-}
-
-type UpdateShieldAdminFormPayload {
-  # The shield admin form.
-  shieldAdminForm: ShieldAdminForm!
   clientMutationId: String
 }
 

@@ -52,7 +52,6 @@ import ProjectTrashCommentApp from '../js/startup/ProjectTrashCommentApp';
 import AdminExportButtonApp from '../js/startup/AdminExportButtonApp';
 import EventListApp from '../js/startup/EventListApp';
 import SectionPageApp from '../js/startup/SectionPageApp';
-import ShieldAdminApp from '../js/startup/ShieldAdminApp';
 
 const emptyFunction = () => {};
 
@@ -115,5 +114,4 @@ ReactOnRails.register({
   ProjectTrashCommentApp,
   AdminExportButtonApp,
   EventListApp,
-  ShieldAdminApp,
 });

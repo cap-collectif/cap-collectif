@@ -163,7 +163,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         className="opinion__buttons"
         style={
           Object {
-            "marginBottom": "15px",
+            "marginBottom": 0,
             "marginTop": "15px",
           }
         }

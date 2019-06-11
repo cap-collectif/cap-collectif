@@ -28,7 +28,7 @@ class OpinionReportButton extends React.Component<Props> {
         reported={opinion.viewerHasReport || false}
         onReport={this.handleReport}
         author={{ uniqueId: opinion.author.slug }}
-        buttonClassName="opinion__action--report btn--outline btn-dark-gray"
+        buttonClassName="btn--default opinion__action--report"
         buttonStyle={{ marginLeft: 5 }}
       />
     );

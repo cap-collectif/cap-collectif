@@ -47,7 +47,7 @@ export class UserAvatar extends React.Component<Props> {
         <img
           src={user.media.url}
           alt=""
-          className="img-circle mr-10 object-cover"
+          className="img-circle object-cover"
           style={{ width: mediaSize, height: mediaSize }}
         />
       );
@@ -58,7 +58,7 @@ export class UserAvatar extends React.Component<Props> {
         <img
           src={defaultAvatar}
           alt=""
-          className="img-circle mr-10 object-cover"
+          className="img-circle object-cover"
           style={{ width: mediaSize, height: mediaSize }}
         />
       );
