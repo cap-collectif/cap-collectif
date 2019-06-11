@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\Interfaces\TimeRangable;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
@@ -29,7 +30,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasValidAddress()
  * @CapcoAssert\CheckRegister()
  */
-class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface
+class Event implements
+    CommentableInterface,
+    IndexableInterface,
+    DisplayableInBOInterface,
+    TimeRangable
 {
     use DateHelperTrait,
         CommentableWithoutCounterTrait,
@@ -42,7 +47,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
      * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
      * @ORM\Column(length=255, nullable=false, unique=true)
      */
-     protected $slug;
+    protected $slug;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -355,9 +360,11 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this->startAt;
     }
 
-    public function setStartAt(?\DateTime $startAt = null)
+    public function setStartAt(?\DateTime $startAt = null): self
     {
         $this->startAt = $startAt;
+
+        return $this;
     }
 
     public function getEndAt(): ?\DateTime
@@ -365,9 +372,11 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this->endAt;
     }
 
-    public function setEndAt(?\DateTime $endAt = null)
+    public function setEndAt(?\DateTime $endAt = null): self
     {
         $this->endAt = $endAt;
+
+        return $this;
     }
 
     public function getRegistrations()

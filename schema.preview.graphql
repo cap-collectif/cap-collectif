@@ -112,14 +112,14 @@ type Event implements Node & UniformResourceLocatable {
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
+  # Time range containing start and end of the event
+  timeRange: PreviewTimeRange!
+
   # Identifies the author of the event.
   author: User
 
   # Identifies the title of the event.
   title: String!
-
-  # Time range containing start and end of the event
-  timeRange: PreviewTimeRange!
 
   # Identifies the body of the event.
   body: HTML!

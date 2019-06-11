@@ -4,6 +4,7 @@ PreviewEvent:
     - Node
     - UniformResourceLocatable
     - Timestampable
+    - PreviewTimeRangable
   config:
     interfaces:
       - Node
@@ -23,9 +24,7 @@ PreviewEvent:
         type: 'String!'
         description: 'Identifies the title of the event.'
       timeRange:
-        type: 'PreviewTimeRange!'
         description: 'Time range containing start and end of the event'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\TimeRangeResolver", [value])'
       body:
         type: 'HTML!'
         description: 'Identifies the body of the event.'

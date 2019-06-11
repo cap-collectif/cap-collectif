@@ -4,7 +4,7 @@ PreviewTimeRange:
     description: 'A time range that contains start date and end date.'
     fields:
       startAt:
-        type: 'DateTime!'
+        type: 'DateTime'
         description: 'The start date of the time range.'
       endAt:
         type: 'DateTime'
