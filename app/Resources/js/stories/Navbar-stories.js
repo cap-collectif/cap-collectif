@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { boolean, text, withKnobs } from '@storybook/addon-knobs';
 import { setIntlConfig, withIntl } from 'storybook-addon-intl';
@@ -134,11 +134,20 @@ storiesOf('NavBar', module)
       'logo url',
       'https://cap-collectif.com/uploads/2016/03/logo-complet-site.png',
     );
+    const theme = {
+      mainNavbarBg: text('Navbar background', '#ffffff', 'Theme'),
+      mainNavbarBgActive: text('Navbar active item background', '#00ACC1', 'Theme'),
+      mainNavbarText: text('Navbar item color', '#000000', 'Theme'),
+      mainNavbarTextHover: text('Navbar item hover color', '#ffffff', 'Theme'),
+      mainNavbarTextActive: text('Navbar item active color', '#ffffff', 'Theme'),
+    };
 
     return (
-      <Container>
-        <Navbar logo={logo} items={[items[0], items[1]]} siteName={siteName} />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Navbar logo={logo} items={[items[0], items[1]]} siteName={siteName} />
+        </Container>
+      </ThemeProvider>
     );
   })
   .add('with many items', () => {
@@ -147,11 +156,20 @@ storiesOf('NavBar', module)
       'logo url',
       'https://cap-collectif.com/uploads/2016/03/logo-complet-site.png',
     );
+    const theme = {
+      mainNavbarBg: text('Navbar background', '#ffffff', 'Theme'),
+      mainNavbarBgActive: text('Navbar active item background', '#00ACC1', 'Theme'),
+      mainNavbarText: text('Navbar item color', '#000000', 'Theme'),
+      mainNavbarTextHover: text('Navbar item hover color', '#ffffff', 'Theme'),
+      mainNavbarTextActive: text('Navbar item active color', '#ffffff', 'Theme'),
+    };
 
     return (
-      <Container>
-        <Navbar logo={logo} items={items} siteName={siteName} />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Navbar logo={logo} items={items} siteName={siteName} />
+        </Container>
+      </ThemeProvider>
     );
   })
   .add('with a submenu', () => {
@@ -160,14 +178,23 @@ storiesOf('NavBar', module)
       'logo url',
       'https://cap-collectif.com/uploads/2016/03/logo-complet-site.png',
     );
+    const theme = {
+      mainNavbarBg: text('Navbar background', '#ffffff', 'Theme'),
+      mainNavbarBgActive: text('Navbar active item background', '#00ACC1', 'Theme'),
+      mainNavbarText: text('Navbar item color', '#000000', 'Theme'),
+      mainNavbarTextHover: text('Navbar item hover color', '#ffffff', 'Theme'),
+      mainNavbarTextActive: text('Navbar item active color', '#ffffff', 'Theme'),
+    };
 
     const newItems = items.slice(0);
     newItems.splice(5, 0, itemWithChildren);
 
     return (
-      <Container>
-        <Navbar logo={logo} items={newItems} siteName={siteName} />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Navbar logo={logo} items={newItems} siteName={siteName} />
+        </Container>
+      </ThemeProvider>
     );
   })
   .add('not logged', () => {
@@ -177,30 +204,49 @@ storiesOf('NavBar', module)
       'logo url',
       'https://cap-collectif.com/uploads/2016/03/logo-complet-site.png',
     );
+    const theme = {
+      mainNavbarBg: text('Navbar background', '#ffffff', 'Theme'),
+      mainNavbarBgActive: text('Navbar active item background', '#00ACC1', 'Theme'),
+      mainNavbarText: text('Navbar item color', '#000000', 'Theme'),
+      mainNavbarTextHover: text('Navbar item hover color', '#ffffff', 'Theme'),
+      mainNavbarTextActive: text('Navbar item active color', '#ffffff', 'Theme'),
+    };
 
     const contentRight = <ContentRightWithIntl user={null} features={{ search: withSearch }} />;
 
     return (
-      <Container>
-        <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        </Container>
+      </ThemeProvider>
     );
   })
   .add('logged', () => {
-    const withSearch = boolean('with search', true);
-    const siteName = text('site name', 'Cap-Collectif');
+    const withSearch = boolean('with search', true, 'Config');
+    const siteName = text('site name', 'Cap-Collectif', 'Config');
     const logo = text(
       'logo url',
       'https://cap-collectif.com/uploads/2016/03/logo-complet-site.png',
+      'Config',
     );
+    const theme = {
+      mainNavbarBg: text('Navbar background', '#ffffff', 'Theme'),
+      mainNavbarBgActive: text('Navbar active item background', '#00ACC1', 'Theme'),
+      mainNavbarText: text('Navbar item color', '#000000', 'Theme'),
+      mainNavbarTextHover: text('Navbar item hover color', '#ffffff', 'Theme'),
+      mainNavbarTextActive: text('Navbar item active color', '#ffffff', 'Theme'),
+    };
 
     const contentRight = (
       <ContentRightWithIntl user={userMock} features={{ search: withSearch, profiles: true }} />
     );
 
     return (
-      <Container>
-        <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        </Container>
+      </ThemeProvider>
     );
   });

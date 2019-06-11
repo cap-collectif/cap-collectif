@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import colors from '../../../utils/colors';
 
 const verticalMixin = css`
   flex-direction: column;
@@ -22,8 +23,8 @@ export const TabsBarContainer = styled.ul`
 `;
 
 const activeNavItem = css`
-  color: #555;
-  background-color: #e7e7e7;
+  color: ${props => props.theme.mainNavbarTextActive};
+  background-color: ${props => props.theme.mainNavbarBgActive};
 `;
 
 export const TabsItemContainer = styled.li`
@@ -43,8 +44,6 @@ export const TabsItemContainer = styled.li`
     display: flex;
     flex-direction: row;
     align-items: center;
-    text-align: center;
-
     text-align: left;
     height: 100%;
     padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
@@ -52,12 +51,19 @@ export const TabsItemContainer = styled.li`
 `;
 
 const activeTabsLinkMixin = css`
-  color: #555;
-  background-color: #e7e7e7;
+  color: ${props => props.theme.mainNavbarTextActive};
+  background-color: ${props => props.theme.mainNavbarBgActive};
+  text-decoration: none;
+`;
+
+const hoverTabsLinkMixin = css`
+  color: ${props => props.theme.mainNavbarTextHover};
+  background-color: ${props => props.theme.mainNavbarBgActive};
   text-decoration: none;
 `;
 
 export const TabsLink = styled.a`
+  color: ${props => props.theme.mainNavbarText};
   text-decoration: none;
   cursor: pointer;
 
@@ -65,7 +71,7 @@ export const TabsLink = styled.a`
 
   &:hover,
   &:focus {
-    ${activeTabsLinkMixin}
+    ${hoverTabsLinkMixin}
   }
 `;
 
@@ -137,12 +143,11 @@ export const DropdownToggle = styled.button`
   height: 100%;
   text-align: left;
   padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
+  color: ${props => props.theme.mainNavbarText};
 
   &:hover,
   &:focus {
-    color: #555;
-    background-color: #e7e7e7;
-    text-decoration: none;
+    ${hoverTabsLinkMixin}
   }
 
   & .caret {
@@ -161,6 +166,6 @@ export const DropdownSectionTitle = styled.span`
   display: block;
   padding: 3px 20px;
   font-size: 14px;
-  color: #777;
+  color: ${colors.darkGray};
   white-space: nowrap;
 `;

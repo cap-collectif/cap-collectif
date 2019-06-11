@@ -22,7 +22,7 @@ const TabsBarDropdown = (props: Props) => {
     <S.Dropdown>
       <S.DropdownToggle
         type="button"
-        className="btn btn-md btn-link" /* Bootstrap class to remove later */
+        className="btn-link" /* Bootstrap class to remove later */
         id={id}
         vertical={vertical}
         aria-haspopup="true"

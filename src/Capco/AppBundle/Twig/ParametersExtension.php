@@ -101,7 +101,15 @@ class ParametersExtension extends \Twig_Extension
             ]);
 
             // Add colors
-            $colors = ['color.btn.primary.bg', 'color.btn.primary.text'];
+            $colors = [
+                'color.main_menu.bg',
+                'color.main_menu.bg_active',
+                'color.main_menu.text',
+                'color.main_menu.text_hover',
+                'color.main_menu.text_active',
+                'color.btn.primary.bg',
+                'color.btn.primary.text',
+            ];
 
             foreach ($colors as $color) {
                 $value = $this->siteColorResolver->getValue($color);

@@ -8,7 +8,7 @@ export const NavigationContainer = styled.div`
   position: relative;
   min-height: 50px;
   padding: 0 15px;
-  background-color: #ffffff;
+  background-color: ${props => props.theme.mainNavbarBg};
 
   & .skip-links {
     position: absolute;
@@ -36,7 +36,7 @@ export const Brand = styled.div`
 `;
 
 export const Bar = styled.span`
-  background-color: #888;
+  background-color: ${props => props.theme.mainNavbarText};
   display: block;
   width: 22px;
   height: 2px;
@@ -57,14 +57,15 @@ export const Toggle = styled.button`
   background-image: none;
   border: 1px solid transparent;
   border-radius: 4px;
-  border-color: #ddd;
+  border-color: ${props => props.theme.mainNavbarText};
 
   &[aria-expanded='true'],
   &:hover {
-    background-color: #ddd;
+    background-color: ${props => props.theme.mainNavbarBgActive};
+    border-color: transparent;
 
     ${Bar} {
-      background-color: #ffffff;
+      background-color: ${props => props.theme.mainNavbarTextActive};
     }
   }
 
