@@ -2,18 +2,25 @@
 
 namespace spec\Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use PhpSpec\ObjectBehavior;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 
 class ProjectSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
         $this->shouldHaveType('Capco\AppBundle\Entity\Project');
+    }
+
+    public function it_should_throw_error_when_setting_empty_authors()
+    {
+        $this->shouldThrow(
+            new \InvalidArgumentException('Authors array can not be empty.')
+        )->during('setAuthors', [[]]);
     }
 
     public function it_doesnt_display_votes_counter_when_no_consultations()

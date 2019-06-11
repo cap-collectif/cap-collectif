@@ -384,6 +384,12 @@ class Project implements IndexableInterface
 
     public function setAuthors(array $authors): self
     {
+        if (empty($authors)) {
+            throw new \InvalidArgumentException('Authors array can not be empty.');
+
+            return null;
+        }
+
         $this->authors = new ArrayCollection($authors);
 
         return $this;
