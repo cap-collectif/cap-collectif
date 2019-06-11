@@ -2,9 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Publishable;
 
+use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\NotPublishedReason;
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Model\Publishable;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class PublishableNotPublishedReasonResolver implements ResolverInterface
@@ -13,10 +14,11 @@ class PublishableNotPublishedReasonResolver implements ResolverInterface
     {
         if (
             $publishable->isPublished() ||
-            ($publishable instanceof Proposal && $publishable->isDraft())
+            ($publishable instanceof DraftableInterface && $publishable->isDraft())
         ) {
             return null;
         }
+        /** @var User $author */
         $author = $publishable->getAuthor();
         if (!$author) {
             return null;

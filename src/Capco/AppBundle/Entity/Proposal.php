@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
@@ -61,7 +62,8 @@ class Proposal implements
     CommentableInterface,
     SelfLinkableInterface,
     SoftDeleteable,
-    DisplayableInBOInterface
+    DisplayableInBOInterface,
+    DraftableInterface
 {
     use UuidTrait;
     use ReferenceTrait;

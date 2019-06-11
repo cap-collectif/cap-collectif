@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Publishable;
 
-use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Model\Publishable;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\EventSubscriber;
@@ -28,7 +28,7 @@ class DoctrineListener implements EventSubscriber
         /** @var User $author */
         $author = $entity->getAuthor();
         if (!$author || $author->isEmailConfirmed()) {
-            if ($entity instanceof Proposal && $entity->isDraft()) {
+            if ($entity instanceof DraftableInterface && $entity->isDraft()) {
                 return;
             }
             $entity->setPublishedAt(new \DateTime());
