@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * @method SiteImage|null findOneBy(array $criteria, array $orderBy = null)
+ * @method SiteImage|null find($id, $lockMode = null, $lockVersion = null)
  */
 class SiteImageRepository extends EntityRepository
 {
