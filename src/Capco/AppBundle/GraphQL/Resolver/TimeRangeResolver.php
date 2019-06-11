@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class TimeRangeResolver implements ResolverInterface
 {
-    public function __invoke(TimeRangable $entity)
+    public function __invoke(TimeRangable $entity): array
     {
         return [
             'startAt' => $entity->getStartAt(),

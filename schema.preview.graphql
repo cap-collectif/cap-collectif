@@ -280,7 +280,7 @@ type PageInfo {
 # A time range that contains start date and end date.
 type PreviewTimeRange {
   # The start date of the time range.
-  startAt: DateTime!
+  startAt: DateTime
 
   # The end date of the time range
   endAt: DateTime

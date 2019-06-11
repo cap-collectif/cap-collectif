@@ -24,6 +24,7 @@ PreviewEvent:
         type: 'String!'
         description: 'Identifies the title of the event.'
       timeRange:
+        type: 'PreviewTimeRange!'
         description: 'Time range containing start and end of the event'
       body:
         type: 'HTML!'

@@ -8,9 +8,6 @@ use Overblog\GraphQLBundle\Resolver\TypeResolver;
 
 class TimeRangeTypeResolver implements ResolverInterface
 {
-    /**
-     * @var TypeResolver
-     */
     private $typeResolver;
 
     public function __construct(TypeResolver $typeResolver)
