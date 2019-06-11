@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\SiteImage;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method SiteImage|null findOneBy(array $criteria, array $orderBy = null)
+ * SiteImageRepository.
  */
 class SiteImageRepository extends EntityRepository
 {

@@ -617,12 +617,3 @@ InternalMutation:
           inputType: UpdateProjectDistrictInput
           payloadType: CreateProjectDistrictPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UpdateProjectDistrictMutation", [value])'
-
-      # Shield admin form
-      updateShieldAdminForm:
-        access: "@=hasRole('ROLE_ADMIN')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: InternalUpdateShieldAdminFormInput
-          payloadType: InternalUpdateShieldAdminFormPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateShieldAdminFormMutation", [value])'
