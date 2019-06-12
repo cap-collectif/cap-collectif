@@ -9204,16 +9204,16 @@
         },
         {
             "name": "simplesamlphp/simplesamlphp",
-            "version": "v1.17.2",
+            "version": "v1.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/simplesamlphp.git",
-                "reference": "39ea6b62447009037ba8a99324c8128c7409a568"
+                "reference": "d5edcf008377507b2ea10e6f8a5f2731406c3a86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/simplesamlphp/zipball/39ea6b62447009037ba8a99324c8128c7409a568",
-                "reference": "39ea6b62447009037ba8a99324c8128c7409a568",
+                "url": "https://api.github.com/repos/simplesamlphp/simplesamlphp/zipball/d5edcf008377507b2ea10e6f8a5f2731406c3a86",
+                "reference": "d5edcf008377507b2ea10e6f8a5f2731406c3a86",
                 "shasum": ""
             },
             "require": {
@@ -9292,7 +9292,7 @@
                 "sp",
                 "ws-federation"
             ],
-            "time": "2019-04-02T15:57:09+00:00"
+            "time": "2019-03-07T14:25:09+00:00"
         },
         {
             "name": "snc/redis-bundle",
@@ -10062,16 +10062,16 @@
         },
         {
             "name": "sonata-project/exporter",
-            "version": "1.11.0",
+            "version": "1.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/exporter.git",
-                "reference": "63d1199e802ff8af2826d8410080093f949dcb92"
+                "reference": "a4925e3569fb3fa710fa7c6fecd85b6281c55f57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/63d1199e802ff8af2826d8410080093f949dcb92",
-                "reference": "63d1199e802ff8af2826d8410080093f949dcb92",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/a4925e3569fb3fa710fa7c6fecd85b6281c55f57",
+                "reference": "a4925e3569fb3fa710fa7c6fecd85b6281c55f57",
                 "shasum": ""
             },
             "require": {
@@ -10129,7 +10129,7 @@
                 "export",
                 "xls"
             ],
-            "time": "2019-01-10T19:05:17+00:00"
+            "time": "2019-04-17T21:05:17+00:00"
         },
         {
             "name": "sonata-project/intl-bundle",
