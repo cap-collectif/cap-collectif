@@ -3,30 +3,25 @@
 namespace Capco\AppBundle\SiteImage;
 
 use Capco\AppBundle\Repository\SiteImageRepository;
-use Psr\Log\LoggerInterface;
+use Capco\MediaBundle\Entity\Media;
 
 class Resolver
 {
     protected $repository;
-    protected $logger;
-    protected $images = null;
 
-    public function __construct(SiteImageRepository $repository, LoggerInterface $logger)
+    public function __construct(SiteImageRepository $repository)
     {
         $this->repository = $repository;
-        $this->logger = $logger;
     }
 
-    public function getMedia($key)
+    public function getMedia($key): ?Media
     {
-        if (!$this->images) {
-            $this->images = $this->repository->getValuesIfEnabled();
+        $images = $this->repository->getValuesIfEnabled();
+
+        if (!isset($images[$key])) {
+            return null;
         }
 
-        if (!isset($this->images[$key])) {
-            return;
-        }
-
-        return $this->images[$key]->getMedia();
+        return $images[$key]->getMedia();
     }
 }

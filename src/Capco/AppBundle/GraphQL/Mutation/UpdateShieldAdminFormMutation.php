@@ -56,6 +56,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         $media = $mediaId ? $this->mediaRepository->find($mediaId) : null;
 
         $siteImage->setMedia($media);
+        $siteImage->setIsEnabled($media && !$siteImage->getIsEnabled());
 
         if ($this->toggleManager->exists(self::SHIELD_MODE_TOGGLE_KEY)) {
             $this->toggleManager->set(self::SHIELD_MODE_TOGGLE_KEY, $shieldMode);
