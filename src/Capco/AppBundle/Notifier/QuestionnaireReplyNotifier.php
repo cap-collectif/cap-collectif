@@ -58,7 +58,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         if ($questionnaire->isNotifyResponseCreate()) {
             $this->mailer->sendMessage(
                 QuestionnaireReplyAdminMessage::create(
-                    $reply->getAuthor()->getEmail(),
+                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     $reply,
                     $step->getProject()->getTitle(),
                     $questionnaire->getTitle(),
@@ -77,7 +77,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         if ($questionnaire->isAcknowledgeReplies()) {
             $this->mailer->sendMessage(
                 QuestionnaireAcknowledgeReplyMessage::create(
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                    $reply->getAuthor()->getEmail(),
                     $reply,
                     $step->getProject()->getTitle(),
                     $reply->getUpdatedAt(),
@@ -117,7 +117,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         if ($questionnaire->isNotifyResponseUpdate()) {
             $this->mailer->sendMessage(
                 QuestionnaireReplyAdminMessage::create(
-                    $reply->getAuthor()->getEmail(),
+                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     $reply,
                     $step->getProject()->getTitle(),
                     $questionnaire->getTitle(),
@@ -135,7 +135,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         if ($questionnaire->isAcknowledgeReplies()) {
             $this->mailer->sendMessage(
                 QuestionnaireAcknowledgeReplyMessage::create(
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                    $reply->getAuthor()->getEmail(),
                     $reply,
                     $step->getProject()->getTitle(),
                     $reply->getUpdatedAt(),
