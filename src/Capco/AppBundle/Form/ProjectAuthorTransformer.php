@@ -34,7 +34,7 @@ class ProjectAuthorTransformer
         return $this;
     }
 
-    public function transformUsers($usersGlobalId): array
+    public function transformUsers(array $usersGlobalId): array
     {
         $data = [];
         foreach ($usersGlobalId as $userId) {
