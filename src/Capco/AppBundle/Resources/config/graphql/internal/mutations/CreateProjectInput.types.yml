@@ -8,7 +8,7 @@ CreateProjectInput:
         description: "The project's title"
       authors:
         type: '[ID!]!'
-        description: "The project's authors"
+        description: "The project's authors, accept IDs of User"
       opinionTerm:
         type: 'String!'
         description: "The project's opinion term"
