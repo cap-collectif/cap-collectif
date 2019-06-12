@@ -18,6 +18,7 @@ import type {
   ProposalStepPageQueryVariables,
 } from '~relay/ProposalStepPageQuery.graphql';
 import config from '../../config';
+import invariant from '../../utils/invariant';
 
 type OwnProps = {|
   stepId: string,
@@ -155,8 +156,7 @@ export class ProposalStepPage extends React.Component<Props> {
                       },
                     }));
                 } catch (e) {
-                  // eslint-disable-next-line no-console
-                  console.error("Can't parse your geojsons !", e);
+                  invariant(false, "Can't parse your geojsons !");
                 }
               }
               return (

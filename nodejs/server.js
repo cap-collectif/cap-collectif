@@ -1,5 +1,6 @@
 const net = require('net');
 const fs = require('fs');
+const invariant = require('invariant');
 var exec = require( "child_process" ).exec;
 
 if (process.env.NODE_ENV === "production") {
@@ -32,7 +33,7 @@ Handler.prototype.handle = function (connection) {
     const evalCode = function() {
       tries = tries + 1;
       if (tries > 20) {
-        console.error('[SSR] Failed request #'+ i);
+        invariant(false, `[SSR] Failed request #${i}`);
         connection.write('');
         connection.end();
         return;
