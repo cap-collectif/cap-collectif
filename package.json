@@ -312,8 +312,7 @@
         "braces": "2.3.1",
         "clean-css": "4.1.11",
         "js-yaml": "^3.13.1",
-        "node-gyp": "^4.0.0",
-        "axios": "0.18.1"
+        "node-gyp": "^4.0.0"
     },
     "devDependencies": {
         "flow-typed": "^2.5.1",
