@@ -363,7 +363,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
       firstname
       lastname
       dateOfBirth
-      websiteUrl
+      website
       biography
       address
       address2

@@ -40,7 +40,7 @@ Capco\UserBundle\Entity\User:
           { social_network: linkedIn, groups: [profile] }
     media:
       - Valid: ~
-    websiteUrl:
+    website:
       - Url: { groups: [profile] }
     zipCode:
       - Length:

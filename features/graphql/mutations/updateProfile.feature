@@ -211,7 +211,7 @@ Scenario: User should be able to update his public data
         user {
           id
           username
-          websiteUrl
+          website
           biography
         }
       }
@@ -219,7 +219,7 @@ Scenario: User should be able to update his public data
     "variables": {
       "input": {
         "username": "New username",
-        "websiteUrl": "http://perdu.com",
+        "website": "http://perdu.com",
         "biography": null
       }
     }
@@ -233,7 +233,7 @@ Scenario: User should be able to update his public data
         "user": {
           "id": "VXNlcjp1c2VyNQ==",
           "username": "New username",
-          "websiteUrl": "http://perdu.com",
+          "website": "http://perdu.com",
           "biography": null
         }
       }
@@ -252,7 +252,7 @@ Scenario: Super Admin should be able to update public data of an other user
         user {
           id
           username
-          websiteUrl
+          website
           biography
         }
       }
@@ -261,7 +261,7 @@ Scenario: Super Admin should be able to update public data of an other user
       "input": {
         "userId": "VXNlcjp1c2VyNTE2",
         "username": "New username",
-        "websiteUrl": "http://perdu.com",
+        "website": "http://perdu.com",
         "biography": null
       }
     }
@@ -275,7 +275,7 @@ Scenario: Super Admin should be able to update public data of an other user
         "user": {
           "id": "VXNlcjp1c2VyNTE2",
           "username": "New username",
-          "websiteUrl": "http://perdu.com",
+          "website": "http://perdu.com",
           "biography": null
         }
       }
@@ -294,7 +294,7 @@ Scenario: User should not be able to update personal data of an other user
         user {
           id
           username
-          websiteUrl
+          website
           biography
         }
       }
@@ -303,7 +303,7 @@ Scenario: User should not be able to update personal data of an other user
       "input": {
         "userId": "VXNlcjp1c2VyNTE2",
         "username": "New username",
-        "websiteUrl": "http://perdu.com",
+        "website": "http://perdu.com",
         "biography": null
       }
     }

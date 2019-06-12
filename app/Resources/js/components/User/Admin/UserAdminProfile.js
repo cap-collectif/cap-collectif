@@ -25,7 +25,7 @@ type FormValues = {
   +url: ?any,
   +username: string,
   +biography: ?string,
-  +websiteUrl: ?string,
+  +website: ?string,
   +facebookUrl: ?string,
   +linkedInUrl: ?string,
   +twitterUrl: ?string,
@@ -53,7 +53,7 @@ const validate = (values: Object) => {
 
   const fields = [
     'biography',
-    'websiteUrl',
+    'website',
     'neighborhood',
     'linkedIn',
     'twitter',
@@ -201,7 +201,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
             />
             <div className="clearfix" />
             <Field
-              name="websiteUrl"
+              name="website"
               component={component}
               type="text"
               disabled={!isViewerOrSuperAdmin}
@@ -299,7 +299,7 @@ const mapStateToProps = (state: GlobalState, { user }: RelayProps) => ({
   initialValues: {
     username: user.username ? user.username : null,
     biography: user.biography ? user.biography : null,
-    websiteUrl: user.websiteUrl ? user.websiteUrl : null,
+    website: user.website ? user.website : null,
     facebookUrl: user.facebookUrl ? user.facebookUrl : null,
     linkedInUrl: user.linkedInUrl ? user.linkedInUrl : null,
     twitterUrl: user.twitterUrl ? user.twitterUrl : null,
@@ -330,7 +330,7 @@ export default createFragmentContainer(container, {
       url
       username
       biography
-      websiteUrl
+      website: websiteUrl
       facebookUrl
       linkedInUrl
       twitterUrl

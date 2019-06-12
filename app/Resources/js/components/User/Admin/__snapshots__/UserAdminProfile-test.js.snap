@@ -135,7 +135,7 @@ exports[`<UserAdminProfile/> should render, with user confirmed by email adn vie
             values={Object {}}
           />
         }
-        name="websiteUrl"
+        name="website"
         type="text"
       />
       <div
@@ -366,7 +366,7 @@ exports[`<UserAdminProfile/> should render, with user not confirmed by email adn
             values={Object {}}
           />
         }
-        name="websiteUrl"
+        name="website"
         type="text"
       />
       <div

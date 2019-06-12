@@ -13,8 +13,8 @@
                 <p>{{ user.biography }}</p>
                 <ul class="excerpt  profile__infos">
                     <li><i class="cap cap-calendar-1"></i> {{ 'user.profile.show.since' | trans({}, 'CapcoAppBundle')}} {{ user.createdAt|localizeddate('short', 'none', app.request.locale)}}</li>
-                    {% if user.websiteUrl %}
-                        <li><i class="cap cap-link-1"></i> <a class="external-link" href="{{ user.websiteUrl }}">{{ user.websiteUrl }}</a></li>
+                    {% if user.website %}
+                        <li><i class="cap cap-link-1"></i> <a class="external-link" href="{{ user.website }}">{{ user.website }}</a></li>
                     {% endif %}
                     {% if is_feature_enabled('user_type') and user.userType %}
                         <li><i class="cap cap-connection-2-1"></i> {{ user.userType }}</li>

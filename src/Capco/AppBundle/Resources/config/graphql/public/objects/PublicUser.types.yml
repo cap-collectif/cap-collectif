@@ -43,6 +43,7 @@ PublicUser:
       websiteUrl:
         type: 'URI'
         description: "A URL pointing to the user's public website/blog."
+        resolve: '@=value.getWebsite()'
       biography:
         type: 'String'
         description: "The user's public profile biography."

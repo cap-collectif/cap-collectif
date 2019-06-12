@@ -40,7 +40,7 @@ class PublicDataType extends AbstractType
             ->add('profilePageIndexed', CheckboxType::class, [
                 'label_attr' => ['style' => 'font-weight: normal; color: #000000'],
             ])
-            ->add('websiteUrl', UrlType::class)
+            ->add('website', UrlType::class)
             ->add('biography', TextareaType::class, [
                 'purify_html' => true,
                 'purify_html_profile' => 'default',

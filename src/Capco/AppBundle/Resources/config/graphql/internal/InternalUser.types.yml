@@ -9,6 +9,10 @@ InternalUser:
     interfaces: [Node, UniformResourceLocatable]
     name: User
     fields:
+      website:
+        type: 'String'
+        description: 'TODO remove me'
+        deprecationReason: 'use `websiteUrl` instead.'
       media:
         type: 'InternalMedia'
         description: "The user's public avatar file."

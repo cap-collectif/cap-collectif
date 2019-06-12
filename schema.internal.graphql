@@ -6328,7 +6328,7 @@ input UpdateProfilePublicDataInput {
   neighborhood: String
 
   # Your website
-  websiteUrl: URI
+  website: String
 
   # Your linkedIn
   linkedInUrl: String
@@ -6651,6 +6651,9 @@ type User implements Node & UniformResourceLocatable {
 
   # Expose Primary Key, do not use it, except for testing purpose.
   _id: ID!
+
+  # TODO remove me
+  website: String @deprecated(reason: "use `websiteUrl` instead.")
 
   # The user's public avatar file.
   media: Media

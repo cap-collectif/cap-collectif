@@ -5679,7 +5679,7 @@
                     "email": "shelburt02@gmail.com"
                 },
                 {
-                    "name": "Théo FIDRY",
+                    "name": "Théo Fidry",
                     "email": "theo.fidry@gmail.com"
                 }
             ],
@@ -9204,16 +9204,16 @@
         },
         {
             "name": "simplesamlphp/simplesamlphp",
-            "version": "v1.17.1",
+            "version": "v1.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/simplesamlphp.git",
-                "reference": "d5edcf008377507b2ea10e6f8a5f2731406c3a86"
+                "reference": "39ea6b62447009037ba8a99324c8128c7409a568"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/simplesamlphp/zipball/d5edcf008377507b2ea10e6f8a5f2731406c3a86",
-                "reference": "d5edcf008377507b2ea10e6f8a5f2731406c3a86",
+                "url": "https://api.github.com/repos/simplesamlphp/simplesamlphp/zipball/39ea6b62447009037ba8a99324c8128c7409a568",
+                "reference": "39ea6b62447009037ba8a99324c8128c7409a568",
                 "shasum": ""
             },
             "require": {
@@ -9292,7 +9292,7 @@
                 "sp",
                 "ws-federation"
             ],
-            "time": "2019-03-07T14:25:09+00:00"
+            "time": "2019-04-02T15:57:09+00:00"
         },
         {
             "name": "snc/redis-bundle",

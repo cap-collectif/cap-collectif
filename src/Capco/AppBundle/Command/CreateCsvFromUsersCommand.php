@@ -49,7 +49,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'firstname' => 'firstname',
         'lastname' => 'lastname',
         'dateOfBirth' => 'dateOfBirth',
-        'websiteUrl' => 'websiteUrl',
+        'website' => 'website',
         'biography' => 'biography',
         'address' => 'address',
         'address2' => 'address2',
@@ -96,7 +96,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'firstname',
         'lastname',
         'dateOfBirth',
-        'websiteUrl',
+        'website',
         'biography',
         'address',
         'address2',
@@ -152,7 +152,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
     {
         if (!$this->toggleManager->isActive('export')) {
             $output->writeln('Feature "export" must be enabled.');
-
             return;
         }
         $fileName = 'users.csv';
@@ -271,7 +270,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         firstname
         lastname
         dateOfBirth
-        websiteUrl
+        website
         biography
         address
         address2
