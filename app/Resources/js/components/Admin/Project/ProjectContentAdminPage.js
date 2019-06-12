@@ -1,10 +1,11 @@
 // @flow
 import React from 'react';
+import type { ProjectAdminAppQueryResponse } from '~relay/ProjectAdminAppQuery.graphql';
 import { FormattedMessage } from 'react-intl';
 import ProjectContentAdminForm from './ProjectContentAdminForm';
 
 type Props = {|
-  project: ?string,
+  ...ProjectAdminAppQueryResponse,
 |};
 
 const ProjectContentAdminPage = (props: Props) => (

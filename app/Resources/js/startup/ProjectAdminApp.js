@@ -2,11 +2,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
-import { graphql, QueryRenderer } from 'react-relay';
+import { graphql, QueryRenderer, type ReadyState } from 'react-relay';
 
 import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import ProjectContentAdminPage from '../components/Admin/Project/ProjectContentAdminPage';
+import type { ProjectAdminAppQueryResponse } from '~relay/ProjectAdminAppQuery.graphql';
 
 const ProjectAdminPage = ({ projectId }: { projectId: string }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
@@ -23,7 +24,7 @@ const ProjectAdminPage = ({ projectId }: { projectId: string }) => (
         variables={{
           projectId,
         }}
-        render={({ props, error }) => {
+        render={({ props, error }: { props: ?ProjectAdminAppQueryResponse } & ReadyState) => {
           if (error) {
             return graphqlError;
           }
