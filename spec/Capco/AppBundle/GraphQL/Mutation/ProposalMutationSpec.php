@@ -83,22 +83,9 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $globalIdResolver->resolve($values['id'], $user)->willReturn($proposal);
 
-        $draft = false;
-        if (isset($values['draft'])) {
-            if ($proposal->isDraft()) {
-                $draft = $values['draft'];
-            }
-            unset($values['draft']);
-        }
-
+        // we set the proposal as non draft
         $proposal->setDraft(false)->shouldBeCalled();
-        $proposal->isDraft()->willReturn(false);
-
-        $proposal->isDraft()->shouldBeCalled();
-
-        if ($wasDraft && !$proposal->isDraft() && $author && $author->isEmailConfirmed()) {
-            $proposal->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
-        }
+        $proposal->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
 
         $container->get('form.factory')->willReturn($formFactory);
         $container->get(Indexer::class)->willReturn($indexer);
@@ -107,7 +94,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $formFactory
             ->create(ProposalAdminType::class, $proposal, [
                 'proposalForm' => $proposalForm,
-                'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
+                'validation_groups' => ['Default'],
             ])
             ->willReturn($form);
 

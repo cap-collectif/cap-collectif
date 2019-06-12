@@ -503,13 +503,7 @@ Scenario: GraphQL client try to update a and published a draft proposal
         proposal {
           id
           title
-          body
-          author {
-            _id
-          }
           draft
-          published
-          publishedAt
           publicationStatus
         }
       }
@@ -555,13 +549,7 @@ Scenario: GraphQL client try to update a and published a draft proposal
          "proposal":{
             "id":"UHJvcG9zYWw6cHJvcG9zYWxEcmFmdFdpdGhOb3RDb25maXJtZWRBdXRob3I=",
             "title":"NewTitle",
-            "body":"NewBody",
-            "author":{
-               "_id":"user508"
-            },
             "draft":false,
-            "published":false,
-            "publishedAt":null,
             "publicationStatus":"UNPUBLISHED"
          }
       }

@@ -427,6 +427,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
+    /** TODO change user to viewer */
     public function changeContent(Argument $input, $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
@@ -444,10 +445,12 @@ class ProposalMutation implements ContainerAwareInterface
         }
         // Save the previous draft status to send the good notif.
         $wasDraft = $proposal->isDraft();
+        $author = $proposal->getAuthor();
+
         unset($values['id']); // This only useful to retrieve the proposal
         $proposalForm = $proposal->getProposalForm();
 
-        if ($user !== $proposal->getAuthor() && !$user->isAdmin()) {
+        if ($user !== $author && !$user->isAdmin()) {
             $error = sprintf('You must be the author to update a proposal.');
             $this->logger->error($error);
 
@@ -462,19 +465,8 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         $draft = false;
-        if (isset($values['draft'])) {
-            if ($proposal->isDraft()) {
-                $draft = $values['draft'];
-            }
-            unset($values['draft']);
-        }
 
-        $proposal->setDraft($draft);
-        $author = $proposal->getAuthor();
-
-        if ($wasDraft && !$proposal->isDraft() && $author && $author->isEmailConfirmed()) {
-            $proposal->setPublishedAt(new \DateTime());
-        }
+        $this->shouldBeDraft($proposal, $author, $values, $wasDraft, $draft);
 
         $values = $this->fixValues($values, $proposalForm);
 
@@ -493,6 +485,7 @@ class ProposalMutation implements ContainerAwareInterface
             }
             $form->remove('author');
         }
+
         $this->logger->info(__METHOD__ . ' : ' . var_export($values, true));
         $form->submit($values, false);
 
@@ -576,6 +569,27 @@ class ProposalMutation implements ContainerAwareInterface
         }
         if (!empty($errors)) {
             throw new UserErrors($errors);
+        }
+    }
+
+    private function shouldBeDraft(
+        Proposal $proposal,
+        User $author,
+        array &$values,
+        bool $wasDraft,
+        bool &$draft
+    ): void {
+        if (isset($values['draft'])) {
+            if ($wasDraft) {
+                $draft = $values['draft'];
+                if (!$draft) {
+                    if ($author && $author->isEmailConfirmed()) {
+                        $proposal->setPublishedAt(new \DateTime());
+                    }
+                    $proposal->setDraft(false);
+                }
+            }
+            unset($values['draft']);
         }
     }
 }

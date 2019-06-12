@@ -36,7 +36,6 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_title' => 'title',
         'proposal_votes_totalCount' => 'allVotes.totalCount',
         'proposal_createdAt' => 'createdAt',
-        'proposal_draft' => 'draft',
         'proposal_publishedAt' => 'publishedAt',
         'proposal_updatedAt' => 'updatedAt',
         'proposal_publicationStatus' => 'publicationStatus',
@@ -237,7 +236,6 @@ EOF;
         'proposal_title',
         'proposal_votes_totalCount',
         'proposal_createdAt',
-        'proposal_draft',
         'proposal_publishedAt',
         'proposal_updatedAt',
         'proposal_publicationStatus',
@@ -1670,7 +1668,6 @@ ${COMMENT_VOTE_INFOS}
             }
             createdAt
             publishedAt
-            draft
             updatedAt
             publicationStatus
             trashedAt

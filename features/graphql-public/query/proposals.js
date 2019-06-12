@@ -87,41 +87,9 @@ const ProposalsWithDraftQuery = /* GraphQL */ `
             cursor
             node {
               id
-              reference
               title
-              createdAt
-              publishedAt
-              updatedAt
-              trashed
-              trashedStatus
               draft
-              published
-              author {
-                id
-                userType {
-                  name
-                }
-                responses {
-                  edges {
-                    node {
-                      ... on ValueResponse {
-                        value
-                      }
-                    }
-                  }
-                }
-              }
-              responses {
-                question {
-                  id
-                  title
-                  __typename
-                }
-                ... on ValueResponse {
-                  value
-                  formattedValue
-                }
-              }
+              publicationStatus
             }
           }
           pageInfo {
@@ -150,7 +118,7 @@ describe('Query.proposals connection', () => {
   );
 
   it(
-    'fetches the first hundred proposals (included drafted) with a cursor',
+    'fetches the first hundred proposals (including drafted) with a cursor',
     async () => {
       await expect(
         graphql(
