@@ -155,6 +155,11 @@ class Manager
         return false;
     }
 
+    public function set(string $name, bool $value): void
+    {
+        $value ? $this->activate($name) : $this->deactivate($name);
+    }
+
     private function createToggle(string $name, int $status, array $conditions = []): Toggle
     {
         $toggle = new Toggle($name, $conditions);

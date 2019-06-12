@@ -65,7 +65,7 @@ class ProjectContributorResolver implements ResolverInterface
             });
         } else {
             $paginator = new Paginator(function () use (&$totalCount, $project) {
-                $totalCount = $project->getExternalParticipantsCount();
+                $totalCount = $project->getExternalParticipantsCount() ?? 0;
 
                 return [];
             });

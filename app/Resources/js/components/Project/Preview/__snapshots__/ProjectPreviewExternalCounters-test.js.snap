@@ -5,7 +5,7 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an external proje
   <ProjectPreviewCounter
     icon="cap-baloon-1"
     label="project.preview.counters.contributions"
-    showZero={true}
+    showZero={false}
     value={71}
   />
   <ProjectPreviewCounter
@@ -42,7 +42,6 @@ exports[`<ProjectPreviewProgressBar /> should render correctly an external proje
 
 exports[`<ProjectPreviewProgressBar /> should render correctly an external project without counters 1`] = `
 <TagsList>
-  0
   <ForwardRef(Relay(ProjectRestrictedAccessFragment))
     icon="cap-lock-2-1"
     project={
