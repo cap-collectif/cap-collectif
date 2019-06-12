@@ -19,6 +19,8 @@ import EventListCounter from './EventListCounter';
 import EventListStatusFilter from './EventListStatusFilter';
 import UserListField from '../../Admin/Field/UserListField';
 import type { EventListFilters_query } from '~relay/EventListFilters_query.graphql';
+import type { EventListFiltersProjectsQueryResponse } from '~relay/EventListFiltersProjectsQuery.graphql';
+import type { EventListFiltersThemeQueryResponse } from '~relay/EventListFiltersThemeQuery.graphql';
 
 type State = {
   projectOptions: Array<Object>,
@@ -76,7 +78,7 @@ const countFilters = (
 };
 
 const projectQuery = graphql`
-  query EventListFiltersQuery($withEventOnly: Boolean) {
+  query EventListFiltersProjectsQuery($withEventOnly: Boolean) {
     projects(withEventOnly: $withEventOnly) {
       edges {
         node {
@@ -113,17 +115,21 @@ export class EventListFilters extends React.Component<Props, State> {
 
   componentDidMount() {
     fetchQuery(environment, projectQuery, { withEventOnly: true })
-      .then(res =>
-        res.projects.edges.map(edge => ({
-          value: edge.node.id,
-          label: edge.node.title,
-        })),
+      .then((res: EventListFiltersProjectsQueryResponse) =>
+        res.projects.edges
+          ? res.projects.edges.filter(Boolean).map(edge => ({
+              value: edge.node.id,
+              label: edge.node.title,
+            }))
+          : [],
       )
       .then(projectOptions => {
         this.setState({ projectOptions });
       });
     fetchQuery(environment, themeQuery)
-      .then(res => res.themes.map(theme => ({ value: theme.id, label: theme.title })))
+      .then((res: EventListFiltersThemeQueryResponse) =>
+        res.themes.map(theme => ({ value: theme.id, label: theme.title })),
+      )
       .then(themeOptions => {
         this.setState({ themeOptions });
       });
