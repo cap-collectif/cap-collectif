@@ -23,6 +23,11 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
       >
         <FormattedMessage
           id="account-confirmed-too-late-message"
+          value={
+            Object {
+              "contentType": "contribution",
+            }
+          }
           values={Object {}}
         />
       </Popover>
@@ -77,6 +82,11 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
       >
         <FormattedMessage
           id="account-not-confirmed-in-time-message"
+          value={
+            Object {
+              "contentType": "contribution",
+            }
+          }
           values={Object {}}
         />
       </Popover>

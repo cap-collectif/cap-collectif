@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
@@ -54,7 +55,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
  * @CapcoAssert\HasAddressIfMandatory()
  */
-class Proposal implements Publishable, Contribution, Trashable, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface
+class Proposal implements
+    Publishable,
+    Contribution,
+    Trashable,
+    CommentableInterface,
+    SelfLinkableInterface,
+    SoftDeleteable,
+    DisplayableInBOInterface,
+    DraftableInterface
 {
     use UuidTrait;
     use ReferenceTrait;
@@ -911,7 +920,7 @@ class Proposal implements Publishable, Contribution, Trashable, CommentableInter
 
     public function getFullReference(): string
     {
-        return $this->getProposalForm()->getReference().'-'.$this->getReference();
+        return $this->getProposalForm()->getReference() . '-' . $this->getReference();
     }
 
     /**
@@ -1008,7 +1017,7 @@ class Proposal implements Publishable, Contribution, Trashable, CommentableInter
 
     public function isIndexable(): bool
     {
-        return $this->isPublished() && !$this->isDraft() && !$this->isDeleted();
+        return !$this->isDeleted();
     }
 
     public static function getElasticsearchPriority(): int

@@ -1636,7 +1636,7 @@ ${COMMENT_VOTE_INFOS}
 {
   node(id: "{$proposalStep->getId()}") {
     ... on ProposalStep {
-      proposals(includeUnpublished: true, first: ${PROPOSALS_PER_PAGE}{$proposalAfter}, trashedStatus: null) {
+      proposals(includeUnpublished: true, first: ${PROPOSALS_PER_PAGE}{$proposalAfter}, trashedStatus: null, includeDraft: true) {
         totalCount
         pageInfo {
           startCursor
