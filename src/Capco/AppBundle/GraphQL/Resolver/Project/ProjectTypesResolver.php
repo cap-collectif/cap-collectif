@@ -24,7 +24,7 @@ class ProjectTypesResolver implements ResolverInterface
     public function __invoke(Argument $args, ?User $user): array
     {
         try {
-            return $this->projectTypeRepository->findAll($user);
+            return $this->projectTypeRepository->findAll();
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 

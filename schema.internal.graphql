@@ -1622,7 +1622,7 @@ input CreateProjectInput {
   # The project's title
   title: String!
 
-  # The project's authors
+  # The project's authors, accept IDs of User
   authors: [ID!]!
 
   # The project's opinion term

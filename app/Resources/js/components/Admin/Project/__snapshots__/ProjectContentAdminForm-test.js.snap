@@ -35,6 +35,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
   <InjectIntl(ProjectTypeListField) />
   <Field
     component={[Function]}
+    initialValue={0}
     label={
       <span>
         <FormattedMessage
@@ -45,7 +46,6 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
     }
     name="opinionTerm"
     type="select"
-    value={0}
   >
     <option
       key="0"
@@ -119,6 +119,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
   <InjectIntl(ProjectTypeListField) />
   <Field
     component={[Function]}
+    initialValue={0}
     label={
       <span>
         <FormattedMessage
@@ -129,7 +130,6 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
     }
     name="opinionTerm"
     type="select"
-    value={0}
   >
     <option
       key="0"

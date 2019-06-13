@@ -151,7 +151,7 @@ export const ProjectContentAdminForm = (props: Props) => {
         name="opinionTerm"
         type="select"
         component={renderComponent}
-        value={projectTerms[0].id}
+        initialValue={projectTerms[0].id}
         label={
           <span>
             <FormattedMessage id="admin.fields.project.opinion_term" />
@@ -176,7 +176,7 @@ export const ProjectContentAdminForm = (props: Props) => {
       </Button>
       <AlertForm
         valid={valid}
-        invalid={invalid}
+        invalid={invalid && !pristine}
         submitSucceeded={submitSucceeded}
         submitFailed={submitFailed}
         submitting={submitting}
