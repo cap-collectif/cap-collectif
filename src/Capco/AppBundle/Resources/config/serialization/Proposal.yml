@@ -29,9 +29,9 @@ Capco\AppBundle\Entity\Proposal:
       groups: [Proposals, Elasticsearch]
     comments:
       groups: [Proposals]
-    isDraft:
-      groups: [Proposals, Elasticsearch]
-      serialized_name: draft
+    draft:
+      serialized_name: isDraft
+      groups: [Proposals]
     proposalForm:
       groups: [Proposals, Elasticsearch]
     progressSteps:
@@ -58,6 +58,3 @@ Capco\AppBundle\Entity\Proposal:
       groups: [Elasticsearch]
     project:
       groups: [Elasticsearch]
-    isPublished:
-      groups: [Elasticsearch]
-      serialized_name: published

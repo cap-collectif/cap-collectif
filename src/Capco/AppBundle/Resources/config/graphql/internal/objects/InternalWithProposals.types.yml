@@ -33,10 +33,6 @@ InternalWithProposals:
             type: 'Boolean'
             description: '(ROLE_SUPER_ADMIN only) Select also unpublished proposals.'
             defaultValue: false
-          includeDraft:
-            type: 'Boolean'
-            description: 'Select also draft proposals'
-            defaultValue: false
       viewerProposalsUnpublished:
         access: "@=hasRole('ROLE_USER')"
         type: 'InternalProposalConnection'

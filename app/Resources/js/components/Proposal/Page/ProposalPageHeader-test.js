@@ -18,7 +18,6 @@ describe('<ProposalPageHeader />', () => {
     updatedAt: '2015-01-05 00:00:00',
     publicationStatus: 'PUBLISHED',
     url: 'true',
-    draft: false,
     project: { opinionCanBeFollowed: true },
     form: {
       isProposalForm: true,
@@ -36,26 +35,6 @@ describe('<ProposalPageHeader />', () => {
     publishedAt: '2015-01-01 00:00:00',
     updatedAt: '2015-01-05 00:00:00',
     publicationStatus: 'PUBLISHED',
-    url: 'true',
-    draft: false,
-    project: { opinionCanBeFollowed: true },
-    form: {
-      isProposalForm: false,
-    },
-  };
-
-  const proposalInDraft = {
-    $refType,
-    $fragmentRefs,
-    id: '1',
-    title: 'titre',
-    theme: null,
-    author: { username: 'userAdmin', displayName: 'userAdmin', media: { url: 'http://media.url' } },
-    createdAt: '2015-01-01 00:00:00',
-    publishedAt: null,
-    updatedAt: '2015-01-05 00:10:00',
-    publicationStatus: 'DRAFT',
-    draft: true,
     url: 'true',
     project: { opinionCanBeFollowed: true },
     form: {
@@ -78,13 +57,6 @@ describe('<ProposalPageHeader />', () => {
   it('should not render theme if proposal has none and form type is question', () => {
     const wrapper = shallow(
       <ProposalPageHeader proposal={proposalWithoutTheme} step={null} viewer={null} {...props} />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render a proposal in draft', () => {
-    const wrapper = shallow(
-      <ProposalPageHeader proposal={proposalInDraft} step={null} viewer={null} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

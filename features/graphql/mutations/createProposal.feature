@@ -14,8 +14,6 @@ Scenario: GraphQL client wants to add a draft proposal
           id
           title
           publicationStatus
-          published
-          publishedAt
         }
       }
     }",
@@ -36,9 +34,7 @@ Scenario: GraphQL client wants to add a draft proposal
         "proposal": {
           "id": @string@,
           "title": "Acheter un sauna pour Capco",
-          "publicationStatus": "DRAFT",
-          "published": false,
-          "publishedAt": null
+          "publicationStatus": "DRAFT"
         }
       }
     }

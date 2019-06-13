@@ -63,45 +63,6 @@ const OpenDataProposalsQuery = /* GraphQL */ `
   }
 `;
 
-const ProposalsWithDraftQuery = /* GraphQL */ `
-  query OpenDataProposalsQuery(
-    $id: ID!
-    $count: Int!
-    $cursor: String
-    $trashedStatus: ProposalTrashedStatus
-    $orderBy: ProposalOrder!
-    $draft: Boolean
-  ) {
-    node(id: $id) {
-      id
-      ... on CollectStep {
-        proposals(
-          trashedStatus: $trashedStatus
-          orderBy: $orderBy
-          first: $count
-          after: $cursor
-          includeDraft: $draft
-        ) {
-          totalCount
-          edges {
-            cursor
-            node {
-              id
-              title
-              draft
-              publicationStatus
-            }
-          }
-          pageInfo {
-            hasNextPage
-            endCursor
-          }
-        }
-      }
-    }
-  }
-`;
-
 describe('Query.proposals connection', () => {
   it(
     'fetches the first hundred proposals with a cursor',
@@ -112,25 +73,6 @@ describe('Query.proposals connection', () => {
           count: 100,
           orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
         }),
-      ).resolves.toMatchSnapshot();
-    },
-    TIMEOUT,
-  );
-
-  it(
-    'fetches the first hundred proposals (including drafted) with a cursor',
-    async () => {
-      await expect(
-        graphql(
-          ProposalsWithDraftQuery,
-          {
-            id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-            count: 100,
-            orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
-            draft: true,
-          },
-          'internal',
-        ),
       ).resolves.toMatchSnapshot();
     },
     TIMEOUT,

@@ -21,7 +21,7 @@ trait PublishableTrait
         return $this->published;
     }
 
-    // We can only publish, never unpublish (= passing NULL)
+    // We can only publish, never depublish (= passing NULL)
     public function setPublishedAt(\DateTime $publishedAt)
     {
         $this->published = true;

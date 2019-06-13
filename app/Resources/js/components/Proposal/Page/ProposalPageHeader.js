@@ -60,7 +60,6 @@ export class ProposalPageHeader extends React.Component<Props> {
     };
 
     const tradKeyToBack = proposal.form.isProposalForm ? 'proposal.back' : 'questions-list';
-    const tradKeyToDisplayDate = proposal.draft ? 'last-modification-on' : 'global.edited_on';
 
     return (
       <div id="ProposalPageHeader" className={classNames(classes)}>
@@ -89,17 +88,15 @@ export class ProposalPageHeader extends React.Component<Props> {
                 <span>
                   {' • '}
                   <FormattedMessage
-                    id={tradKeyToDisplayDate}
+                    id="global.edited_on"
                     values={{
                       updated: updatedDate,
                     }}
                   />
                 </span>
               )}
-              {!proposal.draft && (
-                /* $FlowFixMe $refType */
-                <UnpublishedLabel publishable={proposal} />
-              )}
+              {/* $FlowFixMe */}
+              <UnpublishedLabel publishable={proposal} />
             </p>
           </div>
         </div>
@@ -173,7 +170,6 @@ export default createFragmentContainer(container, {
       }
       createdAt
       publishedAt
-      draft
       updatedAt
       publicationStatus
       url

@@ -28,7 +28,11 @@ export class UserPreview extends React.Component<Props> {
             </Media.Left>
             <Media.Body>
               {user ? (
-                <UserLink className="excerpt" user={user} />
+                <React.Fragment>
+                  <UserLink className="excerpt" user={user} />
+                  {/* $FlowFixMe */}
+                  <UserNotConfirmedLabel user={user} />
+                </React.Fragment>
               ) : (
                 <span className="excerpt">
                   <FormattedMessage id="global.anonymous" />
@@ -44,8 +48,6 @@ export class UserPreview extends React.Component<Props> {
                   </span>
                 ) : null}
               </p>
-              {/* $FlowFixMe */}
-              {user ? <UserNotConfirmedLabel user={user} /> : null}
             </Media.Body>
           </Media>
         </Card.Body>

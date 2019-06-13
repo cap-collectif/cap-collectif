@@ -10,7 +10,6 @@ use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
-use Capco\AppBundle\Utils\Text;
 use Overblog\GraphQLBundle\Request\Executor;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -159,25 +158,25 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         $fileName = 'users.csv';
 
         $requestString = $this->getUsersGraphQLQuery();
-        $data = $this->executor
+        $datas = $this->executor
             ->execute('internal', [
                 'query' => $requestString,
                 'variables' => [],
             ])
             ->toArray();
 
-        $userSample = $data['data']['users']['edges'][0]['node'];
+        $userSample = $datas['data']['users']['edges'][0]['node'];
 
         $this->writer = WriterFactory::create(Type::CSV);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
         $header = $this->generateSheetHeader($userSample);
         $this->writer->addRow($header);
 
-        $totalCount = Arr::path($data, 'data.users.totalCount');
+        $totalCount = Arr::path($datas, 'data.users.totalCount');
         $progress = new ProgressBar($output, $totalCount);
 
         $this->connectionTraversor->traverse(
-            $data,
+            $datas,
             'users',
             function ($edge) use ($progress) {
                 $progress->advance();
@@ -207,11 +206,9 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
             $responses = array_map(function ($edge) {
                 return $edge['node'];
             }, Arr::path($user, 'responses.edges'));
-            foreach ($responses as $response) {
-                $value = $this->addCustomResponse($response);
-                $cleanValue = Text::cleanNewline($value);
 
-                $row[] = $this->exportUtils->parseCellValue($cleanValue);
+            foreach ($responses as $response) {
+                $row[] = $this->exportUtils->parseCellValue($this->addCustomResponse($response));
             }
         }
         $this->writer->addRow($row);

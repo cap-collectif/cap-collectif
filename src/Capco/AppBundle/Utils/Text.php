@@ -67,6 +67,6 @@ final class Text
 
     public static function cleanNewline($value)
     {
-        return \is_bool($value) ? $value : str_replace("\n", ' ', $value);
+        return str_replace("\n", ' ', $value);
     }
 }

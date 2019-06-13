@@ -24,6 +24,7 @@ export class ProposalPageFollowers extends React.Component<Props, State> {
 
   render() {
     const { proposal, relay, pageAdmin } = this.props;
+    const { loading } = this.state;
     if (!proposal.followers || !proposal.followers.edges) {
       return graphqlError;
     }
@@ -49,6 +50,8 @@ export class ProposalPageFollowers extends React.Component<Props, State> {
           </Row>
         ) : (
           <div className="well well-lg text-center">
+            <i className="cap-32 cap-contacts-1 " />
+            <br />
             <FormattedMessage id="no-followers" />
           </div>
         )}
@@ -56,7 +59,8 @@ export class ProposalPageFollowers extends React.Component<Props, State> {
         {relay.hasMore() && (
           <div className="text-center">
             <button
-              disabled={this.state.loading}
+              type="button"
+              disabled={loading}
               onClick={() => {
                 this.setState({ loading: true });
                 relay.loadMore(PROPOSAL_FOLLOWERS_TO_SHOW, () => {
@@ -64,7 +68,7 @@ export class ProposalPageFollowers extends React.Component<Props, State> {
                 });
               }}
               className="text-center btn btn-secondary">
-              <FormattedMessage id={this.state.loading ? 'global.loading' : 'see-more-followers'} />
+              <FormattedMessage id={loading ? 'global.loading' : 'see-more-followers'} />
             </button>
           </div>
         )}

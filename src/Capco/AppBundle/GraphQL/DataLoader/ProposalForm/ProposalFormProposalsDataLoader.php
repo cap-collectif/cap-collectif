@@ -188,9 +188,6 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             if ($args->offsetExists('trashedStatus')) {
                 $filters['trashedStatus'] = $args->offsetGet('trashedStatus');
             }
-            if ($args->offsetExists('includeDraft')) {
-                $filters['includeDraft'] = $args->offsetGet('includeDraft');
-            }
 
             if ($args->offsetExists('affiliations')) {
                 $affiliations = $args->offsetGet('affiliations');
