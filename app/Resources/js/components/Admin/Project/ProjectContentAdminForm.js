@@ -138,7 +138,7 @@ export const ProjectContentAdminForm = (props: Props) => {
         selectFieldIsObject
         debounce
         autoload={false}
-        multi
+        multi={false}
         labelClassName="control-label"
         inputClassName="fake-inputClassName"
         placeholder={intl.formatMessage({ id: 'all-the-authors' })}
