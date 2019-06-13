@@ -43,7 +43,6 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.1-redis \
         php7.1-xsl \
         php7.1-zip \
-        php7.1-phpdbg \
         php-xdebug \
         php-amqp \
     && \

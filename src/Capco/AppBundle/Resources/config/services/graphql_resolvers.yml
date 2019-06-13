@@ -11,17 +11,18 @@ services:
     resource: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Resolver/*'
     exclude: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,UserIsGrantedResolver.php}'
 
-  Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver:
-    $projectDir: '%kernel.project_dir%'
+  Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver:
+    autowire: true
+    public: true
+
+  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver:
+    autowire: true
 
   # This is not a resolver but a voter, rename and move this elsewhere
   Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:
     autowire: true
     public: true
 
-  # Public services :
   Capco\AppBundle\GraphQL\Deprecation:
     autowire: true
-    public: true
-  Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver:
     public: true

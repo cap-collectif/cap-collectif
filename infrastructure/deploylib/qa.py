@@ -10,20 +10,12 @@ capcobot = {
 }
 
 
-# Usage:
-#
-# Runn tests: fab local.qa.phpspec
-#
-# Create a new spec from existing class :
-# fab local.qa.phpspec:desc=Capco/AppBundle/GraphQL/Resolver/Questionnaire/QuestionnaireExportResultsUrlResolver
-#
-@task(environments=['local'])
-def phpspec(desc=False):
+@task(environments=['local', 'ci'])
+def phpspec():
     "Run PHP Unit Tests"
-    if desc:
-        env.service_command('phpdbg -qrr bin/phpspec describe ' + desc, 'application', env.www_app)
-    else:
-        env.service_command('phpdbg -qrr bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
+    env.service_command('phpenmod xdebug', 'application', env.www_app, 'root')
+    env.service_command('php -d memory_limit=-1 bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
+    env.service_command('phpdismod xdebug', 'application', env.www_app, 'root')
 
 
 @task(environments=['ci'])

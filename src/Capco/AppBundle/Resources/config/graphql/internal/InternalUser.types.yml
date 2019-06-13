@@ -119,8 +119,6 @@ InternalUser:
         type: 'Int!'
       commentVotesCount:
         type: 'Int!'
-      votesCount:
-        type: 'Int!'
       contributionsToDeleteCount:
         type: 'Int!'
         description: 'Provisional number of contributions who will be totally deleted if the user chose to delete his account.'

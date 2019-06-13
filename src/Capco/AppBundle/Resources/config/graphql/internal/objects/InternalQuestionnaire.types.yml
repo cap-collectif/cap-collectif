@@ -55,6 +55,3 @@ InternalQuestionnaire:
       privateResult:
         type: 'Boolean!'
         description: 'Results of survey are private'
-      exportResultsUrl:
-        type: 'URI!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireExportResultsUrlResolver", [value])'

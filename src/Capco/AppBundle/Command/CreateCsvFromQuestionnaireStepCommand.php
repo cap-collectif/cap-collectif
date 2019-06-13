@@ -2,35 +2,34 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Command\Utils\ExportUtils;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Symfony\Component\Console\Input\InputInterface;
-use Capco\AppBundle\Resolver\ProjectDownloadResolver;
-use Symfony\Component\Console\Output\OutputInterface;
 use Capco\AppBundle\Repository\QuestionnaireStepRepository;
-use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
+use Capco\AppBundle\Resolver\ProjectDownloadResolver;
+use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromQuestionnaireStepCommand extends BaseExportCommand
 {
     private $toggleManager;
     private $projectDownloadResolver;
     private $questionnaireStepRepository;
-    private $pathResolver;
+    private $projectRootDir;
 
     public function __construct(
         ExportUtils $exportUtils,
         ProjectDownloadResolver $projectDownloadResolver,
         QuestionnaireStepRepository $questionnaireStepRepository,
-        QuestionnaireExportResultsUrlResolver $pathResolver,
+        string $projectRootDir,
         Manager $manager
     ) {
         $this->toggleManager = $manager;
         $this->projectDownloadResolver = $projectDownloadResolver;
         $this->questionnaireStepRepository = $questionnaireStepRepository;
-        $this->pathResolver = $pathResolver;
+        $this->projectRootDir = $projectRootDir;
         parent::__construct($exportUtils);
     }
 
@@ -60,19 +59,21 @@ class CreateCsvFromQuestionnaireStepCommand extends BaseExportCommand
             return;
         }
 
-        if ($questionnaireStep = $this->getQuestionnaireStep($input)) {
+        if (($questionnaireStep = $this->getQuestionnaireStep($input))) {
             $steps = [$questionnaireStep];
         } else {
             $steps = $this->questionnaireStepRepository->findAll();
         }
 
         foreach ($steps as $qs) {
-            if ($qs->getQuestionnaire()) {
-                $writer = $this->projectDownloadResolver->getContent($qs, $this->exportUtils);
-                $filePath = $this->pathResolver->getFilePath($qs->getQuestionnaire());
-                $writer->save($filePath);
-                $output->writeln('The export file "' . $filePath . '" has been created.');
+            $writer = $this->projectDownloadResolver->getContent($qs, $this->exportUtils);
+            $filename = '';
+            if ($qs->getProject()) {
+                $filename .= $qs->getProject()->getSlug() . '_';
             }
+            $filename .= $qs->getSlug() . '.xlsx';
+            $writer->save($this->projectRootDir . '/web/export/' . $filename);
+            $output->writeln('The export file "' . $filename . '" has been created.');
         }
     }
 

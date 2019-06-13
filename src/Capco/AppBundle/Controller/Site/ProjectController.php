@@ -4,8 +4,6 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Form\ProjectSearchType;
 use Capco\AppBundle\Repository\ArgumentRepository;
@@ -45,7 +43,7 @@ class ProjectController extends Controller
                     $max,
                     $offset,
                     $this->getUser()
-                )
+                ),
             ],
             'json',
             ['Projects', 'Steps', 'UserDetails', 'StepTypes', 'ThemeDetails', 'ProjectType']
@@ -115,37 +113,8 @@ class ProjectController extends Controller
             'arguments' => $arguments,
             'sources' => $sources,
             'argumentsLabels' => Argument::$argumentTypesLabels,
-            'currentStep' => 'trash_step'
+            'currentStep' => 'trash_step',
         ];
-    }
-
-    /**
-     * @Route("/questionnaires/{questionnaireId}/download", name="app_questionnaire_download")
-     * @Security("has_role('ROLE_ADMIN')")
-     * @ParamConverter("questionnaire", class="CapcoAppBundle:Questionnaire", options={"mapping": {"questionnaireId": "id"}})
-     */
-    public function downloadQuestionnaireAction(Request $request, Questionnaire $questionnaire)
-    {
-        $filePath = $this->get(QuestionnaireExportResultsUrlResolver::class)->getFilePath(
-            $questionnaire
-        );
-        $fileName = $this->get(QuestionnaireExportResultsUrlResolver::class)->getFileName(
-            $questionnaire
-        );
-
-        if (!file_exists($filePath)) {
-            // We create a session for flashBag
-            $flashBag = $this->get('session')->getFlashBag();
-
-            $flashBag->add(
-                'danger',
-                $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
-            );
-
-            return $this->redirect($request->headers->get('referer'));
-        }
-
-        return $this->streamResponse($request, $filePath, 'application/vnd.ms-excel', $fileName);
     }
 
     /**
@@ -160,6 +129,17 @@ class ProjectController extends Controller
      */
     public function downloadAction(Request $request, Project $project, AbstractStep $step)
     {
+        $trans = $this->get('translator');
+
+        if (
+            !$project->isExportable() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
+            throw new ProjectAccessDeniedException(
+                $trans->trans('project.error.not_exportable', [], 'CapcoAppBundle')
+            );
+        }
+
         $path = sprintf('%s/web/export/', $this->container->getParameter('kernel.project_dir'));
         $filename = '';
         if ($step->getProject()) {
@@ -185,7 +165,20 @@ class ProjectController extends Controller
         $filename = file_exists($path . $csvFile) ? $csvFile : $xlsxFile;
         $contentType = file_exists($path . $csvFile) ? 'text/csv' : 'application/vnd.ms-excel';
 
-        return $this->streamResponse($request, $path . $filename, $contentType, $filename);
+        $date = (new \DateTime())->format('Y-m-d');
+
+        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
+        $response = new BinaryFileResponse($path . $filename);
+        $response->headers->set('X-Accel-Redirect', '/export/' . $filename);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $date . '_' . $filename
+        );
+        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
+        $response->headers->set('Pragma', 'public');
+        $response->headers->set('Cache-Control', 'maxage=1');
+
+        return $response;
     }
 
     /**
@@ -213,7 +206,7 @@ class ProjectController extends Controller
             'project' => $project,
             'years' => $groupedEvents,
             'nbEvents' => $nbEvents,
-            'currentStep' => 'events_step'
+            'currentStep' => 'events_step',
         ];
     }
 
@@ -245,7 +238,7 @@ class ProjectController extends Controller
             'posts' => $posts,
             'page' => $page,
             'nbPage' => $nbPage,
-            'currentStep' => 'posts_step'
+            'currentStep' => 'posts_step',
         ];
     }
 
@@ -281,7 +274,7 @@ class ProjectController extends Controller
             'pagination' => $pagination,
             'nbPage' => $nbPage,
             'currentStep' => 'contributors_step',
-            'showVotes' => $showVotes
+            'showVotes' => $showVotes,
         ];
     }
 
@@ -318,27 +311,5 @@ class ProjectController extends Controller
         $projectUrlResolver = $this->container->get(ProjectUrlResolver::class);
 
         return new RedirectResponse($projectUrlResolver->__invoke($project));
-    }
-
-    private function streamResponse(
-        Request $request,
-        string $filePath,
-        string $contentType,
-        string $fileName
-    ) {
-        $date = (new \DateTime())->format('Y-m-d');
-
-        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($filePath);
-        $response->headers->set('X-Accel-Redirect', '/export/' . $fileName);
-        $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $date . '_' . $fileName
-        );
-        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
-        $response->headers->set('Pragma', 'public');
-        $response->headers->set('Cache-Control', 'maxage=1');
-
-        return $response;
     }
 }
