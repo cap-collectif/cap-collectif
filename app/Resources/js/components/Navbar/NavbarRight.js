@@ -15,12 +15,14 @@ const ButtonsContainer = styled.div`
   padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
 `;
 
-type Props = {
+type Props = {|
   intl: IntlShape,
   user?: Object,
   features: Object,
   vertical: boolean,
-};
+  eventKey?: number | string,
+  ariaLabel?: string,
+|};
 
 export class NavbarRight extends React.Component<Props> {
   static defaultProps = {
@@ -45,7 +47,7 @@ export class NavbarRight extends React.Component<Props> {
             aria-label={intl.formatMessage({ id: 'search.title' })}>
             <TabsLink id="navbar-search" eventKey={1} href="/search">
               <i className="cap cap-magnifier" />{' '}
-              <span className="visible-xs-inline">
+              <span className="visible-xs-inline ml-5">
                 <FormattedMessage id="navbar.search" />
               </span>
             </TabsLink>
@@ -65,7 +67,7 @@ export class NavbarRight extends React.Component<Props> {
             toggleElement={
               <span>
                 <UserAvatar user={user} size={34} anchor={false} />
-                <span>{user.username}</span>
+                <span className="ml-5">{user.username}</span>
               </span>
             }>
             {user.isAdmin && (

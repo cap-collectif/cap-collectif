@@ -1,4 +1,6 @@
+/* @flow */
 import * as React from 'react';
+import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { setIntlConfig, withIntl } from 'storybook-addon-intl';
@@ -8,6 +10,11 @@ import frLocaleData from 'react-intl/locale-data/fr';
 import TabsBar from '../components/Ui/TabsBar/TabsBar';
 
 import { items, itemWithChildren } from './mocks/navbarItems';
+
+const StorybookWrapper = styled.div`
+  background-color: lightBlue;
+  height: 51px;
+`
 
 addLocaleData(frLocaleData);
 
@@ -44,12 +51,12 @@ storiesOf('TabsBar', module)
   .addDecorator(withKnobs)
   .addDecorator(withIntl)
   .add('default case', () => (
-    <div style={{ backgroundColor: 'lightBlue', height: 51 }}>
+    <StorybookWrapper>
       <TabsBar items={newItems} />
-    </div>
+    </StorybookWrapper>
   ))
   .add('vertical', () => (
-    <div style={{ backgroundColor: 'lightBlue' }}>
+    <StorybookWrapper>
       <TabsBar items={newItems} vertical overflowEnable={false} />
-    </div>
+    </StorybookWrapper>
   ));

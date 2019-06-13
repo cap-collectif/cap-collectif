@@ -1,3 +1,4 @@
+/* @flow */
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
@@ -57,8 +58,8 @@ const ContentRight = ({ intl, user, features, vertical }) => (
       <TabsItemContainer vertical={vertical} as="div" role="search" aria-label="Rechercher">
         <TabsLink id="navbar-search" eventKey={1} href="/search">
           <i className="cap cap-magnifier" />
-          <span className="visible-xs-inline" style={{ whiteSpace: 'nowrap' }}>
-            {' Rechercher'}
+          <span className="visible-xs-inline ml-5">
+            {'Rechercher'}
           </span>
         </TabsLink>
       </TabsItemContainer>
@@ -73,7 +74,7 @@ const ContentRight = ({ intl, user, features, vertical }) => (
         toggleElement={
           <span>
             <UserAvatar user={user} size={34} anchor={false} />
-            <span>{user.username}</span>
+            <span className="ml-5">{user.username}</span>
           </span>
         }>
         {user.isAdmin && (

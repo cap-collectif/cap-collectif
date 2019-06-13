@@ -4,15 +4,17 @@ import { type IntlShape } from 'react-intl';
 
 import * as S from './styles';
 
-type Props = {
+type Props = {|
   intl: IntlShape,
   item?: Object,
   vertical?: boolean,
   pullRight?: boolean,
   id?: number | string,
   toggleElement?: any,
+  eventKey?: number | string,
+  'aria-label'?: string,
   children?: any,
-};
+|};
 
 const TabsBarDropdown = (props: Props) => {
   const { intl, item, vertical, pullRight, id, toggleElement, children } = props;
@@ -22,7 +24,7 @@ const TabsBarDropdown = (props: Props) => {
     <S.Dropdown>
       <S.DropdownToggle
         type="button"
-        className="btn-link" /* Bootstrap class to remove later */
+        className="btn-link" /* TODO: Bootstrap class to remove later */
         id={id}
         vertical={vertical}
         aria-haspopup="true"
@@ -90,5 +92,10 @@ const TabsBarDropdown = (props: Props) => {
     </S.Dropdown>
   );
 };
+
+TabsBarDropdown.defaultProps = {
+  vertical: false,
+  pullRight: false,
+}
 
 export default TabsBarDropdown;

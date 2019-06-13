@@ -6,13 +6,17 @@ import TabsBarDropdown from './TabsBarDropdown';
 
 import * as S from './styles';
 
-type Props = {
+type Props = {|
   intl: IntlShape,
   item: Object,
-  vertical: boolean,
-};
+  vertical?: boolean,
+|};
 
 class TabsItem extends React.PureComponent<Props> {
+  static defaultProps = {
+    vertical: false,
+  }
+
   render() {
     const { item, intl, vertical } = this.props;
     const ariaTitle = `${item.title} - ${intl.formatMessage({ id: 'active.page' })}`;

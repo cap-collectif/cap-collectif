@@ -1,4 +1,4 @@
-// @flow
+/* @flow */
 import * as React from 'react';
 import { injectIntl, type IntlShape } from 'react-intl';
 
@@ -8,18 +8,18 @@ import NavbarToggle from './NavbarToggle';
 
 import * as S from './styles';
 
-type Props = {
+type Props = {|
   intl: IntlShape,
   logo?: ?string,
   items: Array<Object>,
   siteName: ?string,
   contentRight?: React.Element<Object>,
-};
+|};
 
-type State = {
+type State = {|
   expanded: boolean,
   desktop: boolean,
-};
+|};
 
 export class NavBar extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -75,14 +75,14 @@ export class NavBar extends React.Component<Props, State> {
           <NavbarToggle onClick={this.getAriaExpanded} expanded={expanded} />
           {desktop && (
             <S.NavigationContentDesktop>
-              {items.length > 0 && <TabsBar items={items} intl={intl} />}
+              {items.length > 0 && <TabsBar items={items} />}
               {contentRight && <S.NavigationContentRight>{contentRight}</S.NavigationContentRight>}
             </S.NavigationContentDesktop>
           )}
           {expanded && (
             <S.NavigationContentMobile>
               {items.length > 0 && (
-                <TabsBar items={items} intl={intl} overflowEnable={false} vertical />
+                <TabsBar items={items} overflowEnable={false} vertical />
               )}
               {contentRight && (
                 <S.NavigationContentRight vertical>

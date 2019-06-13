@@ -3,10 +3,10 @@ import * as React from 'react';
 
 import * as S from './styles';
 
-type Props = {
+type Props = {|
   onClick: () => void,
   expanded: boolean,
-};
+|};
 
 export class NavbarToggle extends React.Component<Props> {
   render() {

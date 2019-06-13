@@ -1,3 +1,4 @@
+/* @flow */
 import styled, { css } from 'styled-components';
 
 export const NavigationContainer = styled.div`

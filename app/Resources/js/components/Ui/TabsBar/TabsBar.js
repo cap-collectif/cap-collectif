@@ -7,18 +7,24 @@ import TabsBarDropdown from './TabsBarDropdown';
 
 import * as S from './styles';
 
-type Props = {
+type Props = {|
   intl: IntlShape,
   items: Array<Object>,
-  overflowEnable: boolean,
-  vertical: boolean,
-};
+  /*
+   * Whether or not the TabsBar can have an overflow, this should be `true` on mobile devices.
+   */
+  overflowEnable?: boolean,
+  /*
+  * Whether the TabsBar is vertical or horizontal, it should be `true` on mobil devices
+   */
+  vertical?: boolean,
+|};
 
-type State = {
+type State = {|
   shouldRender: boolean,
   shouldDisplaySeeMore: boolean,
   overflowIndex: number,
-};
+|};
 
 export class TabsBar extends React.Component<Props, State> {
   containerWidth: number;

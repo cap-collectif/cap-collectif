@@ -21,8 +21,6 @@ const NavbarAppClient = (props: Object) => {
     mainNavbarTextActive: state.default.parameters['color.main_menu.text_active'],
   };
 
-  console.log(theme);
-
   return (
     <Provider store={store}>
       <IntlProvider>
