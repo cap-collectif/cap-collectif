@@ -58,7 +58,11 @@ class UpdateReplyMutation implements MutationInterface
         /** @var Reply $reply */
         $reply = $this->replyRepo->find(GlobalId::fromGlobalId($values['replyId'])['id']);
         unset($values['replyId']);
-
+        $wasDraft = $reply->isDraft();
+        $draft = false;
+        if (isset($values['draft']) && true === $values['draft']) {
+            $draft = true;
+        }
         if (!$reply) {
             throw new UserError('Reply not found.');
         }
@@ -78,19 +82,43 @@ class UpdateReplyMutation implements MutationInterface
 
         $questionnaire = $reply->getQuestionnaire();
 
-        if ($questionnaire && !$reply->isDraft()) {
+        if (
+            $questionnaire &&
+            $questionnaire->isAcknowledgeReplies() &&
+            !$reply->isDraft() &&
+            $questionnaire->getStep()
+        ) {
+            $step = $questionnaire->getStep();
+            $project = $step->getProject();
+            $endAt = $step->getEndAt();
+            $stepUrl = $this->stepUrlResolver->__invoke($step);
+            $this->userNotifier->acknowledgeReply(
+                $project,
+                $reply,
+                $endAt,
+                $stepUrl,
+                $step,
+                $viewer,
+                $wasDraft && !$draft ? false : true
+            );
+        }
+
+        $this->em->flush();
+
+        if ($questionnaire && !$reply->isDraft() && $questionnaire->isNotifyResponseUpdate()) {
             $this->publisher->publish(
                 'questionnaire.reply',
                 new Message(
                     json_encode([
                         'replyId' => $reply->getId(),
-                        'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE,
+                        'state' => $wasDraft
+                            ? QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE
+                            : QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE,
                     ])
                 )
             );
         }
 
-        $this->em->flush();
         $this->redisStorageHelper->recomputeUserCounters($viewer);
 
         return ['reply' => $reply];
