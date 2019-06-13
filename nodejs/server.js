@@ -33,7 +33,7 @@ Handler.prototype.handle = function (connection) {
     const evalCode = function() {
       tries = tries + 1;
       if (tries > 20) {
-        invariant(false, `[SSR] Failed request #${i}`);
+        console.error('[SSR] failed request #'+ i);
         connection.write('');
         connection.end();
         return;
