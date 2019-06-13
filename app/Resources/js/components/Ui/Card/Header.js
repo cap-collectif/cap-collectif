@@ -33,7 +33,6 @@ export const Header = (props: Props) => {
 };
 
 Header.defaultProps = {
-  // eslint-disable-next-line react/default-props-match-prop-types
   bgColor: 'default',
 };
 

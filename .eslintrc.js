@@ -90,6 +90,7 @@ module.exports = {
     // Maybe we could use a different syntax
     // Such as import * as generated from …
     camelcase: 'off',
+    'import/no-cycle': 'off',
     // Fix doesn't seem to work yet
     // Spread in Flow types declaration seems not work yet (See OpinionTabs.js for example).
     'relay/generated-flow-types': ['warn', { fix: false }],

@@ -107,7 +107,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
   componentDidMount() {
     // This import is used to avoid SSR errors.
     L = require('leaflet'); // eslint-disable-line
-    this.setState({ loaded: true }); // eslint-disable-line
+    this.setState({ loaded: true });
 
     const { dispatch, stepId, stepType, visible } = this.props;
     if (visible) {

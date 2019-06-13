@@ -82,7 +82,6 @@ class RankingItem extends React.Component<Props> {
 }
 
 export default DragSource(ITEM_TYPE, itemSource, (connect, monitor) => ({
-  // eslint-disable-line new-cap
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging(),
 }))(RankingItem);

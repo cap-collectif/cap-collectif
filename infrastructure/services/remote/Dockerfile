@@ -259,7 +259,7 @@ RUN chown -R capco:capco . \
 
 # Build JS
 RUN yarn global add babel-cli \
-    && gosu capco yarn install --pure-lockfile \
+    && gosu capco yarn install --production --pure-lockfile \
     && gosu capco npm rebuild node-sass > /dev/null \
     && gosu capco php bin/console translation:download app --env=prod \
     && gosu capco yarn run update-js-translation \

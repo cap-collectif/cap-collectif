@@ -40,7 +40,6 @@ export const InlineList = (props: Props) => {
 };
 
 InlineList.defaultProps = {
-  // eslint-disable-next-line react/default-props-match-prop-types
   margin: true,
 };
 

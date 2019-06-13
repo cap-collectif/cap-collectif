@@ -12,7 +12,6 @@ const spotTarget = {
 type Props = {
   connectDropTarget: Function,
   isOver: boolean,
-  // eslint-disable-next-line react/no-unused-prop-types
   onDrop: Function,
   canDrop: boolean,
   children?: $FlowFixMe,
@@ -33,7 +32,6 @@ class RankingSpot extends React.Component<Props> {
 }
 
 export default DropTarget(ITEM_TYPE, spotTarget, (connect, monitor) => ({
-  // eslint-disable-line new-cap
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop(),

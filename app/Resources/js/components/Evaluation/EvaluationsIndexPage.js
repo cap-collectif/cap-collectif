@@ -14,12 +14,10 @@ export const renderComponent = ({
     return graphqlError;
   }
   if (props) {
-    // eslint-disable-next-line react/prop-types
     if (props.proposalForms && props.proposalForms.length) {
       return (
         <div>
-          {// eslint-disable-next-line react/prop-types
-          props.proposalForms.map(proposalForm => (
+          {props.proposalForms.map(proposalForm => (
             // $FlowFixMe
             <ProposalFormEvaluationList key={proposalForm.id} proposalForm={proposalForm} />
           ))}

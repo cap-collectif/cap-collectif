@@ -5,7 +5,6 @@ import { shallow } from 'enzyme';
 
 import { SmsCodeForm } from './SmsCodeForm';
 
-// eslint-disable-next-line react/prop-types
 const props = {
   onSubmitSuccess: jest.fn(),
   submitting: false,

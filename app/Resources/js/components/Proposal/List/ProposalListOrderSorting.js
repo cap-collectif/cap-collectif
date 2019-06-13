@@ -34,7 +34,6 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
   constructor(props: Props) {
     super(props);
     this.state = {
-      // eslint-disable-next-line react/prop-types
       displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(props.orderByComments ? ['comments'] : [])
         .concat(props.orderByCost ? ['expensive', 'cheap'] : [])
         .concat(props.orderByVotes ? ['votes', 'least-votes'] : []),
@@ -54,7 +53,6 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const { order, dispatch, intl } = this.props;
     const { displayedOrders } = this.state;
 

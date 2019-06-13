@@ -70,7 +70,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
             "_rendered": <div
               className="position-relative"
             >
-              <ForwardRef
+              <ForwardRef(EventListStatusFilter__StatusButton)
                 aria-expanded={false}
                 onClick={[Function]}
                 screen="desktop"
@@ -83,7 +83,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                   />
                   )
                 </React.Fragment>
-              </ForwardRef>
+              </ForwardRef(EventListStatusFilter__StatusButton)>
               <Overlay
                 animation={[Function]}
                 container={[Circular]}
@@ -92,7 +92,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                 show={false}
                 target={null}
               >
-                <ForwardRef>
+                <ForwardRef(EventListStatusFilter__StatusPopover)>
                   <form
                     onChange={[Function]}
                   >
@@ -136,7 +136,7 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                       />
                     </Field>
                   </form>
-                </ForwardRef>
+                </ForwardRef(EventListStatusFilter__StatusPopover)>
               </Overlay>
             </div>,
             "_rendering": false,
@@ -265,7 +265,7 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
             "_rendered": <div
               className="position-relative"
             >
-              <ForwardRef
+              <ForwardRef(EventListStatusFilter__StatusButton)
                 aria-expanded={true}
                 onClick={[Function]}
               >
@@ -273,7 +273,7 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                   id="finished"
                   values={Object {}}
                 />
-              </ForwardRef>
+              </ForwardRef(EventListStatusFilter__StatusButton)>
               <Overlay
                 animation={[Function]}
                 container={[Circular]}
@@ -282,7 +282,7 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                 show={true}
                 target={null}
               >
-                <ForwardRef>
+                <ForwardRef(EventListStatusFilter__StatusPopover)>
                   <form
                     onChange={[Function]}
                   >
@@ -326,7 +326,7 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                       />
                     </Field>
                   </form>
-                </ForwardRef>
+                </ForwardRef(EventListStatusFilter__StatusPopover)>
               </Overlay>
             </div>,
             "_rendering": false,
@@ -458,7 +458,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
             "_rendered": <div
               className="position-relative"
             >
-              <ForwardRef
+              <ForwardRef(EventListStatusFilter__StatusButton)
                 aria-expanded={false}
                 onClick={[Function]}
                 screen="mobile"
@@ -467,7 +467,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                   id="theme.show.status.future"
                   values={Object {}}
                 />
-              </ForwardRef>
+              </ForwardRef(EventListStatusFilter__StatusButton)>
               <Overlay
                 animation={[Function]}
                 container={[Circular]}
@@ -476,7 +476,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                 show={false}
                 target={null}
               >
-                <ForwardRef>
+                <ForwardRef(EventListStatusFilter__StatusPopover)>
                   <form
                     onChange={[Function]}
                   >
@@ -520,7 +520,7 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                       />
                     </Field>
                   </form>
-                </ForwardRef>
+                </ForwardRef(EventListStatusFilter__StatusPopover)>
               </Overlay>
             </div>,
             "_rendering": false,

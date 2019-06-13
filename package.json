@@ -9,11 +9,11 @@
         "test-e2e:watch": "fab local.app.toggle_enable && NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --watchAll",
         "flow": "flow",
         "flow:coverage": "flow-coverage-report",
-        "build": "NODE_ENV=development webpack --config webpack/webpack.client.js",
+        "build": "NODE_ENV=development node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --config webpack/webpack.client.js",
         "build:analyzer": "NODE_ENV=development webpack --config webpack/webpack.client.analyzer.js",
         "build:analyzer:prod": "NODE_ENV=production webpack --config webpack/webpack.prod.analyzer.js",
-        "build:watch": "NODE_ENV=development webpack --config webpack/webpack.client.hot.js",
-        "build:prod": "NODE_ENV=production webpack --config webpack/webpack.prod.client.js",
+        "build:watch": "NODE_ENV=development node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --config webpack/webpack.client.hot.js",
+        "build:prod": "NODE_ENV=production node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --config webpack/webpack.prod.client.js",
         "build-server-bundle": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack/webpack.config.serverside.legacy.js",
         "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack/webpack.config.serverside.legacy.js",
         "build-relay-schema": "relay-compiler --watchman false",
@@ -142,7 +142,6 @@
         "@babel/preset-flow": "^7.0.0",
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-stage-0": "^7.0.0",
-        "@prettier/plugin-php": "^0.9.0",
         "@storybook/addon-info": "^4.0.4",
         "@storybook/addon-knobs": "^4.0.4",
         "@storybook/addon-options": "^4.0.4",
@@ -278,6 +277,7 @@
         "redux-saga": "v0.14.0",
         "regenerator-runtime": "^0.13.1",
         "relay-compiler": "^5.0.0",
+        "relay-compiler-language-js-flow-uncommented": "^1.1.0",
         "relay-config": "^5.0.0",
         "relay-devtools": "^1.4.0",
         "relay-runtime": "^4.0.0",
@@ -315,7 +315,7 @@
         "node-gyp": "^4.0.0"
     },
     "devDependencies": {
-        "flow-typed": "^2.5.1",
-        "relay-compiler-language-js-flow-uncommented": "^1.1.0"
+        "@prettier/plugin-php": "^0.11.2",
+        "flow-typed": "^2.5.1"
     }
 }

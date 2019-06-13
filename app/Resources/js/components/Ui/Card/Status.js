@@ -38,7 +38,6 @@ export const Status = (props: Props) => {
 };
 
 Status.defaultProps = {
-  // eslint-disable-next-line react/default-props-match-prop-types
   bgColor: 'default',
 };
 

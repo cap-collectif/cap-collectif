@@ -26,7 +26,6 @@ type Props = {|
 
 export class OpinionEditModal extends React.Component<Props & { intl: IntlShape }> {
   render() {
-    // eslint-disable-next-line
     const { dispatch, submitting, show, opinion, intl } = this.props;
     return (
       <Modal

@@ -11,9 +11,7 @@ import UserListField from '../../Admin/Field/UserListField';
 type Props = {
   group: GroupAdminUsers_group,
   handleSubmit: Function,
-  // eslint-disable-next-line react/no-unused-prop-types
   dispatch: Dispatch,
-  // eslint-disable-next-line react/no-unused-prop-types
   onClose: Function,
   intl: IntlShape,
 };
