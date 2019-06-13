@@ -48,7 +48,7 @@ class OpinionVotesModal extends React.Component<Props, State> {
           id="opinion-votes-show-all"
           onClick={this.show}
           className="opinion__votes__more__link text-center">
-          {`+${moreVotes}`}
+          {`+${moreVotes >= 100 ? '99' : moreVotes}`}
         </Button>
         <Modal
           animation={false}

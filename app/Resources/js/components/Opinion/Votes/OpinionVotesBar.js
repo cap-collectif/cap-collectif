@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
 import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
 import OpinionVotesModal from './OpinionVotesModal';
@@ -35,7 +34,7 @@ class OpinionVotesBar extends React.Component<Props> {
               .slice(0, 5)
               .map((vote, index) => (
                 /* $FlowFixMe */
-                <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />
+                <OpinionUserVote key={index} vote={vote} className="mr-0" />
               ))}
           {opinion.__typename === 'Opinion' && (
             /* $FlowFixMe */
@@ -44,16 +43,6 @@ class OpinionVotesBar extends React.Component<Props> {
           {opinion.__typename === 'Version' && (
             /* $FlowFixMe */
             <VersionVotesModal version={opinion} />
-          )}
-        </div>
-        <div>
-          {opinion.previewVotes && (
-            <FormattedMessage
-              id="global.votes"
-              values={{
-                num: opinion.previewVotes.totalCount,
-              }}
-            />
           )}
         </div>
       </div>

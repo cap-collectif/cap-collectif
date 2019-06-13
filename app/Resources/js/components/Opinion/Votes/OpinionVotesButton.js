@@ -32,7 +32,7 @@ const valueToObject = (value: YesNoPairedVoteValue): Object => {
     return {
       style: 'warning',
       str: 'mitige',
-      icon: 'cap cap-hand-like-2 icon-rotate',
+      icon: 'cap cap-hand-like-2-1 icon-rotate',
     };
   }
   return {
@@ -203,7 +203,9 @@ export class OpinionVotesButton extends React.Component<Props, State> {
             className="btn--outline"
             onClick={this.voteAction}
             active={active}
-            aria-label={intl.formatMessage({id: active ? `vote.aria_label_active.${data.str}` : `vote.aria_label.${data.str}` })}
+            aria-label={intl.formatMessage({
+              id: active ? `vote.aria_label_active.${data.str}` : `vote.aria_label.${data.str}`,
+            })}
             disabled={disabled || isLoading}>
             {active /* $FlowFixMe */ && (
               <UnpublishedTooltip
