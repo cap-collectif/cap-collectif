@@ -10,7 +10,7 @@
  */
 
 const invariant = function(condition, format, a, b, c, d, e, f) {
-  if (process.env.NODE_ENV === 'dev') {
+  if (process.env.NODE_ENV === 'development') {
     if (format === undefined) {
       throw new Error('invariant requires an error message argument');
     }
