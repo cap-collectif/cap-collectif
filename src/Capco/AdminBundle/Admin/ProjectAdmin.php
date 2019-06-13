@@ -192,8 +192,6 @@ final class ProjectAdmin extends CapcoAdmin
             ->getToken()
             ->getUser();
 
-        // Content
-        $formMapper->with('admin.fields.project.group_content', ['class' => 'col-md-12'])->end();
         if (
             $this->getConfigurationPool()
                 ->getContainer()

@@ -27,7 +27,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
     inputClassName="fake-inputClassName"
     label="admin.fields.project.authors"
     labelClassName="control-label"
-    multi={false}
+    multi={true}
     name="authors"
     placeholder="all-the-authors"
     selectFieldIsObject={true}
@@ -35,7 +35,6 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
   <InjectIntl(ProjectTypeListField) />
   <Field
     component={[Function]}
-    initialValue={0}
     label={
       <span>
         <FormattedMessage
@@ -45,6 +44,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
       </span>
     }
     name="opinionTerm"
+    normalize={[Function]}
     type="select"
   >
     <option
@@ -111,7 +111,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
     inputClassName="fake-inputClassName"
     label="admin.fields.project.authors"
     labelClassName="control-label"
-    multi={false}
+    multi={true}
     name="authors"
     placeholder="all-the-authors"
     selectFieldIsObject={true}
@@ -119,7 +119,6 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
   <InjectIntl(ProjectTypeListField) />
   <Field
     component={[Function]}
-    initialValue={0}
     label={
       <span>
         <FormattedMessage
@@ -129,6 +128,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
       </span>
     }
     name="opinionTerm"
+    normalize={[Function]}
     type="select"
   >
     <option

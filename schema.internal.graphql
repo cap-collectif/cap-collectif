@@ -1626,7 +1626,7 @@ input CreateProjectInput {
   authors: [ID!]!
 
   # The project's opinion term
-  opinionTerm: String!
+  opinionTerm: Int!
 
   # The project's type
   projectType: String!
@@ -3591,7 +3591,7 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
   externalLink: URI
 
   # Opinion term of the project
-  opinionTerm: String!
+  opinionTerm: Int!
 }
 
 # A connection to a list of items.
@@ -6473,7 +6473,7 @@ input UpdateProjectInput {
   authors: [String!]!
 
   # The project's opinion term
-  opinionTerm: String!
+  opinionTerm: Int!
 
   # The project's type
   projectType: String!

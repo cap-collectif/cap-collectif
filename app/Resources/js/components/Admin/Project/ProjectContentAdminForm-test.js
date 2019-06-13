@@ -31,7 +31,7 @@ describe('<ProjectContentAdminForm />', () => {
             label: 'username',
           },
         ],
-        opinionTerm: '1',
+        opinionTerm: 1,
         type: {
           id: '0',
         },

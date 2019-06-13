@@ -92,5 +92,5 @@ InternalProject:
         type: 'URI'
         description: 'Link of external project'
       opinionTerm:
-        type: 'String!'
+        type: 'Int!'
         description: 'Opinion term of the project'

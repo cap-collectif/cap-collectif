@@ -9,6 +9,7 @@ use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class ProjectFormType extends AbstractType
 {
@@ -25,11 +26,8 @@ class ProjectFormType extends AbstractType
                 'required' => true,
                 'class' => ProjectType::class,
             ])
-            ->add('opinionTerm', PurifiedTextType::class, [
+            ->add('opinionTerm', NumberType::class, [
                 'required' => true,
-                'purify_html' => true,
-                'strip_tags' => true,
-                'purify_html_profile' => 'default',
             ]);
     }
 

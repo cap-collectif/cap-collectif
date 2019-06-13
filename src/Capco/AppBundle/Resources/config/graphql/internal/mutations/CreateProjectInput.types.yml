@@ -10,7 +10,7 @@ CreateProjectInput:
         type: '[ID!]!'
         description: "The project's authors, accept IDs of User"
       opinionTerm:
-        type: 'String!'
+        type: 'Int!'
         description: "The project's opinion term"
       projectType:
         type: 'String!'

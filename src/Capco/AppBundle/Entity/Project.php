@@ -679,20 +679,16 @@ class Project implements IndexableInterface
         $this->includeAuthorInRanking = $includeAuthorInRanking;
     }
 
-    /**
-     * @return array
-     */
-    public function getOpinionTerm()
+    public function getOpinionTerm(): int
     {
         return $this->opinionTerm;
     }
 
-    /**
-     * @param array $opinionTerm
-     */
-    public function setOpinionTerm($opinionTerm)
+    public function setOpinionTerm(int $opinionTerm): self
     {
         $this->opinionTerm = $opinionTerm;
+
+        return $this;
     }
 
     public function getDistricts(): Collection

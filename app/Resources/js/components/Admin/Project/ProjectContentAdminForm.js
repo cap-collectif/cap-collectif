@@ -33,7 +33,7 @@ type Author = {|
 type FormValues = {|
   title: string,
   authors: Author[],
-  opinionTerm: string,
+  opinionTerm: number,
   projectType: string,
 |};
 
@@ -87,14 +87,14 @@ const onSubmit = (
   });
 };
 
-const validate = ({ title, authors, opinionTerm, projectType }: FormValues) => {
+const validate = ({ title, authors, projectType }: FormValues) => {
   const errors = {};
 
   if (!title || title.length < 2) {
     errors.title = 'global.required';
   }
 
-  if (!authors || authors.length <= 0) {
+  if (!authors) {
     errors.authors = 'global.required';
   }
 
@@ -102,12 +102,9 @@ const validate = ({ title, authors, opinionTerm, projectType }: FormValues) => {
     errors.projectType = 'global.required';
   }
 
-  if (!opinionTerm) {
-    errors.opinionTerm = 'global.required';
-  }
-
   return errors;
 };
+const normalize = (opinionTerm: string): number => parseInt(opinionTerm, 10);
 
 const formName = 'projectAdminForm';
 
@@ -138,7 +135,7 @@ export const ProjectContentAdminForm = (props: Props) => {
         selectFieldIsObject
         debounce
         autoload={false}
-        multi={false}
+        multi
         labelClassName="control-label"
         inputClassName="fake-inputClassName"
         placeholder={intl.formatMessage({ id: 'all-the-authors' })}
@@ -151,7 +148,7 @@ export const ProjectContentAdminForm = (props: Props) => {
         name="opinionTerm"
         type="select"
         component={renderComponent}
-        initialValue={projectTerms[0].id}
+        normalize={normalize}
         label={
           <span>
             <FormattedMessage id="admin.fields.project.opinion_term" />
@@ -187,7 +184,7 @@ export const ProjectContentAdminForm = (props: Props) => {
 
 const mapStateToProps = (state, { project }: Props) => ({
   initialValues: {
-    opinionTerm: project ? project.opinionTerm : projectTerms[0].id,
+    opinionTerm: project ? project.opinionTerm : parseInt(projectTerms[0].id, 10),
     authors: project ? project.authors : [],
     title: project ? project.title : null,
     projectType: project && project.type ? project.type.id : null,

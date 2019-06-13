@@ -13,7 +13,7 @@ UpdateProjectInput:
         type: '[String!]!'
         description: "The project's authors"
       opinionTerm:
-        type: 'String!'
+        type: 'Int!'
         description: "The project's opinion term"
       projectType:
         type: 'String!'
