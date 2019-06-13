@@ -674,3 +674,10 @@ services:
     class: Capco\AdminBundle\Action\RetrieveAutocompleteItemsAction
     autowire: true
     public: true
+
+  Capco\AdminBundle\Admin\SSOAdmin:
+    arguments: [~, Capco\AppBundle\Entity\SSO\AbstractSSOConfiguration, CapcoAdminBundle:SSO]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: admin.label.pages.sso }
+    calls:
+      - [setTranslationDomain, [CapcoAppBundle]]

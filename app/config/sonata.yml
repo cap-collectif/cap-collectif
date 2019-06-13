@@ -79,6 +79,7 @@ sonata_admin:
         items:
           - Capco\AdminBundle\Admin\SectionAdmin
           - Capco\AdminBundle\Admin\ContactAdmin
+          - Capco\AdminBundle\Admin\SSOAdmin
 
 sonata_doctrine_orm_admin:
   templates:
