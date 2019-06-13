@@ -30,7 +30,7 @@ const validate = (values: Object) => {
 
   const fields = [
     'biography',
-    'website',
+    'websiteUrl',
     'neighborhood',
     'linkedIn',
     'twitter',
@@ -216,7 +216,7 @@ export class Profile extends Component<Props> {
               </label>
               <div>
                 <Field
-                  name="website"
+                  name="websiteUrl"
                   component={component}
                   type="text"
                   id="public-data-form-website"
@@ -321,7 +321,7 @@ const mapStateToProps = (state: State, props: Props) => ({
   initialValues: {
     username: props.viewer.username ? props.viewer.username : null,
     biography: props.viewer.biography ? props.viewer.biography : null,
-    website: props.viewer.website ? props.viewer.website : null,
+    websiteUrl: props.viewer.websiteUrl ? props.viewer.websiteUrl : null,
     facebookUrl: props.viewer.facebookUrl ? props.viewer.facebookUrl : null,
     linkedInUrl: props.viewer.linkedInUrl ? props.viewer.linkedInUrl : null,
     twitterUrl: props.viewer.twitterUrl ? props.viewer.twitterUrl : null,
@@ -349,7 +349,7 @@ export default createFragmentContainer(container, {
       url
       username
       biography
-      website: websiteUrl
+      websiteUrl
       facebookUrl
       linkedInUrl
       twitterUrl

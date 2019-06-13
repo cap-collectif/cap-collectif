@@ -38,7 +38,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
     phoneConfirmed
     gender
     dateOfBirth
-    website
+    websiteUrl
     biography
     address
     zipCode
@@ -166,7 +166,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                             $contributor['phoneConfirmed'],
                             $contributor['gender'],
                             $contributor['dateOfBirth'],
-                            $contributor['website'],
+                            $contributor['websiteUrl'],
                             $contributor['biography'],
                             $contributor['address'],
                             $contributor['zipCode'],
