@@ -102,7 +102,7 @@ class AddReplyMutation implements MutationInterface
         $this->em->persist($reply);
         $this->em->flush();
 
-        if ($questionnaire && !$reply->isDraft()) {
+        if ($questionnaire && !$reply->isDraft() && $questionnaire->isNotifyResponseCreate()) {
             $this->publisher->publish(
                 'questionnaire.reply',
                 new Message(
@@ -115,6 +115,17 @@ class AddReplyMutation implements MutationInterface
         }
 
         $this->redisStorageHelper->recomputeUserCounters($user);
+        if (
+            $questionnaire->isAcknowledgeReplies() &&
+            !$reply->isDraft() &&
+            $questionnaire->getStep()
+        ) {
+            $step = $questionnaire->getStep();
+            $project = $step->getProject();
+            $endAt = $step->getEndAt();
+            $stepUrl = $this->stepUrlResolver->__invoke($step);
+            $this->userNotifier->acknowledgeReply($project, $reply, $endAt, $stepUrl, $step, $user);
+        }
 
         return ['questionnaire' => $questionnaire, 'reply' => $reply];
     }
