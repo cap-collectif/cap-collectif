@@ -3614,16 +3614,16 @@
         },
         {
             "name": "hautelook/alice-bundle",
-            "version": "v2.3.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hautelook/AliceBundle.git",
-                "reference": "1cbbbf65f19d07497174be1b263468bacaba9422"
+                "reference": "b9fa7985a522a7aed335976c168019cadb07396e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hautelook/AliceBundle/zipball/1cbbbf65f19d07497174be1b263468bacaba9422",
-                "reference": "1cbbbf65f19d07497174be1b263468bacaba9422",
+                "url": "https://api.github.com/repos/hautelook/AliceBundle/zipball/b9fa7985a522a7aed335976c168019cadb07396e",
+                "reference": "b9fa7985a522a7aed335976c168019cadb07396e",
                 "shasum": ""
             },
             "require": {
@@ -3641,9 +3641,6 @@
                 "phpspec/prophecy": "^1.7",
                 "phpunit/phpunit": "^7.0",
                 "symfony/phpunit-bridge": "^3.4 || ^4.0"
-            },
-            "suggest": {
-                "theofidry/alice-bundle-extension": "Behat extension for HautelookAliceBundle"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -3681,7 +3678,7 @@
                 "orm",
                 "symfony"
             ],
-            "time": "2018-09-24T18:43:04+00:00"
+            "time": "2019-04-10T10:32:44+00:00"
         },
         {
             "name": "hslavich/simplesamlphp-bundle",
@@ -5624,16 +5621,16 @@
         },
         {
             "name": "nelmio/alice",
-            "version": "v3.5.5",
+            "version": "v3.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/alice.git",
-                "reference": "b1b2a519f0e3fdffa81a051fea72b33d3c6c9c21"
+                "reference": "8bb64f0fe13f6675f0d07ca11ce5c3676f02a9ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/alice/zipball/b1b2a519f0e3fdffa81a051fea72b33d3c6c9c21",
-                "reference": "b1b2a519f0e3fdffa81a051fea72b33d3c6c9c21",
+                "url": "https://api.github.com/repos/nelmio/alice/zipball/8bb64f0fe13f6675f0d07ca11ce5c3676f02a9ce",
+                "reference": "8bb64f0fe13f6675f0d07ca11ce5c3676f02a9ce",
                 "shasum": ""
             },
             "require": {
@@ -5700,7 +5697,7 @@
                 "faker",
                 "test"
             ],
-            "time": "2019-03-14T21:21:21+00:00"
+            "time": "2019-05-05T08:51:28+00:00"
         },
         {
             "name": "nelmio/api-doc-bundle",
