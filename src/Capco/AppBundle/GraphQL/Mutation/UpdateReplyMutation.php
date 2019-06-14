@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Notifier\ReplyInterface;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ReplyType;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Notifier\UserNotifier;
 use Overblog\GraphQLBundle\Error\UserError;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -38,7 +38,7 @@ class UpdateReplyMutation implements MutationInterface
         ReplyRepository $replyRepo,
         RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
-        UserNotifier $userNotifier,
+        ReplyInterface $userNotifier,
         StepUrlResolver $stepUrlResolver,
         Publisher $publisher
     ) {
@@ -55,18 +55,19 @@ class UpdateReplyMutation implements MutationInterface
     public function __invoke(Argument $input, User $viewer): array
     {
         $values = $input->getRawArguments();
+        $replyId = GlobalId::fromGlobalId($values['replyId']);
         /** @var Reply $reply */
-        $reply = $this->replyRepo->find(GlobalId::fromGlobalId($values['replyId'])['id']);
+        $reply = $this->replyRepo->find($replyId['id']);
         unset($values['replyId']);
+
+        if (!$reply) {
+            throw new UserError('Reply not found.');
+        }
         $wasDraft = $reply->isDraft();
         $draft = false;
         if (isset($values['draft']) && true === $values['draft']) {
             $draft = true;
         }
-        if (!$reply) {
-            throw new UserError('Reply not found.');
-        }
-
         if ($reply->getAuthor() == !$viewer) {
             throw new UserError('You are not allowed to update this reply.');
         }
@@ -75,7 +76,6 @@ class UpdateReplyMutation implements MutationInterface
 
         $form = $this->formFactory->create(ReplyType::class, $reply, []);
         $form->submit($values, false);
-
         if (!$form->isValid()) {
             throw GraphQLException::fromFormErrors($form);
         }
@@ -92,6 +92,7 @@ class UpdateReplyMutation implements MutationInterface
             $project = $step->getProject();
             $endAt = $step->getEndAt();
             $stepUrl = $this->stepUrlResolver->__invoke($step);
+            $isUpdated = $wasDraft && !$draft ? false : true;
             $this->userNotifier->acknowledgeReply(
                 $project,
                 $reply,
@@ -99,7 +100,7 @@ class UpdateReplyMutation implements MutationInterface
                 $stepUrl,
                 $step,
                 $viewer,
-                $wasDraft && !$draft ? false : true
+                $isUpdated
             );
         }
 
@@ -113,7 +114,7 @@ class UpdateReplyMutation implements MutationInterface
                         'replyId' => $reply->getId(),
                         'state' => $wasDraft
                             ? QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE
-                            : QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE,
+                            : QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE
                     ])
                 )
             );
