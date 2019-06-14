@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { change } from 'redux-form';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import type { Dispatch } from '../../types';
-import invariant from '../../utils/invariant';
 
 type PassedProps = {
   onChange: Function,
@@ -39,9 +38,9 @@ class Address extends React.Component<Props> {
         this.props.onChange(addressText);
         this.props.updateAddressValue(addressToSend);
       })
-      .catch(() => {
+      .catch(error => {
         this.resetAddressField();
-        invariant(false, 'Google places error.');
+        console.error('Google places error!', error); // eslint-disable-line
       });
   };
 
