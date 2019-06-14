@@ -46,12 +46,16 @@ describe('<ReplyCreateFormWrapper />', () => {
     isPhoneConfirmed: true,
     phone: '0606060606',
     isAdmin: false,
+    isEvaluer: false,
     email: 'test@gmail.com',
     newEmailToConfirm: null,
     media: null,
     roles: [],
     displayName: 'TomTom',
     uniqueId: '234',
+    _links: {
+      profile: 'http://test.com',
+    },
   };
 
   it('should render an alert an a disabled form when form is contribuable and user is not logged in', () => {

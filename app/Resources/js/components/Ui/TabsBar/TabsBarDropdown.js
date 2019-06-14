@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useState } from 'react';
+import * as React from 'react';
 import { type IntlShape } from 'react-intl';
 
 import * as S from './styles';
@@ -10,18 +10,50 @@ type Props = {|
   vertical?: boolean,
   pullRight?: boolean,
   id?: number | string,
-  toggleElement?: any,
+  toggleElement?: React.Node,
   eventKey?: number | string,
   'aria-label'?: string,
-  children?: any,
+  children?: React.ChildrenArray<void | null | boolean | any>,
 |};
+
+// | typeof TabsLink
 
 const TabsBarDropdown = (props: Props) => {
   const { intl, item, vertical, pullRight, id, toggleElement, children } = props;
-  const [open, setOpen] = useState(false);
+  const node = React.useRef();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOutside = (e: MouseEvent) => {
+    // Detect if click is inside container (do nothing)
+    if (node && node.current && node.current.contains(e.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleTabPress = (e: KeyboardEvent) => {
+    if ((e.which || e.keyCode) === 9) {
+      setOpen(false);
+    }
+  };
+
+  React.useEffect(() => {
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleTabPress);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleTabPress);
+    };
+  }, [open]);
 
   return (
-    <S.Dropdown>
+    <S.Dropdown ref={node}>
       <S.DropdownToggle
         type="button"
         className="btn-link" /* TODO: Bootstrap class to remove later */
@@ -29,8 +61,7 @@ const TabsBarDropdown = (props: Props) => {
         vertical={vertical}
         aria-haspopup="true"
         aria-expanded={open}
-        onClick={() => setOpen(!open)}
-        onBlur={() => setOpen(false)}>
+        onClick={() => setOpen(!open)}>
         {toggleElement}
         <span className="caret" />
       </S.DropdownToggle>
@@ -42,7 +73,7 @@ const TabsBarDropdown = (props: Props) => {
         pullRight={pullRight}>
         {children &&
           children.map((child, index) => (
-            <li role="presentation" key={index}>
+            <li role="presentation" key={index} onClick={() => setOpen(false)}>
               {child}
             </li>
           ))}
@@ -51,7 +82,7 @@ const TabsBarDropdown = (props: Props) => {
           item.children &&
           item.children.length > 0 &&
           item.children.map((child, childIndex) => (
-            <li role="presentation" key={childIndex}>
+            <li role="presentation" key={childIndex} onClick={() => setOpen(false)}>
               {/* Item inside dropdown can have children */}
               {child.children && child.children.length > 0 ? (
                 <S.DropdownSection>
@@ -96,6 +127,6 @@ const TabsBarDropdown = (props: Props) => {
 TabsBarDropdown.defaultProps = {
   vertical: false,
   pullRight: false,
-}
+};
 
 export default TabsBarDropdown;

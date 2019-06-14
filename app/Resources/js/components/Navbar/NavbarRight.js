@@ -9,7 +9,8 @@ import { TabsItemContainer, TabsLink, TabsDivider } from '../Ui/TabsBar/styles';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
 import UserAvatar from '../User/UserAvatar';
-import type { State } from '../../types';
+import type { State, FeatureToggles } from '../../types';
+import type { User } from '../../redux/modules/user';
 
 const ButtonsContainer = styled.div`
   padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
@@ -17,8 +18,8 @@ const ButtonsContainer = styled.div`
 
 type Props = {|
   intl: IntlShape,
-  user?: Object,
-  features: Object,
+  user?: ?User,
+  features: FeatureToggles,
   vertical: boolean,
   eventKey?: number | string,
   ariaLabel?: string,
@@ -93,7 +94,7 @@ export class NavbarRight extends React.Component<Props> {
               <FormattedMessage id="navbar.user_settings" />
             </TabsLink>
             <TabsDivider aria-hidden="true" />
-            <TabsLink type='button' eventKey={3.6} id="logout-button" onClick={this.logout}>
+            <TabsLink type="button" eventKey={3.6} id="logout-button" onClick={this.logout}>
               <i className="cap cap-power-1 mr-10" aria-hidden="true" />
               <FormattedMessage id="global.logout" />
             </TabsLink>

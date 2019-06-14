@@ -15,6 +15,8 @@ import TabsBarDropdown from '../components/Ui/TabsBar/TabsBarDropdown';
 
 import { items, itemWithChildren } from './mocks/navbarItems';
 import { author as userMock } from './mocks/users';
+import type { FeatureToggles } from '../types';
+import { features } from '../redux/modules/default';
 
 addLocaleData(frLocaleData);
 
@@ -52,15 +54,23 @@ const ButtonsContainer = styled.div`
   padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
 `;
 
-const ContentRight = ({ intl, user, features, vertical }) => (
+const ContentRight = ({
+  intl,
+  user,
+  features,
+  vertical,
+}: {
+  intl: Object,
+  user: Object,
+  features: FeatureToggles,
+  vertical?: boolean,
+}) => (
   <>
     {features.search && (
       <TabsItemContainer vertical={vertical} as="div" role="search" aria-label="Rechercher">
         <TabsLink id="navbar-search" eventKey={1} href="/search">
           <i className="cap cap-magnifier" />
-          <span className="visible-xs-inline ml-5">
-            {'Rechercher'}
-          </span>
+          <span className="visible-xs-inline ml-5">Rechercher</span>
         </TabsLink>
       </TabsItemContainer>
     )}
@@ -213,7 +223,9 @@ storiesOf('NavBar', module)
       mainNavbarTextActive: text('Navbar item active color', '#ffffff', 'Theme'),
     };
 
-    const contentRight = <ContentRightWithIntl user={null} features={{ search: withSearch }} />;
+    const contentRight = (
+      <ContentRightWithIntl user={null} features={{ ...features, search: withSearch }} />
+    );
 
     return (
       <ThemeProvider theme={theme}>
@@ -240,7 +252,10 @@ storiesOf('NavBar', module)
     };
 
     const contentRight = (
-      <ContentRightWithIntl user={userMock} features={{ search: withSearch, profiles: true }} />
+      <ContentRightWithIntl
+        user={userMock}
+        features={{ ...features, search: withSearch, profiles: true }}
+      />
     );
 
     return (

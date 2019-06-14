@@ -5,10 +5,11 @@ import { shallow } from 'enzyme';
 
 import { NavbarRight } from './NavbarRight';
 import { intlMock } from '../../mocks';
+import { features } from '../../redux/modules/default';
 
 const props = {
-  user: {},
-  features: {},
+  user: null,
+  features,
   intl: intlMock,
 };
 

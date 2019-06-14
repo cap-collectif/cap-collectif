@@ -12,12 +12,16 @@ export type User = {
   +username: string,
   +isEmailConfirmed: boolean,
   +isPhoneConfirmed: boolean,
+  +isEvaluer: boolean,
   +phone: string,
   +isAdmin: boolean,
   +email: string,
   +newEmailToConfirm: ?string,
   +media: ?{
     +url: string,
+  },
+  +_links: {
+    +profile: string,
   },
   +roles: Array<string>,
   +displayName: string,
@@ -317,12 +321,10 @@ export const resendConfirmation = (): void => {
 export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*> => {
   dispatch(startSubmittingAccountForm());
   return Fetcher.put('/users/me', values)
-    .then(
-      (): void => {
-        dispatch(stopSubmittingAccountForm());
-        dispatch(userRequestEmailChange(values.email));
-      },
-    )
+    .then((): void => {
+      dispatch(stopSubmittingAccountForm());
+      dispatch(userRequestEmailChange(values.email));
+    })
     .catch(
       ({
         response: { message, errors },

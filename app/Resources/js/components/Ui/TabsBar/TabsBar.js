@@ -15,7 +15,7 @@ type Props = {|
    */
   overflowEnable?: boolean,
   /*
-  * Whether the TabsBar is vertical or horizontal, it should be `true` on mobil devices
+   * Whether the TabsBar is vertical or horizontal, it should be `true` on mobile devices
    */
   vertical?: boolean,
 |};
@@ -82,11 +82,11 @@ export class TabsBar extends React.Component<Props, State> {
     }
   }
 
-  setContainerRef = (element: Object) => {
+  setContainerRef = (element: React.Node) => {
     this.containerRef = element;
   };
 
-  setSeeMoreRef = (element: Object) => {
+  setSeeMoreRef = (element: React.Node) => {
     this.seeMoreRef = element;
   };
 
