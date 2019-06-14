@@ -391,16 +391,16 @@
         },
         {
             "name": "clue/stream-filter",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/clue/php-stream-filter.git",
-                "reference": "d80fdee9b3a7e0d16fc330a22f41f3ad0eeb09d0"
+                "reference": "5a58cc30a8bd6a4eb8f856adf61dd3e013f53f71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clue/php-stream-filter/zipball/d80fdee9b3a7e0d16fc330a22f41f3ad0eeb09d0",
-                "reference": "d80fdee9b3a7e0d16fc330a22f41f3ad0eeb09d0",
+                "url": "https://api.github.com/repos/clue/php-stream-filter/zipball/5a58cc30a8bd6a4eb8f856adf61dd3e013f53f71",
+                "reference": "5a58cc30a8bd6a4eb8f856adf61dd3e013f53f71",
                 "shasum": ""
             },
             "require": {
@@ -415,7 +415,7 @@
                     "Clue\\StreamFilter\\": "src/"
                 },
                 "files": [
-                    "src/functions.php"
+                    "src/functions_include.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -439,7 +439,7 @@
                 "stream_filter_append",
                 "stream_filter_register"
             ],
-            "time": "2017-08-18T09:54:01+00:00"
+            "time": "2019-04-09T12:31:48+00:00"
         },
         {
             "name": "cocur/slugify",
@@ -2550,24 +2550,24 @@
         },
         {
             "name": "friendsofsymfony/http-cache",
-            "version": "2.5.4",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSHttpCache.git",
-                "reference": "1d2d2bf98cedaa0762d1b3940370127581ad51e1"
+                "reference": "eb1a2c995bcbdb965ad7f0dc2ca5e93885b51ce4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCache/zipball/1d2d2bf98cedaa0762d1b3940370127581ad51e1",
-                "reference": "1d2d2bf98cedaa0762d1b3940370127581ad51e1",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCache/zipball/eb1a2c995bcbdb965ad7f0dc2ca5e93885b51ce4",
+                "reference": "eb1a2c995bcbdb965ad7f0dc2ca5e93885b51ce4",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.6 || ^7.0.0",
-                "php-http/client-common": "^1.1.0",
-                "php-http/client-implementation": "^1.0.0",
-                "php-http/discovery": "^1.0",
-                "php-http/message": "^1.0.0",
+                "php-http/client-common": "^1.1.0 || ^2.0",
+                "php-http/client-implementation": "^1.0 || ^2.0",
+                "php-http/discovery": "^1.0 || ^2.0",
+                "php-http/message": "^1.0 || ^2.0",
                 "symfony/event-dispatcher": "^3.4 || ^4.0",
                 "symfony/options-resolver": "^3.4 || ^4.0"
             },
@@ -2577,8 +2577,8 @@
             "require-dev": {
                 "mockery/mockery": "~0.9.5",
                 "monolog/monolog": "^1.0",
-                "php-http/guzzle6-adapter": "^1.0.0",
-                "php-http/mock-client": "^0.3.2",
+                "php-http/guzzle6-adapter": "^1.0 || ^2.0",
+                "php-http/mock-client": "^1.2",
                 "phpunit/phpunit": "^5.7 || ^6.0",
                 "symfony/http-kernel": "^3.4 || ^4.0",
                 "symfony/process": "^3.4 || ^4.0"
@@ -2590,7 +2590,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5.x-dev"
+                    "dev-master": "2.6.x-dev"
                 }
             },
             "autoload": {
@@ -2627,20 +2627,20 @@
                 "purge",
                 "varnish"
             ],
-            "time": "2018-10-31T14:11:39+00:00"
+            "time": "2019-05-14T12:36:21+00:00"
         },
         {
             "name": "friendsofsymfony/http-cache-bundle",
-            "version": "2.6.1",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle.git",
-                "reference": "1379ca39784755150546583bae01b5683dacb7c9"
+                "reference": "a4efda13d309678844296e61e929826d2147ef2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/1379ca39784755150546583bae01b5683dacb7c9",
-                "reference": "1379ca39784755150546583bae01b5683dacb7c9",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/a4efda13d309678844296e61e929826d2147ef2b",
+                "reference": "a4efda13d309678844296e61e929826d2147ef2b",
                 "shasum": ""
             },
             "require": {
@@ -2668,7 +2668,7 @@
                 "symfony/expression-language": "^3.4.4 || ^4.0",
                 "symfony/finder": "^3.4.4 || ^4.0",
                 "symfony/monolog-bundle": "^3.0",
-                "symfony/phpunit-bridge": "^3.4.4 || ^4.0",
+                "symfony/phpunit-bridge": "^4.2.4",
                 "symfony/routing": "^3.4.4 || ^4.0",
                 "symfony/security-bundle": "^3.4.4 || ^4.0",
                 "symfony/twig-bundle": "^3.4.4 || ^4.0",
@@ -2719,7 +2719,7 @@
                 "purge",
                 "varnish"
             ],
-            "time": "2018-12-14T22:32:21+00:00"
+            "time": "2019-06-12T12:05:41+00:00"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
