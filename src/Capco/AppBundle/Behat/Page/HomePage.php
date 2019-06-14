@@ -13,7 +13,7 @@ class HomePage extends Page
         'Login button' => '.btn.btn--connection',
         'Registration button' => '.btn.btn--registration',
         'Logged user dropdown' => '#navbar-username',
-        'Logout button' => '.nav #logout-button',
+        'Logout button' => '#logout-button'
     ];
 
     /**
@@ -32,7 +32,7 @@ class HomePage extends Page
         sleep(1);
     }
 
-    public function clickLogout()
+    public function clickLogout(): void
     {
         $this->openUserDropdown();
         $this->getElement('Logout button')->click();

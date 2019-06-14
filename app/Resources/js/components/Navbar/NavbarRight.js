@@ -93,7 +93,7 @@ export class NavbarRight extends React.Component<Props> {
               <FormattedMessage id="navbar.user_settings" />
             </TabsLink>
             <TabsDivider aria-hidden="true" />
-            <TabsLink eventKey={3.6} id="logout-button" onClick={this.logout}>
+            <TabsLink type='button' eventKey={3.6} id="logout-button" onClick={this.logout}>
               <i className="cap cap-power-1 mr-10" aria-hidden="true" />
               <FormattedMessage id="global.logout" />
             </TabsLink>

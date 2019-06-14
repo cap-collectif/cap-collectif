@@ -21,7 +21,7 @@ class UserContext extends DefaultContext
         $home->clickLogout();
 
         // Called only once, so it's ok
-        sleep(2);
+        sleep(5);
     }
 
     /**
@@ -50,9 +50,11 @@ class UserContext extends DefaultContext
         foreach ($user->getResponses() as $response) {
             if ($response->getQuestion()->getId() === $questionId) {
                 expect($response->getValue())->toBe($value);
+
                 return;
             }
         }
+
         throw new \Exception('userHasResponseToQuestion failed.');
     }
 
@@ -184,6 +186,7 @@ class UserContext extends DefaultContext
      */
     public function iCanSeeIamLoggedInAs(string $username)
     {
+        $this->waitAndThrowOnFailure(3000, "$('#navbar-username').length > 0");
         $this->assertElementContainsText('#navbar-username', $username);
     }
 
@@ -193,7 +196,9 @@ class UserContext extends DefaultContext
     public function iCanAccessAdminInNavbar()
     {
         $this->navigationContext->getPage('HomePage')->openUserDropdown();
-        $this->assertElementContainsText('.open.dropdown > ul', 'navbar.admin');
+        $selector = '#main-navbar nav div div ul li';
+        $this->waitAndThrowOnFailure(3000, "$('".$selector."').length > 0");
+        $this->assertElementContainsText($selector, 'navbar.admin');
     }
 
     /**
@@ -324,7 +329,7 @@ class UserContext extends DefaultContext
             'name' => $serverSession->getName(),
             'value' => $serverSession->getId(),
             'path' => '/',
-            'secure' => true,
+            'secure' => true
         ];
 
         try {

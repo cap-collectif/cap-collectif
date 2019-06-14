@@ -29,7 +29,9 @@ exports[`<NavbarRight /> should render correctly 1`] = `
           size={34}
           user={Object {}}
         />
-        <span />
+        <span
+          className="ml-5"
+        />
       </span>
     }
     vertical={false}

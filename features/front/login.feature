@@ -9,11 +9,13 @@ Scenario: A drupal user wants to login and see he has successfully logged in.
   Given I am logged in as drupal
   Then I can see I am logged in as "drupal"
 
+@dev
 Scenario: An admin wants to login and see he has successfully logged in.
   Given I am logged in as admin
   Then I can see I am logged in as "admin"
   And I can access admin in navbar
 
+@dev
 Scenario: A logged user wants to logout
   Given I am logged in as user
   When I logout
