@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { Row, Col } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Col, Row } from 'react-bootstrap';
