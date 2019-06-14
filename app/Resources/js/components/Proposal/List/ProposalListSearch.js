@@ -22,7 +22,7 @@ export class ProposalListSearch extends React.Component<Props, State> {
     terms: this.props.terms,
   };
 
-  _input: ?React.Component<*> | mixed;
+  _input: ?React.Component<*>;
 
   handleSubmit = (e: Event) => {
     const { dispatch } = this.props;

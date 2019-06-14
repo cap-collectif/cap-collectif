@@ -6,8 +6,6 @@ import ReactOnRails from 'react-on-rails';
 import { addLocaleData } from 'react-intl';
 import 'moment/locale/fr';
 import frLocaleData from 'react-intl/locale-data/fr';
-import 'moment/locale/nl';
-import nlLocaleData from 'react-intl/locale-data/nl';
 import 'moment/locale/en-gb';
 import enLocaleData from 'react-intl/locale-data/en';
 import 'moment/locale/es';
@@ -108,9 +106,6 @@ if (locale) {
       break;
     case 'de-DE':
       localeData = deLocaleData;
-      break;
-    case 'nl-NL':
-      localeData = nlLocaleData;
       break;
     default:
       break;

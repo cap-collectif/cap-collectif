@@ -4,34 +4,34 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
     title: Questionnaire des JO 2024
     label: Questionnaire
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
-    startAt: <dateTimeBetween('-40 days', 'now')>
-    endAt: <dateTimeBetween('+3 days', '+10 days')>
+    startAt: <(new \DateTime('2014-09-27'))>
+    endAt: <(new \DateTime('2024-09-27'))>
     verification: 'sms'
   questionnairestep2:
     id: questionnairestep2
     title: Questionnaire
     label: Questionnaire
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
-    startAt: <dateTimeBetween('-40 days', 'now')>
-    endAt: <dateTimeBetween('+3 days', '+10 days')>
+    startAt: <(new \DateTime('2014-09-27'))>
+    endAt: <(new \DateTime('2024-09-27'))>
   questionnairestepJump:
     id: questionnairestepJump
     title: Etape de questionnaire avec questionnaire sauts conditionnels
     label: Questionnaire conditionnel
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
-    startAt: <dateTimeBetween('-40 days', 'now')>
-    endAt: <dateTimeBetween('+3 days', '+10 days')>
+    startAt: <(new \DateTime('2014-09-27'))>
+    endAt: <(new \DateTime('2024-09-27'))>
   questionnairestepJump2:
     id: questionnairestepJump2
     title: Essais de sauts conditionnels
     label: Questionnaire conditionnel
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
-    startAt: <dateTimeBetween('-40 days', 'now')>
-    endAt: <dateTimeBetween('+3 days', '+10 days')>
+    startAt: <(new \DateTime('2014-09-27'))>
+    endAt: <(new \DateTime('2024-09-27'))>
   questionnairestep3:
     id: questionnairestep3
     title: Etape de questionnaire fermée
     label: Questionnaire
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
-    startAt: <dateTimeBetween('-40 days', '-30 days')>
-    endAt: <dateTimeBetween('-30 days', '-10 days')>
+    startAt: <(new \DateTime('2014-09-27'))>
+    endAt: <(new \DateTime('2024-09-27'))>

@@ -73,7 +73,7 @@ class Other extends React.Component<Props, State> {
     });
   };
 
-  textField: ?React.Component<*> | mixed;
+  textField: ?React.Component<*>;
 
   clear = () => {
     this.setState({

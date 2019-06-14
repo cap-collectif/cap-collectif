@@ -6,9 +6,11 @@ Capco\AppBundle\Entity\Questionnaire:
     step: '@questionnairestep1'
     multipleRepliesAllowed: true
     anonymousAllowed: true
-    acknowledgeReplies: true
+    acknowledgeReplies: 1
     type: 'QUESTIONNAIRE'
     privateResult: false
+    notifyResponseCreate: 1
+    notifyResponseUpdate: 1
   questionnaire2:
     id: questionnaire2
     title: Questionnaire de test
