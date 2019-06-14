@@ -45,6 +45,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
     }
     name="opinionTerm"
     normalize={[Function]}
+    parse={[Function]}
     type="select"
   >
     <option
@@ -129,6 +130,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
     }
     name="opinionTerm"
     normalize={[Function]}
+    parse={[Function]}
     type="select"
   >
     <option

@@ -37,7 +37,7 @@ type FormValues = {|
   projectType: string,
 |};
 
-const projectTerms = [
+const opinionTerms = [
   {
     id: 0,
     label: 'project.opinion_term.opinion',
@@ -47,6 +47,8 @@ const projectTerms = [
     label: 'project.opinion_term.article',
   },
 ];
+
+const convertOpinionTerm = (opinionTerm: string): number => parseInt(opinionTerm, 10);
 
 const formatAuthors = (authors: Author[]): string[] => authors.map(author => author.value);
 
@@ -104,7 +106,6 @@ const validate = ({ title, authors, projectType }: FormValues) => {
 
   return errors;
 };
-const normalize = (opinionTerm: string): number => parseInt(opinionTerm, 10);
 
 const formName = 'projectAdminForm';
 
@@ -148,13 +149,14 @@ export const ProjectContentAdminForm = (props: Props) => {
         name="opinionTerm"
         type="select"
         component={renderComponent}
-        normalize={normalize}
+        parse={convertOpinionTerm}
+        normalize={convertOpinionTerm}
         label={
           <span>
             <FormattedMessage id="admin.fields.project.opinion_term" />
           </span>
         }>
-        {projectTerms.map(projectTerm => (
+        {opinionTerms.map(projectTerm => (
           <option key={projectTerm.id} value={projectTerm.id}>
             {intl.formatMessage({ id: projectTerm.label })}
           </option>
@@ -184,7 +186,7 @@ export const ProjectContentAdminForm = (props: Props) => {
 
 const mapStateToProps = (state, { project }: Props) => ({
   initialValues: {
-    opinionTerm: project ? project.opinionTerm : parseInt(projectTerms[0].id, 10),
+    opinionTerm: project ? project.opinionTerm : opinionTerms[0].id,
     authors: project ? project.authors : [],
     title: project ? project.title : null,
     projectType: project && project.type ? project.type.id : null,
