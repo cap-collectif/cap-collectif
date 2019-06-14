@@ -140,7 +140,6 @@ sonata_intl:
       fr-FR: Europe/Paris
       en-GB: Europe/London
       de-DE: Europe/Berlin
-      nl-NL: Europe/Berlin
 
 sonata_media:
   class:

@@ -18,7 +18,7 @@ class QuestionnaireReplyProcessor implements ProcessorInterface
         $this->notifier = $notifier;
     }
 
-    public function process(Message $message, array $options): bool
+    public function process(Message $message, array $options): ?bool
     {
         $json = json_decode($message->getBody(), true);
         $state = $json['state'];
@@ -27,6 +27,7 @@ class QuestionnaireReplyProcessor implements ProcessorInterface
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE:
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE:
                 $replyId = $json['replyId'];
+
                 $reply = $this->repository->find($replyId);
                 if (!$reply) {
                     throw new \RuntimeException('Unable to find reply with id : ' . $replyId);

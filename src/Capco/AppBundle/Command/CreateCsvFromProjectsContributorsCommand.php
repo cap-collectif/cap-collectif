@@ -69,7 +69,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         'zipCode',
         'city',
         'phone',
-        'profileUrl'
+        'profileUrl',
     ];
     /**
      * @var WriterInterface
@@ -118,17 +118,17 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         }
 
         $projects = $this->projectRepository->findAllIdsWithSlugs();
-        foreach ($projects as $data) {
-            $id = GlobalId::toGlobalId('Project', $data['id']);
+        foreach ($projects as $p) {
+            $id = GlobalId::toGlobalId('Project', $p['id']);
 
             $project = $this->executor
                 ->execute('internal', [
                     'query' => $this->getContributorsProjectGraphQLQuery($id),
-                    'variables' => []
+                    'variables' => [],
                 ])
                 ->toArray();
 
-            $fileName = 'participants_' . $data['slug'] . '.csv';
+            $fileName = 'participants_' . $p['slug'] . '.csv';
             $this->writer = WriterFactory::create(Type::CSV);
             $this->writer->openToFile(
                 sprintf('%s/web/export/%s', $this->projectRootDir, $fileName)
@@ -172,14 +172,17 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                             $contributor['zipCode'],
                             $contributor['city'],
                             $contributor['phone'],
-                            $contributor['url']
+                            $contributor['url'],
                         ]
                     );
                     $this->writer->addRow($row);
                     $progress->advance();
                 },
-                function ($pageInfo) use ($id) {
-                    return $this->getContributorsProjectGraphQLQuery($id, $pageInfo['endCursor']);
+                function ($pageInfo) use ($p) {
+                    return $this->getContributorsProjectGraphQLQuery(
+                        $p['id'],
+                        $pageInfo['endCursor']
+                    );
                 }
             );
             $this->writer->close();
