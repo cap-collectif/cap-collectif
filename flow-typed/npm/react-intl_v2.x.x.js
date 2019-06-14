@@ -266,9 +266,7 @@ declare module 'react-intl/locale-data/en' {
 declare module 'react-intl/locale-data/fr' {
   declare module.exports: Array<{ [key: string]: any }>
 }
-declare module 'react-intl/locale-data/nl' {
-  declare module.exports: Array<{ [key: string]: any }>
-}
+
 declare module 'react-intl/locale-data/es' {
   declare module.exports: Array<{ [key: string]: any }>
 }
