@@ -59,7 +59,7 @@ export class ImageUpload extends React.Component<Props> {
     }
   };
 
-  _deleteCheckbox: ?React.Component<*>;
+  _deleteCheckbox: ?React.Component<*> | mixed;
 
   uncheckDelete = () => {
     // $FlowFixMe
