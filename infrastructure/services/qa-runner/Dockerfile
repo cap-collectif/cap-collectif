@@ -10,7 +10,6 @@ COPY capco.ini /usr/local/etc/php/conf.d/capco.ini
 RUN mkdir -m 777 -p /home/capco
 RUN groupadd --gid=1000 capco && \
     /usr/sbin/useradd --system --uid=1000 --home /home/capco --shell /bin/bash -g capco capco
-RUN chown -R capco /usr/local /usr/bin /usr/lib
 
 # Add composer global binaries to $PATH
 ENV PATH $PATH:/home/capco/.composer/vendor/bin/
