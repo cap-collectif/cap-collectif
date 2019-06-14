@@ -12,6 +12,7 @@ import component from '../components/Form/Field';
 import PrivateBox from '../components/Ui/Boxes/PrivateBox';
 import ConditionalJumps from './ConditionalJumps';
 import WYSIWYGRender from '../components/Form/WYSIWYGRender';
+import invariant from './invariant';
 import type {
   MultipleChoiceQuestionValidationRulesTypes,
   QuestionChoiceColor,
@@ -519,8 +520,7 @@ export const getValueFromResponse = (questionType: string, responseValue: string
       return JSON.parse(responseValue).labels;
     }
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error(`Failed to parse : ${responseValue}`);
+    invariant(false, `Failed to parse: ${responseValue}`);
   }
 
   return responseValue;
