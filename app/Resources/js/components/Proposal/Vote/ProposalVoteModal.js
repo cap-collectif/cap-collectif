@@ -17,7 +17,6 @@ import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesM
 import type { ProposalVoteModal_proposal } from '~relay/ProposalVoteModal_proposal.graphql';
 import type { ProposalVoteModal_step } from '~relay/ProposalVoteModal_step.graphql';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
-import invariant from '../../../utils/invariant';
 
 type ParentProps = {
   proposal: ProposalVoteModal_proposal,
@@ -66,7 +65,8 @@ export class ProposalVoteModal extends React.Component<Props, State> {
         typeof data.addProposalVote.voteEdge === 'undefined' ||
         data.addProposalVote.voteEdge === null
       ) {
-        invariant(false, 'The vote id is missing.');
+        console.error(data); // eslint-disable-line no-console
+        return;
       }
       tmpVote.id = data.addProposalVote.voteEdge.node.id;
 
@@ -266,7 +266,8 @@ const container = connect(mapStateToProps)(ProposalVoteModal);
 
 export default createFragmentContainer(container, {
   proposal: graphql`
-    fragment ProposalVoteModal_proposal on Proposal @argumentDefinitions(stepId: { type: "ID!" }) {
+    fragment ProposalVoteModal_proposal on Proposal
+      @argumentDefinitions(stepId: { type: "ID!" }) {
       id
       viewerHasVote(step: $stepId)
     }
