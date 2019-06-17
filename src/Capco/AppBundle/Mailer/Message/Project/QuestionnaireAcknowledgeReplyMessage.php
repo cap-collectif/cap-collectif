@@ -2,78 +2,68 @@
 
 namespace Capco\AppBundle\Mailer\Message\Project;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Mailer\Message\DefaultMessage;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Mailer\Message\ExternalMessage;
 
-final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
+final class QuestionnaireAcknowledgeReplyMessage extends ExternalMessage
 {
     public static function create(
-        string $recipientEmail,
+        Project $project,
         Reply $reply,
-        string $projectTitle,
-        \DateTimeInterface $replyUpdatedAt,
-        string $siteName,
-        string $state,
-        string $userUrl,
-        string $configUrl,
-        string $baseUrl,
+        ?\DateTime $endAt,
         string $stepUrl,
-        string $questionnaireTitle
+        bool $isUpdated,
+        AbstractStep $step,
+        bool $isUserConfirmed,
+        string $confirmationUrl,
+        string $recipentEmail,
+        string $recipientName = null
     ): self {
         return new self(
-            $recipientEmail,
-            null,
-            "reply.notify.user.${state}",
-            static::getMySubjectVars($questionnaireTitle),
+            $recipentEmail,
+            $recipientName,
+            'reply.acknowledgement.subject',
+            static::getMySubjectVars(),
             '@CapcoMail/acknowledgeReply.html.twig',
             static::getMyTemplateVars(
-                $projectTitle,
-                $replyUpdatedAt,
-                $siteName,
+                $project,
                 $reply,
-                $state,
-                $userUrl,
-                $configUrl,
-                $baseUrl,
-                $stepUrl
+                $endAt,
+                $stepUrl,
+                $step,
+                $isUpdated,
+                $isUserConfirmed,
+                $confirmationUrl
             )
         );
     }
 
     private static function getMyTemplateVars(
-        string $title,
-        \DateTimeInterface $updatedAt,
-        string $siteName,
+        Project $project,
         Reply $reply,
-        string $state,
-        string $userUrl,
-        string $configUrl,
-        string $baseUrl,
-        string $stepUrl
+        ?\DateTime $endAt,
+        string $stepUrl,
+        AbstractStep $step,
+        bool $isUpdated,
+        bool $isUserConfirmed,
+        string $confirmationUrl
     ): array {
         return [
-            'projectTitle' => self::escape($title),
-            'replyUpdatedAt' => $updatedAt,
-            'siteName' => self::escape($siteName),
-            'date' => $reply->getCreatedAt(),
-            'authorName' => $reply->getAuthor()->getUsername(),
-            'questionnaireTitle' => $reply->getQuestionnaire()->getTitle(),
-            'questionnaireEndDate' => $reply
-                ->getQuestionnaire()
-                ->getStep()
-                ->getEndAt(),
-            'state' => $state,
-            'userUrl' => $userUrl,
-            'configUrl' => $configUrl,
-            'baseUrl' => $baseUrl,
+            'project' => $project,
+            'reply' => $reply,
+            'endAt' => $endAt,
             'stepUrl' => $stepUrl,
+            'step' => $step,
+            'isUpdated' => $isUpdated,
+            'isUserConfirmed' => $isUserConfirmed,
+            'confirmationUrl' => $confirmationUrl,
         ];
     }
 
-    private static function getMySubjectVars(string $questionnaireTitle): array
+    private static function getMySubjectVars(): array
     {
-        return [
-            '{questionnaireTitle}' => $questionnaireTitle,
-        ];
+        return [];
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eea97f0a133340b356c1f3218bf30526",
+    "content-hash": "48ddf814c3d75941997a3c0acd6f130c",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -5085,20 +5085,21 @@
         },
         {
             "name": "limenius/react-bundle",
-            "version": "v3.0.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Limenius/ReactBundle.git",
-                "reference": "a263459147832511fbf810840b86b7e9727f07e2"
+                "reference": "afa0bdd39dbfcdc12518013bbbf7b7b4326afbfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Limenius/ReactBundle/zipball/a263459147832511fbf810840b86b7e9727f07e2",
-                "reference": "a263459147832511fbf810840b86b7e9727f07e2",
+                "url": "https://api.github.com/repos/Limenius/ReactBundle/zipball/afa0bdd39dbfcdc12518013bbbf7b7b4326afbfc",
+                "reference": "afa0bdd39dbfcdc12518013bbbf7b7b4326afbfc",
                 "shasum": ""
             },
             "require": {
-                "limenius/react-renderer": "^3.0.0",
+                "limenius/react-renderer": "^0.14.0",
+                "nacmartin/phpexecjs": "^0.8",
                 "php": ">=5.5.0",
                 "symfony/config": "^2.7.0|^3.0.6|^4.0",
                 "symfony/dependency-injection": "^2.7.0|^3.0.6|^4.0",
@@ -5130,24 +5131,24 @@
                 "isomorphic",
                 "react"
             ],
-            "time": "2018-12-06T16:45:26+00:00"
+            "time": "2017-11-22T11:08:06+00:00"
         },
         {
             "name": "limenius/react-renderer",
-            "version": "v3.0.0",
+            "version": "v0.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Limenius/ReactRenderer.git",
-                "reference": "3387be293f19a6e3ca1ac88f12bffa41a101bac0"
+                "reference": "a6a16654d7c44947abc128da69b1f69fbc6586ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Limenius/ReactRenderer/zipball/3387be293f19a6e3ca1ac88f12bffa41a101bac0",
-                "reference": "3387be293f19a6e3ca1ac88f12bffa41a101bac0",
+                "url": "https://api.github.com/repos/Limenius/ReactRenderer/zipball/a6a16654d7c44947abc128da69b1f69fbc6586ae",
+                "reference": "a6a16654d7c44947abc128da69b1f69fbc6586ae",
                 "shasum": ""
             },
             "require": {
-                "nacmartin/phpexecjs": "^2.0",
+                "nacmartin/phpexecjs": "^0.8",
                 "php": ">=5.5.0",
                 "twig/twig": "^1.20|^2.0"
             },
@@ -5179,7 +5180,7 @@
                 "reactjs",
                 "twig"
             ],
-            "time": "2018-12-06T16:30:50+00:00"
+            "time": "2017-11-06T16:49:25+00:00"
         },
         {
             "name": "liuggio/excelbundle",
@@ -5603,16 +5604,16 @@
         },
         {
             "name": "nacmartin/phpexecjs",
-            "version": "v2.0.0",
+            "version": "v0.8.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nacmartin/phpexecjs.git",
-                "reference": "abb8566e4e5d079e30312e72b33bcf01e09990d9"
+                "reference": "dc42f9dd48235a042ae8de758c73e79fe658f875"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nacmartin/phpexecjs/zipball/abb8566e4e5d079e30312e72b33bcf01e09990d9",
-                "reference": "abb8566e4e5d079e30312e72b33bcf01e09990d9",
+                "url": "https://api.github.com/repos/nacmartin/phpexecjs/zipball/dc42f9dd48235a042ae8de758c73e79fe658f875",
+                "reference": "dc42f9dd48235a042ae8de758c73e79fe658f875",
                 "shasum": ""
             },
             "require": {
@@ -5635,7 +5636,7 @@
                 }
             ],
             "description": "Run JavaScript code from PHP",
-            "time": "2017-11-22T20:17:42+00:00"
+            "time": "2017-11-22T11:12:15+00:00"
         },
         {
             "name": "nelmio/alice",
@@ -9739,16 +9740,16 @@
         },
         {
             "name": "sonata-project/core-bundle",
-            "version": "3.17.0",
+            "version": "3.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "af8ba4f76eef8c855302af8b26713cf33be4103d"
+                "reference": "d0f376d0551358609df523d2e63010c5b42c5887"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/af8ba4f76eef8c855302af8b26713cf33be4103d",
-                "reference": "af8ba4f76eef8c855302af8b26713cf33be4103d",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/d0f376d0551358609df523d2e63010c5b42c5887",
+                "reference": "d0f376d0551358609df523d2e63010c5b42c5887",
                 "shasum": ""
             },
             "require": {
@@ -9819,7 +9820,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2019-04-24T18:55:18+00:00"
+            "time": "2019-03-12T07:07:16+00:00"
         },
         {
             "name": "sonata-project/datagrid-bundle",

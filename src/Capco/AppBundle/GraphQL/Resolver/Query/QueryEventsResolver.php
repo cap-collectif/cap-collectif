@@ -4,6 +4,8 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Search\EventSearch;
+use GraphQL\Type\Definition\ResolveInfo;
+use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
@@ -18,16 +20,22 @@ class QueryEventsResolver implements ResolverInterface
     public const FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR = 100;
     private $eventSearch;
     private $logger;
+    private $queryAnalyzer;
 
-    public function __construct(EventSearch $eventSearch, LoggerInterface $logger)
-    {
+    public function __construct(
+        EventSearch $eventSearch,
+        LoggerInterface $logger,
+        QueryAnalyzer $queryAnalyzer
+    ) {
         $this->eventSearch = $eventSearch;
         $this->logger = $logger;
+        $this->queryAnalyzer = $queryAnalyzer;
     }
 
-    public function __invoke(Argument $args): Connection
+    public function __invoke(Argument $args, ResolveInfo $resolveInfo): Connection
     {
         $this->protectArguments($args);
+        $this->queryAnalyzer->analyseQuery($resolveInfo);
 
         $totalCount = 0;
         $search = null;
