@@ -1,8 +1,8 @@
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule:
   validationRule1:
-    __construct: { create: [equal, 3] }
+    __factory: { create: ['equal', 3] }
   validationRule2:
-    __construct: { create: [min, 2] }
+    __factory: { create: ['min', 2] }
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestion1:
     id: 13
