@@ -44,12 +44,14 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->contributionProjectResolver = $contributionProjectResolver;
         $this->contributionStepResolver = $contributionStepResolver;
         $this->projectRepository = $projectRepository;
-
-        $this->_capcoProfileEdit = $this->router->generate('capco_profile_edit', [], true);
     }
 
     public function normalize($object, $format = null, array $context = [])
     {
+        if (!$this->_capcoProfileEdit) {
+            $this->_capcoProfileEdit = $this->router->generate('capco_profile_edit', [], true);
+        }
+
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
 
