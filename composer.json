@@ -108,7 +108,7 @@
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "doctrine/orm": "^2.5",
         "sonata-project/easy-extends-bundle": "2.5.0",
-        "sonata-project/core-bundle": "3.17.*",
+        "sonata-project/core-bundle": "3.16.*",
         "sonata-project/admin-bundle": "^3.1.0",
         "sonata-project/doctrine-orm-admin-bundle": "^3.0",
         "sonata-project/block-bundle": "~3.12",

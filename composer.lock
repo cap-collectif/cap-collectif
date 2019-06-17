@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a07a0bd3d8319c5fca6228dd7c185eb",
+    "content-hash": "48ddf814c3d75941997a3c0acd6f130c",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -9740,16 +9740,16 @@
         },
         {
             "name": "sonata-project/core-bundle",
-            "version": "3.17.0",
+            "version": "3.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "af8ba4f76eef8c855302af8b26713cf33be4103d"
+                "reference": "d0f376d0551358609df523d2e63010c5b42c5887"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/af8ba4f76eef8c855302af8b26713cf33be4103d",
-                "reference": "af8ba4f76eef8c855302af8b26713cf33be4103d",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/d0f376d0551358609df523d2e63010c5b42c5887",
+                "reference": "d0f376d0551358609df523d2e63010c5b42c5887",
                 "shasum": ""
             },
             "require": {
@@ -9820,7 +9820,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2019-04-24T18:55:18+00:00"
+            "time": "2019-03-12T07:07:16+00:00"
         },
         {
             "name": "sonata-project/datagrid-bundle",
