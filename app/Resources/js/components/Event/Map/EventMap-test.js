@@ -42,3 +42,4 @@ describe('<EventMap />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });
+

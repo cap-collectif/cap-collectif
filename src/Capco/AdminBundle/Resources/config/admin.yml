@@ -453,7 +453,11 @@ services:
         }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
-      - [setTemplate, [list, CapcoAdminBundle:Event:list.html.twig]]
+      - [
+          setTemplate,
+          [list, CapcoAdminBundle:Event:list.html.twig],
+          [create, CapcoAdminBundle:Event:create.html.twig],
+        ]
 
   Capco\AdminBundle\Admin\VideoAdmin:
     arguments: [~, Capco\AppBundle\Entity\Video, CapcoAdminBundle:CRUD]

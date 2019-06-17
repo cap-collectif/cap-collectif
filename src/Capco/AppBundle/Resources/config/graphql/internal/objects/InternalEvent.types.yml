@@ -29,17 +29,30 @@ InternalEvent:
       commentable:
         type: 'Boolean!'
         resolve: '@=value.isCommentable()'
+      link:
+        type: 'URI'
       media:
         type: 'InternalMedia'
       address:
         type: 'String'
-      city:
+      addressJson:
         type: 'String'
-      country:
+      url:
+        type: 'URI!'
+        description: 'The url of the event'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventUrlResolver", [value])'
+      slug:
         type: 'String'
+        description: 'The slug of event'
       guestListEnabled:
         type: 'Boolean!'
-      metaDescription:
-        type: 'String'
       customCode:
         type: 'String'
+      metaDescription:
+        type: 'String'
+      fullAddress:
+        type: 'String'
+      lat:
+        type: 'Float'
+      lng:
+        type: 'Float'

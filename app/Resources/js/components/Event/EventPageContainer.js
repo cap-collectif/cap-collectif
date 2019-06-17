@@ -96,6 +96,7 @@ export default createFragmentContainer(form, {
         author: { type: "ID" }
         isRegistrable: { type: "Boolean" }
         orderBy: { type: "EventOrder" }
+        withEventOnly: { type: "Boolean" }
       ) {
       ...EventRefetch_query
         @arguments(
@@ -122,6 +123,7 @@ export default createFragmentContainer(form, {
           author: $author
           isRegistrable: $isRegistrable
           orderBy: $orderBy
+          withEventOnly: $withEventOnly
         )
       ...EventListCounter_query
         @arguments(

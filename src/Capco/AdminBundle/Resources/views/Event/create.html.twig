@@ -1,0 +1,19 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block sonata_breadcrumb %}
+{% endblock %}
+{% block form %}
+    {% include '@CapcoApp/redux_store.html.twig' with {
+        'data' : {
+        }
+    } %}
+    {{ react_render_component('EventAdminCreatePageApp', {
+        'props': {
+        },
+        'rendering': 'client_side'
+    }) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

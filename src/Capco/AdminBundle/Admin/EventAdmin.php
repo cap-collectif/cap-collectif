@@ -59,7 +59,16 @@ class EventAdmin extends AbstractAdmin
         $this->indexer->finishBulk();
         parent::preUpdate($object);
     }
-
+    public function getTemplate($name)
+    {
+        if ('create' === $name) {
+            return 'CapcoAdminBundle:Event:create.html.twig';
+        }
+        if ('edit' === $name) {
+            return 'CapcoAdminBundle:Event:edit.html.twig';
+        }
+        return $this->getTemplateRegistry()->getTemplate($name);
+    }
     // For mosaic view
     public function getObjectMetadata($object)
     {
@@ -131,6 +140,8 @@ class EventAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
+        unset($this->listModes['mosaic']);
+
         $listMapper
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.event.title'
@@ -417,6 +428,6 @@ class EventAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete', 'show']);
+        $collection->clearExcept(['batch', 'list', 'create', 'delete', 'show', 'edit']);
     }
 }

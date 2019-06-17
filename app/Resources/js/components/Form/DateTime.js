@@ -13,6 +13,8 @@ class DateTime extends React.Component<Props> {
     return (
       <BaseDateTime
         {...this.props}
+        dateFormat='YYYY-MM-DD'
+        timeFormat='HH:mm:ss'
         onChange={value => {
           if (value._isAMomentObject) {
             onChange(value.format('YYYY-MM-DD HH:mm:ss'));

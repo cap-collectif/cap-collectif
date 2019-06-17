@@ -16,7 +16,10 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Resolver\UrlResolver;
+use Capco\AppBundle\Search\EventSearch;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use JMS\Serializer\SerializationContext;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -65,17 +68,32 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
         $projectSlug = $project->getSlug();
+        $events = $this->get(EventResolver::class)->getLastByProject($projectSlug, 2);
         $posts = $this->get(PostRepository::class)->getLastPublishedByProject($projectSlug, 2);
+        $nbEvents = $this->get(EventResolver::class)->countEvents(null, null, $projectSlug, null);
         $nbPosts = $this->get(PostRepository::class)->countSearchResults(null, $projectSlug);
 
         $showVotes = $this->get(ProjectHelper::class)->hasStepWithVotes($project);
+        $nbEvents = $this->get(EventSearch::class)->searchEvents(0, 100, 'asc', null, [
+            'isFuture' => null,
+            'projects' => $project->getId()
+        ]);
+        $projectEventUrl = $this->get(UrlResolver::class)->getProjectEventUrl($project, true);
+        $props = $this->get('serializer')->serialize(
+            ['nbEvent' => 2, 'className' => 'pl-0', 'getAll' => true, 'url' => $projectEventUrl],
+            'json',
+            SerializationContext::create()
+        );
 
         return [
             'project' => $project,
             'currentStep' => $step,
+            'events' => $events,
             'posts' => $posts,
+            'props' => $props,
+            'nbEvents' => $nbEvents,
             'nbPosts' => $nbPosts,
-            'showVotes' => $showVotes
+            'showVotes' => $showVotes,
         ];
     }
 
