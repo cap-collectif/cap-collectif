@@ -4,7 +4,6 @@ PreviewEvent:
     - Node
     - UniformResourceLocatable
     - Timestampable
-    - PreviewTimeRangeable
   config:
     interfaces:
       - Node
@@ -24,13 +23,11 @@ PreviewEvent:
         type: 'String!'
         description: 'Identifies the title of the event.'
       startAt:
-        type: 'DateTime!'
-        description: 'The start date of the event.'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01", reason: "This field has been replaced by timeRange", description: "Field `startAt` will be removed.", supersededBy: "Use `timeRange` instead."})'
+        type: 'DateTime'
+        description: 'Identifies the start of the event.'
       endAt:
         type: 'DateTime'
-        description: 'The end date of the event.'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01", reason: "This field has been replaced by timeRange", description: "Field `endAt` will be removed.", supersededBy: "Use `timeRange` instead."})'
+        description: 'Identifies the end of the event.'
       body:
         type: 'HTML!'
         description: 'Identifies the body of the event.'
