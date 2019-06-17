@@ -24,6 +24,7 @@ e2e:
     Bex\Behat\StepTimeLoggerExtension:
       output: [console, csv]
   suites:
+    # If you add an other suite, please update isSuiteWithJS method.
     core:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -32,7 +33,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@core&&~@event_registration'
+        tags: '@core&&~@event_registration&&~@randomly-failing'
     consultation:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -41,7 +42,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@consultation&&~@synthesis'
+        tags: '@consultation&&~@synthesis&&~@randomly-failing'
     bp:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -50,7 +51,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@bp'
+        tags: '@bp&&~@randomly-failing'
     questionnaire:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -59,7 +60,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@questionnaire'
+        tags: '@questionnaire&&~@randomly-failing'
     bo:
       paths: ['%paths.base%/features/back']
       contexts:
