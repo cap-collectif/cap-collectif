@@ -182,7 +182,6 @@ export class OpinionList extends React.Component<Props, State> {
 
                   return (
                     <React.Fragment>
-                      <div className="opinion-list-rendered">
                       {/* $FlowFixMe $refType */}
                       <OpinionListPaginated
                         enablePagination={enablePagination}
@@ -198,7 +197,6 @@ export class OpinionList extends React.Component<Props, State> {
                           </Button>
                         </ListGroupItem>
                       ) : null}
-                      </div>
                     </React.Fragment>
                   );
                 }

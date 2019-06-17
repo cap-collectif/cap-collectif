@@ -21,7 +21,7 @@ Scenario: An anonymous can paginate opinions inside a section
     | projectSlug | projet-de-loi-renseignement |
     | stepSlug    | elaboration-de-la-loi       |
     | sectionSlug | chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1       |
-  Then I should see 12 ".list-group-item__opinion" element
+  Then I should see 5 ".list-group-item__opinion" element
   When I click the "#OpinionListPaginated-loadmore" element
   And I wait 2 seconds
   Then I should see 8 ".list-group-item__opinion" element
@@ -91,6 +91,16 @@ Scenario: Non author of an opinion wants to update it
     | opinionTypeSlug  | enjeux                           |
     | opinionSlug      | opinion-3                        |
   Then I should not see "global.edit" in the ".opinion__description .opinion__buttons" element
+
+Scenario: Anonymous wants to see opinion appendix
+  Given I go to an opinion with versions
+  Then I should see "Motifs 1"
+  And I press "Exposé des motifs"
+  And I wait 1 seconds
+  Then I should not see "Motifs 1"
+  And I press "Étude d'impact"
+  And I wait 1 seconds
+  Then I should see "Impacts 1"
 
 Scenario: Anonymous user wants to see all votes of an opinion
   Given I go to an opinion with loads of votes

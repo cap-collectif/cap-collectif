@@ -63,6 +63,9 @@ abstract class Message
         return $this->templateVars;
     }
 
+    /*var
+     * Inject translation variables to the subject of the email
+     */
     final public function getSubjectVars(): array
     {
         return $this->subjectVars;
