@@ -2275,36 +2275,6 @@ type InternalChangeSiteFaviconPayload {
   clientMutationId: String
 }
 
-# Oauth2 SSO Configuration.
-type InternalOauth2SSOConfiguration implements Node & InternalSSOConfiguration {
-  # The ID of an object.
-  id: ID!
-
-  # The name of configured SSO.
-  name: String!
-
-  # Does this configuration is enabled?
-  enabled: Boolean!
-
-  # Client ID.
-  clientId: String!
-
-  # Secret key.
-  secret: String!
-
-  # Authorization URL.
-  authorizationUrl: URI!
-
-  # Access token URL.
-  accessTokenUrl: URI!
-
-  # User info URL.
-  userInfoUrl: URI!
-
-  # Logout URL.
-  logoutUrl: URI
-}
-
 input InternalRemoveSiteFaviconInput {
   clientMutationId: String
 }
@@ -2313,18 +2283,6 @@ type InternalRemoveSiteFaviconPayload {
   # The newly updated site image favicon
   siteFavicon: SiteImage!
   clientMutationId: String
-}
-
-# A SSO Configuration
-interface InternalSSOConfiguration {
-  # The ID of an object
-  id: ID!
-
-  # The name of configured SSO.
-  name: String!
-
-  # Does this configuration is enabled?
-  enabled: Boolean!
 }
 
 # A connection to a list of items.
@@ -2341,7 +2299,7 @@ type InternalSSOConfigurationConnection {
 # An edge in a connection.
 type InternalSSOConfigurationEdge {
   # The item at the end of the edge.
-  node: InternalSSOConfiguration
+  node: SSOConfiguration
 
   # A cursor for use in pagination.
   cursor: String!
@@ -2861,6 +2819,36 @@ type NotificationsConfiguration {
   onCommentCreate: Boolean!
   onCommentUpdate: Boolean!
   onCommentDelete: Boolean!
+}
+
+# Oauth2 SSO Configuration.
+type Oauth2SSOConfiguration implements Node & SSOConfiguration {
+  # The ID of an object.
+  id: ID!
+
+  # The name of configured SSO.
+  name: String!
+
+  # Does this configuration is enabled?
+  enabled: Boolean!
+
+  # Client ID.
+  clientId: String!
+
+  # Secret key.
+  secret: String!
+
+  # Authorization URL.
+  authorizationUrl: URI!
+
+  # Access token URL.
+  accessTokenUrl: URI!
+
+  # User info URL.
+  userInfoUrl: URI!
+
+  # Logout URL.
+  logoutUrl: URI
 }
 
 # A contribution
@@ -5331,6 +5319,18 @@ input ResponseInput {
 
   # If related to a media question
   medias: [ID!]
+}
+
+# A SSO Configuration
+interface SSOConfiguration {
+  # The ID of an object
+  id: ID!
+
+  # The name of configured SSO.
+  name: String!
+
+  # Does this configuration is enabled?
+  enabled: Boolean!
 }
 
 # A section

@@ -3,6 +3,7 @@ InternalSSOConfiguration:
   inherits:
     - Node
   config:
+    name: SSOConfiguration
     description: 'A SSO Configuration'
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\TypeResolver", [value])'
     fields:

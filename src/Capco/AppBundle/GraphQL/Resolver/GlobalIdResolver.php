@@ -147,7 +147,7 @@ class GlobalIdResolver
                     $node = $this->container->get(ProjectRepository::class)->find($uuid);
 
                     break;
-                case 'InternalOauth2SSOConfiguration':
+                case 'Oauth2SSOConfiguration':
                     $node = $this->container
                         ->get(Oauth2SSOConfigurationRepository::class)
                         ->find($uuid);
