@@ -934,6 +934,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   # The title of the step.
   title: String!
+  timeRange: PreviewTimeRange
 
   # The kind of the step
   kind: String!
@@ -946,12 +947,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # Start date of the step.
-  startAt: DateTime
-
-  # End date of the step.
-  endAt: DateTime
 
   # The url of the step
   url: String!
@@ -1419,6 +1414,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
   ): RequirementConnection!
+  timeRange: PreviewTimeRange
 
   # The type of step. Returns "consultation".
   kind: String!
@@ -1431,12 +1427,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # Start date of the step.
-  startAt: DateTime
-
-  # End date of the step.
-  endAt: DateTime
 
   # The title of the step.
   title: String!
@@ -1987,6 +1977,7 @@ type Event implements Node & Commentable {
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
+  timeRange: PreviewTimeRange
 
   # Identifies the author of the event.
   author: User
@@ -1994,11 +1985,11 @@ type Event implements Node & Commentable {
   # Identifies the title of the event.
   title: String!
 
-  # Identifies the start of the event.
-  startAt: DateTime
+  # The start date of the event.
+  startAt: DateTime! @deprecated(reason: "Field `startAt` will be removed. Use `timeRange` instead. This field has been replaced by timeRange Removal on 2020-03-01 UTC.")
 
-  # Identifies the end of the event.
-  endAt: DateTime
+  # The end date of the event.
+  endAt: DateTime @deprecated(reason: "Field `endAt` will be removed. Use `timeRange` instead. This field has been replaced by timeRange Removal on 2020-03-01 UTC.")
 
   # Identifies the body of the event.
   body: HTML!
@@ -3157,6 +3148,7 @@ enum OrderDirection {
 type OtherStep implements Step {
   # The ID of an object
   id: ID!
+  timeRange: PreviewTimeRange
 
   # The kind of the step
   kind: String!
@@ -3169,12 +3161,6 @@ type OtherStep implements Step {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # Start date of the step.
-  startAt: DateTime
-
-  # End date of the step.
-  endAt: DateTime
 
   # The title of the step.
   title: String!
@@ -3299,6 +3285,7 @@ union PostRelatedContent = Theme | Proposal | Project
 type PresentationStep implements Step {
   # The ID of an object
   id: ID!
+  timeRange: PreviewTimeRange
 
   # The kind of the step
   kind: String!
@@ -3312,12 +3299,6 @@ type PresentationStep implements Step {
   # Does the step have a end date ?
   timeless: Boolean
 
-  # Start date of the step.
-  startAt: DateTime
-
-  # End date of the step.
-  endAt: DateTime
-
   # The title of the step.
   title: String!
 
@@ -3326,6 +3307,15 @@ type PresentationStep implements Step {
 
   # The introduction text of the step.
   body: HTML
+}
+
+# A time range that contains start date and end date.
+type PreviewTimeRange {
+  # The start date of the time range.
+  startAt: DateTime
+
+  # The end date of the time range
+  endAt: DateTime
 }
 
 # A vote that can be anonymous.
@@ -4082,6 +4072,7 @@ enum ProposalPublicationStatus {
 interface ProposalStep {
   # The ID of an object
   id: ID!
+  timeRange: PreviewTimeRange
 
   # The kind of the step
   kind: String!
@@ -4094,12 +4085,6 @@ interface ProposalStep {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # Start date of the step.
-  startAt: DateTime
-
-  # End date of the step.
-  endAt: DateTime
 
   # The title of the step.
   title: String!
@@ -4792,6 +4777,7 @@ input QuestionnaireAbstractQuestionInput {
 type QuestionnaireStep implements Node & Step {
   # The ID of an object
   id: ID!
+  timeRange: PreviewTimeRange
 
   # The kind of the step
   kind: String!
@@ -4804,12 +4790,6 @@ type QuestionnaireStep implements Node & Step {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # Start date of the step.
-  startAt: DateTime
-
-  # End date of the step.
-  endAt: DateTime
 
   # The title of the step.
   title: String!
@@ -4850,6 +4830,7 @@ enum QuestionnaireType {
 type RankingStep implements Step {
   # The ID of an object
   id: ID!
+  timeRange: PreviewTimeRange
 
   # The kind of the step
   kind: String!
@@ -4862,12 +4843,6 @@ type RankingStep implements Step {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # Start date of the step.
-  startAt: DateTime
-
-  # End date of the step.
-  endAt: DateTime
 
   # The title of the step.
   title: String!
@@ -5461,6 +5436,7 @@ type Selection {
 type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   # The ID of an object
   id: ID!
+  timeRange: PreviewTimeRange
 
   # The kind of the step
   kind: String!
@@ -5473,12 +5449,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # Start date of the step.
-  startAt: DateTime
-
-  # End date of the step.
-  endAt: DateTime
 
   # The title of the step.
   title: String!
@@ -5996,6 +5966,7 @@ enum StatusColor {
 interface Step {
   # The ID of an object
   id: ID!
+  timeRange: PreviewTimeRange
 
   # The kind of the step
   kind: String!
@@ -6008,12 +5979,6 @@ interface Step {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # Start date of the step.
-  startAt: DateTime
-
-  # End date of the step.
-  endAt: DateTime
 
   # The title of the step.
   title: String!

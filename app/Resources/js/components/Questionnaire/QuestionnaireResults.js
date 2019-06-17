@@ -27,16 +27,18 @@ export class QuestionnaireResults extends React.Component<Props> {
             <FormattedMessage id="no_result" />
           ) : (
             <div className="mb-30 project__step-dates">
-              {questionnaire.step && (questionnaire.step.startAt || questionnaire.step.endAt) && (
-                <div className="mr-15 d-ib">
-                  <i className="cap cap-calendar-2-1" />{' '}
-                  <DatesInterval
-                    startAt={questionnaire.step.startAt}
-                    endAt={questionnaire.step.endAt}
-                    fullDay
-                  />
-                </div>
-              )}
+              {questionnaire.step &&
+                questionnaire.step.timeRange &&
+                (questionnaire.step.timeRange.startAt || questionnaire.step.timeRange.endAt) && (
+                  <div className="mr-15 d-ib">
+                    <i className="cap cap-calendar-2-1" />{' '}
+                    <DatesInterval
+                      startAt={questionnaire.step.timeRange.startAt}
+                      endAt={questionnaire.step.timeRange.endAt}
+                      fullDay
+                    />
+                  </div>
+                )}
             </div>
           )}
         </div>
@@ -100,8 +102,10 @@ export default createFragmentContainer(container, {
         }
       }
       step {
-        startAt
-        endAt
+        timeRange {
+          startAt
+          endAt
+        }
       }
     }
   `,

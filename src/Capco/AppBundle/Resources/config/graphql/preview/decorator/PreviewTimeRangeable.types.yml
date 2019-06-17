@@ -1,0 +1,9 @@
+PreviewTimeRangeable:
+  type: 'object'
+  decorator: true
+  config:
+    description: 'A timerangeable'
+    fields:
+      timeRange:
+        type: 'PreviewTimeRange'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\TimeRangeResolver", [value])'
