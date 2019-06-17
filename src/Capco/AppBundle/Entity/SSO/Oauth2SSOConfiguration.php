@@ -29,7 +29,7 @@ class Oauth2SSOConfiguration extends AbstractSSOConfiguration
     /**
      * @ORM\Column(name="access_token_url", type="text", nullable=false)
      */
-    protected $accessTokenUrlId;
+    protected $accessTokenUrl;
 
     /**
      * @ORM\Column(name="user_info_url", type="text", nullable=false)
@@ -77,14 +77,14 @@ class Oauth2SSOConfiguration extends AbstractSSOConfiguration
         return $this;
     }
 
-    public function getAccessTokenUrlId(): string
+    public function getAccessTokenUrl(): string
     {
-        return $this->accessTokenUrlId;
+        return $this->accessTokenUrl;
     }
 
-    public function setAccessTokenUrlId(string $accessTokenUrlId): self
+    public function setAccessTokenUrl(string $accessTokenUrl): self
     {
-        $this->accessTokenUrlId = $accessTokenUrlId;
+        $this->accessTokenUrl = $accessTokenUrl;
 
         return $this;
     }

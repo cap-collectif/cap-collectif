@@ -1,0 +1,25 @@
+InternalOauth2SSOConfiguration:
+  type: object
+  inherits: [Node, InternalSSOConfiguration]
+  config:
+    interfaces: [Node, InternalSSOConfiguration]
+    description: 'Oauth2 SSO Configuration.'
+    fields:
+      clientId:
+        type: 'String!'
+        description: 'Client ID.'
+      secret:
+        type: 'String!'
+        description: 'Secret key.'
+      authorizationUrl:
+        type: 'URI!'
+        description: 'Authorization URL.'
+      accessTokenUrl:
+        type: 'URI!'
+        description: 'Access token URL.'
+      userInfoUrl:
+        type: 'URI!'
+        description: 'User info URL.'
+      logoutUrl:
+        type: 'URI'
+        description: 'Logout URL.'
