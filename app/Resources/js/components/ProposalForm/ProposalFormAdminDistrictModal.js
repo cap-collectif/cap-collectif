@@ -38,7 +38,7 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props> {
           />
         </Modal.Header>
         <Modal.Body>
-          <DistrictAdminFields member={member} district={district} enableDesignFields />
+          <DistrictAdminFields member={member} district={district} />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
