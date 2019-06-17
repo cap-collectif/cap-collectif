@@ -111,15 +111,19 @@ type Event implements Node & UniformResourceLocatable {
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-
-  # Time range containing start and end of the event
-  timeRange: PreviewTimeRange!
+  timeRange: PreviewTimeRange
 
   # Identifies the author of the event.
   author: User
 
   # Identifies the title of the event.
   title: String!
+
+  # The start date of the event.
+  startAt: DateTime! @deprecated(reason: "Field `startAt` will be removed. Use `timeRange` instead. This field has been replaced by timeRange Removal on 2020-03-01 UTC.")
+
+  # The end date of the event.
+  endAt: DateTime @deprecated(reason: "Field `endAt` will be removed. Use `timeRange` instead. This field has been replaced by timeRange Removal on 2020-03-01 UTC.")
 
   # Identifies the body of the event.
   body: HTML!

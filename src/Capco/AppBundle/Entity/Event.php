@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
-use Capco\AppBundle\Entity\Interfaces\TimeRangable;
+use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
@@ -34,7 +34,7 @@ class Event implements
     CommentableInterface,
     IndexableInterface,
     DisplayableInBOInterface,
-    TimeRangable
+    TimeRangeable
 {
     use DateHelperTrait,
         CommentableWithoutCounterTrait,

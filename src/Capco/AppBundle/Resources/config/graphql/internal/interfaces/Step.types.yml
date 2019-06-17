@@ -1,6 +1,6 @@
 Step:
   type: interface
-  inherits: [Node]
+  inherits: [Node, PreviewTimeRangeable]
   config:
     description: 'A step inside a project.'
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
@@ -20,12 +20,6 @@ Step:
       timeless:
         description: 'Does the step have a end date ?'
         type: 'Boolean'
-      startAt:
-        description: 'Start date of the step.'
-        type: 'DateTime'
-      endAt:
-        description: 'End date of the step.'
-        type: 'DateTime'
       title:
         description: 'The title of the step.'
         type: 'String!'

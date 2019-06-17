@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Interfaces;
 
-interface TimeRangable
+interface TimeRangeable
 {
     public function getStartAt(): ?\DateTime;
 
