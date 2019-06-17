@@ -329,16 +329,16 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         // ****************************** Selection steps counters **************************************
 
         $selectionSteps = $container->get(SelectionStepRepository::class)->findAll();
-        foreach ($selectionSteps as $ss) {
-            if ($ss->isOpen() || $this->force) {
-                $participants = $contributionResolver->countStepContributors($ss);
+        foreach ($selectionSteps as $selectionStep) {
+            if ($selectionStep->isOpen() || $this->force) {
+                $participants = $contributionResolver->countStepContributors($selectionStep);
                 $this->executeQuery(
-                    'UPDATE CapcoAppBundle:Steps\SelectionStep ss
-                    set ss.contributorsCount = ' .
+                    'UPDATE CapcoAppBundle:Steps\SelectionStep step
+                    set step.contributorsCount = ' .
                         $participants .
                         '
-                    where ss.id = \'' .
-                        $ss->getId() .
+                    where step.id = \'' .
+                    $selectionStep->getId() .
                         '\''
                 );
             }
