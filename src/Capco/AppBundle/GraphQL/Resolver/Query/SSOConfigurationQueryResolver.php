@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
@@ -21,7 +22,7 @@ class SSOConfigurationQueryResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Arg $args)
+    public function __invoke(Arg $args): Connection
     {
         $totalCount = $this->ssoConfigurationRepository->count([]);
         $paginator = new Paginator(function (int $offset, int $limit) {

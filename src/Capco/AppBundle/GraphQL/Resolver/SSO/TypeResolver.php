@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\SSO;
 
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Resolver\TypeResolver as BaseTypeResolver;
 
@@ -14,7 +15,7 @@ class TypeResolver implements ResolverInterface
         $this->typeResolver = $typeResolver;
     }
 
-    public function __invoke($data)
+    public function __invoke($data): Type
     {
         // Uncomment it when we will add more SSO Configuration type.
         /* if ($data instanceof Oauth2SSOConfiguration) {
