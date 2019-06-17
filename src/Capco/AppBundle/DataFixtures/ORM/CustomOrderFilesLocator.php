@@ -34,7 +34,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
         return $this->installDevFixtures();
     }
 
-    private function installProdFixtures()
+    private function installProdFixtures(): array
     {
         return [
             __DIR__ . '/Prod/MediaContext.yml',
@@ -60,11 +60,11 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             __DIR__ . '/Prod/Project.yml',
             __DIR__ . '/Prod/Post.yml',
             __DIR__ . '/Prod/Event.yml',
-            __DIR__ . '/Prod/HighlightedContent.yml',
+            __DIR__ . '/Prod/HighlightedContent.yml'
         ];
     }
 
-    private function installDevFixtures()
+    private function installDevFixtures(): array
     {
         return [
             __DIR__ . '/Dev/MediaContext.yml',
@@ -158,6 +158,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             __DIR__ . '/Dev/PublicApiToken.yml',
             __DIR__ . '/Dev/MapToken.yml',
             __DIR__ . '/Dev/ContactForm.yml',
+            __DIR__ . '/Dev/SSOConfiguration.yml'
         ];
     }
 }
