@@ -5,12 +5,12 @@ import { Field, reduxForm, type FormProps } from 'redux-form';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
-import component from '../Form/Field';
-import Toggle from '../Form/Toggle';
-import type { GlobalState, MediaFromAPI } from '../../types';
+import component from '../../Form/Field';
+import Toggle from '../../Form/Toggle';
+import type { GlobalState, MediaFromAPI } from '../../../types';
 import { type ShieldAdminForm_shieldAdminForm } from '~relay/ShieldAdminForm_shieldAdminForm.graphql';
-import UpdateShieldAdminFormInput from '../../mutations/UpdateShieldAdminFormMutation';
-import AlertForm from '../Alert/AlertForm';
+import UpdateShieldAdminFormInput from '../../../mutations/UpdateShieldAdminFormMutation';
+import AlertForm from '../../Alert/AlertForm';
 
 type FormValues = {|
   +shieldMode: boolean,
