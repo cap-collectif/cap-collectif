@@ -38,7 +38,7 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
         "edges": [
           {
             "node": {
-              "id": "ssoOauth2",
+              "id": "RXZlbnQ6c3NvT2F1dGgy",
               "name": "Oauth2 Provider",
               "enabled": true,
               "clientId": "clientId",

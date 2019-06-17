@@ -2277,7 +2277,7 @@ type InternalChangeSiteFaviconPayload {
 
 # Oauth2 SSO Configuration.
 type InternalOauth2SSOConfiguration implements Node & InternalSSOConfiguration {
-  # The ID of an object
+  # The ID of an object.
   id: ID!
 
   # The name of configured SSO.

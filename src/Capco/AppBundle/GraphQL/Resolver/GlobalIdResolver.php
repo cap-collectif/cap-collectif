@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Repository\ConsultationRepository;
+use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -32,7 +34,6 @@ use Capco\AppBundle\Repository\ContactFormRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
@@ -144,6 +145,12 @@ class GlobalIdResolver
                     break;
                 case 'Project':
                     $node = $this->container->get(ProjectRepository::class)->find($uuid);
+
+                    break;
+                case 'InternalOauth2SSOConfiguration':
+                    $node = $this->container
+                        ->get(Oauth2SSOConfigurationRepository::class)
+                        ->find($uuid);
 
                     break;
                 default:

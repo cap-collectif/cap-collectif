@@ -5,6 +5,11 @@ InternalOauth2SSOConfiguration:
     interfaces: [Node, InternalSSOConfiguration]
     description: 'Oauth2 SSO Configuration.'
     fields:
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Event
       clientId:
         type: 'String!'
         description: 'Client ID.'
