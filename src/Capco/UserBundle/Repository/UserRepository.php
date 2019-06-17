@@ -476,37 +476,6 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function countProjectProposalAnonymousVotersWithCount(
-        Project $project,
-        $excludePrivate = false
-    ): int {
-        $query = $this->getEntityManager()
-            ->createQueryBuilder()
-            ->select('COUNT(DISTINCT proposal_selection_vote.email)')
-            ->from('CapcoAppBundle:ProposalSelectionVote', 'proposal_selection_vote')
-            ->leftJoin(
-                'CapcoAppBundle:Proposal',
-                'proposal',
-                Join::WITH,
-                'proposal_selection_vote.proposal = proposal'
-            )
-            ->leftJoin('proposal_selection_vote.selectionStep', 'selection_step')
-            ->leftJoin('selection_step.projectAbstractStep', 'project_abstract_step')
-            ->andWhere('proposal.published = 1')
-            ->andWhere('project_abstract_step.project = :project')
-            ->setParameter('project', $project);
-
-        $query->andWhere(
-            $query->expr()->andX($query->expr()->isNotNull('proposal_selection_vote.email'))
-        );
-
-        if ($excludePrivate) {
-            $query->andWhere('proposal_selection_vote.private = 0');
-        }
-
-        return (int) $query->getQuery()->getSingleScalarResult();
-    }
-
     public function findWithMediaByIds($ids): array
     {
         $qb = $this->createQueryBuilder('u');
