@@ -5,7 +5,7 @@ services:
     public: false
 
   Capco\AppBundle\Processor\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Processor/*'
+    resource: '%kernel.project_dir%/src/Capco/AppBundle/Processor/*'
     exclude: '%kernel.project_dir%/src/Capco/AppBundle/Processor/UserArchive/UserArchiveRequestProcessor.php'
 
   Capco\AppBundle\Processor\UserArchive\UserArchiveRequestProcessor:
