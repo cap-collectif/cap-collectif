@@ -2,21 +2,21 @@ Capco\AppBundle\Entity\LogicJump:
   logicjump1:
     id: logicjump1
     always: false
-    origin: '@multiplequestionHapNoel'
-    destination: '@multiplequestionHapCreation'
-    conditions: ['@ljconditionHap']
+    origin: '@multiplequestionFavoriteFleuve'
+    destination: '@multiplequestionHapGange'
+    conditions: ['@ljconditionFleuveHapLg1', '@ljconditionFleuveGange']
   logicjump2:
     id: logicjump2
     always: false
-    origin: '@multiplequestionHapNoel'
-    destination: '@multiplequestionNoelFete'
-    conditions: ['@ljconditionNoel']
+    origin: '@multiplequestionFavoriteFleuve'
+    destination: '@multiplequestionHapCreation'
+    conditions: ['@ljconditionFleuveHap']
   logicjump3:
     id: logicjump3
     always: false
     origin: '@multiplequestionFavoriteFleuve'
-    destination: '@multiplequestionHapGange'
-    conditions: ['@ljconditionFleuveHapProposalForm15', '@ljconditionFleuveGange']
+    destination: '@multiplequestionNoelFete'
+    conditions: ['@ljconditionNoel']
   logicjump4:
     id: logicjump4
     always: false
@@ -145,3 +145,8 @@ Capco\AppBundle\Entity\LogicJump:
     always: true
     origin: '@multiplequestionHapNotGoodHowDareYouProposalForm15'
     destination: '@multiplequestionMarvelOrDcProposalForm15'
+  alwaysLogicJumpHapAndGange:
+    id: alwaysLogicJumpHapAndGange
+    always: true
+    origin: '@multiplequestionHapGange'
+    destination: '@multiplequestionHapCreation'

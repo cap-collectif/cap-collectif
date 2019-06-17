@@ -86,7 +86,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionHapNoel:
     id: 24
     title: Hap ou Noel ?
-    required: true
+    required: false
     type: 4 # select
   multiplequestionHapCreation:
     id: 25
@@ -163,7 +163,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionFavoriteFleuve:
     id: 45
     title: Votre fleuve préféré
-    required: true
+    required: false
     type: 4 # select
   multiplequestionHapGange:
     id: 46
