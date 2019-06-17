@@ -11,7 +11,6 @@ class Manager
     protected $toggleManager;
 
     protected static $toggles = [
-        'graphql_query_analytics',
         'new_feature_questionnaire_result',
         'blog',
         'calendar',

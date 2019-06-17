@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Repository\ConsultationRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -32,7 +33,6 @@ use Capco\AppBundle\Repository\ContactFormRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
@@ -51,6 +51,16 @@ class GlobalIdResolver
     {
         $this->container = $container;
         $this->logger = $logger;
+    }
+
+    public function resolveMultiple(array $array, $user, \ArrayObject $context): array
+    {
+        $results = [];
+        foreach ($array as $value) {
+            $results[] = $this->resolve($value, $user, $context);
+        }
+
+        return $results;
     }
 
     public function resolve(string $uuidOrGlobalId, $userOrAnon, ?\ArrayObject $context = null)
@@ -273,7 +283,7 @@ class GlobalIdResolver
             Post::class,
             ProposalForm::class,
             Event::class,
-            AbstractStep::class
+            AbstractStep::class,
         ];
 
         foreach ($projectContributionClass as $object) {

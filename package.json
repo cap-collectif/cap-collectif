@@ -39,9 +39,6 @@
         "prettier": "yarn run prettier:js",
         "precommit": "flow status && lint-staged"
     },
-    "workspaces": [
-        "packages/*"
-    ],
     "pre-commit": "precommit",
     "flow-coverage-report": {
         "threshold": 70,
@@ -228,7 +225,7 @@
         "moment-locales-webpack-plugin": "^1.0.7",
         "moment-timezone": "^0.5.23",
         "node-sass": "^4.11.0",
-        "papaparse": "^5.0.0",
+        "papaparse": "^4.6.3",
         "points-cluster": "^0.1.4",
         "polished": "^3.0.0",
         "postinstall-postinstall": "^2.0.0",
@@ -242,7 +239,7 @@
         "react-addons-test-utils": "^15.6.2",
         "react-async-script": "^1.0.1",
         "react-axe": "^3.0.2",
-        "react-beautiful-dnd": "^11.0.4",
+        "react-beautiful-dnd": "^8.0.2",
         "react-bootstrap": "^0.32.1",
         "react-color": "^2.14.1",
         "react-datetime": "^2.9.0",
@@ -284,7 +281,7 @@
         "relay-compiler-language-js-flow-uncommented": "^1.1.0",
         "relay-config": "^5.0.0",
         "relay-devtools": "^1.4.0",
-        "relay-runtime": "^5.0.0",
+        "relay-runtime": "^4.0.0",
         "relay-test-utils": "^5.0.0",
         "sass-loader": "^7.1.0",
         "source-map": "^0.7.3",
