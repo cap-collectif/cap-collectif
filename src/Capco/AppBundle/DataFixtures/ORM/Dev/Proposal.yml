@@ -502,7 +502,7 @@ Capco\AppBundle\Entity\Proposal:
     reference: 47
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-  proposal{40..1000}:
+  proposal{40..100}:
     id: 'proposal<current()>'
     title: Proposal <current()>
     body: <text(200)>
