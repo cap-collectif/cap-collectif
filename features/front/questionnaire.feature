@@ -108,7 +108,6 @@ Scenario: Logged in API client can update his email
   When I wait 1 seconds
   And I should see my reply
   And I wait 2 seconds
-  And 1 mail should be sent
 
 ## Replies list
 
@@ -118,7 +117,7 @@ Scenario: Logged in user wants to see the list of his replies
   Then I should see my reply
 
 ## Update
-@database
+@database @rabbitmq
 Scenario: Logged in user wants to update a reply
   Given I am logged in as admin
   When I go to a questionnaire step
@@ -130,6 +129,8 @@ Scenario: Logged in user wants to update a reply
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   When I wait 1 seconds
   And I should see my reply
+  Then the queue associated to "questionnaire_reply" producer has messages below:
+    | 0 | {"replyId": "reply2"} |
 
 @database @draft
 Scenario: Logged in user wants to add a draft to a questionnaire with wrong values

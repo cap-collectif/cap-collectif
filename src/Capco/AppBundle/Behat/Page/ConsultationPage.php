@@ -18,7 +18,7 @@ class ConsultationPage extends Page
     public function verifyPage()
     {
         // TODO: replace this by a real condition to optimize loading time
-        if (!$this->getSession()->wait(10000, "window.jQuery && $('.opinion-list-rendered').length > 0")) {
+        if (!$this->getSession()->wait(2000, 'true')) {
             throw new \RuntimeException(
                 'ConsultationPage did not fully load, check selector in "verifyPage".'
             );

@@ -1,4 +1,8 @@
 // @flow
-import ReactBootstrapInput from './ReactBootstrapInput';
+import ReactBootstrapInput, { type ParentProps } from './ReactBootstrapInput';
 
-export default ReactBootstrapInput;
+export type Props = ParentProps;
+
+const component = ReactBootstrapInput;
+
+export default component;

@@ -144,7 +144,7 @@ export class ProjectDistrictForm extends React.Component<Props> {
           </Modal.Header>
           <Modal.Body>
             {/* $FlowFixMe */}
-            <DistrictAdminFields member={member} district={district} />
+            <DistrictAdminFields member={member} district={district} enableDesignFields={false} />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={handleClose} />

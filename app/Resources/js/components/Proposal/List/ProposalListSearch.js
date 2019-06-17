@@ -4,25 +4,26 @@ import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { changeTerm } from '../../../redux/modules/proposal';
-import Input from '../../Form/Input';
+import Input, { type Props as InputProps } from '../../Form/Input';
 import type { GlobalState, Dispatch } from '../../../types';
 
-type Props = {
-  dispatch: Dispatch,
-  terms: string,
-  intl: Object,
-};
+type Props = {|
+  +dispatch: Dispatch,
+  +terms: string,
+  +intl: Object,
+|};
 
-type State = {
-  terms: string,
-};
+type State = {|
+  +terms: string,
+|};
 
 export class ProposalListSearch extends React.Component<Props, State> {
   state = {
     terms: this.props.terms,
   };
 
-  _input: ?React.Component<*> | mixed;
+  // TODO use React.createRef()
+  _input: ?React.AbstractComponent<InputProps, typeof Input> | mixed;
 
   handleSubmit = (e: Event) => {
     const { dispatch } = this.props;
@@ -48,7 +49,7 @@ export class ProposalListSearch extends React.Component<Props, State> {
         <Input
           id="proposal-search-input"
           type="text"
-          aria-label={intl.formatMessage({ id: 'project.searchform.search' })}
+          ariaLabel={intl.formatMessage({ id: 'project.searchform.search' })}
           ref={c => {
             this._input = c;
           }}

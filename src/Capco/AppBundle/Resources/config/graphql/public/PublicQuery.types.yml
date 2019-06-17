@@ -18,7 +18,7 @@ PublicQuery:
             description: 'The ID of an object.'
         builderConfig:
           nodeInterfaceType: Node
-          idFetcher: '@=resolver("query_node", [value, getUser(), context])'
+          idFetcher: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryNodeResolver", [value, getUser(), context, info])'
       nodes:
         type: '[Node]!'
         description: 'Lookup nodes by a list of IDs.'
@@ -26,4 +26,4 @@ PublicQuery:
           ids:
             type: '[ID!]!'
             description: 'The list of node IDs.'
-        resolve: "@=resolver('query_nodes', [args['ids'], getUser(), context])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryNodesResolver", [args["ids"], getUser(), context, info])'
