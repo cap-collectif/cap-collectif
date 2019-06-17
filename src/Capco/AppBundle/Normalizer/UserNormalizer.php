@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Routing\RouterInterface;
 
 class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
@@ -60,7 +61,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                 'email' => $object->getEmail(),
                 'userType' => $object->getUserType()
                     ? ['id' => $object->getUserType()->getId()]
-                    : null,
+                    : null
             ];
         }
 
@@ -75,12 +76,12 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                     $object,
                     $project,
                     new Argument([
-                        'first' => 0,
+                        'first' => 0
                     ])
                 )->totalCount;
                 $contributionsCountByProject[] = [
                     'project' => ['id' => $project->getId()],
-                    'count' => $count,
+                    'count' => $count
                 ];
                 foreach ($project->getRealSteps() as $step) {
                     $contributionsCountByStep[] = [
@@ -92,9 +93,9 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                                     $object,
                                     $step,
                                     new Argument([
-                                        'first' => 0,
+                                        'first' => 0
                                     ])
-                                )->totalCount,
+                                )->totalCount
                     ];
                 }
             }
@@ -118,14 +119,14 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         }
 
         $links = [
-            'settings' => $this->_capcoProfileEdit,
+            'settings' => $this->_capcoProfileEdit
         ];
 
         if ($this->manager->isActive('profiles')) {
             $links['profile'] = $this->router->generate(
                 'capco_user_profile_show_all',
                 ['slug' => $object->getSlug()],
-                true
+                RouterInterface::ABSOLUTE_URL
             );
         }
 
