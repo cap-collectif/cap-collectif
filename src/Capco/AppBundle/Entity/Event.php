@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
-use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
@@ -30,11 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasValidAddress()
  * @CapcoAssert\CheckRegister()
  */
-class Event implements
-    CommentableInterface,
-    IndexableInterface,
-    DisplayableInBOInterface,
-    TimeRangeable
+class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface
 {
     use DateHelperTrait,
         CommentableWithoutCounterTrait,
@@ -47,7 +42,7 @@ class Event implements
      * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
      * @ORM\Column(length=255, nullable=false, unique=true)
      */
-    protected $slug;
+     protected $slug;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -360,11 +355,9 @@ class Event implements
         return $this->startAt;
     }
 
-    public function setStartAt(?\DateTime $startAt = null): self
+    public function setStartAt(?\DateTime $startAt = null)
     {
         $this->startAt = $startAt;
-
-        return $this;
     }
 
     public function getEndAt(): ?\DateTime
@@ -372,11 +365,9 @@ class Event implements
         return $this->endAt;
     }
 
-    public function setEndAt(?\DateTime $endAt = null): self
+    public function setEndAt(?\DateTime $endAt = null)
     {
         $this->endAt = $endAt;
-
-        return $this;
     }
 
     public function getRegistrations()

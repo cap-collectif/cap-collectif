@@ -31,6 +31,7 @@ Scenario: Anonymous wants to comment a blogpost
   And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
+  And I fill in the following:
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
   When I press "comment.submit"

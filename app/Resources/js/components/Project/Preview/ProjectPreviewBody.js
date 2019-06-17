@@ -20,8 +20,8 @@ type Props = {
 
 const getStepsFilter = (project: ProjectPreviewBody_project) => {
   const projectStep = project.steps.slice(0).sort((a, b) => {
-    const dateA = a.timeRange && a.timeRange.startAt ? new Date(a.timeRange.startAt) : 0;
-    const dateB = b.timeRange && b.timeRange.startAt ? new Date(b.timeRange.startAt) : 0;
+    const dateA = a.startAt ? new Date(a.startAt) : 0;
+    const dateB = b.startAt ? new Date(b.startAt) : 0;
     return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
   });
   const stepClosed = projectStep.filter(step => step.status === 'CLOSED');
@@ -102,19 +102,17 @@ export class ProjectPreviewBody extends React.Component<Props> {
   };
 
   getStartDate = (step: Object) => {
-    if (step.timeRange && step.timeRange.startAt) {
-      const startAtDate = moment(step.timeRange.startAt).toDate();
-      const startDay = (
-        <FormattedDate value={startAtDate} day="numeric" month="long" year="numeric" />
-      );
+    const startAtDate = moment(step.startAt).toDate();
+    const startDay = (
+      <FormattedDate value={startAtDate} day="numeric" month="long" year="numeric" />
+    );
 
-      if (step.status === 'FUTURE') {
-        return (
-          <span className="excerpt-dark">
-            <FormattedMessage id="date.startAt" /> {startDay}
-          </span>
-        );
-      }
+    if (step.status === 'FUTURE') {
+      return (
+        <span className="excerpt-dark">
+          <FormattedMessage id="date.startAt" /> {startDay}
+        </span>
+      );
     }
   };
 
@@ -210,10 +208,8 @@ export class ProjectPreviewBody extends React.Component<Props> {
           {actualStep &&
             actualStep.status === 'OPENED' &&
             !actualStep.timeless &&
-            (actualStep.timeRange && actualStep.timeRange.endAt) &&
-            this.actualStepIsParticipative() && (
-              <RemainingTime endAt={actualStep.timeRange.endAt} />
-            )}
+            actualStep.endAt &&
+            this.actualStepIsParticipative() && <RemainingTime endAt={actualStep.endAt} />}
         </div>
       </Card.Body>
     );
@@ -233,10 +229,8 @@ export default createFragmentContainer(ProjectPreviewBody, {
         title
         timeless
         status
-        timeRange {
-          startAt
-          endAt
-        }
+        startAt
+        endAt
         type
         url
         ... on ProposalStep {

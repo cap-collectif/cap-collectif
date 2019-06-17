@@ -56,18 +56,14 @@ const acceptedMimeTypes = [
   'application/xml',
 ];
 
-export type ParentProps = {|
+type Props = {
+  intl: IntlShape,
   name?: ?string,
   image?: ?string,
   id: ?string,
-  className?: string,
   children?: any,
   help?: string | any,
-  helpPrint?: boolean,
-  checked?: boolean,
-  disabled?: boolean,
-  ariaLabel?: string,
-  placeholder?: ?string,
+  helpPrint: boolean,
   ariaRequired?: boolean,
   description?: string | any,
   backgroundColor?: ?string,
@@ -91,25 +87,7 @@ export type ParentProps = {|
   radioChecked?: boolean,
   checkedValue?: ?string,
   maxLength?: ?string,
-  onBlur?: any,
-  autoComplete?: string,
-  autoFocus?: boolean,
-  disableValidation?: boolean,
-  formName?: string,
-  lang?: string,
-  popover?: any,
-  step?: any,
-  style?: any,
-  // Why do we use this ?
-  medias?: Array<any>,
-  // Why do we use this ?
-  value?: any,
-|};
-
-type Props = {|
-  ...ParentProps,
-  intl: IntlShape,
-|};
+};
 
 class ReactBootstrapInput extends React.Component<Props> {
   static defaultProps = {
