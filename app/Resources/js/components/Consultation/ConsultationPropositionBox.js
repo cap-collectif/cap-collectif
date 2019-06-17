@@ -120,15 +120,20 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
                 }>
                 <h2 className="text-center">{step.title}</h2>
                 <div className="mb-30 project__step-dates text-center">
-                  {(step.startAt || step.endAt) && (
+                  {step.timeRange && (step.timeRange.startAt || step.timeRange.endAt) && (
                     <div className="mr-15 d-ib">
                       <i className="cap cap-calendar-2-1" />{' '}
-                      <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
+                      <DatesInterval
+                        startAt={step.timeRange.startAt}
+                        endAt={step.timeRange.endAt}
+                        fullDay
+                      />
                     </div>
                   )}
-                  {step.endAt && step.status === 'OPENED' && !step.timeless && (
+                  {step.timeRange.endAt && step.status === 'OPENED' && !step.timeless && (
                     <div className="mr-15 d-ib">
-                      <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
+                      <i className="cap cap-hourglass-1" />{' '}
+                      <RemainingTime endAt={step.timeRange.endAt} />
                     </div>
                   )}
                 </div>
@@ -157,8 +162,10 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
               consultationStep: node(id: $consultationStepId) {
                 ... on ConsultationStep {
                   id
-                  startAt
-                  endAt
+                  timeRange {
+                    startAt
+                    endAt
+                  }
                   title
                   status
                   timeless

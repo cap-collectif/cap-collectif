@@ -30,17 +30,25 @@ export class StepPageHeader extends React.Component<Props> {
       <div>
         <h2 className="h2">{step.title}</h2>
         <div className="mb-30 project__step-dates">
-          {(step.startAt || step.endAt) && (
+          {step.timeRange && (step.timeRange.startAt || step.timeRange.endAt) && (
             <div className="mr-15 d-ib">
               <i className="cap cap-calendar-2-1" />{' '}
-              <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
+              <DatesInterval
+                startAt={step.timeRange.startAt}
+                endAt={step.timeRange.endAt}
+                fullDay
+              />
             </div>
           )}
-          {step.endAt && step.status === 'OPENED' && !step.timeless && this.stepIsParticipative() && (
-            <div className="mr-15 d-ib hidden-print">
-              <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
-            </div>
-          )}
+          {step.timeRange &&
+            step.timeRange.endAt &&
+            step.status === 'OPENED' &&
+            !step.timeless &&
+            this.stepIsParticipative() && (
+              <div className="mr-15 d-ib hidden-print">
+                <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.timeRange.endAt} />
+              </div>
+            )}
         </div>
         {step.type === 'selection' && step.voteThreshold && step.voteThreshold > 0 ? (
           <h4 style={{ marginBottom: '20px' }}>
@@ -71,8 +79,10 @@ export default createFragmentContainer(StepPageHeader, {
       status
       title
       timeless
-      startAt
-      endAt
+      timeRange {
+        startAt
+        endAt
+      }
       type
     }
   `,

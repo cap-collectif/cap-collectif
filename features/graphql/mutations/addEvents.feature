@@ -13,8 +13,10 @@ Scenario: An admin wants to add a list of events with dry run
           id
           title
           body
-          startAt
-          endAt
+          timeRange {
+            startAt
+            endAt
+          }
           author {
             id
           }
@@ -72,8 +74,10 @@ Scenario: An admin wants to add a list of events with dry run
             "id": @string@,
             "title": "Rencontre avec les habitants",
             "body": "<h1>Mon super event</h1><p>Rassurez vous, tout le monde est invité</p>",
-            "startAt": "2018-03-07 00:00:00",
-            "endAt": "2018-03-16 00:00:00",
+            "timeRange": {
+              "startAt": "2018-03-07 00:00:00",
+              "endAt": "2018-03-16 00:00:00"
+            },
             "author": {
               "id": "VXNlcjp1c2VyNTAx"
             },
