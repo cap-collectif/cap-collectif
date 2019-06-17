@@ -190,19 +190,12 @@ class Indexer
         return $this;
     }
 
-    public function addApiAnalyticsDocumentToBulk(array $data): void
-    {
-        $this->addToBulk(new Document(null, $data, 'api_analytics'));
-    }
-
     protected function buildDocument(IndexableInterface $object): Document
     {
         $json = [];
 
         try {
-            $json = $this->serializer->serialize($object, 'json', [
-                'groups' => $object->getElasticsearchSerializationGroups(),
-            ]);
+            $json = $this->serializer->serialize($object, 'json', ['groups' => $object->getElasticsearchSerializationGroups()]);
         } catch (\Exception $exception) {
             $this->logger->error(__METHOD__ . $exception->getMessage());
         }

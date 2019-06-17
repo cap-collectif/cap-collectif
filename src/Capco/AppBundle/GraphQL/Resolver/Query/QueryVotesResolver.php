@@ -3,17 +3,18 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepVotesCountResolver;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class QueryVotesResolver implements ResolverInterface
 {
@@ -24,7 +25,7 @@ class QueryVotesResolver implements ResolverInterface
 
     public function __construct(
         AbstractVoteRepository $votesRepository,
-        QueryProjectsResolver $projectsResolver,
+        ProjectsResolver $projectsResolver,
         StepVotesCountResolver $stepVotesCountResolver,
         PromiseAdapterInterface $adapter
     ) {

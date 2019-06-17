@@ -38,8 +38,8 @@ infrastructure/services/databasefixtures/dump.sql
 *.log
 .eslintcache
 
-# Node
-**/node_modules/
+# Node / grunt
+/node_modules/
 /app/Resources/libs
 
 # redis
@@ -90,6 +90,3 @@ php-cs-fixer
 
 # divers
 nohup.out
-
-# env files
-**/.env
