@@ -21,7 +21,7 @@ Scenario: An anonymous can paginate opinions inside a section
     | projectSlug | projet-de-loi-renseignement |
     | stepSlug    | elaboration-de-la-loi       |
     | sectionSlug | chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1       |
-  Then I should see 5 ".list-group-item__opinion" element
+  Then I should see 12 ".list-group-item__opinion" element
   When I click the "#OpinionListPaginated-loadmore" element
   And I wait 2 seconds
   Then I should see 8 ".list-group-item__opinion" element
