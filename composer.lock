@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a07a0bd3d8319c5fca6228dd7c185eb",
+    "content-hash": "eea97f0a133340b356c1f3218bf30526",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -5085,21 +5085,20 @@
         },
         {
             "name": "limenius/react-bundle",
-            "version": "v1.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Limenius/ReactBundle.git",
-                "reference": "afa0bdd39dbfcdc12518013bbbf7b7b4326afbfc"
+                "reference": "a263459147832511fbf810840b86b7e9727f07e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Limenius/ReactBundle/zipball/afa0bdd39dbfcdc12518013bbbf7b7b4326afbfc",
-                "reference": "afa0bdd39dbfcdc12518013bbbf7b7b4326afbfc",
+                "url": "https://api.github.com/repos/Limenius/ReactBundle/zipball/a263459147832511fbf810840b86b7e9727f07e2",
+                "reference": "a263459147832511fbf810840b86b7e9727f07e2",
                 "shasum": ""
             },
             "require": {
-                "limenius/react-renderer": "^0.14.0",
-                "nacmartin/phpexecjs": "^0.8",
+                "limenius/react-renderer": "^3.0.0",
                 "php": ">=5.5.0",
                 "symfony/config": "^2.7.0|^3.0.6|^4.0",
                 "symfony/dependency-injection": "^2.7.0|^3.0.6|^4.0",
@@ -5131,24 +5130,24 @@
                 "isomorphic",
                 "react"
             ],
-            "time": "2017-11-22T11:08:06+00:00"
+            "time": "2018-12-06T16:45:26+00:00"
         },
         {
             "name": "limenius/react-renderer",
-            "version": "v0.14.3",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Limenius/ReactRenderer.git",
-                "reference": "a6a16654d7c44947abc128da69b1f69fbc6586ae"
+                "reference": "3387be293f19a6e3ca1ac88f12bffa41a101bac0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Limenius/ReactRenderer/zipball/a6a16654d7c44947abc128da69b1f69fbc6586ae",
-                "reference": "a6a16654d7c44947abc128da69b1f69fbc6586ae",
+                "url": "https://api.github.com/repos/Limenius/ReactRenderer/zipball/3387be293f19a6e3ca1ac88f12bffa41a101bac0",
+                "reference": "3387be293f19a6e3ca1ac88f12bffa41a101bac0",
                 "shasum": ""
             },
             "require": {
-                "nacmartin/phpexecjs": "^0.8",
+                "nacmartin/phpexecjs": "^2.0",
                 "php": ">=5.5.0",
                 "twig/twig": "^1.20|^2.0"
             },
@@ -5180,7 +5179,7 @@
                 "reactjs",
                 "twig"
             ],
-            "time": "2017-11-06T16:49:25+00:00"
+            "time": "2018-12-06T16:30:50+00:00"
         },
         {
             "name": "liuggio/excelbundle",
@@ -5604,16 +5603,16 @@
         },
         {
             "name": "nacmartin/phpexecjs",
-            "version": "v0.8.8",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nacmartin/phpexecjs.git",
-                "reference": "dc42f9dd48235a042ae8de758c73e79fe658f875"
+                "reference": "abb8566e4e5d079e30312e72b33bcf01e09990d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nacmartin/phpexecjs/zipball/dc42f9dd48235a042ae8de758c73e79fe658f875",
-                "reference": "dc42f9dd48235a042ae8de758c73e79fe658f875",
+                "url": "https://api.github.com/repos/nacmartin/phpexecjs/zipball/abb8566e4e5d079e30312e72b33bcf01e09990d9",
+                "reference": "abb8566e4e5d079e30312e72b33bcf01e09990d9",
                 "shasum": ""
             },
             "require": {
@@ -5636,7 +5635,7 @@
                 }
             ],
             "description": "Run JavaScript code from PHP",
-            "time": "2017-11-22T11:12:15+00:00"
+            "time": "2017-11-22T20:17:42+00:00"
         },
         {
             "name": "nelmio/alice",
