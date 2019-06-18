@@ -22,7 +22,6 @@ application:
   links:
     - database:database
     - elasticsearch:elasticsearch
-    - kibana:kibana
     - redis:redis
     - seleniumhub:selenium
     - mailcatcher:mailcatchersmtp
@@ -53,13 +52,6 @@ elasticsearch:
       soft: -1
       hard: -1
   mem_limit: 1g
-
-kibana:
-  image: kibana:5
-  links:
-    - elasticsearch
-  ports:
-    - '5601:5601'
 
 seleniumhub:
   build:
