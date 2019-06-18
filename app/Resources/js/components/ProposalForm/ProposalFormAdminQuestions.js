@@ -230,7 +230,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                   {fields.map((member, index) => (
                     <Draggable
                       key={questions[index].id}
-                      draggableId={questions[index].id}
+                      draggableId={questions[index].id || `new-question-${index}`}
                       index={index}>
                       {(providedDraggable: DraggableProvided, snapshot) => (
                         <div
