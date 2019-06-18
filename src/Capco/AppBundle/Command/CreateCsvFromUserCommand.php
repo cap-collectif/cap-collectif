@@ -710,8 +710,10 @@ EOF;
         edges {
           node {
             title
-            startAt
-            endAt
+            timeRange {
+              startAt
+              endAt
+            }
             themes {
               title
             }

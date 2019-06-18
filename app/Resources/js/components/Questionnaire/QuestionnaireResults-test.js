@@ -9,8 +9,10 @@ describe('<QuestionnaireResults />', () => {
   const props = {
     questionnaire: {
       step: {
-        startAt: '2018-01-26T03:00:00+01:00',
-        endAt: '2018-02-04T00:00:00+01:00',
+        timeRange: {
+          startAt: '2018-01-26T03:00:00+01:00',
+          endAt: '2018-02-04T00:00:00+01:00',
+        },
       },
       questions: [
         {

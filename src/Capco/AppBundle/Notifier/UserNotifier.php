@@ -2,19 +2,15 @@
 
 namespace Capco\AppBundle\Notifier;
 
-use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\User\UserNewPasswordConfirmationMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationReminderMessage;
-use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 use Symfony\Component\Routing\RouterInterface;
 
 final class UserNotifier extends BaseNotifier
@@ -31,32 +27,6 @@ final class UserNotifier extends BaseNotifier
         $this->router = $router;
         $this->baseUrl = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
         parent::__construct($mailer, $siteParams, $userResolver);
-    }
-
-    public function acknowledgeReply(
-        Project $project,
-        Reply $reply,
-        ?\DateTime $endAt,
-        string $stepUrl,
-        AbstractStep $step,
-        User $user,
-        bool $isUpdated = false
-    ): void {
-        $this->mailer->sendMessage(
-            QuestionnaireAcknowledgeReplyMessage::create(
-                $project,
-                $reply,
-                $endAt,
-                $stepUrl,
-                $isUpdated,
-                $step,
-                $user->isEmailConfirmed(),
-                $user->isEmailConfirmed()
-                    ? ''
-                    : $this->userResolver->resolveRegistrationConfirmationUrl($user),
-                $reply->getAuthor()->getEmail()
-            )
-        );
     }
 
     public function adminConfirmation(User $user): void

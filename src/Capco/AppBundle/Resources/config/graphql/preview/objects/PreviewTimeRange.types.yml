@@ -1,0 +1,11 @@
+PreviewTimeRange:
+  type: object
+  config:
+    description: 'A time range that contains start date and end date.'
+    fields:
+      startAt:
+        type: 'DateTime'
+        description: 'The start date of the time range.'
+      endAt:
+        type: 'DateTime'
+        description: 'The end date of the time range'

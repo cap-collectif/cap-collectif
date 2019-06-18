@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Traits\DateHelperTrait;
@@ -34,7 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "questionnaire" = "QuestionnaireStep",
  * })
  */
-abstract class AbstractStep implements DisplayableInBOInterface
+abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
 {
     use DateHelperTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait, RequirementTrait;
 
@@ -48,7 +49,7 @@ abstract class AbstractStep implements DisplayableInBOInterface
     public static $stepStatus = [
         'closed' => self::OPENING_STATUS_CLOSED,
         'open' => self::OPENING_STATUS_OPENED,
-        'future' => self::OPENING_STATUS_FUTURE,
+        'future' => self::OPENING_STATUS_FUTURE
     ];
 
     /**
@@ -62,7 +63,7 @@ abstract class AbstractStep implements DisplayableInBOInterface
         'ranking' => 'step.types.ranking',
         'selection' => 'step.types.selection',
         'questionnaire' => 'step.types.questionnaire',
-        'realisation' => 'step.types.realisation',
+        'realisation' => 'step.types.realisation'
     ];
 
     /**
@@ -212,7 +213,7 @@ abstract class AbstractStep implements DisplayableInBOInterface
         return $this->startAt;
     }
 
-    public function setStartAt(?\DateTime $startAt): self
+    public function setStartAt(?\DateTime $startAt = null): self
     {
         $this->startAt = $startAt;
 
@@ -224,7 +225,7 @@ abstract class AbstractStep implements DisplayableInBOInterface
         return $this->endAt;
     }
 
-    public function setEndAt(?\DateTime $endAt): self
+    public function setEndAt(?\DateTime $endAt = null): self
     {
         $this->endAt = $endAt;
 
@@ -388,7 +389,7 @@ abstract class AbstractStep implements DisplayableInBOInterface
             if ($time) {
                 return [
                     'days' => (int) $time->format('%a'),
-                    'hours' => (int) $time->format('%h'),
+                    'hours' => (int) $time->format('%h')
                 ];
             }
         }

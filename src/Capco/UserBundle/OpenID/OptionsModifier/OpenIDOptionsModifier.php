@@ -39,7 +39,7 @@ class OpenIDOptionsModifier extends AbstractOptionsModifier implements OptionsMo
 
         if (!$ssoConfigurationCachedItem->isHit()) {
             $newSsoConfiguration = $this->oauthSsoConfigurationRepository->findOneBy([
-                'enabled' => true,
+                'enabled' => true
             ]);
 
             if (!$newSsoConfiguration) {
@@ -51,10 +51,10 @@ class OpenIDOptionsModifier extends AbstractOptionsModifier implements OptionsMo
                     ->set([
                         'client_id' => $newSsoConfiguration->getClientId(),
                         'client_secret' => $newSsoConfiguration->getSecret(),
-                        'access_token_url' => $newSsoConfiguration->getAccessTokenUrlId(),
+                        'access_token_url' => $newSsoConfiguration->getAccessTokenUrl(),
                         'authorization_url' => $newSsoConfiguration->getAuthorizationUrl(),
                         'infos_url' => $newSsoConfiguration->getUserInfoUrl(),
-                        'logout_url' => $newSsoConfiguration->getLogoutUrl(),
+                        'logout_url' => $newSsoConfiguration->getLogoutUrl()
                     ])
                     ->expiresAfter($this->redisCache::ONE_DAY);
             }

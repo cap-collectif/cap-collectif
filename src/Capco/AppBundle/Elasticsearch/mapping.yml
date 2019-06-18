@@ -282,3 +282,17 @@ mappings:
       Author: *Author
       createdAt: { type: date }
       updatedAt: { type: date }
+
+  #
+  # This allow ous to monitore the usage of our API.
+  #
+  # This will move later to another index.
+  #
+  api_analytics:
+    properties:
+      graphql_type: { type: keyword }
+      graphql_field: { type: keyword }
+      host: { type: keyword }
+      graphql_schema: { type: keyword }
+      clientId: { type: keyword }
+      createdAt: { type: date }

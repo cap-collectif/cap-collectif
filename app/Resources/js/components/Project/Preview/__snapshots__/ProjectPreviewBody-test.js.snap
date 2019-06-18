@@ -16,27 +16,33 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": true,
           "steps": Array [
             Object {
-              "endAt": "2016-12-28T09:00:24+01:00",
-              "startAt": "2016-12-20T09:00:24+01:00",
               "status": "CLOSED",
+              "timeRange": Object {
+                "endAt": "2016-12-28T09:00:24+01:00",
+                "startAt": "2016-12-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "Closed step",
               "type": "presentation",
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
-              "endAt": "2017-01-28T09:00:24+01:00",
-              "startAt": "2017-01-20T09:00:24+01:00",
               "status": "CLOSED",
+              "timeRange": Object {
+                "endAt": "2017-01-28T09:00:24+01:00",
+                "startAt": "2017-01-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "closed step 2",
               "type": "presentation",
               "url": "http://capco/closed-step2/show-link",
             },
             Object {
-              "endAt": "2017-12-28T09:00:24+01:00",
-              "startAt": "2017-12-20T09:00:24+01:00",
               "status": "FUTURE",
+              "timeRange": Object {
+                "endAt": "2017-12-28T09:00:24+01:00",
+                "startAt": "2017-12-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "Future step 1",
               "type": "presentation",
@@ -131,27 +137,33 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": true,
           "steps": Array [
             Object {
-              "endAt": "2016-12-28T09:00:24+01:00",
-              "startAt": "2016-12-20T09:00:24+01:00",
               "status": "CLOSED",
+              "timeRange": Object {
+                "endAt": "2016-12-28T09:00:24+01:00",
+                "startAt": "2016-12-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "Closed step",
               "type": "presentation",
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
-              "endAt": "2017-01-28T09:00:24+01:00",
-              "startAt": "2017-01-20T09:00:24+01:00",
               "status": "CLOSED",
+              "timeRange": Object {
+                "endAt": "2017-01-28T09:00:24+01:00",
+                "startAt": "2017-01-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "closed step 2",
               "type": "presentation",
               "url": "http://capco/closed-step2/show-link",
             },
             Object {
-              "endAt": "2017-12-28T09:00:24+01:00",
-              "startAt": "2017-12-20T09:00:24+01:00",
               "status": "FUTURE",
+              "timeRange": Object {
+                "endAt": "2017-12-28T09:00:24+01:00",
+                "startAt": "2017-12-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "Future step 1",
               "type": "presentation",
@@ -167,9 +179,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <ProjectPreviewProgressBar
     actualStep={
       Object {
-        "endAt": "2017-01-28T09:00:24+01:00",
-        "startAt": "2017-01-20T09:00:24+01:00",
         "status": "CLOSED",
+        "timeRange": Object {
+          "endAt": "2017-01-28T09:00:24+01:00",
+          "startAt": "2017-01-20T09:00:24+01:00",
+        },
         "timeless": null,
         "title": "closed step 2",
         "type": "presentation",
@@ -187,27 +201,33 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "isExternal": true,
         "steps": Array [
           Object {
-            "endAt": "2016-12-28T09:00:24+01:00",
-            "startAt": "2016-12-20T09:00:24+01:00",
             "status": "CLOSED",
+            "timeRange": Object {
+              "endAt": "2016-12-28T09:00:24+01:00",
+              "startAt": "2016-12-20T09:00:24+01:00",
+            },
             "timeless": null,
             "title": "Closed step",
             "type": "presentation",
             "url": "http://capco/closed-step1/show-link",
           },
           Object {
-            "endAt": "2017-01-28T09:00:24+01:00",
-            "startAt": "2017-01-20T09:00:24+01:00",
             "status": "CLOSED",
+            "timeRange": Object {
+              "endAt": "2017-01-28T09:00:24+01:00",
+              "startAt": "2017-01-20T09:00:24+01:00",
+            },
             "timeless": null,
             "title": "closed step 2",
             "type": "presentation",
             "url": "http://capco/closed-step2/show-link",
           },
           Object {
-            "endAt": "2017-12-28T09:00:24+01:00",
-            "startAt": "2017-12-20T09:00:24+01:00",
             "status": "FUTURE",
+            "timeRange": Object {
+              "endAt": "2017-12-28T09:00:24+01:00",
+              "startAt": "2017-12-20T09:00:24+01:00",
+            },
             "timeless": null,
             "title": "Future step 1",
             "type": "presentation",
@@ -253,18 +273,22 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": false,
           "steps": Array [
             Object {
-              "endAt": "2017-12-28T09:00:24+01:00",
-              "startAt": "2017-12-20T09:00:24+01:00",
               "status": "FUTURE",
+              "timeRange": Object {
+                "endAt": "2017-12-28T09:00:24+01:00",
+                "startAt": "2017-12-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "Future step 1",
               "type": "presentation",
               "url": "http://capco/future-step1/show-link",
             },
             Object {
-              "endAt": "2018-01-28T09:00:24+01:00",
-              "startAt": "2018-01-20T09:00:24+01:00",
               "status": "FUTURE",
+              "timeRange": Object {
+                "endAt": "2018-01-28T09:00:24+01:00",
+                "startAt": "2018-01-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "Future step 2",
               "type": "presentation",
@@ -324,9 +348,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <ProjectPreviewProgressBar
     actualStep={
       Object {
-        "endAt": "2017-12-28T09:00:24+01:00",
-        "startAt": "2017-12-20T09:00:24+01:00",
         "status": "FUTURE",
+        "timeRange": Object {
+          "endAt": "2017-12-28T09:00:24+01:00",
+          "startAt": "2017-12-20T09:00:24+01:00",
+        },
         "timeless": null,
         "title": "Future step 1",
         "type": "presentation",
@@ -344,18 +370,22 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "isExternal": false,
         "steps": Array [
           Object {
-            "endAt": "2017-12-28T09:00:24+01:00",
-            "startAt": "2017-12-20T09:00:24+01:00",
             "status": "FUTURE",
+            "timeRange": Object {
+              "endAt": "2017-12-28T09:00:24+01:00",
+              "startAt": "2017-12-20T09:00:24+01:00",
+            },
             "timeless": null,
             "title": "Future step 1",
             "type": "presentation",
             "url": "http://capco/future-step1/show-link",
           },
           Object {
-            "endAt": "2018-01-28T09:00:24+01:00",
-            "startAt": "2018-01-20T09:00:24+01:00",
             "status": "FUTURE",
+            "timeRange": Object {
+              "endAt": "2018-01-28T09:00:24+01:00",
+              "startAt": "2018-01-20T09:00:24+01:00",
+            },
             "timeless": null,
             "title": "Future step 2",
             "type": "presentation",
@@ -407,36 +437,38 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": false,
           "steps": Array [
             Object {
-              "endAt": null,
-              "startAt": null,
               "status": "CLOSED",
+              "timeRange": null,
               "timeless": null,
               "title": "Closed step",
               "type": null,
               "url": "",
             },
             Object {
-              "endAt": "2018-11-28T09:00:24+01:00",
-              "startAt": "2017-11-20T09:00:24+01:00",
               "status": "OPENED",
+              "timeRange": Object {
+                "endAt": "2018-11-28T09:00:24+01:00",
+                "startAt": "2017-11-20T09:00:24+01:00",
+              },
               "timeless": false,
               "title": "Open step 2",
               "type": "collect",
               "url": "http://capco/step2/show-link",
             },
             Object {
-              "endAt": "2017-11-25T09:00:24+01:00",
-              "startAt": "2017-01-10T09:00:24+01:00",
               "status": "OPENED",
+              "timeRange": Object {
+                "endAt": "2017-11-25T09:00:24+01:00",
+                "startAt": "2017-01-10T09:00:24+01:00",
+              },
               "timeless": false,
               "title": "Open step 1",
               "type": "collect",
               "url": "http://capco/step1/show-link",
             },
             Object {
-              "endAt": null,
-              "startAt": null,
               "status": "FUTURE",
+              "timeRange": null,
               "timeless": null,
               "title": "Future step",
               "type": null,
@@ -503,36 +535,38 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": false,
           "steps": Array [
             Object {
-              "endAt": null,
-              "startAt": null,
               "status": "CLOSED",
+              "timeRange": null,
               "timeless": null,
               "title": "Closed step",
               "type": null,
               "url": "",
             },
             Object {
-              "endAt": "2018-11-28T09:00:24+01:00",
-              "startAt": "2017-11-20T09:00:24+01:00",
               "status": "OPENED",
+              "timeRange": Object {
+                "endAt": "2018-11-28T09:00:24+01:00",
+                "startAt": "2017-11-20T09:00:24+01:00",
+              },
               "timeless": false,
               "title": "Open step 2",
               "type": "collect",
               "url": "http://capco/step2/show-link",
             },
             Object {
-              "endAt": "2017-11-25T09:00:24+01:00",
-              "startAt": "2017-01-10T09:00:24+01:00",
               "status": "OPENED",
+              "timeRange": Object {
+                "endAt": "2017-11-25T09:00:24+01:00",
+                "startAt": "2017-01-10T09:00:24+01:00",
+              },
               "timeless": false,
               "title": "Open step 1",
               "type": "collect",
               "url": "http://capco/step1/show-link",
             },
             Object {
-              "endAt": null,
-              "startAt": null,
               "status": "FUTURE",
+              "timeRange": null,
               "timeless": null,
               "title": "Future step",
               "type": null,
@@ -548,9 +582,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <ProjectPreviewProgressBar
     actualStep={
       Object {
-        "endAt": "2017-11-25T09:00:24+01:00",
-        "startAt": "2017-01-10T09:00:24+01:00",
         "status": "OPENED",
+        "timeRange": Object {
+          "endAt": "2017-11-25T09:00:24+01:00",
+          "startAt": "2017-01-10T09:00:24+01:00",
+        },
         "timeless": false,
         "title": "Open step 1",
         "type": "collect",
@@ -568,36 +604,38 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "isExternal": false,
         "steps": Array [
           Object {
-            "endAt": null,
-            "startAt": null,
             "status": "CLOSED",
+            "timeRange": null,
             "timeless": null,
             "title": "Closed step",
             "type": null,
             "url": "",
           },
           Object {
-            "endAt": "2018-11-28T09:00:24+01:00",
-            "startAt": "2017-11-20T09:00:24+01:00",
             "status": "OPENED",
+            "timeRange": Object {
+              "endAt": "2018-11-28T09:00:24+01:00",
+              "startAt": "2017-11-20T09:00:24+01:00",
+            },
             "timeless": false,
             "title": "Open step 2",
             "type": "collect",
             "url": "http://capco/step2/show-link",
           },
           Object {
-            "endAt": "2017-11-25T09:00:24+01:00",
-            "startAt": "2017-01-10T09:00:24+01:00",
             "status": "OPENED",
+            "timeRange": Object {
+              "endAt": "2017-11-25T09:00:24+01:00",
+              "startAt": "2017-01-10T09:00:24+01:00",
+            },
             "timeless": false,
             "title": "Open step 1",
             "type": "collect",
             "url": "http://capco/step1/show-link",
           },
           Object {
-            "endAt": null,
-            "startAt": null,
             "status": "FUTURE",
+            "timeRange": null,
             "timeless": null,
             "title": "Future step",
             "type": null,
@@ -646,36 +684,38 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": true,
           "steps": Array [
             Object {
-              "endAt": null,
-              "startAt": null,
               "status": "CLOSED",
+              "timeRange": null,
               "timeless": null,
               "title": "Closed step",
               "type": null,
               "url": "",
             },
             Object {
-              "endAt": "2018-11-28T09:00:24+01:00",
-              "startAt": "2017-11-20T09:00:24+01:00",
               "status": "OPENED",
+              "timeRange": Object {
+                "endAt": "2018-11-28T09:00:24+01:00",
+                "startAt": "2017-11-20T09:00:24+01:00",
+              },
               "timeless": false,
               "title": "Open step 2",
               "type": "collect",
               "url": "http://capco/step2/show-link",
             },
             Object {
-              "endAt": "2017-11-25T09:00:24+01:00",
-              "startAt": "2017-01-10T09:00:24+01:00",
               "status": "OPENED",
+              "timeRange": Object {
+                "endAt": "2017-11-25T09:00:24+01:00",
+                "startAt": "2017-01-10T09:00:24+01:00",
+              },
               "timeless": false,
               "title": "Open step 1",
               "type": "collect",
               "url": "http://capco/step1/show-link",
             },
             Object {
-              "endAt": null,
-              "startAt": null,
               "status": "FUTURE",
+              "timeRange": null,
               "timeless": null,
               "title": "Future step",
               "type": null,
@@ -770,36 +810,38 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": true,
           "steps": Array [
             Object {
-              "endAt": null,
-              "startAt": null,
               "status": "CLOSED",
+              "timeRange": null,
               "timeless": null,
               "title": "Closed step",
               "type": null,
               "url": "",
             },
             Object {
-              "endAt": "2018-11-28T09:00:24+01:00",
-              "startAt": "2017-11-20T09:00:24+01:00",
               "status": "OPENED",
+              "timeRange": Object {
+                "endAt": "2018-11-28T09:00:24+01:00",
+                "startAt": "2017-11-20T09:00:24+01:00",
+              },
               "timeless": false,
               "title": "Open step 2",
               "type": "collect",
               "url": "http://capco/step2/show-link",
             },
             Object {
-              "endAt": "2017-11-25T09:00:24+01:00",
-              "startAt": "2017-01-10T09:00:24+01:00",
               "status": "OPENED",
+              "timeRange": Object {
+                "endAt": "2017-11-25T09:00:24+01:00",
+                "startAt": "2017-01-10T09:00:24+01:00",
+              },
               "timeless": false,
               "title": "Open step 1",
               "type": "collect",
               "url": "http://capco/step1/show-link",
             },
             Object {
-              "endAt": null,
-              "startAt": null,
               "status": "FUTURE",
+              "timeRange": null,
               "timeless": null,
               "title": "Future step",
               "type": null,
@@ -815,9 +857,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <ProjectPreviewProgressBar
     actualStep={
       Object {
-        "endAt": "2017-11-25T09:00:24+01:00",
-        "startAt": "2017-01-10T09:00:24+01:00",
         "status": "OPENED",
+        "timeRange": Object {
+          "endAt": "2017-11-25T09:00:24+01:00",
+          "startAt": "2017-01-10T09:00:24+01:00",
+        },
         "timeless": false,
         "title": "Open step 1",
         "type": "collect",
@@ -835,36 +879,38 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "isExternal": true,
         "steps": Array [
           Object {
-            "endAt": null,
-            "startAt": null,
             "status": "CLOSED",
+            "timeRange": null,
             "timeless": null,
             "title": "Closed step",
             "type": null,
             "url": "",
           },
           Object {
-            "endAt": "2018-11-28T09:00:24+01:00",
-            "startAt": "2017-11-20T09:00:24+01:00",
             "status": "OPENED",
+            "timeRange": Object {
+              "endAt": "2018-11-28T09:00:24+01:00",
+              "startAt": "2017-11-20T09:00:24+01:00",
+            },
             "timeless": false,
             "title": "Open step 2",
             "type": "collect",
             "url": "http://capco/step2/show-link",
           },
           Object {
-            "endAt": "2017-11-25T09:00:24+01:00",
-            "startAt": "2017-01-10T09:00:24+01:00",
             "status": "OPENED",
+            "timeRange": Object {
+              "endAt": "2017-11-25T09:00:24+01:00",
+              "startAt": "2017-01-10T09:00:24+01:00",
+            },
             "timeless": false,
             "title": "Open step 1",
             "type": "collect",
             "url": "http://capco/step1/show-link",
           },
           Object {
-            "endAt": null,
-            "startAt": null,
             "status": "FUTURE",
+            "timeRange": null,
             "timeless": null,
             "title": "Future step",
             "type": null,
@@ -913,36 +959,35 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "isExternal": false,
           "steps": Array [
             Object {
-              "endAt": null,
-              "startAt": null,
               "status": "CLOSED",
+              "timeRange": null,
               "timeless": null,
               "title": "Closed step",
               "type": null,
               "url": "",
             },
             Object {
-              "endAt": "2017-11-25T09:00:24+01:00",
-              "startAt": "2017-11-10T09:00:24+01:00",
               "status": "OPENED",
+              "timeRange": Object {
+                "endAt": "2017-11-25T09:00:24+01:00",
+                "startAt": "2017-11-10T09:00:24+01:00",
+              },
               "timeless": false,
               "title": "Open step",
               "type": "presentation",
               "url": "http://capco/step/show-link",
             },
             Object {
-              "endAt": null,
-              "startAt": null,
               "status": "OPENED",
+              "timeRange": null,
               "timeless": true,
               "title": "timeless step",
               "type": "collect",
               "url": "http://capco/timeless-step/show-link",
             },
             Object {
-              "endAt": null,
-              "startAt": null,
               "status": "FUTURE",
+              "timeRange": null,
               "timeless": null,
               "title": "Future step",
               "type": null,
@@ -1002,9 +1047,8 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <ProjectPreviewProgressBar
     actualStep={
       Object {
-        "endAt": null,
-        "startAt": null,
         "status": "OPENED",
+        "timeRange": null,
         "timeless": true,
         "title": "timeless step",
         "type": "collect",
@@ -1022,36 +1066,35 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "isExternal": false,
         "steps": Array [
           Object {
-            "endAt": null,
-            "startAt": null,
             "status": "CLOSED",
+            "timeRange": null,
             "timeless": null,
             "title": "Closed step",
             "type": null,
             "url": "",
           },
           Object {
-            "endAt": "2017-11-25T09:00:24+01:00",
-            "startAt": "2017-11-10T09:00:24+01:00",
             "status": "OPENED",
+            "timeRange": Object {
+              "endAt": "2017-11-25T09:00:24+01:00",
+              "startAt": "2017-11-10T09:00:24+01:00",
+            },
             "timeless": false,
             "title": "Open step",
             "type": "presentation",
             "url": "http://capco/step/show-link",
           },
           Object {
-            "endAt": null,
-            "startAt": null,
             "status": "OPENED",
+            "timeRange": null,
             "timeless": true,
             "title": "timeless step",
             "type": "collect",
             "url": "http://capco/timeless-step/show-link",
           },
           Object {
-            "endAt": null,
-            "startAt": null,
             "status": "FUTURE",
+            "timeRange": null,
             "timeless": null,
             "title": "Future step",
             "type": null,
@@ -1097,18 +1140,22 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
           "isExternal": true,
           "steps": Array [
             Object {
-              "endAt": "2016-12-28T09:00:24+01:00",
-              "startAt": "2016-12-20T09:00:24+01:00",
               "status": "CLOSED",
+              "timeRange": Object {
+                "endAt": "2016-12-28T09:00:24+01:00",
+                "startAt": "2016-12-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "Closed step",
               "type": "presentation",
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
-              "endAt": "2017-01-28T09:00:24+01:00",
-              "startAt": "2017-01-20T09:00:24+01:00",
               "status": "CLOSED",
+              "timeRange": Object {
+                "endAt": "2017-01-28T09:00:24+01:00",
+                "startAt": "2017-01-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "closed step 2",
               "type": "presentation",
@@ -1203,18 +1250,22 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
           "isExternal": true,
           "steps": Array [
             Object {
-              "endAt": "2016-12-28T09:00:24+01:00",
-              "startAt": "2016-12-20T09:00:24+01:00",
               "status": "CLOSED",
+              "timeRange": Object {
+                "endAt": "2016-12-28T09:00:24+01:00",
+                "startAt": "2016-12-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "Closed step",
               "type": "presentation",
               "url": "http://capco/closed-step1/show-link",
             },
             Object {
-              "endAt": "2017-01-28T09:00:24+01:00",
-              "startAt": "2017-01-20T09:00:24+01:00",
               "status": "CLOSED",
+              "timeRange": Object {
+                "endAt": "2017-01-28T09:00:24+01:00",
+                "startAt": "2017-01-20T09:00:24+01:00",
+              },
               "timeless": null,
               "title": "closed step 2",
               "type": "presentation",
@@ -1230,9 +1281,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
   <ProjectPreviewProgressBar
     actualStep={
       Object {
-        "endAt": "2017-01-28T09:00:24+01:00",
-        "startAt": "2017-01-20T09:00:24+01:00",
         "status": "CLOSED",
+        "timeRange": Object {
+          "endAt": "2017-01-28T09:00:24+01:00",
+          "startAt": "2017-01-20T09:00:24+01:00",
+        },
         "timeless": null,
         "title": "closed step 2",
         "type": "presentation",
@@ -1250,18 +1303,22 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
         "isExternal": true,
         "steps": Array [
           Object {
-            "endAt": "2016-12-28T09:00:24+01:00",
-            "startAt": "2016-12-20T09:00:24+01:00",
             "status": "CLOSED",
+            "timeRange": Object {
+              "endAt": "2016-12-28T09:00:24+01:00",
+              "startAt": "2016-12-20T09:00:24+01:00",
+            },
             "timeless": null,
             "title": "Closed step",
             "type": "presentation",
             "url": "http://capco/closed-step1/show-link",
           },
           Object {
-            "endAt": "2017-01-28T09:00:24+01:00",
-            "startAt": "2017-01-20T09:00:24+01:00",
             "status": "CLOSED",
+            "timeRange": Object {
+              "endAt": "2017-01-28T09:00:24+01:00",
+              "startAt": "2017-01-20T09:00:24+01:00",
+            },
             "timeless": null,
             "title": "closed step 2",
             "type": "presentation",

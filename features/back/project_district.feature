@@ -12,12 +12,8 @@ Scenario: Logged in admin wants to add district in project.
   And I wait 1 seconds
   Then I should see "district_modal.create.title"
   And I wait 1 seconds
-  When I enable the border checkbox
   And I fill in the following:
     | projectDistrict.name  | troisième-quartier |
-    | projectDistrict.border.size  | 12 |
-    | projectDistrict.border.opacity  | 50 |
-  When I pick a color
   When I submit the modal
   And I reload the page
   And I wait 1 seconds

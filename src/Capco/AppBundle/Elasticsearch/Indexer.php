@@ -106,6 +106,7 @@ class Indexer
         $repository = $this->em->getRepository($entityFQN);
         $object = $repository->findOneBy(['id' => $identifier]);
         if (!$object instanceof IndexableInterface) {
+            // @todo if no object found, trigger a "remove" on ES.
             return;
         }
         if ($object->isIndexable()) {
@@ -190,12 +191,19 @@ class Indexer
         return $this;
     }
 
+    public function addApiAnalyticsDocumentToBulk(array $data): void
+    {
+        $this->addToBulk(new Document(null, $data, 'api_analytics'));
+    }
+
     protected function buildDocument(IndexableInterface $object): Document
     {
         $json = [];
 
         try {
-            $json = $this->serializer->serialize($object, 'json', ['groups' => $object->getElasticsearchSerializationGroups()]);
+            $json = $this->serializer->serialize($object, 'json', [
+                'groups' => $object->getElasticsearchSerializationGroups(),
+            ]);
         } catch (\Exception $exception) {
             $this->logger->error(__METHOD__ . $exception->getMessage());
         }
@@ -216,6 +224,7 @@ class Indexer
                 ->select('count(a)')
                 ->getQuery()
                 ->getSingleScalarResult();
+            // @todo ajouter un tri
             $output->writeln(PHP_EOL . "<info> Indexing ${count} ${class}</info>");
             $progress = new ProgressBar($output, $count);
             $progress->start();

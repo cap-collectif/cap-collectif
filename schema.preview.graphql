@@ -111,6 +111,7 @@ type Event implements Node & UniformResourceLocatable {
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
+  timeRange: PreviewTimeRange
 
   # Identifies the author of the event.
   author: User
@@ -118,11 +119,11 @@ type Event implements Node & UniformResourceLocatable {
   # Identifies the title of the event.
   title: String!
 
-  # Identifies the start of the event.
-  startAt: DateTime
+  # The start date of the event.
+  startAt: DateTime! @deprecated(reason: "Field `startAt` will be removed. Use `timeRange` instead. This field has been replaced by timeRange Removal on 2020-03-01 UTC.")
 
-  # Identifies the end of the event.
-  endAt: DateTime
+  # The end date of the event.
+  endAt: DateTime @deprecated(reason: "Field `endAt` will be removed. Use `timeRange` instead. This field has been replaced by timeRange Removal on 2020-03-01 UTC.")
 
   # Identifies the body of the event.
   body: HTML!
@@ -278,6 +279,15 @@ type PageInfo {
 
   # When paginating forwards, the cursor to continue.
   endCursor: String
+}
+
+# A time range that contains start date and end date.
+type PreviewTimeRange {
+  # The start date of the time range.
+  startAt: DateTime
+
+  # The end date of the time range
+  endAt: DateTime
 }
 
 # A participatory project.

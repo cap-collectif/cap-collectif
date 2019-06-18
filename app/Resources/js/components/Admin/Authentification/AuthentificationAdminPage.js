@@ -3,15 +3,15 @@ import * as React from 'react';
 import type { ReadyState } from 'react-relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import ShieldAdminForm from './ShieldAdminForm';
-import type { ShieldmAdminPageQueryResponse } from '~relay/ShieldAdminPageQuery.graphql';
-import environment, { graphqlError } from '../../createRelayEnvironment';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
+import type { AuthentificationAdminPageQueryResponse } from '~relay/AuthentificationAdminPageQuery.graphql';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
 
 const component = ({
   error,
   props,
 }: {
-  props: ?ShieldmAdminPageQueryResponse,
+  props: ?AuthentificationAdminPageQueryResponse,
 } & ReadyState) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
@@ -26,13 +26,13 @@ const component = ({
   return <Loader />;
 };
 
-export class ShieldAdminPage extends React.Component<{}> {
+export class AuthentificationAdminPage extends React.Component<{}> {
   render() {
     return (
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query ShieldAdminPageQuery {
+          query AuthentificationAdminPageQuery {
             shieldAdminForm {
               ...ShieldAdminForm_shieldAdminForm
             }
@@ -45,4 +45,4 @@ export class ShieldAdminPage extends React.Component<{}> {
   }
 }
 
-export default ShieldAdminPage;
+export default AuthentificationAdminPage;

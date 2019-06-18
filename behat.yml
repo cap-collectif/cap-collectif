@@ -24,7 +24,6 @@ e2e:
     Bex\Behat\StepTimeLoggerExtension:
       output: [console, csv]
   suites:
-    # If you add an other suite, please update isSuiteWithJS method.
     core:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -33,7 +32,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@core&&~@event_registration&&~@randomly-failing'
+        tags: '@core&&~@event_registration'
     consultation:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -42,7 +41,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@consultation&&~@synthesis&&~@randomly-failing'
+        tags: '@consultation&&~@synthesis'
     bp:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -51,7 +50,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@bp&&~@randomly-failing'
+        tags: '@bp'
     questionnaire:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -60,22 +59,14 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@questionnaire&&~@randomly-failing'
+        tags: '@questionnaire'
     bo:
       paths: ['%paths.base%/features/back']
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
-    randomly-failing:
-      paths: ['%paths.base%/features/front', '%paths.base%/features/back']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\RabbitMQContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
-      filters:
-        tags: '@randomly-failing'
+
 commands:
   extensions:
     # Tonic\Behat\ParallelScenarioExtension: ~

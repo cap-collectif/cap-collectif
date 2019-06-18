@@ -7,6 +7,7 @@ application:
     - '1664:1664'
     - '8181:8181'
     - '8686:8686'
+    - '1234:1234'
   environment:
     TERM: xterm
     SYMFONY_DATABASE_HOST: database
@@ -25,6 +26,7 @@ application:
     - redis:redis
     - seleniumhub:selenium
     - mailcatcher:mailcatchersmtp
+    - cerebro:cerebro
   extra_hosts: # Used to ban varnish cache
     - 'capco.test:0.0.0.0'
 
@@ -74,6 +76,13 @@ mailcatcher:
   build: ../services/mailcatcher
   ports:
     - '25:25'
+
+cerebro:
+  image: lmenezes/cerebro
+  links:
+    - elasticsearch
+  ports:
+    - '9000:9000'
 
 chrome:
   build: ../services/chrome

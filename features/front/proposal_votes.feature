@@ -143,7 +143,7 @@ Scenario: Logged in user wants to reorder my vote for a project
   And I wait 2 seconds
   Then I click on button "#confirm-update-votes"
 
-@database
+@database @randomly-failing
 Scenario: Logged in user wants to set a vote as anonymous
   Given I am logged in as user
   When I got to the votes details page of project with requirements

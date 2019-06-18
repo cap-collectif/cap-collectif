@@ -476,37 +476,6 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function countProjectProposalAnonymousVotersWithCount(
-        Project $project,
-        $excludePrivate = false
-    ): int {
-        $query = $this->getEntityManager()
-            ->createQueryBuilder()
-            ->select('COUNT(DISTINCT proposal_selection_vote.email)')
-            ->from('CapcoAppBundle:ProposalSelectionVote', 'proposal_selection_vote')
-            ->leftJoin(
-                'CapcoAppBundle:Proposal',
-                'proposal',
-                Join::WITH,
-                'proposal_selection_vote.proposal = proposal'
-            )
-            ->leftJoin('proposal_selection_vote.selectionStep', 'selection_step')
-            ->leftJoin('selection_step.projectAbstractStep', 'project_abstract_step')
-            ->andWhere('proposal.published = 1')
-            ->andWhere('project_abstract_step.project = :project')
-            ->setParameter('project', $project);
-
-        $query->andWhere(
-            $query->expr()->andX($query->expr()->isNotNull('proposal_selection_vote.email'))
-        );
-
-        if ($excludePrivate) {
-            $query->andWhere('proposal_selection_vote.private = 0');
-        }
-
-        return (int) $query->getQuery()->getSingleScalarResult();
-    }
-
     public function findWithMediaByIds($ids): array
     {
         $qb = $this->createQueryBuilder('u');
@@ -760,34 +729,6 @@ class UserRepository extends EntityRepository
             ->setParameter('step', $step);
 
         return $query->getResult();
-    }
-
-    public function countSelectionStepProposalAnonymousVoters(SelectionStep $step): int
-    {
-        $query = $this->getEntityManager()
-            ->createQueryBuilder()
-            ->select('COUNT(DISTINCT proposal_selection_vote.email)')
-            ->from('CapcoAppBundle:ProposalSelectionVote', 'proposal_selection_vote')
-            ->leftJoin(
-                'CapcoAppBundle:Proposal',
-                'proposal',
-                Join::WITH,
-                'proposal_selection_vote.proposal = proposal'
-            )
-            ->andWhere('proposal_selection_vote.published = 1')
-            ->andWhere('proposal.draft = 0')
-            ->andWhere('proposal.trashedAt IS NULL')
-            ->andWhere('proposal.published = 1')
-            ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('proposal_selection_vote.selectionStep = :step');
-
-        $query
-            ->andWhere(
-                $query->expr()->andX($query->expr()->isNotNull('proposal_selection_vote.email'))
-            )
-            ->setParameter('step', $step);
-
-        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function getSearchResults(

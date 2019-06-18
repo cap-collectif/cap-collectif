@@ -21,6 +21,7 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
@@ -228,6 +229,9 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof MapToken) {
             return $this->typeResolver->resolve('MapToken');
+        }
+        if ($node instanceof Oauth2SSOConfiguration) {
+            return $this->typeResolver->resolve('InternalOauth2SSOConfiguration');
         }
 
         throw new UserError('Could not resolve type of Node.');
