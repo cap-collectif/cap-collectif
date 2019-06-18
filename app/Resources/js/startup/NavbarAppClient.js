@@ -14,11 +14,11 @@ const NavbarAppClient = (props: Object) => {
   const state = store.getState();
 
   const theme = {
-    mainNavbarBg: state.default.parameters['color.main_menu.bg'],
-    mainNavbarBgActive: state.default.parameters['color.main_menu.bg_active'],
-    mainNavbarText: state.default.parameters['color.main_menu.text'],
-    mainNavbarTextHover: state.default.parameters['color.main_menu.text_hover'],
-    mainNavbarTextActive: state.default.parameters['color.main_menu.text_active'],
+    mainNavbarBg: state.default.parameters['color.main_menu.bg'] || '#ebebeb',
+    mainNavbarBgActive: state.default.parameters['color.main_menu.bg_active'] || '#e7e7e7',
+    mainNavbarText: state.default.parameters['color.main_menu.text'] || '#777',
+    mainNavbarTextHover: state.default.parameters['color.main_menu.text_hover'] || '#555',
+    mainNavbarTextActive: state.default.parameters['color.main_menu.text_active'] || '#555',
   };
 
   return (
