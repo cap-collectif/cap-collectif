@@ -18,13 +18,13 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
         string $configUrl,
         string $baseUrl,
         string $stepUrl,
-        string $questionnaireStepTitle
+        string $questionnaireTitle
     ): self {
         return new self(
             $recipientEmail,
             null,
             "reply.notify.user.${state}",
-            static::getMySubjectVars($questionnaireStepTitle),
+            static::getMySubjectVars($questionnaireTitle),
             '@CapcoMail/acknowledgeReply.html.twig',
             static::getMyTemplateVars(
                 $projectTitle,
@@ -57,21 +57,23 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
             'siteName' => self::escape($siteName),
             'date' => $reply->getCreatedAt(),
             'authorName' => $reply->getAuthor()->getUsername(),
-            'questionnaireStepTitle' => $reply->getStep()->getTitle(),
-            'questionnaireEndDate' => $reply->getStep()->getEndAt(),
+            'questionnaireTitle' => $reply->getQuestionnaire()->getTitle(),
+            'questionnaireEndDate' => $reply
+                ->getQuestionnaire()
+                ->getStep()
+                ->getEndAt(),
             'state' => $state,
             'userUrl' => $userUrl,
             'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
             'stepUrl' => $stepUrl,
-            'timeless' => $reply->getStep()->isTimeless()
         ];
     }
 
-    private static function getMySubjectVars(string $questionnaireStepTitle): array
+    private static function getMySubjectVars(string $questionnaireTitle): array
     {
         return [
-            '{questionnaireStepTitle}' => $questionnaireStepTitle
+            '{questionnaireTitle}' => $questionnaireTitle,
         ];
     }
 }
