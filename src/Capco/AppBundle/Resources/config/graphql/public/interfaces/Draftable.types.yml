@@ -4,7 +4,8 @@ Draftable:
     - Node
   config:
     description: 'Entities that can be drafted.'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Draftable\\DraftableTypeResolver", [value])'
+    resolveType:
+      '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Draftable\\DraftableTypeResolver", [value])'
     fields:
       draft:
         type: 'Boolean!'

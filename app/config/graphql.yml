@@ -90,4 +90,3 @@ overblog_graphql:
           - InternalSectionQuestion
           - InternalMediaQuestion
           - InternalMediaResponse
-          - InternalOauth2SSOConfiguration

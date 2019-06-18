@@ -5,7 +5,7 @@ exports[`<ProposalListSearch /> should render correctly 1`] = `
   onSubmit={[Function]}
 >
   <InjectIntl(ReactBootstrapInput)
-    ariaLabel="project.searchform.search"
+    aria-label="project.searchform.search"
     buttonAfter={
       <Button
         active={false}

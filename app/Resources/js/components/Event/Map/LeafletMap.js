@@ -58,10 +58,8 @@ const eventMapPreviewQuery = graphql`
         title
         url
         fullAddress
-        timeRange {
-          startAt
-          endAt
-        }
+        startAt
+        endAt
         title
         author {
           username

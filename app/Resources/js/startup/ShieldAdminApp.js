@@ -3,12 +3,12 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
-import AuthentificationAdminPage from '../components/Admin/Authentification/AuthentificationAdminPage';
+import ShieldAdminPage from '../components/Admin/ShieldAdminPage';
 
 export default () => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <AuthentificationAdminPage />
+      <ShieldAdminPage />
     </IntlProvider>
   </Provider>
 );

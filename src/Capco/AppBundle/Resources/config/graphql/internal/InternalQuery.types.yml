@@ -239,9 +239,3 @@ InternalQuery:
         description: 'Get the current shield admin form.'
         access: "@=hasRole('ROLE_ADMIN')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ShieldAdminFormQueryResolver")'
-      ssoConfigurations:
-        type: 'InternalSSOConfigurationConnection!'
-        argsBuilder: 'Relay::Connection'
-        description: 'List all SSO Configurations.'
-        access: "@=hasRole('ROLE_ADMIN')"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SSOConfigurationQueryResolver", [args])'

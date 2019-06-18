@@ -1,7 +1,7 @@
 @consultation @opinions
 Feature: Opinions
 
-@database @randomly-failing
+@database
 Scenario: Can create an opinion of contribuable type in opened project
   Given I am logged in as user
   And I visited "consultation page" with:
@@ -91,16 +91,6 @@ Scenario: Non author of an opinion wants to update it
     | opinionTypeSlug  | enjeux                           |
     | opinionSlug      | opinion-3                        |
   Then I should not see "global.edit" in the ".opinion__description .opinion__buttons" element
-
-Scenario: Anonymous wants to see opinion appendix
-  Given I go to an opinion with versions
-  Then I should see "Motifs 1"
-  And I press "Exposé des motifs"
-  And I wait 1 seconds
-  Then I should not see "Motifs 1"
-  And I press "Étude d'impact"
-  And I wait 1 seconds
-  Then I should see "Impacts 1"
 
 Scenario: Anonymous user wants to see all votes of an opinion
   Given I go to an opinion with loads of votes

@@ -3,13 +3,14 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalListSearch } from './ProposalListSearch';
-import { intlMock } from '../../../mocks';
+import { $refType, intlMock } from '../../../mocks';
 
 describe('<ProposalListSearch />', () => {
   const defaultProps = {
     dispatch: jest.fn(),
     terms: 'This is some terms',
     intl: intlMock,
+    $refType,
   };
 
   it('should render correctly', () => {

@@ -200,7 +200,7 @@ Scenario: Non author of a proposal wants to update it
   And I go to a proposal
   Then I should not see the edit proposal button
 
-@database @randomly-failing
+@database
 Scenario: Author of a proposal wants to delete it
   Given I am logged in as user
   And I go to an open collect step

@@ -1,13 +1,11 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Query;
+namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
-use GraphQL\Type\Definition\ResolveInfo;
 use Capco\AppBundle\Search\ProjectSearch;
-use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
@@ -15,34 +13,22 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class QueryProjectsResolver implements ResolverInterface
+class ProjectsResolver implements ResolverInterface
 {
     use ResolverTrait;
 
     private $logger;
     private $projectSearch;
-    private $queryAnalyzer;
 
-    public function __construct(
-        ProjectSearch $projectSearch,
-        LoggerInterface $logger,
-        QueryAnalyzer $queryAnalyzer
-    ) {
+    public function __construct(ProjectSearch $projectSearch, LoggerInterface $logger)
+    {
         $this->logger = $logger;
         $this->projectSearch = $projectSearch;
-        $this->queryAnalyzer = $queryAnalyzer;
     }
 
-    public function __invoke(Argument $args, ?User $viewer, ResolveInfo $resolveInfo): Connection
+    public function __invoke(Argument $args, ?User $viewer = null): Connection
     {
         $this->protectArguments($args);
-        $this->queryAnalyzer->analyseQuery($resolveInfo);
-
-        return $this->resolve($args, $viewer);
-    }
-
-    public function resolve(Argument $args, ?User $viewer = null): Connection
-    {
         $totalCount = 0;
 
         try {

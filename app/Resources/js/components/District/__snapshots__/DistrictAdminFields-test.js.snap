@@ -9,5 +9,66 @@ exports[`<DistrictAdminFields /> renders correcty 1`] = `
     name="form.name"
     type="text"
   />
+  <Field
+    component={[Function]}
+    help={
+      <FormattedMessage
+        id="admin.fields.proposal.map.helpFormatGeojson"
+        values={Object {}}
+      />
+    }
+    id="form.geojson"
+    label={
+      <FormattedMessage
+        id="admin.fields.proposal.map.zone"
+        values={Object {}}
+      />
+    }
+    name="form.geojson"
+    type="textarea"
+  />
+  <Field
+    component={[Function]}
+    id="form.displayedOnMap"
+    name="form.displayedOnMap"
+    normalize={[Function]}
+    type="checkbox"
+  >
+    <FormattedMessage
+      id="admin.fields.proposal.map.displayZones"
+      values={Object {}}
+    />
+  </Field>
+  <h3>
+    Styles
+  </h3>
+  <hr />
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <Col
+      bsClass="col"
+      componentClass="div"
+      md={6}
+      xs={12}
+    >
+      <_temp
+        isEnabled={true}
+        member="form"
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      md={6}
+      xs={12}
+    >
+      <_temp
+        isEnabled={true}
+        member="form"
+      />
+    </Col>
+  </Row>
 </Fragment>
 `;

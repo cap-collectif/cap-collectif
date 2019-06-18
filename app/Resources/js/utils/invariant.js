@@ -43,4 +43,4 @@ const invariant = function(condition, format, a, b, c, d, e, f) {
   }
 };
 
-export default invariant;
+module.exports = invariant;

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ShieldAdminForm } from './ShieldAdminForm';
-import { formMock, $refType } from '../../../mocks';
+import { formMock, $refType } from '../../mocks';
 
 describe('<ShieldAdminForm />', () => {
   const props = {

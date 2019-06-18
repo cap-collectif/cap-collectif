@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Repository\ConsultationRepository;
-use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -52,6 +51,16 @@ class GlobalIdResolver
     {
         $this->container = $container;
         $this->logger = $logger;
+    }
+
+    public function resolveMultiple(array $array, $user, \ArrayObject $context): array
+    {
+        $results = [];
+        foreach ($array as $value) {
+            $results[] = $this->resolve($value, $user, $context);
+        }
+
+        return $results;
     }
 
     public function resolve(string $uuidOrGlobalId, $userOrAnon, ?\ArrayObject $context = null)
@@ -145,12 +154,6 @@ class GlobalIdResolver
                     break;
                 case 'Project':
                     $node = $this->container->get(ProjectRepository::class)->find($uuid);
-
-                    break;
-                case 'Oauth2SSOConfiguration':
-                    $node = $this->container
-                        ->get(Oauth2SSOConfigurationRepository::class)
-                        ->find($uuid);
 
                     break;
                 default:
@@ -280,7 +283,7 @@ class GlobalIdResolver
             Post::class,
             ProposalForm::class,
             Event::class,
-            AbstractStep::class
+            AbstractStep::class,
         ];
 
         foreach ($projectContributionClass as $object) {

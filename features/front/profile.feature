@@ -4,7 +4,7 @@ Feature: Profil
 Background:
   Given feature "profiles" is enabled
 
-@database @randomly-failing
+@database
 Scenario: Logged in user wants to change his username
   Given feature "user_type" is enabled
   Given I am logged in as user

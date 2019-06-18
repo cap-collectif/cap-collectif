@@ -81,7 +81,7 @@ import SectionPageApp from './startup/SectionPageApp';
 import MapAdminPageApp from './startup/MapAdminPageApp';
 import SSOSwitchUserApp from './startup/SSOSwitchUserApp';
 import LastProposalsApp from './startup/LastProposalsApp';
-import AuthentificationAdminApp from './startup/AuthentificationAdminApp';
+import ShieldAdminApp from './startup/ShieldAdminApp';
 import appStore from './stores/AppStore';
 
 if (process.env.NODE_ENV === 'development') {
@@ -188,5 +188,5 @@ ReactOnRails.register({
   AdminExportButtonApp,
   EventListApp,
   SSOSwitchUserApp,
-  AuthentificationAdminApp,
+  ShieldAdminApp,
 });

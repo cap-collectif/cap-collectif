@@ -6,6 +6,6 @@ class SiteFaviconController extends \Sonata\AdminBundle\Controller\CRUDControlle
 {
     public function listAction()
     {
-        return $this->renderWithExtraParams('CapcoAdminBundle:SiteFavicon:list.html.twig');
+        return $this->render('CapcoAdminBundle:SiteFavicon:list.html.twig');
     }
 }

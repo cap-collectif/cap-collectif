@@ -15,8 +15,9 @@ exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "endAt": "",
+        "startAt": "",
         "status": "OPENED",
-        "timeRange": null,
         "timeless": false,
         "title": "I am a title",
         "type": "consultation",
@@ -41,8 +42,9 @@ exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "endAt": "",
+        "startAt": "",
         "status": "OPENED",
-        "timeRange": null,
         "timeless": false,
         "title": "I am a title",
         "type": "questionnaire",
@@ -93,8 +95,9 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "endAt": "",
+        "startAt": "",
         "status": "OPENED",
-        "timeRange": null,
         "timeless": false,
         "title": "I am a title",
         "type": "selection",

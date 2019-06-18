@@ -59,7 +59,6 @@ export class ImageUpload extends React.Component<Props> {
     }
   };
 
-  // TODO use React.createRef()
   _deleteCheckbox: ?React.Component<*> | mixed;
 
   uncheckDelete = () => {
