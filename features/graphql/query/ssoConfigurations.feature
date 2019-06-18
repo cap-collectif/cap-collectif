@@ -14,7 +14,7 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
             id
             name
             enabled
-            ... on InternalOauth2SSOConfiguration {
+            ... on Oauth2SSOConfiguration {
               clientId
               secret
               authorizationUrl
