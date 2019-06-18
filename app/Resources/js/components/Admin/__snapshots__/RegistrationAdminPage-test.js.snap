@@ -362,6 +362,16 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         }
       }
     >
+      <Alert
+        bsClass="alert"
+        bsStyle="info"
+        closeLabel="Close alert"
+      >
+        <FormattedMessage
+          id="only-super-admin-can-edit"
+          values={Object {}}
+        />
+      </Alert>
       <strong>
         <FormattedMessage
           id="more-fields"
