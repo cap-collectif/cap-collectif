@@ -31,23 +31,17 @@ class ProposalSpec extends ObjectBehavior
         $this->shouldImplement(DisplayableInBOInterface::class);
     }
 
-    public function it_can_be_seen_in_BO_by_admin_or_superadmin(User $viewer, Proposal $proposal): void
+    public function it_can_be_seen_by_admin_draft(User $viewer, Proposal $proposal): void
     {
-        $viewer->isAdmin()->willReturn(true);
+        $proposal->setDraft(true);
+        $viewer->setRoles(['ROLE_ADMIN']);
         $proposal->viewerCanSeeInBo($viewer)->willReturn(true);
     }
 
-    public function it_can_be_seen_by_admin_or_superadmin(User $viewer, Proposal $proposal): void
+    public function it_can_be_seen_by_super_admin_draft(User $viewer, Proposal $proposal): void
     {
-        $viewer->isAdmin()->willReturn(true);
-        $proposal->viewerCanSee($viewer)->willReturn(true);
-    }
-
-    public function it_can_be_seen_by_author_if_not_published(User $viewer, Proposal $proposal): void
-    {
-        $viewer->isAdmin()->willReturn(false);
-        $proposal->isPublished()->willReturn(false);
-        $proposal->getAuthor()->willReturn($viewer);
-        $proposal->viewerCanSee($viewer)->willReturn(true);
+        $proposal->setDraft(true);
+        $viewer->setRoles(['ROLE_SUPER_ADMIN']);
+        $proposal->viewerCanSeeInBo($viewer)->willReturn(true);
     }
 }
