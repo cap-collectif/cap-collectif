@@ -58,20 +58,22 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
             'date' => $reply->getCreatedAt(),
             'authorName' => $reply->getAuthor()->getUsername(),
             'questionnaireTitle' => $reply->getQuestionnaire()->getTitle(),
-            'questionnaireEndDate' => $reply->getStep()->getEndAt(),
+            'questionnaireEndDate' => $reply
+                ->getQuestionnaire()
+                ->getStep()
+                ->getEndAt(),
             'state' => $state,
             'userUrl' => $userUrl,
             'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
             'stepUrl' => $stepUrl,
-            'timeless' => $reply->getStep()->isTimeless()
         ];
     }
 
     private static function getMySubjectVars(string $questionnaireTitle): array
     {
         return [
-            '{questionnaireTitle}' => $questionnaireTitle
+            '{questionnaireTitle}' => $questionnaireTitle,
         ];
     }
 }

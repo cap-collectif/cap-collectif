@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Well } from 'react-bootstrap';
+import { Alert, Well } from 'react-bootstrap';
 import Toggle from 'react-toggle';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import { toggleFeature } from '../../redux/modules/default';
@@ -114,6 +114,11 @@ export class RegistrationAdminPage extends React.Component<Props> {
         </div>
         <Well bsClass={isSuperAdmin ? 'div' : 'well'}>
           <p style={{ marginTop: 10 }}>
+            {!isSuperAdmin && (
+              <Alert bsStyle="info">
+                <FormattedMessage id="only-super-admin-can-edit" />
+              </Alert>
+            )}
             <strong>
               <FormattedMessage id="more-fields" />
             </strong>
@@ -165,7 +170,9 @@ export class RegistrationAdminPage extends React.Component<Props> {
                 link: (
                   <a
                     className="external-link"
-                    href={`${window.location.protocol}//${window.location.host}/admin/settings/settings.global/list`}>
+                    href={`${window.location.protocol}//${
+                      window.location.host
+                    }/admin/settings/settings.global/list`}>
                     <FormattedMessage id="proposal.admin.general" />
                   </a>
                 ),

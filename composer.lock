@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9bd636506bd5c5e2892613e4cbff4fb6",
+    "content-hash": "52dd8b4ec44b8cf1da94e67e85fc0acd",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -1878,7 +1878,7 @@
             "version": "dev-feature/symfony4-compat",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/IvoryCKEditorBundle.git",
+                "url": "https://github.com/cap-collectif/IvoryCKEditorBundle.git",
                 "reference": "f9f68afcff81a210f2122013a852384f4102b65a"
             },
             "dist": {
@@ -1937,6 +1937,9 @@
             "keywords": [
                 "ckeditor"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/IvoryCKEditorBundle/tree/feature/symfony4-compat"
+            },
             "time": "2019-03-28T11:25:51+00:00"
         },
         {
@@ -2023,7 +2026,7 @@
             "version": "dev-feature/symfony4",
             "source": {
                 "type": "git",
-                "url": "git@github.com:pgodel/ivory-json-builder.git",
+                "url": "https://github.com/pgodel/ivory-json-builder.git",
                 "reference": "58f2f1356176429fb18781f32fb39875f4c72ef5"
             },
             "dist": {
@@ -2073,20 +2076,23 @@
                 "escape",
                 "json"
             ],
+            "support": {
+                "source": "https://github.com/pgodel/ivory-json-builder/tree/feature/symfony4"
+            },
             "time": "2017-11-18T12:28:41+00:00"
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.8",
+            "version": "2.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "c26463ff9241f27907112fbcd0c86fa670cfef98"
+                "reference": "709f21f92707308cdf8f9bcfa1af4cb26586521e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/c26463ff9241f27907112fbcd0c86fa670cfef98",
-                "reference": "c26463ff9241f27907112fbcd0c86fa670cfef98",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/709f21f92707308cdf8f9bcfa1af4cb26586521e",
+                "reference": "709f21f92707308cdf8f9bcfa1af4cb26586521e",
                 "shasum": ""
             },
             "require": {
@@ -2130,7 +2136,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2019-05-16T22:02:54+00:00"
+            "time": "2018-12-04T22:38:24+00:00"
         },
         {
             "name": "ekino/newrelic-bundle",
@@ -3734,7 +3740,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/HWIOAuthBundle.git",
+                "url": "https://github.com/cap-collectif/HWIOAuthBundle.git",
                 "reference": "c1802bc31abc3f311301f63cd2cb35b9ca050fee"
             },
             "dist": {
@@ -3890,6 +3896,9 @@
                 "yandex",
                 "youtube"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/HWIOAuthBundle/tree/master"
+            },
             "time": "2019-05-20T13:22:09+00:00"
         },
         {
@@ -4711,16 +4720,16 @@
         },
         {
             "name": "knplabs/knp-menu-bundle",
-            "version": "2.2.2",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
-                "reference": "267027582a1f1e355276f796f8da0e9f82026bf1"
+                "reference": "6bea43eb84fc67c43ab2b43709194efffa8a8ac0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/267027582a1f1e355276f796f8da0e9f82026bf1",
-                "reference": "267027582a1f1e355276f796f8da0e9f82026bf1",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/6bea43eb84fc67c43ab2b43709194efffa8a8ac0",
+                "reference": "6bea43eb84fc67c43ab2b43709194efffa8a8ac0",
                 "shasum": ""
             },
             "require": {
@@ -4766,7 +4775,7 @@
             "keywords": [
                 "menu"
             ],
-            "time": "2019-06-17T12:58:15+00:00"
+            "time": "2017-12-24T16:32:39+00:00"
         },
         {
             "name": "kriswallsmith/buzz",
@@ -5177,7 +5186,7 @@
             "version": "dev-prepare-symfony-4",
             "source": {
                 "type": "git",
-                "url": "git@github.com:Jan0707/ExcelBundle.git",
+                "url": "https://github.com/Jan0707/ExcelBundle.git",
                 "reference": "d55afc1572d3e6747ef8fe849cf20e522a94b59a"
             },
             "dist": {
@@ -5240,6 +5249,9 @@
                 "symfony2",
                 "xls"
             ],
+            "support": {
+                "source": "https://github.com/Jan0707/ExcelBundle/tree/prepare-symfony-4"
+            },
             "time": "2018-01-04T20:39:15+00:00"
         },
         {
@@ -6344,7 +6356,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/GraphQLBundle.git",
+                "url": "https://github.com/cap-collectif/GraphQLBundle.git",
                 "reference": "2cdc6e286f3a7f5f702b1eb5ec2b2c2363997009"
             },
             "dist": {
@@ -6453,6 +6465,9 @@
                 "GraphQL",
                 "Relay"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/GraphQLBundle/tree/master"
+            },
             "time": "2018-12-05T16:36:02+00:00"
         },
         {
@@ -6629,7 +6644,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:Liinkiing/geoPHP.git",
+                "url": "https://github.com/Liinkiing/geoPHP.git",
                 "reference": "dcd53748bbd632f4285a4143e329f67226baae10"
             },
             "dist": {
@@ -6657,7 +6672,66 @@
             ],
             "description": "GeoPHP is a open-source native PHP library for doing geometry operations. It is written entirely in PHP and can therefore run on shared hosts. It can read and write a wide variety of formats: WKT (including EWKT), WKB (including EWKB), GeoJSON, KML, GPX, GeoRSS). It works with all Simple-Feature geometries (Point, LineString, Polygon, GeometryCollection etc.) and can be used to get centroids, bounding-boxes, area, and a wide variety of other useful information.",
             "homepage": "https://github.com/phayes/geoPHP",
+            "support": {
+                "source": "https://github.com/Liinkiing/geoPHP/tree/dev-bugfix"
+            },
             "time": "2017-10-11T16:26:25+00:00"
+        },
+        {
+            "name": "php-http/cache-plugin",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-http/cache-plugin.git",
+                "reference": "8e2505d2090316fac7cce637b39b6bbb5249c5a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/cache-plugin/zipball/8e2505d2090316fac7cce637b39b6bbb5249c5a8",
+                "reference": "8e2505d2090316fac7cce637b39b6bbb5249c5a8",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 || ^7.0",
+                "php-http/client-common": "^1.9 || ^2.0",
+                "php-http/message-factory": "^1.0",
+                "psr/cache": "^1.0",
+                "symfony/options-resolver": "^2.6 || ^3.0 || ^4.0"
+            },
+            "require-dev": {
+                "henrikbjorn/phpspec-code-coverage": "^1.0",
+                "phpspec/phpspec": "^2.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Http\\Client\\Common\\Plugin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
+                }
+            ],
+            "description": "PSR-6 Cache plugin for HTTPlug",
+            "homepage": "http://httplug.io",
+            "keywords": [
+                "cache",
+                "http",
+                "httplug",
+                "plugin"
+            ],
+            "time": "2019-01-23T16:51:58+00:00"
         },
         {
             "name": "php-http/client-common",
@@ -6958,20 +7032,21 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.15.2",
+            "version": "1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "35d281804a90f0359aa9da5b5b1f55c18aeafaf8"
+                "reference": "f94de3b2548c9f7499092dbf4eeaefe890a22ff3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/35d281804a90f0359aa9da5b5b1f55c18aeafaf8",
-                "reference": "35d281804a90f0359aa9da5b5b1f55c18aeafaf8",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/f94de3b2548c9f7499092dbf4eeaefe890a22ff3",
+                "reference": "f94de3b2548c9f7499092dbf4eeaefe890a22ff3",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.5 || ^7.0",
+                "php-http/cache-plugin": "^1.6",
                 "php-http/client-common": "^1.9 || ^2.0",
                 "php-http/client-implementation": "^1.0",
                 "php-http/discovery": "^1.0",
@@ -6985,7 +7060,8 @@
                 "symfony/dependency-injection": "^2.8.49 || ^3.0.9 || ^3.1.10 || ^3.2.14 || ^3.3.18 || ^3.4.20 || ^4.0.15 || ^4.1.9 || ^4.2.1",
                 "symfony/event-dispatcher": "^2.8.49 || ^3.0.9 || ^3.1.10 || ^3.2.14 || ^3.3.18 || ^3.4.20 || ^4.0.15 || ^4.1.9 || ^4.2.1",
                 "symfony/http-kernel": "^2.8.49 || ^3.0.9 || ^3.1.10 || ^3.2.14 || ^3.3.18 || ^3.4.20 || ^4.0.15 || ^4.1.9 || ^4.2.1",
-                "symfony/options-resolver": "^2.8.49 || ^3.0.9 || ^3.1.10 || ^3.2.14 || ^3.3.18 || ^3.4.20 || ^4.0.15 || ^4.1.9 || ^4.2.1"
+                "symfony/options-resolver": "^2.8.49 || ^3.0.9 || ^3.1.10 || ^3.2.14 || ^3.3.18 || ^3.4.20 || ^4.0.15 || ^4.1.9 || ^4.2.1",
+                "twig/twig": "^1.36 || ^2.6"
             },
             "conflict": {
                 "php-http/guzzle6-adapter": "<1.1"
@@ -6994,7 +7070,6 @@
                 "guzzlehttp/psr7": "^1.0",
                 "matthiasnoback/symfony-dependency-injection-test": "^1.1 || ^2.3",
                 "nyholm/nsa": "^1.1",
-                "php-http/cache-plugin": "^1.6",
                 "php-http/guzzle6-adapter": "^1.1.1 || ^2.0.1",
                 "php-http/mock-client": "^1.2",
                 "php-http/promise": "^1.0",
@@ -7007,13 +7082,10 @@
                 "symfony/phpunit-bridge": "^3.4 || ^4.2",
                 "symfony/stopwatch": "^2.8.49 || ^3.0.9 || ^3.1.10 || ^3.2.14 || ^3.3.18 || ^3.4.20 || ^4.0.15 || ^4.1.9 || ^4.2.1",
                 "symfony/twig-bundle": "^2.8.49 || ^3.0.9 || ^3.1.10 || ^3.2.14 || ^3.3.18 || ^3.4.20 || ^4.0.15 || ^4.1.9 || ^4.2.1",
-                "symfony/web-profiler-bundle": "^2.8.49 || ^3.0.9 || ^3.1.10 || ^3.2.14 || ^3.3.18 || ^3.4.20 || ^4.0.15 || ^4.1.9 || ^4.2.1",
-                "twig/twig": "^1.36 || ^2.6"
+                "symfony/web-profiler-bundle": "^2.8.49 || ^3.0.9 || ^3.1.10 || ^3.2.14 || ^3.3.18 || ^3.4.20 || ^4.0.15 || ^4.1.9 || ^4.2.1"
             },
             "suggest": {
-                "php-http/cache-plugin": "To configure clients that cache responses",
-                "php-http/mock-client": "Add this to your require-dev section to mock HTTP responses easily",
-                "twig/twig": "Add this to your require-dev section when using the WebProfilerBundle"
+                "php-http/mock-client": "Add this to your require-dev section to mock HTTP responses easily"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -7023,7 +7095,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Http\\HttplugBundle\\": "src/"
+                    "Http\\HttplugBundle\\": ""
                 },
                 "exclude-from-classmap": [
                     "/Tests/Resources/MyPsr18TestClient.php"
@@ -7055,7 +7127,7 @@
                 "message",
                 "php-http"
             ],
-            "time": "2019-04-18T14:01:25+00:00"
+            "time": "2019-01-03T08:51:31+00:00"
         },
         {
             "name": "php-http/logger-plugin",
@@ -10388,7 +10460,7 @@
             "version": "4.1.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/SonataUserBundle.git",
+                "url": "https://github.com/cap-collectif/SonataUserBundle.git",
                 "reference": "a0c57fbb97d796989d4b584caa3733aef8ce49c0"
             },
             "dist": {
@@ -10484,6 +10556,9 @@
                 "sonata",
                 "user"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/SonataUserBundle/tree/4.1.1"
+            },
             "time": "2018-02-08T10:18:27+00:00"
         },
         {
@@ -10686,16 +10761,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v6.2.1",
+            "version": "v6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a"
+                "reference": "6fa3232ff9d3f8237c0fae4b7ff05e1baa4cd707"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a",
-                "reference": "5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/6fa3232ff9d3f8237c0fae4b7ff05e1baa4cd707",
+                "reference": "6fa3232ff9d3f8237c0fae4b7ff05e1baa4cd707",
                 "shasum": ""
             },
             "require": {
@@ -10744,7 +10819,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2019-04-21T09:21:45+00:00"
+            "time": "2019-03-10T07:52:41+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -11106,16 +11181,16 @@
         },
         {
             "name": "symfony/swiftmailer-bundle",
-            "version": "v3.2.8",
+            "version": "v3.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/swiftmailer-bundle.git",
-                "reference": "cb125b3648f132fb8070b55393f20cb310907d3b"
+                "reference": "ac4f38c2ec7957f2dec8b6c2f24a060b10a254f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/cb125b3648f132fb8070b55393f20cb310907d3b",
-                "reference": "cb125b3648f132fb8070b55393f20cb310907d3b",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/ac4f38c2ec7957f2dec8b6c2f24a060b10a254f2",
+                "reference": "ac4f38c2ec7957f2dec8b6c2f24a060b10a254f2",
                 "shasum": ""
             },
             "require": {
@@ -11124,9 +11199,6 @@
                 "symfony/config": "~2.8|~3.3|~4.0",
                 "symfony/dependency-injection": "~2.7|~3.3|~4.0",
                 "symfony/http-kernel": "~2.7|~3.3|~4.0"
-            },
-            "conflict": {
-                "twig/twig": "<1.41|<2.10"
             },
             "require-dev": {
                 "symfony/console": "~2.7|~3.3|~4.0",
@@ -11167,14 +11239,14 @@
             ],
             "description": "Symfony SwiftmailerBundle",
             "homepage": "http://symfony.com",
-            "time": "2019-06-18T15:27:04+00:00"
+            "time": "2019-01-05T11:51:59+00:00"
         },
         {
             "name": "symfony/symfony",
             "version": "dev-waiting-42",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/symfony.git",
+                "url": "https://github.com/cap-collectif/symfony.git",
                 "reference": "0bad88f9a0621b6717d705f874032532bf0f0a80"
             },
             "dist": {
@@ -11326,6 +11398,10 @@
             "keywords": [
                 "framework"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/symfony/tree/waiting-42",
+                "issues": "https://github.com/cap-collectif/symfony/issues"
+            },
             "time": "2018-12-14T14:39:52+00:00"
         },
         {
@@ -11515,12 +11591,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tweedegolf/prometheus-bundle.git",
+                "url": "https://github.com/cap-collectif/prometheus-bundle.git",
                 "reference": "e559a615173c82884820eec55cacc2513a35c31a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tweedegolf/prometheus-bundle/zipball/e559a615173c82884820eec55cacc2513a35c31a",
+                "url": "https://api.github.com/repos/cap-collectif/prometheus-bundle/zipball/e559a615173c82884820eec55cacc2513a35c31a",
                 "reference": "e559a615173c82884820eec55cacc2513a35c31a",
                 "shasum": ""
             },
@@ -11763,7 +11839,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/WebfactoryIcuTranslationBundle.git",
+                "url": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle.git",
                 "reference": "2f9963dad5a55f26033a74268385c12c251f75ad"
             },
             "dist": {
@@ -11823,6 +11899,9 @@
                 "translation",
                 "translator"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/WebfactoryIcuTranslationBundle/tree/master"
+            },
             "time": "2018-11-20T14:31:28+00:00"
         },
         {
@@ -11881,7 +11960,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/graphql-php.git",
+                "url": "https://github.com/cap-collectif/graphql-php.git",
                 "reference": "efe1bcf052d4b42910c9f96fad3c10e4482ef7a8"
             },
             "dist": {
@@ -11927,6 +12006,9 @@
                 "API",
                 "graphql"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/graphql-php/tree/master"
+            },
             "time": "2018-02-22T10:14:53+00:00"
         },
         {
@@ -12019,7 +12101,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -12423,7 +12505,7 @@
             "target-dir": "Alex/MailCatcher",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/mailcatcher.git",
+                "url": "https://github.com/cap-collectif/mailcatcher.git",
                 "reference": "c412a53596405c0a28ce24b50b601fd9b5dfe380"
             },
             "dist": {
@@ -12451,7 +12533,10 @@
                 "MIT"
             ],
             "description": "A library to access MailCatcher",
-            "time": "2018-01-25T16:41:14+00:00"
+            "support": {
+                "source": "https://github.com/cap-collectif/mailcatcher/tree/master"
+            },
+            "time": "2019-04-17T16:26:09+00:00"
         },
         {
             "name": "behat/behat",
@@ -15534,7 +15619,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/BehatPageObjectExtension.git",
+                "url": "https://github.com/cap-collectif/BehatPageObjectExtension.git",
                 "reference": "0da748bdb327c2da6afedca8b1d8a1a6f3da67d2"
             },
             "dist": {
@@ -15590,6 +15675,9 @@
                 "behat",
                 "page"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/BehatPageObjectExtension/tree/master"
+            },
             "time": "2016-03-15T13:13:55+00:00"
         },
         {
@@ -15747,7 +15835,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/behat-parallel-scenario.git",
+                "url": "https://github.com/cap-collectif/behat-parallel-scenario.git",
                 "reference": "65b5b4d1130d3c9c16097d172882781e839ecfc5"
             },
             "dist": {
@@ -15784,6 +15872,9 @@
                 "process",
                 "testing"
             ],
+            "support": {
+                "source": "https://github.com/cap-collectif/behat-parallel-scenario/tree/master"
+            },
             "time": "2016-03-11T13:43:33+00:00"
         },
         {

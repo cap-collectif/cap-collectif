@@ -1,7 +1,5 @@
 // @flow
 /* eslint-env jest */
-/* eslint-disable no-console */
-
 import 'babel-polyfill';
 import 'whatwg-fetch';
 
@@ -47,9 +45,21 @@ global.Modernizr = {
 
 global.window.__SERVER__ = false;
 
-// $FlowFixMe we are in jest mode
-console.error = () => {
-  return;
+const throwError = warning => {
+  throw new Error(warning);
+};
+
+// $FlowFixMe
+console.warn = throwError; // eslint-disable-line no-console
+
+// Disable missing translation message as translations will be added later.
+// We can add a toggle for this later when we have most translations.
+// $FlowFixMe
+console.error = message => {
+  if (typeof message === 'string' && message.startsWith('[React Intl]')) {
+    return;
+  }
+  throwError(message);
 };
 
 /**
