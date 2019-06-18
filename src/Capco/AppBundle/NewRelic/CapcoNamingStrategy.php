@@ -22,10 +22,13 @@ class CapcoNamingStrategy implements TransactionNamingStrategyInterface
         if ('graphql_multiple_endpoint' === $request->get('_route')) {
             $parameters = $this->requestParser->parse($request);
 
+            $transactionName = $parameters[ParserInterface::PARAM_OPERATION_NAME] ?? 'Unknown query';
+            // We could use a query hash instead of UnknownQuery
+
             return sprintf(
                 '%s::%s',
                 'GraphQL',
-                $parameters[ParserInterface::PARAM_OPERATION_NAME] ?? 'Unknown query'
+                $transactionName
             );
         }
 

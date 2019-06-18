@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Type;
 
+// May get inspiration form here:
+// https://github.com/simPod/GraphQL-Utils/blob/master/src/Type/DateTimeType.php
+
 class DateTimeType
 {
     public static function serialize(\DateTime $value): string

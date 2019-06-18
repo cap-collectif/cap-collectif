@@ -27,22 +27,28 @@ class QuestionnaireReplyProcessor implements ProcessorInterface
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE:
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE:
                 $replyId = $json['replyId'];
+
                 $reply = $this->repository->find($replyId);
                 if (!$reply) {
                     throw new \RuntimeException('Unable to find reply with id : ' . $replyId);
                 }
 
-                return QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE === $state
+                QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE === $state
                     ? $this->notifier->onCreate($reply)
                     : $this->notifier->onUpdate($reply);
+
+                break;
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_DELETE_STATE:
                 $reply = $json['reply'];
+                $this->notifier->onDelete($reply);
 
-                return $this->notifier->onDelete($reply);
+                break;
             default:
                 throw new \LogicException(
                     sprintf('Unknown questionnaire reply state: "%s"', $state)
                 );
         }
+
+        return true;
     }
 }

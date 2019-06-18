@@ -66,6 +66,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('developer_documentation');
         $toggleManager->deactivate('login_openid');
         $toggleManager->deactivate('disconnect_openid');
+        $toggleManager->deactivate('graphql_query_analytics');
         $toggleManager->activate('consultation_plan');
         $toggleManager->activate('display_map');
         $toggleManager->activate('privacy_policy');
