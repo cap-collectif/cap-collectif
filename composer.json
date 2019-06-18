@@ -164,7 +164,7 @@
         "overblog/graphql-bundle": "dev-master#2cdc6e286f3a7f5f702b1eb5ec2b2c2363997009",
         "imagine/imagine": "^0.7.1",
         "liip/imagine-bundle": "~2.1",
-        "knplabs/knp-menu-bundle": "2.2.1",
+        "knplabs/knp-menu-bundle": "2.2.2",
         "box/spout": "^2.7",
         "webfactory/icu-translation-bundle": "dev-master",
         "ruflin/elastica": "~5",

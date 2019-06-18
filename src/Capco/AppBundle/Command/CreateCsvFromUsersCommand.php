@@ -117,7 +117,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'proposalVotesCount',
         'commentVotesCount',
         'sourcesCount',
-        'replies.totalCount',
+        'repliesCount',
         'postCommentsCount',
         'eventCommentsCount',
         'projectsCount',
