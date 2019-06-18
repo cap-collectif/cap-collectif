@@ -87,24 +87,24 @@ const ContentRight = ({
             <span className="ml-5">{user.username}</span>
           </span>
         }>
-        {user.isAdmin && (
+        {user.isAdmin ? (
           <TabsLink eventKey={3.1} href="/admin">
             <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
             Administration
           </TabsLink>
-        )}
-        {features.profiles && (
+        ): null}
+        {features.profiles ? (
           <TabsLink eventKey={3.2} href={`/profile/${user.uniqueId}`}>
             <i className="cap cap-id-8 mr-10" aria-hidden="true" />
             Mon profil
           </TabsLink>
-        )}
-        {user.isEvaluer && (
+        ): null}
+        {user.isEvaluer ? (
           <TabsLink eventKey={3.3} href="/evaluations">
             <i className="cap cap-edit-write mr-10" aria-hidden="true" />
             Mes analyses
           </TabsLink>
-        )}
+        ): null}
         <TabsLink eventKey={3.4} href="/profile/edit-profile">
           <i className="cap cap-setting-adjustment mr-10" aria-hidden="true" />
           Paramètres

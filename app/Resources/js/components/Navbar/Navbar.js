@@ -21,7 +21,7 @@ type State = {|
   desktop: boolean,
 |};
 
-export class NavBar extends React.Component<Props, State> {
+export class Navbar extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -97,4 +97,4 @@ export class NavBar extends React.Component<Props, State> {
   }
 }
 
-export default injectIntl(NavBar);
+export default injectIntl(Navbar);

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavigationSkip /> should render correctly 1`] = `
+<div
+  className="skip-links js-skip-links"
+  role="banner"
+>
+  <div
+    className="skip-links-container"
+  >
+    <ul
+      className="skip-links-list clearfix"
+    >
+      <li>
+        <a
+          href="#navbar"
+        >
+          <FormattedMessage
+            id="navbar.skip_links.menu"
+            values={Object {}}
+          />
+        </a>
+      </li>
+      <li>
+        <a
+          href="#main"
+        >
+          <FormattedMessage
+            id="navbar.skip_links.content"
+            values={Object {}}
+          />
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

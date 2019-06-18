@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navbar /> should render correctly 1`] = `
+<Fragment>
+  <NavigationSkip />
+  <styles__NavigationContainer
+    id="main-navbar"
+    role="navigation"
+  >
+    <styles__NavigationHeader>
+      <styles__Brand
+        id="brand"
+      >
+        <a
+          href="/"
+          title="navbar.homepage"
+        >
+          <img
+            alt="cap-collectif.com"
+            src="Navbar-logo.png"
+          />
+        </a>
+      </styles__Brand>
+    </styles__NavigationHeader>
+    <NavbarToggle
+      expanded={false}
+      onClick={[Function]}
+    />
+    <styles__NavigationContentDesktop>
+      <styles__NavigationContentRight>
+        <div
+          id="content-contentRight"
+        />
+      </styles__NavigationContentRight>
+    </styles__NavigationContentDesktop>
+  </styles__NavigationContainer>
+</Fragment>
+`;

@@ -9,7 +9,7 @@ import * as S from './styles';
 type Props = {|
   intl: IntlShape,
   item: Object,
-  vertical?: boolean,
+  vertical: boolean,
 |};
 
 class TabsItem extends React.PureComponent<Props> {

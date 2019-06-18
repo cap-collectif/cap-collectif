@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TabsBarDropdown /> should render 1`] = `
+<styles__Dropdown>
+  <styles__DropdownToggle
+    aria-expanded={false}
+    aria-haspopup="true"
+    className="btn-link"
+    id="TabsBarDropdown-id"
+    onClick={[Function]}
+    type="button"
+    vertical={false}
+  >
+    <span
+      className="caret"
+    />
+  </styles__DropdownToggle>
+  <styles__DropdownMenu
+    aria-labelledby="TabsBarDropdown-id"
+    pullRight={true}
+    role="menu"
+    show={false}
+    vertical={false}
+  />
+</styles__Dropdown>
+`;

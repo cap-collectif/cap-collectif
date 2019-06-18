@@ -13,10 +13,9 @@ type Props = {|
   toggleElement?: React.Node,
   eventKey?: number | string,
   'aria-label'?: string,
-  children?: React.ChildrenArray<void | null | boolean | any>,
+  children?: ?React.ChildrenArray<null | React.Element<typeof S.TabsLink> | React.Element<typeof S.TabsDivider>>,
 |};
 
-// | typeof TabsLink
 
 const TabsBarDropdown = (props: Props) => {
   const { intl, item, vertical, pullRight, id, toggleElement, children } = props;
@@ -72,6 +71,7 @@ const TabsBarDropdown = (props: Props) => {
         vertical={vertical}
         pullRight={pullRight}>
         {children &&
+          Array.isArray(children) &&
           children.map((child, index) => (
             <li role="presentation" key={index} onClick={() => setOpen(false)}>
               {child}

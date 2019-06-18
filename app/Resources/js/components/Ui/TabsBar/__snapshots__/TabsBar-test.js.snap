@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TabsBar /> should render 1`] = `
+<styles__TabsBarContainer
+  show={true}
+  vertical={false}
+/>
+`;

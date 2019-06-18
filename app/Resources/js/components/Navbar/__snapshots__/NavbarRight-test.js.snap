@@ -2,71 +2,16 @@
 
 exports[`<NavbarRight /> should render correctly 1`] = `
 <Fragment>
-  <TabsBarDropdown
-    aria-label="user.account.menu"
-    eventKey={3}
-    id="navbar-username"
-    intl={
-      Object {
-        "formatDate": [Function],
-        "formatHTMLMessage": [Function],
-        "formatMessage": [Function],
-        "formatNumber": [Function],
-        "formatPlural": [Function],
-        "formatRelative": [Function],
-        "formatTime": [Function],
-        "formats": Object {},
-        "locale": "fr-FR",
-        "messages": Object {},
-        "now": [Function],
-      }
-    }
-    pullRight={true}
-    toggleElement={
-      <span>
-        <Connect(UserAvatar)
-          anchor={false}
-          size={34}
-          user={Object {}}
-        />
-        <span
-          className="ml-5"
-        />
-      </span>
-    }
+  <NavbarRight__ButtonsContainer
     vertical={false}
   >
-    <styles__TabsLink
-      eventKey={3.4}
-      href="/profile/edit-profile"
-    >
-      <i
-        aria-hidden="true"
-        className="cap cap-setting-adjustment mr-10"
-      />
-      <FormattedMessage
-        id="navbar.user_settings"
-        values={Object {}}
-      />
-    </styles__TabsLink>
-    <styles__TabsDivider
-      aria-hidden="true"
+    <Connect(InjectIntl(RegistrationButton))
+      className="navbar-btn"
     />
-    <styles__TabsLink
-      eventKey={3.6}
-      id="logout-button"
-      onClick={[Function]}
-      type="button"
-    >
-      <i
-        aria-hidden="true"
-        className="cap cap-power-1 mr-10"
-      />
-      <FormattedMessage
-        id="global.logout"
-        values={Object {}}
-      />
-    </styles__TabsLink>
-  </TabsBarDropdown>
+     
+    <InjectIntl(Connect(LoginButton))
+      className="btn-darkest-gray navbar-btn btn--connection"
+    />
+  </NavbarRight__ButtonsContainer>
 </Fragment>
 `;
