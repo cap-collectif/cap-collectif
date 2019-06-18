@@ -16,7 +16,7 @@ import TabsBarDropdown from '../components/Ui/TabsBar/TabsBarDropdown';
 import { items, itemWithChildren } from './mocks/navbarItems';
 import { author as userMock } from './mocks/users';
 import type { FeatureToggles } from '../types';
-import { features } from '../redux/modules/default';
+import { features as defaultFeatures } from '../redux/modules/default';
 
 addLocaleData(frLocaleData);
 
@@ -224,7 +224,7 @@ storiesOf('NavBar', module)
     };
 
     const contentRight = (
-      <ContentRightWithIntl user={null} features={{ ...features, search: withSearch }} />
+      <ContentRightWithIntl user={null} features={{ ...defaultFeatures, search: withSearch }} />
     );
 
     return (
@@ -254,7 +254,7 @@ storiesOf('NavBar', module)
     const contentRight = (
       <ContentRightWithIntl
         user={userMock}
-        features={{ ...features, search: withSearch, profiles: true }}
+        features={{ ...defaultFeatures, search: withSearch, profiles: true }}
       />
     );
 
