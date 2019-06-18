@@ -61,7 +61,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     $reply,
                     $step->getProject()->getTitle(),
-                    $questionnaire->getTitle(),
+                    $questionnaire->getStep()->getTitle(),
                     $reply->getAuthor()->getUsername(),
                     $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
@@ -87,7 +87,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $configUrl,
                     $this->baseUrl,
                     $this->stepUrlResolver->__invoke($step),
-                    $questionnaire->getTitle()
+                    $questionnaire->getStep()->getTitle()
                 )
             );
         }
@@ -120,7 +120,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     $reply,
                     $step->getProject()->getTitle(),
-                    $questionnaire->getTitle(),
+                    $questionnaire->getStep()->getTitle(),
                     $reply->getAuthor()->getUsername(),
                     $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
@@ -145,7 +145,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $configUrl,
                     $this->baseUrl,
                     $this->stepUrlResolver->__invoke($step),
-                    $questionnaire->getTitle()
+                    $questionnaire->getStep()->getTitle()
                 )
             );
         }
@@ -160,7 +160,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
      *                     'questionnaire_id' => string,
      *                     'project_title' => string,
      *                     'deleted_at' => string, which will be transformed into a \DateTimeInterface
-     *                     'questionnaire_title' => string,
+     *                     'questionnaire_step_title' => string,
      *                     'author_name' => string,
      *                     ]
      *
@@ -186,7 +186,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                 $reply,
                 $reply['project_title'],
-                $reply['questionnaire_title'],
+                $reply['questionnaire_step_title'],
                 $reply['author_name'],
                 $reply['deleted_at'],
                 $this->siteParams->getValue('global.site.fullname'),

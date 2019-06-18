@@ -11,7 +11,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $recipientEmail,
         Reply $reply,
         string $projectTitle,
-        string $questionnaireTitle,
+        string $questionnaireStepTitle,
         string $authorUsername,
         \DateTimeInterface $replyUpdatedAt,
         string $siteName,
@@ -25,7 +25,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             $recipientEmail,
             null,
             "email.notification.questionnaire.reply.subject.${state}",
-            self::getMySubjectVars($authorUsername, $questionnaireTitle),
+            self::getMySubjectVars($authorUsername, $questionnaireStepTitle),
             '@CapcoMail/notifyQuestionnaireReply.html.twig',
             self::getMyTemplateVars(
                 $projectTitle,
@@ -45,7 +45,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $recipientEmail,
         array $reply,
         string $projectTitle,
-        string $questionnaireTitle,
+        string $questionnaireStepTitle,
         string $authorUsername,
         string $replyDeletedAt,
         string $siteName,
@@ -59,7 +59,7 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             $recipientEmail,
             null,
             "email.notification.questionnaire.reply.subject.${state}",
-            self::getMySubjectVars($authorUsername, $questionnaireTitle),
+            self::getMySubjectVars($authorUsername, $questionnaireStepTitle),
             '@CapcoMail/notifyQuestionnaireReply.html.twig',
             self::getMyTemplateForDeletedReplyVars(
                 $projectTitle,
@@ -92,12 +92,12 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             'siteName' => self::escape($siteName),
             'date' => $reply->getCreatedAt(),
             'authorName' => $reply->getAuthor()->getUsername(),
-            'questionnaireTitle' => $reply->getQuestionnaire()->getTitle(),
+            'questionnaireStepTitle' => $reply->getStep()->getTitle(),
             'state' => $state,
             'userUrl' => $userUrl,
             'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
-            'replyShowUrl' => $replyShowUrl,
+            'replyShowUrl' => $replyShowUrl
         ];
     }
 
@@ -117,20 +117,22 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             'siteName' => self::escape($siteName),
             'date' => \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $replyDeletedAt),
             'authorName' => $reply['author_name'],
-            'questionnaireTitle' => $reply['questionnaire_title'],
+            'questionnaireStepTitle' => $reply['questionnaire_step_title'],
             'state' => $state,
             'userUrl' => $userUrl,
             'configUrl' => $configUrl,
             'baseUrl' => $baseUrl,
-            'replyShowUrl' => $replyShowUrl,
+            'replyShowUrl' => $replyShowUrl
         ];
     }
 
-    private static function getMySubjectVars(string $authorName, string $questionnaireTitle): array
-    {
+    private static function getMySubjectVars(
+        string $authorName,
+        string $questionnaireStepTitle
+    ): array {
         return [
             '{authorName}' => self::escape($authorName),
-            '{questionnaireTitle}' => self::escape($questionnaireTitle),
+            '{questionnaireStepTitle}' => self::escape($questionnaireStepTitle)
         ];
     }
 }

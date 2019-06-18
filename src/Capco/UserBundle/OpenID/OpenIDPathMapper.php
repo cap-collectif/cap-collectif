@@ -27,6 +27,7 @@ class OpenIDPathMapper
 
                 break;
             case 'decathlon-preprod':
+            case 'nl-decathlon':
             case 'decathlon':
                 $this->instanceMapper = new DecathlonMapping();
 
