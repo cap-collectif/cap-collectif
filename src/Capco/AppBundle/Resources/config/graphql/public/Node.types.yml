@@ -2,5 +2,4 @@ Node:
   type: relay-node
   config:
     description: 'An object with an ID.'
-    resolveType:
-      '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\NodeTypeResolver", [value])'
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\NodeTypeResolver", [value])'

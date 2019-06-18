@@ -19,7 +19,6 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class ProposalFormProposalsDataLoader extends BatchDataLoader
 {
-    public const FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR = 100;
     public const CACHE_TIME_FUSION_COUNT = 480;
 
     private $proposalRepo;
@@ -208,7 +207,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                             $form,
                             $viewer,
                             $offset,
-                            $limit + self::FETCH_MORE_TO_AVOID_HAS_NEXT_PAGE_ERROR,
+                            $limit,
                             $field,
                             $direction
                         )

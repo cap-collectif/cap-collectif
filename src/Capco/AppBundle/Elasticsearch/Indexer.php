@@ -106,6 +106,7 @@ class Indexer
         $repository = $this->em->getRepository($entityFQN);
         $object = $repository->findOneBy(['id' => $identifier]);
         if (!$object instanceof IndexableInterface) {
+            // @todo if no object found, trigger a "remove" on ES.
             return;
         }
         if ($object->isIndexable()) {
@@ -223,6 +224,7 @@ class Indexer
                 ->select('count(a)')
                 ->getQuery()
                 ->getSingleScalarResult();
+            // @todo ajouter un tri
             $output->writeln(PHP_EOL . "<info> Indexing ${count} ${class}</info>");
             $progress = new ProgressBar($output, $count);
             $progress->start();
