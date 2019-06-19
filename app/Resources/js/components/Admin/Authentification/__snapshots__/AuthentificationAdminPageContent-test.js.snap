@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthentificationAdminPageContent /> renders correctly 1`] = `
+<Fragment>
+  <ForwardRef(Relay(Connect(ReduxForm)))
+    shieldAdminForm={
+      Object {
+        "introduction": "<p>Introduction text in shield mode</p>",
+        "media": Object {
+          "id": "image-uuid",
+          "name": "image-name.jpg",
+          "url": "https://capco.test/media/default/0001/01/image-name.jpg",
+        },
+        "shieldMode": true,
+      }
+    }
+  />
+  <ForwardRef(Relay(ListSSOConfiguration))
+    ssoConfigurations={
+      Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "$fragmentRefs": null,
+              "accessTokenUrl": "https://localhost:8888/token",
+              "authorizationUrl": "https://localhost:8888/authorization",
+              "clientId": "clientId",
+              "id": "oauth2ID",
+              "logoutUrl": "https://localhost:8888/logout",
+              "name": "Open ID Provider",
+              "secret": "SecretKey",
+              "userInfoUrl": "https://localhost:8888/user",
+            },
+          },
+        ],
+      }
+    }
+  />
+</Fragment>
+`;
