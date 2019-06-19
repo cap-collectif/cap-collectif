@@ -23,7 +23,7 @@ Scenario: GraphQL client wants to create a project
         "input": {
           "title": "thisisnotatest",
           "authors": ["VXNlcjp1c2VyQWRtaW4=", "VXNlcjp1c2VyMQ=="],
-          "opinionTerm": "2",
+          "opinionTerm": 2,
           "projectType": "2"
         }
       }
