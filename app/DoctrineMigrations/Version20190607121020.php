@@ -27,7 +27,7 @@ final class Version20190607121020 extends AbstractMigration
         foreach ($proposalDraft as $proposal) {
             $this->connection->update(
                 $table,
-                ['publishedAt' => null, 'published' => false],
+                ['publishedAt' => null, 'published' => false, 'is_indexable' => true],
                 ['id' => $proposal['id']]
             );
         }
