@@ -7,6 +7,20 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
   <div
     className="box-content mt-25"
   >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      className="pull-right"
+      disabled={false}
+      href="http://capco.dev/questionnaire/id1/download"
+    >
+      <FormattedMessage
+        id="global.export"
+        values={Object {}}
+      />
+    </Button>
     <div
       key="0"
     >
@@ -497,6 +511,20 @@ exports[`<QuestionnaireAdminResults /> renders correctly with private question &
   <div
     className="box-content mt-25"
   >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      className="pull-right"
+      disabled={false}
+      href="http://capco.dev/questionnaire/id1/download"
+    >
+      <FormattedMessage
+        id="global.export"
+        values={Object {}}
+      />
+    </Button>
     <div
       key="0"
     >
@@ -535,6 +563,20 @@ exports[`<QuestionnaireAdminResults /> renders correctly without questions 1`] =
   <div
     className="box-content mt-25"
   >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      className="pull-right"
+      disabled={false}
+      href="http://capco.dev/questionnaire/id1/download"
+    >
+      <FormattedMessage
+        id="global.export"
+        values={Object {}}
+      />
+    </Button>
     <div>
       <FormattedMessage
         id="no-question"

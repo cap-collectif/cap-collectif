@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { Button } from 'react-bootstrap';
 import QuestionnaireAdminResultsBarChart from './QuestionnaireAdminResultsBarChart';
 import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking';
 import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart';
@@ -74,6 +75,9 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
     return (
       <div className="box box-primary container-fluid">
         <div className="box-content mt-25">
+          <Button bsStyle="primary" className="pull-right" href={questionnaire.exportResultsUrl}>
+            <FormattedMessage id="global.export" />
+          </Button>
           {questionnaire.questions && questions.length > 0 ? (
             questions.map((question, key) => (
               <div key={key}>
@@ -132,6 +136,7 @@ const container = withColors(QuestionnaireAdminResults);
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment QuestionnaireAdminResults_questionnaire on Questionnaire {
+      exportResultsUrl
       questions {
         __typename
         title

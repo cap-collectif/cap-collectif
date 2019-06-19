@@ -4832,6 +4832,7 @@ type Questionnaire implements Node {
 
   # Results of survey are private
   privateResult: Boolean!
+  exportResultsUrl: URI!
 }
 
 input QuestionnaireAbstractQuestionInput {
