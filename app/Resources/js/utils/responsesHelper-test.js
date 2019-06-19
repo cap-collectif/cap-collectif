@@ -1,6 +1,6 @@
 // @flow
 /* eslint-env jest */
-import { validateResponses, renderResponses } from './responsesHelper';
+import { getAvailableQuestionsIds, renderResponses, validateResponses } from './responsesHelper';
 import { intlMock } from '../mocks';
 
 const numberQuestion = {
@@ -134,5 +134,288 @@ describe('validateResponses', () => {
       fields: [textQuestion, numberQuestion, selectQuestion, mediaQuestion],
     });
     expect(component).toMatchSnapshot();
+  });
+});
+
+describe('getAvailableQuestionsIds', () => {
+  it('Should return the correct questions ids for a simple questionnaire without logic jumps', () => {
+    const questions = [
+      {
+        id: 'question1',
+        randomQuestionChoices: false,
+        type: 'select',
+        description: null,
+        validationRule: null,
+        isOtherAllowed: false,
+        title: 'Est ce que ce test marche ?',
+        private: false,
+        helpText: null,
+        choices: [
+          {
+            id: 'oui',
+            color: null,
+            description: null,
+            image: null,
+            title: 'Oui',
+          },
+          {
+            id: 'non',
+            color: null,
+            description: null,
+            image: null,
+            title: 'Non',
+          },
+        ],
+        jumps: [],
+        number: 1,
+        position: 1,
+        required: false,
+      },
+      {
+        id: 'question2',
+        randomQuestionChoices: false,
+        type: 'select',
+        description: null,
+        validationRule: null,
+        isOtherAllowed: false,
+        title: 'Quelle est ta waifu préférée ?',
+        private: false,
+        helpText: null,
+        choices: [
+          {
+            id: 'rem',
+            color: null,
+            description: null,
+            image: null,
+            title: 'Rem',
+          },
+          {
+            id: 'emilia',
+            color: null,
+            description: null,
+            image: null,
+            title: 'Emilia',
+          },
+        ],
+        jumps: [],
+        number: 2,
+        position: 2,
+        required: false,
+      },
+    ];
+    const responses = [
+      {
+        question: 'question1',
+        value: 'Oui',
+      },
+      {
+        question: 'question2',
+        value: 'Rem',
+      },
+    ];
+    const ids = getAvailableQuestionsIds(questions, responses);
+    expect(ids).toMatchSnapshot();
+  });
+
+  it('Should return the correct questions ids for a simple questionnaire with logic jumps', () => {
+    const questions = [
+      {
+        id: 'question1',
+        randomQuestionChoices: false,
+        type: 'select',
+        description: null,
+        validationRule: null,
+        isOtherAllowed: false,
+        title: 'Est ce que ce test marche ?',
+        private: false,
+        helpText: null,
+        choices: [
+          {
+            id: 'oui',
+            color: null,
+            description: null,
+            image: null,
+            title: 'Oui',
+          },
+          {
+            id: 'non',
+            color: null,
+            description: null,
+            image: null,
+            title: 'Non',
+          },
+        ],
+        jumps: [],
+        number: 1,
+        position: 1,
+        required: false,
+      },
+      {
+        id: 'question2',
+        randomQuestionChoices: false,
+        type: 'select',
+        description: null,
+        validationRule: null,
+        isOtherAllowed: false,
+        private: false,
+        helpText: null,
+        title: 'Quelle est ta waifu préférée ?',
+        choices: [
+          {
+            id: 'rem',
+            color: null,
+            description: null,
+            image: null,
+            title: 'Rem',
+          },
+          {
+            id: 'emilia',
+            color: null,
+            description: null,
+            image: null,
+            title: 'Emilia',
+          },
+        ],
+        jumps: [
+          {
+            id: 'jump1',
+            always: false,
+            conditions: [
+              {
+                id: 'conditionQuestion2-1',
+                operator: 'IS',
+                question: {
+                  id: 'question2',
+                  title: 'Quelle est ta waifu préférée ?',
+                },
+                value: {
+                  id: 'emilia',
+                  title: 'Emilia',
+                },
+              },
+            ],
+            origin: {
+              id: 'question2',
+            },
+            destination: {
+              id: 'question2-1',
+              number: 3,
+              title: "C'est son côté Satela que tu aimes bien ?",
+            },
+          },
+          {
+            id: 'jump2',
+            always: false,
+            conditions: [
+              {
+                id: 'conditionQuestion2-2',
+                operator: 'IS',
+                question: {
+                  id: 'question2',
+                  title: 'Quelle est ta waifu préférée ?',
+                },
+                value: {
+                  id: 'rem',
+                  title: 'Rem',
+                },
+              },
+            ],
+            origin: {
+              id: 'question2',
+            },
+            destination: {
+              id: 'question2-2',
+              number: 4,
+              title: "C'est son côté maid que tu aimes bien ?",
+            },
+          },
+        ],
+        number: 2,
+        position: 2,
+        required: false,
+      },
+      {
+        id: 'question2-1',
+        randomQuestionChoices: false,
+        type: 'select',
+        description: null,
+        validationRule: null,
+        isOtherAllowed: false,
+        private: false,
+        helpText: null,
+        title: "C'est son côté Satela que tu aimes bien ?",
+        choices: [
+          {
+            id: 'of-course',
+            color: null,
+            description: null,
+            image: null,
+            title: 'Bien sûr',
+          },
+          {
+            id: 'never',
+            color: null,
+            description: null,
+            image: null,
+            title: "Jamais, c'est pour sa pureté",
+          },
+        ],
+        jumps: [],
+        number: 3,
+        position: 3,
+        required: false,
+      },
+      {
+        id: 'question2-2',
+        randomQuestionChoices: false,
+        type: 'select',
+        description: null,
+        validationRule: null,
+        isOtherAllowed: false,
+        private: false,
+        helpText: null,
+        title: "C'est son côté maid que tu aimes bien ?",
+        choices: [
+          {
+            id: 'indeed',
+            color: null,
+            description: null,
+            image: null,
+            title: 'Effectivement',
+          },
+          {
+            id: 'strenght',
+            color: null,
+            description: null,
+            image: null,
+            title: "Non, c'est pour sa force",
+          },
+        ],
+        jumps: [],
+        number: 4,
+        position: 4,
+        required: false,
+      },
+    ];
+    const responses = [
+      {
+        question: 'question1',
+        value: 'Oui',
+      },
+      {
+        question: 'question2',
+        value: 'Rem',
+      },
+      {
+        question: 'question2-1',
+        value: null,
+      },
+      {
+        question: 'question2-2',
+        value: "Non, c'est pour sa force",
+      },
+    ];
+    const ids = getAvailableQuestionsIds(questions, responses);
+    expect(ids).toMatchSnapshot();
   });
 });

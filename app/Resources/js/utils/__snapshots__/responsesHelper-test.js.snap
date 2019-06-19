@@ -1,5 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`getAvailableQuestionsIds Should return the correct questions ids for a simple questionnaire with logic jumps 1`] = `
+Array [
+  "question1",
+  "question2",
+  "question2-2",
+]
+`;
+
+exports[`getAvailableQuestionsIds Should return the correct questions ids for a simple questionnaire without logic jumps 1`] = `
+Array [
+  "question1",
+  "question2",
+]
+`;
+
 exports[`validateResponses Should render correctly when empty 1`] = `
 <div>
   <div

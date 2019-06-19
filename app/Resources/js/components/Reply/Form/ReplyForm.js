@@ -278,9 +278,11 @@ export class ReplyForm extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State, props: Props) => ({
-  responses: formValueSelector(
-    props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`,
-  )(state, 'responses'),
+  responses:
+    formValueSelector(props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`)(
+      state,
+      'responses',
+    ) || [],
   initialValues: {
     responses: formatInitialResponsesValues(
       props.questionnaire.questions,
