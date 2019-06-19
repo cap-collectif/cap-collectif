@@ -76,6 +76,7 @@ export default createFragmentContainer(Oauth2SSOConfigurationItem, {
       accessTokenUrl
       userInfoUrl
       logoutUrl
+      redirectUri
     }
   `,
 });

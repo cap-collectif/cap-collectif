@@ -48,6 +48,7 @@ exports[`<Oauth2SSOConfigurationItem /> renders correctly 1`] = `
     logoutUrl="https://localhost:8888/logout"
     name="Open ID Provider"
     onClose={[Function]}
+    redirectUri="https://capco.test/login/check-openid"
     secret="SecretKey"
     show={false}
     userInfoUrl="https://localhost:8888/user"

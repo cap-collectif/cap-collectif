@@ -18,6 +18,7 @@ type FormValues = {|
   accessTokenUrl: ?Uri,
   userInfoUrl: ?Uri,
   logoutUrl: ?Uri,
+  redirectUri: Uri,
 |};
 
 type Props = {|
@@ -118,8 +119,8 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               label={<span>Clé secrète</span>}
             />
             <Field
-              id={`${formName}_link`}
-              name="link"
+              id={`${formName}_redirectUri`}
+              name="redirectUri"
               disabled
               type="text"
               component={component}
@@ -156,7 +157,6 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
 const mapStateToProps = (state: GlobalState, props: Props) => ({
   initialValues: {
     ...props,
-    link: 'https://test.com/',
   },
 });
 

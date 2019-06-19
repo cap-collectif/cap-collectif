@@ -22,6 +22,7 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
               accessTokenUrl
               userInfoUrl
               logoutUrl
+              redirectUri
             }
           }
         }
@@ -49,6 +50,7 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
               "userInfoUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
               "logoutUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
               "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account"
+              "redirectUri": @string@
             }
           }
         ]

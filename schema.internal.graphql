@@ -3021,6 +3021,9 @@ type Oauth2SSOConfiguration implements Node & SSOConfiguration {
 
   # Logout URL.
   logoutUrl: URI
+
+  # Redirect URI callback.
+  redirectUri: URI!
 }
 
 # A contribution

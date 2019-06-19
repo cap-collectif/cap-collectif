@@ -17,6 +17,7 @@ describe('<Oauth2SSOConfigurationItem />', () => {
       accessTokenUrl: 'https://localhost:8888/token',
       userInfoUrl: 'https://localhost:8888/user',
       logoutUrl: 'https://localhost:8888/logout',
+      redirectUri: 'https://capco.test/login/check-openid',
     },
   };
 
