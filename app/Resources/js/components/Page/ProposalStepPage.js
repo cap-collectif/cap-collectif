@@ -18,7 +18,7 @@ import type {
   ProposalStepPageQueryVariables,
 } from '~relay/ProposalStepPageQuery.graphql';
 import config from '../../config';
-import invariant from '../../utils/invariant';
+import warning from '../../utils/warning';
 
 type OwnProps = {|
   stepId: string,
@@ -34,6 +34,88 @@ type Props = {|
   selectedViewByStep: string,
   features: FeatureToggles,
 |};
+
+type RenderedProps = {|
+  ...ProposalStepPageQueryResponse,
+  selectedViewByStep: string,
+  count: number,
+  isAuthenticated: boolean,
+  features: FeatureToggles,
+|};
+
+const parseGeoJson = (district: { +geojson: string, +id: string }) => {
+  const { geojson, id } = district;
+  try {
+    return JSON.parse(geojson);
+  } catch (e) {
+    warning(
+      false,
+      `Using empty geojson for ${id} because we couldn't parse the geojson : ${geojson}`,
+    );
+    return null;
+  }
+};
+
+export const ProposalStepPageRendered = (props: RenderedProps) => {
+  const { viewer, isAuthenticated, features, step, selectedViewByStep, count } = props;
+
+  if (!step) {
+    return graphqlError;
+  }
+  const { form } = step;
+  if (!form) return null;
+
+  let geoJsons = [];
+  if (features.display_map && form.districts) {
+    geoJsons = form.districts
+      .filter(d => d.geojson && d.displayedOnMap)
+      .map(d => ({
+        // $FlowFixMe geojson is a non-null string, don't worry Flow
+        district: parseGeoJson(d),
+        style: {
+          border: d.border,
+          background: d.background,
+        },
+      }));
+  }
+  return (
+    <div id="ProposalStepPage-rendered">
+      {/* $FlowFixMe $refType */}
+      <StepPageHeader step={step} />
+      {isAuthenticated &&
+        // $FlowFixMe $refType
+        step.kind === 'collect' && <DraftProposalList step={step} />}
+      {isAuthenticated && (
+        // $FlowFixMe $refType
+        <UnpublishedProposalListView step={step} viewer={viewer} />
+      )}
+      {/* $FlowFixMe $refType */}
+      <ProposalStepPageHeader step={step} />
+      {/* $FlowFixMe please use mapDispatchToProps */}
+      <ProposalListFilters step={step} />
+      {step && !step.private && features.display_map ? (
+        /* $FlowFixMe please use mapDispatchToProps */
+        <LeafletMap
+          className="zi-0"
+          geoJsons={geoJsons}
+          defaultMapOptions={{
+            center: { lat: form.latMap ?? 48.8586047, lng: form.lngMap ?? 2.3137325 },
+            zoom: form.zoomMap ?? 10,
+          }}
+          visible={selectedViewByStep === 'map'}
+        />
+      ) : null}
+      {/* $FlowFixMe $refType */}
+      <ProposalListView
+        step={step}
+        count={count}
+        viewer={viewer || null}
+        view={selectedViewByStep === 'mosaic' ? 'mosaic' : 'table'}
+        visible={selectedViewByStep === 'mosaic' || selectedViewByStep === 'table'}
+      />
+    </div>
+  );
+};
 
 export class ProposalStepPage extends React.Component<Props> {
   initialRenderVars: Object;
@@ -88,6 +170,7 @@ export class ProposalStepPage extends React.Component<Props> {
                     districts(order: ALPHABETICAL) @include(if: $isMapDisplay) {
                       displayedOnMap
                       geojson
+                      id
                       border {
                         id
                         enabled
@@ -134,67 +217,14 @@ export class ProposalStepPage extends React.Component<Props> {
             }
 
             if (props) {
-              const { step } = props;
-
-              if (!step) {
-                return graphqlError;
-              }
-              const { form } = step;
-              if (!form) return;
-
-              let geoJsons = [];
-              if (features.display_map && form.districts) {
-                try {
-                  geoJsons = form.districts
-                    .filter(d => d.geojson && d.displayedOnMap)
-                    .map(d => ({
-                      // $FlowFixMe geojson is string
-                      district: JSON.parse(d.geojson),
-                      style: {
-                        border: d.border,
-                        background: d.background,
-                      },
-                    }));
-                } catch (e) {
-                  invariant(false, "Can't parse your geojsons !");
-                }
-              }
               return (
-                <div id="ProposalStepPage-rendered">
-                  {/* $FlowFixMe $refType */}
-                  <StepPageHeader step={step} />
-                  {isAuthenticated &&
-                    // $FlowFixMe $refType
-                    step.kind === 'collect' && <DraftProposalList step={step} />}
-                  {isAuthenticated && (
-                    // $FlowFixMe $refType
-                    <UnpublishedProposalListView step={step} viewer={props.viewer} />
-                  )}
-                  {/* $FlowFixMe $refType */}
-                  <ProposalStepPageHeader step={step} />
-                  {/* $FlowFixMe please use mapDispatchToProps */}
-                  <ProposalListFilters step={step} />
-                  {step && !step.private && features.display_map ? (
-                    /* $FlowFixMe please use mapDispatchToProps */
-                    <LeafletMap
-                      className="zi-0"
-                      geoJsons={geoJsons}
-                      defaultMapOptions={{
-                        center: { lat: form.latMap ?? 48.8586047, lng: form.lngMap ?? 2.3137325 },
-                        zoom: form.zoomMap ?? 10,
-                      }}
-                      visible={selectedViewByStep === 'map'}
-                    />
-                  ) : null}
-                  {/* $FlowFixMe $refType */}
-                  <ProposalListView
-                    step={step}
-                    count={count}
-                    viewer={props.viewer || null}
-                    view={selectedViewByStep === 'mosaic' ? 'mosaic' : 'table'}
-                    visible={selectedViewByStep === 'mosaic' || selectedViewByStep === 'table'}
-                  />
-                </div>
+                <ProposalStepPageRendered
+                  {...props}
+                  count={count}
+                  isAuthenticated={isAuthenticated}
+                  features={features}
+                  selectedViewByStep={selectedViewByStep}
+                />
               );
             }
             return (
