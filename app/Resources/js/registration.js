@@ -192,6 +192,5 @@ ReactOnRails.register({
   EventListApp,
   SSOSwitchUserApp,
   AuthentificationAdminApp,
-  ShieldAdminApp,
   ProjectCreateButtonApp,
 });
