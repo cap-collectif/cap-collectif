@@ -11,6 +11,7 @@ twig:
     # Register here any services accessibles in templates
     opinionVersionsResolver: '@Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionVersionsResolver'
     userRepliesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserRepliesResolver'
+    userVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserVotesResolver'
     projectProposalsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectProposalsResolver'
     projectVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotesResolver'
     projectContributorsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver'

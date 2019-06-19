@@ -136,11 +136,12 @@
                     </a>
                 </li>
                 {% endif %}
-                {% if user.votes.totalCount > 0 %}
+                {% set userVotesCount = userRepliesResolver.__invoke(user).totalCount %}
+                {% if userVotesCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_votes' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_votes', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.votes'|trans({}, 'CapcoAppBundle') }}</h2>
-                        <p class="profile__value__number">{{ user.votes.totalCount}}</p>
+                        <p class="profile__value__number">{{ userVotesCount}}</p>
                     </a>
                 </li>
                 {% endif %}
