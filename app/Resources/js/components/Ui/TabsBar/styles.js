@@ -33,7 +33,6 @@ export const TabsItemContainer = styled.li`
   display: block;
   width: ${props => (props.vertical ? '100%' : 'auto')};
   height: 100%;
-  flex: 0;
   text-align: center;
   white-space: nowrap;
   list-style: none;
