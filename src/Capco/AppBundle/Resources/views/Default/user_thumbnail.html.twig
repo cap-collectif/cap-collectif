@@ -32,7 +32,7 @@
                         {% set contributions = user.contributionsCount | default(0) %}
                     {% endif %}
                     {% if votes is not defined %}
-                        {% set votes = userVotesResolver.__invoke(user).totalCount | default(0) %}
+                        {% set votes = user.getVotesCount() | default(0) %}
                     {% endif %}
                     {% transchoice contributions with {'%count%': contributions} from 'CapcoAppBundle' %}
                         event_registration.listing.contribution

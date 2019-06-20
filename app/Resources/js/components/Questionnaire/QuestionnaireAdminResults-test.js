@@ -9,6 +9,7 @@ describe('<QuestionnaireAdminResults />', () => {
   const allTypeOfQuestions = {
     questionnaire: {
       $refType,
+      exportResultsUrl: 'http://capco.dev/questionnaire/id1/download',
       questions: [
         {
           $fragmentRefs,
@@ -108,6 +109,7 @@ describe('<QuestionnaireAdminResults />', () => {
   const withoutQuestions = {
     questionnaire: {
       $refType,
+      exportResultsUrl: 'http://capco.dev/questionnaire/id1/download',
       questions: [],
     },
     backgroundColor: '#897897',
@@ -116,6 +118,7 @@ describe('<QuestionnaireAdminResults />', () => {
   const withoutParticipants = {
     questionnaire: {
       $refType,
+      exportResultsUrl: 'http://capco.dev/questionnaire/id1/download',
       questions: [
         {
           $fragmentRefs,

@@ -18,12 +18,8 @@ class UserVotesResolver implements ResolverInterface
         $this->votesRepo = $votesRepo;
     }
 
-    public function __invoke(User $user, Argument $args = null): Connection
+    public function __invoke(User $user, Argument $args): Connection
     {
-        if (!$args) {
-            $args = new Argument(['first' => 100000]);
-        }
-
         $paginator = new Paginator(function (?int $offset, ?int $limit) use ($user) {
             return $this->votesRepo->findAllByAuthor($user, $limit, $offset);
         });

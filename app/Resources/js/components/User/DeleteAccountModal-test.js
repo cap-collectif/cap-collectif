@@ -10,9 +10,7 @@ describe('<DeleteAccountModal />', () => {
   const viewer = {
     $refType: mockRefType,
     contributionsCount: 20,
-    votes: {
-      totalCount: 10,
-    },
+    votesCount: 10,
     contributionsToDeleteCount: 5,
     id: 'userAdmin',
   };
