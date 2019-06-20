@@ -6,7 +6,6 @@ use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\CommentType;

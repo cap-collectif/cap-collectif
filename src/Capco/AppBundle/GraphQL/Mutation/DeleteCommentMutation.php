@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Comment;
@@ -34,11 +35,11 @@ class DeleteCommentMutation implements MutationInterface
         $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
     }
 
-    public function __invoke(Arg $input, User $user): array
+    public function __invoke(Arg $input, User $viewer): array
     {
         $commentId = $input->offsetGet('id');
         /** @var Comment $comment */
-        $comment = $this->commentRepo->find($commentId);
+        $comment = $this->commentRepo->find(GlobalId::fromGlobalId($commentId));
 
         if (!$comment) {
             $this->logger->error('Unknown comment with id: ' . $commentId);
@@ -46,19 +47,19 @@ class DeleteCommentMutation implements MutationInterface
             return [
                 'userErrors' => [
                     [
-                        'message' => 'Comment not found.',
-                    ],
-                ],
+                        'message' => 'Comment not found.'
+                    ]
+                ]
             ];
         }
 
-        if ($user !== $comment->getAuthor()) {
+        if ($viewer !== $comment->getAuthor()) {
             return [
                 'userErrors' => [
                     [
-                        'message' => 'You are not author of the comment.',
-                    ],
-                ],
+                        'message' => 'You are not author of the comment.'
+                    ]
+                ]
             ];
         }
 
@@ -67,7 +68,7 @@ class DeleteCommentMutation implements MutationInterface
         if ($comment->getRelatedObject()) {
             $this->commentableCommentsDataLoader->invalidate($comment->getRelatedObject()->getId());
         }
-        $this->redisStorage->recomputeUserCounters($user);
+        $this->redisStorage->recomputeUserCounters($viewer);
 
         return ['deletedCommentId' => $commentId, 'userErrors' => []];
     }

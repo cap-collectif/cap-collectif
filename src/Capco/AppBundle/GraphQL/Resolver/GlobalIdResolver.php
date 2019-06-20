@@ -153,6 +153,10 @@ class GlobalIdResolver
                         ->find($uuid);
 
                     break;
+                case 'Comment':
+                    $node = $this->container->get(CommentRepository::class)->find($uuid);
+
+                    break;
                 default:
                     break;
             }
