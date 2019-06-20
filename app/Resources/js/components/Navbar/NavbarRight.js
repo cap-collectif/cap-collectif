@@ -76,23 +76,29 @@ export class NavbarRight extends React.Component<Props> {
                 <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
                 <FormattedMessage id="navbar.admin" />
               </TabsLink>
-            ): null}
+            ) : null}
             {features.profiles ? (
               <TabsLink eventKey={3.2} href={`/profile/${user.uniqueId}`}>
                 <i className="cap cap-id-8 mr-10" aria-hidden="true" />
                 <FormattedMessage id="navbar.profile" />
               </TabsLink>
-            ): null}
+            ) : null}
             {user.isEvaluer ? (
               <TabsLink eventKey={3.3} href="/evaluations">
                 <i className="cap cap-edit-write mr-10" aria-hidden="true" />
                 <FormattedMessage id="evaluations.index.page_title" />
               </TabsLink>
-            ): null}
+            ) : null}
             <TabsLink eventKey={3.4} href="/profile/edit-profile">
               <i className="cap cap-setting-adjustment mr-10" aria-hidden="true" />
               <FormattedMessage id="navbar.user_settings" />
             </TabsLink>
+            {features.disconnect_openid ? (
+              <TabsLink eventKey={3.5} href="/logout?ssoSwitchUser=true">
+                <i className="cap cap-refresh mr-10" aria-hidden="true" />
+                <FormattedMessage id="change-user" />
+              </TabsLink>
+            ) : null}
             <TabsDivider aria-hidden="true" />
             <TabsLink type="button" eventKey={3.6} id="logout-button" onClick={this.logout}>
               <i className="cap cap-power-1 mr-10" aria-hidden="true" />

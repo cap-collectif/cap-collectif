@@ -33,7 +33,7 @@ class OpenIDPathMapper
 
                 break;
             default:
-                throw new \RuntimeException('No mapping found for provider: ' . $instance);
+                $this->instanceMapper = new DevOpenIDMapping();
         }
     }
 
