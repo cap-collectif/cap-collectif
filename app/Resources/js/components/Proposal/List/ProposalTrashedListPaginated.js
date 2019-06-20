@@ -3,9 +3,8 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { ListGroup, Button } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import { TRASHED_PROPOSAL_PAGINATOR_COUNT } from '../../Project/ProjectTrashProposal';
 import type { ProposalTrashedListPaginated_project } from '~relay/ProposalTrashedListPaginated_project.graphql';
 import ProposalPreview from '../Preview/ProposalPreview';
@@ -62,18 +61,14 @@ export class ProposalTrashedListPaginated extends React.Component<Props, State> 
               ))}
         </ListGroup>
         {relay.hasMore() && (
-          <ListGroupItem style={{ textAlign: 'center' }}>
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <Button
-                id="ProposalTrashedListPaginated-loadMore"
-                bsStyle="link"
-                onClick={this.handleLoadMore}>
-                <FormattedMessage id="global.more" />
-              </Button>
-            )}
-          </ListGroupItem>
+          <div id="proposal-list-pagination-footer" className="text-center">
+            <Button
+              id="ProposalTrashedListPaginated-loadMore"
+              disabled={isLoading}
+              onClick={this.handleLoadMore}>
+              <FormattedMessage id={isLoading ? 'global.loading' : 'see-more-proposals'} />
+            </Button>
+          </div>
         )}
       </React.Fragment>
     );

@@ -556,3 +556,29 @@ Capco\AppBundle\Entity\Proposal:
     proposalForm: '@proposalform14'
     reference: 49
     status: '@status2'
+  proposalTrashedVisible{1..50}:
+    id: 'proposalTrashedVisible<current()>'
+    title: Trashed proposal visible <current()>
+    body: I deserve to be trashed !
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    author: '@user1'
+    proposalForm: '@proposalform1'
+    reference: '667<current()>'
+    createdAt: <(new \DateTime('2018-03-01 01:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    trashedAt: <(new \DateTime('2018-03-01 03:00:00'))>
+    trashedStatus: 'visible'
+    trashedReason: 'SPAM <current()>'
+  proposalTrashedInvisible{1..50}:
+    id: 'proposalTrashedInvisible<current()>'
+    title: Trashed proposal invisible <current()>
+    body: I am not visible because I contains some bad words
+    publishedAt: <(new \DateTime('2018-03-01 01:00:00'))>
+    author: '@user2'
+    proposalForm: '@proposalform1'
+    reference: '666<current()>'
+    createdAt: <(new \DateTime('2018-03-01 01:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    trashedAt: <(new \DateTime('2018-03-01 03:00:00'))>
+    trashedStatus: 'invisible'
+    trashedReason: 'Bad words <current()>'

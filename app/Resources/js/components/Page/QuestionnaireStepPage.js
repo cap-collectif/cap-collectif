@@ -73,7 +73,7 @@ export class QuestionnaireStepPage extends React.Component<Props> {
 
 const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: state.user.user !== null,
-  enableResults: state.default.features.new_feature_questionnaire_result || false,
+  enableResults: state.default.features.new_feature_questionnaire_result,
 });
 
-export default connect<Props, GlobalState, _>(mapStateToProps)(QuestionnaireStepPage);
+export default connect(mapStateToProps)(QuestionnaireStepPage);

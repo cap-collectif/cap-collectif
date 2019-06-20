@@ -51,30 +51,25 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 1`] = `
       viewer={null}
     />
   </ListGroup>
-  <ListGroupItem
-    bsClass="list-group-item"
-    listItem={false}
-    style={
-      Object {
-        "textAlign": "center",
-      }
-    }
+  <div
+    className="text-center"
+    id="proposal-list-pagination-footer"
   >
     <Button
       active={false}
       block={false}
       bsClass="btn"
-      bsStyle="link"
+      bsStyle="default"
       disabled={false}
       id="ProposalTrashedListPaginated-loadMore"
       onClick={[Function]}
     >
       <FormattedMessage
-        id="global.more"
+        id="see-more-proposals"
         values={Object {}}
       />
     </Button>
-  </ListGroupItem>
+  </div>
 </Fragment>
 `;
 
@@ -127,22 +122,25 @@ exports[`<ProposalTrashedListPaginated /> should render correctly 2`] = `
       viewer={null}
     />
   </ListGroup>
-  <ListGroupItem
-    bsClass="list-group-item"
-    listItem={false}
-    style={
-      Object {
-        "textAlign": "center",
-      }
-    }
+  <div
+    className="text-center"
+    id="proposal-list-pagination-footer"
   >
-    <Loader
-      color="#333333"
-      inline={false}
-      show={true}
-      size={40}
-    />
-  </ListGroupItem>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={true}
+      id="ProposalTrashedListPaginated-loadMore"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="global.loading"
+        values={Object {}}
+      />
+    </Button>
+  </div>
 </Fragment>
 `;
 

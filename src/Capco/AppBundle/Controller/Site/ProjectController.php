@@ -137,10 +137,7 @@ class ProjectController extends Controller
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
 
-            $flashBag->add(
-                'danger',
-                $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
-            );
+            $flashBag->add('danger', 'project.download.not_yet_generated');
 
             return $this->redirect($request->headers->get('referer'));
         }
@@ -174,10 +171,7 @@ class ProjectController extends Controller
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
 
-            $flashBag->add(
-                'danger',
-                $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
-            );
+            $flashBag->add('danger', 'project.download.not_yet_generated');
 
             return $this->redirect($request->headers->get('referer'));
         }

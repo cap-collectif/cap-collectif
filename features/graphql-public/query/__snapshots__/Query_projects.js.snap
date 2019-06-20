@@ -1,0 +1,1050 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Query.projects connection fetches the public and private projects with a cursor 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 41,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "title": "Croissance, innovation, disruption",
+          "votes": Object {
+            "totalCount": 10,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 5,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Mg==",
+          "title": "Stratégie technologique de l'Etat et services publics",
+          "votes": Object {
+            "totalCount": 1,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 3,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Mw==",
+          "title": "Transformation numérique des relations",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0NA==",
+          "title": "Projet vide",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 80,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0NQ==",
+          "title": "Projet de loi Renseignement",
+          "votes": Object {
+            "totalCount": 134,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 49,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+          "title": "Budget Participatif Rennes",
+          "votes": Object {
+            "totalCount": 49,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Nw==",
+          "title": "Dépot avec selection vote budget",
+          "votes": Object {
+            "totalCount": 1,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 4,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0OA==",
+          "title": "Projet avec questionnaire",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 50,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0OQ==",
+          "title": "Appel à projets",
+          "votes": Object {
+            "totalCount": 50,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTA=",
+          "title": "Dépôt avec selection vote simple",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 3,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTE=",
+          "title": "Budget avec vote limité",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTI=",
+          "title": "Projet sans étapes participatives",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTM=",
+          "title": "Projet avec une étape de participation en continue",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
+          "title": "Projet à venir",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 2,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTU=",
+          "title": "BP avec vote classement",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTY=",
+          "title": "Le P16 un projet à base de riz",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 3,
+          },
+          "id": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvckFkbWluT25seQ==",
+          "title": "Qui doit conquérir le monde ? | Visible par les admins seulement",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "id": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4=",
+          "title": "Project pour la création de la capCoBeer (visible par admin seulement)",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "id": "UHJvamVjdDpQcm9qZWN0V2l0aEN1c3RvbUFjY2Vzcw==",
+          "title": "Un avenir meilleur pour les nains de jardins (custom access)",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 3,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MjE=",
+          "title": "Questions/Responses",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 69,
+          },
+          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
+          "title": "Projet externe",
+          "votes": Object {
+            "totalCount": 86,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3RXaXRob3V0Q291bnRlcg==",
+          "title": "Projet externe sans compteur",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+    ],
+    "pageInfo": Object {
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjIx",
+      "hasNextPage": false,
+    },
+    "totalCount": 22,
+  },
+}
+`;
+
+exports[`Query.projects connection fetches the public projects containing a specific term 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "contributionsCount": 247,
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "publishedAt": "2014-12-31 00:00:00",
+          "title": "Croissance, innovation, disruption",
+        },
+      },
+    ],
+    "pageInfo": Object {
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjA=",
+      "hasNextPage": false,
+    },
+    "totalCount": 1,
+  },
+}
+`;
+
+exports[`Query.projects connection fetches the public projects ordered by latest 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "contributionsCount": 247,
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "publishedAt": "2014-12-31 00:00:00",
+          "title": "Croissance, innovation, disruption",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "contributionsCount": 8,
+          "id": "UHJvamVjdDpwcm9qZWN0Mg==",
+          "publishedAt": "2014-12-30 00:00:00",
+          "title": "Stratégie technologique de l'Etat et services publics",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "contributionsCount": 3,
+          "id": "UHJvamVjdDpwcm9qZWN0Mw==",
+          "publishedAt": "2014-12-29 00:00:00",
+          "title": "Transformation numérique des relations",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0NA==",
+          "publishedAt": "2014-12-28 00:00:00",
+          "title": "Projet vide",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "contributionsCount": 79,
+          "id": "UHJvamVjdDpwcm9qZWN0NQ==",
+          "publishedAt": "2014-12-27 00:00:00",
+          "title": "Projet de loi Renseignement",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+          "publishedAt": "2014-12-26 00:00:00",
+          "title": "Budget Participatif Rennes",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0Nw==",
+          "publishedAt": "2014-12-25 00:00:00",
+          "title": "Dépot avec selection vote budget",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "node": Object {
+          "contributionsCount": 6,
+          "id": "UHJvamVjdDpwcm9qZWN0OA==",
+          "publishedAt": "2014-12-24 00:00:00",
+          "title": "Projet avec questionnaire",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0OQ==",
+          "publishedAt": "2014-12-23 00:00:00",
+          "title": "Appel à projets",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTA=",
+          "publishedAt": "2014-12-22 00:00:00",
+          "title": "Dépôt avec selection vote simple",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTE=",
+          "publishedAt": "2014-12-21 00:00:00",
+          "title": "Budget avec vote limité",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTI=",
+          "publishedAt": "2014-12-20 00:00:00",
+          "title": "Projet sans étapes participatives",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTM=",
+          "publishedAt": "2014-12-19 00:00:00",
+          "title": "Projet avec une étape de participation en continue",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
+          "publishedAt": "2014-12-18 00:00:00",
+          "title": "Projet à venir",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTU=",
+          "publishedAt": "2014-12-17 00:00:00",
+          "title": "BP avec vote classement",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTY=",
+          "publishedAt": "2014-12-16 00:00:00",
+          "title": "Le P16 un projet à base de riz",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MjE=",
+          "publishedAt": "2014-12-11 00:00:00",
+          "title": "Questions/Responses",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+        "node": Object {
+          "contributionsCount": 51,
+          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
+          "publishedAt": "2014-12-10 00:00:00",
+          "title": "Projet externe",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3RXaXRob3V0Q291bnRlcg==",
+          "publishedAt": "2014-12-09 00:00:00",
+          "title": "Projet externe sans compteur",
+        },
+      },
+    ],
+    "pageInfo": Object {
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
+      "hasNextPage": false,
+    },
+    "totalCount": 19,
+  },
+}
+`;
+
+exports[`Query.projects connection fetches the public projects ordered by popularity 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "contributionsCount": 247,
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "publishedAt": "2014-12-31 00:00:00",
+          "title": "Croissance, innovation, disruption",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "contributionsCount": 79,
+          "id": "UHJvamVjdDpwcm9qZWN0NQ==",
+          "publishedAt": "2014-12-27 00:00:00",
+          "title": "Projet de loi Renseignement",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "contributionsCount": 51,
+          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
+          "publishedAt": "2014-12-10 00:00:00",
+          "title": "Projet externe",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "contributionsCount": 8,
+          "id": "UHJvamVjdDpwcm9qZWN0Mg==",
+          "publishedAt": "2014-12-30 00:00:00",
+          "title": "Stratégie technologique de l'Etat et services publics",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "contributionsCount": 6,
+          "id": "UHJvamVjdDpwcm9qZWN0OA==",
+          "publishedAt": "2014-12-24 00:00:00",
+          "title": "Projet avec questionnaire",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "node": Object {
+          "contributionsCount": 3,
+          "id": "UHJvamVjdDpwcm9qZWN0Mw==",
+          "publishedAt": "2014-12-29 00:00:00",
+          "title": "Transformation numérique des relations",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3RXaXRob3V0Q291bnRlcg==",
+          "publishedAt": "2014-12-09 00:00:00",
+          "title": "Projet externe sans compteur",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTA=",
+          "publishedAt": "2014-12-22 00:00:00",
+          "title": "Dépôt avec selection vote simple",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTE=",
+          "publishedAt": "2014-12-21 00:00:00",
+          "title": "Budget avec vote limité",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTI=",
+          "publishedAt": "2014-12-20 00:00:00",
+          "title": "Projet sans étapes participatives",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTM=",
+          "publishedAt": "2014-12-19 00:00:00",
+          "title": "Projet avec une étape de participation en continue",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
+          "publishedAt": "2014-12-18 00:00:00",
+          "title": "Projet à venir",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTU=",
+          "publishedAt": "2014-12-17 00:00:00",
+          "title": "BP avec vote classement",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MTY=",
+          "publishedAt": "2014-12-16 00:00:00",
+          "title": "Le P16 un projet à base de riz",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0MjE=",
+          "publishedAt": "2014-12-11 00:00:00",
+          "title": "Questions/Responses",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0NA==",
+          "publishedAt": "2014-12-28 00:00:00",
+          "title": "Projet vide",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+          "publishedAt": "2014-12-26 00:00:00",
+          "title": "Budget Participatif Rennes",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0Nw==",
+          "publishedAt": "2014-12-25 00:00:00",
+          "title": "Dépot avec selection vote budget",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
+        "node": Object {
+          "contributionsCount": 0,
+          "id": "UHJvamVjdDpwcm9qZWN0OQ==",
+          "publishedAt": "2014-12-23 00:00:00",
+          "title": "Appel à projets",
+        },
+      },
+    ],
+    "pageInfo": Object {
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
+      "hasNextPage": false,
+    },
+    "totalCount": 19,
+  },
+}
+`;
+
+exports[`Query.projects connection fetches the public projects with a cursor 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 41,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "title": "Croissance, innovation, disruption",
+          "votes": Object {
+            "totalCount": 10,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 5,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Mg==",
+          "title": "Stratégie technologique de l'Etat et services publics",
+          "votes": Object {
+            "totalCount": 1,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 3,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Mw==",
+          "title": "Transformation numérique des relations",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0NA==",
+          "title": "Projet vide",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 80,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0NQ==",
+          "title": "Projet de loi Renseignement",
+          "votes": Object {
+            "totalCount": 134,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 49,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+          "title": "Budget Participatif Rennes",
+          "votes": Object {
+            "totalCount": 49,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Nw==",
+          "title": "Dépot avec selection vote budget",
+          "votes": Object {
+            "totalCount": 1,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 4,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0OA==",
+          "title": "Projet avec questionnaire",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 50,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0OQ==",
+          "title": "Appel à projets",
+          "votes": Object {
+            "totalCount": 50,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTA=",
+          "title": "Dépôt avec selection vote simple",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 3,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTE=",
+          "title": "Budget avec vote limité",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTI=",
+          "title": "Projet sans étapes participatives",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTM=",
+          "title": "Projet avec une étape de participation en continue",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
+          "title": "Projet à venir",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 2,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTU=",
+          "title": "BP avec vote classement",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MTY=",
+          "title": "Le P16 un projet à base de riz",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 3,
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0MjE=",
+          "title": "Questions/Responses",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 69,
+          },
+          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
+          "title": "Projet externe",
+          "votes": Object {
+            "totalCount": 86,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
+        "node": Object {
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3RXaXRob3V0Q291bnRlcg==",
+          "title": "Projet externe sans compteur",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+    ],
+    "pageInfo": Object {
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
+      "hasNextPage": false,
+    },
+    "totalCount": 19,
+  },
+}
+`;
+
+exports[`Query.projects connection fetches the public projects with a specific theme 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "themes": Array [
+            Object {
+              "id": "theme1",
+            },
+            Object {
+              "id": "theme2",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "UHJvamVjdDpwcm9qZWN0Mg==",
+          "themes": Array [
+            Object {
+              "id": "theme1",
+            },
+            Object {
+              "id": "theme3",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "UHJvamVjdDpwcm9qZWN0NQ==",
+          "themes": Array [
+            Object {
+              "id": "theme1",
+            },
+            Object {
+              "id": "theme3",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "UHJvamVjdDpwcm9qZWN0MTM=",
+          "themes": Array [
+            Object {
+              "id": "theme1",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
+          "themes": Array [
+            Object {
+              "id": "theme1",
+            },
+          ],
+        },
+      },
+    ],
+    "totalCount": 5,
+  },
+}
+`;
+
+exports[`Query.projects connection fetches the public projects with a specific type 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "type": Object {
+            "id": "3",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "UHJvamVjdDpwcm9qZWN0Mw==",
+          "type": Object {
+            "id": "3",
+          },
+        },
+      },
+    ],
+    "totalCount": 2,
+  },
+}
+`;

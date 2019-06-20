@@ -151,14 +151,22 @@ class UserSearch extends Search
         $nestedQuery->setQuery($boolQuery);
 
         $query = new Query($nestedQuery);
+
         $query->setSort([
-            'contributionsCountByStep.count' => [
+            'createdAt' => [
                 'order' => 'desc',
-                'nested_filter' => [
-                    'term' => ['contributionsCountByStep.step.id' => $step->getId()],
-                ],
             ],
         ]);
+
+        // Sort by top contributors
+        // $query->setSort([
+        //     'contributionsCountByStep.count' => [
+        //         'order' => 'desc',
+        //         'nested_filter' => [
+        //             'term' => ['contributionsCountByStep.step.id' => $step->getId()],
+        //         ],
+        //     ],
+        // ]);
 
         $query
             ->setSource(['id'])
