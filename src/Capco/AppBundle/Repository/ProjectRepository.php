@@ -85,10 +85,11 @@ class ProjectRepository extends EntityRepository
     public function getByUser(User $user, $viewer = null)
     {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
-            ->addSelect('a', 't')
+            ->addSelect('a', 'u', 't')
             ->leftJoin('p.projectType', 't')
             ->leftJoin('p.authors', 'a')
-            ->andWhere('a = :user')
+            ->leftJoin('a.user', 'u')
+            ->andWhere('u = :user')
             ->setParameter('user', $user)
             ->orderBy('p.updatedAt', 'DESC');
 
