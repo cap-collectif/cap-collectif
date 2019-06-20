@@ -39,7 +39,7 @@ class DeleteCommentMutation implements MutationInterface
     {
         $commentId = $input->offsetGet('id');
         /** @var Comment $comment */
-        $comment = $this->commentRepo->find(GlobalId::fromGlobalId($commentId));
+        $comment = $this->commentRepo->find(GlobalId::fromGlobalId($commentId)['id']);
 
         if (!$comment) {
             $this->logger->error('Unknown comment with id: ' . $commentId);
