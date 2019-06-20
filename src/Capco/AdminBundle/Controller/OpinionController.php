@@ -13,6 +13,7 @@ use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Bridge\Twig\Extension\FormExtension;
 
 class OpinionController extends Controller
 {
@@ -27,7 +28,7 @@ class OpinionController extends Controller
             return $preResponse;
         }
 
-        if (($listMode = $request->get('_list_mode'))) {
+        if ($listMode = $request->get('_list_mode')) {
             $this->admin->setListMode($listMode);
         }
 
@@ -36,7 +37,7 @@ class OpinionController extends Controller
 
         // set the theme for the current Admin Form
         $this->get('twig')
-            ->getExtension('form')
+            ->getExtension(FormExtension::class)
             ->renderer->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->render(
@@ -46,7 +47,7 @@ class OpinionController extends Controller
                 'form' => $formView,
                 'datagrid' => $datagrid,
                 'csrf_token' => $this->getCsrfToken('sonata.batch'),
-                'consultations' => $this->getConsultations(),
+                'consultations' => $this->getConsultations()
             ],
             null,
             $request
@@ -110,7 +111,7 @@ class OpinionController extends Controller
                         return $this->renderJson(
                             [
                                 'result' => 'ok',
-                                'objectId' => $this->admin->getNormalizedIdentifier($object),
+                                'objectId' => $this->admin->getNormalizedIdentifier($object)
                             ],
                             200,
                             [],
@@ -159,7 +160,7 @@ class OpinionController extends Controller
 
         // set the theme for the current Admin Form
         $this->get('twig')
-            ->getExtension('form')
+            ->getExtension(FormExtension::class)
             ->renderer->setTheme($view, $this->admin->getFormTheme());
 
         return $this->render(
@@ -168,7 +169,7 @@ class OpinionController extends Controller
                 'action' => 'create',
                 'form' => $view,
                 'object' => $object,
-                'consultations' => $this->getConsultations(),
+                'consultations' => $this->getConsultations()
             ],
             null,
             $request
@@ -224,7 +225,7 @@ class OpinionController extends Controller
                             [
                                 'result' => 'ok',
                                 'objectId' => $this->admin->getNormalizedIdentifier($object),
-                                'objectName' => $this->escapeHtml($this->admin->toString($object)),
+                                'objectName' => $this->escapeHtml($this->admin->toString($object))
                             ],
                             200,
                             [],
@@ -256,9 +257,9 @@ class OpinionController extends Controller
                                 '%name%' => $this->escapeHtml($this->admin->toString($object)),
                                 '%link_start%' =>
                                     '<a href="' .
-                                        $this->admin->generateObjectUrl('edit', $object) .
-                                        '">',
-                                '%link_end%' => '</a>',
+                                    $this->admin->generateObjectUrl('edit', $object) .
+                                    '">',
+                                '%link_end%' => '</a>'
                             ],
                             'CapcoAppBundle'
                         )
@@ -289,7 +290,7 @@ class OpinionController extends Controller
 
         // set the theme for the current Admin Form
         $this->get('twig')
-            ->getExtension('form')
+            ->getExtension(FormExtension::class)
             ->renderer->setTheme($view, $this->admin->getFormTheme());
 
         return $this->render(
@@ -298,7 +299,7 @@ class OpinionController extends Controller
                 'action' => 'edit',
                 'form' => $view,
                 'object' => $object,
-                'consultations' => $this->getConsultations(),
+                'consultations' => $this->getConsultations()
             ],
             null,
             $request
@@ -336,7 +337,7 @@ class OpinionController extends Controller
                 'action' => 'show',
                 'object' => $object,
                 'elements' => $this->admin->getShow(),
-                'consultations' => $this->getConsultations(),
+                'consultations' => $this->getConsultations()
             ],
             null,
             $request
@@ -412,7 +413,7 @@ class OpinionController extends Controller
                 'object' => $object,
                 'action' => 'delete',
                 'csrf_token' => $this->getCsrfToken('sonata.delete'),
-                'consultations' => $this->getConsultations(),
+                'consultations' => $this->getConsultations()
             ],
             null,
             $request
