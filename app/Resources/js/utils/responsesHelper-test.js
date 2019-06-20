@@ -1,7 +1,802 @@
 // @flow
 /* eslint-env jest */
-import { getAvailableQuestionsIds, renderResponses, validateResponses } from './responsesHelper';
+import {
+  getAvailableQuestionsIds,
+  getNextLogicJumpQuestion,
+  getQuestionDepsIds,
+  renderResponses,
+  validateResponses,
+} from './responsesHelper';
 import { intlMock } from '../mocks';
+
+const questionnaireQuestions = [
+  {
+    id: 'UXVlc3Rpb246MjQ=',
+    title: 'Hap ou Noel ?',
+    number: 1,
+    private: false,
+    position: 1,
+    required: false,
+    helpText: null,
+    jumps: [],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceHap',
+        title: 'Hap',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceNoel',
+        title: 'Noel',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246NDU=',
+    title: 'Votre fleuve préféré',
+    number: 2,
+    private: false,
+    position: 2,
+    required: false,
+    helpText: null,
+    jumps: [
+      {
+        id: 'logicjump1',
+        always: false,
+        origin: {
+          id: 'UXVlc3Rpb246NDU=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246NDY=',
+          title:
+            "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)",
+          number: 3,
+        },
+        conditions: [
+          {
+            id: 'ljconditionFleuveGange',
+            operator: 'IS',
+            question: {
+              id: 'UXVlc3Rpb246NDU=',
+              title: 'Votre fleuve préféré',
+            },
+            value: {
+              id: 'questionchoicLeGange',
+              title: 'Le gange',
+            },
+          },
+          {
+            id: 'ljconditionFleuveHapLg1',
+            operator: 'IS',
+            question: {
+              id: 'UXVlc3Rpb246MjQ=',
+              title: 'Hap ou Noel ?',
+            },
+            value: {
+              id: 'questionchoiceHap',
+              title: 'Hap',
+            },
+          },
+        ],
+      },
+      {
+        id: 'logicjump2',
+        always: false,
+        origin: {
+          id: 'UXVlc3Rpb246NDU=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246MjU=',
+          title: 'Par qui Hap a t-il été créé ?',
+          number: 4,
+        },
+        conditions: [
+          {
+            id: 'ljconditionFleuveHap',
+            operator: 'IS',
+            question: {
+              id: 'UXVlc3Rpb246MjQ=',
+              title: 'Hap ou Noel ?',
+            },
+            value: {
+              id: 'questionchoiceHap',
+              title: 'Hap',
+            },
+          },
+        ],
+      },
+      {
+        id: 'logicjump3',
+        always: false,
+        origin: {
+          id: 'UXVlc3Rpb246NDU=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246Mjc=',
+          title: 'Noel a t-il un rapport avec la fête de Noël ?',
+          number: 7,
+        },
+        conditions: [
+          {
+            id: 'ljconditionNoel',
+            operator: 'IS',
+            question: {
+              id: 'UXVlc3Rpb246MjQ=',
+              title: 'Hap ou Noel ?',
+            },
+            value: {
+              id: 'questionchoiceNoel',
+              title: 'Noel',
+            },
+          },
+        ],
+      },
+    ],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoicLeGange',
+        title: 'Le gange',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceLeNil',
+        title: 'Le nil',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceLaSeine',
+        title: 'La seine',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceAmazone',
+        title: "L'Amazone",
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246NDY=',
+    title: "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)",
+    number: 3,
+    private: false,
+    position: 3,
+    required: false,
+    helpText: null,
+    jumps: [
+      {
+        id: 'alwaysLogicJumpHapAndGange',
+        always: true,
+        origin: {
+          id: 'UXVlc3Rpb246NDY=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246MjU=',
+          title: 'Par qui Hap a t-il été créé ?',
+          number: 4,
+        },
+        conditions: [],
+      },
+    ],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceHapGangeOui',
+        title: 'Oui',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceHapGangeNon',
+        title: 'Non',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246MjU=',
+    title: 'Par qui Hap a t-il été créé ?',
+    number: 4,
+    private: false,
+    position: 4,
+    required: false,
+    helpText: null,
+    jumps: [],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceJvc',
+        title: 'JVC',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceTesla',
+        title: 'Tesla',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceCisla',
+        title: 'Cisla',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246MjY=',
+    title: 'Hap est-il un homme bon ?',
+    number: 5,
+    private: false,
+    position: 5,
+    required: false,
+    helpText: null,
+    jumps: [
+      {
+        id: 'logicjump10',
+        always: false,
+        origin: {
+          id: 'UXVlc3Rpb246MjY=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246Mzk=',
+          title: "Comment ça ce n'est pas un homme bon, comment oses-tu ?",
+          number: 6,
+        },
+        conditions: [
+          {
+            id: 'ljconditionHapGood',
+            operator: 'IS',
+            question: {
+              id: 'UXVlc3Rpb246MjY=',
+              title: 'Hap est-il un homme bon ?',
+            },
+            value: {
+              id: 'questionchoiceHapBonNon',
+              title: 'Non',
+            },
+          },
+        ],
+      },
+      {
+        id: 'logicjump8',
+        always: true,
+        origin: {
+          id: 'UXVlc3Rpb246MjY=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246MzE=',
+          title: 'Plutôt Marvel ou DC ?',
+          number: 9,
+        },
+        conditions: [],
+      },
+    ],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceHapBonOui',
+        title: 'Oui',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceHapBonNon',
+        title: 'Non',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246Mzk=',
+    title: "Comment ça ce n'est pas un homme bon, comment oses-tu ?",
+    number: 6,
+    private: false,
+    position: 6,
+    required: false,
+    helpText: null,
+    jumps: [
+      {
+        id: 'logicjump11',
+        always: true,
+        origin: {
+          id: 'UXVlc3Rpb246Mzk=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246MzE=',
+          title: 'Plutôt Marvel ou DC ?',
+          number: 9,
+        },
+        conditions: [],
+      },
+    ],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceHapNotGoodHowDareYouOk',
+        title: 'Oki',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceHapNotGoodHowDareYouGp',
+        title: 'mdr g pas lu',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246Mjc=',
+    title: 'Noel a t-il un rapport avec la fête de Noël ?',
+    number: 7,
+    private: false,
+    position: 7,
+    required: false,
+    helpText: null,
+    jumps: [],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceNoelOui',
+        title: 'Oui',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceNoelNonBaka',
+        title: 'Non baka',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246Mjg=',
+    title: 'De quelle couleur est le chapeau de Noël ?',
+    number: 8,
+    private: false,
+    position: 8,
+    required: false,
+    helpText: null,
+    jumps: [
+      {
+        id: 'logicjump9',
+        always: true,
+        origin: {
+          id: 'UXVlc3Rpb246Mjg=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246MzE=',
+          title: 'Plutôt Marvel ou DC ?',
+          number: 9,
+        },
+        conditions: [],
+      },
+    ],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceNoelRedHat',
+        title: 'Rouge',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceNoelGreenHat',
+        title: 'Vert',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceNoelBlueHat',
+        title: 'Bleu',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246MzE=',
+    title: 'Plutôt Marvel ou DC ?',
+    number: 9,
+    private: false,
+    position: 9,
+    required: false,
+    helpText: null,
+    jumps: [
+      {
+        id: 'logicjump4',
+        always: false,
+        origin: {
+          id: 'UXVlc3Rpb246MzE=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246MzU=',
+          title: "T'aimes bien Iron Man ?",
+          number: 13,
+        },
+        conditions: [
+          {
+            id: 'ljconditionMarvel',
+            operator: 'IS',
+            question: {
+              id: 'UXVlc3Rpb246MzE=',
+              title: 'Plutôt Marvel ou DC ?',
+            },
+            value: {
+              id: 'questionchoiceMarvelOrDcMarvel',
+              title: 'Marvel',
+            },
+          },
+        ],
+      },
+      {
+        id: 'logicjump5',
+        always: false,
+        origin: {
+          id: 'UXVlc3Rpb246MzE=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246MzI=',
+          title: "T'aimes bien Superman ?",
+          number: 10,
+        },
+        conditions: [
+          {
+            id: 'ljconditionDc',
+            operator: 'IS',
+            question: {
+              id: 'UXVlc3Rpb246MzE=',
+              title: 'Plutôt Marvel ou DC ?',
+            },
+            value: {
+              id: 'questionchoiceMarvelOrDcDc',
+              title: 'DC',
+            },
+          },
+        ],
+      },
+    ],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceMarvelOrDcMarvel',
+        title: 'Marvel',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceMarvelOrDcDc',
+        title: 'DC',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246MzI=',
+    title: "T'aimes bien Superman ?",
+    number: 10,
+    private: false,
+    position: 10,
+    required: false,
+    helpText: null,
+    jumps: [],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceDcSupermanYes',
+        title: 'Oui',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceDcSupermanNo',
+        title: 'Non',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246MzM=',
+    title: "T'aimes bien Batman ?",
+    number: 11,
+    private: false,
+    position: 11,
+    required: false,
+    helpText: null,
+    jumps: [],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceDcBatmanYes',
+        title: 'Oui',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceDcBatmanYes2',
+        title: 'Oui',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246MzQ=',
+    title: "T'aimes bien Supergirl ?",
+    number: 12,
+    private: false,
+    position: 12,
+    required: false,
+    helpText: null,
+    jumps: [
+      {
+        id: 'logicjump6',
+        always: true,
+        origin: {
+          id: 'UXVlc3Rpb246MzQ=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246Mzg=',
+          title: "C'est la fin mais j'affiche quand même des choix",
+          number: 16,
+        },
+        conditions: [],
+      },
+    ],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceDcSupergirlYes',
+        title: 'Oui',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceDcSupergirlNo',
+        title: 'Non',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246MzU=',
+    title: "T'aimes bien Iron Man ?",
+    number: 13,
+    private: false,
+    position: 13,
+    required: false,
+    helpText: null,
+    jumps: [],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceMarvelIronManYes',
+        title: 'Oui',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceMarvelIronManNo',
+        title: 'Non',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246MzY=',
+    title: "T'aimes bien Luke Cage ?",
+    number: 14,
+    private: false,
+    position: 14,
+    required: false,
+    helpText: null,
+    jumps: [],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceMarvelLukeCageYes',
+        title: 'Oui c un bo chauve ténébreux',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceMarvelLukeCageYes2',
+        title: 'Oui',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceMarvelLukeCageYes3',
+        title: 'OUI',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246Mzc=',
+    title: "T'aimes bien Thor ?",
+    number: 15,
+    private: false,
+    position: 15,
+    required: false,
+    helpText: null,
+    jumps: [
+      {
+        id: 'logicjump7',
+        always: true,
+        origin: {
+          id: 'UXVlc3Rpb246Mzc=',
+        },
+        destination: {
+          id: 'UXVlc3Rpb246Mzg=',
+          title: "C'est la fin mais j'affiche quand même des choix",
+          number: 16,
+        },
+        conditions: [],
+      },
+    ],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceMarvelThorYes',
+        title: 'ui',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceMarvelThorNo',
+        title: 'nn',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+  {
+    id: 'UXVlc3Rpb246Mzg=',
+    title: "C'est la fin mais j'affiche quand même des choix",
+    number: 16,
+    private: false,
+    position: 16,
+    required: false,
+    helpText: null,
+    jumps: [],
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: [
+      {
+        id: 'questionchoiceEndConditionOk',
+        title: 'Oki',
+        description: null,
+        color: null,
+        image: null,
+      },
+      {
+        id: 'questionchoiceEndConditionOk2',
+        title: 'Doki',
+        description: null,
+        color: null,
+        image: null,
+      },
+    ],
+  },
+];
 
 const numberQuestion = {
   id: 'numberQuestion',
@@ -417,5 +1212,27 @@ describe('getAvailableQuestionsIds', () => {
     ];
     const ids = getAvailableQuestionsIds(questions, responses);
     expect(ids).toMatchSnapshot();
+  });
+});
+
+describe('getNextLogicJumpQuestion', () => {
+  it('Should return the correct next logic jump question', () => {
+    const questions = [...questionnaireQuestions];
+    let sample = questions[0];
+    const fleuveQuestion = getNextLogicJumpQuestion(sample, questions);
+    expect(fleuveQuestion).toMatchSnapshot();
+
+    sample = questions[3];
+    const hapGoodQuestion = getNextLogicJumpQuestion(sample, questions);
+    expect(hapGoodQuestion).toMatchSnapshot();
+  });
+});
+
+describe('getQuestionDepsIds', () => {
+  it('Should return a correct list of dependent questions for a given question when we change the value of the first question from nothing to Hap', () => {
+    const questions = [...questionnaireQuestions];
+    const question = questions[0];
+    const deps = getQuestionDepsIds(question, questions, 'Hap');
+    expect(deps).toMatchSnapshot();
   });
 });

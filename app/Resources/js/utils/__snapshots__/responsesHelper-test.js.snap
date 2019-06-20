@@ -15,6 +15,230 @@ Array [
 ]
 `;
 
+exports[`getNextLogicJumpQuestion Should return the correct next logic jump question 1`] = `
+Object {
+  "choices": Array [
+    Object {
+      "color": null,
+      "description": null,
+      "id": "questionchoicLeGange",
+      "image": null,
+      "title": "Le gange",
+    },
+    Object {
+      "color": null,
+      "description": null,
+      "id": "questionchoiceLeNil",
+      "image": null,
+      "title": "Le nil",
+    },
+    Object {
+      "color": null,
+      "description": null,
+      "id": "questionchoiceLaSeine",
+      "image": null,
+      "title": "La seine",
+    },
+    Object {
+      "color": null,
+      "description": null,
+      "id": "questionchoiceAmazone",
+      "image": null,
+      "title": "L'Amazone",
+    },
+  ],
+  "description": null,
+  "helpText": null,
+  "id": "UXVlc3Rpb246NDU=",
+  "isOtherAllowed": false,
+  "jumps": Array [
+    Object {
+      "always": false,
+      "conditions": Array [
+        Object {
+          "id": "ljconditionFleuveGange",
+          "operator": "IS",
+          "question": Object {
+            "id": "UXVlc3Rpb246NDU=",
+            "title": "Votre fleuve préféré",
+          },
+          "value": Object {
+            "id": "questionchoicLeGange",
+            "title": "Le gange",
+          },
+        },
+        Object {
+          "id": "ljconditionFleuveHapLg1",
+          "operator": "IS",
+          "question": Object {
+            "id": "UXVlc3Rpb246MjQ=",
+            "title": "Hap ou Noel ?",
+          },
+          "value": Object {
+            "id": "questionchoiceHap",
+            "title": "Hap",
+          },
+        },
+      ],
+      "destination": Object {
+        "id": "UXVlc3Rpb246NDY=",
+        "number": 3,
+        "title": "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)",
+      },
+      "id": "logicjump1",
+      "origin": Object {
+        "id": "UXVlc3Rpb246NDU=",
+      },
+    },
+    Object {
+      "always": false,
+      "conditions": Array [
+        Object {
+          "id": "ljconditionFleuveHap",
+          "operator": "IS",
+          "question": Object {
+            "id": "UXVlc3Rpb246MjQ=",
+            "title": "Hap ou Noel ?",
+          },
+          "value": Object {
+            "id": "questionchoiceHap",
+            "title": "Hap",
+          },
+        },
+      ],
+      "destination": Object {
+        "id": "UXVlc3Rpb246MjU=",
+        "number": 4,
+        "title": "Par qui Hap a t-il été créé ?",
+      },
+      "id": "logicjump2",
+      "origin": Object {
+        "id": "UXVlc3Rpb246NDU=",
+      },
+    },
+    Object {
+      "always": false,
+      "conditions": Array [
+        Object {
+          "id": "ljconditionNoel",
+          "operator": "IS",
+          "question": Object {
+            "id": "UXVlc3Rpb246MjQ=",
+            "title": "Hap ou Noel ?",
+          },
+          "value": Object {
+            "id": "questionchoiceNoel",
+            "title": "Noel",
+          },
+        },
+      ],
+      "destination": Object {
+        "id": "UXVlc3Rpb246Mjc=",
+        "number": 7,
+        "title": "Noel a t-il un rapport avec la fête de Noël ?",
+      },
+      "id": "logicjump3",
+      "origin": Object {
+        "id": "UXVlc3Rpb246NDU=",
+      },
+    },
+  ],
+  "number": 2,
+  "position": 2,
+  "private": false,
+  "randomQuestionChoices": false,
+  "required": false,
+  "title": "Votre fleuve préféré",
+  "type": "select",
+  "validationRule": null,
+}
+`;
+
+exports[`getNextLogicJumpQuestion Should return the correct next logic jump question 2`] = `
+Object {
+  "choices": Array [
+    Object {
+      "color": null,
+      "description": null,
+      "id": "questionchoiceHapBonOui",
+      "image": null,
+      "title": "Oui",
+    },
+    Object {
+      "color": null,
+      "description": null,
+      "id": "questionchoiceHapBonNon",
+      "image": null,
+      "title": "Non",
+    },
+  ],
+  "description": null,
+  "helpText": null,
+  "id": "UXVlc3Rpb246MjY=",
+  "isOtherAllowed": false,
+  "jumps": Array [
+    Object {
+      "always": false,
+      "conditions": Array [
+        Object {
+          "id": "ljconditionHapGood",
+          "operator": "IS",
+          "question": Object {
+            "id": "UXVlc3Rpb246MjY=",
+            "title": "Hap est-il un homme bon ?",
+          },
+          "value": Object {
+            "id": "questionchoiceHapBonNon",
+            "title": "Non",
+          },
+        },
+      ],
+      "destination": Object {
+        "id": "UXVlc3Rpb246Mzk=",
+        "number": 6,
+        "title": "Comment ça ce n'est pas un homme bon, comment oses-tu ?",
+      },
+      "id": "logicjump10",
+      "origin": Object {
+        "id": "UXVlc3Rpb246MjY=",
+      },
+    },
+    Object {
+      "always": true,
+      "conditions": Array [],
+      "destination": Object {
+        "id": "UXVlc3Rpb246MzE=",
+        "number": 9,
+        "title": "Plutôt Marvel ou DC ?",
+      },
+      "id": "logicjump8",
+      "origin": Object {
+        "id": "UXVlc3Rpb246MjY=",
+      },
+    },
+  ],
+  "number": 5,
+  "position": 5,
+  "private": false,
+  "randomQuestionChoices": false,
+  "required": false,
+  "title": "Hap est-il un homme bon ?",
+  "type": "select",
+  "validationRule": null,
+}
+`;
+
+exports[`getQuestionDepsIds Should return a correct list of dependent questions for a given question when we change the value of the first question from nothing to Hap 1`] = `
+Array [
+  "UXVlc3Rpb246NDY=",
+  "UXVlc3Rpb246MzE=",
+  "UXVlc3Rpb246MjY=",
+  "UXVlc3Rpb246Mzg=",
+  "UXVlc3Rpb246MzQ=",
+  "UXVlc3Rpb246MjU=",
+]
+`;
+
 exports[`validateResponses Should render correctly when empty 1`] = `
 <div>
   <div

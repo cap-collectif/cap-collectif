@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { type IntlShape } from 'react-intl';
 import { graphql } from 'react-relay';
+import { detailedDiff } from 'deep-object-diff';
 import { Field, type FieldArrayProps } from 'redux-form';
 import type { QuestionTypeValue } from '~relay/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '~relay/ReplyForm_questionnaire.graphql';
@@ -17,6 +18,7 @@ import type {
   MultipleChoiceQuestionValidationRulesTypes,
   QuestionChoiceColor,
 } from '~relay/responsesHelper_question.graphql';
+import usePrevious from './hooks/usePrevious';
 
 // eslint-disable-next-line no-unused-vars
 const ResponseFragment = {
@@ -45,7 +47,7 @@ const ResponseFragment = {
  * - responsesHelper_adminQuestion
  * - responsesHelper_question
  *
- * Because we need different configurations depending on frontend or backend…
+ * Because we need detailledDiffent configurations depending on frontend or backend…
  * We could use a variable (eg: isOnAdmin)
  * But this is currently not supported on shared fragment:
  * https://github.com/facebook/relay/issues/2118
@@ -280,6 +282,10 @@ type SubmitResponses = $ReadOnlyArray<{|
   medias?: ?$ReadOnlyArray<string>,
 |}>;
 
+type DiffEntry = {|
+  [index: number]: { value: string },
+|};
+
 const IS_OPERATOR = 'IS';
 const IS_NOT_OPERATOR = 'IS_NOT';
 
@@ -342,9 +348,9 @@ export const isAnyQuestionJumpsFullfilled = (
       )
     : false;
 
-export const getFullfilledJump = (question: Question, responses: ResponsesInReduxForm): ?Jump =>
+export const getFullfilledJumps = (question: Question, responses: ResponsesInReduxForm): Jump[] =>
   question.jumps
-    ? question.jumps.filter(Boolean).find(jump =>
+    ? question.jumps.filter(Boolean).filter(jump =>
         jump.conditions
           ? jump.conditions.filter(Boolean).every(condition => {
               const answered = responses.find(
@@ -354,7 +360,7 @@ export const getFullfilledJump = (question: Question, responses: ResponsesInRedu
             })
           : false,
       )
-    : null;
+    : [];
 
 export const getAvailableQuestionsIds = (
   questions: Questions,
@@ -371,40 +377,35 @@ export const getAvailableQuestionsIds = (
   const firstLogicQuestion = questions.find(
     question => question.jumps && question.jumps.length > 0,
   );
-  // const firstLogicQuestionId = firstLogicQuestion ? firstLogicQuestion.id : null;
-  //
-  // const questionIsADestination = [];
-  // questions.map(question => {
-  //   if (question.jumps !== null && question.jumps !== undefined) {
-  //     question.jumps.map(jump => {
-  //       questionIsADestination.push(jump ? jump.destination.id : {});
-  //     });
-  //   }
-  // });
-  //
-  // const filteredIds = questions
-  //   .filter(
-  //     question =>
-  //       question.required ||
-  //       (question.jumps &&
-  //         question.jumps.length === 0 &&
-  //         firstLogicQuestion &&
-  //         !questionIsADestination.includes(question.id)),
-  //   )
-  //   .map(question => question.id);
-  //
-  // const firstQuestionsIds = [firstLogicQuestionId, ...filteredIds];
-  // const questionsWithJumpsIds = populateQuestionsJump(responses, questions, questionWithJump =>
-  //   getAvailableQuestionsIdsAfter(questionWithJump, questions, responses),
-  // );
+  console.log('FIRST QUESTIONS ======');
   const firstQuestionsIds = questions
     .slice(0, questions.indexOf(firstLogicQuestion) + 1)
-    .map(question => question.id);
-
+    .map(question => {
+      console.log(question);
+      return question.id;
+    });
+  console.log('FULLFILLED ======');
   const fullfilledQuestionsIds = questions.reduce((acc, question) => {
     if (isAnyQuestionJumpsFullfilled(question, responses)) {
-      const fullfilled = getFullfilledJump(question, responses);
-      return [...acc, ...(fullfilled && fullfilled.destination ? [fullfilled.destination.id] : [])];
+      // debugger;
+
+      // const answer = responses.find(response => response.question === jumps.origin.id);
+      // if (jumps.length > 0 && (responses.length === 0 || (answer && answer.value === null))) {
+      //   return [...acc]
+      // }
+      // debugger;
+      const jumps = getFullfilledJumps(question, responses);
+      const answers = jumps.map(
+        jump => responses.find(response => response.question === jump.origin.id) || null,
+      );
+      const answer = answers.filter(Boolean).find(a => a.question === question.id) || null;
+      if (
+        jumps.length > 0 &&
+        (responses.length === 0 || (answer && getValueFromSubmitResponse(answer) === null))
+      ) {
+        return [...acc];
+      }
+      return [...acc, ...jumps.filter(Boolean).map(jump => jump.destination.id)];
     }
     return acc;
   }, []);
@@ -643,6 +644,81 @@ export const validateResponses = (
   return responsesError && responsesError.length ? { responses: responsesError } : {};
 };
 
+export const getNextLogicJumpQuestion = (question: Question, questions: Questions): ?Question => {
+  return (
+    questions.slice(questions.indexOf(question) + 1).find(q => q.jumps && q.jumps.length > 0) ||
+    null
+  );
+};
+
+export const getQuestionDepsIds = (
+  question: Question,
+  questions: Questions,
+  value: string,
+): string[] => {
+  const jumpQuestion = getNextLogicJumpQuestion(question, questions);
+  if (jumpQuestion) {
+    return jumpQuestion.jumps
+      ? Array.from(
+          new Set(
+            jumpQuestion.jumps.filter(Boolean).reduce((acc, jump) => {
+              const destination = questions.find(q => q.id === jump.destination.id);
+              return [
+                ...acc,
+                ...(jump.always
+                  ? [
+                      jump.destination.id,
+                      jump.origin.id,
+                      ...(destination ? getQuestionDepsIds(destination, questions, value) : []),
+                    ]
+                  : []),
+                ...(jump.conditions &&
+                jump.conditions
+                  .filter(Boolean)
+                  .filter(
+                    condition =>
+                      condition.value &&
+                      condition.question &&
+                      condition.question.id === question.id &&
+                      condition.value.title === value,
+                  ).length > 0
+                  ? [
+                      jump.destination.id,
+                      ...(destination ? getQuestionDepsIds(destination, questions, value) : []),
+                    ]
+                  : []),
+              ];
+            }, []),
+          ),
+        )
+      : [];
+  }
+  return [];
+};
+
+const getResponsesIdsToClearFromDiff = (
+  diff: { added: DiffEntry, deleted: DiffEntry, updated: DiffEntry },
+  questions: Questions,
+) => {
+  const indexes = Object.keys(diff.updated).map(Number);
+  const result = [];
+  console.log(indexes);
+  const updatedQuestions = indexes
+    .map(index => ({
+      question: questions[index],
+      value: diff.updated[index].value,
+    }))
+    .filter(Boolean);
+  console.log(updatedQuestions);
+  updatedQuestions.filter(Boolean).forEach(updated => {
+    if (updated.question) {
+      console.log('UPDATED QUESTION : ', updated.question, 'UPDATED VALUE', updated.value);
+      result.push(...getQuestionDepsIds(updated.question, questions, updated.value));
+    }
+  });
+  return result;
+};
+
 export const renderResponses = ({
   fields,
   questions,
@@ -662,7 +738,20 @@ export const renderResponses = ({
 |}) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
-
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const prevResponses = usePrevious(responses);
+  if (prevResponses) {
+    console.log(responses, prevResponses);
+    const ids = getResponsesIdsToClearFromDiff(detailedDiff(responses, prevResponses), questions);
+    console.log(ids);
+    ids.forEach(id => {
+      const question = questions.find(q => q.id === id);
+      if (question) {
+        const indexInRedux = questions.indexOf(question);
+        change(`responses[${indexInRedux}].value`, null);
+      }
+    });
+  }
   return (
     <div>
       {fields.map((member, index) => {
