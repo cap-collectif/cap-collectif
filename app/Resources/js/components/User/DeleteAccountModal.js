@@ -101,7 +101,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                     id="data-amount-contributions-votes"
                     values={{
                       contributionsNumber: viewer.contributionsCount,
-                      votesNumber: viewer.votesCount,
+                      votesNumber: viewer.votes.totalCount,
                       datePage: '',
                     }}
                   />
@@ -133,7 +133,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                             id="anonymizing-contributions-and-votes"
                             values={{
                               nbContributions: viewer.contributionsCount,
-                              nbVotes: viewer.votesCount,
+                              nbVotes: viewer.votes.totalCount,
                               nbContributionsToDelete: viewer.contributionsToDeleteCount,
                             }}
                           />
@@ -181,7 +181,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                             id="global-deleting-contributions-and-votes"
                             values={{
                               nbContributions: viewer.contributionsCount,
-                              nbVotes: viewer.votesCount,
+                              nbVotes: viewer.votes.totalCount,
                             }}
                           />
                         </p>
@@ -241,7 +241,9 @@ export default createFragmentContainer(DeleteAccountModal, {
   viewer: graphql`
     fragment DeleteAccountModal_viewer on User {
       contributionsCount
-      votesCount
+      votes {
+        totalCount
+      }
       contributionsToDeleteCount
       id
     }

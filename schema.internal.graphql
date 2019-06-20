@@ -6765,7 +6765,6 @@ type User implements Node & UniformResourceLocatable {
   proposalsCount: Int!
   proposalVotesCount: Int!
   commentVotesCount: Int!
-  votesCount: Int!
 
   # Provisional number of contributions who will be totally deleted if the user chose to delete his account.
   contributionsToDeleteCount: Int!

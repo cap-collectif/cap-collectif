@@ -31,11 +31,11 @@ class User extends BaseUser implements
 
     public static $sortOrder = [
         'activity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
-        'date' => self::SORT_ORDER_CREATED_AT,
+        'date' => self::SORT_ORDER_CREATED_AT
     ];
     public static $sortOrderLabels = [
         'activity' => 'user.index.sort.activity',
-        'date' => 'user.index.sort.date',
+        'date' => 'user.index.sort.date'
     ];
 
     // Hack for ParticipantEdge
@@ -248,7 +248,7 @@ class User extends BaseUser implements
             }
 
             if (method_exists($this, $setter) && null !== $value) {
-                $this->$setter($value);
+                $this->{$setter}($value);
             }
         }
 
@@ -1164,7 +1164,7 @@ class User extends BaseUser implements
         return [
             UserInterface::GENDER_FEMALE => 'gender.female',
             UserInterface::GENDER_MALE => 'gender.male',
-            self::GENDER_OTHER => 'gender.other',
+            self::GENDER_OTHER => 'gender.other'
         ];
     }
 
@@ -1178,7 +1178,7 @@ class User extends BaseUser implements
             $this->getArguments(),
             $this->getSources(),
             $this->getProposals(),
-            $this->getReplies(),
+            $this->getReplies()
         ];
 
         $contributions = [];
@@ -1199,16 +1199,6 @@ class User extends BaseUser implements
             $this->opinionVersionsCount +
             $this->getCommentsCount() +
             $this->proposalsCount;
-    }
-
-    public function getVotesCount()
-    {
-        return $this->commentVotesCount +
-            $this->opinionVotesCount +
-            $this->opinionVersionVotesCount +
-            $this->argumentVotesCount +
-            $this->sourceVotesCount +
-            $this->proposalVotesCount;
     }
 
     public function getCommentsCount(): int
