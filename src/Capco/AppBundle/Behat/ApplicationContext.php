@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Behat\Traits\AdminDashboardTait;
 use Capco\AppBundle\Behat\Traits\AdminGeneralTait;
-use Capco\AppBundle\Behat\Traits\AdminOpinionTait;
 use Capco\AppBundle\Behat\Traits\AdminShieldTrait;
 use Capco\AppBundle\Elasticsearch\Client;
 use Elastica\Snapshot;
@@ -64,7 +63,6 @@ class ApplicationContext extends UserContext
     use AdminGeneralTait;
     use AdminDashboardTait;
     use AdminShieldTrait;
-    use AdminOpinionTait;
 
     protected $dbContainer;
     protected $cookieConsented;
@@ -79,7 +77,7 @@ class ApplicationContext extends UserContext
         // We reset everything
         $jobs = [
             new Process('curl -sS -XBAN http://capco.test:8181'),
-            new Process('redis-cli -h redis FLUSHALL')
+            new Process('redis-cli -h redis FLUSHALL'),
         ];
 
         $scenario = $scope->getScenario();
@@ -303,7 +301,7 @@ class ApplicationContext extends UserContext
     {
         $suiteName = $suiteScope->getSuite()->getName();
         $resultCode = $suiteScope->getTestResult()->getResultCode();
-        if ($notifier = NotifierFactory::create()) {
+        if (($notifier = NotifierFactory::create())) {
             $notification = new Notification();
             if (TestResult::PASSED === $resultCode) {
                 $notification
@@ -658,8 +656,8 @@ class ApplicationContext extends UserContext
         stream_context_set_default([
             'ssl' => [
                 'verify_peer' => false,
-                'verify_peer_name' => false
-            ]
+                'verify_peer_name' => false,
+            ],
         ]);
 
         $url = $this->getSession()->getCurrentUrl() . $path;
@@ -963,14 +961,7 @@ class ApplicationContext extends UserContext
 
     private function isSuiteWithJS(Suite $suite): bool
     {
-        return \in_array($suite->getName(), [
-            'core',
-            'consultation',
-            'questionnaire',
-            'bp',
-            'bo',
-            'randomly-failing'
-        ]);
+        return \in_array($suite->getName(), ['core', 'consultation', 'questionnaire', 'bp', 'bo', 'randomly-failing']);
     }
 
     private function visitPageWithParams($page, array $params = [], bool $cookiesConsent = true)
@@ -994,7 +985,7 @@ class ApplicationContext extends UserContext
         try {
             $swarrot = $this->getContainer()->get('swarrot.factory.default');
             foreach ($this->queues as $queue) {
-                if ($q = $swarrot->getQueue($queue, 'rabbitmq')) {
+                if (($q = $swarrot->getQueue($queue, 'rabbitmq'))) {
                     $q->purge();
                 }
             }
