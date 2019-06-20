@@ -352,30 +352,6 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       values={Object {}}
     />
   </div>
-  <Well
-    bsClass="well"
-  >
-    <p
-      style={
-        Object {
-          "marginTop": 10,
-        }
-      }
-    >
-      <strong>
-        <FormattedMessage
-          id="more-fields"
-          values={Object {}}
-        />
-      </strong>
-    </p>
-    <ReactRelayQueryRenderer
-      environment={"RelayModernEnvironment()"}
-      query={[Function]}
-      render={[Function]}
-      variables={Object {}}
-    />
-  </Well>
   <div
     className="d-flex align-items-center mb-15 mt-15"
   >
