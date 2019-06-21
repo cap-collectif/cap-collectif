@@ -17,7 +17,7 @@ Scenario: Author wants to delete his comment
     }",
     "variables": {
       "input": {
-        "id": "eventComment1"
+        "id": "Q29tbWVudDpldmVudENvbW1lbnQx"
       }
     }
   }
@@ -27,7 +27,7 @@ Scenario: Author wants to delete his comment
   {
     "data": {
       "deleteComment": {
-          "deletedCommentId": "eventComment1",
+          "deletedCommentId": "Q29tbWVudDpldmVudENvbW1lbnQx",
           "userErrors": []
        }
      }
@@ -50,7 +50,7 @@ Scenario: User wants to delete a comment but is not the author
     }",
     "variables": {
       "input": {
-        "id": "eventComment1"
+        "id": "Q29tbWVudDpldmVudENvbW1lbnQx"
       }
     }
   }

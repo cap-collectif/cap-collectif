@@ -37,9 +37,10 @@ class DeleteCommentMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
-        $commentId = $input->offsetGet('id');
+        $commentGlobalId = $input->offsetGet('id');
+        $commentId = GlobalId::fromGlobalId($commentGlobalId)['id'];
         /** @var Comment $comment */
-        $comment = $this->commentRepo->find(GlobalId::fromGlobalId($commentId)['id']);
+        $comment = $this->commentRepo->find($commentId);
 
         if (!$comment) {
             $this->logger->error('Unknown comment with id: ' . $commentId);
@@ -70,6 +71,6 @@ class DeleteCommentMutation implements MutationInterface
         }
         $this->redisStorage->recomputeUserCounters($viewer);
 
-        return ['deletedCommentId' => $commentId, 'userErrors' => []];
+        return ['deletedCommentId' => $commentGlobalId, 'userErrors' => []];
     }
 }
