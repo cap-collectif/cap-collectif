@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { type IntlShape } from 'react-intl';
 import { graphql } from 'react-relay';
-import { detailedDiff } from 'deep-object-diff';
 import { Field, type FieldArrayProps } from 'redux-form';
 import type { QuestionTypeValue } from '~relay/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '~relay/ReplyForm_questionnaire.graphql';
@@ -18,7 +17,6 @@ import type {
   MultipleChoiceQuestionValidationRulesTypes,
   QuestionChoiceColor,
 } from '~relay/responsesHelper_question.graphql';
-import usePrevious from './hooks/usePrevious';
 
 // eslint-disable-next-line no-unused-vars
 const ResponseFragment = {
@@ -281,10 +279,6 @@ type SubmitResponses = $ReadOnlyArray<{|
   question: string,
   medias?: ?$ReadOnlyArray<string>,
 |}>;
-
-type DiffEntry = {|
-  [index: number]: { value: string },
-|};
 
 const IS_OPERATOR = 'IS';
 const IS_NOT_OPERATOR = 'IS_NOT';
@@ -696,29 +690,6 @@ export const getQuestionDepsIds = (
   return [];
 };
 
-const getResponsesIdsToClearFromDiff = (
-  diff: { added: DiffEntry, deleted: DiffEntry, updated: DiffEntry },
-  questions: Questions,
-) => {
-  const indexes = Object.keys(diff.updated).map(Number);
-  const result = [];
-  console.log(indexes);
-  const updatedQuestions = indexes
-    .map(index => ({
-      question: questions[index],
-      value: diff.updated[index].value,
-    }))
-    .filter(Boolean);
-  console.log(updatedQuestions);
-  updatedQuestions.filter(Boolean).forEach(updated => {
-    if (updated.question) {
-      console.log('UPDATED QUESTION : ', updated.question, 'UPDATED VALUE', updated.value);
-      result.push(...getQuestionDepsIds(updated.question, questions, updated.value));
-    }
-  });
-  return result;
-};
-
 export const renderResponses = ({
   fields,
   questions,
@@ -738,12 +709,11 @@ export const renderResponses = ({
 |}) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const prevResponses = usePrevious(responses);
-  if (prevResponses) {
-    console.log(responses, prevResponses);
-    const ids = getResponsesIdsToClearFromDiff(detailedDiff(responses, prevResponses), questions);
-    console.log(ids);
+  if (responses) {
+    const ids = questions
+      .filter(Boolean)
+      .filter(question => !availableQuestions.includes(question.id))
+      .map(question => question.id);
     ids.forEach(id => {
       const question = questions.find(q => q.id === id);
       if (question) {
