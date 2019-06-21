@@ -19,3 +19,7 @@ Capco\AppBundle\Entity\Consultation:
     id: typePJL
     title: Projet de loi
     step: '@cstep5'
+  typeEndless:
+    id: typeEndless
+    title: 'Projet sans fin'
+    step: '@cstep6'
