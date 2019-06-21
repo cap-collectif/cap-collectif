@@ -19,9 +19,6 @@ class ProposalUrlResolver implements ResolverInterface
     public function __invoke(Proposal $proposal): string
     {
         $step = $proposal->getStep();
-        if (!$step) {
-            return '';
-        }
         $project = $step->getProject();
         if (!$project) {
             return '';
@@ -32,7 +29,7 @@ class ProposalUrlResolver implements ResolverInterface
             [
                 'proposalSlug' => $proposal->getSlug(),
                 'projectSlug' => $project->getSlug(),
-                'stepSlug' => $step->getSlug()
+                'stepSlug' => $step->getSlug(),
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
