@@ -61,7 +61,7 @@ export class QuestionnaireStepPage extends React.Component<Props> {
             variables={{
               id: questionnaireId,
               isAuthenticated,
-              enableResults: !!enableResults,
+              enableResults,
             }}
             render={component}
           />
