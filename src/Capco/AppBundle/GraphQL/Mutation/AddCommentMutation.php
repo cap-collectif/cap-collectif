@@ -116,7 +116,7 @@ class AddCommentMutation implements MutationInterface
 
         $this->em->persist($comment);
         $this->em->flush();
-        $this->commentableCommentsDataLoader->invalidate($commentableId);
+        $this->commentableCommentsDataLoader->invalidate($commentableGlobalId);
         $edge = new Edge(ConnectionBuilder::offsetToCursor(0), $comment);
 
         $this->eventDispatcher->dispatch(
