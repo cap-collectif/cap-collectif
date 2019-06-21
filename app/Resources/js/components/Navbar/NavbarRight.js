@@ -77,30 +77,37 @@ export class NavbarRight extends React.Component<Props> {
                 <FormattedMessage id="navbar.admin" />
               </TabsLink>
             ) : null}
-            {features.profiles ? (
+            {features.profiles && !features.login_openid ? (
               <TabsLink eventKey={3.2} href={`/profile/${user.uniqueId}`}>
                 <i className="cap cap-id-8 mr-10" aria-hidden="true" />
                 <FormattedMessage id="navbar.profile" />
               </TabsLink>
             ) : null}
+            {!features.profiles && features.login_openid ? (
+              <TabsLink eventKey={3.3} href="/sso/profile" target="_blank" rel="noopener">
+                <i className="cap cap-id-8 mr-10" aria-hidden="true" />
+                <FormattedMessage id="navbar.profile" />
+                <i className="cap cap-external-link ml-10" aria-hidden="true" />
+              </TabsLink>
+            ) : null}
             {user.isEvaluer ? (
-              <TabsLink eventKey={3.3} href="/evaluations">
+              <TabsLink eventKey={3.4} href="/evaluations">
                 <i className="cap cap-edit-write mr-10" aria-hidden="true" />
                 <FormattedMessage id="evaluations.index.page_title" />
               </TabsLink>
             ) : null}
-            <TabsLink eventKey={3.4} href="/profile/edit-profile">
+            <TabsLink eventKey={3.5} href="/profile/edit-profile">
               <i className="cap cap-setting-adjustment mr-10" aria-hidden="true" />
               <FormattedMessage id="navbar.user_settings" />
             </TabsLink>
             {features.disconnect_openid ? (
-              <TabsLink eventKey={3.5} href="/logout?ssoSwitchUser=true">
+              <TabsLink eventKey={3.6} href="/logout?ssoSwitchUser=true">
                 <i className="cap cap-refresh mr-10" aria-hidden="true" />
                 <FormattedMessage id="change-user" />
               </TabsLink>
             ) : null}
             <TabsDivider aria-hidden="true" />
-            <TabsLink type="button" eventKey={3.6} id="logout-button" onClick={this.logout}>
+            <TabsLink type="button" eventKey={3.7} id="logout-button" onClick={this.logout}>
               <i className="cap cap-power-1 mr-10" aria-hidden="true" />
               <FormattedMessage id="global.logout" />
             </TabsLink>

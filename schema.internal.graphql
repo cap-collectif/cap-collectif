@@ -2832,6 +2832,9 @@ type Oauth2SSOConfiguration implements Node & SSOConfiguration {
   # Does this configuration is enabled?
   enabled: Boolean!
 
+  # Profile URL on the SSO side.
+  profileUrl: URI
+
   # Client ID.
   clientId: String!
 
@@ -5332,6 +5335,9 @@ interface SSOConfiguration {
 
   # Does this configuration is enabled?
   enabled: Boolean!
+
+  # Profile URL on the SSO side.
+  profileUrl: URI
 }
 
 # A section
