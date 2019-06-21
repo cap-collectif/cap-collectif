@@ -130,12 +130,15 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
                       />
                     </div>
                   )}
-                  {step.timeRange.endAt && step.status === 'OPENED' && !step.timeless && (
-                    <div className="mr-15 d-ib">
-                      <i className="cap cap-hourglass-1" />{' '}
-                      <RemainingTime endAt={step.timeRange.endAt} />
-                    </div>
-                  )}
+                  {step.timeRange &&
+                    step.timeRange.endAt &&
+                    step.status === 'OPENED' &&
+                    !step.timeless && (
+                      <div className="mr-15 d-ib">
+                        <i className="cap cap-hourglass-1" />{' '}
+                        <RemainingTime endAt={step.timeRange.endAt} />
+                      </div>
+                    )}
                 </div>
                 {/* $FlowFixMe $refType */}
                 <StepInfos step={step} />
