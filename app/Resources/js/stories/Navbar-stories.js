@@ -92,19 +92,19 @@ const ContentRight = ({
             <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
             Administration
           </TabsLink>
-        ): null}
+        ) : null}
         {features.profiles ? (
           <TabsLink eventKey={3.2} href={`/profile/${user.uniqueId}`}>
             <i className="cap cap-id-8 mr-10" aria-hidden="true" />
             Mon profil
           </TabsLink>
-        ): null}
+        ) : null}
         {user.isEvaluer ? (
           <TabsLink eventKey={3.3} href="/evaluations">
             <i className="cap cap-edit-write mr-10" aria-hidden="true" />
             Mes analyses
           </TabsLink>
-        ): null}
+        ) : null}
         <TabsLink eventKey={3.4} href="/profile/edit-profile">
           <i className="cap cap-setting-adjustment mr-10" aria-hidden="true" />
           Paramètres
@@ -249,6 +249,38 @@ storiesOf('NavBar', module)
       mainNavbarText: text('Navbar item color', '#000000', 'Theme'),
       mainNavbarTextHover: text('Navbar item hover color', '#ffffff', 'Theme'),
       mainNavbarTextActive: text('Navbar item active color', '#ffffff', 'Theme'),
+    };
+
+    const contentRight = (
+      <ContentRightWithIntl
+        user={userMock}
+        features={{ ...defaultFeatures, search: withSearch, profiles: true }}
+      />
+    );
+
+    return (
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        </Container>
+      </ThemeProvider>
+    );
+  })
+  .add('with custom theme', () => {
+    const withSearch = boolean('with search', true, 'Config');
+    const siteName = text('site name', 'Cap-Collectif', 'Config');
+    const logo = text(
+      'logo url',
+      'https://dialoguecitoyen.metropole.nantes.fr/media/cache/default_logo/default/0001/01/6c22377e08184457559a5f0b385556a0380c6297.png',
+      'Config',
+    );
+    const theme = {
+      mainNavbarBg: text('Navbar background', '#2293c7', 'Theme'),
+      mainNavbarBgActive: text('Navbar active item background', '#ffffff', 'Theme'),
+      mainNavbarText: text('Navbar item color', '#ffffff', 'Theme'),
+      mainNavbarTextHover: text('Navbar item hover color', '#2293c7', 'Theme'),
+      mainNavbarTextActive: text('Navbar item active color', '#2293c7', 'Theme'),
+      mainNavbarBgMenu: text('Navbar menu background', '#2293c7', 'Theme'),
     };
 
     const contentRight = (
