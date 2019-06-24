@@ -301,158 +301,6 @@ const getValueFromSubmitResponse = (response: ?ResponseInReduxForm): ?string => 
   return null;
 };
 
-const questionsHaveLogicJump = questions =>
-  questions.reduce(
-    (acc, question) => acc || (question && question.jumps && question.jumps.length > 0),
-    false,
-  );
-
-const getConditionReturn = (
-  response: ?ResponseInReduxForm,
-  condition: ConditionalJumpCondition,
-): boolean => {
-  const userResponse = getValueFromSubmitResponse(response);
-  if (response && userResponse && condition.value) {
-    switch (condition.operator) {
-      case IS_OPERATOR:
-        return condition.value.title === userResponse;
-      case IS_NOT_OPERATOR:
-        return condition.value.title !== userResponse;
-      default:
-        return false;
-    }
-  }
-  return false;
-};
-
-export const isAnyQuestionJumpsFullfilled = (
-  question: Question,
-  responses: ResponsesInReduxForm,
-): boolean =>
-  question.jumps
-    ? question.jumps.filter(Boolean).some(jump =>
-        jump.conditions
-          ? jump.conditions.filter(Boolean).every(condition => {
-              const answered = responses
-                .filter(Boolean)
-                .find(response => response.question === condition.question.id);
-              return getConditionReturn(answered, condition);
-            })
-          : false,
-      )
-    : false;
-
-export const getFullfilledJumps = (question: Question, responses: ResponsesInReduxForm): Jump[] =>
-  question.jumps
-    ? question.jumps.filter(Boolean).filter(jump =>
-        jump.conditions
-          ? jump.conditions.filter(Boolean).every(condition => {
-              const answered = responses.find(
-                response => response.question === condition.question.id,
-              );
-              return getConditionReturn(answered, condition);
-            })
-          : false,
-      )
-    : [];
-
-export const getAvailableQuestionsIds = (
-  questions: Questions,
-  responses: ResponsesInReduxForm,
-): string[] => {
-  // If no jump in questionnaire every question is available
-  const hasLogicJumps = questionsHaveLogicJump(questions);
-  if (!hasLogicJumps) {
-    // $FlowFixMe
-    return questions.map(q => q.id);
-  }
-  //
-  // // Otherwise let's calculate what is currently displayed to user…
-  const firstLogicQuestion = questions.find(
-    question => question.jumps && question.jumps.length > 0,
-  );
-  console.log('FIRST QUESTIONS ======');
-  const firstQuestionsIds = questions
-    .slice(0, questions.indexOf(firstLogicQuestion) + 1)
-    .map(question => {
-      console.log(question);
-      return question.id;
-    });
-  console.log('FULLFILLED ======');
-  const fullfilledQuestionsIds = questions.reduce((acc, question) => {
-    if (isAnyQuestionJumpsFullfilled(question, responses)) {
-      // debugger;
-
-      // const answer = responses.find(response => response.question === jumps.origin.id);
-      // if (jumps.length > 0 && (responses.length === 0 || (answer && answer.value === null))) {
-      //   return [...acc]
-      // }
-      // debugger;
-      const jumps = getFullfilledJumps(question, responses);
-      const answers = jumps.map(
-        jump => responses.find(response => response.question === jump.origin.id) || null,
-      );
-      const answer = answers.filter(Boolean).find(a => a.question === question.id) || null;
-      if (
-        jumps.length > 0 &&
-        (responses.length === 0 || (answer && getValueFromSubmitResponse(answer) === null))
-      ) {
-        return [...acc];
-      }
-      return [...acc, ...jumps.filter(Boolean).map(jump => jump.destination.id)];
-    }
-    return acc;
-  }, []);
-
-  // $FlowFixMe
-  return Array.from(new Set([...firstQuestionsIds, ...fullfilledQuestionsIds]));
-};
-
-export const formatSubmitResponses = (
-  responses: ?ResponsesInReduxForm,
-  questions: Questions,
-): SubmitResponses => {
-  if (!responses) return [];
-  const answeredQuestionsIds = getAvailableQuestionsIds(questions, responses);
-  return responses.map(res => {
-    const question = questions.filter(q => res.question === q.id)[0];
-    const { type: questionType } = question;
-
-    if (questionType === 'medias') {
-      const medias = answeredQuestionsIds.includes(question.id)
-        ? Array.isArray(res.value)
-          ? res.value.map(value => value.id)
-          : []
-        : null;
-      return {
-        question: res.question,
-        medias,
-      };
-    }
-    let { value } = res;
-    if (questionType === 'ranking' || questionType === 'button') {
-      value = answeredQuestionsIds.includes(question.id)
-        ? JSON.stringify({
-            labels: Array.isArray(res.value) ? res.value : [res.value],
-            other: null,
-          })
-        : null;
-    } else if (questionType === 'checkbox' || questionType === 'radio') {
-      value = answeredQuestionsIds.includes(question.id) ? JSON.stringify(res.value) : null;
-    } else if (questionType === 'number') {
-      return {
-        question: res.question,
-        value: res.value,
-      };
-    }
-    if (typeof value === 'string') {
-      value = answeredQuestionsIds.includes(question.id) ? value : null;
-      return { value, question: res.question };
-    }
-    return { value: null, question: res.question };
-  });
-};
-
 export const getValueFromResponse = (questionType: string, responseValue: string) => {
   // For some questions type we need to parse the JSON of previous value
   try {
@@ -688,6 +536,161 @@ export const getQuestionDepsIds = (
       : [];
   }
   return [];
+};
+
+const questionsHaveLogicJump = questions =>
+  questions.reduce(
+    (acc, question) => acc || (question && question.jumps && question.jumps.length > 0),
+    false,
+  );
+
+const getConditionReturn = (
+  response: ?ResponseInReduxForm,
+  condition: ConditionalJumpCondition,
+): boolean => {
+  const userResponse = getValueFromSubmitResponse(response);
+  if (response && userResponse && condition.value) {
+    switch (condition.operator) {
+      case IS_OPERATOR:
+        return condition.value.title === userResponse;
+      case IS_NOT_OPERATOR:
+        return condition.value.title !== userResponse;
+      default:
+        return false;
+    }
+  }
+  return false;
+};
+
+export const isAnyQuestionJumpsFullfilled = (
+  question: Question,
+  responses: ResponsesInReduxForm,
+): boolean =>
+  question.jumps
+    ? question.jumps.filter(Boolean).some(jump =>
+        jump.conditions
+          ? jump.conditions.filter(Boolean).every(condition => {
+              const answered = responses
+                .filter(Boolean)
+                .find(response => response.question === condition.question.id);
+              return getConditionReturn(answered, condition);
+            })
+          : false,
+      )
+    : false;
+
+export const getFullfilledJumps = (question: Question, responses: ResponsesInReduxForm): Jump[] =>
+  question.jumps
+    ? question.jumps.filter(Boolean).filter(jump =>
+        jump.conditions
+          ? jump.conditions.filter(Boolean).every(condition => {
+              const answered = responses.find(
+                response => response.question === condition.question.id,
+              );
+              return getConditionReturn(answered, condition);
+            })
+          : false,
+      )
+    : [];
+
+export const getAvailableQuestionsIds = (
+  questions: Questions,
+  responses: ResponsesInReduxForm,
+): string[] => {
+  // If no jump in questionnaire every question is available
+  const hasLogicJumps = questionsHaveLogicJump(questions);
+  if (!hasLogicJumps) {
+    // $FlowFixMe
+    return questions.map(q => q.id);
+  }
+  //
+  // // Otherwise let's calculate what is currently displayed to user…
+  const firstLogicQuestion = questions.find(
+    question => question.jumps && question.jumps.length > 0,
+  );
+  console.log('FIRST QUESTIONS ======');
+  const firstQuestionsIds = questions
+    .slice(0, questions.indexOf(firstLogicQuestion) + 1)
+    .map(question => {
+      console.log(question);
+      return question.id;
+    });
+  console.log('FULLFILLED ======');
+  const fullfilledQuestionsIds = questions.reduce((acc, question) => {
+    if (isAnyQuestionJumpsFullfilled(question, responses)) {
+      const jumps = getFullfilledJumps(question, responses);
+      const answers = jumps.map(
+        jump => responses.find(response => response.question === jump.origin.id) || null,
+      );
+      const answer = answers.filter(Boolean).find(a => a.question === question.id) || null;
+      if (
+        jumps.length > 0 &&
+        (responses.length === 0 || (answer && getValueFromSubmitResponse(answer) === null))
+      ) {
+        const visibleJumps = jumps
+          .filter(Boolean)
+          .filter(jump => !jump.always)
+          .map(jump => jump.destination.id);
+
+        return [...acc, ...visibleJumps];
+      }
+      // console.log('DEPENDENCIES FOR QUESTION', question, 'WITH ANSWER', answer);
+      // console.log(getQuestionDepsIds(question, questions, answer).map(qId => questions.find(q => q.id === qId)));
+      return [...acc, ...jumps.filter(Boolean).map(jump => jump.destination.id)];
+    }
+    return acc;
+  }, []);
+
+  console.log('FULLFILLED QUESTIONS');
+  fullfilledQuestionsIds.map(qId => questions.find(q => q.id === qId));
+
+  // $FlowFixMe
+  return Array.from(new Set([...firstQuestionsIds, ...fullfilledQuestionsIds]));
+};
+
+export const formatSubmitResponses = (
+  responses: ?ResponsesInReduxForm,
+  questions: Questions,
+): SubmitResponses => {
+  if (!responses) return [];
+  const answeredQuestionsIds = getAvailableQuestionsIds(questions, responses);
+  return responses.map(res => {
+    const question = questions.filter(q => res.question === q.id)[0];
+    const { type: questionType } = question;
+
+    if (questionType === 'medias') {
+      const medias = answeredQuestionsIds.includes(question.id)
+        ? Array.isArray(res.value)
+          ? res.value.map(value => value.id)
+          : []
+        : null;
+      return {
+        question: res.question,
+        medias,
+      };
+    }
+    let { value } = res;
+    if (questionType === 'ranking' || questionType === 'button') {
+      value = answeredQuestionsIds.includes(question.id)
+        ? JSON.stringify({
+            labels: Array.isArray(res.value) ? res.value : [res.value],
+            other: null,
+          })
+        : null;
+    } else if (questionType === 'checkbox' || questionType === 'radio') {
+      value = answeredQuestionsIds.includes(question.id) ? JSON.stringify(res.value) : null;
+    } else if (questionType === 'number') {
+      return {
+        question: res.question,
+        value: res.value,
+      };
+    }
+    if (typeof value === 'string') {
+      value = answeredQuestionsIds.includes(question.id) ? value : null;
+      return { value, question: res.question };
+    }
+    return { value: null, question: res.question };
+  });
 };
 
 export const renderResponses = ({
