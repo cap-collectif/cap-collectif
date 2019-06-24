@@ -6470,7 +6470,7 @@ input UpdateProjectInput {
   title: String!
 
   # The project's authors
-  authors: [String!]!
+  authors: [ID!]!
 
   # The project's opinion term
   opinionTerm: Int!
