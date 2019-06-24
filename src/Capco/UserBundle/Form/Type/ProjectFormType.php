@@ -20,14 +20,14 @@ class ProjectFormType extends AbstractType
                 'required' => true,
                 'purify_html' => true,
                 'strip_tags' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'default'
             ])
             ->add('projectType', EntityType::class, [
-                'required' => true,
-                'class' => ProjectType::class,
+                'required' => false,
+                'class' => ProjectType::class
             ])
             ->add('opinionTerm', NumberType::class, [
-                'required' => true,
+                'required' => true
             ]);
     }
 

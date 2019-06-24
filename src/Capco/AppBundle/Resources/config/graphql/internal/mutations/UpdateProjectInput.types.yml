@@ -16,5 +16,5 @@ UpdateProjectInput:
         type: 'Int!'
         description: "The project's opinion term"
       projectType:
-        type: 'String!'
+        type: 'String'
         description: "The project's type"

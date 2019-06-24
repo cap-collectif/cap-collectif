@@ -89,7 +89,7 @@ const onSubmit = (
   });
 };
 
-const validate = ({ title, authors, projectType }: FormValues) => {
+const validate = ({ title, authors }: FormValues) => {
   const errors = {};
 
   if (!title || title.length < 2) {
@@ -98,10 +98,6 @@ const validate = ({ title, authors, projectType }: FormValues) => {
 
   if (!authors) {
     errors.authors = 'global.required';
-  }
-
-  if (!projectType) {
-    errors.projectType = 'global.required';
   }
 
   return errors;
