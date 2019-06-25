@@ -45,11 +45,12 @@ class SourceAdmin extends AbstractAdmin
             ->leftJoin('op.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
+            ->leftJoin('p.authors', 'authors')
             ->orWhere(
                 $query
                     ->expr()
                     ->andX(
-                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('authors.user', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );
@@ -75,7 +76,7 @@ class SourceAdmin extends AbstractAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
+                    }
                 ]
             )
             ->add('opinion', null, ['label' => 'admin.fields.source.opinion'])
@@ -100,11 +101,11 @@ class SourceAdmin extends AbstractAdmin
             ->add('votesCount', null, ['label' => 'admin.fields.source.vote_count_source'])
             ->add('published', null, [
                 'editable' => false,
-                'label' => 'admin.fields.source.is_enabled',
+                'label' => 'admin.fields.source.is_enabled'
             ])
             ->add('trashedStatus', null, [
                 'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
-                'label' => 'admin.fields.source.is_trashed',
+                'label' => 'admin.fields.source.is_trashed'
             ])
             ->add('updatedAt', null, ['label' => 'admin.fields.source.updated_at'])
             ->add('_action', 'actions', ['actions' => ['delete' => []]]);
@@ -122,7 +123,7 @@ class SourceAdmin extends AbstractAdmin
             ->add('published', null, [
                 'label' => 'admin.fields.source.is_enabled',
                 'disabled' => true,
-                'attr' => ['readonly' => true],
+                'attr' => ['readonly' => true]
             ])
             ->add('body', null, ['label' => 'admin.fields.source.body'])
             ->add('author', 'sonata_type_model_autocomplete', [
@@ -130,20 +131,20 @@ class SourceAdmin extends AbstractAdmin
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                },
+                }
             ])
             ->add('opinion', 'sonata_type_model', ['label' => 'admin.fields.source.opinion'])
             ->add('category', 'sonata_type_model', ['label' => 'admin.fields.source.category'])
             ->add('link', null, [
                 'label' => 'admin.fields.source.link',
-                'attr' => ['placeholder' => 'http://www.cap-collectif.com/'],
+                'attr' => ['placeholder' => 'http://www.cap-collectif.com/']
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'admin.fields.opinion.is_trashed',
+                'label' => 'admin.fields.opinion.is_trashed'
             ])
             ->add('trashedReason', null, [
                 'label' => 'admin.fields.source.trashed_reason',
-                'required' => false,
+                'required' => false
             ]);
     }
 

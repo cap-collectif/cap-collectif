@@ -19,7 +19,6 @@ type Props = {|
 type State = {|
   expanded: boolean,
   desktop: boolean,
-  logoLoaded: boolean,
 |};
 
 export class Navbar extends React.Component<Props, State> {
@@ -29,7 +28,6 @@ export class Navbar extends React.Component<Props, State> {
     this.state = {
       expanded: false,
       desktop: true,
-      logoLoaded: false,
     };
   }
 
@@ -57,14 +55,9 @@ export class Navbar extends React.Component<Props, State> {
     }
   };
 
-  handleLoading = () => {
-    // Wait the loading of logo to mount tabsbar because logo can have different width
-    this.setState({ logoLoaded: true });
-  };
-
   render() {
     const { logo, items, intl, siteName, contentRight } = this.props;
-    const { expanded, logoLoaded, desktop } = this.state;
+    const { expanded, desktop } = this.state;
 
     return (
       <React.Fragment>
@@ -74,13 +67,13 @@ export class Navbar extends React.Component<Props, State> {
             {logo && (
               <S.Brand id="brand">
                 <a href="/" title={intl.formatMessage({ id: 'navbar.homepage' })}>
-                  <img src={logo} alt={siteName} onLoad={this.handleLoading} />
+                  <img src={logo} alt={siteName} />
                 </a>
               </S.Brand>
             )}
           </S.NavigationHeader>
           <NavbarToggle onClick={this.getAriaExpanded} expanded={expanded} />
-          {desktop && logoLoaded && (
+          {desktop && (
             <S.NavigationContentDesktop>
               {items.length > 0 && <TabsBar items={items} />}
               {contentRight && <S.NavigationContentRight>{contentRight}</S.NavigationContentRight>}
@@ -88,7 +81,9 @@ export class Navbar extends React.Component<Props, State> {
           )}
           {expanded && (
             <S.NavigationContentMobile>
-              {items.length > 0 && <TabsBar items={items} overflowEnable={false} vertical />}
+              {items.length > 0 && (
+                <TabsBar items={items} overflowEnable={false} vertical />
+              )}
               {contentRight && (
                 <S.NavigationContentRight vertical>
                   {React.cloneElement(contentRight, { vertical: true })}

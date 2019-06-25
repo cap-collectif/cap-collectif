@@ -42,11 +42,12 @@ class ReplyAdmin extends AbstractAdmin
             ->leftJoin('q.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
+            ->leftJoin('p.authors', 'authors')
             ->orWhere(
                 $query
                     ->expr()
                     ->andX(
-                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('authors.user', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );
@@ -71,13 +72,13 @@ class ReplyAdmin extends AbstractAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
+                    }
                 ]
             )
             ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at'])
             ->add('questionnaire.step', null, ['label' => 'admin.fields.reply.questionnaire_step'])
             ->add('questionnaire.step.projectAbstractStep.project', null, [
-                'label' => 'admin.fields.reply.project',
+                'label' => 'admin.fields.reply.project'
             ])
             ->add('draft', null, ['label' => 'admin.fields.proposal.draft'])
             ->add('published', null, ['label' => 'admin.fields.proposal.enabled']);
@@ -93,7 +94,7 @@ class ReplyAdmin extends AbstractAdmin
             ->add('state', null, [
                 'mapped' => false,
                 'label' => 'admin.fields.proposal.state.label',
-                'template' => 'CapcoAdminBundle:Reply:state_list_field.html.twig',
+                'template' => 'CapcoAdminBundle:Reply:state_list_field.html.twig'
             ])
             ->add('createdAt', null, ['label' => 'admin.fields.questionnaire.created_at'])
             ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at']);
@@ -108,11 +109,11 @@ class ReplyAdmin extends AbstractAdmin
             ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at'])
             ->add('state', null, [
                 'label' => 'admin.fields.proposal.state.label',
-                'template' => 'CapcoAdminBundle:Reply:state_show_field.html.twig',
+                'template' => 'CapcoAdminBundle:Reply:state_show_field.html.twig'
             ])
             ->add('responses', null, [
                 'label' => 'admin.fields.reply.responses',
-                'template' => 'CapcoAdminBundle:Reply:responses_show_field.html.twig',
+                'template' => 'CapcoAdminBundle:Reply:responses_show_field.html.twig'
             ]);
     }
 
