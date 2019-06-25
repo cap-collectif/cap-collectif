@@ -76,7 +76,8 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
 
     public function getRepliesCount(): int
     {
-        return $this->repliesCount;
+        // Column in database is nullable because of single-table inheritance
+        return $this->repliesCount ?? 0;
     }
 
     public function setVerification($verification)
