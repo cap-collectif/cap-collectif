@@ -28,7 +28,6 @@ export class QuestionnaireResults extends React.Component<Props> {
           ) : (
             <div className="mb-30 project__step-dates">
               {questionnaire.step &&
-                questionnaire.step.timeRange &&
                 (questionnaire.step.timeRange.startAt || questionnaire.step.timeRange.endAt) && (
                   <div className="mr-15 d-ib">
                     <i className="cap cap-calendar-2-1" />{' '}

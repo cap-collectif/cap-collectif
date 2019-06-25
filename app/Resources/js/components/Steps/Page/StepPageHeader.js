@@ -30,7 +30,7 @@ export class StepPageHeader extends React.Component<Props> {
       <div>
         <h2 className="h2">{step.title}</h2>
         <div className="mb-30 project__step-dates">
-          {step.timeRange && (step.timeRange.startAt || step.timeRange.endAt) && (
+          {(step.timeRange.startAt || step.timeRange.endAt) && (
             <div className="mr-15 d-ib">
               <i className="cap cap-calendar-2-1" />{' '}
               <DatesInterval
@@ -40,8 +40,7 @@ export class StepPageHeader extends React.Component<Props> {
               />
             </div>
           )}
-          {step.timeRange &&
-            step.timeRange.endAt &&
+          {step.timeRange.endAt &&
             step.status === 'OPENED' &&
             !step.timeless &&
             this.stepIsParticipative() && (

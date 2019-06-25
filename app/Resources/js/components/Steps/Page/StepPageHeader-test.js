@@ -10,7 +10,10 @@ describe('<StepPageHeader />', () => {
     $refType,
     $fragmentRefs,
     title: 'I am a title',
-    timeRange: null,
+    timeRange: {
+      startAt: null,
+      endAt: null,
+    },
     status: 'OPENED',
     timeless: false,
     type: 'consultation',

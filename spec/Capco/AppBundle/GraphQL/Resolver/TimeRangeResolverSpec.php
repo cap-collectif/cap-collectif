@@ -18,7 +18,10 @@ class TimeRangeResolverSpec extends ObjectBehavior
     {
         $step->getStartAt()->willReturn(null);
         $step->getEndAt()->willReturn(null);
-        $this->__invoke($step)->shouldReturn(null);
+        $this->__invoke($step)->shouldReturn([
+            'startAt' => null,
+            'endAt' => null
+        ]);
     }
 
     public function it_returns_a_time_range_if_dates_are_not_null(Event $event): void

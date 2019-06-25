@@ -934,7 +934,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   # The title of the step.
   title: String!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -1414,7 +1414,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
   ): RequirementConnection!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The type of step. Returns "consultation".
   kind: String!
@@ -1998,7 +1998,7 @@ type Event implements Node & Commentable {
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # Identifies the author of the event.
   author: User
@@ -3224,7 +3224,7 @@ enum OrderDirection {
 type OtherStep implements Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -3361,7 +3361,7 @@ union PostRelatedContent = Theme | Proposal | Project
 type PresentationStep implements Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -4151,7 +4151,7 @@ enum ProposalPublicationStatus {
 interface ProposalStep {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -4872,7 +4872,7 @@ input QuestionnaireAbstractQuestionInput {
 type QuestionnaireStep implements Node & Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -4925,7 +4925,7 @@ enum QuestionnaireType {
 type RankingStep implements Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -5546,7 +5546,7 @@ type Selection {
 type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -6076,7 +6076,7 @@ enum StatusColor {
 interface Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
