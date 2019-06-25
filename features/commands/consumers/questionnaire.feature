@@ -61,5 +61,5 @@ Scenario: Email should be sent to admin if a user published a draft reply in a q
   }
   """
   And I consume "questionnaire_reply"
-  Then I open mail with subject 'reply.notify.user.create {"{questionnaireTitle}":"Votre avis sur les JO 2024 \u00e0 Paris"}'
+  Then I open mail with subject 'reply.notify.user.create {"{questionnaireStepTitle}":"Questionnaire des JO 2024"}'
   And email should match snapshot "notifyQuestionnaireReply_publishedDraft.html"

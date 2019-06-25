@@ -166,7 +166,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
      *
      * @throws \Exception
      */
-    public function onDelete(array $reply): void
+    public function onDelete(array $reply): bool
     {
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
@@ -179,7 +179,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             RouterInterface::ABSOLUTE_URL
         );
 
-        $this->mailer->sendMessage(
+        return $this->mailer->sendMessage(
             QuestionnaireReplyAdminMessage::createFromDeletedReply(
                 $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                 $reply,
