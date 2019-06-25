@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Driver\DriverException;
+use Overblog\GraphQLBundle\Error\UserError;
 use Capco\UserBundle\Form\Type\ProjectFormType;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -45,6 +46,10 @@ class CreateProjectMutation implements MutationInterface
     public function __invoke(Argument $input): array
     {
         $arguments = $input->getRawArguments();
+
+        if (\count($arguments['authors']) <= 0) {
+            throw new UserError('You must specify at least one author.');
+        }
 
         $project = new Project();
 

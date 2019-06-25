@@ -95,3 +95,38 @@ Scenario: GraphQL client wants to create a project without type
       }
     }
   """
+
+@database
+Scenario: GraphQL client wants to create a project without authors
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+   """
+    {
+      "query": "mutation ($input: CreateProjectInput!) {
+        createProject(input: $input) {
+          project {
+            title
+            authors {
+              id
+              username
+              email
+            }
+            type {
+              title
+            }
+          }
+        }
+      }",
+      "variables": {
+        "input": {
+          "title": "thisisnotatest",
+          "authors": [],
+          "opinionTerm": 2
+        }
+      }
+    }
+  """
+  Then the JSON response should match:
+  """
+    {"errors":[{"message":"You must specify at least one author.","category":"user","locations":[@...@],"path":["createProject"]}],"data":{"createProject":null}}
+  """

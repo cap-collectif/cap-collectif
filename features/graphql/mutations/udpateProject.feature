@@ -143,3 +143,40 @@ Scenario: GraphQL client wants to update a project without type
     }
    }
   """
+
+@database
+Scenario: GraphQL client wants to update a project without authors
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+   """
+    {
+      "query": "mutation ($input: UpdateProjectInput!) {
+        updateProject(input: $input) {
+          project {
+            title
+            authors {
+              id
+              username
+              email
+            }
+            type {
+              title
+            }
+          }
+        }
+      }",
+      "variables": {
+        "input": {
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "title": "thisisnotatestupdated",
+          "authors": [],
+          "opinionTerm": 1,
+          "projectType": null
+        }
+      }
+    }
+  """
+  Then the JSON response should match:
+  """
+{"errors":[{"message":"You must specify at least one author.","category":"user","locations":[@...@], "path":["updateProject"]}],"data":{"updateProject":null}}
+  """

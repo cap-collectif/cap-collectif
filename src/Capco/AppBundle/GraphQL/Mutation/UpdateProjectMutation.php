@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Driver\DriverException;
+use Overblog\GraphQLBundle\Error\UserError;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -52,6 +53,10 @@ class UpdateProjectMutation implements MutationInterface
     public function __invoke(Argument $input): array
     {
         $arguments = $input->getRawArguments();
+
+        if (\count($arguments['authors']) <= 0) {
+            throw new UserError('You must specify at least one author.');
+        }
 
         $project = $this->projectRepository->find(GlobalId::fromGlobalId($arguments['id'])['id']);
         if (!$project) {
