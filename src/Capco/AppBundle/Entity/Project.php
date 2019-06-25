@@ -194,7 +194,7 @@ class Project implements IndexableInterface
     /**
      * @ORM\Column(name="visibility", type="integer", nullable=false)
      */
-    private $visibility = ProjectVisibilityMode::VISIBILITY_ME;
+    private $visibility = ProjectVisibilityMode::VISIBILITY_ADMIN;
 
     /**
      * @ORM\Column(name="opinion_can_be_followed", type="boolean", nullable=false, options={"default": false})

@@ -1,7 +1,7 @@
 @project @admin
 Feature: createProject
 
-@database
+@database @dev
 Scenario: GraphQL client wants to create a project
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -16,6 +16,7 @@ Scenario: GraphQL client wants to create a project
               username
               email
             }
+            visibility
           }
         }
       }",
@@ -39,7 +40,8 @@ Scenario: GraphQL client wants to create a project
             "authors":[
               {"id":"VXNlcjp1c2VyQWRtaW4=","username":"admin","email":"admin@test.com"},
               {"id":"VXNlcjp1c2VyMQ==","username":"lbrunet","email":"lbrunet@jolicode.com"}
-            ]
+            ],
+            "visibility":"ADMIN"
           }
         }
       }
