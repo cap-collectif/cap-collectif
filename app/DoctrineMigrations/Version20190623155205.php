@@ -5,49 +5,15 @@ declare(strict_types=1);
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\ORM\Id\UuidGenerator;
 use Doctrine\Migrations\AbstractMigration;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190623155205 extends AbstractMigration implements ContainerAwareInterface
+final class Version20190623155205 extends AbstractMigration
 {
-    private $generator;
-    private $em;
-    private $projectAuthors;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->em = $container->get('doctrine')->getManager();
-        $this->generator = new UuidGenerator();
-    }
-
-    public function postUp(Schema $schema): void
-    {
-        foreach ($this->projectAuthors as $pa) {
-            if ($pa['author_id']) {
-                $this->connection->insert('project_author', [
-                    'id' => $this->generator->generate($this->em, null),
-                    'user_id' => $pa['author_id'],
-                    'project_id' => $pa['id'],
-                    'created_at' => $pa['created_at']
-                ]);
-            }
-        }
-    }
-
     public function up(Schema $schema): void
     {
-        $this->projectAuthors = $this->connection->fetchAll(
-            '
-            SELECT p.author_id, p.id, p.created_at
-            FROM project p
-            '
-        );
-
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf(
             'mysql' !== $this->connection->getDatabasePlatform()->getName(),
