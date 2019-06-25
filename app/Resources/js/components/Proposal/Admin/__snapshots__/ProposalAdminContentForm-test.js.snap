@@ -269,7 +269,12 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         disabled={false}
         id="proposal-admin-author"
         inputClassName="fake-inputClassName"
-        label="Auteur"
+        label={
+          <FormattedMessage
+            id="admin.fields.proposal.author"
+            values={Object {}}
+          />
+        }
         labelClassName="control-label"
         multi={false}
         name="author"

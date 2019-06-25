@@ -93,11 +93,16 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             debounce={false}
             id="likers"
             inputClassName="fake-inputClassName"
-            label="Coup(s) de coeur"
+            label={
+              <FormattedMessage
+                id="admin.fields.proposal.likers"
+                values={Object {}}
+              />
+            }
             labelClassName="control-label"
             multi={true}
             name="likers"
-            placeholder="Sélectionnez un coup de coeur"
+            placeholder="select-a-favorite"
           />
         </div>
         <div

@@ -8,10 +8,20 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
   <Field
     component={[Function]}
     label={
-      <FormattedMessage
-        id="admin.fields.group.title"
-        values={Object {}}
-      />
+      <div>
+        <FormattedMessage
+          id="admin.fields.group.title"
+          values={Object {}}
+        />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.mandatory"
+            values={Object {}}
+          />
+        </span>
+      </div>
     }
     name="title"
     type="text"
@@ -25,7 +35,22 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
     debounce={true}
     id="project-author"
     inputClassName="fake-inputClassName"
-    label="admin.fields.project.authors"
+    label={
+      <div>
+        <FormattedMessage
+          id="admin.fields.project.authors"
+          values={Object {}}
+        />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.mandatory"
+            values={Object {}}
+          />
+        </span>
+      </div>
+    }
     labelClassName="control-label"
     multi={true}
     name="authors"
@@ -93,10 +118,20 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
   <Field
     component={[Function]}
     label={
-      <FormattedMessage
-        id="admin.fields.group.title"
-        values={Object {}}
-      />
+      <div>
+        <FormattedMessage
+          id="admin.fields.group.title"
+          values={Object {}}
+        />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.mandatory"
+            values={Object {}}
+          />
+        </span>
+      </div>
     }
     name="title"
     type="text"
@@ -110,7 +145,22 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
     debounce={true}
     id="project-author"
     inputClassName="fake-inputClassName"
-    label="admin.fields.project.authors"
+    label={
+      <div>
+        <FormattedMessage
+          id="admin.fields.project.authors"
+          values={Object {}}
+        />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.mandatory"
+            values={Object {}}
+          />
+        </span>
+      </div>
+    }
     labelClassName="control-label"
     multi={true}
     name="authors"
