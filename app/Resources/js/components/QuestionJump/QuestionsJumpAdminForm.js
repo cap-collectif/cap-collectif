@@ -12,17 +12,18 @@ import component from '../Form/Field';
 import type { responsesHelper_adminQuestion } from '~relay/responsesHelper_adminQuestion.graphql';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
 
-type ParentProps = {
+type ParentProps = {|
   formName: string,
   oldMember: string,
-};
-type Props = ParentProps & {
+|};
+type Props = {|
+  ...ParentProps,
   fields: { length: number, map: Function, remove: Function, push: Function },
   jumps: $PropertyType<responsesHelper_adminQuestion, 'jumps'>,
   questions: $PropertyType<QuestionnaireAdminConfigurationForm_questionnaire, 'questions'>,
   formName: string,
   currentQuestion: Object,
-};
+|};
 
 export class QuestionsJumpAdminForm extends React.Component<Props> {
   render() {

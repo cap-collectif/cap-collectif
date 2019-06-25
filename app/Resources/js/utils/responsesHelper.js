@@ -45,7 +45,7 @@ const ResponseFragment = {
  * - responsesHelper_adminQuestion
  * - responsesHelper_question
  *
- * Because we need detailledDiffent configurations depending on frontend or backend…
+ * Because we need different configurations depending on frontend or backend…
  * We could use a variable (eg: isOnAdmin)
  * But this is currently not supported on shared fragment:
  * https://github.com/facebook/relay/issues/2118
@@ -493,10 +493,12 @@ export const getNextLogicJumpQuestion = (question: Question, questions: Question
   );
 };
 
+// This method is used to get a list of dependent questions (a question is dependant when
+// it is present in the same branch tree of another question) based on a user answer.
 export const getQuestionDepsIds = (
   question: Question,
   questions: Questions,
-  value: string,
+  answer: string,
 ): string[] => {
   const jumpQuestion = getNextLogicJumpQuestion(question, questions);
   if (jumpQuestion) {
@@ -511,7 +513,7 @@ export const getQuestionDepsIds = (
                   ? [
                       jump.destination.id,
                       jump.origin.id,
-                      ...(destination ? getQuestionDepsIds(destination, questions, value) : []),
+                      ...(destination ? getQuestionDepsIds(destination, questions, answer) : []),
                     ]
                   : []),
                 ...(jump.conditions &&
@@ -522,11 +524,11 @@ export const getQuestionDepsIds = (
                       condition.value &&
                       condition.question &&
                       condition.question.id === question.id &&
-                      condition.value.title === value,
+                      condition.value.title === answer,
                   ).length > 0
                   ? [
                       jump.destination.id,
-                      ...(destination ? getQuestionDepsIds(destination, questions, value) : []),
+                      ...(destination ? getQuestionDepsIds(destination, questions, answer) : []),
                     ]
                   : []),
               ];
@@ -605,7 +607,6 @@ export const getAvailableQuestionsIds = (
   // If no jump in questionnaire every question is available
   const hasLogicJumps = questionsHaveLogicJump(questions);
   if (!hasLogicJumps) {
-    // $FlowFixMe
     return questions.map(q => q.id);
   }
   //
