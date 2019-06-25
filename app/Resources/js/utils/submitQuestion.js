@@ -4,9 +4,7 @@ import type { responsesHelper_adminQuestion } from '~relay/responsesHelper_admin
 // Easyfix: We should rely on __typename MultipleChoiceQuestion instead
 const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
-export type QuestionsInReduxForm = $ReadOnlyArray<
-  responsesHelper_adminQuestion & { alwaysJump: ?string },
->;
+export type QuestionsInReduxForm = $ReadOnlyArray<responsesHelper_adminQuestion & { alwaysJump: ?string }>;
 
 const convertJump = jump => ({
   id: jump.id,
