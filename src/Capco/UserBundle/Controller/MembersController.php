@@ -2,10 +2,10 @@
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\Search\UserSearch;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Form\Type\MemberSearchType;
-use Capco\UserBundle\Repository\UserRepository;
 use Capco\UserBundle\Repository\UserTypeRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -26,7 +26,7 @@ class MembersController extends Controller
 
         $form = $this->createForm(MemberSearchType::class, null, [
             'action' => $currentUrl,
-            'method' => 'POST',
+            'method' => 'POST'
         ]);
 
         if ('POST' === $request->getMethod()) {
@@ -41,21 +41,29 @@ class MembersController extends Controller
                         'userType' => $data['userType']
                             ? $data['userType']->getSlug()
                             : UserType::FILTER_ALL,
-                        'sort' => $data['sort'],
+                        'sort' => $data['sort']
                     ])
                 );
             }
         } else {
             $form->setData([
                 'userType' => $this->get(UserTypeRepository::class)->findOneBySlug($userType),
-                'sort' => $sort,
+                'sort' => $sort
             ]);
         }
 
         $pagination = $this->get(Resolver::class)->getValue('members.pagination.size');
 
         $sort = $sort ?? 'activity';
-        $members = $this->get(UserRepository::class)->getSearchResults(
+        /*$members = $this->get(UserRepository::class)->getSearchResults(
+            $pagination,
+            $page,
+            $sort,
+            $userType
+        );*/
+        /** @var UserType $userType */
+        $userType = $this->get(UserTypeRepository::class)->findOneBySlug($userType);
+        $members = $this->get(UserSearch::class)->getRegisteredUsers(
             $pagination,
             $page,
             $sort,
@@ -69,10 +77,10 @@ class MembersController extends Controller
         }
 
         return [
-            'members' => $members,
+            'members' => $members['results'],
             'page' => $page,
             'nbPage' => $nbPage,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ];
     }
 }

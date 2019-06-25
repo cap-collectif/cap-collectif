@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Repository\UserRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -27,6 +28,46 @@ class UserSearch extends Search
         $this->type = 'user';
     }
 
+    public function getRegisteredUsers(
+        int $pagination,
+        int $page,
+        string $sort = null,
+        $type = null
+    ) {
+        $nestedQuery = new Query\Nested();
+        $nestedQuery->setPath('totalContributionsCount');
+
+        $query = new Query($nestedQuery);
+        if (!$sort || 'activity' === $sort) {
+            $query->setSort([
+                'totalContributionsCount.count' => [
+                    'order' => 'desc'
+                ]
+            ]);
+        } else {
+            $query->addSort([
+                'createdAt' => ['order' => 'ASC']
+            ]);
+        }
+
+        if (null !== $type && UserType::FILTER_ALL !== $type) {
+            $boolQuery = new Query\BoolQuery();
+            $boolQuery->addFilter(new Term(['user_type.id' => $type->getId()]));
+            $nestedQuery->setQuery($boolQuery);
+        }
+
+        $resultSet = $this->index->getType('user')->search($query);
+
+        if ($pagination > 0) {
+            $query->setFrom(($page - 1) * $pagination)->setSize($pagination);
+        }
+
+        return [
+            'results' => $this->getHydratedResults($resultSet->getResults()),
+            'totalCount' => $resultSet->getTotalHits()
+        ];
+    }
+
     public function searchAllUsers(
         $terms = null,
         ?array $notInIds = [],
@@ -45,7 +86,7 @@ class UserSearch extends Search
 
             return [
                 'users' => $users,
-                'count' => \count($authorIds),
+                'count' => \count($authorIds)
             ];
         }
 
@@ -71,7 +112,7 @@ class UserSearch extends Search
 
         return [
             'users' => $users,
-            'count' => $resultSet->getTotalHits(),
+            'count' => $resultSet->getTotalHits()
         ];
     }
 
@@ -99,7 +140,7 @@ class UserSearch extends Search
 
         return [
             'users' => $users,
-            'count' => $resultSet->getTotalHits(),
+            'count' => $resultSet->getTotalHits()
         ];
     }
 
@@ -121,9 +162,9 @@ class UserSearch extends Search
             'contributionsCountByProject.count' => [
                 'order' => 'desc',
                 'nested_filter' => [
-                    'term' => ['contributionsCountByProject.project.id' => $project->getId()],
-                ],
-            ],
+                    'term' => ['contributionsCountByProject.project.id' => $project->getId()]
+                ]
+            ]
         ]);
 
         $query
@@ -135,7 +176,7 @@ class UserSearch extends Search
 
         return [
             'results' => $users,
-            'totalCount' => $resultSet->getTotalHits(),
+            'totalCount' => $resultSet->getTotalHits()
         ];
     }
 
@@ -179,7 +220,7 @@ class UserSearch extends Search
 
         return [
             'results' => $users,
-            'totalCount' => $resultSet->getTotalHits(),
+            'totalCount' => $resultSet->getTotalHits()
         ];
     }
 
@@ -196,8 +237,8 @@ class UserSearch extends Search
         $query = new Query($nestedQuery);
         $query->setSort([
             'totalContributionsCount.count' => [
-                'order' => 'desc',
-            ],
+                'order' => 'desc'
+            ]
         ]);
 
         $query->setFrom($offset)->setSize($limit);
@@ -206,7 +247,7 @@ class UserSearch extends Search
 
         return [
             'results' => $this->getHydratedResults($resultSet->getResults()),
-            'totalCount' => $resultSet->getTotalHits(),
+            'totalCount' => $resultSet->getTotalHits()
         ];
     }
 
