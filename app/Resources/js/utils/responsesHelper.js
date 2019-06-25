@@ -579,6 +579,8 @@ export const isAnyQuestionJumpsFullfilled = (
       )
     : false;
 
+// This method returns, for a given questions and based on user's answers, the list of fullfilled logic jumps
+// (all the jumb where all the conditions have been met)
 export const getFullfilledJumps = (question: Question, responses: ResponsesInReduxForm): Jump[] =>
   question.jumps
     ? question.jumps.filter(Boolean).filter(jump =>
@@ -593,6 +595,9 @@ export const getFullfilledJumps = (question: Question, responses: ResponsesInRed
       )
     : [];
 
+// This is the main method, used in `renderResponses` that returns, given the Questionnaire's questions and the
+// user's answers, a list of questions ids that should be displayed to the user based on it's answers
+// and the logic jumps defined for the questions
 export const getAvailableQuestionsIds = (
   questions: Questions,
   responses: ResponsesInReduxForm,
@@ -604,18 +609,18 @@ export const getAvailableQuestionsIds = (
     return questions.map(q => q.id);
   }
   //
-  // // Otherwise let's calculate what is currently displayed to user…
+  // Otherwise let's calculate what is currently displayed to user…
   const firstLogicQuestion = questions.find(
     question => question.jumps && question.jumps.length > 0,
   );
-  console.log('FIRST QUESTIONS ======');
+
+  // We need the first questions before the first logic jump of the questionnaire, so we display
+  // them to the user
   const firstQuestionsIds = questions
     .slice(0, questions.indexOf(firstLogicQuestion) + 1)
-    .map(question => {
-      console.log(question);
-      return question.id;
-    });
-  console.log('FULLFILLED ======');
+    .map(question => question.id);
+
+  // We get all the fullfilled questions ids (the questions that have met all the conditions)
   const fullfilledQuestionsIds = questions.reduce((acc, question) => {
     if (isAnyQuestionJumpsFullfilled(question, responses)) {
       const jumps = getFullfilledJumps(question, responses);
@@ -634,14 +639,11 @@ export const getAvailableQuestionsIds = (
 
         return [...acc, ...visibleJumps];
       }
-      // console.log('DEPENDENCIES FOR QUESTION', question, 'WITH ANSWER', answer);
-      // console.log(getQuestionDepsIds(question, questions, answer).map(qId => questions.find(q => q.id === qId)));
       return [...acc, ...jumps.filter(Boolean).map(jump => jump.destination.id)];
     }
     return acc;
   }, []);
 
-  console.log('FULLFILLED QUESTIONS');
   fullfilledQuestionsIds.map(qId => questions.find(q => q.id === qId));
 
   // $FlowFixMe
