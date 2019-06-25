@@ -17,13 +17,15 @@ export const NavigationContainer = styled.div`
 `;
 
 export const NavigationHeader = styled.div`
+  min-width: 120px;
+  max-width: 120px;
   height: 50px;
+  flex: 0;
   position: relative;
   text-align: center;
 `;
 
 export const Brand = styled.div`
-  display: inline-block;
   width: 100%;
   height: 100%;
   padding: 5px 15px 5px 0;
@@ -87,7 +89,7 @@ export const NavigationContentDesktop = styled.nav`
 `;
 
 export const NavigationContentMobile = styled.nav`
-  background-color: ${props => props.theme.mainNavbarBg};
+  background-color: #fff;
   position: absolute;
   top: 100%;
   left: 0;
