@@ -17,6 +17,7 @@ final class Version20190623155205 extends AbstractMigration implements Container
 {
     private $generator;
     private $em;
+    private $projectAuthors;
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -26,7 +27,7 @@ final class Version20190623155205 extends AbstractMigration implements Container
 
     public function postUp(Schema $schema): void
     {
-        foreach ($this->project_authors as $pa) {
+        foreach ($this->projectAuthors as $pa) {
             if ($pa['author_id']) {
                 $this->connection->insert('project_author', [
                     'id' => $this->generator->generate($this->em, null),
@@ -40,7 +41,7 @@ final class Version20190623155205 extends AbstractMigration implements Container
 
     public function up(Schema $schema): void
     {
-        $this->project_authors = $this->connection->fetchAll(
+        $this->projectAuthors = $this->connection->fetchAll(
             '
             SELECT p.author_id, p.id, p.created_at
             FROM project p
