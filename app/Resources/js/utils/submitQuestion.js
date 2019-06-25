@@ -28,6 +28,9 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
     const questionInput = {
       question: {
         ...question,
+        // We create here an always jump (similar to an "else" case) but to keep consistency
+        // with back-end, it's the same form as a normal logic jump, but the only difference is
+        // that it has an empty array of condition, and an "always" parameter defined to true
         jumps: !question.alwaysJump
           ? question.jumps &&
             question.jumps
@@ -65,11 +68,9 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
         number: undefined,
         position: undefined,
         choices: undefined,
+        alwaysJump: undefined,
       },
     };
-    // We do not need to send this to the server. The always jump (if defined) is instead pushed into
-    // the jumps property, so we keep the same behaviour on the back-end
-    delete questionInput.question.alwaysJump;
     if (
       multipleChoiceQuestions.indexOf(question.type) !== -1 &&
       typeof question.choices !== 'undefined'
