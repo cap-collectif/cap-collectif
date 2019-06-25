@@ -1,12 +1,13 @@
 // @flow
 import React from 'react';
-import { injectIntl, type IntlShape } from 'react-intl';
 import { reduxForm } from 'redux-form';
+import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
+
 import type { Dispatch } from '../../../types';
+import UserListField from '../../Admin/Field/UserListField';
 import GroupAdminUsers_group from '~relay/GroupAdminUsers_group.graphql';
 import { groupAdminUsersUserDeletionReset } from '../../../redux/modules/user';
 import AddUsersInGroupMutation from '../../../mutations/AddUsersInGroupMutation';
-import UserListField from '../../Admin/Field/UserListField';
 
 type Props = {
   group: GroupAdminUsers_group,
@@ -63,7 +64,7 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
             ariaControls="GroupAdminAddUsersForm-filter-user-listbox"
             id="group-users-users"
             name="users"
-            label={intl.formatMessage({ id: 'group.admin.form.users' })}
+            label={<FormattedMessage id="group.admin.form.users" />}
             labelClassName="control-label"
             inputClassName="fake-inputClassName"
             placeholder={intl.formatMessage({ id: 'select-a-user' })}

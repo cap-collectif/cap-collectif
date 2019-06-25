@@ -170,7 +170,7 @@ export class EventListFilters extends React.Component<Props, State> {
         labelClassName="control-label"
         inputClassName="fake-inputClassName"
         placeholder={intl.formatMessage({ id: 'all-the-authors' })}
-        label={intl.formatMessage({ id: 'project_download.label.author' })}
+        label={<FormattedMessage id="project_download.label.author" />}
         ariaControls="EventListFilters-filter-author-listbox"
       />,
     );

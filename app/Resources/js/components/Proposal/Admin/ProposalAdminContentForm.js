@@ -317,7 +317,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               id="proposal-admin-author"
               name="author"
               ariaControls="ProposalAdminContentForm-filter-user-listbox"
-              label="Auteur"
+              label={<FormattedMessage id="admin.fields.proposal.author" />}
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
               placeholder="Auteur"

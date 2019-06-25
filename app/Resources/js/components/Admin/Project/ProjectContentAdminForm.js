@@ -96,7 +96,7 @@ const validate = ({ title, authors }: FormValues) => {
     errors.title = 'global.required';
   }
 
-  if (!authors) {
+  if (!authors || authors.length <= 0) {
     errors.authors = 'global.required';
   }
 
@@ -122,7 +122,14 @@ export const ProjectContentAdminForm = (props: Props) => {
       <Field
         type="text"
         name="title"
-        label={<FormattedMessage id="admin.fields.group.title" />}
+        label={
+          <div>
+            <FormattedMessage id="admin.fields.group.title" />
+            <span className="excerpt">
+              <FormattedMessage id="global.mandatory" />
+            </span>
+          </div>
+        }
         component={renderComponent}
       />
       <UserListField
@@ -136,7 +143,14 @@ export const ProjectContentAdminForm = (props: Props) => {
         labelClassName="control-label"
         inputClassName="fake-inputClassName"
         placeholder={intl.formatMessage({ id: 'all-the-authors' })}
-        label={intl.formatMessage({ id: 'admin.fields.project.authors' })}
+        label={
+          <div>
+            <FormattedMessage id="admin.fields.project.authors" />
+            <span className="excerpt">
+              <FormattedMessage id="global.mandatory" />
+            </span>
+          </div>
+        }
         ariaControls="EventListFilters-filter-author-listbox"
       />
 
