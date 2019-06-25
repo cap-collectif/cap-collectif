@@ -1,7 +1,7 @@
 @project @admin
 Feature: createProject
 
-@database @dev
+@database
 Scenario: GraphQL client wants to create a project
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
