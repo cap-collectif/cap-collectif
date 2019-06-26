@@ -29,7 +29,11 @@ class OccitanieExtraMapper
 
         if (isset($this->userInfoData['birthday'])) {
             $birthday =
-                \DateTime::createFromFormat('dd/mm/YYYY', $this->userInfoData['birthday']) ?: null;
+                \DateTime::createFromFormat('d/m/Y', $this->userInfoData['birthday']) ?: null;
+
+            if ($birthday) {
+                $birthday->setTime(0, 0);
+            }
         }
 
         $this->user->setDateOfBirth($birthday);

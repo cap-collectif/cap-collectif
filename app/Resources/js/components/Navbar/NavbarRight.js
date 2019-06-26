@@ -84,7 +84,11 @@ export class NavbarRight extends React.Component<Props> {
               </TabsLink>
             ) : null}
             {!features.profiles && features.login_openid ? (
-              <TabsLink eventKey={3.3} href="/sso/profile" target="_blank" rel="noopener">
+              <TabsLink
+                eventKey={3.3}
+                href={`/sso/profile?referrer=${window.location.href}`}
+                target="_blank"
+                rel="noopener">
                 <i className="cap cap-id-8 mr-10" aria-hidden="true" />
                 <FormattedMessage id="navbar.profile" />
                 <i className="cap cap-external-link ml-10" aria-hidden="true" />

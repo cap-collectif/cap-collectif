@@ -7,6 +7,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SSOController extends Controller
@@ -41,7 +42,7 @@ class SSOController extends Controller
     /**
      * @Route("/sso/profile", name="app_sso_profile")
      */
-    public function profileAction(): RedirectResponse
+    public function profileAction(Request $request): RedirectResponse
     {
         $user = $this->getUser();
 
@@ -59,6 +60,10 @@ class SSOController extends Controller
             return $this->redirect('/');
         }
 
-        return $this->redirect($ssoConfiguration->getProfileUrl());
+        return $this->redirect(
+            $ssoConfiguration->getProfileUrl() .
+                '?referrer=' .
+                $request->query->get('referrer', $request->getBaseUrl())
+        );
     }
 }
