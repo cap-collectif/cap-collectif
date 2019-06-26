@@ -2,11 +2,6 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Capco\AppBundle\Behat\Traits\AdminDashboardTait;
-use Capco\AppBundle\Behat\Traits\AdminGeneralTait;
-use Capco\AppBundle\Behat\Traits\AdminOpinionTait;
-use Capco\AppBundle\Behat\Traits\AdminShieldTrait;
-use Capco\AppBundle\Elasticsearch\Client;
 use Elastica\Snapshot;
 use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;
@@ -17,6 +12,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\NotifierFactory;
 use Behat\Mink\Driver\Selenium2Driver;
 use Symfony\Component\Process\Process;
+use Capco\AppBundle\Elasticsearch\Client;
 use WebDriver\Exception\ElementNotVisible;
 use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
@@ -26,12 +22,18 @@ use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Capco\AppBundle\Behat\Traits\CookiesTrait;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Capco\AppBundle\Elasticsearch\IndexBuilder;
+use Capco\AppBundle\Behat\Traits\AdminEventTrait;
 use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Capco\AppBundle\Behat\Traits\AdminGeneralTait;
+use Capco\AppBundle\Behat\Traits\AdminOpinionTait;
+use Capco\AppBundle\Behat\Traits\AdminShieldTrait;
+use Capco\AppBundle\Behat\Traits\AdminProjectTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
 use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
+use Capco\AppBundle\Behat\Traits\AdminDashboardTait;
 use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
 use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
@@ -39,7 +41,6 @@ use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
-use Capco\AppBundle\Behat\Traits\AdminEventTrait;
 
 const REPOSITORY_NAME = 'repository_qa';
 const SNAPSHOT_NAME = 'snap_qa';
@@ -63,6 +64,7 @@ class ApplicationContext extends UserContext
     use AdminEventTrait;
     use AdminGeneralTait;
     use AdminDashboardTait;
+    use AdminProjectTrait;
     use AdminShieldTrait;
     use AdminOpinionTait;
 
