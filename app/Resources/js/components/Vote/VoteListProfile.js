@@ -35,6 +35,7 @@ export class VoteListProfile extends Component<Props, State> {
 
   render() {
     const { voteList, relay } = this.props;
+    const { loading } = this.state;
 
     if (!voteList.votes.edges || voteList.votes.edges.length === 0) {
       return null;
@@ -52,7 +53,7 @@ export class VoteListProfile extends Component<Props, State> {
           ))}
         {relay.hasMore() && (
           <ListGroupItem style={{ textAlign: 'center' }}>
-            {this.state.loading ? (
+            {loading ? (
               <Loader />
             ) : (
               <Button bsStyle="link" onClick={this.handleLoadMore}>

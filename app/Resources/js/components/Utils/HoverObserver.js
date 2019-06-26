@@ -13,13 +13,6 @@ type Props = Object;
 class HoverObserver extends React.Component<Props, State> {
   timerIds = [];
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isHovering: false,
-    };
-  }
-
   static defaultProps = {
     hoverDelayInMs: 0,
     hoverOffDelayInMs: 0,
@@ -29,6 +22,17 @@ class HoverObserver extends React.Component<Props, State> {
     onMouseOver: noop,
     onMouseOut: noop,
   };
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      isHovering: false,
+    };
+  }
+
+  componentWillUnmount() {
+    this.clearTimers();
+  }
 
   onMouseEnter = (e: Event) => {
     this.props.onMouseEnter({
@@ -61,10 +65,6 @@ class HoverObserver extends React.Component<Props, State> {
       unsetIsHovering: this.unsetIsHovering,
     });
   };
-
-  componentWillUnmount() {
-    this.clearTimers();
-  }
 
   setIsHovering = () => {
     this.clearTimers();
