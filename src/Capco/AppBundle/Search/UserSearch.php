@@ -33,14 +33,16 @@ class UserSearch extends Search
         int $page,
         string $sort = null,
         $type = null
-    ) {
-        $nestedQuery = new Query\Nested();
-        $nestedQuery->setPath('totalContributionsCount');
-
-        $query = new Query($nestedQuery);
+    ): array {
+        $boolQuery = new Query\BoolQuery();
+        if (null !== $type && UserType::FILTER_ALL !== $type) {
+            $boolQuery->addMust(new Term(['userType.id' => ['value' => $type->getId()]]));
+        }
+        $query = new Query();
+        $query->setQuery($boolQuery);
         if (!$sort || 'activity' === $sort) {
             $query->setSort([
-                'totalContributionsCount.count' => [
+                'totalContributionsCount' => [
                     'order' => 'desc'
                 ]
             ]);
@@ -49,15 +51,7 @@ class UserSearch extends Search
                 'createdAt' => ['order' => 'ASC']
             ]);
         }
-
-        if (null !== $type && UserType::FILTER_ALL !== $type) {
-            $boolQuery = new Query\BoolQuery();
-            $boolQuery->addFilter(new Term(['user_type.id' => $type->getId()]));
-            $nestedQuery->setQuery($boolQuery);
-        }
-
         $resultSet = $this->index->getType('user')->search($query);
-
         if ($pagination > 0) {
             $query->setFrom(($page - 1) * $pagination)->setSize($pagination);
         }

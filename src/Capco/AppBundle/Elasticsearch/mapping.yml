@@ -54,7 +54,7 @@ mappings:
         fields:
           std: { type: text, analyzer: capco_standard }
       biography: *text_analysis_highlighted
-      user_type:
+      userType:
         type: object
         properties:
           id:
@@ -77,15 +77,7 @@ mappings:
               id: { type: keyword }
           count:
             type: long
-      totalContributionsCount:
-        type: nested
-        properties:
-          contribution:
-            type: object
-            properties:
-              id: { type: keyword }
-          count:
-            type: long
+      totalContributionsCount: { type: long }
 
   argument:
     properties:

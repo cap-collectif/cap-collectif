@@ -55,12 +55,12 @@ class MembersController extends Controller
         $pagination = $this->get(Resolver::class)->getValue('members.pagination.size');
 
         $sort = $sort ?? 'activity';
-        /*$members = $this->get(UserRepository::class)->getSearchResults(
+        $members = $this->get(UserRepository::class)->getSearchResults(
             $pagination,
             $page,
             $sort,
             $userType
-        );*/
+        );
         /** @var UserType $userType */
         $userType = $this->get(UserTypeRepository::class)->findOneBySlug($userType);
         $members = $this->get(UserSearch::class)->getRegisteredUsers(

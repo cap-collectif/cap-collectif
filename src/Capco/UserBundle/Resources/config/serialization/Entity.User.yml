@@ -27,3 +27,6 @@ Capco\UserBundle\Entity\User:
       groups: [UserDetails, UsersInfos]
     email:
       groups: [Elasticsearch]
+    createdAt:
+      serialized_name: createdAt
+      groups: [Elasticsearch]
