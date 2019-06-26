@@ -41,7 +41,7 @@ class ProjectsController extends FOSRestController
         }
 
         // We make sure the author can edit his project
-        $author = $project->getAuthor();
+        $author = $project->getFirstAuthor();
         $author->addRole('ROLE_ADMIN');
 
         $em = $this->getDoctrine()->getManager();

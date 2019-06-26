@@ -2,27 +2,27 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Doctrine\ORM\Mapping as ORM;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Traits\UuidTrait;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
-use Capco\AppBundle\Traits\ProjectVisibilityTrait;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Traits\ProjectVisibilityTrait;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 
 /**
  * Project.
@@ -112,16 +112,15 @@ class Project implements IndexableInterface
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "Author", "themes", "steps", "media"})
+     * @Gedmo\Timestampable(on="change", field={"title", "authors", "themes", "steps", "media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProjectAuthor", cascade={"persist", "remove"}, mappedBy="project", orphanRemoval=true)
      */
-    private $Author;
+    private $authors;
 
     /**
      * @var
@@ -195,7 +194,7 @@ class Project implements IndexableInterface
     /**
      * @ORM\Column(name="visibility", type="integer", nullable=false)
      */
-    private $visibility = ProjectVisibilityMode::VISIBILITY_ME;
+    private $visibility = ProjectVisibilityMode::VISIBILITY_ADMIN;
 
     /**
      * @ORM\Column(name="opinion_can_be_followed", type="boolean", nullable=false, options={"default": false})
@@ -238,6 +237,7 @@ class Project implements IndexableInterface
     {
         $this->restrictedViewerGroups = new ArrayCollection();
         $this->themes = new ArrayCollection();
+        $this->authors = new ArrayCollection();
         $this->steps = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
@@ -373,22 +373,57 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    /**
-     * @return User
-     */
-    public function getAuthor()
+    public function getFirstAuthor(): ?User
     {
-        return $this->Author;
+        if ($this->authors && isset($this->authors[0])) {
+            return $this->authors[0]->getUser();
+        }
+
+        return null;
     }
 
-    /**
-     * @param $Author
-     *
-     * @return $this
-     */
-    public function setAuthor($Author)
+    public function setAuthors(array $authors): self
     {
-        $this->Author = $Author;
+        if (empty($authors)) {
+            throw new \InvalidArgumentException('Authors array can not be empty.');
+
+            return null;
+        }
+
+        $this->authors = new ArrayCollection($authors);
+
+        return $this;
+    }
+
+    public function getUserAuthors(): array
+    {
+        $authors = [];
+        foreach ($this->authors as $projectAuthor) {
+            $authors[] = $projectAuthor->getUser();
+        }
+
+        return $authors;
+    }
+
+    public function getAuthors(): Collection
+    {
+        return $this->authors;
+    }
+
+    public function addAuthor(ProjectAuthor $projectAuthor): self
+    {
+        if (!$this->authors->contains($projectAuthor)) {
+            $this->authors->add($projectAuthor);
+        }
+
+        return $this;
+    }
+
+    public function removeAuthor(ProjectAuthor $projectAuthor): self
+    {
+        if ($this->authors->contains($projectAuthor)) {
+            $this->authors->remove($projectAuthor);
+        }
 
         return $this;
     }
@@ -644,20 +679,16 @@ class Project implements IndexableInterface
         $this->includeAuthorInRanking = $includeAuthorInRanking;
     }
 
-    /**
-     * @return array
-     */
-    public function getOpinionTerm()
+    public function getOpinionTerm(): int
     {
         return $this->opinionTerm;
     }
 
-    /**
-     * @param array $opinionTerm
-     */
-    public function setOpinionTerm($opinionTerm)
+    public function setOpinionTerm(int $opinionTerm): self
     {
         $this->opinionTerm = $opinionTerm;
+
+        return $this;
     }
 
     public function getDistricts(): Collection
@@ -1148,7 +1179,7 @@ class Project implements IndexableInterface
             return true;
         }
 
-        if (($viewer && $viewer->isSuperAdmin()) || $this->getAuthor() === $viewer) {
+        if ($viewer && ($viewer->isSuperAdmin() || \in_array($viewer, $this->getUserAuthors()))) {
             return true;
         }
 

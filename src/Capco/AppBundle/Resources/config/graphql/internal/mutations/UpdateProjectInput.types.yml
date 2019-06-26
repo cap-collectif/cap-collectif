@@ -1,0 +1,20 @@
+UpdateProjectInput:
+  type: relay-mutation-input
+  config:
+    description: 'Create a project'
+    fields:
+      id:
+        type: 'ID!'
+        description: "The project's ID"
+      title:
+        type: 'String!'
+        description: "The project's title"
+      authors:
+        type: '[ID!]!'
+        description: "The project's authors"
+      opinionTerm:
+        type: 'Int!'
+        description: "The project's opinion term"
+      projectType:
+        type: 'String'
+        description: "The project's type"

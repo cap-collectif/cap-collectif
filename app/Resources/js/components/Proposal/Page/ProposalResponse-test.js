@@ -79,6 +79,55 @@ describe('<ProposalResponse />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render a null button response', () => {
+    const props = {
+      response: {
+        $refType,
+        question: {
+          __typename: 'MultipleChoiceQuestion',
+          id: 'UXVlc3Rpb246MzY0',
+          title: "Cet objet nécessite de l'entretien ?",
+          type: 'button',
+          choices: [
+            {
+              id: 'fd432e8c-5a32-11e9-8813-0242ac110004',
+              title: 'Oui mais trois fois rien',
+              description: null,
+              color: null,
+              image: null,
+            },
+            {
+              id: 'fd43333b-5a32-11e9-8813-0242ac110004',
+              title: 'Oui quand même',
+              description: null,
+              color: null,
+              image: null,
+            },
+            {
+              id: 'fd4336ec-5a32-11e9-8813-0242ac110004',
+              title: 'Non',
+              description: null,
+              color: null,
+              image: null,
+            },
+          ],
+          description: null,
+          helpText: null,
+          jumps: [],
+          number: 1,
+          position: 317,
+          randomQuestionChoices: false,
+          validationRule: null,
+          private: false,
+          required: false,
+        },
+        value: '{"labels":[null],"other":null}',
+      },
+    };
+    const wrapper = shallow(<ProposalResponse {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render a not valid JSON radio response', () => {
     const props = {
       response: {
@@ -234,6 +283,31 @@ describe('<ProposalResponse />', () => {
           validationRule: null,
         },
         value: 'Mur (le grand)',
+      },
+    };
+    const wrapper = shallow(<ProposalResponse {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a null media response', () => {
+    const props = {
+      response: {
+        $refType,
+        question: {
+          __typename: 'MediaQuestion',
+          id: 'UXVlc3Rpb246MzY1',
+          title:
+            'Vous souhaitez partager le compte rendu des \u00e9changes ou tout autre document ?',
+          number: 1,
+          private: false,
+          position: 313,
+          required: false,
+          helpText: 'Les formats vid\u00e9os ne sont pas accept\u00e9s.',
+          jumps: [],
+          description: '',
+          type: 'medias',
+        },
+        medias: [],
       },
     };
     const wrapper = shallow(<ProposalResponse {...props} />);

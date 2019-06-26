@@ -20,6 +20,46 @@ exports[`<ProposalResponse /> should render a not valid JSON radio response 1`] 
 </div>
 `;
 
+exports[`<ProposalResponse /> should render a null button response 1`] = `
+<div
+  className="block"
+>
+  <h3
+    className="h3"
+  >
+    Cet objet nécessite de l'entretien ?
+  </h3>
+  <p
+    className="excerpt"
+  >
+    <FormattedMessage
+      id="project.votes.widget.no_value"
+      values={Object {}}
+    />
+  </p>
+</div>
+`;
+
+exports[`<ProposalResponse /> should render a null media response 1`] = `
+<div
+  className="block"
+>
+  <h3
+    className="h3"
+  >
+    Vous souhaitez partager le compte rendu des échanges ou tout autre document ?
+  </h3>
+  <p
+    className="excerpt"
+  >
+    <FormattedMessage
+      id="project.votes.widget.no_value"
+      values={Object {}}
+    />
+  </p>
+</div>
+`;
+
 exports[`<ProposalResponse /> should render a number response 1`] = `
 <PrivateBox
   divClassName="block"
@@ -67,23 +107,22 @@ exports[`<ProposalResponse /> should render a section response 1`] = `
 `;
 
 exports[`<ProposalResponse /> should render a select response 1`] = `
-<div
-  className="block"
+<PrivateBox
+  divClassName="block"
+  message="global.form.private"
+  show={false}
 >
-  <h3
-    className="h3"
-  >
-    Zone de la terrasse concernée
-  </h3>
-  <p
-    className="excerpt"
-  >
-    <FormattedMessage
-      id="project.votes.widget.no_value"
-      values={Object {}}
+  <div>
+    <h3
+      className="h3"
+    >
+      Zone de la terrasse concernée
+    </h3>
+    <WYSIWYGRender
+      value="Mur (le grand)"
     />
-  </p>
-</div>
+  </div>
+</PrivateBox>
 `;
 
 exports[`<ProposalResponse /> should render a text response 1`] = `

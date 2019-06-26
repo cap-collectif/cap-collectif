@@ -101,6 +101,13 @@
               {{ react_render_component('UserAdminCreateButtonApp') }}
           </li>
       </ul>
+  {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Project' and admin.hasSubject == false %}
+  {% include '@CapcoApp/redux_store.html.twig' %}
+      <ul class="nav navbar-nav navbar-right">
+          <li>
+              {{ react_render_component('ProjectCreateButtonApp') }}
+          </li>
+      </ul>
   {% endif %}
 {% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}
     <ul class="nav navbar-nav navbar-right">

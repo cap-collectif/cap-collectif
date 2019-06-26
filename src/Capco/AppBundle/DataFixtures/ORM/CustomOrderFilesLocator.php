@@ -58,6 +58,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             __DIR__ . '/Prod/ProjectAbstractStep.yml',
             __DIR__ . '/Prod/ProjectType.yml',
             __DIR__ . '/Prod/Project.yml',
+            __DIR__ . '/Prod/ProjectAuthor.yml',
             __DIR__ . '/Prod/Post.yml',
             __DIR__ . '/Prod/Event.yml',
             __DIR__ . '/Prod/HighlightedContent.yml'
@@ -92,6 +93,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             __DIR__ . '/Dev/OpinionTypeAppendixType.yml',
             __DIR__ . '/Dev/ProjectType.yml',
             __DIR__ . '/Dev/Project.yml',
+            __DIR__ . '/Dev/ProjectAuthor.yml',
             __DIR__ . '/Dev/PresentationStep.yml',
             __DIR__ . '/Dev/RankingStep.yml',
             __DIR__ . '/Dev/OtherStep.yml',

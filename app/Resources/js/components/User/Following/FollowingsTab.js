@@ -51,6 +51,7 @@ export class FollowingsTab extends Component<Props, State> {
 
   render() {
     const { viewer } = this.props;
+    const { open } = this.state;
     const projectsById = {};
 
     if (viewer.followingOpinions) {
@@ -76,7 +77,7 @@ export class FollowingsTab extends Component<Props, State> {
         <h2 className="page-header">
           <FormattedMessage id="followings" />
           {Object.keys(projectsById).length > 0 ? (
-            <Collapse style={{ float: 'right' }} in={this.state.open}>
+            <Collapse style={{ float: 'right' }} in={open}>
               <Button
                 id="unfollow-all"
                 onClick={() => {
@@ -91,7 +92,7 @@ export class FollowingsTab extends Component<Props, State> {
         </h2>
         <div>
           {Object.keys(projectsById).length > 0 ? (
-            <Collapse in={this.state.open}>
+            <Collapse in={open}>
               <div id="all-projects">
                 {Object.keys(projectsById).map((project, id) => {
                   if (projectsById[project].type === 'opinionProject') {
@@ -120,7 +121,7 @@ export class FollowingsTab extends Component<Props, State> {
           )}
         </div>
         <div>
-          <Collapse in={!this.state.open}>
+          <Collapse in={!open}>
             <div>
               <FormattedMessage id="no-following" />
             </div>

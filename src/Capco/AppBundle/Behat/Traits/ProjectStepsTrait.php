@@ -18,7 +18,7 @@ trait ProjectStepsTrait
     {
         $this->getEntityManager()->clear();
         $project = $this->getRepository('CapcoAppBundle:Project')->findOneBySlug($slug);
-        expect($project->getAuthor()->getId())->toBe($authorId);
+        expect($project->getFirstAuthor()->getId())->toBe($authorId);
     }
 
     /**

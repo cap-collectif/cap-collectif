@@ -341,7 +341,7 @@ class Post implements CommentableInterface, IndexableInterface
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getAuthors()
+    public function getAuthors(): Collection
     {
         return $this->Authors;
     }

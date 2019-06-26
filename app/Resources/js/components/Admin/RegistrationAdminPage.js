@@ -112,25 +112,27 @@ export class RegistrationAdminPage extends React.Component<Props> {
           />
           <FormattedMessage id="registration.type" />
         </div>
-        <Well bsClass={isSuperAdmin ? 'div' : 'well'}>
-          <p style={{ marginTop: 10 }}>
-            <strong>
-              <FormattedMessage id="more-fields" />
-            </strong>
-          </p>
-          <QueryRenderer
-            query={graphql`
-              query RegistrationAdminPageQuery {
-                registrationForm {
-                  ...RegistrationFormQuestions_registrationForm
+        {isSuperAdmin && (
+          <Well bsClass={isSuperAdmin ? 'div' : 'well'}>
+            <p style={{ marginTop: 10 }}>
+              <strong>
+                <FormattedMessage id="more-fields" />
+              </strong>
+            </p>
+            <QueryRenderer
+              query={graphql`
+                query RegistrationAdminPageQuery {
+                  registrationForm {
+                    ...RegistrationFormQuestions_registrationForm
+                  }
                 }
-              }
-            `}
-            environment={environment}
-            variables={{}}
-            render={dynamicFieldsComponent}
-          />
-        </Well>
+              `}
+              environment={environment}
+              variables={{}}
+              render={dynamicFieldsComponent}
+            />
+          </Well>
+        )}
         <div className="d-flex align-items-center mb-15 mt-15">
           <Toggle
             icons

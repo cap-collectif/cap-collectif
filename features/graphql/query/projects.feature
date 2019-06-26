@@ -172,7 +172,7 @@ Scenario: GraphQL client wants to get a project with specify term, theme and typ
             themes {
               id
             }
-            author {
+            authors {
               username
             }
             type {
@@ -207,9 +207,9 @@ Scenario: GraphQL client wants to get a project with specify term, theme and typ
                           "id": "theme2"
                        }
                     ],
-                    "author": {
+                    "authors": [{
                        "username": "admin"
-                    },
+                    }],
                     "type": {
                        "id": "3"
                     }

@@ -102,7 +102,7 @@ export class ProposalListFilters extends React.Component<Props> {
     const orderByVotes = step.voteType !== 'DISABLED';
     const orderByComments = form.commentable;
     const orderByCost = form.costable;
-    const showMapButton = form.usingAddress && !step.private && !!features.display_map;
+    const showMapButton = form.usingAddress && !step.private && features.display_map;
 
     return (
       <div className="mb-15 mt-30">

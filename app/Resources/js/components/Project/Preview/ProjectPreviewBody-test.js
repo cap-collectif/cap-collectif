@@ -7,7 +7,10 @@ import { $refType, $fragmentRefs } from '../../../mocks';
 import { ProjectPreviewBody } from './ProjectPreviewBody';
 
 const defaultStep = {
-  timeRange: null,
+  timeRange: {
+    startAt: null,
+    endAt: null,
+  },
   timeless: null,
   type: null,
   url: '',
@@ -137,7 +140,10 @@ const secondTest = {
       {
         title: 'timeless step',
         status: 'OPENED',
-        timeRange: null,
+        timeRange: {
+          startAt: null,
+          endAt: null,
+        },
         timeless: true,
         type: 'collect',
         url: 'http://capco/timeless-step/show-link',

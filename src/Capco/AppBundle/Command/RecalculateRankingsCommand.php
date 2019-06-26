@@ -27,8 +27,8 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
 
         foreach ($projects as $project) {
             $excludedAuthor =
-                !$project->getIncludeAuthorInRanking() && $project->getAuthor()
-                    ? $project->getAuthor()->getId()
+                !$project->getIncludeAuthorInRanking() && $project->getFirstAuthor()
+                    ? $project->getFirstAuthor()->getId()
                     : null;
 
             // Opinions

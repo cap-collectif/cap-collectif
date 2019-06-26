@@ -85,6 +85,7 @@ class ProposalAdmin extends AbstractAdmin
             ->leftJoin('pF.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
+            ->leftJoin('p.authors', 'authors')
             ->andWhere($query->getRootAliases()[0] . '.published = true')
             ->andWhere(
                 $query
@@ -93,7 +94,7 @@ class ProposalAdmin extends AbstractAdmin
                         $query
                             ->expr()
                             ->andX(
-                                $query->expr()->eq('p.Author', ':author'),
+                                $query->expr()->eq('authors.user', ':author'),
                                 $query
                                     ->expr()
                                     ->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)

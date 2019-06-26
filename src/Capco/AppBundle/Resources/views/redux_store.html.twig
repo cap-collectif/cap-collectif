@@ -7,7 +7,6 @@
         {% set stepId = stepId|toGlobalId('SelectionStep') %}
     {% endif %}
 {% endif %}
-
 {% set currentProjectById = null %}
 {% if project is defined %}
     {% set currentProjectById = project.id|toGlobalId('Project') %}

@@ -5,16 +5,12 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import type { GlobalState, Dispatch } from '../../types';
 import { changeConsultationPlanActiveItems } from '../../redux/modules/project';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import SectionRecursiveList from './SectionRecursiveList';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import RemainingTime from '../Utils/RemainingTime';
-import DatesInterval from '../Utils/DatesInterval';
-import StepInfos from '../Steps/Page/StepInfos';
 import type {
   ConsultationPropositionBoxQueryResponse,
   ConsultationPropositionBoxQueryVariables,
 } from '~relay/ConsultationPropositionBoxQuery.graphql';
-import ConsultationPlan from './ConsultationPlan';
+import ConsultationPropositionStep from './ConsultationPropositionStep';
 
 export type OwnProps = {|
   +id: string,
@@ -90,59 +86,24 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
     const renderSectionRecursiveList = ({
       error,
       props,
-    }: { props?: ?ConsultationPropositionBoxQueryResponse } & ReadyState) => {
+    }: {
+      ...ReadyState,
+      props: ?ConsultationPropositionBoxQueryResponse,
+    }) => {
       if (error) {
         console.log(error); // eslint-disable-line no-console
         return graphqlError;
       }
       if (props) {
         if (props.consultationStep) {
-          const step = props.consultationStep;
+          const { consultationStep } = props;
           return (
-            <div>
-              {consultationPlanEnabled && (
-                <div
-                  className={
-                    showConsultationPlan
-                      ? 'consultation-plan sticky col-md-3 col-sm-12'
-                      : 'consultation-plan sticky'
-                  }
-                  id="consultation-plan">
-                  <ConsultationPlan consultation={step.consultation} />
-                </div>
-              )}
-              <div
-                id="scroll-content"
-                className={
-                  consultationPlanEnabled && showConsultationPlan
-                    ? 'col-md-9'
-                    : 'col-md-10 col-md-offset-1'
-                }>
-                <h2 className="text-center">{step.title}</h2>
-                <div className="mb-30 project__step-dates text-center">
-                  {step.timeRange && (step.timeRange.startAt || step.timeRange.endAt) && (
-                    <div className="mr-15 d-ib">
-                      <i className="cap cap-calendar-2-1" />{' '}
-                      <DatesInterval
-                        startAt={step.timeRange.startAt}
-                        endAt={step.timeRange.endAt}
-                        fullDay
-                      />
-                    </div>
-                  )}
-                  {step.timeRange.endAt && step.status === 'OPENED' && !step.timeless && (
-                    <div className="mr-15 d-ib">
-                      <i className="cap cap-hourglass-1" />{' '}
-                      <RemainingTime endAt={step.timeRange.endAt} />
-                    </div>
-                  )}
-                </div>
-                {/* $FlowFixMe $refType */}
-                <StepInfos step={step} />
-                {/* $FlowFixMe */}
-                <SectionRecursiveList consultation={step.consultation} />
-              </div>
-            </div>
+            // $FlowFixMe
+            <ConsultationPropositionStep
+              consultationPlanEnabled={consultationPlanEnabled}
+              showConsultationPlan={showConsultationPlan}
+              consultationStep={consultationStep}
+            />
           );
         }
         return graphqlError;
@@ -160,22 +121,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
               $isAuthenticated: Boolean!
             ) {
               consultationStep: node(id: $consultationStepId) {
-                ... on ConsultationStep {
-                  id
-                  timeRange {
-                    startAt
-                    endAt
-                  }
-                  title
-                  status
-                  timeless
-                  consultation {
-                    ...ConsultationPlan_consultation
-                    ...SectionRecursiveList_consultation
-                      @arguments(isAuthenticated: $isAuthenticated)
-                  }
-                }
-                ...StepInfos_step
+                ...ConsultationPropositionStep_consultationStep
               }
             }
           `}

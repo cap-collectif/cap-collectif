@@ -6,9 +6,6 @@ Capco\AppBundle\Entity\Project:
       groups: [Projects, Elasticsearch]
     visibility:
       groups: [Projects, Elasticsearch]
-    Author:
-      groups: [Projects, Elasticsearch]
-      serialized_name: author
     canContribute:
       groups: [Projects]
     createdAt:

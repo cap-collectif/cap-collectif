@@ -55,7 +55,9 @@ export class ProposalResponse extends React.PureComponent<Props> {
   render() {
     const { response } = this.props;
     const questionType = response.question.type;
-    const responseWithJSON = response.question.__typename === 'MultipleChoiceQuestion';
+    const responseWithJSON =
+      response.question.__typename === 'MultipleChoiceQuestion' &&
+      response.question.type !== 'select';
     const defaultEditorEmptyValue = '<p><br></p>';
     let value = '';
     if (questionType === 'section') {

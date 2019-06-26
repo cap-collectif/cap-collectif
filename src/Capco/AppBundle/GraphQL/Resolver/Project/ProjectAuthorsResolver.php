@@ -47,6 +47,7 @@ class ProjectAuthorsResolver implements ResolverInterface
     {
         // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+
         $users = $this->userRepository->hydrateFromIds($ids);
         // We have to restore the correct order of ids, because Doctrine has lost it, see:
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750

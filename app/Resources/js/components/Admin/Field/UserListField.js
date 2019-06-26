@@ -8,7 +8,7 @@ import environment from '../../../createRelayEnvironment';
 type Props = {
   id: ?string,
   name: string,
-  label?: string,
+  label?: React$Element<*>,
   labelClassName: ?string,
   inputClassName: ?string,
   placeholder: ?string,

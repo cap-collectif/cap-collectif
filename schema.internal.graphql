@@ -934,7 +934,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   # The title of the step.
   title: String!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -1414,7 +1414,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
   ): RequirementConnection!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The type of step. Returns "consultation".
   kind: String!
@@ -1615,6 +1615,27 @@ type CreateProjectDistrictPayload {
 
   # An unsuccessful mutation will return one or more `UserError` objects.
   userErrors: [UserError!]!
+  clientMutationId: String
+}
+
+input CreateProjectInput {
+  # The project's title
+  title: String!
+
+  # The project's authors, accept IDs of User
+  authors: [ID!]!
+
+  # The project's opinion term
+  opinionTerm: Int!
+
+  # The project's type
+  projectType: String
+  clientMutationId: String
+}
+
+type CreateProjectPayload {
+  # The created project
+  project: Project
   clientMutationId: String
 }
 
@@ -1977,7 +1998,7 @@ type Event implements Node & Commentable {
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # Identifies the author of the event.
   author: User
@@ -2758,6 +2779,8 @@ type Mutation {
   createQuestionnaire(input: CreateQuestionnaireInput!): CreateQuestionnairePayload
   updateQuestionnaireParameters(input: UpdateQuestionnaireParametersInput!): UpdateQuestionnaireParametersPayload
   updateQuestionnaireConfiguration(input: UpdateQuestionnaireConfigurationInput!): UpdateQuestionnaireConfigurationPayload
+  createProject(input: CreateProjectInput!): CreateProjectPayload
+  updateProject(input: UpdateProjectInput!): UpdateProjectPayload
   createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
   deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
   updateProjectDistrict(input: UpdateProjectDistrictInput!): CreateProjectDistrictPayload
@@ -2831,6 +2854,9 @@ type Oauth2SSOConfiguration implements Node & SSOConfiguration {
 
   # Does this configuration is enabled?
   enabled: Boolean!
+
+  # Profile URL on the SSO side.
+  profileUrl: URI
 
   # Client ID.
   clientId: String!
@@ -3198,7 +3224,7 @@ enum OrderDirection {
 type OtherStep implements Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -3335,7 +3361,7 @@ union PostRelatedContent = Theme | Proposal | Project
 type PresentationStep implements Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -3505,7 +3531,7 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
   # Slug of a project
   slug: String!
   steps: [Step!]!
-  author: User!
+  authors: [User!]!
   video: String
   cover: Media
   contributionsCount: Int!
@@ -3563,6 +3589,9 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
 
   # Link of external project
   externalLink: URI
+
+  # Opinion term of the project
+  opinionTerm: Int!
 }
 
 # A connection to a list of items.
@@ -4122,7 +4151,7 @@ enum ProposalPublicationStatus {
 interface ProposalStep {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -4843,7 +4872,7 @@ input QuestionnaireAbstractQuestionInput {
 type QuestionnaireStep implements Node & Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -4896,7 +4925,7 @@ enum QuestionnaireType {
 type RankingStep implements Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -5332,6 +5361,9 @@ interface SSOConfiguration {
 
   # Does this configuration is enabled?
   enabled: Boolean!
+
+  # Profile URL on the SSO side.
+  profileUrl: URI
 }
 
 # A section
@@ -5514,7 +5546,7 @@ type Selection {
 type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -6044,7 +6076,7 @@ enum StatusColor {
 interface Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange
+  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -6428,6 +6460,30 @@ input UpdateProjectDistrictInput {
 
   # The background style attached to this district.
   background: BackgroundStyleInput
+}
+
+input UpdateProjectInput {
+  # The project's ID
+  id: ID!
+
+  # The project's title
+  title: String!
+
+  # The project's authors
+  authors: [ID!]!
+
+  # The project's opinion term
+  opinionTerm: Int!
+
+  # The project's type
+  projectType: String
+  clientMutationId: String
+}
+
+type UpdateProjectPayload {
+  # The created project
+  project: Project
+  clientMutationId: String
 }
 
 input UpdateProposalFormInput {
