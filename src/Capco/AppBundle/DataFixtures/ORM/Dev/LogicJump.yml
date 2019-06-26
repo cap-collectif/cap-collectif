@@ -84,6 +84,36 @@ Capco\AppBundle\Entity\LogicJump:
     origin: '@ljMultipleQuestionCheckbox'
     destination: '@ljMultipleQuestionRanking'
     conditions: ['@ljconditionCheckbox']
+  logicjumpAlwaysHapCreationToHapGood:
+    id: logicjumpAlwaysHapCreationToHapGood
+    always: true
+    origin: '@multiplequestionHapCreation'
+    destination: '@multiplequestionIsHapGood'
+  logicjumpAlwaysNoelFeteToNoelColor:
+    id: logicjumpAlwaysNoelFeteToNoelColor
+    always: true
+    origin: '@multiplequestionNoelFete'
+    destination: '@multiplequestionNoelHatColor'
+  logicjumpAlwaysSupermanToBatman:
+    id: logicjumpAlwaysSupermanToBatman
+    always: true
+    origin: '@multiplequestionDcSupermanLike'
+    destination: '@multiplequestionDcBatmanLike'
+  logicjumpAlwaysBatmanToSupergirl:
+    id: logicjumpAlwaysBatmanToSupergirl
+    always: true
+    origin: '@multiplequestionDcBatmanLike'
+    destination: '@multiplequestionDcSupergirlLike'
+  logicjumpAlwaysIronManToLukeCage:
+    id: logicjumpAlwaysIronManToLukeCage
+    always: true
+    origin: '@multiplequestionMarvelIronManLike'
+    destination: '@multiplequestionMarvelLukeCageLike'
+  logicjumpAlwaysLukeCageToThor:
+    id: logicjumpAlwaysLukeCageToThor
+    always: true
+    origin: '@multiplequestionMarvelLukeCageLike'
+    destination: '@multiplequestionMarvelThorLike'
   logicjump1ProposalForm15:
     id: logicjump1ProposalForm15
     always: false
