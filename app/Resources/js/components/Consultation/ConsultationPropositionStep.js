@@ -6,10 +6,10 @@ import DatesInterval from '../Utils/DatesInterval';
 import RemainingTime from '../Utils/RemainingTime';
 import StepInfos from '../Steps/Page/StepInfos';
 import SectionRecursiveList from './SectionRecursiveList';
-import type { ConsultationPropositionsStep_consultationStep } from '~relay/ConsultationPropositionsStep_consultationStep.graphql';
+import type { ConsultationPropositionStep_consultationStep } from '~relay/ConsultationPropositionStep_consultationStep.graphql';
 
 type RelayProps = {|
-  +consultationStep: ConsultationPropositionsStep_consultationStep,
+  +consultationStep: ConsultationPropositionStep_consultationStep,
 |};
 
 type Props = {|
@@ -18,7 +18,7 @@ type Props = {|
   +showConsultationPlan: boolean,
 |};
 
-const ConsultationPropositionsStep = (props: Props) => {
+export const ConsultationPropositionStep = (props: Props) => {
   const { consultationPlanEnabled, showConsultationPlan, consultationStep: step } = props;
 
   return (
@@ -66,9 +66,9 @@ const ConsultationPropositionsStep = (props: Props) => {
   );
 };
 
-export default createFragmentContainer(ConsultationPropositionsStep, {
+export default createFragmentContainer(ConsultationPropositionStep, {
   consultationStep: graphql`
-    fragment ConsultationPropositionsStep_consultationStep on ConsultationStep {
+    fragment ConsultationPropositionStep_consultationStep on ConsultationStep {
       ...StepInfos_step
       id
       timeRange {

@@ -10,7 +10,7 @@ import type {
   ConsultationPropositionBoxQueryResponse,
   ConsultationPropositionBoxQueryVariables,
 } from '~relay/ConsultationPropositionBoxQuery.graphql';
-import ConsultationPropositionsStep from './ConsultationPropositionsStep';
+import ConsultationPropositionStep from './ConsultationPropositionStep';
 
 export type OwnProps = {|
   +id: string,
@@ -99,7 +99,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
           const { consultationStep } = props;
           return (
             // $FlowFixMe
-            <ConsultationPropositionsStep
+            <ConsultationPropositionStep
               consultationPlanEnabled={consultationPlanEnabled}
               showConsultationPlan={showConsultationPlan}
               consultationStep={consultationStep}
@@ -121,7 +121,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
               $isAuthenticated: Boolean!
             ) {
               consultationStep: node(id: $consultationStepId) {
-                ...ConsultationPropositionsStep_consultationStep
+                ...ConsultationPropositionStep_consultationStep
               }
             }
           `}
