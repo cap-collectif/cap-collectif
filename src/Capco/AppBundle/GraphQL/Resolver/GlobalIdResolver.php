@@ -194,10 +194,6 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $node = $this->container->get(CommentRepository::class)->find($uuid);
-        }
-
-        if (!$node) {
             $node = $this->container->get(AbstractStepRepository::class)->find($uuid);
         }
 
