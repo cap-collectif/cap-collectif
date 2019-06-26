@@ -14,7 +14,6 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
             id
             name
             enabled
-            profileUrl
             ... on Oauth2SSOConfiguration {
               clientId
               secret
@@ -40,15 +39,14 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
           {
             "node": {
               "id": "RXZlbnQ6c3NvT2F1dGgy",
-              "name": "Cap collectif Oauth2 Provider",
+              "name": "Oauth2 Provider",
               "enabled": true,
-              "clientId": "account",
-              "secret": "***REMOVED***",
-              "authorizationUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/auth",
-              "accessTokenUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/token",
-              "userInfoUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
-              "logoutUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
-              "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account"
+              "clientId": "clientId",
+              "secret": "SecretKey",
+              "authorizationUrl": "https://localhost:8888/authorization",
+              "accessTokenUrl": "https://localhost:8888/token",
+              "userInfoUrl": "https://localhost:8888/user",
+              "logoutUrl": "https://localhost:8888/logout"
             }
           }
         ]

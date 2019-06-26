@@ -17,7 +17,6 @@ exports[`<Navbar /> should render correctly 1`] = `
         >
           <img
             alt="cap-collectif.com"
-            onLoad={[Function]}
             src="Navbar-logo.png"
           />
         </a>
@@ -27,6 +26,13 @@ exports[`<Navbar /> should render correctly 1`] = `
       expanded={false}
       onClick={[Function]}
     />
+    <styles__NavigationContentDesktop>
+      <styles__NavigationContentRight>
+        <div
+          id="content-contentRight"
+        />
+      </styles__NavigationContentRight>
+    </styles__NavigationContentDesktop>
   </styles__NavigationContainer>
 </Fragment>
 `;

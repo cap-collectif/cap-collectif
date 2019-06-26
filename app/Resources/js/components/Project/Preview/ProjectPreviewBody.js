@@ -20,8 +20,8 @@ type Props = {
 
 const getStepsFilter = (project: ProjectPreviewBody_project) => {
   const projectStep = project.steps.slice(0).sort((a, b) => {
-    const dateA = a.timeRange.startAt ? new Date(a.timeRange.startAt) : 0;
-    const dateB = b.timeRange.startAt ? new Date(b.timeRange.startAt) : 0;
+    const dateA = a.timeRange && a.timeRange.startAt ? new Date(a.timeRange.startAt) : 0;
+    const dateB = b.timeRange && b.timeRange.startAt ? new Date(b.timeRange.startAt) : 0;
     return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
   });
   const stepClosed = projectStep.filter(step => step.status === 'CLOSED');
@@ -102,7 +102,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
   };
 
   getStartDate = (step: Object) => {
-    if (step.timeRange.startAt) {
+    if (step.timeRange && step.timeRange.startAt) {
       const startAtDate = moment(step.timeRange.startAt).toDate();
       const startDay = (
         <FormattedDate value={startAtDate} day="numeric" month="long" year="numeric" />
@@ -210,7 +210,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
           {actualStep &&
             actualStep.status === 'OPENED' &&
             !actualStep.timeless &&
-            actualStep.timeRange.endAt &&
+            (actualStep.timeRange && actualStep.timeRange.endAt) &&
             this.actualStepIsParticipative() && (
               <RemainingTime endAt={actualStep.timeRange.endAt} />
             )}

@@ -3,6 +3,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project1'
     title: Croissance, innovation, disruption
     projectType: '@projectType3'
+    Author: '@user4'
     Cover: '@MediaProject1'
     video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
     themes: ['@theme1', '@theme2']
@@ -16,6 +17,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project2'
     title: Stratégie technologique de l'Etat et services publics
     projectType: '@projectType2'
+    Author: '@user4'
     Cover: '@MediaProject2'
     themes: ['@theme1', '@theme3']
     publishedAt: <(new \DateTime('now - 2 days'))>
@@ -24,6 +26,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project3'
     title: Transformation numérique des relations
     projectType: '@projectType3'
+    Author: '@user4'
     themes: ['@theme2', '@theme3']
     visibility: 2
     publishedAt: <(new \DateTime('now - 4 days'))>
@@ -31,6 +34,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project4'
     title: Projet vide
     projectType: '@projectType2'
+    Author: '@user4'
     themes: ['@theme2', '@theme3']
     publishedAt: <(new \DateTime('now - 6 days'))>
     visibility: 2
@@ -38,6 +42,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project5'
     title: Projet de loi Renseignement
     projectType: '@projectType2'
+    Author: '@user2'
     Cover: '@MediaProject1'
     video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
     themes: ['@theme1', '@theme3']
@@ -50,6 +55,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project6'
     title: Budget Participatif Rennes
     projectType: '@projectType4'
+    Author: '@user502'
     themes: ['@theme3']
     exportable: true
     publishedAt: <(new \DateTime('now - 10 days'))>
@@ -59,6 +65,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project7'
     title: Dépot avec selection vote budget
     projectType: '@projectType4'
+    Author: '@user4'
     themes: ['@theme3']
     exportable: true
     publishedAt: <(new \DateTime('now - 12 days'))>
@@ -67,6 +74,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project8'
     title: Projet avec questionnaire
     projectType: '@projectType7'
+    Author: '@user502'
     themes: ['@theme3']
     exportable: true
     publishedAt: <(new \DateTime('now - 14 days'))>
@@ -75,6 +83,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project9'
     title: Appel à projets
     projectType: '@projectType1'
+    Author: '@user1'
     themes: []
     exportable: true
     publishedAt: <(new \DateTime('now - 16 days'))>
@@ -83,6 +92,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project10'
     title: Dépôt avec selection vote simple
     projectType: '@projectType4'
+    Author: '@user4'
     themes: ['@theme3']
     exportable: true
     publishedAt: <(new \DateTime('now - 18 days'))>
@@ -91,6 +101,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project11'
     title: Budget avec vote limité
     projectType: '@projectType4'
+    Author: '@user4'
     exportable: true
     publishedAt: <(new \DateTime('now - 20 days'))>
     visibility: 2
@@ -98,6 +109,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project12'
     title: Projet sans étapes participatives
     projectType: '@projectType2'
+    Author: '@user4'
     Cover: '@MediaProject4'
     themes: ['@theme2']
     exportable: true
@@ -107,6 +119,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project13'
     title: Projet avec une étape de participation en continue
     projectType: '@projectType4'
+    Author: '@user3'
     themes: ['@theme1']
     exportable: true
     publishedAt: <(new \DateTime('now - 24 days'))>
@@ -115,6 +128,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project14'
     title: Projet à venir
     projectType: '@projectType2'
+    Author: '@user4'
     themes: ['@theme1']
     exportable: true
     publishedAt: <(new \DateTime('now - 26 days'))>
@@ -123,6 +137,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project15'
     title: BP avec vote classement
     projectType: '@projectType4'
+    Author: '@user4'
     themes: []
     exportable: true
     publishedAt: <(new \DateTime('now - 28 days'))>
@@ -131,6 +146,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project16'
     title: Le P16 un projet à base de riz
     projectType: '@projectType4'
+    Author: '@user4'
     themes: ['@theme3']
     exportable: true
     publishedAt: <(new \DateTime('now - 30 days'))>
@@ -139,6 +155,7 @@ Capco\AppBundle\Entity\Project:
     id: 'ProjectAccessibleForMeOnly'
     title: Project pour La Force (visible par mauriau seulement)
     projectType: '@projectType4'
+    Author: '@user516'
     themes: ['@theme3']
     exportable: true
     publishedAt: <(new \DateTime('now - 32 days'))>
@@ -147,6 +164,7 @@ Capco\AppBundle\Entity\Project:
     id: 'ProjectAccessibleForAdminOnly'
     title: Qui doit conquérir le monde ? | Visible par les admins seulement
     projectType: '@projectType2'
+    Author: '@user516'
     themes: ['@theme2']
     exportable: true
     publishedAt: <(new \DateTime('now - 34 days'))>
@@ -155,6 +173,7 @@ Capco\AppBundle\Entity\Project:
     id: 'ProjectAccessibleForMeOnlyByAdmin'
     title: Project pour la création de la capCoBeer (visible par admin seulement)
     projectType: '@projectType4'
+    Author: '@user4'
     themes: ['@theme3']
     exportable: true
     publishedAt: <(new \DateTime('now - 36 days'))>
@@ -163,6 +182,7 @@ Capco\AppBundle\Entity\Project:
     id: 'ProjectWithCustomAccess'
     title: Un avenir meilleur pour les nains de jardins (custom access)
     projectType: '@projectType7'
+    Author: '@user4'
     themes: ['@theme2']
     exportable: true
     publishedAt: <(new \DateTime('now - 38 days'))>
@@ -172,6 +192,7 @@ Capco\AppBundle\Entity\Project:
     id: 'project21'
     title: Questions/Responses
     projectType: '@projectType4'
+    Author: '@user4'
     themes: []
     exportable: true
     publishedAt: <(new \DateTime('now - 40 days'))>
@@ -180,6 +201,7 @@ Capco\AppBundle\Entity\Project:
     id: 'externalProject'
     title: Projet externe
     projectType: '@projectType4'
+    Author: '@user4'
     themes: []
     exportable: true
     publishedAt: <(new \DateTime('now - 40 days'))>
@@ -193,6 +215,7 @@ Capco\AppBundle\Entity\Project:
     id: 'externalProjectWithoutCounter'
     title: Projet externe sans compteur
     projectType: '@projectType4'
+    Author: '@user4'
     themes: []
     exportable: true
     publishedAt: <(new \DateTime('now - 40 days'))>

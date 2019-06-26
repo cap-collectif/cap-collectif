@@ -50,12 +50,11 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->leftJoin('pa.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
-            ->leftJoin('p.authors', 'authors')
             ->orWhere(
                 $query
                     ->expr()
                     ->andX(
-                        $query->expr()->eq('authors.user', ':author'),
+                        $query->expr()->eq('p.Author', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );

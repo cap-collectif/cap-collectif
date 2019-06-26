@@ -212,14 +212,3 @@ Capco\AppBundle\Entity\OpinionType:
     sourceable: false
     consultation: '@typePJL'
     parent: '@opinionType29'
-  opinionTypeEndless:
-    id: 'opinionTypeEndless'
-    title: Première section
-    subtitle: Encore un sous titre
-    position: 1
-    color: green
-    defaultFilter: positions
-    isEnabled: false
-    versionable: false
-    sourceable: false
-    consultation: '@typeEndless'

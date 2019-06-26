@@ -220,12 +220,12 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   id="likers"
                   name="likers"
                   ariaControls="ProposalAdminNotationForm-filter-user-listbox"
-                  label={<FormattedMessage id="admin.fields.proposal.likers" />}
+                  label="Coup(s) de coeur"
                   labelClassName="control-label"
                   autoload={false}
                   clearable={false}
                   inputClassName="fake-inputClassName"
-                  placeholder={intl.formatMessage({ id: 'select-a-favorite' })}
+                  placeholder="Sélectionnez un coup de coeur"
                   multi
                 />
               </div>

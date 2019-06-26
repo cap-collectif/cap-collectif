@@ -101,7 +101,7 @@ class StepController extends Controller
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking()
-            ? $project->getFirstAuthor()->getId()
+            ? $project->getAuthor()->getId()
             : null;
 
         $nbOpinionsToDisplay = $step->getNbOpinionsToDisplay() ?? 10;
@@ -148,7 +148,7 @@ class StepController extends Controller
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking()
-            ? $project->getFirstAuthor()->getId()
+            ? $project->getAuthor()->getId()
             : null;
 
         $opinions = $this->get(OpinionRepository::class)->getEnabledByProject(
@@ -186,7 +186,7 @@ class StepController extends Controller
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking()
-            ? $project->getFirstAuthor()->getId()
+            ? $project->getAuthor()->getId()
             : null;
 
         $versions = $this->get(OpinionVersionRepository::class)->getEnabledByProject(

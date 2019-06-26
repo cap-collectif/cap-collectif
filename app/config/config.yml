@@ -67,7 +67,6 @@ parameters:
   jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
   prometheus_bearer_token: '%env(SYMFONY_PROMETHEUS_BEARER_TOKEN)%'
   mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
-  instance_name: '%env(SYMFONY_INSTANCE_NAME)%'
   #
   # This will ensure we get the same data between two fixtures loadings.
   #
@@ -109,7 +108,6 @@ parameters:
   env(SYMFONY_SENTRY_DSN): ~
   env(SYMFONY_PROMETHEUS_BEARER_TOKEN): ~
   env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
-  env(SYMFONY_INSTANCE_NAME): dev
 
 framework:
   secret: '%secret%'

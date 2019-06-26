@@ -1,4 +1,0 @@
-Capco\AppBundle\Entity\ProjectAuthor:
-  pa1:
-    user: '@user1'
-    project: '@p1'

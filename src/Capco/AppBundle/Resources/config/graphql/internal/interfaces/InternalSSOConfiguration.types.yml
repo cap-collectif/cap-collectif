@@ -13,6 +13,3 @@ InternalSSOConfiguration:
       enabled:
         description: 'Does this configuration is enabled?'
         type: 'Boolean!'
-      profileUrl:
-        type: 'URI'
-        description: 'Profile URL on the SSO side.'

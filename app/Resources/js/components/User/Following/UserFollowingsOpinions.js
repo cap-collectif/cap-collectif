@@ -34,7 +34,6 @@ export class UserFollowingsOpinions extends Component<Props, State> {
 
   render() {
     const { viewer } = this.props;
-    const { open } = this.state;
     const projectsById = {};
     viewer.followingOpinions.edges.map(edge => {
       projectsById[edge.node.project.id] = edge.node.project;
@@ -44,7 +43,7 @@ export class UserFollowingsOpinions extends Component<Props, State> {
         <h2 className="page-header">
           <FormattedMessage id="followings" />
           {Object.keys(projectsById).length > 0 ? (
-            <Collapse style={{ float: 'right' }} in={open}>
+            <Collapse style={{ float: 'right' }} in={this.state.open}>
               <Button
                 id="unfollow-all"
                 onClick={() => {
@@ -59,7 +58,7 @@ export class UserFollowingsOpinions extends Component<Props, State> {
         </h2>
         <div>
           {Object.keys(projectsById).length > 0 ? (
-            <Collapse in={open}>
+            <Collapse in={this.state.open}>
               <div id="all-projects">
                 {Object.keys(projectsById).map((project, id) => (
                   <OpinionProjectRow key={id} project={projectsById[project]} viewer={viewer} />
@@ -73,7 +72,7 @@ export class UserFollowingsOpinions extends Component<Props, State> {
           )}
         </div>
         <div>
-          <Collapse in={open}>
+          <Collapse in={!this.state.open}>
             <div>
               <FormattedMessage id="no-following" />
             </div>

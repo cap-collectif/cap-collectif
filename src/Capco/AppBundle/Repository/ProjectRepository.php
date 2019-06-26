@@ -46,11 +46,11 @@ class ProjectRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('p');
         $qb
-            ->addSelect('theme', 'cover', 'authors', 'district', 'pas', 'step')
+            ->addSelect('theme', 'cover', 'author', 'district', 'pas', 'step')
             ->leftJoin('p.themes', 'theme', 'WITH', 'theme.isEnabled = true')
             ->leftJoin('p.districts', 'district')
             ->leftJoin('p.Cover', 'cover')
-            ->leftJoin('p.authors', 'authors')
+            ->leftJoin('p.Author', 'author')
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 'step')
             ->where('p.id IN (:ids)')
@@ -65,11 +65,11 @@ class ProjectRepository extends EntityRepository
     public function getOneWithoutVisibility(string $slug): ?Project
     {
         $qb = $this->createQueryBuilder('p')
-            ->addSelect('theme', 'cover', 'authors', 'district', 'pas', 'step')
+            ->addSelect('theme', 'cover', 'author', 'district', 'pas', 'step')
             ->leftJoin('p.themes', 'theme', 'WITH', 'theme.isEnabled = true')
             ->leftJoin('p.districts', 'district')
             ->leftJoin('p.Cover', 'cover')
-            ->leftJoin('p.authors', 'authors')
+            ->leftJoin('p.Author', 'author')
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 'step')
             ->andWhere('p.slug = :slug')
@@ -85,11 +85,11 @@ class ProjectRepository extends EntityRepository
     public function getByUser(User $user, $viewer = null)
     {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
-            ->addSelect('a', 'u', 't')
+            ->addSelect('a', 'm', 't')
+            ->leftJoin('p.Author', 'a')
+            ->leftJoin('a.media', 'm')
             ->leftJoin('p.projectType', 't')
-            ->leftJoin('p.authors', 'a')
-            ->leftJoin('a.user', 'u')
-            ->andWhere('u = :user')
+            ->andWhere('p.Author = :user')
             ->setParameter('user', $user)
             ->orderBy('p.updatedAt', 'DESC');
 
@@ -99,11 +99,10 @@ class ProjectRepository extends EntityRepository
     public function getAuthorsId($viewer = null, $order = 'DESC'): array
     {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
-            ->addSelect('u.id')
-            ->leftJoin('p.authors', 'pa')
-            ->leftJoin('pa.user', 'u')
-            ->groupBy('u.id')
-            ->orderBy('u.createdAt', $order);
+            ->select('a.id')
+            ->leftJoin('p.Author', 'a')
+            ->groupBy('a.id')
+            ->orderBy('a.createdAt', $order);
 
         return $qb->getQuery()->execute();
     }
@@ -220,11 +219,10 @@ class ProjectRepository extends EntityRepository
         $visibility = $this->getVisibilityForViewer($viewer);
 
         $qb = $this->createQueryBuilder('p')
-            ->addSelect('authors')
-            ->leftJoin('p.authors', 'authors')
             ->leftJoin('p.restrictedViewerGroups', 'pvg')
             ->orWhere('p.visibility IN (:visibility)')
             ->setParameter('visibility', $visibility);
+
         // https://github.com/cap-collectif/platform/pull/5877#discussion_r213009730
         /** @var User $viewer */
         $viewerGroups = $viewer && \is_object($viewer) ? $viewer->getUserGroupIds() : [];
@@ -247,11 +245,11 @@ class ProjectRepository extends EntityRepository
                     ->expr()
                     ->andX(
                         $qb->expr()->eq('p.visibility', ':me'),
-                        $qb->expr()->eq('authors.user', ':viewer')
+                        $qb->expr()->eq('p.Author', ':author')
                     )
             );
             $qb->setParameter('me', ProjectVisibilityMode::VISIBILITY_ME);
-            $qb->setParameter('viewer', $viewer);
+            $qb->setParameter('author', $viewer);
         }
 
         return $qb;

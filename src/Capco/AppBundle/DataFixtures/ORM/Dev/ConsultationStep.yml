@@ -45,11 +45,3 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     opinionCount: 0
     moderatingOnCreate: true
     moderatingOnUpdate: true
-  cstep6:
-    id: 'cstep6'
-    title: 'Étape participation continue'
-    label: Consultation
-    isEnabled: true
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    opinionCount: 0
-    timeless: true

@@ -14,12 +14,7 @@ exports[`<GroupAdminAddUsersForm /> render correctly 1`] = `
       debounce={false}
       id="group-users-users"
       inputClassName="fake-inputClassName"
-      label={
-        <FormattedMessage
-          id="group.admin.form.users"
-          values={Object {}}
-        />
-      }
+      label="group.admin.form.users"
       labelClassName="control-label"
       multi={true}
       name="users"

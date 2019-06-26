@@ -97,11 +97,11 @@ export class LoginOverlay extends React.Component<Props> {
 
 const mapStateToProps = state => ({
   user: state.user.user,
-  showRegistrationButton: state.default.features.registration,
+  showRegistrationButton: state.default.features.registration || false,
   isLoginOrRegistrationModalOpen:
     state.user.showLoginModal || state.user.showRegistrationModal || false,
-  loginWithMonCompteParis: state.default.features.login_paris,
-  loginWithOpenId: state.default.features.login_openid,
+  loginWithMonCompteParis: state.default.features.login_paris || false,
+  loginWithOpenId: state.default.features.login_openid || false,
 });
 
 const mapDispatchToProps = dispatch => ({

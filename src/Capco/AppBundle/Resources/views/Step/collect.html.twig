@@ -9,7 +9,7 @@
         'title':       title,
         'type':        'project',
         'image':       image,
-        'author':      is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.authors[0].user.slug}) : null,
+        'author':      is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.Author.slug}) : null,
         'description': currentStep.metaDescription|striptags ?: currentStep.body|striptags|truncate(250, true),
         'url':         url('app_project_show_collect', {'projectSlug': project.slug, 'stepSlug': currentStep.slug})
     } only %}

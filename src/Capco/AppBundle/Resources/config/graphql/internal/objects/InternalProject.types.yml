@@ -23,9 +23,8 @@ InternalProject:
       steps:
         type: '[Step!]!'
         resolve: '@=value.getRealSteps()'
-      authors:
-        type: '[InternalUser!]!'
-        resolve: '@=value.getUserAuthors()'
+      author:
+        type: 'InternalUser!'
       video:
         type: 'String'
       cover:
@@ -91,6 +90,3 @@ InternalProject:
       externalLink:
         type: 'URI'
         description: 'Link of external project'
-      opinionTerm:
-        type: 'Int!'
-        description: 'Opinion term of the project'

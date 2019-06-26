@@ -57,14 +57,8 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
                 $object
             );
             $data['eventCount'] = $this->eventRepository->countByProject($object->getId());
-            $data['authors'] = [];
-            foreach ($object->getAuthors() as $projectAuthor) {
-                $data['authors'][] = $this->normalizer->normalize(
-                    $projectAuthor->getUser(),
-                    $format,
-                    $context
-                );
-            }
+
+            return $data;
         }
 
         $links = [

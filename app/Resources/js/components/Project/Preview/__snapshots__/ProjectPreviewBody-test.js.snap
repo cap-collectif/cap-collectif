@@ -438,10 +438,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "steps": Array [
             Object {
               "status": "CLOSED",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
+              "timeRange": null,
               "timeless": null,
               "title": "Closed step",
               "type": null,
@@ -471,10 +468,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             Object {
               "status": "FUTURE",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
+              "timeRange": null,
               "timeless": null,
               "title": "Future step",
               "type": null,
@@ -542,10 +536,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "steps": Array [
             Object {
               "status": "CLOSED",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
+              "timeRange": null,
               "timeless": null,
               "title": "Closed step",
               "type": null,
@@ -575,10 +566,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             Object {
               "status": "FUTURE",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
+              "timeRange": null,
               "timeless": null,
               "title": "Future step",
               "type": null,
@@ -617,10 +605,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "steps": Array [
           Object {
             "status": "CLOSED",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": null,
-            },
+            "timeRange": null,
             "timeless": null,
             "title": "Closed step",
             "type": null,
@@ -650,10 +635,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           },
           Object {
             "status": "FUTURE",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": null,
-            },
+            "timeRange": null,
             "timeless": null,
             "title": "Future step",
             "type": null,
@@ -703,10 +685,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "steps": Array [
             Object {
               "status": "CLOSED",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
+              "timeRange": null,
               "timeless": null,
               "title": "Closed step",
               "type": null,
@@ -736,10 +715,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             Object {
               "status": "FUTURE",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
+              "timeRange": null,
               "timeless": null,
               "title": "Future step",
               "type": null,
@@ -835,10 +811,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "steps": Array [
             Object {
               "status": "CLOSED",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
+              "timeRange": null,
               "timeless": null,
               "title": "Closed step",
               "type": null,
@@ -868,10 +841,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             Object {
               "status": "FUTURE",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
+              "timeRange": null,
               "timeless": null,
               "title": "Future step",
               "type": null,
@@ -910,10 +880,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "steps": Array [
           Object {
             "status": "CLOSED",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": null,
-            },
+            "timeRange": null,
             "timeless": null,
             "title": "Closed step",
             "type": null,
@@ -943,10 +910,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           },
           Object {
             "status": "FUTURE",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": null,
-            },
+            "timeRange": null,
             "timeless": null,
             "title": "Future step",
             "type": null,
@@ -996,10 +960,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "steps": Array [
             Object {
               "status": "CLOSED",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
+              "timeRange": null,
               "timeless": null,
               "title": "Closed step",
               "type": null,
@@ -1018,10 +979,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             Object {
               "status": "OPENED",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
+              "timeRange": null,
               "timeless": true,
               "title": "timeless step",
               "type": "collect",
@@ -1029,10 +987,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             },
             Object {
               "status": "FUTURE",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
+              "timeRange": null,
               "timeless": null,
               "title": "Future step",
               "type": null,
@@ -1093,10 +1048,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     actualStep={
       Object {
         "status": "OPENED",
-        "timeRange": Object {
-          "endAt": null,
-          "startAt": null,
-        },
+        "timeRange": null,
         "timeless": true,
         "title": "timeless step",
         "type": "collect",
@@ -1115,10 +1067,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "steps": Array [
           Object {
             "status": "CLOSED",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": null,
-            },
+            "timeRange": null,
             "timeless": null,
             "title": "Closed step",
             "type": null,
@@ -1137,10 +1086,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           },
           Object {
             "status": "OPENED",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": null,
-            },
+            "timeRange": null,
             "timeless": true,
             "title": "timeless step",
             "type": "collect",
@@ -1148,10 +1094,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           },
           Object {
             "status": "FUTURE",
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": null,
-            },
+            "timeRange": null,
             "timeless": null,
             "title": "Future step",
             "type": null,

@@ -45,12 +45,11 @@ class ArgumentAdmin extends AbstractAdmin
             ->leftJoin('op.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
-            ->leftJoin('p.authors', 'authors')
             ->orWhere(
                 $query
                     ->expr()
                     ->andX(
-                        $qb->expr()->eq(':viewer', 'authors.user'),
+                        $query->expr()->eq('p.Author', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );

@@ -37,7 +37,7 @@ class Oauth2SSOConfiguration extends AbstractSSOConfiguration
     protected $userInfoUrl;
 
     /**
-     * @ORM\Column(name="logout_url", type="text", nullable=true)
+     * @ORM\Column(name="logout_url", type="text", nullable=false)
      */
     protected $logoutUrl;
 
@@ -101,12 +101,12 @@ class Oauth2SSOConfiguration extends AbstractSSOConfiguration
         return $this;
     }
 
-    public function getLogoutUrl(): ?string
+    public function getLogoutUrl(): string
     {
         return $this->logoutUrl;
     }
 
-    public function setLogoutUrl(?string $logoutUrl = null): self
+    public function setLogoutUrl(string $logoutUrl): self
     {
         $this->logoutUrl = $logoutUrl;
 

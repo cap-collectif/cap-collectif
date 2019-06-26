@@ -88,12 +88,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                     debounce={true}
                     id="EventListFilters-filter-authors"
                     inputClassName="fake-inputClassName"
-                    label={
-                      <FormattedMessage
-                        id="project_download.label.author"
-                        values={Object {}}
-                      />
-                    }
+                    label="project_download.label.author"
                     labelClassName="control-label"
                     multi={false}
                     name="author"
@@ -315,12 +310,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                     debounce={true}
                     id="EventListFilters-filter-authors"
                     inputClassName="fake-inputClassName"
-                    label={
-                      <FormattedMessage
-                        id="project_download.label.author"
-                        values={Object {}}
-                      />
-                    }
+                    label="project_download.label.author"
                     labelClassName="control-label"
                     multi={false}
                     name="author"

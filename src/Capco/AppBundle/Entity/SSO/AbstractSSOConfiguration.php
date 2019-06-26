@@ -25,11 +25,6 @@ abstract class AbstractSSOConfiguration
      */
     protected $name;
 
-    /**
-     * @ORM\Column(name="profile_url", type="text", nullable=true)
-     */
-    protected $profileUrl;
-
     public function getName(): string
     {
         return $this->name;
@@ -40,16 +35,6 @@ abstract class AbstractSSOConfiguration
         $this->name = $name;
 
         return $this;
-    }
-
-    public function getProfileUrl(): ?string
-    {
-        return $this->profileUrl;
-    }
-
-    public function setProfileUrl(?string $profileUrl = null): void
-    {
-        $this->profileUrl = $profileUrl;
     }
 
     public function getKind(): string

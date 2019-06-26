@@ -1,28 +1,26 @@
 <?php
-
 namespace spec\Capco\AppBundle\Traits;
 
-use PhpSpec\ObjectBehavior;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Doctrine\Common\Collections\ArrayCollection;
+use Capco\UserBundle\Entity\User;
+use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Traits\ProjectVisibilityStub;
 
 class ProjectVisibilityStubSpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
         $this->beConstructedWith();
         // use anonymous class ?
         $this->beAnInstanceOf(ProjectVisibilityStub::class);
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType(ProjectVisibilityStub::class);
     }
 
-    public function it_is_visible_all(User $viewer, User $author)
+    function it_is_visible_all(User $viewer, User $author)
     {
         $this->setVisibility(ProjectVisibilityMode::VISIBILITY_PUBLIC);
         $this->getVisibility()->shouldReturn(ProjectVisibilityMode::VISIBILITY_PUBLIC);
@@ -39,15 +37,14 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
         $author->hasRole('ROLE_SUPER_ADMIN')->willReturn(false);
         $author->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN']);
 
-        $authors = new ArrayCollection([$author]);
-        $this->setAuthors($authors);
-        $this->getAuthors()->shouldReturn($authors);
+        $this->setAuthor($author);
+        $this->getAuthor()->shouldReturn($author);
 
         $this->getVisibilityForViewer($viewer)->shouldReturn([2]);
         $this->getVisibilityForViewer(null)->shouldReturn([2]);
     }
 
-    public function it_is_visible_for_admin_only(User $viewer, User $author)
+    function it_is_visible_for_admin_only(User $viewer, User $author)
     {
         $this->setVisibility(ProjectVisibilityMode::VISIBILITY_ADMIN);
         $this->getVisibility()->shouldReturn(ProjectVisibilityMode::VISIBILITY_ADMIN);
@@ -64,9 +61,8 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
         $author->hasRole('ROLE_SUPER_ADMIN')->willReturn(false);
         $author->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN']);
 
-        $authors = new ArrayCollection([$author]);
-        $this->setAuthors($authors);
-        $this->getAuthors()->shouldReturn($authors);
+        $this->setAuthor($author);
+        $this->getAuthor()->shouldReturn($author);
 
         $this->getVisibilityForViewer($viewer)->shouldReturn([2]);
         $this->getVisibilityForViewer(null)->shouldReturn([2]);
@@ -80,7 +76,7 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
         $this->getVisibilityForViewer($viewer)->shouldReturn([2, 0, 1, 3]);
     }
 
-    public function it_is_visible_for_me_only(User $viewer, User $author)
+    function it_is_visible_for_me_only(User $viewer, User $author)
     {
         $this->setVisibility(ProjectVisibilityMode::VISIBILITY_ME);
         $this->getVisibility()->shouldReturn(ProjectVisibilityMode::VISIBILITY_ME);
@@ -97,9 +93,8 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
         $author->hasRole('ROLE_SUPER_ADMIN')->willReturn(false);
         $author->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN']);
 
-        $authors = new ArrayCollection([$author]);
-        $this->setAuthors($authors);
-        $this->getAuthors()->shouldReturn($authors);
+        $this->setAuthor($author);
+        $this->getAuthor()->shouldReturn($author);
 
         $this->getVisibilityForViewer($author)->shouldReturn([2, 1]);
         $this->getVisibilityForViewer($viewer)->shouldReturn([2]);

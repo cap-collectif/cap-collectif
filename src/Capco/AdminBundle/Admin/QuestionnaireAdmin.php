@@ -58,12 +58,11 @@ class QuestionnaireAdmin extends CapcoAdmin
             ->leftJoin($query->getRootAliases()[0] . '.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
-            ->leftJoin('p.authors', 'authors')
             ->orWhere(
                 $query
                     ->expr()
                     ->andX(
-                        $query->expr()->eq('authors.user', ':author'),
+                        $query->expr()->eq('p.Author', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );
@@ -99,7 +98,7 @@ class QuestionnaireAdmin extends CapcoAdmin
             ->addIdentifier('title', null, ['label' => 'admin.fields.questionnaire.title'])
             ->add('updatedAt', null, ['label' => 'admin.fields.questionnaire.updated_at'])
             ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []]
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }
 

@@ -113,9 +113,8 @@ class renderSelect extends React.Component<Props> {
         options && options.filter(option => option && option.value && option.value === value);
       selectValue = value ? selectLabel && selectLabel[0] : null;
     }
-
     return (
-      <div className={`form-group ${touched && error ? ' has-error' : ''}`}>
+      <div className="form-group">
         {label && (
           <label htmlFor={id} className={labelClassName || 'control-label'}>
             {label}
@@ -194,11 +193,7 @@ class renderSelect extends React.Component<Props> {
               }}
             />
           )}
-          {touched && error && (
-            <span className="error-block">
-              <FormattedMessage id={error} />
-            </span>
-          )}
+          {touched && error}
         </div>
       </div>
     );

@@ -12,15 +12,7 @@ Scenario: Can create an opinion of contribuable type in opened project
     | opinion_title | Titre                           |
     | opinion_body  | Description de ma proposition   |
   And I press "confirm-opinion-create"
-  And I wait 2 seconds
   Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/titre"
-  
-Scenario: Can see opinions in project with endless participation
-  Given I am logged in as admin
-  And I visited "consultation page" with:
-    | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
-    | stepSlug    | etape-participation-continue                                         |
-  Then I should see "Étape participation continue"
 
 @read-only @randomly-failing
 Scenario: An anonymous can paginate opinions inside a section

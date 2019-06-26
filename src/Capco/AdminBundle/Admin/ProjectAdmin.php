@@ -2,21 +2,21 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Doctrine\ORM\QueryBuilder;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Toggle\Manager;
-use Sonata\CoreBundle\Model\Metadata;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Toggle\Manager;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\CoreBundle\Model\Metadata;
+use Sonata\CoreBundle\Validator\ErrorElement;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Required;
@@ -43,7 +43,7 @@ final class ProjectAdmin extends CapcoAdmin
 
     public function validate(ErrorElement $errorElement, $object)
     {
-        if (empty($object->getAuthors())) {
+        if (empty($object->getAuthor())) {
             $errorElement
                 ->with('Author')
                 ->addConstraint(new Required())
@@ -102,16 +102,14 @@ final class ProjectAdmin extends CapcoAdmin
 
         /** @var QueryBuilder $query */
         $query = parent::createQuery($context);
-        $query
-            ->leftJoin($query->getRootAliases()[0] . '.authors', 'authors')
-            ->andWhere(
-                $query
-                    ->expr()
-                    ->andX(
-                        $query->expr()->eq('authors.user', ':author'),
-                        $query->expr()->eq($query->getRootAliases()[0] . '.visibility', 0)
-                    )
-            );
+        $query->andWhere(
+            $query
+                ->expr()
+                ->andX(
+                    $query->expr()->eq($query->getRootAliases()[0] . '.Author', ':author'),
+                    $query->expr()->eq($query->getRootAliases()[0] . '.visibility', 0)
+                )
+        );
         $query->orWhere($query->expr()->gte($query->getRootAliases()[0] . '.visibility', 1));
         $query->setParameter('author', $user);
 
@@ -124,6 +122,30 @@ final class ProjectAdmin extends CapcoAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('title', null, ['label' => 'admin.fields.project.title'])
+            ->add(
+                'Author',
+                'doctrine_orm_model_autocomplete',
+                ['label' => 'admin.fields.project.author'],
+                null,
+                [
+                    'property' => 'email,username',
+                    'to_string_callback' => function ($enitity, $property) {
+                        return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                    },
+                ]
+            );
+
+        if (
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get(Manager::class)
+                ->isActive('themes')
+        ) {
+            $datagridMapper->add('themes', null, ['label' => 'admin.fields.project.themes']);
+        }
+
+        $datagridMapper
             ->add('steps', null, ['label' => 'admin.fields.project.steps'])
             ->add('events', null, ['label' => 'admin.fields.project.events'])
             ->add('posts', null, ['label' => 'admin.fields.project.posts'])
@@ -132,19 +154,22 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('publishedAt', null, ['label' => 'admin.fields.project.published_at'])
             ->add('updatedAt', null, ['label' => 'admin.fields.project.updated_at'])
             ->add('opinionsRankingThreshold', null, [
-                'label' => 'admin.fields.project.ranking.opinions_threshold'
+                'label' => 'admin.fields.project.ranking.opinions_threshold',
             ])
             ->add('versionsRankingThreshold', null, [
-                'label' => 'admin.fields.project.ranking.versions_threshold'
+                'label' => 'admin.fields.project.ranking.versions_threshold',
             ])
             ->add('includeAuthorInRanking', null, [
-                'label' => 'admin.fields.project.ranking.include_author'
+                'label' => 'admin.fields.project.ranking.include_author',
             ]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('title', null, ['label' => 'admin.fields.project.title']);
+        $listMapper
+            ->addIdentifier('title', null, ['label' => 'admin.fields.project.title'])
+            ->add('Author', 'sonata_type_model', ['label' => 'admin.fields.project.author']);
+
         if (
             $this->getConfigurationPool()
                 ->getContainer()
@@ -159,25 +184,25 @@ final class ProjectAdmin extends CapcoAdmin
                 'template' => 'CapcoAdminBundle:Project:visibility_list_field.html.twig',
                 'choices' => ProjectVisibilityMode::REVERSE_KEY_VISIBILITY,
                 'label' => 'project-access',
-                'catalogue' => 'CapcoAppBundle'
+                'catalogue' => 'CapcoAppBundle',
             ])
             ->add('exportable', null, [
                 'editable' => true,
-                'label' => 'admin.fields.project.exportable'
+                'label' => 'admin.fields.project.exportable',
             ])
             ->add('publishedAt', null, ['label' => 'admin.fields.project.published_at'])
             ->add('_action', 'actions', [
                 'actions' => [
                     'display' => [
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_display.html.twig'
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_display.html.twig',
                     ],
                     'download' => [
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig'
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
                     ],
                     'delete' => [
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig'
-                    ]
-                ]
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig',
+                    ],
+                ],
             ]);
     }
 
@@ -192,6 +217,8 @@ final class ProjectAdmin extends CapcoAdmin
             ->getToken()
             ->getUser();
 
+        // Content
+        $formMapper->with('admin.fields.project.group_content', ['class' => 'col-md-12'])->end();
         if (
             $this->getConfigurationPool()
                 ->getContainer()
@@ -215,6 +242,29 @@ final class ProjectAdmin extends CapcoAdmin
             ->end()
             ->with('group.admin.parameters', ['class' => 'col-md-6'])
             ->end();
+        // Content
+        $formMapper
+            ->with('admin.fields.project.group_content')
+            ->add('title', null, ['label' => 'admin.fields.project.title'])
+            ->add('projectType', 'sonata_type_model', [
+                'label' => 'admin.fields.project.type.title',
+                'required' => false,
+                'attr' => ['placeholder' => 'admin.help.project.type'],
+                'choices_as_values' => true,
+            ])
+            ->add('Author', 'sonata_type_model_autocomplete', [
+                'label' => 'admin.fields.project.author',
+                'property' => 'username,email',
+                'to_string_callback' => function ($enitity, $property) {
+                    return $enitity->getEmail() . ' - ' . $enitity->getUsername();
+                },
+                'required' => true,
+            ])
+            ->add('opinionTerm', 'choice', [
+                'label' => 'admin.fields.project.opinion_term',
+                'choices' => Project::$opinionTermsLabels,
+                'translation_domain' => 'CapcoAppBundle',
+            ]);
 
         if (
             $this->getConfigurationPool()
@@ -228,23 +278,23 @@ final class ProjectAdmin extends CapcoAdmin
                 ->with('admin.fields.project.group_external')
                 ->add('isExternal', CheckboxType::class, [
                     'label' => 'external-project',
-                    'required' => false
+                    'required' => false,
                 ])
                 ->add('externalLink', UrlType::class, [
                     'label' => 'admin.fields.project.externalLink',
-                    'required' => false
+                    'required' => false,
                 ])
                 ->add('externalParticipantsCount', NumberType::class, [
                     'label' => 'admin.fields.project.participantsCount',
-                    'required' => false
+                    'required' => false,
                 ])
                 ->add('externalContributionsCount', NumberType::class, [
                     'label' => 'admin.fields.project.contributionsCount',
-                    'required' => false
+                    'required' => false,
                 ])
                 ->add('externalVotesCount', NumberType::class, [
                     'label' => 'admin.fields.project.votesCount',
-                    'required' => false
+                    'required' => false,
                 ]);
         }
 
@@ -255,7 +305,7 @@ final class ProjectAdmin extends CapcoAdmin
                 'label' => 'admin.fields.project.published_at',
                 'required' => true,
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm']
+                'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm'],
             ]);
 
         if (
@@ -269,7 +319,7 @@ final class ProjectAdmin extends CapcoAdmin
                 'required' => false,
                 'multiple' => true,
                 'by_reference' => false,
-                'choices_as_values' => true
+                'choices_as_values' => true,
             ]);
         }
 
@@ -284,8 +334,8 @@ final class ProjectAdmin extends CapcoAdmin
                     'link_parameters' => [
                         'context' => 'default',
                         'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image'
-                    ]
+                        'provider' => 'sonata.media.provider.image',
+                    ],
                 ]
             )
             ->add(
@@ -294,26 +344,26 @@ final class ProjectAdmin extends CapcoAdmin
                 [
                     'label' => 'admin.fields.project.video',
                     'required' => false,
-                    'help' => 'admin.help.project.video'
+                    'help' => 'admin.help.project.video',
                 ],
                 ['link_parameters' => ['context' => 'project']]
             )
             ->add('districts', null, [
-                'label' => 'proposal_form.districts'
+                'label' => 'proposal_form.districts',
             ])
             ->end()
             ->with('admin.fields.project.group_ranking')
             ->add('opinionsRankingThreshold', null, [
                 'label' => 'admin.fields.project.ranking.opinions_threshold',
-                'required' => false
+                'required' => false,
             ])
             ->add('versionsRankingThreshold', null, [
                 'label' => 'admin.fields.project.ranking.versions_threshold',
-                'required' => false
+                'required' => false,
             ])
             ->add('includeAuthorInRanking', null, [
                 'label' => 'admin.fields.project.ranking.include_author',
-                'required' => false
+                'required' => false,
             ])
             ->end()
             ->with('admin.fields.project.group_steps')
@@ -323,7 +373,7 @@ final class ProjectAdmin extends CapcoAdmin
                 [
                     'label' => 'admin.fields.project.steps',
                     'by_reference' => false,
-                    'required' => false
+                    'required' => false,
                 ],
                 ['edit' => 'inline', 'inline' => 'table', 'sortable' => 'position']
             )
@@ -339,17 +389,17 @@ final class ProjectAdmin extends CapcoAdmin
                 'required' => true,
                 'choices_as_values' => true,
                 'choice_translation_domain' => 'CapcoAppBundle',
-                'attr' => ['class' => 'project-visibility-selector']
+                'attr' => ['class' => 'project-visibility-selector'],
             ])
             ->add('restrictedViewerGroups', null, [
-                'attr' => ['class' => 'project-visibility-group-selector']
+                'attr' => ['class' => 'project-visibility-group-selector'],
             ])
             ->end()
             ->with('admin.fields.project.advanced')
             ->add('metaDescription', null, [
                 'label' => 'projects.metadescription',
                 'required' => false,
-                'help' => 'admin.help.metadescription'
+                'help' => 'admin.help.metadescription',
             ])
             ->end();
 
@@ -357,12 +407,12 @@ final class ProjectAdmin extends CapcoAdmin
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper->add('opinionCanBeFollowed', null, [
                 'label' => 'enable-proposal-tracking',
-                'required' => false
+                'required' => false,
             ]);
         }
         $formMapper->add('exportable', null, [
             'label' => 'admin.fields.project.exportable',
-            'required' => false
+            'required' => false,
         ]);
         $formMapper->end();
     }
@@ -380,9 +430,10 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
             ->add('exportable', null, ['label' => 'admin.fields.project.exportable'])
             ->add('publishedAt', null, ['label' => 'admin.fields.project.published_at'])
+            ->add('Author', null, ['label' => 'admin.fields.project.author'])
             ->add('Cover', null, [
                 'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
-                'label' => 'admin.fields.project.cover'
+                'label' => 'admin.fields.project.cover',
             ])
             ->add('video', null, ['label' => 'admin.fields.project.video']);
 
@@ -402,20 +453,20 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('createdAt', null, ['label' => 'admin.fields.project.created_at'])
             ->add('updatedAt', null, ['label' => 'admin.fields.project.updated_at'])
             ->add('opinionsRankingThreshold', null, [
-                'label' => 'admin.fields.project.ranking.opinions_threshold'
+                'label' => 'admin.fields.project.ranking.opinions_threshold',
             ])
             ->add('versionsRankingThreshold', null, [
-                'label' => 'admin.fields.project.ranking.versions_threshold'
+                'label' => 'admin.fields.project.ranking.versions_threshold',
             ])
             ->add('includeAuthorInRanking', null, [
-                'label' => 'admin.fields.project.ranking.include_author'
+                'label' => 'admin.fields.project.ranking.include_author',
             ])
             ->end();
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['batch', 'list', 'edit', 'delete', 'show']);
+        $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete', 'show']);
         $collection->add('preview', $this->getRouterIdParameter() . '/preview');
     }
 }

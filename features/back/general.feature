@@ -17,21 +17,3 @@ Scenario: Non-generated fonts can be found
   Given I am logged in as admin
   And I go to "/fonts/Nantaise-Bold.otf"
   Then I should not see "error.404"
-
-# TODO: Make E2E test specific to each page
-Scenario: Logged in admin wants to test admin project
-  Given I am logged in as admin
-  And I go to the admin project list page
-  And I should not see "error.500"
-  And I go to the admin appendix list page
-  And I should not see "error.500"
-  And I go to the admin source list page
-  And I should not see "error.500"
-  And I go to the admin consultation list page
-  And I should not see "error.500"
-  And I go to the admin project type list page
-  And I should not see "error.500"
-  And I go to the admin proposal list page
-  And I should not see "error.500"
-  And I go to the admin questionnaire list page
-  And I should not see "error.500"

@@ -312,7 +312,7 @@ class ConsultationStepExtractor
         // Contributions from consultation author are automatically published and archived
         $authorIsConsultationAuthor =
             method_exists($data, 'getAuthor') &&
-            $data->getAuthor() === $this->consultationStep->getProject()->getFirstAuthor();
+            $data->getAuthor() === $this->consultationStep->getProject()->getAuthor();
         $element->setDisplayType('contribution');
         $element->setArchived($authorIsConsultationAuthor);
         $element->setPublished($authorIsConsultationAuthor);
@@ -333,7 +333,7 @@ class ConsultationStepExtractor
             !$this->consultationStep ||
             !method_exists($data, 'getAuthor') ||
             !$this->consultationStep->getProject() ||
-            $data->getAuthor() !== $this->consultationStep->getProject()->getFirstAuthor()
+            $data->getAuthor() !== $this->consultationStep->getProject()->getAuthor()
         ) {
             $element->setArchived(false);
             $element->setPublished(false);
