@@ -158,7 +158,8 @@ class UserSearch extends Search
             ],
         ]);
 
-        // Sort by top contributors
+        // Unstable sort by top contributors.
+        // It will be used in the future for projects counters.
         // $query->setSort([
         //     'contributionsCountByStep.count' => [
         //         'order' => 'desc',
