@@ -64,7 +64,7 @@ export class LoginButton extends React.Component<Props> {
 }
 
 const mapStateToProps = state => ({
-  loginWithMonCompteParis: state.default.features.login_paris,
+  loginWithMonCompteParis: state.default.features.login_paris || false,
 });
 
 const mapDispatchToProps = dispatch => ({
