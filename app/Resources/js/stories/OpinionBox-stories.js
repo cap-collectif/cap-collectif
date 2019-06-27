@@ -25,7 +25,7 @@ import Card from '../components/Ui/Card/Card';
 import PieChart from '../components/Ui/Chart/PieChart';
 import PinnedLabel from '../components/Utils/PinnedLabel';
 
-import { UserVoteList } from './UserVoteList-stories';
+import { UserAvatarList } from '../components/User/UserAvatarList';
 import { opinion as opinionMock } from './mocks/opinions';
 import { author as authorMock } from './mocks/users';
 
@@ -239,7 +239,7 @@ const OpinionBox = ({ section, opinion }) => (
                 {/** Votes/OpinionUserVotes.js */}
                 {opinion.previewVotes.length > 0 && (
                   <div style={{ paddingTop: '20px' }}>
-                    <UserVoteList max={5} votes={opinion.previewVotes} />
+                    <UserAvatarList max={5} users={opinion.previewVotes} />
                   </div>
                 )}
               </div>
