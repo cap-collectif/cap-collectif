@@ -14,6 +14,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MembersController extends Controller
 {
+    private $userTypeRepository;
+
+    public function __construct(UserTypeRepository $userTypeRepository)
+    {
+        $this->userTypeRepository = $userTypeRepository;
+    }
+
     /**
      * @Route("/members/{page}", name="app_members", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "members_list"})
      * @Route("/members/{userType}/{page}", name="app_members_type", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "members_list"} )
@@ -55,14 +62,8 @@ class MembersController extends Controller
         $pagination = $this->get(Resolver::class)->getValue('members.pagination.size');
 
         $sort = $sort ?? 'activity';
-        $members = $this->get(UserRepository::class)->getSearchResults(
-            $pagination,
-            $page,
-            $sort,
-            $userType
-        );
         /** @var UserType $userType */
-        $userType = $this->get(UserTypeRepository::class)->findOneBySlug($userType);
+        $userType = $this->userTypeRepository->findOneBySlug($userType);
         $members = $this->get(UserSearch::class)->getRegisteredUsers(
             $pagination,
             $page,

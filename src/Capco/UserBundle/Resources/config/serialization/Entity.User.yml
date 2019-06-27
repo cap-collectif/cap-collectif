@@ -30,3 +30,5 @@ Capco\UserBundle\Entity\User:
     createdAt:
       serialized_name: createdAt
       groups: [Elasticsearch]
+    roles:
+      groups: [Elasticsearch]

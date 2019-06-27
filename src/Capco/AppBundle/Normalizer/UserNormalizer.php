@@ -61,6 +61,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                 'id' => $object->getId(),
                 'username' => $object->getUsername(),
                 'email' => $object->getEmail(),
+                'roles' => $object->getRoles(),
                 'userType' => $object->getUserType()
                     ? ['id' => $object->getUserType()->getId()]
                     : null

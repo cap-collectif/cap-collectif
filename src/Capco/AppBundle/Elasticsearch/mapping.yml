@@ -54,6 +54,7 @@ mappings:
         fields:
           std: { type: text, analyzer: capco_standard }
       biography: *text_analysis_highlighted
+      roles: { type: text }
       userType:
         type: object
         properties:

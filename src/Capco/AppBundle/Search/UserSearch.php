@@ -62,6 +62,36 @@ class UserSearch extends Search
         ];
     }
 
+    public function getAllUsers(
+        ?int $limit = null,
+        ?int $first = null,
+        bool $showSuperAdmin = false
+    ): array {
+        $boolQuery = new Query\BoolQuery();
+        if (!$showSuperAdmin) {
+            $queryString = new Query\QueryString();
+            $queryString->setQuery('ROLE_SUPER_ADMIN');
+            $queryString->setFields(['roles']);
+            $boolQuery->addMustNot($queryString);
+        }
+        $query = new Query();
+        $query->setQuery($boolQuery);
+        if ($first) {
+            $query->setFrom($first);
+        }
+
+        if ($limit) {
+            $query->setSize($limit);
+        }
+
+        $resultSet = $this->index->getType('user')->search($query);
+
+        return [
+            'results' => $this->getHydratedResults($resultSet->getResults()),
+            'totalCount' => $resultSet->getTotalHits()
+        ];
+    }
+
     public function searchAllUsers(
         $terms = null,
         ?array $notInIds = [],
