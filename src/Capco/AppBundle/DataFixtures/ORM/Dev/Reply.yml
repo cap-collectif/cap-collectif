@@ -69,6 +69,6 @@ Capco\AppBundle\Entity\Reply:
     author: '@user4'
     draft: 1
     questionnaire: '@questionnaire1'
-    publishedAt: <(new \DateTime('2016-03-09'))>
-    createdAt: <(new \DateTime('2016-03-09'))>
-    updatedAt: <(new \DateTime('2016-03-09'))>
+    publishedAt: <(new \DateTime('2016-03-22'))>
+    createdAt: <(new \DateTime('2016-03-05'))>
+    updatedAt: <(new \DateTime('2016-03-20'))>
