@@ -63,8 +63,11 @@ Capco\AppBundle\Entity\ProjectAuthor:
     user: '@user4'
     project: '@p21'
   pa22:
+    user: '@user502'
+    project: '@p21'
+  pa23:
     user: '@user4'
     project: '@p22'
-  pa23:
+  pa24:
     user: '@user4'
     project: '@p23'
