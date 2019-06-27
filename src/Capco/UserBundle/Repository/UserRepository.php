@@ -54,43 +54,6 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countAllUsers(bool $showSuperAdmin = false): int
-    {
-        $query = $this->createQueryBuilder('user')->select('COUNT(user.id)');
-
-        if ($showSuperAdmin) {
-            $query
-                ->andWhere('user.roles != :role')
-                ->setParameter('role', serialize(['ROLE_SUPER_ADMIN']));
-        }
-
-        return $query->getQuery()->getSingleScalarResult();
-    }
-
-    public function getAllUsers(
-        ?int $limit = null,
-        ?int $first = null,
-        bool $showSuperAdmin = false
-    ): Paginator {
-        $qb = $this->createQueryBuilder('user');
-
-        if ($showSuperAdmin) {
-            $qb
-                ->andWhere('user.roles != :role')
-                ->setParameter('role', serialize(['ROLE_SUPER_ADMIN']));
-        }
-
-        if ($first) {
-            $qb->setFirstResult($first);
-        }
-
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        return new Paginator($qb);
-    }
-
     public function getUsersInGroup(Group $group): array
     {
         $qb = $this->createQueryBuilder('u');

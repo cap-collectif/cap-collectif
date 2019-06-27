@@ -51,10 +51,12 @@ class UserSearch extends Search
                 'createdAt' => ['order' => 'ASC']
             ]);
         }
-        $resultSet = $this->index->getType('user')->search($query);
+
         if ($pagination > 0) {
             $query->setFrom(($page - 1) * $pagination)->setSize($pagination);
         }
+
+        $resultSet = $this->index->getType('user')->search($query);
 
         return [
             'results' => $this->getHydratedResults($resultSet->getResults()),
@@ -76,6 +78,7 @@ class UserSearch extends Search
         }
         $query = new Query();
         $query->setQuery($boolQuery);
+
         if ($first) {
             $query->setFrom($first);
         }
@@ -250,27 +253,25 @@ class UserSearch extends Search
 
     public function getAllContributors(int $offset, int $limit): array
     {
-        $nestedQuery = new Query\Nested();
-        $nestedQuery->setPath('totalContributionsCount');
-
         $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMust(new Range('totalContributionsCount.count', ['gt' => 0]));
+        $boolQuery->addMust(new Range('totalContributionsCount', ['gt' => 0]));
 
-        $nestedQuery->setQuery($boolQuery);
-
-        $query = new Query($nestedQuery);
+        $query = new Query($boolQuery);
         $query->setSort([
-            'totalContributionsCount.count' => [
+            'totalContributionsCount' => [
                 'order' => 'desc'
             ]
         ]);
 
-        $query->setFrom($offset)->setSize($limit);
+        $query
+            ->setFrom($offset)
+            ->setSize($limit)
+            ->setSource(['id']);
 
         $resultSet = $this->index->getType('user')->search($query);
 
         return [
-            'results' => $this->getHydratedResults($resultSet->getResults()),
+            'results' => $this->getHydratedResultsFromResultSet($resultSet),
             'totalCount' => $resultSet->getTotalHits()
         ];
     }
@@ -291,7 +292,6 @@ class UserSearch extends Search
                 return $result->getData()['id'];
             }, $ids);
         }
-
         // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
         $users = $this->userRepo->hydrateFromIds($ids);

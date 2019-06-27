@@ -15,10 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 class MembersController extends Controller
 {
     private $userTypeRepository;
+    private $userSearch;
 
-    public function __construct(UserTypeRepository $userTypeRepository)
+    public function __construct(UserTypeRepository $userTypeRepository, UserSearch $userSearch)
     {
         $this->userTypeRepository = $userTypeRepository;
+        $this->userSearch = $userSearch;
     }
 
     /**
@@ -54,7 +56,7 @@ class MembersController extends Controller
             }
         } else {
             $form->setData([
-                'userType' => $this->get(UserTypeRepository::class)->findOneBySlug($userType),
+                'userType' => $this->userTypeRepository->findOneBySlug($userType),
                 'sort' => $sort
             ]);
         }
@@ -62,19 +64,13 @@ class MembersController extends Controller
         $pagination = $this->get(Resolver::class)->getValue('members.pagination.size');
 
         $sort = $sort ?? 'activity';
-        /** @var UserType $userType */
         $userType = $this->userTypeRepository->findOneBySlug($userType);
-        $members = $this->get(UserSearch::class)->getRegisteredUsers(
-            $pagination,
-            $page,
-            $sort,
-            $userType
-        );
+        $members = $this->userSearch->getRegisteredUsers($pagination, $page, $sort, $userType);
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
         if (null !== $pagination && 0 !== $pagination) {
-            $nbPage = ceil(\count($members) / $pagination);
+            $nbPage = ceil($members['totalCount'] / $pagination);
         }
 
         return [

@@ -42,12 +42,15 @@ class QueryUsersResolver implements ResolverInterface
             $includeSuperAdmin,
             &$totalCount
         ) {
-            $users = $this->userSearch->getAllUsers($limit, $offset, $includeSuperAdmin)['results'];
+            $users = $this->userSearch->getAllUsers($limit, $offset, $includeSuperAdmin);
             $totalCount = $users['totalCount'];
 
-            return $users;
+            return $users['results'];
         });
 
-        return $paginator->auto($args, $totalCount);
+        $connection = $paginator->auto($args, $totalCount);
+        $connection->totalCount = $totalCount;
+
+        return $connection;
     }
 }
