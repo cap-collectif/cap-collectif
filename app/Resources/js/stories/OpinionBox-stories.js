@@ -17,7 +17,7 @@ import {
 } from 'react-bootstrap';
 
 import ListGroup from '../components/Ui/List/ListGroup';
-import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
+import { UserAvatar } from '../components/User/UserAvatar';
 import UserLink from '../components/User/UserLink';
 import InlineList from '../components/Ui/List/InlineList';
 import Media from '../components/Ui/Medias/Media/Media';
@@ -51,7 +51,7 @@ const OpinionItem = ({ item, typeLabel }) => (
   <React.Fragment>
     <Media>
       <Media.Left>
-        <UserAvatarDeprecated user={item.user} />
+        <UserAvatar user={item.user} />
       </Media.Left>
       <Media.Body className="opinion__body">
         <div className="opinion__user">
@@ -353,7 +353,7 @@ const OpinionBox = ({ section, opinion }) => (
         <div>
           {opinion.answer.author ? (
             <div className="media media--user-thumbnail" style={{ marginBottom: '10px' }}>
-              <UserAvatarDeprecated className="pull-left" user={opinion.answer.author} />
+              <UserAvatar className="pull-left" user={opinion.answer.author} />
               <div className="media-body">
                 <p className="media-heading media--macro__user" style={{ marginBottom: '0' }}>
                   <UserLink user={opinion.answer.author} />

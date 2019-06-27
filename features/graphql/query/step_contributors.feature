@@ -97,7 +97,7 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
             "edges":[
                {
                   "node":{
-                     "_id":"user7"
+                     "_id":"user5"
                   }
                },
                {
@@ -107,7 +107,7 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
                },
                {
                   "node":{
-                     "_id":"user5"
+                     "_id":"user7"
                   }
                },
                {
@@ -120,6 +120,58 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
       }
    }
 }
+  """
+
+@elasticsearch
+Scenario: GraphQL client want to get the list of contributors of a selectionStep
+  Given I send a GraphQL POST request:
+  """
+  {
+    "query": "query node ($selectionStep: ID!){
+      selectionStep: node(id: $selectionStep) {
+        ... on SelectionStep {
+          contributors(first: 5) {
+            totalCount
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            edges {
+              node {
+                _id
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "selectionStep": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "selectionStep": {
+        "contributors": {
+          "totalCount": 47,
+          "pageInfo": {
+            "hasNextPage": true,
+            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
+          },
+          "edges": [
+            {"node":{"_id":"user10"}},
+            {"node":{"_id":"user11"}},
+            {"node":{"_id":"user12"}},
+            {"node":{"_id":"user13"}},
+            {"node":{"_id":"user14"}}
+          ]
+        }
+      }
+    }
+  }
   """
 
 @elasticsearch
@@ -162,9 +214,9 @@ Scenario: GraphQL client want to get the list of contributors of a questionnaire
             "endCursor": "YXJyYXljb25uZWN0aW9uOjM="
           },
           "edges": [
-            {"node":{"_id":"user515"}},
-            {"node":{"_id":"user_not_confirmed"}},
             {"node":{"_id":"user502"}},
+            {"node":{"_id":"user506"}},
+            {"node":{"_id":"user515"}},
             {"node":{"_id":"userAdmin"}}
           ]
         }

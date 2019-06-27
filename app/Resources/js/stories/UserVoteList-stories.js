@@ -4,7 +4,7 @@ import { number, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
-import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
+import { UserAvatar } from '../components/User/UserAvatar';
 
 import { author } from './mocks/users';
 
@@ -27,7 +27,7 @@ export const UserVoteList = (props: Props) => {
               key={index}
               placement="top"
               overlay={<Tooltip id={`opinion-vote-tooltip-${vote.id}`}>{vote.username}</Tooltip>}>
-              <UserAvatarDeprecated user={vote} />
+              <UserAvatar user={vote} />
             </OverlayTrigger>
           </span>
         ))}

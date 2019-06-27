@@ -74,17 +74,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Then user :userId registered less than 1 week ago
-     */
-    public function userRegisteredLessThan24hAgo(string $userId)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
-        $user->setCreatedAt(new \DateTime('-2 days'));
-        $this->getEntityManager()->flush();
-    }
-
-    /**
      * @Then user :userId should have role :role
      * @Given user :userId has role :role
      */
@@ -208,7 +197,7 @@ class UserContext extends DefaultContext
     {
         $this->navigationContext->getPage('HomePage')->openUserDropdown();
         $selector = '#main-navbar nav div div ul li';
-        $this->waitAndThrowOnFailure(3000, "$('" . $selector . "').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('".$selector."').length > 0");
         $this->assertElementContainsText($selector, 'navbar.admin');
     }
 

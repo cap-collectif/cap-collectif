@@ -10,9 +10,6 @@ services:
   Capco\UserBundle\Controller\ConfirmationController:
     autowire: true
 
-  Capco\UserBundle\Controller\MembersController:
-    autowire: true
-
   Capco\UserBundle\Form\:
     resource: '%kernel.root_dir%/../src/Capco/UserBundle/Form/*'
 

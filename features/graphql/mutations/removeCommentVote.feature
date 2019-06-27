@@ -20,7 +20,7 @@ Scenario: Logged in API client wants to remove a vote for an comment
     }",
     "variables": {
       "input": {
-        "commentId": "Q29tbWVudDpldmVudENvbW1lbnQx"
+        "commentId": "eventComment1"
       }
     }
   }
@@ -31,7 +31,7 @@ Scenario: Logged in API client wants to remove a vote for an comment
    "data":{
       "removeCommentVote":{
          "contribution":{
-            "id": "Q29tbWVudDpldmVudENvbW1lbnQx",
+            "id":"eventComment1",
             "votes":{
                "totalCount": 0
             }

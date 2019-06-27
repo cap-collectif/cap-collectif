@@ -28,7 +28,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
             className="m-auto align-items-center"
           >
             <Left>
-              <Connect(UserAvatarDeprecated)
+              <Connect(UserAvatar)
                 user={
                   Object {
                     "displayName": "iAmAUser",
@@ -328,7 +328,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             className="m-auto align-items-center"
           >
             <Left>
-              <Connect(UserAvatarDeprecated)
+              <Connect(UserAvatar)
                 user={
                   Object {
                     "displayName": "iAmAUser",
@@ -575,7 +575,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             className="m-auto align-items-center"
           >
             <Left>
-              <Connect(UserAvatarDeprecated)
+              <Connect(UserAvatar)
                 user={
                   Object {
                     "displayName": "iAmAUser",

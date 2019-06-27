@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     author: '@user5'
     parent: '@opinion57'
     comment: bououh
-    ranking: 1
+    ranking: <numberBetween(1,5)>
     answer: '@answer2'
     moderationToken: 'version1ModerationToken'
   version2:
@@ -20,7 +20,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     author: '@user2'
     parent: '@opinion57'
     comment: bououh
-    ranking: 2
+    ranking: <numberBetween(1,5)>
   version3:
     id: 'version3'
     publishedAt: <(new \DateTime('2015-01-03'))>
@@ -30,7 +30,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     author: '@user2'
     parent: '@opinion57'
     comment: bououh
-    ranking: 3
+    ranking: <numberBetween(1,5)>
   version{4..10}:
     id: 'version<current()>'
     publishedAt: <(new \DateTime('2015-01-03'))>
@@ -40,9 +40,9 @@ Capco\AppBundle\Entity\OpinionVersion:
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     trashedStatus: 'visible'
     author: '@user2'
-    parent: '@opinion58'
+    parent: '@opinion<numberBetween(57,59)>'
     comment: Coeur avec les doigts !
-    ranking: 4
+    ranking: <numberBetween(1,5)>
   version11:
     id: 'version11'
     publishedAt: <(new \DateTime('2015-01-03'))>

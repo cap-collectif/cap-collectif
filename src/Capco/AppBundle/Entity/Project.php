@@ -49,23 +49,23 @@ class Project implements IndexableInterface
 
     public static $sortOrder = [
         'date' => self::SORT_ORDER_PUBLISHED_AT,
-        'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT
+        'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
     ];
 
     public static $sortOrderLabels = [
         'date' => 'project.sort.published_at',
-        'popularity' => 'project.sort.contributions_nb'
+        'popularity' => 'project.sort.contributions_nb',
     ];
 
     public static $openingStatuses = [
         'future' => self::OPENING_STATUS_FUTURE,
         'opened' => self::OPENING_STATUS_OPENED,
-        'closed' => self::OPENING_STATUS_CLOSED
+        'closed' => self::OPENING_STATUS_CLOSED,
     ];
 
     public static $opinionTermsLabels = [
         'project.opinion_term.opinion' => self::OPINION_TERM_OPINION,
-        'project.opinion_term.article' => self::OPINION_TERM_ARTICLE
+        'project.opinion_term.article' => self::OPINION_TERM_ARTICLE,
     ];
 
     /**
@@ -353,12 +353,20 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    public function getPublishedAt(): ?\DateTime
+    /**
+     * @return \DateTime
+     */
+    public function getPublishedAt()
     {
         return $this->publishedAt;
     }
 
-    public function setPublishedAt(\DateTime $publishedAt): self
+    /**
+     * @param \DateTime $publishedAt
+     *
+     * @return $this
+     */
+    public function setPublishedAt($publishedAt)
     {
         $this->publishedAt = $publishedAt;
 

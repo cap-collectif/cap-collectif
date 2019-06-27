@@ -137,42 +137,6 @@ Scenario: Anonymous wants to get arguments filtered by type for an opinion
     "query": "query ($opinionId: ID!) {
       opinion: node(id: $opinionId) {
           ... on Argumentable {
-              arguments(first: 5, type: AGAINST) {
-                  totalCount
-                  edges {
-                      node {
-                          id
-                          type
-                      }
-                  }
-              }
-          }
-      }
-    }",
-    "variables": {
-      "opinionId": "opinion3"
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-        "opinion": {
-            "arguments": {
-              "totalCount": @integer@,
-              "edges": []
-            }
-        }
-    }
-  }
-  """
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "query ($opinionId: ID!) {
-      opinion: node(id: $opinionId) {
-          ... on Argumentable {
               arguments(first: 5, type: FOR) {
                   totalCount
                   edges {
@@ -202,6 +166,50 @@ Scenario: Anonymous wants to get arguments filtered by type for an opinion
                   "node": {
                     "id": @string@,
                     "type": "FOR"
+                  }
+                },
+                @...@
+              ]
+            }
+        }
+    }
+  }
+  """
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "query ($opinionId: ID!) {
+      opinion: node(id: $opinionId) {
+          ... on Argumentable {
+              arguments(first: 5, type: AGAINST) {
+                  totalCount
+                  edges {
+                      node {
+                          id
+                          type
+                      }
+                  }
+              }
+          }
+      }
+    }",
+    "variables": {
+      "opinionId": "opinion3"
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+        "opinion": {
+            "arguments": {
+              "totalCount": @integer@,
+              "edges": [
+                {
+                  "node": {
+                    "id": @string@,
+                    "type": "AGAINST"
                   }
                 },
                 @...@

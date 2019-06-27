@@ -24,12 +24,16 @@ class QueryContributorsResolver implements ResolverInterface
         if (!$args) {
             $args = new Arg(['first' => 0]);
         }
-
         $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount) {
-            $value = $this->userSearch->getAllContributors($offset, $limit);
-            $totalCount = $value['totalCount'];
+            if ($this->useElasticsearch) {
+                $value = $this->userSearch->getAllContributors($offset, $limit);
+                $contributors = $value['results'];
+                $totalCount = $value['totalCount'];
 
-            return $value['results'];
+                return $contributors;
+            }
+
+            return [];
         });
 
         $connection = $paginator->auto($args, $totalCount);

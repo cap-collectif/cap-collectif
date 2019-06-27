@@ -181,7 +181,7 @@ Capco\AppBundle\Entity\Follower:
 
   # Subscribe to trashed yesterday opinions
   follower2{80..85}:
-    opinion: '@opinion<($current-6)>'
+    opinion: '@opinion<numberBetween(74, 79)>'
     user: '@user<current()>'
     followedAt: <(new \DateTime('now - 7 days'))>
     notifiedOf: 'ALL'

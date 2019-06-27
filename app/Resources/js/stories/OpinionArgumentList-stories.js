@@ -13,7 +13,7 @@ import {
   Popover,
 } from 'react-bootstrap';
 import Input from '../components/Form/Input';
-import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
+import { UserAvatar } from '../components/User/UserAvatar';
 import Media from '../components/Ui/Medias/Media/Media';
 import ListGroup from '../components/Ui/List/ListGroup';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
@@ -30,7 +30,7 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
     )}
     <Media>
       <Media.Left>
-        <UserAvatarDeprecated user={item.user} />
+        <UserAvatar user={item.user} />
       </Media.Left>
       <Media.Body className="opinion__body">
         <div className="opinion__data">

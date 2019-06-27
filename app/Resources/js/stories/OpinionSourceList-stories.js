@@ -3,7 +3,7 @@ import * as React from 'react';
 import { boolean, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Button, ListGroupItem, Label, Media, Panel, Row, Col } from 'react-bootstrap';
-import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
+import { UserAvatar } from '../components/User/UserAvatar';
 import ListGroup from '../components/Ui/List/ListGroup';
 import Card from '../components/Ui/Card/Card';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
@@ -19,7 +19,7 @@ const OpinionSourceItem = ({ item, isProfile, typeLabel }) => (
       </p>
     )}
     <Media.Left>
-      <UserAvatarDeprecated user={item.user} />
+      <UserAvatar user={item.user} />
     </Media.Left>
     <Media.Body className="opinion__body">
       <div className="opinion__user">

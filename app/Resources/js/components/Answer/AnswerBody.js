@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedDate } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment';
-import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
+import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import type { AnswerBody_answer } from '~relay/AnswerBody_answer.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
@@ -21,7 +21,7 @@ export class AnswerBody extends React.Component<Props> {
         {author ? (
           <div className="media media--user-thumbnail" style={{ marginBottom: '10px' }}>
             {/* $FlowFixMe Will be a fragment soon */}
-            <UserAvatarDeprecated className="pull-left" user={author} />
+            <UserAvatar className="pull-left" user={author} />
             <div className="media-body">
               <p className="media-heading media--macro__user" style={{ marginBottom: '0' }}>
                 <UserLink user={author} />

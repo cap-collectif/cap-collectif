@@ -43,7 +43,7 @@
 
             {% if trashedNb > 0 or project.getFirstCollectStep != null %}
 
-                {% if project.getFirstCollectStep != null %}
+            {% if project.getFirstCollectStep != null %}
                 {{
                     react_render_component('ProjectTrashProposalApp', {
                         'props': {
@@ -62,8 +62,8 @@
                         'rendering': 'client_side'
                     }) 
                 }}
-                {% endif %}
-                {% if opinions|length > 0 or versions|length > 0 or arguments|length > 0 or sources|length > 0 %}
+            {% endif %}
+            
                     <div class="block  block--bordered">
                         <ul class="media-list  opinion__list">
                             {% if opinions|length > 0 %}
@@ -88,7 +88,6 @@
                             {% endif %}
                         </ul>
                     </div>
-                {% endif %}
             {% else %}
                 <div class="project__empty-block  text-center">
                     <p class="icon  cap-bubble-attention-6"></p>

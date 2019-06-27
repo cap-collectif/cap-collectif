@@ -7,7 +7,7 @@ import moment from 'moment';
 import Linkify from 'react-linkify';
 import { Label, ListGroupItem } from 'react-bootstrap';
 import Media from '../Ui/Medias/Media/Media';
-import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
+import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
 import UnpublishedLabel from '../Publishable/UnpublishedLabel';
@@ -71,7 +71,7 @@ export class ArgumentItem extends React.Component<Props> {
         <Media>
           <Media.Left>
             {/* $FlowFixMe Will be a fragment soon */}
-            <UserAvatarDeprecated user={argument.author} className="excerpt_dark" />
+            <UserAvatar user={argument.author} className="excerpt_dark" />
           </Media.Left>
           <Media.Body className="opinion__body">
             <div className="opinion__data">

@@ -10,7 +10,7 @@ exports[`<CommentForm /> should render correctly 1`] = `
     }
   }
 >
-  <Connect(UserAvatarDeprecated)
+  <Connect(UserAvatar)
     className="pull-left"
     user={null}
   />
@@ -143,7 +143,7 @@ exports[`<CommentForm /> should render correctly with user 1`] = `
     }
   }
 >
-  <Connect(UserAvatarDeprecated)
+  <Connect(UserAvatar)
     className="pull-left"
     user={
       Object {

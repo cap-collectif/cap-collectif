@@ -35,8 +35,3 @@ Scenario: Logged in admin wants to test admin project
   And I should not see "error.500"
   And I go to the admin questionnaire list page
   And I should not see "error.500"
-
-Scenario: Logged in admin wants to test admin contributions
-  Given I am logged in as admin
-  And I go to the admin argument list page
-  And I should not see "error.500"

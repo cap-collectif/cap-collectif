@@ -45,7 +45,6 @@ mappings:
     properties:
       id: { type: keyword }
       slug: { type: keyword }
-      createdAt: { type: date }
       #      email: { type: keyword } # enable it for the next migration
       username: &text_analysis_highlighted
         type: text
@@ -54,8 +53,7 @@ mappings:
         fields:
           std: { type: text, analyzer: capco_standard }
       biography: *text_analysis_highlighted
-      roles: { type: text }
-      userType:
+      user_type:
         type: object
         properties:
           id:
@@ -78,7 +76,15 @@ mappings:
               id: { type: keyword }
           count:
             type: long
-      totalContributionsCount: { type: long }
+      totalContributionsCount:
+        type: nested
+        properties:
+          contribution:
+            type: object
+            properties:
+              id: { type: keyword }
+          count:
+            type: long
 
   argument:
     properties:

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Capco\AppBundle\Search\UserSearch;
 use GraphQL\Type\Definition\ResolveInfo;
 use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Capco\UserBundle\Repository\UserRepository;
@@ -18,16 +17,11 @@ class QueryUsersResolver implements ResolverInterface
 
     protected $userRepo;
     private $queryAnalyzer;
-    private $userSearch;
 
-    public function __construct(
-        UserRepository $userRepo,
-        QueryAnalyzer $queryAnalyzer,
-        UserSearch $userSearch
-    ) {
+    public function __construct(UserRepository $userRepo, QueryAnalyzer $queryAnalyzer)
+    {
         $this->userRepo = $userRepo;
         $this->queryAnalyzer = $queryAnalyzer;
-        $this->userSearch = $userSearch;
     }
 
     public function __invoke(Argument $args, ResolveInfo $resolveInfo): Connection
@@ -37,20 +31,14 @@ class QueryUsersResolver implements ResolverInterface
 
         $includeSuperAdmin = isset($args['superAdmin']) && true === $args['superAdmin'];
 
-        $totalCount = 0;
-        $paginator = new Paginator(function (int $offset, int $limit) use (
-            $includeSuperAdmin,
-            &$totalCount
-        ) {
-            $users = $this->userSearch->getAllUsers($limit, $offset, $includeSuperAdmin);
-            $totalCount = $users['totalCount'];
-
-            return $users['results'];
+        $paginator = new Paginator(function (int $offset, int $limit) use ($includeSuperAdmin) {
+            return $this->userRepo
+                ->getAllUsers($limit, $offset, $includeSuperAdmin)
+                ->getIterator()
+                ->getArrayCopy();
         });
+        $totalCount = $this->userRepo->countAllUsers($includeSuperAdmin);
 
-        $connection = $paginator->auto($args, $totalCount);
-        $connection->totalCount = $totalCount;
-
-        return $connection;
+        return $paginator->auto($args, $totalCount);
     }
 }

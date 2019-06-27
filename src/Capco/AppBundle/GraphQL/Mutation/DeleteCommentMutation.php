@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Comment;
@@ -35,10 +34,9 @@ class DeleteCommentMutation implements MutationInterface
         $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
     }
 
-    public function __invoke(Arg $input, User $viewer): array
+    public function __invoke(Arg $input, User $user): array
     {
-        $commentGlobalId = $input->offsetGet('id');
-        $commentId = GlobalId::fromGlobalId($commentGlobalId)['id'];
+        $commentId = $input->offsetGet('id');
         /** @var Comment $comment */
         $comment = $this->commentRepo->find($commentId);
 
@@ -48,19 +46,19 @@ class DeleteCommentMutation implements MutationInterface
             return [
                 'userErrors' => [
                     [
-                        'message' => 'Comment not found.'
-                    ]
-                ]
+                        'message' => 'Comment not found.',
+                    ],
+                ],
             ];
         }
 
-        if ($viewer !== $comment->getAuthor()) {
+        if ($user !== $comment->getAuthor()) {
             return [
                 'userErrors' => [
                     [
-                        'message' => 'You are not author of the comment.'
-                    ]
-                ]
+                        'message' => 'You are not author of the comment.',
+                    ],
+                ],
             ];
         }
 
@@ -69,8 +67,8 @@ class DeleteCommentMutation implements MutationInterface
         if ($comment->getRelatedObject()) {
             $this->commentableCommentsDataLoader->invalidate($comment->getRelatedObject()->getId());
         }
-        $this->redisStorage->recomputeUserCounters($viewer);
+        $this->redisStorage->recomputeUserCounters($user);
 
-        return ['deletedCommentId' => $commentGlobalId, 'userErrors' => []];
+        return ['deletedCommentId' => $commentId, 'userErrors' => []];
     }
 }

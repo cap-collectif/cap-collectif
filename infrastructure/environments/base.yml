@@ -22,31 +22,11 @@ application:
   links:
     - database:database
     - elasticsearch:elasticsearch
-    - kibana:kibana
     - redis:redis
     - seleniumhub:selenium
     - mailcatcher:mailcatchersmtp
-    - cerebro:cerebro
   extra_hosts: # Used to ban varnish cache
     - 'capco.test:0.0.0.0'
-
-cerebro:
-  image: lmenezes/cerebro
-  links:
-    - elasticsearch
-  ports:
-    - '9000:9000'
-#  volumes:
-#    - ../services/cerebro:/opt/cerebro/conf
-
-kibana:
-  image: kibana:5
-  links:
-    - elasticsearch
-  ports:
-    - '5601:5601'
-# volumes:
-#     - ../services/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
 
 applicationdata:
   build: ../services/applicationdata

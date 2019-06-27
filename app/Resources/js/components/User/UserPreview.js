@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import UserAvatarDeprecated from './UserAvatarDeprecated';
+import UserAvatar from './UserAvatar';
 import UserLink from './UserLink';
 import type { UserPreview_user } from '~relay/UserPreview_user.graphql';
 import UserNotConfirmedLabel from './UserNotConfirmedLabel';
@@ -24,7 +24,7 @@ export class UserPreview extends React.Component<Props> {
           <Media>
             <Media.Left>
               {/* $FlowFixMe */}
-              <UserAvatarDeprecated user={user} />
+              <UserAvatar user={user} />
             </Media.Left>
             <Media.Body>
               {user ? (

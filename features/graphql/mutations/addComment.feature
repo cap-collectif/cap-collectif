@@ -36,7 +36,7 @@ Scenario: User wants to add a comment on a proposal
       "addComment": {
           "commentEdge": {
               "node": {
-                  "id": @string@,
+                  "id": @uuid@,
                   "published": true,
                   "body": "Tololo",
                   "author": {
@@ -87,7 +87,7 @@ Scenario: Anonymous wants to add a comment on a blog post
       "addComment": {
           "commentEdge": {
               "node": {
-                  "id": @string@,
+                  "id": @uuid@,
                   "published": true,
                   "body": "Je suis un super contenu",
                   "author": null,
@@ -126,7 +126,7 @@ Scenario: Anonymous wants to add an anwer to a comment
     }",
     "variables": {
       "input": {
-        "commentableId": "Q29tbWVudDpldmVudENvbW1lbnQx",
+        "commentableId": "eventComment1",
         "authorName": "Kéké",
         "authorEmail": "vivele94@cap-collectif.com",
         "body": "Ma super réponse"
@@ -141,9 +141,9 @@ Scenario: Anonymous wants to add an anwer to a comment
       "addComment": {
           "commentEdge": {
               "node": {
-                  "id": @string@,
+                  "id": @uuid@,
                   "parent": {
-                    "id": "Q29tbWVudDpldmVudENvbW1lbnQx"
+                    "id": "eventComment1"
                   },
                   "published": true,
                   "body": "Ma super réponse",

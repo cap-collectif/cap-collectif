@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<UserAvatarDeprecated /> renders correctly 1`] = `
+exports[`<UserAvatar /> renders correctly 1`] = `
 <a
   className="mr-10"
   href="http://jesuistoto.com"
@@ -24,7 +24,7 @@ exports[`<UserAvatarDeprecated /> renders correctly 1`] = `
 </a>
 `;
 
-exports[`<UserAvatarDeprecated /> renders correctly user without avatar 1`] = `
+exports[`<UserAvatar /> renders correctly user without avatar 1`] = `
 <a
   className=""
   href="http://jesuistoto.com"
@@ -41,7 +41,7 @@ exports[`<UserAvatarDeprecated /> renders correctly user without avatar 1`] = `
 </a>
 `;
 
-exports[`<UserAvatarDeprecated /> renders correctly with custom default avatar 1`] = `
+exports[`<UserAvatar /> renders correctly with custom default avatar 1`] = `
 <a
   className=""
   href="http://jesuistoto.com"

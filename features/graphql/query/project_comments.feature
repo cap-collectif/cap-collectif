@@ -40,52 +40,52 @@ Scenario: GraphQL user wants to get list of trashed comments.
           "edges":[
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE="
+                "id":"trashedComment1"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDEw"
+                "id":"trashedComment10"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDEx"
+                "id":"trashedComment11"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDEy"
+                "id":"trashedComment12"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDEz"
+                "id":"trashedComment13"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE0"
+                "id":"trashedComment14"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE1"
+                "id":"trashedComment15"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE2"
+                "id":"trashedComment16"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE3"
+                "id":"trashedComment17"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE4"
+                "id":"trashedComment18"
               }
             }
           ]

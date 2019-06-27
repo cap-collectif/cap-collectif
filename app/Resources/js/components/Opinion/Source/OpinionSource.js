@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Media, ListGroupItem } from 'react-bootstrap';
-import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
+import UserAvatar from '../../User/UserAvatar';
 import OpinionInfos from '../OpinionInfos';
 import OpinionSourceTitle from './OpinionSourceTitle';
 import OpinionSourceContent from './OpinionSourceContent';
@@ -43,7 +43,7 @@ export class OpinionSource extends React.Component<Props> {
           )}
           <Media.Left>
             {/* $FlowFixMe Will be a fragment soon */}
-            <UserAvatarDeprecated user={source.author} />
+            <UserAvatar user={source.author} />
           </Media.Left>
           <Media.Body className="opinion__body">
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}

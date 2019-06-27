@@ -2,42 +2,27 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Notifier\ReportNotifier;
-use Capco\AppBundle\Repository\CommentRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class CommentsController extends FOSRestController
 {
-    private $commentRepository;
-    private $entityManager;
-    private $reportNotifier;
-
-    public function __construct(
-        CommentRepository $commentRepository,
-        EntityManagerInterface $entityManager,
-        ReportNotifier $reportNotifier
-    ) {
-        $this->commentRepository = $commentRepository;
-        $this->entityManager = $entityManager;
-        $this->reportNotifier = $reportNotifier;
-    }
-
     /**
      * @Post("/comments/{commentId}/reports")
+     * @ParamConverter("comment", options={"mapping": {"commentId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
-    public function postCommentReportAction(Request $request, string $commentId)
+    public function postCommentReportAction(Request $request, Comment $comment)
     {
         $viewer = $this->getUser();
-        $comment = $this->commentRepository->find(GlobalId::fromGlobalId($commentId)['id']);
         if (!$viewer || 'anon.' === $viewer || $viewer === $comment->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
@@ -50,9 +35,9 @@ class CommentsController extends FOSRestController
             return $form;
         }
 
-        $this->entityManager->persist($report);
-        $this->entityManager->flush();
-        $this->reportNotifier->onCreate($report);
+        $this->get('doctrine.orm.entity_manager')->persist($report);
+        $this->get('doctrine.orm.entity_manager')->flush();
+        $this->get(ReportNotifier::class)->onCreate($report);
 
         return $report;
     }

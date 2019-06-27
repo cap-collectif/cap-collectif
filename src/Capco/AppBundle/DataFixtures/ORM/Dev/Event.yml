@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\Event:
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('now + 1 days'))>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user1'
+    author: '@user<numberBetween(1, 5)>'
     registrationEnable: true
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
@@ -26,7 +26,7 @@ Capco\AppBundle\Entity\Event:
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('now + 2 days'))>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user2'
+    author: '@user<numberBetween(1, 5)>'
     link: http://www.phptour2014.fr
     projects: ['@p1']
     themes: ['@theme1']
@@ -42,7 +42,7 @@ Capco\AppBundle\Entity\Event:
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('now + 3 days'))>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user3'
+    author: '@user<numberBetween(1, 5)>'
     media: '@MediaProject3'
     registrationEnable: true
     projects: ['@p1']
@@ -55,7 +55,7 @@ Capco\AppBundle\Entity\Event:
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('now + 4 days'))>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user4'
+    author: '@user<numberBetween(1, 5)>'
     link: http://www.symfonyLive2015.fr
     media: '@MediaIdea1'
   event5:
@@ -70,7 +70,7 @@ Capco\AppBundle\Entity\Event:
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('2014-02-11'))>
     endAt: <(new \DateTime('2014-02-12'))>
-    author: '@user5'
+    author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
   event6:
     id: event6
@@ -84,7 +84,7 @@ Capco\AppBundle\Entity\Event:
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('now + 5 days'))>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user1'
+    author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
   event7:
     id: 'event7'
@@ -93,7 +93,7 @@ Capco\AppBundle\Entity\Event:
     body: <text(1000)>
     startAt: <(new \DateTime('now + 6 days'))>
     endAt: <dateTimeBetween('+10 days', '+40 days')>
-    author: '@user2'
+    author: '@user<numberBetween(1, 5)>'
   event8:
     id: 'event8'
     title: <text(30)>
@@ -101,7 +101,7 @@ Capco\AppBundle\Entity\Event:
     body: <text(1000)>
     startAt: <(new \DateTime('now + 7 days'))>
     endAt: <dateTimeBetween('+10 days', '+40 days')>
-    author: '@user3'
+    author: '@user<numberBetween(1, 5)>'
   event9:
     id: 'event9'
     title: <text(30)>
@@ -109,7 +109,7 @@ Capco\AppBundle\Entity\Event:
     body: <text(1000)>
     startAt: <(new \DateTime('now + 8 days'))>
     endAt: <dateTimeBetween('+10 days', '+40 days')>
-    author: '@user4'
+    author: '@user<numberBetween(1, 5)>'
   event10:
     id: 'event10'
     title: <text(30)>
@@ -117,7 +117,7 @@ Capco\AppBundle\Entity\Event:
     body: <text(1000)>
     startAt: <(new \DateTime('now + 9 days'))>
     endAt: <dateTimeBetween('+10 days', '+40 days')>
-    author: '@user5'
+    author: '@user<numberBetween(1, 5)>'
   event11:
     id: event11
     title: ParisWeb2016
@@ -125,7 +125,7 @@ Capco\AppBundle\Entity\Event:
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('now + 6 days'))>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user1'
+    author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
   event12:
     id: evenementPresentSansDateDeFin
@@ -133,7 +133,7 @@ Capco\AppBundle\Entity\Event:
     enabled: true
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('now'))>
-    author: '@user2'
+    author: '@user<numberBetween(1, 5)>'
     link: http://www.lavie.fr
   event13:
     id: evenementPasseSansDateDeFin
@@ -141,7 +141,7 @@ Capco\AppBundle\Entity\Event:
     enabled: true
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('now - 10 days'))>
-    author: '@user3'
+    author: '@user<numberBetween(1, 5)>'
     link: http://www.lavie.fr
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
@@ -151,7 +151,7 @@ Capco\AppBundle\Entity\Event:
     enabled: true
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('now + 10 days'))>
-    author: '@user4'
+    author: '@user<numberBetween(1, 5)>'
     link: http://www.lavie.fr
     zipCode: '07400'
     city: Meysse

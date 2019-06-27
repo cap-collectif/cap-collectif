@@ -58,7 +58,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 
     public function all(array $keys)
     {
-        if ($this->debug && $this->enableCache) {
+        if ($this->debug) {
             $this->logger->info(
                 __METHOD__ .
                     'called for keys : ' .
@@ -98,7 +98,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 
         $cacheKey = [
             'form' => $proposalForm->getId(),
-            'args' => $args->getRawArguments()
+            'args' => $args->getRawArguments(),
         ];
 
         if (
@@ -262,10 +262,6 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 
     private function getFusionsCount(ProposalForm $form): int
     {
-        if (!$this->enableCache) {
-            return $this->proposalRepo->countFusionsByProposalForm($form);
-        }
-
         $cacheItem = $this->cache->getItem(
             'ProposalFormProposalsDataLoader-getFusionsCount-' . $form->getId()
         );

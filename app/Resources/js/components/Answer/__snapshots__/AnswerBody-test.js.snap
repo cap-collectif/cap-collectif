@@ -10,7 +10,7 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
       }
     }
   >
-    <Connect(UserAvatarDeprecated)
+    <Connect(UserAvatar)
       className="pull-left"
       user={
         Object {

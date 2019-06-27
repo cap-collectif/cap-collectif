@@ -4,7 +4,7 @@ exports[`<VoteItem /> renders correcty for mitigated vote 1`] = `
 <ListVoteItem
   id="vote-51"
 >
-  <Connect(UserAvatarDeprecated)
+  <Connect(UserAvatar)
     className="pull-left"
     user={
       Object {
@@ -88,7 +88,7 @@ exports[`<VoteItem /> renders correcty for vote against 1`] = `
 <ListVoteItem
   id="vote-51"
 >
-  <Connect(UserAvatarDeprecated)
+  <Connect(UserAvatar)
     className="pull-left"
     user={
       Object {
@@ -172,7 +172,7 @@ exports[`<VoteItem /> renders correcty for vote for 1`] = `
 <ListVoteItem
   id="vote-51"
 >
-  <Connect(UserAvatarDeprecated)
+  <Connect(UserAvatar)
     className="pull-left"
     user={
       Object {
@@ -256,7 +256,7 @@ exports[`<VoteItem /> renders correcty for vote without value 1`] = `
 <ListVoteItem
   id="vote-51"
 >
-  <Connect(UserAvatarDeprecated)
+  <Connect(UserAvatar)
     className="pull-left"
     user={
       Object {

@@ -35,8 +35,8 @@ Capco\AppBundle\Entity\Argument:
   argument{3..95}:
     id: 'argument<current()>'
     Opinion: '@opinion3'
-    type: 1
-    Author: '@user1'
+    type: <numberBetween(0, 1)>
+    Author: '@user<numberBetween(1, 5)>'
     body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>`
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
@@ -62,9 +62,9 @@ Capco\AppBundle\Entity\Argument:
 
   argument{101..150}:
     id: 'argument<current()>'
-    Opinion: '@opinion<($current-97)>'
-    type: 0
-    Author: '@user5'
+    Opinion: '@opinion<numberBetween(4, 50)>'
+    type: <numberBetween(0, 1)>
+    Author: '@user<numberBetween(1, 5)>'
     body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
@@ -73,9 +73,9 @@ Capco\AppBundle\Entity\Argument:
 
   argument{151..175}:
     id: 'argument<current()>'
-    Opinion: '@opinion<($current-122)>'
-    type: 1
-    Author: '@user3'
+    Opinion: '@opinion<numberBetween(3, 50)>'
+    type: <numberBetween(0, 1)>
+    Author: '@user<numberBetween(1, 5)>'
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
@@ -84,9 +84,9 @@ Capco\AppBundle\Entity\Argument:
 
   argument{176..200}:
     id: 'argument<current()>'
-    Opinion: '@opinion<($current-147)>'
-    type: 0
-    Author: '@user2'
+    Opinion: '@opinion<numberBetween(3, 50)>'
+    type: <numberBetween(0, 1)>
+    Author: '@user<numberBetween(1, 5)>'
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
@@ -116,7 +116,7 @@ Capco\AppBundle\Entity\Argument:
     id: 'argument203'
     Opinion: '@opinion52'
     type: 0
-    Author: '@user3'
+    Author: '@user<numberBetween(1, 5)>'
     body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
@@ -136,7 +136,7 @@ Capco\AppBundle\Entity\Argument:
     id: 'argument205'
     opinionVersion: '@version1'
     type: 1
-    Author: '@user2'
+    Author: '@user<numberBetween(1, 5)>'
     body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
@@ -181,7 +181,7 @@ Capco\AppBundle\Entity\Argument:
     id: 'argument<current()>'
     Opinion: '@opinion57'
     type: 1
-    Author: '@user1'
+    Author: '@user<numberBetween(1, 5)>'
     body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2017-03-01'))>
@@ -210,8 +210,8 @@ Capco\AppBundle\Entity\Argument:
   argument{213..250}:
     id: 'argument<current()>'
     Opinion: '@opinion69'
-    type: 0
-    Author: '@user3'
+    type: <numberBetween(0, 1)>
+    Author: '@user<numberBetween(1, 5)>'
     body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2017-03-01'))>
@@ -220,7 +220,7 @@ Capco\AppBundle\Entity\Argument:
     id: 'argument251'
     Opinion: '@opinion1'
     type: 0
-    Author: '@user4'
+    Author: '@user<numberBetween(1, 5)>'
     body: Coucou, je suis un bel argument !
     publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>
@@ -229,7 +229,7 @@ Capco\AppBundle\Entity\Argument:
     id: 'argument252'
     Opinion: '@opinion1'
     type: 0
-    Author: '@user4'
+    Author: '@user<numberBetween(1, 5)>'
     body: Coucou, je suis un bel argument !
     publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>

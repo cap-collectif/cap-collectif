@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Nav, NavDropdown, MenuItem } from 'react-bootstrap';
-import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
+import UserAvatar from '../../User/UserAvatar';
 
 type Props = {
   user: Object,
@@ -21,12 +21,7 @@ export class MainNavbarUser extends React.Component<Props> {
     if (user) {
       const dropdownTitle = (
         <span>
-          <UserAvatarDeprecated
-            user={user}
-            size={34}
-            style={{ marginRight: '10px' }}
-            anchor={false}
-          />
+          <UserAvatar user={user} size={34} style={{ marginRight: '10px' }} anchor={false} />
           <span className="hidden-xs">{user.displayName}</span>
         </span>
       );

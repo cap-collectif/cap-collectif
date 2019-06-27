@@ -4,15 +4,15 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     proposal: '@proposal2'
     selectionStep: '@selectionstep1'
     user: '@user4'
-    publishedAt: <(new \DateTime('2015-03-01 00:00:00'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
   proposalSelectionVote{4..50}:
-    id: <(997+$current)>
+    id (unique): '<numberBetween(1001, 1050)>'
     proposal: '@proposal3'
     selectionStep: '@selectionstep1'
     user: '@user<current()>'
-    publishedAt: <(new \DateTime('2015-03-01 00:00:00'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
   proposalSelectionVote51:
     id: 1051
     proposal: '@proposal7'

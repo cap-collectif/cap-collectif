@@ -76,8 +76,6 @@ use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
-use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 
 class ReinitCommand extends ContainerAwareCommand
 {
@@ -143,12 +141,6 @@ class ReinitCommand extends ContainerAwareCommand
         $elasticsearchListener = $this->getContainer()->get(ElasticsearchDoctrineListener::class);
         $publishableListener = $this->getContainer()->get(DoctrineListener::class);
 
-        // Disable some dataloader cache
-        $stepContributions = $this->getContainer()->get(StepContributionsDataLoader::class);
-        $stepContributions->disableCache();
-        $proposalFormProposals = $this->getContainer()->get(ProposalFormProposalsDataLoader::class);
-        $proposalFormProposals->disableCache();
-
         $eventManager->removeEventListener(
             $elasticsearchListener->getSubscribedEvents(),
             $elasticsearchListener
@@ -205,7 +197,7 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'doctrine:database:create' => []
+                'doctrine:database:create' => [],
             ],
             $output
         );
@@ -215,7 +207,7 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'doctrine:schema:create' => []
+                'doctrine:schema:create' => [],
             ],
             $output
         );
@@ -225,7 +217,7 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'doctrine:database:drop' => ['--force' => true]
+                'doctrine:database:drop' => ['--force' => true],
             ],
             $output
         );
@@ -302,7 +294,7 @@ class ReinitCommand extends ContainerAwareCommand
             BorderStyle::class,
             BackgroundStyle::class,
             ArgumentVote::class,
-            AppendixType::class
+            AppendixType::class,
         ];
 
         $classesProd = [Context::class];
@@ -315,7 +307,7 @@ class ReinitCommand extends ContainerAwareCommand
         }
         $this->runCommands(
             [
-                'hautelook:fixtures:load' => ['-e' => $env]
+                'hautelook:fixtures:load' => ['-e' => $env],
             ],
             $output
         );
@@ -327,8 +319,8 @@ class ReinitCommand extends ContainerAwareCommand
             [
                 'capco:reset-feature-flags' => [
                     '--force' => true,
-                    '--env' => $this->env
-                ]
+                    '--env' => $this->env,
+                ],
             ],
             $output
         );
@@ -338,9 +330,9 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'capco:compute:users-counters' => ['--env' => $this->env, '--force' => true],
-                'capco:compute:counters' => ['--env' => $this->env, '--force' => true],
-                'capco:compute:rankings' => ['--env' => $this->env]
+                'capco:compute:users-counters' => ['--force' => true],
+                'capco:compute:counters' => ['--force' => true],
+                'capco:compute:rankings' => [],
             ],
             $output
         );
@@ -352,7 +344,7 @@ class ReinitCommand extends ContainerAwareCommand
             [
                 'capco:syntheses:update' => [],
                 'capco:syntheses:fix-urls' => [],
-                'capco:syntheses:counters' => []
+                'capco:syntheses:counters' => [],
             ],
             $output
         );
@@ -362,13 +354,14 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'capco:es:clean' => ['--all' => true, '--no-debug' => true]
+                'capco:es:create' => ['--quiet' => true, '--no-debug' => true],
             ],
             $output
         );
+
         $this->runCommands(
             [
-                'capco:es:create' => ['--quiet' => true, '--no-debug' => true, '--populate' => true]
+                'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
             ],
             $output
         );
@@ -378,7 +371,7 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'doctrine:migration:migrate' => ['--no-interaction' => true]
+                'doctrine:migration:migrate' => ['--no-interaction' => true],
             ],
             $output
         );
@@ -388,7 +381,7 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'doctrine:migration:version' => ['--add' => true, '--all' => true]
+                'doctrine:migration:version' => ['--add' => true, '--all' => true],
             ],
             $output
         );

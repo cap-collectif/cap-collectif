@@ -4,7 +4,7 @@ import { Modal, ListGroupItem, Button } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { UserInGroupModal_group } from '~relay/UserInGroupModal_group.graphql';
-import { UserAvatarDeprecated } from '../../User/UserAvatarDeprecated';
+import { UserAvatar } from '../../User/UserAvatar';
 import CloseButton from '../../Form/CloseButton';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
 
@@ -63,7 +63,7 @@ export class UserInGroupModal extends React.Component<Props, State> {
                 .map(user => (
                   <ListGroupItem className="d-flex text-left" key={user.id} id={user.id}>
                     {/* $FlowFixMe */}
-                    <UserAvatarDeprecated
+                    <UserAvatar
                       user={{
                         username: user.username,
                         media: user.media,

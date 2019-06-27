@@ -12,8 +12,10 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Entity\UserType;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -52,6 +54,43 @@ class UserRepository extends EntityRepository
             ->setParameter('group', $group);
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countAllUsers(bool $showSuperAdmin = false): int
+    {
+        $query = $this->createQueryBuilder('user')->select('COUNT(user.id)');
+
+        if ($showSuperAdmin) {
+            $query
+                ->andWhere('user.roles != :role')
+                ->setParameter('role', serialize(['ROLE_SUPER_ADMIN']));
+        }
+
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function getAllUsers(
+        ?int $limit = null,
+        ?int $first = null,
+        bool $showSuperAdmin = false
+    ): Paginator {
+        $qb = $this->createQueryBuilder('user');
+
+        if ($showSuperAdmin) {
+            $qb
+                ->andWhere('user.roles != :role')
+                ->setParameter('role', serialize(['ROLE_SUPER_ADMIN']));
+        }
+
+        if ($first) {
+            $qb->setFirstResult($first);
+        }
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return new Paginator($qb);
     }
 
     public function getUsersInGroup(Group $group): array
@@ -690,6 +729,52 @@ class UserRepository extends EntityRepository
             ->setParameter('step', $step);
 
         return $query->getResult();
+    }
+
+    public function getSearchResults(
+        int $nbByPage = 8,
+        int $page = 1,
+        ?string $sort = null,
+        ?string $type = null
+    ): Paginator {
+        if ($page < 1) {
+            throw new \InvalidArgumentException(
+                sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page)
+            );
+        }
+
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('m', 'ut')
+            ->leftJoin('u.media', 'm')
+            ->leftJoin('u.userType', 'ut');
+
+        if (null !== $type && UserType::FILTER_ALL !== $type) {
+            $qb->andWhere('ut.slug = :type')->setParameter('type', $type);
+        }
+
+        if (!$sort || 'activity' === $sort) {
+            $qb
+                ->addSelect(
+                    '(
+                    u.proposalsCount + 
+                    u.proposalCommentsCount + 
+                    u.opinionsCount + 
+                    u.opinionVersionsCount + 
+                    u.argumentsCount + 
+                    u.sourcesCount + 
+                    u.postCommentsCount 
+                    ) AS HIDDEN contributionsCount'
+                )
+                ->addOrderBy('contributionsCount', 'DESC');
+        } else {
+            $qb->addOrderBy('u.createdAt', 'DESC');
+        }
+
+        if ($nbByPage > 0) {
+            $qb->setFirstResult(($page - 1) * $nbByPage)->setMaxResults($nbByPage);
+        }
+
+        return new Paginator($qb);
     }
 
     public function findUsersFollowingAProposal(

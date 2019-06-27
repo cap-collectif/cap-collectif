@@ -14,7 +14,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
     <MediaLeft
       bsClass="media-left"
     >
-      <Connect(UserAvatarDeprecated)
+      <Connect(UserAvatar)
         user={
           Object {
             "displayName": "author1",
@@ -143,7 +143,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
     <MediaLeft
       bsClass="media-left"
     >
-      <Connect(UserAvatarDeprecated)
+      <Connect(UserAvatar)
         user={
           Object {
             "displayName": "author1",

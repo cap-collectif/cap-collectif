@@ -8,7 +8,7 @@ import { addLocaleData, injectIntl } from 'react-intl';
 import frLocaleData from 'react-intl/locale-data/fr';
 import { Button } from 'react-bootstrap';
 
-import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
+import { UserAvatar } from '../components/User/UserAvatar';
 import Navbar from '../components/Navbar/Navbar';
 import { TabsItemContainer, TabsLink, TabsDivider } from '../components/Ui/TabsBar/styles';
 import TabsBarDropdown from '../components/Ui/TabsBar/TabsBarDropdown';
@@ -83,7 +83,7 @@ const ContentRight = ({
         id="navbar-username"
         toggleElement={
           <span>
-            <UserAvatarDeprecated user={user} size={34} anchor={false} />
+            <UserAvatar user={user} size={34} anchor={false} />
             <span className="ml-5">{user.username}</span>
           </span>
         }>

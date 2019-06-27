@@ -11,12 +11,4 @@ trait AdminGeneralTait
     {
         $this->iVisitedPage('AdminGeneralListPage');
     }
-
-    /**
-     * @When I go to the admin argument list page
-     */
-    public function iGoToTheAdminArgumentListPage()
-    {
-        $this->iVisitedPage('AdminContributionArgumentPage');
-    }
 }

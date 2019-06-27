@@ -153,10 +153,6 @@ class GlobalIdResolver
                         ->find($uuid);
 
                     break;
-                case 'Comment':
-                    $node = $this->container->get(CommentRepository::class)->find($uuid);
-
-                    break;
                 default:
                     break;
             }
@@ -191,6 +187,10 @@ class GlobalIdResolver
 
         if (!$node) {
             $node = $this->container->get(ProposalFormRepository::class)->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get(CommentRepository::class)->find($uuid);
         }
 
         if (!$node) {

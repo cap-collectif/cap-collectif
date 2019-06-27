@@ -50,7 +50,7 @@ class ArgumentAdmin extends AbstractAdmin
                 $query
                     ->expr()
                     ->andX(
-                        $query->expr()->eq(':author', 'authors.user'),
+                        $qb->expr()->eq(':viewer', 'authors.user'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );
@@ -79,7 +79,7 @@ class ArgumentAdmin extends AbstractAdmin
                     'property' => 'username,email',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    }
+                    },
                 ]
             )
             ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
@@ -95,27 +95,27 @@ class ArgumentAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('body', null, [
                 'label' => 'admin.fields.argument.body',
-                'template' => 'CapcoAdminBundle:Argument:body_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Argument:body_list_field.html.twig',
             ])
             ->add('type', null, [
                 'label' => 'admin.fields.argument.type',
                 'template' => 'CapcoAdminBundle:Argument:type_list_field.html.twig',
-                'typesLabels' => Argument::$argumentTypesLabels
+                'typesLabels' => Argument::$argumentTypesLabels,
             ])
             ->add('opinion', 'sonata_type_model', ['label' => 'admin.fields.argument.opinion'])
             ->add('Author', 'sonata_type_model', ['label' => 'admin.fields.argument.author'])
             ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
             ->add('published', null, [
                 'editable' => false,
-                'label' => 'admin.fields.argument.is_enabled'
+                'label' => 'admin.fields.argument.is_enabled',
             ])
             ->add('trashedStatus', null, [
                 'label' => 'admin.fields.opinion.is_trashed',
-                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig'
+                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
             ->add('updatedAt', 'datetime', ['label' => 'admin.fields.argument.updated_at'])
             ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []]
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }
 
@@ -125,31 +125,31 @@ class ArgumentAdmin extends AbstractAdmin
             ->add('type', 'choice', [
                 'label' => 'admin.fields.argument.type',
                 'choices' => array_flip(Argument::$argumentTypesLabels),
-                'translation_domain' => 'CapcoAppBundle'
+                'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('published', null, [
                 'label' => 'admin.fields.argument.is_enabled',
                 'disabled' => true,
-                'attr' => ['readonly' => true]
+                'attr' => ['readonly' => true],
             ])
             ->add('opinion', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.argument.opinion',
-                'property' => 'title'
+                'property' => 'title',
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.argument.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                }
+                },
             ])
             ->add('body', null, ['label' => 'admin.fields.argument.body', 'attr' => ['rows' => 10]])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'admin.fields.opinion.is_trashed'
+                'label' => 'admin.fields.opinion.is_trashed',
             ])
             ->add('trashedReason', null, [
                 'label' => 'admin.fields.argument.trashed_reason',
-                'required' => false
+                'required' => false,
             ]);
     }
 

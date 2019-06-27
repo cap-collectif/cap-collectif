@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Repository\UserRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -28,73 +27,6 @@ class UserSearch extends Search
         $this->type = 'user';
     }
 
-    public function getRegisteredUsers(
-        int $pagination,
-        int $page,
-        string $sort = null,
-        $type = null
-    ): array {
-        $boolQuery = new Query\BoolQuery();
-        if (null !== $type && UserType::FILTER_ALL !== $type) {
-            $boolQuery->addMust(new Term(['userType.id' => ['value' => $type->getId()]]));
-        }
-        $query = new Query();
-        $query->setQuery($boolQuery);
-        if (!$sort || 'activity' === $sort) {
-            $query->setSort([
-                'totalContributionsCount' => [
-                    'order' => 'desc'
-                ]
-            ]);
-        } else {
-            $query->addSort([
-                'createdAt' => ['order' => 'ASC']
-            ]);
-        }
-
-        if ($pagination > 0) {
-            $query->setFrom(($page - 1) * $pagination)->setSize($pagination);
-        }
-
-        $resultSet = $this->index->getType('user')->search($query);
-
-        return [
-            'results' => $this->getHydratedResults($resultSet->getResults()),
-            'totalCount' => $resultSet->getTotalHits()
-        ];
-    }
-
-    public function getAllUsers(
-        ?int $limit = null,
-        ?int $first = null,
-        bool $showSuperAdmin = false
-    ): array {
-        $boolQuery = new Query\BoolQuery();
-        if (!$showSuperAdmin) {
-            $queryString = new Query\QueryString();
-            $queryString->setQuery('ROLE_SUPER_ADMIN');
-            $queryString->setFields(['roles']);
-            $boolQuery->addMustNot($queryString);
-        }
-        $query = new Query();
-        $query->setQuery($boolQuery);
-
-        if ($first) {
-            $query->setFrom($first);
-        }
-
-        if ($limit) {
-            $query->setSize($limit);
-        }
-
-        $resultSet = $this->index->getType('user')->search($query);
-
-        return [
-            'results' => $this->getHydratedResults($resultSet->getResults()),
-            'totalCount' => $resultSet->getTotalHits()
-        ];
-    }
-
     public function searchAllUsers(
         $terms = null,
         ?array $notInIds = [],
@@ -113,7 +45,7 @@ class UserSearch extends Search
 
             return [
                 'users' => $users,
-                'count' => \count($authorIds)
+                'count' => \count($authorIds),
             ];
         }
 
@@ -139,7 +71,7 @@ class UserSearch extends Search
 
         return [
             'users' => $users,
-            'count' => $resultSet->getTotalHits()
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -167,7 +99,7 @@ class UserSearch extends Search
 
         return [
             'users' => $users,
-            'count' => $resultSet->getTotalHits()
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -189,9 +121,9 @@ class UserSearch extends Search
             'contributionsCountByProject.count' => [
                 'order' => 'desc',
                 'nested_filter' => [
-                    'term' => ['contributionsCountByProject.project.id' => $project->getId()]
-                ]
-            ]
+                    'term' => ['contributionsCountByProject.project.id' => $project->getId()],
+                ],
+            ],
         ]);
 
         $query
@@ -203,7 +135,7 @@ class UserSearch extends Search
 
         return [
             'results' => $users,
-            'totalCount' => $resultSet->getTotalHits()
+            'totalCount' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -219,23 +151,14 @@ class UserSearch extends Search
         $nestedQuery->setQuery($boolQuery);
 
         $query = new Query($nestedQuery);
-
         $query->setSort([
-            'createdAt' => [
+            'contributionsCountByStep.count' => [
                 'order' => 'desc',
+                'nested_filter' => [
+                    'term' => ['contributionsCountByStep.step.id' => $step->getId()],
+                ],
             ],
         ]);
-
-        // Unstable sort by top contributors.
-        // It will be used in the future for projects counters.
-        // $query->setSort([
-        //     'contributionsCountByStep.count' => [
-        //         'order' => 'desc',
-        //         'nested_filter' => [
-        //             'term' => ['contributionsCountByStep.step.id' => $step->getId()],
-        //         ],
-        //     ],
-        // ]);
 
         $query
             ->setSource(['id'])
@@ -247,32 +170,34 @@ class UserSearch extends Search
 
         return [
             'results' => $users,
-            'totalCount' => $resultSet->getTotalHits()
+            'totalCount' => $resultSet->getTotalHits(),
         ];
     }
 
     public function getAllContributors(int $offset, int $limit): array
     {
-        $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMust(new Range('totalContributionsCount', ['gt' => 0]));
+        $nestedQuery = new Query\Nested();
+        $nestedQuery->setPath('totalContributionsCount');
 
-        $query = new Query($boolQuery);
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery->addMust(new Range('totalContributionsCount.count', ['gt' => 0]));
+
+        $nestedQuery->setQuery($boolQuery);
+
+        $query = new Query($nestedQuery);
         $query->setSort([
-            'totalContributionsCount' => [
-                'order' => 'desc'
-            ]
+            'totalContributionsCount.count' => [
+                'order' => 'desc',
+            ],
         ]);
 
-        $query
-            ->setFrom($offset)
-            ->setSize($limit)
-            ->setSource(['id']);
+        $query->setFrom($offset)->setSize($limit);
 
         $resultSet = $this->index->getType('user')->search($query);
 
         return [
-            'results' => $this->getHydratedResultsFromResultSet($resultSet),
-            'totalCount' => $resultSet->getTotalHits()
+            'results' => $this->getHydratedResults($resultSet->getResults()),
+            'totalCount' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -292,6 +217,7 @@ class UserSearch extends Search
                 return $result->getData()['id'];
             }, $ids);
         }
+
         // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
         $users = $this->userRepo->hydrateFromIds($ids);

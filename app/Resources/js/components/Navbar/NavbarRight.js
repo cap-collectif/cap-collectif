@@ -8,7 +8,7 @@ import TabsBarDropdown from '../Ui/TabsBar/TabsBarDropdown';
 import { TabsItemContainer, TabsLink, TabsDivider } from '../Ui/TabsBar/styles';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
-import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
+import UserAvatar from '../User/UserAvatar';
 import type { State, FeatureToggles } from '../../types';
 import type { User } from '../../redux/modules/user';
 
@@ -67,7 +67,7 @@ export class NavbarRight extends React.Component<Props> {
             )}
             toggleElement={
               <span>
-                <UserAvatarDeprecated user={user} size={34} anchor={false} />
+                <UserAvatar user={user} size={34} anchor={false} />
                 <span className="ml-5">{user.username}</span>
               </span>
             }>

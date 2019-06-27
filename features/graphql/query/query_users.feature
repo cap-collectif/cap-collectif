@@ -8,7 +8,7 @@ Scenario: GraphQL admin want to get users including superadmin
     """
     {
       "query": "{
-        users(first: 5, superAdmin: true) {
+        users(first: 5) {
           totalCount
           edges {
             node {
@@ -38,17 +38,17 @@ Scenario: GraphQL admin want to get users including superadmin
             },
             {
               "node": {
-                "_id": "user_not_confirmed"
-              }
-            },
-            {
-              "node": {
-                "_id": "user_not_confirmed_with_contribution"
-              }
-            },
-            {
-              "node": {
                 "_id": "user1"
+              }
+            },
+            {
+              "node": {
+                "_id": "user10"
+              }
+            },
+            {
+              "node": {
+                "_id": "user100"
               }
             }
           ]

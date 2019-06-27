@@ -2,12 +2,12 @@ Capco\AppBundle\Entity\PostComment:
   pComment{1..5}:
     id: 'postComment<current()>'
     post: '@post3'
-    Author: '@user3'
+    Author: '@user<numberBetween(1, 3)>'
     body: <text(300)>
     publishedAt: <(new \DateTime('yesterday'))>
   pComment{6..50}:
     id: 'postComment<current()>'
     post: '@post1'
-    Author: '@user2'
+    Author: '@user<numberBetween(1, 3)>'
     body: <text(300)>
     publishedAt: <(new \DateTime('yesterday'))>

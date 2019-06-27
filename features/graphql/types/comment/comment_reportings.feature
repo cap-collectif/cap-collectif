@@ -24,7 +24,7 @@ Scenario: Admin wants to get reportings for a comment
       }
     }",
     "variables": {
-      "commentId": "Q29tbWVudDpldmVudENvbW1lbnQx"
+      "commentId": "eventComment1"
     }
   }
   """
@@ -33,7 +33,7 @@ Scenario: Admin wants to get reportings for a comment
   {
     "data": {
         "comment": {
-            "id": "Q29tbWVudDpldmVudENvbW1lbnQx",
+            "id": "eventComment1",
             "reportings": {
                 "totalCount": 1,
                 "edges": [

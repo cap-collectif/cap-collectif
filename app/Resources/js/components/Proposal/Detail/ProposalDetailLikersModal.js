@@ -6,7 +6,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ListGroupItem, Modal } from 'react-bootstrap';
 import { closeDetailLikersModal } from '../../../redux/modules/proposal';
 import type { ProposalDetailLikersModal_proposal } from '~relay/ProposalDetailLikersModal_proposal.graphql';
-import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
+import UserAvatar from '../../User/UserAvatar';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
 import type { Dispatch } from '../../../types';
 
@@ -47,7 +47,7 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
           {proposal.likers.map((liker, key) => (
             <ListGroupItem key={key} className={`${liker.vip ? 'bg-vip' : ''} d-flex text-left`}>
               {/* $FlowFixMe Will be a fragment soon */}
-              <UserAvatarDeprecated
+              <UserAvatar
                 user={{
                   username: liker.username,
                   media: liker.media,

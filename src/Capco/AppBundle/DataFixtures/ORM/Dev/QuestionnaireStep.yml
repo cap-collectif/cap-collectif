@@ -7,7 +7,6 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
     startAt: <(new \DateTime('2014-09-27'))>
     endAt: <(new \DateTime('2024-09-27'))>
     verification: 'sms'
-    repliesCount: 4
   questionnairestep2:
     id: questionnairestep2
     title: Questionnaire
@@ -15,7 +14,6 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('2014-09-27'))>
     endAt: <(new \DateTime('2024-09-27'))>
-    repliesCount: 1
   questionnairestepJump:
     id: questionnairestepJump
     title: Etape de questionnaire avec questionnaire sauts conditionnels
@@ -37,4 +35,3 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('2014-09-27'))>
     endAt: <(new \DateTime('2016-09-27'))>
-    repliesCount: 1

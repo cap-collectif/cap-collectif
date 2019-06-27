@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\OpinionVote:
   opinionVote1:
     id: 1
     Opinion: '@opinion3'
-    value: 1
+    value: <numberBetween(-1, 1)>
     user: '@user4'
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
@@ -42,7 +42,7 @@ Capco\AppBundle\Entity\OpinionVote:
   opinionVote{6..50}:
     id: <current()>
     Opinion: '@opinion59'
-    value: 1
+    value: <numberBetween(-1, 1)>
     user: '@user<current()>'
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
@@ -50,7 +50,7 @@ Capco\AppBundle\Entity\OpinionVote:
   opinionVote51:
     id: 51
     Opinion: '@opinion59'
-    value: 0
+    value: <numberBetween(-1, 1)>
     user: '@user_not_confirmed_with_contributions'
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
@@ -58,7 +58,7 @@ Capco\AppBundle\Entity\OpinionVote:
   opinionVote{52..80}:
     id: <current()>
     Opinion: '@opinion69'
-    value: -1
+    value: <numberBetween(-1, 1)>
     user: '@user<current()>'
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
@@ -66,7 +66,7 @@ Capco\AppBundle\Entity\OpinionVote:
   opinionVote81:
     id: 81
     Opinion: '@opinion1'
-    value: 1
+    value: <numberBetween(-1, 1)>
     user: '@user519'
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>

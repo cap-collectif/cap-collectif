@@ -138,14 +138,4 @@ describe('Query.node', () => {
     },
     TIMEOUT,
   );
-
-  it(
-    'gets the correct ID and type name for comments',
-    async () => {
-      await expect(
-        graphql(NodeQuery, { id: toGlobalId('Comment', 'eventComment1') }),
-      ).resolves.toMatchSnapshot();
-    },
-    TIMEOUT,
-  );
 });

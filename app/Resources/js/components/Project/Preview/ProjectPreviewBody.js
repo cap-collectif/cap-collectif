@@ -125,7 +125,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
     return (
       <OverlayTrigger placement="top" overlay={tooltip}>
-        <a href={link} target={project.isExternal && project.externalLink ? 'blank' : ''}>
+        <a href={link}>
           <div style={{ width: '98%' }}>
             <Truncate lines={3}>{project.title}</Truncate>
             {project.isExternal && project.externalLink && (

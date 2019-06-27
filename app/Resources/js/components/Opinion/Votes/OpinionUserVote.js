@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
+import UserAvatar from '../../User/UserAvatar';
 import type { OpinionUserVote_vote } from '~relay/OpinionUserVote_vote.graphql';
 
 type Props = {
@@ -22,7 +22,7 @@ class OpinionUserVote extends React.Component<Props> {
             <Tooltip id={`opinion-vote-tooltip-${vote.id}`}>{vote.author.displayName}</Tooltip>
           }>
           {/* $FlowFixMe Will be a fragment soon */}
-          <UserAvatarDeprecated user={vote.author} className="" />
+          <UserAvatar user={vote.author} className="" />
         </OverlayTrigger>
       </span>
     );

@@ -134,7 +134,6 @@ services:
 
   Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader:
     autowire: true
-    public: true
     arguments:
       $cachePrefix: StepContributionsDataLoader
       $cacheTtl: 120

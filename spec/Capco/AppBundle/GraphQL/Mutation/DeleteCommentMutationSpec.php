@@ -4,7 +4,6 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
@@ -41,16 +40,15 @@ class DeleteCommentMutationSpec extends ObjectBehavior
 
     public function it_returns_userError_if_not_found($commentRepo, Arg $arguments, User $viewer)
     {
-        $commentId = GlobalId::toGlobalId('Comment', '123456');
-        $arguments->offsetGet('id')->willReturn($commentId);
-        $commentRepo->find(GlobalId::fromGlobalId($commentId)['id'])->willReturn(null);
+        $arguments->offsetGet('id')->willReturn('123456');
+        $commentRepo->find('123456')->willReturn(null);
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'userErrors' => [
                 [
-                    'message' => 'Comment not found.'
-                ]
-            ]
+                    'message' => 'Comment not found.',
+                ],
+            ],
         ]);
     }
 
@@ -62,16 +60,16 @@ class DeleteCommentMutationSpec extends ObjectBehavior
         ProposalComment $comment
     ) {
         $comment->getAuthor()->willReturn($author);
-        $commentId = GlobalId::toGlobalId('Comment', '123456');
-        $commentRepo->find(GlobalId::fromGlobalId($commentId)['id'])->willReturn($comment);
+        $commentId = '123456';
+        $commentRepo->find('123456')->willReturn($comment);
         $arguments->offsetGet('id')->willReturn($commentId);
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'userErrors' => [
                 [
-                    'message' => 'You are not author of the comment.'
-                ]
-            ]
+                    'message' => 'You are not author of the comment.',
+                ],
+            ],
         ]);
     }
 
@@ -85,11 +83,11 @@ class DeleteCommentMutationSpec extends ObjectBehavior
         ProposalComment $comment,
         Proposal $proposal
     ) {
-        $commentId = GlobalId::toGlobalId('Comment', '123456');
+        $commentId = '123456';
         $proposal->getId()->willReturn('012234');
         $comment->getAuthor()->willReturn($viewer);
         $comment->getRelatedObject()->willReturn($proposal);
-        $commentRepo->find(GlobalId::fromGlobalId($commentId)['id'])->willReturn($comment);
+        $commentRepo->find('123456')->willReturn($comment);
         $arguments->offsetGet('id')->willReturn($commentId);
         $em->remove(Argument::any())->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -97,7 +95,7 @@ class DeleteCommentMutationSpec extends ObjectBehavior
         $redisStorage->recomputeUserCounters($viewer)->shouldBeCalled();
         $this->__invoke($arguments, $viewer)->shouldBe([
             'deletedCommentId' => $commentId,
-            'userErrors' => []
+            'userErrors' => [],
         ]);
     }
 }

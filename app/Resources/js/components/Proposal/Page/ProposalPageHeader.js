@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
-import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
+import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
@@ -75,7 +75,7 @@ export class ProposalPageHeader extends React.Component<Props> {
         </TrashedMessage>
         <div className="media mb-15">
           {/* $FlowFixMe Will be a fragment soon */}
-          <UserAvatarDeprecated className="pull-left" user={proposal.author} />
+          <UserAvatar className="pull-left" user={proposal.author} />
           <div className="media-body">
             <p className="media--aligned excerpt">
               <FormattedMessage

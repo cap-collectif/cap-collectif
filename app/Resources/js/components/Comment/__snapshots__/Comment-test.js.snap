@@ -10,7 +10,7 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
     <div
       className="opinion__content"
     >
-      <Connect(UserAvatarDeprecated)
+      <Connect(UserAvatar)
         user={
           Object {
             "displayName": "admin",
@@ -180,7 +180,7 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
     <div
       className="opinion__content"
     >
-      <Connect(UserAvatarDeprecated)
+      <Connect(UserAvatar)
         user={
           Object {
             "displayName": "admin",
@@ -350,7 +350,7 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
     <div
       className="opinion__content"
     >
-      <Connect(UserAvatarDeprecated)
+      <Connect(UserAvatar)
         user={
           Object {
             "displayName": "admin",
@@ -535,7 +535,7 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
     <div
       className="opinion__content"
     >
-      <Connect(UserAvatarDeprecated)
+      <Connect(UserAvatar)
         user={
           Object {
             "displayName": "admin",
@@ -720,7 +720,7 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
     <div
       className="opinion__content"
     >
-      <Connect(UserAvatarDeprecated)
+      <Connect(UserAvatar)
         user={
           Object {
             "displayName": "jcVandam",
@@ -906,7 +906,7 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
     <div
       className="opinion__content"
     >
-      <Connect(UserAvatarDeprecated)
+      <Connect(UserAvatar)
         user={
           Object {
             "displayName": "jcVandam",

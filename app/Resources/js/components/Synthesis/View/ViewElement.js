@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import ElementTitle from './../Element/ElementTitle';
-import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
+import UserAvatar from '../../User/UserAvatar';
 import VotePiechart from '../../Utils/VotePiechart';
 import ChildrenModal from './ChildrenModal';
 import SynthesisDisplayRules from '../../../services/SynthesisDisplayRules';
@@ -46,10 +46,7 @@ class ViewElement extends React.Component {
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'author')) {
       return (
         <div className="synthesis__element__author">
-          <UserAvatarDeprecated
-            className="pull-left"
-            style={{ marginRight: '15px', marginTop: '15px' }}
-          />
+          <UserAvatar className="pull-left" style={{ marginRight: '15px', marginTop: '15px' }} />
           <span>{element.authorName}</span>
         </div>
       );
