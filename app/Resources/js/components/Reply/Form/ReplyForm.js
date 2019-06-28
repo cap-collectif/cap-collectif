@@ -282,7 +282,11 @@ const mapStateToProps = (state: State, props: Props) => ({
     formValueSelector(props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`)(
       state,
       'responses',
-    ) || [],
+    ) ||
+    formatInitialResponsesValues(
+      props.questionnaire.questions,
+      props.reply ? props.reply.responses : [],
+    ),
   initialValues: {
     responses: formatInitialResponsesValues(
       props.questionnaire.questions,
