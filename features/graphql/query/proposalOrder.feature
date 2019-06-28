@@ -29,7 +29,7 @@ Scenario: GraphQL client want to order proposals by COMMENTS
   """
   Then the JSON response should match:
   """
-  {
+    {
      "data":{
         "proposalForm":{
            "proposals":{
@@ -37,48 +37,56 @@ Scenario: GraphQL client want to order proposals by COMMENTS
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWwx",
-                       "comments": {
-                         "totalCount":19
+                       "comments":{
+                          "totalCount":19
                        }
                     }
                  },
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWwxMA==",
-                       "comments": {
-                         "totalCount":0
+                       "comments":{
+                          "totalCount":0
+                       }
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                       "comments":{
+                          "totalCount":0
                        }
                     }
                  },
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
-                       "comments": {
-                         "totalCount":0
+                       "comments":{
+                          "totalCount":0
                        }
                     }
                  },
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
-                       "comments": {
-                         "totalCount":0
+                       "comments":{
+                          "totalCount":0
                        }
                     }
                  },
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWwz",
-                       "comments": {
-                         "totalCount":0
+                       "comments":{
+                          "totalCount":0
                        }
                     }
                  },
                  {
                     "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWw0",
-                       "comments": {
-                         "totalCount":0
+                       "comments":{
+                          "totalCount":0
                        }
                     }
                  }

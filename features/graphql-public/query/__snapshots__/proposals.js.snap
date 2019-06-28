@@ -105,12 +105,21 @@ Object {
             "title": "Proposition brouillon 2",
           },
         },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+            "publicationStatus": "PUBLISHED",
+            "title": "Test de publication avec accusé de réception",
+          },
+        },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "hasNextPage": false,
       },
-      "totalCount": 11,
+      "totalCount": 12,
     },
   },
 }
@@ -458,12 +467,68 @@ Object {
             "updatedAt": "2018-03-01 00:08:00",
           },
         },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2018-04-02 00:00:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+            "publishedAt": "2018-04-11 00:00:00",
+            "reference": "1-1104",
+            "responses": Array [
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAz",
+                  "title": "Nouvelle section 3",
+                },
+                "value": null,
+              },
+              Object {
+                "formattedValue": null,
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mw==",
+                  "title": "Evaluez le coût de votre proposition",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTE=",
+                  "title": "Documents",
+                },
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MediaQuestion",
+                  "id": "UXVlc3Rpb246MTI=",
+                  "title": "Bilans",
+                },
+              },
+            ],
+            "title": "Test de publication avec accusé de réception",
+            "trashed": false,
+            "trashedStatus": null,
+            "updatedAt": "2018-04-10 00:00:00",
+          },
+        },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "hasNextPage": false,
       },
-      "totalCount": 6,
+      "totalCount": 7,
     },
   },
 }
