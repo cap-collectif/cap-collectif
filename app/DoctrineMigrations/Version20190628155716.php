@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190628145101 extends AbstractMigration
+final class Version20190628155716 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
@@ -17,8 +17,8 @@ final class Version20190628145101 extends AbstractMigration
 
         $this->addSql('ALTER TABLE logic_jump DROP always');
         $this->addSql('ALTER TABLE question ADD always_jump_destination_question_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE question ADD CONSTRAINT FK_B6F7494ED591D250 FOREIGN KEY (always_jump_destination_question_id) REFERENCES questionnaire_abstractquestion (id)');
-        $this->addSql('CREATE INDEX IDX_B6F7494ED591D250 ON question (always_jump_destination_question_id)');
+        $this->addSql('ALTER TABLE question ADD CONSTRAINT FK_B6F7494EC418603E FOREIGN KEY (always_jump_destination_question_id) REFERENCES question (id)');
+        $this->addSql('CREATE INDEX IDX_B6F7494EC418603E ON question (always_jump_destination_question_id)');
     }
 
     public function down(Schema $schema) : void
@@ -27,8 +27,8 @@ final class Version20190628145101 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE logic_jump ADD always TINYINT(1) NOT NULL');
-        $this->addSql('ALTER TABLE question DROP FOREIGN KEY FK_B6F7494ED591D250');
-        $this->addSql('DROP INDEX IDX_B6F7494ED591D250 ON question');
+        $this->addSql('ALTER TABLE question DROP FOREIGN KEY FK_B6F7494EC418603E');
+        $this->addSql('DROP INDEX IDX_B6F7494EC418603E ON question');
         $this->addSql('ALTER TABLE question DROP always_jump_destination_question_id');
     }
 }

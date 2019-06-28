@@ -2709,6 +2709,9 @@ type MediaQuestion implements Question & Node {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
+
+  # The destination of the always jump (the else case) of this question.
+  alwaysJumpDestinationQuestion: Question
 }
 
 # A response
@@ -2780,6 +2783,9 @@ type MultipleChoiceQuestion implements Question & Node {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
+
+  # The destination of the always jump (the else case) of this question.
+  alwaysJumpDestinationQuestion: Question
   isOtherAllowed: Boolean!
 
   # Responses of the `other` question choice.
@@ -4831,6 +4837,9 @@ interface Question {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
+
+  # The destination of the always jump (the else case) of this question.
+  alwaysJumpDestinationQuestion: Question
 }
 
 # A possible choice of a question.
@@ -5673,6 +5682,9 @@ type SectionQuestion implements Question & Node {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
+
+  # The destination of the always jump (the else case) of this question.
+  alwaysJumpDestinationQuestion: Question
 }
 
 input SelectProposalInput {
@@ -5958,6 +5970,9 @@ type SimpleQuestion implements Question & Node {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
+
+  # The destination of the always jump (the else case) of this question.
+  alwaysJumpDestinationQuestion: Question
 }
 
 # A site image

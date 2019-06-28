@@ -85,7 +85,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     protected $jumps;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion")
      * @ORM\JoinColumn(name="always_jump_destination_question_id", nullable=true)
      */
     protected $alwaysJumpDestinationQuestion;
@@ -337,7 +337,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         return true;
     }
 
-    public function getAlwaysJumpDestinationQuestion(): ?self
+    public function getAlwaysJumpDestinationQuestion(): ?AbstractQuestion
     {
         return $this->alwaysJumpDestinationQuestion;
     }

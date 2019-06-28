@@ -90,16 +90,4 @@ class LogicJump
 
         return $this;
     }
-
-    public function isAlways(): ?bool
-    {
-        return $this->always;
-    }
-
-    public function setAlways(bool $always): self
-    {
-        $this->always = $always;
-
-        return $this;
-    }
 }
