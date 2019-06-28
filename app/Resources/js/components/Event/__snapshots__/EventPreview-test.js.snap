@@ -28,7 +28,7 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <UserAvatar
+        <UserAvatarDeprecated
           anchor={true}
           className=""
           onBlur={[Function]}
@@ -129,7 +129,7 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       <p
         className="excerpt"
       >
-        <UserAvatar
+        <UserAvatarDeprecated
           anchor={true}
           className=""
           onBlur={[Function]}
@@ -230,7 +230,7 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
       <p
         className="excerpt"
       >
-        <UserAvatar
+        <UserAvatarDeprecated
           anchor={true}
           className=""
           onBlur={[Function]}

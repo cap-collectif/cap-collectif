@@ -15,7 +15,7 @@ import type { GlobalState, Dispatch } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 import type { MapTokens } from '../../../redux/modules/user';
 import type { MapOptions } from '../../Proposal/Map/LeafletMap';
-import { UserAvatar } from '../../User/UserAvatar';
+import { UserAvatarDeprecated } from '../../User/UserAvatarDeprecated';
 import environment from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 
@@ -232,7 +232,10 @@ export class LeafletMap extends Component<Props, State> {
                               this.state.currentEvent.author.username && (
                                 <p className="excerpt">
                                   {/* $FlowFixMe */}
-                                  <UserAvatar size={16} user={this.state.currentEvent.author} />
+                                  <UserAvatarDeprecated
+                                    size={16}
+                                    user={this.state.currentEvent.author}
+                                  />
                                   <span className="font-weight-semi-bold">
                                     {this.state.currentEvent.author.username}
                                   </span>

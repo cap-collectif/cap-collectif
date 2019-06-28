@@ -25,7 +25,7 @@ type Props = {
   onMouseOut?: Function,
 };
 
-export class UserAvatar extends React.Component<Props> {
+export class UserAvatarDeprecated extends React.Component<Props> {
   static defaultProps = {
     user: null,
     size: 45,
@@ -96,4 +96,4 @@ const mapStateToProps = (state: State) => ({
   defaultAvatar: state.default.images && state.default.images.avatar,
 });
 
-export default connect(mapStateToProps)(UserAvatar);
+export default connect(mapStateToProps)(UserAvatarDeprecated);

@@ -54,7 +54,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         key="user1"
         listItem={false}
       >
-        <UserAvatar
+        <UserAvatarDeprecated
           anchor={true}
           className=""
           defaultAvatar={null}
@@ -94,7 +94,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         key="user2"
         listItem={false}
       >
-        <UserAvatar
+        <UserAvatarDeprecated
           anchor={true}
           className=""
           defaultAvatar={null}
@@ -195,7 +195,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         key="user1"
         listItem={false}
       >
-        <UserAvatar
+        <UserAvatarDeprecated
           anchor={true}
           className=""
           defaultAvatar={null}
@@ -235,7 +235,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         key="user2"
         listItem={false}
       >
-        <UserAvatar
+        <UserAvatarDeprecated
           anchor={true}
           className=""
           defaultAvatar={null}

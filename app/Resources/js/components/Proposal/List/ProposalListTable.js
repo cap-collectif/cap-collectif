@@ -12,7 +12,7 @@ import ProposalListTableMobile from './ProposalListTableMobile';
 import ImplementationStepTitle from '../ImplementationStepTitle';
 import ProgressList from '../../Ui/List/ProgressList';
 import ProgressListItem from '../../Ui/List/ProgressListItem';
-import UserAvatar from '../../User/UserAvatar';
+import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
 import InlineList from '../../Ui/List/InlineList';
 
 type Props = {
@@ -269,7 +269,7 @@ export class ProposalListTable extends React.Component<Props, State> {
         return (
           <td key={key}>
             <div className="d-flex align-items-center text-ellipsis">
-              <UserAvatar
+              <UserAvatarDeprecated
                 user={{ username: value.displayName, media: value.media, _links: {} }}
                 defaultAvatar={null}
               />

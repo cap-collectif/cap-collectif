@@ -374,7 +374,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         <div
           className="d-flex align-items-center text-ellipsis"
         >
-          <Connect(UserAvatar)
+          <Connect(UserAvatarDeprecated)
             defaultAvatar={null}
             user={
               Object {
@@ -440,7 +440,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         <div
           className="d-flex align-items-center text-ellipsis"
         >
-          <Connect(UserAvatar)
+          <Connect(UserAvatarDeprecated)
             defaultAvatar={null}
             user={
               Object {

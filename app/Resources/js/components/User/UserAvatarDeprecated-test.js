@@ -2,9 +2,9 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { UserAvatar } from './UserAvatar';
+import { UserAvatarDeprecated } from './UserAvatarDeprecated';
 
-describe('<UserAvatar />', () => {
+describe('<UserAvatarDeprecated />', () => {
   it('renders correctly', () => {
     const props = {
       user: {
@@ -32,7 +32,7 @@ describe('<UserAvatar />', () => {
         console.log('onMouseOut');
       },
     };
-    const wrapper = shallow(<UserAvatar {...props} />);
+    const wrapper = shallow(<UserAvatarDeprecated {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -47,7 +47,7 @@ describe('<UserAvatar />', () => {
       },
       size: 16,
     };
-    const wrapper = shallow(<UserAvatar {...props} />);
+    const wrapper = shallow(<UserAvatarDeprecated {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -63,7 +63,7 @@ describe('<UserAvatar />', () => {
       defaultAvatar: 'http://avatar/customAvatar.jpg',
       size: 16,
     };
-    const wrapper = shallow(<UserAvatar {...props} />);
+    const wrapper = shallow(<UserAvatarDeprecated {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

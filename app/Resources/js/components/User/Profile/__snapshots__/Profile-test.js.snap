@@ -52,7 +52,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
             values={Object {}}
           />
         </label>
-        <Connect(UserAvatar)
+        <Connect(UserAvatarDeprecated)
           className="col-sm-1"
           user={
             Object {
@@ -472,7 +472,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
             values={Object {}}
           />
         </label>
-        <Connect(UserAvatar)
+        <Connect(UserAvatarDeprecated)
           className="col-sm-1"
           user={
             Object {

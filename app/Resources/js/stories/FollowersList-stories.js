@@ -6,7 +6,7 @@ import { Row, Col, Label } from 'react-bootstrap';
 
 import Media from '../components/Ui/Medias/Media/Media';
 import Card from '../components/Ui/Card/Card';
-import { UserAvatar } from '../components/User/UserAvatar';
+import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
 import UserLink from '../components/User/UserLink';
 
 import { followers as followersMock } from './mocks/users';
@@ -18,7 +18,7 @@ const FollowerItem = ({ user }) => (
       <Media>
         <Media.Left>
           {/* $FlowFixMe */}
-          <UserAvatar user={user} />
+          <UserAvatarDeprecated user={user} />
         </Media.Left>
         <Media.Body>
           {user ? (

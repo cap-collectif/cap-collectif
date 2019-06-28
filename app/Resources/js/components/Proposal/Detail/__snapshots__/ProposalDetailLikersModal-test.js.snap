@@ -54,7 +54,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when on
       key="0"
       listItem={false}
     >
-      <Connect(UserAvatar)
+      <Connect(UserAvatarDeprecated)
         user={
           Object {
             "_links": Object {
@@ -141,7 +141,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
       key="0"
       listItem={false}
     >
-      <Connect(UserAvatar)
+      <Connect(UserAvatarDeprecated)
         user={
           Object {
             "_links": Object {
@@ -176,7 +176,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
       key="1"
       listItem={false}
     >
-      <Connect(UserAvatar)
+      <Connect(UserAvatarDeprecated)
         user={
           Object {
             "_links": Object {

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Button, ListGroupItem, Tooltip, OverlayTrigger, Popover, Label } from 'react-bootstrap';
-import { UserAvatar } from '../components/User/UserAvatar';
+import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
 import InlineList from '../components/Ui/List/InlineList';
 import ListGroup from '../components/Ui/List/ListGroup';
 import Media from '../components/Ui/Medias/Media/Media';
@@ -29,7 +29,7 @@ const OpinionItem = ({ item, typeLabel }) => (
   <React.Fragment>
     <Media>
       <Media.Left>
-        <UserAvatar user={item.user} />
+        <UserAvatarDeprecated user={item.user} />
       </Media.Left>
       <Media.Body className="opinion__body">
         <div className="opinion__user">

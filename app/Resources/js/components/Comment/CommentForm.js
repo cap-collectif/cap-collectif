@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import renderComponent from '../Form/Field';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
-import UserAvatar from '../User/UserAvatar';
+import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import AddCommentMutation from '../../mutations/AddCommentMutation';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import type { GlobalState, Dispatch } from '../../types';
@@ -235,7 +235,7 @@ export class CommentForm extends React.Component<Props, State> {
 
     return (
       <div id="CommentForm" className={classes} style={{ padding: '5px' }}>
-        <UserAvatar user={user} className="pull-left" />
+        <UserAvatarDeprecated user={user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock">
           <form onSubmit={this.onSubmit}>
             <Field

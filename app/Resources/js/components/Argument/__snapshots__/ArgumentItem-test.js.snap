@@ -9,7 +9,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
 >
   <Media>
     <Left>
-      <Connect(UserAvatar)
+      <Connect(UserAvatarDeprecated)
         className="excerpt_dark"
         user={
           Object {
@@ -190,7 +190,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
   </p>
   <Media>
     <Left>
-      <Connect(UserAvatar)
+      <Connect(UserAvatarDeprecated)
         className="excerpt_dark"
         user={
           Object {
