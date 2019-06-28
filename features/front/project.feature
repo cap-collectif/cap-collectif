@@ -128,7 +128,7 @@ Scenario: Presentation step should display correct number of element
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
   And I follow "Présentation"
-  Then I should see 2 ".media--news" elements
+  Then I should see 1 ".media--news" elements
   And I should see 2 ".event" elements
 
 Scenario: Events menu for project should display correct number of events

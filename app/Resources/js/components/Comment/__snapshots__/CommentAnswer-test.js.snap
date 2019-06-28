@@ -10,7 +10,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
     <div
       className="opinion__content"
     >
-      <Connect(UserAvatar)
+      <Connect(UserAvatarDeprecated)
         user={
           Object {
             "displayName": "admin",

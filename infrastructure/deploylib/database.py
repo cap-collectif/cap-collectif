@@ -8,7 +8,6 @@ def generate(migrate='false', environement='dev'):
     "Generate database"
     if environement in environements:
         env.service_command('rm -rf web/media/*', 'application')
-        env.service_command('curl -sS -XDELETE http://elasticsearch:9200/_all', 'application')
         env.service_command('php -d memory_limit=-1 bin/console capco:reinit --force --env=' + environement + ('', ' --migrate')[migrate == 'true'], 'application', env.www_app)
     else:
         print "Option environment must be 'dev', 'test' or 'prod'."

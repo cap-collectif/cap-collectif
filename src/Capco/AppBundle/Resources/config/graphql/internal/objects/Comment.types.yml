@@ -15,6 +15,10 @@ Comment:
     interfaces:
       [Node, PublicPublishable, Reportable, Contribution, Commentable, UniformResourceLocatable]
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Comment
       body:
         type: 'String!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentBodyResolver", [value])'

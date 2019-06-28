@@ -8,7 +8,7 @@ Object {
     "avatarUrl": null,
     "biography": null,
     "consentInternalCommunication": false,
-    "createdAt": "2015-01-01 00:00:05",
+    "createdAt": "2015-01-04 00:00:00",
     "deletedAccountAt": null,
     "email": "admin@test.com",
     "enabled": true,

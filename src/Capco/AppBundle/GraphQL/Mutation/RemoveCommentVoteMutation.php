@@ -1,8 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -34,7 +34,7 @@ class RemoveCommentVoteMutation implements MutationInterface
     public function __invoke(Arg $input, User $viewer): array
     {
         $id = $input->offsetGet('commentId');
-        $comment = $this->commentRepo->find($id);
+        $comment = $this->commentRepo->find(GlobalId::fromGlobalId($id)['id']);
 
         $vote = $this->commentVoteRepo->findOneBy(['user' => $viewer, 'comment' => $comment]);
 
@@ -53,7 +53,7 @@ class RemoveCommentVoteMutation implements MutationInterface
         return [
             'deletedVoteId' => $deletedVoteId,
             'contribution' => $comment,
-            'viewer' => $viewer,
+            'viewer' => $viewer
         ];
     }
 }

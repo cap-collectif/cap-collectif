@@ -10,6 +10,16 @@ Object {
 }
 `;
 
+exports[`User.replies connection fetches a user's published, non-draft, public replies: user_not_confirmed 1`] = `
+Object {
+  "node": Object {
+    "replies": Object {
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
 exports[`User.replies connection fetches a user's published, non-draft, public replies: user1 1`] = `
 Object {
   "node": Object {
@@ -41,16 +51,6 @@ Object {
 `;
 
 exports[`User.replies connection fetches a user's published, non-draft, public replies: user5 1`] = `
-Object {
-  "node": Object {
-    "replies": Object {
-      "totalCount": 1,
-    },
-  },
-}
-`;
-
-exports[`User.replies connection fetches a user's published, non-draft, public replies: user506 1`] = `
 Object {
   "node": Object {
     "replies": Object {

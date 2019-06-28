@@ -11,7 +11,7 @@ import type { State, FeatureToggles } from '../../../types';
 import NotificationsForm from './NotificationsForm';
 import FollowingsTab from '../Following/FollowingsTab';
 import type EditProfileTabs_viewer from '~relay/EditProfileTabs_viewer.graphql';
-import UserAvatar from '../UserAvatar';
+import UserAvatarDeprecated from '../UserAvatarDeprecated';
 import UserLink from '../UserLink';
 import ChangePasswordForm from './ChangePasswordForm';
 import PersonalData from './PersonalData';
@@ -66,7 +66,7 @@ export class EditProfileTabs extends Component<Props> {
               <Panel.Heading className="d-flex">
                 <Media className="m-auto align-items-center">
                   <Media.Left>
-                    <UserAvatar user={viewer} />
+                    <UserAvatarDeprecated user={viewer} />
                   </Media.Left>
                   <Media.Body>
                     <UserLink className="excerpt" user={viewer} />

@@ -64,7 +64,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
   <div
     className="media mb-15"
   >
-    <Connect(UserAvatar)
+    <Connect(UserAvatarDeprecated)
       className="pull-left"
       user={
         Object {
@@ -264,7 +264,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
   <div
     className="media mb-15"
   >
-    <Connect(UserAvatar)
+    <Connect(UserAvatarDeprecated)
       className="pull-left"
       user={
         Object {
@@ -466,7 +466,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
   <div
     className="media mb-15"
   >
-    <Connect(UserAvatar)
+    <Connect(UserAvatarDeprecated)
       className="pull-left"
       user={
         Object {

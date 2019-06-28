@@ -3,7 +3,7 @@ import * as React from 'react';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Button, ListGroupItem, Tooltip, OverlayTrigger } from 'react-bootstrap';
-import { UserAvatar } from '../components/User/UserAvatar';
+import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
 import InlineList from '../components/Ui/List/InlineList';
 import TagsList from '../components/Ui/List/TagsList';
 import Tag from '../components/Ui/Labels/Tag';
@@ -96,7 +96,7 @@ storiesOf('List', module)
         <ListGroupItem className="list-group-item__opinion">
           <Media>
             <Media.Left>
-              <UserAvatar user={author} />
+              <UserAvatarDeprecated user={author} />
             </Media.Left>
             <Media.Body>
               <p>

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import DatesInterval from '../Utils/DatesInterval';
 import type { EventPreview_event } from '~relay/EventPreview_event.graphql';
 import DateIcon from '../Ui/Dates/DateIcon';
-import { UserAvatar } from '../User/UserAvatar';
+import { UserAvatarDeprecated } from '../User/UserAvatarDeprecated';
 import InlineList from '../Ui/List/InlineList';
 
 type Props = {|
@@ -42,7 +42,7 @@ export class EventPreview extends React.Component<Props> {
                 {event.author && event.author.username && (
                   <React.Fragment>
                     {/* $FlowFixMe */}
-                    <UserAvatar size={16} user={event.author} />
+                    <UserAvatarDeprecated size={16} user={event.author} />
                     <span className="font-weight-semi-bold">{event.author.username}</span>
                   </React.Fragment>
                 )}

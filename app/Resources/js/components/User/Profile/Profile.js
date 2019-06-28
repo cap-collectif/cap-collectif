@@ -9,7 +9,7 @@ import type Profile_viewer from '~relay/Profile_viewer.graphql';
 import type { Dispatch, State } from '../../../types';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
-import UserAvatar from '../UserAvatar';
+import UserAvatarDeprecated from '../UserAvatarDeprecated';
 import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
 
 type RelayProps = {| viewer: Profile_viewer |};
@@ -128,7 +128,7 @@ export class Profile extends Component<Props> {
               <label className="col-sm-3 control-label" htmlFor="profile_avatar">
                 <FormattedMessage id="form.label_media" />
               </label>
-              <UserAvatar className="col-sm-1" user={viewer} />
+              <UserAvatarDeprecated className="col-sm-1" user={viewer} />
               <div className="clearfix" />
               <div className="col-sm-3" />
               <Field

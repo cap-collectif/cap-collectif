@@ -13,7 +13,7 @@ import {
   Popover,
   Label,
 } from 'react-bootstrap';
-import { UserAvatar } from '../components/User/UserAvatar';
+import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
 import InlineList from '../components/Ui/List/InlineList';
 import ListGroup from '../components/Ui/List/ListGroup';
 import Media from '../components/Ui/Medias/Media/Media';
@@ -34,7 +34,7 @@ const OpinionVersion = ({ item, typeLabel, isProfile }) => (
         </p>
       )}
       <Media.Left>
-        <UserAvatar user={item.user} />
+        <UserAvatarDeprecated user={item.user} />
       </Media.Left>
       <Media.Body className="opinion__body">
         <div className="opinion__user">

@@ -4,7 +4,7 @@ import moment from 'moment';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedDate } from 'react-intl';
 import Media from '../../Ui/Medias/Media/Media';
-import UserAvatar from '../../User/UserAvatar';
+import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
 import UserLink from '../../User/UserLink';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
 import type { ProposalPreviewUser_proposal } from '~relay/ProposalPreviewUser_proposal.graphql';
@@ -20,7 +20,7 @@ export class ProposalPreviewUser extends React.Component<Props> {
       <Media>
         <Media.Left>
           {/* $FlowFixMe Will be a fragment soon */}
-          <UserAvatar user={proposal.author} />
+          <UserAvatarDeprecated user={proposal.author} />
         </Media.Left>
         <Media.Body>
           <UserLink className="excerpt" user={proposal.author} />

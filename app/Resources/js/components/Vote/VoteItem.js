@@ -6,7 +6,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import Truncate from 'react-truncate';
 import classNames from 'classnames';
 import type { VoteItem_vote } from '~relay/VoteItem_vote.graphql';
-import UserAvatar from '../User/UserAvatar';
+import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import UserLink from '../User/UserLink';
 
 type Props = {
@@ -53,7 +53,7 @@ export class VoteItem extends React.Component<Props> {
     return (
       <ListVoteItem id={`vote-${vote.id}`}>
         {/* $FlowFixMe */}
-        <UserAvatar user={vote.author} className="pull-left" />
+        <UserAvatarDeprecated user={vote.author} className="pull-left" />
         <div className="opinion__data">
           <p className="h5 opinion__user">
             <UserLink user={vote.author} /> <FormattedMessage id={voteVerbe} />{' '}

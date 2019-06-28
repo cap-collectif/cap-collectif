@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
-import UserAvatar from '../User/UserAvatar';
+import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import CommentInfos from './CommentInfos';
 import CommentDate from './CommentDate';
 import CommentBody from './CommentBody';
@@ -53,7 +53,7 @@ export class Comment extends React.Component<Props, State> {
         <div className="opinion__body">
           <div className="opinion__content">
             {/* $FlowFixMe Will be a fragment soon */}
-            <UserAvatar user={comment.author} />
+            <UserAvatarDeprecated user={comment.author} />
             <div className="comment__detail">
               <div className={detailClasses} id={`comment_${comment.id}`}>
                 <div className="opinion__data">

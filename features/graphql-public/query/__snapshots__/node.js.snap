@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Query.node gets the correct ID and type name for comments 1`] = `
+Object {
+  "node": Object {
+    "__typename": "Comment",
+    "id": "Q29tbWVudDpldmVudENvbW1lbnQx",
+  },
+}
+`;
+
 exports[`Query.node gets the correct ID and type name for consultation steps 1`] = `
 Object {
   "node": Object {

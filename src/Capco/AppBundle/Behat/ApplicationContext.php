@@ -670,6 +670,23 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Then /^I should see response status code "([^"]*)"$/
+     */
+    public function iShouldSeeResponseStatusCode(int $statusCode)
+    {
+        $responseStatusCode = $this->getSession()->getStatusCode();
+        if (!$responseStatusCode === (int) $statusCode) {
+            throw new \Exception(
+                sprintf(
+                    'Did not see response status code %s, but %s.',
+                    $statusCode,
+                    $responseStatusCode
+                )
+            );
+        }
+    }
+
+    /**
      * @Then /^I create a cookie named "([^"]*)"$/
      */
     public function iCreateACookieNamed(string $cookieName)

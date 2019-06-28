@@ -30,13 +30,13 @@ class StepContributionsResolver implements ResolverInterface
 
     public function resolveSync(AbstractStep $step, Argument $args): Connection
     {
-        $conn = null;
+        $connection = null;
         $this->promiseAdapter->await(
-            $this->__invoke($step, $args)->then(function ($value) use (&$conn) {
-                $conn = $value;
+            $this->__invoke($step, $args)->then(function ($value) use (&$connection) {
+                $connection = $value;
             })
         );
 
-        return $conn;
+        return $connection;
     }
 }

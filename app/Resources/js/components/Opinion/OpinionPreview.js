@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import UserAvatar from '../User/UserAvatar';
+import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import OpinionInfos from './OpinionInfos';
 import OpinionPreviewTitle from './OpinionPreviewTitle';
 import OpinionPreviewCounters from './OpinionPreviewCounters';
@@ -39,7 +39,7 @@ class OpinionPreview extends React.Component<Props> {
         )}
         <Media.Left>
           {/* $FlowFixMe Will be a fragment soon */}
-          <UserAvatar user={opinion.author} />
+          <UserAvatarDeprecated user={opinion.author} />
         </Media.Left>
 
         <Media.Body className="opinion__body">

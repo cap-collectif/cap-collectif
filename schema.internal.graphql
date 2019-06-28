@@ -3592,6 +3592,7 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
 
   # Opinion term of the project
   opinionTerm: Int!
+  publishedAt: DateTime!
 }
 
 # A connection to a list of items.

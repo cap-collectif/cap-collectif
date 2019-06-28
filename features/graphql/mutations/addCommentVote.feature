@@ -25,7 +25,7 @@ Scenario: Logged in API client wants to vote for a comment
     }",
     "variables": {
       "input": {
-        "commentId": "eventComment1"
+        "commentId": "Q29tbWVudDpldmVudENvbW1lbnQx"
       }
     }
   }
@@ -40,7 +40,7 @@ Scenario: Logged in API client wants to vote for a comment
                 "id": @string@,
                 "published": true,
                 "contribution": {
-                    "id": "eventComment1"
+                    "id": "Q29tbWVudDpldmVudENvbW1lbnQx"
                 },
                 "author": {
                     "_id": "user5"

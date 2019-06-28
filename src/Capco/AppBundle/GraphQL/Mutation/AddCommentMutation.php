@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\CommentType;
@@ -57,8 +57,9 @@ class AddCommentMutation implements MutationInterface
 
     public function __invoke(Arg $input, /*User|string*/ $viewer, RequestStack $requestStack): array
     {
-        $commentableId = $input->offsetGet('commentableId');
-        $commentable = $this->globalIdResolver->resolve($commentableId, $viewer);
+        $commentableGlobalId = $input->offsetGet('commentableId');
+        $commentableId = GlobalId::fromGlobalId($commentableGlobalId)['id'];
+        $commentable = $this->globalIdResolver->resolve($commentableGlobalId, $viewer);
 
         if (!$commentable || !$commentable instanceof CommentableInterface) {
             $this->logger->error('Unknown commentable with id: ' . $commentableId);
@@ -115,7 +116,7 @@ class AddCommentMutation implements MutationInterface
 
         $this->em->persist($comment);
         $this->em->flush();
-        $this->commentableCommentsDataLoader->invalidate($commentableId);
+        $this->commentableCommentsDataLoader->invalidate($commentableGlobalId);
         $edge = new Edge(ConnectionBuilder::offsetToCursor(0), $comment);
 
         $this->eventDispatcher->dispatch(

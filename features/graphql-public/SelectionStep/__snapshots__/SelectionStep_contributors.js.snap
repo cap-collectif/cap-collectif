@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectionStep.contributors returns the top 5 of contributors 1`] = `
+Object {
+  "selectionStep": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "_id": "user50",
+            "createdAt": "2017-02-20 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "user49",
+            "createdAt": "2017-02-19 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "user48",
+            "createdAt": "2017-02-18 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "user47",
+            "createdAt": "2017-02-17 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "user46",
+            "createdAt": "2017-02-16 00:00:00",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "hasNextPage": true,
+      },
+      "totalCount": 47,
+    },
+  },
+}
+`;

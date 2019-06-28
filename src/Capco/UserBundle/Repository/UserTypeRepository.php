@@ -1,17 +1,22 @@
 <?php
+
 namespace Capco\UserBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\UserBundle\Entity\UserType;
 use Doctrine\ORM\EntityRepository;
 
 /**
  * UserTypeRepository.
+ *
+ * @method UserType|null findOneBySlug(string $slug)
  */
 class UserTypeRepository extends EntityRepository
 {
     public function findAllToArray()
     {
         $qb = $this->createQueryBuilder('ut')->select('ut.name as name, ut.id as id');
+
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -44,6 +49,7 @@ class UserTypeRepository extends EntityRepository
     public function countAll()
     {
         $qb = $this->createQueryBuilder('ut')->select('COUNT(ut.id)');
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 }
