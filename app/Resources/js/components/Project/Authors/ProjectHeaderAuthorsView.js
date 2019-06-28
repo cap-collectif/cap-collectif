@@ -21,14 +21,7 @@ export const ProjectHeaderAuthorsView = (properties: Props) => {
         query={graphql`
           query ProjectHeaderAuthorsViewQuery($projectId: ID!) {
             project: node(id: $projectId) {
-              ... on Project {
-                id
-                authors {
-                  id
-                  username
-                  avatarUrl
-                }
-              }
+              ...ProjectHeaderAuthors_project
             }
           }
         `}

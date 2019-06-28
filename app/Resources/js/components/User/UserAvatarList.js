@@ -1,11 +1,13 @@
 // @flow
 import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 import { UserAvatar } from './UserAvatar';
+import type { UserAvatarList_users } from '~relay/UserAvatarList_users.graphql';
 
 type Props = {
-  users: Array<Object>,
+  users: UserAvatarList_users,
   max: number,
 };
 
@@ -21,6 +23,7 @@ export const UserAvatarList = (props: Props) => {
               key={index}
               placement="top"
               overlay={<Tooltip id={`opinion-vote-tooltip-${user.id}`}>{user.username}</Tooltip>}>
+              {/* $FlowFixMe */}
               <UserAvatar user={user} />
             </OverlayTrigger>
           </span>
@@ -43,3 +46,16 @@ export const UserAvatarList = (props: Props) => {
 UserAvatarList.defaultProps = {
   max: 5,
 };
+
+export default createFragmentContainer(UserAvatarList, {
+  users: graphql`
+    fragment UserAvatarList_users on User @relay(plural: true) {
+      id
+      url
+      username
+      media {
+        url
+      }
+    }
+  `,
+});
