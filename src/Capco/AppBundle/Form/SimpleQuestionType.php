@@ -36,7 +36,7 @@ class SimpleQuestionType extends AbstractType
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
         $builder->add('type', IntegerType::class);
-        $builder->add('alwaysJumpQuestion', RelayNodeType::class, [
+        $builder->add('alwaysJumpDestinationQuestion', RelayNodeType::class, [
             'required' => false
         ]);
         $builder->add('jumps', CollectionType::class, [

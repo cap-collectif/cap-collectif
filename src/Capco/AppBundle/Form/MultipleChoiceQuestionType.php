@@ -47,7 +47,7 @@ class MultipleChoiceQuestionType extends AbstractType
                 return null === $questionChoice || empty($questionChoice->getTitle());
             },
         ]);
-        $builder->add('alwaysJumpQuestion', RelayNodeType::class, [
+        $builder->add('alwaysJumpDestinationQuestion', RelayNodeType::class, [
             'required' => false
         ]);
         $builder->add('jumps', CollectionType::class, [
