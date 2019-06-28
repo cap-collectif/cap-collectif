@@ -85,6 +85,12 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     protected $jumps;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion")
+     * @ORM\JoinColumn(name="always_jump_question_id", nullable=true)
+     */
+    protected $alwaysJumpQuestion;
+
+    /**
      * @Assert\NotNull()
      * @Assert\Range(min=0, max=10)
      * @ORM\Column(name="type", nullable=false)
@@ -329,5 +335,17 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     public function viewerCanSeeInBo($user = null): bool
     {
         return true;
+    }
+
+    public function getAlwaysJumpQuestion(): ?self
+    {
+        return $this->alwaysJumpQuestion;
+    }
+
+    public function setAlwaysJumpQuestion(?AbstractQuestion $alwaysJumpQuestion): self
+    {
+        $this->alwaysJumpQuestion = $alwaysJumpQuestion;
+
+        return $this;
     }
 }

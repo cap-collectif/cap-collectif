@@ -27,11 +27,6 @@ class LogicJump
     protected $destination;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    protected $always;
-
-    /**
      * @ORM\OneToMany(targetEntity="AbstractLogicJumpCondition", mappedBy="jump", cascade={"persist", "remove"})
      */
     protected $conditions;

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -35,6 +36,9 @@ class SimpleQuestionType extends AbstractType
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
         $builder->add('type', IntegerType::class);
+        $builder->add('alwaysJumpQuestion', RelayNodeType::class, [
+            'required' => false
+        ]);
         $builder->add('jumps', CollectionType::class, [
             'allow_add' => true,
             'allow_delete' => true,

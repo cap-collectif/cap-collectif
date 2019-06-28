@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -12,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class SectionQuestionType extends AbstractType
+class   SectionQuestionType extends AbstractType
 {
     /**
      * @// TODO: delete `private` and `required` during the refacto.
@@ -40,6 +41,9 @@ class SectionQuestionType extends AbstractType
         $builder->add('type', IntegerType::class);
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
+        $builder->add('alwaysJumpQuestion', RelayNodeType::class, [
+            'required' => false
+        ]);
         $builder->add('jumps', CollectionType::class, [
             'allow_add' => true,
             'allow_delete' => true,
