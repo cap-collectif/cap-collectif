@@ -6822,7 +6822,19 @@ type User implements Node & UniformResourceLocatable {
   argumentVotesCount: Int!
   proposalsCount: Int!
   proposalVotesCount: Int!
-  commentVotesCount: Int!
+
+  # Get all comment votes of the user.
+  commentVotes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): CommentVoteConnection!
 
   # Provisional number of contributions who will be totally deleted if the user chose to delete his account.
   contributionsToDeleteCount: Int!
@@ -6896,7 +6908,7 @@ type User implements Node & UniformResourceLocatable {
   proposalVotes(
     # Returns the elements in the list that come after the specified cursor.
     after: String
-    first: Int = 100000
+    first: Int = 100
 
     # Returns the elements in the list that come before the specified cursor.
     before: String
@@ -6917,7 +6929,7 @@ type User implements Node & UniformResourceLocatable {
   votes(
     # Returns the elements in the list that come after the specified cursor.
     after: String
-    first: Int = 100000
+    first: Int = 100
 
     # Returns the elements in the list that come before the specified cursor.
     before: String

@@ -156,11 +156,6 @@ class User extends BaseUser implements
     /**
      * @var int
      */
-    protected $commentVotesCount = 0;
-
-    /**
-     * @var int
-     */
     protected $proposalVotesCount = 0;
 
     /**
@@ -963,22 +958,6 @@ class User extends BaseUser implements
     public function setProposalCommentsCount($proposalCommentsCount)
     {
         $this->proposalCommentsCount = $proposalCommentsCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCommentVotesCount()
-    {
-        return $this->commentVotesCount;
-    }
-
-    /**
-     * @param int $commentVotesCount
-     */
-    public function setCommentVotesCount($commentVotesCount)
-    {
-        $this->commentVotesCount = $commentVotesCount;
     }
 
     /**

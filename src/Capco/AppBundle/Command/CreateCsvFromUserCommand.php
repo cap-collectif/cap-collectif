@@ -97,14 +97,14 @@ class CreateCsvFromUserCommand extends BaseExportCommand
             'opinionsVersion' => $this->getOpinionVersionGraphQLQuery($userId),
             'arguments' => $this->getArgumentGraphQLQuery($userId),
             'sources' => $this->getSourceGraphQLQuery($userId),
-            'votes' => $this->getVotesGraphQLQuery($userId),
+            'votes' => $this->getVotesGraphQLQuery($userId)
         ];
 
         foreach ($types as $type => $query) {
             $datas[$type] = $this->executor
                 ->execute('internal', [
                     'query' => $query,
-                    'variables' => [],
+                    'variables' => []
                 ])
                 ->toArray();
         }
@@ -176,18 +176,18 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
         $rows = [];
         //we need to handle indepth arrays who are not mapped
-        if (($contributions = Arr::path($data, 'data.node.contributions.edges'))) {
+        if ($contributions = Arr::path($data, 'data.node.contributions.edges')) {
             $rows = $this->getCleanArrayForRowInsert($contributions, $header, true);
-        } elseif (($medias = Arr::path($data, 'data.node.medias'))) {
+        } elseif ($medias = Arr::path($data, 'data.node.medias')) {
             $this->exportMedias($medias, $userId);
             $rows = $this->getCleanArrayForRowInsert($medias, $header);
-        } elseif (($groups = Arr::path($data, 'data.node.groups.edges'))) {
+        } elseif ($groups = Arr::path($data, 'data.node.groups.edges')) {
             $rows = $this->getCleanArrayForRowInsert($groups, $header, true);
-        } elseif (($reports = Arr::path($data, 'data.node.reports.edges'))) {
+        } elseif ($reports = Arr::path($data, 'data.node.reports.edges')) {
             $rows = $this->getCleanArrayForRowInsert($reports, $header, true);
-        } elseif (($events = Arr::path($data, 'data.node.events.edges'))) {
+        } elseif ($events = Arr::path($data, 'data.node.events.edges')) {
             $rows = $this->getCleanArrayForRowInsert($events, $header, true);
-        } elseif (($votes = Arr::path($data, 'data.node.votes.edges'))) {
+        } elseif ($votes = Arr::path($data, 'data.node.votes.edges')) {
             $rows = $this->getCleanArrayForRowInsert($votes, $header, true);
         } else {
             foreach ($header as $value) {
@@ -208,7 +208,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
         if ($header) {
             $this->createZipArchive($this->getZipPathForUser($userId), [
-                ["${type}.csv" => $this->getPath()],
+                ["${type}.csv" => $this->getPath()]
             ]);
         }
     }
@@ -385,7 +385,9 @@ class CreateCsvFromUserCommand extends BaseExportCommand
       argumentVotesCount
       proposalsCount
       proposalVotesCount
-      commentVotesCount
+      commentVotes {
+        totalCount
+      }
       sourcesCount
       replies {
         totalCount

@@ -68,7 +68,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'argumentVotesCount' => 'argumentVotesCount',
         'proposalsCount' => 'proposalsCount',
         'proposalVotesCount' => 'proposalVotesCount',
-        'commentVotesCount' => 'commentVotesCount',
+        'commentVotes.totalCount' => 'commentVotesCount',
         'sourcesCount' => 'sourcesCount',
         'replies.totalCount' => 'repliesCount',
         'postCommentsCount' => 'postCommentsCount',
@@ -290,7 +290,9 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         argumentVotesCount
         proposalsCount
         proposalVotesCount
-        commentVotesCount
+        commentVotesCount {
+            totalCount
+        }
         sourcesCount
         replies {
             totalCount

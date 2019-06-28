@@ -176,23 +176,6 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         if (
             $this->force ||
             $this->em
-                ->createQuery('SELECT COUNT(vote.id) FROM CapcoAppBundle:CommentVote vote')
-                ->getSingleScalarResult() > 0
-        ) {
-            $this->em
-                ->createQuery(
-                    'UPDATE CapcoUserBundle:User u set u.commentVotesCount = (
-                SELECT count(cv.id) from CapcoAppBundle:CommentVote cv
-                INNER JOIN CapcoAppBundle:Comment c WITH cv.comment = c
-                WHERE cv.user = u AND c.published = 1 GROUP BY cv.user
-              )'
-                )
-                ->execute();
-        }
-
-        if (
-            $this->force ||
-            $this->em
                 ->createQuery('SELECT COUNT(vote.id) FROM CapcoAppBundle:OpinionVote vote')
                 ->getSingleScalarResult() > 0
         ) {

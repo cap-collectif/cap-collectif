@@ -117,8 +117,15 @@ InternalUser:
         type: 'Int!'
       proposalVotesCount:
         type: 'Int!'
-      commentVotesCount:
-        type: 'Int!'
+      commentVotes:
+        type: 'CommentVoteConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Get all comment votes of the user.'
+        args:
+          first:
+            type: 'Int'
+            defaultValue: 100
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentVotesResolver", [value, args])'
       contributionsToDeleteCount:
         type: 'Int!'
         description: 'Provisional number of contributions who will be totally deleted if the user chose to delete his account.'
@@ -190,7 +197,7 @@ InternalUser:
         args:
           first:
             type: 'Int'
-            defaultValue: 100000
+            defaultValue: 100
           orderBy:
             type: 'ProposalVotesOrder'
             defaultValue: { field: PUBLISHED_AT, direction: DESC }
@@ -211,7 +218,7 @@ InternalUser:
         args:
           first:
             type: 'Int'
-            defaultValue: 100000
+            defaultValue: 100
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [value, args])'
       groups:
         type: 'GroupConnection!'
