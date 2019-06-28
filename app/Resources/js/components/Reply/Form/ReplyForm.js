@@ -277,27 +277,26 @@ export class ReplyForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: Props) => ({
-  responses:
-    formValueSelector(props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`)(
-      state,
-      'responses',
-    ) ||
-    formatInitialResponsesValues(
-      props.questionnaire.questions,
-      props.reply ? props.reply.responses : [],
-    ),
-  initialValues: {
-    responses: formatInitialResponsesValues(
-      props.questionnaire.questions,
-      props.reply ? props.reply.responses : [],
-    ),
-    draft: props.reply && props.reply.draft ? props.reply.draft : false,
-    private: props.reply ? props.reply.private : false,
-  },
-  user: state.user.user,
-  form: props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`,
-});
+const mapStateToProps = (state: State, props: Props) => {
+  const defaultResponses = formatInitialResponsesValues(
+    props.questionnaire.questions,
+    props.reply ? props.reply.responses : [],
+  );
+  return {
+    responses:
+      formValueSelector(props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`)(
+        state,
+        'responses',
+      ) || defaultResponses,
+    initialValues: {
+      responses: defaultResponses,
+      draft: props.reply && props.reply.draft ? props.reply.draft : false,
+      private: props.reply ? props.reply.private : false,
+    },
+    user: state.user.user,
+    form: props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`,
+  };
+};
 
 const form = reduxForm({
   validate,
