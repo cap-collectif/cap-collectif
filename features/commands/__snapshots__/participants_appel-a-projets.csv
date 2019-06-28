@@ -1,23 +1,4 @@
 ﻿id,email,userName,typeName,createdAt,updatedAt,lastLogin,rolesText,consentExternalCommunication,enabled,isEmailConfirmed,locked,phoneConfirmed,gender,dateOfBirth,websiteUrl,biography,address,zipCode,city,phone,profileUrl
-VXNlcjp1c2VyMQ==,lbrunet@jolicode.com,lbrunet,Citoyen,@datetime@,,,"Super Admin|Utilisateur",No,Yes,Yes,No,No,,,,,,,,+3300000000,https://capco.dev/profile/lbrunet
-VXNlcjp1c2VyMTA=,user10@cap-collectif.com,user10,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user10
-VXNlcjp1c2VyMTE=,user11@cap-collectif.com,user11,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user11
-VXNlcjp1c2VyMTI=,user12@cap-collectif.com,user12,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user12
-VXNlcjp1c2VyMTM=,user13@cap-collectif.com,user13,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user13
-VXNlcjp1c2VyMTQ=,user14@cap-collectif.com,user14,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user14
-VXNlcjp1c2VyMTU=,user15@cap-collectif.com,user15,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user15
-VXNlcjp1c2VyMTY=,user16@cap-collectif.com,user16,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user16
-VXNlcjp1c2VyMTc=,user17@cap-collectif.com,user17,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user17
-VXNlcjp1c2VyMTg=,user18@cap-collectif.com,user18,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user18
-VXNlcjp1c2VyMTk=,user19@cap-collectif.com,user19,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user19
-VXNlcjp1c2VyMg==,sfavot@jolicode.com,sfavot,Citoyen,@datetime@,,,"Super Admin|Utilisateur",No,Yes,Yes,No,Yes,,,http://www.sfavot.fr,"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.",,,Antony,+3300000000,https://capco.dev/profile/sfavot
-VXNlcjp1c2VyMjA=,user20@cap-collectif.com,user20,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user20
-VXNlcjp1c2VyMjE=,user21@cap-collectif.com,user21,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user21
-VXNlcjp1c2VyMjI=,user22@cap-collectif.com,user22,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user22
-VXNlcjp1c2VyMjM=,user23@cap-collectif.com,user23,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user23
-VXNlcjp1c2VyMjQ=,user24@cap-collectif.com,user24,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user24
-VXNlcjp1c2VyMjU=,user25@cap-collectif.com,user25,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user25
-VXNlcjp1c2VyMjY=,user26@cap-collectif.com,user26,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user26
 VXNlcjp1c2VyMjc=,user27@cap-collectif.com,user27,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user27
 VXNlcjp1c2VyMjg=,user28@cap-collectif.com,user28,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user28
 VXNlcjp1c2VyMjk=,user29@cap-collectif.com,user29,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user29
@@ -48,4 +29,23 @@ VXNlcjp1c2VyNg==,user6@cap-collectif.com,user6,Citoyen,@datetime@,,,Utilisateur,
 VXNlcjp1c2VyNw==,user7@cap-collectif.com,user7,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user7
 VXNlcjp1c2VyOA==,user8@cap-collectif.com,user8,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user8
 VXNlcjp1c2VyOQ==,user9@cap-collectif.com,user9,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user9
-VXNlcjp1c2VyQWRtaW4=,admin@test.com,admin,Citoyen,@datetime@,@datetime@,@datetime@,Administrateur|Utilisateur,No,Yes,Yes,No,Yes,,,,,,,,+33675492871,https://capco.dev/profile/admin
+VXNlcjp1c2VyQWRtaW4=,admin@test.com,admin,Citoyen,@datetime@,,,Administrateur|Utilisateur,No,Yes,Yes,No,Yes,,,,,,,,+33675492871,https://capco.dev/profile/admin
+VXNlcjp1c2VyMTU=,user15@cap-collectif.com,user15,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user15
+VXNlcjp1c2VyMTY=,user16@cap-collectif.com,user16,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user16
+VXNlcjp1c2VyMTc=,user17@cap-collectif.com,user17,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user17
+VXNlcjp1c2VyMTg=,user18@cap-collectif.com,user18,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user18
+VXNlcjp1c2VyMTk=,user19@cap-collectif.com,user19,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user19
+VXNlcjp1c2VyMg==,sfavot@jolicode.com,sfavot,Citoyen,@datetime@,,,"Super Admin|Utilisateur",No,Yes,Yes,No,Yes,,,http://www.sfavot.fr,"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.",,,Antony,+3300000000,https://capco.dev/profile/sfavot
+VXNlcjp1c2VyMjA=,user20@cap-collectif.com,user20,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user20
+VXNlcjp1c2VyMjE=,user21@cap-collectif.com,user21,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user21
+VXNlcjp1c2VyMjI=,user22@cap-collectif.com,user22,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user22
+VXNlcjp1c2VyMjM=,user23@cap-collectif.com,user23,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user23
+VXNlcjp1c2VyMjQ=,user24@cap-collectif.com,user24,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user24
+VXNlcjp1c2VyMjU=,user25@cap-collectif.com,user25,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user25
+VXNlcjp1c2VyMjY=,user26@cap-collectif.com,user26,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user26
+VXNlcjp1c2VyMQ==,lbrunet@jolicode.com,lbrunet,Citoyen,@datetime@,,,"Super Admin|Utilisateur",No,Yes,Yes,No,No,,,,,,,,+3300000000,https://capco.dev/profile/lbrunet
+VXNlcjp1c2VyMTA=,user10@cap-collectif.com,user10,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user10
+VXNlcjp1c2VyMTE=,user11@cap-collectif.com,user11,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user11
+VXNlcjp1c2VyMTI=,user12@cap-collectif.com,user12,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user12
+VXNlcjp1c2VyMTM=,user13@cap-collectif.com,user13,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user13
+VXNlcjp1c2VyMTQ=,user14@cap-collectif.com,user14,Citoyen,@datetime@,,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user14
