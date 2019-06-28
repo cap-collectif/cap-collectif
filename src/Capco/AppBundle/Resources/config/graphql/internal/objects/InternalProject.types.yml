@@ -94,5 +94,3 @@ InternalProject:
       opinionTerm:
         type: 'Int!'
         description: 'Opinion term of the project'
-      publishedAt:
-        type: 'DateTime!'

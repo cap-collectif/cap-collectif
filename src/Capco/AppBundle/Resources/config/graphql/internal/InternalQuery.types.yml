@@ -218,6 +218,7 @@ InternalQuery:
           first:
             type: 'Int'
             defaultValue: 100
+        access: "@=hasRole('ROLE_ADMIN')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributorsResolver", [args])'
       allContributions:
         description: 'Return the number of contributions in the platform.'

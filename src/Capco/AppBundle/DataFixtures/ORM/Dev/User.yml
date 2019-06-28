@@ -12,7 +12,7 @@ Capco\UserBundle\Entity\User:
       - 'ROLE_SUPER_ADMIN'
     media: '@MediaUser2'
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01')))>
+    createdAt: <(new \DateTime('2015-01-01 00:00:03'))>
 
   user2:
     id: 'user2'
@@ -32,7 +32,7 @@ Capco\UserBundle\Entity\User:
     phone: '+3300000000'
     phoneConfirmed: true
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 1 days"))>
+    createdAt: <(new \DateTime('2015-01-01 00:00:04'))>
 
   user3:
     id: 'user3'
@@ -46,7 +46,7 @@ Capco\UserBundle\Entity\User:
       - 'ROLE_SUPER_ADMIN'
     media: '@MediaUser3'
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 2 days"))>
+    createdAt: <(new \DateTime('2015-01-01 00:00:02'))>
 
   user4:
     id: 'userAdmin'
@@ -62,7 +62,7 @@ Capco\UserBundle\Entity\User:
     phoneConfirmed: true
     phone: '+33675492871'
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 3 days"))>
+    createdAt: <(new \DateTime('2015-01-01 00:00:05'))>
 
   user666:
     id: 'adminCapco'
@@ -78,7 +78,7 @@ Capco\UserBundle\Entity\User:
     phoneConfirmed: true
     phone: '+33675492871'
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 4 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user5:
     id: 'user5'
@@ -101,7 +101,7 @@ Capco\UserBundle\Entity\User:
     phone: '+33635492871'
     gender: 'f'
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 5 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2016-01-01'))>
 
   user_drupal:
@@ -114,7 +114,7 @@ Capco\UserBundle\Entity\User:
     email: drupal@gmail.com
     password: <htmlentities('$S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU')>
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 6 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user{6..200}:
     id: 'user<current()>'
@@ -128,7 +128,7 @@ Capco\UserBundle\Entity\User:
     roles:
       - 'ROLE_USER'
     enabled: true
-    createdAt: <identity((new \DateTime('2017-01-01'))->modify("+ $current days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user501:
     id: 'user501'
@@ -143,7 +143,7 @@ Capco\UserBundle\Entity\User:
     media: '@MediaUser4'
     vip: true
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 7 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user502:
     id: 'user502'
@@ -158,7 +158,7 @@ Capco\UserBundle\Entity\User:
     media: '@MediaUser5'
     vip: true
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 8 days"))>
+    createdAt: <(new \DateTime('2015-01-01 00:00:01'))>
 
   user503:
     id: 'user503'
@@ -173,7 +173,7 @@ Capco\UserBundle\Entity\User:
       - 'ROLE_USER'
     media: '@MediaUser1'
     vip: false
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 9 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user504:
     id: 'user504'
@@ -188,7 +188,7 @@ Capco\UserBundle\Entity\User:
     media: null
     vip: true
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 10 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user505:
     id: 'user505'
@@ -203,7 +203,7 @@ Capco\UserBundle\Entity\User:
     media: '@MediaUser5'
     vip: true
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 11 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user_not_confirmed:
     id: 'user506'
@@ -263,7 +263,7 @@ Capco\UserBundle\Entity\User:
     media: null
     phone: '+33628353289'
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 12 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user_with_code_not_phone_confirmed:
     id: 'user513'
@@ -279,7 +279,7 @@ Capco\UserBundle\Entity\User:
     phone: '+33628232323'
     smsConfirmationCode: 123456
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 13 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   admin_without_password:
     id: 'user514'
@@ -309,7 +309,7 @@ Capco\UserBundle\Entity\User:
     newEmailToConfirm: new-email-to-confirm@test.com
     newEmailConfirmationToken: check-my-new-email-token
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 14 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2016-01-01'))>
 
   user516:
@@ -327,7 +327,7 @@ Capco\UserBundle\Entity\User:
     emailConfirmationSentAt: <(new \DateTime('2018-06-06 13:37:00'))>
     enabled: true
     phoneConfirmed: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 15 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user517:
     id: 'user517'
@@ -347,7 +347,7 @@ Capco\UserBundle\Entity\User:
     phone: '+3300000000'
     phoneConfirmed: true
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 16 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user_without_username:
     id: 'user518'
@@ -359,7 +359,7 @@ Capco\UserBundle\Entity\User:
     roles:
       - 'ROLE_USER'
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 17 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user519:
     id: 'user519'
@@ -376,4 +376,4 @@ Capco\UserBundle\Entity\User:
     vip: true
     emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 18 days"))>
+    createdAt: <(new \DateTime('2015-01-01'))>
