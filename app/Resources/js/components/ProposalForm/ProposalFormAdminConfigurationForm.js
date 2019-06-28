@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, Field, FieldArray, type FormProps } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Panel, Col, Row, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
-import { submitQuestion } from '../../utils/submitQuestion';
+import { formatInitialQuestions, submitQuestion } from '../../utils/submitQuestion';
 import select from '../Form/Select';
 import ProposalFormAdminCategories from './ProposalFormAdminCategories';
 import ProposalFormAdminQuestions from './ProposalFormAdminQuestions';
@@ -643,17 +643,20 @@ const form = reduxForm({
 const selector = formValueSelector(formName);
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
-  initialValues: props.proposalForm,
-  usingAddress: selector(state, 'usingAddress'),
-  usingCategories: selector(state, 'usingCategories'),
-  usingThemes: selector(state, 'usingThemes'),
-  usingDistrict: selector(state, 'usingDistrict'),
-  usingDescription: selector(state, 'usingDescription'),
-  usingSummary: selector(state, 'usingSummary'),
-  usingIllustration: selector(state, 'usingIllustration'),
-  isProposalForm: selector(state, 'isProposalForm'),
-  features: state.default.features,
-});
+    initialValues: {
+      ...props.proposalForm,
+      questions: formatInitialQuestions(props.proposalForm.questions),
+    },
+    usingAddress: selector(state, 'usingAddress'),
+    usingCategories: selector(state, 'usingCategories'),
+    usingThemes: selector(state, 'usingThemes'),
+    usingDistrict: selector(state, 'usingDistrict'),
+    usingDescription: selector(state, 'usingDescription'),
+    usingSummary: selector(state, 'usingSummary'),
+    usingIllustration: selector(state, 'usingIllustration'),
+    isProposalForm: selector(state, 'isProposalForm'),
+    features: state.default.features,
+  });
 
 const container = connect(mapStateToProps)(form);
 const intlContainer = injectIntl(container);

@@ -1,10 +1,20 @@
 // @flow
 import type { responsesHelper_adminQuestion } from '~relay/responsesHelper_adminQuestion.graphql';
+import type { Questions } from './responsesHelper';
 
 // Easyfix: We should rely on __typename MultipleChoiceQuestion instead
 const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
 export type QuestionsInReduxForm = $ReadOnlyArray<responsesHelper_adminQuestion & { alwaysJump: ?string }>;
+
+export const formatInitialQuestions = (questions: Questions): QuestionsInReduxForm => questions
+  .map(question => {
+    const jump = question.jumps && question.jumps.find(j => j && j.always);
+    return {
+      ...question,
+      alwaysJump: jump ? jump.destination.id : null,
+    };
+  });
 
 const convertJump = jump => ({
   id: jump.id,
@@ -31,12 +41,12 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
         // that it has an empty array of condition, and an "always" parameter defined to true
         jumps: !question.alwaysJump
           ? question.jumps &&
-            question.jumps
-              .filter(Boolean)
-              .filter(jump => !jump.always)
-              .map(convertJump)
+          question.jumps
+            .filter(Boolean)
+            .filter(jump => !jump.always)
+            .map(convertJump)
           : question.jumps && question.jumps.find(jump => jump && jump.always)
-          ? question.jumps &&
+            ? question.jumps &&
             question.jumps
               .filter(Boolean)
               .map(convertJump)
@@ -44,12 +54,12 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
                 ...jump,
                 destination: jump.always ? question.alwaysJump : jump.destination,
               }))
-          : [
+            : [
               ...(question.jumps
                 ? question.jumps
-                    .filter(Boolean)
-                    .filter(jump => !jump.always)
-                    .map(convertJump)
+                  .filter(Boolean)
+                  .filter(jump => !jump.always)
+                  .map(convertJump)
                 : []),
               {
                 always: true,
@@ -75,12 +85,12 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
     ) {
       questionInput.question.choices = question.choices
         ? question.choices.map(choice => ({
-            ...choice,
-            // We only send ids to the server
-            image: choice.image ? choice.image.id : null,
-            // List of not send properties to server
-            kind: undefined,
-          }))
+          ...choice,
+          // We only send ids to the server
+          image: choice.image ? choice.image.id : null,
+          // List of not send properties to server
+          kind: undefined,
+        }))
         : [];
     }
 

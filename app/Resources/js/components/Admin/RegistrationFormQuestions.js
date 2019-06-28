@@ -10,7 +10,7 @@ import type { State } from '../../types';
 import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestions';
 import UpdateRegistrationFormQuestionsMutation from '../../mutations/UpdateRegistrationFormQuestionsMutation';
 import AlertForm from '../Alert/AlertForm';
-import { submitQuestion } from '../../utils/submitQuestion';
+import { formatInitialQuestions, submitQuestion } from '../../utils/submitQuestion';
 
 type Props = {|
   ...FormProps,
@@ -74,7 +74,10 @@ const form = reduxForm({
 })(RegistrationFormQuestions);
 
 const mapStateToProps = (state: State, props: Props) => ({
-  initialValues: props.registrationForm,
+  initialValues: {
+    ...props.registrationForm,
+    questions: formatInitialQuestions(props.registrationForm.questions)
+  },
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
