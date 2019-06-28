@@ -197,7 +197,7 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'doctrine:database:create' => [],
+                'doctrine:database:create' => []
             ],
             $output
         );
@@ -207,7 +207,7 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'doctrine:schema:create' => [],
+                'doctrine:schema:create' => []
             ],
             $output
         );
@@ -217,7 +217,7 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'doctrine:database:drop' => ['--force' => true],
+                'doctrine:database:drop' => ['--force' => true]
             ],
             $output
         );
@@ -294,7 +294,7 @@ class ReinitCommand extends ContainerAwareCommand
             BorderStyle::class,
             BackgroundStyle::class,
             ArgumentVote::class,
-            AppendixType::class,
+            AppendixType::class
         ];
 
         $classesProd = [Context::class];
@@ -307,7 +307,7 @@ class ReinitCommand extends ContainerAwareCommand
         }
         $this->runCommands(
             [
-                'hautelook:fixtures:load' => ['-e' => $env],
+                'hautelook:fixtures:load' => ['-e' => $env]
             ],
             $output
         );
@@ -319,8 +319,8 @@ class ReinitCommand extends ContainerAwareCommand
             [
                 'capco:reset-feature-flags' => [
                     '--force' => true,
-                    '--env' => $this->env,
-                ],
+                    '--env' => $this->env
+                ]
             ],
             $output
         );
@@ -330,9 +330,9 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'capco:compute:users-counters' => ['--force' => true],
-                'capco:compute:counters' => ['--force' => true],
-                'capco:compute:rankings' => [],
+                'capco:compute:users-counters' => ['--env' => $this->env, '--force' => true],
+                'capco:compute:counters' => ['--env' => $this->env, '--force' => true],
+                'capco:compute:rankings' => ['--env' => $this->env]
             ],
             $output
         );
@@ -344,7 +344,7 @@ class ReinitCommand extends ContainerAwareCommand
             [
                 'capco:syntheses:update' => [],
                 'capco:syntheses:fix-urls' => [],
-                'capco:syntheses:counters' => [],
+                'capco:syntheses:counters' => []
             ],
             $output
         );
@@ -354,14 +354,18 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'capco:es:create' => ['--quiet' => true, '--no-debug' => true],
+                'capco:es:create' => ['--quiet' => true, '--no-debug' => true]
             ],
             $output
         );
 
         $this->runCommands(
             [
-                'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
+                'capco:es:populate' => [
+                    '--quiet' => true,
+                    '--no-debug' => true,
+                    '--env' => $this->env
+                ]
             ],
             $output
         );
@@ -371,7 +375,7 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'doctrine:migration:migrate' => ['--no-interaction' => true],
+                'doctrine:migration:migrate' => ['--no-interaction' => true]
             ],
             $output
         );
@@ -381,7 +385,7 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'doctrine:migration:version' => ['--add' => true, '--all' => true],
+                'doctrine:migration:version' => ['--add' => true, '--all' => true]
             ],
             $output
         );

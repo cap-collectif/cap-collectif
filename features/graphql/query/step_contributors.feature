@@ -123,58 +123,6 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
   """
 
 @elasticsearch
-Scenario: GraphQL client want to get the list of contributors of a selectionStep
-  Given I send a GraphQL POST request:
-  """
-  {
-    "query": "query node ($selectionStep: ID!){
-      selectionStep: node(id: $selectionStep) {
-        ... on SelectionStep {
-          contributors(first: 5) {
-            totalCount
-            pageInfo {
-              hasNextPage
-              endCursor
-            }
-            edges {
-              node {
-                _id
-              }
-            }
-          }
-        }
-      }
-    }",
-    "variables": {
-      "selectionStep": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "selectionStep": {
-        "contributors": {
-          "totalCount": 47,
-          "pageInfo": {
-            "hasNextPage": true,
-            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
-          },
-          "edges": [
-            {"node":{"_id":"user10"}},
-            {"node":{"_id":"user11"}},
-            {"node":{"_id":"user12"}},
-            {"node":{"_id":"user13"}},
-            {"node":{"_id":"user14"}}
-          ]
-        }
-      }
-    }
-  }
-  """
-
-@elasticsearch
 Scenario: GraphQL client want to get the list of contributors of a questionnaireStep
   Given I send a GraphQL POST request:
   """

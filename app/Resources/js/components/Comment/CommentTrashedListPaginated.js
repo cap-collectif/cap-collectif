@@ -3,21 +3,20 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { ListGroup, Button } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import Comment from './Comment';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
 import { TRASHED_COMMENT_PAGINATOR_COUNT } from '../Project/ProjectTrashComment';
-import type { CommentTrashedListPaginatedQuery_project } from '~relay/CommentTrashedListPaginatedQuery.graphql';
+import type { CommentTrashedListPaginatedQuery_project } from '~relay/CommentTrashedListPaginated_project.graphql';
 
-type Props = {
-  relay: RelayPaginationProp,
-  project: CommentTrashedListPaginatedQuery_project,
-};
+type Props = {|
+  +relay: RelayPaginationProp,
+  +project: CommentTrashedListPaginatedQuery_project,
+|};
 
-type State = {
-  isLoading: boolean,
-};
+type State = {|
+  +isLoading: boolean,
+|};
 
 export class CommentTrashedListPaginated extends React.Component<Props, State> {
   state = {
@@ -25,8 +24,9 @@ export class CommentTrashedListPaginated extends React.Component<Props, State> {
   };
 
   handleLoadMore = () => {
+    const { relay } = this.props;
     this.setState({ isLoading: true });
-    this.props.relay.loadMore(TRASHED_COMMENT_PAGINATOR_COUNT, () => {
+    relay.loadMore(TRASHED_COMMENT_PAGINATOR_COUNT, () => {
       this.setState({ isLoading: false });
     });
   };
@@ -57,15 +57,14 @@ export class CommentTrashedListPaginated extends React.Component<Props, State> {
               .filter(Boolean)
               .map(node => <Comment key={node.id} comment={node} disabledButton />)}
           {relay.hasMore() && (
-            <ListGroupItem style={{ textAlign: 'center' }}>
-              {isLoading ? (
-                <Loader />
-              ) : (
-                <Button bsStyle="link" onClick={this.handleLoadMore}>
-                  <FormattedMessage id="global.more" />
-                </Button>
-              )}
-            </ListGroupItem>
+            <div id="proposal-list-pagination-footer" className="text-center">
+              <Button
+                id="CommentTrashedListPaginated-loadMore"
+                disabled={isLoading}
+                onClick={this.handleLoadMore}>
+                <FormattedMessage id={isLoading ? 'global.loading' : 'global.more'} />
+              </Button>
+            </div>
           )}
         </ListGroup>
       </React.Fragment>

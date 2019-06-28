@@ -37,13 +37,15 @@ export class ProposalPreviewStatus extends React.Component<Props> {
 
       return (
         <>
-          <TrashedReasonContainer>
-            <p className="px-15">
-              <FormattedMessage id="proposal.show.trashed.shortReason" />
-              <br />
-              <span className="excerpt">{proposal.trashedReason}</span>
-            </p>
-          </TrashedReasonContainer>
+          {proposal.trashedReason ? (
+            <TrashedReasonContainer>
+              <p className="px-15">
+                <FormattedMessage id="proposal.show.trashed.shortReason" />
+                <br />
+                <span className="excerpt">{proposal.trashedReason}</span>
+              </p>
+            </TrashedReasonContainer>
+          ) : null}
           <Card.Status bgColor={status.color}>{status && status.name}</Card.Status>
         </>
       );
