@@ -375,7 +375,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 172,
           "id": "UHJvamVjdDpwcm9qZWN0Ng==",
           "publishedAt": "2014-12-26 00:00:00",
           "title": "Budget Participatif Rennes",
@@ -384,7 +384,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 3,
           "id": "UHJvamVjdDpwcm9qZWN0Nw==",
           "publishedAt": "2014-12-25 00:00:00",
           "title": "Dépot avec selection vote budget",
@@ -402,7 +402,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 1,
           "id": "UHJvamVjdDpwcm9qZWN0OQ==",
           "publishedAt": "2014-12-23 00:00:00",
           "title": "Appel à projets",
@@ -411,7 +411,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MTA=",
           "publishedAt": "2014-12-22 00:00:00",
           "title": "Dépôt avec selection vote simple",
@@ -420,7 +420,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MTE=",
           "publishedAt": "2014-12-21 00:00:00",
           "title": "Budget avec vote limité",
@@ -456,7 +456,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 3,
           "id": "UHJvamVjdDpwcm9qZWN0MTU=",
           "publishedAt": "2014-12-17 00:00:00",
           "title": "BP avec vote classement",
@@ -474,7 +474,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
           "publishedAt": "2014-12-11 00:00:00",
           "title": "Questions/Responses",
@@ -578,7 +578,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MTA=",
           "publishedAt": "2014-12-22 00:00:00",
           "title": "Dépôt avec selection vote simple",
@@ -587,7 +587,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MTE=",
           "publishedAt": "2014-12-21 00:00:00",
           "title": "Budget avec vote limité",
@@ -623,7 +623,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 3,
           "id": "UHJvamVjdDpwcm9qZWN0MTU=",
           "publishedAt": "2014-12-17 00:00:00",
           "title": "BP avec vote classement",
@@ -641,7 +641,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 2,
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
           "publishedAt": "2014-12-11 00:00:00",
           "title": "Questions/Responses",
@@ -659,7 +659,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 172,
           "id": "UHJvamVjdDpwcm9qZWN0Ng==",
           "publishedAt": "2014-12-26 00:00:00",
           "title": "Budget Participatif Rennes",
@@ -668,7 +668,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 3,
           "id": "UHJvamVjdDpwcm9qZWN0Nw==",
           "publishedAt": "2014-12-25 00:00:00",
           "title": "Dépot avec selection vote budget",
@@ -677,7 +677,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
-          "contributionsCount": 0,
+          "contributionsCount": 1,
           "id": "UHJvamVjdDpwcm9qZWN0OQ==",
           "publishedAt": "2014-12-23 00:00:00",
           "title": "Appel à projets",

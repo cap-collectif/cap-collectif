@@ -97,7 +97,7 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
             "edges":[
                {
                   "node":{
-                     "_id":"user5"
+                     "_id":"user7"
                   }
                },
                {
@@ -107,7 +107,7 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
                },
                {
                   "node":{
-                     "_id":"user7"
+                     "_id":"user5"
                   }
                },
                {
@@ -162,9 +162,9 @@ Scenario: GraphQL client want to get the list of contributors of a questionnaire
             "endCursor": "YXJyYXljb25uZWN0aW9uOjM="
           },
           "edges": [
-            {"node":{"_id":"user502"}},
             {"node":{"_id":"user506"}},
             {"node":{"_id":"user515"}},
+            {"node":{"_id":"user502"}},
             {"node":{"_id":"userAdmin"}}
           ]
         }
