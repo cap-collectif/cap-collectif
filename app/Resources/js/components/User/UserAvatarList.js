@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
-import { UserAvatar } from './UserAvatar';
+import UserAvatar from './UserAvatar';
 import type { UserAvatarList_users } from '~relay/UserAvatarList_users.graphql';
 
 type Props = {
@@ -51,11 +51,8 @@ export default createFragmentContainer(UserAvatarList, {
   users: graphql`
     fragment UserAvatarList_users on User @relay(plural: true) {
       id
-      url
       username
-      media {
-        url
-      }
+      ...UserAvatar_user
     }
   `,
 });
