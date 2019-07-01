@@ -43,12 +43,12 @@ class UserSearch extends Search
         if (!$sort || 'activity' === $sort) {
             $query->setSort([
                 'totalContributionsCount' => [
-                    'order' => 'desc'
+                    'order' => 'DESC'
                 ]
             ]);
         } else {
             $query->addSort([
-                'createdAt' => ['order' => 'ASC']
+                'createdAt' => ['order' => 'DESC']
             ]);
         }
 
@@ -222,8 +222,8 @@ class UserSearch extends Search
 
         $query->setSort([
             'createdAt' => [
-                'order' => 'desc',
-            ],
+                'order' => 'desc'
+            ]
         ]);
 
         // Unstable sort by top contributors.
