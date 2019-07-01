@@ -21,7 +21,7 @@ class SectionAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position'
+        '_sort_by' => 'position',
     ];
 
     public function createQuery($context = 'list')
@@ -61,25 +61,25 @@ class SectionAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.section.title'
+                'label' => 'admin.fields.section.title',
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.section.position'
+                'label' => 'admin.fields.section.position',
             ])
             ->add('teaser', null, [
-                'label' => 'admin.fields.section.teaser'
+                'label' => 'admin.fields.section.teaser',
             ])
             ->add('body', null, [
-                'label' => 'admin.fields.section.body'
+                'label' => 'admin.fields.section.body',
             ])
             ->add('enabled', null, [
-                'label' => 'admin.fields.section.enabled'
+                'label' => 'admin.fields.section.enabled',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.section.created_at'
+                'label' => 'admin.fields.section.created_at',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.section.updated_at'
+                'label' => 'admin.fields.section.updated_at',
             ]);
     }
 
@@ -98,33 +98,33 @@ class SectionAdmin extends AbstractAdmin
                 'code' => 'Action',
                 'actions' => [
                     'up' => [
-                        'template' => 'CapcoAdminBundle:Section:list__action_up.html.twig'
+                        'template' => 'CapcoAdminBundle:Section:list__action_up.html.twig',
                     ],
                     'down' => [
-                        'template' => 'CapcoAdminBundle:Section:list__action_down.html.twig'
-                    ]
-                ]
+                        'template' => 'CapcoAdminBundle:Section:list__action_down.html.twig',
+                    ],
+                ],
             ])
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.section.title'
+                'label' => 'admin.fields.section.title',
             ])
             ->add('enabled', null, [
                 'label' => 'admin.fields.section.enabled',
-                'editable' => true
+                'editable' => true,
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.group.created_at'
+                'label' => 'admin.fields.group.created_at',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.section.updated_at'
+                'label' => 'admin.fields.section.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [],
                     'delete' => [
-                        'template' => 'CapcoAdminBundle:Section:list__action_delete.html.twig'
-                    ]
-                ]
+                        'template' => 'CapcoAdminBundle:Section:list__action_delete.html.twig',
+                    ],
+                ],
             ]);
     }
 
@@ -140,12 +140,12 @@ class SectionAdmin extends AbstractAdmin
         if ($fields['title']) {
             $formMapper->add('title', null, [
                 'label' => 'admin.fields.section.title',
-                'help' => 'be-concise-1-or-2-words'
+                'help' => 'be-concise-1-or-2-words',
             ]);
         } else {
             $formMapper->add('title', null, [
                 'label' => 'admin.fields.section.title',
-                'attr' => ['readonly' => true]
+                'attr' => ['readonly' => true],
             ]);
         }
 
@@ -153,20 +153,20 @@ class SectionAdmin extends AbstractAdmin
             $formMapper->add('teaser', null, [
                 'label' => 'admin.fields.section.teaser',
                 'required' => false,
-                'help' => 'support-your-title'
+                'help' => 'support-your-title',
             ]);
         }
 
         if ($fields['body']) {
             $formMapper->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.section.body',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ]);
         }
 
         if ($fields['nbObjects']) {
             $formMapper->add('nbObjects', null, [
-                'label' => 'admin.fields.section.nb_objects'
+                'label' => 'admin.fields.section.nb_objects',
             ]);
         }
 
@@ -175,7 +175,7 @@ class SectionAdmin extends AbstractAdmin
                 'label' => 'admin.fields.section.collect_step',
                 'required' => true,
                 'query' => $this->createQueryForCollectSteps(),
-                'choices_as_values' => true
+                'choices_as_values' => true,
             ]);
         }
         $formMapper->end();
@@ -195,19 +195,19 @@ class SectionAdmin extends AbstractAdmin
             $formMapper
                 ->with('admin.label.section.display.metrics')
                 ->add('metricsToDisplayBasics', null, [
-                    'label' => $basicsMetricsLabel
+                    'label' => $basicsMetricsLabel,
                 ])
                 ->add('metricsToDisplayProjects', null, [
-                    'label' => 'admin.fields.section.projectsMetrics'
+                    'label' => 'admin.fields.section.projectsMetrics',
                 ]);
 
             $events = $this->getConfigurationPool()
                 ->getContainer()
                 ->get(QueryEventsResolver::class)
-                ->getEventsConnection($args);
+                ->__invoke($args);
             if ($events->totalCount > 0) {
                 $formMapper->add('metricsToDisplayEvents', null, [
-                    'label' => 'admin.fields.section.eventsMetrics'
+                    'label' => 'admin.fields.section.eventsMetrics',
                 ]);
             }
             $formMapper->end();
@@ -216,11 +216,11 @@ class SectionAdmin extends AbstractAdmin
         $formMapper
             ->with('admin.label.section.publication')
             ->add('position', null, [
-                'label' => 'admin.fields.section.position'
+                'label' => 'admin.fields.section.position',
             ])
             ->add('enabled', null, [
                 'label' => 'admin.fields.section.enabled',
-                'required' => false
+                'required' => false,
             ])
             ->end();
     }
@@ -232,30 +232,30 @@ class SectionAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.section.title'
+                'label' => 'admin.fields.section.title',
             ])
             ->add('enabled', null, [
-                'label' => 'admin.fields.section.enabled'
+                'label' => 'admin.fields.section.enabled',
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.section.position'
+                'label' => 'admin.fields.section.position',
             ])
             ->add('teaser', CKEditorType::class, [
                 'label' => 'admin.fields.section.teaser',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.section.body',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->add('nbObjects', null, [
-                'label' => 'admin.fields.section.nb_objects'
+                'label' => 'admin.fields.section.nb_objects',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.section.created_at'
+                'label' => 'admin.fields.section.created_at',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.section.updated_at'
+                'label' => 'admin.fields.section.updated_at',
             ]);
     }
 

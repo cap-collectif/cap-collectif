@@ -40,17 +40,3 @@ Scenario: Logged in admin wants to test admin contributions
   Given I am logged in as admin
   And I go to the admin argument list page
   And I should not see "error.500"
-
-Scenario: Logged in admin wants to see home / sections page list.
-  Given I am logged in as admin
-  When I go to the admin section list page
-  Then I should not see "error.500"
-  And I should see "Section List"
-
-Scenario: Logged in admin wants to edit a section
-  Given I am logged in as admin
-  When I go to the admin section page with sectionId 5
-  Then I should not see "error.500"
-  And I should not see "error.404"
-  And I should see an ".content" element
-  
