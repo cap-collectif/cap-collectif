@@ -206,7 +206,7 @@ Capco\UserBundle\Entity\User:
     createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 11 days"))>
 
   user_not_confirmed:
-    id: 'user506'
+    id: 'user_not_confirmed'
     username: user_not_confirmed
     firstname: user_not_confirmed
     lastname: user_not_confirmed
@@ -219,10 +219,10 @@ Capco\UserBundle\Entity\User:
     media: null
     confirmationToken: azertyuiop
     enabled: true
-    createdAt: '<dateTimeBetween("-3 days", "-1 days")>'
+    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 11 days"))>
 
   user_not_confirmed_with_contributions:
-    id: 'user508'
+    id: 'user_not_confirmed_with_contributions'
     username: user_not_confirmed_with_contributions
     firstname: user_not_confirmed_with_contributions
     lastname: user_not_confirmed_with_contributions
@@ -234,7 +234,7 @@ Capco\UserBundle\Entity\User:
     media: null
     confirmationToken: oklmoklm
     enabled: true
-    createdAt: '<dateTimeBetween("-3 days", "-1 days")>'
+    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 11 days"))>
 
   user_without_phone:
     id: 'user511'
@@ -294,7 +294,7 @@ Capco\UserBundle\Entity\User:
     media: null
     confirmationToken: check-my-email-token
     resetPasswordToken: reset-my-password-token
-    createdAt: '<dateTimeBetween("-3 days", "-1 days")>'
+    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 13 days"))>
 
   user_updating_email:
     id: 'user515'

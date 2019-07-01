@@ -20,7 +20,7 @@ class DeveloperController extends Controller
     public const CACHE_KEY = 'DeveloperController';
 
     /**
-     * @Route("/developer/explorer/", name="app_developer_explorer", defaults={"_feature_flags" = "developer_documentation"})
+     * @Route("/developer/explorer", name="app_developer_explorer", defaults={"_feature_flags" = "developer_documentation"})
      * @Template("CapcoAppBundle:Developer:explorer.html.twig")
      */
     public function explorerAction(Request $request)
@@ -29,7 +29,7 @@ class DeveloperController extends Controller
     }
 
     /**
-     * @Route("/developer/guides/{guide}", name="app_developer_guide", requirements={"slug" = "using-global-node-ids|intro-to-graphql|events|proposals|questionnaires"}, defaults={"_feature_flags" = "developer_documentation"})
+     * @Route("/developer/guides/{guide}", name="app_developer_guide", requirements={"guide" = "using-global-node-ids|intro-to-graphql|events|proposals|questionnaires"}, defaults={"_feature_flags" = "developer_documentation"})
      */
     public function guideAction(string $guide)
     {
@@ -37,7 +37,7 @@ class DeveloperController extends Controller
     }
 
     /**
-     * @Route("/developer/guides/", name="app_developer_guides", defaults={"_feature_flags" = "developer_documentation"})
+     * @Route("/developer/guides", name="app_developer_guides", defaults={"_feature_flags" = "developer_documentation"})
      * @Template("CapcoAppBundle:Developer:guides.html.twig")
      */
     public function guidesAction(Request $request)
@@ -47,7 +47,7 @@ class DeveloperController extends Controller
 
     /**
      * @Route("/developer", name="app_developer", defaults={"_feature_flags" = "developer_documentation"})
-     * @Route("/developer/{category}/", name="app_developer_category", requirements={"category" = "query|previews|breaking_changes|mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"})
+     * @Route("/developer/{category}", name="app_developer_category", requirements={"category" = "query|previews|breaking_changes|mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"})
      * @Route("/developer/{category}/{type}", name="app_developer_category_type", requirements={"category" = "mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"})
      * @Template("CapcoAppBundle:Developer:index.html.twig")
      */
@@ -78,7 +78,7 @@ class DeveloperController extends Controller
                 'PublicUser',
                 'PublicProject',
                 'PublicConsultation',
-                'PublicUserConnection',
+                'PublicUserConnection'
             ];
 
             // Public types hard to guess :
@@ -99,7 +99,7 @@ class DeveloperController extends Controller
                 'HTML',
                 'Email',
                 'DateTime',
-                'URI',
+                'URI'
             ];
             foreach ($typeResolver->getSolutions() as $solutionID => $solution) {
                 $aliases = $typeResolver->getSolutionAliases($solutionID);
@@ -197,6 +197,13 @@ class DeveloperController extends Controller
                 }
             }
 
+            // If we could not find the the requested type, let's throw a 404.
+            if ($type && !$selection) {
+                throw $this->createNotFoundException(
+                    'The requested type could not be found: ' . $type
+                );
+            }
+
             $data = [
                 'selection' => $selection,
                 'category' => $category,
@@ -207,7 +214,7 @@ class DeveloperController extends Controller
                 'interfaces' => $interfaces,
                 'objects' => $objects,
                 'scalars' => $scalars,
-                'mutation' => $mutation,
+                'mutation' => $mutation
             ];
 
             $cachedItem->set($data)->expiresAfter(RedisCache::ONE_DAY);

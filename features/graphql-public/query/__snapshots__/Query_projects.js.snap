@@ -21,7 +21,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
           "contributors": Object {
-            "totalCount": 5,
+            "totalCount": 6,
           },
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "title": "Stratégie technologique de l'Etat et services publics",
@@ -307,7 +307,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
-          "contributionsCount": 247,
+          "contributionsCount": 234,
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "publishedAt": "2014-12-31 00:00:00",
           "title": "Croissance, innovation, disruption",
@@ -330,7 +330,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
-          "contributionsCount": 247,
+          "contributionsCount": 234,
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "publishedAt": "2014-12-31 00:00:00",
           "title": "Croissance, innovation, disruption",
@@ -339,7 +339,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 8,
+          "contributionsCount": 17,
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "publishedAt": "2014-12-30 00:00:00",
           "title": "Stratégie technologique de l'Etat et services publics",
@@ -515,7 +515,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
-          "contributionsCount": 247,
+          "contributionsCount": 234,
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "publishedAt": "2014-12-31 00:00:00",
           "title": "Croissance, innovation, disruption",
@@ -542,7 +542,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
-          "contributionsCount": 8,
+          "contributionsCount": 17,
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "publishedAt": "2014-12-30 00:00:00",
           "title": "Stratégie technologique de l'Etat et services publics",
@@ -714,7 +714,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
           "contributors": Object {
-            "totalCount": 5,
+            "totalCount": 6,
           },
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "title": "Stratégie technologique de l'Etat et services publics",

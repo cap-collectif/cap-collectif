@@ -57,7 +57,7 @@ abstract class BatchDataLoader extends DataLoader
                             : base64_encode(var_export($this->serializeKey($key), true))) .
                         ']-'
                 );
-            },
+            }
         ]);
         parent::__construct(
             function ($ids) use ($batchFunction) {
@@ -68,6 +68,11 @@ abstract class BatchDataLoader extends DataLoader
             $promiseFactory,
             $options
         );
+    }
+
+    public function disableCache(): void
+    {
+        $this->enableCache = false;
     }
 
     public function invalidateAll(): void
@@ -108,7 +113,7 @@ abstract class BatchDataLoader extends DataLoader
         }
 
         if (!$this->enableCache || !$cacheItem->isHit()) {
-            if ($this->debug) {
+            if ($this->debug && $this->enableCache) {
                 $this->logger->info(
                     \get_class($this) .
                         ' Cache MISS for: ' .
@@ -145,7 +150,7 @@ abstract class BatchDataLoader extends DataLoader
                         $result = $value;
                     }
 
-                    if ($this->debug) {
+                    if ($this->debug && $this->enableCache) {
                         $this->logger->info('Saved key into cache with value : ');
                     }
                 });

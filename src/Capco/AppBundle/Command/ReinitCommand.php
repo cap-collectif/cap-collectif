@@ -76,6 +76,8 @@ use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
+use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 
 class ReinitCommand extends ContainerAwareCommand
 {
@@ -140,6 +142,12 @@ class ReinitCommand extends ContainerAwareCommand
             ->getEventManager();
         $elasticsearchListener = $this->getContainer()->get(ElasticsearchDoctrineListener::class);
         $publishableListener = $this->getContainer()->get(DoctrineListener::class);
+
+        // Disable some dataloader cache
+        $stepContributions = $this->getContainer()->get(StepContributionsDataLoader::class);
+        $stepContributions->disableCache();
+        $proposalFormProposals = $this->getContainer()->get(ProposalFormProposalsDataLoader::class);
+        $proposalFormProposals->disableCache();
 
         $eventManager->removeEventListener(
             $elasticsearchListener->getSubscribedEvents(),
@@ -354,18 +362,13 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'capco:es:create' => ['--quiet' => true, '--no-debug' => true]
+                'capco:es:clean' => ['--all' => true, '--no-debug' => true]
             ],
             $output
         );
-
         $this->runCommands(
             [
-                'capco:es:populate' => [
-                    '--quiet' => true,
-                    '--no-debug' => true,
-                    '--env' => $this->env
-                ]
+                'capco:es:create' => ['--quiet' => true, '--no-debug' => true, '--populate' => true]
             ],
             $output
         );

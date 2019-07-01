@@ -6,8 +6,9 @@ Capco\AppBundle\Entity\Post:
     isPublished: true
     publishedAt: <dateTimeBetween('-100 days', '-10 days')>
     Authors:
-      - '@user<numberBetween(1,5)>'
-    media: '@MediaProject<numberBetween(1,3)>'
+      - '@user1'
+      - '@user5'
+    media: '@MediaProject1'
     projects: ['@p1']
     themes: ['@theme1']
 
@@ -18,7 +19,7 @@ Capco\AppBundle\Entity\Post:
     isPublished: true
     publishedAt: <dateTimeBetween('-100 days', '-10 days')>
     Authors:
-      - '@user<numberBetween(1,5)>'
+      - '@user2'
     media: null
     projects: ['@p2']
     themes: ['@theme2']
@@ -30,7 +31,7 @@ Capco\AppBundle\Entity\Post:
     isPublished: true
     publishedAt: <dateTimeBetween('+10 days', '+100 days')>
     Authors:
-      - '@user<numberBetween(1,5)>'
+      - '@user5'
     media: null
     projects: ['@p2']
     themes: ['@theme2']
@@ -55,6 +56,6 @@ Capco\AppBundle\Entity\Post:
     isPublished: true
     publishedAt: <dateTimeBetween('-100 days', '-10 days')>
     Authors:
-      - '@user<numberBetween(1,5)>'
+      - '@user1'
     themes: ['@theme1', '@theme2']
     media: null
