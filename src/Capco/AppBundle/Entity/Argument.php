@@ -111,7 +111,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
 
     public function getProject(): ?Project
     {
-        if ($this->getParent()) {
+        if ($this->getParent() && $this->getParent()->getStep()) {
             return $this->getParent()
                 ->getStep()
                 ->getProject();
