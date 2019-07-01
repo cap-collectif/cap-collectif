@@ -6,9 +6,6 @@ LogicJump:
       id:
         #builder: 'Relay::GlobalId'
         type: 'ID'
-      always:
-        description: 'If true, the logic jump will always be triggered, '
-        type: 'Boolean!'
       origin:
         description: 'Return the question that trigger this logic jump.'
         type: 'InternalQuestion!'

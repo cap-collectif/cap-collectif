@@ -54,6 +54,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
           private: false,
           number: 1,
           position: 1,
+          alwaysJumpDestinationQuestion: null,
           jumps: [],
         },
       ],

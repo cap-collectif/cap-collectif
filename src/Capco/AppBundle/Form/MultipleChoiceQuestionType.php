@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AdminBundle\Form\QuestionValidationRuleType;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
@@ -47,9 +48,7 @@ class MultipleChoiceQuestionType extends AbstractType
                 return null === $questionChoice || empty($questionChoice->getTitle());
             },
         ]);
-        $builder->add('alwaysJumpDestinationQuestion', RelayNodeType::class, [
-            'required' => false
-        ]);
+        $builder->add('alwaysJumpDestinationQuestion', RelayNodeType::class, ['required' => false, 'class' => AbstractQuestion::class]);
         $builder->add('jumps', CollectionType::class, [
             'allow_add' => true,
             'allow_delete' => true,

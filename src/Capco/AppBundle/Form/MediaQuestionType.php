@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Form\Type\RelayNodeType;
@@ -39,9 +40,7 @@ class MediaQuestionType extends AbstractType
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
         $builder->add('type', IntegerType::class);
-        $builder->add('alwaysJumpDestinationQuestion', RelayNodeType::class, [
-            'required' => false
-        ]);
+        $builder->add('alwaysJumpDestinationQuestion', RelayNodeType::class, ['required' => false, 'class' => AbstractQuestion::class]);
         $builder->add('jumps', CollectionType::class, [
             'allow_add' => true,
             'allow_delete' => true,

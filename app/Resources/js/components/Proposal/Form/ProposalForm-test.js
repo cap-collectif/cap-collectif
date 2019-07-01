@@ -43,6 +43,7 @@ describe('<ProposalForm />', () => {
         position: 1,
         number: 1,
         jumps: [],
+        alwaysJumpDestinationQuestion: null,
         private: true,
         required: true,
         validationRule: null,

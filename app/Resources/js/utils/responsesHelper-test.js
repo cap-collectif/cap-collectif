@@ -19,6 +19,7 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -49,10 +50,10 @@ const questionnaireQuestions = [
     position: 2,
     required: false,
     helpText: null,
+    alwaysJumpDestinationQuestion: null,
     jumps: [
       {
         id: 'logicjump1',
-        always: false,
         origin: {
           id: 'UXVlc3Rpb246NDU=',
         },
@@ -91,7 +92,6 @@ const questionnaireQuestions = [
       },
       {
         id: 'logicjump2',
-        always: false,
         origin: {
           id: 'UXVlc3Rpb246NDU=',
         },
@@ -117,7 +117,6 @@ const questionnaireQuestions = [
       },
       {
         id: 'logicjump3',
-        always: false,
         origin: {
           id: 'UXVlc3Rpb246NDU=',
         },
@@ -186,21 +185,13 @@ const questionnaireQuestions = [
     position: 3,
     required: false,
     helpText: null,
-    jumps: [
-      {
-        id: 'alwaysLogicJumpHapAndGange',
-        always: true,
-        origin: {
-          id: 'UXVlc3Rpb246NDY=',
-        },
-        destination: {
-          id: 'UXVlc3Rpb246MjU=',
-          title: 'Par qui Hap a t-il été créé ?',
-          number: 4,
-        },
-        conditions: [],
-      },
-    ],
+    alwaysJumpDestinationQuestion: {
+      id: 'alwaysLogicJumpHapAndGange',
+      title: 'Par qui Hap a t-il été créé ?',
+      number: 4
+    },
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -232,6 +223,7 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -269,10 +261,15 @@ const questionnaireQuestions = [
     position: 5,
     required: false,
     helpText: null,
+    alwaysJumpDestinationQuestion: {
+      id: 'logicjump8',
+      title: 'Plutôt Marvel ou DC ?',
+      number: 9
+    },
+    alwaysJumpDestinationQuestion: null,
     jumps: [
       {
         id: 'logicjump10',
-        always: false,
         origin: {
           id: 'UXVlc3Rpb246MjY=',
         },
@@ -295,21 +292,7 @@ const questionnaireQuestions = [
             },
           },
         ],
-      },
-      {
-        id: 'logicjump8',
-        always: true,
-        origin: {
-          id: 'UXVlc3Rpb246MjY=',
-        },
-        destination: {
-          id: 'UXVlc3Rpb246MzE=',
-          title: 'Plutôt Marvel ou DC ?',
-          number: 9,
-        },
-        conditions: [],
-      },
-    ],
+      }],
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -340,21 +323,13 @@ const questionnaireQuestions = [
     position: 6,
     required: false,
     helpText: null,
-    jumps: [
-      {
-        id: 'logicjump11',
-        always: true,
-        origin: {
-          id: 'UXVlc3Rpb246Mzk=',
-        },
-        destination: {
-          id: 'UXVlc3Rpb246MzE=',
-          title: 'Plutôt Marvel ou DC ?',
-          number: 9,
-        },
-        conditions: [],
-      },
-    ],
+    alwaysJumpDestinationQuestion: {
+      id: 'logicjump11',
+      title: 'Plutôt Marvel ou DC ?',
+      number: 9
+    },
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -386,6 +361,7 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -416,21 +392,13 @@ const questionnaireQuestions = [
     position: 8,
     required: false,
     helpText: null,
-    jumps: [
-      {
-        id: 'logicjump9',
-        always: true,
-        origin: {
-          id: 'UXVlc3Rpb246Mjg=',
-        },
-        destination: {
-          id: 'UXVlc3Rpb246MzE=',
-          title: 'Plutôt Marvel ou DC ?',
-          number: 9,
-        },
-        conditions: [],
-      },
-    ],
+    alwaysJumpDestinationQuestion: {
+      id: 'logicjump9',
+      title: 'Plutôt Marvel ou DC ?',
+      number: 9
+    },
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -468,10 +436,10 @@ const questionnaireQuestions = [
     position: 9,
     required: false,
     helpText: null,
+    alwaysJumpDestinationQuestion: null,
     jumps: [
       {
         id: 'logicjump4',
-        always: false,
         origin: {
           id: 'UXVlc3Rpb246MzE=',
         },
@@ -497,7 +465,6 @@ const questionnaireQuestions = [
       },
       {
         id: 'logicjump5',
-        always: false,
         origin: {
           id: 'UXVlc3Rpb246MzE=',
         },
@@ -553,6 +520,7 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -584,6 +552,7 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -614,21 +583,13 @@ const questionnaireQuestions = [
     position: 12,
     required: false,
     helpText: null,
-    jumps: [
-      {
-        id: 'logicjump6',
-        always: true,
-        origin: {
-          id: 'UXVlc3Rpb246MzQ=',
-        },
-        destination: {
-          id: 'UXVlc3Rpb246Mzg=',
-          title: "C'est la fin mais j'affiche quand même des choix",
-          number: 16,
-        },
-        conditions: [],
-      },
-    ],
+    alwaysJumpDestinationQuestion: {
+      id: 'logicjump6',
+      title: "C'est la fin mais j'affiche quand même des choix",
+      number: 16
+    },
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -660,6 +621,7 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -691,6 +653,7 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -728,21 +691,13 @@ const questionnaireQuestions = [
     position: 15,
     required: false,
     helpText: null,
-    jumps: [
-      {
-        id: 'logicjump7',
-        always: true,
-        origin: {
-          id: 'UXVlc3Rpb246Mzc=',
-        },
-        destination: {
-          id: 'UXVlc3Rpb246Mzg=',
-          title: "C'est la fin mais j'affiche quand même des choix",
-          number: 16,
-        },
-        conditions: [],
-      },
-    ],
+    alwaysJumpDestinationQuestion: {
+      id: 'logicjump7',
+      title: "C'est la fin mais j'affiche quand même des choix",
+      number: 16
+    },
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -774,6 +729,7 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     jumps: [],
+    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -808,6 +764,7 @@ const numberQuestion = {
   helpText: null,
   type: 'number',
   jumps: [],
+  alwaysJumpDestinationQuestion: null,
   position: 1,
 };
 
@@ -838,6 +795,7 @@ const selectQuestion = {
   ],
   validationRule: null,
   jumps: [],
+  alwaysJumpDestinationQuestion: null,
   position: 2,
 };
 
@@ -852,6 +810,7 @@ const mediaQuestion = {
   helpText: null,
   type: 'medias',
   jumps: [],
+  alwaysJumpDestinationQuestion: null,
 };
 
 const textQuestion = {
@@ -864,6 +823,7 @@ const textQuestion = {
   helpText: null,
   type: 'textarea',
   jumps: [],
+  alwaysJumpDestinationQuestion: null,
   position: 2,
 };
 
@@ -962,6 +922,7 @@ describe('getAvailableQuestionsIds', () => {
           },
         ],
         jumps: [],
+        alwaysJumpDestinationQuestion: null,
         number: 1,
         position: 1,
         required: false,
@@ -993,6 +954,7 @@ describe('getAvailableQuestionsIds', () => {
           },
         ],
         jumps: [],
+        alwaysJumpDestinationQuestion: null,
         number: 2,
         position: 2,
         required: false,
@@ -1041,6 +1003,7 @@ describe('getAvailableQuestionsIds', () => {
           },
         ],
         jumps: [],
+        alwaysJumpDestinationQuestion: null,
         number: 1,
         position: 1,
         required: false,
@@ -1071,10 +1034,10 @@ describe('getAvailableQuestionsIds', () => {
             title: 'Emilia',
           },
         ],
+        alwaysJumpDestinationQuestion: null,
         jumps: [
           {
             id: 'jump1',
-            always: false,
             conditions: [
               {
                 id: 'conditionQuestion2-1',
@@ -1100,7 +1063,6 @@ describe('getAvailableQuestionsIds', () => {
           },
           {
             id: 'jump2',
-            always: false,
             conditions: [
               {
                 id: 'conditionQuestion2-2',
@@ -1156,6 +1118,7 @@ describe('getAvailableQuestionsIds', () => {
           },
         ],
         jumps: [],
+        alwaysJumpDestinationQuestion: null,
         number: 3,
         position: 3,
         required: false,
@@ -1187,6 +1150,7 @@ describe('getAvailableQuestionsIds', () => {
           },
         ],
         jumps: [],
+        alwaysJumpDestinationQuestion: null,
         number: 4,
         position: 4,
         required: false,

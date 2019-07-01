@@ -53,6 +53,7 @@ describe('<ProposalAdminContentForm />', () => {
             position: 0,
             number: 1,
             jumps: [],
+            alwaysJumpDestinationQuestion: null,
             private: false,
             required: true,
             validationRule: null,

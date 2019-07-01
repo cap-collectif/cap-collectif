@@ -91,6 +91,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionHapCreation:
     id: 25
     title: Par qui Hap a t-il été créé ?
+    alwaysJumpDestinationQuestion: '@multiplequestionIsHapGood'
     type: 4 # select
   multiplequestionIsHapGood:
     id: 26
@@ -99,10 +100,12 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionNoelFete:
     id: 27
     title: Noel a t-il un rapport avec la fête de Noël ?
+    alwaysJumpDestinationQuestion: '@multiplequestionNoelHatColor'
     type: 4 # select
   multiplequestionNoelHatColor:
     id: 28
     title: De quelle couleur est le chapeau de Noël ?
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDc'
     type: 4 # select
   multiplequestionMarvelOrDc:
     id: 31
@@ -111,26 +114,32 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionDcSupermanLike:
     id: 32
     title: T'aimes bien Superman ?
+    alwaysJumpDestinationQuestion: '@multiplequestionDcBatmanLike'
     type: 4 # select
   multiplequestionDcBatmanLike:
     id: 33
     title: T'aimes bien Batman ?
+    alwaysJumpDestinationQuestion: '@multiplequestionDcSupergirlLike'
     type: 4 # select
   multiplequestionDcSupergirlLike:
     id: 34
     title: T'aimes bien Supergirl ?
+    alwaysJumpDestinationQuestion: '@multiplequestionEndConditionel'
     type: 4 # select
   multiplequestionMarvelIronManLike:
     id: 35
     title: T'aimes bien Iron Man ?
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelLukeCageLike'
     type: 4 # select
   multiplequestionMarvelLukeCageLike:
     id: 36
     title: T'aimes bien Luke Cage ?
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelThorLike'
     type: 4 # select
   multiplequestionMarvelThorLike:
     id: 37
     title: T'aimes bien Thor ?
+    alwaysJumpDestinationQuestion: '@multiplequestionEndConditionel'
     type: 4 # select
   multiplequestionEndConditionel:
     id: 38
@@ -139,6 +148,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionHapNotGoodHowDareYou:
     id: 39
     title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDc'
     type: 4 # select
   ljMultipleQuestionRadio:
     id: 40
@@ -169,6 +179,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     id: 46
     title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
     required: false
+    alwaysJumpDestinationQuestion: '@multiplequestionHapCreation'
     type: 4 # select
   multiplequestionReactVue:
     id: 47
@@ -197,6 +208,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionIsHapGoodProposalForm15:
     id: 52
     title: Hap est-il un homme bon ?
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDc'
     type: 4 # select
   multiplequestionNoelFeteProposalForm15:
     id: 53

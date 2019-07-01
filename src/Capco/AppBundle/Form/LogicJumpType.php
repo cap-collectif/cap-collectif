@@ -15,7 +15,6 @@ class LogicJumpType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('id');
-        $builder->add('always');
         $builder->add('origin', RelayNodeType::class, ['class' => AbstractQuestion::class]);
         $builder->add('destination', RelayNodeType::class, ['class' => AbstractQuestion::class]);
         $builder->add('conditions', CollectionType::class, [

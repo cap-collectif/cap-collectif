@@ -27,42 +27,37 @@ type Props = {|
 
 export class QuestionsJumpAdminForm extends React.Component<Props> {
   render() {
-    const { fields, jumps, questions, oldMember, formName, currentQuestion } = this.props;
+    const { fields, questions, oldMember, formName, currentQuestion } = this.props;
     return (
       <div className="form-group" id="questions_choice_panel_personal">
         <ListGroup>
-          {fields.map(
-            (member, index) =>
-              jumps &&
-              jumps[index] &&
-              !jumps[index].always && (
-                <div className="panel-custom panel panel-default">
-                  <div className="panel-heading">
-                    <i
-                      className="cap cap-android-menu"
-                      style={{ color: '#0388CC', fontSize: '20px' }}
-                    />
-                    <h3 className="panel-title">
-                      <FormattedMessage id="answering-this-question" />
-                    </h3>
-                    <button
-                      type="button"
-                      style={{ border: 'none', fontSize: '20px', backgroundColor: '#f5f5f5' }}
-                      onClick={() => fields.remove(index)}>
-                      X
-                    </button>
-                  </div>
-                  <div className="panel-body">
-                    <FieldArray
-                      name={`${member}.conditions`}
-                      component={QuestionJumpConditionsAdminForm}
-                      formName={formName}
-                      member={member}
-                    />
-                  </div>
-                </div>
-              ),
-          )}
+          {fields.map((member, index) => (
+            <div className="panel-custom panel panel-default">
+              <div className="panel-heading">
+                <i
+                  className="cap cap-android-menu"
+                  style={{ color: '#0388CC', fontSize: '20px' }}
+                />
+                <h3 className="panel-title">
+                  <FormattedMessage id="answering-this-question" />
+                </h3>
+                <button
+                  type="button"
+                  style={{ border: 'none', fontSize: '20px', backgroundColor: '#f5f5f5' }}
+                  onClick={() => fields.remove(index)}>
+                  X
+                </button>
+              </div>
+              <div className="panel-body">
+                <FieldArray
+                  name={`${member}.conditions`}
+                  component={QuestionJumpConditionsAdminForm}
+                  formName={formName}
+                  member={member}
+                />
+              </div>
+            </div>
+          ))}
         </ListGroup>
         <Button
           bsStyle="primary"
@@ -94,15 +89,15 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
             <h4 className="panel-title">
               <FormattedMessage
                 id={
-                  jumps && jumps.filter(Boolean).filter(j => !j.always).length === 0
+                  fields && fields.length === 0
                     ? 'always-go-to'
                     : 'jump-other-goto'
                 }
               />
             </h4>
             <Field
-              id={`${oldMember}.alwaysJump`}
-              name={`${oldMember}.alwaysJump`}
+              id={`${oldMember}.alwaysJumpDestinationQuestion.id`}
+              name={`${oldMember}.alwaysJumpDestinationQuestion.id`}
               type="select"
               normalize={val => (val !== '' ? val : null)}
               component={component}>
@@ -122,7 +117,6 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   const selector = formValueSelector(props.formName);
   return {
     currentQuestion: selector(state, `${props.oldMember}`),
-    jumps: selector(state, `${props.oldMember}.jumps`),
     questions: selector(state, 'questions'),
   };
 };

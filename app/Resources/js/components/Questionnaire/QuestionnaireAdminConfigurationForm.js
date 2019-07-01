@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Field, FieldArray, type FormProps, reduxForm } from 'redux-form';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { formatInitialQuestions, type QuestionsInReduxForm, submitQuestion } from '../../utils/submitQuestion';
+import { type QuestionsInReduxForm, submitQuestion } from '../../utils/submitQuestion';
 import AlertForm from '../Alert/AlertForm';
 import component from '../Form/Field';
 import UpdateQuestionnaireConfigurationMutation from '../../mutations/UpdateQuestionnaireConfigurationMutation';
@@ -23,7 +23,6 @@ type Props = {|
 
 export type Jumps = ?$ReadOnlyArray<{|
   +id?: string,
-  +always: boolean,
   +origin: {
     id: number,
     title: string,
@@ -210,11 +209,7 @@ const form = reduxForm({
 })(QuestionnaireAdminConfigurationForm);
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
-  initialValues: {
-    ...props.questionnaire,
-    questions: formatInitialQuestions(props.questionnaire.questions),
-    id: undefined,
-  },
+  initialValues: { ...props.questionnaire, id: undefined }
 });
 
 const container = connect(mapStateToProps)(form);

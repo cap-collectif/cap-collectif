@@ -2499,9 +2499,6 @@ type LastnameRequirement implements Node & Requirement {
 type LogicJump {
   id: ID
 
-  # If true, the logic jump will always be triggered, 
-  always: Boolean!
-
   # Return the question that trigger this logic jump.
   origin: Question!
 
@@ -4914,6 +4911,7 @@ type QuestionChoiceRanking {
 input QuestionInput {
   # If null, a new question will be created.
   id: String
+  alwaysJumpDestinationQuestion: ID
   title: String!
   type: QuestionTypeValue!
   private: Boolean! = false
