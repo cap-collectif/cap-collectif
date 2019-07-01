@@ -6827,6 +6827,8 @@ type User implements Node & UniformResourceLocatable {
   commentVotes(
     # Returns the elements in the list that come after the specified cursor.
     after: String
+
+    # Returns the first n elements from the list.
     first: Int = 100
 
     # Returns the elements in the list that come before the specified cursor.

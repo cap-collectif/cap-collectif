@@ -75,3 +75,74 @@ Scenario: Graphql anonymous want to search user author of event
   """
   {"data":{"userSearch":[{"id":"VXNlcjp1c2VyMw==","displayName":"xlacot"}]}}
   """
+
+@read-only
+Scenario: GraphQL anonymous want to get users's comment votes count
+  Given I send a GraphQL POST request:
+  """
+  {
+    "query": "{
+      users(first: 5) {
+        edges {
+          node {
+            _id
+            commentVotes {
+              totalCount
+            }
+          }
+        }
+      }
+    }"
+  }
+  """
+  Then the JSON response should match:
+    """
+    {
+      "data": {
+        "users": {
+          "edges": [
+            {
+              "node": {
+                "_id": "user117",
+                "commentVotes": {
+                  "totalCount": 0
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "user118",
+                "commentVotes": {
+                  "totalCount": 0
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "user119",
+                "commentVotes": {
+                  "totalCount": 0
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "user12",
+                "commentVotes": {
+                  "totalCount": 2
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "user120",
+                "commentVotes": {
+                  "totalCount": 0
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+    """

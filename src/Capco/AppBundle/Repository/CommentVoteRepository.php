@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Comment;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -43,30 +44,33 @@ class CommentVoteRepository extends EntityRepository
 
     public function countAllByVoter(User $voter): int
     {
-        $qb = $this->createQueryBuilder('cv');
+        $qb = $this->prepareVoterQuery($voter);
 
         return (int) $qb
             ->select('COUNT(cv.id)')
-            ->where($qb->expr()->eq('cv.user', ':voter'))
-            ->leftJoin('cv.comment', 'c')
-            ->andWhere('c.published = 1')
-            ->setParameter(':voter', $voter)
             ->getQuery()
             ->getSingleScalarResult();
     }
 
-    public function findAllByVoter(User $voter, ?int $offset = 0, ?int $limit = 100): array
+    public function findAllByVoter(User $voter, int $offset = 0, int $limit = 100): array
     {
-        $qb = $this->createQueryBuilder('cv');
+        $qb = $this->prepareVoterQuery($voter);
 
         return $qb
-            ->where($qb->expr()->eq('cv.user', ':voter'))
-            ->leftJoin('cv.comment', 'c')
-            ->andWhere('c.published = 1')
-            ->setParameter(':voter', $voter)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+    }
+
+    public function prepareVoterQuery(User $voter): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('cv');
+
+        return $qb
+            ->leftJoin('cv.comment', 'c')
+            ->where($qb->expr()->eq('cv.user', ':voter'))
+            ->andWhere('c.published = true')
+            ->setParameter(':voter', $voter);
     }
 }

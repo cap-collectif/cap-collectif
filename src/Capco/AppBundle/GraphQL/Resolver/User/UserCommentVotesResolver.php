@@ -18,12 +18,8 @@ class UserCommentVotesResolver implements ResolverInterface
         $this->commentVoteRepository = $commentVoteRepository;
     }
 
-    public function __invoke(
-        User $user,
-        Argument $args = null,
-        ?int $offset = null,
-        ?int $limit = 100
-    ): Connection {
+    public function __invoke(User $user, Argument $args = null): Connection
+    {
         if (!$args) {
             $args = new Argument(['first' => 100]);
         }
