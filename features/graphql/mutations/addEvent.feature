@@ -17,6 +17,26 @@ Scenario: Admin wants to add an event
             author {
               _id
             }
+            timeRange {
+              startAt
+              endAt
+            }
+            author {
+              id
+            }
+            themes {
+              id
+            }
+            projects {
+              id
+            }
+            address
+            link
+            commentable
+            address
+            zipCode
+            city
+            country
           }
         }
       }
@@ -26,7 +46,19 @@ Scenario: Admin wants to add an event
         "title": "Rencontre avec les habitants",
         "body": "Tout le monde est invité",
         "startAt": "2018-03-07 00:00:00",
-        "endAt": "2018-03-16 00:00:00"
+        "endAt": "2018-03-16 00:00:00",
+        "themes": ["theme1"],
+        "projects": ["UHJvamVjdDpwcm9qZWN0MQ==","UHJvamVjdDpwcm9qZWN0Mg=="],
+        "address": "25 rue Claude Tillier",
+        "zipCode": "75012",
+        "commentable": false,
+        "enabled": true,
+        "registrationEnable": true,
+        "metaDescription": "metaDescription",
+        "customCode": "customCode",
+        "city": "Paris",
+        "country": "France",
+        "link": "https://facebook.com/inscrivez-vous-ici"
       }
     }
   }
@@ -34,19 +66,43 @@ Scenario: Admin wants to add an event
   Then the JSON response should match:
   """
   {
-    "data": {
-      "addEvent": {
-          "eventEdge": {
-              "node": {
-                "id": @string@,
-                "title": "Rencontre avec les habitants",
-                "body": "Tout le monde est invité",
-                "author": {
-                  "_id": "userAdmin"
-                }
+     "data":{
+        "addEvent":{
+           "eventEdge":{
+              "node":{
+                 "id": @string@,
+                 "title":"Rencontre avec les habitants",
+                 "body":"Tout le monde est invit\u00e9",
+                 "author":{
+                    "_id":"userAdmin",
+                    "id":"VXNlcjp1c2VyQWRtaW4="
+                 },
+                 "timeRange":{
+                    "startAt":"2018-03-07 00:00:00",
+                    "endAt":"2018-03-16 00:00:00"
+                 },
+                 "themes":[
+                    {
+                       "id":"theme1"
+                    }
+                 ],
+                 "projects":[
+                    {
+                       "id":"UHJvamVjdDpwcm9qZWN0MQ=="
+                    },
+                    {
+                       "id":"UHJvamVjdDpwcm9qZWN0Mg=="
+                    }
+                 ],
+                 "address":"25 rue Claude Tillier",
+                 "link":"https:\/\/facebook.com\/inscrivez-vous-ici",
+                 "commentable":true,
+                 "zipCode":"75012",
+                 "city":"Paris",
+                 "country":"France"
               }
-          }
-       }
+           }
+        }
      }
   }
   """

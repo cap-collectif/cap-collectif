@@ -106,6 +106,45 @@ input AddEventInput {
   # Whether or not this event is published.
   enabled: Boolean = true
   clientMutationId: String
+
+  # The media id to illustrate
+  media: ID
+
+  # The metadescription of the event page.
+  metaDescription: String
+
+  # Is the event commentable ?
+  commentable: Boolean
+
+  # The contents of the event link.
+  link: String
+
+  # The contents of the event address.
+  address: String
+
+  # The contents of the event city.
+  city: String
+
+  # The contents of the event zipCode.
+  zipCode: String
+
+  # The contents of the event country.
+  country: String
+
+  # The contents of the event addressJson.
+  addressJson: String
+
+  # The contents of the event customCode.
+  customCode: String
+
+  # The list of projects associated to this event.
+  projects: [ID]
+
+  # The list of themes associated to this event.
+  themes: [ID]
+
+  # Allow registration for the event
+  registrationEnable: Boolean! = false
 }
 
 type AddEventPayload {

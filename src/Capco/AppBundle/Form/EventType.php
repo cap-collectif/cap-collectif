@@ -48,7 +48,11 @@ class EventType extends AbstractType
 
             ->add('commentable')
             ->add('link')
+            ->add('addressJson', TextType::class)
             ->add('address', TextType::class)
+            ->add('city', TextType::class)
+            ->add('zipCode', TextType::class)
+            ->add('country', TextType::class)
             ->add('projects', RelayNodeType::class, [
                 'multiple' => true,
                 'class' => Project::class
@@ -59,13 +63,7 @@ class EventType extends AbstractType
                 'class' => Theme::class,
                 'multiple' => true,
                 'expanded' => true
-            ])
-            ->add('projects', EntityType::class, [
-                'class' => Project::class,
-                'multiple' => true,
-                'expanded' => true
-            ])
-            ->add('isCommentable', CheckboxType::class);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
