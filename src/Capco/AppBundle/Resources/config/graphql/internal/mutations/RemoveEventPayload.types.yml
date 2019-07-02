@@ -1,0 +1,9 @@
+RemoveEventPayload:
+  type: relay-mutation-payload
+  config:
+    description: 'Remove an event'
+    fields:
+      deletedEventId:
+        type: 'ID!'
+      viewer:
+        type: 'InternalUser!'

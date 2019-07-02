@@ -1,0 +1,9 @@
+PreviewRemoveEventInput:
+  type: relay-mutation-input
+  config:
+    name: RemoveEventInput
+    description: 'Remove an event'
+    fields:
+      eventId:
+        type: 'ID!'
+        description: 'The ID of the event'

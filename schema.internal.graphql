@@ -2701,6 +2701,7 @@ enum MultipleChoiceQuestionValidationRulesTypes {
 type Mutation {
   addEvent(input: AddEventInput!): AddEventPayload
   changeEvent(input: ChangeEventInput!): ChangeEventPayload
+  removeEvent(input: RemoveEventInput!): RemoveEventPayload
   changeMapProviderToken(input: ChangeMapProviderTokenInput!): ChangeMapProviderTokenPayload
   changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
   removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload
@@ -5013,6 +5014,18 @@ input RemoveContactFormInput {
 type RemoveContactFormPayload {
   # Id of the deleted contact form.
   deletedContactFormId: ID!
+  clientMutationId: String
+}
+
+input RemoveEventInput {
+  # The ID of the event
+  eventId: ID!
+  clientMutationId: String
+}
+
+type RemoveEventPayload {
+  deletedEventId: ID!
+  viewer: User!
   clientMutationId: String
 }
 

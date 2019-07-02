@@ -4,14 +4,18 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Theme;
+use Capco\MediaBundle\Entity\Media;
+use Capco\UserBundle\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Capco\AppBundle\Form\Type\RelayNodeType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class EventType extends AbstractType
 {
@@ -20,42 +24,55 @@ class EventType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'default'
             ])
             ->add('body', TextareaType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'default'
             ])
             ->add('startAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
+                'format' => 'Y-MM-dd HH:mm:ss'
             ])
             ->add('endAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
+                'format' => 'Y-MM-dd HH:mm:ss'
             ])
-            ->add('registrationEnable')
-            ->add('enabled')
+
+            ->add('enabled', CheckboxType::class)
+            ->add('registrationEnable', CheckboxType::class)
+            ->add('media', EntityType::class, [
+                'class' => Media::class
+            ])
+            ->add('metaDescription', TextType::class)
+
             ->add('commentable')
             ->add('link')
-            ->add('zipCode')
-            ->add('address')
-            ->add('metaDescription')
-            ->add('customCode')
-            ->add('city')
-            ->add('country')
+            ->add('address', TextType::class)
             ->add('projects', RelayNodeType::class, [
                 'multiple' => true,
                 'class' => Project::class
             ])
-            ->add('themes');
+            ->add('customCode', TextType::class)
+            ->add('author', EntityType::class, ['class' => User::class])
+            ->add('themes', EntityType::class, [
+                'class' => Theme::class,
+                'multiple' => true,
+                'expanded' => true
+            ])
+            ->add('projects', EntityType::class, [
+                'class' => Project::class,
+                'multiple' => true,
+                'expanded' => true
+            ])
+            ->add('isCommentable', CheckboxType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => Event::class,
+            'data_class' => Event::class
         ]);
     }
 }
