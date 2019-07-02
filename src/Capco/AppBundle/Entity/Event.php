@@ -78,6 +78,11 @@ class Event implements
     private $zipCode;
 
     /**
+     * @ORM\Column(name="address_json", type="text", nullable=true)
+     */
+    private $addressJson;
+
+    /**
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
@@ -507,5 +512,17 @@ class Event implements
         }
 
         return false;
+    }
+
+    public function getAddressJson(): ?string
+    {
+        return $this->addressJson;
+    }
+
+    public function setAddressJson(?string $addressJson = null): self
+    {
+        $this->addressJson = $addressJson;
+
+        return $this;
     }
 }
