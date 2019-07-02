@@ -21,9 +21,6 @@ Scenario: Admin wants to add an event
               startAt
               endAt
             }
-            author {
-              id
-            }
             themes {
               id
             }
@@ -75,7 +72,6 @@ Scenario: Admin wants to add an event
                  "body":"Tout le monde est invit\u00e9",
                  "author":{
                     "_id":"userAdmin",
-                    "id":"VXNlcjp1c2VyQWRtaW4="
                  },
                  "timeRange":{
                     "startAt":"2018-03-07 00:00:00",

@@ -10,25 +10,21 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Psr\Log\LoggerInterface;
 
 class RemoveEventMutation implements MutationInterface
 {
     private $em;
     private $eventRepository;
     private $indexer;
-    private $logger;
 
     public function __construct(
         EntityManagerInterface $em,
         EventRepository $eventRepository,
-        Indexer $indexer,
-        LoggerInterface $logger
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->eventRepository = $eventRepository;
         $this->indexer = $indexer;
-        $this->logger = $logger;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -48,10 +44,8 @@ class RemoveEventMutation implements MutationInterface
         $this->em->remove($event);
         $this->em->flush();
 
-        if ($event->isEnabled()) {
-            $this->indexer->remove(\get_class($event), $id);
-            $this->indexer->finishBulk();
-        }
+        $this->indexer->remove(\get_class($event), $id);
+        $this->indexer->finishBulk();
 
         return [
             'deletedEventId' => $id,
