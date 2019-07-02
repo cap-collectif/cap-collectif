@@ -2535,6 +2535,40 @@ Object {
 }
 `;
 
+exports[`Query.users connection fetches the five last users 1`] = `
+Object {
+  "users": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "_id": "user506",
+        },
+      },
+      Object {
+        "node": Object {
+          "_id": "user508",
+        },
+      },
+      Object {
+        "node": Object {
+          "_id": "user200",
+        },
+      },
+      Object {
+        "node": Object {
+          "_id": "user199",
+        },
+      },
+      Object {
+        "node": Object {
+          "_id": "user198",
+        },
+      },
+    ],
+  },
+}
+`;
+
 exports[`Query.users connection fetches the next three users with a cursor 1`] = `
 Object {
   "users": Object {

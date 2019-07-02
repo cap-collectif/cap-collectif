@@ -67,6 +67,7 @@ class UserSearch extends Search
     public function getAllUsers(
         ?int $limit = null,
         ?int $first = null,
+        ?array $orderBy = null,
         bool $showSuperAdmin = false
     ): array {
         $boolQuery = new Query\BoolQuery();
@@ -85,6 +86,10 @@ class UserSearch extends Search
 
         if ($limit) {
             $query->setSize($limit);
+        }
+
+        if ($orderBy) {
+            $query->addSort($this->getSort($orderBy));
         }
 
         $resultSet = $this->index->getType('user')->search($query);
@@ -303,5 +308,21 @@ class UserSearch extends Search
         });
 
         return $users;
+    }
+
+    private function getSort(array $order): array
+    {
+        switch ($order['field']) {
+            case 'CREATED_AT':
+                $sortField = 'createdAt';
+
+                break;
+            default:
+                throw new \RuntimeException("Unknow order: ${order}");
+
+                break;
+        }
+
+        return [$sortField => ['order' => $order['direction']]];
     }
 }

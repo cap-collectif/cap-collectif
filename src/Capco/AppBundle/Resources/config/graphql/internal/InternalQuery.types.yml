@@ -132,6 +132,9 @@ InternalQuery:
             type: 'Boolean'
             defaultValue: false
             description: 'Remove super admin from export.'
+          orderBy:
+            type: 'UserOrder'
+            defaultValue: { field: 'CREATED_AT', direction: 'DESC' }
       userSearch:
         type: '[InternalUser]'
         args:

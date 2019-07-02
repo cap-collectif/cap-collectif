@@ -36,13 +36,15 @@ class QueryUsersResolver implements ResolverInterface
         $this->queryAnalyzer->analyseQuery($resolveInfo);
 
         $includeSuperAdmin = isset($args['superAdmin']) && true === $args['superAdmin'];
+        $orderBy = $args->offsetGet('orderBy');
 
         $totalCount = 0;
         $paginator = new Paginator(function (int $offset, int $limit) use (
             $includeSuperAdmin,
-            &$totalCount
+            &$totalCount,
+            $orderBy
         ) {
-            $users = $this->userSearch->getAllUsers($limit, $offset, $includeSuperAdmin);
+            $users = $this->userSearch->getAllUsers($limit, $offset, $orderBy, $includeSuperAdmin);
             $totalCount = $users['totalCount'];
 
             return $users['results'];

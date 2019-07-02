@@ -71,4 +71,27 @@ describe('Query.users connection', () => {
     },
     TIMEOUT,
   );
+  it(
+    'fetches the five last users',
+    async () => {
+      await expect(
+        graphql(
+          `
+            {
+              users(first: 5, orderBy: { field: CREATED_AT, direction: DESC }) {
+                edges {
+                  node {
+                    _id
+                  }
+                }
+              }
+            }
+          `,
+          {},
+          'internal',
+        ),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
 });

@@ -1,0 +1,8 @@
+UserOrderField:
+  type: enum
+  config:
+    description: 'Properties by which users connections can be ordered'
+    values:
+      CREATED_AT:
+        value: 'CREATED_AT'
+        description: 'Allows ordering a list of users by when they were created.'

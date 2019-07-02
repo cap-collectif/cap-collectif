@@ -1,0 +1,13 @@
+UserOrder:
+  type: input-object
+  config:
+    description: 'Ways in which lists of users can be ordered upon return.'
+    fields:
+      field:
+        type: 'UserOrderField!'
+        defaultValue: 'CREATED_AT'
+        description: The field to order users by.
+      direction:
+        type: 'OrderDirection!'
+        defaultValue: 'DESC'
+        description: The ordering direction.
