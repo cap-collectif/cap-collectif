@@ -25,6 +25,7 @@ const AuthorsButton = styled.button.attrs({})`
   outline: none;
   border: none;
   background: none;
+  text-align: left;
 `;
 
 const getAuthorCredits = (authors: $ReadOnlyArray<Object>) => {
