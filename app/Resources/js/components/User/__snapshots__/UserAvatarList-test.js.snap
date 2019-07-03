@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserAvatarList /> renders correctly 1`] = `
+<Fragment>
+  <span
+    className="mr-5"
+  >
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      key="0"
+      overlay={
+        <Tooltip
+          bsClass="tooltip"
+          id="opinion-vote-tooltip-undefined"
+          placement="right"
+        >
+          toto
+        </Tooltip>
+      }
+      placement="top"
+      trigger={
+        Array [
+          "hover",
+          "focus",
+        ]
+      }
+    >
+      <ForwardRef(Relay(Connect(UserAvatar)))
+        user={
+          Object {
+            "_links": Object {
+              "profile": "http://jesuistoto.com",
+            },
+            "media": Object {
+              "url": "http://media12/profileAvatar.jpg",
+            },
+            "username": "toto",
+          }
+        }
+      />
+    </OverlayTrigger>
+  </span>
+</Fragment>
+`;
+
+exports[`<UserAvatarList /> renders correctly withou authors 1`] = `<Fragment />`;
