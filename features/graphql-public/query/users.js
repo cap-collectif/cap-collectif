@@ -82,6 +82,7 @@ describe('Query.users connection', () => {
                 edges {
                   node {
                     _id
+                    createdAt
                   }
                 }
               }

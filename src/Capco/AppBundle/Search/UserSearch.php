@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\SortField;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Repository\UserRepository;
 use Elastica\Index;
@@ -313,8 +314,8 @@ class UserSearch extends Search
     private function getSort(array $order): array
     {
         switch ($order['field']) {
-            case 'CREATED_AT':
-                $sortField = 'createdAt';
+            case SortField::CREATED_AT:
+                $sortField = SortField::SORT_FIELD[SortField::CREATED_AT];
 
                 break;
             default:

@@ -5,9 +5,9 @@ UserOrder:
     fields:
       field:
         type: 'UserOrderField!'
-        defaultValue: 'CREATED_AT'
+        defaultValue: '@=constant("Capco\\AppBundle\\Enum\\SortField::CREATED_AT")'
         description: The field to order users by.
       direction:
         type: 'OrderDirection!'
-        defaultValue: 'DESC'
+        defaultValue: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")'
         description: The ordering direction.

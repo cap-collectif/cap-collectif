@@ -28,27 +28,27 @@ Scenario: GraphQL admin want to get users including superadmin
           "edges": [
             {
               "node": {
-                "_id": "adminCapco"
+                "_id": "user200"
               }
             },
             {
               "node": {
-                "_id": "user_drupal"
+                "_id": "user199"
               }
             },
             {
               "node": {
-                "_id": "user_not_confirmed"
+                "_id": "user198"
               }
             },
             {
               "node": {
-                "_id": "user_not_confirmed_with_contribution"
+                "_id": "user197"
               }
             },
             {
               "node": {
-                "_id": "user1"
+                "_id": "user196"
               }
             }
           ]

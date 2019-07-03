@@ -134,7 +134,11 @@ InternalQuery:
             description: 'Remove super admin from export.'
           orderBy:
             type: 'UserOrder'
-            defaultValue: { field: 'CREATED_AT', direction: 'DESC' }
+            defaultValue:
+              {
+                field: '@=constant("Capco\\AppBundle\\Enum\\SortField::CREATED_AT")',
+                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+              }
       userSearch:
         type: '[InternalUser]'
         args:
