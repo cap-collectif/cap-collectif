@@ -1,9 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectHeaderAuthors /> renders correctly 1`] = `
-<ProjectHeaderAuthors__Container>
+<ProjectHeaderAuthors__Container
+  id="project-header"
+>
   <div>
-    <ForwardRef(Relay(UserAvatarList))
+    <ForwardRef(Relay(ProjectHeaderAuthorsModal))
+      onClose={[Function]}
+      show={false}
       users={
         Array [
           Object {
@@ -13,26 +17,45 @@ exports[`<ProjectHeaderAuthors /> renders correctly 1`] = `
         ]
       }
     />
-  </div>
-  <div
-    className="ml-10"
-  >
-    <span
-      className="font-weight-bold"
-    >
-      <span>
-        toto
+    <div>
+      <ForwardRef(Relay(UserAvatarList))
+        users={
+          Array [
+            Object {
+              "$fragmentRefs": null,
+              "username": "toto",
+            },
+          ]
+        }
+      />
+    </div>
+    <div>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        className="ml-5 font-weight-bold"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <span>
+          toto
+        </span>
+      </Button>
+      <span
+        className="ml-5"
+      >
+        <FormattedDate
+          day="numeric"
+          hour="numeric"
+          minute="numeric"
+          month="long"
+          value={1664-12-07T23:00:00.000Z}
+          year="numeric"
+        />
       </span>
-    </span>
-    <br />
-    <FormattedDate
-      day="numeric"
-      hour="numeric"
-      minute="numeric"
-      month="long"
-      value={1664-12-07T23:50:39.000Z}
-      year="numeric"
-    />
+    </div>
   </div>
 </ProjectHeaderAuthors__Container>
 `;
