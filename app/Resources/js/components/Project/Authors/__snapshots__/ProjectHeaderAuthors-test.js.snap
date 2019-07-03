@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectHeaderAuthors /> renders correctly 1`] = `
+<ProjectHeaderAuthors__Container>
+  <div>
+    <ForwardRef(Relay(UserAvatarList))
+      users={
+        Array [
+          Object {
+            "$fragmentRefs": null,
+            "username": "toto",
+          },
+        ]
+      }
+    />
+  </div>
+  <div
+    className="ml-10"
+  >
+    <span
+      className="font-weight-bold"
+    >
+      <span>
+        toto
+      </span>
+    </span>
+    <br />
+    <FormattedDate
+      day="numeric"
+      hour="numeric"
+      minute="numeric"
+      month="long"
+      value={1664-12-07T23:50:39.000Z}
+      year="numeric"
+    />
+  </div>
+</ProjectHeaderAuthors__Container>
+`;

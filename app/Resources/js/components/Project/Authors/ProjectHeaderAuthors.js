@@ -48,7 +48,7 @@ export const ProjectHeaderAuthors = (props: Props) => {
   const { project } = props;
 
   return (
-    <Container>
+    <Container id="project-header">
       <div>
         {/* $FlowFixMe $refType */}
         <UserAvatarList users={project && project.authors ? project.authors : []} />

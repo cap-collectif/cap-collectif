@@ -12,11 +12,13 @@ describe('<ProjectHeaderAuthors />', () => {
         $refType,
         id: '1',
         publishedAt: '12/08/1664',
-        authors: [{
+        authors: [
+          {
             $fragmentRefs,
             username: 'toto',
-        }]
-      }
+          },
+        ],
+      },
     };
     const wrapper = shallow(<ProjectHeaderAuthors {...props} />);
     expect(wrapper).toMatchSnapshot();

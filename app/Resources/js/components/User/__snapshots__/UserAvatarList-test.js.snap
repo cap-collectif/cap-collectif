@@ -11,7 +11,7 @@ exports[`<UserAvatarList /> renders correctly 1`] = `
       overlay={
         <Tooltip
           bsClass="tooltip"
-          id="opinion-vote-tooltip-undefined"
+          id="opinion-vote-tooltip-1"
           placement="right"
         >
           toto
@@ -28,12 +28,9 @@ exports[`<UserAvatarList /> renders correctly 1`] = `
       <ForwardRef(Relay(Connect(UserAvatar)))
         user={
           Object {
-            "_links": Object {
-              "profile": "http://jesuistoto.com",
-            },
-            "media": Object {
-              "url": "http://media12/profileAvatar.jpg",
-            },
+            "$fragmentRefs": null,
+            "$refType": null,
+            "id": "1",
             "username": "toto",
           }
         }

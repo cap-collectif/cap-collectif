@@ -276,3 +276,11 @@ Scenario: Pierre can access to a restricted project to his user group
   Then I click on button "#load-more"
   And I wait 2 seconds
   Then I should see "ptondereau" in the "#group3-modal .list-group" element
+
+Scenario: Pierre can access a project and see all authors
+  Given I am logged in as pierre
+  When I visited "collect page" with:
+    | projectSlug | questions-responses                |
+    | stepSlug    | collecte-des-questions-chez-youpie |
+  Then I should see "Questions/Responses"
+  And I should see 2 "#project-header .user-avatar" elements

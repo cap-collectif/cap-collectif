@@ -9,12 +9,14 @@ describe('<UserAvatarList />', () => {
   it('renders correctly', () => {
     const props = {
       max: 10,
-      users: [{
-        $refType,
-        $fragmentRefs,
-        id: '1',
-        username: 'toto',
-      }]
+      users: [
+        {
+          $refType,
+          $fragmentRefs,
+          id: '1',
+          username: 'toto',
+        },
+      ],
     };
     const wrapper = shallow(<UserAvatarList {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -23,7 +25,7 @@ describe('<UserAvatarList />', () => {
   it('renders correctly withou authors', () => {
     const props = {
       max: 10,
-      users: []
+      users: [],
     };
     const wrapper = shallow(<UserAvatarList {...props} />);
     expect(wrapper).toMatchSnapshot();
