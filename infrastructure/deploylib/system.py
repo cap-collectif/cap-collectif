@@ -18,6 +18,7 @@ def linux_docker_install(force=False):
     local('curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose')
     local('sudo apt-get install unrar')
 
+
 def dinghy_deps():
     local('brew install docker docker-machine')
     local('brew install docker-machine-nfs xhyve docker-machine-driver-xhyve')
@@ -111,4 +112,5 @@ def generate_ssl():
 
 @task
 def sign_ssl():
-    local('sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain %s' % env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/capco.cer")
+    local('sudo security add-trusted-cert -d -r trustAsRoot -k /Library/Keychains/System.keychain %s' % env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/capco.cer")
+    print cyan('Successfully added HTTPS support !')

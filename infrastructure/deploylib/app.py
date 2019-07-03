@@ -1,6 +1,7 @@
 from task import task
 from fabric.operations import local, run, settings
 from fabric.api import env
+from fabric.colors import cyan
 
 import os
 
@@ -11,20 +12,27 @@ def deploy(environment='dev', user='capco'):
     if os.environ.get('CI') == 'true':
         env.compose('run -u root qarunner chown capco:capco -R /var/www/web')
         local('sudo chmod -R 777 .')
+    if environment == 'dev':
+        local('yarn run fonts')
+        print cyan('Successfully downloaded latests fonts.')
     env.compose('run' + ('', ' -e PRODUCTION=true')[environment == 'prod'] + ('', ' -e CI=true')[os.environ.get('CI') == 'true'] + ' builder build')
+    print cyan('Successfully downloaded dependencies.')
     env.service_command('php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var', 'application', env.www_app)
     env.service_command('rm -rf var/cache/dev var/cache/prod var/cache/test', 'application', env.www_app, 'root')
-    env.service_command('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost app/config/rabbitmq.yml', 'application', env.www_app)
+    rabbitmq_queues()
     env.service_command('php bin/console simplesamlphp:config --no-interaction --env=' + environment, 'application', env.www_app)
     env.service_command('php bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', env.www_app)
     env.service_command('php bin/console assets:install --symlink', 'application', env.www_app)
+    if environment == 'dev':
+        # We need to configure node-sass for local builds without Docker
+        local('npm rebuild node-sass')
+        print cyan('Successfully deployed https://capco.dev ! Last step is to generate your database with "local.database.generate"')
 
 
 @task(environments=['local', 'ci'])
 def toggle_enable(toggle='public_api', environment='test'):
     "Enable a feature toggle."
-    env.service_command('php bin/console capco:toggle:enable ' + toggle
-     + ' --env=' + environment, 'application', env.www_app)
+    env.service_command('php bin/console capco:toggle:enable ' + toggle + ' --env=' + environment, 'application', env.www_app)
 
 
 @task(environments=['ci'])
