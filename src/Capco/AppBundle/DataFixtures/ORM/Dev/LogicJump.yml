@@ -74,33 +74,8 @@ Capco\AppBundle\Entity\LogicJump:
     origin: '@multiplequestionMarvelOrDcProposalForm15'
     destination: '@multiplequestionDcSupermanLikeProposalForm15'
     conditions: ['@ljconditionDcProposalForm15']
-  logicjump6ProposalForm15:
-    id: logicjump6ProposalForm15
-#    always: true
-    origin: '@multiplequestionDcSupergirlLikeProposalForm15'
-    destination: '@multiplequestionEndConditionelProposalForm15'
-  logicjump7ProposalForm1ProposalForm155:
-    id: logicjump7ProposalForm15
-#    always: true
-    origin: '@multiplequestionMarvelThorLikeProposalForm15'
-    destination: '@multiplequestionEndConditionelProposalForm15'
-  logicjump8ProposalForm1ProposalForm155:
-    id: logicjump8ProposalForm15
-#    always: true
-    origin: '@multiplequestionIsHapGoodProposalForm15'
-    destination: '@multiplequestionMarvelOrDcProposalForm15'
-  logicjump9ProposalForm1ProposalForm155:
-    id: logicjump9ProposalForm15
-#    always: true
-    origin: '@multiplequestionNoelHatColorProposalForm15'
-    destination: '@multiplequestionMarvelOrDcProposalForm15'
   logicjump10ProposalForm1ProposalForm155:
     id: logicjump10ProposalForm15
     origin: '@multiplequestionIsHapGoodProposalForm15'
     destination: '@multiplequestionHapNotGoodHowDareYouProposalForm15'
     conditions: ['@ljconditionHapGoodProposalForm15']
-  logicjump11ProposalForm15:
-    id: logicjump11ProposalForm15
-#    always: true
-    origin: '@multiplequestionHapNotGoodHowDareYouProposalForm15'
-    destination: '@multiplequestionMarvelOrDcProposalForm15'

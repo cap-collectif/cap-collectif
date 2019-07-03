@@ -221,7 +221,7 @@ type Question = {|
   +alwaysJumpDestinationQuestion: ?{|
     +id: string,
     +title: string,
-    +number: number
+    +number: number,
   |},
   +jumps: ?$ReadOnlyArray<?Jump>,
   +description: ?string,
@@ -264,15 +264,15 @@ type ResponseInReduxForm = {|
     | ?string
     | ?number
     | $ReadOnlyArray<{|
-    +id: string,
-    +name: string,
-    +url: string,
-    +size: string,
-  |}>
+        +id: string,
+        +name: string,
+        +url: string,
+        +size: string,
+      |}>
     | {|
-    labels: $ReadOnlyArray<string>,
-    other: ?string,
-  |},
+        labels: $ReadOnlyArray<string>,
+        other: ?string,
+      |},
 |};
 
 export type ResponsesInReduxForm = $ReadOnlyArray<ResponseInReduxForm>;
@@ -410,12 +410,9 @@ type ResponseError = ?{
 
 type ResponsesError = ResponseError[];
 
-
 const hasAnsweredQuestion = (question: Question, responses: ResponsesInReduxForm): boolean => {
-  const answer = responses
-    .filter(Boolean)
-    .find(response => response.question === question.id);
-  return !!(answer && answer.value !== null);
+  const answer = responses.filter(Boolean).find(response => response.question === question.id);
+  return !!(answer && 'value' in answer && answer.value !== null);
 };
 
 // alwaysJumpDestinationQuestion can be nullable, but when we call this method it is not
@@ -427,7 +424,7 @@ const createJumpFromAlwaysQuestion = (question: Question): Jump => ({
   origin: {
     id: question.id,
   },
-  id: undefined
+  id: undefined,
 });
 
 export const validateResponses = (
@@ -536,37 +533,37 @@ export const getQuestionDepsIds = (
   if (jumpQuestion) {
     return jumpQuestion.jumps
       ? Array.from(
-        new Set(
-          jumpQuestion.jumps.filter(Boolean).reduce((acc, jump) => {
-            const destination = questions.find(q => q.id === jump.destination.id);
-            return [
-              ...acc,
-              ...(jumpQuestion.alwaysJumpDestinationQuestion
-                ? [
-                  jumpQuestion.alwaysJumpDestinationQuestion.id,
-                  jumpQuestion.id,
-                  ...(destination ? getQuestionDepsIds(destination, questions, answer) : []),
-                ]
-                : []),
-              ...(jump.conditions &&
-              jump.conditions
-                .filter(Boolean)
-                .filter(
-                  condition =>
-                    condition.value &&
-                    condition.question &&
-                    condition.question.id === question.id &&
-                    condition.value.title === answer,
-                ).length > 0
-                ? [
-                  jump.destination.id,
-                  ...(destination ? getQuestionDepsIds(destination, questions, answer) : []),
-                ]
-                : []),
-            ];
-          }, []),
-        ),
-      )
+          new Set(
+            jumpQuestion.jumps.filter(Boolean).reduce((acc, jump) => {
+              const destination = questions.find(q => q.id === jump.destination.id);
+              return [
+                ...acc,
+                ...(jumpQuestion.alwaysJumpDestinationQuestion
+                  ? [
+                      jumpQuestion.alwaysJumpDestinationQuestion.id,
+                      jumpQuestion.id,
+                      ...(destination ? getQuestionDepsIds(destination, questions, answer) : []),
+                    ]
+                  : []),
+                ...(jump.conditions &&
+                jump.conditions
+                  .filter(Boolean)
+                  .filter(
+                    condition =>
+                      condition.value &&
+                      condition.question &&
+                      condition.question.id === question.id &&
+                      condition.value.title === answer,
+                  ).length > 0
+                  ? [
+                      jump.destination.id,
+                      ...(destination ? getQuestionDepsIds(destination, questions, answer) : []),
+                    ]
+                  : []),
+              ];
+            }, []),
+          ),
+        )
       : [];
   }
   return [];
@@ -601,16 +598,18 @@ export const isAnyQuestionJumpsFullfilled = (
   responses: ResponsesInReduxForm,
 ): boolean => {
   if (question.jumps) {
-    return question.jumps.filter(Boolean).some(jump =>
-      jump.conditions
-        ? jump.conditions.filter(Boolean).every(condition => {
-          const answered = responses
-            .filter(Boolean)
-            .find(response => response.question === condition.question.id);
-          return getConditionReturn(answered, condition);
-        })
-        : false,
-    ) || !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses));
+    return (
+      question.jumps.filter(Boolean).some(jump =>
+        jump.conditions
+          ? jump.conditions.filter(Boolean).every(condition => {
+              const answered = responses
+                .filter(Boolean)
+                .find(response => response.question === condition.question.id);
+              return getConditionReturn(answered, condition);
+            })
+          : false,
+      ) || !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses))
+    );
   }
   return !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses));
 };
@@ -618,16 +617,19 @@ export const isAnyQuestionJumpsFullfilled = (
 // This method returns, for a given questions and based on user's answers, the list of fullfilled logic jumps
 // (all the jumps where all the conditions have been met)
 export const getFullfilledJumps = (question: Question, responses: ResponsesInReduxForm): Jump[] => {
-  const elseJumps = question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses) ? [createJumpFromAlwaysQuestion(question)] : [];
+  const elseJumps =
+    question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses)
+      ? [createJumpFromAlwaysQuestion(question)]
+      : [];
   if (question.jumps) {
     const fullfilleds = question.jumps.filter(Boolean).filter(jump =>
       jump.conditions
         ? jump.conditions.filter(Boolean).every(condition => {
-          const answered = responses.find(
-            response => response.question === condition.question.id,
-          );
-          return getConditionReturn(answered, condition);
-        })
+            const answered = responses.find(
+              response => response.question === condition.question.id,
+            );
+            return getConditionReturn(answered, condition);
+          })
         : false,
     );
     // Here, one ore more conditions have been fullfilled, so we return them to show questions based on their conditions
@@ -655,7 +657,8 @@ export const getAvailableQuestionsIds = (
   //
   // Otherwise let's calculate what is currently displayed to user…
   const firstLogicQuestion = questions.find(
-    question => question.jumps && question.jumps.length > 0 || question.alwaysJumpDestinationQuestion,
+    question =>
+      (question.jumps && question.jumps.length > 0) || question.alwaysJumpDestinationQuestion,
   );
 
   // We need the first questions before the first logic jump of the questionnaire, so we display
@@ -676,9 +679,7 @@ export const getAvailableQuestionsIds = (
         jumps.length > 0 &&
         (responses.length === 0 || (answer && getValueFromSubmitResponse(answer) === null))
       ) {
-        const visibleJumps = jumps
-          .filter(Boolean)
-          .map(jump => jump.destination.id);
+        const visibleJumps = jumps.filter(Boolean).map(jump => jump.destination.id);
 
         return [...acc, ...visibleJumps];
       }
@@ -718,9 +719,9 @@ export const formatSubmitResponses = (
     if (questionType === 'ranking' || questionType === 'button') {
       value = answeredQuestionsIds.includes(question.id)
         ? JSON.stringify({
-          labels: Array.isArray(res.value) ? res.value : [res.value],
-          other: null,
-        })
+            labels: Array.isArray(res.value) ? res.value : [res.value],
+            other: null,
+          })
         : null;
     } else if (questionType === 'checkbox' || questionType === 'radio') {
       value = answeredQuestionsIds.includes(question.id) ? JSON.stringify(res.value) : null;
@@ -739,14 +740,14 @@ export const formatSubmitResponses = (
 };
 
 export const renderResponses = ({
-                                  fields,
-                                  questions,
-                                  responses,
-                                  intl,
-                                  form,
-                                  change,
-                                  disabled,
-                                }: {|
+  fields,
+  questions,
+  responses,
+  intl,
+  form,
+  change,
+  disabled,
+}: {|
   ...FieldArrayProps,
   questions: Questions,
   responses: ResponsesInReduxForm,
@@ -785,21 +786,21 @@ export const renderResponses = ({
         const labelAppend = field.required
           ? strategy === 'minority_required'
             ? ` <span class="warning small"> ${intl.formatMessage({
-              id: 'global.mandatory',
-            })}</span>`
+                id: 'global.mandatory',
+              })}</span>`
             : ''
           : strategy === 'majority_required' || strategy === 'half_required'
-            ? ` <span class="excerpt small"> ${intl.formatMessage({
+          ? ` <span class="excerpt small"> ${intl.formatMessage({
               id: 'global.optional',
             })}</span>`
-            : '';
+          : '';
 
         const labelMessage = field.title + labelAppend;
 
         const label = (
           <React.Fragment>
             {field.number && <span className="visible-print-block">{field.number}.</span>}{' '}
-            <span dangerouslySetInnerHTML={{ __html: labelMessage }}/>
+            <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
           </React.Fragment>
         );
 
@@ -809,7 +810,7 @@ export const renderResponses = ({
               <div key={field.id} className="form__section">
                 <TitleInvertContrast>{field.title}</TitleInvertContrast>
                 <div className="mb-15">
-                  <WYSIWYGRender value={field.description}/>
+                  <WYSIWYGRender value={field.description} />
                 </div>
               </div>
             );
@@ -832,7 +833,7 @@ export const renderResponses = ({
                     disabled={disabled}
                   />
                   {/* $FlowFixMe please fix this */}
-                  <ConditionalJumps jumps={field.jumps}/>
+                  <ConditionalJumps jumps={field.jumps} />
                 </PrivateBox>
               </div>
             );
@@ -859,22 +860,22 @@ export const renderResponses = ({
                       {intl.formatMessage({ id: 'global.select' })}
                     </option>
                     {field.choices &&
-                    field.choices.map(choice => (
-                      <option key={choice.id} value={choice.title}>
-                        {choice.title}
-                      </option>
-                    ))}
+                      field.choices.map(choice => (
+                        <option key={choice.id} value={choice.title}>
+                          {choice.title}
+                        </option>
+                      ))}
                   </Field>
                   <div className="visible-print-block form-fields">
                     {field.choices &&
-                    field.choices.map(choice => (
-                      <div key={choice.id} className="radio">
-                        {choice.title}
-                      </div>
-                    ))}
+                      field.choices.map(choice => (
+                        <div key={choice.id} className="radio">
+                          {choice.title}
+                        </div>
+                      ))}
                   </div>
                   {/* $FlowFixMe please fix this */}
-                  <ConditionalJumps jumps={field.jumps}/>
+                  <ConditionalJumps jumps={field.jumps} />
                 </PrivateBox>
               </div>
             );
@@ -914,7 +915,7 @@ export const renderResponses = ({
                         />
                       </div>
                       {/* $FlowFixMe please fix this */}
-                      <ConditionalJumps jumps={field.jumps}/>
+                      <ConditionalJumps jumps={field.jumps} />
                     </PrivateBox>
                   </div>
                 );

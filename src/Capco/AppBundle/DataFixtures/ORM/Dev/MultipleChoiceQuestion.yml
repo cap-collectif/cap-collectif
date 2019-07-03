@@ -208,7 +208,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionIsHapGoodProposalForm15:
     id: 52
     title: Hap est-il un homme bon ?
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDc'
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDcProposalForm15'
     type: 4 # select
   multiplequestionNoelFeteProposalForm15:
     id: 53
@@ -217,6 +217,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionNoelHatColorProposalForm15:
     id: 54
     title: De quelle couleur est le chapeau de Noël ?
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDcProposalForm15'
     type: 4 # select
   multiplequestionMarvelOrDcProposalForm15:
     id: 55
@@ -233,6 +234,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionDcSupergirlLikeProposalForm15:
     id: 58
     title: T'aimes bien Supergirl ?
+    alwaysJumpDestinationQuestion: '@multiplequestionEndConditionelProposalForm15'
     type: 4 # select
   multiplequestionMarvelIronManLikeProposalForm15:
     id: 59
@@ -245,6 +247,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionMarvelThorLikeProposalForm15:
     id: 61
     title: T'aimes bien Thor ?
+    alwaysJumpDestinationQuestion: '@multiplequestionEndConditionelProposalForm15'
     type: 4 # select
   multiplequestionEndConditionelProposalForm15:
     id: 62
@@ -263,4 +266,5 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionHapNotGoodHowDareYouProposalForm15:
     id: 65
     title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDcProposalForm15'
     type: 4 # select
