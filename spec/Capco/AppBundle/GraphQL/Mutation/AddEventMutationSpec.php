@@ -1,6 +1,8 @@
 <?php
+
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
@@ -11,7 +13,6 @@ use Capco\AppBundle\Form\EventType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\ProposalEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\GraphQL\Mutation\AddEventMutation;
@@ -23,9 +24,14 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class AddEventMutationSpec extends ObjectBehavior
 {
-    function let(EntityManagerInterface $em, FormFactory $formFactory, LoggerInterface $logger)
-    {
-        $this->beConstructedWith($em, $formFactory, $logger);
+    function let(
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        LoggerInterface $logger,
+        GlobalIdResolver $globalIdResolver,
+        Indexer $indexer
+    ) {
+        $this->beConstructedWith($em, $formFactory, $logger, $globalIdResolver, $indexer);
     }
 
     function it_is_initializable()
@@ -38,9 +44,20 @@ class AddEventMutationSpec extends ObjectBehavior
         FormFactory $formFactory,
         Arg $arguments,
         User $viewer,
-        Form $form
+        Form $form,
+        Indexer $indexer,
+        Event $event
     ) {
         $values = ["body" => "My body"];
+
+        $event->getBody()->willReturn('My body');
+        $event->getId()->willReturn('eventPhpSpec');
+        $viewer->getId()->willReturn('iMTheAuthor');
+        $viewer->getUsername()->willReturn('My username is toto');
+        $viewer->isAdmin()->willReturn(false);
+        $viewer->isSuperAdmin()->willReturn(false);
+
+        $event->getAuthor()->willReturn($viewer);
 
         $form->submit($values, false)->willReturn(null);
         $form->isValid()->willReturn(true);
@@ -50,6 +67,9 @@ class AddEventMutationSpec extends ObjectBehavior
 
         $em->persist(Argument::type(Event::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
+
+        $indexer->index(\get_class($event->getWrappedObject()), 'eventPhpSpec')->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalled();
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
@@ -70,7 +90,7 @@ class AddEventMutationSpec extends ObjectBehavior
         $values = ["body" => ""];
         $arguments->getRawArguments()->willReturn($values);
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
-        
+
         $form->submit($values, false)->willReturn(null);
         $error->getMessage()->willReturn('Invalid data.');
         $form->getErrors()->willReturn([$error]);
