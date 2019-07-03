@@ -9,6 +9,7 @@ trait AdminTrait
     use AdminProposalFormTrait;
     use AdminUserTrait;
     use AdminProjectDistrictTrait;
+    use AdminPageTrait;
 
     /**
      * @When I go to the admin proposals list page
@@ -41,7 +42,7 @@ trait AdminTrait
         // Select 2 distinct proposals from the project
         $searchValues = [
             '', // Proposition gratuite
-            'pas', // Proposition pas chère
+            'pas' // Proposition pas chère
         ];
         foreach ($searchValues as $search) {
             $this->getSession()

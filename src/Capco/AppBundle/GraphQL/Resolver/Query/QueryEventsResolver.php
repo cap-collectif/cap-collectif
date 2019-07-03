@@ -36,6 +36,11 @@ class QueryEventsResolver implements ResolverInterface
         $this->protectArguments($args);
         $this->queryAnalyzer->analyseQuery($resolveInfo);
 
+        return $this->getEventsConnection($args);
+    }
+
+    public function getEventsConnection(Argument $args): Connection
+    {
         $totalCount = 0;
         $search = null;
         $order = null;

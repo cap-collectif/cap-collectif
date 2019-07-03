@@ -43,7 +43,7 @@ class EventController extends Controller
 
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new ProjectAccessDeniedException(
-                $trans->trans('project.error.not_exportable')
+                $trans->trans('project.error.not_exportable', [], 'CapcoAppBundle')
             );
         }
 
@@ -56,7 +56,7 @@ class EventController extends Controller
 
             $flashBag->add(
                 'danger',
-                $trans->trans('project.download.not_yet_generated')
+                $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
             );
 
             return $this->redirect($request->headers->get('referer'));
