@@ -2,21 +2,21 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Model\ModerableInterface;
-use Capco\AppBundle\Model\Publishable;
-use Capco\AppBundle\Traits\ModerableTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Traits\TrashableTrait;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Model\Publishable;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\ModerableTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
+use Capco\AppBundle\Model\ModerableInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 
 /**
  * @ORM\Table(name="argument", indexes={
@@ -41,13 +41,13 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
     public static $argumentTypes = [
         self::TYPE_FOR => 'yes',
         self::TYPE_AGAINST => 'no',
-        self::TYPE_SIMPLE => 'simple',
+        self::TYPE_SIMPLE => 'simple'
     ];
 
     public static $argumentTypesLabels = [
         self::TYPE_FOR => 'argument.show.type.for',
         self::TYPE_AGAINST => 'argument.show.type.against',
-        self::TYPE_SIMPLE => 'argument.show.type.simple',
+        self::TYPE_SIMPLE => 'argument.show.type.simple'
     ];
 
     /**
@@ -109,11 +109,15 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         return 'argument';
     }
 
-    public function getProject()
+    public function getProject(): ?Project
     {
-        return $this->getParent()
-            ->getStep()
-            ->getProject();
+        if ($this->getParent() && $this->getParent()->getStep()) {
+            return $this->getParent()
+                ->getStep()
+                ->getProject();
+        }
+
+        return null;
     }
 
     public function getRelated()
