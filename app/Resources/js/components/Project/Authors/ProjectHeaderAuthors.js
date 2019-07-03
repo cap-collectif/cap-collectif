@@ -91,7 +91,7 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
             onClick={this.handleClickModal}
           />
         </div>
-        <div className="d-flex" style={{ flexDirection: 'column' }}>
+        <div className="d-flex fd-column">
           <AuthorsButton className="ml-5 p-0 font-weight-bold" onClick={this.handleClickModal}>
             {getAuthorCredits(project.authors)}
           </AuthorsButton>

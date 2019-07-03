@@ -14,13 +14,14 @@ storiesOf('UserAvatarList', module)
   .add('default case', () => {
     const users = usersMockGenerator(4);
     const max = number('Max display', 5);
-    // $FlowFixMe TODO
+
+    // $FlowFixMe $refType
     return <UserAvatarList users={users} max={max} />;
   })
   .add('with 150 votes', () => {
     const users = usersMockGenerator(150);
     const max = number('Max display', 5);
 
-    // $FlowFixMe TODO
+    // $FlowFixMe $refType
     return <UserAvatarList users={users} max={max} />;
   });
