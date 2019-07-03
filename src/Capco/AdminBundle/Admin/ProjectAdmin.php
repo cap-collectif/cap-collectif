@@ -3,7 +3,6 @@
 namespace Capco\AdminBundle\Admin;
 
 use Doctrine\ORM\QueryBuilder;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Toggle\Manager;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -169,7 +168,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('_action', 'actions', [
                 'actions' => [
                     'display' => [
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_display.html.twig'
+                        'template' => 'CapcoAdminBundle:Project:list__action_display.html.twig'
                     ],
                     'download' => [
                         'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig'
