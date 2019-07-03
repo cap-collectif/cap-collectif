@@ -30,12 +30,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly 1`] = `
     />
   </div>
   <div
-    className="d-flex"
-    style={
-      Object {
-        "flexDirection": "column",
-      }
-    }
+    className="d-flex fd-column"
   >
     <ProjectHeaderAuthors__AuthorsButton
       className="ml-5 p-0 font-weight-bold"
