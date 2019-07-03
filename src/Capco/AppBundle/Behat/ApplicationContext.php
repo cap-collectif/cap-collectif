@@ -178,9 +178,6 @@ class ApplicationContext extends UserContext
         $indexManager->markAsLive($indexManager->getLiveSearchIndex());
     }
 
-    /**
-     * @AfterScenario
-     */
     public function closeWindows(AfterScenarioScope $scope): void
     {
         $scenario = $scope->getScenario();
@@ -298,7 +295,7 @@ class ApplicationContext extends UserContext
     /**
      * @AfterScenario
      */
-    public function clearLocalStorage(AfterScenarioScope $scope)
+    public function clearLocalStorage(AfterScenarioScope $scope): void
     {
         if (!$this->isSuiteWithJS($scope->getSuite())) {
             return;
@@ -312,6 +309,8 @@ class ApplicationContext extends UserContext
         } catch (\Exception $e) {
             echo 'Failed to clear localStorage !' . PHP_EOL;
         }
+
+        $this->closeWindows($scope);
     }
 
     /**
