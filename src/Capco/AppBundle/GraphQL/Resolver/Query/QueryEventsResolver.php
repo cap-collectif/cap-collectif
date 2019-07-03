@@ -39,7 +39,7 @@ class QueryEventsResolver implements ResolverInterface
         return $this->getEventsConnection($args);
     }
 
-    public function getEventsConnection(Argument $args)
+    public function getEventsConnection(Argument $args): Connection
     {
         $totalCount = 0;
         $search = null;
