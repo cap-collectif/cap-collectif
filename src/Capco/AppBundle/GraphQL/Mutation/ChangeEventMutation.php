@@ -65,9 +65,6 @@ class ChangeEventMutation implements MutationInterface
             }
         }
 
-        // clear empty/null values
-        $values = array_filter($values);
-
         $form = $this->formFactory->create(EventType::class, $event);
         $form->submit($values, false);
 

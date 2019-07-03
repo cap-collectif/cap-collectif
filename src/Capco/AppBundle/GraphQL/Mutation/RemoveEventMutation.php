@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -14,16 +14,16 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class RemoveEventMutation implements MutationInterface
 {
     private $em;
-    private $eventRepository;
+    private $globalIdResolver;
     private $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
-        EventRepository $eventRepository,
+        GlobalIdResolver $globalIdResolver,
         Indexer $indexer
     ) {
         $this->em = $em;
-        $this->eventRepository = $eventRepository;
+        $this->globalIdResolver = $globalIdResolver;
         $this->indexer = $indexer;
     }
 
@@ -31,14 +31,14 @@ class RemoveEventMutation implements MutationInterface
     {
         $id = $input->offsetGet('eventId');
         /** @var Event $event */
-        $event = $this->eventRepository->find($id);
-
+        $event = $this->globalIdResolver->resolve($id, $viewer);
+        $userErrors = [];
         if (!$event) {
-            throw new UserError('This event doesnt exist.');
+            $userErrors = ['This event doesnt exist.'];
         }
 
         if ($viewer !== $event->getAuthor() && (!$viewer->isAdmin() || !$viewer->isSuperAdmin())) {
-            throw new UserError('You are not available to delete this event');
+            throw new UserError('You are not authorized to delete this event');
         }
 
         $this->em->remove($event);
@@ -49,7 +49,7 @@ class RemoveEventMutation implements MutationInterface
 
         return [
             'deletedEventId' => $id,
-            'viewer' => $viewer
+            'userErrors' => $userErrors
         ];
     }
 }

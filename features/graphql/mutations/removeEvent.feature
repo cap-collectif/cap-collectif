@@ -14,12 +14,12 @@ Scenario: Logged in API client wants delete his event
     }",
     "variables": {
       "input": {
-        "eventId": "evenementFutureSansDateDeFin"
+        "eventId": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg=="
       }
     }
   }
   """
   Then the JSON response should match:
   """
-  {"data":{"removeEvent":{"deletedEventId":"evenementFutureSansDateDeFin"}}}
+  {"data":{"removeEvent":{"deletedEventId":"RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg=="}}}
   """

@@ -5,5 +5,3 @@ RemoveEventPayload:
     fields:
       deletedEventId:
         type: 'ID!'
-      viewer:
-        type: 'InternalUser!'

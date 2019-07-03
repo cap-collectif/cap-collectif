@@ -49,17 +49,13 @@ class AddEventMutation implements MutationInterface
             ? $this->globalIdResolver->resolve($values['author'], $viewer)
             : null;
 
-        // from BO
+        // admin or superAdmin can set other user as author
         if ($user && ($viewer->isAdmin() || $viewer->isSuperAdmin())) {
             $event = (new Event())->setAuthor($user);
             unset($values['author']);
         } else {
-            // from FO
             $event = (new Event())->setAuthor($viewer);
         }
-
-        // clear empty/null values
-        $values = array_filter($values);
 
         $form = $this->formFactory->create(EventType::class, $event);
         $form->submit($values, false);
@@ -77,7 +73,6 @@ class AddEventMutation implements MutationInterface
             $this->em->persist($event);
             $this->em->flush();
         } catch (DriverException $e) {
-            // Updating opinion votes count failed
             throw new UserError($e->getMessage());
         }
 
