@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import styled from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
@@ -9,35 +10,42 @@ import type { UserAvatarList_users } from '~relay/UserAvatarList_users.graphql';
 type Props = {
   users: UserAvatarList_users,
   max: number,
+  onClick?: Function,
 };
 
+const AvatarButton = styled.button.attrs({})`
+  outline: none;
+  border: none;
+  background: none;
+`;
+
 export const UserAvatarList = (props: Props) => {
-  const { users, max } = props;
+  const { users, max, onClick } = props;
 
   return (
     <React.Fragment>
       {users &&
         users.slice(0, max).map((user, index) => (
-          <span className="mr-5">
+          <AvatarButton onClick={onClick}>
             <OverlayTrigger
               key={index}
               placement="top"
-              overlay={<Tooltip id={`opinion-vote-tooltip-${user.id}`}>{user.username}</Tooltip>}>
+              overlay={<Tooltip id={`tooltip-${user.id}`}>{user.username}</Tooltip>}>
               {/* $FlowFixMe */}
               <UserAvatar user={user} />
             </OverlayTrigger>
-          </span>
+          </AvatarButton>
         ))}
       {users.length > 5 && (
-        <span>
+        <AvatarButton onClick={onClick}>
           <Button
             bsStyle="link"
-            id="opinion-votes-show-all"
+            id="show-all"
             onClick={() => {}}
-            className="opinion__votes__more__link text-center">
+            className="more__link text-center">
             {`+${users.length - max >= 100 ? '99' : users.length - max}`}
           </Button>
-        </span>
+        </AvatarButton>
       )}
     </React.Fragment>
   );

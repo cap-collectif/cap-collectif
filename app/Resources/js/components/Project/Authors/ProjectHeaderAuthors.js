@@ -86,7 +86,10 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
         />
         <div>
           {/* $FlowFixMe $refType */}
-          <UserAvatarList users={project && project.authors ? project.authors : []} />
+          <UserAvatarList
+            users={project && project.authors ? project.authors : []}
+            onClick={this.handleClickModal}
+          />
         </div>
         <div className="d-flex" style={{ flexDirection: 'column' }}>
           <AuthorsButton className="ml-5 p-0 font-weight-bold" onClick={this.handleClickModal}>

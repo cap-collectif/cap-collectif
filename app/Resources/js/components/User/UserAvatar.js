@@ -2,8 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { State } from '../../types';
+
 import DefaultAvatar from './DefaultAvatar';
+import type { State, FeatureToggles } from '../../types';
 
 type Props = {
   user: ?{
@@ -11,15 +12,13 @@ type Props = {
     +media: ?{
       +url: string,
     },
-    +_links: {
-      +profile?: string,
-    },
+    +url?: string,
   },
+  features: FeatureToggles,
   size?: number,
   className?: string,
   defaultAvatar?: ?string,
   style?: any,
-  anchor?: boolean,
   onBlur?: Function,
   onFocus?: Function,
   onMouseOver?: Function,
@@ -32,7 +31,6 @@ export class UserAvatar extends React.Component<Props> {
     size: 45,
     className: '',
     style: {},
-    anchor: true,
     onBlur: () => {},
     onFocus: () => {},
     onMouseOver: () => {},
@@ -69,7 +67,16 @@ export class UserAvatar extends React.Component<Props> {
   }
 
   render() {
-    const { anchor, className, onBlur, onFocus, onMouseOut, onMouseOver, style, user } = this.props;
+    const {
+      className,
+      onBlur,
+      onFocus,
+      onMouseOut,
+      onMouseOver,
+      style,
+      user,
+      features,
+    } = this.props;
     const funcProps = {
       onBlur,
       onFocus,
@@ -77,9 +84,9 @@ export class UserAvatar extends React.Component<Props> {
       onMouseOut,
     };
 
-    if (user && user._links && user._links.profile && anchor) {
+    if (user && user.url && features && features.profiles) {
       return (
-        <a {...funcProps} className={className} style={style} href={user._links.profile}>
+        <a {...funcProps} className={className} style={style} href={user.url}>
           {this.renderAvatar()}
         </a>
       );
@@ -95,6 +102,7 @@ export class UserAvatar extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   defaultAvatar: state.default.images && state.default.images.avatar,
+  features: state.default.features,
 });
 
 export default createFragmentContainer(connect(mapStateToProps)(UserAvatar), {

@@ -2,16 +2,14 @@
 
 exports[`<UserAvatarList /> renders correctly 1`] = `
 <Fragment>
-  <span
-    className="mr-5"
-  >
+  <UserAvatarList__AvatarButton>
     <OverlayTrigger
       defaultOverlayShown={false}
       key="0"
       overlay={
         <Tooltip
           bsClass="tooltip"
-          id="opinion-vote-tooltip-1"
+          id="tooltip-1"
           placement="right"
         >
           toto
@@ -36,7 +34,7 @@ exports[`<UserAvatarList /> renders correctly 1`] = `
         }
       />
     </OverlayTrigger>
-  </span>
+  </UserAvatarList__AvatarButton>
 </Fragment>
 `;
 

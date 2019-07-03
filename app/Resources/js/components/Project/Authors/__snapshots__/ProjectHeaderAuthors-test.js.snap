@@ -4,7 +4,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly 1`] = `
 <ProjectHeaderAuthors__Container
   id="project-header"
 >
-  <ForwardRef(Relay(ProjectHeaderAuthorsModal))
+  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
     onClose={[Function]}
     show={false}
     users={
@@ -18,6 +18,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly 1`] = `
   />
   <div>
     <ForwardRef(Relay(UserAvatarList))
+      onClick={[Function]}
       users={
         Array [
           Object {
@@ -52,7 +53,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly 1`] = `
         hour="numeric"
         minute="numeric"
         month="long"
-        value={1664-12-07T23:00:00.000Z}
+        value={2019-05-18T07:57:30.000Z}
         year="numeric"
       />
     </span>

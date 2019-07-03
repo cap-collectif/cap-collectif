@@ -11,7 +11,7 @@ describe('<ProjectHeaderAuthors />', () => {
       project: {
         $refType,
         id: '1',
-        publishedAt: '12/08/1664',
+        publishedAt: '2019-05-18 09:57:30',
         authors: [
           {
             $fragmentRefs,
