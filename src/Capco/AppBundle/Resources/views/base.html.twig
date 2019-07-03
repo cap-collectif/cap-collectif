@@ -12,7 +12,7 @@
                          style="margin-bottom: 0; text-align: center">
                         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
                                 class="sr-only">{{ 'global.alert.close'|trans({}, 'CapcoAppBundle') }}</span></button>
-                        <span>{% block error_message %}{{ message | trans({}, 'CapcoAppBundle') }}{% endblock %}</span>
+                        <span>{{ message }}</span>
                     </div>
                 {% endfor %}
             {% endfor %}
