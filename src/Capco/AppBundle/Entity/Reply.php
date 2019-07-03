@@ -29,7 +29,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     @ORM\Index(name="idx_author_draft", columns={"id", "questionnaire_id", "author_id", "private", "is_draft"})
  * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
- * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
 class Reply implements Publishable, Contribution, VoteContribution, DraftableInterface

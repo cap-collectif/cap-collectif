@@ -37,7 +37,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     public function onCreate(Reply $reply): void
     {
         $questionnaire = $reply->getQuestionnaire();
-        $step = $questionnaire->getStep();
+        $questionnaireStep = $questionnaire->getStep();
 
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
@@ -60,7 +60,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 QuestionnaireReplyAdminMessage::create(
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     $reply,
-                    $step->getProject()->getTitle(),
+                    $questionnaireStep->getProject()->getTitle(),
                     $questionnaire->getStep()->getTitle(),
                     $reply->getAuthor()->getUsername(),
                     $reply->getUpdatedAt(),
@@ -79,14 +79,14 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 QuestionnaireAcknowledgeReplyMessage::create(
                     $reply->getAuthor()->getEmail(),
                     $reply,
-                    $step->getProject()->getTitle(),
+                    $questionnaireStep->getProject()->getTitle(),
                     $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
                     self::QUESTIONNAIRE_REPLY_CREATE_STATE,
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
-                    $this->stepUrlResolver->__invoke($step),
+                    $this->stepUrlResolver->__invoke($questionnaireStep),
                     $questionnaire->getStep()->getTitle()
                 )
             );
@@ -96,7 +96,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     public function onUpdate(Reply $reply): void
     {
         $questionnaire = $reply->getQuestionnaire();
-        $step = $questionnaire->getStep();
+        $questionnaireStep = $questionnaire->getStep();
 
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
@@ -119,8 +119,8 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 QuestionnaireReplyAdminMessage::create(
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     $reply,
-                    $step->getProject()->getTitle(),
-                    $questionnaire->getStep()->getTitle(),
+                    $questionnaireStep->getProject()->getTitle(),
+                    $questionnaireStep->getTitle(),
                     $reply->getAuthor()->getUsername(),
                     $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
@@ -137,15 +137,15 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 QuestionnaireAcknowledgeReplyMessage::create(
                     $reply->getAuthor()->getEmail(),
                     $reply,
-                    $step->getProject()->getTitle(),
+                    $questionnaireStep->getProject()->getTitle(),
                     $reply->getUpdatedAt(),
                     $this->siteParams->getValue('global.site.fullname'),
                     self::QUESTIONNAIRE_REPLY_UPDATE_STATE,
                     $userUrl,
                     $configUrl,
                     $this->baseUrl,
-                    $this->stepUrlResolver->__invoke($step),
-                    $questionnaire->getStep()->getTitle()
+                    $this->stepUrlResolver->__invoke($questionnaireStep),
+                    $questionnaireStep->getTitle()
                 )
             );
         }

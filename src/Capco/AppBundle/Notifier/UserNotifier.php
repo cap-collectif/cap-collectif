@@ -2,12 +2,8 @@
 
 namespace Capco\AppBundle\Notifier;
 
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewPasswordConfirmationMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
@@ -21,54 +17,19 @@ final class UserNotifier extends BaseNotifier
 {
     private $baseUrl;
     private $router;
+    private $questionnaireReplyNotifier;
 
     public function __construct(
         RouterInterface $router,
         MailerService $mailer,
         Resolver $siteParams,
-        UserResolver $userResolver
+        UserResolver $userResolver,
+        QuestionnaireReplyNotifier $questionnaireReplyNotifier
     ) {
         $this->router = $router;
+        $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
         $this->baseUrl = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
         parent::__construct($mailer, $siteParams, $userResolver);
-    }
-
-    public function acknowledgeReply(
-        Project $project,
-        Reply $reply,
-        ?\DateTime $endAt,
-        string $stepUrl,
-        AbstractStep $step,
-        User $user,
-        bool $isUpdated = false
-    ): void {
-        $configUrl = $this->router->generate(
-            'admin_capco_app_questionnaire_edit',
-            ['id' => $reply->getQuestionnaire()->getId()],
-            RouterInterface::ABSOLUTE_URL
-        );
-
-        $state = !$isUpdated
-            ? QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE
-            : QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE;
-
-        $this->mailer->sendMessage(
-            QuestionnaireAcknowledgeReplyMessage::create(
-                $reply->getAuthor()->getEmail(),
-                $reply,
-                $project->getTitle(),
-                $reply->getUpdatedAt(),
-                $this->siteParams->getValue('global.site.fullname'),
-                $state,
-                $user->isEmailConfirmed()
-                    ? ''
-                    : $this->userResolver->resolveRegistrationConfirmationUrl($user),
-                $configUrl,
-                $this->baseUrl,
-                $stepUrl,
-                $reply->getQuestionnaire()->getTitle()
-            )
-        );
     }
 
     public function adminConfirmation(User $user): void

@@ -56,6 +56,7 @@ final class QuestionnaireAcknowledgeReplyMessage extends DefaultMessage
             'replyUpdatedAt' => $updatedAt,
             'siteName' => self::escape($siteName),
             'date' => $reply->getPublishedAt(),
+            'time' => $reply->getPublishedAt()->format('H:i:s'),
             'authorName' => $reply->getAuthor()->getUsername(),
             'questionnaireStepTitle' => $reply->getStep()->getTitle(),
             'questionnaireEndDate' => $reply->getStep()->getEndAt(),

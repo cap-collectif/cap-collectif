@@ -12,7 +12,7 @@ use Capco\AppBundle\GraphQL\Mutation\UpdateReplyMutation;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
-use Capco\AppBundle\Notifier\UserNotifier;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,9 +39,9 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         ReplyRepository $replyRepo,
         RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
-        UserNotifier $userNotifier,
         StepUrlResolver $stepUrlResolver,
-        Publisher $publisher
+        Publisher $publisher,
+        QuestionnaireReplyNotifier $questionnaireReplyNotifier
     ) {
         $this->beConstructedWith(
             $em,
@@ -49,9 +49,9 @@ class UpdateReplyMutationSpec extends ObjectBehavior
             $replyRepo,
             $redisStorageHelper,
             $responsesFormatter,
-            $userNotifier,
             $stepUrlResolver,
-            $publisher
+            $publisher,
+            $questionnaireReplyNotifier
         );
     }
 
@@ -70,12 +70,12 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         ReplyRepository $replyRepo,
         Questionnaire $questionnaire,
         QuestionnaireStep $step,
-        UserNotifier $userNotifier,
         Publisher $publisher,
         Project $project,
         RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
-        StepUrlResolver $stepUrlResolver
+        StepUrlResolver $stepUrlResolver,
+        QuestionnaireReplyNotifier $questionnaireReplyNotifier
     ) {
         $values = [];
         $values['replyId'] = 'UmVwbHk6cmVwbHk1';
@@ -90,6 +90,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $reply->isDraft()->willReturn(true, false);
         $reply->getId()->willReturn('reply5');
         $reply->getAuthor()->willReturn($viewer);
+        $reply->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->willReturn($reply);
 
         $questionnaire->isNotifyResponseUpdate()->willReturn(false);
         $questionnaire->isAcknowledgeReplies()->willReturn(true);
@@ -112,22 +113,19 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $reply->getQuestionnaire()->willReturn($questionnaire);
 
-        $userNotifier
-            ->acknowledgeReply($project, $reply, $endDate, 'google.com', $step, $viewer, false)
-            ->shouldBeCalled();
-
-        $em->flush()->shouldBeCalled();
+        $questionnaireReplyNotifier->onCreate($reply)->shouldBeCalled();
 
         $publisher
             ->publish('questionnaire.reply', \Prophecy\Argument::type(Message::class))
             ->shouldBeCalled();
-
+        $em->flush()->shouldBeCalled();
         $redisStorageHelper->recomputeUserCounters($viewer)->shouldBeCalled();
 
         $this->__invoke($arguments, $viewer)->shouldBe(['reply' => $reply]);
     }
 
     public function it_throw_userError_if_reply_is_not_found(
+        EntityManagerInterface $em,
         Arg $arguments,
         User $viewer,
         ReplyRepository $replyRepo
@@ -140,6 +138,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
 
         $replyId = GlobalId::fromGlobalId($values['replyId'])['id'];
         $replyRepo->find($replyId)->willReturn(null);
+        $em->flush()->shouldNotBeCalled();
 
         $this->shouldThrow(new UserError('Reply not found.'))->during('__invoke', [
             $arguments,
@@ -148,6 +147,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
     }
 
     public function it_throw_userError_if_viewer_is_not_author_of_reply(
+        EntityManagerInterface $em,
         Arg $arguments,
         User $viewer,
         User $author,
@@ -169,7 +169,8 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $reply->getAuthor()->willReturn($author);
 
         $replyRepo->find($replyId)->willReturn($reply);
-
+        $reply->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->willReturn($reply);
+        $em->flush()->shouldNotBeCalled();
         $this->shouldThrow(new UserError('You are not allowed to update this reply.'))->during(
             '__invoke',
             [$arguments, $viewer]
@@ -214,6 +215,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $project->getSlug()->willReturn('project1');
         $step->getProject()->willReturn($project);
         $stepUrlResolver->__invoke($step)->willReturn('google.com');
+        $reply->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->willReturn($reply);
 
         $questionnaire->getStep()->willReturn($step);
 
@@ -224,6 +226,8 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(false);
         $form->getErrors()->willReturn([]);
         $form->all()->willReturn([]);
+
+        $em->flush()->shouldNotBeCalled();
 
         $this->shouldThrow(GraphQLException::class)->during('__invoke', [$arguments, $viewer]);
     }

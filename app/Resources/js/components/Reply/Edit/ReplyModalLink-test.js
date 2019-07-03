@@ -8,8 +8,8 @@ import { $refType, $fragmentRefs } from '../../../mocks';
 describe('<ReplyModalLink />', () => {
   const reply = {
     $refType,
-    createdAt: '',
-    publishedAt: '',
+    createdAt: '2016-03-01 10:11:12',
+    publishedAt: '2016-04-25 14:33:17',
     id: 'replay1',
     private: false,
     draft: false,
@@ -29,7 +29,9 @@ describe('<ReplyModalLink />', () => {
   });
 
   it('render a draft reply in a contribuable questionnaire', () => {
-    const wrapper = shallow(<ReplyModalLink reply={{ ...reply, draft: true }} />);
+    const wrapper = shallow(
+      <ReplyModalLink reply={{ ...reply, draft: true, publishedAt: null }} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
   it('render a private reply in a contribuable questionnaire', () => {
@@ -43,7 +45,9 @@ describe('<ReplyModalLink />', () => {
   });
 
   it('render a draft reply in a closed questionnaire', () => {
-    const wrapper = shallow(<ReplyModalLink reply={{ ...notContribuableReply, draft: true }} />);
+    const wrapper = shallow(
+      <ReplyModalLink reply={{ ...notContribuableReply, draft: true, publishedAt: null }} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

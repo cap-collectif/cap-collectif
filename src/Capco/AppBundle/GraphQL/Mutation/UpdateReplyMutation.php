@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Notifier\UserNotifier;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
@@ -28,9 +27,9 @@ class UpdateReplyMutation implements MutationInterface
     private $redisStorageHelper;
     private $responsesFormatter;
     private $replyRepo;
-    private $userNotifier;
     private $stepUrlResolver;
     private $publisher;
+    private $questionnaireReplyNotifier;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -38,18 +37,18 @@ class UpdateReplyMutation implements MutationInterface
         ReplyRepository $replyRepo,
         RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
-        UserNotifier $userNotifier,
         StepUrlResolver $stepUrlResolver,
-        Publisher $publisher
+        Publisher $publisher,
+        QuestionnaireReplyNotifier $questionnaireReplyNotifier
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->replyRepo = $replyRepo;
         $this->redisStorageHelper = $redisStorageHelper;
         $this->responsesFormatter = $responsesFormatter;
-        $this->userNotifier = $userNotifier;
         $this->stepUrlResolver = $stepUrlResolver;
         $this->publisher = $publisher;
+        $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -68,6 +67,7 @@ class UpdateReplyMutation implements MutationInterface
         if (isset($values['draft']) && true === $values['draft']) {
             $draft = true;
         }
+        $reply->setPublishedAt(new \DateTime('now'));
         $author = $reply->getAuthor();
         if ($author !== $viewer) {
             throw new UserError('You are not allowed to update this reply.');
@@ -81,33 +81,23 @@ class UpdateReplyMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
-        $questionnaire = $reply->getQuestionnaire();
+        $questionnaireReply = $reply->getQuestionnaire();
+        $isUpdated = $wasDraft && !$draft ? false : true;
+
+        $state = !$isUpdated
+            ? QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE
+            : QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE;
+
+        // we use the same code which the e2e test used
+        QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE === $state
+            ? $this->questionnaireReplyNotifier->onCreate($reply)
+            : $this->questionnaireReplyNotifier->onUpdate($reply);
 
         if (
-            $questionnaire &&
-            $questionnaire->isAcknowledgeReplies() &&
+            $questionnaireReply &&
             !$reply->isDraft() &&
-            $questionnaire->getStep()
+            $questionnaireReply->isNotifyResponseUpdate()
         ) {
-            $step = $questionnaire->getStep();
-            $project = $step->getProject();
-            $endAt = $step->getEndAt();
-            $stepUrl = $this->stepUrlResolver->__invoke($step);
-            $isUpdated = $wasDraft && !$draft ? false : true;
-            $this->userNotifier->acknowledgeReply(
-                $project,
-                $reply,
-                $endAt,
-                $stepUrl,
-                $step,
-                $viewer,
-                $isUpdated
-            );
-        }
-
-        $this->em->flush();
-
-        if ($questionnaire && !$reply->isDraft() && $questionnaire->isNotifyResponseUpdate()) {
             $this->publisher->publish(
                 'questionnaire.reply',
                 new Message(
@@ -120,6 +110,7 @@ class UpdateReplyMutation implements MutationInterface
                 )
             );
         }
+        $this->em->flush();
 
         $this->redisStorageHelper->recomputeUserCounters($viewer);
 
