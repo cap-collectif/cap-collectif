@@ -52,7 +52,7 @@ def localmac_dinghy():
     env.host_string = 'docker@192.168.99.100'
     env.key_filename = '~/.docker/machine/machines/capco/id_rsa'
     env.dinghy = True
-    env.local_ip = '192.168.99.100'
+    env.local_ip = lrun('dinghy ip', capture=True).stdout.decode('utf-8')
 
 
 def locallinux():
