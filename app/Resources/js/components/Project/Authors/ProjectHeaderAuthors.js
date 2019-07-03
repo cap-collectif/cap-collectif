@@ -2,7 +2,6 @@
 import moment from 'moment';
 import * as React from 'react';
 import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 
@@ -20,6 +19,12 @@ type State = {|
 
 const Container = styled.div.attrs({})`
   display: flex;
+`;
+
+const AuthorsButton = styled.button.attrs({})`
+  outline: none;
+  border: none;
+  background: none;
 `;
 
 const getAuthorCredits = (authors: $ReadOnlyArray<Object>) => {
@@ -73,32 +78,30 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
 
     return (
       <Container id="project-header">
+        {/* $FlowFixMe $refType */}
+        <ProjectHeaderAuthorsModal
+          users={project.authors}
+          onClose={this.closeAuthorsModal}
+          show={showAuthorsModal}
+        />
         <div>
           {/* $FlowFixMe $refType */}
-          <ProjectHeaderAuthorsModal
-            users={project.authors}
-            onClose={this.closeAuthorsModal}
-            show={showAuthorsModal}
-          />
-          <div>
-            {/* $FlowFixMe $refType */}
-            <UserAvatarList users={project && project.authors ? project.authors : []} />
-          </div>
-          <div>
-            <Button className="ml-5 font-weight-bold" onClick={this.handleClickModal}>
-              {getAuthorCredits(project.authors)}
-            </Button>
-            <span className="ml-5">
-              <FormattedDate
-                value={moment(project.publishedAt).toDate()}
-                minute="numeric"
-                hour="numeric"
-                day="numeric"
-                month="long"
-                year="numeric"
-              />
-            </span>
-          </div>
+          <UserAvatarList users={project && project.authors ? project.authors : []} />
+        </div>
+        <div className="d-flex" style={{ flexDirection: 'column' }}>
+          <AuthorsButton className="ml-5 p-0 font-weight-bold" onClick={this.handleClickModal}>
+            {getAuthorCredits(project.authors)}
+          </AuthorsButton>
+          <span className="ml-5">
+            <FormattedDate
+              value={moment(project.publishedAt).toDate()}
+              minute="numeric"
+              hour="numeric"
+              day="numeric"
+              month="long"
+              year="numeric"
+            />
+          </span>
         </div>
       </Container>
     );

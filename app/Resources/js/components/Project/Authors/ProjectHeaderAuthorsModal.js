@@ -1,6 +1,9 @@
 // @flow
 import * as React from 'react';
-import { Modal, ListGroupItem } from 'react-bootstrap';
+// TODO https://github.com/cap-collectif/platform/issues/7774
+// eslint-disable-next-line no-restricted-imports
+import { Modal, ListGroupItem, ListGroup } from 'react-bootstrap';
+import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import CloseButton from '../../Form/CloseButton';
@@ -13,14 +16,28 @@ type Props = {|
   users: ProjectHeaderAuthorsModal_users,
 |};
 
+const ProjectAuthorItem = styled(ListGroupItem)`
+  border-left: none;
+  border-right: none;
+`;
+
+const ProjectAuthorList = styled(ListGroup)`
+  ${ProjectAuthorItem}:first-of-type {
+    border-top: none;
+  }
+  ${ProjectAuthorItem}:last-of-type {
+    border-bottom: none;
+  }
+`;
+
 const renderAuthorsList = (users: ProjectHeaderAuthorsModal_users) =>
   users.map(user => (
-    <ListGroupItem>
+    <ProjectAuthorItem>
       <UserAvatar user={user} />
       <a className="ml-15" href={user.url}>
         {user.username}{' '}
       </a>
-    </ListGroupItem>
+    </ProjectAuthorItem>
   ));
 
 const ProjectHeaderAuthorsModal = ({ show, onClose, users }: Props) => (
@@ -42,7 +59,9 @@ const ProjectHeaderAuthorsModal = ({ show, onClose, users }: Props) => (
         />
       </Modal.Title>
     </Modal.Header>
-    <Modal.Body>{renderAuthorsList(users)}</Modal.Body>
+    <Modal.Body>
+      <ProjectAuthorList className="mb-0">{renderAuthorsList(users)}</ProjectAuthorList>
+    </Modal.Body>
     <Modal.Footer>
       <CloseButton onClose={onClose} />
     </Modal.Footer>
