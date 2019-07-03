@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Behat\Mink\Session;
 use Elastica\Snapshot;
 use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;
@@ -175,6 +176,21 @@ class ApplicationContext extends UserContext
         $this->snapshot->restoreSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [], true);
         $indexManager->getLiveSearchIndex()->open();
         $indexManager->markAsLive($indexManager->getLiveSearchIndex());
+    }
+
+    /**
+     * @AfterScenario
+     */
+    public function closeWindows(AfterScenarioScope $scope): void
+    {
+        $scenario = $scope->getScenario();
+        if ($scenario->hasTags('multiple-windows')) {
+            /** @var Session $session */
+            $session = $this->getSession();
+            foreach ($session->getWindowNames() as $window) {
+                $session->stop($window);
+            }
+        }
     }
 
     /**
