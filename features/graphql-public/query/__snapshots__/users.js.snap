@@ -39,7 +39,7 @@ Object {
             ],
           },
           "twitterUrl": null,
-          "updatedAt": null,
+          "updatedAt": "2019-07-03 17:02:04",
           "url": "https://capco.test/profile/adminpro",
           "userType": Object {
             "name": "Citoyen",
@@ -2541,27 +2541,32 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
-          "_id": "user506",
-        },
-      },
-      Object {
-        "node": Object {
-          "_id": "user508",
-        },
-      },
-      Object {
-        "node": Object {
           "_id": "user200",
+          "createdAt": "2017-07-20 00:00:00",
         },
       },
       Object {
         "node": Object {
           "_id": "user199",
+          "createdAt": "2017-07-19 00:00:00",
         },
       },
       Object {
         "node": Object {
           "_id": "user198",
+          "createdAt": "2017-07-18 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "_id": "user197",
+          "createdAt": "2017-07-17 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "_id": "user196",
+          "createdAt": "2017-07-16 00:00:00",
         },
       },
     ],

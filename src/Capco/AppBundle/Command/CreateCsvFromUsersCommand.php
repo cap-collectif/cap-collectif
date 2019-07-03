@@ -74,7 +74,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'postCommentsCount' => 'postCommentsCount',
         'eventCommentsCount' => 'eventCommentsCount',
         'projectsCount' => 'projectsCount',
-        'deletedAccountAt' => 'deletedAccountAt',
+        'deletedAccountAt' => 'deletedAccountAt'
     ];
 
     private $sheetHeader = [
@@ -121,7 +121,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'postCommentsCount',
         'eventCommentsCount',
         'projectsCount',
-        'deletedAccountAt',
+        'deletedAccountAt'
     ];
     private $toggleManager;
 
@@ -162,15 +162,13 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         $data = $this->executor
             ->execute('internal', [
                 'query' => $requestString,
-                'variables' => [],
+                'variables' => []
             ])
             ->toArray();
 
-        $userSample = $data['data']['users']['edges'][0]['node'];
-
         $this->writer = WriterFactory::create(Type::CSV);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
-        $header = $this->generateSheetHeader($userSample);
+        $header = $this->generateSheetHeader();
         $this->writer->addRow($header);
 
         $totalCount = Arr::path($data, 'data.users.totalCount');
@@ -202,7 +200,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
                 ? $this->exportUtils->parseCellValue(Arr::path($user, $this->userHeaderMap[$path]))
                 : '';
         }
-        $customQuestions = $this->generateSheetHeaderQuestions($user);
+        $customQuestions = $this->generateSheetHeaderQuestions();
         if (\count($customQuestions) > 0) {
             $responses = array_map(function ($edge) {
                 return $edge['node'];
@@ -308,20 +306,33 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
 EOF;
     }
 
-    private function generateSheetHeaderQuestions(array $sampleUser): array
+    private function generateSheetHeaderQuestions(): array
     {
-        $responses = array_map(function (array $edge) {
-            return $edge['node'];
-        }, $sampleUser['responses']['edges']);
+        $registrationFormQuestionsQuery = <<<'EOF'
+            {
+                registrationForm {
+                    questions {
+                        title
+                    }
+                }
+            } 
+EOF;
 
-        return array_map(function (array $response) {
-            return $response['question']['title'];
-        }, $responses);
+        $questionsTitles = $this->executor
+            ->execute('internal', [
+                'query' => $registrationFormQuestionsQuery,
+                'variables' => []
+            ])
+            ->toArray();
+
+        return array_map(function (array $edge) {
+            return $edge['title'];
+        }, $questionsTitles['data']['registrationForm']['questions']);
     }
 
-    private function generateSheetHeader(array $sampleUser): array
+    private function generateSheetHeader(): array
     {
-        return array_merge($this->sheetHeader, $this->generateSheetHeaderQuestions($sampleUser));
+        return array_merge($this->sheetHeader, $this->generateSheetHeaderQuestions());
     }
 
     private function addCustomResponse(array $response): ?string
