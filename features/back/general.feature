@@ -41,7 +41,7 @@ Scenario: Logged in admin wants to test admin contributions
   And I go to the admin argument list page
   And I should not see "error.500"
 
-Scenario: Logged in admin wants to see home / sections page list.
+Scenario: Logged in admin wants to see home / sections page list
   Given I am logged in as admin
   When I go to the admin section list page
   Then I should not see "error.500"
@@ -53,4 +53,23 @@ Scenario: Logged in admin wants to edit a section
   Then I should not see "error.500"
   And I should not see "error.404"
   And I should see an ".content" element
-  
+
+Scenario: Logged in admin want to see project from project list
+  Given I am logged in as admin
+  Then I go to the admin project list page
+  And I click the "td[objectid='project1'] div a" element
+  Then I switch to window 1
+  And I should be on "/consultation/croissance-innovation-disruption/presentation/presentation-1"
+  And I should not see "error.500"
+  And I should not see "error.400"
+
+# Warning: The number of windows is increasing, don't forget those you open earlier on the session
+
+Scenario: Logged in admin want to see project from project list
+  Given I am logged in as admin
+  Then I go to "/admin/capco/app/project/project2/edit"
+  And I click the "#action_show" element
+  Then I switch to window 2
+  And I should be on "/project/strategie-technologique-de-letat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie"
+  And I should not see "error.404"
+  And I should not see "error.500"

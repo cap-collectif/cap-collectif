@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Behat\Traits;
 
+use Behat\Mink\Session;
+
 trait AdminTrait
 {
     use AdminProposalTrait;
@@ -152,5 +154,16 @@ trait AdminTrait
     public function iDuplicateProposalForm(string $proposalFormId)
     {
         $this->visitPath("/admin/capco/app/proposalform/duplicate?id=${proposalFormId}");
+    }
+
+    /**
+     * @Then I switch to window :tabIndex
+     */
+    public function iSwitchToWindow(int $tabIndex): void
+    {
+        /** @var Session $session */
+        $session = $this->getSession();
+        $windowNames = $session->getWindowNames();
+        $session->switchToWindow($windowNames[$tabIndex]);
     }
 }
