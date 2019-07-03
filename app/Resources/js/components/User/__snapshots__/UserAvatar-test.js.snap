@@ -33,7 +33,7 @@ exports[`<UserAvatar /> renders correctly user without avatar 1`] = `
   style={Object {}}
 >
   <DefaultAvatar
-    className="img-circle avatar mr-0"
+    className="img-circle avatar mr-0 user-avatar"
     size={16}
   />
 </span>

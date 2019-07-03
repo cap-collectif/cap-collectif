@@ -63,7 +63,7 @@ export class UserAvatar extends React.Component<Props> {
       );
     }
 
-    return <DefaultAvatar className="img-circle avatar mr-0" size={size} />;
+    return <DefaultAvatar className="img-circle avatar mr-0 user-avatar" size={size} />;
   }
 
   render() {
