@@ -7,6 +7,7 @@ import { Button } from 'react-bootstrap';
 import type { GlobalState } from '../../types';
 import component from '../Form/Field';
 import QuestionJumpConditionAdminForm from './QuestionJumpConditionAdminForm';
+import { multipleChoiceQuestions } from '../ProposalForm/ProposalFormAdminQuestionModal';
 
 type Props = {
   fields: { length: number, map: Function, remove: Function, push: Function },
@@ -23,6 +24,7 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
     questions.map(question => {
       if (
         question.kind !== 'simple' &&
+        multipleChoiceQuestions.includes(question.kind) &&
         question.id &&
         question.choices &&
         question.choices.length > 0

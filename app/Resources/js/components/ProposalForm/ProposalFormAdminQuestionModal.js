@@ -30,7 +30,7 @@ type Props = {
   intl: IntlShape,
 } & ParentProps;
 
-const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
+export const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
 export class ProposalFormAdminQuestionModal extends React.Component<Props> {
   render() {
@@ -162,23 +162,22 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                 oldMember={member}
                 type={type}
               />
-              <h4 style={{ fontWeight: 'bold' }}>
-                <span>
-                  <FormattedMessage id="conditional-jumps" />
-                </span>
-              </h4>
-              {currentQuestion.id && type !== 'ranking' && (
-                <FieldArray
-                  name={`${member}.jumps`}
-                  component={QuestionsJumpAdmin}
-                  formName={formName}
-                  oldMember={member}
-                />
-              )}
-              {!currentQuestion.id && type !== 'ranking' && (
-                <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
-              )}
             </div>
+          )}
+          <h4 style={{ fontWeight: 'bold' }}>
+            <span>
+              <FormattedMessage id="conditional-jumps" />
+            </span>
+          </h4>
+          {currentQuestion.id ? (
+            <FieldArray
+              name={`${member}.jumps`}
+              component={QuestionsJumpAdmin}
+              formName={formName}
+              oldMember={member}
+            />
+          ) : (
+            <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
           )}
           <h4 style={{ fontWeight: 'bold' }}>
             <span>

@@ -11,6 +11,7 @@ import type { GlobalState } from '../../types';
 import component from '../Form/Field';
 import type { responsesHelper_adminQuestion } from '~relay/responsesHelper_adminQuestion.graphql';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
+import { multipleChoiceQuestions } from '../ProposalForm/ProposalFormAdminQuestionModal';
 
 type ParentProps = {|
   formName: string,
@@ -28,6 +29,10 @@ type Props = {|
 export class QuestionsJumpAdminForm extends React.Component<Props> {
   render() {
     const { fields, questions, oldMember, formName, currentQuestion } = this.props;
+    const firstMultipleChoiceQuestion = questions.find(question =>
+      multipleChoiceQuestions.includes(question.type),
+    );
+    const isMultipleQuestion = multipleChoiceQuestions.includes(currentQuestion.type);
     return (
       <div className="form-group" id="questions_choice_panel_personal">
         <ListGroup>
@@ -64,16 +69,23 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
           className="btn--outline box-content__toolbar"
           onClick={() => {
             fields.push({
-              always: false,
               origin: {
                 id: currentQuestion.id,
               },
               conditions: [
                 {
                   question: {
-                    id: currentQuestion.id,
+                    id: isMultipleQuestion
+                      ? currentQuestion.id
+                      : firstMultipleChoiceQuestion
+                      ? firstMultipleChoiceQuestion.id
+                      : null,
                   },
-                  value: currentQuestion.choices[0],
+                  value: isMultipleQuestion
+                    ? currentQuestion.choices[0]
+                    : firstMultipleChoiceQuestion
+                    ? firstMultipleChoiceQuestion.choices && firstMultipleChoiceQuestion.choices[0]
+                    : null,
                   operator: 'IS',
                 },
               ],
@@ -88,11 +100,7 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
           <div className="mb-10">
             <h4 className="panel-title">
               <FormattedMessage
-                id={
-                  fields && fields.length === 0
-                    ? 'always-go-to'
-                    : 'jump-other-goto'
-                }
+                id={fields && fields.length === 0 ? 'always-go-to' : 'jump-other-goto'}
               />
             </h4>
             <Field
