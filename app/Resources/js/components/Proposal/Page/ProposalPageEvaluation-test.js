@@ -28,6 +28,7 @@ describe('<ProposalPageEvaluation />', () => {
             type: 'text',
             isOtherAllowed: false,
             validationRule: null,
+            __typename: 'SimpleQuestion',
             choices: [],
           },
         ],

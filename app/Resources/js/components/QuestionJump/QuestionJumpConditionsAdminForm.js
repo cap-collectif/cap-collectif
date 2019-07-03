@@ -7,32 +7,32 @@ import { Button } from 'react-bootstrap';
 import type { GlobalState } from '../../types';
 import component from '../Form/Field';
 import QuestionJumpConditionAdminForm from './QuestionJumpConditionAdminForm';
-import { multipleChoiceQuestions } from '../ProposalForm/ProposalFormAdminQuestionModal';
+import type { Jump } from '../Questionnaire/QuestionnaireAdminConfigurationForm';
+import type { Questions } from '../../utils/responsesHelper';
 
 type Props = {
   fields: { length: number, map: Function, remove: Function, push: Function },
-  questions: Object,
+  questions: Questions,
   formName: string,
   member: string,
-  currentJump: Object,
+  currentJump: Jump
 };
 
 export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
   render() {
     const { fields, questions, member, formName, currentJump } = this.props;
-    const arrayQuestions = [];
-    questions.map(question => {
-      if (
-        question.kind !== 'simple' &&
-        multipleChoiceQuestions.includes(question.kind) &&
-        question.id &&
-        question.choices &&
-        question.choices.length > 0
-      ) {
-        arrayQuestions[question.id] = question.choices;
-      }
-    });
-
+    const currentQuestion = questions.find(question => question.id === currentJump.origin.id);
+    const isMultipleChoiceQuestion = currentQuestion && currentQuestion.__typename === "MultipleChoiceQuestion";
+    const firstMultipleChoicQuestion = questions.find(question => question.__typename === "MultipleChoiceQuestion")
+    const defaultCondition = {
+      question: {
+        id: currentJump.origin.id,
+      },
+      value: currentQuestion && isMultipleChoiceQuestion ?
+        currentQuestion.choices && currentQuestion.choices[0] : firstMultipleChoicQuestion ?
+          firstMultipleChoicQuestion.choices && firstMultipleChoicQuestion.choices[0] : null,
+      operator: 'IS',
+    };
     return (
       <div className="form-group" id="questions_choice_panel_personal">
         {fields.map((memberConditions, index) => (
@@ -57,13 +57,7 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
             bsStyle="primary"
             className="btn--outline box-content__toolbar"
             onClick={() => {
-              fields.push({
-                question: {
-                  id: currentJump.origin.id,
-                },
-                value: arrayQuestions[currentJump.origin.id][0],
-                operator: 'IS',
-              });
+              fields.push(defaultCondition);
             }}>
             <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
           </Button>

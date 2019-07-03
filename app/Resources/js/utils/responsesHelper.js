@@ -55,6 +55,7 @@ const ResponseFragment = {
 const QuestionAdminFragment = {
   adminQuestion: graphql`
     fragment responsesHelper_adminQuestion on Question {
+      __typename
       id
       title
       number
@@ -121,6 +122,7 @@ const QuestionAdminFragment = {
 const QuestionFragment = {
   question: graphql`
     fragment responsesHelper_question on Question {
+      __typename
       id
       title
       number
@@ -210,7 +212,8 @@ type Jump = {|
 
 // This is a cp/paster of
 // responsesHelper_question without $refType
-type Question = {|
+export type Question = {|
+  +__typename: string,
   +id: string,
   +title: string,
   +number: number,
@@ -412,11 +415,17 @@ type ResponsesError = ResponseError[];
 
 const hasAnsweredQuestion = (question: Question, responses: ResponsesInReduxForm): boolean => {
   const answer = responses.filter(Boolean).find(response => response.question === question.id);
-  return !!(answer && 'value' in answer && answer.value !== null);
+  if (answer) {
+    const submitResponse = getValueFromSubmitResponse(answer);
+    return !!('value' in answer && (submitResponse !== null && submitResponse !== ""));
+  }
+  return false
 };
 
 // alwaysJumpDestinationQuestion can be nullable, but when we call this method it is not
 // null, we make verification about question.alwaysJumpDestinationQuestion, but flow does not recognize it
+// Typically in this situation I would unwrap the value of question.alwaysJumpDestinationQuestion!, but
+// unwrapping value does not seems to exists in flow
 const createJumpFromAlwaysQuestion = (question: Question): Jump => ({
   // $FlowFixMe
   destination: question.alwaysJumpDestinationQuestion,

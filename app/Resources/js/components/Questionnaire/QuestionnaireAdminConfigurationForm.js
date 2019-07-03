@@ -21,7 +21,7 @@ type Props = {|
   features: FeatureToggles,
 |};
 
-export type Jumps = ?$ReadOnlyArray<{|
+export type Jump = {|
   +id?: string,
   +origin: {
     id: number,
@@ -32,7 +32,10 @@ export type Jumps = ?$ReadOnlyArray<{|
     title: string,
   },
   +conditions: Object,
-|}>;
+|};
+
+
+export type Jumps = ?$ReadOnlyArray<Jump>;
 export type MultipleChoiceQuestionValidationRulesTypes = 'EQUAL' | 'MAX' | 'MIN';
 export type QuestionChoiceColor = 'DANGER' | 'INFO' | 'PRIMARY' | 'SUCCESS' | 'WARNING';
 export type QuestionTypeValue =

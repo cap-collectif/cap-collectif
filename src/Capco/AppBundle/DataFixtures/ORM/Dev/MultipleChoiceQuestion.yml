@@ -96,6 +96,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionIsHapGood:
     id: 26
     title: Hap est-il un homme bon ?
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDc'
     type: 4 # select
   multiplequestionNoelFete:
     id: 27
@@ -197,74 +198,81 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     required: false
     type: 3 # radio
   multiplequestionHapNoelProposalForm15:
-    id: 50
+    id: 2415
     title: Hap ou Noel ?
-    required: true
+    required: false
+    type: 4 # select
+  multiplequestionFavoriteFleuveProposalForm15:
+    id: 4515
+    title: Votre fleuve préféré
+    required: false
+    type: 4 # select
+  multiplequestionHapGangeProposalForm15:
+    id: 4615
+    title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
+    required: false
+    alwaysJumpDestinationQuestion: '@multiplequestionHapCreationProposalForm15'
     type: 4 # select
   multiplequestionHapCreationProposalForm15:
-    id: 51
+    id: 2515
     title: Par qui Hap a t-il été créé ?
+    alwaysJumpDestinationQuestion: '@multiplequestionIsHapGoodProposalForm15'
     type: 4 # select
   multiplequestionIsHapGoodProposalForm15:
-    id: 52
+    id: 2615
     title: Hap est-il un homme bon ?
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDcProposalForm15'
     type: 4 # select
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDcProposalForm15'
   multiplequestionNoelFeteProposalForm15:
-    id: 53
+    id: 2715
     title: Noel a t-il un rapport avec la fête de Noël ?
+    alwaysJumpDestinationQuestion: '@multiplequestionNoelHatColorProposalForm15'
     type: 4 # select
   multiplequestionNoelHatColorProposalForm15:
-    id: 54
+    id: 2815
     title: De quelle couleur est le chapeau de Noël ?
     alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDcProposalForm15'
     type: 4 # select
   multiplequestionMarvelOrDcProposalForm15:
-    id: 55
+    id: 3115
     title: Plutôt Marvel ou DC ?
     type: 4 # select
   multiplequestionDcSupermanLikeProposalForm15:
-    id: 56
+    id: 3215
     title: T'aimes bien Superman ?
+    alwaysJumpDestinationQuestion: '@multiplequestionDcBatmanLikeProposalForm15'
     type: 4 # select
   multiplequestionDcBatmanLikeProposalForm15:
-    id: 57
+    id: 3315
     title: T'aimes bien Batman ?
+    alwaysJumpDestinationQuestion: '@multiplequestionDcSupergirlLikeProposalForm15'
     type: 4 # select
   multiplequestionDcSupergirlLikeProposalForm15:
-    id: 58
+    id: 3415
     title: T'aimes bien Supergirl ?
     alwaysJumpDestinationQuestion: '@multiplequestionEndConditionelProposalForm15'
     type: 4 # select
   multiplequestionMarvelIronManLikeProposalForm15:
-    id: 59
+    id: 3515
     title: T'aimes bien Iron Man ?
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelLukeCageLikeProposalForm15'
     type: 4 # select
   multiplequestionMarvelLukeCageLikeProposalForm15:
-    id: 60
+    id: 3615
     title: T'aimes bien Luke Cage ?
+    alwaysJumpDestinationQuestion: '@multiplequestionMarvelThorLikeProposalForm15'
     type: 4 # select
   multiplequestionMarvelThorLikeProposalForm15:
-    id: 61
+    id: 3715
     title: T'aimes bien Thor ?
     alwaysJumpDestinationQuestion: '@multiplequestionEndConditionelProposalForm15'
     type: 4 # select
   multiplequestionEndConditionelProposalForm15:
-    id: 62
+    id: 3815
     title: C'est la fin mais j'affiche quand même des choix
     type: 4 # select
-  multiplequestionFavoriteFleuveProposalForm15:
-    id: 63
-    title: Votre fleuve préféré
-    required: true
-    type: 4 # select
-  multiplequestionHapGangeProposalForm15:
-    id: 64
-    title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
-    required: false
-    type: 4 # select
   multiplequestionHapNotGoodHowDareYouProposalForm15:
-    id: 65
+    id: 3915
     title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
     alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDcProposalForm15'
     type: 4 # select

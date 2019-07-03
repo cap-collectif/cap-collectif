@@ -32,6 +32,7 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
         otherAllowed: question.isOtherAllowed,
         isOtherAllowed: undefined,
         // List of not send properties to server
+        __typename: undefined,
         kind: undefined,
         number: undefined,
         position: undefined,

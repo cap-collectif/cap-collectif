@@ -57,6 +57,7 @@ describe('<ProposalAdminContentForm />', () => {
             private: false,
             required: true,
             validationRule: null,
+            __typename: 'SimpleQuestion',
             choices: [],
             isOtherAllowed: false,
           },

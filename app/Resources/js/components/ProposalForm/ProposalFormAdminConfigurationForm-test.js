@@ -51,6 +51,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
           helpText: null,
           description: 'des cryptes Sion',
           type: 'text',
+          __typename: 'SimpleQuestion',
           private: false,
           number: 1,
           position: 1,

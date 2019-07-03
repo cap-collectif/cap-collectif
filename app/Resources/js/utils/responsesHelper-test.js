@@ -25,6 +25,7 @@ const questionnaireQuestions = [
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceHap',
@@ -146,6 +147,7 @@ const questionnaireQuestions = [
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoicLeGange',
@@ -186,17 +188,17 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     alwaysJumpDestinationQuestion: {
-      id: 'alwaysLogicJumpHapAndGange',
+      id: 'UXVlc3Rpb246MjU=',
       title: 'Par qui Hap a t-il été créé ?',
       number: 4
     },
     jumps: [],
-    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceHapGangeOui',
@@ -229,6 +231,7 @@ const questionnaireQuestions = [
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceJvc',
@@ -262,11 +265,10 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     alwaysJumpDestinationQuestion: {
-      id: 'logicjump8',
+      id: 'UXVlc3Rpb246MzE=',
       title: 'Plutôt Marvel ou DC ?',
       number: 9
     },
-    alwaysJumpDestinationQuestion: null,
     jumps: [
       {
         id: 'logicjump10',
@@ -298,6 +300,7 @@ const questionnaireQuestions = [
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceHapBonOui',
@@ -324,17 +327,17 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     alwaysJumpDestinationQuestion: {
-      id: 'logicjump11',
+      id: 'UXVlc3Rpb246MzE=',
       title: 'Plutôt Marvel ou DC ?',
       number: 9
     },
     jumps: [],
-    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceHapNotGoodHowDareYouOk',
@@ -367,6 +370,7 @@ const questionnaireQuestions = [
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceNoelOui',
@@ -393,17 +397,17 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     alwaysJumpDestinationQuestion: {
-      id: 'logicjump9',
+      id: 'UXVlc3Rpb246MzE=',
       title: 'Plutôt Marvel ou DC ?',
       number: 9
     },
     jumps: [],
-    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceNoelRedHat',
@@ -494,6 +498,7 @@ const questionnaireQuestions = [
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceMarvelOrDcMarvel',
@@ -526,6 +531,7 @@ const questionnaireQuestions = [
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceDcSupermanYes',
@@ -558,6 +564,7 @@ const questionnaireQuestions = [
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceDcBatmanYes',
@@ -584,17 +591,17 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     alwaysJumpDestinationQuestion: {
-      id: 'logicjump6',
+      id: 'UXVlc3Rpb246Mzg=',
       title: "C'est la fin mais j'affiche quand même des choix",
       number: 16
     },
     jumps: [],
-    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceDcSupergirlYes',
@@ -627,6 +634,7 @@ const questionnaireQuestions = [
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceMarvelIronManYes',
@@ -659,6 +667,7 @@ const questionnaireQuestions = [
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceMarvelLukeCageYes',
@@ -692,17 +701,17 @@ const questionnaireQuestions = [
     required: false,
     helpText: null,
     alwaysJumpDestinationQuestion: {
-      id: 'logicjump7',
+      id: 'UXVlc3Rpb246Mzg=',
       title: "C'est la fin mais j'affiche quand même des choix",
       number: 16
     },
     jumps: [],
-    alwaysJumpDestinationQuestion: null,
     description: null,
     type: 'select',
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceMarvelThorYes',
@@ -735,6 +744,7 @@ const questionnaireQuestions = [
     isOtherAllowed: false,
     randomQuestionChoices: false,
     validationRule: null,
+    __typename: 'MultipleChoiceQuestion',
     choices: [
       {
         id: 'questionchoiceEndConditionOk',
@@ -763,6 +773,7 @@ const numberQuestion = {
   description: null,
   helpText: null,
   type: 'number',
+  __typename: 'SimpleQuestion',
   jumps: [],
   alwaysJumpDestinationQuestion: null,
   position: 1,
@@ -777,6 +788,7 @@ const selectQuestion = {
   description: null,
   helpText: null,
   type: 'select',
+  __typename: 'MultipleChoiceQuestion',
   choices: [
     {
       id: 'choice1',
@@ -809,6 +821,7 @@ const mediaQuestion = {
   description: null,
   helpText: null,
   type: 'medias',
+  __typename: 'MediaQuestion',
   jumps: [],
   alwaysJumpDestinationQuestion: null,
 };
@@ -822,6 +835,7 @@ const textQuestion = {
   description: null,
   helpText: null,
   type: 'textarea',
+  __typename: 'SimpleQuestion',
   jumps: [],
   alwaysJumpDestinationQuestion: null,
   position: 2,
@@ -905,6 +919,7 @@ describe('getAvailableQuestionsIds', () => {
         title: 'Est ce que ce test marche ?',
         private: false,
         helpText: null,
+        __typename: 'MultipleChoiceQuestion',
         choices: [
           {
             id: 'oui',
@@ -937,6 +952,7 @@ describe('getAvailableQuestionsIds', () => {
         title: 'Quelle est ta waifu préférée ?',
         private: false,
         helpText: null,
+        __typename: 'MultipleChoiceQuestion',
         choices: [
           {
             id: 'rem',
@@ -986,6 +1002,7 @@ describe('getAvailableQuestionsIds', () => {
         title: 'Est ce que ce test marche ?',
         private: false,
         helpText: null,
+        __typename: 'MultipleChoiceQuestion',
         choices: [
           {
             id: 'oui',
@@ -1018,6 +1035,7 @@ describe('getAvailableQuestionsIds', () => {
         private: false,
         helpText: null,
         title: 'Quelle est ta waifu préférée ?',
+        __typename: 'MultipleChoiceQuestion',
         choices: [
           {
             id: 'rem',
@@ -1101,6 +1119,7 @@ describe('getAvailableQuestionsIds', () => {
         private: false,
         helpText: null,
         title: "C'est son côté Satela que tu aimes bien ?",
+        __typename: 'MultipleChoiceQuestion',
         choices: [
           {
             id: 'of-course',
@@ -1133,6 +1152,7 @@ describe('getAvailableQuestionsIds', () => {
         private: false,
         helpText: null,
         title: "C'est son côté maid que tu aimes bien ?",
+        __typename: 'MultipleChoiceQuestion',
         choices: [
           {
             id: 'indeed',

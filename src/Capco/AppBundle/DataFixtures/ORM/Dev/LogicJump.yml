@@ -51,19 +51,19 @@ Capco\AppBundle\Entity\LogicJump:
     conditions: ['@ljconditionCheckbox']
   logicjump1ProposalForm15:
     id: logicjump1ProposalForm15
-    origin: '@multiplequestionHapNoelProposalForm15'
-    destination: '@multiplequestionHapCreationProposalForm15'
-    conditions: ['@ljconditionHapProposalForm15']
-  logicjump2ProposalForm15:
-    id: logicjump2ProposalForm15
-    origin: '@multiplequestionHapNoelProposalForm15'
-    destination: '@multiplequestionNoelFeteProposalForm15'
-    conditions: ['@ljconditionNoelProposalForm15']
-  logicjump3ProposalForm15:
-    id: logicjump3ProposalForm15
     origin: '@multiplequestionFavoriteFleuveProposalForm15'
     destination: '@multiplequestionHapGangeProposalForm15'
     conditions: ['@ljconditionFleuveHapProposalForm15', '@ljconditionFleuveGangeProposalForm15']
+  logicjump2ProposalForm15:
+    id: logicjump2ProposalForm15
+    origin: '@multiplequestionFavoriteFleuveProposalForm15'
+    destination: '@multiplequestionHapCreationProposalForm15'
+    conditions: ['@ljconditionFleuveHapProposalForm15']
+  logicjump3ProposalForm15:
+    id: logicjump3ProposalForm15
+    origin: '@multiplequestionFavoriteFleuveProposalForm15'
+    destination: '@multiplequestionNoelFeteProposalForm15'
+    conditions: ['@ljconditionNoelProposalForm15']
   logicjump4ProposalForm15:
     id: logicjump4ProposalForm15
     origin: '@multiplequestionMarvelOrDcProposalForm15'
@@ -74,7 +74,7 @@ Capco\AppBundle\Entity\LogicJump:
     origin: '@multiplequestionMarvelOrDcProposalForm15'
     destination: '@multiplequestionDcSupermanLikeProposalForm15'
     conditions: ['@ljconditionDcProposalForm15']
-  logicjump10ProposalForm1ProposalForm155:
+  logicjump10ProposalForm15:
     id: logicjump10ProposalForm15
     origin: '@multiplequestionIsHapGoodProposalForm15'
     destination: '@multiplequestionHapNotGoodHowDareYouProposalForm15'

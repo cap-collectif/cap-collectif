@@ -21,6 +21,7 @@ describe('<ReplyForm />', () => {
   const requiredText = {
     id: '10',
     type: 'text',
+    __typename: 'SimpleQuestion',
     title:
       "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
     helpText: '',
@@ -39,6 +40,7 @@ describe('<ReplyForm />', () => {
   const facultativeCheckbox = {
     id: '11',
     type: 'checkbox',
+    __typename: 'MultipleChoiceQuestion',
     title: "Pour quel type d'épreuve êtes vous prêt à acheter des places",
     number: 3,
     helpText: 'Plusieurs choix sont possibles',
@@ -73,6 +75,7 @@ describe('<ReplyForm />', () => {
   const requiredRadio = {
     id: '12',
     type: 'radio',
+    __typename: 'MultipleChoiceQuestion',
     title: 'Quel est ton athlète favori ?',
     number: 4,
     helpText: 'Un seul choix possible',
@@ -101,6 +104,7 @@ describe('<ReplyForm />', () => {
   const facultativeSelect = {
     id: '13',
     type: 'select',
+    __typename: 'MultipleChoiceQuestion',
     title: 'Nelson Monfort parle-t-il:',
     number: 5,
     helpText: 'Merci de répondre sincèrement',
@@ -140,6 +144,7 @@ describe('<ReplyForm />', () => {
   const facultativeRanking = {
     id: '14',
     type: 'ranking',
+    __typename: 'MultipleChoiceQuestion',
     title: 'Nelson Monfort parle-t-il:',
     number: 6,
     helpText: 'Merci de répondre sincèrement',
