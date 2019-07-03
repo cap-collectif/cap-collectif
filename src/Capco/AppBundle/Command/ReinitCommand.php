@@ -76,8 +76,11 @@ use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
+use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCountDataLoader;
 
 class ReinitCommand extends ContainerAwareCommand
 {
@@ -143,12 +146,6 @@ class ReinitCommand extends ContainerAwareCommand
         $elasticsearchListener = $this->getContainer()->get(ElasticsearchDoctrineListener::class);
         $publishableListener = $this->getContainer()->get(DoctrineListener::class);
 
-        // Disable some dataloader cache
-        $stepContributions = $this->getContainer()->get(StepContributionsDataLoader::class);
-        $stepContributions->disableCache();
-        $proposalFormProposals = $this->getContainer()->get(ProposalFormProposalsDataLoader::class);
-        $proposalFormProposals->disableCache();
-
         $eventManager->removeEventListener(
             $elasticsearchListener->getSubscribedEvents(),
             $elasticsearchListener
@@ -160,6 +157,21 @@ class ReinitCommand extends ContainerAwareCommand
             $publishableListener
         );
         $output->writeln('Disabled <info>' . \get_class($publishableListener) . '</info>.');
+
+        // Disable some dataloader cache
+        $stepContributions = $this->getContainer()->get(StepContributionsDataLoader::class);
+        $stepContributions->disableCache();
+        $proposalFormProposals = $this->getContainer()->get(ProposalFormProposalsDataLoader::class);
+        $proposalFormProposals->disableCache();
+        $collectStepContributionsCount = $this->getContainer()->get(CollectStepContributorCountDataLoader::class);
+        $collectStepContributionsCount->disableCache();
+        $stepVotesCount = $this->getContainer()->get(StepVotesCountDataLoader::class);
+        $stepVotesCount->disableCache();
+
+        $output->writeln('Disabled <info>' . \get_class($stepContributions) . '</info>.');
+        $output->writeln('Disabled <info>' . \get_class($proposalFormProposals) . '</info>.');
+        $output->writeln('Disabled <info>' . \get_class($collectStepContributionsCount) . '</info>.');
+        $output->writeln('Disabled <info>' . \get_class($stepVotesCount) . '</info>.');
 
         $this->createDatabase($output);
         if ($input->getOption('migrate')) {
@@ -179,16 +191,16 @@ class ReinitCommand extends ContainerAwareCommand
             ->getManager()
             ->clear();
 
+        $this->recalculateCounters($output);
+
+        $output->writeln('<info>Counters updated !</info>');
+
         $this->populateElasticsearch($output);
 
         $this->getContainer()
             ->get('doctrine')
             ->getManager()
             ->clear();
-
-        $this->recalculateCounters($output);
-
-        $output->writeln('<info>Counters updated !</info>');
 
         $this->updateSyntheses($output);
 
@@ -366,9 +378,17 @@ class ReinitCommand extends ContainerAwareCommand
             ],
             $output
         );
+        // /!\ Do not use create --populate
+        // Because for correct counters value we need to query ES
         $this->runCommands(
             [
-                'capco:es:create' => ['--quiet' => true, '--no-debug' => true, '--populate' => true]
+                'capco:es:create' => ['--quiet' => true, '--no-debug' => true]
+            ],
+            $output
+        );
+        $this->runCommands(
+            [
+                'capco:es:populate' => ['--quiet' => true, '--no-debug' => true]
             ],
             $output
         );

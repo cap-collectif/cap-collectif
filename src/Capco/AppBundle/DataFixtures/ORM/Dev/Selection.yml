@@ -3,46 +3,57 @@ Capco\AppBundle\Entity\Selection:
     proposal: '@proposal1'
     selectionStep: '@selectionstep1'
     status: '@status4'
-    createdAt: <(new \DateTime('yesterday'))>
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection2:
     proposal: '@proposal2'
     selectionStep: '@selectionstep1'
     status: '@status5'
-    createdAt: <(new \DateTime('yesterday'))>
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection3:
     proposal: '@proposal2'
     selectionStep: '@selectionstep2'
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection4:
     proposal: '@proposal3'
     selectionStep: '@selectionstep1'
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection5:
     proposal: '@proposal7'
     selectionStep: '@selectionstep4'
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection7:
     proposal: '@proposal8'
     selectionStep: '@selectionstep4'
-    createdAt: <(new \DateTime('yesterday'))>
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection9:
     proposal: '@proposal9'
     selectionStep: '@selectionstep4'
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection11:
     proposal: '@proposal10'
     selectionStep: '@selectionstep6'
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection12:
     proposal: '@proposal11'
     selectionStep: '@selectionstep3'
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection13:
     proposal: '@proposal16'
     selectionStep: '@selectionstep5'
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection14:
     proposal: '@proposal15'
     selectionStep: '@selectionstep5'
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection15:
     proposal: '@proposal17'
     selectionStep: '@selectionstep8'
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection16:
     proposal: '@proposal18'
     selectionStep: '@selectionstep8'
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
   selection17:
     proposal: '@question1'
     selectionStep: '@selectionQuestionStepVoteClassement'
+    createdAt: <(new \DateTime('2017-02-01 00:05:00'))>

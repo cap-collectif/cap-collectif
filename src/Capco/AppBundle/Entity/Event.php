@@ -484,7 +484,7 @@ class Event implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchWithAuthor'];
+        return ['Elasticsearch', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
     }
 
     public function viewerCanSeeInBo($user = null): bool

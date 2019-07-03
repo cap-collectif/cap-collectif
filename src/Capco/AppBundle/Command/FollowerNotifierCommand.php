@@ -43,26 +43,18 @@ class FollowerNotifierCommand extends Command
                 'time',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'The relative time you want to send email.'
+                '/!\ Should be used for CI only /!\ .The relative time you want to send email.',
+                'yesterday'
             )
-            ->setDescription('Send email to followers');
+            ->setDescription('Send an email to followers');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $followedProposalsByUserId = [];
-
         $relativeTime = $input->getOption('time');
 
-        if ($relativeTime === null) {
-            $relativeTime = 'yesterday';
-        }
-
-        try {
-            $followedProposalsByUserId = $this->proposalActivitiesResolver->getFollowedByUserId();
-        } catch (\RuntimeException $e) {
-            $output->writeln('<error>' . $e->getMessage() . '</error>');
-        }
+        $followedProposalsByUserId = $this->proposalActivitiesResolver->getFollowedByUserId();
 
         $proposalActivities = $this->proposalActivitiesResolver->getActivitiesByRelativeTime(
             $relativeTime
@@ -77,11 +69,7 @@ class FollowerNotifierCommand extends Command
 
         $followersWithOpinion = [];
 
-        try {
-            $followersWithOpinion = $this->opinionActivitiesResolver->getFollowedByUserId();
-        } catch (\RuntimeException $e) {
-            $output->writeln('<error>' . $e->getMessage() . '</error>');
-        }
+        $followersWithOpinion = $this->opinionActivitiesResolver->getFollowedByUserId();
 
         $opinionActivities = $this->opinionActivitiesResolver->getActivitiesByRelativeTime(
             $relativeTime
@@ -96,6 +84,8 @@ class FollowerNotifierCommand extends Command
             $followedProposalsActivitiesByUserId,
             $followedOpinionsActivitiesByUserId
         );
+
+        $this->followerNotifier->setSendAt($relativeTime);
 
         foreach ($followedActivities as $userId => $activities) {
             $this->followerNotifier->onReportActivities($activities);
