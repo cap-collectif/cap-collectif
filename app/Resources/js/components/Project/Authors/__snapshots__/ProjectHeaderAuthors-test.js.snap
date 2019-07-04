@@ -29,9 +29,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly 1`] = `
       }
     />
   </div>
-  <div
-    className="d-flex fd-column"
-  >
+  <ProjectHeaderAuthors__AuthorsContainer>
     <ProjectHeaderAuthors__AuthorsButton
       className="ml-5 p-0 font-weight-bold"
       onClick={[Function]}
@@ -52,6 +50,6 @@ exports[`<ProjectHeaderAuthors /> renders correctly 1`] = `
         year="numeric"
       />
     </span>
-  </div>
+  </ProjectHeaderAuthors__AuthorsContainer>
 </ProjectHeaderAuthors__Container>
 `;

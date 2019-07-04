@@ -18,7 +18,7 @@ type State = {|
 |};
 
 const Container = styled.div.attrs({})`
-  display: flex;
+  display: flex !important;
 `;
 
 const AuthorsButton = styled.button.attrs({})`
@@ -26,6 +26,11 @@ const AuthorsButton = styled.button.attrs({})`
   border: none;
   background: none;
   text-align: left;
+`;
+
+const AuthorsContainer = styled.div.attrs({})`
+  display: flex !important;
+  flex-direction: column;
 `;
 
 const getAuthorCredits = (authors: $ReadOnlyArray<Object>) => {
@@ -92,7 +97,7 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
             onClick={this.handleClickModal}
           />
         </div>
-        <div className="d-flex fd-column">
+        <AuthorsContainer>
           <AuthorsButton className="ml-5 p-0 font-weight-bold" onClick={this.handleClickModal}>
             {getAuthorCredits(project.authors)}
           </AuthorsButton>
@@ -106,7 +111,7 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
               year="numeric"
             />
           </span>
-        </div>
+        </AuthorsContainer>
       </Container>
     );
   }
