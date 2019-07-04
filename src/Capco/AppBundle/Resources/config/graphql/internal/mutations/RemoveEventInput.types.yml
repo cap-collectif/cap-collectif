@@ -6,4 +6,4 @@ RemoveEventInput:
     fields:
       eventId:
         type: 'ID!'
-        description: 'The ID of the event'
+        description: 'ID of an Event to delete.'

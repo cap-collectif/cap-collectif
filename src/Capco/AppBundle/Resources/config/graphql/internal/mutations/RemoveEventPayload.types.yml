@@ -4,4 +4,5 @@ RemoveEventPayload:
     description: 'Remove an event'
     fields:
       deletedEventId:
-        type: 'ID!'
+        type: 'ID'
+        description: 'ID of Event to deleted.'
