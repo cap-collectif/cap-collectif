@@ -17,29 +17,11 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MultipleChoiceQuestionType extends AbstractType
+class MultipleChoiceQuestionType extends AbstractQuestionType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('id');
-        $builder->add('temporaryId', TextType::class);
-        $builder->add('title', PurifiedTextType::class, [
-            'strip_tags' => true,
-            'purify_html' => true,
-            'purify_html_profile' => 'default',
-        ]);
-        $builder->add('helpText', PurifiedTextType::class, [
-            'strip_tags' => true,
-            'purify_html' => true,
-            'purify_html_profile' => 'default',
-        ]);
-        $builder->add('description', TextType::class, [
-            'purify_html' => true,
-            'purify_html_profile' => 'default',
-        ]);
-        $builder->add('private', CheckboxType::class);
-        $builder->add('required', CheckboxType::class);
-        $builder->add('type', IntegerType::class);
+        parent::buildForm($builder, $options);
         $builder->add('choices', CollectionType::class, [
             'allow_add' => true,
             'allow_delete' => true,
@@ -48,16 +30,6 @@ class MultipleChoiceQuestionType extends AbstractType
             'delete_empty' => function (QuestionChoice $questionChoice = null) {
                 return null === $questionChoice || empty($questionChoice->getTitle());
             },
-        ]);
-        $builder->add('alwaysJumpDestinationQuestion', RelayNodeType::class, ['required' => false, 'class' => AbstractQuestion::class]);
-        $builder->add('jumps', CollectionType::class, [
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => false,
-            'entry_type' => LogicJumpType::class,
-            'delete_empty' => static function (LogicJump $jump = null) {
-                return null === $jump || (null === $jump->getOrigin() && null === $jump->getDestination());
-            }
         ]);
         $builder->add('randomQuestionChoices', CheckboxType::class);
         $builder->add('otherAllowed', CheckboxType::class);

@@ -2,50 +2,20 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
-use Capco\AppBundle\Form\Type\RelayNodeType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class MediaQuestionType extends AbstractType
+class MediaQuestionType extends AbstractQuestionType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('id');
-        $builder->add('temporaryId', TextType::class);
-        $builder->add('title', PurifiedTextType::class, [
-            'strip_tags' => true,
-
-            'purify_html' => true,
-            'purify_html_profile' => 'default',
-        ]);
-        $builder->add('helpText', PurifiedTextType::class, [
-            'strip_tags' => true,
-
-            'purify_html' => true,
-            'purify_html_profile' => 'default',
-        ]);
+        parent::buildForm($builder, $options);
         $builder->add('description', PurifiedTextType::class, [
             'strip_tags' => true,
             'purify_html' => true,
             'purify_html_profile' => 'default',
-        ]);
-        $builder->add('private', CheckboxType::class);
-        $builder->add('required', CheckboxType::class);
-        $builder->add('type', IntegerType::class);
-        $builder->add('alwaysJumpDestinationQuestion', RelayNodeType::class, ['required' => false, 'class' => AbstractQuestion::class]);
-        $builder->add('jumps', CollectionType::class, [
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => false,
-            'entry_type' => LogicJumpType::class,
         ]);
     }
 
