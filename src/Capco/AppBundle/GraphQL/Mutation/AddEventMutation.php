@@ -44,14 +44,14 @@ class AddEventMutation implements MutationInterface
     {
         $values = $input->getRawArguments();
 
-        /** @var User $user */
-        $user = isset($values['author'])
+        /** @var User $author */
+        $author = isset($values['author'])
             ? $this->globalIdResolver->resolve($values['author'], $viewer)
             : null;
 
         // admin or superAdmin can set other user as author
-        if ($user && ($viewer->isAdmin() || $viewer->isSuperAdmin())) {
-            $event = (new Event())->setAuthor($user);
+        if ($author && ($viewer->isAdmin() || $viewer->isSuperAdmin())) {
+            $event = (new Event())->setAuthor($author);
             unset($values['author']);
         } else {
             $event = (new Event())->setAuthor($viewer);
@@ -61,11 +61,6 @@ class AddEventMutation implements MutationInterface
         $form->submit($values, false);
 
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' ' . $form->getErrors(true)->__toString());
-            $this->logger->debug(
-                __METHOD__ . ' : extra data = ' . var_export($form->getExtraData(), true)
-            );
-
             throw GraphQLException::fromFormErrors($form);
         }
 

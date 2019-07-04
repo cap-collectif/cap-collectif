@@ -105,7 +105,6 @@ input AddEventInput {
 
   # Whether or not this event is published.
   enabled: Boolean = true
-  clientMutationId: String
 
   # ID of an Event to delete.
   media: ID
@@ -145,6 +144,7 @@ input AddEventInput {
 
   # Allow registration for the event
   registrationEnable: Boolean! = false
+  clientMutationId: String
 }
 
 type AddEventPayload {
@@ -670,10 +670,6 @@ input ChangeEventInput {
 
   # Whether or not this event is published.
   enabled: Boolean = true
-  clientMutationId: String
-
-  # The id of the event to update.
-  id: ID!
 
   # ID of an Event to delete.
   media: ID
@@ -713,6 +709,10 @@ input ChangeEventInput {
 
   # Allow registration for the event
   registrationEnable: Boolean! = false
+  clientMutationId: String
+
+  # The id of the event to update.
+  id: ID!
 }
 
 type ChangeEventPayload {

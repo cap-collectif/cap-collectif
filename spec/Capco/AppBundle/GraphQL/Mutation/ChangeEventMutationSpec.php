@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
@@ -23,9 +24,10 @@ class ChangeEventMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         FormFactory $formFactory,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        Indexer $indexer
     ) {
-        $this->beConstructedWith($globalIdResolver, $em, $formFactory, $logger);
+        $this->beConstructedWith($globalIdResolver, $em, $formFactory, $logger, $indexer);
     }
 
     public function it_is_initializable()
@@ -68,7 +70,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $globalIdResolver->resolve('base64id', $viewer)->willReturn(null);
         $this->__invoke($arguments, $viewer)->shouldBe([
             'eventEdge' => null,
-            'userErrors' => [['message' => 'Could not find your event.']],
+            'userErrors' => [['message' => 'Could not find your event.']]
         ]);
     }
 
@@ -94,7 +96,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
 
         $this->shouldThrow(GraphQLException::fromString('Invalid data.'))->during('__invoke', [
             $arguments,
-            $viewer,
+            $viewer
         ]);
     }
 }

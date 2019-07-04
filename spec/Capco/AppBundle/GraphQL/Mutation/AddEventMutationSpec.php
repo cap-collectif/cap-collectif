@@ -13,18 +13,16 @@ use Capco\AppBundle\Form\EventType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Form\FormInterface;
 use Capco\AppBundle\GraphQL\Mutation\AddEventMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class AddEventMutationSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         EntityManagerInterface $em,
         FormFactory $formFactory,
         LoggerInterface $logger,
@@ -34,12 +32,12 @@ class AddEventMutationSpec extends ObjectBehavior
         $this->beConstructedWith($em, $formFactory, $logger, $globalIdResolver, $indexer);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(AddEventMutation::class);
     }
 
-    function it_persists_new_event(
+    public function it_persists_new_event(
         EntityManagerInterface $em,
         FormFactory $formFactory,
         Arg $arguments,
@@ -48,10 +46,9 @@ class AddEventMutationSpec extends ObjectBehavior
         Indexer $indexer,
         Event $event
     ) {
-        $values = ["body" => "My body"];
+        $values = ['body' => 'My body'];
 
         $event->getBody()->willReturn('My body');
-        $event->getId()->willReturn('eventPhpSpec');
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(false);
@@ -68,7 +65,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $em->persist(Argument::type(Event::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
-        $indexer->index(\get_class($event->getWrappedObject()), 'eventPhpSpec')->shouldBeCalled();
+        // we cant moke ID with phpSpec, but in reality there is an ID
+        $indexer->index(Event::class, null)->shouldBeCalled();
         $indexer->finishBulk()->shouldBeCalled();
 
         $payload = $this->__invoke($arguments, $viewer);
@@ -77,29 +75,39 @@ class AddEventMutationSpec extends ObjectBehavior
         $payload['eventEdge']->shouldHaveType(Edge::class);
         $payload['eventEdge']->node->shouldHaveType(Event::class);
         $payload['eventEdge']->node->getAuthor()->shouldBe($viewer);
+        $payload['eventEdge']->node->getAuthor()->shouldBe($viewer);
     }
 
-    function it_throws_error_on_invalid_form(
+    public function it_throws_error_on_invalid_form(
         Arg $arguments,
         FormFactory $formFactory,
-        Form $form,
+        FormInterface $form,
         FormError $error,
         User $viewer,
         Event $event
     ) {
-        $values = ["body" => ""];
+        $values = ['body' => ''];
         $arguments->getRawArguments()->willReturn($values);
-        $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
 
-        $form->submit($values, false)->willReturn(null);
+        $viewer->getId()->willReturn('iMTheAuthor');
+        $viewer->getUsername()->willReturn('My username is toto');
+        $viewer->isAdmin()->willReturn(false);
+        $viewer->isSuperAdmin()->willReturn(false);
+
+        $event->setAuthor($viewer)->willReturn($event);
+        $event->getAuthor()->willReturn($viewer);
+
         $error->getMessage()->willReturn('Invalid data.');
         $form->getErrors()->willReturn([$error]);
         $form->all()->willReturn([]);
         $form->isValid()->willReturn(false);
+        $form->submit($values, false)->willReturn(null);
+        $form->getExtraData()->willReturn([]);
 
-        $this->shouldThrow(GraphQLException::fromString('Invalid data.'))->during(
-            '__invoke',
-            [$arguments, $viewer]
-        );
+        $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
+        $this->shouldThrow(GraphQLException::fromString('Invalid data.'))->during('__invoke', [
+            $arguments,
+            $viewer
+        ]);
     }
 }

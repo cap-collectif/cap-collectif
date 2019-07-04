@@ -7,7 +7,6 @@ use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\EventType;
-use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -15,6 +14,7 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class ChangeEventMutation implements MutationInterface
 {
@@ -27,7 +27,7 @@ class ChangeEventMutation implements MutationInterface
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         Indexer $indexer
     ) {
@@ -51,29 +51,25 @@ class ChangeEventMutation implements MutationInterface
             ];
         }
         unset($values['id']);
-        $newAuthor = null;
-        if (isset($values['author'])) {
-            /** @var User $newAuthor */
-            $newAuthor = $this->globalIdResolver->resolve($values['author'], $viewer);
+        /** @var User $newAuthor */
+        $newAuthor = isset($values['author'])
+            ? $this->globalIdResolver->resolve($values['author'], $viewer)
+            : null;
 
-            if (
-                $viewer->isAdmin() ||
-                ($viewer->isSuperAdmin() && $newAuthor && $newAuthor !== $event->getAuthor())
-            ) {
-                $event->setAuthor($newAuthor);
-                unset($values['author']);
-            }
+        // admin and superAdmin can change the event's author
+        if (
+            $newAuthor &&
+            ($viewer->isAdmin() || $viewer->isSuperAdmin()) &&
+            $newAuthor !== $event->getAuthor()
+        ) {
+            $event->setAuthor($newAuthor);
+            unset($values['author']);
         }
 
         $form = $this->formFactory->create(EventType::class, $event);
         $form->submit($values, false);
 
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' ' . $form->getErrors()->__toString());
-            $this->logger->debug(
-                __METHOD__ . ' : extra data = ' . var_export($form->getExtraData(), true)
-            );
-
             throw GraphQLException::fromFormErrors($form);
         }
 
