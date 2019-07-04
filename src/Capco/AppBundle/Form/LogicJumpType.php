@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\AbstractLogicJumpCondition;
 use Capco\AppBundle\Entity\LogicJump;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Form\Type\RelayNodeType;
@@ -22,6 +23,9 @@ class LogicJumpType extends AbstractType
             'allow_delete' => true,
             'by_reference' => false,
             'entry_type' => LogicJumpConditionType::class,
+            'delete_empty' => static function (AbstractLogicJumpCondition $condition = null) {
+                return null === $condition || (null === $condition->getOperator());
+            }
         ]);
     }
 

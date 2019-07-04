@@ -23,14 +23,14 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
     const { fields, questions, member, formName, currentJump } = this.props;
     const currentQuestion = questions.find(question => question.id === currentJump.origin.id);
     const isMultipleChoiceQuestion = currentQuestion && currentQuestion.__typename === "MultipleChoiceQuestion";
-    const firstMultipleChoicQuestion = questions.find(question => question.__typename === "MultipleChoiceQuestion")
+    const firstMultipleChoiceQuestion = questions.find(question => question.__typename === "MultipleChoiceQuestion")
     const defaultCondition = {
       question: {
         id: currentJump.origin.id,
       },
       value: currentQuestion && isMultipleChoiceQuestion ?
-        currentQuestion.choices && currentQuestion.choices[0] : firstMultipleChoicQuestion ?
-          firstMultipleChoicQuestion.choices && firstMultipleChoicQuestion.choices[0] : null,
+        currentQuestion.choices && currentQuestion.choices[0] : firstMultipleChoiceQuestion ?
+          firstMultipleChoiceQuestion.choices && firstMultipleChoiceQuestion.choices[0] : null,
       operator: 'IS',
     };
     return (

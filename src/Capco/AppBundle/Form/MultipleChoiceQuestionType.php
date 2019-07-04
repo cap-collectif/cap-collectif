@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AdminBundle\Form\QuestionValidationRuleType;
+use Capco\AppBundle\Entity\LogicJump;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\QuestionChoice;
@@ -54,6 +55,9 @@ class MultipleChoiceQuestionType extends AbstractType
             'allow_delete' => true,
             'by_reference' => false,
             'entry_type' => LogicJumpType::class,
+            'delete_empty' => static function (LogicJump $jump = null) {
+                return null === $jump || (null === $jump->getOrigin() && null === $jump->getDestination());
+            }
         ]);
         $builder->add('randomQuestionChoices', CheckboxType::class);
         $builder->add('otherAllowed', CheckboxType::class);

@@ -84,7 +84,7 @@ trait QuestionPersisterTrait
         // we must reorder arguments datas to match database order (used in the symfony form)
         usort(
             $arguments['questions'],
-            function ($a, $b) use ($questionsOrderedByIdInDb) {
+            static function ($a, $b) use ($questionsOrderedByIdInDb) {
                 if (isset($a['question']['id'], $b['question']['id'])) {
                     return array_search($a['question']['id'], $questionsOrderedByIdInDb, false) >
                         array_search($b['question']['id'], $questionsOrderedByIdInDb, false);
@@ -96,9 +96,12 @@ trait QuestionPersisterTrait
         );
 
         foreach ($entity->getQuestions() as $position => $questionnaireQuestion) {
+            // Handle questions deletions
+            /** @var AbstractQuestion $realQuestion */
+            $realQuestion = $questionnaireQuestion->getQuestion();
             if (
             !\in_array(
-                $questionnaireQuestion->getQuestion()->getId(),
+                $realQuestion->getId(),
                 $argumentsQuestionsId,
                 false
             )
@@ -106,15 +109,59 @@ trait QuestionPersisterTrait
                 // Put the title to null to be delete from delete_empty CollectionType field
                 $deletedQuestion = [
                     'question' => [
-                        'id' => $questionnaireQuestion->getQuestion()->getId(),
-                        'type' => $questionnaireQuestion->getQuestion()->getType(),
+                        'id' => $realQuestion->getId(),
+                        'type' => $realQuestion->getType(),
                         'title' => null,
                     ],
                 ];
                 // Inject back the deleted question into the arguments question array
                 array_splice($arguments['questions'], $position, 0, [$deletedQuestion]);
             }
+
+            $questions = array_map(static function (array $question) {
+                return $question['question'];
+            }, $arguments['questions']);
+
+            $realArgumentQuestion = array_reduce($questions, static function (?array $acc, array $question) use ($realQuestion) {
+                if (((int)$question['id']) === $realQuestion->getId()) {
+                    $acc = $question;
+                }
+                return $acc;
+            });
+
+            // Handle Question's logic jumps deletions
+            $argumentsJumpsIds = array_map(static function(array $jump) {
+                return $jump['id'] ?? null;
+            }, $realArgumentQuestion['jumps']);
+            foreach ($realQuestion->getJumps() as $jumpPosition => $jump) {
+                // Handle Question's logic jumps conditions deletions
+                if (isset($realArgumentQuestion['jumps'][$jumpPosition])) {
+                    $argumentsJumpConditionsIds = array_map(static function(array $condition) {
+                        return $condition['id'] ?? null;
+                    }, $realArgumentQuestion['jumps'][$jumpPosition]['conditions']);
+                    foreach ($jump->getConditions() as $conditionPosition => $condition) {
+                        if (\in_array($condition->getId(), $argumentsJumpConditionsIds, true) === false) {
+                            $deletedJumpCondition = [
+                                'id' => $condition->getId(),
+                                'operator' => null
+                            ];
+                            // Inject back the deleted question's logic jump into the arguments question jumps array
+                            array_splice($arguments['questions'][$position]['question']['jumps'][$jumpPosition]['conditions'], $conditionPosition, 0, [$deletedJumpCondition]);
+                        }
+                    }
+                }
+                if (\in_array($jump->getId(), $argumentsJumpsIds, true) === false) {
+                    $deletedJump = [
+                        'id' => $jump->getId(),
+                        'origin' => null,
+                        'destination' => null,
+                    ];
+                    // Inject back the deleted question's logic jump into the arguments question jumps array
+                    array_splice($arguments['questions'][$position]['question']['jumps'], $jumpPosition, 0, [$deletedJump]);
+                }
+            }
         }
+
         try {
             $form->submit($arguments, false);
         } catch (\RuntimeException $exception) {

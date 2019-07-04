@@ -146,7 +146,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     /**
      * @return Collection|LogicJump[]
      */
-    public function getJumps(): ?Collection
+    public function getJumps(): Collection
     {
         return $this->jumps;
     }
@@ -170,6 +170,16 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
                 $jump->setOrigin(null);
             }
         }
+
+        return $this;
+    }
+
+    public function setJumps(Collection $jumps): self
+    {
+        foreach ($jumps as $jump) {
+            $jump->setOrigin($this);
+        }
+        $this->jumps = $jumps;
 
         return $this;
     }

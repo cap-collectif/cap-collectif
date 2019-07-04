@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { formValueSelector, Field, arrayRemove } from 'redux-form';
+import { formValueSelector, Field, arrayRemove, change } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import type { GlobalState, Dispatch } from '../../types';
 import component from '../Form/Field';
@@ -28,7 +28,17 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
   };
 
   handleQuestionChange = (e: $FlowFixMe) => {
-    this.setState({ currentQuestion: e.target.value });
+    this.setState({ currentQuestion: e.target.value }, () => {
+      const { currentQuestion } = this.state;
+      const { questions, member, formName, dispatch } = this.props;
+      const question = questions.find(q => q.id === currentQuestion);
+
+      if (question && question.choices) {
+        dispatch(change(formName,`${member}.question.title`, question.title));
+        dispatch(change(formName,`${member}.value.id`, question.choices[0].id));
+        dispatch(change(formName,`${member}.value.title`, question.choices[0].title));
+      }
+    });
   };
 
   displayValueList = (

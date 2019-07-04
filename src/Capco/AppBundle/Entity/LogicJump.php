@@ -27,7 +27,7 @@ class LogicJump
     protected $destination;
 
     /**
-     * @ORM\OneToMany(targetEntity="AbstractLogicJumpCondition", mappedBy="jump", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="AbstractLogicJumpCondition", mappedBy="jump", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $conditions;
 
