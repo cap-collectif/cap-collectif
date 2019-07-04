@@ -39,7 +39,7 @@ Object {
             ],
           },
           "twitterUrl": null,
-          "updatedAt": "2019-07-03 17:02:04",
+          "updatedAt": null,
           "url": "https://capco.test/profile/adminpro",
           "userType": Object {
             "name": "Citoyen",
