@@ -6,7 +6,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import DefaultAvatar from './DefaultAvatar';
 import type { State, FeatureToggles } from '../../types';
 
-type Props = {
+type Props = {|
   user: ?{
     +username: string,
     +media: ?{
@@ -19,11 +19,11 @@ type Props = {
   className?: string,
   defaultAvatar?: ?string,
   style?: any,
-  onBlur?: Function,
-  onFocus?: Function,
-  onMouseOver?: Function,
-  onMouseOut?: Function,
-};
+  onBlur?: () => void,
+  onFocus?: () => void,
+  onMouseOver?: () => void,
+  onMouseOut?: () => void,
+|};
 
 export class UserAvatar extends React.Component<Props> {
   static defaultProps = {
@@ -45,7 +45,7 @@ export class UserAvatar extends React.Component<Props> {
       return (
         <img
           src={user.media.url}
-          alt=""
+          alt={user.username}
           className="img-circle object-cover user-avatar"
           style={{ width: mediaSize, height: mediaSize }}
         />
@@ -56,7 +56,7 @@ export class UserAvatar extends React.Component<Props> {
       return (
         <img
           src={defaultAvatar}
-          alt=""
+          alt={user.username}
           className="img-circle object-cover user-avatar"
           style={{ width: mediaSize, height: mediaSize }}
         />

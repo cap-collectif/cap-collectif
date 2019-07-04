@@ -10,9 +10,9 @@ import type {
 } from '~relay/ProjectHeaderAuthorsViewQuery.graphql';
 import ProjectHeaderAuthors from './ProjectHeaderAuthors';
 
-export type Props = {
+export type Props = {|
   projectId: Uuid,
-};
+|};
 
 export const ProjectHeaderAuthorsView = (properties: Props) => {
   const { projectId } = properties;

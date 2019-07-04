@@ -1,6 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectHeaderAuthors /> renders correctly 1`] = `
+exports[`<ProjectHeaderAuthors /> renders correctly with 3 authors 1`] = `
+<ProjectHeaderAuthors__Container
+  id="project-header"
+>
+  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+    onClose={[Function]}
+    show={false}
+    users={
+      Array [
+        Object {
+          "$fragmentRefs": null,
+          "username": "toto",
+        },
+        Object {
+          "$fragmentRefs": null,
+          "username": "tota",
+        },
+        Object {
+          "$fragmentRefs": null,
+          "username": "titi",
+        },
+      ]
+    }
+  />
+  <div>
+    <ForwardRef(Relay(UserAvatarList))
+      onClick={[Function]}
+      users={
+        Array [
+          Object {
+            "$fragmentRefs": null,
+            "username": "toto",
+          },
+          Object {
+            "$fragmentRefs": null,
+            "username": "tota",
+          },
+          Object {
+            "$fragmentRefs": null,
+            "username": "titi",
+          },
+        ]
+      }
+    />
+  </div>
+  <ProjectHeaderAuthors__AuthorsContainer>
+    <ProjectHeaderAuthors__AuthorsButton
+      className="ml-5 p-0 font-weight-bold"
+      id="authors-credit"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="project-authors"
+        values={
+          Object {
+            "authorName": "toto",
+            "number": 2,
+          }
+        }
+      />
+    </ProjectHeaderAuthors__AuthorsButton>
+    <span
+      className="ml-5"
+    >
+      <FormattedDate
+        day="numeric"
+        hour="numeric"
+        minute="numeric"
+        month="long"
+        value={2019-05-18T07:57:30.000Z}
+        year="numeric"
+      />
+    </span>
+  </ProjectHeaderAuthors__AuthorsContainer>
+</ProjectHeaderAuthors__Container>
+`;
+
+exports[`<ProjectHeaderAuthors /> renders correctly with one author 1`] = `
 <ProjectHeaderAuthors__Container
   id="project-header"
 >
@@ -39,6 +116,113 @@ exports[`<ProjectHeaderAuthors /> renders correctly 1`] = `
         toto
       </span>
     </ProjectHeaderAuthors__AuthorsButton>
+    <span
+      className="ml-5"
+    >
+      <FormattedDate
+        day="numeric"
+        hour="numeric"
+        minute="numeric"
+        month="long"
+        value={2019-05-18T07:57:30.000Z}
+        year="numeric"
+      />
+    </span>
+  </ProjectHeaderAuthors__AuthorsContainer>
+</ProjectHeaderAuthors__Container>
+`;
+
+exports[`<ProjectHeaderAuthors /> renders correctly with two authors 1`] = `
+<ProjectHeaderAuthors__Container
+  id="project-header"
+>
+  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+    onClose={[Function]}
+    show={false}
+    users={
+      Array [
+        Object {
+          "$fragmentRefs": null,
+          "username": "toto",
+        },
+        Object {
+          "$fragmentRefs": null,
+          "username": "tota",
+        },
+      ]
+    }
+  />
+  <div>
+    <ForwardRef(Relay(UserAvatarList))
+      onClick={[Function]}
+      users={
+        Array [
+          Object {
+            "$fragmentRefs": null,
+            "username": "toto",
+          },
+          Object {
+            "$fragmentRefs": null,
+            "username": "tota",
+          },
+        ]
+      }
+    />
+  </div>
+  <ProjectHeaderAuthors__AuthorsContainer>
+    <ProjectHeaderAuthors__AuthorsButton
+      className="ml-5 p-0 font-weight-bold"
+      id="authors-credit"
+      onClick={[Function]}
+    >
+      <span>
+        toto
+         
+        <FormattedMessage
+          id="event.and"
+          values={Object {}}
+        />
+         
+        tota
+      </span>
+    </ProjectHeaderAuthors__AuthorsButton>
+    <span
+      className="ml-5"
+    >
+      <FormattedDate
+        day="numeric"
+        hour="numeric"
+        minute="numeric"
+        month="long"
+        value={2019-05-18T07:57:30.000Z}
+        year="numeric"
+      />
+    </span>
+  </ProjectHeaderAuthors__AuthorsContainer>
+</ProjectHeaderAuthors__Container>
+`;
+
+exports[`<ProjectHeaderAuthors /> renders correctly without authors 1`] = `
+<ProjectHeaderAuthors__Container
+  id="project-header"
+>
+  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+    onClose={[Function]}
+    show={false}
+    users={Array []}
+  />
+  <div>
+    <ForwardRef(Relay(UserAvatarList))
+      onClick={[Function]}
+      users={Array []}
+    />
+  </div>
+  <ProjectHeaderAuthors__AuthorsContainer>
+    <ProjectHeaderAuthors__AuthorsButton
+      className="ml-5 p-0 font-weight-bold"
+      id="authors-credit"
+      onClick={[Function]}
+    />
     <span
       className="ml-5"
     >

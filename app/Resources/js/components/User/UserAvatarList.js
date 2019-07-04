@@ -7,11 +7,11 @@ import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import UserAvatar from './UserAvatar';
 import type { UserAvatarList_users } from '~relay/UserAvatarList_users.graphql';
 
-type Props = {
+type Props = {|
   users: UserAvatarList_users,
   max: number,
-  onClick?: Function,
-};
+  onClick?: () => void,
+|};
 
 const AvatarButton = styled.button.attrs({})`
   outline: none;

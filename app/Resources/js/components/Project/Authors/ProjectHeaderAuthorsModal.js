@@ -15,7 +15,7 @@ import type { ProjectHeaderAuthorsModal_users } from '~relay/ProjectHeaderAuthor
 
 type Props = {|
   show: boolean,
-  onClose: Function,
+  onClose: () => void,
   features: FeatureToggles,
   users: ProjectHeaderAuthorsModal_users,
 |};

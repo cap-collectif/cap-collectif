@@ -17,7 +17,6 @@ describe('<UserAvatar />', () => {
       },
       size: 16,
       className: 'mr-10',
-      anchor: true,
     };
     const wrapper = shallow(<UserAvatar {...props} />);
     expect(wrapper).toMatchSnapshot();
