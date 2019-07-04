@@ -70,7 +70,7 @@ Scenario: Admin wants to export collect steps
 
 @database
 Scenario: Admin wants to export questionnaire steps
-  Given I run "capco:export:questionnaire --snapshot"
+  Given I run "capco:export:questionnaire"
   Then the command exit code should be 0
   #
   # TODO use snapshots when it will be CSV files.

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Behat;
 
 use Alex\MailCatcher\Behat\MailCatcherContext as Base;
 use Capco\AppBundle\Helper\EnvHelper;
+use Caxy\HtmlDiff\HtmlDiff;
 
 class MailCatcherContext extends Base
 {
@@ -38,11 +39,12 @@ class MailCatcherContext extends Base
         $text = file_get_contents(__DIR__ . '/snapshots/' . $file);
 
         if (false === strpos($content, $text)) {
+            $diff = (new HtmlDiff($content, $text))->build();
+
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Unable to find text \"%s\" in current message:\n%s, if you want to update snapshots, use 'fab local.qa.snapshots:emails'.",
-                    $text,
-                    $message->getContent()
+                    "Snapshots didnt match \"%s\", if you want to update snapshots, use 'fab local.qa.snapshots:emails'.",
+                    $diff
                 )
             );
         }

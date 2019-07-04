@@ -42,12 +42,13 @@ def graphql_schemas(checkSame=False):
 
 @task(environments=['local'])
 def snapshots(emails=False):
+    env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     commands = [
         'capco:export:users --snapshot',
         'capco:export:consultation --snapshot',
         'capco:export:projects-contributors --snapshot',
         'capco:export:proposalStep --snapshot',
-        'capco:export:questionnaire --snapshot',
+        # 'capco:export:questionnaire --snapshot',
     ]
     extensions = [
         'csv',
@@ -56,6 +57,7 @@ def snapshots(emails=False):
     ]
 
     if emails:
+        local('rm -rf src/Capco/AppBundle/Behat/snapshots/*')
         env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p api --tags=snapshot', 'application', env.www_app)
         env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p e2e --tags=snapshot', 'application', env.www_app)
         env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p commands --tags=snapshot', 'application', env.www_app)
