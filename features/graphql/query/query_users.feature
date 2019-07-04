@@ -119,25 +119,25 @@ Scenario: GraphQL anonymous want to get users's comment votes count
             },
             {
               "node": {
+                "_id": "user_not_confirmed",
+                "commentVotes": {
+                  "totalCount": 0
+                }
+              }
+            },
+            {
+              "node": {
+                "_id": "user_not_confirmed_with_contribution",
+                "commentVotes": {
+                  "totalCount": 0
+                }
+              }
+            },
+            {
+              "node": {
                 "_id": "user10",
                 "commentVotes": {
                   "totalCount": 2
-                }
-              }
-            },
-            {
-              "node": {
-                "_id": "user100",
-                "commentVotes": {
-                  "totalCount": 0
-                }
-              }
-            },
-            {
-              "node": {
-                "_id": "user101",
-                "commentVotes": {
-                  "totalCount": 0
                 }
               }
             }
