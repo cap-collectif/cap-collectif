@@ -4,4 +4,4 @@ PreviewRemoveEventPayload:
     name: RemoveEventPayload
     fields:
       deletedEventId:
-        type: 'ID!'
+        type: 'ID'

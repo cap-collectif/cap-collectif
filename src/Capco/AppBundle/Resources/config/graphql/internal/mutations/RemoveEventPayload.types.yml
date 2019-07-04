@@ -1,6 +1,7 @@
 RemoveEventPayload:
   type: relay-mutation-payload
   config:
+    name: RemoveEventPayload
     description: 'Remove an event'
     fields:
       deletedEventId:

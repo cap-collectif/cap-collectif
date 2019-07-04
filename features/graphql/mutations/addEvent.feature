@@ -71,7 +71,7 @@ Scenario: Admin wants to add an event
                  "title":"Rencontre avec les habitants",
                  "body":"Tout le monde est invit\u00e9",
                  "author":{
-                    "_id":"userAdmin",
+                    "_id":"userAdmin"
                  },
                  "timeRange":{
                     "startAt":"2018-03-07 00:00:00",
@@ -92,7 +92,7 @@ Scenario: Admin wants to add an event
                  ],
                  "address":"25 rue Claude Tillier",
                  "link":"https:\/\/facebook.com\/inscrivez-vous-ici",
-                 "commentable":true,
+                 "commentable":false,
                  "zipCode":"75012",
                  "city":"Paris",
                  "country":"France"
