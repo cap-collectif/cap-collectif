@@ -1,10 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
-<ReactRelayQueryRenderer
-  environment={"RelayModernEnvironment()"}
-  query={[Function]}
-  render={[Function]}
-  variables={Object {}}
-/>
+<Fragment>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={[Function]}
+    render={[Function]}
+    variables={Object {}}
+  />
+  <Connect(SSOByPassAuthForm) />
+</Fragment>
 `;

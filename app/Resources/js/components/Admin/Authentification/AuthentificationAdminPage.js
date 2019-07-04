@@ -6,6 +6,7 @@ import ShieldAdminForm from './ShieldAdminForm';
 import type { AuthentificationAdminPageQueryResponse } from '~relay/AuthentificationAdminPageQuery.graphql';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import SSOByPassAuthForm from './SSOByPassAuthForm';
 
 const component = ({
   error,
@@ -29,18 +30,21 @@ const component = ({
 export class AuthentificationAdminPage extends React.Component<{}> {
   render() {
     return (
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
-          query AuthentificationAdminPageQuery {
-            shieldAdminForm {
-              ...ShieldAdminForm_shieldAdminForm
+      <>
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query AuthentificationAdminPageQuery {
+              shieldAdminForm {
+                ...ShieldAdminForm_shieldAdminForm
+              }
             }
-          }
-        `}
-        variables={{}}
-        render={component}
-      />
+          `}
+          variables={{}}
+          render={component}
+        />
+        <SSOByPassAuthForm />
+      </>
     );
   }
 }
