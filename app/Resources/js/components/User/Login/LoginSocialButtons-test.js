@@ -7,7 +7,7 @@ import { features } from '../../../redux/modules/default';
 
 describe('<LoginSocialButtons />', () => {
   const props = {
-    features: { ...features },
+    features,
   };
   const propsWithFeatureLoginGoogleActivated = {
     features: {
@@ -43,6 +43,17 @@ describe('<LoginSocialButtons />', () => {
     },
   };
 
+  const propsWithAllLoginFeaturesLoginActivatedAndORSperatorDisabled = {
+    features: {
+      ...features,
+      login_gplus: true,
+      login_facebook: true,
+      login_saml: true,
+      login_openid: true,
+      sso_by_pass_auth: true,
+    },
+  };
+
   it('renders nothing', () => {
     const wrapper = shallow(<LoginSocialButtons {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -70,6 +81,13 @@ describe('<LoginSocialButtons />', () => {
 
   it('renders all buttons', () => {
     const wrapper = shallow(<LoginSocialButtons {...propsWithAllLoginFeaturesLoginActivated} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders without OR separator', () => {
+    const wrapper = shallow(
+      <LoginSocialButtons {...propsWithAllLoginFeaturesLoginActivatedAndORSperatorDisabled} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

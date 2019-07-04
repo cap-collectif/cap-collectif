@@ -7,14 +7,15 @@ import LoginForm from './LoginForm';
 import type { State } from '../../../types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
-type Props = {
+type Props = {|
   textTop: string,
   textBottom: string,
-};
+  byPassAuth: boolean,
+|};
 
 export class LoginBox extends Component<Props> {
   render() {
-    const { textTop, textBottom } = this.props;
+    const { textTop, textBottom, byPassAuth } = this.props;
     return (
       <div>
         {textTop && (
@@ -23,7 +24,7 @@ export class LoginBox extends Component<Props> {
           </Alert>
         )}
         <LoginSocialButtons />
-        <LoginForm />
+        {!byPassAuth && <LoginForm />}
         {textBottom && <WYSIWYGRender className="text-center excerpt mt-15" value={textBottom} />}
       </div>
     );
@@ -33,6 +34,7 @@ export class LoginBox extends Component<Props> {
 const mapStateToProps = (state: State) => ({
   textTop: state.default.parameters['login.text.top'],
   textBottom: state.default.parameters['login.text.bottom'],
+  byPassAuth: state.default.features.sso_by_pass_auth || false,
 });
 
 export default connect(mapStateToProps)(LoginBox);

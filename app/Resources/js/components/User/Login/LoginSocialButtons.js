@@ -36,9 +36,11 @@ export class LoginSocialButtons extends React.Component<Props> {
         <GoogleLoginButton {...this.props} />
         <SamlLoginButton {...this.props} />
         <OpenIDLoginButton {...this.props} />
-        <p className="p--centered">
-          <span>{<FormattedMessage id="login.or" />}</span>
-        </p>
+        {!features.sso_by_pass_auth && (
+          <p className="p--centered">
+            <span>{<FormattedMessage id="login.or" />}</span>
+          </p>
+        )}
       </div>
     );
   }
