@@ -98,7 +98,10 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
           />
         </div>
         <AuthorsContainer>
-          <AuthorsButton className="ml-5 p-0 font-weight-bold" onClick={this.handleClickModal}>
+          <AuthorsButton
+            id="authors-credit"
+            className="ml-5 p-0 font-weight-bold"
+            onClick={this.handleClickModal}>
             {getAuthorCredits(project.authors)}
           </AuthorsButton>
           <span className="ml-5">
