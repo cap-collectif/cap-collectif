@@ -210,6 +210,17 @@ type Jump = {|
   +conditions: ?$ReadOnlyArray<?ConditionalJumpCondition>,
 |};
 
+export type QuestionChoice = {|
+  +id: string,
+  +title: string,
+  +description: ?string,
+  +color: ?QuestionChoiceColor,
+  +image: ?{|
+    +id: string,
+    +url: string,
+  |},
+|}
+
 // This is a cp/paster of
 // responsesHelper_question without $refType
 export type Question = {|
@@ -235,16 +246,7 @@ export type Question = {|
     +type: MultipleChoiceQuestionValidationRulesTypes,
     +number: number,
   |},
-  +choices?: ?$ReadOnlyArray<{|
-    +id: string,
-    +title: string,
-    +description: ?string,
-    +color: ?QuestionChoiceColor,
-    +image: ?{|
-      +id: string,
-      +url: string,
-    |},
-  |}>,
+  +choices?: ?$ReadOnlyArray<QuestionChoice>,
 |};
 export type Questions = $ReadOnlyArray<Question>;
 

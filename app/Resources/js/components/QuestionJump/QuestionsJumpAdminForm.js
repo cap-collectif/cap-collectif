@@ -110,8 +110,14 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
               normalize={val => (val !== '' ? val : null)}
               component={component}>
               <option value="" />
-              {questions.map((question, i) => (
-                <option value={question.id}>{`${i}. ${question.title}`}</option>
+              {questions
+                .filter(question => {
+                  // We should not display the always jump of a question when it is referecing itself
+                  // because an always jump could not redirect to itself
+                  return question.id && currentQuestion && question.id !== currentQuestion.id
+                })
+                .map((question, i) => (
+                <option value={question.id}>{`${i + 1}. ${question.title}`}</option>
               ))}
             </Field>
           </div>
