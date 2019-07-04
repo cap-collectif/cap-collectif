@@ -7,9 +7,7 @@ import { features } from '../../../redux/modules/default';
 
 describe('<SSOByPassAuthForm />', () => {
   const props = {
-    features: {
-      ...features,
-    },
+    features,
     onToggle: jest.fn(),
   };
 
