@@ -30,7 +30,7 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       >
         <UserAvatarDeprecated
           anchor={true}
-          className="mr-10"
+          className=""
           onBlur={[Function]}
           onFocus={[Function]}
           onMouseOut={[Function]}
@@ -131,7 +131,7 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       >
         <UserAvatarDeprecated
           anchor={true}
-          className="mr-10"
+          className=""
           onBlur={[Function]}
           onFocus={[Function]}
           onMouseOut={[Function]}
@@ -232,7 +232,7 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
       >
         <UserAvatarDeprecated
           anchor={true}
-          className="mr-10"
+          className=""
           onBlur={[Function]}
           onFocus={[Function]}
           onMouseOut={[Function]}

@@ -35,7 +35,7 @@ exports[`<UserAvatarDeprecated /> renders correctly user without avatar 1`] = `
   style={Object {}}
 >
   <DefaultAvatar
-    className="img-circle avatar"
+    className="img-circle avatar mr-10"
     size={16}
   />
 </a>
