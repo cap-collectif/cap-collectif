@@ -1,6 +1,6 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
-{% use 'CapcoAdminBundle:Project:base_edit_form.tml.twig' with form as parentForm %}
+{% use 'CapcoAdminBundle:Project:base_edit_form.html.twig' with form as parentForm %}
 {% block sonata_pre_fieldsets %}
     {% include '@CapcoApp/redux_store.html.twig' %}
     {{ react_render_component('ProjectAdminApp', {

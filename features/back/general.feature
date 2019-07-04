@@ -53,11 +53,12 @@ Scenario: Logged in admin wants to edit a section
   Then I should not see "error.500"
   And I should not see "error.404"
   And I should see an ".content" element
+
 @multiple-windows
 Scenario: Logged in admin want to see project from project list
   Given I am logged in as admin
   Then I go to the admin project list page
-  And I click the "td[objectid='project1'] div a" element
+  And I click the ".sonata-ba-list-field-actions[objectid='project1'] div a" element
   Then I switch to window 1
   And I should be on "/consultation/croissance-innovation-disruption/presentation/presentation-1"
   And I should not see "error.500"

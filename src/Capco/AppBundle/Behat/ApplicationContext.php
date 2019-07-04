@@ -178,15 +178,17 @@ class ApplicationContext extends UserContext
         $indexManager->markAsLive($indexManager->getLiveSearchIndex());
     }
 
+    /**
+     * Close only the first window because Mink loose the connection if we close it all.
+     */
     public function closeWindows(AfterScenarioScope $scope): void
     {
         $scenario = $scope->getScenario();
         if ($scenario->hasTags('multiple-windows')) {
             /** @var Session $session */
             $session = $this->getSession();
-            foreach ($session->getWindowNames() as $window) {
-                $session->stop($window);
-            }
+            $windowsNames = $session->getWindowNames();
+            $session->stop(array_pop($windowsNames));
         }
     }
 
