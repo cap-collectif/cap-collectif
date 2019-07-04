@@ -119,16 +119,16 @@ input AddEventInput {
   # The contents of the event link.
   link: String
 
-  # The contents of the event address.
+  # deprecated Use `addressJson` instead
   address: String
 
-  # The contents of the event city.
+  # deprecated Use `addressJson` instead
   city: String
 
-  # The contents of the event zipCode.
+  # deprecated Use `addressJson` instead
   zipCode: String
 
-  # The contents of the event country.
+  # deprecated Use `addressJson` instead
   country: String
 
   # The contents of the event addressJson.
@@ -675,28 +675,28 @@ input ChangeEventInput {
   # The id of the event to update.
   id: ID!
 
-  # The media id to illustrate
+  # ID of an Event to delete.
   media: ID
 
   # The metadescription of the event page.
   metaDescription: String
 
-  # Is the event commentable ?
+  # Whether or not this event is commentable.
   commentable: Boolean
 
   # The contents of the event link.
   link: String
 
-  # The contents of the event address.
+  # deprecated Use `addressJson` instead
   address: String
 
-  # The contents of the event city.
+  # deprecated Use `addressJson` instead
   city: String
 
-  # The contents of the event zipCode.
+  # deprecated Use `addressJson` instead
   zipCode: String
 
-  # The contents of the event country.
+  # deprecated Use `addressJson` instead
   country: String
 
   # The contents of the event addressJson.

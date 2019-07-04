@@ -8,28 +8,28 @@ InternalChangeEventInput:
     fields:
       media:
         type: 'ID'
-        description: 'The media id to illustrate'
+        description: 'ID of an Event to delete.'
       metaDescription:
         type: 'String'
         description: 'The metadescription of the event page.'
       commentable:
         type: 'Boolean'
-        description: 'Is the event commentable ?'
+        description: 'Whether or not this event is commentable.'
       link:
         type: 'String'
         description: 'The contents of the event link.'
       address:
         type: 'String'
-        description: 'The contents of the event address.'
+        description: 'deprecated Use `addressJson` instead'
       city:
         type: 'String'
-        description: 'The contents of the event city.'
+        description: 'deprecated Use `addressJson` instead'
       zipCode:
         type: 'String'
-        description: 'The contents of the event zipCode.'
+        description: 'deprecated Use `addressJson` instead'
       country:
         type: 'String'
-        description: 'The contents of the event country.'
+        description: 'deprecated Use `addressJson` instead'
       addressJson:
         type: 'String'
         description: 'The contents of the event addressJson.'
