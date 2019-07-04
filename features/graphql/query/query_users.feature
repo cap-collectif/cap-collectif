@@ -103,7 +103,7 @@ Scenario: GraphQL anonymous want to get users's comment votes count
           "edges": [
             {
               "node": {
-                "_id": "adminCapco",
+                "_id": "user200",
                 "commentVotes": {
                   "totalCount": 0
                 }
@@ -111,7 +111,7 @@ Scenario: GraphQL anonymous want to get users's comment votes count
             },
             {
               "node": {
-                "_id": "user_drupal",
+                "_id": "user199",
                 "commentVotes": {
                   "totalCount": 0
                 }
@@ -119,7 +119,7 @@ Scenario: GraphQL anonymous want to get users's comment votes count
             },
             {
               "node": {
-                "_id": "user_not_confirmed",
+                "_id": "user198",
                 "commentVotes": {
                   "totalCount": 0
                 }
@@ -127,7 +127,7 @@ Scenario: GraphQL anonymous want to get users's comment votes count
             },
             {
               "node": {
-                "_id": "user_not_confirmed_with_contribution",
+                "_id": "user197",
                 "commentVotes": {
                   "totalCount": 0
                 }
@@ -135,9 +135,9 @@ Scenario: GraphQL anonymous want to get users's comment votes count
             },
             {
               "node": {
-                "_id": "user10",
+                "_id": "user196",
                 "commentVotes": {
-                  "totalCount": 2
+                  "totalCount": 0
                 }
               }
             }
