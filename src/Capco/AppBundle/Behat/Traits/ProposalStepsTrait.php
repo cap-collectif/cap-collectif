@@ -19,110 +19,110 @@ trait ProposalStepsTrait
 
     protected static $collectStepOpenParams = [
         'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'collecte-des-propositions',
+        'stepSlug' => 'collecte-des-propositions'
     ];
 
     protected static $bpVoteClassement = [
         'projectSlug' => 'bp-avec-vote-classement',
-        'stepSlug' => 'collecte-avec-vote-classement-limite',
+        'stepSlug' => 'collecte-avec-vote-classement-limite'
     ];
     protected static $collectStepNotifiable = [
         'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'collecte-des-propositions',
+        'stepSlug' => 'collecte-des-propositions'
     ];
     protected static $collectStepOpenPrivateParams = [
         'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'collecte-des-propositions-privee',
+        'stepSlug' => 'collecte-des-propositions-privee'
     ];
     protected static $collectStepClosedParams = [
         'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'collecte-des-propositions-fermee',
+        'stepSlug' => 'collecte-des-propositions-fermee'
     ];
     protected static $selectionStepOpenParams = [
         'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'selection',
+        'stepSlug' => 'selection'
     ];
     protected static $votesDetailsPageParams = ['projectSlug' => 'budget-participatif-rennes'];
     protected static $selectionStepWithSimpleVoteParams = [
         'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'selection',
+        'stepSlug' => 'selection'
     ];
     protected static $selectionStepWithBudgetVoteParams = [
         'projectSlug' => 'depot-avec-selection-vote-budget',
-        'stepSlug' => 'selection-avec-vote-selon-le-budget',
+        'stepSlug' => 'selection-avec-vote-selon-le-budget'
     ];
     protected static $selectionStepWithBudgetVoteLimitedParams = [
         'projectSlug' => 'budget-avec-vote-limite',
-        'stepSlug' => 'selection-avec-vote-budget-limite',
+        'stepSlug' => 'selection-avec-vote-budget-limite'
     ];
     protected static $selectionStepNotYetOpen = [
         'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'selection-a-venir',
+        'stepSlug' => 'selection-a-venir'
     ];
     protected static $selectionStepClosed = [
         'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'fermee',
+        'stepSlug' => 'fermee'
     ];
     protected static $proposalWithSimpleVoteParams = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'renovation-du-gymnase',
+        'proposalSlug' => 'renovation-du-gymnase'
     ];
     protected static $proposalByMSantoStefano = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'ravalement-de-la-facade-de-la-bibliotheque-municipale',
+        'proposalSlug' => 'ravalement-de-la-facade-de-la-bibliotheque-municipale'
     ];
     protected static $proposalsByUserTest = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'renovation-du-gymnase',
+        'proposalSlug' => 'renovation-du-gymnase'
     ];
     protected static $proposalCommentNotNotifiable = [
         'projectSlug' => 'appel-a-projets',
         'stepSlug' => 'collecte-des-propositions-avec-vote-simple',
-        'proposalSlug' => 'mon-super-projet',
+        'proposalSlug' => 'mon-super-projet'
     ];
     protected static $proposalCommentNotifiable = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'renovation-du-gymnase',
+        'proposalSlug' => 'renovation-du-gymnase'
     ];
     protected static $proposalNotifiable = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'renovation-du-gymnase',
+        'proposalSlug' => 'renovation-du-gymnase'
     ];
     protected static $proposalNotifiableOfMine = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'renovation-du-gymnase',
+        'proposalSlug' => 'renovation-du-gymnase'
     ];
     protected static $proposalNotNotifiable = [
         'projectSlug' => 'budget-avec-vote-limite',
         'stepSlug' => 'collecte-avec-vote-simple-limite-1',
-        'proposalSlug' => 'proposition-17',
+        'proposalSlug' => 'proposition-17'
     ];
     protected static $proposalWithBudgetVoteParams = [
         'projectSlug' => 'depot-avec-selection-vote-budget',
         'stepSlug' => 'collecte-des-propositions-1',
-        'proposalSlug' => 'proposition-pas-chere',
+        'proposalSlug' => 'proposition-pas-chere'
     ];
     protected static $proposalNotYetVotable = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'proposition-pas-encore-votable',
+        'proposalSlug' => 'proposition-pas-encore-votable'
     ];
     protected static $proposalNotVotableAnymore = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'proposition-plus-votable',
+        'proposalSlug' => 'proposition-plus-votable'
     ];
 
     protected static $proposalWithOneFollower = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'installation-de-bancs-sur-la-place-de-la-mairie',
+        'proposalSlug' => 'installation-de-bancs-sur-la-place-de-la-mairie'
     ];
 
     /** @var array */
@@ -221,8 +221,8 @@ trait ProposalStepsTrait
      */
     public function iGoToAProposalNotCommentNotifiable()
     {
-        $this->waitAndThrowOnFailure(3000, "$('.comments__section').length > 0");
         $this->visitPageWithParams('proposal page', self::$proposalCommentNotNotifiable);
+        $this->waitAndThrowOnFailure(3000, "$('.comments__section').length > 0");
     }
 
     /**
@@ -939,7 +939,7 @@ trait ProposalStepsTrait
     {
         $tableNode = new TableNode([
             ['proposal-vote__username', 'test'],
-            ['proposal-vote__email', 'test@coucou.fr'],
+            ['proposal-vote__email', 'test@coucou.fr']
         ]);
         $this->fillFields($tableNode);
     }
@@ -951,7 +951,7 @@ trait ProposalStepsTrait
     {
         $tableNode = new TableNode([
             ['proposal-vote__username', 'test'],
-            ['proposal-vote__email', 'cheater@test.com'],
+            ['proposal-vote__email', 'cheater@test.com']
         ]);
         $this->fillFields($tableNode);
     }
@@ -963,7 +963,7 @@ trait ProposalStepsTrait
     {
         $tableNode = new TableNode([
             ['proposal-vote__username', 'test'],
-            ['proposal-vote__email', 'user@test.com'],
+            ['proposal-vote__email', 'user@test.com']
         ]);
         $this->fillFields($tableNode);
     }
@@ -978,7 +978,7 @@ trait ProposalStepsTrait
     ) {
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
             'selectionStep' => $selectionStepId,
-            'proposal' => $proposalId,
+            'proposal' => $proposalId
         ]);
         expect($selection->getStatus()->getId())->toBe($statusId);
         $this->getEntityManager()->clear();
@@ -991,7 +991,7 @@ trait ProposalStepsTrait
     {
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
             'selectionStep' => $selectionStepId,
-            'proposal' => $proposalId,
+            'proposal' => $proposalId
         ]);
         expect($selection->getStatus())->toBe(null);
         $this->getEntityManager()->clear();
@@ -1025,7 +1025,7 @@ trait ProposalStepsTrait
         $this->getEntityManager()->clear();
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
             'selectionStep' => $selectionStepId,
-            'proposal' => $proposalId,
+            'proposal' => $proposalId
         ]);
         expect($selection)->toNotBe(null);
     }
@@ -1038,7 +1038,7 @@ trait ProposalStepsTrait
         $this->getEntityManager()->clear();
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
             'selectionStep' => $selectionStepId,
-            'proposal' => $proposalId,
+            'proposal' => $proposalId
         ]);
         expect($selection)->toBe(null);
     }
@@ -1090,7 +1090,7 @@ trait ProposalStepsTrait
             $this->getRepository(ProposalSelectionVote::class)->findOneBy([
                 'user' => $user,
                 'proposal' => $proposal,
-                'selectionStep' => $step,
+                'selectionStep' => $step
             ])
         );
     }
@@ -1489,7 +1489,7 @@ trait ProposalStepsTrait
             ['proposal_title', 'Nouvelle proposition créée'],
             ['proposal_body', 'Description de ma proposition'],
             ['responses[1].value', 'Réponse à la question 1'],
-            ['proposal_address', '5 Allée Rallier-du-Baty 35000 Rennes'],
+            ['proposal_address', '5 Allée Rallier-du-Baty 35000 Rennes']
         ]);
         if (false !== $requiredResponse) {
             $this->fillField('responses[2].value', $requiredResponse);
