@@ -4,7 +4,10 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { Uuid } from '../../../types';
-import type { ProjectHeaderAuthorsViewQueryResponse } from '~relay/ProjectHeaderAuthorsViewQuery.graphql';
+import type {
+  ProjectHeaderAuthorsViewQueryResponse,
+  ProjectHeaderAuthorsViewQueryVariables,
+} from '~relay/ProjectHeaderAuthorsViewQuery.graphql';
 import ProjectHeaderAuthors from './ProjectHeaderAuthors';
 
 export type Props = {
@@ -25,13 +28,18 @@ export const ProjectHeaderAuthorsView = (properties: Props) => {
             }
           }
         `}
-        variables={{
-          projectId,
-        }}
+        variables={
+          ({
+            projectId,
+          }: ProjectHeaderAuthorsViewQueryVariables)
+        }
         render={({
           error,
           props,
-        }: { props?: ?ProjectHeaderAuthorsViewQueryResponse } & ReadyState) => {
+        }: {|
+          ...ReadyState,
+          props: ?ProjectHeaderAuthorsViewQueryResponse,
+        |}) => {
           if (error) {
             return graphqlError;
           }
