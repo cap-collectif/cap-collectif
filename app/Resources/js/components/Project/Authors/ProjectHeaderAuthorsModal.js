@@ -55,7 +55,7 @@ const renderAuthorsList = (users: ProjectHeaderAuthorsModal_users, features) =>
     </ProjectAuthorItem>
   ));
 
-const ProjectHeaderAuthorsModal = ({ show, onClose, users, features }: Props) => (
+export const ProjectHeaderAuthorsModal = ({ show, onClose, users, features }: Props) => (
   <Modal
     id="show-authors-modal"
     className="reply__modal--show"
