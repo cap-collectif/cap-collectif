@@ -16,18 +16,19 @@ import {
   Col,
 } from 'react-bootstrap';
 
-import ListGroup from '../components/Ui/List/ListGroup';
-import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
-import UserLink from '../components/User/UserLink';
-import InlineList from '../components/Ui/List/InlineList';
-import Media from '../components/Ui/Medias/Media/Media';
 import Card from '../components/Ui/Card/Card';
+import UserLink from '../components/User/UserLink';
 import PieChart from '../components/Ui/Chart/PieChart';
+import Media from '../components/Ui/Medias/Media/Media';
+import ListGroup from '../components/Ui/List/ListGroup';
+import InlineList from '../components/Ui/List/InlineList';
 import PinnedLabel from '../components/Utils/PinnedLabel';
+import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
 
-import { UserAvatarList } from '../components/User/UserAvatarList';
-import { opinion as opinionMock } from './mocks/opinions';
+import { features } from '../redux/modules/default';
 import { author as authorMock } from './mocks/users';
+import { opinion as opinionMock } from './mocks/opinions';
+import { UserAvatarList } from '../components/User/UserAvatarList';
 
 const headerOption = {
   Gray: 'gray',
@@ -239,7 +240,7 @@ const OpinionBox = ({ section, opinion }) => (
                 {/** Votes/OpinionUserVotes.js */}
                 {opinion.previewVotes.length > 0 && (
                   <div style={{ paddingTop: '20px' }}>
-                    <UserAvatarList max={5} users={opinion.previewVotes} />
+                    <UserAvatarList features={features} max={5} users={opinion.previewVotes} />
                   </div>
                 )}
               </div>

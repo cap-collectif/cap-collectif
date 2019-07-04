@@ -4,10 +4,12 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { UserAvatarList } from './UserAvatarList';
 import { $refType, $fragmentRefs } from '../../mocks';
+import { features } from '../../redux/modules/default';
 
 describe('<UserAvatarList />', () => {
   it('renders correctly', () => {
     const props = {
+      features,
       max: 10,
       users: [
         {
@@ -24,6 +26,7 @@ describe('<UserAvatarList />', () => {
 
   it('renders correctly withou authors', () => {
     const props = {
+      features,
       max: 10,
       users: [],
     };

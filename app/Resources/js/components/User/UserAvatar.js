@@ -77,6 +77,7 @@ export class UserAvatar extends React.Component<Props> {
       user,
       features,
     } = this.props;
+
     const funcProps = {
       onBlur,
       onFocus,
@@ -84,7 +85,7 @@ export class UserAvatar extends React.Component<Props> {
       onMouseOut,
     };
 
-    if (user && user.url && features && features.profiles) {
+    if (user && user.url && features.profiles) {
       return (
         <a {...funcProps} className={className} style={style} href={user.url}>
           {this.renderAvatar()}
@@ -102,7 +103,6 @@ export class UserAvatar extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   defaultAvatar: state.default.images && state.default.images.avatar,
-  features: state.default.features,
 });
 
 export default createFragmentContainer(connect(mapStateToProps)(UserAvatar), {

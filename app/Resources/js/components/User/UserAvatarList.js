@@ -1,16 +1,19 @@
 // @flow
 import * as React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 import UserAvatar from './UserAvatar';
+import type { State, FeatureToggles } from '../../types';
 import type { UserAvatarList_users } from '~relay/UserAvatarList_users.graphql';
 
 type Props = {|
   users: UserAvatarList_users,
   max: number,
   onClick?: () => void,
+  features: FeatureToggles,
 |};
 
 const AvatarButton = styled.button.attrs({})`
@@ -20,22 +23,28 @@ const AvatarButton = styled.button.attrs({})`
 `;
 
 export const UserAvatarList = (props: Props) => {
-  const { users, max, onClick } = props;
+  const { users, max, onClick, features } = props;
+
+  const shouldRedirectProfile = users.length === 1 && features.profiles;
 
   return (
     <React.Fragment>
       {users &&
-        users.slice(0, max).map((user, index) => (
-          <AvatarButton onClick={onClick}>
-            <OverlayTrigger
-              key={index}
-              placement="top"
-              overlay={<Tooltip id={`tooltip-${user.id}`}>{user.username}</Tooltip>}>
-              {/* $FlowFixMe */}
-              <UserAvatar user={user} />
-            </OverlayTrigger>
-          </AvatarButton>
-        ))}
+        users.slice(0, max).map((user, index) =>
+          shouldRedirectProfile ? (
+            <UserAvatar user={user} features={features} />
+          ) : (
+            <AvatarButton onClick={onClick}>
+              <OverlayTrigger
+                key={index}
+                placement="top"
+                overlay={<Tooltip id={`tooltip-${user.id}`}>{user.username}</Tooltip>}>
+                {/* $FlowFixMe */}
+                <UserAvatar user={user} features={features} />
+              </OverlayTrigger>
+            </AvatarButton>
+          ),
+        )}
       {users.length > 5 && (
         <AvatarButton onClick={onClick}>
           <Button
@@ -55,7 +64,11 @@ UserAvatarList.defaultProps = {
   max: 5,
 };
 
-export default createFragmentContainer(UserAvatarList, {
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
+});
+
+export default createFragmentContainer(connect(mapStateToProps)(UserAvatarList), {
   users: graphql`
     fragment UserAvatarList_users on User @relay(plural: true) {
       id

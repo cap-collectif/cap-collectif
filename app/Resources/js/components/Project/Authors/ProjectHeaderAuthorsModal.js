@@ -46,7 +46,7 @@ const renderAuthorsList = (users: ProjectHeaderAuthorsModal_users, features) =>
   users.map(user => (
     <ProjectAuthorItem>
       <div className="d-flex">
-        <UserAvatar user={user} />
+        <UserAvatar user={user} features={features} />
         <div className="d-flex fd-column">
           {renderAuthorItemUserName(user, features.profiles)}{' '}
           <span className="ml-15 excerpt">{user.userType ? user.userType.name : ''}</span>
