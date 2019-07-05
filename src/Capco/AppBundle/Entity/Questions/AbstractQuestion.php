@@ -87,7 +87,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion")
-     * @ORM\JoinColumn(name="always_jump_destination_question_id", nullable=true)
+     * @ORM\JoinColumn(name="always_jump_destination_question_id", nullable=true, onDelete="SET NULL")
      */
     protected $alwaysJumpDestinationQuestion;
 
