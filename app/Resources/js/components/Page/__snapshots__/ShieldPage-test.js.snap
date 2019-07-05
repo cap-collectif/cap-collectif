@@ -41,12 +41,14 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
   <div
     className="panel-body"
   >
-    <strong>
+    <div
+      className="mb-10 font-weight-bold"
+    >
       <FormattedMessage
         id="authenticate-with"
         values={Object {}}
       />
-    </strong>
+    </div>
     <Connect(LoginBox) />
   </div>
 </div>

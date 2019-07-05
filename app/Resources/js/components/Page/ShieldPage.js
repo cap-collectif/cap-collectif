@@ -36,9 +36,9 @@ const getShieldBody = ({
   if (byPassAuth && loginWithOpenId) {
     return (
       <>
-        <strong>
+        <div className="mb-10 font-weight-bold">
           <FormattedMessage id="authenticate-with" />
-        </strong>
+        </div>
         <LoginBox />
       </>
     );
