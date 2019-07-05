@@ -64,7 +64,7 @@ export class UserAvatarDeprecated extends React.Component<Props> {
       );
     }
 
-    return <DefaultAvatar size={size} />;
+    return <DefaultAvatar size={size} className="img-circle avatar" />;
   }
 
   render() {
