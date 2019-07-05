@@ -24,7 +24,13 @@ type State = {
   currentQuestion: ?string,
 };
 
-const OptionItem = ({ questionChoice, index }: { questionChoice: QuestionChoice, index: number }) => (
+const OptionItem = ({
+  questionChoice,
+  index,
+}: {
+  questionChoice: QuestionChoice,
+  index: number,
+}) => (
   <option value={questionChoice.id}>
     {index + 1}. {questionChoice.title}
   </option>
@@ -42,26 +48,23 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
       const question = questions.find(q => q.id === currentQuestion);
 
       if (question && question.choices) {
-        dispatch(change(formName,`${member}.question.title`, question.title));
-        dispatch(change(formName,`${member}.value.id`, question.choices[0].id));
-        dispatch(change(formName,`${member}.value.title`, question.choices[0].title));
+        dispatch(change(formName, `${member}.question.title`, question.title));
+        dispatch(change(formName, `${member}.value.id`, question.choices[0].id));
+        dispatch(change(formName, `${member}.value.title`, question.choices[0].title));
       }
     });
   };
 
-  displayValueList = (
-    questions: QuestionsInReduxForm,
-    selectedQuestion: string,
-  ) => {
-      const question = questions.find(q => q.id === selectedQuestion);
-      if (question) {
-        return question.choices && question.choices ?
-          question.choices
-          .filter(Boolean)
-          // $FlowFixMe Missing type annotation for U.
-          .map((choice, index) => <OptionItem questionChoice={choice} index={index}/>) : null
-      }
-      return null
+  displayValueList = (questions: QuestionsInReduxForm, selectedQuestion: string) => {
+    const question = questions.find(q => q.id === selectedQuestion);
+    if (question) {
+      return question.choices && question.choices
+        ? question.choices
+            .filter(Boolean)
+            .map<any>((choice, index) => <OptionItem questionChoice={choice} index={index} />)
+        : null;
+    }
+    return null;
   };
 
   render() {
@@ -103,11 +106,11 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
           component={component}>
           {questions
             .filter(question => question.__typename === 'MultipleChoiceQuestion')
-            .map((question, questionIndex) =>
+            .map((question, questionIndex) => (
               <option value={question.id}>
                 {questionIndex + 1}. {question.title}
               </option>
-          )}
+            ))}
         </Field>
         <Field
           id={`${member}.operator`}
@@ -134,10 +137,17 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   const selector = formValueSelector(props.formName);
   const selectedQuestion = selector(state, `${props.member}.question.id`);
   const currentQuestion = questions.find(question => question.id === selectedQuestion);
-  const isMultipleChoiceQuestion = currentQuestion && currentQuestion.__typename === "MultipleChoiceQuestion";
-  const firstMultipleChoiceQuestion = questions.find(question => question.__typename === "MultipleChoiceQuestion");
+  const isMultipleChoiceQuestion =
+    currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion';
+  const firstMultipleChoiceQuestion = questions.find(
+    question => question.__typename === 'MultipleChoiceQuestion',
+  );
   return {
-    selectedQuestion: isMultipleChoiceQuestion ? currentQuestion.id : firstMultipleChoiceQuestion ? firstMultipleChoiceQuestion.id : null,
+    selectedQuestion: isMultipleChoiceQuestion
+      ? currentQuestion.id
+      : firstMultipleChoiceQuestion
+      ? firstMultipleChoiceQuestion.id
+      : null,
   };
 };
 
