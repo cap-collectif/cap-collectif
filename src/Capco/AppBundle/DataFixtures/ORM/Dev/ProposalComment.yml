@@ -4,18 +4,18 @@ Capco\AppBundle\Entity\ProposalComment:
     proposal: '@proposal1'
     Author: '@user2'
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    createdAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    publishedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
   proposalComment5:
     id: 'proposalComment5'
     proposal: '@proposal1'
     parent: '@proposalComment1'
     Author: '@user3'
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    createdAt: <(new \DateTime(2016-02-01))>
+    publishedAt: <(new \DateTime(2016-02-01))>
+    updatedAt: <((new \DateTime(2017-02-01)))>
   proposalComment6:
     id: 'proposalComment6'
     proposal: '@proposal1'
@@ -23,100 +23,100 @@ Capco\AppBundle\Entity\ProposalComment:
     author_email: enjoyphoenix@gmail.com
     author_ip: 192.168.1.1
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-03 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-03 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-03 00:00:00'))>
   proposalComment{7..20}:
     id: 'proposalComment<current()>'
     proposal: '@proposal1'
     Author: '@user1'
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    createdAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    publishedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
   proposalComment{21..27}:
     id: 'proposalComment<current()>'
     proposal: '@proposal27'
     Author: '@user4'
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    publishedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
   proposalComment{28..32}:
     id: 'proposalComment<current()>'
     proposal: '@proposal28'
     Author: '@user5'
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    publishedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    createdAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
   proposalComment{33..37}:
     id: 'proposalComment<current()>'
     proposal: '@proposal31'
     Author: '@user5'
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    publishedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    createdAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
   proposalComment{37..42}:
     id: 'proposalComment<current()>'
     proposal: '@proposal32'
     Author: '@user2'
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    publishedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    createdAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
   proposalComment{43..49}:
     id: 'proposalComment<current()>'
     proposal: '@proposal35'
     Author: '@user3'
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    publishedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    createdAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
   proposalComment{50..55}:
     id: 'proposalComment<current()>'
     proposal: '@proposal36'
     Author: '@user1'
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    publishedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    createdAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
   proposalComment{56..60}:
     id: 'proposalComment<current()>'
     proposal: '@proposal37'
     Author: '@user4'
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    publishedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    createdAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
   proposalComment{61..70}:
     id: 'proposalComment<current()>'
     proposal: '@question1'
     Author: '@user5'
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    publishedAt: <(new \DateTime())>
-    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    publishedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    createdAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2017-02-01))->modify("+ $current days"))>
   trashedVisibleComment{1..50}:
     id: 'trashedComment<current()>'
     proposal: '@proposal1'
     Author: '@user1'
     body: 'Insultes'
-    publishedAt: <(new \DateTime())>
-    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    publishedAt: <((new \DateTime(2018-02-01))->modify("+ $current days"))>
+    createdAt: <((new \DateTime(2018-02-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2018-02-01))->modify("+ $current days"))>
     trashedReason: 'Contenu inadmissible'
-    trashedAt: <(new \DateTime('2019-01-14 00:00:00'))>
+    trashedAt: <((new \DateTime(2019-01-01))->modify("+ $current days"))>
     trashedStatus: 'visible'
   trashedInvisibleComment{51..70}:
     id: 'trashedComment<current()>'
     proposal: '@proposal1'
     Author: '@user2'
     body: 'Insultes invisibles'
-    publishedAt: <(new \DateTime())>
-    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    publishedAt: <((new \DateTime(2018-06-01))->modify("+ $current days"))>
+    createdAt: <((new \DateTime(2018-06-01))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime(2018-06-01))->modify("+ $current days"))>
     trashedReason: 'Contenu inadmissible'
-    trashedAt: <(new \DateTime('2019-01-14 00:00:00'))>
+    trashedAt: <((new \DateTime(2019-06-01))->modify("+ $current days"))>
     trashedStatus: 'invisible'

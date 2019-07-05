@@ -219,7 +219,7 @@ Capco\UserBundle\Entity\User:
     media: null
     confirmationToken: azertyuiop
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 11 days"))>
+    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 11 days")->modify("+ 1 hours"))>
 
   user_not_confirmed_with_contributions:
     id: 'user_not_confirmed_with_contributions'
@@ -234,7 +234,7 @@ Capco\UserBundle\Entity\User:
     media: null
     confirmationToken: oklmoklm
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 11 days"))>
+    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 11 days")->modify("+ 2 hours"))>
 
   user_without_phone:
     id: 'user511'

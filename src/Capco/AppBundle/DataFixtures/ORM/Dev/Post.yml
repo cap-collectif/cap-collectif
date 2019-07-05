@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\Post:
     abstract: <text(150)>
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     isPublished: true
-    publishedAt: <dateTimeBetween('-100 days', '-10 days')>
+    publishedAt: <identity((new \DateTime('2018-11-03')))>
     Authors:
       - '@user1'
       - '@user5'
@@ -17,7 +17,7 @@ Capco\AppBundle\Entity\Post:
     abstract: <text(150)>
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     isPublished: true
-    publishedAt: <dateTimeBetween('-100 days', '-10 days')>
+    publishedAt: <identity((new \DateTime('2018-11-04')))>
     Authors:
       - '@user2'
     media: null
@@ -29,7 +29,7 @@ Capco\AppBundle\Entity\Post:
     abstract: <text(150)>
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     isPublished: true
-    publishedAt: <dateTimeBetween('+10 days', '+100 days')>
+    publishedAt: <identity((new \DateTime('2018-11-05')))>
     Authors:
       - '@user5'
     media: null
@@ -54,7 +54,7 @@ Capco\AppBundle\Entity\Post:
     abstract: <text(150)>
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     isPublished: true
-    publishedAt: <dateTimeBetween('-100 days', '-10 days')>
+    publishedAt: <identity((new \DateTime('2019-01-03 00:00:00')))>
     Authors:
       - '@user1'
     themes: ['@theme1', '@theme2']
