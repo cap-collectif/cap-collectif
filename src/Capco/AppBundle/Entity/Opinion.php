@@ -54,7 +54,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         'opinion.sort.old' => 'old',
         'opinion.sort.favorable' => 'favorable',
         'opinion.sort.votes' => 'votes',
-        'opinion.sort.comments' => 'comments',
+        'opinion.sort.comments' => 'comments'
     ];
 
     /**
@@ -81,6 +81,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinions")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     * @Assert\NotNull()
      */
     protected $Author;
 
