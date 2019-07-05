@@ -5,26 +5,25 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
   <div
     className="proposal__page__metadata"
   >
-    <div
+    <TagsList
       className="proposal__infos"
     >
-      <div
-        className="proposal__info proposal__info--category ellipsis"
+      <Tag
+        className="ellipsis"
+        icon="cap cap-tag-1-1 icon--blue"
+        size="22px"
       >
-        <i
-          className="cap cap-tag-1-1 icon--blue"
-        />
         Nom de la catégorie
-      </div>
-      <div
-        className="proposal__info proposal__info--district ellipsis"
+      </Tag>
+      <Tag
+        className="ellipsis"
+        icon="cap cap-marker-1-1 icon--blue"
+        size="22px"
       >
-        <i
-          className="cap cap-marker-1-1 icon--blue"
-        />
         Nom du quartier
-      </div>
+      </Tag>
       <ForwardRef(Relay(ProposalDetailEstimation))
+        className="ellipsis"
         proposal={
           Object {
             "$refType": null,
@@ -42,10 +41,9 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
           }
         }
         showNullEstimation={true}
+        size="22px"
       />
-      <div
-        className="pt-10"
-      >
+      <div>
         <ForwardRef(Relay(Connect(InjectIntl(ProposalDetailLikers))))
           proposal={
             Object {
@@ -63,17 +61,17 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
               "theme": null,
             }
           }
+          size="22px"
         />
       </div>
-      <div
-        className="proposal__info proposal__info--reference ellipsis"
+      <Tag
+        className="ellipsis"
+        icon="cap cap-tag-1-1 icon--blue"
+        size="22px"
       >
-        <i
-          className="cap cap-tag-1-1 icon--blue"
-        />
         Reference
-      </div>
-    </div>
+      </Tag>
+    </TagsList>
   </div>
 </div>
 `;

@@ -3,6 +3,8 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
+import TagsList from '../../Ui/List/TagsList';
+import Tag from '../../Ui/Labels/Tag';
 import type { ProposalPageMetadata_proposal } from '~relay/ProposalPageMetadata_proposal.graphql';
 
 type Props = {
@@ -24,39 +26,37 @@ export class ProposalPageMetadata extends React.Component<Props> {
           proposal.likers ||
           (showNullEstimation && proposal.estimation)) && (
           <div className="proposal__page__metadata">
-            <div className="proposal__infos">
+            <TagsList className="proposal__infos">
               {showThemes && proposal.theme && (
-                <div className="proposal__info proposal__info--district ellipsis">
-                  <i className="cap cap-tag-1-1 icon--blue" />
+                <Tag size="22px" className="ellipsis" icon="cap cap-tag-1-1 icon--blue">
                   {proposal.theme.title}
-                </div>
+                </Tag>
               )}
               {showCategories && proposal.category && (
-                <div className="proposal__info proposal__info--category ellipsis">
-                  <i className="cap cap-tag-1-1 icon--blue" />
+                <Tag size="22px" className="ellipsis" icon="cap cap-tag-1-1 icon--blue">
                   {proposal.category.name}
-                </div>
+                </Tag>
               )}
               {showDistricts && proposal.district && (
-                <div className="proposal__info proposal__info--district ellipsis">
-                  <i className="cap cap-marker-1-1 icon--blue" />
+                <Tag size="22px" className="ellipsis" icon="cap cap-marker-1-1 icon--blue">
                   {proposal.district.name}
-                </div>
+                </Tag>
               )}
               {/* $FlowFixMe */}
               <ProposalDetailEstimation
                 proposal={proposal}
+                size="22px"
+                className="ellipsis"
                 showNullEstimation={showNullEstimation}
               />
               {/* $FlowFixMe */}
-              <div className="pt-10">
-                <ProposalDetailLikers proposal={proposal} />
+              <div>
+                <ProposalDetailLikers size="22px" proposal={proposal} />
               </div>
-              <div className="proposal__info proposal__info--reference ellipsis">
-                <i className="cap cap-tag-1-1 icon--blue" />
+              <Tag size="22px" className="ellipsis" icon="cap cap-tag-1-1 icon--blue">
                 {proposal.reference}
-              </div>
-            </div>
+              </Tag>
+            </TagsList>
           </div>
         )}
       </div>

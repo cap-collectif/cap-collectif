@@ -8,15 +8,17 @@ import Tag from '../../Ui/Labels/Tag';
 type Props = {
   proposal: ProposalDetailEstimation_proposal,
   showNullEstimation: boolean,
+  className?: string,
+  size?: string,
 };
 
 export class ProposalDetailEstimation extends React.Component<Props> {
   render() {
-    const { proposal, showNullEstimation } = this.props;
+    const { size, className, proposal, showNullEstimation } = this.props;
     const estimation = !proposal.estimation && showNullEstimation ? 0 : proposal.estimation;
 
     return estimation !== null && typeof estimation !== 'undefined' ? (
-      <Tag icon="cap cap-coins-2-1 icon--blue">
+      <Tag size={size} className={className} icon="cap cap-coins-2-1 icon--blue">
         <FormattedNumber
           minimumFractionDigits={0}
           value={estimation}

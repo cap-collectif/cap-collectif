@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { Button, ListGroupItem, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Button, ListGroupItem } from 'react-bootstrap';
 import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
 import InlineList from '../components/Ui/List/InlineList';
 import TagsList from '../components/Ui/List/TagsList';
@@ -48,11 +48,18 @@ storiesOf('List', module)
     'Tags list',
     () => (
       <TagsList>
-        <Tag icon="cap cap-marker-1-1 icon--blue">5 projets</Tag>
-        <Tag icon="cap cap-tag-1-1 icon--blue">10 articles</Tag>
-        <OverlayTrigger placement="top" overlay={<Tooltip>Exemple tooltip</Tooltip>}>
-          <Tag icon="cap cap-lock-2-1 mr-1">Accès restreint</Tag>
-        </OverlayTrigger>
+        <Tag size="22px" className="ellipsis" icon="cap cap-tag-1-1 icon--blue">
+          Justice
+        </Tag>
+        <Tag size="22px" className="ellipsis" icon="cap cap-heart-1 icon--red">
+          2 coups de coeur
+        </Tag>
+        <Tag size="22px" className="ellipsis" icon="cap cap-marker-1-1 icon--blue">
+          Maurepas Patton
+        </Tag>
+        <Tag size="22px" className="ellipsis" icon="cap cap-coins-2-1 icon--blue">
+          100 €
+        </Tag>
       </TagsList>
     ),
     {

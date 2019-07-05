@@ -28,9 +28,11 @@ const TagLink = styled(TagContainer)`
 
 const TagIcon = styled.i`
   padding-right: 5px;
+  font-size: ${props => props.size || '14px'};
 `;
 
 type Props = {
+  size?: string,
   children: any,
   as?: string,
   icon?: string,
@@ -38,12 +40,12 @@ type Props = {
 
 export class Tag extends React.Component<Props> {
   render() {
-    const { children, as, icon, ...rest } = this.props;
+    const { size, children, as, icon, ...rest } = this.props;
     const Container = as === 'a' ? TagLink : TagContainer;
 
     return (
       <Container className="tag" as={as} {...rest}>
-        {icon && <TagIcon className={icon} />}
+        {icon && <TagIcon size={size} className={icon} />}
         {children}
       </Container>
     );

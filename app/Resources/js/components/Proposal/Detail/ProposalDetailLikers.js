@@ -15,6 +15,7 @@ type Props = {
   showModal: boolean,
   dispatch: Dispatch,
   intl: IntlShape,
+  size?: string,
 };
 
 export class ProposalDetailLikers extends React.Component<Props> {
@@ -29,7 +30,7 @@ export class ProposalDetailLikers extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, componentClass, showModal, intl } = this.props;
+    const { size, proposal, componentClass, showModal, intl } = this.props;
 
     if (proposal.likers.length === 0) {
       return null;
@@ -43,6 +44,7 @@ export class ProposalDetailLikers extends React.Component<Props> {
           title={intl.formatMessage({ id: 'list-of-favorites' })}
           componentClass={componentClass}
           onClick={this.handleClick}
+          size={size}
         />
         {/* $FlowFixMe */}
         <ProposalDetailLikersModal show={showModal} proposal={proposal} />

@@ -10,6 +10,7 @@ type Props = {
   componentClass: string,
   title: string,
   onClick: Function,
+  size?: string,
 };
 
 export class ProposalDetailLikersLabel extends React.Component<Props> {
@@ -18,11 +19,16 @@ export class ProposalDetailLikersLabel extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, componentClass, title, onClick } = this.props;
+    const { size, proposal, componentClass, title, onClick } = this.props;
 
     if (proposal.likers.length > 0) {
       return (
-        <Tag as={componentClass} title={title} onClick={onClick} icon="cap cap-heart-1 icon--red">
+        <Tag
+          size={size}
+          as={componentClass}
+          title={title}
+          onClick={onClick}
+          icon="cap cap-heart-1 icon--red">
           <FormattedMessage
             id="proposal.likers.count"
             values={{
