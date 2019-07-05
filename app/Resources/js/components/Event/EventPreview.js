@@ -42,7 +42,7 @@ export class EventPreview extends React.Component<Props> {
                 {event.author && event.author.username && (
                   <React.Fragment>
                     {/* $FlowFixMe */}
-                    <UserAvatarDeprecated size={16} user={event.author} />
+                    <UserAvatarDeprecated size={16} user={event.author} className="mr-10" />
                     <span className="font-weight-semi-bold">{event.author.username}</span>
                   </React.Fragment>
                 )}
