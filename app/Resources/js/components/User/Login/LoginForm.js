@@ -1,24 +1,20 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Alert } from 'react-bootstrap';
 import renderInput from '../../Form/Field';
 import { login as onSubmit } from '../../../redux/modules/user';
+import type { State } from '../../../types';
 import { isEmail } from '../../../services/Validator';
 
-type LoginValues = {|
+type LoginValues = {
   username: string,
   password: string,
-|};
+};
 
-type Props = {|
-  error?: string,
-|};
-
-const formName = 'login';
-
-export const validate = (values: LoginValues) => {
+export const validate = (values: Object) => {
   const errors = {};
 
   if (!values.username || !isEmail(values.username)) {
@@ -26,6 +22,17 @@ export const validate = (values: LoginValues) => {
   }
 
   return errors;
+};
+
+const formName = 'login';
+
+const initialValues: LoginValues = {
+  username: '',
+  password: '',
+};
+
+type Props = {
+  error?: string,
 };
 
 export class LoginForm extends React.Component<Props> {
@@ -70,13 +77,17 @@ export class LoginForm extends React.Component<Props> {
   }
 }
 
-export default reduxForm({
-  initialValues: {
-    username: '',
-    password: '',
-  },
-  validate,
-  onSubmit,
-  form: formName,
-  destroyOnUnmount: true,
-})(LoginForm);
+const mapStateToProps = (state: State) => ({
+  shieldEnabled: state.default.features.shield_mode,
+});
+
+const connector = connect(mapStateToProps);
+export default connector(
+  reduxForm({
+    initialValues,
+    validate,
+    onSubmit,
+    form: formName,
+    destroyOnUnmount: true,
+  })(LoginForm),
+);

@@ -3,7 +3,7 @@
 exports[`<LoginBox /> renders 1`] = `
 <div>
   <Connect(LoginSocialButtons) />
-  <ReduxForm />
+  <Connect(ReduxForm) />
 </div>
 `;
 
@@ -20,16 +20,10 @@ exports[`<LoginBox /> renders a top text and a bottom text if specified 1`] = `
     />
   </Alert>
   <Connect(LoginSocialButtons) />
-  <ReduxForm />
+  <Connect(ReduxForm) />
   <WYSIWYGRender
     className="text-center excerpt mt-15"
     value="Texte du bas"
   />
-</div>
-`;
-
-exports[`<LoginBox /> renders without LoginForm 1`] = `
-<div>
-  <Connect(LoginSocialButtons) />
 </div>
 `;

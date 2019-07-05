@@ -2,92 +2,78 @@
 
 exports[`<ShieldAdminForm /> renders correctly 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box-content box-content__content-form"
 >
-  <div
-    className="box-header"
+  <form
+    id="shield-admin-form"
+    onSubmit={[MockFunction]}
   >
-    <h3
-      className="box-title"
+    <div
+      className="d-flex align-items-center mb-15"
     >
-      <FormattedMessage
-        id="admin.label.pages.shield"
-        values={Object {}}
-      />
-    </h3>
-  </div>
-  <div
-    className="box-content box-content__content-form"
-  >
-    <form
-      id="shield-admin-form"
-      onSubmit={[MockFunction]}
-    >
-      <div
-        className="d-flex align-items-center mb-15"
-      >
-        <Field
-          component={[Function]}
-          id="shield-admin-form_shieldMode"
-          label={
+      <Field
+        component={[Function]}
+        id="shield-admin-form_shieldMode"
+        label={
+          <span>
             <FormattedMessage
               id="capco.module.shield_mode"
               values={Object {}}
             />
-          }
-          name="shieldMode"
-        />
-      </div>
-      <Field
-        component={[Function]}
-        id="shield-admin-form_introduction"
-        label={
-          <h4>
-            <FormattedMessage
-              id="shield.introduction"
-              values={Object {}}
-            />
-          </h4>
+          </span>
         }
-        name="introduction"
-        type="editor"
+        name="shieldMode"
       />
-      <Field
-        component={[Function]}
-        id="shield-admin-form_media"
-        label={
-          <h4>
-            <FormattedMessage
-              id="image.shield"
-              values={Object {}}
-            />
-          </h4>
-        }
-        name="media"
-        type="image"
+    </div>
+    <Field
+      component={[Function]}
+      id="shield-admin-form_introduction"
+      label={
+        <h4>
+          <FormattedMessage
+            id="shield.introduction"
+            values={Object {}}
+          />
+        </h4>
+      }
+      name="introduction"
+      type="editor"
+    />
+    <Field
+      component={[Function]}
+      id="shield-admin-form_media"
+      label={
+        <h4>
+          <FormattedMessage
+            id="image.shield"
+            values={Object {}}
+          />
+        </h4>
+      }
+      name="media"
+      type="image"
+    />
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={true}
+      id="shield-admin-form_submit"
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
       />
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="primary"
-        disabled={true}
-        id="shield-admin-form_submit"
-        type="submit"
-      >
-        <FormattedMessage
-          id="global.save"
-          values={Object {}}
-        />
-      </Button>
-      <AlertForm
-        invalid={false}
-        submitFailed={false}
-        submitSucceeded={false}
-        submitting={false}
-        valid={true}
-      />
-    </form>
-  </div>
+    </Button>
+    <AlertForm
+      invalid={false}
+      submitFailed={false}
+      submitSucceeded={false}
+      submitting={false}
+      valid={true}
+    />
+  </form>
 </div>
 `;

@@ -8,8 +8,8 @@ describe('<ShieldPage />', () => {
   const props = {
     onSubmit: jest.fn(),
     submitting: false,
+    chartBody: 'Super charte !!',
     loginWithOpenId: false,
-    byPassAuth: false,
   };
 
   it('renders with registration enabled', () => {
@@ -19,19 +19,6 @@ describe('<ShieldPage />', () => {
 
   it('renders with registration disabled', () => {
     const wrapper = shallow(<ShieldPage showRegistration={false} {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders with registration disabled and classical auth by pass enabled', () => {
-    const wrapper = shallow(
-      <ShieldPage
-        showRegistration={false}
-        byPassAuth
-        loginWithOpenId
-        submitting={false}
-        onSubmit={jest.fn()}
-      />,
-    );
     expect(wrapper).toMatchSnapshot();
   });
 });

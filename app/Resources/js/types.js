@@ -58,7 +58,6 @@ export type FeatureToggles = {
   zipcode_at_register: ?boolean,
   consultation_plan: ?boolean,
   display_map: ?boolean,
-  sso_by_pass_auth: ?boolean,
 };
 export type FeatureToggle =
   | 'blog'
@@ -92,8 +91,7 @@ export type FeatureToggle =
   | 'new_feature_questionnaire_result'
   | 'zipcode_at_register'
   | 'consultation_plan'
-  | 'display_map'
-  | 'sso_by_pass_auth';
+  | 'display_map';
 
 export type Action =
   | ProposalAction

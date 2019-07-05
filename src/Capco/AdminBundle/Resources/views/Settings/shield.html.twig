@@ -11,6 +11,12 @@
 
 {% block form %}
     {% include '@CapcoApp/redux_store.html.twig' %}
+    <div class="box box-primary container-fluid">
+        <div class="box-header">
+            <h3 class="box-title">
+                <span>{{ 'admin.label.pages.shield' | trans({}, 'CapcoAppBundle') }}</span>
+            </h3>
+        </div>
         {{
         react_render_component(
             'AuthentificationAdminApp',
@@ -20,4 +26,5 @@
             }
         )
         }}
+    </div>
 {% endblock %}
