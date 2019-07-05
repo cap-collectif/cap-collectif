@@ -108,7 +108,7 @@
                         {% endif %}
 
                         {% if event.link %}
-                            <a class="btn  btn-primary  external-link" href="{{ event.link }}" class="external-link">{{ 'event.link_button'|trans({}, 'CapcoAppBundle') }}</a>
+                            <a class="btn  btn-primary  external-link mb-10" href="{{ event.link }}" class="external-link">{{ 'event.link_button'|trans({}, 'CapcoAppBundle') }}</a>
                         {% endif %}
 
                         {{ react_render_component('ShareButtonDropdownApp', {
