@@ -135,8 +135,19 @@ trait QuestionPersisterTrait
                     return $jump['id'] ?? null;
                 }, $realArgumentQuestion['jumps']);
                 foreach ($realQuestion->getJumps() as $jumpPosition => $jump) {
-                    // Handle Question's logic jumps conditions deletions
-                    if (isset($realArgumentQuestion['jumps'][$jumpPosition])) {
+                    // Handle jump deletion when a user delete a logic jump, and the conditions are handled automatically by
+                    // doctrine by using the cascade remove and orphanRemoval=true
+                    if (\in_array($jump->getId(), $argumentsJumpsIds, true) === false) {
+                        $deletedJump = [
+                            'id' => $jump->getId(),
+                            'origin' => null,
+                            'destination' => null,
+                        ];
+
+                        // Inject back the deleted question's logic jump into the arguments question jumps array
+                        array_splice($arguments['questions'][$position]['question']['jumps'], $jumpPosition, 0, [$deletedJump]);
+                    } else if (isset($realArgumentQuestion['jumps'][$jumpPosition]['conditions'])) {
+                        // Otherwise, we want to remove a condition in a logic jump
                         $argumentsJumpConditionsIds = array_map(static function(array $condition) {
                             return $condition['id'] ?? null;
                         }, $realArgumentQuestion['jumps'][$jumpPosition]['conditions']);
@@ -151,16 +162,23 @@ trait QuestionPersisterTrait
                             }
                         }
                     }
-                    if (\in_array($jump->getId(), $argumentsJumpsIds, true) === false) {
-                        $deletedJump = [
-                            'id' => $jump->getId(),
-                            'origin' => null,
-                            'destination' => null,
-                        ];
-                        // Inject back the deleted question's logic jump into the arguments question jumps array
-                        array_splice($arguments['questions'][$position]['question']['jumps'], $jumpPosition, 0, [$deletedJump]);
+                }
+                // And we set manually question jumps position to keep the same order between the front-end and the back-end
+                $arguments['questions'][$position]['question']['jumps'] = array_map(static function (array $jump, $key) {
+                    $jump['position'] = $key + 1;
+                    return $jump;
+                }, $arguments['questions'][$position]['question']['jumps'], array_keys($arguments['questions'][$position]['question']['jumps']));
+
+                foreach ($arguments['questions'][$position]['question']['jumps'] as &$jump) {
+                    // We do the same things for a jump conditions list
+                    if (isset($jump['conditions'])) {
+                        $jump['conditions'] = array_map(static function (array $condition, $key) {
+                            $condition['position'] = $key + 1;
+                            return $condition;
+                        }, $jump['conditions'], array_keys($jump['conditions']));
                     }
                 }
+                unset($jump);
             }
         }
 

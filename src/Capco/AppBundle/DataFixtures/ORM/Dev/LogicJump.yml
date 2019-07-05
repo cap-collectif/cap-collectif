@@ -1,81 +1,97 @@
 Capco\AppBundle\Entity\LogicJump:
   logicjump1:
     id: logicjump1
+    position: 1
     origin: '@multiplequestionFavoriteFleuve'
     destination: '@multiplequestionHapGange'
     conditions: ['@ljconditionFleuveHapLg1', '@ljconditionFleuveGange']
   logicjump2:
     id: logicjump2
+    position: 2
     origin: '@multiplequestionFavoriteFleuve'
     destination: '@multiplequestionHapCreation'
     conditions: ['@ljconditionFleuveHap']
   logicjump3:
     id: logicjump3
+    position: 3
     origin: '@multiplequestionFavoriteFleuve'
     destination: '@multiplequestionNoelFete'
     conditions: ['@ljconditionNoel']
   logicjump4:
     id: logicjump4
+    position: 4
     origin: '@multiplequestionMarvelOrDc'
     destination: '@multiplequestionMarvelIronManLike'
     conditions: ['@ljconditionMarvel']
   logicjump5:
     id: logicjump5
+    position: 5
     origin: '@multiplequestionMarvelOrDc'
     destination: '@multiplequestionDcSupermanLike'
     conditions: ['@ljconditionDc']
   logicjump10:
     id: logicjump10
+    position: 10
     origin: '@multiplequestionIsHapGood'
     destination: '@multiplequestionHapNotGoodHowDareYou'
     conditions: ['@ljconditionHapGood']
   logicjump12:
     id: logicjump12
+    position: 12
     origin: '@ljMultipleQuestionRadio'
     destination: '@ljMultipleQuestionSelect'
     conditions: ['@ljconditionRadio']
   logicjump13:
     id: logicjump13
+    position: 13
     origin: '@ljMultipleQuestionSelect'
     destination: '@ljMultipleQuestionButton'
     conditions: ['@ljconditionSelect']
   logicjump14:
     id: logicjump14
+    position: 14
     origin: '@ljMultipleQuestionButton'
     destination: '@ljMultipleQuestionCheckbox'
     conditions: ['@ljconditionButton']
   logicjump15:
     id: logicjump15
+    position: 15
     origin: '@ljMultipleQuestionCheckbox'
     destination: '@ljMultipleQuestionRanking'
     conditions: ['@ljconditionCheckbox']
   logicjump1ProposalForm15:
     id: logicjump1ProposalForm15
+    position: 1
     origin: '@multiplequestionFavoriteFleuveProposalForm15'
     destination: '@multiplequestionHapGangeProposalForm15'
     conditions: ['@ljconditionFleuveHapProposalForm15', '@ljconditionFleuveGangeProposalForm15']
   logicjump2ProposalForm15:
     id: logicjump2ProposalForm15
+    position: 2
     origin: '@multiplequestionFavoriteFleuveProposalForm15'
     destination: '@multiplequestionHapCreationProposalForm15'
     conditions: ['@ljconditionFleuveHapProposalForm15']
   logicjump3ProposalForm15:
     id: logicjump3ProposalForm15
+    position: 3
     origin: '@multiplequestionFavoriteFleuveProposalForm15'
     destination: '@multiplequestionNoelFeteProposalForm15'
     conditions: ['@ljconditionNoelProposalForm15']
   logicjump4ProposalForm15:
     id: logicjump4ProposalForm15
+    position: 4
     origin: '@multiplequestionMarvelOrDcProposalForm15'
     destination: '@multiplequestionMarvelIronManLikeProposalForm15'
     conditions: ['@ljconditionMarvelProposalForm15']
   logicjump5ProposalForm15:
     id: logicjump5ProposalForm15
+    position: 5
     origin: '@multiplequestionMarvelOrDcProposalForm15'
     destination: '@multiplequestionDcSupermanLikeProposalForm15'
     conditions: ['@ljconditionDcProposalForm15']
   logicjump10ProposalForm15:
     id: logicjump10ProposalForm15
+    position: 10
     origin: '@multiplequestionIsHapGoodProposalForm15'
     destination: '@multiplequestionHapNotGoodHowDareYouProposalForm15'
     conditions: ['@ljconditionHapGoodProposalForm15']

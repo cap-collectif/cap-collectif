@@ -80,7 +80,8 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     protected $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJump", mappedBy="origin", orphanRemoval=true, cascade={"persist", "remove"}, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJump", mappedBy="origin", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $jumps;
 
