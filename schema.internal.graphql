@@ -2137,7 +2137,7 @@ type Event implements Node & Commentable {
   zipCode: String @deprecated(reason: "Field `zipCode` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   # Identifies the address of the event.
-  fullAddress: String @deprecated(reason: "Field `fullAddress` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
+  fullAddress: String
 
   # The comments related to the commentable.
   comments(

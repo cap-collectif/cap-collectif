@@ -15,6 +15,7 @@ Capco\AppBundle\Entity\Event:
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
     createdAt: <identity((new \DateTime('2015-01-01')))>
+    addressJson: '[{"address_components":[{"long_name":"111","short_name":"111","types":["street_number"]},{"long_name":"Rue Georges Clemenceau","short_name":"Rue Georges Clemenceau","types":["route"]},{"long_name":"Sainte-Foy-l\u00e8s-Lyon","short_name":"Sainte-Foy-l\u00e8s-Lyon","types":["locality","political"]},{"long_name":"Rh\u00f4ne","short_name":"Rh\u00f4ne","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69110","short_name":"69110","types":["postal_code"]}],"formatted_address":"111 Rue Georges Clemenceau, 69110 Sainte-Foy-l\u00e8s-Lyon, France","geometry":{"location":{"lat":45.7417672,"lng":4.8058097},"location_type":"RANGE_INTERPOLATED","viewport":{"northeast":{"lat":45.74311618029149,"lng":4.807158680291503},"southwest":{"lat":45.74041821970849,"lng":4.804460719708498}}},"place_id":"Ej4xMTEgUnVlIEdlb3JnZXMgQ2xlbWVuY2VhdSwgNjkxMTAgU2FpbnRlLUZveS1sw6hzLUx5b24sIEZyYW5jZSIaEhgKFAoSCQ_BwZLB6_RHESAaJ_l8KGIrEG8","types":["street_address"]}]'
   event2:
     id: 'event2'
     title: PHPTourDuFuture
@@ -32,6 +33,7 @@ Capco\AppBundle\Entity\Event:
     projects: ['@p1']
     themes: ['@theme1']
     createdAt: <identity((new \DateTime('2015-01-02')))>
+    addressJson: '[{"address_components":[{"long_name":"Tour Eiffel","short_name":"Tour Eiffel","types":["bus_station","establishment","point_of_interest","transit_station"]},{"long_name":"Paris","short_name":"Paris","types":["locality","political"]},{"long_name":"Paris","short_name":"Paris","types":["administrative_area_level_2","political"]},{"long_name":"\u00cele-de-France","short_name":"\u00cele-de-France","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"75007","short_name":"75007","types":["postal_code"]}],"formatted_address":"Tour Eiffel, 75007 Paris, France","geometry":{"location":{"lat":48.860489,"lng":2.2959102},"location_type":"GEOMETRIC_CENTER","viewport":{"northeast":{"lat":48.8618379802915,"lng":2.297259180291502},"southwest":{"lat":48.85914001970851,"lng":2.294561219708498}}},"place_id":"ChIJARsZE-Fv5kcRr1x6No4iL28","plus_code":{"compound_code":"V76W+59 Paris, France","global_code":"8FW4V76W+59"},"types":["bus_station","establishment","point_of_interest","transit_station"]}]'
   event3:
     id: 'event3'
     title: GrenobleWeb2015
@@ -49,6 +51,7 @@ Capco\AppBundle\Entity\Event:
     guestListEnabled: true
     projects: ['@p1']
     createdAt: <identity((new \DateTime('2015-01-03')))>
+    addressJson: '[{"address_components":[{"long_name":"48","short_name":"48","types":["street_number"]},{"long_name":"Rue de Stalingrad","short_name":"Rue de Stalingrad","types":["route"]},{"long_name":"Grenoble","short_name":"Grenoble","types":["locality","political"]},{"long_name":"Is\u00e8re","short_name":"Is\u00e8re","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"38000","short_name":"38000","types":["postal_code"]}],"formatted_address":"48 Rue de Stalingrad, 38000 Grenoble, France","geometry":{"location":{"lat":45.1785573,"lng":5.725935499999999},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":45.1799062802915,"lng":5.727284480291502},"southwest":{"lat":45.17720831970851,"lng":5.724586519708497}}},"place_id":"ChIJCY6gF5T0ikcRzf3RXiLszMo","plus_code":{"compound_code":"5PHG+F7 Grenoble, France","global_code":"8FQ75PHG+F7"},"types":["establishment","health","point_of_interest","store"]}]'
   event4:
     id: event4
     title: SymfonyLive Paris
@@ -77,6 +80,7 @@ Capco\AppBundle\Entity\Event:
     author: '@user5'
     link: http://www.parisweb2014.fr
     createdAt: <identity((new \DateTime('2015-01-05')))>
+    addressJson: '[{"address_components":[{"long_name":"101","short_name":"101","types":["street_number"]},{"long_name":"Rue d\u0027Anvers","short_name":"Rue d\u0027Anvers","types":["route"]},{"long_name":"Lyon","short_name":"Lyon","types":["locality","political"]},{"long_name":"Rh\u00f4ne","short_name":"Rh\u00f4ne","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69007","short_name":"69007","types":["postal_code"]}],"formatted_address":"101 Rue d\u0027Anvers, 69007 Lyon, France","geometry":{"location":{"lat":45.7479199,"lng":4.840617},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":45.7492688802915,"lng":4.841965980291502},"southwest":{"lat":45.7465709197085,"lng":4.839268019708498}}},"partial_match":true,"place_id":"ChIJ1eTj80bq9EcRrNwEr2-V3kU","plus_code":{"compound_code":"PRXR+56 Lyon, France","global_code":"8FQ6PRXR+56"},"types":["street_address"]}]'
   event6:
     id: event6
     title: Event without registrations
@@ -92,6 +96,7 @@ Capco\AppBundle\Entity\Event:
     author: '@user1'
     link: https://www.hellfest.fr/
     createdAt: <identity((new \DateTime('2015-01-06')))>
+    addressJson: '[{"address_components":[{"long_name":"103","short_name":"103","types":["street_number"]},{"long_name":"Grande Rue de la Croix-Rousse","short_name":"Grande Rue de la Croix-Rousse","types":["route"]},{"long_name":"Lyon","short_name":"Lyon","types":["locality","political"]},{"long_name":"Rh\u00f4ne","short_name":"Rh\u00f4ne","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rh\u00f4ne-Alpes","short_name":"Auvergne-Rh\u00f4ne-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69004","short_name":"69004","types":["postal_code"]}],"formatted_address":"103 Grande Rue de la Croix-Rousse, 69004 Lyon, France","geometry":{"location":{"lat":45.7817345,"lng":4.8305811},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":45.78308348029149,"lng":4.831930080291502},"southwest":{"lat":45.7803855197085,"lng":4.829232119708498}}},"place_id":"ChIJjTMnvR_r9EcRYmk8W0oMmC0","plus_code":{"compound_code":"QRJJ+M6 Lyon, France","global_code":"8FQ6QRJJ+M6"},"types":["street_address"]}]'
   event7:
     id: 'event7'
     title: Event 7
@@ -171,3 +176,4 @@ Capco\AppBundle\Entity\Event:
     city: Meysse
     address: 1 rue chevrière
     createdAt: <identity((new \DateTime('2015-01-14')))>
+    addressJson: '[{"address_components" : [ {"long_name" : "1","short_name" : "1","types" : [ "street_number" ] }, {"long_name" : "Rue Chevrière","short_name" : "Rue Chevrière","types" : [ "route" ] }, {"long_name" : "Meysse","short_name" : "Meysse","types" : [ "locality", "political" ] }, {"long_name" : "Ardèche","short_name" : "Ardèche","types" : [ "administrative_area_level_2", "political" ] }, {"long_name" : "Auvergne-Rhône-Alpes","short_name" : "Auvergne-Rhône-Alpes","types" : [ "administrative_area_level_1", "political" ] }, {"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ] }, {"long_name" : "07400","short_name" : "07400","types" : [ "postal_code" ] }],"formatted_address" : "1 Rue Chevrière, 07400 Meysse, France","geometry" : { "location" : {"lat" : 44.609786,"lng" : 4.7250767 }, "location_type" : "ROOFTOP", "viewport" : {"northeast" : { "lat" : 44.6111349802915, "lng" : 4.726425680291502},"southwest" : { "lat" : 44.6084370197085, "lng" : 4.723727719708497} }},"place_id" : "ChIJxdE9Avk_tRIR1LmllEhge_g","plus_code" : { "compound_code" : "JP5G+W2 Meysse, France", "global_code" : "8FP6JP5G+W2"},"types" : ["street_address"]}]'

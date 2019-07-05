@@ -83,4 +83,15 @@ describe('<EventListPaginated />', () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders correctly when status future and no future events and no passed events and previewPassedEvents is null', () => {
+    const wrapper = shallow(
+      <EventListPaginated
+        {...props}
+        query={{ ...props.query, events: emptyConnection, previewPassedEvents: null }}
+        status="ongoing-and-future"
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
 });

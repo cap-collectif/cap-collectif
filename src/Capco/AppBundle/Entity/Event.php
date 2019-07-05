@@ -287,6 +287,10 @@ class Event implements
 
     public function getLat(): ?float
     {
+        if ($this->addressJson) {
+            return json_decode($this->addressJson, true)[0]['geometry']['location']['lat'];
+        }
+
         return $this->lat;
     }
 
@@ -307,6 +311,10 @@ class Event implements
 
     public function getLng(): ?float
     {
+        if ($this->addressJson) {
+            return json_decode($this->addressJson, true)[0]['geometry']['location']['lng'];
+        }
+
         return $this->lng;
     }
 
@@ -494,6 +502,10 @@ class Event implements
 
     public function getFullAddress(): ?string
     {
+        if ($this->addressJson) {
+            return json_decode($this->addressJson, true)[0]['formatted_address'];
+        }
+
         $address = !empty($this->getAddress()) ? $this->getAddress() . ', ' : '';
         $address .= !empty($this->getZipCode()) ? $this->getZipCode() . ' ' : '';
         $address .= !empty($this->getCity()) ? $this->getCity() : '';

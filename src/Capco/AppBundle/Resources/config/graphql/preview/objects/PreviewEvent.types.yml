@@ -56,4 +56,3 @@ PreviewEvent:
       fullAddress:
         type: 'String'
         description: 'Identifies the address of the event.'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-09-01", reason: "This field use a deprecated name.", description: "Field `fullAddress` will be removed.", supersededBy: ""})'

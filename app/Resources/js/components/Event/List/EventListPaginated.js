@@ -72,7 +72,9 @@ export const EventListPaginated = (props: Props) => {
 
   if (!query.events || query.events.totalCount === 0) {
     const showPreviewPassedEvents =
-      status === 'ongoing-and-future' && query.previewPassedEvents.totalCount > 0;
+      status === 'ongoing-and-future' &&
+      query.previewPassedEvents &&
+      query.previewPassedEvents.totalCount > 0;
     return (
       <>
         <p className={classNames({ 'p--centered': true, 'mb-40': true })}>

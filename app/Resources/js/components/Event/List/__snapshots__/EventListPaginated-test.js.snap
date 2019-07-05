@@ -144,3 +144,16 @@ exports[`<EventListPaginated /> renders correctly when status future and no futu
   </p>
 </Fragment>
 `;
+
+exports[`<EventListPaginated /> renders correctly when status future and no future events and no passed events and previewPassedEvents is null 1`] = `
+<Fragment>
+  <p
+    className="p--centered mb-40"
+  >
+    <FormattedMessage
+      id="event.empty"
+      values={Object {}}
+    />
+  </p>
+</Fragment>
+`;
