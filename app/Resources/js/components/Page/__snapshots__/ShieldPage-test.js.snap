@@ -2,12 +2,8 @@
 
 exports[`<ShieldPage /> renders with registration disabled 1`] = `
 <div
-  className="col-md-4 col-md-offset-4 panel panel-default"
-  style={
-    Object {
-      "background": "white",
-    }
-  }
+  className="bg-white col-md-4 col-md-offset-4 panel panel-default"
+  id="shield-agent"
 >
   <div
     className="panel-body"
@@ -33,6 +29,27 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
         />
       </Button>
     </form>
+  </div>
+</div>
+`;
+
+exports[`<ShieldPage /> renders with registration disabled and classical auth by pass enabled 1`] = `
+<div
+  className="bg-white col-md-4 col-md-offset-4 panel panel-default"
+  id="shield-agent"
+>
+  <div
+    className="panel-body"
+  >
+    <div
+      className="mb-10 font-weight-bold"
+    >
+      <FormattedMessage
+        id="authenticate-with"
+        values={Object {}}
+      />
+    </div>
+    <Connect(LoginBox) />
   </div>
 </div>
 `;

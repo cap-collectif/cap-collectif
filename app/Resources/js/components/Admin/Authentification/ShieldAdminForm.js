@@ -52,57 +52,60 @@ export const ShieldAdminForm = (props: Props) => {
   } = props;
 
   return (
-    <div className="box-content box-content__content-form">
-      <form onSubmit={handleSubmit} id={`${formName}`}>
-        <div className="d-flex align-items-center mb-15">
+    <div className="box box-primary container-fluid">
+      <div className="box-header">
+        <h3 className="box-title">
+          <FormattedMessage id="admin.label.pages.shield" />
+        </h3>
+      </div>
+      <div className="box-content box-content__content-form">
+        <form onSubmit={handleSubmit} id={`${formName}`}>
+          <div className="d-flex align-items-center mb-15">
+            <Field
+              id={`${formName}_shieldMode`}
+              name="shieldMode"
+              component={Toggle}
+              label={<FormattedMessage id="capco.module.shield_mode" />}
+            />
+          </div>
           <Field
-            id={`${formName}_shieldMode`}
-            name="shieldMode"
-            component={Toggle}
+            id={`${formName}_introduction`}
+            name="introduction"
+            type="editor"
+            component={component}
             label={
-              <span>
-                <FormattedMessage id="capco.module.shield_mode" />
-              </span>
+              <h4>
+                <FormattedMessage id="shield.introduction" />
+              </h4>
             }
           />
-        </div>
-        <Field
-          id={`${formName}_introduction`}
-          name="introduction"
-          type="editor"
-          component={component}
-          label={
-            <h4>
-              <FormattedMessage id="shield.introduction" />
-            </h4>
-          }
-        />
-        <Field
-          id={`${formName}_media`}
-          name="media"
-          component={component}
-          type="image"
-          label={
-            <h4>
-              <FormattedMessage id="image.shield" />
-            </h4>
-          }
-        />
-        <Button
-          type="submit"
-          id={`${formName}_submit`}
-          bsStyle="primary"
-          disabled={pristine || invalid || submitting}>
-          <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-        </Button>
-        <AlertForm
-          valid={valid}
-          invalid={invalid}
-          submitting={submitting}
-          submitSucceeded={submitSucceeded}
-          submitFailed={submitFailed}
-        />
-      </form>
+          <Field
+            id={`${formName}_media`}
+            name="media"
+            component={component}
+            type="image"
+            label={
+              <h4>
+                <FormattedMessage id="image.shield" />
+              </h4>
+            }
+          />
+          <Button
+            type="submit"
+            id={`${formName}_submit`}
+            bsStyle="primary"
+            disabled={pristine || invalid || submitting}>
+            <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+          </Button>
+          <AlertForm
+            valid={valid}
+            invalid={invalid}
+            submitting={submitting}
+            submitSucceeded={submitSucceeded}
+            submitFailed={submitFailed}
+          />
+        </form>
+      </div>
     </div>
   );
 };
