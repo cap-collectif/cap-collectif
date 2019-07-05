@@ -12,9 +12,9 @@ Scenario: Email should be sent to admin if a user create a reply in a questionna
   """
   And I consume "questionnaire_reply"
   Then I open mail with subject "email.notification.questionnaire.reply.subject.create"
-  And email should match snapshot "notifyQuestionnaireReply_create.html.twig"
+  And email should match snapshot "notifyQuestionnaireReply_create.html"
   Then I open mail with subject "reply.notify.user.create"
-  And email should match snapshot "notifyUserQuestionnaireReply_create.html.twig"
+  And email should match snapshot "notifyUserQuestionnaireReply_create.html"
 
 @rabbitmq @snapshot
 Scenario: Email should be sent to admin if a user update a reply in a questionnaire
@@ -27,9 +27,9 @@ Scenario: Email should be sent to admin if a user update a reply in a questionna
   """
   And I consume "questionnaire_reply"
   Then I open mail with subject "email.notification.questionnaire.reply.subject.update"
-  And email should match snapshot "notifyQuestionnaireReply_update.html.twig"
+  And email should match snapshot "notifyQuestionnaireReply_update.html"
   Then I open mail with subject "reply.notify.user.update"
-  And email should match snapshot "notifyUserQuestionnaireReply_update.html.twig"
+  And email should match snapshot "notifyUserQuestionnaireReply_update.html"
 
 @rabbitmq @snapshot
 Scenario: Email should be sent to admin if a user delete a reply in a questionnaire
@@ -49,4 +49,4 @@ Scenario: Email should be sent to admin if a user delete a reply in a questionna
   """
   And I consume "questionnaire_reply"
   Then I open mail with subject "email.notification.questionnaire.reply.subject.delete"
-  And email should match snapshot "notifyQuestionnaireReply_delete.html.twig"
+  And email should match snapshot "notifyQuestionnaireReply_delete.html"

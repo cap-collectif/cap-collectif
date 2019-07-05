@@ -52,4 +52,4 @@ Scenario: The email sent to the interlocutor should be sent
   And I wait "#current-alert" to appear on current page
   Then 1 mails should be sent
   And I open mail with subject 'via-the-contact-form-of {"{object}":"Proposition de partenariat avec Dop","{siteName}":"Cap-Collectif"}'
-  Then email should match snapshot "contact.html.twig"
+  Then email should match snapshot "contact.html"
