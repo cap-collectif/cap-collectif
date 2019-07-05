@@ -18,10 +18,10 @@ PreviewMutation:
           inputType: PreviewChangeEventInput
           payloadType: PreviewChangeEventPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeEventMutation", [value, getUser()])'
-      removeEvent:
+      deleteEvent:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
-          inputType: RemoveEventInput
-          payloadType: RemoveEventPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveEventMutation", [value, getUser()])'
+          inputType: PreviewDeleteEventInput
+          payloadType: PreviewDeleteEventPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteEventMutation", [value, getUser()])'

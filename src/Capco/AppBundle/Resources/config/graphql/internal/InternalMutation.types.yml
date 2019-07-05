@@ -40,13 +40,13 @@ InternalMutation:
           inputType: InternalAddEventInput
           payloadType: InternalAddEventPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventMutation", [value, getUser()])'
-      removeEvent:
+      deleteEvent:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
-          inputType: RemoveEventInput
-          payloadType: RemoveEventPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveEventMutation", [value, getUser()])'
+          inputType: DeleteEventInput
+          payloadType: DeleteEventPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteEventMutation", [value, getUser()])'
       addEvents:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'

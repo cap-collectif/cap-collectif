@@ -101,12 +101,12 @@ input AddEventInput {
   startAt: DateTime!
 
   # The contents of the event endAt.
-  endAt: DateTime!
+  endAt: DateTime
 
   # Whether or not this event is published.
   enabled: Boolean = true
 
-  # ID of an Event to delete.
+  # Media to join to the event
   media: ID
 
   # The metadescription of the event page.
@@ -666,12 +666,12 @@ input ChangeEventInput {
   startAt: DateTime!
 
   # The contents of the event endAt.
-  endAt: DateTime!
+  endAt: DateTime
 
   # Whether or not this event is published.
   enabled: Boolean = true
 
-  # ID of an Event to delete.
+  # Media to join to the event
   media: ID
 
   # The metadescription of the event page.
@@ -1893,6 +1893,18 @@ type DeleteCommentPayload {
   clientMutationId: String
 }
 
+input DeleteEventInput {
+  # ID of an Event to delete.
+  eventId: ID!
+  clientMutationId: String
+}
+
+type DeleteEventPayload {
+  # ID of Event to deleted.
+  deletedEventId: ID
+  clientMutationId: String
+}
+
 input DeleteGroupInput {
   # The group id
   groupId: ID!
@@ -2779,7 +2791,7 @@ enum MultipleChoiceQuestionValidationRulesTypes {
 type Mutation {
   addEvent(input: AddEventInput!): AddEventPayload
   changeEvent(input: ChangeEventInput!): ChangeEventPayload
-  removeEvent(input: RemoveEventInput!): RemoveEventPayload
+  deleteEvent(input: DeleteEventInput!): DeleteEventPayload
   changeMapProviderToken(input: ChangeMapProviderTokenInput!): ChangeMapProviderTokenPayload
   changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
   removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload
@@ -5092,18 +5104,6 @@ input RemoveContactFormInput {
 type RemoveContactFormPayload {
   # Id of the deleted contact form.
   deletedContactFormId: ID!
-  clientMutationId: String
-}
-
-input RemoveEventInput {
-  # ID of an Event to delete.
-  eventId: ID!
-  clientMutationId: String
-}
-
-type RemoveEventPayload {
-  # ID of Event to deleted.
-  deletedEventId: ID
   clientMutationId: String
 }
 

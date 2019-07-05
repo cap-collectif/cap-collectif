@@ -14,7 +14,7 @@ PreviewAddEventInput:
         type: 'DateTime!'
         description: 'The contents of the event startAt.'
       endAt:
-        type: 'DateTime!'
+        type: 'DateTime'
         description: 'The contents of the event endAt.'
       enabled:
         type: 'Boolean'
@@ -22,7 +22,7 @@ PreviewAddEventInput:
         description: 'Whether or not this event is published.'
       media:
         type: 'ID'
-        description: 'ID of an Event to delete.'
+        description: 'Media to join to the event'
       metaDescription:
         type: 'String'
         description: 'The metadescription of the event page.'
@@ -50,6 +50,7 @@ PreviewAddEventInput:
       customCode:
         type: 'String'
         description: 'The contents of the event customCode.'
+        # cannot add access in type: relay-mutation-input
       projects:
         type: '[ID]'
         description: 'The list of projects associated to this event.'

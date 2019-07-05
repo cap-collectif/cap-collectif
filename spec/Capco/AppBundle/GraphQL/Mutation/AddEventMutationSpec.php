@@ -13,6 +13,7 @@ use Capco\AppBundle\Form\EventType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Capco\AppBundle\GraphQL\Mutation\AddEventMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -24,7 +25,7 @@ class AddEventMutationSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
         Indexer $indexer
@@ -39,7 +40,7 @@ class AddEventMutationSpec extends ObjectBehavior
 
     public function it_persists_new_event(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         Arg $arguments,
         User $viewer,
         Form $form,
@@ -75,6 +76,64 @@ class AddEventMutationSpec extends ObjectBehavior
         $payload['eventEdge']->shouldHaveType(Edge::class);
         $payload['eventEdge']->node->shouldHaveType(Event::class);
         $payload['eventEdge']->node->getAuthor()->shouldBe($viewer);
+    }
+
+    public function it_try_to_persists_new_event_with_customCode_as_user(
+        Arg $arguments,
+        User $viewer
+    ) {
+        $values = ['body' => 'My body', 'customCode' => 'abc'];
+        $viewer->getId()->willReturn('iMTheAuthor');
+        $viewer->getUsername()->willReturn('My username is toto');
+        $viewer->isAdmin()->willReturn(false);
+        $viewer->isSuperAdmin()->willReturn(false);
+
+        $arguments->getRawArguments()->willReturn($values);
+        $payload = $this->__invoke($arguments, $viewer);
+        $payload->shouldHaveCount(2);
+        $payload['userErrors']->shouldBe([
+            ['message' => 'You are not authorized to add customCode field.']
+        ]);
+        $payload['eventEdge']->shouldBe(null);
+    }
+
+    public function it_try_to_persists_new_event_with_customCode_as_admin(
+        EntityManagerInterface $em,
+        FormFactoryInterface $formFactory,
+        Arg $arguments,
+        User $viewer,
+        Form $form,
+        Indexer $indexer,
+        Event $event
+    ) {
+        $values = ['body' => 'My body', 'customCode' => 'abc'];
+
+        $event->getBody()->willReturn('My body');
+        $viewer->getId()->willReturn('iMTheAuthor');
+        $viewer->getUsername()->willReturn('My username is toto');
+        $viewer->isAdmin()->willReturn(true);
+        $viewer->isSuperAdmin()->willReturn(false);
+
+        $event->getAuthor()->willReturn($viewer);
+
+        $form->submit($values, false)->willReturn(null);
+        $form->isValid()->willReturn(true);
+
+        $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
+        $arguments->getRawArguments()->willReturn($values);
+
+        $em->persist(Argument::type(Event::class))->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+
+        // we cant moke ID with phpSpec, but in reality there is an ID
+        $indexer->index(Event::class, null)->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalled();
+
+        $payload = $this->__invoke($arguments, $viewer);
+        $payload->shouldHaveCount(2);
+        $payload['userErrors']->shouldBe([]);
+        $payload['eventEdge']->shouldHaveType(Edge::class);
+        $payload['eventEdge']->node->shouldHaveType(Event::class);
         $payload['eventEdge']->node->getAuthor()->shouldBe($viewer);
     }
 

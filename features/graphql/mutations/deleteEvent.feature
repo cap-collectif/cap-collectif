@@ -1,5 +1,5 @@
-@removeEvent
-Feature: mutation removeEvent
+@deleteEvent
+Feature: mutation deleteEvent
 
 @database
 Scenario: Logged in API client wants delete his event
@@ -7,8 +7,8 @@ Scenario: Logged in API client wants delete his event
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: RemoveEventInput!) {
-      removeEvent(input: $input) {
+    "query": "mutation ($input: DeleteEventInput!) {
+      deleteEvent(input: $input) {
         deletedEventId
       }
     }",

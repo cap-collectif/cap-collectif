@@ -44,12 +44,13 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Form $form,
         Event $event
     ) {
-        $values = ['id' => 'base64id', 'body' => 'My body'];
+        $values = ['id' => 'base64id', 'body' => 'My body', 'customCode' => 'abc'];
+        $viewer->isAdmin()->willReturn(true);
         $arguments->getRawArguments()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
 
         $formFactory->create(EventType::class, $event)->willReturn($form);
-        $form->submit(['body' => 'My body'], false)->willReturn(null);
+        $form->submit(['body' => 'My body', 'customCode' => 'abc'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
 
@@ -97,6 +98,22 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $this->shouldThrow(GraphQLException::fromString('Invalid data.'))->during('__invoke', [
             $arguments,
             $viewer
+        ]);
+    }
+
+    public function it_try_to_persists_new_event_with_customCode_as_user(
+        Arg $arguments,
+        User $viewer
+    ) {
+        $values = ['body' => 'My body', 'customCode' => 'abc'];
+        $viewer->getId()->willReturn('iMTheAuthor');
+        $viewer->getUsername()->willReturn('My username is toto');
+        $viewer->isAdmin()->willReturn(false);
+
+        $arguments->getRawArguments()->willReturn($values);
+        $this->__invoke($arguments, $viewer)->shouldBe([
+            'eventEdge' => null,
+            'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
         ]);
     }
 }

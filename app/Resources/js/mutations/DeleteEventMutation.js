@@ -3,19 +3,19 @@ import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
-  RemoveEventMutationVariables,
-  RemoveEventMutationResponse,
-} from '~relay/RemoveEventMutation.graphql';
+  DeleteEventMutationVariables,
+  DeleteEventMutationResponse,
+} from '~relay/DeleteEventMutation.graphql';
 
 const mutation = graphql`
-  mutation RemoveEventMutation($input: RemoveEventInput!) {
-    removeEvent(input: $input) {
+  mutation DeleteEventMutation($input: DeleteEventInput!) {
+    deleteEvent(input: $input) {
       deletedEventId
     }
   }
 `;
 
-const commit = (variables: RemoveEventMutationVariables): Promise<RemoveEventMutationResponse> =>
+const commit = (variables: DeleteEventMutationVariables): Promise<DeleteEventMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,

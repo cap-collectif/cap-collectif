@@ -93,3 +93,38 @@ Scenario: Admin wants to change an event
      }
   }
   """
+
+@database
+Scenario: User wants to change an event
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+   {
+    "query": "mutation ($input: ChangeEventInput!) {
+      changeEvent(input: $input) {
+        eventEdge {
+          node {
+            id
+            title
+            body
+            customCode
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "RXZlbnQ6ZXZlbnQx",
+        "title": "Rencontre avec les habitants",
+        "body": "Tout le monde est invité",
+        "startAt": "2018-03-07 00:00:00",
+        "customCode": "customCode",
+        "registrationEnable": true
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {"data":{"changeEvent":{"eventEdge":null}}}
+  """

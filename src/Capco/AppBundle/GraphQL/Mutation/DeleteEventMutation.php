@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
-class RemoveEventMutation implements MutationInterface
+class DeleteEventMutation implements MutationInterface
 {
     private $em;
     private $globalIdResolver;

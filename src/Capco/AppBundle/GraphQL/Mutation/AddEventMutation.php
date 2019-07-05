@@ -44,6 +44,12 @@ class AddEventMutation implements MutationInterface
     {
         $values = $input->getRawArguments();
 
+        if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
+            return [
+                'eventEdge' => null,
+                'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
+            ];
+        }
         /** @var User $author */
         $author = isset($values['author'])
             ? $this->globalIdResolver->resolve($values['author'], $viewer)
