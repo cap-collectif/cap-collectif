@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Behat;
 
 use Behat\Mink\Session;
-use Capco\AppBundle\Behat\Traits\AdminOpinionTypeTrait;
 use Elastica\Snapshot;
 use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;
@@ -69,7 +68,6 @@ class ApplicationContext extends UserContext
     use AdminProjectTrait;
     use AdminShieldTrait;
     use AdminOpinionTait;
-    use AdminOpinionTypeTrait;
 
     protected $dbContainer;
     protected $cookieConsented;

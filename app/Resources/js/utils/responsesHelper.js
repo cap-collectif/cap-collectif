@@ -515,10 +515,11 @@ export const validateResponses = (
   // TODO: remove this parameter from the function and create generic traduction keys for all errors.
   className: string,
   intl: IntlShape,
+  isDraft: boolean = false,
 ): { responses?: ResponsesError } => {
   const responsesError = questions.map(question => {
     const response = responses.filter(res => res && res.question === question.id)[0];
-    if (question.required) {
+    if ((question.required && !isDraft) || (response.value && isDraft)) {
       if (question.type === 'medias') {
         if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
           return { value: `${className}.constraints.field_mandatory` };

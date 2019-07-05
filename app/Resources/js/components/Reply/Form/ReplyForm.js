@@ -129,11 +129,8 @@ const validate = (values: FormValues, props: Props) => {
   const { questions } = props.questionnaire;
   const { responses } = values;
   const errors = {};
+  const responsesError = validateResponses(questions, responses, 'reply', props.intl, values.draft);
 
-  const responsesError = validateResponses(questions, responses, 'reply', props.intl);
-  if (values.draft) {
-    return errors;
-  }
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses;
   }

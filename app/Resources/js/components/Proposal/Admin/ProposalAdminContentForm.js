@@ -99,10 +99,11 @@ export const validateProposalContent = (
   proposalForm: ProposalForm,
   features: FeatureToggles,
   intl: IntlShape,
+  isDraft: boolean,
 ) => {
   const errors = {};
   if (!values.title || values.title.length <= 2) {
-    errors.title = 'proposal.constraints.title';
+    errors.title = !isDraft ? 'proposal.constraints.title' : 'proposal.constraints.title_for_draft';
   }
   if (
     proposalForm.usingSummary &&
@@ -145,6 +146,7 @@ export const validateProposalContent = (
     values.responses,
     'proposal',
     intl,
+    isDraft,
   );
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses;
@@ -154,7 +156,7 @@ export const validateProposalContent = (
 };
 
 const validate = (values: FormValues, { proposal, features, intl }: Props) =>
-  validateProposalContent(values, proposal.form, features, intl);
+  validateProposalContent(values, proposal.form, features, intl, values.draft);
 
 type State = {
   showEditFusionModal: boolean,

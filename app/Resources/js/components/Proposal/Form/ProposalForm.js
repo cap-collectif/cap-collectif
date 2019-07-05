@@ -223,21 +223,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 const validate = (values: FormValues, { proposalForm, features, intl }: Props) => {
-  const errors = {};
-
-  if (values.draft) {
-    if (!values.title) {
-      errors.title = 'proposal.constraints.title_for_draft';
-    } else if (values.title.length <= 2) {
-      errors.title = 'proposal.constraints.title';
-    }
-    if (values.summary && values.summary.length > 140) {
-      errors.summary = 'proposal.constraints.summary';
-    }
-    return errors;
-  }
-
-  return validateProposalContent(values, proposalForm, features, intl);
+  return validateProposalContent(values, proposalForm, features, intl, values.draft);
 };
 
 type State = {
