@@ -95,6 +95,7 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
           <UserAvatarList
             users={project && project.authors ? project.authors : []}
             onClick={this.handleClickModal}
+            max={3}
           />
         </div>
         <AuthorsContainer>

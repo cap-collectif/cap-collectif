@@ -25,7 +25,8 @@ exports[`<ProjectHeaderAuthors /> renders correctly with 3 authors 1`] = `
     }
   />
   <div>
-    <ForwardRef(Relay(UserAvatarList))
+    <ForwardRef(Relay(Connect(UserAvatarList)))
+      max={3}
       onClick={[Function]}
       users={
         Array [
@@ -94,7 +95,8 @@ exports[`<ProjectHeaderAuthors /> renders correctly with one author 1`] = `
     }
   />
   <div>
-    <ForwardRef(Relay(UserAvatarList))
+    <ForwardRef(Relay(Connect(UserAvatarList)))
+      max={3}
       onClick={[Function]}
       users={
         Array [
@@ -153,7 +155,8 @@ exports[`<ProjectHeaderAuthors /> renders correctly with two authors 1`] = `
     }
   />
   <div>
-    <ForwardRef(Relay(UserAvatarList))
+    <ForwardRef(Relay(Connect(UserAvatarList)))
+      max={3}
       onClick={[Function]}
       users={
         Array [
@@ -212,7 +215,8 @@ exports[`<ProjectHeaderAuthors /> renders correctly without authors 1`] = `
     users={Array []}
   />
   <div>
-    <ForwardRef(Relay(UserAvatarList))
+    <ForwardRef(Relay(Connect(UserAvatarList)))
+      max={3}
       onClick={[Function]}
       users={Array []}
     />

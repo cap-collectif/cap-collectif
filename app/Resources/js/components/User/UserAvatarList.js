@@ -20,6 +20,7 @@ const AvatarButton = styled.button.attrs({})`
   outline: none;
   border: none;
   background: none;
+  padding: 0;
 `;
 
 export const UserAvatarList = (props: Props) => {
@@ -45,7 +46,7 @@ export const UserAvatarList = (props: Props) => {
             </AvatarButton>
           ),
         )}
-      {users.length > 5 && (
+      {users.length > max && (
         <AvatarButton onClick={onClick}>
           <Button
             bsStyle="link"

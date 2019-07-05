@@ -36,11 +36,9 @@ const ProjectAuthorList = styled(ListGroup)`
 
 const renderAuthorItemUserName = (user, profileFeature) =>
   profileFeature ? (
-    <a className="ml-15" href={user.url}>
-      {user.username}
-    </a>
+    <a href={user.url}>{user.username}</a>
   ) : (
-    <span className="ml-15 font-weight-bold">{user.username}</span>
+    <span className="font-weight-bold">{user.username}</span>
   );
 const renderAuthorsList = (users: ProjectHeaderAuthorsModal_users, features) =>
   users.map(user => (
@@ -49,21 +47,14 @@ const renderAuthorsList = (users: ProjectHeaderAuthorsModal_users, features) =>
         <UserAvatar user={user} features={features} />
         <div className="d-flex fd-column">
           {renderAuthorItemUserName(user, features.profiles)}{' '}
-          <span className="ml-15 excerpt">{user.userType ? user.userType.name : ''}</span>
+          <span className="excerpt">{user.userType ? user.userType.name : ''}</span>
         </div>
       </div>
     </ProjectAuthorItem>
   ));
 
 export const ProjectHeaderAuthorsModal = ({ show, onClose, users, features }: Props) => (
-  <Modal
-    id="show-authors-modal"
-    className="reply__modal--show"
-    animation={false}
-    onHide={onClose}
-    show={show}
-    bsSize="large"
-    aria-labelledby="contained-modal-title-lg">
+  <Modal id="show-authors-modal" animation={false} onHide={onClose} show={show}>
     <Modal.Header closeButton>
       <Modal.Title id="contained-modal-title-lg" className="font-weight-bold">
         <FormattedMessage

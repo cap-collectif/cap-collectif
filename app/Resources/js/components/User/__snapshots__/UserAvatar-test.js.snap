@@ -11,7 +11,7 @@ exports[`<UserAvatar /> renders correctly 1`] = `
 >
   <img
     alt="toto"
-    className="img-circle object-cover user-avatar"
+    className="img-circle object-cover user-avatar mr-10"
     src="http://media12/profileAvatar.jpg"
     style={
       Object {
@@ -33,7 +33,7 @@ exports[`<UserAvatar /> renders correctly user without avatar 1`] = `
   style={Object {}}
 >
   <DefaultAvatar
-    className="img-circle avatar mr-0 user-avatar"
+    className="img-circle avatar user-avatar mr-10"
     size={16}
   />
 </span>
@@ -50,7 +50,7 @@ exports[`<UserAvatar /> renders correctly with custom default avatar 1`] = `
 >
   <img
     alt="toto"
-    className="img-circle object-cover user-avatar"
+    className="img-circle object-cover user-avatar mr-10"
     src="http://avatar/customAvatar.jpg"
     style={
       Object {
