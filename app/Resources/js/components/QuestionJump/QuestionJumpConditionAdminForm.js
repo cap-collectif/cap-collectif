@@ -41,9 +41,11 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
     currentQuestion: null,
   };
 
+  // TODO: Remove state, use instead selectedQuestion from redux props
   handleQuestionChange = (e: $FlowFixMe) => {
     this.setState({ currentQuestion: e.target.value }, () => {
       const { currentQuestion } = this.state;
+      console.log(this.state.currentQuestion, this.props.selectedQuestion);
       const { questions, member, formName, dispatch } = this.props;
       const question = questions.find(q => q.id === currentQuestion);
 
