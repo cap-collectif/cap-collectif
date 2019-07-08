@@ -22,7 +22,7 @@ Scenario: Can see opinions in project with endless participation
     | stepSlug    | etape-participation-continue                                         |
   Then I should see "Étape participation continue"
 
-@read-only @randomly-failing
+@read-only
 Scenario: An anonymous can paginate opinions inside a section
   Given I am logged in as user
   And I visited "section page" with:
