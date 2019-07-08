@@ -540,7 +540,8 @@ export const validateResponses = (
           (response.value &&
             Array.isArray(response.value.labels) &&
             response.value.labels.length === 0 &&
-            (response.value.other === null || response.value.other === ''))
+            (response.value.other === null || response.value.other === '') &&
+            !isDraft)
         ) {
           // We don't have a field with ${name}.value
           // Maybe ${name}.value._error could do the job but it doesn't
@@ -571,7 +572,8 @@ export const validateResponses = (
       question.type !== 'button' &&
       response.value &&
       typeof response.value === 'object' &&
-      (Array.isArray(response.value.labels) || Array.isArray(response.value))
+      (Array.isArray(response.value.labels) || Array.isArray(response.value)) &&
+      !isDraft
     ) {
       const rule = question.validationRule;
       const responsesNumber = getResponseNumber(response.value);
@@ -589,7 +591,10 @@ export const validateResponses = (
 
       if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
         return {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_equal' }, { nb: rule.number }),
+          value: intl.formatMessage(
+            { id: 'reply.constraints.choices_equal' },
+            { nb: rule.number },
+          ),
         };
       }
     }

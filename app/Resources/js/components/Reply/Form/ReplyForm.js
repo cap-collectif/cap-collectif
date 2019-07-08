@@ -287,7 +287,7 @@ const mapStateToProps = (state: State, props: Props) => {
       ) || defaultResponses,
     initialValues: {
       responses: defaultResponses,
-      draft: props.reply && props.reply.draft ? props.reply.draft : false,
+      draft: props.reply && props.reply.draft ? props.reply.draft : true,
       private: props.reply ? props.reply.private : false,
     },
     user: state.user.user,
