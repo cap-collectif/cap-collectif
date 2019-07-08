@@ -169,7 +169,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
               <FormattedMessage id="conditional-jumps" />
             </span>
           </h4>
-          {currentQuestion.id ? (
+          {currentQuestion && currentQuestion.id ? (
             <FieldArray
               name={`${member}.jumps`}
               component={QuestionsJumpAdmin}
