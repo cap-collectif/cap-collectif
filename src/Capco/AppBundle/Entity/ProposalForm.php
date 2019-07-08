@@ -436,10 +436,10 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return true;
     }
 
-    public function viewerCanSeeInBo($user = null): bool
+    public function canDisplayInBo($user = null): bool
     {
         if ($this->getStep()) {
-            return $this->getStep()->viewerCanSeeInBo($user);
+            return $this->getStep()->canDisplayInBO($user);
         }
 
         // not linked to a project so we can display it

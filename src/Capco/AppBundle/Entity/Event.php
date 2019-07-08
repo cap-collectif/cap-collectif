@@ -494,7 +494,7 @@ class Event implements
         return ['Elasticsearch', 'ElasticsearchWithAuthor'];
     }
 
-    public function viewerCanSeeInBo($user = null): bool
+    public function canDisplayInBo($user = null): bool
     {
         return true;
     }

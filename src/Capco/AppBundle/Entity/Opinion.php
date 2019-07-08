@@ -490,9 +490,9 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
             ($user && $user->isAdmin());
     }
 
-    public function viewerCanSeeInBo($user = null): bool
+    public function canDisplayInBo($user = null): bool
     {
-        return ($this->getStep() && $this->getStep()->viewerCanSeeInBo($user)) ||
+        return ($this->getStep() && $this->getStep()->canDisplayInBO($user)) ||
             $this->getAuthor() === $user ||
             ($user && $user->isAdmin());
     }

@@ -54,7 +54,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         self::QUESTION_TYPE_MEDIAS => 'medias',
         self::QUESTION_TYPE_BUTTON => 'button',
         self::QUESTION_TYPE_SECTION => 'section',
-        self::QUESTION_TYPE_NUMBER => 'number'
+        self::QUESTION_TYPE_NUMBER => 'number',
     ];
 
     public static $questionTypesLabels = [];
@@ -265,23 +265,17 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
 
     public function getPosition(): int
     {
-        return $this->getQuestionnaireAbstractQuestion()
-            ? $this->getQuestionnaireAbstractQuestion()->getPosition()
-            : 0;
+        return $this->getQuestionnaireAbstractQuestion() ? $this->getQuestionnaireAbstractQuestion()->getPosition() : 0;
     }
 
     public function getQuestionnaire(): ?Questionnaire
     {
-        return $this->getQuestionnaireAbstractQuestion()
-            ? $this->getQuestionnaireAbstractQuestion()->getQuestionnaire()
-            : null;
+        return $this->getQuestionnaireAbstractQuestion() ? $this->getQuestionnaireAbstractQuestion()->getQuestionnaire() : null;
     }
 
-    public function getQuestion(): ?self
+    public function getQuestion(): ?AbstractQuestion
     {
-        return $this->getQuestionnaireAbstractQuestion()
-            ? $this->getQuestionnaireAbstractQuestion()->getQuestion()
-            : null;
+        return $this->getQuestionnaireAbstractQuestion() ? $this->getQuestionnaireAbstractQuestion()->getQuestion() : null;
     }
 
     public function getQuestionnaireId(): ?int
@@ -326,7 +320,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         }
     }
 
-    public function viewerCanSeeInBo($user = null): bool
+    public function canDisplayInBo($user = null): bool
     {
         return true;
     }

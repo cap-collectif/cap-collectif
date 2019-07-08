@@ -284,9 +284,9 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         return $this->getStep() ? $this->getStep()->canDisplay($user) : true;
     }
 
-    public function viewerCanSeeInBo($user = null): bool
+    public function canDisplayInBO($user = null): bool
     {
-        return $this->getStep() ? $this->getStep()->viewerCanSeeInBo($user) : true;
+        return $this->getStep() ? $this->getStep()->canDisplayInBO($user) : true;
     }
 
     public function canContribute($viewer = null): bool

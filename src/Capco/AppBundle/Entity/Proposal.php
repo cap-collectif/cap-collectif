@@ -494,15 +494,10 @@ class Proposal implements
         return $this->getAuthor() === $user;
     }
 
-    public function viewerCanSeeInBo($user = null): bool
+    public function canDisplayInBo($user = null): bool
     {
-        // SuperAdmin can access everything
-        if ($user && ($user->isAdmin() || $user->isSuperAdmin())) {
-            return true;
-        }
-
         if ($this->isPublished()) {
-            return $this->getStep() ? $this->getStep()->viewerCanSeeInBo($user) : false;
+            return $this->getStep() ? $this->getStep()->canDisplayInBO($user) : false;
         }
 
         return $this->getAuthor() === $user;
@@ -944,7 +939,7 @@ class Proposal implements
         return [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
-            'summary' => $this->getSummary()
+            'summary' => $this->getSummary(),
         ];
     }
 

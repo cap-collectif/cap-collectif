@@ -40,7 +40,7 @@ class CRUDController extends Controller
         if (\is_object($existingObject)) {
             if (
                 $existingObject instanceof DisplayableInBOInterface &&
-                !$existingObject->viewerCanSeeInBo($this->getUser())
+                !$existingObject->canDisplayInBO($this->getUser())
             ) {
                 throw new ProjectAccessDeniedException();
             }
@@ -87,7 +87,7 @@ class CRUDController extends Controller
                                 'objectId' => $objectId,
                                 'objectName' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
-                                )
+                                ),
                             ],
                             200,
                             []
@@ -101,7 +101,7 @@ class CRUDController extends Controller
                             [
                                 '%name%' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
-                                )
+                                ),
                             ],
                             'SonataAdminBundle'
                         )
@@ -124,9 +124,9 @@ class CRUDController extends Controller
                                 ),
                                 '%link_start%' =>
                                     '<a href="' .
-                                    $this->admin->generateObjectUrl('edit', $existingObject) .
-                                    '">',
-                                '%link_end%' => '</a>'
+                                        $this->admin->generateObjectUrl('edit', $existingObject) .
+                                        '">',
+                                '%link_end%' => '</a>',
                             ],
                             'SonataAdminBundle'
                         )
@@ -144,7 +144,7 @@ class CRUDController extends Controller
                             [
                                 '%name%' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
-                                )
+                                ),
                             ],
                             'SonataAdminBundle'
                         )
@@ -172,7 +172,7 @@ class CRUDController extends Controller
                 'action' => 'edit',
                 'form' => $formView,
                 'object' => $existingObject,
-                'objectId' => $objectId
+                'objectId' => $objectId,
             ],
             null
         );
@@ -350,7 +350,7 @@ class CRUDController extends Controller
         return new JsonResponse([
             'status' => 'OK',
             'more' => !$pager->isLastPage(),
-            'items' => $items
+            'items' => $items,
         ]);
     }
 
