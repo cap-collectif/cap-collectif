@@ -72,11 +72,15 @@ Scenario: Admin wants to export collect steps
 Scenario: Admin wants to export questionnaire steps
   Given I run "capco:export:questionnaire --snapshot"
   Then the command exit code should be 0
-  And exported "xlsx" file with name "projet-avec-questionnaire_essais-de-sauts-conditionnels.xlsx" should match its snapshot
-  And exported "xlsx" file with name "projet-avec-questionnaire_etape-de-questionnaire-avec-questionnaire-sauts-conditionnels.xlsx" should match its snapshot
-  And exported "xlsx" file with name "projet-avec-questionnaire_etape-de-questionnaire-fermee.xlsx" should match its snapshot
-  And exported "xlsx" file with name "projet-avec-questionnaire_questionnaire-des-jo-2024.xlsx" should match its snapshot
-  And exported "xlsx" file with name "projet-avec-questionnaire_questionnaire.xlsx" should match its snapshot
+  #
+  # TODO use snapshots when it will be CSV files.
+  # .xlsx a generated differently on every run
+  #
+  # And exported "xlsx" file with name "projet-avec-questionnaire_essais-de-sauts-conditionnels.xlsx" should match its snapshot
+  # And exported "xlsx" file with name "projet-avec-questionnaire_etape-de-questionnaire-avec-questionnaire-sauts-conditionnels.xlsx" should match its snapshot
+  # And exported "xlsx" file with name "projet-avec-questionnaire_etape-de-questionnaire-fermee.xlsx" should match its snapshot
+  # And exported "xlsx" file with name "projet-avec-questionnaire_questionnaire-des-jo-2024.xlsx" should match its snapshot
+  # And exported "xlsx" file with name "projet-avec-questionnaire_questionnaire.xlsx" should match its snapshot
 
 @database
 Scenario: User want to export his datas and 7 days after the cron delete the zip archive
