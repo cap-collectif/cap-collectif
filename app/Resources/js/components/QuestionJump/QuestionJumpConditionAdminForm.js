@@ -33,9 +33,9 @@ const OptionItem = ({
 );
 
 export class QuestionJumpConditionAdminForm extends React.Component<Props> {
-  handleQuestionChange = () => {
-    const { questions, selectedQuestion, member, formName, dispatch } = this.props;
-    const question = questions.find(q => q.id === selectedQuestion);
+  handleQuestionChange = (e: SyntheticEvent<HTMLSelectElement>) => {
+    const { questions, member, formName, dispatch } = this.props;
+    const question = questions.find(q => q.id === e.currentTarget.value);
 
     if (question && question.choices) {
       dispatch(change(formName, `${member}.question.title`, question.title));
