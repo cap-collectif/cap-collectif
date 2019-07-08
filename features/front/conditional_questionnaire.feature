@@ -257,7 +257,6 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
   And I fill in the following:
     | responses[4].value | Non |
   Then I should see "Comment ça ce n'est pas un homme bon, comment oses-tu ?"
-  Then I should see "Plutôt Marvel ou DC ?"
   And I reload the page, I should see a confirm popup
 
 @database
