@@ -717,7 +717,7 @@ input ChangeEventInput {
 
 type ChangeEventPayload {
   # The edge from the events connection.
-  eventEdge: EventEdge
+  event: Event
 
   # An unsuccessful mutation will return one or more `UserError` objects.
   userErrors: [UserError!]!
@@ -1894,13 +1894,12 @@ type DeleteCommentPayload {
 }
 
 input DeleteEventInput {
-  # ID of an Event to delete.
+  # The ID of the event
   eventId: ID!
   clientMutationId: String
 }
 
 type DeleteEventPayload {
-  # ID of Event to deleted.
   deletedEventId: ID
   clientMutationId: String
 }

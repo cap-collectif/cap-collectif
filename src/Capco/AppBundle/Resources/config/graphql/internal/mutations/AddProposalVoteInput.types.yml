@@ -1,5 +1,6 @@
 AddProposalVoteInput:
   type: relay-mutation-input
+  name: AddProposalVoteInput
   config:
     description: 'Add a vote for a proposal in a contribuable step.'
     fields:

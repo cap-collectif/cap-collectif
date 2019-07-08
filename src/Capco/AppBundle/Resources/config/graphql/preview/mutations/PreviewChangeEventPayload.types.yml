@@ -3,8 +3,8 @@ PreviewChangeEventPayload:
   config:
     name: ChangeEventPayload
     fields:
-      eventEdge:
-        type: 'PreviewEventEdge'
+      event:
+        type: 'InternalEvent'
         description: 'The edge from the events connection.'
       userErrors:
         type: '[UserError!]!'

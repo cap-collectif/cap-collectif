@@ -11,9 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class ChangeEventMutation implements MutationInterface
@@ -44,7 +42,7 @@ class ChangeEventMutation implements MutationInterface
 
         if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
             return [
-                'eventEdge' => null,
+                'event' => null,
                 'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
             ];
         }
@@ -53,7 +51,7 @@ class ChangeEventMutation implements MutationInterface
         $event = $this->globalIdResolver->resolve($values['id'], $viewer);
         if (!$event) {
             return [
-                'eventEdge' => null,
+                'event' => null,
                 'userErrors' => [['message' => 'Could not find your event.']]
             ];
         }
@@ -85,8 +83,6 @@ class ChangeEventMutation implements MutationInterface
         $this->indexer->index(\get_class($event), $event->getId());
         $this->indexer->finishBulk();
 
-        $edge = new Edge(ConnectionBuilder::offsetToCursor(0), $event);
-
-        return ['eventEdge' => $edge, 'userErrors' => []];
+        return ['event' => $event, 'userErrors' => []];
     }
 }

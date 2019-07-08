@@ -119,6 +119,9 @@ Scenario: User wants to add an event
             customCode
           }
         }
+        userErrors {
+          message
+        }
       }
     }",
     "variables": {
@@ -134,5 +137,5 @@ Scenario: User wants to add an event
   """
   Then the JSON response should match:
   """
-    {"data":{"addEvent":{"eventEdge":null}}}
+   {"data":{"addEvent":{"eventEdge":null,"userErrors":[{"message":"You are not authorized to add customCode field."}]}}}
   """
