@@ -11,7 +11,6 @@ import type { GlobalState } from '../../types';
 import component from '../Form/Field';
 import type { responsesHelper_adminQuestion } from '~relay/responsesHelper_adminQuestion.graphql';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
-import { multipleChoiceQuestions } from '../ProposalForm/ProposalFormAdminQuestionModal';
 
 type ParentProps = {|
   formName: string,
@@ -29,10 +28,10 @@ type Props = {|
 export class QuestionsJumpAdminForm extends React.Component<Props> {
   render() {
     const { fields, questions, oldMember, formName, currentQuestion } = this.props;
-    const firstMultipleChoiceQuestion = questions.find(question =>
-      multipleChoiceQuestions.includes(question.type),
+    const firstMultipleChoiceQuestion = questions.find(
+      question => question.__typename === 'MultipleChoiceQuestion',
     );
-    const isMultipleQuestion = multipleChoiceQuestions.includes(currentQuestion.type);
+    const isMultipleQuestion = currentQuestion.__typename === 'MultipleChoiceQuestion';
     return (
       <div className="form-group" id="questions_choice_panel_personal">
         <ListGroup>
@@ -114,11 +113,11 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
                 .filter(question => {
                   // We should not display the always jump of a question when it is referecing itself
                   // because an always jump could not redirect to itself
-                  return question.id && currentQuestion && question.id !== currentQuestion.id
+                  return question.id && currentQuestion && question.id !== currentQuestion.id;
                 })
                 .map((question, i) => (
-                <option value={question.id}>{`${i + 1}. ${question.title}`}</option>
-              ))}
+                  <option value={question.id}>{`${i + 1}. ${question.title}`}</option>
+                ))}
             </Field>
           </div>
         </div>

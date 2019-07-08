@@ -25,15 +25,14 @@ class LogicJumpType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'entry_type' => LogicJumpConditionType::class,
-                'delete_empty' => static function (AbstractLogicJumpCondition $condition = null) {
-                    return null === $condition || (null === $condition->getOperator());
+                'delete_empty' => static function (?AbstractLogicJumpCondition $condition = null) {
+                    return null === $condition || null === $condition->getOperator();
                 }
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver
-            ->setDefaults(['csrf_protection' => false, 'data_class' => LogicJump::class]);
+        $resolver->setDefaults(['csrf_protection' => false, 'data_class' => LogicJump::class]);
     }
 }

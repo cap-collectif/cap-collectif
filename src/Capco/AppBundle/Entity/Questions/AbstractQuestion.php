@@ -185,7 +185,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         return $this;
     }
 
-    public function setHelpText(string $helpText = null): self
+    public function setHelpText(?string $helpText = null): self
     {
         $this->helpText = $helpText;
 
@@ -348,13 +348,14 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         return true;
     }
 
-    public function getAlwaysJumpDestinationQuestion(): ?AbstractQuestion
+    public function getAlwaysJumpDestinationQuestion(): ?self
     {
         return $this->alwaysJumpDestinationQuestion;
     }
 
-    public function setAlwaysJumpDestinationQuestion(?AbstractQuestion $alwaysJumpDestinationQuestion): self
-    {
+    public function setAlwaysJumpDestinationQuestion(
+        ?self $alwaysJumpDestinationQuestion = null
+    ): self {
         $this->alwaysJumpDestinationQuestion = $alwaysJumpDestinationQuestion;
 
         return $this;

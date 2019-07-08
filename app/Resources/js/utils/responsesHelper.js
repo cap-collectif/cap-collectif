@@ -219,7 +219,7 @@ export type QuestionChoice = {|
     +id: string,
     +url: string,
   |},
-|}
+|};
 
 // This is a cp/paster of
 // responsesHelper_question without $refType
@@ -419,9 +419,9 @@ const hasAnsweredQuestion = (question: Question, responses: ResponsesInReduxForm
   const answer = responses.filter(Boolean).find(response => response.question === question.id);
   if (answer) {
     const submitResponse = getValueFromSubmitResponse(answer);
-    return !!('value' in answer && (submitResponse !== null && submitResponse !== ""));
+    return !!('value' in answer && (submitResponse !== null && submitResponse !== ''));
   }
-  return false
+  return false;
 };
 
 // alwaysJumpDestinationQuestion can be nullable, but when we call this method it is not
@@ -647,15 +647,13 @@ export const getFullfilledJumps = (question: Question, responses: ResponsesInRed
     if (fullfilleds.length > 0) {
       return fullfilleds;
     }
-    const answered = responses.find(
-      response => response.question === question.id,
-    );
+    const answered = responses.find(response => response.question === question.id);
     if (answered && getValueFromSubmitResponse(answered)) {
       // Here, no conditions have been met and the user have correctly answered the question so we are in the "else" case
       return elseJumps;
     }
     // Here, no conditions have been met and the user have not answered the question so we show nothing more
-    return []
+    return [];
   }
   return [];
 };
@@ -776,19 +774,17 @@ export const renderResponses = ({
 |}) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
-  if (responses) {
-    const ids = questions
-      .filter(Boolean)
-      .filter(question => !availableQuestions.includes(question.id))
-      .map(question => question.id);
-    ids.forEach(id => {
-      const question = questions.find(q => q.id === id);
-      if (question) {
-        const indexInRedux = questions.indexOf(question);
-        change(`responses[${indexInRedux}].value`, null);
-      }
-    });
-  }
+  const ids = questions
+    .filter(Boolean)
+    .filter(question => !availableQuestions.includes(question.id))
+    .map(question => question.id);
+  ids.forEach(id => {
+    const question = questions.find(q => q.id === id);
+    if (question) {
+      const indexInRedux = questions.indexOf(question);
+      change(`responses[${indexInRedux}].value`, null);
+    }
+  });
   return (
     <div>
       {fields.map((member, index) => {
