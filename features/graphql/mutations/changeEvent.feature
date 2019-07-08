@@ -1,4 +1,4 @@
-@changeEvent
+@changeEvent @event
 Feature: Change Event
 
 @database

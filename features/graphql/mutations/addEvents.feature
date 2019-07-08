@@ -1,4 +1,4 @@
-@addEvents
+@addEvents @events
 Feature: Add events.
 
 @database
