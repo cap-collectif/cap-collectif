@@ -515,6 +515,7 @@ export const validateResponses = (
   // TODO: remove this parameter from the function and create generic traduction keys for all errors.
   className: string,
   intl: IntlShape,
+  // The behavior of the validator depends on the draft value of the response.
   isDraft: boolean = false,
 ): { responses?: ResponsesError } => {
   const responsesError = questions.map(question => {
