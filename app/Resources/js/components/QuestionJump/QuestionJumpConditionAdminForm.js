@@ -20,10 +20,6 @@ type Props = ReduxProps & {
   intl: IntlShape,
 };
 
-type State = {
-  currentQuestion: ?string,
-};
-
 const OptionItem = ({
   questionChoice,
   index,
@@ -36,25 +32,16 @@ const OptionItem = ({
   </option>
 );
 
-export class QuestionJumpConditionAdminForm extends React.Component<Props, State> {
-  state = {
-    currentQuestion: null,
-  };
+export class QuestionJumpConditionAdminForm extends React.Component<Props> {
+  handleQuestionChange = () => {
+    const { questions, selectedQuestion, member, formName, dispatch } = this.props;
+    const question = questions.find(q => q.id === selectedQuestion);
 
-  // TODO: Remove state, use instead selectedQuestion from redux props
-  handleQuestionChange = (e: $FlowFixMe) => {
-    this.setState({ currentQuestion: e.target.value }, () => {
-      const { currentQuestion } = this.state;
-      console.log(this.state.currentQuestion, this.props.selectedQuestion);
-      const { questions, member, formName, dispatch } = this.props;
-      const question = questions.find(q => q.id === currentQuestion);
-
-      if (question && question.choices) {
-        dispatch(change(formName, `${member}.question.title`, question.title));
-        dispatch(change(formName, `${member}.value.id`, question.choices[0].id));
-        dispatch(change(formName, `${member}.value.title`, question.choices[0].title));
-      }
-    });
+    if (question && question.choices) {
+      dispatch(change(formName, `${member}.question.title`, question.title));
+      dispatch(change(formName, `${member}.value.id`, question.choices[0].id));
+      dispatch(change(formName, `${member}.value.title`, question.choices[0].title));
+    }
   };
 
   displayValueList = (questions: QuestionsInReduxForm, selectedQuestion: string) => {
@@ -102,9 +89,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
           id={`${member}.question.id`}
           name={`${member}.question.id`}
           type="select"
-          onChange={e => {
-            this.handleQuestionChange(e);
-          }}
+          onChange={this.handleQuestionChange}
           component={component}>
           {questions
             .filter(question => question.__typename === 'MultipleChoiceQuestion')
