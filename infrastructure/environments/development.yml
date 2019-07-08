@@ -30,13 +30,13 @@ kibana:
   ports:
     - '5601:5601'
 
-#builder:
-#  build: ../services/builder
-#  volumes:
-#    - ../../:/var/www
-#    - ~/Library/Caches/Composer:/home/capco/.composer
-#    - ~/Library/Caches/Yarn:/home/capco/.cache/yarn
-#  command: echo "Use 'docker-compose run builder build' to build deps"
+builder:
+  build: ../services/builder
+  volumes:
+    - ../../:/var/www
+    - ~/Library/Caches/Composer:/home/capco/.composer
+    - ~/Library/Caches/Yarn:/home/capco/.cache/yarn
+  command: echo "Use 'docker-compose run builder build' to build deps"
 
 qarunner:
   build: ../services/qa-runner
