@@ -21,7 +21,7 @@ class Video implements DisplayableInBOInterface
 
     public static $colorButtonPlay = [
         'white' => 'video.colors.white',
-        'black' => 'video.colors.black',
+        'black' => 'video.colors.black'
     ];
 
     /**
@@ -311,7 +311,7 @@ class Video implements DisplayableInBOInterface
         $this->color = $color;
     }
 
-    public function canDisplayInBo($user = null): bool
+    public function viewerCanSeeInBo($user = null): bool
     {
         return true;
     }

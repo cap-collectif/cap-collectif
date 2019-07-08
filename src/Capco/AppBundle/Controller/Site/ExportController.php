@@ -41,7 +41,7 @@ const USER_FRAGMENT = '
     phoneConfirmed
     gender
     dateOfBirth
-    websiteUrl
+    website
     biography
     address
     zipCode
@@ -72,7 +72,7 @@ const USER_HEADERS = [
     'user_zipCode',
     'user_city',
     'user_phone',
-    'user_profileUrl'
+    'user_profileUrl',
 ];
 
 const USER_HEADERS_EVENTS = [
@@ -99,7 +99,7 @@ const USER_HEADERS_EVENTS = [
     'user_zipCode',
     'user_city',
     'user_phone',
-    'user_profileUrl'
+    'user_profileUrl',
 ];
 
 class ExportController extends Controller
@@ -142,7 +142,7 @@ class ExportController extends Controller
         $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getEventContributorsGraphQLQuery($event->getId()),
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
 
@@ -183,13 +183,13 @@ class ExportController extends Controller
                             $contributor['phoneConfirmed'],
                             $contributor['gender'],
                             $contributor['dateOfBirth'],
-                            $contributor['websiteUrl'],
+                            $contributor['website'],
                             $contributor['biography'],
                             $contributor['address'],
                             $contributor['zipCode'],
                             $contributor['city'],
                             $contributor['phone'],
-                            $contributor['url']
+                            $contributor['url'],
                         ]);
                     } else {
                         $writer->addRow([
@@ -216,7 +216,7 @@ class ExportController extends Controller
                             null,
                             null,
                             null,
-                            null
+                            null,
                         ]);
                     }
                 },
@@ -285,7 +285,7 @@ class ExportController extends Controller
         $data = $executor
             ->execute('internal', [
                 'query' => $this->getStepContributorsGraphQLQuery($step->getId()),
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
 
@@ -326,13 +326,13 @@ class ExportController extends Controller
                         $contributor['phoneConfirmed'],
                         $contributor['gender'],
                         $contributor['dateOfBirth'],
-                        $contributor['websiteUrl'],
+                        $contributor['website'],
                         $contributor['biography'],
                         $contributor['address'],
                         $contributor['zipCode'],
                         $contributor['city'],
                         $contributor['phone'],
-                        $contributor['url']
+                        $contributor['url'],
                     ]);
                 },
                 function ($pageInfo) use ($step) {
