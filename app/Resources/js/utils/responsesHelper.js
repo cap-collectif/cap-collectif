@@ -647,10 +647,17 @@ export const getFullfilledJumps = (question: Question, responses: ResponsesInRed
     if (fullfilleds.length > 0) {
       return fullfilleds;
     }
-    // Here, no conditions have been met, and we are in the "else" case
-    return elseJumps;
+    const answered = responses.find(
+      response => response.question === question.id,
+    );
+    if (answered && getValueFromSubmitResponse(answered)) {
+      // Here, no conditions have been met and the user have correctly answered the question so we are in the "else" case
+      return elseJumps;
+    }
+    // Here, no conditions have been met and the user have not answered the question so we show nothing more
+    return []
   }
-  return elseJumps;
+  return [];
 };
 
 // This is the main method, used in `renderResponses` that returns, given the Questionnaire's questions and the

@@ -33,7 +33,7 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
           firstMultipleChoiceQuestion.choices && firstMultipleChoiceQuestion.choices[0] : null,
       operator: 'IS',
     };
-    console.log('RENDERING QuestionJumpConditionsAdminForm');
+
     return (
       <div className="form-group" id="questions_choice_panel_personal">
         {fields.map((memberConditions, index) => (
@@ -94,10 +94,6 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
   const selector = formValueSelector(props.formName);
-  console.log({
-    questions: selector(state, 'questions'),
-    currentJump: selector(state, `${props.member}`),
-  });
   return {
     questions: selector(state, 'questions'),
     currentJump: selector(state, `${props.member}`),
