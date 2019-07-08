@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\UserArchive:
   userArchive1:
     id: userArchive1
-    requestedAt: <(new \DateTime('2019-05-27'))>
+    requestedAt: <(new \DateTime('now'))>
     ready: false
     user: '@user1'
 

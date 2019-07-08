@@ -78,7 +78,7 @@ Object {
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
-          "createdAt": "2015-01-12 01:00:00",
+          "createdAt": "2015-01-12 00:00:00",
           "deletedAccountAt": null,
           "email": null,
           "enabled": true,
@@ -103,7 +103,7 @@ Object {
         "node": Object {
           "biography": null,
           "consentInternalCommunication": null,
-          "createdAt": "2015-01-12 02:00:00",
+          "createdAt": "2015-01-12 00:00:00",
           "deletedAccountAt": null,
           "email": null,
           "enabled": true,

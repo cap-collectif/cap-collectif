@@ -9,7 +9,6 @@ Comment:
       Contribution,
       Commentable,
       UniformResourceLocatable,
-      InternalPrimaryKey,
     ]
   config:
     description: 'A comment'

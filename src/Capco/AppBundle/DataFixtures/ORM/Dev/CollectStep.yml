@@ -5,16 +5,16 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     slug: collecte-des-propositions
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2015-01-01')))>
-    endAt: <identity((new \DateTime('2024-01-01')))>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
     voteType: 0
   collectStepWithVote:
     id: collectStepWithVote
     title: Dépôt avec vote
     label: Le dépôt voté
     isEnabled: true
-    startAt: <identity((new \DateTime('2015-01-01'))->modify("+ 1 days"))>
-    endAt: <identity((new \DateTime('2024-01-01'))->modify("+ 1 days"))>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('now', '+40 days')>
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
     voteType: 1
     votesHelpText: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
@@ -23,8 +23,8 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     title: Collecte des propositions fermée
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2016-01-01')))>
-    endAt: <identity((new \DateTime('2018-01-01')))>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('-28 days', '-10 days')>
     voteType: 0
   collectstep3:
     id: collectstep3
@@ -32,16 +32,16 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     slug: collecte-des-propositions-1
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-01-01')))>
-    endAt: <identity((new \DateTime('2019-01-01')))>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('-28 days', '-10 days')>
     voteType: 0
   collectstep4:
     id: collectstep4
     title: Collecte des propositions privée
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-06-01')))>
-    endAt: <identity((new \DateTime('2019-02-01')))>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('-28 days', '-10 days')>
     private: true
     voteType: 0
   collectstep5:
@@ -49,16 +49,16 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     title: Collecte des propositions avec vote simple
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-05-01')))>
-    endAt: <identity((new \DateTime('2025-01-01')))>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('+28 days', '+50 days')>
     voteType: 1
   collectstep6:
     id: collectstep6
     title: Dépôt fermé
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-05-05')))>
-    endAt: <identity((new \DateTime('2019-03-01')))>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('-28 days', '-10 days')>
     voteType: 0
   collectstep7:
     id: collectstep7
@@ -66,8 +66,8 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     slug: collecte-avec-vote-simple-limite-1
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-08-05')))>
-    endAt: <identity((new \DateTime('2019-03-05')))>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('-10 days', '-5 days')>
     voteType: 1
     votesLimit: 1
   collectstep8:
@@ -86,8 +86,8 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     title: Collecte avec vote classement limité
     label: Dépôt avec vote classement limité
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2017-09-05')))>
-    endAt: <identity((new \DateTime('2030-01-01')))>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('+28 days', '+50 days')>
     voteType: 1
     votesLimit: 3
     votesRanking: true
@@ -97,46 +97,46 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     title: Collecte des propositions pour La Force
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-09-05')))>
-    endAt: <identity((new \DateTime('2028-01-01')))>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
     voteType: 0
   collectstep10:
     id: collectstep10
     title: Collecte des propositions pour conquérir le monde
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-09-25')))>
-    endAt: <identity((new \DateTime('2031-01-01')))>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
     voteType: 0
   collectstep11:
     id: collectstep11
     title: Collecte des propositions pour la capcoBeer
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-09-26')))>
-    endAt: <identity((new \DateTime('2032-01-01')))>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
     voteType: 0
   collectstep12:
     id: collectstep12
     title: Collecte des propositions libérer les nains de jardin
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-09-28')))>
-    endAt: <identity((new \DateTime('2040-01-01')))>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
     voteType: 0
   collectQuestionVoteAvecClassement:
     id: collectQuestionVoteAvecClassement
     title: Collecte des questions chez youpie
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-09-29')))>
-    endAt: <identity((new \DateTime('2041-01-01')))>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
     voteType: 0
   collectstepWithQuestions:
     id: collectstepWithQuestions
     title: Collecte des propositions avec questions
     label: Dépôt
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-10-29')))>
-    endAt: <identity((new \DateTime('2042-01-01')))>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('+28 days', '+50 days')>
     voteType: 0

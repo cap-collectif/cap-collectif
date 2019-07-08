@@ -4,8 +4,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     title: Sélection
     label: Sélection
     isEnabled: true
-    startAt: <identity((new \DateTime('2018-11-04')))>
-    endAt: <identity((new \DateTime('2050-11-03')))>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('now', '+40 days')>
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 1
     votesHelpText: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
@@ -14,8 +14,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     title: Vainqueur
     label: Vainqueur
     isEnabled: true
-    startAt: <identity((new \DateTime('2018-11-05')))>
-    endAt: <identity((new \DateTime('2051-11-03')))>
+    startAt: <dateTimeBetween('-10 days', '-8 days')>
+    endAt: <dateTimeBetween('+2 days', '+10 days')>
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 0
   selectionstep3:
@@ -23,8 +23,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     title: Fermée
     label: Fermée
     isEnabled: true
-    startAt: <identity((new \DateTime('2018-11-06')))>
-    endAt: <identity((new \DateTime('2019-01-01')))>
+    startAt: <dateTimeBetween('-10 days', '-5 days')>
+    endAt: <dateTimeBetween('-4 days', '-1 days')>
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 1
   selectionstep4:
@@ -32,8 +32,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     title: Sélection avec vote selon le budget
     label: Sélection
     isEnabled: true
-    startAt: <identity((new \DateTime('2018-11-07')))>
-    endAt: <identity((new \DateTime('2034-01-01')))>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('now', '+40 days')>
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 2
     votesHelpText: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
@@ -43,8 +43,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     title: Sélection avec vote simple
     label: Sélection
     isEnabled: true
-    startAt: <identity((new \DateTime('2018-11-08')))>
-    endAt: <identity((new \DateTime('2034-06-01')))>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('now', '+40 days')>
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 1
     votesHelpText: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
@@ -53,8 +53,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     title: Sélection à venir
     label: Sélection
     isEnabled: true
-    startAt: <identity((new \DateTime('2034-06-01')))>
-    endAt: <identity((new \DateTime('2036-06-01')))>
+    startAt: <dateTimeBetween('+1 days', '+10 days')>
+    endAt: <dateTimeBetween('+11 days', '+20 days')>
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 1
   selectionstep7:
@@ -63,7 +63,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     label: Réalisation
     isEnabled: true
     allowingProgressSteps: true
-    startAt: <identity((new \DateTime('2032-06-01')))>
+    startAt: <dateTimeBetween('+1 days', '+10 days')>
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 0
   selectionstep8:
@@ -71,8 +71,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     title: Sélection avec vote budget limité
     label: Sélection
     isEnabled: true
-    startAt: <identity((new \DateTime('2018-11-09')))>
-    endAt: <identity((new \DateTime('2032-06-02')))>
+    startAt: <dateTimeBetween('-10 days', '-5 days')>
+    endAt: <dateTimeBetween('+11 days', '+20 days')>
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
     voteType: 2
     votesLimit: 1
@@ -81,8 +81,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     title: Selection avec vote classement limité
     label: Selection avec vote classement limité
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-11-10')))>
-    endAt: <identity((new \DateTime('2032-07-02')))>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('+28 days', '+50 days')>
     voteType: 1
     votesLimit: 3
     votesRanking: true
@@ -92,8 +92,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     title: Selection de questions avec vote classement limité
     label: Selection de questions avec vote classement limité
     body: <stripslashes('\<p>\')><text(1000)><stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-11-11')))>
-    endAt: <identity((new \DateTime('2032-08-02')))>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('+28 days', '+50 days')>
     voteType: 1
     votesLimit: 3
     votesRanking: true

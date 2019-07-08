@@ -20,7 +20,7 @@ Scenario: Post can be filtered by theme
   And I visited "blog page"
   And I select "Justice" from "post_search_theme"
   And I wait ".media--news" to appear on current page
-  Then I should see 10 ".media--news" elements
+  Then I should see 8 ".media--news" elements
   And I should see "Post 8"
   And I should not see "Post 2"
 
