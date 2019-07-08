@@ -13,44 +13,38 @@ InternalProject:
       - Node
     description: 'A participatory project.'
     fields:
+      # Override PublicProject or PreviewProject fields
       contributors:
         type: 'InternalUserConnection!'
       votes:
         type: 'InternalVoteConnection!'
+      steps:
+        type: '[InternalStep!]!'
+      cover:
+        type: 'InternalMedia'
+      authors:
+        type: '[InternalUser!]!'
+      type:
+        type: 'InternalProjectType'
+      # Internal fields
+      # proposals:
+      #  resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args, getUser()])'
       slug:
         type: 'String!'
         description: 'Slug of a project'
-      steps:
-        type: '[Step!]!'
-        resolve: '@=value.getRealSteps()'
-      authors:
-        type: '[InternalUser!]!'
-        resolve: '@=value.getUserAuthors()'
       video:
         type: 'String'
-      cover:
-        type: 'InternalMedia'
-        resolve: '@=value.getCover()'
-      contributionsCount:
-        type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", [value])'
       hasParticipativeStep:
         type: Boolean!
         resolve: '@=value.hasParticipativeStep()'
-      type:
-        type: 'ProjectType'
-        resolve: '@=value.getProjectType()'
       themes:
         type: '[Theme!]'
-      url:
-        type: 'URI!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectUrlResolver", [value])'
       votableSteps:
         type: '[ProposalStep!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'
       visibility:
         type: 'ProjectVisibility!'
-        description: 'The visibility of project'
+        description: 'The visibility of the project.'
       adminUrl:
         type: 'URI!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminUrlResolver", [value])'
@@ -61,11 +55,10 @@ InternalProject:
         type: 'GroupConnection'
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", [value, args])'
+        description: 'Viewers that can access the project, null otherwise.'
       districts:
-        type: '[ProjectDistrict]'
-        description: 'The district of the project'
-      proposals:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args, getUser()])'
+        type: '[ProjectDistrict!]!'
+        description: 'The districts related to the project.'
       comments:
         description: 'The comments related to the project.'
         type: 'CommentConnection!'
@@ -87,12 +80,10 @@ InternalProject:
         type: 'Boolean!'
       isExternal:
         type: 'Boolean!'
-        description: 'If it s an external project'
+        description: "Whether it's an external project or not."
       externalLink:
         type: 'URI'
-        description: 'Link of external project'
+        description: 'URL of the external project.'
       opinionTerm:
         type: 'Int!'
-        description: 'Opinion term of the project'
-      publishedAt:
-        type: 'DateTime!'
+        description: 'Opinion term of the project.'

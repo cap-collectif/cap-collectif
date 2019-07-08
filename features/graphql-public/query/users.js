@@ -1,6 +1,4 @@
 /* eslint-env jest */
-const TIMEOUT = 15000;
-
 const OpenDataUsersQuery = /* GraphQL */ `
   query OpenDataUsersQuery($count: Int!, $cursor: String) {
     users(first: $count, after: $cursor) {
@@ -47,52 +45,40 @@ const OpenDataUsersQuery = /* GraphQL */ `
   }
 `;
 
-describe('Query.users connection', () => {
-  it(
-    'fetches the first hundred users with a cursor',
-    async () => {
-      await expect(
-        graphql(OpenDataUsersQuery, {
-          count: 100,
-        }),
-      ).resolves.toMatchSnapshot();
-    },
-    TIMEOUT,
-  );
-  it(
-    'fetches the next three users with a cursor',
-    async () => {
-      await expect(
-        graphql(OpenDataUsersQuery, {
-          count: 3,
-          cursor: 'YXJyYXljb25uZWN0aW9uOjk5',
-        }),
-      ).resolves.toMatchSnapshot();
-    },
-    TIMEOUT,
-  );
-  it(
-    'fetches the five last users',
-    async () => {
-      await expect(
-        graphql(
-          `
-            {
-              users(first: 5, orderBy: { field: CREATED_AT, direction: DESC }) {
-                edges {
-                  node {
-                    _id
-                    createdAt
-                  }
+describe('Preview|Query.users connection', () => {
+  it('fetches the first hundred users with a cursor', async () => {
+    await expect(
+      graphql(OpenDataUsersQuery, {
+        count: 100,
+      }),
+    ).resolves.toMatchSnapshot();
+  });
+  it('fetches the next three users with a cursor', async () => {
+    await expect(
+      graphql(OpenDataUsersQuery, {
+        count: 3,
+        cursor: 'YXJyYXljb25uZWN0aW9uOjk5',
+      }),
+    ).resolves.toMatchSnapshot();
+  });
+  it('fetches the five last users', async () => {
+    await expect(
+      graphql(
+        `
+          {
+            users(first: 5, orderBy: { field: CREATED_AT, direction: DESC }) {
+              edges {
+                node {
+                  _id
+                  createdAt
                 }
               }
             }
-          `,
-          {},
-          'internal',
-        ),
-      ).resolves.toMatchSnapshot();
-    },
-    TIMEOUT,
-  );
+          }
+        `,
+        {},
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 });

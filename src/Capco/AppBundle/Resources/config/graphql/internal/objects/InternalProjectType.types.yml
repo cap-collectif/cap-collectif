@@ -1,7 +1,8 @@
-ProjectType:
+InternalProjectType:
   type: object
   config:
-    description: 'Type of Project'
+    name: ProjectType
+    description: 'Label of a Project.'
     fields:
       id:
         type: 'ID!'

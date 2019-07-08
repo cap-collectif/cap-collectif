@@ -1,7 +1,11 @@
-Step:
+InternalStep:
   type: interface
-  inherits: [Node, PreviewTimeRangeable]
+  inherits:
+    - Node
+    - PreviewTimeRangeable
+    - PreviewStep
   config:
+    name: Step
     description: 'A step inside a project.'
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
     # interfaces: [Node]
@@ -20,13 +24,6 @@ Step:
       timeless:
         description: 'Does the step have a end date ?'
         type: 'Boolean'
-      title:
-        description: 'The title of the step.'
-        type: 'String!'
-      url:
-        type: 'String!'
-        description: 'The url of the step'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
       body:
         type: 'HTML'
         description: 'The introduction text of the step.'

@@ -1,5 +1,5 @@
 # A step to collect proposals.
-type CollectStep implements Node {
+type CollectStep implements Node & Step {
   # The ID of an object.
   id: ID!
   proposals(
@@ -24,6 +24,12 @@ type CollectStep implements Node {
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
   ): ProposalConnection!
+
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
 
   # The title of the step.
   title: String!
@@ -63,9 +69,18 @@ type Consultation implements Node {
 }
 
 # A step with consultation.
-type ConsultationStep implements Node {
+type ConsultationStep implements Node & Step {
   # The ID of an object.
   id: ID!
+
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
+
+  # The title of the step.
+  title: String!
 
   # A list of contributor associated with the consultation step.
   contributors(
@@ -111,7 +126,9 @@ type Event implements Node & UniformResourceLocatable {
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-  timeRange: PreviewTimeRange!
+
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
 
   # Identifies the author of the event.
   author: User
@@ -281,15 +298,6 @@ type PageInfo {
   endCursor: String
 }
 
-# A time range that contains start date and end date.
-type PreviewTimeRange {
-  # The start date of the time range.
-  startAt: DateTime
-
-  # The end date of the time range
-  endAt: DateTime
-}
-
 # A participatory project.
 type Project implements Node & UniformResourceLocatable {
   # The ID of an object.
@@ -300,6 +308,9 @@ type Project implements Node & UniformResourceLocatable {
 
   # Identifies the title of the project.
   title: String!
+
+  # Identifies when the project was published at.
+  publishedAt: DateTime!
 
   # A list of votes associated with the project.
   votes(
@@ -330,6 +341,21 @@ type Project implements Node & UniformResourceLocatable {
     # Returns the last `n` elements from the list.
     last: Int
   ): UserConnection!
+
+  # Count of contributions associated with the project.
+  contributionsCount: Int! @deprecated(reason: "Field `contributionsCount` will be removed. Use `contributions.totalCount` instead when it will be published. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-01-01 UTC.")
+
+  # The cover image associated with the project.
+  cover: Media
+
+  # The type associated with the project.
+  type: ProjectType
+
+  # The different steps associated with the project.
+  steps: [Step!]!
+
+  # The list of users who authored the project.
+  authors: [User!]!
 }
 
 # A connection to a list of items.
@@ -368,6 +394,12 @@ enum ProjectOrderField {
 
   # Allows ordering a list of projects by when they were published.
   LATEST
+}
+
+# Label of a Project.
+type ProjectType {
+  # Title of project Type
+  title: String!
 }
 
 # Represents a user's contribution to a collect step.
@@ -816,6 +848,30 @@ type SimpleQuestion implements Question & Node {
     # Returns the last `n` elements from the list.
     last: Int
   ): ResponseConnection!
+}
+
+# A step is a part of a project.
+interface Step {
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
+
+  # The ID of an object
+  id: ID!
+
+  # The title of the step.
+  title: String!
+}
+
+# A time range that contains start date and end date.
+type TimeRange {
+  # The start date of the time range.
+  startAt: DateTime
+
+  # The end date of the time range
+  endAt: DateTime
 }
 
 # Entities that can be trashed.
