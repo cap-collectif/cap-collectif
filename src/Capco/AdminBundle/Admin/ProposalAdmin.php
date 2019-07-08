@@ -63,7 +63,7 @@ class ProposalAdmin extends AbstractAdmin
     public function createQuery($context = 'list')
     {
         $user = $this->tokenStorage->getToken()->getUser();
-        if ($user->hasRole('ROLE_SUPER_ADMIN') || $user->hasRole('ROLE_ADMIN')) {
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
             $em = $this->getConfigurationPool()
                 ->getContainer()
                 ->get('doctrine')
@@ -115,32 +115,32 @@ class ProposalAdmin extends AbstractAdmin
             ->add('fullReference', null, ['label' => 'admin.fields.proposal.reference'])
             ->add('titleInfo', null, [
                 'label' => 'admin.fields.proposal.title',
-                'template' => 'CapcoAdminBundle:Proposal:title_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Proposal:title_list_field.html.twig',
             ])
             ->add('author', 'sonata_type_model', [
                 'label' => 'admin.fields.proposal.author',
-                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
             ])
             ->add('project', 'sonata_type_model', [
                 'label' => 'admin.fields.proposal.project',
-                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
             ])
             ->add('category', 'sonata_type_model', ['label' => 'admin.fields.proposal.category'])
             ->add('district', 'sonata_type_model', ['label' => 'admin.fields.proposal.district'])
             ->add('lastStatus', null, [
                 'label' => 'admin.fields.proposal.status',
-                'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig',
             ])
             ->add('state', null, [
                 'mapped' => false,
                 'label' => 'admin.fields.proposal.state.label',
-                'template' => 'CapcoAdminBundle:Proposal:state_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Proposal:state_list_field.html.twig',
             ])
             ->add('evaluers', null, ['label' => 'admin.fields.proposal.evaluers'])
             ->addIdentifier('createdAt', null, ['label' => 'admin.fields.proposal.created_at'])
             ->add('updatedInfo', 'datetime', [
                 'label' => 'admin.fields.proposal.updated',
-                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
             ]);
     }
 
@@ -169,7 +169,7 @@ class ProposalAdmin extends AbstractAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    }
+                    },
                 ]
             )
             ->add('district', null, ['label' => 'admin.fields.proposal.district'])
@@ -182,7 +182,7 @@ class ProposalAdmin extends AbstractAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    }
+                    },
                 ]
             )
             ->add(
@@ -194,7 +194,7 @@ class ProposalAdmin extends AbstractAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    }
+                    },
                 ]
             )
             ->add('updatedAt', null, ['label' => 'admin.fields.proposal.updated_at']);
@@ -205,7 +205,7 @@ class ProposalAdmin extends AbstractAdmin
             ->add('status', null, ['label' => 'admin.fields.proposal.status'])
             ->add('estimation', null, ['label' => 'admin.fields.proposal.estimation'])
             ->add('proposalForm.step.projectAbstractStep.project', null, [
-                'label' => 'admin.fields.proposal.project'
+                'label' => 'admin.fields.proposal.project',
             ])
             ->add('evaluers', null, ['label' => 'admin.global.evaluers']);
     }

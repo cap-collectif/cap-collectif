@@ -14,7 +14,7 @@ Scenario: GraphQL user wants to get list of trashed comments.
             totalCount
             edges {
               node {
-                id
+                _id
               }
             }
           }
@@ -40,52 +40,52 @@ Scenario: GraphQL user wants to get list of trashed comments.
           "edges":[
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE="
+                "_id":"trashedComment70"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDEw"
+                "_id":"trashedComment69"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDEx"
+                "_id":"trashedComment68"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDEy"
+                "_id":"trashedComment67"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDEz"
+                "_id":"trashedComment66"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE0"
+                "_id":"trashedComment65"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE1"
+                "_id":"trashedComment64"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE2"
+                "_id":"trashedComment63"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE3"
+                "_id":"trashedComment62"
               }
             },
             {
               "node":{
-                "id":"Q29tbWVudDp0cmFzaGVkQ29tbWVudDE4"
+                "_id":"trashedComment61"
               }
             }
           ]

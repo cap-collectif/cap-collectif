@@ -16,8 +16,12 @@ class SectionPage extends Page
      */
     public function verifyPage()
     {
-        // TODO: replace this by a real condition to optimize loading time
-        if (!$this->getSession()->wait(2000, 'true')) {
+        if (
+            !$this->getSession()->wait(
+                10000,
+                "window.jQuery && $('.opinion-list-rendered').length > 0"
+            )
+        ) {
             throw new \RuntimeException(
                 'SectionPage did not fully load, check selector in "verifyPage".'
             );

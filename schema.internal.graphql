@@ -1115,6 +1115,9 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
     last: Int
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
+
+  # Expose Primary Key, do not use it, except for testing purpose.
+  _id: ID!
   body: String!
   createdAt: DateTime!
   updatedAt: DateTime

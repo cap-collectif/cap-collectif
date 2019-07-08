@@ -8,12 +8,13 @@ Capco\AppBundle\Entity\Event:
     city: Lyon
     enabled: true
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 1 days'))>
-    endAt: <dateTimeBetween('+12 days', '+30 days')>
+    startAt: <identity((new \DateTime('2032-03-01')))>
+    endAt: <identity((new \DateTime('2032-03-10')))>
     author: '@user1'
     registrationEnable: true
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event2:
     id: 'event2'
     title: PHPTourDuFuture
@@ -24,12 +25,13 @@ Capco\AppBundle\Entity\Event:
     zipCode: 75007
     city: Paris
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 2 days'))>
-    endAt: <dateTimeBetween('+12 days', '+30 days')>
+    startAt: <identity((new \DateTime('2030-03-10')))>
+    endAt: <identity((new \DateTime('2032-06-15')))>
     author: '@user2'
     link: http://www.phptour2014.fr
     projects: ['@p1']
     themes: ['@theme1']
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event3:
     id: 'event3'
     title: GrenobleWeb2015
@@ -40,12 +42,13 @@ Capco\AppBundle\Entity\Event:
     city: Grenoble
     zipCode: 38000
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 3 days'))>
-    endAt: <dateTimeBetween('+12 days', '+30 days')>
+    startAt: <identity((new \DateTime('2032-06-10')))>
+    endAt: <identity((new \DateTime('2035-03-16')))>
     author: '@user3'
     media: '@MediaProject3'
     registrationEnable: true
     projects: ['@p1']
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event4:
     id: event4
     title: EventOnOneDay
@@ -53,11 +56,12 @@ Capco\AppBundle\Entity\Event:
     lat: 45.747947
     lng: 4.838041
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 4 days'))>
-    endAt: <dateTimeBetween('+12 days', '+30 days')>
+    startAt: <identity((new \DateTime('2032-01-01')))>
+    endAt: <identity((new \DateTime('2045-03-10')))>
     author: '@user4'
     link: http://www.symfonyLive2015.fr
     media: '@MediaIdea1'
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event5:
     id: event5
     title: ParisWeb2014
@@ -72,6 +76,7 @@ Capco\AppBundle\Entity\Event:
     endAt: <(new \DateTime('2014-02-12'))>
     author: '@user5'
     link: http://www.parisweb2014.fr
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event6:
     id: event6
     title: Event without registrations
@@ -82,77 +87,87 @@ Capco\AppBundle\Entity\Event:
     city: Lyon
     enabled: true
     body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 5 days'))>
-    endAt: <dateTimeBetween('+12 days', '+30 days')>
+    startAt: <identity((new \DateTime('2032-02-01')))>
+    endAt: <identity((new \DateTime('2040-02-02')))>
     author: '@user1'
     link: http://www.parisweb2014.fr
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event7:
     id: 'event7'
-    title: <text(30)>
+    title: Event 7
     enabled: true
-    body: <text(1000)>
-    startAt: <(new \DateTime('now + 6 days'))>
-    endAt: <dateTimeBetween('+10 days', '+40 days')>
+    body: So boring
+    startAt: <identity((new \DateTime('2029-01-01')))>
+    endAt: <identity((new \DateTime('2029-05-05')))>
     author: '@user2'
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event8:
     id: 'event8'
-    title: <text(30)>
+    title: Event 8
     enabled: true
-    body: <text(1000)>
-    startAt: <(new \DateTime('now + 7 days'))>
-    endAt: <dateTimeBetween('+10 days', '+40 days')>
+    body: So much fun
+    startAt: <identity((new \DateTime('2029-03-03')))>
+    endAt: <identity((new \DateTime('2029-09-09')))>
     author: '@user3'
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event9:
     id: 'event9'
-    title: <text(30)>
+    title: Event 9
     enabled: true
-    body: <text(1000)>
-    startAt: <(new \DateTime('now + 8 days'))>
-    endAt: <dateTimeBetween('+10 days', '+40 days')>
+    body: So much gange
+    startAt: <identity((new \DateTime('2030-11-03')))>
+    endAt: <identity((new \DateTime('2030-11-08')))>
     author: '@user4'
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event10:
     id: 'event10'
-    title: <text(30)>
+    title: Event 10
     enabled: true
-    body: <text(1000)>
-    startAt: <(new \DateTime('now + 9 days'))>
-    endAt: <dateTimeBetween('+10 days', '+40 days')>
+    body: Only numbers 10 in my team
+    startAt: <identity((new \DateTime('2030-11-11')))>
+    endAt: <identity((new \DateTime('2030-11-13')))>
     author: '@user5'
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event11:
     id: event11
     title: ParisWeb2016
     enabled: false
-    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 6 days'))>
-    endAt: <dateTimeBetween('+12 days', '+30 days')>
+    body: It's time to learn CSS, noob.
+    startAt: <identity((new \DateTime('2030-11-13')))>
+    endAt: <identity((new \DateTime('2030-11-14')))>
     author: '@user1'
     link: http://www.parisweb2014.fr
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event12:
     id: evenementPresentSansDateDeFin
     title: EvenementPresentSansDateDeFin
     enabled: true
-    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
+    body: Oh yeah
+    # TODO check this event date
     startAt: <(new \DateTime('now'))>
     author: '@user2'
     link: http://www.lavie.fr
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event13:
     id: evenementPasseSansDateDeFin
     title: evenementPasseSansDateDeFin
     enabled: true
-    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now - 10 days'))>
+    body: hey hey
+    startAt: <identity((new \DateTime('2018-11-14')))>
     author: '@user3'
     link: http://www.lavie.fr
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event14:
     id: evenementFutureSansDateDeFin
     title: evenementFutureSansDateDeFin
     enabled: true
-    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
-    startAt: <(new \DateTime('now + 10 days'))>
+    body: I am in the future, but none knows when I will end…
+    startAt: <identity((new \DateTime('2024-11-14')))>
     author: '@user4'
     link: http://www.lavie.fr
     zipCode: '07400'
     city: Meysse
     address: 1 rue chevrière
+    createdAt: <identity((new \DateTime('2015-01-01')))>

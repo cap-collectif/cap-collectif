@@ -2,23 +2,24 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
-use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
-use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
-use Capco\AppBundle\Traits\DateHelperTrait;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
-use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Traits\UuidTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\DateHelperTrait;
+use Doctrine\Common\Collections\Collection;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 
 /**
  * @ORM\Table(name="event", indexes={
@@ -41,6 +42,7 @@ class Event implements
         UuidTrait,
         TextableTrait,
         MetaDescriptionCustomCodeTrait,
+        TimestampableTrait,
         SluggableTitleTrait;
 
     /**
@@ -48,12 +50,6 @@ class Event implements
      * @ORM\Column(length=255, nullable=false, unique=true)
      */
     protected $slug;
-
-    /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body", "startAt", "endAt", "zipCode", "address", "nbAddress", "link", "media", "Theme"})
@@ -159,22 +155,11 @@ class Event implements
         $this->registrations = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->projects = new ArrayCollection();
-        $this->updatedAt = new \DateTime();
     }
 
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New event';
-    }
-
-    public function getCreatedAt(): ?\DateTime
-    {
-        return $this->createdAt;
-    }
-
-    public function getUpdatedAt(): ?\DateTime
-    {
-        return $this->updatedAt;
     }
 
     public function setMedia($media)

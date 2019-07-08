@@ -3,27 +3,27 @@ Capco\AppBundle\Entity\ProgressStep:
     id: progressStep1
     proposal: '@proposal2'
     title: Casser le gymnase
-    startAt: <dateTimeBetween('-80 days', '-70 days')>
-    endAt: <dateTimeBetween('-69 days', '-60 days')>
+    startAt: <identity((new \DateTime('2017-01-03')))>
+    endAt: <identity((new \DateTime('2017-11-03')))>
   progressStep2:
     id: progressStep2
     proposal: '@proposal2'
     title: Reconstruire le gymnase
-    startAt: <dateTimeBetween('-59 days', '-50 days')>
-    endAt: <dateTimeBetween('-49 days', '-40 days')>
+    startAt: <identity((new \DateTime('2018-11-03')))>
+    endAt: <identity((new \DateTime('2018-11-20')))>
   progressStep3:
     id: progressStep3
     proposal: '@proposal2'
     title: Recasser le gymnase
-    startAt: <dateTimeBetween('-30 days', '-29 days')>
+    startAt: <identity((new \DateTime('2018-01-01')))>
   progressStep4:
     id: progressStep4
     proposal: '@proposal2'
     title: Faire un apéro dans les ruines du gymnase
-    startAt: <dateTimeBetween('-2 days', '-1 days')>
-    endAt: <dateTimeBetween('+3 days', '+5 days')>
+    startAt: <identity((new \DateTime('2018-02-01')))>
+    endAt: <identity((new \DateTime('2030-02-10')))>
   progressStep5:
     id: progressStep5
     proposal: '@proposal2'
-    title: Installer une chèvre pour reconstruire le gymnase
-    startAt: <dateTimeBetween('+10 days', '+15 days')>
+    title: Installer une chèvre dans le gymnase
+    startAt: <identity((new \DateTime('2032-03-01')))>
