@@ -4,10 +4,8 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Manager\MenuItemResolver;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class NavigationExtension extends AbstractExtension
+class NavigationExtension extends \Twig_Extension
 {
     protected $menuResolver;
 
@@ -16,16 +14,15 @@ class NavigationExtension extends AbstractExtension
         $this->menuResolver = $menuResolver;
     }
 
-    public function getFunctions(): array
+    public function getFunctions()
     {
-        return [new TwigFunction('headers_list', [$this, 'getHeaders'])];
+        return [
+            new \Twig_SimpleFunction('headers_list', [$this, 'getHeaders']),
+       ];
     }
 
-    public function getHeaders($currentUrl = null): array
+    public function getHeaders($currentUrl = null)
     {
-        return $this->menuResolver->getEnabledMenuItemsWithChildren(
-            MenuItem::TYPE_HEADER,
-            $currentUrl
-        );
+        return $this->menuResolver->getEnabledMenuItemsWithChildren(MenuItem::TYPE_HEADER, $currentUrl);
     }
 }

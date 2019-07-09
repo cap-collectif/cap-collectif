@@ -63,9 +63,7 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
                   )}>
                   {liker.displayName}
                 </a>
-                {liker.userType && liker.userType.name && (
-                  <p className="excerpt">{liker.userType.name}</p>
-                )}
+                {liker.biography && <p className="excerpt">{liker.biography}</p>}
               </div>
             </ListGroupItem>
           ))}
@@ -84,9 +82,7 @@ export default createFragmentContainer(container, {
       likers {
         id
         displayName
-        userType {
-          name
-        }
+        biography
         url
         username
         vip

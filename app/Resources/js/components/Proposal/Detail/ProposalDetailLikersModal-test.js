@@ -18,7 +18,7 @@ describe('<ProposalDetailLikersModal />', () => {
           id: '1',
           displayName: 'user 1',
           vip: true,
-          userType: { name: 'Développeuse web - capco' },
+          biography: 'Développeuse web - capco',
           url: 'www.google.com',
           username: 'user1',
           media: {
@@ -29,7 +29,7 @@ describe('<ProposalDetailLikersModal />', () => {
           id: '2',
           displayName: 'user 2',
           vip: false,
-          userType: { name: 'Développeur web - capco' },
+          biography: 'Développeur web - capco',
           url: 'www.google.com',
           username: 'user2',
           media: {
@@ -52,7 +52,7 @@ describe('<ProposalDetailLikersModal />', () => {
           id: '1',
           displayName: 'user 1',
           vip: true,
-          userType: { name: 'Développeuse web - capco' },
+          biography: 'Développeuse web - capco',
           url: 'www.google.com',
           username: 'user1',
           media: {

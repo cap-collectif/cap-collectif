@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-
 import type { ProjectAdminAppQueryResponse } from '~relay/ProjectAdminAppQuery.graphql';
+import { FormattedMessage } from 'react-intl';
 import ProjectContentAdminForm from './ProjectContentAdminForm';
 
 type Props = {|

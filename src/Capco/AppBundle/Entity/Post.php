@@ -501,7 +501,7 @@ class Post implements CommentableInterface, IndexableInterface
     }
 
     /**
-     * @deprecated: please consider using `viewerCanSee` instead.
+     * @return bool
      */
     public function canDisplay()
     {

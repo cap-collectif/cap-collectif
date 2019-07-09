@@ -7,6 +7,7 @@
 {% set logo = app_logo_url() %}
 {% set timezone = date.timezone %}
 {% set dateLocalized =  date|localizeddate('long', 'none', 'fr_FR', timezone)  %}
+{% set time =  date|date('H:i:s') %}
 
 {% block core_mail %}
     <div style="height: 35px; margin-bottom: 10px;">
@@ -25,7 +26,7 @@
                 <div class="resp-punchline" style="color:#FFFFFF; text-decoration:none; font-size:15px; font-family:helvetica, arial, sans-serif; text-align:left; float: left; margin-right: 10px;margin-bottom: 15px; width: 100%;">
                     <img style="float: left; margin: 2px 10px 0 0; width: 30px;" src="{{ baseUrl ~ asset('folder-mail.png') }}" />
                     <span style="font-size: 10px;">
-                        {{ 'type-project'|trans({}, 'CapcoAppBundle') }}
+                        Projet
                     </span>
                     <br>
                     <span>
@@ -73,7 +74,7 @@
                 %}
                 <div style="color:#FFFFFF; margin-top: 30px; margin-bottom: 10px; font-family:helvetica, arial, sans-serif; font-size: 13px;">
                     <a style="background-color: #0d71bb; padding: 10px; border-radius: 5px; color:#FFFFFF; margin-right: 8px;" href="{{ replyShowUrl }}">
-                        {{ 'link_action_show'|trans({}, 'CapcoAppBundle')|raw }}
+                        Afficher
                     </a>
                 </div>
                 {% endif %}
@@ -91,7 +92,7 @@
         }, 'CapcoAppBundle') | raw }}
         <br />
         <br />
-        {{ 'email.propulsed.by.capco'|trans({'{logoUrl}': baseUrl ~ asset('capco-logo-mail.png')})|raw }}
+        Propulsé par <img style="width: 15px;height: 15px;" src="{{ baseUrl ~ asset('capco-logo-mail.png') }}" /> Cap Collectif
     </p>
     <p>
     </p>

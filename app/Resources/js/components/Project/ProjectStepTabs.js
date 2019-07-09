@@ -117,14 +117,12 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
 
     if (preState.translateX === 0 && this.state.translateX !== 0) {
       if (this.state.translateX < 0) {
-        // eslint-disable-next-line react/no-did-update-set-state
         this.setState({ showArrowLeft: true });
       }
     }
 
     if (firstArrowDisplay) {
       if (scrollNavRight + translateX > barRight) {
-        // eslint-disable-next-line react/no-did-update-set-state
         this.setState({ showArrowRight: true, firstArrowDisplay: false });
       }
     }
@@ -135,7 +133,6 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       preState.showArrowRight === false &&
       this.state.showArrowRight !== false
     ) {
-      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ translateX: translateX - nextArrowWidth });
     }
   };

@@ -103,7 +103,7 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.authors', 'pa')
             ->leftJoin('pa.user', 'u')
             ->groupBy('u.id')
-            ->orderBy('pa.createdAt', $order);
+            ->orderBy('u.createdAt', $order);
 
         return $qb->getQuery()->execute();
     }

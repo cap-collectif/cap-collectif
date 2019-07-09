@@ -485,9 +485,6 @@ class Proposal implements
         return 'Proposal';
     }
 
-    /**
-     * @deprecated: please consider using `viewerCanSee` instead.
-     */
     public function canDisplay($user = null): bool
     {
         if ($this->isPublished()) {
@@ -499,13 +496,22 @@ class Proposal implements
 
     public function viewerCanSeeInBo($user = null): bool
     {
-        return $user && $user->isAdmin();
+        // SuperAdmin can access everything
+        if ($user && ($user->isAdmin() || $user->isSuperAdmin())) {
+            return true;
+        }
+
+        if ($this->isPublished()) {
+            return $this->getStep() ? $this->getStep()->viewerCanSeeInBo($user) : false;
+        }
+
+        return $this->getAuthor() === $user;
     }
 
     public function viewerCanSee(User $user = null): bool
     {
-        // Admin and SuperAdmin can access everything
-        if ($user && $user->isAdmin()) {
+        // SuperAdmin can access everything
+        if ($user && $user->isSuperAdmin()) {
             return true;
         }
 
@@ -514,7 +520,7 @@ class Proposal implements
                 return $this->getStep() ? $this->getStep()->canDisplay($user) : false;
             }
 
-            return false;
+            return $user && $user->isAdmin();
         }
 
         return $this->getAuthor() === $user;

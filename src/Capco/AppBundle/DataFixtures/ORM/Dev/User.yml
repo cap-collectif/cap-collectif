@@ -309,8 +309,8 @@ Capco\UserBundle\Entity\User:
     newEmailToConfirm: new-email-to-confirm@test.com
     newEmailConfirmationToken: check-my-new-email-token
     enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
-    updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>
+    createdAt: <identity((new \DateTime('2015-01-01'))->modify("+ 14 days"))>
+    updatedAt: <(new \DateTime('2016-01-01'))>
 
   user516:
     id: 'user516'

@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ReplyType;
 use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Notifier\UserNotifier;
 use Overblog\GraphQLBundle\Error\UserError;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -27,9 +28,9 @@ class UpdateReplyMutation implements MutationInterface
     private $redisStorageHelper;
     private $responsesFormatter;
     private $replyRepo;
+    private $userNotifier;
     private $stepUrlResolver;
     private $publisher;
-    private $questionnaireReplyNotifier;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -37,39 +38,32 @@ class UpdateReplyMutation implements MutationInterface
         ReplyRepository $replyRepo,
         RedisStorageHelper $redisStorageHelper,
         ResponsesFormatter $responsesFormatter,
+        UserNotifier $userNotifier,
         StepUrlResolver $stepUrlResolver,
-        Publisher $publisher,
-        QuestionnaireReplyNotifier $questionnaireReplyNotifier
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->replyRepo = $replyRepo;
         $this->redisStorageHelper = $redisStorageHelper;
         $this->responsesFormatter = $responsesFormatter;
+        $this->userNotifier = $userNotifier;
         $this->stepUrlResolver = $stepUrlResolver;
         $this->publisher = $publisher;
-        $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
         $values = $input->getRawArguments();
-        $replyId = GlobalId::fromGlobalId($values['replyId']);
         /** @var Reply $reply */
-        $reply = $this->replyRepo->find($replyId['id']);
+        $reply = $this->replyRepo->find(GlobalId::fromGlobalId($values['replyId'])['id']);
         unset($values['replyId']);
 
         if (!$reply) {
             throw new UserError('Reply not found.');
         }
-        $wasDraft = $reply->isDraft();
-        $draft = false;
-        if (isset($values['draft']) && true === $values['draft']) {
-            $draft = true;
-        }
-        $reply->setPublishedAt(new \DateTime('now'));
-        $author = $reply->getAuthor();
-        if ($author !== $viewer) {
+
+        if ($reply->getAuthor() == !$viewer) {
             throw new UserError('You are not allowed to update this reply.');
         }
 
@@ -77,41 +71,26 @@ class UpdateReplyMutation implements MutationInterface
 
         $form = $this->formFactory->create(ReplyType::class, $reply, []);
         $form->submit($values, false);
+
         if (!$form->isValid()) {
             throw GraphQLException::fromFormErrors($form);
         }
 
-        $questionnaireReply = $reply->getQuestionnaire();
-        $isUpdated = $wasDraft && !$draft ? false : true;
+        $questionnaire = $reply->getQuestionnaire();
 
-        $state = !$isUpdated
-            ? QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE
-            : QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE;
-
-        // we use the same code which the e2e test used
-        QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE === $state
-            ? $this->questionnaireReplyNotifier->onCreate($reply)
-            : $this->questionnaireReplyNotifier->onUpdate($reply);
-
-        if (
-            $questionnaireReply &&
-            !$reply->isDraft() &&
-            $questionnaireReply->isNotifyResponseUpdate()
-        ) {
+        if ($questionnaire && !$reply->isDraft()) {
             $this->publisher->publish(
                 'questionnaire.reply',
                 new Message(
                     json_encode([
                         'replyId' => $reply->getId(),
-                        'state' => $wasDraft
-                            ? QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE
-                            : QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE
+                        'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE,
                     ])
                 )
             );
         }
-        $this->em->flush();
 
+        $this->em->flush();
         $this->redisStorageHelper->recomputeUserCounters($viewer);
 
         return ['reply' => $reply];

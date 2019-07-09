@@ -34,9 +34,8 @@ final class UserNewPasswordConfirmationMessage extends DefaultMessage
         return [
             'user' => $user,
             'date' => $date,
-            'time' => $date->format('H:i:s'),
             'siteName' => $siteName,
-            'baseUrl' => $baseUrl
+            'baseUrl' => $baseUrl,
         ];
     }
 

@@ -5,10 +5,8 @@ namespace Capco\AppBundle\Twig;
 use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 use Capco\AppBundle\Cache\RedisCache;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class RegistrationFormExtension extends AbstractExtension
+class RegistrationFormExtension extends \Twig_Extension
 {
     public const CACHE_KEY = 'RegistrationFormExtension';
 
@@ -28,7 +26,9 @@ class RegistrationFormExtension extends AbstractExtension
 
     public function getFunctions(): array
     {
-        return [new TwigFunction('registration_form_serialize', [$this, 'serializeFields'])];
+        return [
+            new \Twig_SimpleFunction('registration_form_serialize', [$this, 'serializeFields']),
+        ];
     }
 
     public function serializeFields(): array
@@ -37,12 +37,19 @@ class RegistrationFormExtension extends AbstractExtension
 
         if (!$cachedItem->isHit()) {
             $form = $this->formRepo->findCurrent();
+            $serializedQuestions = $this->serializer->serialize(
+                $form ? $form->getRealQuestions() : [],
+                'json',
+                [
+                    'groups' => ['Questions'],
+                ]
+            );
 
             $serializedDomains = $this->serializer->serialize(
                 $form ? $form->getDomains() : [],
                 'json',
                 [
-                    'groups' => ['EmailDomain']
+                    'groups' => ['EmailDomain'],
                 ]
             );
 
@@ -52,7 +59,7 @@ class RegistrationFormExtension extends AbstractExtension
                 'topTextDisplayed' => $form ? $form->isTopTextDisplayed() : '',
                 'topText' => $form ? $form->getTopText() : '',
                 'hasQuestions' => $form ? $form->getRealQuestions()->count() > 0 : false,
-                'domains' => json_decode($serializedDomains, true)
+                'domains' => json_decode($serializedDomains, true),
             ];
 
             $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);

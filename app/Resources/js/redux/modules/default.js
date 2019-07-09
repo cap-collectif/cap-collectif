@@ -1,14 +1,7 @@
 // @flow
 import { SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
-import type {
-  Exact,
-  Action,
-  Dispatch,
-  FeatureToggle,
-  FeatureToggles,
-  SSOConfiguration,
-} from '../../types';
+import type { Exact, Action, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
 
 type ShowNewFieldModalAction = { type: 'default/SHOW_NEW_FIELD_MODAL' };
 type HideNewFieldModalAction = { type: 'default/HIDE_NEW_FIELD_MODAL' };
@@ -39,7 +32,6 @@ export type State = {|
   +userTypes: Array<Object>,
   +parameters: Object,
   +updatingRegistrationFieldModal: ?number,
-  +ssoList: Array<SSOConfiguration>,
 |};
 
 export const features = {
@@ -88,7 +80,6 @@ const initialState: State = {
   userTypes: [],
   parameters: {},
   updatingRegistrationFieldModal: null,
-  ssoList: [],
 };
 
 export const toggleFeatureSucceeded = (

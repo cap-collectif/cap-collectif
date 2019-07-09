@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import type { State } from '../../types';
 import DefaultAvatar from './DefaultAvatar';
+import type { State } from '../../types';
 
 type Props = {
   user: ?{
@@ -47,7 +47,7 @@ export class UserAvatarDeprecated extends React.Component<Props> {
         <img
           src={user.media.url}
           alt=""
-          className="img-circle object-cover mr-10"
+          className="img-circle object-cover"
           style={{ width: mediaSize, height: mediaSize }}
         />
       );
@@ -58,13 +58,13 @@ export class UserAvatarDeprecated extends React.Component<Props> {
         <img
           src={defaultAvatar}
           alt=""
-          className="img-circle object-cover mr-10"
+          className="img-circle object-cover"
           style={{ width: mediaSize, height: mediaSize }}
         />
       );
     }
 
-    return <DefaultAvatar className="img-circle avatar user-avatar mr-10" size={size} />;
+    return <DefaultAvatar size={size} className="img-circle avatar" />;
   }
 
   render() {

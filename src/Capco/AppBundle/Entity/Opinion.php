@@ -483,9 +483,6 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         return $count;
     }
 
-    /**
-     * @deprecated: please consider using `viewerCanSee` instead.
-     */
     public function canDisplay($user = null): bool
     {
         return ($this->isPublished() && $this->getStep() && $this->getStep()->canDisplay($user)) ||

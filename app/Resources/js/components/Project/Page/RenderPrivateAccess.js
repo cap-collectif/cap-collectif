@@ -1,10 +1,9 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
-import { createFragmentContainer, graphql } from 'react-relay';
-
 import Tag from '../../Ui/Labels/Tag';
+import { FormattedMessage } from 'react-intl';
+import { createFragmentContainer, graphql } from 'react-relay';
 import type { RenderPrivateAccess_project } from '~relay/RenderPrivateAccess_project.graphql';
 
 type Props = {

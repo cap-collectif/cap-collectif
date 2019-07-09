@@ -4,10 +4,8 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\UserBundle\Repository\UserTypeRepository;
 use Capco\AppBundle\Cache\RedisCache;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class UserTypeExtension extends AbstractExtension
+class UserTypeExtension extends \Twig_Extension
 {
     public const CACHE_KEY = 'userTypes';
     protected $repo;
@@ -21,7 +19,7 @@ class UserTypeExtension extends AbstractExtension
 
     public function getFunctions(): array
     {
-        return [new TwigFunction('user_type_list', [$this, 'getUserTypes'])];
+        return [new \Twig_SimpleFunction('user_type_list', [$this, 'getUserTypes'])];
     }
 
     public function getUserTypes(): array

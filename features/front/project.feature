@@ -250,7 +250,7 @@ Scenario: Admin access to his project and click to edit it
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-capcobeer                          |
   Then I should see "Collecte des propositions pour la capcoBeer"
-  And I should see "admin" in the "#project-header #authors-credit" element
+  And I should see "project.show.published_by admin"
   And I should see "global.draft.only_visible_by_you"
   Then I follow "action_edit"
   And I should be redirected to "/admin/capco/app/project/ProjectAccessibleForMeOnlyByAdmin/edit"
@@ -276,10 +276,3 @@ Scenario: Pierre can access to a restricted project to his user group
   Then I click on button "#load-more"
   And I wait 2 seconds
   Then I should see "ptondereau" in the "#group3-modal .list-group" element
-
-Scenario: Anonymous can access a project and see all authors
-  Given I visited "collect page" with:
-    | projectSlug | questions-responses                |
-    | stepSlug    | collecte-des-questions-chez-youpie |
-  Then I should see "Questions/Responses"
-  And I should see 2 "#project-header .user-avatar" elements

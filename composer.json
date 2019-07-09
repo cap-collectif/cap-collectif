@@ -170,7 +170,7 @@
         "ruflin/elastica": "~5",
         "tweedegolf/prometheus-client": "^0.3.0",
         "symfony/polyfill-php55": "^1.7.0",
-        "sentry/sentry-symfony": "^3.1",
+        "sentry/sentry-symfony": "^2.0",
         "tweedegolf/prometheus-bundle": "dev-master",
         "overblog/dataloader-bundle": "^0.4.1",
         "zendframework/zend-diactoros": "^1.8",
@@ -185,7 +185,7 @@
         "jolicode/jolinotif": "^2.0",
         "symfony/security-acl": "dev-master",
         "friendsofsymfony/rest-bundle": "2.5",
-        "jms/serializer-bundle": "2.4.4",
+        "jms/serializer-bundle": "2.4.3",
         "egeloen/ckeditor-bundle": "dev-feature/symfony4-compat#f9f68afcff81a210f2122013a852384f4102b65a",
         "egeloen/json-builder": "dev-feature/symfony4",
         "stof/doctrine-extensions-bundle": "^1.3"
@@ -213,8 +213,7 @@
         "friendsofphp/php-cs-fixer": "^2.13",
         "phpstan/phpstan-symfony": "^0.11.2",
         "phpstan/phpstan": "^0.11.4",
-        "symfony/maker-bundle": "^1.11",
-        "dg/bypass-finals": "^1.1"
+        "symfony/maker-bundle": "^1.11"
     },
     "scripts": {
         "post-install-cmd": [

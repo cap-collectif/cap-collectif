@@ -279,9 +279,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    /**
-     * @deprecated: please consider using `viewerCanSee` instead.
-     */
     public function canDisplay($user = null): bool
     {
         return $this->getStep() ? $this->getStep()->canDisplay($user) : true;

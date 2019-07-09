@@ -23,8 +23,8 @@ class MonCompteParisUserProvider implements UserProviderInterface
     {
         $user = $this->userManager->findUserBy(['parisId' => $id]);
         if (null === $user) {
-            $informations = $this->openAmCaller->getUserInformations($id);
-            if (false === filter_var($informations['validatedAccount'], FILTER_VALIDATE_BOOLEAN)) {
+            $informations = $this->openAmCaller->getUserInformations();
+            if (false === filter_var($informations['validated'], FILTER_VALIDATE_BOOLEAN)) {
                 throw new ParisAuthenticationException(
                     $id,
                     'Please validate your account from Mon Compte Paris'
@@ -33,9 +33,12 @@ class MonCompteParisUserProvider implements UserProviderInterface
 
             $user = $this->userManager->createUser();
             $user->setParisId($id);
-            // We don't have a username from informations
-            // It will be asked later to the user
-            $user->setUsername(null);
+            $firstname = '' !== $informations['firstname'] ? $informations['firstname'] : null;
+            $lastname = '' !== $informations['lastname'] ? $informations['lastname'] : null;
+            $username = ($firstname || $lastname) ? trim($firstname . ' ' . $lastname) : null;
+            $user->setFirstname(null);
+            $user->setLastname(null);
+            $user->setUsername($username);
             $user->setEmail($id);
             $user->setPlainPassword('No password is stored locally.');
             $user->setEnabled(true);
@@ -54,6 +57,6 @@ class MonCompteParisUserProvider implements UserProviderInterface
 
     public function supportsClass($class): bool
     {
-        return User::class === $class;
+        return 'Capco\UserBundle\Entity\User' === $class;
     }
 }

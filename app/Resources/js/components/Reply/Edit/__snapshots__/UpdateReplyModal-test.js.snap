@@ -47,13 +47,13 @@ exports[`<UpdateReplyModal /> should render correctly with minimal props 1`] = `
             "date": <FormattedDate
               day="numeric"
               month="long"
-              value={"2016-04-25T12:33:17.000Z"}
+              value={"2016-02-29T23:00:00.000Z"}
               year="numeric"
             />,
             "time": <FormattedDate
               hour="numeric"
               minute="numeric"
-              value={"2016-04-25T12:33:17.000Z"}
+              value={"2016-02-29T23:00:00.000Z"}
             />,
           }
         }
@@ -63,10 +63,8 @@ exports[`<UpdateReplyModal /> should render correctly with minimal props 1`] = `
           Object {
             "$fragmentRefs": null,
             "$refType": null,
-            "createdAt": "2016-03-01 12:26:24",
-            "draft": false,
+            "createdAt": "2016-03-01 00:00:00",
             "id": "UmVwbHk6cmVwbHky",
-            "publishedAt": "2016-04-25 14:33:17",
             "questionnaire": Object {
               "$fragmentRefs": null,
             },
@@ -90,10 +88,8 @@ exports[`<UpdateReplyModal /> should render correctly with minimal props 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "createdAt": "2016-03-01 12:26:24",
-          "draft": false,
+          "createdAt": "2016-03-01 00:00:00",
           "id": "UmVwbHk6cmVwbHky",
-          "publishedAt": "2016-04-25 14:33:17",
           "questionnaire": Object {
             "$fragmentRefs": null,
           },
@@ -160,14 +156,27 @@ exports[`<UpdateReplyModal /> should render correctly with replies 1`] = `
             "date": <FormattedDate
               day="numeric"
               month="long"
-              value={"2016-03-01T11:26:24.000Z"}
+              value={"2016-02-29T23:00:00.000Z"}
               year="numeric"
             />,
             "time": <FormattedDate
               hour="numeric"
               minute="numeric"
-              value={"2016-03-01T11:26:24.000Z"}
+              value={"2016-02-29T23:00:00.000Z"}
             />,
+          }
+        }
+      />
+      <ForwardRef(Relay(Connect(UnpublishedLabel)))
+        publishable={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "createdAt": "2016-03-01 00:00:00",
+            "id": "UmVwbHk6cmVwbHky",
+            "questionnaire": Object {
+              "$fragmentRefs": null,
+            },
           }
         }
       />
@@ -188,10 +197,8 @@ exports[`<UpdateReplyModal /> should render correctly with replies 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "createdAt": "2016-03-01 12:26:24",
-          "draft": true,
+          "createdAt": "2016-03-01 00:00:00",
           "id": "UmVwbHk6cmVwbHky",
-          "publishedAt": null,
           "questionnaire": Object {
             "$fragmentRefs": null,
           },

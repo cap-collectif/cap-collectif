@@ -9,7 +9,7 @@ sentry:
   dsn: '%sentry_dsn%'
   options:
     environment: '%kernel.environment%'
-    server_name: '%router.request_context.host%'
+    name: '%router.request_context.host%'
 
 doctrine:
   orm:
@@ -26,6 +26,10 @@ monolog:
       type: stream
       path: 'php://stderr'
       level: warning
+    sentry:
+      level: warning
+      type: raven
+      dsn: '%sentry_dsn%'
 
 swiftmailer:
   default_mailer: mandrill

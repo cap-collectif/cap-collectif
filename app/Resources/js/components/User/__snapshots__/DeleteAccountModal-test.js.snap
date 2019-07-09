@@ -183,7 +183,7 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
                           className="col-sm-4 delete__inception__avatar"
                         >
                           <DefaultAvatar
-                            className="img-circle avatar mr-10 user-avatar"
+                            className="img-circle avatar mr-10"
                             size={35}
                           />
                         </div>
@@ -275,7 +275,7 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
                           className="col-sm-4 delete__inception__avatar"
                         >
                           <DefaultAvatar
-                            className="img-circle avatar mr-10 user-avatar"
+                            className="img-circle avatar mr-10"
                             size={35}
                           />
                         </div>
@@ -530,7 +530,7 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
                           className="col-sm-4 delete__inception__avatar"
                         >
                           <DefaultAvatar
-                            className="img-circle avatar mr-10 user-avatar"
+                            className="img-circle avatar mr-10"
                             size={35}
                           />
                         </div>
@@ -622,7 +622,7 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
                           className="col-sm-4 delete__inception__avatar"
                         >
                           <DefaultAvatar
-                            className="img-circle avatar mr-10 user-avatar"
+                            className="img-circle avatar mr-10"
                             size={35}
                           />
                         </div>

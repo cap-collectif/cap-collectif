@@ -12,7 +12,7 @@ import ReplyForm from '../Form/ReplyForm';
 type Props = {
   show: boolean,
   reply: UpdateReplyModal_reply,
-  onClose: () => void,
+  onClose: Function,
 };
 
 export class UpdateReplyModal extends React.Component<Props> {
@@ -39,23 +39,19 @@ export class UpdateReplyModal extends React.Component<Props> {
               values={{
                 date: (
                   <FormattedDate
-                    value={moment(reply.publishedAt ? reply.publishedAt : reply.createdAt)}
+                    value={moment(reply.createdAt)}
                     day="numeric"
                     month="long"
                     year="numeric"
                   />
                 ),
                 time: (
-                  <FormattedDate
-                    value={moment(reply.publishedAt ? reply.publishedAt : reply.createdAt)}
-                    hour="numeric"
-                    minute="numeric"
-                  />
+                  <FormattedDate value={moment(reply.createdAt)} hour="numeric" minute="numeric" />
                 ),
               }}
             />
             {/* $FlowFixMe */}
-            {!reply.draft && <UnpublishedLabel publishable={reply} />}
+            <UnpublishedLabel publishable={reply} />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -75,10 +71,8 @@ export default createFragmentContainer(UpdateReplyModal, {
     fragment UpdateReplyModal_reply on Reply {
       ...UnpublishedLabel_publishable
       ...ReplyForm_reply
-      draft
       id
       createdAt
-      publishedAt
       questionnaire {
         ...ReplyForm_questionnaire
       }

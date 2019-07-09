@@ -4,10 +4,8 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\Cache\RedisCache;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class SiteParameterExtension extends AbstractExtension
+class SiteParameterExtension extends \Twig_Extension
 {
     public const CACHE_KEY = 'getSiteParameterValue';
     protected $resolver;
@@ -22,11 +20,11 @@ class SiteParameterExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction(
+            new \Twig_SimpleFunction(
                 'capco_site_parameter_value',
                 [$this, 'getSiteParameterValue'],
                 ['is_safe' => ['html']]
-            )
+            ),
         ];
     }
 

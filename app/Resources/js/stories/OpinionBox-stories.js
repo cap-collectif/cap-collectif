@@ -10,25 +10,24 @@ import {
   OverlayTrigger,
   Popover,
   Label,
-  DropdownButton,
-  MenuItem,
   Row,
   Col,
 } from 'react-bootstrap';
+import ShareButton from '../components/Ui/Button/ShareButton';
+import ShareButtonAction from '../components/Ui/Button/ShareButtonAction';
 
-import Card from '../components/Ui/Card/Card';
-import UserLink from '../components/User/UserLink';
-import PieChart from '../components/Ui/Chart/PieChart';
-import Media from '../components/Ui/Medias/Media/Media';
 import ListGroup from '../components/Ui/List/ListGroup';
-import InlineList from '../components/Ui/List/InlineList';
-import PinnedLabel from '../components/Utils/PinnedLabel';
 import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
+import UserLink from '../components/User/UserLink';
+import InlineList from '../components/Ui/List/InlineList';
+import Media from '../components/Ui/Medias/Media/Media';
+import Card from '../components/Ui/Card/Card';
+import PieChart from '../components/Ui/Chart/PieChart';
+import PinnedLabel from '../components/Utils/PinnedLabel';
 
-import { features } from '../redux/modules/default';
-import { author as authorMock } from './mocks/users';
+import { UserVoteList } from './UserVoteList-stories';
 import { opinion as opinionMock } from './mocks/opinions';
-import { UserAvatarList } from '../components/User/UserAvatarList';
+import { author as authorMock } from './mocks/users';
 
 const headerOption = {
   Gray: 'gray',
@@ -240,7 +239,7 @@ const OpinionBox = ({ section, opinion }) => (
                 {/** Votes/OpinionUserVotes.js */}
                 {opinion.previewVotes.length > 0 && (
                   <div style={{ paddingTop: '20px' }}>
-                    <UserAvatarList features={features} max={5} users={opinion.previewVotes} />
+                    <UserVoteList max={5} votes={opinion.previewVotes} />
                   </div>
                 )}
               </div>
@@ -310,34 +309,13 @@ const OpinionBox = ({ section, opinion }) => (
           </span>
           {/** Utils/ShareButtonDropdown.js */}
           {opinion.title && opinion.url && (
-            <div className="share-button-dropdown">
-              <DropdownButton
-                id="opinion-share-button"
-                style={{ marginLeft: 5 }}
-                className="dropdown--custom ml-5"
-                onClick={() => {}}
-                title={
-                  <span>
-                    <i className="cap cap-link" /> {'Partager'}
-                  </span>
-                }>
-                <MenuItem eventKey="1">
-                  <i className="cap cap-mail-2-1" /> {'Mail'}
-                </MenuItem>
-                <MenuItem eventKey="2">
-                  <i className="cap cap-facebook" /> {'Facebook'}
-                </MenuItem>
-                <MenuItem eventKey="3">
-                  <i className="cap cap-twitter" /> {'Twitter'}
-                </MenuItem>
-                <MenuItem eventKey="4">
-                  <i className="cap cap-linkedin" /> {'LinkedIn'}
-                </MenuItem>
-                <MenuItem eventKey="5">
-                  <i className="cap cap-link-1" /> {'Link'}
-                </MenuItem>
-              </DropdownButton>
-            </div>
+            <ShareButton id="shareButton" margin="ml-5">
+              <ShareButtonAction action="mail" />
+              <ShareButtonAction action="facebook" />
+              <ShareButtonAction action="twitter" />
+              <ShareButtonAction action="linkedin" />
+              <ShareButtonAction action="link" />
+            </ShareButton>
           )}
         </ButtonToolbar>
       </div>
