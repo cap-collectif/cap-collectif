@@ -4,7 +4,7 @@ import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { fetchQuery, graphql } from 'relay-runtime';
+import { graphql } from 'relay-runtime';
 import { Field, formValueSelector, type FormProps, reset } from 'redux-form';
 import { createFragmentContainer } from 'react-relay';
 import select from '../../Form/Select';
@@ -14,25 +14,18 @@ import component from '../../Form/Field';
 import { changeEventMobileListView } from '../../../redux/modules/event';
 import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
-import environment from '../../../createRelayEnvironment';
 import EventListCounter from './EventListCounter';
 import EventListStatusFilter from './EventListStatusFilter';
 import UserListField from '../../Admin/Field/UserListField';
 import type { EventListFilters_query } from '~relay/EventListFilters_query.graphql';
-// import type { EventListFilters_themes } from '~relay/EventListFilters_themes.graphql';
-import type { EventListFiltersProjectsQueryResponse } from '~relay/EventListFiltersProjectsQuery.graphql';
 import ThemeFilter from '../../Utils/ThemeFilter';
-
-type State = {
-  projectOptions: Array<Object>,
-};
+import ProjectFilter from '../../Utils/ProjectFilter';
 
 type Registrable = 'all' | 'yes' | 'no';
 
 type Props = {|
   ...FormProps,
   query: EventListFilters_query,
-  // themes: EventListFilters_themes,
   features: FeatureToggles,
   dispatch: Dispatch,
   theme: ?string,
@@ -77,19 +70,6 @@ const countFilters = (
 
   return nbFilter;
 };
-
-const projectQuery = graphql`
-  query EventListFiltersProjectsQuery($withEventOnly: Boolean) {
-    projects(withEventOnly: $withEventOnly) {
-      edges {
-        node {
-          id
-          title
-        }
-      }
-    }
-  }
-`;
 const StatusContainer = styled(Col)`
   color: white;
   display: flex;
@@ -102,27 +82,9 @@ const FiltersWrapper = styled(Col)`
   }
 `;
 
-export class EventListFilters extends React.Component<Props, State> {
-  state = { projectOptions: [] };
-
-  componentDidMount() {
-    fetchQuery(environment, projectQuery, { withEventOnly: true })
-      .then((res: EventListFiltersProjectsQueryResponse) =>
-        res.projects.edges
-          ? res.projects.edges.filter(Boolean).map(edge => ({
-              value: edge.node.id,
-              label: edge.node.title,
-            }))
-          : [],
-      )
-      .then(projectOptions => {
-        this.setState({ projectOptions });
-      });
-  }
-
+export class EventListFilters extends React.Component<Props> {
   getFilters(nbFilter: number): [] {
     const { features, theme, project, userTypes, intl, dispatch, query } = this.props;
-    const { projectOptions } = this.state;
     const filters = [];
     filters.push(
       <Field
@@ -178,7 +140,7 @@ export class EventListFilters extends React.Component<Props, State> {
         />
       </div>,
     );
-    if (features.themes) {
+    if (features.themes && query) {
       filters.push(
         <div>
           {/* $FlowFixMe $refType */}
@@ -186,20 +148,12 @@ export class EventListFilters extends React.Component<Props, State> {
         </div>,
       );
     }
-    if (features.projects_form && projectOptions.length) {
+    if (features.projects_form && query) {
       filters.push(
-        <Field
-          component={select}
-          id="EventListFilters-filter-project"
-          name="project"
-          placeholder={intl.formatMessage({ id: 'admin.label.project' })}
-          label={intl.formatMessage({ id: 'type-project' })}
-          options={projectOptions}
-          role="combobox"
-          aria-autocomplete="list"
-          aria-haspopup="true"
-          aria-controls="EventListFilters-filter-project-listbox"
-        />,
+        <div>
+          {/* $FlowFixMe $refType */}
+          <ProjectFilter query={query} />
+        </div>,
       );
     }
 
@@ -346,6 +300,7 @@ export default createFragmentContainer(container, {
         isFuture: { type: "Boolean" }
         author: { type: "ID" }
         isRegistrable: { type: "Boolean" }
+        withEventOnly: { type: "Boolean" }
       ) {
       ...EventListCounter_query
         @arguments(
@@ -360,6 +315,7 @@ export default createFragmentContainer(container, {
           isRegistrable: $isRegistrable
         )
       ...ThemeFilter_query
+      ...ProjectFilter_query @arguments(withEventOnly: $withEventOnly)
     }
   `,
 });

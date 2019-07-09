@@ -157,6 +157,24 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                 componentClass="div"
               >
                 <div>
+                  <div>
+                    <ForwardRef(Relay(InjectIntl(ProjectFilter)))
+                      query={
+                        Object {
+                          "$fragmentRefs": null,
+                          "$refType": null,
+                        }
+                      }
+                    />
+                  </div>
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
                   <Field
                     aria-autocomplete="list"
                     aria-controls="EventListFilters-filter-userType-listbox"
