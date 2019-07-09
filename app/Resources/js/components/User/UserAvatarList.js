@@ -6,6 +6,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 import UserAvatar from './UserAvatar';
+import colors from '../../utils/colors';
 import type { State, FeatureToggles } from '../../types';
 import type { UserAvatarList_users } from '~relay/UserAvatarList_users.graphql';
 
@@ -21,6 +22,14 @@ const AvatarButton = styled.button.attrs({})`
   border: none;
   background: none;
   padding: 0;
+`;
+
+const AvatarDefaultButton = styled(Button)`
+  color: ${colors.darkGray} !important;
+  background-color: ${colors.borderColor};
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
 `;
 
 export const UserAvatarList = (props: Props) => {
@@ -48,13 +57,13 @@ export const UserAvatarList = (props: Props) => {
         )}
       {users.length > max && (
         <AvatarButton onClick={onClick}>
-          <Button
+          <AvatarDefaultButton
             bsStyle="link"
             id="show-all"
             onClick={() => {}}
             className="more__link text-center">
             {`+${users.length - max >= 100 ? '99' : users.length - max}`}
-          </Button>
+          </AvatarDefaultButton>
         </AvatarButton>
       )}
     </React.Fragment>

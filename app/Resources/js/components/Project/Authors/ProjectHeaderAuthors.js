@@ -1,8 +1,7 @@
 // @flow
-import moment from 'moment';
 import * as React from 'react';
 import styled from 'styled-components';
-import { FormattedMessage, FormattedDate } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 
 import UserAvatarList from '../../User/UserAvatarList';
@@ -19,6 +18,7 @@ type State = {|
 
 const Container = styled.div.attrs({})`
   display: flex !important;
+  align-items: center;
 `;
 
 const AuthorsButton = styled.button.attrs({})`
@@ -105,16 +105,6 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
             onClick={this.handleClickModal}>
             {getAuthorCredits(project.authors)}
           </AuthorsButton>
-          <span className="ml-5">
-            <FormattedDate
-              value={moment(project.publishedAt).toDate()}
-              minute="numeric"
-              hour="numeric"
-              day="numeric"
-              month="long"
-              year="numeric"
-            />
-          </span>
         </AuthorsContainer>
       </Container>
     );
@@ -125,7 +115,6 @@ export default createFragmentContainer(ProjectHeaderAuthors, {
   project: graphql`
     fragment ProjectHeaderAuthors_project on Project {
       id
-      publishedAt
       authors {
         username
         ...UserAvatarList_users

@@ -1,5 +1,7 @@
 // @flow
+import moment from 'moment';
 import * as React from 'react';
+import { FormattedDate } from 'react-intl';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 
 import environment, { graphqlError } from '../../../createRelayEnvironment';
@@ -25,6 +27,9 @@ export const ProjectHeaderAuthorsView = (properties: Props) => {
           query ProjectHeaderAuthorsViewQuery($projectId: ID!) {
             project: node(id: $projectId) {
               ...ProjectHeaderAuthors_project
+              ... on Project {
+                publishedAt
+              }
             }
           }
         `}
@@ -55,8 +60,21 @@ export const ProjectHeaderAuthorsView = (properties: Props) => {
           }
 
           return (
-            /* $FlowFixMe $refType */
-            <ProjectHeaderAuthors project={project} />
+            <>
+              {/* $FlowFixMe $refType */}
+              <ProjectHeaderAuthors project={project} />
+              <div className="mt-10">
+                <i className="cap-calendar-2-1 mr-10" />
+                <FormattedDate
+                  value={moment(project.publishedAt).toDate()}
+                  minute="numeric"
+                  hour="numeric"
+                  day="numeric"
+                  month="long"
+                  year="numeric"
+                />
+              </div>
+            </>
           );
         }}
       />

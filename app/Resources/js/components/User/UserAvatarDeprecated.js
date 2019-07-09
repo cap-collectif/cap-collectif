@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import DefaultAvatar from './DefaultAvatar';
 import type { State } from '../../types';
+import DefaultAvatar from './DefaultAvatar';
 
 type Props = {
   user: ?{
