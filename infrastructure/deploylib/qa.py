@@ -44,10 +44,10 @@ def graphql_schemas(checkSame=False):
 def snapshots(emails=False):
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     commands = [
-        'capco:export:users --snapshot',
-        'capco:export:consultation --snapshot',
-        'capco:export:projects-contributors --snapshot',
-        'capco:export:proposalStep --snapshot',
+        'capco:export:users --quiet --snapshot',
+        'capco:export:consultation --quiet --snapshot',
+        'capco:export:projects-contributors --quiet --snapshot',
+        'capco:export:proposalStep --quiet --snapshot',
         # 'capco:export:questionnaire --snapshot',
     ]
     extensions = [
