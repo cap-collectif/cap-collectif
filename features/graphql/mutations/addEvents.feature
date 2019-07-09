@@ -1,4 +1,4 @@
-@addEvents
+@addEvents @events
 Feature: Add events.
 
 @database
@@ -51,7 +51,7 @@ Scenario: An admin wants to add a list of events with dry run
             "zipCode": "75012",
             "commentable": false,
             "enabled": true,
-            "registrationEnable": true,
+            "guestListEnabled": true,
             "metaDescription": "metaDescription",
             "customCode": "customCode",
             "city": "Paris",

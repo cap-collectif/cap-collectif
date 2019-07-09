@@ -52,7 +52,7 @@ class UrlResolver
             return '';
         }
 
-        $format = $args ? $args['format'] ?? 'reference' : 'reference';
+        $format = $args['format'] ?? 'reference';
         $provider = $this->container->get($media->getProviderName());
         $path = '';
         if ('reference' === $format) {
@@ -79,7 +79,7 @@ class UrlResolver
                         ->getSlug(),
                     'stepSlug' => $object->getStep()->getSlug(),
                     'opinionTypeSlug' => $object->getOpinionType()->getSlug(),
-                    'opinionSlug' => $object->getSlug(),
+                    'opinionSlug' => $object->getSlug()
                 ],
                 $referenceType
             );
@@ -98,7 +98,7 @@ class UrlResolver
                     'stepSlug' => $opinion->getStep()->getSlug(),
                     'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
                     'opinionSlug' => $opinion->getSlug(),
-                    'versionSlug' => $object->getSlug(),
+                    'versionSlug' => $object->getSlug()
                 ],
                 $referenceType
             );
@@ -114,7 +114,7 @@ class UrlResolver
                             ->getProject()
                             ->getSlug(),
                         'stepSlug' => $object->getStep()->getSlug(),
-                        'proposalSlug' => $object->getSlug(),
+                        'proposalSlug' => $object->getSlug()
                     ],
                     $referenceType
                 )
@@ -278,7 +278,7 @@ class UrlResolver
                         ->getLinkedOpinion()
                         ->getStep()
                         ->getProject()
-                        ->getSlug(),
+                        ->getSlug()
                 ],
                 $referenceType
             );

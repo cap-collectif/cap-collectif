@@ -120,14 +120,12 @@ export class OpinionList extends React.Component<Props, State> {
                   </select>
                 </form>
               )}
-              {section.contribuable && (
-                <NewOpinionButton
-                  className="m-0"
-                  section={section}
-                  consultation={consultation}
-                  label={intl.formatMessage({ id: 'opinion.create.button' })}
-                />
-              )}
+              <NewOpinionButton
+                className="m-0"
+                section={section}
+                consultation={consultation}
+                label={intl.formatMessage({ id: 'opinion.create.button' })}
+              />
             </div>
           </div>
         </Card.Header>
@@ -185,21 +183,21 @@ export class OpinionList extends React.Component<Props, State> {
                   return (
                     <React.Fragment>
                       <div className="opinion-list-rendered">
-                        {/* $FlowFixMe $refType */}
-                        <OpinionListPaginated
-                          enablePagination={enablePagination}
-                          section={props.section}
-                        />
-                        {!enablePagination &&
-                        section.contributionsCount &&
-                        consultation.opinionCountShownBySection &&
-                        section.contributionsCount > consultation.opinionCountShownBySection ? (
-                          <ListGroupItem>
-                            <Button block componentClass="a" bsStyle="link" href={section.url}>
-                              <FormattedMessage id="opinion.show.all" />
-                            </Button>
-                          </ListGroupItem>
-                        ) : null}
+                      {/* $FlowFixMe $refType */}
+                      <OpinionListPaginated
+                        enablePagination={enablePagination}
+                        section={props.section}
+                      />
+                      {!enablePagination &&
+                      section.contributionsCount &&
+                      consultation.opinionCountShownBySection &&
+                      section.contributionsCount > consultation.opinionCountShownBySection ? (
+                        <ListGroupItem>
+                          <Button block componentClass="a" bsStyle="link" href={section.url}>
+                            <FormattedMessage id="opinion.show.all" />
+                          </Button>
+                        </ListGroupItem>
+                      ) : null}
                       </div>
                     </React.Fragment>
                   );

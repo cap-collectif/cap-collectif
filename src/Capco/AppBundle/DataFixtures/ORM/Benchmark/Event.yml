@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\Event:
     author: '@user<numberBetween(1,3)>'
     address: '25, rue Claude Tillier'
     city: Paris
-    registrationEnable: true
+    guestListEnabled: true
     lat: 48.84<numberBetween(1000,9999)>
     lng: 2.29<numberBetween(1000,9999)>
     projects: ['@project1']

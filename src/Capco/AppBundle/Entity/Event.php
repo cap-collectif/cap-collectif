@@ -78,6 +78,11 @@ class Event implements
     private $zipCode;
 
     /**
+     * @ORM\Column(name="address_json", type="text", nullable=true)
+     */
+    private $addressJson;
+
+    /**
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
@@ -145,9 +150,9 @@ class Event implements
     private $registrations;
 
     /**
-     * @ORM\Column(name="registration_enable", type="boolean", nullable=false)
+     * @ORM\Column(name="guest_list_enabled", type="boolean", nullable=false)
      */
-    private $registrationEnable = false;
+    private $guestListEnabled = false;
 
     public function __construct()
     {
@@ -369,16 +374,16 @@ class Event implements
         return $this->registrations;
     }
 
-    public function setRegistrationEnable(bool $registrationEnable): self
+    public function setGuestListEnabled(bool $guestListEnabled): self
     {
-        $this->registrationEnable = $registrationEnable;
+        $this->guestListEnabled = $guestListEnabled;
 
         return $this;
     }
 
-    public function isRegistrationEnable(): bool
+    public function isGuestListEnabled(): bool
     {
-        return $this->registrationEnable;
+        return $this->guestListEnabled;
     }
 
     // **************** Custom methods ***************
@@ -502,10 +507,22 @@ class Event implements
 
     public function isRegistrable(): bool
     {
-        if (!empty($this->link) || $this->registrationEnable) {
+        if (!empty($this->link) || $this->guestListEnabled) {
             return true;
         }
 
         return false;
+    }
+
+    public function getAddressJson(): ?string
+    {
+        return $this->addressJson;
+    }
+
+    public function setAddressJson(?string $addressJson = null): self
+    {
+        $this->addressJson = $addressJson;
+
+        return $this;
     }
 }

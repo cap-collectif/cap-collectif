@@ -45,7 +45,7 @@ const prepareVariablesFromAnalyzedFile = (
   const events = result.data
     .filter(data => data.title !== '')
     .map(data => {
-      data.registrationEnable = data.registrationEnable === 'true';
+      data.guestListEnabled = data.guestListEnabled === 'true';
       data.enabled = data.enabled === 'true';
       data.commentable = data.commentable === 'true';
       data.themes = data.themes.split(',')[0] === '' ? [] : data.themes.split(',');

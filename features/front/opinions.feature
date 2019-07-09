@@ -14,14 +14,6 @@ Scenario: Can create an opinion of contribuable type in opened project
   And I press "confirm-opinion-create"
   And I wait 2 seconds
   Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/titre"
-
-Scenario: Can't create an opinion of non-contribuable type in opened project
-  Given I am logged in as user
-  And I visited "consultation page" with:
-    | projectSlug | croissance-innovation-disruption |
-    | stepSlug    | collecte-des-avis                |
-  And I wait "#opinions--test17le-probleme-constate" to appear on current page
-  Then I should not see a "#btn-add--le-probleme-constate" element
   
 Scenario: Can see opinions in project with endless participation
   Given I am logged in as admin

@@ -19,7 +19,7 @@ export const HEADERS = [
   'authorEmail',
   'startAt',
   'endAt',
-  'registrationEnable',
+  'guestListEnabled',
   'address',
   'zipCode',
   'city',
