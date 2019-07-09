@@ -10,10 +10,7 @@ class EventHelper
 {
     public function isRegistrationPossible(Event $event)
     {
-        return $event->canContribute() &&
-            $event->isFuture() &&
-            $event->isGuestListEnabled() &&
-            null === $event->getLink();
+        return $event->canContribute() && $event->isFuture() && $event->isRegistrationEnable() && null === $event->getLink();
     }
 
     public function findUserRegistrationOrCreate(Event $event, User $user = null)

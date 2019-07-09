@@ -1,7 +1,0 @@
-PreviewDeleteEventPayload:
-  type: relay-mutation-payload
-  config:
-    name: DeleteEventPayload
-    fields:
-      deletedEventId:
-        type: 'ID'

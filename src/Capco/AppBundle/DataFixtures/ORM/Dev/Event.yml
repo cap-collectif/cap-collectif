@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\Event:
     startAt: <identity((new \DateTime('2032-03-01')))>
     endAt: <identity((new \DateTime('2032-03-10')))>
     author: '@user1'
-    guestListEnabled: true
+    registrationEnable: true
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
     createdAt: <identity((new \DateTime('2015-01-01')))>
@@ -46,7 +46,7 @@ Capco\AppBundle\Entity\Event:
     endAt: <identity((new \DateTime('2035-03-16')))>
     author: '@user3'
     media: '@MediaProject3'
-    guestListEnabled: true
+    registrationEnable: true
     projects: ['@p1']
     createdAt: <identity((new \DateTime('2015-01-01')))>
   event4:

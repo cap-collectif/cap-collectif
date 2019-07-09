@@ -5,23 +5,16 @@ PreviewMutation:
     name: Mutation
     fields:
       addEvent:
-        access: "@=hasRole('ROLE_USER')"
+        access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: PreviewAddEventInput
           payloadType: PreviewAddEventPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventMutation", [value, getUser()])'
       changeEvent:
-        access: "@=hasRole('ROLE_USER')"
+        access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: PreviewChangeEventInput
           payloadType: PreviewChangeEventPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeEventMutation", [value, getUser()])'
-      deleteEvent:
-        access: "@=hasRole('ROLE_USER')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: PreviewDeleteEventInput
-          payloadType: PreviewDeleteEventPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteEventMutation", [value, getUser()])'

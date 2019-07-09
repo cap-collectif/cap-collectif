@@ -101,49 +101,10 @@ input AddEventInput {
   startAt: DateTime!
 
   # The contents of the event endAt.
-  endAt: DateTime
+  endAt: DateTime!
 
   # Whether or not this event is published.
   enabled: Boolean = true
-
-  # Media to join to the event
-  media: ID
-
-  # The metadescription of the event page.
-  metaDescription: String
-
-  # Whether or not this event is commentable.
-  commentable: Boolean
-
-  # The contents of the event link.
-  link: String
-
-  # deprecated Use `addressJson` instead
-  address: String
-
-  # deprecated Use `addressJson` instead
-  city: String
-
-  # deprecated Use `addressJson` instead
-  zipCode: String
-
-  # deprecated Use `addressJson` instead
-  country: String
-
-  # The contents of the event addressJson.
-  addressJson: String
-
-  # The contents of the event customCode.
-  customCode: String
-
-  # The list of projects associated to this event.
-  projects: [ID]
-
-  # The list of themes associated to this event.
-  themes: [ID]
-
-  # Allow registration for the event
-  guestListEnabled: Boolean! = false
   clientMutationId: String
 }
 
@@ -666,49 +627,10 @@ input ChangeEventInput {
   startAt: DateTime!
 
   # The contents of the event endAt.
-  endAt: DateTime
+  endAt: DateTime!
 
   # Whether or not this event is published.
   enabled: Boolean = true
-
-  # Media to join to the event
-  media: ID
-
-  # The metadescription of the event page.
-  metaDescription: String
-
-  # Whether or not this event is commentable.
-  commentable: Boolean
-
-  # The contents of the event link.
-  link: String
-
-  # deprecated Use `addressJson` instead
-  address: String
-
-  # deprecated Use `addressJson` instead
-  city: String
-
-  # deprecated Use `addressJson` instead
-  zipCode: String
-
-  # deprecated Use `addressJson` instead
-  country: String
-
-  # The contents of the event addressJson.
-  addressJson: String
-
-  # The contents of the event customCode.
-  customCode: String
-
-  # The list of projects associated to this event.
-  projects: [ID]
-
-  # The list of themes associated to this event.
-  themes: [ID]
-
-  # Allow registration for the event
-  guestListEnabled: Boolean! = false
   clientMutationId: String
 
   # The id of the event to update.
@@ -717,7 +639,7 @@ input ChangeEventInput {
 
 type ChangeEventPayload {
   # The edge from the events connection.
-  event: Event
+  eventEdge: EventEdge
 
   # An unsuccessful mutation will return one or more `UserError` objects.
   userErrors: [UserError!]!
@@ -1893,17 +1815,6 @@ type DeleteCommentPayload {
   clientMutationId: String
 }
 
-input DeleteEventInput {
-  # The ID of the event
-  eventId: ID!
-  clientMutationId: String
-}
-
-type DeleteEventPayload {
-  deletedEventId: ID
-  clientMutationId: String
-}
-
 input DeleteGroupInput {
   # The group id
   groupId: ID!
@@ -2165,7 +2076,7 @@ type Event implements Node & Commentable {
   address: String
   city: String
   country: String
-  guestListEnabled: Boolean!
+  registrationEnable: Boolean!
   metaDescription: String
   customCode: String
 }
@@ -2199,7 +2110,7 @@ input EventInput {
   themes: [ID!]!
   projects: [ID!]!
   link: String
-  guestListEnabled: Boolean!
+  registrationEnable: Boolean!
   enabled: Boolean!
   commentable: Boolean!
   zipCode: String
@@ -2790,7 +2701,6 @@ enum MultipleChoiceQuestionValidationRulesTypes {
 type Mutation {
   addEvent(input: AddEventInput!): AddEventPayload
   changeEvent(input: ChangeEventInput!): ChangeEventPayload
-  deleteEvent(input: DeleteEventInput!): DeleteEventPayload
   changeMapProviderToken(input: ChangeMapProviderTokenInput!): ChangeMapProviderTokenPayload
   changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
   removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload

@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\Event:
     media: '@MediaProject3'
     address: '25, rue Claude Tillier'
     city: Paris
-    guestListEnabled: true
+    registrationEnable: true
     lat: 48.8485254
     lng: 2.388342899999998
     projects: ['@p1']

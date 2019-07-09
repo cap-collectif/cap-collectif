@@ -43,7 +43,7 @@ class CreateCsvFromEventsCommand extends ContainerAwareCommand
         'comments_count',
         'is_commentable',
         'meta_description',
-        'custom_code'
+        'custom_code',
     ];
     /**
      * @var WriterInterface
@@ -86,7 +86,7 @@ class CreateCsvFromEventsCommand extends ContainerAwareCommand
         $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getEventsGraphQLQuery(),
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
 
@@ -129,11 +129,11 @@ class CreateCsvFromEventsCommand extends ContainerAwareCommand
                     $event['lat'],
                     $event['lng'],
                     $event['link'],
-                    $event['guestListEnabled'],
+                    $event['registrationEnable'],
                     $event['comments'] ? $event['comments']['totalCount'] : null,
                     $event['commentable'],
                     $event['metaDescription'],
-                    $event['customCode']
+                    $event['customCode'],
                 ]);
                 $progress->advance();
             },
@@ -189,7 +189,7 @@ class CreateCsvFromEventsCommand extends ContainerAwareCommand
                 lat
                 lng
                 link
-                guestListEnabled
+                registrationEnable
                 comments {
                   totalCount
                 }

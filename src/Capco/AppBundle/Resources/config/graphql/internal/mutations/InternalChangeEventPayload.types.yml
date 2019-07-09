@@ -5,6 +5,5 @@ InternalChangeEventPayload:
   config:
     name: ChangeEventPayload
     fields:
-      event:
-        type: 'InternalEvent'
-        description: 'The edge from the events connection.'
+      eventEdge:
+        type: 'InternalEventEdge'

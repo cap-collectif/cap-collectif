@@ -10,7 +10,7 @@ class CheckRegisterValidator extends ConstraintValidator
     public function validate($object, Constraint $constraint)
     {
         if ($object->getLink()) {
-            $object->setGuestListEnabled(false);
+            $object->setRegistrationEnable(false);
         }
 
         return true;

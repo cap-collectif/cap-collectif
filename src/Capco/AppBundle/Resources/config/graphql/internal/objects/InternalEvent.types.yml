@@ -36,7 +36,7 @@ InternalEvent:
         type: 'String'
       country:
         type: 'String'
-      guestListEnabled:
+      registrationEnable:
         type: 'Boolean!'
       metaDescription:
         type: 'String'

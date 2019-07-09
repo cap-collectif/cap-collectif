@@ -1,3 +1,3 @@
-title;body;authorEmail;startAt;endAt;guestListEnabled;address;zipCode;city;country;themes;projects;enabled;commentable;metaDescription;customCode;link
+title;body;authorEmail;startAt;endAt;registrationEnable;address;zipCode;city;country;themes;projects;enabled;commentable;metaDescription;customCode;link
 Rencontre avec les habitants;"<h1>Mon super event</h1><p>Rassurez vous, tout le monde est invité</p>";"aurelien@cap-collectif.com";"2018-03-07 00:00:00";"2018-03-16 00:00:00";true;"18 avenue Parmentier";75011;Paris;France;theme1,theme2;;true;true;meta;code;"https://facebook.com/inscrivez-vous-ici"
 Event 2;"<h1>Mon super event n 2</h1><p>Rassurez vous, tout le monde est encore invité</p>";"pierre@cap-collectif.com";"2018-03-07 00:00:00";"2018-03-16 00:00:00";true;"25 avenue claude tillier";75012;Paris;France;theme1;UHJvamVjdDpwcm9qZWN0MQ==;true;true;metasdqqsdsq;codsqdqsdqsde;"https://facebook.com/inscrivez-vous-ici"

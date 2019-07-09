@@ -4,3 +4,6 @@ InternalAddEventPayload:
     - PreviewAddEventPayload
   config:
     name: AddEventPayload
+    fields:
+      eventEdge:
+        type: 'InternalEventEdge'
