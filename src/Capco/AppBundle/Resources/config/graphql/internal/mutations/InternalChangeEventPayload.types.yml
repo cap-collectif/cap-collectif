@@ -1,0 +1,10 @@
+InternalChangeEventPayload:
+  type: relay-mutation-payload
+  inherits:
+    - PreviewChangeEventPayload
+  config:
+    name: ChangeEventPayload
+    fields:
+      event:
+        type: 'InternalEvent'
+        description: 'The edge from the events connection.'

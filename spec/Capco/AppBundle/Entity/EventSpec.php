@@ -15,14 +15,14 @@ class EventSpec extends ObjectBehavior
     public function it_is_registration_enable()
     {
         $this->setLink('http://my-external-event-registration.link');
-        $this->setRegistrationEnable(false);
+        $this->setGuestListEnabled(false);
         $this->isRegistrable()->shouldReturn(true);
 
         $this->setLink(null);
-        $this->setRegistrationEnable(true);
+        $this->setGuestListEnabled(true);
         $this->isRegistrable()->shouldReturn(true);
 
-        $this->setRegistrationEnable(false);
+        $this->setGuestListEnabled(false);
         $this->isRegistrable()->shouldReturn(false);
     }
 }

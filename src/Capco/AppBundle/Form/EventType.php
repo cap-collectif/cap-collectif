@@ -40,7 +40,7 @@ class EventType extends AbstractType
             ])
 
             ->add('enabled', CheckboxType::class)
-            ->add('registrationEnable', CheckboxType::class)
+            ->add('guestListEnabled', CheckboxType::class)
             ->add('media', EntityType::class, [
                 'class' => Media::class
             ])

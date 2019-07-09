@@ -19,7 +19,7 @@ InternalEventInput:
         type: '[ID!]!'
       link:
         type: 'String'
-      registrationEnable:
+      guestListEnabled:
         type: 'Boolean!'
       enabled:
         type: 'Boolean!'

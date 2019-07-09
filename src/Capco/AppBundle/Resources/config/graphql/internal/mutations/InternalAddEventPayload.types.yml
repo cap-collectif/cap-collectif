@@ -1,0 +1,6 @@
+InternalAddEventPayload:
+  type: relay-mutation-payload
+  inherits:
+    - PreviewAddEventPayload
+  config:
+    name: AddEventPayload

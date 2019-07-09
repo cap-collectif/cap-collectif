@@ -143,7 +143,7 @@ input AddEventInput {
   themes: [ID]
 
   # Allow registration for the event
-  registrationEnable: Boolean! = false
+  guestListEnabled: Boolean! = false
   clientMutationId: String
 }
 
@@ -708,7 +708,7 @@ input ChangeEventInput {
   themes: [ID]
 
   # Allow registration for the event
-  registrationEnable: Boolean! = false
+  guestListEnabled: Boolean! = false
   clientMutationId: String
 
   # The id of the event to update.
@@ -2165,7 +2165,7 @@ type Event implements Node & Commentable {
   address: String
   city: String
   country: String
-  registrationEnable: Boolean!
+  guestListEnabled: Boolean!
   metaDescription: String
   customCode: String
 }
@@ -2199,7 +2199,7 @@ input EventInput {
   themes: [ID!]!
   projects: [ID!]!
   link: String
-  registrationEnable: Boolean!
+  guestListEnabled: Boolean!
   enabled: Boolean!
   commentable: Boolean!
   zipCode: String

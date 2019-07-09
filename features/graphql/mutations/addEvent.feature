@@ -50,7 +50,7 @@ Scenario: Admin wants to add an event
         "zipCode": "75012",
         "commentable": false,
         "enabled": true,
-        "registrationEnable": true,
+        "guestListEnabled": true,
         "metaDescription": "metaDescription",
         "customCode": "customCode",
         "city": "Paris",
@@ -130,7 +130,7 @@ Scenario: User wants to add an event
         "body": "Tout le monde est invité",
         "startAt": "2018-03-07 00:00:00",
         "customCode": "customCode",
-        "registrationEnable": true
+        "guestListEnabled": true
       }
     }
   }

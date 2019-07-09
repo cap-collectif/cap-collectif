@@ -44,7 +44,7 @@ Scenario: Admin wants to change an event
         "startAt": "2018-04-07 00:00:00",
         "endAt": "2018-05-16 00:00:00",
         "themes": ["theme1", "theme2"],
-        "registrationEnable": true
+        "guestListEnabled": true
       }
     }
   }
@@ -116,7 +116,7 @@ Scenario: User wants to change an event
         "body": "Tout le monde est invité",
         "startAt": "2018-03-07 00:00:00",
         "customCode": "customCode",
-        "registrationEnable": true
+        "guestListEnabled": true
       }
     }
   }

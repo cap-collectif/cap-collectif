@@ -57,7 +57,7 @@ PreviewAddEventInput:
       themes:
         type: '[ID]'
         description: 'The list of themes associated to this event.'
-      registrationEnable:
+      guestListEnabled:
         type: 'Boolean!'
         defaultValue: false
         description: 'Allow registration for the event'

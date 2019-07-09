@@ -1,0 +1,6 @@
+InternalChangeEventInput:
+  type: relay-mutation-input
+  inherits:
+    - PreviewChangeEventInput
+  config:
+    name: ChangeEventInput
