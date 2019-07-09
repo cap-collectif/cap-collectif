@@ -19,12 +19,12 @@ import EventListCounter from './EventListCounter';
 import EventListStatusFilter from './EventListStatusFilter';
 import UserListField from '../../Admin/Field/UserListField';
 import type { EventListFilters_query } from '~relay/EventListFilters_query.graphql';
+// import type { EventListFilters_themes } from '~relay/EventListFilters_themes.graphql';
 import type { EventListFiltersProjectsQueryResponse } from '~relay/EventListFiltersProjectsQuery.graphql';
-import type { EventListFiltersThemeQueryResponse } from '~relay/EventListFiltersThemeQuery.graphql';
+import ThemeFilter from '../../Utils/ThemeFilter';
 
 type State = {
   projectOptions: Array<Object>,
-  themeOptions: Array<Object>,
 };
 
 type Registrable = 'all' | 'yes' | 'no';
@@ -32,6 +32,7 @@ type Registrable = 'all' | 'yes' | 'no';
 type Props = {|
   ...FormProps,
   query: EventListFilters_query,
+  // themes: EventListFilters_themes,
   features: FeatureToggles,
   dispatch: Dispatch,
   theme: ?string,
@@ -89,15 +90,6 @@ const projectQuery = graphql`
     }
   }
 `;
-
-const themeQuery = graphql`
-  query EventListFiltersThemeQuery {
-    themes {
-      id
-      title
-    }
-  }
-`;
 const StatusContainer = styled(Col)`
   color: white;
   display: flex;
@@ -111,7 +103,7 @@ const FiltersWrapper = styled(Col)`
 `;
 
 export class EventListFilters extends React.Component<Props, State> {
-  state = { projectOptions: [], themeOptions: [] };
+  state = { projectOptions: [] };
 
   componentDidMount() {
     fetchQuery(environment, projectQuery, { withEventOnly: true })
@@ -126,18 +118,11 @@ export class EventListFilters extends React.Component<Props, State> {
       .then(projectOptions => {
         this.setState({ projectOptions });
       });
-    fetchQuery(environment, themeQuery)
-      .then((res: EventListFiltersThemeQueryResponse) =>
-        res.themes.map(theme => ({ value: theme.id, label: theme.title })),
-      )
-      .then(themeOptions => {
-        this.setState({ themeOptions });
-      });
   }
 
   getFilters(nbFilter: number): [] {
-    const { features, theme, project, userTypes, intl, dispatch } = this.props;
-    const { themeOptions, projectOptions } = this.state;
+    const { features, theme, project, userTypes, intl, dispatch, query } = this.props;
+    const { projectOptions } = this.state;
     const filters = [];
     filters.push(
       <Field
@@ -193,21 +178,12 @@ export class EventListFilters extends React.Component<Props, State> {
         />
       </div>,
     );
-
-    if (features.themes && themeOptions.length) {
+    if (features.themes) {
       filters.push(
-        <Field
-          component={select}
-          id="EventListFilters-filter-theme"
-          name="theme"
-          placeholder={intl.formatMessage({ id: 'project.searchform.all_themes' })}
-          label={intl.formatMessage({ id: 'type-theme' })}
-          options={themeOptions}
-          role="combobox"
-          aria-autocomplete="list"
-          aria-haspopup="true"
-          aria-controls="EventListFilters-filter-theme-listbox"
-        />,
+        <div>
+          {/* $FlowFixMe $refType */}
+          <ThemeFilter query={query} />
+        </div>,
       );
     }
     if (features.projects_form && projectOptions.length) {
@@ -383,6 +359,7 @@ export default createFragmentContainer(container, {
           author: $author
           isRegistrable: $isRegistrable
         )
+      ...ThemeFilter_query
     }
   `,
 });
