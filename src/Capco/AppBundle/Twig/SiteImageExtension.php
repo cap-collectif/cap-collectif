@@ -35,9 +35,9 @@ class SiteImageExtension extends \Twig_Extension
             ),
             new \Twig_SimpleFunction(
                 'app_logo_url',
-                [$this, 'getAppLogourl'],
+                [$this, 'getAppLogoUrl'],
                 ['is_safe' => ['html']]
-            ),
+            )
         ];
     }
 
@@ -45,29 +45,19 @@ class SiteImageExtension extends \Twig_Extension
     {
         $logo = $this->repository->getAppLogo();
 
-        /* TODO: Temp hack to allow snapshot email testing to not include link
-        for a Media, because they are generated at each db regenerate, and we
-        cannot set the providerReference to something predictable, so this
-        allows our mail to, only in dev and test mode, render the website logo
-        by using the static icon 'apple-icon-76x76.png' (see file `notifyQuestionnaireReply.html.twig:15`)
-        */
-        if (\in_array($this->kernelEnvironment, ['dev', 'test'], true)) {
-            return null;
-        }
-
         if (!$logo) {
             return null;
         }
 
-        $logo = $logo->getMedia();
+        $media = $logo->getMedia();
 
-        if (!$logo) {
+        if (!$media) {
             return null;
         }
 
-        $provider = $this->container->get($logo->getProviderName());
+        $provider = $this->container->get($media->getProviderName());
 
-        return $provider->generatePublicUrl($logo, 'default_logo');
+        return $provider->generatePublicUrl($media, 'default_logo');
     }
 
     public function getSiteImageMedia($key)
