@@ -105,7 +105,7 @@ type Props = {|
   +dispatch: Dispatch,
   +features: FeatureToggles,
   +titleValue: ?string,
-  +addressValue: ?string,
+  +addressValue: $PropertyType<ProposalForm_proposal, 'address'>,
   +responses: ResponsesInReduxForm,
 |};
 
@@ -273,7 +273,8 @@ export class ProposalForm extends React.Component<Props, State> {
     }
     if (this.props.addressValue !== addressValue) {
       if (proposalForm.proposalInAZoneRequired && addressValue) {
-        this.retrieveDistrictForLocation(JSON.parse(addressValue)[0].geometry.location);
+        const { lat, lng } = addressValue
+        this.retrieveDistrictForLocation({ lat, lng });
       }
     }
   }
@@ -594,7 +595,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
     category: proposal && proposal.category ? proposal.category.id : undefined,
     media: proposal ? proposal.media : undefined,
     addressText:
-      proposal && proposal.address ? JSON.parse(proposal.address)[0].formatted_address : '',
+      proposal && proposal.address ? proposal.address.formatted : '',
     address: (proposal && proposal.address) || undefined,
     responses: formatInitialResponsesValues(
       proposalForm.questions,
@@ -624,7 +625,12 @@ export default createFragmentContainer(container, {
       title
       body
       summary
-      address
+      address {
+        raw
+        formatted
+        lat
+        lng
+      }
       publicationStatus
       category {
         id

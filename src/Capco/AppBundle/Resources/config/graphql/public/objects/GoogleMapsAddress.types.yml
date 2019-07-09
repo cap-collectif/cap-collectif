@@ -1,0 +1,20 @@
+GoogleMapsAddress:
+  type: object
+  config:
+    description: 'An address from Google Maps.'
+    fields:
+      raw:
+        description: 'The raw response from the Google Maps API that describes an address'
+        type: 'String!'
+      formatted:
+        description: 'A human-readable address string.'
+        type: 'String'
+      types:
+        description: 'The address types.'
+        type: '[GoogleMapsAddressType!]!'
+      lat:
+        description: 'The latitude of this address.'
+        type: 'Float!'
+      lng:
+        description: 'The longitude of this address.'
+        type: 'Float!'
