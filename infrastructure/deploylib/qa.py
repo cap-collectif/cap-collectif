@@ -89,7 +89,7 @@ def behat(fast_failure='true', profile=False, suite='false', tags='false', timer
             + ('', '  --suite=' + suite)[suite != 'false']
             + ('', '  --tags=' + tags)[tags != 'false']
             + ('', '  --stop-on-failure')[fast_failure == 'true'])
-        env.service_command(command, 'application', env.www_app)
+        env.service_command(command, 'application', env.www_app, 'root')
 
 
 @task(environments=['local'])
