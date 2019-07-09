@@ -185,7 +185,7 @@
         "jolicode/jolinotif": "^2.0",
         "symfony/security-acl": "dev-master",
         "friendsofsymfony/rest-bundle": "2.5",
-        "jms/serializer-bundle": "2.4.4",
+        "jms/serializer-bundle": "2.4.3",
         "egeloen/ckeditor-bundle": "dev-feature/symfony4-compat#f9f68afcff81a210f2122013a852384f4102b65a",
         "egeloen/json-builder": "dev-feature/symfony4",
         "stof/doctrine-extensions-bundle": "^1.3"
