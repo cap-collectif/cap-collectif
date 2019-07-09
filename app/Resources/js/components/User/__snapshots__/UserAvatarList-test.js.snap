@@ -56,6 +56,7 @@ exports[`<UserAvatarList /> renders correctly 1`] = `
             "server_side_rendering": false,
             "share_buttons": false,
             "shield_mode": false,
+            "sso_by_pass_auth": false,
             "themes": false,
             "user_type": false,
             "votes_evolution": false,

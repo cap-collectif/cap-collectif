@@ -47,21 +47,23 @@ exports[`<ProjectHeaderAuthors /> renders correctly with 3 authors 1`] = `
     />
   </div>
   <ProjectHeaderAuthors__AuthorsContainer>
-    <ProjectHeaderAuthors__AuthorsButton
+    <ProjectHeaderAuthors__AuthorsCreditContainer
       className="ml-5 p-0 font-weight-bold"
       id="authors-credit"
       onClick={[Function]}
     >
-      <FormattedMessage
-        id="project-authors"
-        values={
-          Object {
-            "authorName": "toto",
-            "number": 2,
+      <span>
+        <FormattedMessage
+          id="project-authors"
+          values={
+            Object {
+              "authorName": "toto",
+              "number": 2,
+            }
           }
-        }
-      />
-    </ProjectHeaderAuthors__AuthorsButton>
+        />
+      </span>
+    </ProjectHeaderAuthors__AuthorsCreditContainer>
   </ProjectHeaderAuthors__AuthorsContainer>
 </ProjectHeaderAuthors__Container>
 `;
@@ -97,7 +99,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with one author 1`] = `
     />
   </div>
   <ProjectHeaderAuthors__AuthorsContainer>
-    <ProjectHeaderAuthors__AuthorsButton
+    <ProjectHeaderAuthors__AuthorsCreditContainer
       className="ml-5 p-0 font-weight-bold"
       id="authors-credit"
       onClick={[Function]}
@@ -105,7 +107,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with one author 1`] = `
       <span>
         toto
       </span>
-    </ProjectHeaderAuthors__AuthorsButton>
+    </ProjectHeaderAuthors__AuthorsCreditContainer>
   </ProjectHeaderAuthors__AuthorsContainer>
 </ProjectHeaderAuthors__Container>
 `;
@@ -149,7 +151,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with two authors 1`] = `
     />
   </div>
   <ProjectHeaderAuthors__AuthorsContainer>
-    <ProjectHeaderAuthors__AuthorsButton
+    <ProjectHeaderAuthors__AuthorsCreditContainer
       className="ml-5 p-0 font-weight-bold"
       id="authors-credit"
       onClick={[Function]}
@@ -164,7 +166,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with two authors 1`] = `
          
         tota
       </span>
-    </ProjectHeaderAuthors__AuthorsButton>
+    </ProjectHeaderAuthors__AuthorsCreditContainer>
   </ProjectHeaderAuthors__AuthorsContainer>
 </ProjectHeaderAuthors__Container>
 `;
@@ -186,7 +188,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly without authors 1`] = `
     />
   </div>
   <ProjectHeaderAuthors__AuthorsContainer>
-    <ProjectHeaderAuthors__AuthorsButton
+    <ProjectHeaderAuthors__AuthorsCreditContainer
       className="ml-5 p-0 font-weight-bold"
       id="authors-credit"
       onClick={[Function]}

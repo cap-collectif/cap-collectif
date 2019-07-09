@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 
+import colors from '../../../utils/colors';
 import UserAvatarList from '../../User/UserAvatarList';
 import ProjectHeaderAuthorsModal from './ProjectHeaderAuthorsModal';
 import type { ProjectHeaderAuthors_project } from '~relay/ProjectHeaderAuthors_project.graphql';
@@ -17,7 +18,7 @@ type State = {|
 |};
 
 const Container = styled.div.attrs({})`
-  display: flex !important;
+  display: flex;
   align-items: center;
 `;
 
@@ -29,8 +30,14 @@ const AuthorsButton = styled.button.attrs({})`
 `;
 
 const AuthorsContainer = styled.div.attrs({})`
-  display: flex !important;
+  display: flex;
   flex-direction: column;
+`;
+
+const AuthorsCreditContainer = styled(AuthorsButton)`
+  &:hover {
+    color: ${colors.primaryColor};
+  }
 `;
 
 const getAuthorCredits = (authors: $ReadOnlyArray<Object>) => {
@@ -40,13 +47,15 @@ const getAuthorCredits = (authors: $ReadOnlyArray<Object>) => {
 
   if (authors.length > 2) {
     return (
-      <FormattedMessage
-        id="project-authors"
-        values={{
-          authorName: authors[0].username,
-          number: authors.length - 1,
-        }}
-      />
+      <span>
+        <FormattedMessage
+          id="project-authors"
+          values={{
+            authorName: authors[0].username,
+            number: authors.length - 1,
+          }}
+        />
+      </span>
     );
   }
 
@@ -99,12 +108,12 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
           />
         </div>
         <AuthorsContainer>
-          <AuthorsButton
+          <AuthorsCreditContainer
             id="authors-credit"
             className="ml-5 p-0 font-weight-bold"
             onClick={this.handleClickModal}>
             {getAuthorCredits(project.authors)}
-          </AuthorsButton>
+          </AuthorsCreditContainer>
         </AuthorsContainer>
       </Container>
     );
