@@ -14,7 +14,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Capco\AppBundle\GraphQL\Mutation\ChangeEventMutation;
 use Symfony\Component\Form\FormError;
 
@@ -57,8 +56,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
         $payload['userErrors']->shouldBe([]);
-        $payload['eventEdge']->shouldHaveType(Edge::class);
-        $payload['eventEdge']->node->shouldBe($event);
+        $payload['event']->shouldBe($event);
     }
 
     public function it_resolve_userErrors_on_unknown_id(
@@ -70,7 +68,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $arguments->getRawArguments()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn(null);
         $this->__invoke($arguments, $viewer)->shouldBe([
-            'eventEdge' => null,
+            'event' => null,
             'userErrors' => [['message' => 'Could not find your event.']]
         ]);
     }
@@ -112,7 +110,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
 
         $arguments->getRawArguments()->willReturn($values);
         $this->__invoke($arguments, $viewer)->shouldBe([
-            'eventEdge' => null,
+            'event' => null,
             'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
         ]);
     }
