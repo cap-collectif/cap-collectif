@@ -2,22 +2,11 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Capco\AppBundle\Helper\EnvHelper;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Alex\MailCatcher\Behat\MailCatcherContext as Base;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Caxy\HtmlDiffBundle\Service\HtmlDiffService;
+use Capco\AppBundle\Helper\EnvHelper;
 
-class MailCatcherContext extends Base implements KernelAwareContext
+class MailCatcherContext extends Base
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function setKernel(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
-    }
-
     /**
      * @Then email should match snapshot :file
      */
@@ -41,7 +30,7 @@ class MailCatcherContext extends Base implements KernelAwareContext
             $newSnapshot = fopen(__DIR__ . '/snapshots/' . $file, 'w');
             fwrite($newSnapshot, $content);
             fclose($newSnapshot);
-            echo "\"Snapshot writen at '${file}'. You can now relaunch the testsuite.\"";
+            echo "\"Snapshot writen at ${file}, you can now relaunch the testsuite.\"";
 
             return;
         }
@@ -49,27 +38,11 @@ class MailCatcherContext extends Base implements KernelAwareContext
         $text = file_get_contents(__DIR__ . '/snapshots/' . $file);
 
         if (false === strpos($content, $text)) {
-            // HtmlDiffService
-            $diff = $this->kernel
-                ->getContainer()
-                ->get('caxy.html_diff')
-                ->diff($content, $text);
-            $dir = __DIR__ . '/snapshots-diff/';
-            if (!file_exists($dir)) {
-                mkdir($dir, 0700);
-            }
-            $path = __DIR__ . '/snapshots-diff/' . $file;
-            $newDiff = fopen($path, 'w');
-            fwrite(
-                $newDiff,
-                $diff . '<link type="text/css" href="https://capco.dev/codes.css" rel="stylesheet">'
-            );
-            fclose($newDiff);
-
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Snapshots didn't match ! Use 'open %s'. To regenerate snapshots, use 'fab local.qa.snapshots:emails'.",
-                    $path
+                    "Unable to find text \"%s\" in current message:\n%s, if you want to update snapshots, use 'fab local.qa.snapshots:emails'.",
+                    $text,
+                    $message->getContent()
                 )
             );
         }

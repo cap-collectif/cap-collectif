@@ -2,9 +2,6 @@
 **/__generated__/**
 schema.internal.json
 
-# Tests files
-src/Capco/AppBundle/Behat/snapshots-diff/*
-
 # Symfony directories
 /web/bundles/
 /web/images/*

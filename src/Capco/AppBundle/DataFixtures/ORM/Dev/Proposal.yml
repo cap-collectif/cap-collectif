@@ -133,7 +133,7 @@ Capco\AppBundle\Entity\Proposal:
     reference: 1
     publishedAt: <(new \DateTime('2018-03-01 00:07:00'))>
     createdAt: <(new \DateTime('2018-03-01 00:07:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:08:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal8:
     id: proposal8
     title: Proposition pas chère
@@ -148,9 +148,9 @@ Capco\AppBundle\Entity\Proposal:
     estimation: 100
     category: '@pCategory3'
     reference: 2
-    createdAt: <(new \DateTime('2018-03-01 00:10:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:11:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:10:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal9:
     id: proposal9
     title: Proposition gratuite
@@ -240,9 +240,9 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
     reference: 1
-    publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
-    createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 14:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal15:
     id: proposal15
     title: Proposition 15
@@ -250,9 +250,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalform6'
     reference: 1
-    publishedAt: <(new \DateTime('2018-03-01 15:00:00'))>
-    createdAt: <(new \DateTime('2018-03-01 15:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 15:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal16:
     id: proposal16
     title: Proposition 16
@@ -260,9 +260,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalform6'
     reference: 2
-    publishedAt: <(new \DateTime('2018-03-01 16:00:00'))>
-    createdAt: <(new \DateTime('2018-03-01 16:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 16:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal17:
     id: proposal17
     title: Proposition 17
@@ -270,9 +270,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user5'
     proposalForm: '@proposalform7'
     reference: 1
-    publishedAt: <(new \DateTime('2018-03-01 17:00:00'))>
-    createdAt: <(new \DateTime('2018-03-01 17:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 17:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal18:
     id: proposal18
     title: Proposition 18
@@ -280,9 +280,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalform7'
     reference: 2
-    publishedAt: <(new \DateTime('2018-03-01 18:00:00'))>
-    createdAt: <(new \DateTime('2018-03-01 18:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 18:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal19:
     id: proposal19
     title: Proposition brouillon 1
@@ -305,8 +305,8 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district3'
     reference: 10
-    createdAt: <(new \DateTime('2018-03-01 20:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 20:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal21:
     id: proposal21
     title: Proposition brouillon 3
@@ -326,9 +326,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user4'
     proposalForm: '@proposalFormVote'
     reference: 666
-    createdAt: <(new \DateTime('2018-03-01 22:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 22:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 22:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal23:
     id: proposal23
     title: Proposition très intéressante
@@ -336,9 +336,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user4'
     proposalForm: '@proposalFormVote'
     reference: 667
-    createdAt: <(new \DateTime('2018-03-01 23:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 23:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 23:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal24:
     id: proposal24
     title: Proposition 1
@@ -346,9 +346,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 1
-    createdAt: <(new \DateTime('2018-03-01 00:02:40'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:02:40'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:02:40'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal25:
     id: proposal25
     title: Proposition 2
@@ -356,9 +356,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 2
-    createdAt: <(new \DateTime('2018-03-01 00:02:50'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:02:50'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:02:50'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal26:
     id: proposal26
     title: Proposition 3
@@ -366,9 +366,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 3
-    createdAt: <(new \DateTime('2018-03-01 00:26:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:26:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:26:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal27:
     id: proposal27
     title: Operation génétique pour avoir la force
@@ -376,9 +376,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalform9'
     reference: 10
-    createdAt: <(new \DateTime('2018-03-01 00:27:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:27:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:27:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal28:
     id: proposal28
     title: Transfusion de midi-chloriens
@@ -387,8 +387,8 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user4'
     proposalForm: '@proposalform9'
     reference: 11
-    createdAt: <(new \DateTime('2018-03-01 00:28:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:28:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal29:
     id: proposal29
     title: Annuler les prochains Star-Wars
@@ -396,9 +396,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user4'
     proposalForm: '@proposalform9'
     reference: 666
-    createdAt: <(new \DateTime('2018-03-01 00:29:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:29:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:29:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal30:
     id: proposal30
     title: Trouver un anti dote à la force
@@ -406,9 +406,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user4'
     proposalForm: '@proposalform9'
     reference: 667
-    publishedAt: <(new \DateTime('2018-03-01 00:30:00'))>
-    createdAt: <(new \DateTime('2018-03-01 00:30:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:30:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal31:
     id: proposal31
     title: Minus et Cortex
@@ -416,9 +416,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user5'
     proposalForm: '@proposalform10'
     reference: 42
-    createdAt: <(new \DateTime('2018-03-01 00:31:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:31:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:31:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal32:
     id: proposal32
     title: Les chats
@@ -426,9 +426,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user2'
     proposalForm: '@proposalform10'
     reference: 44
-    publishedAt: <(new \DateTime('2018-03-01 00:32:00'))>
-    createdAt: <(new \DateTime('2018-03-01 00:32:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:32:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal33:
     id: proposal33
     title: Batman
@@ -436,9 +436,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user4'
     proposalForm: '@proposalform10'
     reference: 43
-    publishedAt: <(new \DateTime('2018-03-01 00:33:00'))>
-    createdAt: <(new \DateTime('2018-03-01 00:33:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:33:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal34:
     id: proposal34
     title: Quel type de bière ?
@@ -446,9 +446,9 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalform11'
     reference: 45
-    publishedAt: <(new \DateTime('2018-03-01 00:34:00'))>
-    createdAt: <(new \DateTime('2018-03-01 00:34:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:34:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal35:
     id: proposal35
     title: Proposition 35 non publiée
@@ -476,52 +476,52 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal37
     title: Libérons les nains de jardin
     body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
-    publishedAt: <(new \DateTime('2018-03-01 13:37:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform12'
     reference: 45
-    createdAt: <(new \DateTime('2018-03-01 13:37:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 13:37:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal38:
     id: proposal38
     title: Libérons blanche neige
     body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
-    publishedAt: <(new \DateTime('2018-03-01 13:38:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform12'
     reference: 46
-    createdAt: <(new \DateTime('2018-03-01 13:38:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 13:38:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal39:
     id: proposal39
     title: Donnons leur un village dédié
     body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
-    publishedAt: <(new \DateTime('2018-03-01 13:39:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform12'
     reference: 47
-    createdAt: <(new \DateTime('2018-03-01 13:39:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 13:39:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal{40..100}:
     id: 'proposal<current()>'
     title: Proposal <current()>
     body: <text(200)>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform15'
     reference: '1<current()>'
-    publishedAt: <((new \DateTime('2018-03-01 00:21:00'))->modify("+ $current days"))>
-    createdAt: <((new \DateTime('2018-03-01 00:21:00'))->modify("+ $current days"))>
-    updatedAt: <((new \DateTime('2018-03-01 00:21:00'))->modify("+ $current days"))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal101:
     id: 'proposal101'
     slug: proposition-sans-titre
     title: Proposition sans titre
     body: Je suis une proposition crée en tant que fusion avec mon titre (FR) par défaut
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform15'
     reference: '101'
-    publishedAt: <(new \DateTime('2018-03-01 10:01:00'))>
-    createdAt: <(new \DateTime('2018-03-01 10:01:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal102:
     id: proposalDraftWithNotConfirmedAuthor
     title: Proposition brouillon avec un auteur non confirmé
@@ -532,15 +532,15 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district3'
     reference: 102
-    createdAt: <(new \DateTime('2018-03-01 00:16:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:16:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:12:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:12:00'))>
   question1:
     id: question1
     title: Comment faire de l'électricité ?
     body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:01'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:00:01'))>
-    createdAt: <(new \DateTime('2018-03-01 00:00:01'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform14'
     reference: 48
@@ -549,9 +549,9 @@ Capco\AppBundle\Entity\Proposal:
     id: question2
     title: Et chez Youpie c'est mieux ?
     body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:02'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:00:02'))>
-    createdAt: <(new \DateTime('2018-03-01 00:00:02'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform14'
     reference: 49
@@ -560,25 +560,25 @@ Capco\AppBundle\Entity\Proposal:
     id: 'proposalTrashedVisible<current()>'
     title: Trashed proposal visible <current()>
     body: I deserve to be trashed !
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform1'
     reference: '667<current()>'
-    publishedAt: <((new \DateTime('2018-03-01 00:23:00'))->modify("+ $current days"))>
-    createdAt: <((new \DateTime('2018-03-01 00:23:00'))->modify("+ $current days"))>
-    updatedAt: <((new \DateTime('2018-03-01 00:23:00'))->modify("+ $current days"))>
-    trashedAt: <((new \DateTime('2018-03-01 00:23:00'))->modify("+ $current days"))>
+    createdAt: <(new \DateTime('2018-03-01 01:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    trashedAt: <(new \DateTime('2018-03-01 03:00:00'))>
     trashedStatus: 'visible'
     trashedReason: 'SPAM <current()>'
   proposalTrashedInvisible{1..50}:
     id: 'proposalTrashedInvisible<current()>'
     title: Trashed proposal invisible <current()>
     body: I am not visible because I contains some bad words
-    publishedAt: <((new \DateTime('2019-03-01 00:23:00'))->modify("+ $current days"))>
+    publishedAt: <(new \DateTime('2018-03-01 01:00:00'))>
     author: '@user2'
     proposalForm: '@proposalform1'
     reference: '666<current()>'
-    createdAt: <((new \DateTime('2019-03-01 00:23:00'))->modify("+ $current days"))>
-    updatedAt: <((new \DateTime('2019-03-01 00:23:00'))->modify("+ $current days"))>
-    trashedAt: <((new \DateTime('2019-03-01 00:23:00'))->modify("+ $current days"))>
+    createdAt: <(new \DateTime('2018-03-01 01:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 02:00:00'))>
+    trashedAt: <(new \DateTime('2018-03-01 03:00:00'))>
     trashedStatus: 'invisible'
     trashedReason: 'Bad words <current()>'

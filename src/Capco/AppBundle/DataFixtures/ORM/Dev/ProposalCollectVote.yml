@@ -1,48 +1,48 @@
 Capco\AppBundle\Entity\ProposalCollectVote:
   proposalCollectVote{1..50}:
-    id: <(1999+$current)>
+    id:  <(1999+$current)>
     proposal: '@proposal14'
     collectStep: '@collectstep5'
     user: '@user<current()>'
-    publishedAt: <((new \DateTime('2018-03-01 00:00:00'))->modify("+ $current days"))>
-    createdAt: <((new \DateTime('2018-03-01 00:00:00'))->modify("+ $current days"))>
+    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
   proposalCollectVote51:
     id: 2051
     proposal: '@proposal24'
     collectStep: '@collectstepVoteClassement'
     user: '@user5'
     position: 3
-    publishedAt: <(new \DateTime('2015-03-01 00:00:51'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:51'))>
+    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
   proposalCollectVote52:
     id: 2052
     proposal: '@proposal25'
     collectStep: '@collectstepVoteClassement'
     user: '@user5'
     position: 2
-    publishedAt: <(new \DateTime('2015-03-01 00:00:52'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:52'))>
+    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
   proposalCollectVote53:
     id: 2053
     proposal: '@proposal26'
     collectStep: '@collectstepVoteClassement'
     user: '@user5'
     position: 1
-    publishedAt: <(new \DateTime('2015-03-01 00:00:53'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:53'))>
+    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
   questionCollectVote54:
     id: 2054
     proposal: '@question1'
     collectStep: '@collectQuestionVoteAvecClassement'
     user: '@user5'
     position: 1
-    publishedAt: <(new \DateTime('2015-03-01 00:00:54'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:54'))>
+    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
   questionCollectVote55:
     id: 2055
     proposal: '@question2'
     collectStep: '@collectQuestionVoteAvecClassement'
     user: '@user5'
     position: 2
-    publishedAt: <(new \DateTime('2015-03-01 00:00:55'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:55'))>
+    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>

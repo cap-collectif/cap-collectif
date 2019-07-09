@@ -164,9 +164,11 @@ class QuestionnaireReplyNotifier extends BaseNotifier
      *                     'author_name' => string,
      *                     ]
      *
+     * @return bool
+     *
      * @throws \Exception
      */
-    public function onDelete(array $reply): void
+    public function onDelete(array $reply): bool
     {
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',

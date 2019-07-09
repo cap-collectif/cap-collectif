@@ -4,154 +4,128 @@ Capco\MediaBundle\Entity\Media:
     binaryContent: project-1.jpg
     name: Titre du média 1
     category: '@MediaCategory1'
-    providerReference: providerReference1.jpg
   MediaProject2:
     id: media2
     binaryContent: project-2.jpg
     name: Titre du média 2
     category: '@MediaCategory1'
-    providerReference: providerReference2.jpg
   MediaProject3:
     id: media3
     binaryContent: project-3.jpg
     name: Titre du média 3
     category: '@MediaCategory1'
-    providerReference: providerReference3.jpg
   MediaProject4:
     id: media-project4
     binaryContent: project-4.jpg
     name: Titre du média 4
     category: '@MediaCategory1'
-    providerReference: providerReference4.jpg
   MediaProjectImageVideo:
     id: media4
     binaryContent: project-image-video.jpg
     name: Project image video
     category: '@MediaCategory1'
-    providerReference: providerReference5.jpg
   MediaIdea1:
     id: media5
     binaryContent: idea-1.jpg
     name: Titre du média idée 1
     category: '@MediaCategory1'
-    providerReference: providerReference6.jpg
   MediaIdea2:
     id: media6
     binaryContent: idea-2.jpg
     name: Titre du média idée 2
     category: '@MediaCategory1'
-    providerReference: providerReference7.jpg
   MediaUser1:
     id: media7
     binaryContent: user/sfavot.jpg
     name: Suzanne Favot
     category: '@MediaCategory1'
-    providerReference: providerReference8.jpg
   MediaUser2:
     id: media8
     binaryContent: user/lbrunet.jpg
     name: Laurent Brunet
     category: '@MediaCategory1'
-    providerReference: providerReference9.jpg
   MediaUser3:
     id: media9
     binaryContent: user/xlacot.jpg
     name: Xavier Lacot
     category: '@MediaCategory1'
-    providerReference: providerReference10.jpg
   MediaUser4:
     id: media10
     binaryContent: user/spyl.jpg
     name: Spyl
     category: '@MediaCategory1'
-    providerReference: providerReference11.jpg
   MediaUser5:
     id: media11
     binaryContent: user/welcomattic.jpg
     name: Welcomattic
     category: '@MediaCategory1'
-    providerReference: providerReference12.jpg
   Logo:
     id: media12
     binaryContent: logo.png
     name: Logo
     category: '@MediaCategory1'
-    providerReference: providerReferenceForLogo.png
   header:
     id: media13
     binaryContent: header.jpg
     name: Header
     category: '@MediaCategory1'
-    providerReference: providerReference14.jpg
   picto:
     id: media14
     binaryContent: picto.png
     name: Picto
     category: '@MediaCategory1'
-    providerReference: providerReference15.png
   MediaFlickr:
     id: media15
     binaryContent: social/flickr.png
     name: Flickr
     category: '@MediaCategory1'
-    providerReference: providerReference16.png
   MediaFacebook:
     id: media16
     binaryContent: social/facebook.png
     name: Facebook
     category: '@MediaCategory1'
-    providerReference: providerReference17.png
   MediaGooglePlus:
     id: media17
     binaryContent: social/google_plus.png
     name: Google
     category: '@MediaCategory1'
-    providerReference: providerReference18.png
   MediaLinkedIn:
     id: media18
     binaryContent: social/linkedIn.png
     name: LinkedIn
     category: '@MediaCategory1'
-    providerReference: providerReference19.png
   MediaRSS:
     id: media19
     binaryContent: social/rss.png
     name: RSS
     category: '@MediaCategory1'
-    providerReference: providerReference20.png
   MediaTwitter:
     id: media20
     binaryContent: social/twitter.png
     name: Twitter
     category: '@MediaCategory1'
-    providerReference: providerReference21.png
   MediaCapcoSite:
     id: media21
     binaryContent: social/capco.png
     name: Capco
     category: '@MediaCategory1'
-    providerReference: providerReference22.png
   MediaAvatar:
     id: media22
     binaryContent: default_avatar.jpg
     name: Avatar
     category: '@MediaCategory1'
-    providerReference: providerReference23.jpg
   MediaVotesBar:
     id: media23
     binaryContent: votes_bar_image.png
     name: Image de la barre de votes
     category: '@MediaCategory1'
-    providerReference: providerReference24.png
   MediaInstagram:
     id: media25
     binaryContent: social/instagram.png
     name: Instagram
     category: '@MediaCategory1'
-    providerReference: providerReference25.png
   MediaFilePdf:
     id: media24
     binaryContent: small_pdf.pdf
     name: Small PDF
     category: '@MediaCategory1'
-    providerReference: providerReference26.pdf

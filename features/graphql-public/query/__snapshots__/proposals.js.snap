@@ -9,6 +9,15 @@ Object {
         Object {
           "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
           "node": Object {
+            "draft": true,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyMA==",
+            "publicationStatus": "DRAFT",
+            "title": "Proposition brouillon 2",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
             "publicationStatus": "PUBLISHED",
@@ -16,7 +25,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
@@ -25,7 +34,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
@@ -34,7 +43,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
@@ -43,7 +52,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
@@ -52,7 +61,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
           "node": Object {
             "draft": false,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
@@ -61,7 +70,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+          "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxOQ==",
@@ -70,21 +79,12 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+          "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
           "node": Object {
             "draft": true,
             "id": "UHJvcG9zYWw6cHJvcG9zYWwyMQ==",
             "publicationStatus": "DRAFT",
             "title": "Proposition brouillon 3",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
-          "node": Object {
-            "draft": false,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
-            "publicationStatus": "UNPUBLISHED",
-            "title": "Proposition 35 non publiée",
           },
         },
         Object {
@@ -99,10 +99,10 @@ Object {
         Object {
           "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
           "node": Object {
-            "draft": true,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwyMA==",
-            "publicationStatus": "DRAFT",
-            "title": "Proposition brouillon 2",
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
+            "publicationStatus": "UNPUBLISHED",
+            "title": "Proposition 35 non publiée",
           },
         },
       ],

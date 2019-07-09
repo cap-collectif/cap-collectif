@@ -3,6 +3,7 @@ Feature: Contact
 
 Scenario: User wants to send a message via the first form in contact page
   Given I visited "contact page"
+  When I wait ".contact__form__list button:first-of-type" to appear on current page
   And I click the ".contact__form__list button:first-of-type" element
   And I fill in the following:
     | name         | Marie Lopez                                      |
@@ -15,6 +16,7 @@ Scenario: User wants to send a message via the first form in contact page
 
 Scenario: User wants to send a message via the first form with wrong email in contact page
   Given I visited "contact page"
+  When I wait ".contact__form__list" to appear on current page
   And I click the ".contact__form__list button:first-of-type" element
   And I fill in the following:
     | name         | Marie Lopez                                      |
@@ -25,6 +27,7 @@ Scenario: User wants to send a message via the first form with wrong email in co
 
 Scenario: User wants to send a message via the first form by filling empty fields in contact page
   Given I visited "contact page"
+  When I wait ".contact__form__list" to appear on current page
   And I click the ".contact__form__list button:first-of-type" element
   And I fill in the following:
     | name         | |
@@ -38,6 +41,7 @@ Scenario: User wants to send a message via the first form by filling empty field
 @snapshot
 Scenario: The email sent to the interlocutor should be sent
   Given I visited "contact page"
+  When I wait ".contact__form__list button:first-of-type" to appear on current page
   And I click the ".contact__form__list button:first-of-type" element
   And I fill in the following:
     | name         | Marie Lopez                                      |
