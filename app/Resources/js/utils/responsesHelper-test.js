@@ -1220,7 +1220,7 @@ describe('getQuestionDeps', () => {
     let deps = getQuestionDeps(question, questions);
     expect(deps).toMatchSnapshot();
 
-    question = questions[questions.length - 1]; // C'est la fin mais j'affiche quand même des chois question
+    question = questions[questions.length - 1]; // C'est la fin mais j'affiche quand même des choix question
     deps = getQuestionDeps(question, questions);
     expect(deps).toMatchSnapshot();
   });
