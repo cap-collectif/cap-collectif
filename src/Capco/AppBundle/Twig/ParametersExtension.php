@@ -9,8 +9,10 @@ use Symfony\Component\Routing\RouterInterface;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Translation\TranslatorInterface;
 use Capco\AppBundle\SiteColor\Resolver as SiteColorResolver;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class ParametersExtension extends \Twig_Extension
+class ParametersExtension extends AbstractExtension
 {
     public const CACHE_KEY = 'site-parameters';
     protected $cache;
@@ -42,10 +44,10 @@ class ParametersExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('is_feature_enabled', [$this, 'getIsFeatureEnabled']),
-            new \Twig_SimpleFunction('has_feature_enabled', [$this, 'getHasFeatureEnabled']),
-            new \Twig_SimpleFunction('features_list', [$this, 'getFeatures']),
-            new \Twig_SimpleFunction('site_parameters_list', [$this, 'getSiteParameters']),
+            new TwigFunction('is_feature_enabled', [$this, 'getIsFeatureEnabled']),
+            new TwigFunction('has_feature_enabled', [$this, 'getHasFeatureEnabled']),
+            new TwigFunction('features_list', [$this, 'getFeatures']),
+            new TwigFunction('site_parameters_list', [$this, 'getSiteParameters'])
         ];
     }
 
@@ -83,7 +85,7 @@ class ParametersExtension extends \Twig_Extension
                 'ad-scripts-on-all-pages',
                 'cookies-list',
                 'privacy-policy',
-                'charter.body',
+                'charter.body'
             ];
 
             $exposedParameters = [];
@@ -97,7 +99,7 @@ class ParametersExtension extends \Twig_Extension
                 'CapcoAppBundle'
             );
             $exposedParameters['signin.cgu.link'] = $this->router->generate('app_page_show', [
-                'slug' => $slug,
+                'slug' => $slug
             ]);
 
             // Add colors
@@ -108,7 +110,7 @@ class ParametersExtension extends \Twig_Extension
                 'color.main_menu.text_hover',
                 'color.main_menu.text_active',
                 'color.btn.primary.bg',
-                'color.btn.primary.text',
+                'color.btn.primary.text'
             ];
 
             foreach ($colors as $color) {

@@ -6,8 +6,10 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Repository\ProposalCommentRepository;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class CommentExtension extends \Twig_Extension
+class CommentExtension extends AbstractExtension
 {
     protected $resolver;
     protected $proposalCommentRepository;
@@ -23,18 +25,12 @@ class CommentExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('capco_comment_can_show', [$this, 'canShowCommentOnObject']),
-            new \Twig_SimpleFunction('capco_comment_proposal_count', [
-                $this,
-                'getProposalCommentsCount',
-            ]),
-            new \Twig_SimpleFunction('capco_comment_can_add', [$this, 'canAddCommentOnObject']),
-            new \Twig_SimpleFunction('capco_comment_object_url', [$this, 'getRelatedObjectUrl']),
-            new \Twig_SimpleFunction('capco_comment_object', [$this, 'getRelatedObject']),
-            new \Twig_SimpleFunction('capco_comment_object_admin_url', [
-                $this,
-                'getRelatedObjectAdminUrl',
-            ]),
+            new TwigFunction('capco_comment_can_show', [$this, 'canShowCommentOnObject']),
+            new TwigFunction('capco_comment_proposal_count', [$this, 'getProposalCommentsCount']),
+            new TwigFunction('capco_comment_can_add', [$this, 'canAddCommentOnObject']),
+            new TwigFunction('capco_comment_object_url', [$this, 'getRelatedObjectUrl']),
+            new TwigFunction('capco_comment_object', [$this, 'getRelatedObject']),
+            new TwigFunction('capco_comment_object_admin_url', [$this, 'getRelatedObjectAdminUrl'])
         ];
     }
 

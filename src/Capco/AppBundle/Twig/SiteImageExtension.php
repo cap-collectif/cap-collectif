@@ -4,40 +4,36 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\SiteImage\Resolver;
+use Capco\MediaBundle\Entity\Media;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class SiteImageExtension extends \Twig_Extension
+class SiteImageExtension extends AbstractExtension
 {
     protected $resolver;
     private $repository;
     private $container;
-    private $kernelEnvironment;
 
     public function __construct(
         Resolver $resolver,
         SiteImageRepository $repository,
-        ContainerInterface $container,
-        string $kernelEnvironment
+        ContainerInterface $container
     ) {
         $this->resolver = $resolver;
         $this->repository = $repository;
         $this->container = $container;
-        $this->kernelEnvironment = $kernelEnvironment;
     }
 
     public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction(
+            new TwigFunction(
                 'capco_site_image_media',
                 [$this, 'getSiteImageMedia'],
                 ['is_safe' => ['html']]
             ),
-            new \Twig_SimpleFunction(
-                'app_logo_url',
-                [$this, 'getAppLogoUrl'],
-                ['is_safe' => ['html']]
-            )
+            new TwigFunction('app_logo_url', [$this, 'getAppLogoUrl'], ['is_safe' => ['html']])
         ];
     }
 
@@ -60,7 +56,7 @@ class SiteImageExtension extends \Twig_Extension
         return $provider->generatePublicUrl($media, 'default_logo');
     }
 
-    public function getSiteImageMedia($key)
+    public function getSiteImageMedia($key): ?Media
     {
         return $this->resolver->getMedia($key);
     }
