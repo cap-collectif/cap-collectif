@@ -165,15 +165,7 @@ class EventRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    /**
-     * Get last future events.
-     *
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return mixed
-     */
-    public function getLast($limit = 1, $offset = 0)
+    public function getLast(int $limit = 1, int $offset = 0): Paginator
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 't', 'media', 'c')
@@ -218,6 +210,25 @@ class EventRepository extends EntityRepository
             ->setMaxResults($offset);
 
         return new Paginator($query);
+    }
+
+    public function getEventsWithAddress($offset = 0, $limit = 1): array
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->addSelect('e.id', 'e.address', 'e.zipCode', 'e.country', 'e.city')
+            ->orderBy('e.createdAt', 'ASC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function countAll(): int
+    {
+        return $this->createQueryBuilder('e')
+            ->select('count(e.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder
