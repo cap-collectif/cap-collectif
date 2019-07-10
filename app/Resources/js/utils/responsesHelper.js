@@ -440,6 +440,75 @@ const createJumpFromAlwaysQuestion = (question: Question): Jump => ({
   id: undefined,
 });
 
+const questionsHaveLogicJump = questions =>
+  questions.reduce(
+    (acc, question) => acc || (question && question.jumps && question.jumps.length > 0),
+    false,
+  );
+
+const getConditionReturn = (
+  response: ?ResponseInReduxForm,
+  condition: ConditionalJumpCondition,
+): boolean => {
+  const userResponse = getValueFromSubmitResponse(response);
+  if (response && userResponse && condition.value) {
+    switch (condition.operator) {
+      case IS_OPERATOR:
+        return condition.value.title === userResponse;
+      case IS_NOT_OPERATOR:
+        return condition.value.title !== userResponse;
+      default:
+        return false;
+    }
+  }
+  return false;
+};
+
+export const getNextLogicJumpQuestion = (question: Question, questions: Questions): ?Question => {
+  return (
+    questions.slice(questions.indexOf(question) + 1).find(q => q.jumps && q.jumps.length > 0) ||
+    null
+  );
+};
+
+export const isAnyQuestionJumpsFullfilled = (
+  question: Question,
+  responses: ResponsesInReduxForm,
+): boolean => {
+  if (question.jumps) {
+    return (
+      question.jumps.filter(Boolean).some(jump =>
+        jump.conditions
+          ? jump.conditions.filter(Boolean).every(condition => {
+              const answered = responses
+                .filter(Boolean)
+                .find(response => response.question === condition.question.id);
+              return getConditionReturn(answered, condition);
+            })
+          : false,
+      ) || !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses))
+    );
+  }
+  return !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses));
+};
+
+// This method is used to get a list of dependent questions (a question is dependant when
+// it is present in the same branch tree of another question)
+export const getQuestionDeps = (question: Question, questions: Questions): Questions =>
+  questions
+    .filter(Boolean)
+    .filter(
+      q =>
+        (q.alwaysJumpDestinationQuestion && q.alwaysJumpDestinationQuestion.id === question.id) ||
+        (q.jumps && q.jumps.filter(Boolean).some(jump => jump.destination.id === question.id)),
+    );
+
+const getOrphanedQuestions = (questions: Questions): Questions =>
+  questions.reduce((acc, question) => {
+    const deps = getQuestionDeps(question, questions);
+    return [...acc, ...(deps.length === 0 ? [question] : [])];
+  }, []);
+
 export const validateResponses = (
   questions: Questions,
   responses: ResponsesInReduxForm,
@@ -528,105 +597,6 @@ export const validateResponses = (
   return responsesError && responsesError.length ? { responses: responsesError } : {};
 };
 
-export const getNextLogicJumpQuestion = (question: Question, questions: Questions): ?Question => {
-  return (
-    questions.slice(questions.indexOf(question) + 1).find(q => q.jumps && q.jumps.length > 0) ||
-    null
-  );
-};
-
-// This method is used to get a list of dependent questions (a question is dependant when
-// it is present in the same branch tree of another question) based on a user answer.
-export const getQuestionDepsIds = (
-  question: Question,
-  questions: Questions,
-  answer: string,
-): string[] => {
-  const jumpQuestion = getNextLogicJumpQuestion(question, questions);
-  if (jumpQuestion) {
-    return jumpQuestion.jumps
-      ? Array.from(
-          new Set(
-            jumpQuestion.jumps.filter(Boolean).reduce((acc, jump) => {
-              const destination = questions.find(q => q.id === jump.destination.id);
-              return [
-                ...acc,
-                ...(jumpQuestion.alwaysJumpDestinationQuestion
-                  ? [
-                      jumpQuestion.alwaysJumpDestinationQuestion.id,
-                      jumpQuestion.id,
-                      ...(destination ? getQuestionDepsIds(destination, questions, answer) : []),
-                    ]
-                  : []),
-                ...(jump.conditions &&
-                jump.conditions
-                  .filter(Boolean)
-                  .filter(
-                    condition =>
-                      condition.value &&
-                      condition.question &&
-                      condition.question.id === question.id &&
-                      condition.value.title === answer,
-                  ).length > 0
-                  ? [
-                      jump.destination.id,
-                      ...(destination ? getQuestionDepsIds(destination, questions, answer) : []),
-                    ]
-                  : []),
-              ];
-            }, []),
-          ),
-        )
-      : [];
-  }
-  return [];
-};
-
-const questionsHaveLogicJump = questions =>
-  questions.reduce(
-    (acc, question) => acc || (question && question.jumps && question.jumps.length > 0),
-    false,
-  );
-
-const getConditionReturn = (
-  response: ?ResponseInReduxForm,
-  condition: ConditionalJumpCondition,
-): boolean => {
-  const userResponse = getValueFromSubmitResponse(response);
-  if (response && userResponse && condition.value) {
-    switch (condition.operator) {
-      case IS_OPERATOR:
-        return condition.value.title === userResponse;
-      case IS_NOT_OPERATOR:
-        return condition.value.title !== userResponse;
-      default:
-        return false;
-    }
-  }
-  return false;
-};
-
-export const isAnyQuestionJumpsFullfilled = (
-  question: Question,
-  responses: ResponsesInReduxForm,
-): boolean => {
-  if (question.jumps) {
-    return (
-      question.jumps.filter(Boolean).some(jump =>
-        jump.conditions
-          ? jump.conditions.filter(Boolean).every(condition => {
-              const answered = responses
-                .filter(Boolean)
-                .find(response => response.question === condition.question.id);
-              return getConditionReturn(answered, condition);
-            })
-          : false,
-      ) || !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses))
-    );
-  }
-  return !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses));
-};
-
 // This method returns, for a given questions and based on user's answers, the list of fullfilled logic jumps
 // (all the jumps where all the conditions have been met)
 export const getFullfilledJumps = (question: Question, responses: ResponsesInReduxForm): Jump[] => {
@@ -708,8 +678,12 @@ export const getAvailableQuestionsIds = (
 
   fullfilledQuestionsIds.map(qId => questions.find(q => q.id === qId));
 
+  const orphanedQuestionsIds = getOrphanedQuestions(questions).map(question => question.id);
+
   // $FlowFixMe
-  return Array.from(new Set([...firstQuestionsIds, ...fullfilledQuestionsIds]));
+  return Array.from(
+    new Set([...firstQuestionsIds, ...fullfilledQuestionsIds, ...orphanedQuestionsIds]),
+  );
 };
 
 export const formatSubmitResponses = (

@@ -3,7 +3,7 @@
 import {
   getAvailableQuestionsIds,
   getNextLogicJumpQuestion,
-  getQuestionDepsIds,
+  getQuestionDeps,
   renderResponses,
   validateResponses,
 } from './responsesHelper';
@@ -190,7 +190,7 @@ const questionnaireQuestions = [
     alwaysJumpDestinationQuestion: {
       id: 'UXVlc3Rpb246MjU=',
       title: 'Par qui Hap a t-il été créé ?',
-      number: 4
+      number: 4,
     },
     jumps: [],
     description: null,
@@ -267,7 +267,7 @@ const questionnaireQuestions = [
     alwaysJumpDestinationQuestion: {
       id: 'UXVlc3Rpb246MzE=',
       title: 'Plutôt Marvel ou DC ?',
-      number: 9
+      number: 9,
     },
     jumps: [
       {
@@ -294,7 +294,8 @@ const questionnaireQuestions = [
             },
           },
         ],
-      }],
+      },
+    ],
     description: null,
     type: 'select',
     isOtherAllowed: false,
@@ -329,7 +330,7 @@ const questionnaireQuestions = [
     alwaysJumpDestinationQuestion: {
       id: 'UXVlc3Rpb246MzE=',
       title: 'Plutôt Marvel ou DC ?',
-      number: 9
+      number: 9,
     },
     jumps: [],
     description: null,
@@ -399,7 +400,7 @@ const questionnaireQuestions = [
     alwaysJumpDestinationQuestion: {
       id: 'UXVlc3Rpb246MzE=',
       title: 'Plutôt Marvel ou DC ?',
-      number: 9
+      number: 9,
     },
     jumps: [],
     description: null,
@@ -593,7 +594,7 @@ const questionnaireQuestions = [
     alwaysJumpDestinationQuestion: {
       id: 'UXVlc3Rpb246Mzg=',
       title: "C'est la fin mais j'affiche quand même des choix",
-      number: 16
+      number: 16,
     },
     jumps: [],
     description: null,
@@ -703,7 +704,7 @@ const questionnaireQuestions = [
     alwaysJumpDestinationQuestion: {
       id: 'UXVlc3Rpb246Mzg=',
       title: "C'est la fin mais j'affiche quand même des choix",
-      number: 16
+      number: 16,
     },
     jumps: [],
     description: null,
@@ -1212,11 +1213,15 @@ describe('getNextLogicJumpQuestion', () => {
   });
 });
 
-describe('getQuestionDepsIds', () => {
-  it('Should return a correct list of dependent questions for a given question when we change the value of the first question from nothing to Hap', () => {
+describe('getQuestionDeps', () => {
+  it('Should return a correct list of dependent questions for a given question', () => {
     const questions = [...questionnaireQuestions];
-    const question = questions[0];
-    const deps = getQuestionDepsIds(question, questions, 'Hap');
+    let question = questions[2]; // Comme tu as choisi Hap et le Gange question
+    let deps = getQuestionDeps(question, questions);
+    expect(deps).toMatchSnapshot();
+
+    question = questions[questions.length - 1]; // C'est la fin mais j'affiche quand même des chois question
+    deps = getQuestionDeps(question, questions);
     expect(deps).toMatchSnapshot();
   });
 });
