@@ -77,7 +77,7 @@ Scenario: I publish a proposal in draft without allowAknowledge
   """
   And I consume "proposal_create"
   Then I open mail with subject "notification.email.proposal.create.subject"
-  And email should match snapshot "notifyProposal_publishedDraft.html.twig"
+  And email should match snapshot "notifyProposal_publishedDraft.html"
 
 @rabbitmq @snapshot
 Scenario: I publish a proposal in draft with allowAknowledge
@@ -89,4 +89,4 @@ Scenario: I publish a proposal in draft with allowAknowledge
   """
   And I consume "proposal_create"
   Then I open mail with subject "notification.email.proposal.create.subject"
-  And email should match snapshot "notifyProposal_publishedAllowedAknowledgeDraft.html.twig"
+  And email should match snapshot "notifyProposal_publishedAllowedAknowledgeDraft.html"
