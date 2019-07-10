@@ -12,8 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateEventAddressesToJsonAddressesCommand extends ContainerAwareCommand
 {
-    private $connection;
     protected static $defaultName = 'capco:migrate:eventAddress-to-jsonAddress';
+    private $connection;
 
     public function __construct(Connection $connection)
     {
@@ -64,83 +64,74 @@ class MigrateEventAddressesToJsonAddressesCommand extends ContainerAwareCommand
         $maps = $this->getContainer()->get(Map::class);
 
         foreach ($events as $event) {
-            $zipCode = (string)$event['zipCode'];
+            $zipCode = (string) $event['zipCode'];
             $oldAddress = !empty($event['address'])
-                ? ', '.str_replace(',', ' ', $event['address'])
+                ? ', ' . str_replace(',', ' ', $event['address'])
                 : '';
-            $oldAddress .= !empty($zipCode) ? ', '.str_replace(',', '', $zipCode) : '';
-            $oldAddress .= !empty($event['city']) ? ', '.$event['city'] : '';
-            $oldAddress .= !empty($event['country']) ? ', '.$event['country'] : '';
+            $oldAddress .= !empty($zipCode) ? ', ' . str_replace(',', '', $zipCode) : '';
+            $oldAddress .= !empty($event['city']) ? ', ' . $event['city'] : '';
+            $oldAddress .= !empty($event['country']) ? ', ' . $event['country'] : '';
             $oldAddress = trim(trim($oldAddress, ','));
-            $newAddressField = !empty($oldAddress) ? $maps->getFormattedAddress($oldAddress) : '';
+            $jsonAddress =
+                !empty($event['lng']) && !empty($event['lat'])
+                    ? $maps->reverserGeocodingAddress($event['lat'], $event['lng'])
+                    : '';
+            $newAddress = !empty($jsonAddress)
+                ? $maps::decodeAddressFromJson($jsonAddress)
+                : 'NOT FOUND';
+            $smilarity = $this->checkSimilarityAddressDiff($jsonAddress, $output, $event);
 
-            $this->checkLevenshteinAddressDiff($oldAddress, $newAddressField, $output, $event);
-
-            if (!empty($newAddressField)) {
+            if (!empty($jsonAddress) && $smilarity) {
                 $this->connection->update(
                     'event',
-                    ['address_json' => $newAddressField],
+                    ['address_json' => $jsonAddress, 'similarity_of_new_address' => ($smilarity['percLat'] + $smilarity['percLng']) / 2, 'new_address_is_similar' => $smilarity['newAddressIsSimilar']],
                     ['id' => $event['id']]
-                );
-            } else {
-                $output->writeln(
-                    sprintf(
-                        '<error>the eventId %s with address "%s" was not updated. Offset %d, limit %d</error>',
-                        $event['id'],
-                        $oldAddress,
-                        $offset,
-                        $limit
-                    )
                 );
             }
         }
     }
 
-    private function checkLevenshteinAddressDiff($oldAddress, $jsonAddress, OutputInterface $output, array $event)
+    private function checkSimilarityAddressDiff($jsonAddress, OutputInterface $output, array $event)
     {
-        $newAddress = $this->getFullAddressFromJson($jsonAddress);
         $newLat = $this->getLatFromJson($jsonAddress);
         $newLng = $this->getLngFromJson($jsonAddress);
 
-        if ($oldAddress && $newAddress && levenshtein($oldAddress, $newAddress) > 9) {
-            $output->writeln(
-                sprintf(
-                    '<warning>the eventId %s with address "%s" got a difference with new address %s</warning>',
-                    $event['id'],
-                    $oldAddress,
-                    $newAddress
-                )
-            );
-        }
+        if ($event['lng'] && $newLng && $event['lat'] && $newLat) {
+            $lngDiff = similar_text($event['lng'], $newLng, $percLng);
+            $latDiff = similar_text($event['lng'], $newLng, $percLat);
+            $similarity = ['percLat' => round($percLat, 2), 'percLng'=>round($percLng, 2)];
 
-        if($event['lng'] && $newLng && levenshtein($event['lng'], $newLng) > 1){
-            $output->writeln(
-                sprintf(
-                    '<warning>the eventId %s with lng "%s" got a difference with new lng %s</warning>',
-                    $event['id'],
-                    $event['lng'],
-                    $newLng
-                )
-            );
-        }
-        if($event['lat'] && $newLat && levenshtein($event['lat'], $newLat) > 1){
-            $output->writeln(
-                sprintf(
-                    '<warning>the eventId %s with lng "%s" got a difference with new lng %s</warning>',
-                    $event['id'],
-                    $event['lat'],
-                    $newLat
-                )
-            );
+
+            if ($percLng < 75) {
+                $similarity['newAddressSimilar'] = false;
+                $output->writeln(
+                    sprintf(
+                        '<comment>the eventId %s with lng "%s" is only %s similar with new lng %s</comment>',
+                        $event['id'],
+                        $event['lng'],
+                        round($percLng, 2) . '%',
+                        $newLng
+                    )
+                );
+            }
+            if ($percLat < 75) {
+                $similarity['newAddressIsSimilar'] = false;
+                $output->writeln(
+                    sprintf(
+                        '<comment>the eventId %s with lat "%s" is only %s similar with new lat %s</comment>',
+                        $event['id'],
+                        $event['lat'],
+                        round($percLat, 2) . '%',
+                        $newLat
+                    )
+                );
+            }
+
+            return $similarity;
         }
     }
 
-    private function getFullAddressFromJson($jsonAddress)
-    {
-        return $jsonAddress ? json_decode($jsonAddress, true)[0]['formatted_address'] : null;
-    }
-
-    private function getLatFromJson($jsonAddress)
+    private function getLatFromJson($jsonAddress): ?string
     {
         if ($jsonAddress) {
             return json_decode($jsonAddress, true)[0]['geometry']['location']['lat'];
@@ -149,7 +140,7 @@ class MigrateEventAddressesToJsonAddressesCommand extends ContainerAwareCommand
         return null;
     }
 
-    private function getLngFromJson($jsonAddress)
+    private function getLngFromJson($jsonAddress): ?string
     {
         if ($jsonAddress) {
             return json_decode($jsonAddress, true)[0]['geometry']['location']['lng'];

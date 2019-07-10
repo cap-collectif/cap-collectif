@@ -154,6 +154,17 @@ class Event implements
      */
     private $guestListEnabled = false;
 
+
+    /**
+     * @ORM\Column(name="similarity_of_new_address", type="float")
+     */
+    private $similarityOfNewAddress;
+
+    /**
+     * @ORM\Column(name="new_address_is_similar", type="boolean")
+     */
+    private $newAddressIsSimilar;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -301,7 +312,7 @@ class Event implements
     {
         if (\is_string($lat)) {
             $lat = str_replace(',', '.', $lat);
-            $lat = (float) $lat;
+            $lat = (float)$lat;
         }
 
         $this->lat = $lat;
@@ -322,7 +333,7 @@ class Event implements
     {
         if (\is_string($lng)) {
             $lng = str_replace(',', '.', $lng);
-            $lng = (float) $lng;
+            $lng = (float)$lng;
         }
         $this->lng = $lng;
 
@@ -506,8 +517,8 @@ class Event implements
             return json_decode($this->addressJson, true)[0]['formatted_address'];
         }
 
-        $address = !empty($this->getAddress()) ? $this->getAddress() . ', ' : '';
-        $address .= !empty($this->getZipCode()) ? $this->getZipCode() . ' ' : '';
+        $address = !empty($this->getAddress()) ? $this->getAddress().', ' : '';
+        $address .= !empty($this->getZipCode()) ? $this->getZipCode().' ' : '';
         $address .= !empty($this->getCity()) ? $this->getCity() : '';
 
         $address = rtrim($address, ', ');
@@ -540,4 +551,30 @@ class Event implements
 
         return $this;
     }
+
+    public function getSimilarityOfNewAddress()
+    {
+        return $this->similarityOfNewAddress;
+    }
+
+    public function setSimilarityOfNewAddress($similarityOfNewAddress): self
+    {
+        $this->similarityOfNewAddress = $similarityOfNewAddress;
+
+        return $this;
+    }
+
+    public function getNewAddressIsSimilar()
+    {
+        return $this->newAddressIsSimilar;
+    }
+
+    public function setNewAddressIsSimilar($newAddressIsSimilar): self
+    {
+        $this->newAddressIsSimilar = $newAddressIsSimilar;
+
+        return $this;
+    }
+
+
 }
