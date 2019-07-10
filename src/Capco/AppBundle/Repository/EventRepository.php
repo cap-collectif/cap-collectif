@@ -215,18 +215,20 @@ class EventRepository extends EntityRepository
     public function getEventsWithAddress($offset = 0, $limit = 1): array
     {
         $qb = $this->createQueryBuilder('e')
-            ->addSelect('e.id', 'e.address', 'e.zipCode', 'e.country', 'e.city')
+            ->addSelect('e.id', 'e.address', 'e.zipCode', 'e.country', 'e.city', 'e.lat', 'e.lng')
             ->orderBy('e.createdAt', 'ASC')
+            ->andWhere('e.addressJson is null')
             ->setFirstResult($offset)
             ->setMaxResults($limit);
 
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function countAll(): int
+    public function countAllWithoutJsonAddress(): int
     {
         return $this->createQueryBuilder('e')
             ->select('count(e.id)')
+            ->andWhere('e.addressJson is null')
             ->getQuery()
             ->getSingleScalarResult();
     }
