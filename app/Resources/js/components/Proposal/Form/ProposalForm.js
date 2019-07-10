@@ -105,7 +105,7 @@ type Props = {|
   +dispatch: Dispatch,
   +features: FeatureToggles,
   +titleValue: ?string,
-  +addressValue: $PropertyType<ProposalForm_proposal, 'address'>,
+  +addressValue: ?string,
   +responses: ResponsesInReduxForm,
 |};
 
@@ -273,8 +273,7 @@ export class ProposalForm extends React.Component<Props, State> {
     }
     if (this.props.addressValue !== addressValue) {
       if (proposalForm.proposalInAZoneRequired && addressValue) {
-        const { lat, lng } = addressValue
-        this.retrieveDistrictForLocation({ lat, lng });
+        this.retrieveDistrictForLocation(JSON.parse(addressValue)[0].geometry.location);
       }
     }
   }
