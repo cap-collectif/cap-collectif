@@ -1,12 +1,12 @@
 // @flow
-import React, {Component} from 'react';
-import {Map, TileLayer, GeoJSON, Marker, Popup} from 'react-leaflet-universal';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { Map, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet-universal';
+import { connect } from 'react-redux';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import LocateControl from './LocateControl';
 import LeafletSearch from './LeafletSearch';
-import type {State} from '../../../types';
-import type {MapTokens} from '../../../redux/modules/user';
+import type { State } from '../../../types';
+import type { MapTokens } from '../../../redux/modules/user';
 
 type MapCenterObject = {
   lat: number,
@@ -25,9 +25,9 @@ export type ProposalMapMarker = {|
   +title: string,
   +author: {|
     +username: string,
-    +url: string
-  |}
-|}
+    +url: string,
+  |},
+|};
 
 type ComponentState = {
   loaded: boolean,
@@ -56,7 +56,7 @@ export type GeoJson = {|
   style: Style,
 |};
 
-type Props = {|
+type Props = {
   markers: $ReadOnlyArray<ProposalMapMarker>,
   mapTokens: MapTokens,
   geoJsons?: Array<GeoJson>,
@@ -65,7 +65,7 @@ type Props = {|
   stepId: string,
   stepType: string,
   className?: string,
-|};
+};
 
 let L;
 
@@ -100,7 +100,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
   static defaultProps = {
     markers: [],
     defaultMapOptions: {
-      center: {lat: 48.8586047, lng: 2.3137325},
+      center: { lat: 48.8586047, lng: 2.3137325 },
       zoom: 12,
     },
     visible: true,
@@ -108,7 +108,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
 
   constructor() {
     super();
-    this.state = {loaded: false};
+    this.state = { loaded: false };
   }
 
   state: ComponentState;
@@ -116,13 +116,13 @@ export class LeafletMap extends Component<Props, ComponentState> {
   componentDidMount() {
     // This import is used to avoid SSR errors.
     L = require('leaflet'); // eslint-disable-line
-    this.setState({loaded: true});
+    this.setState({ loaded: true });
   }
 
   render() {
-    const {geoJsons, defaultMapOptions, markers, visible, mapTokens, className} = this.props;
-    const {loaded} = this.state;
-    const {publicToken, styleId, styleOwner} = mapTokens.MAPBOX;
+    const { geoJsons, defaultMapOptions, markers, visible, mapTokens, className } = this.props;
+    const { loaded } = this.state;
+    const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
 
     if (!visible || !loaded) {
       return null;
@@ -148,38 +148,38 @@ export class LeafletMap extends Component<Props, ComponentState> {
           zoomToBoundsOnClick
           maxClusterRadius={30}>
           {markers &&
-          markers.length > 0 &&
-          markers.map((mark, key) => (
-            <Marker
-              key={key}
-              position={[mark.lat, mark.lng]}
-              icon={L.icon({
-                iconUrl: '/svg/marker.svg',
-                iconSize: [40, 40],
-                iconAnchor: [20, 40],
-                popupAnchor: [0, -40],
-              })}>
-              <Popup>
-                <div>
-                  <h2 className="h4 proposal__title">
-                    <a href={mark.url}>{mark.title}</a>
-                  </h2>{' '}
-                  Par : <a href={mark.author.url}>{mark.author.username}</a>
-                </div>
-              </Popup>
-            </Marker>
-          ))}
+            markers.length > 0 &&
+            markers.map((mark, key) => (
+              <Marker
+                key={key}
+                position={[mark.lat, mark.lng]}
+                icon={L.icon({
+                  iconUrl: '/svg/marker.svg',
+                  iconSize: [40, 40],
+                  iconAnchor: [20, 40],
+                  popupAnchor: [0, -40],
+                })}>
+                <Popup>
+                  <div>
+                    <h2 className="h4 proposal__title">
+                      <a href={mark.url}>{mark.title}</a>
+                    </h2>{' '}
+                    Par : <a href={mark.author.url}>{mark.author.username}</a>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
         </MarkerClusterGroup>
         {geoJsons &&
-        geoJsons.map((geoJson, key) => (
-          <GeoJSON
-            style={convertToGeoJsonStyle(geoJson.style)}
-            key={key}
-            data={geoJson.district}
-          />
-        ))}
-        <LocateControl/>
-        <LeafletSearch/>
+          geoJsons.map((geoJson, key) => (
+            <GeoJSON
+              style={convertToGeoJsonStyle(geoJson.style)}
+              key={key}
+              data={geoJson.district}
+            />
+          ))}
+        <LocateControl />
+        <LeafletSearch />
       </Map>
     );
   }
