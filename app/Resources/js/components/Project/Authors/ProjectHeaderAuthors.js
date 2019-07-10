@@ -22,22 +22,14 @@ const Container = styled.div.attrs({})`
   align-items: center;
 `;
 
-const AuthorsButton = styled.button.attrs({})`
-  outline: none;
-  border: none;
-  background: none;
-  text-align: left;
-`;
-
 const AuthorsContainer = styled.div.attrs({})`
   display: flex;
   flex-direction: column;
 `;
 
-const AuthorsCreditContainer = styled(AuthorsButton)`
-  &:hover {
-    color: ${colors.primaryColor};
-  }
+const AuthorsCreditContainer = styled.a.attrs({})`
+  color: ${colors.darkText};
+  cursor: pointer;
 `;
 
 const getAuthorCredits = (authors: $ReadOnlyArray<Object>) => {
@@ -90,6 +82,7 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
   render() {
     const { project } = this.props;
     const { showAuthorsModal } = this.state;
+    const isMultipleAuthors = project.authors && project.authors.length > 1;
 
     return (
       <Container id="project-header">
@@ -111,7 +104,8 @@ export class ProjectHeaderAuthors extends React.Component<Props, State> {
           <AuthorsCreditContainer
             id="authors-credit"
             className="ml-5 p-0 font-weight-bold"
-            onClick={this.handleClickModal}>
+            onClick={isMultipleAuthors ? this.handleClickModal : null}
+            href={!isMultipleAuthors && project.authors[0] ? project.authors[0].url : null}>
             {getAuthorCredits(project.authors)}
           </AuthorsCreditContainer>
         </AuthorsContainer>
@@ -126,6 +120,7 @@ export default createFragmentContainer(ProjectHeaderAuthors, {
       id
       authors {
         username
+        url
         ...UserAvatarList_users
         ...ProjectHeaderAuthorsModal_users
       }

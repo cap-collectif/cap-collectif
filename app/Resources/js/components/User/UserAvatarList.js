@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 import UserAvatar from './UserAvatar';
 import colors from '../../utils/colors';
@@ -24,9 +24,9 @@ const AvatarButton = styled.button.attrs({})`
   padding: 0;
 `;
 
-const AvatarDefaultButton = styled(Button)`
+const AvatarDefaultButton = styled(AvatarButton)`
   color: ${colors.darkGray} !important;
-  background-color: ${colors.borderColor};
+  background-color: ${colors.borderColor} !important;
   height: 45px;
   width: 45px;
   border-radius: 50%;
@@ -50,7 +50,7 @@ export const UserAvatarList = (props: Props) => {
                 placement="top"
                 overlay={<Tooltip id={`tooltip-${user.id}`}>{user.username}</Tooltip>}>
                 {/* $FlowFixMe */}
-                <UserAvatar user={user} features={features} />
+                <UserAvatar user={user} features={features} displayUrl={false} />
               </OverlayTrigger>
             </AvatarButton>
           ),

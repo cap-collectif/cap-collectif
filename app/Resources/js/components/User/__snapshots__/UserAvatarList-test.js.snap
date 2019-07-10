@@ -24,6 +24,7 @@ exports[`<UserAvatarList /> renders correctly 1`] = `
       }
     >
       <ForwardRef(Relay(Connect(UserAvatar)))
+        displayUrl={false}
         features={
           Object {
             "blog": false,

@@ -15,6 +15,7 @@ describe('<ProjectHeaderAuthors />', () => {
           {
             $fragmentRefs,
             username: 'toto',
+            url: 'http://jaimeles.coquillettes',
           },
         ],
       },
@@ -44,14 +45,17 @@ describe('<ProjectHeaderAuthors />', () => {
           {
             $fragmentRefs,
             username: 'toto',
+            url: 'http://jaimeles.coquillettes',
           },
           {
             $fragmentRefs,
             username: 'tota',
+            url: 'http://jaimeles.gnocchis',
           },
           {
             $fragmentRefs,
             username: 'titi',
+            url: 'http://jaimeles.farfale',
           },
         ],
       },
@@ -69,10 +73,12 @@ describe('<ProjectHeaderAuthors />', () => {
           {
             $fragmentRefs,
             username: 'toto',
+            url: 'http://jaimeles.coquillettes',
           },
           {
             $fragmentRefs,
             username: 'tota',
+            url: 'http://jaimeles.gnocchis',
           },
         ],
       },

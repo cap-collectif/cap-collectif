@@ -18,6 +18,7 @@ type Props = {|
   size?: number,
   className?: string,
   defaultAvatar?: ?string,
+  displayUrl?: boolean,
   style?: any,
   onBlur?: () => void,
   onFocus?: () => void,
@@ -29,8 +30,9 @@ export class UserAvatar extends React.Component<Props> {
   static defaultProps = {
     user: null,
     size: 45,
-    className: '',
     style: {},
+    className: '',
+    displayUrl: true,
     onBlur: () => {},
     onFocus: () => {},
     onMouseOver: () => {},
@@ -76,6 +78,7 @@ export class UserAvatar extends React.Component<Props> {
       style,
       user,
       features,
+      displayUrl,
     } = this.props;
 
     const funcProps = {
@@ -87,7 +90,7 @@ export class UserAvatar extends React.Component<Props> {
 
     if (user && user.url && features.profiles) {
       return (
-        <a {...funcProps} className={className} style={style} href={user.url}>
+        <a {...funcProps} className={className} style={style} href={displayUrl ? user.url : null}>
           {this.renderAvatar()}
         </a>
       );
