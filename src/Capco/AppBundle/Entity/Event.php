@@ -156,12 +156,12 @@ class Event implements
 
 
     /**
-     * @ORM\Column(name="similarity_of_new_address", type="float")
+     * @ORM\Column(name="similarity_of_new_address", type="float", nullable=true)
      */
     private $similarityOfNewAddress;
 
     /**
-     * @ORM\Column(name="new_address_is_similar", type="boolean")
+     * @ORM\Column(name="new_address_is_similar", type="boolean", nullable=true)
      */
     private $newAddressIsSimilar;
 

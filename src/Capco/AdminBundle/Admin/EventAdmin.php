@@ -126,16 +126,7 @@ class EventAdmin extends AbstractAdmin
             ->add('endAt', 'doctrine_orm_datetime_range', [
                 'label' => 'admin.fields.event.end_at'
             ]);
-        /** @var User $viewer */
-        $viewer = $this->token->getToken()->getUser();
-        if($viewer->isSuperAdmin()) {
-            $datagridMapper->add('newAddressIsSimilar', null,[
-                'label' => 'isSimilar'
-            ])
-            ->add('similarityOfNewAddress', NumberType::class, [
-                'label' => 'similarityOfNewAddress'
-            ]);
-        }
+
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -158,6 +149,17 @@ class EventAdmin extends AbstractAdmin
         ) {
             $listMapper->add('themes', null, [
                 'label' => 'admin.fields.event.themes'
+            ]);
+        }
+        /** @var User $viewer */
+        $viewer = $this->token->getToken()->getUser();
+
+        if($viewer->isSuperAdmin()) {
+            $listMapper->add('newAddressIsSimilar', null,[
+                'label' => 'isSimilar'
+            ])
+            ->add('similarityOfNewAddress', null, [
+                'label' => 'similarityOfNewAddress'
             ]);
         }
 
@@ -189,7 +191,10 @@ class EventAdmin extends AbstractAdmin
                     ],
                     'delete' => [
                         'template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig'
-                    ]
+                    ],
+                    'display' => [
+                        'template' => 'CapcoAdminBundle:Event:list__action_display.html.twig'
+                    ],
                 ]
             ]);
     }

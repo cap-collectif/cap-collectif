@@ -21,5 +21,6 @@ twig:
     projectContributionResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributionResolver'
     publicApiKeyRepo: '@Capco\AppBundle\Repository\PublicApiTokenRepository'
     projectUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver'
+    eventUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver'
   paths:
     '%kernel.project_dir%/src/Capco/AppBundle/Mailer/templates': CapcoMail

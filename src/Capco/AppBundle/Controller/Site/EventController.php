@@ -90,10 +90,12 @@ class EventController extends Controller
     public function showAction(Request $request, Event $event)
     {
         $eventHelper = $this->container->get(EventHelper::class);
-
+        /** @var User $viewer */
+        $viewer = $this->getUser();
         if (!$eventHelper->isRegistrationPossible($event)) {
             return [
                 'event' => $event,
+                'viewer' => $viewer
             ];
         }
 
@@ -138,8 +140,7 @@ class EventController extends Controller
                 );
             }
         }
-        /** @var User $viewer */
-        $viewer = $this->getUser();
+
         return [
             'form' => $form->createView(),
             'event' => $event,

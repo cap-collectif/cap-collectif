@@ -44,47 +44,39 @@ class MigrateEventAddressesToJsonAddressesCommand extends ContainerAwareCommand
         $offset = $input->getArgument('offset') ? $input->getArgument('offset') : 0;
         $limit = $input->getArgument('limit') ? $input->getArgument('limit') : 1000;
         $all = $input->getOption('all');
+        $offset = $all ? 0 : $offset;
+
         /** @var EventRepository $eventRepository */
         $eventRepository = $this->getContainer()->get(EventRepository::class);
+
 
         $totalEvents = $all ? $eventRepository->countAllWithoutJsonAddress() : $limit;
 
         for ($i = 0; $i < $totalEvents; $i += $limit) {
             $events = $eventRepository->getEventsWithAddress($offset, $limit);
-            $this->migrate($events, $offset, $limit, $output);
+            $this->migrate($events, $output);
             $offset = $limit;
         }
 
         return 0;
     }
 
-    private function migrate(array $events, $offset, $limit, OutputInterface $output): void
+    private function migrate(array $events, OutputInterface $output): void
     {
         /** @var Map $maps */
         $maps = $this->getContainer()->get(Map::class);
 
         foreach ($events as $event) {
-            $zipCode = (string) $event['zipCode'];
-            $oldAddress = !empty($event['address'])
-                ? ', ' . str_replace(',', ' ', $event['address'])
-                : '';
-            $oldAddress .= !empty($zipCode) ? ', ' . str_replace(',', '', $zipCode) : '';
-            $oldAddress .= !empty($event['city']) ? ', ' . $event['city'] : '';
-            $oldAddress .= !empty($event['country']) ? ', ' . $event['country'] : '';
-            $oldAddress = trim(trim($oldAddress, ','));
             $jsonAddress =
                 !empty($event['lng']) && !empty($event['lat'])
                     ? $maps->reverserGeocodingAddress($event['lat'], $event['lng'])
                     : '';
-            $newAddress = !empty($jsonAddress)
-                ? $maps::decodeAddressFromJson($jsonAddress)
-                : 'NOT FOUND';
-            $smilarity = $this->checkSimilarityAddressDiff($jsonAddress, $output, $event);
+            $similarity = $this->checkSimilarityAddressDiff($jsonAddress, $output, $event);
 
-            if (!empty($jsonAddress) && $smilarity) {
+            if (!empty($jsonAddress) && $similarity) {
                 $this->connection->update(
                     'event',
-                    ['address_json' => $jsonAddress, 'similarity_of_new_address' => ($smilarity['percLat'] + $smilarity['percLng']) / 2, 'new_address_is_similar' => $smilarity['newAddressIsSimilar']],
+                    ['address_json' => $jsonAddress, 'similarity_of_new_address' => ($similarity['percLat'] + $similarity['percLng']) / 2, 'new_address_is_similar' => $similarity['newAddressIsSimilar']],
                     ['id' => $event['id']]
                 );
             }
@@ -97,13 +89,13 @@ class MigrateEventAddressesToJsonAddressesCommand extends ContainerAwareCommand
         $newLng = $this->getLngFromJson($jsonAddress);
 
         if ($event['lng'] && $newLng && $event['lat'] && $newLat) {
-            $lngDiff = similar_text($event['lng'], $newLng, $percLng);
-            $latDiff = similar_text($event['lng'], $newLng, $percLat);
+            similar_text($event['lng'], $newLng, $percLng);
+            similar_text($event['lng'], $newLng, $percLat);
             $similarity = ['percLat' => round($percLat, 2), 'percLng'=>round($percLng, 2)];
-
+            $similarity['newAddressIsSimilar'] = true;
 
             if ($percLng < 75) {
-                $similarity['newAddressSimilar'] = false;
+                $similarity['newAddressIsSimilar'] = false;
                 $output->writeln(
                     sprintf(
                         '<comment>the eventId %s with lng "%s" is only %s similar with new lng %s</comment>',

@@ -47,30 +47,35 @@ class MediaProcessor implements ProcessorInterface
     {
         if ($object instanceof Media) {
             $newProviderReference = $this->referenceMap[$id];
-            (new Process(
-                'mv /var/www/web/media/default/0001/01/' .
-                    $object->getProviderReference() .
-                    ' /var/www/web/media/default/0001/01/' .
-                    $newProviderReference
-            ))->mustRun();
+            if (
+                !empty($newProviderReference) &&
+                $newProviderReference !== $object->getProviderReference()
+            ) {
+                (new Process(
+                    'mv /var/www/web/media/default/0001/01/' .
+                        $object->getProviderReference() .
+                        ' /var/www/web/media/default/0001/01/' .
+                        $newProviderReference
+                ))->mustRun();
 
-            // Restore providerReference in fixtures
-            $object->setProviderReference($newProviderReference);
+                // Restore providerReference in fixtures
+                $object->setProviderReference($newProviderReference);
 
-            // Let's generate cache for all medias in all formats, to avoid "/resolve" in first URL generation
-            $imgFormats = ['default_logo', 'default_avatar'];
-            foreach ($imgFormats as $format) {
-                // Will generate cache file
-                if (!strpos($newProviderReference, '.pdf')) {
-                    $this->filterService->getUrlOfFilteredImage(
-                        'default/0001/01/' . $newProviderReference,
-                        $format
-                    );
+                // Let's generate cache for all medias in all formats, to avoid "/resolve" in first URL generation
+                $imgFormats = ['default_logo', 'default_avatar'];
+                foreach ($imgFormats as $format) {
+                    // Will generate cache file
+                    if (!strpos($newProviderReference, '.pdf')) {
+                        $this->filterService->getUrlOfFilteredImage(
+                            'default/0001/01/' . $newProviderReference,
+                            $format
+                        );
+                    }
                 }
-            }
 
-            // Flush new provider reference
-            $this->em->flush();
+                // Flush new provider reference
+                $this->em->flush();
+            }
         }
     }
 
