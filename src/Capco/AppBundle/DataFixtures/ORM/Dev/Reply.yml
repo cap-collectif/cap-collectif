@@ -64,11 +64,3 @@ Capco\AppBundle\Entity\Reply:
     publishedAt: <(new \DateTime('2016-03-08'))>
     createdAt: <(new \DateTime('2016-03-08'))>
     updatedAt: <(new \DateTime('2019-03-08'))>
-  reply9:
-    id: 'reply9'
-    author: '@user4'
-    draft: 1
-    questionnaire: '@questionnaire1'
-    publishedAt: <(new \DateTime('2016-03-09'))>
-    createdAt: <(new \DateTime('2016-03-09'))>
-    updatedAt: <(new \DateTime('2016-03-09'))>

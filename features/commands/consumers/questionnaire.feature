@@ -50,16 +50,3 @@ Scenario: Email should be sent to admin if a user delete a reply in a questionna
   And I consume "questionnaire_reply"
   Then I open mail with subject "email.notification.questionnaire.reply.subject.delete"
   And email should match snapshot "notifyQuestionnaireReply_delete.html"
-
-@rabbitmq @snapshot
-Scenario: Email should be sent to admin if a user published a draft reply in a questionnaire
-  Given I publish in "questionnaire_reply" with message below:
-  """
-  {
-    "replyId": "reply9",
-    "state": "create"
-  }
-  """
-  And I consume "questionnaire_reply"
-  Then I open mail with subject 'reply.notify.user.create {"{questionnaireTitle}":"Votre avis sur les JO 2024 \u00e0 Paris"}'
-  And email should match snapshot "notifyQuestionnaireReply_publishedDraft.html"

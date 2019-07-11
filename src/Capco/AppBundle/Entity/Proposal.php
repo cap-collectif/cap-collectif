@@ -496,22 +496,13 @@ class Proposal implements
 
     public function viewerCanSeeInBo($user = null): bool
     {
-        // SuperAdmin can access everything
-        if ($user && ($user->isAdmin() || $user->isSuperAdmin())) {
-            return true;
-        }
-
-        if ($this->isPublished()) {
-            return $this->getStep() ? $this->getStep()->viewerCanSeeInBo($user) : false;
-        }
-
-        return $this->getAuthor() === $user;
+        return $user && $user->isAdmin();
     }
 
     public function viewerCanSee(User $user = null): bool
     {
-        // SuperAdmin can access everything
-        if ($user && $user->isSuperAdmin()) {
+        // Admin and SuperAdmin can access everything
+        if ($user && $user->isAdmin()) {
             return true;
         }
 
@@ -520,7 +511,7 @@ class Proposal implements
                 return $this->getStep() ? $this->getStep()->canDisplay($user) : false;
             }
 
-            return $user && $user->isAdmin();
+            return false;
         }
 
         return $this->getAuthor() === $user;
