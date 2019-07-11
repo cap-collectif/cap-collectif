@@ -67,7 +67,6 @@ export const ProjectHeaderAuthorsView = (properties: Props) => {
                 <i className="cap-calendar-2-1 mr-10" />
                 <FormattedDate
                   value={moment(project.publishedAt).toDate()}
-                  minute="numeric"
                   hour="numeric"
                   day="numeric"
                   month="long"
