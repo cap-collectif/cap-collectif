@@ -7,6 +7,7 @@ use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\Helper\EventHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
@@ -137,10 +138,12 @@ class EventController extends Controller
                 );
             }
         }
-
+        /** @var User $viewer */
+        $viewer = $this->getUser();
         return [
             'form' => $form->createView(),
             'event' => $event,
+            'viewer' => $viewer
         ];
     }
 

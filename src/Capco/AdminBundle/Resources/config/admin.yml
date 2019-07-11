@@ -436,6 +436,7 @@ services:
         Capco\AppBundle\Entity\Event,
         CapcoAdminBundle:CRUD,
         '@Capco\AppBundle\Elasticsearch\Indexer',
+        '@security.token_storage'
       ]
     tags:
       - {

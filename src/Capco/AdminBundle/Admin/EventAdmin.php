@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -13,7 +14,9 @@ use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class EventAdmin extends AbstractAdmin
 {
@@ -23,14 +26,18 @@ class EventAdmin extends AbstractAdmin
     ];
 
     private $indexer;
+    private $token;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        Indexer $indexer
+        Indexer $indexer,
+        TokenStorageInterface $token
     ) {
         $this->indexer = $indexer;
+        $this->token = $token;
+
         parent::__construct($code, $class, $baseControllerName);
     }
 
@@ -119,6 +126,16 @@ class EventAdmin extends AbstractAdmin
             ->add('endAt', 'doctrine_orm_datetime_range', [
                 'label' => 'admin.fields.event.end_at'
             ]);
+        /** @var User $viewer */
+        $viewer = $this->token->getToken()->getUser();
+        if($viewer->isSuperAdmin()) {
+            $datagridMapper->add('newAddressIsSimilar', null,[
+                'label' => 'isSimilar'
+            ])
+            ->add('similarityOfNewAddress', NumberType::class, [
+                'label' => 'similarityOfNewAddress'
+            ]);
+        }
     }
 
     protected function configureListFields(ListMapper $listMapper)

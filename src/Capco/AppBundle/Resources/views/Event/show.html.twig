@@ -61,17 +61,17 @@
                 </section>
 
                 <section class="section--custom">
-                    <div class="container container--thinner">
+                    <hr class="container container--thinner">
 
                         <ul class="event__meta  block">
                             <li class="excerpt"><i class="cap cap-calendar-1"></i>
                                 {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': event} only %}
                             </li>
-                            {% if event.address or event.zipCode or event.city %}
+                            {% if event.fullAddress %}
                             <li class="excerpt">
                                 <address>
                                     <i class="cap cap-marker-1  excerpt"></i>
-                                    {{ event.address }}, {{ event.zipCode }} {{ event.city }}{% if event.country %}, {{ event.country }}{% endif %} <br/>
+                                    {{ event.fullAddress }} {% endif %} <br/>
                                 </address>
                             </li>
                             {% endif %}
@@ -91,7 +91,16 @@
                                  data-lng="{{ event.lng }}"
                             ></div>
                         {% endif %}
-
+                        {% if viewer.superAdmin %}
+                        <hr></hr>
+                        <i>With new address</i>
+                        {% if event.lat(true) and event.lng(true) %}
+                            <div id="event_map" class="event__map block"
+                                 data-lat="{{ event.lat(true) }}"
+                                 data-lng="{{ event.lng(true) }}"
+                            ></div>
+                        {% endif %}
+                        {% endif %}
                         {% if event.projects | length > 0 %}
                             <div class="block event_link-project">
                                 <p>
