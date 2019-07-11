@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Repository\MapTokenRepository;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class MapTokensExtension extends \Twig_Extension
+class MapTokensExtension extends AbstractExtension
 {
     private $repository;
 
@@ -16,11 +18,7 @@ class MapTokensExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction(
-                'capco_map_tokens',
-                [$this, 'getMapTokens'],
-                ['is_safe' => 'html']
-            ),
+            new TwigFunction('capco_map_tokens', [$this, 'getMapTokens'], ['is_safe' => 'html'])
         ];
     }
 
@@ -32,7 +30,7 @@ class MapTokensExtension extends \Twig_Extension
                 $mapToken->getStyleId(),
                 $mapToken->getStyleOwner(),
                 $mapToken->getInitialPublicToken(),
-                $mapToken->getPublicToken(),
+                $mapToken->getPublicToken()
             ];
             $mapTokens[$mapToken->getProvider()] = compact(
                 'styleId',

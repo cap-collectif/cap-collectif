@@ -8,8 +8,10 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class GraphQLExtension extends \Twig_Extension
+class GraphQLExtension extends AbstractExtension
 {
     private $collectStepRepo;
     private $questionnaireRepo;
@@ -25,9 +27,9 @@ class GraphQLExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('graphql_offset_to_cursor', [$this, 'getOffsetToCursor']),
-            new \Twig_SimpleFunction('graphql_list_collect_steps', [$this, 'getCollectSteps']),
-            new \Twig_SimpleFunction('graphql_list_questionnaires', [$this, 'getQuestionnaires']),
+            new TwigFunction('graphql_offset_to_cursor', [$this, 'getOffsetToCursor']),
+            new TwigFunction('graphql_list_collect_steps', [$this, 'getCollectSteps']),
+            new TwigFunction('graphql_list_questionnaires', [$this, 'getQuestionnaires'])
         ];
     }
 
@@ -40,10 +42,10 @@ class GraphQLExtension extends \Twig_Extension
     {
         $steps = $this->collectStepRepo->findAll();
 
-        return array_map(function (CollectStep $step) {
+        return array_map(static function (CollectStep $step) {
             return [
                 'id' => GlobalId::toGlobalId('CollectStep', $step->getId()),
-                'label' => $step->__toString(),
+                'label' => (string) $step
             ];
         }, $steps);
     }
@@ -52,10 +54,10 @@ class GraphQLExtension extends \Twig_Extension
     {
         $questionnaires = $this->questionnaireRepo->findAll();
 
-        return array_map(function (Questionnaire $questionnaire) {
+        return array_map(static function (Questionnaire $questionnaire) {
             return [
                 'id' => GlobalId::toGlobalId('Questionnaire', $questionnaire->getId()),
-                'label' => $questionnaire->__toString(),
+                'label' => (string) $questionnaire
             ];
         }, $questionnaires);
     }

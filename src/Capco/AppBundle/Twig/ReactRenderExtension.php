@@ -5,8 +5,10 @@ namespace Capco\AppBundle\Twig;
 use Capco\AppBundle\Toggle\Manager;
 use Limenius\ReactRenderer\Twig\ReactRenderExtension as BaseExtension;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class ReactRenderExtension extends \Twig_Extension
+class ReactRenderExtension extends AbstractExtension
 {
     private $extension;
     private $toggleManager;
@@ -22,18 +24,18 @@ class ReactRenderExtension extends \Twig_Extension
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction(
+            new TwigFunction(
                 'react_render_component',
                 [$this, 'reactRenderIntlComponent'],
                 ['is_safe' => ['html']]
-            ),
+            )
         ];
     }
 
-    public function reactRenderIntlComponent($componentName, array $options = [])
+    public function reactRenderIntlComponent($componentName, array $options = []): string
     {
         if ($this->tokenStorage->getToken() && $this->tokenStorage->getToken()->getUser()) {
             $options['rendering'] = 'client_side';

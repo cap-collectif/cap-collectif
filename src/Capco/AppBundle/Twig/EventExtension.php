@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Helper\EventHelper;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-class EventExtension extends \Twig_Extension
+class EventExtension extends AbstractExtension
 {
     protected $helper;
 
@@ -13,11 +15,11 @@ class EventExtension extends \Twig_Extension
         $this->helper = $helper;
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('capco_event_registration_possible', [$this, 'isRegistrationPossible']),
-            new \Twig_SimpleFilter('capco_event_user_registered', [$this, 'isRegistered']),
+            new TwigFilter('capco_event_registration_possible', [$this, 'isRegistrationPossible']),
+            new TwigFilter('capco_event_user_registered', [$this, 'isRegistered'])
         ];
     }
 

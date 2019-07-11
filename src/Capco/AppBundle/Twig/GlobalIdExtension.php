@@ -3,9 +3,10 @@
 namespace Capco\AppBundle\Twig;
 
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class GlobalIdExtension extends \Twig_Extension
+class GlobalIdExtension extends AbstractExtension
 {
     public function getFilters(): array
     {

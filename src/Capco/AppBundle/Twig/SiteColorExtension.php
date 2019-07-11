@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\SiteColor\Resolver;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class SiteColorExtension extends \Twig_Extension
+class SiteColorExtension extends AbstractExtension
 {
     protected $resolver;
 
@@ -16,8 +18,12 @@ class SiteColorExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('capco_site_color_value', [$this, 'getSiteColorValue'], ['is_safe' => ['html']]),
-       ];
+            new TwigFunction(
+                'capco_site_color_value',
+                [$this, 'getSiteColorValue'],
+                ['is_safe' => ['html']]
+            )
+        ];
     }
 
     public function getSiteColorValue($key)

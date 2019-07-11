@@ -4,8 +4,10 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class SiteFaviconExtension extends \Twig_Extension
+class SiteFaviconExtension extends AbstractExtension
 {
     protected $container;
     private $repository;
@@ -18,7 +20,7 @@ class SiteFaviconExtension extends \Twig_Extension
 
     public function getFunctions(): array
     {
-        return [new \Twig_SimpleFunction('site_favicons', [$this, 'getSiteFavicons'])];
+        return [new TwigFunction('site_favicons', [$this, 'getSiteFavicons'])];
     }
 
     public function getSiteFavicons(): ?array
@@ -57,7 +59,7 @@ class SiteFaviconExtension extends \Twig_Extension
                 'favicon_152',
                 'favicon_180',
                 'favicon_192',
-                'favicon_310',
+                'favicon_310'
             ]
             as $filter
         ) {
