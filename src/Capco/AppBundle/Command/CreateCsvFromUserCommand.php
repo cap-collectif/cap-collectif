@@ -756,7 +756,9 @@ EOF;
               url
               title
               bodyText
-              formattedAddress
+              address {
+                formatted
+              }
               createdAt
               updatedAt
               trashedAt
