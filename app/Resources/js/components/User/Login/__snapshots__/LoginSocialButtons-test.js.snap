@@ -127,6 +127,47 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
       }
     }
   />
+  <OpenIDLoginButton
+    features={
+      Object {
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "login_facebook": true,
+        "login_gplus": true,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
   <p
     className="p--centered"
   >
@@ -269,6 +310,47 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
       }
     }
   />
+  <OpenIDLoginButton
+    features={
+      Object {
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "login_facebook": true,
+        "login_gplus": false,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
   <p
     className="p--centered"
   >
@@ -369,6 +451,47 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
     prefix="login."
   />
   <SamlLoginButton
+    features={
+      Object {
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "login_facebook": false,
+        "login_gplus": true,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
+  <OpenIDLoginButton
     features={
       Object {
         "blog": false,
@@ -589,8 +712,6 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
         "zipcode_at_register": false,
       }
     }
-    key="0"
-    text="Cap Collectif Oauth2 Provider"
   />
   <p
     className="p--centered"
@@ -692,6 +813,47 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
     prefix="login."
   />
   <SamlLoginButton
+    features={
+      Object {
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "login_facebook": false,
+        "login_gplus": false,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
+  <OpenIDLoginButton
     features={
       Object {
         "blog": false,
@@ -912,8 +1074,6 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
         "zipcode_at_register": false,
       }
     }
-    key="0"
-    text="Cap Collectif Oauth2 Provider"
   />
 </div>
 `;

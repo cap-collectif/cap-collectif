@@ -10,10 +10,8 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Capco\AppBundle\Cache\RedisCache;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class ThemeExtension extends AbstractExtension
+class ThemeExtension extends \Twig_Extension
 {
     public const LIST_PROJECTS_CACHE_KEY = 'listProjects';
     public const LIST_THEMES_CACHE_KEY = 'listThemes';
@@ -50,8 +48,8 @@ class ThemeExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('list_projectsById', [$this, 'listProjects']),
-            new TwigFunction('themes_list', [$this, 'listThemes'])
+            new \Twig_SimpleFunction('list_projectsById', [$this, 'listProjects']),
+            new \Twig_SimpleFunction('themes_list', [$this, 'listThemes']),
         ];
     }
 
@@ -76,7 +74,7 @@ class ThemeExtension extends AbstractExtension
                     foreach ($realStep->getStatuses() as $status) {
                         $projectStepsStatus[] = [
                             'id' => $status->getId(),
-                            'name' => $status->getName()
+                            'name' => $status->getName(),
                         ];
                     }
 
@@ -118,11 +116,11 @@ class ThemeExtension extends AbstractExtension
                                 'app_project_edit_synthesis',
                                 [
                                     'projectSlug' => $project->getSlug(),
-                                    'stepSlug' => $realStep->getSlug()
+                                    'stepSlug' => $realStep->getSlug(),
                                 ],
                                 true
-                            )
-                        ]
+                            ),
+                        ],
                     ];
                     $projectStepsData[] = $stepData;
                     $projectStepsByIdData[$stepData['id']] = $stepData;
@@ -133,8 +131,8 @@ class ThemeExtension extends AbstractExtension
                         'UserDetails',
                         'UserVotes',
                         'ThemeDetails',
-                        'ProjectType'
-                    ]
+                        'ProjectType',
+                    ],
                 ]);
 
                 $projectId = GlobalId::toGlobalId('Project', $project->getId());
@@ -163,7 +161,7 @@ class ThemeExtension extends AbstractExtension
                 $data[] = [
                     'id' => $theme->getId(),
                     'title' => $theme->getTitle(),
-                    'slug' => $theme->getSlug()
+                    'slug' => $theme->getSlug(),
                 ];
             }
 

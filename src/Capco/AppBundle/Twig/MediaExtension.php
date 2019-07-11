@@ -3,10 +3,8 @@
 namespace Capco\AppBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class MediaExtension extends AbstractExtension
+class MediaExtension extends \Twig_Extension
 {
     protected $container;
 
@@ -17,7 +15,9 @@ class MediaExtension extends AbstractExtension
 
     public function getFunctions(): array
     {
-        return [new TwigFunction('media_public_url', [$this, 'getMediaUrl'])];
+        return [
+            new \Twig_SimpleFunction('media_public_url', [$this, 'getMediaUrl']),
+        ];
     }
 
     public function getMediaUrl($media, $format)

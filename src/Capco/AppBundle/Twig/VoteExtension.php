@@ -6,18 +6,14 @@ use Capco\AppBundle\Entity\AbstractVote as Vote;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use Capco\AppBundle\Resolver\VoteResolver;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class VoteExtension extends AbstractExtension
+class VoteExtension extends \Twig_Extension
 {
     protected $voteResolver;
     protected $proposalStepVotesResolver;
 
-    public function __construct(
-        VoteResolver $voteResolver,
-        ProposalStepVotesResolver $proposalStepVotesResolver
-    ) {
+    public function __construct(VoteResolver $voteResolver, ProposalStepVotesResolver $proposalStepVotesResolver)
+    {
         $this->voteResolver = $voteResolver;
         $this->proposalStepVotesResolver = $proposalStepVotesResolver;
     }
@@ -25,13 +21,10 @@ class VoteExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('capco_vote_object_url', [$this, 'getRelatedObjectUrl']),
-            new TwigFunction('capco_vote_object', [$this, 'getRelatedObject']),
-            new TwigFunction('capco_vote_object_admin_url', [$this, 'getRelatedObjectAdminUrl']),
-            new TwigFunction('capco_has_votable_step_not_future', [
-                $this,
-                'hasVotableStepNotFuture'
-            ])
+            new \Twig_SimpleFunction('capco_vote_object_url', [$this, 'getRelatedObjectUrl']),
+            new \Twig_SimpleFunction('capco_vote_object', [$this, 'getRelatedObject']),
+            new \Twig_SimpleFunction('capco_vote_object_admin_url', [$this, 'getRelatedObjectAdminUrl']),
+            new \Twig_SimpleFunction('capco_has_votable_step_not_future', [$this, 'hasVotableStepNotFuture']),
         ];
     }
 
@@ -40,7 +33,7 @@ class VoteExtension extends AbstractExtension
         return $this->voteResolver->getRelatedObjectUrl($vote, $absolute);
     }
 
-    public function getRelatedObjectAdminUrl(Vote $vote, $absolute = false): string
+    public function getRelatedObjectAdminUrl(Vote $vote, $absolute = false)
     {
         return $this->voteResolver->getRelatedObjectAdminUrl($vote, $absolute);
     }
@@ -50,7 +43,7 @@ class VoteExtension extends AbstractExtension
         return $this->voteResolver->getRelatedObject($vote);
     }
 
-    public function hasVotableStepNotFuture(Project $project): bool
+    public function hasVotableStepNotFuture(Project $project)
     {
         return $this->proposalStepVotesResolver->hasVotableStepNotFuture($project);
     }

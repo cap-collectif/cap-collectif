@@ -20,7 +20,6 @@ import { type ProjectContentAdminForm_project } from '~relay/ProjectContentAdmin
 type Props = {|
   ...FormProps,
   project: ?ProjectContentAdminForm_project,
-  handleSubmit: () => void,
   intl: IntlShape,
   formName: string,
 |};

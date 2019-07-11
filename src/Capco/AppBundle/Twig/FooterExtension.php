@@ -8,10 +8,8 @@ use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
 use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class FooterExtension extends AbstractExtension
+class FooterExtension extends \Twig_Extension
 {
     public const CACHE_KEY_LEGALS = 'getLegalsPages';
     public const CACHE_KEY_LINKS = 'getFooterLinks';
@@ -37,9 +35,9 @@ class FooterExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('getFooterLinks', [$this, 'getFooterLinks']),
-            new TwigFunction('getFooterSocialNetworks', [$this, 'getFooterSocialNetworks']),
-            new TwigFunction('getLegalsPages', [$this, 'getLegalsPages'])
+            new \Twig_SimpleFunction('getFooterLinks', [$this, 'getFooterLinks']),
+            new \Twig_SimpleFunction('getFooterSocialNetworks', [$this, 'getFooterSocialNetworks']),
+            new \Twig_SimpleFunction('getLegalsPages', [$this, 'getLegalsPages']),
         ];
     }
 
@@ -67,7 +65,7 @@ class FooterExtension extends AbstractExtension
             $data = [
                 'cookies' => $cookies ? $cookies->getIsEnabled() : false,
                 'legal' => $legal ? $legal->getIsEnabled() : false,
-                'privacy' => $privacy ? $privacy->getIsEnabled() : false
+                'privacy' => $privacy ? $privacy->getIsEnabled() : false,
             ];
             $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
             $this->cache->save($cachedItem);

@@ -7,7 +7,6 @@ import type { LabelPrefix } from './LoginSocialButtons';
 
 type Props = {|
   features: FeatureToggles,
-  text: ?string,
   prefix?: LabelPrefix,
 |};
 
@@ -15,12 +14,12 @@ export class OpenIDLoginButton extends React.Component<Props> {
   static displayName = 'OpenIDLoginButton';
 
   render() {
-    const { features, text } = this.props;
+    const { features } = this.props;
     if (!features.login_openid) {
       return null;
     }
 
-    const title = text || <FormattedMessage id="login.openid" />;
+    const title = <FormattedMessage id="login.openid" />;
     const redirectUri = features.disconnect_openid
       ? `${baseUrl}/sso/switch-user`
       : `${window && window.location.href}`;

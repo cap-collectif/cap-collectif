@@ -3,10 +3,8 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Resolver\SectionResolver;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
 
-class SectionExtension extends AbstractExtension
+class SectionExtension extends \Twig_Extension
 {
     protected $resolver;
 
@@ -18,17 +16,17 @@ class SectionExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('capco_is_first_section', [$this, 'isFirstSection']),
-            new TwigFilter('capco_is_last_section', [$this, 'isLastSection'])
+            new \Twig_SimpleFilter('capco_is_first_section', [$this, 'isFirstSection']),
+            new \Twig_SimpleFilter('capco_is_last_section', [$this, 'isLastSection']),
         ];
     }
 
-    public function isFirstSection($section): bool
+    public function isFirstSection($section)
     {
         return $this->resolver->isFirst($section);
     }
 
-    public function isLastSection($section): bool
+    public function isLastSection($section)
     {
         return $this->resolver->isLast($section);
     }

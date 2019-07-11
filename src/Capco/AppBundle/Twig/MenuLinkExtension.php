@@ -5,10 +5,8 @@ namespace Capco\AppBundle\Twig;
 use Capco\AppBundle\Manager\MenuItemResolver;
 use Symfony\Component\Routing\RouterInterface;
 use Capco\AppBundle\Entity\MenuItem;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
-class MenuLinkExtension extends AbstractExtension
+class MenuLinkExtension extends \Twig_Extension
 {
     protected $resolver;
     protected $router;
@@ -21,14 +19,14 @@ class MenuLinkExtension extends AbstractExtension
 
     public function getFunctions(): array
     {
-        return [new TwigFunction('menu_url', [$this, 'getMenuUrl'])];
+        return [new \Twig_SimpleFunction('menu_url', [$this, 'getMenuUrl'])];
     }
 
     public function getMenuUrl(MenuItem $item): string
     {
         if ($item->getPage()) {
             return $this->router->generate('app_page_show', [
-                'slug' => $item->getPage()->getSlug()
+                'slug' => $item->getPage()->getSlug(),
             ]);
         }
 

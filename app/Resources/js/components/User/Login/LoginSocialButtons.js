@@ -6,13 +6,12 @@ import FacebookLoginButton from './FacebookLoginButton';
 import GoogleLoginButton from './GoogleLoginButton';
 import SamlLoginButton from './SamlLoginButton';
 import OpenIDLoginButton from './OpenIDLoginButton';
-import type { FeatureToggles, SSOConfiguration, State } from '../../../types';
+import type { FeatureToggles, State } from '../../../types';
 
 export type LabelPrefix = 'registration.' | 'login.';
 
 type StateProps = {|
   features: FeatureToggles,
-  ssoList: Array<SSOConfiguration>,
 |};
 
 type Props = {|
@@ -22,7 +21,7 @@ type Props = {|
 
 export class LoginSocialButtons extends React.Component<Props> {
   render() {
-    const { features, ssoList, prefix } = this.props;
+    const { features } = this.props;
     if (
       !features.login_facebook &&
       !features.login_gplus &&
@@ -31,20 +30,12 @@ export class LoginSocialButtons extends React.Component<Props> {
     ) {
       return null;
     }
-
-    /* @TODO: Add more Login button in mapping when it will be configurable. */
     return (
       <div>
-        <FacebookLoginButton features={features} prefix={prefix} />
-        <GoogleLoginButton features={features} prefix={prefix} />
-        <SamlLoginButton features={features} prefix={prefix} />
-        {ssoList.length > 0 &&
-          ssoList.map(
-            ({ ssoType, name }: SSOConfiguration, index: number) =>
-              ssoType === 'oauth2' && (
-                <OpenIDLoginButton text={name} key={index} features={features} prefix={prefix} />
-              ),
-          )}
+        <FacebookLoginButton {...this.props} />
+        <GoogleLoginButton {...this.props} />
+        <SamlLoginButton {...this.props} />
+        <OpenIDLoginButton {...this.props} />
         {!features.sso_by_pass_auth && (
           <p className="p--centered">
             <span>{<FormattedMessage id="login.or" />}</span>
@@ -57,7 +48,6 @@ export class LoginSocialButtons extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
-  ssoList: state.default.ssoList,
 });
 
 export default connect(mapStateToProps)(LoginSocialButtons);
