@@ -27,13 +27,13 @@ class Theme implements IndexableInterface
     public static $statuses = [
         'closed' => self::STATUS_CLOSED,
         'opened' => self::STATUS_OPENED,
-        'future' => self::STATUS_FUTURE,
+        'future' => self::STATUS_FUTURE
     ];
 
     public static $statusesLabels = [
         'theme.show.status.closed' => self::STATUS_CLOSED,
         'theme.show.status.opened' => self::STATUS_OPENED,
-        'theme.show.status.future' => self::STATUS_FUTURE,
+        'theme.show.status.future' => self::STATUS_FUTURE
     ];
 
     /**
@@ -472,6 +472,9 @@ class Theme implements IndexableInterface
         return $this->isEnabled;
     }
 
+    /**
+     * @deprecated: please consider using `viewerCanSee` instead.
+     */
     public function canDisplay()
     {
         return $this->isEnabled;

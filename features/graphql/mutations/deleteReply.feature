@@ -1,4 +1,4 @@
-@deleteReply @reply
+@deleteReply
 Feature: Delete reply
 
 @database
@@ -26,23 +26,16 @@ Scenario: User can delete his reply
   """
   Then the JSON response should match:
   """
-{
-   "data":{
-      "deleteReply":{
-         "questionnaire":{
-            "id":"UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
-            "viewerReplies":[
-               {
-                  "id":"UmVwbHk6cmVwbHk1"
-               },
-               {
-                  "id":"UmVwbHk6cmVwbHk5"
-               }
-            ]
-         }
+  {
+    "data": {
+      "deleteReply": {
+        "questionnaire": {
+          "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+          "viewerReplies": [{"id":"UmVwbHk6cmVwbHk1"}]
+        }
       }
-   }
-}
+    }
+  }
   """
 
 @security

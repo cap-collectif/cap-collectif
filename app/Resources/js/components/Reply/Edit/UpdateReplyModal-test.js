@@ -13,31 +13,10 @@ describe('<UpdateReplyModal />', () => {
       $refType,
       $fragmentRefs,
       id: 'UmVwbHk6cmVwbHky',
-      createdAt: '2016-03-01 12:26:24',
-      publishedAt: '2016-04-25 14:33:17',
+      createdAt: '2016-03-01 00:00:00',
       questionnaire: {
         $fragmentRefs,
       },
-      draft: false,
-    },
-    questionnaire: {
-      viewerReplies: {},
-    },
-  };
-
-  const defaultPropsInDraft = {
-    show: true,
-    onClose: () => {},
-    reply: {
-      $refType,
-      $fragmentRefs,
-      id: 'UmVwbHk6cmVwbHky',
-      createdAt: '2016-03-01 12:26:24',
-      publishedAt: null,
-      questionnaire: {
-        $fragmentRefs,
-      },
-      draft: true,
     },
     questionnaire: {
       viewerReplies: {},
@@ -65,7 +44,7 @@ describe('<UpdateReplyModal />', () => {
 
   it('should render correctly with replies', () => {
     const props = {
-      ...defaultPropsInDraft,
+      ...defaultProps,
       questionnaire: questionnaireWithReplies,
     };
     const wrapper = shallow(<UpdateReplyModal {...props} />);

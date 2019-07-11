@@ -91,7 +91,6 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
             'replyUpdatedAt' => $updatedAt,
             'siteName' => self::escape($siteName),
             'date' => $reply->getCreatedAt(),
-            'time' => $reply->getCreatedAt()->format('H:i:s'),
             'authorName' => $reply->getAuthor()->getUsername(),
             'questionnaireStepTitle' => $reply->getStep()->getTitle(),
             'state' => $state,
@@ -113,13 +112,10 @@ final class QuestionnaireReplyAdminMessage extends DefaultMessage
         string $baseUrl,
         string $replyShowUrl
     ): array {
-        $date = \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $replyDeletedAt);
-
         return [
             'projectTitle' => self::escape($title),
             'siteName' => self::escape($siteName),
-            'date' => $date,
-            'time' => $date->format('H:i:s'),
+            'date' => \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $replyDeletedAt),
             'authorName' => $reply['author_name'],
             'questionnaireStepTitle' => $reply['questionnaire_step_title'],
             'state' => $state,

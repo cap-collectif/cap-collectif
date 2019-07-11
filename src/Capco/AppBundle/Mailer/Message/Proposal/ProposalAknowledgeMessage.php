@@ -69,14 +69,14 @@ final class ProposalAknowledgeMessage extends Message
             'homepageUrl' => $homepageUrl,
             'typeOfMail' => $typeOfMail,
             'sendAt' =>
-                'create' === $typeOfMail ? $proposal->getPublishedAt() : $proposal->getUpdatedAt(),
+                'create' === $typeOfMail ? $proposal->getCreatedAt() : $proposal->getUpdatedAt(),
             'endAt' => $proposal->getStep()->getEndAt(),
             'to' => self::escape($recipentEmail),
             'username' => $proposal->getAuthor()->getDisplayName(),
             'timezone' => $proposal->getCreatedAt()->getTimezone(),
             'business' => 'Cap Collectif',
             'businessUrl' => 'https://cap-collectif.com/',
-            'isTimeless' => $proposal->getStep()->isTimeless()
+            'isTimeless' => $proposal->getStep()->isTimeless(),
         ];
     }
 

@@ -42,7 +42,6 @@ def graphql_schemas(checkSame=False):
 
 @task(environments=['local'])
 def snapshots(emails=False):
-    "Run Generating Snapshot"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     commands = [
         'capco:export:users --quiet --snapshot',

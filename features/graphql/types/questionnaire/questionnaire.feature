@@ -52,23 +52,20 @@ Scenario: GraphQL client wants to retrieve replies
   """
   Then the JSON response should match:
   """
-  {
-     "data":{
-        "questionnaire":{
-           "viewerReplies":[
-              {
-                 "id":"UmVwbHk6cmVwbHky"
-              },
-              {
-                 "id":"UmVwbHk6cmVwbHk1"
-              },
-              {
-                 "id":"UmVwbHk6cmVwbHk5"
-              }
-           ]
-        }
-     }
-  }
+{
+   "data":{
+      "questionnaire":{
+         "viewerReplies":[
+            {
+               "id": "UmVwbHk6cmVwbHky"
+            },
+            {
+               "id": "UmVwbHk6cmVwbHk1"
+            }
+         ]
+      }
+   }
+}
   """
 
 Scenario: GraphQL client wants to get question's participants with users not confirmed
