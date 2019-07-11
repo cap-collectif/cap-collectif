@@ -75,7 +75,7 @@ class GoogleMapsAddress
         return $this;
     }
 
-    public function getLat()
+    public function getLat(): float
     {
         return $this->lat;
     }
@@ -87,7 +87,7 @@ class GoogleMapsAddress
         return $this;
     }
 
-    public function getLng()
+    public function getLng(): float
     {
         return $this->lng;
     }

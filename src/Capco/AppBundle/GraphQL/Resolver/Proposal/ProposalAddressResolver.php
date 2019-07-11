@@ -18,7 +18,7 @@ class ProposalAddressResolver implements ResolverInterface
      *          formatted_address: string
  *              geometry: { location: { lat: float, lng: float }, location_type: string, viewport: not revelant }
      *          place_id: string
-     *          types: string[]
+     *          types: string, separated by a |
      *      }
      *  ]
      *
