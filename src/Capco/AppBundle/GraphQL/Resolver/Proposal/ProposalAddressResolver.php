@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
+use Capco\AppBundle\DTO\GoogleMapsAddress;
 use Capco\AppBundle\Entity\Proposal;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
@@ -23,20 +24,10 @@ class ProposalAddressResolver implements ResolverInterface
      *
      * @return array|null
      */
-    public function __invoke(Proposal $proposal): ?array
+    public function __invoke(Proposal $proposal): ?GoogleMapsAddress
     {
-        if ($adressFromApi = $proposal->getAddress()) {
-            $decoded = \GuzzleHttp\json_decode($adressFromApi, true);
-            if (count($decoded) > 0 && $address = $decoded[0]) {
-                return [
-                    'raw' => $adressFromApi,
-                    'formatted' => $address['formatted_address'] ?? null,
-                    'types' => explode('|', $address['geometry']['location_type']),
-                    'lat' => $address['geometry']['location']['lat'],
-                    'lng' => $address['geometry']['location']['lng']
-                ];
-            }
-            return null;
+        if ($addressFromApi = $proposal->getAddress()) {
+            return GoogleMapsAddress::fromApi($addressFromApi);
         }
 
         return null;
