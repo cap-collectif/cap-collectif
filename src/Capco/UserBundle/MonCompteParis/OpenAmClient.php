@@ -9,7 +9,7 @@ class OpenAmClient
     public const COOKIE_NAME = 'mcpAuth'; // Iplanetdirectorypro in test env
     public const COOKIE_DOMAIN = '.paris.fr';
     public const API_URL = 'https://moncompte.paris.fr/v69/json';
-    public const API_INFORMATIONS_URL = 'https://moncompte.paris.fr/moncompte/rest/banner/api/1/informations';
+    public const API_INFORMATIONS_URL = 'https://moncompte.paris.fr/v69/json/users/';
 
     protected $cookie;
     protected $client;
@@ -63,17 +63,17 @@ class OpenAmClient
         }
     }
 
-    public function getUserInformations(): array
+    public function getUserInformations(string $email): array
     {
-        $response = $this->client->get(self::API_INFORMATIONS_URL, [
+        $response = $this->client->get(self::API_INFORMATIONS_URL . $email, [
             'Cookie' => self::COOKIE_NAME . '=' . $this->cookie,
         ]);
         $json = json_decode((string) $response->getBody(), true);
-        if ('OK' !== $json['status']) {
+        if ($json) {
             $this->logger->critical('Error returned by moncompte.paris.fr', ['json' => $json]);
             throw new \RuntimeException('Error returned by moncompte.paris.fr.');
         }
 
-        return $json['result'];
+        return $json;
     }
 }
