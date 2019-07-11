@@ -29,6 +29,10 @@ type Props = {
   intl: IntlShape,
 } & ParentProps;
 
+// When creating a new question, we can not rely on __typename because it does not exists before creation
+// so this is used to determine if we can show the "choices" section of the question form when creating a new one
+const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
+
 export class ProposalFormAdminQuestionModal extends React.Component<Props> {
   render() {
     let disabled = false;
@@ -147,7 +151,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
               </option>
             </optgroup>
           </Field>
-          {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (
+          {multipleChoiceQuestions.includes(type) && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
                 <FormattedMessage id="admin.fields.reply.group_responses" />

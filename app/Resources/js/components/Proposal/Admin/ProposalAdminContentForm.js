@@ -462,46 +462,49 @@ const form = reduxForm({
   form: formName,
 })(ProposalAdminContentForm);
 
-const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => ({
-  isAdmin: !!(
-    (state.user.user && state.user.user.roles.includes('ROLE_ADMIN')) ||
-    (state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'))
-  ),
-  features: state.default.features,
-  themes: state.default.themes,
-  initialValues: {
-    draft: proposal.publicationStatus === 'DRAFT',
-    title: proposal.title,
-    body: proposal.body,
-    summary: proposal.summary,
-    author: {
-      value: proposal.author.id,
-      label: proposal.author.displayName,
-    },
-    theme:
-      state.default.features.themes && proposal.form.usingThemes
-        ? proposal.theme
+const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
+  const defaultResponses = formatInitialResponsesValues(proposal.form.questions, proposal.responses ? proposal.responses : []);
+  return ({
+    isAdmin: !!(
+      (state.user.user && state.user.user.roles.includes('ROLE_ADMIN')) ||
+      (state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'))
+    ),
+    features: state.default.features,
+    themes: state.default.themes,
+    initialValues: {
+      draft: proposal.publicationStatus === 'DRAFT',
+      title: proposal.title,
+      body: proposal.body,
+      summary: proposal.summary,
+      author: {
+        value: proposal.author.id,
+        label: proposal.author.displayName,
+      },
+      theme:
+        state.default.features.themes && proposal.form.usingThemes
+          ? proposal.theme
           ? proposal.theme.id
           : null
-        : undefined,
-    category: proposal.form.usingCategories
-      ? proposal.category
-        ? proposal.category.id
-        : null
-      : undefined,
-    district:
-      state.default.features.districts && proposal.form.usingDistrict
-        ? proposal.district
-          ? proposal.district.id
+          : undefined,
+      category: proposal.form.usingCategories
+        ? proposal.category
+          ? proposal.category.id
           : null
         : undefined,
-    address: proposal.form.usingAddress ? proposal.address : undefined,
-    media: proposal.media ? proposal.media : null,
-    responses: formatInitialResponsesValues(proposal.form.questions, proposal.responses),
-    addressText: proposal.address ? proposal.address.formatted : null,
-  },
-  responses: formValueSelector(formName)(state, 'responses'),
-});
+      district:
+        state.default.features.districts && proposal.form.usingDistrict
+          ? proposal.district
+          ? proposal.district.id
+          : null
+          : undefined,
+      address: proposal.form.usingAddress ? proposal.address : undefined,
+      media: proposal.media ? proposal.media : null,
+      responses: defaultResponses,
+      addressText: proposal.address ? proposal.address.formatted : null,
+    },
+    responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
+  });
+};
 
 const container = connect(mapStateToProps)(injectIntl(form));
 export default createFragmentContainer(container, {
@@ -543,20 +546,7 @@ export default createFragmentContainer(container, {
       }
       publicationStatus
       responses {
-        question {
-          id
-        }
-        ... on ValueResponse {
-          value
-        }
-        ... on MediaResponse {
-          medias {
-            id
-            name
-            size
-            url
-          }
-        }
+        ...responsesHelper_response @relay(mask: false)
       }
       media {
         id

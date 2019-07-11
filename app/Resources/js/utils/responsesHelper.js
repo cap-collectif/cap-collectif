@@ -731,6 +731,11 @@ export const formatSubmitResponses = (
   });
 };
 
+const getQuestionInitialValue = (question: Question) => {
+  // MediaQuestion have a default value of []
+  return question.__typename === 'MediaQuestion' ? [] : null
+};
+
 export const renderResponses = ({
   fields,
   questions,
@@ -758,7 +763,7 @@ export const renderResponses = ({
     const question = questions.find(q => q.id === id);
     if (question) {
       const indexInRedux = questions.indexOf(question);
-      change(`responses[${indexInRedux}].value`, null);
+      change(`responses[${indexInRedux}].value`, getQuestionInitialValue(question));
     }
   });
   return (
