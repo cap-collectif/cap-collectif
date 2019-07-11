@@ -320,16 +320,13 @@ export class ProposalForm extends React.Component<Props, State> {
       const districtIdsFilteredByAddress = data.availableDistrictsForLocalisation.map(
         district => district.id,
       );
-      // Select a district if not editing
-      if (!this.props.proposal) {
-        this.props.dispatch(
-          change(
-            formName,
-            'district',
-            districtIdsFilteredByAddress.length === 0 ? null : districtIdsFilteredByAddress[0],
-          ),
-        );
-      }
+      this.props.dispatch(
+        change(
+          formName,
+          'district',
+          districtIdsFilteredByAddress.length === 0 ? null : districtIdsFilteredByAddress[0],
+        ),
+      );
       this.setState({
         districtIdsFilteredByAddress,
       });
@@ -595,7 +592,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
     media: proposal ? proposal.media : undefined,
     addressText:
       proposal && proposal.address ? proposal.address.formatted : '',
-    address: (proposal && proposal.address) || undefined,
+    address: (proposal && proposal.address && proposal.address.raw) || undefined,
     responses: formatInitialResponsesValues(
       proposalForm.questions,
       proposal ? proposal.responses : [],
