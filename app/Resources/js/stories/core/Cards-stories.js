@@ -11,7 +11,7 @@ import { UserAvatarDeprecated } from '../../components/User/UserAvatarDeprecated
 import InlineList from '../../components/Ui/List/InlineList';
 import { author as authorMock } from '../mocks/users';
 
-const susan = authorMock;
+const user = authorMock;
 
 const bsStyleOption = {
   Warning: 'warning',
@@ -60,8 +60,8 @@ class EventCard extends React.Component<Props> {
           </h3>
           <p className="excerpt">
             {/* $FlowFixMe */}
-            <UserAvatarDeprecated size={16} user={susan} className="mr-10" />
-            <span className="font-weight-semi-bold">{susan.username}</span>
+            <UserAvatarDeprecated size={16} user={user} className="mr-10" />
+            <span className="font-weight-semi-bold">{user.username}</span>
           </p>
           <p className="excerpt">
             <i className="cap-calendar-1 mr-10" />
