@@ -2,18 +2,35 @@
 
 namespace Capco\AppBundle\Command\Nantes;
 
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\District;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectType;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalCategory;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
+use Capco\AppBundle\Entity\Questions\SimpleQuestion;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Enum\VoteType;
+use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
+use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -42,7 +59,7 @@ class NantesImportCommand extends ContainerAwareCommand
         'closeTextRight',
         'districtUuid',
         'contributions',
-        'infos'
+        'infos',
     ];
 
     protected const DEMARCHE_HEADER = [
@@ -54,7 +71,7 @@ class NantesImportCommand extends ContainerAwareCommand
         'thematicUuid',
         'contributions',
         'infos',
-        'concertations'
+        'concertations',
     ];
 
     protected const CONTRIBUTION_HEADER = [
@@ -68,7 +85,7 @@ class NantesImportCommand extends ContainerAwareCommand
         'role',
         'files',
         'createdDate',
-        'lastPublishedDate'
+        'lastPublishedDate',
     ];
 
     protected const ACTUALITY_HEADER = [
@@ -84,12 +101,12 @@ class NantesImportCommand extends ContainerAwareCommand
         'concertationUuid',
         'files',
         'createdAt',
-        'lastPublishedDate'
+        'lastPublishedDate',
     ];
 
     protected const PROJECTS = [
         self::DEMARCHE_FILE => self::DEMARCHE_HEADER,
-        self::CONCERTATION_FILE => self::CONCERTATION_HEADER
+        self::CONCERTATION_FILE => self::CONCERTATION_HEADER,
     ];
 
     /** @var EntityManagerInterface */
@@ -169,14 +186,14 @@ class NantesImportCommand extends ContainerAwareCommand
                 ->setLabel('Vos contributions')
                 ->setStartAt(new \DateTime())
                 ->setEndAt(new \DateTime())
-                ->setVoteType(VoteType::SIMPLE);
+                ->setVoteType(VoteTypeTrait::$VOTE_TYPE_SIMPLE);
             $avisStep = (new OtherStep())->setTitle('Avis Citoyen')->setLabel('Avis Citoyen');
             $resultStep = (new OtherStep())
                 ->setTitle('Réponse')
                 ->setLabel('Réponse')
                 ->setBody($row['closeTextLeft'] . ' ' . $row['closeTextRight']);
             $project = (new Project())
-                ->setTitle($row['titre'] ?? $row['id'])
+                ->setTitle(isset($row['titre']) ? $row['titre'] : $row['id'])
                 ->setAuthor($author)
                 ->setCreatedAt(new \DateTime())
                 ->setPublishedAt(new \DateTime())
@@ -279,20 +296,20 @@ class NantesImportCommand extends ContainerAwareCommand
             $progress = new ProgressBar($output, \count($proposals));
             $count = 1;
             $defaultAuthor = $this->em->getRepository(User::class)->findOneBy([
-                'email' => $this->nantesAuthor
+                'email' => $this->nantesAuthor,
             ]);
             foreach ($proposals as $proposal) {
                 $author =
                     $this->em->getRepository(User::class)->findOneBy([
-                        'openId' => $proposal['userUuid']
+                        'openId' => $proposal['userUuid'],
                     ]) ?? $defaultAuthor;
 
                 $description =
                     '' !== $proposal['videoLink']
                         ? $proposal['description'] .
-                            '<br/><a href="' .
+                            "<br/><a href=\"" .
                             $proposal['videoLink'] .
-                            '">Vidéo</a>'
+                            "\">Vidéo</a>"
                         : $proposal['description'];
                 $proposal = (new Proposal())
                     ->setTitle('Contribution n° ' . $count)
@@ -336,7 +353,7 @@ class NantesImportCommand extends ContainerAwareCommand
             $count = 1;
             foreach ($actualities as $actuality) {
                 $author = $this->em->getRepository(User::class)->findOneBy([
-                    'email' => $this->nantesAuthor
+                    'email' => $this->nantesAuthor,
                 ]);
                 if ($author) {
                     $actu = (new Post())
@@ -362,12 +379,12 @@ class NantesImportCommand extends ContainerAwareCommand
                                 rename(
                                     $filePath . $actuality['image'],
                                     $filePath .
-                                        str_replace(' ', '', $actuality['image']) .
+                                        str_replace(" ", "", $actuality['image']) .
                                         $extension
                                 );
                                 $file =
                                     $filePath .
-                                    str_replace(' ', '', $actuality['image']) .
+                                    str_replace(" ", "", $actuality['image']) .
                                     $extension;
                             } else {
                                 if (file_exists($file . '.jpg')) {

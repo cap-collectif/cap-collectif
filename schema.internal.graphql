@@ -331,9 +331,6 @@ type AddVersionPayload {
   clientMutationId: String
 }
 
-# A string containing Address code.
-scalar Address
-
 # A contribution
 type Answer {
   # Identifies the date and time when the object was created.
@@ -611,7 +608,6 @@ input BorderStyleInput {
 
 # Ordering options for categories returned from the connection.
 enum CategoryOrderField {
-  # Allows ordering a list of categories in an alphabetical order.
   ALPHABETICAL
 }
 
@@ -790,7 +786,7 @@ input ChangeProposalContentInput {
   district: String
 
   # The address geocoded by google
-  address: Address
+  address: String
 
   # The custom fields responses
   responses: [ResponseInput]
@@ -1652,25 +1648,12 @@ enum ContributionOrderField {
 
 # Different contribution type
 enum ContributionType {
-  # Get contributions that are an opnion
   OPINION
-
-  # Get contributions that are an opnion version
   OPINIONVERSION
-
-  # Get contributions that are a comment
   COMMENT
-
-  # Get contributions that are an argument
   ARGUMENT
-
-  # Get contributions that are a source
   SOURCE
-
-  # Get contributions that are a proposal
   PROPOSAL
-
-  # Get contributions that are a reply
   REPLY
 }
 
@@ -1782,7 +1765,7 @@ input CreateProposalInput {
   district: ID
 
   # The address geocoded by google
-  address: Address
+  address: String
 
   # The responses to the form questions
   responses: [ResponseInput]
@@ -2042,10 +2025,7 @@ input DistrictInput {
 
 # Ordering options for districts returned from the connection.
 enum DistrictOrderField {
-  # Allows ordering a list of districts in an alphabetical order.
   ALPHABETICAL
-
-  # Allows ordering a list of districts by when they were created.
   CREATED_AT
 }
 
@@ -2338,6 +2318,42 @@ enum GenderValue {
 
 # A string containing GeoJSON code.
 scalar GeoJSON
+
+# An address from Google Maps.
+type GoogleMapsAddress {
+  # The raw response from the Google Maps API that describes an address
+  json: String!
+
+  # A human-readable address string.
+  formatted: String
+
+  # The available types for this address. A type indicate the accuracy of the address on Google Maps.
+  types: [GoogleMapsAddressType!]!
+
+  # The latitude of this address.
+  lat: Float!
+
+  # The longitude of this address.
+  lng: Float!
+}
+
+# A list of possible types for a given address from Google Maps.
+enum GoogleMapsAddressType {
+  # Returns only the addresses for which Google has location information accurate down to street address precision.
+  ROOFTOP
+
+  # Returns only the addresses that reflect an approximation (usually on a road)
+  # interpolated between two precise points (such as intersections). An
+  # interpolated range generally indicates that rooftop geocodes are unavailable
+  # for a street address.
+  RANGE_INTERPOLATED
+
+  # Returns only geometric centers of a location such as a polyline (for example, a street) or polygon (region).
+  GEOMETRIC_CENTER
+
+  # Returns only the addresses that are characterized as approximate
+  APPROXIMATE
+}
 
 # A group of User
 type Group implements Node {
@@ -3767,7 +3783,7 @@ input ProjectOrder {
 
 # Ordering options for projects returned from the connection.
 enum ProjectOrderField {
-  # Allows ordering a list of projects by their number of contributions.
+  # Allows ordering a list of projects by there number of contributions.
   POPULAR
 
   # Allows ordering a list of projects by when they were published.
@@ -3955,8 +3971,7 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   theme: Theme
   category: ProposalCategory
   district: ProposalDistrict
-  address: Address
-  formattedAddress: String
+  address: GoogleMapsAddress
 
   # The delete date.
   deletedAt: DateTime
@@ -4020,10 +4035,7 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
 
 # The affiliation of a user to a proposal
 enum ProposalAffiliation {
-  # Show only the proposals where the current user is an owner
   OWNER
-
-  # Show only the proposals where the current user is an evaluer
   EVALUER
 }
 
@@ -5355,20 +5367,11 @@ enum ReportingOrderField {
 
 # Type of reporting
 enum ReportingType {
-  # The associated contribution has been flagged as sexual content
-  SEX
-
-  # The associated contribution has been flagged as offending content
-  OFF
-
-  # The associated contribution has been flagged as spam
-  SPAM
-
-  # The associated contribution has been flagged as erroneous
   ERROR
-
-  # The associated contribution has been flagged as off topic
+  OFF
   OFF_TOPIC
+  SEX
+  SPAM
 }
 
 input RequestUserArchiveInput {
@@ -6255,13 +6258,8 @@ type Style {
 
 # 3 possible values for a subscription.
 enum SubscriptionTypeValue {
-  # Get all notifications for this subscription
   ALL
-
-  # Get essentials notifications for this subscription
   ESSENTIAL
-
-  # Get minimal notifications for this subscription
   MINIMAL
 }
 

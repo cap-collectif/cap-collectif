@@ -4,11 +4,11 @@ CommentOrderField:
     description: 'Ordering options for comments returned from the connection.'
     values:
       PUBLISHED_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\CommentOrderField::PUBLISHED_AT")'
+        value: 'PUBLISHED_AT'
         description: 'Allows ordering a list of comments by when they were published.'
       UPDATED_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\CommentOrderField::UPDATED_AT")'
+        value: 'UPDATED_AT'
         description: 'Allows ordering a list of comments by when they were updated.'
       POPULARITY:
-        value: '@=constant("Capco\\AppBundle\\Enum\\CommentOrderField::POPULARITY")'
+        value: 'POPULARITY'
         description: 'Allows ordering a list of comments by there likes.'

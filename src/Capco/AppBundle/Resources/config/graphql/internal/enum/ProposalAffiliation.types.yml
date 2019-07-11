@@ -4,8 +4,6 @@ ProposalAffiliation:
     description: The affiliation of a user to a proposal
     values:
       OWNER:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAffiliations::OWNER")'
-        description: 'Show only the proposals where the current user is an owner'
+        value: OWNER
       EVALUER:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAffiliations::EVALUER")'
-        description: 'Show only the proposals where the current user is an evaluer'
+        value: EVALUER

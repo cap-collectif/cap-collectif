@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\Security\Http\Logout;
 
-use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\MonCompteParis\OpenAmClient;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
@@ -38,7 +37,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     {
         $deleteType = $request->get('deleteType');
         $returnTo =
-            DeleteAccountType::SOFT === $deleteType || DeleteAccountType::HARD === $deleteType
+            'SOFT' === $deleteType || 'HARD' === $deleteType
                 ? $this->router->generate('app_homepage', ['deleteType' => $deleteType])
                 : $request->headers->get('referer', '/');
 

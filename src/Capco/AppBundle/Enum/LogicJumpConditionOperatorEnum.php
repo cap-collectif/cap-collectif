@@ -1,21 +1,20 @@
 <?php
-
 namespace Capco\AppBundle\Enum;
 
-class LogicJumpConditionOperator
+abstract class LogicJumpConditionOperatorEnum
 {
-    public const IS = 'IS';
-    public const IS_NOT = 'IS_NOT';
+    public const CONDITION_OPERATOR_IS = 'IS';
+    public const CONDITION_OPERATOR_IS_NOT = 'IS_NOT';
 
     protected static $operatorName = [
-        self::IS => 'logic-jump.is',
-        self::IS_NOT => 'logic-jump.is_not'
+        self::CONDITION_OPERATOR_IS => 'logic-jump.is',
+        self::CONDITION_OPERATOR_IS_NOT => 'logic-jump.is_not',
     ];
 
     public static function getOperatorValue(string $operatorShortName): string
     {
         if (!isset(static::$operatorName[$operatorShortName])) {
-            throw new \RuntimeException("Unknown operator '${operatorShortName}'");
+            throw new \RuntimeException("Unknown operator '$operatorShortName'");
         }
 
         return static::$operatorName[$operatorShortName];
@@ -28,11 +27,6 @@ class LogicJumpConditionOperator
 
     public static function getAvailableOperatorValues(): array
     {
-        return [self::IS, self::IS_NOT];
-    }
-
-    public static function getAvailableOperatorValuesToString(): string
-    {
-        return implode(' | ', self::getAvailableOperatorValues());
+        return [self::CONDITION_OPERATOR_IS, self::CONDITION_OPERATOR_IS_NOT];
     }
 }

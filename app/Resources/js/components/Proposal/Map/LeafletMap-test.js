@@ -11,7 +11,6 @@ describe('<LeafletMap />', () => {
   };
 
   const step = {
-    dispatch: jest.fn(),
     stepId: 'step1',
     stepType: 'collect',
     mapTokens: {
@@ -26,31 +25,29 @@ describe('<LeafletMap />', () => {
     },
   };
 
-  const markers = {
-    markers: [
-      {
-        lat: 49.8397,
-        lng: 24.0297,
-        url: 'http://test',
-        title: 'test',
-        author: { username: 'test', url: 'http://test' },
-      },
-      {
-        lat: 52.2297,
-        lng: 21.0122,
-        url: 'http://test',
-        title: 'test',
-        author: { username: 'test', url: 'http://test' },
-      },
-      {
-        lat: 51.5074,
-        lng: -0.0901,
-        url: 'http://test',
-        title: 'test',
-        author: { username: 'test', url: 'http://test' },
-      },
-    ],
-  };
+  const markers = [
+    {
+      lat: 49.8397,
+      lng: 24.0297,
+      url: 'http://test',
+      title: 'test',
+      author: { username: 'test', url: 'http://test' },
+    },
+    {
+      lat: 52.2297,
+      lng: 21.0122,
+      url: 'http://test',
+      title: 'test',
+      author: { username: 'test', url: 'http://test' },
+    },
+    {
+      lat: 51.5074,
+      lng: -0.0901,
+      url: 'http://test',
+      title: 'test',
+      author: { username: 'test', url: 'http://test' },
+    },
+  ];
 
   it('should render a map with markers', () => {
     const wrapper = shallow(

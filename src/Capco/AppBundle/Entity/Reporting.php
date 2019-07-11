@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Enum\ReportingType;
 use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TextableTrait;
@@ -20,12 +19,18 @@ class Reporting implements CreatableInterface
 {
     use IdTrait, TextableTrait;
 
+    const SIGNALEMENT_SEX = 0;
+    const SIGNALEMENT_OFF = 1;
+    const SIGNALEMENT_SPAM = 2;
+    const SIGNALEMENT_ERROR = 3;
+    const SIGNALEMENT_OFF_TOPIC = 4;
+
     public static $statusesLabels = [
-        ReportingType::SEX => 'reporting.status.sexual',
-        ReportingType::OFF => 'reporting.status.offending',
-        ReportingType::SPAM => 'reporting.status.spam',
-        ReportingType::ERROR => 'reporting.status.error',
-        ReportingType::OFF_TOPIC => 'reporting.status.off_topic'
+        self::SIGNALEMENT_SPAM => 'reporting.status.spam',
+        self::SIGNALEMENT_OFF => 'reporting.status.offending',
+        self::SIGNALEMENT_ERROR => 'reporting.status.error',
+        self::SIGNALEMENT_OFF_TOPIC => 'reporting.status.off_topic',
+        self::SIGNALEMENT_SEX => 'reporting.status.sexual',
     ];
 
     /**

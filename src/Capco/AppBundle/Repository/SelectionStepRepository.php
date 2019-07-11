@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Enum\VoteType;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 
 class SelectionStepRepository extends AbstractStepRepository
 {
@@ -13,7 +13,7 @@ class SelectionStepRepository extends AbstractStepRepository
         $expr = $qb->expr();
         $qb
             ->leftJoin('ss.projectAbstractStep', 'pas')
-            ->andWhere($expr->neq('ss.voteType', VoteType::DISABLED))
+            ->andWhere($expr->neq('ss.voteType', SelectionStep::$VOTE_TYPE_DISABLED))
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)
             ->orderBy('pas.position');

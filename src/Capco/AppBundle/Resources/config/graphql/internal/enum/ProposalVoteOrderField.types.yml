@@ -4,5 +4,5 @@ ProposalVoteOrderField:
     description: 'Ordering options for proposals votes connections.'
     values:
       PUBLISHED_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::PUBLISHED_AT")'
+        value: 'PUBLISHED_AT'
         description: 'Allows ordering a list of vote by when they were published.'

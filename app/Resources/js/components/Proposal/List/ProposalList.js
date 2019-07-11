@@ -10,12 +10,13 @@ import VisibilityBox from '../../Utils/VisibilityBox';
 import type { ProposalList_step } from '~relay/ProposalList_step.graphql';
 import type { ProposalList_viewer } from '~relay/ProposalList_viewer.graphql';
 import type { ProposalList_proposals } from '~relay/ProposalList_proposals.graphql';
+import type {ProposalViewMode} from "../../../redux/modules/proposal"
 
 type Props = {
   step: ?ProposalList_step,
   proposals: ProposalList_proposals,
   viewer: ?ProposalList_viewer,
-  view?: 'mosaic' | 'table',
+  view?: ProposalViewMode,
 };
 
 const classes = classNames({
@@ -98,6 +99,7 @@ export default createFragmentContainer(ProposalList, {
       id
       ...ProposalListTable_step
       ...ProposalPreview_step
+      ...ProposalsDisplayMap_step
     }
   `,
   proposals: graphql`

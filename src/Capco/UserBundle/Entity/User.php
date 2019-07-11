@@ -25,9 +25,9 @@ class User extends BaseUser implements
     EquatableInterface,
     IndexableInterface
 {
-    public const GENDER_OTHER = 'o';
-    protected const SORT_ORDER_CREATED_AT = 0;
-    protected const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
+    const SORT_ORDER_CREATED_AT = 0;
+    const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
+    const GENDER_OTHER = 'o';
 
     public static $sortOrder = [
         'activity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,

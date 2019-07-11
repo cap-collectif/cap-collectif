@@ -4,8 +4,6 @@ DistrictOrderField:
     description: 'Ordering options for districts returned from the connection.'
     values:
       ALPHABETICAL:
-        value: '@=constant("Capco\\AppBundle\\Enum\\DistrictOrderField::ALPHABETICAL")'
-        description: 'Allows ordering a list of districts in an alphabetical order.'
+        value: 'ALPHABETICAL'
       CREATED_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\DistrictOrderField::CREATED_AT")'
-        description: 'Allows ordering a list of districts by when they were created.'
+        value: 'CREATED_AT'

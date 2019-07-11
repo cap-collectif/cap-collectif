@@ -4,20 +4,20 @@ ContributionOrderField:
     description: 'Ordering options for contributions connections.'
     values:
       COMMENT_COUNT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrderField::COMMENT_COUNT")'
+        value: 'COMMENT_COUNT'
         description: 'Allows ordering a list of contributions by there number of comments.'
       POPULAR:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrderField::POPULAR")'
+        value: 'POPULAR'
         description: 'Allows ordering a list of contributions by there number of votes ok.'
       POSITION:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrderField::POSITION")'
+        value: 'POSITION'
         description: 'Allows ordering a list of contributions by there position.'
       PUBLISHED_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrderField::PUBLISHED_AT")'
+        value: 'PUBLISHED_AT'
         description: 'Allows ordering a list of contributions by when they were published.'
       RANDOM:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrderField::RANDOM")'
+        value: 'RANDOM'
         description: 'Allows ordering a list of contributions randomly.'
       VOTE_COUNT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrderField::VOTE_COUNT")'
+        value: 'VOTE_COUNT'
         description: 'Allows ordering a list of contributions by there number of votes.'

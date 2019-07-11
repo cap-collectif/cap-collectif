@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
@@ -73,7 +72,7 @@ class DeleteAccountMutation implements MutationInterface
         }
 
         $this->hardDeleteUserContributionsInActiveSteps($user);
-        if (DeleteAccountType::HARD === $deleteType && $user) {
+        if ('HARD' === $deleteType && $user) {
             $this->hardDelete($user);
         }
 
@@ -88,7 +87,7 @@ class DeleteAccountMutation implements MutationInterface
     {
         $usernameDeleted = $this->translator->trans('deleted-user', [], 'CapcoAppBundle');
         $newsletter = $this->em->getRepository(NewsletterSubscription::class)->findOneBy([
-            'email' => $user->getEmail()
+            'email' => $user->getEmail(),
         ]);
         $userGroups = $this->groupRepository->findBy(['user' => $user]);
 
@@ -187,7 +186,7 @@ class DeleteAccountMutation implements MutationInterface
 
             if ($contribution instanceof Comment) {
                 $hasChild = $this->em->getRepository('CapcoAppBundle:Comment')->findOneBy([
-                    'parent' => $contribution->getId()
+                    'parent' => $contribution->getId(),
                 ]);
                 if ($hasChild) {
                     $contribution->setBody($deletedBodyText);

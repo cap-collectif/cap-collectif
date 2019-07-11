@@ -4,14 +4,14 @@ CommentPublicationStatus:
     description: 'Available statuses'
     values:
       UNPUBLISHED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\CommentPublicationStatus::UNPUBLISHED")'
+        value: 'UNPUBLISHED'
         description: 'Visible by author only.'
       PUBLISHED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\CommentPublicationStatus::PUBLISHED")'
+        value: 'PUBLISHED'
         description: 'Normal status, Publicly visible'
       TRASHED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\CommentPublicationStatus::TRASHED")'
+        value: 'TRASHED'
         description: 'Publicly visible in the trash bin'
       TRASHED_NOT_VISIBLE:
-        value: '@=constant("Capco\\AppBundle\\Enum\\CommentPublicationStatus::TRASHED_NOT_VISIBLE")'
+        value: 'TRASHED_NOT_VISIBLE'
         description: 'In the trash bin, content not visible'

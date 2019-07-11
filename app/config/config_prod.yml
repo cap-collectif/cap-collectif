@@ -1,6 +1,11 @@
 imports:
   - { resource: config.yml }
 
+services:
+  Sentry\Monolog\Handler:
+    autoconfigure: true
+    autowire: true
+
 framework:
   validation:
     cache: validator.mapping.cache.doctrine.apc
@@ -25,6 +30,10 @@ monolog:
     nested:
       type: stream
       path: 'php://stderr'
+      level: warning
+    sentry:
+      type: service
+      id: Sentry\Monolog\Handler
       level: warning
 
 swiftmailer:
