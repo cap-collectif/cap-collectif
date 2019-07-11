@@ -11,6 +11,7 @@ import { Modal, ListGroupItem, ListGroup } from 'react-bootstrap';
 import type { State, FeatureToggles } from '../../../types';
 import CloseButton from '../../Form/CloseButton';
 import UserAvatar from '../../User/UserAvatar';
+
 import type { ProjectHeaderAuthorsModal_users } from '~relay/ProjectHeaderAuthorsModal_users.graphql';
 
 type Props = {|
@@ -40,13 +41,14 @@ const renderAuthorItemUserName = (user, profileFeature) =>
   ) : (
     <span className="font-weight-bold">{user.username}</span>
   );
-const renderAuthorsList = (users: ProjectHeaderAuthorsModal_users, features) =>
+
+const renderAuthorsList = (users: ProjectHeaderAuthorsModal_users, features: FeatureToggles) =>
   users.map(user => (
     <ProjectAuthorItem>
       <div className="d-flex">
         <UserAvatar user={user} features={features} />
         <div className="d-flex fd-column">
-          {renderAuthorItemUserName(user, features.profiles)}{' '}
+          {renderAuthorItemUserName(user, !!features.profiles)}{' '}
           <span className="excerpt">{user.userType ? user.userType.name : ''}</span>
         </div>
       </div>
