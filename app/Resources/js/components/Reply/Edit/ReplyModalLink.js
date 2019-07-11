@@ -53,7 +53,11 @@ export class ReplyModalLink extends React.Component<Props, State> {
                   />
                 ),
                 time: (
-                  <FormattedDate value={moment(reply.createdAt)} hour="numeric" minute="numeric" />
+                  <FormattedDate
+                    value={moment(reply.publishedAt ? reply.publishedAt : reply.createdAt)}
+                    hour="numeric"
+                    minute="numeric"
+                  />
                 ),
               }}
             />
@@ -65,7 +69,7 @@ export class ReplyModalLink extends React.Component<Props, State> {
             )}
             {/* $FlowFixMe $refType */}
             <ReplyDraftLabel draft={reply.draft} />
-            <UnpublishedLabel publishable={reply} />
+            {!reply.draft && <UnpublishedLabel publishable={reply} />}
           </div>
           <div>
             <Button

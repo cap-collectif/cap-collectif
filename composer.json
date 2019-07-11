@@ -213,7 +213,8 @@
         "friendsofphp/php-cs-fixer": "^2.13",
         "phpstan/phpstan-symfony": "^0.11.2",
         "phpstan/phpstan": "^0.11.4",
-        "symfony/maker-bundle": "^1.11"
+        "symfony/maker-bundle": "^1.11",
+        "dg/bypass-finals": "^1.1"
     },
     "scripts": {
         "post-install-cmd": [

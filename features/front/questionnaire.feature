@@ -159,22 +159,28 @@ Scenario: Logged in user wants to update a draft to a questionnaire with wrong v
   And I should see my reply
 
 ## Deletion
-@database
+@database @draft
 Scenario: Logged in user wants to remove a reply
   Given I am logged in as admin
   When I go to a questionnaire step
   And I click the delete reply button
-  When I wait 1 seconds
+  And I wait "#delete-reply-modal-UmVwbHk6cmVwbHky" to appear on current page
   And I confirm reply deletion
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.delete.success" in the "#global-alert-box" element
-  When I wait 1 seconds  
+  And I wait "#delete-reply-modal-UmVwbHk6cmVwbHky" to disappear on current page
   And I click the delete reply draft button
-  When I wait 1 seconds
+  And I wait "#delete-reply-modal-UmVwbHk6cmVwbHk1" to appear on current page
   And I confirm reply draft deletion
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.delete.success" in the "#global-alert-box" element
-  And I wait 1 seconds
+  And I wait "#delete-reply-modal-UmVwbHk6cmVwbHk1" to disappear on current page
+  And I click the delete 2nd reply draft button
+  And I wait "#delete-reply-modal-UmVwbHk6cmVwbHk5" to appear on current page
+  And I confirm 2nd reply draft deletion
+  And I wait "#global-alert-box .alert-success" to appear on current page
+  Then I should see "reply.request.delete.success" in the "#global-alert-box" element
+  And I wait "#delete-reply-modal-UmVwbHk6cmVwbHk5" to disappear on current page
   And I should not see my reply anymore
 
 @security

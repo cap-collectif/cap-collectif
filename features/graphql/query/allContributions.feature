@@ -15,7 +15,7 @@ Scenario: GraphQL admin want to get users including superadmin
   """
   {
     "data": {
-      "allContributions": 575
+      "allContributions": 577
     }
   }
   """

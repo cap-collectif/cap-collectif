@@ -582,3 +582,23 @@ Capco\AppBundle\Entity\Proposal:
     trashedAt: <((new \DateTime('2019-03-01 00:23:00'))->modify("+ $current days"))>
     trashedStatus: 'invisible'
     trashedReason: 'Bad words <current()>'
+  proposal103:
+    id: proposal103
+    title: Test de publication sans accusé de réception
+    body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+    author: '@user4'
+    proposalForm: '@proposalFormVote'
+    reference: 1103
+    createdAt: <(new \DateTime('2018-03-02 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-10 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-11 00:00:00'))>
+  proposal104:
+    id: proposal104
+    title: Test de publication avec accusé de réception
+    body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+    author: '@user4'
+    proposalForm: '@proposalform1'
+    reference: 1104
+    createdAt: <(new \DateTime('2018-04-02 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-04-10 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-04-11 00:00:00'))>
