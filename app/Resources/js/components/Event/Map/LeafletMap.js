@@ -234,6 +234,7 @@ export class LeafletMap extends Component<Props, State> {
                                   {/* $FlowFixMe */}
                                   <UserAvatarDeprecated
                                     size={16}
+                                    className="mr-10"
                                     user={this.state.currentEvent.author}
                                   />
                                   <span className="font-weight-semi-bold">
