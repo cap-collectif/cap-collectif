@@ -68,7 +68,7 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               type="text"
               required
               component={component}
-              label={<span>Nom</span>}
+              label={<FormattedMessage id="global.name" />}
             />
             <h4>Configuration</h4>
             <Field
@@ -77,7 +77,7 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               type="text"
               required
               component={component}
-              label={<span>URL d'autorisation</span>}
+              label={<FormattedMessage id="authorization-URL" />}
             />
             <Field
               id={`${formName}_accessTokenUrl`}
@@ -85,7 +85,7 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               type="text"
               required
               component={component}
-              label={<span>URL du jeton d'accès</span>}
+              label={<FormattedMessage id="access-token-URL" />}
             />
             <Field
               id={`${formName}_userInfoUrl`}
@@ -93,14 +93,14 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               type="text"
               required
               component={component}
-              label={<span>URL d'information utilisateur</span>}
+              label={<FormattedMessage id="user-information-url" />}
             />
             <Field
               id={`${formName}_logoutUrl`}
               name="logoutUrl"
               type="text"
               component={component}
-              label={<span>URL de déconnexion</span>}
+              label={<FormattedMessage id="access-disconnection-url" />}
             />
             <Field
               id={`${formName}_clientId`}
@@ -108,7 +108,7 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               type="text"
               required
               component={component}
-              label={<span>ID Client</span>}
+              label={<FormattedMessage id="client-id" />}
             />
             <Field
               id={`${formName}_secret`}
@@ -116,7 +116,7 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               type="text"
               required
               component={component}
-              label={<span>Clé secrète</span>}
+              label={<FormattedMessage id="secret" />}
             />
             <Field
               id={`${formName}_redirectUri`}
@@ -124,7 +124,7 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               disabled
               type="text"
               component={component}
-              label={<span>Lien de l'authentification unique</span>}
+              label={<FormattedMessage id="sso-link" />}
             />
           </Modal.Body>
           <Modal.Footer>

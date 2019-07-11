@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { ListGroupItem } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { SSOConfigurationItem_configuration } from '~relay/SSOConfigurationItem_configuration.graphql';
 import Oauth2SSOConfigurationItem from './Oauth2SSOConfigurationItem';
@@ -21,7 +22,11 @@ const getConcreteSSOElementItem = (
       /* $FlowFixMe $refType */
       return <Oauth2SSOConfigurationItem configuration={configuration} />;
     default:
-      return <div>Configuration inconnue.</div>;
+      return (
+        <div>
+          <FormattedMessage id="open-id-authentication-method" />
+        </div>
+      );
   }
 };
 

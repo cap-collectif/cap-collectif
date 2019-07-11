@@ -13,14 +13,16 @@ exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
       <h3
         className="box-title"
       >
-        <span>
-          Méthode d'authentification Open ID
-        </span>
+        <FormattedMessage
+          id="open-id-authentication-method"
+          values={Object {}}
+        />
       </h3>
     </div>
-    <span>
-      Aucun méthode configurée
-    </span>
+    <FormattedMessage
+      id="no-method-configured"
+      values={Object {}}
+    />
     <Button
       active={false}
       block={false}
@@ -57,9 +59,10 @@ exports[`<ListSSOConfiguration /> renders correctly with items 1`] = `
       <h3
         className="box-title"
       >
-        <span>
-          Méthode d'authentification Open ID
-        </span>
+        <FormattedMessage
+          id="open-id-authentication-method"
+          values={Object {}}
+        />
       </h3>
     </div>
     <ListGroup

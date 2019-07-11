@@ -38,7 +38,7 @@ export class ListSSOConfiguration extends React.Component<Props, State> {
         <div className="mt-30 mb-15">
           <div className="box-header">
             <h3 className="box-title">
-              <span>Méthode d'authentification Open ID</span>
+              <FormattedMessage id="open-id-authentication-method" />
             </h3>
           </div>
           {ssoConfigurations.edges && ssoConfigurations.edges.length > 0 ? (
@@ -53,7 +53,7 @@ export class ListSSOConfiguration extends React.Component<Props, State> {
                 ))}
             </ListGroup>
           ) : (
-            <span>Aucun méthode configurée</span>
+            <FormattedMessage id="no-method-configured" />
           )}
           <Button
             bsStyle="primary"

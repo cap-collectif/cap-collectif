@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { Oauth2SSOConfigurationItem } from './Oauth2SSOConfigurationItem';
-import { $refType } from '../../../mocks';
+import { $refType, intlMock } from '../../../mocks';
 
 describe('<Oauth2SSOConfigurationItem />', () => {
   const props = {
@@ -19,6 +19,7 @@ describe('<Oauth2SSOConfigurationItem />', () => {
       logoutUrl: 'https://localhost:8888/logout',
       redirectUri: 'https://capco.test/login/check-openid',
     },
+    intl: intlMock,
   };
 
   it('renders correctly', () => {

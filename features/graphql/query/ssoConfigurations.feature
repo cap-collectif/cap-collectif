@@ -22,7 +22,6 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
               accessTokenUrl
               userInfoUrl
               logoutUrl
-              profileUrl
               redirectUri
             }
           }
@@ -41,7 +40,7 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
         "edges": [
           {
             "node": {
-              "id": "RXZlbnQ6c3NvT2F1dGgy",
+              "id": "T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
               "name": "Cap collectif Oauth2 Provider",
               "enabled": true,
               "clientId": "account",

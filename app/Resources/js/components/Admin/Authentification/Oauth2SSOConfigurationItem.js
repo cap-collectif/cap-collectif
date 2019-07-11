@@ -3,7 +3,7 @@ import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { Oauth2SSOConfigurationItem_configuration } from '~relay/Oauth2SSOConfigurationItem_configuration.graphql';
 import { Button, ButtonToolbar } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, type IntlShape } from 'react-intl';
 import Oauth2SSOConfigurationModal from './Oauth2SSOConfigurationModal';
 
 type RelayProps = {|
@@ -12,6 +12,7 @@ type RelayProps = {|
 
 type Props = {|
   ...RelayProps,
+  intl: IntlShape,
 |};
 
 type State = {|
@@ -28,7 +29,7 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
   };
 
   render() {
-    const { configuration } = this.props;
+    const { configuration, intl } = this.props;
     const { showModal } = this.state;
 
     return (
@@ -50,7 +51,16 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
             bsStyle="danger"
             className="btn-outline-danger"
             onClick={() => {
-              // remove mutation with configuration.id
+              if (
+                // eslint-disable-next-line no-alert
+                window.confirm(
+                  intl.formatMessage({
+                    id: 'are-you-sure-you-want-to-delete-the-authentication-method',
+                  }),
+                )
+              ) {
+                // remove mutation with configuration.id
+              }
             }}>
             <i className="fa fa-trash" />
           </Button>
