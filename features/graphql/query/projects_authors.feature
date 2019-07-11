@@ -14,15 +14,15 @@ Scenario: GraphQL client wants to list projects authors
   """
   Then the JSON response should match:
   """
-  {
-    "data":{
-      "projectAuthors":[
-        {"username":"lbrunet"},
-        {"username":"sfavot"},
-        {"username":"xlacot"},
-        {"username":"admin"},
-        {"username":"welcomattic"}
-      ]
+    {
+      "data":{
+        "projectAuthors":[
+          {"username":"admin"},
+          {"username":"xlacot"},
+          {"username":"welcomattic"},
+          {"username":"sfavot"},
+          {"username":"lbrunet"}
+        ]
+      }
     }
-  }
-"""
+  """
