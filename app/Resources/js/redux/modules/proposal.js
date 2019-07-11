@@ -1,7 +1,6 @@
 // @flow
-import { takeEvery, select, call, put } from 'redux-saga/effects';
+import { takeEvery, select } from 'redux-saga/effects';
 import LocalStorageService from '../../services/LocalStorageService';
-import Fetcher from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import addVote from '../../mutations/AddProposalVoteMutation';
