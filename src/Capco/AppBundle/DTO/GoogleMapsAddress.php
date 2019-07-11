@@ -23,17 +23,21 @@ class GoogleMapsAddress
 
     public static function fromApi(string $response): ?self
     {
-        $decoded = \GuzzleHttp\json_decode($response, true);
-        if (count($decoded) > 0 && $address = $decoded[0]) {
-            return new self(
-                $response,
-                explode('|', $address['geometry']['location_type']),
-                (float)$address['geometry']['location']['lat'],
-                (float)$address['geometry']['location']['lng'],
-                $address['formatted_address'] ?? null
-            );
+        try {
+            $decoded = \GuzzleHttp\json_decode($response, true);
+            if (count($decoded) > 0 && $address = $decoded[0]) {
+                return new self(
+                    $response,
+                    explode('|', $address['geometry']['location_type']),
+                    (float)$address['geometry']['location']['lat'],
+                    (float)$address['geometry']['location']['lng'],
+                    $address['formatted_address'] ?? null
+                );
+            }
+            return null;
+        } catch (\InvalidArgumentException $exception) {
+            return null;
         }
-        return null;
     }
 
     public function getRaw(): string
