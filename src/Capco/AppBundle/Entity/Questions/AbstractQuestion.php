@@ -31,17 +31,17 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     use SluggableUpdatableTitleTrait;
     use IdTrait;
 
-    const QUESTION_TYPE_SIMPLE_TEXT = 0;
-    const QUESTION_TYPE_MULTILINE_TEXT = 1;
-    const QUESTION_TYPE_EDITOR = 2;
-    const QUESTION_TYPE_RADIO = 3;
-    const QUESTION_TYPE_SELECT = 4;
-    const QUESTION_TYPE_CHECKBOX = 5;
-    const QUESTION_TYPE_RANKING = 6;
-    const QUESTION_TYPE_MEDIAS = 7;
-    const QUESTION_TYPE_BUTTON = 8;
-    const QUESTION_TYPE_NUMBER = 9;
-    const QUESTION_TYPE_SECTION = 10;
+    public const QUESTION_TYPE_SIMPLE_TEXT = 0;
+    public const QUESTION_TYPE_MULTILINE_TEXT = 1;
+    public const QUESTION_TYPE_EDITOR = 2;
+    public const QUESTION_TYPE_RADIO = 3;
+    public const QUESTION_TYPE_SELECT = 4;
+    public const QUESTION_TYPE_CHECKBOX = 5;
+    public const QUESTION_TYPE_RANKING = 6;
+    public const QUESTION_TYPE_MEDIAS = 7;
+    public const QUESTION_TYPE_BUTTON = 8;
+    public const QUESTION_TYPE_NUMBER = 9;
+    public const QUESTION_TYPE_SECTION = 10;
 
     public static $questionTypesInputs = [
         self::QUESTION_TYPE_SIMPLE_TEXT => 'text',

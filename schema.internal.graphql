@@ -1651,12 +1651,25 @@ enum ContributionOrderField {
 
 # Different contribution type
 enum ContributionType {
+  # Get contributions that are an opnion
   OPINION
+
+  # Get contributions that are an opnion version
   OPINIONVERSION
+
+  # Get contributions that are a comment
   COMMENT
+
+  # Get contributions that are an argument
   ARGUMENT
+
+  # Get contributions that are a source
   SOURCE
+
+  # Get contributions that are a proposal
   PROPOSAL
+
+  # Get contributions that are a reply
   REPLY
 }
 
@@ -3750,7 +3763,7 @@ input ProjectOrder {
 
 # Ordering options for projects returned from the connection.
 enum ProjectOrderField {
-  # Allows ordering a list of projects by there number of contributions.
+  # Allows ordering a list of projects by their number of contributions.
   POPULAR
 
   # Allows ordering a list of projects by when they were published.
@@ -4003,7 +4016,10 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
 
 # The affiliation of a user to a proposal
 enum ProposalAffiliation {
+  # Show only the proposals where the current user is an owner
   OWNER
+
+  # Show only the proposals where the current user is an evaluer
   EVALUER
 }
 
@@ -6226,8 +6242,13 @@ type Style {
 
 # 3 possible values for a subscription.
 enum SubscriptionTypeValue {
+  # Get all notifications for this subscription
   ALL
+
+  # Get essentials notifications for this subscription
   ESSENTIAL
+
+  # Get minimal notifications for this subscription
   MINIMAL
 }
 

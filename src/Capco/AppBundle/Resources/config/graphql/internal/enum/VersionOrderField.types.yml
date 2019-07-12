@@ -4,17 +4,17 @@ VersionOrderField:
     description: 'Properties by which version connections can be ordered'
     values:
       PUBLISHED_AT:
-        value: 'PUBLISHED_AT'
+        value: '@=constant("Capco\\AppBundle\\Enum\\VersionOrderField::PUBLISHED_AT")'
         description: 'Allows ordering a list of versions by when they were published.'
       VOTES:
-        value: 'VOTES'
+        value: '@=constant("Capco\\AppBundle\\Enum\\VersionOrderField::VOTES")'
         description: 'Allows ordering a list of versions by the number of votes it have.'
       ARGUMENTS:
-        value: 'ARGUMENTS'
+        value: '@=constant("Capco\\AppBundle\\Enum\\VersionOrderField::ARGUMENTS")'
         description: 'Allows ordering a list of versions by the number of arguments it have.'
       VOTES_OK:
-        value: 'VOTES_OK'
+        value: '@=constant("Capco\\AppBundle\\Enum\\VersionOrderField::VOTES_OK")'
         description: 'Allows ordering a list of versions by the number of votes ok it have.'
       RANDOM:
-        value: 'RANDOM'
+        value: '@=constant("Capco\\AppBundle\\Enum\\VersionOrderField::RANDOM")'
         description: 'Allows ordering a list of versions randomly.'

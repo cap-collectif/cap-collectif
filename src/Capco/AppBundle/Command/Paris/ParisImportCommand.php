@@ -19,11 +19,11 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\Enum\VoteType;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\ProjectTypeRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
-use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Cocur\Slugify\Slugify;
@@ -58,7 +58,7 @@ class ParisImportCommand extends ContainerAwareCommand
         'created_at',
         'updated_at',
         'end_at',
-        'filename',
+        'filename'
     ];
 
     protected const CATEGORY_HEADER = ['project_id', 'name'];
@@ -68,7 +68,7 @@ class ParisImportCommand extends ContainerAwareCommand
         'author_name',
         'body',
         'created_at',
-        'updated_at',
+        'updated_at'
     ];
 
     protected const PROPOSAL_HEADER = [
@@ -86,7 +86,7 @@ class ParisImportCommand extends ContainerAwareCommand
         'diagnostic',
         'objectif',
         'created_at',
-        'updated_at',
+        'updated_at'
     ];
 
     protected const STATUSES = [
@@ -97,7 +97,7 @@ class ParisImportCommand extends ContainerAwareCommand
         'Nouvelle' => 'info',
         'Refusée' => 'danger',
         'Retenu' => 'success',
-        'Vote' => 'success',
+        'Vote' => 'success'
     ];
 
     /** @var EntityManagerInterface */
@@ -151,7 +151,7 @@ class ParisImportCommand extends ContainerAwareCommand
         $type = $this->getContainer()
             ->get(ProjectTypeRepository::class)
             ->findOneBy([
-                'title' => 'project.types.participatoryBudgeting',
+                'title' => 'project.types.participatoryBudgeting'
             ]);
         $iterator = $csv->setOffset(1)->fetchAssoc(self::PROJECT_HEADER);
         foreach ($iterator as $item) {
@@ -162,7 +162,7 @@ class ParisImportCommand extends ContainerAwareCommand
         $author = $this->getContainer()
             ->get(UserRepository::class)
             ->findOneBy([
-                'username' => 'Mairie de Paris',
+                'username' => 'Mairie de Paris'
             ]);
         foreach ($rows as $row) {
             $body = $row['animateur_title'] . $row['animateur_body'] . $row['body'];
@@ -175,7 +175,7 @@ class ParisImportCommand extends ContainerAwareCommand
                 ->setLabel('Dépôt')
                 ->setStartAt(new \DateTime($row['created_at']))
                 ->setEndAt(new \DateTime($row['end_at']))
-                ->setVoteType(VoteTypeTrait::$VOTE_TYPE_SIMPLE);
+                ->setVoteType(VoteType::SIMPLE);
             $project = (new Project())
                 ->setTitle($row['title'])
                 ->setAuthor($author)
@@ -284,14 +284,14 @@ class ParisImportCommand extends ContainerAwareCommand
                 $author = $this->getContainer()
                     ->get(UserRepository::class)
                     ->findOneBy([
-                        'username' => $proposal['author_name'],
+                        'username' => $proposal['author_name']
                     ]);
                 $proposalParisId = $proposal['proposal_id'];
                 $district = $this->getContainer()
                     ->get(ProposalDistrictRepository::class)
                     ->findOneBy([
                         'form' => $step->getProposalForm(),
-                        'name' => $proposal['district'],
+                        'name' => $proposal['district']
                     ]);
                 $responses = $this->createResponses($proposal, $questions);
                 $category = $categories
@@ -373,7 +373,7 @@ class ParisImportCommand extends ContainerAwareCommand
                 $author = $this->getContainer()
                     ->get(UserRepository::class)
                     ->findOneBy([
-                        'username' => $comment['author_name'],
+                        'username' => $comment['author_name']
                     ]);
                 $comment = (new ProposalComment())
                     ->setAuthor($author)
@@ -474,7 +474,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
         $this->importQuestions($proposalForm, [
             'Objectif',
-            "Diagnostic / Inspiration / Exemples d'expérimentation passée",
+            "Diagnostic / Inspiration / Exemples d'expérimentation passée"
         ]);
 
         $this->em->persist($proposalForm);
