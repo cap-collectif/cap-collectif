@@ -15,6 +15,7 @@ sentry:
   options:
     environment: '%kernel.environment%'
     server_name: '%router.request_context.host%'
+    release: 'Sprint 246'
 
 doctrine:
   orm:
