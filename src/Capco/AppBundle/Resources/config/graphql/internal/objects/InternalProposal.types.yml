@@ -95,10 +95,8 @@ InternalProposal:
       district:
         type: 'ProposalDistrict'
       address:
-        type: 'Address'
-      formattedAddress:
-        type: 'String'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\FormattedAddressTypeResolver", [value])'
+        type: 'GoogleMapsAddress'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAddressResolver", [value])'
       author:
         type: 'InternalUser!'
       deletedAt:

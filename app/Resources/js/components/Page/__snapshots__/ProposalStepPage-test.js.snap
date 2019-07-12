@@ -112,8 +112,8 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
       }
     }
   />
-  <Connect(LeafletMap)
-    className="zi-0"
+  <ForwardRef(Relay(Connect(ProposalListView)))
+    count={10}
     defaultMapOptions={
       Object {
         "center": Object {
@@ -123,6 +123,7 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
         "zoom": 10,
       }
     }
+    displayMap={true}
     geoJsons={
       Array [
         Object {
@@ -134,10 +135,6 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
         },
       ]
     }
-    visible={true}
-  />
-  <ForwardRef(Relay(Connect(ProposalListView)))
-    count={10}
     step={
       Object {
         "$fragmentRefs": null,
@@ -163,9 +160,8 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
         "voteType": "BUDGET",
       }
     }
-    view="table"
+    view="map"
     viewer={null}
-    visible={false}
   />
 </div>
 `;

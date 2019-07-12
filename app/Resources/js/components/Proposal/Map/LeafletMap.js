@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import LocateControl from './LocateControl';
 import LeafletSearch from './LeafletSearch';
-import { loadMarkers } from '../../../redux/modules/proposal';
-import type { Dispatch, State } from '../../../types';
+import type { State } from '../../../types';
 import type { MapTokens } from '../../../redux/modules/user';
 
 type MapCenterObject = {
@@ -18,6 +17,17 @@ export type MapOptions = {
   center: MapCenterObject,
   zoom: number,
 };
+
+export type ProposalMapMarker = {|
+  +lat: number,
+  +lng: number,
+  +url: string,
+  +title: string,
+  +author: {|
+    +username: string,
+    +url: string,
+  |},
+|};
 
 type ComponentState = {
   loaded: boolean,
@@ -41,20 +51,19 @@ type Style = {
   },
 };
 
-type GeoJson = {
+export type GeoJson = {|
   district: string,
   style: Style,
-};
+|};
 
 type Props = {
-  markers: ?Object,
+  markers: $ReadOnlyArray<ProposalMapMarker>,
   mapTokens: MapTokens,
   geoJsons?: Array<GeoJson>,
   defaultMapOptions: MapOptions,
   visible: boolean,
   stepId: string,
   stepType: string,
-  dispatch: Dispatch,
   className?: string,
 };
 
@@ -89,7 +98,7 @@ function convertToGeoJsonStyle(style: Style) {
 
 export class LeafletMap extends Component<Props, ComponentState> {
   static defaultProps = {
-    markers: null,
+    markers: [],
     defaultMapOptions: {
       center: { lat: 48.8586047, lng: 2.3137325 },
       zoom: 12,
@@ -108,19 +117,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
     // This import is used to avoid SSR errors.
     L = require('leaflet'); // eslint-disable-line
     this.setState({ loaded: true });
-
-    const { dispatch, stepId, stepType, visible } = this.props;
-    if (visible) {
-      dispatch(loadMarkers(stepId, stepType));
-    }
-  }
-
-  // $FlowFixMe
-  componentDidUpdate(prevProps: Props) {
-    const { dispatch, stepId, stepType, visible } = this.props;
-    if (visible && prevProps.visible !== visible) {
-      dispatch(loadMarkers(stepId, stepType));
-    }
   }
 
   render() {
@@ -190,7 +186,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
 }
 
 const mapStateToProps = (state: State) => ({
-  markers: state.proposal.markers || {},
   mapTokens: state.user.mapTokens,
   stepId: state.project.currentProjectStepById || '',
   stepType:

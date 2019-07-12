@@ -1,13 +1,14 @@
 // @flow
-import { takeEvery, select, call, put } from 'redux-saga/effects';
+import { takeEvery, select } from 'redux-saga/effects';
 import LocalStorageService from '../../services/LocalStorageService';
-import Fetcher from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import addVote from '../../mutations/AddProposalVoteMutation';
 import removeVote from '../../mutations/RemoveProposalVoteMutation';
 import DeleteProposalMutation from '../../mutations/DeleteProposalMutation';
 import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
+
+export type ProposalViewMode = 'mosaic' | 'table' | 'map'
 
 type Status = { name: string, id: number, color: string };
 type ChangeFilterAction = {
@@ -20,15 +21,6 @@ type ChangeOrderAction = { type: 'proposal/CHANGE_ORDER', order: string };
 type LoadSelectionsAction = {
   type: 'proposal/LOAD_SELECTIONS_REQUEST',
   proposalId: Uuid,
-};
-type LoadMarkersAction = {
-  type: 'proposal/LOAD_MARKERS_REQUEST',
-  stepType: string,
-  stepId: Uuid,
-};
-type LoadMarkersSuccessAction = {
-  type: 'proposal/LOAD_MARKERS_SUCCEEDED',
-  markers: Object,
 };
 type CloseCreateFusionModalAction = {
   type: 'proposal/CLOSE_CREATE_FUSION_MODAL',
@@ -52,7 +44,7 @@ type OpenDetailLikersModalAction = { type: 'proposal/OPEN_DETAIL_LIKERS_MODAL', 
 type CloseDetailLikersModalAction = { type: 'proposal/CLOSE_DETAIL_LIKERS_MODAL' };
 type ChangeProposalListViewAction = {
   type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
-  mode: string,
+  mode: ProposalViewMode,
 };
 type Step = {
   type?: string,
@@ -81,8 +73,7 @@ export type State = {
   +lastEditedStepId: ?Uuid,
   +lastEditedProposalId: ?Uuid,
   +lastNotifiedStepId: ?Uuid,
-  +selectedViewByStep: string,
-  +markers: ?Object,
+  +selectedViewByStep: ProposalViewMode,
   +referer: ?string,
   +showDetailLikersModal: ?string,
 };
@@ -105,21 +96,9 @@ export const initialState: State = {
   lastEditedProposalId: null,
   lastNotifiedStepId: null,
   selectedViewByStep: 'mosaic',
-  markers: null,
   referer: null,
   showDetailLikersModal: null,
 };
-
-export const loadMarkers = (stepId: Uuid, stepType: string): LoadMarkersAction => ({
-  type: 'proposal/LOAD_MARKERS_REQUEST',
-  stepType,
-  stepId,
-});
-
-export const loadMarkersSuccess = (markers: Object): LoadMarkersSuccessAction => ({
-  type: 'proposal/LOAD_MARKERS_SUCCEEDED',
-  markers,
-});
 
 export const closeCreateFusionModal = (): CloseCreateFusionModalAction => ({
   type: 'proposal/CLOSE_CREATE_FUSION_MODAL',
@@ -170,7 +149,7 @@ export const changeFilter = (filter: string, value: string): ChangeFilterAction 
   filter,
   value,
 });
-export const changeProposalListView = (mode: string): ChangeProposalListViewAction => ({
+export const changeProposalListView = (mode: ProposalViewMode): ChangeProposalListViewAction => ({
   type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
   mode,
 });
@@ -272,17 +251,6 @@ export const deleteVote = (step: Object, proposal: Object, isAuthenticated: bool
       });
     });
 
-export function* fetchMarkers(action: LoadMarkersAction): Generator<*, *, *> {
-  try {
-    const markers = yield call(Fetcher.get, `/${action.stepType}_step/${action.stepId}/markers`);
-    yield put({
-      type: 'proposal/LOAD_MARKERS_SUCCEEDED',
-      markers,
-    });
-  } catch (e) {
-    console.log(e); // eslint-disable-line
-  }
-}
 
 export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generator<*, *, *> {
   const { filter, value } = action;
@@ -334,11 +302,9 @@ export type ProposalAction =
   | CloseDeleteProposalModalAction
   | RequestDeleteAction
   | ChangeProposalListViewAction
-  | LoadMarkersAction
   | OpenCreateFusionModalAction
   | CloseCreateFusionModalAction
   | OpenEditProposalModalAction
-  | LoadMarkersSuccessAction
   | OpenDetailLikersModalAction
   | CloseDetailLikersModalAction
   | { type: 'proposal/POSTS_FETCH_FAILED', error: Error }
@@ -355,7 +321,6 @@ export type ProposalAction =
 
 export function* saga(): Generator<*, *, *> {
   yield [
-    takeEvery('proposal/LOAD_MARKERS_REQUEST', fetchMarkers),
     takeEvery('proposal/CHANGE_FILTER', storeFiltersInLocalStorage),
     takeEvery('proposal/CHANGE_TERMS', storeTermsInLocalStorage),
     takeEvery('proposal/CHANGE_ORDER', storeOrderInLocalStorage),
@@ -398,9 +363,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, isVoting: false };
     case 'proposal/DELETE_REQUEST':
       return { ...state, isDeleting: true };
-    case 'proposal/LOAD_MARKERS_SUCCEEDED': {
-      return { ...state, markers: action.markers };
-    }
     case 'proposal/CHANGE_PROPOSAL_LIST_VIEW': {
       return { ...state, selectedViewByStep: action.mode };
     }

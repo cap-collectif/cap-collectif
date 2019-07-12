@@ -7,11 +7,17 @@ import type { ProposalListViewPaginated_step } from '~relay/ProposalListViewPagi
 import type { ProposalListViewPaginated_viewer } from '~relay/ProposalListViewPaginated_viewer.graphql';
 import VisibilityBox from '../../Utils/VisibilityBox';
 import ProposalList from './ProposalList';
+import type {ProposalViewMode} from "../../../redux/modules/proposal"
+import ProposalsDisplayMap from "../../Page/ProposalsDisplayMap"
+import type {GeoJson, MapOptions} from "../Map/LeafletMap"
 
 type Props = {
   relay: RelayPaginationProp,
+  displayMap: boolean,
   step: ProposalListViewPaginated_step,
-  view: 'mosaic' | 'table',
+  view: ProposalViewMode,
+  defaultMapOptions: MapOptions,
+  geoJsons: Array<GeoJson>,
   viewer: ?ProposalListViewPaginated_viewer,
   count: number,
 };
@@ -25,33 +31,45 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
   };
 
   render() {
-    const { step, viewer, relay, view, count } = this.props;
+    const { step, viewer, geoJsons, defaultMapOptions, displayMap, relay, view, count } = this.props;
     return (
       <div>
-        <VisibilityBox enabled={step.private || false}>
-          {/* $FlowFixMe */}
-          <ProposalList
+        {displayMap && view === 'map' ?
+          (
+          // $FlowFixMe $refType
+          <ProposalsDisplayMap
+            className="zi-0"
             step={step}
-            proposals={step.proposals}
-            viewer={viewer}
-            view={view}
-            id="proposals-list"
-          />
-        </VisibilityBox>
-        <div id="proposal-list-pagination-footer" className="text-center">
-          {relay.hasMore() && (
-            <Button
-              disabled={this.state.loading}
-              onClick={() => {
-                this.setState({ loading: true });
-                relay.loadMore(count, () => {
-                  this.setState({ loading: false });
-                });
-              }}>
-              <FormattedMessage id={this.state.loading ? 'global.loading' : 'see-more-proposals'} />
-            </Button>
-          )}
-        </div>
+            geoJsons={geoJsons}
+            defaultMapOptions={defaultMapOptions}
+          />) : (
+          <React.Fragment>
+            <VisibilityBox enabled={step.private || false}>
+              {/* $FlowFixMe */}
+              <ProposalList
+                step={step}
+                proposals={step.proposals}
+                viewer={viewer}
+                view={view}
+                id="proposals-list"
+              />
+            </VisibilityBox>
+            <div id="proposal-list-pagination-footer" className="text-center">
+              {relay.hasMore() && (
+                <Button
+                  disabled={this.state.loading}
+                  onClick={() => {
+                    this.setState({ loading: true });
+                    relay.loadMore(count, () => {
+                      this.setState({ loading: false });
+                    });
+                  }}>
+                  <FormattedMessage id={this.state.loading ? 'global.loading' : 'see-more-proposals'} />
+                </Button>
+              )}
+            </div>
+          </React.Fragment>
+        )}
       </div>
     );
   }
@@ -71,6 +89,7 @@ export default createPaginationContainer(
         ... on CollectStep {
           private
         }
+        ...ProposalsDisplayMap_step
         ...ProposalList_step
         proposals(
           first: $count

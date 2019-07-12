@@ -52,7 +52,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_estimation' => 'estimation',
         'proposal_category_name' => 'category.name',
         'proposal_theme_title' => 'theme.title',
-        'proposal_formattedAddress' => 'formattedAddress',
+        'proposal_formattedAddress' => 'address.formatted',
         'proposal_district_name' => 'district.name',
         'proposal_illustration' => 'media.url',
         'proposal_summary' => 'summary',
@@ -1686,7 +1686,9 @@ ${COMMENT_VOTE_INFOS}
             theme {
               title
             }
-            formattedAddress
+            address {
+              formatted
+            }
             district {
               name
             }

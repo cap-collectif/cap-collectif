@@ -331,9 +331,6 @@ type AddVersionPayload {
   clientMutationId: String
 }
 
-# A string containing Address code.
-scalar Address
-
 # A contribution
 type Answer {
   # Identifies the date and time when the object was created.
@@ -790,7 +787,7 @@ input ChangeProposalContentInput {
   district: String
 
   # The address geocoded by google
-  address: Address
+  address: String
 
   # The custom fields responses
   responses: [ResponseInput]
@@ -1782,7 +1779,7 @@ input CreateProposalInput {
   district: ID
 
   # The address geocoded by google
-  address: Address
+  address: String
 
   # The responses to the form questions
   responses: [ResponseInput]
@@ -2338,6 +2335,42 @@ enum GenderValue {
 
 # A string containing GeoJSON code.
 scalar GeoJSON
+
+# An address from Google Maps.
+type GoogleMapsAddress {
+  # The raw response from the Google Maps API that describes an address
+  json: String!
+
+  # A human-readable address string.
+  formatted: String
+
+  # The available types for this address. A type indicate the accuracy of the address on Google Maps.
+  types: [GoogleMapsAddressType!]!
+
+  # The latitude of this address.
+  lat: Float!
+
+  # The longitude of this address.
+  lng: Float!
+}
+
+# A list of possible types for a given address from Google Maps.
+enum GoogleMapsAddressType {
+  # Returns only the addresses for which Google has location information accurate down to street address precision.
+  ROOFTOP
+
+  # Returns only the addresses that reflect an approximation (usually on a road)
+  # interpolated between two precise points (such as intersections). An
+  # interpolated range generally indicates that rooftop geocodes are unavailable
+  # for a street address.
+  RANGE_INTERPOLATED
+
+  # Returns only geometric centers of a location such as a polyline (for example, a street) or polygon (region).
+  GEOMETRIC_CENTER
+
+  # Returns only the addresses that are characterized as approximate
+  APPROXIMATE
+}
 
 # A group of User
 type Group implements Node {
@@ -3955,8 +3988,7 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   theme: Theme
   category: ProposalCategory
   district: ProposalDistrict
-  address: Address
-  formattedAddress: String
+  address: GoogleMapsAddress
 
   # The delete date.
   deletedAt: DateTime

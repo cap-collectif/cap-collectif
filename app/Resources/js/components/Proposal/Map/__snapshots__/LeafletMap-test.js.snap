@@ -29,7 +29,158 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
     showCoverageOnHover={false}
     spiderfyOnMaxZoom={true}
     zoomToBoundsOnClick={true}
-  />
+  >
+    <LeafletUnivMarker
+      icon={
+        NewClass {
+          "_initHooksCalled": true,
+          "options": Object {
+            "iconAnchor": Array [
+              20,
+              40,
+            ],
+            "iconSize": Array [
+              40,
+              40,
+            ],
+            "iconUrl": "/svg/marker.svg",
+            "popupAnchor": Array [
+              0,
+              -40,
+            ],
+          },
+        }
+      }
+      key="0"
+      position={
+        Array [
+          49.8397,
+          24.0297,
+        ]
+      }
+    >
+      <LeafletUnivPopup>
+        <div>
+          <h2
+            className="h4 proposal__title"
+          >
+            <a
+              href="http://test"
+            >
+              test
+            </a>
+          </h2>
+           
+          Par : 
+          <a
+            href="http://test"
+          >
+            test
+          </a>
+        </div>
+      </LeafletUnivPopup>
+    </LeafletUnivMarker>
+    <LeafletUnivMarker
+      icon={
+        NewClass {
+          "_initHooksCalled": true,
+          "options": Object {
+            "iconAnchor": Array [
+              20,
+              40,
+            ],
+            "iconSize": Array [
+              40,
+              40,
+            ],
+            "iconUrl": "/svg/marker.svg",
+            "popupAnchor": Array [
+              0,
+              -40,
+            ],
+          },
+        }
+      }
+      key="1"
+      position={
+        Array [
+          52.2297,
+          21.0122,
+        ]
+      }
+    >
+      <LeafletUnivPopup>
+        <div>
+          <h2
+            className="h4 proposal__title"
+          >
+            <a
+              href="http://test"
+            >
+              test
+            </a>
+          </h2>
+           
+          Par : 
+          <a
+            href="http://test"
+          >
+            test
+          </a>
+        </div>
+      </LeafletUnivPopup>
+    </LeafletUnivMarker>
+    <LeafletUnivMarker
+      icon={
+        NewClass {
+          "_initHooksCalled": true,
+          "options": Object {
+            "iconAnchor": Array [
+              20,
+              40,
+            ],
+            "iconSize": Array [
+              40,
+              40,
+            ],
+            "iconUrl": "/svg/marker.svg",
+            "popupAnchor": Array [
+              0,
+              -40,
+            ],
+          },
+        }
+      }
+      key="2"
+      position={
+        Array [
+          51.5074,
+          -0.0901,
+        ]
+      }
+    >
+      <LeafletUnivPopup>
+        <div>
+          <h2
+            className="h4 proposal__title"
+          >
+            <a
+              href="http://test"
+            >
+              test
+            </a>
+          </h2>
+           
+          Par : 
+          <a
+            href="http://test"
+          >
+            test
+          </a>
+        </div>
+      </LeafletUnivPopup>
+    </LeafletUnivMarker>
+  </r>
   <InjectIntl(LocateControl) />
   <InjectIntl(LeafletSearch) />
 </LeafletUnivMap>

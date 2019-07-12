@@ -498,7 +498,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => ({
     address: proposal.form.usingAddress ? proposal.address : undefined,
     media: proposal.media ? proposal.media : null,
     responses: formatInitialResponsesValues(proposal.form.questions, proposal.responses),
-    addressText: proposal.formattedAddress,
+    addressText: proposal.address ? proposal.address.formatted : null,
   },
   responses: formValueSelector(formName)(state, 'responses'),
 });
@@ -538,8 +538,9 @@ export default createFragmentContainer(container, {
       title
       body
       summary
-      address
-      formattedAddress
+      address {
+        formatted
+      }
       publicationStatus
       responses {
         question {
