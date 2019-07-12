@@ -50,6 +50,8 @@ class MonCompteParisUserProvider implements UserProviderInterface
         if ($user instanceof User) {
             return $this->userManager->findUserBy(['parisId' => $user->getParisId()]);
         }
+
+        return null;
     }
 
     public function supportsClass($class): bool
