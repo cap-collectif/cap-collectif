@@ -250,19 +250,19 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
           "questions": [
             {
               "id": @string@,
-              "helpText": "5 fichiers max",
-              "private": false,
-              "required": true,
-              "title": "Documents à remplir",
-              "type": "medias"
-            },
-            {
-              "id": @string@,
               "helpText": "Peut-être que non...",
               "private": false,
               "required": true,
               "title": "Etes-vous réél ?",
               "type": "text"
+            },
+            {
+              "id": @string@,
+              "helpText": "5 fichiers max",
+              "private": false,
+              "required": true,
+              "title": "Documents à remplir",
+              "type": "medias"
             }
           ]
         }
