@@ -2342,7 +2342,7 @@ enum GoogleMapsAddressType {
   # Returns only the addresses for which Google has location information accurate down to street address precision.
   ROOFTOP
 
-  # returns only the addresses that reflect an approximation (usually on a road)
+  # Returns only the addresses that reflect an approximation (usually on a road)
   # interpolated between two precise points (such as intersections). An
   # interpolated range generally indicates that rooftop geocodes are unavailable
   # for a street address.

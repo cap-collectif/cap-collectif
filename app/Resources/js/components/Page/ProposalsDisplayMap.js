@@ -40,14 +40,16 @@ const convertToMarker = (proposal: Proposal): ProposalMapMarker => ({
   url: proposal.url,
 });
 
-const ProposalsDisplayMap = ({ step, ...rest }: Props) => {
+export const getProposalsMarkers = (proposals: $ReadOnlyArray<Proposal>): $ReadOnlyArray<ProposalMapMarker> =>
+  proposals
+    .filter(proposal => !!(proposal.address && proposal.address.lat && proposal.address.lng))
+    .map(convertToMarker);
+
+export const ProposalsDisplayMap = ({ step, ...rest }: Props) => {
   if (step.proposals && step.proposals.edges) {
-    const markers = step.proposals.edges
-      .filter(Boolean)
-      .map(edge => edge.node)
-      .filter(Boolean)
-      .filter(proposal => proposal.address && proposal.address.lat && proposal.address.lng)
-      .map(convertToMarker);
+    const markers = getProposalsMarkers(
+      step.proposals.edges.filter(Boolean).map(edge => edge.node)
+    );
 
     return <LeafletMap markers={markers} {...rest} />;
   }
