@@ -68,11 +68,10 @@ class ArgumentButtons extends React.Component<Props, State> {
           onClose={this.closeDeleteModal}
         />{' '}
         <ShareButtonDropdown
+          title=""
           id={`arg-${argument.id}-share-button`}
           url={argument.url}
-          bsSize="xs"
-          outline
-          grey
+          className="argument__btn--share btn-dark-gray btn--outline btn btn-xs"
         />
       </div>
     );

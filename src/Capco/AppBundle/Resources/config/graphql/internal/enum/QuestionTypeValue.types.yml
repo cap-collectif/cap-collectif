@@ -4,24 +4,24 @@ QuestionTypeValue:
     description: 'Value of type of question'
     values:
       text:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SIMPLE_TEXT")'
+        value: 0
       textarea:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT")'
+        value: 1
       editor:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_EDITOR")'
+        value: 2
       radio:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RADIO")'
+        value: 3
       select:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SELECT")'
+        value: 4
       checkbox:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_CHECKBOX")'
+        value: 5
       ranking:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RANKING")'
+        value: 6
       medias:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MEDIAS")'
+        value: 7
       button:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_BUTTON")'
+        value: 8
       number:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_NUMBER")'
+        value: 9
       section:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SECTION")'
+        value: 10

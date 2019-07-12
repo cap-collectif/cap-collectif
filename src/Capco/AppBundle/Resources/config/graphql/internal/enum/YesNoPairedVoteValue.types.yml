@@ -4,8 +4,8 @@ YesNoPairedVoteValue:
     description: '3 possible values'
     values:
       YES:
-        value: '@=constant("Capco\\AppBundle\\Entity\\OpinionVote::VOTE_OK")'
+        value: 1
       NO:
-        value: '@=constant("Capco\\AppBundle\\Entity\\OpinionVote::VOTE_NOK")'
+        value: -1
       MITIGE:
-        value: '@=constant("Capco\\AppBundle\\Entity\\OpinionVote::VOTE_MITIGE")'
+        value: 0

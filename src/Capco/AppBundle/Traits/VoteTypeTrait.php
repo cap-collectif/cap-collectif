@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Traits;
 
-use Capco\AppBundle\Enum\VoteType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -21,7 +20,7 @@ trait VoteTypeTrait
      * @Assert\Choice(choices={0,1,2})
      * @ORM\Column(name="vote_type", type="integer")
      */
-    private $voteType = VoteType::DISABLED;
+    private $voteType = 0;
 
     /**
      * @ORM\Column(name="budget", type="float", nullable=true)
@@ -42,9 +41,9 @@ trait VoteTypeTrait
     public static function getVoteTypeLabels()
     {
         return [
-            'step.vote_type.disabled' => VoteType::DISABLED,
-            'step.vote_type.simple' => VoteType::SIMPLE,
-            'step.vote_type.budget' => VoteType::BUDGET
+            'step.vote_type.disabled' => self::$VOTE_TYPE_DISABLED,
+            'step.vote_type.simple' => self::$VOTE_TYPE_SIMPLE,
+            'step.vote_type.budget' => self::$VOTE_TYPE_BUDGET,
         ];
     }
 
@@ -96,15 +95,6 @@ trait VoteTypeTrait
 
     public function setVoteType(int $voteType): self
     {
-        if (!VoteType::isValid($voteType)) {
-            throw new \RuntimeException(
-                sprintf(
-                    'Unknown vote type "%s". Available types: "%s"',
-                    $voteType,
-                    VoteType::getAvailableTypesToString()
-                )
-            );
-        }
         $this->voteType = $voteType;
 
         return $this;
@@ -112,12 +102,12 @@ trait VoteTypeTrait
 
     public function isVotable(): bool
     {
-        return VoteType::DISABLED !== $this->voteType;
+        return self::$VOTE_TYPE_DISABLED !== $this->voteType;
     }
 
     public function isBudgetVotable(): bool
     {
-        return VoteType::BUDGET === $this->voteType;
+        return self::$VOTE_TYPE_BUDGET === $this->voteType;
     }
 
     public function getVotesHelpText()

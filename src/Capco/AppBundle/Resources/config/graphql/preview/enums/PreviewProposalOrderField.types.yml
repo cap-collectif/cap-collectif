@@ -5,17 +5,17 @@ PreviewProposalOrderField:
     description: 'Properties by which proposal connections can be ordered.'
     values:
       PUBLISHED_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::PUBLISHED_AT")'
+        value: 'PUBLISHED_AT'
         description: 'Allows ordering a list of proposals by when they were published.'
       VOTES:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::VOTES")'
+        value: 'VOTES'
         description: 'Allows ordering a list of proposals by the number of votes it have.'
       COMMENTS:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::COMMENTS")'
+        value: 'COMMENTS'
         description: 'Allows ordering a list of proposals by the number of comments it have.'
       RANDOM:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::RANDOM")'
+        value: 'RANDOM'
         description: 'Allows randomizing a list of proposals.'
       COST:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::COST")'
+        value: 'COST'
         description: 'Allows ordering a list of proposals by the cost it have been estimated.'

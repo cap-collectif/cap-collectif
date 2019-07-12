@@ -1,8 +1,6 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Enum\SubscriptionType;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -140,10 +138,6 @@ class Follower
 
     public function setNotifiedOf(string $notifiedOf): self
     {
-        if (!SubscriptionType::isValid($notifiedOf)) {
-            throw new \RuntimeException("Unknown subscription value '${notifiedOf}'");
-        }
-
         $this->notifiedOf = $notifiedOf;
 
         return $this;

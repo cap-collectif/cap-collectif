@@ -10,11 +10,11 @@ import {
   OverlayTrigger,
   Popover,
   Label,
+  DropdownButton,
+  MenuItem,
   Row,
   Col,
 } from 'react-bootstrap';
-import ShareButton from '../components/Ui/Button/ShareButton';
-import ShareButtonAction from '../components/Ui/Button/ShareButtonAction';
 
 import Card from '../components/Ui/Card/Card';
 import UserLink from '../components/User/UserLink';
@@ -310,13 +310,34 @@ const OpinionBox = ({ section, opinion }) => (
           </span>
           {/** Utils/ShareButtonDropdown.js */}
           {opinion.title && opinion.url && (
-            <ShareButton id="shareButton" margin="ml-5">
-              <ShareButtonAction action="mail" />
-              <ShareButtonAction action="facebook" />
-              <ShareButtonAction action="twitter" />
-              <ShareButtonAction action="linkedin" />
-              <ShareButtonAction action="link" />
-            </ShareButton>
+            <div className="share-button-dropdown">
+              <DropdownButton
+                id="opinion-share-button"
+                style={{ marginLeft: 5 }}
+                className="dropdown--custom ml-5"
+                onClick={() => {}}
+                title={
+                  <span>
+                    <i className="cap cap-link" /> {'Partager'}
+                  </span>
+                }>
+                <MenuItem eventKey="1">
+                  <i className="cap cap-mail-2-1" /> {'Mail'}
+                </MenuItem>
+                <MenuItem eventKey="2">
+                  <i className="cap cap-facebook" /> {'Facebook'}
+                </MenuItem>
+                <MenuItem eventKey="3">
+                  <i className="cap cap-twitter" /> {'Twitter'}
+                </MenuItem>
+                <MenuItem eventKey="4">
+                  <i className="cap cap-linkedin" /> {'LinkedIn'}
+                </MenuItem>
+                <MenuItem eventKey="5">
+                  <i className="cap cap-link-1" /> {'Link'}
+                </MenuItem>
+              </DropdownButton>
+            </div>
           )}
         </ButtonToolbar>
       </div>

@@ -1,9 +1,8 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Capco\AppBundle\Enum\LogicJumpConditionOperator;
+use Capco\AppBundle\Enum\LogicJumpConditionOperatorEnum;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,8 +42,8 @@ abstract class AbstractLogicJumpCondition
 
     public function setOperator(string $operator): self
     {
-        if (!LogicJumpConditionOperator::isOperatorValueValid($operator)) {
-            throw new \RuntimeException("Unknown operator '${operator}'");
+        if (!LogicJumpConditionOperatorEnum::isOperatorValueValid($operator)) {
+            throw new \RuntimeException("Unknown operator '$operator'");
         }
 
         $this->operator = $operator;

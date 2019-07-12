@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity\Questions;
 
-use Capco\AppBundle\Enum\MultipleChoiceQuestionValidationRules;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,9 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class MultipleChoiceQuestionValidationRule
 {
     public static $typeLabels = [
-        'questionnaire.validation.type.min' => MultipleChoiceQuestionValidationRules::MIN,
-        'questionnaire.validation.type.equal' => MultipleChoiceQuestionValidationRules::EQUAL,
-        'questionnaire.validation.type.max' => MultipleChoiceQuestionValidationRules::MAX
+        'questionnaire.validation.type.min' => 'min',
+        'questionnaire.validation.type.equal' => 'equal',
+        'questionnaire.validation.type.max' => 'max',
     ];
 
     /**
