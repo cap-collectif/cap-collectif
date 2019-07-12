@@ -39,12 +39,12 @@ class OpenAmClient
         $json = json_decode((string) $response->getBody(), true);
 
         if (isset($json['code']) && 500 === $json['code']) {
-            $this->logger->critical('Error returned by'. self::API_URL, ['json' => $json]);
+            $this->logger->critical('Error returned by'. self::API_URL, ['cookie' => $this->cookie, 'json' => $json]);
             throw new \RuntimeException('Error returned by'. self::API_URL);
         }
 
         if (false === $json['valid']) {
-            $this->logger->critical('Token not valid returned by ' . self::API_URL);
+            $this->logger->critical('Token not valid returned by ' . self::API_URL, ['cookie' => $this->cookie, 'json' => $json]);
             throw new \RuntimeException('Token not valid.');
         }
 
@@ -62,7 +62,7 @@ class OpenAmClient
         $json = json_decode((string) $response->getBody(), true);
 
         if (isset($json['code']) && (400 >= $json['code'] && 500 <= $json['code'])) {
-            $this->logger->critical('Error returned by '. $url, ['json' => $json]);
+            $this->logger->critical('Error returned by '. $url, ['cookie' => $this->cookie, 'json' => $json]);
             throw new \RuntimeException('Error returned by '. $url);
         }
     }
@@ -74,7 +74,7 @@ class OpenAmClient
         ]);
         $json = json_decode((string) $response->getBody(), true);
         if (!$json) {
-            $this->logger->critical('Error returned by '. self::API_INFORMATIONS_URL, ['email' => $email, 'json' => $json]);
+            $this->logger->critical('Error returned by '. self::API_INFORMATIONS_URL, ['cookie' => $this->cookie, 'email' => $email, 'json' => $json]);
             throw new \RuntimeException('Error returned by '. self::API_INFORMATIONS_URL);
         }
 
