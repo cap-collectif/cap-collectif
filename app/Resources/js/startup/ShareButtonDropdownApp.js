@@ -7,12 +7,8 @@ import ShareButtonDropdown from '../components/Utils/ShareButtonDropdown';
 
 type Props = {|
   id: string,
-  enabled: boolean,
   title: string,
   url: string,
-  className?: string,
-  bsStyle?: string,
-  style?: Object,
 |};
 
 export default (props: Props) => (
