@@ -30,7 +30,7 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
   }
 
   componentWillUnmount() {
-    window.removeListener('resize', this.updateWindowsWidth, false);
+    window.removeEventListener('resize', this.updateWindowsWidth, false);
   }
 
   getHeight = (choicesNumber: number) => {
