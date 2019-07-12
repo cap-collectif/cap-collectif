@@ -2,22 +2,15 @@
 import * as React from 'react';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import {
-  Button,
-  ListGroupItem,
-  Panel,
-  DropdownButton,
-  MenuItem,
-  Label,
-  OverlayTrigger,
-  Popover,
-} from 'react-bootstrap';
+import { Button, ListGroupItem, Panel, Label, OverlayTrigger, Popover } from 'react-bootstrap';
 import Input from '../components/Form/Input';
 import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
 import Media from '../components/Ui/Medias/Media/Media';
 import ListGroup from '../components/Ui/List/ListGroup';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 import { opinionArguments as opinionArgumentsMock } from './mocks/opinionArguments';
+import ShareButton from '../components/Ui/Button/ShareButton';
+import ShareButtonAction from '../components/Ui/Button/ShareButtonAction';
 
 // eslint-disable-next-line react/prop-types
 const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
@@ -141,33 +134,13 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
               </button>{' '}
             </React.Fragment>
           )}
-          <div className="share-button-dropdown">
-            <DropdownButton
-              className="argument__btn--share btn-dark-gray btn--outline btn btn-xs dropdown--custom"
-              bsSize="xs"
-              onClick={() => {}}
-              title={
-                <span>
-                  <i className="cap cap-link" /> {'Partager'}
-                </span>
-              }>
-              <MenuItem eventKey="1">
-                <i className="cap cap-mail-2-1" /> {'Mail'}
-              </MenuItem>
-              <MenuItem eventKey="2">
-                <i className="cap cap-facebook" /> {'Facebook'}
-              </MenuItem>
-              <MenuItem eventKey="3">
-                <i className="cap cap-twitter" /> {'Twitter'}
-              </MenuItem>
-              <MenuItem eventKey="4">
-                <i className="cap cap-linkedin" /> {'LinkedIn'}
-              </MenuItem>
-              <MenuItem eventKey="5">
-                <i className="cap cap-link-1" /> {'Link'}
-              </MenuItem>
-            </DropdownButton>
-          </div>
+          <ShareButton id="shareButton" bsSize="xs" outline grey>
+            <ShareButtonAction action="mail" />
+            <ShareButtonAction action="facebook" />
+            <ShareButtonAction action="twitter" />
+            <ShareButtonAction action="linkedin" />
+            <ShareButtonAction action="link" />
+          </ShareButton>
         </div>
       </Media.Body>
     </Media>

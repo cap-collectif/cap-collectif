@@ -145,7 +145,6 @@ framework:
     fallback: fr-FR
 
 services:
-  Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
   twig.extension.text:
     class: Twig_Extensions_Extension_Text
     tags:

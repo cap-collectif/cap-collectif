@@ -21,9 +21,9 @@ capcobot = {
 def phpspec(desc=False):
     "Run PHP Unit Tests"
     if desc:
-        env.service_command('phpdbg -qrr -d memory_limit=-1 bin/phpspec describe ' + desc, 'application', env.www_app)
+        env.service_command('phpdbg -qrr bin/phpspec describe ' + desc, 'application', env.www_app)
     else:
-        env.service_command('phpdbg -qrr -d memory_limit=-1 bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
+        env.service_command('phpdbg -qrr bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
 
 
 @task(environments=['ci'])
