@@ -1,0 +1,7 @@
+Address:
+  type: custom-scalar
+  config:
+    description: 'A string containing Address code.'
+    serialize: ["Capco\\AppBundle\\GraphQL\\Type\\AddressType", 'serialize']
+    parseValue: ["Capco\\AppBundle\\GraphQL\\Type\\AddressType", 'parseValue']
+    parseLiteral: ["Capco\\AppBundle\\GraphQL\\Type\\AddressType", 'parseLiteral']

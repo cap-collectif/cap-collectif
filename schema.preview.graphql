@@ -363,7 +363,7 @@ input ProjectOrder {
 
 # Ordering options for projects returned from the connection.
 enum ProjectOrderField {
-  # Allows ordering a list of projects by there number of contributions.
+  # Allows ordering a list of projects by their number of contributions.
   POPULAR
 
   # Allows ordering a list of projects by when they were published.

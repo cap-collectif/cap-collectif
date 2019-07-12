@@ -320,13 +320,16 @@ export class ProposalForm extends React.Component<Props, State> {
       const districtIdsFilteredByAddress = data.availableDistrictsForLocalisation.map(
         district => district.id,
       );
-      this.props.dispatch(
-        change(
-          formName,
-          'district',
-          districtIdsFilteredByAddress.length === 0 ? null : districtIdsFilteredByAddress[0],
-        ),
-      );
+      // Select a district if not editing
+      if (!this.props.proposal) {
+        this.props.dispatch(
+          change(
+            formName,
+            'district',
+            districtIdsFilteredByAddress.length === 0 ? null : districtIdsFilteredByAddress[0],
+          ),
+        );
+      }
       this.setState({
         districtIdsFilteredByAddress,
       });
@@ -590,8 +593,9 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
     district: proposal && proposal.district ? proposal.district.id : undefined,
     category: proposal && proposal.category ? proposal.category.id : undefined,
     media: proposal ? proposal.media : undefined,
-    addressText: proposal && proposal.address ? proposal.address.formatted : '',
-    address: (proposal && proposal.address && proposal.address.json) || undefined,
+    addressText:
+      proposal && proposal.address ? JSON.parse(proposal.address)[0].formatted_address : '',
+    address: (proposal && proposal.address) || undefined,
     responses: formatInitialResponsesValues(
       proposalForm.questions,
       proposal ? proposal.responses : [],
@@ -620,12 +624,7 @@ export default createFragmentContainer(container, {
       title
       body
       summary
-      address {
-        json
-        formatted
-        lat
-        lng
-      }
+      address
       publicationStatus
       category {
         id

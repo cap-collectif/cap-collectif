@@ -19,6 +19,7 @@ describe('<ProposalAdminContentForm />', () => {
       $fragmentRefs,
       id: '1',
       title: 'title-1',
+      formattedAddress: null,
       summary: 'summary',
       body: 'body',
       publicationStatus: 'DRAFT',

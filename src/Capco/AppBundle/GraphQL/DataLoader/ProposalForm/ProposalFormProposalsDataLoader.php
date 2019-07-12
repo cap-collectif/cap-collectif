@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\ProposalForm;
 
 use Capco\AppBundle\DataCollector\GraphQLCollector;
+use Capco\AppBundle\Enum\ProposalAffiliations;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
@@ -193,7 +194,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 
             if ($args->offsetExists('affiliations')) {
                 $affiliations = $args->offsetGet('affiliations');
-                if (\in_array('EVALUER', $affiliations, true)) {
+                if (\in_array(ProposalAffiliations::EVALUER, $affiliations, true)) {
                     $direction = $args->offsetGet('orderBy')['direction'];
                     $field = $args->offsetGet('orderBy')['field'];
 
@@ -215,7 +216,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                         ->getArrayCopy();
                 }
 
-                if (\in_array('OWNER', $affiliations, true)) {
+                if (\in_array(ProposalAffiliations::OWNER, $affiliations, true)) {
                     $filters['author'] = $viewer->getId();
                 }
             }

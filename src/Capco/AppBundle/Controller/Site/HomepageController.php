@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Toggle\Manager;
@@ -49,9 +50,9 @@ class HomepageController extends Controller
 
         if ($deleteType) {
             $flashBag = $this->get('session')->getFlashBag();
-            if ('SOFT' === $deleteType) {
+            if (DeleteAccountType::SOFT === $deleteType) {
                 $flashBag->add('success', $translator->trans('account-and-contents-anonymized'));
-            } elseif ('HARD' === $deleteType) {
+            } elseif (DeleteAccountType::HARD === $deleteType) {
                 $flashBag->add('success', $translator->trans('account-and-contents-deleted'));
             }
         }
@@ -74,7 +75,7 @@ class HomepageController extends Controller
                     );
                     /** @var User $userToNotify */
                     $userToNotify = $this->get(UserRepository::class)->findOneBy([
-                        'email' => $subscription->getEmail(),
+                        'email' => $subscription->getEmail()
                     ]);
                     $em = $this->getDoctrine()->getManager();
 
@@ -145,8 +146,8 @@ class HomepageController extends Controller
                 'Themes',
                 'ThemeDetails',
                 'Default',
-                'Proposals',
-            ],
+                'Proposals'
+            ]
         ]);
 
         return ['props' => $props, 'section' => $section];
@@ -158,7 +159,7 @@ class HomepageController extends Controller
     public function metricsSectionAction(Section $section = null)
     {
         $props = $this->serializer->serialize($section, 'json', [
-            'groups' => ['Section'],
+            'groups' => ['Section']
         ]);
 
         return ['props' => $props];

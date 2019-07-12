@@ -4,4 +4,5 @@ CategoryOrderField:
     description: 'Ordering options for categories returned from the connection.'
     values:
       ALPHABETICAL:
-        value: 'ALPHABETICAL'
+        value: '@=constant("Capco\\AppBundle\\Enum\\CategoryOrderField::ALPHABETICAL")'
+        description: 'Allows ordering a list of categories in an alphabetical order.'

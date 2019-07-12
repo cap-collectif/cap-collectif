@@ -24,7 +24,7 @@ class MonCompteParisUserProvider implements UserProviderInterface
         $user = $this->userManager->findUserBy(['parisId' => $id]);
         if (null === $user) {
             $informations = $this->openAmCaller->getUserInformations($id);
-            if ("false" === $informations['validatedAccount']) {
+            if (false === filter_var($informations['validatedAccount'], FILTER_VALIDATE_BOOLEAN)) {
                 throw new ParisAuthenticationException(
                     $id,
                     'Please validate your account from Mon Compte Paris'
@@ -50,8 +50,6 @@ class MonCompteParisUserProvider implements UserProviderInterface
         if ($user instanceof User) {
             return $this->userManager->findUserBy(['parisId' => $user->getParisId()]);
         }
-
-        return null;
     }
 
     public function supportsClass($class): bool

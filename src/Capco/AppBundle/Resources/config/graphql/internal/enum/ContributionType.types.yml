@@ -4,16 +4,23 @@ ContributionType:
     description: 'Different contribution type'
     values:
       OPINION:
-        value: 'OPINION'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::OPINION")'
+        description: 'Get contributions that are an opnion'
       OPINIONVERSION:
-        value: 'OPINIONVERSION'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::OPINIONVERSION")'
+        description: 'Get contributions that are an opnion version'
       COMMENT:
-        value: 'COMMENT'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::COMMENT")'
+        description: 'Get contributions that are a comment'
       ARGUMENT:
-        value: 'ARGUMENT'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::ARGUMENT")'
+        description: 'Get contributions that are an argument'
       SOURCE:
-        value: 'SOURCE'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::SOURCE")'
+        description: 'Get contributions that are a source'
       PROPOSAL:
-        value: 'PROPOSAL'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::PROPOSAL")'
+        description: 'Get contributions that are a proposal'
       REPLY:
-        value: 'REPLY'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::REPLY")'
+        description: 'Get contributions that are a reply'

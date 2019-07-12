@@ -4,8 +4,8 @@ GenderValue:
     description: '3 possible values'
     values:
       MALE:
-        value: 'm'
+        value: '@=constant("Sonata\\UserBundle\\Model\\UserInterface::GENDER_MALE")'
       FEMALE:
-        value: 'f'
+        value: '@=constant("Sonata\\UserBundle\\Model\\UserInterface::GENDER_FEMALE")'
       OTHER:
-        value: 'o'
+        value: '@=constant("Capco\\UserBundle\\Entity\\User::GENDER_OTHER")'

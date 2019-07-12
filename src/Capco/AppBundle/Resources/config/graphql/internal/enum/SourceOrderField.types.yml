@@ -4,8 +4,8 @@ SourceOrderField:
     description: 'Properties by which source connections can be ordered'
     values:
       PUBLISHED_AT:
-        value: 'PUBLISHED_AT'
+        value: '@=constant("Capco\\AppBundle\\Enum\\SourceOrderField::PUBLISHED_AT")'
         description: 'Allows ordering a list of sources by when they were published.'
       VOTES:
-        value: 'VOTES'
+        value: '@=constant("Capco\\AppBundle\\Enum\\SourceOrderField::VOTES")'
         description: 'Allows ordering a list of sources by the number of votes it have.'

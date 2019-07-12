@@ -4,11 +4,11 @@ UserRole:
     description: '3 possible values'
     values:
       ROLE_USER:
-        value: 'ROLE_USER'
+        value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_USER")'
         description: 'Represents a user.'
       ROLE_ADMIN:
-        value: 'ROLE_ADMIN'
+        value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_ADMIN")'
         description: 'Represents an administrator.'
       ROLE_SUPER_ADMIN:
-        value: 'ROLE_SUPER_ADMIN'
+        value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_SUPER_ADMIN")'
         description: 'Represents Cap Collectif account.'

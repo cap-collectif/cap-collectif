@@ -4,8 +4,8 @@ PostPublicationStatus:
     description: 'Available statuses'
     values:
       PUBLISHED:
-        value: 'PUBLISHED'
+        value: '@=constant("Capco\\AppBundle\\Enum\\PostPublicationStatus::PUBLISHED")'
         description: 'Normal status, publicly visible'
       NOT_PUBLISHED:
-        value: 'NOT_PUBLISHED'
+        value: '@=constant("Capco\\AppBundle\\Enum\\PostPublicationStatus::NOT_PUBLISHED")'
         description: 'Not publicly visible'

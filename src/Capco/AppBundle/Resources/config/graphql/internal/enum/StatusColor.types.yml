@@ -4,14 +4,14 @@ StatusColor:
     description: 'Different status type'
     values:
       info:
-        value: 'info'
+        value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::INFO")'
       primary:
-        value: 'primary'
+        value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::PRIMARY")'
       success:
-        value: 'success'
+        value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::SUCCESS")'
       warning:
-        value: 'warning'
+        value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::WARNING")'
       danger:
-        value: 'danger'
+        value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::DANGER")'
       default:
-        value: 'default'
+        value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::NORMAL")'

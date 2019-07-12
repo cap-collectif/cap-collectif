@@ -4,4 +4,5 @@ EventOrderField:
     description: 'Ordering options for events returned from the connection.'
     values:
       START_AT:
-        value: 'START_AT'
+        value: '@=constant("Capco\\AppBundle\\Enum\\EventOrderField::START_AT")'
+
