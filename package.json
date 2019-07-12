@@ -160,7 +160,7 @@
         "babel-jest": "^24.8.0",
         "babel-loader": "^8.0.6",
         "babel-plugin-add-module-exports": "^1.0.2",
-        "babel-plugin-dev-expression": "^0.2.1",
+        "babel-plugin-dev-expression": "^0.2.2",
         "babel-plugin-polished": "^1.1.0",
         "babel-plugin-react-docgen": "^3.1.0",
         "babel-plugin-relay": "^5.0.0",
