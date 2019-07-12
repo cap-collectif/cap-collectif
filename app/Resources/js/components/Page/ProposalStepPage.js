@@ -9,6 +9,7 @@ import DraftProposalList from '../Proposal/List/DraftProposalList';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import ProposalStepPageHeader from './ProposalStepPageHeader';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
+import LeafletMap from '../Proposal/Map/LeafletMap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import ProposalListView, { queryVariables } from '../Proposal/List/ProposalListView';
 import type { FeatureToggles, State } from '../../types';
@@ -92,17 +93,25 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
       <ProposalStepPageHeader step={step} />
       {/* $FlowFixMe please use mapDispatchToProps */}
       <ProposalListFilters step={step} />
+      {step && !step.private && features.display_map ? (
+        /* $FlowFixMe please use mapDispatchToProps */
+        <LeafletMap
+          className="zi-0"
+          geoJsons={geoJsons}
+          defaultMapOptions={{
+            center: { lat: form.latMap ?? 48.8586047, lng: form.lngMap ?? 2.3137325 },
+            zoom: form.zoomMap ?? 10,
+          }}
+          visible={selectedViewByStep === 'map'}
+        />
+      ) : null}
+      {/* $FlowFixMe $refType */}
       <ProposalListView
-        displayMap={features.display_map}
-        geoJsons={geoJsons}
         step={step}
         count={count}
         viewer={viewer || null}
-        defaultMapOptions={{
-          center: { lat: form.latMap ?? 48.8586047, lng: form.lngMap ?? 2.3137325 },
-          zoom: form.zoomMap ?? 10,
-        }}
-        view={selectedViewByStep}
+        view={selectedViewByStep === 'mosaic' ? 'mosaic' : 'table'}
+        visible={selectedViewByStep === 'mosaic' || selectedViewByStep === 'table'}
       />
     </div>
   );
@@ -179,7 +188,6 @@ export class ProposalStepPage extends React.Component<Props> {
                     }
                   }
                   kind
-                  ...ProposalsDisplayMap_step
                   ...StepPageHeader_step
                   ...ProposalListFilters_step
                   ...ProposalListView_step @arguments(count: $count)

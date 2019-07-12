@@ -4,8 +4,8 @@ MultipleChoiceQuestionValidationRulesTypes:
     description: 'Available types of validation rules'
     values:
       MIN:
-        value: 'min'
+        value: '@=constant("Capco\\AppBundle\\Enum\\MultipleChoiceQuestionValidationRules::MIN")'
       EQUAL:
-        value: 'equal'
+        value: '@=constant("Capco\\AppBundle\\Enum\\MultipleChoiceQuestionValidationRules::EQUAL")'
       MAX:
-        value: 'max'
+        value: '@=constant("Capco\\AppBundle\\Enum\\MultipleChoiceQuestionValidationRules::MAX")'

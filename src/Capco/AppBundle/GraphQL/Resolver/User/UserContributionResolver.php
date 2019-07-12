@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
+use Capco\AppBundle\Enum\ContributionType;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -21,22 +22,22 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
 {
     use ContainerAwareTrait;
 
-    public function __invoke(User $object, Argument $args): Connection
+    public function __invoke(User $user, Argument $args): Connection
     {
-        $query = $this->getContributionsByType($args->offsetGet('type'), $object);
-        $paginator = new Paginator(function (int $offset, int $limit) use ($query) {
+        $query = $this->getContributionsByType($user, $args->offsetGet('type'));
+        $paginator = new Paginator(static function (int $offset, int $limit) use ($query) {
             return $query['values'];
         });
 
         return $paginator->auto($args, $query['totalCount']);
     }
 
-    public function getContributionsByType(string $requestedType = null, User $user): array
+    public function getContributionsByType(User $user, string $requestedType = null): array
     {
         $result = [];
 
         switch ($requestedType) {
-            case 'OPINION':
+            case ContributionType::OPINION:
                 $result['values'] = $this->container
                     ->get(OpinionRepository::class)
                     ->findAllByAuthor($user);
@@ -47,7 +48,7 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 return $result;
 
                 break;
-            case 'OPINIONVERSION':
+            case ContributionType::OPINIONVERSION:
                 $result['values'] = $this->container
                     ->get(OpinionVersionRepository::class)
                     ->findAllByAuthor($user);
@@ -58,7 +59,7 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 return $result;
 
                 break;
-            case 'COMMENT':
+            case ContributionType::COMMENT:
                 $result['values'] = $this->container
                     ->get(CommentRepository::class)
                     ->findAllByAuthor($user);
@@ -69,7 +70,7 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 return $result;
 
                 break;
-            case 'ARGUMENT':
+            case ContributionType::ARGUMENT:
                 $result['values'] = $this->container
                     ->get(ArgumentRepository::class)
                     ->findAllByAuthor($user);
@@ -80,7 +81,7 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 return $result;
 
                 break;
-            case 'SOURCE':
+            case ContributionType::SOURCE:
                 $result['values'] = $this->container
                     ->get(SourceRepository::class)
                     ->findAllByAuthor($user);
@@ -91,7 +92,7 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 return $result;
 
                 break;
-            case 'PROPOSAL':
+            case ContributionType::PROPOSAL:
                 $result['values'] = $this->container
                     ->get(ProposalRepository::class)
                     ->findAllByAuthor($user);
@@ -102,7 +103,7 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
                 return $result;
 
                 break;
-            case 'REPLY':
+            case ContributionType::REPLY:
                 $result['values'] = $this->container
                     ->get(ReplyRepository::class)
                     ->findAllByAuthor($user);

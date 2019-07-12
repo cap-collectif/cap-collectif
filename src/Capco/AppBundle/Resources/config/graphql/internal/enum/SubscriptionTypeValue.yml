@@ -4,8 +4,11 @@ SubscriptionTypeValue:
     description: '3 possible values for a subscription.'
     values:
       ALL:
-        value: 'ALL'
+        value: '@=constant("Capco\\AppBundle\\Enum\\FollowerSubscriptionType::ALL")'
+        description: 'Get all notifications for this subscription'
       ESSENTIAL:
-        value: 'ESSENTIAL'
+        value: '@=constant("Capco\\AppBundle\\Enum\\FollowerSubscriptionType::ESSENTIAL")'
+        description: 'Get essentials notifications for this subscription'
       MINIMAL:
-        value: 'MINIMAL'
+        value: '@=constant("Capco\\AppBundle\\Enum\\FollowerSubscriptionType::MINIMAL")'
+        description: 'Get minimal notifications for this subscription'

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\StatusColor;
 use Capco\AppBundle\Traits\ColorableTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -25,30 +26,22 @@ class Status
     use PositionableTrait;
     use ColorableTrait;
 
-    // normal constant == default class in bootstrap
-    const NORMAL = 'default';
-    const PRIMARY = 'primary';
-    const SUCCESS = 'success';
-    const INFO = 'info';
-    const WARNING = 'warning';
-    const DANGER = 'danger';
-
     public static $statuses = [
-        'normal' => self::NORMAL,
-        'primary' => self::PRIMARY,
-        'success' => self::SUCCESS,
-        'info' => self::INFO,
-        'warning' => self::WARNING,
-        'danger' => self::DANGER,
+        'normal' => StatusColor::NORMAL,
+        'primary' => StatusColor::PRIMARY,
+        'success' => StatusColor::SUCCESS,
+        'info' => StatusColor::INFO,
+        'warning' => StatusColor::WARNING,
+        'danger' => StatusColor::DANGER
     ];
 
     public static $statusesLabels = [
-        'statuses.labels.normal' => self::NORMAL,
-        'statuses.labels.primary' => self::PRIMARY,
-        'statuses.labels.success' => self::SUCCESS,
-        'statuses.labels.info' => self::INFO,
-        'statuses.labels.warning' => self::WARNING,
-        'statuses.labels.danger' => self::DANGER,
+        'statuses.labels.normal' => StatusColor::NORMAL,
+        'statuses.labels.primary' => StatusColor::PRIMARY,
+        'statuses.labels.success' => StatusColor::SUCCESS,
+        'statuses.labels.info' => StatusColor::INFO,
+        'statuses.labels.warning' => StatusColor::WARNING,
+        'statuses.labels.danger' => StatusColor::DANGER
     ];
 
     /**

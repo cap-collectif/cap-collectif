@@ -4,11 +4,11 @@ FollowerOrderField:
     description: 'Properties by which follower connections can be ordered'
     values:
       NAME:
-        value: 'NAME'
+        value: '@=constant("Capco\\AppBundle\\Enum\\FollowerOrderField::NAME")'
         description: 'Allows ordering a list of followers namely.'
       FOLLOWED_AT:
-        value: 'FOLLOWED_AT'
+        value: '@=constant("Capco\\AppBundle\\Enum\\FollowerOrderField::FOLLOWED_AT")'
         description: 'Allows ordering a list of followers by when they were followed.'
       RANDOM:
-        value: 'RANDOM'
+        value: '@=constant("Capco\\AppBundle\\Enum\\FollowerOrderField::RANDOM")'
         description: 'Allows ordering a list of followers randomly.'

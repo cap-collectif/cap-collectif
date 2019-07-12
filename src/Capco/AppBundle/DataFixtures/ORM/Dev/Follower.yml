@@ -166,7 +166,7 @@ Capco\AppBundle\Entity\Follower:
     opinion: '@opinion8'
     user: '@user11'
     followedAt: <identity((new \DateTime('2018-01-01'))->modify("- 10 days"))>
-    notifiedOf: 1
+    notifiedOf: 'MINIMAL'
   follower2{28..60}:
     opinion: '@opinion6'
     user: '@user<current()>'

@@ -76,6 +76,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "usingSummary": true,
           "usingThemes": true,
         },
+        "formattedAddress": null,
         "id": "1",
         "media": Object {
           "id": "1",

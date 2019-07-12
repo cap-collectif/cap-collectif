@@ -4,12 +4,12 @@ QuestionChoiceColor:
     description: 'Available colors for a question choice'
     values:
       PRIMARY:
-        value: '#fffff'
+        value: '@=constant("Capco\\AppBundle\\Enum\\QuestionChoiceColors::PRIMARY")'
       SUCCESS:
-        value: '#5cb85c'
+        value: '@=constant("Capco\\AppBundle\\Enum\\QuestionChoiceColors::SUCCESS")'
       INFO:
-        value: '#5bc0de'
+        value: '@=constant("Capco\\AppBundle\\Enum\\QuestionChoiceColors::INFO")'
       WARNING:
-        value: '#f0ad4e'
+        value: '@=constant("Capco\\AppBundle\\Enum\\QuestionChoiceColors::WARNING")'
       DANGER:
-        value: '#d9534f'
+        value: '@=constant("Capco\\AppBundle\\Enum\\QuestionChoiceColors::DANGER")'

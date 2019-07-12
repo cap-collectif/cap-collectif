@@ -8,8 +8,6 @@ import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { GlobalState } from '../../../types';
 import ProposalListViewPaginated from './ProposalListViewPaginated';
 import { graphqlError } from '../../../createRelayEnvironment';
-import type {ProposalViewMode} from "../../../redux/modules/proposal"
-import type {GeoJson, MapOptions} from "../Map/LeafletMap"
 
 type Filters = {|
   categories?: string,
@@ -73,10 +71,8 @@ type Props = {
   relay: RelayRefetchProp,
   step: ProposalListView_step,
   viewer: ?ProposalListView_viewer,
-  defaultMapOptions: MapOptions,
-  geoJsons: Array<GeoJson>,
-  displayMap: boolean,
-  view: ProposalViewMode,
+  visible: boolean,
+  view: 'mosaic' | 'table',
   count: number,
 };
 type State = {
@@ -125,7 +121,11 @@ export class ProposalListView extends React.Component<Props, State> {
   };
 
   render() {
-    const { displayMap, geoJsons, defaultMapOptions, step, viewer, view, count } = this.props;
+    const { visible, step, viewer, view, count } = this.props;
+
+    if (!visible) {
+      return null;
+    }
 
     if (this.state.hasRefetchError) {
       return graphqlError;
@@ -136,14 +136,7 @@ export class ProposalListView extends React.Component<Props, State> {
     }
 
     // $FlowFixMe
-    return <ProposalListViewPaginated
-      displayMap={displayMap}
-      geoJsons={geoJsons}
-      defaultMapOptions={defaultMapOptions}
-      count={count}
-      step={step}
-      viewer={viewer}
-      view={view} />;
+    return <ProposalListViewPaginated count={count} step={step} viewer={viewer} view={view} />;
   }
 }
 

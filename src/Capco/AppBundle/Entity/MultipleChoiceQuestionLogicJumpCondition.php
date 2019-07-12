@@ -1,9 +1,7 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Capco\AppBundle\Enum\LogicJumpConditionOperatorEnum;
-use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

@@ -4,8 +4,8 @@ ArgumentValue:
     description: 'Value of an argument'
     values:
       AGAINST:
-        value: 0
+        value: '@=constant("Capco\\AppBundle\\Entity\\Argument::TYPE_AGAINST")'
         description: 'AGAINST argument'
       FOR:
-        value: 1
+        value: '@=constant("Capco\\AppBundle\\Entity\\Argument::TYPE_FOR")'
         description: 'FOR argument'

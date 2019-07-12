@@ -3,13 +3,18 @@ ReportingType:
   config:
     description: 'Type of reporting'
     values:
-      ERROR:
-        value: 3
-      OFF:
-        value: 1
-      OFF_TOPIC:
-        value: 4
       SEX:
-        value: 0
+        value: '@=constant("Capco\\AppBundle\\Enum\\ReportingType::SEX")'
+        description: 'The associated contribution has been flagged as sexual content'
+      OFF:
+        value: '@=constant("Capco\\AppBundle\\Enum\\ReportingType::OFF")'
+        description: 'The associated contribution has been flagged as offending content'
       SPAM:
-        value: 2
+        value: '@=constant("Capco\\AppBundle\\Enum\\ReportingType::SPAM")'
+        description: 'The associated contribution has been flagged as spam'
+      ERROR:
+        value: '@=constant("Capco\\AppBundle\\Enum\\ReportingType::ERROR")'
+        description: 'The associated contribution has been flagged as erroneous'
+      OFF_TOPIC:
+        value: '@=constant("Capco\\AppBundle\\Enum\\ReportingType::OFF_TOPIC")'
+        description: 'The associated contribution has been flagged as off topic'

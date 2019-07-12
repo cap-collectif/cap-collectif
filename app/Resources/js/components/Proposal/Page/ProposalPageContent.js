@@ -51,7 +51,7 @@ export class ProposalPageContent extends React.Component<Props> {
       L = require('leaflet'); // eslint-disable-line
     }
 
-    const { address } = proposal;
+    const address = proposal.address ? JSON.parse(proposal.address) : null;
     const proposalForm = proposal.form;
 
     return (
@@ -101,11 +101,11 @@ export class ProposalPageContent extends React.Component<Props> {
             <h3 className="h3">
               <FormattedMessage id="proposal.map.form.field" />
             </h3>
-            <p>{address.formatted}</p>
+            <p>{address[0].formatted_address}</p>
             <Map
               center={{
-                lat: address.lat,
-                lng: address.lng,
+                lat: address[0].geometry.location.lat,
+                lng: address[0].geometry.location.lng,
               }}
               zoom={16}
               maxZoom={18}
@@ -118,7 +118,7 @@ export class ProposalPageContent extends React.Component<Props> {
                 url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
               />
               <Marker
-                position={[address.lat, address.lng]}
+                position={[address[0].geometry.location.lat, address[0].geometry.location.lng]}
                 icon={L.icon({
                   iconUrl: '/svg/marker.svg',
                   iconSize: [40, 40],
@@ -202,11 +202,7 @@ export default createFragmentContainer(container, {
       form {
         contribuable
       }
-      address {
-        formatted
-        lat
-        lng
-      }
+      address
       body
       summary
       media {

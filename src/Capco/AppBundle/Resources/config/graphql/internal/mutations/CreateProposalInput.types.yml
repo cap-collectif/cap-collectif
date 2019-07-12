@@ -28,7 +28,7 @@ CreateProposalInput:
         type: 'ID'
         description: 'The district id (feature districts must be enabled)'
       address:
-        type: 'String'
+        type: 'Address'
         description: 'The address geocoded by google'
       responses:
         type: '[ResponseInput]'

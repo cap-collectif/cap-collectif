@@ -46,12 +46,7 @@ const mutation = graphql`
         category {
           id
         }
-        address {
-          json
-          formatted
-          lat
-          lng
-        }
+        address
         district {
           id
         }

@@ -4559,31 +4559,31 @@
         },
         {
             "name": "jolicode/jolitypo",
-            "version": "1.0.5",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jolicode/JoliTypo.git",
-                "reference": "31da15657ec27837d014740a0a0ab281c58959c0"
+                "reference": "b88e06ac94738d15dc394aff4537dd12578ff769"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jolicode/JoliTypo/zipball/31da15657ec27837d014740a0a0ab281c58959c0",
-                "reference": "31da15657ec27837d014740a0a0ab281c58959c0",
+                "url": "https://api.github.com/repos/jolicode/JoliTypo/zipball/b88e06ac94738d15dc394aff4537dd12578ff769",
+                "reference": "b88e06ac94738d15dc394aff4537dd12578ff769",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "lib-libxml": "*",
                 "org_heigl/hyphenator": "~2.0.3",
-                "php": ">=7.0.0"
+                "php": ">=5.6.0"
             },
             "conflict": {
                 "ext-apc": "3.1.11"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2",
-                "symfony/framework-bundle": "^2.3|^3.0|^4.0",
-                "symfony/phpunit-bridge": "^4"
+                "friendsofphp/php-cs-fixer": "~2.2.0",
+                "phpunit/phpunit": "~4.5",
+                "symfony/framework-bundle": "^2.3|^3.0|^4.0"
             },
             "type": "library",
             "autoload": {
@@ -4614,7 +4614,7 @@
                 "smartquote",
                 "typography"
             ],
-            "time": "2019-07-01T08:09:49+00:00"
+            "time": "2018-11-21T11:43:30+00:00"
         },
         {
             "name": "knplabs/gaufrette",
@@ -6210,7 +6210,7 @@
                     "name": "Andreas Heigl",
                     "email": "andreas@heigl.org",
                     "homepage": "http://andreas.heigl.org",
-                    "role": "developer"
+                    "role": "Developer"
                 }
             ],
             "description": "Word-Hyphenation for PHP based on the TeX-Hyphenation algorithm",
@@ -11776,12 +11776,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tweedegolf/prometheus-bundle.git",
+                "url": "https://github.com/cap-collectif/prometheus-bundle.git",
                 "reference": "e559a615173c82884820eec55cacc2513a35c31a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tweedegolf/prometheus-bundle/zipball/e559a615173c82884820eec55cacc2513a35c31a",
+                "url": "https://api.github.com/repos/cap-collectif/prometheus-bundle/zipball/e559a615173c82884820eec55cacc2513a35c31a",
                 "reference": "e559a615173c82884820eec55cacc2513a35c31a",
                 "shasum": ""
             },
@@ -14021,7 +14021,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette Finder: find files and directories with an intuitive API.",
+            "description": "🔍 Nette Finder: find files and directories with an intuitive API.",
             "homepage": "https://nette.org",
             "keywords": [
                 "filesystem",
@@ -14081,7 +14081,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette NEON: encodes and decodes NEON file format.",
+            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",
@@ -15005,23 +15005,23 @@
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "0.11.5",
+            "version": "0.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "3c68697365f0b71e357d773d91a6c77f3f9e143a"
+                "reference": "f7ce9844788ff131bfb76d379d940617188b8239"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/3c68697365f0b71e357d773d91a6c77f3f9e143a",
-                "reference": "3c68697365f0b71e357d773d91a6c77f3f9e143a",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/f7ce9844788ff131bfb76d379d940617188b8239",
+                "reference": "f7ce9844788ff131bfb76d379d940617188b8239",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^4.0",
                 "php": "~7.1",
                 "phpstan/phpdoc-parser": "^0.3",
-                "phpstan/phpstan": "^0.11.7"
+                "phpstan/phpstan": "^0.11"
             },
             "conflict": {
                 "doctrine/collections": "<1.0",
@@ -15030,7 +15030,7 @@
                 "doctrine/orm": "<2.5"
             },
             "require-dev": {
-                "consistence/coding-standard": "^3.8",
+                "consistence/coding-standard": "^3.0.1",
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
                 "doctrine/collections": "^1.0",
                 "doctrine/common": "^2.7",
@@ -15041,18 +15041,12 @@
                 "phpstan/phpstan-phpunit": "^0.11",
                 "phpstan/phpstan-strict-rules": "^0.11",
                 "phpunit/phpunit": "^7.0",
-                "slevomat/coding-standard": "^5.0.4"
+                "slevomat/coding-standard": "^4.5.2"
             },
-            "type": "phpstan-extension",
+            "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "0.11-dev"
-                },
-                "phpstan": {
-                    "includes": [
-                        "extension.neon",
-                        "rules.neon"
-                    ]
                 }
             },
             "autoload": {
@@ -15065,7 +15059,7 @@
                 "MIT"
             ],
             "description": "Doctrine extensions for PHPStan",
-            "time": "2019-05-29T06:01:20+00:00"
+            "time": "2019-03-11T11:44:21+00:00"
         },
         {
             "name": "phpstan/phpstan-symfony",
@@ -15915,7 +15909,7 @@
                 "page"
             ],
             "support": {
-                "source": "https://github.com/cap-collectif/BehatPageObjectExtension/tree/master"
+                "source": "https://github.com/spyl94/BehatPageObjectExtension/tree/master"
             },
             "time": "2016-03-15T13:13:55+00:00"
         },
@@ -16112,7 +16106,7 @@
                 "testing"
             ],
             "support": {
-                "source": "https://github.com/cap-collectif/behat-parallel-scenario/tree/master"
+                "source": "https://github.com/spyl94/behat-parallel-scenario/tree/master"
             },
             "time": "2016-03-11T13:43:33+00:00"
         },

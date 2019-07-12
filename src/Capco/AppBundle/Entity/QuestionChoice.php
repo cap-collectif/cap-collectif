@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Enum\QuestionChoiceColors;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -21,11 +22,11 @@ class QuestionChoice
     use PositionableTrait;
 
     public static $availableColors = [
-        'admin.fields.question_choice.colors.primary' => '#fffff',
-        'admin.fields.question_choice.colors.success' => '#5cb85c',
-        'admin.fields.question_choice.colors.info' => '#5bc0de',
-        'admin.fields.question_choice.colors.warning' => '#f0ad4e',
-        'admin.fields.question_choice.colors.danger' => '#d9534f',
+        'admin.fields.question_choice.colors.primary' => QuestionChoiceColors::PRIMARY,
+        'admin.fields.question_choice.colors.success' => QuestionChoiceColors::SUCCESS,
+        'admin.fields.question_choice.colors.info' => QuestionChoiceColors::INFO,
+        'admin.fields.question_choice.colors.warning' => QuestionChoiceColors::WARNING,
+        'admin.fields.question_choice.colors.danger' => QuestionChoiceColors::DANGER
     ];
 
     /**

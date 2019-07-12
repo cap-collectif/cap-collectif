@@ -4,8 +4,8 @@ ArgumentOrderField:
     description: 'Properties by which argument connections can be ordered'
     values:
       PUBLISHED_AT:
-        value: 'PUBLISHED_AT'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ArgumentOrderField::PUBLISHED_AT")'
         description: 'Allows ordering a list of arguments by when they were published.'
       VOTES:
-        value: 'VOTES'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ArgumentOrderField::VOTES")'
         description: 'Allows ordering a list of arguments by the number of votes it have.'
