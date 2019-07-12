@@ -47,7 +47,7 @@ const mutation = graphql`
           id
         }
         address {
-          raw
+          json
           formatted
           lat
           lng

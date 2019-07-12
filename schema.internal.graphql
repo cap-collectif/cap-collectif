@@ -2322,12 +2322,12 @@ scalar GeoJSON
 # An address from Google Maps.
 type GoogleMapsAddress {
   # The raw response from the Google Maps API that describes an address
-  raw: String!
+  json: String!
 
   # A human-readable address string.
   formatted: String
 
-  # The address types.
+  # The available types for this address. A type indicate the accuracy of the address on Google Maps.
   types: [GoogleMapsAddressType!]!
 
   # The latitude of this address.

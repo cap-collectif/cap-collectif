@@ -590,9 +590,8 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
     district: proposal && proposal.district ? proposal.district.id : undefined,
     category: proposal && proposal.category ? proposal.category.id : undefined,
     media: proposal ? proposal.media : undefined,
-    addressText:
-      proposal && proposal.address ? proposal.address.formatted : '',
-    address: (proposal && proposal.address && proposal.address.raw) || undefined,
+    addressText: proposal && proposal.address ? proposal.address.formatted : '',
+    address: (proposal && proposal.address && proposal.address.json) || undefined,
     responses: formatInitialResponsesValues(
       proposalForm.questions,
       proposal ? proposal.responses : [],
@@ -622,7 +621,7 @@ export default createFragmentContainer(container, {
       body
       summary
       address {
-        raw
+        json
         formatted
         lat
         lng

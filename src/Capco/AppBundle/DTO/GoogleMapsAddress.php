@@ -4,17 +4,20 @@ namespace Capco\AppBundle\DTO;
 
 class GoogleMapsAddress
 {
-
-    protected $raw;
+    protected $json;
     protected $formatted;
     protected $types;
     protected $lat;
     protected $lng;
 
-    private function __construct(string $raw, array $types, float $lat, float $lng, ?string $formatted)
-    {
-
-        $this->raw = $raw;
+    private function __construct(
+        string $json,
+        array $types,
+        float $lat,
+        float $lng,
+        ?string $formatted
+    ) {
+        $this->json = $json;
         $this->types = $types;
         $this->lat = $lat;
         $this->lng = $lng;
@@ -25,29 +28,31 @@ class GoogleMapsAddress
     {
         try {
             $decoded = \GuzzleHttp\json_decode($response, true);
-            if (count($decoded) > 0 && $address = $decoded[0]) {
+            if (\count($decoded) > 0 && ($address = $decoded[0])) {
                 return new self(
                     $response,
                     explode('|', $address['geometry']['location_type']),
-                    (float)$address['geometry']['location']['lat'],
-                    (float)$address['geometry']['location']['lng'],
+                    (float) $address['geometry']['location']['lat'],
+                    (float) $address['geometry']['location']['lng'],
                     $address['formatted_address'] ?? null
                 );
             }
+
             return null;
         } catch (\InvalidArgumentException $exception) {
             return null;
         }
     }
 
-    public function getRaw(): string
+    public function getJson(): string
     {
-        return $this->raw;
+        return $this->json;
     }
 
-    public function setRaw($raw): self
+    public function setJson(string $json): self
     {
-        $this->raw = $raw;
+        $this->json = $json;
+
         return $this;
     }
 
@@ -98,5 +103,4 @@ class GoogleMapsAddress
 
         return $this;
     }
-
 }
