@@ -18,8 +18,8 @@ import EventListCounter from './EventListCounter';
 import EventListStatusFilter from './EventListStatusFilter';
 import UserListField from '../../Admin/Field/UserListField';
 import type { EventListFilters_query } from '~relay/EventListFilters_query.graphql';
-import ThemeFilter from '../../Utils/ThemeFilter';
-import ProjectFilter from '../../Utils/ProjectFilter';
+import SelectTheme from '../../Utils/SelectTheme';
+import SelectProject from '../../Utils/SelectProject';
 
 type Registrable = 'all' | 'yes' | 'no';
 
@@ -144,7 +144,7 @@ export class EventListFilters extends React.Component<Props> {
       filters.push(
         <div>
           {/* $FlowFixMe $refType */}
-          <ThemeFilter query={query} />
+          <SelectTheme query={query} />
         </div>,
       );
     }
@@ -152,7 +152,7 @@ export class EventListFilters extends React.Component<Props> {
       filters.push(
         <div>
           {/* $FlowFixMe $refType */}
-          <ProjectFilter query={query} />
+          <SelectProject query={query} />
         </div>,
       );
     }
@@ -314,8 +314,8 @@ export default createFragmentContainer(container, {
           author: $author
           isRegistrable: $isRegistrable
         )
-      ...ThemeFilter_query
-      ...ProjectFilter_query @arguments(withEventOnly: $withEventOnly)
+      ...SelectTheme_query
+      ...SelectProject_query @arguments(withEventOnly: $withEventOnly)
     }
   `,
 });

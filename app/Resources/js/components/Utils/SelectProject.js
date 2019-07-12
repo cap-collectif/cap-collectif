@@ -4,14 +4,14 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { Field } from 'redux-form';
 import select from '../Form/Select';
-import type { ProjectFilter_query } from '~relay/ProjectFilter_query.graphql';
+import type { SelectProject_query } from '~relay/SelectProject_query.graphql';
 
-type Props = {
-  query: ProjectFilter_query,
+type Props = {|
+  query: SelectProject_query,
   intl: IntlShape,
-};
+|};
 
-export class ProjectFilter extends React.Component<Props> {
+export class SelectProject extends React.Component<Props> {
   render() {
     const { query, intl } = this.props;
 
@@ -19,7 +19,7 @@ export class ProjectFilter extends React.Component<Props> {
       <div>
         <Field
           component={select}
-          id="ProjectFilter-filter-project"
+          id="SelectProject-filter-project"
           name="project"
           placeholder={intl.formatMessage({ id: 'project.searchform.all_projects' })}
           label={intl.formatMessage({ id: 'type-project' })}
@@ -36,18 +36,18 @@ export class ProjectFilter extends React.Component<Props> {
           role="combobox"
           aria-autocomplete="list"
           aria-haspopup="true"
-          aria-controls="ProjectFilter-filter-project-listbox"
+          aria-controls="SelectProject-filter-project-listbox"
         />
       </div>
     );
   }
 }
 
-const container = injectIntl(ProjectFilter);
+const container = injectIntl(SelectProject);
 
 export default createFragmentContainer(container, {
   query: graphql`
-    fragment ProjectFilter_query on Query @argumentDefinitions(withEventOnly: { type: "Boolean" }) {
+    fragment SelectProject_query on Query @argumentDefinitions(withEventOnly: { type: "Boolean" }) {
       projects(withEventOnly: $withEventOnly) {
         edges {
           node {

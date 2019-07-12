@@ -140,7 +140,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
               >
                 <div>
                   <div>
-                    <ForwardRef(Relay(InjectIntl(ThemeFilter)))
+                    <ForwardRef(Relay(InjectIntl(SelectTheme)))
                       query={
                         Object {
                           "$fragmentRefs": null,
@@ -158,7 +158,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
               >
                 <div>
                   <div>
-                    <ForwardRef(Relay(InjectIntl(ProjectFilter)))
+                    <ForwardRef(Relay(InjectIntl(SelectProject)))
                       query={
                         Object {
                           "$fragmentRefs": null,

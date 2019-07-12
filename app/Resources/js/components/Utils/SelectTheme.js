@@ -4,14 +4,14 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { Field } from 'redux-form';
 import select from '../Form/Select';
-import type { ThemeFilter_query } from '~relay/ThemeFilter_query.graphql';
+import type { SelectTheme_query } from '~relay/SelectTheme_query.graphql';
 
-type Props = {
-  query: ThemeFilter_query,
+type Props = {|
+  query: SelectTheme_query,
   intl: IntlShape,
-};
+|};
 
-export class ThemeFilter extends React.Component<Props> {
+export class SelectTheme extends React.Component<Props> {
   render() {
     const { query, intl } = this.props;
 
@@ -19,7 +19,7 @@ export class ThemeFilter extends React.Component<Props> {
       <div>
         <Field
           component={select}
-          id="ThemeFilter-filter-theme"
+          id="SelectTheme-filter-theme"
           name="theme"
           placeholder={intl.formatMessage({ id: 'project.searchform.all_themes' })}
           label={intl.formatMessage({ id: 'type-theme' })}
@@ -29,18 +29,18 @@ export class ThemeFilter extends React.Component<Props> {
           role="combobox"
           aria-autocomplete="list"
           aria-haspopup="true"
-          aria-controls="ThemeFilter-filter-theme-listbox"
+          aria-controls="SelectTheme-filter-theme-listbox"
         />
       </div>
     );
   }
 }
 
-const container = injectIntl(ThemeFilter);
+const container = injectIntl(SelectTheme);
 
 export default createFragmentContainer(container, {
   query: graphql`
-    fragment ThemeFilter_query on Query {
+    fragment SelectTheme_query on Query {
       themes {
         id
         title
