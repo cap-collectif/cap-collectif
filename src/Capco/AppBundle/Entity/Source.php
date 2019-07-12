@@ -40,7 +40,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
 
     public static $TypesLabels = [
         self::LINK => 'source.type.link',
-        self::FILE => 'source.type.file',
+        self::FILE => 'source.type.file'
     ];
 
     /**
@@ -339,6 +339,9 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
         return false;
     }
 
+    /**
+     * @deprecated: please consider using `viewerCanSee` instead.
+     */
     public function canDisplay($user = null): bool
     {
         return ($this->isPublished() && $this->getParent()->canDisplay($user)) ||

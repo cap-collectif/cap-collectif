@@ -3,7 +3,9 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\SSO\AbstractSSOConfiguration;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -20,5 +22,22 @@ class AbstractSSOConfigurationRepository extends EntityRepository
             ->setMaxResults($limit);
 
         return new Paginator($qb);
+    }
+
+    public function getPublicList(): array
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('name', 'name');
+        $rsm->addScalarResult('ssoType', 'ssoType');
+        $query = $this->getEntityManager()->createNativeQuery(
+            '
+            SELECT name, ssoType
+            FROM sso_configuration
+            WHERE enabled = 1
+        ',
+            $rsm
+        );
+
+        return $query->getResult(AbstractQuery::HYDRATE_ARRAY);
     }
 }

@@ -28,14 +28,16 @@ class QuestionnairePage extends Page
         'reply buttons' => '.reply__buttons',
         'delete reply button' => '#reply-link-UmVwbHk6cmVwbHky .reply__delete-btn',
         'delete reply draft button' => '#reply-link-UmVwbHk6cmVwbHk1 .reply__delete-btn',
+        'delete 2nd reply draft button' => '#reply-link-UmVwbHk6cmVwbHk5 .reply__delete-btn',
         'update reply button' => '#reply-link-UmVwbHk6cmVwbHky .reply__update-btn',
         'update reply draft button' => '#reply-link-UmVwbHk6cmVwbHk1 .reply__update-btn',
         'confirm delete reply button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHky',
         'confirm delete reply draft button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHk1',
+        'confirm delete 2nd reply draft button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHk5',
         'first ranking choice right arrow' =>
             '.ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right',
         'update first ranking choice right arrow' =>
-            '.reply__modal--show .ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right',
+            '.reply__modal--show .ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right'
     ];
 
     public function submitReply()
@@ -113,9 +115,19 @@ class QuestionnairePage extends Page
         $this->getElement('delete reply draft button')->click();
     }
 
+    public function clickDelete2ndReplyDraftButton()
+    {
+        $this->getElement('delete 2nd reply draft button')->click();
+    }
+
     public function clickConfirmDeleteReplyDraftButton()
     {
         $this->getElement('confirm delete reply draft button')->click();
+    }
+
+    public function clickConfirmDelete2ndReplyDraftButton()
+    {
+        $this->getElement('confirm delete 2nd reply draft button')->click();
     }
 
     public function clickConfirmDeleteReplyButton()

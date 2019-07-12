@@ -21,9 +21,9 @@ capcobot = {
 def phpspec(desc=False):
     "Run PHP Unit Tests"
     if desc:
-        env.service_command('phpdbg -qrr bin/phpspec describe ' + desc, 'application', env.www_app)
+        env.service_command('phpdbg -qrr -d memory_limit=-1 bin/phpspec describe ' + desc, 'application', env.www_app)
     else:
-        env.service_command('phpdbg -qrr bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
+        env.service_command('phpdbg -qrr -d memory_limit=-1 bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
 
 
 @task(environments=['ci'])
@@ -42,6 +42,7 @@ def graphql_schemas(checkSame=False):
 
 @task(environments=['local'])
 def snapshots(emails=False):
+    "Run Generating Snapshot"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     commands = [
         'capco:export:users --quiet --snapshot',

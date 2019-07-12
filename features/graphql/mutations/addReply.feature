@@ -1,4 +1,4 @@
-@addReply
+@addReply @reply
 Feature: Add Reply
 
 @database

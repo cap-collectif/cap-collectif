@@ -6,32 +6,39 @@ import { LoginSocialButtons } from './LoginSocialButtons';
 import { features } from '../../../redux/modules/default';
 
 describe('<LoginSocialButtons />', () => {
+  const ssoList = [{ name: 'Cap Collectif Oauth2 Provider', ssoType: 'oauth2' }];
+
   const props = {
     features,
+    ssoList,
   };
   const propsWithFeatureLoginGoogleActivated = {
     features: {
       ...features,
       login_gplus: true,
     },
+    ssoList: [],
   };
   const propsWithFeatureLoginFacebookActivated = {
     features: {
       ...features,
       login_facebook: true,
     },
+    ssoList: [],
   };
   const propsWithFeatureLoginSamlActivated = {
     features: {
       ...features,
       login_saml: true,
     },
+    ssoList: [],
   };
   const propsWithFeatureLoginOpenIDActivated = {
     features: {
       ...features,
       login_openid: true,
     },
+    ssoList,
   };
   const propsWithAllLoginFeaturesLoginActivated = {
     features: {
@@ -41,6 +48,7 @@ describe('<LoginSocialButtons />', () => {
       login_saml: true,
       login_openid: true,
     },
+    ssoList: [],
   };
 
   const propsWithAllLoginFeaturesLoginActivatedAndORSperatorDisabled = {
@@ -52,6 +60,7 @@ describe('<LoginSocialButtons />', () => {
       login_openid: true,
       sso_by_pass_auth: true,
     },
+    ssoList,
   };
 
   it('renders nothing', () => {

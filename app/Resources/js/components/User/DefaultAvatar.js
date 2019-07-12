@@ -8,7 +8,7 @@ type Props = {
 
 export default class DefaultAvatar extends React.Component<Props> {
   static defaultProps = {
-    className: 'img-circle avatar mr-10',
+    className: 'img-circle avatar mr-10 user-avatar',
     size: 45,
   };
 

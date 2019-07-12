@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\SiteImage\Resolver;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-class DefaultAvatarExtension extends \Twig_Extension
+class DefaultAvatarExtension extends AbstractExtension
 {
     protected $resolver;
 
@@ -13,11 +15,9 @@ class DefaultAvatarExtension extends \Twig_Extension
         $this->resolver = $resolver;
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
-        return [
-            new \Twig_SimpleFilter('capco_default_avatar', [$this, 'getDefaultAvatarIfNull']),
-        ];
+        return [new TwigFilter('capco_default_avatar', [$this, 'getDefaultAvatarIfNull'])];
     }
 
     public function getDefaultAvatarIfNull($media)

@@ -1,70 +1,97 @@
 Capco\AppBundle\Entity\ProjectAuthor:
   pa1:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p1'
   pa2:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p2'
   pa3:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p3'
   pa4:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p4'
   pa5:
+    createdAt: <(new \DateTime('2018-02-02'))>
     user: '@user2'
     project: '@p5'
   pa6:
+    createdAt: <(new \DateTime('2018-05-02'))>
     user: '@user502'
     project: '@p6'
   pa7:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p7'
   pa8:
+    createdAt: <(new \DateTime('2018-05-02'))>
     user: '@user502'
     project: '@p8'
   pa9:
+    createdAt: <(new \DateTime('2018-01-01'))>
     user: '@user1'
     project: '@p9'
   pa10:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p10'
   pa11:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p11'
   pa12:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p12'
   pa13:
+    createdAt: <(new \DateTime('2018-03-03'))>
     user: '@user3'
     project: '@p13'
   pa14:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p14'
   pa15:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p15'
   pa16:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p16'
   pa17:
+    createdAt: <(new \DateTime('2018-05-16'))>
     user: '@user516'
     project: '@p17'
   pa18:
+    createdAt: <(new \DateTime('2018-05-16'))>
     user: '@user516'
     project: '@p18'
   pa19:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p19'
   pa20:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p20'
   pa21:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p21'
   pa22:
+    createdAt: <(new \DateTime('2018-05-02'))>
+    user: '@user502'
+    project: '@p21'
+  pa23:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p22'
-  pa23:
+  pa24:
+    createdAt: <(new \DateTime('2018-04-04'))>
     user: '@user4'
     project: '@p23'

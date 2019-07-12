@@ -145,3 +145,11 @@ export type District = {|
   border: ?BorderStyle,
   background: ?BackgroundStyle,
 |};
+
+// @TODO: Add more type in the future here.
+export type SSOType = 'oauth2';
+
+export type SSOConfiguration = {|
+  name: string,
+  ssoType: SSOType,
+|};

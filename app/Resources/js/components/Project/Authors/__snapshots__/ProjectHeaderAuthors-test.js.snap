@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectHeaderAuthors /> renders correctly with 3 authors 1`] = `
+<ProjectHeaderAuthors__Container
+  id="project-header"
+>
+  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+    onClose={[Function]}
+    show={false}
+    users={
+      Array [
+        Object {
+          "$fragmentRefs": null,
+          "url": "http://jaimeles.coquillettes",
+          "username": "toto",
+        },
+        Object {
+          "$fragmentRefs": null,
+          "url": "http://jaimeles.gnocchis",
+          "username": "tota",
+        },
+        Object {
+          "$fragmentRefs": null,
+          "url": "http://jaimeles.farfale",
+          "username": "titi",
+        },
+      ]
+    }
+  />
+  <div>
+    <ForwardRef(Relay(Connect(UserAvatarList)))
+      max={3}
+      onClick={[Function]}
+      users={
+        Array [
+          Object {
+            "$fragmentRefs": null,
+            "url": "http://jaimeles.coquillettes",
+            "username": "toto",
+          },
+          Object {
+            "$fragmentRefs": null,
+            "url": "http://jaimeles.gnocchis",
+            "username": "tota",
+          },
+          Object {
+            "$fragmentRefs": null,
+            "url": "http://jaimeles.farfale",
+            "username": "titi",
+          },
+        ]
+      }
+    />
+  </div>
+  <ProjectHeaderAuthors__AuthorsContainer>
+    <ProjectHeaderAuthors__AuthorsCreditContainer
+      className="ml-5 p-0 font-weight-bold"
+      href={null}
+      id="authors-credit"
+      onClick={[Function]}
+    >
+      <span>
+        <FormattedMessage
+          id="project-authors"
+          values={
+            Object {
+              "authorName": "toto",
+              "number": 2,
+            }
+          }
+        />
+      </span>
+    </ProjectHeaderAuthors__AuthorsCreditContainer>
+  </ProjectHeaderAuthors__AuthorsContainer>
+</ProjectHeaderAuthors__Container>
+`;
+
+exports[`<ProjectHeaderAuthors /> renders correctly with one author 1`] = `
+<ProjectHeaderAuthors__Container
+  id="project-header"
+>
+  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+    onClose={[Function]}
+    show={false}
+    users={
+      Array [
+        Object {
+          "$fragmentRefs": null,
+          "url": "http://jaimeles.coquillettes",
+          "username": "toto",
+        },
+      ]
+    }
+  />
+  <div>
+    <ForwardRef(Relay(Connect(UserAvatarList)))
+      max={3}
+      onClick={[Function]}
+      users={
+        Array [
+          Object {
+            "$fragmentRefs": null,
+            "url": "http://jaimeles.coquillettes",
+            "username": "toto",
+          },
+        ]
+      }
+    />
+  </div>
+  <ProjectHeaderAuthors__AuthorsContainer>
+    <ProjectHeaderAuthors__AuthorsCreditContainer
+      className="ml-5 p-0 font-weight-bold"
+      href="http://jaimeles.coquillettes"
+      id="authors-credit"
+      onClick={null}
+    >
+      <span>
+        toto
+      </span>
+    </ProjectHeaderAuthors__AuthorsCreditContainer>
+  </ProjectHeaderAuthors__AuthorsContainer>
+</ProjectHeaderAuthors__Container>
+`;
+
+exports[`<ProjectHeaderAuthors /> renders correctly with two authors 1`] = `
+<ProjectHeaderAuthors__Container
+  id="project-header"
+>
+  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+    onClose={[Function]}
+    show={false}
+    users={
+      Array [
+        Object {
+          "$fragmentRefs": null,
+          "url": "http://jaimeles.coquillettes",
+          "username": "toto",
+        },
+        Object {
+          "$fragmentRefs": null,
+          "url": "http://jaimeles.gnocchis",
+          "username": "tota",
+        },
+      ]
+    }
+  />
+  <div>
+    <ForwardRef(Relay(Connect(UserAvatarList)))
+      max={3}
+      onClick={[Function]}
+      users={
+        Array [
+          Object {
+            "$fragmentRefs": null,
+            "url": "http://jaimeles.coquillettes",
+            "username": "toto",
+          },
+          Object {
+            "$fragmentRefs": null,
+            "url": "http://jaimeles.gnocchis",
+            "username": "tota",
+          },
+        ]
+      }
+    />
+  </div>
+  <ProjectHeaderAuthors__AuthorsContainer>
+    <ProjectHeaderAuthors__AuthorsCreditContainer
+      className="ml-5 p-0 font-weight-bold"
+      href={null}
+      id="authors-credit"
+      onClick={[Function]}
+    >
+      <span>
+        toto
+         
+        <FormattedMessage
+          id="event.and"
+          values={Object {}}
+        />
+         
+        tota
+      </span>
+    </ProjectHeaderAuthors__AuthorsCreditContainer>
+  </ProjectHeaderAuthors__AuthorsContainer>
+</ProjectHeaderAuthors__Container>
+`;
+
+exports[`<ProjectHeaderAuthors /> renders correctly without authors 1`] = `
+<ProjectHeaderAuthors__Container
+  id="project-header"
+>
+  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+    onClose={[Function]}
+    show={false}
+    users={Array []}
+  />
+  <div>
+    <ForwardRef(Relay(Connect(UserAvatarList)))
+      max={3}
+      onClick={[Function]}
+      users={Array []}
+    />
+  </div>
+  <ProjectHeaderAuthors__AuthorsContainer>
+    <ProjectHeaderAuthors__AuthorsCreditContainer
+      className="ml-5 p-0 font-weight-bold"
+      href={null}
+      id="authors-credit"
+      onClick={null}
+    />
+  </ProjectHeaderAuthors__AuthorsContainer>
+</ProjectHeaderAuthors__Container>
+`;

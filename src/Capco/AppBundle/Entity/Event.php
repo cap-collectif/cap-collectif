@@ -388,6 +388,9 @@ class Event implements
 
     // **************** Custom methods ***************
 
+    /**
+     * @deprecated: please consider using `viewerCanSee` instead.
+     */
     public function canDisplay(): bool
     {
         return $this->enabled;

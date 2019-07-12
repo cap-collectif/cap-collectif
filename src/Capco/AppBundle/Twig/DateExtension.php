@@ -2,13 +2,16 @@
 
 namespace Capco\AppBundle\Twig;
 
-class DateExtension extends \Twig_Extension
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
+class DateExtension extends AbstractExtension
 {
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('date_diff', [$this, 'getDatesDiff']),
-            new \Twig_SimpleFilter('has_significant_diff', [$this, 'hasSignificantDiff']),
+            new TwigFilter('date_diff', [$this, 'getDatesDiff']),
+            new TwigFilter('has_significant_diff', [$this, 'hasSignificantDiff'])
         ];
     }
 
@@ -17,15 +20,18 @@ class DateExtension extends \Twig_Extension
         return $this->getDiffInSeconds($firstDate, $secondDate, $absolute);
     }
 
-    public function hasSignificantDiff($firstDate, $secondDate, $maxDiff = 60)
+    public function hasSignificantDiff($firstDate, $secondDate, $maxDiff = 60): bool
     {
         $diff = $this->getDiffInSeconds($firstDate, $secondDate, true);
 
         return $diff > $maxDiff;
     }
 
-    protected function getDiffInSeconds(\DateTime $firstDate, \DateTime $secondDate, $absolute = false)
-    {
+    protected function getDiffInSeconds(
+        \DateTime $firstDate,
+        \DateTime $secondDate,
+        $absolute = false
+    ) {
         $diff = $firstDate->getTimestamp() - $secondDate->getTimestamp();
 
         return $absolute ? abs($diff) : $diff;

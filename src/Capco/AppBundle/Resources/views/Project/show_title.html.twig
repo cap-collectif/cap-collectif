@@ -59,47 +59,49 @@
             </a>
         {% endif %}
     </div>
+
+
     <div class="col-xs-12 col-sm-7">
         <h1 class="project__header__title  h1">{{ project.title }}</h1>
         {% if project.authors[0].user is not null %}
-            <div class="media d-flex project__header__media" style="align-items: center">
-                {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with {'user': project.authors[0].user, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
-                <div class="media-body">
-                    <span class="media--aligned  excerpt">
-                        {% spaceless %}
-                            {{ 'project.show.published_by' | trans({}, 'CapcoAppBundle') }}
-                            {% if is_feature_enabled('profiles') %}
-                                <a href="{{ path('capco_user_profile_show_all', {'slug': project.authors[0].user.slug}) }}">{{ project.authors[0].user.username }}</a>
-                            {% else %}
-                                {{ project.authors[0].user.username }}
-                            {% endif %}
-                            {% if is_feature_enabled('themes') and project.themes | length > 0 %}
-                                {{ 'project.show.in_theme' | trans({}, 'CapcoAppBundle') }}
-                                {% for theme in project.themes %}
-                                    <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if not loop.last %},{% endif %}
-                                {% endfor %}
-                            {% endif %}<span>,</span>
-                            {{ 'project.show.on_date' | trans({'%date%': project.publishedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
-                            {% if project.districts | length > 0 %}
-                                <span>· </span>  
-                                {{ react_render_component('ProjectHeaderDistrictsApp', {
-                                    'props': {
-                                        'projectId': project.id|toGlobalId('Project'),
-                                    }
-                                })}}
-                            {% endif %}
-                        {% endspaceless %}
-                    </span>
+            <div class="project__header__media" style="align-items: center">
+                <div>
+                    {{ react_render_component('ProjectHeaderAuthorsApp', {
+                        'props': {
+                            'projectId': project.id|toGlobalId('Project')
+                        },
+                    })}}
+                </div>
+                {% if is_feature_enabled('themes') and project.themes | length > 0 %}
+                    {% spaceless %}
+                    <div>
+                        <i class="cap-folder-2 mr-10"></i>
+                        {% for theme in project.themes %}
+                        <a class="main td-n" href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    </div>
+                    {% endspaceless %}
+                {% endif %} 
+                <div>
+                    {% if project.districts | length > 0 %}
+                        {{ react_render_component('ProjectHeaderDistrictsApp', {
+                            'props': {
+                                'projectId': project.id|toGlobalId('Project'),
+                            }
+                        })}}
+                    {% endif %}
                 </div>
             </div>
         {% endif %}
         {% if project.visibility == 3 %}
-            {{ react_render_component('ProjectRestrictedAccessApp', {
-                'props': {
-                    'projectId': project.id|toGlobalId('Project'),
-                },
-            })
+            <div class="mt-5">
+                {{ react_render_component('ProjectRestrictedAccessApp', {
+                    'props': {
+                        'projectId': project.id|toGlobalId('Project'),
+                    },
+                })
             }}
+            <div>
         {% endif %}
 
         {% set votesCount = projectVotesResolver.countProjectVotes(project) %}

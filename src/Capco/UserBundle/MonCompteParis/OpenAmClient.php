@@ -1,21 +1,24 @@
 <?php
 namespace Capco\UserBundle\MonCompteParis;
 
-use Http\Client\HttpClient;
+use Http\Client\Common\HttpMethodsClient;
 use Psr\Log\LoggerInterface;
 
 class OpenAmClient
 {
-    public const COOKIE_NAME = 'mcpAuth'; // Iplanetdirectorypro in test env
+    public const COOKIE_NAME = 'mcpAuth';
     public const COOKIE_DOMAIN = '.paris.fr';
+    
+    // https://fr.lutece.paris.fr/fr/wiki/api-openam.html
     public const API_URL = 'https://moncompte.paris.fr/v69/json';
-    public const API_INFORMATIONS_URL = 'https://moncompte.paris.fr/moncompte/rest/banner/api/1/informations';
+    // https://fr.lutece.paris.fr/fr/wiki/user-information.html
+    public const API_INFORMATIONS_URL = 'https://moncompte.paris.fr/v69/json/users/';
 
     protected $cookie;
     protected $client;
     protected $logger;
 
-    public function __construct(HttpClient $client, LoggerInterface $logger)
+    public function __construct(HttpMethodsClient $client, LoggerInterface $logger)
     {
         $this->client = $client;
         $this->logger = $logger;
@@ -36,12 +39,12 @@ class OpenAmClient
         $json = json_decode((string) $response->getBody(), true);
 
         if (isset($json['code']) && 500 === $json['code']) {
-            $this->logger->critical('Error returned by moncompte.paris.fr', ['json' => $json]);
-            throw new \RuntimeException('Error returned by moncompte.paris.fr.');
+            $this->logger->critical('Error returned by'. self::API_URL, ['json' => $json]);
+            throw new \RuntimeException('Error returned by'. self::API_URL);
         }
 
         if (false === $json['valid']) {
-            $this->logger->critical('Token not valid returned by moncompte.paris.fr.');
+            $this->logger->critical('Token not valid returned by ' . self::API_URL);
             throw new \RuntimeException('Token not valid.');
         }
 
@@ -50,30 +53,31 @@ class OpenAmClient
 
     public function logoutUser(): void
     {
+        $url = sprintf('%s/sessions/?_action=logout', self::API_URL);
         $response = $this->client->post(
-            sprintf('%s/sessions/?_action=logout', self::API_URL),
+            $url,
             ['content-type' => 'application/json', 'mcpAuth' => $this->cookie],
             '{}'
         );
         $json = json_decode((string) $response->getBody(), true);
 
         if (isset($json['code']) && (400 >= $json['code'] && 500 <= $json['code'])) {
-            $this->logger->critical('Error returned by moncompte.paris.fr', ['json' => $json]);
-            throw new \RuntimeException('Error returned by moncompte.paris.fr.');
+            $this->logger->critical('Error returned by '. $url, ['json' => $json]);
+            throw new \RuntimeException('Error returned by '. $url);
         }
     }
 
-    public function getUserInformations(): array
+    public function getUserInformations(string $email): array
     {
-        $response = $this->client->get(self::API_INFORMATIONS_URL, [
+        $response = $this->client->get(self::API_INFORMATIONS_URL . $email, [
             'Cookie' => self::COOKIE_NAME . '=' . $this->cookie,
         ]);
         $json = json_decode((string) $response->getBody(), true);
-        if ('OK' !== $json['status']) {
-            $this->logger->critical('Error returned by moncompte.paris.fr', ['json' => $json]);
-            throw new \RuntimeException('Error returned by moncompte.paris.fr.');
+        if (!$json) {
+            $this->logger->critical('Error returned by '. self::API_INFORMATIONS_URL, ['email' => $email, 'json' => $json]);
+            throw new \RuntimeException('Error returned by '. self::API_INFORMATIONS_URL);
         }
 
-        return $json['result'];
+        return $json;
     }
 }

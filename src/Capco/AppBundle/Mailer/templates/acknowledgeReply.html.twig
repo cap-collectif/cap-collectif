@@ -7,7 +7,6 @@
 {% set logo = app_logo_url() %}
 {% set timezone = date.timezone %}
 {% set dateLocalized =  date|localizeddate('long', 'none', 'fr_FR', timezone)  %}
-{% set time =  date|date('H:i:s') %}
 
 {% block core_mail %}
     <div style="height: 35px; margin-bottom: 10px;">

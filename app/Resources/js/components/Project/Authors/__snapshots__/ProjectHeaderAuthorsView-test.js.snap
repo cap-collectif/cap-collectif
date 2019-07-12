@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectHeaderAuthorsView /> renders correctly 1`] = `
+<Fragment>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={[Function]}
+    render={[Function]}
+    variables={
+      Object {
+        "projectId": "1",
+      }
+    }
+  />
+</Fragment>
+`;

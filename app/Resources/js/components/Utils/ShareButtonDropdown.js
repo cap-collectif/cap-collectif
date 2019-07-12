@@ -2,10 +2,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Modal } from 'react-bootstrap';
+import { MenuItem, DropdownButton, Modal } from 'react-bootstrap';
 import type { GlobalState } from '../../types';
-import ShareButton from '../Ui/Button/ShareButton';
-import ShareButtonAction from '../Ui/Button/ShareButtonAction';
 
 type Props = {|
   id: string,
@@ -13,9 +11,8 @@ type Props = {|
   title: string,
   url: string,
   className?: string,
-  bsSize?: string,
-  outline?: boolean,
-  grey?: boolean,
+  bsStyle?: string,
+  style?: Object,
 |};
 
 type State = {|
@@ -27,6 +24,7 @@ class ShareButtonDropdown extends React.Component<Props, State> {
     id: 'share-button',
     className: '',
     title: '',
+    style: {},
   };
 
   state = {
@@ -36,11 +34,6 @@ class ShareButtonDropdown extends React.Component<Props, State> {
   getEncodedUrl = () => {
     const { url } = this.props;
     return encodeURIComponent(url);
-  };
-
-  mail = () => {
-    const { title, url } = this.props;
-    window.open(`mailto:?subject=${title}&body=${url}`);
   };
 
   facebook = () => {
@@ -113,19 +106,40 @@ class ShareButtonDropdown extends React.Component<Props, State> {
   };
 
   render() {
-    const { enabled, id, className, bsSize, outline, grey } = this.props;
+    const { enabled, style, id, bsStyle, className, title, url } = this.props;
     if (!enabled) {
       return null;
     }
     return (
-      <ShareButton id={id} bsSize={bsSize} className={className} outline={outline} grey={grey}>
-        <ShareButtonAction action="mail" onSelect={this.mail} />
-        <ShareButtonAction action="facebook" onSelect={this.facebook} />
-        <ShareButtonAction action="twitter" onSelect={this.twitter} />
-        <ShareButtonAction action="linkedin" onSelect={this.linkedin} />
-        <ShareButtonAction action="link" onSelect={this.showModal} />
+      <div className="share-button-dropdown">
+        <DropdownButton
+          id={id}
+          bsStyle={bsStyle}
+          className={`${className || ''} dropdown--custom`}
+          style={style}
+          title={
+            <span>
+              <i className="cap cap-link" /> {<FormattedMessage id="global.share" />}
+            </span>
+          }>
+          <MenuItem eventKey="1" href={`mailto:?subject=${title}&body=${url}`}>
+            <i className="cap cap-mail-2-1" /> {<FormattedMessage id="share.mail" />}
+          </MenuItem>
+          <MenuItem eventKey="2" onSelect={this.facebook}>
+            <i className="cap cap-facebook" /> {<FormattedMessage id="share.facebook" />}
+          </MenuItem>
+          <MenuItem eventKey="3" onSelect={this.twitter}>
+            <i className="cap cap-twitter" /> {<FormattedMessage id="share.twitter" />}
+          </MenuItem>
+          <MenuItem eventKey="4" onSelect={this.linkedin}>
+            <i className="cap cap-linkedin" /> {<FormattedMessage id="share.linkedin" />}
+          </MenuItem>
+          <MenuItem eventKey="5" onSelect={this.showModal}>
+            <i className="cap cap-link-1" /> {<FormattedMessage id="share.link" />}
+          </MenuItem>
+        </DropdownButton>
         {this.renderModal()}
-      </ShareButton>
+      </div>
     );
   }
 }

@@ -8,15 +8,15 @@ trait QuestionnaireStepsTrait
 {
     protected static $questionnaireStepParams = [
         'projectSlug' => 'projet-avec-questionnaire',
-        'stepSlug' => 'questionnaire-des-jo-2024',
+        'stepSlug' => 'questionnaire-des-jo-2024'
     ];
     protected static $questionnaireStepClosedParams = [
         'projectSlug' => 'projet-avec-questionnaire',
-        'stepSlug' => 'etape-de-questionnaire-fermee',
+        'stepSlug' => 'etape-de-questionnaire-fermee'
     ];
     protected static $questionnaireStepWithNoMultipleReplies = [
         'projectSlug' => 'projet-avec-questionnaire',
-        'stepSlug' => 'questionnaire',
+        'stepSlug' => 'questionnaire'
     ];
 
     /**
@@ -342,6 +342,14 @@ trait QuestionnaireStepsTrait
     }
 
     /**
+     * @Then I click the delete 2nd reply draft button
+     */
+    public function iClickDelete2ndReplyDraftButton()
+    {
+        $this->navigationContext->getPage('questionnaire page')->clickDelete2ndReplyDraftButton();
+    }
+
+    /**
      * @Then I confirm reply draft deletion
      */
     public function iConfirmReplyDraftDeletion()
@@ -349,6 +357,16 @@ trait QuestionnaireStepsTrait
         $this->navigationContext
             ->getPage('questionnaire page')
             ->clickConfirmDeleteReplyDraftButton();
+    }
+
+    /**
+     * @Then I confirm 2nd reply draft deletion
+     */
+    public function iConfirm2ndReplyDraftDeletion()
+    {
+        $this->navigationContext
+            ->getPage('questionnaire page')
+            ->clickConfirmDelete2ndReplyDraftButton();
     }
 
     /**

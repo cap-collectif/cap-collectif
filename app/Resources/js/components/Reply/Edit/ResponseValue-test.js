@@ -2,52 +2,84 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { $refType, $fragmentRefs } from '../../../mocks';
-import { UpdateReplyModal } from './UpdateReplyModal';
+import { $refType } from '../../../mocks';
+import { ResponseValue } from './ResponseValue';
 
 describe('<UpdateReplyModal />', () => {
   const defaultProps = {
     show: true,
     onClose: () => {},
-    reply: {
+    response: {
       $refType,
-      $fragmentRefs,
-      id: 'UmVwbHk6cmVwbHky',
-      createdAt: '2016-03-01 00:00:00',
-      questionnaire: {
-        $fragmentRefs,
+      value: '{"value": "myValue", "labels": [], "other": "otherValue"}',
+      question: {
+        id: 'question1',
+        type: 'radio',
       },
     },
-    questionnaire: {
-      viewerReplies: {},
-    },
-  };
-
-  const questionnaireWithReplies = {
-    viewerReplies: [
-      {
-        id: 'UmVwbHk6cmVwbHky',
-        $fragmentRefs,
-      },
-      {
-        id: 'UmVwbHk6cmVwbHk1',
-        $fragmentRefs,
-      },
-    ],
   };
 
   it('should render correctly with minimal props', () => {
-    const props = defaultProps;
-    const wrapper = shallow(<UpdateReplyModal {...props} />);
+    const wrapper = shallow(<ResponseValue {...defaultProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render correctly with minimal null value', () => {
+    const wrapper = shallow(
+      <ResponseValue {...defaultProps} response={{ ...defaultProps.response, value: null }} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly with replies', () => {
-    const props = {
-      ...defaultProps,
-      questionnaire: questionnaireWithReplies,
+  it('should render correctly with question type editor', () => {
+    const editorType = {
+      question: {
+        id: 'question1',
+        type: 'editor',
+      },
     };
-    const wrapper = shallow(<UpdateReplyModal {...props} />);
+
+    const wrapper = shallow(
+      <ResponseValue
+        {...defaultProps}
+        response={{ ...defaultProps.response, question: editorType.question }}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with question type medias', () => {
+    const editorType = {
+      question: {
+        id: 'question1',
+        type: 'medias',
+      },
+    };
+
+    const wrapper = shallow(
+      <ResponseValue
+        {...defaultProps}
+        response={{
+          ...defaultProps.response,
+          question: editorType.question,
+          medias: [{ url: 'medias.jpg', name: 'monMedia' }],
+        }}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with question type ranking', () => {
+    const rankingProps = {
+      value: '{"value": "myValue", "labels":  ["rankingLabel1","rankingLabel2","rankingLabel3"]}',
+      question: {
+        id: 'question1',
+        type: 'ranking',
+      },
+    };
+
+    const wrapper = shallow(
+      <ResponseValue {...defaultProps} response={{ ...defaultProps.response, ...rankingProps }} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserAvatarList /> renders correctly 1`] = `
+<Fragment>
+  <UserAvatarList__AvatarButton>
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      key="0"
+      overlay={
+        <Tooltip
+          bsClass="tooltip"
+          id="tooltip-1"
+          placement="right"
+        >
+          toto
+        </Tooltip>
+      }
+      placement="top"
+      trigger={
+        Array [
+          "hover",
+          "focus",
+        ]
+      }
+    >
+      <ForwardRef(Relay(Connect(UserAvatar)))
+        displayUrl={false}
+        features={
+          Object {
+            "blog": false,
+            "calendar": false,
+            "captcha": false,
+            "consent_external_communication": false,
+            "consent_internal_communication": false,
+            "consultation_plan": false,
+            "disconnect_openid": false,
+            "display_map": false,
+            "districts": false,
+            "export": false,
+            "login_facebook": false,
+            "login_gplus": false,
+            "login_openid": false,
+            "login_paris": false,
+            "login_saml": false,
+            "members_list": false,
+            "new_feature_questionnaire_result": false,
+            "newsletter": false,
+            "phone_confirmation": false,
+            "privacy_policy": false,
+            "profiles": false,
+            "project_trash": false,
+            "projects_form": false,
+            "registration": false,
+            "reporting": false,
+            "restrict_registration_via_email_domain": false,
+            "search": false,
+            "server_side_rendering": false,
+            "share_buttons": false,
+            "shield_mode": false,
+            "sso_by_pass_auth": false,
+            "themes": false,
+            "user_type": false,
+            "votes_evolution": false,
+            "zipcode_at_register": false,
+          }
+        }
+        user={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "id": "1",
+            "username": "toto",
+          }
+        }
+      />
+    </OverlayTrigger>
+  </UserAvatarList__AvatarButton>
+</Fragment>
+`;
+
+exports[`<UserAvatarList /> renders correctly withou authors 1`] = `<Fragment />`;

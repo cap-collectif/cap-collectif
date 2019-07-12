@@ -5,21 +5,10 @@ services:
     public: false
 
   Capco\AppBundle\Twig\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Twig/*'
+    resource: '%kernel.project_dir%/src/Capco/AppBundle/Twig/*'
 
   Capco\AppBundle\Twig\ThemeExtension:
     arguments:
       $twig: '@twig.extension.intl'
-    tags:
-      - { name: twig.extension }
-
-  Capco\AppBundle\Twig\SiteImageExtension:
-    arguments:
-      $kernelEnvironment: '%kernel.environment%'
-
-  Capco\AppBundle\Twig\ReactIntlExtension:
-    arguments:
-      $translationFolder: '%kernel.root_dir%/../translations/'
-      $env: '%kernel.environment%'
     tags:
       - { name: twig.extension }

@@ -4,8 +4,10 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Resolver\ProjectStatsResolver;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class StatsExtension extends \Twig_Extension
+class StatsExtension extends AbstractExtension
 {
     protected $projectStatsResolver;
 
@@ -16,12 +18,10 @@ class StatsExtension extends \Twig_Extension
 
     public function getFunctions(): array
     {
-        return [
-            new \Twig_SimpleFunction('capco_has_stats', [$this, 'hasStats']),
-        ];
+        return [new TwigFunction('capco_has_stats', [$this, 'hasStats'])];
     }
 
-    public function hasStats(Project $project)
+    public function hasStats(Project $project): bool
     {
         return $this->projectStatsResolver->hasStepsWithStats($project);
     }

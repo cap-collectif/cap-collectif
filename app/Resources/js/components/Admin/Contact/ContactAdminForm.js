@@ -10,7 +10,6 @@ import type { Props as ContactAdminPageProps } from './ContactAdminPage';
 type Props = {|
   ...FormProps,
   ...ContactAdminPageProps,
-  handleSubmit: () => void,
   formName: string,
 |};
 

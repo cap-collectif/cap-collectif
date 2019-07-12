@@ -57,7 +57,7 @@ class SearchController extends Controller
                 if (!$proposal->getStep()) {
                     continue;
                 }
-                if (!$proposal->canDisplay($this->getUser())) {
+                if (!$proposal->viewerCanSee($this->getUser())) {
                     unset($searchResults['results'][$key]);
                     --$searchResults['count'];
                 }

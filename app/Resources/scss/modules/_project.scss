@@ -31,8 +31,9 @@
     font-size: 16px;
 }
 
-.project__header__media .media-body div {
-    display: inline-block;
+.project__header__media .media-body {
+    display: flex;
+    align-items: flex-end;
 }
 
 #project__project-list-filters-d {

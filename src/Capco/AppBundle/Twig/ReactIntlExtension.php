@@ -3,25 +3,23 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\SiteParameter\Resolver;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class ReactIntlExtension extends \Twig_Extension
+class ReactIntlExtension extends AbstractExtension
 {
-    private $translationFolder;
     private $resolver;
-    private $env;
 
-    public function __construct(string $translationFolder, string $env, Resolver $resolver)
+    public function __construct(Resolver $resolver)
     {
-        $this->translationFolder = $translationFolder;
-        $this->env = $env;
         $this->resolver = $resolver;
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('intl_locale', [$this, 'getLocale']),
-            new \Twig_SimpleFunction('intl_timeZone', [$this, 'getTimeZone'])
+            new TwigFunction('intl_locale', [$this, 'getLocale']),
+            new TwigFunction('intl_timeZone', [$this, 'getTimeZone'])
         ];
     }
 
