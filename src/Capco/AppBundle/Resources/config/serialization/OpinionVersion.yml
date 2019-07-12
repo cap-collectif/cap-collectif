@@ -16,4 +16,4 @@ Capco\AppBundle\Entity\OpinionVersion:
     getProject:
       type: object
       serialized_name: project
-      groups: [Elasticsearch]
+      groups: [ElasticsearchNestedProject]

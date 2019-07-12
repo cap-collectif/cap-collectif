@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Project:
   attributes:
     id:
-      groups: [Projects, Elasticsearch]
+      groups: [Projects, Elasticsearch, ElasticsearchNested]
     title:
       groups: [Projects, Elasticsearch]
     visibility:

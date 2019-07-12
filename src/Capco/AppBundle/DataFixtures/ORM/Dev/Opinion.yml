@@ -241,9 +241,9 @@ Capco\AppBundle\Entity\Opinion:
     createdAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
     updatedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
     publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
-    trashedAt: <(new \DateTime('2018-02-20 00:00:00'))>
     trashedStatus: 'visible'
     trashedReason: reporting.status.spam
+    trashedAt: <(new \DateTime('2018-02-20 00:00:00'))>
     title: 'Opinion mis a la corbeille hier <current()>'
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user1'

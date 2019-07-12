@@ -3,7 +3,7 @@
 schema.internal.json
 
 # Tests files
-src/Capco/AppBundle/Behat/snapshots-diff/*
+__snapshots-diff__/*
 
 # Symfony directories
 /web/bundles/

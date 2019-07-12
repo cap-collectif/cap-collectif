@@ -4,19 +4,20 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Model\Publishable;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Traits\TrashableTrait;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Model\Publishable;
-use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 
 /**
  * @ORM\Table(name="source", indexes={
@@ -326,6 +327,17 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
         return $this->opinion;
     }
 
+    public function getProject(): ?Project
+    {
+        if ($this->getParent() && $this->getParent()->getStep()) {
+            return $this->getParent()
+                ->getStep()
+                ->getProject();
+        }
+
+        return null;
+    }
+
     public function userHasReport(User $user = null): bool
     {
         if (null !== $user) {
@@ -390,6 +402,6 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchWithAuthor'];
+        return ['Elasticsearch', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedProject'];
     }
 }

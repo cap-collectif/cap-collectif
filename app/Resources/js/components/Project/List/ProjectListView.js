@@ -47,7 +47,7 @@ export class ProjectListView extends React.Component<Props, State> {
     this.setState({ isRefetching: true });
 
     const refetchVariables = () => ({
-      orderBy: { field: this.props.orderBy, direction: 'ASC' },
+      orderBy: { field: this.props.orderBy, direction: 'DESC' },
       author: this.props.author,
       type: this.props.type,
       theme: this.props.theme,

@@ -14,7 +14,6 @@ type Props = {
 export const Container = styled(MediaBtsp)`
   display: flex;
   margin: initial;
-  overflow: initial;
 `;
 
 export default class Media extends PureComponent<Props> {

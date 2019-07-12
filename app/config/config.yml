@@ -110,6 +110,7 @@ parameters:
   env(SYMFONY_PROMETHEUS_BEARER_TOKEN): ~
   env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
   env(SYMFONY_INSTANCE_NAME): dev
+  env(APP_VERSION): Sprint 246
 
 framework:
   secret: '%secret%'

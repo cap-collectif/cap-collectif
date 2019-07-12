@@ -20,7 +20,7 @@ Capco\AppBundle\Entity\Event:
       serialized_name: author
       groups: [Events, Elasticsearch]
     projects:
-      groups: [Elasticsearch]
+      groups: [ElasticsearchNestedProject]
     themes:
       groups: [Elasticsearch]
     canContribute:

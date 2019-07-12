@@ -567,6 +567,6 @@ class Post implements CommentableInterface, IndexableInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchWithAuthor'];
+        return ['Elasticsearch', 'ElasticsearchNestedAuthor'];
     }
 }

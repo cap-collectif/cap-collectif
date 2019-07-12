@@ -134,7 +134,7 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
               </button>{' '}
             </React.Fragment>
           )}
-          <ShareButton id={`share-button-${item.id}`} bsSize="xs" outline grey>
+          <ShareButton id="shareButton" bsSize="xs" outline grey>
             <ShareButtonAction action="mail" />
             <ShareButtonAction action="facebook" />
             <ShareButtonAction action="twitter" />

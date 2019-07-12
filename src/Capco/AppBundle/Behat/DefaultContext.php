@@ -25,9 +25,12 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
     {
         $environment = $scope->getEnvironment();
 
-        $this->navigationContext = $environment->getContext(
-            'Capco\AppBundle\Behat\NavigationContext'
-        );
+        if ($environment->hasContextClass(NavigationContext::class)) {
+            $this->navigationContext = $environment->getContext(NavigationContext::class);
+        }
+        if ($environment->hasContextClass(ExportContext::class)) {
+            $this->exportContext = $environment->getContext(ExportContext::class);
+        }
     }
 
     /**

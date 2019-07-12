@@ -51,6 +51,12 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         /** @var Project $object */
         $data = $this->normalizer->normalize($object, $format, $context);
 
+        // We do not need all fields
+        if (\in_array('ElasticsearchNestedProject', $groups, true)) {
+            return $data;
+        }
+
+        // Full serialization
         if (\in_array('Elasticsearch', $groups, true)) {
             $data['projectStatus'] = $object->getCurrentStepStatus();
             $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(

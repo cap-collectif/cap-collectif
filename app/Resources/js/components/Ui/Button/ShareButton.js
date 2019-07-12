@@ -11,18 +11,16 @@ type Props = {|
   outline?: boolean,
   grey?: boolean,
   margin: string,
-  onClick?: Function,
 |};
 
 class ShareButton extends React.Component<Props> {
   static defaultProps = {
     className: '',
     margin: '',
-    onClick: () => {},
   };
 
   render() {
-    const { id, children, bsSize, className, outline, grey, margin, onClick } = this.props;
+    const { id, children, bsSize, className, outline, grey, margin } = this.props;
     const greyClass = grey ? 'btn-dark-gray' : '';
     const outlineClass = outline ? 'btn--outline' : '';
 
@@ -32,7 +30,6 @@ class ShareButton extends React.Component<Props> {
           id={id}
           key={id}
           className={`dropdown--custom ${className} ${greyClass} ${outlineClass}`}
-          onClick={onClick}
           bsSize={bsSize}
           title={
             <span>

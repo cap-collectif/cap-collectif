@@ -1,11 +1,6 @@
 imports:
   - { resource: config.yml }
 
-services:
-  Sentry\Monolog\Handler:
-    autoconfigure: true
-    autowire: true
-
 framework:
   validation:
     cache: validator.mapping.cache.doctrine.apc
@@ -14,8 +9,12 @@ sentry:
   dsn: '%sentry_dsn%'
   options:
     environment: '%kernel.environment%'
-    server_name: '%router.request_context.host%'
-    release: 'Sprint 246'
+    name: '%router.request_context.host%'
+    release: '%env(APP_VERSION)%'
+    excluded_exceptions:
+      # This spam too much:
+      - Symfony\Component\Security\Core\Exception\AccessDeniedException
+      # - Symfony\Component\HttpKernel\Exception\NotFoundHttpException
 
 doctrine:
   orm:
@@ -25,17 +24,50 @@ doctrine:
 
 monolog:
   handlers:
+    # Used to output error log with stack trace to Docker's stdout.
+    stdout_fingers_crossed:
+      type: fingers_crossed
+      action_level: error
+      handler: stdout
+      stop_buffering: false
+    stdout:
+      type: stream
+      path: 'php://stderr'
+      level: debug
     console:
       type: console
       bubble: false
-    nested:
-      type: stream
-      path: 'php://stderr'
-      level: warning
+    # Sentry configuration
+    sentry_fingers_crossed:
+      type: fingers_crossed
+      handler: sentry_buffer
+      action_level: error
+      excluded_404s:
+        - ^/
+    sentry_buffer:
+      type: buffer
+      handler: sentry
     sentry:
+      type: raven
+      level: error
+      client_id: Raven_Client
+    sentry_breadcrumbs:
       type: service
-      id: Sentry\Monolog\Handler
-      level: warning
+      id: Raven_Breadcrumbs_MonologHandler
 
 swiftmailer:
   default_mailer: mandrill
+
+services:
+  Raven_Client:
+    class: Raven_Client
+    arguments:
+      - '%sentry_dsn%'
+      - auto_log_stacks: true
+        install_default_breadcrumb_handlers: false
+        install_shutdown_handler: false
+        release: '%env(APP_VERSION)%'
+  Raven_Breadcrumbs_MonologHandler:
+    class: Raven_Breadcrumbs_MonologHandler
+    arguments:
+      - '@Raven_Client'
