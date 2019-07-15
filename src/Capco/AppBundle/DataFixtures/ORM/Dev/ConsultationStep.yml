@@ -43,8 +43,6 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     startAt: <identity((new \DateTime('2018-11-03')))>
     endAt: <identity((new \DateTime('2032-11-03')))>
     opinionCount: 0
-    moderatingOnCreate: true
-    moderatingOnUpdate: true
   cstep6:
     id: 'cstep6'
     title: 'Étape participation continue'
