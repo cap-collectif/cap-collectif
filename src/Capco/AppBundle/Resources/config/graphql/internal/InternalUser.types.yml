@@ -143,8 +143,6 @@ InternalUser:
       eventCommentsCount:
         type: 'Int!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventCommentsCountResolver", [value])'
-      projectsCount:
-        type: 'Int!'
       consentExternalCommunication:
         type: 'Boolean!'
         description: 'Whether or not this user consent external communication.'

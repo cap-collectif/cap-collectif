@@ -73,7 +73,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'replies.totalCount' => 'repliesCount',
         'postCommentsCount' => 'postCommentsCount',
         'eventCommentsCount' => 'eventCommentsCount',
-        'projectsCount' => 'projectsCount',
         'deletedAccountAt' => 'deletedAccountAt'
     ];
 
@@ -120,7 +119,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'repliesCount',
         'postCommentsCount',
         'eventCommentsCount',
-        'projectsCount',
         'deletedAccountAt'
     ];
     private $toggleManager;
@@ -299,7 +297,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         }
         postCommentsCount
         eventCommentsCount
-        projectsCount
         deletedAccountAt
       }
     }

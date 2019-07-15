@@ -7030,7 +7030,6 @@ type User implements Node & UniformResourceLocatable {
   ): ReplyConnection!
   postCommentsCount: Int!
   eventCommentsCount: Int!
-  projectsCount: Int!
 
   # Whether or not this user consent external communication.
   consentExternalCommunication: Boolean!

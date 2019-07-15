@@ -129,7 +129,6 @@
         <field name="sourceVotesCount" column="source_votes_count" type="integer" nullable="false" />
         <field name="argumentVotesCount" column="argument_votes_count" type="integer" nullable="false" />
 
-        <field name="projectsCount" column="projects_count" type="integer" nullable="false" />
         <field name="proposalsCount" column="proposals_count" type="integer" nullable="false" />
         <field name="argumentsCount" column="arguments_count" type="integer" nullable="false" />
         <field name="sourcesCount" column="sources_count" type="integer" nullable="false" />
