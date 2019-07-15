@@ -96,6 +96,25 @@ class ProjectRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
+    /**
+     * Get all arguments by user.
+     */
+    public function getByUserPaginated(User $user, int $first = 0, int $offset = 100): Paginator
+    {
+        $query = $this->getProjectsViewerCanSeeQueryBuilder($user)
+            ->addSelect('a', 'u', 't')
+            ->leftJoin('p.projectType', 't')
+            ->leftJoin('p.authors', 'a')
+            ->leftJoin('a.user', 'u')
+            ->andWhere('u = :user')
+            ->setParameter('user', $user)
+            ->orderBy('p.updatedAt', 'DESC')
+            ->setMaxResults($offset)
+            ->setFirstResult($first);
+
+        return new Paginator($query);
+    }
+
     public function getAuthorsId($viewer = null, $order = 'DESC'): array
     {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
