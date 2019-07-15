@@ -48,40 +48,54 @@ class EventCard extends React.Component<Props> {
       'highlighted-comment': isHighlighted,
     });
     return (
-      <div className={`d-flex flex-1-1 event block  block--bordered ${detailClasses}`}>
-        <div className="col-md-2 col-sm-2 hidden-xs">
-          <DateIcon startAt="2030-03-10 00:00:00" />
+      <div
+        className={`d-flex flex-1-1 event block block--bordered ${detailClasses}`}
+        style={{ width: '65%' }}>
+        <div className="col-md-3 col-sm-4 col-xs-3 picture_container">
+          <img className="event__picture" src="https://picsum.photos/300/400" alt="" />
         </div>
-        <div className="col-md-10 col-sm-10 col-xs-12 event__body box event-js">
-          <h3 className="event__title">
-            <a href title="PHPTourDuFuture">
-              PHPTourDuFuture
-            </a>
-          </h3>
-          <p className="excerpt">
-            {/* $FlowFixMe */}
-            <UserAvatarDeprecated size={16} user={user} className="mr-10" />
-            <span className="font-weight-semi-bold">{user.username}</span>
-          </p>
-          <p className="excerpt">
-            <i className="cap-calendar-1 mr-10" />
-            <DatesInterval startAt="2030-03-10 00:00:00" endAt="2032-06-15 00:00:00" fullDay />
-          </p>
-          <p className="excerpt">
-            <React.Fragment>
-              <i className="cap-marker-1 mr-10" />
-              Tour Eiffel, 75007 Paris
-            </React.Fragment>
-          </p>
-          <div className="excerpt">
-            <i className="cap cap-folder-2 mr-10 r-0" />
-            <InlineList separator="," className="d-i">
-              <li>
-                <a href="https://capco.dev/themes/immobilier" title="Immobilier">
-                  Immobilier
-                </a>
-              </li>
-            </InlineList>
+
+        <div className="d-flex event__infos">
+          <div className="col-md-2 col-sm-2 hidden-xs">
+            <DateIcon startAt="2030-03-10 00:00:00" />
+          </div>
+
+          <div className="event__body event-js">
+            <h3 className="event__title">
+              <a href title="PHPTourDuFuture">
+                PHPTourDuFuture
+              </a>
+            </h3>
+
+            <p className="excerpt">
+              {/* $FlowFixMe */}
+              <UserAvatarDeprecated size={16} user={user} />
+              <span className="font-weight-semi-bold">{user.username}</span>
+            </p>
+
+            <p className="excerpt">
+              <i className="cap-calendar-1 mr-10" />
+              <DatesInterval startAt="2030-03-10 00:00:00" endAt="2032-06-15 00:00:00" fullDay />
+            </p>
+
+            <p className="excerpt">
+              <React.Fragment>
+                <i className="cap-marker-1 mr-10" />
+                Tour Eiffel, 75007 Paris
+              </React.Fragment>
+            </p>
+
+            <div className="excerpt">
+              <i className="cap cap-folder-2 mr-10 r-0" />
+
+              <InlineList separator="," className="d-i">
+                <li>
+                  <a href="https://capco.dev/themes/immobilier" title="Immobilier">
+                    Immobilier
+                  </a>
+                </li>
+              </InlineList>
+            </div>
           </div>
         </div>
       </div>
