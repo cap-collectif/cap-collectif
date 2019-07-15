@@ -28,6 +28,11 @@ class Consultation
     private $title;
 
     /**
+     * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
+     */
+    private $titleHelpText;
+
+    /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
@@ -53,6 +58,21 @@ class Consultation
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $step;
+
+    /**
+     * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
+     */
+    private $descriptionHelpText;
+
+    /**
+     * @ORM\Column(name="moderating_on_create", type="boolean", nullable=false, options={"default" = false})
+     */
+    private $moderatingOnCreate = false;
+
+    /**
+     * @ORM\Column(name="moderating_on_update", type="boolean", nullable=false, options={"default" = false})
+     */
+    private $moderatingOnUpdate = false;
 
     /**
      * Constructor.
@@ -102,14 +122,52 @@ class Consultation
         return $this;
     }
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
+    public function isModeratingOnCreate(): bool
     {
-        return $this->id;
+        return $this->moderatingOnCreate;
+    }
+
+    public function setModeratingOnCreate(bool $value): self
+    {
+        $this->moderatingOnCreate = $value;
+
+        return $this;
+    }
+
+    public function isModeratingOnUpdate(): bool
+    {
+        return $this->moderatingOnUpdate;
+    }
+
+    public function setModeratingOnUpdate(bool $value): self
+    {
+        $this->moderatingOnUpdate = $value;
+
+        return $this;
+    }
+
+    public function getTitleHelpText(): ?string
+    {
+        return $this->titleHelpText;
+    }
+
+    public function setTitleHelpText(string $titleHelpText = null): self
+    {
+        $this->titleHelpText = $titleHelpText;
+
+        return $this;
+    }
+
+    public function getDescriptionHelpText(): ?string
+    {
+        return $this->descriptionHelpText;
+    }
+
+    public function setDescriptionHelpText(string $descriptionHelpText = null): self
+    {
+        $this->descriptionHelpText = $descriptionHelpText;
+
+        return $this;
     }
 
     /**

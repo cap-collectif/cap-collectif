@@ -14,7 +14,7 @@ class ConsultationAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by' => 'title'
     ];
 
     public function getTemplate($name)
@@ -33,16 +33,16 @@ class ConsultationAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.consultation.title',
+                'label' => 'admin.fields.consultation.title'
             ])
             ->add('opinionTypes', null, [
-                'label' => 'admin.fields.consultation.opinion_types',
+                'label' => 'admin.fields.consultation.opinion_types'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.consultation.updated_at',
+                'label' => 'admin.fields.consultation.updated_at'
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.consultation.created_at',
+                'label' => 'admin.fields.consultation.created_at'
             ]);
     }
 
@@ -55,23 +55,23 @@ class ConsultationAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.consultation.title',
+                'label' => 'admin.fields.consultation.title'
             ])
             ->add('step', null, [
-                'label' => 'admin.fields.consultation.step',
+                'label' => 'admin.fields.consultation.step'
             ])
             ->add('opinionTypes', 'sonata_type_model', [
-                'label' => 'admin.fields.consultation.opinion_types',
+                'label' => 'admin.fields.consultation.opinion_types'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.consultation.updated_at',
+                'label' => 'admin.fields.consultation.updated_at'
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => [],
-                ],
+                    'delete' => []
+                ]
             ]);
     }
 
@@ -80,9 +80,38 @@ class ConsultationAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('title', null, [
-            'label' => 'admin.fields.consultation.title',
-        ]);
+        $formMapper
+            ->add('title', null, [
+                'label' => 'admin.fields.consultation.title'
+            ])
+            ->end()
+            ->with('admin.fields.proposal_form.group_help_texts')
+            ->add('titleHelpText', null, [
+                'label' => 'admin.fields.proposal_form.title_help_text',
+                'required' => false,
+                'help' => 'admin.fields.proposal_form.help_text_title_help_text'
+            ])
+            ->add('descriptionHelpText', null, [
+                'label' => 'admin.fields.proposal_form.description_help_text',
+                'required' => false,
+                'help' => 'admin.fields.proposal_form.help_text_description_help_text'
+            ])
+            ->end()
+            ->with('moderation', [
+                'description' => 'receive-email-notification-when-a-contribution-is'
+            ])
+            ->add('moderatingOnReport', 'checkbox', [
+                'label' => 'reported',
+                'mapped' => false,
+                'value' => true,
+                'disabled' => true,
+                'attr' => ['readonly' => true, 'checked' => true]
+            ])
+            ->add('moderatingOnCreate', null, ['label' => 'admin.fields.synthesis.enabled'])
+            ->add('moderatingOnUpdate', null, [
+                'label' => 'admin.fields.proposal_form.notification.on_update'
+            ])
+            ->end();
         if ($this->getSubject()->getId()) {
             $formMapper->add('opinionTypes', ModelType::class, [
                 'label' => 'admin.fields.consultation.opinion_types',
@@ -93,7 +122,7 @@ class ConsultationAdmin extends AbstractAdmin
                 'required' => true,
                 'tree' => true,
                 'choices_as_values' => true,
-                'disabled' => true,
+                'disabled' => true
             ]);
         }
     }
@@ -105,16 +134,16 @@ class ConsultationAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.consultation.title',
+                'label' => 'admin.fields.consultation.title'
             ])
             ->add('opinionTypes', null, [
-                'label' => 'admin.fields.consultation.opinion_types',
+                'label' => 'admin.fields.consultation.opinion_types'
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.consultation.updated_at',
+                'label' => 'admin.fields.consultation.updated_at'
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.consultation.created_at',
+                'label' => 'admin.fields.consultation.created_at'
             ]);
     }
 
