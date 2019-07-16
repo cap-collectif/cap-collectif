@@ -8,31 +8,31 @@ Object {
         Object {
           "node": Object {
             "_id": "user50",
-            "createdAt": "2017-02-20 00:00:00",
+            "createdAt": "2017-01-01 00:50:00",
           },
         },
         Object {
           "node": Object {
             "_id": "user49",
-            "createdAt": "2017-02-19 00:00:00",
+            "createdAt": "2017-01-01 00:49:00",
           },
         },
         Object {
           "node": Object {
             "_id": "user48",
-            "createdAt": "2017-02-18 00:00:00",
+            "createdAt": "2017-01-01 00:48:00",
           },
         },
         Object {
           "node": Object {
             "_id": "user47",
-            "createdAt": "2017-02-17 00:00:00",
+            "createdAt": "2017-01-01 00:47:00",
           },
         },
         Object {
           "node": Object {
             "_id": "user46",
-            "createdAt": "2017-02-16 00:00:00",
+            "createdAt": "2017-01-01 00:46:00",
           },
         },
       ],

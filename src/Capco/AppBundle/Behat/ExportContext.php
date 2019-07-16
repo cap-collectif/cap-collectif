@@ -16,12 +16,12 @@ class ExportContext implements KernelAwareContext
 {
     use KernelDictionary;
 
-    private const SNAPSHOTS_DIRNAME = '__snapshots__';
+    private const SNAPSHOTS_DIRNAME = '/../__snapshots__/exports/';
 
     private $config = [
         'readerType' => Type::CSV,
         'delimiter' => ',',
-        'enclosure' => '"',
+        'enclosure' => '"'
     ];
 
     public function setKernel(KernelInterface $kernel): void
@@ -84,6 +84,11 @@ class ExportContext implements KernelAwareContext
         $realPath = $this->getExportDir() . "/${name}";
         $snapshotPath = $this->getSnapshotsDir() . "/${name}";
 
+        $this->compareFileWithSnapshot($realPath, $snapshotPath);
+    }
+
+    public function compareFileWithSnapshot(string $realPath, string $snapshotPath)
+    {
         Assert::assertFileExists($realPath);
         Assert::assertFileExists($snapshotPath);
 
@@ -134,7 +139,6 @@ class ExportContext implements KernelAwareContext
     private function getSnapshotsDir(): string
     {
         return $this->getKernel()->getRootDir() .
-            '/../features/commands/' .
             self::SNAPSHOTS_DIRNAME;
     }
 
@@ -237,7 +241,7 @@ class ExportContext implements KernelAwareContext
                     continue;
                 }
                 // We skip Sonata's cached medias URLs because they can be dynamic
-                if (false !== \strpos($cellValue, 'media/default')) {
+                if (false !== strpos($cellValue, 'media/default')) {
                     continue;
                 }
                 if (!isset($actual[$i])) {
@@ -279,7 +283,7 @@ class ExportContext implements KernelAwareContext
                 }
 
                 return $result;
-            }, $expectedLines),
+            }, $expectedLines)
         ];
 
         $output['actual'] = [
@@ -291,7 +295,7 @@ class ExportContext implements KernelAwareContext
                 }
 
                 return $result;
-            }, $actualLines),
+            }, $actualLines)
         ];
 
         return $output;

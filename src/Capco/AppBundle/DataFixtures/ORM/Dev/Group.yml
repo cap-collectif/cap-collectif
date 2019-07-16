@@ -3,29 +3,35 @@ Capco\AppBundle\Entity\Group:
     id: group1
     title: Super-administrateur
     description: Droits d'administration complet
-    createdAt: <(new \DateTime('2017-01-18'))>
+    createdAt: <(new \DateTime('2017-01-18 00:00:00'))>
+    updatedAt: <(new \DateTime('2017-01-18 00:00:00'))>
   group2:
     id: group2
     title: Agent de la ville
     description: Lorem ipsum dolor sit amet sapien estiam
-    createdAt: <(new \DateTime('2017-01-01'))>
+    createdAt: <(new \DateTime('2017-01-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2017-01-01 00:00:00'))>
   group3:
     id: group3
     title: Utilisateurs
     description: Lorem ipsum dolor sit amet sapien estiam
-    createdAt: <(new \DateTime('2017-02-21'))>
+    createdAt: <(new \DateTime('2017-02-21 00:00:00'))>
+    updatedAt: <(new \DateTime('2017-02-21 00:00:00'))>
   group4:
     id: group4
     title: Comité de suvi
     description: Lorem ipsum dolor sit amet sapien estiam
-    createdAt: <(new \DateTime('2017-02-21'))>
+    createdAt: <(new \DateTime('2017-02-21 00:00:00'))>
+    updatedAt: <(new \DateTime('2017-02-21 00:00:00'))>
   group5:
     id: group5
     title: Direction Culture
     description: Droits qui concernent la direction de culture
-    createdAt: <(new \DateTime('2017-02-21'))>
+    createdAt: <(new \DateTime('2017-02-21 00:00:00'))>
+    updatedAt: <(new \DateTime('2017-02-21 00:00:00'))>
   group6:
     id: group6
     title: Projet 2
     description: Droits sur le projet 2
-    createdAt: <(new \DateTime('2017-02-21'))>
+    createdAt: <(new \DateTime('2017-02-21 00:00:00'))>
+    updatedAt: <(new \DateTime('2017-02-21 00:00:00'))>

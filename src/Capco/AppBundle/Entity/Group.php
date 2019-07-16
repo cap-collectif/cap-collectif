@@ -122,7 +122,7 @@ class Group
         return [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
-            'description' => $this->getDescription(),
+            'description' => $this->getDescription()
         ];
     }
 

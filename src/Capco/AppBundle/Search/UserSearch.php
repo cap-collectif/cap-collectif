@@ -41,7 +41,7 @@ class UserSearch extends Search
         }
         $query = new Query();
         $query->setQuery($boolQuery);
-        if (!$sort || 'activity' === $sort) {
+        if ('activity' === $sort) {
             $query->setSort([
                 'totalContributionsCount' => [
                     'order' => 'DESC'

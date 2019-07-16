@@ -137,7 +137,7 @@ describe('Query.projects connection', () => {
         graphql(
           ProjectsInternalQuery,
           {
-            orderBy: { field: 'POPULAR', direction: 'ASC' },
+            orderBy: { field: 'POPULAR', direction: 'DESC' },
             count: 100,
           },
           'internal',
