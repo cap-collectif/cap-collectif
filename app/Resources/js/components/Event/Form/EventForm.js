@@ -2,20 +2,18 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { fetchQuery } from 'relay-runtime';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
 import { type FormProps, Field, reduxForm } from 'redux-form';
+import { Row } from 'react-bootstrap';
 import component from '../../Form/Field';
 import type { Dispatch, FeatureToggles, GlobalState } from '../../../types';
 import select from '../../Form/Select';
-import environment from '../../../createRelayEnvironment';
-import type { EventListFiltersThemeQueryResponse } from '~relay/EventListFiltersThemeQuery.graphql';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { EventForm_event } from '~relay/EventForm_event.graphql';
 import UserListField from '../../Admin/Field/UserListField';
-
-type State = {|
-  themeOptions: Array<any>,
-|};
+import SelectTheme from '../../Utils/SelectTheme';
+import SelectProject from '../../Utils/SelectProject';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
 
 type Props = {|
   ...FormProps,
@@ -37,31 +35,39 @@ type Props = {|
 
 export const formName = 'EventForm';
 
-const themeQuery = graphql`
-  query EventFormThemeQuery {
-    themes {
-      id
-      title
-    }
-  }
-`;
-
-export class EventForm extends React.Component<Props, State> {
-  state = { themeOptions: [] };
-
-  componentDidMount() {
-    fetchQuery(environment, themeQuery)
-      .then((res: EventListFiltersThemeQueryResponse) =>
-        res.themes.map(theme => ({ value: theme.id, label: theme.title })),
-      )
-      .then(themeOptions => {
-        this.setState({ themeOptions });
-      });
-  }
-
+export class EventForm extends React.Component<Props> {
   render() {
     const { features, intl, projects, isAdmin, event } = this.props;
-    const { themeOptions } = this.state;
+
+    const renderSelectThemeQuery = ({ error, props }) => {
+      if (error) {
+        return graphqlError;
+      }
+      if (props) {
+        /* $FlowFixMe $refType */
+        return <SelectTheme query={props} />;
+      }
+      return (
+        <Row>
+          <Loader />
+        </Row>
+      );
+    };
+    const renderSelectProjectQuery = ({ error, props }) => {
+      if (error) {
+        return graphqlError;
+      }
+      if (props) {
+        /* $FlowFixMe $refType */
+        return <SelectProject query={props} />;
+      }
+      return (
+        <Row>
+          <Loader />
+        </Row>
+      );
+    };
+
     return (
       <form>
         <div className="box-header">
@@ -164,18 +170,16 @@ export class EventForm extends React.Component<Props, State> {
             <FormattedMessage id="form.label_category" />
           </h3>
         </div>
-        {features.themes && themeOptions && themeOptions.length && (
-          <Field
-            component={select}
-            id="EventForm-filter-theme"
-            name="theme"
-            placeholder={intl.formatMessage({ id: 'project.searchform.all_themes' })}
-            label={intl.formatMessage({ id: 'type-theme' })}
-            options={themeOptions}
-            role="combobox"
-            aria-autocomplete="list"
-            aria-haspopup="true"
-            aria-controls="EventForm-filter-theme-listbox"
+        {features.themes && (
+          <QueryRenderer
+            environment={environment}
+            query={graphql`
+              query EventFormThemeQuery {
+                ...SelectTheme_query
+              }
+            `}
+            variables={{}}
+            render={renderSelectThemeQuery}
           />
         )}
         <Field
@@ -196,6 +200,16 @@ export class EventForm extends React.Component<Props, State> {
                   }))
                 : {},
             )}
+        />
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query EventFormProjectQuery {
+              ...SelectProject_query
+            }
+          `}
+          variables={{}}
+          render={renderSelectProjectQuery}
         />
         <div>
           <div className="box-header">
@@ -317,6 +331,18 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
 };
 
 const container = connect(mapStateToProps)(injectIntl(formContainer));
+//
+// const baseQuery = createFragmentContainer(container, {
+//   query: graphql`
+//     fragment EventForm_query on Query
+//       @argumentDefinitions(
+//         withEventOnly: { type: "Boolean" }
+//       ) {
+//       ...SelectTheme_query
+//       ...SelectProject_query @arguments(withEventOnly: $withEventOnly)
+//     }
+//   `,
+// });
 
 export const EventCreateForm = container;
 
