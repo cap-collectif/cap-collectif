@@ -13,7 +13,7 @@ import { items, itemWithChildren } from './mocks/navbarItems';
 
 const StorybookWrapper = styled.div`
   background-color: lightBlue;
-  height: ${({ height }) => height || "51px"};
+  height: 51px;
 `
 
 addLocaleData(frLocaleData);
@@ -56,7 +56,7 @@ storiesOf('TabsBar', module)
     </StorybookWrapper>
   ))
   .add('vertical', () => (
-    <StorybookWrapper height="auto">
+    <StorybookWrapper>
       <TabsBar items={newItems} vertical overflowEnable={false} />
     </StorybookWrapper>
   ));

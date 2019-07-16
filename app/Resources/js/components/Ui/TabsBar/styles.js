@@ -118,6 +118,7 @@ export const DropdownMenu = styled.ul`
   text-align: left;
   list-style: none;
   background-color: ${props => props.theme.mainNavbarBg};
+  border: 1px solid #e3e3e3;
   border-radius: 4px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;

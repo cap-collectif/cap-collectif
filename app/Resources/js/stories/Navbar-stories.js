@@ -46,6 +46,10 @@ setIntlConfig({
   getMessages,
 });
 
+const Container = styled.div`
+  border: 1px solid #ddd;
+`;
+
 const ButtonsContainer = styled.div`
   padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
 `;
@@ -151,7 +155,9 @@ storiesOf('NavBar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={[items[0], items[1]]} siteName={siteName} />
+        <Container>
+          <Navbar logo={logo} items={[items[0], items[1]]} siteName={siteName} />
+        </Container>
       </ThemeProvider>
     );
   })
@@ -171,7 +177,9 @@ storiesOf('NavBar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={items} siteName={siteName} />
+        <Container>
+          <Navbar logo={logo} items={items} siteName={siteName} />
+        </Container>
       </ThemeProvider>
     );
   })
@@ -194,7 +202,9 @@ storiesOf('NavBar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={newItems} siteName={siteName} />
+        <Container>
+          <Navbar logo={logo} items={newItems} siteName={siteName} />
+        </Container>
       </ThemeProvider>
     );
   })
@@ -219,7 +229,9 @@ storiesOf('NavBar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        <Container>
+          <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        </Container>
       </ThemeProvider>
     );
   })
@@ -248,7 +260,9 @@ storiesOf('NavBar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        <Container>
+          <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        </Container>
       </ThemeProvider>
     );
   })
@@ -278,7 +292,9 @@ storiesOf('NavBar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        <Container>
+          <Navbar logo={logo} items={items} siteName={siteName} contentRight={contentRight} />
+        </Container>
       </ThemeProvider>
     );
   });

@@ -17,7 +17,6 @@ exports[`<Navbar /> should render correctly 1`] = `
         >
           <img
             alt="cap-collectif.com"
-            onError={[Function]}
             onLoad={[Function]}
             src="Navbar-logo.png"
           />

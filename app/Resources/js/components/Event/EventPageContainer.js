@@ -89,6 +89,7 @@ export default createFragmentContainer(form, {
         isFuture: { type: "Boolean" }
         author: { type: "ID" }
         isRegistrable: { type: "Boolean" }
+        withEventOnly: { type: "Boolean" }
       ) {
       ...EventRefetch_query
         @arguments(
@@ -113,6 +114,7 @@ export default createFragmentContainer(form, {
           isFuture: $isFuture
           author: $author
           isRegistrable: $isRegistrable
+          withEventOnly: $withEventOnly
         )
       ...EventListCounter_query
         @arguments(
