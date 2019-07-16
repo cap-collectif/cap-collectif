@@ -414,7 +414,11 @@ const getResponseNumber = (value: any) => {
 type ResponseError = ?{
   value: string | { labels: string, other: string },
 };
+type ResponseWarning = ?{
+  value: string | { labels: string, other: string },
+};
 
+type ResponsesWarning = ResponseWarning[];
 type ResponsesError = ResponseError[];
 
 const hasAnsweredQuestion = (question: Question, responses: ResponsesInReduxForm): boolean => {
@@ -520,7 +524,11 @@ export const validateResponses = (
 ): { responses?: ResponsesError } => {
   const responsesError = questions.map(question => {
     const response = responses.filter(res => res && res.question === question.id)[0];
-    if ((question.required && !isDraft) || (response.value && isDraft)) {
+    if (
+      (question.required && !isDraft) ||
+      (Array.isArray(response.value) && response.value.length > 0) ||
+      (response.value && !Array.isArray(response.value) && isDraft)
+    ) {
       if (question.type === 'medias') {
         if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
           return { value: `${className}.constraints.field_mandatory` };
@@ -741,6 +749,17 @@ export const formatSubmitResponses = (
 const getQuestionInitialValue = (question: Question) => {
   // MediaQuestion have a default value of []
   return question.__typename === 'MediaQuestion' ? [] : null
+};
+
+export const warnResponses = (
+  questions: Questions,
+  responses: ResponsesInReduxForm,
+  // TODO: remove this parameter from the function and create generic traduction keys for all errors.
+  className: string,
+  intl: IntlShape,
+  isDraft: boolean = false,
+): { responses?: ResponsesWarning } => {
+  return validateResponses(questions, responses, className, intl, !isDraft);
 };
 
 export const renderResponses = ({

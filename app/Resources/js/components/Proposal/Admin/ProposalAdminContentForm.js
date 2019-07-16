@@ -30,6 +30,7 @@ import {
   formatInitialResponsesValues,
   type ResponsesInReduxForm,
   validateResponses,
+  warnResponses,
 } from '../../../utils/responsesHelper';
 
 type ProposalForm = ProposalForm_proposalForm;
@@ -93,6 +94,59 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isAdmin }:
     });
 };
 
+export const checkProposalContent = (
+  values: FormValues | FrontendFormValues,
+  // $FlowFixMe $refType
+  proposalForm: ProposalForm,
+  features: FeatureToggles,
+  intl: IntlShape,
+  isDraft: boolean,
+) => {
+  const messages = {};
+  if (!values.title || values.title.length <= 2) {
+    messages.title = !isDraft
+      ? 'proposal.constraints.title'
+      : 'proposal.constraints.title_for_draft';
+  }
+  if (
+    proposalForm.usingSummary &&
+    (values.summary && (values.summary.length > 140 || values.summary.length < 2))
+  ) {
+    messages.summary = 'proposal.constraints.summary';
+  }
+  if (
+    proposalForm.usingDescription &&
+    proposalForm.descriptionMandatory &&
+    (!values.body || values.body.length <= 2)
+  ) {
+    messages.body = 'proposal.constraints.body';
+  }
+  if (proposalForm.usingAddress && !values.address) {
+    messages.addressText = 'proposal.constraints.address';
+  }
+  if (
+    proposalForm.categories.length &&
+    proposalForm.usingCategories &&
+    proposalForm.categoryMandatory &&
+    !values.category
+  ) {
+    messages.category = 'proposal.constraints.category';
+  }
+  if (
+    features.districts &&
+    proposalForm.usingDistrict &&
+    proposalForm.districtMandatory &&
+    !values.district
+  ) {
+    messages.district = 'proposal.constraints.district';
+  }
+  if (features.themes && proposalForm.usingThemes && proposalForm.themeMandatory && !values.theme) {
+    messages.theme = 'proposal.constraints.theme';
+  }
+
+  return messages;
+};
+
 export const validateProposalContent = (
   values: FormValues | FrontendFormValues,
   // $FlowFixMe $refType
@@ -101,46 +155,9 @@ export const validateProposalContent = (
   intl: IntlShape,
   isDraft: boolean,
 ) => {
-  const errors = {};
-  if (!values.title || values.title.length <= 2) {
-    errors.title = !isDraft ? 'proposal.constraints.title' : 'proposal.constraints.title_for_draft';
-  }
-  if (
-    proposalForm.usingSummary &&
-    (values.summary && (values.summary.length > 140 || values.summary.length < 2))
-  ) {
-    errors.summary = 'proposal.constraints.summary';
-  }
-  if (
-    proposalForm.usingDescription &&
-    proposalForm.descriptionMandaotry &&
-    (!values.body || values.body.length <= 2)
-  ) {
-    errors.body = 'proposal.constraints.body';
-  }
-  if (proposalForm.usingAddress && !values.address) {
-    errors.addressText = 'proposal.constraints.address';
-  }
-  if (
-    proposalForm.categories.length &&
-    proposalForm.usingCategories &&
-    proposalForm.categoryMandatory &&
-    !values.category
-  ) {
-    errors.category = 'proposal.constraints.category';
-  }
-  if (
-    features.districts &&
-    proposalForm.usingDistrict &&
-    proposalForm.districtMandatory &&
-    !values.district
-  ) {
-    errors.district = 'proposal.constraints.district';
-  }
-  if (features.themes && proposalForm.usingThemes && proposalForm.themeMandatory && !values.theme) {
-    errors.theme = 'proposal.constraints.theme';
-  }
-
+  const errors = !isDraft
+    ? checkProposalContent(values, proposalForm, features, intl, isDraft)
+    : {};
   const responsesError = validateResponses(
     proposalForm.questions,
     values.responses,
@@ -153,6 +170,29 @@ export const validateProposalContent = (
   }
 
   return errors;
+};
+
+export const warnProposalContent = (
+  values: FormValues | FrontendFormValues,
+  // $FlowFixMe $refType
+  proposalForm: ProposalForm,
+  features: FeatureToggles,
+  intl: IntlShape,
+  isDraft: boolean,
+) => {
+  const warnings = checkProposalContent(values, proposalForm, features, intl, isDraft);
+  const responsesWarning = warnResponses(
+    proposalForm.questions,
+    values.responses,
+    'proposal',
+    intl,
+    isDraft,
+  );
+  if (responsesWarning.responses && responsesWarning.responses.length) {
+    warnings.responses = responsesWarning.responses;
+  }
+
+  return warnings;
 };
 
 const validate = (values: FormValues, { proposal, features, intl }: Props) =>

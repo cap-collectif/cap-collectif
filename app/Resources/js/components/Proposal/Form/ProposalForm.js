@@ -46,7 +46,7 @@ import {
   type ResponsesInReduxForm,
 } from '../../../utils/responsesHelper';
 import environment from '../../../createRelayEnvironment';
-import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
+import { validateProposalContent, warnProposalContent } from '../Admin/ProposalAdminContentForm';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 
@@ -224,6 +224,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
 const validate = (values: FormValues, { proposalForm, features, intl }: Props) => {
   return validateProposalContent(values, proposalForm, features, intl, values.draft);
+};
+
+const warn = (values: FormValues, { proposalForm, features, intl }: Props) => {
+  return warnProposalContent(values, proposalForm, features, intl, values.draft);
 };
 
 type State = {
@@ -597,6 +601,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
 
 const form = reduxForm({
   form: formName,
+  warn,
   validate,
   onSubmit,
 })(ProposalForm);
