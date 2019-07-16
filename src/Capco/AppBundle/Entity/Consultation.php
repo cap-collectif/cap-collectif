@@ -165,7 +165,7 @@ class Consultation
         return $this->titleHelpText;
     }
 
-    public function setTitleHelpText(string $titleHelpText = null): self
+    public function setTitleHelpText(?string $titleHelpText = null): self
     {
         $this->titleHelpText = $titleHelpText;
 
@@ -177,7 +177,7 @@ class Consultation
         return $this->descriptionHelpText;
     }
 
-    public function setDescriptionHelpText(string $descriptionHelpText = null): self
+    public function setDescriptionHelpText(?string $descriptionHelpText = null): self
     {
         $this->descriptionHelpText = $descriptionHelpText;
 
