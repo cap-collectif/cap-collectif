@@ -1,6 +1,6 @@
 FROM node:11-slim AS node
 FROM composer:latest AS composer
-FROM php:7.1-cli AS php
+FROM php:7.2-cli-stretch AS php
 
 LABEL maintainer "Cap Collectif <tech@cap-collectif.com>"
 
@@ -39,16 +39,25 @@ RUN apt-get update && \
       libxslt-dev \
       libpng-dev \
       libmagickwand-dev \
-      zip unzip git vim ssmtp wget && \
+      zip unzip git vim wget && \
     pecl install redis-3.1.6 && \
     docker-php-ext-enable redis && \
     pecl install imagick && \
     docker-php-ext-enable imagick && \
     pecl install apcu && \
     docker-php-ext-enable apcu && \
-    docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ && \
-	docker-php-ext-configure intl && \
-    docker-php-ext-install -j$(nproc) curl mbstring intl mysqli dom zip gd xsl && \
+    docker-php-ext-configure intl && \
+    docker-php-ext-install -j$(nproc) curl mbstring intl mysqli dom zip xsl && \
+    rm -r /var/lib/apt/lists/*
+
+# Install GD
+RUN apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+    && docker-php-ext-install -j$(nproc) iconv \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd && \
     rm -r /var/lib/apt/lists/*
 
 # Install babel-cli
