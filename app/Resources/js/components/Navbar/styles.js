@@ -1,5 +1,6 @@
 /* @flow */
 import styled, { css } from 'styled-components';
+import colors from '../../utils/colors';
 
 export const NavigationContainer = styled.div`
   display: flex;
@@ -10,6 +11,7 @@ export const NavigationContainer = styled.div`
   min-height: 50px;
   padding: 0 15px;
   background-color: ${props => props.theme.mainNavbarBg};
+  border-bottom: 1px solid ${colors.borderColor};
 
   & .skip-links {
     position: absolute;
