@@ -2,6 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
+import { baseUrl } from '../../config';
 import DatesInterval from '../Utils/DatesInterval';
 import type { EventPreview_event } from '~relay/EventPreview_event.graphql';
 import DateIcon from '../Ui/Dates/DateIcon';
@@ -25,13 +26,16 @@ export class EventPreview extends React.Component<Props> {
     const detailClasses = classNames({
       'highlighted-comment': isHighlighted,
     });
-    const imgURL =
-      event.media && event.media.url ? event.media.url : 'https://picsum.photos/300/400';
+    const imgURL = event.media && event.media.url ? event.media.url : null;
     return (
       <div className={`d-flex flex-1-1 event block  block--bordered ${detailClasses}`}>
-        <div className="col-md-3 col-sm-4 col-xs-3 picture_container">
-          <img className="event__picture" src={imgURL} alt="event illustration" />
-        </div>
+        {imgURL ? (
+          <div className="picture_container" style={{ backgroundImage: `url(${imgURL})` }} />
+        ) : (
+          <div className="picture_container" style={{ backgroundColor: '#eeeeee' }}>
+            <img className="event__picture" src={`${baseUrl}/svg/calendar.svg`} alt="" />
+          </div>
+        )}
 
         <div className="d-flex event__infos">
           <div className="col-md-2 col-sm-2 hidden-xs">
@@ -103,7 +107,7 @@ export default createFragmentContainer(EventPreview, {
         endAt
       }
       media {
-        url(format: "default_homepageVideo")
+        url(format: "default_project")
       }
       title
       fullAddress

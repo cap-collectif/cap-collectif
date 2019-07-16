@@ -35,6 +35,7 @@ const headerOption = {
 
 type Props = {|
   +isHighlighted: boolean,
+  hasAPicture?: boolean,
 |};
 
 class EventCard extends React.Component<Props> {
@@ -43,7 +44,7 @@ class EventCard extends React.Component<Props> {
   };
 
   render() {
-    const { isHighlighted } = this.props;
+    const { isHighlighted, hasAPicture } = this.props;
     const detailClasses = classNames({
       'highlighted-comment': isHighlighted,
     });
@@ -51,9 +52,16 @@ class EventCard extends React.Component<Props> {
       <div
         className={`d-flex flex-1-1 event block block--bordered ${detailClasses}`}
         style={{ width: '65%' }}>
-        <div className="col-md-3 col-sm-4 col-xs-3 picture_container">
-          <img className="event__picture" src="https://picsum.photos/300/400" alt="" />
-        </div>
+        {hasAPicture ? (
+          <div
+            className="picture_container"
+            style={{ backgroundImage: `url('https://picsum.photos/300/400')` }}
+          />
+        ) : (
+          <div className="picture_container" style={{ backgroundColor: '#eeeeee' }}>
+            <img className="event__picture" src="../../app/web/svg/calendar.svg" alt="" />
+          </div>
+        )}
 
         <div className="d-flex event__infos">
           <div className="col-md-2 col-sm-2 hidden-xs">
@@ -238,12 +246,17 @@ storiesOf('Core|Cards', module)
       propTablesExclude: [Image, Card.Counters, Card.Body],
     },
   })
-  .add('Event Card default', () => <EventCard />, {
+  .add('Event Card default', () => <EventCard hasAPicture />, {
     info: {
       text: 'Ce composant est utilisé...',
     },
   })
-  .add('Event Card Highlighted', () => <EventCard isHighlighted />, {
+  .add('Event Card Highlighted', () => <EventCard isHighlighted hasAPicture />, {
+    info: {
+      text: 'Ce composant est utilisé...',
+    },
+  })
+  .add('Event Card Without Picture', () => <EventCard />, {
     info: {
       text: 'Ce composant est utilisé...',
     },

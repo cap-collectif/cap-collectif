@@ -19,12 +19,21 @@
     }
 
     .picture_container{
-        overflow: hidden;
+        // overflow: hidden;
         padding: 0;
+        width: auto;
         min-width: 150px;
+        max-width: 300px;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         .event__picture{
-            width:100%;
+            width:50%;
+            opacity: 0.5;
         }
     }
 
@@ -128,14 +137,13 @@
 
         .picture_container{
             text-align: center;
-            min-width: 60px;
+            margin: 10px;
+            min-width: 45px;
+            height: 45px;
+            border-radius: 2px;
 
-            .event__picture{
-                margin: 10px;
-                width: 45px;
-                height: 45px;
-                border-radius: 2px;
-            }
+            // .event__picture{
+            // }
         }
 
         .excerpt{

@@ -5,14 +5,13 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
   className="d-flex flex-1-1 event block  block--bordered highlighted-comment"
 >
   <div
-    className="col-md-3 col-sm-4 col-xs-3 picture_container"
-  >
-    <img
-      alt="event illustration"
-      className="event__picture"
-      src="https://picsum.photos/300/400"
-    />
-  </div>
+    className="picture_container"
+    style={
+      Object {
+        "backgroundImage": "url(https://picsum.photos/300/400)",
+      }
+    }
+  />
   <div
     className="d-flex event__infos"
   >
@@ -117,14 +116,13 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
   className="d-flex flex-1-1 event block  block--bordered "
 >
   <div
-    className="col-md-3 col-sm-4 col-xs-3 picture_container"
-  >
-    <img
-      alt="event illustration"
-      className="event__picture"
-      src="https://picsum.photos/300/400"
-    />
-  </div>
+    className="picture_container"
+    style={
+      Object {
+        "backgroundImage": "url(https://picsum.photos/300/400)",
+      }
+    }
+  />
   <div
     className="d-flex event__infos"
   >
@@ -229,14 +227,13 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
   className="d-flex flex-1-1 event block  block--bordered "
 >
   <div
-    className="col-md-3 col-sm-4 col-xs-3 picture_container"
-  >
-    <img
-      alt="event illustration"
-      className="event__picture"
-      src="https://picsum.photos/300/400"
-    />
-  </div>
+    className="picture_container"
+    style={
+      Object {
+        "backgroundImage": "url(https://picsum.photos/300/400)",
+      }
+    }
+  />
   <div
     className="d-flex event__infos"
   >
@@ -339,14 +336,13 @@ exports[`<EventPreview /> renders without username 1`] = `
   className="d-flex flex-1-1 event block  block--bordered "
 >
   <div
-    className="col-md-3 col-sm-4 col-xs-3 picture_container"
-  >
-    <img
-      alt="event illustration"
-      className="event__picture"
-      src="https://picsum.photos/300/400"
-    />
-  </div>
+    className="picture_container"
+    style={
+      Object {
+        "backgroundImage": "url(https://picsum.photos/300/400)",
+      }
+    }
+  />
   <div
     className="d-flex event__infos"
   >
