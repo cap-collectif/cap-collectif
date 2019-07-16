@@ -6,7 +6,7 @@ use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Repository\ProjectRepository;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -22,8 +22,13 @@ class UserProjectsResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(User $user, Arg $args): Connection
+    public function __invoke(User $user, ?Argument $args = null): Connection
     {
+        if (!$args) {
+            $args = new Argument([
+                'first' => 0
+            ]);
+        }
         $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
             try {
                 $arguments = $this->projectRepository
