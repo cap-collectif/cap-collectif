@@ -2,8 +2,4 @@ Capco\AppBundle\Entity\UserNotificationsConfiguration:
   allDisabledUserNotifications:
     id: 'allDisabledUserNotifications'
     onProposalCommentMail: false
-    unsubscribeToken: user-unsubscribe-token
-  adminNotificationConfiguration:
-    id: 'adminNotificationConfiguration'
-    onProposalCommentMail: true
-    unsubscribeToken: admin-unsubscribe-token
+    unsubscribeToken: ***REMOVED***

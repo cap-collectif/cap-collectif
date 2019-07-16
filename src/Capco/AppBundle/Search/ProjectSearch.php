@@ -51,7 +51,7 @@ class ProjectSearch extends Search
             'phrase_prefix'
         );
 
-        if (isset($providedFilters['withEventOnly']) && $providedFilters['withEventOnly'] === true) {
+        if (isset($providedFilters['withEventOnly'])) {
             $withEventOnlyBoolQuery = new Query\BoolQuery();
             $withEventOnlyBoolQuery->addShould(new Query\Range('eventCount', ['gt' => 0]));
             $boolQuery->addMust($withEventOnlyBoolQuery);
@@ -66,7 +66,7 @@ class ProjectSearch extends Search
         $query = new Query($boolQuery);
 
         if (isset($order['field'])) {
-            $query->setSort($this->getSort($order));
+            $query->setSort($this->getSort($order['field']));
         }
 
         $query
@@ -122,21 +122,23 @@ class ProjectSearch extends Search
         return $projects;
     }
 
-    private function getSort(array $order): array
+    private function getSort(string $order): array
     {
-        switch ($order['field']) {
+        switch ($order) {
             case self::POPULAR:
                 $sortField = 'contributionsCount';
-                $sortOrder = $order['direction'];
+                $sortOrder = 'desc';
 
                 break;
             case self::LATEST:
                 $sortField = 'publishedAt';
-                $sortOrder = $order['direction'];
+                $sortOrder = 'desc';
 
                 break;
             default:
-                throw new \RuntimeException("Unknown order: ${order}");
+                throw new \RuntimeException("Unknow order: ${order}");
+
+                break;
         }
 
         return [$sortField => ['order' => $sortOrder]];

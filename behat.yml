@@ -90,6 +90,7 @@ commands:
       paths: ['%paths.base%/features/commands']
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\ExportContext
         - Capco\AppBundle\Behat\CommandContext
         - Capco\AppBundle\Behat\RabbitMQContext
@@ -110,6 +111,7 @@ api:
       paths: ['%paths.base%/features/api']
       contexts:
         - Capco\AppBundle\Behat\ApiContext
+        - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\MailCatcherContext
     graphql:
@@ -117,6 +119,7 @@ api:
         - '%paths.base%/features/graphql'
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\GraphQLContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\MailCatcherContext
