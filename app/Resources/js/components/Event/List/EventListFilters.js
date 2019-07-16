@@ -4,7 +4,7 @@ import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { graphql } from 'relay-runtime';
+import { fetchQuery, graphql } from 'relay-runtime';
 import { Field, formValueSelector, type FormProps, reset } from 'redux-form';
 import { createFragmentContainer } from 'react-relay';
 import select from '../../Form/Select';
@@ -14,12 +14,18 @@ import component from '../../Form/Field';
 import { changeEventMobileListView } from '../../../redux/modules/event';
 import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 import FiltersContainer from '../../Filters/FiltersContainer';
+import environment from '../../../createRelayEnvironment';
 import EventListCounter from './EventListCounter';
 import EventListStatusFilter from './EventListStatusFilter';
 import UserListField from '../../Admin/Field/UserListField';
 import type { EventListFilters_query } from '~relay/EventListFilters_query.graphql';
-import SelectTheme from '../../Utils/SelectTheme';
-import SelectProject from '../../Utils/SelectProject';
+import type { EventListFiltersProjectsQueryResponse } from '~relay/EventListFiltersProjectsQuery.graphql';
+import type { EventListFiltersThemeQueryResponse } from '~relay/EventListFiltersThemeQuery.graphql';
+
+type State = {
+  projectOptions: Array<Object>,
+  themeOptions: Array<Object>,
+};
 
 type Registrable = 'all' | 'yes' | 'no';
 
@@ -70,6 +76,28 @@ const countFilters = (
 
   return nbFilter;
 };
+
+const projectQuery = graphql`
+  query EventListFiltersProjectsQuery($withEventOnly: Boolean) {
+    projects(withEventOnly: $withEventOnly) {
+      edges {
+        node {
+          id
+          title
+        }
+      }
+    }
+  }
+`;
+
+const themeQuery = graphql`
+  query EventListFiltersThemeQuery {
+    themes {
+      id
+      title
+    }
+  }
+`;
 const StatusContainer = styled(Col)`
   color: white;
   display: flex;
@@ -82,9 +110,34 @@ const FiltersWrapper = styled(Col)`
   }
 `;
 
-export class EventListFilters extends React.Component<Props> {
+export class EventListFilters extends React.Component<Props, State> {
+  state = { projectOptions: [], themeOptions: [] };
+
+  componentDidMount() {
+    fetchQuery(environment, projectQuery, { withEventOnly: true })
+      .then((res: EventListFiltersProjectsQueryResponse) =>
+        res.projects.edges
+          ? res.projects.edges.filter(Boolean).map(edge => ({
+              value: edge.node.id,
+              label: edge.node.title,
+            }))
+          : [],
+      )
+      .then(projectOptions => {
+        this.setState({ projectOptions });
+      });
+    fetchQuery(environment, themeQuery)
+      .then((res: EventListFiltersThemeQueryResponse) =>
+        res.themes.map(theme => ({ value: theme.id, label: theme.title })),
+      )
+      .then(themeOptions => {
+        this.setState({ themeOptions });
+      });
+  }
+
   getFilters(nbFilter: number): [] {
-    const { features, theme, project, userTypes, intl, dispatch, query } = this.props;
+    const { features, theme, project, userTypes, intl, dispatch } = this.props;
+    const { themeOptions, projectOptions } = this.state;
     const filters = [];
     filters.push(
       <Field
@@ -140,20 +193,37 @@ export class EventListFilters extends React.Component<Props> {
         />
       </div>,
     );
-    if (features.themes && query) {
+
+    if (features.themes && themeOptions.length) {
       filters.push(
-        <div>
-          {/* $FlowFixMe $refType */}
-          <SelectTheme query={query} />
-        </div>,
+        <Field
+          component={select}
+          id="EventListFilters-filter-theme"
+          name="theme"
+          placeholder={intl.formatMessage({ id: 'project.searchform.all_themes' })}
+          label={intl.formatMessage({ id: 'type-theme' })}
+          options={themeOptions}
+          role="combobox"
+          aria-autocomplete="list"
+          aria-haspopup="true"
+          aria-controls="EventListFilters-filter-theme-listbox"
+        />,
       );
     }
-    if (features.projects_form && query) {
+    if (features.projects_form && projectOptions.length) {
       filters.push(
-        <div>
-          {/* $FlowFixMe $refType */}
-          <SelectProject query={query} />
-        </div>,
+        <Field
+          component={select}
+          id="EventListFilters-filter-project"
+          name="project"
+          placeholder={intl.formatMessage({ id: 'admin.label.project' })}
+          label={intl.formatMessage({ id: 'type-project' })}
+          options={projectOptions}
+          role="combobox"
+          aria-autocomplete="list"
+          aria-haspopup="true"
+          aria-controls="EventListFilters-filter-project-listbox"
+        />,
       );
     }
 
@@ -300,7 +370,6 @@ export default createFragmentContainer(container, {
         isFuture: { type: "Boolean" }
         author: { type: "ID" }
         isRegistrable: { type: "Boolean" }
-        withEventOnly: { type: "Boolean" }
       ) {
       ...EventListCounter_query
         @arguments(
@@ -314,8 +383,6 @@ export default createFragmentContainer(container, {
           author: $author
           isRegistrable: $isRegistrable
         )
-      ...SelectTheme_query
-      ...SelectProject_query @arguments(withEventOnly: $withEventOnly)
     }
   `,
 });

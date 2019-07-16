@@ -14,7 +14,7 @@ class QueryThemesResolver implements ResolverInterface
         $this->repository = $repository;
     }
 
-    public function __invoke(): array
+     public function __invoke(): array
     {
         return $this->repository->findAll();
     }
