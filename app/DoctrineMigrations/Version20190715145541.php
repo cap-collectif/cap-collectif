@@ -48,10 +48,10 @@ final class Version20190715145541 extends AbstractMigration
         );
 
         $this->addSql(
-            'ALTER TABLE consultation ADD title_help_text VARCHAR(255) DEFAULT NULL, ADD description_help_text VARCHAR(255) DEFAULT NULL, ADD moderating_on_create TINYINT(1) DEFAULT \'0\' NOT NULL, ADD moderating_on_update TINYINT(1) DEFAULT \'0\' NOT NULL'
+            'ALTER TABLE consultation ADD opinion_count_shown_by_section INT NOT NULL, ADD title_help_text VARCHAR(255) DEFAULT NULL, ADD description_help_text VARCHAR(255) DEFAULT NULL, ADD moderating_on_create TINYINT(1) DEFAULT \'0\' NOT NULL, ADD moderating_on_update TINYINT(1) DEFAULT \'0\' NOT NULL, ADD meta_description VARCHAR(160) DEFAULT NULL, ADD custom_code LONGTEXT DEFAULT NULL'
         );
         $this->addSql(
-            'ALTER TABLE step DROP title_help_text, DROP description_help_text, DROP moderating_on_create, DROP moderating_on_update'
+            'ALTER TABLE step DROP opinion_count_shown_by_section, DROP title_help_text, DROP description_help_text, DROP moderating_on_create, DROP moderating_on_update'
         );
     }
 
@@ -64,10 +64,10 @@ final class Version20190715145541 extends AbstractMigration
         );
 
         $this->addSql(
-            'ALTER TABLE consultation DROP title_help_text, DROP description_help_text, DROP moderating_on_create, DROP moderating_on_update'
+            'ALTER TABLE consultation DROP opinion_count_shown_by_section, DROP title_help_text, DROP description_help_text, DROP moderating_on_create, DROP moderating_on_update, DROP meta_description, DROP custom_code'
         );
         $this->addSql(
-            'ALTER TABLE step ADD title_help_text VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci, ADD description_help_text VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci, ADD moderating_on_create TINYINT(1) DEFAULT \'0\', ADD moderating_on_update TINYINT(1) DEFAULT \'0\''
+            'ALTER TABLE step ADD opinion_count_shown_by_section INT DEFAULT NULL, ADD title_help_text VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci, ADD description_help_text VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci, ADD moderating_on_create TINYINT(1) DEFAULT \'0\', ADD moderating_on_update TINYINT(1) DEFAULT \'0\''
         );
     }
 }
