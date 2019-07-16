@@ -92,7 +92,7 @@ class ProjectsList extends React.Component<Props> {
         variables={{
           orderBy: {
             field: orderBy,
-            direction: 'DESC',
+            direction: 'ASC',
           },
           author,
           type,

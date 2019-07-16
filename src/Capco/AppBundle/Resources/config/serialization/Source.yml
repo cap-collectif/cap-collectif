@@ -10,7 +10,3 @@ Capco\AppBundle\Entity\Source:
       groups: [Elasticsearch]
     updatedAt:
       groups: [Elasticsearch]
-    getProject:
-      type: object
-      serialized_name: project
-      groups: [ElasticsearchNestedProject]

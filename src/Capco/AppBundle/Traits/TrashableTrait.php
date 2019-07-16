@@ -47,11 +47,7 @@ trait TrashableTrait
         }
 
         $this->trashedStatus = $status;
-
-        // Do not overwrite a previous date
-        if (!$this->trashedAt) {
-            $this->trashedAt = new \DateTime();
-        }
+        $this->trashedAt = new \DateTime();
 
         return $this;
     }

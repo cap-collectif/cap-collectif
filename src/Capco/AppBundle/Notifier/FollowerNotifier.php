@@ -38,10 +38,7 @@ final class FollowerNotifier extends BaseNotifier
 
         $this->siteName = $siteParams->getValue('global.site.fullname');
         $this->siteUrl = $router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
-    }
-
-    public function setSendAt(string $relativeTime) {
-        $this->sendAt = (new \DateTime($relativeTime))->setTimezone(
+        $this->sendAt = (new \DateTime('yesterday'))->setTimezone(
             new \DateTimeZone('Europe/Paris')
         );
     }

@@ -16,4 +16,4 @@ Capco\AppBundle\Entity\Argument:
     step:
       groups: [Elasticsearch]
     project:
-      groups: [ElasticsearchNestedProject]
+      groups: [Elasticsearch]

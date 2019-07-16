@@ -3,23 +3,19 @@ Capco\AppBundle\Entity\SourceVote:
     id: 60000
     Source: '@source1'
     user: '@user1'
-    publishedAt: <(new \DateTime('2017-02-21 01:00:00'))>
-    createdAt: <(new \DateTime('2017-02-21 01:00:00'))>
+    publishedAt: <(new \DateTime('yesterday'))>
   sourceVote2:
     id: 60001
     Source: '@source35'
     user: '@user3'
-    publishedAt: <(new \DateTime('2017-02-21 02:00:00'))>
-    createdAt: <(new \DateTime('2017-02-21 02:00:00'))>
+    publishedAt: <(new \DateTime('yesterday'))>
   sourceVote3:
     id: 60002
     Source: '@source43'
     user: '@user519'
-    publishedAt: <(new \DateTime('2017-02-21 03:00:00'))>
-    createdAt: <(new \DateTime('2017-02-21 03:00:00'))>
+    publishedAt: <(new \DateTime('yesterday'))>
   sourceVote4:
     id: 60003
     Source: '@source43'
     user: '@user5'
-    publishedAt: <(new \DateTime('2017-02-21 04:00:00'))>
-    createdAt: <(new \DateTime('2017-02-21 04:00:00'))>
+    publishedAt: <(new \DateTime('yesterday'))>

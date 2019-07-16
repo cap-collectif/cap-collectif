@@ -10,9 +10,6 @@ use Caxy\HtmlDiffBundle\Service\HtmlDiffService;
 
 class MailCatcherContext extends Base implements KernelAwareContext
 {
-    public const SNAPSHOTS_PATH = '/var/www/__snapshots__/emails/';
-    public const SNAPSHOTS_DIFF_PATH = '/var/www/__snapshots-diff__/';
-
     /**
      * {@inheritdoc}
      */
@@ -41,7 +38,7 @@ class MailCatcherContext extends Base implements KernelAwareContext
         }
 
         if ($writeSnapshot) {
-            $newSnapshot = fopen(self::SNAPSHOTS_PATH . $file, 'w');
+            $newSnapshot = fopen(__DIR__ . '/snapshots/' . $file, 'w');
             fwrite($newSnapshot, $content);
             fclose($newSnapshot);
             echo "\"Snapshot writen at '${file}'. You can now relaunch the testsuite.\"";
@@ -49,7 +46,7 @@ class MailCatcherContext extends Base implements KernelAwareContext
             return;
         }
 
-        $text = file_get_contents(self::SNAPSHOTS_PATH . $file);
+        $text = file_get_contents(__DIR__ . '/snapshots/' . $file);
 
         if (false === strpos($content, $text)) {
             // HtmlDiffService
@@ -57,11 +54,11 @@ class MailCatcherContext extends Base implements KernelAwareContext
                 ->getContainer()
                 ->get('caxy.html_diff')
                 ->diff($content, $text);
-            $dir = self::SNAPSHOTS_DIFF_PATH;
+            $dir = __DIR__ . '/snapshots-diff/';
             if (!file_exists($dir)) {
                 mkdir($dir, 0700);
             }
-            $path = $dir . $file;
+            $path = __DIR__ . '/snapshots-diff/' . $file;
             $newDiff = fopen($path, 'w');
             fwrite(
                 $newDiff,

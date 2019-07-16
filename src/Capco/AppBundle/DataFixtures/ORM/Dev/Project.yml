@@ -6,8 +6,6 @@ Capco\AppBundle\Entity\Project:
     Cover: '@MediaProject1'
     video: 'http://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
     themes: ['@theme1', '@theme2']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 1 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 1 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 1 days"))>
     exportable: true
     opinionsRankingThreshold: 60
@@ -20,8 +18,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType2'
     Cover: '@MediaProject2'
     themes: ['@theme1', '@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 2 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 2 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 2 days"))>
     visibility: 2
   p3:
@@ -30,16 +26,12 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType3'
     themes: ['@theme2', '@theme3']
     visibility: 2
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 3 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 3 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 3 days"))>
   p4:
     id: 'project4'
     title: Projet vide
     projectType: '@projectType2'
     themes: ['@theme2', '@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 4 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 4 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 4 days"))>
     visibility: 2
   p5:
@@ -49,8 +41,6 @@ Capco\AppBundle\Entity\Project:
     Cover: '@MediaProject1'
     video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
     themes: ['@theme1', '@theme3']
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 5 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 5 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 5 days"))>
     exportable: true
     opinionsRankingThreshold: 60
@@ -62,8 +52,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     themes: ['@theme3']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 6 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 6 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 6 days"))>
     visibility: 2
     opinionCanBeFollowed: true
@@ -73,8 +61,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     themes: ['@theme3']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 7 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 7 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 7 days"))>
     visibility: 2
   p8:
@@ -83,8 +69,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType7'
     themes: ['@theme3']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 8 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 8 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 8 days"))>
     visibility: 2
   p9:
@@ -93,8 +77,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType1'
     themes: []
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
     visibility: 2
   p10:
@@ -103,8 +85,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     themes: ['@theme3']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 10 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 10 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 10 days"))>
     visibility: 2
   p11:
@@ -112,8 +92,6 @@ Capco\AppBundle\Entity\Project:
     title: Budget avec vote limité
     projectType: '@projectType4'
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 11 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 11 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 11 days"))>
     visibility: 2
   p12:
@@ -123,8 +101,6 @@ Capco\AppBundle\Entity\Project:
     Cover: '@MediaProject4'
     themes: ['@theme2']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 12 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 12 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 12 days"))>
     visibility: 2
   p13:
@@ -133,8 +109,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     themes: ['@theme1']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 13 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 13 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 13 days"))>
     visibility: 2
   p14:
@@ -143,8 +117,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType2'
     themes: ['@theme1']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 14 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 14 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 14 days"))>
     visibility: 2
   p15:
@@ -153,8 +125,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     themes: []
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 15 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 15 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 15 days"))>
     visibility: 2
   p16:
@@ -163,8 +133,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     themes: ['@theme3']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 16 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 16 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 16 days"))>
     visibility: 2
   p17:
@@ -173,8 +141,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     themes: ['@theme3']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 17 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 17 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 17 days"))>
     visibility: 0
   p18:
@@ -183,8 +149,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType2'
     themes: ['@theme2']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 18 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 18 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 18 days"))>
     visibility: 1
   p19:
@@ -193,8 +157,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     themes: ['@theme3']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 19 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 19 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 19 days"))>
     visibility: 0
   p20:
@@ -203,8 +165,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType7'
     themes: ['@theme2']
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
     visibility: 3
     restrictedViewerGroups: ['@group2', '@group3']
@@ -214,8 +174,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     themes: []
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 21 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 21 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 21 days"))>
     visibility: 2
   p22:
@@ -224,8 +182,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     themes: []
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 22 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 22 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 22 days"))>
     visibility: 2
     externalVotesCount: 86
@@ -239,8 +195,6 @@ Capco\AppBundle\Entity\Project:
     projectType: '@projectType4'
     themes: []
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
     publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
     visibility: 2
     isExternal: true

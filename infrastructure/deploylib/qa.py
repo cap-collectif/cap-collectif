@@ -2,7 +2,6 @@ from task import task
 from fabric.operations import local, run, settings
 from fabric.api import env
 import time
-from fabric.colors import cyan
 
 capcobot = {
     'user': 'capco',
@@ -43,7 +42,7 @@ def graphql_schemas(checkSame=False):
 
 @task(environments=['local'])
 def snapshots(emails=False):
-    "Generate all snapshots"
+    "Run Generating Snapshot"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     commands = [
         'capco:export:users --quiet --snapshot',
@@ -58,30 +57,22 @@ def snapshots(emails=False):
         'xls',
     ]
 
-    print cyan('/!\ Your database must be up to date, to generate accurate snapshots !')
-
     if emails:
-        print cyan('Deleting email snapshots...')
-        local('rm -rf __snapshots__/emails/*')
+        local('rm -rf src/Capco/AppBundle/Behat/snapshots/*')
         env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p api --tags=snapshot', 'application', env.www_app)
         env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p e2e --tags=snapshot', 'application', env.www_app)
         env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p commands --tags=snapshot', 'application', env.www_app)
-        print cyan('Successfully generated emails snapshots !')
 
     env.service_command('bin/console capco:toggle:enable export --env test --no-debug', 'application', env.www_app)
-    
-    print cyan('Deleting exports snapshots...')
     for extension in extensions:
-        env.service_command('rm -rf __snapshots__/exports/*.' + extension , 'application', env.www_app, 'root')
+        env.service_command('rm -rf var/www/web/export/*.' + extension , 'application', env.www_app, 'root')
 
-    print cyan('Running export commands...')
     for command in commands:
         env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
 
+    env.service_command('rm -rf var/www/features/commands/__snapshots__/*', 'application', env.www_app, 'root')
     for extension in extensions:
-        env.service_command('cp web/export/*.' + extension + ' __snapshots__/exports/ 2>/dev/null || :', 'application', env.www_app)
-    print cyan('Successfully genrated snapshots !')
-
+        env.service_command('cp web/export/*.' + extension + ' features/commands/__snapshots__/ 2>/dev/null || :', 'application', env.www_app)
 
 @task(environments=['local', 'ci'])
 def behat(fast_failure='true', profile=False, suite='false', tags='false', timer='true'):

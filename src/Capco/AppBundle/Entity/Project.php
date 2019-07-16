@@ -958,8 +958,7 @@ class Project implements IndexableInterface
 
     public static function getElasticsearchPriority(): int
     {
-        // Proposals must be indexed before, to calculate a correct `contributionsCount`
-        return 10;
+        return 1;
     }
 
     public static function getElasticsearchTypeName(): string
