@@ -13,8 +13,6 @@ describe('<OpinionCreateForm />', () => {
     project: {
       _id: 'project1',
     },
-    titleHelpText: null,
-    descriptionHelpText: null,
     requirements: {
       reason: null,
       totalCount: 0,
@@ -23,6 +21,11 @@ describe('<OpinionCreateForm />', () => {
   };
   const props = {
     ...formMock,
+    consultation: {
+      $refType,
+      titleHelpText: null,
+      descriptionHelpText: null,
+    },
     consultationStep: defaultConsultationStep,
     section: {
       $refType,

@@ -1404,6 +1404,8 @@ type Consultation implements Node {
   # Contributions are allowed right now.
   contribuable: Boolean!
   opinionCountShownBySection: Int
+  titleHelpText: String
+  descriptionHelpText: String
 
   # The associated consultation step in which belongs this consultation
   step: ConsultationStep!
@@ -1515,12 +1517,9 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   # The introduction text of the step.
   body: HTML
-  opinionCountShownBySection: Int
 
   # The project
   project: Project!
-  titleHelpText: String
-  descriptionHelpText: String
 
   # Contributions are allowed right now.
   contribuable: Boolean!

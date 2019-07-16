@@ -65,7 +65,13 @@ export class OpinionCreateModal extends React.Component<Props> {
               <FormattedMessage id="opinion.add_new_infos" />
             </p>
           </div>
-          <OpinionCreateForm section={section} consultationStep={consultation.step} />
+          {consultation && (
+            <OpinionCreateForm
+              section={section}
+              consultationStep={consultation.step}
+              consultation={consultation}
+            />
+          )}
         </Modal.Body>
         <Modal.Footer>
           <CloseButton
@@ -106,6 +112,7 @@ export default createFragmentContainer(container, {
   consultation: graphql`
     fragment OpinionCreateModal_consultation on Consultation
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      ...OpinionCreateForm_consultation
       step {
         ...OpinionCreateForm_consultationStep @arguments(isAuthenticated: $isAuthenticated)
       }

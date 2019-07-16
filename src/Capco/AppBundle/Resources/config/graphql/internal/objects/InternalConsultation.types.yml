@@ -32,6 +32,10 @@ InternalConsultation:
         resolve: '@=value.canContribute(getUser())'
       opinionCountShownBySection:
         type: 'Int'
+      titleHelpText:
+        type: 'String'
+      descriptionHelpText:
+        type: 'String'
       step:
         type: 'InternalConsultationStep!'
         description: 'The associated consultation step in which belongs this consultation'
