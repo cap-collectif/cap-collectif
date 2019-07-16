@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Button, ListGroupItem, Panel, Label, OverlayTrigger, Popover } from 'react-bootstrap';
 import Input from '../components/Form/Input';
@@ -223,7 +223,6 @@ const argumentTypes = {
 };
 
 storiesOf('OpinionArgumentList', module)
-  .addDecorator(withKnobs)
   .add('default case', () => {
     const section = {
       paginationEnable: boolean('Pagination enabled', true, 'Section'),

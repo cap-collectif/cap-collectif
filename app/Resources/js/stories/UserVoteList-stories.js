@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { number, withKnobs } from '@storybook/addon-knobs';
+import { number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
@@ -51,7 +51,6 @@ UserVoteList.defaultProps = {
 };
 
 storiesOf('UserVoteList', module)
-  .addDecorator(withKnobs)
   .add('default case', () => {
     const votes = votesMockGenerator(4);
     const max = number('Max display', 5);

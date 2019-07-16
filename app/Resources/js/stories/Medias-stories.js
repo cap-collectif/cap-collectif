@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean, withKnobs, number, text, select } from '@storybook/addon-knobs';
+import { boolean, number, text, select } from '@storybook/addon-knobs';
 import DarkenGradientMedia from '../components/Ui/Medias/DarkenGradientMedia';
 import RatioMediaContainer from '../components/Ui/Medias/RatioMediaContainer';
 import Media from '../components/Ui/Medias/Media/Media';
@@ -20,7 +20,6 @@ const sizeOption = {
 };
 
 storiesOf('Medias', module)
-  .addDecorator(withKnobs)
   .add(
     'Darken gradient media',
     () => {

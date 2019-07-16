@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { boolean, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Button, ListGroupItem, Label, Media, Panel, Row, Col } from 'react-bootstrap';
 import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
@@ -178,7 +178,6 @@ const OpinionSourceList = ({ section, opinionSources, isProfile }) => (
 );
 
 storiesOf('OpinionSourceList', module)
-  .addDecorator(withKnobs)
   .add('default case', () => {
     const section = {
       addSourceEnable: boolean('Add source enabled', true, 'Section'),

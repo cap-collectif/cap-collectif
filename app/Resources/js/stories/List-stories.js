@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Button, ListGroupItem } from 'react-bootstrap';
 import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
@@ -24,7 +24,6 @@ const author = {
 };
 
 storiesOf('List', module)
-  .addDecorator(withKnobs)
   .add(
     'Inline list',
     () => (

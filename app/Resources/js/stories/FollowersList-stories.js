@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Row, Col, Label } from 'react-bootstrap';
 
@@ -86,7 +86,6 @@ const FollowersList = ({ withHeader, hasMore, isLoading, followers }) => (
 );
 
 storiesOf('FollowersList', module)
-  .addDecorator(withKnobs)
   .add('default case', () => {
     const section = {
       withHeader: boolean('with header', true, 'Section'),

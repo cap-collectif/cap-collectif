@@ -2,12 +2,11 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, Nav } from 'react-bootstrap';
-import { withKnobs, number, boolean } from '@storybook/addon-knobs';
+import { number, boolean } from '@storybook/addon-knobs';
 import StackedNav from '../components/Ui/Nav/StackedNav';
 import Pagination from '../components/Utils/Pagination';
 
 storiesOf('Navigation', module)
-  .addDecorator(withKnobs)
   .add(
     'StackedNav',
     () => (

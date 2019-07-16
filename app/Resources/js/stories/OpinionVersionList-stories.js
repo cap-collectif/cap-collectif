@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { boolean, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import {
   Button,
@@ -198,7 +198,6 @@ const OpinionVersionList = ({ section, opinionVersions, isProfile }) => (
 );
 
 storiesOf('OpinionVersionList', module)
-  .addDecorator(withKnobs)
   .add('default case', () => {
     const section = {
       paginationEnable: boolean('Pagination enabled', true, 'Section'),

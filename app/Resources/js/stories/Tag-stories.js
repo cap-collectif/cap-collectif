@@ -1,13 +1,12 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import { Tooltip, OverlayTrigger, Button } from 'react-bootstrap';
 import Tag from '../components/Ui/Labels/Tag';
 import InlineList from '../components/Ui/List/InlineList';
 
 storiesOf('Tag', module)
-  .addDecorator(withKnobs)
   .add('default', () => {
     const children = text('Children', 'Label', 'Props');
     return <Tag id="example">{children}</Tag>;

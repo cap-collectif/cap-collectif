@@ -214,7 +214,7 @@
         "intl": "^1.2.5",
         "intl-relativeformat": "^2.1.0",
         "jest": "^24.8.0",
-        "jest-styled-components": "^6.3.3",
+        "jest-styled-components": "^4.11.0-1",
         "jquery": "^3.4.0",
         "jquery-minicolors": "^2.1.10",
         "js-cookie": "^2.2.0",

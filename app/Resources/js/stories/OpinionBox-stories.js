@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { select, boolean, text, withKnobs } from '@storybook/addon-knobs';
+import { select, boolean, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import {
   ListGroupItem,
@@ -350,7 +350,6 @@ const OpinionBox = ({ section, opinion }) => (
 );
 
 storiesOf('OpinionBox', module)
-  .addDecorator(withKnobs)
   .add('default case', () => {
     const section = {
       title: text('Title', 'Proposition', 'Section'),

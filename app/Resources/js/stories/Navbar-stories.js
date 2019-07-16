@@ -2,10 +2,8 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
-import { boolean, text, withKnobs } from '@storybook/addon-knobs';
-import { setIntlConfig, withIntl } from 'storybook-addon-intl';
-import { addLocaleData, injectIntl } from 'react-intl';
-import frLocaleData from 'react-intl/locale-data/fr';
+import { boolean, text } from '@storybook/addon-knobs';
+import { injectIntl } from 'react-intl';
 import { Button } from 'react-bootstrap';
 
 import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
@@ -17,34 +15,6 @@ import { items, itemWithChildren } from './mocks/navbarItems';
 import { author as userMock } from './mocks/users';
 import type { FeatureToggles } from '../types';
 import { features as defaultFeatures } from '../redux/modules/default';
-
-addLocaleData(frLocaleData);
-
-// Provide your messages
-const messages = {
-  en: {
-    'global.navbar.see_more': 'See more',
-    'navbar.homepage': 'Home',
-    'navbar.skip_links.menu': 'Go to menu',
-    'navbar.skip_links.content': 'Go to content',
-    'active.page': 'active page',
-  },
-  fr: {
-    'global.navbar.see_more': 'Plus',
-    'navbar.homepage': 'Accueil',
-    'navbar.skip_links.menu': 'Aller au menu',
-    'navbar.skip_links.content': 'Aller au contenu',
-    'active.page': 'page active',
-  },
-};
-
-const getMessages = locale => messages[locale];
-
-setIntlConfig({
-  locales: ['fr', 'en'],
-  defaultLocale: 'fr',
-  getMessages,
-});
 
 const ButtonsContainer = styled.div`
   padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
@@ -133,8 +103,6 @@ const ContentRight = ({
 const ContentRightWithIntl = injectIntl(ContentRight);
 
 storiesOf('NavBar', module)
-  .addDecorator(withKnobs)
-  .addDecorator(withIntl)
   .add('with 2 items', () => {
     const siteName = text('site name', 'Cap-Collectif');
     const logo = text(
