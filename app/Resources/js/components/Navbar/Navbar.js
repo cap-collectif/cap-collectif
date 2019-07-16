@@ -74,7 +74,12 @@ export class Navbar extends React.Component<Props, State> {
             {logo && (
               <S.Brand id="brand">
                 <a href="/" title={intl.formatMessage({ id: 'navbar.homepage' })}>
-                  <img src={logo} alt={siteName} onLoad={this.handleLoading} />
+                  <img
+                    src={logo}
+                    alt={siteName}
+                    onLoad={this.handleLoading}
+                    onError={this.handleLoading}
+                  />
                 </a>
               </S.Brand>
             )}
