@@ -19,7 +19,7 @@ trait MetaDescriptionCustomCodeTrait
      */
     private $customCode;
 
-    public function getMetaDescription() //:?string
+    public function getMetaDescription(): ?string
     {
         return $this->metaDescription;
     }
@@ -31,7 +31,7 @@ trait MetaDescriptionCustomCodeTrait
         return $this;
     }
 
-    public function getCustomCode() //:?string
+    public function getCustomCode(): ?string
     {
         return $this->customCode;
     }

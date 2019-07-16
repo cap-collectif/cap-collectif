@@ -166,10 +166,6 @@ class StepAdmin extends CapcoAdmin
                     'query' => $this->createQueryForConsultation(),
                     'choices_as_values' => true
                 ])
-                ->add('opinionCountShownBySection', null, [
-                    'label' => 'admin.fields.step.opinionCountShownBySection',
-                    'required' => true
-                ])
                 ->end()
                 ->with('requirements')
                 ->add(

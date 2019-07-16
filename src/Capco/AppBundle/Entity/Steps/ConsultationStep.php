@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationStepRepository")
@@ -21,12 +20,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
      * @ORM\Column(name="opinion_count", type="integer")
      */
     private $opinionCount = 0;
-
-    /**
-     * @ORM\Column(name="opinion_count_shown_by_section", type="integer")
-     * @Assert\Range(max=20,min=1)
-     */
-    private $opinionCountShownBySection = 5;
 
     /**
      * @ORM\Column(name="trashed_opinion_count", type="integer")
@@ -98,18 +91,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     public function setOpinionCount(int $opinionCount): self
     {
         $this->opinionCount = $opinionCount;
-
-        return $this;
-    }
-
-    public function getOpinionCountShownBySection(): int
-    {
-        return $this->opinionCountShownBySection;
-    }
-
-    public function setOpinionCountShownBySection(int $opinionCountShownBySection): self
-    {
-        $this->opinionCountShownBySection = $opinionCountShownBySection;
 
         return $this;
     }

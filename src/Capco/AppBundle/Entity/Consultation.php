@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,6 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Consultation
 {
     use UuidTrait;
+    use MetaDescriptionCustomCodeTrait;
 
     /**
      * @var string
@@ -31,6 +33,12 @@ class Consultation
      * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
      */
     private $titleHelpText;
+
+    /**
+     * @ORM\Column(name="opinion_count_shown_by_section", type="integer")
+     * @Assert\Range(max=20,min=1)
+     */
+    private $opinionCountShownBySection = 5;
 
     /**
      * @var \DateTime
@@ -92,16 +100,22 @@ class Consultation
         return 'New consultation step type';
     }
 
+    public function getOpinionCountShownBySection(): int
+    {
+        return $this->opinionCountShownBySection;
+    }
+
+    public function setOpinionCountShownBySection(int $opinionCountShownBySection): self
+    {
+        $this->opinionCountShownBySection = $opinionCountShownBySection;
+
+        return $this;
+    }
+
     // TODO: using step values before we definitely move those values in Consultation entity
     public function canContribute(?User $user): bool
     {
         return $this->getStep()->canContribute($user);
-    }
-
-    // TODO: using step values before we definitely move those values in Consultation entity
-    public function getOpinionCountShownBySection(): int
-    {
-        return $this->getStep()->getOpinionCountShownBySection();
     }
 
     // TODO: using step values before we definitely move those values in Consultation entity
