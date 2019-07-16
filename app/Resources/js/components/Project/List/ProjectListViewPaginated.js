@@ -88,6 +88,7 @@ export default createPaginationContainer(
           type: $type
           status: $status
           term: $term
+          onlyPublic: true,
         ) @connection(key: "ProjectListViewPaginated_projects", filters: []) {
           edges {
             node {

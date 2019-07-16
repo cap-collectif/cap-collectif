@@ -10,6 +10,7 @@ import ProjectListView from './ProjectListView';
 import { getInitialValues } from './Filters/ProjectListFilters';
 
 type Props = {|
+  author: ?string,
   orderBy: ?string,
   term?: ?string,
   // Used only on /themes page
@@ -38,6 +39,7 @@ class ProjectsList extends React.Component<Props> {
       orderBy: props.orderBy,
       term: props.term,
       limit: props.limit,
+      author: props.author,
     };
     if (props.themeId) {
       this.initialRenderVars.theme = props.themeId;
@@ -62,7 +64,7 @@ class ProjectsList extends React.Component<Props> {
   };
 
   render() {
-    const { author, orderBy, type, theme, term, limit, status } = this.initialRenderVars;
+    const { orderBy, type, theme, term, limit, status, author } = this.initialRenderVars;
     return (
       <QueryRenderer
         environment={environment}
@@ -109,6 +111,7 @@ class ProjectsList extends React.Component<Props> {
 
 const mapStateToProps = (state: GlobalState) => ({
   orderBy: state.project.orderBy || 'LATEST',
+  author: state.user.user ? state.user.user.id : null,
 });
 
 export default connect(mapStateToProps)(ProjectsList);

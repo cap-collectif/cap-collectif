@@ -96,10 +96,7 @@ class ProjectRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
-    /**
-     * Get all arguments by user.
-     */
-    public function getByUserPaginated(User $user, int $first = 0, int $offset = 100): Paginator
+    public function getByUserPublicPaginated(User $user): Paginator
     {
         $query = $this->getProjectsViewerCanSeeQueryBuilder($user)
             ->addSelect('a', 'u', 't')
@@ -107,12 +104,28 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.authors', 'a')
             ->leftJoin('a.user', 'u')
             ->andWhere('u = :user')
+            ->andWhere('p.visibility = :visibility')
             ->setParameter('user', $user)
-            ->orderBy('p.updatedAt', 'DESC')
-            ->setMaxResults($offset)
-            ->setFirstResult($first);
+            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+            ->orderBy('p.updatedAt', 'DESC');
 
         return new Paginator($query);
+    }
+
+    public function countPublicPublished(User $user)
+    {
+        $query = $this->getProjectsViewerCanSeeQueryBuilder($user)
+            ->addSelect('a', 'u', 't')
+            ->leftJoin('p.projectType', 't')
+            ->leftJoin('authors.user', 'u')
+            ->andWhere('u = :user')
+            ->andWhere('p.visibility = :visibility')
+            ->setParameter('user', $user)
+            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+            ->orderBy('p.updatedAt', 'DESC');
+
+        $query->select('COUNT(p.id)');
+        return $query->getQuery()->getSingleScalarResult();
     }
 
     public function getAuthorsId($viewer = null, $order = 'DESC'): array

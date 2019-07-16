@@ -69,6 +69,7 @@ export class ProjectListView extends React.Component<Props, State> {
   render() {
     const { query, limit, paginate } = this.props;
     const { isRefetching } = this.state;
+    console.log(this.props);
     if (isRefetching) {
       return <Loader />;
     }

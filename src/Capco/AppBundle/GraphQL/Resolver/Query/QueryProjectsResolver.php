@@ -107,7 +107,7 @@ class QueryProjectsResolver implements ResolverInterface
             $filters['projectType.id'] = $args->offsetGet('type');
         }
         if ($args->offsetExists('author') && '' !== $args['author']) {
-            $filters['author.id'] = GlobalId::fromGlobalId($args->offsetGet('author'))['id'];
+            $filters['authors.id'] = GlobalId::fromGlobalId($args->offsetGet('author'))['id'];
         }
         if ($args->offsetExists('withEventOnly') && false !== $args['withEventOnly']) {
             $filters['withEventOnly'] = $args['withEventOnly'];

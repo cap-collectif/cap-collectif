@@ -285,9 +285,5 @@ InternalUser:
       projects:
         type: 'InternalProjectConnection!'
         description: 'Get all projects the user has created.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProjectsResolver", [getUser(), args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProjectsResolver", [value, args])'
         argsBuilder: 'Relay::Connection'
-        args:
-          first:
-            type: 'Int'
-            defaultValue: 100
