@@ -2,11 +2,11 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { UserAvatarListContainer } from './UserAvatarList';
+import { UserAvatarList } from './UserAvatarList';
 import { $refType, $fragmentRefs } from '../../mocks';
 import { features } from '../../redux/modules/default';
 
-describe('<UserAvatarListContainer />', () => {
+describe('<UserAvatarList />', () => {
   it('renders correctly', () => {
     const props = {
       features,
@@ -20,17 +20,17 @@ describe('<UserAvatarListContainer />', () => {
         },
       ],
     };
-    const wrapper = shallow(<UserAvatarListContainer {...props} />);
+    const wrapper = shallow(<UserAvatarList {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly without authors', () => {
+  it('renders correctly withou authors', () => {
     const props = {
       features,
       max: 10,
       users: [],
     };
-    const wrapper = shallow(<UserAvatarListContainer {...props} />);
+    const wrapper = shallow(<UserAvatarList {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
