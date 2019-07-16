@@ -21,6 +21,8 @@ final class Version20190715145541 extends AbstractMigration
                 'consultation',
                 [
                     'title_help_text' => $consultationStep['title_help_text'],
+                    'opinion_count_shown_by_section' =>
+                        (int) $consultationStep['opinion_count_shown_by_section'],
                     'description_help_text' => $consultationStep['description_help_text'],
                     'moderating_on_create' => $consultationStep['moderating_on_create'],
                     'moderating_on_update' => $consultationStep['moderating_on_update']
@@ -41,7 +43,7 @@ final class Version20190715145541 extends AbstractMigration
         );
 
         $this->consultationSteps = $this->connection->fetchAll(
-            'SELECT id, title_help_text, description_help_text, moderating_on_create, moderating_on_update
+            'SELECT id, opinion_count_shown_by_section, title_help_text, description_help_text, moderating_on_create, moderating_on_update
                 FROM step
                 WHERE step.step_type = "consultation"
             '
