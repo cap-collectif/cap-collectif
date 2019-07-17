@@ -47,8 +47,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "proposalInAZoneRequired": true,
           "questions": Array [
             Object {
-              "__typename": "SimpleQuestion",
-              "alwaysJumpDestinationQuestion": null,
               "choices": Array [],
               "description": null,
               "helpText": "Help 1",
@@ -364,8 +362,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         questions={
           Array [
             Object {
-              "__typename": "SimpleQuestion",
-              "alwaysJumpDestinationQuestion": null,
               "choices": Array [],
               "description": null,
               "helpText": "Help 1",

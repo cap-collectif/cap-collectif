@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { type IntlShape } from 'react-intl';
 import { graphql } from 'react-relay';
-import { Field, type FieldArrayProps } from 'redux-form';
+import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '~relay/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '~relay/ReplyForm_questionnaire.graphql';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
@@ -55,7 +55,6 @@ const ResponseFragment = {
 const QuestionAdminFragment = {
   adminQuestion: graphql`
     fragment responsesHelper_adminQuestion on Question {
-      __typename
       id
       title
       number
@@ -65,6 +64,7 @@ const QuestionAdminFragment = {
       helpText
       jumps {
         id
+        always
         origin {
           id
         }
@@ -87,11 +87,6 @@ const QuestionAdminFragment = {
             }
           }
         }
-      }
-      alwaysJumpDestinationQuestion {
-        id
-        title
-        number
       }
       description
       type
@@ -122,7 +117,6 @@ const QuestionAdminFragment = {
 const QuestionFragment = {
   question: graphql`
     fragment responsesHelper_question on Question {
-      __typename
       id
       title
       number
@@ -132,6 +126,7 @@ const QuestionFragment = {
       helpText
       jumps {
         id
+        always
         origin {
           id
         }
@@ -154,11 +149,6 @@ const QuestionFragment = {
             }
           }
         }
-      }
-      alwaysJumpDestinationQuestion {
-        id
-        title
-        number
       }
       description
       type
@@ -184,47 +174,9 @@ const QuestionFragment = {
   `,
 };
 
-type ConditionalJumpCondition = {|
-  +id: ?string,
-  +operator: LogicJumpConditionOperator,
-  +question: {|
-    +id: string,
-    +title: string,
-  |},
-  +value?: ?{|
-    +id: string,
-    +title: string,
-  |},
-|};
-
-type Jump = {|
-  +id: ?string,
-  +origin: {|
-    +id: string,
-  |},
-  +destination: {|
-    +id: string,
-    +title: string,
-    +number: number,
-  |},
-  +conditions: ?$ReadOnlyArray<?ConditionalJumpCondition>,
-|};
-
-export type QuestionChoice = {|
-  +id: string,
-  +title: string,
-  +description: ?string,
-  +color: ?QuestionChoiceColor,
-  +image: ?{|
-    +id: string,
-    +url: string,
-  |},
-|};
-
 // This is a cp/paster of
 // responsesHelper_question without $refType
-export type Question = {|
-  +__typename: string,
+type Question = {|
   +id: string,
   +title: string,
   +number: number,
@@ -232,12 +184,30 @@ export type Question = {|
   +position: number,
   +required: boolean,
   +helpText: ?string,
-  +alwaysJumpDestinationQuestion: ?{|
-    +id: string,
-    +title: string,
-    +number: number,
-  |},
-  +jumps: ?$ReadOnlyArray<?Jump>,
+  +jumps: ?$ReadOnlyArray<?{|
+    +id: ?string,
+    +always: boolean,
+    +origin: {|
+      +id: string,
+    |},
+    +destination: {|
+      +id: string,
+      +title: string,
+      +number: number,
+    |},
+    +conditions: ?$ReadOnlyArray<?{|
+      +id: ?string,
+      +operator: LogicJumpConditionOperator,
+      +question: {|
+        +id: string,
+        +title: string,
+      |},
+      +value?: ?{|
+        +id: string,
+        +title: string,
+      |},
+    |}>,
+  |}>,
   +description: ?string,
   +type: QuestionTypeValue,
   +isOtherAllowed?: boolean,
@@ -246,7 +216,16 @@ export type Question = {|
     +type: MultipleChoiceQuestionValidationRulesTypes,
     +number: number,
   |},
-  +choices?: ?$ReadOnlyArray<QuestionChoice>,
+  +choices?: ?$ReadOnlyArray<{|
+    +id: string,
+    +title: string,
+    +description: ?string,
+    +color: ?QuestionChoiceColor,
+    +image: ?{|
+      +id: string,
+      +url: string,
+    |},
+  |}>,
 |};
 export type Questions = $ReadOnlyArray<Question>;
 
@@ -263,7 +242,7 @@ type ResponsesFromAPI = $ReadOnlyArray<?{|
   |}>,
 |}>;
 
-type ResponseInReduxForm = {|
+export type ResponsesInReduxForm = $ReadOnlyArray<{|
   question: string,
   value:
     | ?string
@@ -278,9 +257,7 @@ type ResponseInReduxForm = {|
         labels: $ReadOnlyArray<string>,
         other: ?string,
       |},
-|};
-
-export type ResponsesInReduxForm = $ReadOnlyArray<ResponseInReduxForm>;
+|}>;
 
 // The real type is
 //
@@ -297,27 +274,237 @@ type SubmitResponses = $ReadOnlyArray<{|
   medias?: ?$ReadOnlyArray<string>,
 |}>;
 
-const IS_OPERATOR = 'IS';
-const IS_NOT_OPERATOR = 'IS_NOT';
-
-const getValueFromSubmitResponse = (response: ?ResponseInReduxForm): ?string => {
-  if (response && typeof response.value === 'string') {
-    return response.value;
+const getValueFromSubmitResponse = search => {
+  if (search && typeof search.value === 'string') {
+    return search.value;
   }
-  if (
-    response &&
-    response.value &&
-    typeof response.value === 'object' &&
-    !Array.isArray(response.value)
-  ) {
-    return response.value.labels[0];
+  if (search && search.value && typeof search.value === 'object' && !Array.isArray(search.value)) {
+    return search.value.labels[0];
   }
-  if (response && response.value && Array.isArray(response.value) && response.value.length > 0) {
-    return typeof response.value[0] === 'object'
-      ? response.value[0].name // Here, we are dealing with a MediaQuestion, which has the shape { id: string, name: string, url: string }
-      : response.value.join(', '); // Here, we are dealing with a MultipleChoiceQuestion but more specifically a Ranking question, which is a simple array of strings
+  if (search && search.value && Array.isArray(search.value)) {
+    return search.value[0].name;
   }
   return null;
+};
+
+const getConditionsResultForJump = (jump, responses) => {
+  const conditions =
+    jump &&
+    jump.conditions &&
+    jump.conditions.filter(Boolean).map(condition => {
+      const search = responses
+        .filter(Boolean)
+        .find(r => condition && condition.question && r.question === condition.question.id);
+      const userResponse = getValueFromSubmitResponse(search);
+      return condition.operator === 'IS'
+        ? condition && condition.value && condition.value.title === userResponse
+        : condition && condition.value && condition.value.title !== userResponse;
+    });
+
+  return (jump && jump.always) || (conditions && conditions.every(condition => condition === true));
+};
+
+const populateQuestionsJump = (responses, questions, callback) => {
+  const questionsWithJumpsIds = [];
+  if (responses) {
+    responses.forEach(response => {
+      if (response.value) {
+        const question = questions.find(q => q.id === response.question);
+        if (question && question.jumps && question.jumps.length > 0) {
+          question.jumps.some(jump => {
+            const conditionsResult = getConditionsResultForJump(jump, responses);
+            if (conditionsResult) {
+              const questionWithJump = questions.find(
+                q => q.id === (jump && jump.destination && jump.destination.id),
+              );
+              questionsWithJumpsIds.push(...callback(questionWithJump));
+            }
+            return conditionsResult;
+          });
+        }
+      }
+    });
+  }
+  return questionsWithJumpsIds;
+};
+
+const questionsHaveLogicJump = questions =>
+  questions.reduce(
+    (acc, question) => acc || (question && question.jumps && question.jumps.length > 0),
+    false,
+  );
+
+const filterQuestions = (questions, questionsWithJumps, otherQuestions) => {
+  const tree = {};
+  questionsWithJumps.forEach(questionId => {
+    tree[questionId] = questions.filter(
+      q => q && q.jumps && q.jumps.some(j => j && j.destination && j.destination.id === questionId),
+    );
+  });
+
+  let questionsJumps = questionsWithJumps;
+  let questionsOther = otherQuestions;
+
+  Object.keys(tree).forEach(questionId => {
+    tree[questionId].forEach(question => {
+      if (!questionsWithJumps.includes(question.id) && !otherQuestions.includes(question.id)) {
+        questionsJumps = questionsWithJumps.filter(qId => qId !== questionId);
+        questionsOther = otherQuestions.filter(qId => qId !== questionId);
+        questionsJumps.push(
+          ...question.jumps.filter(jump => jump.always).map(jump => jump.destination.id),
+        );
+        questionsOther.push(
+          ...question.jumps.filter(jump => jump.always).map(jump => jump.destination.id),
+        );
+      }
+    });
+  });
+
+  return [questionsJumps, questionsOther];
+};
+
+const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
+  const firstLogicQuestion = questions
+    .filter(Boolean)
+    .find(
+      question =>
+        question.required ||
+        (question.jumps &&
+          question.jumps.length > 0 &&
+          afterQuestion &&
+          question.position >= afterQuestion.position),
+    );
+
+  let firstQuestionsIds = [];
+  if (firstLogicQuestion) {
+    const filteredIds = questions
+      .filter(
+        question =>
+          question.required ||
+          (question.jumps &&
+            question.jumps.length === 0 &&
+            afterQuestion &&
+            question.position > afterQuestion.position &&
+            question.position < firstLogicQuestion.position),
+      )
+      .map(question => question.id);
+    if (firstLogicQuestion && firstLogicQuestion.jumps) {
+      firstLogicQuestion.jumps.some(jump => {
+        if (jump && jump.always && jump.destination) {
+          filteredIds.push(jump.destination.id);
+        }
+        return jump && jump.always;
+      });
+    }
+    firstQuestionsIds = [firstLogicQuestion.id, ...filteredIds];
+  } else {
+    firstQuestionsIds = questions
+      .filter(question => afterQuestion && question.position > afterQuestion.position)
+      .map(question => question.id);
+  }
+
+  let questionsWithJumpsIds = populateQuestionsJump(responses, questions, questionWithJump =>
+    questionWithJump ? [questionWithJump.id] : [],
+  );
+
+  [questionsWithJumpsIds, firstQuestionsIds] = filterQuestions(
+    questions,
+    questionsWithJumpsIds,
+    firstQuestionsIds,
+  );
+
+  return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
+};
+
+export const getAvailableQuestionsIds = (
+  questions: Questions,
+  responses: ?ResponsesInReduxForm,
+) => {
+  // If no jump in questionnaire every question is available
+  const hasLogicJumps = questionsHaveLogicJump(questions);
+  if (!hasLogicJumps) {
+    // $FlowFixMe
+    return questions.map(q => q.id);
+  }
+
+  // Otherwise let's calculate what is currently displayed to user…
+  const firstLogicQuestion = questions.find(
+    question => question.jumps && question.jumps.length > 0,
+  );
+  const firstLogicQuestionId = firstLogicQuestion ? firstLogicQuestion.id : null;
+
+  const questionIsADestination = [];
+  questions.map(question => {
+    if (question.jumps !== null && question.jumps !== undefined) {
+      question.jumps.map(jump => {
+        questionIsADestination.push(jump ? jump.destination.id : {});
+      });
+    }
+  });
+
+  const filteredIds = questions
+    .filter(
+      question =>
+        question.required ||
+        (question.jumps &&
+          question.jumps.length === 0 &&
+          firstLogicQuestion &&
+          !questionIsADestination.includes(question.id)),
+    )
+    .map(question => question.id);
+
+  const firstQuestionsIds = [firstLogicQuestionId, ...filteredIds];
+  const questionsWithJumpsIds = populateQuestionsJump(responses, questions, questionWithJump =>
+    getAvailableQuestionsIdsAfter(questionWithJump, questions, responses),
+  );
+
+  // $FlowFixMe
+  return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
+};
+
+export const formatSubmitResponses = (
+  responses: ?ResponsesInReduxForm,
+  questions: Questions,
+): SubmitResponses => {
+  if (!responses) return [];
+  const answeredQuestionsIds = getAvailableQuestionsIds(questions, responses);
+  return responses.map(res => {
+    const question = questions.filter(q => res.question === q.id)[0];
+    const { type: questionType } = question;
+
+    if (questionType === 'medias') {
+      const medias = answeredQuestionsIds.includes(question.id)
+        ? Array.isArray(res.value)
+          ? res.value.map(value => value.id)
+          : []
+        : null;
+      return {
+        question: res.question,
+        medias,
+      };
+    }
+    let { value } = res;
+    if (questionType === 'ranking' || questionType === 'button') {
+      value = answeredQuestionsIds.includes(question.id)
+        ? JSON.stringify({
+            labels: Array.isArray(res.value) ? res.value : [res.value],
+            other: null,
+          })
+        : null;
+    } else if (questionType === 'checkbox' || questionType === 'radio') {
+      value = answeredQuestionsIds.includes(question.id) ? JSON.stringify(res.value) : null;
+    } else if (questionType === 'number') {
+      return {
+        question: res.question,
+        value: res.value,
+      };
+    }
+    if (typeof value === 'string') {
+      value = answeredQuestionsIds.includes(question.id) ? value : null;
+      return { value, question: res.question };
+    }
+    return { value: null, question: res.question };
+  });
 };
 
 export const getValueFromResponse = (questionType: string, responseValue: string) => {
@@ -417,98 +604,6 @@ type ResponseError = ?{
 
 type ResponsesError = ResponseError[];
 
-const hasAnsweredQuestion = (question: Question, responses: ResponsesInReduxForm): boolean => {
-  const answer = responses.filter(Boolean).find(response => response.question === question.id);
-  if (answer) {
-    const submitResponse = getValueFromSubmitResponse(answer);
-    return !!('value' in answer && (submitResponse !== null && submitResponse !== ''));
-  }
-  return false;
-};
-
-// alwaysJumpDestinationQuestion can be nullable, but when we call this method it is not
-// null, we make verification about question.alwaysJumpDestinationQuestion, but flow does not recognize it
-// Typically in this situation I would unwrap the value of question.alwaysJumpDestinationQuestion!, but
-// unwrapping value does not seems to exists in flow
-const createJumpFromAlwaysQuestion = (question: Question): Jump => ({
-  // $FlowFixMe
-  destination: question.alwaysJumpDestinationQuestion,
-  conditions: [],
-  origin: {
-    id: question.id,
-  },
-  id: undefined,
-});
-
-const questionsHaveLogicJump = questions =>
-  questions.reduce(
-    (acc, question) => acc || (question && question.jumps && question.jumps.length > 0),
-    false,
-  );
-
-const getConditionReturn = (
-  response: ?ResponseInReduxForm,
-  condition: ConditionalJumpCondition,
-): boolean => {
-  const userResponse = getValueFromSubmitResponse(response);
-  if (response && userResponse && condition.value) {
-    switch (condition.operator) {
-      case IS_OPERATOR:
-        return condition.value.title === userResponse;
-      case IS_NOT_OPERATOR:
-        return condition.value.title !== userResponse;
-      default:
-        return false;
-    }
-  }
-  return false;
-};
-
-export const getNextLogicJumpQuestion = (question: Question, questions: Questions): ?Question => {
-  return (
-    questions.slice(questions.indexOf(question) + 1).find(q => q.jumps && q.jumps.length > 0) ||
-    null
-  );
-};
-
-export const isAnyQuestionJumpsFullfilled = (
-  question: Question,
-  responses: ResponsesInReduxForm,
-): boolean => {
-  if (question.jumps) {
-    return (
-      question.jumps.filter(Boolean).some(jump =>
-        jump.conditions
-          ? jump.conditions.filter(Boolean).every(condition => {
-              const answered = responses
-                .filter(Boolean)
-                .find(response => response.question === condition.question.id);
-              return getConditionReturn(answered, condition);
-            })
-          : false,
-      ) || !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses))
-    );
-  }
-  return !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses));
-};
-
-// This method is used to get a list of dependent questions (a question is dependant when
-// it is present in the same branch tree of another question)
-export const getQuestionDeps = (question: Question, questions: Questions): Questions =>
-  questions
-    .filter(Boolean)
-    .filter(
-      q =>
-        (q.alwaysJumpDestinationQuestion && q.alwaysJumpDestinationQuestion.id === question.id) ||
-        (q.jumps && q.jumps.filter(Boolean).some(jump => jump.destination.id === question.id)),
-    );
-
-const getOrphanedQuestions = (questions: Questions): Questions =>
-  questions.reduce((acc, question) => {
-    const deps = getQuestionDeps(question, questions);
-    return [...acc, ...(deps.length === 0 ? [question] : [])];
-  }, []);
-
 export const validateResponses = (
   questions: Questions,
   responses: ResponsesInReduxForm,
@@ -597,145 +692,6 @@ export const validateResponses = (
   return responsesError && responsesError.length ? { responses: responsesError } : {};
 };
 
-// This method returns, for a given questions and based on user's answers, the list of fullfilled logic jumps
-// (all the jumps where all the conditions have been met)
-export const getFullfilledJumps = (question: Question, responses: ResponsesInReduxForm): Jump[] => {
-  const elseJumps =
-    question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses)
-      ? [createJumpFromAlwaysQuestion(question)]
-      : [];
-  if (question.jumps) {
-    const fullfilleds = question.jumps.filter(Boolean).filter(jump =>
-      jump.conditions
-        ? jump.conditions.filter(Boolean).every(condition => {
-            const answered = responses.find(
-              response => response.question === condition.question.id,
-            );
-            return getConditionReturn(answered, condition);
-          })
-        : false,
-    );
-    // Here, one ore more conditions have been fullfilled, so we return them to show questions based on their conditions
-    if (fullfilleds.length > 0) {
-      return fullfilleds;
-    }
-    const answered = responses.find(response => response.question === question.id);
-    if (answered && getValueFromSubmitResponse(answered)) {
-      // Here, no conditions have been met and the user have correctly answered the question so we are in the "else" case
-      return elseJumps;
-    }
-    // Here, no conditions have been met and the user have not answered the question so we show nothing more
-    return [];
-  }
-  return [];
-};
-
-// This is the main method, used in `renderResponses` that returns, given the Questionnaire's questions and the
-// user's answers, a list of questions ids that should be displayed to the user based on it's answers
-// and the logic jumps defined for the questions
-export const getAvailableQuestionsIds = (
-  questions: Questions,
-  responses: ResponsesInReduxForm,
-): string[] => {
-  // If no jump in questionnaire every question is available
-  const hasLogicJumps = questionsHaveLogicJump(questions);
-  if (!hasLogicJumps) {
-    return questions.map(q => q.id);
-  }
-  //
-  // Otherwise let's calculate what is currently displayed to user…
-  const firstLogicQuestion = questions.find(
-    question =>
-      (question.jumps && question.jumps.length > 0) || question.alwaysJumpDestinationQuestion,
-  );
-
-  // We need the first questions before the first logic jump of the questionnaire, so we display
-  // them to the user
-  const firstQuestionsIds = questions
-    .slice(0, questions.indexOf(firstLogicQuestion) + 1)
-    .map(question => question.id);
-
-  // We get all the fullfilled questions ids (the questions that have met all the conditions)
-  const fullfilledQuestionsIds = questions.reduce((acc, question) => {
-    if (isAnyQuestionJumpsFullfilled(question, responses)) {
-      const jumps = getFullfilledJumps(question, responses);
-      const answers = jumps.map(
-        jump => responses.find(response => response.question === jump.origin.id) || null,
-      );
-      const answer = answers.filter(Boolean).find(a => a.question === question.id) || null;
-      if (
-        jumps.length > 0 &&
-        (responses.length === 0 || (answer && getValueFromSubmitResponse(answer) === null))
-      ) {
-        const visibleJumps = jumps.filter(Boolean).map(jump => jump.destination.id);
-
-        return [...acc, ...visibleJumps];
-      }
-      return [...acc, ...jumps.filter(Boolean).map(jump => jump.destination.id)];
-    }
-    return acc;
-  }, []);
-
-  fullfilledQuestionsIds.map(qId => questions.find(q => q.id === qId));
-
-  const orphanedQuestionsIds = getOrphanedQuestions(questions).map(question => question.id);
-
-  // $FlowFixMe
-  return Array.from(
-    new Set([...firstQuestionsIds, ...fullfilledQuestionsIds, ...orphanedQuestionsIds]),
-  );
-};
-
-export const formatSubmitResponses = (
-  responses: ?ResponsesInReduxForm,
-  questions: Questions,
-): SubmitResponses => {
-  if (!responses) return [];
-  const answeredQuestionsIds = getAvailableQuestionsIds(questions, responses);
-  return responses.map(res => {
-    const question = questions.filter(q => res.question === q.id)[0];
-    const { type: questionType } = question;
-
-    if (questionType === 'medias') {
-      const medias = answeredQuestionsIds.includes(question.id)
-        ? Array.isArray(res.value)
-          ? res.value.map(value => value.id)
-          : []
-        : null;
-      return {
-        question: res.question,
-        medias,
-      };
-    }
-    let { value } = res;
-    if (questionType === 'ranking' || questionType === 'button') {
-      value = answeredQuestionsIds.includes(question.id)
-        ? JSON.stringify({
-            labels: Array.isArray(res.value) ? res.value : [res.value],
-            other: null,
-          })
-        : null;
-    } else if (questionType === 'checkbox' || questionType === 'radio') {
-      value = answeredQuestionsIds.includes(question.id) ? JSON.stringify(res.value) : null;
-    } else if (questionType === 'number') {
-      return {
-        question: res.question,
-        value: res.value,
-      };
-    }
-    if (typeof value === 'string') {
-      value = answeredQuestionsIds.includes(question.id) ? value : null;
-      return { value, question: res.question };
-    }
-    return { value: null, question: res.question };
-  });
-};
-
-const getQuestionInitialValue = (question: Question) => {
-  // MediaQuestion have a default value of []
-  return question.__typename === 'MediaQuestion' ? [] : null
-};
-
 export const renderResponses = ({
   fields,
   questions,
@@ -747,7 +703,7 @@ export const renderResponses = ({
 }: {|
   ...FieldArrayProps,
   questions: Questions,
-  responses: ResponsesInReduxForm,
+  responses: ?ResponsesInReduxForm,
   change: (field: string, value: any) => void,
   form: string,
   intl: IntlShape,
@@ -755,17 +711,7 @@ export const renderResponses = ({
 |}) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
-  const ids = questions
-    .filter(Boolean)
-    .filter(question => !availableQuestions.includes(question.id))
-    .map(question => question.id);
-  ids.forEach(id => {
-    const question = questions.find(q => q.id === id);
-    if (question) {
-      const indexInRedux = questions.indexOf(question);
-      change(`responses[${indexInRedux}].value`, getQuestionInitialValue(question));
-    }
-  });
+
   return (
     <div>
       {fields.map((member, index) => {

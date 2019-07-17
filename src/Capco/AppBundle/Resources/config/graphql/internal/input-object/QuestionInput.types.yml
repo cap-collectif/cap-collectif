@@ -5,8 +5,6 @@ QuestionInput:
       id:
         type: 'String'
         description: 'If null, a new question will be created.'
-      alwaysJumpDestinationQuestion:
-        type: 'ID'
       title:
         type: 'String!'
       type:

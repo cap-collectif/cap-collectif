@@ -34,8 +34,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
           questions={
             Array [
               Object {
-                "__typename": "SimpleQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [],
                 "description": "description of question",
                 "helpText": "",
@@ -51,8 +49,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -97,8 +93,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -136,8 +130,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -281,8 +273,6 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
           questions={
             Array [
               Object {
-                "__typename": "SimpleQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [],
                 "description": "description of question",
                 "helpText": "",
@@ -298,8 +288,6 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -344,8 +332,6 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -489,8 +475,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
           questions={
             Array [
               Object {
-                "__typename": "SimpleQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [],
                 "description": "description of question",
                 "helpText": "",
@@ -506,8 +490,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -552,8 +534,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -598,8 +578,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -637,8 +615,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -782,8 +758,6 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
           questions={
             Array [
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -828,8 +802,6 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -867,8 +839,6 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,
@@ -1012,8 +982,6 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
           questions={
             Array [
               Object {
-                "__typename": "SimpleQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [],
                 "description": "description of question",
                 "helpText": "",
@@ -1029,8 +997,6 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
                 "validationRule": null,
               },
               Object {
-                "__typename": "MultipleChoiceQuestion",
-                "alwaysJumpDestinationQuestion": null,
                 "choices": Array [
                   Object {
                     "color": null,

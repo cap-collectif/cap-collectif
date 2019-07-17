@@ -2,8 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,10 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class AbstractLogicJumpCondition
 {
     use UuidTrait;
-    use PositionableTrait;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=false)
+     * @ORM\Column(type="string", length=10)
      */
     protected $operator;
 
@@ -34,7 +32,6 @@ abstract class AbstractLogicJumpCondition
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\LogicJump", inversedBy="conditions")
-     * @ORM\JoinColumn(nullable=false)
      */
     protected $jump;
 
@@ -43,19 +40,19 @@ abstract class AbstractLogicJumpCondition
         return $this->operator;
     }
 
-    public function setOperator(?string $operator): self
+    public function setOperator(string $operator): self
     {
         $this->operator = $operator;
 
         return $this;
     }
 
-    public function getQuestion(): ?AbstractQuestion
+    public function getQuestion(): ?MultipleChoiceQuestion
     {
         return $this->question;
     }
 
-    public function setQuestion(?AbstractQuestion $question): self
+    public function setQuestion(?MultipleChoiceQuestion $question): self
     {
         $this->question = $question;
 

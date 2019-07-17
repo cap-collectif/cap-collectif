@@ -80,16 +80,9 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     protected $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJump", mappedBy="origin", orphanRemoval=true, cascade={"persist", "remove"})
-     * @ORM\OrderBy({"position" = "ASC"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJump", mappedBy="origin", orphanRemoval=true, cascade={"persist", "remove"}, fetch="EAGER")
      */
     protected $jumps;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion")
-     * @ORM\JoinColumn(name="always_jump_destination_question_id", nullable=true, onDelete="SET NULL")
-     */
-    protected $alwaysJumpDestinationQuestion;
 
     /**
      * @Assert\NotNull()
@@ -147,7 +140,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     /**
      * @return Collection|LogicJump[]
      */
-    public function getJumps(): Collection
+    public function getJumps(): ?Collection
     {
         return $this->jumps;
     }
@@ -175,17 +168,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         return $this;
     }
 
-    public function setJumps(Collection $jumps): self
-    {
-        foreach ($jumps as $jump) {
-            $jump->setOrigin($this);
-        }
-        $this->jumps = $jumps;
-
-        return $this;
-    }
-
-    public function setHelpText(?string $helpText = null): self
+    public function setHelpText(string $helpText = null): self
     {
         $this->helpText = $helpText;
 
@@ -346,18 +329,5 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     public function viewerCanSeeInBo($user = null): bool
     {
         return true;
-    }
-
-    public function getAlwaysJumpDestinationQuestion(): ?self
-    {
-        return $this->alwaysJumpDestinationQuestion;
-    }
-
-    public function setAlwaysJumpDestinationQuestion(
-        ?self $alwaysJumpDestinationQuestion = null
-    ): self {
-        $this->alwaysJumpDestinationQuestion = $alwaysJumpDestinationQuestion;
-
-        return $this;
     }
 }

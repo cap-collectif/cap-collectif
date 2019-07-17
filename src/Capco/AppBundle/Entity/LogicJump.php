@@ -2,7 +2,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,7 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
 class LogicJump
 {
     use UuidTrait;
-    use PositionableTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="jumps")
@@ -29,8 +27,12 @@ class LogicJump
     protected $destination;
 
     /**
-     * @ORM\OneToMany(targetEntity="AbstractLogicJumpCondition", mappedBy="jump", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\OrderBy({"position" = "ASC"})
+     * @ORM\Column(type="boolean")
+     */
+    protected $always;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AbstractLogicJumpCondition", mappedBy="jump", cascade={"persist", "remove"})
      */
     protected $conditions;
 
@@ -90,6 +92,18 @@ class LogicJump
                 $condition->setJump(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isAlways(): ?bool
+    {
+        return $this->always;
+    }
+
+    public function setAlways(bool $always): self
+    {
+        $this->always = $always;
 
         return $this;
     }

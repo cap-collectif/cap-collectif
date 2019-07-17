@@ -13,12 +13,10 @@ class LogicJumpConditionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('id')
-            ->add('position')
-            ->add('operator')
-            ->add('question', RelayNodeType::class, ['class' => AbstractQuestion::class])
-            ->add('value');
+        $builder->add('id');
+        $builder->add('operator');
+        $builder->add('question', RelayNodeType::class, ['class' => AbstractQuestion::class]);
+        $builder->add('value');
     }
 
     public function configureOptions(OptionsResolver $resolver)

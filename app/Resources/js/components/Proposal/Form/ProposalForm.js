@@ -580,34 +580,30 @@ export class ProposalForm extends React.Component<Props, State> {
 
 const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) => {
-  const defaultResponses = formatInitialResponsesValues(
-    proposalForm.questions,
-    proposal ? proposal.responses : [],
-  );
-  return {
-    initialValues: {
-      draft: proposal ? proposal.publicationStatus === 'DRAFT' : true,
-      title: proposal ? proposal.title : null,
-      summary: proposal ? proposal.summary : null,
-      body: proposal ? proposal.body : null,
-      theme: proposal && proposal.theme ? proposal.theme.id : undefined,
-      district: proposal && proposal.district ? proposal.district.id : undefined,
-      category: proposal && proposal.category ? proposal.category.id : undefined,
-      media: proposal ? proposal.media : undefined,
-      addressText:
-        proposal && proposal.address ? proposal.address.formatted : '',
-      address: (proposal && proposal.address&& proposal.address.json) || undefined,
-      responses: defaultResponses,
-    },
-    titleValue: selector(state, 'title'),
-    addressValue: selector(state, 'address'),
-    features: state.default.features,
-    themes: state.default.themes,
-    currentStepId: state.project.currentProjectStepById,
-    responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
-  };
-};
+const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) => ({
+  initialValues: {
+    draft: proposal ? proposal.publicationStatus === 'DRAFT' : true,
+    title: proposal ? proposal.title : null,
+    summary: proposal ? proposal.summary : null,
+    body: proposal ? proposal.body : null,
+    theme: proposal && proposal.theme ? proposal.theme.id : undefined,
+    district: proposal && proposal.district ? proposal.district.id : undefined,
+    category: proposal && proposal.category ? proposal.category.id : undefined,
+    media: proposal ? proposal.media : undefined,
+    addressText: proposal && proposal.address ? proposal.address.formatted : '',
+    address: (proposal && proposal.address && proposal.address.json) || undefined,
+    responses: formatInitialResponsesValues(
+      proposalForm.questions,
+      proposal ? proposal.responses : [],
+    ),
+  },
+  titleValue: selector(state, 'title'),
+  addressValue: selector(state, 'address'),
+  features: state.default.features,
+  themes: state.default.themes,
+  currentStepId: state.project.currentProjectStepById,
+  responses: formValueSelector(formName)(state, 'responses'),
+});
 
 const form = reduxForm({
   form: formName,
