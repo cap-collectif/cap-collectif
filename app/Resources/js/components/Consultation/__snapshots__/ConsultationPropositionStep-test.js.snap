@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
-<Fragment>
+<div>
   <div
     className="consultation-plan sticky col-md-3 col-sm-12"
     id="consultation-plan"
@@ -78,11 +78,11 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
       }
     />
   </div>
-</Fragment>
+</div>
 `;
 
 exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
-<Fragment>
+<div>
   <div
     className="col-md-10 col-md-offset-1"
     id="scroll-content"
@@ -147,5 +147,5 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
       }
     />
   </div>
-</Fragment>
+</div>
 `;
