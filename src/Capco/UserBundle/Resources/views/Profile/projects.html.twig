@@ -1,3 +1,5 @@
-{{ react_render_component('ProjectsListApp', {
-    'props': projectsProps,
+{{ react_render_component(
+    'ProjectsListApp',
+    {'props': {'authorId': user.id | toGlobalId('User')}
 }) }}
+
