@@ -6,8 +6,7 @@ import IntlProvider from './IntlProvider';
 import ProjectsListPage from '../components/Project/Page/ProjectListPage';
 
 type Props = {
-  limit: number,
-  author: any
+  limit?: ?number,
 };
 
 export default (props: Props) => (
