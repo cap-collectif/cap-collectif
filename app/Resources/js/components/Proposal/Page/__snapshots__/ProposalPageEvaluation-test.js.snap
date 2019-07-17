@@ -31,6 +31,8 @@ exports[`<ProposalPageEvaluation /> render a disabled form if viewer is not an e
         questions={
           Array [
             Object {
+              "__typename": "SimpleQuestion",
+              "alwaysJumpDestinationQuestion": null,
               "choices": Array [],
               "description": null,
               "helpText": null,
@@ -85,6 +87,8 @@ exports[`<ProposalPageEvaluation /> render a form if viewer is an evaluer 1`] = 
         questions={
           Array [
             Object {
+              "__typename": "SimpleQuestion",
+              "alwaysJumpDestinationQuestion": null,
               "choices": Array [],
               "description": null,
               "helpText": null,

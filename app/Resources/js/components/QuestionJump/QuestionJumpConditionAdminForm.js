@@ -1,12 +1,14 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { formValueSelector, Field, arrayRemove } from 'redux-form';
+import { formValueSelector, Field, arrayRemove, change } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import type { GlobalState, Dispatch } from '../../types';
 import component from '../Form/Field';
+import type { QuestionsInReduxForm } from '../../utils/submitQuestion';
+import type { QuestionChoice } from '../../utils/responsesHelper';
 
-type ReduxProps = { selectedQuestion: number };
+type ReduxProps = { selectedQuestion: string };
 type Props = ReduxProps & {
   fields: { length: number, map: () => void, remove: () => void },
   questions: Object,
@@ -18,39 +20,40 @@ type Props = ReduxProps & {
   intl: IntlShape,
 };
 
-type State = {
-  currentQuestion: ?number,
-};
+const OptionItem = ({
+  questionChoice,
+  index,
+}: {
+  questionChoice: QuestionChoice,
+  index: number,
+}) => (
+  <option value={questionChoice.id}>
+    {index + 1}. {questionChoice.title}
+  </option>
+);
 
-export class QuestionJumpConditionAdminForm extends React.Component<Props, State> {
-  state = {
-    currentQuestion: null,
-  };
+export class QuestionJumpConditionAdminForm extends React.Component<Props> {
+  handleQuestionChange = (e: SyntheticEvent<HTMLSelectElement>) => {
+    const { questions, member, formName, dispatch } = this.props;
+    const question = questions.find(q => q.id === e.currentTarget.value);
 
-  handleQuestionChange = (e: $FlowFixMe) => {
-    this.setState({ currentQuestion: e.target.value });
-  };
-
-  displayValueList = (
-    currentQuestion: ?number,
-    selectedQuestion: ?number,
-    arrayQuestions: Array<Object>,
-  ) => {
-    let choiceList = [];
-    if (currentQuestion) {
-      choiceList = arrayQuestions[currentQuestion];
-    } else if (selectedQuestion) {
-      choiceList = arrayQuestions[selectedQuestion];
+    if (question && question.choices) {
+      dispatch(change(formName, `${member}.question.title`, question.title));
+      dispatch(change(formName, `${member}.value.id`, question.choices[0].id));
+      dispatch(change(formName, `${member}.value.title`, question.choices[0].title));
     }
+  };
 
-    return choiceList
-      ? // $FlowFixMe Missing type annotation for U.
-        choiceList.map((questionChoice, questionChoiceIndex) => (
-          <option value={questionChoice.id}>
-            {questionChoiceIndex}. {questionChoice.title}
-          </option>
-        ))
-      : null;
+  displayValueList = (questions: QuestionsInReduxForm, selectedQuestion: string) => {
+    const question = questions.find(q => q.id === selectedQuestion);
+    if (question) {
+      return question.choices && question.choices
+        ? question.choices
+            .filter(Boolean)
+            .map<any>((choice, index) => <OptionItem questionChoice={choice} index={index} />)
+        : null;
+    }
+    return null;
   };
 
   render() {
@@ -64,18 +67,6 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
       formName,
       oldMember,
     } = this.props;
-    const { currentQuestion } = this.state;
-    const arrayQuestions = [];
-    questions.map(question => {
-      if (
-        question.kind !== 'simple' &&
-        question.id &&
-        question.choices &&
-        question.choices.length > 0
-      ) {
-        arrayQuestions[question.id] = question.choices;
-      }
-    });
     return (
       <div className="movable-element" key={index}>
         <div className="mb-10">
@@ -97,26 +88,16 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
         <Field
           id={`${member}.question.id`}
           name={`${member}.question.id`}
-          normalize={val => val && parseInt(val, 10)}
           type="select"
-          onChange={e => {
-            this.handleQuestionChange(e);
-          }}
+          onChange={this.handleQuestionChange}
           component={component}>
-          {questions.map((question, questionIndex) => {
-            if (
-              question.kind !== 'simple' &&
-              question.id &&
-              question.choices &&
-              question.choices.length > 0
-            ) {
-              return (
-                <option value={question.id}>
-                  {questionIndex}. {question.title}
-                </option>
-              );
-            }
-          })}
+          {questions
+            .filter(question => question.__typename === 'MultipleChoiceQuestion')
+            .map((question, questionIndex) => (
+              <option value={question.id}>
+                {questionIndex + 1}. {question.title}
+              </option>
+            ))}
         </Field>
         <Field
           id={`${member}.operator`}
@@ -131,7 +112,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
           name={`${member}.value.id`}
           type="select"
           component={component}>
-          {this.displayValueList(currentQuestion, selectedQuestion, arrayQuestions)}
+          {this.displayValueList(questions, selectedQuestion)}
         </Field>
       </div>
     );
@@ -139,9 +120,21 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
 }
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
+  const { questions } = props;
   const selector = formValueSelector(props.formName);
+  const selectedQuestion = selector(state, `${props.member}.question.id`);
+  const currentQuestion = questions.find(question => question.id === selectedQuestion);
+  const isMultipleChoiceQuestion =
+    currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion';
+  const firstMultipleChoiceQuestion = questions.find(
+    question => question.__typename === 'MultipleChoiceQuestion',
+  );
   return {
-    selectedQuestion: selector(state, `${props.member}.question.id`),
+    selectedQuestion: isMultipleChoiceQuestion
+      ? currentQuestion.id
+      : firstMultipleChoiceQuestion
+      ? firstMultipleChoiceQuestion.id
+      : null,
   };
 };
 

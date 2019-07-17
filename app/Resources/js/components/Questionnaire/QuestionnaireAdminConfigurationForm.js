@@ -13,17 +13,18 @@ import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestio
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
 import type { FeatureToggles, State } from '../../types';
 
-type RelayProps = {| questionnaire: QuestionnaireAdminConfigurationForm_questionnaire |};
+type RelayProps = {| +questionnaire: QuestionnaireAdminConfigurationForm_questionnaire |};
+type ReduxProps = {| +questionnaireResultsEnabled: boolean |};
 type Props = {|
   ...RelayProps,
+  ...ReduxProps,
   ...FormProps,
   intl: IntlShape,
   features: FeatureToggles,
 |};
 
-export type Jumps = ?$ReadOnlyArray<{|
+export type Jump = {|
   +id?: string,
-  +always: boolean,
   +origin: {
     id: number,
     title: string,
@@ -33,7 +34,9 @@ export type Jumps = ?$ReadOnlyArray<{|
     title: string,
   },
   +conditions: Object,
-|}>;
+|};
+
+export type Jumps = ?$ReadOnlyArray<Jump>;
 export type MultipleChoiceQuestionValidationRulesTypes = 'EQUAL' | 'MAX' | 'MIN';
 export type QuestionChoiceColor = 'DANGER' | 'INFO' | 'PRIMARY' | 'SUCCESS' | 'WARNING';
 export type QuestionTypeValue =
@@ -84,6 +87,7 @@ const validate = (values: FormValues) => {
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+  const { questionnaireResultsEnabled } = props;
   const input = {
     ...values,
     id: undefined,
@@ -92,7 +96,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   };
 
   // $FlowFixMe
-  return UpdateQuestionnaireConfigurationMutation.commit({ input });
+  return UpdateQuestionnaireConfigurationMutation.commit({ input, questionnaireResultsEnabled });
 };
 
 export class QuestionnaireAdminConfigurationForm extends React.Component<Props> {
@@ -210,6 +214,7 @@ const form = reduxForm({
 })(QuestionnaireAdminConfigurationForm);
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
+  questionnaireResultsEnabled: state.default.features.new_feature_questionnaire_result,
   initialValues: { ...props.questionnaire, id: undefined },
 });
 

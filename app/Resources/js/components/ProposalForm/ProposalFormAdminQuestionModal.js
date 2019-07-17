@@ -10,6 +10,7 @@ import component from '../Form/Field';
 import type { GlobalState } from '../../types';
 import QuestionChoiceAdminForm from '../QuestionChoices/QuestionChoiceAdminForm';
 import QuestionsJumpAdmin from '../QuestionJump/QuestionsJumpAdminForm';
+import type { Question } from '../../utils/responsesHelper';
 
 type ParentProps = {
   show: boolean,
@@ -24,12 +25,12 @@ type Props = {
   type: string,
   validationRuleType: string,
   formErrors: Object,
-  currentQuestion: {
-    id: string,
-  },
+  currentQuestion: Question,
   intl: IntlShape,
 } & ParentProps;
 
+// When creating a new question, we can not rely on __typename because it does not exists before creation
+// so this is used to determine if we can show the "choices" section of the question form when creating a new one
 const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
 export class ProposalFormAdminQuestionModal extends React.Component<Props> {
@@ -150,7 +151,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
               </option>
             </optgroup>
           </Field>
-          {multipleChoiceQuestions.indexOf(type) !== -1 && (
+          {multipleChoiceQuestions.includes(type) && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
                 <FormattedMessage id="admin.fields.reply.group_responses" />
@@ -162,30 +163,29 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                 oldMember={member}
                 type={type}
               />
-              <h4 style={{ fontWeight: 'bold' }}>
-                <span>
-                  <FormattedMessage id="conditional-jumps" />
-                </span>
-              </h4>
-              {currentQuestion.id && type !== 'ranking' && (
-                <FieldArray
-                  name={`${member}.jumps`}
-                  component={QuestionsJumpAdmin}
-                  formName={formName}
-                  oldMember={member}
-                />
-              )}
-              {!currentQuestion.id && type !== 'ranking' && (
-                <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
-              )}
             </div>
+          )}
+          <h4 style={{ fontWeight: 'bold' }}>
+            <span>
+              <FormattedMessage id="conditional-jumps" />
+            </span>
+          </h4>
+          {currentQuestion && currentQuestion.id ? (
+            <FieldArray
+              name={`${member}.jumps`}
+              component={QuestionsJumpAdmin}
+              formName={formName}
+              oldMember={member}
+            />
+          ) : (
+            <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
           )}
           <h4 style={{ fontWeight: 'bold' }}>
             <span>
               <FormattedMessage id="proposal_form.admin.settings.options" />
             </span>
           </h4>
-          {multipleChoiceQuestions.indexOf(type) !== -1 && (
+          {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (
             <div>
               <Field
                 id={`${member}.randomQuestionChoices`}
@@ -221,7 +221,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
             type="checkbox"
             component={component}
           />
-          {multipleChoiceQuestions.indexOf(type) !== -1 && (
+          {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
                 <span>

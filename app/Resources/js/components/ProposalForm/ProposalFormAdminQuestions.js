@@ -49,6 +49,7 @@ const getDraggableStyle = (isDragging: boolean) => ({
   background: isDragging ? '#ddd' : '',
 });
 
+// TODO: Rename to a more generic name, like FormAdminQuestions
 export class ProposalFormAdminQuestions extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);

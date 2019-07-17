@@ -10,6 +10,10 @@ trait QuestionnaireStepsTrait
         'projectSlug' => 'projet-avec-questionnaire',
         'stepSlug' => 'questionnaire-des-jo-2024'
     ];
+    protected static $conditionalQuestionnaireStepParams = [
+        'projectSlug' => 'projet-avec-questionnaire',
+        'stepSlug' => 'etape-de-questionnaire-avec-questionnaire-sauts-conditionnels'
+    ];
     protected static $questionnaireStepClosedParams = [
         'projectSlug' => 'projet-avec-questionnaire',
         'stepSlug' => 'etape-de-questionnaire-fermee'
@@ -25,6 +29,15 @@ trait QuestionnaireStepsTrait
     public function iGoToAQuestionnaireStep()
     {
         $this->visitPageWithParams('questionnaire page', self::$questionnaireStepParams);
+        $this->iWait(1);
+    }
+
+    /**
+     * @When I go to a conditional questionnaire step
+     */
+    public function iGoToAConditionalQuestionnaireStep()
+    {
+        $this->visitPageWithParams('questionnaire page', self::$conditionalQuestionnaireStepParams);
         $this->iWait(1);
     }
 

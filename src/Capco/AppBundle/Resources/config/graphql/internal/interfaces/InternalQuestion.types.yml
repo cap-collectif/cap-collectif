@@ -51,3 +51,6 @@ InternalQuestion:
       jumps:
         description: 'The associated logic jumps to this question.'
         type: '[LogicJump]'
+      alwaysJumpDestinationQuestion:
+        description: 'The destination of the always jump (the else case) of this question.'
+        type: 'InternalQuestion'
