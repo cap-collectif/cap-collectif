@@ -22,7 +22,7 @@ export const ConsultationPropositionStep = (props: Props) => {
   const { consultationPlanEnabled, showConsultationPlan, consultationStep: step } = props;
 
   return (
-    <div>
+    <React.Fragment>
       {consultationPlanEnabled && (
         <div
           className={
@@ -62,7 +62,7 @@ export const ConsultationPropositionStep = (props: Props) => {
         {/* $FlowFixMe */}
         <SectionRecursiveList consultation={step.consultation} />
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

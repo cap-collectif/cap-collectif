@@ -3,8 +3,6 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { DropdownButton } from 'react-bootstrap';
 
-import SocialIcon from '../Icons/SocialIcon';
-
 type Props = {|
   id: string,
   children: any,
@@ -38,8 +36,7 @@ class ShareButton extends React.Component<Props> {
           bsSize={bsSize}
           title={
             <span>
-              <SocialIcon name="link" size={bsSize === 'xs' ? 12 : 16} />{' '}
-              {<FormattedMessage id="global.share" />}
+              <i className="cap cap-link" /> {<FormattedMessage id="global.share" />}
             </span>
           }>
           {children}

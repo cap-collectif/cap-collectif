@@ -39,14 +39,6 @@ const colors = {
   votes: ['#5cb85c', '#f0ad4e', '#d9534f'],
 };
 
-export const socialColors = {
-  facebook: '#3b5998',
-  twitter: '#00aced',
-  linkedin: '#0077b5',
-  email: '#212529',
-  link: '#212529',
-};
-
 export const CardHeaderColors = {
   gray: colors.borderColor,
   white: colors.white,
