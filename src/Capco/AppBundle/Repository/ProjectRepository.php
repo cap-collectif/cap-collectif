@@ -112,7 +112,7 @@ class ProjectRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function countPublicPublished(User $user)
+    public function countPublicPublished(User $user): int
     {
         $query = $this->getProjectsViewerCanSeeQueryBuilder($user)
             ->addSelect('a', 'u', 't')
@@ -125,6 +125,7 @@ class ProjectRepository extends EntityRepository
             ->orderBy('p.updatedAt', 'DESC');
 
         $query->select('COUNT(p.id)');
+
         return $query->getQuery()->getSingleScalarResult();
     }
 
