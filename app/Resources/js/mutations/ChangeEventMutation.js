@@ -10,8 +10,8 @@ import type {
 const mutation = graphql`
   mutation ChangeEventMutation($input: ChangeEventInput!) {
     changeEvent(input: $input) {
-      event {
-        id
+    event{
+      ...EventForm_event
       }
       userErrors {
         message

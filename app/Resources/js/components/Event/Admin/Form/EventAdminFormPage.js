@@ -35,17 +35,18 @@ type Props = {|
 |};
 
 type FormValues = {|
-  address: string,
+  addressText: string,
   title: string,
   body: string,
-  author: string,
+  author?: { value: string, label: string },
   startAt: string,
   endAt: ?string,
-  address: ?string,
+  addressText: ?string,
   metaDescription: ?string,
   customCode: ?string,
   commentable: boolean,
   guestListEnabled: boolean,
+  addressJson: ?string,
   enabled: boolean,
   // $FlowFixMe
   media: ?{
@@ -93,6 +94,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const guestListEnabled = values.guestListEnabled ? values.guestListEnabled : false;
   const commentable = values.commentable ? values.commentable : false;
   const enabled = values.enabled ? values.enabled : false;
+  const addressJson = values.addressText;
+  delete values.addressText;
+  delete values.address;
   const input = {
     ...values,
     themes: values.themes ? values.themes.map(t => t.value) : null,
@@ -101,6 +105,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     enabled,
     commentable,
     guestListEnabled,
+    addressJson,
+    author: values.author ? values.author.value : undefined,
   };
 
   return AddEventMutation.commit({ input })
@@ -128,7 +134,10 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   const guestListEnabled = values.guestListEnabled ? values.guestListEnabled : false;
   const commentable = values.commentable ? values.commentable : false;
+  delete values.addressText;
   const enabled = values.enabled ? values.enabled : false;
+  const addressJson = values.addressText;
+  delete values.addressText;
   const input = {
     ...values,
     themes: values.themes ? values.themes.map(t => t.value) : null,
@@ -137,6 +146,8 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     enabled,
     guestListEnabled,
     commentable,
+    addressJson,
+    author: values.author ? values.author.value : undefined,
   };
 
   return ChangeEventMutation.commit({ input })

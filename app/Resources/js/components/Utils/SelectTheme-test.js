@@ -23,6 +23,9 @@ describe('<SelectTheme />', () => {
       $refType,
     },
     intl: intlMock,
+    name: 'themes',
+    multi: true,
+    clearable: true,
   };
 
   it('should render correctly', () => {

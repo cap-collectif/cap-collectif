@@ -3,11 +3,10 @@ import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
-import { type FormProps, Field, reduxForm } from 'redux-form';
+import { type FormProps, Field, reduxForm, formValueSelector } from 'redux-form';
 import { Row } from 'react-bootstrap';
 import component from '../../Form/Field';
 import type { Dispatch, FeatureToggles, GlobalState } from '../../../types';
-import select from '../../Form/Select';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { EventForm_event } from '~relay/EventForm_event.graphql';
 import UserListField from '../../Admin/Field/UserListField';
@@ -18,7 +17,6 @@ import Loader from '../../Ui/FeedbacksIndicators/Loader';
 type Props = {|
   ...FormProps,
   event: ?EventForm_event,
-  projects: {},
   features: FeatureToggles,
   dispatch: Dispatch,
   theme: ?string,
@@ -36,16 +34,16 @@ type Props = {|
 export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
+
   render() {
-    const { features, intl, projects, isAdmin, event } = this.props;
+    const { features, isAdmin, event } = this.props;
 
     const renderSelectThemeQuery = ({ error, props }) => {
       if (error) {
         return graphqlError;
       }
       if (props) {
-        /* $FlowFixMe $refType */
-        return <SelectTheme query={props} />;
+        return <SelectTheme query={props} multi clearable name="themes" />;
       }
       return (
         <Row>
@@ -59,7 +57,7 @@ export class EventForm extends React.Component<Props> {
       }
       if (props) {
         /* $FlowFixMe $refType */
-        return <SelectProject query={props} />;
+        return <SelectProject query={props} multi clearable object={event} name="projects" />;
       }
       return (
         <Row>
@@ -115,7 +113,7 @@ export class EventForm extends React.Component<Props> {
             id="event_address"
             component={component}
             type="address"
-            name="address"
+            name="addressText"
             formName={formName}
             label={<FormattedMessage id="admin.fields.proposal.address" />}
             placeholder="proposal.map.form.placeholder"
@@ -182,33 +180,14 @@ export class EventForm extends React.Component<Props> {
             render={renderSelectThemeQuery}
           />
         )}
-        <Field
-          component={select}
-          clearable
-          id="event_project"
-          name="projects"
-          multi
-          placeholder={intl.formatMessage({ id: 'type-project' })}
-          options={Object.keys(projects)
-            .map(key => projects[key])
-            .map(p => ({ value: p.id, label: p.title }))
-            .concat(
-              event && event.projects
-                ? event.projects.map(p => ({
-                    value: p.id,
-                    label: p.title,
-                  }))
-                : {},
-            )}
-        />
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query EventFormProjectQuery {
-              ...SelectProject_query
+            query EventFormProjectQuery($withEventOnly: Boolean) {
+              ...SelectProject_query @arguments(withEventOnly: $withEventOnly)
             }
           `}
-          variables={{}}
+          variables={{ withEventOnly: false }}
           render={renderSelectProjectQuery}
         />
         <div>
@@ -283,13 +262,13 @@ const formContainer = reduxForm({
   form: formName,
 })(EventForm);
 
+const selector = formValueSelector(formName);
+
 const mapStateToProps = (state: GlobalState, props: Props) => {
   if (props.event) {
     return {
       isAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_ADMIN')),
       features: state.default.features,
-      themes: state.default.themes,
-      projects: state.project.projectsById,
       initialValues: {
         id: props.event && props.event.id ? props.event.id : null,
         title: props.event && props.event.title ? props.event.title : null,
@@ -314,35 +293,25 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
               label: th.title,
             }))
           : null,
-        author: props.event && props.event.author ? props.event.author.id : null,
-        address:
-          props.event && props.event.addressJson
-            ? JSON.parse(props.event.addressJson)[0].formatted_address
+        author:
+          props.event && props.event.author
+            ? { value: props.event.author.id, label: props.event.author.displayName }
             : null,
+        addressText:
+          props.event && props.event.fullAddress
+            ? props.event.fullAddress
+            : null,
+        addressJson: props.event && props.event.addressJson ? props.event.addressJson : null
       },
     };
   }
   return {
     isAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_ADMIN')),
     features: state.default.features,
-    themes: state.default.themes,
-    projects: state.project.projectsById,
   };
 };
 
 const container = connect(mapStateToProps)(injectIntl(formContainer));
-//
-// const baseQuery = createFragmentContainer(container, {
-//   query: graphql`
-//     fragment EventForm_query on Query
-//       @argumentDefinitions(
-//         withEventOnly: { type: "Boolean" }
-//       ) {
-//       ...SelectTheme_query
-//       ...SelectProject_query @arguments(withEventOnly: $withEventOnly)
-//     }
-//   `,
-// });
 
 export const EventCreateForm = container;
 
@@ -356,6 +325,7 @@ export default createFragmentContainer(container, {
       }
       title
       addressJson
+      fullAddress
       enabled
       body
       commentable

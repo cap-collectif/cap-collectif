@@ -61,6 +61,7 @@ class ChangeEventMutation implements MutationInterface
             ? $this->globalIdResolver->resolve($values['author'], $viewer)
             : null;
 
+        dump($newAuthor);
         // admin and superAdmin can change the event's author
         if (
             $newAuthor &&
@@ -68,8 +69,8 @@ class ChangeEventMutation implements MutationInterface
             $newAuthor !== $event->getAuthor()
         ) {
             $event->setAuthor($newAuthor);
-            unset($values['author']);
         }
+        unset($values['author']);
 
         $form = $this->formFactory->create(EventType::class, $event);
         $form->submit($values, false);
