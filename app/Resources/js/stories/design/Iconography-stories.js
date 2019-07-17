@@ -3,7 +3,9 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 
-const glyphes = [
+import Icon from '../../components/Ui/Icons/Icon';
+
+const fontasticGlyphes = [
   'cap-ios-close-outline',
   'cap-ios-close',
   'cap-baloon',
@@ -82,6 +84,8 @@ const glyphes = [
   'cap-linkedin',
 ];
 
+const streamlineGlyphes = ['link', 'email', 'google', 'facebook', 'twitter', 'linkedin'];
+
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -114,27 +118,52 @@ const IconContainer = styled.div`
   }
 `;
 
-const Icon = ({ glyph }) => <i className={`cap ${glyph}`} />;
+const FontasticIcon = ({ glyph }) => <i className={`cap ${glyph}`} />;
 
-storiesOf('Design|Icons', module).add(
-  'Icons',
-  () => (
-    <Container>
-      {glyphes.map(glyph => (
-        <IconContainer>
-          <Icon glyph={glyph} />
-          <div className="excerpt small">{glyph}</div>
-        </IconContainer>
-      ))}
-    </Container>
-  ),
-  {
-    info: {
-      source: false,
-      propTables: null,
+storiesOf('Design|Iconography', module)
+  .add(
+    'Fontastic icons [deprecated]',
+    () => (
+      <Container>
+        {fontasticGlyphes.map(glyph => (
+          <IconContainer>
+            <FontasticIcon glyph={glyph} />
+            <div className="excerpt small">{glyph}</div>
+          </IconContainer>
+        ))}
+      </Container>
+    ),
+    {
+      info: {
+        text: 'Tous les icônes providennent de http://fontastic.me/',
+        source: false,
+        propTables: null,
+      },
+      options: {
+        showAddonPanel: false,
+      },
     },
-    options: {
-      showAddonPanel: false,
+  )
+  .add(
+    'Streamline 3.0 icons',
+    () => (
+      <Container>
+        {streamlineGlyphes.map(glyph => (
+          <IconContainer>
+            <Icon name={glyph} />
+            <div className="excerpt small">{glyph}</div>
+          </IconContainer>
+        ))}
+      </Container>
+    ),
+    {
+      info: {
+        text: 'Tous les icônes providennent de https://streamlineicons.com/',
+        source: false,
+        propTables: null,
+      },
+      options: {
+        showAddonPanel: false,
+      },
     },
-  },
-);
+  );

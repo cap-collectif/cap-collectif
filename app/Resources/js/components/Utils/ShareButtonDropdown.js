@@ -119,7 +119,7 @@ class ShareButtonDropdown extends React.Component<Props, State> {
     }
     return (
       <ShareButton id={id} bsSize={bsSize} className={className} outline={outline} grey={grey}>
-        <ShareButtonAction action="mail" onSelect={this.mail} />
+        <ShareButtonAction action="email" onSelect={this.mail} />
         <ShareButtonAction action="facebook" onSelect={this.facebook} />
         <ShareButtonAction action="twitter" onSelect={this.twitter} />
         <ShareButtonAction action="linkedin" onSelect={this.linkedin} />
