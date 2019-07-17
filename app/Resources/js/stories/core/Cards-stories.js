@@ -3,15 +3,22 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import classNames from 'classnames';
-import Card from '../../components/Ui/Card/Card';
-import Image from '../../components/Ui/Medias/Image';
-import DatesInterval from '../../components/Utils/DatesInterval';
-import DateIcon from '../../components/Ui/Dates/DateIcon';
-import { UserAvatarDeprecated } from '../../components/User/UserAvatarDeprecated';
-import InlineList from '../../components/Ui/List/InlineList';
-import { author as authorMock } from '../mocks/users';
+// $FlowFixMe add support for SVG
+import calendarSVG from '../../../../web/svg/calendar.svg';
+import Card from '../components/Ui/Card/Card';
+import Image from '../components/Ui/Medias/Image';
+import DatesInterval from '../components/Utils/DatesInterval';
+import DateIcon from '../components/Ui/Dates/DateIcon';
+import { UserAvatarDeprecated } from '../components/User/UserAvatarDeprecated';
+import InlineList from '../components/Ui/List/InlineList';
+import { author as authorMock } from './mocks/users';
 
 const user = authorMock;
+
+const calendar = {
+  src: calendarSVG,
+  alt: 'illustration-placeholder',
+};
 
 const bsStyleOption = {
   Warning: 'warning',
@@ -59,7 +66,7 @@ class EventCard extends React.Component<Props> {
           />
         ) : (
           <div className="picture_container" style={{ backgroundColor: '#eeeeee' }}>
-            <img className="event__picture" src="../../app/web/svg/calendar.svg" alt="" />
+            <img className="event__picture" src={calendar.src} alt={calendar.alt} />
           </div>
         )}
 
@@ -133,75 +140,78 @@ storiesOf('Core|Cards', module)
       const status = text('Status', 'My status', 'Status');
       const statusBgColor = select('Status background color', bsStyleOption, 'default', 'Status');
 
-    // $FlowFixMe
-    Card.Cover.displayName = 'Card.Cover';
-    // $FlowFixMe
-    Card.Type.displayName = 'Card.Type';
-    // $FlowFixMe
-    Card.Header.displayName = 'Card.Header';
-    // $FlowFixMe
-    Card.Status.displayName = 'Card.Status';
-    Card.Body.displayName = 'Card.Body';
-    // $FlowFixMe
-    Card.Title.displayName = 'Card.Title';
-    Card.Counters.displayName = 'Card.Counters';
+      // $FlowFixMe
+      Card.Cover.displayName = 'Card.Cover';
+      // $FlowFixMe
+      Card.Type.displayName = 'Card.Type';
+      // $FlowFixMe
+      Card.Header.displayName = 'Card.Header';
+      // $FlowFixMe
+      Card.Status.displayName = 'Card.Status';
+      Card.Body.displayName = 'Card.Body';
+      // $FlowFixMe
+      Card.Title.displayName = 'Card.Title';
+      Card.Counters.displayName = 'Card.Counters';
 
-    return (
-      <Card>
-        {cardType && <Card.Type bgColor={colorType}>{type}</Card.Type>}
-        {cardHeader && <Card.Header bgColor={headerBgColor}>{header}</Card.Header>}
-        {leftCover && (
-          <div>
-            {cardCover && (
-              <div className="col-xs-4 p-0">
-                <Card.Cover height={coverHeight} width={coverWidth}>
-                  <Image src="https://source.unsplash.com/collection/1127828" alt="Project title" />
-                </Card.Cover>
-              </div>
-            )}
-            {cardBody && (
-              <div className="col-xs-8 p-0">
-                <Card.Body>
-                  <Card.Title tagName={titleTagName}>
-                    <a href="https://ui.cap-collectif.com">{title}</a>
-                  </Card.Title>
-                </Card.Body>
-              </div>
-            )}
-          </div>
-        )}
-        {!leftCover && cardCover && (
-          <Card.Cover height={coverHeight}>
-            <Image src="https://source.unsplash.com/collection/1127828" alt="Project title" />
-          </Card.Cover>
-        )}
-        {!leftCover && cardBody && (
-          <Card.Body>
-            <Card.Title tagName={titleTagName}>
-              <a href="https://ui.cap-collectif.com">{title}</a>
-            </Card.Title>
-          </Card.Body>
-        )}
-        {cardCounters && (
-          <Card.Counters>
-            <div className="card__counters__item">
-              <div className="card__counters__value">0</div>
-              <div>Lorem ipsum</div>
+      return (
+        <Card>
+          {cardType && <Card.Type bgColor={colorType}>{type}</Card.Type>}
+          {cardHeader && <Card.Header bgColor={headerBgColor}>{header}</Card.Header>}
+          {leftCover && (
+            <div>
+              {cardCover && (
+                <div className="col-xs-4 p-0">
+                  <Card.Cover height={coverHeight} width={coverWidth}>
+                    <Image
+                      src="https://source.unsplash.com/collection/1127828"
+                      alt="Project title"
+                    />
+                  </Card.Cover>
+                </div>
+              )}
+              {cardBody && (
+                <div className="col-xs-8 p-0">
+                  <Card.Body>
+                    <Card.Title tagName={titleTagName}>
+                      <a href="https://ui.cap-collectif.com">{title}</a>
+                    </Card.Title>
+                  </Card.Body>
+                </div>
+              )}
             </div>
-            <div className="card__counters__item">
-              <div className="card__counters__value">40</div>
-              <div>Lorem ipsum</div>
-            </div>
-          </Card.Counters>
-        )}
-        {cardStatus && <Card.Status bgColor={statusBgColor}>{status}</Card.Status>}
-      </Card>
-    );
-  },
-  {
-    info: {
-      text: `
-          <p>Emplacement : <code>import Card from ‘../Ui/Card/Card’;</code></p>
+          )}
+          {!leftCover && cardCover && (
+            <Card.Cover height={coverHeight}>
+              <Image src="https://source.unsplash.com/collection/1127828" alt="Project title" />
+            </Card.Cover>
+          )}
+          {!leftCover && cardBody && (
+            <Card.Body>
+              <Card.Title tagName={titleTagName}>
+                <a href="https://ui.cap-collectif.com">{title}</a>
+              </Card.Title>
+            </Card.Body>
+          )}
+          {cardCounters && (
+            <Card.Counters>
+              <div className="card__counters__item">
+                <div className="card__counters__value">0</div>
+                <div>Lorem ipsum</div>
+              </div>
+              <div className="card__counters__item">
+                <div className="card__counters__value">40</div>
+                <div>Lorem ipsum</div>
+              </div>
+            </Card.Counters>
+          )}
+          {cardStatus && <Card.Status bgColor={statusBgColor}>{status}</Card.Status>}
+        </Card>
+      );
+    },
+    {
+      info: {
+        text: `
+          <p>Emplacement : <code>import Avatar from ‘../Ui/Card/Card’;</code></p>
 
           <p class="mb-20">
             <h5><b>Project card</b></h5>
@@ -243,9 +253,10 @@ storiesOf('Core|Cards', module)
             </ul>
           </p>
         `,
-      propTablesExclude: [Image, Card.Counters, Card.Body],
+        propTablesExclude: [Image, Card.Counters, Card.Body],
+      },
     },
-  })
+  )
   .add('Event Card default', () => <EventCard hasAPicture />, {
     info: {
       text: 'Ce composant est utilisé...',
