@@ -39,7 +39,7 @@ export class EventPreview extends React.Component<Props> {
 
         <div className="d-flex event__infos">
           <div className="col-md-2 col-sm-2 hidden-xs">
-            <DateIcon startAt="2030-03-10 00:00:00" />
+            <DateIcon startAt={event.timeRange.startAt} />
           </div>
 
           <div className="event__body event-js">

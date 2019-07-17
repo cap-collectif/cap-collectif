@@ -19,7 +19,7 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       className="col-md-2 col-sm-2 hidden-xs"
     >
       <DateIcon
-        startAt="2030-03-10 00:00:00"
+        startAt="2018-09-27T03:00:00+01:00"
       />
     </div>
     <div
@@ -130,7 +130,7 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       className="col-md-2 col-sm-2 hidden-xs"
     >
       <DateIcon
-        startAt="2030-03-10 00:00:00"
+        startAt="2018-09-27T03:00:00+01:00"
       />
     </div>
     <div
@@ -241,7 +241,7 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
       className="col-md-2 col-sm-2 hidden-xs"
     >
       <DateIcon
-        startAt="2030-03-10 00:00:00"
+        startAt="2018-09-27T03:00:00+01:00"
       />
     </div>
     <div
@@ -350,7 +350,7 @@ exports[`<EventPreview /> renders without username 1`] = `
       className="col-md-2 col-sm-2 hidden-xs"
     >
       <DateIcon
-        startAt="2030-03-10 00:00:00"
+        startAt="2018-09-27T03:00:00+01:00"
       />
     </div>
     <div

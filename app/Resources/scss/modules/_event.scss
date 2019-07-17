@@ -19,7 +19,6 @@
     }
 
     .picture_container{
-        // overflow: hidden;
         padding: 0;
         width: auto;
         min-width: 150px;
@@ -139,11 +138,9 @@
             text-align: center;
             margin: 10px;
             min-width: 45px;
+            max-width: 45px;
             height: 45px;
             border-radius: 2px;
-
-            // .event__picture{
-            // }
         }
 
         .excerpt{
