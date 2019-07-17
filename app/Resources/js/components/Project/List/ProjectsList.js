@@ -34,7 +34,7 @@ class ProjectsList extends React.Component<Props> {
 
   constructor(props: Props) {
     super(props);
-    console.log(props);
+
     this.initialRenderVars = {
       ...getInitialValues(),
       orderBy: props.orderBy,
@@ -66,7 +66,6 @@ class ProjectsList extends React.Component<Props> {
 
   render() {
     const { orderBy, type, theme, term, limit, status, author } = this.initialRenderVars;
-    console.log(this.initialRenderVars);
 
     return (
       <QueryRenderer
