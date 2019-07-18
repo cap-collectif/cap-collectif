@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
@@ -16,20 +17,25 @@ type Props = {|
   features: FeatureToggles,
 |};
 
+const Button = styled.button`
+  border: none;
+  background: transparent;
+`;
+
 export const UserAvatarListContainer = (props: Props) => {
   const { users, max, onClick, features } = props;
 
   const shouldRedirectProfile = users.length === 1 && features.profiles;
 
   return (
-    <button type="button" onClick={onClick}>
+    <Button type="button" onClick={onClick}>
       <UserAvatarList max={max}>
         {users &&
-          users.slice(0, max).map((user, index) =>
+          users.map((user, index) =>
             shouldRedirectProfile ? (
               <UserAvatar user={user} features={features} />
-            ) : (        
-              <OverlayTrigger 
+            ) : (
+              <OverlayTrigger
                 key={index}
                 placement="top"
                 overlay={<Tooltip id={`tooltip-${user.id}`}>{user.username}</Tooltip>}>
@@ -39,7 +45,7 @@ export const UserAvatarListContainer = (props: Props) => {
             ),
           )}
       </UserAvatarList>
-    </button>
+    </Button>
   );
 };
 

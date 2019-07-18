@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import Avatar from '../components/Ui/Medias/Avatar';
+import Avatar from '../../components/Ui/Medias/Avatar';
 
-import UserAvatarList from '../components/Ui/List/UserAvatarList';
+import UserAvatarList from '../../components/Ui/List/UserAvatarList';
 
 import { author } from '../mocks/users';
 
@@ -15,21 +15,23 @@ storiesOf('Cap Collectif|UserAvatarList', module)
     const users = usersMockGenerator(4);
     const max = number('Max display', 5);
 
-    return <UserAvatarList max={max}>
-      {users.map((user, index) => 
-      (
-        <Avatar src={user.media.url} key={index}/>
-      ))}
-    </UserAvatarList>;
+    return (
+      <UserAvatarList max={max}>
+        {users.map((user, index) => (
+          <Avatar alt={author.username} src={user.media.url} key={index} />
+        ))}
+      </UserAvatarList>
+    );
   })
   .add('with 150 votes', () => {
     const users = usersMockGenerator(150);
     const max = number('Max display', 5);
 
-    return <UserAvatarList max={max}>
-      {users.map((user, index) => 
-      (
-        <Avatar src={user.media.url} key={index}/>
-      ))}
-    </UserAvatarList>;
+    return (
+      <UserAvatarList max={max}>
+        {users.map((user, index) => (
+          <Avatar alt={author.username} src={user.media.url} key={index} />
+        ))}
+      </UserAvatarList>
+    );
   });
