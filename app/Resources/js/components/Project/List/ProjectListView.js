@@ -102,7 +102,6 @@ export default createRefetchContainer(
           type: { type: "ID" }
           status: { type: "ID" }
           term: { type: "String" }
-          onlyPublic: { type: "Boolean" }
         ) {
         ...ProjectListViewPaginated_query
           @arguments(
@@ -113,7 +112,6 @@ export default createRefetchContainer(
             term: $term
             count: $count
             status: $status
-            onlyPublic: $onlyPublic
           )
       }
     `,
@@ -128,7 +126,6 @@ export default createRefetchContainer(
       $type: ID
       $status: ID
       $term: String
-      $onlyPublic: Boolean
     ) {
       ...ProjectListView_query
         @arguments(
@@ -139,7 +136,6 @@ export default createRefetchContainer(
           term: $term
           count: $count
           status: $status
-          onlyPublic: $onlyPublic
         )
     }
   `,
