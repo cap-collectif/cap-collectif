@@ -44,7 +44,7 @@ class ArrayHelper {
         return 1;
       }
       // We never do want to sort contributions by children number
-      if (field === 'childrenElementsNb' && el1.displayType === 'consultation.feature') {
+      if (field === 'childrenElementsNb' && el1.displayType === 'contribution') {
         field = 'title';
         order = 'ASC';
         nsort = true;

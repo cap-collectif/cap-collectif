@@ -32,7 +32,7 @@ export class UnpublishedLabel extends React.Component<Props> {
           <p>
             <FormattedMessage
               id="account-pending-confirmation-message"
-              values={{ contentType: 'consultation.feature', emailAddress: viewer.email }}
+              values={{ contentType: 'contribution', emailAddress: viewer.email }}
             />
           </p>
           {publishable.publishableUntil && (
@@ -42,7 +42,7 @@ export class UnpublishedLabel extends React.Component<Props> {
                   id="remaining-time"
                   values={{
                     remainingTime: moment(publishable.publishableUntil).toNow(true),
-                    contentType: 'consultation.feature',
+                    contentType: 'contribution',
                   }}
                 />
               </strong>
@@ -62,7 +62,7 @@ export class UnpublishedLabel extends React.Component<Props> {
           }>
           <FormattedMessage
             id="account-not-confirmed-in-time-message"
-            value={{ contentType: 'consultation.feature' }}
+            value={{ contentType: 'contribution' }}
           />
         </Popover>
       );
@@ -78,7 +78,7 @@ export class UnpublishedLabel extends React.Component<Props> {
           }>
           <FormattedMessage
             id="account-confirmed-too-late-message"
-            value={{ contentType: 'consultation.feature' }}
+            value={{ contentType: 'contribution' }}
           />
         </Popover>
       );
