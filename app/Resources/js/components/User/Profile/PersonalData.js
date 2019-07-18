@@ -182,17 +182,16 @@ type PersonalDataState = {
 
 export class PersonalData extends Component<Props, PersonalDataState> {
   deleteField = (target: string): void => {
-    const { dispatch } = this.props;
     // $FlowFixMe
     if (target.split('-').length > 1) {
       target.split('-').forEach(index => {
-        dispatch(unregisterField(formName, index, false));
-        dispatch(change(formName, index, null));
+        this.props.dispatch(unregisterField(formName, index, false));
+        this.props.dispatch(change(formName, index, null));
       });
       return;
     }
-    dispatch(unregisterField(formName, target, false));
-    dispatch(change(formName, target, null));
+    this.props.dispatch(unregisterField(formName, target, false));
+    this.props.dispatch(change(formName, target, null));
   };
 
   popover = (target: string) => (

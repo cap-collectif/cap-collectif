@@ -18,7 +18,7 @@ class ElementIcon extends React.Component<Props> {
     if (element.displayType) {
       const classes = `${classNames({
         cap: true,
-        'cap-baloon': element.displayType === 'contribution',
+        'cap-baloon': element.displayType === 'consultation.feature',
         'cap-folder-2': element.displayType === 'folder',
         'cap-bubble-conversation-5': element.displayType === 'grouping',
         'cap-book-1': element.displayType === 'root',

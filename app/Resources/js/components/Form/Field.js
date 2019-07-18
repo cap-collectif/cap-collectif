@@ -9,7 +9,6 @@ type Props = {
     dirty?: boolean,
     pristine?: boolean,
     error?: any,
-    warning?: any,
   },
   backgroundColor?: ?string,
   labelClassName?: string,
@@ -73,7 +72,7 @@ type Props = {
 
 class Field extends React.Component<Props> {
   render() {
-    const { touched, error, dirty, warning } = this.props.meta;
+    const { touched, error, dirty } = this.props.meta;
     const {
       popover,
       children,
@@ -107,21 +106,12 @@ class Field extends React.Component<Props> {
     const check = touched || (dirty && !disableValidation);
 
     let errorMessage = null;
-    let warningMessage = null;
 
     if (check && error) {
       if (error.id) {
         errorMessage = <FormattedMessage id={error.id} values={error.values} />;
       } else {
         errorMessage = <FormattedMessage id={error} />;
-      }
-    }
-
-    if (check && warning) {
-      if (warning.id) {
-        warningMessage = <FormattedMessage id={warning.id} values={warning.values} />;
-      } else {
-        warningMessage = <FormattedMessage id={warning} />;
       }
     }
 
@@ -146,7 +136,6 @@ class Field extends React.Component<Props> {
         label={label || null}
         placeholder={placeholder || null}
         errors={errorMessage}
-        warnings={warningMessage}
         validationState={check ? (error ? 'error' : 'success') : null}
         validationRule={validationRule}
         autoComplete={autoComplete}

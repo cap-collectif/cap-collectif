@@ -30,7 +30,6 @@ import {
   formatInitialResponsesValues,
   type ResponsesInReduxForm,
   validateResponses,
-  warnResponses,
 } from '../../../utils/responsesHelper';
 
 type ProposalForm = ProposalForm_proposalForm;
@@ -94,35 +93,32 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isAdmin }:
     });
 };
 
-export const checkProposalContent = (
+export const validateProposalContent = (
   values: FormValues | FrontendFormValues,
   // $FlowFixMe $refType
   proposalForm: ProposalForm,
   features: FeatureToggles,
   intl: IntlShape,
-  isDraft: boolean,
 ) => {
-  const messages = {};
+  const errors = {};
   if (!values.title || values.title.length <= 2) {
-    messages.title = !isDraft
-      ? 'proposal.constraints.title'
-      : 'proposal.constraints.title_for_draft';
+    errors.title = 'proposal.constraints.title';
   }
   if (
     proposalForm.usingSummary &&
     (values.summary && (values.summary.length > 140 || values.summary.length < 2))
   ) {
-    messages.summary = 'proposal.constraints.summary';
+    errors.summary = 'proposal.constraints.summary';
   }
   if (
     proposalForm.usingDescription &&
-    proposalForm.descriptionMandatory &&
+    proposalForm.descriptionMandaotry &&
     (!values.body || values.body.length <= 2)
   ) {
-    messages.body = 'proposal.constraints.body';
+    errors.body = 'proposal.constraints.body';
   }
   if (proposalForm.usingAddress && !values.address) {
-    messages.addressText = 'proposal.constraints.address';
+    errors.addressText = 'proposal.constraints.address';
   }
   if (
     proposalForm.categories.length &&
@@ -130,7 +126,7 @@ export const checkProposalContent = (
     proposalForm.categoryMandatory &&
     !values.category
   ) {
-    messages.category = 'proposal.constraints.category';
+    errors.category = 'proposal.constraints.category';
   }
   if (
     features.districts &&
@@ -138,35 +134,17 @@ export const checkProposalContent = (
     proposalForm.districtMandatory &&
     !values.district
   ) {
-    messages.district = 'proposal.constraints.district';
+    errors.district = 'proposal.constraints.district';
   }
   if (features.themes && proposalForm.usingThemes && proposalForm.themeMandatory && !values.theme) {
-    messages.theme = 'proposal.constraints.theme';
+    errors.theme = 'proposal.constraints.theme';
   }
 
-  return messages;
-};
-
-export const validateProposalContent = (
-  values: FormValues | FrontendFormValues,
-  // $FlowFixMe $refType
-  proposalForm: ProposalForm,
-  features: FeatureToggles,
-  intl: IntlShape,
-  isDraft: boolean,
-) => {
-  const errors = !isDraft
-    ? checkProposalContent(values, proposalForm, features, intl, isDraft)
-    : {};
-  if (!values.title || values.title.length <= 2) {
-    errors.title = !isDraft ? 'proposal.constraints.title' : 'proposal.constraints.title_for_draft';
-  }
   const responsesError = validateResponses(
     proposalForm.questions,
     values.responses,
     'proposal',
     intl,
-    isDraft,
   );
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses;
@@ -175,31 +153,8 @@ export const validateProposalContent = (
   return errors;
 };
 
-export const warnProposalContent = (
-  values: FormValues | FrontendFormValues,
-  // $FlowFixMe $refType
-  proposalForm: ProposalForm,
-  features: FeatureToggles,
-  intl: IntlShape,
-  isDraft: boolean,
-) => {
-  const warnings = checkProposalContent(values, proposalForm, features, intl, isDraft);
-  const responsesWarning = warnResponses(
-    proposalForm.questions,
-    values.responses,
-    'proposal',
-    intl,
-    isDraft,
-  );
-  if (responsesWarning.responses && responsesWarning.responses.length) {
-    warnings.responses = responsesWarning.responses;
-  }
-
-  return warnings;
-};
-
 const validate = (values: FormValues, { proposal, features, intl }: Props) =>
-  validateProposalContent(values, proposal.form, features, intl, values.draft);
+  validateProposalContent(values, proposal.form, features, intl);
 
 type State = {
   showEditFusionModal: boolean,

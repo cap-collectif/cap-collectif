@@ -876,25 +876,11 @@ describe('validateResponses', () => {
     expect(value).toEqual({ responses: [{ value: 'please-enter-a-number' }] });
   });
 
-  it('Should return object errors please-enter-a-number when draft is true', () => {
-    const questions = [numberQuestion];
-    const responses = [{ ...numberReponse, value: 'notanumber' }];
-    const value = validateResponses(questions, responses, className, intlMock, true);
-    expect(value).toEqual({ responses: [{ value: 'please-enter-a-number' }] });
-  });
-
   it('Should return object errors field_mandatory', () => {
     const questions = [{ ...textQuestion, required: true }];
     const responses = [{ ...textReponse, value: null }];
     const value = validateResponses(questions, responses, className, intlMock);
     expect(value).toEqual({ responses: [{ value: 'test.constraints.field_mandatory' }] });
-  });
-
-  it('Should not return object errors when draft is true', () => {
-    const questions = [{ ...textQuestion, required: true }];
-    const responses = [{ ...textReponse, value: null }];
-    const value = validateResponses(questions, responses, className, intlMock, true);
-    expect(value).toEqual({ responses: [undefined] });
   });
 
   it('Should render correctly when empty', () => {

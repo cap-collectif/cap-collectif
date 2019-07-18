@@ -129,8 +129,11 @@ const validate = (values: FormValues, props: Props) => {
   const { questions } = props.questionnaire;
   const { responses } = values;
   const errors = {};
-  const responsesError = validateResponses(questions, responses, 'reply', props.intl, values.draft);
 
+  const responsesError = validateResponses(questions, responses, 'reply', props.intl);
+  if (values.draft) {
+    return errors;
+  }
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses;
   }
@@ -287,7 +290,7 @@ const mapStateToProps = (state: State, props: Props) => {
       ) || defaultResponses,
     initialValues: {
       responses: defaultResponses,
-      draft: props.reply && props.reply.draft ? props.reply.draft : true,
+      draft: props.reply && props.reply.draft ? props.reply.draft : false,
       private: props.reply ? props.reply.private : false,
     },
     user: state.user.user,

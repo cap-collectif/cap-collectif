@@ -141,7 +141,7 @@ export const DISPLAY_SETTINGS = [
       },
       {
         type: 'display_type',
-        value: 'contribution',
+        value: 'consultation.feature',
       },
     ],
     rules: [
