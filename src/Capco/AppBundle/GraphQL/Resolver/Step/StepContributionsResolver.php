@@ -28,11 +28,11 @@ class StepContributionsResolver implements ResolverInterface
         return $this->dataLoader->load(compact('step', 'args'));
     }
 
-    public function resolveSync(AbstractStep $step, Argument $args): Connection
+    public function resolveSync(AbstractStep $step, Argument $args): ?Connection
     {
         $connection = null;
         $this->promiseAdapter->await(
-            $this->__invoke($step, $args)->then(function ($value) use (&$connection) {
+            $this->__invoke($step, $args)->then(static function ($value) use (&$connection) {
                 $connection = $value;
             })
         );

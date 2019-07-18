@@ -35,7 +35,8 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('aut.userType', 'ut')
             ->leftJoin('a.opinion', 'o')
-            ->leftJoin('o.step', 's')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c');
 
@@ -57,7 +58,8 @@ class ArgumentRepository extends EntityRepository
             )
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('a.opinion', 'o')
-            ->leftJoin('o.step', 's')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->where('a.id = :id')
@@ -150,10 +152,12 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('aut.media', 'm')
             ->leftJoin('a.opinion', 'o')
+            ->leftJoin('o.consultation', 'oc')
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
-            ->leftJoin('o.step', 'os')
-            ->leftJoin('ovo.step', 'ovos')
+            ->leftJoin('ovo.consultation', 'ovoc')
+            ->leftJoin('oc.step', 'os')
+            ->leftJoin('ovoc.step', 'ovos')
             ->leftJoin('ovos.projectAbstractStep', 'ovopas')
             ->leftJoin('os.projectAbstractStep', 'opas')
             ->andWhere('opas.project = :project OR ovopas.project = :project')
@@ -191,7 +195,8 @@ class ArgumentRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(a) as TotalArguments')
             ->leftJoin('a.opinion', 'o')
-            ->leftJoin('o.step', 's')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->andWhere('a.Author = :author')
@@ -209,10 +214,12 @@ class ArgumentRepository extends EntityRepository
         return $this->getIsEnabledQueryBuilder()
             ->select('COUNT(DISTINCT a)')
             ->leftJoin('a.opinion', 'o')
+            ->leftJoin('o.consultation', 'oc')
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('ovo.consultation', 'ovoc')
             ->andWhere('a.Author = :author')
-            ->andWhere('o.step IN (:steps) OR ovo.step IN (:steps)')
+            ->andWhere('oc.step IN (:steps) OR ovoc.step IN (:steps)')
             ->setParameter(
                 'steps',
                 array_filter($project->getRealSteps(), function ($step) {
@@ -230,9 +237,11 @@ class ArgumentRepository extends EntityRepository
         return $this->getIsEnabledQueryBuilder()
             ->select('COUNT(DISTINCT a)')
             ->leftJoin('a.opinion', 'o')
+            ->leftJoin('o.consultation', 'oc')
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
-            ->andWhere('o.step = :step OR ovo.step = :step')
+            ->leftJoin('ovo.consultation', 'ovoc')
+            ->andWhere('oc.step = :step OR ovoc.step = :step')
             ->andWhere('a.Author = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author)
@@ -285,15 +294,17 @@ class ArgumentRepository extends EntityRepository
         return $qb
             ->select('count(DISTINCT a.id)')
             ->leftJoin('a.opinion', 'o')
+            ->leftJoin('o.consultation', 'oc')
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('ovo.consultation', 'ovoc')
             ->andWhere('a.published = 1 AND a.trashedAt IS NULL')
             ->andWhere(
                 $qb
                     ->expr()
                     ->orX(
-                        '(a.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs)',
-                        '(a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs)'
+                        '(a.opinion IS NOT NULL AND o.published = 1 AND oc.step = :cs)',
+                        '(a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovoc.step = :cs)'
                     )
             )
             ->setParameter('cs', $cs)
@@ -308,15 +319,17 @@ class ArgumentRepository extends EntityRepository
         return $qb
             ->select('count(DISTINCT a.id)')
             ->leftJoin('a.opinion', 'o')
+            ->leftJoin('o.consultation', 'oc')
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('ovo.consultation', 'ovoc')
             ->andWhere('a.published = 1 AND a.trashedAt IS NOT NULL')
             ->andWhere(
                 $qb
                     ->expr()
                     ->orX(
-                        '(a.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs)',
-                        '(a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs)'
+                        '(a.opinion IS NOT NULL AND o.published = 1 AND oc.step = :cs)',
+                        '(a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovoc.step = :cs)'
                     )
             )
             ->setParameter('cs', $cs)

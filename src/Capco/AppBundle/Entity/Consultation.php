@@ -83,11 +83,17 @@ class Consultation
     private $moderatingOnUpdate = false;
 
     /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="step",  cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $opinions;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->opinionTypes = new ArrayCollection();
+        $this->opinions = new ArrayCollection();
         $this->updatedAt = new \DateTime();
     }
 
@@ -98,6 +104,32 @@ class Consultation
         }
 
         return 'New consultation step type';
+    }
+
+    /**
+     * @return Collection|Opinion[]
+     */
+    public function getOpinions(): Collection
+    {
+        return $this->opinions;
+    }
+
+    public function addOpinion(Opinion $opinion): self
+    {
+        if (!$this->opinions->contains($opinion)) {
+            $this->opinions->add($opinion);
+        }
+
+        return $this;
+    }
+
+    public function removeOpinion(Opinion $opinion): self
+    {
+        if (!$this->opinions->contains($opinion)) {
+            $this->opinions->removeElement($opinion);
+        }
+
+        return $this;
     }
 
     public function getOpinionCountShownBySection(): int

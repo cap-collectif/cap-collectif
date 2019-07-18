@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
@@ -125,6 +126,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             if (0 === $key) {
                 continue;
             }
+            /** @var OpinionType|null $opinionType */
             $opinionType = null;
             foreach (explode('|', $row[1]) as $index => $ot) {
                 if (0 === $index) {
@@ -175,7 +177,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
             $opinion->setTitle($row[0]);
             $opinion->setBody($row[2]);
-            $opinion->setStep($consultationStep);
+            $opinion->setConsultation($consultationStep->getConsultation());
 
             $opinion->setOpinionType($opinionType);
             $opinion->setAuthor($user);

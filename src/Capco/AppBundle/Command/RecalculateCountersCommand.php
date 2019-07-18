@@ -184,8 +184,8 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $this->executeQuery(
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionCount = (
           select count(DISTINCT o.id)
-          from CapcoAppBundle:Opinion o
-          where o.step = cs AND o.published = 1 AND o.trashedAt IS NULL group by o.step
+          from CapcoAppBundle:Opinion o LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
+          WHERE o.published = 1 AND o.trashedAt IS NULL group by oc.step
         )'
         );
 
@@ -193,7 +193,8 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionVersionsCount = (
           select count(DISTINCT ov.id)
           from CapcoAppBundle:OpinionVersion ov INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
-          where o.step = cs AND ov.published = 1 AND ov.trashedAt IS NULL AND o.published = 1 AND o.trashedAt IS NULL group by o.step
+          INNER JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
+          WHERE ov.published = 1 AND ov.trashedAt IS NULL AND o.published = 1 AND o.trashedAt IS NULL group by oc.step
         )'
         );
 
@@ -201,7 +202,8 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedOpinionCount = (
           select count(DISTINCT o.id)
           from CapcoAppBundle:Opinion o
-          where o.step = cs AND o.published = 1 AND o.trashedAt IS NOT NULL group by o.step
+          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
+          WHERE o.published = 1 AND o.trashedAt IS NOT NULL group by oc.step
         )'
         );
 
@@ -209,7 +211,8 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedOpinionVersionsCount = (
           select count(DISTINCT ov.id)
           from CapcoAppBundle:OpinionVersion ov INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
-          where o.step = cs AND ov.published = 1 AND ov.trashedAt IS NOT NULL AND o.published = 1 group by o.step
+          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
+          WHERE ov.published = 1 AND ov.trashedAt IS NOT NULL AND o.published = 1 group by oc.step
         )'
         );
 
@@ -219,11 +222,13 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           from CapcoAppBundle:Argument a
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovoc.step = cs
           WHERE a.published = 1 AND a.trashedAt IS NULL AND (
-            (a.opinion IS NOT NULL AND o.published = 1 AND o.step = cs)
+            (a.opinion IS NOT NULL AND o.published = 1)
             OR
-            (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = cs)
+            (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
         )'
         );
@@ -234,11 +239,13 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           from CapcoAppBundle:Argument a
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovoc.step = cs
           WHERE a.published = 1 AND a.trashedAt IS NOT NULL AND (
-            (a.opinion IS NOT NULL AND o.published = 1 AND o.step = cs)
+            (a.opinion IS NOT NULL AND o.published = 1)
             OR
-            (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = cs)
+            (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
         )'
         );
@@ -249,11 +256,13 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           from CapcoAppBundle:Source s
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
+          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovoc.step = cs
           WHERE s.published = 1 AND s.trashedAt IS NULL AND (
-            (s.opinion IS NOT NULL AND o.published = 1 AND o.step = cs)
+            (s.opinion IS NOT NULL AND o.published = 1)
             OR
-            (s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = cs)
+            (s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
         )'
         );
@@ -264,11 +273,13 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           from CapcoAppBundle:Source s
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
+          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovoc.step = cs
           WHERE s.published = 1 AND s.trashedAt IS NOT NULL AND (
-            (s.opinion IS NOT NULL AND o.published = 1 AND o.step = cs)
+            (s.opinion IS NOT NULL AND o.published = 1)
             OR
-            (s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = cs)
+            (s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
         )'
         );

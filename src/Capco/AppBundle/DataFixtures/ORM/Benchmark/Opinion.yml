@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Opinion:
   opinion{1..220}:
     id: 'opinion<current()>'
-    step: '@cstep1'
+    consultation: '@typeDefault'
     title: 'Opinion <current()>'
     slug: 'opinion-<current()>'
     body: |

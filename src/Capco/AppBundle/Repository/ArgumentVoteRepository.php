@@ -18,9 +18,11 @@ class ArgumentVoteRepository extends EntityRepository
             ->select('COUNT (DISTINCT v)')
             ->leftJoin('v.argument', 'argument')
             ->leftJoin('argument.opinion', 'o')
+            ->leftJoin('o.consultation', 'oc')
             ->leftJoin('argument.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
-            ->andWhere('o.step IN (:steps) OR ovo.step IN (:steps)')
+            ->leftJoin('ovo.consultation', 'ovoc')
+            ->andWhere('oc.step IN (:steps) OR ovoc.step IN (:steps)')
             ->setParameter(
                 'steps',
                 array_filter($project->getRealSteps(), function ($step) {
@@ -42,13 +44,15 @@ class ArgumentVoteRepository extends EntityRepository
             ->select('COUNT (DISTINCT v)')
             ->leftJoin('v.argument', 'argument')
             ->leftJoin('argument.opinion', 'o')
+            ->leftJoin('o.consultation', 'oc')
             ->leftJoin('argument.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('ovo.consultation', 'ovoc')
             ->andWhere(
                 '
-            (argument.opinion IS NOT NULL AND o.step = :step AND o.published = 1)
+            (argument.opinion IS NOT NULL AND oc.step = :step AND o.published = 1)
             OR
-            (argument.opinionVersion IS NOT NULL AND ovo.step = :step AND ov.published = 1 AND ovo.published = 1)'
+            (argument.opinionVersion IS NOT NULL AND ovoc.step = :step AND ov.published = 1 AND ovo.published = 1)'
             )
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)

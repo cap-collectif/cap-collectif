@@ -65,7 +65,8 @@ class OpinionTypeRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ot')
             ->addSelect('o', 's', 'pas', 'p')
             ->leftJoin('ot.Opinions', 'o')
-            ->leftJoin('o.step', 's')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')
             ->andWhere('s.isEnabled = :enabled')
@@ -91,7 +92,8 @@ class OpinionTypeRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ot')
             ->addSelect('o', 's', 'cas', 'p')
             ->join('ot.Opinions', 'o')
-            ->leftJoin('o.step', 's')
+            ->join('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')
             ->addGroupBy('ot.id')
@@ -130,8 +132,9 @@ class OpinionTypeRepository extends EntityRepository
                 'ot.Opinions',
                 'o',
                 'WITH',
-                'o.published = :enabled AND o.step = :step AND o.trashedAt IS NULL'
+                'o.published = :enabled AND o.trashedAt IS NULL'
             )
+            ->leftJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
             ->andWhere('ot IN (:allowedTypes)')
             ->setParameter('step', $step)
             ->setParameter('enabled', true)

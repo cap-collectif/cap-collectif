@@ -77,7 +77,8 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
             $query = $this->em->createQuery(
                 'UPDATE CapcoUserBundle:User u SET u.opinionsCount = (
               SELECT count(o.id) from CapcoAppBundle:Opinion o
-              INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH o.step = cs
+              INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+              INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
               WHERE o.Author = u AND o.published = 1 AND cs.isEnabled = 1 GROUP BY o.Author
             )'
             );
@@ -88,7 +89,8 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoUserBundle:User u SET u.opinionVersionsCount = (
           SELECT count(ov.id) from CapcoAppBundle:OpinionVersion ov
           INNER JOIN CapcoAppBundle:Opinion o with ov.parent = o
-          INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs with o.step = cs
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
           WHERE ov.author = u AND ov.published = 1 AND o.published = 1 AND cs.isEnabled = 1 GROUP BY ov.author
         )'
         );
@@ -100,8 +102,10 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
             LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
             LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
             LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH o.step = cs
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovo.step = ovocs
+            LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+            LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
+            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
+            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = ovocs
             WHERE a.Author = u AND a.published = 1 AND (
               (a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1)
               OR
@@ -158,7 +162,8 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
                     'UPDATE CapcoUserBundle:User u set u.opinionVotesCount = (
                 SELECT count(ov.id) from CapcoAppBundle:OpinionVote ov
                 INNER JOIN CapcoAppBundle:Opinion o WITH ov.opinion = o
-                INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH o.step = cs
+                INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+                INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
                 WHERE ov.user = u AND o.published = 1 AND cs.isEnabled = 1 GROUP BY ov.user
               )'
                 )
@@ -170,7 +175,8 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
           SELECT count(ovv.id) from CapcoAppBundle:OpinionVersionVote ovv
           INNER JOIN CapcoAppBundle:OpinionVersion ov WITH ovv.opinionVersion = ov
           INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
-          INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH o.step = cs
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc   
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
           WHERE ovv.user = u AND ov.published = 1 AND o.published = 1 AND cs.isEnabled = 1
           GROUP BY ovv.user
         )'
@@ -193,9 +199,11 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
             LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
             LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
             LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+            LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
             LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH o.step = cs
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovo.step = ovocs
+            LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
+            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = ovocs
             WHERE av.user = u AND a.published = 1 AND (
               (a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1)
               OR
@@ -212,9 +220,11 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
             LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
             LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
             LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
+            LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
             LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH o.step = cs
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovo.step = ovocs
+            LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
+            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = ovocs
             WHERE sv.user = u AND s.published = 1 AND (
               (s.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1)
               OR

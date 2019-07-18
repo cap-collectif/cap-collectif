@@ -100,7 +100,7 @@ class ConsultationStepExtractor
 
             // Create elements from opinions
             $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->findBy([
-                'step' => $this->consultationStep,
+                'consultation' => $this->consultationStep->getConsultation(),
                 'OpinionType' => $opinionType,
             ]);
             if (\count($opinions) > 0) {

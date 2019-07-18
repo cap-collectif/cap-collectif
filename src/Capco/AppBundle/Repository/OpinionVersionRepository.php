@@ -27,7 +27,8 @@ class OpinionVersionRepository extends EntityRepository
     ): ?OpinionVersion {
         $qb = $this->createQueryBuilder('v')
             ->leftJoin('v.parent', 'o')
-            ->leftJoin('o.step', 's')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')
             ->andWhere('v.slug = :slug')
@@ -78,7 +79,8 @@ class OpinionVersionRepository extends EntityRepository
             )
             ->leftJoin('o.author', 'a')
             ->leftJoin('o.parent', 'op')
-            ->leftJoin('op.step', 's')
+            ->leftJoin('op.consultation', 'opc')
+            ->leftJoin('opc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c');
 
@@ -101,7 +103,8 @@ class OpinionVersionRepository extends EntityRepository
             )
             ->leftJoin('o.author', 'a')
             ->leftJoin('o.parent', 'op')
-            ->leftJoin('op.step', 's')
+            ->leftJoin('op.consultation', 'opc')
+            ->leftJoin('opc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->where('o.id = :id')
@@ -121,7 +124,8 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('op.OpinionType', 'ot')
             ->leftJoin('o.author', 'aut')
             ->leftJoin('aut.media', 'm')
-            ->leftJoin('op.step', 's')
+            ->leftJoin('op.consultation', 'opc')
+            ->leftJoin('opc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->andWhere('pas.project = :project')
             ->andWhere('o.trashedAt IS NOT NULL')
@@ -214,11 +218,11 @@ class OpinionVersionRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder('version')
             ->select('count(DISTINCT version)')
             ->leftJoin('version.parent', 'opinion')
+            ->leftJoin('opinion.consultation', 'oc', 'WITH', 'oc.step IN (:steps)')
             ->andWhere('version.author = :author')
-            ->andWhere('opinion.step IN (:steps)')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
+                array_filter($project->getRealSteps(), static function ($step) {
                     return $step->isConsultationStep();
                 })
             )
@@ -235,7 +239,7 @@ class OpinionVersionRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder('version')
             ->select('count(DISTINCT version)')
             ->leftJoin('version.parent', 'opinion')
-            ->andWhere('opinion.step = :step')
+            ->leftJoin('opinion.consultation', 'oc', 'WITH', 'oc.step = :step')
             ->andWhere('version.author = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
@@ -286,7 +290,8 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('ov.author', 'aut')
             ->leftJoin('aut.media', 'm')
-            ->leftJoin('o.step', 's')
+            ->innerJoin('o.consultation', 'oc')
+            ->innerJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->andWhere('cas.project = :project')
             ->andWhere('ov.trashedAt IS NULL')
@@ -329,7 +334,8 @@ class OpinionVersionRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder('ov')
             ->innerJoin('ov.parent', 'o')
-            ->innerJoin('o.step', 's')
+            ->innerJoin('o.consultation', 'oc')
+            ->innerJoin('oc.step', 's')
             ->innerJoin('s.projectAbstractStep', 'cas')
             ->innerJoin('cas.project', 'c')
             ->andWhere('ov.trashedAt IS NULL')

@@ -124,11 +124,11 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     private $OpinionType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="opinions", cascade={"persist"})
-     * @ORM\JoinColumn(name="step_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="opinions", cascade={"persist"})
+     * @ORM\JoinColumn(name="consultation_id", referencedColumnName="id")
      * @Assert\NotNull()
      */
-    private $step;
+    private $consultation;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVersion", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -257,21 +257,30 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         return $this;
     }
 
-    public function getProject()
+    public function getProject(): ?Project
     {
-        return $this->step->getProject();
+        return $this->getStep() ?
+            $this->getStep()->getProject() :
+            null;
+    }
+
+    public function getConsultation(): ?Consultation
+    {
+        return $this->consultation;
+    }
+
+    public function setConsultation(Consultation $consultation): self
+    {
+        $this->consultation = $consultation;
+
+        return $this;
     }
 
     public function getStep(): ?ConsultationStep
     {
-        return $this->step;
-    }
-
-    public function setStep(ConsultationStep $step): self
-    {
-        $this->step = $step;
-
-        return $this;
+        return $this->getConsultation() ?
+            $this->getConsultation()->getStep() :
+            null;
     }
 
     public function getSources(): Collection
@@ -603,8 +612,8 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
      */
     public function deleteOpinion()
     {
-        if (null !== $this->step) {
-            $this->step->removeOpinion($this);
+        if (null !== $this->getStep()) {
+            $this->getStep()->removeOpinion($this);
         }
         if (null !== $this->OpinionType) {
             $this->OpinionType->removeOpinion($this);

@@ -34,7 +34,8 @@ class OpinionRepository extends EntityRepository
                 'c.title as project'
             )
             ->leftJoin('o.Author', 'a')
-            ->leftJoin('o.step', 's')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c');
 
@@ -56,7 +57,8 @@ class OpinionRepository extends EntityRepository
                 'c.title as project'
             )
             ->leftJoin('o.Author', 'a')
-            ->leftJoin('o.step', 's')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->where('o.id = :id')
@@ -72,7 +74,8 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.Author', 'a')
             ->leftJoin('a.media', 'm')
             ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.step', 's')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('o.appendices', 'appendix')
             ->andWhere('o.id = :id')
             ->setParameter('id', $id);
@@ -89,7 +92,8 @@ class OpinionRepository extends EntityRepository
         string $stepSlug
     ): ?Opinion {
         $qb = $this->createQueryBuilder('o')
-            ->leftJoin('o.step', 's')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')
             ->andWhere('o.slug = :slug')
@@ -125,7 +129,8 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.media', 'm')
-            ->leftJoin('o.step', 's')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->andWhere('cas.project = :project')
             ->andWhere('o.trashedAt IS NULL')
@@ -166,7 +171,8 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.media', 'm')
-            ->leftJoin('o.step', 's')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->andWhere('pas.project = :project')
             ->andWhere('o.trashedAt IS NOT NULL')
@@ -181,7 +187,7 @@ class OpinionRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('count(DISTINCT o)')
             ->andWhere('o.Author = :author')
-            ->andWhere('o.step IN (:steps)')
+            ->leftJoin('o.consultation', 'oc', 'WITH', 'oc.step IN (:steps)')
             ->setParameter(
                 'steps',
                 array_filter($project->getRealSteps(), function ($step) {
@@ -200,7 +206,7 @@ class OpinionRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('count(DISTINCT o)')
-            ->andWhere('o.step = :step')
+            ->leftJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
             ->andWhere('o.Author = :author')
             ->setParameter('author', $user)
             ->setParameter('step', $step);
@@ -237,13 +243,14 @@ class OpinionRepository extends EntityRepository
     public function getByUser(User $user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 's', 'c', 'aut', 'm')
+            ->addSelect('ot', 's', 'p', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.step', 's')
-            ->leftJoin('s.project', 'c')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
+            ->leftJoin('s.project', 'p')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.media', 'm')
-            ->andWhere('c.isEnabled = true')
+            ->andWhere('p.isEnabled = true')
             ->andWhere('s.isEnabled = true')
             ->andWhere('o.Author = :author')
             ->setParameter('author', $user)
@@ -263,10 +270,11 @@ class OpinionRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o) as totalOpinions')
-            ->leftJoin('o.step', 's')
-            ->leftJoin('s.project', 'c')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
+            ->leftJoin('s.project', 'p')
             ->andWhere('s.isEnabled = true')
-            ->andWhere('c.isEnabled = true')
+            ->andWhere('p.isEnabled = true')
             ->andWhere('o.published = true')
             ->andWhere('o.Author = :author')
             ->setParameter('author', $user);
@@ -293,7 +301,7 @@ class OpinionRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o)')
-            ->andWhere('o.step = :step')
+            ->leftJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
             ->setParameter('step', $step);
 
         if (!$includeTrashed) {
@@ -324,7 +332,9 @@ class OpinionRepository extends EntityRepository
         }
 
         if (isset($criteria['step'])) {
-            $qb->andWhere('o.step = :step')->setParameter('step', $criteria['step']);
+            $qb
+                ->leftJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
+                ->setParameter('step', $criteria['step']);
         }
 
         if (isset($criteria['trashed'])) {
@@ -439,8 +449,9 @@ class OpinionRepository extends EntityRepository
     public function getEnabledByProjectsOrderedByVotes(Project $project, $excludedAuthor = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->innerJoin('o.step', 's')
-            ->innerJoin('s.projectAbstractStep', 'cas')
+            ->innerJoin('o.consultation', 'oc')
+            ->innerJoin('oc.step', 'ocs')
+            ->innerJoin('ocs.projectAbstractStep', 'cas')
             ->innerJoin('cas.project', 'c')
             ->andWhere('o.trashedAt IS NULL')
             ->andWhere('cas.project = :project')
@@ -462,9 +473,9 @@ class OpinionRepository extends EntityRepository
         User $author
     ): array {
         return $this->createQueryBuilder('o')
+            ->leftJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
             ->andWhere('o.published = false')
             ->andWhere('o.Author = :author')
-            ->andWhere('o.step = :step')
             ->setParameter('author', $author)
             ->setParameter('step', $consultation->getStep())
             ->getQuery()
@@ -478,7 +489,8 @@ class OpinionRepository extends EntityRepository
     ): Paginator {
         $query = $this->createQueryBuilder('o')
             ->leftJoin('o.followers', 'f')
-            ->leftJoin('o.step', 'step')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 'step')
             ->leftJoin('step.projectAbstractStep', 'project_abstract_step')
             ->leftJoin('project_abstract_step.project', 'project')
             ->andWhere('f.user = :user')
@@ -497,7 +509,8 @@ class OpinionRepository extends EntityRepository
         $query
             ->select('COUNT(o.id)')
             ->leftJoin('o.followers', 'f')
-            ->leftJoin('o.step', 'step')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 'step')
             ->leftJoin('step.projectAbstractStep', 'project_abstract_step')
             ->leftJoin('project_abstract_step.project', 'project')
             ->andWhere('f.user = :user')
@@ -513,7 +526,7 @@ class OpinionRepository extends EntityRepository
         $query = $this->createQueryBuilder('o');
         $query
             ->select('COUNT(o.id)')
-            ->andWhere('o.step = :cs')
+            ->leftJoin('o.consultation', 'oc', 'WITH', 'oc.step = :cs')
             ->andWhere('o.published = 1')
             ->andWhere('o.trashedAt IS NULL')
             ->setParameter('cs', $cs);
@@ -526,7 +539,7 @@ class OpinionRepository extends EntityRepository
         $query = $this->createQueryBuilder('o');
         $query
             ->select('COUNT(o.id)')
-            ->andWhere('o.step = :cs')
+            ->leftJoin('o.consultation', 'oc', 'WITH', 'oc.step = :cs')
             ->andWhere('o.published = 1')
             ->andWhere('o.trashedAt IS NOT NULL')
             ->setParameter('cs', $cs);

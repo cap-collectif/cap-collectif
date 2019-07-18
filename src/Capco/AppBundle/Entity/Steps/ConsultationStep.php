@@ -67,11 +67,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     private $contributorsCount = 0;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="step",  cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $opinions;
-
-    /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="step")
      */
     private $consultation;
@@ -80,7 +75,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     {
         parent::__construct();
         $this->requirements = new ArrayCollection();
-        $this->opinions = new ArrayCollection();
     }
 
     public function getOpinionCount(): int
@@ -255,40 +249,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     public function setContributorsCount($contributorsCount)
     {
         $this->contributorsCount = $contributorsCount;
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getOpinions()
-    {
-        return $this->opinions;
-    }
-
-    /**
-     * @param $opinion
-     *
-     * @return $this
-     */
-    public function addOpinion($opinion)
-    {
-        if (!$this->opinions->contains($opinion)) {
-            $this->opinions->add($opinion);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param $opinion
-     *
-     * @return $this
-     */
-    public function removeOpinion($opinion)
-    {
-        $this->opinions->removeElement($opinion);
 
         return $this;
     }
