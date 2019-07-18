@@ -158,6 +158,9 @@ export const validateProposalContent = (
   const errors = !isDraft
     ? checkProposalContent(values, proposalForm, features, intl, isDraft)
     : {};
+  if (!values.title || values.title.length <= 2) {
+    errors.title = !isDraft ? 'proposal.constraints.title' : 'proposal.constraints.title_for_draft';
+  }
   const responsesError = validateResponses(
     proposalForm.questions,
     values.responses,

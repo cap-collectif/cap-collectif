@@ -539,7 +539,8 @@ export const validateResponses = (
           (response.value &&
             Array.isArray(response.value.labels) &&
             response.value.labels.length === 0 &&
-            response.value.other === null)
+            response.value.other === null &&
+            !isDraft)
         ) {
           return { value: `${className}.constraints.field_mandatory` };
         }
