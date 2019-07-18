@@ -1,3 +1,9 @@
-{{ react_render_component('ProjectsListApp', {
-    'props': projectsProps,
+{% if onlyPublic is not defined %}
+    {% set onlyPublic = false %}
+{% endif %}
+
+{{ react_render_component(
+    'ProjectsListApp',
+    {'props': {'authorId': user.id | toGlobalId('User'), 'onlyPublic': onlyPublic}
 }) }}
+

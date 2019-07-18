@@ -971,8 +971,7 @@ class ApplicationContext extends UserContext
             'questionnaire',
             'bp',
             'bo',
-            'randomly-failing',
-            'admin'
+            'randomly-failing'
         ]);
     }
 

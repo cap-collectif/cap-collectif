@@ -10,6 +10,8 @@ import ProjectListView from './ProjectListView';
 import { getInitialValues } from './Filters/ProjectListFilters';
 
 type Props = {|
+  authorId?: string,
+  onlyPublic: boolean,
   orderBy: ?string,
   term?: ?string,
   // Used only on /themes page
@@ -29,15 +31,19 @@ class ProjectsList extends React.Component<Props> {
     limit: 50,
     paginate: true,
     themeId: null,
+    onlyPublic: false,
   };
 
   constructor(props: Props) {
     super(props);
+
     this.initialRenderVars = {
       ...getInitialValues(),
       orderBy: props.orderBy,
       term: props.term,
       limit: props.limit,
+      author: props.authorId,
+      onlyPublic: props.onlyPublic,
     };
     if (props.themeId) {
       this.initialRenderVars.theme = props.themeId;
@@ -62,7 +68,17 @@ class ProjectsList extends React.Component<Props> {
   };
 
   render() {
-    const { author, orderBy, type, theme, term, limit, status } = this.initialRenderVars;
+    const {
+      orderBy,
+      type,
+      theme,
+      term,
+      limit,
+      status,
+      author,
+      onlyPublic,
+    } = this.initialRenderVars;
+
     return (
       <QueryRenderer
         environment={environment}
@@ -76,6 +92,7 @@ class ProjectsList extends React.Component<Props> {
             $type: ID
             $term: String
             $status: ID
+            $onlyPublic: Boolean
           ) {
             ...ProjectListView_query
               @arguments(
@@ -86,20 +103,22 @@ class ProjectsList extends React.Component<Props> {
                 term: $term
                 status: $status
                 count: $count
+                onlyPublic: $onlyPublic
               )
           }
         `}
         variables={{
+          type,
+          term,
+          theme,
+          status,
+          author,
+          onlyPublic,
+          count: limit,
           orderBy: {
             field: orderBy,
             direction: 'DESC',
           },
-          author,
-          type,
-          theme,
-          term,
-          count: limit,
-          status,
         }}
         render={this.renderProjectList}
       />

@@ -74,12 +74,6 @@ e2e:
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
-    admin:
-      paths: ['%paths.base%/features/admin']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
       filters:
         tags: '@randomly-failing'
 commands:

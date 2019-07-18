@@ -78,6 +78,7 @@ export default createPaginationContainer(
           type: { type: "ID" }
           status: { type: "ID" }
           term: { type: "String" }
+          onlyPublic: { type: "Boolean" }
         ) {
         projects(
           author: $author
@@ -88,6 +89,7 @@ export default createPaginationContainer(
           type: $type
           status: $status
           term: $term
+          onlyPublic: $onlyPublic
         ) @connection(key: "ProjectListViewPaginated_projects", filters: []) {
           edges {
             node {
@@ -130,6 +132,7 @@ export default createPaginationContainer(
         $type: ID
         $status: ID
         $term: String
+        $onlyPublic: Boolean
       ) {
         ...ProjectListViewPaginated_query
           @arguments(
@@ -140,6 +143,7 @@ export default createPaginationContainer(
             type: $type
             status: $status
             term: $term
+            onlyPublic: $onlyPublic
           )
       }
     `,
