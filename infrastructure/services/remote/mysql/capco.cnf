@@ -49,5 +49,3 @@ innodb-flush-log-at-trx-commit = 1
 innodb-file-per-table          = 1
 innodb-buffer-pool-size        = 512M
 innodb-fast-shutdown           = 0
-
-max_allowed_packet=32M

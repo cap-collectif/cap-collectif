@@ -5,19 +5,23 @@ namespace Capco\AppBundle\Command\Migrations;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Utils\Map;
 use Doctrine\DBAL\Connection;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class MigrateEventAddressesToJsonAddressesCommand extends ContainerAwareCommand
+class MigrateEventAddressesToJsonAddressesCommand extends Command
 {
     protected static $defaultName = 'capco:migrate:eventAddress-to-jsonAddress';
     private $connection;
+    private $map;
+    private $eventRepository;
 
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection, Map $map, EventRepository $eventRepository)
     {
         $this->connection = $connection;
+        $this->map = $map;
+        $this->eventRepository = $eventRepository;
         parent::__construct();
     }
 
@@ -41,19 +45,15 @@ class MigrateEventAddressesToJsonAddressesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $offset = $input->getArgument('offset') ? $input->getArgument('offset') : 0;
-        $limit = $input->getArgument('limit') ? $input->getArgument('limit') : 1000;
+        $offset = $input->getArgument('offset') ?: 0;
+        $limit = $input->getArgument('limit') ?: 1000;
         $all = $input->getOption('all');
         $offset = $all ? 0 : $offset;
 
-        /** @var EventRepository $eventRepository */
-        $eventRepository = $this->getContainer()->get(EventRepository::class);
-
-
-        $totalEvents = $all ? $eventRepository->countAllWithoutJsonAddress() : $limit;
+        $totalEvents = $all ? $this->eventRepository->countAllWithoutJsonAddress() : $limit;
 
         for ($i = 0; $i < $totalEvents; $i += $limit) {
-            $events = $eventRepository->getEventsWithAddress($offset, $limit);
+            $events = $this->eventRepository->getEventsWithAddress($offset, $limit);
             $this->migrate($events, $output);
             $offset = $limit;
         }
@@ -63,20 +63,22 @@ class MigrateEventAddressesToJsonAddressesCommand extends ContainerAwareCommand
 
     private function migrate(array $events, OutputInterface $output): void
     {
-        /** @var Map $maps */
-        $maps = $this->getContainer()->get(Map::class);
-
         foreach ($events as $event) {
             $jsonAddress =
                 !empty($event['lng']) && !empty($event['lat'])
-                    ? $maps->reverserGeocodingAddress($event['lat'], $event['lng'])
+                    ? $this->map->reverserGeocodingAddress($event['lat'], $event['lng'])
                     : '';
             $similarity = $this->checkSimilarityAddressDiff($jsonAddress, $output, $event);
 
             if (!empty($jsonAddress) && $similarity) {
                 $this->connection->update(
                     'event',
-                    ['address_json' => $jsonAddress, 'similarity_of_new_address' => ($similarity['percLat'] + $similarity['percLng']) / 2, 'new_address_is_similar' => $similarity['newAddressIsSimilar']],
+                    [
+                        'address_json' => $jsonAddress,
+                        'similarity_of_new_address' =>
+                            ($similarity['percLat'] + $similarity['percLng']) / 2,
+                        'new_address_is_similar' => $similarity['newAddressIsSimilar']
+                    ],
                     ['id' => $event['id']]
                 );
             }
@@ -91,7 +93,7 @@ class MigrateEventAddressesToJsonAddressesCommand extends ContainerAwareCommand
         if ($event['lng'] && $newLng && $event['lat'] && $newLat) {
             similar_text($event['lng'], $newLng, $percLng);
             similar_text($event['lng'], $newLng, $percLat);
-            $similarity = ['percLat' => round($percLat, 2), 'percLng'=>round($percLng, 2)];
+            $similarity = ['percLat' => round($percLat, 2), 'percLng' => round($percLng, 2)];
             $similarity['newAddressIsSimilar'] = true;
 
             if ($percLng < 75) {
