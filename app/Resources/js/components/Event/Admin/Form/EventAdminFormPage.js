@@ -35,18 +35,17 @@ type Props = {|
 |};
 
 type FormValues = {|
-  addressText: string,
   title: string,
   body: string,
   author?: { value: string, label: string },
   startAt: string,
   endAt: ?string,
-  addressText: ?string,
   metaDescription: ?string,
   customCode: ?string,
   commentable: boolean,
   guestListEnabled: boolean,
   addressJson: ?string,
+  address: ?string,
   enabled: boolean,
   // $FlowFixMe
   media: ?{
@@ -94,18 +93,22 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const guestListEnabled = values.guestListEnabled ? values.guestListEnabled : false;
   const commentable = values.commentable ? values.commentable : false;
   const enabled = values.enabled ? values.enabled : false;
-  const addressJson = values.addressText;
-  delete values.addressText;
+  const addressJson = values.address;
   delete values.address;
   const input = {
-    ...values,
-    themes: values.themes ? values.themes.map(t => t.value) : null,
-    projects: values.projects ? values.projects.map(p => p.value) : null,
-    media,
-    enabled,
+    title: values.title,
+    body: values.body,
+    startAt: values.startAt,
+    endAt: values.endAt ? values.endAt : null,
+    metaDescription: values.metaDescription,
+    customCode: values.customCode,
     commentable,
     guestListEnabled,
     addressJson,
+    enabled,
+    media,
+    themes: values.themes ? values.themes.map(t => t.value) : null,
+    projects: values.projects ? values.projects.map(p => p.value) : null,
     author: values.author ? values.author.value : undefined,
   };
 
@@ -134,19 +137,24 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   const guestListEnabled = values.guestListEnabled ? values.guestListEnabled : false;
   const commentable = values.commentable ? values.commentable : false;
-  delete values.addressText;
   const enabled = values.enabled ? values.enabled : false;
-  const addressJson = values.addressText;
-  delete values.addressText;
+  const addressJson = values.address;
+  delete values.address;
   const input = {
-    ...values,
+    id: values.id,
+    title: values.title,
+    body: values.body,
+    startAt: values.startAt,
+    endAt: values.endAt ? values.endAt : null,
+    metaDescription: values.metaDescription,
+    customCode: values.customCode,
+    commentable,
+    guestListEnabled,
+    addressJson,
+    enabled,
+    media,
     themes: values.themes ? values.themes.map(t => t.value) : null,
     projects: values.projects ? values.projects.map(p => p.value) : null,
-    media,
-    enabled,
-    guestListEnabled,
-    commentable,
-    addressJson,
     author: values.author ? values.author.value : undefined,
   };
 

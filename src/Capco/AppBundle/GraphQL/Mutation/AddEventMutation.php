@@ -61,12 +61,19 @@ class AddEventMutation implements MutationInterface
             : null;
 
         // admin or superAdmin can set other user as author
-        if ($author && ($viewer->isAdmin() || $viewer->isSuperAdmin())) {
+        if ($author && $viewer->isAdmin()) {
             $event = (new Event())->setAuthor($author);
-            unset($values['author']);
         } else {
             $event = (new Event())->setAuthor($viewer);
         }
+        $event->setStartAt(new \DateTime($values['startAt']));
+        unset($values['startAt']);
+        if (isset($values['endAt'])) {
+            $event->setEndAt(new \DateTime($values['endAt']));
+            unset($values['endAt']);
+        }
+
+        unset($values['author']);
 
         $form = $this->formFactory->create(EventType::class, $event);
         $form->submit($values, false);

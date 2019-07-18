@@ -62,4 +62,4 @@ PreviewAddEventInput:
         defaultValue: false
         description: 'Allow registration for the event'
       author:
-        type: 'ID'
+        type: 'String'

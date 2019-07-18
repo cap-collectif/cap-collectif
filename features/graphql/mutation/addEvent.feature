@@ -27,13 +27,10 @@ Scenario: Admin wants to add an event
             projects {
               id
             }
-            address
             link
             commentable
-            address
-            zipCode
-            city
-            country
+            addressJson
+            fullAddress
           }
         }
       }
@@ -46,16 +43,13 @@ Scenario: Admin wants to add an event
         "endAt": "2018-03-16 00:00:00",
         "themes": ["theme1"],
         "projects": ["UHJvamVjdDpwcm9qZWN0MQ==","UHJvamVjdDpwcm9qZWN0Mg=="],
-        "address": "25 rue Claude Tillier",
-        "zipCode": "75012",
         "commentable": false,
         "enabled": true,
         "guestListEnabled": true,
         "metaDescription": "metaDescription",
         "customCode": "customCode",
-        "city": "Paris",
-        "country": "France",
-        "link": "https://facebook.com/inscrivez-vous-ici"
+        "link": "https://facebook.com/inscrivez-vous-ici",
+        "addressJson":"[{\"address_components\":[{\"long_name\":\"25\",\"short_name\":\"25\",\"types\":[\"street_number\"]},{\"long_name\":\"Rue Claude Tillier\",\"short_name\":\"Rue Claude Tillier\",\"types\":[\"route\"]},{\"long_name\":\"Paris\",\"short_name\":\"Paris\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Arrondissement de Paris\",\"short_name\":\"Arrondissement de Paris\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"Île-de-France\",\"short_name\":\"Île-de-France\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"75012\",\"short_name\":\"75012\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"25 Rue Claude Tillier, 75012 Paris, France\",\"geometry\":{\"bounds\":{\"south\":48.8484736,\"west\":2.3882939999999735,\"north\":48.8485762,\"east\":2.388451199999963},\"location\":{\"lat\":48.8485327,\"lng\":2.3883663000000297},\"location_type\":\"ROOFTOP\",\"viewport\":{\"south\":48.8471759197085,\"west\":2.3870236197085433,\"north\":48.8498738802915,\"east\":2.389721580291507}},\"place_id\":\"ChIJGRpmzgxy5kcRPt50gCGa7kM\",\"types\":[\"premise\"]}]"
       }
     }
   }
@@ -90,12 +84,11 @@ Scenario: Admin wants to add an event
                        "id":"UHJvamVjdDpwcm9qZWN0Mg=="
                     }
                  ],
-                 "address":"25 rue Claude Tillier",
+                 "addressJson":"[{\"address_components\":[{\"long_name\":\"25\",\"short_name\":\"25\",\"types\":[\"street_number\"]},{\"long_name\":\"Rue Claude Tillier\",\"short_name\":\"Rue Claude Tillier\",\"types\":[\"route\"]},{\"long_name\":\"Paris\",\"short_name\":\"Paris\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Arrondissement de Paris\",\"short_name\":\"Arrondissement de Paris\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"Île-de-France\",\"short_name\":\"Île-de-France\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"75012\",\"short_name\":\"75012\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"25 Rue Claude Tillier, 75012 Paris, France\",\"geometry\":{\"bounds\":{\"south\":48.8484736,\"west\":2.3882939999999735,\"north\":48.8485762,\"east\":2.388451199999963},\"location\":{\"lat\":48.8485327,\"lng\":2.3883663000000297},\"location_type\":\"ROOFTOP\",\"viewport\":{\"south\":48.8471759197085,\"west\":2.3870236197085433,\"north\":48.8498738802915,\"east\":2.389721580291507}},\"place_id\":\"ChIJGRpmzgxy5kcRPt50gCGa7kM\",\"types\":[\"premise\"]}]",
                  "link":"https:\/\/facebook.com\/inscrivez-vous-ici",
                  "commentable":false,
-                 "zipCode":"75012",
-                 "city":"Paris",
-                 "country":"France"
+                 "fullAddress":"25 Rue Claude Tillier, 75012 Paris, France"
+
               }
            }
         }

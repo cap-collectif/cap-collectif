@@ -55,21 +55,18 @@ class ChangeEventMutation implements MutationInterface
                 'userErrors' => [['message' => 'Could not find your event.']]
             ];
         }
+
         unset($values['id']);
         /** @var User $newAuthor */
         $newAuthor = isset($values['author'])
             ? $this->globalIdResolver->resolve($values['author'], $viewer)
             : null;
 
-        dump($newAuthor);
         // admin and superAdmin can change the event's author
-        if (
-            $newAuthor &&
-            ($viewer->isAdmin() || $viewer->isSuperAdmin()) &&
-            $newAuthor !== $event->getAuthor()
-        ) {
+        if ($newAuthor && $viewer->isAdmin() && $newAuthor !== $event->getAuthor()) {
             $event->setAuthor($newAuthor);
         }
+
         unset($values['author']);
 
         $form = $this->formFactory->create(EventType::class, $event);

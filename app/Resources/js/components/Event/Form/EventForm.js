@@ -3,7 +3,7 @@ import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
-import { type FormProps, Field, reduxForm, formValueSelector } from 'redux-form';
+import { type FormProps, Field, reduxForm } from 'redux-form';
 import { Row } from 'react-bootstrap';
 import component from '../../Form/Field';
 import type { Dispatch, FeatureToggles, GlobalState } from '../../../types';
@@ -34,7 +34,6 @@ type Props = {|
 export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
-
   render() {
     const { features, isAdmin, event } = this.props;
 
@@ -107,6 +106,7 @@ export class EventForm extends React.Component<Props> {
               name="author"
               placeholder={null}
               labelClassName={null}
+              selectFieldIsObject
             />
           )}
           <Field
@@ -133,6 +133,7 @@ export class EventForm extends React.Component<Props> {
             }
           />
           <Field
+            timeFormat={false}
             id="event_startAt"
             component={component}
             type="datetime"
@@ -262,8 +263,6 @@ const formContainer = reduxForm({
   form: formName,
 })(EventForm);
 
-const selector = formValueSelector(formName);
-
 const mapStateToProps = (state: GlobalState, props: Props) => {
   if (props.event) {
     return {
@@ -297,11 +296,8 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
           props.event && props.event.author
             ? { value: props.event.author.id, label: props.event.author.displayName }
             : null,
-        addressText:
-          props.event && props.event.fullAddress
-            ? props.event.fullAddress
-            : null,
-        addressJson: props.event && props.event.addressJson ? props.event.addressJson : null
+        addressText: props.event && props.event.fullAddress ? props.event.fullAddress : null,
+        addressJson: props.event && props.event.addressJson ? props.event.addressJson : null,
       },
     };
   }

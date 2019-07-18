@@ -56,3 +56,7 @@ InternalEvent:
         type: 'Float'
       lng:
         type: 'Float'
+      city:
+        type: 'String'
+      country:
+        type: 'String'

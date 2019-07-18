@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Capco\MediaBundle\Entity\Media;
-use Capco\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Capco\AppBundle\Form\Type\RelayNodeType;
@@ -49,16 +48,15 @@ class EventType extends AbstractType
             ->add('commentable')
             ->add('link')
             ->add('addressJson', TextType::class)
-            ->add('address', TextType::class)
-            ->add('city', TextType::class)
-            ->add('zipCode', TextType::class)
-            ->add('country', TextType::class)
             ->add('projects', RelayNodeType::class, [
                 'multiple' => true,
                 'class' => Project::class
             ])
+            ->add('address', TextType::class)
+            ->add('city', TextType::class)
+            ->add('zipCode', TextType::class)
+            ->add('country', TextType::class)
             ->add('customCode', TextType::class)
-            ->add('author', EntityType::class, ['class' => User::class])
             ->add('themes', EntityType::class, [
                 'class' => Theme::class,
                 'multiple' => true,
