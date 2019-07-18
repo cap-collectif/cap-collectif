@@ -19,7 +19,7 @@ class ThemeAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position'
+        '_sort_by' => 'position',
     ];
     private $indexer;
 
@@ -69,41 +69,41 @@ class ThemeAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'admin.fields.theme.title'
+                'label' => 'admin.fields.theme.title',
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.theme.position'
+                'label' => 'admin.fields.theme.position',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.theme.is_enabled'
+                'label' => 'admin.fields.theme.is_enabled',
             ])
             ->add('projects', null, [
-                'label' => 'admin.fields.theme.projects'
+                'label' => 'admin.fields.theme.projects',
             ])
             ->add('events', null, [
-                'label' => 'admin.fields.theme.events'
+                'label' => 'admin.fields.theme.events',
             ])
             ->add('posts', null, [
-                'label' => 'admin.fields.theme.posts'
+                'label' => 'admin.fields.theme.posts',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.theme.created_at'
+                'label' => 'admin.fields.theme.created_at',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.theme.updated_at'
+                'label' => 'admin.fields.theme.updated_at',
             ])
             ->add(
                 'Author',
                 'doctrine_orm_model_autocomplete',
                 [
-                    'label' => 'admin.fields.theme.author'
+                    'label' => 'admin.fields.theme.author',
                 ],
                 null,
                 [
                     'property' => 'email,username',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    }
+                    },
                 ]
             );
     }
@@ -112,40 +112,44 @@ class ThemeAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'admin.fields.theme.title'
+                'label' => 'admin.fields.theme.title',
             ])
             ->add('Author', null, [
-                'label' => 'admin.fields.theme.author'
+                'label' => 'admin.fields.theme.author',
             ])
             ->add('status', null, [
                 'label' => 'admin.fields.theme.status',
                 'template' => 'CapcoAdminBundle:Theme:status_list_field.html.twig',
-                'statusesLabels' => Theme::$statusesLabels
+                'statusesLabels' => Theme::$statusesLabels,
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.theme.position'
+                'label' => 'admin.fields.theme.position',
+            ])
+            ->add('projectsCount', null, [
+                'label' => 'admin.fields.theme.projects_count',
+                'template' => 'CapcoAdminBundle:Theme:projects_count_list_field.html.twig',
             ])
             ->add('eventsCount', null, [
                 'label' => 'admin.fields.theme.events_count',
-                'template' => 'CapcoAdminBundle:Theme:events_count_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Theme:events_count_list_field.html.twig',
             ])
             ->add('postsCount', null, [
                 'label' => 'admin.fields.theme.posts_count',
-                'template' => 'CapcoAdminBundle:Theme:posts_count_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Theme:posts_count_list_field.html.twig',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.theme.is_enabled'
+                'label' => 'admin.fields.theme.is_enabled',
             ])
             ->add('updatedAt', 'datetime', [
-                'label' => 'admin.fields.theme.updated_at'
+                'label' => 'admin.fields.theme.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
@@ -154,58 +158,58 @@ class ThemeAdmin extends AbstractAdmin
         $formMapper
             ->add('title', null, [
                 'label' => 'admin.fields.theme.title',
-                'required' => true
+                'required' => true,
             ])
             ->add('slug', null, [
                 'label' => 'admin.fields.page.slug',
                 'attr' => [
                     'read-only' => true,
-                    'disabled' => true
-                ]
+                    'disabled' => true,
+                ],
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.theme.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                }
+                },
             ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.theme.is_enabled',
-                'required' => false
+                'required' => false,
             ])
             ->add('position', IntegerType::class, [
-                'label' => 'admin.fields.theme.position'
+                'label' => 'admin.fields.theme.position',
             ])
             ->add('teaser', TextareaType::class, [
                 'label' => 'admin.fields.theme.teaser',
-                'required' => false
+                'required' => false,
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.theme.body',
                 'config_name' => 'admin_editor',
-                'required' => false
+                'required' => false,
             ])
             ->add('status', ChoiceType::class, [
                 'label' => 'admin.fields.theme.status',
                 'choices' => Theme::$statusesLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
-                'placeholder' => 'admin.fields.theme.no_status'
+                'placeholder' => 'admin.fields.theme.no_status',
             ])
             ->add(
                 'media',
                 'sonata_type_model_list',
                 [
                     'required' => false,
-                    'label' => 'admin.fields.theme.media'
+                    'label' => 'admin.fields.theme.media',
                 ],
                 [
                     'link_parameters' => [
                         'context' => 'default',
                         'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image'
-                    ]
+                        'provider' => 'sonata.media.provider.image',
+                    ],
                 ]
             )
             ->end();
@@ -214,7 +218,7 @@ class ThemeAdmin extends AbstractAdmin
             ->add('metaDescription', null, [
                 'label' => 'theme.metadescription',
                 'required' => false,
-                'help' => 'admin.help.metadescription'
+                'help' => 'admin.help.metadescription',
             ])
             ->add('customCode', null, [
                 'label' => 'admin.customcode',
@@ -222,8 +226,8 @@ class ThemeAdmin extends AbstractAdmin
                 'help' => 'admin.help.customcode',
                 'attr' => [
                     'rows' => 10,
-                    'placeholder' => '<script type="text/javascript"> </script>'
-                ]
+                    'placeholder' => '<script type="text/javascript"> </script>',
+                ],
             ])
             ->end();
     }
@@ -232,46 +236,46 @@ class ThemeAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'admin.fields.theme.title'
+                'label' => 'admin.fields.theme.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.theme.is_enabled'
+                'label' => 'admin.fields.theme.is_enabled',
             ])
             ->add('teaser', null, [
-                'label' => 'admin.fields.theme.teaser'
+                'label' => 'admin.fields.theme.teaser',
             ])
             ->add('body', null, [
-                'label' => 'admin.fields.theme.body'
+                'label' => 'admin.fields.theme.body',
             ])
             ->add('status', null, [
                 'label' => 'admin.fields.theme.status',
                 'template' => 'CapcoAdminBundle:Theme:status_show_field.html.twig',
-                'statusesLabels' => Theme::$statusesLabels
+                'statusesLabels' => Theme::$statusesLabels,
             ])
             ->add('position', null, [
-                'label' => 'admin.fields.theme.position'
+                'label' => 'admin.fields.theme.position',
             ])
             ->add('Author', null, [
-                'label' => 'admin.fields.theme.author'
+                'label' => 'admin.fields.theme.author',
             ])
             ->add('projects', null, [
-                'label' => 'admin.fields.theme.projects'
+                'label' => 'admin.fields.theme.projects',
             ])
             ->add('events', null, [
-                'label' => 'admin.fields.theme.events'
+                'label' => 'admin.fields.theme.events',
             ])
             ->add('posts', null, [
-                'label' => 'admin.fields.theme.posts'
+                'label' => 'admin.fields.theme.posts',
             ])
             ->add('media', null, [
                 'template' => 'CapcoAdminBundle:Theme:media_show_field.html.twig',
-                'label' => 'admin.fields.theme.media'
+                'label' => 'admin.fields.theme.media',
             ])
             ->add('createdAt', null, [
-                'label' => 'admin.fields.theme.created_at'
+                'label' => 'admin.fields.theme.created_at',
             ])
             ->add('updatedAt', null, [
-                'label' => 'admin.fields.theme.updated_at'
+                'label' => 'admin.fields.theme.updated_at',
             ]);
     }
 }
