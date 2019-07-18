@@ -113,10 +113,16 @@ InternalUser:
         type: 'Int!'
       argumentVotesCount:
         type: 'Int!'
-      proposalsCount:
-        type: 'Int!'
-      proposalVotesCount:
-        type: 'Int!'
+      proposals:
+        type: 'InternalProposalConnection'
+        argsBuilder: 'Relay::Connection'
+        description: 'Get all proposals of the user.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProposalsResolver", [value, args])'
+        args:
+          first:
+            type: 'Int'
+            description: 'Returns the first n elements from the list.'
+            defaultValue: 100
       commentVotes:
         type: 'CommentVoteConnection!'
         argsBuilder: 'Relay::Connection'

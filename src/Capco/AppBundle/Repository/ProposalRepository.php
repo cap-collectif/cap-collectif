@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Doctrine\ORM\QueryBuilder;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -114,7 +115,7 @@ class ProposalRepository extends EntityRepository
             } else {
                 $proposalsWithStep[$collectStep->getId()] = [
                     'step' => $collectStep,
-                    'proposals' => [$result],
+                    'proposals' => [$result]
                 ];
             }
         }
@@ -588,6 +589,39 @@ class ProposalRepository extends EntityRepository
         $query->groupBy('pf.step');
 
         return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function getProposalsByAuthorizedAuthor(User $user)
+    {
+        /** @var QueryBuilder $qb */
+        $qb = $this->getIsEnabledQueryBuilder('p')
+            ->andWhere('p.author = :user')
+            ->leftJoin('p.project', 'project')
+            ->leftJoin('p.author', 'u')
+            ->leftJoin('u.userGroups', 'ug')
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->orX(
+                        $qb
+                            ->expr()
+                            ->orX(
+                                $qb
+                                    ->expr()
+                                    ->eq(
+                                        'project.visibility',
+                                        ProjectVisibilityMode::VISIBILITY_PUBLIC
+                                    ),
+                                $qb
+                                    ->expr()
+                                    ->orX(
+                                        $qb->expr()->in('ROLE_SUPER_ADMIN', $user->getRoles()),
+                                        $qb->expr()->in($user, 'project.authors')
+                                    )
+                            )
+                    )
+            )
+            ->setParameter(':user', $user);
     }
 
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
