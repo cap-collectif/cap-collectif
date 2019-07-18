@@ -155,13 +155,18 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'translation_domain' => 'CapcoAppBundle'
             ])
             ->end()
-            ->with('admin.fields.opinion_type.group_votes')
-            ->add('voteWidgetType', 'choice', [
+            ->with('admin.fields.opinion_type.group_votes');
+
+        if ($user->isSuperAdmin()) {
+            $formMapper->add('voteWidgetType', 'choice', [
                 'label' => 'admin.fields.opinion_type.vote_widget_type',
                 'choices' => OpinionType::$voteWidgetLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true
-            ])
+            ]);
+        }
+
+        $formMapper
             ->add('votesHelpText', 'textarea', [
                 'label' => 'admin.fields.opinion_type.votes_help_text',
                 'required' => false
