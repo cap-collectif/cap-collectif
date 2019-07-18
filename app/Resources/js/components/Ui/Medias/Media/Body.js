@@ -11,7 +11,7 @@ type Props = {
 
 export const Container = styled(MediaBtsp.Body)`
   flex: 1;
-  overflow: initial;
+  overflow: auto;
 
   a.excerpt:hover {
     color: ${colors.darkGray};
