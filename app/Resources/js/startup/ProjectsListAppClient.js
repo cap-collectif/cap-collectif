@@ -10,6 +10,7 @@ type Props = {|
   paginate?: boolean,
   themeId?: string,
   authorId?: string,
+  onlyPublic?: boolean,
 |};
 
 export default (props: Props) => (
