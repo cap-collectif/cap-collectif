@@ -29,7 +29,11 @@ class ProposalPageComments extends React.Component<Props> {
       <div className={classNames(classes)}>
         {proposal.form.commentable && (
           // $FlowFixMe
-          <CommentSectionFragmented isAuthenticated={isAuthenticated} commentable={proposal} />
+          <CommentSectionFragmented
+            isAuthenticated={isAuthenticated}
+            commentable={proposal}
+            invertedBackground={false}
+          />
         )}
       </div>
     );

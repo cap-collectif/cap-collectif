@@ -36,7 +36,7 @@ class CommentVoteButton extends React.Component<Props> {
     const { comment } = this.props;
     if (comment.author && comment.author.isViewer) {
       return (
-        <button disabled="disabled" className="btn btn-dark-gray btn-sm">
+        <button type="button" disabled="disabled" className="btn btn-dark-gray btn-xs">
           <i className="cap-hand-like-2" /> {<FormattedMessage id="comment.vote.submit" />}
         </button>
       );
@@ -51,11 +51,12 @@ class CommentVoteButton extends React.Component<Props> {
     if (comment.viewerHasVote) {
       return (
         <button
+          type="button"
           ref={ref => {
             // $FlowFixMe
             this.target = ref;
           }}
-          className="btn btn-danger btn-sm"
+          className="btn btn-danger btn-xs"
           onClick={this.deleteVote}>
           {/* $FlowFixMe */}
           <UnpublishedTooltip
@@ -69,7 +70,7 @@ class CommentVoteButton extends React.Component<Props> {
 
     return (
       <LoginOverlay>
-        <button className="btn btn-success btn--outline btn-sm" onClick={this.vote}>
+        <button type="button" className="btn btn-success btn--outline btn-xs" onClick={this.vote}>
           <i className="cap-hand-like-2" /> {<FormattedMessage id="comment.vote.submit" />}
         </button>
       </LoginOverlay>
@@ -79,8 +80,8 @@ class CommentVoteButton extends React.Component<Props> {
   render() {
     const { comment } = this.props;
     return (
-      <span className="comment__agree">
-        {this.renderFormOrDisabled()}{' '}
+      <span>
+        <form className="opinion__votes-button">{this.renderFormOrDisabled()} </form>
         <span className="opinion__votes-nb">{comment.votes.totalCount}</span>
       </span>
     );

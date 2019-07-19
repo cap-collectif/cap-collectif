@@ -3,97 +3,86 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import classNames from 'classnames';
 import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import CommentInfos from './CommentInfos';
-import CommentDate from './CommentDate';
 import CommentBody from './CommentBody';
 import CommentVoteButton from './CommentVoteButton';
 import CommentReportButton from './CommentReportButton';
 import CommentEdit from './CommentEdit';
 import CommentAnswers from './CommentAnswers';
 import CommentForm from './CommentForm';
+import Media from '../Ui/Medias/Media/Media';
+import { CommentContainer } from './styles';
 import type { Comment_comment } from '~relay/Comment_comment.graphql';
 
 type Props = {
   comment: Comment_comment,
   isHighlighted?: ?boolean,
   disabledButton?: ?boolean,
+  invertedBackground?: ?boolean,
 };
 
 type State = {
   answerFormShown: boolean,
-  answerFormFocus: boolean,
 };
 
 export class Comment extends React.Component<Props, State> {
-  state = { answerFormShown: false, answerFormFocus: false };
+  static defaultProps = {
+    invertedBackground: true,
+  };
+
+  state = { answerFormShown: false };
 
   focusAnswer = () => {
     this.setState({
       answerFormShown: true,
-      answerFormFocus: true,
     });
   };
 
   render() {
-    const { comment, isHighlighted, disabledButton } = this.props;
-    const classes = classNames({
-      opinion: true,
-      'opinion--comment': true,
-    });
-    const detailClasses = classNames({
-      'bg-vip': comment.author && comment.author.vip,
-      comment__descripton: true,
-      'highlighted-comment': isHighlighted,
-    });
+    const { comment, isHighlighted, invertedBackground, disabledButton } = this.props;
+    const { answerFormShown } = this.state;
 
     return (
-      <li className={classes}>
-        <div className="opinion__body">
-          <div className="opinion__content">
+      <CommentContainer
+        as="li"
+        invertedBackground={invertedBackground || (comment.author && comment.author.vip)}
+        isHighlighted={isHighlighted}>
+        <Media className="opinion">
+          <Media.Left>
             {/* $FlowFixMe Will be a fragment soon */}
             <UserAvatarDeprecated user={comment.author} />
-            <div className="comment__detail">
-              <div className={detailClasses} id={`comment_${comment.id}`}>
-                <div className="opinion__data">
-                  {/* $FlowFixMe $refType */}
-                  <CommentInfos comment={comment} />
-                </div>
-                {/* $FlowFixMe $refType */}
-                <CommentBody comment={comment} />
-              </div>
-              <div className="comment__action">
-                {/* $FlowFixMe $refType */}
-                <CommentDate comment={comment} />
-                {!disabledButton && (
-                  <div className="comment__buttons">
-                    {/* $FlowFixMe $refType */}
-                    <CommentVoteButton comment={comment} />{' '}
-                    <Button
-                      bsStyle="link"
-                      bsSize="sm"
-                      onClick={this.focusAnswer}
-                      className="btn-dark-gray btn--outline">
-                      <i className="cap-reply-mail-2" /> <FormattedMessage id="global.answer" />
-                    </Button>{' '}
-                    {/* $FlowFixMe $refType */}
-                    <CommentReportButton comment={comment} /> {/* $FlowFixMe $refType */}
-                    <CommentEdit comment={comment} />{' '}
-                  </div>
-                )}
-              </div>
+          </Media.Left>
+          <Media.Body className="opinion__body" id={`comment_${comment.id}`}>
+            <div className="opinion__data">
+              {/* $FlowFixMe $refType */}
+              <CommentInfos comment={comment} />
             </div>
-          </div>
-          <div className="comment-answers-block">
             {/* $FlowFixMe $refType */}
-            <CommentAnswers comment={comment} />
-            {this.state.answerFormShown ? (
-              <CommentForm commentable={comment} answerOf={comment.id} />
-            ) : null}
-          </div>
-        </div>
-      </li>
+            <CommentBody comment={comment} />
+            {!disabledButton && (
+              <div className="small">
+                {/* $FlowFixMe $refType */}
+                <CommentVoteButton comment={comment} />{' '}
+                <Button
+                  bsSize="xsmall"
+                  onClick={this.focusAnswer}
+                  className="btn-dark-gray btn--outline">
+                  <i className="cap-reply-mail-2" /> <FormattedMessage id="global.answer" />
+                </Button>{' '}
+                {/* $FlowFixMe $refType */}
+                <CommentReportButton comment={comment} /> {/* $FlowFixMe $refType */}
+                <CommentEdit comment={comment} />{' '}
+              </div>
+            )}
+            <div>
+              {/* $FlowFixMe $refType */}
+              <CommentAnswers invertedBackground={invertedBackground} comment={comment} />
+              {answerFormShown ? <CommentForm commentable={comment} answerOf={comment.id} /> : null}
+            </div>
+          </Media.Body>
+        </Media>
+      </CommentContainer>
     );
   }
 }

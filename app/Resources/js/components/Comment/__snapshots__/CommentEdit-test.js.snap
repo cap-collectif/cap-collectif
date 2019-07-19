@@ -2,7 +2,7 @@
 
 exports[`<CommentEdit /> should render correctly 1`] = `
 <a
-  className="btn btn-dark-gray btn--outline btn-sm"
+  className="btn btn-xs btn-dark-gray btn--outline"
   href="https://aa.com/"
 >
   <i

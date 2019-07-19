@@ -155,7 +155,7 @@ const Comment = ({ item, answers, invertedBackground, isAnswer, disabledButtons 
               <React.Fragment>
                 <span>
                   <Button
-                    className="btn--outline btn-dark-gray argument__btn--report"
+                    className="btn--outline btn-dark-gray"
                     active={item.reported}
                     disabled={item.reported}
                     bsSize="xs"
@@ -174,7 +174,7 @@ const Comment = ({ item, answers, invertedBackground, isAnswer, disabledButtons 
               <React.Fragment>
                 <button
                   type="button"
-                  className="argument__btn--edit btn btn-xs btn-dark-gray btn--outline"
+                  className="btn btn-xs btn-dark-gray btn--outline"
                   onClick={() => {}}>
                   <i className="cap cap-pencil-1" /> <FormattedMessage id="global.edit" />
                 </button>{' '}
@@ -184,7 +184,7 @@ const Comment = ({ item, answers, invertedBackground, isAnswer, disabledButtons 
               <React.Fragment>
                 <button
                   type="button"
-                  className="argument__btn--delete btn btn-xs btn-danger btn--outline"
+                  className="btn btn-xs btn-danger btn--outline"
                   onClick={() => {}}>
                   <i className="cap cap-bin-2" /> <FormattedMessage id="global.delete" />
                 </button>{' '}
@@ -192,15 +192,17 @@ const Comment = ({ item, answers, invertedBackground, isAnswer, disabledButtons 
             )}
           </div>
         )}
-        {answers && (
-          <CommentAnswersContainer id="comments-answers">
-            {answers.map((answer, index) => (
-              <li key={index}>
-                <Comment isAnswer invertedBackground={invertedBackground} item={answer} />
-              </li>
-            ))}
-          </CommentAnswersContainer>
-        )}
+        <div>
+          {answers && (
+            <CommentAnswersContainer id="comments-answers">
+              {answers.map((answer, index) => (
+                <li key={index}>
+                  <Comment isAnswer invertedBackground={invertedBackground} item={answer} />
+                </li>
+              ))}
+            </CommentAnswersContainer>
+          )}
+        </div>
       </Media.Body>
     </Media>
   </CommentContainer>

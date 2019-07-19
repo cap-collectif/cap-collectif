@@ -13,7 +13,7 @@ export class CommentEdit extends React.Component<Props> {
     const { comment } = this.props;
     if (comment.contribuable && comment.author && comment.author.isViewer) {
       return (
-        <a href={comment.editUrl} className="btn btn-dark-gray btn--outline btn-sm">
+        <a href={comment.editUrl} className="btn btn-xs btn-dark-gray btn--outline">
           <i className="cap cap-pencil-1" />
           <FormattedMessage id="comment.update.button" />
         </a>

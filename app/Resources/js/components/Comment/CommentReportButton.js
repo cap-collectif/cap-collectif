@@ -26,8 +26,8 @@ export class CommentReportButton extends React.Component<Props> {
         reported={comment.viewerHasReport || false}
         onReport={this.handleReport}
         author={{ uniqueId: comment.author ? comment.author.slug : null }}
-        buttonBsSize="sm"
-        buttonClassName="btn btn-sm btn-dark-gray btn--outline"
+        buttonBsSize="xs"
+        buttonClassName="btn btn-dark-gray btn--outline"
       />
     );
   }

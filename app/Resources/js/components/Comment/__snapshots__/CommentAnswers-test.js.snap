@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CommentAnswers /> should render correctly 1`] = `
-<ul
-  className="media-list opinion__list comment-answers"
-  id="comments"
+<styles__CommentAnswersContainer
+  id="comments-answers"
 >
   <ForwardRef(Relay(CommentAnswer))
     comment={
@@ -25,7 +24,7 @@ exports[`<CommentAnswers /> should render correctly 1`] = `
     isHighlighted={false}
     key="2"
   />
-</ul>
+</styles__CommentAnswersContainer>
 `;
 
 exports[`<CommentAnswers /> should render correctly with no answers 1`] = `""`;

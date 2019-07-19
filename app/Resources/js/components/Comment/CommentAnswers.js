@@ -1,23 +1,18 @@
 // @flow
 import React from 'react';
-import classNames from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import CommentAnswer from './CommentAnswer';
+import { CommentAnswersContainer } from './styles';
 import type { CommentAnswers_comment } from '~relay/CommentAnswers_comment.graphql';
 
 type Props = {
   comment: CommentAnswers_comment,
+  invertedBackground?: ?boolean,
 };
 
 type State = {
   highlightedComment: ?string,
 };
-
-const classes = classNames({
-  'media-list': true,
-  opinion__list: true,
-  'comment-answers': true,
-});
 
 export class CommentAnswers extends React.Component<Props, State> {
   state = {
@@ -25,19 +20,20 @@ export class CommentAnswers extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    if (location.hash.length > 0) {
+    if (window.location.hash.length > 0) {
       this.setState({ highlightedComment: location.hash.split('_')[1] }); // eslint-disable-line
     }
   }
 
   render() {
-    const { comment } = this.props;
+    const { comment, invertedBackground } = this.props;
+    const { highlightedComment } = this.state;
     if (!comment.answers || comment.answers.totalCount === 0) {
       return null;
     }
 
     return (
-      <ul id="comments" className={classes}>
+      <CommentAnswersContainer id="comments-answers">
         {comment.answers &&
           comment.answers.edges &&
           comment.answers.edges
@@ -49,10 +45,11 @@ export class CommentAnswers extends React.Component<Props, State> {
               <CommentAnswer
                 key={node.id}
                 comment={node}
-                isHighlighted={node.id === this.state.highlightedComment}
+                isHighlighted={node.id === highlightedComment}
+                invertedBackground={invertedBackground}
               />
             ))}
-      </ul>
+      </CommentAnswersContainer>
     );
   }
 }

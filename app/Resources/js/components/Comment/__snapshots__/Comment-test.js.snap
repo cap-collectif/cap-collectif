@@ -1,15 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`] = `
-<li
-  className="opinion opinion--comment"
+<styles__CommentContainer
+  as="li"
+  invertedBackground={true}
 >
-  <div
-    className="opinion__body"
+  <Media
+    className="opinion"
   >
-    <div
-      className="opinion__content"
-    >
+    <Left>
       <Connect(UserAvatarDeprecated)
         user={
           Object {
@@ -19,139 +18,30 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
           }
         }
       />
-      <div
-        className="comment__detail"
-      >
-        <div
-          className="bg-vip comment__descripton"
-          id="comment_proposalComment1"
-        >
-          <div
-            className="opinion__data"
-          >
-            <ForwardRef(Relay(CommentInfos))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-          </div>
-          <ForwardRef(Relay(CommentBody))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "admin",
-                  "media": null,
-                  "vip": true,
-                },
-                "id": "proposalComment1",
-              }
-            }
-          />
-        </div>
-        <div
-          className="comment__action"
-        >
-          <ForwardRef(Relay(CommentDate))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "admin",
-                  "media": null,
-                  "vip": true,
-                },
-                "id": "proposalComment1",
-              }
-            }
-          />
-          <div
-            className="comment__buttons"
-          >
-            <ForwardRef(Relay(CommentVoteButton))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsSize="sm"
-              bsStyle="link"
-              className="btn-dark-gray btn--outline"
-              disabled={false}
-              onClick={[Function]}
-            >
-              <i
-                className="cap-reply-mail-2"
-              />
-               
-              <FormattedMessage
-                id="global.answer"
-                values={Object {}}
-              />
-            </Button>
-             
-            <ForwardRef(Relay(Connect(CommentReportButton)))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-            <ForwardRef(Relay(CommentEdit))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="comment-answers-block"
+    </Left>
+    <Body
+      className="opinion__body"
+      id="comment_proposalComment1"
     >
-      <ForwardRef(Relay(CommentAnswers))
+      <div
+        className="opinion__data"
+      >
+        <ForwardRef(Relay(CommentInfos))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+      </div>
+      <ForwardRef(Relay(CommentBody))
         comment={
           Object {
             "$fragmentRefs": null,
@@ -165,21 +55,106 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
           }
         }
       />
-    </div>
-  </div>
-</li>
+      <div
+        className="small"
+      >
+        <ForwardRef(Relay(CommentVoteButton))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+         
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="xsmall"
+          bsStyle="default"
+          className="btn-dark-gray btn--outline"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <i
+            className="cap-reply-mail-2"
+          />
+           
+          <FormattedMessage
+            id="global.answer"
+            values={Object {}}
+          />
+        </Button>
+         
+        <ForwardRef(Relay(Connect(CommentReportButton)))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+         
+        <ForwardRef(Relay(CommentEdit))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+         
+      </div>
+      <div>
+        <ForwardRef(Relay(CommentAnswers))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+          invertedBackground={true}
+        />
+      </div>
+    </Body>
+  </Media>
+</styles__CommentContainer>
 `;
 
 exports[`<Comment /> <Comment /> not shown and not focus should render correctly 1`] = `
-<li
-  className="opinion opinion--comment"
+<styles__CommentContainer
+  as="li"
+  invertedBackground={true}
 >
-  <div
-    className="opinion__body"
+  <Media
+    className="opinion"
   >
-    <div
-      className="opinion__content"
-    >
+    <Left>
       <Connect(UserAvatarDeprecated)
         user={
           Object {
@@ -189,139 +164,30 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
           }
         }
       />
-      <div
-        className="comment__detail"
-      >
-        <div
-          className="bg-vip comment__descripton"
-          id="comment_proposalComment1"
-        >
-          <div
-            className="opinion__data"
-          >
-            <ForwardRef(Relay(CommentInfos))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-          </div>
-          <ForwardRef(Relay(CommentBody))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "admin",
-                  "media": null,
-                  "vip": true,
-                },
-                "id": "proposalComment1",
-              }
-            }
-          />
-        </div>
-        <div
-          className="comment__action"
-        >
-          <ForwardRef(Relay(CommentDate))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "admin",
-                  "media": null,
-                  "vip": true,
-                },
-                "id": "proposalComment1",
-              }
-            }
-          />
-          <div
-            className="comment__buttons"
-          >
-            <ForwardRef(Relay(CommentVoteButton))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsSize="sm"
-              bsStyle="link"
-              className="btn-dark-gray btn--outline"
-              disabled={false}
-              onClick={[Function]}
-            >
-              <i
-                className="cap-reply-mail-2"
-              />
-               
-              <FormattedMessage
-                id="global.answer"
-                values={Object {}}
-              />
-            </Button>
-             
-            <ForwardRef(Relay(Connect(CommentReportButton)))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-            <ForwardRef(Relay(CommentEdit))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="comment-answers-block"
+    </Left>
+    <Body
+      className="opinion__body"
+      id="comment_proposalComment1"
     >
-      <ForwardRef(Relay(CommentAnswers))
+      <div
+        className="opinion__data"
+      >
+        <ForwardRef(Relay(CommentInfos))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+      </div>
+      <ForwardRef(Relay(CommentBody))
         comment={
           Object {
             "$fragmentRefs": null,
@@ -335,21 +201,106 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
           }
         }
       />
-    </div>
-  </div>
-</li>
+      <div
+        className="small"
+      >
+        <ForwardRef(Relay(CommentVoteButton))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+         
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="xsmall"
+          bsStyle="default"
+          className="btn-dark-gray btn--outline"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <i
+            className="cap-reply-mail-2"
+          />
+           
+          <FormattedMessage
+            id="global.answer"
+            values={Object {}}
+          />
+        </Button>
+         
+        <ForwardRef(Relay(Connect(CommentReportButton)))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+         
+        <ForwardRef(Relay(CommentEdit))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+         
+      </div>
+      <div>
+        <ForwardRef(Relay(CommentAnswers))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+          invertedBackground={true}
+        />
+      </div>
+    </Body>
+  </Media>
+</styles__CommentContainer>
 `;
 
 exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
-<li
-  className="opinion opinion--comment"
+<styles__CommentContainer
+  as="li"
+  invertedBackground={true}
 >
-  <div
-    className="opinion__body"
+  <Media
+    className="opinion"
   >
-    <div
-      className="opinion__content"
-    >
+    <Left>
       <Connect(UserAvatarDeprecated)
         user={
           Object {
@@ -359,139 +310,30 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
           }
         }
       />
-      <div
-        className="comment__detail"
-      >
-        <div
-          className="bg-vip comment__descripton"
-          id="comment_proposalComment1"
-        >
-          <div
-            className="opinion__data"
-          >
-            <ForwardRef(Relay(CommentInfos))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-          </div>
-          <ForwardRef(Relay(CommentBody))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "admin",
-                  "media": null,
-                  "vip": true,
-                },
-                "id": "proposalComment1",
-              }
-            }
-          />
-        </div>
-        <div
-          className="comment__action"
-        >
-          <ForwardRef(Relay(CommentDate))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "admin",
-                  "media": null,
-                  "vip": true,
-                },
-                "id": "proposalComment1",
-              }
-            }
-          />
-          <div
-            className="comment__buttons"
-          >
-            <ForwardRef(Relay(CommentVoteButton))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsSize="sm"
-              bsStyle="link"
-              className="btn-dark-gray btn--outline"
-              disabled={false}
-              onClick={[Function]}
-            >
-              <i
-                className="cap-reply-mail-2"
-              />
-               
-              <FormattedMessage
-                id="global.answer"
-                values={Object {}}
-              />
-            </Button>
-             
-            <ForwardRef(Relay(Connect(CommentReportButton)))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-            <ForwardRef(Relay(CommentEdit))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="comment-answers-block"
+    </Left>
+    <Body
+      className="opinion__body"
+      id="comment_proposalComment1"
     >
-      <ForwardRef(Relay(CommentAnswers))
+      <div
+        className="opinion__data"
+      >
+        <ForwardRef(Relay(CommentInfos))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+      </div>
+      <ForwardRef(Relay(CommentBody))
         comment={
           Object {
             "$fragmentRefs": null,
@@ -505,36 +347,121 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
           }
         }
       />
-      <ForwardRef(Relay(Connect(ReduxForm)))
-        answerOf="proposalComment1"
-        commentable={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "author": Object {
-              "displayName": "admin",
-              "media": null,
-              "vip": true,
-            },
-            "id": "proposalComment1",
+      <div
+        className="small"
+      >
+        <ForwardRef(Relay(CommentVoteButton))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
           }
-        }
-      />
-    </div>
-  </div>
-</li>
+        />
+         
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="xsmall"
+          bsStyle="default"
+          className="btn-dark-gray btn--outline"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <i
+            className="cap-reply-mail-2"
+          />
+           
+          <FormattedMessage
+            id="global.answer"
+            values={Object {}}
+          />
+        </Button>
+         
+        <ForwardRef(Relay(Connect(CommentReportButton)))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+         
+        <ForwardRef(Relay(CommentEdit))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+         
+      </div>
+      <div>
+        <ForwardRef(Relay(CommentAnswers))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+          invertedBackground={true}
+        />
+        <ForwardRef(Relay(Connect(ReduxForm)))
+          answerOf="proposalComment1"
+          commentable={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+      </div>
+    </Body>
+  </Media>
+</styles__CommentContainer>
 `;
 
 exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`] = `
-<li
-  className="opinion opinion--comment"
+<styles__CommentContainer
+  as="li"
+  invertedBackground={true}
 >
-  <div
-    className="opinion__body"
+  <Media
+    className="opinion"
   >
-    <div
-      className="opinion__content"
-    >
+    <Left>
       <Connect(UserAvatarDeprecated)
         user={
           Object {
@@ -544,139 +471,30 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
           }
         }
       />
-      <div
-        className="comment__detail"
-      >
-        <div
-          className="bg-vip comment__descripton"
-          id="comment_proposalComment1"
-        >
-          <div
-            className="opinion__data"
-          >
-            <ForwardRef(Relay(CommentInfos))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-          </div>
-          <ForwardRef(Relay(CommentBody))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "admin",
-                  "media": null,
-                  "vip": true,
-                },
-                "id": "proposalComment1",
-              }
-            }
-          />
-        </div>
-        <div
-          className="comment__action"
-        >
-          <ForwardRef(Relay(CommentDate))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "admin",
-                  "media": null,
-                  "vip": true,
-                },
-                "id": "proposalComment1",
-              }
-            }
-          />
-          <div
-            className="comment__buttons"
-          >
-            <ForwardRef(Relay(CommentVoteButton))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsSize="sm"
-              bsStyle="link"
-              className="btn-dark-gray btn--outline"
-              disabled={false}
-              onClick={[Function]}
-            >
-              <i
-                className="cap-reply-mail-2"
-              />
-               
-              <FormattedMessage
-                id="global.answer"
-                values={Object {}}
-              />
-            </Button>
-             
-            <ForwardRef(Relay(Connect(CommentReportButton)))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-            <ForwardRef(Relay(CommentEdit))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "admin",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "proposalComment1",
-                }
-              }
-            />
-             
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="comment-answers-block"
+    </Left>
+    <Body
+      className="opinion__body"
+      id="comment_proposalComment1"
     >
-      <ForwardRef(Relay(CommentAnswers))
+      <div
+        className="opinion__data"
+      >
+        <ForwardRef(Relay(CommentInfos))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+      </div>
+      <ForwardRef(Relay(CommentBody))
         comment={
           Object {
             "$fragmentRefs": null,
@@ -690,36 +508,122 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
           }
         }
       />
-      <ForwardRef(Relay(Connect(ReduxForm)))
-        answerOf="proposalComment1"
-        commentable={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "author": Object {
-              "displayName": "admin",
-              "media": null,
-              "vip": true,
-            },
-            "id": "proposalComment1",
+      <div
+        className="small"
+      >
+        <ForwardRef(Relay(CommentVoteButton))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
           }
-        }
-      />
-    </div>
-  </div>
-</li>
+        />
+         
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="xsmall"
+          bsStyle="default"
+          className="btn-dark-gray btn--outline"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <i
+            className="cap-reply-mail-2"
+          />
+           
+          <FormattedMessage
+            id="global.answer"
+            values={Object {}}
+          />
+        </Button>
+         
+        <ForwardRef(Relay(Connect(CommentReportButton)))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+         
+        <ForwardRef(Relay(CommentEdit))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+         
+      </div>
+      <div>
+        <ForwardRef(Relay(CommentAnswers))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+          invertedBackground={true}
+        />
+        <ForwardRef(Relay(Connect(ReduxForm)))
+          answerOf="proposalComment1"
+          commentable={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "admin",
+                "media": null,
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+      </div>
+    </Body>
+  </Media>
+</styles__CommentContainer>
 `;
 
 exports[`<Comment /> should render correctly highlighted 1`] = `
-<li
-  className="opinion opinion--comment"
+<styles__CommentContainer
+  as="li"
+  invertedBackground={true}
+  isHighlighted={true}
 >
-  <div
-    className="opinion__body"
+  <Media
+    className="opinion"
   >
-    <div
-      className="opinion__content"
-    >
+    <Left>
       <Connect(UserAvatarDeprecated)
         user={
           Object {
@@ -731,151 +635,32 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
           }
         }
       />
-      <div
-        className="comment__detail"
-      >
-        <div
-          className="bg-vip comment__descripton highlighted-comment"
-          id="comment_comment1"
-        >
-          <div
-            className="opinion__data"
-          >
-            <ForwardRef(Relay(CommentInfos))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "jcVandam",
-                    "media": Object {
-                      "url": "http://perdu.com/image.jpg",
-                    },
-                    "vip": true,
-                  },
-                  "id": "comment1",
-                }
-              }
-            />
-          </div>
-          <ForwardRef(Relay(CommentBody))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "jcVandam",
-                  "media": Object {
-                    "url": "http://perdu.com/image.jpg",
-                  },
-                  "vip": true,
-                },
-                "id": "comment1",
-              }
-            }
-          />
-        </div>
-        <div
-          className="comment__action"
-        >
-          <ForwardRef(Relay(CommentDate))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "jcVandam",
-                  "media": Object {
-                    "url": "http://perdu.com/image.jpg",
-                  },
-                  "vip": true,
-                },
-                "id": "comment1",
-              }
-            }
-          />
-          <div
-            className="comment__buttons"
-          >
-            <ForwardRef(Relay(CommentVoteButton))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "jcVandam",
-                    "media": Object {
-                      "url": "http://perdu.com/image.jpg",
-                    },
-                    "vip": true,
-                  },
-                  "id": "comment1",
-                }
-              }
-            />
-             
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsSize="sm"
-              bsStyle="link"
-              className="btn-dark-gray btn--outline"
-              disabled={false}
-              onClick={[Function]}
-            >
-              <i
-                className="cap-reply-mail-2"
-              />
-               
-              <FormattedMessage
-                id="global.answer"
-                values={Object {}}
-              />
-            </Button>
-             
-            <ForwardRef(Relay(Connect(CommentReportButton)))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "jcVandam",
-                    "media": Object {
-                      "url": "http://perdu.com/image.jpg",
-                    },
-                    "vip": true,
-                  },
-                  "id": "comment1",
-                }
-              }
-            />
-             
-            <ForwardRef(Relay(CommentEdit))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "jcVandam",
-                    "media": Object {
-                      "url": "http://perdu.com/image.jpg",
-                    },
-                    "vip": true,
-                  },
-                  "id": "comment1",
-                }
-              }
-            />
-             
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="comment-answers-block"
+    </Left>
+    <Body
+      className="opinion__body"
+      id="comment_comment1"
     >
-      <ForwardRef(Relay(CommentAnswers))
+      <div
+        className="opinion__data"
+      >
+        <ForwardRef(Relay(CommentInfos))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "jcVandam",
+                "media": Object {
+                  "url": "http://perdu.com/image.jpg",
+                },
+                "vip": true,
+              },
+              "id": "comment1",
+            }
+          }
+        />
+      </div>
+      <ForwardRef(Relay(CommentBody))
         comment={
           Object {
             "$fragmentRefs": null,
@@ -891,21 +676,115 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
           }
         }
       />
-    </div>
-  </div>
-</li>
+      <div
+        className="small"
+      >
+        <ForwardRef(Relay(CommentVoteButton))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "jcVandam",
+                "media": Object {
+                  "url": "http://perdu.com/image.jpg",
+                },
+                "vip": true,
+              },
+              "id": "comment1",
+            }
+          }
+        />
+         
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="xsmall"
+          bsStyle="default"
+          className="btn-dark-gray btn--outline"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <i
+            className="cap-reply-mail-2"
+          />
+           
+          <FormattedMessage
+            id="global.answer"
+            values={Object {}}
+          />
+        </Button>
+         
+        <ForwardRef(Relay(Connect(CommentReportButton)))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "jcVandam",
+                "media": Object {
+                  "url": "http://perdu.com/image.jpg",
+                },
+                "vip": true,
+              },
+              "id": "comment1",
+            }
+          }
+        />
+         
+        <ForwardRef(Relay(CommentEdit))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "jcVandam",
+                "media": Object {
+                  "url": "http://perdu.com/image.jpg",
+                },
+                "vip": true,
+              },
+              "id": "comment1",
+            }
+          }
+        />
+         
+      </div>
+      <div>
+        <ForwardRef(Relay(CommentAnswers))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "jcVandam",
+                "media": Object {
+                  "url": "http://perdu.com/image.jpg",
+                },
+                "vip": true,
+              },
+              "id": "comment1",
+            }
+          }
+          invertedBackground={true}
+        />
+      </div>
+    </Body>
+  </Media>
+</styles__CommentContainer>
 `;
 
 exports[`<Comment /> should render correctly not highlighted 1`] = `
-<li
-  className="opinion opinion--comment"
+<styles__CommentContainer
+  as="li"
+  invertedBackground={true}
+  isHighlighted={false}
 >
-  <div
-    className="opinion__body"
+  <Media
+    className="opinion"
   >
-    <div
-      className="opinion__content"
-    >
+    <Left>
       <Connect(UserAvatarDeprecated)
         user={
           Object {
@@ -915,139 +794,30 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
           }
         }
       />
-      <div
-        className="comment__detail"
-      >
-        <div
-          className="bg-vip comment__descripton"
-          id="comment_comment2"
-        >
-          <div
-            className="opinion__data"
-          >
-            <ForwardRef(Relay(CommentInfos))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "jcVandam",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "comment2",
-                }
-              }
-            />
-          </div>
-          <ForwardRef(Relay(CommentBody))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "jcVandam",
-                  "media": null,
-                  "vip": true,
-                },
-                "id": "comment2",
-              }
-            }
-          />
-        </div>
-        <div
-          className="comment__action"
-        >
-          <ForwardRef(Relay(CommentDate))
-            comment={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "author": Object {
-                  "displayName": "jcVandam",
-                  "media": null,
-                  "vip": true,
-                },
-                "id": "comment2",
-              }
-            }
-          />
-          <div
-            className="comment__buttons"
-          >
-            <ForwardRef(Relay(CommentVoteButton))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "jcVandam",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "comment2",
-                }
-              }
-            />
-             
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsSize="sm"
-              bsStyle="link"
-              className="btn-dark-gray btn--outline"
-              disabled={false}
-              onClick={[Function]}
-            >
-              <i
-                className="cap-reply-mail-2"
-              />
-               
-              <FormattedMessage
-                id="global.answer"
-                values={Object {}}
-              />
-            </Button>
-             
-            <ForwardRef(Relay(Connect(CommentReportButton)))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "jcVandam",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "comment2",
-                }
-              }
-            />
-             
-            <ForwardRef(Relay(CommentEdit))
-              comment={
-                Object {
-                  "$fragmentRefs": null,
-                  "$refType": null,
-                  "author": Object {
-                    "displayName": "jcVandam",
-                    "media": null,
-                    "vip": true,
-                  },
-                  "id": "comment2",
-                }
-              }
-            />
-             
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="comment-answers-block"
+    </Left>
+    <Body
+      className="opinion__body"
+      id="comment_comment2"
     >
-      <ForwardRef(Relay(CommentAnswers))
+      <div
+        className="opinion__data"
+      >
+        <ForwardRef(Relay(CommentInfos))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "jcVandam",
+                "media": null,
+                "vip": true,
+              },
+              "id": "comment2",
+            }
+          }
+        />
+      </div>
+      <ForwardRef(Relay(CommentBody))
         comment={
           Object {
             "$fragmentRefs": null,
@@ -1061,22 +831,108 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
           }
         }
       />
-      <ForwardRef(Relay(Connect(ReduxForm)))
-        answerOf="comment2"
-        commentable={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "author": Object {
-              "displayName": "jcVandam",
-              "media": null,
-              "vip": true,
-            },
-            "id": "comment2",
+      <div
+        className="small"
+      >
+        <ForwardRef(Relay(CommentVoteButton))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "jcVandam",
+                "media": null,
+                "vip": true,
+              },
+              "id": "comment2",
+            }
           }
-        }
-      />
-    </div>
-  </div>
-</li>
+        />
+         
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="xsmall"
+          bsStyle="default"
+          className="btn-dark-gray btn--outline"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <i
+            className="cap-reply-mail-2"
+          />
+           
+          <FormattedMessage
+            id="global.answer"
+            values={Object {}}
+          />
+        </Button>
+         
+        <ForwardRef(Relay(Connect(CommentReportButton)))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "jcVandam",
+                "media": null,
+                "vip": true,
+              },
+              "id": "comment2",
+            }
+          }
+        />
+         
+        <ForwardRef(Relay(CommentEdit))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "jcVandam",
+                "media": null,
+                "vip": true,
+              },
+              "id": "comment2",
+            }
+          }
+        />
+         
+      </div>
+      <div>
+        <ForwardRef(Relay(CommentAnswers))
+          comment={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "jcVandam",
+                "media": null,
+                "vip": true,
+              },
+              "id": "comment2",
+            }
+          }
+          invertedBackground={true}
+        />
+        <ForwardRef(Relay(Connect(ReduxForm)))
+          answerOf="comment2"
+          commentable={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "jcVandam",
+                "media": null,
+                "vip": true,
+              },
+              "id": "comment2",
+            }
+          }
+        />
+      </div>
+    </Body>
+  </Media>
+</styles__CommentContainer>
 `;

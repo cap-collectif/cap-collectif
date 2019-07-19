@@ -2,7 +2,6 @@
 import React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import classNames from 'classnames';
 import Comment from './Comment';
 import type { CommentListViewPaginated_commentable } from '~relay/CommentListViewPaginated_commentable.graphql';
 
@@ -11,22 +10,18 @@ type Props = {
   intl: IntlShape,
   commentable: CommentListViewPaginated_commentable,
   highlightedComment: ?string,
+  invertedBackground?: ?boolean,
 };
 
 export class CommentListViewPaginated extends React.Component<Props> {
   render() {
-    const { intl, commentable, relay, highlightedComment } = this.props;
+    const { intl, commentable, relay, highlightedComment, invertedBackground } = this.props;
     if (!commentable.comments || commentable.comments.totalCount === 0) {
       return null;
     }
 
-    const classes = classNames({
-      'media-list': true,
-      opinion__list: true,
-    });
-
     return (
-      <ul id="comments" className={classes}>
+      <ul id="comments" className="media-list">
         {commentable.comments &&
           commentable.comments.edges &&
           commentable.comments.edges
@@ -38,11 +33,13 @@ export class CommentListViewPaginated extends React.Component<Props> {
               <Comment
                 key={node.id}
                 comment={node}
+                invertedBackground={invertedBackground}
                 isHighlighted={node.id === highlightedComment}
               />
             ))}
         {relay.hasMore() && (
           <button
+            type="button"
             id="comments-section-load-more"
             className="btn btn-block btn-secondary"
             data-loading-text={intl.formatMessage({ id: 'global.loading' })}

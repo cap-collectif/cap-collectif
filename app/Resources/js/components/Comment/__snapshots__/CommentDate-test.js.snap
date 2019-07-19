@@ -2,11 +2,10 @@
 
 exports[`<CommentDate /> should render correctly 1`] = `
 <span
-  className="h5 comment__date"
+  className="excerpt small"
 >
-  <span
-    className="excerpt"
-  >
+   • 
+  <span>
     <FormattedDate
       day="numeric"
       hour="numeric"
@@ -16,10 +15,8 @@ exports[`<CommentDate /> should render correctly 1`] = `
       year="numeric"
     />
   </span>
-  <br />
-  <span
-    className="excerpt"
-  >
+  <span>
+     • 
     <FormattedMessage
       id="comment.edited"
       values={Object {}}
@@ -39,11 +36,10 @@ exports[`<CommentDate /> should render correctly 1`] = `
 
 exports[`<CommentDate /> should render correctly with trashed false 1`] = `
 <span
-  className="h5 comment__date"
+  className="excerpt small"
 >
-  <span
-    className="excerpt"
-  >
+   • 
+  <span>
     <FormattedDate
       day="numeric"
       hour="numeric"
@@ -53,10 +49,8 @@ exports[`<CommentDate /> should render correctly with trashed false 1`] = `
       year="numeric"
     />
   </span>
-  <br />
-  <span
-    className="excerpt"
-  >
+  <span>
+     • 
     <FormattedMessage
       id="comment.edited"
       values={Object {}}
@@ -76,11 +70,10 @@ exports[`<CommentDate /> should render correctly with trashed false 1`] = `
 
 exports[`<CommentDate /> should render null with createdAt > publishedAt 1`] = `
 <span
-  className="h5 comment__date"
+  className="excerpt small"
 >
-  <span
-    className="excerpt"
-  >
+   • 
+  <span>
     <FormattedDate
       day="numeric"
       hour="numeric"
@@ -90,6 +83,5 @@ exports[`<CommentDate /> should render null with createdAt > publishedAt 1`] = `
       year="numeric"
     />
   </span>
-  <br />
 </span>
 `;

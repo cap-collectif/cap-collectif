@@ -10,11 +10,12 @@ type Props = {
   intl: IntlShape,
   commentable: CommentSectionFragmented_commentable,
   isAuthenticated: boolean,
+  invertedBackground?: ?boolean,
 };
 
 export function CommentSectionView(props: Props) {
   const [order, setOrder] = useState('last');
-  const { isAuthenticated, intl, commentable } = props;
+  const { isAuthenticated, intl, invertedBackground, commentable } = props;
 
   const updateSelectedValue = (e: any) => {
     setOrder({
@@ -55,7 +56,12 @@ export function CommentSectionView(props: Props) {
       {/* $FlowFixMe */}
       <CommentForm commentable={commentable} />
       {/* $FlowFixMe */}
-      <CommentListView isAuthenticated={isAuthenticated} order={order} commentable={commentable} />
+      <CommentListView
+        isAuthenticated={isAuthenticated}
+        order={order}
+        commentable={commentable}
+        invertedBackground={invertedBackground}
+      />
     </div>
   );
 }

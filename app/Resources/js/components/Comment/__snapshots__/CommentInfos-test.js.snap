@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CommentInfos /> should render correctly 1`] = `
-<p
-  className="h5  opinion__user"
+<div
+  className="opinion__user"
 >
   <UserLink
     className=""
@@ -13,7 +13,21 @@ exports[`<CommentInfos /> should render correctly 1`] = `
       }
     }
   />
-    
+   
+  <ForwardRef(Relay(CommentDate))
+    comment={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "displayName": "Pipoudou",
+          "url": "https://aa.com/",
+        },
+        "authorName": "Poupidou",
+        "pinned": false,
+      }
+    }
+  />
   <PinnedLabel
     show={false}
     type="comment"
@@ -32,17 +46,28 @@ exports[`<CommentInfos /> should render correctly 1`] = `
       }
     }
   />
-</p>
+</div>
 `;
 
 exports[`<CommentInfos /> should render correctly with no author 1`] = `
-<p
-  className="h5  opinion__user"
+<div
+  className="opinion__user"
 >
   <span>
     Poupidou
   </span>
-    
+   
+  <ForwardRef(Relay(CommentDate))
+    comment={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": null,
+        "authorName": "Poupidou",
+        "pinned": false,
+      }
+    }
+  />
   <PinnedLabel
     show={false}
     type="comment"
@@ -58,5 +83,5 @@ exports[`<CommentInfos /> should render correctly with no author 1`] = `
       }
     }
   />
-</p>
+</div>
 `;

@@ -17,7 +17,7 @@ export class CommentDate extends React.Component<Props> {
     }
 
     return (
-      <span className="excerpt">
+      <span>
         <FormattedDate
           value={moment(comment.createdAt)}
           day="numeric"
@@ -41,7 +41,8 @@ export class CommentDate extends React.Component<Props> {
     }
 
     return (
-      <span className="excerpt">
+      <span>
+        {' • '}
         {<FormattedMessage id="comment.edited" />}{' '}
         <FormattedDate
           value={moment(comment.updatedAt)}
@@ -57,9 +58,9 @@ export class CommentDate extends React.Component<Props> {
 
   render() {
     return (
-      <span className="h5 comment__date">
+      <span className="excerpt small">
+        {' • '}
         {this.renderDate()}
-        <br />
         {this.renderEditionDate()}
       </span>
     );

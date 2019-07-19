@@ -13,6 +13,7 @@ type Props = {
   isAuthenticated: boolean,
   order: CommentOrderBy,
   relay: RelayRefetchProp,
+  invertedBackground?: ?boolean,
 };
 
 type State = {
@@ -69,17 +70,20 @@ export class CommentListView extends React.Component<Props, State> {
   };
 
   render() {
-    if (this.state.isRefetching) {
+    const { highlightedComment, isRefetching } = this.state;
+
+    if (isRefetching) {
       return <Loader />;
     }
 
-    const { commentable } = this.props;
+    const { commentable, invertedBackground } = this.props;
 
     return (
       // $FlowFixMe
       <CommentListViewPaginated
         commentable={commentable}
-        highlightedComment={this.state.highlightedComment}
+        highlightedComment={highlightedComment}
+        invertedBackground={invertedBackground}
       />
     );
   }

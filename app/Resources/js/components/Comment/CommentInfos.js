@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import CommentDate from './CommentDate';
 import PinnedLabel from '../Utils/PinnedLabel';
 import UnpublishedLabel from '../Publishable/UnpublishedLabel';
 import UserLink from '../User/UserLink';
@@ -23,12 +24,12 @@ export class CommentInfos extends React.Component<Props> {
   render() {
     const { comment } = this.props;
     return (
-      <p className="h5  opinion__user">
-        {this.renderAuthorName()}
-        {'  '}
+      <div className="opinion__user">
+        {this.renderAuthorName()} {/* $FlowFixMe $refType */}
+        <CommentDate comment={comment} />
         <PinnedLabel show={comment.pinned} type="comment" />
         <UnpublishedLabel publishable={comment} />
-      </p>
+      </div>
     );
   }
 }
