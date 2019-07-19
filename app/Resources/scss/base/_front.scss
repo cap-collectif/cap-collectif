@@ -283,18 +283,6 @@ h2 + h3 {
   display: block;
 }
 
-// Show a play icon on top of images
-.play:before {
-  position: absolute;
-  z-index: 1000;
-  top: 50%;
-  left: 50%;
-  display: block;
-  content: "";
-  margin-top: -($custom-video-play / 2);
-  margin-left: -($custom-video-play / 2);
-  @include triangle($white, 'left', $custom-video-play);
-}
 
 /*// Show length of video, stored in link's data-length attribute
 .play[data-length]:before {
