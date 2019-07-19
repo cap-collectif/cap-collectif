@@ -444,6 +444,9 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     {
         /** @var Consultation $consultation */
         $consultation = $this->consultation;
+        if (!$consultation) {
+            return false;
+        }
 
         /** @var OpinionType $opinionType */
         foreach ($consultation->getOpinionTypes() as $opinionType) {
