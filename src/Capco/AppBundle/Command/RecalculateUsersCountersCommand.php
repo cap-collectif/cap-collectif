@@ -68,6 +68,14 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         $this->ids = $redis->smembers($redisKey);
         $redis->del($redisKey);
 
+        $this->compute(
+            'UPDATE CapcoUserBundle:User u set u.proposalsCount = (
+          SELECT count(p.id) FROM CapcoAppBundle:Proposal p
+          WHERE p.author = u AND p.published = 1 AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL
+          GROUP BY p.author
+        )'
+        );
+
         if (
             $this->force ||
             $this->em
