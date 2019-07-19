@@ -127,8 +127,10 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
-            ->leftJoin('o.step', 'ostep')
-            ->leftJoin('ovo.step', 'ovostep')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 'ostep')
+            ->leftJoin('ovo.consultation', 'ovoc')
+            ->leftJoin('ovoc.step', 'ovostep')
             ->leftJoin('ostep.projectAbstractStep', 'opas')
             ->leftJoin('ovostep.projectAbstractStep', 'ovopas')
             ->andWhere('opas.project = :project OR ovopas.project = :project')
@@ -146,10 +148,12 @@ class SourceRepository extends EntityRepository
     {
         $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT(DISTINCT s)')
-            ->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
+            ->leftJoin('s.opinion', 'o')
+            ->leftJoin('o.consultation', 'oc')
             ->leftJoin('ov.parent', 'ovo')
-            ->andWhere('o.step = :step OR ovo.step = :step')
+            ->leftJoin('ovo.consultation', 'ovoc')
+            ->andWhere('oc.step = :step OR ovoc.step = :step')
             ->andWhere('s.author = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
@@ -191,7 +195,8 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.category', 'ca')
             ->leftJoin('s.media', 'media')
             ->leftJoin('s.opinion', 'o')
-            ->leftJoin('o.step', 'cs')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 'cs')
             ->leftJoin('cs.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->leftJoin('s.author', 'aut')
@@ -219,8 +224,10 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
-            ->leftJoin('o.step', 'ostep')
-            ->leftJoin('ovo.step', 'ovostep')
+            ->leftJoin('ovo.consultation', 'ovoc')
+            ->leftJoin('ovoc.step', 'ovostep')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 'ostep')
             ->leftJoin('ostep.projectAbstractStep', 'opas')
             ->leftJoin('ovostep.projectAbstractStep', 'ovopas')
             ->andWhere('opas.project = :project OR ovopas.project = :project')
@@ -238,6 +245,8 @@ class SourceRepository extends EntityRepository
             ->select('count(DISTINCT s.id)')
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('ovo.consultation', 'ovoc')
+            ->leftJoin('o.consultation', 'oc')
             ->leftJoin('s.opinion', 'o')
             ->andWhere('s.published = 1')
             ->andWhere('s.trashedAt IS NULL')
@@ -245,8 +254,8 @@ class SourceRepository extends EntityRepository
                 $query
                     ->expr()
                     ->orX(
-                        's.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs',
-                        's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs'
+                        's.opinion IS NOT NULL AND o.published = 1 AND oc.step = :cs',
+                        's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovoc.step = :cs'
                     )
             )
             ->setParameter('cs', $cs);
@@ -261,6 +270,8 @@ class SourceRepository extends EntityRepository
             ->select('count(DISTINCT s.id)')
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('ovo.consultation', 'ovoc')
+            ->leftJoin('o.consultation', 'oc')
             ->leftJoin('s.opinion', 'o')
             ->andWhere('s.published = 1')
             ->andWhere('s.trashedAt IS NOT NULL')
@@ -268,8 +279,8 @@ class SourceRepository extends EntityRepository
                 $query
                     ->expr()
                     ->orX(
-                        's.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs',
-                        's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs'
+                        's.opinion IS NOT NULL AND o.published = 1 AND oc.step = :cs',
+                        's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovoc.step = :cs'
                     )
             )
             ->setParameter('cs', $cs);

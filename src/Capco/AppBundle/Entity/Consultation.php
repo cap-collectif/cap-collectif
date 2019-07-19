@@ -83,7 +83,7 @@ class Consultation
     private $moderatingOnUpdate = false;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="step",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="consultation",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $opinions;
 

@@ -17,7 +17,7 @@ class OpinionVoteRepository extends EntityRepository
         $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT (DISTINCT v)')
             ->leftJoin('v.opinion', 'o')
-            ->andWhere('o.step IN (:steps)')
+            ->leftJoin('o.consultation', 'oc', 'WITH', 'oc.step IN (:steps)')
             ->andWhere('o.published = 1')
             ->andWhere('v.user = :author')
             ->setParameter(
@@ -50,7 +50,7 @@ class OpinionVoteRepository extends EntityRepository
         $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT (DISTINCT v)')
             ->leftJoin('v.opinion', 'o')
-            ->andWhere('o.step = :step')
+            ->leftJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
             ->andWhere('o.published = 1')
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
