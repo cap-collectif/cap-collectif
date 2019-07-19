@@ -20,8 +20,11 @@
         position: relative;
         width:auto;
         height: auto;
+        
+        a{cursor: default;}
 
         .play-button {
+            cursor: pointer;
             position: absolute;
             z-index: 1000;
             top: 50%;
@@ -36,12 +39,13 @@
         }
 
         .triangle {
+            cursor: pointer;
             position: absolute;
             z-index: 1000;
             width: 100px;
             top: 50%;
             left: 50%;
-            transform: translateX(-35%) translateY(-55%) scale(1.2);
+            transform: translateX(-35%) translateY(-50%) scale(1.2);
             display: block;
             content: "";
             @include triangle($white, 'left', $custom-video-play);
