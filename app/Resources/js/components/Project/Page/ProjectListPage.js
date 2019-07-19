@@ -4,7 +4,7 @@ import { Row } from 'react-bootstrap';
 import ProjectList from '../List/ProjectsList';
 import ProjectListFiltersContainer from '../List/Filters/ProjectListFiltersContainer';
 
-type Props = {
+export type Props = {
   limit?: ?number,
 };
 

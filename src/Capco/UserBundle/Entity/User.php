@@ -107,11 +107,6 @@ class User extends BaseUser implements
     /**
      * @var int
      */
-    protected $projectsCount = 0;
-
-    /**
-     * @var int
-     */
     protected $sourcesCount = 0;
 
     /**
@@ -729,16 +724,6 @@ class User extends BaseUser implements
     }
 
     /**
-     * Gets the value of projectsCount.
-     *
-     * @return int
-     */
-    public function getProjectsCount()
-    {
-        return $this->projectsCount;
-    }
-
-    /**
      * Gets the value of sourcesCount.
      *
      * @return int
@@ -848,20 +833,6 @@ class User extends BaseUser implements
     public function setArgumentsCount($argumentsCount)
     {
         $this->argumentsCount = $argumentsCount;
-
-        return $this;
-    }
-
-    /**
-     * Sets the value of projectsCount.
-     *
-     * @param int $projectsCount the sources count
-     *
-     * @return self
-     */
-    public function setProjectsCount($projectsCount)
-    {
-        $this->projectsCount = $projectsCount;
 
         return $this;
     }

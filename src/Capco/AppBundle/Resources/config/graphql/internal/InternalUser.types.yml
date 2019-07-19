@@ -143,8 +143,6 @@ InternalUser:
       eventCommentsCount:
         type: 'Int!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventCommentsCountResolver", [value])'
-      projectsCount:
-        type: 'Int!'
       consentExternalCommunication:
         type: 'Boolean!'
         description: 'Whether or not this user consent external communication.'
@@ -284,3 +282,8 @@ InternalUser:
         type: 'InternalResponseConnection!'
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserUrlResolver", [value])'
+      projects:
+        type: 'InternalProjectConnection!'
+        description: 'Get all projects the user has created.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProjectsResolver", [value, args])'
+        argsBuilder: 'Relay::Connection'
