@@ -105,8 +105,10 @@ export default createPaginationContainer(
           edges {
             node {
               id
-              lat
-              lng
+              googleMapsAddress {
+                lat
+                lng
+              }
             }
           }
         }

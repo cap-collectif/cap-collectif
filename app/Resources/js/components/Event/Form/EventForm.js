@@ -293,8 +293,12 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
           props.event && props.event.author
             ? { value: props.event.author.id, label: props.event.author.displayName }
             : null,
-        addressText: props.event && props.event.fullAddress ? props.event.fullAddress : null,
-        addressJson: props.event && props.event.addressJson ? props.event.addressJson : null,
+        addressText:
+          props.event && props.event.googleMapsAddress
+            ? props.event.googleMapsAddress.formatted
+            : null,
+        addressJson:
+          props.event && props.event.googleMapsAddress ? props.event.googleMapsAddress.json : null,
       },
     };
   }
@@ -309,6 +313,7 @@ const container = connect(mapStateToProps)(injectIntl(formContainer));
 export const EventCreateForm = container;
 
 export default createFragmentContainer(container, {
+  /* eslint-disable relay/unused-fields */
   event: graphql`
     fragment EventForm_event on Event {
       id
@@ -317,8 +322,10 @@ export default createFragmentContainer(container, {
         endAt
       }
       title
-      addressJson
-      fullAddress
+      googleMapsAddress {
+        formatted
+        json
+      }
       enabled
       body
       commentable

@@ -60,3 +60,6 @@ InternalEvent:
         type: 'String'
       country:
         type: 'String'
+      googleMapsAddress:
+        type: 'GoogleMapsAddress'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", [value])'

@@ -29,8 +29,10 @@ Scenario: Admin wants to add an event
             }
             link
             commentable
-            addressJson
-            fullAddress
+            googleMapsAddress {
+              json
+              formatted
+            }
           }
         }
       }
@@ -84,11 +86,12 @@ Scenario: Admin wants to add an event
                        "id":"UHJvamVjdDpwcm9qZWN0Mg=="
                     }
                  ],
-                 "addressJson":"[{\"address_components\":[{\"long_name\":\"25\",\"short_name\":\"25\",\"types\":[\"street_number\"]},{\"long_name\":\"Rue Claude Tillier\",\"short_name\":\"Rue Claude Tillier\",\"types\":[\"route\"]},{\"long_name\":\"Paris\",\"short_name\":\"Paris\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Arrondissement de Paris\",\"short_name\":\"Arrondissement de Paris\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"Île-de-France\",\"short_name\":\"Île-de-France\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"75012\",\"short_name\":\"75012\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"25 Rue Claude Tillier, 75012 Paris, France\",\"geometry\":{\"bounds\":{\"south\":48.8484736,\"west\":2.3882939999999735,\"north\":48.8485762,\"east\":2.388451199999963},\"location\":{\"lat\":48.8485327,\"lng\":2.3883663000000297},\"location_type\":\"ROOFTOP\",\"viewport\":{\"south\":48.8471759197085,\"west\":2.3870236197085433,\"north\":48.8498738802915,\"east\":2.389721580291507}},\"place_id\":\"ChIJGRpmzgxy5kcRPt50gCGa7kM\",\"types\":[\"premise\"]}]",
-                 "link":"https:\/\/facebook.com\/inscrivez-vous-ici",
+                "link":"https:\/\/facebook.com\/inscrivez-vous-ici",
                  "commentable":false,
-                 "fullAddress":"25 Rue Claude Tillier, 75012 Paris, France"
-
+                 "googleMapsAddress": {
+                     "json":"[{\"address_components\":[{\"long_name\":\"25\",\"short_name\":\"25\",\"types\":[\"street_number\"]},{\"long_name\":\"Rue Claude Tillier\",\"short_name\":\"Rue Claude Tillier\",\"types\":[\"route\"]},{\"long_name\":\"Paris\",\"short_name\":\"Paris\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Arrondissement de Paris\",\"short_name\":\"Arrondissement de Paris\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"Île-de-France\",\"short_name\":\"Île-de-France\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"75012\",\"short_name\":\"75012\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"25 Rue Claude Tillier, 75012 Paris, France\",\"geometry\":{\"bounds\":{\"south\":48.8484736,\"west\":2.3882939999999735,\"north\":48.8485762,\"east\":2.388451199999963},\"location\":{\"lat\":48.8485327,\"lng\":2.3883663000000297},\"location_type\":\"ROOFTOP\",\"viewport\":{\"south\":48.8471759197085,\"west\":2.3870236197085433,\"north\":48.8498738802915,\"east\":2.389721580291507}},\"place_id\":\"ChIJGRpmzgxy5kcRPt50gCGa7kM\",\"types\":[\"premise\"]}]",
+                      "formatted":"25 Rue Claude Tillier, 75012 Paris, France"
+                 }
               }
            }
         }
