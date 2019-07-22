@@ -46,7 +46,7 @@ import {
   type ResponsesInReduxForm,
 } from '../../../utils/responsesHelper';
 import environment from '../../../createRelayEnvironment';
-import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
+import { validateProposalContent, warnProposalContent } from '../Admin/ProposalAdminContentForm';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 
@@ -223,21 +223,11 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 const validate = (values: FormValues, { proposalForm, features, intl }: Props) => {
-  const errors = {};
+  return validateProposalContent(values, proposalForm, features, intl, values.draft);
+};
 
-  if (values.draft) {
-    if (!values.title) {
-      errors.title = 'proposal.constraints.title_for_draft';
-    } else if (values.title.length <= 2) {
-      errors.title = 'proposal.constraints.title';
-    }
-    if (values.summary && values.summary.length > 140) {
-      errors.summary = 'proposal.constraints.summary';
-    }
-    return errors;
-  }
-
-  return validateProposalContent(values, proposalForm, features, intl);
+const warn = (values: FormValues, { proposalForm, features, intl }: Props) => {
+  return warnProposalContent(values, proposalForm, features, intl, values.draft);
 };
 
 type State = {
@@ -611,6 +601,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
 
 const form = reduxForm({
   form: formName,
+  warn,
   validate,
   onSubmit,
 })(ProposalForm);

@@ -13,6 +13,7 @@ exports[`<Field /> pass input props to children 1`] = `
   placeholder={null}
   type="text"
   validationState={null}
+  warnings={null}
   wrapperClassName=""
 />
 `;
@@ -30,6 +31,7 @@ exports[`<Field /> renders a default <Input /> element 1`] = `
   placeholder={null}
   type="text"
   validationState={null}
+  warnings={null}
   wrapperClassName=""
 />
 `;
@@ -50,6 +52,7 @@ exports[`<Field /> renders a div around <Input /> element 1`] = `
     placeholder={null}
     type="text"
     validationState={null}
+    warnings={null}
     wrapperClassName=""
   />
 </div>
@@ -68,6 +71,7 @@ exports[`<Field /> renders a validated <Input /> element 1`] = `
   placeholder={null}
   type="text"
   validationState="success"
+  warnings={null}
   wrapperClassName=""
 />
 `;
@@ -85,6 +89,7 @@ exports[`<Field /> renders a validation disabled <Input /> element 1`] = `
   placeholder={null}
   type="text"
   validationState={null}
+  warnings={null}
   wrapperClassName=""
 />
 `;
@@ -107,6 +112,7 @@ exports[`<Field /> renders an error <Input /> element 1`] = `
   placeholder={null}
   type="text"
   validationState="error"
+  warnings={null}
   wrapperClassName=""
 />
 `;
