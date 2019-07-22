@@ -456,6 +456,17 @@
         }
     {% endif %}
 
+    {% if header2Text is not null %}
+        .event .month {
+            color: {{ header2Text | raw }}
+        }
+    {% endif %}
+
+    {% if header2Bg is not null %}
+    .event .month {
+        background-color: {{ btnPrimary | raw }};
+    }
+    {% endif %}
 
     .appendices__item h4 {
         color: {{ mainText | raw }}
