@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
+<div>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={[Function]}
+    render={[Function]}
+    variables={
+      Object {
+        "eventId": "event1",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
+<div>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={[Function]}
+    render={[Function]}
+    variables={
+      Object {
+        "eventId": "",
+      }
+    }
+  />
+</div>
+`;

@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = `
+<div>
+  <p>
+    <strong>
+      <FormattedMessage
+        id="permalink-unavailable"
+        values={Object {}}
+      />
+       
+    </strong>
+    <FormattedMessage
+      id="proposal-form-not-linked-to-a-project"
+      values={Object {}}
+    />
+     |
+     
+    <b>
+      proposal_form.admin.reference
+       : 
+    </b>
+     
+  </p>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      event={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
+      onSubmit={[Function]}
+      validate={[Function]}
+    />
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="box-content__toolbar"
+    >
+      <Connect(SubmitButton)
+        disabled={false}
+        id="confirm-event-create"
+        isSubmitting={false}
+        label="action_edit"
+        onSubmit={[Function]}
+      />
+      <AlertForm
+        invalid={false}
+        submitFailed={false}
+        submitSucceeded={false}
+        submitting={false}
+        valid={false}
+      />
+    </ButtonToolbar>
+  </div>
+</div>
+`;
+
+exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
+<div>
+  <p>
+    <strong>
+      <FormattedMessage
+        id="permalink-unavailable"
+        values={Object {}}
+      />
+       
+    </strong>
+    <FormattedMessage
+      id="proposal-form-not-linked-to-a-project"
+      values={Object {}}
+    />
+     |
+     
+    <b>
+      proposal_form.admin.reference
+       : 
+    </b>
+     
+  </p>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      event={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
+      onSubmit={[Function]}
+      validate={[Function]}
+    />
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="box-content__toolbar"
+    >
+      <Connect(SubmitButton)
+        disabled={true}
+        id="confirm-event-create"
+        isSubmitting={true}
+        label="action_edit"
+        onSubmit={[Function]}
+      />
+      <AlertForm
+        invalid={true}
+        submitFailed={true}
+        submitSucceeded={true}
+        submitting={true}
+        valid={true}
+      />
+    </ButtonToolbar>
+  </div>
+</div>
+`;
+
+exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
+<div>
+  <p>
+    <strong>
+      <FormattedMessage
+        id="permalink-unavailable"
+        values={Object {}}
+      />
+       
+    </strong>
+    <FormattedMessage
+      id="proposal-form-not-linked-to-a-project"
+      values={Object {}}
+    />
+     |
+     
+    <b>
+      proposal_form.admin.reference
+       : 
+    </b>
+     
+  </p>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <Connect(InjectIntl(ReduxForm))
+      event={null}
+      onSubmit={[Function]}
+      validate={[Function]}
+    />
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="box-content__toolbar"
+    >
+      <Connect(SubmitButton)
+        disabled={true}
+        id="confirm-event-create"
+        isSubmitting={true}
+        label="global.add"
+        onSubmit={[Function]}
+      />
+      <AlertForm
+        invalid={true}
+        submitFailed={true}
+        submitSucceeded={true}
+        submitting={true}
+        valid={true}
+      />
+    </ButtonToolbar>
+  </div>
+</div>
+`;
