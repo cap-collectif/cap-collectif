@@ -23,7 +23,7 @@ abstract class AbstractSSOConfiguration
     /**
      * @ORM\Column(name="name", type="string", nullable=false)
      */
-    protected $name = '';
+    protected $name;
 
     /**
      * @ORM\Column(name="profile_url", type="text", nullable=true)
