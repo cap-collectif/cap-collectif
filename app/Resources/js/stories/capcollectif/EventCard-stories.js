@@ -53,7 +53,7 @@ class EventCard extends React.Component<Props> {
 
           <div className="event__body event-js">
             <h3 className="event__title">
-              <a href title={event.title}>
+              <a href={event.url} title={event.title}>
                 {event.title}
               </a>
             </h3>

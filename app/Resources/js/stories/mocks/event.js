@@ -2,6 +2,7 @@ import { author } from './users';
 
 export const event = {
   title: 'PHPTourDuTurfu',
+  url: '#',
   image: {
     url: 'https://picsum.photos/300/400',
     alt: 'event picture',
