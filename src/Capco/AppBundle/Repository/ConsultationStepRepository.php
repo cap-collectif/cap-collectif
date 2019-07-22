@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Doctrine\ORM\EntityRepository;
 
 class ConsultationStepRepository extends EntityRepository
@@ -18,13 +19,14 @@ class ConsultationStepRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
-    public function getByOpinionId(string $opinionId)
+    public function getByOpinionId(string $opinionId): ?ConsultationStep
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('p', 'pas')
             ->leftJoin('cs.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')
-            ->innerJoin('cs.opinions', 'opinions')
+            ->leftJoin('cs.consultation', 'csc')
+            ->innerJoin('csc.opinions', 'opinions')
             ->andWhere('opinions.id = :opinionId')
             ->setParameter('opinionId', $opinionId);
 
