@@ -14,27 +14,27 @@ class Oauth2SSOConfiguration extends AbstractSSOConfiguration
     /**
      * @ORM\Column(name="client_id", type="string", nullable=false)
      */
-    protected $clientId;
+    protected $clientId = '';
 
     /**
      * @ORM\Column(name="secret", type="string", nullable=false)
      */
-    protected $secret;
+    protected $secret = '';
 
     /**
      * @ORM\Column(name="authorization_url", type="text", nullable=false)
      */
-    protected $authorizationUrl;
+    protected $authorizationUrl = '';
 
     /**
      * @ORM\Column(name="access_token_url", type="text", nullable=false)
      */
-    protected $accessTokenUrl;
+    protected $accessTokenUrl = '';
 
     /**
      * @ORM\Column(name="user_info_url", type="text", nullable=false)
      */
-    protected $userInfoUrl;
+    protected $userInfoUrl = '';
 
     /**
      * @ORM\Column(name="logout_url", type="text", nullable=true)
