@@ -42,25 +42,23 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
 
   delete = () => {
     const { redirectToAdminUrl, userDeletedIsNotViewer, viewer } = this.props;
-    const { removalType } = this.state;
     DeleteAccountMutation.commit({
-      input: { type: removalType, userId: viewer.id },
+      input: { type: this.state.removalType, userId: viewer.id },
     }).then(() => {
       setTimeout(() => {
         if (redirectToAdminUrl && userDeletedIsNotViewer) {
           window.location = `/admin/capco/user/user/list`;
         } else {
-          window.location = `/logout?deleteType=${removalType}`;
+          window.location = `/logout?deleteType=${this.state.removalType}`;
         }
       }, 1000);
     });
   };
 
   render() {
-    const { removalType } = this.state;
-    const softPanelChecked = removalType === 'SOFT' ? 'delete__panel__checked' : '';
-    const hardPanelChecked = removalType === 'HARD' ? 'delete__panel__checked' : '';
-    const { show, viewer, handleClose } = this.props;
+    const softPanelChecked = this.state.removalType === 'SOFT' ? 'delete__panel__checked' : '';
+    const hardPanelChecked = this.state.removalType === 'HARD' ? 'delete__panel__checked' : '';
+    const { show, viewer } = this.props;
     const removalName = 'type-of-removal';
     return (
       <div>
@@ -68,7 +66,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
           animation={false}
           show={show}
           onHide={() => {
-            handleClose();
+            this.props.handleClose();
           }}
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
@@ -175,7 +173,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                           value="hard"
                           name={removalName}
                           onClick={() => this.onPanelClick('HARD')}
-                          checked={removalType === 'HARD'}>
+                          checked={this.state.removalType === 'HARD'}>
                           <FormattedMessage id="delete-account-and-contents" />
                         </Radio>
                         <p className="delete__content__choice">
@@ -219,7 +217,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
           <Modal.Footer>
             <CloseButton
               onClose={() => {
-                handleClose();
+                this.props.handleClose();
               }}
             />
             <Button

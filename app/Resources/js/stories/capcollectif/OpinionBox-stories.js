@@ -28,7 +28,7 @@ import { UserAvatarDeprecated } from '../../components/User/UserAvatarDeprecated
 import { features } from '../../redux/modules/default';
 import { author as authorMock } from '../mocks/users';
 import { opinion as opinionMock } from '../mocks/opinions';
-import UserAvatarList from '../../components/User/UserAvatarList';
+import { UserAvatarList } from '../../components/User/UserAvatarList';
 
 const headerOption = {
   Gray: 'gray',

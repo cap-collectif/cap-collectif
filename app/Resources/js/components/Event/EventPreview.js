@@ -2,6 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
+import { baseUrl } from '../../config';
 import DatesInterval from '../Utils/DatesInterval';
 import type { EventPreview_event } from '~relay/EventPreview_event.graphql';
 import DateIcon from '../Ui/Dates/DateIcon';
@@ -25,13 +26,23 @@ export class EventPreview extends React.Component<Props> {
     const detailClasses = classNames({
       'highlighted-comment': isHighlighted,
     });
+    const imgURL = event.media && event.media.url ? event.media.url : null;
     return (
-      <React.Fragment>
-        <div className={`d-flex flex-1-1 event block  block--bordered ${detailClasses}`}>
+      <div className={`d-flex flex-1-1 event block  block--bordered ${detailClasses}`}>
+        {imgURL ? (
+          <div className="picture_container" style={{ backgroundImage: `url(${imgURL})` }} />
+        ) : (
+          <div className="picture_container" style={{ backgroundColor: '#eeeeee' }}>
+            <img className="event__picture" src={`${baseUrl}/svg/calendar.svg`} alt="" />
+          </div>
+        )}
+
+        <div className="d-flex event__infos">
           <div className="col-md-2 col-sm-2 hidden-xs">
             <DateIcon startAt={event.timeRange.startAt} />
           </div>
-          <div className="col-md-10 col-sm-10 col-xs-12 event__body box event-js">
+
+          <div className="event__body event-js">
             <h3 className="event__title">
               <a href={event.url} title={event.title}>
                 {event.title}
@@ -42,7 +53,7 @@ export class EventPreview extends React.Component<Props> {
                 {event.author && event.author.username && (
                   <React.Fragment>
                     {/* $FlowFixMe */}
-                    <UserAvatarDeprecated size={16} user={event.author} className="mr-10" />
+                    <UserAvatarDeprecated size={16} user={event.author} />
                     <span className="font-weight-semi-bold">{event.author.username}</span>
                   </React.Fragment>
                 )}
@@ -80,7 +91,7 @@ export class EventPreview extends React.Component<Props> {
             )}
           </div>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
@@ -94,6 +105,9 @@ export default createFragmentContainer(EventPreview, {
       timeRange {
         startAt
         endAt
+      }
+      media {
+        url(format: "default_project")
       }
       title
       fullAddress

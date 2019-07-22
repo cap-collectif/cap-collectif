@@ -25,7 +25,7 @@ const headerOption = {
   Default: 'default',
 };
 
-storiesOf('Core|Card', module).add(
+storiesOf('Core|Cards', module).add(
   'Card',
   () => {
     const cardType = boolean('Display card type', false, 'Type');
