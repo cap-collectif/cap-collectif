@@ -2,15 +2,15 @@
 import * as React from 'react';
 import { number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import Avatar from '../../components/Ui/Medias/Avatar';
+import Avatar from '../../../components/Ui/Medias/Avatar';
 
-import UserAvatarList from '../../components/Ui/List/UserAvatarList';
+import UserAvatarList from '../../../components/Ui/List/UserAvatarList';
 
-import { author } from '../mocks/users';
+import { author } from '../../mocks/users';
 
 const usersMockGenerator = nb => new Array(nb).fill(author);
 
-storiesOf('Cap Collectif|UserAvatarList', module)
+storiesOf('Core|List/UserAvatarList', module)
   .add('default case', () => {
     const users = usersMockGenerator(4);
     const max = number('Max display', 5);
