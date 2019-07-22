@@ -82,6 +82,7 @@ describe('<FollowingsTab />', () => {
     const wrapper = shallow(<FollowingsTab viewer={viewer} />);
     expect(wrapper).toMatchSnapshot();
   });
+
   it('should render an empty list', () => {
     const wrapper = shallow(
       <FollowingsTab
