@@ -155,13 +155,15 @@ class Event implements
     private $guestListEnabled = false;
 
     /**
-     * TODO to remove after recette is ok
+     * TODO to remove after recette is ok.
+     *
      * @ORM\Column(name="similarity_of_new_address", type="float", nullable=true)
      */
     private $similarityOfNewAddress;
 
     /**
-     * TODO to remove after recette is ok
+     * TODO to remove after recette is ok.
+     *
      * @ORM\Column(name="new_address_is_similar", type="boolean", nullable=true)
      */
     private $newAddressIsSimilar;
@@ -565,7 +567,7 @@ class Event implements
         return $this;
     }
 
-    public function getNewAddressIsSimilar(): bool
+    public function getNewAddressIsSimilar(): ?bool
     {
         return $this->newAddressIsSimilar;
     }

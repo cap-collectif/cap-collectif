@@ -217,7 +217,7 @@ class EventRepository extends EntityRepository
         $qb = $this->createQueryBuilder('e')
             ->addSelect('e.id', 'e.address', 'e.zipCode', 'e.country', 'e.city', 'e.lat', 'e.lng')
             ->orderBy('e.createdAt', 'ASC')
-            ->andWhere('e.addressJson is null')
+            ->andWhere('e.addressJson IS NULL')
             ->setFirstResult($offset)
             ->setMaxResults($limit);
 
@@ -228,7 +228,7 @@ class EventRepository extends EntityRepository
     {
         return $this->createQueryBuilder('e')
             ->select('count(e.id)')
-            ->andWhere('e.addressJson is null')
+            ->andWhere('e.addressJson IS NULL')
             ->getQuery()
             ->getSingleScalarResult();
     }

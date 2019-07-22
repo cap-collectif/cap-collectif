@@ -2125,10 +2125,10 @@ type Event implements Node & Commentable {
   enabled: Boolean!
 
   # Identifies the latitude of the event.
-  lat: Float
+  lat: Float @deprecated(reason: "Field `lat` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   # Identifies the longitude of the event.
-  lng: Float
+  lng: Float @deprecated(reason: "Field `lng` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   # Identifies the registration link of the event.
   link: URI @deprecated(reason: "Field `link` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
@@ -2137,7 +2137,7 @@ type Event implements Node & Commentable {
   zipCode: String @deprecated(reason: "Field `zipCode` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   # Identifies the address of the event.
-  fullAddress: String
+  fullAddress: String @deprecated(reason: "Field `fullAddress` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
   # The comments related to the commentable.
   comments(
