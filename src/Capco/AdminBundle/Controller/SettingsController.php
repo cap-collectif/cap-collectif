@@ -25,21 +25,21 @@ class SettingsController extends Controller
         $adminPool = $this->get('sonata.admin.pool');
 
         return [
-            'admin_pool' => $adminPool
+            'admin_pool' => $adminPool,
         ];
     }
 
     /**
      * @Route("/admin/settings/pages.shield/list", name="capco_admin_settings_shield")
      * @Template("@CapcoAdmin/Settings/shield.html.twig")
-     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
-    public function shieldAction()
+    public function shieldAction(Request $request)
     {
         $adminPool = $this->get('sonata.admin.pool');
 
         return [
-            'admin_pool' => $adminPool
+            'admin_pool' => $adminPool,
         ];
     }
 
@@ -62,21 +62,21 @@ class SettingsController extends Controller
 
         $parameters = $this->get(SiteParameterRepository::class)->findBy(
             [
-                'category' => $category
+                'category' => $category,
             ],
             ['position' => 'ASC']
         );
 
         $images = $this->get(SiteImageRepository::class)->findBy(
             [
-                'category' => $category
+                'category' => $category,
             ],
             ['position' => 'ASC']
         );
 
         $colors = $this->get(SiteColorRepository::class)->findBy(
             [
-                'category' => $category
+                'category' => $category,
             ],
             ['position' => 'ASC']
         );
@@ -92,7 +92,7 @@ class SettingsController extends Controller
             'colors' => $colors,
             'images' => $images,
             'toggles' => $toggles,
-            'current_group_label' => $group
+            'current_group_label' => $group,
         ];
     }
 
@@ -141,7 +141,7 @@ class SettingsController extends Controller
 
         return $this->redirect(
             $this->generateUrl('capco_admin_settings', [
-                'category' => $category ?? 'settings.modules'
+                'category' => $category ?? 'settings.modules',
             ])
         );
     }

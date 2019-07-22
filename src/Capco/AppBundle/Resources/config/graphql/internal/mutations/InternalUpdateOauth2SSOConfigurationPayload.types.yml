@@ -1,7 +1,0 @@
-InternalUpdateOauth2SSOConfigurationPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      ssoConfiguration:
-        type: 'InternalOauth2SSOConfiguration'
-        description: 'The updated oauth2 configuration.'
