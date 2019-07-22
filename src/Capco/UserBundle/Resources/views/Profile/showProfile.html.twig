@@ -111,11 +111,12 @@
                     </a>
                 </li>
                 {% endif %}
-                {% if user.proposalsCount > 0 %}
+                {% set proposalsCount = userProposalsResolver.__invoke(app.user, user).totalCount %}
+                {% if proposalsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_proposals' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_proposals', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.proposals'|trans({}, 'CapcoAppBundle') }}</h2>
-                        <p class="profile__value__number">{{ user.proposalsCount }}</p>
+                        <p class="profile__value__number">{{ proposalsCount }}</p>
                     </a>
                 </li>
                 {% endif %}

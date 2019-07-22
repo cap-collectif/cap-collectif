@@ -117,11 +117,6 @@ class User extends BaseUser implements
     /**
      * @var int
      */
-    protected $proposalsCount = 0;
-
-    /**
-     * @var int
-     */
     protected $opinionsCount = 0;
 
     /**
@@ -786,26 +781,6 @@ class User extends BaseUser implements
     /**
      * @return int
      */
-    public function getProposalsCount()
-    {
-        return $this->proposalsCount;
-    }
-
-    /**
-     * @param int $proposalsCount
-     *
-     * @return $this
-     */
-    public function setProposalsCount($proposalsCount)
-    {
-        $this->proposalsCount = $proposalsCount;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
     public function getProposalVotesCount()
     {
         return $this->proposalVotesCount;
@@ -1147,8 +1122,7 @@ class User extends BaseUser implements
             $this->argumentsCount +
             $this->opinionsCount +
             $this->opinionVersionsCount +
-            $this->getCommentsCount() +
-            $this->proposalsCount;
+            $this->getCommentsCount();
     }
 
     public function getCommentsCount(): int

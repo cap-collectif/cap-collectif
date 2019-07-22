@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Doctrine\ORM\QueryBuilder;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -114,7 +115,7 @@ class ProposalRepository extends EntityRepository
             } else {
                 $proposalsWithStep[$collectStep->getId()] = [
                     'step' => $collectStep,
-                    'proposals' => [$result],
+                    'proposals' => [$result]
                 ];
             }
         }
@@ -588,6 +589,144 @@ class ProposalRepository extends EntityRepository
         $query->groupBy('pf.step');
 
         return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function getProposalsByAuthorViewerCanSee(
+        User $viewer,
+        User $user,
+        ?int $limit = null,
+        ?int $offset = null
+    ): array {
+        $qb = $this->createQueryBuilder('p');
+        $this->createProposalsByAuthorViewerCanSeeQuery($viewer, $user, $qb)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function createProposalsByAuthorViewerCanSeeQuery(
+        User $viewer,
+        User $user,
+        QueryBuilder $qb
+    ): QueryBuilder {
+        $visibility = [];
+        $visibility[] = ProjectVisibilityMode::VISIBILITY_PUBLIC;
+        if ($viewer->isSuperAdmin()) {
+            $visibility[] = ProjectVisibilityMode::VISIBILITY_ME;
+            $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
+            $visibility[] = ProjectVisibilityMode::VISIBILITY_CUSTOM;
+        } elseif ($viewer->isAdmin()) {
+            $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
+        }
+        // @var QueryBuilder $qb
+        $qb
+            ->andWhere('p.author = :user')
+            ->leftJoin('p.proposalForm', 'pf')
+            ->leftJoin('pf.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pabs')
+            ->leftJoin('pabs.project', 'pro')
+            ->leftJoin('pro.authors', 'pr_au')
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->orX(
+                        $qb
+                            ->expr()
+                            ->orX(
+                                $qb
+                                    ->expr()
+                                    ->eq(
+                                        'pro.visibility',
+                                        ProjectVisibilityMode::VISIBILITY_PUBLIC
+                                    ),
+                                $qb
+                                    ->expr()
+                                    ->orX(
+                                        $qb->expr()->in(':superAdmin', ':roles'),
+                                        $qb->expr()->eq(':viewer', 'pr_au.user')
+                                    )
+                            ),
+                        $qb
+                            ->expr()
+                            ->andX(
+                                $qb
+                                    ->expr()
+                                    ->eq(
+                                        'pro.visibility',
+                                        ProjectVisibilityMode::VISIBILITY_CUSTOM
+                                    ),
+                                $qb->expr()->in('prvg.id', ':prvgId')
+                            ),
+                        $qb
+                            ->expr()
+                            ->andX(
+                                $qb->expr()->in('pro.visibility', ':visibility'),
+                                $qb
+                                    ->expr()
+                                    ->lt('pro.visibility', ProjectVisibilityMode::VISIBILITY_CUSTOM)
+                            )
+                    )
+            );
+
+        $qb->setParameters([
+            ':viewer' => $viewer,
+            ':user' => $user,
+            ':visibility' => $visibility,
+            ':roles' => $viewer->getRoles(),
+            ':prvgId' => $viewer->getUserGroupIds() ?? [],
+            ':superAdmin' => 'ROLE_SUPER_ADMIN'
+        ]);
+
+        return $qb;
+    }
+
+    public function countProposalsViewerCanSee(User $viewer, User $user): int
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('COUNT(p.id)');
+        $this->createProposalsByAuthorViewerCanSeeQuery($viewer, $user, $qb);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getPublicProposalsByAuthor(
+        User $author,
+        ?int $limit = null,
+        ?int $offset = null
+    ): array {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->andWhere('p.author = :author')
+            ->leftJoin('p.proposalForm', 'pf')
+            ->leftJoin('pf.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pabs')
+            ->leftJoin('pabs.project', 'pro')
+            ->andWhere($qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC));
+
+        $qb
+            ->setParameter(':author', $author)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countPublicProposalsByAuthor(User $author): int
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->select('COUNT(p.id)')
+            ->andWhere('p.author = :author')
+            ->leftJoin('p.proposalForm', 'pf')
+            ->leftJoin('pf.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pabs')
+            ->leftJoin('pabs.project', 'pro')
+            ->andWhere($qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC))
+            ->setParameter(':author', $author);
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
