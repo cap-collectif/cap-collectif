@@ -69,7 +69,7 @@ export class ProposalPreviewBody extends React.Component<Props> {
             <ProposalDetailLikers proposal={proposal} />
           </TagsList>
         </div>
-        <div className="proposal__buttons mt-15">
+        <div className="proposal__buttons">
           {/* $FlowFixMe */
           step && proposal.currentVotableStep && step.id === proposal.currentVotableStep.id && (
             /* $FlowFixMe */

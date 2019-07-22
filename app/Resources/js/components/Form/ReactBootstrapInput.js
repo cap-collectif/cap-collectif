@@ -86,7 +86,6 @@ export type ParentProps = {|
   label?: string | any,
   type: ?string,
   errors?: any,
-  warnings?: any,
   choices?: Array<any>,
   onChange?: any,
   radioChecked?: boolean,
@@ -116,7 +115,6 @@ class ReactBootstrapInput extends React.Component<Props> {
   static defaultProps = {
     labelClassName: 'h5',
     errors: null,
-    warnings: null,
     image: null,
     medias: [],
     helpPrint: true,
@@ -461,14 +459,6 @@ class ReactBootstrapInput extends React.Component<Props> {
         {props.errors && (
           <span className="error-block hidden-print" id={`${props.id ? `${props.id}-error` : ''}`}>
             {props.errors}
-          </span>
-        )}
-        {!props.errors && props.warnings && (
-          <span
-            style={{ color: 'orange' }}
-            className="error-block hidden-print"
-            id={`${props.id ? `${props.id}-error` : ''}`}>
-            {props.warnings}
           </span>
         )}
       </FormGroup>
