@@ -4,13 +4,12 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Form\Oauth2SSOConfigurationFormType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Error\UserErrors;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormInterface;
 
 class CreateOauth2SSOConfigurationMutation implements MutationInterface
 {
@@ -40,25 +39,12 @@ class CreateOauth2SSOConfigurationMutation implements MutationInterface
         $form->submit($values, false);
 
         if (!$form->isValid()) {
-            $this->handleErrors($form);
+            throw GraphQLException::fromFormErrors($form);
         }
 
         $this->em->persist($ssoConfiguration);
         $this->em->flush();
 
         return compact('ssoConfiguration');
-    }
-
-    private function handleErrors(FormInterface $form): void
-    {
-        $errors = [];
-        foreach ($form->getErrors() as $error) {
-            $this->logger->error((string) $error->getMessage());
-            $this->logger->error(implode('', $form->getExtraData()));
-            $errors[] = (string) $error->getMessage();
-        }
-        if (!empty($errors)) {
-            throw new UserErrors($errors);
-        }
     }
 }
