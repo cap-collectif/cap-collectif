@@ -15,9 +15,6 @@ describe('<EventPreview />', () => {
           startAt: '2018-09-27T03:00:00+01:00',
           endAt: '2019-09-27T03:00:00+01:00',
         },
-        media: {
-          url: 'https://picsum.photos/300/400',
-        },
         title: 'Un super evenement',
         fullAddress: '21 rue george 5, 75012 Paris',
         url: 'http://impossible.com',
@@ -49,9 +46,6 @@ describe('<EventPreview />', () => {
         timeRange: {
           startAt: '2018-09-27T03:00:00+01:00',
           endAt: '2019-09-27T03:00:00+01:00',
-        },
-        media: {
-          url: 'https://picsum.photos/300/400',
         },
         title: 'Un super evenement',
         fullAddress: '21 rue george 5, 75012 Paris',
@@ -85,9 +79,6 @@ describe('<EventPreview />', () => {
           startAt: '2018-09-27T03:00:00+01:00',
           endAt: '2019-09-27T03:00:00+01:00',
         },
-        media: {
-          url: 'https://picsum.photos/300/400',
-        },
         title: 'Un super evenement',
         fullAddress: '21 rue george 5, 75012 Paris',
         url: 'http://impossible.com',
@@ -119,9 +110,6 @@ describe('<EventPreview />', () => {
         timeRange: {
           startAt: '2018-09-27T03:00:00+01:00',
           endAt: '2019-09-27T03:00:00+01:00',
-        },
-        media: {
-          url: 'https://picsum.photos/300/400',
         },
         title: 'Un super evenement',
         fullAddress: '21 rue george 5, 75012 Paris',

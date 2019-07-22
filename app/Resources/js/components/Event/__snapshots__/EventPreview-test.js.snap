@@ -1,19 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EventPreview /> renders correctly and highlighted 1`] = `
-<div
-  className="d-flex flex-1-1 event block  block--bordered highlighted-comment"
->
+<Fragment>
   <div
-    className="picture_container"
-    style={
-      Object {
-        "backgroundImage": "url(https://picsum.photos/300/400)",
-      }
-    }
-  />
-  <div
-    className="d-flex event__infos"
+    className="d-flex flex-1-1 event block  block--bordered highlighted-comment"
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"
@@ -23,7 +13,7 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       />
     </div>
     <div
-      className="event__body event-js"
+      className="col-md-10 col-sm-10 col-xs-12 event__body box event-js"
     >
       <h3
         className="event__title"
@@ -40,7 +30,7 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       >
         <UserAvatarDeprecated
           anchor={true}
-          className=""
+          className="mr-10"
           onBlur={[Function]}
           onFocus={[Function]}
           onMouseOut={[Function]}
@@ -108,23 +98,13 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
       </div>
     </div>
   </div>
-</div>
+</Fragment>
 `;
 
 exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
-<div
-  className="d-flex flex-1-1 event block  block--bordered "
->
+<Fragment>
   <div
-    className="picture_container"
-    style={
-      Object {
-        "backgroundImage": "url(https://picsum.photos/300/400)",
-      }
-    }
-  />
-  <div
-    className="d-flex event__infos"
+    className="d-flex flex-1-1 event block  block--bordered "
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"
@@ -134,7 +114,7 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       />
     </div>
     <div
-      className="event__body event-js"
+      className="col-md-10 col-sm-10 col-xs-12 event__body box event-js"
     >
       <h3
         className="event__title"
@@ -151,7 +131,7 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       >
         <UserAvatarDeprecated
           anchor={true}
-          className=""
+          className="mr-10"
           onBlur={[Function]}
           onFocus={[Function]}
           onMouseOut={[Function]}
@@ -219,23 +199,13 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
       </div>
     </div>
   </div>
-</div>
+</Fragment>
 `;
 
 exports[`<EventPreview /> renders correctly without picture for user 1`] = `
-<div
-  className="d-flex flex-1-1 event block  block--bordered "
->
+<Fragment>
   <div
-    className="picture_container"
-    style={
-      Object {
-        "backgroundImage": "url(https://picsum.photos/300/400)",
-      }
-    }
-  />
-  <div
-    className="d-flex event__infos"
+    className="d-flex flex-1-1 event block  block--bordered "
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"
@@ -245,7 +215,7 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
       />
     </div>
     <div
-      className="event__body event-js"
+      className="col-md-10 col-sm-10 col-xs-12 event__body box event-js"
     >
       <h3
         className="event__title"
@@ -262,7 +232,7 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
       >
         <UserAvatarDeprecated
           anchor={true}
-          className=""
+          className="mr-10"
           onBlur={[Function]}
           onFocus={[Function]}
           onMouseOut={[Function]}
@@ -328,23 +298,13 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
       </div>
     </div>
   </div>
-</div>
+</Fragment>
 `;
 
 exports[`<EventPreview /> renders without username 1`] = `
-<div
-  className="d-flex flex-1-1 event block  block--bordered "
->
+<Fragment>
   <div
-    className="picture_container"
-    style={
-      Object {
-        "backgroundImage": "url(https://picsum.photos/300/400)",
-      }
-    }
-  />
-  <div
-    className="d-flex event__infos"
+    className="d-flex flex-1-1 event block  block--bordered "
   >
     <div
       className="col-md-2 col-sm-2 hidden-xs"
@@ -354,7 +314,7 @@ exports[`<EventPreview /> renders without username 1`] = `
       />
     </div>
     <div
-      className="event__body event-js"
+      className="col-md-10 col-sm-10 col-xs-12 event__body box event-js"
     >
       <h3
         className="event__title"
@@ -414,5 +374,5 @@ exports[`<EventPreview /> renders without username 1`] = `
       </div>
     </div>
   </div>
-</div>
+</Fragment>
 `;

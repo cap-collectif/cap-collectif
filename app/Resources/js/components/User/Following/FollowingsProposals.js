@@ -23,9 +23,10 @@ export class FollowingsProposals extends Component<Props, State> {
 
   onUnfollowAll() {
     const { viewer } = this.props;
+    const { open } = this.state;
     const idsProposal = viewer.followingProposals.edges.map(edge => edge.node.id);
 
-    this.setState({ open: !this.state.open }, () => {
+    this.setState({ open: !open }, () => {
       UnfollowProposalMutation.commit({
         input: { idsProposal },
       });
@@ -34,6 +35,7 @@ export class FollowingsProposals extends Component<Props, State> {
 
   render() {
     const { viewer } = this.props;
+    const { open } = this.state;
     const projectsById = {};
     viewer.followingProposals.edges.map(edge => {
       projectsById[edge.node.project.id] = edge.node.project;
@@ -43,7 +45,7 @@ export class FollowingsProposals extends Component<Props, State> {
         <h2 className="page-header">
           <FormattedMessage id="followings" />
           {Object.keys(projectsById).length > 0 ? (
-            <Collapse style={{ float: 'right' }} in={this.state.open}>
+            <Collapse style={{ float: 'right' }} in={open}>
               <Button
                 id="unfollow-all"
                 onClick={() => {
@@ -58,7 +60,7 @@ export class FollowingsProposals extends Component<Props, State> {
         </h2>
         <div>
           {Object.keys(projectsById).length > 0 ? (
-            <Collapse in={this.state.open}>
+            <Collapse in={open}>
               <div id="all-projects">
                 {Object.keys(projectsById).map((project, id) => (
                   <ProposalProjectRow key={id} project={projectsById[project]} viewer={viewer} />
@@ -72,7 +74,7 @@ export class FollowingsProposals extends Component<Props, State> {
           )}
         </div>
         <div>
-          <Collapse in={!this.state.open}>
+          <Collapse in={!open}>
             <div>
               <FormattedMessage id="no-following" />
             </div>

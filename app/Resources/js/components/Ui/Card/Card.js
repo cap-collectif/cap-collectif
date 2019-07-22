@@ -33,10 +33,6 @@ export const Container = styled.div.attrs({
     margin-bottom: 5px;
   }
 
-  button:not(.ql-editor-button) {
-    margin-top: 15px;
-  }
-
   form + button {
     margin-left: 5px;
   }
