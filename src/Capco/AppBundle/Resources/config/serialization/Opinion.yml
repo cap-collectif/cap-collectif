@@ -31,8 +31,6 @@ Capco\AppBundle\Entity\Opinion:
       groups: [Opinions]
     ranking:
       groups: [Opinions]
-    step:
-      groups: [Opinions]
     canContribute:
       serialized_name: isContribuable
       groups: [Opinions, OpinionVersions]
@@ -49,7 +47,7 @@ Capco\AppBundle\Entity\Opinion:
     getStep:
       type: object
       serialized_name: step
-      groups: [Elasticsearch]
+      groups: [Opinions, Elasticsearch]
     getProject:
       type: object
       serialized_name: project

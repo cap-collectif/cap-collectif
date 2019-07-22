@@ -359,7 +359,7 @@ class OpinionVersionRepository extends EntityRepository
         $query
             ->select('count(DISTINCT ov.id)')
             ->innerJoin('ov.parent', 'o')
-            ->andWhere('o.step = :cs')
+            ->innerJoin('o.consultation', 'oc', 'WITH', 'oc.step = :cs')
             ->andWhere('ov.published = 1')
             ->andWhere('o.trashedAt IS NULL')
             ->setParameter('cs', $cs);
@@ -373,7 +373,7 @@ class OpinionVersionRepository extends EntityRepository
         $query
             ->select('count(DISTINCT ov.id)')
             ->innerJoin('ov.parent', 'o')
-            ->andWhere('o.step = :cs')
+            ->innerJoin('o.consultation', 'oc', 'WITH', 'oc.step = :cs')
             ->andWhere('ov.published = 1')
             ->andWhere('o.trashedAt IS NOT NULL')
             ->setParameter('cs', $cs);
