@@ -2459,7 +2459,11 @@ input InternalCreateOauth2SSOConfigurationInput {
 
   # Profile URL on the SSO side.
   profileUrl: URI
+
+  # Specify if this SSO configuration is active or not.
   enabled: Boolean!
+
+  # The name of your SSO provider.
   name: String!
   clientMutationId: String
 }
@@ -2513,9 +2517,6 @@ type InternalSSOConfigurationEdge {
 }
 
 input InternalUpdateOauth2SSOConfigurationInput {
-  # The ID of oauth2 configuration that needs to be updated.
-  id: ID!
-
   # Client ID.
   clientId: String!
 
@@ -2536,8 +2537,15 @@ input InternalUpdateOauth2SSOConfigurationInput {
 
   # Profile URL on the SSO side.
   profileUrl: URI
+
+  # Specify if this SSO configuration is active or not.
   enabled: Boolean!
+
+  # The name of your SSO provider.
   name: String!
+
+  # The ID of oauth2 configuration that needs to be updated.
+  id: ID!
   clientMutationId: String
 }
 

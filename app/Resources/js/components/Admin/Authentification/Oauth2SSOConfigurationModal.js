@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import type { FormProps } from 'redux-form';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, type IntlShape } from 'react-intl';
 import CloseButton from '../../Form/CloseButton';
 import type { GlobalState, Uri, Uuid } from '../../../types';
 import component from '../../Form/Field';
@@ -28,6 +28,7 @@ type Props = {|
   isCreating: boolean,
   ...FormValues,
   ...FormProps,
+  intl: IntlShape,
 |};
 
 const formName = 'oauth2-sso-configuration-form';
@@ -56,7 +57,16 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
   };
 
   render() {
-    const { show, isCreating, onClose, pristine, invalid, handleSubmit, submitting } = this.props;
+    const {
+      show,
+      isCreating,
+      onClose,
+      pristine,
+      invalid,
+      handleSubmit,
+      submitting,
+      intl,
+    } = this.props;
     return (
       <Modal show={show} onHide={onClose} aria-labelledby="oauth2-sso-modal-lg">
         <form onSubmit={handleSubmit} id={`${formName}`}>
@@ -67,8 +77,8 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
                 <FormattedMessage
                   id={
                     isCreating
-                      ? "Ajouter une méthode d'authentification Open ID"
-                      : "Modifier une méthode d'authentification Open ID"
+                      ? intl.formatMessage({ id: 'add-an-open-id-authentication-method' })
+                      : intl.formatMessage({ id: 'update-an-open-id-authentication-method' })
                   }
                 />
               }
