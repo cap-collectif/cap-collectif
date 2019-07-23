@@ -8,6 +8,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserProposalsResolver implements ResolverInterface
 {
@@ -23,7 +24,10 @@ class UserProposalsResolver implements ResolverInterface
         if (!$args) {
             $args = new Argument(['first' => 100]);
         }
-        if ($viewer) {
+
+        $validViewer = \is_object($viewer) && $viewer instanceof UserInterface;
+
+        if ($validViewer && $user) {
             /** @var User $viewer */
             $paginator = new Paginator(function (int $offset, int $limit) use ($viewer, $user) {
                 return $this->proposalRepository->getProposalsByAuthorViewerCanSee(

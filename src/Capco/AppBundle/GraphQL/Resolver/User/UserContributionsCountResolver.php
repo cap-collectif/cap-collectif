@@ -14,9 +14,10 @@ class UserContributionsCountResolver implements ResolverInterface
         $this->userEventCommentsCountResolver = $userEventCommentsCountResolver;
     }
 
-    public function __invoke(User $viewer): int
+    public function __invoke(User $user, $viewer): int
     {
-        return $this->userEventCommentsCountResolver->__invoke($viewer) +
-            $viewer->getContributionsCount();
+        return $this->userEventCommentsCountResolver->__invoke($user) +
+            $this->userProposalsResolver->__invoke($viewer, $user)->totalCount +
+            $user->getContributionsCount();
     }
 }

@@ -187,7 +187,7 @@ InternalUser:
             description: 'Ordering options for followers returning from the connection'
       contributionsCount:
         type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsCountResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsCountResolver", [value, getUser()])'
         description: 'Total of contributions count'
       profilePageIndexed:
         type: 'Boolean'

@@ -605,7 +605,49 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function createProposalsByAuthorViewerCanSeeQuery(
+    public function countProposalsViewerCanSee(User $viewer, User $user): int
+    {
+        $qb = $this->getIsEnabledQueryBuilder('p');
+        $qb->select('COUNT(p.id)');
+        $this->createProposalsByAuthorViewerCanSeeQuery($viewer, $user, $qb);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getPublicProposalsByAuthor(
+        User $author,
+        int $limit = null,
+        int $offset = null
+    ): array {
+        $qb = $this->getIsEnabledQueryBuilder('p');
+        $this->createProposalsPublicByAuthorQuery($author, $qb)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countPublicProposalsByAuthor(User $author): int
+    {
+        $qb = $this->getIsEnabledQueryBuilder('p');
+        $qb->select('COUNT(p.id)');
+        $this->createProposalsPublicByAuthorQuery($author, $qb);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
+    {
+        return $this->createQueryBuilder($alias)
+            ->andWhere($alias . '.draft = false')
+            ->andWhere($alias . '.trashedAt IS NULL')
+            ->andWhere($alias . '.deletedAt IS NULL')
+            ->andWhere($alias . '.published = true');
+    }
+
+    // This return the query used to retrieve all the proposals of an author the logged user can see.
+    // It depends on the project's visibility, the logged user's roles and the restricted viewer groups.
+    private function createProposalsByAuthorViewerCanSeeQuery(
         User $viewer,
         User $user,
         QueryBuilder $qb
@@ -619,7 +661,7 @@ class ProposalRepository extends EntityRepository
         } elseif ($viewer->isAdmin()) {
             $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
         }
-        // @var QueryBuilder $qb
+
         $qb
             ->andWhere('p.author = :user')
             ->leftJoin('p.proposalForm', 'pf')
@@ -675,7 +717,7 @@ class ProposalRepository extends EntityRepository
             ':user' => $user,
             ':visibility' => $visibility,
             ':roles' => $viewer->getRoles(),
-            ':prvgId' => $viewer->getUserGroupIds() ?? [],
+            ':prvgId' => $viewer->getUserGroupIds(),
             ':superAdmin' => 'ROLE_SUPER_ADMIN'
         ]);
 
