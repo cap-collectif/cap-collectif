@@ -348,7 +348,13 @@ export const formatInitialResponsesValues = (
     const questionId = question.id;
     // If we have a previous response format it
     if (response) {
-      if (typeof response.value !== 'undefined' && response.value !== null) {
+      // TODO: response.value !== "null" is a hotfix, related to issue https://github.com/cap-collectif/platform/issues/6214
+      // because of a weird bug, causing answer with questions set to "null" instead of NULL in db
+      if (
+        typeof response.value !== 'undefined' &&
+        response.value !== null &&
+        response.value !== 'null'
+      ) {
         return {
           question: questionId,
           value: getValueFromResponse(question.type, response.value),
@@ -601,10 +607,7 @@ export const validateResponses = (
 
       if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
         return {
-          value: intl.formatMessage(
-            { id: 'reply.constraints.choices_equal' },
-            { nb: rule.number },
-          ),
+          value: intl.formatMessage({ id: 'reply.constraints.choices_equal' }, { nb: rule.number }),
         };
       }
     }
@@ -749,7 +752,7 @@ export const formatSubmitResponses = (
 
 const getQuestionInitialValue = (question: Question) => {
   // MediaQuestion have a default value of []
-  return question.__typename === 'MediaQuestion' ? [] : null
+  return question.__typename === 'MediaQuestion' ? [] : null;
 };
 
 export const warnResponses = (

@@ -14,9 +14,12 @@ class ValueResponse extends AbstractResponse
      */
     protected $value;
 
+
+    // TODO: response.value !== "null" is a hotfix, related to issue https://github.com/cap-collectif/platform/issues/6214
+    // because of a weird bug, causing answer with questions set to "null" instead of NULL in db
     public function getValue()
     {
-        return $this->value;
+        return $this->value !== 'null' ? $this->value : null;
     }
 
     public function setValue($value): self
