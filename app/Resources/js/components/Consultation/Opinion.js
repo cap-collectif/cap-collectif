@@ -1,22 +1,16 @@
 // @flow
 import * as React from 'react';
-import styled from 'styled-components';
-import { ListGroupItem } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-
-import VotePiechart from '../Utils/VotePiechart';
+import { ListGroupItem } from 'react-bootstrap';
 import OpinionPreview from '../Opinion/OpinionPreview';
+import VotePiechart from '../Utils/VotePiechart';
 import type { Opinion_opinion } from '~relay/Opinion_opinion.graphql';
+import Media from '../Ui/Medias/Media/Media';
 
 type Props = {|
   +opinion: Opinion_opinion,
   +showUpdatedDate: boolean,
 |};
-
-export const OpinionContainer = styled.div`
-  display: flex;
-  width: 100%;
-`;
 
 export class Opinion extends React.Component<Props> {
   static defaultProps = {
@@ -31,17 +25,20 @@ export class Opinion extends React.Component<Props> {
         className={`list-group-item__opinion opinion text-left has-chart${
           author && author.vip ? ' bg-vip' : ''
         }`}>
-        <OpinionContainer>
+        <Media>
           {/* $FlowFixMe $refType */}
           <OpinionPreview opinion={opinion} showUpdatedDate={showUpdatedDate} />
-          {opinion.votes && opinion.votes.totalCount > 0 ? (
+        </Media>
+        {opinion.votes && opinion.votes.totalCount > 0 ? (
+          <div className="hidden-xs">
+            {/* $FlowFixMe $refType */}
             <VotePiechart
               ok={opinion.votesOk.totalCount}
               nok={opinion.votesNok.totalCount}
               mitige={opinion.votesMitige.totalCount}
             />
-          ) : null}
-        </OpinionContainer>
+          </div>
+        ) : null}
       </ListGroupItem>
     );
   }
@@ -65,6 +62,11 @@ export default createFragmentContainer(Opinion, {
       }
       author {
         vip
+        displayName
+        media {
+          url
+        }
+        url
       }
     }
   `,

@@ -1,11 +1,9 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-
-import { FormattedMessage } from 'react-intl';
-import Card from '../Ui/Card/Card';
 import OpinionTypeLabel from './OpinionTypeLabel';
 import type { OpinionPreviewTitle_opinion } from '~relay/OpinionPreviewTitle_opinion.graphql';
+import Card from '../Ui/Card/Card';
 
 type Props = {
   opinion: OpinionPreviewTitle_opinion,
@@ -15,14 +13,8 @@ type Props = {
 export class OpinionPreviewTitle extends React.Component<Props> {
   render() {
     const { opinion, showTypeLabel } = this.props;
-
     return (
       <Card.Title tagName="div" firstElement={false}>
-        {opinion.trashed && (
-          <span className="label label-default mr-5">
-            <FormattedMessage id="opinion.show.trashed.label" />
-          </span>
-        )}
         {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
         {showTypeLabel ? <OpinionTypeLabel section={opinion.section || null} /> : null}
         {showTypeLabel ? ' ' : null}
@@ -38,7 +30,6 @@ export default createFragmentContainer(OpinionPreviewTitle, {
       ... on Opinion {
         url
         title
-        trashed
         section {
           ...OpinionTypeLabel_section
         }

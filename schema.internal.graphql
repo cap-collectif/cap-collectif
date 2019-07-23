@@ -4919,12 +4919,6 @@ type Query {
     # Returns the last `n` elements from the list.
     last: Int
   ): InternalSSOConfigurationConnection!
-
-  # List all sections.
-  sections(
-    # Filter by contributor of section.
-    user: ID
-  ): [Section!]!
 }
 
 # Fetches an object given its ID
@@ -5757,14 +5751,8 @@ type Section implements Node & UniformResourceLocatable {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # Filter by author of opinion.
-    author: ID
-
     # Ordering options for followers returning from the connection
-    orderBy: OpinionOrder = {field: PUBLISHED_AT, direction: DESC}
-
-    # Include trashed opinion or not
-    includeTrashed: Boolean = false
+    orderBy: OpinionOrder
   ): OpinionConnection!
 }
 
@@ -7186,6 +7174,7 @@ type User implements Node & UniformResourceLocatable {
     # Returns the last `n` elements from the list.
     last: Int
   ): SourceConnection!
+  opinionsCount: Int!
   opinionVotesCount: Int!
   opinionVersionsCount: Int!
   argumentsCount: Int!
@@ -7279,21 +7268,6 @@ type User implements Node & UniformResourceLocatable {
 
     # Ordering options for followers returning from the connection
     orderBy: String
-  ): OpinionConnection!
-
-  # Array of opinions by current user.
-  opinions(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
   ): OpinionConnection!
 
   # Total of contributions count

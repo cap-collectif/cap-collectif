@@ -37,7 +37,7 @@
         </section>
     {% endif %}
 
-    {% if opinionsCount > 0 %}
+    {% if opinionTypesWithUserOpinions|length > 0 %}
         <section class="section--custom">
             <div class="container">
                 <h2>{{ 'user.profile.show.opinions' | trans({}, 'CapcoAppBundle') }}</h2>

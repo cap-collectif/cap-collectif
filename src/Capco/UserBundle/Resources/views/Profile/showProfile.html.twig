@@ -76,13 +76,11 @@
                     </a>
                 </li>
                 {% endif %}
-
-                {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true) %}
-                {% if opinionsCount > 0 %}
+                {% if user.opinionsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_opinions' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_opinions', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.opinions'|trans({}, 'CapcoAppBundle') }}</h2>
-                        <p class="profile__value__number">{{ opinionsCount }}</p>
+                        <p class="profile__value__number">{{ user.opinionsCount }}</p>
                     </a>
                 </li>
                 {% endif %}

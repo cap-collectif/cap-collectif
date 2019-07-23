@@ -5,6 +5,10 @@ InternalQuestionChoice:
   config:
     name: QuestionChoice
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: QuestionChoice
       description:
         type: 'String'
       color:
