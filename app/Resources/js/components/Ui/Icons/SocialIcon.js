@@ -5,7 +5,7 @@ import Icon from './Icon';
 import { socialColors } from '../../../utils/colors';
 
 type Props = {
-  action: string,
+  name: string,
 };
 
 
@@ -18,12 +18,12 @@ type Props = {
 
 class SocialIcon extends React.Component<Props> {
   render() {
-    const { action, ...rest } = this.props;
+    const { name, ...rest } = this.props;
 
 
     return (
-      <span style={{ color: socialColors[action] }}>
-        <Icon name={action} {...rest} />
+      <span style={{ color: socialColors[name] }}>
+        <Icon name={name} {...rest} />
       </span>
     );
   }
