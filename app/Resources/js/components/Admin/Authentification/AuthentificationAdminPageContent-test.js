@@ -4,6 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { AuthentificationAdminPageContent } from './AuthentificationAdminPageContent';
 import { $fragmentRefs, $refType } from '../../../mocks';
+import { features } from '../../../redux/modules/default';
 
 describe('<AuthentificationAdminPageContent />', () => {
   const props = {
@@ -35,6 +36,10 @@ describe('<AuthentificationAdminPageContent />', () => {
         name: 'image-name.jpg',
         url: 'https://capco.test/media/default/0001/01/image-name.jpg',
       },
+    },
+    features: {
+      ...features,
+      list_sso: true,
     },
   };
 

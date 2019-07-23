@@ -147,7 +147,7 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               type="text"
               required
               component={component}
-              label={<FormattedMessage id="secret" />}
+              label={<FormattedMessage id="url-user-profile-sso" />}
             />
             <Field
               id={`${formName}_redirectUri`}

@@ -78,6 +78,7 @@ export const features = {
   consultation_plan: false,
   display_map: false,
   sso_by_pass_auth: false,
+  list_sso: false,
 };
 
 const initialState: State = {

@@ -311,7 +311,7 @@ const OpinionBox = ({ section, opinion }) => (
           {/** Utils/ShareButtonDropdown.js */}
           {opinion.title && opinion.url && (
             <ShareButton id="shareButton" margin="ml-5">
-              <ShareButtonAction action="mail" />
+              <ShareButtonAction action="email" />
               <ShareButtonAction action="facebook" />
               <ShareButtonAction action="twitter" />
               <ShareButtonAction action="linkedin" />

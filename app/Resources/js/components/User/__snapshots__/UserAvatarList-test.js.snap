@@ -41,6 +41,7 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "display_map": false,
             "districts": false,
             "export": false,
+            "list_sso": false,
             "login_facebook": false,
             "login_gplus": false,
             "login_openid": false,
