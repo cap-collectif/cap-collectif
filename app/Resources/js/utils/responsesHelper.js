@@ -312,7 +312,7 @@ const getValueFromSubmitResponse = (response: ?ResponseInReduxForm): ?string => 
   ) {
     return response.value.labels[0];
   }
-  if (response && response.value && Array.isArray(response.value) && response.value.length > 0) {
+  if (response && response.value && Array.isArray(response.value) && response.value.filter(Boolean).length > 0) {
     return typeof response.value[0] === 'object'
       ? response.value[0].name // Here, we are dealing with a MediaQuestion, which has the shape { id: string, name: string, url: string }
       : response.value.join(', '); // Here, we are dealing with a MultipleChoiceQuestion but more specifically a Ranking question, which is a simple array of strings
