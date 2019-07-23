@@ -19,11 +19,6 @@ class Video implements DisplayableInBOInterface
 {
     use IdTrait;
 
-    public static $colorButtonPlay = [
-        'white' => 'video.colors.white',
-        'black' => 'video.colors.black'
-    ];
-
     /**
      * @var string
      *
@@ -73,13 +68,6 @@ class Video implements DisplayableInBOInterface
      * @ORM\Column(name="position", type="integer", nullable=true)
      */
     private $position = 0;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="color", type="string", length=50)
-     */
-    private $color = 'white';
 
     /**
      * @ORM\Column(name="video", type="string")
@@ -293,22 +281,6 @@ class Video implements DisplayableInBOInterface
     public function setLink($link)
     {
         $this->link = $link;
-    }
-
-    /**
-     * @return string
-     */
-    public function getColor()
-    {
-        return $this->color;
-    }
-
-    /**
-     * @param string $color
-     */
-    public function setColor($color)
-    {
-        $this->color = $color;
     }
 
     public function viewerCanSeeInBo($user = null): bool
