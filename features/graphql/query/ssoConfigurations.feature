@@ -22,6 +22,7 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
               accessTokenUrl
               userInfoUrl
               logoutUrl
+              redirectUri
             }
           }
         }
@@ -39,7 +40,7 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
         "edges": [
           {
             "node": {
-              "id": "RXZlbnQ6c3NvT2F1dGgy",
+              "id": "T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
               "name": "Cap collectif Oauth2 Provider",
               "enabled": true,
               "clientId": "account",
@@ -48,7 +49,8 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
               "accessTokenUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/token",
               "userInfoUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
               "logoutUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
-              "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account"
+              "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account",
+              "redirectUri": @string@
             }
           }
         ]

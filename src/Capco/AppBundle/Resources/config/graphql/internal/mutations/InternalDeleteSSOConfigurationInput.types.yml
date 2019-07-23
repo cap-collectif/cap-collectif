@@ -1,0 +1,8 @@
+InternalDeleteSSOConfigurationInput:
+  type: relay-mutation-input
+  config:
+    description: 'Create an oauth2 configuration'
+    fields:
+      id:
+        description: 'The ID of SSO Configuration that needs to be deleted.'
+        type: 'ID!'

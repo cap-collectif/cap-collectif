@@ -2438,6 +2438,54 @@ type InternalChangeSiteFaviconPayload {
   clientMutationId: String
 }
 
+input InternalCreateOauth2SSOConfigurationInput {
+  # Client ID.
+  clientId: String!
+
+  # Secret key.
+  secret: String!
+
+  # Authorization URL.
+  authorizationUrl: URI!
+
+  # Access token URL.
+  accessTokenUrl: URI!
+
+  # User info URL.
+  userInfoUrl: URI!
+
+  # Logout URL.
+  logoutUrl: URI
+
+  # Profile URL on the SSO side.
+  profileUrl: URI
+
+  # Specify if this SSO configuration is active or not.
+  enabled: Boolean!
+
+  # The name of your SSO provider.
+  name: String!
+  clientMutationId: String
+}
+
+type InternalCreateOauth2SSOConfigurationPayload {
+  # The created oauth2 configuration.
+  ssoConfiguration: Oauth2SSOConfiguration
+  clientMutationId: String
+}
+
+input InternalDeleteSSOConfigurationInput {
+  # The ID of SSO Configuration that needs to be deleted.
+  id: ID!
+  clientMutationId: String
+}
+
+type InternalDeleteSSOConfigurationPayload {
+  deletedSsoConfigurationId: ID
+  userErrors: [UserError]
+  clientMutationId: String
+}
+
 input InternalRemoveSiteFaviconInput {
   clientMutationId: String
 }
@@ -2466,6 +2514,45 @@ type InternalSSOConfigurationEdge {
 
   # A cursor for use in pagination.
   cursor: String!
+}
+
+input InternalUpdateOauth2SSOConfigurationInput {
+  # Client ID.
+  clientId: String!
+
+  # Secret key.
+  secret: String!
+
+  # Authorization URL.
+  authorizationUrl: URI!
+
+  # Access token URL.
+  accessTokenUrl: URI!
+
+  # User info URL.
+  userInfoUrl: URI!
+
+  # Logout URL.
+  logoutUrl: URI
+
+  # Profile URL on the SSO side.
+  profileUrl: URI
+
+  # Specify if this SSO configuration is active or not.
+  enabled: Boolean!
+
+  # The name of your SSO provider.
+  name: String!
+
+  # The ID of oauth2 configuration that needs to be updated.
+  id: ID!
+  clientMutationId: String
+}
+
+type InternalUpdateOauth2SSOConfigurationPayload {
+  # The updated oauth2 configuration.
+  ssoConfiguration: Oauth2SSOConfiguration
+  clientMutationId: String
 }
 
 input InternalUpdateShieldAdminFormInput {
@@ -2931,6 +3018,9 @@ type Mutation {
   deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
   updateProjectDistrict(input: UpdateProjectDistrictInput!): CreateProjectDistrictPayload
   updateShieldAdminForm(input: InternalUpdateShieldAdminFormInput!): UpdateShieldAdminFormPayload
+  createOauth2SSOConfiguration(input: InternalCreateOauth2SSOConfigurationInput!): InternalCreateOauth2SSOConfigurationPayload
+  updateOauth2SSOConfiguration(input: InternalUpdateOauth2SSOConfigurationInput!): InternalUpdateOauth2SSOConfigurationPayload
+  deleteSSOConfiguration(input: InternalDeleteSSOConfigurationInput!): InternalDeleteSSOConfigurationPayload
 }
 
 # A connection to a list of items.
@@ -3021,6 +3111,9 @@ type Oauth2SSOConfiguration implements Node & SSOConfiguration {
 
   # Logout URL.
   logoutUrl: URI
+
+  # Redirect URI callback.
+  redirectUri: URI!
 }
 
 # A contribution

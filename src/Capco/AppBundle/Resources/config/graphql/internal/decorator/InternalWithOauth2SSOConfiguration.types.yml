@@ -1,0 +1,31 @@
+InternalWithOauth2SSOConfiguration:
+  decorator: true
+  config:
+    fields:
+      clientId:
+        type: 'String!'
+        description: 'Client ID.'
+      secret:
+        type: 'String!'
+        description: 'Secret key.'
+      authorizationUrl:
+        type: 'URI!'
+        description: 'Authorization URL.'
+      accessTokenUrl:
+        type: 'URI!'
+        description: 'Access token URL.'
+      userInfoUrl:
+        type: 'URI!'
+        description: 'User info URL.'
+      logoutUrl:
+        type: 'URI'
+        description: 'Logout URL.'
+      profileUrl:
+        type: 'URI'
+        description: 'Profile URL on the SSO side.'
+      enabled:
+        type: 'Boolean!'
+        description: 'Specify if this SSO configuration is active or not.'
+      name:
+        type: 'String!'
+        description: 'The name of your SSO provider.'
