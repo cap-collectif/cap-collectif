@@ -107,44 +107,58 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       name="body"
       type="editor"
     />
-    <Field
-      component={[Function]}
-      formName="EventForm"
-      id="event_startAt"
-      label={
-        <span>
-          <FormattedMessage
-            id="start-date"
-            values={Object {}}
+    <div
+      className="d-flex justify-content-between w-23"
+    >
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
           />
-           
-          <span
-            className="excerpt"
-          >
+        }
+        component={[Function]}
+        formName="EventForm"
+        id="event_startAt"
+        label={
+          <span>
             <FormattedMessage
-              id="global.mandatory"
+              id="start-date"
               values={Object {}}
             />
+             
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.mandatory"
+                values={Object {}}
+              />
+            </span>
           </span>
-        </span>
-      }
-      name="startAt"
-      timeFormat={false}
-      type="datetime"
-    />
-    <Field
-      component={[Function]}
-      formName="EventForm"
-      id="event_endAt"
-      label={
-        <FormattedMessage
-          id="ending-date"
-          values={Object {}}
-        />
-      }
-      name="endAt"
-      type="datetime"
-    />
+        }
+        name="startAt"
+        timeFormat={false}
+        type="datetime"
+      />
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        component={[Function]}
+        formName="EventForm"
+        id="event_endAt"
+        label={
+          <FormattedMessage
+            id="ending-date"
+            values={Object {}}
+          />
+        }
+        name="endAt"
+        type="datetime"
+      />
+    </div>
     <Field
       component={[Function]}
       id="event_media"
@@ -407,44 +421,58 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       name="body"
       type="editor"
     />
-    <Field
-      component={[Function]}
-      formName="EventForm"
-      id="event_startAt"
-      label={
-        <span>
-          <FormattedMessage
-            id="start-date"
-            values={Object {}}
+    <div
+      className="d-flex justify-content-between w-23"
+    >
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
           />
-           
-          <span
-            className="excerpt"
-          >
+        }
+        component={[Function]}
+        formName="EventForm"
+        id="event_startAt"
+        label={
+          <span>
             <FormattedMessage
-              id="global.mandatory"
+              id="start-date"
               values={Object {}}
             />
+             
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.mandatory"
+                values={Object {}}
+              />
+            </span>
           </span>
-        </span>
-      }
-      name="startAt"
-      timeFormat={false}
-      type="datetime"
-    />
-    <Field
-      component={[Function]}
-      formName="EventForm"
-      id="event_endAt"
-      label={
-        <FormattedMessage
-          id="ending-date"
-          values={Object {}}
-        />
-      }
-      name="endAt"
-      type="datetime"
-    />
+        }
+        name="startAt"
+        timeFormat={false}
+        type="datetime"
+      />
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        component={[Function]}
+        formName="EventForm"
+        id="event_endAt"
+        label={
+          <FormattedMessage
+            id="ending-date"
+            values={Object {}}
+          />
+        }
+        name="endAt"
+        type="datetime"
+      />
+    </div>
     <Field
       component={[Function]}
       id="event_media"
@@ -707,44 +735,58 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       name="body"
       type="editor"
     />
-    <Field
-      component={[Function]}
-      formName="EventForm"
-      id="event_startAt"
-      label={
-        <span>
-          <FormattedMessage
-            id="start-date"
-            values={Object {}}
+    <div
+      className="d-flex justify-content-between w-23"
+    >
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
           />
-           
-          <span
-            className="excerpt"
-          >
+        }
+        component={[Function]}
+        formName="EventForm"
+        id="event_startAt"
+        label={
+          <span>
             <FormattedMessage
-              id="global.mandatory"
+              id="start-date"
               values={Object {}}
             />
+             
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.mandatory"
+                values={Object {}}
+              />
+            </span>
           </span>
-        </span>
-      }
-      name="startAt"
-      timeFormat={false}
-      type="datetime"
-    />
-    <Field
-      component={[Function]}
-      formName="EventForm"
-      id="event_endAt"
-      label={
-        <FormattedMessage
-          id="ending-date"
-          values={Object {}}
-        />
-      }
-      name="endAt"
-      type="datetime"
-    />
+        }
+        name="startAt"
+        timeFormat={false}
+        type="datetime"
+      />
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        component={[Function]}
+        formName="EventForm"
+        id="event_endAt"
+        label={
+          <FormattedMessage
+            id="ending-date"
+            values={Object {}}
+          />
+        }
+        name="endAt"
+        type="datetime"
+      />
+    </div>
     <Field
       component={[Function]}
       id="event_media"

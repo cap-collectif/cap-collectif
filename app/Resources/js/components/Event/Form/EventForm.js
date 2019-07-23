@@ -129,30 +129,34 @@ export class EventForm extends React.Component<Props> {
               </span>
             }
           />
-          <Field
-            timeFormat={false}
-            id="event_startAt"
-            component={component}
-            type="datetime"
-            name="startAt"
-            formName={formName}
-            label={
-              <span>
-                <FormattedMessage id="start-date" />{' '}
-                <span className="excerpt">
-                  <FormattedMessage id="global.mandatory" />
+          <div className="d-flex justify-content-between w-23">
+            <Field
+              timeFormat={false}
+              id="event_startAt"
+              component={component}
+              type="datetime"
+              name="startAt"
+              formName={formName}
+              label={
+                <span>
+                  <FormattedMessage id="start-date" />{' '}
+                  <span className="excerpt">
+                    <FormattedMessage id="global.mandatory" />
+                  </span>
                 </span>
-              </span>
-            }
-          />
-          <Field
-            id="event_endAt"
-            component={component}
-            type="datetime"
-            name="endAt"
-            formName={formName}
-            label={<FormattedMessage id="ending-date" />}
-          />
+              }
+              addonAfter={<i className="cap-calendar-2" />}
+            />
+            <Field
+              id="event_endAt"
+              component={component}
+              type="datetime"
+              name="endAt"
+              formName={formName}
+              label={<FormattedMessage id="ending-date" />}
+              addonAfter={<i className="cap-calendar-2" />}
+            />
+          </div>
           <Field
             id="event_media"
             name="media"

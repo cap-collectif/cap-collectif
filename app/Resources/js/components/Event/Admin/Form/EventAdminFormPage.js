@@ -13,14 +13,16 @@ import {
 } from 'redux-form';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { ButtonToolbar } from 'react-bootstrap';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 import SubmitButton from '../../../Form/SubmitButton';
 import EventForm, { EventCreateForm, formName } from '../../Form/EventForm';
 import type { Dispatch, GlobalState } from '../../../../types';
 import AddEventMutation from '../../../../mutations/AddEventMutation';
 import ChangeEventMutation from '../../../../mutations/ChangeEventMutation';
+import DeleteEventMutation from '../../../../mutations/DeleteEventMutation';
 import AlertForm from '../../../Alert/AlertForm';
 import type { EventAdminFormPage_event } from '~relay/EventAdminFormPage_event.graphql';
+import DeleteModal from '../../../Modal/DeleteModal';
 
 type Props = {|
   intl: IntlShape,
@@ -60,6 +62,7 @@ type EditFormValue = {|
   ...FormValues,
   id: string,
 |};
+type State = { showDeleteModal: boolean };
 
 const validate = (values: any) => {
   const errors = {};
@@ -177,7 +180,28 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     });
 };
 
-export class EventAdminFormPage extends React.Component<Props> {
+const onDelete = (eventId: string) =>
+  DeleteEventMutation.commit({
+    input: {
+      eventId,
+    },
+  }).then(() => {
+    window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/event/list`;
+  });
+
+export class EventAdminFormPage extends React.Component<Props, State> {
+  state = {
+    showDeleteModal: false,
+  };
+
+  openDeleteModal = () => {
+    this.setState({ showDeleteModal: true });
+  };
+
+  cancelCloseDeleteModal = () => {
+    this.setState({ showDeleteModal: false });
+  };
+
   render() {
     const {
       pristine,
@@ -188,7 +212,9 @@ export class EventAdminFormPage extends React.Component<Props> {
       submitting,
       intl,
       dispatch,
+      event,
     } = this.props;
+    const { showDeleteModal } = this.state;
 
     return (
       <div>
@@ -200,21 +226,40 @@ export class EventAdminFormPage extends React.Component<Props> {
           <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
         </p>
         <div className="box box-primary container-fluid">
-          {this.props.event ? (
-            <EventForm event={this.props.event} onSubmit={updateEvent} validate={validate} />
+          {event ? (
+            <EventForm event={event} onSubmit={updateEvent} validate={validate} />
           ) : (
             <EventCreateForm event={null} onSubmit={onSubmit} validate={validate} />
           )}
           <ButtonToolbar className="box-content__toolbar">
             <SubmitButton
               id="confirm-event-create"
-              label={this.props.event ? 'action_edit' : 'global.add'}
+              label={event ? 'action_edit' : 'global.add'}
               isSubmitting={submitting}
               disabled={pristine || invalid || submitting}
               onSubmit={() => {
                 dispatch(submit(formName));
               }}
             />
+            {event && (
+              <div>
+                <DeleteModal
+                  closeDeleteModal={this.cancelCloseDeleteModal}
+                  showDeleteModal={showDeleteModal}
+                  deleteElement={() => {
+                    onDelete(event.id);
+                  }}
+                  deleteModalTitle="group.admin.parameters.modal.delete.title"
+                  deleteModalContent="group.admin.parameters.modal.delete.content"
+                  buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+                />
+                <div>
+                  <Button bsStyle="danger" className="ml-5" onClick={this.openDeleteModal}>
+                    <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
+                  </Button>
+                </div>
+              </div>
+            )}
             <AlertForm
               valid={valid}
               invalid={invalid}
@@ -243,6 +288,7 @@ export const EventAdminFormCreatePage = connect(mapStateToProps)(injectIntl(Even
 export default createFragmentContainer(EventAdminFormCreatePage, {
   event: graphql`
     fragment EventAdminFormPage_event on Event {
+      id
       ...EventForm_event
     }
   `,

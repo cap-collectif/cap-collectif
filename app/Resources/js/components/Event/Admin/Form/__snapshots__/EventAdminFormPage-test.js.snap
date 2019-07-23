@@ -30,6 +30,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "id": "event1",
         }
       }
       onSubmit={[Function]}
@@ -46,6 +47,36 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
         label="action_edit"
         onSubmit={[Function]}
       />
+      <div>
+        <Connect(DeleteModal)
+          buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+          closeDeleteModal={[Function]}
+          deleteElement={[Function]}
+          deleteModalContent="group.admin.parameters.modal.delete.content"
+          deleteModalTitle="group.admin.parameters.modal.delete.title"
+          showDeleteModal={false}
+        />
+        <div>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="danger"
+            className="ml-5"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <i
+              className="fa fa-trash"
+            />
+             
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          </Button>
+        </div>
+      </div>
       <AlertForm
         invalid={false}
         submitFailed={false}
@@ -88,6 +119,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "id": "event1",
         }
       }
       onSubmit={[Function]}
@@ -104,6 +136,36 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
         label="action_edit"
         onSubmit={[Function]}
       />
+      <div>
+        <Connect(DeleteModal)
+          buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+          closeDeleteModal={[Function]}
+          deleteElement={[Function]}
+          deleteModalContent="group.admin.parameters.modal.delete.content"
+          deleteModalTitle="group.admin.parameters.modal.delete.title"
+          showDeleteModal={false}
+        />
+        <div>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="danger"
+            className="ml-5"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <i
+              className="fa fa-trash"
+            />
+             
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          </Button>
+        </div>
+      </div>
       <AlertForm
         invalid={true}
         submitFailed={true}

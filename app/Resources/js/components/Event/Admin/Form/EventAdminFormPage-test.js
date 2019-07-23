@@ -15,6 +15,7 @@ const defaultProps = {
   invalid: true,
   dispatch: jest.fn(),
   event: {
+    id: 'event1',
     $fragmentRefs,
     $refType,
   },
