@@ -13,6 +13,7 @@ import UserListField from '../../Admin/Field/UserListField';
 import SelectTheme from '../../Utils/SelectTheme';
 import SelectProject from '../../Utils/SelectProject';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import CustomPageFields from '../../Admin/Field/CustomPageFields';
 
 type Props = {|
   ...FormProps,
@@ -222,22 +223,7 @@ export class EventForm extends React.Component<Props> {
                 </h3>
               </div>
               {/* // TODO look at component dev by jean */}
-              <Field
-                name="customCode"
-                id="event_custom_code"
-                type="text"
-                component={component}
-                label={<FormattedMessage id="event.metadescription" />}
-                help={<FormattedMessage id="admin.help.metadescription" />}
-              />
-              <Field
-                name="metaDescription"
-                id="event_meta_description"
-                type="textarea"
-                component={component}
-                label={<FormattedMessage id="event.customcode" />}
-                help={<FormattedMessage id="admin.help.customcode" />}
-              />
+              <CustomPageFields />
               <div className="box-header">
                 <h3 className="box-title">
                   <FormattedMessage id="admin.fields.project.published_at" />
@@ -278,8 +264,8 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         enabled: props.event ? props.event.enabled : null,
         commentable: props.event ? props.event.commentable : null,
         guestListEnabled: props.event ? props.event.guestListEnabled : null,
-        metaDescription: props.event ? props.event.metaDescription : null,
-        customCode: props.event ? props.event.customCode : null,
+        metadescription: props.event ? props.event.metaDescription : null,
+        customcode: props.event ? props.event.customCode : null,
         media: props.event ? props.event.media : null,
         projects: props.event
           ? props.event.projects.map(p => ({

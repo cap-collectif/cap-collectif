@@ -246,42 +246,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        help={
-          <FormattedMessage
-            id="admin.help.metadescription"
-            values={Object {}}
-          />
-        }
-        id="event_custom_code"
-        label={
-          <FormattedMessage
-            id="event.metadescription"
-            values={Object {}}
-          />
-        }
-        name="customCode"
-        type="text"
-      />
-      <Field
-        component={[Function]}
-        help={
-          <FormattedMessage
-            id="admin.help.customcode"
-            values={Object {}}
-          />
-        }
-        id="event_meta_description"
-        label={
-          <FormattedMessage
-            id="event.customcode"
-            values={Object {}}
-          />
-        }
-        name="metaDescription"
-        type="textarea"
-      />
+      <CustomPageFields />
       <div
         className="box-header"
       >
@@ -560,42 +525,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        help={
-          <FormattedMessage
-            id="admin.help.metadescription"
-            values={Object {}}
-          />
-        }
-        id="event_custom_code"
-        label={
-          <FormattedMessage
-            id="event.metadescription"
-            values={Object {}}
-          />
-        }
-        name="customCode"
-        type="text"
-      />
-      <Field
-        component={[Function]}
-        help={
-          <FormattedMessage
-            id="admin.help.customcode"
-            values={Object {}}
-          />
-        }
-        id="event_meta_description"
-        label={
-          <FormattedMessage
-            id="event.customcode"
-            values={Object {}}
-          />
-        }
-        name="metaDescription"
-        type="textarea"
-      />
+      <CustomPageFields />
       <div
         className="box-header"
       >
@@ -874,42 +804,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        help={
-          <FormattedMessage
-            id="admin.help.metadescription"
-            values={Object {}}
-          />
-        }
-        id="event_custom_code"
-        label={
-          <FormattedMessage
-            id="event.metadescription"
-            values={Object {}}
-          />
-        }
-        name="customCode"
-        type="text"
-      />
-      <Field
-        component={[Function]}
-        help={
-          <FormattedMessage
-            id="admin.help.customcode"
-            values={Object {}}
-          />
-        }
-        id="event_meta_description"
-        label={
-          <FormattedMessage
-            id="event.customcode"
-            values={Object {}}
-          />
-        }
-        name="metaDescription"
-        type="textarea"
-      />
+      <CustomPageFields />
       <div
         className="box-header"
       >

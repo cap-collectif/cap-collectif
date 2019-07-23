@@ -102,7 +102,9 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
         />
       </h3>
     </div>
-    <CustomPageFields />
+    <CustomPageFields
+      picto={true}
+    />
   </div>
   <div
     className="box no-border"

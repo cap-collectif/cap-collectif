@@ -23,6 +23,7 @@ import DeleteEventMutation from '../../../../mutations/DeleteEventMutation';
 import AlertForm from '../../../Alert/AlertForm';
 import type { EventAdminFormPage_event } from '~relay/EventAdminFormPage_event.graphql';
 import DeleteModal from '../../../Modal/DeleteModal';
+import type { FormValues as CustomFormValues } from '../../../Admin/Field/CustomPageFields';
 
 type Props = {|
   intl: IntlShape,
@@ -37,13 +38,12 @@ type Props = {|
 |};
 
 type FormValues = {|
+  ...CustomFormValues,
   title: string,
   body: string,
   author?: { value: string, label: string },
   startAt: string,
   endAt: ?string,
-  metaDescription: ?string,
-  customCode: ?string,
   commentable: boolean,
   guestListEnabled: boolean,
   addressJson: ?string,
@@ -103,8 +103,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     body: values.body,
     startAt: values.startAt,
     endAt: values.endAt ? values.endAt : null,
-    metaDescription: values.metaDescription,
-    customCode: values.customCode,
+    metaDescription: values.metadescription,
+    customCode: values.customcode,
     commentable,
     guestListEnabled,
     addressJson,
@@ -149,8 +149,8 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     body: values.body,
     startAt: values.startAt,
     endAt: values.endAt ? values.endAt : null,
-    metaDescription: values.metaDescription,
-    customCode: values.customCode,
+    metaDescription: values.metadescription,
+    customCode: values.customcode,
     commentable,
     guestListEnabled,
     addressJson,

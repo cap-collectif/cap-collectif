@@ -27,7 +27,7 @@ class EventController extends Controller
             $this->admin->getTemplate('edit'),
             [
                 'action' => 'edit',
-                'object' => $this->admin->getNewInstance(),
+                'object' => $this->admin->getObject($id),
                 'eventId' => GlobalId::toGlobalId('Event', $id)
             ],
             null
