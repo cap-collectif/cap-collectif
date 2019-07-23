@@ -192,7 +192,11 @@ class AbstractVoteRepository extends EntityRepository
 
     public function getVotesFromConsultationStep(ConsultationStep $step): int
     {
-        $id = $step->getId();
+        if (!$step->getConsultation()) {
+            return 0;
+        }
+
+        $cId = $step->getConsultation()->getId();
 
         $sql = "
             SELECT SUM(nb) as result
@@ -200,52 +204,46 @@ class AbstractVoteRepository extends EntityRepository
                 SELECT COUNT(v.id) as nb , 'opi' as entity
                 FROM votes v
                 LEFT JOIN opinion o ON v.opinion_id = o.id
-                LEFT JOIN consultation c ON o.consultation_id = c.id
-                INNER JOIN step cs ON c.step_id = \"${id}\"
-                WHERE v.published = true
+                WHERE o.consultation_id =\"${cId}\"
+                AND v.published = true
                 UNION
                 SELECT COUNT(v.id) as nb, 'args' as entity
                 FROM votes v
                 LEFT JOIN argument a ON v.argument_id = a.id
                 LEFT JOIN opinion o ON a.opinion_id = o.id
-                LEFT JOIN consultation c ON o.consultation_id = c.id
-                INNER JOIN step cs ON c.step_id = \"${id}\"
-                WHERE v.published = true
+                WHERE o.consultation_id =\"${cId}\"
+                AND v.published = true
                 UNION
                 SELECT COUNT(v.id) as nb, 'src' as entity
                 FROM votes v
                 LEFT JOIN source s ON v.source_id = s.id
                 LEFT JOIN opinion o ON s.opinion_id = o.id
-                LEFT JOIN consultation c ON o.consultation_id = c.id
-                INNER JOIN step cs ON c.step_id = \"${id}\"
-                WHERE v.published = true
+                WHERE o.consultation_id =\"${cId}\"
+                AND v.published = true
                 UNION
                 SELECT COUNT(v.id) as nb, 'opv' as entity
                 FROM votes v
                 LEFT JOIN opinion_version ov ON v.opinion_version_id = ov.id
                 LEFT JOIN opinion o ON ov.opinion_id = o.id
-                LEFT JOIN consultation c ON o.consultation_id = c.id
-                INNER JOIN step cs ON c.step_id = \"${id}\"
-                WHERE v.published = true
+                WHERE o.consultation_id =\"${cId}\"
+                AND v.published = true
                 UNION
                 SELECT COUNT(v.id) as nb, 'aropv' as entity
                 FROM votes v
                 LEFT JOIN argument a ON v.argument_id = a.id
                 LEFT JOIN opinion_version ov ON a.opinion_version_id = ov.id
                 LEFT JOIN opinion o ON ov.opinion_id = o.id
-                LEFT JOIN consultation c ON o.consultation_id = c.id
-                INNER JOIN step cs ON c.step_id = \"${id}\"
-                WHERE v.published = true
+                WHERE o.consultation_id =\"${cId}\"
+                AND v.published = true
                 UNION
                 SELECT COUNT(v.id) as nb, 'srcopv'  as entity
                 FROM votes v
                 LEFT JOIN source s ON v.source_id = s.id
                 LEFT JOIN opinion_version ov ON s.opinion_version_id = ov.id
                 LEFT JOIN opinion o ON ov.opinion_id = o.id
-                LEFT JOIN consultation c ON o.consultation_id = c.id
-                INNER JOIN step cs ON c.step_id = \"${id}\"
-                WHERE v.published = true
-            ) AS count
+                WHERE o.consultation_id =\"${cId}\"
+                AND v.published = true
+            ) res
         ";
 
         return $this->getEntityManager()
