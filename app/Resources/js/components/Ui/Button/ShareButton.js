@@ -38,7 +38,7 @@ class ShareButton extends React.Component<Props> {
           bsSize={bsSize}
           title={
             <span>
-              <SocialIcon name="link" size={bsSize === 'xs' ? 12 : 16} />{' '}
+              <SocialIcon name="share" size={bsSize === 'xs' ? 12 : 16} />{' '}
               {<FormattedMessage id="global.share" />}
             </span>
           }>
