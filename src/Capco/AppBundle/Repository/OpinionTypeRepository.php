@@ -134,7 +134,7 @@ class OpinionTypeRepository extends EntityRepository
                 'WITH',
                 'o.published = :enabled AND o.trashedAt IS NULL'
             )
-            ->leftJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
+            ->innerJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
             ->andWhere('ot IN (:allowedTypes)')
             ->setParameter('step', $step)
             ->setParameter('enabled', true)

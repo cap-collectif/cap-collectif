@@ -612,8 +612,8 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
      */
     public function deleteOpinion()
     {
-        if (null !== $this->getStep()) {
-            $this->getStep()->removeOpinion($this);
+        if (null !== $this->getConsultation()) {
+            $this->getConsultation()->removeOpinion($this);
         }
         if (null !== $this->OpinionType) {
             $this->OpinionType->removeOpinion($this);

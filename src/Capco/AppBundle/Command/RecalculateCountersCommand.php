@@ -2,17 +2,16 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireRepliesResolver;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Console\Input\InputOption;
 use Capco\AppBundle\Resolver\ContributionResolver;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireRepliesResolver;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class RecalculateCountersCommand extends ContainerAwareCommand
 {
@@ -184,7 +183,8 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $this->executeQuery(
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionCount = (
           select count(DISTINCT o.id)
-          from CapcoAppBundle:Opinion o LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
+          from CapcoAppBundle:Opinion o 
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc AND oc.step = cs
           WHERE o.published = 1 AND o.trashedAt IS NULL group by oc.step
         )'
         );
@@ -192,9 +192,10 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $this->executeQuery(
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionVersionsCount = (
           select count(DISTINCT ov.id)
-          from CapcoAppBundle:OpinionVersion ov INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
-          INNER JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
-          WHERE ov.published = 1 AND ov.trashedAt IS NULL AND o.published = 1 AND o.trashedAt IS NULL group by oc.step
+          from CapcoAppBundle:OpinionVersion ov 
+          INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+          WHERE oc.step = cs AND ov.published = 1 AND ov.trashedAt IS NULL AND o.published = 1 AND o.trashedAt IS NULL group by oc.step
         )'
         );
 
@@ -202,17 +203,18 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedOpinionCount = (
           select count(DISTINCT o.id)
           from CapcoAppBundle:Opinion o
-          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
-          WHERE o.published = 1 AND o.trashedAt IS NOT NULL group by oc.step
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+          WHERE oc.step = cs AND o.published = 1 AND o.trashedAt IS NOT NULL group by oc.step
         )'
         );
 
         $this->executeQuery(
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedOpinionVersionsCount = (
           select count(DISTINCT ov.id)
-          from CapcoAppBundle:OpinionVersion ov INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
-          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
-          WHERE ov.published = 1 AND ov.trashedAt IS NOT NULL AND o.published = 1 group by oc.step
+          from CapcoAppBundle:OpinionVersion ov 
+          INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc 
+          WHERE oc.step = cs AND ov.published = 1 AND ov.trashedAt IS NOT NULL AND o.published = 1 group by oc.step
         )'
         );
 
@@ -291,11 +293,11 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\ConsultationStep cs
                     set cs.contributorsCount = ' .
-                        $participants .
-                        '
+                    $participants .
+                    '
                     where cs.id = \'' .
-                        $cs->getId() .
-                        '\''
+                    $cs->getId() .
+                    '\''
                 );
 
                 $count = $container
@@ -304,11 +306,11 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\ConsultationStep cs
                     set cs.votesCount = ' .
-                        $count .
-                        '
+                    $count .
+                    '
                     where cs.id = \'' .
-                        $cs->getId() .
-                        '\''
+                    $cs->getId() .
+                    '\''
                 );
             }
         }
@@ -327,11 +329,11 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                     $this->executeQuery(
                         'UPDATE CapcoAppBundle:Steps\QuestionnaireStep qs
                         set qs.repliesCount = ' .
-                            $repliesCount .
-                            '
+                        $repliesCount .
+                        '
                         where qs.id = \'' .
-                            $qs->getId() .
-                            '\''
+                        $qs->getId() .
+                        '\''
                     );
                 }
             }
@@ -346,11 +348,11 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\SelectionStep step
                     set step.contributorsCount = ' .
-                        $participants .
-                        '
+                    $participants .
+                    '
                     where step.id = \'' .
                     $selectionStep->getId() .
-                        '\''
+                    '\''
                 );
             }
         }

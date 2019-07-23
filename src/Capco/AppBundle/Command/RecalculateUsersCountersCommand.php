@@ -104,8 +104,8 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
             LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
             LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
             LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = ovocs
+            INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
+            INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = ovocs
             WHERE a.Author = u AND a.published = 1 AND (
               (a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1)
               OR
@@ -200,10 +200,10 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
             LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
             LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
             LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
+            INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
             LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
             LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = ovocs
+            INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = ovocs
             WHERE av.user = u AND a.published = 1 AND (
               (a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1)
               OR
@@ -221,10 +221,10 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
             LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
             LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
             LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
+            INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
             LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
             LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = ovocs
+            INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = ovocs
             WHERE sv.user = u AND s.published = 1 AND (
               (s.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1)
               OR
