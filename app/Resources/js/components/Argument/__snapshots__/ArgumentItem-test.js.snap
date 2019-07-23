@@ -7,9 +7,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
   id="arg-argument1"
   listItem={false}
 >
-  <Media
-    overflow={true}
-  >
+  <Media>
     <Left>
       <Connect(UserAvatarDeprecated)
         className="excerpt_dark"
@@ -190,9 +188,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
       Opinion 1
     </a>
   </p>
-  <Media
-    overflow={true}
-  >
+  <Media>
     <Left>
       <Connect(UserAvatarDeprecated)
         className="excerpt_dark"
