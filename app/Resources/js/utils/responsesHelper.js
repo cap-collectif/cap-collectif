@@ -323,6 +323,9 @@ const getValueFromSubmitResponse = (response: ?ResponseInReduxForm): ?string => 
 export const getValueFromResponse = (questionType: string, responseValue: string) => {
   // For some questions type we need to parse the JSON of previous value
   try {
+    if (questionType === 'number') {
+      return Number(responseValue)
+    }
     if (questionType === 'button') {
       return JSON.parse(responseValue).labels[0];
     }
