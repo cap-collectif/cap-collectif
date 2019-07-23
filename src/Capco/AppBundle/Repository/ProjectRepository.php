@@ -124,7 +124,7 @@ class ProjectRepository extends EntityRepository
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
             ->orderBy('p.updatedAt', 'DESC');
 
-        $query->select('COUNT(DISTINCT(p.id))');
+        $query->select('COUNT(p.id)');
 
         return $query->getQuery()->getSingleScalarResult();
     }
