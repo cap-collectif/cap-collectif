@@ -21,7 +21,7 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
         <a href={item.related.url}>{item.related.title}</a>
       </p>
     )}
-    <Media overflow>
+    <Media>
       <Media.Left>
         <UserAvatarDeprecated user={item.user} />
       </Media.Left>
@@ -135,7 +135,7 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
             </React.Fragment>
           )}
           <ShareButton id={`share-button-${item.id}`} bsSize="xs" outline grey>
-            <ShareButtonAction action="mail" />
+            <ShareButtonAction action="email" />
             <ShareButtonAction action="facebook" />
             <ShareButtonAction action="twitter" />
             <ShareButtonAction action="linkedin" />

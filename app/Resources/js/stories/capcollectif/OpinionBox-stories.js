@@ -28,7 +28,7 @@ import { UserAvatarDeprecated } from '../../components/User/UserAvatarDeprecated
 import { features } from '../../redux/modules/default';
 import { author as authorMock } from '../mocks/users';
 import { opinion as opinionMock } from '../mocks/opinions';
-import UserAvatarList from '../../components/User/UserAvatarList';
+import { UserAvatarList } from '../../components/User/UserAvatarList';
 
 const headerOption = {
   Gray: 'gray',
@@ -311,7 +311,7 @@ const OpinionBox = ({ section, opinion }) => (
           {/** Utils/ShareButtonDropdown.js */}
           {opinion.title && opinion.url && (
             <ShareButton id="shareButton" margin="ml-5">
-              <ShareButtonAction action="mail" />
+              <ShareButtonAction action="email" />
               <ShareButtonAction action="facebook" />
               <ShareButtonAction action="twitter" />
               <ShareButtonAction action="linkedin" />

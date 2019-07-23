@@ -8,16 +8,10 @@ type Props = {
   name: string,
 };
 
-class SocialIcon extends React.Component<Props> {
-  render() {
-    const { name, ...rest } = this.props;
-
-    return (
-      <span style={{ color: socialColors[name] }}>
-        <Icon name={name} {...rest} />
-      </span>
-    );
-  }
-}
+const SocialIcon = ({ name, ...rest }: Props) => (
+  <span style={{ color: socialColors[name] }}>
+    <Icon name={name} {...rest} />
+  </span>
+);
 
 export default SocialIcon;

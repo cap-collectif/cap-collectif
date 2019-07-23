@@ -9,14 +9,12 @@ import Left from './Left';
 type Props = {
   children?: any,
   className?: string,
-  // TODO : find a more global solution than passing an overflow props
-  overflow?: boolean,
 };
 
 export const Container = styled(MediaBtsp)`
   display: flex;
   margin: initial;
-  overflow: ${props => (props.overflow ? 'initial' : 'auto')};
+  overflow: initial;
 `;
 
 export default class Media extends PureComponent<Props> {
@@ -27,12 +25,8 @@ export default class Media extends PureComponent<Props> {
   static Heading = Heading;
 
   render() {
-    const { children, className, overflow } = this.props;
+    const { children, className } = this.props;
 
-    return (
-      <Container overflow={overflow} className={className}>
-        {children}
-      </Container>
-    );
+    return <Container className={className}>{children}</Container>;
   }
 }

@@ -1,12 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<UserAvatarListContainer /> renders correctly 1`] = `
-<UserAvatarList__Button
-  type="button"
->
-  <UserAvatarList
-    max={10}
-  >
+exports[`<UserAvatarList /> renders correctly 1`] = `
+<Fragment>
+  <UserAvatarList__AvatarButton>
     <OverlayTrigger
       defaultOverlayShown={false}
       key="0"
@@ -78,16 +74,8 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
         }
       />
     </OverlayTrigger>
-  </UserAvatarList>
-</UserAvatarList__Button>
+  </UserAvatarList__AvatarButton>
+</Fragment>
 `;
 
-exports[`<UserAvatarListContainer /> renders correctly without authors 1`] = `
-<UserAvatarList__Button
-  type="button"
->
-  <UserAvatarList
-    max={10}
-  />
-</UserAvatarList__Button>
-`;
+exports[`<UserAvatarList /> renders correctly withou authors 1`] = `<Fragment />`;

@@ -8,7 +8,7 @@ import ShareButtonAction from '../../../components/Ui/Button/ShareButtonAction';
 // Share Button components parametrable
 const ShareButtonDropDown = ({ type }: { type: Object }) => (
   <ShareButton id="shareButton" bsSize={type.size} outline={type.outline} grey={type.grey}>
-    <ShareButtonAction action="mail" />
+    <ShareButtonAction action="email" />
     <ShareButtonAction action="facebook" />
     <ShareButtonAction action="twitter" />
     <ShareButtonAction action="linkedin" />

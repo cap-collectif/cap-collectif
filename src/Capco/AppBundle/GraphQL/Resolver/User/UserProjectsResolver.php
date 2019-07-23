@@ -33,12 +33,11 @@ class UserProjectsResolver implements ResolverInterface
         $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
             try {
                 $arguments = $this->projectRepository
-                    ->getByUserPublicPaginated($user, $offset, $limit)
+                    ->getByUserPublicPaginated($user)
                     ->getIterator()
                     ->getArrayCopy();
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-
                 throw new UserError('Error during fetching arguments of ' . $user->getLastname());
             }
 

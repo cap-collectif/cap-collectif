@@ -1,9 +1,0 @@
-InternalDeleteSSOConfigurationPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      deletedSsoConfigurationId:
-        type: 'ID'
-      userErrors:
-        type: '[UserError]'
-        description: ''

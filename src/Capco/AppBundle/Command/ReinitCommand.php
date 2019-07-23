@@ -78,6 +78,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCountDataLoader;
 
@@ -162,18 +163,14 @@ class ReinitCommand extends ContainerAwareCommand
         $stepContributions->disableCache();
         $proposalFormProposals = $this->getContainer()->get(ProposalFormProposalsDataLoader::class);
         $proposalFormProposals->disableCache();
-        $collectStepContributionsCount = $this->getContainer()->get(
-            CollectStepContributorCountDataLoader::class
-        );
+        $collectStepContributionsCount = $this->getContainer()->get(CollectStepContributorCountDataLoader::class);
         $collectStepContributionsCount->disableCache();
         $stepVotesCount = $this->getContainer()->get(StepVotesCountDataLoader::class);
         $stepVotesCount->disableCache();
 
         $output->writeln('Disabled <info>' . \get_class($stepContributions) . '</info>.');
         $output->writeln('Disabled <info>' . \get_class($proposalFormProposals) . '</info>.');
-        $output->writeln(
-            'Disabled <info>' . \get_class($collectStepContributionsCount) . '</info>.'
-        );
+        $output->writeln('Disabled <info>' . \get_class($collectStepContributionsCount) . '</info>.');
         $output->writeln('Disabled <info>' . \get_class($stepVotesCount) . '</info>.');
 
         $this->createDatabase($output);
@@ -354,7 +351,8 @@ class ReinitCommand extends ContainerAwareCommand
         $this->runCommands(
             [
                 'capco:compute:users-counters' => ['--env' => $this->env, '--force' => true],
-                'capco:compute:counters' => ['--env' => $this->env, '--force' => true]
+                'capco:compute:counters' => ['--env' => $this->env, '--force' => true],
+                'capco:compute:rankings' => ['--env' => $this->env]
             ],
             $output
         );
