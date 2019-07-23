@@ -10,9 +10,6 @@
 # Recalculate counters that have changed at every 2nd minute from 1 through 59.
 1-59/2 * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:counters --env=prod
 
-# Recalculate rankings at every 5th minute.
-*/5 * * * * /usr/bin/timeout 4m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:rankings --env=prod
-
 # Recalculate users counters from scratch at 04:00.
 0 4 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --force --env=prod
 
