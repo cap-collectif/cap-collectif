@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireRepliesResolver;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
@@ -184,8 +185,8 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionCount = (
           select count(DISTINCT o.id)
           from CapcoAppBundle:Opinion o 
-          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc AND oc.step = cs
-          WHERE o.published = 1 AND o.trashedAt IS NULL group by oc.step
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+          WHERE oc.step = cs AND o.published = 1 AND o.trashedAt IS NULL group by oc.step
         )'
         );
 
@@ -218,76 +219,82 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )'
         );
 
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.argumentCount = (
-          select count(DISTINCT a.id)
-          from CapcoAppBundle:Argument a
-          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
-          LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
-          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
-          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovoc.step = cs
-          WHERE a.published = 1 AND a.trashedAt IS NULL AND (
-            (a.opinion IS NOT NULL AND o.published = 1)
-            OR
-            (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
-          )
-        )'
-        );
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedArgumentCount = (
-          select count(DISTINCT a.id)
-          from CapcoAppBundle:Argument a
-          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
-          LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
-          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
-          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovoc.step = cs
-          WHERE a.published = 1 AND a.trashedAt IS NOT NULL AND (
-            (a.opinion IS NOT NULL AND o.published = 1)
-            OR
-            (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
-          )
-        )'
-        );
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.sourcesCount = (
-          select count(DISTINCT s.id)
-          from CapcoAppBundle:Source s
-          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
-          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
-          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
-          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovoc.step = cs
-          WHERE s.published = 1 AND s.trashedAt IS NULL AND (
-            (s.opinion IS NOT NULL AND o.published = 1)
-            OR
-            (s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
-          )
-        )'
-        );
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedSourceCount = (
-          select count(DISTINCT s.id)
-          from CapcoAppBundle:Source s
-          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
-          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
-          LEFT JOIN CapcoAppBundle:Consultation oc WITH oc.step = cs
-          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovoc.step = cs
-          WHERE s.published = 1 AND s.trashedAt IS NOT NULL AND (
-            (s.opinion IS NOT NULL AND o.published = 1)
-            OR
-            (s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
-          )
-        )'
-        );
-
         $consultationSteps = $container->get(ConsultationStepRepository::class)->findAll();
         foreach ($consultationSteps as $cs) {
+            $first = <<<DQL
+          select count(DISTINCT a.id)
+          from CapcoAppBundle:Argument a
+          LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+          WHERE a.published = 1 AND a.trashedAt IS NULL AND a.opinion IS NOT NULL AND o.published = 1 AND oc.step = :cs
+DQL;
+            $second = <<<DQL
+          select count(DISTINCT a.id)
+          from CapcoAppBundle:Argument a
+          LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          INNER JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
+          WHERE a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovoc.step = :cs
+DQL;
+            $this->updateCounterForConsultationStepWithOpinion('argumentCount', $first, $second, $cs);
+
+            $first = <<<DQL
+          select count(DISTINCT a.id)
+          from CapcoAppBundle:Argument a
+          LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+          WHERE a.published = 1 AND a.trashedAt IS NOT NULL AND a.opinion IS NOT NULL AND o.published = 1 AND oc.step = :cs
+DQL;
+            $second = <<<DQL
+          select count(DISTINCT a.id)
+          from CapcoAppBundle:Argument a
+          LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          INNER JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
+          WHERE a.published = 1 AND a.trashedAt IS NOT NULL AND a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovoc.step = :cs
+DQL;
+            $this->updateCounterForConsultationStepWithOpinion('trashedArgumentCount', $first, $second, $cs);
+
+            $first = <<<DQL
+          select count(DISTINCT s.id)
+          from CapcoAppBundle:Source s
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+          WHERE s.published = 1 AND s.trashedAt IS NULL AND s.opinion IS NOT NULL AND o.published = 1 AND oc.step = :cs
+DQL;
+            $second = <<<DQL
+          select count(DISTINCT s.id)
+          from CapcoAppBundle:Source s
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          INNER JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
+          WHERE s.published = 1 AND s.trashedAt IS NULL AND s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovoc.step = :cs
+DQL;
+            $this->updateCounterForConsultationStepWithOpinion('sourcesCount', $first, $second, $cs);
+
+            $first = <<<DQL
+          select count(DISTINCT s.id)
+          from CapcoAppBundle:Source s
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
+          WHERE s.published = 1 AND s.trashedAt IS NOT NULL AND s.opinion IS NOT NULL AND o.published = 1 AND oc.step = :cs
+DQL;
+            $second = <<<DQL
+          select count(DISTINCT s.id)
+          from CapcoAppBundle:Source s
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          INNER JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
+          WHERE s.published = 1 AND s.trashedAt IS NOT NULL AND s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovoc.step = :cs
+DQL;
+            $this->updateCounterForConsultationStepWithOpinion('trashedSourceCount', $first, $second, $cs);
+
             if ($cs->isOpen() || $this->force) {
                 $participants = $contributionResolver->countStepContributors($cs);
                 $this->executeQuery(
@@ -358,6 +365,19 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         }
 
         $output->writeln('Calculation completed');
+    }
+
+    private function updateCounterForConsultationStepWithOpinion(string $fieldName, string $firstQuery, string $secondQuery, ConsultationStep $cs): void {
+        $count = $this->entityManager
+            ->createQuery($firstQuery)
+            ->setParameter('cs', $cs)
+            ->getSingleScalarResult();
+        $count += $this->entityManager
+            ->createQuery($secondQuery)
+            ->setParameter('cs', $cs)
+            ->getSingleScalarResult();
+
+        $this->executeQuery("UPDATE CapcoAppBundle:Steps\\ConsultationStep cs set cs.${fieldName} = ${count} WHERE cs.id = '" . $cs->getId() . "'");
     }
 
     private function executeQuery(string $sql, bool $executeUpdate = false): void

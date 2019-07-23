@@ -391,10 +391,10 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
           LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
-          LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ocs WITH oc.step = :project
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ocs WITH oc.step = :project
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc   
-          LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :project   
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :project   
           WHERE av.user = u AND a.published = 1 AND (
             (a.opinion IS NOT NULL AND o.published = 1)
             OR
@@ -501,10 +501,10 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
           LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
-          LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ocs WITH oc.step = :step
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ocs WITH oc.step = :step
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
-          LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :step
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :step
           WHERE s.published = 1 AND (
             (s.opinion IS NOT NULL AND o.published = 1)
             OR
@@ -529,10 +529,10 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
           LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
-          LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ocs WITH oc.step = :step
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ocs WITH oc.step = :step
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
-          LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :step
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :step
           WHERE a.published = 1 AND (
             (a.opinion IS NOT NULL AND o.published = 1)
             OR
@@ -551,8 +551,7 @@ class UserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions) as opinions_count')
             ->leftJoin('u.opinions', 'opinions', 'WITH', 'opinions.published = 1')
-            ->leftJoin('opinions.consultation', 'consultation')
-            ->where('consultation.step = :step')
+            ->innerJoin('opinions.consultation', 'consultation', 'WITH', 'consultation.step = :step')
             ->groupBy('u.id')
             ->setParameter('step', $step);
 
@@ -596,8 +595,7 @@ class UserRepository extends EntityRepository
             ->select('u.id', 'count(distinct versions) as versions_count')
             ->leftJoin('u.opinionVersions', 'versions', 'WITH', 'versions.published = 1')
             ->leftJoin('versions.parent', 'opinions', 'WITH', 'opinions.published = 1')
-            ->leftJoin('opinions.consultation', 'consultation')
-            ->where('consultation.step = :step')
+            ->innerJoin('opinions.consultation', 'consultation', 'WITH', 'consultation.step = :step')
             ->groupBy('u.id')
             ->setParameter('step', $step);
 
@@ -624,7 +622,7 @@ class UserRepository extends EntityRepository
                 'opinions_votes_opinion.consultation',
                 'opinions_votes_opinion_consultation'
             )
-            ->leftJoin(
+            ->innerJoin(
                 'opinions_votes_opinion_consultation.step',
                 'opinions_votes_opinion_consultation_step',
                 'WITH',
@@ -662,7 +660,7 @@ class UserRepository extends EntityRepository
                 'versions_votes_version_parent.consultation',
                 'versions_votes_version_parent_consultation'
             )
-            ->leftJoin(
+            ->innerJoin(
                 'versions_votes_version_parent_consultation.step',
                 'versions_votes_version_parent_consultation_step',
                 'WITH',
@@ -686,10 +684,10 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
           LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
-          LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ocs WITH oc.step = :step
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ocs WITH oc.step = :step
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
-          LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :step
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :step
           WHERE av.user = u AND a.published = 1 AND (
             (a.opinion IS NOT NULL AND o.published = 1)
             OR
@@ -715,10 +713,10 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
           LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
-          LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ocs WITH oc.step = :step
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ocs WITH oc.step = :step
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
-          LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :step
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :step
           WHERE sv.user = u AND s.published = 1 AND (
             (s.opinion IS NOT NULL AND o.published = 1)
             OR
