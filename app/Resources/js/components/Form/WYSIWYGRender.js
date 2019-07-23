@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 type Props = {
-  value?: ?string | ?number,
+  value?: ?string,
   tagName?: string,
   className?: string,
 };
