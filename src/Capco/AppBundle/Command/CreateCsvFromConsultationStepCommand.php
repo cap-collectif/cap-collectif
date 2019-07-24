@@ -522,18 +522,18 @@ ${versionFragment}
                 totalCount
             }
             votes(first: ${votePerPage}) {
-                totalCount
-                edges {
-                    cursor
-                    node {
-                        ...voteInfos
-                    }
+              totalCount
+              edges {
+                cursor
+                node {
+                  ...voteInfos
                 }
-                pageInfo {
-                    startCursor
-                    endCursor
-                    hasNextPage
-                }
+              }
+              pageInfo {
+                startCursor
+                endCursor
+                hasNextPage
+              }
             }
             arguments(first: ${argumentPerPage}, includeTrashed: true) {
               totalCount
@@ -550,18 +550,18 @@ ${versionFragment}
               }
             }
             sources(first: ${sourcePerPage}) {
-                totalCount
-                edges {
-                    cursor
-                    node {
-                      ...sourceInfos
-                    }
+              totalCount
+              edges {
+                cursor
+                node {
+                  ...sourceInfos
                 }
-                pageInfo {
-                    startCursor
-                    endCursor
-                    hasNextPage
-                }
+              }
+              pageInfo {
+                startCursor
+                endCursor
+                hasNextPage
+              }
             }
             reportings(first: ${reportingPerPage}) {
               totalCount
@@ -578,14 +578,18 @@ ${versionFragment}
               }
             }
             versions(first: ${versionPerPage}) {
-                totalCount
-                edges {
-                    cursor
-                    node {
-                        ...versionInfos
-                    }
+              totalCount
+              edges {
+                cursor
+                node {
+                  ...versionInfos
                 }
-            }
+              }
+              pageInfo {
+                startCursor
+                endCursor
+                hasNextPage
+              }
             }
           }
         }

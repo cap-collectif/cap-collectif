@@ -165,8 +165,13 @@ Object {
               "name": "Citoyen",
             },
           },
+<<<<<<< HEAD
           "body": "Paris Web est un événement annuel de deux jours de conférences et un jour d'ateliers consacré au développement web. L'événement a généralement lieu fin septembre, début octobre, à Paris ou dans sa proche banlieue depuis 2006 et organisé par l'association à but non lucratif Paris-Web.",
           "createdAt": "2015-01-03 00:00:00",
+=======
+          "body": "<h2>Ipsam.</h2><p>Molestiae molestias excepturi minus totam earum. Eius ipsum fuga dolor praesentium dolores. Quas fuga repudiandae et consequatur dolore. Corporis voluptate assumenda odio maiores quam. Vitae sequi voluptates quo voluptate sint reiciendis. Adipisci aperiam enim sunt ad quos id molestias. Debitis sed est laboriosam impedit. Sequi eum necessitatibus non officia dolor quis optio voluptatem. Quaerat fugiat est accusamus odit exercitationem recusandae ut.</p><h2>Occaecati.</h2><h3>Soluta.</h3><p>Voluptatem quis quia saepe. Sunt saepe nisi omnis quo et expedita. Qui aut expedita ex et perferendis nulla pariatur. Veniam repudiandae quia recusandae harum qui. Sit soluta labore et. Reprehenderit officia excepturi dolores dolor natus. Molestiae aut esse recusandae facere.</p>",
+          "createdAt": "2015-01-01 00:00:00",
+>>>>>>> e9cc83e9d... Update snapshots, fix indentation
           "enabled": true,
           "fullAddress": "Optique Moreau, 48 Rue de Stalingrad, 38000 Grenoble",
           "id": "RXZlbnQ6ZXZlbnQz",
