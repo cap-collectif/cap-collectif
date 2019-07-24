@@ -67,7 +67,7 @@ Scenario: Email should be sent if a message is sent to the proposal_update queue
   And I should see "notification.email.proposal.update.body" in mail
   Then I should not see mail with subject "acknowledgment-of-receipt"
 
-@rabbitmq @snapshot
+@rabbitmq @snapshot-email
 Scenario: I publish a proposal in draft without allowAknowledge
   Given I publish in "proposal_create" with message below:
   """
@@ -79,7 +79,7 @@ Scenario: I publish a proposal in draft without allowAknowledge
   Then I open mail with subject "notification.email.proposal.create.subject"
   And email should match snapshot "notifyProposal_publishedDraft.html"
 
-@rabbitmq @snapshot
+@rabbitmq @snapshot-email
 Scenario: I publish a proposal in draft with allowAknowledge
   Given I publish in "proposal_create" with message below:
   """

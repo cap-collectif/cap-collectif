@@ -35,7 +35,7 @@ Scenario: User wants to send a message via the first form by filling empty field
   Then I should see "contact.no_email"
   Then I should see "contact.no_description"
 
-@snapshot
+@snapshot-email
 Scenario: The email sent to the interlocutor should be sent
   Given I visited "contact page"
   And I click the ".contact__form__list button:first-of-type" element
