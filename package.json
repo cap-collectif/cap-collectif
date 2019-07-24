@@ -82,7 +82,7 @@
         "app/Resources/js/**/*.js": [
             "eslint --fix --report-unused-disable-directives",
             "prettier --parser flow --write",
-            "jest --bail --findRelatedTests",
+            "jest --bail --findRelatedTests --runInBand",
             "git add"
         ],
         "features/**/*.js": [
