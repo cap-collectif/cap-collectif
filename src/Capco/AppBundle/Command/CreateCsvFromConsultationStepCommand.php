@@ -163,6 +163,7 @@ fragment versionInfos on Version {
     reportings {
       totalCount
       edges {
+      cursor
         node {
           ...reportInfos
         }
