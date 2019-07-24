@@ -2,7 +2,7 @@
 Feature: Shield admin configuration
 
 Background:
-  Given I am logged in as super admin
+  Given I am logged in as admin
 
 @database
 Scenario: Logged in admin want to update shield configuration

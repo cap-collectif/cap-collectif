@@ -49,7 +49,8 @@ class Manager
         'display_map',
         'consent_internal_communication',
         'disconnect_openid',
-        'sso_by_pass_auth'
+        'sso_by_pass_auth',
+        'list_sso'
     ];
 
     protected $context;
