@@ -76,7 +76,7 @@ module.exports = {
       },
     ],
     'graphql/no-deprecated-fields': [
-      'error',
+      'warn',
       {
         env: 'relay',
         tagName: 'graphql',
