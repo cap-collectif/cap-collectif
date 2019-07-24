@@ -7,7 +7,6 @@ Capco\AppBundle\Entity\Video:
     Author: '@user1'
     media: '@MediaProject1'
     link: 'https://www.youtube.com/embed/gwuLVLwMjuA?autoplay=1'
-    color: black
   video2:
     title: Stratégie technologique de l'Etat et services publics
     body: <text(50)>
@@ -16,7 +15,6 @@ Capco\AppBundle\Entity\Video:
     Author: '@user2'
     media: '@MediaProjectImageVideo'
     link: 'https://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
-    color: white
   video3:
     title: Star Wars 5 est le meilleur film ever qu'est ce que vous allez répondre à ça oui j'écris beaucoup pour avoir un titre sur plusieurs lignes
     body: <text(50)>
@@ -33,7 +31,6 @@ Capco\AppBundle\Entity\Video:
     Author: '@user1'
     media: '@MediaProject5'
     link: 'https://www.youtube.com/embed/gwuLVLwMjuA?autoplay=1'
-    color: black
   video5:
     title: Stratégie technologique de l'Etat et services publics
     body: <text(50)>
@@ -42,7 +39,6 @@ Capco\AppBundle\Entity\Video:
     Author: '@user2'
     media: '@MediaProject6'
     link: 'https://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
-    color: white
   video6:
     isEnabled: true
     position: 6
