@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\Questionnaire:
   questionnaire1:
     id: questionnaire1
     title: Votre avis sur les JO 2024 à Paris
-    description: Les Jeux olympiques d'été de 2024, officiellement appelés les Jeux de la XXXIIIᵉ olympiade de l'ère moderne, seront célébrés en 2024 à Paris, en France, officiellement désignée lors de la 131ᵉ session du CIO à Lima, au Pérou, le 13 septembre 2017.
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@questionnairestep1'
     multipleRepliesAllowed: true
     anonymousAllowed: true
@@ -14,31 +14,31 @@ Capco\AppBundle\Entity\Questionnaire:
   questionnaire2:
     id: questionnaire2
     title: Questionnaire de test
-    description: Tester c'est douter
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@questionnairestep2'
     multipleRepliesAllowed: false
     privateResult: false
   questionnaire3:
     id: questionnaire3
     title: Questionnaire dans une étape fermée
-    description: Je suis fermé mais bon pourquoi pas
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@questionnairestep3'
     multipleRepliesAllowed: true
     privateResult: true
   questionnaire4:
     id: questionnaire4
     title: Questionnaire pour budget participatif
-    description: Le Budget Participatif permet ainsi aux citoyens parisiens d'apporter des solutions à des problèmes qui les concernent directement
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaire5:
     id: questionnaire5
     title: Questionnaire pour budget participatif disponible
-    description: Le Budget Participatif permet ainsi aux citoyens parisiens d'apporter des solutions à des problèmes qui les concernent directement
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaireWithJumps:
     id: questionnaireWithJumps
     title: El famoso questionnaire a branche
-    description: On appelle saut (ou branchement) en assembleur le fait de passer à une instruction autre que celle qui suit celle en cours en mémoire. En effet, en temps normal (c'est-à-dire sans instruction contraire) le processeur exécute les instructions séquentiellement, il exécute l'instruction située à l'emplacement mémoire suivant. C'est un registre spécial (le registre IP) qui indique l'adresse de l'instruction suivante à exécuter.
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@questionnairestepJump'
     multipleRepliesAllowed: true
     anonymousAllowed: true
@@ -47,27 +47,27 @@ Capco\AppBundle\Entity\Questionnaire:
   questionnaire6:
     id: questionnaire6
     title: Questionnaire pour budget participatif de la Force
-    description: Star Wars est un univers de fantasy et de science-fiction créé par George Lucas. D'abord conçue comme une trilogie cinématographique sortie entre 1977 et 1983, la saga s'accroît ensuite, entre 1999 et 2005, de trois nouveaux films, qui racontent des événements antérieurs à la première trilogie.
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaire7:
     id: questionnaire7
     title: Consultation pour conquerir le monde
-    description: Comment faire pour conquérir le monde ?
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaire8:
     id: questionnaire8
     title: Consultation pour la capcoBeer
-    description: La bière est une boisson alcoolisée obtenue par fermentation alcoolique d'un moût de produits végétaux amylacés tels que l'orge, le maïs, le riz, la banane, le manioc...
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaire9:
     id: questionnaire9
     title: Consultation pour la FLNJ
-    description: Le Front de libération des nains de jardin est un réseau de groupes informels se présentant comme une association à but non lucratif dont l'objectif « vise à rendre la liberté des nains de jardin » en les transportant depuis les jardins de leurs propriétaires vers des lieux où ils sont considérés comme libres.
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     privateResult: true
   questionnaireWithJumps2:
     id: questionnaireWithJumps2
     title: Questionnaire saut conditionnel (tous les champs)
-    description: Merci Omar
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     step: '@questionnairestepJump2'
     multipleRepliesAllowed: true
     anonymousAllowed: true
@@ -76,7 +76,7 @@ Capco\AppBundle\Entity\Questionnaire:
   questionnaire10:
     id: questionnaire10
     title: Questionnaire non rattaché
-    description: J'ai pas d'amis hashtag foreveralone
+    description: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
     multipleRepliesAllowed: true
     anonymousAllowed: true
     acknowledgeReplies: true

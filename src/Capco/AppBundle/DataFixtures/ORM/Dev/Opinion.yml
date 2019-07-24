@@ -51,8 +51,8 @@ Capco\AppBundle\Entity\Opinion:
   opinion{6..40}:
     id: 'opinion<current()>'
     step: '@cstep1'
-    createdAt: <((new \DateTime('2018-03-01 00:00:00'))->modify("+ $current minutes"))>
-    publishedAt: <((new \DateTime('2018-03-01 00:00:00'))->modify("+ $current minutes"))>
+    createdAt: <((new \DateTime('2018-03-01 00:00:00'))->modify("+ $current days"))>
+    publishedAt: <((new \DateTime('2018-03-01 00:00:00'))->modify("+ $current days"))>
     title: Opinion <current()>
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     pinned: <boolean()>
@@ -62,7 +62,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion<current()>'
     step: '@cstep1'
     title: Opinion <current()>
-    createdAt: <((new \DateTime('2018-03-01 00:00:00'))->modify("+ $current minutes"))>
+    createdAt: <((new \DateTime('2018-03-01 00:00:00'))->modify("+ $current days"))>
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     pinned: <boolean()>
     Author: '@user_not_confirmed_with_contributions'
@@ -217,7 +217,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion{64..67}:
     id: 'opinion<current()>'
     step: '@cstep2'
-    createdAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current minutes"))>
+    createdAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current days"))>
     title: Opinion <current()> non publié à temps
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user5'
@@ -226,9 +226,9 @@ Capco\AppBundle\Entity\Opinion:
   opinion{68..74}:
     id: 'opinion<current()>'
     step: '@cstep5'
-    createdAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current minutes"))>
-    updatedAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current minutes"))>
-    publishedAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current minutes"))>
+    createdAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current days"))>
+    publishedAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current days"))>
     title: 'Opinion d hier <current()>'
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
     Author: '@user5'
@@ -238,9 +238,9 @@ Capco\AppBundle\Entity\Opinion:
   opinion{74..80}:
     id: 'opinion<current()>'
     step: '@cstep5'
-    createdAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current minutes"))>
-    updatedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current minutes"))>
-    publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current minutes"))>
+    createdAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
+    updatedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
+    publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
     trashedStatus: 'visible'
     trashedReason: reporting.status.spam
     trashedAt: <(new \DateTime('2018-02-20 00:00:00'))>

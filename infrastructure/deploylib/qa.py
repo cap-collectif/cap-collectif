@@ -54,10 +54,13 @@ def snapshots(tags='false'):
     "Generate all snapshots"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     commands = [
-        'capco:export:users --quiet',
-        'capco:export:consultation --quiet',
+        'capco:export:users --quiet --snapshot',
+        'capco:export:consultation --quiet --snapshot',
         'capco:export:projects-contributors --quiet --snapshot',
         'capco:export:proposalStep --quiet --snapshot',
+        'capco:export:user userAdmin --quiet',
+        'capco:export:user user1 --quiet',
+        'capco:export:user user5 --quiet',
     ]
     extensions = [
         'csv',
@@ -71,15 +74,8 @@ def snapshots(tags='false'):
         print cyan('Deleting email snapshots...')
         local('rm -rf __snapshots__/emails/*')
     for suite in ['api', 'e2e', 'commands']:
-        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-email', '--tags=snapshot-email&&' + tags)[tags != 'false'], 'application', env.www_app)
+        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot', '--tags=' + tags)[tags != 'false'], 'application', env.www_app)
     print cyan('Successfully generated emails snapshots !')
-
-    if tags == 'false':
-        print cyan('Deleting RGPD snapshots...')
-        local('rm -rf __snapshots__/rgpd_user_archives/*')
-    for suite in ['commands']:
-        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-rgpd', '--tags=snapshot-rgpd&&' + tags)[tags != 'false'], 'application', env.www_app)
-    print cyan('Successfully generated RGPD snapshots !')
 
     env.service_command('bin/console capco:toggle:enable export --env test --no-debug', 'application', env.www_app)
     

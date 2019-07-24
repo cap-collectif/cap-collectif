@@ -7,7 +7,7 @@ Capco\AppBundle\Entity\Event:
     address: 111 Avenue Clémenceau
     city: Lyon
     enabled: true
-    body: <('<i>L’exactitude des informations ci-dessous relève uniquement de la responsabilité de l’organisateur de l’évènement“</i> <h2>Objet</h2> exprimer et échanger sur les réformes qui vous semblent nécessaires <h2>Public attendu</h2> Cet événement est ouvert au public dans la limite de 30 participants, sans inscription. Pour participer, rendez-vous à l’heure dite et au lieu indiqué.')>
+    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <identity((new \DateTime('2032-03-01')))>
     endAt: <identity((new \DateTime('2032-03-10')))>
     author: '@user1'
@@ -24,14 +24,14 @@ Capco\AppBundle\Entity\Event:
     address: Tour Eiffel
     zipCode: 75007
     city: Paris
-    body: 2 jours de conférences, de rencontres et d'échanges autour de PHP et son écosystème. Rejoignez la communauté, les experts PHP et les sociétés qui font vivre notre langage ! Pro. Et Open-Source. Communautés PHP. Dédié Au Langage.
+    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <identity((new \DateTime('2030-03-10')))>
     endAt: <identity((new \DateTime('2032-06-15')))>
     author: '@user2'
     link: http://www.phptour2014.fr
     projects: ['@p1']
     themes: ['@theme1']
-    createdAt: <identity((new \DateTime('2015-01-02')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event3:
     id: 'event3'
     title: GrenobleWeb2015
@@ -41,27 +41,27 @@ Capco\AppBundle\Entity\Event:
     address: Optique Moreau, 48 Rue de Stalingrad
     city: Grenoble
     zipCode: 38000
-    body: Paris Web est un événement annuel de deux jours de conférences et un jour d'ateliers consacré au développement web. L'événement a généralement lieu fin septembre, début octobre, à Paris ou dans sa proche banlieue depuis 2006 et organisé par l'association à but non lucratif Paris-Web.
+    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <identity((new \DateTime('2032-06-10')))>
     endAt: <identity((new \DateTime('2035-03-16')))>
     author: '@user3'
     media: '@MediaProject3'
     guestListEnabled: true
     projects: ['@p1']
-    createdAt: <identity((new \DateTime('2015-01-03')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event4:
     id: event4
-    title: SymfonyLive Paris
+    title: EventOnOneDay
     enabled: true
     lat: 45.747947
     lng: 4.838041
-    body: Rendez-vous les 29 et 30 mars pour l'évènement SymfonyLive Paris 2018, évènement Symfony 100% francophone.
+    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <identity((new \DateTime('2032-01-01')))>
     endAt: <identity((new \DateTime('2045-03-10')))>
     author: '@user4'
     link: http://www.symfonyLive2015.fr
     media: '@MediaIdea1'
-    createdAt: <identity((new \DateTime('2015-01-04')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event5:
     id: event5
     title: ParisWeb2014
@@ -71,12 +71,12 @@ Capco\AppBundle\Entity\Event:
     city: Lyon
     zipCode: 69007
     enabled: true
-    body: Paris Web, la conférence francophone des gens qui font un web accessible et de qualité.
+    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <(new \DateTime('2014-02-11'))>
     endAt: <(new \DateTime('2014-02-12'))>
     author: '@user5'
     link: http://www.parisweb2014.fr
-    createdAt: <identity((new \DateTime('2015-01-05')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event6:
     id: event6
     title: Event without registrations
@@ -86,12 +86,12 @@ Capco\AppBundle\Entity\Event:
     zipCode: 69004
     city: Lyon
     enabled: true
-    body: Le Hellfest, également appelé Hellfest Summer Open Air, est un festival de musique français spécialisé dans les musiques extrêmes, annuellement organisé au mois de juin à Clisson en Loire-Atlantique. Sa forte fréquentation le fait figurer parmi les plus importants festivals de musique français.
+    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     startAt: <identity((new \DateTime('2032-02-01')))>
     endAt: <identity((new \DateTime('2040-02-02')))>
     author: '@user1'
-    link: https://www.hellfest.fr/
-    createdAt: <identity((new \DateTime('2015-01-06')))>
+    link: http://www.parisweb2014.fr
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event7:
     id: 'event7'
     title: Event 7
@@ -100,7 +100,7 @@ Capco\AppBundle\Entity\Event:
     startAt: <identity((new \DateTime('2029-01-01')))>
     endAt: <identity((new \DateTime('2029-05-05')))>
     author: '@user2'
-    createdAt: <identity((new \DateTime('2015-01-07')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event8:
     id: 'event8'
     title: Event 8
@@ -109,7 +109,7 @@ Capco\AppBundle\Entity\Event:
     startAt: <identity((new \DateTime('2029-03-03')))>
     endAt: <identity((new \DateTime('2029-09-09')))>
     author: '@user3'
-    createdAt: <identity((new \DateTime('2015-01-08')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event9:
     id: 'event9'
     title: Event 9
@@ -118,7 +118,7 @@ Capco\AppBundle\Entity\Event:
     startAt: <identity((new \DateTime('2030-11-03')))>
     endAt: <identity((new \DateTime('2030-11-08')))>
     author: '@user4'
-    createdAt: <identity((new \DateTime('2015-01-09')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event10:
     id: 'event10'
     title: Event 10
@@ -127,7 +127,7 @@ Capco\AppBundle\Entity\Event:
     startAt: <identity((new \DateTime('2030-11-11')))>
     endAt: <identity((new \DateTime('2030-11-13')))>
     author: '@user5'
-    createdAt: <identity((new \DateTime('2015-01-10')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event11:
     id: event11
     title: ParisWeb2016
@@ -137,7 +137,7 @@ Capco\AppBundle\Entity\Event:
     endAt: <identity((new \DateTime('2030-11-14')))>
     author: '@user1'
     link: http://www.parisweb2014.fr
-    createdAt: <identity((new \DateTime('2015-01-11')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event12:
     id: evenementPresentSansDateDeFin
     title: EvenementPresentSansDateDeFin
@@ -147,7 +147,7 @@ Capco\AppBundle\Entity\Event:
     startAt: <(new \DateTime('now'))>
     author: '@user2'
     link: http://www.lavie.fr
-    createdAt: <identity((new \DateTime('2015-01-12')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event13:
     id: evenementPasseSansDateDeFin
     title: evenementPasseSansDateDeFin
@@ -158,7 +158,7 @@ Capco\AppBundle\Entity\Event:
     link: http://www.lavie.fr
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
-    createdAt: <identity((new \DateTime('2015-01-13')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>
   event14:
     id: evenementFutureSansDateDeFin
     title: evenementFutureSansDateDeFin
@@ -170,4 +170,4 @@ Capco\AppBundle\Entity\Event:
     zipCode: '07400'
     city: Meysse
     address: 1 rue chevrière
-    createdAt: <identity((new \DateTime('2015-01-14')))>
+    createdAt: <identity((new \DateTime('2015-01-01')))>

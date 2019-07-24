@@ -1,7 +1,7 @@
 @consumers
 Feature: Argument consumers
 
-@rabbitmq @snapshot-email
+@rabbitmq @snapshot
 Scenario: Moderator should receive a new argument email if active moderation is enabled
   Given I publish in "argument_create" with message below:
   """
@@ -20,7 +20,7 @@ Scenario: Moderator should not receive a new argument email if active moderation
   When I consume "argument_create"
   Then 0 mail should be sent
 
-@rabbitmq @snapshot-email
+@rabbitmq @snapshot
 Scenario: Moderator should receive an updated argument email if active moderation is enabled
   Given I publish in "argument_update" with message below:
   """
@@ -39,7 +39,7 @@ Scenario: Moderator should not receive an updated argument email if active moder
   When I consume "argument_update"
   Then 0 mail should be sent
 
-@rabbitmq @snapshot-email
+@rabbitmq @snapshot
 Scenario: Author should receive a trashed argument email
   Given I publish in "argument_trash" with message below:
   """

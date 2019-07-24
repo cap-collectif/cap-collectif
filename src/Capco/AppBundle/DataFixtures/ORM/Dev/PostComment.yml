@@ -3,11 +3,11 @@ Capco\AppBundle\Entity\PostComment:
     id: 'postComment<current()>'
     post: '@post3'
     Author: '@user3'
-    body: Commentaire n°<current()>
+    body: <text(300)>
     publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>
   pComment{6..50}:
     id: 'postComment<current()>'
     post: '@post1'
     Author: '@user2'
-    body: Commentaire n°<current()>
+    body: <text(300)>
     publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current days"))>

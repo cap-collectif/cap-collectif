@@ -1,7 +1,8 @@
 import parser from 'xml2json';
 import fs from 'fs';
+import config from './webpack/config';
 
-for (const locale of ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL']) {
+for (const locale of config.locales) {
     const xml = fs.readFileSync(`translations/CapcoAppBundle.${locale}.xlf`, 'utf8');
     // We duplicate file for each translation domain used
     fs.writeFileSync(`translations/SonataAdminBundle.${locale}.xlf`, xml);
@@ -27,8 +28,5 @@ for (const locale of ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL']) {
     }
     fs.writeFileSync(bundlePath, `window.intl_messages=${JSON.stringify(translations, null, 2)};`);
 
-    fs.writeFileSync(
-        `${dir}/${locale}-es6.js`,
-        `export default ${JSON.stringify(translations, null, 2)};`,
-    );
+    fs.writeFileSync(`${dir}/${locale}-es6.js`, `export default ${JSON.stringify(translations, null, 2)};`);
 }

@@ -1,8 +1,8 @@
 Capco\AppBundle\Entity\Post:
   post{1..5}:
     title: Post <current()>
-    abstract: Résumé du post <current()>
-    body: Contenu du post <current()>
+    abstract: <text(150)>
+    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     isPublished: true
     publishedAt: <identity((new \DateTime('2018-11-03')))>
     Authors:
@@ -14,8 +14,8 @@ Capco\AppBundle\Entity\Post:
 
   post{6..8}:
     title: Post <current()>
-    abstract: Résumé du post <current()>
-    body: Contenu du post <current()>
+    abstract: <text(150)>
+    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     isPublished: true
     publishedAt: <identity((new \DateTime('2018-11-04')))>
     Authors:
@@ -26,8 +26,8 @@ Capco\AppBundle\Entity\Post:
 
   post{9..10}:
     title: Post <current()>
-    abstract: Résumé du post <current()>
-    body: Contenu du post <current()>
+    abstract: <text(150)>
+    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     isPublished: true
     publishedAt: <identity((new \DateTime('2018-11-05')))>
     Authors:
@@ -51,8 +51,8 @@ Capco\AppBundle\Entity\Post:
 
   post{12..15}:
     title: Post <current()>
-    abstract: Résumé du post <current()>
-    body: Contenu du post <current()>
+    abstract: <text(150)>
+    body: <stripslashes('\<h2>\')><text(10)><stripslashes('\</h2><p>\')><text(500)><stripslashes('\</p><h2>\')><text(10)><stripslashes('\</h2><h3>\')><text(10)><stripslashes('\</h3><p>\')><text(300)><stripslashes('\</p>\')>
     isPublished: true
     publishedAt: <identity((new \DateTime('2019-01-03 00:00:00')))>
     Authors:

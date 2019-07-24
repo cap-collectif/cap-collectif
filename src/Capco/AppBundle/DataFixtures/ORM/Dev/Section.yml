@@ -12,9 +12,8 @@ Capco\AppBundle\Entity\Section:
     type: introduction
     title: Introduction
     position: 2
-    teaser: Teaser de l'intro
-    body: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
+    teaser: <text(150)>
+    body: <text(300)>
     nbObjects: null
     enabled: true
     associatedFeatures: []
@@ -22,7 +21,7 @@ Capco\AppBundle\Entity\Section:
     type: videos
     title: Vidéos
     position: 3
-    teaser: Plein de vidéos par ici
+    teaser: <text(150)>
     body: null
     nbObjects: 3
     enabled: true
@@ -31,8 +30,7 @@ Capco\AppBundle\Entity\Section:
     type: projects
     title: Projets participatifs
     position: 4
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
+    teaser: <text(150)>
     body: null
     nbObjects: 4
     enabled: true
@@ -41,8 +39,7 @@ Capco\AppBundle\Entity\Section:
     type: themes
     title: Thèmes
     position: 5
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
+    teaser: <text(150)>
     body: null
     nbObjects: 4
     enabled: true
@@ -51,8 +48,7 @@ Capco\AppBundle\Entity\Section:
     type: news
     title: Actualités
     position: 6
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
+    teaser: <text(150)>
     body: null
     nbObjects: 3
     enabled: true
@@ -61,8 +57,7 @@ Capco\AppBundle\Entity\Section:
     type: events
     title: Évènements
     position: 7
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
+    teaser: <text(150)>
     body: null
     nbObjects: 3
     enabled: true
@@ -71,8 +66,7 @@ Capco\AppBundle\Entity\Section:
     type: newsletter
     title: Lettre d'information
     position: 8
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
+    teaser: <text(150)>
     body: null
     nbObjects: null
     enabled: true
@@ -81,8 +75,7 @@ Capco\AppBundle\Entity\Section:
     type: social-networks
     title: Restez à l'écoute
     position: 9
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
+    teaser: <text(150)>
     body: null
     nbObjects: null
     enabled: true
@@ -91,8 +84,7 @@ Capco\AppBundle\Entity\Section:
     type: metrics
     title: Chiffres-clés
     position: 11
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
+    teaser: <text(150)>
     body: null
     nbObjects: null
     enabled: false
@@ -101,9 +93,8 @@ Capco\AppBundle\Entity\Section:
     type: custom
     title: Section activée
     position: 12
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
-    body: Un super long contenu
+    teaser: <text(150)>
+    body: <text(300)>
     nbObjects: null
     enabled: true
     associatedFeatures: []
@@ -111,9 +102,8 @@ Capco\AppBundle\Entity\Section:
     type: custom
     title: Section désactivée
     position: 13
-    teaser: Maître corbeau, sur un arbre perché,
-      | Tenait en son bec un fromage.
-    body: Un super long contenu
+    teaser: <text(150)>
+    body: <text(300)>
     nbObjects: null
     enabled: false
     associatedFeatures: []

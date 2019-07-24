@@ -1,7 +1,7 @@
 @consumers
 Feature: Opinion consumers
 
-@rabbitmq @snapshot-email
+@rabbitmq @snapshot
 Scenario: Moderator should receive a new opinion email if active moderation is enabled
   Given I publish in "opinion_create" with message below:
   """
@@ -20,7 +20,7 @@ Scenario: Moderator should not receive a new opinion email if active moderation 
   When I consume "opinion_create"
   Then 0 mail should be sent
 
-@rabbitmq @snapshot-email
+@rabbitmq @snapshot
 Scenario: Moderator should receive an updated opinion email if active moderation is enabled
   Given I publish in "opinion_update" with message below:
   """
@@ -39,7 +39,7 @@ Scenario: Moderator should not receive an updated opinion email if active modera
   When I consume "opinion_update"
   Then 0 mail should be sent
 
-@rabbitmq @snapshot-email
+@rabbitmq @snapshot
 Scenario: Author should receive a trashed opinion email
   Given I publish in "opinion_trash" with message below:
   """

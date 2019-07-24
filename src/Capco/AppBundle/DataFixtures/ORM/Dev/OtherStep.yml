@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Steps\OtherStep:
     isEnabled: true
     startAt: <(new \DateTime('2015-04-25'))>
     endAt: <(new \DateTime('2015-05-25'))>
-    body: <stripslashes('\ <p> Afficher le texte pour la proposition de la synthèse</p>      <h3>Argumentation</h3> <p>\')>Il faut argumenter<stripslashes('\</p>\')>
+    body: <stripslashes('\ <p> Afficher le texte pour la proposition de la synthèse</p>      <h3>Argumentation</h3> <p>\')><text(1000)><stripslashes('\</p>\')>
   ostep2:
     id: ostep2
     title: Mettre en place une proposition adaptée à la synthèse
@@ -14,28 +14,7 @@ Capco\AppBundle\Entity\Steps\OtherStep:
     isEnabled: true
     startAt: <(new \DateTime('2014-09-27'))>
     endAt: <(new \DateTime('2014-11-20'))>
-    body: La cigale , ayant chanté
-      | Tout l'été,
-      | Se trouva fort dépourvue
-      | Quand la bise fut venue.
-      | Pas un seul petit morceau
-      | De mouche ou de vermisseau
-      | Elle alla crier famine
-      | Chez la fourmi sa voisine,
-      | La priant de lui prêter
-      | Quelque grain pour subsister
-      | Jusqu'à la saison nouvelle
-      | «Je vous paierai, lui dit-elle,
-      | Avant l'oût , foi d'animal,
-      | Intérêt et principal .»
-      | La fourmi n'est pas prêteuse ;
-      | C'est là son moindre défaut.
-      | «Que faisiez-vous au temps chaud ?
-      | Dit-elle à cette emprunteuse.
-      | Nuit et jour à tout venant
-      | Je chantais, ne vous déplaise.
-      | - Vous chantiez ? j'en suis fort aise.
-      | Eh bien dansez maintenant.
+    body: <stripslashes('\<p>Afficher le texte pour la préparation de la proposition</p><h3>Une synthèse</h3><p>\')><text(1000)><stripslashes('\</p><h3>Une bonne synthèse argumentée</h3><p>\')><text(500)><stripslashes('\</p>\')>
   ostep3:
     id: ostep3
     title: À venir une synthèse optimisée
@@ -43,31 +22,4 @@ Capco\AppBundle\Entity\Steps\OtherStep:
     isEnabled: true
     startAt: <(new \DateTime('2015-10-20'))>
     endAt: <(new \DateTime('2015-11-20'))>
-    body: Compère  le Renard se mit un jour en frais,
-      | Et retint à dîner commère la Cicogne.
-      | Le régal fut petit et sans beaucoup d'apprêts
-      | Le galand, pour toute besogne,
-      | Avait un brouet clair (il vivait chichement).
-      | Ce brouet fut par lui servi sur une assiette
-      | La cigogne au long bec n'en put attraper miette,
-      | Et le drôle eut lapé le tout en un moment.
-      | Pour se venger de cette tromperie,
-      | A quelque temps de là, la cigogne le prie.
-      | "Volontiers, lui dit-il, car avec mes amis,
-      | Je ne fais point cérémonie. "
-      | A l'heure dite, il courut au logis
-      | De la cigogne son hôtesse,
-      | Loua très fort sa politesse ,
-      | Trouva le dîner cuit à point.
-      | Bon appétit surtout, renards n'en manquent point.
-      | Il se réjouissait à l'odeur de la viande
-      | Mise en menus morceaux, et qu'il croyait friande.
-      | On servit, pour l'embarrasser,
-      | En un vase à long col et d'étroite embouchure .
-      | Le bec de la cigogne y pouvait bien passer,
-      | Mais le museau du sire était d'autre mesure.
-      | Il lui fallut à jeun retourner au logis,
-      | Honteux comme un renard qu'une poule aurait pris,
-      | Serrant la queue, et portant bas l'oreille.
-      | Trompeurs, c'est pour vous que j'écris
-      | Attendez-vous à la pareille.
+    body: <stripslashes('\<p>\')><text(100)><stripslashes('\</p><h2>Ma synthèse</h2><p>\')><text(1000))><stripslashes('\</p><h3>Une bonne synthèse argumentée</h3><p>\')><text(500)><stripslashes('\</p>\')>

@@ -3,29 +3,29 @@ Capco\AppBundle\Entity\EventComment:
     id: 'eventComment1'
     Event: '@event2'
     Author: '@user5'
-    body: Commentaire n°1
+    body: <text(300)>
     publishedAt: <dateTime()>
   evComment{2..19}:
     id: 'eventComment<current()>'
     Event: '@event1'
     Author: '@user2'
-    body: Commentaire n°<current()>
+    body: <text(300)>
     publishedAt: <dateTime()>
   evComment{20..29}:
     id: 'eventComment<current()>'
     Event: '@event2'
     Author: '@user1'
-    body: Commentaire n°<current()>
+    body: <text(300)>
     publishedAt: <dateTime()>
   evComment{30..49}:
     id: 'eventComment<current()>'
     Event: '@event3'
     Author: '@user5'
-    body: Commentaire n°<current()>
+    body: <text(300)>
     publishedAt: <dateTime()>
   evComment50:
     id: 'eventComment50'
     Event: '@event1'
     Author: '@user3'
-    body: Commentaire n°50
+    body: <text(300)>
     publishedAt: <dateTime()>
