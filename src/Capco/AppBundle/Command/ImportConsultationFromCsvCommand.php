@@ -159,7 +159,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
             $opinion = $this->getContainer()
                 ->get(OpinionRepository::class)
-                ->findOneBy(['title' => $row[0], 'step' => $consultationStep]);
+                ->findOneBy(['title' => $row[0], 'consultation' => $consultationStep->getConsultation()]);
             if (\is_object($opinion) && !$input->getOption('force')) {
                 $output->writeln(
                     '<error>Opinion with title "' .

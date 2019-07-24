@@ -2,17 +2,15 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Repository\ConsultationStepRepository;
-use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Sonata\AdminBundle\Form\FormMapper;
-use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
+use Doctrine\ORM\QueryBuilder;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class OpinionAdmin extends CapcoAdmin
@@ -27,7 +25,8 @@ class OpinionAdmin extends CapcoAdmin
         string $class,
         string $baseControllerName,
         TokenStorageInterface $tokenStorage
-    ) {
+    )
+    {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
     }
@@ -115,7 +114,7 @@ class OpinionAdmin extends CapcoAdmin
                     }
                 ]
             )
-            ->add('step', null, ['label' => 'admin.fields.opinion.step'])
+            ->add('consultation', null, ['label' => 'admin.fields.project.consultation'])
             ->add('OpinionType', null, ['label' => 'admin.fields.opinion.opinion_type'])
             ->add('published', null, ['label' => 'admin.fields.opinion.is_enabled'])
             ->add('pinned', null, ['label' => 'admin.fields.opinion.pinned_long'])
@@ -134,7 +133,7 @@ class OpinionAdmin extends CapcoAdmin
             ->addIdentifier('title', null, ['label' => 'admin.fields.opinion.title'])
             ->add('Author', 'sonata_type_model', ['label' => 'admin.fields.opinion.author'])
             ->add('OpinionType', null, ['label' => 'admin.fields.opinion.opinion_type'])
-            ->add('step', 'sonata_type_model', ['label' => 'admin.fields.opinion.step'])
+            ->add('consultation', 'sonata_type_model', ['label' => 'admin.fields.project.consultation'])
             ->add('voteCountTotal', 'integer', [
                 'label' => 'admin.fields.opinion.vote_count_total',
                 'mapped' => false,
@@ -198,14 +197,12 @@ class OpinionAdmin extends CapcoAdmin
                 'label' => 'admin.fields.opinion.body',
                 'config_name' => 'admin_editor'
             ])
-            ->add('step', null, [
-                'label' => 'admin.fields.opinion.step',
-                'query_builder' => $this->createQueryBuilderForStep(),
-                'choice_label' => 'labelTitle',
-                'required' => true
+            ->add('consultation', ModelAutocompleteType::class, [
+                'label' => 'admin.fields.project.consultation',
+                'property' => 'title',
+                'required' => true,
             ])
             ->end()
-
             ->with('admin.fields.opinion.group_appendices')
             ->add('appendices', 'sonata_type_collection', [
                 'label' => 'admin.fields.opinion.appendices',
@@ -245,29 +242,4 @@ class OpinionAdmin extends CapcoAdmin
         $collection->clearExcept(['list', 'create', 'edit', 'delete', 'export', 'show']);
     }
 
-    private function createQueryBuilderForStep()
-    {
-        if (!$this->getPersistentParameter('opinion_type')) {
-            return null;
-        }
-
-        $opinionType = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(OpinionTypeRepository::class)
-            ->find($this->getPersistentParameter('opinion_type'));
-
-        if (!$opinionType) {
-            throw new \InvalidArgumentException('Invalid opinion type.');
-        }
-
-        $consultation = $opinionType->getConsultation();
-
-        return $this->getConfigurationPool()
-            ->getContainer()
-            ->get(ConsultationStepRepository::class)
-            ->createQueryBuilder('cs')
-            ->join('cs.consultation', 'type')
-            ->where('type = :stepType')
-            ->setParameter('stepType', $consultation);
-    }
 }
