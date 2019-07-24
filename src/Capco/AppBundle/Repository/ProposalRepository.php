@@ -664,13 +664,15 @@ class ProposalRepository extends EntityRepository
 
         $qb
             ->andWhere('p.author = :user')
+            ->leftJoin('p.selections', 'ps')
             ->leftJoin('p.proposalForm', 'pf')
             ->leftJoin('pf.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pabs')
             ->leftJoin('pabs.project', 'pro')
             ->leftJoin('pro.authors', 'pr_au')
-            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
-            ->andWhere(
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg');
+        if (!$viewer->isSuperAdmin()) {
+            $qb->andWhere(
                 $qb
                     ->expr()
                     ->orX(
@@ -683,12 +685,7 @@ class ProposalRepository extends EntityRepository
                                         'pro.visibility',
                                         ProjectVisibilityMode::VISIBILITY_PUBLIC
                                     ),
-                                $qb
-                                    ->expr()
-                                    ->orX(
-                                        $qb->expr()->in(':superAdmin', ':roles'),
-                                        $qb->expr()->eq(':viewer', 'pr_au.user')
-                                    )
+                                $qb->expr()->eq(':viewer', 'pr_au.user')
                             ),
                         $qb
                             ->expr()
@@ -711,14 +708,29 @@ class ProposalRepository extends EntityRepository
                             )
                     )
             );
+            if (!$viewer->isAdmin()) {
+                $qb->andWhere(
+                    $qb
+                        ->expr()
+                        ->orX(
+                            $qb
+                                ->expr()
+                                ->andX(
+                                    $qb->expr()->eq('s.private', 'false'),
+                                    $qb->expr()->isNotNull('ps.selectionStep'),
+                                    $qb->expr()->eq('s.stepType', 'collect')
+                                ),
+                            $qb->expr()->eq(':viewer', 'pr_au.user')
+                        )
+                );
+            }
+        }
 
         $qb->setParameters([
             ':viewer' => $viewer,
             ':user' => $user,
             ':visibility' => $visibility,
-            ':roles' => $viewer->getRoles(),
-            ':prvgId' => $viewer->getUserGroupIds(),
-            ':superAdmin' => 'ROLE_SUPER_ADMIN'
+            ':prvgId' => $viewer->getUserGroupIds()
         ]);
 
         return $qb;
@@ -762,11 +774,21 @@ class ProposalRepository extends EntityRepository
             ->select('COUNT(p.id)')
             ->andWhere('p.author = :author')
             ->leftJoin('p.proposalForm', 'pf')
+            ->leftJoin('p.selections', 'ps')
             ->leftJoin('pf.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pabs')
             ->leftJoin('pabs.project', 'pro')
             ->andWhere($qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC))
-            ->setParameter(':author', $author);
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->andX(
+                        $qb->expr()->eq('s.private', 'false'),
+                        $qb->expr()->isNotNull('ps.selectionStep')
+                    )
+            );
+
+        $qb->setParameter(':author', $author);
 
         return $qb->getQuery()->getSingleScalarResult();
     }
