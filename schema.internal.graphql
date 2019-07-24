@@ -2595,7 +2595,7 @@ type LogicJump {
   # Return the necessited conditions that needs to be fullfiled to trigger this logic jump.
   conditions: [LogicJumpCondition]
 
-  # Return the position of this logic jump
+  # Return the position of this logic jump.
   position: Int!
 }
 
