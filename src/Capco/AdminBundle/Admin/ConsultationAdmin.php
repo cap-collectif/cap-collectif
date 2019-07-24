@@ -85,70 +85,70 @@ class ConsultationAdmin extends AbstractAdmin
             ->add('title', null, [
                 'label' => 'admin.fields.consultation.title'
             ])
-            ->end()
-            ->with('admin.fields.proposal_form.map')
-            ->add('opinionCountShownBySection', null, [
-                'label' => 'admin.fields.step.opinionCountShownBySection',
-                'required' => true
-            ]);
-        if ($this->getSubject()->getId()) {
-            $formMapper->add('opinionTypes', ModelType::class, [
-                'label' => 'admin.fields.consultation.opinion_types',
-                'query' => $this->createQueryForOpinionTypes(),
-                'by_reference' => false,
-                'multiple' => true,
-                'expanded' => true,
-                'required' => true,
-                'tree' => true,
-                'choices_as_values' => true,
-                'disabled' => true
-            ]);
-        }
-        $formMapper
-            ->end()
-            ->with('submission-of-proposals')
-            ->add('titleHelpText', null, [
-                'label' => 'admin.fields.proposal_form.title_help_text',
-                'required' => false,
-                'help' => 'admin.fields.proposal_form.help_text_title_help_text'
-            ])
-            ->add('descriptionHelpText', null, [
-                'label' => 'admin.fields.proposal_form.description_help_text',
-                'required' => false,
-                'help' => 'admin.fields.proposal_form.help_text_description_help_text'
-            ])
-            ->end()
-            ->with('admin.label.settings.notifications', [
-                'description' => 'receive-email-notification-when-a-contribution-is'
-            ])
-            ->add('moderatingOnReport', 'checkbox', [
-                'label' => 'reported',
-                'mapped' => false,
-                'value' => true,
-                'disabled' => true,
-                'attr' => ['readonly' => true, 'checked' => true]
-            ])
-            ->add('moderatingOnCreate', null, ['label' => 'admin.fields.synthesis.enabled'])
-            ->add('moderatingOnUpdate', null, [
-                'label' => 'admin.fields.proposal_form.notification.on_update'
-            ])
-            ->end()
-            ->with('admin.fields.step.advanced')
-            ->add('metaDescription', null, [
-                'label' => 'projects.metadescription',
-                'required' => false,
-                'help' => 'admin.help.metadescription'
-            ])
-            ->add('customCode', null, [
-                'label' => 'admin.customcode',
-                'required' => false,
-                'help' => 'admin.help.customcode',
-                'attr' => [
-                    'rows' => 10,
-                    'placeholder' => '<script type="text/javascript"> </script>'
-                ]
-            ])
             ->end();
+        if ($this->getSubject()->getId()) {
+            $formMapper
+                ->with('admin.fields.proposal_form.map')
+                ->add('opinionCountShownBySection', null, [
+                    'label' => 'admin.fields.step.opinionCountShownBySection',
+                    'required' => true
+                ])
+                ->add('opinionTypes', ModelType::class, [
+                    'label' => 'admin.fields.consultation.opinion_types',
+                    'query' => $this->createQueryForOpinionTypes(),
+                    'by_reference' => false,
+                    'multiple' => true,
+                    'expanded' => true,
+                    'required' => true,
+                    'tree' => true,
+                    'choices_as_values' => true,
+                    'disabled' => true
+                ])
+                ->end()
+                ->with('submission-of-proposals')
+                ->add('titleHelpText', null, [
+                    'label' => 'admin.fields.proposal_form.title_help_text',
+                    'required' => false,
+                    'help' => 'admin.fields.proposal_form.help_text_title_help_text'
+                ])
+                ->add('descriptionHelpText', null, [
+                    'label' => 'admin.fields.proposal_form.description_help_text',
+                    'required' => false,
+                    'help' => 'admin.fields.proposal_form.help_text_description_help_text'
+                ])
+                ->end()
+                ->with('admin.label.settings.notifications', [
+                    'description' => 'receive-email-notification-when-a-contribution-is'
+                ])
+                ->add('moderatingOnReport', 'checkbox', [
+                    'label' => 'reported',
+                    'mapped' => false,
+                    'value' => true,
+                    'disabled' => true,
+                    'attr' => ['readonly' => true, 'checked' => true]
+                ])
+                ->add('moderatingOnCreate', null, ['label' => 'admin.fields.synthesis.enabled'])
+                ->add('moderatingOnUpdate', null, [
+                    'label' => 'admin.fields.proposal_form.notification.on_update'
+                ])
+                ->end()
+                ->with('admin.fields.step.advanced')
+                ->add('metaDescription', null, [
+                    'label' => 'projects.metadescription',
+                    'required' => false,
+                    'help' => 'admin.help.metadescription'
+                ])
+                ->add('customCode', null, [
+                    'label' => 'admin.customcode',
+                    'required' => false,
+                    'help' => 'admin.help.customcode',
+                    'attr' => [
+                        'rows' => 10,
+                        'placeholder' => '<script type="text/javascript"> </script>'
+                    ]
+                ])
+                ->end();
+        }
     }
 
     /**
