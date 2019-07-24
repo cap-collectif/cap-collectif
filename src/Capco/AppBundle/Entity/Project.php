@@ -71,8 +71,9 @@ class Project implements IndexableInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      * @Assert\NotBlank()
+     * @Assert\NotNull()
      */
     private $title;
 
@@ -948,6 +949,16 @@ class Project implements IndexableInterface
             foreach ($this->themes as $theme) {
                 $theme->removeProject($this);
             }
+        }
+    }
+
+    /**
+     * @ORM\PreFlush
+     */
+    public function checkTitleIsNotNullNorEmpty()
+    {
+        if (empty($this->title) || null === $this->title) {
+            throw new \InvalidArgumentException('Title cannot be null nor empty');
         }
     }
 
