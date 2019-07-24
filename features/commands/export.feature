@@ -32,7 +32,7 @@ Scenario: Admin wants to export projects contributors
 
 @parallel-scenario
 Scenario: Admin wants to export consultation steps
-  Given I run "capco:export:consultation --snapshot"
+  Given I run "capco:export:consultation"
   Then the command exit code should be 0
   And exported "csv" file with name "croissance-innovation-disruption_collecte-des-avis.csv" should match its snapshot
   And exported "csv" file with name "projet-de-loi-renseignement_elaboration-de-la-loi.csv" should match its snapshot
@@ -82,7 +82,7 @@ Scenario: Admin wants to export questionnaire steps
   # And exported "xlsx" file with name "projet-avec-questionnaire_questionnaire-des-jo-2024.xlsx" should match its snapshot
   # And exported "xlsx" file with name "projet-avec-questionnaire_questionnaire.xlsx" should match its snapshot
 
-@database
+@database @snapshot-rgpd
 Scenario: User want to export his datas and 7 days after the cron delete the zip archive
   Given I run "capco:export:user userAdmin"
   And the command exit code should be 0
@@ -93,6 +93,6 @@ Scenario: User want to export his datas and 7 days after the cron delete the zip
 
 @parallel-scenario
 Scenario: Admin wants to export users
-  Given I run "capco:export:users --snapshot"
+  Given I run "capco:export:users"
   And exported "csv" file with name "users.csv" should match its snapshot
   Then the command exit code should be 0

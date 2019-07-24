@@ -17,7 +17,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     endAt: <identity((new \DateTime('2024-01-01'))->modify("+ 1 days"))>
     body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
     voteType: 1
-    votesHelpText: <stripslashes('\<p>\')><text(100)><stripslashes('\</p>\')>
+    votesHelpText: <stripslashes('\<p>\')>Il faut voter<stripslashes('\</p>\')>
   collectstep2:
     id: collectstep2
     title: Collecte des propositions fermée

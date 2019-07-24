@@ -6,9 +6,9 @@ Capco\AppBundle\Entity\OpinionType:
     color: red
     isEnabled: false
     defaultFilter: votes
-    votesHelpText: <text(200)>
+    votesHelpText: Bon vote
     votesThreshold: 5
-    votesThresholdHelpText: <text(200)>
+    votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
     consultation: '@typeAll'
   opinionType2:
     id: 'opinionType2'
@@ -67,9 +67,9 @@ Capco\AppBundle\Entity\OpinionType:
     defaultFilter: positions
     isEnabled: true
     versionable: true
-    votesHelpText: <text(200)>
+    votesHelpText: Bon votes à tous
     votesThreshold: 5
-    votesThresholdHelpText: <text(200)>
+    votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
     consultation: '@typePJL'
     parent: '@opinionType5ter'
     linkable: true
@@ -82,9 +82,9 @@ Capco\AppBundle\Entity\OpinionType:
     isEnabled: true
     versionable: true
     linkable: true
-    votesHelpText: <text(200)>
+    votesHelpText: Il faut voter en cliquant sur les boutons
     votesThreshold: 5
-    votesThresholdHelpText: <text(200)>
+    votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
     consultation: '@typePJL'
     parent: '@opinionType5'
   opinionType7:
@@ -96,9 +96,9 @@ Capco\AppBundle\Entity\OpinionType:
     isEnabled: true
     versionable: true
     linkable: true
-    votesHelpText: <text(200)>
+    votesHelpText: Bon courage pour le votes
     votesThreshold: 5
-    votesThresholdHelpText: <text(200)>
+    votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
     consultation: '@typePJL'
     parent: '@opinionType5'
   opinionType8:
@@ -108,9 +108,9 @@ Capco\AppBundle\Entity\OpinionType:
     color: red
     isEnabled: 0
     defaultFilter: votes
-    votesHelpText: <text(200)>
+    votesHelpText: Bon courage pour le votes
     votesThreshold: 5
-    votesThresholdHelpText: <text(200)>
+    votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
     consultation: '@typeDefault'
   opinionType9:
     id: 'opinionType9'
@@ -136,9 +136,9 @@ Capco\AppBundle\Entity\OpinionType:
     color: red
     isEnabled: 0
     defaultFilter: votes
-    votesHelpText: <text(200)>
+    votesHelpText: Bon vote à tous
     votesThreshold: 5
-    votesThresholdHelpText: <text(200)>
+    votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
     consultation: '@typeSimple'
   opinionType12:
     id: 'opinionType12'

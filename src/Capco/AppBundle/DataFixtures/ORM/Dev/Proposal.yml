@@ -505,7 +505,7 @@ Capco\AppBundle\Entity\Proposal:
   proposal{40..100}:
     id: 'proposal<current()>'
     title: Proposal <current()>
-    body: <text(200)>
+    body: Contenu <current()>
     author: '@user1'
     proposalForm: '@proposalform15'
     reference: '1<current()>'

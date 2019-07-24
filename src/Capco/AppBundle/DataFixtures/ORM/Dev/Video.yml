@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Video:
   video1:
     title: Croissance innovation, disruption
-    body: <text(50)>
+    body: Vidéo 1
     isEnabled: true
     position: 2
     Author: '@user1'
@@ -9,7 +9,7 @@ Capco\AppBundle\Entity\Video:
     link: 'https://www.youtube.com/embed/gwuLVLwMjuA?autoplay=1'
   video2:
     title: Stratégie technologique de l'Etat et services publics
-    body: <text(50)>
+    body: Vidéo 2
     isEnabled: true
     position: 3
     Author: '@user2'
@@ -17,7 +17,7 @@ Capco\AppBundle\Entity\Video:
     link: 'https://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
   video3:
     title: Star Wars 5 est le meilleur film ever qu'est ce que vous allez répondre à ça oui j'écris beaucoup pour avoir un titre sur plusieurs lignes
-    body: <text(50)>
+    body: Video 3
     isEnabled: true
     position: 1
     Author: '@user3'
@@ -25,7 +25,7 @@ Capco\AppBundle\Entity\Video:
     link: 'https://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
   video4:
     title: Croissance innovation, disruption
-    body: <text(50)>
+    body: Video 4
     isEnabled: true
     position: 4
     Author: '@user1'
@@ -33,7 +33,7 @@ Capco\AppBundle\Entity\Video:
     link: 'https://www.youtube.com/embed/gwuLVLwMjuA?autoplay=1'
   video5:
     title: Stratégie technologique de l'Etat et services publics
-    body: <text(50)>
+    body: Video 5
     isEnabled: true
     position: 5
     Author: '@user2'
