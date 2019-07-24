@@ -19,8 +19,8 @@
 {% endblock %}
 
 {% block stylesheets %}
-   {{ parent() }}
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
+    {{ parent() }}
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet'/>
     <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
 {% endblock %}
 
@@ -46,13 +46,14 @@
                                         {{ 'event.show.in_theme'|trans({}, 'CapcoAppBundle') }}
                                         {% for theme in event.themes %}
                                             {% if theme.canDisplay %}
-                                                <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if loop.revindex0 == '1' %} {{ 'event.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endif %}{% endfor %},
+                                                <a
+                                                href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a>{% if loop.revindex0 == '1' %} {{ 'event.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endif %}{% endfor %},
                                     {% endif %}
                                     {{ 'event.show.on_date'|trans({'%date%': event.createdAt | localizeddate('long', 'none') }, 'CapcoAppBundle') }}
                                     {% if event.registrations|length > 0 %}
                                         | {% transchoice event.registrations|length with {'%count%': event.registrations|length} from 'CapcoAppBundle' %}
                                         event_registration.listing.count
-                                        {% endtranschoice %}
+                                    {% endtranschoice %}
                                     {% endif %}
                                 </p>
                             </div>
@@ -68,12 +69,12 @@
                                 {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': event} only %}
                             </li>
                             {% if event.fullAddress %}
-                            <li class="excerpt">
-                                <address>
-                                    <i class="cap cap-marker-1  excerpt"></i>
-                                    {{ event.fullAddress }} <br/>
-                                </address>
-                            </li>
+                                <li class="excerpt">
+                                    <address>
+                                        <i class="cap cap-marker-1  excerpt"></i>
+                                        {{ event.fullAddress }} <br/>
+                                    </address>
+                                </li>
                             {% endif %}
                         </ul>
 
@@ -90,16 +91,24 @@
                                  data-lat="{{ event.lat }}"
                                  data-lng="{{ event.lng }}"
                             ></div>
+                            {% if viewer.superAdmin %}
+                                lat : {{ event.lat }} - lng : {{ event.lng }}<br>
+                            {% endif %}
                         {% endif %}
 
                         {% if viewer.superAdmin %}
                             <hr></hr>
-                            <i>With new address</i>
+                            <h3>With new address</h3>
                             {% if event.lat(true) and event.lng(true) %}
                                 <div id="event_map_2" class="event__map block"
                                      data-lat="{{ event.lat(true) }}"
                                      data-lng="{{ event.lng(true) }}"
                                 ></div>
+                                <address>
+                                    <i class="cap cap-marker-1  excerpt"></i>
+                                    {{ event.fullAddress(true) }} <br/>
+                                </address>
+                                lat : {{ event.lat(true) }} - lng : {{ event.lng(true) }}<br>
                             {% endif %}
                         {% endif %}
 
@@ -119,7 +128,8 @@
                         {% endif %}
 
                         {% if event.link %}
-                            <a class="btn  btn-primary  external-link mb-10" href="{{ event.link }}" class="external-link">{{ 'event.link_button'|trans({}, 'CapcoAppBundle') }}</a>
+                            <a class="btn  btn-primary  external-link mb-10" href="{{ event.link }}"
+                               class="external-link">{{ 'event.link_button'|trans({}, 'CapcoAppBundle') }}</a>
                         {% endif %}
 
                         {{ react_render_component('ShareButtonDropdownApp', {
@@ -128,8 +138,7 @@
                                 'title': event.title,
                                 'id': 'event-' ~ event.slug,
                             }
-                        })
-                        }}
+                        }) }}
                     </div>
                 </section>
 
@@ -140,7 +149,8 @@
                             {% set limit = 6 %}
                             {% include 'CapcoAppBundle:Event:event_registrations.html.twig' with {'event': event, 'limit': limit} only %}
                             {% if event.registrations|length > limit %}
-                                <button type="button" class="btn btn-primary btn--outline" data-toggle="modal" data-target="#eventRegistrationModal">
+                                <button type="button" class="btn btn-primary btn--outline" data-toggle="modal"
+                                        data-target="#eventRegistrationModal">
                                     {{ 'event_registration.listing.see_all'|trans({}, 'CapcoAppBundle') }}
                                 </button>
                             {% endif %}
@@ -187,13 +197,16 @@
                             {{ form(form) }}
                         </div>
 
-                        <button type="button" class="sidebar-toggle sidebar-hidden-large  btn  btn-default  btn-block">{{ 'event_registration.toggle.cancel'|trans({}, 'CapcoAppBundle') }}</button>
+                        <button type="button"
+                                class="sidebar-toggle sidebar-hidden-large  btn  btn-default  btn-block">{{ 'event_registration.toggle.cancel'|trans({}, 'CapcoAppBundle') }}</button>
                     </div>
 
                     {% if event | capco_event_user_registered(app.user) %}
-                        <button type="button" class="sidebar-toggle sidebar-hideable  sidebar-hidden-large  btn-danger btn-lg  btn  btn-block  btn--no-radius">{{ 'event_registration.toggle.unsubscribe'|trans({}, 'CapcoAppBundle') }}</button>
+                        <button type="button"
+                                class="sidebar-toggle sidebar-hideable  sidebar-hidden-large  btn-danger btn-lg  btn  btn-block  btn--no-radius">{{ 'event_registration.toggle.unsubscribe'|trans({}, 'CapcoAppBundle') }}</button>
                     {% else %}
-                        <button type="button" class="sidebar-toggle sidebar-hideable  sidebar-hidden-large  btn-primary btn-lg  btn  btn-block  btn--no-radius">{{ 'event_registration.toggle.subscribe'|trans({}, 'CapcoAppBundle') }}</button>
+                        <button type="button"
+                                class="sidebar-toggle sidebar-hideable  sidebar-hidden-large  btn-primary btn-lg  btn  btn-block  btn--no-radius">{{ 'event_registration.toggle.subscribe'|trans({}, 'CapcoAppBundle') }}</button>
                     {% endif %}
                 </div>
             {% endif %}
@@ -207,7 +220,8 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">{{ 'event_registration.listing.title_all'|trans({}, 'CapcoAppBundle') }}</h4>
                     </div>
                     <div class="modal-body">
@@ -232,13 +246,13 @@
             App.showMap('event_map');
             App.showMap('event_map_2');
             {% if event | capco_event_registration_possible %}
-                App.makeSidebar({
-                    sidebar: '#sidebar',
-                    container: '#sidebar-container',
-                    hideable: '.sidebar-hideable',
-                    toggle: '.sidebar-toggle',
-                    overlay: '#sidebar-overlay'
-                });
+            App.makeSidebar({
+                sidebar: '#sidebar',
+                container: '#sidebar-container',
+                hideable: '.sidebar-hideable',
+                toggle: '.sidebar-toggle',
+                overlay: '#sidebar-overlay'
+            });
             {% endif %}
         });
     </script>

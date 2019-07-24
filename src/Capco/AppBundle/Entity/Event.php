@@ -514,9 +514,9 @@ class Event implements
         return true;
     }
 
-    public function getFullAddress(): ?string
+    public function getFullAddress(?bool $fromJson = false): ?string
     {
-        if ($this->addressJson) {
+        if ($fromJson && $this->addressJson) {
             return json_decode($this->addressJson, true)[0]['formatted_address'];
         }
 
