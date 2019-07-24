@@ -65,6 +65,7 @@ const QuestionAdminFragment = {
       helpText
       jumps {
         id
+        position
         origin {
           id
         }
@@ -132,6 +133,7 @@ const QuestionFragment = {
       helpText
       jumps {
         id
+        position
         origin {
           id
         }
@@ -199,6 +201,7 @@ type ConditionalJumpCondition = {|
 
 type Jump = {|
   +id: ?string,
+  +position: number,
   +origin: {|
     +id: string,
   |},
@@ -263,9 +266,15 @@ type ResponsesFromAPI = $ReadOnlyArray<?{|
   |}>,
 |}>;
 
+type MultipleChoiceQuestionValue = {|
+  labels: $ReadOnlyArray<string>,
+  other: ?string,
+|};
+
 type ResponseInReduxForm = {|
   question: string,
   value:
+    | MultipleChoiceQuestionValue
     | ?string
     | ?number
     | $ReadOnlyArray<{|
@@ -273,11 +282,7 @@ type ResponseInReduxForm = {|
         +name: string,
         +url: string,
         +size: string,
-      |}>
-    | {|
-        labels: $ReadOnlyArray<string>,
-        other: ?string,
-      |},
+      |}>,
 |};
 
 export type ResponsesInReduxForm = $ReadOnlyArray<ResponseInReduxForm>;
@@ -312,7 +317,12 @@ const getValueFromSubmitResponse = (response: ?ResponseInReduxForm): ?string => 
   ) {
     return response.value.labels[0];
   }
-  if (response && response.value && Array.isArray(response.value) && response.value.filter(Boolean).length > 0) {
+  if (
+    response &&
+    response.value &&
+    Array.isArray(response.value) &&
+    response.value.filter(Boolean).length > 0
+  ) {
     return typeof response.value[0] === 'object'
       ? response.value[0].name // Here, we are dealing with a MediaQuestion, which has the shape { id: string, name: string, url: string }
       : response.value.join(', '); // Here, we are dealing with a MultipleChoiceQuestion but more specifically a Ranking question, which is a simple array of strings
@@ -320,11 +330,11 @@ const getValueFromSubmitResponse = (response: ?ResponseInReduxForm): ?string => 
   return null;
 };
 
-export const getValueFromResponse = (questionType: string, responseValue: string) => {
+export const getValueFromResponse = (questionType: QuestionTypeValue, responseValue: string) => {
   // For some questions type we need to parse the JSON of previous value
   try {
     if (questionType === 'number') {
-      return Number(responseValue)
+      return Number(responseValue);
     }
     if (questionType === 'button') {
       return JSON.parse(responseValue).labels[0];
@@ -446,6 +456,7 @@ const hasAnsweredQuestion = (question: Question, responses: ResponsesInReduxForm
 const createJumpFromAlwaysQuestion = (question: Question): Jump => ({
   // $FlowFixMe
   destination: question.alwaysJumpDestinationQuestion,
+  position: 0,
   conditions: [],
   origin: {
     id: question.id,
@@ -459,17 +470,49 @@ const questionsHaveLogicJump = questions =>
     false,
   );
 
+// This method handle the condition return value (if a condition is considered fullfiled or not)
+// based on the question type. Here we can add support for future questions types and handle
+// their return logic here.
 const getConditionReturn = (
+  questionType: QuestionTypeValue,
   response: ?ResponseInReduxForm,
   condition: ConditionalJumpCondition,
 ): boolean => {
-  const userResponse = getValueFromSubmitResponse(response);
+  const userResponse = response && response.value;
   if (response && userResponse && condition.value) {
     switch (condition.operator) {
       case IS_OPERATOR:
-        return condition.value.title === userResponse;
+        switch (questionType) {
+          case 'ranking':
+            // $FlowFixMe same as bottom :(
+            return userResponse.includes(condition.value.title);
+          case 'radio':
+          case 'checkbox':
+            // Flow does not seem to understand the type casting here, because we know at
+            // this point that userReponse is of MultipleChoiceQuestionValue but only in runtime
+            // $FlowFixMe
+            return (userResponse: MultipleChoiceQuestionValue).labels.includes(
+              condition.value.title,
+            );
+          default:
+            return condition.value.title === userResponse;
+        }
       case IS_NOT_OPERATOR:
-        return condition.value.title !== userResponse;
+        switch (questionType) {
+          case 'ranking':
+            // $FlowFixMe same as bottom :(
+            return userResponse.includes(condition.value.title);
+          case 'radio':
+          case 'checkbox':
+            // Flow does not seem to understand the type casting here, because we know at
+            // this point that userReponse is of MultipleChoiceQuestionValue but only in runtime
+            // $FlowFixMe
+            return !(userResponse: MultipleChoiceQuestionValue).labels.includes(
+              condition.value.title,
+            );
+          default:
+            return condition.value.title !== userResponse;
+        }
       default:
         return false;
     }
@@ -496,7 +539,7 @@ export const isAnyQuestionJumpsFullfilled = (
               const answered = responses
                 .filter(Boolean)
                 .find(response => response.question === condition.question.id);
-              return getConditionReturn(answered, condition);
+              return getConditionReturn(question.type, answered, condition);
             })
           : false,
       ) || !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses))
@@ -633,7 +676,7 @@ export const getFullfilledJumps = (question: Question, responses: ResponsesInRed
             const answered = responses.find(
               response => response.question === condition.question.id,
             );
-            return getConditionReturn(answered, condition);
+            return getConditionReturn(question.type, answered, condition);
           })
         : false,
     );
@@ -693,7 +736,36 @@ export const getAvailableQuestionsIds = (
 
         return [...acc, ...visibleJumps];
       }
-      return [...acc, ...jumps.filter(Boolean).map(jump => jump.destination.id)];
+      // Because of how Logic Jump behaves, the first condition that’s met will trigger the Logic Jump
+      // and prevent other scenarios when all the conditions of a jump concern the same question.
+      // (e.g a checkbox question which has many conditions)
+      // see https://www.typeform.com/help/single-branching-vs-multi-branching/
+      const fullfilledJump = jumps
+        .filter(Boolean)
+        .filter(
+          jump =>
+            jump.conditions &&
+            jump.conditions.length > 0 &&
+            jump.conditions
+              .filter(Boolean)
+              .every(condition => condition.question.id === jump.origin.id),
+        )
+        .sort((a, b) => a.position - b.position)[0];
+
+      const visibleJumps = jumps.filter(
+        jump =>
+          jump.conditions &&
+          (jump.conditions.length === 0 ||
+            jump.conditions
+              .filter(Boolean)
+              .some(condition => condition.question.id !== jump.origin.id)),
+      );
+
+      return [
+        ...acc,
+        ...(fullfilledJump ? [fullfilledJump.destination.id] : []),
+        ...visibleJumps.filter(Boolean).map(jump => jump.destination.id),
+      ];
     }
     return acc;
   }, []);

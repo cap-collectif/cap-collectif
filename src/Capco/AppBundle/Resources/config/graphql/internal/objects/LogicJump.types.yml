@@ -15,3 +15,6 @@ LogicJump:
       conditions:
         description: 'Return the necessited conditions that needs to be fullfiled to trigger this logic jump.'
         type: '[LogicJumpCondition]'
+      position:
+        description: 'Return the position of this logic jump.'
+        type: 'Int!'
