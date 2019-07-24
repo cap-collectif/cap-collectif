@@ -2,14 +2,15 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
+use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 
 /**
  * @method Project[]|null findAll()
@@ -96,35 +97,20 @@ class ProjectRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
-    public function getByUserPublicPaginated(User $user): Paginator
+    public function getByUserPublicPaginated(User $user, int $offset, int $limit): Paginator
     {
-        $query = $this->getProjectsViewerCanSeeQueryBuilder($user)
-            ->addSelect('a', 'u', 't')
-            ->leftJoin('p.projectType', 't')
-            ->leftJoin('p.authors', 'a')
-            ->leftJoin('a.user', 'u')
-            ->andWhere('u = :user')
-            ->andWhere('p.visibility = :visibility')
-            ->setParameter('user', $user)
-            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
-            ->orderBy('p.updatedAt', 'DESC');
+        $query = $this->getUserProjectPublicQueryBuilder($user);
+        $query->addSelect('u');
+        $query->setFirstResult($offset)->setMaxResults($limit);
 
         return new Paginator($query);
     }
 
     public function countPublicPublished(User $user): int
     {
-        $query = $this->getProjectsViewerCanSeeQueryBuilder($user)
-            ->addSelect('a', 'u', 't')
-            ->leftJoin('p.projectType', 't')
-            ->leftJoin('authors.user', 'u')
-            ->andWhere('u = :user')
-            ->andWhere('p.visibility = :visibility')
-            ->setParameter('user', $user)
-            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
-            ->orderBy('p.updatedAt', 'DESC');
+        $query = $this->getUserProjectPublicQueryBuilder($user);
 
-        $query->select('COUNT(p.id)');
+        $query->select('COUNT(DISTINCT(p.id))');
 
         return $query->getQuery()->getSingleScalarResult();
     }
@@ -288,5 +274,14 @@ class ProjectRepository extends EntityRepository
         }
 
         return $qb;
+    }
+
+    private function getUserProjectPublicQueryBuilder(User $user): QueryBuilder
+    {
+        return $this->getProjectsViewerCanSeeQueryBuilder($user)
+            ->innerJoin('authors.user', 'u', Expr\Join::WITH, 'u = :user')
+            ->andWhere('p.visibility = :visibility')
+            ->setParameter('user', $user)
+            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
     }
 }

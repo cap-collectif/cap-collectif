@@ -312,7 +312,7 @@ const getValueFromSubmitResponse = (response: ?ResponseInReduxForm): ?string => 
   ) {
     return response.value.labels[0];
   }
-  if (response && response.value && Array.isArray(response.value) && response.value.length > 0) {
+  if (response && response.value && Array.isArray(response.value) && response.value.filter(Boolean).length > 0) {
     return typeof response.value[0] === 'object'
       ? response.value[0].name // Here, we are dealing with a MediaQuestion, which has the shape { id: string, name: string, url: string }
       : response.value.join(', '); // Here, we are dealing with a MultipleChoiceQuestion but more specifically a Ranking question, which is a simple array of strings
@@ -323,6 +323,9 @@ const getValueFromSubmitResponse = (response: ?ResponseInReduxForm): ?string => 
 export const getValueFromResponse = (questionType: string, responseValue: string) => {
   // For some questions type we need to parse the JSON of previous value
   try {
+    if (questionType === 'number') {
+      return Number(responseValue)
+    }
     if (questionType === 'button') {
       return JSON.parse(responseValue).labels[0];
     }
@@ -348,7 +351,13 @@ export const formatInitialResponsesValues = (
     const questionId = question.id;
     // If we have a previous response format it
     if (response) {
-      if (typeof response.value !== 'undefined' && response.value !== null) {
+      // TODO: response.value !== "null" is a hotfix, related to issue https://github.com/cap-collectif/platform/issues/6214
+      // because of a weird bug, causing answer with questions set to "null" instead of NULL in db
+      if (
+        typeof response.value !== 'undefined' &&
+        response.value !== null &&
+        response.value !== 'null'
+      ) {
         return {
           question: questionId,
           value: getValueFromResponse(question.type, response.value),
@@ -414,7 +423,11 @@ const getResponseNumber = (value: any) => {
 type ResponseError = ?{
   value: string | { labels: string, other: string },
 };
+type ResponseWarning = ?{
+  value: string | { labels: string, other: string },
+};
 
+type ResponsesWarning = ResponseWarning[];
 type ResponsesError = ResponseError[];
 
 const hasAnsweredQuestion = (question: Question, responses: ResponsesInReduxForm): boolean => {
@@ -515,10 +528,16 @@ export const validateResponses = (
   // TODO: remove this parameter from the function and create generic traduction keys for all errors.
   className: string,
   intl: IntlShape,
+  // The behavior of the validator depends on the draft value of the response.
+  isDraft: boolean = false,
 ): { responses?: ResponsesError } => {
   const responsesError = questions.map(question => {
     const response = responses.filter(res => res && res.question === question.id)[0];
-    if (question.required) {
+    if (
+      (question.required && !isDraft) ||
+      (Array.isArray(response.value) && response.value.length > 0) ||
+      (response.value && !Array.isArray(response.value) && isDraft)
+    ) {
       if (question.type === 'medias') {
         if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
           return { value: `${className}.constraints.field_mandatory` };
@@ -529,7 +548,8 @@ export const validateResponses = (
           (response.value &&
             Array.isArray(response.value.labels) &&
             response.value.labels.length === 0 &&
-            response.value.other === null)
+            response.value.other === null &&
+            !isDraft)
         ) {
           return { value: `${className}.constraints.field_mandatory` };
         }
@@ -539,7 +559,8 @@ export const validateResponses = (
           (response.value &&
             Array.isArray(response.value.labels) &&
             response.value.labels.length === 0 &&
-            (response.value.other === null || response.value.other === ''))
+            (response.value.other === null || response.value.other === '') &&
+            !isDraft)
         ) {
           // We don't have a field with ${name}.value
           // Maybe ${name}.value._error could do the job but it doesn't
@@ -570,7 +591,8 @@ export const validateResponses = (
       question.type !== 'button' &&
       response.value &&
       typeof response.value === 'object' &&
-      (Array.isArray(response.value.labels) || Array.isArray(response.value))
+      (Array.isArray(response.value.labels) || Array.isArray(response.value)) &&
+      !isDraft
     ) {
       const rule = question.validationRule;
       const responsesNumber = getResponseNumber(response.value);
@@ -733,7 +755,18 @@ export const formatSubmitResponses = (
 
 const getQuestionInitialValue = (question: Question) => {
   // MediaQuestion have a default value of []
-  return question.__typename === 'MediaQuestion' ? [] : null
+  return question.__typename === 'MediaQuestion' ? [] : null;
+};
+
+export const warnResponses = (
+  questions: Questions,
+  responses: ResponsesInReduxForm,
+  // TODO: remove this parameter from the function and create generic traduction keys for all errors.
+  className: string,
+  intl: IntlShape,
+  isDraft: boolean = false,
+): { responses?: ResponsesWarning } => {
+  return validateResponses(questions, responses, className, intl, !isDraft);
 };
 
 export const renderResponses = ({

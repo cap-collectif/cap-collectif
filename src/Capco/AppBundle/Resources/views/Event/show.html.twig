@@ -33,7 +33,7 @@
                 <section class="section--custom">
                     <div class="container  container--thinner">
                         <h1 class="h1"> {{ event.title }}</h1>
-                        <div class="media">
+                        <div class="media d-flex align-items-center">
                             {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': event.author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                             <div class="media-body">
                                 <p class="media--aligned  excerpt">

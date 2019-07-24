@@ -10,6 +10,9 @@ use PHPUnit\Framework\Assert;
 
 class GraphQLContext implements Context
 {
+    /**
+     * @var Client
+     */
     public $client;
     public $response;
     public $rawResponse;
@@ -91,8 +94,8 @@ class GraphQLContext implements Context
         $response = $this->client->request('GET', '/graphql/internal', [
             'query' => ['query' => $query->getRaw()],
             'headers' => [
-                'Content-Type' => 'application/graphql',
-            ],
+                'Content-Type' => 'application/graphql'
+            ]
         ]);
         Assert::assertSame(200, (int) $response->getStatusCode());
         $this->response = (string) $response->getBody();
@@ -183,21 +186,21 @@ class GraphQLContext implements Context
     protected function createAuthenticatedClient(
         string $username = 'test',
         string $password = 'test'
-    ) {
+    ): void {
         $this->resetClient();
         $response = $this->client->request('POST', '/login_check', [
             'headers' => ['Content-Type' => 'application/json'],
-            'json' => ['username' => $username, 'password' => $password],
+            'json' => ['username' => $username, 'password' => $password]
         ]);
     }
 
-    private function resetClient()
+    private function resetClient(): void
     {
         $this->client = new Client([
             'base_uri' => 'https://capco.test/',
             'cert' => '/etc/ssl/certs/capco.pem',
             'verify' => false,
-            'cookies' => true,
+            'cookies' => true
         ]);
     }
 
@@ -216,7 +219,7 @@ class GraphQLContext implements Context
         $headers = [
             'Content-Type' => 'application/json',
             'Accept' => $accept,
-            'Origin' => $origin,
+            'Origin' => $origin
         ];
 
         if ('OPTIONS' === $method) {
@@ -229,7 +232,7 @@ class GraphQLContext implements Context
         $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
         $response = $this->client->request($method, $endpoint, [
             'json' => json_decode($string, true),
-            'headers' => $headers,
+            'headers' => $headers
         ]);
         $this->response = (string) $response->getBody();
         $this->rawResponse = $response;

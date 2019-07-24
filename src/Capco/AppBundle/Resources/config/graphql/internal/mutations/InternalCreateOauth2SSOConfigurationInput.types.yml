@@ -1,0 +1,6 @@
+InternalCreateOauth2SSOConfigurationInput:
+  type: relay-mutation-input
+  inherits:
+    - InternalWithOauth2SSOConfiguration
+  config:
+    description: 'Create an oauth2 configuration'

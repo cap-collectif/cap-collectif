@@ -32,6 +32,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire without filling
   And I go to a questionnaire step
   When I fill the questionnaire form without the required questions
   When I wait 1 seconds
+  And I submit my reply
   Then I should see "reply.constraints.field_mandatory" in the "#reply-form" element
   And I reload the page, I should see a confirm popup
 

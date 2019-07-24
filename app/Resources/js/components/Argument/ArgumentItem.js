@@ -68,7 +68,7 @@ export class ArgumentItem extends React.Component<Props> {
             </a>
           </p>
         )}
-        <Media>
+        <Media overflow>
           <Media.Left>
             {/* $FlowFixMe Will be a fragment soon */}
             <UserAvatarDeprecated user={argument.author} className="excerpt_dark" />

@@ -21,7 +21,7 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
         <a href={item.related.url}>{item.related.title}</a>
       </p>
     )}
-    <Media>
+    <Media overflow>
       <Media.Left>
         <UserAvatarDeprecated user={item.user} />
       </Media.Left>

@@ -10,7 +10,7 @@ InternalOauth2SSOConfiguration:
         description: 'The ID of an object.'
         builder: 'Relay::GlobalId'
         builderConfig:
-          typeName: Event
+          typeName: Oauth2SSOConfiguration
       clientId:
         type: 'String!'
         description: 'Client ID.'
@@ -29,3 +29,7 @@ InternalOauth2SSOConfiguration:
       logoutUrl:
         type: 'URI'
         description: 'Logout URL.'
+      redirectUri:
+        type: 'URI!'
+        description: 'Redirect URI callback.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\OpenIDRedirectUriResolver", [value])'

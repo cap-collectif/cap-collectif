@@ -41,8 +41,16 @@ def graphql_schemas(checkSame=False):
     if checkSame:
         local('if [[ $(git diff -G. --name-only *.graphql | wc -c) -ne 0 ]]; then git --no-pager diff *.graphql && echo "\n\033[31mThe following schemas are not up to date:\033[0m" && git diff --name-only *.graphql && echo "\033[31mYou should run \'yarn generate-graphql-files\' to update your *.graphql files !\033[0m" && exit 1; fi',  capture=False, shell='/bin/bash')
 
+# Usage:
+#
+# Generate all snapshots (delete all previous snapshots) :
+# fab local.qa.snapshots
+#
+# Generate only snapshots, you are working on (@dev tag) :
+# fab local.qa.snapshots:tags=dev
+#
 @task(environments=['local'])
-def snapshots(emails=False):
+def snapshots(tags='false'):
     "Generate all snapshots"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     commands = [
@@ -50,7 +58,9 @@ def snapshots(emails=False):
         'capco:export:consultation --quiet --snapshot',
         'capco:export:projects-contributors --quiet --snapshot',
         'capco:export:proposalStep --quiet --snapshot',
-        # 'capco:export:questionnaire --snapshot',
+        'capco:export:user userAdmin --quiet',
+        'capco:export:user user1 --quiet',
+        'capco:export:user user5 --quiet',
     ]
     extensions = [
         'csv',
@@ -60,27 +70,28 @@ def snapshots(emails=False):
 
     print cyan('/!\ Your database must be up to date, to generate accurate snapshots !')
 
-    if emails:
+    if tags == 'false':
         print cyan('Deleting email snapshots...')
         local('rm -rf __snapshots__/emails/*')
-        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p api --tags=snapshot', 'application', env.www_app, 'root')
-        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p e2e --tags=snapshot', 'application', env.www_app, 'root')
-        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p commands --tags=snapshot', 'application', env.www_app, 'root')
-        print cyan('Successfully generated emails snapshots !')
+    for suite in ['api', 'e2e', 'commands']:
+        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot', '--tags=' + tags)[tags != 'false'], 'application', env.www_app)
+    print cyan('Successfully generated emails snapshots !')
 
     env.service_command('bin/console capco:toggle:enable export --env test --no-debug', 'application', env.www_app)
     
-    print cyan('Deleting exports snapshots...')
-    for extension in extensions:
-        env.service_command('rm -rf __snapshots__/exports/*.' + extension , 'application', env.www_app, 'root')
+    if tags == 'false':
+        print cyan('Deleting exports snapshots...')
+        for extension in extensions:
+            env.service_command('rm -rf __snapshots__/exports/*.' + extension , 'application', env.www_app, 'root')
 
-    print cyan('Running export commands...')
-    for command in commands:
-        env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
+        print cyan('Running export commands...')
+        for command in commands:
+            env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
 
-    for extension in extensions:
-        env.service_command('cp web/export/*.' + extension + ' __snapshots__/exports/ 2>/dev/null || :', 'application', env.www_app)
-    print cyan('Successfully genrated snapshots !')
+        for extension in extensions:
+            env.service_command('cp web/export/*.' + extension + ' __snapshots__/exports/ 2>/dev/null || :', 'application', env.www_app)
+    
+    print cyan('Successfully generated snapshots !')
 
 
 @task(environments=['local', 'ci'])

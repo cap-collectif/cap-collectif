@@ -647,3 +647,26 @@ InternalMutation:
           inputType: InternalUpdateShieldAdminFormInput
           payloadType: InternalUpdateShieldAdminFormPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateShieldAdminFormMutation", [value])'
+
+      # SSO Configuration
+      createOauth2SSOConfiguration:
+        access: "@=hasRole('ROLE_SUPER_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: InternalCreateOauth2SSOConfigurationInput
+          payloadType: InternalCreateOauth2SSOConfigurationPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOauth2SSOConfigurationMutation", [value])'
+      updateOauth2SSOConfiguration:
+        access: "@=hasRole('ROLE_SUPER_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: InternalUpdateOauth2SSOConfigurationInput
+          payloadType: InternalUpdateOauth2SSOConfigurationPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOauth2SSOConfigurationMutation", [value])'
+      deleteSSOConfiguration:
+        access: "@=hasRole('ROLE_SUPER_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: InternalDeleteSSOConfigurationInput
+          payloadType: InternalDeleteSSOConfigurationPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteSSOConfigurationMutation", [value])'
