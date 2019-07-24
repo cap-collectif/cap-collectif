@@ -235,8 +235,8 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('InternalOauth2SSOConfiguration');
         }
 
-        if ($node instanceof QuestionChoice){
-            return $this->typeResolver->resolve('QuestionChoice');
+        if ($node instanceof QuestionChoice) {
+            return $this->typeResolver->resolve('InternalQuestionChoice');
         }
 
         throw new UserError('Could not resolve type of Node.');

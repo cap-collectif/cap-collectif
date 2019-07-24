@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,14 +13,14 @@ class QuestionChoiceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('id');
+        $builder->add('id', RelayNodeType::class);
         $builder->add('title', TextType::class, [
             'purify_html' => true,
-            'purify_html_profile' => 'default',
+            'purify_html_profile' => 'default'
         ]);
         $builder->add('description', TextType::class, [
             'purify_html' => true,
-            'purify_html_profile' => 'default',
+            'purify_html_profile' => 'default'
         ]);
         $builder->add('color');
         $builder->add('image');
