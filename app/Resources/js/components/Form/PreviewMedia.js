@@ -40,20 +40,22 @@ export class PreviewMedia extends React.PureComponent<Props, State> {
             <strong>
               <FormattedMessage id="proposal.documents.deposited" />
             </strong>{' '}
-            {medias.map((file, key) => (
-              <Label key={key} bsStyle="info" style={{ marginRight: '5px' }}>
-                <a href={file.url} target="_blank" rel="noopener noreferrer">
-                  {file.name}
-                </a>{' '}
-                <Button
-                  bsStyle="link"
-                  onClick={() => {
-                    onRemoveMedia(file);
-                  }}>
-                  <i style={{ cursor: 'pointer' }} className="glyphicon glyphicon-remove" />
-                </Button>
-              </Label>
-            ))}
+            <div className="document-container">
+              {medias.map((file, key) => (
+                <Label key={key} bsStyle="info" style={{ marginRight: '5px' }}>
+                  <a href={file.url} target="_blank" rel="noopener noreferrer">
+                    {file.name}
+                  </a>{' '}
+                  <Button
+                    bsStyle="link"
+                    onClick={() => {
+                      onRemoveMedia(file);
+                    }}>
+                    <i style={{ cursor: 'pointer' }} className="glyphicon glyphicon-remove" />
+                  </Button>
+                </Label>
+              ))}
+            </div>
           </Col>
         )}
       </div>

@@ -7085,21 +7085,7 @@ type User implements Node & UniformResourceLocatable {
   opinionVersionsCount: Int!
   argumentsCount: Int!
   argumentVotesCount: Int!
-
-  # Get all proposals of the user.
-  proposals(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ProposalConnection!
+  proposalsCount: Int!
   proposalVotesCount: Int!
 
   # Get all comment votes of the user.

@@ -383,9 +383,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
       opinionVersionsCount
       argumentsCount
       argumentVotesCount
-      proposals {
-        totalCount
-      }
+      proposalsCount
       proposalVotesCount
       commentVotes {
         totalCount

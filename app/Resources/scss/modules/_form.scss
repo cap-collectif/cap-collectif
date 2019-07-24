@@ -216,6 +216,12 @@ form {
         }
     }
 
+    .document-container span{
+        display: inline-block;
+        height: 23px;
+        margin-top: 5px;
+    }
+
     &__dropzone {
         width: 200px;
         height: 200px;
