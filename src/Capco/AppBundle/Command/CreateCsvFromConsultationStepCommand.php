@@ -256,7 +256,7 @@ EOF;
         'contribution_versions_title',
         'contribution_versions_bodyText',
         'contribution_versions_createdAt',
-        'contribution_versions_updatedAt',
+        'contribution_versions_updatedAt'
     ];
     protected const SOURCE_HEADER_MAP = [
         'contributions_sources_id' => 'id',
@@ -271,14 +271,14 @@ EOF;
         'contributions_sources_createdAt' => 'createdAt',
         'contributions_sources_updatedAt' => 'updatedAt',
         'contributions_sources_published' => 'published',
-        'contributions_sources_votesCount' => 'votes.totalCount',
+        'contributions_sources_votesCount' => 'votes.totalCount'
     ];
 
     protected const VOTES_HEADER_MAP = [
         'contributions_votes_id' => 'id',
         'contributions_votes_author_id' => 'author.id',
         'contributions_votes_value' => 'value',
-        'contributions_votes_createdAt' => 'createdAt',
+        'contributions_votes_createdAt' => 'createdAt'
     ];
 
     protected const ARGUMENT_HEADER_MAP = [
@@ -296,7 +296,7 @@ EOF;
         'contributions_arguments_trashedStatus' => 'trashedStatus',
         'contributions_arguments_trashedAt' => 'trashedAt',
         'contributions_arguments_trashedReason' => 'trashedReason',
-        'contributions_arguments_votesCount' => 'votes.totalCount',
+        'contributions_arguments_votesCount' => 'votes.totalCount'
     ];
 
     protected const VERSION_HEADER_MAP = [
@@ -304,7 +304,7 @@ EOF;
         'contribution_versions_title' => 'title',
         'contribution_versions_bodyText' => 'bodyText',
         'contribution_versions_createdAt' => 'createdAt',
-        'contribution_versions_updatedAt' => 'updatedAt',
+        'contribution_versions_updatedAt' => 'updatedAt'
     ];
 
     protected const REPORTING_HEADER_MAP = [
@@ -314,7 +314,7 @@ EOF;
         'contributions_reportings_author_id' => 'author.id',
         'contributions_reportings_type' => 'type',
         'contributions_reportings_body' => 'body',
-        'contributions_reportings_createdAt' => 'createdAt',
+        'contributions_reportings_createdAt' => 'createdAt'
     ];
 
     protected $contributionHeaderMap =
@@ -340,7 +340,7 @@ EOF;
             'contributions_argumentsCountFor' => 'argumentsFor.totalCount',
             'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
             'contributions_sourcesCount' => 'sources.totalCount',
-            'contributions_versionsCount' => 'versions.totalCount',
+            'contributions_versionsCount' => 'versions.totalCount'
         ] +
         self::ARGUMENT_HEADER_MAP +
         self::VOTES_HEADER_MAP +
@@ -422,7 +422,7 @@ EOF;
         $contributions = $this->executor
             ->execute('internal', [
                 'query' => $contributionsQuery,
-                'variables' => [],
+                'variables' => []
             ])
             ->toArray();
 
@@ -597,6 +597,7 @@ ${versionFragment}
       }
     }
   }
+}
 }
 EOF;
     }
