@@ -5281,9 +5281,9 @@
             "authors": [
                 {
                     "name": "Mandrill Devs",
+                    "role": "Developer",
                     "email": "community@mandrill.com",
-                    "homepage": "http://mandrill.com",
-                    "role": "Developer"
+                    "homepage": "http://mandrill.com"
                 }
             ],
             "description": "API client library for the Mandrill email as a service platform",
@@ -6154,9 +6154,9 @@
             "authors": [
                 {
                     "name": "Andreas Heigl",
+                    "role": "developer",
                     "email": "andreas@heigl.org",
-                    "homepage": "http://andreas.heigl.org",
-                    "role": "Developer"
+                    "homepage": "http://andreas.heigl.org"
                 }
             ],
             "description": "Word-Hyphenation for PHP based on the TeX-Hyphenation algorithm",
@@ -9819,16 +9819,16 @@
         },
         {
             "name": "sonata-project/doctrine-extensions",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/sonata-doctrine-extensions.git",
-                "reference": "a22ab48341d1a704cdb823d1d721383bf2feba24"
+                "reference": "aab1ede164095afcb1f40253c5d97258b930a433"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/sonata-doctrine-extensions/zipball/a22ab48341d1a704cdb823d1d721383bf2feba24",
-                "reference": "a22ab48341d1a704cdb823d1d721383bf2feba24",
+                "url": "https://api.github.com/repos/sonata-project/sonata-doctrine-extensions/zipball/aab1ede164095afcb1f40253c5d97258b930a433",
+                "reference": "aab1ede164095afcb1f40253c5d97258b930a433",
                 "shasum": ""
             },
             "require": {
@@ -9884,7 +9884,7 @@
                 "doctrine2",
                 "json"
             ],
-            "time": "2019-03-08T06:51:52+00:00"
+            "time": "2019-04-29T17:07:46+00:00"
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
@@ -11524,12 +11524,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/prometheus-bundle.git",
+                "url": "https://github.com/tweedegolf/prometheus-bundle.git",
                 "reference": "e559a615173c82884820eec55cacc2513a35c31a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/prometheus-bundle/zipball/e559a615173c82884820eec55cacc2513a35c31a",
+                "url": "https://api.github.com/repos/tweedegolf/prometheus-bundle/zipball/e559a615173c82884820eec55cacc2513a35c31a",
                 "reference": "e559a615173c82884820eec55cacc2513a35c31a",
                 "shasum": ""
             },
@@ -13760,7 +13760,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🔍 Nette Finder: find files and directories with an intuitive API.",
+            "description": "? Nette Finder: find files and directories with an intuitive API.",
             "homepage": "https://nette.org",
             "keywords": [
                 "filesystem",
@@ -13820,7 +13820,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
+            "description": "? Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",
@@ -15198,8 +15198,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "The PHP Unit Testing framework.",
@@ -15653,9 +15653,6 @@
                 "behat",
                 "page"
             ],
-            "support": {
-                "source": "https://github.com/spyl94/BehatPageObjectExtension/tree/master"
-            },
             "time": "2016-03-15T13:13:55+00:00"
         },
         {
@@ -15850,9 +15847,6 @@
                 "process",
                 "testing"
             ],
-            "support": {
-                "source": "https://github.com/spyl94/behat-parallel-scenario/tree/master"
-            },
             "time": "2016-03-11T13:43:33+00:00"
         },
         {
