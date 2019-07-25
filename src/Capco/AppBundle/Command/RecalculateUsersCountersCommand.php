@@ -97,19 +97,19 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
 
         $this->compute(
             'UPDATE CapcoUserBundle:User u SET u.argumentsCount = (
-            SELECT count(a.id)
+            SELECT count(DISTINCT a.id)
             FROM CapcoAppBundle:Argument a
             LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
             LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
             LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
             LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
             LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
-            INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
-            INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = ovocs
+            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs
+            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs
             WHERE a.Author = u AND a.published = 1 AND (
-              (a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1)
+              (oc.step = cs AND a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1)
               OR
-              (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovocs.isEnabled = 1)
+              (ovoc.step = ovocs AND a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovocs.isEnabled = 1)
             )
             GROUP BY a.Author
         )'
@@ -194,20 +194,20 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
 
         $this->compute(
             'UPDATE CapcoUserBundle:User u set u.argumentVotesCount = (
-            SELECT count(av.id)
+            SELECT count(DISTINCT av.id)
             from CapcoAppBundle:ArgumentVote av
             LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
             LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
             LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
             LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
-            INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
+            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs
             LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
             LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
-            INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = ovocs
+            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs
             WHERE av.user = u AND a.published = 1 AND (
-              (a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1)
+              (oc.step = cs AND a.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1)
               OR
-              (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovocs.isEnabled = 1)
+              (ovoc.step = ovocs AND a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovocs.isEnabled = 1)
             )
             GROUP BY av.user
         )'
