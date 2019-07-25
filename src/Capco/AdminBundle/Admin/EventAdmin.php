@@ -14,7 +14,6 @@ use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -59,6 +58,7 @@ class EventAdmin extends AbstractAdmin
         $this->indexer->finishBulk();
         parent::preUpdate($object);
     }
+
     public function getTemplate($name)
     {
         if ('create' === $name) {
@@ -67,8 +67,10 @@ class EventAdmin extends AbstractAdmin
         if ('edit' === $name) {
             return 'CapcoAdminBundle:Event:edit.html.twig';
         }
+
         return $this->getTemplateRegistry()->getTemplate($name);
     }
+
     // For mosaic view
     public function getObjectMetadata($object)
     {
@@ -135,7 +137,6 @@ class EventAdmin extends AbstractAdmin
             ->add('endAt', 'doctrine_orm_datetime_range', [
                 'label' => 'admin.fields.event.end_at'
             ]);
-
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -165,13 +166,14 @@ class EventAdmin extends AbstractAdmin
         /** @var User $viewer */
         $viewer = $this->token->getToken()->getUser();
 
-        if($viewer->isSuperAdmin()) {
-            $listMapper->add('newAddressIsSimilar', null,[
-                'label' => 'isSimilar'
-            ])
-            ->add('similarityOfNewAddress', null, [
-                'label' => 'similarityOfNewAddress'
-            ]);
+        if ($viewer->isSuperAdmin()) {
+            $listMapper
+                ->add('newAddressIsSimilar', null, [
+                    'label' => 'isSimilar'
+                ])
+                ->add('similarityOfNewAddress', null, [
+                    'label' => 'similarityOfNewAddress'
+                ]);
         }
 
         $listMapper
@@ -205,7 +207,7 @@ class EventAdmin extends AbstractAdmin
                     ],
                     'display' => [
                         'template' => 'CapcoAdminBundle:Event:list__action_display.html.twig'
-                    ],
+                    ]
                 ]
             ]);
     }

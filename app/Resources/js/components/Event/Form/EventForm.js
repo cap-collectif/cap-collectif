@@ -22,6 +22,7 @@ type Props = {|
   dispatch: Dispatch,
   intl: IntlShape,
   isAdmin: boolean,
+  isSuperAdmin: boolean,
   initialValues?: ?{},
   autoload: boolean,
   multi: boolean,
@@ -33,7 +34,7 @@ export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
   render() {
-    const { features, isAdmin, event } = this.props;
+    const { features, isAdmin, event, isSuperAdmin } = this.props;
 
     const renderSelectThemeQuery = ({ error, props }) => {
       if (error) {
@@ -116,6 +117,31 @@ export class EventForm extends React.Component<Props> {
             label={<FormattedMessage id="admin.fields.proposal.address" />}
             placeholder="proposal.map.form.placeholder"
           />
+          {isSuperAdmin && (
+            <div className="mb-5">
+              <div>
+                {event && event.fullAddress && (
+                  <div className="clearfix mb-5">Ancienne adresse : {event.fullAddress}</div>
+                )}
+                {event && event.lat && event.lng && (
+                  <span className="clearfix mb-5">
+                    {' '}
+                    Ancienne lat/lng :&nbsp; {event.lat} / {event.lng}
+                  </span>
+                )}
+                {event &&
+                  event.googleMapsAddress &&
+                  event.googleMapsAddress.lat &&
+                  event.googleMapsAddress.lng && (
+                    <span className="clearfix mb-5">
+                      {' '}
+                      Nouvelle lat/lng :&nbsp; {event.googleMapsAddress.lat} /{' '}
+                      {event.googleMapsAddress.lng}
+                    </span>
+                  )}
+              </div>
+            </div>
+          )}
           <Field
             id="event_body"
             type="editor"
@@ -131,32 +157,36 @@ export class EventForm extends React.Component<Props> {
             }
           />
           <div className="d-flex justify-content-between w-23">
-            <Field
-              timeFormat={false}
-              id="event_startAt"
-              component={component}
-              type="datetime"
-              name="startAt"
-              formName={formName}
-              label={
-                <span>
-                  <FormattedMessage id="start-date" />{' '}
-                  <span className="excerpt">
-                    <FormattedMessage id="global.mandatory" />
+            <div id="event_startAt">
+              <Field
+                timeFormat={false}
+                id="event_startAt"
+                component={component}
+                type="datetime"
+                name="startAt"
+                formName={formName}
+                label={
+                  <span>
+                    <FormattedMessage id="start-date" />{' '}
+                    <span className="excerpt">
+                      <FormattedMessage id="global.mandatory" />
+                    </span>
                   </span>
-                </span>
-              }
-              addonAfter={<i className="cap-calendar-2" />}
-            />
-            <Field
-              id="event_endAt"
-              component={component}
-              type="datetime"
-              name="endAt"
-              formName={formName}
-              label={<FormattedMessage id="ending-date" />}
-              addonAfter={<i className="cap-calendar-2" />}
-            />
+                }
+                addonAfter={<i className="cap-calendar-2" />}
+              />
+            </div>
+            <div id="event_endAt">
+              <Field
+                id="event_endAt"
+                component={component}
+                type="datetime"
+                name="endAt"
+                formName={formName}
+                label={<FormattedMessage id="ending-date" />}
+                addonAfter={<i className="cap-calendar-2" />}
+              />
+            </div>
           </div>
           <Field
             id="event_media"
@@ -254,6 +284,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   if (props.event) {
     return {
       isAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_ADMIN')),
+      isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
       features: state.default.features,
       initialValues: {
         id: props.event && props.event.id ? props.event.id : null,
@@ -294,6 +325,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   }
   return {
     isAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_ADMIN')),
+    isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
     features: state.default.features,
   };
 };
@@ -315,6 +347,8 @@ export default createFragmentContainer(container, {
       googleMapsAddress {
         formatted
         json
+        lat
+        lng
       }
       enabled
       body
@@ -338,6 +372,9 @@ export default createFragmentContainer(container, {
         id
         displayName
       }
+      lat
+      lng
+      fullAddress
     }
   `,
 });

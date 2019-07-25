@@ -82,7 +82,7 @@
             </li>
         </ul>
   {% endif %}
-    {% if admin.class == 'Capco\\AppBundle\\Entity\\Event' and admin.hasSubject == false %}
+    {% if admin.class == 'Capco\\AppBundle\\Entity\\Event' and action == 'list' %}
         <ul class="nav navbar-nav navbar-right">
             <li class="mr-5">
                 {{ react_render_component('AdminImportEventsApp') }}
