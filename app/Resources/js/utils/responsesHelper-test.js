@@ -64,7 +64,6 @@ const questionnaireQuestions = [
             "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)",
           number: 3,
         },
-        position: 1,
         conditions: [
           {
             id: 'ljconditionFleuveGange',
@@ -102,7 +101,6 @@ const questionnaireQuestions = [
           title: 'Par qui Hap a t-il été créé ?',
           number: 4,
         },
-        position: 2,
         conditions: [
           {
             id: 'ljconditionFleuveHap',
@@ -128,7 +126,6 @@ const questionnaireQuestions = [
           title: 'Noel a t-il un rapport avec la fête de Noël ?',
           number: 7,
         },
-        position: 3,
         conditions: [
           {
             id: 'ljconditionNoel',
@@ -283,7 +280,6 @@ const questionnaireQuestions = [
           title: "Comment ça ce n'est pas un homme bon, comment oses-tu ?",
           number: 6,
         },
-        position: 1,
         conditions: [
           {
             id: 'ljconditionHapGood',
@@ -457,7 +453,6 @@ const questionnaireQuestions = [
           title: "T'aimes bien Iron Man ?",
           number: 13,
         },
-        position: 1,
         conditions: [
           {
             id: 'ljconditionMarvel',
@@ -483,7 +478,6 @@ const questionnaireQuestions = [
           title: "T'aimes bien Superman ?",
           number: 10,
         },
-        position: 2,
         conditions: [
           {
             id: 'ljconditionDc',
@@ -1077,7 +1071,6 @@ describe('getAvailableQuestionsIds', () => {
         jumps: [
           {
             id: 'jump1',
-            position: 1,
             conditions: [
               {
                 id: 'conditionQuestion2-1',
@@ -1103,7 +1096,6 @@ describe('getAvailableQuestionsIds', () => {
           },
           {
             id: 'jump2',
-            position: 2,
             conditions: [
               {
                 id: 'conditionQuestion2-2',

@@ -90,7 +90,6 @@ Object {
       "origin": Object {
         "id": "UXVlc3Rpb246NDU=",
       },
-      "position": 1,
     },
     Object {
       "conditions": Array [
@@ -116,7 +115,6 @@ Object {
       "origin": Object {
         "id": "UXVlc3Rpb246NDU=",
       },
-      "position": 2,
     },
     Object {
       "conditions": Array [
@@ -142,7 +140,6 @@ Object {
       "origin": Object {
         "id": "UXVlc3Rpb246NDU=",
       },
-      "position": 3,
     },
   ],
   "number": 2,
@@ -209,7 +206,6 @@ Object {
       "origin": Object {
         "id": "UXVlc3Rpb246MjY=",
       },
-      "position": 1,
     },
   ],
   "number": 5,
@@ -299,7 +295,6 @@ Array [
         "origin": Object {
           "id": "UXVlc3Rpb246NDU=",
         },
-        "position": 1,
       },
       Object {
         "conditions": Array [
@@ -325,7 +320,6 @@ Array [
         "origin": Object {
           "id": "UXVlc3Rpb246NDU=",
         },
-        "position": 2,
       },
       Object {
         "conditions": Array [
@@ -351,7 +345,6 @@ Array [
         "origin": Object {
           "id": "UXVlc3Rpb246NDU=",
         },
-        "position": 3,
       },
     ],
     "number": 2,

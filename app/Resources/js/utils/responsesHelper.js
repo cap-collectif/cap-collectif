@@ -63,9 +63,8 @@ const QuestionAdminFragment = {
       position
       required
       helpText
-      jumps {
+      jumps(orderBy: { field: POSITION, direction: ASC }) {
         id
-        position
         origin {
           id
         }
@@ -131,9 +130,8 @@ const QuestionFragment = {
       position
       required
       helpText
-      jumps {
+      jumps(orderBy: { field: POSITION, direction: ASC }) {
         id
-        position
         origin {
           id
         }
@@ -201,7 +199,6 @@ type ConditionalJumpCondition = {|
 
 type Jump = {|
   +id: ?string,
-  +position: number,
   +origin: {|
     +id: string,
   |},
@@ -456,7 +453,6 @@ const hasAnsweredQuestion = (question: Question, responses: ResponsesInReduxForm
 const createJumpFromAlwaysQuestion = (question: Question): Jump => ({
   // $FlowFixMe
   destination: question.alwaysJumpDestinationQuestion,
-  position: 0,
   conditions: [],
   origin: {
     id: question.id,
@@ -477,6 +473,7 @@ const getConditionReturn = (
   questionType: QuestionTypeValue,
   response: ?ResponseInReduxForm,
   condition: ConditionalJumpCondition,
+  jump: Jump,
 ): boolean => {
   const userResponse = response && response.value;
   if (response && userResponse && condition.value) {
@@ -491,8 +488,10 @@ const getConditionReturn = (
             // Flow does not seem to understand the type casting here, because we know at
             // this point that userReponse is of MultipleChoiceQuestionValue but only in runtime
             // $FlowFixMe
-            return (userResponse: MultipleChoiceQuestionValue).labels.includes(
-              condition.value.title,
+            return (
+              jump.conditions &&
+              jump.conditions.filter(Boolean).length === userResponse.labels.length &&
+              (userResponse: MultipleChoiceQuestionValue).labels.includes(condition.value.title)
             );
           default:
             return condition.value.title === userResponse;
@@ -507,8 +506,10 @@ const getConditionReturn = (
             // Flow does not seem to understand the type casting here, because we know at
             // this point that userReponse is of MultipleChoiceQuestionValue but only in runtime
             // $FlowFixMe
-            return !(userResponse: MultipleChoiceQuestionValue).labels.includes(
-              condition.value.title,
+            return (
+              jump.conditions &&
+              jump.conditions.filter(Boolean).length === userResponse.labels.length &&
+              !(userResponse: MultipleChoiceQuestionValue).labels.includes(condition.value.title)
             );
           default:
             return condition.value.title !== userResponse;
@@ -539,7 +540,7 @@ export const isAnyQuestionJumpsFullfilled = (
               const answered = responses
                 .filter(Boolean)
                 .find(response => response.question === condition.question.id);
-              return getConditionReturn(question.type, answered, condition);
+              return getConditionReturn(question.type, answered, condition, jump);
             })
           : false,
       ) || !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses))
@@ -676,7 +677,7 @@ export const getFullfilledJumps = (question: Question, responses: ResponsesInRed
             const answered = responses.find(
               response => response.question === condition.question.id,
             );
-            return getConditionReturn(question.type, answered, condition);
+            return getConditionReturn(question.type, answered, condition, jump);
           })
         : false,
     );
@@ -749,8 +750,7 @@ export const getAvailableQuestionsIds = (
             jump.conditions
               .filter(Boolean)
               .every(condition => condition.question.id === jump.origin.id),
-        )
-        .sort((a, b) => a.position - b.position)[0];
+        )[0];
 
       const visibleJumps = jumps.filter(
         jump =>
