@@ -597,41 +597,36 @@ class ProposalRepository extends EntityRepository
         ?int $limit = null,
         ?int $offset = null
     ): array {
-        $qb = $this->createQueryBuilder('p');
-        $this->createProposalsByAuthorViewerCanSeeQuery($viewer, $user, $qb)
+        $qb = $this->createProposalsByAuthorViewerCanSeeQuery($viewer, $user)
             ->setMaxResults($limit)
             ->setFirstResult($offset);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function countProposalsViewerCanSee(User $viewer, User $user): int
+    public function countProposalsByAuthorViewerCanSee(User $viewer, User $user): int
     {
-        $qb = $this->getIsEnabledQueryBuilder('p');
-        $qb->select('COUNT(p.id)');
-        $this->createProposalsByAuthorViewerCanSeeQuery($viewer, $user, $qb);
+        $qb = $this->createProposalsByAuthorViewerCanSeeQuery($viewer, $user);
+        $qb->select('COUNT(DISTINCT p.id)');
 
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getPublicProposalsByAuthor(
         User $author,
-        int $limit = null,
-        int $offset = null
+        ?int $limit = null,
+        ?int $offset = null
     ): array {
-        $qb = $this->getIsEnabledQueryBuilder('p');
-        $this->createProposalsPublicByAuthorQuery($author, $qb)
-            ->setMaxResults($limit)
-            ->setFirstResult($offset);
+        $qb = $this->createPublicProposalsByAuthorQuery($author);
+        $qb->setMaxResults($limit)->setFirstResult($offset);
 
         return $qb->getQuery()->getResult();
     }
 
     public function countPublicProposalsByAuthor(User $author): int
     {
-        $qb = $this->getIsEnabledQueryBuilder('p');
-        $qb->select('COUNT(p.id)');
-        $this->createProposalsPublicByAuthorQuery($author, $qb);
+        $qb = $this->createPublicProposalsByAuthorQuery($author);
+        $qb->select('COUNT(DISTINCT p.id)');
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -649,8 +644,7 @@ class ProposalRepository extends EntityRepository
     // It depends on the project's visibility, the logged user's roles and the restricted viewer groups.
     private function createProposalsByAuthorViewerCanSeeQuery(
         User $viewer,
-        User $user,
-        QueryBuilder $qb
+        User $user
     ): QueryBuilder {
         $visibility = [];
         $visibility[] = ProjectVisibilityMode::VISIBILITY_PUBLIC;
@@ -662,6 +656,7 @@ class ProposalRepository extends EntityRepository
             $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
         }
 
+        $qb = $this->getIsEnabledQueryBuilder('p');
         $qb
             ->andWhere('p.author = :user')
             ->leftJoin('p.selections', 'ps')
@@ -724,57 +719,24 @@ class ProposalRepository extends EntityRepository
                         )
                 );
             }
+            $qb->setParameters([
+                ':viewer' => $viewer,
+                ':visibility' => $visibility,
+                ':prvgId' => $viewer->getUserGroupIds()
+            ]);
         }
-
-        $qb->setParameters([
-            ':viewer' => $viewer,
-            ':user' => $user,
-            ':visibility' => $visibility,
-            ':prvgId' => $viewer->getUserGroupIds()
-        ]);
+        $qb->setParameter(':user', $user);
 
         return $qb;
     }
 
-    public function countProposalsViewerCanSee(User $viewer, User $user): int
+    private function createPublicProposalsByAuthorQuery(User $author): QueryBuilder
     {
-        $qb = $this->createQueryBuilder('p');
-        $qb->select('COUNT(p.id)');
-        $this->createProposalsByAuthorViewerCanSeeQuery($viewer, $user, $qb);
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function getPublicProposalsByAuthor(
-        User $author,
-        ?int $limit = null,
-        ?int $offset = null
-    ): array {
-        $qb = $this->createQueryBuilder('p');
+        $qb = $this->getIsEnabledQueryBuilder('p');
         $qb
             ->andWhere('p.author = :author')
-            ->leftJoin('p.proposalForm', 'pf')
-            ->leftJoin('pf.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pabs')
-            ->leftJoin('pabs.project', 'pro')
-            ->andWhere($qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC));
-
-        $qb
-            ->setParameter(':author', $author)
-            ->setMaxResults($limit)
-            ->setFirstResult($offset);
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function countPublicProposalsByAuthor(User $author): int
-    {
-        $qb = $this->createQueryBuilder('p');
-        $qb
-            ->select('COUNT(p.id)')
-            ->andWhere('p.author = :author')
-            ->leftJoin('p.proposalForm', 'pf')
             ->leftJoin('p.selections', 'ps')
+            ->leftJoin('p.proposalForm', 'pf')
             ->leftJoin('pf.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pabs')
             ->leftJoin('pabs.project', 'pro')
@@ -784,22 +746,13 @@ class ProposalRepository extends EntityRepository
                     ->expr()
                     ->andX(
                         $qb->expr()->eq('s.private', 'false'),
-                        $qb->expr()->isNotNull('ps.selectionStep')
+                        $qb->expr()->isNotNull('ps.selectionStep'),
+                        $qb->expr()->eq('s.stepType', 'collect')
                     )
-            );
+            )
+            ->setParameter(':author', $author);
 
-        $qb->setParameter(':author', $author);
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
-    {
-        return $this->createQueryBuilder($alias)
-            ->andWhere($alias . '.draft = false')
-            ->andWhere($alias . '.trashedAt IS NULL')
-            ->andWhere($alias . '.deletedAt IS NULL')
-            ->andWhere($alias . '.published = true');
+        return $qb;
     }
 
     private function getProposalQueryPublishedByStep(CollectStep $cs): QueryBuilder

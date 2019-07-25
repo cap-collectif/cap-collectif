@@ -37,7 +37,10 @@ class UserProposalsResolver implements ResolverInterface
                     $offset
                 );
             });
-            $totalCount = $this->proposalRepository->countProposalsViewerCanSee($viewer, $user);
+            $totalCount = $this->proposalRepository->countProposalsByAuthorViewerCanSee(
+                $viewer,
+                $user
+            );
         } else {
             /** @var User $viewer */
             $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
