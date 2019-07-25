@@ -641,21 +641,10 @@ class ProposalRepository extends EntityRepository
     }
 
     // This return the query used to retrieve all the proposals of an author the logged user can see.
-    // It depends on the project's visibility, the logged user's roles and the restricted viewer groups.
     private function createProposalsByAuthorViewerCanSeeQuery(
         User $viewer,
         User $user
     ): QueryBuilder {
-        $visibility = [];
-        $visibility[] = ProjectVisibilityMode::VISIBILITY_PUBLIC;
-        if ($viewer->isSuperAdmin()) {
-            $visibility[] = ProjectVisibilityMode::VISIBILITY_ME;
-            $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
-            $visibility[] = ProjectVisibilityMode::VISIBILITY_CUSTOM;
-        } elseif ($viewer->isAdmin()) {
-            $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
-        }
-
         $qb = $this->getIsEnabledQueryBuilder('p');
         $qb
             ->andWhere('p.author = :user')
@@ -667,42 +656,9 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('pro.authors', 'pr_au')
             ->leftJoin('pro.restrictedViewerGroups', 'prvg');
         if (!$viewer->isSuperAdmin()) {
-            $qb->andWhere(
-                $qb
-                    ->expr()
-                    ->orX(
-                        $qb
-                            ->expr()
-                            ->orX(
-                                $qb
-                                    ->expr()
-                                    ->eq(
-                                        'pro.visibility',
-                                        ProjectVisibilityMode::VISIBILITY_PUBLIC
-                                    ),
-                                $qb->expr()->eq(':viewer', 'pr_au.user')
-                            ),
-                        $qb
-                            ->expr()
-                            ->andX(
-                                $qb
-                                    ->expr()
-                                    ->eq(
-                                        'pro.visibility',
-                                        ProjectVisibilityMode::VISIBILITY_CUSTOM
-                                    ),
-                                $qb->expr()->in('prvg.id', ':prvgId')
-                            ),
-                        $qb
-                            ->expr()
-                            ->andX(
-                                $qb->expr()->in('pro.visibility', ':visibility'),
-                                $qb
-                                    ->expr()
-                                    ->lt('pro.visibility', ProjectVisibilityMode::VISIBILITY_CUSTOM)
-                            )
-                    )
-            );
+            // The call of the function below filters the contributions according to the visibility
+            // of the project containing it, as well as the privileges of the connected user.
+            $this->getContributionsViewerCanSee($qb, $viewer);
             if (!$viewer->isAdmin()) {
                 $qb->andWhere(
                     $qb
@@ -711,19 +667,17 @@ class ProposalRepository extends EntityRepository
                             $qb
                                 ->expr()
                                 ->andX(
+                                    $qb->expr()->isInstanceOf('s', ':collectStep'),
                                     $qb->expr()->eq('s.private', 'false'),
-                                    $qb->expr()->isNotNull('ps.selectionStep'),
-                                    $qb->expr()->eq('s.stepType', 'collect')
+                                    $qb->expr()->isNotNull('ps.selectionStep')
                                 ),
                             $qb->expr()->eq(':viewer', 'pr_au.user')
                         )
                 );
+                // All the proposals have a CollectStep.
+                $qb->setParameter(':collectStep', $this->_em->getClassMetadata(CollectStep::class));
             }
-            $qb->setParameters([
-                ':viewer' => $viewer,
-                ':visibility' => $visibility,
-                ':prvgId' => $viewer->getUserGroupIds()
-            ]);
+            $qb->setParameter(':viewer', $viewer);
         }
         $qb->setParameter(':user', $user);
 
@@ -747,10 +701,13 @@ class ProposalRepository extends EntityRepository
                     ->andX(
                         $qb->expr()->eq('s.private', 'false'),
                         $qb->expr()->isNotNull('ps.selectionStep'),
-                        $qb->expr()->eq('s.stepType', 'collect')
+                        $qb->expr()->isInstanceOf('s', ':collectStep')
                     )
             )
-            ->setParameter(':author', $author);
+            ->setParameters([
+                ':author' => $author,
+                ':collectStep' => $this->_em->getClassMetadata(CollectStep::class)
+            ]);
 
         return $qb;
     }

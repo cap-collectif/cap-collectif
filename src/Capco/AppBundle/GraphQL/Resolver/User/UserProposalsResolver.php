@@ -25,7 +25,7 @@ class UserProposalsResolver implements ResolverInterface
             $args = new Argument(['first' => 100]);
         }
 
-        $validViewer = \is_object($viewer) && $viewer instanceof UserInterface;
+        $validViewer = $viewer instanceof UserInterface;
 
         if ($validViewer && $user) {
             /** @var User $viewer */
