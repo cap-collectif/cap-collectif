@@ -484,11 +484,16 @@ const getConditionReturn = (
             // $FlowFixMe same as bottom :(
             return userResponse.includes(condition.value.title);
           case 'radio':
+            // $FlowFixMe
+            return (userResponse: MultipleChoiceQuestionValue).labels.includes(
+              condition.value.title,
+            );
           case 'checkbox':
             // Flow does not seem to understand the type casting here, because we know at
             // this point that userReponse is of MultipleChoiceQuestionValue but only in runtime
             return !!(
-              jump.conditions && userResponse.labels &&
+              jump.conditions &&
+              userResponse.labels &&
               // $FlowFixMe
               jump.conditions.filter(Boolean).length === userResponse.labels.length &&
               // $FlowFixMe
@@ -507,7 +512,8 @@ const getConditionReturn = (
             // Flow does not seem to understand the type casting here, because we know at
             // this point that userReponse is of MultipleChoiceQuestionValue but only in runtime
             return !!(
-              jump.conditions && userResponse.labels &&
+              jump.conditions &&
+              userResponse.labels &&
               // $FlowFixMe
               jump.conditions.filter(Boolean).length === userResponse.labels.length &&
               // $FlowFixMe
