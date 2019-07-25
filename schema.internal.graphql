@@ -2570,6 +2570,21 @@ input InternalUpdateShieldAdminFormInput {
 # A string containing JSON code.
 scalar JSON
 
+# Ways in which a question jump can be ordered.
+input JumpsOrder {
+  # The field in which to order jumps by.
+  field: JumpsOrderField
+
+  # The direction in which to order jumps.
+  direction: OrderDirection
+}
+
+# Properties by which question jumps can be ordered
+enum JumpsOrderField {
+  # Allows ordering a list of question jumps by its position.
+  POSITION
+}
+
 # Requires a lastname
 type LastnameRequirement implements Node & Requirement {
   # The ID of an object
@@ -2795,7 +2810,10 @@ type MediaQuestion implements Question & Node {
   ): ParticipantConnection!
 
   # The associated logic jumps to this question.
-  jumps: [LogicJump]
+  jumps(
+    # Ordering options for question jumps.
+    orderBy: JumpsOrder = {field: POSITION, direction: ASC}
+  ): [LogicJump]
 
   # The destination of the always jump (the else case) of this question.
   alwaysJumpDestinationQuestion: Question
@@ -2869,7 +2887,10 @@ type MultipleChoiceQuestion implements Question & Node {
   ): ParticipantConnection!
 
   # The associated logic jumps to this question.
-  jumps: [LogicJump]
+  jumps(
+    # Ordering options for question jumps.
+    orderBy: JumpsOrder = {field: POSITION, direction: ASC}
+  ): [LogicJump]
 
   # The destination of the always jump (the else case) of this question.
   alwaysJumpDestinationQuestion: Question
@@ -4929,7 +4950,10 @@ interface Question {
   ): ParticipantConnection!
 
   # The associated logic jumps to this question.
-  jumps: [LogicJump]
+  jumps(
+    # Ordering options for question jumps.
+    orderBy: JumpsOrder = {field: POSITION, direction: ASC}
+  ): [LogicJump]
 
   # The destination of the always jump (the else case) of this question.
   alwaysJumpDestinationQuestion: Question
@@ -5775,7 +5799,10 @@ type SectionQuestion implements Question & Node {
   ): ParticipantConnection!
 
   # The associated logic jumps to this question.
-  jumps: [LogicJump]
+  jumps(
+    # Ordering options for question jumps.
+    orderBy: JumpsOrder = {field: POSITION, direction: ASC}
+  ): [LogicJump]
 
   # The destination of the always jump (the else case) of this question.
   alwaysJumpDestinationQuestion: Question
@@ -6063,7 +6090,10 @@ type SimpleQuestion implements Question & Node {
   ): ParticipantConnection!
 
   # The associated logic jumps to this question.
-  jumps: [LogicJump]
+  jumps(
+    # Ordering options for question jumps.
+    orderBy: JumpsOrder = {field: POSITION, direction: ASC}
+  ): [LogicJump]
 
   # The destination of the always jump (the else case) of this question.
   alwaysJumpDestinationQuestion: Question

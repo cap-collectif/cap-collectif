@@ -1,0 +1,12 @@
+JumpsOrder:
+  type: input-object
+  config:
+    name: JumpsOrder
+    description: 'Ways in which a question jump can be ordered.'
+    fields:
+      field:
+        type: 'JumpsOrderField'
+        description: 'The field in which to order jumps by.'
+      direction:
+        type: 'OrderDirection'
+        description: 'The direction in which to order jumps.'

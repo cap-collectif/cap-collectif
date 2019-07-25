@@ -1,0 +1,8 @@
+JumpsOrderField:
+  type: enum
+  config:
+    description: 'Properties by which question jumps can be ordered'
+    values:
+      POSITION:
+        value: '@=constant("Capco\\AppBundle\\Enum\\JumpsOrderField::POSITION")'
+        description: 'Allows ordering a list of question jumps by its position.'
