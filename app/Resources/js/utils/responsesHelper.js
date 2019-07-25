@@ -487,10 +487,11 @@ const getConditionReturn = (
           case 'checkbox':
             // Flow does not seem to understand the type casting here, because we know at
             // this point that userReponse is of MultipleChoiceQuestionValue but only in runtime
-            // $FlowFixMe
-            return (
-              jump.conditions &&
+            return !!(
+              jump.conditions && userResponse.labels &&
+              // $FlowFixMe
               jump.conditions.filter(Boolean).length === userResponse.labels.length &&
+              // $FlowFixMe
               (userResponse: MultipleChoiceQuestionValue).labels.includes(condition.value.title)
             );
           default:
@@ -505,10 +506,11 @@ const getConditionReturn = (
           case 'checkbox':
             // Flow does not seem to understand the type casting here, because we know at
             // this point that userReponse is of MultipleChoiceQuestionValue but only in runtime
-            // $FlowFixMe
-            return (
-              jump.conditions &&
+            return !!(
+              jump.conditions && userResponse.labels &&
+              // $FlowFixMe
               jump.conditions.filter(Boolean).length === userResponse.labels.length &&
+              // $FlowFixMe
               !(userResponse: MultipleChoiceQuestionValue).labels.includes(condition.value.title)
             );
           default:
