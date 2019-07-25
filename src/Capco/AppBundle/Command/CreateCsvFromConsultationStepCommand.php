@@ -138,6 +138,7 @@ fragment versionInfos on Version {
     arguments {
       totalCount
       edges {
+        cursor
         node {
           ...argumentInfos
         }
@@ -151,6 +152,7 @@ fragment versionInfos on Version {
     sources {
       totalCount
       edges {
+        cursor
         node {
           ...sourceInfos
         }
@@ -177,6 +179,7 @@ fragment versionInfos on Version {
     votes {
         totalCount
         edges {
+            cursor
             node {
               ...voteInfos
             }
@@ -937,6 +940,74 @@ EOF;
     private function addContributionVersionRow($contribution, $version): void
     {
         $this->addContributionRow('version', $version, $contribution, self::VERSION_HEADER_MAP);
+
+        if ($version['votes']['totalCount'] > 0) {
+            // we add Opinion's votes rows.
+            $this->connectionTraversor->traverse(
+                $version,
+                'votes',
+                function ($edge) use ($version) {
+                    $this->addContributionVotesRow($version, $edge['node']);
+                },
+                function ($pageInfos) use ($version) {
+                    return $this->getOpinionVotesGraphQLQuery(
+                        $version['id'],
+                        $pageInfos['endCursor']
+                    );
+                }
+            );
+        }
+
+        if ($version['sources']['totalCount'] > 0) {
+            // we add Opinion's sources rows.
+            $this->connectionTraversor->traverse(
+                $version,
+                'sources',
+                function ($edge) use ($version) {
+                    $this->addContributionSourcesRow($version, $edge['node']);
+                },
+                function ($pageInfos) use ($version) {
+                    return $this->getOpinionSourcesGraphQLQuery(
+                        $version['id'],
+                        $pageInfos['endCursor']
+                    );
+                }
+            );
+        }
+
+        if ($version['reportings']['totalCount'] > 0) {
+            // we add Opinion's reportings rows.
+            $this->connectionTraversor->traverse(
+                $version,
+                'reportings',
+                function ($edge) use ($version) {
+                    $this->addContributionReportingsRow($version, $edge['node']);
+                },
+                function ($pageInfos) use ($version) {
+                    return $this->getOpinionReportingsGraphQLQuery(
+                        $version['id'],
+                        $pageInfos['endCursor']
+                    );
+                }
+            );
+        }
+
+        if ($version['arguments']['totalCount'] > 0) {
+            // we add Opinion's arguments rows.
+            $this->connectionTraversor->traverse(
+                $version,
+                'arguments',
+                function ($edge) use ($version) {
+                    $this->addContributionArgumentRow($version, $edge['node']);
+                },
+                function ($pageInfo) use ($version) {
+                    return $this->getContributionsArgumentsGraphQLQuery(
+                        $version['id'],
+                        $pageInfo['endCursor']
+                    );
+                }
+            );
+        }
     }
 
     private function addContributionRow(string $type, $node, $contribution, $headerMap): void
