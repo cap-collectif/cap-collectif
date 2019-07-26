@@ -472,7 +472,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
               2
               .
             </span>
-
+             
             <span
               dangerouslySetInnerHTML={
                 Object {
@@ -512,7 +512,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
               1
               .
             </span>
-
+             
             <span
               dangerouslySetInnerHTML={
                 Object {
@@ -551,7 +551,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
               3
               .
             </span>
-
+             
             <span
               dangerouslySetInnerHTML={
                 Object {
@@ -623,7 +623,7 @@ exports[`validateResponses Should render correctly when empty 1`] = `
               4
               .
             </span>
-
+             
             <span
               dangerouslySetInnerHTML={
                 Object {
