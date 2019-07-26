@@ -14,7 +14,7 @@ type Props = {|
     },
     +url?: string,
   },
-  features: FeatureToggles,
+  features?: FeatureToggles,
   size?: number,
   className?: string,
   defaultAvatar?: ?string,
@@ -88,7 +88,7 @@ export class UserAvatar extends React.Component<Props> {
       onMouseOut,
     };
 
-    if (user && user.url && features.profiles) {
+    if (user && user.url && features && features.profiles) {
       return (
         <a {...funcProps} className={className} style={style} href={displayUrl ? user.url : null}>
           {this.renderAvatar()}
