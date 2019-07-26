@@ -2,18 +2,19 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Utils\Text;
+use Liuggio\ExcelBundle\Factory;
+use Capco\AppBundle\Helper\EnvHelper;
+use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Helper\EnvHelper;
-use Capco\AppBundle\Utils\Text;
-use Doctrine\ORM\EntityManagerInterface;
-use Liuggio\ExcelBundle\Factory;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
-use Symfony\Bridge\Twig\Extension\HttpFoundationExtension;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Bridge\Twig\Extension\HttpFoundationExtension;
+use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProjectDownloadResolver
 {
@@ -34,7 +35,7 @@ class ProjectDownloadResolver
         EntityManagerInterface $em,
         TranslatorInterface $translator,
         UrlArrayResolver $urlArrayResolver,
-        UrlResolver $urlResolver,
+        MediaUrlResolver $urlResolver,
         Factory $phpexcel,
         MediaExtension $mediaExtension,
         HttpFoundationExtension $httpFoundationExtension
@@ -64,7 +65,7 @@ class ProjectDownloadResolver
             'created',
             'updated',
             'anonymous',
-            'draft',
+            'draft'
         ];
 
         if ($step->getQuestionnaire()) {
@@ -155,7 +156,7 @@ class ProjectDownloadResolver
             'created' => $this->dateToString($reply['createdAt']),
             'updated' => $this->dateToString($reply['updatedAt']),
             'anonymous' => $this->booleanToString($reply['private']),
-            'draft' => $this->booleanToString($reply['draft']),
+            'draft' => $this->booleanToString($reply['draft'])
         ];
 
         foreach ($responses as $response) {
@@ -180,11 +181,11 @@ class ProjectDownloadResolver
             $responseMedia = $this->em
                 ->getRepository('CapcoAppBundle:Responses\MediaResponse')
                 ->findOneBy([
-                    'id' => $response['id'],
+                    'id' => $response['id']
                 ]);
 
             foreach ($responseMedia->getMedias() as $media) {
-                $mediasUrl[] = $this->urlResolver->getMediaUrl(
+                $mediasUrl[] = $this->urlResolver->__invoke(
                     $media,
                     new Argument(['format' => 'reference'])
                 );

@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\Video;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -65,9 +64,6 @@ class VideoAdmin extends AbstractAdmin
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.video.position'
-            ])
-            ->add('color', null, [
-                'label' => 'admin.fields.video.color'
             ]);
     }
 
@@ -93,11 +89,6 @@ class VideoAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.video.updated_at'
-            ])
-            ->add('color', null, [
-                'label' => 'admin.fields.video.color',
-                'template' => 'CapcoAdminBundle:OpinionType:color_list_field.html.twig',
-                'typesColors' => Video::$colorButtonPlay
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.video.position'
@@ -180,11 +171,6 @@ class VideoAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'admin.fields.video.media'
-            ])
-            ->add('color', null, [
-                'label' => 'admin.fields.video.color',
-                'template' => 'CapcoAdminBundle:OpinionType:color_show_field.html.twig',
-                'typesColors' => Video::$colorButtonPlay
             ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.video.is_enabled',

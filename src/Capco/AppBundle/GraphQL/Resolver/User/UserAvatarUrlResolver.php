@@ -3,14 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Resolver\UrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserAvatarUrlResolver implements ResolverInterface
 {
     private $urlResolver;
 
-    public function __construct(UrlResolver $urlResolver)
+    public function __construct(MediaUrlResolver $urlResolver)
     {
         $this->urlResolver = $urlResolver;
     }
@@ -22,6 +22,6 @@ class UserAvatarUrlResolver implements ResolverInterface
             return null;
         }
 
-        return $this->urlResolver->getMediaUrl($media);
+        return $this->urlResolver->__invoke($media);
     }
 }
