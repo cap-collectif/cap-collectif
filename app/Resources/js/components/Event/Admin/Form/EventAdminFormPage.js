@@ -233,7 +233,7 @@ export class EventAdminFormPage extends React.Component<Props, State> {
           )}
           <ButtonToolbar className="box-content__toolbar">
             <SubmitButton
-              id="confirm-event-create"
+              id={event ? 'confirm-event-edit' : 'confirm-event-create'}
               label={event ? 'action_edit' : 'global.add'}
               isSubmitting={submitting}
               disabled={pristine || invalid || submitting}

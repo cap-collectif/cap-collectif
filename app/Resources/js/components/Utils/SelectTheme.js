@@ -12,6 +12,8 @@ type Props = {|
   +multi?: boolean,
   +clearable?: boolean,
   +name?: string,
+  +className?: string,
+  +divId?: string,
 |};
 
 export class SelectTheme extends React.Component<Props> {
@@ -19,15 +21,17 @@ export class SelectTheme extends React.Component<Props> {
     multi: false,
     clearable: false,
     name: 'theme',
+    className: '',
+    divId: '',
   };
 
   render() {
-    const { query, intl, multi, clearable, name } = this.props;
+    const { query, intl, multi, clearable, name, className, divId } = this.props;
     const renderOptions =
       query && query.themes ? query.themes.map(p => ({ value: p.id, label: p.title })) : [];
 
     return (
-      <div>
+      <div className={className} id={divId}>
         <Field
           component={select}
           id="SelectTheme-filter-theme"

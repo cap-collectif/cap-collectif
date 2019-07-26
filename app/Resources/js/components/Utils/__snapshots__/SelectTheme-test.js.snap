@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SelectTheme /> should render correctly 1`] = `
-<div>
+<div
+  className=""
+  id=""
+>
   <Field
     aria-autocomplete="list"
     aria-controls="SelectTheme-filter-theme-listbox"
@@ -31,7 +34,10 @@ exports[`<SelectTheme /> should render correctly 1`] = `
 `;
 
 exports[`<SelectTheme /> should render empty list 1`] = `
-<div>
+<div
+  className=""
+  id=""
+>
   <Field
     aria-autocomplete="list"
     aria-controls="SelectTheme-filter-theme-listbox"

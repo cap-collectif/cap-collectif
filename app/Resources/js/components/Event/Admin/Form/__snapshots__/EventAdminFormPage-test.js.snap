@@ -42,7 +42,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
     >
       <Connect(SubmitButton)
         disabled={false}
-        id="confirm-event-create"
+        id="confirm-event-edit"
         isSubmitting={false}
         label="action_edit"
         onSubmit={[Function]}
@@ -131,7 +131,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
     >
       <Connect(SubmitButton)
         disabled={true}
-        id="confirm-event-create"
+        id="confirm-event-edit"
         isSubmitting={true}
         label="action_edit"
         onSubmit={[Function]}

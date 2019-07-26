@@ -6,11 +6,9 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Form\EventType;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -67,14 +65,7 @@ class ChangeEventMutation implements MutationInterface
             $event->setAuthor($newAuthor);
         }
 
-        unset($values['author']);
-
-        $form = $this->formFactory->create(EventType::class, $event);
-        $form->submit($values, false);
-
-        if (!$form->isValid()) {
-            throw GraphQLException::fromFormErrors($form);
-        }
+        AddEventMutation::initEvent($event, $values, $this->formFactory);
 
         $this->em->flush();
 

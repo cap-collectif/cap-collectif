@@ -41,8 +41,9 @@ export class EventForm extends React.Component<Props> {
         return graphqlError;
       }
       if (props) {
-        return <SelectTheme query={props} multi clearable name="themes" />;
+        return <SelectTheme query={props} multi clearable name="themes" divId="event_theme" />;
       }
+
       return (
         <Row>
           <Loader />
@@ -86,7 +87,7 @@ export class EventForm extends React.Component<Props> {
             type="text"
             id="event_title"
           />
-          {isAdmin && (
+          {(isAdmin || isSuperAdmin) && (
             <UserListField
               clearable={false}
               label={
@@ -245,14 +246,13 @@ export class EventForm extends React.Component<Props> {
               children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
             />
           </div>
-          {isAdmin && (
+          {(isAdmin || isSuperAdmin) && (
             <div>
               <div className="box-header">
                 <h3 className="box-title">
                   <FormattedMessage id="admin.fields.page.advanced" />
                 </h3>
               </div>
-              {/* // TODO look at component dev by jean */}
               <CustomPageFields />
               <div className="box-header">
                 <h3 className="box-title">

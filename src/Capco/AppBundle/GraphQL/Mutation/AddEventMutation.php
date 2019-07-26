@@ -66,21 +66,8 @@ class AddEventMutation implements MutationInterface
         } else {
             $event = (new Event())->setAuthor($viewer);
         }
-        $event->setStartAt(new \DateTime($values['startAt']));
-        unset($values['startAt']);
-        if (isset($values['endAt'])) {
-            $event->setEndAt(new \DateTime($values['endAt']));
-            unset($values['endAt']);
-        }
 
-        unset($values['author']);
-
-        $form = $this->formFactory->create(EventType::class, $event);
-        $form->submit($values, false);
-
-        if (!$form->isValid()) {
-            throw GraphQLException::fromFormErrors($form);
-        }
+        static::initEvent($event, $values, $this->formFactory);
 
         try {
             $this->em->persist($event);
@@ -104,5 +91,27 @@ class AddEventMutation implements MutationInterface
         $edge = new Edge(ConnectionBuilder::offsetToCursor(0), $event);
 
         return ['eventEdge' => $edge, 'userErrors' => []];
+    }
+
+    public static function initEvent(
+        Event $event,
+        array &$values,
+        FormFactoryInterface $formFactory
+    ): void {
+        $event->setStartAt(new \DateTime($values['startAt']));
+        unset($values['startAt']);
+        if (isset($values['endAt'])) {
+            $event->setEndAt(new \DateTime($values['endAt']));
+            unset($values['endAt']);
+        }
+
+        unset($values['author']);
+
+        $form = $formFactory->create(EventType::class, $event);
+        $form->submit($values, false);
+
+        if (!$form->isValid()) {
+            throw GraphQLException::fromFormErrors($form);
+        }
     }
 }

@@ -980,6 +980,42 @@ class ApplicationContext extends UserContext
         $this->iClickElement($selector);
     }
 
+    /**
+     * @When I fill the theme filter
+     */
+    public function iFillThemeFilter()
+    {
+        $this->waitAndThrowOnFailure(3000, "$('#SelectTheme-filter-theme').length > 0");
+
+        $node = $this->getCurrentPage()->find(
+            'css',
+            '#SelectTheme-filter-theme .react-select__input input'
+        );
+
+        $node->setValue('Immobilier');
+        $node->keyPress(13);
+
+        $this->getSession()->wait(10);
+    }
+
+    /**
+     * @When I fill the project filter
+     */
+    public function iFillProjectFilter()
+    {
+        $this->waitAndThrowOnFailure(3000, "$('#SelectProject-filter-project').length > 0");
+
+        $node = $this->getCurrentPage()->find(
+            'css',
+            '#SelectProject-filter-project .react-select__input input'
+        );
+
+        $node->setValue('Croissance');
+        $node->keyPress(13);
+
+        $this->getSession()->wait(10);
+    }
+
     private function isSuiteWithJS(Suite $suite): bool
     {
         return \in_array($suite->getName(), [
