@@ -79,3 +79,4 @@ Section:
           orderBy:
             type: 'InternalOpinionOrder'
             description: 'Ordering options for followers returning from the connection'
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
