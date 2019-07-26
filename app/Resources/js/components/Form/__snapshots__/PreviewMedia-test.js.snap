@@ -27,11 +27,6 @@ exports[`<PreviewMedia /> should render correctly 1`] = `
         bsClass="label"
         bsStyle="info"
         key="0"
-        style={
-          Object {
-            "marginRight": "5px",
-          }
-        }
       >
         <a
           href="http://capco.dev/image.jpg"
