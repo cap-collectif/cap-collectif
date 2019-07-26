@@ -3,10 +3,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EventAdmin } from './EventAdmin';
-import { intlMock } from '../../../mocks';
 
 const defaultProps = {
-  intl: intlMock,
   eventId: 'event1',
 };
 

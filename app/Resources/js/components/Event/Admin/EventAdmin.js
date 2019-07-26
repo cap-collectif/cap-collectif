@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
-import { type IntlShape, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { Row } from 'react-bootstrap';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import EventAdminFormPage from './Form/EventAdminFormPage';
@@ -13,7 +13,6 @@ import Loader from '../../Ui/FeedbacksIndicators/Loader';
 
 type Props = {|
   +eventId: string,
-  +intl: IntlShape,
 |};
 
 export class EventAdmin extends React.Component<Props> {
@@ -21,30 +20,28 @@ export class EventAdmin extends React.Component<Props> {
     return (
       <div>
         <QueryRenderer
-          environment={ environment }
-          query={ graphql`
+          environment={environment}
+          query={graphql`
             query EventAdminQuery($eventId: ID!) {
               event: node(id: $eventId) {
                 ...EventAdminFormPage_event
               }
             }
-          ` }
-          variables={ ({eventId: this.props.eventId}: EventAdminQueryVariables) }
-          render={ ({error, props}: { ...ReadyState, props: ?EventAdminQueryResponse }) => {
-            if(error) {
+          `}
+          variables={({ eventId: this.props.eventId }: EventAdminQueryVariables)}
+          render={({ error, props }: { ...ReadyState, props: ?EventAdminQueryResponse }) => {
+            if (error) {
               return graphqlError;
             }
-            if(props) {
-              return (
-                  <EventAdminFormPage event={ props.event }/>
-              );
+            if (props) {
+              return <EventAdminFormPage event={props.event} />;
             }
             return (
               <Row>
-                <Loader/>
+                <Loader />
               </Row>
             );
-          } }
+          }}
         />
       </div>
     );

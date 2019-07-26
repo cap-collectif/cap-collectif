@@ -64,17 +64,23 @@ type EditFormValue = {|
 |};
 type State = { showDeleteModal: boolean };
 
-const validate = (values: any) => {
+const validate = (values: FormValues) => {
   const errors = {};
 
-  const fields = ['title', 'startAt', 'endAt', 'author', 'description'];
+  const fields = ['title', 'startAt', 'endAt', 'author', 'body'];
   fields.forEach(value => {
     if (value === 'endAt') {
-      if (!values.startAt && values.endAt) {
+      if (!values.startAt && values.endAt !== null) {
         errors.startAt = 'fill-field';
         return;
       }
-      if (values.startAt && values.startAt.length > 0 && values.endAt && values.endAt.length > 0) {
+      if (
+        values.startAt &&
+        values.startAt.length > 0 &&
+        // $FlowFixMe
+        (values.endAt !== null && values.endAt.length > 0)
+      ) {
+        // $FlowFixMe
         if (Date.parse(values.startAt) > Date.parse(values.endAt)) {
           errors.endAt = 'date.end_before_start';
           return;
@@ -102,7 +108,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     title: values.title,
     body: values.body,
     startAt: values.startAt,
-    endAt: values.endAt ? values.endAt : null,
+    endAt: values.endAt,
     metaDescription: values.metadescription,
     customCode: values.customcode,
     commentable,
