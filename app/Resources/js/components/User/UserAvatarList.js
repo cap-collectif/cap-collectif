@@ -20,7 +20,6 @@ type Props = {|
 const Button = styled.button`
   border: none;
   background: transparent;
-  padding-left: 0px;
 `;
 
 export const UserAvatarListContainer = (props: Props) => {

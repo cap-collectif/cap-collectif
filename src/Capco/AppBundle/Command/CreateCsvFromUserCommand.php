@@ -191,6 +191,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
             $rows = $this->getCleanArrayForRowInsert($votes, $header, true);
         } else {
             foreach ($header as $value) {
+                $value = str_replace('_', '.', $value);
                 $value = Arr::path($data, "data.node.${value}") ?? '';
                 $rows[] = $value;
             }
@@ -226,8 +227,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
             foreach ($header as $columnKey => $columnName) {
                 if ($isNode) {
                     if (
-                        false !== strpos($columnName, 'responses_') &&
-                        false === $responsesInserted
+                        false === $responsesInserted &&
+                        false !== strpos($columnName, 'responses_')
                     ) {
                         $responsesDatas = $this->handleMultipleResponsesForQuestions(
                             $content,
@@ -265,9 +266,9 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
         foreach ($responses['node']['responses'] as $response) {
             if (
-                $response['question']['title'] &&
                 'ValueResponse' === $response['__typename'] &&
-                null !== $response['formattedValue']
+                null !== $response['formattedValue'] &&
+                $response['question']['title']
             ) {
                 $rows[$rowCounter][$columnKey] = $response['question']['title'];
                 $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
@@ -383,7 +384,9 @@ class CreateCsvFromUserCommand extends BaseExportCommand
       opinionVersionsCount
       argumentsCount
       argumentVotesCount
-      proposalsCount
+      proposals {
+        totalCount
+      }
       proposalVotesCount
       commentVotes {
         totalCount
