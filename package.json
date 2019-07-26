@@ -279,7 +279,7 @@
         "readmore": "^0.0.2",
         "readmore-js": "^2.2.1",
         "recharts": "^1.5.0",
-        "redux": "^3.7.2",
+        "redux": "^4.0.4",
         "redux-form": "^7.4.2",
         "redux-saga": "^1.0.3",
         "regenerator-runtime": "^0.13.1",
