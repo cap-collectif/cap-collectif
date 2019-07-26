@@ -480,6 +480,9 @@ const getConditionReturn = (
 ): boolean => {
   const userResponse = response && response.value;
   if (response && userResponse && condition.value) {
+    const getFilteredCheckboxesConditions = (jumpCondition: ConditionalJumpCondition): boolean =>
+      jumpCondition.question && jumpCondition.question.type === 'checkbox' && jumpCondition.question.id === response.question;
+
     switch (condition.operator) {
       case IS_OPERATOR:
         switch (questionType) {
@@ -500,11 +503,9 @@ const getConditionReturn = (
               // $FlowFixMe
               jump.conditions
                 .filter(Boolean)
-                .filter(
-                  jumpCondition =>
-                    jumpCondition.question && jumpCondition.question.id === jump.origin.id,
-                ).length === userResponse.labels &&
-              userResponse.labels.length &&
+                .filter(getFilteredCheckboxesConditions).length === (userResponse.labels &&
+                // $FlowFixMe
+              userResponse.labels.length) &&
               // $FlowFixMe
               (userResponse: MultipleChoiceQuestionValue).labels.includes(condition.value.title)
             );
@@ -517,6 +518,10 @@ const getConditionReturn = (
             // $FlowFixMe same as bottom :(
             return userResponse.includes(condition.value.title);
           case 'radio':
+            // $FlowFixMe
+            return (userResponse: MultipleChoiceQuestionValue).labels.includes(
+              condition.value.title,
+            );
           case 'checkbox':
             // Flow does not seem to understand the type casting here, because we know at
             // this point that userReponse is of MultipleChoiceQuestionValue but only in runtime
@@ -526,11 +531,9 @@ const getConditionReturn = (
               // $FlowFixMe
               jump.conditions
                 .filter(Boolean)
-                .filter(
-                  jumpCondition =>
-                    jumpCondition.question && jumpCondition.question.id === jump.origin.id,
-                ).length === userResponse.labels &&
-              userResponse.labels.length &&
+                .filter(getFilteredCheckboxesConditions).length === (userResponse.labels &&
+                // $FlowFixMe
+              userResponse.labels.length) &&
               // $FlowFixMe
               !(userResponse: MultipleChoiceQuestionValue).labels.includes(condition.value.title)
             );
