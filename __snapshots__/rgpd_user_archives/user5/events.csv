@@ -1,0 +1,3 @@
+﻿title,timeRange_startAt,timeRange_endAt,commentable,createdAt,updatedAt,body,link,address,zipCode,city,country
+"Event 10","2030-11-11 00:00:00","2030-11-13 00:00:00",1,"2015-01-10 00:00:00",,"Only numbers 10 in my team",,,,,
+ParisWeb2014,"2014-02-11 00:00:00","2014-02-12 00:00:00",1,"2015-01-05 00:00:00",,"Paris Web, la conférence francophone des gens qui font un web accessible et de qualité.",http://www.parisweb2014.fr,"101 rue d'Angers",69007,Lyon,

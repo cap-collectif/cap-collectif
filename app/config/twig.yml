@@ -13,7 +13,6 @@ twig:
     userRepliesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserRepliesResolver'
     userVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserVotesResolver'
     userProjectsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserProjectsResolver'
-    userProposalsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserProposalsResolver'
     projectProposalsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectProposalsResolver'
     projectVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotesResolver'
     projectContributorsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver'

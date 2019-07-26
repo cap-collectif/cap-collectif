@@ -8,20 +8,15 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 class UserContributionsCountResolver implements ResolverInterface
 {
     protected $userEventCommentsCountResolver;
-    protected $userProposalsResolver;
 
-    public function __construct(
-        UserEventCommentsCountResolver $userEventCommentsCountResolver,
-        UserProposalsResolver $userProposalsResolver
-    ) {
+    public function __construct(UserEventCommentsCountResolver $userEventCommentsCountResolver)
+    {
         $this->userEventCommentsCountResolver = $userEventCommentsCountResolver;
-        $this->userProposalsResolver = $userProposalsResolver;
     }
 
-    public function __invoke(User $user, $viewer): int
+    public function __invoke(User $viewer): int
     {
-        return $this->userEventCommentsCountResolver->__invoke($user) +
-            $this->userProposalsResolver->__invoke($viewer, $user)->totalCount +
-            $user->getContributionsCount();
+        return $this->userEventCommentsCountResolver->__invoke($viewer) +
+            $viewer->getContributionsCount();
     }
 }
