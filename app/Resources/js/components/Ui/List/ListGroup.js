@@ -17,7 +17,6 @@ const Container = styled(ListGroupBtsp)`
       .left-block {
         display: flex;
         text-align: left;
-        width: 100%;
 
         .title {
           line-height: 20px;
