@@ -1,14 +1,16 @@
 // @flow
 import * as React from 'react';
 import { ProgressBar } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Progress } from '../../Ui/FeedbacksIndicators/Progress';
+import type { ProjectPreviewProgressBar_project } from '~relay/ProjectPreviewProgressBar_project.graphql'
 
-type Props = {
-  project: Object,
-  actualStep: Object,
-  isCurrentStep?: ?boolean,
-};
+type Props = {|
+  +project: ProjectPreviewProgressBar_project,
+  +actualStep: Object,
+  +isCurrentStep?: ?boolean,
+|};
 
 export class ProjectPreviewProgressBar extends React.Component<Props> {
   getStyle = (stepStatus: string) => {
@@ -84,4 +86,12 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
   }
 }
 
-export default ProjectPreviewProgressBar;
+export default createFragmentContainer(ProjectPreviewProgressBar, {
+  project: graphql`
+    fragment ProjectPreviewProgressBar_project on Project {
+      steps {
+        title
+      }
+    }
+  `,
+});

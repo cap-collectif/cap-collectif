@@ -3,15 +3,17 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
+import { $refType } from '../../../mocks';
 import { ProjectPreviewProgressBar } from './ProjectPreviewProgressBar';
 
 const props = {
   project: {
+    $refType,
     steps: [
-      { id: 'step1', title: 'Open step' },
-      { id: 'step2', title: 'Open step & timeless' },
-      { id: 'step3', title: 'closed step' },
-      { id: 'step4', title: 'future step' },
+      { title: 'Open step' },
+      { title: 'Open step & timeless' },
+      { title: 'closed step' },
+      { title: 'future step' },
     ],
   },
 };

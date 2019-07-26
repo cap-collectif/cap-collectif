@@ -4,9 +4,9 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import DefaultProjectImage from './DefaultProjectImage';
 import type { ProjectImage_project } from '~relay/ProjectImage_project.graphql';
 
-type Props = {
-  project: ProjectImage_project,
-};
+type Props = {|
+  +project: ProjectImage_project,
+|};
 
 class ProjectImage extends React.Component<Props> {
   render() {

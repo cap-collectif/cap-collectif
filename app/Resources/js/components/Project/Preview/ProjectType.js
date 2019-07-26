@@ -5,9 +5,9 @@ import { FormattedMessage } from 'react-intl';
 import Card from '../../Ui/Card/Card';
 import type { ProjectType_project } from '~relay/ProjectType_project.graphql';
 
-type Props = {
-  project: ProjectType_project,
-};
+type Props = {|
+  +project: ProjectType_project,
+|};
 
 export class ProjectType extends React.Component<Props> {
   render() {
