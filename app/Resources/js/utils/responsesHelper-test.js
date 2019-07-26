@@ -71,6 +71,7 @@ const questionnaireQuestions = [
             question: {
               id: 'UXVlc3Rpb246NDU=',
               title: 'Votre fleuve préféré',
+              type: 'select',
             },
             value: {
               id: 'questionchoicLeGange',
@@ -83,6 +84,7 @@ const questionnaireQuestions = [
             question: {
               id: 'UXVlc3Rpb246MjQ=',
               title: 'Hap ou Noel ?',
+              type: 'select',
             },
             value: {
               id: 'questionchoiceHap',
@@ -108,6 +110,7 @@ const questionnaireQuestions = [
             question: {
               id: 'UXVlc3Rpb246MjQ=',
               title: 'Hap ou Noel ?',
+              type: 'select',
             },
             value: {
               id: 'questionchoiceHap',
@@ -133,6 +136,7 @@ const questionnaireQuestions = [
             question: {
               id: 'UXVlc3Rpb246MjQ=',
               title: 'Hap ou Noel ?',
+              type: 'select',
             },
             value: {
               id: 'questionchoiceNoel',
@@ -287,6 +291,7 @@ const questionnaireQuestions = [
             question: {
               id: 'UXVlc3Rpb246MjY=',
               title: 'Hap est-il un homme bon ?',
+              type: 'select',
             },
             value: {
               id: 'questionchoiceHapBonNon',
@@ -460,6 +465,7 @@ const questionnaireQuestions = [
             question: {
               id: 'UXVlc3Rpb246MzE=',
               title: 'Plutôt Marvel ou DC ?',
+              type: 'select',
             },
             value: {
               id: 'questionchoiceMarvelOrDcMarvel',
@@ -485,6 +491,7 @@ const questionnaireQuestions = [
             question: {
               id: 'UXVlc3Rpb246MzE=',
               title: 'Plutôt Marvel ou DC ?',
+              type: 'select',
             },
             value: {
               id: 'questionchoiceMarvelOrDcDc',
@@ -1078,6 +1085,7 @@ describe('getAvailableQuestionsIds', () => {
                 question: {
                   id: 'question2',
                   title: 'Quelle est ta waifu préférée ?',
+                  type: 'select',
                 },
                 value: {
                   id: 'emilia',
@@ -1103,6 +1111,7 @@ describe('getAvailableQuestionsIds', () => {
                 question: {
                   id: 'question2',
                   title: 'Quelle est ta waifu préférée ?',
+                  type: 'select',
                 },
                 value: {
                   id: 'rem',

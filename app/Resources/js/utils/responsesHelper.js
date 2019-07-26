@@ -79,6 +79,7 @@ const QuestionAdminFragment = {
           question {
             id
             title
+            type
           }
           ... on MultipleChoiceQuestionLogicJumpCondition {
             value {
@@ -146,6 +147,7 @@ const QuestionFragment = {
           question {
             id
             title
+            type
           }
           ... on MultipleChoiceQuestionLogicJumpCondition {
             value {
@@ -190,6 +192,7 @@ type ConditionalJumpCondition = {|
   +question: {|
     +id: string,
     +title: string,
+    +type: QuestionTypeValue,
   |},
   +value?: ?{|
     +id: string,
@@ -495,7 +498,13 @@ const getConditionReturn = (
               jump.conditions &&
               userResponse.labels &&
               // $FlowFixMe
-              jump.conditions.filter(Boolean).length === userResponse.labels.length &&
+              jump.conditions
+                .filter(Boolean)
+                .filter(
+                  jumpCondition =>
+                    jumpCondition.question && jumpCondition.question.id === jump.origin.id,
+                ).length === userResponse.labels &&
+              userResponse.labels.length &&
               // $FlowFixMe
               (userResponse: MultipleChoiceQuestionValue).labels.includes(condition.value.title)
             );
@@ -515,7 +524,13 @@ const getConditionReturn = (
               jump.conditions &&
               userResponse.labels &&
               // $FlowFixMe
-              jump.conditions.filter(Boolean).length === userResponse.labels.length &&
+              jump.conditions
+                .filter(Boolean)
+                .filter(
+                  jumpCondition =>
+                    jumpCondition.question && jumpCondition.question.id === jump.origin.id,
+                ).length === userResponse.labels &&
+              userResponse.labels.length &&
               // $FlowFixMe
               !(userResponse: MultipleChoiceQuestionValue).labels.includes(condition.value.title)
             );
@@ -548,7 +563,7 @@ export const isAnyQuestionJumpsFullfilled = (
               const answered = responses
                 .filter(Boolean)
                 .find(response => response.question === condition.question.id);
-              return getConditionReturn(question.type, answered, condition, jump);
+              return getConditionReturn(condition.question.type, answered, condition, jump);
             })
           : false,
       ) || !!(question.alwaysJumpDestinationQuestion && hasAnsweredQuestion(question, responses))
@@ -685,7 +700,7 @@ export const getFullfilledJumps = (question: Question, responses: ResponsesInRed
             const answered = responses.find(
               response => response.question === condition.question.id,
             );
-            return getConditionReturn(question.type, answered, condition, jump);
+            return getConditionReturn(condition.question.type, answered, condition, jump);
           })
         : false,
     );
