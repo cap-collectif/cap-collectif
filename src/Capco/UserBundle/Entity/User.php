@@ -117,6 +117,11 @@ class User extends BaseUser implements
     /**
      * @var int
      */
+    protected $proposalsCount = 0;
+
+    /**
+     * @var int
+     */
     protected $opinionVersionsCount = 0;
 
     // Comments
@@ -724,30 +729,6 @@ class User extends BaseUser implements
     }
 
     /**
-     * Gets the value of opinionsCount.
-     *
-     * @return int
-     */
-    public function getOpinionsCount()
-    {
-        return $this->opinionsCount;
-    }
-
-    /**
-     * Sets the value of opinionsCount.
-     *
-     * @param int $opinionsCount the opinions count
-     *
-     * @return self
-     */
-    public function setOpinionsCount($opinionsCount)
-    {
-        $this->opinionsCount = $opinionsCount;
-
-        return $this;
-    }
-
-    /**
      * @return int
      */
     public function getOpinionVersionsCount()
@@ -1085,6 +1066,11 @@ class User extends BaseUser implements
         }
 
         return $contributions;
+    }
+
+    public function getContributionsCount()
+    {
+        return $this->getCommentsCount();
     }
 
     public function getCommentsCount(): int

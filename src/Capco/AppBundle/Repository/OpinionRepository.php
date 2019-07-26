@@ -233,50 +233,30 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * Get all opinions by user.
-     *
-     * @param $user
-     *
-     * @return array
-     */
-    public function getByUser(User $user)
+    public function getByUser(User $user, $limit = 50, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 's', 'p', 'aut', 'm')
-            ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 's')
-            ->leftJoin('s.project', 'p')
-            ->leftJoin('o.Author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->andWhere('p.isEnabled = true')
-            ->andWhere('s.isEnabled = true')
             ->andWhere('o.Author = :author')
-            ->setParameter('author', $user)
-            ->orderBy('o.createdAt', 'DESC');
+            ->andWhere('o.published = true')
+            ->andWhere('s.isEnabled = true')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->setParameter('author', $user);
 
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * Count opinions by user.
-     *
-     * @param $user
-     *
-     * @return mixed
-     */
-    public function countByUser($user)
+    public function countByUser(User $user): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(o) as totalOpinions')
+            ->select('COUNT(o.id)')
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 's')
-            ->leftJoin('s.project', 'p')
-            ->andWhere('s.isEnabled = true')
-            ->andWhere('p.isEnabled = true')
-            ->andWhere('o.published = true')
             ->andWhere('o.Author = :author')
+            ->andWhere('o.published = true')
+            ->andWhere('s.isEnabled = true')
             ->setParameter('author', $user);
 
         return $qb->getQuery()->getSingleScalarResult();

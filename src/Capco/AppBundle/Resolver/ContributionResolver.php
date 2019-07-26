@@ -75,11 +75,6 @@ class ContributionResolver
                 $argumentsContributor['arguments_count'];
         }
 
-        foreach ($opinionsContributors as $opinionsContributor) {
-            $contributors[$opinionsContributor['id']]['opinions'] =
-                $opinionsContributor['opinions_count'];
-        }
-
         foreach ($proposalsContributors as $proposalsContributor) {
             $contributors[$proposalsContributor['id']]['proposals'] =
                 $proposalsContributor['proposals_count'];
@@ -195,10 +190,6 @@ class ContributionResolver
             foreach ($argumentsContributors as $argumentsContributor) {
                 $contributors[$argumentsContributor['id']]['arguments'] =
                     $argumentsContributor['arguments_count'];
-            }
-            foreach ($opinionsContributors as $opinionsContributor) {
-                $contributors[$opinionsContributor['id']]['opinions'] =
-                    $opinionsContributor['opinions_count'];
             }
             foreach ($versionsContributors as $versionContributor) {
                 $contributors[$versionContributor['id']]['versions'] =
