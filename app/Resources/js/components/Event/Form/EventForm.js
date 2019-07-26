@@ -2,22 +2,21 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { type FormProps, Field, reduxForm } from 'redux-form';
-import { Row } from 'react-bootstrap';
 import component from '../../Form/Field';
 import type { Dispatch, FeatureToggles, GlobalState } from '../../../types';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { EventForm_event } from '~relay/EventForm_event.graphql';
+import type { EventForm_query } from '~relay/EventForm_query.graphql';
 import UserListField from '../../Admin/Field/UserListField';
 import SelectTheme from '../../Utils/SelectTheme';
 import SelectProject from '../../Utils/SelectProject';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import CustomPageFields from '../../Admin/Field/CustomPageFields';
 
 type Props = {|
   ...FormProps,
   event: ?EventForm_event,
+  query: EventForm_query,
   features: FeatureToggles,
   dispatch: Dispatch,
   intl: IntlShape,
@@ -34,36 +33,7 @@ export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
   render() {
-    const { features, isAdmin, event, isSuperAdmin } = this.props;
-
-    const renderSelectThemeQuery = ({ error, props }) => {
-      if (error) {
-        return graphqlError;
-      }
-      if (props) {
-        return <SelectTheme query={props} multi clearable name="themes" divId="event_theme" />;
-      }
-
-      return (
-        <Row>
-          <Loader />
-        </Row>
-      );
-    };
-    const renderSelectProjectQuery = ({ error, props }) => {
-      if (error) {
-        return graphqlError;
-      }
-      if (props) {
-        /* $FlowFixMe $refType */
-        return <SelectProject query={props} multi clearable object={event} name="projects" />;
-      }
-      return (
-        <Row>
-          <Loader />
-        </Row>
-      );
-    };
+    const { features, isAdmin, event, isSuperAdmin, query } = this.props;
 
     return (
       <form>
@@ -203,27 +173,9 @@ export class EventForm extends React.Component<Props> {
           </h3>
         </div>
         {features.themes && (
-          <QueryRenderer
-            environment={environment}
-            query={graphql`
-              query EventFormThemeQuery {
-                ...SelectTheme_query
-              }
-            `}
-            variables={{}}
-            render={renderSelectThemeQuery}
-          />
+          <SelectTheme query={query} multi clearable name="themes" divId="event_theme" />
         )}
-        <QueryRenderer
-          environment={environment}
-          query={graphql`
-            query EventFormProjectQuery($withEventOnly: Boolean) {
-              ...SelectProject_query @arguments(withEventOnly: $withEventOnly)
-            }
-          `}
-          variables={{ withEventOnly: false }}
-          render={renderSelectProjectQuery}
-        />
+        <SelectProject query={query} multi clearable object={event} name="projects" />
         <div>
           <div className="box-header">
             <h3 className="box-title">
@@ -332,10 +284,13 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
 
 const container = connect(mapStateToProps)(injectIntl(formContainer));
 
-export const EventCreateForm = container;
-
 export default createFragmentContainer(container, {
-  /* eslint-disable relay/unused-fields */
+  query: graphql`
+    fragment EventForm_query on Query {
+      ...SelectTheme_query
+      ...SelectProject_query
+    }
+  `,
   event: graphql`
     fragment EventForm_event on Event {
       id

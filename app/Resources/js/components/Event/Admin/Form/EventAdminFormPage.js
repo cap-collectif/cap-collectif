@@ -15,18 +15,20 @@ import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import SubmitButton from '../../../Form/SubmitButton';
-import EventForm, { EventCreateForm, formName } from '../../Form/EventForm';
+import EventForm, { formName } from '../../Form/EventForm';
 import type { Dispatch, GlobalState } from '../../../../types';
 import AddEventMutation from '../../../../mutations/AddEventMutation';
 import ChangeEventMutation from '../../../../mutations/ChangeEventMutation';
 import DeleteEventMutation from '../../../../mutations/DeleteEventMutation';
 import AlertForm from '../../../Alert/AlertForm';
 import type { EventAdminFormPage_event } from '~relay/EventAdminFormPage_event.graphql';
+import type { EventAdminFormPage_query } from '~relay/EventAdminFormPage_query.graphql';
 import DeleteModal from '../../../Modal/DeleteModal';
 import type { FormValues as CustomFormValues } from '../../../Admin/Field/CustomPageFields';
 
 type Props = {|
   intl: IntlShape,
+  query: EventAdminFormPage_query,
   event?: ?EventAdminFormPage_event,
   pristine: boolean,
   valid: boolean,
@@ -219,6 +221,7 @@ export class EventAdminFormPage extends React.Component<Props, State> {
       intl,
       dispatch,
       event,
+      query
     } = this.props;
     const { showDeleteModal } = this.state;
 
@@ -232,11 +235,7 @@ export class EventAdminFormPage extends React.Component<Props, State> {
           <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
         </p>
         <div className="box box-primary container-fluid">
-          {event ? (
-            <EventForm event={event} onSubmit={updateEvent} validate={validate} />
-          ) : (
-            <EventCreateForm event={null} onSubmit={onSubmit} validate={validate} />
-          )}
+          <EventForm event={event} onSubmit={event ? updateEvent : onSubmit} validate={validate} query={query}/>
           <ButtonToolbar className="box-content__toolbar">
             <SubmitButton
               id={event ? 'confirm-event-edit' : 'confirm-event-create'}
@@ -292,6 +291,11 @@ const mapStateToProps = (state: GlobalState) => ({
 export const EventAdminFormCreatePage = connect(mapStateToProps)(injectIntl(EventAdminFormPage));
 
 export default createFragmentContainer(EventAdminFormCreatePage, {
+  query: graphql`
+    fragment EventAdminFormPage_query on Query {
+      ...EventForm_query
+    }
+  `,
   event: graphql`
     fragment EventAdminFormPage_event on Event {
       id

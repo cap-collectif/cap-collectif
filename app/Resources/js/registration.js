@@ -94,8 +94,8 @@ import AuthentificationAdminApp from './startup/AuthentificationAdminApp';
 import HomePageEventsApp from './startup/HomePageEventsApp';
 import PresentationStepEventsApp from './startup/PresentationStepEventsApp';
 import ProfileUserCommentApp from './startup/ProfileUserCommentApp';
-import EventAdminCreatePageApp from './startup/EventAdminCreatePageApp';
 import EventAdminEditPageApp from './startup/EventAdminEditPageApp';
+import EventFormPageApp from './startup/EventFormPageApp';
 import appStore from './stores/AppStore';
 import ConsultationListPageApp from './startup/ConsultationListPageApp';
 
@@ -216,5 +216,5 @@ ReactOnRails.register({
   ReplyPageApp,
   ProfileUserCommentApp,
   EventAdminEditPageApp,
-  EventAdminCreatePageApp
+  EventFormPageApp
 });

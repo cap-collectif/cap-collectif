@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EventForm } from './EventForm';
-import { intlMock, formMock, $refType } from '../../../mocks';
+import { intlMock, formMock, $refType, $fragmentRefs } from '../../../mocks';
 import { features } from '../../../redux/modules/default';
 
 const defaultProps = {
@@ -18,6 +18,10 @@ const defaultProps = {
   multi: true,
   initialValues: {},
   isSuperAdmin: false,
+  query: {
+    $fragmentRefs,
+    $refType
+  }
 };
 
 const eventNotComplete = {

@@ -59,6 +59,7 @@ import AuthentificationAdminApp from '../js/startup/AuthentificationAdminApp';
 import ProfileUserCommentApp from "../js/startup/ProfileUserCommentApp";
 import EventAdminCreatePageApp from '../js/startup/EventAdminCreatePageApp';
 import EventAdminEditPageApp from '../js/startup/EventAdminEditPageApp';
+import EventFormPageApp from '../js/startup/EventFormPageApp';
 
 const emptyFunction = () => {};
 
@@ -125,4 +126,5 @@ ReactOnRails.register({
   ProfileUserCommentApp,
   EventAdminCreatePageApp,
   EventAdminEditPageApp,
+  EventFormPageApp,
 });
