@@ -221,6 +221,17 @@ form {
         height: 23px;
         margin-top: 5px;
         margin-right: 5px;
+    
+        @media screen and (max-width: $screen-sm-max) {
+                max-width: 100%;
+
+                a{
+                    max-width: calc(100% - 20px);
+                    display: inline-block;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+        }
     }
 
     &__dropzone {
