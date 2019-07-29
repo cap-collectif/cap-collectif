@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb93d68934d8c3ca8c41bb3fba141f09",
+    "content-hash": "24710555329859537ea9752979156784",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -7494,16 +7494,16 @@
         },
         {
             "name": "php-translation/loco-adapter",
-            "version": "0.5.0",
+            "version": "0.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-translation/loco-adapter.git",
-                "reference": "7683644632ff993809ca51759d6e889c650706e8"
+                "reference": "992188f64df442f91affc16daa44afd3a3d6f091"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-translation/loco-adapter/zipball/7683644632ff993809ca51759d6e889c650706e8",
-                "reference": "7683644632ff993809ca51759d6e889c650706e8",
+                "url": "https://api.github.com/repos/php-translation/loco-adapter/zipball/992188f64df442f91affc16daa44afd3a3d6f091",
+                "reference": "992188f64df442f91affc16daa44afd3a3d6f091",
                 "shasum": ""
             },
             "require": {
@@ -7526,7 +7526,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.3-dev"
+                    "dev-master": "0.5-dev"
                 }
             },
             "autoload": {
@@ -7545,7 +7545,7 @@
                 }
             ],
             "description": "Adapter for loco.",
-            "time": "2018-01-13T11:11:49+00:00"
+            "time": "2018-02-21T19:57:28+00:00"
         },
         {
             "name": "php-translation/symfony-bundle",
