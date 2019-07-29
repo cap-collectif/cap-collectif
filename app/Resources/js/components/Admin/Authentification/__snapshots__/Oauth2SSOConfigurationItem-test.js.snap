@@ -40,7 +40,7 @@ exports[`<Oauth2SSOConfigurationItem /> renders correctly 1`] = `
       />
     </Button>
   </ButtonToolbar>
-  <Connect(ReduxForm)
+  <Connect(InjectIntl(ReduxForm))
     accessTokenUrl="https://localhost:8888/token"
     authorizationUrl="https://localhost:8888/authorization"
     clientId="clientId"

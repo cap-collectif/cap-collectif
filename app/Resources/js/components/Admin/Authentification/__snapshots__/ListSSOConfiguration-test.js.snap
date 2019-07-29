@@ -37,7 +37,7 @@ exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
         values={Object {}}
       />
     </Button>
-    <Connect(ReduxForm)
+    <Connect(InjectIntl(ReduxForm))
       isCreating={true}
       onClose={[Function]}
       show={false}
@@ -99,7 +99,7 @@ exports[`<ListSSOConfiguration /> renders correctly with items 1`] = `
         values={Object {}}
       />
     </Button>
-    <Connect(ReduxForm)
+    <Connect(InjectIntl(ReduxForm))
       isCreating={true}
       onClose={[Function]}
       show={false}

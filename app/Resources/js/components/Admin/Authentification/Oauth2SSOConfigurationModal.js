@@ -1,13 +1,14 @@
 // @flow
 import React from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import type { FormProps } from 'redux-form';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { FormattedMessage, type IntlShape } from 'react-intl';
+import { Button, Modal } from 'react-bootstrap';
+
+import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
+import component from '../../Form/Field';
 import CloseButton from '../../Form/CloseButton';
 import type { GlobalState, Uri, Uuid } from '../../../types';
-import component from '../../Form/Field';
 
 type FormValues = {|
   id: ?Uuid,
@@ -38,6 +39,7 @@ const onSubmit = async (values: FormValues) => {
 
   if (id === null) {
     // return create
+//    return UpdateContactPageMutation.commit({ input });
   }
 
   // return update
@@ -186,4 +188,4 @@ const form = reduxForm({
   form: formName,
 })(Oauth2SSOConfigurationModal);
 
-export default connect(mapStateToProps)(form);
+export default connect(mapStateToProps)(injectIntl(form));

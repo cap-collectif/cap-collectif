@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, ButtonToolbar } from 'react-bootstrap';
-import { FormattedMessage, type IntlShape } from 'react-intl';
-import type { Oauth2SSOConfigurationItem_configuration } from '~relay/Oauth2SSOConfigurationItem_configuration.graphql';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
+
 import Oauth2SSOConfigurationModal from './Oauth2SSOConfigurationModal';
+import type { Oauth2SSOConfigurationItem_configuration } from '~relay/Oauth2SSOConfigurationItem_configuration.graphql';
 
 type RelayProps = {|
   +configuration: Oauth2SSOConfigurationItem_configuration,
@@ -75,7 +76,9 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(Oauth2SSOConfigurationItem, {
+const container = injectIntl(Oauth2SSOConfigurationItem);
+
+export default createFragmentContainer(container, {
   configuration: graphql`
     fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
       id
