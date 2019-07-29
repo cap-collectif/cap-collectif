@@ -25,8 +25,7 @@ class OpinionAdmin extends CapcoAdmin
         string $class,
         string $baseControllerName,
         TokenStorageInterface $tokenStorage
-    )
-    {
+    ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
     }
@@ -76,8 +75,10 @@ class OpinionAdmin extends CapcoAdmin
 
         /** @var QueryBuilder $query */
         $query = parent::createQuery($context);
+
         $query
-            ->leftJoin($query->getRootAliases()[0] . '.step', 's')
+            ->innerJoin($query->getRootAliases()[0] . '.consultation', 'oc')
+            ->innerJoin('oc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
             ->leftJoin('p.authors', 'authors')
@@ -133,7 +134,9 @@ class OpinionAdmin extends CapcoAdmin
             ->addIdentifier('title', null, ['label' => 'admin.fields.opinion.title'])
             ->add('Author', 'sonata_type_model', ['label' => 'admin.fields.opinion.author'])
             ->add('OpinionType', null, ['label' => 'admin.fields.opinion.opinion_type'])
-            ->add('consultation', 'sonata_type_model', ['label' => 'admin.fields.project.consultation'])
+            ->add('consultation', 'sonata_type_model', [
+                'label' => 'admin.fields.project.consultation'
+            ])
             ->add('voteCountTotal', 'integer', [
                 'label' => 'admin.fields.opinion.vote_count_total',
                 'mapped' => false,
@@ -200,7 +203,7 @@ class OpinionAdmin extends CapcoAdmin
             ->add('consultation', ModelAutocompleteType::class, [
                 'label' => 'admin.fields.project.consultation',
                 'property' => 'title',
-                'required' => true,
+                'required' => true
             ])
             ->end()
             ->with('admin.fields.opinion.group_appendices')
@@ -241,5 +244,4 @@ class OpinionAdmin extends CapcoAdmin
     {
         $collection->clearExcept(['list', 'create', 'edit', 'delete', 'export', 'show']);
     }
-
 }
