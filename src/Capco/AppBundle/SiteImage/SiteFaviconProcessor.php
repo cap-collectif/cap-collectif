@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\SiteImage;
 
-use ColorThief\ColorThief;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Entity\SiteImage;
+use Capco\AppBundle\Resolver\UrlResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\Twig\SiteFaviconExtension;
 use Capco\AppBundle\Utils\Text;
 use Capco\MediaBundle\Entity\Media;
-use Capco\AppBundle\Entity\SiteImage;
-use Capco\AppBundle\SiteParameter\Resolver;
+use ColorThief\ColorThief;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Capco\AppBundle\Twig\SiteFaviconExtension;
 use Symfony\Component\Serializer\SerializerInterface;
-use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 
 class SiteFaviconProcessor
 {
@@ -28,59 +28,59 @@ class SiteFaviconProcessor
                 'src' => '/android-icon-36x36.png',
                 'sizes' => '36x36',
                 'type' => 'image/png',
-                'density' => '0.75'
+                'density' => '0.75',
             ],
             [
                 'src' => '/android-icon-48x48.png',
                 'sizes' => '48x48',
                 'type' => 'image/png',
-                'density' => '1.0'
+                'density' => '1.0',
             ],
             [
                 'src' => '/android-icon-72x72.png',
                 'sizes' => '72x72',
                 'type' => 'image/png',
-                'density' => '1.5'
+                'density' => '1.5',
             ],
             [
                 'src' => '/android-icon-96x96.png',
                 'sizes' => '96x96',
                 'type' => 'image/png',
-                'density' => '2.0'
+                'density' => '2.0',
             ],
             [
                 'src' => '/android-icon-144x144.png',
                 'sizes' => '144x144',
                 'type' => 'image/png',
-                'density' => '3.0'
+                'density' => '3.0',
             ],
             [
                 'src' => '/android-icon-192x192.png',
                 'sizes' => '192x192',
                 'type' => 'image/png',
-                'density' => '4.0'
-            ]
+                'density' => '4.0',
+            ],
         ],
         'theme_color' => self::DEFAULT_COLOR,
         'background_color' => self::DEFAULT_COLOR,
-        'display' => 'standalone'
+        'display' => 'standalone',
     ];
 
     private $browserConfig = [
         'msapplication' => [
             'tile' => [
                 'square70x70logo' => [
-                    '@src' => '/ms-icon-70x70.png'
+                    '@src' => '/ms-icon-70x70.png',
                 ],
                 'square150x150logo' => [
-                    '@src' => '/ms-icon-150x150.png'
+                    '@src' => '/ms-icon-150x150.png',
                 ],
                 'square310x310logo' => [
-                    '@src' => '/ms-icon-310x310.png'
+                    '@src' => '/ms-icon-310x310.png',
                 ],
-                'TileColor' => self::DEFAULT_COLOR
-            ]
-        ]
+                'TileColor' => self::DEFAULT_COLOR,
+            ],
+        ],
     ];
 
     private $serializer;
@@ -98,7 +98,7 @@ class SiteFaviconProcessor
         SiteFaviconExtension $siteFaviconExtension,
         SerializerInterface $serializer,
         LoggerInterface $logger,
-        MediaUrlResolver $urlResolver,
+        UrlResolver $urlResolver,
         Resolver $siteResolver,
         Filesystem $filesystem,
         string $webDir
@@ -179,7 +179,7 @@ class SiteFaviconProcessor
                 'favicon_72' => '1.5',
                 'favicon_96' => '2.0',
                 'favicon_144' => '3.0',
-                'favicon_192' => '4.0'
+                'favicon_192' => '4.0',
             ]
             as $filter => $density
         ) {
@@ -190,7 +190,7 @@ class SiteFaviconProcessor
                 'src' => $path,
                 'sizes' => $size . 'x' . $size,
                 'type' => $siteFavicon->getMedia()->getContentType(),
-                'density' => $density
+                'density' => $density,
             ];
         }
 
@@ -203,7 +203,7 @@ class SiteFaviconProcessor
             $this->filesystem->dumpFile(
                 $this->webDir . self::BROWSERCONFIG_FILENAME,
                 $this->serializer->serialize($this->browserConfig, 'xml', [
-                    'xml_root_node_name' => 'browserconfig'
+                    'xml_root_node_name' => 'browserconfig',
                 ])
             );
         } catch (\Exception $exception) {
@@ -232,11 +232,11 @@ class SiteFaviconProcessor
         $context = stream_context_create([
             'ssl' => [
                 'verify_peer' => false,
-                'verify_peer_name' => false
-            ]
+                'verify_peer_name' => false,
+            ],
         ]);
 
-        $url = $this->urlResolver->__invoke($media);
+        $url = $this->urlResolver->getMediaUrl($media);
         $result = file_get_contents($url, false, $context);
         if (false === $result) {
             $this->logger->error('Could not get content of ' . $url);

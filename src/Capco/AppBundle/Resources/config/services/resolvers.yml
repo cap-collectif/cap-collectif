@@ -55,7 +55,11 @@ services:
     public: true
 
   Capco\AppBundle\Resolver\UrlResolver:
-    public: true
+    arguments:
+      $scheme: '%router.request_context.scheme%'
+      $host: '%router.request_context.host%'
+    tags:
+      - { name: overblog_graphql.resolver, alias: 'media_url', method: 'getMediaUrl' }
 
   Capco\AppBundle\Resolver\ProjectStatsResolver:
     public: true

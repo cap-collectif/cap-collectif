@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Doctrine\ORM\QueryBuilder;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -114,7 +115,7 @@ class ProposalRepository extends EntityRepository
             } else {
                 $proposalsWithStep[$collectStep->getId()] = [
                     'step' => $collectStep,
-                    'proposals' => [$result],
+                    'proposals' => [$result]
                 ];
             }
         }
@@ -212,10 +213,12 @@ class ProposalRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getByUser(User $user): array
+    public function getByUser(User $user, int $limit = null, int $offset = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->andWhere('proposal.author = :author')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
             ->setParameter('author', $user);
 
         return $qb->getQuery()->execute();
@@ -590,6 +593,46 @@ class ProposalRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
+    public function getProposalsByAuthorViewerCanSee(
+        User $viewer,
+        User $user,
+        ?int $limit = null,
+        ?int $offset = null
+    ): array {
+        $qb = $this->createProposalsByAuthorViewerCanSeeQuery($viewer, $user)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countProposalsByAuthorViewerCanSee(User $viewer, User $user): int
+    {
+        $qb = $this->createProposalsByAuthorViewerCanSeeQuery($viewer, $user);
+        $qb->select('COUNT(DISTINCT p.id)');
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getPublicProposalsByAuthor(
+        User $author,
+        ?int $limit = null,
+        ?int $offset = null
+    ): array {
+        $qb = $this->createPublicProposalsByAuthorQuery($author);
+        $qb->setMaxResults($limit)->setFirstResult($offset);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countPublicProposalsByAuthor(User $author): int
+    {
+        $qb = $this->createPublicProposalsByAuthorQuery($author);
+        $qb->select('COUNT(DISTINCT p.id)');
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
@@ -597,6 +640,78 @@ class ProposalRepository extends EntityRepository
             ->andWhere($alias . '.trashedAt IS NULL')
             ->andWhere($alias . '.deletedAt IS NULL')
             ->andWhere($alias . '.published = true');
+    }
+
+    // This return the query used to retrieve all the proposals of an author the logged user can see.
+    private function createProposalsByAuthorViewerCanSeeQuery(
+        User $viewer,
+        User $user
+    ): QueryBuilder {
+        $qb = $this->getIsEnabledQueryBuilder('p');
+        $qb
+            ->andWhere('p.author = :user')
+            ->leftJoin('p.selections', 'ps')
+            ->leftJoin('p.proposalForm', 'pf')
+            ->leftJoin('pf.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pabs')
+            ->leftJoin('pabs.project', 'pro')
+            ->leftJoin('pro.authors', 'pr_au')
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg');
+        if (!$viewer->isSuperAdmin()) {
+            // The call of the function below filters the contributions according to the visibility
+            // of the project containing it, as well as the privileges of the connected user.
+            $this->getContributionsViewerCanSee($qb, $viewer);
+            if (!$viewer->isAdmin()) {
+                $qb->andWhere(
+                    $qb
+                        ->expr()
+                        ->orX(
+                            $qb
+                                ->expr()
+                                ->andX(
+                                    $qb->expr()->isInstanceOf('s', ':collectStep'),
+                                    $qb->expr()->eq('s.private', 'false'),
+                                    $qb->expr()->isNotNull('ps.selectionStep')
+                                ),
+                            $qb->expr()->eq(':viewer', 'pr_au.user')
+                        )
+                );
+                // All the proposals have a CollectStep.
+                $qb->setParameter(':collectStep', $this->_em->getClassMetadata(CollectStep::class));
+            }
+            $qb->setParameter(':viewer', $viewer);
+        }
+        $qb->setParameter(':user', $user);
+
+        return $qb;
+    }
+
+    private function createPublicProposalsByAuthorQuery(User $author): QueryBuilder
+    {
+        $qb = $this->getIsEnabledQueryBuilder('p');
+        $qb
+            ->andWhere('p.author = :author')
+            ->leftJoin('p.selections', 'ps')
+            ->leftJoin('p.proposalForm', 'pf')
+            ->leftJoin('pf.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pabs')
+            ->leftJoin('pabs.project', 'pro')
+            ->andWhere($qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC))
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->andX(
+                        $qb->expr()->eq('s.private', 'false'),
+                        $qb->expr()->isNotNull('ps.selectionStep'),
+                        $qb->expr()->isInstanceOf('s', ':collectStep')
+                    )
+            )
+            ->setParameters([
+                ':author' => $author,
+                ':collectStep' => $this->_em->getClassMetadata(CollectStep::class)
+            ]);
+
+        return $qb;
     }
 
     private function getProposalQueryPublishedByStep(CollectStep $cs): QueryBuilder
