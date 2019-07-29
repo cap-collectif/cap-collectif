@@ -9766,16 +9766,16 @@
         },
         {
             "name": "sonata-project/doctrine-extensions",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/sonata-doctrine-extensions.git",
-                "reference": "a22ab48341d1a704cdb823d1d721383bf2feba24"
+                "reference": "aab1ede164095afcb1f40253c5d97258b930a433"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/sonata-doctrine-extensions/zipball/a22ab48341d1a704cdb823d1d721383bf2feba24",
-                "reference": "a22ab48341d1a704cdb823d1d721383bf2feba24",
+                "url": "https://api.github.com/repos/sonata-project/sonata-doctrine-extensions/zipball/aab1ede164095afcb1f40253c5d97258b930a433",
+                "reference": "aab1ede164095afcb1f40253c5d97258b930a433",
                 "shasum": ""
             },
             "require": {
@@ -9831,7 +9831,7 @@
                 "doctrine2",
                 "json"
             ],
-            "time": "2019-03-08T06:51:52+00:00"
+            "time": "2019-04-29T17:07:46+00:00"
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
