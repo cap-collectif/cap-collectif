@@ -65,17 +65,17 @@
         },
         {
             "name": "accord/mandrill-swiftmailer-bundle",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "target-dir": "Accord/MandrillSwiftMailerBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AccordGroup/MandrillSwiftMailerBundle.git",
-                "reference": "df0b53821630ad53145bce8c9dab79f00c7bc687"
+                "reference": "a0a38dcc7b2a3716b7bccfbabe38bf369564c5d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AccordGroup/MandrillSwiftMailerBundle/zipball/df0b53821630ad53145bce8c9dab79f00c7bc687",
-                "reference": "df0b53821630ad53145bce8c9dab79f00c7bc687",
+                "url": "https://api.github.com/repos/AccordGroup/MandrillSwiftMailerBundle/zipball/a0a38dcc7b2a3716b7bccfbabe38bf369564c5d1",
+                "reference": "a0a38dcc7b2a3716b7bccfbabe38bf369564c5d1",
                 "shasum": ""
             },
             "require": {
@@ -122,7 +122,7 @@
                 "swiftmailer",
                 "symfony"
             ],
-            "time": "2017-06-29T15:29:02+00:00"
+            "time": "2018-12-28T09:12:10+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2021,16 +2021,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.8",
+            "version": "2.1.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "c26463ff9241f27907112fbcd0c86fa670cfef98"
+                "reference": "a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/c26463ff9241f27907112fbcd0c86fa670cfef98",
-                "reference": "c26463ff9241f27907112fbcd0c86fa670cfef98",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
+                "reference": "a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
                 "shasum": ""
             },
             "require": {
@@ -2040,7 +2040,8 @@
             "require-dev": {
                 "dominicsayers/isemail": "dev-master",
                 "phpunit/phpunit": "^4.8.35||^5.7||^6.0",
-                "satooshi/php-coveralls": "^1.0.1"
+                "satooshi/php-coveralls": "^1.0.1",
+                "symfony/phpunit-bridge": "^4.4@dev"
             },
             "suggest": {
                 "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
@@ -2074,7 +2075,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2019-05-16T22:02:54+00:00"
+            "time": "2019-07-19T20:52:08+00:00"
         },
         {
             "name": "ekino/newrelic-bundle",
