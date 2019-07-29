@@ -4,7 +4,7 @@
     {{ parent() }}
     {% if admin.subject.id is null %}
         <script type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready( function() {
                 $("#field_actions_{{ admin.uniqid }}_opinionTypes .btn-success").on('click', function(e) {
                     var name = $("#{{ admin.uniqid }}_title").val();
                     if (name !== null && name !== '') {
@@ -15,12 +15,6 @@
                     return true;
                 });
             });
-        </script>
-    {% else %}
-        <script type="text/javascript">
-            (function () {
-                document.querySelector('.sonata-ba-action').setAttribute('target', '__blank');
-            })()
         </script>
     {% endif %}
 {% endblock %}
