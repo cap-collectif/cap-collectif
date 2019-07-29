@@ -15,9 +15,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Twig\MediaExtension;
-use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -26,44 +24,18 @@ class UrlResolver
     protected $router;
     protected $manager;
     protected $mediaExtension;
-    protected $scheme;
-    protected $host;
     private $container;
 
     public function __construct(
         ContainerInterface $container,
         RouterInterface $router,
         Manager $manager,
-        MediaExtension $mediaExtension,
-        ?string $scheme = '',
-        ?string $host = ''
+        MediaExtension $mediaExtension
     ) {
         $this->router = $router;
         $this->manager = $manager;
         $this->mediaExtension = $mediaExtension;
-        $this->scheme = $scheme;
-        $this->host = $host;
         $this->container = $container;
-    }
-
-    public function getMediaUrl(Media $media, ?Arg $args = null): string
-    {
-        if (!$media) {
-            return '';
-        }
-
-        $format = $args['format'] ?? 'reference';
-        $provider = $this->container->get($media->getProviderName());
-        $path = '';
-        if ('reference' === $format) {
-            $path = '/media';
-        }
-
-        return $this->scheme .
-            '://' .
-            $this->host .
-            $path .
-            $provider->generatePublicUrl($media, $format);
     }
 
     public function generateOpinionOrProposalRoute($object, $absolute)
