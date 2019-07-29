@@ -209,7 +209,7 @@
         "leanphp/phpspec-code-coverage": "dev-patch-1",
         "bossa/phpspec2-expect": "@dev",
         "phpunit/phpunit": "^7.3",
-        "bex/behat-step-time-logger": "^1.0",
+        "bex/behat-step-time-logger": "^2.0",
         "friendsofphp/php-cs-fixer": "^2.13",
         "phpstan/phpstan-symfony": "^0.11.2",
         "phpstan/phpstan": "^0.11.4",
