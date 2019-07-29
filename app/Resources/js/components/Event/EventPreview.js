@@ -15,27 +15,44 @@ type Props = {|
   +isAuthorDisplay: boolean,
 |};
 
-export class EventPreview extends React.Component<Props> {
+type State = {|
+  imgURL: string,
+|};
+
+const FALLBACK_IMAGE = `${baseUrl}/svg/calendar.svg`;
+
+export class EventPreview extends React.Component<Props, State> {
   static defaultProps = {
     isAuthorDisplay: true,
     isHighlighted: false,
   };
 
+  constructor(props: Props) {
+    super(props);
+    const { event } = props;
+    this.state = {
+      imgURL: event.media && event.media.url ? event.media.url : FALLBACK_IMAGE,
+    };
+  }
+
+  onImageError = () => {
+    this.setState({
+      imgURL: FALLBACK_IMAGE,
+    });
+  };
+
   render() {
     const { event, isHighlighted, isAuthorDisplay } = this.props;
+    const { imgURL } = this.state;
     const detailClasses = classNames({
       'highlighted-comment': isHighlighted,
     });
-    const imgURL = event.media && event.media.url ? event.media.url : null;
+
     return (
       <div className={`d-flex flex-1-1 event block  block--bordered ${detailClasses}`}>
-        {imgURL ? (
-          <div className="picture_container" style={{ backgroundImage: `url(${imgURL})` }} />
-        ) : (
-          <div className="picture_container" style={{ backgroundColor: '#eeeeee' }}>
-            <img className="event__picture" src={`${baseUrl}/svg/calendar.svg`} alt="" />
-          </div>
-        )}
+        <div className="picture_container" style={{ backgroundColor: '#eeeeee' }}>
+          <img className="event__picture" src={`${imgURL}`} onError={this.onImageError} alt="" />
+        </div>
 
         <div className="d-flex event__infos">
           <div className="col-md-2 col-sm-2 hidden-xs">

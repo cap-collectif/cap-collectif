@@ -20,42 +20,41 @@ exports[`<PreviewMedia /> should render correctly 1`] = `
       />
     </strong>
      
-    <Label
-      bsClass="label"
-      bsStyle="info"
-      key="0"
-      style={
-        Object {
-          "marginRight": "5px",
-        }
-      }
+    <div
+      className="document-container"
     >
-      <a
-        href="http://capco.dev/image.jpg"
-        rel="noopener noreferrer"
-        target="_blank"
+      <Label
+        bsClass="label"
+        bsStyle="info"
+        key="0"
       >
-        image
-      </a>
-       
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        disabled={false}
-        onClick={[Function]}
-      >
-        <i
-          className="glyphicon glyphicon-remove"
-          style={
-            Object {
-              "cursor": "pointer",
+        <a
+          href="http://capco.dev/image.jpg"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          image
+        </a>
+         
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="link"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <i
+            className="glyphicon glyphicon-remove"
+            style={
+              Object {
+                "cursor": "pointer",
+              }
             }
-          }
-        />
-      </Button>
-    </Label>
+          />
+        </Button>
+      </Label>
+    </div>
   </Col>
 </div>
 `;

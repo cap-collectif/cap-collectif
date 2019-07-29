@@ -2,10 +2,10 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { text } from '@storybook/addon-knobs';
-import Media from '../../components/Ui/Medias/Media/Media';
-import Avatar from '../../components/Ui/Medias/Avatar';
+import Media from '../../../components/Ui/Medias/Media/Media';
+import Avatar from '../../../components/Ui/Medias/Avatar';
 
-storiesOf('Core|Media', module).add(
+storiesOf('Core|Medias', module).add(
   'Media',
   () => {
     const src = text('Src', 'https://source.unsplash.com/collection/181462');

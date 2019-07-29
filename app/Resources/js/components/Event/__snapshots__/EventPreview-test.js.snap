@@ -8,10 +8,17 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
     className="picture_container"
     style={
       Object {
-        "backgroundImage": "url(https://picsum.photos/300/400)",
+        "backgroundColor": "#eeeeee",
       }
     }
-  />
+  >
+    <img
+      alt=""
+      className="event__picture"
+      onError={[Function]}
+      src="https://picsum.photos/300/400"
+    />
+  </div>
   <div
     className="d-flex event__infos"
   >
@@ -119,10 +126,17 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
     className="picture_container"
     style={
       Object {
-        "backgroundImage": "url(https://picsum.photos/300/400)",
+        "backgroundColor": "#eeeeee",
       }
     }
-  />
+  >
+    <img
+      alt=""
+      className="event__picture"
+      onError={[Function]}
+      src="https://picsum.photos/300/400"
+    />
+  </div>
   <div
     className="d-flex event__infos"
   >
@@ -230,10 +244,17 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
     className="picture_container"
     style={
       Object {
-        "backgroundImage": "url(https://picsum.photos/300/400)",
+        "backgroundColor": "#eeeeee",
       }
     }
-  />
+  >
+    <img
+      alt=""
+      className="event__picture"
+      onError={[Function]}
+      src="https://picsum.photos/300/400"
+    />
+  </div>
   <div
     className="d-flex event__infos"
   >
@@ -339,10 +360,17 @@ exports[`<EventPreview /> renders without username 1`] = `
     className="picture_container"
     style={
       Object {
-        "backgroundImage": "url(https://picsum.photos/300/400)",
+        "backgroundColor": "#eeeeee",
       }
     }
-  />
+  >
+    <img
+      alt=""
+      className="event__picture"
+      onError={[Function]}
+      src="https://picsum.photos/300/400"
+    />
+  </div>
   <div
     className="d-flex event__infos"
   >
