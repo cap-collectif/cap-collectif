@@ -9,9 +9,9 @@ import LoginOverlay from '../Utils/LoginOverlay';
 import UnpublishedTooltip from '../Publishable/UnpublishedTooltip';
 import type { CommentVoteButton_comment } from '~relay/CommentVoteButton_comment.graphql';
 
-type Props = {
-  comment: CommentVoteButton_comment,
-};
+type Props = {|
+  +comment: CommentVoteButton_comment,
+|};
 
 class CommentVoteButton extends React.Component<Props> {
   target: null;

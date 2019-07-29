@@ -19,9 +19,7 @@ const defaultComment = {
 };
 
 const defaultProps = {
-  editUrl: 'https://bb.com/',
   comment: defaultComment,
-  contribuable: true,
 };
 
 describe('<CommentInfos />', () => {

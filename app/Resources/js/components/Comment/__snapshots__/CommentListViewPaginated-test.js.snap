@@ -3,7 +3,7 @@
 exports[`<CommentListViewPaginated /> should render correctly 1`] = `
 <ul
   className="media-list"
-  id="comments"
+  id="CommentListViewPaginated"
 >
   <ForwardRef(Relay(Comment))
     comment={

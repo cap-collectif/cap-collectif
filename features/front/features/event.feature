@@ -82,7 +82,7 @@ Scenario: Anonymous wants to comment an event
     | authorEmail | naruto72@gmail.com  |
   When I press "comment.submit"
   And I wait 2 seconds
-  Then I should see "J'ai un truc à dire" in the ".opinion__list" element
+  Then I should see "J'ai un truc à dire" in the "#CommentListViewPaginated" element
 
 @database
 Scenario: Logged in user wants to comment an event
@@ -105,4 +105,4 @@ Scenario: Anonymous wants to comment an event without email
     | authorName  | Naruto              |
   When I press "comment.submit"
   And I wait 2 seconds
-  Then I should not see "J'ai un truc à dire" in the ".opinion__list" element
+  Then I should not see "J'ai un truc à dire" in the "#CommentListViewPaginated" element

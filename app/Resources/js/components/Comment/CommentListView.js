@@ -8,18 +8,18 @@ import scrollToAnchor from '../../services/ScrollToAnchor';
 
 export type CommentOrderBy = 'last' | 'old' | 'popular';
 
-type Props = {
-  commentable: CommentListView_commentable,
-  isAuthenticated: boolean,
-  order: CommentOrderBy,
-  relay: RelayRefetchProp,
-  invertedBackground?: ?boolean,
-};
+type Props = {|
+  +commentable: CommentListView_commentable,
+  +isAuthenticated: boolean,
+  +order: CommentOrderBy,
+  +relay: RelayRefetchProp,
+  +invertedBackground?: ?boolean,
+|};
 
-type State = {
-  isRefetching: boolean,
-  highlightedComment: ?string,
-};
+type State = {|
+  +isRefetching: boolean,
+  +highlightedComment: ?string,
+|};
 
 export class CommentListView extends React.Component<Props, State> {
   state = {

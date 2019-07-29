@@ -6,13 +6,13 @@ import { FormattedMessage } from 'react-intl';
 import nl2br from 'react-nl2br';
 import type { CommentBody_comment } from '~relay/CommentBody_comment.graphql';
 
-type Props = {
-  comment: CommentBody_comment,
-};
+type Props = {|
+  +comment: CommentBody_comment,
+|};
 
-type State = {
-  expanded: boolean,
-};
+type State = {|
+  +expanded: boolean,
+|};
 
 export class CommentBody extends React.Component<Props, State> {
   state = {

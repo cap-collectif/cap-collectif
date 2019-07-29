@@ -4,6 +4,7 @@ exports[`<CommentEdit /> should render correctly 1`] = `
 <a
   className="btn btn-xs btn-dark-gray btn--outline"
   href="https://aa.com/"
+  id="CommentEdit-<mock-comment-id/>"
 >
   <i
     className="cap cap-pencil-1"

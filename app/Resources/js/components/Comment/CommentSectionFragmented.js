@@ -4,11 +4,11 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import type { CommentSectionFragmented_commentable } from '~relay/CommentSectionFragmented_commentable.graphql';
 import CommentSectionView from './CommentSectionView';
 
-type Props = {
-  commentable: CommentSectionFragmented_commentable,
-  isAuthenticated: boolean,
-  invertedBackground?: ?boolean,
-};
+type Props = {|
+  +commentable: CommentSectionFragmented_commentable,
+  +isAuthenticated: boolean,
+  +invertedBackground?: ?boolean,
+|};
 
 export class CommentSectionFragmented extends React.Component<Props> {
   render() {

@@ -571,17 +571,15 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I click the edit comment button
+     * @When I click the edit comment button :id
      */
-    public function iClickTheEditCommentButton()
+    public function iClickTheEditCommentButton(string $id)
     {
-        $this->navigationContext->getPage('proposal page')->clickEditCommentButton();
+        $this->navigationContext->getPage('proposal page')->clickEditCommentButton($id);
     }
 
     /**
      * @When I fill and submit the edit comment form with :body
-     *
-     * @param string $body
      */
     public function iFillTheEditCommentForm(string $body)
     {

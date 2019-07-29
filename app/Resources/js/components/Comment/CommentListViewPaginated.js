@@ -5,13 +5,13 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 import Comment from './Comment';
 import type { CommentListViewPaginated_commentable } from '~relay/CommentListViewPaginated_commentable.graphql';
 
-type Props = {
-  relay: RelayPaginationProp,
-  intl: IntlShape,
-  commentable: CommentListViewPaginated_commentable,
-  highlightedComment: ?string,
-  invertedBackground?: ?boolean,
-};
+type Props = {|
+  +relay: RelayPaginationProp,
+  +intl: IntlShape,
+  +commentable: CommentListViewPaginated_commentable,
+  +highlightedComment: ?string,
+  +invertedBackground?: ?boolean,
+|};
 
 export class CommentListViewPaginated extends React.Component<Props> {
   render() {
@@ -21,7 +21,7 @@ export class CommentListViewPaginated extends React.Component<Props> {
     }
 
     return (
-      <ul id="comments" className="media-list">
+      <ul id="CommentListViewPaginated" className="media-list">
         {commentable.comments &&
           commentable.comments.edges &&
           commentable.comments.edges

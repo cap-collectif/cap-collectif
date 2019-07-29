@@ -6,6 +6,7 @@ import { CommentEdit } from './CommentEdit';
 import { $refType } from '../../mocks';
 
 const defaultComment = {
+  id: '<mock-comment-id/>',
   $refType,
   editUrl: 'https://aa.com/',
   contribuable: true,

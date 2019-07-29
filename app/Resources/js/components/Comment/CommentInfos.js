@@ -7,9 +7,9 @@ import UnpublishedLabel from '../Publishable/UnpublishedLabel';
 import UserLink from '../User/UserLink';
 import type { CommentInfos_comment } from '~relay/CommentInfos_comment.graphql';
 
-type Props = {
-  comment: CommentInfos_comment,
-};
+type Props = {|
+  +comment: CommentInfos_comment,
+|};
 
 export class CommentInfos extends React.Component<Props> {
   renderAuthorName = () => {

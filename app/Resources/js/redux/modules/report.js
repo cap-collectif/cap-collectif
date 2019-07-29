@@ -10,6 +10,11 @@ export type State = {
   +elements: Array<?number | ?string>,
 };
 
+export type ReportData = {|
+  status: number,
+  body: string,
+|};
+
 const baseUrl = (opinion: { parent: ?{ id: number } }) =>
   opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
 
@@ -55,7 +60,7 @@ const addReported = (): AddReportedAction => ({
 
 const submitReport = (
   url: string,
-  data: Object,
+  data: ReportData,
   dispatch: Dispatch,
   successMessage: string,
 ): Promise<void> => {
@@ -82,7 +87,7 @@ const submitReport = (
 export const submitSourceReport = (
   opinion: Object,
   sourceId: Uuid,
-  data: Object,
+  data: ReportData,
   dispatch: Dispatch,
 ) =>
   submitReport(
@@ -95,7 +100,7 @@ export const submitSourceReport = (
 export const submitArgumentReport = (
   opinion: Object,
   argument: Uuid,
-  data: Object,
+  data: ReportData,
   dispatch: Dispatch,
 ) =>
   submitReport(
@@ -105,7 +110,7 @@ export const submitArgumentReport = (
     'alert.success.report.argument',
   );
 
-export const submitOpinionReport = (opinion: Object, data: Object, dispatch: Dispatch) =>
+export const submitOpinionReport = (opinion: Object, data: ReportData, dispatch: Dispatch) =>
   submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/reports`,
     data,
@@ -113,10 +118,10 @@ export const submitOpinionReport = (opinion: Object, data: Object, dispatch: Dis
     'alert.success.report.opinion',
   );
 
-export const submitCommentReport = (commentId: string, data: Object, dispatch: Dispatch) =>
+export const submitCommentReport = (commentId: string, data: ReportData, dispatch: Dispatch) =>
   submitReport(`/comments/${commentId}/reports`, data, dispatch, 'alert.success.report.comment');
 
-export const submitProposalReport = (proposal: Object, data: Object, dispatch: Dispatch) =>
+export const submitProposalReport = (proposal: Object, data: ReportData, dispatch: Dispatch) =>
   submitReport(
     `/proposals/${proposal.id}/reports`,
     data,

@@ -5,14 +5,14 @@ import CommentAnswer from './CommentAnswer';
 import { CommentAnswersContainer } from './styles';
 import type { CommentAnswers_comment } from '~relay/CommentAnswers_comment.graphql';
 
-type Props = {
-  comment: CommentAnswers_comment,
-  invertedBackground?: ?boolean,
-};
+type Props = {|
+  +comment: CommentAnswers_comment,
+  +invertedBackground?: ?boolean,
+|};
 
-type State = {
-  highlightedComment: ?string,
-};
+type State = {|
+  +highlightedComment: ?string,
+|};
 
 export class CommentAnswers extends React.Component<Props, State> {
   state = {

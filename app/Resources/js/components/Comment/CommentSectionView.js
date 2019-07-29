@@ -6,12 +6,12 @@ import CommentListView from './CommentListView';
 import CommentForm from './CommentForm';
 import type { CommentSectionFragmented_commentable } from '~relay/CommentSectionFragmented_commentable.graphql';
 
-type Props = {
-  intl: IntlShape,
-  commentable: CommentSectionFragmented_commentable,
-  isAuthenticated: boolean,
-  invertedBackground?: ?boolean,
-};
+type Props = {|
+  +intl: IntlShape,
+  +commentable: CommentSectionFragmented_commentable,
+  +isAuthenticated: boolean,
+  +invertedBackground?: ?boolean,
+|};
 
 export function CommentSectionView(props: Props) {
   const [order, setOrder] = useState('last');
@@ -53,7 +53,6 @@ export function CommentSectionView(props: Props) {
           </Col>
         )}
       </Row>
-      {/* $FlowFixMe */}
       <CommentForm commentable={commentable} />
       {/* $FlowFixMe */}
       <CommentListView
