@@ -72,7 +72,7 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
         </ButtonToolbar>
         <Oauth2SSOConfigurationModal
           show={showModalUpdate}
-          onClose={this.handleCloseDelete}
+          onClose={this.handleCloseUpdate}
           {...configuration}
         />
 
