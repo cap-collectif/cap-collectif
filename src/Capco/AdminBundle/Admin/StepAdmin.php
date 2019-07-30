@@ -40,7 +40,7 @@ class StepAdmin extends CapcoAdmin
         ConsultationStep::class => 'project.types.consultation',
         RankingStep::class => 'admin.fields.project.group_ranking',
         SelectionStep::class => '',
-        CollectStep::class => 'admin.fields.proposal.group_collect',
+        CollectStep::class => 'admin.fields.proposal.group_collect'
     ];
 
     public function getNewInstance()
@@ -102,23 +102,23 @@ class StepAdmin extends CapcoAdmin
             ->add('title', null, [
                 'label' => 'admin.fields.step.label',
                 'data' => $title,
-                'required' => true,
+                'required' => true
             ])
             ->add('label', null, [
                 'label' => 'color.main_menu.text',
                 'data' => $translator->trans($label),
-                'required' => true,
+                'required' => true
             ]);
 
         $formMapper->add('isEnabled', null, [
             'label' => 'admin.fields.step.is_enabled',
-            'required' => false,
+            'required' => false
         ]);
 
         if ($subject instanceof ParticipativeStepInterface) {
             $formMapper->add('timeless', CheckboxType::class, [
                 'label' => 'admin.fields.step.timeless',
-                'required' => false,
+                'required' => false
             ]);
         }
         if (!$subject instanceof PresentationStep) {
@@ -128,14 +128,14 @@ class StepAdmin extends CapcoAdmin
                     'format' => 'dd/MM/yyyy HH:mm',
                     'dp_use_current' => false,
                     'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm'],
-                    'required' => false,
+                    'required' => false
                 ])
                 ->add('endAt', 'sonata_type_datetime_picker', [
                     'label' => 'admin.fields.step.end_at',
                     'format' => 'dd/MM/yyyy HH:mm',
                     'dp_use_current' => false,
                     'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm'],
-                    'required' => false,
+                    'required' => false
                 ]);
         }
 
@@ -148,7 +148,7 @@ class StepAdmin extends CapcoAdmin
             $formMapper->add('body', CKEditorType::class, [
                 'config_name' => 'admin_editor',
                 'label' => 'admin.fields.step.body',
-                'required' => false,
+                'required' => false
             ]);
         }
 
@@ -157,47 +157,14 @@ class StepAdmin extends CapcoAdmin
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
-                    'required' => false,
+                    'required' => false
                 ])
                 ->add('consultation', 'sonata_type_model', [
                     'label' => 'admin.fields.project.consultation',
                     'required' => true,
                     'btn_add' => false,
                     'query' => $this->createQueryForConsultation(),
-                    'choices_as_values' => true,
-                ])
-                ->add('opinionCountShownBySection', null, [
-                    'label' => 'admin.fields.step.opinionCountShownBySection',
-                    'required' => true,
-                ])
-                ->end()
-                ->with('admin.fields.proposal_form.group_help_texts')
-                ->add('titleHelpText', null, [
-                    'label' => 'admin.fields.proposal_form.title_help_text',
-                    'required' => false,
-                    'help' => 'admin.fields.proposal_form.help_text_title_help_text',
-                ])
-                ->add('descriptionHelpText', null, [
-                    'label' => 'admin.fields.proposal_form.description_help_text',
-                    'required' => false,
-                    'help' => 'admin.fields.proposal_form.help_text_description_help_text',
-                ])
-                ->end()
-                ->with('moderation', [
-                    'description' => $translator->trans(
-                        'receive-email-notification-when-a-contribution-is'
-                    ),
-                ])
-                ->add('moderatingOnReport', 'checkbox', [
-                    'label' => 'reported',
-                    'mapped' => false,
-                    'value' => true,
-                    'disabled' => true,
-                    'attr' => ['readonly' => true, 'checked' => true],
-                ])
-                ->add('moderatingOnCreate', null, ['label' => 'admin.fields.synthesis.enabled'])
-                ->add('moderatingOnUpdate', null, [
-                    'label' => 'admin.fields.proposal_form.notification.on_update',
+                    'choices_as_values' => true
                 ])
                 ->end()
                 ->with('requirements')
@@ -213,7 +180,7 @@ class StepAdmin extends CapcoAdmin
                     'required' => false,
                     'help' => 'help-text-for-reason-for-collection-field',
                     'purify_html' => true,
-                    'purify_html_profile' => 'default',
+                    'purify_html_profile' => 'default'
                 ])
                 ->end();
         } elseif ($subject instanceof SynthesisStep) {
@@ -221,7 +188,7 @@ class StepAdmin extends CapcoAdmin
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
-                    'required' => false,
+                    'required' => false
                 ])
                 ->add(
                     'synthesis',
@@ -234,26 +201,26 @@ class StepAdmin extends CapcoAdmin
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
-                    'required' => false,
+                    'required' => false
                 ])
                 ->add('nbOpinionsToDisplay', null, [
                     'label' => 'admin.fields.step.nb_opinions_to_display',
-                    'required' => true,
+                    'required' => true
                 ])
                 ->add('nbVersionsToDisplay', null, [
                     'label' => 'admin.fields.step.nb_versions_to_display',
-                    'required' => true,
+                    'required' => true
                 ]);
         } elseif ($subject instanceof SelectionStep) {
             $formMapper
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
-                    'required' => false,
+                    'required' => false
                 ])
                 ->add('allowingProgressSteps', null, [
                     'label' => 'admin.fields.step.allowingProgressSteps',
-                    'required' => false,
+                    'required' => false
                 ]);
         }
 
@@ -262,7 +229,7 @@ class StepAdmin extends CapcoAdmin
                 'config_name' => 'admin_editor',
                 'label' => 'admin.fields.step.footer',
                 'required' => false,
-                'translation_domain' => 'CapcoAppBundle',
+                'translation_domain' => 'CapcoAppBundle'
             ]);
             if (
                 $this->getConfigurationPool()
@@ -273,7 +240,7 @@ class StepAdmin extends CapcoAdmin
                 $formMapper->add('verification', 'choice', [
                     'label' => 'admin.fields.step.verification',
                     'choices' => QuestionnaireStep::$verificationLabels,
-                    'translation_domain' => 'CapcoAppBundle',
+                    'translation_domain' => 'CapcoAppBundle'
                 ]);
             }
         }
@@ -288,37 +255,37 @@ class StepAdmin extends CapcoAdmin
                     'choices' => SelectionStep::getVoteTypeLabels(),
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
-                    'help' => 'admin.help.step.vote_type',
+                    'help' => 'admin.help.step.vote_type'
                 ])
                 ->add('votesLimit', IntegerType::class, [
                     'label' => 'admin.fields.step.votesLimit',
-                    'required' => false,
+                    'required' => false
                 ])
                 ->add('hasVoteThreshold', CheckboxType::class, [
                     'label' => 'admin.fields.step.vote_threshold.checkbox',
                     'required' => false,
                     'mapped' => false,
-                    'data' => $subject->hasVoteThreshold(),
+                    'data' => $subject->hasVoteThreshold()
                 ])
                 ->add('voteThreshold', IntegerType::class, [
                     'label' => 'admin.fields.step.vote_threshold.input',
                     'required' => false,
-                    'attr' => ['style' => 'width: 200px;'],
+                    'attr' => ['style' => 'width: 200px;']
                 ])
                 ->add('budget', 'money', [
                     'currency' => 'EUR',
                     'label' => 'admin.fields.step.budget',
-                    'required' => false,
+                    'required' => false
                 ])
                 ->add('votesRanking', null, [
                     'label' => 'activate-vote-ranking',
                     'required' => false,
-                    'help' => 'ranking-votes-help-text',
+                    'help' => 'ranking-votes-help-text'
                 ])
                 ->add('votesHelpText', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.votesHelpText',
-                    'required' => false,
+                    'required' => false
                 ])
                 ->end();
             $formMapper
@@ -344,7 +311,7 @@ class StepAdmin extends CapcoAdmin
                     'required' => false,
                     'help' => 'help-text-for-reason-for-collection-field',
                     'purify_html' => true,
-                    'purify_html_profile' => 'default',
+                    'purify_html_profile' => 'default'
                 ])
                 ->end();
             if ($subject instanceof CollectStep) {
@@ -356,20 +323,20 @@ class StepAdmin extends CapcoAdmin
                     'btn_add' => false,
                     'class' => Status::class,
                     'placeholder' => 'admin.fields.step.default_status_none',
-                    'choices_as_values' => true,
+                    'choices_as_values' => true
                 ]);
                 $formMapper->end();
                 $formMapper
                     ->with('admin.fields.step.group_selections')
                     ->add('private', CheckboxType::class, [
                         'label' => 'admin.fields.step.private',
-                        'required' => false,
+                        'required' => false
                     ])
                     ->add('defaultSort', 'choice', [
                         'label' => 'admin.fields.step.default_sort',
                         'choices' => CollectStep::$sortLabels,
                         'translation_domain' => 'CapcoAppBundle',
-                        'required' => true,
+                        'required' => true
                     ]);
             }
             $formMapper->end();
@@ -380,13 +347,13 @@ class StepAdmin extends CapcoAdmin
                 ->with('admin.fields.step.group_selections')
                 ->add('proposalsHidden', CheckboxType::class, [
                     'label' => 'admin.fields.step.proposals_hidden',
-                    'required' => false,
+                    'required' => false
                 ])
                 ->add('defaultSort', 'choice', [
                     'label' => 'admin.fields.step.default_sort',
                     'choices' => SelectionStep::$sortLabels,
                     'translation_domain' => 'CapcoAppBundle',
-                    'required' => true,
+                    'required' => true
                 ])
                 ->end();
         }
@@ -400,7 +367,7 @@ class StepAdmin extends CapcoAdmin
                     'by_reference' => false,
                     'required' => false,
                     'placeholder' => 'admin.fields.step.no_proposal_form',
-                    'choices_as_values' => true,
+                    'choices_as_values' => true
                 ])
                 ->end()
                 ->with('admin.fields.step.group_statuses')
@@ -410,7 +377,7 @@ class StepAdmin extends CapcoAdmin
                     [
                         'label' => 'admin.fields.step.statuses',
                         'by_reference' => false,
-                        'required' => false,
+                        'required' => false
                     ],
                     ['edit' => 'inline', 'inline' => 'table', 'sortable' => 'position']
                 )
@@ -425,7 +392,7 @@ class StepAdmin extends CapcoAdmin
                     'query' => $this->createQueryForQuestionnaires(),
                     'required' => false,
                     'placeholder' => 'admin.fields.step.no_questionnaire',
-                    'choices_as_values' => true,
+                    'choices_as_values' => true
                 ])
                 ->end();
         }
@@ -434,7 +401,7 @@ class StepAdmin extends CapcoAdmin
             ->add('metaDescription', null, [
                 'label' => 'projects.metadescription',
                 'required' => false,
-                'help' => 'admin.help.metadescription',
+                'help' => 'admin.help.metadescription'
             ])
             ->add('customCode', null, [
                 'label' => 'admin.customcode',
@@ -442,8 +409,8 @@ class StepAdmin extends CapcoAdmin
                 'help' => 'admin.help.customcode',
                 'attr' => [
                     'rows' => 10,
-                    'placeholder' => '<script type="text/javascript"> </script>',
-                ],
+                    'placeholder' => '<script type="text/javascript"> </script>'
+                ]
             ])
             ->end();
     }

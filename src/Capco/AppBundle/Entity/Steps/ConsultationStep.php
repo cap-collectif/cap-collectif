@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationStepRepository")
@@ -21,12 +20,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
      * @ORM\Column(name="opinion_count", type="integer")
      */
     private $opinionCount = 0;
-
-    /**
-     * @ORM\Column(name="opinion_count_shown_by_section", type="integer")
-     * @Assert\Range(max=20,min=1)
-     */
-    private $opinionCountShownBySection = 5;
 
     /**
      * @ORM\Column(name="trashed_opinion_count", type="integer")
@@ -83,55 +76,11 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
      */
     private $consultation;
 
-    /**
-     * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
-     */
-    private $titleHelpText;
-
-    /**
-     * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
-     */
-    private $descriptionHelpText;
-
-    /**
-     * @ORM\Column(name="moderating_on_create", type="boolean", nullable=false, options={"default" = false})
-     */
-    private $moderatingOnCreate = false;
-
-    /**
-     * @ORM\Column(name="moderating_on_update", type="boolean", nullable=false, options={"default" = false})
-     */
-    private $moderatingOnUpdate = false;
-
     public function __construct()
     {
         parent::__construct();
         $this->requirements = new ArrayCollection();
         $this->opinions = new ArrayCollection();
-    }
-
-    public function isModeratingOnCreate(): bool
-    {
-        return $this->moderatingOnCreate;
-    }
-
-    public function setModeratingOnCreate(bool $value): self
-    {
-        $this->moderatingOnCreate = $value;
-
-        return $this;
-    }
-
-    public function isModeratingOnUpdate(): bool
-    {
-        return $this->moderatingOnUpdate;
-    }
-
-    public function setModeratingOnUpdate(bool $value): self
-    {
-        $this->moderatingOnUpdate = $value;
-
-        return $this;
     }
 
     public function getOpinionCount(): int
@@ -142,18 +91,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     public function setOpinionCount(int $opinionCount): self
     {
         $this->opinionCount = $opinionCount;
-
-        return $this;
-    }
-
-    public function getOpinionCountShownBySection(): int
-    {
-        return $this->opinionCountShownBySection;
-    }
-
-    public function setOpinionCountShownBySection(int $opinionCountShownBySection): self
-    {
-        $this->opinionCountShownBySection = $opinionCountShownBySection;
 
         return $this;
     }
@@ -425,21 +362,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
         return true;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getTitleHelpText()
-    {
-        return $this->titleHelpText;
-    }
-
-    public function setTitleHelpText(string $titleHelpText = null): self
-    {
-        $this->titleHelpText = $titleHelpText;
-
-        return $this;
-    }
-
     public function isVotable(): bool
     {
         /** @var Consultation $consultation */
@@ -456,20 +378,5 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
         }
 
         return false;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getDescriptionHelpText()
-    {
-        return $this->descriptionHelpText;
-    }
-
-    public function setDescriptionHelpText(string $descriptionHelpText = null): self
-    {
-        $this->descriptionHelpText = $descriptionHelpText;
-
-        return $this;
     }
 }

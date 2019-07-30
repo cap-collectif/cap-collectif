@@ -1,59 +1,14 @@
-{% extends "@CapcoMail/standardLayout.html.twig" %}
-
-{% block html_title %}
-    {{ 'acknowledgment-of-receipt'|trans({},'CapcoAppBundle') }}
+{% block body_text %}
+    {% autoescape false %}
+        <p>
+            {{ 'email.alert_expire_user.hello'|trans({'%username%' : user.username}, 'CapcoAppBundle') }}
+        </p>
+        <p>
+            {{ 'user.register.confirmation_message.please_validate'|trans({}, 'CapcoAppBundle') }}
+        <p>
+            <a href="{{ confirmationUrl }}"><strong>{{ 'user.register.confirmation_message.validate'|trans({}, 'CapcoAppBundle') }}</strong></a>
+        </p>
+        <hr>
+    {% endautoescape %}
 {% endblock %}
-
-{% set logo = app_logo_url() %}
-
-{% block core_mail %}
-    <div style="height: 35px; margin-bottom: 10px;">
-        {% if logo is not null %}
-            <img style="float: left;" src="{{ logo }}" />
-        {% else %}
-            <img style="width: 30px; height: 30px; float: left;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" />
-        {% endif %}
-        <h2 style="color: #666; float: left; margin: 12px 8px;">
-            {{ siteName }}
-        </h2>
-    </div>
-    <tr>
-        <td class="resp-full-td" valign="top" style="margin:0 20px;background-color: #FFFFFF;border-radius: 7px; padding: 20px; border: 1px solid #ccc; border-top-left-radius: 0px; border-top-right-radius: 0px;">
-            <div>
-                <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
-                    <p>
-                        {{ 'confirm-your-email-address-to-finalize-its-change'|trans({
-                            '{email}': recipientEmail
-                        }, 'CapcoAppBundle') | raw }}
-                    </p>
-                    <p style="font-size: 16px">
-                        {{ 'until-you-confirm'|trans({}, 'CapcoAppBundle') | raw }}
-                    </p>
-
-                    <div style="color:#FFFFFF; margin-top: 30px; margin-bottom: 10px; font-family:helvetica, arial, sans-serif; font-size: 13px;">
-                        <a style="background-color: #0d71bb; padding: 10px; border-radius: 5px; color:#FFFFFF; margin-right: 8px;" href="{{ confirmationUrl }}">
-                            {{ 'global.confirm'|trans({}, 'CapcoAppBundle') | raw }}
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </td>
-    </tr>
-{% endblock %}
-
-{% block footer_mail %}
-    <p style="font-size:13px; font-family:helvetica, arial, sans-serif; color:#999999; margin-top: 10px;">
-        {{ 'email.notification.footer.mail-send-by'|trans({
-            '{siteName}': siteName,
-            '{siteUrl}': baseUrl,
-        }, 'CapcoAppBundle') | raw }}
-        <br><br>
-        {{ 'footer-promotion'|trans({}, 'CapcoAppBundle') | raw }}
-        <br><br>
-        {{ 'email.propulsed.by.capco'|trans({
-            '{logoUrl}': baseUrl ~ asset('capco-logo-mail.png'),
-        }, 'CapcoAppBundle') | raw }}
-    </p>
-
-{% endblock %}
+{% block body_html %}{% endblock %}

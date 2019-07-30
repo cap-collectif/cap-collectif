@@ -11,9 +11,11 @@ import type { Dispatch } from '../../../types';
 import type { OpinionCreateForm_section } from '~relay/OpinionCreateForm_section.graphql';
 import type { OpinionCreateForm_consultationStep } from '~relay/OpinionCreateForm_consultationStep.graphql';
 import RequirementsForm from '../../Requirements/RequirementsForm';
+import type { OpinionCreateForm_consultation } from '~relay/OpinionCreateForm_consultation.graphql';
 
 type RelayProps = {|
   section: OpinionCreateForm_section,
+  consultation: OpinionCreateForm_consultation,
   consultationStep: OpinionCreateForm_consultationStep,
 |};
 type FormValues = Object;
@@ -90,7 +92,7 @@ export class OpinionCreateForm extends React.Component<Props> {
   }
 
   render() {
-    const { section, consultationStep, handleSubmit, error, dispatch } = this.props;
+    const { section, consultation, consultationStep, handleSubmit, error, dispatch } = this.props;
     if (!section) return null;
     return (
       <form id="opinion-create-form" onSubmit={handleSubmit}>
@@ -120,7 +122,7 @@ export class OpinionCreateForm extends React.Component<Props> {
           type="text"
           id="opinion_title"
           component={renderInput}
-          help={consultationStep.titleHelpText}
+          help={consultation.titleHelpText}
           autoFocus
           label={<FormattedMessage id="opinion.title" />}
         />
@@ -129,7 +131,7 @@ export class OpinionCreateForm extends React.Component<Props> {
           type="editor"
           id="opinion_body"
           component={renderInput}
-          help={consultationStep.descriptionHelpText}
+          help={consultation.descriptionHelpText}
           label={<FormattedMessage id="opinion.body" />}
         />
         {section.appendixTypes &&
@@ -168,14 +170,17 @@ export default createFragmentContainer(container, {
       }
     }
   `,
+  consultation: graphql`
+    fragment OpinionCreateForm_consultation on Consultation {
+      titleHelpText
+      descriptionHelpText
+    }
+  `,
   consultationStep: graphql`
     fragment OpinionCreateForm_consultationStep on ConsultationStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
-
       id
-      titleHelpText
-      descriptionHelpText
       project {
         _id
       }

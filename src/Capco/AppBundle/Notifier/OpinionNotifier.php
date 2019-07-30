@@ -37,7 +37,7 @@ class OpinionNotifier extends BaseNotifier
     {
         $step = $opinion->getStep();
 
-        if ($step->isModeratingOnCreate()) {
+        if ($step->getConsultation() && $step->getConsultation()->isModeratingOnCreate()) {
             $this->mailer->sendMessage(
                 NewOpinionModeratorMessage::create(
                     $opinion,
@@ -55,7 +55,7 @@ class OpinionNotifier extends BaseNotifier
     {
         $step = $opinion->getStep();
 
-        if ($step->isModeratingOnUpdate()) {
+        if ($step->getConsultation() && $step->getConsultation()->isModeratingOnUpdate()) {
             $this->mailer->sendMessage(
                 UpdateOpinionModeratorMessage::create(
                     $opinion,
