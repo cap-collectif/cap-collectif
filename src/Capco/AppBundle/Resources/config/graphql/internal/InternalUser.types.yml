@@ -152,6 +152,16 @@ InternalUser:
         argsBuilder: 'Relay::Connection'
         description: 'A list of replies associated to the user.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRepliesResolver", [value])'
+      comments:
+        type: 'CommentConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Get all comments of the user.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentsResolver", [getUser(), value, args])'
+        args:
+          first:
+            type: 'Int'
+            description: 'Returns the first n elements from the list.'
+            defaultValue: 100
       postCommentsCount:
         type: 'Int!'
       eventCommentsCount:

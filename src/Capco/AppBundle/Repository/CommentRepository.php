@@ -97,12 +97,13 @@ class CommentRepository extends EntityRepository
     /**
      * Get comments by user.
      *
-     * @param user
-     * @param mixed $user
+     * @param mixed    $user
+     * @param int|null $limit
+     * @param int|null $offset
      *
      * @return mixed
      */
-    public function getByUser($user)
+    public function getByUser($user, int $limit = null, int $offset = null)
     {
         $qb = $this->getPublishedQueryBuilder()
             ->addSelect('a', 'm')
@@ -110,7 +111,9 @@ class CommentRepository extends EntityRepository
             ->leftJoin('a.media', 'm')
             ->andWhere('c.Author = :user')
             ->setParameter('user', $user)
-            ->orderBy('c.updatedAt', 'ASC');
+            ->orderBy('c.updatedAt', 'ASC')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
 
         return $qb->getQuery()->execute();
     }
