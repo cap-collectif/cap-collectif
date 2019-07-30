@@ -19,8 +19,6 @@ Capco\AppBundle\Entity\Consultation:
     id: typePJL
     title: Projet de loi
     step: '@cstep5'
-    moderatingOnCreate: true
-    moderatingOnUpdate: true
   typeEndless:
     id: typeEndless
     title: 'Projet sans fin'

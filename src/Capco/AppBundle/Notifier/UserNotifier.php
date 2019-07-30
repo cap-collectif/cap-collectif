@@ -50,7 +50,9 @@ final class UserNotifier extends BaseNotifier
             UserNewEmailConfirmationMessage::create(
                 $user,
                 $this->userResolver->resolveConfirmNewEmailUrl($user),
-                $user->getNewEmailToConfirm()
+                $user->getNewEmailToConfirm(),
+                $this->siteParams->getValue('global.site.fullname'),
+                $this->baseUrl
             )
         );
 
@@ -71,7 +73,9 @@ final class UserNotifier extends BaseNotifier
             UserNewEmailConfirmationMessage::create(
                 $user,
                 $this->userResolver->resolveRegistrationConfirmationUrl($user),
-                $user->getNewEmailToConfirm()
+                $user->getNewEmailToConfirm(),
+                $this->siteParams->getValue('global.site.fullname'),
+                $this->baseUrl
             )
         );
     }

@@ -22,20 +22,28 @@
             <div>
                 <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
                     <p>
-                        {{ 'confirm-your-email-address-to-finalize-its-change'|trans({
-                            '{email}': recipientEmail
+                        {{ 'email.hello'|trans({
+                            '{username}': username,
                         }, 'CapcoAppBundle') | raw }}
                     </p>
-                    <p style="font-size: 16px">
-                        {{ 'until-you-confirm'|trans({}, 'CapcoAppBundle') | raw }}
+                    <p>
+                        {{ 'email.registration.thank'|trans({
+                            '{sitename}': siteName,
+                        }, 'CapcoAppBundle') | raw }}
+
                     </p>
-
-                    <div style="color:#FFFFFF; margin-top: 30px; margin-bottom: 10px; font-family:helvetica, arial, sans-serif; font-size: 13px;">
-                        <a style="background-color: #0d71bb; padding: 10px; border-radius: 5px; color:#FFFFFF; margin-right: 8px;" href="{{ confirmationUrl }}">
-                            {{ 'global.confirm'|trans({}, 'CapcoAppBundle') | raw }}
+                    <p>
+                        {{ 'email.registration.confirm.text'|trans({
+                        }, 'CapcoAppBundle') | raw }}
+                    </p>
+                    <p>
+                        <a href="{{ confirmationUrl }}" target="_blank" rel="noopener">
+                            {{ 'email.registration.confirm.button'|trans({
+                            }, 'CapcoAppBundle') | raw }}
                         </a>
-                    </div>
-
+                    </p>
+                    <p>{{ 'email.registration.participation'|trans({
+                        }, 'CapcoAppBundle') | raw }}</p>
                 </div>
             </div>
         </td>

@@ -11,7 +11,6 @@ describe('<OpinionCreateModal />', () => {
     show: true,
     consultation: {
       $refType,
-      $fragmentRefs,
       step: {
         $fragmentRefs,
       },

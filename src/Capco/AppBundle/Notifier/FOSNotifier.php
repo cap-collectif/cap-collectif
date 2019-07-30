@@ -10,12 +10,18 @@ use Capco\AppBundle\Mailer\Message\User\UserResettingPasswordMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use FOS\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class FOSNotifier extends BaseNotifier implements MailerInterface
 {
     private $userUrlResolver;
+    /**
+     * @var RouterInterface
+     */
+    private $router;
 
     public function __construct(
+        RouterInterface $router,
         MailerService $mailer,
         Resolver $siteParams,
         UserResolver $userResolver,
@@ -23,6 +29,7 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
     ) {
         parent::__construct($mailer, $siteParams, $userResolver);
         $this->userUrlResolver = $userUrlResolver;
+        $this->router = $router;
     }
 
     /**
@@ -39,7 +46,8 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
                 $this->userResolver->resolveRegistrationConfirmationUrl($user),
                 $this->siteParams->getValue('global.site.fullname'),
                 'Cap Collectif',
-                $this->userUrlResolver->__invoke($user)
+                $this->userUrlResolver->__invoke($user),
+                $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL)
             )
         );
     }

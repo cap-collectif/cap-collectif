@@ -76,7 +76,7 @@ export class OpinionEditForm extends React.Component<Props> {
           type="text"
           id="opinion_title"
           component={renderInput}
-          help={step.consultation && step.consultation.titleHelpText}
+          help={step.titleHelpText}
           autoFocus
           label={<FormattedMessage id="opinion.title" />}
         />
@@ -85,7 +85,7 @@ export class OpinionEditForm extends React.Component<Props> {
           type="editor"
           id="opinion_body"
           component={renderInput}
-          help={step.consultation && step.consultation.descriptionHelpText}
+          help={step.descriptionHelpText}
           autoFocus
           label={<FormattedMessage id="opinion.body" />}
         />
@@ -143,10 +143,8 @@ export default createFragmentContainer(container, {
         body
       }
       step {
-        consultation {
-          titleHelpText
-          descriptionHelpText
-        }
+        titleHelpText
+        descriptionHelpText
       }
       id
       title

@@ -5,15 +5,15 @@
     {% if admin.subject.id is null %}
         <script type="text/javascript">
             $(document).ready( function() {
-                $("#field_actions_{{ admin.uniqid }}_opinionTypes .btn-success").on('click', function(e) {
-                    var name = $("#{{ admin.uniqid }}_title").val();
-                    if (name !== null && name !== '') {
-                        var url = $(this).attr('href') + '&consultation_name=' + name;
-                        $(this).attr('href', url);
-                        $("#{{ admin.uniqid }}_title").val('');
-                    }
-                    return true;
-                });
+               $("#field_actions_{{ admin.uniqid }}_opinionTypes .btn-success").on('click', function(e) {
+                   var name = $("#{{ admin.uniqid }}_title").val();
+                   if (name !== null && name !== '') {
+                       var url = $(this).attr('href') + '&consultation_name=' + name;
+                       $(this).attr('href', url);
+                       $("#{{ admin.uniqid }}_title").val('');
+                   }
+                   return true;
+               });
             });
         </script>
     {% endif %}

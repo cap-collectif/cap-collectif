@@ -23,9 +23,15 @@ InternalConsultationStep:
         type: 'String!'
         description: 'The type of step. Returns "consultation".'
         resolve: 'consultation'
+      opinionCountShownBySection:
+        type: 'Int'
       project:
         type: 'InternalProject!'
         description: 'The project'
+      titleHelpText:
+        type: 'String'
+      descriptionHelpText:
+        type: 'String'
       contribuable:
         type: 'Boolean!'
         description: 'Contributions are allowed right now.'
