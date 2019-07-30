@@ -3,10 +3,12 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
 
@@ -80,15 +82,37 @@ class ConsultationAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->with('admin.fields.step.group_general')
-            ->add('title', null, [
-                'label' => 'admin.fields.consultation.title'
-            ])
-            ->end();
+        $formMapper->with('admin.fields.step.group_general')->add('title', null, [
+            'label' => 'admin.fields.consultation.title'
+        ]);
         if ($this->getSubject()->getId()) {
             $formMapper
-                ->with('admin.fields.proposal_form.map')
+                ->add('description', CKEditorType::class, [
+                    'label' => 'proposal.description',
+                    'config_name' => 'admin_editor',
+                    'required' => false
+                ])
+                ->add(
+                    'illustration',
+                    ModelListType::class,
+                    [
+                        'required' => false,
+                        'label' => 'illustration',
+                        'help' => 'help-text-description-step'
+                    ],
+                    [
+                        'link_parameters' => [
+                            'context' => 'default',
+                            'hide_context' => true,
+                            'provider' => 'sonata.media.provider.image'
+                        ]
+                    ]
+                );
+        }
+        $formMapper->end();
+        if ($this->getSubject()->getId()) {
+            $formMapper
+                ->with('plan-consultation')
                 ->add('opinionCountShownBySection', null, [
                     'label' => 'admin.fields.step.opinionCountShownBySection',
                     'required' => true

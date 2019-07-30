@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -38,6 +39,17 @@ class Consultation
      * @Assert\NotNull()
      */
     private $title;
+
+    /**
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $illustration;
 
     /**
      * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
@@ -99,6 +111,56 @@ class Consultation
     private $opinions;
 
     /**
+     * @ORM\Column(name="opinion_count", type="integer")
+     */
+    private $opinionCount = 0;
+
+    /**
+     * @ORM\Column(name="trashed_opinion_count", type="integer")
+     */
+    private $trashedOpinionCount = 0;
+
+    /**
+     * @ORM\Column(name="opinion_versions_count", type="integer")
+     */
+    private $opinionVersionsCount = 0;
+
+    /**
+     * @ORM\Column(name="trashed_opinion_versions_count", type="integer")
+     */
+    private $trashedOpinionVersionsCount = 0;
+
+    /**
+     * @ORM\Column(name="argument_count", type="integer")
+     */
+    private $argumentCount = 0;
+
+    /**
+     * @ORM\Column(name="trashed_argument_count", type="integer")
+     */
+    private $trashedArgumentCount = 0;
+
+    /**
+     * @ORM\Column(name="sources_count", type="integer")
+     */
+    private $sourcesCount = 0;
+
+    /**
+     * @ORM\Column(name="trashed_sources_count", type="integer")
+     */
+    private $trashedSourceCount = 0;
+
+    /**
+     * @ORM\Column(name="votes_count", type="integer")
+     */
+    private $votesCount = 0;
+
+    /**
+     * @ORM\Column(name="contributors_count", type="integer")
+     */
+    private $contributorsCount = 0;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -139,6 +201,30 @@ class Consultation
         if (!$this->opinions->contains($opinion)) {
             $this->opinions->removeElement($opinion);
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description = null): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getIllustration(): ?Media
+    {
+        return $this->illustration;
+    }
+
+    public function setIllustration(?Media $illustration = null): self
+    {
+        $this->illustration = $illustration;
 
         return $this;
     }
@@ -326,5 +412,126 @@ class Consultation
         }
 
         return $roots;
+    }
+
+    public function getOpinionCount(): int
+    {
+        return $this->opinionCount;
+    }
+
+    public function setOpinionCount(int $opinionCount): self
+    {
+        $this->opinionCount = $opinionCount;
+
+        return $this;
+    }
+
+    public function getTrashedOpinionCount(): int
+    {
+        return $this->trashedOpinionCount;
+    }
+
+    public function setTrashedOpinionCount(int $trashedOpinionCount): self
+    {
+        $this->trashedOpinionCount = $trashedOpinionCount;
+
+        return $this;
+    }
+
+    public function getOpinionVersionsCount(): int
+    {
+        return $this->opinionVersionsCount;
+    }
+
+    public function setOpinionVersionsCount(int $opinionVersionsCount): self
+    {
+        $this->opinionVersionsCount = $opinionVersionsCount;
+    }
+
+    public function getTrashedOpinionVersionsCount(): int
+    {
+        return $this->trashedOpinionVersionsCount;
+    }
+
+    public function setTrashedOpinionVersionsCount(int $trashedOpinionVersionsCount): self
+    {
+        $this->trashedOpinionVersionsCount = $trashedOpinionVersionsCount;
+
+        return $this;
+    }
+
+    public function getArgumentCount(): int
+    {
+        return $this->argumentCount;
+    }
+
+    public function setArgumentCount(int $argumentCount): self
+    {
+        $this->argumentCount = $argumentCount;
+
+        return $this;
+    }
+
+    public function getTrashedArgumentCount(): int
+    {
+        return $this->trashedArgumentCount;
+    }
+
+    public function setTrashedArgumentCount(int $trashedArgumentCount): self
+    {
+        $this->trashedArgumentCount = $trashedArgumentCount;
+
+        return $this;
+    }
+
+    public function getSourcesCount(): int
+    {
+        return $this->sourcesCount;
+    }
+
+    public function setSourcesCount(int $sourcesCount)
+    {
+        $this->sourcesCount = $sourcesCount;
+    }
+
+    public function getTrashedSourceCount(): int
+    {
+        return $this->trashedSourceCount;
+    }
+
+    public function setTrashedSourceCount(int $trashedSourceCount)
+    {
+        $this->trashedSourceCount = $trashedSourceCount;
+    }
+
+    public function setVotesCount(int $votesCount): self
+    {
+        $this->votesCount = $votesCount;
+
+        return $this;
+    }
+
+    public function getContributorsCount(): int
+    {
+        return $this->contributorsCount;
+    }
+
+    public function setContributorsCount(int $contributorsCount): self
+    {
+        $this->contributorsCount = $contributorsCount;
+
+        return $this;
+    }
+
+    public function getContributionsCount(): int
+    {
+        return $this->opinionCount +
+            $this->trashedOpinionCount +
+            $this->argumentCount +
+            $this->trashedArgumentCount +
+            $this->opinionVersionsCount +
+            $this->trashedOpinionVersionsCount +
+            $this->sourcesCount +
+            $this->trashedSourceCount;
     }
 }
