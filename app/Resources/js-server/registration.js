@@ -17,7 +17,7 @@ import ProjectStatsPageApp from '../js/startup/ProjectStatsPageApp';
 import ProposalVoteBasketWidgetApp from '../js/startup/ProposalVoteBasketWidgetApp';
 import AlertBoxApp from '../js/startup/AlertBoxApp';
 import ConsultationPageApp from '../js/startup/ConsultationPageApp';
-import ProposalListApp from '../js/startup/ProposalListApp';
+import UserProposalsApp from '../js/startup/UserProposalsApp';
 import ProposalsUserVotesPageApp from '../js/startup/ProposalsUserVotesPageApp';
 import ShareButtonDropdownApp from '../js/startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from '../js/startup/ProposalCreateFusionButtonApp';
@@ -90,7 +90,7 @@ ReactOnRails.register({
   ProposalVoteBasketWidgetApp,
   AlertBoxApp,
   ConsultationPageApp,
-  ProposalListApp,
+  UserProposalsApp,
   ProposalsUserVotesPageApp,
   AccountProfileApp,
   ShareButtonDropdownApp,

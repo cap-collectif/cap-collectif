@@ -77,7 +77,7 @@
         <section class="section--custom">
             <div class="container">
                 <h2>{{ 'user.profile.show.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
-                {{ react_render_component('ProposalListApp', { 'props': { 'authorId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
+                {{ react_render_component('UserProposalsApp', { 'props': { 'authorId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
             </div>
         </section>
     {% endif %}
