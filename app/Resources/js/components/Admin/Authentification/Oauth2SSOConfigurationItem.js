@@ -1,9 +1,10 @@
 // @flow
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 
+import DeleteModal from '../../Modal/DeleteModal';
 import Oauth2SSOConfigurationModal from './Oauth2SSOConfigurationModal';
 import DeleteOauth2SSOConfigurationMutation from '../../../mutations/DeleteOauth2SSOConfigurationMutation';
 import type { Oauth2SSOConfigurationItem_configuration } from '~relay/Oauth2SSOConfigurationItem_configuration.graphql';
@@ -14,25 +15,33 @@ type RelayProps = {|
 
 type Props = {|
   ...RelayProps,
-  intl: IntlShape,
 |};
 
 type State = {|
-  showModal: boolean,
+  showModalUpdate: boolean,
+  showModalDelete: boolean,
 |};
+
+const onDelete = (configurationID: string) =>
+  DeleteOauth2SSOConfigurationMutation.commit({ input: { id: configurationID } });
 
 export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
   state = {
-    showModal: false,
+    showModalUpdate: false,
+    showModalDelete: false,
   };
 
-  handleClose = () => {
-    this.setState({ showModal: false });
+  handleCloseUpdate = () => {
+    this.setState({ showModalUpdate: false });
+  };
+
+  handleCloseDelete = () => {
+    this.setState({ showModalDelete: false });
   };
 
   render() {
-    const { configuration, intl } = this.props;
-    const { showModal } = this.state;
+    const { configuration } = this.props;
+    const { showModalUpdate, showModalDelete } = this.state;
 
     return (
       <>
@@ -44,7 +53,7 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
             onClick={() => {
               this.setState((prevState: State) => ({
                 ...prevState,
-                showModal: !prevState.showModal,
+                showModalUpdate: !prevState.showModalUpdate,
               }));
             }}>
             <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
@@ -53,33 +62,35 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
             bsStyle="danger"
             className="btn-outline-danger"
             onClick={() => {
-              if (
-                // eslint-disable-next-line no-alert
-                window.confirm(
-                  intl.formatMessage({
-                    id: 'are-you-sure-you-want-to-delete-the-authentication-method',
-                  }),
-                )
-              ) {
-                DeleteOauth2SSOConfigurationMutation.commit({ input: { id: configuration.id } });
-              }
+              this.setState((prevState: State) => ({
+                ...prevState,
+                showModalDelete: !prevState.showModalDelete,
+              }));
             }}>
             <i className="fa fa-trash" />
           </Button>
         </ButtonToolbar>
         <Oauth2SSOConfigurationModal
-          show={showModal}
-          onClose={this.handleClose}
+          show={showModalUpdate}
+          onClose={this.handleCloseDelete}
           {...configuration}
+        />
+
+        <DeleteModal
+          closeDeleteModal={this.handleCloseDelete}
+          showDeleteModal={showModalDelete}
+          deleteElement={() => {
+            onDelete(configuration.id);
+          }}
+          deleteModalTitle="are-you-sure-you-want-to-delete-the-authentication-method"
+          deleteModalContent="group-admin-parameters-modal-delete-content"
         />
       </>
     );
   }
 }
 
-const container = injectIntl(Oauth2SSOConfigurationItem);
-
-export default createFragmentContainer(container, {
+export default createFragmentContainer(Oauth2SSOConfigurationItem, {
   configuration: graphql`
     fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
       id

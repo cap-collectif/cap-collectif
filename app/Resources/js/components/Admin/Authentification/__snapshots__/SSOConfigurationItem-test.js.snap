@@ -6,7 +6,7 @@ exports[`<SSOConfigurationItem /> renders correctly with Oauth2 configuration 1`
   className="d-flex justify-content-between align-items-center bg--default"
   listItem={false}
 >
-  <ForwardRef(Relay(InjectIntl(Oauth2SSOConfigurationItem)))
+  <ForwardRef(Relay(Oauth2SSOConfigurationItem))
     configuration={
       Object {
         "__typename": "Oauth2SSOConfiguration",

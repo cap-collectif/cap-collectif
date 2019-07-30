@@ -22,6 +22,12 @@ const commit = (
   commitMutation(environment, {
     mutation,
     variables,
+    configs: [
+      {
+        type: 'NODE_DELETE',
+        deletedIDFieldName: 'deletedSsoConfigurationId',
+      },
+    ],
   });
 
 export default { commit };

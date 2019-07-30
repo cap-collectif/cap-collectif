@@ -54,5 +54,12 @@ exports[`<Oauth2SSOConfigurationItem /> renders correctly 1`] = `
     show={false}
     userInfoUrl="https://localhost:8888/user"
   />
+  <Connect(DeleteModal)
+    closeDeleteModal={[Function]}
+    deleteElement={[Function]}
+    deleteModalContent="group-admin-parameters-modal-delete-content"
+    deleteModalTitle="are-you-sure-you-want-to-delete-the-authentication-method"
+    showDeleteModal={false}
+  />
 </Fragment>
 `;

@@ -2,12 +2,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import type { FormProps } from 'redux-form';
-import { Field, reduxForm } from 'redux-form';
 import { Button, Modal } from 'react-bootstrap';
-
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
+
 import component from '../../Form/Field';
+import AlertForm from '../../Alert/AlertForm';
 import CloseButton from '../../Form/CloseButton';
+import { isUrl } from '../../../services/Validator';
 import type { GlobalState, Uri, Uuid } from '../../../types';
 import AddOauth2SSOConfigurationMutation from '../../../mutations/AddOauth2SSOConfigurationMutation';
 import UpdateOauth2SSOConfigurationMutation from '../../../mutations/UpdateOauth2SSOConfigurationMutation';
@@ -36,7 +38,7 @@ type Props = {|
 
 const formName = 'oauth2-sso-configuration-form';
 
-const onSubmit = async (values: FormValues) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const {
     id,
     name,
@@ -48,6 +50,9 @@ const onSubmit = async (values: FormValues) => {
     logoutUrl,
     profileUrl,
   } = values;
+
+  const { onClose } = props;
+
   const input = {
     name,
     secret,
@@ -61,7 +66,18 @@ const onSubmit = async (values: FormValues) => {
   };
 
   if (id === undefined || id === null) {
-    return AddOauth2SSOConfigurationMutation.commit({ input });
+    return AddOauth2SSOConfigurationMutation.commit({ input })
+      .then(() => {
+        if (onClose) {
+          onClose();
+        }
+        window.location.reload();
+      })
+      .catch(() => {
+        throw new SubmissionError({
+          _error: 'global.error.server.form',
+        });
+      });
   }
 
   return UpdateOauth2SSOConfigurationMutation.commit({
@@ -69,7 +85,66 @@ const onSubmit = async (values: FormValues) => {
       id,
       ...input,
     },
-  });
+  })
+    .then(() => {
+      if (onClose) {
+        onClose();
+      }
+    })
+    .catch(() => {
+      throw new SubmissionError({
+        _error: 'global.error.server.form',
+      });
+    });
+};
+
+const validateUrl = (url: ?string): ?string => {
+  if (!url) {
+    return 'global.required';
+  }
+  if (!isUrl(url)) {
+    return 'source.constraints.link';
+  }
+  return null;
+};
+
+const validate = ({
+  name,
+  secret,
+  clientId,
+  logoutUrl,
+  profileUrl,
+  userInfoUrl,
+  authorizationUrl,
+  accessTokenUrl,
+}: FormValues) => {
+  const errors = {};
+
+  if (!name) {
+    errors.name = 'global.required';
+  } else if (name.length < 2) {
+    errors.name = 'two-characters-minimum-required';
+  }
+
+  if (!secret) {
+    errors.secret = 'global.required';
+  } else if (secret.length < 2) {
+    errors.secret = 'two-characters-minimum-required';
+  }
+
+  if (!clientId) {
+    errors.clientId = 'global.required';
+  } else if (clientId.length < 2) {
+    errors.clientId = 'two-characters-minimum-required';
+  }
+
+  errors.logoutUrl = validateUrl(logoutUrl);
+  errors.profileUrl = validateUrl(profileUrl);
+  errors.userInfoUrl = validateUrl(userInfoUrl);
+  errors.accessTokenUrl = validateUrl(accessTokenUrl);
+  errors.authorizationUrl = validateUrl(authorizationUrl);
+
+  return errors;
 };
 
 export class Oauth2SSOConfigurationModal extends React.Component<Props> {
@@ -95,6 +170,9 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
       handleSubmit,
       submitting,
       intl,
+      valid,
+      submitSucceeded,
+      submitFailed,
     } = this.props;
     return (
       <Modal show={show} onHide={onClose} aria-labelledby="oauth2-sso-modal-lg">
@@ -188,6 +266,13 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
             />
           </Modal.Body>
           <Modal.Footer>
+            <AlertForm
+              valid={valid}
+              invalid={invalid && !pristine}
+              submitSucceeded={submitSucceeded}
+              submitFailed={submitFailed}
+              submitting={submitting}
+            />
             <CloseButton onClose={onClose} />
             <Button
               type="submit"
@@ -210,6 +295,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
 });
 
 const form = reduxForm({
+  validate,
   onSubmit,
   enableReinitialize: true,
   form: formName,
