@@ -15,20 +15,12 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
         variables={{ authorId, isProfileView: true, isAuthenticated, stepId: '' }}
         environment={environment}
         query={graphql`
-          query ProposalListAppQuery(
-            $stepId: ID!
-            $authorId: ID!
-            $isProfileView: Boolean!
-            $isAuthenticated: Boolean!
-          ) {
-            proposalForms {
-              id
-              step {
-                title
-              }
-              proposals(first: 50, author: $authorId) {
-                ...ProposalList_proposals
-                totalCount
+          query ProposalListAppQuery($stepId: ID!, $authorId: ID!, $isAuthenticated: Boolean!) {
+            user: node(id: $authorId) {
+              ... on User {
+                proposals {
+                  ...ProposalList_proposals
+                }
               }
             }
             viewer @include(if: $isAuthenticated) {
@@ -36,30 +28,19 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
             }
           }
         `}
-        render={({ error, props }: { props: ?ProposalListAppQueryResponse } & ReadyState) => {
+        render={({ error, props }: { props: ?ProposalListAppQueryResponse, ...ReadyState }) => {
           if (error) {
             return graphqlError;
           }
           if (props) {
-            if (props.proposalForms) {
+            if (props.user && props.user.proposals) {
               return (
-                <div>
-                  {props.proposalForms
-                    .filter(p => p && p.proposals.totalCount > 0)
-                    .filter(Boolean)
-                    .map(proposalForm => (
-                      <div key={proposalForm.id}>
-                        {proposalForm.step ? <h3>{proposalForm.step.title}</h3> : null}
-                        {/* $FlowFixMe */}
-                        <ProposalList
-                          step={null}
-                          proposals={proposalForm.proposals}
-                          viewer={props.viewer || null}
-                          view="mosaic"
-                        />
-                      </div>
-                    ))}
-                </div>
+                <ProposalList
+                  step={null}
+                  proposals={props.user.proposals}
+                  viewer={props.viewer || null}
+                  view="mosaic"
+                />
               );
             }
             return graphqlError;

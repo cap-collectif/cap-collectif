@@ -670,7 +670,13 @@ class ProposalRepository extends EntityRepository
                                 ->expr()
                                 ->andX(
                                     $qb->expr()->isInstanceOf('s', ':collectStep'),
-                                    $qb->expr()->eq('s.private', 'false'),
+                                    $qb->expr()->eq('s.private', 'false')
+                                ),
+                            $qb
+                                ->expr()
+                                ->andX(
+                                    $qb->expr()->isInstanceOf('s', ':collectStep'),
+                                    $qb->expr()->eq('s.private', 'true'),
                                     $qb->expr()->isNotNull('ps.selectionStep')
                                 ),
                             $qb->expr()->eq(':viewer', 'pr_au.user')
@@ -700,10 +706,20 @@ class ProposalRepository extends EntityRepository
             ->andWhere(
                 $qb
                     ->expr()
-                    ->andX(
-                        $qb->expr()->eq('s.private', 'false'),
-                        $qb->expr()->isNotNull('ps.selectionStep'),
-                        $qb->expr()->isInstanceOf('s', ':collectStep')
+                    ->orX(
+                        $qb
+                            ->expr()
+                            ->andX(
+                                $qb->expr()->isInstanceOf('s', ':collectStep'),
+                                $qb->expr()->eq('s.private', 'false')
+                            ),
+                        $qb
+                            ->expr()
+                            ->andX(
+                                $qb->expr()->isInstanceOf('s', ':collectStep'),
+                                $qb->expr()->eq('s.private', 'true'),
+                                $qb->expr()->isNotNull('ps.selectionStep')
+                            )
                     )
             )
             ->setParameters([
