@@ -5,6 +5,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 
 import Oauth2SSOConfigurationModal from './Oauth2SSOConfigurationModal';
+import DeleteOauth2SSOConfigurationMutation from '../../../mutations/DeleteOauth2SSOConfigurationMutation';
 import type { Oauth2SSOConfigurationItem_configuration } from '~relay/Oauth2SSOConfigurationItem_configuration.graphql';
 
 type RelayProps = {|
@@ -60,7 +61,7 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
                   }),
                 )
               ) {
-                // remove mutation with configuration.id
+                DeleteOauth2SSOConfigurationMutation.commit({ input: { id: configuration.id } });
               }
             }}>
             <i className="fa fa-trash" />

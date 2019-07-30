@@ -9,9 +9,11 @@ import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import component from '../../Form/Field';
 import CloseButton from '../../Form/CloseButton';
 import type { GlobalState, Uri, Uuid } from '../../../types';
+import AddOauth2SSOConfigurationMutation from '../../../mutations/AddOauth2SSOConfigurationMutation';
+import UpdateOauth2SSOConfigurationMutation from '../../../mutations/UpdateOauth2SSOConfigurationMutation';
 
 type FormValues = {|
-  id: ?Uuid,
+  id?: ?Uuid,
   name: ?string,
   clientId: ?string,
   secret: ?string,
@@ -35,27 +37,52 @@ type Props = {|
 const formName = 'oauth2-sso-configuration-form';
 
 const onSubmit = async (values: FormValues) => {
-  const { id } = values;
+  const {
+    id,
+    name,
+    clientId,
+    secret,
+    authorizationUrl,
+    accessTokenUrl,
+    userInfoUrl,
+    logoutUrl,
+    profileUrl,
+  } = values;
+  const input = {
+    name,
+    secret,
+    enabled: true,
+    clientId,
+    logoutUrl,
+    profileUrl,
+    userInfoUrl,
+    accessTokenUrl,
+    authorizationUrl,
+  };
 
-  if (id === null) {
-    // return create
-//    return UpdateContactPageMutation.commit({ input });
+  if (id === undefined || id === null) {
+    return AddOauth2SSOConfigurationMutation.commit({ input });
   }
 
-  // return update
+  return UpdateOauth2SSOConfigurationMutation.commit({
+    input: {
+      id,
+      ...input,
+    },
+  });
 };
 
 export class Oauth2SSOConfigurationModal extends React.Component<Props> {
   static defaultProps = {
     id: null,
     name: null,
-    clientId: null,
     secret: null,
-    authorizationUrl: null,
-    accessTokenUrl: null,
-    userInfoUrl: null,
+    clientId: null,
     logoutUrl: null,
     profileUrl: null,
+    userInfoUrl: null,
+    accessTokenUrl: null,
+    authorizationUrl: null,
   };
 
   render() {
