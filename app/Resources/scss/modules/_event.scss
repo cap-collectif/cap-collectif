@@ -5,7 +5,7 @@
     overflow: hidden;
     text-align: center;
     border-radius: 4px;
-    max-height: 175px;
+    min-height: 125px;
 
     .event__title {
         margin-top: 0;
@@ -21,8 +21,7 @@
     .picture_container{
         padding: 0;
         width: auto;
-        min-width: 150px;
-        max-width: 300px;
+        width: 25%;
         background-position: 50% 50%;
         background-repeat: no-repeat;
         background-size: cover;
@@ -38,52 +37,54 @@
 
         [src$='svg'] {
             object-fit: unset;
-            width: 50%;
+            width: 40%;
             opacity: 0.5;
         }
     }
 
     .event__infos{
-        width: 100%;
+        width: 70%;
         height: 100%;
-        padding: 10px 0 10px 0;
-        margin-left: 10px;
-    }
+        padding: 10px 10px 10px 20px;
 
-    .month {
-        @include border-bottom-radius(4px);
-        border-right: 1px solid $border-color;
-        border-left: 1px solid $border-color;
-        border-bottom: 1px solid $border-color;
-        color: $primary-color;
-        font-size: 16px;
-        padding-bottom: 10px;
+        .month {
+            @include border-bottom-radius(4px);
+            border-right: 1px solid $border-color;
+            border-left: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
+            color: $primary-color;
+            font-size: 16px;
+            padding-bottom: 10px;
+        }
+    
+        .day {
+            @include border-top-radius(4px);
+            background-color: $white;
+            font-size: 22px;
+            border-right: 1px solid $border-color;
+            border-left: 1px solid $border-color;
+            border-top: 1px solid $border-color;
+            padding-top: 10px;
+        }
+    
+        .event__date{
+    
+    
+            .month-calendar {
+                font-size: 14px;
+            }
+        
+            .day-calendar {
+                font-size: 20px;
+            }
+        }
+    
+        .event__body {
+            background-color: $white;
+            text-align: left;
+            margin-left: 20px;
+        }
     }
-
-    .day {
-        @include border-top-radius(4px);
-        background-color: $white;
-        font-size: 22px;
-        border-right: 1px solid $border-color;
-        border-left: 1px solid $border-color;
-        border-top: 1px solid $border-color;
-        padding-top: 10px;
-    }
-
-    .month-calendar {
-        font-size: 14px;
-    }
-
-    .day-calendar {
-        font-size: 20px;
-    }
-
-    .event__body {
-        background-color: $white;
-        text-align: left;
-        margin-left: 10px;
-    }
-
 }
 
 .event__meta {
@@ -130,11 +131,15 @@
 
 @media (max-width: 380px) {
     .event{
-        font-size: 0.7em;
+        font-size: 1.3rem;
 
         .event__infos{
             height: 100%;
             padding: 10px 0 10px 0;
+
+            .event__title{
+                font-size: 1.5rem;
+            }
         }
 
         .event__body{
@@ -144,14 +149,13 @@
         .picture_container{
             text-align: center;
             margin: 10px;
-            min-width: 45px;
-            max-width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 2px;
         }
 
         .excerpt{
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
     }
 }

@@ -47,7 +47,7 @@ class EventCard extends React.Component<Props> {
         )}
 
         <div className="d-flex event__infos">
-          <div className="col-md-2 col-sm-2 hidden-xs">
+          <div className="event__date hidden-xs">
             <DateIcon startAt={event.date.start} />
           </div>
 

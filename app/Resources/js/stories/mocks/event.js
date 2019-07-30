@@ -12,7 +12,7 @@ export const event = {
     end: '2032-06-15 00:00:00',
   },
   location: {
-    place: 'Tour Eiffel',
+    place: 'Ecole nationale des beaux arts aka adresse super longue',
     zip: '75007',
     city: 'Paris',
   },
