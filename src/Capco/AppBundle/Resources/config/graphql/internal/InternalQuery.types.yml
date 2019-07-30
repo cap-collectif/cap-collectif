@@ -88,9 +88,6 @@ InternalQuery:
       events:
         type: 'InternalEventConnection!'
         args:
-          orderBy:
-            type: 'EventsOrder'
-            description: 'Ordering options for events returning from the connection.'
           # TODO
           # rename to query.
           search:

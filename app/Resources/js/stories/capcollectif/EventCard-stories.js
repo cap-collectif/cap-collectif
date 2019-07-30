@@ -16,7 +16,7 @@ const calendar = {
 };
 
 type Props = {|
-  +isHighlighted?: boolean,
+  +isHighlighted: boolean,
   hasAPicture?: boolean,
   event: Object,
 |};
@@ -47,7 +47,7 @@ class EventCard extends React.Component<Props> {
         )}
 
         <div className="d-flex event__infos">
-          <div className="event__date hidden-xs">
+          <div className="col-md-2 col-sm-2 hidden-xs">
             <DateIcon startAt={event.date.start} />
           </div>
 
@@ -98,5 +98,3 @@ storiesOf('Cap Collectif|EventCard', module)
   .add('default', () => <EventCard hasAPicture event={event} />)
   .add('is highlighted', () => <EventCard isHighlighted hasAPicture event={event} />)
   .add('without picture', () => <EventCard event={event} />);
-
-export default EventCard;

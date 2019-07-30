@@ -55,7 +55,7 @@ export class EventPreview extends React.Component<Props, State> {
         </div>
 
         <div className="d-flex event__infos">
-          <div className="event__date hidden-xs">
+          <div className="col-md-2 col-sm-2 hidden-xs">
             <DateIcon startAt={event.timeRange.startAt} />
           </div>
 

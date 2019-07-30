@@ -85,7 +85,6 @@ import MapAdminPageApp from './startup/MapAdminPageApp';
 import SSOSwitchUserApp from './startup/SSOSwitchUserApp';
 import LastProposalsApp from './startup/LastProposalsApp';
 import AuthentificationAdminApp from './startup/AuthentificationAdminApp';
-import HomePageEventsApp from './startup/HomePageEventsApp';
 import appStore from './stores/AppStore';
 
 if (process.env.NODE_ENV === 'development') {
@@ -137,7 +136,6 @@ ReactOnRails.register({
   ChooseAUsernameApp,
   ParisUserNotValidApp,
   ShieldApp,
-  HomePageEventsApp,
   ProjectListPageApp,
   ProposalFormCreateButtonApp,
   ProjectsListApp,
