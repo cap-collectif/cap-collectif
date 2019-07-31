@@ -263,7 +263,7 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countByOpinionType(string $opinionTypeId, ?string $author): int
+    public function countByOpinionType(string $opinionTypeId, ?string $author = null): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o)')
