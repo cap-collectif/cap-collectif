@@ -68,7 +68,7 @@ export class UserProposalsPaginated extends Component<Props, State> {
           </ul>
         </Row>
         {relay.hasMore() && (
-          <div style={{ textAlign: 'center' }}>
+          <div className="text-center">
             {loading ? (
               <Loader />
             ) : (
