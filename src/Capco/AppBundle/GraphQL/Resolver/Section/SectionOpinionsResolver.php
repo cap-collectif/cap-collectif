@@ -2,12 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Section;
 
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\OpinionType;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\OpinionRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class SectionOpinionsResolver implements ResolverInterface
 {
@@ -18,14 +20,30 @@ class SectionOpinionsResolver implements ResolverInterface
         $this->opinionRepo = $opinionRepo;
     }
 
-    public function __invoke(OpinionType $section, Argument $args): Connection
+    public function __invoke(OpinionType $section, Argument $args, ?User $viewer): Connection
     {
         $totalCount = $this->opinionRepo->countByOpinionType($section->getId());
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($section, $args) {
+        $paginator = new Paginator(function (int $offset, int $limit) use (
+            $section,
+            $args,
+            $viewer
+        ) {
             // TODO use OpinionSearch here.
+            $userId = null;
+            if ($args->offsetExists('author') && $args->offsetGet('author')) {
+                $userId = GlobalId::fromGlobalId($args->offsetGet('author'))['id'];
+            }
+
             return $this->opinionRepo
-                ->getByOpinionTypeOrdered($section, $offset, $limit, $args->offsetGet('orderBy'))
+                ->getByOpinionTypeOrdered(
+                    $section,
+                    $offset,
+                    $limit,
+                    $args->offsetGet('orderBy'),
+                    $viewer,
+                    $userId
+                )
                 ->getIterator()
                 ->getArrayCopy();
         });

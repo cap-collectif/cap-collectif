@@ -2,19 +2,20 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Enum\OpinionOrderField;
-use Capco\AppBundle\Enum\OrderDirection;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Traits\ContributionRepositoryTrait;
+use Doctrine\ORM\Query;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\OpinionOrderField;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 
 class OpinionRepository extends EntityRepository
 {
@@ -374,15 +375,35 @@ class OpinionRepository extends EntityRepository
         OpinionType $section,
         int $offset,
         int $limit,
-        array $orderBy
+        array $orderBy,
+        ?User $viewer,
+        ?string $author
     ) {
         $field = $orderBy['field'];
         $direction = $orderBy['direction'];
 
         $qb = $this->getIsEnabledQueryBuilder()
+            ->leftJoin('o.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'pro')
+            ->leftJoin('pro.authors', 'pr_au')
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->andWhere('o.OpinionType = :section')
             ->andWhere('o.trashedAt IS NULL')
             ->setParameter('section', $section);
+        if ($author) {
+            $qb->andWhere('o.Author = :author')->setParameter('author', $author);
+        }
+        if (!$viewer) {
+            $qb->andWhere(
+                $qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+            );
+        } elseif (!$viewer->isSuperAdmin()) {
+            $qb->setParameter('viewer', $viewer);
+            // The call of the function below filters the contributions according to the visibility
+            // of the project containing it, as well as the privileges of the connected user.
+            $this->getContributionsViewerCanSee($qb, $viewer);
+        }
 
         if (OpinionOrderField::PUBLISHED_AT === $field) {
             $qb->addOrderBy('o.createdAt', $direction);

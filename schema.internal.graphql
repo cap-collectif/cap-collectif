@@ -5757,6 +5757,9 @@ type Section implements Node & UniformResourceLocatable {
     # Returns the last `n` elements from the list.
     last: Int
 
+    # Filter by author of opinion.
+    author: ID
+
     # Ordering options for followers returning from the connection
     orderBy: OpinionOrder = {field: PUBLISHED_AT, direction: DESC}
   ): OpinionConnection!
