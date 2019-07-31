@@ -13,6 +13,7 @@ use Capco\AppBundle\Manager\ContributionManager;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Capco\UserBundle\Controller\ConfirmationController;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ConfirmationControllerSpec extends ObjectBehavior
 {
@@ -22,6 +23,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
         Router $router,
         Session $session,
         ContributionManager $contributionManager,
+        TranslatorInterface $translator,
         UserRepository $userRepo
     ) {
         $this->beConstructedWith(
@@ -30,6 +32,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
             $router,
             $session,
             $contributionManager,
+            $translator,
             $userRepo
         );
         $this->login = false;
@@ -46,7 +49,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
         LoginManager $loginManager,
         FlashBagInterface $flashBag,
         Router $router,
-        ContributionManager $contributionManager
+        ContributionManager $contributionManager,
+        TranslatorInterface $translator
     ) {
         $router->generate('app_homepage')->willReturn('/');
         $session->getFlashBag()->willReturn($flashBag);
@@ -54,6 +58,10 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->findUserByConfirmationToken('unknowntoken')
             ->shouldBeCalled()
             ->willReturn(null);
+        $translator
+            ->trans('global.alert.already_email_confirmed', [], 'SonataUserBundle')
+            ->shouldBeCalled()
+            ->willReturn('global.alert.already_email_confirmed');
         $flashBag
             ->set('sonata_user_success', 'global.alert.already_email_confirmed')
             ->shouldBeCalled();
@@ -75,7 +83,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         Router $router,
         User $user,
-        ContributionManager $contributionManager
+        ContributionManager $contributionManager,
+        TranslatorInterface $translator
     ) {
         $router->generate('app_homepage')->willReturn('/');
         $session->getFlashBag()->willReturn($flashBag);
@@ -108,6 +117,10 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn(true);
 
+        $translator
+            ->trans('global.alert.email_confirmed_with_republish', [], 'SonataUserBundle')
+            ->shouldBeCalled()
+            ->willReturn('global.alert.email_confirmed_with_republish');
         $flashBag
             ->set('sonata_user_success', 'global.alert.email_confirmed_with_republish')
             ->shouldBeCalled();
@@ -131,7 +144,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
         Router $router,
         User $user,
         ContributionManager $contributionManager,
-        UserRepository $userRepo
+        UserRepository $userRepo,
+        TranslatorInterface $translator
     ) {
         $router->generate('app_homepage')->willReturn('/');
         $session->getFlashBag()->willReturn($flashBag);
@@ -139,6 +153,10 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->findUserByNewEmailConfirmationToken('invalidtoken')
             ->shouldBeCalled()
             ->willReturn(null);
+        $translator
+            ->trans('global.alert.already_email_confirmed', [], 'SonataUserBundle')
+            ->shouldBeCalled()
+            ->willReturn('global.alert.already_email_confirmed');
         $flashBag
             ->set('sonata_user_success', 'global.alert.already_email_confirmed')
             ->shouldBeCalled();
@@ -162,7 +180,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
         Router $router,
         User $user,
         ContributionManager $contributionManager,
-        UserRepository $userRepo
+        UserRepository $userRepo,
+        TranslatorInterface $translator
     ) {
         $router->generate('app_homepage')->willReturn('/');
         $session->getFlashBag()->willReturn($flashBag);
@@ -197,7 +216,10 @@ class ConfirmationControllerSpec extends ObjectBehavior
             ->updateUser($user)
             ->shouldBeCalled()
             ->willReturn(null);
-
+        $translator
+            ->trans('global.alert.new_email_confirmed', [], 'SonataUserBundle')
+            ->shouldBeCalled()
+            ->willReturn('global.alert.new_email_confirmed');
         $flashBag->set('sonata_user_success', 'global.alert.new_email_confirmed')->shouldBeCalled();
 
         $this->newEmailAction(
