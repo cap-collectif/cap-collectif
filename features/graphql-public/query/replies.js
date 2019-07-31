@@ -1,6 +1,4 @@
 /* eslint-env jest */
-const TIMEOUT = 15000;
-
 const OpenDataRepliesQuery = /* GraphQL */ `
   query OpenDataRepliesQuery($id: ID!, $count: Int!, $cursor: String) {
     node(id: $id) {
@@ -56,17 +54,13 @@ const OpenDataRepliesQuery = /* GraphQL */ `
   }
 `;
 
-describe('Questionnaire.replies connection', () => {
-  it(
-    'fetches the first hundred replies with a cursor',
-    async () => {
-      await expect(
-        graphql(OpenDataRepliesQuery, {
-          id: 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==',
-          count: 100,
-        }),
-      ).resolves.toMatchSnapshot();
-    },
-    TIMEOUT,
-  );
+describe('Preview|Questionnaire.replies connection', () => {
+  it('fetches the first hundred replies with a cursor', async () => {
+    await expect(
+      graphql(OpenDataRepliesQuery, {
+        id: 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==',
+        count: 100,
+      }),
+    ).resolves.toMatchSnapshot();
+  });
 });

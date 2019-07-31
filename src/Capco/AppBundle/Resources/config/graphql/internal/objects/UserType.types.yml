@@ -5,6 +5,7 @@ UserType:
     fields:
       id:
         type: 'ID!'
+        description: 'The id of the type.'
       name:
         type: 'String!'
         description: 'The name of the type.'

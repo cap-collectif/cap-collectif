@@ -41,22 +41,20 @@ export class ListSSOConfiguration extends React.Component<Props, State> {
           </h3>
         </div>
         <div className="box-content box-content__content-form">
-          <ListGroup>
-            {ssoConfigurations.edges && ssoConfigurations.edges.length > 0 ? (
-              <>
-                {ssoConfigurations.edges
-                  .filter(Boolean)
-                  .map(edge => edge.node)
-                  .filter(Boolean)
-                  .map((node, key) => (
-                    /* $FlowFixMe $refType */
-                    <SSOConfigurationItem configuration={node} key={key} />
-                  ))}
-              </>
-            ) : (
-              <FormattedMessage id="no-method-configured" />
-            )}
-          </ListGroup>
+          {ssoConfigurations.edges && ssoConfigurations.edges.length > 0 ? (
+            <ListGroup>
+              {ssoConfigurations.edges
+                .filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+                .map((node, key) => (
+                  /* $FlowFixMe $refType */
+                  <SSOConfigurationItem configuration={node} key={key} />
+                ))}
+            </ListGroup>
+          ) : (
+            <FormattedMessage id="no-method-configured" />
+          )}
           <Button
             bsStyle="primary"
             className="mt-15"

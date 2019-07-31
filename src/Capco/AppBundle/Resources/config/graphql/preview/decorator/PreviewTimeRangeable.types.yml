@@ -7,3 +7,4 @@ PreviewTimeRangeable:
       timeRange:
         type: 'PreviewTimeRange!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\TimeRangeResolver", [value])'
+        description: 'When the time interval begins or ends.'

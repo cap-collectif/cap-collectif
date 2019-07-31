@@ -18,3 +18,9 @@ PublicProject:
       title:
         type: 'String!'
         description: 'Identifies the title of the project.'
+      url:
+        type: 'URI!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectUrlResolver", [value])'
+      publishedAt:
+        type: DateTime!
+        description: 'Identifies when the project was published at.'

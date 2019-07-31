@@ -4,6 +4,8 @@ import 'whatwg-fetch';
 
 const GraphQLClient = require('graphql-request').GraphQLClient;
 
+jest.setTimeout(15000);
+
 const endpoint = 'https://capco.test/graphql';
 const adminClient = new GraphQLClient(endpoint, {
   headers: {

@@ -40,7 +40,7 @@ exports[`<Oauth2SSOConfigurationItem /> renders correctly 1`] = `
       />
     </Button>
   </ButtonToolbar>
-  <Connect(InjectIntl(ReduxForm))
+  <Connect(ReduxForm)
     accessTokenUrl="https://localhost:8888/token"
     authorizationUrl="https://localhost:8888/authorization"
     clientId="clientId"
@@ -53,13 +53,6 @@ exports[`<Oauth2SSOConfigurationItem /> renders correctly 1`] = `
     secret="SecretKey"
     show={false}
     userInfoUrl="https://localhost:8888/user"
-  />
-  <Connect(DeleteModal)
-    closeDeleteModal={[Function]}
-    deleteElement={[Function]}
-    deleteModalContent="group-admin-parameters-modal-delete-content"
-    deleteModalTitle="are-you-sure-you-want-to-delete-the-authentication-method"
-    showDeleteModal={false}
   />
 </Fragment>
 `;

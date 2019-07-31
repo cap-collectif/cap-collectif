@@ -1,6 +1,4 @@
 /* eslint-env jest */
-const TIMEOUT = 15000;
-
 const SimpleQuestionResponsesQuery = /* GraphQL */ `
   query SimpleQuestionResponsesQuery($id: ID!) {
     node(id: $id) {
@@ -40,6 +38,5 @@ describe('SimpleQuestion.responses array', () => {
         ),
       );
     },
-    TIMEOUT,
   );
 });

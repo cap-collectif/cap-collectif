@@ -958,6 +958,8 @@ type CheckboxRequirement implements Node & Requirement {
 type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   # The ID of an object
   id: ID!
+
+  # A list of proposals associated to the object.
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -1008,9 +1010,14 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     includeDraft: Boolean = false
   ): ProposalConnection!
 
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
+
   # The title of the step.
   title: String!
-  timeRange: PreviewTimeRange!
 
   # The kind of the step
   kind: String!
@@ -1023,9 +1030,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # The url of the step
-  url: String!
 
   # The introduction text of the step.
   body: HTML
@@ -1457,6 +1461,15 @@ type ConsultationStep implements Node & Step & RequirementStep {
   # The ID of an object.
   id: ID!
 
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
+
+  # The title of the step.
+  title: String!
+
   # A list of contributor associated with the consultation step.
   contributors(
     # Returns the elements in the list that come after the specified cursor.
@@ -1495,7 +1508,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
   ): RequirementConnection!
-  timeRange: PreviewTimeRange!
 
   # The type of step. Returns "consultation".
   kind: String!
@@ -1508,12 +1520,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
 
   # The introduction text of the step.
   body: HTML
@@ -2103,7 +2109,9 @@ type Event implements Node & Commentable {
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-  timeRange: PreviewTimeRange!
+
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
 
   # Identifies the author of the event.
   author: User
@@ -3074,14 +3082,14 @@ interface Node {
 
 # Possible reason that a `Publishable` is not published.
 enum NotPublishedReason {
-  # Author account isn't confirmed yet.
-  WAITING_AUTHOR_CONFIRMATION
+  # Author account was confirmed after the step has ended.
+  AUTHOR_CONFIRMED_TOO_LATE
 
   # Author account isn't confirmed and the step has ended.
   AUTHOR_NOT_CONFIRMED
 
-  # Author account was confirmed after the step has ended.
-  AUTHOR_CONFIRMED_TOO_LATE
+  # Author account isn't confirmed yet.
+  WAITING_AUTHOR_CONFIRMATION
 }
 
 # A user without account.
@@ -3486,7 +3494,15 @@ enum OrderDirection {
 type OtherStep implements Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange!
+
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
+
+  # The title of the step.
+  title: String!
 
   # The kind of the step
   kind: String!
@@ -3499,12 +3515,6 @@ type OtherStep implements Step {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
 
   # The introduction text of the step.
   body: HTML
@@ -3623,7 +3633,15 @@ union PostRelatedContent = Theme | Proposal | Project
 type PresentationStep implements Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange!
+
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
+
+  # The title of the step.
+  title: String!
 
   # The kind of the step
   kind: String!
@@ -3637,23 +3655,8 @@ type PresentationStep implements Step {
   # Does the step have a end date ?
   timeless: Boolean
 
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
-
   # The introduction text of the step.
   body: HTML
-}
-
-# A time range that contains start date and end date.
-type PreviewTimeRange {
-  # The start date of the time range.
-  startAt: DateTime
-
-  # The end date of the time range
-  endAt: DateTime
 }
 
 # A vote that can be anonymous.
@@ -3690,6 +3693,9 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
   # Identifies the title of the project.
   title: String!
 
+  # Identifies when the project was published at.
+  publishedAt: DateTime!
+
   # A list of votes associated with the project.
   votes(
     # Returns the elements in the list that come after the specified cursor.
@@ -3720,8 +3726,25 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
     last: Int
   ): UserConnection!
 
+  # Count of contributions associated with the project.
+  contributionsCount: Int! @deprecated(reason: "Field `contributionsCount` will be removed. Use `contributions.totalCount` instead when it will be published. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-01-01 UTC.")
+
+  # The cover image associated with the project.
+  cover: Media
+
+  # The type associated with the project.
+  type: ProjectType
+
+  # The different steps associated with the project.
+  steps: [Step!]!
+
+  # The list of users who authored the project.
+  authors: [User!]!
+
   # The admin URL to this resource.
   adminUrl: URI!
+
+  # A list of proposals associated to the object.
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -3792,21 +3815,18 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
 
   # Slug of a project
   slug: String!
-  steps: [Step!]!
-  authors: [User!]!
   video: String
-  cover: Media
-  contributionsCount: Int!
   hasParticipativeStep: Boolean!
-  type: ProjectType
   themes: [Theme!]
   votableSteps: [ProposalStep!]!
 
-  # The visibility of project
+  # The visibility of the project.
   visibility: ProjectVisibility!
 
   # State of activation of Opinion subscription.
   opinionCanBeFollowed: Boolean!
+
+  # Viewers that can access the project, null otherwise.
   restrictedViewers(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -3821,8 +3841,8 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
     last: Int
   ): GroupConnection
 
-  # The district of the project
-  districts: [ProjectDistrict]
+  # The districts related to the project.
+  districts: [ProjectDistrict!]!
 
   # The comments related to the project.
   comments(
@@ -3846,15 +3866,14 @@ type Project implements UniformResourceLocatable & UniformResourceAdminLocatable
   isContributionsCounterDisplayable: Boolean!
   isParticipantsCounterDisplayable: Boolean!
 
-  # If it s an external project
+  # Whether it's an external project or not.
   isExternal: Boolean!
 
-  # Link of external project
+  # URL of the external project.
   externalLink: URI
 
-  # Opinion term of the project
+  # Opinion term of the project.
   opinionTerm: Int!
-  publishedAt: DateTime!
 }
 
 # A connection to a list of items.
@@ -3919,14 +3938,14 @@ input ProjectOrder {
 
 # Ordering options for projects returned from the connection.
 enum ProjectOrderField {
-  # Allows ordering a list of projects by their number of contributions.
-  POPULAR
-
   # Allows ordering a list of projects by when they were published.
   LATEST
+
+  # Allows ordering a list of projects by their number of contributions.
+  POPULAR
 }
 
-# Type of Project
+# Label of a Project.
 type ProjectType {
   # Id of project Type
   id: ID!
@@ -4237,6 +4256,8 @@ type ProposalEvaluation {
 type ProposalForm implements Node & UniformResourceLocatable {
   # The ID of an object
   id: ID!
+
+  # A list of proposals associated to the object.
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -4375,20 +4396,20 @@ input ProposalOrder {
 
 # Properties by which proposal connections can be ordered.
 enum ProposalOrderField {
-  # Allows ordering a list of proposals by when they were published.
-  PUBLISHED_AT
-
-  # Allows ordering a list of proposals by the number of votes it have.
-  VOTES
-
   # Allows ordering a list of proposals by the number of comments it have.
   COMMENTS
+
+  # Allows ordering a list of proposals by the cost it have been estimated.
+  COST
+
+  # Allows ordering a list of proposals by when they were published.
+  PUBLISHED_AT
 
   # Allows randomizing a list of proposals.
   RANDOM
 
-  # Allows ordering a list of proposals by the cost it have been estimated.
-  COST
+  # Allows ordering a list of proposals by the number of votes it have.
+  VOTES
 }
 
 # Available statuses
@@ -4416,7 +4437,15 @@ enum ProposalPublicationStatus {
 interface ProposalStep {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange!
+
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
+
+  # The title of the step.
+  title: String!
 
   # The kind of the step
   kind: String!
@@ -4430,14 +4459,10 @@ interface ProposalStep {
   # Does the step have a end date ?
   timeless: Boolean
 
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
-
   # The introduction text of the step.
   body: HTML
+
+  # A list of proposals associated to the object.
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -4556,11 +4581,11 @@ enum ProposalStepVoteType {
 
 # Possible trashed status for a `Proposal`.
 enum ProposalTrashedStatus {
-  # `TRASHED` status to include the trashed proposal.
-  TRASHED
-
   # `NOT_TRASHED` status to inclide the non trashed proposal.
   NOT_TRASHED
+
+  # `TRASHED` status to include the trashed proposal.
+  TRASHED
 }
 
 # A vote on a proposal for a given step.
@@ -5145,7 +5170,15 @@ input QuestionnaireAbstractQuestionInput {
 type QuestionnaireStep implements Node & Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange!
+
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
+
+  # The title of the step.
+  title: String!
 
   # The kind of the step
   kind: String!
@@ -5158,12 +5191,6 @@ type QuestionnaireStep implements Node & Step {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
 
   # The introduction text of the step.
   body: HTML
@@ -5198,7 +5225,15 @@ enum QuestionnaireType {
 type RankingStep implements Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange!
+
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
+
+  # The title of the step.
+  title: String!
 
   # The kind of the step
   kind: String!
@@ -5211,12 +5246,6 @@ type RankingStep implements Step {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
 
   # The introduction text of the step.
   body: HTML
@@ -5834,7 +5863,15 @@ type Selection {
 type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange!
+
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
+
+  # The title of the step.
+  title: String!
 
   # The kind of the step
   kind: String!
@@ -5848,14 +5885,10 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   # Does the step have a end date ?
   timeless: Boolean
 
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
-
   # The introduction text of the step.
   body: HTML
+
+  # A list of proposals associated to the object.
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -6370,7 +6403,15 @@ enum StatusColor {
 interface Step {
   # The ID of an object
   id: ID!
-  timeRange: PreviewTimeRange!
+
+  # When the time interval begins or ends.
+  timeRange: TimeRange!
+
+  # The URL to this resource.
+  url: URI!
+
+  # The title of the step.
+  title: String!
 
   # The kind of the step
   kind: String!
@@ -6383,12 +6424,6 @@ interface Step {
 
   # Does the step have a end date ?
   timeless: Boolean
-
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
 
   # The introduction text of the step.
   body: HTML
@@ -6441,6 +6476,15 @@ type Theme implements UniformResourceLocatable {
   url: URI!
   id: ID!
   title: String!
+}
+
+# A time range that contains start date and end date.
+type TimeRange {
+  # The start date of the time range.
+  startAt: DateTime
+
+  # The end date of the time range
+  endAt: DateTime
 }
 
 # Entities that can be trashed.
@@ -7439,6 +7483,7 @@ enum UserRole {
 
 # A type of person
 type UserType {
+  # The id of the type.
   id: ID!
 
   # The name of the type.
