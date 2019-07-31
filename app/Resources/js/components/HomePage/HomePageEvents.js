@@ -7,7 +7,6 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import EventPreview from '../Event/EventPreview';
 
 type Props = {|
-  // Defined pagination limit
   limit: number,
 |};
 
