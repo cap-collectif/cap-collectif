@@ -22,19 +22,20 @@ class SectionOpinionsResolver implements ResolverInterface
 
     public function __invoke(OpinionType $section, Argument $args, ?User $viewer): Connection
     {
-        $totalCount = $this->opinionRepo->countByOpinionType($section->getId());
+        $userId = null;
+        if ($args->offsetExists('author') && $args->offsetGet('author')) {
+            $userId = GlobalId::fromGlobalId($args->offsetGet('author'))['id'];
+        }
+
+        $totalCount = $this->opinionRepo->countByOpinionType($section->getId(), $userId);
 
         $paginator = new Paginator(function (int $offset, int $limit) use (
             $section,
             $args,
-            $viewer
+            $viewer,
+            $userId
         ) {
             // TODO use OpinionSearch here.
-            $userId = null;
-            if ($args->offsetExists('author') && $args->offsetGet('author')) {
-                $userId = GlobalId::fromGlobalId($args->offsetGet('author'))['id'];
-            }
-
             return $this->opinionRepo
                 ->getByOpinionTypeOrdered(
                     $section,

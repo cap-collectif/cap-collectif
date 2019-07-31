@@ -45,10 +45,12 @@ class SectionList extends React.Component<Props> {
 
 export default createFragmentContainer(SectionList, {
   sections: graphql`
-    fragment SectionList_sections on Section @relay(plural: true) {
+    fragment SectionList_sections on Section
+      @relay(plural: true)
+      @argumentDefinitions(userId: { type: "ID" }) {
       title
       color
-      opinions {
+      opinions(author: $userId) {
         totalCount
         edges {
           node {

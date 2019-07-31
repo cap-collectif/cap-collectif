@@ -11,7 +11,7 @@ const query = graphql`
   query SectionListPageQuery($userId: ID!) {
     sections(user: $userId) {
       id
-      ...SectionList_sections
+      ...SectionList_sections @arguments(userId: $userId)
     }
   }
 `;

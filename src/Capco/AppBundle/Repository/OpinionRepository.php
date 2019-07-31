@@ -263,13 +263,17 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countByOpinionType(string $opinionTypeId): int
+    public function countByOpinionType(string $opinionTypeId, ?string $author): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o)')
             ->andWhere('o.trashedAt IS NULL')
             ->andWhere('o.OpinionType = :opinionTypeId')
             ->setParameter('opinionTypeId', $opinionTypeId);
+
+        if ($author) {
+            $qb->andWhere('o.Author = :author')->setParameter('author', $author);
+        }
 
         return // ->useResultCache(true, 60)
             $qb
