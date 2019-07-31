@@ -111,24 +111,6 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         )'
         );
 
-        $this->compute(
-            'UPDATE CapcoUserBundle:User u set u.sourcesCount = (
-            SELECT count(s.id)
-            FROM CapcoAppBundle:Source s
-            LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
-            LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
-            LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH o.step = cs
-            LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovo.step = ovocs
-            WHERE s.author = u AND s.published = 1 AND (
-              (s.opinion IS NOT NULL AND o.published = 1 AND cs.isEnabled = 1)
-              OR
-              (s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovocs.isEnabled = 1)
-            )
-            GROUP BY s.author
-        )'
-        );
-
         if (
             $this->force ||
             $this->em

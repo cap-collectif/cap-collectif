@@ -103,6 +103,16 @@ InternalUser:
       samlId:
         type: 'String'
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      sources:
+        type: 'SourceConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Get all sources of the user'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSourcesResolver", [value, args])'
+        args:
+          first:
+            type: 'Int'
+            description: 'Returns the first n elements from the list.'
+            defaultValue: 100
       opinionsCount:
         type: 'Int!'
       opinionVotesCount:
@@ -139,8 +149,6 @@ InternalUser:
         type: 'Int!'
         description: 'Provisional number of contributions who will be totally deleted if the user chose to delete his account.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsToDeleteCount", [value])'
-      sourcesCount:
-        type: 'Int!'
       replies:
         type: 'InternalReplyConnection!'
         argsBuilder: 'Relay::Connection'

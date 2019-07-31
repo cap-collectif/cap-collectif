@@ -168,10 +168,15 @@ class SourceRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findAllByAuthor(User $user): array
+    public function findAllByAuthor(User $user, int $limit = null, int $offset = null): array
     {
         $qb = $this->createQueryBuilder('s');
-        $qb->andWhere('s.author = :author')->setParameter('author', $user);
+        $qb->andWhere('s.author = :author');
+        $qb->setParameter('author', $user);
+
+        if ($limit && $offset) {
+            $qb->setMaxResults($limit)->setFirstResult($offset);
+        }
 
         return $qb->getQuery()->getResult();
     }

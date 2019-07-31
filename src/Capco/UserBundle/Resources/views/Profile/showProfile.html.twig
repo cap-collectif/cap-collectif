@@ -48,11 +48,12 @@
     <div class="profile__values">
         <div class="container">
             <ul class="nav  nav-pills">
-                {% if user.getContributionsCount() > 0 %}
+                {% set contributionsCount =  userContributionsCountResolver.__invoke(user) %}
+                {% if contributionsCount > 0 %}
                 <li class="profile__value {% if (app.request.attributes.get('_route') in ['capco_user_profile_show_all', 'capco_user_profile_show']) %}active{% endif %} ">
                     <a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.all'|trans({}, 'CapcoAppBundle') }}</h2>
-                        <p class="profile__value__number">{{ user.getContributionsCount() }}</p>
+                        <p class="profile__value__number">{{ contributionsCount }}</p>
                     </a>
                 </li>
                 {% endif %}
@@ -103,11 +104,12 @@
                     </a>
                 </li>
                 {% endif %}
-                {% if user.sourcesCount > 0 %}
+                {% set sourcesCount = userSourcesResolver.__invoke(user).totalCount %}
+                {% if sourcesCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_sources' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_sources', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.sources'|trans({}, 'CapcoAppBundle') }}</h2>
-                        <p class="profile__value__number">{{ user.sourcesCount }}</p>
+                        <p class="profile__value__number">{{ sourcesCount }}</p>
                     </a>
                 </li>
                 {% endif %}

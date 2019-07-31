@@ -107,11 +107,6 @@ class User extends BaseUser implements
     /**
      * @var int
      */
-    protected $sourcesCount = 0;
-
-    /**
-     * @var int
-     */
     protected $argumentsCount = 0;
 
     /**
@@ -719,16 +714,6 @@ class User extends BaseUser implements
     }
 
     /**
-     * Gets the value of sourcesCount.
-     *
-     * @return int
-     */
-    public function getSourcesCount()
-    {
-        return $this->sourcesCount;
-    }
-
-    /**
      * Gets the value of argumentsCount.
      *
      * @return int
@@ -808,20 +793,6 @@ class User extends BaseUser implements
     public function setArgumentsCount($argumentsCount)
     {
         $this->argumentsCount = $argumentsCount;
-
-        return $this;
-    }
-
-    /**
-     * Sets the value of sourcesCount.
-     *
-     * @param int $sourcesCount the sources count
-     *
-     * @return self
-     */
-    public function setSourcesCount($sourcesCount)
-    {
-        $this->sourcesCount = $sourcesCount;
 
         return $this;
     }
@@ -1114,15 +1085,6 @@ class User extends BaseUser implements
         }
 
         return $contributions;
-    }
-
-    public function getContributionsCount()
-    {
-        return $this->sourcesCount +
-            $this->argumentsCount +
-            $this->opinionsCount +
-            $this->opinionVersionsCount +
-            $this->getCommentsCount();
     }
 
     public function getCommentsCount(): int
