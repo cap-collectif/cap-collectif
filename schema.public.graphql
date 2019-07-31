@@ -65,9 +65,6 @@ type Project implements Node & UniformResourceLocatable {
 
   # Identifies the title of the project.
   title: String!
-
-  # Identifies when the project was published at.
-  publishedAt: DateTime!
 }
 
 # This is entry point into the schema.

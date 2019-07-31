@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Internal|Query.allContributors fetches total number of contributors 1`] = `
+exports[`Query.allContributors fetches total number of contributors 1`] = `
 Object {
   "allContributors": Object {
     "totalCount": 84,

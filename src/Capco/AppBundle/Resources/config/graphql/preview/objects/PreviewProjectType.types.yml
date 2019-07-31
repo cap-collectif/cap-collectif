@@ -1,9 +1,0 @@
-PreviewProjectType:
-  type: object
-  config:
-    name: ProjectType
-    description: 'Label of a Project.'
-    fields:
-      title:
-        type: 'String!'
-        description: 'Title of project Type'

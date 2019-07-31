@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Preview|Query.users connection fetches the first hundred users with a cursor 1`] = `
+exports[`Query.users connection fetches the first hundred users with a cursor 1`] = `
 Object {
   "users": Object {
     "edges": Array [
@@ -2535,7 +2535,7 @@ Object {
 }
 `;
 
-exports[`Preview|Query.users connection fetches the five last users 1`] = `
+exports[`Query.users connection fetches the five last users 1`] = `
 Object {
   "users": Object {
     "edges": Array [
@@ -2574,7 +2574,7 @@ Object {
 }
 `;
 
-exports[`Preview|Query.users connection fetches the next three users with a cursor 1`] = `
+exports[`Query.users connection fetches the next three users with a cursor 1`] = `
 Object {
   "users": Object {
     "edges": Array [

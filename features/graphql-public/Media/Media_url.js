@@ -1,4 +1,6 @@
 /* eslint-env jest */
+const TIMEOUT = 15000;
+
 // Media is not part of Node interface
 const EventMediaQuery = /* GraphQL */ `
   query EventMediaQuery($id: ID!) {
@@ -32,5 +34,6 @@ describe('Media.url', () => {
         }),
       );
     },
+    TIMEOUT,
   );
 });

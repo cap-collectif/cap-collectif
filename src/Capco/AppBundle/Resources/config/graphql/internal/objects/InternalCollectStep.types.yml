@@ -3,12 +3,12 @@ InternalCollectStep:
   inherits:
     - Node
     - PreviewCollectStep
-    - InternalStep
+    - Step
     - ProposalStep
     - RequirementStep
   config:
     name: CollectStep
-    interfaces: [Node, InternalStep, ProposalStep, RequirementStep]
+    interfaces: [Node, Step, ProposalStep, RequirementStep]
     fields:
       id:
         builder: 'Relay::GlobalId'

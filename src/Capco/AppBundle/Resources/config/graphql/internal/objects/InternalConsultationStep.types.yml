@@ -5,11 +5,11 @@ InternalConsultationStep:
     - Node
     - PreviewConsultationStep
     - RequirementStep
-    - InternalStep
+    - Step
   config:
     interfaces:
       - Node
-      - InternalStep
+      - Step
       - RequirementStep
     description: 'A consultation step'
     name: ConsultationStep
