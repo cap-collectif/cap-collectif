@@ -6,9 +6,9 @@ import TagsList from '../../Ui/List/TagsList';
 import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFragment';
 import type { ProjectPreviewExternalCounters_project } from '~relay/ProjectPreviewExternalCounters_project.graphql';
 
-type Props = {|
-  +project: ProjectPreviewExternalCounters_project,
-|};
+type Props = {
+  project: ProjectPreviewExternalCounters_project,
+};
 
 export class ProjectPreviewExternalCounters extends React.Component<Props> {
   render() {

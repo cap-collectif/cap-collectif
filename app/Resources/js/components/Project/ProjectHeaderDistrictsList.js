@@ -9,18 +9,17 @@ import InlineList from '../Ui/List/InlineList';
 import ListGroupFlush from '../Ui/List/ListGroupFlush';
 import type { ProjectHeaderDistrictsList_project } from '~relay/ProjectHeaderDistrictsList_project.graphql';
 
-type Props = {|
-  +breakingNumber: number,
-  +fontSize: ?number,
-  +project: ProjectHeaderDistrictsList_project,
-|};
+type Props = {
+  project: ProjectHeaderDistrictsList_project,
+};
 
-type State = {|
-  +show: boolean,
-|};
+type State = {
+  show: boolean,
+};
 
-const DistrictsButton = styled(Button)`
-  font-size: ${props => props.fontSize || 'auto'},
+const DistrictsButton = styled(Button).attrs({
+  className: 'project-districts__modal-link',
+})`
   padding: 0;
   vertical-align: baseline;
 `;
@@ -39,11 +38,11 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
   };
 
   render() {
-    const { project, breakingNumber } = this.props;
+    const { project } = this.props;
     const { show } = this.state;
 
     if (project.districts) {
-      if (project.districts.length <= breakingNumber) {
+      if (project.districts.length <= 3) {
         return (
           <InlineList separator="," className="d-i">
             {project.districts.map((district, key) => (

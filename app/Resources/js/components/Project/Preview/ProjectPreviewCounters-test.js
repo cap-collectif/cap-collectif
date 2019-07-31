@@ -15,8 +15,6 @@ const props = {
     contributors: { totalCount: 48, anonymousCount: 2 },
     votes: { totalCount: 48 },
     contributionsCount: 71,
-    isExternal: false,
-    hasParticipativeStep: true,
     isVotesCounterDisplayable: true,
     isContributionsCounterDisplayable: true,
     isParticipantsCounterDisplayable: true,
@@ -28,8 +26,6 @@ const propsWithDistricts = {
     $fragmentRefs,
     $refType,
     id: 'project2',
-    isExternal: false,
-    hasParticipativeStep: true,
     districts: [{ name: 'rive gauche' }, { name: 'rive droite' }],
     contributors: { totalCount: 54, anonymousCount: 0 },
     votes: { totalCount: 54 },
@@ -40,7 +36,7 @@ const propsWithDistricts = {
   },
 };
 
-describe('<ProjectPreviewCounters />', () => {
+describe('<ProjectPreviewProgressBar />', () => {
   it('should render correctly counters without districts', () => {
     const wrapper = shallow(<ProjectPreviewCounters {...props} />);
     expect(wrapper).toMatchSnapshot();

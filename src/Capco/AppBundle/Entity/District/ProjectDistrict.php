@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity\District;
 
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Project;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -40,17 +39,11 @@ class ProjectDistrict extends AbstractDistrict
         return $this->projects;
     }
 
-    public function hasProject(Project $project)
-    {
-        return $this->projects->contains($project);
-    }
-
     public function addProject(Project $project): self
     {
-        if (!$this->hasProject($project)) {
+        if (!$this->projects->contains($project)) {
             $this->projects->add($project);
         }
-
         $project->addDistrict($this);
 
         return $this;

@@ -20,6 +20,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromUserCommand extends BaseExportCommand
 {
+    const PROPOSAL_EXPORT_PATHS = [
+        'url',
+        'title',
+        'bodyText',
+        'address_formatted',
+        'createdAt',
+        'updatedAt',
+        'trashedAt',
+        'trashedReason',
+        'responses_question_title',
+        'responses_formattedValue'
+    ];
     protected static $defaultName = 'capco:export:user';
 
     protected $userRepository;
@@ -49,6 +61,82 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         parent::__construct($exportUtils);
     }
 
+    public function getNodeContent($content, ?string $columnName, string $closestPath = ''): array
+    {
+        $keys = explode('_', $columnName, 2);
+        if (\count($keys) < 2) {
+            return [
+                'content' => $content[$keys[0]],
+                'columnName' => null,
+                'isMultiple' => false,
+                'closestPath' => $content[$keys[0]]
+            ];
+        }
+        if (isset($content[$keys[0]]) || \array_key_exists($keys[0], $content)) {
+            if (!\array_key_exists($keys[0], $content)) {
+                return [
+                    'content' => null,
+                    'columnName' => null,
+                    'isMultiple' => false
+                ];
+            }
+
+            return $this->getNodeContent(
+                $content[$keys[0]],
+                $keys[1],
+                $closestPath . '_' . $keys[0]
+            );
+        }
+
+        return [
+            'content' => $content,
+            'columnName' => $columnName,
+            'isMultiple' => true,
+            'closestPath' => $closestPath
+        ];
+    }
+
+    public function getRowsForProposal(array $contents, array $header)
+    {
+        $columnSize = \count($header);
+        $rows = [];
+        $rowSize = \count($contents);
+        $row = 0;
+        foreach ($contents as $content) {
+            $rows[$row] = array_fill(0, $columnSize, null);
+            for ($column = 0; $column < $columnSize; ++$column) {
+                if (3 == $column) {
+                }
+                if ('responses_formattedValue' != $header[$column]) {
+                    $cellData = $this->getNodeContent($content['node'], $header[$column]);
+                    if ($cellData['isMultiple']) {
+                        $ret = $this->handleMultipleResponsesForQuestions(
+                            $cellData['content'],
+                            $row,
+                            $column,
+                            $rows,
+                            $columnSize
+                        );
+                        $rows = $ret['rows'];
+                        $rowSize += $ret['counter'] - $row;
+                        $row = $ret['counter'];
+                    } else {
+                        if (\is_array($cellData['content'])) {
+                            $rows[$row][$column] = $cellData['content']['formatted'];
+                        } else {
+                            $rows[$row][$column] = $cellData['content'];
+                        }
+                    }
+                }
+            }
+            if (array_filter($rows[$row])) {
+                ++$row;
+            }
+        }
+
+        return $rows;
+    }
+
     protected function configure(): void
     {
         parent::configure();
@@ -62,6 +150,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $userId = $input->getArgument('userId');
+
         /** @var User $user */
         $user = $this->userRepository->find($userId);
         $userId = GlobalId::toGlobalId('User', $userId);
@@ -69,7 +158,6 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         foreach ($datas as $key => $value) {
             $this->createCsv($userId, $value, $key);
         }
-
         $archive = $this->userArchiveRepository->getLastForUser($user);
 
         if ($archive) {
@@ -176,8 +264,13 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
         $rows = [];
         //we need to handle indepth arrays who are not mapped
+
         if ($contributions = Arr::path($data, 'data.node.contributions.edges')) {
-            $rows = $this->getCleanArrayForRowInsert($contributions, $header, true);
+            if ('proposals' == $type) {
+                $rows = $this->getRowsForProposal($contributions, self::PROPOSAL_EXPORT_PATHS);
+            } else {
+                $rows = $this->getCleanArrayForRowInsert($contributions, $header, true);
+            }
         } elseif ($medias = Arr::path($data, 'data.node.medias')) {
             $this->exportMedias($medias, $userId);
             $rows = $this->getCleanArrayForRowInsert($medias, $header);
@@ -197,7 +290,9 @@ class CreateCsvFromUserCommand extends BaseExportCommand
             }
         }
 
-        $rows = array_map([$this->exportUtils, 'parseCellValue'], $rows);
+        if ('proposals' != $type) {
+            $rows = array_map([$this->exportUtils, 'parseCellValue'], $rows);
+        }
 
         if (!empty($rows) && \is_array($rows[0])) {
             $writer->addRows($rows);
@@ -219,6 +314,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         array $header,
         bool $isNode = false
     ): array {
+        $columnSize = \count($header);
         $rows = [];
         $rowCounter = 0;
         $responsesInserted = false;
@@ -227,14 +323,15 @@ class CreateCsvFromUserCommand extends BaseExportCommand
             foreach ($header as $columnKey => $columnName) {
                 if ($isNode) {
                     if (
-                        false === $responsesInserted &&
-                        false !== strpos($columnName, 'responses_')
+                        false !== strpos($columnName, 'responses_') &&
+                        false === $responsesInserted
                     ) {
                         $responsesDatas = $this->handleMultipleResponsesForQuestions(
                             $content,
                             $rowCounter,
                             $columnKey,
-                            $rows
+                            $rows,
+                            $columnSize
                         );
                         $rows = $responsesDatas['rows'];
                         $rowCounter = $responsesDatas['counter'];
@@ -259,21 +356,33 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         array $responses,
         int $rowCounter,
         int $columnKey,
-        array $rows
+        array $rows,
+        int $size
     ): array {
-        // A question can have multiple responses so we insert a line for each response
-        $emptyRow = array_fill(0, $columnKey - 1, null);
+        $emptyRow = array_fill(0, $size, null);
 
-        foreach ($responses['node']['responses'] as $response) {
-            if (
-                'ValueResponse' === $response['__typename'] &&
-                null !== $response['formattedValue'] &&
-                $response['question']['title']
-            ) {
-                $rows[$rowCounter][$columnKey] = $response['question']['title'];
-                $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
-                ++$rowCounter;
-                $rows[$rowCounter] = $emptyRow;
+        foreach ($responses as $response) {
+            if (isset($response['question']['title'])) {
+                if (
+                    'ValueResponse' === $response['__typename'] &&
+                    isset($response['formattedValue'])
+                ) {
+                    $rows[$rowCounter][$columnKey] = $response['question']['title'];
+                    $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
+                    ++$rowCounter;
+                    $rows[$rowCounter] = $emptyRow;
+                }
+
+                if (
+                    'MediaResponse' === $response['__typename'] &&
+                    isset($response['medias']) &&
+                    !empty($response['medias'])
+                ) {
+                    $rows[$rowCounter][$columnKey] = $response['question']['title'];
+                    $rows[$rowCounter][$columnKey + 1] = $response['medias'];
+                    ++$rowCounter;
+                    $rows[$rowCounter] = $emptyRow;
+                }
             }
         }
 
@@ -301,30 +410,36 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     protected function getCleanHeadersName($data, string $type): array
     {
         $infoResolver = new InfoResolver();
-        $header = array_map(
-            function (string $header) use ($type) {
-                $header = str_replace('data_node_', '', $header);
+        if ('proposals' !== $type) {
+            $header = array_map(
+                function (string $header) use ($type) {
+                    $header = str_replace('data_node_', '', $header);
 
-                if ('medias' === $type) {
-                    $header = str_replace('medias_', '', $header);
-                } elseif ('groups' === $type) {
-                    $header = str_replace('groups_edges_node_', '', $header);
-                } elseif ('reports' === $type) {
-                    $header = str_replace('reports_edges_node_', '', $header);
-                } elseif ('events' === $type) {
-                    $header = str_replace('events_edges_node_', '', $header);
-                } elseif ('votes' === $type) {
-                    $header = str_replace('votes_edges_node_', '', $header);
-                } else {
-                    $header = str_replace('contributions_edges_node_', '', $header);
-                }
+                    if ('medias' === $type) {
+                        $header = str_replace('medias_', '', $header);
+                    } elseif ('groups' === $type) {
+                        $header = str_replace('groups_edges_node_', '', $header);
+                    } elseif ('reports' === $type) {
+                        $header = str_replace('reports_edges_node_', '', $header);
+                    } elseif ('events' === $type) {
+                        $header = str_replace('events_edges_node_', '', $header);
+                    } elseif ('votes' === $type) {
+                        $header = str_replace('votes_edges_node_', '', $header);
+                    } else {
+                        $header = str_replace('contributions_edges_node_', '', $header);
+                    }
 
-                return $header;
-            },
-            array_filter($infoResolver->guessHeadersFromFields($data), function (string $header) {
-                return 'data_node_contributions_edges_node_responses___typename' !== $header;
-            })
-        );
+                    return $header;
+                },
+                array_filter($infoResolver->guessHeadersFromFields($data), function (
+                    string $header
+                ) {
+                    return 'data_node_contributions_edges_node_responses___typename' !== $header;
+                })
+            );
+        } else {
+            $header = self::PROPOSAL_EXPORT_PATHS;
+        }
 
         return $header;
     }

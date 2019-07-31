@@ -2,14 +2,14 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
-import type { State, FeatureToggles } from '../../../types';
+import type { State } from '../../../types';
 import InlineList from '../../Ui/List/InlineList';
 import type { ProjectPreviewThemes_project } from '~relay/ProjectPreviewThemes_project.graphql';
 
-type Props = {|
-  +project: ProjectPreviewThemes_project,
-  +features: FeatureToggles,
-|};
+type Props = {
+  project: ProjectPreviewThemes_project,
+  features: Object,
+};
 
 class ProjectPreviewThemes extends React.Component<Props> {
   render() {

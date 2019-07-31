@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectPreviewCounters /> should render correctly counters with districts 1`] = `
+exports[`<ProjectPreviewProgressBar /> should render correctly counters with districts 1`] = `
 <TagsList>
   <ProjectPreviewCounter
     icon="cap-baloon-1"
@@ -23,37 +23,22 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
   <Tag
     icon="cap cap-marker-1-1"
   >
-    <ForwardRef(Relay(ProjectHeaderDistrictsList))
-      breakingNumber={1}
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "contributionsCount": 89,
-          "contributors": Object {
-            "anonymousCount": 0,
-            "totalCount": 54,
-          },
-          "districts": Array [
-            Object {
-              "name": "rive gauche",
-            },
-            Object {
-              "name": "rive droite",
-            },
-          ],
-          "hasParticipativeStep": true,
-          "id": "project2",
-          "isContributionsCounterDisplayable": true,
-          "isExternal": false,
-          "isParticipantsCounterDisplayable": true,
-          "isVotesCounterDisplayable": true,
-          "votes": Object {
-            "totalCount": 54,
-          },
-        }
-      }
-    />
+    <InlineList
+      className="d-i"
+      margin={true}
+      separator=","
+    >
+      <li
+        key="0"
+      >
+        rive gauche
+      </li>
+      <li
+        key="1"
+      >
+        rive droite
+      </li>
+    </InlineList>
   </Tag>
   <ForwardRef(Relay(ProjectRestrictedAccessFragment))
     icon="cap-lock-2-1"
@@ -74,10 +59,8 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
             "name": "rive droite",
           },
         ],
-        "hasParticipativeStep": true,
         "id": "project2",
         "isContributionsCounterDisplayable": true,
-        "isExternal": false,
         "isParticipantsCounterDisplayable": true,
         "isVotesCounterDisplayable": true,
         "votes": Object {
@@ -89,7 +72,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
 </TagsList>
 `;
 
-exports[`<ProjectPreviewCounters /> should render correctly counters without districts 1`] = `
+exports[`<ProjectPreviewProgressBar /> should render correctly counters without districts 1`] = `
 <TagsList>
   <ProjectPreviewCounter
     icon="cap-baloon-1"
@@ -121,10 +104,8 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
           "totalCount": 48,
         },
         "districts": Array [],
-        "hasParticipativeStep": true,
         "id": "UHJvamVjdDpwcm9qZWN0MQ==",
         "isContributionsCounterDisplayable": true,
-        "isExternal": false,
         "isParticipantsCounterDisplayable": true,
         "isVotesCounterDisplayable": true,
         "votes": Object {

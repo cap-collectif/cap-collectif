@@ -51,7 +51,7 @@ export const ProjectHeaderDistricts = (properties: Props) => {
             <>
               <i className="cap-marker-1 mr-10" />
               {/* $FlowFixMe $refType */}
-              <ProjectHeaderDistrictsList project={project} fontSize={16} breakingNumber={3} />
+              <ProjectHeaderDistrictsList project={project} />
             </>
           );
         }}

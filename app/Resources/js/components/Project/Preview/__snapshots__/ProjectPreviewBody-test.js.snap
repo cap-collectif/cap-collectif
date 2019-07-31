@@ -127,55 +127,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         </a>
       </OverlayTrigger>
     </Title>
-    <ForwardRef(Relay(ProjectPreviewCounters))
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "externalLink": "http://test.com",
-          "hasParticipativeStep": false,
-          "id": "1",
-          "isExternal": true,
-          "steps": Array [
-            Object {
-              "status": "CLOSED",
-              "timeRange": Object {
-                "endAt": "2016-12-28T09:00:24+01:00",
-                "startAt": "2016-12-20T09:00:24+01:00",
-              },
-              "timeless": null,
-              "title": "Closed step",
-              "type": "presentation",
-              "url": "http://capco/closed-step1/show-link",
-            },
-            Object {
-              "status": "CLOSED",
-              "timeRange": Object {
-                "endAt": "2017-01-28T09:00:24+01:00",
-                "startAt": "2017-01-20T09:00:24+01:00",
-              },
-              "timeless": null,
-              "title": "closed step 2",
-              "type": "presentation",
-              "url": "http://capco/closed-step2/show-link",
-            },
-            Object {
-              "status": "FUTURE",
-              "timeRange": Object {
-                "endAt": "2017-12-28T09:00:24+01:00",
-                "startAt": "2017-12-20T09:00:24+01:00",
-              },
-              "timeless": null,
-              "title": "Future step 1",
-              "type": "presentation",
-              "url": "http://capco/future-step1/show-link",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
     <ForwardRef(Relay(ProjectPreviewExternalCounters))
       project={
         Object {
@@ -226,7 +177,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <ProjectPreviewProgressBar
     actualStep={
       Object {
         "status": "CLOSED",
@@ -395,46 +346,8 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         </a>
       </OverlayTrigger>
     </Title>
-    <ForwardRef(Relay(ProjectPreviewCounters))
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "externalLink": null,
-          "hasParticipativeStep": false,
-          "id": "1",
-          "isExternal": false,
-          "steps": Array [
-            Object {
-              "status": "FUTURE",
-              "timeRange": Object {
-                "endAt": "2017-12-28T09:00:24+01:00",
-                "startAt": "2017-12-20T09:00:24+01:00",
-              },
-              "timeless": null,
-              "title": "Future step 1",
-              "type": "presentation",
-              "url": "http://capco/future-step1/show-link",
-            },
-            Object {
-              "status": "FUTURE",
-              "timeRange": Object {
-                "endAt": "2018-01-28T09:00:24+01:00",
-                "startAt": "2018-01-20T09:00:24+01:00",
-              },
-              "timeless": null,
-              "title": "Future step 2",
-              "type": "presentation",
-              "url": "http://capco/future-step2/show-link",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <ProjectPreviewProgressBar
     actualStep={
       Object {
         "status": "FUTURE",
@@ -681,7 +594,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <ProjectPreviewProgressBar
     actualStep={
       Object {
         "status": "OPENED",
@@ -914,66 +827,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         </a>
       </OverlayTrigger>
     </Title>
-    <ForwardRef(Relay(ProjectPreviewCounters))
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "externalLink": "http://test.com",
-          "hasParticipativeStep": true,
-          "id": "1",
-          "isExternal": true,
-          "steps": Array [
-            Object {
-              "status": "CLOSED",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
-              "timeless": null,
-              "title": "Closed step",
-              "type": null,
-              "url": "",
-            },
-            Object {
-              "status": "OPENED",
-              "timeRange": Object {
-                "endAt": "2018-11-28T09:00:24+01:00",
-                "startAt": "2017-11-20T09:00:24+01:00",
-              },
-              "timeless": false,
-              "title": "Open step 2",
-              "type": "collect",
-              "url": "http://capco/step2/show-link",
-            },
-            Object {
-              "status": "OPENED",
-              "timeRange": Object {
-                "endAt": "2017-11-25T09:00:24+01:00",
-                "startAt": "2017-01-10T09:00:24+01:00",
-              },
-              "timeless": false,
-              "title": "Open step 1",
-              "type": "collect",
-              "url": "http://capco/step1/show-link",
-            },
-            Object {
-              "status": "FUTURE",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
-              "timeless": null,
-              "title": "Future step",
-              "type": null,
-              "url": "",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
     <ForwardRef(Relay(ProjectPreviewExternalCounters))
       project={
         Object {
@@ -1035,7 +888,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <ProjectPreviewProgressBar
     actualStep={
       Object {
         "status": "OPENED",
@@ -1240,68 +1093,8 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         </a>
       </OverlayTrigger>
     </Title>
-    <ForwardRef(Relay(ProjectPreviewCounters))
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "externalLink": null,
-          "hasParticipativeStep": false,
-          "id": "1",
-          "isExternal": false,
-          "steps": Array [
-            Object {
-              "status": "CLOSED",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
-              "timeless": null,
-              "title": "Closed step",
-              "type": null,
-              "url": "",
-            },
-            Object {
-              "status": "OPENED",
-              "timeRange": Object {
-                "endAt": "2017-11-25T09:00:24+01:00",
-                "startAt": "2017-11-10T09:00:24+01:00",
-              },
-              "timeless": false,
-              "title": "Open step",
-              "type": "presentation",
-              "url": "http://capco/step/show-link",
-            },
-            Object {
-              "status": "OPENED",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
-              "timeless": true,
-              "title": "timeless step",
-              "type": "collect",
-              "url": "http://capco/timeless-step/show-link",
-            },
-            Object {
-              "status": "FUTURE",
-              "timeRange": Object {
-                "endAt": null,
-                "startAt": null,
-              },
-              "timeless": null,
-              "title": "Future step",
-              "type": null,
-              "url": "",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <ProjectPreviewProgressBar
     actualStep={
       Object {
         "status": "OPENED",
@@ -1509,44 +1302,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
         </a>
       </OverlayTrigger>
     </Title>
-    <ForwardRef(Relay(ProjectPreviewCounters))
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "externalLink": "http://test.com",
-          "hasParticipativeStep": false,
-          "id": "1",
-          "isExternal": true,
-          "steps": Array [
-            Object {
-              "status": "CLOSED",
-              "timeRange": Object {
-                "endAt": "2016-12-28T09:00:24+01:00",
-                "startAt": "2016-12-20T09:00:24+01:00",
-              },
-              "timeless": null,
-              "title": "Closed step",
-              "type": "presentation",
-              "url": "http://capco/closed-step1/show-link",
-            },
-            Object {
-              "status": "CLOSED",
-              "timeRange": Object {
-                "endAt": "2017-01-28T09:00:24+01:00",
-                "startAt": "2017-01-20T09:00:24+01:00",
-              },
-              "timeless": null,
-              "title": "closed step 2",
-              "type": "presentation",
-              "url": "http://capco/closed-step2/show-link",
-            },
-          ],
-          "title": "Name of my project",
-          "url": "http://capco/show-link",
-        }
-      }
-    />
     <ForwardRef(Relay(ProjectPreviewExternalCounters))
       project={
         Object {
@@ -1586,7 +1341,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
       }
     />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <ProjectPreviewProgressBar
     actualStep={
       Object {
         "status": "CLOSED",

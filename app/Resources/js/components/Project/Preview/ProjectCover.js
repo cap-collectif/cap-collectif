@@ -6,7 +6,7 @@ import ProjectImage from './ProjectImage';
 import Card from '../../Ui/Card/Card';
 import type { ProjectCover_project } from '~relay/ProjectCover_project.graphql';
 
-type Props = {| +project: ProjectCover_project |};
+type Props = { project: ProjectCover_project };
 
 class ProjectCover extends React.Component<Props> {
   render() {

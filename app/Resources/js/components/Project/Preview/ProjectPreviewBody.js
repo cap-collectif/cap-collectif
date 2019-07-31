@@ -13,10 +13,10 @@ import ProjectPreviewExternalCounters from './ProjectPreviewExternalCounters';
 import Card from '../../Ui/Card/Card';
 import type { ProjectPreviewBody_project } from '~relay/ProjectPreviewBody_project.graphql';
 
-type Props = {|
-  +project: ProjectPreviewBody_project,
-  +hasSecondTitle?: boolean,
-|};
+type Props = {
+  project: ProjectPreviewBody_project,
+  hasSecondTitle?: boolean,
+};
 
 const getStepsFilter = (project: ProjectPreviewBody_project) => {
   const projectStep = project.steps.slice(0).sort((a, b) => {
@@ -191,13 +191,14 @@ export class ProjectPreviewBody extends React.Component<Props> {
         <div className="flex-1">
           <ProjectPreviewThemes project={project} />
           {this.getTitle()}
-          {/* $FlowFixMe $fragmentRefs */}
-          <ProjectPreviewCounters project={project} />
+          {project.hasParticipativeStep && !project.isExternal && (
+            /* $FlowFixMe $fragmentRefs */
+            <ProjectPreviewCounters project={project} />
+          )}
           {/* $FlowFixMe $fragmentRefs */}
           {project.isExternal && <ProjectPreviewExternalCounters project={project} />}
         </div>
         {actualStep && (
-          /* $FlowFixMe $fragmentRefs */
           <ProjectPreviewProgressBar
             project={project}
             actualStep={actualStep}
@@ -242,7 +243,6 @@ export default createFragmentContainer(ProjectPreviewBody, {
           votable
         }
       }
-      ...ProjectPreviewProgressBar_project
       ...ProjectPreviewCounters_project
       ...ProjectPreviewExternalCounters_project
       ...ProjectPreviewThemes_project

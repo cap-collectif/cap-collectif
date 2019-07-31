@@ -5,11 +5,11 @@ import { Field } from 'redux-form';
 import select from '../../../Form/Select';
 import type { ProjectTheme } from './ProjectListFiltersContainer';
 
-type Props = {|
-  +intl: IntlShape,
-  +theme: ?string,
-  +themes: ProjectTheme[],
-|};
+type Props = {
+  intl: IntlShape,
+  theme: ?string,
+  themes: ProjectTheme[],
+};
 
 export default class ProjectsListFilterThemes extends React.Component<Props> {
   render() {
@@ -27,8 +27,8 @@ export default class ProjectsListFilterThemes extends React.Component<Props> {
           placeholder={intl.formatMessage({ id: 'type-theme' })}
           options={themes.map(t => ({
             value: t.id,
-            label: t.title,
-            ariaLabel: t.title,
+            label: intl.formatMessage({ id: t.title }),
+            ariaLabel: intl.formatMessage({ id: t.title }),
           }))}
         />
       );

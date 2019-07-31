@@ -3,12 +3,12 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Tag from '../../Ui/Labels/Tag';
 
-type Props = {|
-  +value: number,
-  +label: string,
-  +showZero?: boolean,
-  +icon?: string,
-|};
+type Props = {
+  value: number,
+  label: string,
+  showZero?: boolean,
+  icon?: string,
+};
 
 export class ProjectPreviewCounter extends React.Component<Props> {
   static defaultProps = {

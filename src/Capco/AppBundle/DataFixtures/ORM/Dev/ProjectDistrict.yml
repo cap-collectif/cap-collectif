@@ -5,11 +5,9 @@ Capco\AppBundle\Entity\District\ProjectDistrict:
     displayedOnMap: 1
     border: '@borderStyle1'
     background: '@backgroundStyle1'
-    projects: ['@p1']
   projectDistrict2:
     id: projectDistrict2
     name: Deuxième Quartier
     displayedOnMap: 1
     border: '@borderStyle1'
     background: '@backgroundStyle1'
-    projects: ['@p1']
