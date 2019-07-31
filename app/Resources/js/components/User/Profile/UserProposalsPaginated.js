@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-// TODO https://github.com/cap-collectif/platform/issues/7774
 import { Button, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
@@ -10,12 +9,12 @@ import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import ProposalPreview from '../../Proposal/Preview/ProposalPreview';
 import type { UserProposalsPaginated_user } from '~relay/UserProposalsPaginated_user.graphql';
 
-const PROPOSAL_PAGINATION = 10;
+type Props = {|
+  +relay: RelayPaginationProp,
+  +user: UserProposalsPaginated_user,
+|};
 
-type Props = {
-  relay: RelayPaginationProp,
-  user: UserProposalsPaginated_user,
-};
+export const PROPOSAL_PAGINATION = 50;
 
 type State = {
   loading: boolean,

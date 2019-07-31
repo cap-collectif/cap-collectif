@@ -5,7 +5,9 @@ import ReactOnRails from 'react-on-rails';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';
-import UserProposalsPaginated from '../components/User/Profile/UserProposalsPaginated';
+import UserProposalsPaginated, {
+  PROPOSAL_PAGINATION,
+} from '../components/User/Profile/UserProposalsPaginated';
 import type { UserProposalsAppQueryResponse } from '~relay/UserProposalsAppQuery.graphql';
 
 export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticated: boolean }) => (
@@ -17,7 +19,7 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
           isProfileView: true,
           isAuthenticated,
           stepId: '',
-          count: 10,
+          count: PROPOSAL_PAGINATION,
           cursor: null,
         }}
         environment={environment}
@@ -43,7 +45,7 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
             }
           }
         `}
-        render={({ error, props }: { props: ?UserProposalsAppQueryResponse, ...ReadyState }) => {
+        render={({ error, props }: { ...ReadyState, props: ?UserProposalsAppQueryResponse }) => {
           if (error) {
             return graphqlError;
           }

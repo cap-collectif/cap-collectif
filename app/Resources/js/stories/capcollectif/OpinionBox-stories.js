@@ -46,7 +46,7 @@ const voteWidgetTypes = {
   both: 2,
 };
 
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
 const OpinionItem = ({ item, typeLabel }) => (
   <React.Fragment>
     <Media>
@@ -145,7 +145,6 @@ const OpinionItem = ({ item, typeLabel }) => (
   </React.Fragment>
 );
 
-// eslint-disable-next-line react/prop-types
 const OpinionBox = ({ section, opinion }) => (
   /** Blah blah blah */
   <div id="OpinionBox" className="block block--bordered opinion__details">

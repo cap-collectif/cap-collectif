@@ -9,7 +9,7 @@ import Card from '../../components/Ui/Card/Card';
 import Loader from '../../components/Ui/FeedbacksIndicators/Loader';
 import { opinionSources as opinionSourcesMock } from '../mocks/opinionSources';
 
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
 const OpinionSourceItem = ({ item, isProfile, typeLabel }) => (
   <Media>
     {isProfile && item.related && (
@@ -108,7 +108,6 @@ const OpinionSourceItem = ({ item, isProfile, typeLabel }) => (
   </Media>
 );
 
-// eslint-disable-next-line react/prop-types
 const OpinionSourceList = ({ section, opinionSources, isProfile }) => (
   <div>
     <Panel>
