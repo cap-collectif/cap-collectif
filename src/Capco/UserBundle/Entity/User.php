@@ -1068,11 +1068,6 @@ class User extends BaseUser implements
         return $contributions;
     }
 
-    public function getContributionsCount()
-    {
-        return $this->getCommentsCount();
-    }
-
     public function getCommentsCount(): int
     {
         return $this->postCommentsCount + $this->proposalCommentsCount;
