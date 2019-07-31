@@ -21,7 +21,7 @@ use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
 
 class ConsultationStepExtractorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         EntityManager $em,
         TranslatorInterface $translator,
         Router $router,
@@ -31,12 +31,12 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->beConstructedWith($em, $translator, $router, $opinionTypesResolver, $urlResolver);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(ConsultationStepExtractor::class);
     }
 
-    function it_can_create_or_update_elements_from_consultation_step(
+    public function it_can_create_or_update_elements_from_consultation_step(
         Synthesis $synthesis,
         ConsultationStep $consultationStep
     ) {
@@ -101,8 +101,8 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $consultation = new Consultation();
         $consultationStep->getIsEnabled()->willReturn(true);
         $consultationStep
-            ->getConsultation()
-            ->willReturn($consultation)
+            ->getConsultations()
+            ->willReturn(new ArrayCollection([$consultation]))
             ->shouldBeCalled();
 
         $updatedSynthesis = $this->createOrUpdateElementsFromConsultationStep(
@@ -111,7 +111,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         )->shouldReturnAnInstanceOf(Synthesis::class);
     }
 
-    function it_can_tell_if_element_is_related_to_object(SynthesisElement $element)
+    public function it_can_tell_if_element_is_related_to_object(SynthesisElement $element)
     {
         // Can't mock opinion because we need to call get_class() method on it
         $opinion = new Opinion();
@@ -162,7 +162,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->isElementExisting($element, $opinion)->shouldReturn(false);
     }
 
-    function it_can_tell_if_element_is_outdated(SynthesisElement $element, Opinion $opinion)
+    public function it_can_tell_if_element_is_outdated(SynthesisElement $element, Opinion $opinion)
     {
         $now = new \DateTime();
         $before = (new \DateTime())->modify('-10 days');
@@ -201,7 +201,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->isElementOutdated($element, $opinion)->shouldReturn(false);
     }
 
-    function it_can_update_an_element_from_an_object(
+    public function it_can_update_an_element_from_an_object(
         SynthesisElement $element,
         User $author,
         Opinion $object

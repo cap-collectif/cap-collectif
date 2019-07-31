@@ -159,12 +159,10 @@ class StepAdmin extends CapcoAdmin
                     'label' => 'admin.fields.step.body',
                     'required' => false
                 ])
-                ->add('consultation', 'sonata_type_model', [
+                ->add('consultations', null, [
+                    'by_reference' => false,
                     'label' => 'admin.fields.project.consultation',
-                    'required' => true,
-                    'btn_add' => false,
-                    'query' => $this->createQueryForConsultation(),
-                    'choices_as_values' => true
+                    'required' => false
                 ])
                 ->end()
                 ->with('requirements')

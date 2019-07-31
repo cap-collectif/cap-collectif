@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -67,13 +68,14 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     private $contributorsCount = 0;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="step")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="step")
      */
-    private $consultation;
+    private $consultations;
 
     public function __construct()
     {
         parent::__construct();
+        $this->consultations = new ArrayCollection();
         $this->requirements = new ArrayCollection();
     }
 
@@ -254,21 +256,31 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     }
 
     /**
-     * @return null|Consultation
+     * @return Collection|Consultation[]
      */
-    public function getConsultation(): ?Consultation
+    public function getConsultations(): Collection
     {
-        return $this->consultation;
+        return $this->consultations;
     }
 
-    public function setConsultation(Consultation $consultation = null)
+    public function addConsultation(Consultation $consultation): self
     {
-        if ($this->consultation) {
-            $this->consultation->setStep(null);
-        }
-        if ($consultation) {
+        if (!$this->consultations->contains($consultation)) {
+            $this->consultations->add($consultation);
             $consultation->setStep($this);
         }
+
+        return $this;
+    }
+
+    public function removeConsultation(Consultation $consultation): self
+    {
+        if ($this->consultations->contains($consultation)) {
+            $this->consultations->remove($consultation);
+            $consultation->clearStep();
+        }
+
+        return $this;
     }
 
     // **************************** Custom methods *******************************
@@ -324,16 +336,17 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
 
     public function isVotable(): bool
     {
-        /** @var Consultation $consultation */
-        $consultation = $this->consultation;
-        if (!$consultation) {
+        $consultations = $this->getConsultations();
+
+        if (0 === $consultations->count()) {
             return false;
         }
 
-        /** @var OpinionType $opinionType */
-        foreach ($consultation->getOpinionTypes() as $opinionType) {
-            if (OpinionType::VOTE_WIDGET_DISABLED !== $opinionType->getVoteWidgetType()) {
-                return true;
+        foreach ($consultations as $consultation) {
+            foreach ($consultation->getOpinionTypes() as $opinionType) {
+                if (OpinionType::VOTE_WIDGET_DISABLED !== $opinionType->getVoteWidgetType()) {
+                    return true;
+                }
             }
         }
 

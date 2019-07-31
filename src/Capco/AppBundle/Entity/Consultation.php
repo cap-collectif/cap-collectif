@@ -62,7 +62,7 @@ class Consultation
     private $opinionTypes;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="consultation")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="consultations")
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $step;
@@ -154,6 +154,13 @@ class Consultation
     public function getVotesCount(): int
     {
         return $this->getStep()->getVotesCount();
+    }
+
+    public function clearStep(): self
+    {
+        $this->step = null;
+
+        return $this;
     }
 
     public function getStep(): ?ConsultationStep
@@ -249,6 +256,9 @@ class Consultation
         return $this->updatedAt;
     }
 
+    /**
+     * @return Collection|OpinionType[]
+     */
     public function getOpinionTypes(): Collection
     {
         return $this->opinionTypes;

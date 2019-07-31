@@ -192,13 +192,17 @@ class AbstractVoteRepository extends EntityRepository
 
     public function getVotesFromConsultationStep(ConsultationStep $step): int
     {
-        if (!$step->getConsultation()) {
+        $consultations = $step->getConsultations();
+        if (0 === $consultations->count()) {
             return 0;
         }
 
-        $cId = $step->getConsultation()->getId();
+        $count = 0;
 
-        $sql = "
+        foreach ($consultations as $consultation) {
+            $cId = $consultation->getId();
+
+            $sql = "
             SELECT SUM(nb) as result
             FROM (
                 SELECT COUNT(v.id) as nb , 'opi' as entity
@@ -246,10 +250,13 @@ class AbstractVoteRepository extends EntityRepository
             ) res
         ";
 
-        return $this->getEntityManager()
-            ->getConnection()
-            ->query($sql)
-            ->fetchAll()[0]['result'];
+            $count += $this->getEntityManager()
+                ->getConnection()
+                ->query($sql)
+                ->fetchAll()[0]['result'];
+        }
+
+        return $count;
     }
 
     protected function getQueryBuilder()

@@ -67,7 +67,7 @@ class ConsultationStepExtractor
             return $synthesis;
         }
 
-        if (!$consultationStep->getConsultation()) {
+        if (0 === $consultationStep->getConsultations()->count()) {
             return $synthesis;
         }
 
@@ -76,7 +76,10 @@ class ConsultationStepExtractor
         $this->previousElements = $synthesis->getElements();
 
         // First we get the opinion types allowed by the consultation step
-        $opinionTypes = $consultationStep->getConsultation()->getRootOpinionTypes();
+        $opinionTypes = $consultationStep
+            ->getConsultations()
+            ->first()
+            ->getRootOpinionTypes();
         // Then we start creating or updating the elements from these opinion types
         $this->createElementsFromOpinionTypes($opinionTypes);
 
@@ -100,8 +103,8 @@ class ConsultationStepExtractor
 
             // Create elements from opinions
             $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->findBy([
-                'consultation' => $this->consultationStep->getConsultation(),
-                'OpinionType' => $opinionType,
+                'consultation' => $this->consultationStep->getConsultations()->first(),
+                'OpinionType' => $opinionType
             ]);
             if (\count($opinions) > 0) {
                 $this->createElementsFromOpinions($opinions, $elementFromOT);
@@ -354,8 +357,7 @@ class ConsultationStepExtractor
         SynthesisElement $element,
         // Contribution|OpinionType
         $contribution
-    ): SynthesisElement
-    {
+    ): SynthesisElement {
         if ($contribution instanceof OpinionType) {
             return $this->setDataFromOpinionType($element, $contribution);
         }
@@ -475,7 +477,7 @@ class ConsultationStepExtractor
         // Set link
         if ($source->getMedia()) {
             $mediaURL = $this->router->generate('sonata_media_download', [
-                'id' => $source->getMedia()->getId(),
+                'id' => $source->getMedia()->getId()
             ]);
             $element->setLink($mediaURL);
         } elseif ($source->getLink()) {

@@ -28,20 +28,19 @@ class OpinionTypesResolver
 
     public function findByStepAndSlug(ConsultationStep $step, string $slug): OpinionType
     {
-        foreach ($step->getConsultation()->getOpinionTypes() as $section) {
-            if ($section->getSlug() === $slug) {
-                return $section;
+        foreach ($step->getConsultations() as $consultation) {
+            foreach ($consultation->getOpinionTypes() as $section) {
+                if ($section->getSlug() === $slug) {
+                    return $section;
+                }
             }
         }
 
         throw new NotFoundHttpException('This type does not exist for this consultation step');
     }
 
-    public function getAvailableLinkTypesForConsultation(
-        Consultation $consultation
-    ) {
-        return $this->opinionTypeRepo->getLinkableOpinionTypesForConsultation(
-            $consultation
-        );
+    public function getAvailableLinkTypesForConsultation(Consultation $consultation)
+    {
+        return $this->opinionTypeRepo->getLinkableOpinionTypesForConsultation($consultation);
     }
 }
