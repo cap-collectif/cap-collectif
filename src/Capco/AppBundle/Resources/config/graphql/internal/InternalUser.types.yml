@@ -113,8 +113,6 @@ InternalUser:
             type: 'Int'
             description: 'Returns the first n elements from the list.'
             defaultValue: 100
-      opinionsCount:
-        type: 'Int!'
       opinionVotesCount:
         type: 'Int!'
       opinionVersionsCount:

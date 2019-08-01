@@ -112,16 +112,6 @@ class User extends BaseUser implements
     /**
      * @var int
      */
-    protected $opinionsCount = 0;
-
-    /**
-     * @var int
-     */
-    protected $proposalsCount = 0;
-
-    /**
-     * @var int
-     */
     protected $opinionVersionsCount = 0;
 
     // Comments
