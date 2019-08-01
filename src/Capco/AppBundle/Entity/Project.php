@@ -694,7 +694,10 @@ class Project implements IndexableInterface
         if (!$this->districts->contains($district)) {
             $this->districts->add($district);
         }
-        $district->addProject($this);
+        
+        if (!$district->hasProject($this)) {
+            $district->addProject($this);
+        }
 
         return $this;
     }
