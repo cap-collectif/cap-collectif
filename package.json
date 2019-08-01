@@ -203,7 +203,7 @@
         "fancybox": "^3.0.0",
         "fetch": "github/fetch",
         "file-loader": "^3.0.1",
-        "flow-bin": "^0.102.0",
+        "flow-bin": "^0.104.0",
         "flow-coverage-report": "https://github.com/cap-collectif/flow-coverage-report/tarball/312a5be1e89451036866ca2bafcb522e49de8e3e",
         "flux": "^3.1.3",
         "gherkin-lint": "^3.3.0",
