@@ -44,6 +44,8 @@ class RecentContributionsResolver
                 throw new NotFoundHttpException(
                     'Contribution not found for type ' . $type . ' and id ' . $id
                 );
+
+                break;
         }
 
         return $result;

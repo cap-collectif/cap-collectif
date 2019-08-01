@@ -25,14 +25,14 @@ import type { MapTokens } from '../../../redux/modules/user';
 
 let L;
 
-type Props = {|
-  +viewer: ?ProposalPageContent_viewer,
-  +step: ?ProposalPageContent_step,
-  +proposal: ProposalPageContent_proposal,
-  +mapTokens: MapTokens,
-  +className: string,
-  +dispatch: Function,
-|};
+type Props = {
+  viewer: ?ProposalPageContent_viewer,
+  step: ?ProposalPageContent_step,
+  proposal: ProposalPageContent_proposal,
+  mapTokens: MapTokens,
+  className: string,
+  dispatch: Function,
+};
 
 export class ProposalPageContent extends React.Component<Props> {
   static defaultProps = {
@@ -154,9 +154,13 @@ export class ProposalPageContent extends React.Component<Props> {
             </div>
           )}
         </div>
+        {/* $FlowFixMe */}
         <ProposalEditModal proposal={proposal} />
         <ProposalDeleteModal proposal={proposal} />
-        {proposal.publicationStatus !== 'DRAFT' && <ProposalPageComments proposal={proposal} />}
+        {proposal.publicationStatus !== 'DRAFT' && (
+          /* $FlowFixMe */
+          <ProposalPageComments proposal={proposal} />
+        )}
       </div>
     );
   }

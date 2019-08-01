@@ -33,15 +33,15 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        return $this->import($input, $output);
+        $this->import($input, $output);
     }
 
-    protected function import(InputInterface $input, OutputInterface $output): int
+    protected function import(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getOption('force')) {
             $output->writeln('Please set the --force option to run this command');
 
-            return 1;
+            return;
         }
 
         $em = $this->getContainer()
@@ -82,7 +82,7 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
                 ->get(ReplyRepository::class)
                 ->findOneBy([
                     'author' => $author,
-                    'questionnaire' => $questionnaire
+                    'questionnaire' => $questionnaire,
                 ]);
             if (!$reply) {
                 $reply = new Reply();
@@ -107,7 +107,5 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
         }
 
         $output->writeln(\count($responses) . ' responses have been created !');
-
-        return 0;
     }
 }

@@ -9,7 +9,7 @@ class Resolver
 {
     protected $repository;
     protected $logger;
-    protected $colors;
+    protected $colors = null;
 
     public function __construct(SiteColorRepository $repository, LoggerInterface $logger)
     {
@@ -23,7 +23,7 @@ class Resolver
             $this->colors = $this->repository->getValuesIfEnabled();
         }
         if (!isset($this->colors[$key])) {
-            return null;
+            return;
         }
 
         return $this->colors[$key]['value'];

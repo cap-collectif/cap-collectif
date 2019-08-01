@@ -23,7 +23,7 @@ class ProposalSearch extends Search
         'object',
         'object.std',
         'teaser',
-        'teaser.std'
+        'teaser.std',
     ];
 
     private $proposalRepo;
@@ -82,7 +82,7 @@ class ProposalSearch extends Search
 
         return [
             'proposals' => $proposals,
-            'count' => $resultSet->getTotalHits()
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -166,19 +166,21 @@ class ProposalSearch extends Search
                     'votesCountByStep.count' => [
                         'order' => 'desc',
                         'nested_path' => 'votesCountByStep',
-                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]]
-                    ]
+                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]],
+                    ],
                 ];
 
+                break;
             case 'least-votes':
                 return [
                     'votesCountByStep.count' => [
                         'order' => 'asc',
                         'nested_path' => 'votesCountByStep',
-                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]]
-                    ]
+                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]],
+                    ],
                 ];
 
+                break;
             case 'comments':
                 $sortField = 'commentsCount';
                 $sortOrder = 'desc';
@@ -196,6 +198,8 @@ class ProposalSearch extends Search
                 break;
             default:
                 throw new \RuntimeException('Unknown order: ' . $order);
+
+                break;
         }
 
         return [$sortField => ['order' => $sortOrder]];

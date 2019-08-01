@@ -348,6 +348,8 @@ EOF;
         switch ($response['__typename']) {
             case self::VALUE_RESPONSE_TYPENAME:
                 return $response['formattedValue'];
+
+                break;
             case self::MEDIA_RESPONSE_TYPENAME:
                 return implode(
                     ', ',
@@ -356,6 +358,7 @@ EOF;
                     }, $response['medias'])
                 );
 
+                break;
             default:
                 throw new \LogicException('Unknown response typename');
         }

@@ -11,6 +11,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": "http://test.com",
+          "hasParticipativeStep": false,
           "id": "1",
           "isExternal": true,
           "steps": Array [
@@ -132,6 +133,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": "http://test.com",
+          "hasParticipativeStep": false,
           "id": "1",
           "isExternal": true,
           "steps": Array [
@@ -180,6 +182,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": "http://test.com",
+          "hasParticipativeStep": false,
           "id": "1",
           "isExternal": true,
           "steps": Array [
@@ -243,6 +246,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "$fragmentRefs": null,
         "$refType": null,
         "externalLink": "http://test.com",
+        "hasParticipativeStep": false,
         "id": "1",
         "isExternal": true,
         "steps": Array [
@@ -314,6 +318,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": null,
+          "hasParticipativeStep": false,
           "id": "1",
           "isExternal": false,
           "steps": Array [
@@ -396,6 +401,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": null,
+          "hasParticipativeStep": false,
           "id": "1",
           "isExternal": false,
           "steps": Array [
@@ -448,6 +454,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "$fragmentRefs": null,
         "$refType": null,
         "externalLink": null,
+        "hasParticipativeStep": false,
         "id": "1",
         "isExternal": false,
         "steps": Array [
@@ -514,6 +521,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": null,
+          "hasParticipativeStep": true,
           "id": "1",
           "isExternal": false,
           "steps": Array [
@@ -618,6 +626,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": null,
+          "hasParticipativeStep": true,
           "id": "1",
           "isExternal": false,
           "steps": Array [
@@ -692,6 +701,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "$fragmentRefs": null,
         "$refType": null,
         "externalLink": null,
+        "hasParticipativeStep": true,
         "id": "1",
         "isExternal": false,
         "steps": Array [
@@ -777,6 +787,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": "http://test.com",
+          "hasParticipativeStep": true,
           "id": "1",
           "isExternal": true,
           "steps": Array [
@@ -909,6 +920,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": "http://test.com",
+          "hasParticipativeStep": true,
           "id": "1",
           "isExternal": true,
           "steps": Array [
@@ -968,6 +980,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": "http://test.com",
+          "hasParticipativeStep": true,
           "id": "1",
           "isExternal": true,
           "steps": Array [
@@ -1042,6 +1055,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "$fragmentRefs": null,
         "$refType": null,
         "externalLink": "http://test.com",
+        "hasParticipativeStep": true,
         "id": "1",
         "isExternal": true,
         "steps": Array [
@@ -1127,6 +1141,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": null,
+          "hasParticipativeStep": false,
           "id": "1",
           "isExternal": false,
           "steps": Array [
@@ -1231,6 +1246,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": null,
+          "hasParticipativeStep": false,
           "id": "1",
           "isExternal": false,
           "steps": Array [
@@ -1305,6 +1321,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "$fragmentRefs": null,
         "$refType": null,
         "externalLink": null,
+        "hasParticipativeStep": false,
         "id": "1",
         "isExternal": false,
         "steps": Array [
@@ -1387,6 +1404,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": "http://test.com",
+          "hasParticipativeStep": false,
           "id": "1",
           "isExternal": true,
           "steps": Array [
@@ -1497,6 +1515,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": "http://test.com",
+          "hasParticipativeStep": false,
           "id": "1",
           "isExternal": true,
           "steps": Array [
@@ -1534,6 +1553,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
           "$fragmentRefs": null,
           "$refType": null,
           "externalLink": "http://test.com",
+          "hasParticipativeStep": false,
           "id": "1",
           "isExternal": true,
           "steps": Array [
@@ -1586,6 +1606,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
         "$fragmentRefs": null,
         "$refType": null,
         "externalLink": "http://test.com",
+        "hasParticipativeStep": false,
         "id": "1",
         "isExternal": true,
         "steps": Array [

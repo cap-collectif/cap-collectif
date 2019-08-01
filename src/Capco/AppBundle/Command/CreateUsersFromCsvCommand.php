@@ -11,20 +11,29 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateUsersFromCsvCommand extends ContainerAwareCommand
 {
-    const HEADERS = ['username', 'email', 'password'];
+    const HEADERS = [
+        'username',
+        'email',
+        'password',
+    ];
     private $filePath;
     private $delimiter;
 
     protected function configure()
     {
-        $this->setName('capco:import:users')
+        $this
+            ->setName('capco:import:users')
             ->setDescription('Import users from a CSV file')
             ->addArgument(
                 'filePath',
                 InputArgument::REQUIRED,
                 'Please provide the path of the file you want to use.'
             )
-            ->addArgument('delimiter', InputArgument::OPTIONAL, ', or ;');
+            ->addArgument(
+                'delimiter',
+                InputArgument::OPTIONAL,
+                ', or ;'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -39,10 +48,9 @@ class CreateUsersFromCsvCommand extends ContainerAwareCommand
 
         if (0 === $count) {
             $output->writeln(
-                '<error>Your file with path ' .
-                    $this->filePath .
-                    ' was not found or no user was found in your file. Please verify your path and file\'s content.</error>'
-            );
+                '<error>Your file with path '
+                . $this->filePath .
+                ' was not found or no user was found in your file. Please verify your path and file\'s content.</error>');
             $output->writeln('<error>Import cancelled. No user was created.</error>');
 
             return 1;
@@ -72,7 +80,11 @@ class CreateUsersFromCsvCommand extends ContainerAwareCommand
 
         $progress->finish();
 
-        $output->writeln('<info>' . (\count($rows) - 1) . ' users successfully created.</info>');
+        $output->writeln(
+            '<info>'
+            . (\count($rows) - 1) .
+            ' users successfully created.</info>'
+        );
 
         return 0;
     }
@@ -101,7 +113,8 @@ class CreateUsersFromCsvCommand extends ContainerAwareCommand
 
     protected function generateContentException(OutputInterface $output): int
     {
-        $output->writeln('<error>Content of your file is not valid.</error>');
+        $output->writeln(
+            '<error>Content of your file is not valid.</error>');
         $output->writeln('<error>Import cancelled. No user was created.</error>');
 
         return 1;
@@ -119,7 +132,7 @@ class CreateUsersFromCsvCommand extends ContainerAwareCommand
         }
 
         if ($hasError) {
-            return (bool) $this->generateContentException($output);
+            return $this->generateContentException($output);
         }
 
         return true;

@@ -1,4 +1,3 @@
-// @flow
 import { author } from './users';
 
 export const opinion = {
@@ -18,7 +17,6 @@ export const opinion = {
   votesMitige: { totalCount: 1 },
   votesNok: { totalCount: 3 },
   votesOk: { totalCount: 4 },
-  // $FlowFixMe
   previewVotes: new Array(8).fill(author),
   body:
     'Lorem ipsum dolor amet direct trade cornhole exercitation hashtag mixtape, master cleanse vexillologist. Irure kickstarter single-origin coffee fashion axe vexillologist viral. Selfies etsy cloud bread heirloom, sunt craft beer fixie palo santo asymmetrical.',

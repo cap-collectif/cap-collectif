@@ -53,7 +53,7 @@ class CommandContext implements KernelAwareContext
      */
     public function runCommandWithParameters($command, PyStringNode $parameters)
     {
-        $commandParameters = json_decode((string) $parameters, true);
+        $commandParameters = json_decode($parameters, true);
 
         if (null === $commandParameters) {
             throw new \InvalidArgumentException('PyStringNode could not be converted to json.');

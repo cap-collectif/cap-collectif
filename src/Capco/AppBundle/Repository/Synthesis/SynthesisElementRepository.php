@@ -78,7 +78,6 @@ class SynthesisElementRepository extends MaterializedPathRepository
             ->leftJoin('se.originalDivision', 'odiv')
             ->where('se.id = :id')
             ->setParameter('id', $id);
-
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -136,8 +135,9 @@ class SynthesisElementRepository extends MaterializedPathRepository
                     $item['publishedChildrenCount'] = (int) $item['publishedChildrenCount'];
                 }
                 if (isset($item['publishedParentChildrenCount'])) {
-                    $item['publishedParentChildrenCount'] =
-                        (int) $item['publishedParentChildrenCount'];
+                    $item['publishedParentChildrenCount'] = (int) $item[
+                        'publishedParentChildrenCount'
+                    ];
                 }
                 if (isset($item['childrenScore'])) {
                     $item['childrenScore'] = (int) $item['childrenScore'];
@@ -200,8 +200,9 @@ class SynthesisElementRepository extends MaterializedPathRepository
             return;
         }
         $parent = explode('-', $splitted[\count($splitted) - 2]);
+        $parent = implode('-', array_splice($parent, \count($parent) - 5, \count($parent)));
 
-        return implode('-', array_splice($parent, \count($parent) - 5, \count($parent)));
+        return $parent;
     }
 
     /**
@@ -355,28 +356,23 @@ class SynthesisElementRepository extends MaterializedPathRepository
         switch ($type) {
             case 'new':
                 $qb = $this->addAndQueryCondition($qb, 'archived', false);
-
                 break;
             case 'unpublished':
                 $qb = $this->addAndQueryCondition($qb, 'archived', true);
                 $qb = $this->addAndQueryCondition($qb, 'published', false);
-
                 break;
             case 'archived':
                 $qb = $this->addAndQueryCondition($qb, 'archived', true);
-
                 break;
             case 'published':
                 $qb = $this->addAndQueryCondition($qb, 'archived', true);
                 $qb = $this->addAndQueryCondition($qb, 'published', true);
-
                 break;
             case 'notIgnored':
                 $qb
                     ->andWhere('se.published = :published OR se.archived = :notArchived')
                     ->setParameter('published', true)
                     ->setParameter('notArchived', false);
-
                 break;
             default:
                 break;
@@ -390,16 +386,22 @@ class SynthesisElementRepository extends MaterializedPathRepository
         switch ($type) {
             case 'new':
                 return $alias . '.archived = 0';
+                break;
             case 'unpublished':
                 return $alias . '.archived = 1 AND ' . $alias . '.published = 0';
+                break;
             case 'archived':
                 return $alias . '.archived = 1';
+                break;
             case 'published':
                 return $alias . '.archived = 1 AND ' . $alias . '.published = 1';
+                break;
             case 'notIgnored':
                 return $alias . '.published = 1 OR ' . $alias . '.archived = 0';
+                break;
             default:
                 return '';
+                break;
         }
     }
 
