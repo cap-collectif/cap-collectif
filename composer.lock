@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d33797f945a7decfdb83dec8c31ce11a",
+    "content-hash": "24710555329859537ea9752979156784",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -4920,9 +4920,9 @@
             "authors": [
                 {
                     "name": "Ignace Nyamagana Butera",
+                    "role": "Developer",
                     "email": "nyamsprod@gmail.com",
-                    "homepage": "https://github.com/nyamsprod/",
-                    "role": "Developer"
+                    "homepage": "https://github.com/nyamsprod/"
                 }
             ],
             "description": "Csv data manipulation made easy in PHP",
@@ -10530,32 +10530,33 @@
         },
         {
             "name": "swarrot/swarrot",
-            "version": "v3.3.1",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swarrot/swarrot.git",
-                "reference": "1cf6b2f81e53f2ceca14485534aa2ca09e3c3d57"
+                "reference": "698fb79bd8904e5da244ac33312ad14e517bac97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swarrot/swarrot/zipball/1cf6b2f81e53f2ceca14485534aa2ca09e3c3d57",
-                "reference": "1cf6b2f81e53f2ceca14485534aa2ca09e3c3d57",
+                "url": "https://api.github.com/repos/swarrot/swarrot/zipball/698fb79bd8904e5da244ac33312ad14e517bac97",
+                "reference": "698fb79bd8904e5da244ac33312ad14e517bac97",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
                 "psr/log": "^1.0",
-                "symfony/options-resolver": "^2.8 || ^3.0 || ^4.0"
+                "symfony/options-resolver": "^3.4 || ^4.1"
             },
             "require-dev": {
                 "aws/aws-sdk-php": "^2.8",
                 "doctrine/common": "^2.3",
                 "doctrine/dbal": "^2.2",
                 "php-amqplib/php-amqplib": "^2.1",
-                "phpunit/phpunit": "^6.2",
+                "php-http/curl-client": "^2.0",
+                "phpunit/phpunit": "^7.5",
                 "queue-interop/amqp-interop": "^0.5",
                 "queue-interop/queue-interop": "^0.5",
-                "sentry/sentry": ">=1.5.0",
+                "sentry/sentry": "^1.5",
                 "stomp-php/stomp-php": "^4.3.1"
             },
             "suggest": {
@@ -10564,9 +10565,9 @@
                 "php-amqplib/php-amqplib": "^2.1",
                 "queue-interop/amqp-interop": "^0.5",
                 "queue-interop/queue-interop": "^0.5",
-                "sentry/sentry": ">=1.5.0",
+                "sentry/sentry": "^1.5",
                 "stomp-php/stomp-php": "^4.3.1",
-                "symfony/console": "^3.0"
+                "symfony/console": "^3.4 || ^4.1"
             },
             "type": "library",
             "extra": {
@@ -10596,36 +10597,39 @@
                 "swarrot",
                 "worker"
             ],
-            "time": "2018-11-10T14:00:51+00:00"
+            "time": "2019-05-19T15:13:16+00:00"
         },
         {
             "name": "swarrot/swarrot-bundle",
-            "version": "v1.6.1",
+            "version": "v1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swarrot/SwarrotBundle.git",
-                "reference": "35b422ba58d227fd856c8d6c964618778136f719"
+                "reference": "f3e5b8f83b38121262d29adf908e4bccae6d85ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swarrot/SwarrotBundle/zipball/35b422ba58d227fd856c8d6c964618778136f719",
-                "reference": "35b422ba58d227fd856c8d6c964618778136f719",
+                "url": "https://api.github.com/repos/swarrot/SwarrotBundle/zipball/f3e5b8f83b38121262d29adf908e4bccae6d85ea",
+                "reference": "f3e5b8f83b38121262d29adf908e4bccae6d85ea",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1",
-                "psr/log": "~1.0",
-                "swarrot/swarrot": "^2.1.1|^3.0",
-                "symfony/console": "~2.4|~3.0|~4.0",
-                "symfony/framework-bundle": "~2.4|~3.0|~4.0",
-                "symfony/yaml": "~2.4|~3.0|~4.0"
+                "php": "^7.1",
+                "psr/log": "^1.0",
+                "swarrot/swarrot": "^3.4",
+                "symfony/config": "^3.4|^4.1",
+                "symfony/console": "^3.4|^4.1",
+                "symfony/dependency-injection": "^3.4|^4.1",
+                "symfony/http-kernel": "^3.4|^4.1",
+                "symfony/yaml": "^3.4|^4.1"
             },
             "require-dev": {
-                "doctrine/common": "~2.2",
-                "doctrine/dbal": "~2.2",
-                "phpunit/phpunit": "~6.5",
-                "sentry/sentry-symfony": ">=0.1.0",
-                "symfony/phpunit-bridge": "~4.0"
+                "doctrine/common": "^2.2",
+                "doctrine/dbal": "^2.2",
+                "php-amqplib/php-amqplib": "^2.9",
+                "phpunit/phpunit": "^7.5",
+                "sentry/sentry-symfony": "^2.3",
+                "symfony/phpunit-bridge": "^4.0"
             },
             "suggest": {
                 "php-amqplib/php-amqplib": "Required if using amqp_lib"
@@ -10633,7 +10637,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -10659,7 +10663,7 @@
                 "bundle",
                 "swarrot"
             ],
-            "time": "2019-02-11T20:17:06+00:00"
+            "time": "2019-07-28T22:03:26+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -13113,21 +13117,21 @@
         },
         {
             "name": "bex/behat-step-time-logger",
-            "version": "2.0.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tkotosz/behat-step-time-logger.git",
-                "reference": "f633518f564c0603e81715ca464007e1cf21ecb3"
+                "reference": "3f8a080450d0e5d28711093bbbd87dc29ad0b953"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tkotosz/behat-step-time-logger/zipball/f633518f564c0603e81715ca464007e1cf21ecb3",
-                "reference": "f633518f564c0603e81715ca464007e1cf21ecb3",
+                "url": "https://api.github.com/repos/tkotosz/behat-step-time-logger/zipball/3f8a080450d0e5d28711093bbbd87dc29ad0b953",
+                "reference": "3f8a080450d0e5d28711093bbbd87dc29ad0b953",
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "^3.0.0",
-                "php": ">=5.5",
+                "php": ">=5.4",
                 "symfony/filesystem": ">=2.3 || ^3.0.0"
             },
             "require-dev": {
@@ -13161,7 +13165,7 @@
                 "Behat",
                 "TDD"
             ],
-            "time": "2018-10-12T07:06:30+00:00"
+            "time": "2018-07-12T11:31:30+00:00"
         },
         {
             "name": "bossa/phpspec2-expect",
@@ -14436,18 +14440,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "email": "sebastian@phpeople.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpeople.de"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Library for handling version information and constraints",

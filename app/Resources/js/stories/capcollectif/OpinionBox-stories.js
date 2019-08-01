@@ -25,9 +25,10 @@ import InlineList from '../../components/Ui/List/InlineList';
 import PinnedLabel from '../../components/Utils/PinnedLabel';
 import { UserAvatarDeprecated } from '../../components/User/UserAvatarDeprecated';
 
+import { features } from '../../redux/modules/default';
 import { author as authorMock } from '../mocks/users';
 import { opinion as opinionMock } from '../mocks/opinions';
-import UserAvatarList from '../../components/Ui/List/UserAvatarList';
+import UserAvatarList from '../../components/User/UserAvatarList';
 
 const headerOption = {
   Gray: 'gray',
@@ -239,16 +240,7 @@ const OpinionBox = ({ section, opinion }) => (
                 {/** Votes/OpinionUserVotes.js */}
                 {opinion.previewVotes.length > 0 && (
                   <div style={{ paddingTop: '20px' }}>
-                    <UserAvatarList>
-                      {opinion.previewVotes.map(user => (
-                        <img
-                          src={user.media.url}
-                          alt={user.username}
-                          className="img-circle object-cover user-avatar mr-10"
-                          style={{ width: 45, height: 45 }}
-                        />
-                      ))}
-                    </UserAvatarList>
+                    <UserAvatarList features={features} max={5} users={opinion.previewVotes} />
                   </div>
                 )}
               </div>
