@@ -47,7 +47,8 @@ class OpinionVersionAdmin extends AbstractAdmin
         $query = parent::createQuery($context);
         $query
             ->leftJoin($query->getRootAliases()[0] . '.parent', 'pa')
-            ->leftJoin('pa.step', 's')
+            ->innerJoin('pa.consultation', 'pac')
+            ->innerJoin('pac.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
             ->leftJoin('p.authors', 'authors')
