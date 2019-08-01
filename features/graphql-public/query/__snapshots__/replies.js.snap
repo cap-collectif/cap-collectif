@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Preview|Questionnaire.replies connection fetches the first hundred replies with a cursor 1`] = `
+exports[`Questionnaire.replies connection fetches the first hundred replies with a cursor 1`] = `
 Object {
   "node": Object {
     "replies": Object {

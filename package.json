@@ -29,7 +29,6 @@
         "relay": "yarn run generate-graphql-files && yarn run build-relay-schema",
         "relay:watch": "yarn run generate-graphql-files && yarn run build-relay-schema:watch",
         "graphql:lint:public": "graphql-schema-linter --comment-descriptions schema.public.graphql",
-        "graphql:lint:preview": "graphql-schema-linter --comment-descriptions schema.preview.graphql",
         "graphql:lint:internal": "graphql-schema-linter --comment-descriptions schema.internal.graphql",
         "lint": "eslint --cache --fix --report-unused-disable-directives app/Resources/js",
         "bundlesize": "bundlesize",
@@ -77,13 +76,13 @@
         }
     },
     "lint-staged": {
-        "schema.{public,preview}.graphql": [
+        "schema.public.graphql": [
             "graphql-schema-linter --comment-descriptions"
         ],
         "app/Resources/js/**/*.js": [
             "eslint --fix --report-unused-disable-directives",
             "prettier --parser flow --write",
-            "jest -c jest.config.js --bail --findRelatedTests --runInBand --coverage=false",
+            "jest --bail --findRelatedTests --runInBand",
             "git add"
         ],
         "features/**/*.js": [

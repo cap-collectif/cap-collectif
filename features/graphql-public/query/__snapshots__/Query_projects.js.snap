@@ -1,18 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Preview|Query.projects connection fetches the public and private projects with a cursor 1`] = `
+exports[`Query.projects connection fetches the public and private projects with a cursor 1`] = `
 Object {
   "projects": Object {
     "edges": Array [
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
-          "contributionsCount": 234,
           "contributors": Object {
             "totalCount": 41,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference1.jpg",
           },
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "title": "Croissance, innovation, disruption",
@@ -24,12 +20,8 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 17,
           "contributors": Object {
             "totalCount": 6,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference2.jpg",
           },
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "title": "Stratégie technologique de l'Etat et services publics",
@@ -41,11 +33,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
-          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 3,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Mw==",
           "title": "Transformation numérique des relations",
           "votes": Object {
@@ -56,11 +46,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0NA==",
           "title": "Projet vide",
           "votes": Object {
@@ -71,12 +59,8 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
-          "contributionsCount": 79,
           "contributors": Object {
             "totalCount": 80,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference1.jpg",
           },
           "id": "UHJvamVjdDpwcm9qZWN0NQ==",
           "title": "Projet de loi Renseignement",
@@ -88,11 +72,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
-          "contributionsCount": 174,
           "contributors": Object {
             "totalCount": 49,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Ng==",
           "title": "Budget Participatif Rennes",
           "votes": Object {
@@ -103,11 +85,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
-          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 1,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Nw==",
           "title": "Dépot avec selection vote budget",
           "votes": Object {
@@ -118,11 +98,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
-          "contributionsCount": 6,
           "contributors": Object {
             "totalCount": 4,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
           "title": "Projet avec questionnaire",
           "votes": Object {
@@ -133,11 +111,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
-          "contributionsCount": 1,
           "contributors": Object {
             "totalCount": 50,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OQ==",
           "title": "Appel à projets",
           "votes": Object {
@@ -148,11 +124,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
-          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 1,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTA=",
           "title": "Dépôt avec selection vote simple",
           "votes": Object {
@@ -163,11 +137,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
-          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 3,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTE=",
           "title": "Budget avec vote limité",
           "votes": Object {
@@ -178,12 +150,8 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference4.jpg",
           },
           "id": "UHJvamVjdDpwcm9qZWN0MTI=",
           "title": "Projet sans étapes participatives",
@@ -195,11 +163,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTM=",
           "title": "Projet avec une étape de participation en continue",
           "votes": Object {
@@ -210,11 +176,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
           "title": "Projet à venir",
           "votes": Object {
@@ -225,11 +189,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
-          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 2,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTU=",
           "title": "BP avec vote classement",
           "votes": Object {
@@ -240,11 +202,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTY=",
           "title": "Le P16 un projet à base de riz",
           "votes": Object {
@@ -255,11 +215,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
-          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 3,
           },
-          "cover": null,
           "id": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvckFkbWluT25seQ==",
           "title": "Qui doit conquérir le monde ? | Visible par les admins seulement",
           "votes": Object {
@@ -270,11 +228,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
-          "contributionsCount": 1,
           "contributors": Object {
             "totalCount": 1,
           },
-          "cover": null,
           "id": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4=",
           "title": "Project pour la création de la capCoBeer (visible par admin seulement)",
           "votes": Object {
@@ -285,11 +241,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
-          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 1,
           },
-          "cover": null,
           "id": "UHJvamVjdDpQcm9qZWN0V2l0aEN1c3RvbUFjY2Vzcw==",
           "title": "Un avenir meilleur pour les nains de jardins (custom access)",
           "votes": Object {
@@ -300,11 +254,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
-          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 3,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
           "title": "Questions/Responses",
           "votes": Object {
@@ -315,11 +267,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
         "node": Object {
-          "contributionsCount": 51,
           "contributors": Object {
             "totalCount": 69,
           },
-          "cover": null,
           "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
           "title": "Projet externe",
           "votes": Object {
@@ -330,11 +280,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
-          "cover": null,
           "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3RXaXRob3V0Q291bnRlcg==",
           "title": "Projet externe sans compteur",
           "votes": Object {
@@ -352,7 +300,7 @@ Object {
 }
 `;
 
-exports[`Preview|Query.projects connection fetches the public projects containing a specific term 1`] = `
+exports[`Query.projects connection fetches the public projects containing a specific term 1`] = `
 Object {
   "projects": Object {
     "edges": Array [
@@ -375,7 +323,7 @@ Object {
 }
 `;
 
-exports[`Preview|Query.projects connection fetches the public projects ordered by latest 1`] = `
+exports[`Query.projects connection fetches the public projects ordered by latest 1`] = `
 Object {
   "projects": Object {
     "edges": Array [
@@ -560,7 +508,7 @@ Object {
 }
 `;
 
-exports[`Preview|Query.projects connection fetches the public projects ordered by popularity 1`] = `
+exports[`Query.projects connection fetches the public projects ordered by popularity 1`] = `
 Object {
   "projects": Object {
     "edges": Array [
@@ -745,19 +693,15 @@ Object {
 }
 `;
 
-exports[`Preview|Query.projects connection fetches the public projects with a cursor 1`] = `
+exports[`Query.projects connection fetches the public projects with a cursor 1`] = `
 Object {
   "projects": Object {
     "edges": Array [
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
-          "contributionsCount": 234,
           "contributors": Object {
             "totalCount": 41,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference1.jpg",
           },
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "title": "Croissance, innovation, disruption",
@@ -769,12 +713,8 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 17,
           "contributors": Object {
             "totalCount": 6,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference2.jpg",
           },
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "title": "Stratégie technologique de l'Etat et services publics",
@@ -786,11 +726,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
-          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 3,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Mw==",
           "title": "Transformation numérique des relations",
           "votes": Object {
@@ -801,11 +739,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0NA==",
           "title": "Projet vide",
           "votes": Object {
@@ -816,12 +752,8 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
-          "contributionsCount": 79,
           "contributors": Object {
             "totalCount": 80,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference1.jpg",
           },
           "id": "UHJvamVjdDpwcm9qZWN0NQ==",
           "title": "Projet de loi Renseignement",
@@ -833,11 +765,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
-          "contributionsCount": 174,
           "contributors": Object {
             "totalCount": 49,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Ng==",
           "title": "Budget Participatif Rennes",
           "votes": Object {
@@ -848,11 +778,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
-          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 1,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Nw==",
           "title": "Dépot avec selection vote budget",
           "votes": Object {
@@ -863,11 +791,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
-          "contributionsCount": 6,
           "contributors": Object {
             "totalCount": 4,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
           "title": "Projet avec questionnaire",
           "votes": Object {
@@ -878,11 +804,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
-          "contributionsCount": 1,
           "contributors": Object {
             "totalCount": 50,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OQ==",
           "title": "Appel à projets",
           "votes": Object {
@@ -893,11 +817,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
-          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 1,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTA=",
           "title": "Dépôt avec selection vote simple",
           "votes": Object {
@@ -908,11 +830,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
-          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 3,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTE=",
           "title": "Budget avec vote limité",
           "votes": Object {
@@ -923,12 +843,8 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference4.jpg",
           },
           "id": "UHJvamVjdDpwcm9qZWN0MTI=",
           "title": "Projet sans étapes participatives",
@@ -940,11 +856,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTM=",
           "title": "Projet avec une étape de participation en continue",
           "votes": Object {
@@ -955,11 +869,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
           "title": "Projet à venir",
           "votes": Object {
@@ -970,11 +882,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
-          "contributionsCount": 3,
           "contributors": Object {
             "totalCount": 2,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTU=",
           "title": "BP avec vote classement",
           "votes": Object {
@@ -985,11 +895,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTY=",
           "title": "Le P16 un projet à base de riz",
           "votes": Object {
@@ -1000,11 +908,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
-          "contributionsCount": 2,
           "contributors": Object {
             "totalCount": 3,
           },
-          "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",
           "title": "Questions/Responses",
           "votes": Object {
@@ -1015,11 +921,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
-          "contributionsCount": 51,
           "contributors": Object {
             "totalCount": 69,
           },
-          "cover": null,
           "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
           "title": "Projet externe",
           "votes": Object {
@@ -1030,11 +934,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
-          "contributionsCount": 0,
           "contributors": Object {
             "totalCount": 0,
           },
-          "cover": null,
           "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3RXaXRob3V0Q291bnRlcg==",
           "title": "Projet externe sans compteur",
           "votes": Object {
@@ -1052,7 +954,7 @@ Object {
 }
 `;
 
-exports[`Preview|Query.projects connection fetches the public projects with a specific theme 1`] = `
+exports[`Query.projects connection fetches the public projects with a specific theme 1`] = `
 Object {
   "projects": Object {
     "edges": Array [
@@ -1121,7 +1023,7 @@ Object {
 }
 `;
 
-exports[`Preview|Query.projects connection fetches the public projects with a specific type 1`] = `
+exports[`Query.projects connection fetches the public projects with a specific type 1`] = `
 Object {
   "projects": Object {
     "edges": Array [

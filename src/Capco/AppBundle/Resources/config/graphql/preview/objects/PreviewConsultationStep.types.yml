@@ -2,11 +2,9 @@ PreviewConsultationStep:
   type: object
   inherits:
     - Node
-    - PreviewStep
   config:
     interfaces:
       - Node
-      - PreviewStep
     description: 'A step with consultation.'
     name: ConsultationStep
     fields:

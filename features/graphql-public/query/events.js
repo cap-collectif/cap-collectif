@@ -1,4 +1,6 @@
 /* eslint-env jest */
+const TIMEOUT = 15000;
+
 // eslint-disable-next-line no-unused-vars
 const OpenDataEventsQuery = /* GraphQL */ `
   query OpenDataEventsQuery($count: Int!, $cursor: String) {
@@ -46,8 +48,12 @@ const OpenDataEventsQuery = /* GraphQL */ `
   }
 `;
 
-describe('Preview|Query.events connection', () => {
-  it('fetches the first hundred events with a cursor', async () => {
-    await expect(graphql(OpenDataEventsQuery, { count: 100 })).resolves.toMatchSnapshot();
-  });
+describe('Query.events connection', () => {
+  it(
+    'fetches the first hundred events with a cursor',
+    async () => {
+      await expect(graphql(OpenDataEventsQuery, { count: 100 })).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
 });

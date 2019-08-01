@@ -1,4 +1,6 @@
 /* eslint-env jest */
+const TIMEOUT = 15000;
+
 const ProjectsPublicQuery = /* GraphQL */ `
   query ProjectsPublicQuery($count: Int!, $cursor: String) {
     projects(first: $count, after: $cursor) {
@@ -12,10 +14,6 @@ const ProjectsPublicQuery = /* GraphQL */ `
         node {
           id
           title
-          cover {
-            url
-          }
-          contributionsCount
           votes {
             totalCount
           }
@@ -86,89 +84,117 @@ const ProjectsTypeQuery = /* GraphQL */ `
   }
 `;
 
-describe('Preview|Query.projects connection', () => {
-  it('fetches the public projects with a cursor', async () => {
-    await expect(
-      graphql(ProjectsPublicQuery, {
-        count: 100,
-      }),
-    ).resolves.toMatchSnapshot();
-  });
-
-  it('fetches the public and private projects with a cursor', async () => {
-    await expect(
-      graphql(
-        ProjectsPublicQuery,
-        {
+describe('Query.projects connection', () => {
+  it(
+    'fetches the public projects with a cursor',
+    async () => {
+      await expect(
+        graphql(ProjectsPublicQuery, {
           count: 100,
-        },
-        'admin',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
+        }),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
 
-  it('fetches the public projects ordered by latest', async () => {
-    await expect(
-      graphql(
-        ProjectsInternalQuery,
-        {
-          orderBy: { field: 'LATEST', direction: 'ASC' },
-          count: 100,
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
+  it(
+    'fetches the public and private projects with a cursor',
+    async () => {
+      await expect(
+        graphql(
+          ProjectsPublicQuery,
+          {
+            count: 100,
+          },
+          'admin',
+        ),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
 
-  it('fetches the public projects ordered by popularity', async () => {
-    await expect(
-      graphql(
-        ProjectsInternalQuery,
-        {
-          orderBy: { field: 'POPULAR', direction: 'DESC' },
-          count: 100,
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
+  it(
+    'fetches the public projects ordered by latest',
+    async () => {
+      await expect(
+        graphql(
+          ProjectsInternalQuery,
+          {
+            orderBy: { field: 'LATEST', direction: 'ASC' },
+            count: 100,
+          },
+          'internal',
+        ),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
 
-  it('fetches the public projects with a specific theme', async () => {
-    await expect(
-      graphql(
-        ProjectsThemeQuery,
-        {
-          theme: 'theme1',
-          count: 100,
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
+  it(
+    'fetches the public projects ordered by popularity',
+    async () => {
+      await expect(
+        graphql(
+          ProjectsInternalQuery,
+          {
+            orderBy: { field: 'POPULAR', direction: 'DESC' },
+            count: 100,
+          },
+          'internal',
+        ),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
 
-  it('fetches the public projects with a specific type', async () => {
-    await expect(
-      graphql(
-        ProjectsTypeQuery,
-        {
-          type: '3',
-          count: 100,
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
+  it(
+    'fetches the public projects with a specific theme',
+    async () => {
+      await expect(
+        graphql(
+          ProjectsThemeQuery,
+          {
+            theme: 'theme1',
+            count: 100,
+          },
+          'internal',
+        ),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
 
-  it('fetches the public projects containing a specific term', async () => {
-    await expect(
-      graphql(
-        ProjectsInternalQuery,
-        {
-          term: 'Croissance',
-          count: 100,
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
+  it(
+    'fetches the public projects with a specific type',
+    async () => {
+      await expect(
+        graphql(
+          ProjectsTypeQuery,
+          {
+            type: '3',
+            count: 100,
+          },
+          'internal',
+        ),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
+
+  it(
+    'fetches the public projects containing a specific term',
+    async () => {
+      await expect(
+        graphql(
+          ProjectsInternalQuery,
+          {
+            term: 'Croissance',
+            count: 100,
+          },
+          'internal',
+        ),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
 });

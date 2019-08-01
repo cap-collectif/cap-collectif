@@ -1,4 +1,6 @@
 /* eslint-env jest */
+const TIMEOUT = 15000;
+
 const OpenDataProposalsQuery = /* GraphQL */ `
   query OpenDataProposalsQuery(
     $id: ID!
@@ -100,29 +102,37 @@ const ProposalsWithDraftQuery = /* GraphQL */ `
   }
 `;
 
-describe('Preview|Query.proposals connection', () => {
-  it('fetches the first hundred proposals with a cursor', async () => {
-    await expect(
-      graphql(OpenDataProposalsQuery, {
-        id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-        count: 100,
-        orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
-      }),
-    ).resolves.toMatchSnapshot();
-  });
-
-  it('fetches the first hundred proposals (including drafted) with a cursor', async () => {
-    await expect(
-      graphql(
-        ProposalsWithDraftQuery,
-        {
+describe('Query.proposals connection', () => {
+  it(
+    'fetches the first hundred proposals with a cursor',
+    async () => {
+      await expect(
+        graphql(OpenDataProposalsQuery, {
           id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
           count: 100,
           orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
-          draft: true,
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
+        }),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
+
+  it(
+    'fetches the first hundred proposals (including drafted) with a cursor',
+    async () => {
+      await expect(
+        graphql(
+          ProposalsWithDraftQuery,
+          {
+            id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+            count: 100,
+            orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
+            draft: true,
+          },
+          'internal',
+        ),
+      ).resolves.toMatchSnapshot();
+    },
+    TIMEOUT,
+  );
 });

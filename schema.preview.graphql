@@ -1,9 +1,7 @@
 # A step to collect proposals.
-type CollectStep implements Node & Step {
+type CollectStep implements Node {
   # The ID of an object.
   id: ID!
-
-  # A list of proposals associated to the object.
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -26,12 +24,6 @@ type CollectStep implements Node & Step {
     # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
   ): ProposalConnection!
-
-  # When the time interval begins or ends.
-  timeRange: TimeRange!
-
-  # The URL to this resource.
-  url: URI!
 
   # The title of the step.
   title: String!
@@ -71,18 +63,9 @@ type Consultation implements Node {
 }
 
 # A step with consultation.
-type ConsultationStep implements Node & Step {
+type ConsultationStep implements Node {
   # The ID of an object.
   id: ID!
-
-  # When the time interval begins or ends.
-  timeRange: TimeRange!
-
-  # The URL to this resource.
-  url: URI!
-
-  # The title of the step.
-  title: String!
 
   # A list of contributor associated with the consultation step.
   contributors(
@@ -128,9 +111,7 @@ type Event implements Node & UniformResourceLocatable {
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-
-  # When the time interval begins or ends.
-  timeRange: TimeRange!
+  timeRange: PreviewTimeRange!
 
   # Identifies the author of the event.
   author: User
@@ -168,7 +149,6 @@ type Event implements Node & UniformResourceLocatable {
 
 # A connection to a list of items.
 type EventConnection {
-  # Identifies the total count of items in the connection.
   totalCount: Int!
 
   # Information to aid in pagination.
@@ -267,14 +247,14 @@ interface Node {
 
 # Possible reason that a `Publishable` is not published.
 enum NotPublishedReason {
-  # Author account was confirmed after the step has ended.
-  AUTHOR_CONFIRMED_TOO_LATE
+  # Author account isn't confirmed yet.
+  WAITING_AUTHOR_CONFIRMATION
 
   # Author account isn't confirmed and the step has ended.
   AUTHOR_NOT_CONFIRMED
 
-  # Author account isn't confirmed yet.
-  WAITING_AUTHOR_CONFIRMATION
+  # Author account was confirmed after the step has ended.
+  AUTHOR_CONFIRMED_TOO_LATE
 }
 
 # Possible directions in which to order a list of items when provided an `orderBy` argument.
@@ -301,6 +281,15 @@ type PageInfo {
   endCursor: String
 }
 
+# A time range that contains start date and end date.
+type PreviewTimeRange {
+  # The start date of the time range.
+  startAt: DateTime
+
+  # The end date of the time range
+  endAt: DateTime
+}
+
 # A participatory project.
 type Project implements Node & UniformResourceLocatable {
   # The ID of an object.
@@ -311,9 +300,6 @@ type Project implements Node & UniformResourceLocatable {
 
   # Identifies the title of the project.
   title: String!
-
-  # Identifies when the project was published at.
-  publishedAt: DateTime!
 
   # A list of votes associated with the project.
   votes(
@@ -344,26 +330,10 @@ type Project implements Node & UniformResourceLocatable {
     # Returns the last `n` elements from the list.
     last: Int
   ): UserConnection!
-
-  # Count of contributions associated with the project.
-  contributionsCount: Int! @deprecated(reason: "Field `contributionsCount` will be removed. Use `contributions.totalCount` instead when it will be published. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-01-01 UTC.")
-
-  # The cover image associated with the project.
-  cover: Media
-
-  # The type associated with the project.
-  type: ProjectType
-
-  # The different steps associated with the project.
-  steps: [Step!]!
-
-  # The list of users who authored the project.
-  authors: [User!]!
 }
 
 # A connection to a list of items.
 type ProjectConnection {
-  # Identifies the total count of items in the connection.
   totalCount: Int!
 
   # Information to aid in pagination.
@@ -393,17 +363,11 @@ input ProjectOrder {
 
 # Ordering options for projects returned from the connection.
 enum ProjectOrderField {
-  # Allows ordering a list of projects by when they were published.
-  LATEST
-
   # Allows ordering a list of projects by their number of contributions.
   POPULAR
-}
 
-# Label of a Project.
-type ProjectType {
-  # Title of project Type
-  title: String!
+  # Allows ordering a list of projects by when they were published.
+  LATEST
 }
 
 # Represents a user's contribution to a collect step.
@@ -462,7 +426,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
 # A connection to a list of items.
 type ProposalConnection {
-  # Identifies the total count of items in the connection.
   totalCount: Int!
 
   # Information to aid in pagination.
@@ -492,29 +455,29 @@ input ProposalOrder {
 
 # Properties by which proposal connections can be ordered.
 enum ProposalOrderField {
-  # Allows ordering a list of proposals by the number of comments it have.
-  COMMENTS
-
-  # Allows ordering a list of proposals by the cost it have been estimated.
-  COST
-
   # Allows ordering a list of proposals by when they were published.
   PUBLISHED_AT
+
+  # Allows ordering a list of proposals by the number of votes it have.
+  VOTES
+
+  # Allows ordering a list of proposals by the number of comments it have.
+  COMMENTS
 
   # Allows randomizing a list of proposals.
   RANDOM
 
-  # Allows ordering a list of proposals by the number of votes it have.
-  VOTES
+  # Allows ordering a list of proposals by the cost it have been estimated.
+  COST
 }
 
 # Possible trashed status for a `Proposal`.
 enum ProposalTrashedStatus {
-  # `NOT_TRASHED` status to inclide the non trashed proposal.
-  NOT_TRASHED
-
   # `TRASHED` status to include the trashed proposal.
   TRASHED
+
+  # `NOT_TRASHED` status to inclide the non trashed proposal.
+  NOT_TRASHED
 }
 
 # A vote on a proposal for a given step.
@@ -631,7 +594,6 @@ type Query {
   ): UserConnection!
 }
 
-# All custom forms are build using questions.
 interface Question {
   # The ID of an object.
   id: ID!
@@ -856,30 +818,6 @@ type SimpleQuestion implements Question & Node {
   ): ResponseConnection!
 }
 
-# A step is a part of a project.
-interface Step {
-  # When the time interval begins or ends.
-  timeRange: TimeRange!
-
-  # The URL to this resource.
-  url: URI!
-
-  # The ID of an object
-  id: ID!
-
-  # The title of the step.
-  title: String!
-}
-
-# A time range that contains start date and end date.
-type TimeRange {
-  # The start date of the time range.
-  startAt: DateTime
-
-  # The end date of the time range
-  endAt: DateTime
-}
-
 # Entities that can be trashed.
 interface Trashable {
   # Whether or not the contribution is trashed.
@@ -1005,7 +943,6 @@ type UserEdge {
 
 # A type of person
 type UserType {
-  # The id of the type.
   id: ID!
 
   # The name of the type.
@@ -1038,7 +975,6 @@ interface Vote {
 
 # A connection to a list of items.
 type VoteConnection {
-  # Identifies the total count of items in the connection.
   totalCount: Int!
 
   # Information to aid in pagination.

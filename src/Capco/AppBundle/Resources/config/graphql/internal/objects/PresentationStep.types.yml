@@ -1,8 +1,8 @@
 PresentationStep:
   type: object
-  inherits: [InternalStep]
+  inherits: [Step]
   config:
-    interfaces: [InternalStep]
+    interfaces: [Step]
     fields:
       kind:
         resolve: 'presentation'

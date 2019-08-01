@@ -58,14 +58,12 @@ trait ExportDatasUserTrait
             if (file_exists($justGeneratedFile)) {
                 if ($writeSnapshots) {
                     (new Process('mv ' . $justGeneratedFile . ' ' . $matchTo . $csv))->mustRun();
-                } else {
-                    $this->exportContext->compareFileWithSnapshot(
-                        $extractTo . $csv,
-                        $matchTo . $csv
-                    );
+                }
+                else {
+                    $this->exportContext->compareFileWithSnapshot($extractTo . $csv, $matchTo . $csv);
                 }
             } else {
-                echo "${justGeneratedFile} does not exist.";
+                echo "$justGeneratedFile does not exist.";
             }
         }
 

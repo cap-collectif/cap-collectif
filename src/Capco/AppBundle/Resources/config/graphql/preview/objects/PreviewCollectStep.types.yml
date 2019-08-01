@@ -3,13 +3,11 @@ PreviewCollectStep:
   inherits:
     - Node
     - PreviewWithProposals
-    - PreviewStep
   config:
     name: CollectStep
     description: 'A step to collect proposals.'
     interfaces:
       - Node
-      - PreviewStep
     fields:
       id:
         description: 'The ID of an object.'

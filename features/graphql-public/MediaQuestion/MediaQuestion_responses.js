@@ -1,4 +1,6 @@
 /* eslint-env jest */
+const TIMEOUT = 15000;
+
 const MediaQuestionResponsesQuery = /* GraphQL */ `
   query MediaQuestionResponsesQuery($id: ID!) {
     node(id: $id) {
@@ -39,5 +41,6 @@ describe('MediaQuestion.responses array', () => {
         }),
       );
     },
+    TIMEOUT,
   );
 });
