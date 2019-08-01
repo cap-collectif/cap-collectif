@@ -2,8 +2,10 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Doctrine\ORM\QueryBuilder;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -96,6 +98,22 @@ class OpinionAdmin extends CapcoAdmin
         $query->setParameter('author', $user);
 
         return $query;
+    }
+
+    public function getNewInstance()
+    {
+        /** @var Opinion $opinion */
+        $opinion = parent::getNewInstance();
+
+        if ($opinionTypeId = $this->request->get('opinion_type')) {
+            $opinionType = $this->getConfigurationPool()
+                ->getContainer()
+                ->get(OpinionTypeRepository::class)
+                ->find($opinionTypeId);
+            $opinion->setConsultation($opinionType ? $opinionType->getConsultation() : null);
+        }
+
+        return $opinion;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

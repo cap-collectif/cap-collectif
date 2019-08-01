@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\OpinionType;
@@ -9,6 +10,11 @@ use Doctrine\ORM\Query;
 
 /**
  * OpinionTypeRepository.
+ *
+ * @method OpinionType|null find($id, $lockMode = null, $lockVersion = null)
+ * @method OpinionType|null findOneBy(array $criteria, array $orderBy = null)
+ * @method OpinionType[]    findAll()
+ * @method OpinionType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class OpinionTypeRepository extends EntityRepository
 {
@@ -27,6 +33,7 @@ class OpinionTypeRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ot')
             ->where('ot.id = :id')
             ->setParameter('id', $id);
+
         return $qb->getQuery()->getSingleResult(Query::HYDRATE_ARRAY);
     }
 
@@ -36,6 +43,7 @@ class OpinionTypeRepository extends EntityRepository
             ->andWhere('ot.parent = :parent')
             ->orderBy('ot.position', 'ASC')
             ->setParameter('parent', $parent);
+
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -128,12 +136,7 @@ class OpinionTypeRepository extends EntityRepository
                 'ot.defaultFilter',
                 'count(o.id) as total_opinions_count'
             )
-            ->leftJoin(
-                'ot.Opinions',
-                'o',
-                'WITH',
-                'o.published = :enabled AND o.trashedAt IS NULL'
-            )
+            ->leftJoin('ot.Opinions', 'o', 'WITH', 'o.published = :enabled AND o.trashedAt IS NULL')
             ->innerJoin('o.consultation', 'oc', 'WITH', 'oc.step = :step')
             ->andWhere('ot IN (:allowedTypes)')
             ->setParameter('step', $step)
@@ -141,6 +144,7 @@ class OpinionTypeRepository extends EntityRepository
             ->setParameter('allowedTypes', $allowedTypes)
             ->addGroupBy('ot')
             ->orderBy('ot.position', 'ASC');
+
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -161,12 +165,12 @@ class OpinionTypeRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ot')
             ->where('ot.parent IS NULL')
             ->orderBy('ot.position', 'ASC');
+
         return $qb->getQuery()->getResult();
     }
 
-    public function getLinkableOpinionTypesForConsultation(
-        Consultation $consultation
-    ) {
+    public function getLinkableOpinionTypesForConsultation(Consultation $consultation)
+    {
         $qb = $this->createQueryBuilder('ot')
             ->addSelect('otat', 'at')
             ->leftJoin('ot.appendixTypes', 'otat')
@@ -177,6 +181,7 @@ class OpinionTypeRepository extends EntityRepository
             ->setParameter('enabled', true)
             ->setParameter('linkable', true)
             ->setParameter('consultation', $consultation);
+
         return $qb->getQuery()->getResult();
     }
 }
