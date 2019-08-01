@@ -13,11 +13,6 @@ exports[`<Opinion /> renders correcty 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "author": Object {
-            "displayName": "",
-            "media": Object {
-              "url": "",
-            },
-            "url": "",
             "vip": false,
           },
           "votes": Object {

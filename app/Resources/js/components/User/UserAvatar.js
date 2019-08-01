@@ -111,7 +111,6 @@ const mapStateToProps = (state: State) => ({
 export default createFragmentContainer(connect(mapStateToProps)(UserAvatar), {
   user: graphql`
     fragment UserAvatar_user on User {
-      id
       url
       username
       media {

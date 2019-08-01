@@ -10,7 +10,6 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 const query = graphql`
   query SectionListPageQuery($userId: ID!) {
     sections(user: $userId) {
-      id
       ...SectionList_sections @arguments(userId: $userId)
     }
   }
@@ -23,30 +22,34 @@ export type Props = {|
 export const rendering = ({
   error,
   props,
-}: {
-  error: ?Error,
-  props?: ?SectionListPageQueryResponse,
-} & ReadyState) => {
+}: {|
+  ...ReadyState,
+  props: ?SectionListPageQueryResponse,
+|}) => {
   if (error) {
     return graphqlError;
   }
 
-  if (props && props.sections != null) {
-    // $FlowFixMe
-    return <SectionList sections={props.sections} />;
+  if (props) {
+    if (props.sections != null) {
+      // $FlowFixMe
+      return <SectionList sections={props.sections} />;
+    }
   }
   return <Loader />;
 };
 
 export default class SectionListPage extends React.Component<Props> {
   render() {
+    const { userId } = this.props;
+
     return (
       <div>
         <QueryRenderer
           environment={environment}
           query={query}
           variables={{
-            userId: this.props.userId,
+            userId,
           }}
           render={rendering}
         />

@@ -60,11 +60,6 @@ export default createFragmentContainer(Opinion, {
       }
       author {
         vip
-        displayName
-        media {
-          url
-        }
-        url
       }
     }
   `,
