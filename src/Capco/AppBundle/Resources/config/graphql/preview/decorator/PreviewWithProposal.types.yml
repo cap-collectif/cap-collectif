@@ -6,6 +6,7 @@ PreviewWithProposals:
       proposals:
         type: 'PreviewProposalConnection!'
         argsBuilder: 'Relay::Connection'
+        description: 'A list of proposals associated to the object.'
         args:
           first:
             type: 'Int'

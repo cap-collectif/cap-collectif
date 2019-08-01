@@ -1,6 +1,4 @@
 /* eslint-env jest */
-const TIMEOUT = 15000;
-
 const MultipleChoiceQuestionChoicesQuery = /* GraphQL */ `
   query MultipleChoiceQuestionQuery($id: ID!) {
     node(id: $id) {
@@ -30,6 +28,5 @@ describe('MultipleChoiceQuestion.choices array', () => {
         ),
       ).resolves.toMatchSnapshot('13');
     },
-    TIMEOUT,
   );
 });

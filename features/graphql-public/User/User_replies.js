@@ -1,6 +1,4 @@
 /* eslint-env jest */
-const TIMEOUT = 15000;
-
 const UserRepliesQuery = /* GraphQL */ `
   query UserRepliesQuery($id: ID!) {
     node(id: $id) {
@@ -33,6 +31,5 @@ describe('User.replies connection', () => {
         ),
       );
     },
-    TIMEOUT,
   );
 });

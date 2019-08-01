@@ -2,6 +2,7 @@ PreviewQuestion:
   type: interface
   config:
     name: Question
+    description: 'All custom forms are build using questions.'
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
     fields:
       id:

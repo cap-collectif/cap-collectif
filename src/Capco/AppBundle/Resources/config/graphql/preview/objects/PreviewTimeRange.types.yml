@@ -1,6 +1,7 @@
 PreviewTimeRange:
   type: object
   config:
+    name: TimeRange
     description: 'A time range that contains start date and end date.'
     fields:
       startAt:

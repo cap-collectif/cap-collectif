@@ -46,6 +46,10 @@ class StepTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('QuestionnaireStep');
         }
         if ($step instanceof ConsultationStep) {
+            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
+                return $this->typeResolver->resolve('PreviewConsultationStep');
+            }
+
             return $this->typeResolver->resolve('InternalConsultationStep');
         }
         if ($step instanceof OtherStep) {

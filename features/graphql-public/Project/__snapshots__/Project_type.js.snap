@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preview|Project.type fetches the types of a project 1`] = `
+Object {
+  "project": Object {
+    "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+    "type": Object {
+      "title": "project.types.interpellation",
+    },
+  },
+}
+`;

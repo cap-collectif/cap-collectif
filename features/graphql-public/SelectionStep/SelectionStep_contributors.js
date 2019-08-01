@@ -1,6 +1,4 @@
 /* eslint-env jest */
-const TIMEOUT = 15000;
-
 const SelectionStepContributorsQuery = /* GraphQL */ `
   query SelectionStepContributorsQuery($id: ID!, $count: Int) {
     selectionStep: node(id: $id) {
@@ -35,6 +33,5 @@ describe('SelectionStep.contributors', () => {
         ),
       ).resolves.toMatchSnapshot();
     },
-    TIMEOUT,
   );
 });

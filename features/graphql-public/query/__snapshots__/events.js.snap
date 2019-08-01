@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Query.events connection fetches the first hundred events with a cursor 1`] = `
+exports[`Preview|Query.events connection fetches the first hundred events with a cursor 1`] = `
 Object {
   "events": Object {
     "edges": Array [

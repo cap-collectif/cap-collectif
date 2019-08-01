@@ -3,12 +3,12 @@ NotPublishedReason:
   config:
     description: 'Possible reason that a `Publishable` is not published.'
     values:
-      WAITING_AUTHOR_CONFIRMATION:
-        value: '@=constant("Capco\\AppBundle\\Entity\\NotPublishedReason::WAITING_AUTHOR_CONFIRMATION")'
-        description: "Author account isn't confirmed yet."
-      AUTHOR_NOT_CONFIRMED:
-        value: '@=constant("Capco\\AppBundle\\Entity\\NotPublishedReason::AUTHOR_NOT_CONFIRMED")'
-        description: "Author account isn't confirmed and the step has ended."
       AUTHOR_CONFIRMED_TOO_LATE:
         value: '@=constant("Capco\\AppBundle\\Entity\\NotPublishedReason::ACCOUNT_CONFIRMED_TOO_LATE")'
         description: 'Author account was confirmed after the step has ended.'
+      AUTHOR_NOT_CONFIRMED:
+        value: '@=constant("Capco\\AppBundle\\Entity\\NotPublishedReason::AUTHOR_NOT_CONFIRMED")'
+        description: "Author account isn't confirmed and the step has ended."
+      WAITING_AUTHOR_CONFIRMATION:
+        value: '@=constant("Capco\\AppBundle\\Entity\\NotPublishedReason::WAITING_AUTHOR_CONFIRMATION")'
+        description: "Author account isn't confirmed yet."

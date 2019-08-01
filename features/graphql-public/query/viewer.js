@@ -1,6 +1,4 @@
 /* eslint-env jest */
-const TIMEOUT = 15000;
-
 const ViewerQuery = /* GraphQL */ `
   query ViewerQuery {
     viewer {
@@ -21,20 +19,12 @@ const ViewerQuery = /* GraphQL */ `
   }
 `;
 
-describe('Query.viewer', () => {
-  it(
-    'fetches an admin',
-    async () => {
-      await expect(graphql(ViewerQuery, null, 'admin')).resolves.toMatchSnapshot();
-    },
-    TIMEOUT,
-  );
+describe('Public|Query.viewer', () => {
+  it('fetches an admin', async () => {
+    await expect(graphql(ViewerQuery, null, 'admin')).resolves.toMatchSnapshot();
+  });
 
-  it(
-    'can not access if not authenticated',
-    async () => {
-      await expect(graphql(ViewerQuery, null, 'anonymous')).resolves.toMatchSnapshot();
-    },
-    TIMEOUT,
-  );
+  it('can not access if not authenticated', async () => {
+    await expect(graphql(ViewerQuery, null, 'anonymous')).resolves.toMatchSnapshot();
+  });
 });
