@@ -108,7 +108,6 @@ const firstTest = {
     title: 'Name of my project',
     externalLink: null,
     isExternal: false,
-    hasParticipativeStep: true,
     steps: [defaultClosedStep, openStep2, openStep1, defaultFutureStep],
     url: 'http://capco/show-link',
   },
@@ -123,7 +122,6 @@ const secondTest = {
     isExternal: false,
     externalLink: null,
     url: 'http://capco/show-link',
-    hasParticipativeStep: false,
     steps: [
       defaultClosedStep,
       {
@@ -162,7 +160,6 @@ const thirdTest = {
     isExternal: false,
     externalLink: null,
     url: 'http://capco/show-link',
-    hasParticipativeStep: false,
     steps: [futureStep1, futureStep2],
   },
 };
@@ -176,7 +173,6 @@ const fourthTest = {
     isExternal: true,
     externalLink: 'http://test.com',
     url: 'http://capco/show-link',
-    hasParticipativeStep: false,
     steps: [closedStepComplete1, closedStepComplete2],
   },
   hasSecondTitle: true,
@@ -191,7 +187,6 @@ const fifthTest = {
     isExternal: true,
     externalLink: 'http://test.com',
     url: 'http://capco/show-link',
-    hasParticipativeStep: true,
     steps: [defaultClosedStep, openStep2, openStep1, defaultFutureStep],
   },
 };
@@ -205,7 +200,6 @@ const sixthTest = {
     isExternal: true,
     externalLink: 'http://test.com',
     url: 'http://capco/show-link',
-    hasParticipativeStep: false,
     steps: [closedStepComplete1, closedStepComplete2, futureStep1],
   },
 };

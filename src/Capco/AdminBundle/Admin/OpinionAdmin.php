@@ -112,7 +112,7 @@ class OpinionAdmin extends CapcoAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
+                    }
                 ]
             )
             ->add('step', null, ['label' => 'admin.fields.opinion.step'])
@@ -138,23 +138,23 @@ class OpinionAdmin extends CapcoAdmin
             ->add('voteCountTotal', 'integer', [
                 'label' => 'admin.fields.opinion.vote_count_total',
                 'mapped' => false,
-                'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig',
+                'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig'
             ])
             ->add('position', null, ['label' => 'admin.fields.opinion.position'])
             ->add('argumentsCount', null, ['label' => 'admin.fields.opinion.argument_count'])
             ->add('sourcesCount', null, ['label' => 'admin.fields.opinion.source_count'])
             ->add('published', null, [
                 'editable' => false,
-                'label' => 'admin.fields.opinion.is_enabled',
+                'label' => 'admin.fields.opinion.is_enabled'
             ])
             ->add('pinned', null, ['editable' => true, 'label' => 'admin.fields.opinion.pinned'])
             ->add('trashedStatus', null, [
                 'label' => 'admin.fields.opinion.is_trashed',
-                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
+                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig'
             ])
             ->add('updatedAt', null, ['label' => 'admin.fields.opinion.updated_at'])
             ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []]
             ]);
     }
 
@@ -188,21 +188,21 @@ class OpinionAdmin extends CapcoAdmin
                 'property' => 'username,email',
                 'to_string_callback' => function ($enitity, $property) {
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                },
+                }
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.opinion.position',
-                'required' => false,
+                'required' => false
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.opinion.body',
-                'config_name' => 'admin_editor',
+                'config_name' => 'admin_editor'
             ])
             ->add('step', null, [
                 'label' => 'admin.fields.opinion.step',
                 'query_builder' => $this->createQueryBuilderForStep(),
                 'choice_label' => 'labelTitle',
-                'required' => true,
+                'required' => true
             ])
             ->end()
 
@@ -213,21 +213,21 @@ class OpinionAdmin extends CapcoAdmin
                 'required' => false,
                 'btn_add' => false,
                 'type_options' => ['delete' => false, 'btn_add' => false],
-                'attr' => ['class' => $classname],
+                'attr' => ['class' => $classname]
             ])
             ->end()
             ->with('admin.fields.opinion.group_publication')
             ->add('published', null, [
                 'label' => 'admin.fields.opinion.is_enabled',
                 'disabled' => true,
-                'attr' => ['readonly' => true],
+                'attr' => ['readonly' => true]
             ])
             ->add('pinned', null, [
                 'label' => 'admin.fields.opinion.pinned_long',
-                'required' => false,
+                'required' => false
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'admin.fields.opinion.is_trashed',
+                'label' => 'admin.fields.opinion.is_trashed'
             ])
             ->add('trashedReason', null, ['label' => 'admin.fields.opinion.trashed_reason'])
             ->end()
@@ -235,7 +235,7 @@ class OpinionAdmin extends CapcoAdmin
             ->add('answer', 'sonata_type_model_list', [
                 'btn_list' => false,
                 'label' => 'admin.fields.opinion.answer',
-                'required' => false,
+                'required' => false
             ])
             ->end();
     }
@@ -248,7 +248,7 @@ class OpinionAdmin extends CapcoAdmin
     private function createQueryBuilderForStep()
     {
         if (!$this->getPersistentParameter('opinion_type')) {
-            return;
+            return null;
         }
 
         $opinionType = $this->getConfigurationPool()

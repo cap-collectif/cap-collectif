@@ -224,7 +224,6 @@ export default createFragmentContainer(ProjectPreviewBody, {
     fragment ProjectPreviewBody_project on Project {
       id
       title
-      hasParticipativeStep
       externalLink
       isExternal
       url
