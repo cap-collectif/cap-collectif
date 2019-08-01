@@ -37,20 +37,12 @@ class IsSocialNetworkUrl extends Constraint
         switch ($this->social_network) {
             case 'facebook':
                 return 'global.is_not_facebook_url';
-
-                break;
             case 'twitter':
                 return 'global.is_not_twitter_url';
-
-                break;
             case 'gplus':
                 return 'global.is_not_google_url';
-
-                break;
             default:
                 return $this->message;
-
-                break;
         }
     }
 }

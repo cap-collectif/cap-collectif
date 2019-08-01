@@ -37,7 +37,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         'category',
         'summary',
         'body',
-        'proposal_illustration',
+        'proposal_illustration'
     ];
 
     protected static $defaultName = 'capco:import:proposals-from-csv';
@@ -171,7 +171,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
                 /** @var User $author */
                 $author = $this->userRepository->findOneBy([
-                    'email' => $row['author'],
+                    'email' => $row['author']
                 ]);
 
                 if (!$author) {
@@ -197,12 +197,12 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
                 $district = $this->districtRepository->findOneBy([
                     'name' => trim($row['district_name']),
-                    'form' => $this->proposalForm,
+                    'form' => $this->proposalForm
                 ]);
 
                 $status = $this->statusRepository->findOneBy([
                     'name' => trim($row['collect_status']),
-                    'step' => $this->proposalForm->getStep(),
+                    'step' => $this->proposalForm->getStep()
                 ]);
 
                 if (null === $author) {
@@ -224,7 +224,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 if ('' !== $row['category']) {
                     $proposalCategory = $this->proposalCategoryRepository->findOneBy([
                         'name' => trim($row['category']),
-                        'form' => $this->proposalForm,
+                        'form' => $this->proposalForm
                     ]);
                     $proposal->setCategory($proposalCategory);
                 }
@@ -319,7 +319,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         }
 
         if ($hasError) {
-            return $this->generateContentException($output);
+            return (bool) $this->generateContentException($output);
         }
 
         return true;

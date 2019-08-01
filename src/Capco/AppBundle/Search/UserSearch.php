@@ -320,8 +320,6 @@ class UserSearch extends Search
                 break;
             default:
                 throw new \RuntimeException("Unknow order: ${order}");
-
-                break;
         }
 
         return [$sortField => ['order' => $order['direction']]];

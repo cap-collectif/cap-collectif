@@ -13,14 +13,12 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
         $form = $object->getProposalForm();
 
         if (!$form->getUsingAddress()) {
-            return true;
+            return;
         }
 
         $address = $object->getAddress();
         if (!$address) {
-            $this->context
-                ->buildViolation($constraint->noAddressMessage)
-                ->addViolation();
+            $this->context->buildViolation($constraint->noAddressMessage)->addViolation();
 
             return;
         }
@@ -28,9 +26,7 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
         // TODO Security: here we should do something validate the structure, recheck with google map api...
         $decodedAddress = json_decode($address, true);
         if (!$decodedAddress) {
-            $this->context
-                ->buildViolation($constraint->noValidJsonAddressMessage)
-                ->addViolation();
+            $this->context->buildViolation($constraint->noValidJsonAddressMessage)->addViolation();
 
             return;
         }
@@ -47,8 +43,6 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
             }
         }
 
-        $this->context
-              ->buildViolation($constraint->addressNotInZoneMessage)
-              ->addViolation();
+        $this->context->buildViolation($constraint->addressNotInZoneMessage)->addViolation();
     }
 }

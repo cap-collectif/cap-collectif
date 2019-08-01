@@ -32,11 +32,6 @@ describe('<ProposalPageContent />', () => {
 
   const props = {
     dispatch: () => {},
-    form: {
-      usingThemes: true,
-      usingCategories: false,
-    },
-    categories: [],
     mapTokens: {
       MAPBOX: {
         initialPublicToken:
