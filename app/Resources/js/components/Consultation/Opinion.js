@@ -28,17 +28,15 @@ export class Opinion extends React.Component<Props> {
         <Media>
           {/* $FlowFixMe $refType */}
           <OpinionPreview opinion={opinion} showUpdatedDate={showUpdatedDate} />
-        </Media>
-        {opinion.votes && opinion.votes.totalCount > 0 ? (
-          <div className="hidden-xs">
-            {/* $FlowFixMe $refType */}
+          {opinion.votes && opinion.votes.totalCount > 0 ? (
             <VotePiechart
+              height="90px"
               ok={opinion.votesOk.totalCount}
               nok={opinion.votesNok.totalCount}
               mitige={opinion.votesMitige.totalCount}
             />
-          </div>
-        ) : null}
+          ) : null}
+        </Media>
       </ListGroupItem>
     );
   }
