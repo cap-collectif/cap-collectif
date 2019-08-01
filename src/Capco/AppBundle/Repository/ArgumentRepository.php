@@ -147,7 +147,7 @@ class ArgumentRepository extends EntityRepository
     public function getTrashedByProject(Project $project)
     {
         return $this->createQueryBuilder('a')
-            ->addSelect('o', 'ov', 'v', 'aut', 'm')
+            ->addSelect('o', 'ov', 'v', 'aut', 'm', 'ovoc', 'ovo')
             ->leftJoin('a.votes', 'v')
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('aut.media', 'm')
@@ -359,7 +359,7 @@ class ArgumentRepository extends EntityRepository
                 'from' => $from,
                 'to' => $to,
                 'id' => $opinionId,
-                'type' => $type,
+                'type' => $type
             ]);
 
         return (int) $qb->getQuery()->getSingleScalarResult();

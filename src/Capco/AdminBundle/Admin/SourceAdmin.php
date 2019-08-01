@@ -42,7 +42,8 @@ class SourceAdmin extends AbstractAdmin
         $query = parent::createQuery($context);
         $query
             ->leftJoin($query->getRootAliases()[0] . '.opinion', 'op')
-            ->leftJoin('op.step', 's')
+            ->innerJoin('op.consultation', 'opc')
+            ->innerJoin('opc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
             ->leftJoin('p.authors', 'authors')

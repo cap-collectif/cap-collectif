@@ -119,7 +119,7 @@ class OpinionVersionRepository extends EntityRepository
     public function getTrashedByProject(Project $project)
     {
         $qb = $this->createQueryBuilder('o')
-            ->addSelect('op', 's', 'aut', 'm')
+            ->addSelect('op', 's', 'aut', 'm', 'opc')
             ->leftJoin('o.parent', 'op')
             ->leftJoin('op.OpinionType', 'ot')
             ->leftJoin('o.author', 'aut')
