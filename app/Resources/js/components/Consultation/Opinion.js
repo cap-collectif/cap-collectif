@@ -1,16 +1,22 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import styled from 'styled-components';
 import { ListGroupItem } from 'react-bootstrap';
-import OpinionPreview from '../Opinion/OpinionPreview';
+import { graphql, createFragmentContainer } from 'react-relay';
+
 import VotePiechart from '../Utils/VotePiechart';
+import OpinionPreview from '../Opinion/OpinionPreview';
 import type { Opinion_opinion } from '~relay/Opinion_opinion.graphql';
-import Media from '../Ui/Medias/Media/Media';
 
 type Props = {|
   +opinion: Opinion_opinion,
   +showUpdatedDate: boolean,
 |};
+
+export const OpinionContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
 
 export class Opinion extends React.Component<Props> {
   static defaultProps = {
@@ -25,18 +31,17 @@ export class Opinion extends React.Component<Props> {
         className={`list-group-item__opinion opinion text-left has-chart${
           author && author.vip ? ' bg-vip' : ''
         }`}>
-        <Media>
+        <OpinionContainer>
           {/* $FlowFixMe $refType */}
           <OpinionPreview opinion={opinion} showUpdatedDate={showUpdatedDate} />
           {opinion.votes && opinion.votes.totalCount > 0 ? (
             <VotePiechart
-              height="90px"
               ok={opinion.votesOk.totalCount}
               nok={opinion.votesNok.totalCount}
               mitige={opinion.votesMitige.totalCount}
             />
           ) : null}
-        </Media>
+        </OpinionContainer>
       </ListGroupItem>
     );
   }
