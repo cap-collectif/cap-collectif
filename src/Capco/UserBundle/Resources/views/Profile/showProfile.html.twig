@@ -48,7 +48,7 @@
     <div class="profile__values">
         <div class="container">
             <ul class="nav  nav-pills">
-                {% set contributionsCount =  userContributionsCountResolver.__invoke(user) %}
+                {% set contributionsCount =  userContributionsCountResolver.__invoke(user, app.user) %}
                 {% if contributionsCount > 0 %}
                 <li class="profile__value {% if (app.request.attributes.get('_route') in ['capco_user_profile_show_all', 'capco_user_profile_show']) %}active{% endif %} ">
                     <a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">
