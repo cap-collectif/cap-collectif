@@ -5,6 +5,10 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import EventPreview from '../Event/EventPreview';
+import type {
+  HomePageEventsQueryResponse,
+  HomePageEventsQueryVariables,
+} from '~relay/HomePageEventsQuery.graphql';
 
 type Props = {|
   limit: number,
@@ -37,15 +41,14 @@ class HomePageEvents extends React.Component<Props> {
   renderEventList = ({
     error,
     props,
-  }: {
-    props: Object,
-  } & ReadyState) => {
+  }: {|
+    ...ReadyState,
+    props: ?HomePageEventsQueryResponse,
+  |}) => {
     if (error) {
-      console.log(error); // eslint-disable-line no-console
       return graphqlError;
     }
     if (props) {
-      console.log(props);
       return (
         <EventContainer>
           {props.events.edges &&
@@ -55,6 +58,7 @@ class HomePageEvents extends React.Component<Props> {
               .filter(Boolean)
               .map(node => (
                 <div>
+                  {/* $FlowFixMe */}
                   <EventPreview isHighlighted={false} event={node} />
                 </div>
               ))}
@@ -82,13 +86,15 @@ class HomePageEvents extends React.Component<Props> {
             }
           }
         `}
-        variables={{
-          count: limit,
-          orderBy: {
-            field: 'START_AT',
-            direction: 'DESC',
-          },
-        }}
+        variables={
+          ({
+            count: limit,
+            orderBy: {
+              field: 'START_AT',
+              direction: 'DESC',
+            },
+          }: HomePageEventsQueryVariables)
+        }
         render={this.renderEventList}
       />
     );

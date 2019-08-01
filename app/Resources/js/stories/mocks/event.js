@@ -1,3 +1,4 @@
+// @flow
 import { author } from './users';
 
 export const event = {
@@ -12,7 +13,7 @@ export const event = {
     end: '2032-06-15 00:00:00',
   },
   location: {
-    place: 'Ecole nationale des beaux arts aka adresse super longue',
+    place: 'Tour Eiffel',
     zip: '75007',
     city: 'Paris',
   },

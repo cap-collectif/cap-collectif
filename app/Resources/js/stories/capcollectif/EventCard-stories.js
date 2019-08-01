@@ -16,7 +16,7 @@ const calendar = {
 };
 
 type Props = {|
-  +isHighlighted: boolean,
+  +isHighlighted?: boolean,
   hasAPicture?: boolean,
   event: Object,
 |};
@@ -98,3 +98,5 @@ storiesOf('Cap Collectif|EventCard', module)
   .add('default', () => <EventCard hasAPicture event={event} />)
   .add('is highlighted', () => <EventCard isHighlighted hasAPicture event={event} />)
   .add('without picture', () => <EventCard event={event} />);
+
+export default EventCard;
