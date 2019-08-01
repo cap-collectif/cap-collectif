@@ -19,10 +19,14 @@ exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
   <div
     className="box-content box-content__content-form"
   >
-    <FormattedMessage
-      id="no-method-configured"
-      values={Object {}}
-    />
+    <ListGroup
+      className=""
+    >
+      <FormattedMessage
+        id="no-method-configured"
+        values={Object {}}
+      />
+    </ListGroup>
     <Button
       active={false}
       block={false}
@@ -37,7 +41,7 @@ exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
         values={Object {}}
       />
     </Button>
-    <Connect(ReduxForm)
+    <Connect(InjectIntl(ReduxForm))
       isCreating={true}
       onClose={[Function]}
       show={false}
@@ -99,7 +103,7 @@ exports[`<ListSSOConfiguration /> renders correctly with items 1`] = `
         values={Object {}}
       />
     </Button>
-    <Connect(ReduxForm)
+    <Connect(InjectIntl(ReduxForm))
       isCreating={true}
       onClose={[Function]}
       show={false}
