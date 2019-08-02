@@ -10,7 +10,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Resolver\SectionResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Repository\VideoRepository;
 use Capco\UserBundle\Repository\UserRepository;
@@ -241,18 +240,6 @@ class HomepageController extends Controller
         $count = $projectRepo->countPublished($this->getUser());
 
         return ['max' => $max, 'count' => $count, 'section' => $section];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Homepage:lastEvents.html.twig")
-     */
-    public function lastEventsAction(int $max = null, int $offset = null, Section $section = null)
-    {
-        $max = $max ?? 3;
-        $offset = $offset ?? 0;
-        $events = $this->get(EventRepository::class)->getLast($max, $offset);
-
-        return ['events' => $events, 'section' => $section];
     }
 
     /**

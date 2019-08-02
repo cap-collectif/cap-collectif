@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\Helper\EventHelper;
-use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
@@ -29,8 +28,8 @@ class EventController extends Controller
         return [
             'props' => [
                 'eventPageTitle' => $this->get(Resolver::class)->getValue('events.jumbotron.title'),
-                'eventPageBody' => $this->get(Resolver::class)->getValue('events.content.body'),
-            ],
+                'eventPageBody' => $this->get(Resolver::class)->getValue('events.content.body')
+            ]
         ];
     }
 
@@ -43,9 +42,7 @@ class EventController extends Controller
         $trans = $this->get('translator');
 
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new ProjectAccessDeniedException(
-                $trans->trans('project.error.not_exportable')
-            );
+            throw new ProjectAccessDeniedException($trans->trans('project.error.not_exportable'));
         }
 
         $path = sprintf('%s/web/export/', $this->container->getParameter('kernel.project_dir'));
@@ -55,10 +52,7 @@ class EventController extends Controller
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
 
-            $flashBag->add(
-                'danger',
-                $trans->trans('project.download.not_yet_generated')
-            );
+            $flashBag->add('danger', $trans->trans('project.download.not_yet_generated'));
 
             return $this->redirect($request->headers->get('referer'));
         }
@@ -102,7 +96,7 @@ class EventController extends Controller
         $user = $this->getUser();
         $registration = $eventHelper->findUserRegistrationOrCreate($event, $user);
         $form = $this->createForm(EventRegistrationType::class, $registration, [
-            'registered' => $registration->isConfirmed(),
+            'registered' => $registration->isConfirmed()
         ]);
 
         if ('POST' === $request->getMethod()) {
@@ -146,15 +140,5 @@ class EventController extends Controller
             'event' => $event,
             'viewer' => $viewer
         ];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Event:lastEvents.html.twig")
-     */
-    public function lastEventsAction(int $max = 3, int $offset = 0)
-    {
-        $events = $this->get(EventRepository::class)->getLast($max, $offset);
-
-        return ['events' => $events];
     }
 }

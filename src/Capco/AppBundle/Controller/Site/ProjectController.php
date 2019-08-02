@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Questionnaire;
@@ -13,7 +14,6 @@ use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\SourceRepository;
-use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Resolver\ProjectStatsResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\HttpFoundation\Request;
@@ -137,7 +137,10 @@ class ProjectController extends Controller
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
 
-            $flashBag->add('danger', $this->get('translator')->trans('project.download.not_yet_generated'));
+            $flashBag->add(
+                'danger',
+                $this->get('translator')->trans('project.download.not_yet_generated')
+            );
 
             return $this->redirect($request->headers->get('referer'));
         }
@@ -171,7 +174,10 @@ class ProjectController extends Controller
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
 
-            $flashBag->add('danger', $this->get('translator')->trans('project.download.not_yet_generated'));
+            $flashBag->add(
+                'danger',
+                $this->get('translator')->trans('project.download.not_yet_generated')
+            );
 
             return $this->redirect($request->headers->get('referer'));
         }
@@ -183,32 +189,19 @@ class ProjectController extends Controller
     }
 
     /**
+     * Legacy URL to avoid 404s.
+     *
      * @Route("/projects/{projectSlug}/events", name="app_project_show_events", defaults={"_feature_flags" = "calendar"})
      * @Route("/consultations/{projectSlug}/events", name="app_consultation_show_events", defaults={"_feature_flags" = "calendar"})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @Template("CapcoAppBundle:Project:show_events.html.twig")
      */
     public function showEventsAction(Project $project)
     {
-        $groupedEvents = $this->get(EventResolver::class)->getEventsGroupedByYearAndMonth(
-            null,
-            null,
-            $project->getSlug(),
-            null
+        return new RedirectResponse(
+            $this->generateUrl('app_event') .
+                '?projectId=' .
+                GlobalId::toGlobalId('Project', $project->getId())
         );
-        $nbEvents = $this->get(EventResolver::class)->countEvents(
-            null,
-            null,
-            $project->getSlug(),
-            null
-        );
-
-        return [
-            'project' => $project,
-            'years' => $groupedEvents,
-            'nbEvents' => $nbEvents,
-            'currentStep' => 'events_step'
-        ];
     }
 
     /**

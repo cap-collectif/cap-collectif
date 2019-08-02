@@ -129,15 +129,7 @@ Scenario: Presentation step should display correct number of element
     | stepSlug    | collecte-des-avis                |
   And I follow "Présentation"
   Then I should see 1 ".media--news" elements
-  And I should see 2 ".event" elements
-
-Scenario: Events menu for project should display correct number of events
-  Given feature "calendar" is enabled
-  And I visited "consultation page" with:
-    | projectSlug | croissance-innovation-disruption |
-    | stepSlug    | collecte-des-avis                |
-  And I follow "Présentation"
-  And I follow "project-events"
+  And I wait "#PresentationStepEvents" to appear on current page
   And I should see 4 ".event" elements
 
 Scenario: Posts menu for project should display correct number of posts

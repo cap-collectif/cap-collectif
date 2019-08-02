@@ -254,7 +254,7 @@ InternalUser:
         description: 'Get all events the user has created.'
         args:
           orderBy:
-            type: 'EventsOrder'
+            type: 'EventOrder'
             defaultValue: { field: START_AT, direction: DESC }
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventsResolver", [value, args])'
       contributions:

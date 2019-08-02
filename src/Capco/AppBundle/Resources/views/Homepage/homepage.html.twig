@@ -82,7 +82,7 @@
         {% elseif section.type == 'news' %}
             {{ render(controller('CapcoAppBundle:Site/Homepage:lastPosts', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
         {% elseif section.type == 'events' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:lastEvents', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {% include 'CapcoAppBundle:Homepage:lastEvents.html.twig' with {'section': section} %}
         {% elseif section.type == 'newsletter' %}
             {% include '@CapcoApp/Homepage/newsletter.html.twig' with {'section': section, 'form': form} only %}
         {% elseif section.type == 'social-networks' %}

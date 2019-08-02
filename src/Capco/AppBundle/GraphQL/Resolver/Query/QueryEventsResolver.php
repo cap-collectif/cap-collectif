@@ -12,6 +12,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\EventOrderField;
 
 class QueryEventsResolver implements ResolverInterface
 {
@@ -42,23 +44,16 @@ class QueryEventsResolver implements ResolverInterface
     public function getEventsConnection(Argument $args): Connection
     {
         $totalCount = 0;
-        $search = null;
-        $order = null;
-        if ($args->offsetExists('search')) {
-            $search = $args->offsetGet('search');
-        }
-        if ($args->offsetExists('isFuture')) {
-            $order = $args->offsetGet('isFuture');
-        }
 
         try {
             $paginator = new Paginator(function (int $offset, int $limit) use (
                 $args,
-                $search,
-                &$totalCount,
-                $order
+                &$totalCount
             ) {
                 $filters = [];
+                $search = null;
+                $orderBy = $args->offsetExists('orderBy') ? $args->offsetGet('orderBy') : ['field' => EventOrderField::START_AT , 'direction' => OrderDirection::ASC];
+
                 if ($args->offsetExists('theme')) {
                     $filters['themes'] = $args->offsetGet('theme');
                 }
@@ -79,12 +74,16 @@ class QueryEventsResolver implements ResolverInterface
                 if ($args->offsetExists('isRegistrable')) {
                     $filters['isRegistrable'] = $args->offsetGet('isRegistrable');
                 }
+                if ($args->offsetExists('search')) {
+                    $search = $args->offsetGet('search');
+                }
+
                 $results = $this->eventSearch->searchEvents(
                     $offset,
                     $limit,
-                    $order,
                     $search,
-                    $filters
+                    $filters,
+                    $orderBy
                 );
 
                 $totalCount = $results['count'];

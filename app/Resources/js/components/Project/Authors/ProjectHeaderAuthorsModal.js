@@ -43,8 +43,8 @@ const renderAuthorItemUserName = (user, profileFeature) =>
   );
 
 const renderAuthorsList = (users: ProjectHeaderAuthorsModal_users, features: FeatureToggles) =>
-  users.map(user => (
-    <ProjectAuthorItem>
+  users.map((user, key) => (
+    <ProjectAuthorItem key={key}>
       <div className="d-flex">
         <UserAvatar user={user} features={features} />
         <div className="d-flex fd-column">

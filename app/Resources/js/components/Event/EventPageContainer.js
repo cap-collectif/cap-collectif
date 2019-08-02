@@ -14,11 +14,11 @@ import EventListCounter from './List/EventListCounter';
 import EventListStatusFilter from './List/EventListStatusFilter';
 import colors from '../../utils/colors';
 
-type Props = {
-  query: EventPageContainer_query,
-  eventPageBody: ?string,
-  backgroundColor: ?string,
-};
+type Props = {|
+  +query: EventPageContainer_query,
+  +eventPageBody: ?string,
+  +backgroundColor: ?string,
+|};
 
 const EventFiltersContainer = styled(ColorBox).attrs({
   id: 'event-page-filters',
@@ -68,12 +68,20 @@ export class EventPageContainer extends React.Component<Props> {
   }
 }
 
+export const getInitialValues = () => {
+  const urlSearch = new URLSearchParams(window.location.search);
+  const project = urlSearch.get('projectId') || null;
+  const hasFilteredUrl = !!project;
+  return {
+    status: hasFilteredUrl ? 'all' : 'ongoing-and-future',
+    project,
+  };
+};
+
 const form = reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  initialValues: {
-    status: 'ongoing-and-future',
-  },
+  initialValues: getInitialValues(),
 })(EventPageContainer);
 
 export default createFragmentContainer(form, {
@@ -89,7 +97,6 @@ export default createFragmentContainer(form, {
         isFuture: { type: "Boolean" }
         author: { type: "ID" }
         isRegistrable: { type: "Boolean" }
-        withEventOnly: { type: "Boolean" }
       ) {
       ...EventRefetch_query
         @arguments(
@@ -114,7 +121,6 @@ export default createFragmentContainer(form, {
           isFuture: $isFuture
           author: $author
           isRegistrable: $isRegistrable
-          withEventOnly: $withEventOnly
         )
       ...EventListCounter_query
         @arguments(

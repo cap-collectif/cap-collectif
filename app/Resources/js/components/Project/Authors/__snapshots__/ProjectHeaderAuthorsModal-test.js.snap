@@ -55,7 +55,9 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
     <ProjectHeaderAuthorsModal__ProjectAuthorList
       className="mb-0"
     >
-      <ProjectHeaderAuthorsModal__ProjectAuthorItem>
+      <ProjectHeaderAuthorsModal__ProjectAuthorItem
+        key="0"
+      >
         <div
           className="d-flex"
         >

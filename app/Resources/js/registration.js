@@ -87,6 +87,7 @@ import SSOSwitchUserApp from './startup/SSOSwitchUserApp';
 import LastProposalsApp from './startup/LastProposalsApp';
 import AuthentificationAdminApp from './startup/AuthentificationAdminApp';
 import HomePageEventsApp from './startup/HomePageEventsApp';
+import PresentationStepEventsApp from './startup/PresentationStepEventsApp';
 import appStore from './stores/AppStore';
 
 if (process.env.NODE_ENV === 'development') {
@@ -139,6 +140,7 @@ ReactOnRails.register({
   ParisUserNotValidApp,
   ShieldApp,
   HomePageEventsApp,
+  PresentationStepEventsApp,
   ProjectListPageApp,
   ProposalFormCreateButtonApp,
   ProjectsListApp,

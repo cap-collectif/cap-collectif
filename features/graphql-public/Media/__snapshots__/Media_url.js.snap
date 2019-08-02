@@ -6,7 +6,7 @@ Object {
     "media": Object {
       "url": "https://capco.test/media/default/0001/01/providerReference6.jpg",
       "urlAvatar": "https://capco.test/media/cache/default_avatar/default/0001/01/providerReference6.jpg",
-      "urlProject": "https://capco.test/media/cache/resolve/default_project/default/0001/01/providerReference6.jpg",
+      "urlProject": "https://capco.test/media/cache/default_project/default/0001/01/providerReference6.jpg",
     },
   },
 }

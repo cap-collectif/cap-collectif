@@ -33,9 +33,6 @@ services:
   Capco\AppBundle\Resolver\ContributionResolver:
     public: true
 
-  Capco\AppBundle\Resolver\EventResolver:
-    public: true
-
   Capco\AppBundle\Resolver\HighlightedContentResolver:
     public: true
 

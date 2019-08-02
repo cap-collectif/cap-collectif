@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
@@ -44,7 +43,7 @@ class StepController extends Controller
 
         return [
             'project' => $project,
-            'currentStep' => $step,
+            'currentStep' => $step
         ];
     }
 
@@ -65,9 +64,7 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
         $projectSlug = $project->getSlug();
-        $events = $this->get(EventResolver::class)->getLastByProject($projectSlug, 2);
         $posts = $this->get(PostRepository::class)->getLastPublishedByProject($projectSlug, 2);
-        $nbEvents = $this->get(EventResolver::class)->countEvents(null, null, $projectSlug, null);
         $nbPosts = $this->get(PostRepository::class)->countSearchResults(null, $projectSlug);
 
         $showVotes = $this->get(ProjectHelper::class)->hasStepWithVotes($project);
@@ -75,11 +72,9 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
-            'events' => $events,
             'posts' => $posts,
-            'nbEvents' => $nbEvents,
             'nbPosts' => $nbPosts,
-            'showVotes' => $showVotes,
+            'showVotes' => $showVotes
         ];
     }
 
@@ -126,7 +121,7 @@ class StepController extends Controller
             'opinions' => $opinions,
             'nbOpinionsToDisplay' => $nbOpinionsToDisplay,
             'versions' => $versions,
-            'nbVersionsToDisplay' => $nbVersionsToDisplay,
+            'nbVersionsToDisplay' => $nbVersionsToDisplay
         ];
     }
 
@@ -164,7 +159,7 @@ class StepController extends Controller
             'currentStep' => $step,
             'opinions' => $opinions,
             'page' => $page,
-            'nbPage' => ceil(\count($opinions) / 10),
+            'nbPage' => ceil(\count($opinions) / 10)
         ];
     }
 
@@ -202,7 +197,7 @@ class StepController extends Controller
             'currentStep' => $step,
             'versions' => $versions,
             'page' => $page,
-            'nbPage' => ceil(\count($versions) / 10),
+            'nbPage' => ceil(\count($versions) / 10)
         ];
     }
 
@@ -233,7 +228,7 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
-            'props' => $props,
+            'props' => $props
         ];
     }
 
@@ -259,7 +254,7 @@ class StepController extends Controller
 
         return [
             'project' => $project,
-            'currentStep' => $step,
+            'currentStep' => $step
         ];
     }
 
@@ -285,18 +280,18 @@ class StepController extends Controller
                 'step' => $step,
                 'questionnaireId' => $step->getQuestionnaire()
                     ? GlobalId::toGlobalId('Questionnaire', $step->getQuestionnaire()->getId())
-                    : null,
+                    : null
             ],
             'json',
             [
-                'groups' => ['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps'],
+                'groups' => ['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps']
             ]
         );
 
         return [
             'project' => $project,
             'currentStep' => $step,
-            'props' => $props,
+            'props' => $props
         ];
     }
 
@@ -319,7 +314,7 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
-            'proposalForm' => null,
+            'proposalForm' => null
         ];
     }
 
@@ -359,7 +354,7 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
-            'props' => $props,
+            'props' => $props
         ];
     }
 
@@ -394,8 +389,8 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'stepProps' => [
-                'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
-            ],
+                'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId())
+            ]
         ];
     }
 }

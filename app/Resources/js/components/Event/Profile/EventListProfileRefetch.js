@@ -91,7 +91,7 @@ export default createRefetchContainer(
   {
     user: graphql`
       fragment EventListProfileRefetch_user on User
-        @argumentDefinitions(orderBy: { type: "EventsOrder" }) {
+        @argumentDefinitions(orderBy: { type: "EventOrder" }) {
         events(first: 100, orderBy: $orderBy) {
           totalCount
           edges {
@@ -105,7 +105,7 @@ export default createRefetchContainer(
     `,
   },
   graphql`
-    query EventListProfileRefetchQuery($userId: ID!, $orderBy: EventsOrder) {
+    query EventListProfileRefetchQuery($userId: ID!, $orderBy: EventOrder) {
       user: node(id: $userId) {
         ...EventListProfileRefetch_user @arguments(orderBy: $orderBy)
       }

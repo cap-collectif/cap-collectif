@@ -62,7 +62,7 @@ class MediaProcessor implements ProcessorInterface
                 $object->setProviderReference($newProviderReference);
 
                 // Let's generate cache for all medias in all formats, to avoid "/resolve" in first URL generation
-                $imgFormats = ['default_logo', 'default_avatar'];
+                $imgFormats = ['default_logo', 'default_avatar', 'default_project'];
                 foreach ($imgFormats as $format) {
                     // Will generate cache file
                     if (!strpos($newProviderReference, '.pdf')) {

@@ -46,7 +46,8 @@ const container = injectIntl(SelectProject);
 
 export default createFragmentContainer(container, {
   query: graphql`
-    fragment SelectProject_query on Query @argumentDefinitions(withEventOnly: { type: "Boolean" }) {
+    fragment SelectProject_query on Query
+      @argumentDefinitions(withEventOnly: { type: "Boolean", defaultValue: false }) {
       projects(withEventOnly: $withEventOnly) {
         edges {
           node {

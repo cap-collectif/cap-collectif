@@ -10,22 +10,22 @@ import { graphqlError } from '../../../createRelayEnvironment';
 import type { GlobalState } from '../../../types';
 import type { EventRefetch_query } from '~relay/EventRefetch_query.graphql';
 
-type Props = {
-  search: ?string,
-  relay: RelayRefetchProp,
-  query: EventRefetch_query,
-  theme: ?string,
-  project: ?string,
-  userType: ?string,
-  status: ?boolean,
-  isRegistrable: ?string,
-  author: ?{ value: string },
-};
+type Props = {|
+  +search: ?string,
+  +relay: RelayRefetchProp,
+  +query: EventRefetch_query,
+  +theme: ?string,
+  +project: ?string,
+  +userType: ?string,
+  +status: ?boolean,
+  +isRegistrable: ?string,
+  +author: ?{ value: string },
+|};
 
-type State = {
-  isRefetching: boolean,
-  hasRefetchError: boolean,
-};
+type State = {|
+  +isRefetching: boolean,
+  +hasRefetchError: boolean,
+|};
 
 export class EventRefetch extends React.Component<Props, State> {
   state = {
@@ -94,17 +94,18 @@ export class EventRefetch extends React.Component<Props, State> {
   }
 }
 
-const selector = formValueSelector('EventPageContainer');
-
-const mapStateToProps = (state: GlobalState) => ({
-  theme: selector(state, 'theme'),
-  project: selector(state, 'project'),
-  search: selector(state, 'search'),
-  userType: selector(state, 'userType'),
-  status: selector(state, 'status'),
-  author: selector(state, 'author'),
-  isRegistrable: selector(state, 'isRegistrable'),
-});
+const mapStateToProps = (state: GlobalState) => {
+  const selector = formValueSelector('EventPageContainer');
+  return {
+    theme: selector(state, 'theme'),
+    project: selector(state, 'project'),
+    search: selector(state, 'search'),
+    userType: selector(state, 'userType'),
+    status: selector(state, 'status'),
+    author: selector(state, 'author'),
+    isRegistrable: selector(state, 'isRegistrable'),
+  };
+};
 
 const container = connect(mapStateToProps)(EventRefetch);
 

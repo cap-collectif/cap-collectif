@@ -2,16 +2,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
 import EventPreview from '../Event/EventPreview';
+
 import type {
   HomePageEventsQueryResponse,
   HomePageEventsQueryVariables,
 } from '~relay/HomePageEventsQuery.graphql';
 
-type Props = {|
-  limit: number,
+export type Props = {|
+  +showAllUrl: string,
+  +section: {
+    title: ?string,
+    teaser: ?string,
+    body: ?string,
+    nbObjects: ?number,
+  },
 |};
 
 const EventContainer = styled.div`
@@ -49,35 +56,47 @@ class HomePageEvents extends React.Component<Props> {
     if (error) {
       return graphqlError;
     }
-    if (props) {
+    if (props && props.events.edges && props.events.edges.length > 0) {
+      const { section, showAllUrl } = this.props;
       return (
-        <EventContainer>
-          {props.events.edges &&
-            props.events.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map(node => (
-                <div>
-                  {/* $FlowFixMe */}
-                  <EventPreview isHighlighted={false} event={node} />
-                </div>
-              ))}
-        </EventContainer>
+        <section className="section--custom">
+          <div className="container">
+            <h2 className="h2">
+              {section.title ? section.title : <FormattedMessage id="homepage.section.events" />}
+            </h2>
+            {section.teaser ? <p className="block">{section.teaser}</p> : null}
+            {section.body ? <p>{section.body}</p> : null}
+            <EventContainer>
+              {props.events.edges &&
+                props.events.edges
+                  .filter(Boolean)
+                  .map(edge => edge.node)
+                  .filter(Boolean)
+                  .map((node, key) => (
+                    <div key={key}>
+                      {/* $FlowFixMe */}
+                      <EventPreview isHighlighted={false} event={node} />
+                    </div>
+                  ))}
+            </EventContainer>
+            <a href={showAllUrl} className="btn btn-primary btn--outline">
+              <FormattedMessage id="event.see_all" />
+            </a>
+          </div>
+        </section>
       );
     }
-    return <Loader />;
   };
 
   render() {
-    const { limit } = this.props;
+    const { section } = this.props;
 
     return (
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query HomePageEventsQuery($count: Int, $orderBy: EventsOrder) {
-            events(orderBy: $orderBy, first: $count) {
+          query HomePageEventsQuery($count: Int, $orderBy: EventOrder!, $isFuture: Boolean!) {
+            events(orderBy: $orderBy, first: $count, isFuture: $isFuture) {
               edges {
                 node {
                   id
@@ -89,7 +108,8 @@ class HomePageEvents extends React.Component<Props> {
         `}
         variables={
           ({
-            count: limit,
+            count: section.nbObjects || 4,
+            isFuture: true,
             orderBy: {
               field: 'START_AT',
               direction: 'DESC',

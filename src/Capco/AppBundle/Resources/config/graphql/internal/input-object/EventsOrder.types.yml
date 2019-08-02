@@ -1,4 +1,4 @@
-EventsOrder:
+EventOrder:
   type: input-object
   config:
     description: 'Ways in which lists of events can be ordered upon return.'
@@ -6,6 +6,8 @@ EventsOrder:
       field:
         type: 'EventOrderField!'
         defaultValue: 'START_AT'
+        description: 'The field in which to order nodes by.'
       direction:
         type: 'OrderDirection!'
         defaultValue: 'DESC'
+        description: 'The direction in which to order nodes.'

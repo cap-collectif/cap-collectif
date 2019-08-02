@@ -300,7 +300,6 @@ export default createFragmentContainer(container, {
         isFuture: { type: "Boolean" }
         author: { type: "ID" }
         isRegistrable: { type: "Boolean" }
-        withEventOnly: { type: "Boolean" }
       ) {
       ...EventListCounter_query
         @arguments(
@@ -315,7 +314,7 @@ export default createFragmentContainer(container, {
           isRegistrable: $isRegistrable
         )
       ...SelectTheme_query
-      ...SelectProject_query @arguments(withEventOnly: $withEventOnly)
+      ...SelectProject_query @arguments(withEventOnly: true)
     }
   `,
 });

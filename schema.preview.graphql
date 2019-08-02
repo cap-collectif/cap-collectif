@@ -187,6 +187,24 @@ type EventEdge {
   cursor: String!
 }
 
+# Ways in which lists of events can be ordered upon return.
+input EventOrder {
+  # The field in which to order nodes by.
+  field: EventOrderField! = START_AT
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = DESC
+}
+
+# Ordering options for events returned from the connection.
+enum EventOrderField {
+  # Order by the end date of the time range.
+  END_AT
+
+  # Order by the start date of the time range.
+  START_AT
+}
+
 # A string containing HTML code.
 scalar HTML
 
@@ -610,6 +628,9 @@ type Query {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Ordering options for events returning from the connection.
+    orderBy: EventOrder = {field: START_AT, direction: DESC}
 
     # ID of a Project to filter by. If non-null, only events belonging to the project will be returned.
     project: ID

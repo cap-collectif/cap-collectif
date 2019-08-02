@@ -9,6 +9,7 @@ use Elastica\Query;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\Result;
+use Capco\AppBundle\Enum\EventOrderField;
 
 class EventSearch extends Search
 {
@@ -24,11 +25,8 @@ class EventSearch extends Search
         'teaser',
         'teaser.std',
         'fullAddress',
-        'fullAddress.std',
+        'fullAddress.std'
     ];
-
-    private const OLD = false;
-    private const LAST = true;
 
     private $eventRepository;
 
@@ -42,9 +40,9 @@ class EventSearch extends Search
     public function searchEvents(
         int $offset,
         int $limit,
-        ?string $order,
-        $terms,
-        array $providedFilters
+        ?string $terms,
+        array $providedFilters,
+        array $orderBy
     ): array {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(
@@ -57,7 +55,7 @@ class EventSearch extends Search
         if (isset($providedFilters['isFuture'])) {
             switch ($providedFilters['isFuture']) {
                 // PASSED only
-                case self::OLD:
+                case false:
                     $dateBoolQuery = new Query\BoolQuery();
                     $endDateIsNullQuery = new Query\BoolQuery();
                     $dateBoolQuery->addShould(new Query\Range('endAt', ['lt' => 'now/d']));
@@ -68,14 +66,14 @@ class EventSearch extends Search
 
                     break;
                 // FUTURE and current
-                case self::LAST:
+                case true:
                     $dateBoolQuery = new Query\BoolQuery();
                     $dateBoolQuery->addShould(new Query\Range('startAt', ['gte' => 'now/d']));
                     $dateBoolQuery->addShould(new Query\Range('endAt', ['gte' => 'now/d']));
                     $boolQuery->addMust($dateBoolQuery);
 
                     break;
-                // FUTURE and PASSED
+                // FUTURE and PASSED (null case)
                 default:
                     break;
             }
@@ -88,13 +86,11 @@ class EventSearch extends Search
         }
         $boolQuery->addMust(new Exists('id'));
 
-        if ('random' === $order) {
+        if ('random' === $orderBy['field']) {
             $query = $this->getRandomSortedQuery($boolQuery);
         } else {
             $query = new Query($boolQuery);
-            if (null !== $order) {
-                $query->setSort($this->getSort($order));
-            }
+            $query->setSort($this->getSort($orderBy));
         }
 
         $query
@@ -109,8 +105,7 @@ class EventSearch extends Search
 
         return [
             'events' => $this->getHydratedResults($ids),
-            'count' => $resultSet->getTotalHits(),
-            'order' => $order,
+            'count' => $resultSet->getTotalHits()
         ];
     }
 
@@ -148,28 +143,21 @@ class EventSearch extends Search
         return $events;
     }
 
-    private function getSort($order): array
+    private function getSort(array $orderBy): array
     {
-        switch ($order) {
-            case self::OLD:
+        switch ($orderBy['field']) {
+            case EventOrderField::END_AT:
                 $sortField = 'endAt';
                 $sortOrder = 'desc';
 
                 break;
-            case self::LAST:
+            case EventOrderField::START_AT:
                 $sortField = 'startAt';
                 $sortOrder = 'asc';
 
                 break;
-            case 'slug':
-                $sortField = 'slug';
-                $sortOrder = 'desc';
-
-                break;
             default:
-                throw new \RuntimeException("Unknow order: ${order}");
-
-                break;
+                throw new \RuntimeException("Unknown order: ${$orderBy['field']}");
         }
 
         return [$sortField => ['order' => $sortOrder]];

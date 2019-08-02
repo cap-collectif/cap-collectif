@@ -47,18 +47,8 @@
         </div>
     {% endif %}
 
-    {% if is_feature_enabled('calendar') and events | length > 0 %}
-        <div class="block">
-            <h2 class="h2">{{ 'step.presentation.events.title'|trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ nbEvents }}</span></h2>
-            <div class="row">
-                {% for event in events %}
-                    {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event, 'col_classes': 'col-md-6  col-sm-12'} only %}
-                {% endfor %}
-            </div>
-            {% if nbEvents > 2 %}
-                <a href="{{ path('app_project_show_events', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline" id="project-events">{{ 'step.presentation.events.see_all'|trans({}, 'CapcoAppBundle') }}</a>
-            {% endif %}
-        </div>
+    {% if is_feature_enabled('calendar') %}
+        {{ react_render_component('PresentationStepEventsApp', { 'props': {'limit': 4, 'showAllUrl': path('app_project_show_events', {'projectSlug': project.slug}), 'projectId': project.id|toGlobalId('Project')} }) }}
     {% endif %}
 
     {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}

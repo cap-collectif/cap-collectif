@@ -2231,15 +2231,22 @@ input EventInput {
   country: String
 }
 
-# Ordering options for events returned from the connection.
-enum EventOrderField {
-  START_AT
+# Ways in which lists of events can be ordered upon return.
+input EventOrder {
+  # The field in which to order nodes by.
+  field: EventOrderField! = START_AT
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = DESC
 }
 
-# Ways in which lists of events can be ordered upon return.
-input EventsOrder {
-  field: EventOrderField! = START_AT
-  direction: OrderDirection! = DESC
+# Ordering options for events returned from the connection.
+enum EventOrderField {
+  # Order by the end date of the time range.
+  END_AT
+
+  # Order by the start date of the time range.
+  START_AT
 }
 
 # Require a firstname
@@ -4749,11 +4756,11 @@ type Query {
     # Returns the last `n` elements from the list.
     last: Int
 
+    # Ordering options for events returning from the connection.
+    orderBy: EventOrder = {field: START_AT, direction: DESC}
+
     # ID of a Project to filter by. If non-null, only events belonging to the project will be returned.
     project: ID
-
-    # Ordering options for events returning from the connection.
-    orderBy: EventsOrder
 
     # If provided, searches events by title and description.
     search: String
@@ -7380,7 +7387,7 @@ type User implements Node & UniformResourceLocatable {
 
     # Returns the last `n` elements from the list.
     last: Int
-    orderBy: EventsOrder = {field: START_AT, direction: DESC}
+    orderBy: EventOrder = {field: START_AT, direction: DESC}
   ): EventConnection!
 
   # Return the user's contributions of the type requested.
