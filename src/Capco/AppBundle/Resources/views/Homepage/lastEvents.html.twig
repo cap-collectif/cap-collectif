@@ -12,11 +12,7 @@
             {% if null != section.body %}
                 <p>{{ section.body | raw }}</p>
             {% endif %}
-            <div class="row">
-                {% for event in events %}
-                    {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event} only %}
-                {% endfor %}
-            </div>
+            {{ react_render_component('HomePageEventsApp', { 'props': {'limit': 3} }) }}
             <a href="{{ path('app_event') }}" class="btn  btn-primary  btn--outline">{{ 'event.see_all'|trans({}, 'CapcoAppBundle') }}</a>
         </div>
     </section>

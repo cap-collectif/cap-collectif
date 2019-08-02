@@ -1,3 +1,4 @@
+// @flow
 import { author } from './users';
 
 export const event = {

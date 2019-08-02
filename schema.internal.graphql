@@ -4752,6 +4752,9 @@ type Query {
     # ID of a Project to filter by. If non-null, only events belonging to the project will be returned.
     project: ID
 
+    # Ordering options for events returning from the connection.
+    orderBy: EventsOrder
+
     # If provided, searches events by title and description.
     search: String
 
