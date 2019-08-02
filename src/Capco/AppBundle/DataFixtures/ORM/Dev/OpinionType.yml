@@ -9,7 +9,7 @@ Capco\AppBundle\Entity\OpinionType:
     votesHelpText: Bon vote
     votesThreshold: 5
     votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
-    consultation: '@typeAll'
+    consultation: '@all'
   opinionType2:
     id: 'opinionType2'
     title: Les causes
@@ -17,7 +17,7 @@ Capco\AppBundle\Entity\OpinionType:
     color: orange
     defaultFilter: votes
     isEnabled: true
-    consultation: '@typeAll'
+    consultation: '@all'
   opinionType3:
     id: 'opinionType3'
     title: Les enjeux
@@ -26,7 +26,7 @@ Capco\AppBundle\Entity\OpinionType:
     defaultFilter: votes
     isEnabled: true
     sourceable: false
-    consultation: '@typeAll'
+    consultation: '@all'
   opinionType4:
     id: 'opinionType4'
     title: Les solutions
@@ -34,7 +34,7 @@ Capco\AppBundle\Entity\OpinionType:
     color: green
     defaultFilter: votes
     isEnabled: true
-    consultation: '@typeAll'
+    consultation: '@all'
   opinionType5bis:
     id: 'opinionType5bis'
     title: Titre Ier
@@ -45,7 +45,7 @@ Capco\AppBundle\Entity\OpinionType:
     isEnabled: false
     versionable: false
     sourceable: false
-    consultation: '@typePJL'
+    consultation: '@PJL'
   opinionType5ter:
     id: 'opinionType5ter'
     title: Chapitre Ier
@@ -56,7 +56,7 @@ Capco\AppBundle\Entity\OpinionType:
     isEnabled: false
     versionable: false
     sourceable: false
-    consultation: '@typePJL'
+    consultation: '@PJL'
     parent: '@opinionType5bis'
   opinionType5:
     id: 'opinionType5'
@@ -70,7 +70,7 @@ Capco\AppBundle\Entity\OpinionType:
     votesHelpText: Bon votes à tous
     votesThreshold: 5
     votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
-    consultation: '@typePJL'
+    consultation: '@PJL'
     parent: '@opinionType5ter'
     linkable: true
   opinionType6:
@@ -85,7 +85,7 @@ Capco\AppBundle\Entity\OpinionType:
     votesHelpText: Il faut voter en cliquant sur les boutons
     votesThreshold: 5
     votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
-    consultation: '@typePJL'
+    consultation: '@PJL'
     parent: '@opinionType5'
   opinionType7:
     id: 'opinionType7'
@@ -99,7 +99,7 @@ Capco\AppBundle\Entity\OpinionType:
     votesHelpText: Bon courage pour le votes
     votesThreshold: 5
     votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
-    consultation: '@typePJL'
+    consultation: '@PJL'
     parent: '@opinionType5'
   opinionType8:
     id: 'opinionType8'
@@ -111,7 +111,7 @@ Capco\AppBundle\Entity\OpinionType:
     votesHelpText: Bon courage pour le votes
     votesThreshold: 5
     votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
-    consultation: '@typeDefault'
+    consultation: '@default'
   opinionType9:
     id: 'opinionType9'
     title: Les causes
@@ -119,7 +119,7 @@ Capco\AppBundle\Entity\OpinionType:
     color: orange
     defaultFilter: votes
     isEnabled: true
-    consultation: '@typeDefault'
+    consultation: '@default'
   opinionType10:
     id: 'opinionType10'
     title: Les enjeux
@@ -128,7 +128,7 @@ Capco\AppBundle\Entity\OpinionType:
     defaultFilter: votes
     isEnabled: true
     sourceable: false
-    consultation: '@typeDefault'
+    consultation: '@default'
   opinionType11:
     id: 'opinionType11'
     title: Le problème constaté
@@ -139,7 +139,7 @@ Capco\AppBundle\Entity\OpinionType:
     votesHelpText: Bon vote à tous
     votesThreshold: 5
     votesThresholdHelpText: La seuil à atteindre est toujours de 5 votes
-    consultation: '@typeSimple'
+    consultation: '@simple'
   opinionType12:
     id: 'opinionType12'
     title: Les causes
@@ -148,7 +148,7 @@ Capco\AppBundle\Entity\OpinionType:
     defaultFilter: votes
     isEnabled: true
     versionable: true
-    consultation: '@typeSimple'
+    consultation: '@simple'
   opinionType13:
     id: 'opinionType13'
     title: Les causes
@@ -156,7 +156,7 @@ Capco\AppBundle\Entity\OpinionType:
     color: orange
     defaultFilter: votes
     isEnabled: true
-    consultation: '@typeCauses'
+    consultation: '@causes'
   opinionType{17..27}:
     id: opinionType<current()>
     title: Test<current()>
@@ -164,7 +164,7 @@ Capco\AppBundle\Entity\OpinionType:
     color: orange
     defaultFilter: votes
     isEnabled: true
-    consultation: '@typePJL'
+    consultation: '@PJL'
     parent: '@opinionType5ter'
   opinionType28:
     id: 'opinionType28'
@@ -176,7 +176,7 @@ Capco\AppBundle\Entity\OpinionType:
     isEnabled: false
     versionable: false
     sourceable: false
-    consultation: '@typePJL'
+    consultation: '@PJL'
   opinionType28ter:
     id: 'opinionType28ter'
     title: Chapitre Ier
@@ -187,7 +187,7 @@ Capco\AppBundle\Entity\OpinionType:
     isEnabled: false
     versionable: false
     sourceable: false
-    consultation: '@typePJL'
+    consultation: '@PJL'
     parent: '@opinionType28'
   opinionType29:
     id: 'opinionType29'
@@ -199,7 +199,7 @@ Capco\AppBundle\Entity\OpinionType:
     isEnabled: false
     versionable: false
     sourceable: false
-    consultation: '@typePJL'
+    consultation: '@PJL'
   opinionType29ter:
     id: 'opinionType29ter'
     title: Chapitre Ier
@@ -210,7 +210,7 @@ Capco\AppBundle\Entity\OpinionType:
     isEnabled: false
     versionable: false
     sourceable: false
-    consultation: '@typePJL'
+    consultation: '@PJL'
     parent: '@opinionType29'
   opinionTypeEndless:
     id: 'opinionTypeEndless'
@@ -222,4 +222,4 @@ Capco\AppBundle\Entity\OpinionType:
     isEnabled: false
     versionable: false
     sourceable: false
-    consultation: '@typeEndless'
+    consultation: '@endless'

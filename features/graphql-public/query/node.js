@@ -47,7 +47,7 @@ describe('Query.node', () => {
     'gets the correct ID and type name for consultations',
     async () => {
       await expect(
-        graphql(NodeQuery, { id: toGlobalId('Consultation', 'typeAll') }),
+        graphql(NodeQuery, { id: toGlobalId('Consultation', 'all') }),
       ).resolves.toMatchSnapshot();
     },
   );

@@ -41,7 +41,7 @@ Scenario: GraphQL client wants to list contributions in a consultation
   When I send a GraphQL request:
   """
   query {
-     consultations(id: "Q29uc3VsdGF0aW9uOnR5cGVQSkw=") {
+     consultations(id: "Q29uc3VsdGF0aW9uOlBKTA==") {
       id
       title
       contributions(first: 5, orderBy: {field: VOTE_COUNT, direction: DESC}) {
@@ -65,7 +65,7 @@ Scenario: GraphQL client wants to list contributions in a consultation
   "data": {
     "consultations": [
       {
-        "id": "Q29uc3VsdGF0aW9uOnR5cGVQSkw=",
+        "id": "Q29uc3VsdGF0aW9uOlBKTA==",
         "title": "Projet de loi",
         "contributions": {
           "totalCount": 11,
@@ -90,7 +90,7 @@ Scenario: GraphQL client wants to list contributions in a consultation including
   When I send a GraphQL request:
   """
   query {
-     consultations(id: "Q29uc3VsdGF0aW9uOnR5cGVQSkw=") {
+     consultations(id: "Q29uc3VsdGF0aW9uOlBKTA==") {
       id
       title
       contributions(first: 5, orderBy: {field: VOTE_COUNT, direction: DESC}, includeTrashed: true) {
@@ -105,7 +105,7 @@ Scenario: GraphQL client wants to list contributions in a consultation including
   "data": {
     "consultations": [
       {
-        "id": "Q29uc3VsdGF0aW9uOnR5cGVQSkw=",
+        "id": "Q29uc3VsdGF0aW9uOlBKTA==",
         "title": "Projet de loi",
         "contributions": {
           "totalCount": 19

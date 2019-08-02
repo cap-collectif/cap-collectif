@@ -22,7 +22,7 @@ exports[`Query.node gets the correct ID and type name for consultations 1`] = `
 Object {
   "node": Object {
     "__typename": "Consultation",
-    "id": "Q29uc3VsdGF0aW9uOnR5cGVBbGw=",
+    "id": "Q29uc3VsdGF0aW9uOmFsbA==",
   },
 }
 `;

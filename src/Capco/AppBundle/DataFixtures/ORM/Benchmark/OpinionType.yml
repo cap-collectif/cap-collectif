@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\OpinionType:
     votesHelpText: <text(200)>
     votesThreshold: 5
     votesThresholdHelpText: <text(200)>
-    consultation: '@typeDefault'
+    consultation: '@default'
   opinionType2:
     id: 'opinionType2'
     title: Les causes
@@ -19,7 +19,7 @@ Capco\AppBundle\Entity\OpinionType:
     color: orange
     defaultFilter: votes
     isEnabled: true
-    consultation: '@typeDefault'
+    consultation: '@default'
   opinionType3:
     id: 'opinionType3'
     title: Les enjeux
@@ -29,7 +29,7 @@ Capco\AppBundle\Entity\OpinionType:
     defaultFilter: votes
     isEnabled: true
     sourceable: false
-    consultation: '@typeDefault'
+    consultation: '@default'
   opinionType4:
     id: 'opinionType4'
     title: Les solutions
@@ -38,7 +38,7 @@ Capco\AppBundle\Entity\OpinionType:
     color: green
     defaultFilter: votes
     isEnabled: true
-    consultation: '@typeDefault'
+    consultation: '@default'
   opinionType5:
     id: 'opinionType5'
     title: Titre Ier
@@ -50,4 +50,4 @@ Capco\AppBundle\Entity\OpinionType:
     isEnabled: false
     versionable: false
     sourceable: false
-    consultation: '@typeDefault'
+    consultation: '@default'

@@ -1,27 +1,27 @@
 Capco\AppBundle\Entity\Consultation:
-  typeAll:
-    id: typeAll
+  all:
+    id: all
     title: Toutes
     step: '@cstep3'
-  typeDefault:
-    id: typeDefault
+  default:
+    id: default
     title: Défaut
     step: '@cstep1'
-  typeSimple:
-    id: typeSimple
+  simple:
+    id: simple
     title: Simple
     step: '@cstep2'
-  typeCauses:
-    id: typeCauses
+  causes:
+    id: causes
     title: Causes
     step: '@cstep4'
-  typePJL:
-    id: typePJL
+  PJL:
+    id: PJL
     title: Projet de loi
     step: '@cstep5'
     moderatingOnCreate: true
     moderatingOnUpdate: true
-  typeEndless:
-    id: typeEndless
+  endless:
+    id: endless
     title: 'Projet sans fin'
     step: '@cstep6'

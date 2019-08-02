@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\Opinion:
   # Project 1
   opinion1:
     id: 'opinion1'
-    consultation: '@typeDefault'
+    consultation: '@default'
     title: Opinion 1
     createdAt: <(new \DateTime('2018-01-01 01:00:00'))>
     publishedAt: <(new \DateTime('2018-01-01 01:00:00'))>
@@ -12,7 +12,7 @@ Capco\AppBundle\Entity\Opinion:
     moderationToken: 'opinion1ModerationToken'
   opinion2:
     id: 'opinion2'
-    consultation: '@typeDefault'
+    consultation: '@default'
     title: Opinion 2
     createdAt: <(new \DateTime('2018-01-01 02:00:00'))>
     publishedAt: <(new \DateTime('2018-01-01 02:00:00'))>
@@ -24,7 +24,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion3:
     id: 'opinion3'
     Author: '@user5'
-    consultation: '@typeDefault'
+    consultation: '@default'
     title: Opinion 3
     createdAt: <(new \DateTime('2018-01-01 03:00:00'))>
     publishedAt: <(new \DateTime('2018-01-01 03:00:00'))>
@@ -32,7 +32,7 @@ Capco\AppBundle\Entity\Opinion:
     OpinionType: '@opinionType10'
   opinion4:
     id: 'opinion4'
-    consultation: '@typeDefault'
+    consultation: '@default'
     title: Opinion 4
     createdAt: <(new \DateTime('2018-01-01 04:00:00'))>
     publishedAt: <(new \DateTime('2018-01-01 04:00:00'))>
@@ -41,7 +41,7 @@ Capco\AppBundle\Entity\Opinion:
     OpinionType: '@opinionType10'
   opinion5:
     id: 'opinion5'
-    consultation: '@typeDefault'
+    consultation: '@default'
     title: Opinion sans sources
     createdAt: <(new \DateTime('2018-01-01 05:00:00'))>
     publishedAt: <(new \DateTime('2018-01-01 05:00:00'))>
@@ -50,7 +50,7 @@ Capco\AppBundle\Entity\Opinion:
     OpinionType: '@opinionType9'
   opinion{6..40}:
     id: 'opinion<current()>'
-    consultation: '@typeDefault'
+    consultation: '@default'
     createdAt: <((new \DateTime('2018-03-01 00:00:00'))->modify("+ $current minutes"))>
     publishedAt: <((new \DateTime('2018-03-01 00:00:00'))->modify("+ $current minutes"))>
     title: Opinion <current()>
@@ -60,7 +60,7 @@ Capco\AppBundle\Entity\Opinion:
     OpinionType: '@opinionType9'
   opinion{41..50}:
     id: 'opinion<current()>'
-    consultation: '@typeDefault'
+    consultation: '@default'
     title: Opinion <current()>
     createdAt: <((new \DateTime('2018-03-01 00:00:00'))->modify("+ $current minutes"))>
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
@@ -70,7 +70,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion51:
     id: 'opinion51'
-    consultation: '@typeSimple'
+    consultation: '@simple'
     createdAt: <(new \DateTime('2018-03-01 01:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 01:00:00'))>
     title: Opinion 51
@@ -80,7 +80,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion52:
     id: 'opinion52'
-    consultation: '@typeSimple'
+    consultation: '@simple'
     publishedAt: <(new \DateTime('2018-03-01 02:00:00'))>
     title: Opinion 52
     body: Contenu de ma super opinion !
@@ -91,7 +91,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion53:
     id: 'opinion53'
-    consultation: '@typeSimple'
+    consultation: '@simple'
     createdAt: <(new \DateTime('2018-03-01 03:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 03:00:00'))>
     title: Opinion 53
@@ -101,7 +101,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion54:
     id: 'opinion54'
-    consultation: '@typeAll'
+    consultation: '@all'
     publishedAt: <(new \DateTime('2018-03-01 04:00:00'))>
     createdAt: <(new \DateTime('2018-03-01 04:00:00'))>
     title: Opinion 54
@@ -111,7 +111,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion55:
     id: 'opinion55'
-    consultation: '@typeAll'
+    consultation: '@all'
     createdAt: <(new \DateTime('2018-03-01 05:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 05:00:00'))>
     title: Opinion 55
@@ -120,7 +120,7 @@ Capco\AppBundle\Entity\Opinion:
     OpinionType: '@opinionType9'
   opinion56:
     id: 'opinion56'
-    consultation: '@typeAll'
+    consultation: '@all'
     createdAt: <(new \DateTime('2018-03-01 06:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 06:00:00'))>
     title: Opinion 56
@@ -130,7 +130,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion57:
     id: 'opinion57'
-    consultation: '@typePJL'
+    consultation: '@PJL'
     createdAt: <(new \DateTime('2018-03-01 07:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 07:00:00'))>
     title: Article 1
@@ -142,7 +142,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion58:
     id: 'opinion58'
-    consultation: '@typePJL'
+    consultation: '@PJL'
     createdAt: <(new \DateTime('2018-03-01 08:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 08:00:00'))>
     title: Article 3
@@ -154,7 +154,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion59:
     id: 'opinion59'
-    consultation: '@typePJL'
+    consultation: '@PJL'
     createdAt: <(new \DateTime('2018-03-01 10:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 10:00:00'))>
     title: Article 2
@@ -166,7 +166,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion60:
     id: 'opinion60'
-    consultation: '@typePJL'
+    consultation: '@PJL'
     publishedAt: <(new \DateTime('2018-03-01 11:00:00'))>
     title: Article
     slug: article-0
@@ -181,7 +181,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion61:
     id: 'opinion61'
-    consultation: '@typePJL'
+    consultation: '@PJL'
     publishedAt: <(new \DateTime('2018-03-01 12:00:00'))>
     createdAt: <(new \DateTime('2018-03-01 12:00:00'))>
     title: Lié à article
@@ -192,7 +192,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion62:
     id: 'opinion62'
-    consultation: '@typePJL'
+    consultation: '@PJL'
     title: Très lié à article
     createdAt: <(new \DateTime('2018-03-01 13:00:00'))>
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
@@ -202,7 +202,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion63:
     id: 'opinion63'
-    consultation: '@typePJL'
+    consultation: '@PJL'
     title: Article visible à la corbeille
     createdAt: <(new \DateTime('2018-03-01 14:00:00'))>
     publishedAt: <(new \DateTime('2018-03-01 14:00:00'))>
@@ -216,7 +216,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion{64..67}:
     id: 'opinion<current()>'
-    consultation: '@typeSimple'
+    consultation: '@simple'
     createdAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current minutes"))>
     title: Opinion <current()> non publié à temps
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
@@ -225,7 +225,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion{68..74}:
     id: 'opinion<current()>'
-    consultation: '@typePJL'
+    consultation: '@PJL'
     createdAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current minutes"))>
     publishedAt: <((new \DateTime('2018-02-01 00:00:00'))->modify("+ $current minutes"))>
@@ -237,7 +237,7 @@ Capco\AppBundle\Entity\Opinion:
 
   opinion{74..80}:
     id: 'opinion<current()>'
-    consultation: '@typePJL'
+    consultation: '@PJL'
     createdAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current minutes"))>
     updatedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current minutes"))>
     publishedAt: <((new \DateTime('2018-02-16 00:00:00'))->modify("+ $current minutes"))>
