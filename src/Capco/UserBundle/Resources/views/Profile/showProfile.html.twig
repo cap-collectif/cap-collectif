@@ -106,7 +106,7 @@
                     </a>
                 </li>
                 {% endif %}
-                {% set sourcesCount = userSourcesResolver.__invoke(user).totalCount %}
+                {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
                 {% if sourcesCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_sources' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_sources', {'slug': user.slug}) }}">

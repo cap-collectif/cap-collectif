@@ -36,6 +36,7 @@ import ProposalVoteBasketWidgetApp from './startup/ProposalVoteBasketWidgetApp';
 import AlertBoxApp from './startup/AlertBoxApp';
 import ConsultationPageApp from './startup/ConsultationPageApp';
 import UserProposalsApp from './startup/UserProposalsApp';
+import SourcePageApp from './startup/SourcePageApp';
 import ProposalsUserVotesPageApp from './startup/ProposalsUserVotesPageApp';
 import AccountProfileApp from './startup/AccountProfileApp';
 import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
@@ -200,5 +201,6 @@ ReactOnRails.register({
   SSOSwitchUserApp,
   AuthentificationAdminApp,
   ProjectCreateButtonApp,
+  SourcePageApp,
   SectionListPageApp,
 });

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -11,6 +12,7 @@ use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class SourceRepository extends EntityRepository
@@ -185,6 +187,87 @@ class SourceRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function getSourcesByAuthorViewerCanSee(
+        User $viewer,
+        User $user,
+        ?int $limit = null,
+        ?int $offset = null
+    ): array {
+        $qb = $this->createSourcesByAuthorViewerCanSeeQuery($viewer, $user)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countSourcesByAuthorViewerCanSee(User $viewer, User $user): int
+    {
+        $qb = $this->createSourcesByAuthorViewerCanSeeQuery($viewer, $user);
+        $qb->select('COUNT(DISTINCT s.id)');
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getPublicSourcesByAuthor(
+        User $author,
+        ?int $limit = null,
+        ?int $offset = null
+    ): array {
+        $qb = $this->createPublicSourcesByAuthorQuery($author);
+        $qb->setMaxResults($limit)->setFirstResult($offset);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function createPublicSourcesByAuthorQuery(User $author): QueryBuilder
+    {
+        //        $qb = $this->getIsEnabledQueryBuilder('s');
+        $qb = $this->createQueryBuilder('s');
+        $qb
+            ->leftJoin('s.opinion', 'o')
+            ->leftJoin('s.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('o.step', 'ostep')
+            ->leftJoin('ovo.step', 'ovostep')
+
+            ->leftJoin('ostep.projectAbstractStep', 'opas')
+            ->leftJoin('ovostep.projectAbstractStep', 'ovopas')
+
+            ->leftJoin('opas.project', 'pro')
+            ->leftJoin('ovopas.project', 'pro2')
+
+            ->andWhere('s.author = :author')
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->orX(
+                        $qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC),
+                        $qb->expr()->eq('pro2.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+                    )
+            )
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->orX(
+                        $qb->expr()->eq('ostep.private', 'false'),
+                        $qb->expr()->eq('ovostep.private', 'false')
+                    )
+            )
+            ->setParameters([
+                ':author' => $author
+            ]);
+
+        return $qb;
+    }
+
+    public function countPublicSourcesByAuthor(User $author): int
+    {
+        $qb = $this->createPublicSourcesByAuthorQuery($author);
+        $qb->select('COUNT(DISTINCT p.id)');
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
     /**
      * Get sources by user.
      */
@@ -291,5 +374,105 @@ class SourceRepository extends EntityRepository
     protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('s')->andWhere('s.published = true');
+    }
+
+    private function createSourcesByAuthorViewerCanSeeQuery(User $viewer, User $user): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        $qb
+            ->leftJoin('s.opinion', 'o')
+            ->leftJoin('s.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+
+            ->leftJoin('o.step', 'ostep')
+            ->leftJoin('ovo.step', 'ovostep')
+
+            ->leftJoin('ostep.projectAbstractStep', 'opas')
+            ->leftJoin('ovostep.projectAbstractStep', 'ovopas')
+
+            ->leftJoin('opas.project', 'pro')
+            ->leftJoin('ovopas.project', 'pro2')
+
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
+            ->leftJoin('pro2.restrictedViewerGroups', 'prvg2')
+
+            ->leftJoin('pro.authors', 'pr_au')
+            ->leftJoin('pro2.authors', 'pr_au2')
+            ->andWhere('s.author = :user');
+        if (!$viewer->isSuperAdmin()) {
+            $this->getContributionsViewerCanSee($qb, $viewer);
+
+            $visibility = [];
+            $visibility[] = ProjectVisibilityMode::VISIBILITY_PUBLIC;
+            if ($viewer->isSuperAdmin()) {
+                $visibility[] = ProjectVisibilityMode::VISIBILITY_ME;
+                $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
+                $visibility[] = ProjectVisibilityMode::VISIBILITY_CUSTOM;
+            } elseif ($viewer->isAdmin()) {
+                $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
+            }
+
+            $qb = $qb->andWhere(
+                $qb
+                    ->expr()
+                    ->orX(
+                        $qb
+                            ->expr()
+                            ->orX(
+                                $qb
+                                    ->expr()
+                                    ->eq(
+                                        'pro2.visibility',
+                                        ProjectVisibilityMode::VISIBILITY_PUBLIC
+                                    ),
+                                $qb->expr()->eq(':viewer', 'pr_au.user')
+                            ),
+                        $qb
+                            ->expr()
+                            ->andX(
+                                $qb
+                                    ->expr()
+                                    ->eq(
+                                        'pro2.visibility',
+                                        ProjectVisibilityMode::VISIBILITY_CUSTOM
+                                    ),
+                                $qb->expr()->in('prvg2.id', ':prvgId')
+                            ),
+                        $qb
+                            ->expr()
+                            ->andX(
+                                $qb->expr()->in('pro2.visibility', ':visibility'),
+                                $qb
+                                    ->expr()
+                                    ->lt(
+                                        'pro2.visibility',
+                                        ProjectVisibilityMode::VISIBILITY_CUSTOM
+                                    )
+                            )
+                    )
+            );
+
+            if (!$viewer->isAdmin()) {
+                $qb->andWhere(
+                    $qb
+                        ->expr()
+                        ->orX(
+                            $qb->expr()->andX($qb->expr()->eq('ostep.private', 'false')),
+                            $qb->expr()->eq(':viewer', 'pr_au.user')
+                        )
+                );
+            }
+            $qb->setParameters([
+                ':viewer' => $viewer,
+                ':user' => $user,
+                ':visibility' => $user,
+                ':prvgId' => $viewer->getUserGroupIds()
+            ]);
+        } else {
+            $qb->setParameter(':user', $user);
+        }
+
+        return $qb;
     }
 }

@@ -107,7 +107,7 @@ InternalUser:
         type: 'SourceConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all sources of the user'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSourcesResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSourcesResolver", [getUser(), value, args, context])'
         args:
           first:
             type: 'Int'
@@ -125,7 +125,7 @@ InternalUser:
         type: 'InternalProposalConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all proposals of the user.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProposalsResolver", [getUser(), value ,args, context])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProposalsResolver", [getUser(), value, args, context])'
         args:
           first:
             type: 'Int'

@@ -1,7 +1,1 @@
-<ul class="media-list  opinion__list">
-    {% for source in sources %}
-        <div class="block  block--bordered">
-            {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.opinion, 'opinionType': source.opinion.opinionType, 'project': source.opinion.step.project, 'profile': true } only %}
-        </div>
-    {% endfor %}
-</ul>
+{{ react_render_component('SourcePageApp', { 'props': { 'userId': user.id|toGlobalId('User') } }) }}
