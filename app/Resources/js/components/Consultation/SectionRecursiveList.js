@@ -5,9 +5,9 @@ import SectionList from './SectionList';
 import UnpublishedOpinionList from './UnpublishedOpinionList';
 import type { SectionRecursiveList_consultation } from '~relay/SectionRecursiveList_consultation.graphql';
 
-type Props = {
-  consultation: SectionRecursiveList_consultation,
-};
+type Props = {|
+  +consultation: SectionRecursiveList_consultation,
+|};
 
 export class SectionRecursiveList extends React.Component<Props> {
   render() {

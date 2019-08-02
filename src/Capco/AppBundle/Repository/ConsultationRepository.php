@@ -9,7 +9,8 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
- * ConsultationRepository. *
+ * ConsultationRepository. *.
+ *
  * @method Consultation|null find($id, $lockMode = null, $lockVersion = null)
  * @method Consultation|null findOneBy(array $criteria, array $orderBy = null)
  * @method Consultation[]    findAll()
@@ -32,23 +33,20 @@ class ConsultationRepository extends EntityRepository
             ->select('ot.id')
             ->leftJoin('c.opinionTypes', 'ot')
             ->andWhere('c.id = :id')
-            ->setParameter('id', $id)
-        ;
+            ->setParameter('id', $id);
 
-        return array_map('current',
-            $qb
-            ->getQuery()
-            ->getScalarResult());
+        return array_map('current', $qb->getQuery()->getScalarResult());
     }
 
-    public function getByConsultationStepPaginated(ConsultationStep $cs, int $offset = 0, int $limit = 100): Paginator
-    {
+    public function getByConsultationStepPaginated(
+        ConsultationStep $cs,
+        int $offset = 0,
+        int $limit = 100
+    ): Paginator {
         $qb = $this->createQueryBuilder('c');
 
         $query = $qb
-            ->andWhere(
-                $qb->expr()->eq('c.step', ':cs')
-            )
+            ->andWhere($qb->expr()->eq('c.step', ':cs'))
             ->setParameter('cs', $cs)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
@@ -62,23 +60,19 @@ class ConsultationRepository extends EntityRepository
 
         return $qb
             ->select('count(DISTINCT c)')
-            ->andWhere(
-                $qb->expr()->eq('c.step', ':cs')
-            )
+            ->andWhere($qb->expr()->eq('c.step', ':cs'))
             ->setParameter('cs', $cs)
             ->getQuery()
             ->getSingleScalarResult();
-
     }
 
-//    /**
-//     * @return QueryBuilder
-//     */
-//    protected function getIsEnabledQueryBuilder()
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.enabled = :enabled')
-//            ->setParameter('enabled', true);
-//    }
-
+    /**
+     * @return QueryBuilder
+     */
+    protected function getIsEnabledQueryBuilder()
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.enabled = :enabled')
+            ->setParameter('enabled', true);
+    }
 }

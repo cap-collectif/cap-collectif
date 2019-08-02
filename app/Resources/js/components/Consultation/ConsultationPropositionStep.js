@@ -64,11 +64,14 @@ export const ConsultationPropositionStep = (props: Props) => {
         {/* $FlowFixMe $refType */}
         <StepInfos step={step} />
         {/* $FlowFixMe */}
-        {step.consultations.edges && step.consultations.edges.length > 0 && (
-          <SectionRecursiveList
-            consultation={step.consultations.edges[0] && step.consultations.edges[0].node}
-          />
-        )}
+        {step.consultations.edges &&
+          step.consultations.edges[0] &&
+          step.consultations.edges[0].node && (
+            <SectionRecursiveList
+              // $FlowFixMe $refType
+              consultation={step.consultations.edges[0].node}
+            />
+          )}
       </div>
     </React.Fragment>
   );
