@@ -82,10 +82,10 @@ Scenario: GraphQL admin wants to get visible proposals of a user.
   And I send a GraphQL POST request:
   """
   {
-    "query": "query getProposalsByAuthorViewerCanSee($userId: ID!, $after: String) {
+    "query": "query getProposalsByAuthorViewerCanSee($userId: ID!) {
       user: node(id: $userId) {
         ... on User {
-          proposals(after: $after, first: 5) {
+          proposals(first: 5) {
             edges {
               node {
                 project {
@@ -99,8 +99,7 @@ Scenario: GraphQL admin wants to get visible proposals of a user.
       }
     }",
     "variables": {
-      "userId": "VXNlcjp1c2VyQWRtaW4",
-      "after": "YXJyYXljb25uZWN0aW9uOjI="
+      "userId": "VXNlcjp1c2VyQWRtaW4"
     }
   }
   """
@@ -138,16 +137,16 @@ Scenario: GraphQL admin wants to get visible proposals of a user.
             {
               "node": {
                 "project": {
-                  "_id": "ProjectAccessibleForAdminOnly",
-                  "visibility": "ADMIN"
+                  "_id": "project6",
+                  "visibility": "PUBLIC"
                 }
               }
             },
             {
               "node": {
                 "project": {
-                  "_id": "project7",
-                  "visibility": "PUBLIC"
+                  "_id": "ProjectAccessibleForAdminOnly",
+                  "visibility": "ADMIN"
                 }
               }
             }
@@ -167,7 +166,7 @@ Scenario: GraphQL super admin wants to get visible proposals of a user
     "query": "query getProposalsByAuthorViewerCanSee($userId: ID!, $after: String) {
       user: node(id: $userId) {
         ... on User {
-          proposals(after: $after, first: 6) {
+          proposals(after: $after, first: 5) {
             edges {
               node {
                 project {
@@ -182,7 +181,7 @@ Scenario: GraphQL super admin wants to get visible proposals of a user
     }",
     "variables": {
       "userId": "VXNlcjp1c2VyQWRtaW4",
-      "after": "YXJyYXljb25uZWN0aW9uOjI="
+      "after": "YXJyYXljb25uZWN0aW9uOjM="
     }
   }
   """
@@ -196,48 +195,40 @@ Scenario: GraphQL super admin wants to get visible proposals of a user
             {
               "node": {
                 "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "ProjectAccessibleForMeOnly",
-                  "visibility": "ME"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "ProjectAccessibleForMeOnly",
-                  "visibility": "ME"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
                   "_id": "ProjectAccessibleForAdminOnly",
                   "visibility": "ADMIN"
+                }
+              }
+            },
+            {
+              "node": {
+                "project": {
+                  "_id": "ProjectAccessibleForMeOnly",
+                  "visibility": "ME"
+                }
+              }
+            },
+            {
+              "node": {
+                "project": {
+                  "_id": "ProjectAccessibleForMeOnly",
+                  "visibility": "ME"
+                }
+              }
+            },
+            {
+              "node": {
+                "project": {
+                  "_id": "project7",
+                  "visibility": "PUBLIC"
+                }
+              }
+            },
+            {
+              "node": {
+                "project": {
+                  "_id": "project6",
+                  "visibility": "PUBLIC"
                 }
               }
             }
@@ -293,23 +284,23 @@ Scenario: GraphQL anonymous want to get visible proposals of a user
             {
               "node": {
                 "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
-                  "_id": "project6",
-                  "visibility": "PUBLIC"
-                }
-              }
-            },
-            {
-              "node": {
-                "project": {
                   "_id": "project7",
+                  "visibility": "PUBLIC"
+                }
+              }
+            },
+            {
+              "node": {
+                "project": {
+                  "_id": "project6",
+                  "visibility": "PUBLIC"
+                }
+              }
+            },
+            {
+              "node": {
+                "project": {
+                  "_id": "project6",
                   "visibility": "PUBLIC"
                 }
               }
@@ -353,7 +344,7 @@ Scenario: GraphQL user wants to get proposals of a project with custom acces tha
     }",
     "variables": {
       "userId": "VXNlcjp1c2VyMQ==",
-      "after": "YXJyYXljb25uZWN0aW9uOjY="
+      "after": "YXJyYXljb25uZWN0aW9uOjY0"
     }
   }
   """
@@ -364,7 +355,7 @@ Scenario: GraphQL user wants to get proposals of a project with custom acces tha
       "user": {
         "proposals": {
           "edges": [
-            {
+              {
               "node": {
                 "project": {
                   "_id": "ProjectWithCustomAccess",
@@ -391,7 +382,7 @@ Scenario: GraphQL user wants to get proposals of a project with custom acces tha
             {
               "node": {
                 "project": {
-                  "_id": "project21",
+                  "_id": "project6",
                   "visibility": "PUBLIC"
                 }
               }
@@ -399,7 +390,7 @@ Scenario: GraphQL user wants to get proposals of a project with custom acces tha
             {
               "node": {
                 "project": {
-                  "_id": "project21",
+                  "_id": "project15",
                   "visibility": "PUBLIC"
                 }
               }

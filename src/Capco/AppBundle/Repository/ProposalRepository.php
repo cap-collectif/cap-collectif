@@ -656,7 +656,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('s.projectAbstractStep', 'pabs')
             ->leftJoin('pabs.project', 'pro')
             ->leftJoin('pro.authors', 'pr_au')
-            ->leftJoin('pro.restrictedViewerGroups', 'prvg');
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
+            ->orderBy('p.createdAt', 'DESC');
         if ($viewer !== $user && !$viewer->isSuperAdmin()) {
             // The call of the function below filters the contributions according to the visibility
             // of the project containing it, as well as the privileges of the connected user.
@@ -702,6 +703,7 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('pf.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pabs')
             ->leftJoin('pabs.project', 'pro')
+            ->orderBy('p.createdAt', 'DESC')
             ->andWhere($qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC))
             ->andWhere(
                 $qb
