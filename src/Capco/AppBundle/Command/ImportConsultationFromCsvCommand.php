@@ -95,7 +95,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             return 1;
         }
 
-        if (!$consultationStep->getConsultation()) {
+        if (!$consultationStep->getFirstConsultation()) {
             $output->writeln(
                 '<error>Consultation step' .
                     $consultationStepSlug .
@@ -135,7 +135,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                         ->findOneBy([
                             'title' => $ot,
                             'parent' => null,
-                            'consultation' => $consultationStep->getConsultation(),
+                            'consultation' => $consultationStep->getFirstConsultation()
                         ]);
                 } else {
                     $opinionType = $this->getContainer()
@@ -159,7 +159,10 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
             $opinion = $this->getContainer()
                 ->get(OpinionRepository::class)
-                ->findOneBy(['title' => $row[0], 'consultation' => $consultationStep->getConsultation()]);
+                ->findOneBy([
+                    'title' => $row[0],
+                    'consultation' => $consultationStep->getFirstConsultation()
+                ]);
             if (\is_object($opinion) && !$input->getOption('force')) {
                 $output->writeln(
                     '<error>Opinion with title "' .
@@ -177,7 +180,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
             $opinion->setTitle($row[0]);
             $opinion->setBody($row[2]);
-            $opinion->setConsultation($consultationStep->getConsultation());
+            $opinion->setConsultation($consultationStep->getFirstConsultation());
 
             $opinion->setOpinionType($opinionType);
             $opinion->setAuthor($user);

@@ -21,7 +21,10 @@ final class Version20190731125647 extends AbstractMigration
         );
 
         $this->addSql(
-            'ALTER TABLE consultation ADD position INT NOT NULL DEFAULT 1, DROP INDEX UNIQ_964685A673B21E9C, ADD INDEX IDX_964685A673B21E9C (step_id)'
+            'ALTER TABLE consultation ADD position INT NOT NULL, DROP INDEX UNIQ_964685A673B21E9C, ADD INDEX IDX_964685A673B21E9C (step_id)'
+        );
+        $this->addSql(
+            'CREATE UNIQUE INDEX consultation_position_unique ON consultation (step_id, position)'
         );
     }
 
@@ -36,5 +39,6 @@ final class Version20190731125647 extends AbstractMigration
         $this->addSql(
             'ALTER TABLE consultation DROP position, DROP INDEX IDX_964685A673B21E9C, ADD UNIQUE INDEX UNIQ_964685A673B21E9C (step_id)'
         );
+        $this->addSql('DROP INDEX consultation_position_unique ON consultation');
     }
 }

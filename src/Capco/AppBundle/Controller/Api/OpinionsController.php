@@ -88,7 +88,7 @@ class OpinionsController extends FOSRestController
 
         $opinion = (new Opinion())
             ->setAuthor($author)
-            ->setConsultation($step->getConsultation())
+            ->setConsultation($step->getFirstConsultation())
             ->setOpinionType($type);
         $form = $this->createForm(OpinionForm::class, $opinion);
         $form->submit($request->request->all(), false);

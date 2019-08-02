@@ -5,6 +5,12 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * @method ConsultationStep|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ConsultationStep|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ConsultationStep[]    findAll()
+ * @method ConsultationStep[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
 class ConsultationStepRepository extends EntityRepository
 {
     //fix error where a step is not bind to a project

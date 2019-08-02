@@ -39,9 +39,9 @@ class ArgumentNotifier extends BaseNotifier
 
     public function onCreation(Argument $argument)
     {
-        $step = $argument->getStep();
+        $consultation = $argument->getStep()->getFirstConsultation();
 
-        if ($step->getConsultation() && $step->getConsultation()->isModeratingOnCreate()) {
+        if ($consultation && $consultation->isModeratingOnCreate()) {
             $this->mailer->sendMessage(
                 NewArgumentModeratorMessage::create(
                     $argument,
@@ -58,9 +58,9 @@ class ArgumentNotifier extends BaseNotifier
 
     public function onUpdate(Argument $argument)
     {
-        $step = $argument->getStep();
+        $consultation = $argument->getStep()->getFirstConsultation();
 
-        if ($step->getConsultation() && $step->getConsultation()->isModeratingOnUpdate()) {
+        if ($consultation && $consultation->isModeratingOnUpdate()) {
             $this->mailer->sendMessage(
                 UpdateArgumentModeratorMessage::create(
                     $argument,
