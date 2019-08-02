@@ -208,11 +208,8 @@ class SourceRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getPublicSourcesByAuthor(
-        User $author,
-        ?int $limit = null,
-        ?int $offset = null
-    ): array {
+    public function getPublicSourcesByAuthor(User $author, int $offset, int $limit): array
+    {
         $qb = $this->createPublicSourcesByAuthorQuery($author);
         $qb->setMaxResults($limit)->setFirstResult($offset);
 
@@ -221,7 +218,6 @@ class SourceRepository extends EntityRepository
 
     public function createPublicSourcesByAuthorQuery(User $author): QueryBuilder
     {
-        //        $qb = $this->getIsEnabledQueryBuilder('s');
         $qb = $this->createQueryBuilder('s');
         $qb
             ->leftJoin('s.opinion', 'o')
@@ -245,17 +241,7 @@ class SourceRepository extends EntityRepository
                         $qb->expr()->eq('pro2.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
                     )
             )
-            ->andWhere(
-                $qb
-                    ->expr()
-                    ->orX(
-                        $qb->expr()->eq('ostep.private', 'false'),
-                        $qb->expr()->eq('ovostep.private', 'false')
-                    )
-            )
-            ->setParameters([
-                ':author' => $author
-            ]);
+            ->setParameter(':author', $author);
 
         return $qb;
     }
@@ -263,7 +249,7 @@ class SourceRepository extends EntityRepository
     public function countPublicSourcesByAuthor(User $author): int
     {
         $qb = $this->createPublicSourcesByAuthorQuery($author);
-        $qb->select('COUNT(DISTINCT p.id)');
+        $qb->select('COUNT(DISTINCT s.id)');
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -376,8 +362,10 @@ class SourceRepository extends EntityRepository
         return $this->createQueryBuilder('s')->andWhere('s.published = true');
     }
 
-    private function createSourcesByAuthorViewerCanSeeQuery(User $viewer, User $user): QueryBuilder
-    {
+    private function createSourcesByAuthorViewerCanSeeQuery(
+        User $viewer,
+        User $author
+    ): QueryBuilder {
         $qb = $this->createQueryBuilder('s');
 
         $qb
@@ -399,7 +387,7 @@ class SourceRepository extends EntityRepository
 
             ->leftJoin('pro.authors', 'pr_au')
             ->leftJoin('pro2.authors', 'pr_au2')
-            ->andWhere('s.author = :user');
+            ->andWhere('s.author = :author');
         if (!$viewer->isSuperAdmin()) {
             $this->getContributionsViewerCanSee($qb, $viewer);
 
@@ -453,24 +441,14 @@ class SourceRepository extends EntityRepository
                     )
             );
 
-            if (!$viewer->isAdmin()) {
-                $qb->andWhere(
-                    $qb
-                        ->expr()
-                        ->orX(
-                            $qb->expr()->andX($qb->expr()->eq('ostep.private', 'false')),
-                            $qb->expr()->eq(':viewer', 'pr_au.user')
-                        )
-                );
-            }
             $qb->setParameters([
                 ':viewer' => $viewer,
-                ':user' => $user,
-                ':visibility' => $user,
+                ':author' => $author,
+                ':visibility' => $visibility,
                 ':prvgId' => $viewer->getUserGroupIds()
             ]);
         } else {
-            $qb->setParameter(':user', $user);
+            $qb->setParameter(':author', $author);
         }
 
         return $qb;
