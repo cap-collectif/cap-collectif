@@ -30,9 +30,16 @@ InternalConsultationStep:
         type: 'Boolean!'
         description: 'Contributions are allowed right now.'
         resolve: '@=value.canContribute(getUser())'
-      consultation:
-        type: 'InternalConsultation'
-        description: 'Get the associated consultation of this consultation step'
+      consultations:
+        type: 'InternalConsultationConnection'
+        description: 'Get the associated consultations of this consultation step'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationsResolver", [value, args])'
+        argsBuilder: 'Relay::Connection'
+        args:
+          first:
+            type: 'Int'
+            description: Returns the first `n` elements from the list.
+            defaultValue: 100
       contributors:
         type: 'InternalUserConnection!'
       # TODO rename to `contributions`

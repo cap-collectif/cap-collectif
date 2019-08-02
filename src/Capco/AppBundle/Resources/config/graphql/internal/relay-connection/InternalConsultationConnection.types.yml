@@ -1,0 +1,5 @@
+InternalConsultationConnection:
+  type: relay-connection
+  config:
+    name: ConsultationConnection
+    nodeType: InternalConsultation!

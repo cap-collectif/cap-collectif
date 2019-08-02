@@ -1,0 +1,5 @@
+PublicConsultationConnection:
+  type: relay-connection
+  config:
+    name: ConsultationConnection
+    nodeType: PublicConsultation!
