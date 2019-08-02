@@ -353,7 +353,7 @@ Scenario: GraphQL user wants to get proposals of a project with custom acces tha
     }",
     "variables": {
       "userId": "VXNlcjp1c2VyMQ==",
-      "after": "YXJyYXljb25uZWN0aW9uOjg="
+      "after": "YXJyYXljb25uZWN0aW9uOjY="
     }
   }
   """
@@ -391,7 +391,7 @@ Scenario: GraphQL user wants to get proposals of a project with custom acces tha
             {
               "node": {
                 "project": {
-                  "_id": "project6",
+                  "_id": "project21",
                   "visibility": "PUBLIC"
                 }
               }
@@ -399,7 +399,7 @@ Scenario: GraphQL user wants to get proposals of a project with custom acces tha
             {
               "node": {
                 "project": {
-                  "_id": "project6",
+                  "_id": "project21",
                   "visibility": "PUBLIC"
                 }
               }
