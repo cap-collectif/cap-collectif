@@ -12,7 +12,6 @@ imports:
   - { resource: jms.yml }
   - { resource: doctrine.yml }
   - { resource: translation.yml }
-  - { resource: prometheus.yml }
   - { resource: swiftmailer.yml }
   - { resource: doctrine_extensions.yml }
   - { resource: hautelook_alice.yml }
@@ -65,7 +64,6 @@ parameters:
   locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE', 'nl-NL']
   google_maps_key_server: '***REMOVED***'
   jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
-  prometheus_bearer_token: '%env(SYMFONY_PROMETHEUS_BEARER_TOKEN)%'
   mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
   instance_name: '%env(SYMFONY_INSTANCE_NAME)%'
   #
@@ -107,7 +105,6 @@ parameters:
   env(SYMFONY_TWILIO_NUMBER): +***REMOVED***
   env(SYMFONY_DISABLE_MAIL_DELIVERY): false
   env(SYMFONY_SENTRY_DSN): ~
-  env(SYMFONY_PROMETHEUS_BEARER_TOKEN): ~
   env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
   env(SYMFONY_INSTANCE_NAME): dev
   env(APP_VERSION): Sprint 246

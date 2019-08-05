@@ -92,9 +92,6 @@ services:
     autowire: true
     public: true
 
-  Capco\AppBundle\Adapter\RedisAdapter:
-    arguments: ['@snc_redis.default']
-
   Capco\AppBundle\Mailer\MailerService:
     autowire: true
 

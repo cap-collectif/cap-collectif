@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d33797f945a7decfdb83dec8c31ce11a",
+    "content-hash": "876804df858b5421bb02595225ecee5a",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -4920,9 +4920,9 @@
             "authors": [
                 {
                     "name": "Ignace Nyamagana Butera",
-                    "role": "Developer",
                     "email": "nyamsprod@gmail.com",
-                    "homepage": "https://github.com/nyamsprod/"
+                    "homepage": "https://github.com/nyamsprod/",
+                    "role": "Developer"
                 }
             ],
             "description": "Csv data manipulation made easy in PHP",
@@ -5238,9 +5238,9 @@
             "authors": [
                 {
                     "name": "Mandrill Devs",
-                    "role": "Developer",
                     "email": "community@mandrill.com",
-                    "homepage": "http://mandrill.com"
+                    "homepage": "http://mandrill.com",
+                    "role": "Developer"
                 }
             ],
             "description": "API client library for the Mandrill email as a service platform",
@@ -6111,9 +6111,9 @@
             "authors": [
                 {
                     "name": "Andreas Heigl",
-                    "role": "developer",
                     "email": "andreas@heigl.org",
-                    "homepage": "http://andreas.heigl.org"
+                    "homepage": "http://andreas.heigl.org",
+                    "role": "Developer"
                 }
             ],
             "description": "Word-Hyphenation for PHP based on the TeX-Hyphenation algorithm",
@@ -11732,82 +11732,6 @@
             "time": "2017-09-15T13:22:25+00:00"
         },
         {
-            "name": "tweedegolf/prometheus-bundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tweedegolf/prometheus-bundle.git",
-                "reference": "e559a615173c82884820eec55cacc2513a35c31a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tweedegolf/prometheus-bundle/zipball/e559a615173c82884820eec55cacc2513a35c31a",
-                "reference": "e559a615173c82884820eec55cacc2513a35c31a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1.3",
-                "symfony/config": "~2.7|~3.0|~4.0",
-                "symfony/dependency-injection": "~2.7|~3.0|~4.0",
-                "symfony/http-kernel": "~2.7|~3.0|~4.0",
-                "tweedegolf/prometheus-client": "^0.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "TweedeGolf\\PrometheusBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ruben Nijveld",
-                    "email": "ruben@tweedegolf.com"
-                }
-            ],
-            "description": "Symfony bundle for Prometheus client",
-            "time": "2019-02-15T11:03:53+00:00"
-        },
-        {
-            "name": "tweedegolf/prometheus-client",
-            "version": "v0.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tweedegolf/prometheus-client.git",
-                "reference": "573b2fa0f3138f83dd8434b0102192cf1ad0e050"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tweedegolf/prometheus-client/zipball/573b2fa0f3138f83dd8434b0102192cf1ad0e050",
-                "reference": "573b2fa0f3138f83dd8434b0102192cf1ad0e050",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "TweedeGolf\\PrometheusClient\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ruben Nijveld",
-                    "email": "ruben@tweedegolf.com"
-                }
-            ],
-            "description": "A PHP Prometheus client library",
-            "time": "2018-12-07T13:37:17+00:00"
-        },
-        {
             "name": "twig/extensions",
             "version": "v1.5.4",
             "source": {
@@ -13981,7 +13905,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette Finder: find files and directories with an intuitive API.",
+            "description": "🔍 Nette Finder: find files and directories with an intuitive API.",
             "homepage": "https://nette.org",
             "keywords": [
                 "filesystem",
@@ -14041,7 +13965,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette NEON: encodes and decodes NEON file format.",
+            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",
@@ -14440,18 +14364,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "role": "Developer",
-                    "email": "sebastian@phpeople.de"
+                    "email": "sebastian@phpeople.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "Developer",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "Developer"
                 }
             ],
             "description": "Library for handling version information and constraints",
@@ -15146,8 +15070,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
@@ -15419,8 +15343,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "The PHP Unit Testing framework.",
@@ -15875,7 +15799,7 @@
                 "page"
             ],
             "support": {
-                "source": "https://github.com/cap-collectif/BehatPageObjectExtension/tree/master"
+                "source": "https://github.com/spyl94/BehatPageObjectExtension/tree/master"
             },
             "time": "2016-03-15T13:13:55+00:00"
         },
@@ -16072,7 +15996,7 @@
                 "testing"
             ],
             "support": {
-                "source": "https://github.com/cap-collectif/behat-parallel-scenario/tree/master"
+                "source": "https://github.com/spyl94/behat-parallel-scenario/tree/master"
             },
             "time": "2016-03-11T13:43:33+00:00"
         },
@@ -16146,7 +16070,6 @@
         "webonyx/graphql-php": 20,
         "overblog/graphql-bundle": 20,
         "webfactory/icu-translation-bundle": 20,
-        "tweedegolf/prometheus-bundle": 20,
         "symfony/security-acl": 20,
         "egeloen/ckeditor-bundle": 20,
         "egeloen/json-builder": 20,

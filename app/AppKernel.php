@@ -40,17 +40,16 @@ class AppKernel extends Kernel
             // sonata user admin
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+            new Sonata\UserBundle\SonataUserBundle(),
             // HTTPlug
-            new \Http\HttplugBundle\HttplugBundle(),
+            new Http\HttplugBundle\HttplugBundle(),
             // oauth user
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
 
             // sonata media
             new Sonata\MediaBundle\SonataMediaBundle(),
-            // Prometheus
-            new TweedeGolf\PrometheusBundle\TweedeGolfPrometheusBundle(),
+
             // project bundles
             new Capco\AppBundle\CapcoAppBundle(),
             new Capco\AdminBundle\CapcoAdminBundle(),
@@ -63,12 +62,12 @@ class AppKernel extends Kernel
             // typography concerns
             new JoliTypo\Bridge\Symfony\JoliTypoBundle(),
             // CKEditor
-            new \CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
-            new \Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Caxy\HtmlDiffBundle\CaxyHtmlDiffBundle(),
             // API
-            new \FOS\RestBundle\FOSRestBundle(),
-            new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             // GraphQL
             new Overblog\GraphQLBundle\OverblogGraphQLBundle(),
             // Swarrot to publish and consume rabbitmq messages
@@ -91,7 +90,7 @@ class AppKernel extends Kernel
             // NewRelic
             new Ekino\NewRelicBundle\EkinoNewRelicBundle(),
             // Mandrill
-            new Accord\MandrillSwiftMailerBundle\AccordMandrillSwiftMailerBundle(),
+            new Accord\MandrillSwiftMailerBundle\AccordMandrillSwiftMailerBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -103,7 +102,7 @@ class AppKernel extends Kernel
 
         if (in_array($this->getEnvironment(), ['dev', 'prod'], true)) {
             // ICU translation
-            $bundles[] = new \Webfactory\IcuTranslationBundle\WebfactoryIcuTranslationBundle();
+            $bundles[] = new Webfactory\IcuTranslationBundle\WebfactoryIcuTranslationBundle();
         }
 
         if ('prod' === $this->getEnvironment()) {
