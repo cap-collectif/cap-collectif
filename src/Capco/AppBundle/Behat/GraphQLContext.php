@@ -28,14 +28,6 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @When I am logged in to graphql as :email with password :password
-     */
-    public function iAmLoggedInToGraphQLAs(string $email, string $password)
-    {
-        $this->createAuthenticatedClient($email, $password);
-    }
-
-    /**
      * @When I am logged in to graphql as admin
      */
     public function iAmLoggedInToGraphQLAsAdmin()

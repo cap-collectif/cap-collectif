@@ -4,7 +4,6 @@ namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
-use Capco\AppBundle\GraphQL\Resolver\User\UserProposalsResolver;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\CommentRepository;
@@ -12,6 +11,7 @@ use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\UserArchiveRepository;
@@ -34,13 +34,6 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
  */
 class ProfileController extends Controller
 {
-    private $userProposalsResolver;
-
-    public function __construct(UserProposalsResolver $userProposalsResolver)
-    {
-        $this->userProposalsResolver = $userProposalsResolver;
-    }
-
     /**
      * @Route("/edit-profile", name="capco_profile_edit")
      * @Template("CapcoUserBundle:Profile:edit_profile.html.twig")
@@ -207,34 +200,31 @@ class ProfileController extends Controller
         $opinionTypesWithUserOpinions = $this->get(OpinionTypeRepository::class)->getByUser($user);
         $versions = $this->get(OpinionVersionRepository::class)->getByUser($user);
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
+
         $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
+
         $sources = $this->get(SourceRepository::class)->getByUser($user);
         $comments = $this->get(CommentRepository::class)->getByUser($user);
         $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
         $eventsCount = $this->getEventsCount($user);
 
-        $proposalsCount =
-            $this->userProposalsResolver->__invoke(
-                $this->getUser(),
-                $user,
-                new \Overblog\GraphQLBundle\Definition\Argument(['first' => 0])
-            )->totalCount ?? 0;
-
-        return [
-            'user' => $user,
-            'projectsProps' => $projectsProps,
-            'projectsCount' => $projectsCount,
-            'proposalsCount' => $proposalsCount,
-            'eventsCount' => $eventsCount,
-            'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
-            'versions' => $versions,
-            'arguments' => $arguments,
-            'replies' => $replies,
-            'sources' => $sources,
-            'comments' => $comments,
-            'votes' => $votes,
-            'argumentsLabels' => Argument::$argumentTypesLabels
-        ];
+        return array_merge(
+            [
+                'user' => $user,
+                'projectsProps' => $projectsProps,
+                'projectsCount' => $projectsCount,
+                'eventsCount' => $eventsCount,
+                'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
+                'versions' => $versions,
+                'arguments' => $arguments,
+                'replies' => $replies,
+                'sources' => $sources,
+                'comments' => $comments,
+                'votes' => $votes,
+                'argumentsLabels' => Argument::$argumentTypesLabels
+            ],
+            $this->getProposalsProps($user)
+        );
     }
 
     /**
@@ -303,11 +293,14 @@ class ProfileController extends Controller
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
 
-        return [
-            'user' => $user,
-            'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount
-        ];
+        return array_merge(
+            [
+                'user' => $user,
+                'projectsCount' => $projectsCount,
+                'eventsCount' => $eventsCount
+            ],
+            $this->getProposalsProps($user)
+        );
     }
 
     /**
@@ -418,6 +411,39 @@ class ProfileController extends Controller
             'user' => $user,
             'projectsCount' => $projectsCount,
             'eventsCount' => $eventsCount
+        ];
+    }
+
+    private function getProposalsProps(User $user)
+    {
+        $proposalsWithStep = $this->get(
+            ProposalRepository::class
+        )->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user);
+        $proposalsCount = array_reduce($proposalsWithStep, function ($sum, $item) {
+            $sum += \count($item['proposals']);
+
+            return $sum;
+        });
+        $proposalsPropsBySteps = [];
+        foreach ($proposalsWithStep as $key => $value) {
+            $proposalsPropsBySteps[$key] = json_decode(
+                $this->get('serializer')->serialize($value, 'json', [
+                    'groups' => [
+                        'Steps',
+                        'Proposals',
+                        'PrivateProposals',
+                        'ProposalResponses',
+                        'UsersInfos',
+                        'UserMedias'
+                    ]
+                ]),
+                true
+            );
+        }
+
+        return [
+            'proposalsPropsBySteps' => $proposalsPropsBySteps,
+            'proposalsCount' => $proposalsCount
         ];
     }
 

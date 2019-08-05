@@ -52,7 +52,7 @@ Scenario: GraphQL client wants to get list of users groups who can access to cur
             }
           ],
           "totalCount": 2,
-          "totalUserCount": 13
+          "totalUserCount": 12
         }
       }
     }

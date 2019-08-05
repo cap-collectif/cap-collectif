@@ -24,7 +24,7 @@ const headerOption = {
   Default: 'default',
 };
 
-/* eslint-disable react/prop-types */
+// eslint-disable-next-line react/prop-types
 const OpinionItem = ({ item, typeLabel }) => (
   <React.Fragment>
     <Media>
@@ -123,6 +123,7 @@ const OpinionItem = ({ item, typeLabel }) => (
   </React.Fragment>
 );
 
+// eslint-disable-next-line react/prop-types
 const OpinionList = ({ section, opinions }) => (
   <Card id="opinions--test17" className="anchor-offset" style={{ border: 0 }}>
     <Card.Header bgColor={section.bgColor}>

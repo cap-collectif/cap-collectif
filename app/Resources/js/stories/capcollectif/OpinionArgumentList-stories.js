@@ -12,7 +12,7 @@ import { opinionArguments as opinionArgumentsMock } from '../mocks/opinionArgume
 import ShareButton from '../../components/Ui/Button/ShareButton';
 import ShareButtonAction from '../../components/Ui/Button/ShareButtonAction';
 
-/* eslint-disable react/prop-types */
+// eslint-disable-next-line react/prop-types
 const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
   <div className="w-100">
     {isProfile && item.related && (
@@ -147,6 +147,7 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
   </div>
 );
 
+// eslint-disable-next-line react/prop-types
 const OpinionArgumentList = ({ section, isProfile, opinionArguments }) => (
   <div id={`opinion__arguments--${section.argumentType}`} className="block--tablet">
     {section.isLoading ? (

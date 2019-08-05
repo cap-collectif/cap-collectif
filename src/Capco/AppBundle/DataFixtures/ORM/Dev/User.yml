@@ -378,20 +378,3 @@ Capco\UserBundle\Entity\User:
     emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
     enabled: true
     createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
-
-  user520:
-    id: 'user520'
-    username: OnePunchMan
-    firstname: Saitama
-    lastname: Dono
-    email: saitama@cap-collectif.com
-    userType: '@UserType1'
-    plainPassword: mob?
-    roles:
-      - 'ROLE_USER'
-    media: '@MediaUser1'
-    biography: Miskin il a que le role user.
-    vip: true
-    emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>

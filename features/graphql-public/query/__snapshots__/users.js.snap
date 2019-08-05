@@ -2530,7 +2530,7 @@ Object {
       "hasPreviousPage": false,
       "startCursor": "YXJyYXljb25uZWN0aW9uOjA=",
     },
-    "totalCount": 209,
+    "totalCount": 208,
   },
 }
 `;
@@ -2660,7 +2660,7 @@ Object {
       "hasPreviousPage": false,
       "startCursor": "YXJyYXljb25uZWN0aW9uOjEwMA==",
     },
-    "totalCount": 209,
+    "totalCount": 208,
   },
 }
 `;

@@ -13,10 +13,6 @@ services:
   Capco\UserBundle\Controller\MembersController:
     autowire: true
 
-  Capco\UserBundle\Controller\ProfileController:
-    autowire: true
-    public: true
-
   Capco\UserBundle\Form\:
     resource: '%kernel.root_dir%/../src/Capco/UserBundle/Form/*'
 

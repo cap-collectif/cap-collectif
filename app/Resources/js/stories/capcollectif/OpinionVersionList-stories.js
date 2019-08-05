@@ -23,7 +23,7 @@ import Loader from '../../components/Ui/FeedbacksIndicators/Loader';
 import PinnedLabel from '../../components/Utils/PinnedLabel';
 import { opinionVersions as opinionVersionsMock } from '../mocks/opinionVersions';
 
-/* eslint-disable react/prop-types */
+// eslint-disable-next-line react/prop-types
 const OpinionVersion = ({ item, typeLabel, isProfile }) => (
   <React.Fragment>
     <Media>
@@ -122,6 +122,7 @@ const OpinionVersion = ({ item, typeLabel, isProfile }) => (
   </React.Fragment>
 );
 
+// eslint-disable-next-line react/prop-types
 const OpinionVersionList = ({ section, opinionVersions, isProfile }) => (
   <Panel>
     <Panel.Heading>
