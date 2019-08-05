@@ -16,6 +16,7 @@ type Props = {|
 
 const EventContainer = styled.div`
   padding-top: 20px;
+  width: 105%;
 
   >div{
     width: 45%;

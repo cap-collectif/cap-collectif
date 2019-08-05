@@ -1,6 +1,6 @@
 {% if events|length > 0 %}
     <section id="events" class="section--custom">
-        <div class="container">
+        <div class="container ">
             {% if null != section.title %}
                 <h2 class="h2">{{ section.title }}</h2>
             {% else %}
@@ -12,7 +12,7 @@
             {% if null != section.body %}
                 <p>{{ section.body | raw }}</p>
             {% endif %}
-            {{ react_render_component('HomePageEventsApp', { 'props': {'limit': 3} }) }}
+            {{ react_render_component('HomePageEventsApp', { 'props': {'limit': 4} }) }}
             <a href="{{ path('app_event') }}" class="btn  btn-primary  btn--outline">{{ 'event.see_all'|trans({}, 'CapcoAppBundle') }}</a>
         </div>
     </section>

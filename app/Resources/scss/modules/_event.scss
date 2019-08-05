@@ -5,12 +5,8 @@
     overflow: hidden;
     text-align: center;
     border-radius: 4px;
-    min-height: 125px;
+    height: 160px;
 
-    .event__title {
-        margin-top: 0;
-        font-size: 18px;
-    }
 
     .event__icon {
         margin: auto;
@@ -68,8 +64,7 @@
         }
     
         .event__date{
-    
-    
+
             .month-calendar {
                 font-size: 14px;
             }
@@ -83,6 +78,28 @@
             background-color: $white;
             text-align: left;
             margin-left: 20px;
+            width: 90%;
+
+            .event__title {
+                margin-top: 0;
+                font-size: 20px;
+            }
+
+            .excerpt{
+                margin-bottom: 5px;
+            }
+
+            p, h3, span{
+                max-width: calc(100% - 10px);
+                height: 22px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+
+            h3{
+                color: #00acc1;
+            }
         }
     }
 }
