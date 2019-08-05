@@ -46,7 +46,7 @@ export class Comment extends React.Component<Props, State> {
     return (
       <CommentContainer
         as="li"
-        invertedBackground={invertedBackground || (comment.author && comment.author.vip)}
+        invertedBackground={invertedBackground}
         isHighlighted={isHighlighted}>
         <Media className="opinion">
           <Media.Left>
