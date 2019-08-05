@@ -386,7 +386,11 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                     !empty($response['medias'])
                 ) {
                     $rows[$rowCounter][$columnKey] = $response['question']['title'];
-                    $rows[$rowCounter][$columnKey + 1] = $response['medias'];
+                    if (\is_array($response['medias'])) {
+                        $rows[$rowCounter][$columnKey + 1] = implode(', ', $response['medias']);
+                    } else {
+                        $rows[$rowCounter][$columnKey + 1] = $response['medias'];
+                    }
                     ++$rowCounter;
                     $rows[$rowCounter] = $emptyRow;
                 }
