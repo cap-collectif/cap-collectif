@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,12 +14,21 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="consultation")
+ * @ORM\Table(
+ *     name="consultation",
+ *     uniqueConstraints={
+ *     @ORM\UniqueConstraint(
+ *        name="consultation_position_unique",
+ *        columns={"step_id", "position"}
+ *     )
+ *   }
+ * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
  */
 class Consultation
 {
     use UuidTrait;
+    use PositionableTrait;
     use MetaDescriptionCustomCodeTrait;
 
     /**
@@ -62,6 +72,7 @@ class Consultation
     private $opinionTypes;
 
     /**
+     * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="consultations")
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */

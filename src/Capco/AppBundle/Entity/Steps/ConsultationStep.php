@@ -69,6 +69,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="step")
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $consultations;
 
@@ -276,7 +277,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     public function removeConsultation(Consultation $consultation): self
     {
         if ($this->consultations->contains($consultation)) {
-            $this->consultations->remove($consultation);
+            $this->consultations->removeElement($consultation);
             $consultation->clearStep();
         }
 

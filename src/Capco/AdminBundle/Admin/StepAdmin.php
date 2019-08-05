@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -13,7 +14,6 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\StatusRepository;
@@ -21,10 +21,13 @@ use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class StepAdmin extends CapcoAdmin
 {
@@ -154,14 +157,49 @@ class StepAdmin extends CapcoAdmin
 
         if ($subject instanceof ConsultationStep) {
             $formMapper
+                ->getFormBuilder()
+                ->addEventListener(FormEvents::SUBMIT, static function (FormEvent $event) {
+                    // We get the order from the submitted data from user
+                    /** @var Consultation[] $normalizedConsultations */
+                    $normalizedConsultations = $event
+                        ->getForm()
+                        ->get('consultations')
+                        ->getNormData();
+                    /** @var ConsultationStep $step */
+                    $step = $event->getData();
+                    $position = 1;
+                    foreach ($normalizedConsultations as $normalizedConsultation) {
+                        // And we set in the backend the correct position for the consultation, based on the user order
+                        $consultation = $step
+                            ->getConsultations()
+                            ->filter(static function (Consultation $c) use (
+                                $normalizedConsultation
+                            ) {
+                                return $c->getId() === $normalizedConsultation->getId();
+                            })
+                            ->first();
+                        /** @var Consultation $consultation */
+                        if ($consultation) {
+                            $consultation->setPosition($position);
+                        }
+                        ++$position;
+                    }
+                });
+            $formMapper
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false
                 ])
-                ->add('consultations', null, [
+                ->add('consultations', ModelAutocompleteType::class, [
+                    'multiple' => true,
+                    'property' => 'title',
+                    'to_string_callback' => static function (Consultation $entity) {
+                        return $entity->getTitle();
+                    },
+                    'req_params' => ['subclass' => 'consultation_step'],
+                    'label' => 'one-or-more-consultation-step',
                     'by_reference' => false,
-                    'label' => 'admin.fields.project.consultation',
                     'required' => false
                 ])
                 ->end()
@@ -416,19 +454,6 @@ class StepAdmin extends CapcoAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(['create', 'edit', 'delete']);
-    }
-
-    private function createQueryForConsultation()
-    {
-        $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(ConsultationRepository::class)
-            ->createQueryBuilder('f')
-            ->where('f.step IS NULL OR f.step = :step')
-            ->setParameter('step', $subject);
-
-        return $qb->getQuery();
     }
 
     private function createQueryForProposalForms()

@@ -3,25 +3,31 @@ Capco\AppBundle\Entity\Consultation:
     id: all
     title: Toutes
     step: '@cstep3'
+    position: 1
   default:
     id: default
     title: Défaut
     step: '@cstep1'
+    position: 1
   simple:
     id: simple
     title: Simple
     step: '@cstep2'
+    position: 1
   causes:
     id: causes
     title: Causes
     step: '@cstep4'
+    position: 1
   PJL:
     id: PJL
     title: Projet de loi
     step: '@cstep5'
+    position: 1
     moderatingOnCreate: true
     moderatingOnUpdate: true
   endless:
     id: endless
     title: 'Projet sans fin'
     step: '@cstep6'
+    position: 1
