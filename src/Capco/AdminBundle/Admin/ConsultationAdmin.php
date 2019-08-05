@@ -2,6 +2,8 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -11,6 +13,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class ConsultationAdmin extends AbstractAdmin
 {
@@ -87,6 +91,22 @@ class ConsultationAdmin extends AbstractAdmin
         ]);
         if ($this->getSubject()->getId()) {
             $formMapper
+                ->getFormBuilder()
+                ->addEventListener(FormEvents::SUBMIT, static function (FormEvent $event) {
+                    /** @var ConsultationStep|null $step */
+                    $step = $event
+                        ->getForm()
+                        ->get('step')
+                        ->getNormData();
+                    /** @var Consultation $consultation */
+                    $consultation = $event->getData();
+                    if ($step && ($last = $step->getConsultations()->last())) {
+                        $consultation->setPosition($last->getPosition() + 1);
+                    } else {
+                        $consultation->setPosition(1);
+                    }
+                });
+            $formMapper
                 ->add('description', CKEditorType::class, [
                     'label' => 'proposal.description',
                     'config_name' => 'admin_editor',
@@ -107,7 +127,11 @@ class ConsultationAdmin extends AbstractAdmin
                             'provider' => 'sonata.media.provider.image'
                         ]
                     ]
-                );
+                )
+                ->add('step', null, [
+                    'label' => 'admin.label.step',
+                    'required' => false
+                ]);
         }
         $formMapper->end();
         if ($this->getSubject()->getId()) {
