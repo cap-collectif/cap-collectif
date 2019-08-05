@@ -368,7 +368,14 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                     isset($response['formattedValue'])
                 ) {
                     $rows[$rowCounter][$columnKey] = $response['question']['title'];
-                    $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
+                    if (\is_array($response['formattedValue'])) {
+                        $rows[$rowCounter][$columnKey + 1] = implode(
+                            ', ',
+                            $response['formattedValue']
+                        );
+                    } else {
+                        $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
+                    }
                     ++$rowCounter;
                     $rows[$rowCounter] = $emptyRow;
                 }
