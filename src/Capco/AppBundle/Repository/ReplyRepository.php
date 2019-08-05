@@ -107,6 +107,7 @@ class ReplyRepository extends EntityRepository
         return $this->hydrateFromIds($result);
     }
 
+
     public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('r');
