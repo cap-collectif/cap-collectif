@@ -56,8 +56,14 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "consultation": Object {
-            "$fragmentRefs": null,
+          "consultations": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "$fragmentRefs": null,
+                },
+              },
+            ],
           },
           "id": "myStep",
           "status": "OPENED",
@@ -125,8 +131,14 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "consultation": Object {
-            "$fragmentRefs": null,
+          "consultations": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "$fragmentRefs": null,
+                },
+              },
+            ],
           },
           "id": "myStep",
           "status": "OPENED",

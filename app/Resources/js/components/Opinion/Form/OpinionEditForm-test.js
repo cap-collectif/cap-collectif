@@ -12,9 +12,15 @@ describe('<OpinionEditForm />', () => {
       id: 'opinion1',
       $refType,
       step: {
-        consultation: {
-          descriptionHelpText: 'descriptionHelpText',
-          titleHelpText: 'titleHelpText',
+        consultations: {
+          edges: [
+            {
+              node: {
+                descriptionHelpText: 'descriptionHelpText',
+                titleHelpText: 'titleHelpText',
+              },
+            },
+          ],
         },
       },
       appendices: [{ body: 'content', appendixType: { title: 'Exposé des motifs' } }],

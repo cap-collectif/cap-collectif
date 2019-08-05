@@ -1561,7 +1561,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
     # Returns the last `n` elements from the list.
     last: Int
-  ): ConsultationConnection
+  ): ConsultationConnection!
   contributionConnection(
     # Returns the elements in the list that come after the specified cursor.
     after: String

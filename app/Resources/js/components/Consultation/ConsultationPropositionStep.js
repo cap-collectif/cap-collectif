@@ -31,7 +31,11 @@ export const ConsultationPropositionStep = (props: Props) => {
               : 'consultation-plan sticky'
           }
           id="consultation-plan">
-          <ConsultationPlan consultation={step.consultation} />
+          {step.consultations.edges && step.consultations.edges.length > 0 && (
+            <ConsultationPlan
+              consultation={step.consultations.edges[0] && step.consultations.edges[0].node}
+            />
+          )}
         </div>
       )}
       <div
@@ -60,7 +64,11 @@ export const ConsultationPropositionStep = (props: Props) => {
         {/* $FlowFixMe $refType */}
         <StepInfos step={step} />
         {/* $FlowFixMe */}
-        <SectionRecursiveList consultation={step.consultation} />
+        {step.consultations.edges && step.consultations.edges.length > 0 && (
+          <SectionRecursiveList
+            consultation={step.consultations.edges[0] && step.consultations.edges[0].node}
+          />
+        )}
       </div>
     </React.Fragment>
   );
@@ -78,9 +86,13 @@ export default createFragmentContainer(ConsultationPropositionStep, {
       title
       status
       timeless
-      consultation {
-        ...ConsultationPlan_consultation
-        ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
+      consultations(first: 1) {
+        edges {
+          node {
+            ...ConsultationPlan_consultation
+            ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
+          }
+        }
       }
     }
   `,

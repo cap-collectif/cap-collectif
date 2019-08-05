@@ -17,8 +17,14 @@ describe('<ConsultationPropositionStep />', () => {
         startAt: new Date(2019, 6, 25).toDateString(),
         endAt: new Date(2019, 6, 25).toDateString(),
       },
-      consultation: {
-        $fragmentRefs,
+      consultations: {
+        edges: [
+          {
+            node: {
+              $fragmentRefs,
+            },
+          },
+        ],
       },
       timeless: false,
       $refType,

@@ -31,7 +31,7 @@ InternalConsultationStep:
         description: 'Contributions are allowed right now.'
         resolve: '@=value.canContribute(getUser())'
       consultations:
-        type: 'InternalConsultationConnection'
+        type: 'InternalConsultationConnection!'
         description: 'Get the associated consultations of this consultation step'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationsResolver", [value, args])'
         argsBuilder: 'Relay::Connection'

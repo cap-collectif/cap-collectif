@@ -25,7 +25,7 @@ class ConsultationStepRepository extends EntityRepository
             ->addSelect('p', 'pas')
             ->leftJoin('cs.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')
-            ->leftJoin('cs.consultation', 'csc')
+            ->leftJoin('cs.consultations', 'csc')
             ->innerJoin('csc.opinions', 'opinions')
             ->andWhere('opinions.id = :opinionId')
             ->setParameter('opinionId', $opinionId);

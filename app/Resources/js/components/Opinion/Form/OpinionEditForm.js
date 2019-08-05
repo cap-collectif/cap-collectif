@@ -1,11 +1,11 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { reduxForm, Field } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import Fetcher, { json } from '../../../services/Fetcher';
-import type { State, Dispatch } from '../../../types';
+import type { Dispatch, State } from '../../../types';
 import renderInput from '../../Form/Field';
 import { closeOpinionEditModal } from '../../../redux/modules/opinion';
 import type { OpinionEditForm_opinion } from '~relay/OpinionEditForm_opinion.graphql';
@@ -76,7 +76,13 @@ export class OpinionEditForm extends React.Component<Props> {
           type="text"
           id="opinion_title"
           component={renderInput}
-          help={step.consultation && step.consultation.titleHelpText}
+          help={
+            step.consultations &&
+            step.consultations.edges &&
+            step.consultations.edges[0] &&
+            step.consultations.edges[0].node &&
+            step.consultations.edges[0].node.titleHelpText
+          }
           autoFocus
           label={<FormattedMessage id="opinion.title" />}
         />
@@ -85,7 +91,13 @@ export class OpinionEditForm extends React.Component<Props> {
           type="editor"
           id="opinion_body"
           component={renderInput}
-          help={step.consultation && step.consultation.descriptionHelpText}
+          help={
+            step.consultations &&
+            step.consultations.edges &&
+            step.consultations.edges[0] &&
+            step.consultations.edges[0].node &&
+            step.consultations.edges[0].node.descriptionHelpText
+          }
           autoFocus
           label={<FormattedMessage id="opinion.body" />}
         />
@@ -143,9 +155,13 @@ export default createFragmentContainer(container, {
         body
       }
       step {
-        consultation {
-          titleHelpText
-          descriptionHelpText
+        consultations(first: 1) {
+          edges {
+            node {
+              titleHelpText
+              descriptionHelpText
+            }
+          }
         }
       }
       id
