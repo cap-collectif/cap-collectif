@@ -71,7 +71,7 @@ class OpinionTypeRepository extends EntityRepository
     public function getByUser($user)
     {
         $qb = $this->createQueryBuilder('ot')
-            ->addSelect('o', 's', 'pas', 'p')
+            ->addSelect('o', 's', 'pas', 'p', 'oc')
             ->leftJoin('ot.Opinions', 'o')
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 's')
@@ -98,7 +98,7 @@ class OpinionTypeRepository extends EntityRepository
     public function countByUser($user)
     {
         $qb = $this->createQueryBuilder('ot')
-            ->addSelect('o', 's', 'cas', 'p')
+            ->addSelect('o', 's', 'cas', 'p', 'oc')
             ->join('ot.Opinions', 'o')
             ->join('o.consultation', 'oc')
             ->leftJoin('oc.step', 's')

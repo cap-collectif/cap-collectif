@@ -191,7 +191,7 @@ class SourceRepository extends EntityRepository
     public function getByUser($user)
     {
         $qb = $this->getPublishedQueryBuilder()
-            ->addSelect('ca', 'o', 'cs', 'cas', 'c', 'aut', 'm', 'media')
+            ->addSelect('ca', 'o', 'oc', 'cs', 'cas', 'c', 'aut', 'm', 'media')
             ->leftJoin('s.category', 'ca')
             ->leftJoin('s.media', 'media')
             ->leftJoin('s.opinion', 'o')
