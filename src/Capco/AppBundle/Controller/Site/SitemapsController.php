@@ -20,12 +20,15 @@ class SitemapsController extends Controller
     /**
      * @Route("/sitemap.{_format}", name="app_sitemap", requirements={"_format" = "xml"})
      * @Template("CapcoAppBundle:Sitemaps:sitemap.xml.twig")
-     *
-     * @return array
      */
-    public function sitemapAction()
+    public function sitemapAction(): array
     {
         $toggleManager = $this->get(Manager::class);
+
+        if ($toggleManager->isActive('shield_mode')) {
+            throw $this->createAccessDeniedException();
+        }
+
         $em = $this->getDoctrine()->getManager();
         $urls = [];
         $hostname = $this->get('request_stack')
@@ -36,14 +39,14 @@ class SitemapsController extends Controller
         $urls[] = [
             'loc' => $this->get('router')->generate('app_homepage'),
             'changefreq' => 'weekly',
-            'priority' => '1.0',
+            'priority' => '1.0'
         ];
 
         // Contact
         $urls[] = [
             'loc' => $this->get('router')->generate('app_contact'),
             'changefreq' => 'yearly',
-            'priority' => '0.1',
+            'priority' => '0.1'
         ];
 
         // Pages
@@ -53,11 +56,11 @@ class SitemapsController extends Controller
         ) {
             $urls[] = [
                 'loc' => $this->get('router')->generate('app_page_show', [
-                    'slug' => $page->getSlug(),
+                    'slug' => $page->getSlug()
                 ]),
                 'lastmod' => $page->getUpdatedAt()->format(\DateTime::W3C),
                 'changefreq' => 'monthly',
-                'priority' => '0.1',
+                'priority' => '0.1'
             ];
         }
 
@@ -66,16 +69,16 @@ class SitemapsController extends Controller
             $urls[] = [
                 'loc' => $this->get('router')->generate('app_theme'),
                 'changefreq' => 'weekly',
-                'priority' => '0.5',
+                'priority' => '0.5'
             ];
             foreach ($this->get(ThemeRepository::class)->findBy(['isEnabled' => true]) as $theme) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_theme_show', [
-                        'slug' => $theme->getSlug(),
+                        'slug' => $theme->getSlug()
                     ]),
                     'lastmod' => $theme->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'weekly',
-                    'priority' => '0.5',
+                    'priority' => '0.5'
                 ];
             }
         }
@@ -85,16 +88,16 @@ class SitemapsController extends Controller
             $urls[] = [
                 'loc' => $this->get('router')->generate('app_blog'),
                 'changefreq' => 'daily',
-                'priority' => '1.0',
+                'priority' => '1.0'
             ];
             foreach ($this->get(PostRepository::class)->findBy(['isPublished' => true]) as $post) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_blog_show', [
-                        'slug' => $post->getSlug(),
+                        'slug' => $post->getSlug()
                     ]),
                     'lastmod' => $post->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'daily',
-                    'priority' => '1.0',
+                    'priority' => '1.0'
                 ];
             }
         }
@@ -104,16 +107,16 @@ class SitemapsController extends Controller
             $urls[] = [
                 'loc' => $this->get('router')->generate('app_event'),
                 'changefreq' => 'daily',
-                'priority' => '1.0',
+                'priority' => '1.0'
             ];
             foreach ($this->get(EventRepository::class)->findBy(['enabled' => true]) as $event) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_event_show', [
-                        'slug' => $event->getSlug(),
+                        'slug' => $event->getSlug()
                     ]),
                     'priority' => '1.0',
                     'lastmod' => $event->getUpdatedAt()->format(\DateTime::W3C),
-                    'changefreq' => 'daily',
+                    'changefreq' => 'daily'
                 ];
             }
         }
@@ -122,7 +125,7 @@ class SitemapsController extends Controller
         $urls[] = [
             'loc' => $this->get('router')->generate('app_project'),
             'changefreq' => 'weekly',
-            'priority' => '0.5',
+            'priority' => '0.5'
         ];
 
         // Steps
@@ -137,7 +140,7 @@ class SitemapsController extends Controller
                     'loc' => $stepResolver->getLink($step, false),
                     'priority' => '0.5',
                     'lastmod' => $step->getUpdatedAt()->format(\DateTime::W3C),
-                    'changefreq' => 'weekly',
+                    'changefreq' => 'weekly'
                 ];
             }
         }
@@ -153,13 +156,13 @@ class SitemapsController extends Controller
                             ->getSlug(),
                         'stepSlug' => $opinion->getStep()->getSlug(),
                         'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
-                        'opinionSlug' => $opinion->getSlug(),
+                        'opinionSlug' => $opinion->getSlug()
                     ]),
                     'priority' => '2.0',
                     'lastmod' => $opinion->getUpdatedAt()
                         ? $opinion->getUpdatedAt()->format(\DateTime::W3C)
                         : null,
-                    'changefreq' => 'hourly',
+                    'changefreq' => 'hourly'
                 ];
             }
         }
