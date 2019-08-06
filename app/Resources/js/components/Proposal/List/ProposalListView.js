@@ -135,8 +135,8 @@ export class ProposalListView extends React.Component<Props, State> {
       return <Loader />;
     }
 
-    // $FlowFixMe
     return (
+      // $FlowFixMe
       <ProposalListViewPaginated
         displayMap={displayMap}
         geoJsons={geoJsons}
