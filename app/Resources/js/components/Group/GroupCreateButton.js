@@ -34,9 +34,7 @@ const validate = ({ title }) => {
 const onSubmit = (values: FormValues) =>
   CreateGroupMutation.commit({ input: values }).then((resp: CreateGroupMutationResponse) => {
     const groupId = resp.createGroup.group.id;
-    window.location.href = `${window.location.protocol}//${
-      window.location.host
-    }/admin/capco/app/group/${groupId}/edit`;
+    window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/group/${groupId}/edit`;
   });
 
 export class GroupCreateButton extends React.Component<Props, ComponentState> {

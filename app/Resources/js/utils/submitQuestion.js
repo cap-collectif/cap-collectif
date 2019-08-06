@@ -25,8 +25,9 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
     const questionInput = {
       question: {
         ...question,
-        alwaysJumpDestinationQuestion:
-          question.alwaysJumpDestinationQuestion ? question.alwaysJumpDestinationQuestion.id : null,
+        alwaysJumpDestinationQuestion: question.alwaysJumpDestinationQuestion
+          ? question.alwaysJumpDestinationQuestion.id
+          : null,
         jumps: question.jumps ? question.jumps.filter(Boolean).map(convertJump) : [],
         // Easyfix: this should be refactored
         otherAllowed: question.isOtherAllowed,
@@ -45,12 +46,12 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
     ) {
       questionInput.question.choices = question.choices
         ? question.choices.map(choice => ({
-          ...choice,
-          // We only send ids to the server
-          image: choice.image ? choice.image.id : null,
-          // List of not send properties to server
-          kind: undefined,
-        }))
+            ...choice,
+            // We only send ids to the server
+            image: choice.image ? choice.image.id : null,
+            // List of not send properties to server
+            kind: undefined,
+          }))
         : [];
     }
 

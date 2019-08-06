@@ -15,7 +15,7 @@ type Props = {|
 class TabsItem extends React.PureComponent<Props> {
   static defaultProps = {
     vertical: false,
-  }
+  };
 
   render() {
     const { item, intl, vertical } = this.props;

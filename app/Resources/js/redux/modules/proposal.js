@@ -8,7 +8,7 @@ import removeVote from '../../mutations/RemoveProposalVoteMutation';
 import DeleteProposalMutation from '../../mutations/DeleteProposalMutation';
 import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
 
-export type ProposalViewMode = 'mosaic' | 'table' | 'map'
+export type ProposalViewMode = 'mosaic' | 'table' | 'map';
 
 type Status = { name: string, id: number, color: string };
 type ChangeFilterAction = {
@@ -250,7 +250,6 @@ export const deleteVote = (step: Object, proposal: Object, isAuthenticated: bool
         },
       });
     });
-
 
 export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generator<*, *, *> {
   const { filter, value } = action;

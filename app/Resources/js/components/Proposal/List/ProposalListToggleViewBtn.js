@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import type { State } from '../../../types';
 import config from '../../../config';
-import type {ProposalViewMode} from "../../../redux/modules/proposal"
+import type { ProposalViewMode } from '../../../redux/modules/proposal';
 
 type Props = {
   onChange: Function,

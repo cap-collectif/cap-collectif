@@ -11,7 +11,7 @@ const mutation = graphql`
   mutation UpdateProjectMutation($input: UpdateProjectInput!) {
     updateProject(input: $input) {
       project {
-       ...ProjectContentAdminForm_project
+        ...ProjectContentAdminForm_project
       }
     }
   }

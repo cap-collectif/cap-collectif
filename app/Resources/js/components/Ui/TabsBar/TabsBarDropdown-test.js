@@ -6,24 +6,20 @@ import TabsBarDropdown from './TabsBarDropdown';
 import { intlMock } from '../../../mocks';
 
 describe('<TabsBarDropdown />', () => {
-
   const props = {
-      intl: intlMock,
-      item: {},
-      vertical: false,
-      pullRight: true,
-      id: 'TabsBarDropdown-id',
-      toggleElement: null,
-      eventKey: 1,
-      'aria-label': 'TabsBarDropdown-aria-label',
-      children: null,
+    intl: intlMock,
+    item: {},
+    vertical: false,
+    pullRight: true,
+    id: 'TabsBarDropdown-id',
+    toggleElement: null,
+    eventKey: 1,
+    'aria-label': 'TabsBarDropdown-aria-label',
+    children: null,
   };
 
   it('should render', () => {
-    const wrapper = shallow(
-      <TabsBarDropdown {...props} />,
-    );
+    const wrapper = shallow(<TabsBarDropdown {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
-
 });

@@ -8,8 +8,8 @@ import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { GlobalState } from '../../../types';
 import ProposalListViewPaginated from './ProposalListViewPaginated';
 import { graphqlError } from '../../../createRelayEnvironment';
-import type {ProposalViewMode} from "../../../redux/modules/proposal"
-import type {GeoJson, MapOptions} from "../Map/LeafletMap"
+import type { ProposalViewMode } from '../../../redux/modules/proposal';
+import type { GeoJson, MapOptions } from '../Map/LeafletMap';
 
 type Filters = {|
   categories?: string,
@@ -136,14 +136,17 @@ export class ProposalListView extends React.Component<Props, State> {
     }
 
     // $FlowFixMe
-    return <ProposalListViewPaginated
-      displayMap={displayMap}
-      geoJsons={geoJsons}
-      defaultMapOptions={defaultMapOptions}
-      count={count}
-      step={step}
-      viewer={viewer}
-      view={view} />;
+    return (
+      <ProposalListViewPaginated
+        displayMap={displayMap}
+        geoJsons={geoJsons}
+        defaultMapOptions={defaultMapOptions}
+        count={count}
+        step={step}
+        viewer={viewer}
+        view={view}
+      />
+    );
   }
 }
 

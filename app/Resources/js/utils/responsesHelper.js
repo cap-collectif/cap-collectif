@@ -481,7 +481,9 @@ const getConditionReturn = (
   const userResponse = response && response.value;
   if (response && userResponse && condition.value) {
     const getFilteredCheckboxesConditions = (jumpCondition: ConditionalJumpCondition): boolean =>
-      jumpCondition.question && jumpCondition.question.type === 'checkbox' && jumpCondition.question.id === response.question;
+      jumpCondition.question &&
+      jumpCondition.question.type === 'checkbox' &&
+      jumpCondition.question.id === response.question;
 
     switch (condition.operator) {
       case IS_OPERATOR:
@@ -501,11 +503,10 @@ const getConditionReturn = (
               jump.conditions &&
               userResponse.labels &&
               // $FlowFixMe
-              jump.conditions
-                .filter(Boolean)
-                .filter(getFilteredCheckboxesConditions).length === (userResponse.labels &&
-                // $FlowFixMe
-              userResponse.labels.length) &&
+              jump.conditions.filter(Boolean).filter(getFilteredCheckboxesConditions).length ===
+                (userResponse.labels &&
+                  // $FlowFixMe
+                  userResponse.labels.length) &&
               // $FlowFixMe
               (userResponse: MultipleChoiceQuestionValue).labels.includes(condition.value.title)
             );
@@ -529,11 +530,10 @@ const getConditionReturn = (
               jump.conditions &&
               userResponse.labels &&
               // $FlowFixMe
-              jump.conditions
-                .filter(Boolean)
-                .filter(getFilteredCheckboxesConditions).length === (userResponse.labels &&
-                // $FlowFixMe
-              userResponse.labels.length) &&
+              jump.conditions.filter(Boolean).filter(getFilteredCheckboxesConditions).length ===
+                (userResponse.labels &&
+                  // $FlowFixMe
+                  userResponse.labels.length) &&
               // $FlowFixMe
               !(userResponse: MultipleChoiceQuestionValue).labels.includes(condition.value.title)
             );

@@ -13,9 +13,10 @@ type Props = {|
   toggleElement?: React.Node,
   eventKey?: number | string,
   'aria-label'?: string,
-  children?: ?React.ChildrenArray<null | React.Element<typeof S.TabsLink> | React.Element<typeof S.TabsDivider>>,
+  children?: ?React.ChildrenArray<
+    null | React.Element<typeof S.TabsLink> | React.Element<typeof S.TabsDivider>,
+  >,
 |};
-
 
 const TabsBarDropdown = (props: Props) => {
   const { intl, item, vertical, pullRight, id, toggleElement, children } = props;

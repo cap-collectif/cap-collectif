@@ -4,7 +4,7 @@ import { ProgressBar } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Progress } from '../../Ui/FeedbacksIndicators/Progress';
-import type { ProjectPreviewProgressBar_project } from '~relay/ProjectPreviewProgressBar_project.graphql'
+import type { ProjectPreviewProgressBar_project } from '~relay/ProjectPreviewProgressBar_project.graphql';
 
 type Props = {|
   +project: ProjectPreviewProgressBar_project,

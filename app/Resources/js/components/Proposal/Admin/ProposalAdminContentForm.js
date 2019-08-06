@@ -508,8 +508,11 @@ const form = reduxForm({
 })(ProposalAdminContentForm);
 
 const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
-  const defaultResponses = formatInitialResponsesValues(proposal.form.questions, proposal.responses ? proposal.responses : []);
-  return ({
+  const defaultResponses = formatInitialResponsesValues(
+    proposal.form.questions,
+    proposal.responses ? proposal.responses : [],
+  );
+  return {
     isAdmin: !!(
       (state.user.user && state.user.user.roles.includes('ROLE_ADMIN')) ||
       (state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'))
@@ -528,8 +531,8 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
       theme:
         state.default.features.themes && proposal.form.usingThemes
           ? proposal.theme
-          ? proposal.theme.id
-          : null
+            ? proposal.theme.id
+            : null
           : undefined,
       category: proposal.form.usingCategories
         ? proposal.category
@@ -539,8 +542,8 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
       district:
         state.default.features.districts && proposal.form.usingDistrict
           ? proposal.district
-          ? proposal.district.id
-          : null
+            ? proposal.district.id
+            : null
           : undefined,
       address: proposal.form.usingAddress ? proposal.address : undefined,
       media: proposal.media ? proposal.media : null,
@@ -548,7 +551,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
       addressText: proposal.address ? proposal.address.formatted : null,
     },
     responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
-  });
+  };
 };
 
 const container = connect(mapStateToProps)(injectIntl(form));

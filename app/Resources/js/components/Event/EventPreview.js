@@ -66,11 +66,11 @@ export class EventPreview extends React.Component<Props, State> {
               </a>
             </h3>
             {isAuthorDisplay && event.author && event.author.username && (
-                  <p className="excerpt">
-                    {/* $FlowFixMe */}
-                    <UserAvatarDeprecated size={16} user={event.author} />
-                    <span className="font-weight-semi-bold">{event.author.username}</span>
-                  </p>
+              <p className="excerpt">
+                {/* $FlowFixMe */}
+                <UserAvatarDeprecated size={16} user={event.author} />
+                <span className="font-weight-semi-bold">{event.author.username}</span>
+              </p>
             )}
             <p className="excerpt">
               <i className="cap-calendar-1 mr-10" />
@@ -80,12 +80,12 @@ export class EventPreview extends React.Component<Props, State> {
                 fullDay
               />
             </p>
-              {event.fullAddress ? (
-                <p className="excerpt">
-                  <i className="cap-marker-1 mr-10" />
-                  {event.fullAddress}
-                </p>
-              ) : null}
+            {event.fullAddress ? (
+              <p className="excerpt">
+                <i className="cap-marker-1 mr-10" />
+                {event.fullAddress}
+              </p>
+            ) : null}
             {event.themes && event.themes.length > 0 && (
               <div className="excerpt">
                 <i className="cap cap-folder-2 mr-10 r-0" />

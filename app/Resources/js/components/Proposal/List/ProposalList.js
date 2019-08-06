@@ -10,7 +10,7 @@ import VisibilityBox from '../../Utils/VisibilityBox';
 import type { ProposalList_step } from '~relay/ProposalList_step.graphql';
 import type { ProposalList_viewer } from '~relay/ProposalList_viewer.graphql';
 import type { ProposalList_proposals } from '~relay/ProposalList_proposals.graphql';
-import type {ProposalViewMode} from "../../../redux/modules/proposal"
+import type { ProposalViewMode } from '../../../redux/modules/proposal';
 
 type Props = {
   step: ?ProposalList_step,

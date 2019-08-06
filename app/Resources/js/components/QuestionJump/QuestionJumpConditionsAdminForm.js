@@ -15,22 +15,28 @@ type Props = {
   questions: Questions,
   formName: string,
   member: string,
-  currentJump: Jump
+  currentJump: Jump,
 };
 
 export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
   render() {
     const { fields, questions, member, formName, currentJump } = this.props;
     const currentQuestion = questions.find(question => question.id === currentJump.origin.id);
-    const isMultipleChoiceQuestion = currentQuestion && currentQuestion.__typename === "MultipleChoiceQuestion";
-    const firstMultipleChoiceQuestion = questions.find(question => question.__typename === "MultipleChoiceQuestion");
+    const isMultipleChoiceQuestion =
+      currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion';
+    const firstMultipleChoiceQuestion = questions.find(
+      question => question.__typename === 'MultipleChoiceQuestion',
+    );
     const defaultCondition = {
       question: {
         id: currentJump.origin.id,
       },
-      value: currentQuestion && isMultipleChoiceQuestion ?
-        currentQuestion.choices && currentQuestion.choices[0] : firstMultipleChoiceQuestion ?
-          firstMultipleChoiceQuestion.choices && firstMultipleChoiceQuestion.choices[0] : null,
+      value:
+        currentQuestion && isMultipleChoiceQuestion
+          ? currentQuestion.choices && currentQuestion.choices[0]
+          : firstMultipleChoiceQuestion
+          ? firstMultipleChoiceQuestion.choices && firstMultipleChoiceQuestion.choices[0]
+          : null,
       operator: 'IS',
     };
 
@@ -76,13 +82,18 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
                   .filter(question => {
                     // We should not display the origin question of the jump when adding a new jump because a logic jump
                     // could not redirect to itself
-                    return question.id && currentJump && currentJump.origin.id && question.id !== currentJump.origin.id
+                    return (
+                      question.id &&
+                      currentJump &&
+                      currentJump.origin.id &&
+                      question.id !== currentJump.origin.id
+                    );
                   })
-                  .map((question, index) =>
+                  .map((question, index) => (
                     <option value={question.id}>
                       {index + 1}. {question.title}
                     </option>
-                  )}
+                  ))}
               </Field>
             </div>
           )}

@@ -22,4 +22,3 @@ class ShareButtonAction extends React.Component<Props> {
 }
 
 export default ShareButtonAction;
-

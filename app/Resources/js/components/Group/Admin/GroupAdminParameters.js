@@ -40,9 +40,7 @@ const onDelete = (groupId: string) =>
       groupId,
     },
   }).then(() => {
-    window.location.href = `${window.location.protocol}//${
-      window.location.host
-    }/admin/capco/app/group/list`;
+    window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/group/list`;
   });
 
 const validate = ({ title }) => {

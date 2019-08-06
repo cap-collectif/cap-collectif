@@ -7,9 +7,9 @@ import type { ProposalListViewPaginated_step } from '~relay/ProposalListViewPagi
 import type { ProposalListViewPaginated_viewer } from '~relay/ProposalListViewPaginated_viewer.graphql';
 import VisibilityBox from '../../Utils/VisibilityBox';
 import ProposalList from './ProposalList';
-import type {ProposalViewMode} from "../../../redux/modules/proposal"
-import ProposalsDisplayMap from "../../Page/ProposalsDisplayMap"
-import type {GeoJson, MapOptions} from "../Map/LeafletMap"
+import type { ProposalViewMode } from '../../../redux/modules/proposal';
+import ProposalsDisplayMap from '../../Page/ProposalsDisplayMap';
+import type { GeoJson, MapOptions } from '../Map/LeafletMap';
 
 type Props = {
   relay: RelayPaginationProp,
@@ -31,18 +31,27 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
   };
 
   render() {
-    const { step, viewer, geoJsons, defaultMapOptions, displayMap, relay, view, count } = this.props;
+    const {
+      step,
+      viewer,
+      geoJsons,
+      defaultMapOptions,
+      displayMap,
+      relay,
+      view,
+      count,
+    } = this.props;
     return (
       <div>
-        {displayMap && view === 'map' ?
-          (
+        {displayMap && view === 'map' ? (
           // $FlowFixMe $refType
           <ProposalsDisplayMap
             className="zi-0"
             step={step}
             geoJsons={geoJsons}
             defaultMapOptions={defaultMapOptions}
-          />) : (
+          />
+        ) : (
           <React.Fragment>
             <VisibilityBox enabled={step.private || false}>
               {/* $FlowFixMe */}
@@ -64,7 +73,9 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
                       this.setState({ loading: false });
                     });
                   }}>
-                  <FormattedMessage id={this.state.loading ? 'global.loading' : 'see-more-proposals'} />
+                  <FormattedMessage
+                    id={this.state.loading ? 'global.loading' : 'see-more-proposals'}
+                  />
                 </Button>
               )}
             </div>
