@@ -11,7 +11,7 @@ trait PositionableTrait
      * @Gedmo\SortablePosition
      * @ORM\Column(name="position", type="integer")
      */
-    private $position;
+    private $position = 1;
 
     public function setPosition(int $position)
     {
@@ -20,7 +20,7 @@ trait PositionableTrait
         return $this;
     }
 
-    public function getPosition()
+    public function getPosition(): int
     {
         return $this->position;
     }
