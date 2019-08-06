@@ -18,3 +18,7 @@ Capco\AppBundle\Entity\Comment:
       groups: [Elasticsearch]
     trashedStatus:
       groups: [Elasticsearch]
+    getProposal:
+      type: object
+      serialized_name: proposal
+      groups: [ElasticsearchNestedProposal]

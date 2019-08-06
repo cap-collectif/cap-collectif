@@ -75,27 +75,15 @@ class ProposalSearch extends Search
             ->setFrom($offset)
             ->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
-        $ids = array_map(function (Result $result) {
+        $ids = array_map(static function (Result $result) {
             return $result->getData()['id'];
         }, $resultSet->getResults());
-        $proposals = $this->getHydratedResults($ids);
+        $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
 
         return [
             'proposals' => $proposals,
             'count' => $resultSet->getTotalHits()
         ];
-    }
-
-    public function getHydratedResults(array $ids): array
-    {
-        $proposals = $this->proposalRepo->hydrateFromIds($ids);
-        // We have to restore the correct order of ids, because Doctrine has lost it, see:
-        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        usort($proposals, function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
-
-        return $proposals;
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string

@@ -85,4 +85,9 @@ class ProposalComment extends Comment
     {
         return $this->setProposal($object);
     }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Elasticsearch', 'ElasticsearchNestedProject', 'ElasticsearchNestedProposal'];
+    }
 }

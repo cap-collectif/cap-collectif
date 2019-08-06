@@ -156,7 +156,7 @@ InternalUser:
         type: 'CommentConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all comments of the user.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentsResolver", [getUser(), value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentsResolver", [getUser(), value, args, context])'
         args:
           first:
             type: 'Int'

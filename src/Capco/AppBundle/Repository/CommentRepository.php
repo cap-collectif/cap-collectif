@@ -151,6 +151,14 @@ class CommentRepository extends EntityRepository
         return (int) $query->getSingleScalarResult();
     }
 
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->where('c.id IN (:ids)')->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('c')->andWhere('c.published = true');

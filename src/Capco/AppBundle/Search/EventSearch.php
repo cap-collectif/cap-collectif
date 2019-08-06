@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRepository;
+use Doctrine\ORM\EntityRepository;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Exists;
@@ -104,7 +105,7 @@ class EventSearch extends Search
         }, $resultSet->getResults());
 
         return [
-            'events' => $this->getHydratedResults($ids),
+            'events' => $this->getHydratedResults($this->eventRepository, $ids),
             'count' => $resultSet->getTotalHits()
         ];
     }
@@ -127,20 +128,6 @@ class EventSearch extends Search
         }, $resultSet->getResults());
 
         return array_unique($authorIds);
-    }
-
-    public function getHydratedResults(array $ids): array
-    {
-        // We can't use findById because we would lost the correct order given by ES
-        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        $events = $this->eventRepository->hydrateFromIds($ids);
-        // We have to restore the correct order of ids, because Doctrine has lost it, see:
-        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        usort($events, function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
-
-        return $events;
     }
 
     private function getSort(array $orderBy): array

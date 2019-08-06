@@ -37,8 +37,10 @@ class ProfileController extends Controller
     private $userProposalsResolver;
     private $commentSearch;
 
-    public function __construct(UserProposalsResolver $userProposalsResolver, CommentSearch $commentSearch)
-    {
+    public function __construct(
+        UserProposalsResolver $userProposalsResolver,
+        CommentSearch $commentSearch
+    ) {
         $this->userProposalsResolver = $userProposalsResolver;
         $this->commentSearch = $commentSearch;
     }
@@ -187,11 +189,7 @@ class ProfileController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $user = $slug
-            ? $this->get(UserRepository::class)->findOneBySlug($slug)
-            : $this->get('security.token_storage')
-                ->getToken()
-                ->getUser();
+        $user = $slug ? $this->get(UserRepository::class)->findOneBySlug($slug) : $this->getUser();
 
         if (!$user) {
             throw $this->createNotFoundException();
@@ -201,14 +199,12 @@ class ProfileController extends Controller
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
         $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
         $sources = $this->get(SourceRepository::class)->getByUser($user);
-        $comments = $this->commentSearch->getCommentsByAuthorViewerCanSee(
-            $user,
-            $this->getUser(),
-            50,
-            0
-        );
+        $comments = $this->get(CommentRepository::class)->getByUser($user);
         $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
         $eventsCount = $this->getEventsCount($user);
+
+        dump($this->commentSearch->getCommentsByAuthorViewerCanSee($user, $this->getUser()));
+        exit();
 
         $proposalsCount =
             $this->userProposalsResolver->__invoke(
