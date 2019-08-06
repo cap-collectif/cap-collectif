@@ -387,7 +387,8 @@ class OpinionRepository extends EntityRepository
         $direction = $orderBy['direction'];
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->leftJoin('o.step', 'step')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 'step')
             ->leftJoin('step.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'pro')
             ->leftJoin('pro.authors', 'pr_au')
