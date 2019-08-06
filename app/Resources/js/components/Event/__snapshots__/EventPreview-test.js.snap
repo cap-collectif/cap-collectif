@@ -396,9 +396,6 @@ exports[`<EventPreview /> renders without username 1`] = `
       </h3>
       <p
         className="excerpt"
-      />
-      <p
-        className="excerpt"
       >
         <i
           className="cap-calendar-1 mr-10"
