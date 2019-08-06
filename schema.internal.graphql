@@ -5762,6 +5762,9 @@ type Section implements Node & UniformResourceLocatable {
 
     # Ordering options for followers returning from the connection
     orderBy: OpinionOrder = {field: PUBLISHED_AT, direction: DESC}
+
+    # Include trashed opinion or not
+    includeTrashed: Boolean = false
   ): OpinionConnection!
 }
 

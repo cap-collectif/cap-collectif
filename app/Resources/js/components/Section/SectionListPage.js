@@ -10,7 +10,7 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 const query = graphql`
   query SectionListPageQuery($userId: ID!) {
     sections(user: $userId) {
-      ...SectionList_sections @arguments(userId: $userId)
+      ...SectionList_sections @arguments(userId: $userId, includeTrashed: true)
     }
   }
 `;

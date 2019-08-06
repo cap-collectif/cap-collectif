@@ -27,13 +27,23 @@ class SectionOpinionsResolver implements ResolverInterface
             $userId = GlobalId::fromGlobalId($args->offsetGet('author'))['id'];
         }
 
-        $totalCount = $this->opinionRepo->countByOpinionType($section->getId(), $userId);
+        $includeTrashed = false;
+        if ($args->offsetExists('includeTrashed') && $args->offsetGet('includeTrashed')) {
+            $includeTrashed = $args->offsetGet('includeTrashed');
+        }
+
+        $totalCount = $this->opinionRepo->countByOpinionType(
+            $section->getId(),
+            $userId,
+            $includeTrashed
+        );
 
         $paginator = new Paginator(function (int $offset, int $limit) use (
             $section,
             $args,
             $viewer,
-            $userId
+            $userId,
+            $includeTrashed
         ) {
             // TODO use OpinionSearch here.
             return $this->opinionRepo
@@ -43,7 +53,8 @@ class SectionOpinionsResolver implements ResolverInterface
                     $limit,
                     $args->offsetGet('orderBy'),
                     $viewer,
-                    $userId
+                    $userId,
+                    $includeTrashed
                 )
                 ->getIterator()
                 ->getArrayCopy();

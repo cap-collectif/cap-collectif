@@ -20,24 +20,27 @@ class SectionList extends React.Component<Props> {
 
     return (
       <div>
-        {sections.map(opinionType => (
-          <div className="panel panel-default">
-            <div className="panel-heading opinion opinion--default">
-              <PanelTitle className="m-0">
-                {' '}
-                {opinionType.title}
-                <span className="badge ml-5">{opinionType.opinions.totalCount}</span>
-              </PanelTitle>
-            </div>
-            <ul className="media-list opinion__list">
-              {opinionType.opinions.edges &&
-                opinionType.opinions.edges.map(opinion => (
-                  // $FlowFixMe $refType
-                  <Opinion opinion={opinion.node} />
-                ))}
-            </ul>
-          </div>
-        ))}
+        {sections.map(
+          opinionType =>
+            opinionType.opinions.totalCount > 0 && (
+              <div className="panel panel-default">
+                <div className="panel-heading opinion opinion--default">
+                  <PanelTitle className="m-0">
+                    {' '}
+                    {opinionType.title}
+                    <span className="badge ml-5">{opinionType.opinions.totalCount}</span>
+                  </PanelTitle>
+                </div>
+                <ul className="media-list opinion__list">
+                  {opinionType.opinions.edges &&
+                    opinionType.opinions.edges.map(opinion => (
+                      // $FlowFixMe $refType
+                      <Opinion opinion={opinion.node} />
+                    ))}
+                </ul>
+              </div>
+            ),
+        )}
       </div>
     );
   }
@@ -47,10 +50,13 @@ export default createFragmentContainer(SectionList, {
   sections: graphql`
     fragment SectionList_sections on Section
       @relay(plural: true)
-      @argumentDefinitions(userId: { type: "ID" }) {
+      @argumentDefinitions(
+        userId: { type: "ID" }
+        includeTrashed: { type: "Boolean", defaultValue: false }
+      ) {
       title
       color
-      opinions(author: $userId) {
+      opinions(author: $userId, includeTrashed: $includeTrashed) {
         totalCount
         edges {
           node {

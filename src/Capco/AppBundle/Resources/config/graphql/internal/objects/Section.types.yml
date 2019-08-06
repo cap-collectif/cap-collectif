@@ -83,3 +83,8 @@ Section:
             type: 'InternalOpinionOrder'
             description: 'Ordering options for followers returning from the connection'
             defaultValue: { field: PUBLISHED_AT, direction: DESC }
+          includeTrashed:
+            type: 'Boolean'
+            description: 'Include trashed opinion or not'
+            defaultValue: false
+

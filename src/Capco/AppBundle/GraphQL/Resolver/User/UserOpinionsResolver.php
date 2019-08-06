@@ -47,8 +47,8 @@ class UserOpinionsResolver implements ResolverInterface
         return $paginator->auto($args, $totalCount);
     }
 
-    public function getCountPublicPublished(User $user): int
+    public function getCountPublicPublished(User $user, bool $includeTrashed = false): int
     {
-        return $this->opinionRepository->countByUser($user);
+        return $this->opinionRepository->countByUser($user, $includeTrashed);
     }
 }
