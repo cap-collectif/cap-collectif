@@ -90,4 +90,11 @@ trait AdminProjectTrait
     {
         $this->iVisitedPage('AdminProjectConsultationPage');
     }
+    /**
+     * @When I go to the admin consultation creation page
+     */
+    public function iGoToTheAdminConsultationCreationPage()
+    {
+        $this->iVisitedPage('AdminProjectConsultationCreationPage');
+    }
 }

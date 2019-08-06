@@ -29,7 +29,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Consultation
 {
     use UuidTrait;
-    use PositionableTrait;
     use MetaDescriptionCustomCodeTrait;
 
     /**
@@ -159,6 +158,24 @@ class Consultation
      * @ORM\Column(name="contributors_count", type="integer")
      */
     private $contributorsCount = 0;
+
+    /**
+     * @Gedmo\SortablePosition
+     * @ORM\Column(name="position", type="integer")
+     */
+    private $position = 1;
+
+    public function setPosition(int $position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
 
     /**
      * Constructor.
