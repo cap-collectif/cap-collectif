@@ -19,8 +19,7 @@ trait QuestionPersisterTrait
         $entity,
         array $arguments,
         string $type
-    ): void
-    {
+    ): void {
         $questionsOrderedByBase = $form
             ->getData()
             ->getRealQuestions()
@@ -90,7 +89,7 @@ trait QuestionPersisterTrait
             return isset($a['question']['id']) ? false : true;
         });
 
-//        dump("ENTITY BEFORE FOREACH", $entity);
+        //        dump("ENTITY BEFORE FOREACH", $entity);
 
         foreach ($entity->getQuestions() as $position => $questionnaireQuestion) {
             // Handle questions deletions
@@ -109,8 +108,7 @@ trait QuestionPersisterTrait
                 array_splice($arguments['questions'], $position, 0, [$deletedQuestion]);
             }
 
-//            dump("ENTITY AFTER FOREACH", $entity);
-
+            //            dump("ENTITY AFTER FOREACH", $entity);
 
             $questions = array_map(static function (array $question) {
                 return $question['question'];
@@ -120,7 +118,7 @@ trait QuestionPersisterTrait
                 ?array $acc,
                 array $question
             ) use ($realQuestion) {
-                if (isset($question['id']) && ((int)$question['id']) === $realQuestion->getId()) {
+                if (isset($question['id']) && ((int) $question['id']) === $realQuestion->getId()) {
                     $acc = $question;
                 }
 
@@ -165,7 +163,9 @@ trait QuestionPersisterTrait
                                 ];
                                 // Inject back the deleted question's logic jump into the arguments question jumps array
                                 array_splice(
-                                    $arguments['questions'][$position]['question']['jumps'][$jumpPosition]['conditions'],
+                                    $arguments['questions'][$position]['question']['jumps'][
+                                        $jumpPosition
+                                    ]['conditions'],
                                     $conditionPosition,
                                     0,
                                     [$deletedJumpCondition]
@@ -191,13 +191,17 @@ trait QuestionPersisterTrait
                         $jump['conditions'] = array_map(
                             static function (array $condition, $key) {
                                 $condition['position'] = $key + 1;
-                                $condition['value'] = GlobalId::fromGlobalId($condition['value'])['id'];
+                                if (isset($condition['value'])) {
+                                    $condition['value'] = GlobalId::fromGlobalId(
+                                        $condition['value']
+                                    )['id'];
+                                }
+
                                 return $condition;
                             },
                             $jump['conditions'],
                             array_keys($jump['conditions'])
                         );
-
                     }
                 }
                 unset($jump);
@@ -208,22 +212,27 @@ trait QuestionPersisterTrait
             $arguments['questions'] = array_map(static function (array $question) {
                 if (isset($question['question']['choices'])) {
                     foreach ($question['question']['choices'] as &$choice) {
-                        if (isset($choice['id']) && $choice['id'] !== '') {
+                        //
+                        if (
+                            isset($choice['id']) &&
+                            '' !== $choice['id'] &&
+                            (int) $question['question']['id'] !== $choice['id']
+                        ) {
                             $choice['id'] = GlobalId::fromGlobalId($choice['id'])['id'];
                         }
                     }
                 }
+
                 return $question;
             }, $arguments['questions']);
-            dump('BEFORE SUBMIT', $arguments);
 
             $form->submit($arguments, false);
         } catch (\RuntimeException $exception) {
             $this->logger->error(
                 __METHOD__ .
-                ' : ' .
-                $exception->getMessage() .
-                var_export($form->getExtraData(), true)
+                    ' : ' .
+                    $exception->getMessage() .
+                    var_export($form->getExtraData(), true)
             );
         }
         $qaq = $entity->getQuestions();
@@ -248,12 +257,10 @@ trait QuestionPersisterTrait
         EntityManagerInterface $em,
         int $delta,
         ?array $questionsOrdered
-    ): void
-    {
+    ): void {
         foreach ($questionnaireAbstractQuestions as $index => $abstractQuestion) {
             /** @var AbstractQuestion $abstractQuestion * */
             $question = $abstractQuestion->getQuestion();
-//            dump("GET QUESTION", $question);
 
             if (!empty($questionsOrdered)) {
                 $newPosition = 0;
@@ -283,12 +290,10 @@ trait QuestionPersisterTrait
     private function persistQuestionMultiChoice(
         MultipleChoiceQuestion &$question,
         EntityManagerInterface $em
-    )
-    {
+    ) {
         foreach ($question->getChoices() as $key => $questionChoice) {
             $questionChoice->setQuestion($question);
             $questionChoice->setPosition($key);
-//            dump($questionChoice);
             $em->persist($questionChoice);
         }
     }
