@@ -234,7 +234,7 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getByUser(User $user, $limit = 50, $offset = 0)
+    public function getByUser(User $user, $limit = 50, $offset = 0, bool $includeTrashed = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->leftJoin('o.consultation', 'oc')
@@ -246,10 +246,14 @@ class OpinionRepository extends EntityRepository
             ->setMaxResults($limit)
             ->setParameter('author', $user);
 
+        if (!$includeTrashed) {
+            $qb->andWhere('o.trashedAt IS NULL');
+        }
+
         return $qb->getQuery()->getResult();
     }
 
-    public function countByUser(User $user): int
+    public function countByUser(User $user, bool $includeTrashed = false): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o.id)')
@@ -260,11 +264,18 @@ class OpinionRepository extends EntityRepository
             ->andWhere('s.isEnabled = true')
             ->setParameter('author', $user);
 
+        if (!$includeTrashed) {
+            $qb->andWhere('o.trashedAt IS NULL');
+        }
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countByOpinionType(string $opinionTypeId, ?string $author = null): int
-    {
+    public function countByOpinionType(
+        string $opinionTypeId,
+        ?string $author = null,
+        bool $includeTrashed = false
+    ): int {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o)')
             ->andWhere('o.OpinionType = :opinionTypeId')
@@ -272,6 +283,10 @@ class OpinionRepository extends EntityRepository
 
         if ($author) {
             $qb->andWhere('o.Author = :author')->setParameter('author', $author);
+        }
+
+        if (!$includeTrashed) {
+            $qb->andWhere('o.trashedAt IS NULL');
         }
 
         return // ->useResultCache(true, 60)
@@ -380,7 +395,8 @@ class OpinionRepository extends EntityRepository
         int $limit,
         array $orderBy,
         ?User $viewer,
-        ?string $author
+        ?string $author,
+        bool $includeTrashed = false
     ) {
         $field = $orderBy['field'];
         $direction = $orderBy['direction'];
@@ -394,6 +410,11 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->andWhere('o.OpinionType = :section')
             ->setParameter('section', $section);
+
+        if (!$includeTrashed) {
+            $qb->andWhere('o.trashedAt IS NULL');
+        }
+
         if ($author) {
             $qb->andWhere('o.Author = :author')->setParameter('author', $author);
         }
