@@ -32,21 +32,26 @@ Scenario: GraphQL client wants to remove a user from group
   Then the JSON response should match:
   """
   {
-      "data": {
-        "deleteUserInGroup": {
-          "group": {
-            "id": "group2",
-            "users": {
-              "edges": [
+    "data": {
+      "deleteUserInGroup": {
+        "group": {
+          "id": "group2",
+          "users": {
+            "edges": [
+              {
+                "node": {
+                  "id": "VXNlcjp1c2VyNTIw"
+                }
+              },
               {
                 "node": {
                   "id": "VXNlcjp1c2VyNTAz"
                 }
               }
-              ]
-            }
+            ]
           }
         }
       }
+    }
   }
   """

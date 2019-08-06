@@ -11,7 +11,7 @@ import UserLink from '../../components/User/UserLink';
 
 import { followers as followersMock } from '../mocks/users';
 
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
 const FollowerItem = ({ user }) => (
   <Card>
     <Card.Body>
@@ -45,7 +45,6 @@ const FollowerItem = ({ user }) => (
   </Card>
 );
 
-// eslint-disable-next-line react/prop-types
 const FollowersList = ({ withHeader, hasMore, isLoading, followers }) => (
   <div>
     {withHeader && (

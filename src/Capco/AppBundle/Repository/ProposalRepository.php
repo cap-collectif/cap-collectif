@@ -656,8 +656,9 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('s.projectAbstractStep', 'pabs')
             ->leftJoin('pabs.project', 'pro')
             ->leftJoin('pro.authors', 'pr_au')
-            ->leftJoin('pro.restrictedViewerGroups', 'prvg');
-        if (!$viewer->isSuperAdmin()) {
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
+            ->orderBy('p.createdAt', 'DESC');
+        if ($viewer !== $user && !$viewer->isSuperAdmin()) {
             // The call of the function below filters the contributions according to the visibility
             // of the project containing it, as well as the privileges of the connected user.
             $this->getContributionsViewerCanSee($qb, $viewer);
@@ -670,7 +671,13 @@ class ProposalRepository extends EntityRepository
                                 ->expr()
                                 ->andX(
                                     $qb->expr()->isInstanceOf('s', ':collectStep'),
-                                    $qb->expr()->eq('s.private', 'false'),
+                                    $qb->expr()->eq('s.private', 'false')
+                                ),
+                            $qb
+                                ->expr()
+                                ->andX(
+                                    $qb->expr()->isInstanceOf('s', ':collectStep'),
+                                    $qb->expr()->eq('s.private', 'true'),
                                     $qb->expr()->isNotNull('ps.selectionStep')
                                 ),
                             $qb->expr()->eq(':viewer', 'pr_au.user')
@@ -696,14 +703,25 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('pf.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pabs')
             ->leftJoin('pabs.project', 'pro')
+            ->orderBy('p.createdAt', 'DESC')
             ->andWhere($qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC))
             ->andWhere(
                 $qb
                     ->expr()
-                    ->andX(
-                        $qb->expr()->eq('s.private', 'false'),
-                        $qb->expr()->isNotNull('ps.selectionStep'),
-                        $qb->expr()->isInstanceOf('s', ':collectStep')
+                    ->orX(
+                        $qb
+                            ->expr()
+                            ->andX(
+                                $qb->expr()->isInstanceOf('s', ':collectStep'),
+                                $qb->expr()->eq('s.private', 'false')
+                            ),
+                        $qb
+                            ->expr()
+                            ->andX(
+                                $qb->expr()->isInstanceOf('s', ':collectStep'),
+                                $qb->expr()->eq('s.private', 'true'),
+                                $qb->expr()->isNotNull('ps.selectionStep')
+                            )
                     )
             )
             ->setParameters([
