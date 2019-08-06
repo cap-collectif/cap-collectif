@@ -89,8 +89,6 @@ trait QuestionPersisterTrait
             return isset($a['question']['id']) ? false : true;
         });
 
-        //        dump("ENTITY BEFORE FOREACH", $entity);
-
         foreach ($entity->getQuestions() as $position => $questionnaireQuestion) {
             // Handle questions deletions
             /** @var AbstractQuestion $realQuestion */
@@ -107,8 +105,6 @@ trait QuestionPersisterTrait
                 // Inject back the deleted question into the arguments question array
                 array_splice($arguments['questions'], $position, 0, [$deletedQuestion]);
             }
-
-            //            dump("ENTITY AFTER FOREACH", $entity);
 
             $questions = array_map(static function (array $question) {
                 return $question['question'];
@@ -212,7 +208,8 @@ trait QuestionPersisterTrait
             $arguments['questions'] = array_map(static function (array $question) {
                 if (isset($question['question']['choices'])) {
                     foreach ($question['question']['choices'] as &$choice) {
-                        //
+                        //We need to check if the choice id is null in which case we cannot retrieve from a global Id
+                        //If we use a global id for the Question Entity we will need to fix this part of code
                         if (
                             isset($choice['id']) &&
                             '' !== $choice['id'] &&
