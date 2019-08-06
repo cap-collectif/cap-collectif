@@ -267,7 +267,6 @@ class OpinionRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o)')
-            ->andWhere('o.trashedAt IS NULL')
             ->andWhere('o.OpinionType = :opinionTypeId')
             ->setParameter('opinionTypeId', $opinionTypeId);
 
@@ -394,7 +393,6 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('pro.authors', 'pr_au')
             ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->andWhere('o.OpinionType = :section')
-            ->andWhere('o.trashedAt IS NULL')
             ->setParameter('section', $section);
         if ($author) {
             $qb->andWhere('o.Author = :author')->setParameter('author', $author);
