@@ -203,9 +203,6 @@ class ProfileController extends Controller
         $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
         $eventsCount = $this->getEventsCount($user);
 
-        dump($this->commentSearch->getCommentsByAuthorViewerCanSee($user, $this->getUser()));
-        exit();
-
         $proposalsCount =
             $this->userProposalsResolver->__invoke(
                 $this->getUser(),
