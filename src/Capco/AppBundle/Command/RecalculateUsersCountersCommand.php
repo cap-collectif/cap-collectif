@@ -68,23 +68,6 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         $this->ids = $redis->smembers($redisKey);
         $redis->del($redisKey);
 
-        if (
-            $this->force ||
-            $this->em
-                ->createQuery('SELECT COUNT(opinion.id) FROM CapcoAppBundle:Opinion opinion')
-                ->getSingleScalarResult() > 0
-        ) {
-            $query = $this->em->createQuery(
-                'UPDATE CapcoUserBundle:User u SET u.opinionsCount = (
-              SELECT count(o.id) from CapcoAppBundle:Opinion o
-              INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
-              INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH oc.step = cs
-              WHERE o.Author = u AND o.published = 1 AND cs.isEnabled = 1 GROUP BY o.Author
-            )'
-            );
-            $query->execute();
-        }
-
         $this->compute(
             'UPDATE CapcoUserBundle:User u SET u.opinionVersionsCount = (
           SELECT count(ov.id) from CapcoAppBundle:OpinionVersion ov

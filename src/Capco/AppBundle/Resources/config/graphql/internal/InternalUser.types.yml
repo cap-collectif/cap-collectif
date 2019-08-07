@@ -113,8 +113,6 @@ InternalUser:
             type: 'Int'
             description: 'Returns the first n elements from the list.'
             defaultValue: 100
-      opinionsCount:
-        type: 'Int!'
       opinionVotesCount:
         type: 'Int!'
       opinionVersionsCount:
@@ -193,6 +191,11 @@ InternalUser:
           orderBy:
             type: 'String'
             description: 'Ordering options for followers returning from the connection'
+      opinions:
+        type: 'OpinionConnection!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionsResolver", [value, args])'
+        description: 'Array of opinions by current user.'
+        argsBuilder: 'Relay::Connection'
       contributionsCount:
         type: 'Int!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsCountResolver", [value, getUser()])'

@@ -73,9 +73,18 @@ Section:
         resolve: '@=value.getDefaultFilter()'
       opinions:
         type: 'OpinionConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionOpinionsResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionOpinionsResolver", [value, args, getUser()])'
         argsBuilder: 'Relay::Connection'
         args:
+          author:
+            type: 'ID'
+            description: 'Filter by author of opinion.'
           orderBy:
             type: 'InternalOpinionOrder'
             description: 'Ordering options for followers returning from the connection'
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+          includeTrashed:
+            type: 'Boolean'
+            description: 'Include trashed opinion or not'
+            defaultValue: false
+

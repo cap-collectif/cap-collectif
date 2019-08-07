@@ -254,3 +254,11 @@ InternalQuery:
         description: 'List all SSO Configurations.'
         access: "@=hasRole('ROLE_ADMIN')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SSOConfigurationQueryResolver", [args])'
+      sections:
+        type: '[Section!]!'
+        description: 'List all sections.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryOpinionTypeResolver", [args])'
+        args:
+          user:
+            type: 'ID'
+            description: 'Filter by contributor of section.'
