@@ -112,11 +112,6 @@ class User extends BaseUser implements
     /**
      * @var int
      */
-    protected $opinionsCount = 0;
-
-    /**
-     * @var int
-     */
     protected $opinionVersionsCount = 0;
 
     // Comments
@@ -721,30 +716,6 @@ class User extends BaseUser implements
     public function getArgumentsCount()
     {
         return $this->argumentsCount;
-    }
-
-    /**
-     * Gets the value of opinionsCount.
-     *
-     * @return int
-     */
-    public function getOpinionsCount()
-    {
-        return $this->opinionsCount;
-    }
-
-    /**
-     * Sets the value of opinionsCount.
-     *
-     * @param int $opinionsCount the opinions count
-     *
-     * @return self
-     */
-    public function setOpinionsCount($opinionsCount)
-    {
-        $this->opinionsCount = $opinionsCount;
-
-        return $this;
     }
 
     /**

@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
-use Capco\AppBundle\Repository\QuestionChoiceRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -134,10 +133,6 @@ class GlobalIdResolver
                     break;
                 case 'Question':
                     $node = $this->container->get(AbstractQuestionRepository::class)->find($uuid);
-
-                    break;
-                case 'QuestionChoice':
-                    $node = $this->container->get(QuestionChoiceRepository::class)->find($uuid);
 
                     break;
                 case 'Reply':

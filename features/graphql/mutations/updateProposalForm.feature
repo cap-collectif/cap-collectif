@@ -305,21 +305,21 @@ Scenario: GraphQL client wants to delete the first question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzMg==",
+                  "id": "questionchoice32",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzMw==",
+                  "id": "questionchoice33",
                   "title": "Non",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNA==",
+                  "id": "questionchoice34",
                   "title": "Peut être",
                   "description": null,
                   "color": null,
@@ -407,14 +407,14 @@ Scenario: GraphQL client wants to delete the first question choice
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzMw==",
+                  "id": "questionchoice33",
                   "title": "Non",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNA==",
+                  "id": "questionchoice34",
                   "title": "Peut être",
                   "description": null,
                   "color": null,
@@ -451,13 +451,13 @@ Scenario: GraphQL client wants to delete the first question choice
               "type": "radio",
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzMw==",
+                  "id": "questionchoice33",
                   "title": "Non",
                   "description": null,
                   "color": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNA==",
+                  "id": "questionchoice34",
                   "title": "Peut être",
                   "description": null,
                   "color": null

@@ -4,12 +4,7 @@ InternalQuestionChoice:
     - PreviewQuestionChoice
   config:
     name: QuestionChoice
-    interfaces: [Node]
     fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: QuestionChoice
       description:
         type: 'String'
       color:

@@ -10,13 +10,16 @@ class UserContributionsCountResolver implements ResolverInterface
     protected $userEventCommentsCountResolver;
     protected $userProposalsResolver;
     protected $userSourcesResolver;
+    protected $userOpinionsResolver;
 
     public function __construct(
         UserEventCommentsCountResolver $userEventCommentsCountResolver,
         UserProposalsResolver $userProposalsResolver,
-        UserSourcesResolver $userSourcesResolver
+        UserSourcesResolver $userSourcesResolver,
+        UserOpinionsResolver $userOpinionsResolver
     ) {
         $this->userEventCommentsCountResolver = $userEventCommentsCountResolver;
+        $this->userOpinionsResolver = $userOpinionsResolver;
         $this->userProposalsResolver = $userProposalsResolver;
         $this->userSourcesResolver = $userSourcesResolver;
     }
@@ -24,10 +27,10 @@ class UserContributionsCountResolver implements ResolverInterface
     public function __invoke(User $user, $viewer = null): int
     {
         return $this->userEventCommentsCountResolver->__invoke($user) +
+            $this->userOpinionsResolver->getCountPublicPublished($user, true) +
             $this->userProposalsResolver->__invoke($viewer, $user)->totalCount +
+            $this->userSourcesResolver->__invoke($user)->totalCount +
             $user->getArgumentsCount() +
-            $user->getOpinionsCount() +
-            $user->getOpinionVersionsCount() +
-            $this->userSourcesResolver->__invoke($user)->totalCount;
+            $user->getOpinionVersionsCount();
     }
 }

@@ -24,6 +24,7 @@ const headerOption = {
   Default: 'default',
 };
 
+// TODO: Split this to make more UI components
 /* eslint-disable react/prop-types */
 const OpinionItem = ({ item, typeLabel }) => (
   <React.Fragment>

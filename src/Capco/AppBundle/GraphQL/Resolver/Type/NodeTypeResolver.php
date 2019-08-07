@@ -15,7 +15,6 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
@@ -233,10 +232,6 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof Oauth2SSOConfiguration) {
             return $this->typeResolver->resolve('InternalOauth2SSOConfiguration');
-        }
-
-        if ($node instanceof QuestionChoice) {
-            return $this->typeResolver->resolve('InternalQuestionChoice');
         }
 
         throw new UserError('Could not resolve type of Node.');

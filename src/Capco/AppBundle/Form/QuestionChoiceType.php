@@ -15,11 +15,11 @@ class QuestionChoiceType extends AbstractType
         $builder->add('id');
         $builder->add('title', TextType::class, [
             'purify_html' => true,
-            'purify_html_profile' => 'default'
+            'purify_html_profile' => 'default',
         ]);
         $builder->add('description', TextType::class, [
             'purify_html' => true,
-            'purify_html_profile' => 'default'
+            'purify_html_profile' => 'default',
         ]);
         $builder->add('color');
         $builder->add('image');

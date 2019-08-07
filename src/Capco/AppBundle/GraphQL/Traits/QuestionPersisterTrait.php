@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Traits;
 
+use Doctrine\ORM\PersistentCollection;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\PersistentCollection;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\Form\FormInterface;
 
 trait QuestionPersisterTrait
 {
@@ -58,9 +58,7 @@ trait QuestionPersisterTrait
                 $dataQuestionChoicesIds = [];
                 foreach ($dataQuestion['question']['choices'] as $key => $dataQuestionChoice) {
                     if (isset($dataQuestionChoice['id'])) {
-                        $dataQuestionChoicesIds[] = GlobalId::fromGlobalId(
-                            $dataQuestionChoice['id']
-                        )['id'];
+                        $dataQuestionChoicesIds[] = $dataQuestionChoice['id'];
                     }
                 }
 
@@ -68,39 +66,53 @@ trait QuestionPersisterTrait
                     if (!\in_array($questionChoice->getId(), $dataQuestionChoicesIds, false)) {
                         $deletedChoice = [
                             'id' => $abstractQuestion->getId(),
-                            'title' => null
+                            'title' => null,
                         ];
-                        array_splice($dataQuestion['question']['choices'], $position, 0, [
-                            $deletedChoice
-                        ]);
+                        array_splice(
+                            $dataQuestion['question']['choices'],
+                            $position,
+                            0,
+                            [
+                                $deletedChoice,
+                            ]
+                        );
                     }
                 }
             }
         }
 
         // we must reorder arguments datas to match database order (used in the symfony form)
-        usort($arguments['questions'], static function ($a, $b) use ($questionsOrderedByIdInDb) {
-            if (isset($a['question']['id'], $b['question']['id'])) {
-                return array_search($a['question']['id'], $questionsOrderedByIdInDb, false) >
-                    array_search($b['question']['id'], $questionsOrderedByIdInDb, false);
-            }
+        usort(
+            $arguments['questions'],
+            static function ($a, $b) use ($questionsOrderedByIdInDb) {
+                if (isset($a['question']['id'], $b['question']['id'])) {
+                    return array_search($a['question']['id'], $questionsOrderedByIdInDb, false) >
+                        array_search($b['question']['id'], $questionsOrderedByIdInDb, false);
+                }
 
-            //@todo respect the user order, for now we just put new items at the end
-            return isset($a['question']['id']) ? false : true;
-        });
+                //@todo respect the user order, for now we just put new items at the end
+                return isset($a['question']['id']) ? false : true;
+            }
+        );
 
         foreach ($entity->getQuestions() as $position => $questionnaireQuestion) {
             // Handle questions deletions
             /** @var AbstractQuestion $realQuestion */
             $realQuestion = $questionnaireQuestion->getQuestion();
-            if (!\in_array($realQuestion->getId(), $argumentsQuestionsId, false)) {
+            if (
+            !\in_array(
+                $realQuestion->getId(),
+                $argumentsQuestionsId,
+                false
+            )
+            ) {
                 // Put the title to null to be delete from delete_empty CollectionType field
                 $deletedQuestion = [
                     'question' => [
                         'id' => $realQuestion->getId(),
                         'type' => $realQuestion->getType(),
-                        'title' => null
-                    ]
+                        'title' => null,
+                    ],
                 ];
                 // Inject back the deleted question into the arguments question array
                 array_splice($arguments['questions'], $position, 0, [$deletedQuestion]);
@@ -110,94 +122,60 @@ trait QuestionPersisterTrait
                 return $question['question'];
             }, $arguments['questions']);
 
-            $realArgumentQuestion = array_reduce($questions, static function (
-                ?array $acc,
-                array $question
-            ) use ($realQuestion) {
-                if (isset($question['id']) && ((int) $question['id']) === $realQuestion->getId()) {
+            $realArgumentQuestion = array_reduce($questions, static function (?array $acc, array $question) use ($realQuestion) {
+                if (isset($question['id']) && ((int)$question['id']) === $realQuestion->getId()) {
                     $acc = $question;
                 }
-
                 return $acc;
             });
 
             // Handle Question's logic jumps deletions
             if (isset($realArgumentQuestion['jumps'])) {
-                $argumentsJumpsIds = array_map(static function (array $jump) {
+                $argumentsJumpsIds = array_map(static function(array $jump) {
                     return $jump['id'] ?? null;
                 }, $realArgumentQuestion['jumps']);
                 foreach ($realQuestion->getJumps() as $jumpPosition => $jump) {
                     // Handle jump deletion when a user delete a logic jump, and the conditions are handled automatically by
                     // doctrine by using the cascade remove and orphanRemoval=true
-                    if (false === \in_array($jump->getId(), $argumentsJumpsIds, true)) {
+                    if (\in_array($jump->getId(), $argumentsJumpsIds, true) === false) {
                         $deletedJump = [
                             'id' => $jump->getId(),
                             'origin' => null,
-                            'destination' => null
+                            'destination' => null,
                         ];
 
                         // Inject back the deleted question's logic jump into the arguments question jumps array
-                        array_splice(
-                            $arguments['questions'][$position]['question']['jumps'],
-                            $jumpPosition,
-                            0,
-                            [$deletedJump]
-                        );
-                    } elseif (isset($realArgumentQuestion['jumps'][$jumpPosition]['conditions'])) {
+                        array_splice($arguments['questions'][$position]['question']['jumps'], $jumpPosition, 0, [$deletedJump]);
+                    } else if (isset($realArgumentQuestion['jumps'][$jumpPosition]['conditions'])) {
                         // Otherwise, we want to remove a condition in a logic jump
-                        $argumentsJumpConditionsIds = array_map(static function (array $condition) {
+                        $argumentsJumpConditionsIds = array_map(static function(array $condition) {
                             return $condition['id'] ?? null;
                         }, $realArgumentQuestion['jumps'][$jumpPosition]['conditions']);
                         foreach ($jump->getConditions() as $conditionPosition => $condition) {
-                            if (
-                                false ===
-                                \in_array($condition->getId(), $argumentsJumpConditionsIds, true)
-                            ) {
+                            if (\in_array($condition->getId(), $argumentsJumpConditionsIds, true) === false) {
                                 $deletedJumpCondition = [
                                     'id' => $condition->getId(),
                                     'operator' => null
                                 ];
                                 // Inject back the deleted question's logic jump into the arguments question jumps array
-                                array_splice(
-                                    $arguments['questions'][$position]['question']['jumps'][
-                                        $jumpPosition
-                                    ]['conditions'],
-                                    $conditionPosition,
-                                    0,
-                                    [$deletedJumpCondition]
-                                );
+                                array_splice($arguments['questions'][$position]['question']['jumps'][$jumpPosition]['conditions'], $conditionPosition, 0, [$deletedJumpCondition]);
                             }
                         }
                     }
                 }
                 // And we set manually question jumps position to keep the same order between the front-end and the back-end
-                $arguments['questions'][$position]['question']['jumps'] = array_map(
-                    static function (array $jump, $key) {
-                        $jump['position'] = $key + 1;
-
-                        return $jump;
-                    },
-                    $arguments['questions'][$position]['question']['jumps'],
-                    array_keys($arguments['questions'][$position]['question']['jumps'])
-                );
+                $arguments['questions'][$position]['question']['jumps'] = array_map(static function (array $jump, $key) {
+                    $jump['position'] = $key + 1;
+                    return $jump;
+                }, $arguments['questions'][$position]['question']['jumps'], array_keys($arguments['questions'][$position]['question']['jumps']));
 
                 foreach ($arguments['questions'][$position]['question']['jumps'] as &$jump) {
                     // We do the same things for a jump conditions list
                     if (isset($jump['conditions'])) {
-                        $jump['conditions'] = array_map(
-                            static function (array $condition, $key) {
-                                $condition['position'] = $key + 1;
-                                if (isset($condition['value'])) {
-                                    $condition['value'] = GlobalId::fromGlobalId(
-                                        $condition['value']
-                                    )['id'];
-                                }
-
-                                return $condition;
-                            },
-                            $jump['conditions'],
-                            array_keys($jump['conditions'])
-                        );
+                        $jump['conditions'] = array_map(static function (array $condition, $key) {
+                            $condition['position'] = $key + 1;
+                            return $condition;
+                        }, $jump['conditions'], array_keys($jump['conditions']));
                     }
                 }
                 unset($jump);
@@ -205,32 +183,9 @@ trait QuestionPersisterTrait
         }
 
         try {
-            $arguments['questions'] = array_map(static function (array $question) {
-                if (isset($question['question']['choices'])) {
-                    foreach ($question['question']['choices'] as &$choice) {
-                        //We need to check if the choice id is null in which case we cannot retrieve from a global Id
-                        //If we use a global id for the Question Entity we will need to fix this part of code
-                        if (
-                            isset($choice['id']) &&
-                            '' !== $choice['id'] &&
-                            (int) $question['question']['id'] !== $choice['id']
-                        ) {
-                            $choice['id'] = GlobalId::fromGlobalId($choice['id'])['id'];
-                        }
-                    }
-                }
-
-                return $question;
-            }, $arguments['questions']);
-
             $form->submit($arguments, false);
         } catch (\RuntimeException $exception) {
-            $this->logger->error(
-                __METHOD__ .
-                    ' : ' .
-                    $exception->getMessage() .
-                    var_export($form->getExtraData(), true)
-            );
+            $this->logger->error(__METHOD__.' : '.$exception->getMessage().var_export($form->getExtraData(), true));
         }
         $qaq = $entity->getQuestions();
 

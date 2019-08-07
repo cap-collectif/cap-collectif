@@ -2,19 +2,20 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Enum\OpinionOrderField;
-use Capco\AppBundle\Enum\OrderDirection;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Traits\ContributionRepositoryTrait;
+use Doctrine\ORM\Query;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\OpinionOrderField;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 
 class OpinionRepository extends EntityRepository
 {
@@ -233,62 +234,60 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * Get all opinions by user.
-     *
-     * @param $user
-     *
-     * @return array
-     */
-    public function getByUser(User $user)
+    public function getByUser(User $user, $limit = 50, $offset = 0, bool $includeTrashed = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 's', 'p', 'aut', 'm')
-            ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 's')
-            ->leftJoin('s.project', 'p')
-            ->leftJoin('o.Author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->andWhere('p.isEnabled = true')
-            ->andWhere('s.isEnabled = true')
             ->andWhere('o.Author = :author')
-            ->setParameter('author', $user)
-            ->orderBy('o.createdAt', 'DESC');
+            ->andWhere('o.published = true')
+            ->andWhere('s.isEnabled = true')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->setParameter('author', $user);
+
+        if (!$includeTrashed) {
+            $qb->andWhere('o.trashedAt IS NULL');
+        }
 
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * Count opinions by user.
-     *
-     * @param $user
-     *
-     * @return mixed
-     */
-    public function countByUser($user)
+    public function countByUser(User $user, bool $includeTrashed = false): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(o) as totalOpinions')
+            ->select('COUNT(o.id)')
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 's')
-            ->leftJoin('s.project', 'p')
-            ->andWhere('s.isEnabled = true')
-            ->andWhere('p.isEnabled = true')
-            ->andWhere('o.published = true')
             ->andWhere('o.Author = :author')
+            ->andWhere('o.published = true')
+            ->andWhere('s.isEnabled = true')
             ->setParameter('author', $user);
+
+        if (!$includeTrashed) {
+            $qb->andWhere('o.trashedAt IS NULL');
+        }
 
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countByOpinionType(string $opinionTypeId): int
-    {
+    public function countByOpinionType(
+        string $opinionTypeId,
+        ?string $author = null,
+        bool $includeTrashed = false
+    ): int {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o)')
-            ->andWhere('o.trashedAt IS NULL')
             ->andWhere('o.OpinionType = :opinionTypeId')
             ->setParameter('opinionTypeId', $opinionTypeId);
+
+        if ($author) {
+            $qb->andWhere('o.Author = :author')->setParameter('author', $author);
+        }
+
+        if (!$includeTrashed) {
+            $qb->andWhere('o.trashedAt IS NULL');
+        }
 
         return // ->useResultCache(true, 60)
             $qb
@@ -394,15 +393,41 @@ class OpinionRepository extends EntityRepository
         OpinionType $section,
         int $offset,
         int $limit,
-        array $orderBy
+        array $orderBy,
+        ?User $viewer,
+        ?string $author,
+        bool $includeTrashed = false
     ) {
         $field = $orderBy['field'];
         $direction = $orderBy['direction'];
 
         $qb = $this->getIsEnabledQueryBuilder()
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'pro')
+            ->leftJoin('pro.authors', 'pr_au')
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->andWhere('o.OpinionType = :section')
-            ->andWhere('o.trashedAt IS NULL')
             ->setParameter('section', $section);
+
+        if (!$includeTrashed) {
+            $qb->andWhere('o.trashedAt IS NULL');
+        }
+
+        if ($author) {
+            $qb->andWhere('o.Author = :author')->setParameter('author', $author);
+        }
+        if (!$viewer) {
+            $qb->andWhere(
+                $qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+            );
+        } elseif (!$viewer->isSuperAdmin()) {
+            $qb->setParameter('viewer', $viewer);
+            // The call of the function below filters the contributions according to the visibility
+            // of the project containing it, as well as the privileges of the connected user.
+            $this->getContributionsViewerCanSee($qb, $viewer);
+        }
 
         if (OpinionOrderField::PUBLISHED_AT === $field) {
             $qb->addOrderBy('o.createdAt', $direction);

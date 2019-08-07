@@ -98,12 +98,8 @@ trait QuestionnaireStepsTrait
     public function iFillTheQuestionnaireFormWithWrongValues()
     {
         $this->scrollToElement('CreateReplyForm-responses[0]');
-        $this->checkOption(
-            'CreateReplyForm-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
-        );
-        $this->checkOption(
-            'CreateReplyForm-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy'
-        );
+        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
+        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice2');
     }
 
     /**
@@ -127,9 +123,7 @@ trait QuestionnaireStepsTrait
             'UpdateReplyForm-UmVwbHk6cmVwbHk1-responses[0]',
             'This biscuit bless your soul'
         );
-        $this->checkOption(
-            'UpdateReplyForm-UmVwbHk6cmVwbHk1-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz'
-        );
+        $this->checkOption('UpdateReplyForm-UmVwbHk6cmVwbHk1-responses[1]_choice-questionchoice3');
     }
 
     /**
@@ -141,12 +135,8 @@ trait QuestionnaireStepsTrait
             'CreateReplyForm-responses[0]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
-        $this->checkOption(
-            'CreateReplyForm-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
-        );
-        $this->checkOption(
-            'CreateReplyForm-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz'
-        );
+        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
+        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice3');
     }
 
     /**
@@ -436,15 +426,9 @@ trait QuestionnaireStepsTrait
                 'CreateReplyForm-responses[0]',
                 'Je pense que c\'est la ville parfaite pour organiser les JO'
             );
-            $this->checkOption(
-                'CreateReplyForm-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
-            );
-            $this->checkOption(
-                'CreateReplyForm-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy'
-            );
-            $this->checkOption(
-                'CreateReplyForm-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz'
-            );
+            $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
+            $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice2');
+            $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice3');
 
             return;
         }
@@ -463,15 +447,9 @@ trait QuestionnaireStepsTrait
         );
         $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
         $this->fillField('CreateReplyForm-responses[0]', '99876');
-        $this->checkOption(
-            'CreateReplyForm-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
-        );
-        $this->checkOption(
-            'CreateReplyForm-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy'
-        );
-        $this->checkOption(
-            'CreateReplyForm-responses[1]_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz'
-        );
+        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
+        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice2');
+        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice3');
     }
 
     protected function fillUpdateQuestionnaireForm()

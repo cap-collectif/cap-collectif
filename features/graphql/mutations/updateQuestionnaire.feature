@@ -199,21 +199,21 @@ Scenario: GraphQL admin wants to delete first question
                 {
                   "color": null,
                   "description": null,
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNQ==",
+                  "id": "questionchoice35",
                   "image": null,
                   "title": "premier choix"
                 },
                 {
                   "color": null,
                   "description": null,
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNg==",
+                  "id": "questionchoice36",
                   "image": null,
                   "title": "deuxième choix"
                 },
                 {
                   "color": null,
                   "description": null,
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNw==",
+                  "id": "questionchoice37",
                   "image": null,
                   "title": "troisième choix"
                 }
@@ -296,14 +296,14 @@ Scenario: GraphQL admin wants to delete first question choice
                 {
                   "color": null,
                   "description": null,
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNg==",
+                  "id": "questionchoice36",
                   "image": null,
                   "title": "deuxième choix"
                 },
                 {
                   "color": null,
                   "description": null,
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNw==",
+                  "id": "questionchoice37",
                   "image": null,
                   "title": "troisième choix"
                 }
@@ -337,11 +337,11 @@ Scenario: GraphQL admin wants to delete first question choice
               "type": "radio",
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNg==",
+                  "id": "questionchoice36",
                   "title": "deuxième choix"
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNw==",
+                  "id": "questionchoice37",
                   "title": "troisième choix"
                 }
               ]
@@ -393,14 +393,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXA=",
+                  "id": "questionchoiceHap",
                   "title": "Hap",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2Vs",
+                  "id": "questionchoiceNoel",
                   "title": "Noel",
                   "description": null,
                   "color": null,
@@ -425,7 +425,7 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
                       "id": "ljconditionFleuveHap",
                       "operator": "IS",
                       "question": "UXVlc3Rpb246MjQ=",
-                      "value": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXA="
+                      "value": "questionchoiceHap"
                     }
                   ],
                   "origin": "UXVlc3Rpb246NDU=",
@@ -438,7 +438,7 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
                       "id": "ljconditionNoel",
                       "operator": "IS",
                       "question": "UXVlc3Rpb246MjQ=",
-                      "value": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2Vs"
+                      "value": "questionchoiceNoel"
                     }
                   ],
                   "origin": "UXVlc3Rpb246NDU=",
@@ -452,28 +452,28 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY0xlR2FuZ2U=",
+                  "id": "questionchoicLeGange",
                   "title": "Le gange",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VMZU5pbA==",
+                  "id": "questionchoiceLeNil",
                   "title": "Le nil",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VMYVNlaW5l",
+                  "id": "questionchoiceLaSeine",
                   "title": "La seine",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VBbWF6b25l",
+                  "id": "questionchoiceAmazone",
                   "title": "L'Amazone",
                   "description": null,
                   "color": null,
@@ -498,14 +498,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBHYW5nZU91aQ==",
+                  "id": "questionchoiceHapGangeOui",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBHYW5nZU5vbg==",
+                  "id": "questionchoiceHapGangeNon",
                   "title": "Non",
                   "description": null,
                   "color": null,
@@ -530,21 +530,21 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VKdmM=",
+                  "id": "questionchoiceJvc",
                   "title": "JVC",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VUZXNsYQ==",
+                  "id": "questionchoiceTesla",
                   "title": "Tesla",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VDaXNsYQ==",
+                  "id": "questionchoiceCisla",
                   "title": "Cisla",
                   "description": null,
                   "color": null,
@@ -569,7 +569,7 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
                       "id": "ljconditionHapGood",
                       "operator": "IS",
                       "question": "UXVlc3Rpb246MjY=",
-                      "value": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBCb25Ob24="
+                      "value": "questionchoiceHapBonNon"
                     }
                   ],
                   "origin": "UXVlc3Rpb246MjY=",
@@ -583,14 +583,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBCb25PdWk=",
+                  "id": "questionchoiceHapBonOui",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBCb25Ob24=",
+                  "id": "questionchoiceHapBonNon",
                   "title": "Non",
                   "description": null,
                   "color": null,
@@ -615,14 +615,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBOb3RHb29kSG93RGFyZVlvdU9r",
+                  "id": "questionchoiceHapNotGoodHowDareYouOk",
                   "title": "Oki",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBOb3RHb29kSG93RGFyZVlvdUdw",
+                  "id": "questionchoiceHapNotGoodHowDareYouGp",
                   "title": "mdr g pas lu",
                   "description": null,
                   "color": null,
@@ -647,14 +647,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2VsT3Vp",
+                  "id": "questionchoiceNoelOui",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2VsTm9uQmFrYQ==",
+                  "id": "questionchoiceNoelNonBaka",
                   "title": "Non baka",
                   "description": null,
                   "color": null,
@@ -679,21 +679,21 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2VsUmVkSGF0",
+                  "id": "questionchoiceNoelRedHat",
                   "title": "Rouge",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2VsR3JlZW5IYXQ=",
+                  "id": "questionchoiceNoelGreenHat",
                   "title": "Vert",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2VsQmx1ZUhhdA==",
+                  "id": "questionchoiceNoelBlueHat",
                   "title": "Bleu",
                   "description": null,
                   "color": null,
@@ -718,7 +718,7 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
                       "id": "ljconditionMarvel",
                       "operator": "IS",
                       "question": "UXVlc3Rpb246MzE=",
-                      "value": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxPckRjTWFydmVs"
+                      "value": "questionchoiceMarvelOrDcMarvel"
                     }
                   ],
                   "origin": "UXVlc3Rpb246MzE=",
@@ -731,7 +731,7 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
                       "id": "ljconditionDc",
                       "operator": "IS",
                       "question": "UXVlc3Rpb246MzE=",
-                      "value": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxPckRjRGM="
+                      "value": "questionchoiceMarvelOrDcDc"
                     }
                   ],
                   "origin": "UXVlc3Rpb246MzE=",
@@ -745,14 +745,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxPckRjTWFydmVs",
+                  "id": "questionchoiceMarvelOrDcMarvel",
                   "title": "Marvel",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxPckRjRGM=",
+                  "id": "questionchoiceMarvelOrDcDc",
                   "title": "DC",
                   "description": null,
                   "color": null,
@@ -777,14 +777,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY1N1cGVybWFuWWVz",
+                  "id": "questionchoiceDcSupermanYes",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY1N1cGVybWFuTm8=",
+                  "id": "questionchoiceDcSupermanNo",
                   "title": "Non",
                   "description": null,
                   "color": null,
@@ -809,14 +809,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY0JhdG1hblllcw==",
+                  "id": "questionchoiceDcBatmanYes",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY0JhdG1hblllczI=",
+                  "id": "questionchoiceDcBatmanYes2",
                   "title": "Oui",
                   "description": null,
                   "color": null,
@@ -841,14 +841,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY1N1cGVyZ2lybFllcw==",
+                  "id": "questionchoiceDcSupergirlYes",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY1N1cGVyZ2lybE5v",
+                  "id": "questionchoiceDcSupergirlNo",
                   "title": "Non",
                   "description": null,
                   "color": null,
@@ -873,14 +873,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxJcm9uTWFuWWVz",
+                  "id": "questionchoiceMarvelIronManYes",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxJcm9uTWFuTm8=",
+                  "id": "questionchoiceMarvelIronManNo",
                   "title": "Non",
                   "description": null,
                   "color": null,
@@ -905,21 +905,21 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxMdWtlQ2FnZVllcw==",
+                  "id": "questionchoiceMarvelLukeCageYes",
                   "title": "Oui c un bo chauve ténébreux",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxMdWtlQ2FnZVllczI=",
+                  "id": "questionchoiceMarvelLukeCageYes2",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxMdWtlQ2FnZVllczM=",
+                  "id": "questionchoiceMarvelLukeCageYes3",
                   "title": "OUI",
                   "description": null,
                   "color": null,
@@ -944,14 +944,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxUaG9yWWVz",
+                  "id": "questionchoiceMarvelThorYes",
                   "title": "ui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxUaG9yTm8=",
+                  "id": "questionchoiceMarvelThorNo",
                   "title": "nn",
                   "description": null,
                   "color": null,
@@ -976,14 +976,14 @@ Scenario: GraphQL admin wants to delete a logic jump of a question in a question
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VFbmRDb25kaXRpb25Paw==",
+                  "id": "questionchoiceEndConditionOk",
                   "title": "Oki",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VFbmRDb25kaXRpb25PazI=",
+                  "id": "questionchoiceEndConditionOk2",
                   "title": "Doki",
                   "description": null,
                   "color": null,
@@ -1153,14 +1153,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXA=",
+                  "id": "questionchoiceHap",
                   "title": "Hap",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2Vs",
+                  "id": "questionchoiceNoel",
                   "title": "Noel",
                   "description": null,
                   "color": null,
@@ -1185,7 +1185,7 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
                       "id": "ljconditionFleuveGange",
                       "operator": "IS",
                       "question": "UXVlc3Rpb246NDU=",
-                      "value": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY0xlR2FuZ2U="
+                      "value": "questionchoicLeGange"
                     }
                   ],
                   "origin": "UXVlc3Rpb246NDU=",
@@ -1198,7 +1198,7 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
                       "id": "ljconditionFleuveHap",
                       "operator": "IS",
                       "question": "UXVlc3Rpb246MjQ=",
-                      "value": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXA="
+                      "value": "questionchoiceHap"
                     }
                   ],
                   "origin": "UXVlc3Rpb246NDU=",
@@ -1211,7 +1211,7 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
                       "id": "ljconditionNoel",
                       "operator": "IS",
                       "question": "UXVlc3Rpb246MjQ=",
-                      "value": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2Vs"
+                      "value": "questionchoiceNoel"
                     }
                   ],
                   "origin": "UXVlc3Rpb246NDU=",
@@ -1225,28 +1225,28 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY0xlR2FuZ2U=",
+                  "id": "questionchoicLeGange",
                   "title": "Le gange",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VMZU5pbA==",
+                  "id": "questionchoiceLeNil",
                   "title": "Le nil",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VMYVNlaW5l",
+                  "id": "questionchoiceLaSeine",
                   "title": "La seine",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VBbWF6b25l",
+                  "id": "questionchoiceAmazone",
                   "title": "L'Amazone",
                   "description": null,
                   "color": null,
@@ -1271,14 +1271,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBHYW5nZU91aQ==",
+                  "id": "questionchoiceHapGangeOui",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBHYW5nZU5vbg==",
+                  "id": "questionchoiceHapGangeNon",
                   "title": "Non",
                   "description": null,
                   "color": null,
@@ -1303,21 +1303,21 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VKdmM=",
+                  "id": "questionchoiceJvc",
                   "title": "JVC",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VUZXNsYQ==",
+                  "id": "questionchoiceTesla",
                   "title": "Tesla",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VDaXNsYQ==",
+                  "id": "questionchoiceCisla",
                   "title": "Cisla",
                   "description": null,
                   "color": null,
@@ -1342,7 +1342,7 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
                       "id": "ljconditionHapGood",
                       "operator": "IS",
                       "question": "UXVlc3Rpb246MjY=",
-                      "value": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBCb25Ob24="
+                      "value": "questionchoiceHapBonNon"
                     }
                   ],
                   "origin": "UXVlc3Rpb246MjY=",
@@ -1356,14 +1356,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBCb25PdWk=",
+                  "id": "questionchoiceHapBonOui",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBCb25Ob24=",
+                  "id": "questionchoiceHapBonNon",
                   "title": "Non",
                   "description": null,
                   "color": null,
@@ -1388,14 +1388,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBOb3RHb29kSG93RGFyZVlvdU9r",
+                  "id": "questionchoiceHapNotGoodHowDareYouOk",
                   "title": "Oki",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VIYXBOb3RHb29kSG93RGFyZVlvdUdw",
+                  "id": "questionchoiceHapNotGoodHowDareYouGp",
                   "title": "mdr g pas lu",
                   "description": null,
                   "color": null,
@@ -1420,14 +1420,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2VsT3Vp",
+                  "id": "questionchoiceNoelOui",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2VsTm9uQmFrYQ==",
+                  "id": "questionchoiceNoelNonBaka",
                   "title": "Non baka",
                   "description": null,
                   "color": null,
@@ -1452,21 +1452,21 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2VsUmVkSGF0",
+                  "id": "questionchoiceNoelRedHat",
                   "title": "Rouge",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2VsR3JlZW5IYXQ=",
+                  "id": "questionchoiceNoelGreenHat",
                   "title": "Vert",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VOb2VsQmx1ZUhhdA==",
+                  "id": "questionchoiceNoelBlueHat",
                   "title": "Bleu",
                   "description": null,
                   "color": null,
@@ -1491,7 +1491,7 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
                       "id": "ljconditionMarvel",
                       "operator": "IS",
                       "question": "UXVlc3Rpb246MzE=",
-                      "value": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxPckRjTWFydmVs"
+                      "value": "questionchoiceMarvelOrDcMarvel"
                     }
                   ],
                   "origin": "UXVlc3Rpb246MzE=",
@@ -1504,7 +1504,7 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
                       "id": "ljconditionDc",
                       "operator": "IS",
                       "question": "UXVlc3Rpb246MzE=",
-                      "value": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxPckRjRGM="
+                      "value": "questionchoiceMarvelOrDcDc"
                     }
                   ],
                   "origin": "UXVlc3Rpb246MzE=",
@@ -1518,14 +1518,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxPckRjTWFydmVs",
+                  "id": "questionchoiceMarvelOrDcMarvel",
                   "title": "Marvel",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxPckRjRGM=",
+                  "id": "questionchoiceMarvelOrDcDc",
                   "title": "DC",
                   "description": null,
                   "color": null,
@@ -1550,14 +1550,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY1N1cGVybWFuWWVz",
+                  "id": "questionchoiceDcSupermanYes",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY1N1cGVybWFuTm8=",
+                  "id": "questionchoiceDcSupermanNo",
                   "title": "Non",
                   "description": null,
                   "color": null,
@@ -1582,14 +1582,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY0JhdG1hblllcw==",
+                  "id": "questionchoiceDcBatmanYes",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "questionchoiceUXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY0JhdG1hblllczI=DcBatmanYes2",
+                  "id": "questionchoiceDcBatmanYes2",
                   "title": "Oui",
                   "description": null,
                   "color": null,
@@ -1614,14 +1614,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY1N1cGVyZ2lybFllcw==",
+                  "id": "questionchoiceDcSupergirlYes",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VEY1N1cGVyZ2lybE5v",
+                  "id": "questionchoiceDcSupergirlNo",
                   "title": "Non",
                   "description": null,
                   "color": null,
@@ -1646,14 +1646,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxJcm9uTWFuWWVz",
+                  "id": "questionchoiceMarvelIronManYes",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxJcm9uTWFuTm8=",
+                  "id": "questionchoiceMarvelIronManNo",
                   "title": "Non",
                   "description": null,
                   "color": null,
@@ -1678,21 +1678,21 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxMdWtlQ2FnZVllcw==",
+                  "id": "questionchoiceMarvelLukeCageYes",
                   "title": "Oui c un bo chauve ténébreux",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxMdWtlQ2FnZVllczI=",
+                  "id": "questionchoiceMarvelLukeCageYes2",
                   "title": "Oui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxMdWtlQ2FnZVllczM=",
+                  "id": "questionchoiceMarvelLukeCageYes3",
                   "title": "OUI",
                   "description": null,
                   "color": null,
@@ -1717,14 +1717,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxUaG9yWWVz",
+                  "id": "questionchoiceMarvelThorYes",
                   "title": "ui",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VNYXJ2ZWxUaG9yTm8=",
+                  "id": "questionchoiceMarvelThorNo",
                   "title": "nn",
                   "description": null,
                   "color": null,
@@ -1749,14 +1749,14 @@ Scenario: GraphQL admin wants to delete a condition in a logic jump of a questio
               "validationRule": null,
               "choices": [
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VFbmRDb25kaXRpb25Paw==",
+                  "id": "questionchoiceEndConditionOk",
                   "title": "Oki",
                   "description": null,
                   "color": null,
                   "image": null
                 },
                 {
-                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2VFbmRDb25kaXRpb25PazI=",
+                  "id": "questionchoiceEndConditionOk2",
                   "title": "Doki",
                   "description": null,
                   "color": null,
