@@ -28,7 +28,7 @@ Section:
         description: 'The description of the section.'
       contributionsCount:
         type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionsCountResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionsCountResolver", [value, getUser()])'
       contributionConnection:
         type: 'ContributionConnection!'
         argsBuilder: 'Relay::Connection'

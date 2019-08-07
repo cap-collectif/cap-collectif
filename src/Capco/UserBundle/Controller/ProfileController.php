@@ -16,6 +16,11 @@ use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
+<<<<<<< HEAD
+=======
+use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Capco\AppBundle\Repository\UserArchiveRepository;
+>>>>>>> [8382-HIDE] Add viewer notion to profile project.
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
@@ -194,6 +199,22 @@ class ProfileController extends Controller
         if (!$user) {
             throw $this->createNotFoundException();
         }
+
+        $serializer = $this->get('serializer');
+
+        $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
+
+        $projectsProps = $serializer->serialize(['projects' => $projectsRaw], 'json', [
+            'groups' => ['Projects', 'UserDetails', 'Steps', 'ThemeDetails', 'ProjectType']
+        ]);
+        $projectsCount = \count($projectsRaw);
+
+        $opinionTypesWithUserOpinions = $this->get(OpinionTypeRepository::class)->getByUser($user);
+        $opinionsCount = $this->get(OpinionRepository::class)->countByUser(
+            $user,
+            false,
+            $this->getUser()
+        );
 
         $versions = $this->get(OpinionVersionRepository::class)->getByUser($user);
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Opinion;
@@ -234,14 +235,39 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getByUser(User $user, $limit = 50, $offset = 0, bool $includeTrashed = false)
+    public function handleOpinionVisibility(QueryBuilder $qb, ?User $viewer): QueryBuilder
     {
+        if (!$viewer) {
+            $qb->andWhere(
+                $qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+            );
+        } elseif (!$viewer->isSuperAdmin()) {
+            $qb->setParameter('viewer', $viewer);
+            // The call of the function below filters the contributions according to the visibility
+            // of the project containing it, as well as the privileges of the connected user.
+            $qb = $this->getContributionsViewerCanSee($qb, $viewer);
+        }
+
+        return $qb;
+    }
+
+    public function getByUser(
+        User $user,
+        ?User $viewer,
+        $limit = 50,
+        $offset = 0,
+        bool $includeTrashed = false
+    ) {
         $qb = $this->getIsEnabledQueryBuilder()
             ->leftJoin('o.consultation', 'oc')
-            ->leftJoin('oc.step', 's')
+            ->leftJoin('oc.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'pro')
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
+            ->leftJoin('pro.authors', 'pr_au')
             ->andWhere('o.Author = :author')
             ->andWhere('o.published = true')
-            ->andWhere('s.isEnabled = true')
+            ->andWhere('step.isEnabled = true')
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->setParameter('author', $user);
@@ -249,24 +275,31 @@ class OpinionRepository extends EntityRepository
         if (!$includeTrashed) {
             $qb->andWhere('o.trashedAt IS NULL');
         }
+        $qb = $this->handleOpinionVisibility($qb, $viewer);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function countByUser(User $user, bool $includeTrashed = false): int
+    public function countByUser(User $user, bool $includeTrashed = false, ?User $viewer = null): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o.id)')
             ->leftJoin('o.consultation', 'oc')
-            ->leftJoin('oc.step', 's')
+            ->leftJoin('oc.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'pro')
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
+            ->leftJoin('pro.authors', 'pr_au')
             ->andWhere('o.Author = :author')
             ->andWhere('o.published = true')
-            ->andWhere('s.isEnabled = true')
+            ->andWhere('step.isEnabled = true')
             ->setParameter('author', $user);
 
         if (!$includeTrashed) {
             $qb->andWhere('o.trashedAt IS NULL');
         }
+
+        $qb = $this->handleOpinionVisibility($qb, $viewer);
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -274,10 +307,17 @@ class OpinionRepository extends EntityRepository
     public function countByOpinionType(
         string $opinionTypeId,
         ?string $author = null,
-        bool $includeTrashed = false
+        bool $includeTrashed = false,
+        ?User $viewer = null
     ): int {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o)')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'pro')
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
+            ->leftJoin('pro.authors', 'pr_au')
             ->andWhere('o.OpinionType = :opinionTypeId')
             ->setParameter('opinionTypeId', $opinionTypeId);
 
@@ -288,6 +328,8 @@ class OpinionRepository extends EntityRepository
         if (!$includeTrashed) {
             $qb->andWhere('o.trashedAt IS NULL');
         }
+
+        $qb = $this->handleOpinionVisibility($qb, $viewer);
 
         return // ->useResultCache(true, 60)
             $qb
@@ -418,16 +460,8 @@ class OpinionRepository extends EntityRepository
         if ($author) {
             $qb->andWhere('o.Author = :author')->setParameter('author', $author);
         }
-        if (!$viewer) {
-            $qb->andWhere(
-                $qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
-            );
-        } elseif (!$viewer->isSuperAdmin()) {
-            $qb->setParameter('viewer', $viewer);
-            // The call of the function below filters the contributions according to the visibility
-            // of the project containing it, as well as the privileges of the connected user.
-            $this->getContributionsViewerCanSee($qb, $viewer);
-        }
+
+        $qb = $this->handleOpinionVisibility($qb, $viewer);
 
         if (OpinionOrderField::PUBLISHED_AT === $field) {
             $qb->addOrderBy('o.createdAt', $direction);

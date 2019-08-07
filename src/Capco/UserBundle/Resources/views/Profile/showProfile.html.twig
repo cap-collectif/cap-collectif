@@ -77,7 +77,7 @@
                 </li>
                 {% endif %}
 
-                {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true) %}
+                {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) %}
                 {% if opinionsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_opinions' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_opinions', {'slug': user.slug}) }}">

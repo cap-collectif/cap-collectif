@@ -198,7 +198,7 @@ InternalUser:
             description: 'Ordering options for followers returning from the connection'
       opinions:
         type: 'OpinionConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionsResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionsResolver", [value, getUser(), args])'
         description: 'Array of opinions by current user.'
         argsBuilder: 'Relay::Connection'
       contributionsCount:
