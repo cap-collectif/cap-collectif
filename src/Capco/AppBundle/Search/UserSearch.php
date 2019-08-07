@@ -58,7 +58,7 @@ class UserSearch extends Search
         $resultSet = $this->index->getType('user')->search($query);
 
         return [
-            'results' => $this->getHydratedResults($this->userRepo, $resultSet->getResults()),
+            'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
             'totalCount' => $resultSet->getTotalHits()
         ];
     }
@@ -94,7 +94,7 @@ class UserSearch extends Search
         $resultSet = $this->index->getType('user')->search($query);
 
         return [
-            'results' => $this->getHydratedResults($this->userRepo, $resultSet->getResults()),
+            'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
             'totalCount' => $resultSet->getTotalHits()
         ];
     }

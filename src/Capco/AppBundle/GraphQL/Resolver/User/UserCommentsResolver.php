@@ -38,7 +38,7 @@ class UserCommentsResolver implements ResolverInterface
 
         if ($aclDisabled) {
             $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
-                return $this->commentSearch->getCommentsByUser($user, $limit, $offset);
+                return $this->commentSearch->getCommentsByUser($user, $limit, $offset)['results'];
             });
 
             $totalCount = $this->commentSearch->countCommentsByUser($user);

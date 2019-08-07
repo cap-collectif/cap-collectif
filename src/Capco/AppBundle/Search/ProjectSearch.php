@@ -78,12 +78,7 @@ class ProjectSearch extends Search
             ->setSize($limit);
 
         $resultSet = $this->index->getType($this->type)->search($query);
-        $results = $this->getHydratedResults(
-            $this->projectRepo,
-            array_map(static function (Result $result) {
-                return $result->getData()['id'];
-            }, $resultSet->getResults())
-        );
+        $results = $this->getHydratedResultsFromResultSet($this->projectRepo, $resultSet);
 
         return [
             'projects' => $results,

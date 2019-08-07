@@ -162,11 +162,6 @@ InternalUser:
             type: 'Int'
             description: 'Returns the first n elements from the list.'
             defaultValue: 100
-      postCommentsCount:
-        type: 'Int!'
-      eventCommentsCount:
-        type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventCommentsCountResolver", [value])'
       consentExternalCommunication:
         type: 'Boolean!'
         description: 'Whether or not this user consent external communication.'
