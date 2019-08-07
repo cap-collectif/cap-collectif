@@ -16,6 +16,9 @@ describe('<Section />', () => {
       subtitle: 'subtitle',
       description: 'description',
       title: 'title',
+      opinions: {
+        totalCount: 2,
+      },
     },
     consultation: {
       $fragmentRefs,

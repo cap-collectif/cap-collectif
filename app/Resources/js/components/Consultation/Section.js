@@ -20,17 +20,29 @@ export class Section extends React.Component<Props> {
 
   render() {
     const { enablePagination, consultation, section, level } = this.props;
+    const {
+      opinions,
+      title,
+      subtitle,
+      slug,
+      description,
+      contributionsCount,
+      contribuable,
+    } = section;
+
+    if (opinions.totalCount === 0) {
+      return null;
+    }
+
     return (
-      <div id={`opinion-type--${section.slug}`} className="anchor-offset text-center">
+      <div id={`opinion-type--${slug}`} className="anchor-offset text-center">
         <div className={`opinion-type__title level--${level}`}>
-          {section.title}
+          {title}
           <br />
-          {section.subtitle && <span className="small excerpt">{section.subtitle}</span>}
+          {subtitle && <span className="small excerpt">{subtitle}</span>}
         </div>
-        {section.description && (
-          <WYSIWYGRender className="opinion-type__description" value={section.description} />
-        )}
-        {(section.contributionsCount > 0 || section.contribuable) && (
+        {description && <WYSIWYGRender className="opinion-type__description" value={description} />}
+        {(contributionsCount > 0 || contribuable) && (
           <div className="mt-15">
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionList
@@ -54,6 +66,9 @@ export default createFragmentContainer(Section, {
       description
       contribuable
       contributionsCount
+      opinions {
+        totalCount
+      }
       ...OpinionList_section
     }
   `,

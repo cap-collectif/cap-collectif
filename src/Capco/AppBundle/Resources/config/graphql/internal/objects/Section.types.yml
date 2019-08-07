@@ -87,4 +87,3 @@ Section:
             type: 'Boolean'
             description: 'Include trashed opinion or not'
             defaultValue: false
-

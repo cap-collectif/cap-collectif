@@ -38,6 +38,9 @@ exports[`<Section /> renders correcty 1`] = `
           "contribuable": true,
           "contributionsCount": 0,
           "description": "description",
+          "opinions": Object {
+            "totalCount": 2,
+          },
           "slug": "slug",
           "subtitle": "subtitle",
           "title": "title",
