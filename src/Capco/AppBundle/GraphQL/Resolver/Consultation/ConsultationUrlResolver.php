@@ -18,7 +18,7 @@ class ConsultationUrlResolver implements ResolverInterface
 
     public function __invoke(Consultation $consultation): string
     {
-        return $this->router->generate('app_project_show_consultation', [
+        return $this->router->generate('app_project_consultations_show_consultation', [
             'projectSlug' => $consultation->getStep()->getProject()->getSlug(),
             'stepSlug' => $consultation->getStep()->getSlug(),
             'consultationSlug' => $consultation->getSlug(),
