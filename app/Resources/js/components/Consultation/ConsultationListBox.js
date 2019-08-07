@@ -6,6 +6,7 @@ import { graphql, QueryRenderer, type ReadyState } from 'react-relay';
 import type { RelayGlobalId } from '../../types';
 import type { ConsultationListBoxQueryResponse } from '~relay/ConsultationListBoxQuery.graphql';
 import ConsultationListView from './ConsultationListView';
+import ConsultationStepHeader from './ConsultationStepHeader';
 
 type Props = {|
   +id: RelayGlobalId
@@ -17,6 +18,7 @@ const CONSULTATION_STEP_QUERY = graphql`
     ) {
         step: node(id: $consultationStepId) {
             ... on ConsultationStep {
+                ...ConsultationStepHeader_step
                 consultations {
                     ...ConsultationListView_consultations
                 }
@@ -32,10 +34,14 @@ const ConsultationStep = ({ error, props }: { ...ReadyState, props: ?Consultatio
   }
   if (props) {
     if (props.step && props.step.consultations) {
-      const { step: { consultations } } = props;
+      const { step } = props;
       return (
-        // $FlowFixMe
-        <ConsultationListView consultations={consultations}/>
+        <React.Fragment>
+          {/* $FlowFixMe $refType */}
+          <ConsultationStepHeader step={step}/>
+          {/* $FlowFixMe $refType */}
+          <ConsultationListView consultations={step.consultations}/>
+        </React.Fragment>
       );
     }
     return graphqlError;
@@ -46,16 +52,14 @@ const ConsultationStep = ({ error, props }: { ...ReadyState, props: ?Consultatio
 const ConsultationListBox = (props: Props) => {
   const { id: consultationStepId } = props;
   return (
-    <div className="row">
-      <QueryRenderer
-        environment={environment}
-        query={CONSULTATION_STEP_QUERY}
-        render={ConsultationStep}
-        variables={{
-          consultationStepId
-        }}
-      />
-    </div>
+    <QueryRenderer
+      environment={environment}
+      query={CONSULTATION_STEP_QUERY}
+      render={ConsultationStep}
+      variables={{
+        consultationStepId,
+      }}
+    />
   );
 };
 
