@@ -264,10 +264,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
         return $this->consultations;
     }
 
-    /**
-     * @deprecated While we fully migrate the app to support multi consultation, we are using this to keep the same
-     * behaviour as before to deliver this feature step by step
-     */
     public function getFirstConsultation(): ?Consultation
     {
         return $this->consultations->first();

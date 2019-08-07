@@ -1491,7 +1491,11 @@ type Consultation implements Node {
   """The number of votes in the related step of this consultation."""
   votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-09-01 UTC.")
 
-  """List of sections."""
+  # Get the associated illustration of the consultation
+  illustration: Media
+  url: URI!
+
+  # List of sections.
   sections: [Section]
   viewerOpinionsUnpublished(
     """
@@ -1690,6 +1694,12 @@ type ConsultationStep implements Node & Step & RequirementStep {
     """Returns the last `n` elements from the list."""
     last: Int
   ): ConsultationConnection!
+
+  # Search a consultation in this step by it's slug
+  consultation(
+    # Returns the consultation that match the given slug
+    slug: String!
+  ): Consultation
   contributionConnection(
     """
     Returns the elements in the list that come after the specified cursor.

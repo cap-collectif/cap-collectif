@@ -15,6 +15,12 @@ InternalConsultation:
       contributors:
         type: 'InternalUserConnection!'
       # Should stay an array ?
+      illustration:
+        description: 'Get the associated illustration of the consultation'
+        type: 'InternalMedia'
+      url:
+        type: 'URI!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationUrlResolver", [value])'
       sections:
         type: '[Section]'
         description: 'List of sections.'

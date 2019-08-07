@@ -19,9 +19,9 @@ use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
 
 class StepController extends Controller
 {
@@ -360,6 +360,7 @@ class StepController extends Controller
     }
 
     /**
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/consultation/{consultationSlug}", name="app_project_show_consultation ")
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}", name="app_project_show")
      * @Route("/project/{projectSlug}/consultation/{stepSlug}", name="app_project_show_consultation")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={
@@ -372,9 +373,14 @@ class StepController extends Controller
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
      * })
+     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={
+     *    "mapping": {"stepSlug": "stepSlug", "projectSlug": "projectSlug", "consultationSlug": "consultationSlug"},
+     *    "repository_method"="findOneBySlugs",
+     *    "map_method_signature"=true
+     * })
      * @Template("CapcoAppBundle:Consultation:show.html.twig")
      */
-    public function showConsultationAction(Project $project, ConsultationStep $step)
+    public function showConsultationAction(Project $project, ConsultationStep $step, ?Consultation $consultation = null)
     {
         if (!$step->canDisplay($this->getUser())) {
             $error = $this->get('translator')->trans(
@@ -386,11 +392,23 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException($error);
         }
 
-        if ($step->getConsultations()->count() > 1) {
+        if (!$consultation && $step->getConsultations()->count() > 1) {
             return $this->redirectToRoute('app_project_show_consultations', [
                 'stepSlug' => $step->getSlug(),
                 'projectSlug' => $project->getSlug()
             ]);
+        }
+
+        // To keep the same old URI to handle consultion show and supporting the new URI for showing a consultation
+        // with a slug, we have to handle both case. If the step has only 1 consultation, we should keep the old behaviour
+        if ($step->getFirstConsultation()) {
+            $consultationSlug = $consultation ?
+                $consultation->getSlug() :
+                $step->getFirstConsultation()->getSlug();
+        } else {
+            $consultationSlug = $consultation ?
+                $consultation->getSlug() :
+                null;
         }
 
         return [
@@ -398,6 +416,7 @@ class StepController extends Controller
             'currentStep' => $step,
             'stepProps' => [
                 'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
+                'consultationSlug' => $consultationSlug
             ],
         ];
     }

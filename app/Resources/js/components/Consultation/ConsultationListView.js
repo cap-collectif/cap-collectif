@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { ConsultationListView_consultations } from '~relay/ConsultationListView_consultations.graphql';
-import ConsultationPreview from './ConsultationPreview';
+import ConsultationPreview from './Preview/ConsultationPreview';
 
 type RelayProps = {|
   +consultations: ConsultationListView_consultations

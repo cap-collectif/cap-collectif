@@ -33,11 +33,16 @@ export const ConsultationPropositionStep = (props: Props) => {
   return (
     <>
       {consultationPlanEnabled && (
-        <>
-          {step.consultations.edges && step.consultations.edges.length > 0 && (
+        <div
+          className={
+            showConsultationPlan
+              ? 'consultation-plan sticky col-md-3 col-sm-12'
+              : 'consultation-plan sticky'
+          }
+          id="consultation-plan">
+          {step.consultation && (
             <ConsultationPlan
-              className="sticky"
-              consultation={step.consultations.edges[0] && step.consultations.edges[0].node}
+              consultation={step.consultation}
             />
           )}
         </>
@@ -68,12 +73,9 @@ export const ConsultationPropositionStep = (props: Props) => {
           )}
         </div>
         <StepInfos step={step} />
-        {step.consultations.edges &&
-          step.consultations.edges[0] &&
-          step.consultations.edges[0].node && (
+        {step.consultation && (
             <SectionRecursiveList
-              consultation={step.consultations.edges[0].node}
-              hideEmptySection={false}
+              consultation={step.consultation}
             />
           )}
       </div>
@@ -83,7 +85,7 @@ export const ConsultationPropositionStep = (props: Props) => {
 
 export default createFragmentContainer(ConsultationPropositionStep, {
   consultationStep: graphql`
-    fragment ConsultationPropositionStep_consultationStep on ConsultationStep {
+    fragment ConsultationPropositionStep_consultationStep on ConsultationStep @argumentDefinitions(consultationSlug: { type: "String!" }) {
       ...StepInfos_step
       id
       timeRange {
@@ -93,20 +95,9 @@ export default createFragmentContainer(ConsultationPropositionStep, {
       title
       status
       timeless
-      consultations(first: 1) {
-        edges {
-          node {
-            id
-            sections {
-              id
-              sections {
-                id
-              }
-            }
-            ...ConsultationPlan_consultation
-            ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
-          }
-        }
+      consultation(slug: $consultationSlug) {
+        ...ConsultationPlan_consultation
+        ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
       }
     }
   `,

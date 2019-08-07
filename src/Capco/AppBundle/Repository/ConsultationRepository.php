@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use function Doctrine\ORM\QueryBuilder;
 
 /**
  * ConsultationRepository. *.
@@ -17,11 +18,36 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ConsultationRepository extends EntityRepository
 {
+    public function findOneBySlugs(string $stepSlug,
+                                   string $projectSlug,
+                                   ?string $consultationSlug = null): ?Consultation
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        return $qb
+            ->leftJoin('c.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->andWhere(
+                $qb->expr()->eq('c.slug', ':consultationSlug')
+            )
+            ->andWhere(
+                $qb->expr()->eq('p.slug', ':projectSlug')
+            )
+            ->andWhere(
+                $qb->expr()->eq('s.slug', ':stepSlug')
+            )
+            ->setParameters(compact('stepSlug', 'projectSlug', 'consultationSlug'))
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function getByConsultationStepPaginated(
         ConsultationStep $cs,
         int $offset = 0,
         int $limit = 100
-    ): Paginator {
+    ): Paginator
+    {
         $qb = $this->createQueryBuilder('c');
 
         $query = $qb
