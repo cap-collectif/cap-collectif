@@ -6,31 +6,42 @@ import GoogleLoginButton from './GoogleLoginButton';
 import { features } from '../../../redux/modules/default';
 
 describe('<GoogleLoginButton />', () => {
-  const props = {
+  const defaultProps = {
     features: { ...features },
-  };
-  const propsWithFeatureGoogleLoginActivated = {
-    features: { ...features, login_gplus: true },
-  };
-  const propsWithFeatureGoogleLoginActivatedAndRegistrationPrefix = {
-    features: { ...features, login_gplus: true },
-    prefix: 'registration.',
   };
 
   it('renders nothing if login_gplus is not activate', () => {
-    const wrapper = shallow(<GoogleLoginButton {...props} />);
+    const wrapper = shallow(<GoogleLoginButton {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a button if feature is active', () => {
-    const wrapper = shallow(<GoogleLoginButton {...propsWithFeatureGoogleLoginActivated} />);
+    const props = {
+      features: { ...features, login_gplus: true },
+    };
+
+    const wrapper = shallow(<GoogleLoginButton {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders without prefix', () => {
+    const props = {
+      ...defaultProps,
+      features: { ...features, login_gplus: true },
+      prefix: '',
+    };
+
+    const wrapper = shallow(<GoogleLoginButton {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a button with correct registration label', () => {
-    const wrapper = shallow(
-      <GoogleLoginButton {...propsWithFeatureGoogleLoginActivatedAndRegistrationPrefix} />,
-    );
+    const props = {
+      features: { ...features, login_gplus: true },
+      prefix: 'registration.',
+    };
+
+    const wrapper = shallow(<GoogleLoginButton {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

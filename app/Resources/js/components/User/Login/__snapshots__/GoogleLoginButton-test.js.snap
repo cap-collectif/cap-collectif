@@ -37,3 +37,21 @@ exports[`<GoogleLoginButton /> renders a button with correct registration label 
 `;
 
 exports[`<GoogleLoginButton /> renders nothing if login_gplus is not activate 1`] = `""`;
+
+exports[`<GoogleLoginButton /> renders without prefix 1`] = `
+<a
+  className="btn login__social-btn login__social-btn--googleplus"
+  href="/login/google?_destination=http://localhost/"
+  title={
+    <FormattedMessage
+      id="Google"
+      values={Object {}}
+    />
+  }
+>
+  <FormattedMessage
+    id="Google"
+    values={Object {}}
+  />
+</a>
+`;

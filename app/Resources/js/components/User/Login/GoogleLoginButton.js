@@ -17,14 +17,14 @@ export class GoogleLoginButton extends React.Component<Props> {
   };
 
   getTitleTraduction = (): string => {
-    const {prefix} = this.props;
+    const { prefix } = this.props;
 
-    if(prefix === "") {
-      return "Google";
+    if (prefix === '') {
+      return 'Google';
     }
 
-    return `${prefix || 'login.'}google`
-  }
+    return `${prefix || 'login.'}google`;
+  };
 
   render() {
     const { features } = this.props;

@@ -12,16 +12,15 @@ type Props = {|
 export class SamlLoginButton extends React.Component<Props> {
   static displayName = 'SamlLoginButton';
 
-
   getTitleTraduction = (): string => {
-    const {prefix} = this.props;
+    const { prefix } = this.props;
 
-    if(prefix === "") {
-      return "SAML";
+    if (prefix === '') {
+      return 'SAML';
     }
 
-    return `${prefix || 'login.'}saml`
-  }
+    return `${prefix || 'login.'}saml`;
+  };
 
   render() {
     const { features } = this.props;

@@ -17,22 +17,21 @@ class FacebookLoginButton extends React.Component<Props> {
   };
 
   getTitleTraduction = (): string => {
-    const {prefix} = this.props;
+    const { prefix } = this.props;
 
-    if(prefix === "") {
-      return "Facebook";
+    if (prefix === '') {
+      return 'Facebook';
     }
 
-    return `${prefix || 'login.'}Facebook`
-  }
+    return `${prefix || 'login.'}Facebook`;
+  };
 
   render() {
     const { features } = this.props;
     if (!features.login_facebook) {
       return null;
     }
-    
-  
+
     const title = <FormattedMessage id={this.getTitleTraduction()} />;
     return (
       <a

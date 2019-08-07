@@ -6,13 +6,13 @@ exports[`<FacebookLoginButton /> renders a button if feature is active 1`] = `
   href="/login/facebook?_destination=http://localhost/"
   title={
     <FormattedMessage
-      id="login.facebook"
+      id="login.Facebook"
       values={Object {}}
     />
   }
 >
   <FormattedMessage
-    id="login.facebook"
+    id="login.Facebook"
     values={Object {}}
   />
 </a>
@@ -24,16 +24,34 @@ exports[`<FacebookLoginButton /> renders a button with correct registration labe
   href="/login/facebook?_destination=http://localhost/"
   title={
     <FormattedMessage
-      id="registration.facebook"
+      id="registration.Facebook"
       values={Object {}}
     />
   }
 >
   <FormattedMessage
-    id="registration.facebook"
+    id="registration.Facebook"
     values={Object {}}
   />
 </a>
 `;
 
 exports[`<FacebookLoginButton /> renders nothing if login_facebook is not activated 1`] = `""`;
+
+exports[`<FacebookLoginButton /> renders with no prefix 1`] = `
+<a
+  className="btn login__social-btn login__social-btn--facebook"
+  href="/login/facebook?_destination=http://localhost/"
+  title={
+    <FormattedMessage
+      id="Facebook"
+      values={Object {}}
+    />
+  }
+>
+  <FormattedMessage
+    id="Facebook"
+    values={Object {}}
+  />
+</a>
+`;

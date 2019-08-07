@@ -12,7 +12,7 @@ type Props = {|
   textTop: string,
   textBottom: string,
   byPassAuth: boolean,
-  prefix?: LabelPrefix
+  prefix?: LabelPrefix,
 |};
 
 export class LoginBox extends Component<Props> {
