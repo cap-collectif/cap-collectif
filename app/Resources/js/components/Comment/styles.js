@@ -2,22 +2,31 @@
 import styled from 'styled-components';
 import colors from '../../utils/colors';
 
-const getCommentBackground = ({ isAnswer, invertedBackground }) => {
-  if (isAnswer && invertedBackground) return colors.pageBgc;
-  if (isAnswer && !invertedBackground) return colors.white;
-  if (!isAnswer && invertedBackground) return colors.white;
-
-  return colors.pageBgc;
+const getCommentBackground = ({ invertedBackground }) => {
+  if (!invertedBackground) return colors.pageBgc;
+  if (invertedBackground) return colors.white;
 };
 
 export const CommentContainer = styled.div`
-  background-color: ${props => getCommentBackground(props)};
-  padding: 10px;
-  border-radius: 10px;
-  border: ${props => (props.isHighlighted ? `1px solid ${colors.primaryColor}` : undefined)};
+  display: flex;
+  flex-direction: row;
 
   & + & {
     margin-top: 10px;
+  }
+
+  .opinion {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .opinion__body {
+      width: 100%;
+      background-color: ${props => getCommentBackground(props)};
+      padding: 10px;
+      border-radius: 10px;
+      border: ${props => (props.isHighlighted ? `1px solid ${colors.primaryColor}` : undefined)};
+    }
   }
 `;
 

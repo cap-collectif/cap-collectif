@@ -6,20 +6,22 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
   invertedBackground={true}
   isAnswer={true}
 >
+  <div
+    className="Commentavatar"
+  >
+    <Connect(UserAvatarDeprecated)
+      user={
+        Object {
+          "displayName": "admin",
+          "media": null,
+          "vip": true,
+        }
+      }
+    />
+  </div>
   <Media
     className="opinion"
   >
-    <Left>
-      <Connect(UserAvatarDeprecated)
-        user={
-          Object {
-            "displayName": "admin",
-            "media": null,
-            "vip": true,
-          }
-        }
-      />
-    </Left>
     <Body
       className="opinion__body"
     >

@@ -6,6 +6,7 @@ exports[`<CommentForm /> should render correctly 1`] = `
   id="CommentForm"
   style={
     Object {
+      "marginTop": "10px",
       "padding": "5px",
     }
   }
@@ -139,6 +140,7 @@ exports[`<CommentForm /> should render correctly with user 1`] = `
   id="CommentForm"
   style={
     Object {
+      "marginTop": "10px",
       "padding": "5px",
     }
   }

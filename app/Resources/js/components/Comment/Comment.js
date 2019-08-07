@@ -48,11 +48,9 @@ export class Comment extends React.Component<Props, State> {
         as="li"
         invertedBackground={invertedBackground}
         isHighlighted={isHighlighted}>
+        {/* $FlowFixMe Will be a fragment soon */}
+        <UserAvatarDeprecated user={comment.author} />
         <Media className="opinion">
-          <Media.Left>
-            {/* $FlowFixMe Will be a fragment soon */}
-            <UserAvatarDeprecated user={comment.author} />
-          </Media.Left>
           <Media.Body className="opinion__body" id={`comment_${comment.id}`}>
             <div className="opinion__data">
               {/* $FlowFixMe $refType */}
@@ -75,12 +73,12 @@ export class Comment extends React.Component<Props, State> {
                 <CommentEdit comment={comment} />{' '}
               </div>
             )}
-            <div>
-              {/* $FlowFixMe $refType */}
-              <CommentAnswers invertedBackground={invertedBackground} comment={comment} />
-              {answerFormShown ? <CommentForm commentable={comment} answerOf={comment.id} /> : null}
-            </div>
           </Media.Body>
+          <div className="CommentAnswer">
+            {/* $FlowFixMe $refType */}
+            <CommentAnswers invertedBackground={invertedBackground} comment={comment} />
+            {answerFormShown ? <CommentForm commentable={comment} answerOf={comment.id} /> : null}
+          </div>
         </Media>
       </CommentContainer>
     );

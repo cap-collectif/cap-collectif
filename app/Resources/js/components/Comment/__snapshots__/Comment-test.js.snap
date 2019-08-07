@@ -5,20 +5,18 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
   as="li"
   invertedBackground={true}
 >
+  <Connect(UserAvatarDeprecated)
+    user={
+      Object {
+        "displayName": "admin",
+        "media": null,
+        "vip": true,
+      }
+    }
+  />
   <Media
     className="opinion"
   >
-    <Left>
-      <Connect(UserAvatarDeprecated)
-        user={
-          Object {
-            "displayName": "admin",
-            "media": null,
-            "vip": true,
-          }
-        }
-      />
-    </Left>
     <Body
       className="opinion__body"
       id="comment_proposalComment1"
@@ -124,24 +122,26 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
         />
          
       </div>
-      <div>
-        <ForwardRef(Relay(CommentAnswers))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-          invertedBackground={true}
-        />
-      </div>
     </Body>
+    <div
+      className="CommentAnswer"
+    >
+      <ForwardRef(Relay(CommentAnswers))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+        invertedBackground={true}
+      />
+    </div>
   </Media>
 </styles__CommentContainer>
 `;
@@ -151,20 +151,18 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
   as="li"
   invertedBackground={true}
 >
+  <Connect(UserAvatarDeprecated)
+    user={
+      Object {
+        "displayName": "admin",
+        "media": null,
+        "vip": true,
+      }
+    }
+  />
   <Media
     className="opinion"
   >
-    <Left>
-      <Connect(UserAvatarDeprecated)
-        user={
-          Object {
-            "displayName": "admin",
-            "media": null,
-            "vip": true,
-          }
-        }
-      />
-    </Left>
     <Body
       className="opinion__body"
       id="comment_proposalComment1"
@@ -270,24 +268,26 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
         />
          
       </div>
-      <div>
-        <ForwardRef(Relay(CommentAnswers))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-          invertedBackground={true}
-        />
-      </div>
     </Body>
+    <div
+      className="CommentAnswer"
+    >
+      <ForwardRef(Relay(CommentAnswers))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+        invertedBackground={true}
+      />
+    </div>
   </Media>
 </styles__CommentContainer>
 `;
@@ -297,20 +297,18 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
   as="li"
   invertedBackground={true}
 >
+  <Connect(UserAvatarDeprecated)
+    user={
+      Object {
+        "displayName": "admin",
+        "media": null,
+        "vip": true,
+      }
+    }
+  />
   <Media
     className="opinion"
   >
-    <Left>
-      <Connect(UserAvatarDeprecated)
-        user={
-          Object {
-            "displayName": "admin",
-            "media": null,
-            "vip": true,
-          }
-        }
-      />
-    </Left>
     <Body
       className="opinion__body"
       id="comment_proposalComment1"
@@ -416,39 +414,41 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
         />
          
       </div>
-      <div>
-        <ForwardRef(Relay(CommentAnswers))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-          invertedBackground={true}
-        />
-        <ForwardRef(Relay(Connect(ReduxForm)))
-          answerOf="proposalComment1"
-          commentable={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-      </div>
     </Body>
+    <div
+      className="CommentAnswer"
+    >
+      <ForwardRef(Relay(CommentAnswers))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+        invertedBackground={true}
+      />
+      <ForwardRef(Relay(Connect(ReduxForm)))
+        answerOf="proposalComment1"
+        commentable={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+    </div>
   </Media>
 </styles__CommentContainer>
 `;
@@ -458,20 +458,18 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
   as="li"
   invertedBackground={true}
 >
+  <Connect(UserAvatarDeprecated)
+    user={
+      Object {
+        "displayName": "admin",
+        "media": null,
+        "vip": true,
+      }
+    }
+  />
   <Media
     className="opinion"
   >
-    <Left>
-      <Connect(UserAvatarDeprecated)
-        user={
-          Object {
-            "displayName": "admin",
-            "media": null,
-            "vip": true,
-          }
-        }
-      />
-    </Left>
     <Body
       className="opinion__body"
       id="comment_proposalComment1"
@@ -577,39 +575,41 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
         />
          
       </div>
-      <div>
-        <ForwardRef(Relay(CommentAnswers))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-          invertedBackground={true}
-        />
-        <ForwardRef(Relay(Connect(ReduxForm)))
-          answerOf="proposalComment1"
-          commentable={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-      </div>
     </Body>
+    <div
+      className="CommentAnswer"
+    >
+      <ForwardRef(Relay(CommentAnswers))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+        invertedBackground={true}
+      />
+      <ForwardRef(Relay(Connect(ReduxForm)))
+        answerOf="proposalComment1"
+        commentable={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+    </div>
   </Media>
 </styles__CommentContainer>
 `;
@@ -620,22 +620,20 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
   invertedBackground={true}
   isHighlighted={true}
 >
+  <Connect(UserAvatarDeprecated)
+    user={
+      Object {
+        "displayName": "jcVandam",
+        "media": Object {
+          "url": "http://perdu.com/image.jpg",
+        },
+        "vip": true,
+      }
+    }
+  />
   <Media
     className="opinion"
   >
-    <Left>
-      <Connect(UserAvatarDeprecated)
-        user={
-          Object {
-            "displayName": "jcVandam",
-            "media": Object {
-              "url": "http://perdu.com/image.jpg",
-            },
-            "vip": true,
-          }
-        }
-      />
-    </Left>
     <Body
       className="opinion__body"
       id="comment_comment1"
@@ -751,26 +749,28 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
         />
          
       </div>
-      <div>
-        <ForwardRef(Relay(CommentAnswers))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "jcVandam",
-                "media": Object {
-                  "url": "http://perdu.com/image.jpg",
-                },
-                "vip": true,
-              },
-              "id": "comment1",
-            }
-          }
-          invertedBackground={true}
-        />
-      </div>
     </Body>
+    <div
+      className="CommentAnswer"
+    >
+      <ForwardRef(Relay(CommentAnswers))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "jcVandam",
+              "media": Object {
+                "url": "http://perdu.com/image.jpg",
+              },
+              "vip": true,
+            },
+            "id": "comment1",
+          }
+        }
+        invertedBackground={true}
+      />
+    </div>
   </Media>
 </styles__CommentContainer>
 `;
@@ -781,20 +781,18 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
   invertedBackground={true}
   isHighlighted={false}
 >
+  <Connect(UserAvatarDeprecated)
+    user={
+      Object {
+        "displayName": "jcVandam",
+        "media": null,
+        "vip": true,
+      }
+    }
+  />
   <Media
     className="opinion"
   >
-    <Left>
-      <Connect(UserAvatarDeprecated)
-        user={
-          Object {
-            "displayName": "jcVandam",
-            "media": null,
-            "vip": true,
-          }
-        }
-      />
-    </Left>
     <Body
       className="opinion__body"
       id="comment_comment2"
@@ -900,39 +898,41 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
         />
          
       </div>
-      <div>
-        <ForwardRef(Relay(CommentAnswers))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "jcVandam",
-                "media": null,
-                "vip": true,
-              },
-              "id": "comment2",
-            }
-          }
-          invertedBackground={true}
-        />
-        <ForwardRef(Relay(Connect(ReduxForm)))
-          answerOf="comment2"
-          commentable={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "jcVandam",
-                "media": null,
-                "vip": true,
-              },
-              "id": "comment2",
-            }
-          }
-        />
-      </div>
     </Body>
+    <div
+      className="CommentAnswer"
+    >
+      <ForwardRef(Relay(CommentAnswers))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "jcVandam",
+              "media": null,
+              "vip": true,
+            },
+            "id": "comment2",
+          }
+        }
+        invertedBackground={true}
+      />
+      <ForwardRef(Relay(Connect(ReduxForm)))
+        answerOf="comment2"
+        commentable={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "jcVandam",
+              "media": null,
+              "vip": true,
+            },
+            "id": "comment2",
+          }
+        }
+      />
+    </div>
   </Media>
 </styles__CommentContainer>
 `;

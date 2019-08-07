@@ -27,11 +27,11 @@ export class CommentAnswer extends React.Component<Props> {
         invertedBackground={invertedBackground || (comment.author && comment.author.vip)}
         isHighlighted={isHighlighted}
         isAnswer>
+        <div className="Commentavatar">
+          {/* $FlowFixMe Will be a fragment soon */}
+          <UserAvatarDeprecated user={comment.author} />
+        </div>
         <Media className="opinion">
-          <Media.Left>
-            {/* $FlowFixMe Will be a fragment soon */}
-            <UserAvatarDeprecated user={comment.author} />
-          </Media.Left>
           <Media.Body className="opinion__body">
             <div className="opinion__data">
               {/* $FlowFixMe $refType */}
