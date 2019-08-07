@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use ArrayObject;
-use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Search\CommentSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -14,19 +13,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserCommentsResolver implements ResolverInterface
 {
-    private $commentRepository;
     private $commentSearch;
 
-    public function __construct(CommentRepository $commentRepository, CommentSearch $commentSearch)
+    public function __construct(CommentSearch $commentSearch)
     {
-        $this->commentRepository = $commentRepository;
         $this->commentSearch = $commentSearch;
     }
 
     public function __invoke(
         $viewer,
         User $user,
-        Argument $args,
+        Argument $args = null,
         ?ArrayObject $context = null
     ): Connection {
         if (!$args) {
@@ -41,10 +38,10 @@ class UserCommentsResolver implements ResolverInterface
 
         if ($aclDisabled) {
             $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
-                return $this->commentRepository->getByUser($user, $limit, $offset);
+                return $this->commentSearch->getCommentsByUser($user, $limit, $offset);
             });
 
-            $totalCount = $this->commentRepository->countAllByAuthor($user);
+            $totalCount = $this->commentSearch->countCommentsByUser($user);
         } elseif ($validViewer && $user) {
             $paginator = new Paginator(function (int $offset, int $limit) use ($viewer, $user) {
                 return $this->commentSearch->getCommentsByAuthorViewerCanSee(
@@ -55,7 +52,7 @@ class UserCommentsResolver implements ResolverInterface
                 )['results'];
             });
 
-            $totalCount = 73;
+            $totalCount = $this->commentSearch->countCommentsByAuthorViewerCanSee($user, $viewer);
         } else {
             $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
                 return $this->commentSearch->getPublicCommentsByAuthor(
@@ -65,7 +62,7 @@ class UserCommentsResolver implements ResolverInterface
                 )['results'];
             });
 
-            $totalCount = 50;
+            $totalCount = $this->commentSearch->countPublicCommentsByAuthor($user);
         }
 
         return $paginator->auto($args, $totalCount);

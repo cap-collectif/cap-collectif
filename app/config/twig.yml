@@ -26,5 +26,6 @@ twig:
     eventUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver'
     userSourcesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserSourcesResolver'
     userContributionsCountResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserContributionsCountResolver'
+    userCommentsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserCommentsResolver'
   paths:
     '%kernel.project_dir%/src/Capco/AppBundle/Mailer/templates': CapcoMail
