@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ProjectStepTabs } from './ProjectStepTabs';
+import { CLOSED_STEP_STATUS, OPEN_STEP_STATUS, ProjectStepTabs } from './ProjectStepTabs';
 import { intlMock } from '../../mocks';
 
 describe('<ProposalUserVoteItem />', () => {
@@ -13,21 +13,21 @@ describe('<ProposalUserVoteItem />', () => {
         id: 'cs1',
         type: 'presentation',
         label: 'presentation step',
-        status: 'open',
+        status: OPEN_STEP_STATUS,
         enabled: true,
       },
       {
         _links: { show: 'www.test.com' },
         id: 'cs2',
         label: 'open step',
-        status: 'open',
+        status: OPEN_STEP_STATUS,
         enabled: true,
       },
       {
         _links: { show: 'www.test.com' },
         id: 'cs3',
         label: 'timeless step',
-        status: 'open',
+        status: OPEN_STEP_STATUS,
         timeless: true,
         enabled: true,
       },
@@ -35,7 +35,7 @@ describe('<ProposalUserVoteItem />', () => {
         _links: { show: 'www.test.com' },
         id: 'cs4',
         label: 'last step',
-        status: 'closed',
+        status: CLOSED_STEP_STATUS,
         enabled: true,
       },
     ],
@@ -51,7 +51,7 @@ describe('<ProposalUserVoteItem />', () => {
         id: 'cs1',
         type: 'presentation',
         label: 'presentation step',
-        status: 'open',
+        status: OPEN_STEP_STATUS,
         enabled: true,
       },
     ],
