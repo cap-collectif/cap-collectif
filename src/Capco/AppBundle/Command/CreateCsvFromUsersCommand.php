@@ -71,7 +71,6 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'sources.totalCount' => 'sourcesCount',
         'replies.totalCount' => 'repliesCount',
         'comments.totalCount' => 'commentsCount',
-        'eventCommentsCount' => 'eventCommentsCount',
         'opinions.totalCount' => 'opinionsCount',
         'projects.totalCount' => 'projectsCount',
         'deletedAccountAt' => 'deletedAccountAt'
