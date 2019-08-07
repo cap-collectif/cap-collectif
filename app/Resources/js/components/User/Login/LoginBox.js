@@ -6,16 +6,18 @@ import LoginSocialButtons from './LoginSocialButtons';
 import LoginForm from './LoginForm';
 import type { State } from '../../../types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
+import type { LabelPrefix } from './LoginSocialButtons';
 
 type Props = {|
   textTop: string,
   textBottom: string,
   byPassAuth: boolean,
+  prefix?: LabelPrefix
 |};
 
 export class LoginBox extends Component<Props> {
   render() {
-    const { textTop, textBottom, byPassAuth } = this.props;
+    const { textTop, textBottom, byPassAuth, prefix } = this.props;
     return (
       <div>
         {textTop && (
@@ -23,7 +25,7 @@ export class LoginBox extends Component<Props> {
             <WYSIWYGRender value={textTop} />
           </Alert>
         )}
-        <LoginSocialButtons />
+        <LoginSocialButtons prefix={prefix} />
         {!byPassAuth && <LoginForm />}
         {textBottom && <WYSIWYGRender className="text-center excerpt mt-15" value={textBottom} />}
       </div>
