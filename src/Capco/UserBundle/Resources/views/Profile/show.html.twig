@@ -26,6 +26,7 @@
 
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
 
+    {% set projectsCount = userProjectsResolver.__invoke(user).totalCount %}
     {% if projectsCount > 0 %}
         <section class="section--custom">
             <div class="container">
@@ -37,6 +38,7 @@
         </section>
     {% endif %}
 
+    {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true) %}
     {% if opinionsCount > 0 %}
         <section class="section--custom">
             <div class="container">

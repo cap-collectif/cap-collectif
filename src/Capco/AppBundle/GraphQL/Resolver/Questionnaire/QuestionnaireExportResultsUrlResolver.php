@@ -33,7 +33,7 @@ class QuestionnaireExportResultsUrlResolver implements ResolverInterface
     {
         $step = $questionnaire->getStep();
         if (!$step) {
-            return '';
+            return $questionnaire->getSlug();
         }
 
         $fileName = '';

@@ -31,6 +31,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
 class ProjectController extends Controller
 {
@@ -133,7 +134,14 @@ class ProjectController extends Controller
             $questionnaire
         );
 
-        if (!file_exists($filePath)) {
+        try {
+            return $this->streamResponse(
+                $request,
+                $filePath,
+                'application/vnd.ms-excel',
+                $fileName
+            );
+        } catch (FileNotFoundException $exception) {
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
 
@@ -144,8 +152,6 @@ class ProjectController extends Controller
 
             return $this->redirect($request->headers->get('referer'));
         }
-
-        return $this->streamResponse($request, $filePath, 'application/vnd.ms-excel', $fileName);
     }
 
     /**
@@ -170,7 +176,12 @@ class ProjectController extends Controller
         $csvFile = $filename . '.csv';
         $xlsxFile = $filename . '.xlsx';
 
-        if (!file_exists($path . $csvFile) && !file_exists($path . $xlsxFile)) {
+        $filename = file_exists($path . $csvFile) ? $csvFile : $xlsxFile;
+        $contentType = file_exists($path . $csvFile) ? 'text/csv' : 'application/vnd.ms-excel';
+
+        try {
+            return $this->streamResponse($request, $path . $filename, $contentType, $filename);
+        } catch (FileNotFoundException $exception) {
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
 
@@ -181,11 +192,6 @@ class ProjectController extends Controller
 
             return $this->redirect($request->headers->get('referer'));
         }
-
-        $filename = file_exists($path . $csvFile) ? $csvFile : $xlsxFile;
-        $contentType = file_exists($path . $csvFile) ? 'text/csv' : 'application/vnd.ms-excel';
-
-        return $this->streamResponse($request, $path . $filename, $contentType, $filename);
     }
 
     /**
@@ -307,12 +313,15 @@ class ProjectController extends Controller
         return new RedirectResponse($projectUrlResolver->__invoke($project));
     }
 
+    /**
+     * @throws FileNotFoundException
+     */
     private function streamResponse(
         Request $request,
         string $filePath,
         string $contentType,
         string $fileName
-    ) {
+    ): BinaryFileResponse {
         $date = (new \DateTime())->format('Y-m-d');
 
         $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
