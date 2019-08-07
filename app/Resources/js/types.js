@@ -11,6 +11,7 @@ import type { State as DefaultState, DefaultAction } from './redux/modules/defau
 import type { State as EventState, EventAction } from './redux/modules/event';
 
 export type Exact<T> = T;
+export type RelayGlobalId = string;
 export type Uuid = string;
 export type Uri = string;
 export type Opinion = { id: Uuid };

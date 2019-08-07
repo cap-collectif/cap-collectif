@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Entity\Steps\OtherStep;
@@ -383,6 +384,55 @@ class StepController extends Controller
             );
 
             throw new ProjectAccessDeniedException($error);
+        }
+
+        if ($step->getConsultations()->count() > 1) {
+            return $this->redirectToRoute('app_project_show_consultations', [
+                'stepSlug' => $step->getSlug(),
+                'projectSlug' => $project->getSlug()
+            ]);
+        }
+
+        return [
+            'project' => $project,
+            'currentStep' => $step,
+            'stepProps' => [
+                'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
+            ],
+        ];
+    }
+
+    /**
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/consultations", name="app_project_show_consultations")
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={
+     *    "mapping": {"projectSlug": "slug"},
+     *    "repository_method"="getOneWithoutVisibility",
+     *    "map_method_signature" = true
+     * })
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
+     * @Template("CapcoAppBundle:Consultation:list.html.twig")
+     */
+    public function showConsultationsAction(Project $project, ConsultationStep $step)
+    {
+        if (!$step->canDisplay($this->getUser())) {
+            $error = $this->get('translator')->trans(
+                'project.error.not_found',
+                [],
+                'CapcoAppBundle'
+            );
+
+            throw new ProjectAccessDeniedException($error);
+        }
+
+        if ($step->getConsultations()->count() <= 1) {
+            return $this->redirectToRoute('app_project_show_consultation', [
+                'stepSlug' => $step->getSlug(),
+                'projectSlug' => $project->getSlug()
+            ]);
         }
 
         return [

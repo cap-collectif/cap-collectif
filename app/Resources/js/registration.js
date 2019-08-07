@@ -94,6 +94,7 @@ import HomePageEventsApp from './startup/HomePageEventsApp';
 import PresentationStepEventsApp from './startup/PresentationStepEventsApp';
 import ProfileUserCommentApp from './startup/ProfileUserCommentApp';
 import appStore from './stores/AppStore';
+import ConsultationListPageApp from './startup/ConsultationListPageApp';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -172,6 +173,7 @@ ReactOnRails.register({
   ProposalVoteBasketWidgetApp,
   AlertBoxApp,
   ConsultationPageApp,
+  ConsultationListPageApp,
   UserProposalsApp,
   ProposalsUserVotesPageApp,
   ShareButtonDropdownApp,
