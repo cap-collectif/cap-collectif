@@ -35,7 +35,8 @@ class SectionOpinionsResolver implements ResolverInterface
         $totalCount = $this->opinionRepo->countByOpinionType(
             $section->getId(),
             $userId,
-            $includeTrashed
+            $includeTrashed,
+            $viewer
         );
 
         $paginator = new Paginator(function (int $offset, int $limit) use (

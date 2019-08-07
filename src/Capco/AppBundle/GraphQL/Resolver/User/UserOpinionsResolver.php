@@ -22,7 +22,7 @@ class UserOpinionsResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(User $user, ?Argument $args = null): Connection
+    public function __invoke(User $user, ?User $viewer, ?Argument $args = null): Connection
     {
         if (!$args) {
             $args = new Argument([
@@ -30,9 +30,9 @@ class UserOpinionsResolver implements ResolverInterface
             ]);
         }
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($user, $viewer) {
             try {
-                $arguments = $this->opinionRepository->getByUser($user);
+                $arguments = $this->opinionRepository->getByUser($user, $viewer);
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
@@ -42,13 +42,16 @@ class UserOpinionsResolver implements ResolverInterface
             return $arguments;
         });
 
-        $totalCount = $this->getCountPublicPublished($user);
+        $totalCount = $this->getCountPublicPublished($user, false, $viewer);
 
         return $paginator->auto($args, $totalCount);
     }
 
-    public function getCountPublicPublished(User $user, bool $includeTrashed = false): int
-    {
-        return $this->opinionRepository->countByUser($user, $includeTrashed);
+    public function getCountPublicPublished(
+        User $user,
+        bool $includeTrashed = false,
+        ?User $viewer = null
+    ): int {
+        return $this->opinionRepository->countByUser($user, $includeTrashed, $viewer);
     }
 }
