@@ -12,9 +12,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
       id="login-form"
       onSubmit={[MockFunction]}
     >
-      <Connect(LoginBox)
-        prefix=""
-      />
+      <Connect(LoginBox) />
       <Button
         active={false}
         block={false}
@@ -51,9 +49,7 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
         values={Object {}}
       />
     </div>
-    <Connect(LoginBox)
-      prefix=""
-    />
+    <Connect(LoginBox) />
   </div>
 </div>
 `;

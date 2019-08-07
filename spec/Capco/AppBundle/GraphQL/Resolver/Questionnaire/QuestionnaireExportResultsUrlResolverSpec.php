@@ -23,9 +23,8 @@ class QuestionnaireExportResultsUrlResolverSpec extends ObjectBehavior
 
     public function it_resolve_fileName_when_no_step(Questionnaire $questionnaire)
     {
-        $questionnaire->getSlug()->willReturn('my-slug');
         $questionnaire->getStep()->willReturn(null);
-        $this->getFileName($questionnaire)->shouldReturn('my-slug');
+        $this->getFileName($questionnaire)->shouldReturn('');
     }
 
     public function it_resolve_fileName_inside_a_step_but_no_project(

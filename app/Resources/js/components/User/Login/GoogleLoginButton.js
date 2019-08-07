@@ -16,23 +16,13 @@ export class GoogleLoginButton extends React.Component<Props> {
     prefix: 'login.',
   };
 
-  getTitleTraduction = (): string => {
-    const { prefix } = this.props;
-
-    if (prefix === '') {
-      return 'Google';
-    }
-
-    return `${prefix || 'login.'}google`;
-  };
-
   render() {
-    const { features } = this.props;
+    const { features, prefix } = this.props;
     if (!features.login_gplus) {
       return null;
     }
 
-    const title = <FormattedMessage id={this.getTitleTraduction()} />;
+    const title = <FormattedMessage id={`${prefix || 'login.'}google`} />;
     return (
       <a
         href={`/login/google?_destination=${window && window.location.href}`}

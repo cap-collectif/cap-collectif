@@ -107,7 +107,7 @@ parameters:
   env(SYMFONY_SENTRY_DSN): ~
   env(SYMFONY_MANDRILL_API_KEY): ***REMOVED***
   env(SYMFONY_INSTANCE_NAME): dev
-  env(APP_VERSION): Sprint 249
+  env(APP_VERSION): Sprint 246
 
 framework:
   secret: '%secret%'

@@ -8,7 +8,7 @@ import SamlLoginButton from './SamlLoginButton';
 import OpenIDLoginButton from './OpenIDLoginButton';
 import type { FeatureToggles, SSOConfiguration, State } from '../../../types';
 
-export type LabelPrefix = 'registration.' | 'login.' | '';
+export type LabelPrefix = 'registration.' | 'login.';
 
 type StateProps = {|
   features: FeatureToggles,

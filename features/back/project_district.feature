@@ -34,7 +34,7 @@ Scenario: Logged in admin wants to add district without style in project
 
 @database
 Scenario: Logged in admin wants to delete district from project.
-  When I click the delete button
+  When I click the delete button for Deuxième Quartier
   Then I should see "are-you-sure-you-want-to-delete-this-item"
   When I click the confirm delete popover
   And I reload the page

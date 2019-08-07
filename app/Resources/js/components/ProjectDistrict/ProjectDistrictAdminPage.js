@@ -106,7 +106,10 @@ export class ProjectDistrictAdminPage extends React.Component<Props, State> {
         render={({
           error,
           props,
-        }: { props: ?ProjectDistrictAdminPageQueryResponse } & ReadyState) => {
+        }: {|
+          ...ReadyState,
+          props: ?ProjectDistrictAdminPageQueryResponse,
+        |}) => {
           if (error) {
             return graphqlError;
           }
@@ -153,6 +156,7 @@ export class ProjectDistrictAdminPage extends React.Component<Props, State> {
                             <ButtonToolbar className="pull-right">
                               <EditButton onClick={() => this.handleEdit(district.id)} />
                               <DeleteButtonPopover
+                                id={`DeleteButtonPopover-${district.id}`}
                                 handleValidate={() => this.handleDelete(district.id)}
                               />
                             </ButtonToolbar>

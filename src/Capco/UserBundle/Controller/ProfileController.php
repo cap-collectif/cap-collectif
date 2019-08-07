@@ -11,8 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\UserArchiveRepository;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -194,6 +197,17 @@ class ProfileController extends Controller
             throw $this->createNotFoundException();
         }
 
+        $serializer = $this->get('serializer');
+
+        $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
+
+        $projectsProps = $serializer->serialize(['projects' => $projectsRaw], 'json', [
+            'groups' => ['Projects', 'UserDetails', 'Steps', 'ThemeDetails', 'ProjectType']
+        ]);
+        $projectsCount = \count($projectsRaw);
+
+        $opinionTypesWithUserOpinions = $this->get(OpinionTypeRepository::class)->getByUser($user);
+        $opinionsCount = $this->get(OpinionRepository::class)->countByUser($user);
         $versions = $this->get(OpinionVersionRepository::class)->getByUser($user);
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
         $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
@@ -211,8 +225,12 @@ class ProfileController extends Controller
 
         return [
             'user' => $user,
+            'projectsProps' => $projectsProps,
+            'projectsCount' => $projectsCount,
             'proposalsCount' => $proposalsCount,
+            'opinionsCount' => $opinionsCount,
             'eventsCount' => $eventsCount,
+            'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'versions' => $versions,
             'arguments' => $arguments,
             'replies' => $replies,
@@ -229,10 +247,19 @@ class ProfileController extends Controller
      */
     public function showProjectsAction(User $user)
     {
+        $serializer = $this->get('serializer');
+        $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
+
+        $projectsProps = $serializer->serialize(['projects' => $projectsRaw], 'json', [
+            'groups' => ['Projects', 'Steps', 'ThemeDetails']
+        ]);
+        $projectsCount = \count($projectsRaw);
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
+            'projectsProps' => $projectsProps,
+            'projectsCount' => $projectsCount,
             'eventsCount' => $eventsCount
         ];
     }
@@ -247,10 +274,15 @@ class ProfileController extends Controller
      */
     public function showOpinionsAction(User $user)
     {
+        $opinionTypesWithUserOpinions = $this->get(OpinionTypeRepository::class)->getByUser($user);
+
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
+            'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
+            'projectsCount' => $projectsCount,
             'eventsCount' => $eventsCount
         ];
     }
@@ -272,10 +304,12 @@ class ProfileController extends Controller
      */
     public function showProposalsAction(User $user)
     {
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
+            'projectsCount' => $projectsCount,
             'eventsCount' => $eventsCount
         ];
     }
@@ -287,11 +321,13 @@ class ProfileController extends Controller
     public function showRepliesAction(User $user)
     {
         $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'replies' => $replies,
+            'projectsCount' => $projectsCount,
             'eventsCount' => $eventsCount
         ];
     }
@@ -304,12 +340,14 @@ class ProfileController extends Controller
     {
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
 
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'arguments' => $arguments,
             'argumentsLabels' => Argument::$argumentTypesLabels,
+            'projectsCount' => $projectsCount,
             'eventsCount' => $eventsCount
         ];
     }
@@ -322,11 +360,13 @@ class ProfileController extends Controller
     {
         $sources = $this->get(SourceRepository::class)->getByUser($user);
 
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'sources' => $sources,
+            'projectsCount' => $projectsCount,
             'eventsCount' => $eventsCount
         ];
     }
@@ -339,11 +379,13 @@ class ProfileController extends Controller
     {
         $comments = $this->get(CommentRepository::class)->getByUser($user);
 
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'comments' => $comments,
+            'projectsCount' => $projectsCount,
             'eventsCount' => $eventsCount
         ];
     }
@@ -356,11 +398,13 @@ class ProfileController extends Controller
     {
         $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
 
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'votes' => $votes,
+            'projectsCount' => $projectsCount,
             'eventsCount' => $eventsCount
         ];
     }
@@ -371,10 +415,12 @@ class ProfileController extends Controller
      */
     public function showEventsAction(User $user)
     {
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
+            'projectsCount' => $projectsCount,
             'eventsCount' => $eventsCount
         ];
     }

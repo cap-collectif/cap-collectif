@@ -33,12 +33,3 @@ exports[`<LoginBox /> renders without LoginForm 1`] = `
   <Connect(LoginSocialButtons) />
 </div>
 `;
-
-exports[`<LoginBox /> renders without prefix 1`] = `
-<div>
-  <Connect(LoginSocialButtons)
-    prefix=""
-  />
-  <ReduxForm />
-</div>
-`;

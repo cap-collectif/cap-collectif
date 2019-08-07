@@ -39,13 +39,13 @@ const getShieldBody = ({
         <div className="mb-10 font-weight-bold">
           <FormattedMessage id="authenticate-with" />
         </div>
-        <LoginBox prefix="" />
+        <LoginBox />
       </>
     );
   }
   return (
     <form id="login-form" onSubmit={onSubmit}>
-      <LoginBox prefix="" />
+      <LoginBox />
       <Button
         id="confirm-login"
         type="submit"

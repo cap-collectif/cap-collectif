@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DeleteButtonPopover /> renders correctly 1`] = `
+<OverlayTrigger
+  defaultOverlayShown={false}
+  overlay={
+    <Popover
+      bsClass="popover"
+      className="in"
+      id="<mock-id/>-Popover"
+      placement="left"
+      title={
+        <FormattedMessage
+          id="are-you-sure-you-want-to-delete-this-item"
+          values={Object {}}
+        />
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="right-bloc btn-block"
+        disabled={false}
+        id="btn-confirm-delete-field"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="btn_delete"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        className="right-block btn-block"
+        disabled={false}
+        id="btn-cancel-delete-field"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.no"
+          values={Object {}}
+        />
+      </Button>
+    </Popover>
+  }
+  placement="left"
+  rootClose={true}
+  trigger="click"
+>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="danger"
+    className="btn-outline-danger"
+    disabled={false}
+    id="<mock-id/>-DeleteButton"
+  >
+    <i
+      className="cap cap-times"
+    />
+     
+    <span
+      className="hidden-xs"
+    >
+      <FormattedMessage
+        id="global.delete"
+        values={Object {}}
+      />
+    </span>
+  </Button>
+</OverlayTrigger>
+`;
