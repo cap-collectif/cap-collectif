@@ -6,11 +6,10 @@ PreviewQuestionChoice:
     fields:
       id:
         type: 'ID!'
-        # TODO: https://github.com/cap-collectif/platform/issues/7952 this need to be a GlobalId
-        # builder: 'Relay::GlobalId'
-        # builderConfig:
-        #   typeName: QuestionChoice
+        builder: 'Relay::GlobalId'
         description: 'The ID of an object.'
+        builderConfig:
+          typeName: QuestionChoice
       title:
         type: 'String!'
         description: 'Identifies the question choice title.'

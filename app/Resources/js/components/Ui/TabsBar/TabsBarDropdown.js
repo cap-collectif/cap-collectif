@@ -13,7 +13,6 @@ type Props = {|
   toggleElement?: React.Node,
   eventKey?: number | string,
   'aria-label'?: string,
-  // eslint-disable-next-line flowtype/generic-spacing
   children?: ?React.ChildrenArray<
     null | React.Element<typeof S.TabsLink> | React.Element<typeof S.TabsDivider>,
   >,

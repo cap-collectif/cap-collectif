@@ -6,13 +6,18 @@ exports[`<Opinion /> renders correcty 1`] = `
   className="list-group-item__opinion opinion text-left has-chart"
   listItem={false}
 >
-  <Opinion__OpinionContainer>
+  <Media>
     <ForwardRef(Relay(OpinionPreview))
       opinion={
         Object {
           "$fragmentRefs": null,
           "$refType": null,
           "author": Object {
+            "displayName": "",
+            "media": Object {
+              "url": "",
+            },
+            "url": "",
             "vip": false,
           },
           "votes": Object {
@@ -31,6 +36,6 @@ exports[`<Opinion /> renders correcty 1`] = `
       }
       showUpdatedDate={false}
     />
-  </Opinion__OpinionContainer>
+  </Media>
 </ListGroupItem>
 `;

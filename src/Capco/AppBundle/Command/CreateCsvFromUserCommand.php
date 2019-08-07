@@ -505,6 +505,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
       facebookUrl
       twitterUrl
       linkedInUrl
+      opinionsCount
       opinionVotesCount
       opinionVersionsCount
       argumentsCount
@@ -517,9 +518,6 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         totalCount
       }
       sources {
-        totalCount
-      }
-      opinions {
         totalCount
       }
       replies {

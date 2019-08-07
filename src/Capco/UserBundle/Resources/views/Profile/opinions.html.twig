@@ -1,1 +1,18 @@
-{{ react_render_component('SectionListPageApp', { 'props': { 'userId': user.id|toGlobalId('User') } }) }}
+{% for opinionType in opinionTypesWithUserOpinions %}
+    <div class="panel panel-default">
+        <div class="panel-heading opinion opinion--{{ opinionType.color }} opinion--default">
+            <h3 style="font-size: 18px; margin: 0"> {{ opinionType.title }} <span class="badge">{{ opinionType.Opinions|length }}</span></h3>
+        </div>
+        <div class="panel-body" style="padding: 0">
+            <ul class="media-list  opinion__list">
+                {% for opinion in opinionType.Opinions %}
+                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {
+                    'opinion': opinion,
+                    'opinionType': opinion.opinionType,
+                    'profile': true
+                    } %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endfor %}

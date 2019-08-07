@@ -2,34 +2,32 @@
 
 namespace Capco\UserBundle\Controller;
 
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Argument;
-use Symfony\Component\HttpFoundation\Request;
+use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\GraphQL\Resolver\User\UserProposalsResolver;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Repository\UserArchiveRepository;
+use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
-use Capco\AppBundle\Repository\EventRepository;
-use Capco\AppBundle\Repository\SourceRepository;
-use Capco\AppBundle\Repository\CommentRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Capco\AppBundle\Repository\UserArchiveRepository;
-use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Capco\AppBundle\GraphQL\Resolver\User\UserProposalsResolver;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
  * @Route("/profile")
@@ -207,7 +205,6 @@ class ProfileController extends Controller
         $projectsCount = \count($projectsRaw);
 
         $opinionTypesWithUserOpinions = $this->get(OpinionTypeRepository::class)->getByUser($user);
-        $opinionsCount = $this->get(OpinionRepository::class)->countByUser($user);
         $versions = $this->get(OpinionVersionRepository::class)->getByUser($user);
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
         $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
@@ -228,7 +225,6 @@ class ProfileController extends Controller
             'projectsProps' => $projectsProps,
             'projectsCount' => $projectsCount,
             'proposalsCount' => $proposalsCount,
-            'opinionsCount' => $opinionsCount,
             'eventsCount' => $eventsCount,
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'versions' => $versions,

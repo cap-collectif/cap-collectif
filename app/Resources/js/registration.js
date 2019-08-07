@@ -43,7 +43,6 @@ import ProjectHeaderDistrictsApp from './startup/ProjectHeaderDistrictsApp';
 import ProjectHeaderAuthorsApp from './startup/ProjectHeaderAuthorsApp';
 import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
 import ProposalFormCreateButtonApp from './startup/ProposalFormCreateButtonApp';
-import SectionListPageApp from './startup/SectionListPageApp';
 import ProjectListPageApp from './startup/ProjectListPageApp';
 import ProposalAdminPageApp from './startup/ProposalAdminPageApp';
 import ProposalFormAdminPageApp from './startup/ProposalFormAdminPageApp';
@@ -198,5 +197,4 @@ ReactOnRails.register({
   SSOSwitchUserApp,
   AuthentificationAdminApp,
   ProjectCreateButtonApp,
-  SectionListPageApp,
 });
