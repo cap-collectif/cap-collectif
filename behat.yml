@@ -1,6 +1,5 @@
 # List of profiles
 
-
 aliases:
   - &bo-config
     - Capco\AppBundle\Behat\ApplicationContext
