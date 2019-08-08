@@ -28,7 +28,7 @@ final class Version20190806152359 extends AbstractMigration implements Container
         $consultations = $em->getRepository('CapcoAppBundle:Consultation')->findAll();
 
         foreach ($consultations as $consultation) {
-            $consultation->setSlug(null);
+            $consultation->setSlug(null); // Allows Gedmo to regenerate itself the slugs
         }
         $em->flush();
         echo "-> Finished adding consultations slug\n";
