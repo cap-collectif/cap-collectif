@@ -506,9 +506,11 @@ class Consultation
         return $this->sourcesCount;
     }
 
-    public function setSourcesCount(int $sourcesCount)
+    public function setSourcesCount(int $sourcesCount): self
     {
         $this->sourcesCount = $sourcesCount;
+
+        return $this;
     }
 
     public function getTrashedSourceCount(): int
@@ -516,9 +518,11 @@ class Consultation
         return $this->trashedSourceCount;
     }
 
-    public function setTrashedSourceCount(int $trashedSourceCount)
+    public function setTrashedSourceCount(int $trashedSourceCount): self
     {
         $this->trashedSourceCount = $trashedSourceCount;
+
+        return $this;
     }
 
     public function setVotesCount(int $votesCount): self

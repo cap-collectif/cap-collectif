@@ -19,6 +19,7 @@ use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
@@ -196,6 +197,15 @@ class StepAdmin extends CapcoAdmin
                     'property' => 'title',
                     'to_string_callback' => static function (Consultation $entity) {
                         return $entity->getTitle();
+                    },
+                    'callback' => static function (AdminInterface $admin, $property, $value) {
+                        $datagrid = $admin->getDatagrid();
+                        $queryBuilder = $datagrid->getQuery();
+                        $queryBuilder
+                            ->andWhere(
+                                $queryBuilder->getRootAlias() . '.step IS NULL'
+                            );
+                        $datagrid->setValue($property, null, $value);
                     },
                     'req_params' => ['subclass' => 'consultation_step'],
                     'label' => 'one-or-more-consultation-step',
