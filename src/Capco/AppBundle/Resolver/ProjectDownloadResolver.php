@@ -4,17 +4,19 @@ namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Utils\Text;
 use Liuggio\ExcelBundle\Factory;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Helper\EnvHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Command\Utils\ExportUtils;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Bridge\Twig\Extension\HttpFoundationExtension;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
 
 class ProjectDownloadResolver
 {
@@ -30,6 +32,7 @@ class ProjectDownloadResolver
     protected $mediaExtension;
     protected $customFields;
     protected $httpFoundExtension;
+    private $exportUrlResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -38,7 +41,8 @@ class ProjectDownloadResolver
         MediaUrlResolver $urlResolver,
         Factory $phpexcel,
         MediaExtension $mediaExtension,
-        HttpFoundationExtension $httpFoundationExtension
+        HttpFoundationExtension $httpFoundationExtension,
+        QuestionnaireExportResultsUrlResolver $exportUrlResolver
     ) {
         $this->em = $em;
         $this->translator = $translator;
@@ -51,9 +55,10 @@ class ProjectDownloadResolver
         $this->instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
         $this->mediaExtension = $mediaExtension;
         $this->httpFoundExtension = $httpFoundationExtension;
+        $this->exportUrlResolver = $exportUrlResolver;
     }
 
-    public function getQuestionnaireStepHeaders(QuestionnaireStep $step): array
+    public function getQuestionnaireHeaders(Questionnaire $questionnaire): array
     {
         $headers = [
             'id',
@@ -68,31 +73,20 @@ class ProjectDownloadResolver
             'draft'
         ];
 
-        if ($step->getQuestionnaire()) {
-            foreach ($step->getQuestionnaire()->getRealQuestions() as $question) {
-                $headers[] = ['label' => Text::unslug($question->getSlug()), 'raw' => true];
-            }
+        foreach ($questionnaire->getRealQuestions() as $question) {
+            $headers[] = ['label' => Text::unslug($question->getSlug()), 'raw' => true];
         }
 
         return $headers;
     }
 
     public function getContent(
-        AbstractStep $step,
+        Questionnaire $questionnaire,
         ExportUtils $exportUtils
     ): \PHPExcel_Writer_IWriter {
-        if (!$step) {
-            throw new NotFoundHttpException('Step not found');
-        }
-
-        if ($step instanceof QuestionnaireStep) {
-            $this->headers = $this->getQuestionnaireStepHeaders($step);
-            $data = $this->getQuestionnaireStepData($step);
-        } else {
-            throw new \InvalidArgumentException('Step must be of type collect or questionnaire');
-        }
-        $title = $step->getProject() ? $step->getProject()->getTitle() . '_' : '';
-        $title .= $step->getTitle();
+        $this->headers = $this->getQuestionnaireHeaders($questionnaire);
+        $data = $this->getQuestionnaireData($questionnaire);
+        $title = $this->exportUrlResolver->getFileName($questionnaire);
 
         foreach ($data as &$d) {
             foreach ($d as $key => $value) {
@@ -109,17 +103,12 @@ class ProjectDownloadResolver
         $this->data[] = $item;
     }
 
-    public function getQuestionnaireStepData(QuestionnaireStep $questionnaireStep): array
+    public function getQuestionnaireData(Questionnaire $questionnaire): array
     {
         $this->data = [];
-        $replies = [];
-
-        if ($questionnaireStep->getQuestionnaire()) {
-            // Replies
-            $replies = $this->em
-                ->getRepository('CapcoAppBundle:Reply')
-                ->getEnabledByQuestionnaireAsArray($questionnaireStep->getQuestionnaire());
-        }
+        $replies = $this->em
+            ->getRepository(Reply::class)
+            ->getEnabledByQuestionnaireAsArray($questionnaire);
 
         $this->getRepliesData($replies);
 
@@ -136,7 +125,7 @@ class ProjectDownloadResolver
     {
         foreach ($replies as $reply) {
             $responses = $this->em
-                ->getRepository('CapcoAppBundle:Responses\AbstractResponse')
+                ->getRepository(AbstractResponse::class)
                 ->getByReplyAsArray($reply['id']);
             $this->addItemToData($this->getReplyItem($reply, $responses));
         }
@@ -178,11 +167,9 @@ class ProjectDownloadResolver
         $responseMedia = null;
         $mediasUrl = [];
         if ('media' === $response['response_type']) {
-            $responseMedia = $this->em
-                ->getRepository('CapcoAppBundle:Responses\MediaResponse')
-                ->findOneBy([
-                    'id' => $response['id']
-                ]);
+            $responseMedia = $this->em->getRepository(MediaResponse::class)->findOneBy([
+                'id' => $response['id']
+            ]);
 
             foreach ($responseMedia->getMedias() as $media) {
                 $mediasUrl[] = $this->urlResolver->__invoke(
