@@ -7,8 +7,8 @@ import select from '../Form/Select';
 import type { SelectTheme_query } from '~relay/SelectTheme_query.graphql';
 
 type Props = {|
-  +query: SelectTheme_query,
-  +intl: IntlShape,
+  query: SelectTheme_query,
+  intl: IntlShape,
 |};
 
 export class SelectTheme extends React.Component<Props> {
@@ -23,7 +23,7 @@ export class SelectTheme extends React.Component<Props> {
           component={select}
           id="SelectTheme-filter-theme"
           name="theme"
-          placeholder={intl.formatMessage({ id: 'event.searchform.all_themes' })}
+          placeholder={intl.formatMessage({ id: 'event.searchform.all_projects' })}
           label={intl.formatMessage({ id: 'type-theme' })}
           options={renderOptions}
           role="combobox"

@@ -134,19 +134,20 @@ class EventSearch extends Search
     {
         switch ($orderBy['field']) {
             case EventOrderField::END_AT:
-                return [
-                    'endAt' => ['order' => $orderBy['direction']],
-                    'startAt' => ['order' => $orderBy['direction']]
-                ];
+                $sortField = 'endAt';
+                $sortOrder = 'desc';
 
+                break;
             case EventOrderField::START_AT:
-                return [
-                    'startAt' => ['order' => $orderBy['direction']],
-                    'endAt' => ['order' => $orderBy['direction']]
-                ];
+                $sortField = 'startAt';
+                $sortOrder = 'asc';
+
+                break;
             default:
                 throw new \RuntimeException("Unknown order: ${$orderBy['field']}");
         }
+
+        return [$sortField => ['order' => $sortOrder]];
     }
 
     private function getFilters(array $providedFilters): array

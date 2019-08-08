@@ -22,7 +22,7 @@ exports[`<SelectTheme /> should render correctly 1`] = `
         },
       ]
     }
-    placeholder="event.searchform.all_themes"
+    placeholder="event.searchform.all_projects"
     role="combobox"
   />
 </div>
@@ -39,7 +39,7 @@ exports[`<SelectTheme /> should render empty list 1`] = `
     label="type-theme"
     name="theme"
     options={Array []}
-    placeholder="event.searchform.all_themes"
+    placeholder="event.searchform.all_projects"
     role="combobox"
   />
 </div>

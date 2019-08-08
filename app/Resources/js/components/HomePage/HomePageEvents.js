@@ -14,10 +14,10 @@ import type {
 export type Props = {|
   +showAllUrl: string,
   +section: {
-    +title: ?string,
-    +teaser: ?string,
-    +body: ?string,
-    +nbObjects: ?number,
+    title: ?string,
+    teaser: ?string,
+    body: ?string,
+    nbObjects: ?number,
   },
 |};
 
@@ -44,8 +44,6 @@ const EventContainer = styled.div`
     }
   }
 `;
-
-const DEFAULT_EVENTS = 4;
 
 class HomePageEvents extends React.Component<Props> {
   renderEventList = ({
@@ -110,7 +108,7 @@ class HomePageEvents extends React.Component<Props> {
         `}
         variables={
           ({
-            count: section.nbObjects ? section.nbObjects : DEFAULT_EVENTS,
+            count: section.nbObjects || 4,
             isFuture: true,
             orderBy: {
               field: 'START_AT',

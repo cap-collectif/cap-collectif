@@ -37,7 +37,7 @@ trait AdminProjectDistrictTrait
     }
 
     /**
-     * @When I click the delete button for Deuxième Quartier
+     * @When I click the delete button
      */
     public function iClickDeleteButton()
     {

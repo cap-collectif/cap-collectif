@@ -16,9 +16,9 @@ class AdminProjectDistrictPage extends Page
         'project district enable border' => '.react-toggle',
         'project district pick color' => '.saturation-black',
         'project district modal submit button' => '#js-sumbit-button',
-        'project district delete button' => '#DeleteButtonPopover-projectDistrict2-DeleteButton',
+        'project district delete button' => '.btn-outline-danger',
         'project district confirm delete popover' => '#btn-confirm-delete-field',
-        'project district edit button' => '.btn-outline-warning'
+        'project district edit button' => '.btn-outline-warning',
     ];
 
     protected $path = '/admin/capco/app/district-projectdistrict/list';
