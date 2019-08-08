@@ -1,4 +1,4 @@
-@proposal_page_admin
+@admin @moderation @proposal_page_admin
 Feature: Edit a proposal
 
 @database @elasticsearch

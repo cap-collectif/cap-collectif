@@ -1,4 +1,4 @@
-@admin
+@admin @moderation @sources
 Feature: Admin sources back office
 
 Scenario: Logged in admin wants to tests sources list page

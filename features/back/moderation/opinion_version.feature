@@ -1,4 +1,4 @@
-@admin
+@admin @moderation @opinion_version
 Feature: Admin opinion version back office
 
 Scenario: Logged in admin wants to tests opinion version list page

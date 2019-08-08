@@ -1,4 +1,4 @@
-@project
+@admin @project
 Feature: Projects features
 
 Scenario: Logged in admin wants to test admin project

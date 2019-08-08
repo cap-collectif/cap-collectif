@@ -1,4 +1,4 @@
-@shield
+@admin @parameter @shield
 Feature: Shield admin configuration
 
 Background:

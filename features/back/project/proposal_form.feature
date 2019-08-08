@@ -1,4 +1,4 @@
-@proposal_form_page_admin
+@admin @project @proposal_form_page_admin
 Feature: Edit a proposal form
 
 @database

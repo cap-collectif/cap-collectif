@@ -1,4 +1,4 @@
-@admin
+@admin @moderation @arguments
 Feature: Admin features Argument
 
 Scenario: Logged in admin wants to test admin contributions

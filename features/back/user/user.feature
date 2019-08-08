@@ -1,4 +1,4 @@
-@user_page_admin
+@admin @user
 Feature: User Admin
 
 Background:

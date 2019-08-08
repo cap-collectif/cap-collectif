@@ -1,4 +1,4 @@
-@contact_page_form
+@admin @pages @contact_page_form
 Feature: Edit the contact page
 
 @database

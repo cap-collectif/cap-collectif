@@ -1,4 +1,4 @@
-@comments
+@admin @comments @moderation
 Feature: Comments features
 
 Background:

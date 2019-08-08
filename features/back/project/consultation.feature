@@ -1,4 +1,4 @@
-@opinion_type_admin
+@admin @project @opinion_type_admin
 Feature: Show correctly the consultation form
 
 Scenario: Conditional display of the comment type of a contribution as Admin

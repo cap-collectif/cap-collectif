@@ -1,4 +1,4 @@
-@proposal @merge_proposals
+@admin @proposal @merge_proposals @moderation
 Feature: Merge proposals
 
 @database @elasticsearch

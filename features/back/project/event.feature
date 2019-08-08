@@ -1,4 +1,4 @@
-@events
+@admin @project @events
 Feature: Events features
 
 @database

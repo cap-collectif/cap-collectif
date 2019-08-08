@@ -1,4 +1,4 @@
-@projectDistrict
+@admin @parameter @projectDistrict
 Feature: Project District
 
 Background:
