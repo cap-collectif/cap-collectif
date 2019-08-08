@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use function Doctrine\ORM\QueryBuilder;
 
 /**
  * ConsultationRepository. *.
