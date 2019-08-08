@@ -135,7 +135,7 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
                   className="excerpt"
                 >
                   <ProjectStepTabs__StepExcerptBadge
-                    active={true}
+                    activeTab={true}
                   >
                     <FormattedMessage
                       id="step.status.open"
@@ -223,7 +223,7 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
                   className="excerpt"
                 >
                   <ProjectStepTabs__StepExcerptBadge
-                    active={true}
+                    activeTab={true}
                   >
                     <FormattedMessage
                       id="step.status.open"
@@ -310,7 +310,7 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
                   className="excerpt"
                 >
                   <ProjectStepTabs__StepExcerptBadge
-                    active={false}
+                    activeTab={false}
                   >
                     <FormattedMessage
                       id="step.status.closed"

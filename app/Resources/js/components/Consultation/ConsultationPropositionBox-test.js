@@ -7,6 +7,7 @@ import { ConsultationPropositionBox } from './ConsultationPropositionBox';
 describe('<ConsultationPropositionBox />', () => {
   const props = {
     id: 'stepId',
+    consultationSlug: 'consultationSlug',
     dispatch: jest.fn(),
     showConsultationPlan: true,
     isAuthenticated: false,

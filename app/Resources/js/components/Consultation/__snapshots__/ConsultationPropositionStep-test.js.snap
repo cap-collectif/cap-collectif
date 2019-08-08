@@ -2,25 +2,19 @@
 
 exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
 <Fragment>
-  <ForwardRef(Relay(Connect(InjectIntl(ConsultationPlan))))
-    className="sticky"
-    consultation={
-      Object {
-        "$fragmentRefs": null,
-        "id": "consultation1",
-        "sections": Array [
-          Object {
-            "id": "section1",
-            "sections": Array [
-              Object {
-                "id": "section2",
-              },
-            ],
-          },
-        ],
+  <ConsultationPropositionStep__ConsultationPlanInner
+    className="consultation-plan sticky col-md-3 col-sm-12"
+    id="consultation-plan"
+    offset={60}
+  >
+    <ForwardRef(Relay(Connect(InjectIntl(ConsultationPlan))))
+      consultation={
+        Object {
+          "$fragmentRefs": null,
+        }
       }
-    }
-  />
+    />
+  </ConsultationPropositionStep__ConsultationPlanInner>
   <div
     className="col-md-10 col-md-offset-1"
     id="scroll-content"
@@ -63,25 +57,8 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "consultations": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "$fragmentRefs": null,
-                  "id": "consultation1",
-                  "sections": Array [
-                    Object {
-                      "id": "section1",
-                      "sections": Array [
-                        Object {
-                          "id": "section2",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              },
-            ],
+          "consultation": Object {
+            "$fragmentRefs": null,
           },
           "id": "myStep",
           "status": "OPENED",
@@ -161,21 +138,8 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "consultations": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "$fragmentRefs": null,
-                  "id": "consultation1",
-                  "sections": Array [
-                    Object {
-                      "id": "section1",
-                      "sections": null,
-                    },
-                  ],
-                },
-              },
-            ],
+          "consultation": Object {
+            "$fragmentRefs": null,
           },
           "id": "myStep",
           "status": "OPENED",

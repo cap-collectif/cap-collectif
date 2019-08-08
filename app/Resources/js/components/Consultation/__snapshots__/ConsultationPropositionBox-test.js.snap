@@ -10,6 +10,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
     render={[Function]}
     variables={
       Object {
+        "consultationSlug": "consultationSlug",
         "consultationStepId": "stepId",
         "isAuthenticated": false,
       }
@@ -28,6 +29,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
     render={[Function]}
     variables={
       Object {
+        "consultationSlug": "consultationSlug",
         "consultationStepId": "stepId",
         "isAuthenticated": false,
       }
