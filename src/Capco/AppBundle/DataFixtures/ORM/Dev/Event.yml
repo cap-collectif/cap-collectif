@@ -148,7 +148,8 @@ Capco\AppBundle\Entity\Event:
     title: EvenementPresentSansDateDeFin
     enabled: true
     body: Oh yeah
-    startAt: <(new \DateTime('2019-08-07'))>
+    # TODO check this event date
+    startAt: <(new \DateTime('now'))>
     author: '@user2'
     link: http://www.lavie.fr
     createdAt: <identity((new \DateTime('2015-01-12')))>

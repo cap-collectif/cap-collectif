@@ -67,8 +67,21 @@ mappings:
             type: object
             properties:
               id: { type: keyword }
+              visibility: { type: long }
+              restrictedViewerIds: { type: keyword }
+              authors: &Author
+                type: object
+                properties:
+                  id: { type: keyword }
+                  username: *text_analysis_highlighted
+                  email: *text_analysis_highlighted
+                  userType:
+                    type: object
+                    properties:
+                      id: { type: long }
           count:
             type: long
+
       contributionsCountByStep:
         type: nested
         properties:
@@ -88,16 +101,7 @@ mappings:
       updatedAt: { type: date }
       project: *Project
       step: *Step
-      Author: &Author
-        type: object
-        properties:
-          id: { type: keyword }
-          username: *text_analysis_highlighted
-          email: *text_analysis_highlighted
-          userType:
-            type: object
-            properties:
-              id: { type: long }
+      Author: *Author
   district:
     properties:
       id: { type: keyword }
@@ -131,6 +135,19 @@ mappings:
       createdAt: { type: date }
       authorName: *text_analysis_highlighted
       Author: *Author
+      published: { type: boolean }
+      project: *Project
+      trashedStatus: { type: keyword }
+      proposal:
+        type: object
+        properties:
+          id: { type: keyword }
+          author: *Author
+          visible: { type: boolean }
+          step:
+            type: object
+            properties:
+              id: { type: keyword }
 
   event:
     properties:

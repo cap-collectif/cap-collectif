@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\Proposal:
   exclusion_policy: ALL
   attributes:
     id:
-      groups: [Proposals, Elasticsearch]
+      groups: [Proposals, Elasticsearch, ElasticsearchNestedProposal]
     title:
       groups: [Proposals, Elasticsearch]
     summary:
@@ -43,7 +43,7 @@ Capco\AppBundle\Entity\Proposal:
     address:
       groups: [Proposals]
     isVisible:
-      groups: [PrivateProposals]
+      groups: [PrivateProposals, ElasticsearchNestedProposal]
       serialized_name: visible
     getSummaryOrBodyExcerpt:
       groups: [Proposals]
@@ -55,7 +55,7 @@ Capco\AppBundle\Entity\Proposal:
       serialized_name: trashed
       groups: [Proposals, Elasticsearch]
     step:
-      groups: [Elasticsearch]
+      groups: [Elasticsearch, ElasticsearchNestedProposal]
     project:
       groups: [ElasticsearchNestedProject]
     isPublished:

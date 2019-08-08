@@ -43,6 +43,7 @@ class MailCatcherContext extends Base implements KernelAwareContext
         if ($writeSnapshot) {
             $newSnapshot = fopen(self::SNAPSHOTS_PATH . $file, 'w');
             fwrite($newSnapshot, $content);
+            chmod(self::SNAPSHOTS_PATH . $file, 0755);
             fclose($newSnapshot);
             echo "\"Snapshot writen at '${file}'. You can now relaunch the testsuite.\"";
 

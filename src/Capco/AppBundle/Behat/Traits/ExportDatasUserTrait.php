@@ -58,6 +58,7 @@ trait ExportDatasUserTrait
             if (file_exists($justGeneratedFile)) {
                 if ($writeSnapshots) {
                     (new Process('mv ' . $justGeneratedFile . ' ' . $matchTo . $csv))->mustRun();
+                    chmod($matchTo . $csv, 0755);
                 } else {
                     $this->exportContext->compareFileWithSnapshot(
                         $extractTo . $csv,

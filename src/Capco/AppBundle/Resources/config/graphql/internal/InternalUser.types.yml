@@ -152,11 +152,16 @@ InternalUser:
         argsBuilder: 'Relay::Connection'
         description: 'A list of replies associated to the user.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRepliesResolver", [value])'
-      postCommentsCount:
-        type: 'Int!'
-      eventCommentsCount:
-        type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventCommentsCountResolver", [value])'
+      comments:
+        type: 'CommentConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Get all comments of the user.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentsResolver", [getUser(), value, args, context])'
+        args:
+          first:
+            type: 'Int'
+            description: 'Returns the first n elements from the list.'
+            defaultValue: 100
       consentExternalCommunication:
         type: 'Boolean!'
         description: 'Whether or not this user consent external communication.'

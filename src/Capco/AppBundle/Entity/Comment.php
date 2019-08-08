@@ -62,7 +62,7 @@ abstract class Comment implements
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
-        'popularity' => 'argument.sort.popularity',
+        'popularity' => 'argument.sort.popularity'
     ];
 
     /**
@@ -326,6 +326,16 @@ abstract class Comment implements
         return $this->getRelatedObject() ? $this->getRelatedObject()->canDisplay($user) : false;
     }
 
+    public function getProject(): ?Project
+    {
+        $relatedObject = $this->getRelatedObject();
+        if ($relatedObject instanceof Proposal) {
+            return $relatedObject->getProject();
+        }
+
+        return null;
+    }
+
     // ********************** Abstract methods **********************************
 
     abstract public function getRelatedObject();
@@ -359,6 +369,6 @@ abstract class Comment implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch'];
+        return ['Elasticsearch', 'ElasticsearchNestedProject'];
     }
 }

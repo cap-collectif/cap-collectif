@@ -35,7 +35,7 @@ class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
-        if (\in_array('Elasticsearch', $groups)) {
+        if (\in_array('Elasticsearch', $groups, true)) {
             return $data;
         }
 
@@ -44,7 +44,7 @@ class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface
                 'app_comment_edit',
                 ['commentId' => $object->getId()],
                 true
-            ),
+            )
         ];
 
         $data['hasUserVoted'] = $this->hasUserVoted($object);

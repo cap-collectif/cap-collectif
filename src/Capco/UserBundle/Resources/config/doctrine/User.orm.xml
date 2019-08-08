@@ -120,9 +120,6 @@
           </cascade>
         </one-to-many>
 
-        <field name="postCommentsCount" column="post_comments_count" type="integer" nullable="false" />
-        <field name="proposalCommentsCount" column="proposal_comments_count" type="integer" nullable="false" />
-
         <field name="proposalVotesCount" column="proposal_votes_count" type="integer" nullable="false" />
         <field name="opinionVotesCount" column="opinion_votes_count" type="integer" nullable="false" />
         <field name="opinionVersionVotesCount" column="opinion_version_votes_count" type="integer" nullable="false" />

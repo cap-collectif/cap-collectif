@@ -22,7 +22,7 @@ class ProjectSearch extends Search
         'object',
         'object.std',
         'teaser',
-        'teaser.std',
+        'teaser.std'
     ];
     private const POPULAR = 'POPULAR';
     private const LATEST = 'LATEST';
@@ -51,7 +51,10 @@ class ProjectSearch extends Search
             'phrase_prefix'
         );
 
-        if (isset($providedFilters['withEventOnly']) && $providedFilters['withEventOnly'] === true) {
+        if (
+            isset($providedFilters['withEventOnly']) &&
+            true === $providedFilters['withEventOnly']
+        ) {
             $withEventOnlyBoolQuery = new Query\BoolQuery();
             $withEventOnlyBoolQuery->addShould(new Query\Range('eventCount', ['gt' => 0]));
             $boolQuery->addMust($withEventOnlyBoolQuery);
@@ -75,16 +78,12 @@ class ProjectSearch extends Search
             ->setSize($limit);
 
         $resultSet = $this->index->getType($this->type)->search($query);
-        $results = $this->getHydratedResults(
-            array_map(function (Result $result) {
-                return $result->getData()['id'];
-            }, $resultSet->getResults())
-        );
+        $results = $this->getHydratedResultsFromResultSet($this->projectRepo, $resultSet);
 
         return [
             'projects' => $results,
             'count' => $resultSet->getTotalHits(),
-            'order' => $order,
+            'order' => $order
         ];
     }
 
@@ -96,7 +95,7 @@ class ProjectSearch extends Search
             ->getType($this->type)
             ->search($query, $this->projectRepo->count([]));
         $totalCount = array_sum(
-            array_map(function (Result $result) {
+            array_map(static function (Result $result) {
                 if (ProjectVisibilityMode::VISIBILITY_PUBLIC === $result->getData()['visibility']) {
                     return $result->getData()['contributionsCount'];
                 }
@@ -106,20 +105,6 @@ class ProjectSearch extends Search
         );
 
         return $totalCount;
-    }
-
-    private function getHydratedResults(array $ids): array
-    {
-        // We can't use findById because we would lost the correct order given by ES
-        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        $projects = $this->projectRepo->hydrateFromIds($ids);
-        // We have to restore the correct order of ids, because Doctrine has lost it, see:
-        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        usort($projects, function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
-
-        return $projects;
     }
 
     private function getSort(array $order): array
