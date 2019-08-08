@@ -30,22 +30,18 @@ class CommentSearch extends Search
         int $offset = 0
     ): array {
         $query = $this->createCommentsByAuthorViewerCanSeeQuery($author, $viewer);
+        $type = $this->index->getType($this->type);
+        $totalCount = $type->count($query);
         $query->setFrom($offset);
         $query->setSize($limit);
 
         return [
             'results' => $this->getHydratedResultsFromResultSet(
                 $this->commentRepository,
-                $this->index->getType($this->type)->search($query)
-            )
+                $type->search($query)
+            ),
+            'totalCount' => $totalCount
         ];
-    }
-
-    public function countCommentsByAuthorViewerCanSee(User $author, User $viewer): int
-    {
-        $query = $this->createCommentsByAuthorViewerCanSeeQuery($author, $viewer);
-
-        return $this->index->getType($this->type)->count($query);
     }
 
     public function getPublicCommentsByAuthor(
@@ -54,43 +50,35 @@ class CommentSearch extends Search
         int $offset = 0
     ): array {
         $query = $this->createPublicCommentsByAuthorQuery($author);
+        $type = $this->index->getType($this->type);
+        $totalCount = $type->count($query);
         $query->setFrom($offset);
         $query->setSize($limit);
 
         return [
             'results' => $this->getHydratedResultsFromResultSet(
                 $this->commentRepository,
-                $this->index->getType($this->type)->search($query)
-            )
+                $type->search($query)
+            ),
+            'totalCount' => $totalCount
         ];
-    }
-
-    public function countPublicCommentsByAuthor(User $author): int
-    {
-        $query = $this->createPublicCommentsByAuthorQuery($author);
-
-        return $this->index->getType($this->type)->count($query);
     }
 
     public function getCommentsByUser(User $user, int $limit = 100, int $offset = 0): array
     {
         $query = $this->createCommentByUserQuery($user);
+        $type = $this->index->getType($this->type);
+        $totalCount = $type->count($query);
         $query->setSize($limit);
         $query->setFrom($offset);
 
         return [
             'results' => $this->getHydratedResultsFromResultSet(
                 $this->commentRepository,
-                $this->index->getType($this->type)->search($query)
-            )
+                $type->search($query)
+            ),
+            'totalCount' => $totalCount
         ];
-    }
-
-    public function countCommentsByUser(User $user): int
-    {
-        $query = $this->createCommentByUserQuery($user);
-
-        return $this->index->getType($this->type)->count($query);
     }
 
     private function createCommentByUserQuery(User $user): Query

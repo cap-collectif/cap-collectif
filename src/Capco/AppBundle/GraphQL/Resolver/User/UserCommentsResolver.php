@@ -37,34 +37,53 @@ class UserCommentsResolver implements ResolverInterface
         $validViewer = $viewer instanceof UserInterface;
 
         if ($aclDisabled) {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
-                return $this->commentSearch->getCommentsByUser($user, $limit, $offset)['results'];
-            });
+            $totalCount = 0;
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $user,
+                &$totalCount
+            ) {
+                $queryResponse = $this->commentSearch->getCommentsByUser($user, $limit, $offset);
+                $totalCount = $queryResponse['totalCount'] ?? 0;
 
-            $totalCount = $this->commentSearch->countCommentsByUser($user);
+                return $queryResponse['results'] ?? [];
+            });
         } elseif ($validViewer && $user) {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($viewer, $user) {
-                return $this->commentSearch->getCommentsByAuthorViewerCanSee(
+            $totalCount = 0;
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $viewer,
+                $user,
+                &$totalCount
+            ) {
+                $queryResponse = $this->commentSearch->getCommentsByAuthorViewerCanSee(
                     $user,
                     $viewer,
                     $limit,
                     $offset
-                )['results'];
-            });
+                );
+                $totalCount = $queryResponse['totalCount'] ?? 0;
 
-            $totalCount = $this->commentSearch->countCommentsByAuthorViewerCanSee($user, $viewer);
+                return $queryResponse['results'] ?? [];
+            });
         } else {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
-                return $this->commentSearch->getPublicCommentsByAuthor(
+            $totalCount = 0;
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $user,
+                &$totalCount
+            ) {
+                $queryResponse = $this->commentSearch->getPublicCommentsByAuthor(
                     $user,
                     $limit,
                     $offset
-                )['results'];
-            });
+                );
+                $totalCount = $queryResponse['totalCount'];
 
-            $totalCount = $this->commentSearch->countPublicCommentsByAuthor($user);
+                return $queryResponse['results'] ?? [];
+            });
         }
 
-        return $paginator->auto($args, $totalCount);
+        $connection = $paginator->auto($args, $totalCount);
+        $connection->totalCount = $totalCount;
+
+        return $connection;
     }
 }
