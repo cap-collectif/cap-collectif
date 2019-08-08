@@ -68,13 +68,13 @@ const StepNavigationTypeTitle = ({ step }: { step: StepPropositionNavigation_ste
 const StepNavigationTypeShare = ({ step }: { step: StepPropositionNavigation_step }) => {
   switch (step.__typename) {
     case 'ConsultationStep':
-      return step.consultation && <ShareButtonDropdownInner>
+      return step.consultation ? (<ShareButtonDropdownInner>
         <ShareButtonDropdown
           id={CONSULTATION_SHARE_BUTTON_ID}
           url={step.consultation.url}
           title={step.consultation.title}
         />
-      </ShareButtonDropdownInner>;
+      </ShareButtonDropdownInner>) : null;
     default:
       return null;
   }

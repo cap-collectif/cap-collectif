@@ -17,7 +17,7 @@ const ConsultationListView = ({consultations}: Props) => {
   return (
     <div className="row">
       <div className="d-flex flex-wrap">
-        {consultations.edges
+        {consultations.edges && consultations.edges
           .filter(Boolean)
           .map(edge => edge.node)
           .filter(Boolean)

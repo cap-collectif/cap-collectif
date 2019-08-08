@@ -13,7 +13,7 @@ import type {
 } from '~relay/StepPropositionNavigationBoxQuery.graphql';
 import StepPropositionNavigation from './StepPropositionNavigation';
 
-type Props = {|
+export type Props = {|
   +stepId: RelayGlobalId,
   +relatedSlug: string,
 |}

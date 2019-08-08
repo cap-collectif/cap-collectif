@@ -33,9 +33,9 @@ const ConsultationPlanInner = styled.div`
 export const ConsultationPropositionStep = (props: Props) => {
   const { consultationPlanEnabled, showConsultationPlan, consultationStep: step } = props;
   const stepNavigationHeaderRef = React.useRef<?HTMLDivElement>(null);
-  const getStepNavigationHeader: ?HTMLDivElement = () => {
+  const getStepNavigationHeader: () => ?HTMLDivElement = () => {
     if (stepNavigationHeaderRef.current === null) {
-      stepNavigationHeaderRef.current = document.querySelector('.step__propositions__navigation');
+      stepNavigationHeaderRef.current = ((document.querySelector('.step__propositions__navigation'): any): ?HTMLDivElement);
     }
     return stepNavigationHeaderRef.current;
   };

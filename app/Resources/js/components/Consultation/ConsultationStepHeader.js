@@ -30,6 +30,7 @@ const ConsultationStepHeader = ({ step }: Props) => {
           </div>
         )}
       </div>
+      {/* $FlowFixMe $refType */}
       <StepInfos step={step} />
     </React.Fragment>
   )

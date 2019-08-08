@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
 import StepPropositionNavigationBox, {
-  type OwnProps as Props,
+  type Props,
 } from '../components/Steps/StepPropositionNavigationBox';
 
 export default (props: Props) => (

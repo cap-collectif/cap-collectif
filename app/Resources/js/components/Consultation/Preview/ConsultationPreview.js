@@ -38,19 +38,19 @@ const ConsultationPreviewBody = ({ consultation }: { consultation: ConsultationP
       <div className="flex-1">
         <TagsList>
             <ProjectPreviewCounter
-              value={contributions.totalCount}
+              value={(contributions && contributors.totalCount) || 0}
               label="project.preview.counters.contributions"
               showZero
               icon="cap-baloon-1"
             />
             <ProjectPreviewCounter
-              value={contributors.totalCount}
+              value={(contributors && contributors.totalCount) || 0}
               label="project.preview.counters.contributors"
               showZero
               icon="cap-user-2-1"
             />
             <ProjectPreviewCounter
-              value={votesCount}
+              value={votesCount || 0}
               label="project.preview.counters.votes"
               icon="cap-hand-like-2-1"
             />

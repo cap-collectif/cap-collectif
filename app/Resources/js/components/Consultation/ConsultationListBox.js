@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react';
+import { graphql, QueryRenderer, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import { graphql, QueryRenderer, type ReadyState } from 'react-relay';
 import type { RelayGlobalId } from '../../types';
 import type { ConsultationListBoxQueryResponse } from '~relay/ConsultationListBoxQuery.graphql';
 import ConsultationListView from './ConsultationListView';
 import ConsultationStepHeader from './ConsultationStepHeader';
 
-type Props = {|
+export type Props = {|
   +id: RelayGlobalId
 |}
 
