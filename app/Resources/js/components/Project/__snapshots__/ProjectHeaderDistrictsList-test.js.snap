@@ -29,6 +29,7 @@ exports[`<ProjectHeaderDistrictsList /> should render correctly with many distri
   <ProjectHeaderDistrictsList__DistrictsButton
     bsStyle="link"
     className="p-0 project-districts__modal-link"
+    fontSize={16}
     onClick={[Function]}
   >
     zone 1
@@ -148,6 +149,7 @@ exports[`<ProjectHeaderDistrictsList /> should render correctly with the display
   <ProjectHeaderDistrictsList__DistrictsButton
     bsStyle="link"
     className="p-0 project-districts__modal-link"
+    fontSize={16}
     onClick={[Function]}
   >
     zone 1
