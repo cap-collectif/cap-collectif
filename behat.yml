@@ -61,8 +61,38 @@ e2e:
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
         tags: '@questionnaire&&~@randomly-failing'
-    bo:
-      paths: ['%paths.base%/features/back']
+    bo-moderation:
+      paths: ['%paths.base%/features/back/moderation']
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\NavigationContext
+        - Capco\AppBundle\Behat\MailCatcherContext
+    bo-parameter:
+      paths: ['%paths.base%/features/back/parameter']
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\NavigationContext
+        - Capco\AppBundle\Behat\MailCatcherContext
+    bo-content:
+      paths: ['%paths.base%/features/back/content']
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\NavigationContext
+        - Capco\AppBundle\Behat\MailCatcherContext
+    bo-project:
+      paths: ['%paths.base%/features/back/project']
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\NavigationContext
+        - Capco\AppBundle\Behat\MailCatcherContext
+    bo-pages:
+      paths: ['%paths.base%/features/back/pages']
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\NavigationContext
+        - Capco\AppBundle\Behat\MailCatcherContext
+    bo-user:
+      paths: ['%paths.base%/features/back/user']
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext
         - Capco\AppBundle\Behat\NavigationContext
