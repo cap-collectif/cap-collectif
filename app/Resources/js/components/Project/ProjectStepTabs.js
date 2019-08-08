@@ -36,7 +36,7 @@ export const CLOSED_STEP_STATUS: StepStatus = 'closed';
 
 const StepExcerptBadge = styled(Badge)`
   border-radius: 3px;
-  ${({active}: { active: boolean }) => !active && css`
+  ${({activeTab}: { activeTab: boolean }) => !activeTab && css`
     background-color: ${colors.borderColor} !important;
     color: ${colors.darkGray};
   `}
@@ -285,7 +285,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                           </span>
                           <p className="excerpt">
                             {step.type !== 'presentation' && (
-                              <StepExcerptBadge active={step.status === OPEN_STEP_STATUS}>
+                              <StepExcerptBadge activeTab={step.status === OPEN_STEP_STATUS}>
                                 {this.renderStepStatus(step)}
                               </StepExcerptBadge>
                             )}

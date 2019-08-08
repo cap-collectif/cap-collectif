@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
+import styled, { css } from 'styled-components';
 import ConsultationPlan from './ConsultationPlan';
 import DatesInterval from '../Utils/DatesInterval';
 import RemainingTime from '../Utils/RemainingTime';
@@ -8,6 +9,7 @@ import StepInfos from '../Steps/Page/StepInfos';
 import SectionRecursiveList from './SectionRecursiveList';
 import type { ConsultationPropositionStep_consultationStep } from '~relay/ConsultationPropositionStep_consultationStep.graphql';
 import { STEP_PROPOSITION_NAVIGATION_HEIGHT } from '../Steps/StepPropositionNavigationBox';
+import { breakpoint } from '../../utils/mixins';
 
 type RelayProps = {|
   +consultationStep: ConsultationPropositionStep_consultationStep,
@@ -20,6 +22,13 @@ type Props = {|
 |};
 
 const STICKY_OFFSET_TOP = 60;
+
+const ConsultationPlanInner = styled.div`
+  top: inherit;
+  ${breakpoint('large', css`
+    top: ${({ offset }) => `${offset}px`}
+  `)}
+`;
 
 export const ConsultationPropositionStep = (props: Props) => {
   const { consultationPlanEnabled, showConsultationPlan, consultationStep: step } = props;
@@ -45,22 +54,20 @@ export const ConsultationPropositionStep = (props: Props) => {
   return (
     <>
       {consultationPlanEnabled && (
-        <div
+        <ConsultationPlanInner
           className={
             showConsultationPlan
               ? 'consultation-plan sticky col-md-3 col-sm-12'
               : 'consultation-plan sticky'
           }
-          style={{
-            top: `${STICKY_OFFSET_TOP + (stickyOffset)}px`,
-          }}
+          offset={STICKY_OFFSET_TOP + stickyOffset}
           id="consultation-plan">
           {step.consultation && (
             <ConsultationPlan
               consultation={step.consultation}
             />
           )}
-        </>
+        </ConsultationPlanInner>
       )}
       <div
         id="scroll-content"
