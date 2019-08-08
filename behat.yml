@@ -1,4 +1,12 @@
 # List of profiles
+
+
+aliases:
+  - &bo-config
+    - Capco\AppBundle\Behat\ApplicationContext
+    - Capco\AppBundle\Behat\NavigationContext
+    - Capco\AppBundle\Behat\MailCatcherContext
+
 e2e:
   extensions:
     Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
@@ -61,42 +69,24 @@ e2e:
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
         tags: '@questionnaire&&~@randomly-failing'
-    bo-moderation:
-      paths: ['%paths.base%/features/back/moderation']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
     bo-parameter:
       paths: ['%paths.base%/features/back/parameter']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
+      contexts: *bo-config
+    bo-moderation:
+      paths: ['%paths.base%/features/back/moderation']
+      contexts: *bo-config
     bo-content:
       paths: ['%paths.base%/features/back/content']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
+      contexts: *bo-config
     bo-project:
       paths: ['%paths.base%/features/back/project']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
+      contexts: *bo-config
     bo-pages:
       paths: ['%paths.base%/features/back/pages']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
+      contexts: *bo-config
     bo-user:
       paths: ['%paths.base%/features/back/user']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
+      contexts: *bo-config
     randomly-failing:
       paths: ['%paths.base%/features/front', '%paths.base%/features/back']
       contexts:
