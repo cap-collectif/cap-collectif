@@ -148,12 +148,12 @@ class EventSearch extends Search
         switch ($orderBy['field']) {
             case EventOrderField::END_AT:
                 $sortField = 'endAt';
-                $sortOrder = 'desc';
+                $sortOrder = $orderBy['direction'];
 
                 break;
             case EventOrderField::START_AT:
                 $sortField = 'startAt';
-                $sortOrder = 'asc';
+                $sortOrder = $orderBy['direction'];
 
                 break;
             default:

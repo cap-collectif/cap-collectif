@@ -6,31 +6,42 @@ import FacebookLoginButton from './FacebookLoginButton';
 import { features } from '../../../redux/modules/default';
 
 describe('<FacebookLoginButton />', () => {
-  const props = {
+  const defaultProps = {
     features: { ...features },
-  };
-  const propsWithFeatureFacebookLoginActivated = {
-    features: { ...features, login_facebook: true },
-  };
-  const propsWithFeatureFacebookLoginActivatedAndRegistrationPrefix = {
-    features: { ...features, login_facebook: true },
-    prefix: 'registration.',
   };
 
   it('renders nothing if login_facebook is not activated', () => {
+    const wrapper = shallow(<FacebookLoginButton {...defaultProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders with no prefix', () => {
+    const props = {
+      ...defaultProps,
+      features: { ...features, login_facebook: true },
+      prefix: '',
+    };
+
     const wrapper = shallow(<FacebookLoginButton {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a button if feature is active', () => {
-    const wrapper = shallow(<FacebookLoginButton {...propsWithFeatureFacebookLoginActivated} />);
+    const props = {
+      features: { ...features, login_facebook: true },
+    };
+
+    const wrapper = shallow(<FacebookLoginButton {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a button with correct registration label', () => {
-    const wrapper = shallow(
-      <FacebookLoginButton {...propsWithFeatureFacebookLoginActivatedAndRegistrationPrefix} />,
-    );
+    const props = {
+      features: { ...features, login_facebook: true },
+      prefix: 'registration.',
+    };
+
+    const wrapper = shallow(<FacebookLoginButton {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

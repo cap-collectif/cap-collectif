@@ -7,8 +7,8 @@ import select from '../Form/Select';
 import type { SelectProject_query } from '~relay/SelectProject_query.graphql';
 
 type Props = {|
-  query: SelectProject_query,
-  intl: IntlShape,
+  +query: SelectProject_query,
+  +intl: IntlShape,
 |};
 
 export class SelectProject extends React.Component<Props> {
@@ -29,7 +29,7 @@ export class SelectProject extends React.Component<Props> {
           component={select}
           id="SelectProject-filter-project"
           name="project"
-          placeholder={intl.formatMessage({ id: 'project.searchform.all_projects' })}
+          placeholder={intl.formatMessage({ id: 'event.searchform.all_projects' })}
           label={intl.formatMessage({ id: 'type-project' })}
           options={renderOptions}
           role="combobox"

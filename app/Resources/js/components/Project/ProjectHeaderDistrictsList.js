@@ -11,7 +11,7 @@ import type { ProjectHeaderDistrictsList_project } from '~relay/ProjectHeaderDis
 
 type Props = {|
   +breakingNumber: number,
-  +fontSize: number,
+  +fontSize: ?number,
   +project: ProjectHeaderDistrictsList_project,
 |};
 
@@ -20,7 +20,7 @@ type State = {|
 |};
 
 const DistrictsButton = styled(Button)`
-  font-size: ${props => props.fontSize}px;
+  font-size: ${props => props.fontSize || 'auto'},
   padding: 0;
   vertical-align: baseline;
 `;
@@ -39,7 +39,7 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
   };
 
   render() {
-    const { project, breakingNumber, fontSize } = this.props;
+    const { project, breakingNumber } = this.props;
     const { show } = this.state;
 
     if (project.districts) {
@@ -56,7 +56,6 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
       return (
         <React.Fragment>
           <DistrictsButton
-            fontSize={fontSize}
             bsStyle="link"
             onClick={this.handleShow}
             className="p-0 project-districts__modal-link">

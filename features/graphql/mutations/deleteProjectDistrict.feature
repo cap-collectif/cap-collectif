@@ -2,7 +2,7 @@
 Feature: Delete a district in projects
 
 @database
-Scenario: Admin can delete a project district
+Scenario: Admin wants to delete a district in projects
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
    """
@@ -29,8 +29,40 @@ Scenario: Admin can delete a project district
      }
   }
   """
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "query {
+      projectDistricts {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+    }"
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+   "data":{
+      "projectDistricts": {
+        "edges": [
+          {
+            "node": {
+              "id": "projectDistrict2",
+              "name": "Deuxième Quartier"
+            }
+          }
+        ]
+      }
+    }
+  }
+  """
 
-Scenario: Admin should receive an error when deleting an unknown project district
+Scenario: Admin wants to receive error during deleting a district in projects
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
    """

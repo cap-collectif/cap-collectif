@@ -215,6 +215,7 @@ InternalQuery:
           first:
             type: 'Int'
             defaultValue: 1000
+        access: "@=hasRole('ROLE_ADMIN')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryProjectDistrictResolver", [args])'
       allContributors:
         description: 'List all the contributors in the platform.'
