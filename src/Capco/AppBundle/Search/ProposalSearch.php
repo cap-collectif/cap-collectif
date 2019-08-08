@@ -155,7 +155,8 @@ class ProposalSearch extends Search
                         'order' => 'desc',
                         'nested_path' => 'votesCountByStep',
                         'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]]
-                    ]
+                    ],
+                    'createdAt' => ['order' => 'desc']
                 ];
 
             case 'least-votes':
@@ -164,24 +165,26 @@ class ProposalSearch extends Search
                         'order' => 'asc',
                         'nested_path' => 'votesCountByStep',
                         'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]]
-                    ]
+                    ],
+                    'createdAt' => ['order' => 'desc']
                 ];
 
             case 'comments':
-                $sortField = 'commentsCount';
-                $sortOrder = 'desc';
+                return [
+                    'commentsCount' => ['order' => 'desc'],
+                    'createdAt' => ['order' => 'desc']
+                ];
 
-                break;
             case 'expensive':
-                $sortField = 'estimation';
-                $sortOrder = 'desc';
-
-                break;
+                return [
+                    'estimation' => ['order' => 'desc'],
+                    'createdAt' => ['order' => 'desc']
+                ];
             case 'cheap':
-                $sortField = 'estimation';
-                $sortOrder = 'asc';
-
-                break;
+                return [
+                    'estimation' => ['order' => 'asc'],
+                    'createdAt' => ['order' => 'desc']
+                ];
             default:
                 throw new \RuntimeException('Unknown order: ' . $order);
         }

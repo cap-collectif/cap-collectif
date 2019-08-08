@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRepository;
-use Doctrine\ORM\EntityRepository;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Exists;
@@ -136,13 +135,15 @@ class EventSearch extends Search
             case EventOrderField::END_AT:
                 return [
                     'endAt' => ['order' => $orderBy['direction']],
-                    'startAt' => ['order' => $orderBy['direction']]
+                    'startAt' => ['order' => $orderBy['direction']],
+                    'createdAt' => ['order' => $orderBy['direction']]
                 ];
 
             case EventOrderField::START_AT:
                 return [
                     'startAt' => ['order' => $orderBy['direction']],
-                    'endAt' => ['order' => $orderBy['direction']]
+                    'endAt' => ['order' => $orderBy['direction']],
+                    'createdAt' => ['order' => $orderBy['direction']]
                 ];
             default:
                 throw new \RuntimeException("Unknown order: ${$orderBy['field']}");

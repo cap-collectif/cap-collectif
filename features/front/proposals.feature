@@ -98,7 +98,6 @@ Scenario: Anonymous user combine search, filters and sorting on proposals in a c
   Then there should be 7 proposals
   When I sort proposals by comments
   And I search for proposals with terms "proposition"
-  And I change the proposals theme filter
   Then there should be 2 proposals
   Then proposals should be filtered by theme and terms and sorted by comments
 

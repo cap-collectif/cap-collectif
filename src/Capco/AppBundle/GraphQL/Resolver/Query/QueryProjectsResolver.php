@@ -5,9 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Enum\OrderDirection;
 use GraphQL\Type\Definition\ResolveInfo;
 use Capco\AppBundle\Search\ProjectSearch;
 use Capco\AppBundle\GraphQL\QueryAnalyzer;
+use Capco\AppBundle\Enum\ProjectOrderField;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
@@ -52,7 +54,9 @@ class QueryProjectsResolver implements ResolverInterface
                 &$totalCount
             ) {
                 $term = $args->offsetExists('term') ? $args->offsetGet('term') : null;
-                $order = $args->offsetExists('orderBy') ? $args->offsetGet('orderBy') : null;
+                $orderBy = $args->offsetExists('orderBy')
+                    ? $args->offsetGet('orderBy')
+                    : ['field' => ProjectOrderField::LATEST, 'direction' => OrderDirection::DESC];
                 $onlyPublic = $args->offsetExists('onlyPublic')
                     ? $args->offsetGet('onlyPublic')
                     : false;
@@ -60,7 +64,7 @@ class QueryProjectsResolver implements ResolverInterface
                 $results = $this->projectSearch->searchProjects(
                     0,
                     1000,
-                    $order,
+                    $orderBy,
                     $term,
                     $this->getFilters($args)
                 );

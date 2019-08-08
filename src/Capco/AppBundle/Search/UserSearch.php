@@ -43,6 +43,9 @@ class UserSearch extends Search
             $query->setSort([
                 'totalContributionsCount' => [
                     'order' => 'DESC'
+                ],
+                'createdAt' => [
+                    'order' => 'desc'
                 ]
             ]);
         } else {
@@ -64,9 +67,9 @@ class UserSearch extends Search
     }
 
     public function getAllUsers(
-        ?int $limit = null,
-        ?int $first = null,
-        ?array $orderBy = null,
+        int $limit,
+        int $first,
+        array $orderBy,
         bool $showSuperAdmin = false
     ): array {
         $boolQuery = new Query\BoolQuery();
@@ -87,9 +90,7 @@ class UserSearch extends Search
             $query->setSize($limit);
         }
 
-        if ($orderBy) {
-            $query->addSort($this->getSort($orderBy));
-        }
+        $query->addSort($this->getSort($orderBy));
 
         $resultSet = $this->index->getType('user')->search($query);
 
@@ -195,6 +196,9 @@ class UserSearch extends Search
                 'nested_filter' => [
                     'term' => ['contributionsCountByProject.project.id' => $project->getId()]
                 ]
+            ],
+            'createdAt' => [
+                'order' => 'desc'
             ]
         ]);
 
@@ -264,6 +268,9 @@ class UserSearch extends Search
         $query->setSort([
             'totalContributionsCount' => [
                 'order' => 'desc'
+            ],
+            'createdAt' => [
+                'order' => 'desc'
             ]
         ]);
 
@@ -280,17 +287,17 @@ class UserSearch extends Search
         ];
     }
 
-    private function getSort(array $order): array
+    private function getSort(array $orderBy): array
     {
-        switch ($order['field']) {
+        switch ($orderBy['field']) {
             case SortField::CREATED_AT:
                 $sortField = SortField::SORT_FIELD[SortField::CREATED_AT];
 
                 break;
             default:
-                throw new \RuntimeException("Unknow order: ${order}");
+                throw new \RuntimeException("Unknown order: ${orderBy}");
         }
 
-        return [$sortField => ['order' => $order['direction']]];
+        return [$sortField => ['order' => $orderBy['direction']]];
     }
 }

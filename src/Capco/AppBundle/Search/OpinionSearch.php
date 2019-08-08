@@ -120,10 +120,10 @@ class OpinionSearch extends Search
 
                 break;
             case 'comments':
-                $sortField = 'commentsCount';
-                $sortOrder = 'desc';
-
-                break;
+                return [
+                    'commentsCount' => ['order' => 'desc'],
+                    'createdAt' => ['order' => 'desc']
+                ];
             default:
                 throw new \RuntimeException('Unknown order: ' . $order);
 

@@ -39,7 +39,7 @@ class ProjectSearch extends Search
     public function searchProjects(
         int $offset,
         ?int $limit,
-        array $order = null,
+        array $orderBy,
         string $term = null,
         array $providedFilters
     ): array {
@@ -68,9 +68,7 @@ class ProjectSearch extends Search
 
         $query = new Query($boolQuery);
 
-        if (isset($order['field'])) {
-            $query->setSort($this->getSort($order));
-        }
+        $query->setSort($this->getSort($orderBy));
 
         $query
             ->setSource(['id'])
@@ -82,8 +80,7 @@ class ProjectSearch extends Search
 
         return [
             'projects' => $results,
-            'count' => $resultSet->getTotalHits(),
-            'order' => $order
+            'count' => $resultSet->getTotalHits()
         ];
     }
 
@@ -107,21 +104,21 @@ class ProjectSearch extends Search
         return $totalCount;
     }
 
-    private function getSort(array $order): array
+    private function getSort(array $orderBy): array
     {
-        switch ($order['field']) {
+        switch ($orderBy['field']) {
             case self::POPULAR:
-                $sortField = 'contributionsCount';
-                $sortOrder = $order['direction'];
-
-                break;
+                return [
+                    'contributionsCount' => ['order' => $orderBy['direction']],
+                    'createdAt' => ['order' => 'desc']
+                ];
             case self::LATEST:
                 $sortField = 'publishedAt';
-                $sortOrder = $order['direction'];
+                $sortOrder = $orderBy['direction'];
 
                 break;
             default:
-                throw new \RuntimeException("Unknown order: ${order}");
+                throw new \RuntimeException("Unknown order: ${orderBy}");
         }
 
         return [$sortField => ['order' => $sortOrder]];

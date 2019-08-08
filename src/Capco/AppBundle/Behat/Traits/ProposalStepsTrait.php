@@ -419,7 +419,7 @@ trait ProposalStepsTrait
         $this->assertIfFilterSortedBy('comments');
         $this->assertPageContainsText('Proposition pas encore votable');
         $this->assertPageContainsText('Proposition plus votable');
-        $this->proposalBeforeProposal('Proposition pas encore votable', 'Proposition plus votable');
+        $this->proposalBeforeProposal('Proposition plus votable', 'Proposition pas encore votable');
     }
 
     /**

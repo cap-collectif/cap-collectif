@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
+use Capco\AppBundle\Enum\SortField;
 use Capco\AppBundle\Search\UserSearch;
+use Capco\AppBundle\Enum\OrderDirection;
 use GraphQL\Type\Definition\ResolveInfo;
 use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Capco\UserBundle\Repository\UserRepository;
@@ -36,7 +38,9 @@ class QueryUsersResolver implements ResolverInterface
         $this->queryAnalyzer->analyseQuery($resolveInfo);
 
         $includeSuperAdmin = isset($args['superAdmin']) && true === $args['superAdmin'];
-        $orderBy = $args->offsetGet('orderBy');
+        $orderBy = $args->offsetExists('orderBy')
+            ? $args->offsetGet('orderBy')
+            : ['field' => SortField::CREATED_AT, 'direction' => OrderDirection::DESC];
 
         $totalCount = 0;
         $paginator = new Paginator(function (int $offset, int $limit) use (
