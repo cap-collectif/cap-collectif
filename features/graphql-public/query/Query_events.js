@@ -1,7 +1,7 @@
 /* eslint-env jest */
 const OpenDataEventsQuery = /* GraphQL */ `
-  query OpenDataEventsQuery($count: Int!, $cursor: String) {
-    events(first: $count, after: $cursor) {
+  query OpenDataEventsQuery($count: Int!, $cursor: String, $orderBy: EventOrder) {
+    events(first: $count, after: $cursor, orderBy: $orderBy) {
       totalCount
       pageInfo {
         hasNextPage
@@ -13,8 +13,8 @@ const OpenDataEventsQuery = /* GraphQL */ `
           title
           createdAt
           updatedAt
-          #startAt
-          #endAt
+          startAt
+          endAt
           enabled
           fullAddress
           lat
@@ -39,6 +39,26 @@ const OpenDataEventsQuery = /* GraphQL */ `
               }
             }
           }
+        }
+      }
+    }
+  }
+`;
+
+const PublicOrderdedEventsQuery = /* GraphQL */ `
+  query PublicOrderdedEventsQuery($count: Int!, $cursor: String, $orderBy: EventOrder) {
+    events(first: $count, after: $cursor, orderBy: $orderBy) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          title
+          startAt
+          endAt
         }
       }
     }
@@ -79,13 +99,39 @@ describe('Preview|Query.events connection', () => {
     await expect(graphql(OpenDataEventsQuery, { count: 100 })).resolves.toMatchSnapshot();
   });
 
-  it('fetches the 3 events ordored by start date with a cursor', async () => {
+  it('fetches the 3 events ordered by last start date with a cursor', async () => {
     await expect(
-      graphql(
-        InternalEventsQuery,
-        { count: 3, orderBy: { field: 'START_AT', direction: 'DESC' } },
-        'internal',
-      ),
+      graphql(PublicOrderdedEventsQuery, {
+        count: 3,
+        orderBy: { field: 'START_AT', direction: 'DESC' },
+      }),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches the 3 events ordered by first start date with a cursor', async () => {
+    await expect(
+      graphql(PublicOrderdedEventsQuery, {
+        count: 3,
+        orderBy: { field: 'START_AT', direction: 'ASC' },
+      }),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches the 3 events ordered by last end date with a cursor', async () => {
+    await expect(
+      graphql(PublicOrderdedEventsQuery, {
+        count: 3,
+        orderBy: { field: 'END_AT', direction: 'DESC' },
+      }),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches the 3 events ordered by first end date with a cursor', async () => {
+    await expect(
+      graphql(PublicOrderdedEventsQuery, {
+        count: 3,
+        orderBy: { field: 'END_AT', direction: 'ASC' },
+      }),
     ).resolves.toMatchSnapshot();
   });
 
