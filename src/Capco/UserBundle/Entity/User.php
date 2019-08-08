@@ -114,6 +114,18 @@ class User extends BaseUser implements
      */
     protected $opinionVersionsCount = 0;
 
+    // Comments
+
+    /**
+     * @var int
+     */
+    protected $postCommentsCount = 0;
+
+    /**
+     * @var int
+     */
+    protected $proposalCommentsCount = 0;
+
     // Votes
 
     /**
@@ -759,6 +771,22 @@ class User extends BaseUser implements
     /**
      * @return int
      */
+    public function getPostCommentsCount()
+    {
+        return $this->postCommentsCount;
+    }
+
+    /**
+     * @param int $postCommentsCount
+     */
+    public function setPostCommentsCount($postCommentsCount)
+    {
+        $this->postCommentsCount = $postCommentsCount;
+    }
+
+    /**
+     * @return int
+     */
     public function getOpinionVotesCount()
     {
         return $this->opinionVotesCount;
@@ -802,6 +830,22 @@ class User extends BaseUser implements
     public function setSourceVotesCount($sourceVotesCount)
     {
         $this->sourceVotesCount = $sourceVotesCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProposalCommentsCount(): int
+    {
+        return $this->proposalCommentsCount;
+    }
+
+    /**
+     * @param int $proposalCommentsCount
+     */
+    public function setProposalCommentsCount($proposalCommentsCount)
+    {
+        $this->proposalCommentsCount = $proposalCommentsCount;
     }
 
     /**
@@ -1012,6 +1056,11 @@ class User extends BaseUser implements
         }
 
         return $contributions;
+    }
+
+    public function getCommentsCount(): int
+    {
+        return $this->postCommentsCount + $this->proposalCommentsCount;
     }
 
     public function getUsername(): ?string

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\EntityNotFoundException;
@@ -60,12 +59,12 @@ class ProposalComment extends Comment
     public function isIndexable(): bool
     {
         try {
-            $project = $this->getProject();
-
             return $this->isPublished() &&
                 !$this->getRelatedObject()->isDeleted() &&
-                $project &&
-                $project->isIndexable();
+                $this->getProposal()->getProject() &&
+                $this->getProposal()
+                    ->getProject()
+                    ->isIndexable();
         } catch (EntityNotFoundException $e) {
             return false;
         }
@@ -84,10 +83,5 @@ class ProposalComment extends Comment
     public function setRelatedObject($object)
     {
         return $this->setProposal($object);
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return ['Elasticsearch', 'ElasticsearchNestedProject', 'ElasticsearchNestedProposal'];
     }
 }

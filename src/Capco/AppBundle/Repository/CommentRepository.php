@@ -97,13 +97,12 @@ class CommentRepository extends EntityRepository
     /**
      * Get comments by user.
      *
-     * @param mixed    $user
-     * @param int|null $limit
-     * @param int|null $offset
+     * @param user
+     * @param mixed $user
      *
      * @return mixed
      */
-    public function getByUser($user, int $limit = null, int $offset = null)
+    public function getByUser($user)
     {
         $qb = $this->getPublishedQueryBuilder()
             ->addSelect('a', 'm')
@@ -111,9 +110,7 @@ class CommentRepository extends EntityRepository
             ->leftJoin('a.media', 'm')
             ->andWhere('c.Author = :user')
             ->setParameter('user', $user)
-            ->orderBy('c.updatedAt', 'ASC')
-            ->setMaxResults($limit)
-            ->setFirstResult($offset);
+            ->orderBy('c.updatedAt', 'ASC');
 
         return $qb->getQuery()->execute();
     }
@@ -149,14 +146,6 @@ class CommentRepository extends EntityRepository
             ->setParameter('userId', $user->getId());
 
         return (int) $query->getSingleScalarResult();
-    }
-
-    public function hydrateFromIds(array $ids): array
-    {
-        $qb = $this->createQueryBuilder('c');
-        $qb->where('c.id IN (:ids)')->setParameter('ids', $ids);
-
-        return $qb->getQuery()->getResult();
     }
 
     protected function getPublishedQueryBuilder()

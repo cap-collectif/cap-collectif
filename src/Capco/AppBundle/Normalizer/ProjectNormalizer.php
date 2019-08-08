@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
@@ -55,15 +53,6 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
 
         // We do not need all fields
         if (\in_array('ElasticsearchNestedProject', $groups, true)) {
-            $data['restrictedViewerIds'] = [];
-            // @var Group $viewerGroup
-            foreach ($object->getRestrictedViewerGroups() as $groups) {
-                /** @var UserGroup $userGroup */
-                foreach ($groups->getUserGroups() as $userGroup) {
-                    $data['restrictedViewerIds'][] = $userGroup->getUser()->getId();
-                }
-            }
-
             return $data;
         }
 
@@ -86,7 +75,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
 
         $links = [
             'show' => $this->stepResolver->getFirstStepLinkForProject($object),
-            'external' => $object->getExternalLink()
+            'external' => $object->getExternalLink(),
         ];
 
         if (\in_array('ProjectAdmin', $groups, true)) {
@@ -112,7 +101,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         if (\in_array('Projects', $groups, true) && $object->getCover()) {
             try {
                 $data['cover'] = [
-                    'url' => $this->mediaExtension->path($object->getCover(), 'project')
+                    'url' => $this->mediaExtension->path($object->getCover(), 'project'),
                 ];
             } catch (RouteNotFoundException $e) {
                 // Avoid some SonataMedia problems

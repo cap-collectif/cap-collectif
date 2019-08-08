@@ -11,6 +11,8 @@ use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Range;
 use Elastica\Query\Term;
+use Elastica\Result;
+use Elastica\ResultSet;
 
 class UserSearch extends Search
 {
@@ -58,7 +60,7 @@ class UserSearch extends Search
         $resultSet = $this->index->getType('user')->search($query);
 
         return [
-            'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
+            'results' => $this->getHydratedResults($resultSet->getResults()),
             'totalCount' => $resultSet->getTotalHits()
         ];
     }
@@ -94,7 +96,7 @@ class UserSearch extends Search
         $resultSet = $this->index->getType('user')->search($query);
 
         return [
-            'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
+            'results' => $this->getHydratedResults($resultSet->getResults()),
             'totalCount' => $resultSet->getTotalHits()
         ];
     }
@@ -109,7 +111,7 @@ class UserSearch extends Search
 
         if ($terms && $authorsOfEventOnly) {
             $authorIds = $this->eventSearch->getAllIdsOfAuthorOfEvent($terms);
-            $users = $this->getHydratedResults($this->userRepo, $authorIds);
+            $users = $this->getHydratedResults($authorIds);
 
             if ($onlyUsers) {
                 return $users;
@@ -135,7 +137,7 @@ class UserSearch extends Search
         }
 
         $resultSet = $this->index->getType($this->type)->search($query);
-        $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
+        $users = $this->getHydratedResultsFromResultSet($resultSet);
 
         if ($onlyUsers) {
             return $users;
@@ -163,7 +165,7 @@ class UserSearch extends Search
         }
 
         $resultSet = $this->index->getType($this->type)->search($query, 300);
-        $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
+        $users = $this->getHydratedResultsFromResultSet($resultSet);
 
         if ($onlyUsers) {
             return $users;
@@ -203,7 +205,7 @@ class UserSearch extends Search
             ->setFrom($offset)
             ->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
-        $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
+        $users = $this->getHydratedResultsFromResultSet($resultSet);
 
         return [
             'results' => $users,
@@ -247,7 +249,7 @@ class UserSearch extends Search
             ->setSize($limit);
 
         $resultSet = $this->index->getType($this->type)->search($query);
-        $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
+        $users = $this->getHydratedResultsFromResultSet($resultSet);
 
         return [
             'results' => $users,
@@ -275,9 +277,38 @@ class UserSearch extends Search
         $resultSet = $this->index->getType('user')->search($query);
 
         return [
-            'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
+            'results' => $this->getHydratedResultsFromResultSet($resultSet),
             'totalCount' => $resultSet->getTotalHits()
         ];
+    }
+
+    private function getHydratedResultsFromResultSet(ResultSet $resultSet): array
+    {
+        $ids = array_map(function (Result $result) {
+            return $result->getData()['id'];
+        }, $resultSet->getResults());
+
+        return $this->getHydratedResults($ids);
+    }
+
+    private function getHydratedResults(array $ids): array
+    {
+        if (isset($ids[0]) && !\is_string($ids[0])) {
+            $ids = array_map(function (Result $result) {
+                return $result->getData()['id'];
+            }, $ids);
+        }
+        // We can't use findById because we would lost the correct order given by ES
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        $users = $this->userRepo->hydrateFromIds($ids);
+
+        // We have to restore the correct order of ids, because Doctrine has lost it, see:
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        usort($users, function ($a, $b) use ($ids) {
+            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+        });
+
+        return $users;
     }
 
     private function getSort(array $order): array

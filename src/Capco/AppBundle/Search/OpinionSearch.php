@@ -61,12 +61,24 @@ class OpinionSearch extends Search
         $ids = array_map(function (Result $result) {
             return $result->getData()['id'];
         }, $resultSet->getResults());
-        $opinions = $this->getHydratedResults($this->opinionRepo, $ids);
+        $opinions = $this->getHydratedResults($ids);
 
         return [
             'opinions' => $opinions,
-            'count' => $resultSet->getTotalHits()
+            'count' => $resultSet->getTotalHits(),
         ];
+    }
+
+    public function getHydratedResults(array $ids): array
+    {
+        $opinions = $this->opinionRepo->hydrateFromIds($ids);
+        // We have to restore the correct order of ids, because Doctrine has lost it, see:
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        usort($opinions, function ($a, $b) use ($ids) {
+            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+        });
+
+        return $opinions;
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string

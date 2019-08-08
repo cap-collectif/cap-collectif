@@ -6,9 +6,6 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Argument;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\AppBundle\Repository\UserArchiveRepository;
-use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
-use Capco\AppBundle\Search\CommentSearch;
 use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\EventRepository;
@@ -16,6 +13,7 @@ use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\UserArchiveRepository;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
@@ -27,6 +25,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\GraphQL\Resolver\User\UserProposalsResolver;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
@@ -35,14 +34,10 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class ProfileController extends Controller
 {
     private $userProposalsResolver;
-    private $commentSearch;
 
-    public function __construct(
-        UserProposalsResolver $userProposalsResolver,
-        CommentSearch $commentSearch
-    ) {
+    public function __construct(UserProposalsResolver $userProposalsResolver)
+    {
         $this->userProposalsResolver = $userProposalsResolver;
-        $this->commentSearch = $commentSearch;
     }
 
     /**
@@ -189,7 +184,11 @@ class ProfileController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $user = $slug ? $this->get(UserRepository::class)->findOneBySlug($slug) : $this->getUser();
+        $user = $slug
+            ? $this->get(UserRepository::class)->findOneBySlug($slug)
+            : $this->get('security.token_storage')
+                ->getToken()
+                ->getUser();
 
         if (!$user) {
             throw $this->createNotFoundException();

@@ -8,17 +8,3 @@ Capco\AppBundle\Entity\Comment:
       groups: [Elasticsearch]
     authorName:
       groups: [Elasticsearch]
-    Author:
-      groups: [Elasticsearch]
-    getProject:
-      type: object
-      serialized_name: project
-      groups: [ElasticsearchNestedProject]
-    published:
-      groups: [Elasticsearch]
-    trashedStatus:
-      groups: [Elasticsearch]
-    getProposal:
-      type: object
-      serialized_name: proposal
-      groups: [ElasticsearchNestedProposal]

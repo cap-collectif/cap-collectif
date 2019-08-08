@@ -55,6 +55,16 @@ trait ContributionRepositoryTrait
         User $viewer,
         string $viewerParamName = 'viewer'
     ): QueryBuilder {
+        $visibility = [];
+        $visibility[] = ProjectVisibilityMode::VISIBILITY_PUBLIC;
+        if ($viewer->isSuperAdmin()) {
+            $visibility[] = ProjectVisibilityMode::VISIBILITY_ME;
+            $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
+            $visibility[] = ProjectVisibilityMode::VISIBILITY_CUSTOM;
+        } elseif ($viewer->isAdmin()) {
+            $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
+        }
+
         $qb->andWhere(
             $qb
                 ->expr()
@@ -87,10 +97,7 @@ trait ContributionRepositoryTrait
         );
 
         $qb->setParameter(':prvgId', $viewer->getUserGroupIds());
-        $qb->setParameter(
-            ':visibility',
-            ProjectVisibilityMode::getProjectVisibilityByRoles($viewer)
-        );
+        $qb->setParameter(':visibility', $visibility);
 
         return $qb;
     }

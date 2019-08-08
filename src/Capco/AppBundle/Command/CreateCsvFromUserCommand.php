@@ -528,9 +528,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
       projects {
         totalCount
       }
-      comments {
-        totalCount
-      }
+      postCommentsCount
+      eventCommentsCount
     }
   }
 }

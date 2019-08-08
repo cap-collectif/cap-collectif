@@ -71,14 +71,14 @@ def snapshots(tags='false'):
         print cyan('Deleting email snapshots...')
         local('rm -rf __snapshots__/emails/*')
     for suite in ['api', 'e2e', 'commands']:
-        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-email', '--tags=snapshot-email&&' + tags)[tags != 'false'], 'application', env.www_app)
+        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-email', '--tags=snapshot-email&&' + tags)[tags != 'false'], 'application', env.www_app, 'root')
     print cyan('Successfully generated emails snapshots !')
 
     if tags == 'false':
         print cyan('Deleting RGPD snapshots...')
         local('rm -rf __snapshots__/rgpd_user_archives/*')
     for suite in ['commands']:
-        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-rgpd', '--tags=snapshot-rgpd&&' + tags)[tags != 'false'], 'application', env.www_app)
+        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-rgpd', '--tags=snapshot-rgpd&&' + tags)[tags != 'false'], 'application', env.www_app, 'root')
     print cyan('Successfully generated RGPD snapshots !')
 
     env.service_command('bin/console capco:toggle:enable export --env test --no-debug', 'application', env.www_app)
@@ -91,8 +91,6 @@ def snapshots(tags='false'):
         print cyan('Running export commands...')
         for command in commands:
             env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
-
-        env.service_command('chmod 755 -R web/export/', 'application', env.www_app)
 
         for extension in extensions:
             env.service_command('cp web/export/*.' + extension + ' __snapshots__/exports/ 2>/dev/null || :', 'application', env.www_app)

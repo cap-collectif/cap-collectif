@@ -16,6 +16,3 @@ services:
 
   Capco\AppBundle\Search\UserSearch:
     public: true
-
-  Capco\AppBundle\Search\CommentSearch:
-    public: true
