@@ -5,6 +5,7 @@ import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type Props = {
   text?: ?string,
+  maxLength: number
 };
 
 type State = {
@@ -16,13 +17,18 @@ type State = {
 class StepText extends React.Component<Props, State> {
   static defaultProps = {
     text: null,
+    maxLength: 1600
   };
 
-  state = {
-    expanded: true,
-    truncated: false,
-    hideText: false,
-  };
+  constructor(props: Props) {
+    super(props);
+    const expanded = props.text && props.text.length <= props.maxLength;
+    this.state = {
+      expanded,
+      truncated: !expanded,
+      hideText: false,
+    }
+  }
 
   toggleExpand = () => {
     this.setState({

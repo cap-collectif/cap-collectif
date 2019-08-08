@@ -14,7 +14,6 @@ type Props = {|
   ...RelayProps,
 |}
 
-
 const ConsultationStepHeader = ({ step }: Props) => {
   const { timeRange: { startAt, endAt }} = step;
   return (
@@ -31,7 +30,7 @@ const ConsultationStepHeader = ({ step }: Props) => {
         )}
       </div>
       {/* $FlowFixMe $refType */}
-      <StepInfos step={step} />
+      <StepInfos maxLength={600} step={step} />
     </React.Fragment>
   )
 }
@@ -45,6 +44,7 @@ export default createFragmentContainer(ConsultationStepHeader, {
               startAt
               endAt
           }
+          body
           ...StepInfos_step
       }
   `,

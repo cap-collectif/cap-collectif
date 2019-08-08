@@ -4,6 +4,7 @@ exports[`<StepInfos /> should render correcty 1`] = `
 <Card>
   <Body>
     <StepText
+      maxLength={1600}
       text="Coucou"
     />
   </Body>
