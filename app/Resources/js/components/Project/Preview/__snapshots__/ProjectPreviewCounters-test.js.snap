@@ -25,6 +25,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
   >
     <ForwardRef(Relay(ProjectHeaderDistrictsList))
       breakingNumber={1}
+      fontSize={14}
       project={
         Object {
           "$fragmentRefs": null,

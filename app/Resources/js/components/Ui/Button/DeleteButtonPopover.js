@@ -3,10 +3,11 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Popover, OverlayTrigger } from 'react-bootstrap';
 
-type Props = {
-  handleValidate: () => void,
-  handleCancel?: ?() => void,
-};
+type Props = {|
+  +handleValidate: () => void,
+  +handleCancel?: ?() => void,
+  +id: string,
+|};
 
 export class DeleteButtonPopover extends React.Component<Props> {
   overlayRef: any;
@@ -33,6 +34,7 @@ export class DeleteButtonPopover extends React.Component<Props> {
   };
 
   render() {
+    const { id } = this.props;
     return (
       <OverlayTrigger
         trigger="click"
@@ -43,7 +45,7 @@ export class DeleteButtonPopover extends React.Component<Props> {
           <Popover
             placement="left"
             className="in"
-            id="delete-field"
+            id={`${id}-Popover`}
             title={<FormattedMessage id="are-you-sure-you-want-to-delete-this-item" />}>
             <Button
               onClick={this.handleValidate}
@@ -61,7 +63,7 @@ export class DeleteButtonPopover extends React.Component<Props> {
             </Button>
           </Popover>
         }>
-        <Button bsStyle="danger" className="btn-outline-danger">
+        <Button id={`${id}-DeleteButton`} bsStyle="danger" className="btn-outline-danger">
           <i className="cap cap-times" />{' '}
           <span className="hidden-xs">
             <FormattedMessage id="global.delete" />

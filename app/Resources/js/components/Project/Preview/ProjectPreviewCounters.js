@@ -46,7 +46,7 @@ export class ProjectPreviewCounters extends React.Component<Props> {
         {project.districts && project.districts.length > 0 && (
           <Tag icon="cap cap-marker-1-1">
             {/* $FlowFixMe */}
-            <ProjectHeaderDistrictsList project={project} breakingNumber={1} />
+            <ProjectHeaderDistrictsList fontSize={14} project={project} breakingNumber={1} />
           </Tag>
         )}
         {/* $FlowFixMe */}
