@@ -38,3 +38,14 @@ Capco\AppBundle\Entity\Consultation:
     step: '@cstep6'
     opinionCount: 0
     position: 1
+  firstConsultationMultiConsultationStep:
+    id: firstConsultationMultiConsultationStep
+    title: 'Première consultation'
+    step: '@multiCstep1'
+    position: 1
+    description: Regardez comme je suis une cheba
+  secondConsultationMultiConsultationStep:
+    id: secondConsultationMultiConsultationStep
+    title: 'Deuxième consultation'
+    step: '@multiCstep1'
+    position: 2
