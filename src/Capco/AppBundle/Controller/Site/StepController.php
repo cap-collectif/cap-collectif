@@ -416,6 +416,7 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
+            'consultation' => $consultation ?? $step->getFirstConsultation(),
             'stepProps' => [
                 'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
                 'consultationSlug' => $consultationSlug,
