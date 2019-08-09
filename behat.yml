@@ -31,7 +31,7 @@ e2e:
     Bex\Behat\StepTimeLoggerExtension:
       output: [console, csv]
   suites:
-    # If you add an other suite, please update isSuiteWithJS method.
+    # /!\ If you add an other suite, please update isSuiteWithJS method. /!\
     core:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -95,6 +95,7 @@ e2e:
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
         tags: '@randomly-failing'
+    # /!\ If you add an other suite, please update isSuiteWithJS method. /!\
 commands:
   extensions:
     # Tonic\Behat\ParallelScenarioExtension: ~

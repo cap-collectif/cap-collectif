@@ -968,12 +968,17 @@ class ApplicationContext extends UserContext
     private function isSuiteWithJS(Suite $suite): bool
     {
         return \in_array($suite->getName(), [
-            'core',
-            'consultation',
+            'randomly-failing',
             'questionnaire',
-            'bp',
-            'bo',
-            'randomly-failing'
+            'bo-moderation',
+            'consultation',
+            'bo-parameter',
+            'bo-content',
+            'bo-project',
+            'bo-pages',
+            'bo-user',
+            'core',
+            'bp'
         ]);
     }
 
