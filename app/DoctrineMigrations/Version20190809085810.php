@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190805125647 extends AbstractMigration
+final class Version20190809085810 extends AbstractMigration
 {
     protected $consultationsByStep = [];
 
