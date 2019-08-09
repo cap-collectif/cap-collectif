@@ -4,11 +4,9 @@ namespace Capco\UserBundle\Controller;
 
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Search\CommentSearch;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\AppBundle\Repository\UserArchiveRepository;
-use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
-use Capco\AppBundle\Search\CommentSearch;
 use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\EventRepository;
@@ -16,11 +14,7 @@ use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
-<<<<<<< HEAD
-=======
-use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\UserArchiveRepository;
->>>>>>> [8382-HIDE] Add viewer notion to profile project.
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
@@ -32,6 +26,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\GraphQL\Resolver\User\UserProposalsResolver;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
@@ -199,22 +194,6 @@ class ProfileController extends Controller
         if (!$user) {
             throw $this->createNotFoundException();
         }
-
-        $serializer = $this->get('serializer');
-
-        $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
-
-        $projectsProps = $serializer->serialize(['projects' => $projectsRaw], 'json', [
-            'groups' => ['Projects', 'UserDetails', 'Steps', 'ThemeDetails', 'ProjectType']
-        ]);
-        $projectsCount = \count($projectsRaw);
-
-        $opinionTypesWithUserOpinions = $this->get(OpinionTypeRepository::class)->getByUser($user);
-        $opinionsCount = $this->get(OpinionRepository::class)->countByUser(
-            $user,
-            false,
-            $this->getUser()
-        );
 
         $versions = $this->get(OpinionVersionRepository::class)->getByUser($user);
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
