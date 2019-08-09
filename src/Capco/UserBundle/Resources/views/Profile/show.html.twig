@@ -38,7 +38,7 @@
         </section>
     {% endif %}
 
-    {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true) %}
+    {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) %}
     {% if opinionsCount > 0 %}
         <section class="section--custom">
             <div class="container">
