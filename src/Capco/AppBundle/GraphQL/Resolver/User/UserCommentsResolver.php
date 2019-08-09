@@ -75,7 +75,7 @@ class UserCommentsResolver implements ResolverInterface
                     $limit,
                     $offset
                 );
-                $totalCount = $queryResponse['totalCount'];
+                $totalCount = $queryResponse['totalCount'] ?? 0;
 
                 return $queryResponse['results'] ?? [];
             });

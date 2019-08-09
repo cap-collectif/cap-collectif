@@ -88,7 +88,6 @@
         <section class="section--custom">
             <div class="container">
                 <h2>{{ 'user.profile.show.comments' | trans({}, 'CapcoAppBundle') }}</h2>
-{#                {% include '@CapcoUser/Profile/comments.html.twig' %}#}
                 {{ react_render_component('ProfileUserCommentApp', { 'props': { 'userId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
             </div>
         </section>

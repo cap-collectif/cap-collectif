@@ -1225,6 +1225,7 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   viewerHasVote: Boolean!
   viewerVote: CommentVote
   editUrl: URI
+  commentable: Commentable
 }
 
 # A connection to a list of items.
