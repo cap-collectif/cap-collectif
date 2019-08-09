@@ -12,7 +12,6 @@ type Props = {|
 
 export class SectionRecursiveList extends React.Component<Props> {
   static defaultProps = {
-    hideEmpty: false,
     hideEmptySection: false,
   };
 
