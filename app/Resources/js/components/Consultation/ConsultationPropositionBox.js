@@ -14,7 +14,8 @@ import ConsultationPropositionStep from './ConsultationPropositionStep';
 
 export type OwnProps = {|
   +id: RelayGlobalId,
-  +consultationSlug: string
+  +consultationSlug: string,
+  +isMultiConsultation: boolean
 |};
 
 type Props = {|
@@ -82,7 +83,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
   };
 
   render() {
-    const { id, showConsultationPlan, consultationPlanEnabled, isAuthenticated, consultationSlug } = this.props;
+    const { id, showConsultationPlan, consultationPlanEnabled, isMultiConsultation, isAuthenticated, consultationSlug } = this.props;
 
     const renderSectionRecursiveList = ({
       error,
@@ -100,6 +101,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
           const { consultationStep } = props;
           return (
             <ConsultationPropositionStep
+              isMultiConsultation={isMultiConsultation}
               consultationPlanEnabled={consultationPlanEnabled}
               showConsultationPlan={showConsultationPlan}
               consultationStep={consultationStep}
@@ -120,9 +122,10 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
               $consultationStepId: ID!
               $consultationSlug: String!
               $isAuthenticated: Boolean!
+              $isMultiConsultation: Boolean!
             ) {
               consultationStep: node(id: $consultationStepId) {
-                ...ConsultationPropositionStep_consultationStep @arguments(consultationSlug: $consultationSlug)
+                ...ConsultationPropositionStep_consultationStep @arguments(consultationSlug: $consultationSlug, isMultiConsultation: $isMultiConsultation)
               }
             }
           `}
@@ -131,6 +134,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
               consultationStepId: id,
               consultationSlug,
               isAuthenticated,
+              isMultiConsultation
             }: ConsultationPropositionBoxQueryVariables)
           }
           render={renderSectionRecursiveList}

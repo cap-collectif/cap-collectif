@@ -1573,7 +1573,9 @@ type Consultation implements Node {
 
 """A connection to a list of items."""
 type ConsultationConnection {
-  """Information to aid in pagination."""
+  totalCount: Int!
+
+  # Information to aid in pagination.
   pageInfo: PageInfo!
 
   """Information to aid in pagination."""

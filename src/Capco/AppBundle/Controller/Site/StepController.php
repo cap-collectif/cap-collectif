@@ -392,7 +392,9 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException($error);
         }
 
-        if (!$consultation && $step->getConsultations()->count() > 1) {
+        $isMultiConsultation = $step->getConsultations()->count() > 1;
+
+        if (!$consultation && $isMultiConsultation) {
             return $this->redirectToRoute('app_project_show_consultations', [
                 'stepSlug' => $step->getSlug(),
                 'projectSlug' => $project->getSlug()
@@ -416,7 +418,8 @@ class StepController extends Controller
             'currentStep' => $step,
             'stepProps' => [
                 'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
-                'consultationSlug' => $consultationSlug
+                'consultationSlug' => $consultationSlug,
+                'isMultiConsultation' => $isMultiConsultation
             ],
         ];
     }

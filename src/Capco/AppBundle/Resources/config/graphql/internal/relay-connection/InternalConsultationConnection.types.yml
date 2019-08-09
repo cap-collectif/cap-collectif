@@ -3,3 +3,6 @@ InternalConsultationConnection:
   config:
     name: ConsultationConnection
     nodeType: InternalConsultation!
+    connectionFields:
+      totalCount:
+        type: Int!

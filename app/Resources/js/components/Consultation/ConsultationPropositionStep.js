@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled, { css } from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 import ConsultationPlan from './ConsultationPlan';
 import DatesInterval from '../Utils/DatesInterval';
 import RemainingTime from '../Utils/RemainingTime';
@@ -10,6 +11,7 @@ import SectionRecursiveList from './SectionRecursiveList';
 import type { ConsultationPropositionStep_consultationStep } from '~relay/ConsultationPropositionStep_consultationStep.graphql';
 import { STEP_PROPOSITION_NAVIGATION_HEIGHT } from '../Steps/StepPropositionNavigationBox';
 import { breakpoint } from '../../utils/mixins';
+import UserAvatarList from '../User/UserAvatarList';
 
 type RelayProps = {|
   +consultationStep: ConsultationPropositionStep_consultationStep,
@@ -19,6 +21,7 @@ type Props = {|
   ...RelayProps,
   +consultationPlanEnabled: boolean,
   +showConsultationPlan: boolean,
+  +isMultiConsultation: boolean,
 |};
 
 const STICKY_OFFSET_TOP = 60;
@@ -31,7 +34,7 @@ const ConsultationPlanInner = styled.div`
 `;
 
 export const ConsultationPropositionStep = (props: Props) => {
-  const { consultationPlanEnabled, showConsultationPlan, consultationStep: step } = props;
+  const { consultationPlanEnabled, showConsultationPlan, consultationStep: step, isMultiConsultation } = props;
   const stepNavigationHeaderRef = React.useRef<?HTMLDivElement>(null);
   const getStepNavigationHeader: () => ?HTMLDivElement = () => {
     if (stepNavigationHeaderRef.current === null) {
@@ -77,7 +80,26 @@ export const ConsultationPropositionStep = (props: Props) => {
             : 'col-md-10 col-md-offset-1'
         }>
         <h2 className="text-center">{step.title}</h2>
-        <div className="mb-30 project__step-dates text-center">
+        <div className="mb-15 project__step-authors text-center">
+          {isMultiConsultation && step.project && step.project.authors.length > 0 && (
+            <div className="mr-15 d-ib">
+              {/* $FlowFixMe $refType */}
+              <UserAvatarList
+                users={step.project.authors}
+                max={3}
+                avatarSize={35}
+              />
+              <FormattedMessage id="project.show.published_by"/>&nbsp;
+              {step.project.authors
+                .filter(Boolean)
+                .map((author, index) =>
+                  <span><a href={author.url}>{author.username}</a>{step.project && step.project.authors && index !== step.project.authors.length - 1 && ', '}</span>
+                )
+              }
+            </div>
+          )}
+        </div>
+        <div className="mb-15 project__step-dates text-center">
           {(step.timeRange.startAt || step.timeRange.endAt) && (
             <div className="mr-15 d-ib">
               <i className="cap cap-calendar-2-1"/>{' '}
@@ -89,17 +111,36 @@ export const ConsultationPropositionStep = (props: Props) => {
             </div>
           )}
           {step.timeRange.endAt && step.status === 'OPENED' && !step.timeless && (
-            <div className="mr-15 d-ib">
+            <div className="d-ib">
               <i className="cap cap-hourglass-1"/> <RemainingTime endAt={step.timeRange.endAt}/>
             </div>
           )}
         </div>
-        <StepInfos step={step} />
+        {isMultiConsultation && (
+          <div className="mb-30 project__step__consultation--counters text-center">
+            {step.consultation && (
+              <div className="mr-15 d-ib">
+                <i className="cap cap-baloon-1"/> {step.consultation.contributions && step.consultation.contributions.totalCount} <FormattedMessage id="project.preview.counters.contributions" values={{ num: step.consultation.contributions && step.consultation.contributions.totalCount }} />
+              </div>
+            )}
+            {step.consultation && step.consultation.votesCount && (
+              <div className="mr-15 d-ib">
+                <i className="cap cap-hand-like-2-1"/> {step.consultation.votesCount} <FormattedMessage id="project.preview.counters.votes" values={{ num: step.consultation.votesCount }} />
+              </div>
+            )}
+            {step.consultation && (
+              <div className="mr-15 d-ib">
+                <i className="cap cap-user-2-1"/> {step.consultation.contributors.totalCount} <FormattedMessage id="project.preview.counters.contributors" values={{ num: step.consultation.contributors.totalCount }} />
+              </div>
+            )}
+          </div>
+        )}
+        <StepInfos step={step}/>
         {step.consultation && (
-            <SectionRecursiveList
-              consultation={step.consultation}
-            />
-          )}
+          <SectionRecursiveList
+            consultation={step.consultation}
+          />
+        )}
       </div>
     </>
   );
@@ -107,7 +148,7 @@ export const ConsultationPropositionStep = (props: Props) => {
 
 export default createFragmentContainer(ConsultationPropositionStep, {
   consultationStep: graphql`
-      fragment ConsultationPropositionStep_consultationStep on ConsultationStep @argumentDefinitions(consultationSlug: { type: "String!" }) {
+      fragment ConsultationPropositionStep_consultationStep on ConsultationStep @argumentDefinitions(isMultiConsultation: { type: "Boolean!", defaultValue: false }, consultationSlug: { type: "String!" }) {
           ...StepInfos_step
           id
           timeRange {
@@ -117,7 +158,21 @@ export default createFragmentContainer(ConsultationPropositionStep, {
           title
           status
           timeless
+          project @include(if: $isMultiConsultation)  {
+              authors {
+                  username
+                  url
+                  ...UserAvatarList_users
+              }
+          }
           consultation(slug: $consultationSlug) {
+              contributions {
+                  totalCount
+              }
+              contributors {
+                  totalCount
+              }
+              votesCount
               ...ConsultationPlan_consultation
               ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
           }

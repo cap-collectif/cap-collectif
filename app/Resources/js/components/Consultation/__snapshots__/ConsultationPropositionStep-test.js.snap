@@ -11,6 +11,13 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
       consultation={
         Object {
           "$fragmentRefs": null,
+          "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "votesCount": 0,
         }
       }
     />
@@ -25,7 +32,10 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
       El titro
     </h2>
     <div
-      className="mb-30 project__step-dates text-center"
+      className="mb-15 project__step-authors text-center"
+    />
+    <div
+      className="mb-15 project__step-dates text-center"
     >
       <div
         className="mr-15 d-ib"
@@ -41,7 +51,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
         />
       </div>
       <div
-        className="mr-15 d-ib"
+        className="d-ib"
       >
         <i
           className="cap cap-hourglass-1"
@@ -59,6 +69,13 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
           "$refType": null,
           "consultation": Object {
             "$fragmentRefs": null,
+            "contributions": Object {
+              "totalCount": 0,
+            },
+            "contributors": Object {
+              "totalCount": 0,
+            },
+            "votesCount": 0,
           },
           "id": "myStep",
           "status": "OPENED",
@@ -75,17 +92,13 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
       consultation={
         Object {
           "$fragmentRefs": null,
-          "id": "consultation1",
-          "sections": Array [
-            Object {
-              "id": "section1",
-              "sections": Array [
-                Object {
-                  "id": "section2",
-                },
-              ],
-            },
-          ],
+          "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "votesCount": 0,
         }
       }
       hideEmptySection={false}
@@ -106,7 +119,10 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
       El titro
     </h2>
     <div
-      className="mb-30 project__step-dates text-center"
+      className="mb-15 project__step-authors text-center"
+    />
+    <div
+      className="mb-15 project__step-dates text-center"
     >
       <div
         className="mr-15 d-ib"
@@ -122,7 +138,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
         />
       </div>
       <div
-        className="mr-15 d-ib"
+        className="d-ib"
       >
         <i
           className="cap cap-hourglass-1"
@@ -140,6 +156,13 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
           "$refType": null,
           "consultation": Object {
             "$fragmentRefs": null,
+            "contributions": Object {
+              "totalCount": 0,
+            },
+            "contributors": Object {
+              "totalCount": 0,
+            },
+            "votesCount": 0,
           },
           "id": "myStep",
           "status": "OPENED",
@@ -156,13 +179,13 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
       consultation={
         Object {
           "$fragmentRefs": null,
-          "id": "consultation1",
-          "sections": Array [
-            Object {
-              "id": "section1",
-              "sections": null,
-            },
-          ],
+          "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "votesCount": 0,
         }
       }
       hideEmptySection={false}

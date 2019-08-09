@@ -22,7 +22,7 @@ class StepText extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    const expanded = props.text && props.text.length <= props.maxLength;
+    const expanded = (props.text && props.text.length <= props.maxLength) || true;
     this.state = {
       expanded,
       truncated: !expanded,
@@ -41,9 +41,10 @@ class StepText extends React.Component<Props, State> {
     if (!text) {
       return null;
     }
+    const { truncated, hideText, expanded } = this.state;
     const style = {
-      maxHeight: this.state.expanded ? 'none' : '85px',
-      visibility: this.state.hideText ? 'hidden' : 'visible',
+      maxHeight: expanded ? 'none' : '85px',
+      visibility: hideText ? 'hidden' : 'visible',
     };
     return (
       <div className="step__intro">
@@ -52,8 +53,8 @@ class StepText extends React.Component<Props, State> {
         </div>
         <div className="text-center">
           <ReadMoreLink
-            visible={this.state.truncated}
-            expanded={this.state.expanded}
+            visible={truncated}
+            expanded={expanded}
             onClick={this.toggleExpand}
           />
         </div>

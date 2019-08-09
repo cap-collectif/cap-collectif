@@ -12,10 +12,6 @@ type Props = {|
 
 export class StepInfos extends React.Component<Props> {
 
-  static defaultProps = {
-    truncated: false
-  };
-
   render() {
     const { step, maxLength } = this.props;
     const { body } = step;

@@ -13,6 +13,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
         "consultationSlug": "consultationSlug",
         "consultationStepId": "stepId",
         "isAuthenticated": false,
+        "isMultiConsultation": false,
       }
     }
   />
@@ -32,6 +33,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
         "consultationSlug": "consultationSlug",
         "consultationStepId": "stepId",
         "isAuthenticated": false,
+        "isMultiConsultation": false,
       }
     }
   />

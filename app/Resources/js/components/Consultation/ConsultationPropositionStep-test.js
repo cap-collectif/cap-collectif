@@ -8,6 +8,7 @@ import { $fragmentRefs, $refType } from '../../mocks';
 describe('<ConsultationPropositionStep />', () => {
   const props = {
     showConsultationPlan: true,
+    isMultiConsultation: false,
     consultationPlanEnabled: true,
     consultationStep: {
       id: 'myStep',
@@ -18,6 +19,13 @@ describe('<ConsultationPropositionStep />', () => {
         endAt: new Date(2019, 6, 25).toDateString(),
       },
       consultation: {
+        contributions: {
+          totalCount: 0
+        },
+        contributors: {
+          totalCount: 0
+        },
+        votesCount: 0,
         $fragmentRefs,
       },
       timeless: false,
