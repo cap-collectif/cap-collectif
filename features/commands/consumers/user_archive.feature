@@ -1,7 +1,7 @@
 @consumers
 Feature: User archive consumer
 
-@rabbitmq @export @snapshot-rgpd
+@rabbitmq @export
 Scenario: User request for personal archive is asynchronous
   Given I publish in "user_archive_request" with message below:
   """
@@ -10,9 +10,9 @@ Scenario: User request for personal archive is asynchronous
   }
   """
   And I consume 1 messages in "user_archive_request"
-  Then there should be a personal data archive for user "user1"
+  Then personal data archive for user "user1" should match its snapshot
 
-@rabbitmq @export @snapshot-rgpd
+@rabbitmq @export
 Scenario: User request for personal archive is asynchronous
   Given I publish in "user_archive_request" with message below:
   """
@@ -21,4 +21,4 @@ Scenario: User request for personal archive is asynchronous
   }
   """
   And I consume 1 messages in "user_archive_request"
-  Then there should be a personal data archive for user "user5"
+  Then personal data archive for user "user5" should match its snapshot

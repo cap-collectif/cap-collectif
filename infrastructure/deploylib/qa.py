@@ -53,11 +53,16 @@ def graphql_schemas(checkSame=False):
 def snapshots(tags='false'):
     "Generate all snapshots"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
-    commands = [
+    export_commands = [
         'capco:export:users --quiet',
         'capco:export:consultation --quiet',
         'capco:export:projects-contributors --quiet --snapshot',
         'capco:export:proposalStep --quiet --snapshot',
+    ]
+    user_archives_commands = [
+        'capco:export:user userAdmin --updateSnapshot',
+        'capco:export:user user1 --updateSnapshot',
+        'capco:export:user user5 --updateSnapshot',
     ]
     extensions = [
         'csv',
@@ -71,15 +76,14 @@ def snapshots(tags='false'):
         print cyan('Deleting email snapshots...')
         local('rm -rf __snapshots__/emails/*')
     for suite in ['api', 'e2e', 'commands']:
-        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-email', '--tags=snapshot-email&&' + tags)[tags != 'false'], 'application', env.www_app)
+        env.service_command('UPDATE_SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-email', '--tags=snapshot-email&&' + tags)[tags != 'false'], 'application', env.www_app)
     print cyan('Successfully generated emails snapshots !')
 
     if tags == 'false':
-        print cyan('Deleting RGPD snapshots...')
-        local('rm -rf __snapshots__/rgpd_user_archives/*')
-    for suite in ['commands']:
-        env.service_command('SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-rgpd', '--tags=snapshot-rgpd&&' + tags)[tags != 'false'], 'application', env.www_app)
-    print cyan('Successfully generated RGPD snapshots !')
+        print cyan('Running user RGPD archive commands...')
+        for command in user_archives_commands:
+            env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
+        print cyan('Successfully generated user RGPD archive snapshots !')
 
     env.service_command('bin/console capco:toggle:enable export --env test --no-debug', 'application', env.www_app)
     
@@ -89,7 +93,7 @@ def snapshots(tags='false'):
             env.service_command('rm -rf __snapshots__/exports/*.' + extension , 'application', env.www_app, 'root')
 
         print cyan('Running export commands...')
-        for command in commands:
+        for command in export_commands:
             env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
 
         env.service_command('chmod 755 -R web/export/', 'application', env.www_app)
