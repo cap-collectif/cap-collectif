@@ -82,6 +82,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
           "$fragmentRefs": null,
         }
       }
+      hideEmptySection={false}
     />
   </div>
 </Fragment>
@@ -157,6 +158,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
           "$fragmentRefs": null,
         }
       }
+      hideEmptySection={false}
     />
   </div>
 </Fragment>

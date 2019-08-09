@@ -38,9 +38,6 @@ exports[`<Section /> renders correcty 1`] = `
           "contribuable": true,
           "contributionsCount": 0,
           "description": "description",
-          "opinions": Object {
-            "totalCount": 2,
-          },
           "slug": "slug",
           "subtitle": "subtitle",
           "title": "title",
@@ -48,5 +45,51 @@ exports[`<Section /> renders correcty 1`] = `
       }
     />
   </div>
+</div>
+`;
+
+exports[`<Section /> renders nothing when hide section 1`] = `
+<div
+  className="anchor-offset text-center"
+  id="opinion-type--slug"
+>
+  <div
+    className="opinion-type__title level--0"
+  >
+    title
+    <br />
+    <span
+      className="small excerpt"
+    >
+      subtitle
+    </span>
+  </div>
+  <WYSIWYGRender
+    className="opinion-type__description"
+    value="description"
+  />
+</div>
+`;
+
+exports[`<Section /> renders nothing when section not contribuable 1`] = `
+<div
+  className="anchor-offset text-center"
+  id="opinion-type--slug"
+>
+  <div
+    className="opinion-type__title level--0"
+  >
+    title
+    <br />
+    <span
+      className="small excerpt"
+    >
+      subtitle
+    </span>
+  </div>
+  <WYSIWYGRender
+    className="opinion-type__description"
+    value="description"
+  />
 </div>
 `;

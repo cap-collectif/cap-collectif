@@ -17,6 +17,7 @@ const query = graphql`
 
 export type Props = {|
   userId: string,
+  hideEmptySection: boolean,
 |};
 
 export const rendering = ({
@@ -33,7 +34,7 @@ export const rendering = ({
   if (props) {
     if (props.sections != null) {
       // $FlowFixMe
-      return <SectionList sections={props.sections} />;
+      return <SectionList sections={props.sections} hideEmptySection={props.hideEmptySection} />;
     }
   }
   return <Loader />;

@@ -70,6 +70,7 @@ export const ConsultationPropositionStep = (props: Props) => {
             <SectionRecursiveList
               // $FlowFixMe $refType
               consultation={step.consultations.edges[0].node}
+              hideEmptySection={false}
             />
           )}
       </div>

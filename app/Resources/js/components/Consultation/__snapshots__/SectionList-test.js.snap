@@ -7,6 +7,7 @@ exports[`<SectionList /> renders correcty 1`] = `
 >
   <ForwardRef(Relay(Section))
     consultation={Object {}}
+    hideEmptySection={false}
     level={0}
     section={
       Object {
@@ -24,6 +25,7 @@ exports[`<SectionList /> renders correcty 1`] = `
   />
   <SectionList
     consultation={Object {}}
+    hideEmptySection={false}
     key="0"
     level={1}
     section={

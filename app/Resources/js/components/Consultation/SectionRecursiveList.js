@@ -7,11 +7,17 @@ import type { SectionRecursiveList_consultation } from '~relay/SectionRecursiveL
 
 type Props = {|
   +consultation: SectionRecursiveList_consultation,
+  +hideEmptySection: boolean,
 |};
 
 export class SectionRecursiveList extends React.Component<Props> {
+  static defaultProps = {
+    hideEmpty: false,
+    hideEmptySection: false,
+  };
+
   render() {
-    const { consultation } = this.props;
+    const { consultation, hideEmptySection } = this.props;
 
     return (
       <div>
@@ -20,7 +26,13 @@ export class SectionRecursiveList extends React.Component<Props> {
         {consultation.sections &&
           consultation.sections.filter(Boolean).map((section, index) => (
             // $FlowFixMe $refType
-            <SectionList key={index} consultation={consultation} section={section} level={0} />
+            <SectionList
+              key={index}
+              consultation={consultation}
+              section={section}
+              level={0}
+              hideEmptySection={hideEmptySection}
+            />
           ))}
       </div>
     );

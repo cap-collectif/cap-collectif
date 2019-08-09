@@ -37,6 +37,7 @@ exports[`<SectionRecursiveList /> renders correcty 1`] = `
         ],
       }
     }
+    hideEmptySection={false}
     key="0"
     level={0}
     section={
@@ -63,6 +64,7 @@ exports[`<SectionRecursiveList /> renders correcty 1`] = `
         ],
       }
     }
+    hideEmptySection={false}
     key="1"
     level={0}
     section={

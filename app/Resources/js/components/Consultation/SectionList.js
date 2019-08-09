@@ -15,16 +15,26 @@ type Props = {|
   |},
   +consultation: {||},
   +level: number,
+  +hideEmptySection: boolean,
 |};
 
 export class SectionList extends React.Component<Props> {
+  static defaultProps = {
+    hideEmptySection: false,
+  };
+
   render() {
-    const { consultation, section, level } = this.props;
+    const { consultation, section, level, hideEmptySection } = this.props;
 
     return (
       <div className="section-list_container" id={section.__id}>
         {/* $FlowFixMe $refType */}
-        <Section consultation={consultation} section={section} level={level} />
+        <Section
+          consultation={consultation}
+          section={section}
+          level={level}
+          hideEmptySection={hideEmptySection}
+        />
         {section.sections &&
           section.sections.map((subSelection, index) => (
             // $FlowFixMe $refType
