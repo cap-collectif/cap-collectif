@@ -6,13 +6,13 @@ exports[`<FacebookLoginButton /> renders a button if feature is active 1`] = `
   href="/login/facebook?_destination=http://localhost/"
   title={
     <FormattedMessage
-      id="login.Facebook"
+      id="login.facebook"
       values={Object {}}
     />
   }
 >
   <FormattedMessage
-    id="login.Facebook"
+    id="login.facebook"
     values={Object {}}
   />
 </a>
@@ -24,13 +24,13 @@ exports[`<FacebookLoginButton /> renders a button with correct registration labe
   href="/login/facebook?_destination=http://localhost/"
   title={
     <FormattedMessage
-      id="registration.Facebook"
+      id="registration.facebook"
       values={Object {}}
     />
   }
 >
   <FormattedMessage
-    id="registration.Facebook"
+    id="registration.facebook"
     values={Object {}}
   />
 </a>

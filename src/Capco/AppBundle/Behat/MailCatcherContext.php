@@ -26,7 +26,7 @@ class MailCatcherContext extends Base implements KernelAwareContext
      */
     public function emailContentShouldMatch(string $file)
     {
-        $writeSnapshot = EnvHelper::get('UPDATE_SNAPSHOTS');
+        $writeSnapshot = EnvHelper::get('SNAPSHOTS');
 
         $message = $this->getCurrentMessage();
 

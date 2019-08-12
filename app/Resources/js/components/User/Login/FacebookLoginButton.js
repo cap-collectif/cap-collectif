@@ -23,7 +23,7 @@ class FacebookLoginButton extends React.Component<Props> {
       return 'Facebook';
     }
 
-    return `${prefix || 'login.'}Facebook`;
+    return `${prefix || 'login.'}facebook`;
   };
 
   render() {

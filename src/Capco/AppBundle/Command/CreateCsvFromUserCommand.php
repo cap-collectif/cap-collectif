@@ -3,18 +3,15 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
+use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Entity\User;
 use Box\Spout\Writer\WriterFactory;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Process\Process;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\InfoResolver;
 use Overblog\GraphQLBundle\Request\Executor;
-use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
@@ -62,53 +59,6 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         $this->kernelRootDir = $kernelRootDir;
 
         parent::__construct($exportUtils);
-    }
-
-    public static function getSnapshotDir(string $userId): string
-    {
-        return "/var/www/__snapshots__/rgpd_user_archives/${userId}/";
-    }
-
-    public static function updateSnapshot(string $userId, string $zipPath): void
-    {
-        if (!file_exists($zipPath)) {
-            throw new \RuntimeException('Zip path is does not contain a file.');
-        }
-
-        $matchTo = self::getSnapshotDir($userId);
-
-        // Delete current snapshot
-        (new Process('rm -rf ' . $matchTo))->mustRun();
-        mkdir($matchTo, 0755);
-        mkdir($matchTo . '/pictures', 0755);
-
-        $extractTo = '/var/www/__unziped_tmp_dir__/';
-        if (!file_exists($extractTo)) {
-            mkdir($extractTo, 0755);
-        }
-
-        $zip = new \ZipArchive();
-        $zip->open($zipPath);
-        $zip->extractTo($extractTo);
-        $zip->close();
-
-        $finder = new Finder();
-        // Find all files in the current directory
-        $finder->files()->in($extractTo);
-
-        foreach ($finder as $file) {
-            (new Process(
-                'mv ' .
-                    $extractTo .
-                    $file->getRelativePathname() .
-                    ' ' .
-                    $matchTo .
-                    $file->getRelativePathname()
-            ))->mustRun();
-            chmod($matchTo . $file->getRelativePathname(), 0755);
-        }
-
-        (new Process('rm -rf ' . $extractTo))->mustRun();
     }
 
     public function getNodeContent($content, ?string $columnName, string $closestPath = ''): array
@@ -190,14 +140,11 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     protected function configure(): void
     {
         parent::configure();
-        $this->setDescription('Create csv file from user data')
-            ->addArgument('userId', InputArgument::REQUIRED, 'The ID of the user')
-            ->addOption(
-                'updateSnapshot',
-                'u',
-                InputOption::VALUE_NONE,
-                '/!\ Dev only. This will re-generate snapshot artifacts for current RGPD archive.'
-            );
+        $this->setDescription('Create csv file from user data')->addArgument(
+            'userId',
+            InputArgument::REQUIRED,
+            'The ID of the user'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
@@ -206,27 +153,20 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
         /** @var User $user */
         $user = $this->userRepository->find($userId);
-        $encodedUserId = GlobalId::toGlobalId('User', $userId);
-        $datas = $this->requestDatas($encodedUserId);
+        $userId = GlobalId::toGlobalId('User', $userId);
+        $datas = $this->requestDatas($userId);
         foreach ($datas as $key => $value) {
-            $this->createCsv($encodedUserId, $value, $key);
+            $this->createCsv($userId, $value, $key);
         }
         $archive = $this->userArchiveRepository->getLastForUser($user);
 
         if ($archive) {
             $archive->setReady(true);
-            $archive->setPath(trim($this->getZipFilenameForUser($encodedUserId)));
+            $archive->setPath(trim($this->getZipFilenameForUser($userId)));
             $this->em->flush();
         }
 
-        $zipPath = $this->getZipPathForUser($encodedUserId);
-
-        if (true === $input->getOption('updateSnapshot')) {
-            self::updateSnapshot($userId, $zipPath);
-            $output->writeln('<info>Snapshot has been written !</info>');
-        }
-
-        $output->writeln($zipPath);
+        $output->writeln($this->getZipFilenameForUser($userId));
     }
 
     protected function requestDatas(string $userId): array
