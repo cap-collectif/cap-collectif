@@ -57,6 +57,7 @@ class OpinionPage extends Page
         'source report button' => '#source-source36 .source__btn--report',
     ];
 
+
     /**
      * @var string
      */
