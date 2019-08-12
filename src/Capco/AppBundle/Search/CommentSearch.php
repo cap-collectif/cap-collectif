@@ -147,7 +147,7 @@ class CommentSearch extends Search
                             'value' => ProjectVisibilityMode::VISIBILITY_CUSTOM
                         ]
                     ]),
-                    new Query\Terms('project.restrictedViewerIds', $viewer->getUserGroupIds())
+                    new Query\Terms('project.restrictedViewerIds', [$viewer->getId()])
                 ]),
                 (new BoolQuery())->addMust([
                     new Query\Terms('project.visibility', $visibility),
