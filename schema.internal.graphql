@@ -1492,7 +1492,7 @@ type Consultation implements Node {
   votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-09-01 UTC.")
 
   # Get the associated description of the consultation
-  description: String
+  description: HTML
 
   # Get the associated illustration of the consultation
   illustration: Media
