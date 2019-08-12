@@ -44,7 +44,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <GoogleLoginButton
     features={
@@ -88,7 +88,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <SamlLoginButton
     features={
@@ -192,7 +192,7 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <GoogleLoginButton
     features={
@@ -236,7 +236,7 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <SamlLoginButton
     features={
@@ -338,7 +338,7 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <GoogleLoginButton
     features={
@@ -382,7 +382,7 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <SamlLoginButton
     features={
@@ -484,7 +484,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <GoogleLoginButton
     features={
@@ -528,7 +528,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <SamlLoginButton
     features={
@@ -677,7 +677,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <GoogleLoginButton
     features={
@@ -721,7 +721,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <SamlLoginButton
     features={
@@ -823,7 +823,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <GoogleLoginButton
     features={
@@ -867,7 +867,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
         "zipcode_at_register": false,
       }
     }
-    prefix="login."
+    prefix=""
   />
   <SamlLoginButton
     features={

@@ -13,7 +13,7 @@ export class GoogleLoginButton extends React.Component<Props> {
   static displayName = 'GoogleLoginButton';
 
   static defaultProps = {
-    prefix: 'login.',
+    prefix: '',
   };
 
   getTitleTraduction = (): string => {

@@ -13,7 +13,7 @@ class FacebookLoginButton extends React.Component<Props> {
   static displayName = 'FacebookLoginButton';
 
   static defaultProps = {
-    prefix: 'login.',
+    prefix: '',
   };
 
   getTitleTraduction = (): string => {
