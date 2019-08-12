@@ -9,6 +9,7 @@ describe('<SSOByPassAuthForm />', () => {
   const props = {
     features,
     onToggle: jest.fn(),
+    isSuperAdmin: true,
   };
 
   it('renders correctly', () => {

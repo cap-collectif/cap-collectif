@@ -9,42 +9,46 @@ import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../../ty
 type Props = {|
   features: FeatureToggles,
   onToggle: (feature: FeatureToggle, value: boolean) => void,
+  isSuperAdmin: boolean,
 |};
 
 export class SSOByPassAuthForm extends React.Component<Props> {
   render() {
-    const { onToggle, features } = this.props;
+    const { onToggle, features, isSuperAdmin } = this.props;
     return (
-      <div className="box box-primary container-fluid">
-        <div className="box-header">
-          <h3 className="box-title">
-            <FormattedMessage id="option" />
-          </h3>
-        </div>
-        <div className="box-content box-content__content-form">
-          <div className="d-flex flex-row align-items-center mb-15">
-            <Toggle
-              icons
-              checked={features.sso_by_pass_auth}
-              onChange={() => onToggle('sso_by_pass_auth', !features.sso_by_pass_auth)}
-            />
-            <div className="d-flex flex-column">
-              <strong>
-                <FormattedMessage id="instant-authentication" />
-              </strong>
-              <div className="color-dark-gray">
-                <FormattedMessage id="bypass-the-selection-of-an-authentication-method" />
+      isSuperAdmin && (
+        <div className="box box-primary container-fluid">
+          <div className="box-header">
+            <h3 className="box-title">
+              <FormattedMessage id="option" />
+            </h3>
+          </div>
+          <div className="box-content box-content__content-form">
+            <div className="d-flex flex-row align-items-center mb-15">
+              <Toggle
+                icons
+                checked={features.sso_by_pass_auth}
+                onChange={() => onToggle('sso_by_pass_auth', !features.sso_by_pass_auth)}
+              />
+              <div className="d-flex flex-column">
+                <strong>
+                  <FormattedMessage id="instant-authentication" />
+                </strong>
+                <div className="color-dark-gray">
+                  <FormattedMessage id="bypass-the-selection-of-an-authentication-method" />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )
     );
   }
 }
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onToggle: (feature: FeatureToggle, value: boolean) => {

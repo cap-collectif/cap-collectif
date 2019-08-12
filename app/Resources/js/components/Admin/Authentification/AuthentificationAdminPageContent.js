@@ -15,16 +15,19 @@ type RelayProps = {|
 type Props = {|
   ...RelayProps,
   features: FeatureToggles,
+  isSuperAdmin: boolean,
 |};
 
 export class AuthentificationAdminPageContent extends React.Component<Props> {
   render() {
-    const { shieldAdminForm, ssoConfigurations, features } = this.props;
+    const { shieldAdminForm, ssoConfigurations, features, isSuperAdmin } = this.props;
 
     return (
       <>
         <ShieldAdminForm shieldAdminForm={shieldAdminForm} />
-        {features.list_sso && <ListSSOConfiguration ssoConfigurations={ssoConfigurations} />}
+        {isSuperAdmin && features.list_sso && (
+          <ListSSOConfiguration ssoConfigurations={ssoConfigurations} />
+        )}
       </>
     );
   }
@@ -32,6 +35,7 @@ export class AuthentificationAdminPageContent extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 
 export default connect(mapStateToProps)(AuthentificationAdminPageContent);
