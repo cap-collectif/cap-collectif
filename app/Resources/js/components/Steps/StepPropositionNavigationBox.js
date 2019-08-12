@@ -18,7 +18,7 @@ export type Props = {|
   +relatedSlug: string,
 |}
 
-export const STEP_PROPOSITION_NAVIGATION_HEIGHT = 120;
+export const STEP_PROPOSITION_NAVIGATION_HEIGHT = 100;
 
 const StepPropositionNavigationBoxInner = styled.div`
   height: ${STEP_PROPOSITION_NAVIGATION_HEIGHT}px;

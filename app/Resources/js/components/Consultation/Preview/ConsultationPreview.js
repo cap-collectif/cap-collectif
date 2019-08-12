@@ -2,11 +2,13 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Col } from 'react-bootstrap';
+import { FormattedMessage } from "react-intl";
 import type { ConsultationPreview_consultation } from '~relay/ConsultationPreview_consultation.graphql';
 import Card from '../../Ui/Card/Card';
 import DefaultProjectImage from '../../Project/Preview/DefaultProjectImage';
 import ProjectPreviewCounter from '../../Project/Preview/ProjectPreviewCounter';
 import TagsList from '../../Ui/List/TagsList';
+import colors from '../../../utils/colors';
 
 type RelayProps = {|
   +consultation: ConsultationPreview_consultation
@@ -15,6 +17,12 @@ type RelayProps = {|
 type Props = {|
   ...RelayProps,
 |}
+
+const ConsultationPreviewType = () => (
+  <Card.Type bgColor={colors.darkGray}>
+    <FormattedMessage id="project.types.consultation"/>
+  </Card.Type>
+);
 
 const ConsultationPreviewCover = ({ consultation: { url, title, illustration } }: { consultation: ConsultationPreview_consultation }) => (
   <Card.Cover>
@@ -43,16 +51,17 @@ const ConsultationPreviewBody = ({ consultation }: { consultation: ConsultationP
               showZero
               icon="cap-baloon-1"
             />
+          <ProjectPreviewCounter
+            value={votesCount || 0}
+            label="project.preview.counters.votes"
+            icon="cap-hand-like-2-1"
+            showZero
+          />
             <ProjectPreviewCounter
               value={(contributors && contributors.totalCount) || 0}
               label="project.preview.counters.contributors"
               showZero
               icon="cap-user-2-1"
-            />
-            <ProjectPreviewCounter
-              value={votesCount || 0}
-              label="project.preview.counters.votes"
-              icon="cap-hand-like-2-1"
             />
         </TagsList>
       </div>
@@ -66,6 +75,7 @@ const ConsultationPreview = ({ consultation }: Props) => {
   return (
     <Col xs={12} sm={6} md={4} lg={3} className="d-flex">
       <Card id={id} className="consultation-preview">
+        <ConsultationPreviewType/>
         <ConsultationPreviewCover consultation={consultation}/>
         <ConsultationPreviewBody consultation={consultation}/>
       </Card>
