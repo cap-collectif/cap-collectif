@@ -1,0 +1,305 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectListFiltersContainer /> should render correctly with projects authors 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={2}
+  >
+    <Connect(InjectIntl(ProjectListFilterOrder)) />
+  </Col>
+  <Col
+    bsClass="col"
+    className=""
+    componentClass="div"
+    md={7}
+  >
+    <FiltersContainer
+      filterCount={0}
+      overlay={
+        <Connect(ReduxForm)
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          projectAuthors={
+            Array [
+              Object {
+                "id": "1",
+                "username": "Kaaris270",
+              },
+            ]
+          }
+          projectDistricts={
+            Object {
+              "edges": Array [],
+              "totalCount": 0,
+            }
+          }
+          projectTypes={Array []}
+          themes={Array []}
+        />
+      }
+      type="project"
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={3}
+    smHidden={true}
+    xsHidden={true}
+  >
+    <Connect(ProjectListSearch) />
+  </Col>
+</Row>
+`;
+
+exports[`<ProjectListFiltersContainer /> should render correctly with projects districts 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={2}
+  >
+    <Connect(InjectIntl(ProjectListFilterOrder)) />
+  </Col>
+  <Col
+    bsClass="col"
+    className=""
+    componentClass="div"
+    md={7}
+  >
+    <FiltersContainer
+      filterCount={0}
+      overlay={
+        <Connect(ReduxForm)
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          projectAuthors={Array []}
+          projectDistricts={
+            Object {
+              "edges": Object {
+                "node": Object {
+                  "id": "1",
+                  "name": "district1",
+                },
+              },
+              "totalCount": 1,
+            }
+          }
+          projectTypes={Array []}
+          themes={Array []}
+        />
+      }
+      type="project"
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={3}
+    smHidden={true}
+    xsHidden={true}
+  >
+    <Connect(ProjectListSearch) />
+  </Col>
+</Row>
+`;
+
+exports[`<ProjectListFiltersContainer /> should render correctly with projects types 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={2}
+  >
+    <Connect(InjectIntl(ProjectListFilterOrder)) />
+  </Col>
+  <Col
+    bsClass="col"
+    className=""
+    componentClass="div"
+    md={7}
+  >
+    <FiltersContainer
+      filterCount={0}
+      overlay={
+        <Connect(ReduxForm)
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          projectAuthors={Array []}
+          projectDistricts={
+            Object {
+              "edges": Array [],
+              "totalCount": 0,
+            }
+          }
+          projectTypes={
+            Array [
+              Object {
+                "id": "1",
+                "slug": "type1",
+                "title": "type 1",
+              },
+            ]
+          }
+          themes={Array []}
+        />
+      }
+      type="project"
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={3}
+    smHidden={true}
+    xsHidden={true}
+  >
+    <Connect(ProjectListSearch) />
+  </Col>
+</Row>
+`;
+
+exports[`<ProjectListFiltersContainer /> should render correctly with themes 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={2}
+  >
+    <Connect(InjectIntl(ProjectListFilterOrder)) />
+  </Col>
+  <Col
+    bsClass="col"
+    className=""
+    componentClass="div"
+    md={7}
+  >
+    <FiltersContainer
+      filterCount={0}
+      overlay={
+        <Connect(ReduxForm)
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          projectAuthors={Array []}
+          projectDistricts={
+            Object {
+              "edges": Array [],
+              "totalCount": 0,
+            }
+          }
+          projectTypes={Array []}
+          themes={
+            Array [
+              Object {
+                "id": "1",
+                "slug": "theme1",
+                "title": "theme 1",
+              },
+            ]
+          }
+        />
+      }
+      type="project"
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={3}
+    smHidden={true}
+    xsHidden={true}
+  >
+    <Connect(ProjectListSearch) />
+  </Col>
+</Row>
+`;
+
+exports[`<ProjectListFiltersContainer /> should render correctly without filters 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={2}
+  >
+    <Connect(InjectIntl(ProjectListFilterOrder)) />
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={3}
+    smHidden={true}
+    xsHidden={true}
+  >
+    <Connect(ProjectListSearch) />
+  </Col>
+</Row>
+`;
