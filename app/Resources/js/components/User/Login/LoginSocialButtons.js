@@ -35,8 +35,6 @@ export class LoginSocialButtons extends React.Component<Props> {
     /* @TODO: Add more Login button in mapping when it will be configurable. */
     return (
       <div>
-        <FacebookLoginButton features={features} prefix={prefix} />
-        <GoogleLoginButton features={features} prefix={prefix} />
         <SamlLoginButton features={features} prefix={prefix} />
         {ssoList.length > 0 &&
           ssoList.map(
@@ -52,6 +50,8 @@ export class LoginSocialButtons extends React.Component<Props> {
                 />
               ),
           )}
+        <FacebookLoginButton features={features} prefix={prefix} />
+        <GoogleLoginButton features={features} prefix={prefix} />
         {!features.sso_by_pass_auth && (
           <p className="p--centered">
             <span>{<FormattedMessage id="login.or" />}</span>

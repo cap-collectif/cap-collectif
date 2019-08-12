@@ -2,6 +2,49 @@
 
 exports[`<LoginSocialButtons /> renders all buttons 1`] = `
 <div>
+  <SamlLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_gplus": true,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
   <FacebookLoginButton
     features={
       Object {
@@ -89,49 +132,6 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
       }
     }
     prefix=""
-  />
-  <SamlLoginButton
-    features={
-      Object {
-        "allow_users_to_propose_events": false,
-        "blog": false,
-        "calendar": false,
-        "captcha": false,
-        "consent_external_communication": false,
-        "consent_internal_communication": false,
-        "consultation_plan": false,
-        "disconnect_openid": false,
-        "display_map": false,
-        "districts": false,
-        "export": false,
-        "list_sso": false,
-        "login_facebook": true,
-        "login_gplus": true,
-        "login_openid": true,
-        "login_paris": false,
-        "login_saml": true,
-        "members_list": false,
-        "new_feature_questionnaire_result": false,
-        "newsletter": false,
-        "phone_confirmation": false,
-        "privacy_policy": false,
-        "profiles": false,
-        "project_trash": false,
-        "projects_form": false,
-        "registration": false,
-        "reporting": false,
-        "restrict_registration_via_email_domain": false,
-        "search": false,
-        "server_side_rendering": false,
-        "share_buttons": false,
-        "shield_mode": false,
-        "sso_by_pass_auth": false,
-        "themes": false,
-        "user_type": false,
-        "votes_evolution": false,
-        "zipcode_at_register": false,
-      }
-    }
   />
   <p
     className="p--centered"
@@ -150,6 +150,49 @@ exports[`<LoginSocialButtons /> renders nothing 1`] = `""`;
 
 exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
 <div>
+  <SamlLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_gplus": false,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
   <FacebookLoginButton
     features={
       Object {
@@ -237,49 +280,6 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
       }
     }
     prefix=""
-  />
-  <SamlLoginButton
-    features={
-      Object {
-        "allow_users_to_propose_events": false,
-        "blog": false,
-        "calendar": false,
-        "captcha": false,
-        "consent_external_communication": false,
-        "consent_internal_communication": false,
-        "consultation_plan": false,
-        "disconnect_openid": false,
-        "display_map": false,
-        "districts": false,
-        "export": false,
-        "list_sso": false,
-        "login_facebook": true,
-        "login_gplus": false,
-        "login_openid": false,
-        "login_paris": false,
-        "login_saml": false,
-        "members_list": false,
-        "new_feature_questionnaire_result": false,
-        "newsletter": false,
-        "phone_confirmation": false,
-        "privacy_policy": false,
-        "profiles": false,
-        "project_trash": false,
-        "projects_form": false,
-        "registration": false,
-        "reporting": false,
-        "restrict_registration_via_email_domain": false,
-        "search": false,
-        "server_side_rendering": false,
-        "share_buttons": false,
-        "shield_mode": false,
-        "sso_by_pass_auth": false,
-        "themes": false,
-        "user_type": false,
-        "votes_evolution": false,
-        "zipcode_at_register": false,
-      }
-    }
   />
   <p
     className="p--centered"
@@ -296,6 +296,49 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
 
 exports[`<LoginSocialButtons /> renders only Google button 1`] = `
 <div>
+  <SamlLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_gplus": true,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
   <FacebookLoginButton
     features={
       Object {
@@ -383,49 +426,6 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
       }
     }
     prefix=""
-  />
-  <SamlLoginButton
-    features={
-      Object {
-        "allow_users_to_propose_events": false,
-        "blog": false,
-        "calendar": false,
-        "captcha": false,
-        "consent_external_communication": false,
-        "consent_internal_communication": false,
-        "consultation_plan": false,
-        "disconnect_openid": false,
-        "display_map": false,
-        "districts": false,
-        "export": false,
-        "list_sso": false,
-        "login_facebook": false,
-        "login_gplus": true,
-        "login_openid": false,
-        "login_paris": false,
-        "login_saml": false,
-        "members_list": false,
-        "new_feature_questionnaire_result": false,
-        "newsletter": false,
-        "phone_confirmation": false,
-        "privacy_policy": false,
-        "profiles": false,
-        "project_trash": false,
-        "projects_form": false,
-        "registration": false,
-        "reporting": false,
-        "restrict_registration_via_email_domain": false,
-        "search": false,
-        "server_side_rendering": false,
-        "share_buttons": false,
-        "shield_mode": false,
-        "sso_by_pass_auth": false,
-        "themes": false,
-        "user_type": false,
-        "votes_evolution": false,
-        "zipcode_at_register": false,
-      }
-    }
   />
   <p
     className="p--centered"
@@ -442,6 +442,94 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
 
 exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
 <div>
+  <SamlLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_gplus": false,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
+  <OpenIDLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_gplus": false,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+    key="0"
+    text="Cap Collectif Oauth2 Provider"
+  />
   <FacebookLoginButton
     features={
       Object {
@@ -529,96 +617,6 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
       }
     }
     prefix=""
-  />
-  <SamlLoginButton
-    features={
-      Object {
-        "allow_users_to_propose_events": false,
-        "blog": false,
-        "calendar": false,
-        "captcha": false,
-        "consent_external_communication": false,
-        "consent_internal_communication": false,
-        "consultation_plan": false,
-        "disconnect_openid": false,
-        "display_map": false,
-        "districts": false,
-        "export": false,
-        "list_sso": false,
-        "login_facebook": false,
-        "login_gplus": false,
-        "login_openid": true,
-        "login_paris": false,
-        "login_saml": false,
-        "members_list": false,
-        "new_feature_questionnaire_result": false,
-        "newsletter": false,
-        "phone_confirmation": false,
-        "privacy_policy": false,
-        "profiles": false,
-        "project_trash": false,
-        "projects_form": false,
-        "registration": false,
-        "reporting": false,
-        "restrict_registration_via_email_domain": false,
-        "search": false,
-        "server_side_rendering": false,
-        "share_buttons": false,
-        "shield_mode": false,
-        "sso_by_pass_auth": false,
-        "themes": false,
-        "user_type": false,
-        "votes_evolution": false,
-        "zipcode_at_register": false,
-      }
-    }
-  />
-  <OpenIDLoginButton
-    buttonColor="#ABABAB"
-    features={
-      Object {
-        "allow_users_to_propose_events": false,
-        "blog": false,
-        "calendar": false,
-        "captcha": false,
-        "consent_external_communication": false,
-        "consent_internal_communication": false,
-        "consultation_plan": false,
-        "disconnect_openid": false,
-        "display_map": false,
-        "districts": false,
-        "export": false,
-        "list_sso": false,
-        "login_facebook": false,
-        "login_gplus": false,
-        "login_openid": true,
-        "login_paris": false,
-        "login_saml": false,
-        "members_list": false,
-        "new_feature_questionnaire_result": false,
-        "newsletter": false,
-        "phone_confirmation": false,
-        "privacy_policy": false,
-        "profiles": false,
-        "project_trash": false,
-        "projects_form": false,
-        "registration": false,
-        "reporting": false,
-        "restrict_registration_via_email_domain": false,
-        "search": false,
-        "server_side_rendering": false,
-        "share_buttons": false,
-        "shield_mode": false,
-        "sso_by_pass_auth": false,
-        "themes": false,
-        "user_type": false,
-        "votes_evolution": false,
-        "zipcode_at_register": false,
-      }
-    }
-    key="0"
-    labelColor="#FFFFFF"
-    text="Cap Collectif Oauth2 Provider"
   />
   <p
     className="p--centered"
@@ -635,94 +633,6 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
 
 exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
 <div>
-  <FacebookLoginButton
-    features={
-      Object {
-        "allow_users_to_propose_events": false,
-        "blog": false,
-        "calendar": false,
-        "captcha": false,
-        "consent_external_communication": false,
-        "consent_internal_communication": false,
-        "consultation_plan": false,
-        "disconnect_openid": false,
-        "display_map": false,
-        "districts": false,
-        "export": false,
-        "list_sso": false,
-        "login_facebook": false,
-        "login_gplus": false,
-        "login_openid": false,
-        "login_paris": false,
-        "login_saml": true,
-        "members_list": false,
-        "new_feature_questionnaire_result": false,
-        "newsletter": false,
-        "phone_confirmation": false,
-        "privacy_policy": false,
-        "profiles": false,
-        "project_trash": false,
-        "projects_form": false,
-        "registration": false,
-        "reporting": false,
-        "restrict_registration_via_email_domain": false,
-        "search": false,
-        "server_side_rendering": false,
-        "share_buttons": false,
-        "shield_mode": false,
-        "sso_by_pass_auth": false,
-        "themes": false,
-        "user_type": false,
-        "votes_evolution": false,
-        "zipcode_at_register": false,
-      }
-    }
-    prefix=""
-  />
-  <GoogleLoginButton
-    features={
-      Object {
-        "allow_users_to_propose_events": false,
-        "blog": false,
-        "calendar": false,
-        "captcha": false,
-        "consent_external_communication": false,
-        "consent_internal_communication": false,
-        "consultation_plan": false,
-        "disconnect_openid": false,
-        "display_map": false,
-        "districts": false,
-        "export": false,
-        "list_sso": false,
-        "login_facebook": false,
-        "login_gplus": false,
-        "login_openid": false,
-        "login_paris": false,
-        "login_saml": true,
-        "members_list": false,
-        "new_feature_questionnaire_result": false,
-        "newsletter": false,
-        "phone_confirmation": false,
-        "privacy_policy": false,
-        "profiles": false,
-        "project_trash": false,
-        "projects_form": false,
-        "registration": false,
-        "reporting": false,
-        "restrict_registration_via_email_domain": false,
-        "search": false,
-        "server_side_rendering": false,
-        "share_buttons": false,
-        "shield_mode": false,
-        "sso_by_pass_auth": false,
-        "themes": false,
-        "user_type": false,
-        "votes_evolution": false,
-        "zipcode_at_register": false,
-      }
-    }
-    prefix=""
-  />
   <SamlLoginButton
     features={
       Object {
@@ -766,21 +676,6 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
       }
     }
   />
-  <p
-    className="p--centered"
-  >
-    <span>
-      <FormattedMessage
-        id="login.or"
-        values={Object {}}
-      />
-    </span>
-  </p>
-</div>
-`;
-
-exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
-<div>
   <FacebookLoginButton
     features={
       Object {
@@ -796,9 +691,9 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
         "districts": false,
         "export": false,
         "list_sso": false,
-        "login_facebook": true,
-        "login_gplus": true,
-        "login_openid": true,
+        "login_facebook": false,
+        "login_gplus": false,
+        "login_openid": false,
         "login_paris": false,
         "login_saml": true,
         "members_list": false,
@@ -816,7 +711,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
         "server_side_rendering": false,
         "share_buttons": false,
         "shield_mode": false,
-        "sso_by_pass_auth": true,
+        "sso_by_pass_auth": false,
         "themes": false,
         "user_type": false,
         "votes_evolution": false,
@@ -840,9 +735,9 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
         "districts": false,
         "export": false,
         "list_sso": false,
-        "login_facebook": true,
-        "login_gplus": true,
-        "login_openid": true,
+        "login_facebook": false,
+        "login_gplus": false,
+        "login_openid": false,
         "login_paris": false,
         "login_saml": true,
         "members_list": false,
@@ -860,7 +755,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
         "server_side_rendering": false,
         "share_buttons": false,
         "shield_mode": false,
-        "sso_by_pass_auth": true,
+        "sso_by_pass_auth": false,
         "themes": false,
         "user_type": false,
         "votes_evolution": false,
@@ -869,6 +764,21 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
     }
     prefix=""
   />
+  <p
+    className="p--centered"
+  >
+    <span>
+      <FormattedMessage
+        id="login.or"
+        values={Object {}}
+      />
+    </span>
+  </p>
+</div>
+`;
+
+exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
+<div>
   <SamlLoginButton
     features={
       Object {
@@ -913,7 +823,6 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
     }
   />
   <OpenIDLoginButton
-    buttonColor="#ABABAB"
     features={
       Object {
         "allow_users_to_propose_events": false,
@@ -956,8 +865,95 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
       }
     }
     key="0"
-    labelColor="#FFFFFF"
     text="Cap Collectif Oauth2 Provider"
+  />
+  <FacebookLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_gplus": true,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": true,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+    prefix=""
+  />
+  <GoogleLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_gplus": true,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": true,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+    prefix=""
   />
 </div>
 `;
