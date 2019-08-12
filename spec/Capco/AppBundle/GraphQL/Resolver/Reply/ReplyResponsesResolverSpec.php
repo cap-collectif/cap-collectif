@@ -37,7 +37,7 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $reply->getResponses()->willReturn($responses);
         $reply->getAuthor()->willReturn($author);
-        $this->__invoke($reply, $viewer, $context)->shouldBeLike($responses);
+        $this->__invoke($reply, $viewer, $context)->shouldBeLike($responses->getIterator());
     }
 
     public function it_should_return_all_responses_when_viewer_is_author(
@@ -56,7 +56,7 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $reply->getResponses()->willReturn($responses);
         $reply->getAuthor()->willReturn($author);
         $reply->getQuestionnaire()->willReturn($questionnaire);
-        $this->__invoke($reply, $viewer, $context)->shouldBeLike($responses);
+        $this->__invoke($reply, $viewer, $context)->shouldBeLike($responses->getIterator());
     }
 
     public function it_should_not_return_private_responses_when_viewer_is_anonymous(
@@ -75,7 +75,9 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $reply->getResponses()->willReturn($responses);
         $reply->getAuthor()->willReturn($author);
         $reply->getQuestionnaire()->willReturn($questionnaire);
-        $this->__invoke($reply, $viewer, $context)->shouldBeLike(new ArrayCollection([]));
+        $this->__invoke($reply, $viewer, $context)->shouldBeLike(
+            (new ArrayCollection([]))->getIterator()
+        );
     }
 
     public function it_should_not_return_private_responses_when_viewer_is_not_author(
@@ -95,6 +97,8 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $reply->getResponses()->willReturn($responses);
         $reply->getAuthor()->willReturn($author);
         $reply->getQuestionnaire()->willReturn($questionnaire);
-        $this->__invoke($reply, $viewer, $context)->shouldBeLike(new ArrayCollection([]));
+        $this->__invoke($reply, $viewer, $context)->shouldBeLike(
+            (new ArrayCollection([]))->getIterator()
+        );
     }
 }
