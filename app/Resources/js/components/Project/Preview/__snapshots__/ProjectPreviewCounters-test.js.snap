@@ -37,9 +37,11 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
           },
           "districts": Array [
             Object {
+              "id": "1",
               "name": "rive gauche",
             },
             Object {
+              "id": "2",
               "name": "rive droite",
             },
           ],
@@ -69,9 +71,11 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
         },
         "districts": Array [
           Object {
+            "id": "1",
             "name": "rive gauche",
           },
           Object {
+            "id": "2",
             "name": "rive droite",
           },
         ],

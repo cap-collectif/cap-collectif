@@ -73,6 +73,9 @@ InternalQuery:
           type:
             type: 'ID'
             description: 'ID of a ProjectType to filter by. If non-null, filter projects by types'
+          district:
+            type: 'ID'
+            description: 'ID of a ProjectDistrict to filter by. If non-null, filter projects by district'
           # TODO before preview
           # rename "withEventsOnly"
           withEventOnly:

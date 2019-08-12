@@ -10,7 +10,9 @@ import ProjectsListFilterTypes from './ProjectListFilterTypes';
 import ProjectsListFilterAuthors from './ProjectListFilterAuthors';
 import ProjectsListFilterThemes from './ProjectListFilterThemes';
 import ProjectsListFilterStatus from './ProjectListFilterStatus';
+import ProjectsListFilterDistricts from './ProjectListFilterDistricts';
 import type { ProjectType, ProjectAuthor, ProjectTheme } from './ProjectListFiltersContainer';
+import type { ProjectListFiltersContainerQueryResponse } from '~relay/ProjectListFiltersContainerQuery.graphql';
 
 type Props = {
   author: ?string,
@@ -18,6 +20,8 @@ type Props = {
   intl: IntlShape,
   projectTypes: ProjectType[],
   projectAuthors: ProjectAuthor[],
+  projectDistricts: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectDistricts'>,
+  district: ?string,
   theme: ?string,
   status: ?string,
   themes: ProjectTheme[],
@@ -46,12 +50,24 @@ class ProjectListFilters extends React.Component<Props> {
     return <ProjectsListFilterStatus intl={intl} status={status} />;
   }
 
+  renderDistrictsFilter() {
+    const { district, projectDistricts, intl } = this.props;
+    return (
+      <ProjectsListFilterDistricts
+        district={district}
+        projectDistricts={projectDistricts}
+        intl={intl}
+      />
+    );
+  }
+
   render() {
     const filters = [];
     filters.push(this.renderTypeFilter());
     filters.push(this.renderThemeFilter());
     filters.push(this.renderAuthorsFilter());
     filters.push(this.renderThemeStatus());
+    filters.push(this.renderDistrictsFilter());
 
     if (filters.filter(Boolean).length > 0) {
       return (
@@ -77,6 +93,7 @@ const mapStateToProps = (state: GlobalState) => ({
   theme: selector(state, 'theme'),
   type: selector(state, 'type'),
   status: selector(state, 'status'),
+  district: selector(state, 'district'),
 });
 
 type FormValues = {|
@@ -84,6 +101,7 @@ type FormValues = {|
   +theme: ?string,
   +type: ?string,
   +status: ?string,
+  +district: ?string,
 |};
 
 export const getInitialValues = (): FormValues => {
@@ -93,6 +111,7 @@ export const getInitialValues = (): FormValues => {
     type: urlSearch.get('type') || null,
     author: urlSearch.get('author') || null,
     theme: urlSearch.get('theme') || null,
+    district: urlSearch.get('district') || null,
   };
 };
 

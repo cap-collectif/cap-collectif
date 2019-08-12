@@ -76,6 +76,7 @@ export default createPaginationContainer(
           theme: { type: "ID" }
           orderBy: { type: "ProjectOrder" }
           type: { type: "ID" }
+          district: { type: "ID" }
           status: { type: "ID" }
           term: { type: "String" }
           onlyPublic: { type: "Boolean" }
@@ -87,6 +88,7 @@ export default createPaginationContainer(
           theme: $theme
           orderBy: $orderBy
           type: $type
+          district: $district
           status: $status
           term: $term
           onlyPublic: $onlyPublic
@@ -130,6 +132,7 @@ export default createPaginationContainer(
         $theme: ID
         $orderBy: ProjectOrder
         $type: ID
+        $district: ID
         $status: ID
         $term: String
         $onlyPublic: Boolean
@@ -141,6 +144,7 @@ export default createPaginationContainer(
             theme: $theme
             orderBy: $orderBy
             type: $type
+            district: $district
             status: $status
             term: $term
             onlyPublic: $onlyPublic

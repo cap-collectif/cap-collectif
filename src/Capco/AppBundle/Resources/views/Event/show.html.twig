@@ -91,12 +91,12 @@
                                  data-lat="{{ event.lat }}"
                                  data-lng="{{ event.lng }}"
                             ></div>
-                            {% if viewer.superAdmin %}
+                            {% if viewer is not null and viewer.superAdmin %}
                                 lat : {{ event.lat }} - lng : {{ event.lng }}<br>
                             {% endif %}
                         {% endif %}
 
-                        {% if viewer.superAdmin %}
+                        {% if viewer is not null and viewer.superAdmin %}
                             <hr></hr>
                             <h3>With new address</h3>
                             {% if event.lat(true) and event.lng(true) %}

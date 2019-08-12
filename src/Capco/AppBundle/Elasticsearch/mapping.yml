@@ -115,6 +115,11 @@ mappings:
       publishedAt: { type: date }
       authors: *Author
       visibility: { type: long }
+      districts:
+        type: object
+        properties:
+          id: { type: keyword }
+          name: *text_analysis_highlighted
       projectType:
         type: object
         properties:

@@ -61,6 +61,7 @@ export default createFragmentContainer(ProjectPreviewCounters, {
     fragment ProjectPreviewCounters_project on Project {
       id
       districts {
+        id
         name
       }
       hasParticipativeStep

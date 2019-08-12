@@ -30,7 +30,7 @@ const propsWithDistricts = {
     id: 'project2',
     isExternal: false,
     hasParticipativeStep: true,
-    districts: [{ name: 'rive gauche' }, { name: 'rive droite' }],
+    districts: [{ id: '1', name: 'rive gauche' }, { id: '2', name: 'rive droite' }],
     contributors: { totalCount: 54, anonymousCount: 0 },
     votes: { totalCount: 54 },
     contributionsCount: 89,

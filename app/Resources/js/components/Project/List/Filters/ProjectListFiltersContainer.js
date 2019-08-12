@@ -25,21 +25,28 @@ export type ProjectAuthor = {
   +username: ?string,
 };
 
+export type ProjectDistrict = {|
+  +id: string,
+  +name: ?string,
+|};
+
 export type ProjectTheme = { id: string, slug: string, title: string };
 
-type Props = {
-  intl: IntlShape,
-  type: ?string,
-  author: ?string,
-  themes: ProjectTheme[],
-  theme: ?string,
-};
-type State = {
-  projectTypes: $ReadOnlyArray<ProjectType>,
-  projectAuthors: $ReadOnlyArray<ProjectAuthor>,
-};
+type Props = {|
+  +intl: IntlShape,
+  +type: ?string,
+  +author: ?string,
+  +themes: ProjectTheme[],
+  +theme: ?string,
+  +district: ?string,
+|};
+type State = {|
+  projectTypes: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectTypes'>,
+  projectAuthors: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectAuthors'>,
+  projectDistricts: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectDistricts'>,
+|};
 
-const getAvailableProjectTypesAndAuthors = graphql`
+const getAvailableProjectResources = graphql`
   query ProjectListFiltersContainerQuery {
     projectTypes {
       id
@@ -50,30 +57,43 @@ const getAvailableProjectTypesAndAuthors = graphql`
       id
       username
     }
+    projectDistricts {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
   }
 `;
 
 class ProjectListFiltersContainer extends React.Component<Props, State> {
-  state = { projectTypes: [], projectAuthors: [] };
+  state = { projectTypes: [], projectAuthors: [], projectDistricts: { edges: [] } };
 
   componentDidMount() {
-    fetchQuery(environment, getAvailableProjectTypesAndAuthors, {}).then(
-      ({ projectTypes, projectAuthors }: ProjectListFiltersContainerQueryResponse) => {
+    fetchQuery(environment, getAvailableProjectResources, {}).then(
+      ({
+        projectTypes,
+        projectAuthors,
+        projectDistricts,
+      }: ProjectListFiltersContainerQueryResponse) => {
         this.setState({
           projectTypes: projectTypes || [],
           projectAuthors: projectAuthors || [],
+          projectDistricts: projectDistricts || [],
         });
       },
     );
   }
 
   countFilter(): number {
-    const { type, author, theme } = this.props;
-    return Number(!!author) + Number(!!type) + Number(!!theme);
+    const { type, author, theme, district } = this.props;
+    return Number(!!author) + Number(!!type) + Number(!!theme) + Number(!!district);
   }
 
   renderFilters() {
-    const { projectTypes, projectAuthors } = this.state;
+    const { projectTypes, projectAuthors, projectDistricts } = this.state;
     const { intl, themes } = this.props;
     if (projectTypes.length > 0 && projectAuthors.length > 0 && themes.length > 0) {
       return (
@@ -85,6 +105,7 @@ class ProjectListFiltersContainer extends React.Component<Props, State> {
                 intl={intl}
                 projectAuthors={projectAuthors}
                 projectTypes={projectTypes}
+                projectDistricts={projectDistricts}
                 themes={themes}
               />
             }
@@ -117,6 +138,7 @@ const mapStateToProps = (state: GlobalState) => ({
   author: selector(state, 'author'),
   theme: selector(state, 'theme'),
   type: selector(state, 'type'),
+  district: selector(state, 'district'),
 });
 
 export default connect(mapStateToProps)(injectIntl(ProjectListFiltersContainer));

@@ -4765,6 +4765,9 @@ type Query {
     # ID of a ProjectType to filter by. If non-null, filter projects by types
     type: ID
 
+    # ID of a ProjectDistrict to filter by. If non-null, filter projects by district
+    district: ID
+
     # If true, only projects with at least 1 event will be returned.
     withEventOnly: Boolean = false
 

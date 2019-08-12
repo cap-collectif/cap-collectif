@@ -15,6 +15,7 @@ type Props = {
   author: ?string,
   type: ?string,
   theme: ?string,
+  district: ?string,
   term: ?string,
   status: ?string,
   limit: number,
@@ -35,6 +36,7 @@ export class ProjectListView extends React.Component<Props, State> {
       prevProps.orderBy !== this.props.orderBy ||
       prevProps.author !== this.props.author ||
       prevProps.type !== this.props.type ||
+      prevProps.district !== this.props.district ||
       prevProps.theme !== this.props.theme ||
       prevProps.status !== this.props.status ||
       prevProps.term !== this.props.term
@@ -50,6 +52,7 @@ export class ProjectListView extends React.Component<Props, State> {
       orderBy: { field: this.props.orderBy, direction: 'DESC' },
       author: this.props.author,
       type: this.props.type,
+      district: this.props.district,
       theme: this.props.theme,
       limit: this.props.limit,
       term: this.props.term,
@@ -82,6 +85,7 @@ const mapStateToProps = (state: GlobalState) => ({
   author: selector(state, 'author'),
   theme: selector(state, 'theme'),
   type: selector(state, 'type'),
+  district: selector(state, 'district'),
   status: selector(state, 'status'),
   term: state.project.term,
 });
@@ -100,6 +104,7 @@ export default createRefetchContainer(
           theme: { type: "ID" }
           orderBy: { type: "ProjectOrder" }
           type: { type: "ID" }
+          district: { type: "ID" }
           status: { type: "ID" }
           term: { type: "String" }
           onlyPublic: { type: "Boolean" }
@@ -109,6 +114,7 @@ export default createRefetchContainer(
             theme: $theme
             orderBy: $orderBy
             type: $type
+            district: $district
             author: $author
             term: $term
             count: $count
@@ -126,6 +132,7 @@ export default createRefetchContainer(
       $theme: ID
       $orderBy: ProjectOrder
       $type: ID
+      $district: ID
       $status: ID
       $term: String
       $onlyPublic: Boolean
@@ -136,6 +143,7 @@ export default createRefetchContainer(
           orderBy: $orderBy
           author: $author
           type: $type
+          district: $district
           term: $term
           count: $count
           status: $status
