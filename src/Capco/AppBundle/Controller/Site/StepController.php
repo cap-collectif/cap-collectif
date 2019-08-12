@@ -413,12 +413,17 @@ class StepController extends Controller
                 null;
         }
 
+        $cstepGlobalId = GlobalId::toGlobalId('ConsultationStep', $step->getId());
         return [
             'project' => $project,
             'currentStep' => $step,
             'consultation' => $consultation ?? $step->getFirstConsultation(),
+            'navigationStepProps' => [
+                'id' => $cstepGlobalId,
+                'consultationSlug' => $consultationSlug
+            ],
             'stepProps' => [
-                'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
+                'id' => $cstepGlobalId,
                 'consultationSlug' => $consultationSlug,
                 'isMultiConsultation' => $isMultiConsultation
             ],

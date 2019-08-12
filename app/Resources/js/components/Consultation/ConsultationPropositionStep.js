@@ -79,7 +79,7 @@ export const ConsultationPropositionStep = (props: Props) => {
             ? 'col-md-9'
             : 'col-md-10 col-md-offset-1'
         }>
-        <h2 className="text-center">{step.title}</h2>
+        <h2 className="text-center">{step.consultation ? step.consultation.title : step.title}</h2>
         <div className="mb-15 project__step-authors text-center">
           {isMultiConsultation && step.project && step.project.authors.length > 0 && (
             <div className="mr-15 d-ib">
@@ -123,9 +123,9 @@ export const ConsultationPropositionStep = (props: Props) => {
                 <i className="cap cap-baloon-1"/> {step.consultation.contributions && step.consultation.contributions.totalCount} <FormattedMessage id="project.preview.counters.contributions" values={{ num: step.consultation.contributions && step.consultation.contributions.totalCount }} />
               </div>
             )}
-            {step.consultation && step.consultation.votesCount && (
+            {step.consultation && (
               <div className="mr-15 d-ib">
-                <i className="cap cap-hand-like-2-1"/> {step.consultation.votesCount} <FormattedMessage id="project.preview.counters.votes" values={{ num: step.consultation.votesCount }} />
+                <i className="cap cap-hand-like-2-1"/> {step.consultation.votesCount || 0} <FormattedMessage id="project.preview.counters.votes" values={{ num: step.consultation.votesCount }} />
               </div>
             )}
             {step.consultation && (
@@ -166,6 +166,7 @@ export default createFragmentContainer(ConsultationPropositionStep, {
               }
           }
           consultation(slug: $consultationSlug) {
+              title
               description
               contributions {
                   totalCount

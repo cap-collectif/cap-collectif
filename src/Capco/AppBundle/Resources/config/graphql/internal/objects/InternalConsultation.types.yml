@@ -14,7 +14,7 @@ InternalConsultation:
           typeName: Consultation
       description:
         description: 'Get the associated description of the consultation'
-        type: 'String'
+        type: 'HTML'
       contributors:
         type: 'InternalUserConnection!'
       # Should stay an array ?
