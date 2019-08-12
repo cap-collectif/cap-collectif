@@ -7,6 +7,7 @@ import RemainingTime from '../Utils/RemainingTime';
 import StepInfos from '../Steps/Page/StepInfos';
 import SectionRecursiveList from './SectionRecursiveList';
 import type { ConsultationPropositionStep_consultationStep } from '~relay/ConsultationPropositionStep_consultationStep.graphql';
+import { STEP_PROPOSITION_NAVIGATION_HEIGHT } from '../Steps/StepPropositionNavigationBox';
 
 type RelayProps = {|
   +consultationStep: ConsultationPropositionStep_consultationStep,
@@ -18,8 +19,19 @@ type Props = {|
   +showConsultationPlan: boolean,
 |};
 
+const STICKY_OFFSET_TOP = 60;
+
 export const ConsultationPropositionStep = (props: Props) => {
   const { consultationPlanEnabled, showConsultationPlan, consultationStep: step } = props;
+  const stepNavigationHeaderRef = React.useRef<?HTMLDivElement>(null);
+  const getStepNavigationHeader: ?HTMLDivElement = () => {
+    if (stepNavigationHeaderRef.current === null) {
+      stepNavigationHeaderRef.current = document.querySelector('.step__propositions__navigation');
+    }
+    return stepNavigationHeaderRef.current;
+  };
+  const stickyOffset = getStepNavigationHeader() ?
+    STEP_PROPOSITION_NAVIGATION_HEIGHT : 0;
 
   const atLeast2Sections = () => {
     return (
@@ -39,6 +51,9 @@ export const ConsultationPropositionStep = (props: Props) => {
               ? 'consultation-plan sticky col-md-3 col-sm-12'
               : 'consultation-plan sticky'
           }
+          style={{
+            top: `${STICKY_OFFSET_TOP + (stickyOffset)}px`,
+          }}
           id="consultation-plan">
           {step.consultation && (
             <ConsultationPlan
@@ -58,7 +73,7 @@ export const ConsultationPropositionStep = (props: Props) => {
         <div className="mb-30 project__step-dates text-center">
           {(step.timeRange.startAt || step.timeRange.endAt) && (
             <div className="mr-15 d-ib">
-              <i className="cap cap-calendar-2-1" />{' '}
+              <i className="cap cap-calendar-2-1"/>{' '}
               <DatesInterval
                 startAt={step.timeRange.startAt}
                 endAt={step.timeRange.endAt}
@@ -68,7 +83,7 @@ export const ConsultationPropositionStep = (props: Props) => {
           )}
           {step.timeRange.endAt && step.status === 'OPENED' && !step.timeless && (
             <div className="mr-15 d-ib">
-              <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.timeRange.endAt} />
+              <i className="cap cap-hourglass-1"/> <RemainingTime endAt={step.timeRange.endAt}/>
             </div>
           )}
         </div>
@@ -85,20 +100,20 @@ export const ConsultationPropositionStep = (props: Props) => {
 
 export default createFragmentContainer(ConsultationPropositionStep, {
   consultationStep: graphql`
-    fragment ConsultationPropositionStep_consultationStep on ConsultationStep @argumentDefinitions(consultationSlug: { type: "String!" }) {
-      ...StepInfos_step
-      id
-      timeRange {
-        startAt
-        endAt
+      fragment ConsultationPropositionStep_consultationStep on ConsultationStep @argumentDefinitions(consultationSlug: { type: "String!" }) {
+          ...StepInfos_step
+          id
+          timeRange {
+              startAt
+              endAt
+          }
+          title
+          status
+          timeless
+          consultation(slug: $consultationSlug) {
+              ...ConsultationPlan_consultation
+              ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
+          }
       }
-      title
-      status
-      timeless
-      consultation(slug: $consultationSlug) {
-        ...ConsultationPlan_consultation
-        ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
-      }
-    }
   `,
 });

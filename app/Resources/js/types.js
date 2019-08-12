@@ -18,6 +18,7 @@ export type Opinion = { id: Uuid };
 export type Version = { id: Uuid, parent: Object };
 
 export type ArgumentType = 'FOR' | 'AGAINST' | 'SIMPLE';
+export type StepPropositionNavigationType = 'ConsultationStep' | 'CollectStep' | 'PresentationStep' | 'OtherStep' | 'RankingStep' | 'SelectionStep' | 'QuestionnaireStep'
 
 export type MediaFromAPI = {|
   +id: Uuid,

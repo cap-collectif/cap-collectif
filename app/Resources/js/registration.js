@@ -37,6 +37,7 @@ import ProjectStatsPageApp from './startup/ProjectStatsPageApp';
 import ProposalVoteBasketWidgetApp from './startup/ProposalVoteBasketWidgetApp';
 import AlertBoxApp from './startup/AlertBoxApp';
 import ConsultationPageApp from './startup/ConsultationPageApp';
+import StepPropositionNavigationApp from './startup/StepPropositionNavigationApp';
 import UserProposalsApp from './startup/UserProposalsApp';
 import SourcePageApp from './startup/SourcePageApp';
 import ProposalsUserVotesPageApp from './startup/ProposalsUserVotesPageApp';
@@ -209,6 +210,7 @@ ReactOnRails.register({
   ProjectCreateButtonApp,
   SourcePageApp,
   SectionListPageApp,
+  StepPropositionNavigationApp,
   ReplyPageApp,
   ProfileUserCommentApp,
 });
