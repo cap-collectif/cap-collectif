@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\Responses\ValueResponse:
-#  TODO rename response to valueResponse
+  #  TODO rename response to valueResponse
   response1:
     question: '@simplequestion1'
     proposal: '@proposal1'
