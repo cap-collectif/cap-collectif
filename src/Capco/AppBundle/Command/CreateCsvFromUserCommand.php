@@ -72,7 +72,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     public static function updateSnapshot(string $userId, string $zipPath): void
     {
         if (!file_exists($zipPath)) {
-            throw new \RuntimeException('Zip path is does not contain a file.');
+            throw new \RuntimeException('Zip path does not contain a file.');
         }
 
         $matchTo = self::getSnapshotDir($userId);
