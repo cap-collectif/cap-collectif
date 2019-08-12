@@ -2,7 +2,7 @@
 Feature: Update Reply
 
 @database
-Scenario: User wants to update a reply
+Scenario: Author wants to update his reply
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
    """
