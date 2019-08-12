@@ -4,7 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import type { ConsultationStepHeader_step } from '~relay/ConsultationStepHeader_step.graphql';
 import DatesInterval from '../Utils/DatesInterval';
 import RemainingTime from '../Utils/RemainingTime';
-import StepInfos from '../Steps/Page/StepInfos';
+import BodyInfos from '../Ui/Boxes/BodyInfos';
 
 type RelayProps = {|
   +step: ConsultationStepHeader_step
@@ -30,7 +30,7 @@ const ConsultationStepHeader = ({ step }: Props) => {
         )}
       </div>
       {/* $FlowFixMe $refType */}
-      <StepInfos maxLength={600} step={step} />
+      <BodyInfos maxLength={600} body={step.body} />
     </React.Fragment>
   )
 }
@@ -45,7 +45,6 @@ export default createFragmentContainer(ConsultationStepHeader, {
               endAt
           }
           body
-          ...StepInfos_step
       }
   `,
 });

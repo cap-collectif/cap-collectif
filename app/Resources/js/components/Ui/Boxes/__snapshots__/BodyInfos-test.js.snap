@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<StepInfos /> should render correcty 1`] = `
+exports[`<BodyInfos /> should render correcty 1`] = `
 <Card>
   <Body>
-    <StepText
+    <BodyText
       maxLength={1600}
-      text="Coucou"
+      text="coucou"
     />
   </Body>
 </Card>

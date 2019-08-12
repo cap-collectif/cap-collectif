@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<StepText /> should not render anything when text is empty 1`] = `""`;
+exports[`<BodyText /> should not render anything when text is empty 1`] = `""`;
 
-exports[`<StepText /> should not render anything when there is no text provided 1`] = `""`;
+exports[`<BodyText /> should not render anything when there is no text provided 1`] = `""`;
 
-exports[`<StepText /> should render a step intro div, a FormattedHTMLMessage and a ReadMoreLink 1`] = `
+exports[`<BodyText /> should render a step intro div, a FormattedHTMLMessage and a ReadMoreLink 1`] = `
 <div
   className="step__intro"
 >

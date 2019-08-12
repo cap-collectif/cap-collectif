@@ -12,6 +12,9 @@ InternalConsultation:
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: Consultation
+      description:
+        description: 'Get the associated description of the consultation'
+        type: 'String'
       contributors:
         type: 'InternalUserConnection!'
       # Should stay an array ?

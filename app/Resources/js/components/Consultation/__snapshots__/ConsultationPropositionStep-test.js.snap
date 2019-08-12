@@ -62,32 +62,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
         />
       </div>
     </div>
-    <ForwardRef(Relay(StepInfos))
-      step={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "consultation": Object {
-            "$fragmentRefs": null,
-            "contributions": Object {
-              "totalCount": 0,
-            },
-            "contributors": Object {
-              "totalCount": 0,
-            },
-            "votesCount": 0,
-          },
-          "id": "myStep",
-          "status": "OPENED",
-          "timeRange": Object {
-            "endAt": "Thu Jul 25 2019",
-            "startAt": "Thu Jul 25 2019",
-          },
-          "timeless": false,
-          "title": "El titro",
-        }
-      }
-    />
+    <BodyInfos />
     <ForwardRef(Relay(SectionRecursiveList))
       consultation={
         Object {
@@ -149,32 +124,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
         />
       </div>
     </div>
-    <ForwardRef(Relay(StepInfos))
-      step={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "consultation": Object {
-            "$fragmentRefs": null,
-            "contributions": Object {
-              "totalCount": 0,
-            },
-            "contributors": Object {
-              "totalCount": 0,
-            },
-            "votesCount": 0,
-          },
-          "id": "myStep",
-          "status": "OPENED",
-          "timeRange": Object {
-            "endAt": "Thu Jul 25 2019",
-            "startAt": "Thu Jul 25 2019",
-          },
-          "timeless": false,
-          "title": "El titro",
-        }
-      }
-    />
+    <BodyInfos />
     <ForwardRef(Relay(SectionRecursiveList))
       consultation={
         Object {

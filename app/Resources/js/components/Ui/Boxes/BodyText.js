@@ -3,18 +3,18 @@ import React from 'react';
 import ReadMoreLink from '../../Utils/ReadMoreLink';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
-type Props = {
-  text?: ?string,
-  maxLength: number
-};
+type Props = {|
+  +text?: ?string,
+  +maxLength: number
+|};
 
-type State = {
-  expanded: boolean,
-  truncated: boolean,
-  hideText: boolean,
-};
+type State = {|
+  +expanded: boolean,
+  +truncated: boolean,
+  +hideText: boolean,
+|};
 
-class StepText extends React.Component<Props, State> {
+class BodyText extends React.Component<Props, State> {
   static defaultProps = {
     text: null,
     maxLength: 1600
@@ -31,8 +31,9 @@ class StepText extends React.Component<Props, State> {
   }
 
   toggleExpand = () => {
+    const { expanded } = this.state;
     this.setState({
-      expanded: !this.state.expanded,
+      expanded: !expanded,
     });
   };
 
@@ -63,4 +64,4 @@ class StepText extends React.Component<Props, State> {
   }
 }
 
-export default StepText;
+export default BodyText;

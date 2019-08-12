@@ -6,12 +6,12 @@ import { FormattedMessage } from 'react-intl';
 import ConsultationPlan from './ConsultationPlan';
 import DatesInterval from '../Utils/DatesInterval';
 import RemainingTime from '../Utils/RemainingTime';
-import StepInfos from '../Steps/Page/StepInfos';
 import SectionRecursiveList from './SectionRecursiveList';
 import type { ConsultationPropositionStep_consultationStep } from '~relay/ConsultationPropositionStep_consultationStep.graphql';
 import { STEP_PROPOSITION_NAVIGATION_HEIGHT } from '../Steps/StepPropositionNavigationBox';
 import { breakpoint } from '../../utils/mixins';
 import UserAvatarList from '../User/UserAvatarList';
+import BodyInfos from '../Ui/Boxes/BodyInfos';
 
 type RelayProps = {|
   +consultationStep: ConsultationPropositionStep_consultationStep,
@@ -135,7 +135,7 @@ export const ConsultationPropositionStep = (props: Props) => {
             )}
           </div>
         )}
-        <StepInfos step={step}/>
+        <BodyInfos body={step.consultation && step.consultation.description ? step.consultation.description : step.body}/>
         {step.consultation && (
           <SectionRecursiveList
             consultation={step.consultation}
@@ -149,7 +149,7 @@ export const ConsultationPropositionStep = (props: Props) => {
 export default createFragmentContainer(ConsultationPropositionStep, {
   consultationStep: graphql`
       fragment ConsultationPropositionStep_consultationStep on ConsultationStep @argumentDefinitions(isMultiConsultation: { type: "Boolean!", defaultValue: false }, consultationSlug: { type: "String!" }) {
-          ...StepInfos_step
+          body
           id
           timeRange {
               startAt
@@ -166,6 +166,7 @@ export default createFragmentContainer(ConsultationPropositionStep, {
               }
           }
           consultation(slug: $consultationSlug) {
+              description
               contributions {
                   totalCount
               }
