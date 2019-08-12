@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Behat\Traits;
 
+use Behat\Mink\Element\NodeElement;
+
 trait AdminEventTrait
 {
     /**
@@ -81,18 +83,19 @@ trait AdminEventTrait
     }
 
     /**
-     * @When I fill the start field :id
+     * @When I fill date field :id with value :value
      */
-    public function iFillStartAtField($id)
+    public function iFillDateFieldWithValue($id, $value)
     {
         $this->waitAndThrowOnFailure(3000, "$('#${id}').length > 0");
-
+        /** @var NodeElement $node */
         $node = $this->getCurrentPage()->find('css', "#${id} > div > span > div > input");
 
+        $node->setValue('');
         $node->setValue('2050-05-05 12:12:12');
-        $enter = 13;
 
-        $node->keyPress($enter);
-        $this->getSession()->wait(10);
+        $this->iWait(1);
+
+        var_dump($node->getValue());die;
     }
 }
