@@ -5,16 +5,13 @@ namespace Capco\AppBundle\Resolver;
 use Capco\AppBundle\Utils\Text;
 use Liuggio\ExcelBundle\Factory;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Helper\EnvHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
-use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Bridge\Twig\Extension\HttpFoundationExtension;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
 
@@ -27,9 +24,7 @@ class ProjectDownloadResolver
     protected $phpexcel;
     protected $headers;
     protected $data;
-    protected $instanceName;
     protected $withVote;
-    protected $mediaExtension;
     protected $customFields;
     protected $httpFoundExtension;
     private $exportUrlResolver;
@@ -40,8 +35,6 @@ class ProjectDownloadResolver
         UrlArrayResolver $urlArrayResolver,
         MediaUrlResolver $urlResolver,
         Factory $phpexcel,
-        MediaExtension $mediaExtension,
-        HttpFoundationExtension $httpFoundationExtension,
         QuestionnaireExportResultsUrlResolver $exportUrlResolver
     ) {
         $this->em = $em;
@@ -52,9 +45,6 @@ class ProjectDownloadResolver
         $this->headers = [];
         $this->customFields = [];
         $this->data = [];
-        $this->instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-        $this->mediaExtension = $mediaExtension;
-        $this->httpFoundExtension = $httpFoundationExtension;
         $this->exportUrlResolver = $exportUrlResolver;
     }
 
