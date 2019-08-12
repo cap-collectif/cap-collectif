@@ -428,14 +428,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                     isset($response['formattedValue'])
                 ) {
                     $rows[$rowCounter][$columnKey] = $response['question']['title'];
-                    if (\is_array($response['formattedValue'])) {
-                        $rows[$rowCounter][$columnKey + 1] = implode(
-                            ', ',
-                            $response['formattedValue']
-                        );
-                    } else {
-                        $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
-                    }
+                    $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
                     ++$rowCounter;
                     $rows[$rowCounter] = $emptyRow;
                 }
@@ -447,7 +440,13 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                 ) {
                     $rows[$rowCounter][$columnKey] = $response['question']['title'];
                     if (\is_array($response['medias'])) {
-                        $rows[$rowCounter][$columnKey + 1] = implode(', ', $response['medias']);
+                        $mediaLists = '';
+                        foreach ($response['medias'] as $media) {
+                            if (isset($media['url'])) {
+                                $mediaLists .= $media['url'] . ', ';
+                            }
+                        }
+                        $rows[$rowCounter][$columnKey + 1] = substr($mediaLists, 0, -2);
                     } else {
                         $rows[$rowCounter][$columnKey + 1] = $response['medias'];
                     }
