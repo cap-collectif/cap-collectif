@@ -25,7 +25,7 @@ class QuestionnaireExportResultsUrlResolverSpec extends ObjectBehavior
     {
         $questionnaire->getSlug()->willReturn('my-slug');
         $questionnaire->getStep()->willReturn(null);
-        $this->getFileName($questionnaire)->shouldReturn('my-slug.xlsx');
+        $this->getFileName($questionnaire)->shouldReturn('my-slug');
     }
 
     public function it_resolve_fileName_inside_a_step_but_no_project(

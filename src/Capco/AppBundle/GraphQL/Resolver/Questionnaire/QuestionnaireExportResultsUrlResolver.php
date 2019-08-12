@@ -11,7 +11,6 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
  */
 class QuestionnaireExportResultsUrlResolver implements ResolverInterface
 {
-    public const EXTENSION = '.xlsx';
     private $router;
     private $projectDir;
 
@@ -34,7 +33,7 @@ class QuestionnaireExportResultsUrlResolver implements ResolverInterface
     {
         $step = $questionnaire->getStep();
         if (!$step) {
-            return $questionnaire->getSlug() . self::EXTENSION;
+            return $questionnaire->getSlug();
         }
 
         $fileName = '';
@@ -43,7 +42,7 @@ class QuestionnaireExportResultsUrlResolver implements ResolverInterface
         if ($project) {
             $fileName .= $project->getSlug() . '_';
         }
-        $fileName .= $step->getSlug() . self::EXTENSION;
+        $fileName .= $step->getSlug() . '.xlsx';
 
         return $fileName;
     }

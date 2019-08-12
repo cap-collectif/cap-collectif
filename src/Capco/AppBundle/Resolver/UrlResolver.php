@@ -14,6 +14,7 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Twig\MediaExtension;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -22,15 +23,18 @@ class UrlResolver
 {
     protected $router;
     protected $manager;
+    protected $mediaExtension;
     private $container;
 
     public function __construct(
         ContainerInterface $container,
         RouterInterface $router,
-        Manager $manager
+        Manager $manager,
+        MediaExtension $mediaExtension
     ) {
         $this->router = $router;
         $this->manager = $manager;
+        $this->mediaExtension = $mediaExtension;
         $this->container = $container;
     }
 

@@ -6,6 +6,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\RouterInterface;
+use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Translation\TranslatorInterface;
 use Capco\AppBundle\SiteColor\Resolver as SiteColorResolver;
 use Twig\Extension\AbstractExtension;
@@ -18,6 +19,7 @@ class ParametersExtension extends AbstractExtension
     protected $router;
     protected $manager;
     protected $translator;
+    protected $mediaExtension;
     protected $siteColorResolver;
     protected $siteParameterResolver;
 
@@ -25,6 +27,7 @@ class ParametersExtension extends AbstractExtension
         Manager $manager,
         RedisCache $cache,
         RouterInterface $router,
+        MediaExtension $mediaExtension,
         Resolver $siteParameterResolver,
         TranslatorInterface $translator,
         SiteColorResolver $siteColorResolver
@@ -33,6 +36,7 @@ class ParametersExtension extends AbstractExtension
         $this->router = $router;
         $this->manager = $manager;
         $this->translator = $translator;
+        $this->mediaExtension = $mediaExtension;
         $this->siteColorResolver = $siteColorResolver;
         $this->siteParameterResolver = $siteParameterResolver;
     }
