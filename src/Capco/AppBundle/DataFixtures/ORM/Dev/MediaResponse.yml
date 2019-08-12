@@ -1,13 +1,21 @@
 Capco\AppBundle\Entity\Responses\MediaResponse:
-  mediaResponse1:
+  response13:
     question: '@mediaquestion1'
     proposal: '@proposal1'
     medias: ['@MediaCapcoSite', '@MediaUser4']
-  mediaResponse2:
+  response14:
     question: '@mediaquestion2'
     proposal: '@proposal1'
     medias: ['@MediaUser1', '@MediaUser3', '@MediaFilePdf']
-  mediaResponse3:
+  # There is no answer to this question
+  # to check what's going on if no response
+  # is stored in database and we try to update
+  #
+  # response15:
+  #   question: '@mediaquestion1'
+  #   proposal: '@proposal2'
+  #   medias: ['@MediaCapcoSite', '@MediaUser4']
+  response16:
     question: '@mediaquestion2'
     proposal: '@proposal2'
     medias: ['@MediaUser1', '@MediaUser3', '@MediaFilePdf']

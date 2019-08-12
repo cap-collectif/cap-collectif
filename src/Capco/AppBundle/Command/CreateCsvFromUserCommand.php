@@ -72,7 +72,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     public static function updateSnapshot(string $userId, string $zipPath): void
     {
         if (!file_exists($zipPath)) {
-            throw new \RuntimeException('Zip path does not contain a file.');
+            throw new \RuntimeException('Zip path is does not contain a file.');
         }
 
         $matchTo = self::getSnapshotDir($userId);
@@ -428,7 +428,14 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                     isset($response['formattedValue'])
                 ) {
                     $rows[$rowCounter][$columnKey] = $response['question']['title'];
-                    $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
+                    if (\is_array($response['formattedValue'])) {
+                        $rows[$rowCounter][$columnKey + 1] = implode(
+                            ', ',
+                            $response['formattedValue']
+                        );
+                    } else {
+                        $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
+                    }
                     ++$rowCounter;
                     $rows[$rowCounter] = $emptyRow;
                 }
@@ -440,13 +447,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                 ) {
                     $rows[$rowCounter][$columnKey] = $response['question']['title'];
                     if (\is_array($response['medias'])) {
-                        $mediaLists = '';
-                        foreach ($response['medias'] as $media) {
-                            if (isset($media['url'])) {
-                                $mediaLists .= $media['url'] . ', ';
-                            }
-                        }
-                        $rows[$rowCounter][$columnKey + 1] = substr($mediaLists, 0, -2);
+                        $rows[$rowCounter][$columnKey + 1] = implode(', ', $response['medias']);
                     } else {
                         $rows[$rowCounter][$columnKey + 1] = $response['medias'];
                     }

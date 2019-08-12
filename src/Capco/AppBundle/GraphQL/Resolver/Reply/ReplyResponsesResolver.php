@@ -36,18 +36,7 @@ class ReplyResponsesResolver implements ResolverInterface
 
             return [];
         }
-        $responses = $this->filterVisibleResponses(
-            $reply->getResponses(),
-            $author,
-            $viewer,
-            $context
-        );
-        $iterator = $responses->getIterator();
 
-        $iterator->uasort(function ($a, $b) {
-            return $a->getQuestion()->getPosition() - $b->getQuestion()->getPosition();
-        });
-
-        return $iterator;
+        return $this->filterVisibleResponses($reply->getResponses(), $author, $viewer, $context);
     }
 }

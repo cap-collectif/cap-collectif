@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Responses;
 
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,7 +31,7 @@ class MediaResponse extends AbstractResponse
         $this->medias = new ArrayCollection();
     }
 
-    public function getMedias(): iterable
+    public function getMedias(): Collection
     {
         return $this->medias;
     }
@@ -44,7 +45,7 @@ class MediaResponse extends AbstractResponse
         return $this;
     }
 
-    public function setMedias(iterable $medias): self
+    public function setMedias(Collection $medias): self
     {
         $this->medias = $medias;
 

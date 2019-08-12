@@ -6,13 +6,13 @@ Object {
     "choices": Array [
       Object {
         "responses": Object {
-          "totalCount": 2,
+          "totalCount": 1,
         },
         "title": "Athlétisme",
       },
       Object {
         "responses": Object {
-          "totalCount": 0,
+          "totalCount": 1,
         },
         "title": "Natation",
       },
