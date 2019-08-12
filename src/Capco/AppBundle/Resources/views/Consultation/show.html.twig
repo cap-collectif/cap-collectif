@@ -21,7 +21,7 @@
 
 {% block jumbotron %}{% endblock %}
 
-{% block navigation %}
+{% block stepNavigation %}
     {% if currentStep.consultations.count > 1 %}
         <div class="step__propositions__navigation sticky">
             {{ react_render_component('StepPropositionNavigationApp', { 'props': { stepId: stepProps.id, relatedSlug: stepProps.consultationSlug } }) }}
