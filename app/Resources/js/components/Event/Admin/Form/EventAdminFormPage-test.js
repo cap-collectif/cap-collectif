@@ -16,8 +16,19 @@ const defaultProps = {
   dispatch: jest.fn(),
   event: {
     id: 'event1',
+    author: {
+      username: 'toto',
+    },
     $fragmentRefs,
     $refType,
+  },
+  query: {
+    $fragmentRefs,
+    $refType,
+  },
+  isSuperAdmin: true,
+  viewer: {
+    username: 'toto',
   },
 };
 
@@ -39,6 +50,7 @@ describe('<EventAdminFormPage />', () => {
       submitSucceeded: false,
       submitFailed: false,
       invalid: false,
+      isSuperAdmin: false,
     };
     const wrapper = shallow(<EventAdminFormPage {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -48,6 +60,9 @@ describe('<EventAdminFormPage />', () => {
     const props = {
       ...defaultProps,
       event: null,
+      viewer: {
+        username: 'notToto',
+      },
     };
     const wrapper = shallow(<EventAdminFormPage {...props} />);
     expect(wrapper).toMatchSnapshot();

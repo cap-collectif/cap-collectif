@@ -88,6 +88,7 @@ export class EventForm extends React.Component<Props> {
             label={<FormattedMessage id="admin.fields.proposal.address" />}
             placeholder="proposal.map.form.placeholder"
           />
+          {/* //Pour le super admin seulement, je n'ai donc pas mis de clef de trad, c'est temporaire le temps de la migration des adresses */}
           {isSuperAdmin && (
             <div className="mb-5">
               <div>
@@ -128,36 +129,34 @@ export class EventForm extends React.Component<Props> {
             }
           />
           <div className="d-flex justify-content-between w-23">
-            <div id="event_startAt">
-              <Field
-                timeFormat={false}
-                id="event_startAt"
-                component={component}
-                type="datetime"
-                name="startAt"
-                formName={formName}
-                label={
-                  <span>
-                    <FormattedMessage id="start-date" />{' '}
-                    <span className="excerpt">
-                      <FormattedMessage id="global.mandatory" />
-                    </span>
+            <Field
+              timeFormat={false}
+              id="event_startAt"
+              dateTimeInputProps={{ id: 'event_input_startAt' }}
+              component={component}
+              type="datetime"
+              name="startAt"
+              formName={formName}
+              label={
+                <span>
+                  <FormattedMessage id="start-date" />{' '}
+                  <span className="excerpt">
+                    <FormattedMessage id="global.mandatory" />
                   </span>
-                }
-                addonAfter={<i className="cap-calendar-2" />}
-              />
-            </div>
-            <div id="event_endAt">
-              <Field
-                id="event_endAt"
-                component={component}
-                type="datetime"
-                name="endAt"
-                formName={formName}
-                label={<FormattedMessage id="ending-date" />}
-                addonAfter={<i className="cap-calendar-2" />}
-              />
-            </div>
+                </span>
+              }
+              addonAfter={<i className="cap-calendar-2" />}
+            />
+            <Field
+              id="event_endAt"
+              dateTimeInputProps={{ id: 'event_input_endAt' }}
+              component={component}
+              type="datetime"
+              name="endAt"
+              formName={formName}
+              label={<FormattedMessage id="ending-date" />}
+              addonAfter={<i className="cap-calendar-2" />}
+            />
           </div>
           <Field
             id="event_media"
@@ -173,8 +172,10 @@ export class EventForm extends React.Component<Props> {
           </h3>
         </div>
         {features.themes && (
+          // $FlowFixMe
           <SelectTheme query={query} multi clearable name="themes" divId="event_theme" />
         )}
+        {/* $FlowFixMe */}
         <SelectProject query={query} multi clearable object={event} name="projects" />
         <div>
           <div className="box-header">

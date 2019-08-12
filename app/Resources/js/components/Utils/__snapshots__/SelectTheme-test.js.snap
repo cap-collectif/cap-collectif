@@ -36,7 +36,7 @@ exports[`<SelectTheme /> should render correctly 1`] = `
 exports[`<SelectTheme /> should render empty list 1`] = `
 <div
   className=""
-  id=""
+  id="myDivId"
 >
   <Field
     aria-autocomplete="list"

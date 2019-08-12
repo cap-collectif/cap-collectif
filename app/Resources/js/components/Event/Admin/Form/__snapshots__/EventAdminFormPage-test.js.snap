@@ -30,10 +30,19 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "author": Object {
+            "username": "toto",
+          },
           "id": "event1",
         }
       }
       onSubmit={[Function]}
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
       validate={[Function]}
     />
     <ButtonToolbar
@@ -53,7 +62,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
           closeDeleteModal={[Function]}
           deleteElement={[Function]}
           deleteModalContent="group.admin.parameters.modal.delete.content"
-          deleteModalTitle="group.admin.parameters.modal.delete.title"
+          deleteModalTitle="event.alert.delete"
           showDeleteModal={false}
         />
         <div>
@@ -64,6 +73,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
             bsStyle="danger"
             className="ml-5"
             disabled={false}
+            id="delete-event"
             onClick={[Function]}
           >
             <i
@@ -119,10 +129,19 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "author": Object {
+            "username": "toto",
+          },
           "id": "event1",
         }
       }
       onSubmit={[Function]}
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
       validate={[Function]}
     />
     <ButtonToolbar
@@ -142,7 +161,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
           closeDeleteModal={[Function]}
           deleteElement={[Function]}
           deleteModalContent="group.admin.parameters.modal.delete.content"
-          deleteModalTitle="group.admin.parameters.modal.delete.title"
+          deleteModalTitle="event.alert.delete"
           showDeleteModal={false}
         />
         <div>
@@ -153,6 +172,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
             bsStyle="danger"
             className="ml-5"
             disabled={false}
+            id="delete-event"
             onClick={[Function]}
           >
             <i
@@ -203,9 +223,15 @@ exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
   <div
     className="box box-primary container-fluid"
   >
-    <Connect(InjectIntl(ReduxForm))
+    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
       event={null}
       onSubmit={[Function]}
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
       validate={[Function]}
     />
     <ButtonToolbar

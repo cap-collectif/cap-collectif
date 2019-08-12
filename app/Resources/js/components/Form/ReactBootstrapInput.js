@@ -105,6 +105,7 @@ export type ParentProps = {|
   medias?: Array<any>,
   // Why do we use this ?
   value?: any,
+  dateTimeInputProps?: Object,
 |};
 
 type Props = {|
@@ -247,6 +248,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       formControl = (
         <DateTime
           value={value}
+          dateTimeInputProps={this.props.dateTimeInputProps}
           {...props}
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}

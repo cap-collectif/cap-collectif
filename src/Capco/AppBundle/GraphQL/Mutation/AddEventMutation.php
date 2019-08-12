@@ -98,14 +98,17 @@ class AddEventMutation implements MutationInterface
         array &$values,
         FormFactoryInterface $formFactory
     ): void {
-        $event->setStartAt(new \DateTime($values['startAt']));
-        unset($values['startAt']);
+        if (isset($values['startAt'])) {
+            $event->setStartAt(new \DateTime($values['startAt']));
+            unset($values['startAt']);
+        }
         if (isset($values['endAt'])) {
             $event->setEndAt(new \DateTime($values['endAt']));
             unset($values['endAt']);
         }
-
-        unset($values['author']);
+        if (isset($values['author'])) {
+            unset($values['author']);
+        }
 
         $form = $formFactory->create(EventType::class, $event);
         $form->submit($values, false);

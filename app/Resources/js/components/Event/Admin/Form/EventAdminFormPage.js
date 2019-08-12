@@ -37,6 +37,8 @@ type Props = {|
   submitFailed: boolean,
   invalid: boolean,
   dispatch: Dispatch,
+  viewer: Object,
+  isSuperAdmin: boolean,
 |};
 
 type FormValues = {|
@@ -71,7 +73,7 @@ const validate = (values: FormValues) => {
 
   const fields = ['title', 'startAt', 'endAt', 'author', 'body'];
   fields.forEach(value => {
-    if (value === 'endAt') {
+    if (value === 'endAt' && values.endAt) {
       if (!values.startAt && values.endAt !== null) {
         errors.startAt = 'fill-field';
         return;
@@ -110,7 +112,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     title: values.title,
     body: values.body,
     startAt: values.startAt,
-    endAt: values.endAt,
+    endAt: values.endAt ? values.endAt : null,
     metaDescription: values.metadescription,
     customCode: values.customcode,
     commentable,
@@ -221,7 +223,9 @@ export class EventAdminFormPage extends React.Component<Props, State> {
       intl,
       dispatch,
       event,
-      query
+      query,
+      viewer,
+      isSuperAdmin,
     } = this.props;
     const { showDeleteModal } = this.state;
 
@@ -235,7 +239,12 @@ export class EventAdminFormPage extends React.Component<Props, State> {
           <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
         </p>
         <div className="box box-primary container-fluid">
-          <EventForm event={event} onSubmit={event ? updateEvent : onSubmit} validate={validate} query={query}/>
+          <EventForm
+            event={event}
+            onSubmit={event ? updateEvent : onSubmit}
+            validate={validate}
+            query={query}
+          />
           <ButtonToolbar className="box-content__toolbar">
             <SubmitButton
               id={event ? 'confirm-event-edit' : 'confirm-event-create'}
@@ -246,25 +255,30 @@ export class EventAdminFormPage extends React.Component<Props, State> {
                 dispatch(submit(formName));
               }}
             />
-            {event && (
-              <div>
-                <DeleteModal
-                  closeDeleteModal={this.cancelCloseDeleteModal}
-                  showDeleteModal={showDeleteModal}
-                  deleteElement={() => {
-                    onDelete(event.id);
-                  }}
-                  deleteModalTitle="group.admin.parameters.modal.delete.title"
-                  deleteModalContent="group.admin.parameters.modal.delete.content"
-                  buttonConfirmMessage="group.admin.parameters.modal.delete.button"
-                />
+            {event &&
+              ((event.author && event.author.username === viewer.username) || isSuperAdmin) && (
                 <div>
-                  <Button bsStyle="danger" className="ml-5" onClick={this.openDeleteModal}>
-                    <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
-                  </Button>
+                  <DeleteModal
+                    closeDeleteModal={this.cancelCloseDeleteModal}
+                    showDeleteModal={showDeleteModal}
+                    deleteElement={() => {
+                      onDelete(event.id);
+                    }}
+                    deleteModalTitle="event.alert.delete"
+                    deleteModalContent="group.admin.parameters.modal.delete.content"
+                    buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+                  />
+                  <div>
+                    <Button
+                      bsStyle="danger"
+                      className="ml-5"
+                      onClick={this.openDeleteModal}
+                      id="delete-event">
+                      <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
             <AlertForm
               valid={valid}
               invalid={invalid}
@@ -286,6 +300,8 @@ const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
   submitSucceeded: hasSubmitSucceeded(formName)(state),
   submitFailed: hasSubmitFailed(formName)(state),
+  viewer: state.user.user,
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 
 export const EventAdminFormCreatePage = connect(mapStateToProps)(injectIntl(EventAdminFormPage));
@@ -299,6 +315,9 @@ export default createFragmentContainer(EventAdminFormCreatePage, {
   event: graphql`
     fragment EventAdminFormPage_event on Event {
       id
+      author {
+        username
+      }
       ...EventForm_event
     }
   `,

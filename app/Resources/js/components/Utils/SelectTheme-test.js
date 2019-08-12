@@ -26,6 +26,7 @@ describe('<SelectTheme />', () => {
     name: 'themes',
     multi: true,
     clearable: true,
+    divId: 'myDivId',
   };
 
   it('should render correctly', () => {

@@ -62,3 +62,4 @@ PreviewEvent:
       googleMapsAddress:
         type: 'GoogleMapsAddress'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", [value])'
+        description: 'identifies the address in google Maps format'
