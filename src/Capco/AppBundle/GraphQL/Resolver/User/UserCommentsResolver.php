@@ -27,7 +27,7 @@ class UserCommentsResolver implements ResolverInterface
         ?ArrayObject $context = null
     ): Connection {
         if (!$args) {
-            $args = new Argument(['first' => 100]);
+            $args = new Argument(['first' => 0]);
         }
 
         $aclDisabled =

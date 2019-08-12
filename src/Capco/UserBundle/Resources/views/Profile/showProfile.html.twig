@@ -45,6 +45,22 @@
         </div>
     </div>
 
+    {% if commentsCount is not defined %}
+        {% set commentsCount = userCommentsResolver.__(app.user, user).totalCount ?? 0 %}
+    {% endif %}
+    {% if proposalsCount is not defined %}
+        {% set proposalsCount = userProposalsResolver.__invoke(app.user, user).totalCount ?? 0 %}
+    {% endif %}
+    {% if opinionsCount is not defined %}
+        {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) ?? 0 %}
+    {% endif %}
+    {% if projectsCount is not defined %}
+        {% set projectsCount = userProjectsResolver.__invoke(user).totalCount ?? 0 %}
+    {% endif %}
+    {% if sourcesCount is not defined %}
+        {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
+    {% endif %}
+
     <div class="profile__values">
         <div class="container">
             <ul class="nav  nav-pills">
@@ -67,7 +83,6 @@
                     </li>
                 {% endif %}                
 
-                {% set projectsCount = userProjectsResolver.__invoke(user).totalCount %}
                 {% if projectsCount > 0 %}
                 <li class="profile__value {% if (app.request.attributes.get('_route') == 'capco_user_profile_show_projects') %}active{% endif %} ">
                     <a href="{{ path('capco_user_profile_show_projects', {'slug': user.slug}) }}">
@@ -77,7 +92,6 @@
                 </li>
                 {% endif %}
 
-                {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) %}
                 {% if opinionsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_opinions' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_opinions', {'slug': user.slug}) }}">
@@ -106,7 +120,6 @@
                     </a>
                 </li>
                 {% endif %}
-                {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
                 {% if sourcesCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_sources' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_sources', {'slug': user.slug}) }}">
@@ -115,7 +128,6 @@
                     </a>
                 </li>
                 {% endif %}
-                {% set proposalsCount = userProposalsResolver.__invoke(app.user, user).totalCount %}
                 {% if proposalsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_proposals' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_proposals', {'slug': user.slug}) }}">
@@ -124,7 +136,6 @@
                     </a>
                 </li>
                 {% endif %}
-                {% set commentsCount = userCommentsResolver.__invoke(app.user, user).totalCount %}
                 {% if (is_feature_enabled('calendar') or is_feature_enabled('blog') and commentsCount > 0) %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_comments' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_comments', {'slug': user.slug}) }}">

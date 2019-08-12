@@ -20,7 +20,7 @@ class ProfileComment extends React.Component<Props> {
   render() {
     const { comment } = this.props;
     return (
-      <li className="opinion opinion--comment block block--bordered box">
+      <li className="opinion bg-white block block--bordered box">
         <div className="opinion__body">
           <div className="opinion__content">
             {/* $FlowFixMe Will be a fragment soon */}

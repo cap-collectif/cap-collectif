@@ -10,7 +10,9 @@
 {% block jumbotron %}{% endblock %}
 
 {% block fos_user_content %}
-    {% include '@CapcoUser/Profile/showProfile.html.twig' %}
+    {% set projectsCount = userProjectsResolver.__invoke(user).totalCount ?? 0 %}
+
+    {% include '@CapcoUser/Profile/showProfile.html.twig' with projectsCount %}
     <section class="section--custom">
         <div class="container">
             <div class="row">

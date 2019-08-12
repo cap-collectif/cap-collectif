@@ -1,9 +1,0 @@
-{% set nbComments = comments | length %}
-{% if nbComments > 0 %}
-    <h2 class="h2">{% transchoice nbComments with {'%count%': nbComments} from 'CapcoAppBundle' %}comment.list.title{% endtranschoice %}</h2>
-    <ul class="media-list  opinion__list">
-        {% for comment in comments %}
-            {% include '@CapcoApp/Comment/blockComment.html.twig' with {'comment': comment} only %}
-        {% endfor %}
-    </ul>
-{% endif %}

@@ -19,7 +19,7 @@ class CommentController extends CRUDController
         $object = $this->admin->getObject($id);
 
         if (
-            is_object($this->getUser()) && !$this->getUser()->isSuperAdmin() ||
+            (\is_object($this->getUser()) && !$this->getUser()->isSuperAdmin()) ||
             $object->getAuthor() != $this->getUser()
         ) {
             throw new ProjectAccessDeniedException();
@@ -88,7 +88,7 @@ class CommentController extends CRUDController
             [
                 'object' => $object,
                 'action' => 'delete',
-                'csrf_token' => $this->getCsrfToken('sonata.delete'),
+                'csrf_token' => $this->getCsrfToken('sonata.delete')
             ],
             null
         );
