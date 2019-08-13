@@ -13,6 +13,12 @@ aliases:
       - Capco\AppBundle\Behat\MailCatcherContext
     filters:
       tags: '@core&&~@event_registration&&~@randomly-failing'
+  - &bp-config
+    contexts:
+      - Capco\AppBundle\Behat\ApplicationContext
+      - Capco\AppBundle\Behat\RabbitMQContext
+      - Capco\AppBundle\Behat\NavigationContext
+      - Capco\AppBundle\Behat\MailCatcherContext
 
 e2e:
   extensions:
@@ -50,14 +56,20 @@ e2e:
       filters:
         tags: '@consultation&&~@synthesis&&~@randomly-failing'
     bp:
-      paths: ['%paths.base%/features/front']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\RabbitMQContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
+      paths: ['%paths.base%/features/front/bp']
+      contexts: *bp-config
       filters:
-        tags: '@bp&&~@randomly-failing'
+        tags: '@bp&&~@proposal_crud&&~@proposal_search&&~@randomly-failing'
+    bp-crud:
+      paths: ['%paths.base%/features/front/bp']
+      contexts: *bp-config
+      filters:
+        tags: '@proposal_crud&&~@randomly-failing'
+    bp-search:
+      paths: ['%paths.base%/features/front/bp']
+      contexts: *bp-config
+      filters:
+        tags: '@proposal_search&&~@randomly-failing'
     questionnaire:
       paths: ['%paths.base%/features/front']
       contexts:

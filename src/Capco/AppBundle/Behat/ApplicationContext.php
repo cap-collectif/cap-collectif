@@ -978,7 +978,9 @@ class ApplicationContext extends UserContext
             'bo-project',
             'core-pages',
             'core-user',
+            'bp-search',
             'bo-pages',
+            'bp-crud',
             'bp'
         ]);
     }
