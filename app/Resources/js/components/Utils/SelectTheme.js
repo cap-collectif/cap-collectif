@@ -9,11 +9,11 @@ import type { SelectTheme_query } from '~relay/SelectTheme_query.graphql';
 type Props = {|
   +query: SelectTheme_query,
   +intl: IntlShape,
-  +multi?: boolean,
-  +clearable?: boolean,
-  +name?: string,
-  +className?: string,
-  +divId?: string,
+  +multi: boolean,
+  +clearable: boolean,
+  +name: string,
+  +className: string,
+  +divId: string,
 |};
 
 export class SelectTheme extends React.Component<Props> {
@@ -22,7 +22,7 @@ export class SelectTheme extends React.Component<Props> {
     clearable: false,
     name: 'theme',
     className: '',
-    divId: '',
+    divId: 'testId',
   };
 
   render() {

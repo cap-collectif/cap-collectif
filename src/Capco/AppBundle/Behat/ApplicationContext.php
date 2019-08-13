@@ -981,9 +981,9 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @When I fill the theme filter
+     * @When I fill the theme filter with value :value
      */
-    public function iFillThemeFilter()
+    public function iFillThemeFilterWithValue($value)
     {
         $this->waitAndThrowOnFailure(3000, "$('#SelectTheme-filter-theme').length > 0");
 
@@ -992,16 +992,16 @@ class ApplicationContext extends UserContext
             '#SelectTheme-filter-theme .react-select__input input'
         );
 
-        $node->setValue('Immobilier');
+        $node->setValue($value);
         $node->keyPress(13);
 
         $this->getSession()->wait(10);
     }
 
     /**
-     * @When I fill the project filter
+     * @When I fill the project filter with value :value
      */
-    public function iFillProjectFilter()
+    public function iFillProjectFilterWithValue($value)
     {
         $this->waitAndThrowOnFailure(3000, "$('#SelectProject-filter-project').length > 0");
 
@@ -1010,7 +1010,7 @@ class ApplicationContext extends UserContext
             '#SelectProject-filter-project .react-select__input input'
         );
 
-        $node->setValue('Croissance');
+        $node->setValue($value);
         $node->keyPress(13);
 
         $this->getSession()->wait(10);

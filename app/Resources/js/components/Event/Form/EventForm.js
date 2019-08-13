@@ -256,13 +256,13 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
               value: p.id,
               label: p.title,
             }))
-          : null,
+          : [],
         themes: props.event
           ? props.event.themes.map(th => ({
               value: th.id,
               label: th.title,
             }))
-          : null,
+          : [],
         author:
           props.event && props.event.author
             ? { value: props.event.author.id, label: props.event.author.displayName }

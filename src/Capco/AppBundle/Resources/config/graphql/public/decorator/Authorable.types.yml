@@ -5,5 +5,5 @@ Authorable:
     fields:
       viewerDidAuthor:
         type: 'Boolean'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Viewer\\ViewerDidAuthorResolver", [value, getUser()])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerDidAuthorResolver", [value, getUser()])'
         description: 'Did the viewer author this entity.'

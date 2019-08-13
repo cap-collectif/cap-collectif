@@ -52,7 +52,6 @@ type FormValues = {|
   addressJson: ?string,
   address: ?string,
   enabled: boolean,
-  // $FlowFixMe
   media: ?{
     id: string,
     url: string,
@@ -80,7 +79,6 @@ const validate = (values: FormValues) => {
       if (
         values.startAt &&
         values.startAt.length > 0 &&
-        // $FlowFixMe
         (values.endAt !== null && values.endAt.length > 0)
       ) {
         // $FlowFixMe

@@ -11,7 +11,7 @@ import type {
 } from '~relay/EventAdminQuery.graphql';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 
-type Props = {|
+export type Props = {|
   +eventId: string,
 |};
 

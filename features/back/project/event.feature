@@ -15,8 +15,8 @@ Scenario: Logged in admin wants to add a new event
   And I fill in "event_body" with "My body"
   And I fill date field "#event_input_startAt" with value '2030-08-17 12:13:14'
   And I attach the file "/var/www/features/files/image.jpg" to "event_media_field"
-  And I fill the theme filter
-  And I fill the project filter
+  And I fill the theme filter with value "Immobilier"
+  And I fill the project filter with value 'Croissance'
   And I fill in "custom.metadescription" with "Common on a react event to speak about how to fire our president"
   And I fill in "custom.customcode" with "<script>alert('I m an xss fail');</script>"
   Then I click on button "#confirm-event-create"
@@ -35,8 +35,8 @@ Scenario: Logged in admin wants to edit an event
   And I fill in "event_body" with "My body"
   And I fill date field "#event_input_startAt" with value '2050-08-17 12:13:14'
   And I attach the file "/var/www/features/files/image.jpg" to "event_media_field"
-  And I fill the theme filter
-  And I fill the project filter
+  And I fill the theme filter with value "Immobilier"
+  And I fill the project filter with value 'Croissance'
   And I fill in "custom.metadescription" with "Common on a react event to speak about how to fire our president"
   And I fill in "custom.customcode" with "<script>alert('I m an xss fail');</script>"
   Then I click on button "#confirm-event-edit"

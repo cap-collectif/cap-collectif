@@ -9,9 +9,9 @@ import type { SelectProject_query } from '~relay/SelectProject_query.graphql';
 type Props = {|
   +query: SelectProject_query,
   +intl: IntlShape,
-  +multi?: boolean,
-  +clearable?: boolean,
-  +name?: string,
+  +multi: boolean,
+  +clearable: boolean,
+  +name: string,
 |};
 
 export class SelectProject extends React.Component<Props> {

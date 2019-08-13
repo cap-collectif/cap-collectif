@@ -71,7 +71,7 @@
             });
         });
     </script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places"></script>
+    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
 {% endblock %}
 
 {% block sonata_admin_content_actions_wrappers %}
