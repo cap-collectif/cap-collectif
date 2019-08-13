@@ -2,8 +2,23 @@
 
 exports[`<EventPreview /> renders correctly and highlighted 1`] = `
 <div
-  className="d-flex flex-1-1 event block--bordered highlighted-comment"
+  className="d-flex flex-1-1 event block  block--bordered highlighted-comment"
 >
+  <div
+    className="picture_container"
+    style={
+      Object {
+        "backgroundColor": "#eeeeee",
+      }
+    }
+  >
+    <img
+      alt=""
+      className="event__picture"
+      onError={[Function]}
+      src="https://picsum.photos/300/400"
+    />
+  </div>
   <div
     className="d-flex event__infos"
   >
@@ -105,8 +120,23 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
 
 exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
 <div
-  className="d-flex flex-1-1 event block--bordered "
+  className="d-flex flex-1-1 event block  block--bordered "
 >
+  <div
+    className="picture_container"
+    style={
+      Object {
+        "backgroundColor": "#eeeeee",
+      }
+    }
+  >
+    <img
+      alt=""
+      className="event__picture"
+      onError={[Function]}
+      src="https://picsum.photos/300/400"
+    />
+  </div>
   <div
     className="d-flex event__infos"
   >
@@ -208,8 +238,23 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
 
 exports[`<EventPreview /> renders correctly without picture for user 1`] = `
 <div
-  className="d-flex flex-1-1 event block--bordered "
+  className="d-flex flex-1-1 event block  block--bordered "
 >
+  <div
+    className="picture_container"
+    style={
+      Object {
+        "backgroundColor": "#eeeeee",
+      }
+    }
+  >
+    <img
+      alt=""
+      className="event__picture"
+      onError={[Function]}
+      src="https://picsum.photos/300/400"
+    />
+  </div>
   <div
     className="d-flex event__infos"
   >
@@ -309,8 +354,23 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
 
 exports[`<EventPreview /> renders without username 1`] = `
 <div
-  className="d-flex flex-1-1 event block--bordered "
+  className="d-flex flex-1-1 event block  block--bordered "
 >
+  <div
+    className="picture_container"
+    style={
+      Object {
+        "backgroundColor": "#eeeeee",
+      }
+    }
+  >
+    <img
+      alt=""
+      className="event__picture"
+      onError={[Function]}
+      src="https://picsum.photos/300/400"
+    />
+  </div>
   <div
     className="d-flex event__infos"
   >

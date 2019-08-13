@@ -3,7 +3,7 @@
 {% set nbArguments = opinion.argumentsCount %}
 {% set nbSources = opinion.sourcesCount %}
 {% set nbVersions = isVersion ? null : opinionVersionsResolver.__invoke(opinion).totalCount %}
-{% set top = isVersion ? opinion.parent.step.project.versionsRankingThreshold : opinion.step.project.opinionsRankingThreshold %}
+{% set top = isVersion ? opinion.parent.project.versionsRankingThreshold : opinion.project.opinionsRankingThreshold %}
 {% set showRanking = showRanking is defined ? showRanking : false %}
 {% set bodyCols = showRanking ? 'col-xs-11  col-sm-7  col-md-8  col-lg-9' : 'col-xs-12  col-sm-8  col-md-9  col-lg-10' %}
 <li class="opinion has-chart{% if opinion.author.isVip %} bg-vip{% endif %}" data-ok="{{ opinion.votesCountOk }}" data-nok="{{ opinion.votesCountNok }}" data-mitige="{{ opinion.votesCountMitige }}" data-pie-id="{{ opinion.id }}">

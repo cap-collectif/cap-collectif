@@ -127,7 +127,7 @@ class OpinionRepository extends EntityRepository
         $page = 1
     ) {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 's', 'aut', 'm')
+            ->addSelect('ot', 'oc', 's', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.media', 'm')
@@ -169,7 +169,7 @@ class OpinionRepository extends EntityRepository
     public function getTrashedByProject(Project $project)
     {
         $qb = $this->createQueryBuilder('o')
-            ->addSelect('ot', 's', 'aut', 'm', 'oc')
+            ->addSelect('ot', 'oc', 's', 'aut', 'm', 'oc')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.media', 'm')

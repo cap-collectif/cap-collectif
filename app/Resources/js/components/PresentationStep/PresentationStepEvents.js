@@ -18,27 +18,18 @@ export type Props = {|
 
 const EventContainer = styled.div`
   padding-top: 20px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 5%;
-  grid-auto-rows: auto;
-  margin-bottom: 30px;
 
-  >div>div{
-    margin-bottom: 0;
+  >div{
+    width: 45%;
+    display: inline-block;
+    margin-right: 5%;
   }
 
-
-
   @media (max-width: 1200px) {
-    display: flex;
-    flex-direction: column;
-
     >div{
       width: 70%;
       display: block;
-      margin: 0 0 20px 0;
+      margin-right: 0;
     }
     
   @media (max-width: 380px) {
