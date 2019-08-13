@@ -301,6 +301,7 @@ mappings:
       user: *Author
       private: { type: boolean }
       project: *Project
+      published: { type: boolean }
 
   #
   # This allow ous to monitore the usage of our API.

@@ -209,6 +209,11 @@ InternalUser:
         type: 'InternalVoteConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all votes of the user.'
+        args:
+          first:
+            type: 'Int'
+            description: 'Returns the first n elements from the list.'
+            defaultValue: 100
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [value, args])'
       groups:
         type: 'GroupConnection!'

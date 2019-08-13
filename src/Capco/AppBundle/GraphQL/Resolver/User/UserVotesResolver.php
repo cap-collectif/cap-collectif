@@ -21,7 +21,7 @@ class UserVotesResolver implements ResolverInterface
     public function __invoke(User $user, Argument $args = null): Connection
     {
         if (!$args) {
-            $args = new Argument(['first' => 100]);
+            $args = new Argument(['first' => 0]);
         }
 
         $paginator = new Paginator(function (?int $offset, ?int $limit) use ($user) {

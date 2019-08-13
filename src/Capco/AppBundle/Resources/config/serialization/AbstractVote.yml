@@ -4,6 +4,8 @@ Capco\AppBundle\Entity\AbstractVote:
       groups: [OpinionVersions, UserMedias, ElasticsearchNestedAuthor]
     id:
       groups: [ElasticsearchVote]
+    published:
+      groups: [ElasticsearchVote]
     getProject:
       groups: [ElasticsearchNestedProject]
       serialized_name: project
