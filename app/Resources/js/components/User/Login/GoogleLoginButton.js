@@ -1,12 +1,14 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+
 import type { FeatureToggles } from '../../../types';
 import type { LabelPrefix } from './LoginSocialButtons';
 
 type Props = {|
   features: FeatureToggles,
   prefix?: LabelPrefix,
+  intl: IntlShape,
 |};
 
 export class GoogleLoginButton extends React.Component<Props> {
@@ -17,10 +19,10 @@ export class GoogleLoginButton extends React.Component<Props> {
   };
 
   getTitleTraduction = (): string => {
-    const { prefix } = this.props;
+    const { prefix, intl } = this.props;
 
     if (prefix === '') {
-      return 'Google';
+      return intl.formatMessage({ id: 'share.google' });
     }
 
     return `${prefix || 'login.'}google`;
@@ -44,4 +46,4 @@ export class GoogleLoginButton extends React.Component<Props> {
   }
 }
 
-export default GoogleLoginButton;
+export default injectIntl(GoogleLoginButton);

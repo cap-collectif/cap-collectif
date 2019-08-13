@@ -2,12 +2,14 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import FacebookLoginButton from './FacebookLoginButton';
+import { intlMock } from '../../../mocks';
+import { FacebookLoginButton } from './FacebookLoginButton';
 import { features } from '../../../redux/modules/default';
 
 describe('<FacebookLoginButton />', () => {
   const defaultProps = {
     features: { ...features },
+    intl: intlMock,
   };
 
   it('renders nothing if login_facebook is not activated', () => {
@@ -28,6 +30,7 @@ describe('<FacebookLoginButton />', () => {
 
   it('renders a button if feature is active', () => {
     const props = {
+      ...defaultProps,
       features: { ...features, login_facebook: true },
     };
 
@@ -37,6 +40,7 @@ describe('<FacebookLoginButton />', () => {
 
   it('renders a button with correct registration label', () => {
     const props = {
+      ...defaultProps,
       features: { ...features, login_facebook: true },
       prefix: 'registration.',
     };

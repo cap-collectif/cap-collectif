@@ -1,15 +1,17 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+
 import type { FeatureToggles } from '../../../types';
 import type { LabelPrefix } from './LoginSocialButtons';
 
 type Props = {|
   features: FeatureToggles,
   prefix?: LabelPrefix,
+  intl: IntlShape,
 |};
 
-class FacebookLoginButton extends React.Component<Props> {
+export class FacebookLoginButton extends React.Component<Props> {
   static displayName = 'FacebookLoginButton';
 
   static defaultProps = {
@@ -17,10 +19,10 @@ class FacebookLoginButton extends React.Component<Props> {
   };
 
   getTitleTraduction = (): string => {
-    const { prefix } = this.props;
+    const { prefix, intl } = this.props;
 
     if (prefix === '') {
-      return 'Facebook';
+      return intl.formatMessage({ id: 'share.facebook' });
     }
 
     return `${prefix || 'login.'}facebook`;
@@ -44,4 +46,4 @@ class FacebookLoginButton extends React.Component<Props> {
   }
 }
 
-export default FacebookLoginButton;
+export default injectIntl(FacebookLoginButton);
