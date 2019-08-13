@@ -223,8 +223,12 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
-            ->leftJoin('o.step', 'ostep')
-            ->leftJoin('ovo.step', 'ovostep')
+
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('ovo.consultation', 'ovoc')
+
+            ->leftJoin('oc.step', 'ostep')
+            ->leftJoin('ovoc.step', 'ovostep')
 
             ->leftJoin('ostep.projectAbstractStep', 'opas')
             ->leftJoin('ovostep.projectAbstractStep', 'ovopas')
@@ -315,8 +319,13 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
             ->leftJoin('s.opinion', 'o')
+
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('ovo.consultation', 'ovoc')
+
+            ->leftJoin('oc.step', 'ostep')
+            ->leftJoin('ovoc.step', 'ovostep')
+
             ->andWhere('s.published = 1')
             ->andWhere('s.trashedAt IS NULL')
             ->andWhere(
@@ -373,8 +382,11 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
 
-            ->leftJoin('o.step', 'ostep')
-            ->leftJoin('ovo.step', 'ovostep')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('ovo.consultation', 'ovoc')
+
+            ->leftJoin('oc.step', 'ostep')
+            ->leftJoin('ovoc.step', 'ovostep')
 
             ->leftJoin('ostep.projectAbstractStep', 'opas')
             ->leftJoin('ovostep.projectAbstractStep', 'ovopas')

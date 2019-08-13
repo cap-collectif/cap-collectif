@@ -41,8 +41,7 @@ class OpinionPage extends Page
         'sources list' => '#sources-list',
         'add source button' => '#source-form__add',
         'source vote button' => '#sources-list .list-group-item:first-child .source__btn--vote',
-        'first source vote count' =>
-            '#sources-list .list-group-item:first-child .opinion__votes-nb',
+        'first source vote count' => '#source-source35 .opinion__votes-nb',
         'source create title field' => '#source-form #sourceTitle',
         'source create body field' => '#source-form #sourceBody .ql-editor',
         'source create link field' => '#source-form #sourceLink',
@@ -54,9 +53,8 @@ class OpinionPage extends Page
         'source edit submit button' => '#confirm-opinion-source-update',
         'source delete button' => '#source-source35 .source__btn--delete',
         'source confirm delete button' => '#confirm-opinion-source-delete',
-        'source report button' => '#source-source36 .source__btn--report',
+        'source report button' => '#source-source36 .source__btn--report'
     ];
-
 
     /**
      * @var string

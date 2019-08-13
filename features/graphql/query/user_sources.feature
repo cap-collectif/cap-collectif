@@ -28,7 +28,7 @@ Scenario: admin wants to see user5's sources
       "user": {
         "id": "VXNlcjp1c2VyNQ==",
          "sources": {
-          "totalCount": 4
+          "totalCount": 3
          }
       }
     }
