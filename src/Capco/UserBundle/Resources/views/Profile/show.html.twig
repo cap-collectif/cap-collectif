@@ -1,3 +1,4 @@
+
 {% set page_class = "profile-page" %}
 {% extends "CapcoUserBundle::layout.html.twig" %}
 
@@ -28,7 +29,7 @@
     {% set proposalsCount = userProposalsResolver.__invoke(app.user, user).totalCount ?? 0 %}
     {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) ?? 0 %}
     {% set projectsCount = userProjectsResolver.__invoke(user).totalCount ?? 0 %}
-    {% set sourcesCount = userSourcesResolver.__invoke(user).totalCount %}
+    {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount ?? 0 %}
 
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
 

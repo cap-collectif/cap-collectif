@@ -42,6 +42,7 @@ export default createFragmentContainer(CommentInfos, {
         displayName
         url
       }
+      ...CommentDate_comment
       ...UnpublishedLabel_publishable
       authorName
     }

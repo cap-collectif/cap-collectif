@@ -23,6 +23,11 @@ class Indexer
     public const BULK_SIZE = 100;
 
     /**
+     * This attribute is used in a PhpSpec test.
+     */
+    public $currentDeleteBulk = [];
+
+    /**
      * @var Index
      */
     protected $index;
@@ -33,8 +38,6 @@ class Indexer
     protected $client;
 
     protected $currentInsertBulk = [];
-
-    protected $currentDeleteBulk = [];
 
     /**
      * @var EntityManager
@@ -105,11 +108,7 @@ class Indexer
     {
         $repository = $this->em->getRepository($entityFQN);
         $object = $repository->findOneBy(['id' => $identifier]);
-        if (!$object instanceof IndexableInterface) {
-            // @todo if no object found, trigger a "remove" on ES.
-            return;
-        }
-        if ($object->isIndexable()) {
+        if ($object instanceof IndexableInterface && $object->isIndexable()) {
             $document = $this->buildDocument($object);
             $this->addToBulk($document);
         } else {
@@ -125,10 +124,7 @@ class Indexer
      */
     public function remove(string $entityFQN, $identifier): void
     {
-        $classes = $this->getClassesToIndex();
-        $type = array_search($entityFQN, $classes, true);
-
-        $this->addToBulk(new Document($identifier, [], $type));
+        $this->addToBulk(new Document($identifier, [], $this->getTypeFromEntityFQN($entityFQN)));
     }
 
     /**
@@ -202,13 +198,25 @@ class Indexer
 
         try {
             $json = $this->serializer->serialize($object, 'json', [
-                'groups' => $object->getElasticsearchSerializationGroups(),
+                'groups' => $object->getElasticsearchSerializationGroups()
             ]);
         } catch (\Exception $exception) {
             $this->logger->error(__METHOD__ . $exception->getMessage());
         }
 
         return new Document($object->getId(), $json, $object::getElasticsearchTypeName());
+    }
+
+    private function getTypeFromEntityFQN($entityFQN): string
+    {
+        $parentClass = (new \ReflectionClass($entityFQN))->getParentClass() ?? false;
+        if ($parentClass && Comment::class === $parentClass->getName()) {
+            return 'comment';
+        }
+
+        $classes = $this->getClassesToIndex();
+
+        return array_search($entityFQN, $classes, true);
     }
 
     private function indexType(string $class, int $offset, OutputInterface $output = null): void

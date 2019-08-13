@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
@@ -19,7 +20,7 @@ class CommentableTypeResolver implements ResolverInterface
         $this->typeResolver = $typeResolver;
     }
 
-    public function __invoke($data)
+    public function __invoke($data): Type
     {
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 

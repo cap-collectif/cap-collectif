@@ -6,6 +6,7 @@ use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Doctrine\Common\EventSubscriber;
@@ -57,7 +58,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         $this->process($args->getObject());
     }
 
-    private function publishMessage(IndexableInterface $entity): void
+    public function publishMessage(IndexableInterface $entity): void
     {
         $this->publisher->publish(
             CapcoAppBundleMessagesTypes::ELASTICSEARCH_INDEXATION,
@@ -65,7 +66,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         );
     }
 
-    private function process($entity, bool $indexAuthor = true): void
+    private function process($entity, bool $indexAuthor = true, bool $skipProcess = false): void
     {
         if ($entity instanceof IndexableInterface) {
             $this->publishMessage($entity);
@@ -79,7 +80,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
             $this->publishMessage($entity->getAuthor());
         }
         if ($entity instanceof Comment && $entity->getRelatedObject()) {
-            $this->process($entity->getRelatedObject(), false);
+            $this->process($entity->getRelatedObject(), false, true);
         }
         if ($entity instanceof AbstractVote && $entity->getRelated()) {
             $this->process($entity->getRelated(), false);
@@ -87,6 +88,11 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         if ($entity instanceof Event && $entity->getProjects()->count() > 0) {
             foreach ($entity->getProjects() as $project) {
                 $this->process($project, false);
+            }
+        }
+        if (!$skipProcess && $entity instanceof Proposal && $entity->getComments()->count() > 0) {
+            foreach ($entity->getComments() as $comment) {
+                $this->process($comment, false);
             }
         }
     }

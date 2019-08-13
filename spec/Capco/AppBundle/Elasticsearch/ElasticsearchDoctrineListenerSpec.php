@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\Elasticsearch;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Swarrot\Broker\Message;
@@ -27,7 +28,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $this->getSubscribedEvents()->shouldReturn([
             Events::postPersist,
             Events::postUpdate,
-            Events::preRemove,
+            Events::preRemove
         ]);
     }
 
@@ -44,7 +45,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $message = new Message(
             json_encode([
                 'class' => \get_class($event->getWrappedObject()),
-                'id' => 'event1',
+                'id' => 'event1'
             ])
         );
         $publisher
@@ -59,12 +60,13 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         Publisher $publisher,
         LifecycleEventArgs $args,
         Proposal $proposal,
-        User $author
+        User $author,
+        EntityManagerInterface $em
     ) {
         $proposalMessage = new Message(
             json_encode([
                 'class' => \get_class($proposal->getWrappedObject()),
-                'id' => 'proposal1',
+                'id' => 'proposal1'
             ])
         );
         $authorMessage = new Message(
@@ -78,8 +80,8 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
             ->shouldBeCalledOnce();
         $proposal->getId()->willReturn('proposal1');
         $author->getId()->willReturn('user1');
-
         $proposal->getAuthor()->willReturn($author);
+        $proposal->getComments()->willReturn(new ArrayCollection());
         $args->getObject()->willReturn($proposal);
         $this->handleEvent($args);
     }
@@ -94,13 +96,13 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $proposalMessage = new Message(
             json_encode([
                 'class' => \get_class($proposal->getWrappedObject()),
-                'id' => 'proposal1',
+                'id' => 'proposal1'
             ])
         );
         $voteAuthorMessage = new Message(
             json_encode([
                 'class' => \get_class($voteAuthor->getWrappedObject()),
-                'id' => 'user1',
+                'id' => 'user1'
             ])
         );
 
@@ -113,10 +115,9 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
             ->shouldBeCalledOnce();
         $proposal->getId()->willReturn('proposal1');
         $voteAuthor->getId()->willReturn('user1');
-
+        $proposal->getComments()->willReturn(new ArrayCollection());
         $vote->getRelated()->willReturn($proposal);
         $vote->getAuthor()->willReturn($voteAuthor);
-
         $args->getObject()->willReturn($vote);
         $this->handleEvent($args);
     }
@@ -131,19 +132,19 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $commentMessage = new Message(
             json_encode([
                 'class' => \get_class($comment->getWrappedObject()),
-                'id' => 'comment1',
+                'id' => 'comment1'
             ])
         );
         $commentProposalMessage = new Message(
             json_encode([
                 'class' => \get_class($commentProposal->getWrappedObject()),
-                'id' => 'proposal1',
+                'id' => 'proposal1'
             ])
         );
         $commentAuthorMessage = new Message(
             json_encode([
                 'class' => \get_class($commentAuthor->getWrappedObject()),
-                'id' => 'user1',
+                'id' => 'user1'
             ])
         );
 
