@@ -5,7 +5,8 @@
     overflow: hidden;
     text-align: center;
     border-radius: 4px;
-    height: 160px;
+    margin-bottom: 20px;
+    height: 100%;
 
 
     .event__icon {
@@ -39,7 +40,7 @@
     }
 
     .event__infos{
-        width: 70%;
+        width: 100%;
         height: 100%;
         padding: 10px 10px 10px 20px;
 
@@ -89,17 +90,17 @@
                 margin-bottom: 5px;
             }
 
-            p, h3, span{
-                max-width: calc(100% - 10px);
-                height: 22px;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-            }
+            // p, h3, span{
+            //     max-width: calc(100% - 10px);
+            //     height: 22px;
+            //     text-overflow: ellipsis;
+            //     overflow: hidden;
+            //     white-space: nowrap;
+            // }
 
-            h3{
-                color: #00acc1;
-            }
+            // h3{
+            //     color: #00acc1;
+            // }
         }
     }
 }
