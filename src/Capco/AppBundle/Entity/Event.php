@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -35,15 +36,16 @@ class Event implements
     CommentableInterface,
     IndexableInterface,
     DisplayableInBOInterface,
-    TimeRangeable
+    TimeRangeable,
+    Authorable
 {
-    use DateHelperTrait,
-        CommentableWithoutCounterTrait,
-        UuidTrait,
-        TextableTrait,
-        MetaDescriptionCustomCodeTrait,
-        TimestampableTrait,
-        SluggableTitleTrait;
+    use DateHelperTrait;
+    use CommentableWithoutCounterTrait;
+    use UuidTrait;
+    use TextableTrait;
+    use MetaDescriptionCustomCodeTrait;
+    use TimestampableTrait;
+    use SluggableTitleTrait;
 
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)

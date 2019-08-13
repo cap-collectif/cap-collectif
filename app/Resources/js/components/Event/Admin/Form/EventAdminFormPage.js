@@ -37,7 +37,6 @@ type Props = {|
   submitFailed: boolean,
   invalid: boolean,
   dispatch: Dispatch,
-  viewer: Object,
   isSuperAdmin: boolean,
 |};
 
@@ -224,7 +223,6 @@ export class EventAdminFormPage extends React.Component<Props, State> {
       dispatch,
       event,
       query,
-      viewer,
       isSuperAdmin,
     } = this.props;
     const { showDeleteModal } = this.state;
@@ -255,30 +253,29 @@ export class EventAdminFormPage extends React.Component<Props, State> {
                 dispatch(submit(formName));
               }}
             />
-            {event &&
-              ((event.author && event.author.username === viewer.username) || isSuperAdmin) && (
+            {event && (event.viewerDidAuthor || isSuperAdmin) && (
+              <div>
+                <DeleteModal
+                  closeDeleteModal={this.cancelCloseDeleteModal}
+                  showDeleteModal={showDeleteModal}
+                  deleteElement={() => {
+                    onDelete(event.id);
+                  }}
+                  deleteModalTitle="event.alert.delete"
+                  deleteModalContent="group.admin.parameters.modal.delete.content"
+                  buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+                />
                 <div>
-                  <DeleteModal
-                    closeDeleteModal={this.cancelCloseDeleteModal}
-                    showDeleteModal={showDeleteModal}
-                    deleteElement={() => {
-                      onDelete(event.id);
-                    }}
-                    deleteModalTitle="event.alert.delete"
-                    deleteModalContent="group.admin.parameters.modal.delete.content"
-                    buttonConfirmMessage="group.admin.parameters.modal.delete.button"
-                  />
-                  <div>
-                    <Button
-                      bsStyle="danger"
-                      className="ml-5"
-                      onClick={this.openDeleteModal}
-                      id="delete-event">
-                      <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
-                    </Button>
-                  </div>
+                  <Button
+                    bsStyle="danger"
+                    className="ml-5"
+                    onClick={this.openDeleteModal}
+                    id="delete-event">
+                    <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
+                  </Button>
                 </div>
-              )}
+              </div>
+            )}
             <AlertForm
               valid={valid}
               invalid={invalid}
@@ -300,7 +297,6 @@ const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
   submitSucceeded: hasSubmitSucceeded(formName)(state),
   submitFailed: hasSubmitFailed(formName)(state),
-  viewer: state.user.user,
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 
@@ -315,9 +311,7 @@ export default createFragmentContainer(EventAdminFormCreatePage, {
   event: graphql`
     fragment EventAdminFormPage_event on Event {
       id
-      author {
-        username
-      }
+      viewerDidAuthor
       ...EventForm_event
     }
   `,

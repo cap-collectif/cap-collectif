@@ -5,6 +5,7 @@ PreviewEvent:
     - UniformResourceLocatable
     - Timestampable
     - PreviewTimeRangeable
+    - Authorable
   config:
     interfaces:
       - Node

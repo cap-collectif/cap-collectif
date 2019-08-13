@@ -30,10 +30,8 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "author": Object {
-            "username": "toto",
-          },
           "id": "event1",
+          "viewerDidAuthor": true,
         }
       }
       onSubmit={[Function]}
@@ -129,10 +127,8 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "author": Object {
-            "username": "toto",
-          },
           "id": "event1",
+          "viewerDidAuthor": true,
         }
       }
       onSubmit={[Function]}

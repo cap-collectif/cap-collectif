@@ -16,9 +16,7 @@ const defaultProps = {
   dispatch: jest.fn(),
   event: {
     id: 'event1',
-    author: {
-      username: 'toto',
-    },
+    viewerDidAuthor: true,
     $fragmentRefs,
     $refType,
   },
@@ -27,9 +25,6 @@ const defaultProps = {
     $refType,
   },
   isSuperAdmin: true,
-  viewer: {
-    username: 'toto',
-  },
 };
 
 describe('<EventAdminFormPage />', () => {
@@ -60,9 +55,6 @@ describe('<EventAdminFormPage />', () => {
     const props = {
       ...defaultProps,
       event: null,
-      viewer: {
-        username: 'notToto',
-      },
     };
     const wrapper = shallow(<EventAdminFormPage {...props} />);
     expect(wrapper).toMatchSnapshot();
