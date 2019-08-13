@@ -6,13 +6,13 @@ exports[`<GoogleLoginButton /> renders a button if feature is active 1`] = `
   href="/login/google?_destination=http://localhost/"
   title={
     <FormattedMessage
-      id="share.google"
+      id="google"
       values={Object {}}
     />
   }
 >
   <FormattedMessage
-    id="share.google"
+    id="google"
     values={Object {}}
   />
 </a>
@@ -44,13 +44,13 @@ exports[`<GoogleLoginButton /> renders without prefix 1`] = `
   href="/login/google?_destination=http://localhost/"
   title={
     <FormattedMessage
-      id="share.google"
+      id="google"
       values={Object {}}
     />
   }
 >
   <FormattedMessage
-    id="share.google"
+    id="google"
     values={Object {}}
   />
 </a>

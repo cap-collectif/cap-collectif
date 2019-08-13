@@ -2,6 +2,14 @@
 
 exports[`<LoginSocialButtons /> renders all buttons 1`] = `
 <div>
+  <span
+    className="font-weight-semi-bold"
+  >
+    <FormattedMessage
+      id="authenticate-with"
+      values={Object {}}
+    />
+  </span>
   <SamlLoginButton
     features={
       Object {
@@ -148,6 +156,14 @@ exports[`<LoginSocialButtons /> renders nothing 1`] = `""`;
 
 exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
 <div>
+  <span
+    className="font-weight-semi-bold"
+  >
+    <FormattedMessage
+      id="authenticate-with"
+      values={Object {}}
+    />
+  </span>
   <SamlLoginButton
     features={
       Object {
@@ -292,6 +308,14 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
 
 exports[`<LoginSocialButtons /> renders only Google button 1`] = `
 <div>
+  <span
+    className="font-weight-semi-bold"
+  >
+    <FormattedMessage
+      id="authenticate-with"
+      values={Object {}}
+    />
+  </span>
   <SamlLoginButton
     features={
       Object {
@@ -436,6 +460,14 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
 
 exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
 <div>
+  <span
+    className="font-weight-semi-bold"
+  >
+    <FormattedMessage
+      id="authenticate-with"
+      values={Object {}}
+    />
+  </span>
   <SamlLoginButton
     features={
       Object {
@@ -480,6 +512,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
     }
   />
   <OpenIDLoginButton
+    buttonColor="#ABABAB"
     features={
       Object {
         "allow_users_to_propose_events": false,
@@ -522,6 +555,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
       }
     }
     key="0"
+    labelColor="#FFFFFF"
     text="Cap Collectif Oauth2 Provider"
   />
   <InjectIntl(FacebookLoginButton)
@@ -625,6 +659,14 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
 
 exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
 <div>
+  <span
+    className="font-weight-semi-bold"
+  >
+    <FormattedMessage
+      id="authenticate-with"
+      values={Object {}}
+    />
+  </span>
   <SamlLoginButton
     features={
       Object {
@@ -769,6 +811,14 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
 
 exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
 <div>
+  <span
+    className="font-weight-semi-bold"
+  >
+    <FormattedMessage
+      id="authenticate-with"
+      values={Object {}}
+    />
+  </span>
   <SamlLoginButton
     features={
       Object {
@@ -813,6 +863,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
     }
   />
   <OpenIDLoginButton
+    buttonColor="#ABABAB"
     features={
       Object {
         "allow_users_to_propose_events": false,
@@ -855,6 +906,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
       }
     }
     key="0"
+    labelColor="#FFFFFF"
     text="Cap Collectif Oauth2 Provider"
   />
   <InjectIntl(FacebookLoginButton)

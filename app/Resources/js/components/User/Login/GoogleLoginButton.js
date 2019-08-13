@@ -22,7 +22,7 @@ export class GoogleLoginButton extends React.Component<Props> {
     const { prefix, intl } = this.props;
 
     if (prefix === '') {
-      return intl.formatMessage({ id: 'share.google' });
+      return intl.formatMessage({ id: 'google' });
     }
 
     return `${prefix || 'login.'}google`;

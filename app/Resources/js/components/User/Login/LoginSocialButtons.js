@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import FacebookLoginButton from './FacebookLoginButton';
-import GoogleLoginButton from './GoogleLoginButton';
+import { FormattedMessage } from 'react-intl';
+
 import SamlLoginButton from './SamlLoginButton';
+import GoogleLoginButton from './GoogleLoginButton';
 import OpenIDLoginButton from './OpenIDLoginButton';
+import FacebookLoginButton from './FacebookLoginButton';
 import type { FeatureToggles, SSOConfiguration, State } from '../../../types';
 
 export type LabelPrefix = 'registration.' | 'login.' | '';
@@ -35,6 +36,9 @@ export class LoginSocialButtons extends React.Component<Props> {
     /* @TODO: Add more Login button in mapping when it will be configurable. */
     return (
       <div>
+        <span className="font-weight-semi-bold">
+          <FormattedMessage id="authenticate-with" />
+        </span>
         <SamlLoginButton features={features} prefix={prefix} />
         {ssoList.length > 0 &&
           ssoList.map(
