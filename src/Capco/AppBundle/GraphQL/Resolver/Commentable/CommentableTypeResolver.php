@@ -44,6 +44,6 @@ class CommentableTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('Post');
         }
 
-        throw new UserError('Could not resolve type of Contribution.');
+        throw new UserError('Could not resolve type of Commentable.');
     }
 }

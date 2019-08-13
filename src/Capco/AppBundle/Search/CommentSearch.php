@@ -130,7 +130,7 @@ class CommentSearch extends Search
             new Term(['published' => ['value' => true]])
         ];
 
-        if (!$viewer->isSuperAdmin()) {
+        if ($viewer !== $author && !$viewer->isSuperAdmin()) {
             $subConditions = [
                 (new BoolQuery())->addMustNot([new Exists('project')]),
                 (new BoolQuery())->addShould([
