@@ -1,5 +1,1 @@
-<ul class="media-list">
-    {% for reply in replies %}
-        {% include 'CapcoUserBundle:Profile:blockReply.html.twig' with {'reply': reply, 'classes': 'block  block--bordered  box'} only %}
-    {% endfor %}
-</ul>
+{{ react_render_component('ReplyPageApp', { 'props': { 'userId': user.id|toGlobalId('User') } }) }}

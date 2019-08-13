@@ -48,13 +48,23 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getByUser(User $user): array
+    //    public function getByUser(User $user): array
+    //    {
+    //        $qb = $this->getPublishedQueryBuilder()
+    //            ->andWhere('reply.author = :author')
+    //            ->setParameter('author', $user);
+    //
+    //        return $qb->getQuery()->execute();
+    //    }
+
+    public function getByAuthorViewerCanSee($viewer, User $user, int $limit, int $offset): array
     {
         $qb = $this->getPublishedQueryBuilder()
             ->andWhere('reply.author = :author')
             ->setParameter('author', $user);
+        $qb = $qb->setMaxResults($limit)->setFirstResult($offset);
 
-        return $qb->getQuery()->execute();
+        return $qb->getQuery()->getResult();
     }
 
     public function countAllByAuthor(User $author): int

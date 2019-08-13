@@ -25,16 +25,21 @@ class UserRepliesResolver implements ResolverInterface
      * This resolve replace legacy MySQL field.
      * We still need to add some dataloader and caching later.
      */
-    public function __invoke(User $user, ?Argument $args = null): Connection
+    public function __invoke($viewer, User $user, ?Argument $args = null): Connection
     {
         if (!$args) {
             $args = new Argument(['first' => 0]);
         }
         $this->protectArguments($args);
 
-        $paginator = new Paginator(function (int $offset, int $limit) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($viewer, $user) {
             // TODO, implement this one day.
-            return [];
+            return $this->repliesRepository->getByAuthorViewerCanSee(
+                $viewer,
+                $user,
+                $limit,
+                $offset
+            );
         });
 
         $totalCount = $this->repliesRepository->countAllByAuthor($user);

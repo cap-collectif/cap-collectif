@@ -151,7 +151,7 @@ InternalUser:
         type: 'InternalReplyConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'A list of replies associated to the user.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRepliesResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRepliesResolver", [getUser(), value, args, context])'
       comments:
         type: 'CommentConnection!'
         argsBuilder: 'Relay::Connection'

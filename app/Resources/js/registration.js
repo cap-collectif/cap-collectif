@@ -45,7 +45,6 @@ import ProjectHeaderAuthorsApp from './startup/ProjectHeaderAuthorsApp';
 import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
 import ProposalFormCreateButtonApp from './startup/ProposalFormCreateButtonApp';
 import SectionListPageApp from './startup/SectionListPageApp';
-import AnswerPage from './startup/AnswerPageApp';
 import ProjectListPageApp from './startup/ProjectListPageApp';
 import ProposalAdminPageApp from './startup/ProposalAdminPageApp';
 import ProposalFormAdminPageApp from './startup/ProposalFormAdminPageApp';
@@ -82,6 +81,7 @@ import AdminImportEventsApp from './startup/AdminImportEventsApp';
 import AdminExportButtonApp from './startup/AdminExportButtonApp';
 import EventListApp from './startup/EventListApp';
 import ContactsListPage from './startup/ContactsListPage';
+import ReplyPageApp from './startup/ReplyPageApp';
 import ContactPage from './startup/ContactPage';
 import SectionPageApp from './startup/SectionPageApp';
 import MapAdminPageApp from './startup/MapAdminPageApp';
@@ -201,8 +201,8 @@ ReactOnRails.register({
   EventListApp,
   SSOSwitchUserApp,
   AuthentificationAdminApp,
-  AnswerPage,
   ProjectCreateButtonApp,
   SourcePageApp,
   SectionListPageApp,
+  ReplyPageApp,
 });
