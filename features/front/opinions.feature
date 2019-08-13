@@ -22,7 +22,7 @@ Scenario: Can't create an opinion of non-contribuable type in opened project
     | stepSlug    | collecte-des-avis                |
   And I wait "#opinions--test17le-probleme-constate" to appear on current page
   Then I should not see a "#btn-add--le-probleme-constate" element
-  
+
 Scenario: Can see opinions in project with endless participation
   Given I am logged in as admin
   And I visited "consultation page" with:
@@ -121,9 +121,6 @@ Scenario: Anonymous user wants to share an opinion
   And I click the opinion share link button
   Then I should see the share link modal
 
-#
-# Scenario: Anonymous wants to see votes evolution
-#   Given feature "votes_evolution" is enabled
-#   And I go to an opinion with versions
-#   When I go on the votes evolution tab
-#   Then I should see 1 ".opinion__history_chart" element
+Scenario: Anonymous user wants to see rankings of opinions
+  Given I go to a ranking step with opinions
+  Then I should not see "error.500"

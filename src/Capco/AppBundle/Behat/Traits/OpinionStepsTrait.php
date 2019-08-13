@@ -71,6 +71,10 @@ trait OpinionStepsTrait
         'opinionSlug' => 'opinion-51',
         'versionSlug' => 'version-sur-une-etape-fermee'
     ];
+    protected static $rankingStepWithOpinions = [
+        'projectSlug' => 'croissance-innovation-disruption',
+        'stepSlug' => 'classement-des-propositions-et-modifications'
+    ];
 
     /**
      * @When I go to an opinion
@@ -97,6 +101,17 @@ trait OpinionStepsTrait
             'opinion page',
             self::$opinionWithLoadsOfVotes,
             'opinion-page-tabs'
+        );
+    }
+
+    /**
+     * @When I go to a ranking step with opinions
+     */
+    public function iGoToARankingStepWithOpinions()
+    {
+        $this->visitPageWithParams(
+            'ranking step page',
+            self::$rankingStepWithOpinions
         );
     }
 
