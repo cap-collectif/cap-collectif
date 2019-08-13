@@ -1,3 +1,4 @@
+@user_replies
 Feature: Check user5's replies
 
 @read-only

@@ -31,6 +31,7 @@ class UserRepliesResolver implements ResolverInterface
             $args = new Argument(['first' => 0]);
         }
         $this->protectArguments($args);
+        $viewer = $viewer instanceof User ? $viewer : null;
 
         $paginator = new Paginator(function (int $offset, int $limit) use ($viewer, $user) {
             return $this->repliesRepository->getByAuthorViewerCanSee(
