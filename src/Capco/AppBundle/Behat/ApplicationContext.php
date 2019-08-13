@@ -971,13 +971,14 @@ class ApplicationContext extends UserContext
             'randomly-failing',
             'questionnaire',
             'bo-moderation',
+            'core-features',
             'consultation',
             'bo-parameter',
             'bo-content',
             'bo-project',
+            'core-pages',
+            'core-user',
             'bo-pages',
-            'bo-user',
-            'core',
             'bp'
         ]);
     }
