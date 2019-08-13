@@ -6,19 +6,15 @@ aliases:
     - Capco\AppBundle\Behat\NavigationContext
     - Capco\AppBundle\Behat\MailCatcherContext
   - &core-config
-    contexts:
-      - Capco\AppBundle\Behat\ApplicationContext
-      - Capco\AppBundle\Behat\RabbitMQContext
-      - Capco\AppBundle\Behat\NavigationContext
-      - Capco\AppBundle\Behat\MailCatcherContext
-    filters:
-      tags: '@core&&~@event_registration&&~@randomly-failing'
+    - Capco\AppBundle\Behat\ApplicationContext
+    - Capco\AppBundle\Behat\RabbitMQContext
+    - Capco\AppBundle\Behat\NavigationContext
+    - Capco\AppBundle\Behat\MailCatcherContext
   - &bp-config
-    contexts:
-      - Capco\AppBundle\Behat\ApplicationContext
-      - Capco\AppBundle\Behat\RabbitMQContext
-      - Capco\AppBundle\Behat\NavigationContext
-      - Capco\AppBundle\Behat\MailCatcherContext
+    - Capco\AppBundle\Behat\ApplicationContext
+    - Capco\AppBundle\Behat\RabbitMQContext
+    - Capco\AppBundle\Behat\NavigationContext
+    - Capco\AppBundle\Behat\MailCatcherContext
 
 e2e:
   extensions:
@@ -100,12 +96,18 @@ e2e:
     core-features:
       paths: ['%paths.base%/features/front/features']
       contexts: *core-config
+      filters:
+        tags: '@core&&~@event_registration&&~@randomly-failing'
     core-user:
       paths: ['%paths.base%/features/front/user']
       contexts: *core-config
+      filters:
+        tags: '@core&&~@event_registration&&~@randomly-failing'
     core-pages:
       paths: ['%paths.base%/features/front/pages']
       contexts: *core-config
+      filters:
+        tags: '@core&&~@event_registration&&~@randomly-failing'
     randomly-failing:
       paths: ['%paths.base%/features/front', '%paths.base%/features/back']
       contexts:
