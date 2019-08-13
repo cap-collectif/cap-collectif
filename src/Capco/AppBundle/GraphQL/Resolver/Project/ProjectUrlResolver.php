@@ -35,7 +35,9 @@ class ProjectUrlResolver implements ResolverInterface
         if ($firstStep instanceof CollectStep) {
             $routeName = 'app_project_show_collect';
         } elseif ($firstStep instanceof ConsultationStep) {
-            $routeName = 'app_project_show_consultation';
+            $routeName = $firstStep->isMultiConsultation()
+                ? 'app_project_show_consultations'
+                : 'app_project_show_consultation';
         } elseif ($firstStep instanceof QuestionnaireStep) {
             $routeName = 'app_project_show_questionnaire';
         } elseif ($firstStep instanceof SelectionStep) {

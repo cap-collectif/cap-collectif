@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
 use Doctrine\ORM\EntityManager;
 use Elastica\Bulk;
@@ -176,6 +177,7 @@ class Indexer
         }
 
         $this->classes['comment'] = Comment::class;
+        $this->classes['vote'] = AbstractVote::class;
 
         return $this->classes;
     }

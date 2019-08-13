@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { type RenderProps } from 'react-relay/ReactRelayQueryRenderer.js.flow';
 
 declare module "areEqual" {
   declare module.exports: any;
@@ -37,7 +36,13 @@ declare module "emptyFunction" {
   declare module.exports: any;
 };
 
-type ReactRelayReadyState = RenderProps;
+// Cannot create QueryRenderer element because inexact RenderProps [1] is incompatible with exact object type [2] in the
+// first argument of property render.
+declare type ReactRelayReadyState = {
+  error: ?Error,
+  props: ?Object,
+  retry: ?() => void,
+};
 
 type ReactRelayRecordSourceSelectorProxy = {
     create(dataID: DataID, typeName: string): RecordProxy;

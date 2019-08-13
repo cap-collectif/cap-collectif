@@ -24,7 +24,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 17,
+          "contributionsCount": 37,
           "contributors": Object {
             "totalCount": 6,
           },
@@ -270,9 +270,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
-          "contributionsCount": 1,
+          "contributionsCount": 4,
           "contributors": Object {
-            "totalCount": 1,
+            "totalCount": 2,
           },
           "cover": null,
           "id": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4=",
@@ -535,7 +535,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
-          "contributionsCount": 17,
+          "contributionsCount": 37,
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
           "publishedAt": "2014-12-30 00:00:00",
           "title": "Stratégie technologique de l'Etat et services publics",
@@ -584,7 +584,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 17,
+          "contributionsCount": 37,
           "contributors": Object {
             "totalCount": 6,
           },

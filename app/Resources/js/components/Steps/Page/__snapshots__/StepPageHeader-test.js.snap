@@ -10,21 +10,22 @@ exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
   <div
     className="mb-30 project__step-dates"
   />
-  <ForwardRef(Relay(StepInfos))
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "status": "OPENED",
-        "timeRange": Object {
-          "endAt": null,
-          "startAt": null,
-        },
-        "timeless": false,
-        "title": "I am a title",
-        "type": "consultation",
-      }
-    }
+</div>
+`;
+
+exports[`<StepPageHeader /> should render correctly a consultationStep with a description 1`] = `
+<div>
+  <h2
+    className="h2"
+  >
+    I am a title
+  </h2>
+  <div
+    className="mb-30 project__step-dates"
+  />
+  <BodyInfos
+    body="Je suis la belle description"
+    maxLines={5}
   />
 </div>
 `;
@@ -38,22 +39,6 @@ exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
   </h2>
   <div
     className="mb-30 project__step-dates"
-  />
-  <ForwardRef(Relay(StepInfos))
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "status": "OPENED",
-        "timeRange": Object {
-          "endAt": null,
-          "startAt": null,
-        },
-        "timeless": false,
-        "title": "I am a title",
-        "type": "questionnaire",
-      }
-    }
   />
 </div>
 `;
@@ -94,23 +79,5 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
       }
     />
   </h4>
-  <ForwardRef(Relay(StepInfos))
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "status": "OPENED",
-        "timeRange": Object {
-          "endAt": null,
-          "startAt": null,
-        },
-        "timeless": false,
-        "title": "I am a title",
-        "type": "selection",
-        "votable": true,
-        "voteThreshold": 1,
-      }
-    }
-  />
 </div>
 `;

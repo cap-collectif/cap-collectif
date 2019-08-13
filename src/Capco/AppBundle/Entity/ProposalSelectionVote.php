@@ -84,4 +84,9 @@ class ProposalSelectionVote extends AbstractVote
     {
         return 'proposalSelectionVote';
     }
+
+    public function getProject(): Project
+    {
+        return $this->getProposal()->getProject();
+    }
 }

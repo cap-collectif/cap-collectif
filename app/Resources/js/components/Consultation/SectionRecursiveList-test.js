@@ -8,6 +8,7 @@ import { $refType, $fragmentRefs } from '../../mocks';
 describe('<SectionRecursiveList />', () => {
   const props = {
     consultation: {
+      id: 'consultation',
       $refType,
       $fragmentRefs,
       sections: [{ sections: [], $fragmentRefs }, { sections: [], $fragmentRefs }],

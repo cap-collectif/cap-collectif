@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -21,7 +22,7 @@ class ArgumentVote extends AbstractVote
     /**
      * @return mixed
      */
-    public function getArgument()
+    public function getArgument(): Argument
     {
         return $this->argument;
     }
@@ -31,7 +32,7 @@ class ArgumentVote extends AbstractVote
      *
      * @return $this
      */
-    public function setArgument($argument)
+    public function setArgument($argument): self
     {
         $this->argument = $argument;
         $argument->addVote($this);
@@ -47,6 +48,11 @@ class ArgumentVote extends AbstractVote
     public function getStep(): ?ConsultationStep
     {
         return $this->argument ? $this->argument->getStep() : null;
+    }
+
+    public function getProject(): Project
+    {
+        return $this->getArgument()->getProject();
     }
 
     // *************************** Lifecycle **********************************

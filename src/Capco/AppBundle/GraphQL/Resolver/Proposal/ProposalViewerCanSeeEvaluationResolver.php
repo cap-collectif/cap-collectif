@@ -14,12 +14,12 @@ class ProposalViewerCanSeeEvaluationResolver implements ResolverInterface
         $this->isViewerAnEvaluerResolver = $isViewerAnEvaluerResolver;
     }
 
-    public function __invoke(Proposal $proposal, $user): bool
+    public function __invoke(Proposal $proposal, $viewer): bool
     {
         $evalForm = $proposal->getProposalForm()->getEvaluationForm();
 
         return null !== $evalForm &&
             (!$evalForm->isFullyPrivate() ||
-                $this->isViewerAnEvaluerResolver->__invoke($proposal, $user));
+                $this->isViewerAnEvaluerResolver->__invoke($proposal, $viewer));
     }
 }

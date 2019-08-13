@@ -32,8 +32,8 @@ class EventListProfile extends React.Component<Props> {
           error,
           props,
         }: {
-          props: ?EventListProfileQueryResponse,
           ...ReactRelayReadyState,
+          props: ?EventListProfileQueryResponse,
         }) => {
           if (error) {
             return graphqlError;

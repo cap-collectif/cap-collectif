@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
-import type { GlobalState, Dispatch } from '../../types';
+import type { GlobalState, Dispatch, RelayGlobalId } from '../../types';
 import { changeConsultationPlanActiveItems } from '../../redux/modules/project';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
@@ -13,7 +13,9 @@ import type {
 import ConsultationPropositionStep from './ConsultationPropositionStep';
 
 export type OwnProps = {|
-  +id: string,
+  +id: RelayGlobalId,
+  +consultationSlug: string,
+  +isMultiConsultation: boolean
 |};
 
 type Props = {|
@@ -81,7 +83,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
   };
 
   render() {
-    const { id, showConsultationPlan, consultationPlanEnabled, isAuthenticated } = this.props;
+    const { id, showConsultationPlan, consultationPlanEnabled, isMultiConsultation, isAuthenticated, consultationSlug } = this.props;
 
     const renderSectionRecursiveList = ({
       error,
@@ -99,6 +101,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
           const { consultationStep } = props;
           return (
             <ConsultationPropositionStep
+              isMultiConsultation={isMultiConsultation}
               consultationPlanEnabled={consultationPlanEnabled}
               showConsultationPlan={showConsultationPlan}
               consultationStep={consultationStep}
@@ -117,17 +120,21 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
           query={graphql`
             query ConsultationPropositionBoxQuery(
               $consultationStepId: ID!
+              $consultationSlug: String!
               $isAuthenticated: Boolean!
+              $isMultiConsultation: Boolean!
             ) {
               consultationStep: node(id: $consultationStepId) {
-                ...ConsultationPropositionStep_consultationStep
+                ...ConsultationPropositionStep_consultationStep @arguments(consultationSlug: $consultationSlug, isMultiConsultation: $isMultiConsultation, exceptStepId: $consultationStepId)
               }
             }
           `}
           variables={
             ({
               consultationStepId: id,
+              consultationSlug,
               isAuthenticated,
+              isMultiConsultation
             }: ConsultationPropositionBoxQueryVariables)
           }
           render={renderSectionRecursiveList}

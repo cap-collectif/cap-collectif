@@ -1,0 +1,49 @@
+{% extends '@CapcoApp/Project/base.html.twig' %}
+
+{% block canonical_link %}{{ url('app_project_show_consultations', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+{% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title ~ ' - ' ~ 'app-consultation-list-page-title'|trans({}, 'CapcoAppBundle')  %}
+
+{% block metaTags %}
+    {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       title,
+        'description': currentStep.metaDescription|striptags ?: currentStep.body|striptags|truncate(250, true),
+        'url':         url('app_project_show_consultations', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}),
+        'type':        'project',
+        'image':       image,
+        'author':      is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.authors[0].user.slug}) : null
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block jumbotron %}{% endblock %}
+
+{% block details %}
+    {% if currentStep.isClosed %}
+        <div class="alert alert-info alert-dismissible  block" role="alert">
+            <p><strong>{{ 'step.consultation.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.consultation.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
+        </div>
+    {% endif %}
+
+    {% if currentStep.isFuture %}
+        <div class="alert alert-info alert-dismissible  block" role="alert">
+            <p><strong>{{ 'step.consultation.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.consultation.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
+        </div>
+    {% endif %}
+
+    {% block content %}
+        {{ react_render_component('ConsultationListPageApp', { 'props': stepProps }) }}
+    {% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% if currentStep.customCode is defined and currentStep.customCode != '' %}
+        {{ currentStep.customCode | raw }}
+    {% elseif currentStep.project is defined and currentStep.project.customCode is defined and currentStep.project.customCode != '' %}
+        {{ currentStep.project.customCode | raw }}
+    {% endif %}
+{% endblock %}

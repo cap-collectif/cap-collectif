@@ -295,6 +295,13 @@ mappings:
       createdAt: { type: date }
       updatedAt: { type: date }
 
+  vote:
+    properties:
+      id: { type: keyword }
+      user: *Author
+      private: { type: boolean }
+      project: *Project
+
   #
   # This allow ous to monitore the usage of our API.
   #

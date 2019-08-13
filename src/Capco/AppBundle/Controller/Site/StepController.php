@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Entity\Steps\OtherStep;
@@ -18,9 +19,9 @@ use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
 
 class StepController extends Controller
 {
@@ -359,6 +360,7 @@ class StepController extends Controller
     }
 
     /**
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/consultation/{consultationSlug}", name="app_project_consultations_show_consultation")
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}", name="app_project_show")
      * @Route("/project/{projectSlug}/consultation/{stepSlug}", name="app_project_show_consultation")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={
@@ -371,9 +373,80 @@ class StepController extends Controller
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
      * })
+     * @ParamConverter("consultation", class="CapcoAppBundle:Consultation", options={
+     *    "mapping": {"stepSlug": "stepSlug", "projectSlug": "projectSlug", "consultationSlug": "consultationSlug"},
+     *    "repository_method"="findOneBySlugs",
+     *    "map_method_signature"=true
+     * })
      * @Template("CapcoAppBundle:Consultation:show.html.twig")
      */
-    public function showConsultationAction(Project $project, ConsultationStep $step)
+    public function showConsultationAction(
+        Project $project,
+        ConsultationStep $step,
+        ?Consultation $consultation = null
+    ) {
+        if (!$step->canDisplay($this->getUser())) {
+            $error = $this->get('translator')->trans(
+                'project.error.not_found',
+                [],
+                'CapcoAppBundle'
+            );
+
+            throw new ProjectAccessDeniedException($error);
+        }
+
+        $isMultiConsultation = $step->isMultiConsultation();
+
+        if (!$consultation && $isMultiConsultation) {
+            return $this->redirectToRoute('app_project_show_consultations', [
+                'stepSlug' => $step->getSlug(),
+                'projectSlug' => $project->getSlug()
+            ]);
+        }
+
+        // To keep the same old URI to handle consultion show and supporting the new URI for showing a consultation
+        // with a slug, we have to handle both case. If the step has only 1 consultation, we should keep the old behaviour
+        if ($step->getFirstConsultation()) {
+            $consultationSlug = $consultation
+                ? $consultation->getSlug()
+                : $step->getFirstConsultation()->getSlug();
+        } else {
+            $consultationSlug = $consultation ? $consultation->getSlug() : null;
+        }
+
+        $cstepGlobalId = GlobalId::toGlobalId('ConsultationStep', $step->getId());
+
+        return [
+            'project' => $project,
+            'currentStep' => $step,
+            'consultation' => $consultation ?? $step->getFirstConsultation(),
+            'navigationStepProps' => [
+                'id' => $cstepGlobalId,
+                'consultationSlug' => $consultationSlug
+            ],
+            'stepProps' => [
+                'id' => $cstepGlobalId,
+                'consultationSlug' => $consultationSlug,
+                'isMultiConsultation' => $isMultiConsultation
+            ]
+        ];
+    }
+
+    /**
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/consultations", name="app_project_show_consultations")
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={
+     *    "mapping": {"projectSlug": "slug"},
+     *    "repository_method"="getOneWithoutVisibility",
+     *    "map_method_signature" = true
+     * })
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
+     * @Template("CapcoAppBundle:Consultation:list.html.twig")
+     */
+    public function showConsultationsAction(Project $project, ConsultationStep $step)
     {
         if (!$step->canDisplay($this->getUser())) {
             $error = $this->get('translator')->trans(
@@ -383,6 +456,13 @@ class StepController extends Controller
             );
 
             throw new ProjectAccessDeniedException($error);
+        }
+
+        if (!$step->isMultiConsultation()) {
+            return $this->redirectToRoute('app_project_show_consultation', [
+                'stepSlug' => $step->getSlug(),
+                'projectSlug' => $project->getSlug()
+            ]);
         }
 
         return [

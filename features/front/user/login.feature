@@ -46,3 +46,41 @@ Scenario: Admin wants to enable his account and set his password
   Then I should be redirected to "/"
   Then I can see I am logged in as "admin_without_password"
   And I should see "resetting.flash.success"
+
+@database
+Scenario: Anonymous wants to register with user type and zipcode
+  Given features "restrict_connection", "captcha" are enabled
+  And I visited "home page"
+  When I press "global.login"
+  And I fill in the following:
+    | username             | lbrunet@jolicode.com    |
+    | password             | tot                     |
+  When I press "global.login_me"
+  Then I wait "#login-error" to appear on current page
+  Then I should see a ".hide-captcha" element
+  And I fill in the following:
+    | username             | lbrunet@jolicode.com    |
+    | password             | tot                     |
+  When I press "global.login_me"
+  Then I wait "#login-error" to appear on current page
+  And I fill in the following:
+    | username             | lbrunet@jolicode.com    |
+    | password             | tot                     |
+  When I press "global.login_me"
+  Then I wait "#login-error" to appear on current page
+  And I fill in the following:
+    | username             | lbrunet@jolicode.com    |
+    | password             | tot                     |
+  When I press "global.login_me"
+  Then I wait "#login-error" to appear on current page
+  And I fill in the following:
+    | username             | lbrunet@jolicode.com    |
+    | password             | tot                     |
+  When I press "global.login_me"
+  And I wait 3 seconds
+  Then I should not see a ".hide-captcha" element
+  And I fill in the following:
+    | username             | lbrunet@jolicode.com    |
+    | password             | toto                    |
+  When I press "global.login_me"
+  Then I should see "registration.constraints.captcha.invalid"

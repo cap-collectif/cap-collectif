@@ -71,9 +71,18 @@ trait OpinionStepsTrait
         'opinionSlug' => 'opinion-51',
         'versionSlug' => 'version-sur-une-etape-fermee'
     ];
+
     protected static $rankingStepWithOpinions = [
         'projectSlug' => 'croissance-innovation-disruption',
         'stepSlug' => 'classement-des-propositions-et-modifications'
+    ];
+
+    protected static $versionEditable = [
+        'projectSlug' => 'project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement',
+        'stepSlug' => 'etape-participation-continue',
+        'opinionTypeSlug' => 'premiere-section-encore-un-sous-titre',
+        'opinionSlug' => 'opinion-endless',
+        'versionSlug' => 'modification-16'
     ];
 
     /**
@@ -109,10 +118,7 @@ trait OpinionStepsTrait
      */
     public function iGoToARankingStepWithOpinions()
     {
-        $this->visitPageWithParams(
-            'ranking step page',
-            self::$rankingStepWithOpinions
-        );
+        $this->visitPageWithParams('ranking step page', self::$rankingStepWithOpinions);
     }
 
     /**
@@ -700,6 +706,14 @@ trait OpinionStepsTrait
     }
 
     /**
+     * @When I go to an editable version
+     */
+    public function iGoToAnEditableVersion()
+    {
+        $this->visitPageWithParams('opinion version page', self::$versionEditable);
+    }
+
+    /**
      * @When I go to an opinion version in a closed step
      */
     public function iGoToAnOpinionVersionInAClosedStep()
@@ -739,6 +753,29 @@ trait OpinionStepsTrait
     {
         $this->waitAndThrowOnFailure(3000, "$('#opinion-delete').length > 0");
         $this->navigationContext->getPage('opinion version page')->clickDeleteButton();
+    }
+
+    /**
+     * @When I click the edit version button
+     */
+    public function iClickTheEditVersionButton()
+    {
+        $this->waitAndThrowOnFailure(3000, "$('#opinion-version-edit-button').length > 0");
+        $this->navigationContext->getPage('opinion version page')->clickEditButton();
+    }
+
+    /**
+     * @When I fill the edit version form
+     */
+    public function iFillTheEditVersionForm()
+    {
+        $this->waitAndThrowOnFailure(3000, "$('#opinion-version-edit').length > 0");
+
+        $this->fillField('title', 'Updated title');
+
+        $this->fillField('version-body', '<p>Updated body</p>');
+
+        $this->fillField('version-comment', '<p>Updated comment</p>');
     }
 
     /**

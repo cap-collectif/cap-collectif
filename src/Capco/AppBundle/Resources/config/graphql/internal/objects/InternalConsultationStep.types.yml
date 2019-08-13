@@ -51,6 +51,19 @@ InternalConsultationStep:
         description: 'Get the associated consultations of this consultation step'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationsResolver", [value, args])'
         argsBuilder: 'Relay::Connection'
+        args:
+          first:
+            type: 'Int'
+            description: Returns the first `n` elements from the list.
+            defaultValue: 100
+      consultation:
+        type: 'InternalConsultation'
+        description: "Search a consultation in this step by it's slug"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationBySlugResolver", [value, args])'
+        args:
+          slug:
+            type: 'String!'
+            description: Returns the consultation that match the given slug
       # TODO rename to `contributions`
       contributionConnection:
         type: 'ContributionConnection'

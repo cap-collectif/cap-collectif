@@ -219,7 +219,39 @@ Capco\AppBundle\Entity\OpinionType:
     position: 1
     color: green
     defaultFilter: positions
-    isEnabled: false
-    versionable: false
+    isEnabled: true
+    versionable: true
     sourceable: false
     consultation: '@endless'
+  opinionTypeFirstInFirstConsultationMultiConsultation:
+    id: opinionTypeFirstInFirstConsultationMultiConsultation
+    title: Première section dans la première consultation
+    position: 1
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultation: '@firstConsultationMultiConsultationStep'
+  opinionTypeSecondInFirstConsultationMultiConsultation:
+    id: opinionTypeSecondInFirstConsultationMultiConsultation
+    title: Deuxième section dans la première consultation
+    position: 2
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultation: '@firstConsultationMultiConsultationStep'
+  opinionTypeFirstInSecondConsultationMultiConsultation:
+    id: opinionTypeFirstInSecondConsultationMultiConsultation
+    title: Première section dans la deuxième consultation
+    position: 1
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultation: '@secondConsultationMultiConsultationStep'
+  opinionTypeSecondInSecondConsultationMultiConsultation:
+    id: opinionTypeSecondInSecondConsultationMultiConsultation
+    title: Deuxième section dans la deuxième consultation
+    position: 2
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultation: '@secondConsultationMultiConsultationStep'

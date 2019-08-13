@@ -85,7 +85,7 @@ class OpinionVote extends AbstractVote
         return $this;
     }
 
-    public function getOpinion(): ?Opinion
+    public function getOpinion(): Opinion
     {
         return $this->opinion;
     }
@@ -96,6 +96,11 @@ class OpinionVote extends AbstractVote
         $this->opinion->addVote($this);
 
         return $this;
+    }
+
+    public function getProject(): Project
+    {
+        return $this->getOpinion()->getProject();
     }
 
     // ******************* Lifecycle ******************************

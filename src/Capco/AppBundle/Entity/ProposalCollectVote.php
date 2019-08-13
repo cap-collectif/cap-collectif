@@ -84,4 +84,9 @@ class ProposalCollectVote extends AbstractVote
     {
         $this->proposal->removeCollectVote($this);
     }
+
+    public function getProject(): Project
+    {
+        return $this->getProposal()->getProject();
+    }
 }
