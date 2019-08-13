@@ -177,7 +177,6 @@ Scenario: Logged in user wants to vote for an argument on an opinion in a closed
   And I go to an opinion in a closed step
   Then the argument vote button should be disabled
 
-
 ## Votes from version
 
 @database

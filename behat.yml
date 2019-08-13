@@ -5,6 +5,14 @@ aliases:
     - Capco\AppBundle\Behat\ApplicationContext
     - Capco\AppBundle\Behat\NavigationContext
     - Capco\AppBundle\Behat\MailCatcherContext
+  - &core-config
+    contexts:
+      - Capco\AppBundle\Behat\ApplicationContext
+      - Capco\AppBundle\Behat\RabbitMQContext
+      - Capco\AppBundle\Behat\NavigationContext
+      - Capco\AppBundle\Behat\MailCatcherContext
+    filters:
+      tags: '@core&&~@event_registration&&~@randomly-failing'
 
 e2e:
   extensions:
@@ -32,15 +40,6 @@ e2e:
       output: [console, csv]
   suites:
     # /!\ If you add an other suite, please update isSuiteWithJS method. /!\
-    core:
-      paths: ['%paths.base%/features/front']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\RabbitMQContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
-      filters:
-        tags: '@core&&~@event_registration&&~@randomly-failing'
     consultation:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -86,6 +85,15 @@ e2e:
     bo-user:
       paths: ['%paths.base%/features/back/user']
       contexts: *bo-config
+    core-features:
+      paths: ['%paths.base%/features/front/features']
+      contexts: *core-config
+    core-user:
+      paths: ['%paths.base%/features/front/user']
+      contexts: *core-config
+    core-pages:
+      paths: ['%paths.base%/features/front/pages']
+      contexts: *core-config
     randomly-failing:
       paths: ['%paths.base%/features/front', '%paths.base%/features/back']
       contexts:
