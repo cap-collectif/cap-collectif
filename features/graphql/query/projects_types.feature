@@ -1,4 +1,4 @@
-@projects @read-only @projectTypes
+@projects @read-only
 Feature: Projects
 
 Scenario: GraphQL client wants to list projects types 

@@ -25,9 +25,10 @@ const EventContainer = styled.div`
   padding-top: 20px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 5%;
+  grid-template-columns: 47% 47%;
+  grid-gap: 6%;
   grid-auto-rows: auto;
+  grid-auto-columns: 1fr;
   margin-bottom: 30px;
 
   >div>div{

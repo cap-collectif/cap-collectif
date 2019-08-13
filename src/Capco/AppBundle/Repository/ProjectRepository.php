@@ -287,7 +287,6 @@ class ProjectRepository extends EntityRepository
             ->addSelect('pt.title, pt.slug, pt.color')
             ->leftJoin('p.projectType', 'pt')
             ->where('p IN (:projects)')
-            ->andWhere('p.projectType IS NOT NULL')
             ->setParameter('projects', $projects)
             ->getQuery()
             ->useQueryCache(true)
