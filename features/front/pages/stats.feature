@@ -1,4 +1,4 @@
-@bp @stats
+@core @stats
 Feature: Stats
 
 Scenario: Anonymous user wants to see project stats

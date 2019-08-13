@@ -1,4 +1,4 @@
-@bp @proposal_evaluation
+@bp @proposal_evaluations
 Feature: Proposals Evaluations
 
 Scenario: Logged in evaluer wants to see his evaluations
