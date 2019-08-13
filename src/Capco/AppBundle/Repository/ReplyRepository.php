@@ -48,23 +48,47 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    //    public function getByUser(User $user): array
-    //    {
-    //        $qb = $this->getPublishedQueryBuilder()
-    //            ->andWhere('reply.author = :author')
-    //            ->setParameter('author', $user);
-    //
-    //        return $qb->getQuery()->execute();
-    //    }
-
-    public function getByAuthorViewerCanSee($viewer, User $user, int $limit, int $offset): array
+    public function getByUser(User $user): array
     {
         $qb = $this->getPublishedQueryBuilder()
             ->andWhere('reply.author = :author')
             ->setParameter('author', $user);
+
+        return $qb->getQuery()->execute();
+    }
+
+    public function getByAuthorViewerCanSee(
+        ?User $viewer,
+        User $user,
+        int $limit,
+        int $offset
+    ): array {
+        $qb = $this->getPublicPublishedNonDraftByAuthorQueryBuilder($user);
+
+        if (
+            null === $viewer ||
+            (null !== $viewer && ($viewer->getId() != $user->getId() && !$viewer->isAdmin()))
+        ) {
+            $qb = $qb->andWhere('reply.private = false');
+        }
+
         $qb = $qb->setMaxResults($limit)->setFirstResult($offset);
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function countRepliesByAuthorViewerCanSee(?User $viewer, User $user)
+    {
+        $qb = $this->getPublicPublishedNonDraftByAuthorQueryBuilder($user);
+        $qb = $qb->select('COUNT(reply)');
+        if (
+            null === $viewer ||
+            (null !== $viewer && ($viewer->getId() != $user->getId() && !$viewer->isAdmin()))
+        ) {
+            $qb = $qb->andWhere('reply.private = false');
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countAllByAuthor(User $author): int
@@ -215,7 +239,6 @@ class ReplyRepository extends EntityRepository
         return $this->createQueryBuilder('reply')
             ->andWhere('reply.published = true')
             ->andWhere('reply.author = :author')
-            ->andWhere('reply.private = false')
             ->andWhere('reply.draft = false')
             ->setParameter('author', $author);
     }

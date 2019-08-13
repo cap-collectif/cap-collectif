@@ -2,14 +2,14 @@
 import React from 'react';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
-import environment, { graphqlError } from '../../createRelayEnvironment';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type {
   ReplyPageQueryResponse,
   ReplyPageQueryVariables,
 } from '~relay/ReplyPageQuery.graphql';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import ProfileReplyList from './ProfileReplyList';
-import type { State } from '../../types';
+import type { State } from '../../../types';
 
 const query = graphql`
   query ReplyPageQuery($userId: ID!, $isAuthenticated: Boolean!) {
@@ -28,6 +28,7 @@ type ReduxProps = {|
 
 export type Props = {|
   userId: string,
+  isProfileEnabled: boolean,
   ...ReduxProps,
 |};
 
@@ -43,8 +44,10 @@ export const rendering = ({
   }
 
   if (props && props.node && props.node.replies != null) {
-    // $FlowFixMe
-    return <ProfileReplyList replies={props.node.replies} />;
+    return (
+      // $FlowFixMe
+      <ProfileReplyList replies={props.node.replies} isProfileEnabled={props.isProfileEnabled} />
+    );
   }
   return <Loader />;
 };

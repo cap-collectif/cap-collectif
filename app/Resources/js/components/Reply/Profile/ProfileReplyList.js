@@ -2,6 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import type { ProfileReplyList_replies } from '~relay/ProfileReplyList_replies.graphql';
+import Reply from './Reply';
 
 type RelayProps = {|
   replies: ProfileReplyList_replies,
@@ -9,11 +10,12 @@ type RelayProps = {|
 
 type Props = {|
   ...RelayProps,
+  isProfileEnabled: boolean,
 |};
 
 class ProfileReplyList extends React.Component<Props> {
   render() {
-    const { replies } = this.props;
+    const { replies, isProfileEnabled } = this.props;
 
     return (
       <div>
@@ -22,7 +24,9 @@ class ProfileReplyList extends React.Component<Props> {
             .filter(Boolean)
             .map(edge => edge.node)
             .filter(Boolean)
-            .map((reply, index) => <div key={index}> Hello {reply.id} </div>)}
+            .map((reply, index) => (
+              <Reply key={index} reply={reply} isProfileEnabled={isProfileEnabled} />
+            ))}
       </div>
     );
   }
@@ -34,8 +38,7 @@ export default createFragmentContainer(ProfileReplyList, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: false }) {
       edges {
         node {
-          id
-          private
+          ...Reply_reply @arguments(isAuthenticated: $isAuthenticated)
           responses {
             id
             ... on ValueResponse {

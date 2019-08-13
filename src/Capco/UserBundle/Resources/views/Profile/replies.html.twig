@@ -1,1 +1,1 @@
-{{ react_render_component('ReplyPageApp', { 'props': { 'userId': user.id|toGlobalId('User') } }) }}
+{{ react_render_component('ReplyPageApp', { 'props': { 'userId': user.id|toGlobalId('User'), 'isProfileEnabled': is_feature_enabled('profiles') } }) }}

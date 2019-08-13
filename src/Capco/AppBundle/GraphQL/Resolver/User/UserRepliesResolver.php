@@ -33,7 +33,6 @@ class UserRepliesResolver implements ResolverInterface
         $this->protectArguments($args);
 
         $paginator = new Paginator(function (int $offset, int $limit) use ($viewer, $user) {
-            // TODO, implement this one day.
             return $this->repliesRepository->getByAuthorViewerCanSee(
                 $viewer,
                 $user,
@@ -42,7 +41,7 @@ class UserRepliesResolver implements ResolverInterface
             );
         });
 
-        $totalCount = $this->repliesRepository->countAllByAuthor($user);
+        $totalCount = $this->repliesRepository->countRepliesByAuthorViewerCanSee($viewer, $user);
 
         return $paginator->auto($args, $totalCount);
     }
