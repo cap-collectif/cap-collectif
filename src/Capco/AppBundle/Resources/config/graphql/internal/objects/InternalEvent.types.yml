@@ -35,6 +35,7 @@ InternalEvent:
         type: 'InternalMedia'
       address:
         type: 'String'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({reason:"will be deleted"})'
       addressJson:
         type: 'String'
       url:
@@ -52,14 +53,17 @@ InternalEvent:
         type: 'String'
       fullAddress:
         type: 'String'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({reason:"will be deleted"})'
       lat:
         type: 'Float'
       lng:
         type: 'Float'
       city:
         type: 'String'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({reason:"will be deleted"})'
       country:
         type: 'String'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({reason:"will be deleted"})'
       googleMapsAddress:
         type: 'GoogleMapsAddress'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", [value])'
