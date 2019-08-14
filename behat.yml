@@ -17,8 +17,8 @@ aliases:
     - Capco\AppBundle\Behat\MailCatcherContext
   - &graphql-config
     - Capco\AppBundle\Behat\ApplicationContext
+    - Capco\AppBundle\Behat\GraphQLContext
     - Capco\AppBundle\Behat\RabbitMQContext
-    - Capco\AppBundle\Behat\NavigationContext
     - Capco\AppBundle\Behat\MailCatcherContext
 
 e2e:
@@ -160,10 +160,8 @@ api:
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\MailCatcherContext
     graphql-mutation:
-      paths:
-        - '%paths.base%/features/graphql/mutation'
+      paths: ['%paths.base%/features/graphql/mutation']
       contexts: *graphql-config
     graphql-query:
-      paths:
-        - '%paths.base%/features/graphql/query'
+      paths: ['%paths.base%/features/graphql/query']
       contexts: *graphql-config
