@@ -13,7 +13,7 @@ type Props = {|
   +isAuthenticated: boolean,
   +order: CommentOrderBy,
   +relay: RelayRefetchProp,
-  +invertedBackground?: ?boolean,
+  +useBodyColor?: ?boolean,
 |};
 
 type State = {|
@@ -76,14 +76,14 @@ export class CommentListView extends React.Component<Props, State> {
       return <Loader />;
     }
 
-    const { commentable, invertedBackground } = this.props;
+    const { commentable, useBodyColor } = this.props;
 
     return (
       // $FlowFixMe
       <CommentListViewPaginated
         commentable={commentable}
         highlightedComment={highlightedComment}
-        invertedBackground={invertedBackground}
+        useBodyColor={useBodyColor}
       />
     );
   }

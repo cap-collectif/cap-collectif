@@ -32,7 +32,7 @@ class ProposalPageComments extends React.Component<Props> {
           <CommentSectionFragmented
             isAuthenticated={isAuthenticated}
             commentable={proposal}
-            invertedBackground={false}
+            useBodyColor
           />
         )}
       </div>

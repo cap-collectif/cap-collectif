@@ -7,7 +7,7 @@ import type { CommentAnswers_comment } from '~relay/CommentAnswers_comment.graph
 
 type Props = {|
   +comment: CommentAnswers_comment,
-  +invertedBackground?: ?boolean,
+  +useBodyColor: boolean,
 |};
 
 type State = {|
@@ -26,7 +26,7 @@ export class CommentAnswers extends React.Component<Props, State> {
   }
 
   render() {
-    const { comment, invertedBackground } = this.props;
+    const { comment, useBodyColor } = this.props;
     const { highlightedComment } = this.state;
     if (!comment.answers || comment.answers.totalCount === 0) {
       return null;
@@ -46,7 +46,7 @@ export class CommentAnswers extends React.Component<Props, State> {
                 key={node.id}
                 comment={node}
                 isHighlighted={node.id === highlightedComment}
-                invertedBackground={invertedBackground}
+                useBodyColor={useBodyColor}
               />
             ))}
       </CommentAnswersContainer>

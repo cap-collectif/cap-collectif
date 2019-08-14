@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CommentAnswer /> should render correctly 1`] = `
-<styles__CommentContainer
+<Connect(ComponentWithColors)
   as="li"
-  invertedBackground={true}
   isAnswer={true}
+  useBodyColor={true}
 >
   <div
     className="Commentavatar"
@@ -107,5 +107,5 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
       </div>
     </Body>
   </Media>
-</styles__CommentContainer>
+</Connect(ComponentWithColors)>
 `;

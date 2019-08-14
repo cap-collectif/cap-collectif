@@ -19,7 +19,7 @@ type Props = {
   comment: Comment_comment,
   isHighlighted?: ?boolean,
   disabledButton?: ?boolean,
-  invertedBackground?: ?boolean,
+  useBodyColor?: ?boolean,
 };
 
 type State = {
@@ -28,7 +28,7 @@ type State = {
 
 export class Comment extends React.Component<Props, State> {
   static defaultProps = {
-    invertedBackground: true,
+    useBodyColor: true,
   };
 
   state = { answerFormShown: false };
@@ -40,46 +40,45 @@ export class Comment extends React.Component<Props, State> {
   };
 
   render() {
-    const { comment, isHighlighted, invertedBackground, disabledButton } = this.props;
+    const { comment, isHighlighted, useBodyColor, disabledButton } = this.props;
     const { answerFormShown } = this.state;
 
     return (
-      <CommentContainer
-        as="li"
-        invertedBackground={invertedBackground}
-        isHighlighted={isHighlighted}>
-        {/* $FlowFixMe Will be a fragment soon */}
-        <UserAvatarDeprecated user={comment.author} />
-        <Media className="opinion">
-          <Media.Body className="opinion__body" id={`comment_${comment.id}`}>
-            <div className="opinion__data">
-              {/* $FlowFixMe $refType */}
-              <CommentInfos comment={comment} />
-            </div>
-            {/* $FlowFixMe $refType */}
-            <CommentBody comment={comment} />
-            {!disabledButton && (
-              <div className="small">
+      <CommentContainer as="li" useBodyColor={useBodyColor} isHighlighted={isHighlighted}>
+        <>
+          {/* $FlowFixMe Will be a fragment soon */}
+          <UserAvatarDeprecated user={comment.author} />
+          <Media className="opinion">
+            <Media.Body className="opinion__body" id={`comment_${comment.id}`}>
+              <div className="opinion__data">
                 {/* $FlowFixMe $refType */}
-                <CommentVoteButton comment={comment} />{' '}
-                <Button
-                  bsSize="xsmall"
-                  onClick={this.focusAnswer}
-                  className="btn-dark-gray btn--outline">
-                  <i className="cap-reply-mail-2" /> <FormattedMessage id="global.answer" />
-                </Button>{' '}
-                {/* $FlowFixMe $refType */}
-                <CommentReportButton comment={comment} /> {/* $FlowFixMe $refType */}
-                <CommentEdit comment={comment} />{' '}
+                <CommentInfos comment={comment} />
               </div>
-            )}
-          </Media.Body>
-          <div className="CommentAnswer">
-            {/* $FlowFixMe $refType */}
-            <CommentAnswers invertedBackground={invertedBackground} comment={comment} />
-            {answerFormShown ? <CommentForm commentable={comment} answerOf={comment.id} /> : null}
-          </div>
-        </Media>
+              {/* $FlowFixMe $refType */}
+              <CommentBody comment={comment} />
+              {!disabledButton && (
+                <div className="small">
+                  {/* $FlowFixMe $refType */}
+                  <CommentVoteButton comment={comment} />{' '}
+                  <Button
+                    bsSize="xsmall"
+                    onClick={this.focusAnswer}
+                    className="btn-dark-gray btn--outline">
+                    <i className="cap-reply-mail-2" /> <FormattedMessage id="global.answer" />
+                  </Button>{' '}
+                  {/* $FlowFixMe $refType */}
+                  <CommentReportButton comment={comment} /> {/* $FlowFixMe $refType */}
+                  <CommentEdit comment={comment} />{' '}
+                </div>
+              )}
+            </Media.Body>
+            <div className="CommentAnswer">
+              {/* $FlowFixMe $refType */}
+              <CommentAnswers useBodyColor={useBodyColor} comment={comment} />
+              {answerFormShown ? <CommentForm commentable={comment} answerOf={comment.id} /> : null}
+            </div>
+          </Media>
+        </>
       </CommentContainer>
     );
   }

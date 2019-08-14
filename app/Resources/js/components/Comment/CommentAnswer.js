@@ -14,17 +14,17 @@ import type { CommentAnswer_comment } from '~relay/CommentAnswer_comment.graphql
 type Props = {
   comment: CommentAnswer_comment,
   isHighlighted?: ?boolean,
-  invertedBackground?: ?boolean,
+  useBodyColor?: ?boolean,
 };
 
 export class CommentAnswer extends React.Component<Props> {
   render() {
-    const { comment, invertedBackground, isHighlighted } = this.props;
+    const { comment, useBodyColor, isHighlighted } = this.props;
 
     return (
       <CommentContainer
         as="li"
-        invertedBackground={invertedBackground || (comment.author && comment.author.vip)}
+        useBodyColor={useBodyColor || (comment.author && comment.author.vip)}
         isHighlighted={isHighlighted}
         isAnswer>
         <div className="Commentavatar">

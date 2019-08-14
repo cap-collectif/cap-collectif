@@ -46,6 +46,7 @@ export class CommentSection extends React.Component<Props> {
                   <CommentSectionView
                     commentable={props.commentable}
                     isAuthenticated={isAuthenticated}
+                    useBodyColor={false}
                   />
                 );
               }

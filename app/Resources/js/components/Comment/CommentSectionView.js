@@ -10,12 +10,12 @@ type Props = {|
   +intl: IntlShape,
   +commentable: CommentSectionFragmented_commentable,
   +isAuthenticated: boolean,
-  +invertedBackground?: ?boolean,
+  +useBodyColor: boolean,
 |};
 
 export function CommentSectionView(props: Props) {
   const [order, setOrder] = useState('last');
-  const { isAuthenticated, intl, invertedBackground, commentable } = props;
+  const { isAuthenticated, intl, useBodyColor, commentable } = props;
 
   const updateSelectedValue = (e: any) => {
     setOrder({
@@ -59,7 +59,7 @@ export function CommentSectionView(props: Props) {
         isAuthenticated={isAuthenticated}
         order={order}
         commentable={commentable}
-        invertedBackground={invertedBackground}
+        useBodyColor={useBodyColor}
       />
     </div>
   );

@@ -13,6 +13,7 @@ exports[`<CommentAnswers /> should render correctly 1`] = `
     }
     isHighlighted={false}
     key="1"
+    useBodyColor={true}
   />
   <ForwardRef(Relay(CommentAnswer))
     comment={
@@ -23,6 +24,7 @@ exports[`<CommentAnswers /> should render correctly 1`] = `
     }
     isHighlighted={false}
     key="2"
+    useBodyColor={true}
   />
 </styles__CommentAnswersContainer>
 `;

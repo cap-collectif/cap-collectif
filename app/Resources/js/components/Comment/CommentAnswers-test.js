@@ -27,6 +27,7 @@ const props = {
       ],
     },
   },
+  useBodyColor: true,
 };
 
 const propsWithoutAnswers = {
@@ -38,6 +39,7 @@ const propsWithoutAnswers = {
       edges: [],
     },
   },
+  useBodyColor: true,
 };
 
 describe('<CommentAnswers />', () => {

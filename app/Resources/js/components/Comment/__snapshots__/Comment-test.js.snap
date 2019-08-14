@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`] = `
-<styles__CommentContainer
+<Connect(ComponentWithColors)
   as="li"
-  invertedBackground={true}
+  useBodyColor={true}
 >
   <Connect(UserAvatarDeprecated)
     user={
@@ -139,17 +139,17 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
             "id": "proposalComment1",
           }
         }
-        invertedBackground={true}
+        useBodyColor={true}
       />
     </div>
   </Media>
-</styles__CommentContainer>
+</Connect(ComponentWithColors)>
 `;
 
 exports[`<Comment /> <Comment /> not shown and not focus should render correctly 1`] = `
-<styles__CommentContainer
+<Connect(ComponentWithColors)
   as="li"
-  invertedBackground={true}
+  useBodyColor={true}
 >
   <Connect(UserAvatarDeprecated)
     user={
@@ -285,17 +285,17 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
             "id": "proposalComment1",
           }
         }
-        invertedBackground={true}
+        useBodyColor={true}
       />
     </div>
   </Media>
-</styles__CommentContainer>
+</Connect(ComponentWithColors)>
 `;
 
 exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
-<styles__CommentContainer
+<Connect(ComponentWithColors)
   as="li"
-  invertedBackground={true}
+  useBodyColor={true}
 >
   <Connect(UserAvatarDeprecated)
     user={
@@ -431,7 +431,7 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
             "id": "proposalComment1",
           }
         }
-        invertedBackground={true}
+        useBodyColor={true}
       />
       <ForwardRef(Relay(Connect(ReduxForm)))
         answerOf="proposalComment1"
@@ -450,13 +450,13 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
       />
     </div>
   </Media>
-</styles__CommentContainer>
+</Connect(ComponentWithColors)>
 `;
 
 exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`] = `
-<styles__CommentContainer
+<Connect(ComponentWithColors)
   as="li"
-  invertedBackground={true}
+  useBodyColor={true}
 >
   <Connect(UserAvatarDeprecated)
     user={
@@ -592,7 +592,7 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
             "id": "proposalComment1",
           }
         }
-        invertedBackground={true}
+        useBodyColor={true}
       />
       <ForwardRef(Relay(Connect(ReduxForm)))
         answerOf="proposalComment1"
@@ -611,14 +611,14 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
       />
     </div>
   </Media>
-</styles__CommentContainer>
+</Connect(ComponentWithColors)>
 `;
 
 exports[`<Comment /> should render correctly highlighted 1`] = `
-<styles__CommentContainer
+<Connect(ComponentWithColors)
   as="li"
-  invertedBackground={true}
   isHighlighted={true}
+  useBodyColor={true}
 >
   <Connect(UserAvatarDeprecated)
     user={
@@ -768,18 +768,18 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
             "id": "comment1",
           }
         }
-        invertedBackground={true}
+        useBodyColor={true}
       />
     </div>
   </Media>
-</styles__CommentContainer>
+</Connect(ComponentWithColors)>
 `;
 
 exports[`<Comment /> should render correctly not highlighted 1`] = `
-<styles__CommentContainer
+<Connect(ComponentWithColors)
   as="li"
-  invertedBackground={true}
   isHighlighted={false}
+  useBodyColor={true}
 >
   <Connect(UserAvatarDeprecated)
     user={
@@ -915,7 +915,7 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
             "id": "comment2",
           }
         }
-        invertedBackground={true}
+        useBodyColor={true}
       />
       <ForwardRef(Relay(Connect(ReduxForm)))
         answerOf="comment2"
@@ -934,5 +934,5 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
       />
     </div>
   </Media>
-</styles__CommentContainer>
+</Connect(ComponentWithColors)>
 `;

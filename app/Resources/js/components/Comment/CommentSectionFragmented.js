@@ -7,12 +7,16 @@ import CommentSectionView from './CommentSectionView';
 type Props = {|
   +commentable: CommentSectionFragmented_commentable,
   +isAuthenticated: boolean,
-  +invertedBackground?: ?boolean,
+  +useBodyColor: boolean,
 |};
 
 export class CommentSectionFragmented extends React.Component<Props> {
+  static defaultProps = {
+    useBodyColor: false,
+  };
+
   render() {
-    const { isAuthenticated, invertedBackground, commentable } = this.props;
+    const { isAuthenticated, useBodyColor, commentable } = this.props;
 
     if (!commentable) {
       return null;
@@ -23,7 +27,7 @@ export class CommentSectionFragmented extends React.Component<Props> {
         <CommentSectionView
           commentable={commentable}
           isAuthenticated={isAuthenticated}
-          invertedBackground={invertedBackground}
+          useBodyColor={useBodyColor}
         />
       </div>
     );

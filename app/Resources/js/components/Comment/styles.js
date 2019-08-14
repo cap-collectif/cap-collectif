@@ -1,13 +1,17 @@
 // @flow
 import styled from 'styled-components';
+import withColors from '../Utils/withColors';
 import colors from '../../utils/colors';
 
-const getCommentBackground = ({ invertedBackground }) => {
-  if (!invertedBackground) return colors.pageBgc;
-  if (invertedBackground) return colors.white;
+const getCommentBackground = ({ bodyColor, sectionColor, useBodyColor }) => {
+  console.log(bodyColor, sectionColor, useBodyColor);
+  if (useBodyColor) {
+    return bodyColor === '#ffffff' ? sectionColor : colors.white;
+  }
+  return sectionColor === '#ffffff' ? bodyColor : colors.white;
 };
 
-export const CommentContainer = styled.div`
+const CommentContainerbase = styled.div`
   display: flex;
   flex-direction: row;
 
@@ -29,6 +33,8 @@ export const CommentContainer = styled.div`
     }
   }
 `;
+
+export const CommentContainer = withColors(CommentContainerbase);
 
 export const CommentAnswersContainer = styled.ul`
   width: 100%;

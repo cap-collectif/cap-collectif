@@ -11,10 +11,10 @@ import { UserAvatarDeprecated } from '../../components/User/UserAvatarDeprecated
 
 import { comment as commentMock, comments } from '../mocks/comments';
 
-const getCommentBackground = ({ isAnswer, invertedBackground }) => {
-  if (isAnswer && invertedBackground) return '#f6f6f6';
-  if (isAnswer && !invertedBackground) return '#ffffff';
-  if (!isAnswer && invertedBackground) return '#ffffff';
+const getCommentBackground = ({ isAnswer, useBodyColor }) => {
+  if (isAnswer && useBodyColor) return '#f6f6f6';
+  if (isAnswer && !useBodyColor) return '#ffffff';
+  if (!isAnswer && useBodyColor) return '#ffffff';
 
   return '#f6f6f6';
 };
@@ -40,15 +40,15 @@ const CommentAnswersContainer = styled.ul`
 type Props = {
   item: Object,
   answers?: Array<Object>,
-  invertedBackground?: boolean,
+  useBodyColor?: boolean,
   isAnswer?: boolean,
   disabledButtons?: boolean,
 };
 
-const Comment = ({ item, answers, invertedBackground, isAnswer, disabledButtons }: Props) => (
+const Comment = ({ item, answers, useBodyColor, isAnswer, disabledButtons }: Props) => (
   <CommentContainer
     isAnswer={isAnswer}
-    invertedBackground={invertedBackground}
+    useBodyColor={useBodyColor}
     isHighlighted={item.highlighted}>
     <Media className="opinion">
       <Media.Left>
@@ -197,7 +197,7 @@ const Comment = ({ item, answers, invertedBackground, isAnswer, disabledButtons 
             <CommentAnswersContainer id="comments-answers">
               {answers.map((answer, index) => (
                 <li key={index}>
-                  <Comment isAnswer invertedBackground={invertedBackground} item={answer} />
+                  <Comment isAnswer useBodyColor={useBodyColor} item={answer} />
                 </li>
               ))}
             </CommentAnswersContainer>
@@ -235,7 +235,7 @@ storiesOf('Cap Collectif|Comment', module)
   .add('with inverted background', () => {
     return (
       <div style={{ background: '#333333', padding: '30px 60px' }}>
-        <Comment item={commentMock} invertedBackground answers={comments} />
+        <Comment item={commentMock} useBodyColor answers={comments} />
       </div>
     );
   });

@@ -10,12 +10,12 @@ type Props = {|
   +intl: IntlShape,
   +commentable: CommentListViewPaginated_commentable,
   +highlightedComment: ?string,
-  +invertedBackground?: ?boolean,
+  +useBodyColor?: ?boolean,
 |};
 
 export class CommentListViewPaginated extends React.Component<Props> {
   render() {
-    const { intl, commentable, relay, highlightedComment, invertedBackground } = this.props;
+    const { intl, commentable, relay, highlightedComment, useBodyColor } = this.props;
     if (!commentable.comments || commentable.comments.totalCount === 0) {
       return null;
     }
@@ -33,7 +33,7 @@ export class CommentListViewPaginated extends React.Component<Props> {
               <Comment
                 key={node.id}
                 comment={node}
-                invertedBackground={invertedBackground}
+                useBodyColor={useBodyColor}
                 isHighlighted={node.id === highlightedComment}
               />
             ))}

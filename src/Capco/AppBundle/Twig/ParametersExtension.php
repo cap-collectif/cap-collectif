@@ -106,7 +106,9 @@ class ParametersExtension extends AbstractExtension
                 'color.main_menu.text_hover',
                 'color.main_menu.text_active',
                 'color.btn.primary.bg',
-                'color.btn.primary.text'
+                'color.btn.primary.text',
+                'color.section.bg',
+                'color.body.bg'
             ];
 
             foreach ($colors as $color) {
