@@ -13,12 +13,15 @@ describe('<ConsultationPropositionStep />', () => {
     consultationStep: {
       id: 'myStep',
       title: 'El titro',
+      body: 'Je suis le beau body',
       status: 'OPENED',
       timeRange: {
         startAt: new Date(2019, 6, 25).toDateString(),
         endAt: new Date(2019, 6, 25).toDateString(),
       },
       consultation: {
+        title: 'Je suis la belle consultation',
+        description: null,
         contributions: {
           totalCount: 0
         },
@@ -30,7 +33,6 @@ describe('<ConsultationPropositionStep />', () => {
       },
       timeless: false,
       $refType,
-      $fragmentRefs,
     },
   };
 

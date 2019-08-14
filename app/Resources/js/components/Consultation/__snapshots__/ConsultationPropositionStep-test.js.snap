@@ -17,6 +17,8 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
           "contributors": Object {
             "totalCount": 0,
           },
+          "description": null,
+          "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
       }
@@ -29,7 +31,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
     <h2
       className="text-center"
     >
-      El titro
+      Je suis la belle consultation
     </h2>
     <div
       className="mb-15 project__step-authors text-center"
@@ -62,7 +64,9 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
         />
       </div>
     </div>
-    <BodyInfos />
+    <BodyInfos
+      body="Je suis le beau body"
+    />
     <ForwardRef(Relay(SectionRecursiveList))
       consultation={
         Object {
@@ -73,6 +77,8 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
           "contributors": Object {
             "totalCount": 0,
           },
+          "description": null,
+          "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
       }
@@ -90,7 +96,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
     <h2
       className="text-center"
     >
-      El titro
+      Je suis la belle consultation
     </h2>
     <div
       className="mb-15 project__step-authors text-center"
@@ -123,7 +129,9 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
         />
       </div>
     </div>
-    <BodyInfos />
+    <BodyInfos
+      body="Je suis le beau body"
+    />
     <ForwardRef(Relay(SectionRecursiveList))
       consultation={
         Object {
@@ -134,6 +142,8 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
           "contributors": Object {
             "totalCount": 0,
           },
+          "description": null,
+          "title": "Je suis la belle consultation",
           "votesCount": 0,
         }
       }

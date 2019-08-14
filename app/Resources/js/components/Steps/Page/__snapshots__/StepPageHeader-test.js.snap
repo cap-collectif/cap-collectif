@@ -10,7 +10,22 @@ exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
   <div
     className="mb-30 project__step-dates"
   />
-  <BodyInfos />
+</div>
+`;
+
+exports[`<StepPageHeader /> should render correctly a consultationStep with a description 1`] = `
+<div>
+  <h2
+    className="h2"
+  >
+    I am a title
+  </h2>
+  <div
+    className="mb-30 project__step-dates"
+  />
+  <BodyInfos
+    body="Je suis la belle description"
+  />
 </div>
 `;
 
@@ -24,7 +39,6 @@ exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
   <div
     className="mb-30 project__step-dates"
   />
-  <BodyInfos />
 </div>
 `;
 
@@ -64,6 +78,5 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
       }
     />
   </h4>
-  <BodyInfos />
 </div>
 `;

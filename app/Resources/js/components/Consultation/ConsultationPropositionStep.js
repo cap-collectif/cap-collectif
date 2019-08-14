@@ -135,7 +135,9 @@ export const ConsultationPropositionStep = (props: Props) => {
             )}
           </div>
         )}
-        <BodyInfos body={step.consultation && step.consultation.description ? step.consultation.description : step.body}/>
+        {((step.consultation && step.consultation.description) || step.body) &&
+          <BodyInfos body={step.consultation && step.consultation.description ? step.consultation.description : step.body || ''}/>
+        }
         {step.consultation && (
           <SectionRecursiveList
             consultation={step.consultation}
