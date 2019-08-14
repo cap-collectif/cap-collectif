@@ -17,7 +17,7 @@ type Props = {
 export class ProjectsListFilterTypes extends React.Component<Props> {
   render() {
     const { type, projectTypes, intl } = this.props;
-    if (projectTypes.length > 0) {
+    if (projectTypes.length > 2) {
       return (
         <Field
           id="project-type"

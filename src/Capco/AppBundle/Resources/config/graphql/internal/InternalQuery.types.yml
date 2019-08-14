@@ -141,6 +141,11 @@ InternalQuery:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAuthorsResolver", [args, getUser()])'
       projectTypes:
         type: '[InternalProjectType!]!'
+        args:
+          onlyUsedByProjects:
+            type: 'Boolean!'
+            description: 'If true, filter the projectTypes only used by the projects'
+            defaultValue: false
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectTypesResolver", [args, getUser()])'
       users:
         type: 'InternalUserConnection!'

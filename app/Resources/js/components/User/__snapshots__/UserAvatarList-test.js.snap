@@ -31,7 +31,6 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
         displayUrl={false}
         features={
           Object {
-            "allow_users_to_propose_events": false,
             "blog": false,
             "calendar": false,
             "captcha": false,

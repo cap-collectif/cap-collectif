@@ -62,7 +62,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->deactivate('login_saml');
         $toggleManager->deactivate('restrict_registration_via_email_domain');
         $toggleManager->deactivate('login_paris');
-        $toggleManager->deactivate('allow_users_to_propose_events');
         $toggleManager->activate('indexation');
         $toggleManager->activate('developer_documentation');
         $toggleManager->deactivate('login_openid');
