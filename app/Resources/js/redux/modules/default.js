@@ -79,7 +79,6 @@ export const features = {
   display_map: false,
   sso_by_pass_auth: false,
   list_sso: false,
-  allow_users_to_propose_events: false,
 };
 
 const initialState: State = {

@@ -42,4 +42,19 @@ describe('<ProjectsListFilterTypes />', () => {
     const wrapper = shallow(<ProjectsListFilterTypes {...defaultPropsTypes} type="1" />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render correctly without projectType', () => {
+    const props = {
+      ...defaultPropsTypes,
+      projectTypes: [
+        {
+          id: '1',
+          slug: 'Sarah1',
+          title: 'SarahKonor',
+        },
+      ],
+    };
+    const wrapper = shallow(<ProjectsListFilterTypes {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

@@ -73,3 +73,5 @@ exports[`<ProjectsListFilterTypes /> should render correctly with a selected the
   value="1"
 />
 `;
+
+exports[`<ProjectsListFilterTypes /> should render correctly without projectType 1`] = `""`;
