@@ -79,7 +79,7 @@ export const ConsultationPropositionStep = (props: Props) => {
             ? 'col-md-9'
             : 'col-md-10 col-md-offset-1'
         }>
-        <h2 className="text-center">{step.consultation ? step.consultation.title : step.title}</h2>
+        <h2 className="text-center">{step.consultation ? step.consultation.title || step.title : step.title}</h2>
         <div className="mb-15 project__step-authors text-center">
           {isMultiConsultation && step.project && step.project.authors.length > 0 && (
             <div className="mr-15 d-ib">

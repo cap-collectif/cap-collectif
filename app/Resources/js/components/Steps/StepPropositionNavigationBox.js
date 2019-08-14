@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
 import type { ReadyState } from 'react-relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import type { RelayGlobalId } from '../../types';

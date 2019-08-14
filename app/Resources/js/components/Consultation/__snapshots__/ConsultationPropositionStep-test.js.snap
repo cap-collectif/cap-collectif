@@ -76,7 +76,6 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
           "votesCount": 0,
         }
       }
-      hideEmptySection={false}
     />
   </div>
 </Fragment>
@@ -138,7 +137,6 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
           "votesCount": 0,
         }
       }
-      hideEmptySection={false}
     />
   </div>
 </Fragment>
