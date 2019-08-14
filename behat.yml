@@ -165,3 +165,6 @@ api:
     graphql-query:
       paths: ['%paths.base%/features/graphql/query']
       contexts: *graphql-config
+    graphql-type:
+      paths: ['%paths.base%/features/graphql/type']
+      contexts: *graphql-config
