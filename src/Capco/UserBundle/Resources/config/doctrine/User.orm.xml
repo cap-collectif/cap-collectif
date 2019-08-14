@@ -105,8 +105,6 @@
         <field name="city" column="city" type="string" length="255" nullable="true" />
         <field name="neighborhood" column="neighborhood" type="string" length="255" nullable="true" />
 
-        <field name="encoder" column="encoder" type="string" length="255" nullable="true" />
-
         <one-to-many field="opinions" target-entity="Capco\AppBundle\Entity\Opinion" mapped-by="Author" />
         <one-to-many field="opinionVersions" target-entity="Capco\AppBundle\Entity\OpinionVersion" mapped-by="author" />
         <one-to-many field="comments" target-entity="Capco\AppBundle\Entity\Comment" mapped-by="Author" />

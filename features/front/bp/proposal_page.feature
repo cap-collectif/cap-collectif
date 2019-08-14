@@ -8,7 +8,7 @@ Scenario: Anonymous user should not see private fields on a proposal
 
 @database
 Scenario: Non author should not see private fields on a proposal
-  Given I am logged in as drupal
+  Given I am logged in as pierre
   When I go to a proposal
   Then I should not see the proposal private field
 

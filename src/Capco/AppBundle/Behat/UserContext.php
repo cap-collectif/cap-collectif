@@ -153,14 +153,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Given I am logged in as drupal
-     */
-    public function iAmLoggedInAsDrupal()
-    {
-        $this->iAmAuthenticatedAs('drupal@gmail.com');
-    }
-
-    /**
      * @Given I am logged in as pierre
      */
     public function iAmLoggedInAsPierre()

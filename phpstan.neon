@@ -12,7 +12,6 @@ parameters:
         - %currentWorkingDirectory%/app/config/parameters.php
         - %currentWorkingDirectory%/app/DoctrineMigrations/*
         - %currentWorkingDirectory%/app/DoctrineMigrations/*
-        - %currentWorkingDirectory%/src/Capco/UserBundle/Security/DrupalEncoder.php
         - %currentWorkingDirectory%/src/Capco/AppBundle/DataFixtures/ORM/*
         - %currentWorkingDirectory%/src/Capco/AdminBundle/*
         - %currentWorkingDirectory%/src/Capco/AdminBundle/Controller/*

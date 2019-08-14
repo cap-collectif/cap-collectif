@@ -15,12 +15,10 @@ use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Util\Canonicalizer;
 use Sonata\UserBundle\Entity\BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 
 class User extends BaseUser implements
-    EncoderAwareInterface,
     SynthesisUserInterface,
     EquatableInterface,
     IndexableInterface
@@ -85,8 +83,6 @@ class User extends BaseUser implements
     protected $neighborhood;
 
     protected $city;
-
-    protected $encoder;
 
     protected $opinions;
 
@@ -180,10 +176,9 @@ class User extends BaseUser implements
 
     private $resetPasswordToken;
 
-    public function __construct($encoder = null)
+    public function __construct()
     {
         parent::__construct();
-        $this->encoder = $encoder;
         $this->roles = ['ROLE_USER'];
         $this->opinions = new ArrayCollection();
         $this->opinionVersions = new ArrayCollection();
@@ -389,18 +384,6 @@ class User extends BaseUser implements
         $this->newEmailConfirmationToken = $token;
 
         return $this;
-    }
-
-    // for EncoderAwareInterface
-    public function getEncoderName()
-    {
-        return $this->encoder;
-    }
-
-    // for serialization
-    public function getEncoder()
-    {
-        return $this->encoder;
     }
 
     public function getId()

@@ -56,9 +56,6 @@ services:
   Capco\UserBundle\Security\Core\User\UserEmailProvider:
     arguments: ['@fos_user.user_manager', {}]
 
-  Capco\UserBundle\Security\DrupalEncoder:
-    class: Capco\UserBundle\Security\DrupalEncoder
-
   Capco\UserBundle\Authenticator\SamlAuthenticator:
     arguments:
       $samlIdp: '%simplesamlphp.sp%'

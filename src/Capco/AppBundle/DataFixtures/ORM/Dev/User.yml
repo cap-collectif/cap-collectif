@@ -105,18 +105,6 @@ Capco\UserBundle\Entity\User:
     createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 5 days"))>
     updatedAt: <(new \DateTime('2016-01-01'))>
 
-  user_drupal:
-    id: 'user_drupal'
-    __construct: ['drupal']
-    username: drupal
-    userType: '@UserType1'
-    firstname: toto
-    lastname: toto
-    email: drupal@gmail.com
-    password: <htmlentities('$S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU')>
-    enabled: true
-    createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 6 days"))>
-
   user{6..200}:
     id: 'user<current()>'
     username: user<current()>
