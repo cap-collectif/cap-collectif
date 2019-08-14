@@ -217,6 +217,14 @@ Capco\AppBundle\Entity\SiteParameter:
     position: 303
     type: 1
 
+  SiteParameterEventAllowUsersToProposeEvent:
+    keyname: allow-users-to-propose-envents
+    category: pages.events
+    isEnabled: false
+    value: 0
+    position: 304
+    type: 8
+
   SiteParameterHomepageDarkening:
     keyname: homepage.jumbotron.darken
     category: pages.homepage
@@ -300,14 +308,14 @@ Capco\AppBundle\Entity\SiteParameter:
     keyname: event.metadescription
     category: pages.events
     value: ''
-    position: 304
+    position: 305
     isSocialNetworkDescription: true
     type: 0
   SiteParameterEventCustomCode:
     keyname: event.customcode
     category: pages.events
     value: ''
-    position: 305
+    position: 306
     type: 3
   SiteParameterBlogMetaDescription:
     keyname: blog.metadescription

@@ -84,6 +84,13 @@ class SettingsController extends Controller
         $featuresCategoryResolver = $this->get(FeaturesCategoryResolver::class);
         $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
         $group = $featuresCategoryResolver->getGroupNameForCategory($category);
+        if (
+            'pages.events' === $category &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')
+        ) {
+            // key of SiteParameterEventAllowUsersToProposeEvent
+            unset($parameters[2]);
+        }
 
         return [
             'admin_pool' => $admin_pool,
