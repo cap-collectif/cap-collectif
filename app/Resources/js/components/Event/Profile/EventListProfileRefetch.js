@@ -25,6 +25,10 @@ const RowCustom = styled(Row)`
 const RowList = styled(Row)`
   display: flex;
   flex-wrap: wrap;
+
+  > div > div {
+    height: auto;
+  }
 `;
 
 const getOrderBy = (order: OrderByType) => {
