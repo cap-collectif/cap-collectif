@@ -15,8 +15,6 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
             name
             enabled
             profileUrl
-            buttonColor
-            labelColor
             ... on Oauth2SSOConfiguration {
               clientId
               secret
@@ -52,9 +50,7 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
               "userInfoUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
               "logoutUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
               "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account",
-              "redirectUri": @string@,
-              "buttonColor": "#7498C0",
-              "labelColor": "#FFFFFF"
+              "redirectUri": @string@
             }
           }
         ]

@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,9 +25,7 @@ class Oauth2SSOConfigurationFormType extends AbstractType
             ->add('clientId', PurifiedTextType::class, ['strip_tags' => true])
             ->add('secret', PurifiedTextType::class, ['strip_tags' => true])
             ->add('profileUrl', UrlType::class)
-            ->add('logoutUrl', UrlType::class)
-            ->add('buttonColor', ColorType::class)
-            ->add('labelColor', ColorType::class);
+            ->add('logoutUrl', UrlType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

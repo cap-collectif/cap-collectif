@@ -16,9 +16,3 @@ InternalSSOConfiguration:
       profileUrl:
         type: 'URI'
         description: 'Profile URL on the SSO side.'
-      buttonColor:
-        type: 'Color!'
-        description: 'Color in hexadecimal of SSO button.'
-      labelColor:
-        type: 'Color!'
-        description: 'Color in hexadecimal of label SSO button.'
