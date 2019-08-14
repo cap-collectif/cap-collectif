@@ -4,7 +4,7 @@ exports[`<BodyInfos /> should render correcty 1`] = `
 <Card>
   <Body>
     <BodyText
-      maxLength={1600}
+      maxLength={4000}
       text="coucou"
     />
   </Body>

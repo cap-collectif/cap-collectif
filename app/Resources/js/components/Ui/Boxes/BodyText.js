@@ -17,7 +17,7 @@ type State = {|
 class BodyText extends React.Component<Props, State> {
   static defaultProps = {
     text: null,
-    maxLength: 1600
+    maxLength: 4000
   };
 
   constructor(props: Props) {
