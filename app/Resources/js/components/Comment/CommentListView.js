@@ -13,7 +13,7 @@ type Props = {|
   +isAuthenticated: boolean,
   +order: CommentOrderBy,
   +relay: RelayRefetchProp,
-  +useBodyColor?: ?boolean,
+  +useBodyColor: boolean,
 |};
 
 type State = {|

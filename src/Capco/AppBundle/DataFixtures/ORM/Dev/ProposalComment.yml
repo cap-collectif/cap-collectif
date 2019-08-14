@@ -120,11 +120,3 @@ Capco\AppBundle\Entity\ProposalComment:
     trashedReason: 'Contenu inadmissible'
     trashedAt: <((new \DateTime('2019-06-01'))->modify("+ $current minutes"))>
     trashedStatus: 'invisible'
-  proposalComment77:
-    id: 'proposalComment77'
-    proposal: '@proposal14'
-    Author: '@user5'
-    body: Effectivement il est top ce projet !
-    createdAt: <(new \DateTime('2019-06-06'))>
-    publishedAt: <(new \DateTime('2019-06-06'))>
-    updatedAt: <(new \DateTime('2019-06-06'))>

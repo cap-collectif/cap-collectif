@@ -14,6 +14,7 @@ exports[`<CommentListViewPaginated /> should render correctly 1`] = `
     }
     isHighlighted={false}
     key="1"
+    useBodyColor={false}
   />
   <ForwardRef(Relay(Comment))
     comment={
@@ -24,6 +25,7 @@ exports[`<CommentListViewPaginated /> should render correctly 1`] = `
     }
     isHighlighted={false}
     key="2"
+    useBodyColor={false}
   />
 </ul>
 `;

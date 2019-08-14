@@ -10,6 +10,7 @@ exports[`<CommentListView /> should render correctly 1`] = `
     }
   }
   highlightedComment={null}
+  useBodyColor={false}
 />
 `;
 

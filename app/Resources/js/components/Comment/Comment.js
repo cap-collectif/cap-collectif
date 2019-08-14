@@ -15,16 +15,16 @@ import Media from '../Ui/Medias/Media/Media';
 import { CommentContainer } from './styles';
 import type { Comment_comment } from '~relay/Comment_comment.graphql';
 
-type Props = {
-  comment: Comment_comment,
-  isHighlighted?: ?boolean,
-  disabledButton?: ?boolean,
-  useBodyColor?: ?boolean,
-};
+type Props = {|
+  +comment: Comment_comment,
+  +isHighlighted?: ?boolean,
+  +disabledButton?: ?boolean,
+  +useBodyColor: boolean,
+|};
 
-type State = {
-  answerFormShown: boolean,
-};
+type State = {|
+  +answerFormShown: boolean,
+|};
 
 export class Comment extends React.Component<Props, State> {
   static defaultProps = {

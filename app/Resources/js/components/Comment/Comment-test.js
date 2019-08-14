@@ -16,8 +16,6 @@ const props = {
     },
     id: 'proposalComment1',
   },
-  $fragmentRefs,
-  $refType,
 };
 
 describe('<Comment />', () => {

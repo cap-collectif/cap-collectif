@@ -10,7 +10,7 @@ type Props = {|
   +intl: IntlShape,
   +commentable: CommentListViewPaginated_commentable,
   +highlightedComment: ?string,
-  +useBodyColor?: ?boolean,
+  +useBodyColor: boolean,
 |};
 
 export class CommentListViewPaginated extends React.Component<Props> {

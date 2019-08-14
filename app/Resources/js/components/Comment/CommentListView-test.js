@@ -10,6 +10,7 @@ const defaultProps = {
   commentable: { $fragmentRefs, $refType, id: '1' },
   order: 'last',
   relay: relayRefetchMock,
+  useBodyColor: false,
 };
 
 const defaultState = {

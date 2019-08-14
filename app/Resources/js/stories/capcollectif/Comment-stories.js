@@ -37,13 +37,13 @@ const CommentAnswersContainer = styled.ul`
   }
 `;
 
-type Props = {
-  item: Object,
-  answers?: Array<Object>,
-  useBodyColor?: boolean,
-  isAnswer?: boolean,
-  disabledButtons?: boolean,
-};
+type Props = {|
+  +item: Object,
+  +answers?: Array<Object>,
+  +useBodyColor: boolean,
+  +isAnswer?: boolean,
+  +disabledButtons?: boolean,
+|};
 
 const Comment = ({ item, answers, useBodyColor, isAnswer, disabledButtons }: Props) => (
   <CommentContainer
@@ -207,6 +207,10 @@ const Comment = ({ item, answers, useBodyColor, isAnswer, disabledButtons }: Pro
     </Media>
   </CommentContainer>
 );
+
+Comment.defaultProps = {
+  useBodyColor: true,
+};
 
 storiesOf('Cap Collectif|Comment', module)
   .add('default case', () => {

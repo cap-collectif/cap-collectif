@@ -16,6 +16,7 @@ const props = {
     },
     id: 'proposalComment1',
   },
+  useBodyColor: false,
 };
 describe('<CommentAnswer />', () => {
   it('should render correctly', () => {

@@ -40,6 +40,7 @@ const defaultProps = {
   relay: relayPaginationMock,
   intl: intlMock,
   highlightedComment: 'string',
+  useBodyColor: false,
 };
 
 describe('<CommentListViewPaginated />', () => {

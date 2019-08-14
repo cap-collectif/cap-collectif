@@ -11,11 +11,11 @@ import Media from '../Ui/Medias/Media/Media';
 import { CommentContainer } from './styles';
 import type { CommentAnswer_comment } from '~relay/CommentAnswer_comment.graphql';
 
-type Props = {
-  comment: CommentAnswer_comment,
-  isHighlighted?: ?boolean,
-  useBodyColor?: ?boolean,
-};
+type Props = {|
+  +comment: CommentAnswer_comment,
+  +isHighlighted?: ?boolean,
+  +useBodyColor: boolean,
+|};
 
 export class CommentAnswer extends React.Component<Props> {
   render() {
