@@ -6,8 +6,8 @@ Scenario: User wants to check the complexity of his good password
   Given I send a GraphQL POST request:
   """
   {
-    "query": "query passwordComplexityTest($username: String!, $password: String!, $email: String!){
-      registrationValidation(
+    "query": "query passwordComplexityTest($username: String, $password: String!, $email: String!){
+      passwordComplexityScore(
         username: $username,
         password: $password,
         email: $email)
@@ -23,7 +23,7 @@ Scenario: User wants to check the complexity of his good password
   """
   {
     "data": {
-      "registrationValidation": 4
+      "passwordComplexityScore": 4
     }
   }
   """
@@ -33,14 +33,12 @@ Scenario: User wants to check the complexity of his bad password
   Given I send a GraphQL POST request:
   """
   {
-    "query": "query passwordComplexityTest($username: String!, $password: String!, $email: String!){
-      registrationValidation(
-        username: $username,
+    "query": "query passwordComplexityTest($password: String!, $email: String!){
+      passwordComplexityScore(
         password: $password,
         email: $email)
     }",
     "variables": {
-      "username": "kjgkbng",
       "password": "azertyuiop",
       "email": "jean.paul.bella@hotmail.fr"
     }
@@ -50,7 +48,7 @@ Scenario: User wants to check the complexity of his bad password
   """
   {
     "data": {
-      "registrationValidation": 0
+      "passwordComplexityScore": 0
     }
   }
   """

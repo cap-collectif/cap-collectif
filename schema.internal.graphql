@@ -4859,7 +4859,7 @@ type Query {
   registrationForm: RegistrationForm
 
   # Validate the registration credentials
-  registrationValidation(
+  passwordComplexityScore(
     # The username of the user
     username: String
 
