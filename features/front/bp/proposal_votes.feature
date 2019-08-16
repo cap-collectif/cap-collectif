@@ -125,7 +125,6 @@ Scenario: Logged in as user who doesn't full fill requirements and want to vote.
   Then I cannot confirm my vote
   And I wait 1 seconds
   Then I full fill the requirements conditions
-  And I wait 2 seconds
   And I confirm my vote
   # We delete the vote
   And I vote for the first proposal
