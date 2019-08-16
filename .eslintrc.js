@@ -152,11 +152,9 @@ module.exports = {
         ],
       },
     ],
+    'flowtype/require-valid-file-annotation': ['error', 'always'],
   },
   settings: {
-    flowtype: {
-      onlyFilesWithFlowAnnotation: true,
-    },
     'import/resolver': {
       alias: {
         map: [['~relay', './app/Resources/js/__generated__/~relay']],
