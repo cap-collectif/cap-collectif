@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity\District;
 
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Project;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**

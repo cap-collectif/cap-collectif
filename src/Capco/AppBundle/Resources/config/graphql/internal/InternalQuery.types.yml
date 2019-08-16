@@ -44,7 +44,7 @@ InternalQuery:
       passwordComplexityScore:
         type: 'Int'
         description: 'Validate the registration credentials'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationValidationResolver", [args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\PasswordComplexityScoreResolver", [args])'
         args:
           username:
             type: 'String'

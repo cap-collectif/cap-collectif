@@ -6,7 +6,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use ZxcvbnPhp\Zxcvbn;
 
-class RegistrationValidationResolver implements ResolverInterface
+class PasswordComplexityScoreResolver implements ResolverInterface
 {
     public function __invoke(Argument $args): int
     {
@@ -18,6 +18,6 @@ class RegistrationValidationResolver implements ResolverInterface
         $zxcvbn = new Zxcvbn();
         $strength = $zxcvbn->passwordStrength($password, $userData);
 
-        return $strength['score'] ?? -1;
+        return $strength['score'] ?? 0;
     }
 }
