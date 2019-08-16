@@ -51,7 +51,8 @@ class Manager
         'disconnect_openid',
         'sso_by_pass_auth',
         'list_sso',
-        'allow_users_to_propose_events'
+        'allow_users_to_propose_events',
+        'login_franceconnect'
     ];
 
     protected $context;
