@@ -397,104 +397,12 @@ Object {
             "updatedAt": "2019-03-07 00:00:00",
           },
         },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyNQ==",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2019-03-20 00:00:00",
-            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
-            "publishedAt": "2019-03-20 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2019-03-20 00:00:00",
-          },
-        },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "hasNextPage": false,
       },
-      "totalCount": 5,
+      "totalCount": 4,
     },
   },
 }
