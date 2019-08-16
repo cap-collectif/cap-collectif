@@ -25,7 +25,10 @@ export class ProjectRestrictedAccess extends React.Component<Props> {
     const component = ({
       error,
       props,
-    }: { props: ?ProjectRestrictedAccessQueryResponse } & ReadyState) => {
+    }: {
+      props: ?ProjectRestrictedAccessQueryResponse,
+      ...ReadyState,
+    }) => {
       if (error) {
         return graphqlError;
       }

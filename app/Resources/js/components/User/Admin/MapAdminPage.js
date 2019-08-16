@@ -10,7 +10,10 @@ import MapboxAdminConfig from './MapboxAdminConfig';
 const mapboxAdminConfig = ({
   error,
   props,
-}: { props?: ?MapAdminPageQueryResponse } & ReadyState) => {
+}: {
+  props?: ?MapAdminPageQueryResponse,
+  ...ReadyState,
+}) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

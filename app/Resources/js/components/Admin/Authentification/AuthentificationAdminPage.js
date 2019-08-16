@@ -13,7 +13,8 @@ const component = ({
   props,
 }: {
   props: ?AuthentificationAdminPageQueryResponse,
-} & ReadyState) => {
+  ...ReadyState,
+}) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

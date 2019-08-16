@@ -155,7 +155,10 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
             render={({
               error,
               props,
-            }: { props?: ?OpinionVersionsBoxQueryResponse } & ReadyState) => {
+            }: {
+              props?: ?OpinionVersionsBoxQueryResponse,
+              ...ReadyState,
+            }) => {
               if (error) {
                 return graphqlError;
               }

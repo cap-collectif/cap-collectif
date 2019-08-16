@@ -14,7 +14,8 @@ export default class ProjectsListFilterTypesContainer extends React.Component<Pr
     props,
   }: {
     props: ?ProjectListFilterTypesQueryResponse,
-  } & ReadyState) => {
+    ...ReadyState,
+  }) => {
     if (error) {
       console.log(error); // eslint-disable-line no-console
       return graphqlError;

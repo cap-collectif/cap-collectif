@@ -9,7 +9,10 @@ import type { EvaluationsIndexPageQueryResponse } from '~relay/EvaluationsIndexP
 export const renderComponent = ({
   error,
   props,
-}: { props: ?EvaluationsIndexPageQueryResponse } & ReadyState) => {
+}: {
+  props: ?EvaluationsIndexPageQueryResponse,
+  ...ReadyState,
+}) => {
   if (error) {
     return graphqlError;
   }

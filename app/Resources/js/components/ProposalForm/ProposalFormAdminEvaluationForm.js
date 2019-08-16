@@ -76,7 +76,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
                   }
                 }
               `}
-              render={({ error, props }: { props: any } & ReadyState) => {
+              render={({ error, props }: { props: any, ...ReadyState }) => {
                 if (error) {
                   console.log(error); // eslint-disable-line no-console
                   return graphqlError;

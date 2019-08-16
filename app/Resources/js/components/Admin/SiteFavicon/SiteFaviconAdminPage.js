@@ -10,7 +10,10 @@ import Loader from '../../Ui/FeedbacksIndicators/Loader';
 const siteFaviconAdminForm = ({
   error,
   props,
-}: { props?: ?SiteFaviconAdminPageQueryResponse } & ReadyState) => {
+}: {
+  props?: ?SiteFaviconAdminPageQueryResponse,
+  ...ReadyState,
+}) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

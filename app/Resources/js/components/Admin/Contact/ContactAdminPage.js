@@ -53,12 +53,7 @@ const onSubmit = (values: FormValues) => {
   return UpdateContactPageMutation.commit({ input });
 };
 
-const renderContactList = ({
-  error,
-  props,
-}: {
-  props: any,
-} & ReadyState) => {
+const renderContactList = ({ error, props }: { props: any, ...ReadyState }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

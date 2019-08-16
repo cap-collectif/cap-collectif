@@ -203,7 +203,7 @@ export class ProposalStepPage extends React.Component<Props> {
               isMapDisplay: features.display_map,
             }: ProposalStepPageQueryVariables)
           }
-          render={({ error, props }: { props: ?ProposalStepPageQueryResponse } & ReadyState) => {
+          render={({ error, props }: { props: ?ProposalStepPageQueryResponse, ...ReadyState }) => {
             if (error) {
               return graphqlError;
             }

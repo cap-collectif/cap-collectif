@@ -50,12 +50,7 @@ class ProjectsList extends React.Component<Props> {
     }
   }
 
-  renderProjectList = ({
-    error,
-    props,
-  }: {
-    props: ?ProjectsListQueryResponse,
-  } & ReadyState) => {
+  renderProjectList = ({ error, props }: { props: ?ProjectsListQueryResponse, ...ReadyState }) => {
     const { limit, paginate } = this.props;
     if (error) {
       console.log(error); // eslint-disable-line no-console

@@ -15,7 +15,8 @@ const component = ({
   props,
 }: {
   props: ?QuestionnaireAdminPageQueryResponse,
-} & ReadyState) => {
+  ...ReadyState,
+}) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

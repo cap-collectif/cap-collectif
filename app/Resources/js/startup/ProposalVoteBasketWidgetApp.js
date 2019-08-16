@@ -40,7 +40,10 @@ export default (data: Props) => (
         render={({
           error,
           props,
-        }: { props: ?ProposalVoteBasketWidgetAppQueryResponse } & ReadyState) => {
+        }: {
+          props: ?ProposalVoteBasketWidgetAppQueryResponse,
+          ...ReadyState,
+        }) => {
           if (error) {
             return graphqlError;
           }

@@ -24,7 +24,7 @@ const ProjectAdminPage = ({ projectId }: { projectId: string }) => (
         variables={{
           projectId,
         }}
-        render={({ props, error }: { props: ?ProjectAdminAppQueryResponse } & ReadyState) => {
+        render={({ props, error }: { props: ?ProjectAdminAppQueryResponse, ...ReadyState }) => {
           if (error) {
             return graphqlError;
           }

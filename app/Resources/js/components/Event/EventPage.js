@@ -71,7 +71,7 @@ export class EventPage extends React.Component<Props> {
               isRegistrable: null,
             }: EventPageQueryVariables)
           }
-          render={({ error, props }: { props: ?EventPageQueryResponse } & ReadyState) => {
+          render={({ error, props }: { props: ?EventPageQueryResponse, ...ReadyState }) => {
             if (error) {
               return graphqlError;
             }

@@ -19,7 +19,8 @@ const component = ({
   props,
 }: {
   props: ?QuestionnaireStepPageQueryResponse,
-} & ReadyState) => {
+  ...ReadyState,
+}) => {
   if (error) {
     return graphqlError;
   }

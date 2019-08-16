@@ -15,7 +15,8 @@ const renderContactAdminPage = ({
   props,
 }: {
   props: ?ContactAdminPageAppQueryResponse,
-} & ReadyState) => {
+  ...ReadyState,
+}) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

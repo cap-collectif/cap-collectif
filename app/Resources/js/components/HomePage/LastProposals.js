@@ -39,7 +39,7 @@ export class LastProposals extends React.Component<Props> {
               stepId: '',
             }: LastProposalsQueryVariables)
           }
-          render={({ error, props }: { props?: ?LastProposalsQueryResponse } & ReadyState) => {
+          render={({ error, props }: { props?: ?LastProposalsQueryResponse, ...ReadyState }) => {
             if (error) {
               return graphqlError;
             }

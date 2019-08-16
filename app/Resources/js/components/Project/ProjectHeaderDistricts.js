@@ -32,7 +32,10 @@ export const ProjectHeaderDistricts = (properties: Props) => {
         render={({
           error,
           props,
-        }: { props?: ?ProjectHeaderDistrictsQueryResponse } & ReadyState) => {
+        }: {
+          props?: ?ProjectHeaderDistrictsQueryResponse,
+          ...ReadyState,
+        }) => {
           if (error) {
             return graphqlError;
           }

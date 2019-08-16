@@ -53,7 +53,7 @@ export class OpinionPage extends React.Component<Props> {
               isAuthenticated,
             }: OpinionPageQueryVariables)
           }
-          render={({ error, props }: { props?: ?OpinionPageQueryResponse } & ReadyState) => {
+          render={({ error, props }: { props?: ?OpinionPageQueryResponse, ...ReadyState }) => {
             if (error) {
               return graphqlError;
             }

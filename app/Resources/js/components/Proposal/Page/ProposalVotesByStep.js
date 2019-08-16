@@ -33,12 +33,7 @@ export class ProposalVotesByStep extends React.Component<Props> {
             stepId,
           }: ProposalVotesByStepQueryVariables)
         }
-        render={({
-          error,
-          props,
-        }: {
-          props: ?ProposalVotesByStepQueryResponse,
-        } & ReadyState) => {
+        render={({ error, props }: { props: ?ProposalVotesByStepQueryResponse, ...ReadyState }) => {
           if (error) {
             console.log(error); // eslint-disable-line no-console
             return graphqlError;

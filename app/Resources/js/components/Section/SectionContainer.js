@@ -80,7 +80,7 @@ export class SectionContainer extends Component<Props> {
               }
             }
           `}
-          render={({ error, props }: { props?: ?SectionContainerQueryResponse } & ReadyState) => {
+          render={({ error, props }: { props?: ?SectionContainerQueryResponse, ...ReadyState }) => {
             if (error) {
               console.log(error); // eslint-disable-line no-console
               return graphqlError;
