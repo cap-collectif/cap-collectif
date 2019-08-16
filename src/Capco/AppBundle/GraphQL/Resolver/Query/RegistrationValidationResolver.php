@@ -11,7 +11,10 @@ class RegistrationValidationResolver implements ResolverInterface
     public function __invoke(Argument $args): int
     {
         $password = $args->offsetGet('password');
-        $userData = [$args->offsetGet('username'), $args->offsetGet('email')];
+        $userData = [$args->offsetGet('email')];
+        if (!empty($args->offsetGet('username'))) {
+            array_push($userData, $args->offsetGet('username'));
+        }
         $zxcvbn = new Zxcvbn();
         $strength = $zxcvbn->passwordStrength($password, $userData);
 

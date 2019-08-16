@@ -4861,7 +4861,7 @@ type Query {
   # Validate the registration credentials
   registrationValidation(
     # The username of the user
-    username: String!
+    username: String
 
     # The email of the user
     email: String!

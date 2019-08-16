@@ -46,7 +46,7 @@ InternalQuery:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationValidationResolver", [args])'
         args:
           username:
-            type: 'String!'
+            type: 'String'
             description: 'The username of the user'
           email:
             type: 'String!'
