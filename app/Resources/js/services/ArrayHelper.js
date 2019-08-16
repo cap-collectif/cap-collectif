@@ -1,3 +1,4 @@
+// @flow
 class ArrayHelper {
   getElementIndexFromArray(els, el, uniqueField = 'id', secondUniqueField = null) {
     let index = -1;

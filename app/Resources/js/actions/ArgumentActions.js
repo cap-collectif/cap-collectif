@@ -1,3 +1,4 @@
+// @flow
 import Fetcher from '../services/Fetcher';
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../constants/AlertConstants';

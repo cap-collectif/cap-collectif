@@ -18,6 +18,13 @@ sketchy-null-bool=off
 .*/docs/*
 .*/coverage/*
 .*/codemod/*
+; ignore synthesis
+.*/SynthesisElementActions.js
+.*/SynthesisDisplayRules.js
+.*/SynthesisViewBoxApp.js
+.*/SynthesisActions.js
+.*/SynthesisStore.js
+.*/SynthesisBox.js
 
 [libs]
 flow-typed

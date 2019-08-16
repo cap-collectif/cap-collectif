@@ -1,3 +1,4 @@
+// @flow
 import BaseStore from './BaseStore';
 import { UPDATE_ALERT } from '../constants/AlertConstants';
 

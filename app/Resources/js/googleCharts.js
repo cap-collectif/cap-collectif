@@ -1,3 +1,4 @@
+// @flow
 import colors from './utils/colors';
 
 /*eslint-disable */

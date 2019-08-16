@@ -1,3 +1,4 @@
+// @flow
 class FormattedText {
   strip(text) {
     if (text) {

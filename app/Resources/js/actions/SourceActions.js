@@ -1,3 +1,4 @@
+// @flow
 import Fetcher from '../services/Fetcher';
 
 export default {
