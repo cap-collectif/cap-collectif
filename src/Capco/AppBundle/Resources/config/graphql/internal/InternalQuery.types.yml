@@ -40,6 +40,20 @@ InternalQuery:
         type: 'InternalRegistrationForm'
         description: 'Get the current registration form'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver")'
+      registrationValidation:
+        type: 'Int'
+        description: 'Validate the registration credentials'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationValidationResolver", [args])'
+        args:
+          username:
+            type: 'String!'
+            description: 'The username of the user'
+          email:
+            type: 'String!'
+            description: 'The email of the user'
+          password:
+            type: 'String!'
+            description: 'The password of the user'
       contactForms:
         type: '[InternalContactForm!]'
         description: 'Get the contact forms'

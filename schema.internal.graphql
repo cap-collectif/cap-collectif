@@ -4858,6 +4858,18 @@ type Query {
   # Get the current registration form
   registrationForm: RegistrationForm
 
+  # Validate the registration credentials
+  registrationValidation(
+    # The username of the user
+    username: String!
+
+    # The email of the user
+    email: String!
+
+    # The password of the user
+    password: String!
+  ): Int
+
   # Get the contact forms
   contactForms: [ContactForm!]
   projectAuthors: [User!]!
