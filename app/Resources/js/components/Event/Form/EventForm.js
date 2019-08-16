@@ -88,17 +88,22 @@ export class EventForm extends React.Component<Props> {
             label={<FormattedMessage id="admin.fields.proposal.address" />}
             placeholder="proposal.map.form.placeholder"
           />
-          {/* //Pour le super admin seulement, je n'ai donc pas mis de clef de trad, c'est temporaire le temps de la migration des adresses */}
+          {/* This part is tempory, it will be delete after migration complete */}
           {isSuperAdmin && (
             <div className="mb-5">
               <div>
                 {event && event.fullAddress && (
-                  <div className="clearfix mb-5">Ancienne adresse : {event.fullAddress}</div>
+                  <div className="clearfix mb-5">
+                    <div>
+                      <FormattedMessage id="old-address" />
+                    </div>
+                    : {event.fullAddress}
+                  </div>
                 )}
                 {event && event.lat && event.lng && (
                   <span className="clearfix mb-5">
                     {' '}
-                    Ancienne lat/lng :&nbsp; {event.lat} / {event.lng}
+                    <FormattedMessage id="old-latitude" />: &nbsp; {event.lat} / {event.lng}
                   </span>
                 )}
                 {event &&
@@ -107,8 +112,8 @@ export class EventForm extends React.Component<Props> {
                   event.googleMapsAddress.lng && (
                     <span className="clearfix mb-5">
                       {' '}
-                      Nouvelle lat/lng :&nbsp; {event.googleMapsAddress.lat} /{' '}
-                      {event.googleMapsAddress.lng}
+                      <FormattedMessage id="new-latitude" />
+                      :&nbsp; {event.googleMapsAddress.lat} / {event.googleMapsAddress.lng}
                     </span>
                   )}
               </div>

@@ -143,8 +143,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
 const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
-  const media =
-    typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
+  const media = values.media && values.media.id ? values.media.id : null;
   const guestListEnabled = values.guestListEnabled ? values.guestListEnabled : false;
   const commentable = values.commentable ? values.commentable : false;
   const enabled = values.enabled ? values.enabled : false;

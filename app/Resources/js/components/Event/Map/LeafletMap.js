@@ -48,7 +48,6 @@ type State = {|
 
 let L;
 
-/* eslint-disable relay/unused-fields */
 const eventMapPreviewQuery = graphql`
   query LeafletMapQuery($id: ID!) {
     node(id: $id) {
