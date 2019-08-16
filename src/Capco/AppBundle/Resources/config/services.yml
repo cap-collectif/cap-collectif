@@ -159,6 +159,10 @@ services:
     arguments:
       - '@hautelook_alice.locator.environmentless'
 
+  ZxcvbnPhp\Zxcvbn:
+    autowire: true
+    public: true
+
   # Replaces the default file locator used
   hautelook_alice.locator: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderFilesLocator'
 
