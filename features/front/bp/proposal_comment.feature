@@ -48,7 +48,7 @@ Scenario: User update his comment and admin should be notified if the proposal h
 Scenario: User update his comment and admin should not be notified if the proposal have comments notifications off
   Given I am logged in as user
   And I go to a proposal which is not comment notifiable
-  And I click the edit comment button "Q29tbWVudDpwcm9wb3NhbENvbW1lbnQ3Nw=="
+  And I click the edit comment button "Q29tbWVudDpwcm9wb3NhbENvbW1lbnQ3MQ=="
   And I fill and submit the edit comment form with "Salut les filles, il faut que vous essayiez ce DOP à la madeleine"
   Then the queue associated to "comment_update" producer has messages below:
   | 0 | {"commentId": "@string@"} |
