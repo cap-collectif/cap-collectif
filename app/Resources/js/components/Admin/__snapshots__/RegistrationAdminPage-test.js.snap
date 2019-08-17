@@ -19,38 +19,6 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
   </div>
   <h4>
     <FormattedMessage
-      id="social-medias"
-      values={Object {}}
-    />
-  </h4>
-  <p>
-    <FormattedMessage
-      id="allow-registration-with"
-      values={Object {}}
-    />
-  </p>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    Facebook
-  </div>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    Google
-  </div>
-  <h4>
-    <FormattedMessage
       id="allow"
       values={Object {}}
     />
@@ -242,38 +210,6 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       id="allow-registration"
       values={Object {}}
     />
-  </div>
-  <h4>
-    <FormattedMessage
-      id="social-medias"
-      values={Object {}}
-    />
-  </h4>
-  <p>
-    <FormattedMessage
-      id="allow-registration-with"
-      values={Object {}}
-    />
-  </p>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    Facebook
-  </div>
-  <div
-    className="d-flex align-items-center mb-15 mt-15"
-  >
-    <Toggle
-      checked={false}
-      icons={true}
-      onChange={[Function]}
-    />
-    Google
   </div>
   <h4>
     <FormattedMessage

@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
+<Fragment>
+  <ListGroup
+    className=""
+  >
+    <ListGroupItem
+      bsClass="list-group-item"
+      listItem={false}
+      style={
+        Object {
+          "justifyContent": "end",
+        }
+      }
+    >
+      <Toggle
+        checked={true}
+        icons={true}
+        onChange={[Function]}
+      />
+      <h5
+        className="mb-0 mt-0"
+      >
+        <FormattedMessage
+          id="capco.module.login_franceconnect"
+          values={Object {}}
+        />
+      </h5>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="warning"
+        className="btn-outline-warning"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "marginLeft": "auto",
+          }
+        }
+      >
+        <i
+          className="fa fa-pencil"
+        />
+         
+        <FormattedMessage
+          id="global.edit"
+          values={Object {}}
+        />
+      </Button>
+    </ListGroupItem>
+    <ListGroupItem
+      bsClass="list-group-item"
+      listItem={false}
+      style={
+        Object {
+          "justifyContent": "end",
+        }
+      }
+    >
+      <Toggle
+        checked={false}
+        icons={true}
+        onChange={[Function]}
+      />
+      <h5
+        className="mb-0 mt-0"
+      >
+        Facebook
+      </h5>
+    </ListGroupItem>
+    <ListGroupItem
+      bsClass="list-group-item"
+      listItem={false}
+      style={
+        Object {
+          "justifyContent": "end",
+        }
+      }
+    >
+      <Toggle
+        checked={false}
+        icons={true}
+        onChange={[Function]}
+      />
+      <h5
+        className="mb-0 mt-0"
+      >
+        Google
+      </h5>
+    </ListGroupItem>
+    <ListGroupItem
+      bsClass="list-group-item"
+      listItem={false}
+      style={
+        Object {
+          "justifyContent": "end",
+        }
+      }
+    >
+      <Toggle
+        checked={true}
+        disabled={true}
+        icons={true}
+      />
+      <h5
+        className="mb-0 mt-0"
+      >
+        <FormattedMessage
+          id="user.login.email"
+          values={Object {}}
+        />
+      </h5>
+    </ListGroupItem>
+  </ListGroup>
+</Fragment>
+`;
+
+exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
+<Fragment>
+  <ListGroup
+    className=""
+  >
+    <ListGroupItem
+      bsClass="list-group-item"
+      listItem={false}
+      style={
+        Object {
+          "justifyContent": "end",
+        }
+      }
+    >
+      <Toggle
+        checked={false}
+        icons={true}
+        onChange={[Function]}
+      />
+      <h5
+        className="mb-0 mt-0"
+      >
+        Facebook
+      </h5>
+    </ListGroupItem>
+    <ListGroupItem
+      bsClass="list-group-item"
+      listItem={false}
+      style={
+        Object {
+          "justifyContent": "end",
+        }
+      }
+    >
+      <Toggle
+        checked={false}
+        icons={true}
+        onChange={[Function]}
+      />
+      <h5
+        className="mb-0 mt-0"
+      >
+        Google
+      </h5>
+    </ListGroupItem>
+    <ListGroupItem
+      bsClass="list-group-item"
+      listItem={false}
+      style={
+        Object {
+          "justifyContent": "end",
+        }
+      }
+    >
+      <Toggle
+        checked={true}
+        disabled={true}
+        icons={true}
+      />
+      <h5
+        className="mb-0 mt-0"
+      >
+        <FormattedMessage
+          id="user.login.email"
+          values={Object {}}
+        />
+      </h5>
+    </ListGroupItem>
+  </ListGroup>
+</Fragment>
+`;

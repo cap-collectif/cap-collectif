@@ -11,7 +11,7 @@ exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="open-id-authentication-method"
+        id="method"
         values={Object {}}
       />
     </h3>
@@ -19,33 +19,30 @@ exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
   <div
     className="box-content box-content__content-form"
   >
-    <ListGroup
-      className=""
-    >
+    <h4>
       <FormattedMessage
-        id="no-method-configured"
+        id="other_step"
         values={Object {}}
       />
-    </ListGroup>
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="mt-15"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="global.add"
-        values={Object {}}
-      />
-    </Button>
-    <Connect(InjectIntl(ReduxForm))
-      isCreating={true}
-      onClose={[Function]}
-      show={false}
+    </h4>
+    <ForwardRef(Relay(ListCustomSSO))
+      ssoConfigurations={
+        Object {
+          "edges": Array [],
+        }
+      }
     />
+    <div
+      className="mt-30"
+    >
+      <h4>
+        <FormattedMessage
+          id="preconfigured"
+          values={Object {}}
+        />
+      </h4>
+      <Connect(ListPublicSSO) />
+    </div>
   </div>
 </div>
 `;
@@ -61,7 +58,7 @@ exports[`<ListSSOConfiguration /> renders correctly with items 1`] = `
       className="box-title"
     >
       <FormattedMessage
-        id="open-id-authentication-method"
+        id="method"
         values={Object {}}
       />
     </h3>
@@ -69,45 +66,78 @@ exports[`<ListSSOConfiguration /> renders correctly with items 1`] = `
   <div
     className="box-content box-content__content-form"
   >
-    <ListGroup
-      className=""
-    >
-      <ForwardRef(Relay(SSOConfigurationItem))
-        configuration={
-          Object {
-            "$fragmentRefs": null,
-            "accessTokenUrl": "https://localhost:8888/token",
-            "authorizationUrl": "https://localhost:8888/authorization",
-            "clientId": "clientId",
-            "id": "oauth2ID",
-            "logoutUrl": "https://localhost:8888/logout",
-            "name": "Open ID Provider",
-            "secret": "SecretKey",
-            "userInfoUrl": "https://localhost:8888/user",
-          }
-        }
-        key="0"
-      />
-    </ListGroup>
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="mt-15"
-      disabled={false}
-      onClick={[Function]}
-    >
+    <h4>
       <FormattedMessage
-        id="global.add"
+        id="other_step"
         values={Object {}}
       />
-    </Button>
-    <Connect(InjectIntl(ReduxForm))
-      isCreating={true}
-      onClose={[Function]}
-      show={false}
+    </h4>
+    <ForwardRef(Relay(ListCustomSSO))
+      ssoConfigurations={
+        Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "$fragmentRefs": null,
+                "accessTokenUrl": "https://localhost:8888/token",
+                "authorizationUrl": "https://localhost:8888/authorization",
+                "clientId": "clientId",
+                "id": "oauth2ID",
+                "logoutUrl": "https://localhost:8888/logout",
+                "name": "Open ID Provider",
+                "secret": "SecretKey",
+                "userInfoUrl": "https://localhost:8888/user",
+              },
+            },
+          ],
+        }
+      }
     />
+    <div
+      className="mt-30"
+    >
+      <h4>
+        <FormattedMessage
+          id="preconfigured"
+          values={Object {}}
+        />
+      </h4>
+      <Connect(ListPublicSSO) />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ListSSOConfiguration /> renders correctly with only Public SSO list when associated feature toggle is disabled 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="method"
+        values={Object {}}
+      />
+    </h3>
+  </div>
+  <div
+    className="box-content box-content__content-form"
+  >
+    <div
+      className=""
+    >
+      <h4>
+        <FormattedMessage
+          id="preconfigured"
+          values={Object {}}
+        />
+      </h4>
+      <Connect(ListPublicSSO) />
+    </div>
   </div>
 </div>
 `;

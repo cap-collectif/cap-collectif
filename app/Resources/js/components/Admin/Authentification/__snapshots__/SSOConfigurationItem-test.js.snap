@@ -3,7 +3,6 @@
 exports[`<SSOConfigurationItem /> renders correctly with Oauth2 configuration 1`] = `
 <ListGroupItem
   bsClass="list-group-item"
-  className="d-flex justify-content-between align-items-center bg--default"
   listItem={false}
 >
   <ForwardRef(Relay(Oauth2SSOConfigurationItem))

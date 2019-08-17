@@ -47,28 +47,6 @@ export class RegistrationAdminPage extends React.Component<Props> {
           <FormattedMessage id="allow-registration" />
         </div>
         <h4>
-          <FormattedMessage id="social-medias" />
-        </h4>
-        <p>
-          <FormattedMessage id="allow-registration-with" />
-        </p>
-        <div className="d-flex align-items-center mb-15 mt-15">
-          <Toggle
-            icons
-            checked={features.login_facebook}
-            onChange={() => onToggle('login_facebook', !features.login_facebook)}
-          />
-          Facebook
-        </div>
-        <div className="d-flex align-items-center mb-15 mt-15">
-          <Toggle
-            icons
-            checked={features.login_gplus}
-            onChange={() => onToggle('login_gplus', !features.login_gplus)}
-          />
-          Google
-        </div>
-        <h4>
           <FormattedMessage id="allow" />
         </h4>
         <div className="d-flex align-items-center mb-15 mt-15">

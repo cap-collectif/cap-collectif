@@ -34,11 +34,7 @@ export class SSOConfigurationItem extends React.Component<Props> {
   render() {
     const { configuration } = this.props;
 
-    return (
-      <ListGroupItem className="d-flex justify-content-between align-items-center bg--default">
-        {getConcreteSSOElementItem(configuration)}
-      </ListGroupItem>
-    );
+    return <ListGroupItem>{getConcreteSSOElementItem(configuration)}</ListGroupItem>;
   }
 }
 

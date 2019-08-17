@@ -15,7 +15,7 @@ exports[`<AuthentificationAdminPageContent /> renders correctly 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(ListSSOConfiguration))
+  <Connect(Component)
     ssoConfigurations={
       Object {
         "edges": Array [

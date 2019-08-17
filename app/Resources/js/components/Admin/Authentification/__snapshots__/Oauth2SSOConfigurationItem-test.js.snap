@@ -2,9 +2,23 @@
 
 exports[`<Oauth2SSOConfigurationItem /> renders correctly 1`] = `
 <Fragment>
-  <h4>
-    Open ID Provider
-  </h4>
+  <div
+    className="d-flex flex-column"
+  >
+    <h5
+      className="mb-0 mt-0"
+    >
+      Open ID Provider
+    </h5>
+    <div
+      className="color-dark-gray"
+    >
+      <FormattedMessage
+        id="capco.module.login_openid"
+        values={Object {}}
+      />
+    </div>
+  </div>
   <ButtonToolbar
     bsClass="btn-toolbar"
   >

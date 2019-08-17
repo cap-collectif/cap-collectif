@@ -45,7 +45,12 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
 
     return (
       <>
-        <h4>{configuration.name}</h4>
+        <div className="d-flex flex-column">
+          <h5 className="mb-0 mt-0">{configuration.name}</h5>
+          <div className="color-dark-gray">
+            <FormattedMessage id="capco.module.login_openid" />
+          </div>
+        </div>
         <ButtonToolbar>
           <Button
             bsStyle="warning"

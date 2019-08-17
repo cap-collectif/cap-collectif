@@ -2,11 +2,10 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { ListSSOConfiguration } from './ListSSOConfiguration';
+import { ListCustomSSO } from './ListCustomSSO';
 import { $fragmentRefs, $refType } from '../../../mocks';
-import { features } from '../../../redux/modules/default';
 
-describe('<ListSSOConfiguration />', () => {
+describe('<ListCustomSSO />', () => {
   const props = {
     ssoConfigurations: {
       ...$refType,
@@ -26,31 +25,15 @@ describe('<ListSSOConfiguration />', () => {
         },
       ],
     },
-    features: {
-      ...features,
-      list_sso: true,
-    },
   };
 
   it('renders correctly with items', () => {
-    const wrapper = shallow(<ListSSOConfiguration {...props} />);
+    const wrapper = shallow(<ListCustomSSO {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly with empty list', () => {
-    const wrapper = shallow(
-      <ListSSOConfiguration
-        ssoConfigurations={{ ...$refType, edges: [] }}
-        features={{ ...features, list_sso: true }}
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly with only Public SSO list when associated feature toggle is disabled', () => {
-    const wrapper = shallow(
-      <ListSSOConfiguration ssoConfigurations={{ ...$refType, edges: [] }} features={features} />,
-    );
+    const wrapper = shallow(<ListCustomSSO ssoConfigurations={{ ...$refType, edges: [] }} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

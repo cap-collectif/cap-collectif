@@ -1,88 +1,64 @@
 // @flow
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import type { ListSSOConfiguration_ssoConfigurations } from '~relay/ListSSOConfiguration_ssoConfigurations.graphql';
-import ListGroup from '../../Ui/List/ListGroup';
-import SSOConfigurationItem from './SSOConfigurationItem';
-import Oauth2SSOConfigurationModal from './Oauth2SSOConfigurationModal';
+import ListCustomSSO from './ListCustomSSO';
+import ListPublicSSO from './ListPublicSSO';
+import type { ListCustomSSO_ssoConfigurations } from '~relay/ListCustomSSO_ssoConfigurations.graphql';
+import type { FeatureToggles, State } from '../../../types';
 
 type RelayProps = {|
-  +ssoConfigurations: ListSSOConfiguration_ssoConfigurations,
+  +ssoConfigurations: ListCustomSSO_ssoConfigurations,
 |};
 
 type Props = {|
   ...RelayProps,
+  features: FeatureToggles,
 |};
 
-type State = {|
-  showModal: boolean,
-|};
-
-export class ListSSOConfiguration extends React.Component<Props, State> {
-  state = {
-    showModal: false,
-  };
-
-  handleClose = () => {
-    this.setState({ showModal: false });
-  };
-
+export class ListSSOConfiguration extends React.Component<Props> {
   render() {
-    const { ssoConfigurations } = this.props;
-    const { showModal } = this.state;
+    const { ssoConfigurations, features } = this.props;
 
     return (
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
-            <FormattedMessage id="open-id-authentication-method" />
+            <FormattedMessage id="method" />
           </h3>
         </div>
         <div className="box-content box-content__content-form">
-          <ListGroup>
-            {ssoConfigurations.edges && ssoConfigurations.edges.length > 0 ? (
-              <>
-                {ssoConfigurations.edges
-                  .filter(Boolean)
-                  .map(edge => edge.node)
-                  .filter(Boolean)
-                  .map((node, key) => (
-                    /* $FlowFixMe $refType */
-                    <SSOConfigurationItem configuration={node} key={key} />
-                  ))}
-              </>
-            ) : (
-              <FormattedMessage id="no-method-configured" />
-            )}
-          </ListGroup>
-          <Button
-            bsStyle="primary"
-            className="mt-15"
-            onClick={() => {
-              this.setState((prevState: State) => ({
-                ...prevState,
-                showModal: !prevState.showModal,
-              }));
-            }}>
-            <FormattedMessage id="global.add" />
-          </Button>
-          <Oauth2SSOConfigurationModal show={showModal} onClose={this.handleClose} isCreating />
+          {features.list_sso && (
+            <>
+              <h4>
+                <FormattedMessage id="other_step" />
+              </h4>
+              <ListCustomSSO ssoConfigurations={ssoConfigurations} />
+            </>
+          )}
+          <div className={features.list_sso ? 'mt-30' : ''}>
+            <h4>
+              <FormattedMessage id="preconfigured" />
+            </h4>
+            <ListPublicSSO />
+          </div>
         </div>
       </div>
     );
   }
 }
 
-export default createFragmentContainer(ListSSOConfiguration, {
-  ssoConfigurations: graphql`
-    fragment ListSSOConfiguration_ssoConfigurations on InternalSSOConfigurationConnection {
-      edges {
-        node {
-          ...SSOConfigurationItem_configuration
-        }
-      }
-    }
-  `,
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
 });
+
+export default connect(mapStateToProps)(
+  createFragmentContainer(ListSSOConfiguration, {
+    ssoConfigurations: graphql`
+      fragment ListSSOConfiguration_ssoConfigurations on InternalSSOConfigurationConnection {
+        ...ListCustomSSO_ssoConfigurations
+      }
+    `,
+  }),
+);

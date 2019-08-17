@@ -1,41 +1,30 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
 import ShieldAdminForm from './ShieldAdminForm';
 import ListSSOConfiguration from './ListSSOConfiguration';
 import type { ShieldAdminForm_shieldAdminForm } from '~relay/ShieldAdminForm_shieldAdminForm.graphql';
-import type { ListSSOConfiguration_ssoConfigurations } from '~relay/ListSSOConfiguration_ssoConfigurations.graphql';
-import type { FeatureToggles, State } from '../../../types';
+import type { ListCustomSSO_ssoConfigurations } from '~relay/ListCustomSSO_ssoConfigurations.graphql';
 
 type RelayProps = {|
   +shieldAdminForm: ShieldAdminForm_shieldAdminForm,
-  +ssoConfigurations: ListSSOConfiguration_ssoConfigurations,
+  +ssoConfigurations: ListCustomSSO_ssoConfigurations,
 |};
 
 type Props = {|
   ...RelayProps,
-  features: FeatureToggles,
-  isSuperAdmin: boolean,
 |};
 
 export class AuthentificationAdminPageContent extends React.Component<Props> {
   render() {
-    const { shieldAdminForm, ssoConfigurations, features, isSuperAdmin } = this.props;
+    const { shieldAdminForm, ssoConfigurations } = this.props;
 
     return (
       <>
         <ShieldAdminForm shieldAdminForm={shieldAdminForm} />
-        {isSuperAdmin && features.list_sso && (
-          <ListSSOConfiguration ssoConfigurations={ssoConfigurations} />
-        )}
+        <ListSSOConfiguration ssoConfigurations={ssoConfigurations} />
       </>
     );
   }
 }
 
-const mapStateToProps = (state: State) => ({
-  features: state.default.features,
-  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-});
-
-export default connect(mapStateToProps)(AuthentificationAdminPageContent);
+export default AuthentificationAdminPageContent;
