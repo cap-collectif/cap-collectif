@@ -29,3 +29,9 @@ InternalWithOauth2SSOConfiguration:
       name:
         type: 'String!'
         description: 'The name of your SSO provider.'
+      buttonColor:
+        type: 'Color!'
+        description: 'Color in hexadecimal of SSO button.'
+      labelColor:
+        type: 'Color!'
+        description: 'Color in hexadecimal of label SSO button.'

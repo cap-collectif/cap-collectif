@@ -31,7 +31,7 @@ class AbstractSSOConfigurationRepository extends EntityRepository
         $rsm->addScalarResult('ssoType', 'ssoType');
         $query = $this->getEntityManager()->createNativeQuery(
             '
-            SELECT name, ssoType
+            SELECT name, ssoType, buttonColor, labelColor
             FROM sso_configuration
             WHERE enabled = 1
         ',

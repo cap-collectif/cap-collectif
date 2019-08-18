@@ -19,6 +19,8 @@ Scenario: Admin wants to update a Oauth2 SSO configuration
           userInfoUrl
           logoutUrl
           profileUrl
+          buttonColor
+          labelColor
         }
       }
     }",
@@ -33,7 +35,9 @@ Scenario: Admin wants to update a Oauth2 SSO configuration
         "accessTokenUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/token",
         "userInfoUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
         "logoutUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
-        "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account"
+        "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account",
+        "buttonColor": "#CDCDCD",
+        "labelColor": "#000000"
       }
     }
   }
@@ -52,7 +56,9 @@ Scenario: Admin wants to update a Oauth2 SSO configuration
           "accessTokenUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/token",
           "userInfoUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
           "logoutUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
-          "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account"
+          "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account",
+          "buttonColor": "#CDCDCD",
+          "labelColor": "#000000"
          }
        }
      }
