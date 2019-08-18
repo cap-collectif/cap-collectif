@@ -39,21 +39,3 @@ exports[`<AuthentificationAdminPageContent /> renders correctly 1`] = `
   />
 </Fragment>
 `;
-
-exports[`<AuthentificationAdminPageContent /> renders correctly when not superAdmin 1`] = `
-<Fragment>
-  <ForwardRef(Relay(Connect(ReduxForm)))
-    shieldAdminForm={
-      Object {
-        "introduction": "<p>Introduction text in shield mode</p>",
-        "media": Object {
-          "id": "image-uuid",
-          "name": "image-name.jpg",
-          "url": "https://capco.test/media/default/0001/01/image-name.jpg",
-        },
-        "shieldMode": true,
-      }
-    }
-  />
-</Fragment>
-`;

@@ -15,11 +15,12 @@ type RelayProps = {|
 type Props = {|
   ...RelayProps,
   features: FeatureToggles,
+  isSuperAdmin: boolean,
 |};
 
 export class ListSSOConfiguration extends React.Component<Props> {
   render() {
-    const { ssoConfigurations, features } = this.props;
+    const { ssoConfigurations, features, isSuperAdmin } = this.props;
 
     return (
       <div className="box box-primary container-fluid">
@@ -29,7 +30,7 @@ export class ListSSOConfiguration extends React.Component<Props> {
           </h3>
         </div>
         <div className="box-content box-content__content-form">
-          {features.list_sso && (
+          {features.list_sso && isSuperAdmin && (
             <>
               <h4>
                 <FormattedMessage id="other_step" />
@@ -51,6 +52,7 @@ export class ListSSOConfiguration extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 
 export default connect(mapStateToProps)(

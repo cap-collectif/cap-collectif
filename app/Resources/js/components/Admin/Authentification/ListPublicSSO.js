@@ -4,9 +4,11 @@ import { Button, ListGroupItem } from 'react-bootstrap';
 import Toggle from 'react-toggle';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import styled from 'styled-components';
 import ListGroup from '../../Ui/List/ListGroup';
 import type { Dispatch, FeatureToggle, FeatureToggles, State as GlobalState } from '../../../types';
 import { toggleFeature } from '../../../redux/modules/default';
+import FranceConnectConfigurationModal from './FranceConnectConfigurationModal';
 
 type Props = {|
   features: FeatureToggles,
@@ -17,15 +19,36 @@ type State = {|
   showFranceConnectModal: boolean,
 |};
 
+const ListGroupItemWithJustifyContentEnd = styled(ListGroupItem)`
+  && {
+    justify-content: end;
+  }
+`;
+
+const ButtonWithMarginLeftAuto = styled(Button)`
+  && {
+    margin-left: auto;
+  }
+`;
+
 export class ListPublicSSO extends React.Component<Props, State> {
+  state = {
+    showFranceConnectModal: false,
+  };
+
+  handleClose = () => {
+    this.setState({ showFranceConnectModal: false });
+  };
+
   render() {
     const { onToggle, features } = this.props;
+    const { showFranceConnectModal } = this.state;
 
     return (
       <>
         <ListGroup>
           {features.login_franceconnect && (
-            <ListGroupItem style={{ justifyContent: 'end' }}>
+            <ListGroupItemWithJustifyContentEnd>
               <Toggle
                 icons
                 checked={features.login_franceconnect}
@@ -34,10 +57,9 @@ export class ListPublicSSO extends React.Component<Props, State> {
               <h5 className="mb-0 mt-0">
                 <FormattedMessage id="capco.module.login_franceconnect" />
               </h5>
-              <Button
+              <ButtonWithMarginLeftAuto
                 bsStyle="warning"
                 className="btn-outline-warning"
-                style={{ marginLeft: 'auto' }}
                 onClick={() => {
                   this.setState((prevState: State) => ({
                     ...prevState,
@@ -45,31 +67,35 @@ export class ListPublicSSO extends React.Component<Props, State> {
                   }));
                 }}>
                 <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
-              </Button>
-            </ListGroupItem>
+              </ButtonWithMarginLeftAuto>
+              <FranceConnectConfigurationModal
+                show={showFranceConnectModal}
+                onClose={this.handleClose}
+              />
+            </ListGroupItemWithJustifyContentEnd>
           )}
-          <ListGroupItem style={{ justifyContent: 'end' }}>
+          <ListGroupItemWithJustifyContentEnd>
             <Toggle
               icons
               checked={features.login_facebook}
               onChange={() => onToggle('login_facebook', !features.login_facebook)}
             />
             <h5 className="mb-0 mt-0">Facebook</h5>
-          </ListGroupItem>
-          <ListGroupItem style={{ justifyContent: 'end' }}>
+          </ListGroupItemWithJustifyContentEnd>
+          <ListGroupItemWithJustifyContentEnd>
             <Toggle
               icons
               checked={features.login_gplus}
               onChange={() => onToggle('login_gplus', !features.login_gplus)}
             />
             <h5 className="mb-0 mt-0">Google</h5>
-          </ListGroupItem>
-          <ListGroupItem style={{ justifyContent: 'end' }}>
+          </ListGroupItemWithJustifyContentEnd>
+          <ListGroupItemWithJustifyContentEnd>
             <Toggle icons checked disabled />
             <h5 className="mb-0 mt-0">
               <FormattedMessage id="user.login.email" />
             </h5>
-          </ListGroupItem>
+          </ListGroupItemWithJustifyContentEnd>
         </ListGroup>
       </>
     );

@@ -48,10 +48,6 @@ type State = {
 export class QuestionnaireAdminCreateButton extends React.Component<Props, State> {
   state = { showModal: false, type: 'VOTING' };
 
-  changeType = (type: QuestionnaireType) => {
-    this.setState({ type });
-  };
-
   render() {
     const { submitting, handleSubmit, submit, dispatch } = this.props;
     const { showModal } = this.state;

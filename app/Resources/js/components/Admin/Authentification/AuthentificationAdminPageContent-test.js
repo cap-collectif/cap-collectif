@@ -36,24 +36,10 @@ describe('<AuthentificationAdminPageContent />', () => {
         url: 'https://capco.test/media/default/0001/01/image-name.jpg',
       },
     },
-    features: {
-      ...features,
-      list_sso: true,
-    },
-    isSuperAdmin: true,
   };
 
   it('renders correctly', () => {
     const wrapper = shallow(<AuthentificationAdminPageContent {...defaultProps} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly when not superAdmin', () => {
-    const props = {
-      ...defaultProps,
-      isSuperAdmin: false,
-    };
-    const wrapper = shallow(<AuthentificationAdminPageContent {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -30,6 +30,7 @@ describe('<ListSSOConfiguration />', () => {
       ...features,
       list_sso: true,
     },
+    isSuperAdmin: true,
   };
 
   it('renders correctly with items', () => {
@@ -42,14 +43,19 @@ describe('<ListSSOConfiguration />', () => {
       <ListSSOConfiguration
         ssoConfigurations={{ ...$refType, edges: [] }}
         features={{ ...features, list_sso: true }}
+        isSuperAdmin
       />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly with only Public SSO list when associated feature toggle is disabled', () => {
+  it('renders correctly with only Public SSO list when associated feature toggle is disabled and not user is not a super admin', () => {
     const wrapper = shallow(
-      <ListSSOConfiguration ssoConfigurations={{ ...$refType, edges: [] }} features={features} />,
+      <ListSSOConfiguration
+        ssoConfigurations={{ ...$refType, edges: [] }}
+        features={features}
+        isSuperAdmin={false}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

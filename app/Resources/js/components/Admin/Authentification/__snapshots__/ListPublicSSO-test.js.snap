@@ -5,15 +5,7 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
   <ListGroup
     className=""
   >
-    <ListGroupItem
-      bsClass="list-group-item"
-      listItem={false}
-      style={
-        Object {
-          "justifyContent": "end",
-        }
-      }
-    >
+    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
       <Toggle
         checked={true}
         icons={true}
@@ -27,19 +19,10 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
           values={Object {}}
         />
       </h5>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
+      <ListPublicSSO__ButtonWithMarginLeftAuto
         bsStyle="warning"
         className="btn-outline-warning"
-        disabled={false}
         onClick={[Function]}
-        style={
-          Object {
-            "marginLeft": "auto",
-          }
-        }
       >
         <i
           className="fa fa-pencil"
@@ -49,17 +32,13 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
           id="global.edit"
           values={Object {}}
         />
-      </Button>
-    </ListGroupItem>
-    <ListGroupItem
-      bsClass="list-group-item"
-      listItem={false}
-      style={
-        Object {
-          "justifyContent": "end",
-        }
-      }
-    >
+      </ListPublicSSO__ButtonWithMarginLeftAuto>
+      <Connect(ReduxForm)
+        onClose={[Function]}
+        show={false}
+      />
+    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
       <Toggle
         checked={false}
         icons={true}
@@ -70,16 +49,8 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
       >
         Facebook
       </h5>
-    </ListGroupItem>
-    <ListGroupItem
-      bsClass="list-group-item"
-      listItem={false}
-      style={
-        Object {
-          "justifyContent": "end",
-        }
-      }
-    >
+    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
       <Toggle
         checked={false}
         icons={true}
@@ -90,16 +61,8 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
       >
         Google
       </h5>
-    </ListGroupItem>
-    <ListGroupItem
-      bsClass="list-group-item"
-      listItem={false}
-      style={
-        Object {
-          "justifyContent": "end",
-        }
-      }
-    >
+    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
       <Toggle
         checked={true}
         disabled={true}
@@ -113,7 +76,7 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
           values={Object {}}
         />
       </h5>
-    </ListGroupItem>
+    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
   </ListGroup>
 </Fragment>
 `;
@@ -123,15 +86,7 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
   <ListGroup
     className=""
   >
-    <ListGroupItem
-      bsClass="list-group-item"
-      listItem={false}
-      style={
-        Object {
-          "justifyContent": "end",
-        }
-      }
-    >
+    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
       <Toggle
         checked={false}
         icons={true}
@@ -142,16 +97,8 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
       >
         Facebook
       </h5>
-    </ListGroupItem>
-    <ListGroupItem
-      bsClass="list-group-item"
-      listItem={false}
-      style={
-        Object {
-          "justifyContent": "end",
-        }
-      }
-    >
+    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
       <Toggle
         checked={false}
         icons={true}
@@ -162,16 +109,8 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
       >
         Google
       </h5>
-    </ListGroupItem>
-    <ListGroupItem
-      bsClass="list-group-item"
-      listItem={false}
-      style={
-        Object {
-          "justifyContent": "end",
-        }
-      }
-    >
+    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
+    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
       <Toggle
         checked={true}
         disabled={true}
@@ -185,7 +124,7 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
           values={Object {}}
         />
       </h5>
-    </ListGroupItem>
+    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
   </ListGroup>
 </Fragment>
 `;
