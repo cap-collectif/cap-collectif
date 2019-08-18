@@ -40,9 +40,16 @@ export class LoginSocialButtons extends React.Component<Props> {
         <SamlLoginButton features={features} prefix={prefix} />
         {ssoList.length > 0 &&
           ssoList.map(
-            ({ ssoType, name }: SSOConfiguration, index: number) =>
+            ({ ssoType, name, buttonColor, labelColor }: SSOConfiguration, index: number) =>
               ssoType === 'oauth2' && (
-                <OpenIDLoginButton text={name} key={index} features={features} prefix={prefix} />
+                <OpenIDLoginButton
+                  text={name}
+                  key={index}
+                  features={features}
+                  prefix={prefix}
+                  labelColor={labelColor}
+                  buttonColor={buttonColor}
+                />
               ),
           )}
         {!features.sso_by_pass_auth && (
