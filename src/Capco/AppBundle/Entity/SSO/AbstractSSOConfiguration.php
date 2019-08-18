@@ -30,6 +30,16 @@ abstract class AbstractSSOConfiguration
      */
     protected $profileUrl;
 
+    /**
+     * @ORM\Column(name="button_color", type="string", length=7, nullable=false)
+     */
+    protected $buttonColor = '#7498C0';
+
+    /**
+     * @ORM\Column(name="label_color", type="string", length=7, nullable=false)
+     */
+    protected $labelColor = '#FFFFFF';
+
     public function getName(): string
     {
         return $this->name;
@@ -50,6 +60,26 @@ abstract class AbstractSSOConfiguration
     public function setProfileUrl(?string $profileUrl = null): void
     {
         $this->profileUrl = $profileUrl;
+    }
+
+    public function getButtonColor(): string
+    {
+        return $this->buttonColor;
+    }
+
+    public function setButtonColor(string $buttonColor): void
+    {
+        $this->buttonColor = $buttonColor;
+    }
+
+    public function getLabelColor(): string
+    {
+        return $this->labelColor;
+    }
+
+    public function setLabelColor(string $labelColor = null): void
+    {
+        $this->labelColor = $labelColor;
     }
 
     public function getKind(): string
