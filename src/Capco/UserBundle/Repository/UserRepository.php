@@ -999,4 +999,20 @@ class UserRepository extends EntityRepository
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');
     }
+
+    public function findByRole(string $role)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('u')
+            ->from($this->_entityName, 'u')
+            ->where('u.roles LIKE :roles')
+            ->setParameter('roles', '%"'.$role.'"%');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getAllAdmin()
+    {
+        return $this->findByRole('ROLE_ADMIN');
+    }
 }

@@ -386,7 +386,7 @@ services:
       - [setTranslationDomain, [CapcoAppBundle]]
 
   Capco\AdminBundle\Admin\ContactAdmin:
-    arguments: [~, Capco\AppBundle\Entity\SiteParameter, CapcoAdminBundle:Contact]
+    arguments: [~, '', CapcoAdminBundle:Contact]
     tags:
       - { name: sonata.admin, group: admin.group.project, manager_type: orm, label: contact.title }
     calls:
@@ -436,7 +436,7 @@ services:
         Capco\AppBundle\Entity\Event,
         CapcoAdminBundle:CRUD,
         '@Capco\AppBundle\Elasticsearch\Indexer',
-        '@security.token_storage',
+        '@security.token_storage'
       ]
     tags:
       - {
@@ -675,10 +675,3 @@ services:
     class: Capco\AdminBundle\Action\RetrieveAutocompleteItemsAction
     autowire: true
     public: true
-
-  Capco\AdminBundle\Admin\UserAdmin:
-    arguments: [~, Capco\UserBundle\Entity\User, CapcoAdminBundle:User]
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: 'User', group: sonata.admin.group.user }
-    calls:
-      - [setTranslationDomain, [CapcoAppBundle]]
