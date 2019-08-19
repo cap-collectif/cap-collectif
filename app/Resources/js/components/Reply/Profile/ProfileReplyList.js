@@ -1,4 +1,4 @@
-// // @flow
+// @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import type { ProfileReplyList_replies } from '~relay/ProfileReplyList_replies.graphql';
@@ -13,7 +13,7 @@ type Props = {|
   isProfileEnabled: boolean,
 |};
 
-class ProfileReplyList extends React.Component<Props> {
+export class ProfileReplyList extends React.Component<Props> {
   render() {
     const { replies, isProfileEnabled } = this.props;
 
@@ -39,17 +39,6 @@ export default createFragmentContainer(ProfileReplyList, {
       edges {
         node {
           ...Reply_reply @arguments(isAuthenticated: $isAuthenticated)
-          responses {
-            id
-            ... on ValueResponse {
-              value
-            }
-            ... on MediaResponse {
-              medias {
-                url
-              }
-            }
-          }
         }
       }
     }

@@ -118,9 +118,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
-          "contributionsCount": 6,
+          "contributionsCount": 7,
           "contributors": Object {
-            "totalCount": 4,
+            "totalCount": 5,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
@@ -481,7 +481,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
-          "contributionsCount": 6,
+          "contributionsCount": 7,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
           "publishedAt": "2014-12-24 00:00:00",
           "title": "Projet avec questionnaire",
@@ -612,7 +612,7 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
-          "contributionsCount": 6,
+          "contributionsCount": 7,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
           "publishedAt": "2014-12-24 00:00:00",
           "title": "Projet avec questionnaire",
@@ -863,9 +863,9 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
-          "contributionsCount": 6,
+          "contributionsCount": 7,
           "contributors": Object {
-            "totalCount": 4,
+            "totalCount": 5,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",

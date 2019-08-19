@@ -93,14 +93,13 @@ export default createFragmentContainer(container, {
       questionnaire {
         title
         step {
-          id
           url
         }
       }
       author {
         id
-        username
         url
+        username
       }
     }
   `,

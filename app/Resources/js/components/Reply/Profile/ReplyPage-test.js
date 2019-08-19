@@ -1,28 +1,26 @@
+// @flow
+/* eslint-env jest */
 import React from 'react';
-import { shallow } from 'enzyme/build';
-import { $refType } from '../../../mocks';
-import { Reply } from './Reply';
+import { shallow } from 'enzyme';
+import { ReplyPage } from './ReplyPage';
 
-describe('<Reply />', () => {
-  const reply = {
-    $refType,
-    author: {
-      id: 'author1',
-      displayName: 'author1',
-      url: 'https://capco/dev/profile/author1',
-    },
-    createdAt: '2019-03-08 00:00:00',
-    questionnaire: {
-      title: 'Titre du questionnaire',
-      step: {
-        url: '/project/projet-avec-questionnaire/questionnaire/questionnaire-des-jo-2024',
-      },
-    },
-    id: 'reply1',
-  };
+describe('<ReplyPage />', () => {
+  const userId = 'VXNlcjp1c2VyNQo=';
 
   it('should render correctly', () => {
-    const wrapper = shallow(<Reply reply={reply} />);
+    const wrapper = shallow(<ReplyPage isAuthenticated isProfileEnabled userId={userId} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with profile not enabled', () => {
+    const wrapper = shallow(<ReplyPage isAuthenticated isProfileEnabled={false} userId={userId} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with profile not enabled and not authenticated', () => {
+    const wrapper = shallow(
+      <ReplyPage isAuthenticated={false} isProfileEnabled={false} userId={userId} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

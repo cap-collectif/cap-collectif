@@ -56,7 +56,7 @@ const mapStateToProps = (state: State) => ({
   isAuthenticated: !!state.user.user,
 });
 
-class ReplyPage extends React.Component<Props> {
+export class ReplyPage extends React.Component<Props> {
   render() {
     const { isAuthenticated } = this.props;
     return (
