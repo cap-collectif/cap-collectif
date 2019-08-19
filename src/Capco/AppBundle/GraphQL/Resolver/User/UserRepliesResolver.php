@@ -25,7 +25,7 @@ class UserRepliesResolver implements ResolverInterface
      * This resolve replace legacy MySQL field.
      * We still need to add some dataloader and caching later.
      */
-    public function __invoke($viewer, User $user, ?Argument $args = null): Connection
+    public function __invoke($viewer, $user, ?Argument $args = null): Connection
     {
         if (!$args) {
             $args = new Argument(['first' => 0]);

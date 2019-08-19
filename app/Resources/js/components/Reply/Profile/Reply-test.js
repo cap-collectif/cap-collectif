@@ -2,14 +2,14 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { $refType } from '../../../mocks';
+import { $refType, $fragmentRefs } from '../../../mocks';
 import { Reply } from './Reply';
 
 describe('<Reply />', () => {
   const replyWithStep = {
     $refType,
     author: {
-      id: 'author1',
+      $fragmentRefs,
       username: 'author1',
       url: 'https://capco/dev/profile/author1',
     },
@@ -26,7 +26,7 @@ describe('<Reply />', () => {
   const replyWithoutStep = {
     $refType,
     author: {
-      id: 'author1',
+      $fragmentRefs,
       username: 'author1',
       url: 'https://capco/dev/profile/author1',
     },
@@ -39,7 +39,7 @@ describe('<Reply />', () => {
   };
 
   it('should render correctly with profile not enabled but step', () => {
-    const wrapper = shallow(<Reply reply={replyWithStep} isProfileEnabled={false} />);
+    const wrapper = shallow(<Reply reply={replyWithStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 

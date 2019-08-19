@@ -7,7 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import type { Reply_reply } from '~relay/Reply_reply.graphql';
 import type { State } from '../../../types';
-import { UserAvatarDeprecated } from '../../User/UserAvatarDeprecated';
+import { UserAvatar } from '../../User/UserAvatar';
 
 type ReduxProps = {|
   +isProfileEnabled: boolean,
@@ -23,18 +23,20 @@ export class Reply extends React.Component<Props> {
     isProfileEnabled: false,
   };
 
-  renderProfile(reply: Reply_reply) {
-    if (this.props.isProfileEnabled) {
-      return <a href={reply.author.url}>{reply.author.username}</a>;
+  renderProfile({ author }: Reply_reply) {
+    const { isProfileEnabled } = this.props;
+
+    if (isProfileEnabled) {
+      return <a href={author.url}>{author.username}</a>;
     }
-    return <span>{reply.author.username}</span>;
+    return <span>{author.username}</span>;
   }
 
-  renderTitle(reply: Reply_reply) {
-    if (reply.questionnaire.step) {
-      return <a href={reply.questionnaire.step.url}>{reply.questionnaire.title}</a>;
+  renderTitle({ questionnaire }: Reply_reply) {
+    if (questionnaire.step) {
+      return <a href={questionnaire.step.url}>{questionnaire.title}</a>;
     }
-    return <span>{reply.questionnaire.title}</span>;
+    return <span>{questionnaire.title}</span>;
   }
 
   render() {
@@ -45,8 +47,8 @@ export class Reply extends React.Component<Props> {
         id={`reply-${reply.id}`}>
         <Media>
           <Media.Left>
-            {/* $FlowFixMe Will be a fragment soon */}
-            <UserAvatarDeprecated user={reply.author} />
+            {/* $FlowFixMe $refType */}
+            <UserAvatar user={reply.author} />
           </Media.Left>
 
           <Media.Body className="opinion__body">
@@ -97,9 +99,9 @@ export default createFragmentContainer(container, {
         }
       }
       author {
-        id
-        url
+        ...UserAvatar_user
         username
+        url
       }
     }
   `,

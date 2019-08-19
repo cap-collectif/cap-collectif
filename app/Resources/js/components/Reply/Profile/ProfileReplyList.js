@@ -14,6 +14,10 @@ type Props = {|
 |};
 
 export class ProfileReplyList extends React.Component<Props> {
+  static defaultProps = {
+    isProfileEnabled: false,
+  };
+
   render() {
     const { replies, isProfileEnabled } = this.props;
 

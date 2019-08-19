@@ -7,7 +7,7 @@ import { ProfileReplyList } from './ProfileReplyList';
 
 describe('<ProfileReplyList />', () => {
   const replies = {
-    $refType,
+    ...$refType,
     edges: [
       {
         node: {
@@ -23,7 +23,7 @@ describe('<ProfileReplyList />', () => {
   });
 
   it('should render correctly with profile not enabled', () => {
-    const wrapper = shallow(<ProfileReplyList replies={replies} isProfileEnabled={false} />);
+    const wrapper = shallow(<ProfileReplyList replies={replies} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
