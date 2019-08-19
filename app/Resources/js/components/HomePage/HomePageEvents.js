@@ -25,11 +25,19 @@ const EventContainer = styled.div`
   padding-top: 20px;
   width: 100%;
   display: grid;
-  grid-template-columns: 47% 47%;
-  grid-gap: 6%;
+  grid-template-columns: 50% 50%;
   grid-auto-rows: auto;
   grid-auto-columns: 1fr;
   margin-bottom: 30px;
+
+  >div{
+    width: 97%;
+    margin-bottom: 5%;
+  }
+  >div:nth-of-type(2n){
+    margin-left: 2%;
+  }
+
 
   >div>div{
     margin-bottom: 0;
