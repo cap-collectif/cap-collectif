@@ -60,6 +60,7 @@ export type FeatureToggles = {
   display_map: ?boolean,
   sso_by_pass_auth: ?boolean,
   list_sso: ?boolean,
+  allow_users_to_propose_events: ?boolean,
 };
 export type FeatureToggle =
   | 'blog'
@@ -95,7 +96,8 @@ export type FeatureToggle =
   | 'consultation_plan'
   | 'display_map'
   | 'sso_by_pass_auth'
-  | 'list_sso';
+  | 'list_sso'
+  | 'allow_users_to_propose_events';
 
 export type Action =
   | ProposalAction

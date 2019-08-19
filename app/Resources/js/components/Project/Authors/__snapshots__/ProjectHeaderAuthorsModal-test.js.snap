@@ -64,6 +64,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
           <ForwardRef(Relay(Connect(UserAvatar)))
             features={
               Object {
+                "allow_users_to_propose_events": false,
                 "blog": false,
                 "calendar": false,
                 "captcha": false,

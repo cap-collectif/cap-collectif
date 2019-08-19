@@ -5,6 +5,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   <FacebookLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -48,6 +49,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   <GoogleLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -91,6 +93,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   <SamlLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -150,6 +153,7 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
   <FacebookLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -193,6 +197,7 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
   <GoogleLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -236,6 +241,7 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
   <SamlLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -293,6 +299,7 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
   <FacebookLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -336,6 +343,7 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
   <GoogleLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -379,6 +387,7 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
   <SamlLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -436,6 +445,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
   <FacebookLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -479,6 +489,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
   <GoogleLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -522,6 +533,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
   <SamlLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -564,6 +576,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
   <OpenIDLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -623,6 +636,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
   <FacebookLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -666,6 +680,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
   <GoogleLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -709,6 +724,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
   <SamlLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -766,6 +782,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
   <FacebookLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -809,6 +826,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
   <GoogleLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -852,6 +870,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
   <SamlLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
@@ -894,6 +913,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
   <OpenIDLoginButton
     features={
       Object {
+        "allow_users_to_propose_events": false,
         "blog": false,
         "calendar": false,
         "captcha": false,
