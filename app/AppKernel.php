@@ -105,10 +105,6 @@ class AppKernel extends Kernel
             $bundles[] = new Webfactory\IcuTranslationBundle\WebfactoryIcuTranslationBundle();
         }
 
-        if ('prod' === $this->getEnvironment()) {
-            $bundles[] = new Sentry\SentryBundle\SentryBundle();
-        }
-
         return $bundles;
     }
 

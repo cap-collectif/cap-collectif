@@ -4873,7 +4873,10 @@ type Query {
   # Get the contact forms
   contactForms: [ContactForm!]
   projectAuthors: [User!]!
-  projectTypes: [ProjectType!]!
+  projectTypes(
+    # If true, filter the projectTypes only used by the projects
+    onlyUsedByProjects: Boolean = false
+  ): [ProjectType!]!
   userSearch(
     # Filter by displayName.
     displayName: String = null

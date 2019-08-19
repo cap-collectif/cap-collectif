@@ -88,7 +88,8 @@ class SettingsController extends Controller
             'pages.events' === $category &&
             !$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')
         ) {
-            unset($toggles['allow_users_to_propose_events']);
+            // key of SiteParameterEventAllowUsersToProposeEvent
+            unset($parameters[2]);
         }
 
         return [

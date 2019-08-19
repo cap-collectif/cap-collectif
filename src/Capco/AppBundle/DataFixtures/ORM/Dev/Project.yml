@@ -190,7 +190,7 @@ Capco\AppBundle\Entity\Project:
   p19:
     id: 'ProjectAccessibleForMeOnlyByAdmin'
     title: Project pour la création de la capCoBeer (visible par admin seulement)
-    projectType: '@projectType4'
+    projectType: '@projectType8'
     themes: ['@theme3']
     exportable: true
     createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 19 days"))>
@@ -236,7 +236,6 @@ Capco\AppBundle\Entity\Project:
   p23:
     id: 'externalProjectWithoutCounter'
     title: Projet externe sans compteur
-    projectType: '@projectType4'
     themes: []
     exportable: true
     createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>

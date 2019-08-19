@@ -37,15 +37,15 @@ export default class ProjectsListFilterTypesContainer extends React.Component<Pr
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query ProjectListFilterTypesContainerQuery {
-            projectTypes {
+          query ProjectListFilterTypesContainerQuery($onlyUsedByProjects: Boolean!) {
+            projectTypes(onlyUsedByProjects: $onlyUsedByProjects) {
               id
               title
               slug
             }
           }
         `}
-        variables={{}}
+        variables={{ onlyUsedByProjects: true }}
         render={this.renderProjectsListFilterTypes}
       />
     );
