@@ -156,16 +156,37 @@ Scenario: GraphQL client want to get the list of contributors of a questionnaire
     "data": {
       "questionnaireStep": {
         "contributors": {
-          "totalCount": 4,
+          "totalCount": 5,
           "pageInfo": {
             "hasNextPage": false,
-            "endCursor": "YXJyYXljb25uZWN0aW9uOjM="
+            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
           },
           "edges": [
-            {"node":{"_id":"user515"}},
-            {"node":{"_id":"user_not_confirmed"}},
-            {"node":{"_id":"user502"}},
-            {"node":{"_id":"userAdmin"}}
+            {
+              "node": {
+                "_id": "user515"
+              }
+            },
+            {
+              "node": {
+                "_id": "user_not_confirmed"
+              }
+            },
+            {
+              "node": {
+                "_id": "user502"
+              }
+            },
+            {
+              "node": {
+                "_id": "user5"
+              }
+            },
+            {
+              "node": {
+                "_id": "userAdmin"
+              }
+            }
           ]
         }
       }
