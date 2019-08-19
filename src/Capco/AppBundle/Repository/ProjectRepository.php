@@ -276,24 +276,6 @@ class ProjectRepository extends EntityRepository
         return $qb;
     }
 
-    public function getDistinctProjectTypesUsedByProjects($viewer = null): array
-    {
-        $projects = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
-            ->getQuery()
-            ->getResult();
-
-        return $this->createQueryBuilder('p')
-            ->select('DISTINCT(p.projectType) as id')
-            ->addSelect('pt.title, pt.slug, pt.color')
-            ->leftJoin('p.projectType', 'pt')
-            ->where('p IN (:projects)')
-            ->setParameter('projects', $projects)
-            ->getQuery()
-            ->useQueryCache(true)
-            ->useResultCache(true, 60)
-            ->getArrayResult();
-    }
-
     private function getUserProjectPublicQueryBuilder(User $user): QueryBuilder
     {
         return $this->getProjectsViewerCanSeeQueryBuilder($user)

@@ -47,8 +47,8 @@ type State = {|
 |};
 
 const getAvailableProjectResources = graphql`
-  query ProjectListFiltersContainerQuery($onlyUsedByProjects: Boolean!) {
-    projectTypes(onlyUsedByProjects: $onlyUsedByProjects) {
+  query ProjectListFiltersContainerQuery {
+    projectTypes {
       id
       title
       slug
@@ -73,7 +73,7 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
   state = { projectTypes: [], projectAuthors: [], projectDistricts: { totalCount: 0, edges: [] } };
 
   componentDidMount() {
-    fetchQuery(environment, getAvailableProjectResources, { onlyUsedByProjects: true }).then(
+    fetchQuery(environment, getAvailableProjectResources, {}).then(
       ({
         projectTypes,
         projectAuthors,
@@ -96,12 +96,7 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
   renderFilters() {
     const { projectTypes, projectAuthors, projectDistricts } = this.state;
     const { intl, themes } = this.props;
-    if (
-      projectTypes.length > 0 ||
-      projectAuthors.length > 0 ||
-      themes.length > 0 ||
-      projectDistricts.totalCount > 0
-    ) {
+    if (projectTypes.length > 0 || projectAuthors.length > 0 || themes.length > 0 || projectDistricts.totalCount  > 0) {
       return (
         <Col md={7} className={config.isMobile ? 'mt-10 mb-5' : ''}>
           <FiltersContainer

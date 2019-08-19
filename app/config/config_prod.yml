@@ -5,6 +5,17 @@ framework:
   validation:
     cache: validator.mapping.cache.doctrine.apc
 
+sentry:
+  dsn: '%sentry_dsn%'
+  options:
+    environment: '%kernel.environment%'
+    name: '%router.request_context.host%'
+    release: '%env(APP_VERSION)%'
+    excluded_exceptions:
+      # This spam too much:
+      - Symfony\Component\Security\Core\Exception\AccessDeniedException
+      # - Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+
 doctrine:
   orm:
     metadata_cache_driver: apcu
@@ -27,46 +38,36 @@ monolog:
       type: console
       bubble: false
     # Sentry configuration
-    sentry:
+    sentry_fingers_crossed:
       type: fingers_crossed
-      action_level: error
       handler: sentry_buffer
+      action_level: error
       excluded_404s:
         - ^/
-      buffer_size: 100 # Prevents memory leaks for workers
-      channels: ['!event', '!security']
     sentry_buffer:
       type: buffer
-      handler: sentry_handler
-    sentry_handler:
+      handler: sentry
+    sentry:
+      type: raven
+      level: error
+      client_id: Raven_Client
+    sentry_breadcrumbs:
       type: service
-      id: 'BGalati\MonologSentryHandler\SentryHandler'
+      id: Raven_Breadcrumbs_MonologHandler
 
 swiftmailer:
   default_mailer: mandrill
 
 services:
-  BGalati\MonologSentryHandler\SentryHandler:
-    autowire: true
-    autoconfigure: true
-
-  Sentry\State\HubInterface:
-    factory: ['Capco\AppBundle\Sentry\SentryFactory', 'create']
+  Raven_Client:
+    class: Raven_Client
     arguments:
-      $dsn: '%sentry_dsn%'
-      $environment: '%kernel.environment%'
-      $release: '%env(APP_VERSION)%'
-      $projectRoot: '%kernel.project_dir%'
-      $cacheDir: '%kernel.cache_dir%'
-
-  Monolog\Processor\PsrLogMessageProcessor:
-    tags: [monolog.processor]
-
-  Capco\AppBundle\Sentry\SentryListener:
-    autoconfigure: true
-    autowire: true
-    tags:
-      - { name: kernel.event_listener, event: kernel.request }
-      - { name: kernel.event_listener, event: kernel.controller }
-      - { name: kernel.event_listener, event: kernel.terminate }
-      - { name: kernel.event_listener, event: console.command }
+      - '%sentry_dsn%'
+      - auto_log_stacks: true
+        install_default_breadcrumb_handlers: false
+        install_shutdown_handler: false
+        release: '%env(APP_VERSION)%'
+  Raven_Breadcrumbs_MonologHandler:
+    class: Raven_Breadcrumbs_MonologHandler
+    arguments:
+      - '@Raven_Client'
