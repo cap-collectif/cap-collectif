@@ -2509,6 +2509,12 @@ input InternalCreateOauth2SSOConfigurationInput {
 
   # The name of your SSO provider.
   name: String!
+
+  # Color in hexadecimal of SSO button.
+  buttonColor: Color!
+
+  # Color in hexadecimal of label SSO button.
+  labelColor: Color!
   clientMutationId: String
 }
 
@@ -2587,6 +2593,12 @@ input InternalUpdateOauth2SSOConfigurationInput {
 
   # The name of your SSO provider.
   name: String!
+
+  # Color in hexadecimal of SSO button.
+  buttonColor: Color!
+
+  # Color in hexadecimal of label SSO button.
+  labelColor: Color!
 
   # The ID of oauth2 configuration that needs to be updated.
   id: ID!
@@ -3161,6 +3173,12 @@ type Oauth2SSOConfiguration implements Node & SSOConfiguration {
 
   # Profile URL on the SSO side.
   profileUrl: URI
+
+  # Color in hexadecimal of SSO button.
+  buttonColor: Color!
+
+  # Color in hexadecimal of label SSO button.
+  labelColor: Color!
 
   # Client ID.
   clientId: String!
@@ -5739,6 +5757,12 @@ interface SSOConfiguration {
 
   # Profile URL on the SSO side.
   profileUrl: URI
+
+  # Color in hexadecimal of SSO button.
+  buttonColor: Color!
+
+  # Color in hexadecimal of label SSO button.
+  labelColor: Color!
 }
 
 # A section

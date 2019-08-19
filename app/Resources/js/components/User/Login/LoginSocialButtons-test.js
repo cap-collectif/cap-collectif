@@ -6,7 +6,14 @@ import { LoginSocialButtons } from './LoginSocialButtons';
 import { features } from '../../../redux/modules/default';
 
 describe('<LoginSocialButtons />', () => {
-  const ssoList = [{ name: 'Cap Collectif Oauth2 Provider', ssoType: 'oauth2' }];
+  const ssoList = [
+    {
+      name: 'Cap Collectif Oauth2 Provider',
+      ssoType: 'oauth2',
+      labelColor: '#FFFFFF',
+      buttonColor: '#ABABAB',
+    },
+  ];
 
   const props = {
     features,
