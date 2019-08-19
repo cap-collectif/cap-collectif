@@ -24,6 +24,8 @@ const mutation = graphql`
         userInfoUrl
         logoutUrl
         profileUrl
+        buttonColor
+        labelColor
       }
     }
   }
