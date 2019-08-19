@@ -48,10 +48,13 @@
     "flow-coverage-report": {
         "threshold": 70,
         "outputDir": "coverage/flow/",
+        "flowCommandPath": "node_modules/.bin/flow",
+        "concurrentFiles": 5,
         "globExcludePatterns": [
             "app/Resources/js/components/Synthesis/**/*.js",
             "app/Resources/js/__generated__/**/*.js",
-            "app/Resources/js/stories/**/*.js"
+            "app/Resources/js/stories/**/*.js",
+            "node_modules/**"
         ],
         "globIncludePatterns": [
             "app/Resources/js/**/*.js"
