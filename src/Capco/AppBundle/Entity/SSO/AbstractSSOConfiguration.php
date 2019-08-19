@@ -57,9 +57,11 @@ abstract class AbstractSSOConfiguration
         return $this->profileUrl;
     }
 
-    public function setProfileUrl(?string $profileUrl = null): void
+    public function setProfileUrl(?string $profileUrl = null): self
     {
         $this->profileUrl = $profileUrl;
+
+        return $this;
     }
 
     public function getButtonColor(): string
@@ -67,9 +69,11 @@ abstract class AbstractSSOConfiguration
         return $this->buttonColor;
     }
 
-    public function setButtonColor(string $buttonColor): void
+    public function setButtonColor(string $buttonColor): self
     {
         $this->buttonColor = $buttonColor;
+
+        return $this;
     }
 
     public function getLabelColor(): string
