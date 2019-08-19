@@ -11,12 +11,15 @@ class FeaturesCategoryResolver
     protected static $categories = [
         'pages.homepage' => ['conditions' => [], 'features' => []],
         'pages.blog' => ['conditions' => ['blog'], 'features' => []],
-        'pages.events' => ['conditions' => ['calendar'], 'features' => []],
+        'pages.events' => [
+            'conditions' => ['calendar'],
+            'features' => ['allow_users_to_propose_events']
+        ],
         'pages.themes' => ['conditions' => ['themes'], 'features' => []],
         'pages.projects' => ['conditions' => [], 'features' => ['projects_form', 'project_trash']],
         'pages.registration' => [
             'conditions' => [],
-            'features' => ['user_type', 'zipcode_at_register'],
+            'features' => ['user_type', 'zipcode_at_register']
         ],
         'pages.members' => ['conditions' => ['members_list'], 'features' => []],
         'pages.login' => ['conditions' => [], 'features' => []],
@@ -44,11 +47,11 @@ class FeaturesCategoryResolver
                 'reporting',
                 'newsletter',
                 'share_buttons',
-                'search',
-            ],
+                'search'
+            ]
         ],
         'settings.notifications' => ['conditions' => [], 'features' => []],
-        'settings.appearance' => ['conditions' => [], 'features' => []],
+        'settings.appearance' => ['conditions' => [], 'features' => []]
     ];
 
     protected $manager;
