@@ -24,23 +24,26 @@ type Props = {|
 export class LoginSocialButtons extends React.Component<Props> {
   render() {
     const { features, ssoList, prefix } = this.props;
+
     if (
       !features.login_facebook &&
       !features.login_gplus &&
       !features.login_saml &&
-      !features.login_openid
+      (!features.login_openid || !ssoList.length)
     ) {
       return null;
     }
 
     /* @TODO: Add more Login button in mapping when it will be configurable. */
     return (
-      <div>
-        <span className="font-weight-semi-bold">
+      <>
+        <div className="font-weight-semi-bold">
           <FormattedMessage id="authenticate-with" />
-        </span>
+        </div>
         <SamlLoginButton features={features} prefix={prefix} />
-        {ssoList.length > 0 &&
+        {ssoList.length > 0 && (
+            <FormattedMessage id="authenticate-with" className="font-weight-semi-bold" />
+          ) &&
           ssoList.map(
             ({ ssoType, name, buttonColor, labelColor }: SSOConfiguration, index: number) =>
               ssoType === 'oauth2' && (
@@ -58,10 +61,10 @@ export class LoginSocialButtons extends React.Component<Props> {
         <GoogleLoginButton features={features} prefix={prefix} />
         {!features.sso_by_pass_auth && (
           <p className="p--centered">
-            <span>{<FormattedMessage id="login.or" />}</span>
+            <FormattedMessage id="login.or" />
           </p>
         )}
-      </div>
+      </>
     );
   }
 }

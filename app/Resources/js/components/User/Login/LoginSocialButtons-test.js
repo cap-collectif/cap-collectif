@@ -17,8 +17,9 @@ describe('<LoginSocialButtons />', () => {
 
   const props = {
     features,
-    ssoList,
+    ssoList: [],
   };
+
   const propsWithFeatureLoginGoogleActivated = {
     features: {
       ...features,
@@ -58,7 +59,7 @@ describe('<LoginSocialButtons />', () => {
     ssoList: [],
   };
 
-  const propsWithAllLoginFeaturesLoginActivatedAndORSperatorDisabled = {
+  const propsWithAllLoginFeaturesLoginActivatedAndORSeparatorDisabled = {
     features: {
       ...features,
       login_gplus: true,
@@ -102,7 +103,7 @@ describe('<LoginSocialButtons />', () => {
 
   it('renders without OR separator', () => {
     const wrapper = shallow(
-      <LoginSocialButtons {...propsWithAllLoginFeaturesLoginActivatedAndORSperatorDisabled} />,
+      <LoginSocialButtons {...propsWithAllLoginFeaturesLoginActivatedAndORSeparatorDisabled} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

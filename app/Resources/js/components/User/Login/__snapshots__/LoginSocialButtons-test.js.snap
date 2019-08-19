@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginSocialButtons /> renders all buttons 1`] = `
-<div>
-  <span
+<Fragment>
+  <div
     className="font-weight-semi-bold"
   >
     <FormattedMessage
       id="authenticate-with"
       values={Object {}}
     />
-  </span>
+  </div>
   <SamlLoginButton
     features={
       Object {
@@ -142,28 +142,26 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   <p
     className="p--centered"
   >
-    <span>
-      <FormattedMessage
-        id="login.or"
-        values={Object {}}
-      />
-    </span>
+    <FormattedMessage
+      id="login.or"
+      values={Object {}}
+    />
   </p>
-</div>
+</Fragment>
 `;
 
 exports[`<LoginSocialButtons /> renders nothing 1`] = `""`;
 
 exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
-<div>
-  <span
+<Fragment>
+  <div
     className="font-weight-semi-bold"
   >
     <FormattedMessage
       id="authenticate-with"
       values={Object {}}
     />
-  </span>
+  </div>
   <SamlLoginButton
     features={
       Object {
@@ -296,26 +294,24 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
   <p
     className="p--centered"
   >
-    <span>
-      <FormattedMessage
-        id="login.or"
-        values={Object {}}
-      />
-    </span>
+    <FormattedMessage
+      id="login.or"
+      values={Object {}}
+    />
   </p>
-</div>
+</Fragment>
 `;
 
 exports[`<LoginSocialButtons /> renders only Google button 1`] = `
-<div>
-  <span
+<Fragment>
+  <div
     className="font-weight-semi-bold"
   >
     <FormattedMessage
       id="authenticate-with"
       values={Object {}}
     />
-  </span>
+  </div>
   <SamlLoginButton
     features={
       Object {
@@ -448,26 +444,24 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
   <p
     className="p--centered"
   >
-    <span>
-      <FormattedMessage
-        id="login.or"
-        values={Object {}}
-      />
-    </span>
+    <FormattedMessage
+      id="login.or"
+      values={Object {}}
+    />
   </p>
-</div>
+</Fragment>
 `;
 
 exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
-<div>
-  <span
+<Fragment>
+  <div
     className="font-weight-semi-bold"
   >
     <FormattedMessage
       id="authenticate-with"
       values={Object {}}
     />
-  </span>
+  </div>
   <SamlLoginButton
     features={
       Object {
@@ -647,26 +641,24 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
   <p
     className="p--centered"
   >
-    <span>
-      <FormattedMessage
-        id="login.or"
-        values={Object {}}
-      />
-    </span>
+    <FormattedMessage
+      id="login.or"
+      values={Object {}}
+    />
   </p>
-</div>
+</Fragment>
 `;
 
 exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
-<div>
-  <span
+<Fragment>
+  <div
     className="font-weight-semi-bold"
   >
     <FormattedMessage
       id="authenticate-with"
       values={Object {}}
     />
-  </span>
+  </div>
   <SamlLoginButton
     features={
       Object {
@@ -799,26 +791,24 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
   <p
     className="p--centered"
   >
-    <span>
-      <FormattedMessage
-        id="login.or"
-        values={Object {}}
-      />
-    </span>
+    <FormattedMessage
+      id="login.or"
+      values={Object {}}
+    />
   </p>
-</div>
+</Fragment>
 `;
 
 exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
-<div>
-  <span
+<Fragment>
+  <div
     className="font-weight-semi-bold"
   >
     <FormattedMessage
       id="authenticate-with"
       values={Object {}}
     />
-  </span>
+  </div>
   <SamlLoginButton
     features={
       Object {
@@ -995,5 +985,5 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
       }
     }
   />
-</div>
+</Fragment>
 `;
