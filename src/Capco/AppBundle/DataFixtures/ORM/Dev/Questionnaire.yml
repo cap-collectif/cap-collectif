@@ -81,3 +81,10 @@ Capco\AppBundle\Entity\Questionnaire:
     anonymousAllowed: true
     acknowledgeReplies: true
     privateResult: true
+  questionnaireAdmin:
+    id: questionnaireAdmin
+    title: Questionnaire pour admin
+    description: Merci Jpec
+    step: '@questionnairestep4'
+    multipleRepliesAllowed: true
+    privateResult: true

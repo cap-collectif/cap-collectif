@@ -405,11 +405,7 @@ class SourceRepository extends EntityRepository
 
             $visibility = [];
             $visibility[] = ProjectVisibilityMode::VISIBILITY_PUBLIC;
-            if ($viewer->isSuperAdmin()) {
-                $visibility[] = ProjectVisibilityMode::VISIBILITY_ME;
-                $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
-                $visibility[] = ProjectVisibilityMode::VISIBILITY_CUSTOM;
-            } elseif ($viewer->isAdmin()) {
+            if ($viewer->isAdmin()) {
                 $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
             }
 

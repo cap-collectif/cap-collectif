@@ -93,7 +93,8 @@
         </section>
     {% endif %}
 
-    {% if replies|length > 0 %}
+    {% set repliesCount = userRepliesResolver.__invoke(app.user, user).totalCount %}
+    {% if repliesCount > 0 %}
         <section class="section--custom">
             <div class="container">
                 <h2>{{ 'user.profile.show.replies' | trans({}, 'CapcoAppBundle') }}</h2>

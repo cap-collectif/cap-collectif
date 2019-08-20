@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
@@ -63,11 +64,12 @@ class ReplyRepository extends EntityRepository
         int $limit,
         int $offset
     ): array {
-        $qb = $this->getPublicPublishedNonDraftByAuthorQueryBuilder($user);
+        $qb = $this->getPublishedNonDraftByAuthorQueryBuilder($user);
+        $qb = $this->setPublicityConstraints($viewer, $qb);
 
         if (
             null === $viewer ||
-            (null !== $viewer && ($viewer->getId() != $user->getId() && !$viewer->isAdmin()))
+            (null !== $viewer && ($viewer->getId() !== $user->getId() && !$viewer->isAdmin()))
         ) {
             $qb = $qb->andWhere('reply.private = false');
         }
@@ -79,11 +81,14 @@ class ReplyRepository extends EntityRepository
 
     public function countRepliesByAuthorViewerCanSee(?User $viewer, User $user)
     {
-        $qb = $this->getPublicPublishedNonDraftByAuthorQueryBuilder($user);
+        $qb = $this->getPublishedNonDraftByAuthorQueryBuilder($user);
         $qb = $qb->select('COUNT(reply)');
+
+        $qb = $this->setPublicityConstraints($viewer, $qb);
+
         if (
             null === $viewer ||
-            (null !== $viewer && ($viewer->getId() != $user->getId() && !$viewer->isAdmin()))
+            (null !== $viewer && ($viewer->getId() !== $user->getId() && !$viewer->isAdmin()))
         ) {
             $qb = $qb->andWhere('reply.private = false');
         }
@@ -232,6 +237,36 @@ class ReplyRepository extends EntityRepository
     protected function getPublishedQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('reply')->andWhere('reply.published = true');
+    }
+
+    private function getPublishedNonDraftByAuthorQueryBuilder(User $author): QueryBuilder
+    {
+        return $this->createQueryBuilder('reply')
+            ->leftJoin('reply.questionnaire', 'questionnaire')
+            ->leftJoin('questionnaire.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'abstractstep')
+            ->leftJoin('abstractstep.project', 'pro')
+            ->leftJoin('pro.restrictedViewerGroups', 'prvg')
+            ->leftJoin('pro.authors', 'pr_au')
+
+            ->andWhere('reply.published = true')
+            ->andWhere('reply.author = :author')
+            ->andWhere('reply.draft = false')
+            ->setParameter('author', $author);
+    }
+
+    private function setPublicityConstraints(?User $viewer, QueryBuilder $qb): QueryBuilder
+    {
+        if (null !== $viewer) {
+            $qb = $this->getContributionsViewerCanSee($qb, $viewer);
+            $qb->setParameter(':viewer', $viewer);
+        } else {
+            $qb->andWhere(
+                $qb->expr()->eq('pro.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+            );
+        }
+
+        return $qb;
     }
 
     private function getPublicPublishedNonDraftByAuthorQueryBuilder(User $author): QueryBuilder
