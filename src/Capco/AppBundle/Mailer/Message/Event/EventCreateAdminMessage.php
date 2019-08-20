@@ -1,8 +1,9 @@
 <?php
 
-namespace Capco\AppBundle\Mailer\Message;
+namespace Capco\AppBundle\Mailer\Message\Event;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Mailer\Message\AdminMessage;
 
 final class EventCreateAdminMessage extends AdminMessage
 {
@@ -18,40 +19,24 @@ final class EventCreateAdminMessage extends AdminMessage
             'event-needing-examination',
             static::getMySubjectVars($event->getTitle()),
             '@CapcoMail/notifyAdminOfNewEvent.html.twig',
-            static::getMyTemplateVars(
-                $event->getAuthor()->getUsername(),
-                $event->getCreatedAt()->format('d/m/Y'),
-                $event->getCreatedAt()->format('H:i:s'),
-                $event->getBodyTextExcerpt(),
-                $eventAdminUrl
-            )
+            static::getMyTemplateVars($event, $eventAdminUrl)
         );
 
         return $message;
     }
 
-    private static function getMyTemplateVars(
-        string $authorName,
-        string $date,
-        string $time,
-        string $event,
-        string $eventAdminUrl,
-        string $eventTitle
-    ): array {
+    private static function getMyTemplateVars(Event $event, string $eventAdminUrl): array
+    {
         return [
-            '%username%' => self::escape($authorName),
-            '%eventTitle%' => self::escape($eventTitle),
-            '%date%' => $date,
-            '%time%' => $time,
-            '%event%' => self::escape($event),
-            'eventAdminUrl' => $eventAdminUrl,
+            'eventTitle' => self::escape($event->getTitle()),
+            'eventAdminUrl' => $eventAdminUrl
         ];
     }
 
     private static function getMySubjectVars(string $eventTitle): array
     {
         return [
-            '{eventTitle}' => self::escape($eventTitle),
+            '{eventTitle}' => self::escape($eventTitle)
         ];
     }
 }
