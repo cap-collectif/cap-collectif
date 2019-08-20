@@ -26,8 +26,8 @@ type FormValues = {|
   logoutUrl: ?Uri,
   redirectUri: Uri,
   profileUrl: ?Uri,
-  buttonColor: string,
-  labelColor: string,
+  buttonColor: ?string,
+  labelColor: ?string,
 |};
 
 type Props = {|
@@ -175,6 +175,8 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
     userInfoUrl: null,
     accessTokenUrl: null,
     authorizationUrl: null,
+    labelColor: null,
+    buttonColor: null,
   };
 
   render() {
@@ -324,6 +326,8 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
 const mapStateToProps = (state: GlobalState, props: Props) => ({
   initialValues: {
     ...props,
+    buttonColor: props.buttonColor || '#7498C0',
+    labelColor: props.labelColor || '#FFFFFF',
   },
 });
 
