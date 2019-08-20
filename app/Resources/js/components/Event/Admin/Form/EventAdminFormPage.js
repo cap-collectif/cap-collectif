@@ -37,7 +37,6 @@ type Props = {|
   submitFailed: boolean,
   invalid: boolean,
   dispatch: Dispatch,
-  isSuperAdmin: boolean,
 |};
 
 type FormValues = {|
@@ -220,7 +219,6 @@ export class EventAdminFormPage extends React.Component<Props, State> {
       dispatch,
       event,
       query,
-      isSuperAdmin,
     } = this.props;
     const { showDeleteModal } = this.state;
 
@@ -243,14 +241,14 @@ export class EventAdminFormPage extends React.Component<Props, State> {
           <ButtonToolbar className="box-content__toolbar">
             <SubmitButton
               id={event ? 'confirm-event-edit' : 'confirm-event-create'}
-              label={event ? 'action_edit' : 'global.add'}
+              label="global.save"
               isSubmitting={submitting}
               disabled={pristine || invalid || submitting}
               onSubmit={() => {
                 dispatch(submit(formName));
               }}
             />
-            {event && (event.viewerDidAuthor || isSuperAdmin) && (
+            {event && (event.viewerDidAuthor || query.viewer.isSuperAdmin) && (
               <div>
                 <DeleteModal
                   closeDeleteModal={this.cancelCloseDeleteModal}
@@ -294,7 +292,6 @@ const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
   submitSucceeded: hasSubmitSucceeded(formName)(state),
   submitFailed: hasSubmitFailed(formName)(state),
-  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 
 export const EventAdminFormCreatePage = connect(mapStateToProps)(injectIntl(EventAdminFormPage));
@@ -303,6 +300,9 @@ export default createFragmentContainer(EventAdminFormCreatePage, {
   query: graphql`
     fragment EventAdminFormPage_query on Query {
       ...EventForm_query
+      viewer {
+        isSuperAdmin
+      }
     }
   `,
   event: graphql`

@@ -39,6 +39,9 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "viewer": Object {
+            "isSuperAdmin": false,
+          },
         }
       }
       validate={[Function]}
@@ -51,7 +54,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
         disabled={false}
         id="confirm-event-edit"
         isSubmitting={false}
-        label="action_edit"
+        label="global.save"
         onSubmit={[Function]}
       />
       <div>
@@ -136,6 +139,9 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "viewer": Object {
+            "isSuperAdmin": true,
+          },
         }
       }
       validate={[Function]}
@@ -148,7 +154,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
         disabled={true}
         id="confirm-event-edit"
         isSubmitting={true}
-        label="action_edit"
+        label="global.save"
         onSubmit={[Function]}
       />
       <div>
@@ -226,6 +232,9 @@ exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "viewer": Object {
+            "isSuperAdmin": true,
+          },
         }
       }
       validate={[Function]}
@@ -238,7 +247,7 @@ exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
         disabled={true}
         id="confirm-event-create"
         isSubmitting={true}
-        label="global.add"
+        label="global.save"
         onSubmit={[Function]}
       />
       <AlertForm

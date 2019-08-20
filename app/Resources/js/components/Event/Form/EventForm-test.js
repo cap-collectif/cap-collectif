@@ -16,12 +16,14 @@ const defaultProps = {
   dispatch: jest.fn(),
   onSubmit: jest.fn(),
   validate: jest.fn(),
-  isAdmin: true,
   autoload: true,
   multi: true,
   initialValues: {},
-  isSuperAdmin: false,
   query: {
+    viewer: {
+      isSuperAdmin: false,
+      isAdmin: true,
+    },
     $fragmentRefs,
     $refType,
   },

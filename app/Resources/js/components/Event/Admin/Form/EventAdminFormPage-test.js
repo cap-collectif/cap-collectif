@@ -21,10 +21,12 @@ const defaultProps = {
     $refType,
   },
   query: {
+    viewer: {
+      isSuperAdmin: true,
+    },
     $fragmentRefs,
     $refType,
   },
-  isSuperAdmin: true,
 };
 
 describe('<EventAdminFormPage />', () => {
@@ -45,7 +47,13 @@ describe('<EventAdminFormPage />', () => {
       submitSucceeded: false,
       submitFailed: false,
       invalid: false,
-      isSuperAdmin: false,
+      query: {
+        viewer: {
+          isSuperAdmin: false,
+        },
+        $fragmentRefs,
+        $refType,
+      },
     };
     const wrapper = shallow(<EventAdminFormPage {...props} />);
     expect(wrapper).toMatchSnapshot();

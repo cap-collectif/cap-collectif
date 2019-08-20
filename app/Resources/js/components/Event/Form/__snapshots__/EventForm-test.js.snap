@@ -248,6 +248,10 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "viewer": Object {
+          "isAdmin": true,
+          "isSuperAdmin": false,
+        },
       }
     }
   />
@@ -584,6 +588,10 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "viewer": Object {
+          "isAdmin": true,
+          "isSuperAdmin": false,
+        },
       }
     }
   />
@@ -905,6 +913,10 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "viewer": Object {
+          "isAdmin": true,
+          "isSuperAdmin": false,
+        },
       }
     }
   />

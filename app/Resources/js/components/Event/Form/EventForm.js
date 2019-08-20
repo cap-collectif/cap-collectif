@@ -20,8 +20,6 @@ type Props = {|
   features: FeatureToggles,
   dispatch: Dispatch,
   intl: IntlShape,
-  isAdmin: boolean,
-  isSuperAdmin: boolean,
   initialValues?: ?{},
   autoload: boolean,
   multi: boolean,
@@ -33,7 +31,7 @@ export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
   render() {
-    const { features, isAdmin, event, isSuperAdmin, query } = this.props;
+    const { features, event, query } = this.props;
 
     return (
       <form>
@@ -57,7 +55,7 @@ export class EventForm extends React.Component<Props> {
             type="text"
             id="event_title"
           />
-          {(isAdmin || isSuperAdmin) && (
+          {query.viewer.isAdmin && (
             <UserListField
               clearable={false}
               label={
@@ -71,7 +69,7 @@ export class EventForm extends React.Component<Props> {
               ariaControls="EventForm-filter-user-listbox"
               inputClassName="fake-inputClassName"
               autoload
-              disabled={!isAdmin}
+              disabled={!query.viewer.isAdmin}
               id="event_author"
               name="author"
               placeholder={null}
@@ -89,7 +87,7 @@ export class EventForm extends React.Component<Props> {
             placeholder="proposal.map.form.placeholder"
           />
           {/* This part is tempory, it will be delete after migration complete */}
-          {isSuperAdmin && (
+          {query.viewer.isSuperAdmin && (
             <div className="mb-5">
               <div>
                 {event && event.fullAddress && (
@@ -204,7 +202,7 @@ export class EventForm extends React.Component<Props> {
               children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
             />
           </div>
-          {(isAdmin || isSuperAdmin) && (
+          {query.viewer.isAdmin && (
             <div>
               <div className="box-header">
                 <h3 className="box-title">
@@ -241,8 +239,6 @@ const formContainer = reduxForm({
 const mapStateToProps = (state: GlobalState, props: Props) => {
   if (props.event) {
     return {
-      isAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_ADMIN')),
-      isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
       features: state.default.features,
       initialValues: {
         id: props.event && props.event.id ? props.event.id : null,
@@ -282,8 +278,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     };
   }
   return {
-    isAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_ADMIN')),
-    isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
     features: state.default.features,
   };
 };
@@ -295,6 +289,10 @@ export default createFragmentContainer(container, {
     fragment EventForm_query on Query {
       ...SelectTheme_query
       ...SelectProject_query
+      viewer {
+        isAdmin
+        isSuperAdmin
+      }
     }
   `,
   event: graphql`
