@@ -6,6 +6,13 @@ Capco\AppBundle\Entity\AbstractVote:
       groups: [ElasticsearchVote]
     published:
       groups: [ElasticsearchVote]
+    createdAt:
+      groups: [ElasticsearchVote]
     getProject:
-      groups: [ElasticsearchNestedProject]
+      type: object
+      groups: [ElasticsearchNestedProject, ElasticsearchNestedAuthor]
       serialized_name: project
+    getProposal:
+      type: object
+      serialized_name: proposal
+      groups: [ElasticsearchNestedProposal]

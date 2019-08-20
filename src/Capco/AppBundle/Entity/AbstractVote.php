@@ -128,6 +128,11 @@ abstract class AbstractVote implements
         return null;
     }
 
+    public function getProposal(): ?Proposal
+    {
+        return null;
+    }
+
     public static function getElasticsearchPriority(): int
     {
         return 50;
@@ -140,6 +145,11 @@ abstract class AbstractVote implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['ElasticsearchVote', 'ElasticsearchNestedProject', 'ElasticsearchNestedAuthor'];
+        return [
+            'ElasticsearchVote',
+            'ElasticsearchNestedProject',
+            'ElasticsearchNestedAuthor',
+            'ElasticsearchNestedProposal'
+        ];
     }
 }

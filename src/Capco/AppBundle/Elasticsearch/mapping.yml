@@ -299,7 +299,7 @@ mappings:
     properties:
       id: { type: keyword }
       user: *Author
-      private: { type: boolean }
+      createdAt: { type: date }
       project: *Project
       published: { type: boolean }
 

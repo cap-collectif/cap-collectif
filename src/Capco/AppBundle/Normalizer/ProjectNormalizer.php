@@ -63,6 +63,14 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
                     $data['restrictedViewerIds'][] = $userGroup->getUser()->getId();
                 }
             }
+            $data['authors'] = [];
+            foreach ($object->getAuthors() as $projectAuthor) {
+                $data['authors'][] = $this->normalizer->normalize(
+                    $projectAuthor->getUser(),
+                    $format,
+                    $context
+                );
+            }
 
             $data['authors'] = [];
             foreach ($object->getAuthors() as $projectAuthor) {
@@ -75,7 +83,6 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
 
             return $data;
         }
-
         // Full serialization
         if (\in_array('Elasticsearch', $groups, true)) {
             $data['projectStatus'] = $object->getCurrentStepStatus();

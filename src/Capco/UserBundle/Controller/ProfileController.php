@@ -4,7 +4,6 @@ namespace Capco\UserBundle\Controller;
 
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Search\CommentSearch;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Repository\UserRepository;
@@ -35,14 +34,10 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class ProfileController extends Controller
 {
     private $userProposalsResolver;
-    private $commentSearch;
 
-    public function __construct(
-        UserProposalsResolver $userProposalsResolver,
-        CommentSearch $commentSearch
-    ) {
+    public function __construct(UserProposalsResolver $userProposalsResolver)
+    {
         $this->userProposalsResolver = $userProposalsResolver;
-        $this->commentSearch = $commentSearch;
     }
 
     /**
@@ -199,7 +194,6 @@ class ProfileController extends Controller
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
         $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
         $sources = $this->get(SourceRepository::class)->getByUser($user);
-        $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
         $eventsCount = $this->getEventsCount($user);
 
         return [
@@ -209,7 +203,6 @@ class ProfileController extends Controller
             'arguments' => $arguments,
             'replies' => $replies,
             'sources' => $sources,
-            'votes' => $votes,
             'argumentsLabels' => Argument::$argumentTypesLabels
         ];
     }

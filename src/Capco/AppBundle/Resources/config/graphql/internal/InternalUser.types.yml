@@ -214,7 +214,7 @@ InternalUser:
             type: 'Int'
             description: 'Returns the first n elements from the list.'
             defaultValue: 100
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [getUser(), value, args, context])'
       groups:
         type: 'GroupConnection!'
         argsBuilder: 'Relay::Connection'
