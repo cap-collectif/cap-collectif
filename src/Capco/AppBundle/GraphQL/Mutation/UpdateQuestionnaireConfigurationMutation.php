@@ -46,7 +46,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
 
         $questionnaireId = GlobalId::fromGlobalId($arguments['questionnaireId'])['id'];
         /** @var Questionnaire $questionnaire */

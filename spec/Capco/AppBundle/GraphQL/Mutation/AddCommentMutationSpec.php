@@ -56,9 +56,9 @@ class AddCommentMutationSpec extends ObjectBehavior
         $this->__invoke($arguments, $viewer, $requestStack)->shouldBe([
             'userErrors' => [
                 [
-                    'message' => 'Commentable not found.',
-                ],
-            ],
+                    'message' => 'Commentable not found.'
+                ]
+            ]
         ]);
     }
 
@@ -76,9 +76,9 @@ class AddCommentMutationSpec extends ObjectBehavior
         $this->__invoke($arguments, $viewer, $requestStack)->shouldBe([
             'userErrors' => [
                 [
-                    'message' => 'Can\'t add a comment to a not commentable.',
-                ],
-            ],
+                    'message' => 'Can\'t add a comment to a not commentable.'
+                ]
+            ]
         ]);
     }
 
@@ -97,9 +97,9 @@ class AddCommentMutationSpec extends ObjectBehavior
         $this->__invoke($arguments, $viewer, $requestStack)->shouldBe([
             'userErrors' => [
                 [
-                    'message' => "Comment's are not longer accepted",
-                ],
-            ],
+                    'message' => "Comment's are not longer accepted"
+                ]
+            ]
         ]);
     }
 
@@ -122,7 +122,7 @@ class AddCommentMutationSpec extends ObjectBehavior
         $formFactory
             ->create('Capco\\AppBundle\\Form\\CommentType', Argument::any())
             ->willReturn($form);
-        $arguments->getRawArguments()->willReturn($formData);
+        $arguments->getArrayCopy()->willReturn($formData);
         $commentable
             ->addComment(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))
             ->willReturn($commentable);
@@ -150,7 +150,7 @@ class AddCommentMutationSpec extends ObjectBehavior
         // TODO: We should use snapshot testing, because we don't test commentEdge
         $payload->shouldBe([
             'commentEdge' => $payload->getWrappedObject()['commentEdge'],
-            'userErrors' => [],
+            'userErrors' => []
         ]);
     }
 }

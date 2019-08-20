@@ -31,14 +31,14 @@ class UpdateProjectDistrictMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         $projectDistrictId = $input->offsetGet('id');
 
         $projectDistrict = $this->projectDistrictRepository->find($projectDistrictId);
 
         if (!$projectDistrict) {
             $error = [
-                'message' => sprintf('Unknown project district with id: %s', $projectDistrictId),
+                'message' => sprintf('Unknown project district with id: %s', $projectDistrictId)
             ];
             $this->logger->error(
                 sprintf('Unknown project district with id: %s', $projectDistrictId)

@@ -14,9 +14,6 @@ Reportable:
         description: 'The reportings related to the reportable.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reportable\\ReportableReportingResolver", [value, args])'
         args:
-          first:
-            type: 'Int'
-            defaultValue: 30
           orderBy:
             type: 'ReportingOrder'
             defaultValue: { field: CREATED_AT, direction: DESC }

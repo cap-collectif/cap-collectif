@@ -8,10 +8,6 @@ PreviewWithProposals:
         argsBuilder: 'Relay::Connection'
         description: 'A list of proposals associated to the object.'
         args:
-          first:
-            type: 'Int'
-            description: Returns the first `n` elements from the list.
-            defaultValue: 100
           trashedStatus:
             type: 'ProposalTrashedStatus'
             description: 'If non-null, filters proposals with the given trashed status (eg: visible, not visible).'

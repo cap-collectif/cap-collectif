@@ -1,8 +1,12 @@
 PhoneRequirement:
   type: object
-  inherits: [Node, Requirement]
+  inherits:
+    - Node
+    - Requirement
   config:
-    interfaces: [Node, Requirement]
+    interfaces:
+      - Node
+      - Requirement
     description: 'Requires a phone'
     fields:
       viewerValue:

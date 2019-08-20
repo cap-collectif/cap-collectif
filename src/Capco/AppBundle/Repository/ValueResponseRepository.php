@@ -31,7 +31,7 @@ class ValueResponseRepository extends EntityRepository
     public function countParticipantsByQuestion(
         AbstractQuestion $question,
         bool $withNotConfirmedUser = false
-    ): ?int {
+    ): int {
         $qb = $this->getNoEmptyResultQueryBuilder()
             ->select('COUNT(DISTINCT reply.author)')
             ->leftJoin('r.question', 'question')
@@ -45,7 +45,7 @@ class ValueResponseRepository extends EntityRepository
         }
         $qb->setParameter('question', $question);
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getAllByQuestion(

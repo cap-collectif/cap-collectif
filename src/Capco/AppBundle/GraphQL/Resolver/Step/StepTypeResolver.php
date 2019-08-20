@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;

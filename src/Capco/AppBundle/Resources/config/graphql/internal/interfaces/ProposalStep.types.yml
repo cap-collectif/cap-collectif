@@ -38,9 +38,6 @@ ProposalStep:
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'
         args:
-          first:
-            type: 'Int'
-            defaultValue: 100000
           orderBy:
             type: 'ProposalVotesOrder'
             defaultValue: { field: CREATED_AT, direction: DESC }

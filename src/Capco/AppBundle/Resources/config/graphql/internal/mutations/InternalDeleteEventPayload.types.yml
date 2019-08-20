@@ -1,6 +1,7 @@
 InternalDeleteEventPayload:
   type: relay-mutation-payload
-  inherits:
-    - PreviewDeleteEventPayload
   config:
     name: DeleteEventPayload
+    fields:
+      deletedEventId:
+        type: 'ID'

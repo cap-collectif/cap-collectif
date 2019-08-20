@@ -1,9 +1,13 @@
 InternalOauth2SSOConfiguration:
   type: object
-  inherits: [Node, InternalSSOConfiguration]
+  inherits:
+    - Node
+    - InternalSSOConfiguration
   config:
     name: Oauth2SSOConfiguration
-    interfaces: [Node, InternalSSOConfiguration]
+    interfaces:
+      - Node
+      - InternalSSOConfiguration
     description: 'Oauth2 SSO Configuration.'
     fields:
       id:

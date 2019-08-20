@@ -64,7 +64,7 @@ class AddReplyMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
 
         $questionnaireId = GlobalId::fromGlobalId($values['questionnaireId'])['id'];
 
@@ -91,7 +91,7 @@ class AddReplyMutation implements MutationInterface
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 
         $form = $this->formFactory->create(ReplyType::class, $reply, [
-            'anonymousAllowed' => $questionnaire->isAnonymousAllowed(),
+            'anonymousAllowed' => $questionnaire->isAnonymousAllowed()
         ]);
         $form->submit($values, false);
 
@@ -108,7 +108,7 @@ class AddReplyMutation implements MutationInterface
                 new Message(
                     json_encode([
                         'replyId' => $reply->getId(),
-                        'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE,
+                        'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE
                     ])
                 )
             );

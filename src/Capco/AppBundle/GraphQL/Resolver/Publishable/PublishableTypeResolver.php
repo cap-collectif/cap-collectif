@@ -1,7 +1,7 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Publishable;
 
-use Capco\AppBundle\Entity\Reply;
 use GraphQL\Type\Definition\Type;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Comment;
@@ -11,7 +11,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class PublishableTypeResolver implements ResolverInterface

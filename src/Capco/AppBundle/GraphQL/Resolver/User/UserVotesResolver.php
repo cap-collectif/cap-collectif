@@ -30,6 +30,6 @@ class UserVotesResolver implements ResolverInterface
 
         $totalCount = $this->votesRepo->countAllByAuthor($user);
 
-        return $paginator->auto($args, $totalCount);
+        return $paginator->auto($args, (int) $totalCount);
     }
 }

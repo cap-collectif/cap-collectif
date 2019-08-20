@@ -28,8 +28,8 @@ class UpdateProposalFusionMutation implements MutationInterface
 
     public function __invoke(Argument $input, $user): array
     {
-        $proposalIds = $input->getRawArguments()['fromProposals'];
-        $proposalId = $input->getRawArguments()['proposalId'];
+        $proposalIds = $input->getArrayCopy()['fromProposals'];
+        $proposalId = $input->getArrayCopy()['proposalId'];
 
         $proposal = $this->globalIdResolver->resolve($proposalId, $user);
         if (!$proposal) {
@@ -54,7 +54,7 @@ class UpdateProposalFusionMutation implements MutationInterface
         }
 
         $form = $this->formFactory->create(ProposalFusionType::class, $proposal, [
-            'proposalForm' => $proposalForm,
+            'proposalForm' => $proposalForm
         ]);
         $form->submit(['childConnections' => $proposalUuids], false);
 

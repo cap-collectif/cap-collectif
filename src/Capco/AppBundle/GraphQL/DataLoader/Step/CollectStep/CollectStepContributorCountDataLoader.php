@@ -64,15 +64,14 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
     protected function serializeKey($key): array
     {
         return [
-            'collectStepId' => $key['collectStep']->getId(),
+            'collectStepId' => $key['collectStep']->getId()
         ];
     }
 
     private function resolve(CollectStep $step): int
     {
-        return $this->stepContributorResolver->__invoke(
-            $step,
-            new Argument(['first' => 0])
-        )->totalCount;
+        return $this->stepContributorResolver
+            ->__invoke($step, new Argument(['first' => 0]))
+            ->getTotalCount();
     }
 }

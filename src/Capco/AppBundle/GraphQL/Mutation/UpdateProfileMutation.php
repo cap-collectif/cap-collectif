@@ -29,10 +29,10 @@ class UpdateProfileMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
 
         $form = $this->formFactory->create(ProfileFormType::class, $user, [
-            'csrf_protection' => false,
+            'csrf_protection' => false
         ]);
         $form->submit($arguments, false);
 

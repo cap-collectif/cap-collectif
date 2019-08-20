@@ -1,0 +1,6 @@
+InternalPrivatableVote:
+  type: interface
+  inherits:
+    - PreviewPrivatableVote
+  config:
+    name: PrivatableVote

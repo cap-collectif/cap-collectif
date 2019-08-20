@@ -81,8 +81,8 @@ class ProposalStatusDataLoader extends BatchDataLoader
     {
         return [
             'proposalId' => $key['proposal']->getId(),
-            'args' => $key['args']->getRawArguments(),
-            'context' => $key['context'],
+            'args' => $key['args']->getArrayCopy(),
+            'context' => $key['context']
         ];
     }
 

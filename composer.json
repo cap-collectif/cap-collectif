@@ -30,11 +30,11 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/cap-collectif/graphql-php"
+            "url": "https://github.com/cap-collectif/behat-parallel-scenario"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/cap-collectif/behat-parallel-scenario"
+            "url": "https://github.com/spyl94/GraphQLBundle"
         },
         {
             "type": "vcs",
@@ -59,10 +59,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/mailcatcher"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/cap-collectif/GraphQLBundle"
         },
         {
             "type": "vcs",
@@ -105,23 +101,22 @@
         "doctrine/orm": "^2.5",
         "sonata-project/easy-extends-bundle": "2.5.0",
         "sonata-project/core-bundle": "3.17.*",
-        "sonata-project/admin-bundle": "^3.1.0",
+        "sonata-project/admin-bundle": "^3.52",
         "sonata-project/doctrine-orm-admin-bundle": "^3.0",
-        "sonata-project/block-bundle": "~3.12",
-        "sonata-project/media-bundle": "dev-bugfix-3.16.3#295023d as 3.16.3",
+        "sonata-project/block-bundle": "^3.17",
+        "sonata-project/media-bundle": "dev-bugfix-3.16.3#295023d as 3.20.1",
         "sonata-project/user-bundle": "^4.0",
         "sonata-project/datagrid-bundle": "~2.2@dev",
-        "sonata-project/exporter": "~1.11.0",
+        "sonata-project/exporter": "^2.0",
         "sonata-project/classification-bundle": "^3.0",
         "sonata-project/doctrine-extensions": "^1.0",
-        "sonata-project/intl-bundle": "2.4.0",
+        "sonata-project/intl-bundle": "^2.7",
         "sonata-project/notification-bundle": "^3.0",
         "hwi/oauth-bundle": "dev-master#c1802bc31abc3f311301f63cd2cb35b9ca050fee",
         "qandidate/toggle-bundle": "~1.0",
         "predis/predis": "^1.0",
         "willdurand/geocoder": "~3.0",
         "tilleuls/ckeditor-sonata-media-bundle": "1.0.8",
-        "friendsofsymfony/elastica-bundle": "dev-master#f583cc5842d1fc2cb42d963f97b7b67f208be0f7",
         "jms/serializer": "1.13.*",
         "nelmio/api-doc-bundle": "^2.13",
         "liuggio/excelbundle": "dev-prepare-symfony-4",
@@ -152,12 +147,9 @@
         "cocur/slugify": "~3.2",
         "phayes/geophp": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
         "pmill/doctrine-array-hydrator": "^0.1.2",
-        "webonyx/graphql-php": "dev-master#efe1bcf052d4b42910c9f96fad3c10e4482ef7a8 as 0.12.0",
-        "overblog/graphql-php-generator": "^0.7.0",
         "php-http/httplug-bundle": "^1.8",
         "php-http/curl-client": "^1.7",
         "symfony/polyfill-apcu": "^1.7",
-        "overblog/graphql-bundle": "dev-master#2cdc6e286f3a7f5f702b1eb5ec2b2c2363997009",
         "imagine/imagine": "^0.7.1",
         "liip/imagine-bundle": "~2.1",
         "knplabs/knp-menu-bundle": "2.2.2",
@@ -184,7 +176,9 @@
         "stof/doctrine-extensions-bundle": "^1.3",
         "bjeavons/zxcvbn-php": "^0.4",
         "bgalati/monolog-sentry-handler": "^1.0",
-        "barryvdh/composer-cleanup-plugin": "0.2.x"
+        "barryvdh/composer-cleanup-plugin": "0.2.x",
+        "overblog/graphql-bundle": "0.12.x-dev",
+        "friendsofsymfony/elastica-bundle": "dev-master#f583cc5842d1fc2cb42d963f97b7b67f208be0f7"
     },
     "require-dev": {
         "behat/behat": "^3.3",

@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Theme;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class PostRelatedContentTypeResolver implements ResolverInterface
 {

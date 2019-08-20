@@ -1,8 +1,16 @@
 SelectionStep:
   type: object
-  inherits: [Node, InternalStep, ProposalStep, RequirementStep]
+  inherits:
+    - Node
+    - InternalStep
+    - ProposalStep
+    - RequirementStep
   config:
-    interfaces: [Node, InternalStep, ProposalStep, RequirementStep]
+    interfaces:
+      - Node
+      - InternalStep
+      - ProposalStep
+      - RequirementStep
     description: 'A budget contribution'
     fields:
       id:

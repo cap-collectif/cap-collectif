@@ -30,7 +30,7 @@ class UpdateOauth2SSOConfigurationMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         $id = GlobalId::fromGlobalId($values['id'])['id'];
 
         $ssoConfiguration = $this->repository->find($id);

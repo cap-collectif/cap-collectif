@@ -4,7 +4,8 @@ MapToken:
     - Node
     - InternalPrimaryKey
   config:
-    interfaces: [Node]
+    interfaces:
+      - Node
     description: 'A map token used for connecting external services with our maps'
     fields:
       id:

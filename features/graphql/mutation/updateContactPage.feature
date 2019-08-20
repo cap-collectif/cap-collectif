@@ -55,5 +55,5 @@ Scenario: Normal user wants to update contact page informations
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"Access denied to this field.","category":"user","locations":[@...@],"path":[@...@]}],"data":{"updateContactPage":null}}
+  {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"updateContactPage":null}}
   """

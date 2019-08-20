@@ -33,7 +33,7 @@ class CreateQuestionnaireMutation implements MutationInterface
 
         $form = $this->formFactory->create(QuestionnaireCreateType::class, $questionnaire);
 
-        $form->submit($input->getRawArguments(), false);
+        $form->submit($input->getArrayCopy(), false);
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 

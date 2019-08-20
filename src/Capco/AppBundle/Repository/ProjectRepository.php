@@ -227,11 +227,11 @@ class ProjectRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function countPublished($viewer = null)
+    public function countPublished($viewer = null): int
     {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)->select('COUNT(p.id)');
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getProjectsViewerCanSeeQueryBuilder($viewer = null): QueryBuilder

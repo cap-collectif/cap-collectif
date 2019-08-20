@@ -1,9 +1,13 @@
 Reporting:
   type: object
-  inherits: [Contribution, ContributionWithAuthor]
+  inherits:
+    - Contribution
+    - ContributionWithAuthor
   config:
     description: 'A report'
-    interfaces: [Contribution, ContributionWithAuthor]
+    interfaces:
+      - Contribution
+      - ContributionWithAuthor
     fields:
       createdAt:
         type: 'DateTime!'

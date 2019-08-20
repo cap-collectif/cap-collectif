@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\SSO;
 
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Resolver\TypeResolver as BaseTypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver as BaseTypeResolver;
 
 class TypeResolver implements ResolverInterface
 {

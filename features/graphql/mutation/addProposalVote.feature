@@ -28,9 +28,7 @@ Scenario: Logged in API client wants to vote for a proposal in a step with vote 
     "errors": [
       {
         "message": "You have reached the limit of votes.",
-        "category": @string@,
-        "locations": [{"line":1,"column":47}],
-        "path":["addProposalVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {
@@ -66,9 +64,7 @@ Scenario: Logged in API client without all requirements wants to vote for a prop
     "errors": [
       {
         "message": "You dont meets all the requirements.",
-        "category": @string@,
-        "locations": [{"line":1,"column":47}],
-        "path":["addProposalVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {
@@ -231,9 +227,7 @@ Scenario: Logged in API client wants to vote several times for a proposal in a s
     "errors": [
       {
         "message": "proposal.vote.already_voted",
-        "category": @string@,
-        "locations": [{"line":1,"column":47}],
-        "path": ["addProposalVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {
@@ -269,9 +263,7 @@ Scenario: Logged in API client wants to vote for a proposal in a wrong selection
     "errors": [
       {
         "message": "This proposal is not associated to this selection step.",
-        "category": @string@,
-        "locations": [{"line":1,"column":47}],
-        "path": ["addProposalVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {
@@ -307,9 +299,7 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
     "errors": [
       {
         "message": "This step is not votable.",
-        "category": @string@,
-        "locations": [{"line":1,"column":47}],
-        "path": ["addProposalVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {
@@ -345,9 +335,7 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
     "errors": [
       {
         "message": "This step is no longer contributable.",
-        "category": @string@,
-        "locations": [{"line":1,"column":47}],
-        "path": ["addProposalVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {
@@ -383,9 +371,7 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
     "errors": [
       {
         "message": "proposal.vote.not_enough_credits",
-        "category": @string@,
-        "locations": [{"line":1,"column":47}],
-        "path": ["addProposalVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {

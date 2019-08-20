@@ -1,6 +1,0 @@
-InternalDeleteEventInput:
-  type: relay-mutation-input
-  inherits:
-    - PreviewDeleteEventInput
-  config:
-    name: DeleteEventInput

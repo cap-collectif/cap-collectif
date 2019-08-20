@@ -25,7 +25,7 @@ class GroupMutation implements ContainerAwareInterface
 
         $form = $this->container->get('form.factory')->create(GroupCreateType::class, $group);
 
-        $form->submit($input->getRawArguments(), false);
+        $form->submit($input->getArrayCopy(), false);
 
         if (!$form->isValid()) {
             $logger = $this->container->get('logger');
@@ -46,7 +46,7 @@ class GroupMutation implements ContainerAwareInterface
 
     public function update(Argument $input): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $group = $this->container->get(GroupRepository::class)->find($arguments['groupId']);
 
         if (!$group) {
@@ -99,7 +99,7 @@ class GroupMutation implements ContainerAwareInterface
         $userId = GlobalId::fromGlobalId($userId)['id'];
         $userGroup = $this->container->get(UserGroupRepository::class)->findOneBy([
             'user' => $userId,
-            'group' => $groupId,
+            'group' => $groupId
         ]);
 
         if (!$userGroup) {
@@ -143,7 +143,7 @@ class GroupMutation implements ContainerAwareInterface
                 if ($user) {
                     $userGroup = $this->container->get(UserGroupRepository::class)->findOneBy([
                         'user' => $user,
-                        'group' => $group,
+                        'group' => $group
                     ]);
 
                     if (!$userGroup) {

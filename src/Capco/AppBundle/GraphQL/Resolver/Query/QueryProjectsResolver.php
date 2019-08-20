@@ -10,11 +10,12 @@ use GraphQL\Type\Definition\ResolveInfo;
 use Capco\AppBundle\Search\ProjectSearch;
 use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Capco\AppBundle\Enum\ProjectOrderField;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryProjectsResolver implements ResolverInterface
@@ -35,19 +36,21 @@ class QueryProjectsResolver implements ResolverInterface
         $this->queryAnalyzer = $queryAnalyzer;
     }
 
-    public function __invoke(Argument $args, ?User $viewer, ResolveInfo $resolveInfo): Connection
-    {
+    public function __invoke(
+        Argument $args,
+        ?User $viewer,
+        ResolveInfo $resolveInfo
+    ): ConnectionInterface {
         $this->protectArguments($args);
         $this->queryAnalyzer->analyseQuery($resolveInfo);
 
         return $this->resolve($args, $viewer);
     }
 
-    public function resolve(Argument $args, ?User $viewer = null): Connection
+    public function resolve(Argument $args, ?User $viewer = null): ConnectionInterface
     {
-        $totalCount = 0;
-
         try {
+            $totalCount = 0;
             $paginator = new Paginator(function (int $offset, int $limit) use (
                 $args,
                 $viewer,
@@ -68,6 +71,8 @@ class QueryProjectsResolver implements ResolverInterface
                     $term,
                     $this->getFilters($args)
                 );
+                // @TODO: this logic should be done in Elasticsearch not PHP
+                // https://github.com/cap-collectif/platform/issues/8616
                 $allResults = [];
                 // @var Project $project
                 if (!$onlyPublic) {
@@ -88,14 +93,16 @@ class QueryProjectsResolver implements ResolverInterface
                 return \array_slice($allResults, $offset, $limit);
             });
             $connection = $paginator->auto($args, $totalCount);
-            $connection->totalCount = $totalCount;
+            $connection->setTotalCount($totalCount);
 
             return $connection;
         } catch (\RuntimeException $exception) {
-            $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-
-            throw new \RuntimeException('Could not find projects');
+            $this->logger->error(__METHOD__ . ' ' . $exception->getMessage(), [
+                'exception' => $exception
+            ]);
         }
+
+        return ConnectionBuilder::empty();
     }
 
     private function getFilters(Argument $args): array

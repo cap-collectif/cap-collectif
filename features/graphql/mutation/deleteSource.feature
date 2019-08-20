@@ -59,7 +59,7 @@ Scenario: User wants to delete an source but is not the author
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"You are not the author of source with id: source1","category":"user","locations":[@...@],"path":["deleteSource"]}],"data":{"deleteSource":null}}
+  {"errors":[{"message":"You are not the author of source with id: source1","@*@": "@*@"}],"data":{"deleteSource":null}}
   """
 
 @security
@@ -85,5 +85,5 @@ Scenario: User wants to delete an source without requirements
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"You dont meets all the requirements.","category":"user","locations":[@...@],"path":["deleteSource"]}],"data":{"deleteSource":null}}
+  {"errors":[{"message":"You dont meets all the requirements.","@*@": "@*@"}],"data":{"deleteSource":null}}
   """

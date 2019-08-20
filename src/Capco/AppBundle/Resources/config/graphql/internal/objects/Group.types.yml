@@ -1,8 +1,10 @@
 Group:
   type: object
-  inherits: [Node]
+  inherits:
+    - Node
   config:
-    interfaces: [Node]
+    interfaces:
+      - Node
     description: 'A group of User'
     fields:
       id:

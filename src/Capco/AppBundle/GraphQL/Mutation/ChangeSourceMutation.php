@@ -51,7 +51,7 @@ class ChangeSourceMutation implements MutationInterface
             throw new UserError("Can't update uncontributable source.");
         }
 
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         unset($values['sourceId']);
 
         $form = $this->formFactory->create(ApiSourceType::class, $source);

@@ -56,5 +56,5 @@ Scenario: User wants to delete an argument but is not the author
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"You are not the author of argument with id: argument1","category":"user","locations":[@...@],"path":["deleteArgument"]}],"data":{"deleteArgument":null}}
+  {"errors":[{"message":"You are not the author of argument with id: argument1","@*@": "@*@"}],"data":{"deleteArgument":null}}
   """

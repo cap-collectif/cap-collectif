@@ -5,8 +5,6 @@ InternalConsultation:
     - PublicConsultation
     - Node
   config:
-    interfaces:
-      - Node
     name: Consultation
     fields:
       id:

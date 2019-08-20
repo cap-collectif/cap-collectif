@@ -96,5 +96,5 @@ Scenario: GraphQL client who is not an admin wants to update the current favicon
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"Access denied to this field.","category":"user","locations":[@...@],"path":[@...@]}],"data":{"changeSiteFavicon":null}}
+  {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"changeSiteFavicon":null}}
   """

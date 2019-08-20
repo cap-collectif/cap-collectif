@@ -19,13 +19,13 @@ class ParticipantConnectionEdgeRegisteredAnonymouslyResolver implements Resolver
 
     public function __invoke(Edge $edge): bool
     {
-        if ($edge->node instanceof EventRegistration) {
-            return $edge->node->isPrivate();
+        if ($edge->getNode() instanceof EventRegistration) {
+            return $edge->getNode()->isPrivate();
         }
-        if ($edge->node instanceof User) {
+        if ($edge->getNode() instanceof User) {
             $registration = $this->eventRegistrationRepository->getOneByUserAndEvent(
-                $edge->node,
-                $edge->node->registeredEvent
+                $edge->getNode(),
+                $edge->getNode()->registeredEvent
             );
 
             return $registration->isPrivate();

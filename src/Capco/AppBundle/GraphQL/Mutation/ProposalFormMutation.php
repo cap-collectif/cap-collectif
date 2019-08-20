@@ -43,7 +43,7 @@ class ProposalFormMutation
 
         $form = $this->formFactory->create(ProposalFormCreateType::class, $proposalForm);
 
-        $form->submit($input->getRawArguments(), false);
+        $form->submit($input->getArrayCopy(), false);
 
         if (!$form->isValid()) {
             throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
@@ -57,7 +57,7 @@ class ProposalFormMutation
 
     public function update(Argument $input): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $id = $arguments['proposalFormId'];
         $proposalForm = $this->proposalFormRepository->find($id);
 
@@ -87,7 +87,7 @@ class ProposalFormMutation
 
     public function updateNotificationsConfiguration(Argument $input)
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $proposalForm = $this->proposalFormRepository->find($arguments['proposalFormId']);
 
         if (!$proposalForm) {
@@ -122,7 +122,7 @@ class ProposalFormMutation
 
     public function setEvaluationForm(Argument $input): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $proposalForm = $this->proposalFormRepository->find($arguments['proposalFormId']);
 
         if (!$proposalForm) {

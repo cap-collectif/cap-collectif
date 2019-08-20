@@ -1,10 +1,12 @@
 PublicQuestionnaire:
   type: object
-  inherits: [Node]
+  inherits:
+    - Node
   config:
     name: Questionnaire
     description: 'A questionnaire is a series of questions that users can answer.'
-    interfaces: [Node]
+    interfaces:
+      - Node
     fields:
       id:
         description: 'The ID of an object.'

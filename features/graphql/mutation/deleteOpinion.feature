@@ -50,5 +50,5 @@ Scenario: User wants to delete a version but is not the author
   """
   Then the JSON response should match:
   """
-    {"errors":[{"message":"You are not the author of opinion with id: opinion1","category":"user","locations":[@...@],"path":["deleteOpinion"]}],"data":{"deleteOpinion":null}}
+    {"errors":[{"message":"You are not the author of opinion with id: opinion1","@*@": "@*@"}],"data":{"deleteOpinion":null}}
   """

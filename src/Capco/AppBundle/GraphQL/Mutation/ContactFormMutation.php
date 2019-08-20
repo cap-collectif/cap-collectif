@@ -41,7 +41,7 @@ class ContactFormMutation implements MutationInterface
 
     public function send(Argument $input, ?User $viewer): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $id = $arguments['idContactForm'];
 
         /** @var ContactForm $contactForm */
@@ -72,13 +72,13 @@ class ContactFormMutation implements MutationInterface
         $this->em->flush();
 
         return [
-            'contactForm' => $contactForm,
+            'contactForm' => $contactForm
         ];
     }
 
     public function add(Argument $input)
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
 
         /** @var ContactForm $contactForm */
         $contactForm = new ContactForm();
@@ -99,13 +99,13 @@ class ContactFormMutation implements MutationInterface
         }
 
         return [
-            'contactForm' => $contactForm,
+            'contactForm' => $contactForm
         ];
     }
 
     public function update(Argument $input, ?User $viewer)
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $id = $arguments['id'];
 
         /** @var ContactForm $contactForm */
@@ -132,13 +132,13 @@ class ContactFormMutation implements MutationInterface
         }
 
         return [
-            'contactForm' => $contactForm,
+            'contactForm' => $contactForm
         ];
     }
 
     public function remove(Argument $input, ?User $viewer)
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $id = $arguments['id'];
 
         /** @var ContactForm $contactForm */
@@ -156,7 +156,7 @@ class ContactFormMutation implements MutationInterface
         }
 
         return [
-            'deletedContactFormId' => $arguments['id'],
+            'deletedContactFormId' => $arguments['id']
         ];
     }
 }

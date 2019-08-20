@@ -6,7 +6,6 @@ use Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation;
 use Capco\UserBundle\Entity\User;
 use FOS\UserBundle\Model\UserInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 

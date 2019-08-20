@@ -38,7 +38,7 @@ class ProjectSearch extends Search
 
     public function searchProjects(
         int $offset,
-        ?int $limit,
+        int $limit,
         array $orderBy,
         string $term = null,
         array $providedFilters
@@ -62,8 +62,11 @@ class ProjectSearch extends Search
         }
 
         foreach ($providedFilters as $key => $value) {
-            $boolQuery->addMust(new Term([$key => ['value' => $value]]));
+            if ($value) {
+                $boolQuery->addMust(new Term([$key => ['value' => $value]]));
+            }
         }
+
         $boolQuery->addMust(new Exists('id'));
 
         $query = new Query($boolQuery);

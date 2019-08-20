@@ -52,7 +52,7 @@ class UpdateProjectMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
 
         if (\count($arguments['authors']) <= 0) {
             throw new UserError('You must specify at least one author.');

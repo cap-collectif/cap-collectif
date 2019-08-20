@@ -82,17 +82,7 @@ Scenario: Anonymous GraphQL client want to get the personal data of a user
       "warnings": [
         {
           "message": "Access denied to this field.",
-          "category": @string@,
-          "locations": [
-            {
-              "line": 1,
-              "column": @integer@
-            }
-          ],
-          "path": [
-            "user",
-            "@string@"
-          ]
+          "@*@": "@*@"
         },
         @...@
       ]
@@ -186,17 +176,7 @@ Scenario: GraphQL client want to get the personal data of user authenticated as 
       "warnings": [
         {
           "message": "Access denied to this field.",
-          "category": @string@,
-          "locations": [
-            {
-              "line": 1,
-              "column": @integer@
-            }
-          ],
-          "path": [
-            "user",
-            "@string@"
-          ]
+          "@*@": "@*@"
         },
         @...@
       ]

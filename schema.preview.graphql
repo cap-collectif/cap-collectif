@@ -1,1079 +1,1163 @@
-# A step to collect proposals.
+"""A step to collect proposals."""
 type CollectStep implements Node & Step {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # A list of proposals associated to the object.
+  """A list of proposals associated to the object."""
   proposals(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
 
-    # If non-null, filters proposals with the given trashed status (eg: visible, not visible).
+    """
+    If non-null, filters proposals with the given trashed status (eg: visible, not visible).
+    """
     trashedStatus: ProposalTrashedStatus = NOT_TRASHED
 
-    # ID of a User to filter by. If non-null, only proposals authored by this user will be returned.
+    """
+    ID of a User to filter by. If non-null, only proposals authored by this user will be returned.
+    """
     author: ID
 
-    # Ordering options for proposals returned from the connection.
+    """Ordering options for proposals returned from the connection."""
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
   ): ProposalConnection!
 
-  # When the time interval begins or ends.
+  """When the time interval begins or ends."""
   timeRange: TimeRange!
 
-  # The URL to this resource.
+  """The URL to this resource."""
   url: URI!
 
-  # The title of the step.
+  """The title of the step."""
   title: String!
 }
 
-# A consultation
+"""A consultation"""
 type Consultation implements Node {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # The title of the consultation.
+  """The title of the consultation."""
   title: String!
 
-  # A list of contributor associated with the consultation.
+  """A list of contributor associated with the consultation."""
   contributors(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): UserConnection!
 
-  # Whether the user has vote for a contribution in the related step of this consultation.
+  """
+  Whether the user has vote for a contribution in the related step of this consultation.
+  """
   userHasVote(
-    # The user's login (for example, an email).
+    """The user's login (for example, an email)."""
     login: String!
   ): Boolean!
 
-  # The number of votes in the related step of this consultation.
+  """The number of votes in the related step of this consultation."""
   votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-09-01 UTC.")
 }
 
-# A step with consultation.
+"""A step with consultation."""
 type ConsultationStep implements Node & Step {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # When the time interval begins or ends.
+  """When the time interval begins or ends."""
   timeRange: TimeRange!
 
-  # The URL to this resource.
+  """The URL to this resource."""
   url: URI!
 
-  # The title of the step.
+  """The title of the step."""
   title: String!
 
-  # A list of contributor associated with the consultation step.
+  """A list of contributor associated with the consultation step."""
   contributors(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): UserConnection!
 
-  # The number of votes in this consultation.
+  """The number of votes in this consultation."""
   votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-09-01 UTC.")
 
-  # Whether the user has vote for a contribution in this consultation step.
+  """
+  Whether the user has vote for a contribution in this consultation step.
+  """
   userHasVote(
-    # The user's login (for example, an email).
+    """The user's login (for example, an email)."""
     login: String!
   ): Boolean!
 }
 
-# A string containing a datetime.
+"""A string containing a datetime."""
 scalar DateTime
 
-# A string containing an email.
+"""A string containing an email."""
 scalar Email
 
-# Represents a calendar event.
+"""Represents a calendar event."""
 type Event implements Node & UniformResourceLocatable {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # The URL to this resource.
+  """The URL to this resource."""
   url: URI!
 
-  # Identifies the date and time when the object was last updated.
+  """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime
 
-  # Identifies the date and time when the object was created.
+  """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
-  # When the time interval begins or ends.
+  """When the time interval begins or ends."""
   timeRange: TimeRange!
 
-  # Identifies the author of the event.
+  """Identifies the author of the event."""
   author: User
 
-  # Identifies the title of the event.
+  """Identifies the title of the event."""
   title: String!
 
-  # The start date of the event.
+  """The start date of the event."""
   startAt: DateTime! @deprecated(reason: "Field `startAt` will be removed. Use `timeRange` instead. This field has been replaced by timeRange Removal on 2020-03-01 UTC.")
 
-  # The end date of the event.
+  """The end date of the event."""
   endAt: DateTime @deprecated(reason: "Field `endAt` will be removed. Use `timeRange` instead. This field has been replaced by timeRange Removal on 2020-03-01 UTC.")
 
-  # Identifies the body of the event.
+  """Identifies the body of the event."""
   body: HTML!
 
-  # Whether or not this event is published.
+  """Whether or not this event is published."""
   enabled: Boolean!
 
-  # Identifies the latitude of the event.
+  """Identifies the latitude of the event."""
   lat: Float @deprecated(reason: "Field `lat` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
-  # Identifies the longitude of the event.
+  """Identifies the longitude of the event."""
   lng: Float @deprecated(reason: "Field `lng` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
-  # Identifies the registration link of the event.
+  """Identifies the registration link of the event."""
   link: URI @deprecated(reason: "Field `link` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
-  # Identifies the zip code of the event.
+  """Identifies the zip code of the event."""
   zipCode: String @deprecated(reason: "Field `zipCode` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 
-  # Identifies the address of the event.
+  """Identifies the address of the event."""
   fullAddress: String @deprecated(reason: "Field `fullAddress` will be removed.  This field use a deprecated name. Removal on 2019-09-01 UTC.")
 }
 
-# A connection to a list of items.
+"""A connection to a list of items."""
 type EventConnection {
-  # Identifies the total count of items in the connection.
+  """Identifies the total count of items in the connection."""
   totalCount: Int!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   edges: [EventEdge]
 }
 
-# An edge in a connection.
+"""An edge in a connection."""
 type EventEdge {
-  # The item at the end of the edge.
+  """The item at the end of the edge."""
   node: Event!
 
-  # A cursor for use in pagination.
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
-# Ways in which lists of events can be ordered upon return.
+"""Ways in which lists of events can be ordered upon return."""
 input EventOrder {
-  # The field in which to order nodes by.
+  """The field in which to order nodes by."""
   field: EventOrderField! = START_AT
 
-  # The direction in which to order nodes.
+  """The direction in which to order nodes."""
   direction: OrderDirection! = DESC
 }
 
-# Ordering options for events returned from the connection.
+"""Ordering options for events returned from the connection."""
 enum EventOrderField {
-  # Order by the end date of the time range.
+  """Order by the end date of the time range."""
   END_AT
 
-  # Order by the start date of the time range.
+  """Order by the start date of the time range."""
   START_AT
 }
 
-# A string containing HTML code.
+"""A string containing HTML code."""
 scalar HTML
 
-# A file uploaded by a user.
+"""A file uploaded by a user."""
 type Media implements UniformResourceLocatable {
-  # The URL to this resource.
+  """The URL to this resource."""
   url: URI!
 }
 
-# A question which accept document only.
+"""A question which accept document only."""
 type MediaQuestion implements Question & Node {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # Identifies the question title.
+  """Identifies the question title."""
   title: String!
 
-  # Return responses on this questions.
+  """Return responses on this questions."""
   responses(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): ResponseConnection!
 }
 
-# A media response.
+"""A media response."""
 type MediaResponse implements Response {
-  # Nullable ID in case of empty response.
+  """Nullable ID in case of empty response."""
   id: String
 
-  # The question.
+  """The question."""
   question: Question!
 
-  # Identifies medias of the response.
+  """Identifies medias of the response."""
   medias: [Media!]!
 }
 
-# A question with multiple choices available.
+"""A question with multiple choices available."""
 type MultipleChoiceQuestion implements Question & Node {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # Identifies the question title.
+  """Identifies the question title."""
   title: String!
 
-  # Return responses on this questions.
+  """Return responses on this questions."""
   responses(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): ResponseConnection!
 
-  # The question available choices.
+  """The question available choices."""
   choices: [QuestionChoice!]!
 }
 
-# Fetches an object given its ID
+"""Fetches an object given its ID"""
 interface Node {
-  # The ID of an object
+  """The ID of an object"""
   id: ID!
 }
 
-# Possible reason that a `Publishable` is not published.
+"""Possible reason that a `Publishable` is not published."""
 enum NotPublishedReason {
-  # Author account was confirmed after the step has ended.
+  """Author account was confirmed after the step has ended."""
   AUTHOR_CONFIRMED_TOO_LATE
 
-  # Author account isn't confirmed and the step has ended.
+  """Author account isn't confirmed and the step has ended."""
   AUTHOR_NOT_CONFIRMED
 
-  # Author account isn't confirmed yet.
+  """Author account isn't confirmed yet."""
   WAITING_AUTHOR_CONFIRMATION
 }
 
-# Possible directions in which to order a list of items when provided an `orderBy` argument.
+"""
+Possible directions in which to order a list of items when provided an `orderBy` argument.
+"""
 enum OrderDirection {
-  # Specifies an ascending order for a given `orderBy` argument.
+  """Specifies an ascending order for a given `orderBy` argument."""
   ASC
 
-  # Specifies a descending order for a given `orderBy` argument.
+  """Specifies a descending order for a given `orderBy` argument."""
   DESC
 }
 
-# Information about pagination in a connection.
+"""Information about pagination in a connection."""
 type PageInfo {
-  # When paginating forwards, are there more items?
+  """When paginating forwards, are there more items?"""
   hasNextPage: Boolean!
 
-  # When paginating backwards, are there more items?
+  """When paginating backwards, are there more items?"""
   hasPreviousPage: Boolean!
 
-  # When paginating backwards, the cursor to continue.
+  """When paginating backwards, the cursor to continue."""
   startCursor: String
 
-  # When paginating forwards, the cursor to continue.
+  """When paginating forwards, the cursor to continue."""
   endCursor: String
 }
 
-# A participatory project.
+"""A participatory project."""
 type Project implements Node & UniformResourceLocatable {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # The URL to this resource.
+  """The URL to this resource."""
   url: URI!
 
-  # Identifies the title of the project.
+  """Identifies the title of the project."""
   title: String!
 
-  # Identifies when the project was published at.
+  """Identifies when the project was published at."""
   publishedAt: DateTime!
 
-  # A list of votes associated with the project.
+  """A list of votes associated with the project."""
   votes(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): VoteConnection!
 
-  # A list of contributors associated with the project.
+  """A list of contributors associated with the project."""
   contributors(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): UserConnection!
 
-  # Count of contributions associated with the project.
+  """Count of contributions associated with the project."""
   contributionsCount: Int! @deprecated(reason: "Field `contributionsCount` will be removed. Use `contributions.totalCount` instead when it will be published. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-01-01 UTC.")
 
-  # The cover image associated with the project.
+  """The cover image associated with the project."""
   cover: Media
 
-  # The type associated with the project.
+  """The type associated with the project."""
   type: ProjectType
 
-  # The different steps associated with the project.
+  """The different steps associated with the project."""
   steps: [Step!]!
 
-  # The list of users who authored the project.
+  """The list of users who authored the project."""
   authors: [User!]!
 }
 
-# A connection to a list of items.
+"""A connection to a list of items."""
 type ProjectConnection {
-  # Identifies the total count of items in the connection.
+  """Identifies the total count of items in the connection."""
   totalCount: Int!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   edges: [ProjectEdge]
 }
 
-# An edge in a connection.
+"""An edge in a connection."""
 type ProjectEdge {
-  # The item at the end of the edge.
+  """The item at the end of the edge."""
   node: Project!
 
-  # A cursor for use in pagination.
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
-# Ways in which project can be ordered.
+"""Ways in which project can be ordered."""
 input ProjectOrder {
-  # The field in which to order nodes by.
+  """The field in which to order nodes by."""
   field: ProjectOrderField
 
-  # The direction in which to order nodes.
+  """The direction in which to order nodes."""
   direction: OrderDirection
 }
 
-# Ordering options for projects returned from the connection.
+"""Ordering options for projects returned from the connection."""
 enum ProjectOrderField {
-  # Allows ordering a list of projects by when they were published.
+  """Allows ordering a list of projects by when they were published."""
   LATEST
 
-  # Allows ordering a list of projects by their number of contributions.
+  """Allows ordering a list of projects by their number of contributions."""
   POPULAR
 }
 
-# Label of a Project.
+"""Label of a Project."""
 type ProjectType {
-  # Title of project Type
+  """Title of project Type"""
   title: String!
 }
 
-# Represents a user's contribution to a collect step.
+"""Represents a user's contribution to a collect step."""
 type Proposal implements Node & Publishable & UniformResourceLocatable & Trashable {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # Whether or not the entity is published.
+  """Whether or not the entity is published."""
   published: Boolean!
 
-  # Identifies when the entity can no more be published.
+  """Identifies when the entity can no more be published."""
   publishableUntil: DateTime
 
-  # Identifies when the entity was published at.
+  """Identifies when the entity was published at."""
   publishedAt: DateTime
 
-  # Reason that the entity is not published.
+  """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  # The URL to this resource.
+  """The URL to this resource."""
   url: URI!
 
-  # Whether or not the contribution is trashed.
+  """Whether or not the contribution is trashed."""
   trashed: Boolean!
 
-  # Identifies the trashed visibility.
+  """Identifies the trashed visibility."""
   trashedStatus: TrashableStatus
 
-  # Identifies the moment the moderator trashed the contribution.
+  """Identifies the moment the moderator trashed the contribution."""
   trashedAt: DateTime
 
-  # Identifies the reason why the moderator trashed the contribution.
+  """Identifies the reason why the moderator trashed the contribution."""
   trashedReason: String
 
-  # Identifies the date and time when the object was last updated.
+  """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime
 
-  # Identifies the date and time when the object was created.
+  """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
-  # Identifies the proposal title.
+  """Identifies the proposal title."""
   title: String!
 
-  # Identifies the author of the contribution.
+  """Identifies the author of the contribution."""
   author: User!
 
-  # Identifies the body of the proposal.
+  """Identifies the body of the proposal."""
   body: HTML
 
-  # Identifies the responses of the proposal.
+  """Identifies the responses of the proposal."""
   responses: [Response]!
 
-  # Identifies the unique reference of the proposal.
+  """Identifies the unique reference of the proposal."""
   reference: String!
 }
 
-# A connection to a list of items.
+"""A connection to a list of items."""
 type ProposalConnection {
-  # Identifies the total count of items in the connection.
+  """Identifies the total count of items in the connection."""
   totalCount: Int!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   edges: [ProposalEdge]
 }
 
-# An edge in a connection.
+"""An edge in a connection."""
 type ProposalEdge {
-  # The item at the end of the edge.
+  """The item at the end of the edge."""
   node: Proposal!
 
-  # A cursor for use in pagination.
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
-# Ways in which proposal connections can be ordered.
+"""Ways in which proposal connections can be ordered."""
 input ProposalOrder {
-  # The field in which to order nodes by.
+  """The field in which to order nodes by."""
   field: ProposalOrderField!
 
-  # The direction in which to order nodes.
+  """The direction in which to order nodes."""
   direction: OrderDirection! = ASC
 }
 
-# Properties by which proposal connections can be ordered.
+"""Properties by which proposal connections can be ordered."""
 enum ProposalOrderField {
-  # Allows ordering a list of proposals by the number of comments it have.
+  """
+  Allows ordering a list of proposals by the number of comments it have.
+  """
   COMMENTS
 
-  # Allows ordering a list of proposals by the cost it have been estimated.
+  """
+  Allows ordering a list of proposals by the cost it have been estimated.
+  """
   COST
 
-  # Allows ordering a list of proposals by when they were published.
+  """Allows ordering a list of proposals by when they were published."""
   PUBLISHED_AT
 
-  # Allows randomizing a list of proposals.
+  """Allows randomizing a list of proposals."""
   RANDOM
 
-  # Allows ordering a list of proposals by the number of votes it have.
+  """Allows ordering a list of proposals by the number of votes it have."""
   VOTES
 }
 
-# Possible trashed status for a `Proposal`.
+"""Possible trashed status for a `Proposal`."""
 enum ProposalTrashedStatus {
-  # `NOT_TRASHED` status to inclide the non trashed proposal.
+  """`NOT_TRASHED` status to inclide the non trashed proposal."""
   NOT_TRASHED
 
-  # `TRASHED` status to include the trashed proposal.
+  """`TRASHED` status to include the trashed proposal."""
   TRASHED
 }
 
-# A vote on a proposal for a given step.
+"""A vote on a proposal for a given step."""
 type ProposalVote implements Publishable & Vote {
-  # The ID of an object
+  """The ID of an object"""
   id: ID!
 
-  # Whether or not the entity is published.
+  """Whether or not the entity is published."""
   published: Boolean!
 
-  # Identifies when the entity can no more be published.
+  """Identifies when the entity can no more be published."""
   publishableUntil: DateTime
 
-  # Identifies when the entity was published at.
+  """Identifies when the entity was published at."""
   publishedAt: DateTime
 
-  # Reason that the entity is not published.
+  """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  # Whether the author of the vote is anonymous or not.
+  """Whether the author of the vote is anonymous or not."""
   private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2019-09-01 UTC.")
 
-  # Whether the author of the vote is anonymous or not.
+  """Whether the author of the vote is anonymous or not."""
   anonymous: Boolean!
 
-  # Identifies the date and time when the object was created.
+  """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 }
 
-# Entities that can be published.
+"""Entities that can be published."""
 interface Publishable {
-  # The ID of an object
+  """The ID of an object"""
   id: ID!
 
-  # Whether or not the entity is published.
+  """Whether or not the entity is published."""
   published: Boolean!
 
-  # Identifies when the entity can no more be published.
+  """Identifies when the entity can no more be published."""
   publishableUntil: DateTime
 
-  # Identifies when the entity was published at.
+  """Identifies when the entity was published at."""
   publishedAt: DateTime
 
-  # Reason that the entity is not published.
+  """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 }
 
-# Root of the schema.
+"""Root of the schema."""
 type Query {
-  # The currently authenticated user.
+  """The currently authenticated user."""
   viewer: User!
 
-  # Lookup a node by its ID.
+  """Lookup a node by its ID."""
   node(
-    # The ID of an object.
+    """The ID of an object."""
     id: ID!
   ): Node
 
-  # Lookup nodes by a list of IDs.
+  """Lookup nodes by a list of IDs."""
   nodes(
-    # The list of node IDs.
+    """The list of node IDs."""
     ids: [ID!]!
   ): [Node]!
 
-  # Lookup projects.
+  """Lookup projects."""
   projects(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
 
-    # Ordering options for projects returning from the connection.
+    """Ordering options for projects returning from the connection."""
     orderBy: ProjectOrder = {field: LATEST, direction: DESC}
   ): ProjectConnection!
 
-  # Lookup events.
+  """Lookup events."""
   events(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
 
-    # Ordering options for events returning from the connection.
+    """Ordering options for events returning from the connection."""
     orderBy: EventOrder = {field: START_AT, direction: DESC}
 
-    # ID of a Project to filter by. If non-null, only events belonging to the project will be returned.
+    """
+    ID of a Project to filter by. If non-null, only events belonging to the project will be returned.
+    """
     project: ID
   ): EventConnection!
 
-  # Lookup users.
+  """Lookup users."""
   users(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): UserConnection!
 }
 
-# All custom forms are build using questions.
+"""All custom forms are build using questions."""
 interface Question {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # Identifies the question title.
+  """Identifies the question title."""
   title: String!
 
-  # Return responses on this questions.
+  """Return responses on this questions."""
   responses(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): ResponseConnection!
 }
 
-# A possible choice of a question.
+"""A possible choice of a question."""
 type QuestionChoice {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # Identifies the question choice title.
+  """Identifies the question choice title."""
   title: String!
 
-  # Identifies the responses of the question choice.
+  """Identifies the responses of the question choice."""
   responses(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): ResponseConnection!
 }
 
-# A questionnaire is a series of questions that users can answer.
+"""A questionnaire is a series of questions that users can answer."""
 type Questionnaire implements Node {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # Identifies the questionnaire title.
+  """Identifies the questionnaire title."""
   title: String!
 
-  # Whether the user has reply to a questionnaire.
+  """Whether the user has reply to a questionnaire."""
   userHasReply(
-    # The user's login (for example, an email).
+    """The user's login (for example, an email)."""
     login: String!
   ): Boolean!
 
-  # A list of users that have replied to the questionnaire.
+  """A list of users that have replied to the questionnaire."""
   participants(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): UserConnection!
 
-  # The list of questions of the questionnaire.
+  """The list of questions of the questionnaire."""
   questions: [Question!]!
 
-  # A list of replies to the questionnaire.
+  """A list of replies to the questionnaire."""
   replies(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): ReplyConnection!
 }
 
-# Represents a user's answer to a questionnaire.
+"""Represents a user's answer to a questionnaire."""
 type Reply implements Node & Publishable {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # Whether or not the entity is published.
+  """Whether or not the entity is published."""
   published: Boolean!
 
-  # Identifies when the entity can no more be published.
+  """Identifies when the entity can no more be published."""
   publishableUntil: DateTime
 
-  # Identifies when the entity was published at.
+  """Identifies when the entity was published at."""
   publishedAt: DateTime
 
-  # Reason that the entity is not published.
+  """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  # Identifies the date and time when the object was last updated.
+  """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime
 
-  # Identifies the date and time when the object was created.
+  """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
-  # The responses of the reply.
+  """The responses of the reply."""
   responses: [Response]!
 
-  # The author of the contribution.
+  """The author of the contribution."""
   author: User!
 }
 
-# A connection to a list of items.
+"""A connection to a list of items."""
 type ReplyConnection {
-  # Identifies the total count of items in the connection.
+  """Identifies the total count of items in the connection."""
   totalCount: Int!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   edges: [ReplyEdge]
 }
 
-# An edge in a connection.
+"""An edge in a connection."""
 type ReplyEdge {
-  # The item at the end of the edge.
+  """The item at the end of the edge."""
   node: Reply!
 
-  # A cursor for use in pagination.
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
-# A response to a question.
+"""A response to a question."""
 interface Response {
-  # Nullable ID in case of empty response.
+  """Nullable ID in case of empty response."""
   id: String
 
-  # The question.
+  """The question."""
   question: Question!
 }
 
-# A connection to a list of items.
+"""A connection to a list of items."""
 type ResponseConnection {
-  # Identifies the total count of items in the connection.
+  """Identifies the total count of items in the connection."""
   totalCount: Int!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   edges: [ResponseEdge]
 }
 
-# An edge in a connection.
+"""An edge in a connection."""
 type ResponseEdge {
-  # The item at the end of the edge.
+  """The item at the end of the edge."""
   node: Response!
 
-  # A cursor for use in pagination.
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
-# A section is just a title in a quiz without any possible answer.
+"""A section is just a title in a quiz without any possible answer."""
 type SectionQuestion implements Question & Node {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # Identifies the question title.
+  """Identifies the question title."""
   title: String!
 
-  # Return responses on this questions.
+  """Return responses on this questions."""
   responses(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): ResponseConnection!
 }
 
-# A simple question
+"""A simple question"""
 type SimpleQuestion implements Question & Node {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # Identifies the question title.
+  """Identifies the question title."""
   title: String!
 
-  # Return responses on this questions.
+  """Return responses on this questions."""
   responses(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): ResponseConnection!
 }
 
-# A step is a part of a project.
+"""A step is a part of a project."""
 interface Step {
-  # When the time interval begins or ends.
+  """When the time interval begins or ends."""
   timeRange: TimeRange!
 
-  # The URL to this resource.
+  """The URL to this resource."""
   url: URI!
 
-  # The ID of an object
+  """The ID of an object"""
   id: ID!
 
-  # The title of the step.
+  """The title of the step."""
   title: String!
 }
 
-# A time range that contains start date and end date.
+"""A time range that contains start date and end date."""
 type TimeRange {
-  # The start date of the time range.
+  """The start date of the time range."""
   startAt: DateTime
 
-  # The end date of the time range
+  """The end date of the time range"""
   endAt: DateTime
 }
 
-# Entities that can be trashed.
+"""Entities that can be trashed."""
 interface Trashable {
-  # Whether or not the contribution is trashed.
+  """Whether or not the contribution is trashed."""
   trashed: Boolean!
 
-  # Identifies the trashed visibility.
+  """Identifies the trashed visibility."""
   trashedStatus: TrashableStatus
 
-  # Identifies the moment the moderator trashed the contribution.
+  """Identifies the moment the moderator trashed the contribution."""
   trashedAt: DateTime
 
-  # Identifies the reason why the moderator trashed the contribution.
+  """Identifies the reason why the moderator trashed the contribution."""
   trashedReason: String
 }
 
-# Different trashable status.
+"""Different trashable status."""
 enum TrashableStatus {
-  # Content is not visible.
+  """Content is not visible."""
   INVISIBLE
 
-  # Content is visible.
+  """Content is visible."""
   VISIBLE
 }
 
-# An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string.
+"""An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string."""
 scalar URI
 
-# Represents a type that can be retrieved by a URL.
+"""Represents a type that can be retrieved by a URL."""
 interface UniformResourceLocatable {
-  # The URL to this resource.
+  """The URL to this resource."""
   url: URI!
 }
 
-# A user is an individual's account.
+"""A user is an individual's account."""
 type User implements Node & UniformResourceLocatable {
-  # The ID of an object.
+  """The ID of an object."""
   id: ID!
 
-  # The URL to this resource.
+  """The URL to this resource."""
   url: URI!
 
-  # The user's public name.
+  """The user's public name."""
   username: String
 
-  # Whether or not this user is the authenticated user.
+  """Whether or not this user is the authenticated user."""
   isViewer: Boolean!
 
-  # Identifies the date and time when the object was created.
+  """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
-  # Identifies the date and time when the object was last updated.
+  """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime
 
-  # A URL pointing to the user's Facebook account.
+  """A URL pointing to the user's Facebook account."""
   facebookUrl: URI
 
-  # A URL pointing to the user's Twitter account.
+  """A URL pointing to the user's Twitter account."""
   twitterUrl: URI
 
-  # A URL pointing to the user's LinkedIn account.
+  """A URL pointing to the user's LinkedIn account."""
   linkedInUrl: URI
 
-  # A URL pointing to the user's public website/blog.
+  """A URL pointing to the user's public website/blog."""
   websiteUrl: URI
 
-  # The user's public profile biography.
+  """The user's public profile biography."""
   biography: String
 
-  # Identifies the date and time when this user account was deleted.
+  """Identifies the date and time when this user account was deleted."""
   deletedAccountAt: DateTime
 
-  # The type of the person.
+  """The type of the person."""
   userType: UserType
 
-  # The responses answered by user.
+  """The responses answered by user."""
   responses(
-    # Returns the elements in the list that come after the specified cursor.
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
     after: String
 
-    # Returns the first `n` elements from the list.
+    """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    # Returns the elements in the list that come before the specified cursor.
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
     before: String
 
-    # Returns the last `n` elements from the list.
+    """Returns the last `n` elements from the list."""
     last: Int
   ): ResponseConnection!
 
-  # The user's personal email.
+  """The user's personal email."""
   email: Email
 
-  # Whether or not this user consent internal communication.
+  """Whether or not this user consent internal communication."""
   consentInternalCommunication: Boolean
 
-  # The user's public avatar URL.
+  """The user's public avatar URL."""
   avatarUrl: URI
 
-  # Whether or not this user has a confirmed account.
+  """Whether or not this user has a confirmed account."""
   enabled: Boolean!
 }
 
-# A connection to a list of items.
+"""A connection to a list of items."""
 type UserConnection {
-  # Identifies the total count of items in the connection.
+  """Identifies the total count of items in the connection."""
   totalCount: Int!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   edges: [UserEdge]
 }
 
-# An edge in a connection.
+"""An edge in a connection."""
 type UserEdge {
-  # The item at the end of the edge.
+  """The item at the end of the edge."""
   node: User!
 
-  # A cursor for use in pagination.
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
-# A type of person
+"""A type of person"""
 type UserType {
-  # The id of the type.
+  """The id of the type."""
   id: ID!
 
-  # The name of the type.
+  """The name of the type."""
   name: String!
 }
 
-# A value response.
+"""A value response."""
 type ValueResponse implements Response {
-  # Nullable ID in case of empty response.
+  """Nullable ID in case of empty response."""
   id: String
 
-  # The question.
+  """The question."""
   question: Question!
 
-  # The response value which can be a string or a JSON.
+  """The response value which can be a string or a JSON."""
   value: String
 
-  # The response value formatted.
+  """The response value formatted."""
   formattedValue: String
 }
 
-# A vote.
+"""A vote."""
 interface Vote {
-  # The ID of an object
+  """The ID of an object"""
   id: ID!
 
-  # Identifies the date and time when the object was created.
+  """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 }
 
-# A connection to a list of items.
+"""A connection to a list of items."""
 type VoteConnection {
-  # Identifies the total count of items in the connection.
+  """Identifies the total count of items in the connection."""
   totalCount: Int!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  # Information to aid in pagination.
+  """Information to aid in pagination."""
   edges: [VoteEdge]
 }
 
-# An edge in a connection.
+"""An edge in a connection."""
 type VoteEdge {
-  # The item at the end of the edge.
+  """The item at the end of the edge."""
   node: Vote
 
-  # A cursor for use in pagination.
+  """A cursor for use in pagination."""
   cursor: String!
 }

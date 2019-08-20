@@ -38,7 +38,7 @@ abstract class BaseUpdateProfile implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer)
     {
-        $this->arguments = $input->getRawArguments();
+        $this->arguments = $input->getArrayCopy();
         $this->user = $viewer;
         $userId = GlobalId::fromGlobalId($this->arguments[self::USER_ID])['id'];
         if (!empty($this->arguments[self::USER_ID])) {

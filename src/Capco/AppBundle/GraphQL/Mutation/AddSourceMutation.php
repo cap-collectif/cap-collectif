@@ -19,7 +19,7 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddSourceMutation implements MutationInterface
@@ -104,7 +104,7 @@ class AddSourceMutation implements MutationInterface
             $source->setOpinionVersion($sourceable);
         }
 
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         unset($values['sourceableId']);
         $form = $this->formFactory->create(ApiSourceType::class, $source);
         $form->submit($values, false);

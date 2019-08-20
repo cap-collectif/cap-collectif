@@ -178,5 +178,5 @@ Scenario: GraphQL client wants to update a project without authors
   """
   Then the JSON response should match:
   """
-{"errors":[{"message":"You must specify at least one author.","category":"user","locations":[@...@], "path":["updateProject"]}],"data":{"updateProject":null}}
+{"errors":[{"message":"You must specify at least one author.","@*@": "@*@"}],"data":{"updateProject":null}}
   """

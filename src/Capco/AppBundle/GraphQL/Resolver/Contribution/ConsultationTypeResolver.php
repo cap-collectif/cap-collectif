@@ -16,7 +16,7 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class ConsultationTypeResolver implements ResolverInterface
 {

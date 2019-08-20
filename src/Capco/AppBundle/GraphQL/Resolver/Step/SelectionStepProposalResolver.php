@@ -96,13 +96,13 @@ class SelectionStepProposalResolver implements ResolverInterface
                     $seed
                 );
 
-                $totalCount = $results['count'];
+                $totalCount = (int) $results['count'];
 
                 return $results['proposals'];
             });
 
             $connection = $paginator->auto($args, $totalCount);
-            $connection->totalCount = $totalCount;
+            $connection->setTotalCount($totalCount);
             $connection->{'fusionCount'} = 0;
 
             return $connection;

@@ -67,7 +67,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $author->isEmailConfirmed()->willReturn(true);
         $author->isAdmin()->willReturn(false);
 
-        $input->getRawArguments()->willReturn($values);
+        $input->getArrayCopy()->willReturn($values);
 
         $proposal->getId()->willReturn('proposal21');
         $proposal->isDraft()->willReturn(true);
@@ -94,14 +94,14 @@ class ProposalMutationSpec extends ObjectBehavior
         $formFactory
             ->create(ProposalAdminType::class, $proposal, [
                 'proposalForm' => $proposalForm,
-                'validation_groups' => ['Default'],
+                'validation_groups' => ['Default']
             ])
             ->willReturn($form);
 
         $form
             ->submit(
                 [
-                    'title' => 'new title',
+                    'title' => 'new title'
                 ],
                 false
             )

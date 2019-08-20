@@ -52,7 +52,9 @@ class QueryEventsResolver implements ResolverInterface
             ) {
                 $filters = [];
                 $search = null;
-                $orderBy = $args->offsetExists('orderBy') ? $args->offsetGet('orderBy') : ['field' => EventOrderField::START_AT , 'direction' => OrderDirection::ASC];
+                $orderBy = $args->offsetExists('orderBy')
+                    ? $args->offsetGet('orderBy')
+                    : ['field' => EventOrderField::START_AT, 'direction' => OrderDirection::ASC];
 
                 if ($args->offsetExists('theme')) {
                     $filters['themes'] = $args->offsetGet('theme');
@@ -86,13 +88,13 @@ class QueryEventsResolver implements ResolverInterface
                     $orderBy
                 );
 
-                $totalCount = $results['count'];
+                $totalCount = (int) $results['count'];
 
                 return $results['events'];
             });
 
             $connection = $paginator->auto($args, $totalCount);
-            $connection->totalCount = $totalCount;
+            $connection->setTotalCount($totalCount);
 
             return $connection;
         } catch (\RuntimeException $exception) {

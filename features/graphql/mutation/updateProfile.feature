@@ -196,7 +196,7 @@ Scenario: User should not be able to update personal data of an other user
   Then the JSON response should match:
   """
   {
-    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","category":@string@,"locations":[{"line":1,"column":90}],"path":["updateProfilePersonalData"]}],"data":{"updateProfilePersonalData":null}
+    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","@*@": "@*@"}],"data":{"updateProfilePersonalData":null}
   }
   """
 
@@ -312,34 +312,7 @@ Scenario: User should not be able to update personal data of an other user
   Then the JSON response should match:
   """
   {
-    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","category":@string@,"locations":[{"line":1,"column":86}],"path":["updateProfilePublicData"]}],"data":{"updateProfilePublicData":null}
-  }
-  """
-
-@security
-Scenario: User should be able to update his public data, but username is missing
-  Given I am logged in to graphql as user
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation UpdateProfilePublicDataMutation($input: UpdateProfilePublicDataInput!) {
-      updateProfilePublicData(input: $input) {
-        user {
-          id
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "username": null
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "errors":[{"message":"Variable \u0022$input\u0022 got invalid value {\u0022username\u0022:null}.\nIn field \u0022username\u0022: Expected \u0022String!\u0022, found null.","category":@string@,"locations":[{"line":1,"column":42}]}]
+    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","@*@": "@*@"}],"data":{"updateProfilePublicData":null}
   }
   """
 
@@ -532,7 +505,7 @@ Scenario: Admin should not be able to update other/own user as super admin
   Then the JSON response should match:
   """
   {
-"errors":[{"message":"You are not able to add super_admin role to a user.","category":@string@,"locations":[{"line":1,"column":74}],"path":["updateUserAccount"]}],"data":{"updateUserAccount":null}
+"errors":[{"message":"You are not able to add super_admin role to a user.","@*@": "@*@"}],"data":{"updateUserAccount":null}
   }
   """
 

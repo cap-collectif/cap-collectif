@@ -10,25 +10,28 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class CollectStepViewerProposalDraftResolver implements ResolverInterface
 {
     private $proposalFormRepository;
     private $proposalRepository;
+    private $builder;
 
     public function __construct(
         ProposalFormRepository $proposalFormRepository,
-        ProposalRepository $proposalRepository
+        ProposalRepository $proposalRepository,
+        ConnectionBuilder $builder
     ) {
         $this->proposalFormRepository = $proposalFormRepository;
         $this->proposalRepository = $proposalRepository;
+        $this->builder = $builder;
     }
 
     public function __invoke(CollectStep $step, User $user, Argument $args): Connection
     {
         $proposalForm = $this->proposalFormRepository->findOneBy([
-            'step' => $step->getId(),
+            'step' => $step->getId()
         ]);
 
         if (!$proposalForm) {
@@ -39,11 +42,11 @@ class CollectStepViewerProposalDraftResolver implements ResolverInterface
             'draft' => true,
             'deletedAt' => null,
             'author' => $user,
-            'proposalForm' => $proposalForm,
+            'proposalForm' => $proposalForm
         ]);
 
-        $connection = ConnectionBuilder::connectionFromArray($proposals, $args);
-        $connection->totalCount = \count($proposals);
+        $connection = $this->builder->connectionFromArray($proposals, $args);
+        $connection->setTotalCount(\count($proposals));
         $connection->{'fusionCount'} = 0;
 
         return $connection;

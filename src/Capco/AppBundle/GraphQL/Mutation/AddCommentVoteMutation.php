@@ -13,7 +13,7 @@ use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\CommentVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class AddCommentVoteMutation implements MutationInterface

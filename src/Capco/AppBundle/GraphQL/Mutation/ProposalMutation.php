@@ -58,7 +58,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
 
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
         unset($values['proposalId']); // This only useful to retrieve the proposal
@@ -85,7 +85,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
 
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
 
         unset($values['proposalId']);
@@ -122,7 +122,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
 
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
         if (!$proposal) {
@@ -178,7 +178,7 @@ class ProposalMutation implements ContainerAwareInterface
         $stepId = GlobalIdResolver::getDecodedId($stepId);
         $selection = $this->container->get(SelectionRepository::class)->findOneBy([
             'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
-            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
+            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId
         ]);
 
         if (!$selection) {
@@ -214,7 +214,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $selection = $this->container->get(SelectionRepository::class)->findOneBy([
             'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
-            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
+            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId
         ]);
 
         if (!$selection) {
@@ -247,7 +247,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $selection = $this->container->get(SelectionRepository::class)->findOneBy([
             'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
-            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
+            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId
         ]);
         if ($selection) {
             throw new UserError('Already selected');
@@ -339,7 +339,7 @@ class ProposalMutation implements ContainerAwareInterface
         $formFactory = $this->container->get('form.factory');
         $proposalFormRepo = $this->container->get(ProposalFormRepository::class);
 
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
 
         /** @var ProposalForm $proposalForm */
         $proposalForm = $proposalFormRepo->find($values['proposalFormId']);
@@ -394,7 +394,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $form = $formFactory->create(ProposalType::class, $proposal, [
             'proposalForm' => $proposalForm,
-            'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
+            'validation_groups' => [$draft ? 'ProposalDraft' : 'Default']
         ]);
 
         $this->logger->info('createProposal: ' . json_encode($values, true));
@@ -433,7 +433,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
 
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['id'], $user);
 
@@ -473,7 +473,7 @@ class ProposalMutation implements ContainerAwareInterface
         /** @var Form $form */
         $form = $formFactory->create(ProposalAdminType::class, $proposal, [
             'proposalForm' => $proposalForm,
-            'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
+            'validation_groups' => [$draft ? 'ProposalDraft' : 'Default']
         ]);
 
         if (!$user->isAdmin()) {

@@ -68,9 +68,7 @@ Scenario: Logged in API client wants to remove a vote but has not voted
     "errors": [
       {
         "message": "You have not voted for this argument.",
-        "category": @string@,
-        "locations": [{"line":1,"column":50}],
-        "path": ["removeArgumentVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {
@@ -105,9 +103,7 @@ Scenario: Logged in API client wants to remove a vote without requirements
     "errors": [
       {
         "message": "You dont meets all the requirements.",
-        "category": @string@,
-        "locations": [{"line":1,"column":50}],
-        "path": ["removeArgumentVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {

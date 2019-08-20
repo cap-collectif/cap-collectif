@@ -3,10 +3,8 @@ InternalUser:
   inherits:
     - PreviewUser
     - InternalPrimaryKey
-    - UniformResourceLocatable
   config:
     description: "A user is an individual's account."
-    interfaces: [Node, UniformResourceLocatable]
     name: User
     fields:
       media:
@@ -108,11 +106,6 @@ InternalUser:
         argsBuilder: 'Relay::Connection'
         description: 'Get all sources of the user'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSourcesResolver", [getUser(), value, args, context])'
-        args:
-          first:
-            type: 'Int'
-            description: 'Returns the first n elements from the list.'
-            defaultValue: 100
       opinionVotesCount:
         type: 'Int!'
       opinionVersionsCount:
@@ -126,11 +119,6 @@ InternalUser:
         argsBuilder: 'Relay::Connection'
         description: 'Get all proposals of the user.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProposalsResolver", [getUser(), value, args, context])'
-        args:
-          first:
-            type: 'Int'
-            description: 'Returns the first n elements from the list.'
-            defaultValue: 100
       proposalVotesCount:
         type: 'Int!'
       commentVotes:
@@ -138,11 +126,6 @@ InternalUser:
         argsBuilder: 'Relay::Connection'
         description: 'Get all comment votes of the user.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentVotesResolver", [value, args])'
-        args:
-          first:
-            type: 'Int'
-            description: 'Returns the first n elements from the list.'
-            defaultValue: 100
       contributionsToDeleteCount:
         type: 'Int!'
         description: 'Provisional number of contributions who will be totally deleted if the user chose to delete his account.'
@@ -157,11 +140,6 @@ InternalUser:
         argsBuilder: 'Relay::Connection'
         description: 'Get all comments of the user.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentsResolver", [getUser(), value, args, context])'
-        args:
-          first:
-            type: 'Int'
-            description: 'Returns the first n elements from the list.'
-            defaultValue: 100
       consentExternalCommunication:
         type: 'Boolean!'
         description: 'Whether or not this user consent external communication.'
@@ -170,23 +148,14 @@ InternalUser:
         type: 'InternalProposalConnection!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalsFollowedByUserResolver", [value, args])'
         description: 'Array of proposals followed by current user.'
+        argsBuilder:
+          builder: 'Relay::Connection'
+          config:
+            defaultLimit: 32
         args:
           orderBy:
             type: 'String'
             description: 'Ordering options for followers returning from the connection'
-          after:
-            type: 'String'
-            description: 'Returns the elements in the list that come after the specified global ID.'
-          first:
-            type: 'Int'
-            defaultValue: 32
-            description: 'Returns the first n elements from the list.'
-          before:
-            type: 'String'
-            description: 'Returns the elements in the list that come before the specified global ID.'
-          last:
-            type: 'Int'
-            description: 'Returns the last n elements from the list.'
       followingOpinions:
         type: 'OpinionConnection!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionsFollowedByUserResolver", [value, args])'
@@ -223,9 +192,6 @@ InternalUser:
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerProposalVotesResolver", [value, args, context, getUser()])'
         args:
-          first:
-            type: 'Int'
-            defaultValue: 100
           orderBy:
             type: 'ProposalVotesOrder'
             defaultValue: { field: PUBLISHED_AT, direction: DESC }
@@ -243,10 +209,6 @@ InternalUser:
         type: 'InternalVoteConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all votes of the user.'
-        args:
-          first:
-            type: 'Int'
-            defaultValue: 100
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [value, args])'
       groups:
         type: 'GroupConnection!'
@@ -269,23 +231,11 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventsResolver", [value, args])'
       contributions:
         type: 'ContributionConnection!'
+        argsBuilder: 'Relay::Connection'
         args:
           type:
             type: 'ContributionType'
             description: 'Type of contribustion requested'
-          after:
-            type: 'String'
-            description: 'Returns the elements in the list that come after the specified global ID.'
-          first:
-            type: 'Int'
-            defaultValue: 100
-            description: 'Returns the first n elements from the list.'
-          before:
-            type: 'String'
-            description: 'Returns the elements in the list that come before the specified global ID.'
-          last:
-            type: 'Int'
-            description: 'Returns the last n elements from the list.'
         description: "Return the user's contributions of the type requested."
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionResolver", [value, args])'
       isSubscribedToNewsLetter:

@@ -8,9 +8,7 @@ InternalProject:
   config:
     name: Project
     interfaces:
-      - UniformResourceLocatable
       - UniformResourceAdminLocatable
-      - Node
     description: 'A participatory project.'
     fields:
       # Override PublicProject or PreviewProject fields
@@ -27,8 +25,6 @@ InternalProject:
       type:
         type: 'InternalProjectType'
       # Internal fields
-      # proposals:
-      #  resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args, getUser()])'
       slug:
         type: 'String!'
         description: 'Slug of a project'

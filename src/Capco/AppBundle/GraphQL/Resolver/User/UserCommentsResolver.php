@@ -82,7 +82,7 @@ class UserCommentsResolver implements ResolverInterface
         }
 
         $connection = $paginator->auto($args, $totalCount);
-        $connection->totalCount = $totalCount;
+        $connection->setTotalCount($totalCount);
 
         return $connection;
     }

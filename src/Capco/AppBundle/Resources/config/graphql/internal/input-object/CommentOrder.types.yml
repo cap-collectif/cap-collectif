@@ -6,6 +6,8 @@ CommentOrder:
       field:
         type: 'CommentOrderField!'
         defaultValue: 'PUBLISHED_AT'
+        description: 'The field in which to order nodes by.'
       direction:
         type: 'OrderDirection!'
         defaultValue: 'DESC'
+        description: 'The direction in which to order nodes.'

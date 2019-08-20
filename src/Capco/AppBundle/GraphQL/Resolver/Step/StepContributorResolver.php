@@ -40,7 +40,7 @@ class StepContributorResolver implements ResolverInterface
             try {
                 $value = $this->userSearch->getContributorByStep($step, $offset, $limit);
                 $contributors = $value['results'];
-                $totalCount = $value['totalCount'];
+                $totalCount = (int) $value['totalCount'];
 
                 return $contributors;
             } catch (\RuntimeException $exception) {
@@ -51,7 +51,7 @@ class StepContributorResolver implements ResolverInterface
         });
 
         $connection = $paginator->auto($args, $totalCount);
-        $connection->totalCount = $totalCount;
+        $connection->setTotalCount($totalCount);
 
         $connection->{'anonymousCount'} = $this->getAnonymousVote($step);
 

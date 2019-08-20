@@ -8,6 +8,7 @@ Scenario: Can create an opinion of contribuable type in opened project
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
   When I click the "#btn-add--les-causes" element
+  And I wait "#opinion-create-form" to appear on current page
   And I fill in the following:
     | opinion_title | Titre                           |
     | opinion_body  | Description de ma proposition   |

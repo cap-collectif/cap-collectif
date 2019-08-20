@@ -2,16 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL;
 
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder as ParentBuilder;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionBuilder as ParentBuilder;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 final class ConnectionBuilder
 {
-    public static function empty(array $extraFields = []): Connection
+    public static function empty(array $extraFields = []): ConnectionInterface
     {
-        $emptyConnection = ParentBuilder::connectionFromArray([], new Argument());
-        $emptyConnection->totalCount = 0;
+        $connectionBuilder = new ParentBuilder();
+        $emptyConnection = $connectionBuilder->connectionFromArray([], new Argument([]));
+        $emptyConnection->setTotalCount(0);
 
         foreach ($extraFields as $key => $value) {
             $emptyConnection->{$key} = $value;
@@ -20,8 +21,15 @@ final class ConnectionBuilder
         return $emptyConnection;
     }
 
-    public static function connectionFromArray(array $array, Argument $args): Connection
+    public function connectionFromArray(array $array, ?Argument $args = null): ConnectionInterface
     {
-        return ParentBuilder::connectionFromArray($array, $args);
+        $connectionBuilder = new ParentBuilder();
+
+        return $connectionBuilder->connectionFromArray($array, $args ? $args : []);
+    }
+
+    public static function offsetToCursor(int $offset): string
+    {
+        return base64_encode(ParentBuilder::PREFIX . $offset);
     }
 }

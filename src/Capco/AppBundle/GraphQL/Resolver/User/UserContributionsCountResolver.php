@@ -31,10 +31,10 @@ class UserContributionsCountResolver implements ResolverInterface
     {
         return $this->userEventCommentsCountResolver->__invoke($user) +
             $this->userOpinionsResolver->getCountPublicPublished($user, true, $viewer) +
-            $this->userProposalsResolver->__invoke($viewer, $user)->totalCount +
+            $this->userProposalsResolver->__invoke($viewer, $user)->getTotalCount() +
             $user->getArgumentsCount() +
             $user->getOpinionVersionsCount() +
-            $this->userRepliesResolver->__invoke($viewer, $user)->totalCount +
-            $this->userSourcesResolver->__invoke($viewer, $user)->totalCount;
+            $this->userRepliesResolver->__invoke($viewer, $user)->getTotalCount() +
+            $this->userSourcesResolver->__invoke($viewer, $user)->getTotalCount();
     }
 }

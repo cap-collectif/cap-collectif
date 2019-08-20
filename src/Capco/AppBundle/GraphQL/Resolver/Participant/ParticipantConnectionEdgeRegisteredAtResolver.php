@@ -19,13 +19,13 @@ class ParticipantConnectionEdgeRegisteredAtResolver implements ResolverInterface
 
     public function __invoke(Edge $edge): \DateTime
     {
-        if ($edge->node instanceof EventRegistration) {
-            return $edge->node->getCreatedAt();
+        if ($edge->getNode() instanceof EventRegistration) {
+            return $edge->getNode()->getCreatedAt();
         }
-        if ($edge->node instanceof User) {
+        if ($edge->getNode() instanceof User) {
             $registration = $this->eventRegistrationRepository->getOneByUserAndEvent(
-                $edge->node,
-                $edge->node->registeredEvent
+                $edge->getNode(),
+                $edge->getNode()->registeredEvent
             );
 
             return $registration->getCreatedAt();

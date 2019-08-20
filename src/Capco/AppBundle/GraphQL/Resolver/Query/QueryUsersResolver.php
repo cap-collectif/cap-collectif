@@ -49,13 +49,13 @@ class QueryUsersResolver implements ResolverInterface
             $orderBy
         ) {
             $users = $this->userSearch->getAllUsers($limit, $offset, $orderBy, $includeSuperAdmin);
-            $totalCount = $users['totalCount'];
+            $totalCount = (int) $users['totalCount'];
 
             return $users['results'];
         });
 
         $connection = $paginator->auto($args, $totalCount);
-        $connection->totalCount = $totalCount;
+        $connection->setTotalCount($totalCount);
 
         return $connection;
     }

@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

@@ -44,13 +44,5 @@ Scenario: Logged in API client wants to vote for a comment without requirement
   """
   Then the JSON response should match:
   """
-  {
-    "errors":[{
-      "message":"You dont meets all the requirements.",
-      "category":"user",
-      "locations":[{"line":1,"column":48}],
-      "path":["removeSourceVote"]
-    }],
-    "data":{"removeSourceVote":null}
-  }
+  {"errors":[{"message":"You dont meets all the requirements.","@*@": "@*@"}],"data":{"removeSourceVote":null}}
   """

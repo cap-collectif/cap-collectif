@@ -13,7 +13,7 @@ use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\SourceVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddSourceVoteMutation implements MutationInterface
@@ -53,7 +53,7 @@ class AddSourceVoteMutation implements MutationInterface
 
         $previousVote = $this->sourceVoteRepo->findOneBy([
             'user' => $viewer,
-            'source' => $source,
+            'source' => $source
         ]);
 
         if ($previousVote) {
@@ -84,7 +84,7 @@ class AddSourceVoteMutation implements MutationInterface
 
         return [
             'voteEdge' => $edge,
-            'viewer' => $viewer,
+            'viewer' => $viewer
         ];
     }
 }

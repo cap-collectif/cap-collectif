@@ -20,7 +20,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddOpinionVoteMutation implements MutationInterface
@@ -82,13 +82,13 @@ class AddOpinionVoteMutation implements MutationInterface
         if ($contribution instanceof Opinion) {
             $previousVote = $this->opinionVoteRepo->findOneBy([
                 'user' => $viewer,
-                'opinion' => $contribution,
+                'opinion' => $contribution
             ]);
         }
         if ($contribution instanceof OpinionVersion) {
             $previousVote = $this->versionVoteRepo->findOneBy([
                 'user' => $viewer,
-                'opinionVersion' => $contribution,
+                'opinionVersion' => $contribution
             ]);
         }
 
@@ -124,7 +124,7 @@ class AddOpinionVoteMutation implements MutationInterface
             'vote' => $vote,
             'voteEdge' => $edge,
             'viewer' => $viewer,
-            'previousVoteId' => $previousVoteId,
+            'previousVoteId' => $previousVoteId
         ];
     }
 }

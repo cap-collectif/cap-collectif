@@ -11,30 +11,35 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\RequirementRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class StepRequirementsResolver implements ResolverInterface
 {
     private $repository;
     private $viewerMeetsTheRequirementResolver;
+    private $builder;
 
     public function __construct(
         RequirementRepository $repository,
-        ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver
+        ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver,
+        ConnectionBuilder $builder
     ) {
         $this->repository = $repository;
+        $this->builder = $builder;
         $this->viewerMeetsTheRequirementResolver = $viewerMeetsTheRequirementResolver;
     }
 
     public function __invoke(
         AbstractStep $step,
-        /* User|string */ $user,
+        // User|string
+
+        $user,
         Argument $args
     ): Connection {
         $requirements = $this->repository->getByStep($step);
 
-        $connection = ConnectionBuilder::connectionFromArray($requirements, $args);
-        $connection->totalCount = \count($requirements);
+        $connection = $this->builder->connectionFromArray($requirements, $args);
+        $connection->setTotalCount(\count($requirements));
 
         if (
             $step instanceof SelectionStep ||

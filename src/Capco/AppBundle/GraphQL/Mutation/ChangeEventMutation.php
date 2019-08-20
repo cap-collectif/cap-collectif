@@ -38,7 +38,7 @@ class ChangeEventMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
 
         if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
             return [

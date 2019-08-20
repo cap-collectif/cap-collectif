@@ -13,7 +13,7 @@ use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddArgumentVoteMutation implements MutationInterface
@@ -53,7 +53,7 @@ class AddArgumentVoteMutation implements MutationInterface
 
         $previousVote = $this->argumentVoteRepo->findOneBy([
             'user' => $viewer,
-            'argument' => $argument,
+            'argument' => $argument
         ]);
 
         if ($previousVote) {
@@ -84,7 +84,7 @@ class AddArgumentVoteMutation implements MutationInterface
 
         return [
             'voteEdge' => $edge,
-            'viewer' => $viewer,
+            'viewer' => $viewer
         ];
     }
 }

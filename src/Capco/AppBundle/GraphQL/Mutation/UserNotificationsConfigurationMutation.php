@@ -34,7 +34,7 @@ class UserNotificationsConfigurationMutation implements MutationInterface
             UserNotificationsConfigurationType::class,
             $userNotificationsConfiguration
         );
-        $values = $args->getRawArguments();
+        $values = $args->getArrayCopy();
         $form->submit($values);
         if (!$form->isValid()) {
             $this->logger->error(

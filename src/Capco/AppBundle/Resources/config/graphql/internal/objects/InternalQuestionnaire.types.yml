@@ -1,12 +1,10 @@
 InternalQuestionnaire:
   type: object
   inherits:
-    - Node
     - PreviewQuestionnaire
     - InternalPrimaryKey
   config:
     name: Questionnaire
-    interfaces: [Node]
     fields:
       step:
         type: 'QuestionnaireStep'

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Public|Query.viewer can not access if not authenticated 1`] = `Array []`;
+exports[`Public|Query.viewer can not access if not authenticated 1`] = `[Error: GraphQL Error (Code: 200): {"response":{"extensions":{"warnings":[{"message":"Access denied to this field.","extensions":{"category":"user"},"locations":[{"line":3,"column":5}],"path":["viewer"]}]},"status":200},"request":{"query":"\\n  query ViewerQuery {\\n    viewer {\\n      id\\n      username\\n      email\\n      createdAt\\n      consentInternalCommunication\\n      avatarUrl\\n      websiteUrl\\n      facebookUrl\\n      twitterUrl\\n      linkedInUrl\\n      biography\\n      enabled\\n      deletedAccountAt\\n    }\\n  }\\n","variables":null}}]`;
 
 exports[`Public|Query.viewer fetches an admin 1`] = `
 Object {

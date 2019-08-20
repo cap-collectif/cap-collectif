@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -23,10 +24,8 @@ class OpinionVotesResolver implements ResolverInterface
         $this->versionVoteRepository = $versionVoteRepository;
     }
 
-    public function __invoke(
-        OpinionContributionInterface $contribution,
-        Argument $args
-    ): Connection {
+    public function __invoke(OpinionContributionInterface $contribution, Argument $args): Connection
+    {
         $field = $args->offsetGet('orderBy')['field'];
         $direction = $args->offsetGet('orderBy')['direction'];
 
@@ -37,7 +36,7 @@ class OpinionVotesResolver implements ResolverInterface
 
         if ($args->offsetExists('value')) {
             $value = $args->offsetGet('value');
-            $paginator = new Paginator(function (?int $offset, ?int $limit) use (
+            $paginator = new Paginator(function (int $offset, int $limit) use (
                 $repo,
                 $contribution,
                 $value,
@@ -61,7 +60,7 @@ class OpinionVotesResolver implements ResolverInterface
             return $paginator->auto($args, $totalCount);
         }
 
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
+        $paginator = new Paginator(function (int $offset, int $limit) use (
             $repo,
             $contribution,
             $field,

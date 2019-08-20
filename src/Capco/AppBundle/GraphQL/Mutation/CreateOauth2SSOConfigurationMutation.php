@@ -29,7 +29,7 @@ class CreateOauth2SSOConfigurationMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         $ssoConfiguration = new Oauth2SSOConfiguration();
 
         $form = $this->formFactory->create(

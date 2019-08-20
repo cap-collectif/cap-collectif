@@ -38,8 +38,8 @@ class QueryVotesResolver implements ResolverInterface
     {
         $totalCount = 0;
         $projectArgs = new Argument(['first' => 100]);
-        foreach ($this->projectsResolver->resolve($projectArgs)->edges as $edge) {
-            $totalCount += $this->countProjectVotes($edge->node);
+        foreach ($this->projectsResolver->resolve($projectArgs)->getEdges() as $edge) {
+            $totalCount += $this->countProjectVotes($edge->getNode());
         }
 
         $paginator = new Paginator(function (int $offset, int $limit) {
@@ -47,7 +47,7 @@ class QueryVotesResolver implements ResolverInterface
         });
 
         $connection = $paginator->auto($args, $totalCount);
-        $connection->totalCount = $totalCount;
+        $connection->setTotalCount($totalCount);
 
         return $connection;
     }

@@ -95,7 +95,7 @@ class OpinionTypeRepository extends EntityRepository
      *
      * @return array
      */
-    public function countByUser($user)
+    public function countByUser($user): int
     {
         $qb = $this->createQueryBuilder('ot')
             ->addSelect('o', 's', 'cas', 'p', 'oc')
@@ -113,7 +113,7 @@ class OpinionTypeRepository extends EntityRepository
             ->orderBy('ot.position', 'ASC')
             ->addOrderBy('o.createdAt', 'DESC');
 
-        return $qb->getQuery()->getScalarResult();
+        return (int) $qb->getQuery()->getScalarResult();
     }
 
     /**

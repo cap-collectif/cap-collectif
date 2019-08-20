@@ -234,19 +234,11 @@ InternalQuery:
         description: 'List all the district project in the platform.'
         type: 'ProjectDistrictConnection!'
         argsBuilder: 'Relay::Connection'
-        args:
-          first:
-            type: 'Int'
-            defaultValue: 1000
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryProjectDistrictResolver", [args])'
       allContributors:
         description: 'List all the contributors in the platform.'
         type: 'InternalUserConnection!'
         argsBuilder: 'Relay::Connection'
-        args:
-          first:
-            type: 'Int'
-            defaultValue: 100
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributorsResolver", [args])'
       allContributions:
         description: 'Return the number of contributions in the platform.'
@@ -256,10 +248,6 @@ InternalQuery:
         description: 'List all the votes in the platform.'
         type: 'InternalVoteConnection!'
         argsBuilder: 'Relay::Connection'
-        args:
-          first:
-            type: 'Int'
-            defaultValue: 100
         access: "@=hasRole('ROLE_ADMIN')"
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryVotesResolver", [args])'
       shieldAdminForm:

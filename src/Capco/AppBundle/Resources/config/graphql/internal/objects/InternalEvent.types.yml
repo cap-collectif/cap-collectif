@@ -6,7 +6,8 @@ InternalEvent:
     - InternalPrimaryKey
   config:
     description: 'An event.'
-    interfaces: [Node, Commentable]
+    interfaces:
+      - Commentable
     name: Event
     fields:
       id:

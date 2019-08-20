@@ -13,7 +13,7 @@ class MediaResponseRepository extends EntityRepository
     public function countParticipantsByQuestion(
         MediaQuestion $question,
         bool $withNotConfirmedUser = false
-    ): ?int {
+    ): int {
         $qb = $this->getNoEmptyResultQueryBuilder()
             ->select('COUNT(DISTINCT reply.author)')
             ->leftJoin('r.question', 'question')
@@ -26,7 +26,7 @@ class MediaResponseRepository extends EntityRepository
         }
         $qb->setParameter('question', $question);
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countByQuestion(
@@ -45,7 +45,7 @@ class MediaResponseRepository extends EntityRepository
         }
         $qb->setParameter('question', $question);
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getAllByQuestion(

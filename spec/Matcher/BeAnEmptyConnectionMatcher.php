@@ -23,7 +23,7 @@ class BeAnEmptyConnectionMatcher implements Matcher
             );
         }
 
-        if ($subject != ConnectionBuilder::empty() || $subject->totalCount > 0) {
+        if ($subject != ConnectionBuilder::empty() || $subject->getTotalCount() > 0) {
             throw new FailureException(
                 sprintf('the return value "%s" must be an empty Connection.', $subject)
             );

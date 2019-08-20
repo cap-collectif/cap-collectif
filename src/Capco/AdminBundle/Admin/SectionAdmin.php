@@ -188,7 +188,7 @@ class SectionAdmin extends AbstractAdmin
                 ->get(QueryVotesResolver::class)
                 ->__invoke($args);
             $basicsMetricsLabel =
-                $votes->totalCount > 0
+                $votes->getTotalCount() > 0
                     ? 'admin.fields.section.basicsMetrics'
                     : 'admin.fields.section.basicsMetricsNoVotes';
 
@@ -205,7 +205,7 @@ class SectionAdmin extends AbstractAdmin
                 ->getContainer()
                 ->get(QueryEventsResolver::class)
                 ->getEventsConnection($args);
-            if ($events->totalCount > 0) {
+            if ($events->getTotalCount() > 0) {
                 $formMapper->add('metricsToDisplayEvents', null, [
                     'label' => 'admin.fields.section.eventsMetrics'
                 ]);

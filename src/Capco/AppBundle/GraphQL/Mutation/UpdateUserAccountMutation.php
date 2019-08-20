@@ -13,7 +13,7 @@ class UpdateUserAccountMutation extends BaseUpdateProfile
 {
     public function __invoke(Argument $input, User $viewer): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $user = $viewer;
 
         if ($viewer->isAdmin() && isset($arguments[self::USER_ID])) {
@@ -46,7 +46,7 @@ class UpdateUserAccountMutation extends BaseUpdateProfile
         }
 
         $form = $this->formFactory->create(UserAccountFormType::class, $user, [
-            'csrf_protection' => false,
+            'csrf_protection' => false
         ]);
         $form->submit($arguments, false);
 

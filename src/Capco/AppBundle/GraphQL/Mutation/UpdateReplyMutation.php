@@ -53,7 +53,7 @@ class UpdateReplyMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         $replyId = GlobalId::fromGlobalId($values['replyId']);
         /** @var Reply $reply */
         $reply = $this->replyRepo->find($replyId['id']);

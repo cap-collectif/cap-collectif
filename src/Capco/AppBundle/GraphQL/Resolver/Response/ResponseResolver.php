@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class ResponseResolver implements ResolverInterface
 {

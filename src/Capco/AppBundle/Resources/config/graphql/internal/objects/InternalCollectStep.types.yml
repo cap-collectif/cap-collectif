@@ -2,18 +2,25 @@ InternalCollectStep:
   type: object
   inherits:
     - Node
-    - PreviewCollectStep
     - InternalStep
     - ProposalStep
     - RequirementStep
   config:
     name: CollectStep
-    interfaces: [Node, InternalStep, ProposalStep, RequirementStep]
+    interfaces:
+      - Node
+      - InternalStep
+      - ProposalStep
+      - RequirementStep
     fields:
       id:
+        description: 'The ID of an object.'
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: CollectStep
+      title:
+        description: 'The title of the step.'
+        type: 'String!'
       kind:
         resolve: 'collect'
       requirements:

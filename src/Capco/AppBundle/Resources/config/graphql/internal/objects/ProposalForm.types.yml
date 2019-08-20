@@ -1,12 +1,14 @@
 ProposalForm:
   type: object
   inherits:
-    - 'Node'
-    - 'InternalWithProposals'
-    - 'UniformResourceLocatable'
+    - Node
+    - InternalWithProposals
+    - UniformResourceLocatable
   config:
     description: 'A budget form'
-    interfaces: [Node, UniformResourceLocatable]
+    interfaces:
+      - Node
+      - UniformResourceLocatable
     fields:
       reference:
         type: 'String!'

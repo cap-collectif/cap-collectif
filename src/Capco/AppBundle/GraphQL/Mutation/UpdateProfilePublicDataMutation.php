@@ -30,7 +30,7 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
     public function __invoke(Argument $input, User $user): array
     {
         $this->user = $user;
-        $this->arguments = $input->getRawArguments();
+        $this->arguments = $input->getArrayCopy();
         if (isset($this->arguments[self::USER_ID])) {
             parent::__invoke($input, $user);
         }

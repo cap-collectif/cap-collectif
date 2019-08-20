@@ -99,7 +99,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 
         $cacheKey = [
             'form' => $proposalForm->getId(),
-            'args' => $args->getRawArguments()
+            'args' => $args->getArrayCopy()
         ];
 
         if (
@@ -248,13 +248,13 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                 $seed
             );
 
-            $totalCount = $results['count'];
+            $totalCount = (int) $results['count'];
 
             return $results['proposals'];
         });
 
         $connection = $paginator->auto($args, $totalCount);
-        $connection->totalCount = $totalCount;
+        $connection->setTotalCount($totalCount);
 
         $connection->{'fusionCount'} = $this->getFusionsCount($form);
 

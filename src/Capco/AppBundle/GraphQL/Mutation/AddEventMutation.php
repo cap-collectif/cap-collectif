@@ -13,7 +13,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Form\EventType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -42,7 +42,7 @@ class AddEventMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
 
         if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
             return [

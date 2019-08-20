@@ -11,7 +11,7 @@ use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use GraphQL\Error\UserError;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use GraphQL\Type\Definition\Type;
 

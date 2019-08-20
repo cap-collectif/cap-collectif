@@ -16,7 +16,7 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class AddVersionMutation implements MutationInterface
 {
@@ -72,7 +72,7 @@ class AddVersionMutation implements MutationInterface
         }
 
         $version = (new OpinionVersion())->setAuthor($viewer)->setParent($opinion);
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         unset($values['opinionId']);
 
         $form = $this->formFactory->create(OpinionVersionType::class, $version);

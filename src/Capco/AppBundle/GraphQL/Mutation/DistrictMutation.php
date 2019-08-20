@@ -24,7 +24,7 @@ class DistrictMutation implements MutationInterface
 
     public function change(Argument $input): array
     {
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
 
         $district = $this->entityManager->find(
             'CapcoAppBundle:District\ProposalDistrict',

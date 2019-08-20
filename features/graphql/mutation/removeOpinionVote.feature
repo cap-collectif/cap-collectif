@@ -24,7 +24,7 @@ Scenario: Logged in API client wants to remove a vote in a not contribuable opin
   Then the JSON response should match:
   """
   {
-    "errors":[{"message":"Uncontribuable opinion.","category":"user","locations":[{"line":1,"column":49}],"path":["removeOpinionVote"]}],
+    "errors":[{"message":"Uncontribuable opinion.","@*@": "@*@"}],
     "data":{"removeOpinionVote":null}
   }
   """
@@ -55,9 +55,7 @@ Scenario: Logged in API client wants to remove a vote but has not voted
     "errors": [
       {
         "message": "You have not voted for this opinion.",
-        "category": @string@,
-        "locations": [{"line":1,"column":49}],
-        "path": ["removeOpinionVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {
@@ -128,8 +126,7 @@ Scenario: Logged in API client wants to remove a vote without meeting requiremen
   "errors":[
     {
       "message":"You dont meets all the requirements.",
-      "category":"user","locations":[{"line":1,"column":49}],
-      "path":["removeOpinionVote"]
+      "@*@": "@*@"
     }
   ],
   "data":{"removeOpinionVote":null}

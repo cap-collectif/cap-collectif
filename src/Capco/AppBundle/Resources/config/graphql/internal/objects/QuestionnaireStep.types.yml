@@ -1,8 +1,12 @@
 QuestionnaireStep:
   type: object
-  inherits: [Node, InternalStep]
+  inherits:
+    - Node
+    - InternalStep
   config:
-    interfaces: [Node, InternalStep]
+    interfaces:
+      - Node
+      - InternalStep
     fields:
       footer:
         type: String

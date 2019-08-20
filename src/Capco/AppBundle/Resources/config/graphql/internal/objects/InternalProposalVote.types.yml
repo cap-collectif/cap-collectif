@@ -2,15 +2,14 @@ InternalProposalVote:
   type: object
   inherits:
     - PublicPublishable
-    - PreviewPrivatableVote
     - InternalVote
-    - PreviewProposalVote
+    - InternalPrivatableVote
   config:
     name: ProposalVote
     interfaces:
       - InternalVote
       - PublicPublishable
-      - PreviewPrivatableVote
+      - InternalPrivatableVote
     fields:
       proposal:
         type: 'InternalProposal!'

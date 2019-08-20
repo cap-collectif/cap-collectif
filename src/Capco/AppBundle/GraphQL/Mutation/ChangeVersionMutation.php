@@ -51,7 +51,7 @@ class ChangeVersionMutation implements MutationInterface
             throw new UserError("Can't update uncontributable version.");
         }
 
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         unset($values['versionId']);
 
         $form = $this->formFactory->create(OpinionVersionType::class, $version);

@@ -64,5 +64,5 @@ Scenario: User wants to update an argument but is not the author
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"Can\u0027t update the argument of someone else.","category":"user","locations":[@...@],"path":["changeArgument"]}],"data":{"changeArgument":null}}
+  {"errors":[{"message":"Can\u0027t update the argument of someone else.","@*@": "@*@"}],"data":{"changeArgument":null}}
   """

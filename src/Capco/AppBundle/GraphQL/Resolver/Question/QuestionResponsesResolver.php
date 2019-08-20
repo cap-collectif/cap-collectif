@@ -48,7 +48,7 @@ class QuestionResponsesResolver implements ResolverInterface
         }
 
         $totalCount = 0;
-        $arguments = $args->getRawArguments();
+        $arguments = $args->getArrayCopy();
         $withNotConfirmedUser =
             isset($arguments['withNotConfirmedUser']) &&
             true === $arguments['withNotConfirmedUser'];

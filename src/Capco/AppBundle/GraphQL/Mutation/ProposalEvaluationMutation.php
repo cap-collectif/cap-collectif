@@ -43,7 +43,7 @@ class ProposalEvaluationMutation
 
     public function changeProposalEvaluation(Argument $input, User $user): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $version = $arguments['version'];
 
         $proposal = $this->globalIdResolver->resolve($arguments['proposalId'], $user);
@@ -60,7 +60,7 @@ class ProposalEvaluationMutation
         }
         unset($arguments['proposalId']);
         $proposalEvaluation = $this->proposalEvaluationRepository->findOneBy([
-            'proposal' => $proposal,
+            'proposal' => $proposal
         ]);
 
         if (!$proposalEvaluation) {

@@ -4,7 +4,8 @@ InternalContactForm:
     - Node
   config:
     name: ContactForm
-    interfaces: [Node]
+    interfaces:
+      - Node
     fields:
       id:
         builder: 'Relay::GlobalId'

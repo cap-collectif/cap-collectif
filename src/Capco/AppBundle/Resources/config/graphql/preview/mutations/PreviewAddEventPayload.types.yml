@@ -4,7 +4,7 @@ PreviewAddEventPayload:
     name: AddEventPayload
     fields:
       eventEdge:
-        type: 'InternalEventEdge'
+        type: 'PreviewEventEdge'
         description: 'The edge from the events connection.'
       userErrors:
         type: '[UserError!]!'

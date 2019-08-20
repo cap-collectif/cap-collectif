@@ -24,7 +24,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class AddCommentMutation implements MutationInterface
@@ -105,7 +105,7 @@ class AddCommentMutation implements MutationInterface
             ->setRelatedObject($relatedCommentInstance)
             ->setParent($commentable instanceof Comment ? $commentable : null);
 
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         unset($values['commentableId']);
         $form = $this->formFactory->create(CommentType::class, $comment);
         $form->submit($values, false);

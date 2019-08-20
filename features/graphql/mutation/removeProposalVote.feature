@@ -26,9 +26,7 @@ Scenario: Logged in API client wants to remove a vote but has not voted
     "errors": [
       {
         "message": "You have not voted for this proposal in this step.",
-        "category": @string@,
-        "locations": [{"line":1,"column":50}],
-        "path": ["removeProposalVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {
@@ -62,9 +60,7 @@ Scenario: Logged in API client wants to remove a vote but has not voted
     "errors": [
       {
         "message": "This step is no longer contributable.",
-        "category": @string@,
-        "locations": [{"line":1,"column":50}],
-        "path": ["removeProposalVote"]
+        "@*@": "@*@"
       }
     ],
     "data": {

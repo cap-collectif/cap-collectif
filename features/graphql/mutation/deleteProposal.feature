@@ -24,7 +24,7 @@ Scenario: Anonymous GraphQL client can not delete a proposal
   """
   {
     "errors": [
-      {"message":"Access denied to this field.","category":@string@,"locations":[{"line":1,"column":46}],"path":["deleteProposal"]}
+      {"message":"Access denied to this field.","@*@": "@*@"}
     ],
     "data": {
       "deleteProposal": null

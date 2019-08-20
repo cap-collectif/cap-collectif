@@ -2,16 +2,12 @@ InternalReply:
   type: object
   inherits:
     - PreviewReply
-    - Node
-    - PublicPublishable
     - Draftable
     - Contribution
     - UniformResourceLocatable
   config:
     name: Reply
     interfaces:
-      - Node
-      - PublicPublishable
       - Draftable
       - Contribution
       - UniformResourceLocatable

@@ -224,7 +224,7 @@ Scenario: GraphQL client wants to create a proposal out of the zone
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"global.address_not_in_zone","category":@string@,"locations":[@...@],"path":[@...@]}],"data":{"createProposal":null}}
+  {"errors":[{"message":"global.address_not_in_zone","@*@": "@*@"}],"data":{"createProposal":null}}
   """
 
 @security
@@ -266,7 +266,7 @@ Scenario: Logged in API client wants to add a proposal without a required value 
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"proposal.missing_required_responses {\"missing\":3}","category":@string@,"locations":[@...@],"path":[@...@]}],"data":{"createProposal":null}}
+  {"errors":[{"message":"proposal.missing_required_responses {\"missing\":3}","@*@": "@*@"}],"data":{"createProposal":null}}
   """
 
 @security
@@ -316,7 +316,7 @@ Scenario: Logged in API client wants to add a proposal without a required media 
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"proposal.missing_required_responses {\"missing\":11}","category":@string@,"locations":[@...@],"path":[@...@]}],"data":{"createProposal":null}}
+  {"errors":[{"message":"proposal.missing_required_responses {\"missing\":11}","@*@": "@*@"}],"data":{"createProposal":null}}
   """
 
 @security
@@ -366,7 +366,7 @@ Scenario: Logged in API client wants to add a proposal with empty required value
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"proposal.missing_required_responses {\"missing\":3}","category":@string@,"locations":[@...@],"path":[@...@]}],"data":{"createProposal":null}}
+  {"errors":[{"message":"proposal.missing_required_responses {\"missing\":3}","@*@": "@*@"}],"data":{"createProposal":null}}
   """
 
 @security
@@ -415,7 +415,7 @@ Scenario: Logged in API client wants to add a proposal with no category when man
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"global.no_category_when_mandatory","category":@string@,"locations":[@...@],"path":[@...@]}],"data":{"createProposal":null}}
+  {"errors":[{"message":"global.no_category_when_mandatory","@*@": "@*@"}],"data":{"createProposal":null}}
   """
 
 @security
@@ -464,5 +464,5 @@ Scenario: Logged in API client wants to add a proposal with no address when mand
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"global.no_address_when_mandatory","category":@string@,"locations":[@...@],"path":[@...@]}],"data":{"createProposal":null}}
+  {"errors":[{"message":"global.no_address_when_mandatory","@*@": "@*@"}],"data":{"createProposal":null}}
   """

@@ -15,14 +15,10 @@ InternalProposal:
   config:
     name: Proposal
     interfaces:
-      - Node
       - Contribution
       - Commentable
-      - PublicPublishable
       - Draftable
       - Reportable
-      - Trashable
-      - UniformResourceLocatable
       - UniformResourceAdminLocatable
     fields:
       id:
@@ -49,9 +45,6 @@ InternalProposal:
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalNewsResolver", [value, args])'
         args:
-          first:
-            type: 'Int'
-            defaultValue: 30
           orderBy:
             type: 'PreviewProposalOrder'
             defaultValue: { field: PUBLISHED_AT, direction: DESC }
@@ -60,9 +53,6 @@ InternalProposal:
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReportingsResolver", [value, args])'
         args:
-          first:
-            type: 'Int'
-            defaultValue: 30
           orderBy:
             type: 'ReportingOrder'
             defaultValue: { field: CREATED_AT, direction: DESC }
@@ -134,9 +124,6 @@ InternalProposal:
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args, context, getUser()])'
         args:
-          first:
-            type: 'Int'
-            defaultValue: 30
           orderBy:
             type: 'ProposalVotesOrder'
             defaultValue: { field: PUBLISHED_AT, direction: DESC }
@@ -157,24 +144,12 @@ InternalProposal:
         resolve: '@=value.getParentConnections()'
       followers:
         type: 'InternalUserConnection!'
+        argsBuilder: 'Relay::Connection'
         args:
           orderBy:
             type: 'FollowerOrder'
             defaultValue: { field: FOLLOWED_AT, direction: DESC }
             description: 'Ordering options for followers returning from the connection'
-          after:
-            type: 'String'
-            description: 'Returns the elements in the list that come after the specified global ID.'
-          first:
-            type: 'Int'
-            defaultValue: 32
-            description: 'Returns the first n elements from the list.'
-          before:
-            type: 'String'
-            description: 'Returns the elements in the list that come before the specified global ID.'
-          last:
-            type: 'Int'
-            description: 'Returns the last n elements from the list.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowerConnection", [value, args])'
       viewerIsFollowing:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", [value, getUser()])'

@@ -5,7 +5,7 @@ namespace Capco\AppBundle\GraphQL;
 use Capco\AppBundle\Toggle\Manager;
 use GraphQL\Type\Definition\ResolveInfo;
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class QueryAnalyzer
 {

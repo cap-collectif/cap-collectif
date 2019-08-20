@@ -55,7 +55,7 @@ class ChangeArgumentMutation implements MutationInterface
             throw new UserError("Can't update uncontributable argument.");
         }
 
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         unset($values['argumentId']);
 
         $form = $this->formFactory->create(ArgumentType::class, $argument);

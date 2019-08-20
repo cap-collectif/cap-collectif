@@ -74,13 +74,15 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
             $contributionsCountByProject = [];
             $contributionsCountByStep = [];
             foreach ($this->getAllProjects() as $project) {
-                $count = $this->contributionProjectResolver->__invoke(
-                    $object,
-                    $project,
-                    new Argument([
-                        'first' => 0
-                    ])
-                )->totalCount;
+                $count = $this->contributionProjectResolver
+                    ->__invoke(
+                        $object,
+                        $project,
+                        new Argument([
+                            'first' => 0
+                        ])
+                    )
+                    ->getTotalCount();
                 $contributionsCountByProject[] = [
                     'project' => ['id' => $project->getId()],
                     'count' => $count
@@ -91,13 +93,15 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                         'count' =>
                             0 === $count
                                 ? 0
-                                : $this->contributionStepResolver->__invoke(
-                                    $object,
-                                    $step,
-                                    new Argument([
-                                        'first' => 0
-                                    ])
-                                )->totalCount
+                                : $this->contributionStepResolver
+                                    ->__invoke(
+                                        $object,
+                                        $step,
+                                        new Argument([
+                                            'first' => 0
+                                        ])
+                                    )
+                                    ->getTotalCount()
                     ];
                 }
             }

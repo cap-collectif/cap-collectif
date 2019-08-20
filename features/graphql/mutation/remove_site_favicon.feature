@@ -80,5 +80,5 @@ Scenario: GraphQL client who is not an admin wants to remove the current favicon
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"Access denied to this field.","category":"user","locations":[@...@],"path":[@...@]}],"data":{"removeSiteFavicon":null}}
+  {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"removeSiteFavicon":null}}
   """

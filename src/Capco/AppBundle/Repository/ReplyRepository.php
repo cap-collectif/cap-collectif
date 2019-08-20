@@ -79,7 +79,7 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function countRepliesByAuthorViewerCanSee(?User $viewer, User $user)
+    public function countRepliesByAuthorViewerCanSee(?User $viewer, User $user): int
     {
         $qb = $this->getPublishedNonDraftByAuthorQueryBuilder($user);
         $qb = $qb->select('COUNT(reply)');
@@ -93,7 +93,7 @@ class ReplyRepository extends EntityRepository
             $qb = $qb->andWhere('reply.private = false');
         }
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countAllByAuthor(User $author): int

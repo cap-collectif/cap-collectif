@@ -45,7 +45,7 @@ class UpdateProposalFormMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $id = $arguments['proposalFormId'];
 
         /** @var ProposalForm $proposalForm */
@@ -70,7 +70,7 @@ class UpdateProposalFormMutation implements MutationInterface
                 if (!\in_array($district->getId(), $districtsIds)) {
                     $deletedDistrict = [
                         'id' => $district->getId(),
-                        'name' => 'NULL',
+                        'name' => 'NULL'
                     ];
                     array_splice($arguments['districts'], $position, 0, [$deletedDistrict]);
                 }
@@ -89,7 +89,7 @@ class UpdateProposalFormMutation implements MutationInterface
                 if (!\in_array($category->getId(), $categoriesIds)) {
                     $deletedCategory = [
                         'id' => $category->getId(),
-                        'name' => 'NULL',
+                        'name' => 'NULL'
                     ];
                     // Add deleted category.
                     array_splice($arguments['categories'], $position, 0, [$deletedCategory]);

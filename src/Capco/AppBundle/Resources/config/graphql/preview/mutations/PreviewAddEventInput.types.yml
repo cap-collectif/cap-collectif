@@ -2,7 +2,7 @@ PreviewAddEventInput:
   type: relay-mutation-input
   config:
     name: AddEventInput
-    description: 'Input type of addEvent'
+    description: 'Input type of addEvent.'
     fields:
       title:
         type: 'String!'

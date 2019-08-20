@@ -22,7 +22,7 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddArgumentMutation implements MutationInterface
@@ -120,7 +120,7 @@ class AddArgumentMutation implements MutationInterface
             $argument->setOpinionVersion($argumentable);
         }
 
-        $values = $input->getRawArguments();
+        $values = $input->getArrayCopy();
         unset($values['argumentableId']);
         $form = $this->formFactory->create(ArgumentType::class, $argument);
         $form->submit($values, false);

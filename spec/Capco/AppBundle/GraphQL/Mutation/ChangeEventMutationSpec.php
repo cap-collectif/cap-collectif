@@ -45,7 +45,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
     ) {
         $values = ['id' => 'base64id', 'body' => 'My body', 'customCode' => 'abc'];
         $viewer->isAdmin()->willReturn(true);
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
 
         $formFactory->create(EventType::class, $event)->willReturn($form);
@@ -65,7 +65,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $values = ['id' => 'base64id', 'body' => 'My body'];
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn(null);
         $this->__invoke($arguments, $viewer)->shouldBe([
             'event' => null,
@@ -83,7 +83,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Event $event
     ) {
         $values = ['id' => 'base64id', 'body' => ''];
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $formFactory->create(EventType::class, $event)->willReturn($form);
 
@@ -108,7 +108,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(false);
 
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
         $this->__invoke($arguments, $viewer)->shouldBe([
             'event' => null,
             'userErrors' => [['message' => 'You are not authorized to add customCode field.']]

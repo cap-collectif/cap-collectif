@@ -576,19 +576,19 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 79,
-          "id": "UHJvamVjdDpwcm9qZWN0NQ==",
-          "publishedAt": "2014-12-27 00:00:00",
-          "title": "Projet de loi Renseignement",
+          "contributionsCount": 174,
+          "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+          "publishedAt": "2014-12-26 00:00:00",
+          "title": "Budget Participatif Rennes",
         },
       },
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
-          "contributionsCount": 174,
-          "id": "UHJvamVjdDpwcm9qZWN0Ng==",
-          "publishedAt": "2014-12-26 00:00:00",
-          "title": "Budget Participatif Rennes",
+          "contributionsCount": 79,
+          "id": "UHJvamVjdDpwcm9qZWN0NQ==",
+          "publishedAt": "2014-12-27 00:00:00",
+          "title": "Projet de loi Renseignement",
         },
       },
       Object {
@@ -666,15 +666,6 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
-          "contributionsCount": 2,
-          "id": "UHJvamVjdDpwcm9qZWN0MjE=",
-          "publishedAt": "2014-12-11 00:00:00",
-          "title": "Questions/Responses",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
-        "node": Object {
           "contributionsCount": 1,
           "id": "UHJvamVjdDpwcm9qZWN0OQ==",
           "publishedAt": "2014-12-23 00:00:00",
@@ -682,7 +673,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0NA==",
@@ -691,7 +682,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
           "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTI=",
@@ -700,7 +691,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTM=",
@@ -709,7 +700,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTQ=",
@@ -718,12 +709,21 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
           "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0MTY=",
           "publishedAt": "2014-12-16 00:00:00",
           "title": "Le P16 un projet à base de riz",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+        "node": Object {
+          "contributionsCount": 2,
+          "id": "UHJvamVjdDpwcm9qZWN0MjE=",
+          "publishedAt": "2014-12-11 00:00:00",
+          "title": "Questions/Responses",
         },
       },
       Object {

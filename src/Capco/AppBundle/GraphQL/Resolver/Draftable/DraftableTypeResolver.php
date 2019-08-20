@@ -6,7 +6,7 @@ use GraphQL\Type\Definition\Type;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Proposal;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class DraftableTypeResolver implements ResolverInterface

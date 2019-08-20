@@ -39,7 +39,7 @@ use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
 
 class NodeTypeResolver implements ResolverInterface

@@ -83,7 +83,7 @@ Scenario: Logged in API client can not vote for a trashed argument
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"Uncontribuable argument.","category":"user","locations":[{"line":1,"column":47}],"path":["addArgumentVote"]}],"data":{"addArgumentVote":null}}
+  {"errors":[{"message":"Uncontribuable argument.","@*@": "@*@"}],"data":{"addArgumentVote":null}}
   """
 
 @security
@@ -117,7 +117,12 @@ Scenario: Logged in API client can not vote for a argument in a closed step
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"Uncontribuable argument.","category":"user","locations":[{"line":1,"column":47}],"path":["addArgumentVote"]}],"data":{"addArgumentVote":null}}
+  { "errors":[{
+      "message":"Uncontribuable argument.",
+      "@*@": "@*@"
+    }],
+    "data":{"addArgumentVote":null}
+  }
   """
 
 @database
@@ -151,5 +156,5 @@ Scenario: Logged in API client wants to vote for an argument without requirement
   """
   Then the JSON response should match:
   """
-    {"errors":[{"message":"You dont meets all the requirements.","category":"user","locations":[{"line":1,"column":47}],"path":["addArgumentVote"]}],"data":{"addArgumentVote":null}}
+    {"errors":[{"message":"You dont meets all the requirements.","@*@": "@*@"}],"data":{"addArgumentVote":null}}
   """

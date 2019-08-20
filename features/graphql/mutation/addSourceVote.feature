@@ -67,9 +67,7 @@ Scenario: Logged in API client wants to vote for a source
   {
     "errors":[{
       "message":"You dont meets all the requirements.",
-      "category":"user",
-      "locations":[{"line":1,"column":45}],
-      "path":["addSourceVote"]
+      "@*@": "@*@"
     }],
     "data":{"addSourceVote":null}
   }

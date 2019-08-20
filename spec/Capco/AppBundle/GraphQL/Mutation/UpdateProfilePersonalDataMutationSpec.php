@@ -45,7 +45,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $encodeId = GlobalId::toGlobalId('User', 'theUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
-        $arguments->getRawArguments()->willReturn($argumentsValues);
+        $arguments->getArrayCopy()->willReturn($argumentsValues);
 
         $formFactory->create(PersonalDataFormType::class, $viewer)->willReturn($form);
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
@@ -67,7 +67,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $viewer->isSuperAdmin()->willReturn(true);
         $encodeId = GlobalId::toGlobalId('User', 'theUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
-        $arguments->getRawArguments()->willReturn($argumentsValues);
+        $arguments->getArrayCopy()->willReturn($argumentsValues);
 
         $formFactory->create(PersonalDataFormType::class, $viewer)->willReturn($form);
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
@@ -91,7 +91,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $viewer->getId()->willReturn('theUserId');
         $encodeId = GlobalId::toGlobalId('User', 'simpleUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
-        $arguments->getRawArguments()->willReturn($argumentsValues);
+        $arguments->getArrayCopy()->willReturn($argumentsValues);
 
         $userId = GlobalId::fromGlobalId($argumentsValues['userId'])['id'];
 
@@ -123,7 +123,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $user->getId()->willReturn('theUserId');
         $encodeId = GlobalId::toGlobalId('User', 'badUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
-        $arguments->getRawArguments()->willReturn($argumentsValues);
+        $arguments->getArrayCopy()->willReturn($argumentsValues);
 
         $formFactory->create(PersonalDataFormType::class, $user)->willReturn($form);
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
@@ -149,7 +149,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $user->getUsername()->willReturn('Atos');
         $user->getId()->willReturn('theUserId');
         $argumentsValues = ['username' => 'Portos', 'email' => 'portos@test.com'];
-        $arguments->getRawArguments()->willReturn($argumentsValues);
+        $arguments->getArrayCopy()->willReturn($argumentsValues);
 
         $formFactory->create(PersonalDataFormType::class, $user)->willReturn($form);
         $form->submit($argumentsValues, false)->willReturn(null);

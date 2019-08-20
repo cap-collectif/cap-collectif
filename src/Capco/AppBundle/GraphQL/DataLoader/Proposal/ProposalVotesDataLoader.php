@@ -96,8 +96,8 @@ class ProposalVotesDataLoader extends BatchDataLoader
             'proposalId' => $key['proposal']->getId(),
             // ?TODO? toGlobalId
             'stepId' => isset($key['step']) ? $key['step']->getId() : null,
-            'args' => $key['args']->getRawArguments(),
-            'includeUnpublished' => $key['includeUnpublished'],
+            'args' => $key['args']->getArrayCopy(),
+            'includeUnpublished' => $key['includeUnpublished']
         ];
     }
 
@@ -295,7 +295,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
                     $includeUnpublished
                 );
 
-                return $paginator->auto($args, $totalCount);
+                return $paginator->auto($args, (int) $totalCount);
             }
             if ($step instanceof CollectStep) {
                 $paginator = new Paginator(function (int $offset, int $limit) use (
@@ -324,7 +324,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
                     $includeUnpublished
                 );
 
-                return $paginator->auto($args, $totalCount);
+                return $paginator->auto($args, (int) $totalCount);
             }
 
             throw new \RuntimeException('Unknown step type.');
@@ -343,6 +343,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
             $includeUnpublished
         );
 
-        return $paginator->auto($args, $totalCount);
+        return $paginator->auto($args, (int) $totalCount);
     }
 }

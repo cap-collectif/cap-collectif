@@ -31,11 +31,11 @@ class CreateUserMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $user = new User();
 
         $form = $this->formFactory->create(UserFormType::class, $user, [
-            'csrf_protection' => false,
+            'csrf_protection' => false
         ]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {

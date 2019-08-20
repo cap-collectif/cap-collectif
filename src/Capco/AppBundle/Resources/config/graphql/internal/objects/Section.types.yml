@@ -1,9 +1,12 @@
 Section:
   type: object
-  inherits: [UniformResourceLocatable]
+  inherits:
+    - UniformResourceLocatable
   config:
     description: 'A section'
-    interfaces: [Node, UniformResourceLocatable]
+    interfaces:
+      - Node
+      - UniformResourceLocatable
     fields:
       id:
         type: 'ID!'
@@ -36,10 +39,6 @@ Section:
           orderBy:
             type: 'ContributionOrder'
             description: 'Ordering options for contributions returned from the connection.'
-          first:
-            type: 'Int'
-            defaultValue: 10
-            description: 'Returns the first n elements from the list.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionRelayResolver", [value, args])'
       appendixTypes:
         type: '[SectionAppendixType]'

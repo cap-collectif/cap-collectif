@@ -14,7 +14,12 @@ Comment:
   config:
     description: 'A comment'
     interfaces:
-      [Node, PublicPublishable, Reportable, Contribution, Commentable, UniformResourceLocatable]
+      - Node
+      - PublicPublishable
+      - Reportable
+      - Contribution
+      - Commentable
+      - UniformResourceLocatable
     fields:
       id:
         builder: 'Relay::GlobalId'
@@ -53,9 +58,6 @@ Comment:
         type: 'CommentVoteConnection!'
         argsBuilder: 'Relay::Connection'
         args:
-          first:
-            type: 'Int'
-            defaultValue: 30
           orderBy:
             type: 'VoteOrder'
             defaultValue: { field: PUBLISHED_AT, direction: DESC }

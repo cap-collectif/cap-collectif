@@ -1,8 +1,10 @@
 Theme:
   type: object
-  inherits: [UniformResourceLocatable]
+  inherits:
+    - UniformResourceLocatable
   config:
-    interfaces: [UniformResourceLocatable]
+    interfaces:
+      - UniformResourceLocatable
     description: 'A theme'
     fields:
       id:

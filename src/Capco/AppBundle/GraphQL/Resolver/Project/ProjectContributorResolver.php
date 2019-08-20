@@ -73,7 +73,7 @@ class ProjectContributorResolver implements ResolverInterface
 
         $connection = $paginator->auto($args, $totalCount);
         $connection->{'anonymousCount'} = $this->getAnonymousCount($project);
-        $connection->totalCount = $totalCount;
+        $connection->setTotalCount($totalCount);
 
         return $connection;
     }

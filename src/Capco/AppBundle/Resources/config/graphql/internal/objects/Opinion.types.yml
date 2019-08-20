@@ -17,17 +17,15 @@ Opinion:
   config:
     description: 'A contribution'
     interfaces:
-      [
-        Node,
-        PublicPublishable,
-        Argumentable,
-        Sourceable,
-        Reportable,
-        Contribution,
-        Trashable,
-        ContributionWithAuthor,
-        EditableContribution,
-      ]
+      - Node
+      - PublicPublishable
+      - Argumentable
+      - Sourceable
+      - Reportable
+      - Contribution
+      - Trashable
+      - ContributionWithAuthor
+      - EditableContribution
     fields:
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", [value])'

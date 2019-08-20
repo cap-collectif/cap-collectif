@@ -27,6 +27,10 @@ overblog_graphql:
     auto_compile: false
     cache_dir: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/__generated__'
     class_namespace: "Capco\\AppBundle\\GraphQL\\__GENERATED__"
+    builders:
+      args:
+        - alias: 'Relay::Connection'
+          class: "Capco\\AppBundle\\GraphQL\\Args\\RelayConnection"
     schema:
       # This is our public schema (considered default)
       public:
@@ -42,7 +46,8 @@ overblog_graphql:
       # This is our preview schema (for beta testers)
       preview:
         query: PreviewQuery
-        #mutation: PreviewMutation
+        # TODO uncomment me
+        # mutation: PreviewMutation
         # The name of extra types that can not be detected
         # by graphql-php during static schema analysis.
         # These types names should be explicitly declare here

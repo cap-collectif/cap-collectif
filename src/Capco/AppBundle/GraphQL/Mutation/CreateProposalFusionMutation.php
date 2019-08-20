@@ -42,7 +42,7 @@ class CreateProposalFusionMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $author): array
     {
-        $proposalIds = array_unique($input->getRawArguments()['fromProposals']);
+        $proposalIds = array_unique($input->getArrayCopy()['fromProposals']);
 
         if (\count($proposalIds) < 2) {
             throw new UserError('You must specify at least 2 proposals to merge.');
@@ -53,7 +53,7 @@ class CreateProposalFusionMutation implements MutationInterface
         foreach ($proposalIds as $key => $id) {
             $child = $this->globalIdResolver->resolve($id, $author);
             if (!$child) {
-                throw new UserError('Unknown proposal to merge with id: '.var_export($id, true));
+                throw new UserError('Unknown proposal to merge with id: ' . var_export($id, true));
             }
             $proposalUuids[] = $child->getId();
             if (0 === $key) {
@@ -70,7 +70,7 @@ class CreateProposalFusionMutation implements MutationInterface
             ->setTitle($defaultTitle)
             ->setProposalForm($proposalForm);
         $form = $this->formFactory->create(ProposalFusionType::class, $proposal, [
-            'proposalForm' => $proposalForm,
+            'proposalForm' => $proposalForm
         ]);
         $form->submit(['childConnections' => $proposalUuids], false);
 

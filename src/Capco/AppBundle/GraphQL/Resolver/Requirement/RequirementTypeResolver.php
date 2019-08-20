@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Requirement;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class RequirementTypeResolver implements ResolverInterface
 {

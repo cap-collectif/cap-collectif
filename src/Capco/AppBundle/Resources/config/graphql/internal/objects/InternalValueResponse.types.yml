@@ -1,12 +1,25 @@
 InternalValueResponse:
   type: object
   inherits:
-    - PreviewValueResponse
+    # We can not inherit interface from an other schema anymore
+    #- PreviewValueResponse
   config:
     name: ValueResponse
     interfaces:
       - InternalResponse
     description: 'A response'
     fields:
+      id:
+        type: 'String'
+        description: 'Nullable ID in case of empty response.'
       question:
+        description: 'The question.'
         type: 'InternalQuestion!'
+      value:
+        type: 'String'
+        description: 'The response value which can be a string or a JSON.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\ResponseValueResolver", [value])'
+      formattedValue:
+        type: 'String'
+        description: 'The response value formatted.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\FormattedValueResponseTypeResolver", [value])'

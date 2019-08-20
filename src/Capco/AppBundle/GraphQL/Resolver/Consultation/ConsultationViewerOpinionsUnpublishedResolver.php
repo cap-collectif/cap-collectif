@@ -13,23 +13,25 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 class ConsultationViewerOpinionsUnpublishedResolver implements ResolverInterface
 {
     private $opinionRepo;
+    private $builder;
 
-    public function __construct(OpinionRepository $opinionRepo)
+    public function __construct(OpinionRepository $opinionRepo, ConnectionBuilder $builder)
     {
         $this->opinionRepo = $opinionRepo;
+        $this->builder = $builder;
     }
 
     public function __invoke(Consultation $consultation, Argument $args, $viewer): Connection
     {
         if (!$viewer instanceof User) {
-            return ConnectionBuilder::empty();
+            return $this->builder->empty();
         }
         $unpublished = $this->opinionRepo->getUnpublishedByConsultationAndAuthor(
             $consultation,
             $viewer
         );
-        $connection = ConnectionBuilder::connectionFromArray($unpublished, $args);
-        $connection->totalCount = \count($unpublished);
+        $connection = $this->builder->connectionFromArray($unpublished, $args);
+        $connection->setTotalCount(\count($unpublished));
 
         return $connection;
     }

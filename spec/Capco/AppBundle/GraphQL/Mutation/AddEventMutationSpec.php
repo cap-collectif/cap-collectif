@@ -61,7 +61,7 @@ class AddEventMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
 
         $em->persist(Argument::type(Event::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -88,7 +88,7 @@ class AddEventMutationSpec extends ObjectBehavior
         $viewer->isAdmin()->willReturn(false);
         $viewer->isSuperAdmin()->willReturn(false);
 
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
         $payload['userErrors']->shouldBe([
@@ -120,7 +120,7 @@ class AddEventMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
 
         $em->persist(Argument::type(Event::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -146,7 +146,7 @@ class AddEventMutationSpec extends ObjectBehavior
         Event $event
     ) {
         $values = ['body' => ''];
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
 
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');

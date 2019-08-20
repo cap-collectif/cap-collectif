@@ -46,7 +46,7 @@ class UserTypeRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function countAll()
+    public function countAll(): int
     {
         $qb = $this->createQueryBuilder('ut')->select('COUNT(ut.id)');
 

@@ -81,7 +81,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $values['replyId'] = 'UmVwbHk6cmVwbHk1';
         $values['draft'] = false;
         $values['responses'] = [];
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
 
         $replyId = GlobalId::fromGlobalId($values['replyId'])['id'];
         $replyRepo->find($replyId)->willReturn($reply);
@@ -134,7 +134,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $values['replyId'] = 'UmVwbHkscmVwbHkxMA==';
         $values['draft'] = false;
         $values['responses'] = [];
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
 
         $replyId = GlobalId::fromGlobalId($values['replyId'])['id'];
         $replyRepo->find($replyId)->willReturn(null);
@@ -158,7 +158,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $values['replyId'] = 'UmVwbHk6cmVwbHk1';
         $values['draft'] = false;
         $values['responses'] = [];
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
 
         $viewer->getId()->willReturn('user1');
         $author->getId()->willReturn('user2');
@@ -195,7 +195,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $values['replyId'] = 'UmVwbHk6cmVwbHk1';
         $values['draft'] = false;
         $values['responses'] = [];
-        $arguments->getRawArguments()->willReturn($values);
+        $arguments->getArrayCopy()->willReturn($values);
 
         $viewer->getId()->willReturn('user1');
 

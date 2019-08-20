@@ -12,7 +12,7 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
     public function __invoke(Argument $input, User $user): array
     {
         $this->user = $user;
-        $this->arguments = $input->getRawArguments();
+        $this->arguments = $input->getArrayCopy();
 
         // it an update from BO
         if (isset($this->arguments[self::USER_ID])) {

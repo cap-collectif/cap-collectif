@@ -3,7 +3,6 @@ InternalConsultationStep:
   inherits:
     - InternalPrimaryKey
     - Node
-    - PreviewConsultationStep
     - RequirementStep
     - InternalStep
   config:
@@ -19,6 +18,23 @@ InternalConsultationStep:
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: ConsultationStep
+      contributors:
+        description: 'A list of contributor associated with the consultation step.'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+        type: 'InternalUserConnection!'
+      votesCount:
+        type: 'Int'
+        description: 'The number of votes in this consultation.'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-09-01", reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `votesCount` will be removed.", supersededBy: "Use `votes.totalCount` instead."})'
+      userHasVote:
+        type: 'Boolean!'
+        description: 'Whether the user has vote for a contribution in this consultation step.'
+        args:
+          login:
+            type: 'String!'
+            description: "The user's login (for example, an email)."
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepUserHasVoteResolver", [value, args])'
       kind:
         type: 'String!'
         description: 'The type of step. Returns "consultation".'
@@ -35,13 +51,6 @@ InternalConsultationStep:
         description: 'Get the associated consultations of this consultation step'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationsResolver", [value, args])'
         argsBuilder: 'Relay::Connection'
-        args:
-          first:
-            type: 'Int'
-            description: Returns the first `n` elements from the list.
-            defaultValue: 100
-      contributors:
-        type: 'InternalUserConnection!'
       # TODO rename to `contributions`
       contributionConnection:
         type: 'ContributionConnection'

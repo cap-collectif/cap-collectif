@@ -28,9 +28,9 @@
         "generate-graphql-files": "yarn run clean-cache && yarn run compile-graphql && yarn run dump-graphql-schemas",
         "relay": "yarn run generate-graphql-files && yarn run build-relay-schema",
         "relay:watch": "yarn run generate-graphql-files && yarn run build-relay-schema:watch",
-        "graphql:lint:public": "graphql-schema-linter --comment-descriptions schema.public.graphql",
-        "graphql:lint:preview": "graphql-schema-linter --comment-descriptions schema.preview.graphql",
-        "graphql:lint:internal": "graphql-schema-linter --comment-descriptions schema.internal.graphql",
+        "graphql:lint:public": "graphql-schema-linter schema.public.graphql",
+        "graphql:lint:preview": "graphql-schema-linter schema.preview.graphql",
+        "graphql:lint:internal": "graphql-schema-linter schema.internal.graphql",
         "lint": "eslint --cache --fix --report-unused-disable-directives app/Resources/js",
         "bundlesize": "bundlesize",
         "storybook": "start-storybook -p 9001 -c .storybook",
@@ -80,8 +80,14 @@
         }
     },
     "lint-staged": {
-        "schema.{public,preview}.graphql": [
-            "graphql-schema-linter --comment-descriptions"
+        "schema.public.graphql": [
+            "graphql-schema-linter"
+        ],
+        "schema.preview.graphql": [
+            "graphql-schema-linter"
+        ],
+        "schema.internal.graphql": [
+            "graphql-schema-linter --rules deprecations-have-a-reason,types-are-capitalized "
         ],
         "{features/graphql-public,app/Resources/js}/**/*.js": [
             "eslint --fix --report-unused-disable-directives",

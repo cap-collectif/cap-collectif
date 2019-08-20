@@ -40,7 +40,9 @@ class OpinionSearch extends Search
         $filters = $this->getFilters(['type' => $sectionId]);
 
         foreach ($filters as $key => $value) {
-            $boolQuery->addMust(new Term([$key => ['value' => $value]]));
+            if ($value) {
+                $boolQuery->addMust(new Term([$key => ['value' => $value]]));
+            }
         }
         $boolQuery->addMust(new Exists('id'));
 

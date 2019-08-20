@@ -74,7 +74,7 @@ Scenario: Logged in API client wants to vote for an opinion not contributable
   """
   {
     "errors": [
-      {"message":"Uncontribuable opinion.","category":"user","locations":[{"line":1,"column":46}],"path":["addOpinionVote"]}
+      {"message":"Uncontribuable opinion.","@*@": "@*@"}
     ],
     "data":{"addOpinionVote":null}
   }
@@ -143,8 +143,7 @@ Scenario: Logged in API client wants to vote for an opinion without requirement
   "errors":[
     {
       "message":"You dont meets all the requirements.",
-      "category":"user","locations":[{"line":1,"column":46}],
-      "path":["addOpinionVote"]
+      "@*@": "@*@"
     }
   ],
   "data":{"addOpinionVote":null}

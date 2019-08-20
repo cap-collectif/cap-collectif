@@ -44,7 +44,7 @@ class UpdateRegistrationFormQuestionsMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
 
         $registrationForm = $this->registrationFormRepository->findCurrent();
 

@@ -37,9 +37,9 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
 
     public function __invoke(Argument $input, User $user): array
     {
-        $arguments = $input->getRawArguments();
+        $arguments = $input->getArrayCopy();
         $form = $this->formFactory->create(ChangePasswordFormType::class, null, [
-            'csrf_protection' => false,
+            'csrf_protection' => false
         ]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {
@@ -55,7 +55,7 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
             'user.password',
             new Message(
                 json_encode([
-                    'userId' => $user->getId(),
+                    'userId' => $user->getId()
                 ])
             )
         );

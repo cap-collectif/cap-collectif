@@ -154,8 +154,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         $connection = $copier->copy($value);
 
         if ($connection) {
-            foreach ($connection->edges as $vote) {
-                $vote->node = $vote->node->getId();
+            foreach ($connection->getEdges() as $vote) {
+                $vote->setNode($vote->getNode()->getId());
             }
         }
 
@@ -165,8 +165,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     protected function denormalizeValue($value)
     {
         if ($value) {
-            foreach ($value->edges as $vote) {
-                $vote->node = $this->abstractVoteRepository->find($vote->node);
+            foreach ($value->getEdges() as $vote) {
+                $vote->setNode($this->abstractVoteRepository->find($vote->getNode()));
             }
         }
 
@@ -182,7 +182,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     {
         return [
             'userId' => $key['user']->getId(),
-            'args' => $key['args'],
+            'args' => $key['args']
         ];
     }
 

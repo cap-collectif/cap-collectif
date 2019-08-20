@@ -79,7 +79,7 @@ Scenario: GraphQL client wants to create a fusion with only 1 proposal
   Then the JSON response should match:
   """
   {
-    "errors": [{"message":"You must specify at least 2 proposals to merge.","category":@string@,"locations": @wildcard@,"path":["createProposalFusion"]}],
+    "errors": [{"message":"You must specify at least 2 proposals to merge.","@*@": "@*@"}],
     "data": {
       "createProposalFusion": null
     }
@@ -112,7 +112,7 @@ Scenario: GraphQL client wants to create a fusion with proposals from different 
   Then the JSON response should match:
   """
   {
-    "errors": [{"message":"All proposals to merge should have the same proposalForm.","category":@string@,"locations": @wildcard@,"path":["createProposalFusion"]}],
+    "errors": [{"message":"All proposals to merge should have the same proposalForm.","@*@": "@*@"}],
     "data": {
       "createProposalFusion": null
     }

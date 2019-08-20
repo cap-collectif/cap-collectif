@@ -27,13 +27,13 @@ class QueryContributorsResolver implements ResolverInterface
 
         $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount) {
             $value = $this->userSearch->getAllContributors($offset, $limit);
-            $totalCount = $value['totalCount'];
+            $totalCount = (int) $value['totalCount'];
 
             return $value['results'];
         });
 
         $connection = $paginator->auto($args, $totalCount);
-        $connection->totalCount = $totalCount;
+        $connection->setTotalCount($totalCount);
         $connection->{'anonymousCount'} = 0;
 
         return $connection;

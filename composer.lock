@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9c095e716acb983a2d4a66bb1d279d3",
+    "content-hash": "835074e8e97122c905679bb2124dc379",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -2592,18 +2592,18 @@
             "require-dev": {
                 "doctrine/doctrine-bundle": "^1.6",
                 "doctrine/orm": "^2.5",
-                "doctrine/phpcr-bundle": "^1.3",
+                "doctrine/phpcr-bundle": "^1.3|^2.0",
                 "doctrine/phpcr-odm": "^1.4",
                 "friendsofphp/php-cs-fixer": "^2.2",
                 "jackalope/jackalope-doctrine-dbal": "^1.2",
                 "jms/serializer-bundle": "^2.2",
                 "knplabs/knp-components": "^1.2",
                 "phpunit/phpunit": "^5.7.11|^6.5",
-                "symfony/expression-language": "^3.2|^4",
-                "symfony/serializer": "^3.2|^4",
-                "symfony/twig-bundle": "^3.2|^4",
-                "symfony/web-profiler-bundle": "^3.0|^4.0",
-                "symfony/yaml": "^3.2|^4"
+                "symfony/expression-language": "^3.4|^4",
+                "symfony/serializer": "^3.4|^4",
+                "symfony/twig-bundle": "^3.4|^4",
+                "symfony/web-profiler-bundle": "^3.4|^4.0",
+                "symfony/yaml": "^3.4|^4"
             },
             "suggest": {
                 "enqueue/elastica-bundle": "The bundle adds extra features to FOSElasticaBundle bundle. Aimed to improve performance."
@@ -2611,7 +2611,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0.x-dev"
+                    "dev-master": "5.1.x-dev"
                 }
             },
             "autoload": {
@@ -2650,7 +2650,7 @@
                 "mongodb",
                 "search"
             ],
-            "time": "2018-06-12T21:22:51+00:00"
+            "time": "2019-06-25T12:21:26+00:00"
         },
         {
             "name": "friendsofsymfony/http-cache",
@@ -6452,20 +6452,20 @@
         },
         {
             "name": "overblog/graphql-bundle",
-            "version": "dev-master",
+            "version": "0.12.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/GraphQLBundle.git",
-                "reference": "2cdc6e286f3a7f5f702b1eb5ec2b2c2363997009"
+                "url": "https://github.com/spyl94/GraphQLBundle.git",
+                "reference": "c38f3710cf56f7721623e0cdcb93cadab1f418ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/GraphQLBundle/zipball/2cdc6e286f3a7f5f702b1eb5ec2b2c2363997009",
-                "reference": "2cdc6e286f3a7f5f702b1eb5ec2b2c2363997009",
+                "url": "https://api.github.com/repos/spyl94/GraphQLBundle/zipball/c38f3710cf56f7721623e0cdcb93cadab1f418ae",
+                "reference": "c38f3710cf56f7721623e0cdcb93cadab1f418ae",
                 "shasum": ""
             },
             "require": {
-                "overblog/graphql-php-generator": "^0.7.0",
+                "ext-json": "*",
                 "php": ">=7.1",
                 "psr/log": "^1.0",
                 "symfony/config": "^3.4 || ^4.0",
@@ -6475,14 +6475,15 @@
                 "symfony/framework-bundle": "^3.4 || ^4.0",
                 "symfony/options-resolver": "^3.4 || ^4.0",
                 "symfony/property-access": "^3.4 || ^4.0",
-                "webonyx/graphql-php": "^0.12.0"
+                "webonyx/graphql-php": "^0.13.5"
+            },
+            "replace": {
+                "overblog/graphql-php-generator": "self.version"
             },
             "require-dev": {
-                "phpstan/phpstan": "^0.10.3",
-                "phpstan/phpstan-phpunit": "^0.10.0",
-                "phpunit/phpunit": "^5.7.26 || ^6.0 || ^7.2",
+                "doctrine/orm": "^2.5",
+                "phpunit/phpunit": "<8.3",
                 "react/promise": "^2.5",
-                "sensio/framework-extra-bundle": "^3.0",
                 "symfony/asset": "^3.4 || ^4.0",
                 "symfony/browser-kit": "^3.4 || ^4.0",
                 "symfony/console": "^3.4 || ^4.0",
@@ -6490,8 +6491,7 @@
                 "symfony/phpunit-bridge": "^3.4 || ^4.0",
                 "symfony/process": "^3.4 || ^4.0",
                 "symfony/security-bundle": "^3.4 || ^4.0",
-                "symfony/templating": "^3.4 || ^4.0",
-                "symfony/web-profiler-bundle": "^3.4 || ^4.0",
+                "symfony/validator": "^3.4 || ^4.0",
                 "symfony/yaml": "^3.4 || ^4.0"
             },
             "suggest": {
@@ -6507,25 +6507,25 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Overblog\\GraphQLBundle\\": "src"
+                    "Overblog\\GraphQLBundle\\": "src/",
+                    "Overblog\\GraphQLGenerator\\": "lib/generator/src/"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "Overblog\\GraphQLBundle\\Benchmarks\\": "benchmarks",
-                    "Overblog\\GraphQLBundle\\Tests\\": "tests"
-                },
-                "files": [
-                    "vendor/overblog/graphql-php-generator/tests/DateTimeType.php",
-                    "vendor/overblog/graphql-php-generator/tests/Resolver.php"
-                ]
+                    "Overblog\\GraphQLBundle\\Benchmarks\\": "benchmarks/",
+                    "Overblog\\GraphQLBundle\\Tests\\": "tests/",
+                    "Overblog\\GraphQLGenerator\\Tests\\": "lib/generator/tests/"
+                }
             },
             "scripts": {
                 "test": [
                     "bin/phpunit --color=always -v --debug"
                 ],
                 "static-analysis": [
-                    "phpstan analyse --ansi"
+                    "@composer req --ansi --dev 'phpstan/phpstan:^0.10.3' 'phpstan/phpstan-phpunit:^0.10.0'",
+                    "phpstan analyse --ansi",
+                    "@composer rem --ansi --dev phpstan/phpstan phpstan/phpstan-phpunit"
                 ],
                 "bench": [
                     "test -f phpbench.phar || wget https://phpbench.github.io/phpbench/phpbench.phar https://phpbench.github.io/phpbench/phpbench.phar.pubkey",
@@ -6536,11 +6536,14 @@
                 ],
                 "fix-cs": [
                     "@install-cs",
-                    "@php php-cs-fixer.phar fix --diff -v --allow-risky=yes --ansi"
+                    "@php php-cs-fixer.phar self-update",
+                    "@php php-cs-fixer.phar fix --diff -v --allow-risky=yes --ansi",
+                    "@php php-cs-fixer.phar fix --config=lib/generator/.php_cs.dist --diff -v --allow-risky=yes --ansi"
                 ],
                 "check-cs": [
                     "@install-cs",
-                    "@php php-cs-fixer.phar fix --dry-run --diff -v --allow-risky=yes --ansi"
+                    "@php php-cs-fixer.phar fix --dry-run --diff -v --allow-risky=yes --ansi",
+                    "@php php-cs-fixer.phar fix --config=lib/generator/.php_cs.dist --dry-run --diff -v --allow-risky=yes --ansi"
                 ],
                 "code-quality": [
                     "rm composer.lock",
@@ -6548,6 +6551,12 @@
                     "@static-analysis",
                     "@bench",
                     "@check-cs"
+                ],
+                "docker-clean": [
+                    "docker image rm $(docker image ls -qf reference=graphql-test)"
+                ],
+                "docker": [
+                    "docker build . -t graphql-test && docker image prune -f >/dev/null && docker run --rm graphql-test"
                 ]
             },
             "license": [
@@ -6565,60 +6574,9 @@
                 "Relay"
             ],
             "support": {
-                "source": "https://github.com/cap-collectif/GraphQLBundle/tree/master"
+                "source": "https://github.com/spyl94/GraphQLBundle/tree/0.12"
             },
-            "time": "2018-12-05T16:36:02+00:00"
-        },
-        {
-            "name": "overblog/graphql-php-generator",
-            "version": "v0.7.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/overblog/GraphQLPhpGenerator.git",
-                "reference": "dd8cf110efb0864fe79a9effff57ef5e4e57cabf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphQLPhpGenerator/zipball/dd8cf110efb0864fe79a9effff57ef5e4e57cabf",
-                "reference": "dd8cf110efb0864fe79a9effff57ef5e4e57cabf",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5|~7.0",
-                "webonyx/graphql-php": "^0.11.2|^0.12.0"
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "^1.11",
-                "phpunit/phpunit": "^4.1|^5.1",
-                "sllh/php-cs-fixer-styleci-bridge": "^1.5",
-                "symfony/expression-language": "^3.3",
-                "symfony/filesystem": "^3.3",
-                "symfony/process": "^3.3",
-                "symfony/yaml": "^3.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Overblog\\GraphQLGenerator\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Overblog",
-                    "homepage": "http://www.over-blog.com"
-                }
-            ],
-            "description": "GraphQL types generator",
-            "keywords": [
-                "generator",
-                "graphql",
-                "type"
-            ],
-            "time": "2019-02-18T14:34:13+00:00"
+            "time": "2019-08-21T13:53:02+00:00"
         },
         {
             "name": "pagerfanta/pagerfanta",
@@ -9474,16 +9432,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "3.51.0",
+            "version": "3.52.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "bc279a80e701c200251d802c7910ff782c2770e5"
+                "reference": "f0c22710bed3a5926bab5a65b4c1b73f2e1da671"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/bc279a80e701c200251d802c7910ff782c2770e5",
-                "reference": "bc279a80e701c200251d802c7910ff782c2770e5",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/f0c22710bed3a5926bab5a65b4c1b73f2e1da671",
+                "reference": "f0c22710bed3a5926bab5a65b4c1b73f2e1da671",
                 "shasum": ""
             },
             "require": {
@@ -9518,7 +9476,7 @@
                 "symfony/twig-bundle": "^2.8 || ^3.2 || ^4.0",
                 "symfony/validator": "^2.8 || ^3.2 || ^4.0",
                 "twig/extensions": "^1.5",
-                "twig/twig": "^2.9"
+                "twig/twig": "^2.10"
             },
             "conflict": {
                 "jms/di-extra-bundle": "<1.9",
@@ -9559,13 +9517,13 @@
             ],
             "authors": [
                 {
-                    "name": "Sonata Community",
-                    "homepage": "https://github.com/sonata-project/SonataAdminBundle/contributors"
-                },
-                {
                     "name": "Thomas Rabaix",
                     "email": "thomas.rabaix@sonata-project.org",
                     "homepage": "https://sonata-project.org"
+                },
+                {
+                    "name": "Sonata Community",
+                    "homepage": "https://github.com/sonata-project/SonataAdminBundle/contributors"
                 }
             ],
             "description": "The missing Symfony Admin Generator",
@@ -9576,20 +9534,20 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2019-06-27T05:45:19+00:00"
+            "time": "2019-08-16T11:06:16+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
-            "version": "3.16.1",
+            "version": "3.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "4606e3c7e156c3ede16abed8a893ce3116e44103"
+                "reference": "38619fa25eda56d32361b6a50e2c5eb6b27b1891"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/4606e3c7e156c3ede16abed8a893ce3116e44103",
-                "reference": "4606e3c7e156c3ede16abed8a893ce3116e44103",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/38619fa25eda56d32361b6a50e2c5eb6b27b1891",
+                "reference": "38619fa25eda56d32361b6a50e2c5eb6b27b1891",
                 "shasum": ""
             },
             "require": {
@@ -9663,7 +9621,7 @@
                 "block",
                 "sonata"
             ],
-            "time": "2019-08-05T06:06:34+00:00"
+            "time": "2019-08-16T11:17:01+00:00"
         },
         {
             "name": "sonata-project/cache",
@@ -10175,34 +10133,34 @@
         },
         {
             "name": "sonata-project/exporter",
-            "version": "1.11.1",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/exporter.git",
-                "reference": "a4925e3569fb3fa710fa7c6fecd85b6281c55f57"
+                "reference": "9e84fd03ef0c696b9b4e9617b73cb6defaf3b476"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/a4925e3569fb3fa710fa7c6fecd85b6281c55f57",
-                "reference": "a4925e3569fb3fa710fa7c6fecd85b6281c55f57",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/9e84fd03ef0c696b9b4e9617b73cb6defaf3b476",
+                "reference": "9e84fd03ef0c696b9b4e9617b73cb6defaf3b476",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6 || ^7.0"
+                "php": "^7.2"
             },
             "require-dev": {
                 "doctrine/dbal": "^2.5",
                 "doctrine/orm": "^2.4.5",
-                "matthiasnoback/symfony-config-test": "^2.0",
-                "matthiasnoback/symfony-dependency-injection-test": "^1.0",
+                "matthiasnoback/symfony-config-test": "^4.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^3.0",
                 "propel/propel1": "^1.6",
-                "symfony/config": "^2.8 || ^3.2 || ^4.0",
-                "symfony/dependency-injection": "^2.8 || ^3.2 || ^4.0",
-                "symfony/http-foundation": "^2.8 || ^3.2 || ^4.0",
-                "symfony/http-kernel": "^2.8 || ^3.2 || ^4.0",
-                "symfony/phpunit-bridge": "^4.0",
-                "symfony/property-access": "^2.8 || ^3.2 || ^4.0",
-                "symfony/routing": "^2.8 || ^3.2 || ^4.0"
+                "symfony/config": "^3.4 || ^4.0",
+                "symfony/dependency-injection": "^3.4 || ^4.0",
+                "symfony/http-foundation": "^3.4 || ^4.0",
+                "symfony/http-kernel": "^3.4 || ^4.0",
+                "symfony/phpunit-bridge": "^4.1",
+                "symfony/property-access": "^3.4 || ^4.0",
+                "symfony/routing": "^3.4 || ^4.0"
             },
             "suggest": {
                 "ext-curl": "*",
@@ -10213,12 +10171,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Exporter\\": "aliases/",
                     "Sonata\\Exporter\\": "src/"
                 }
             },
@@ -10242,39 +10199,40 @@
                 "export",
                 "xls"
             ],
-            "time": "2019-04-17T21:05:17+00:00"
+            "time": "2019-01-26T10:32:20+00:00"
         },
         {
             "name": "sonata-project/intl-bundle",
-            "version": "2.4.0",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataIntlBundle.git",
-                "reference": "82d3e586b30aeea31c5a93c673f0b4b4eebbf7b8"
+                "reference": "222b9bf6ff14429e369e9b20bb9dec75a2ae2eda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/82d3e586b30aeea31c5a93c673f0b4b4eebbf7b8",
-                "reference": "82d3e586b30aeea31c5a93c673f0b4b4eebbf7b8",
+                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/222b9bf6ff14429e369e9b20bb9dec75a2ae2eda",
+                "reference": "222b9bf6ff14429e369e9b20bb9dec75a2ae2eda",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6 || ^7.0",
+                "php": "^7.1",
+                "symfony/config": "^2.8 || ^3.2 || ^4.0",
                 "symfony/dependency-injection": "^2.8 || ^3.2 || ^4.0",
+                "symfony/http-foundation": "^2.8 || ^3.2 || ^4.0",
                 "symfony/http-kernel": "^2.8 || ^3.2 || ^4.0",
                 "symfony/intl": "^2.8 || ^3.2 || ^4.0",
                 "symfony/templating": "^2.8 || ^3.2 || ^4.0",
-                "twig/twig": "^1.12 || ^2.0"
+                "twig/twig": "^2.9"
             },
             "conflict": {
                 "sonata-project/user-bundle": "<2.0 || >=5.0"
             },
             "require-dev": {
-                "matthiasnoback/symfony-dependency-injection-test": "^1.0",
-                "sllh/php-cs-fixer-styleci-bridge": "^2.0",
-                "symfony/phpunit-bridge": "^3.3 || ^4.0",
-                "symfony/security": "^2.8 || ^3.2 || ^4.0",
-                "symfony/security-acl": "^2.8 || ^3.0"
+                "matthiasnoback/symfony-dependency-injection-test": "^3.1",
+                "sonata-project/user-bundle": "^3.6 || ^4.0",
+                "symfony/phpunit-bridge": "^4.3",
+                "symfony/security-core": "^2.8 || ^3.2 || ^4.0"
             },
             "suggest": {
                 "sonata-project/user-bundle": "For user timezone detection"
@@ -10296,12 +10254,12 @@
             ],
             "authors": [
                 {
-                    "name": "Sonata Community",
-                    "homepage": "https://github.com/sonata-project/SonataIntlBundle/contributors"
-                },
-                {
                     "name": "Thomas Rabaix",
                     "email": "thomas.rabaix@sonata-project.org"
+                },
+                {
+                    "name": "Sonata Community",
+                    "homepage": "https://github.com/sonata-project/SonataIntlBundle/contributors"
                 }
             ],
             "description": "Symfony SonataIntlBundle",
@@ -10313,7 +10271,7 @@
                 "sonata",
                 "time"
             ],
-            "time": "2017-11-30T13:41:09+00:00"
+            "time": "2019-08-08T19:27:06+00:00"
         },
         {
             "name": "sonata-project/media-bundle",
@@ -12211,25 +12169,33 @@
         },
         {
             "name": "webonyx/graphql-php",
-            "version": "dev-master",
+            "version": "v0.13.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/graphql-php.git",
-                "reference": "efe1bcf052d4b42910c9f96fad3c10e4482ef7a8"
+                "url": "https://github.com/webonyx/graphql-php.git",
+                "reference": "123af49e46d26b0cd2e7a71a387253aa01ea9a6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/graphql-php/zipball/efe1bcf052d4b42910c9f96fad3c10e4482ef7a8",
-                "reference": "efe1bcf052d4b42910c9f96fad3c10e4482ef7a8",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/123af49e46d26b0cd2e7a71a387253aa01ea9a6b",
+                "reference": "123af49e46d26b0cd2e7a71a387253aa01ea9a6b",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "ext-mbstring": "*",
-                "php": ">=5.5,<8.0-DEV"
+                "php": "^7.1||^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8",
-                "psr/http-message": "^1.0"
+                "doctrine/coding-standard": "^6.0",
+                "phpbench/phpbench": "^0.14.0",
+                "phpstan/phpstan": "^0.11.4",
+                "phpstan/phpstan-phpunit": "^0.11.0",
+                "phpstan/phpstan-strict-rules": "^0.11.0",
+                "phpunit/phpcov": "^5.0",
+                "phpunit/phpunit": "^7.2",
+                "psr/http-message": "^1.0",
+                "react/promise": "2.*"
             },
             "suggest": {
                 "psr/http-message": "To use standard GraphQL server",
@@ -12237,33 +12203,21 @@
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "src/deprecated.php"
-                ],
                 "psr-4": {
                     "GraphQL\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "GraphQL\\Tests\\": "tests/",
-                    "GraphQL\\Benchmarks\\": "benchmarks/",
-                    "GraphQL\\Examples\\Blog\\": "examples/01-blog/Blog/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "A PHP port of GraphQL reference implementation",
             "homepage": "https://github.com/webonyx/graphql-php",
             "keywords": [
-                "API",
+                "api",
                 "graphql"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/graphql-php/tree/master"
-            },
-            "time": "2018-02-22T10:14:53+00:00"
+            "time": "2019-08-07T08:16:55+00:00"
         },
         {
             "name": "whitehat101/apr1-md5",
@@ -16239,16 +16193,10 @@
             "package": "symfony/symfony"
         },
         {
-            "alias": "3.16.3",
-            "alias_normalized": "3.16.3.0",
+            "alias": "3.20.1",
+            "alias_normalized": "3.20.1.0",
             "version": "dev-bugfix-3.16.3",
             "package": "sonata-project/media-bundle"
-        },
-        {
-            "alias": "0.12.0",
-            "alias_normalized": "0.12.0.0",
-            "version": "9999999-dev",
-            "package": "webonyx/graphql-php"
         }
     ],
     "minimum-stability": "stable",
@@ -16257,16 +16205,15 @@
         "sonata-project/media-bundle": 20,
         "sonata-project/datagrid-bundle": 20,
         "hwi/oauth-bundle": 20,
-        "friendsofsymfony/elastica-bundle": 20,
         "liuggio/excelbundle": 20,
         "hslavich/simplesamlphp-bundle": 20,
         "phayes/geophp": 20,
-        "webonyx/graphql-php": 20,
-        "overblog/graphql-bundle": 20,
         "webfactory/icu-translation-bundle": 20,
         "symfony/security-acl": 20,
         "egeloen/ckeditor-bundle": 20,
         "egeloen/json-builder": 20,
+        "overblog/graphql-bundle": 20,
+        "friendsofsymfony/elastica-bundle": 20,
         "tonicforhealth/behat-parallel-scenario": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "alexandresalome/mailcatcher": 20,

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
@@ -31,7 +32,7 @@ class PostRepository extends EntityRepository
 
     public function getOrderedPublishedPostsByProposal(
         Proposal $proposal,
-        ?int $limit = null,
+        ?int $limit,
         string $field,
         int $offset = 0,
         string $direction = 'ASC'
@@ -129,7 +130,7 @@ class PostRepository extends EntityRepository
      *
      * @return array
      */
-    public function countSearchResults($themeSlug = null, $projectSlug = null)
+    public function countSearchResults($themeSlug = null, $projectSlug = null): int
     {
         $qb = $this->getIsPublishedQueryBuilder('p')->select('COUNT(p.id)');
 
@@ -148,7 +149,7 @@ class PostRepository extends EntityRepository
                 ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
         }
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
