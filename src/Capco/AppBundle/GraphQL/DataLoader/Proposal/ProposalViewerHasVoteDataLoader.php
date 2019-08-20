@@ -95,10 +95,7 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         $step = $this->globalIdResolver->resolve($stepId, $user);
 
         if (!$step) {
-            // TODO fixme https://github.com/cap-collectif/platform/issues/7016
-            if (!empty($stepId)) {
-                $this->logger->error('Please provide a valid stepId argument.');
-            }
+            $this->logger->error('Please provide a valid stepId');
 
             return $this->getPromiseAdapter()->createAll(
                 array_map(function ($key) {
@@ -149,7 +146,7 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         return [
             'proposalId' => $key['proposal']->getId(),
             'stepId' => $key['stepId'],
-            'user' => $key['user']->getId()
+            'user' => $key['user']->getId(),
         ];
     }
 
