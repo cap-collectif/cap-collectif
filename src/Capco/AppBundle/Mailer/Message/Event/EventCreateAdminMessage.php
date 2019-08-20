@@ -15,15 +15,14 @@ final class EventCreateAdminMessage extends AdminMessage
         $message = new self(
             $recipentEmail,
             $recipientName,
-            'notification.email.anonymous_event.create.subject',
-            static::getMySubjectVars($event->getAuthor()->getDisplayName()),
-            'notification.email.anonymous_event.create.body',
+            'event-needing-examination',
+            static::getMySubjectVars($event->getTitle()),
+            '@CapcoMail/notifyAdminOfNewEvent.html.twig',
             static::getMyTemplateVars(
                 $event->getAuthor()->getUsername(),
                 $event->getCreatedAt()->format('d/m/Y'),
                 $event->getCreatedAt()->format('H:i:s'),
                 $event->getBodyTextExcerpt(),
-                $eventUrl,
                 $eventAdminUrl
             )
         );
@@ -36,8 +35,7 @@ final class EventCreateAdminMessage extends AdminMessage
         string $date,
         string $time,
         string $event,
-        string $proposalUrl,
-        string $proposalAdminUrl,
+        string $eventAdminUrl,
         string $eventTitle
     ): array {
         return [
@@ -46,15 +44,14 @@ final class EventCreateAdminMessage extends AdminMessage
             '%date%' => $date,
             '%time%' => $time,
             '%event%' => self::escape($event),
-            '%proposalUrl%' => $proposalUrl,
-            '%eventUrlBack%' => $proposalAdminUrl,
+            'eventAdminUrl' => $eventAdminUrl,
         ];
     }
 
-    private static function getMySubjectVars(string $username): array
+    private static function getMySubjectVars(string $eventTitle): array
     {
         return [
-            '%username%' => self::escape($username),
+            '{eventTitle}' => self::escape($eventTitle),
         ];
     }
 }

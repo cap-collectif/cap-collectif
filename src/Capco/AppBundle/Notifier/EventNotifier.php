@@ -29,17 +29,11 @@ class EventNotifier extends BaseNotifier
         MailerService $mailer,
         Resolver $siteParams,
         UserResolver $userResolver,
-        ProposalResolver $proposalResolver,
-        ProposalUrlResolver $proposalUrlResolver,
-        UserUrlResolver $userUrlResolver,
         TranslatorInterface $translator,
         EventUrlResolver $eventUrlResolver,
         UserRepository $userRepository
     ) {
         parent::__construct($mailer, $siteParams, $userResolver);
-        $this->proposalResolver = $proposalResolver;
-        $this->proposalUrlResolver = $proposalUrlResolver;
-        $this->userUrlResolver = $userUrlResolver;
         $this->eventUrlResolver = $eventUrlResolver;
         $this->translator = $translator;
         $this->userRepository = $userRepository;
@@ -54,7 +48,7 @@ class EventNotifier extends BaseNotifier
                 EventCreateAdminMessage::create(
                     $event,
                     $this->eventUrlResolver->__invoke($event, true),
-                    $admin->getEmail()
+                    $admin->getEmail(),
                     $admin->getDisplayName()
                 )
             );

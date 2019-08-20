@@ -19,9 +19,9 @@ class EventUrlResolver implements ResolverInterface
         $this->router = $router;
     }
 
-    public function __invoke(Event $event, bool $adminUrl = false): string
+    public function __invoke(Event $event, bool $isAdminUrl = false): string
     {
-        if ($adminUrl) {
+        if ($isAdminUrl) {
             return $this->router->generate(
                 'admin_capco_app_event_edit',
                 ['id' => $event->getId()],

@@ -2,7 +2,13 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver;
+use Capco\AppBundle\Mailer\Message\EventCreateAdminMessage;
+use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
+use FOS\UserBundle\Mailer\Mailer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\SiteParameterRepository;
@@ -26,21 +32,27 @@ class DefaultController extends Controller
                 $request->getSession()->invalidate();
             }
 
-            return $this->json([
-                'success' => false,
-                'reason' => 'please-confirm-your-email-address-to-login',
-            ]);
+            return $this->json(
+                [
+                    'success' => false,
+                    'reason' => 'please-confirm-your-email-address-to-login',
+                ]
+            );
         }
 
         if (!$this->getUser()) {
-            return $this->json([
-                'success' => false,
-            ]);
+            return $this->json(
+                [
+                    'success' => false,
+                ]
+            );
         }
 
-        return $this->json([
-            'success' => true,
-        ]);
+        return $this->json(
+            [
+                'success' => true,
+            ]
+        );
     }
 
     /**
@@ -78,10 +90,12 @@ class DefaultController extends Controller
      */
     public function cookiesAction(Request $request)
     {
-        $cookiesList = $this->get(SiteParameterRepository::class)->findOneBy([
-            'keyname' => 'cookies-list',
-            'isEnabled' => 1,
-        ]);
+        $cookiesList = $this->get(SiteParameterRepository::class)->findOneBy(
+            [
+                'keyname' => 'cookies-list',
+                'isEnabled' => 1,
+            ]
+        );
 
         if (!$cookiesList) {
             return $this->createNotFoundException();
@@ -98,10 +112,12 @@ class DefaultController extends Controller
      */
     public function privacyPolicyAction(Request $request)
     {
-        $policy = $this->get(SiteParameterRepository::class)->findOneBy([
-            'keyname' => 'privacy-policy',
-            'isEnabled' => 1,
-        ]);
+        $policy = $this->get(SiteParameterRepository::class)->findOneBy(
+            [
+                'keyname' => 'privacy-policy',
+                'isEnabled' => 1,
+            ]
+        );
 
         if (!$policy) {
             return $this->createNotFoundException();
@@ -113,15 +129,17 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/legal", name="app_legal")
+     * @Route("/legaEvent.ymll", name="app_legal")
      * @Template("CapcoAppBundle:Default:legalMentions.html.twig")
      */
     public function legalMentionsAction(Request $request)
     {
-        $legal = $this->get(SiteParameterRepository::class)->findOneBy([
-            'keyname' => 'legal-mentions',
-            'isEnabled' => 1,
-        ]);
+        $legal = $this->get(SiteParameterRepository::class)->findOneBy(
+            [
+                'keyname' => 'legal-mentions',
+                'isEnabled' => 1,
+            ]
+        );
 
         if (!$legal) {
             return $this->createNotFoundException();
@@ -130,5 +148,25 @@ class DefaultController extends Controller
         return [
             'legal' => html_entity_decode($legal->getValue()),
         ];
+    }
+
+    /**
+     * @Route("/email", name="app_email")
+     * @Template("@CapcoMail/notifyAdminOfNewEvent.html.twig")
+     */
+    public function emailAction(Request $request)
+    {
+        $admins = $this->get(UserRepository::class)->getAllAdmin();
+        $event = $this->get(EventRepository::class)->find('event1');
+        /** @var User $admin */
+        foreach ($admins as $admin) {
+            return [
+                'eventAdminUrl' => $this->get(EventUrlResolver::class)->__invoke($event, true),
+                'username' => $admin->getDisplayName(),
+                'siteName' => 'Cap collectif',
+                'baseUrl' => 'http://capco.dev',
+                'eventTitle' => $event->getTitle()
+            ];
+        }
     }
 }
