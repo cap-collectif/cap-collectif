@@ -48,13 +48,10 @@
     "flow-coverage-report": {
         "threshold": 70,
         "outputDir": "coverage/flow/",
-        "flowCommandPath": "node_modules/.bin/flow",
-        "concurrentFiles": 5,
         "globExcludePatterns": [
             "app/Resources/js/components/Synthesis/**/*.js",
             "app/Resources/js/__generated__/**/*.js",
-            "app/Resources/js/stories/**/*.js",
-            "node_modules/**"
+            "app/Resources/js/stories/**/*.js"
         ],
         "globIncludePatterns": [
             "app/Resources/js/**/*.js"
@@ -159,7 +156,6 @@
         "@storybook/react": "^5.1.8",
         "@storybook/storybook-deployer": "^2.3.0",
         "autosize": "^4.0.2",
-        "babel-cli": "^6.26.0",
         "babel-core": "^7.0.0-bridge.0",
         "babel-eslint": "^10.0.2",
         "babel-jest": "^24.8.0",
@@ -238,7 +234,7 @@
         "node-sass": "^4.11.0",
         "papaparse": "^5.0.0",
         "points-cluster": "^0.1.4",
-        "polished": "^3.4.1",
+        "polished": "^3.0.0",
         "postinstall-postinstall": "^2.0.0",
         "pre-commit": "^1.2.2",
         "prettier": "^1.15.2",

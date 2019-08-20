@@ -574,7 +574,6 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
     }
   />
   <OpenIDLoginButton
-    buttonColor="#ABABAB"
     features={
       Object {
         "allow_users_to_propose_events": false,
@@ -617,7 +616,6 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
       }
     }
     key="0"
-    labelColor="#FFFFFF"
     text="Cap Collectif Oauth2 Provider"
   />
   <p
@@ -913,7 +911,6 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
     }
   />
   <OpenIDLoginButton
-    buttonColor="#ABABAB"
     features={
       Object {
         "allow_users_to_propose_events": false,
@@ -956,7 +953,6 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
       }
     }
     key="0"
-    labelColor="#FFFFFF"
     text="Cap Collectif Oauth2 Provider"
   />
 </div>

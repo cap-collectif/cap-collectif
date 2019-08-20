@@ -13,7 +13,6 @@ import { isUrl } from '../../../services/Validator';
 import type { GlobalState, Uri, Uuid } from '../../../types';
 import AddOauth2SSOConfigurationMutation from '../../../mutations/AddOauth2SSOConfigurationMutation';
 import UpdateOauth2SSOConfigurationMutation from '../../../mutations/UpdateOauth2SSOConfigurationMutation';
-import ColorPickerInput from '../../Form/ColorPickerInput';
 
 type FormValues = {|
   id?: ?Uuid,
@@ -26,8 +25,6 @@ type FormValues = {|
   logoutUrl: ?Uri,
   redirectUri: Uri,
   profileUrl: ?Uri,
-  buttonColor: string,
-  labelColor: string,
 |};
 
 type Props = {|
@@ -52,8 +49,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     userInfoUrl,
     logoutUrl,
     profileUrl,
-    buttonColor,
-    labelColor,
   } = values;
 
   const { onClose } = props;
@@ -68,8 +63,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     userInfoUrl,
     accessTokenUrl,
     authorizationUrl,
-    buttonColor,
-    labelColor,
   };
 
   if (id === undefined || id === null) {
@@ -124,8 +117,6 @@ const validate = ({
   userInfoUrl,
   authorizationUrl,
   accessTokenUrl,
-  buttonColor,
-  labelColor,
 }: FormValues) => {
   const errors = {};
 
@@ -145,14 +136,6 @@ const validate = ({
     errors.clientId = 'global.required';
   } else if (clientId.length < 2) {
     errors.clientId = 'two-characters-minimum-required';
-  }
-
-  if (!buttonColor) {
-    errors.buttonColor = 'global.required';
-  }
-
-  if (!labelColor) {
-    errors.labelColor = 'global.required';
   }
 
   errors.logoutUrl = validateUrl(logoutUrl);
@@ -216,22 +199,6 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
               required
               component={component}
               label={<FormattedMessage id="global.name" />}
-            />
-            <Field
-              id={`${formName}_buttonColor`}
-              name="buttonColor"
-              type="text"
-              required
-              component={ColorPickerInput}
-              label={<FormattedMessage id="color.btn.bg" />}
-            />
-            <Field
-              id={`${formName}_labelColor`}
-              name="labelColor"
-              type="text"
-              required
-              component={ColorPickerInput}
-              label={<FormattedMessage id="label-color" />}
             />
             <h4>Configuration</h4>
             <Field

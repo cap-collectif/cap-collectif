@@ -239,30 +239,16 @@ RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$
     && rm yarn-v$YARN_VERSION.tar.gz
 
 # Download PHP dependencies
-COPY composer.json composer.lock ./
-
-# Will only install bundles that have changed since building the base image
+COPY composer.json composer.lock /var/www/
 RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --ignore-platform-reqs --no-progress
 
-# Then add usefull source code
-COPY bin /var/www/bin
-COPY web /var/www/web
-COPY app /var/www/app
-COPY src /var/www/src
-
-# Maybe chown before copy will be faster
-RUN mkdir -m 755 -p translations var web/bundles src/Capco/AppBundle/GraphQL/__generated__ \
-    && chown -R capco:capco . \
+# Then add source code, build autoloader and initialize Symfony
+COPY . /var/www
+RUN chown -R capco:capco . \
     && mkdir -p var/cache/prod \
     && chown -R capco:capco var \
-    && chmod -R 777 var
-
-# /!\
-# /!\ Beyond this step nothing is cached /!\
-# /!\
-
-# Build autoloader and initialize Symfony
-RUN rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
+    && chmod -R 777 var \
+    && rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
     && rm -rf vendor/simplesamlphp/simplesamlphp/metadata/* \
     && rm -rf vendor/simplesamlphp/simplesamlphp/cert \
     && cp -r app/config/simplesamlphp /var/www/vendor/simplesamlphp \
@@ -271,12 +257,8 @@ RUN rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
     && gosu capco php -d memory_limit=2048M bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
     && gosu capco php bin/console assets:install --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
 
-# Install JS deps to build compiled files (*.js)
-COPY npm-packages-offline-cache /var/www/npm-packages-offline-cache
-COPY webpack /var/www/webpack
-COPY package.json .yarnrc yarn.lock relay.config.js xlf2-to-json.mjs schema.internal.graphql .flowconfig .babelrc /var/www/
-
-RUN chown -R capco:capco npm-packages-offline-cache \
+# Build JS
+RUN yarn global add babel-cli \
     && gosu capco yarn install --production --pure-lockfile \
     && gosu capco npm rebuild node-sass > /dev/null \
     && gosu capco php bin/console translation:download app --env=prod \
@@ -285,9 +267,9 @@ RUN chown -R capco:capco npm-packages-offline-cache \
     ## SSR is disabled
     #&& gosu capco yarn run build-server-bundle:prod \
     && gosu capco yarn run build:prod \
-    ## Clean everything no more needed
+    ## Clean everything not needed
     && gosu capco yarn cache clean \
-    && rm -rf package.json yarn.lock relay.config.js xlf2-to-json.mjs schema.internal.graphql node_modules npm-packages-offline-cache webpack .babelrc .flowconfig
+    && rm -rf node_modules
 
 # Install crontab just to check if it's valid.
 RUN set -ex; \

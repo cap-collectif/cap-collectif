@@ -1,21 +1,16 @@
 # https://docs.codecov.io/docs
 codecov:
   notify:
-    require_ci_to_pass: false # will send notifications without checking ci status
-    after_n_builds: 1  # send notifications after the first upload
-    wait_for_ci: false
+    require_ci_to_pass: no # will send notifications without checking ci status
 
 comment:
   layout: 'reach, diff, flags, files'
   require_changes: yes # only post the comment if coverage changes
-  behavior: default  # update if exists else create new
 
 coverage:
   precision: 2 # 2 = xx.xx%
-  round: down
-  range: 50...100 # default 70...90. red...green
+  range: 50...60 # default 70...90. red...green
   status:
-    changes: true
     patch: # Only measures lines adjusted in the pull request
       default: off
       jest:
@@ -30,7 +25,6 @@ coverage:
         target: 0
       flow:
         flags: flow
-        target: 79
     project: # Overall project coverage
       default: off
       jest:
@@ -41,9 +35,9 @@ coverage:
         target: 1
       graphql:
         flags: graphql
-        target: 3
+        target: 0
       flow:
-        target: 79
+        target: 88
         flags: flow
 
 flags:

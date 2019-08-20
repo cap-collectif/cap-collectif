@@ -103,8 +103,6 @@ export default createFragmentContainer(Oauth2SSOConfigurationItem, {
       logoutUrl
       redirectUri
       profileUrl
-      buttonColor
-      labelColor
     }
   `,
 });
