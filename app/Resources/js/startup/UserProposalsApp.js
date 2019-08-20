@@ -8,20 +8,26 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import UserProposalsPaginated, {
   PROPOSAL_PAGINATION,
 } from '../components/User/Profile/UserProposalsPaginated';
-import type { UserProposalsAppQueryResponse } from '~relay/UserProposalsAppQuery.graphql';
+import type {
+  UserProposalsAppQueryResponse,
+  UserProposalsAppQueryVariables,
+} from '~relay/UserProposalsAppQuery.graphql';
 
 export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticated: boolean }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <QueryRenderer
-        variables={{
-          authorId,
-          isProfileView: true,
-          isAuthenticated,
-          stepId: '',
-          count: PROPOSAL_PAGINATION,
-          cursor: null,
-        }}
+        variables={
+          ({
+            authorId,
+            isProfileView: true,
+            isAuthenticated,
+            // TODO fixme https://github.com/cap-collectif/platform/issues/7016
+            stepId: '',
+            count: PROPOSAL_PAGINATION,
+            cursor: null,
+          }: UserProposalsAppQueryVariables)
+        }
         environment={environment}
         query={graphql`
           query UserProposalsAppQuery(

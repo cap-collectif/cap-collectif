@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -110,16 +109,13 @@ class SitemapsController extends Controller
                 'changefreq' => 'daily',
                 'priority' => '1.0'
             ];
-            /** @var Event $event */
             foreach ($this->get(EventRepository::class)->findBy(['enabled' => true]) as $event) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_event_show', [
                         'slug' => $event->getSlug()
                     ]),
                     'priority' => '1.0',
-                    'lastmod' => $event->getUpdatedAt()
-                        ? $event->getUpdatedAt()->format(\DateTime::W3C)
-                        : null,
+                    'lastmod' => $event->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'daily'
                 ];
             }

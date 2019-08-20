@@ -156,4 +156,6 @@ export type SSOType = 'oauth2';
 export type SSOConfiguration = {|
   name: string,
   ssoType: SSOType,
+  labelColor: string,
+  buttonColor: string,
 |};

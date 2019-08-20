@@ -5,6 +5,7 @@ const devConf = require('./webpack.client');
 
 const prodConf = {
   mode: 'production',
+  stats: 'minimal',
   // Don't attempt to continue if there are any errors.
   bail: true,
   optimization: {

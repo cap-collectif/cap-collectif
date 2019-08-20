@@ -36,6 +36,7 @@ export class LastProposals extends React.Component<Props> {
           variables={
             ({
               ids,
+              // TODO fixme https://github.com/cap-collectif/platform/issues/7016
               stepId: '',
             }: LastProposalsQueryVariables)
           }
