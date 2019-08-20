@@ -92,3 +92,13 @@ Capco\AppBundle\Entity\Reply:
     publishedAt: <(new \DateTime('2019-03-20'))>
     createdAt: <(new \DateTime('2019-03-20'))>
     updatedAt: <(new \DateTime('2019-03-20'))>
+
+  replyGroup:
+    id: 'replyGroup'
+    author: '@user5'
+    draft: 0
+    private: true
+    questionnaire: '@questionnaireGroup'
+    publishedAt: <(new \DateTime('2019-03-20'))>
+    createdAt: <(new \DateTime('2019-03-20'))>
+    updatedAt: <(new \DateTime('2019-03-20'))>

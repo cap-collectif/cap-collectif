@@ -11,15 +11,18 @@ class UserContributionsCountResolver implements ResolverInterface
     protected $userProposalsResolver;
     protected $userSourcesResolver;
     protected $userOpinionsResolver;
+    protected $userRepliesResolver;
 
     public function __construct(
         UserEventCommentsCountResolver $userEventCommentsCountResolver,
         UserProposalsResolver $userProposalsResolver,
         UserSourcesResolver $userSourcesResolver,
-        UserOpinionsResolver $userOpinionsResolver
+        UserOpinionsResolver $userOpinionsResolver,
+        UserRepliesResolver $userRepliesResolver
     ) {
         $this->userEventCommentsCountResolver = $userEventCommentsCountResolver;
         $this->userOpinionsResolver = $userOpinionsResolver;
+        $this->userRepliesResolver = $userRepliesResolver;
         $this->userProposalsResolver = $userProposalsResolver;
         $this->userSourcesResolver = $userSourcesResolver;
     }
@@ -31,6 +34,7 @@ class UserContributionsCountResolver implements ResolverInterface
             $this->userProposalsResolver->__invoke($viewer, $user)->totalCount +
             $user->getArgumentsCount() +
             $user->getOpinionVersionsCount() +
+            $this->userRepliesResolver->__invoke($viewer, $user)->totalCount +
             $this->userSourcesResolver->__invoke($viewer, $user)->totalCount;
     }
 }

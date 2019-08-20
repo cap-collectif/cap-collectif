@@ -244,3 +244,16 @@ Capco\AppBundle\Entity\Project:
     visibility: 2
     isExternal: true
     externalLink: 'http://projet.noob.fr'
+  p24:
+    id: 'projectGroup2'
+    title: Projet pour le group2
+    themes: []
+    exportable: true
+    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
+    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
+    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
+    visibility: 3
+    isExternal: true
+    externalLink: 'http://projet.noob.fr'
+    restrictedViewerGroups: ['@group2']
+

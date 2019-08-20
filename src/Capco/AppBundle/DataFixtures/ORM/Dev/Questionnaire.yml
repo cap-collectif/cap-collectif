@@ -88,3 +88,10 @@ Capco\AppBundle\Entity\Questionnaire:
     step: '@questionnairestep4'
     multipleRepliesAllowed: true
     privateResult: true
+  questionnaireGroup:
+    id: questionnaireForGroup
+    title: Questionnaire visible pour le group2
+    description: Questionnaire visible pour le group2
+    step: '@questionnairestep5'
+    multipleRepliesAllowed: true
+    privateResult: true
