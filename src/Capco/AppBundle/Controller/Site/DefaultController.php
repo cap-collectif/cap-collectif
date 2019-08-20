@@ -3,12 +3,11 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver;
-use Capco\AppBundle\Mailer\Message\EventCreateAdminMessage;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
-use FOS\UserBundle\Mailer\Mailer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\SiteParameterRepository;
@@ -32,27 +31,21 @@ class DefaultController extends Controller
                 $request->getSession()->invalidate();
             }
 
-            return $this->json(
-                [
-                    'success' => false,
-                    'reason' => 'please-confirm-your-email-address-to-login',
-                ]
-            );
+            return $this->json([
+                'success' => false,
+                'reason' => 'please-confirm-your-email-address-to-login'
+            ]);
         }
 
         if (!$this->getUser()) {
-            return $this->json(
-                [
-                    'success' => false,
-                ]
-            );
+            return $this->json([
+                'success' => false
+            ]);
         }
 
-        return $this->json(
-            [
-                'success' => true,
-            ]
-        );
+        return $this->json([
+            'success' => true
+        ]);
     }
 
     /**
@@ -90,19 +83,17 @@ class DefaultController extends Controller
      */
     public function cookiesAction(Request $request)
     {
-        $cookiesList = $this->get(SiteParameterRepository::class)->findOneBy(
-            [
-                'keyname' => 'cookies-list',
-                'isEnabled' => 1,
-            ]
-        );
+        $cookiesList = $this->get(SiteParameterRepository::class)->findOneBy([
+            'keyname' => 'cookies-list',
+            'isEnabled' => 1
+        ]);
 
         if (!$cookiesList) {
             return $this->createNotFoundException();
         }
 
         return [
-            'cookiesList' => html_entity_decode($cookiesList->getValue()),
+            'cookiesList' => html_entity_decode($cookiesList->getValue())
         ];
     }
 
@@ -112,19 +103,17 @@ class DefaultController extends Controller
      */
     public function privacyPolicyAction(Request $request)
     {
-        $policy = $this->get(SiteParameterRepository::class)->findOneBy(
-            [
-                'keyname' => 'privacy-policy',
-                'isEnabled' => 1,
-            ]
-        );
+        $policy = $this->get(SiteParameterRepository::class)->findOneBy([
+            'keyname' => 'privacy-policy',
+            'isEnabled' => 1
+        ]);
 
         if (!$policy) {
             return $this->createNotFoundException();
         }
 
         return [
-            'privacy' => html_entity_decode($policy->getValue()),
+            'privacy' => html_entity_decode($policy->getValue())
         ];
     }
 
@@ -134,25 +123,24 @@ class DefaultController extends Controller
      */
     public function legalMentionsAction(Request $request)
     {
-        $legal = $this->get(SiteParameterRepository::class)->findOneBy(
-            [
-                'keyname' => 'legal-mentions',
-                'isEnabled' => 1,
-            ]
-        );
+        $legal = $this->get(SiteParameterRepository::class)->findOneBy([
+            'keyname' => 'legal-mentions',
+            'isEnabled' => 1
+        ]);
 
         if (!$legal) {
             return $this->createNotFoundException();
         }
 
         return [
-            'legal' => html_entity_decode($legal->getValue()),
+            'legal' => html_entity_decode($legal->getValue())
         ];
     }
 
     /**
      * @Route("/email", name="app_email")
      * @Template("@CapcoMail/notifyAdminOfNewEvent.html.twig")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function emailAction(Request $request)
     {
