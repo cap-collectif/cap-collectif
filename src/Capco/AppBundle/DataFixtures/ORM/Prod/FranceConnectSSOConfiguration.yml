@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration:
+  franceConnect:
+    id: 'franceConnect'
+    name: 'France Connect'
+    enabled: false
+    authorizationUrl: '/api/v1/authorize'
+    accessTokenUrl: '/api/v1/token'
+    userInfoUrl: '/api/v1/userinfo'
+    logoutUrl: '/api/v1/logout'
