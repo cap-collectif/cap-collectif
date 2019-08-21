@@ -112,43 +112,41 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
     <div
       className="datePickContainer"
     >
-      <div>
-        <Field
-          addonAfter={
-            <i
-              className="cap-calendar-2"
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "id": "event_input_startAt",
+          }
+        }
+        formName="EventForm"
+        id="event_startAt"
+        label={
+          <span>
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
             />
-          }
-          component={[Function]}
-          dateTimeInputProps={
-            Object {
-              "id": "event_input_startAt",
-            }
-          }
-          formName="EventForm"
-          id="event_startAt"
-          label={
-            <span>
+             
+            <span
+              className="excerpt"
+            >
               <FormattedMessage
-                id="start-date"
+                id="global.mandatory"
                 values={Object {}}
               />
-               
-              <span
-                className="excerpt"
-              >
-                <FormattedMessage
-                  id="global.mandatory"
-                  values={Object {}}
-                />
-              </span>
             </span>
-          }
-          name="startAt"
-          timeFormat={false}
-          type="datetime"
-        />
-      </div>
+          </span>
+        }
+        name="startAt"
+        timeFormat={false}
+        type="datetime"
+      />
       <Field
         addonAfter={
           <i
@@ -459,43 +457,41 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
     <div
       className="datePickContainer"
     >
-      <div>
-        <Field
-          addonAfter={
-            <i
-              className="cap-calendar-2"
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "id": "event_input_startAt",
+          }
+        }
+        formName="EventForm"
+        id="event_startAt"
+        label={
+          <span>
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
             />
-          }
-          component={[Function]}
-          dateTimeInputProps={
-            Object {
-              "id": "event_input_startAt",
-            }
-          }
-          formName="EventForm"
-          id="event_startAt"
-          label={
-            <span>
+             
+            <span
+              className="excerpt"
+            >
               <FormattedMessage
-                id="start-date"
+                id="global.mandatory"
                 values={Object {}}
               />
-               
-              <span
-                className="excerpt"
-              >
-                <FormattedMessage
-                  id="global.mandatory"
-                  values={Object {}}
-                />
-              </span>
             </span>
-          }
-          name="startAt"
-          timeFormat={false}
-          type="datetime"
-        />
-      </div>
+          </span>
+        }
+        name="startAt"
+        timeFormat={false}
+        type="datetime"
+      />
       <Field
         addonAfter={
           <i
@@ -806,43 +802,41 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
     <div
       className="datePickContainer"
     >
-      <div>
-        <Field
-          addonAfter={
-            <i
-              className="cap-calendar-2"
+      <Field
+        addonAfter={
+          <i
+            className="cap-calendar-2"
+          />
+        }
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "id": "event_input_startAt",
+          }
+        }
+        formName="EventForm"
+        id="event_startAt"
+        label={
+          <span>
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
             />
-          }
-          component={[Function]}
-          dateTimeInputProps={
-            Object {
-              "id": "event_input_startAt",
-            }
-          }
-          formName="EventForm"
-          id="event_startAt"
-          label={
-            <span>
+             
+            <span
+              className="excerpt"
+            >
               <FormattedMessage
-                id="start-date"
+                id="global.mandatory"
                 values={Object {}}
               />
-               
-              <span
-                className="excerpt"
-              >
-                <FormattedMessage
-                  id="global.mandatory"
-                  values={Object {}}
-                />
-              </span>
             </span>
-          }
-          name="startAt"
-          timeFormat={false}
-          type="datetime"
-        />
-      </div>
+          </span>
+        }
+        name="startAt"
+        timeFormat={false}
+        type="datetime"
+      />
       <Field
         addonAfter={
           <i

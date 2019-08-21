@@ -133,26 +133,24 @@ export class EventForm extends React.Component<Props> {
             }
           />
           <div className="datePickContainer">
-            <div>
-              <Field
-                timeFormat={false}
-                id="event_startAt"
-                dateTimeInputProps={{ id: 'event_input_startAt' }}
-                component={component}
-                type="datetime"
-                name="startAt"
-                formName={formName}
-                label={
-                  <span>
-                    <FormattedMessage id="start-date" />{' '}
-                    <span className="excerpt">
-                      <FormattedMessage id="global.mandatory" />
-                    </span>
+            <Field
+              timeFormat={false}
+              id="event_startAt"
+              dateTimeInputProps={{ id: 'event_input_startAt' }}
+              component={component}
+              type="datetime"
+              name="startAt"
+              formName={formName}
+              label={
+                <span>
+                  <FormattedMessage id="start-date" />{' '}
+                  <span className="excerpt">
+                    <FormattedMessage id="global.mandatory" />
                   </span>
-                }
-                addonAfter={<i className="cap-calendar-2" />}
-              />
-            </div>
+                </span>
+              }
+              addonAfter={<i className="cap-calendar-2" />}
+            />
             <Field
               id="event_endAt"
               dateTimeInputProps={{ id: 'event_input_endAt' }}
