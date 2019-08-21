@@ -31,7 +31,7 @@ export class Toggle extends React.Component<Props> {
     return (
       <div className="form-group">
         <label style={{ display: 'flex', alignItems: 'center' }}>
-          {labelSide === 'RIGHT' && <span style={{ marginRight: 10 }}>{label}</span>}
+          {labelSide === 'RIGHT' && <span className="ml-10">{label}</span>}
           <ReactToggle
             id={id}
             aria-labelledby={label}
@@ -40,7 +40,7 @@ export class Toggle extends React.Component<Props> {
             checked={input.value}
             onChange={input.onChange}
           />
-          {labelSide === 'LEFT' && <span style={{ marginLeft: 10 }}>{label}</span>}
+          {labelSide === 'LEFT' && <span className="ml-10">{label}</span>}
         </label>
         {touched && error}
       </div>

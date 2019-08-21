@@ -44,6 +44,7 @@ const eventNotComplete = {
     body: '<p>My body</p>',
     commentable: true,
     guestListEnabled: true,
+    link: 'http://weezevent.com',
     themes: [],
     projects: [],
     media: {
@@ -94,6 +95,7 @@ const initialValuesComplete = {
     enabled: false,
     commentable: false,
     guestListEnabled: true,
+    link: 'http://weezevent.com',
     metaDescription: 'meta description',
     customCode: 'custom code',
     media: {

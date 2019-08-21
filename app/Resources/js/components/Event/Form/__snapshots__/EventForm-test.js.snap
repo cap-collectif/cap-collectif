@@ -198,6 +198,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
   </div>
   <ForwardRef(Relay(InjectIntl(SelectProject)))
     clearable={true}
+    label="admin.group.project"
     multi={true}
     name="projects"
     object={
@@ -221,6 +222,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         "guestListEnabled": true,
         "id": "event1",
         "lat": 45.749842,
+        "link": "http://weezevent.com",
         "lng": 4.94068000000002,
         "media": Object {
           "id": "media1",
@@ -258,43 +260,66 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
     }
   />
   <div>
-    <div
-      className="box-header"
-    >
-      <h3
-        className="box-title"
+    <div>
+      <div
+        className="box-header"
       >
-        <FormattedMessage
-          id="proposal_form.admin.settings.options"
-          values={Object {}}
-        />
-      </h3>
-    </div>
-    <div
-      className="box-body ml-10"
-    >
-      <Field
-        component={[Function]}
-        id="event_registrable"
-        name="guestListEnabled"
-        type="checkbox"
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.settings.options"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <div
+        className="ml-10 pl-10"
       >
-        <FormattedMessage
-          id="authorize-registration"
-          values={Object {}}
-        />
-      </Field>
-      <Field
-        component={[Function]}
-        id="event_commentable"
-        name="commentable"
-        type="checkbox"
+        <Field
+          component={[Function]}
+          id="event_registrable"
+          name="guestListEnabled"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="authorize-registration"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+      <div
+        className="clearfix"
       >
-        <FormattedMessage
-          id="admin.fields.blog_post.is_commentable"
-          values={Object {}}
+        <Field
+          component={[Function]}
+          id="event_link"
+          label={
+            <FormattedMessage
+              id="admin.fields.event.link"
+              values={Object {}}
+            />
+          }
+          name="link"
+          placeholder="http://"
+          type="text"
         />
-      </Field>
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          id="event_commentable"
+          name="commentable"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.blog_post.is_commentable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
     </div>
     <div>
       <div
@@ -311,7 +336,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       </div>
       <CustomPageFields />
       <div
-        className="box-header"
+        className="box-header pt-0"
       >
         <h3
           className="box-title"
@@ -322,24 +347,18 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           />
         </h3>
       </div>
-      <div
-        className="box-body ml-10"
-      >
-        <Field
-          component={[Function]}
-          id="event_enabled"
-          name="enabled"
-          type="checkbox"
-        />
-        <ToggleButton
-          onChange={[Function]}
-        >
+      <Field
+        component={[Function]}
+        id="event_enabled"
+        label={
           <FormattedMessage
             id="proposal.state.published"
             values={Object {}}
           />
-        </ToggleButton>
-      </div>
+        }
+        name="enabled"
+        type="checkbox"
+      />
     </div>
   </div>
 </form>
@@ -543,6 +562,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
   </div>
   <ForwardRef(Relay(InjectIntl(SelectProject)))
     clearable={true}
+    label="admin.group.project"
     multi={true}
     name="projects"
     object={
@@ -566,6 +586,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
         "guestListEnabled": true,
         "id": "event1",
         "lat": 45.749842,
+        "link": "http://weezevent.com",
         "lng": 4.94068000000002,
         "media": Object {
           "id": "media1",
@@ -603,43 +624,66 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
     }
   />
   <div>
-    <div
-      className="box-header"
-    >
-      <h3
-        className="box-title"
+    <div>
+      <div
+        className="box-header"
       >
-        <FormattedMessage
-          id="proposal_form.admin.settings.options"
-          values={Object {}}
-        />
-      </h3>
-    </div>
-    <div
-      className="box-body ml-10"
-    >
-      <Field
-        component={[Function]}
-        id="event_registrable"
-        name="guestListEnabled"
-        type="checkbox"
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.settings.options"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <div
+        className="ml-10 pl-10"
       >
-        <FormattedMessage
-          id="authorize-registration"
-          values={Object {}}
-        />
-      </Field>
-      <Field
-        component={[Function]}
-        id="event_commentable"
-        name="commentable"
-        type="checkbox"
+        <Field
+          component={[Function]}
+          id="event_registrable"
+          name="guestListEnabled"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="authorize-registration"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+      <div
+        className="clearfix"
       >
-        <FormattedMessage
-          id="admin.fields.blog_post.is_commentable"
-          values={Object {}}
+        <Field
+          component={[Function]}
+          id="event_link"
+          label={
+            <FormattedMessage
+              id="admin.fields.event.link"
+              values={Object {}}
+            />
+          }
+          name="link"
+          placeholder="http://"
+          type="text"
         />
-      </Field>
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          id="event_commentable"
+          name="commentable"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.blog_post.is_commentable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
     </div>
     <div>
       <div
@@ -656,7 +700,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       </div>
       <CustomPageFields />
       <div
-        className="box-header"
+        className="box-header pt-0"
       >
         <h3
           className="box-title"
@@ -667,24 +711,18 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
           />
         </h3>
       </div>
-      <div
-        className="box-body ml-10"
-      >
-        <Field
-          component={[Function]}
-          id="event_enabled"
-          name="enabled"
-          type="checkbox"
-        />
-        <ToggleButton
-          onChange={[Function]}
-        >
+      <Field
+        component={[Function]}
+        id="event_enabled"
+        label={
           <FormattedMessage
             id="proposal.state.published"
             values={Object {}}
           />
-        </ToggleButton>
-      </div>
+        }
+        name="enabled"
+        type="checkbox"
+      />
     </div>
   </div>
 </form>
@@ -888,6 +926,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
   </div>
   <ForwardRef(Relay(InjectIntl(SelectProject)))
     clearable={true}
+    label="admin.group.project"
     multi={true}
     name="projects"
     object={
@@ -906,6 +945,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         "guestListEnabled": true,
         "id": "event1",
         "lat": null,
+        "link": "http://weezevent.com",
         "lng": null,
         "media": Object {
           "id": "media1",
@@ -933,43 +973,66 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
     }
   />
   <div>
-    <div
-      className="box-header"
-    >
-      <h3
-        className="box-title"
+    <div>
+      <div
+        className="box-header"
       >
-        <FormattedMessage
-          id="proposal_form.admin.settings.options"
-          values={Object {}}
-        />
-      </h3>
-    </div>
-    <div
-      className="box-body ml-10"
-    >
-      <Field
-        component={[Function]}
-        id="event_registrable"
-        name="guestListEnabled"
-        type="checkbox"
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.settings.options"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <div
+        className="ml-10 pl-10"
       >
-        <FormattedMessage
-          id="authorize-registration"
-          values={Object {}}
-        />
-      </Field>
-      <Field
-        component={[Function]}
-        id="event_commentable"
-        name="commentable"
-        type="checkbox"
+        <Field
+          component={[Function]}
+          id="event_registrable"
+          name="guestListEnabled"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="authorize-registration"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+      <div
+        className="clearfix"
       >
-        <FormattedMessage
-          id="admin.fields.blog_post.is_commentable"
-          values={Object {}}
+        <Field
+          component={[Function]}
+          id="event_link"
+          label={
+            <FormattedMessage
+              id="admin.fields.event.link"
+              values={Object {}}
+            />
+          }
+          name="link"
+          placeholder="http://"
+          type="text"
         />
-      </Field>
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          id="event_commentable"
+          name="commentable"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.blog_post.is_commentable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
     </div>
     <div>
       <div
@@ -986,7 +1049,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       </div>
       <CustomPageFields />
       <div
-        className="box-header"
+        className="box-header pt-0"
       >
         <h3
           className="box-title"
@@ -997,24 +1060,18 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           />
         </h3>
       </div>
-      <div
-        className="box-body ml-10"
-      >
-        <Field
-          component={[Function]}
-          id="event_enabled"
-          name="enabled"
-          type="checkbox"
-        />
-        <ToggleButton
-          onChange={[Function]}
-        >
+      <Field
+        component={[Function]}
+        id="event_enabled"
+        label={
           <FormattedMessage
             id="proposal.state.published"
             values={Object {}}
           />
-        </ToggleButton>
-      </div>
+        }
+        name="enabled"
+        type="checkbox"
+      />
     </div>
   </div>
 </form>

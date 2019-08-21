@@ -37,6 +37,7 @@ export default class CustomPageFields extends React.Component<Props> {
           label={<FormattedMessage id="admin.customcode" />}
           help={<FormattedMessage id="admin.help.customcode" />}
           component={component}
+          placeholder='<script type="text/javascript"> </script>"'
         />
         {picto && (
           <Field

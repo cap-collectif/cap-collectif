@@ -215,7 +215,6 @@ export class EventAdminFormPage extends React.Component<Props, State> {
       submitSucceeded,
       submitFailed,
       submitting,
-      intl,
       dispatch,
       event,
       query,
@@ -224,13 +223,6 @@ export class EventAdminFormPage extends React.Component<Props, State> {
 
     return (
       <div>
-        <p>
-          <strong>
-            <FormattedMessage id="permalink-unavailable" />{' '}
-          </strong>
-          <FormattedMessage id="proposal-form-not-linked-to-a-project" /> |{' '}
-          <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
-        </p>
         <div className="box box-primary container-fluid">
           <EventForm
             event={event}

@@ -2,10 +2,10 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { ToggleButton } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { type FormProps, Field, reduxForm, change } from 'redux-form';
+import { type FormProps, Field, reduxForm } from 'redux-form';
 import component from '../../Form/Field';
+import toggle from '../../Form/Toggle';
 import type { Dispatch, FeatureToggles, GlobalState } from '../../../types';
 import type { EventForm_event } from '~relay/EventForm_event.graphql';
 import type { EventForm_query } from '~relay/EventForm_query.graphql';
@@ -32,7 +32,7 @@ export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
   render() {
-    const { features, event, query, dispatch } = this.props;
+    const { features, event, query } = this.props;
 
     return (
       <form className="eventForm">
@@ -177,31 +177,59 @@ export class EventForm extends React.Component<Props> {
         </div>
         {features.themes && (
           // $FlowFixMe
-          <SelectTheme query={query} multi clearable name="themes" divId="event_theme" />
+          <SelectTheme
+            query={query}
+            multi
+            clearable
+            name="themes"
+            divId="event_theme"
+            label="admin.fields.event.themes"
+          />
         )}
         {/* $FlowFixMe */}
-        <SelectProject query={query} multi clearable object={event} name="projects" />
+        <SelectProject
+          query={query}
+          multi
+          clearable
+          object={event}
+          name="projects"
+          label="admin.group.project"
+        />
         <div>
-          <div className="box-header">
-            <h3 className="box-title">
-              <FormattedMessage id="proposal_form.admin.settings.options" />
-            </h3>
-          </div>
-          <div className="box-body ml-10">
-            <Field
-              name="guestListEnabled"
-              id="event_registrable"
-              type="checkbox"
-              component={component}
-              children={<FormattedMessage id="authorize-registration" />}
-            />
-            <Field
-              name="commentable"
-              id="event_commentable"
-              type="checkbox"
-              component={component}
-              children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
-            />
+          <div>
+            <div className="box-header">
+              <h3 className="box-title">
+                <FormattedMessage id="proposal_form.admin.settings.options" />
+              </h3>
+            </div>
+            <div className="ml-10 pl-10">
+              <Field
+                name="guestListEnabled"
+                id="event_registrable"
+                type="checkbox"
+                component={component}
+                children={<FormattedMessage id="authorize-registration" />}
+              />
+            </div>
+            <div className="clearfix">
+              <Field
+                name="link"
+                label={<FormattedMessage id="admin.fields.event.link" />}
+                component={component}
+                placeholder="http://"
+                type="text"
+                id="event_link"
+              />
+            </div>
+            <div className="ml-10 pl-10">
+              <Field
+                name="commentable"
+                id="event_commentable"
+                type="checkbox"
+                component={component}
+                children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
+              />
+            </div>
           </div>
           {query.viewer.isAdmin && (
             <div>
@@ -211,23 +239,18 @@ export class EventForm extends React.Component<Props> {
                 </h3>
               </div>
               <CustomPageFields />
-              <div className="box-header">
+              <div className="box-header pt-0">
                 <h3 className="box-title">
                   <FormattedMessage id="admin.fields.project.published_at" />
                 </h3>
               </div>
-              <div className="box-body ml-10">
-                <Field
-                  name="enabled"
-                  id="event_enabled"
-                  type="checkbox"
-                  component={component}
-                  // children={<FormattedMessage id="proposal.state.published" />}
-                />
-                <ToggleButton onChange={() => dispatch(change(formName, 'enabled', true))}>
-                  <FormattedMessage id="proposal.state.published" />
-                </ToggleButton>
-              </div>
+              <Field
+                name="enabled"
+                id="event_enabled"
+                type="checkbox"
+                component={toggle}
+                label={<FormattedMessage id="proposal.state.published" />}
+              />
             </div>
           )}
         </div>
@@ -253,6 +276,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         enabled: props.event ? props.event.enabled : null,
         commentable: props.event ? props.event.commentable : null,
         guestListEnabled: props.event ? props.event.guestListEnabled : null,
+        link: props.event ? props.event.link : null,
         metadescription: props.event ? props.event.metaDescription : null,
         customcode: props.event ? props.event.customCode : null,
         media: props.event ? props.event.media : null,
@@ -319,6 +343,7 @@ export default createFragmentContainer(container, {
       metaDescription
       customCode
       guestListEnabled
+      link
       themes {
         id
         title

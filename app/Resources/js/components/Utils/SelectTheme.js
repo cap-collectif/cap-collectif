@@ -14,6 +14,7 @@ type Props = {|
   +name: string,
   +className: string,
   +divId: string,
+  +label: string,
 |};
 
 export class SelectTheme extends React.Component<Props> {
@@ -23,10 +24,11 @@ export class SelectTheme extends React.Component<Props> {
     name: 'theme',
     className: '',
     divId: 'testId',
+    label: 'type-theme',
   };
 
   render() {
-    const { query, intl, multi, clearable, name, className, divId } = this.props;
+    const { query, intl, multi, clearable, name, className, divId, label } = this.props;
     const renderOptions =
       query && query.themes ? query.themes.map(p => ({ value: p.id, label: p.title })) : [];
 
@@ -37,7 +39,7 @@ export class SelectTheme extends React.Component<Props> {
           id="SelectTheme-filter-theme"
           name={name}
           placeholder={intl.formatMessage({ id: 'event.searchform.all_themes' })}
-          label={intl.formatMessage({ id: 'type-theme' })}
+          label={intl.formatMessage({ id: label })}
           options={renderOptions}
           role="combobox"
           aria-autocomplete="list"

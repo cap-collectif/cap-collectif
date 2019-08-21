@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Capco\AppBundle\Form\Type\RelayNodeType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -40,6 +41,7 @@ class EventType extends AbstractType
 
             ->add('enabled', CheckboxType::class)
             ->add('guestListEnabled', CheckboxType::class)
+            ->add('link', UrlType::class)
             ->add('media', EntityType::class, [
                 'class' => Media::class
             ])

@@ -12,6 +12,7 @@ type Props = {|
   +multi: boolean,
   +clearable: boolean,
   +name: string,
+  +label: string,
 |};
 
 export class SelectProject extends React.Component<Props> {
@@ -19,10 +20,11 @@ export class SelectProject extends React.Component<Props> {
     multi: false,
     clearable: false,
     name: 'project',
+    label: 'type-project',
   };
 
   render() {
-    const { query, intl, multi, clearable, name } = this.props;
+    const { query, intl, multi, clearable, name, label } = this.props;
     const renderSelectedOption =
       query && query.projects && query.projects.edges
         ? query.projects.edges
@@ -39,7 +41,7 @@ export class SelectProject extends React.Component<Props> {
           id="SelectProject-filter-project"
           name={name}
           placeholder={intl.formatMessage({ id: 'event.searchform.all_projects' })}
-          label={intl.formatMessage({ id: 'type-project' })}
+          label={intl.formatMessage({ id: label })}
           options={renderSelectedOption}
           role="combobox"
           aria-autocomplete="list"

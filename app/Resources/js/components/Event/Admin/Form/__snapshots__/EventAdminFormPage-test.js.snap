@@ -2,26 +2,6 @@
 
 exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = `
 <div>
-  <p>
-    <strong>
-      <FormattedMessage
-        id="permalink-unavailable"
-        values={Object {}}
-      />
-       
-    </strong>
-    <FormattedMessage
-      id="proposal-form-not-linked-to-a-project"
-      values={Object {}}
-    />
-     |
-     
-    <b>
-      proposal_form.admin.reference
-       : 
-    </b>
-     
-  </p>
   <div
     className="box box-primary container-fluid"
   >
@@ -102,26 +82,6 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
 
 exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
 <div>
-  <p>
-    <strong>
-      <FormattedMessage
-        id="permalink-unavailable"
-        values={Object {}}
-      />
-       
-    </strong>
-    <FormattedMessage
-      id="proposal-form-not-linked-to-a-project"
-      values={Object {}}
-    />
-     |
-     
-    <b>
-      proposal_form.admin.reference
-       : 
-    </b>
-     
-  </p>
   <div
     className="box box-primary container-fluid"
   >
@@ -202,26 +162,6 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
 
 exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
 <div>
-  <p>
-    <strong>
-      <FormattedMessage
-        id="permalink-unavailable"
-        values={Object {}}
-      />
-       
-    </strong>
-    <FormattedMessage
-      id="proposal-form-not-linked-to-a-project"
-      values={Object {}}
-    />
-     |
-     
-    <b>
-      proposal_form.admin.reference
-       : 
-    </b>
-     
-  </p>
   <div
     className="box box-primary container-fluid"
   >
