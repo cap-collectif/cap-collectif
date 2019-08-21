@@ -58,7 +58,7 @@ export class EventImage extends React.Component<Props, State> {
 
     return (
       <PictureContainer style={{ backgroundColor: '#eeeeee' }}>
-        <img src={`${imgURL}`} onError={this.onImageError} alt="" />
+        <img src={`${imgURL}`} onError={this.onImageError} alt="" aria-hidden />
       </PictureContainer>
     );
   }
