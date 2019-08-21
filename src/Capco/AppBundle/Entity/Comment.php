@@ -369,6 +369,6 @@ abstract class Comment implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['ElasticsearchComment', 'ElasticsearchNestedAuthor'];
+        return ['Elasticsearch', 'ElasticsearchNestedProject'];
     }
 }

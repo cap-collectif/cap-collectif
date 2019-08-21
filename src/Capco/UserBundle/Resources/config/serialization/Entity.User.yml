@@ -1,7 +1,7 @@
 Capco\UserBundle\Entity\User:
   attributes:
     id:
-      groups: [UserId, Elasticsearch, ElasticsearchNestedProject]
+      groups: [UserId, Elasticsearch]
     slug:
       groups: [Default, Elasticsearch]
     media:

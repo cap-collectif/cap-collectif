@@ -74,9 +74,9 @@ class ProposalCommentRepository extends EntityRepository
 
     public function getByProject(
         Project $project,
-        int $first,
-        int $offset,
-        bool $onlyTrashed,
+        int $first = 0,
+        int $offset = 100,
+        bool $onlyTrashed = false,
         string $field,
         string $direction
     ): Paginator {
@@ -86,18 +86,18 @@ class ProposalCommentRepository extends EntityRepository
             ->setFirstResult($first)
             ->setMaxResults($offset);
 
-        if ('PUBLISHED_AT' === $field) {
-            $qb->addOrderBy('c.publishedAt', $direction);
-            $qb->addOrderBy('c.createdAt', $direction);
-        }
-
-        if ('UPDATED_AT' === $field) {
-            $qb->addOrderBy('c.updatedAt', $direction);
-        }
-
-        if ('POPULARITY' === $field) {
-            $qb->addOrderBy('c.votesCount', $direction);
-        }
+            if ('PUBLISHED_AT' === $field) {
+                $qb->addOrderBy('c.publishedAt', $direction);
+                $qb->addOrderBy('c.createdAt', $direction);
+            }
+    
+            if ('UPDATED_AT' === $field) {
+                $qb->addOrderBy('c.updatedAt', $direction);
+            }
+    
+            if ('POPULARITY' === $field) {
+                $qb->addOrderBy('c.votesCount', $direction);
+            }
 
         return new Paginator($qb);
     }
@@ -110,25 +110,6 @@ class ProposalCommentRepository extends EntityRepository
             ->setParameter('project', $project);
 
         return $query->getQuery()->getSingleScalarResult();
-    }
-
-    public function getCommentsByProject(Project $project): array
-    {
-        $qb = $this->getQueryCommentWithProject();
-        $qb->andWhere(
-            $qb
-                ->expr()
-                ->andX(
-                    $qb->expr()->eq('pas.project', ':project'),
-                    $qb->expr()->isInstanceOf('c', ':proposalComment')
-                )
-        );
-        $qb->setParameters([
-            ':project' => $project,
-            ':proposalComment' => $this->_em->getClassMetadata(ProposalComment::class)
-        ]);
-
-        return $qb->getQuery()->getResult();
     }
 
     protected function getPublishedNotTrashedQueryBuilder(?User $viewer): QueryBuilder

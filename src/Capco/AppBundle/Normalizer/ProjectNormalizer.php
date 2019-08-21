@@ -64,15 +64,6 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
                 }
             }
 
-            $data['authors'] = [];
-            foreach ($object->getAuthors() as $projectAuthor) {
-                $data['authors'][] = $this->normalizer->normalize(
-                    $projectAuthor->getUser(),
-                    $format,
-                    $context
-                );
-            }
-
             return $data;
         }
 

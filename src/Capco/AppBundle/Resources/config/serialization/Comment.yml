@@ -1,20 +1,23 @@
 Capco\AppBundle\Entity\Comment:
   attributes:
     id:
-      groups: [ElasticsearchComment]
+      groups: [Elasticsearch]
     body:
-      groups: [ElasticsearchComment]
+      groups: [Elasticsearch]
     createdAt:
-      groups: [ElasticsearchComment]
+      groups: [Elasticsearch]
     authorName:
-      groups: [ElasticsearchComment]
+      groups: [Elasticsearch]
     Author:
-      groups: [ElasticsearchNestedAuthor]
-      serialized_name: author
+      groups: [Elasticsearch]
+    getProject:
+      type: object
+      serialized_name: project
+      groups: [ElasticsearchNestedProject]
     published:
-      groups: [ElasticsearchComment]
+      groups: [Elasticsearch]
     trashedStatus:
-      groups: [ElasticsearchComment]
+      groups: [Elasticsearch]
     getProposal:
       type: object
       serialized_name: proposal

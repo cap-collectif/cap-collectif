@@ -1,0 +1,55 @@
+{%  set currentUser = app.user %}
+{% set author = comment.Author %}
+<li class="opinion  opinion--comment {% if author and author.isVip %}bg-vip{% endif %}{% if classes is defined %} {{ classes }}{% endif %}" id="comment-{{ comment.id }}">
+    <div class="opinion__body">
+        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': author, 'link_classes': 'pull-left'} only %}
+        <div class="opinion__data">
+            <p class="h5  opinion__user">
+                {% if null != author %}
+                    {% if is_feature_enabled('profiles') %}
+                        <a href="{{ path('capco_user_profile_show_all', {'slug': author.slug}) }}">{{ author.username }}</a>
+                    {% else %}
+                        {{ author.username }}
+                    {% endif %}
+                {% else %}
+                    {{ comment.authorName }}
+                {% endif %}
+            </p>
+            <p class="excerpt  opinion__date">{{ comment.publishedAt | localizeddate('long', 'short', app.request.locale) }}</p>
+        </div>
+        {% if profile is defined %}
+            <p>{{ 'comment.linked_object' | trans({}, 'CapcoAppBundle') }} <a href="{{ capco_comment_object_url(comment) }}">{{ capco_comment_object(comment) }}</a></p>
+        {% endif %}
+
+        <p class="opinion__text {% if comment.body | length > 500 %} more {% endif %}">
+            {% spaceless %}
+                {% if comment.isTrashed() %}<span class="label label-default" style="position: static">{{ 'comment.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
+                {{ comment.body }}
+            {% endspaceless %}
+        </p>
+
+        {% if false == comment.canContribute %}
+            <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap-hand-like-2"></i> {{ 'comment.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
+        {% else %}
+            <span>
+                {% if comment.userHasVote(currentUser) %}
+                    <button class="btn  btn-danger  btn-xs disabled">{{ 'comment.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
+                {% else %}
+                    <button class="btn  btn-success  btn--outline  btn-xs disabled"><i class="cap-hand-like-2"></i> {{ 'comment.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                {% endif %}
+            </span>
+        {% endif %}
+        <span class="opinion__votes-nb">{{ comment.votesCount }}</span>
+
+        {% if is_feature_enabled('reporting') %}
+            {% if comment.userHasReport(currentUser) %}
+                <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'comment.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
+            {% endif  %}
+        {% endif %}
+
+        {% if comment.canContribute and currentUser is not null and currentUser == comment.Author %}
+            <a href="{{ path('app_comment_edit' ,{'commentId': comment.id } ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'comment.update.button'|trans({}, 'CapcoAppBundle') }}</a>
+        {% endif %}
+
+    </div>
+</li>

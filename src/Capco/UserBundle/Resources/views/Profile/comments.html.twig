@@ -1,0 +1,5 @@
+<ul class="media-list">
+    {% for comment in comments if capco_comment_object(comment) is not null %}
+        {% include 'CapcoAppBundle:Comment:blockComment.html.twig' with {'comment': comment, 'profile': true, 'classes': 'block  block--bordered  box'} only %}
+    {% endfor %}
+</ul>

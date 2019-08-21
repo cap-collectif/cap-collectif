@@ -30,16 +30,17 @@ class CommentSearch extends Search
         int $offset = 0
     ): array {
         $query = $this->createCommentsByAuthorViewerCanSeeQuery($author, $viewer);
+        $type = $this->index->getType($this->type);
+        $totalCount = $type->count($query);
         $query->setFrom($offset);
         $query->setSize($limit);
-        $response = $this->index->getType($this->type)->search($query);
 
         return [
             'results' => $this->getHydratedResultsFromResultSet(
                 $this->commentRepository,
-                $response
+                $type->search($query)
             ),
-            'totalCount' => $response->getTotalHits()
+            'totalCount' => $totalCount
         ];
     }
 
@@ -49,32 +50,34 @@ class CommentSearch extends Search
         int $offset = 0
     ): array {
         $query = $this->createPublicCommentsByAuthorQuery($author);
+        $type = $this->index->getType($this->type);
+        $totalCount = $type->count($query);
         $query->setFrom($offset);
         $query->setSize($limit);
-        $response = $this->index->getType($this->type)->search($query);
 
         return [
             'results' => $this->getHydratedResultsFromResultSet(
                 $this->commentRepository,
-                $response
+                $type->search($query)
             ),
-            'totalCount' => $response->getTotalHits()
+            'totalCount' => $totalCount
         ];
     }
 
     public function getCommentsByUser(User $user, int $limit = 100, int $offset = 0): array
     {
         $query = $this->createCommentByUserQuery($user);
+        $type = $this->index->getType($this->type);
+        $totalCount = $type->count($query);
         $query->setSize($limit);
         $query->setFrom($offset);
-        $response = $this->index->getType($this->type)->search($query);
 
         return [
             'results' => $this->getHydratedResultsFromResultSet(
                 $this->commentRepository,
-                $response
+                $type->search($query)
             ),
-            'totalCount' => $response->getTotalHits()
+            'totalCount' => $totalCount
         ];
     }
 
@@ -83,7 +86,7 @@ class CommentSearch extends Search
         $boolQuery = new BoolQuery();
         $boolQuery->addMust([
             new Term(['published' => ['value' => true]]),
-            new Term(['author.id' => ['value' => $user->getId()]])
+            new Term(['Author.id' => ['value' => $user->getId()]])
         ]);
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC']]);
@@ -96,8 +99,9 @@ class CommentSearch extends Search
         $boolQuery = new BoolQuery();
         $boolQuery->addMust([
             (new BoolQuery())->addShould([
-                (new BoolQuery())->addMustNot([new Exists('proposal')]),
+                (new BoolQuery())->addMustNot([new Exists('project')]),
                 (new BoolQuery())->addMust([
+                    new Exists('project'),
                     new Term([
                         'project.visibility' => [
                             'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
@@ -106,12 +110,8 @@ class CommentSearch extends Search
                     new Term(['proposal.visible' => ['value' => true]])
                 ])
             ]),
-            (new BoolQuery())->addShould([
-                (new BoolQuery())->addMustNot([new Exists('proposal')]),
-                new Term(['proposal.visible' => ['value' => true]])
-            ]),
             new Term(['published' => ['value' => true]]),
-            new Term(['author.id' => ['value' => $author->getId()]])
+            new Term(['Author.id' => ['value' => $author->getId()]])
         ]);
         $boolQuery->addMustNot([new Exists('trashedStatus')]);
         $query = new Query($boolQuery);
@@ -124,50 +124,49 @@ class CommentSearch extends Search
     {
         $visibility = ProjectVisibilityMode::getProjectVisibilityByRoles($viewer);
         $boolQuery = new BoolQuery();
+        $subConditions = [];
         $conditions = [
-            new Term(['author.id' => ['value' => $author->getId()]]),
+            new Term(['Author.id' => ['value' => $author->getId()]]),
             new Term(['published' => ['value' => true]])
         ];
 
-        if ($viewer !== $author) {
-            if (!$viewer->isSuperAdmin()) {
-                $subConditions = [
-                    (new BoolQuery())->addMustNot([new Exists('proposal')]),
-                    (new BoolQuery())->addShould([
-                        new Term([
-                            'proposal.project.visibility' => [
-                                'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
-                            ]
-                        ]),
-                        new Query\Terms('proposal.project.authors.id', [$viewer->getId()])
+        if (!$viewer->isSuperAdmin()) {
+            $subConditions = [
+                (new BoolQuery())->addMustNot([new Exists('project')]),
+                (new BoolQuery())->addShould([
+                    new Term([
+                        'project.visibility' => [
+                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
+                        ]
                     ]),
-                    (new BoolQuery())->addMust([
-                        new Term([
-                            'proposal.project.visibility' => [
-                                'value' => ProjectVisibilityMode::VISIBILITY_CUSTOM
-                            ]
-                        ]),
-                        new Query\Terms('proposal.project.restrictedViewerIds', [$viewer->getId()])
+                    new Query\Terms('project.authors.id', [$viewer->getId()])
+                ]),
+                (new BoolQuery())->addMust([
+                    new Term([
+                        'project.visibility' => [
+                            'value' => ProjectVisibilityMode::VISIBILITY_CUSTOM
+                        ]
                     ]),
-                    (new BoolQuery())->addMust([
-                        new Query\Terms('proposal.project.visibility', $visibility),
-                        new Query\Range('proposal.project.visibility', [
-                            'lt' => ProjectVisibilityMode::VISIBILITY_CUSTOM
-                        ])
+                    new Query\Terms('project.restrictedViewerIds', $viewer->getUserGroupIds())
+                ]),
+                (new BoolQuery())->addMust([
+                    new Query\Terms('project.visibility', $visibility),
+                    new Query\Range('project.visibility', [
+                        'lt' => ProjectVisibilityMode::VISIBILITY_CUSTOM
                     ])
-                ];
-                $conditions[] = [(new BoolQuery())->addShould($subConditions)];
-            }
+                ])
+            ];
+            $conditions = array_merge($conditions, [(new BoolQuery())->addShould($subConditions)]);
+        }
 
-            if (!$viewer->isAdmin()) {
-                $conditions[] = [
-                    (new BoolQuery())->addShould([
-                        (new BoolQuery())->addMustNot([new Exists('proposal')]),
-                        new Term(['proposal.visible' => ['value' => true]]),
-                        new Query\Terms('proposal.project.authors.id', [$viewer->getId()])
-                    ])
-                ];
-            }
+        if (!$viewer->isAdmin()) {
+            $subConditions = array_merge($subConditions, [
+                (new BoolQuery())->addShould([
+                    new Term(['proposal.visible' => ['value' => true]]),
+                    new Query\Terms('project.authors.id', [$viewer->getId()])
+                ])
+            ]);
+            $conditions = array_merge($conditions, [(new BoolQuery())->addShould($subConditions)]);
         }
 
         $boolQuery->addMust($conditions);

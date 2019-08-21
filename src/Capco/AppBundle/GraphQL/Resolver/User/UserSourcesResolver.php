@@ -27,7 +27,7 @@ class UserSourcesResolver implements ResolverInterface
         ?ArrayObject $context = null
     ): Connection {
         if (!$args) {
-            $args = new Argument(['first' => 0]);
+            $args = new Argument(['first' => 5]);
         }
 
         $aclDisabled =

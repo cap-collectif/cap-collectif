@@ -139,7 +139,7 @@ mappings:
       body: *text_analysis_highlighted
       createdAt: { type: date }
       authorName: *text_analysis_highlighted
-      author: *Author
+      Author: *Author
       published: { type: boolean }
       project: *Project
       trashedStatus: { type: keyword }
@@ -149,6 +149,10 @@ mappings:
           id: { type: keyword }
           author: *Author
           visible: { type: boolean }
+          step:
+            type: object
+            properties:
+              id: { type: keyword }
 
   event:
     properties:

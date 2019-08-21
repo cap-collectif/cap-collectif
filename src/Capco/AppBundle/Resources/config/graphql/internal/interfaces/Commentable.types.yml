@@ -4,7 +4,7 @@ Commentable:
     - Node
   config:
     description: 'A commentable'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableTypeResolver", [value])'
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
     fields:
       comments:
         description: 'The comments related to the commentable.'

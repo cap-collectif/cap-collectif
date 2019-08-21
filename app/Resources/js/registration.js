@@ -90,7 +90,6 @@ import LastProposalsApp from './startup/LastProposalsApp';
 import AuthentificationAdminApp from './startup/AuthentificationAdminApp';
 import HomePageEventsApp from './startup/HomePageEventsApp';
 import PresentationStepEventsApp from './startup/PresentationStepEventsApp';
-import ProfileUserCommentApp from './startup/ProfileUserCommentApp';
 import appStore from './stores/AppStore';
 
 if (process.env.NODE_ENV === 'development') {
@@ -206,5 +205,4 @@ ReactOnRails.register({
   SourcePageApp,
   SectionListPageApp,
   ReplyPageApp,
-  ProfileUserCommentApp,
 });

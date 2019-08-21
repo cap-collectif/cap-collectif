@@ -27,7 +27,7 @@ class UserProposalsResolver implements ResolverInterface
         ?ArrayObject $context = null
     ): Connection {
         if (!$args) {
-            $args = new Argument(['first' => 0]);
+            $args = new Argument(['first' => 100]);
         }
 
         $aclDisabled =

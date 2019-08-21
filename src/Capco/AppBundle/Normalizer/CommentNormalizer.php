@@ -35,7 +35,7 @@ class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
-        if ($groups === $object::getElasticsearchSerializationGroups()) {
+        if (\in_array('Elasticsearch', $groups, true)) {
             return $data;
         }
 

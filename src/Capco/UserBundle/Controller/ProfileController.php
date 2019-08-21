@@ -199,16 +199,26 @@ class ProfileController extends Controller
         $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
         $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
         $sources = $this->get(SourceRepository::class)->getByUser($user);
+        $comments = $this->get(CommentRepository::class)->getByUser($user);
         $votes = $this->get(AbstractVoteRepository::class)->getPublicVotesByUser($user);
         $eventsCount = $this->getEventsCount($user);
 
+        $proposalsCount =
+            $this->userProposalsResolver->__invoke(
+                $this->getUser(),
+                $user,
+                new \Overblog\GraphQLBundle\Definition\Argument(['first' => 0])
+            )->totalCount ?? 0;
+
         return [
             'user' => $user,
+            'proposalsCount' => $proposalsCount,
             'eventsCount' => $eventsCount,
             'versions' => $versions,
             'arguments' => $arguments,
             'replies' => $replies,
             'sources' => $sources,
+            'comments' => $comments,
             'votes' => $votes,
             'argumentsLabels' => Argument::$argumentTypesLabels
         ];

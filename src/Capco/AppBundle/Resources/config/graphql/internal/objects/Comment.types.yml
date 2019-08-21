@@ -71,6 +71,3 @@ Comment:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentEditUrlResolver", [value])'
       viewerHasReport:
         resolve: '@=value.userHasReport(getUser())'
-      commentable:
-        type: 'Commentable'
-        resolve: '@=value.getRelatedObject()'
