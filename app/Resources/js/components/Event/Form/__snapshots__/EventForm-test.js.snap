@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EventForm /> it renders correctly with event complete 1`] = `
-<form>
+<form
+  className="eventForm"
+>
   <div
     className="box-header"
   >
@@ -108,43 +110,45 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       type="editor"
     />
     <div
-      className="d-flex justify-content-between w-23"
+      className="datePickContainer"
     >
-      <Field
-        addonAfter={
-          <i
-            className="cap-calendar-2"
-          />
-        }
-        component={[Function]}
-        dateTimeInputProps={
-          Object {
-            "id": "event_input_startAt",
-          }
-        }
-        formName="EventForm"
-        id="event_startAt"
-        label={
-          <span>
-            <FormattedMessage
-              id="start-date"
-              values={Object {}}
+      <div>
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
             />
-             
-            <span
-              className="excerpt"
-            >
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label={
+            <span>
               <FormattedMessage
-                id="global.mandatory"
+                id="start-date"
                 values={Object {}}
               />
+               
+              <span
+                className="excerpt"
+              >
+                <FormattedMessage
+                  id="global.mandatory"
+                  values={Object {}}
+                />
+              </span>
             </span>
-          </span>
-        }
-        name="startAt"
-        timeFormat={false}
-        type="datetime"
-      />
+          }
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+      </div>
       <Field
         addonAfter={
           <i
@@ -328,12 +332,15 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           id="event_enabled"
           name="enabled"
           type="checkbox"
+        />
+        <ToggleButton
+          onChange={[Function]}
         >
           <FormattedMessage
             id="proposal.state.published"
             values={Object {}}
           />
-        </Field>
+        </ToggleButton>
       </div>
     </div>
   </div>
@@ -341,7 +348,9 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
 `;
 
 exports[`<EventForm /> it renders correctly with initialValue 1`] = `
-<form>
+<form
+  className="eventForm"
+>
   <div
     className="box-header"
   >
@@ -448,43 +457,45 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       type="editor"
     />
     <div
-      className="d-flex justify-content-between w-23"
+      className="datePickContainer"
     >
-      <Field
-        addonAfter={
-          <i
-            className="cap-calendar-2"
-          />
-        }
-        component={[Function]}
-        dateTimeInputProps={
-          Object {
-            "id": "event_input_startAt",
-          }
-        }
-        formName="EventForm"
-        id="event_startAt"
-        label={
-          <span>
-            <FormattedMessage
-              id="start-date"
-              values={Object {}}
+      <div>
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
             />
-             
-            <span
-              className="excerpt"
-            >
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label={
+            <span>
               <FormattedMessage
-                id="global.mandatory"
+                id="start-date"
                 values={Object {}}
               />
+               
+              <span
+                className="excerpt"
+              >
+                <FormattedMessage
+                  id="global.mandatory"
+                  values={Object {}}
+                />
+              </span>
             </span>
-          </span>
-        }
-        name="startAt"
-        timeFormat={false}
-        type="datetime"
-      />
+          }
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+      </div>
       <Field
         addonAfter={
           <i
@@ -668,12 +679,15 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
           id="event_enabled"
           name="enabled"
           type="checkbox"
+        />
+        <ToggleButton
+          onChange={[Function]}
         >
           <FormattedMessage
             id="proposal.state.published"
             values={Object {}}
           />
-        </Field>
+        </ToggleButton>
       </div>
     </div>
   </div>
@@ -681,7 +695,9 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
 `;
 
 exports[`<EventForm /> it renders correctly without default props 1`] = `
-<form>
+<form
+  className="eventForm"
+>
   <div
     className="box-header"
   >
@@ -788,43 +804,45 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       type="editor"
     />
     <div
-      className="d-flex justify-content-between w-23"
+      className="datePickContainer"
     >
-      <Field
-        addonAfter={
-          <i
-            className="cap-calendar-2"
-          />
-        }
-        component={[Function]}
-        dateTimeInputProps={
-          Object {
-            "id": "event_input_startAt",
-          }
-        }
-        formName="EventForm"
-        id="event_startAt"
-        label={
-          <span>
-            <FormattedMessage
-              id="start-date"
-              values={Object {}}
+      <div>
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
             />
-             
-            <span
-              className="excerpt"
-            >
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label={
+            <span>
               <FormattedMessage
-                id="global.mandatory"
+                id="start-date"
                 values={Object {}}
               />
+               
+              <span
+                className="excerpt"
+              >
+                <FormattedMessage
+                  id="global.mandatory"
+                  values={Object {}}
+                />
+              </span>
             </span>
-          </span>
-        }
-        name="startAt"
-        timeFormat={false}
-        type="datetime"
-      />
+          }
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+      </div>
       <Field
         addonAfter={
           <i
@@ -993,12 +1011,15 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           id="event_enabled"
           name="enabled"
           type="checkbox"
+        />
+        <ToggleButton
+          onChange={[Function]}
         >
           <FormattedMessage
             id="proposal.state.published"
             values={Object {}}
           />
-        </Field>
+        </ToggleButton>
       </div>
     </div>
   </div>

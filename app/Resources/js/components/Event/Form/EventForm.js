@@ -1,11 +1,10 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import Toggle from 'react-toggle';
 import { connect } from 'react-redux';
 import { ToggleButton } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { type FormProps, Field, reduxForm,change } from 'redux-form';
+import { type FormProps, Field, reduxForm, change } from 'redux-form';
 import component from '../../Form/Field';
 import type { Dispatch, FeatureToggles, GlobalState } from '../../../types';
 import type { EventForm_event } from '~relay/EventForm_event.graphql';
@@ -33,10 +32,10 @@ export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
   render() {
-    const { features, event, query,dispatch } = this.props;
+    const { features, event, query, dispatch } = this.props;
 
     return (
-      <form>
+      <form className="eventForm">
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage id="proposal.admin.general" />
@@ -133,26 +132,26 @@ export class EventForm extends React.Component<Props> {
               </span>
             }
           />
-          <div className="d-flex" style={{width:'auto', flexDirection: 'row'}}>
-            <div style={{marginRight: '2%'}}>
-            <Field
-              timeFormat={false}
-              id="event_startAt"
-              dateTimeInputProps={{ id: 'event_input_startAt' }}
-              component={component}
-              type="datetime"
-              name="startAt"
-              formName={formName}
-              label={
-                <span>
-                  <FormattedMessage id="start-date" />{' '}
-                  <span className="excerpt">
-                    <FormattedMessage id="global.mandatory" />
+          <div className="datePickContainer">
+            <div>
+              <Field
+                timeFormat={false}
+                id="event_startAt"
+                dateTimeInputProps={{ id: 'event_input_startAt' }}
+                component={component}
+                type="datetime"
+                name="startAt"
+                formName={formName}
+                label={
+                  <span>
+                    <FormattedMessage id="start-date" />{' '}
+                    <span className="excerpt">
+                      <FormattedMessage id="global.mandatory" />
+                    </span>
                   </span>
-                </span>
-              }
-              addonAfter={<i className="cap-calendar-2" />}
-            />
+                }
+                addonAfter={<i className="cap-calendar-2" />}
+              />
             </div>
             <Field
               id="event_endAt"
@@ -227,10 +226,8 @@ export class EventForm extends React.Component<Props> {
                   component={component}
                   // children={<FormattedMessage id="proposal.state.published" />}
                 />
-                <ToggleButton
-                  onChange={() => dispatch(change(formName, 'enabled', true))}
-                >
-                <FormattedMessage id="proposal.state.published" />
+                <ToggleButton onChange={() => dispatch(change(formName, 'enabled', true))}>
+                  <FormattedMessage id="proposal.state.published" />
                 </ToggleButton>
               </div>
             </div>
