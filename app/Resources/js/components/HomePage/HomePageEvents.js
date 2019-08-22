@@ -78,31 +78,29 @@ class HomePageEvents extends React.Component<Props> {
     if (props && props.events.edges && props.events.edges.length > 0) {
       const { section, showAllUrl } = this.props;
       return (
-        <section className="section--custom">
-          <div className="container">
-            <h2 className="h2">
-              {section.title ? section.title : <FormattedMessage id="homepage.section.events" />}
-            </h2>
-            {section.teaser ? <p className="block">{section.teaser}</p> : null}
-            {section.body ? <p>{section.body}</p> : null}
-            <EventContainer>
-              {props.events.edges &&
-                props.events.edges
-                  .filter(Boolean)
-                  .map(edge => edge.node)
-                  .filter(Boolean)
-                  .map((node, key) => (
-                    <div key={key}>
-                      {/* $FlowFixMe */}
-                      <EventPreview isHighlighted={false} event={node} />
-                    </div>
-                  ))}
-            </EventContainer>
-            <a href={showAllUrl} className="btn btn-primary btn--outline">
-              <FormattedMessage id="event.see_all" />
-            </a>
-          </div>
-        </section>
+        <div className="container">
+          <h2 className="h2">
+            {section.title ? section.title : <FormattedMessage id="homepage.section.events" />}
+          </h2>
+          {section.teaser ? <p className="block">{section.teaser}</p> : null}
+          {section.body ? <p>{section.body}</p> : null}
+          <EventContainer>
+            {props.events.edges &&
+              props.events.edges
+                .filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+                .map((node, key) => (
+                  <div key={key}>
+                    {/* $FlowFixMe */}
+                    <EventPreview isHighlighted={false} event={node} />
+                  </div>
+                ))}
+          </EventContainer>
+          <a href={showAllUrl} className="btn btn-primary btn--outline">
+            <FormattedMessage id="event.see_all" />
+          </a>
+        </div>
       );
     }
   };
