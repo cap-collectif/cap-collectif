@@ -9,6 +9,9 @@ import {
   UserPasswordComplexityField,
 } from './UserPasswordComplexityUtils';
 import component from '../Form/Field';
+import config from '../../config';
+
+jest.mock('../../config');
 
 describe('<UserPasswordComplexityField />', () => {
   const props = {
@@ -29,6 +32,26 @@ describe('<UserPasswordComplexityField />', () => {
     formName: 'form-name',
     formAsyncErrors: null,
   };
+
+  beforeEach(() => {
+    config.isMobile = false;
+  });
+
+  it('renders a mobile version of the field', () => {
+    config.isMobile = true;
+    const wrapper = shallow(
+      <UserPasswordComplexityField
+        {...props}
+        passwordComplexityScore={3}
+        passwordConditions={{
+          length: true,
+          upperLowercase: false,
+          digit: false,
+        }}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
 
   it('gets correct passwordConditions with checkPasswordConditions', () => {
     expect(checkPasswordConditions('passWord91')).toMatchSnapshot();

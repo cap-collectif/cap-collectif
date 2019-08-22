@@ -94,7 +94,11 @@ export class ChangePasswordForm extends Component<Props> {
             <h2 className="page-header">
               <FormattedMessage id="form.new_password" />
             </h2>
-            <div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}>
               <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
                 <label className="col-sm-3 control-label" htmlFor="password-form-current">
                   <FormattedMessage id="form.current_password" />
@@ -109,6 +113,16 @@ export class ChangePasswordForm extends Component<Props> {
                   />
                 </div>
               </div>
+
+              <div
+                style={{
+                  marginTop: -10,
+                  marginBottom: 10,
+                }}>
+                <div className="col-sm-3" />
+                <a href="/resetting/request">{<FormattedMessage id="global.forgot_password" />}</a>
+              </div>
+
               <div className="clearfix" />
               <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
                 <label className="col-sm-3 control-label" htmlFor="password-form-new">
