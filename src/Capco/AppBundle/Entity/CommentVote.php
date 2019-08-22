@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -58,5 +59,15 @@ class CommentVote extends AbstractVote
         if (null !== $this->comment) {
             $this->comment->removeVote($this);
         }
+    }
+
+    // ************************* Elastic Search ********************************
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return array_merge(parent::getElasticsearchSerializationGroups(), [
+            'ElasticsearchNestedComment',
+            'ElasticsearchNestedProposal'
+        ]);
     }
 }

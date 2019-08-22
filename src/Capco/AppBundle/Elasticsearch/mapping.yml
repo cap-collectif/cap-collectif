@@ -303,6 +303,21 @@ mappings:
       project: *Project
       published: { type: boolean }
 
+      comment:
+        type: object
+        properties:
+          id: {type: keyword}
+          proposal:
+            type: object
+            properties:
+              id: { type: keyword }
+              visible: { type: boolean }
+      proposal:
+        type: object
+        properties:
+          id: { type: keyword }
+          visible: { type: boolean }
+
   #
   # This allow ous to monitore the usage of our API.
   #

@@ -10,9 +10,25 @@ Capco\AppBundle\Entity\AbstractVote:
       groups: [ElasticsearchVote]
     getProject:
       type: object
-      groups: [ElasticsearchNestedProject, ElasticsearchNestedAuthor]
+      groups: [ElasticsearchNestedProject]
       serialized_name: project
     getProposal:
       type: object
-      serialized_name: proposal
       groups: [ElasticsearchNestedProposal]
+      serialized_name: proposal
+    getComment:
+      type: object
+      groups: [ElasticsearchNestedComment]
+      serialized_name: comment
+    getArgument:
+      type: object
+      groups: [ElasticsearchNestedArgument]
+      serialized_name: argument
+    getSource:
+      type: object
+      groups: [ElasticsearchNestedSource]
+      serialized_name: source
+    getOpinionVersion:
+      type: object
+      groups: [ElasticsearchNestedOpinionVersion]
+      serialized_name: opinionVersion

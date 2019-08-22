@@ -2,14 +2,9 @@
 
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Elastica\Index;
 use Elastica\Query;
-use Elastica\Query\BoolQuery;
-use Elastica\Query\Exists;
-use Elastica\Query\Term;
 use Elastica\Result;
 use Elastica\ResultSet;
 
@@ -103,37 +98,5 @@ abstract class Search
         $functionScore->setRandomScore($seed);
 
         return new Query($functionScore);
-    }
-
-    protected function filterProjectsFromResultsByUserRoles(User $user): array
-    {
-        return [
-            (new BoolQuery())->addMustNot([new Exists('project')]),
-            (new BoolQuery())->addShould([
-                new Term([
-                    'project.visibility' => [
-                        'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
-                    ]
-                ]),
-                new Query\Terms('project.authors.id', [$user->getId()])
-            ]),
-            (new BoolQuery())->addMust([
-                new Term([
-                    'project.visibility' => [
-                        'value' => ProjectVisibilityMode::VISIBILITY_CUSTOM
-                    ]
-                ]),
-                new Query\Terms('project.restrictedViewerIds', $user->getUserGroupIds())
-            ]),
-            (new BoolQuery())->addMust([
-                new Query\Terms(
-                    'project.visibility',
-                    ProjectVisibilityMode::getProjectVisibilityByRoles($user)
-                ),
-                new Query\Range('project.visibility', [
-                    'lt' => ProjectVisibilityMode::VISIBILITY_CUSTOM
-                ])
-            ])
-        ];
     }
 }

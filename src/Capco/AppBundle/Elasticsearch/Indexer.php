@@ -212,8 +212,14 @@ class Indexer
     private function getTypeFromEntityFQN($entityFQN): string
     {
         $parentClass = (new \ReflectionClass($entityFQN))->getParentClass() ?? false;
-        if ($parentClass && Comment::class === $parentClass->getName()) {
-            return 'comment';
+        if ($parentClass) {
+            if (Comment::class === $parentClass->getName()) {
+                return 'comment';
+            }
+
+            if (AbstractVote::class === $parentClass->getName()) {
+                return 'vote';
+            }
         }
 
         $classes = $this->getClassesToIndex();

@@ -69,18 +69,9 @@ class VoteSearch extends Search
         ];
 
         if (!$viewer->isSuperAdmin()) {
-            $subConditions = $this->filterProjectsFromResultsByUserRoles($viewer);
-            $conditions = array_merge($conditions, [(new BoolQuery())->addShould($subConditions)]);
         }
 
         if (!$viewer->isAdmin()) {
-            $subConditions = array_merge($subConditions, [
-                (new BoolQuery())->addShould([
-                    new Term(['proposal.visible' => ['value' => true]]),
-                    new Query\Terms('project.authors.id', [$viewer->getId()])
-                ])
-            ]);
-            $conditions = array_merge($conditions, [(new BoolQuery())->addShould($subConditions)]);
         }
 
         $boolQuery->addMust($conditions);

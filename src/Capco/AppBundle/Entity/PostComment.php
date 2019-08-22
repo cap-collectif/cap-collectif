@@ -54,4 +54,9 @@ class PostComment extends Comment
     {
         return $this->setPost($object);
     }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['ElasticsearchComment', 'ElasticsearchNestedAuthor'];
+    }
 }

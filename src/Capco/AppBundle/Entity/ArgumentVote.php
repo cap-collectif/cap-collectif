@@ -66,4 +66,11 @@ class ArgumentVote extends AbstractVote
             $this->argument->removeVote($this);
         }
     }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return array_merge(parent::getElasticsearchSerializationGroups(), [
+            'ElasticsearchNestedArgument'
+        ]);
+    }
 }
