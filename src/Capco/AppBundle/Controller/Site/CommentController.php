@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType as CommentForm;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
-use Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,38 +15,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CommentController extends Controller
 {
-    /**
-     * @Route("/comments/{objectType}/{objectId}/login", name="app_comment_login")
-     * @Security("has_role('ROLE_USER')")
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function loginToCommentAction($objectType, $objectId)
-    {
-        return $this->redirect(
-            $this->get(CommentResolver::class)->getUrlOfObjectByTypeAndId($objectType, $objectId)
-        );
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Comment:list.html.twig")
-     *
-     * @param $object
-     *
-     * @return array
-     */
-    public function showCommentsAction($object)
-    {
-        $comments = $this->get(CommentResolver::class)->getCommentsByObject($object);
-
-        return ['comments' => $comments];
-    }
-
     /**
      * @Route("/comments/{commentId}/edit", name="app_comment_edit")
      * @Template("CapcoAppBundle:Comment:update.html.twig")
@@ -167,16 +137,5 @@ class CommentController extends Controller
         }
 
         return ['form' => $form->createView(), 'comment' => $comment];
-    }
-
-    /**
-     * @Route("/admin/capco/app/comment/{commentId}/preview", name="capco_admin.admin.comment.preview")
-     * @ParamConverter("comment", options={"mapping": {"commentId": "id"}})
-     */
-    public function previewAction(Request $request, Comment $comment): Response
-    {
-        $commentUrlResolver = $this->container->get(CommentShowUrlResolver::class);
-
-        return new RedirectResponse($commentUrlResolver->__invoke($comment));
     }
 }

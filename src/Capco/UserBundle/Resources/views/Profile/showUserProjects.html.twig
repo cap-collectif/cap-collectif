@@ -10,7 +10,7 @@
 {% block jumbotron %}{% endblock %}
 
 {% block fos_user_content %}
-    {% include '@CapcoUser/Profile/showProfile.html.twig' %}
+    {% include '@CapcoUser/Profile/showProfile.html.twig' with projectsCount %}
     <section class="section--custom">
         <div class="container">
             <div class="row">

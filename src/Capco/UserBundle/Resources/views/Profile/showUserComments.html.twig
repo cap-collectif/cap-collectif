@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12" id="details">
-                    {% include '@CapcoUser/Profile/comments.html.twig' %}
+                    {{ react_render_component('ProfileUserCommentApp', { 'props': { 'userId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
                 </div>
             </div>
         </div>

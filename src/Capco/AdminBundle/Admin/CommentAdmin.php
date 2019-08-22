@@ -77,7 +77,7 @@ class CommentAdmin extends AbstractAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($enitity, $property) {
                         return $enitity->getEmail() . ' - ' . $enitity->getUsername();
-                    },
+                    }
                 ]
             )
             ->add('authorName', null, ['label' => 'admin.fields.comment.author_name'])
@@ -88,7 +88,7 @@ class CommentAdmin extends AbstractAdmin
             ->add('trashedStatus', null, ['label' => 'admin.fields.comment.is_trashed'])
             ->add('type', 'doctrine_orm_class', [
                 'label' => 'admin.fields.comment.type',
-                'sub_classes' => $this->getSubClasses(),
+                'sub_classes' => $this->getSubClasses()
             ]);
     }
 
@@ -96,43 +96,37 @@ class CommentAdmin extends AbstractAdmin
     {
         unset($this->listModes['mosaic']);
 
-        $availableActions = [
-            'display' => [
-                'template' => 'CapcoAdminBundle:CRUD:list__action_display.html.twig',
-            ],
-        ];
-
         $availableActions['delete'] = [
-            'template' => 'CapcoAdminBundle:Comment:list__action_delete.html.twig',
+            'template' => 'CapcoAdminBundle:Comment:list__action_delete.html.twig'
         ];
 
         $listMapper
             ->addIdentifier('body', null, [
                 'label' => 'admin.fields.comment.body',
-                'template' => 'CapcoAdminBundle:Comment:body_list_field.html.twig',
+                'template' => 'CapcoAdminBundle:Comment:body_list_field.html.twig'
             ])
             ->add('object', null, [
                 'label' => 'admin.fields.comment.object',
                 'template' => 'CapcoAdminBundle:Comment:object_list_field.html.twig',
-                'mapped' => false,
+                'mapped' => false
             ])
             ->add('Author', 'sonata_type_model', [
                 'label' => 'admin.fields.comment.author',
                 'template' => 'CapcoAdminBundle:Comment:author_list_field.html.twig',
-                'mapped' => false,
+                'mapped' => false
             ])
             ->add('votesCount', null, ['label' => 'admin.fields.comment.vote_count'])
             ->add('published', null, [
                 'editable' => false,
-                'label' => 'admin.fields.comment.is_enabled',
+                'label' => 'admin.fields.comment.is_enabled'
             ])
             ->add('trashedStatus', null, [
                 'label' => 'admin.fields.opinion.is_trashed',
-                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
+                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig'
             ])
             ->add('updatedAt', 'datetime', ['label' => 'admin.fields.comment.updated_at'])
             ->add('_action', 'actions', [
-                'actions' => $availableActions,
+                'actions' => $availableActions
             ]);
     }
 
@@ -143,12 +137,12 @@ class CommentAdmin extends AbstractAdmin
         if ($subject instanceof EventComment) {
             $formMapper->add('event', 'sonata_type_model', [
                 'label' => 'admin.fields.comment.idea',
-                'class' => Event::class,
+                'class' => Event::class
             ]);
         } elseif ($subject instanceof PostComment) {
             $formMapper->add('post', 'sonata_type_model', [
                 'label' => 'admin.fields.comment.idea',
-                'class' => Post::class,
+                'class' => Post::class
             ]);
         }
 
@@ -161,17 +155,17 @@ class CommentAdmin extends AbstractAdmin
                     return $enitity->getEmail() . ' - ' . $enitity->getUsername();
                 },
                 'help' => 'admin.help.comment.author',
-                'required' => false,
+                'required' => false
             ])
             ->add('authorName', null, ['label' => 'admin.fields.comment.author_name'])
             ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])
             ->add('published', null, [
                 'label' => 'admin.fields.comment.is_enabled',
                 'disabled' => true,
-                'attr' => ['readonly' => true],
+                'attr' => ['readonly' => true]
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'admin.fields.opinion.is_trashed',
+                'label' => 'admin.fields.opinion.is_trashed'
             ])
             ->add('trashedReason', null, ['label' => 'admin.fields.comment.trashed_reason'])
             ->add('pinned', null, ['label' => 'admin.fields.comment.pinned', 'required' => false]);
@@ -180,6 +174,5 @@ class CommentAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete', 'show']);
-        $collection->add('preview', $this->getRouterIdParameter() . '/preview');
     }
 }

@@ -27,7 +27,7 @@ class UserCommentsResolver implements ResolverInterface
         ?ArrayObject $context = null
     ): Connection {
         if (!$args) {
-            $args = new Argument(['first' => 100]);
+            $args = new Argument(['first' => 0]);
         }
 
         $aclDisabled =
@@ -43,9 +43,9 @@ class UserCommentsResolver implements ResolverInterface
                 &$totalCount
             ) {
                 $queryResponse = $this->commentSearch->getCommentsByUser($user, $limit, $offset);
-                $totalCount = $queryResponse['totalCount'] ?? 0;
+                $totalCount = $queryResponse['totalCount'];
 
-                return $queryResponse['results'] ?? [];
+                return $queryResponse['results'];
             });
         } elseif ($validViewer && $user) {
             $totalCount = 0;
@@ -60,9 +60,9 @@ class UserCommentsResolver implements ResolverInterface
                     $limit,
                     $offset
                 );
-                $totalCount = $queryResponse['totalCount'] ?? 0;
+                $totalCount = $queryResponse['totalCount'];
 
-                return $queryResponse['results'] ?? [];
+                return $queryResponse['results'];
             });
         } else {
             $totalCount = 0;
@@ -77,7 +77,7 @@ class UserCommentsResolver implements ResolverInterface
                 );
                 $totalCount = $queryResponse['totalCount'];
 
-                return $queryResponse['results'] ?? [];
+                return $queryResponse['results'];
             });
         }
 

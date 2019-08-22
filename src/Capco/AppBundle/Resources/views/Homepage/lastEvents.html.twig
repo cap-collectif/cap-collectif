@@ -1,4 +1,2 @@
 {% set props = {'section': { 'title': section.title, 'nbObjects': section.nbObjects, 'teaser': section.teaser, 'body': section.body }, 'showAllUrl': path('app_event')} %}
-<section class="section--custom">
-    {{ react_render_component('HomePageEventsApp', { 'props': props }) }}
-</section>
+{{ react_render_component('HomePageEventsApp', { 'props': props }) }}

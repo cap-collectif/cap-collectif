@@ -34,29 +34,33 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
 
     public function normalize($object, $format = null, array $context = [])
     {
+        $groups =
+            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
-
         $selectionVotesCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedByStepsId(
             $object
         );
-
         $collectVotesCount = $this->proposalCollectVoteRepository->getCountsByProposalGroupedByStepsId(
             $object
         );
+
+        if (\in_array('ElasticsearchNestedProposal', $groups, true)) {
+            return $data;
+        }
 
         $stepCounter = [];
         $totalCount = 0;
         foreach ($collectVotesCount as $stepId => $value) {
             $stepCounter[] = [
                 'step' => ['id' => $stepId],
-                'count' => $value,
+                'count' => $value
             ];
             $totalCount += $value;
         }
         foreach ($selectionVotesCount as $stepId => $value) {
             $stepCounter[] = [
                 'step' => ['id' => $stepId],
-                'count' => $value,
+                'count' => $value
             ];
             $totalCount += $value;
         }
@@ -66,7 +70,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
 
         $args = new Argument([
             'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
-            'first' => 0,
+            'first' => 0
         ]);
 
         if ($object->isCommentable()) {

@@ -53,6 +53,7 @@ import AdminExportButtonApp from '../js/startup/AdminExportButtonApp';
 import EventListApp from '../js/startup/EventListApp';
 import SectionPageApp from '../js/startup/SectionPageApp';
 import AuthentificationAdminApp from '../js/startup/AuthentificationAdminApp';
+import ProfileUserCommentApp from "../js/startup/ProfileUserCommentApp";
 
 const emptyFunction = () => {};
 
@@ -116,4 +117,5 @@ ReactOnRails.register({
   AdminExportButtonApp,
   EventListApp,
   AuthentificationAdminApp,
+  ProfileUserCommentApp
 });

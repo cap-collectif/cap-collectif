@@ -1,3 +1,4 @@
+
 {% set page_class = "profile-page" %}
 {% extends "CapcoUserBundle::layout.html.twig" %}
 
@@ -24,9 +25,13 @@
 
 {% block fos_user_content %}
 
+    {% set commentsCount = userCommentsResolver.__invoke(app.user, user).totalCount %}
+    {% set proposalsCount = userProposalsResolver.__invoke(app.user, user).totalCount %}
+    {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) %}
+    {% set projectsCount = userProjectsResolver.__invoke(user).totalCount %}
+    {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
 
-    {% set projectsCount = userProjectsResolver.__invoke(user).totalCount %}
     {% if projectsCount > 0 %}
         <section class="section--custom">
             <div class="container">
@@ -38,7 +43,6 @@
         </section>
     {% endif %}
 
-    {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) %}
     {% if opinionsCount > 0 %}
         <section class="section--custom">
             <div class="container">
@@ -66,7 +70,7 @@
         </section>
     {% endif %}
 
-    {% if sources|length > 0 %}
+    {% if sourcesCount > 0 %}
         <section class="section--custom">
             <div class="container">
                 <h2>{{ 'user.profile.show.sources' | trans({}, 'CapcoAppBundle') }}</h2>
@@ -84,11 +88,11 @@
         </section>
     {% endif %}
 
-    {% if (is_feature_enabled('calendar') or is_feature_enabled('blog')) and comments|length > 0 %}
+    {% if commentsCount > 0 %}
         <section class="section--custom">
             <div class="container">
                 <h2>{{ 'user.profile.show.comments' | trans({}, 'CapcoAppBundle') }}</h2>
-                {% include '@CapcoUser/Profile/comments.html.twig' %}
+                {{ react_render_component('ProfileUserCommentApp', { 'props': { 'userId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
             </div>
         </section>
     {% endif %}
