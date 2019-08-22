@@ -69,4 +69,6 @@ services:
       - { name: kernel.event_listener, event: kernel.request }
       - { name: kernel.event_listener, event: kernel.controller }
       - { name: kernel.event_listener, event: kernel.terminate }
-      - { name: kernel.event_listener, event: console.command }
+      - { name: kernel.event_listener, event: kernel.exception }
+      - { name: console.event_listener, event: console.command }
+      - { name: console.event_listener, event: console.error }

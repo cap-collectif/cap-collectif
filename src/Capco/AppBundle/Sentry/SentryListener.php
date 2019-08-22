@@ -7,9 +7,11 @@ use Sentry\State\HubInterface;
 use Sentry\State\Scope;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
+use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Security;
@@ -84,13 +86,30 @@ class SentryListener implements EventSubscriberInterface
         });
     }
 
+    public function onKernelException(GetResponseForExceptionEvent $event): void
+    {
+        $this->hub->captureException($event->getException());
+    }
+
+    public function onConsoleError(ConsoleErrorEvent $event): void
+    {
+        $this->hub->captureException($event->getError());
+
+        $command = $event->getCommand();
+        $this->hub->configureScope(static function (Scope $scope) use ($command): void {
+            $scope->setTag('command', $command ? $command->getName() : 'N/A');
+        });
+    }
+
     public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::REQUEST => ['onKernelRequest', 1],
             KernelEvents::CONTROLLER => ['onKernelController', 10000],
             KernelEvents::TERMINATE => ['onKernelTerminate', 1],
-            ConsoleEvents::COMMAND => ['onConsoleCommand', 1]
+            ConsoleEvents::COMMAND => ['onConsoleCommand', 1],
+            KernelEvents::EXCEPTION => ['onKernelException', 1],
+            ConsoleEvents::ERROR => ['onConsoleError', 1]
         ];
     }
 }
