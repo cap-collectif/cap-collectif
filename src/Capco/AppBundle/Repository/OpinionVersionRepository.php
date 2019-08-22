@@ -271,23 +271,17 @@ class OpinionVersionRepository extends EntityRepository
     /**
      * Get all versions in a project.
      *
-     * @param $project
-     * @param $excludedAuthor
-     * @param $orderByRanking
-     * @param $limit
-     * @param $page
-     *
-     * @return mixed
+     * @param string|User|null $excludedAuthor
      */
     public function getEnabledByProject(
-        $project,
+        Project $project,
         $excludedAuthor = null,
-        $orderByRanking = false,
-        $limit = null,
-        $page = 1
+        bool $orderByRanking = false,
+        ?int $limit = null,
+        int $page = 1
     ) {
-        $qb = $this->getIsEnabledQueryBuilder('ov')
-            ->addSelect('o', 'ot', 's', 'aut', 'm')
+        /*: array|Paginator*/ $qb = $this->getIsEnabledQueryBuilder('ov')
+            ->addSelect('o', 'ot', 's', 'aut', 'm', 'oc')
             ->leftJoin('ov.parent', 'o')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('ov.author', 'aut')
