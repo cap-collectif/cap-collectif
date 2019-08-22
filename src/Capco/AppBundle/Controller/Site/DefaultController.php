@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -138,6 +139,9 @@ class DefaultController extends Controller
     }
 
     /**
+     * use this to integrate your email template
+     * Only accessible for super admin.
+     *
      * @Route("/email", name="app_email")
      * @Template("@CapcoMail/notifyAdminOfNewEvent.html.twig")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
@@ -145,6 +149,8 @@ class DefaultController extends Controller
     public function emailAction(Request $request)
     {
         $admins = $this->get(UserRepository::class)->getAllAdmin();
+
+        /** @var Event $event */
         $event = $this->get(EventRepository::class)->find('event1');
         /** @var User $admin */
         foreach ($admins as $admin) {

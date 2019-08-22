@@ -108,9 +108,8 @@ abstract class Message
         return array_values($this->recipients);
     }
 
-    final public function getRecipient($key)
+    final public function getRecipient($key /*:?MessageRecipient*/)
     {
-        //:?MessageRecipient
         if (!\is_int($key) && !\is_string($key)) {
             throw new \InvalidArgumentException(
                 'Recipient key must be an integer index or valid email address string.'
