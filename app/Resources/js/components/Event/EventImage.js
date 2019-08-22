@@ -4,13 +4,10 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import styled from 'styled-components';
 import type { EventImage_event } from '~relay/EventImage_event.graphql';
 import { baseUrl } from '../../config';
+import Image from '../Ui/Medias/Image';
 
 type Props = {|
   +event: EventImage_event,
-|};
-
-type State = {|
-  imgURL: string,
 |};
 
 const PictureContainer = styled.div`
@@ -23,12 +20,6 @@ const PictureContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
   [src$='svg'] {
     object-fit: unset;
     width: 40%;
@@ -38,27 +29,14 @@ const PictureContainer = styled.div`
 
 const FALLBACK_IMAGE = `${baseUrl}/svg/calendar.svg`;
 
-export class EventImage extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    const { event } = props;
-    this.state = {
-      imgURL: event.media && event.media.url ? event.media.url : FALLBACK_IMAGE,
-    };
-  }
-
-  onImageError = () => {
-    this.setState({
-      imgURL: FALLBACK_IMAGE,
-    });
-  };
-
+export class EventImage extends React.Component<Props> {
   render() {
-    const { imgURL } = this.state;
+    const { event } = this.props;
+    const imgURL = event.media && event.media.url ? event.media.url : null;
 
     return (
       <PictureContainer style={{ backgroundColor: '#eeeeee' }}>
-        <img src={`${imgURL}`} onError={this.onImageError} alt="" aria-hidden />
+        <Image src={imgURL} width="100%" height="100%" fallBack={FALLBACK_IMAGE} aria-hidden />
       </PictureContainer>
     );
   }
