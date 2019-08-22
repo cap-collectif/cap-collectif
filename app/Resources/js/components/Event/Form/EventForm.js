@@ -45,12 +45,12 @@ export class EventForm extends React.Component<Props> {
           <Field
             name="title"
             label={
-              <span>
+              <div>
                 <FormattedMessage id="admin.fields.group.title" />
-                <span className="excerpt">
+                <div className="excerpt">
                   <FormattedMessage id="global.mandatory" />
-                </span>
-              </span>
+                </div>
+              </div>
             }
             component={component}
             type="text"
@@ -60,12 +60,12 @@ export class EventForm extends React.Component<Props> {
             <UserListField
               clearable={false}
               label={
-                <span>
+                <div>
                   <FormattedMessage id="admin.fields.argument_vote.voter" />
-                  <span className="excerpt">
+                  <div className="excerpt">
                     <FormattedMessage id="global.mandatory" />
-                  </span>
-                </span>
+                  </div>
+                </div>
               }
               ariaControls="EventForm-filter-user-listbox"
               inputClassName="fake-inputClassName"
@@ -93,27 +93,24 @@ export class EventForm extends React.Component<Props> {
               <div>
                 {event && event.fullAddress && (
                   <div className="clearfix mb-5">
-                    <div>
-                      <FormattedMessage id="old-address" />
-                    </div>
-                    : {event.fullAddress}
+                    <FormattedMessage id="old-address" />: {event.fullAddress}
                   </div>
                 )}
                 {event && event.lat && event.lng && (
-                  <span className="clearfix mb-5">
+                  <div className="clearfix mb-5">
                     {' '}
                     <FormattedMessage id="old-latitude" />: &nbsp; {event.lat} / {event.lng}
-                  </span>
+                  </div>
                 )}
                 {event &&
                   event.googleMapsAddress &&
                   event.googleMapsAddress.lat &&
                   event.googleMapsAddress.lng && (
-                    <span className="clearfix mb-5">
+                    <div className="clearfix mb-5">
                       {' '}
                       <FormattedMessage id="new-latitude" />
                       :&nbsp; {event.googleMapsAddress.lat} / {event.googleMapsAddress.lng}
-                    </span>
+                    </div>
                   )}
               </div>
             </div>
@@ -124,12 +121,12 @@ export class EventForm extends React.Component<Props> {
             name="body"
             component={component}
             label={
-              <span>
+              <div>
                 <FormattedMessage id="admin.fields.proposal_form.description" />
-                <span className="excerpt">
+                <div className="excerpt">
                   <FormattedMessage id="global.mandatory" />
-                </span>
-              </span>
+                </div>
+              </div>
             }
           />
           <div className="datePickContainer">
@@ -142,12 +139,12 @@ export class EventForm extends React.Component<Props> {
               name="startAt"
               formName={formName}
               label={
-                <span>
-                  <FormattedMessage id="start-date" />{' '}
+                <div>
+                  <FormattedMessage id="start-date" />
                   <span className="excerpt">
                     <FormattedMessage id="global.mandatory" />
                   </span>
-                </span>
+                </div>
               }
               addonAfter={<i className="cap-calendar-2" />}
             />

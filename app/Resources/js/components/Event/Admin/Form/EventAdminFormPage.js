@@ -222,7 +222,7 @@ export class EventAdminFormPage extends React.Component<Props, State> {
     const { showDeleteModal } = this.state;
 
     return (
-      <div>
+      <>
         <div className="box box-primary container-fluid">
           <EventForm
             event={event}
@@ -241,7 +241,7 @@ export class EventAdminFormPage extends React.Component<Props, State> {
               }}
             />
             {event && (event.viewerDidAuthor || query.viewer.isSuperAdmin) && (
-              <div>
+              <>
                 <DeleteModal
                   closeDeleteModal={this.cancelCloseDeleteModal}
                   showDeleteModal={showDeleteModal}
@@ -252,16 +252,14 @@ export class EventAdminFormPage extends React.Component<Props, State> {
                   deleteModalContent="group.admin.parameters.modal.delete.content"
                   buttonConfirmMessage="group.admin.parameters.modal.delete.button"
                 />
-                <div>
-                  <Button
-                    bsStyle="danger"
-                    className="ml-5"
-                    onClick={this.openDeleteModal}
-                    id="delete-event">
-                    <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
-                  </Button>
-                </div>
-              </div>
+                <Button
+                  bsStyle="danger"
+                  className="ml-5"
+                  onClick={this.openDeleteModal}
+                  id="delete-event">
+                  <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
+                </Button>
+              </>
             )}
             <AlertForm
               valid={valid}
@@ -272,7 +270,7 @@ export class EventAdminFormPage extends React.Component<Props, State> {
             />
           </ButtonToolbar>
         </div>
-      </div>
+      </>
     );
   }
 }

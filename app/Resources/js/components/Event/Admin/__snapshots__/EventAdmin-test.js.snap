@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
-<div>
+<Fragment>
   <ReactRelayQueryRenderer
     environment={"RelayModernEnvironment()"}
     query={[Function]}
@@ -12,11 +12,11 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
       }
     }
   />
-</div>
+</Fragment>
 `;
 
 exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
-<div>
+<Fragment>
   <ReactRelayQueryRenderer
     environment={"RelayModernEnvironment()"}
     query={[Function]}
@@ -27,5 +27,5 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
       }
     }
   />
-</div>
+</Fragment>
 `;

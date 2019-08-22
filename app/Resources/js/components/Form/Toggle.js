@@ -31,7 +31,7 @@ export class Toggle extends React.Component<Props> {
     return (
       <div className="form-group">
         <label style={{ display: 'flex', alignItems: 'center' }}>
-          {labelSide === 'RIGHT' && <span className="ml-10">{label}</span>}
+          {labelSide === 'RIGHT' && <span className="mr-10">{label}</span>}
           <ReactToggle
             id={id}
             aria-labelledby={label}

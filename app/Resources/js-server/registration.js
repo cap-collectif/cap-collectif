@@ -57,7 +57,6 @@ import EventListApp from '../js/startup/EventListApp';
 import SectionPageApp from '../js/startup/SectionPageApp';
 import AuthentificationAdminApp from '../js/startup/AuthentificationAdminApp';
 import ProfileUserCommentApp from "../js/startup/ProfileUserCommentApp";
-import EventAdminCreatePageApp from '../js/startup/EventAdminCreatePageApp';
 import EventAdminEditPageApp from '../js/startup/EventAdminEditPageApp';
 import EventFormPageApp from '../js/startup/EventFormPageApp';
 
@@ -124,7 +123,6 @@ ReactOnRails.register({
   EventListApp,
   AuthentificationAdminApp,
   ProfileUserCommentApp,
-  EventAdminCreatePageApp,
   EventAdminEditPageApp,
   EventFormPageApp,
 });

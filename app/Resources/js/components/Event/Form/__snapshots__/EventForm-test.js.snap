@@ -23,20 +23,20 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       component={[Function]}
       id="event_title"
       label={
-        <span>
+        <div>
           <FormattedMessage
             id="admin.fields.group.title"
             values={Object {}}
           />
-          <span
+          <div
             className="excerpt"
           >
             <FormattedMessage
               id="global.mandatory"
               values={Object {}}
             />
-          </span>
-        </span>
+          </div>
+        </div>
       }
       name="title"
       type="text"
@@ -52,20 +52,20 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       id="event_author"
       inputClassName="fake-inputClassName"
       label={
-        <span>
+        <div>
           <FormattedMessage
             id="admin.fields.argument_vote.voter"
             values={Object {}}
           />
-          <span
+          <div
             className="excerpt"
           >
             <FormattedMessage
               id="global.mandatory"
               values={Object {}}
             />
-          </span>
-        </span>
+          </div>
+        </div>
       }
       labelClassName={null}
       multi={false}
@@ -91,20 +91,20 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       component={[Function]}
       id="event_body"
       label={
-        <span>
+        <div>
           <FormattedMessage
             id="admin.fields.proposal_form.description"
             values={Object {}}
           />
-          <span
+          <div
             className="excerpt"
           >
             <FormattedMessage
               id="global.mandatory"
               values={Object {}}
             />
-          </span>
-        </span>
+          </div>
+        </div>
       }
       name="body"
       type="editor"
@@ -127,12 +127,11 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         formName="EventForm"
         id="event_startAt"
         label={
-          <span>
+          <div>
             <FormattedMessage
               id="start-date"
               values={Object {}}
             />
-             
             <span
               className="excerpt"
             >
@@ -141,7 +140,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
                 values={Object {}}
               />
             </span>
-          </span>
+          </div>
         }
         name="startAt"
         timeFormat={false}
@@ -387,20 +386,20 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       component={[Function]}
       id="event_title"
       label={
-        <span>
+        <div>
           <FormattedMessage
             id="admin.fields.group.title"
             values={Object {}}
           />
-          <span
+          <div
             className="excerpt"
           >
             <FormattedMessage
               id="global.mandatory"
               values={Object {}}
             />
-          </span>
-        </span>
+          </div>
+        </div>
       }
       name="title"
       type="text"
@@ -416,20 +415,20 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       id="event_author"
       inputClassName="fake-inputClassName"
       label={
-        <span>
+        <div>
           <FormattedMessage
             id="admin.fields.argument_vote.voter"
             values={Object {}}
           />
-          <span
+          <div
             className="excerpt"
           >
             <FormattedMessage
               id="global.mandatory"
               values={Object {}}
             />
-          </span>
-        </span>
+          </div>
+        </div>
       }
       labelClassName={null}
       multi={false}
@@ -455,20 +454,20 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       component={[Function]}
       id="event_body"
       label={
-        <span>
+        <div>
           <FormattedMessage
             id="admin.fields.proposal_form.description"
             values={Object {}}
           />
-          <span
+          <div
             className="excerpt"
           >
             <FormattedMessage
               id="global.mandatory"
               values={Object {}}
             />
-          </span>
-        </span>
+          </div>
+        </div>
       }
       name="body"
       type="editor"
@@ -491,12 +490,11 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
         formName="EventForm"
         id="event_startAt"
         label={
-          <span>
+          <div>
             <FormattedMessage
               id="start-date"
               values={Object {}}
             />
-             
             <span
               className="excerpt"
             >
@@ -505,7 +503,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
                 values={Object {}}
               />
             </span>
-          </span>
+          </div>
         }
         name="startAt"
         timeFormat={false}
@@ -751,20 +749,20 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       component={[Function]}
       id="event_title"
       label={
-        <span>
+        <div>
           <FormattedMessage
             id="admin.fields.group.title"
             values={Object {}}
           />
-          <span
+          <div
             className="excerpt"
           >
             <FormattedMessage
               id="global.mandatory"
               values={Object {}}
             />
-          </span>
-        </span>
+          </div>
+        </div>
       }
       name="title"
       type="text"
@@ -780,20 +778,20 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       id="event_author"
       inputClassName="fake-inputClassName"
       label={
-        <span>
+        <div>
           <FormattedMessage
             id="admin.fields.argument_vote.voter"
             values={Object {}}
           />
-          <span
+          <div
             className="excerpt"
           >
             <FormattedMessage
               id="global.mandatory"
               values={Object {}}
             />
-          </span>
-        </span>
+          </div>
+        </div>
       }
       labelClassName={null}
       multi={false}
@@ -819,20 +817,20 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       component={[Function]}
       id="event_body"
       label={
-        <span>
+        <div>
           <FormattedMessage
             id="admin.fields.proposal_form.description"
             values={Object {}}
           />
-          <span
+          <div
             className="excerpt"
           >
             <FormattedMessage
               id="global.mandatory"
               values={Object {}}
             />
-          </span>
-        </span>
+          </div>
+        </div>
       }
       name="body"
       type="editor"
@@ -855,12 +853,11 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         formName="EventForm"
         id="event_startAt"
         label={
-          <span>
+          <div>
             <FormattedMessage
               id="start-date"
               values={Object {}}
             />
-             
             <span
               className="excerpt"
             >
@@ -869,7 +866,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
                 values={Object {}}
               />
             </span>
-          </span>
+          </div>
         }
         name="startAt"
         timeFormat={false}

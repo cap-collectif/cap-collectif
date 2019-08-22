@@ -18,7 +18,7 @@ export type Props = {|
 export class EventAdmin extends React.Component<Props> {
   render() {
     return (
-      <div>
+      <>
         <QueryRenderer
           environment={environment}
           query={graphql`
@@ -43,7 +43,7 @@ export class EventAdmin extends React.Component<Props> {
             );
           }}
         />
-      </div>
+      </>
     );
   }
 }
