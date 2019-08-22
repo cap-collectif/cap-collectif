@@ -16,7 +16,6 @@ final class FollowerNotifier extends BaseNotifier
     protected $urlResolver;
     protected $siteParams;
     protected $logger;
-    protected $siteName;
     protected $sendAt;
 
     public function __construct(
@@ -31,7 +30,6 @@ final class FollowerNotifier extends BaseNotifier
         $this->urlResolver = $urlResolver;
         $this->logger = $logger;
         $this->siteParams = $siteParams;
-        $this->siteName = $siteParams->getValue('global.site.fullname');
     }
 
     public function setSendAt(string $relativeTime)

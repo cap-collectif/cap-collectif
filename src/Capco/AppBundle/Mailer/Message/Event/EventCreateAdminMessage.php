@@ -11,6 +11,9 @@ final class EventCreateAdminMessage extends AdminMessage
         Event $event,
         string $eventAdminUrl,
         string $recipentEmail,
+        string $baseUrl,
+        string $siteName,
+        string $siteUrl,
         string $recipientName = null
     ): self {
         $message = new self(
@@ -18,18 +21,40 @@ final class EventCreateAdminMessage extends AdminMessage
             $recipientName,
             'event-needing-examination',
             static::getMySubjectVars($event->getTitle()),
-            '@CapcoMail/notifyAdminOfNewEvent.html.twig',
-            static::getMyTemplateVars($event, $eventAdminUrl)
+            '@CapcoMail/Admin/notifyAdminOfNewEvent.html.twig',
+            static::getMyTemplateVars(
+                $event,
+                $eventAdminUrl,
+                $baseUrl,
+                $siteName,
+                $siteUrl,
+                $recipientName
+            )
         );
 
         return $message;
     }
 
-    private static function getMyTemplateVars(Event $event, string $eventAdminUrl): array
+    public function getFooterTemplate(): string
     {
+        return '';
+    }
+
+    private static function getMyTemplateVars(
+        Event $event,
+        string $eventAdminUrl,
+        string $baseUrl,
+        string $siteName,
+        string $siteUrl,
+        string $recipientName = null
+    ): array {
         return [
             'eventTitle' => self::escape($event->getTitle()),
-            'eventAdminUrl' => $eventAdminUrl
+            'eventAdminUrl' => $eventAdminUrl,
+            'baseUrl' => $baseUrl,
+            'siteName' => $siteName,
+            'siteUrl' => $siteUrl,
+            'username' => $recipientName
         ];
     }
 

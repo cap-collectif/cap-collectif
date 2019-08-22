@@ -28,8 +28,8 @@
                              style="position: relative;    top: 2px;    right: 2px; height: 26px; width: auto;"
                              class="event"/>
                         <div style="margin-left: 10px">
-                            <p style="margin: 0; font-weight: bold; text-transform: uppercase">{{ 'event.last.title'|trans({}, 'CapcoAppBundle') }}</p>
-                            <span>{{ eventTitle }}</span>
+                            <p style="margin: 0; font-weight: bold; text-transform: uppercase; font-family: OpenSans-Bold;">{{ 'event.last.title'|trans({}, 'CapcoAppBundle') }}</p>
+                            <span style="font-family: OpenSans-Regular;">{{ eventTitle }}</span>
                         </div>
                     </td>
                 </tr>
@@ -56,8 +56,8 @@
 {% block footer_mail %}
     <p style="font-size:13px; font-family:helvetica, arial, sans-serif; color:#999999; margin-top: 10px;">
         {{ 'email.notification.footer.mail-send-by'|trans({
-            '{siteName}': siteName,
-            '{siteUrl}': baseUrl,
+            '{sitename}': siteName,
+            '{siteUrl}': siteUrl,
         }, 'CapcoAppBundle') | raw }}
         <br><br>
         {{ 'email.propulsed.by.capco'|trans({

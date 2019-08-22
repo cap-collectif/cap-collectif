@@ -35,10 +35,9 @@ class EventCreateProcessor implements ProcessorInterface
             throw new \RuntimeException('Unable to find event with id : ' . $id);
         }
 
-        $this->logger->debug(__METHOD__ . ' : ' . var_export($event->getTitle()));
-        if (!$event->getAuthor()->isAdmin()) {
-            $this->notifier->onCreate($event);
-        }
+        $messages = $this->notifier->onCreate($event);
+
+        $this->logger->info(__METHOD__ . ' : ' . var_export($messages, true));
 
         return true;
     }

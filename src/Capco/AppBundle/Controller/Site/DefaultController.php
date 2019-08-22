@@ -118,7 +118,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/legaEvent.ymll", name="app_legal")
+     * @Route("/legal", name="app_legal")
      * @Template("CapcoAppBundle:Default:legalMentions.html.twig")
      */
     public function legalMentionsAction(Request $request)
