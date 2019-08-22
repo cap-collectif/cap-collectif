@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
+use Capco\UserBundle\FranceConnect\FranceConnectMapper;
 use Capco\UserBundle\OpenID\OpenIDExtraMapper;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
@@ -68,6 +69,10 @@ class OauthUserProvider extends FOSUBUserProvider
             $user->setUsername($username);
             $user->setEmail($email);
             $this->extraMapper->map($user, $response);
+        } elseif ('franceconnect' === $service) {
+            $user->setUsername($username);
+            $user->setEmail($email);
+            FranceConnectMapper::map($user, $response);
         }
 
         $user->{$setterId}($response->getUsername());

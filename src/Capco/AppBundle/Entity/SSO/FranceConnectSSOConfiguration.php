@@ -17,6 +17,13 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
         EnumSSOEnvironmentType::PRODUCTION => '	https://app.franceconnect.gouv.fr'
     ];
 
+    public const ROUTES = [
+        'authorizationUrl' => '/api/v1/authorize',
+        'accessTokenUrl' => '/api/v1/token',
+        'userInfoUrl' => '/api/v1/userinfo',
+        'logoutUrl' => '/api/v1/logout'
+    ];
+
     /**
      * @ORM\Column(name="client_id", type="string", nullable=false)
      */

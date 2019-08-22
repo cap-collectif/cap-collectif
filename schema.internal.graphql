@@ -2516,6 +2516,33 @@ enum FollowerOrderField {
   RANDOM
 }
 
+"""France Connect SSO Configuration."""
+type FranceConnectSSOConfiguration {
+  """Client ID."""
+  clientId: String!
+
+  """Secret key."""
+  secret: String!
+
+  """Authorization URL."""
+  authorizationUrl: URI!
+
+  """Access token URL."""
+  accessTokenUrl: URI!
+
+  """User info URL."""
+  userInfoUrl: URI!
+
+  """Logout URL."""
+  logoutUrl: URI
+
+  """Environment mode."""
+  environment: SSOEnvironment!
+
+  """Redirect URI callback."""
+  redirectUri: URI!
+}
+
 """3 possible values"""
 enum GenderValue {
   MALE
@@ -2724,6 +2751,24 @@ type InternalSSOConfigurationEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+input InternalUpdateFranceConnectSSOConfigurationInput {
+  """Client ID."""
+  clientId: String!
+
+  """Secret key."""
+  secret: String!
+
+  """Environment mode."""
+  environment: SSOEnvironment!
+  clientMutationId: String
+}
+
+type InternalUpdateFranceConnectSSOConfigurationPayload {
+  """The updated France Connect configuration."""
+  fcConfiguration: FranceConnectSSOConfiguration
+  clientMutationId: String
 }
 
 input InternalUpdateOauth2SSOConfigurationInput {
@@ -3299,6 +3344,7 @@ type Mutation {
   createOauth2SSOConfiguration(input: InternalCreateOauth2SSOConfigurationInput!): InternalCreateOauth2SSOConfigurationPayload
   updateOauth2SSOConfiguration(input: InternalUpdateOauth2SSOConfigurationInput!): InternalUpdateOauth2SSOConfigurationPayload
   deleteSSOConfiguration(input: InternalDeleteSSOConfigurationInput!): InternalDeleteSSOConfigurationPayload
+  updateFranceConnectSSOConfiguration(input: InternalUpdateFranceConnectSSOConfigurationInput!): InternalUpdateFranceConnectSSOConfigurationPayload
 }
 
 """A connection to a list of items."""
@@ -6227,6 +6273,15 @@ interface SSOConfiguration {
 
   """Color in hexadecimal of label SSO button."""
   labelColor: Color!
+}
+
+"""Possible environment for a SSO Configuration."""
+enum SSOEnvironment {
+  """Integration mode for resource owner validation."""
+  TESTING
+
+  """Production mode."""
+  PRODUCTION
 }
 
 """A section"""

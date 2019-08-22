@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190820054140 extends AbstractMigration
+final class Version20190821052821 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -21,7 +21,10 @@ final class Version20190820054140 extends AbstractMigration
         );
 
         $this->addSql(
-            'ALTER TABLE sso_configuration ADD environment ENUM(\'testing\', \'production\', \'\') DEFAULT \'\' NOT NULL'
+            'ALTER TABLE sso_configuration CHANGE environment environment ENUM(\'TESTING\', \'PRODUCTION\', \'\') DEFAULT \'\' NOT NULL'
+        );
+        $this->addSql(
+            'ALTER TABLE fos_user ADD france_connect_id VARCHAR(255) DEFAULT NULL, ADD france_connect_access_token VARCHAR(255) DEFAULT NULL'
         );
     }
 
@@ -33,6 +36,11 @@ final class Version20190820054140 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('ALTER TABLE sso_configuration DROP environment');
+        $this->addSql(
+            'ALTER TABLE fos_user DROP france_connect_id, DROP france_connect_access_token'
+        );
+        $this->addSql(
+            'ALTER TABLE sso_configuration CHANGE environment environment VARCHAR(255) DEFAULT \'\' NOT NULL COLLATE utf8_unicode_ci'
+        );
     }
 }

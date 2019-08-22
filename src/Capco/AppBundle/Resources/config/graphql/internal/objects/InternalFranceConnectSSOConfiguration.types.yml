@@ -1,0 +1,31 @@
+InternalFranceConnectSSOConfiguration:
+  type: object
+  config:
+    name: FranceConnectSSOConfiguration
+    description: 'France Connect SSO Configuration.'
+    fields:
+      clientId:
+        type: 'String!'
+        description: 'Client ID.'
+      secret:
+        type: 'String!'
+        description: 'Secret key.'
+      authorizationUrl:
+        type: 'URI!'
+        description: 'Authorization URL.'
+      accessTokenUrl:
+        type: 'URI!'
+        description: 'Access token URL.'
+      userInfoUrl:
+        type: 'URI!'
+        description: 'User info URL.'
+      logoutUrl:
+        type: 'URI'
+        description: 'Logout URL.'
+      environment:
+        type: 'SSOEnvironment!'
+        description: 'Environment mode.'
+      redirectUri:
+        type: 'URI!'
+        description: 'Redirect URI callback.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\FranceConnectRedirectUriResolver", [value])'

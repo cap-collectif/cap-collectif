@@ -670,3 +670,12 @@ InternalMutation:
           inputType: InternalDeleteSSOConfigurationInput
           payloadType: InternalDeleteSSOConfigurationPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteSSOConfigurationMutation", [value])'
+
+      # France Connect
+      updateFranceConnectSSOConfiguration:
+        access: "@=hasRole('ROLE_SUPER_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: InternalUpdateFranceConnectSSOConfigurationInput
+          payloadType: InternalUpdateFranceConnectSSOConfigurationPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateFranceConnectSSOConfigurationMutation", [value])'
