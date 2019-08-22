@@ -89,8 +89,7 @@ class AddEventMutation implements MutationInterface
             'event.create',
             new Message(
                 json_encode([
-                    'eventId' => $event->getId(),
-                    'state' => 'event.create'
+                    'eventId' => $event->getId()
                 ])
             )
         );

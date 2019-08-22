@@ -2,14 +2,10 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver;
-use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Mailer\Message\MessagesList;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -140,27 +136,19 @@ class DefaultController extends Controller
 
     /**
      * use this to integrate your email template
-     * Only accessible for super admin.
+     * Only accessible in dev environment.
      *
-     * @Route("/email", name="app_email")
-     * @Template("@CapcoMail/notifyAdminOfNewEvent.html.twig")
-     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * @Route("/email/{messageType}", name="app_email", condition="'%kernel.environment%' === 'dev'")
      */
-    public function emailAction(Request $request)
+    public function emailAction(Request $request, $messageType)
     {
-        $admins = $this->get(UserRepository::class)->getAllAdmin();
+        if (isset(MessagesList::MESSAGES_LIST[$messageType])) {
+            $messager = MessagesList::MESSAGES_LIST[$messageType];
+            $data = $messager::mockData($this->container);
 
-        /** @var Event $event */
-        $event = $this->get(EventRepository::class)->find('event1');
-        /** @var User $admin */
-        foreach ($admins as $admin) {
-            return [
-                'eventAdminUrl' => $this->get(EventUrlResolver::class)->__invoke($event, true),
-                'username' => $admin->getDisplayName(),
-                'siteName' => 'Cap collectif',
-                'baseUrl' => 'http://capco.dev',
-                'eventTitle' => $event->getTitle()
-            ];
+            return $this->render($data['template'], $data);
         }
+
+        throw new NotFoundHttpException("${messageType} message doesnt exist");
     }
 }

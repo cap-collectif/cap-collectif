@@ -11,6 +11,7 @@ use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class EventNotifier extends BaseNotifier
@@ -35,7 +36,7 @@ class EventNotifier extends BaseNotifier
         $this->siteParams = $siteParams;
     }
 
-    public function onCreate(Event $event)
+    public function onCreate(Event $event): array
     {
         $admins = $this->userRepository->getAllAdmin();
         $messages = [];
@@ -55,5 +56,10 @@ class EventNotifier extends BaseNotifier
         }
 
         return $messages;
+    }
+
+    public function mockData(ContainerInterface $container): array
+    {
+        return EventCreateAdminMessage::mockData($container);
     }
 }
