@@ -24,6 +24,18 @@ class UserPasswordField extends React.Component<Props, State> {
     isPasswordFocus: false,
   };
 
+  setPasswordFocusToTrue = () => {
+    this.setState({
+      isPasswordFocus: true,
+    });
+  };
+
+  setPasswordFocusToFalse = () => {
+    this.setState({
+      isPasswordFocus: false,
+    });
+  };
+
   render() {
     const {
       id,
@@ -45,16 +57,8 @@ class UserPasswordField extends React.Component<Props, State> {
           <Field
             type="password"
             component={component}
-            onFocus={() => {
-              this.setState({
-                isPasswordFocus: true,
-              });
-            }}
-            onBlur={() => {
-              this.setState({
-                isPasswordFocus: false,
-              });
-            }}
+            onFocus={this.setPasswordFocusToTrue}
+            onBlur={this.setPasswordFocusToFalse}
             name={name}
             id={id}
             divClassName={divClassName}

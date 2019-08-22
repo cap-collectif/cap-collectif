@@ -42,6 +42,27 @@ describe('<Field />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders an error with id <Input /> element', () => {
+    const wrapper = shallow(
+      <Field {...defaultProps} meta={{ touched: true, error: { id: 'global.required' } }} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders a warning <Input /> element', () => {
+    const wrapper = shallow(
+      <Field {...defaultProps} meta={{ touched: true, warning: 'global.required' }} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders a warning with id <Input /> element', () => {
+    const wrapper = shallow(
+      <Field {...defaultProps} meta={{ touched: true, warning: { id: 'global.required' } }} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('renders a validation disabled <Input /> element', () => {
     const wrapper = shallow(
       <Field

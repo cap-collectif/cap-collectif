@@ -94,7 +94,76 @@ exports[`<Field /> renders a validation disabled <Input /> element 1`] = `
 />
 `;
 
+exports[`<Field /> renders a warning <Input /> element 1`] = `
+<InjectIntl(ReactBootstrapInput)
+  autoFocus={false}
+  disableValidation={false}
+  errors={null}
+  id="id"
+  image={null}
+  label="label"
+  labelClassName=""
+  name="name"
+  placeholder={null}
+  type="text"
+  validationState="success"
+  warnings={
+    <FormattedMessage
+      id="global.required"
+      values={Object {}}
+    />
+  }
+  wrapperClassName=""
+/>
+`;
+
+exports[`<Field /> renders a warning with id <Input /> element 1`] = `
+<InjectIntl(ReactBootstrapInput)
+  autoFocus={false}
+  disableValidation={false}
+  errors={null}
+  id="id"
+  image={null}
+  label="label"
+  labelClassName=""
+  name="name"
+  placeholder={null}
+  type="text"
+  validationState="success"
+  warnings={
+    <FormattedMessage
+      id="global.required"
+      values={Object {}}
+    />
+  }
+  wrapperClassName=""
+/>
+`;
+
 exports[`<Field /> renders an error <Input /> element 1`] = `
+<InjectIntl(ReactBootstrapInput)
+  autoFocus={false}
+  disableValidation={false}
+  errors={
+    <FormattedMessage
+      id="global.required"
+      values={Object {}}
+    />
+  }
+  id="id"
+  image={null}
+  label="label"
+  labelClassName=""
+  name="name"
+  placeholder={null}
+  type="text"
+  validationState="error"
+  warnings={null}
+  wrapperClassName=""
+/>
+`;
+
+exports[`<Field /> renders an error with id <Input /> element 1`] = `
 <InjectIntl(ReactBootstrapInput)
   autoFocus={false}
   disableValidation={false}

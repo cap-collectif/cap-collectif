@@ -143,15 +143,6 @@ export const getPasswordComplexityScore = graphql`
 `;
 
 export class UserPasswordComplexityField extends Component<Props> {
-  static defaultProps = {
-    passwordComplexityScore: 0,
-    passwordConditions: {
-      length: false,
-      upperLowercase: false,
-      digit: false,
-    },
-  };
-
   getMatchingPasswordSecurityAttributes(passwordComplexityScore: number) {
     switch (passwordComplexityScore) {
       case 0:
