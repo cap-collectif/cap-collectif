@@ -4,17 +4,21 @@ import styled from 'styled-components';
 import { OverlayTrigger, Popover, ProgressBar } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql } from 'react-relay';
+import { formValueSelector, getFormAsyncErrors } from 'redux-form';
+import { connect } from 'react-redux';
 import CheckCircle from './CheckCircle';
 import config from '../../config';
-import type { Dispatch } from '../../types';
 
 type Props = {|
+  +name: string,
   +field: Object,
+  +formName: string,
   +passwordComplexityScore: number,
   +passwordConditions: Object,
-  +dispatch: Dispatch,
-  +error: ?string,
+  +formAsyncErrors: Object,
 |};
+
+type State = {||};
 
 const StyleContainer = styled.div`
   .bg-danger .progress-bar {
@@ -138,7 +142,7 @@ export const getPasswordComplexityScore = graphql`
   }
 `;
 
-export default class UserPasswordComplexityField extends Component<Props> {
+export class UserPasswordComplexityField extends Component<Props> {
   static defaultProps = {
     passwordComplexityScore: 0,
     passwordConditions: {
@@ -146,7 +150,6 @@ export default class UserPasswordComplexityField extends Component<Props> {
       upperLowercase: false,
       digit: false,
     },
-    error: null,
   };
 
   getMatchingPasswordSecurityAttributes(passwordComplexityScore: number) {
@@ -245,14 +248,24 @@ export default class UserPasswordComplexityField extends Component<Props> {
   }
 
   render() {
-    const { field, passwordComplexityScore, passwordConditions, error } = this.props;
+    const {
+      field,
+      passwordComplexityScore,
+      passwordConditions,
+      formAsyncErrors,
+      name,
+    } = this.props;
 
     if (config.isMobile) {
       return (
         <div>
           {field}
 
-          {this.renderPasswordInformation(passwordConditions, passwordComplexityScore, error)}
+          {this.renderPasswordInformation(
+            passwordConditions,
+            passwordComplexityScore,
+            formAsyncErrors ? formAsyncErrors[name] : null,
+          )}
         </div>
       );
     }
@@ -261,7 +274,11 @@ export default class UserPasswordComplexityField extends Component<Props> {
         placement="right"
         overlay={
           <Popover placement="right" className="in" id="pinned-label">
-            {this.renderPasswordInformation(passwordConditions, passwordComplexityScore, error)}
+            {this.renderPasswordInformation(
+              passwordConditions,
+              passwordComplexityScore,
+              formAsyncErrors ? formAsyncErrors[name] : null,
+            )}
           </Popover>
         }>
         {field}
@@ -269,3 +286,11 @@ export default class UserPasswordComplexityField extends Component<Props> {
     );
   }
 }
+
+const mapStateToProps = (state: State, props: Props) => ({
+  formAsyncErrors: getFormAsyncErrors(props.formName)(state),
+  passwordComplexityScore: formValueSelector(props.formName)(state, 'passwordComplexityScore'),
+  passwordConditions: formValueSelector(props.formName)(state, 'passwordConditions'),
+});
+
+export default connect(mapStateToProps)(UserPasswordComplexityField);

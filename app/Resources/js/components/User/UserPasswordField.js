@@ -3,17 +3,12 @@ import React from 'react';
 import { Field } from 'redux-form';
 import component from '../Form/Field';
 import UserPasswordComplexityUtils from './UserPasswordComplexityUtils';
-import type { Dispatch } from '../../types';
 
 type Props = {|
   +id: string,
   +divClassName?: string,
+  +formName: string,
   +name: string,
-  +passwordComplexityScore: number,
-  +passwordConditions: Object,
-  +dispatch: Dispatch,
-  +error: ?string,
-
   +ariaRequired?: boolean,
   +autoComplete?: string,
   +label?: any,
@@ -25,16 +20,6 @@ type State = {|
 |};
 
 class UserPasswordField extends React.Component<Props, State> {
-  static defaultProps = {
-    passwordComplexityScore: 0,
-    passwordConditions: {
-      length: false,
-      upperLowercase: false,
-      digit: false,
-    },
-    error: null,
-  };
-
   state = {
     isPasswordFocus: false,
   };
@@ -44,24 +29,18 @@ class UserPasswordField extends React.Component<Props, State> {
       id,
       divClassName,
       name,
-      dispatch,
-      error,
-      passwordComplexityScore,
-      passwordConditions,
       ariaRequired,
       autoComplete,
+      formName,
       label,
       labelClassName,
     } = this.props;
-
     const { isPasswordFocus } = this.state;
 
     return (
       <UserPasswordComplexityUtils
-        passwordComplexityScore={passwordComplexityScore}
-        passwordConditions={passwordConditions}
-        dispatch={dispatch}
-        error={error}
+        name={name}
+        formName={formName}
         field={
           <Field
             type="password"

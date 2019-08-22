@@ -3,14 +3,7 @@ import * as React from 'react';
 import { QueryRenderer, graphql, fetchQuery } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import {
-  Field,
-  reduxForm,
-  type FormProps,
-  formValueSelector,
-  change,
-  getFormAsyncErrors,
-} from 'redux-form';
+import { Field, reduxForm, type FormProps, formValueSelector, change } from 'redux-form';
 import { Button } from 'react-bootstrap';
 import { isEmail } from '../../../services/Validator';
 import type { Dispatch, State } from '../../../types';
@@ -44,9 +37,6 @@ type Props = {|
   organizationName: string,
   internalCommunicationFrom: string,
   shieldEnabled: boolean,
-  passwordComplexityScore: number,
-  passwordConditions: Object,
-  formAsyncErrors: Object,
   dispatch: Dispatch,
 |};
 
@@ -55,8 +45,6 @@ type FormValues = {
   email: string,
   plainPassword: string,
   charte: string,
-  passwordComplexityScore: number,
-  passwordConditions: Object,
   captcha: boolean,
   responses: Array<Object>,
   questions: Array<Object>,
@@ -70,20 +58,7 @@ const getCustomFieldsErrors = (values: FormValues, props: Props) =>
 
 export const form = 'registration-form';
 
-const selector = formValueSelector(form);
-
 export class RegistrationForm extends React.Component<Props> {
-  static defaultProps = {
-    passwordComplexityScore: 0,
-    formAsyncErrors: null,
-    passwordConditions: {
-      length: false,
-      upperLowercase: false,
-      digit: false,
-      consecutive: true,
-    },
-  };
-
   render() {
     const {
       cguName,
@@ -102,9 +77,6 @@ export class RegistrationForm extends React.Component<Props> {
       addCaptchaField,
       organizationName,
       privacyPolicyRequired,
-      passwordComplexityScore,
-      passwordConditions,
-      formAsyncErrors,
       dispatch,
     } = this.props;
 
@@ -163,10 +135,7 @@ export class RegistrationForm extends React.Component<Props> {
         />
 
         <UserPasswordField
-          passwordComplexityScore={passwordComplexityScore}
-          passwordConditions={passwordConditions}
-          dispatch={dispatch}
-          error={formAsyncErrors ? formAsyncErrors.plainPassword : null}
+          formName={form}
           id="password"
           name="plainPassword"
           ariaRequired
@@ -310,7 +279,6 @@ export class RegistrationForm extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State) => ({
-  formAsyncErrors: getFormAsyncErrors(form)(state),
   hasQuestions: state.user.registration_form.hasQuestions,
   addCaptchaField: state.default.features.captcha,
   addUserTypeField: state.default.features.user_type,
@@ -325,16 +293,8 @@ const mapStateToProps = (state: State) => ({
   privacyPolicyRequired: state.default.features.privacy_policy,
   responses: formValueSelector(form)(state, 'responses'),
   initialValues: {
-    passwordComplexityScore: 0,
     responses: [],
-    passwordConditions: {
-      length: false,
-      upperLowercase: false,
-      digit: false,
-    },
   },
-  passwordComplexityScore: selector(state, 'passwordComplexityScore'),
-  passwordConditions: selector(state, 'passwordConditions'),
 });
 
 export const validate = (values: FormValues, props: Props) => {

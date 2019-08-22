@@ -49,7 +49,7 @@ Scenario: Logged in user wants to change his password to a too short password
     | password-form-current      | user   |
     | password-form-new          | 1234   |
     | password-form-confirmation | 1234   |
-  And I should see "fos_user.new_password.short"
+  And I should see "at-least-8-characters-one-uppercase-one-lowercase"
   And I should see "global.invalid.form"
 
 @database
@@ -58,9 +58,9 @@ Scenario: Logged in user wants to change his password
   And I visited "change password page"
   And I wait 1 seconds
   And I fill in the following:
-    | password-form-current      | user        |
-    | password-form-new          | toto12345   |
-    | password-form-confirmation | toto12345   |
+    | password-form-current      | user            |
+    | password-form-new          | toto12345Toto   |
+    | password-form-confirmation | toto12345Toto   |
   And I press "profile-password-save"
   And I wait 2 seconds
   And I should see "global.saved"

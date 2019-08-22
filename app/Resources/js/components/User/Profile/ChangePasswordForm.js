@@ -2,21 +2,13 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import {
-  reduxForm,
-  Field,
-  SubmissionError,
-  type FormProps,
-  change,
-  formValueSelector,
-  getFormAsyncErrors,
-} from 'redux-form';
+import { reduxForm, Field, SubmissionError, type FormProps, change } from 'redux-form';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import { fetchQuery } from 'react-relay';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
-import type { Dispatch, State } from '../../../types';
+import type { Dispatch } from '../../../types';
 import {
   checkPasswordConditions,
   getMatchingPasswordError,
@@ -28,17 +20,12 @@ import UserPasswordField from '../UserPasswordField';
 type Props = {|
   ...FormProps,
   intl: IntlShape,
-  passwordComplexityScore: number,
-  passwordConditions: Object,
-  formAsyncErrors: Object,
   dispatch: Dispatch,
 |};
 
 type FormValues = {
   email: string,
   new_password: string,
-  passwordComplexityScore: number,
-  passwordConditions: Object,
 };
 const formName = 'password-form';
 
@@ -67,19 +54,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
   });
 };
 
-const selector = formValueSelector(formName);
-
 export class ChangePasswordForm extends Component<Props> {
-  static defaultProps = {
-    passwordComplexityScore: 0,
-    passwordConditions: {
-      length: false,
-      upperLowercase: false,
-      digit: false,
-    },
-    formAsyncErrors: null,
-  };
-
   render() {
     const {
       invalid,
@@ -89,10 +64,6 @@ export class ChangePasswordForm extends Component<Props> {
       handleSubmit,
       submitting,
       error,
-      passwordComplexityScore,
-      passwordConditions,
-      dispatch,
-      formAsyncErrors,
     } = this.props;
 
     const header = (
@@ -145,10 +116,7 @@ export class ChangePasswordForm extends Component<Props> {
                 </label>
                 <div>
                   <UserPasswordField
-                    passwordComplexityScore={passwordComplexityScore}
-                    passwordConditions={passwordConditions}
-                    dispatch={dispatch}
-                    error={formAsyncErrors ? formAsyncErrors.new_password : null}
+                    formName={formName}
                     id="password-form-new"
                     name="new_password"
                     divClassName="col-sm-6"
@@ -192,20 +160,6 @@ export class ChangePasswordForm extends Component<Props> {
     );
   }
 }
-
-const mapStateToProps = (state: State) => ({
-  initialValues: {
-    passwordComplexityScore: 0,
-    passwordConditions: {
-      length: false,
-      upperLowercase: false,
-      digit: false,
-    },
-  },
-  passwordComplexityScore: selector(state, 'passwordComplexityScore'),
-  passwordConditions: selector(state, 'passwordConditions'),
-  formAsyncErrors: getFormAsyncErrors(formName)(state),
-});
 
 const validate = ({
   current_password,
@@ -262,4 +216,4 @@ const form = reduxForm({
   form: formName,
 })(ChangePasswordForm);
 
-export default connect(mapStateToProps)(injectIntl(form));
+export default connect()(injectIntl(form));

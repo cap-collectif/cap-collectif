@@ -47,8 +47,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   <UserPasswordField
     ariaRequired={true}
     autoComplete="new-password"
-    dispatch={[MockFunction]}
-    error={null}
+    formName="registration-form"
     id="password"
     label={
       <FormattedMessage
@@ -58,15 +57,6 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     }
     labelClassName="font-weight-normal"
     name="plainPassword"
-    passwordComplexityScore={0}
-    passwordConditions={
-      Object {
-        "consecutive": true,
-        "digit": false,
-        "length": false,
-        "upperLowercase": false,
-      }
-    }
   />
   <ReactRelayQueryRenderer
     environment={"RelayModernEnvironment()"}
@@ -198,8 +188,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   <UserPasswordField
     ariaRequired={true}
     autoComplete="new-password"
-    dispatch={[MockFunction]}
-    error={null}
+    formName="registration-form"
     id="password"
     label={
       <FormattedMessage
@@ -209,15 +198,6 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     }
     labelClassName="font-weight-normal"
     name="plainPassword"
-    passwordComplexityScore={0}
-    passwordConditions={
-      Object {
-        "consecutive": true,
-        "digit": false,
-        "length": false,
-        "upperLowercase": false,
-      }
-    }
   />
   <Field
     ariaRequired={true}
@@ -343,8 +323,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   <UserPasswordField
     ariaRequired={true}
     autoComplete="new-password"
-    dispatch={[MockFunction]}
-    error={null}
+    formName="registration-form"
     id="password"
     label={
       <FormattedMessage
@@ -354,15 +333,6 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     }
     labelClassName="font-weight-normal"
     name="plainPassword"
-    passwordComplexityScore={0}
-    passwordConditions={
-      Object {
-        "consecutive": true,
-        "digit": false,
-        "length": false,
-        "upperLowercase": false,
-      }
-    }
   />
   <Field
     component={[Function]}
@@ -525,8 +495,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
   <UserPasswordField
     ariaRequired={true}
     autoComplete="new-password"
-    dispatch={[MockFunction]}
-    error={null}
+    formName="registration-form"
     id="password"
     label={
       <FormattedMessage
@@ -536,15 +505,6 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     }
     labelClassName="font-weight-normal"
     name="plainPassword"
-    passwordComplexityScore={0}
-    passwordConditions={
-      Object {
-        "consecutive": true,
-        "digit": false,
-        "length": false,
-        "upperLowercase": false,
-      }
-    }
   />
   <Field
     autoComplete="postal-code"

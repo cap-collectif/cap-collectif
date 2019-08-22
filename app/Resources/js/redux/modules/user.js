@@ -235,7 +235,13 @@ export const login = (
     });
 
 export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: Props) => {
-  const form = { ...values, questions: undefined, charte: undefined };
+  const form = {
+    ...values,
+    questions: undefined,
+    charte: undefined,
+    passwordConditions: undefined,
+    passwordComplexityScore: undefined,
+  };
   if (values.questions && values.questions.length > 0) {
     form.responses = formatSubmitResponses(values.responses, values.questions);
   }
