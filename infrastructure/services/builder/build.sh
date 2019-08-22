@@ -29,7 +29,7 @@ if [ "$PRODUCTION" ]; then
   echo "Building node-sass binding for the container..."
   npm rebuild node-sass > /dev/null
 
-  php bin/console translation:download app --env=prod
+  php bin/console -d memory_limit=-1 translation:download app --env=prod
   yarn run update-js-translation
   yarn run build-relay-schema
   yarn run build:prod

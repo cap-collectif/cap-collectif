@@ -38,6 +38,7 @@ class EventCreateProcessor implements ProcessorInterface
         $messages = $this->notifier->onCreate($event);
 
         $this->logger->info(__METHOD__ . ' : ' . var_export($messages, true));
+        echo 'There are ' . \count($messages) . ' messages sends to administrators.';
 
         return true;
     }
