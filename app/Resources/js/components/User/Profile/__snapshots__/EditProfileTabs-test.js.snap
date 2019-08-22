@@ -258,7 +258,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="password"
         >
-          <InjectIntl(ReduxForm) />
+          <Connect(InjectIntl(ReduxForm)) />
         </TabPane>
         <TabPane
           bsClass="tab-pane"

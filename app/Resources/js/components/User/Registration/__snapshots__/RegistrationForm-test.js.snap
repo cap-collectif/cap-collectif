@@ -44,10 +44,11 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     }
     type="email"
   />
-  <Field
+  <UserPasswordField
     ariaRequired={true}
     autoComplete="new-password"
-    component={[Function]}
+    dispatch={[MockFunction]}
+    error={null}
     id="password"
     label={
       <FormattedMessage
@@ -57,16 +58,15 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     }
     labelClassName="font-weight-normal"
     name="plainPassword"
-    popover={
+    passwordComplexityScore={0}
+    passwordConditions={
       Object {
-        "id": "registration-password-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.password"
-          values={Object {}}
-        />,
+        "consecutive": true,
+        "digit": false,
+        "length": false,
+        "upperLowercase": false,
       }
     }
-    type="password"
   />
   <ReactRelayQueryRenderer
     environment={"RelayModernEnvironment()"}
@@ -195,10 +195,11 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     }
     type="email"
   />
-  <Field
+  <UserPasswordField
     ariaRequired={true}
     autoComplete="new-password"
-    component={[Function]}
+    dispatch={[MockFunction]}
+    error={null}
     id="password"
     label={
       <FormattedMessage
@@ -208,16 +209,15 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     }
     labelClassName="font-weight-normal"
     name="plainPassword"
-    popover={
+    passwordComplexityScore={0}
+    passwordConditions={
       Object {
-        "id": "registration-password-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.password"
-          values={Object {}}
-        />,
+        "consecutive": true,
+        "digit": false,
+        "length": false,
+        "upperLowercase": false,
       }
     }
-    type="password"
   />
   <Field
     ariaRequired={true}
@@ -340,10 +340,11 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     }
     type="email"
   />
-  <Field
+  <UserPasswordField
     ariaRequired={true}
     autoComplete="new-password"
-    component={[Function]}
+    dispatch={[MockFunction]}
+    error={null}
     id="password"
     label={
       <FormattedMessage
@@ -353,16 +354,15 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     }
     labelClassName="font-weight-normal"
     name="plainPassword"
-    popover={
+    passwordComplexityScore={0}
+    passwordConditions={
       Object {
-        "id": "registration-password-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.password"
-          values={Object {}}
-        />,
+        "consecutive": true,
+        "digit": false,
+        "length": false,
+        "upperLowercase": false,
       }
     }
-    type="password"
   />
   <Field
     component={[Function]}
@@ -522,10 +522,11 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     }
     type="email"
   />
-  <Field
+  <UserPasswordField
     ariaRequired={true}
     autoComplete="new-password"
-    component={[Function]}
+    dispatch={[MockFunction]}
+    error={null}
     id="password"
     label={
       <FormattedMessage
@@ -535,16 +536,15 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     }
     labelClassName="font-weight-normal"
     name="plainPassword"
-    popover={
+    passwordComplexityScore={0}
+    passwordConditions={
       Object {
-        "id": "registration-password-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.password"
-          values={Object {}}
-        />,
+        "consecutive": true,
+        "digit": false,
+        "length": false,
+        "upperLowercase": false,
       }
     }
-    type="password"
   />
   <Field
     autoComplete="postal-code"

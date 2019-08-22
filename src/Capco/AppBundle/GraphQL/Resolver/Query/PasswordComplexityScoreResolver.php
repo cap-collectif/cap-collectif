@@ -18,7 +18,10 @@ class PasswordComplexityScoreResolver implements ResolverInterface
     public function __invoke(Argument $args): int
     {
         $password = $args->offsetGet('password');
-        $userData = [$args->offsetGet('email')];
+        $userData = [];
+        if (!empty($args->offsetGet('email'))) {
+            $userData[] = $args->offsetGet('email');
+        }
         if (!empty($args->offsetGet('username'))) {
             $userData[] = $args->offsetGet('username');
         }

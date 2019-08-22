@@ -50,7 +50,7 @@ InternalQuery:
             type: 'String'
             description: 'The username of the user'
           email:
-            type: 'String!'
+            type: 'String'
             description: 'The email of the user'
           password:
             type: 'String!'

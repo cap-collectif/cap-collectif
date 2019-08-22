@@ -22,6 +22,7 @@ type Props = {
   formName?: string,
   autoComplete?: string,
   disableValidation?: boolean,
+  hideValidationMessage?: boolean,
   type:
     | 'address'
     | 'text'
@@ -72,6 +73,10 @@ type Props = {
 };
 
 class Field extends React.Component<Props> {
+  static defaultProps = {
+    hideValidationMessage: false,
+  };
+
   render() {
     const { touched, error, dirty, warning } = this.props.meta;
     const {
@@ -100,6 +105,7 @@ class Field extends React.Component<Props> {
       style,
       radioImage,
       radioChecked,
+      hideValidationMessage,
       lang,
       step,
     } = this.props;
@@ -109,7 +115,7 @@ class Field extends React.Component<Props> {
     let errorMessage = null;
     let warningMessage = null;
 
-    if (check && error) {
+    if (check && error && !hideValidationMessage) {
       if (error.id) {
         errorMessage = <FormattedMessage id={error.id} values={error.values} />;
       } else {

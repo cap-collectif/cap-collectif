@@ -1,40 +1,46 @@
-/**
- * @flow
- */
+// @flow
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { reduxForm, Field, SubmissionError, type FormProps } from 'redux-form';
+import { connect } from 'react-redux';
+import {
+  reduxForm,
+  Field,
+  SubmissionError,
+  type FormProps,
+  change,
+  formValueSelector,
+  getFormAsyncErrors,
+} from 'redux-form';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
+import { fetchQuery } from 'react-relay';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
-import type { Dispatch } from '../../../types';
+import type { Dispatch, State } from '../../../types';
+import {
+  checkPasswordConditions,
+  getMatchingPasswordError,
+  getPasswordComplexityScore,
+} from '../UserPasswordComplexityUtils';
+import environment from '../../../createRelayEnvironment';
+import UserPasswordField from '../UserPasswordField';
 
-type Props = {| ...FormProps, intl: IntlShape |};
+type Props = {|
+  ...FormProps,
+  intl: IntlShape,
+  passwordComplexityScore: number,
+  passwordConditions: Object,
+  formAsyncErrors: Object,
+  dispatch: Dispatch,
+|};
 
-const formName = 'profileChangePassword';
-
-const validate = ({
-  current_password,
-  new_password,
-  new_password_confirmation,
-}: {
-  current_password: ?string,
-  new_password: ?string,
-  new_password_confirmation: ?string,
-}) => {
-  const errors = {};
-  if (current_password && current_password.length < 1) {
-    errors.current_password = 'fos_user.password.not_current';
-  }
-  if (new_password && new_password.length < 8) {
-    errors.new_password = 'fos_user.new_password.short';
-  }
-  if (new_password && new_password_confirmation && new_password_confirmation !== new_password) {
-    errors.new_password_confirmation = 'fos_user.password.mismatch';
-  }
-  return errors;
+type FormValues = {
+  email: string,
+  new_password: string,
+  passwordComplexityScore: number,
+  passwordConditions: Object,
 };
+const formName = 'password-form';
 
 const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
   const input = {
@@ -61,7 +67,19 @@ const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
   });
 };
 
+const selector = formValueSelector(formName);
+
 export class ChangePasswordForm extends Component<Props> {
+  static defaultProps = {
+    passwordComplexityScore: 0,
+    passwordConditions: {
+      length: false,
+      upperLowercase: false,
+      digit: false,
+    },
+    formAsyncErrors: null,
+  };
+
   render() {
     const {
       invalid,
@@ -71,12 +89,16 @@ export class ChangePasswordForm extends Component<Props> {
       handleSubmit,
       submitting,
       error,
+      passwordComplexityScore,
+      passwordConditions,
+      dispatch,
+      formAsyncErrors,
     } = this.props;
 
     const header = (
       <div className="panel-heading profile-header">
         <h1>
-          <FormattedMessage id="user.profile.edit.password" />
+          <FormattedMessage id="modify-password" />
         </h1>
       </div>
     );
@@ -88,7 +110,7 @@ export class ChangePasswordForm extends Component<Props> {
           type="submit"
           bsStyle="primary"
           id="profile-password-save">
-          <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
+          <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
         </Button>
       </div>
     );
@@ -119,14 +141,16 @@ export class ChangePasswordForm extends Component<Props> {
               <div className="clearfix" />
               <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
                 <label className="col-sm-3 control-label" htmlFor="password-form-new">
-                  <FormattedMessage id="form.new_password" />
+                  <FormattedMessage id="new-password" />
                 </label>
                 <div>
-                  <Field
-                    type="password"
-                    component={component}
-                    name="new_password"
+                  <UserPasswordField
+                    passwordComplexityScore={passwordComplexityScore}
+                    passwordConditions={passwordConditions}
+                    dispatch={dispatch}
+                    error={formAsyncErrors ? formAsyncErrors.new_password : null}
                     id="password-form-new"
+                    name="new_password"
                     divClassName="col-sm-6"
                   />
                 </div>
@@ -134,7 +158,7 @@ export class ChangePasswordForm extends Component<Props> {
               <div className="clearfix" />
               <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
                 <label className="col-sm-3 control-label" htmlFor="password-form-confirmation">
-                  <FormattedMessage id="form.new_password_confirmation" />
+                  <FormattedMessage id="confirm-password" />
                 </label>
                 <div>
                   <Field
@@ -169,11 +193,73 @@ export class ChangePasswordForm extends Component<Props> {
   }
 }
 
+const mapStateToProps = (state: State) => ({
+  initialValues: {
+    passwordComplexityScore: 0,
+    passwordConditions: {
+      length: false,
+      upperLowercase: false,
+      digit: false,
+    },
+  },
+  passwordComplexityScore: selector(state, 'passwordComplexityScore'),
+  passwordConditions: selector(state, 'passwordConditions'),
+  formAsyncErrors: getFormAsyncErrors(formName)(state),
+});
+
+const validate = ({
+  current_password,
+  new_password,
+  new_password_confirmation,
+}: {
+  current_password: ?string,
+  new_password: ?string,
+  new_password_confirmation: ?string,
+}) => {
+  const errors = {};
+  if (current_password && current_password.length < 1) {
+    errors.current_password = 'fos_user.password.not_current';
+  }
+  if (new_password && new_password_confirmation && new_password_confirmation !== new_password) {
+    errors.new_password_confirmation = 'fos_user.password.mismatch';
+  }
+  return errors;
+};
+
+const asyncValidate = (values: FormValues, dispatch: Dispatch) => {
+  const passwordConditions = checkPasswordConditions(values.new_password);
+  dispatch(change(formName, 'passwordConditions', passwordConditions));
+
+  const credentialValues = {
+    password: values.new_password,
+    email: values.email === undefined ? null : values.email,
+  };
+  return new Promise((resolve, reject) => {
+    fetchQuery(environment, getPasswordComplexityScore, credentialValues).then(res => {
+      dispatch(
+        change(
+          formName,
+          'passwordComplexityScore',
+          res.passwordComplexityScore + (passwordConditions.length ? 1 : 0),
+        ),
+      );
+    });
+
+    const error = getMatchingPasswordError('new_password', passwordConditions);
+    if (error) {
+      reject(error);
+    }
+    resolve();
+  });
+};
+
 const form = reduxForm({
   onSubmit,
   validate,
+  asyncValidate,
+  asyncChangeFields: ['new_password'],
   enableReinitialize: true,
   form: formName,
 })(ChangePasswordForm);
 
-export default injectIntl(form);
+export default connect(mapStateToProps)(injectIntl(form));

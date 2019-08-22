@@ -1,9 +1,16 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql, fetchQuery } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { Field, reduxForm, type FormProps, formValueSelector } from 'redux-form';
+import {
+  Field,
+  reduxForm,
+  type FormProps,
+  formValueSelector,
+  change,
+  getFormAsyncErrors,
+} from 'redux-form';
 import { Button } from 'react-bootstrap';
 import { isEmail } from '../../../services/Validator';
 import type { Dispatch, State } from '../../../types';
@@ -13,6 +20,12 @@ import renderComponent from '../../Form/Field';
 import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
 import { validateResponses } from '../../../utils/responsesHelper';
 import PrivacyModal from '../../StaticPage/PrivacyModal';
+import {
+  getMatchingPasswordError,
+  checkPasswordConditions,
+  getPasswordComplexityScore,
+} from '../UserPasswordComplexityUtils';
+import UserPasswordField from '../UserPasswordField';
 
 type Props = {|
   ...FormProps,
@@ -31,6 +44,9 @@ type Props = {|
   organizationName: string,
   internalCommunicationFrom: string,
   shieldEnabled: boolean,
+  passwordComplexityScore: number,
+  passwordConditions: Object,
+  formAsyncErrors: Object,
   dispatch: Dispatch,
 |};
 
@@ -39,6 +55,8 @@ type FormValues = {
   email: string,
   plainPassword: string,
   charte: string,
+  passwordComplexityScore: number,
+  passwordConditions: Object,
   captcha: boolean,
   responses: Array<Object>,
   questions: Array<Object>,
@@ -50,43 +68,28 @@ const getCustomFieldsErrors = (values: FormValues, props: Props) =>
       validateResponses(values.questions, values.responses, 'reply', props.intl).responses
     : [];
 
-export const validate = (values: FormValues, props: Props) => {
-  const errors = {};
-
-  if (!values.username || values.username.length < 2) {
-    errors.username = 'registration.constraints.username.min';
-  }
-  if (!values.email || !isEmail(values.email)) {
-    errors.email = 'global.constraints.email.invalid';
-  }
-  if (!values.plainPassword || values.plainPassword.length < 8) {
-    errors.plainPassword = 'registration.constraints.password.min';
-  }
-  if (values.plainPassword && values.plainPassword.length > 72) {
-    errors.plainPassword = 'registration.constraints.password.max';
-  }
-  if (!values.charte) {
-    errors.charte = 'registration.constraints.charte.check';
-  }
-  if (
-    !values.captcha &&
-    props.addCaptchaField &&
-    (window && window.location.host !== 'capco.test')
-  ) {
-    errors.captcha = 'registration.constraints.captcha.invalid';
-  }
-
-  return { ...errors, responses: getCustomFieldsErrors(values, props) };
-};
-
 export const form = 'registration-form';
 
+const selector = formValueSelector(form);
+
 export class RegistrationForm extends React.Component<Props> {
+  static defaultProps = {
+    passwordComplexityScore: 0,
+    formAsyncErrors: null,
+    passwordConditions: {
+      length: false,
+      upperLowercase: false,
+      digit: false,
+      consecutive: true,
+    },
+  };
+
   render() {
     const {
       cguName,
       hasQuestions,
       responses,
+      // eslint-disable-next-line no-shadow
       change,
       intl,
       addZipcodeField,
@@ -99,6 +102,9 @@ export class RegistrationForm extends React.Component<Props> {
       addCaptchaField,
       organizationName,
       privacyPolicyRequired,
+      passwordComplexityScore,
+      passwordConditions,
+      formAsyncErrors,
       dispatch,
     } = this.props;
 
@@ -128,6 +134,7 @@ export class RegistrationForm extends React.Component<Props> {
         }}
       />
     );
+
     return (
       <form onSubmit={handleSubmit} id="registration-form">
         <Field
@@ -154,20 +161,20 @@ export class RegistrationForm extends React.Component<Props> {
             message: <FormattedMessage id="registration.tooltip.email" />,
           }}
         />
-        <Field
-          name="plainPassword"
+
+        <UserPasswordField
+          passwordComplexityScore={passwordComplexityScore}
+          passwordConditions={passwordConditions}
+          dispatch={dispatch}
+          error={formAsyncErrors ? formAsyncErrors.plainPassword : null}
           id="password"
-          component={renderComponent}
-          type="password"
+          name="plainPassword"
           ariaRequired
           autoComplete="new-password"
           label={<FormattedMessage id="registration.password" />}
           labelClassName="font-weight-normal"
-          popover={{
-            id: 'registration-password-tooltip',
-            message: <FormattedMessage id="registration.tooltip.password" />,
-          }}
         />
+
         {addUserTypeField && (
           <Field
             id="user_type"
@@ -303,6 +310,7 @@ export class RegistrationForm extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State) => ({
+  formAsyncErrors: getFormAsyncErrors(form)(state),
   hasQuestions: state.user.registration_form.hasQuestions,
   addCaptchaField: state.default.features.captcha,
   addUserTypeField: state.default.features.user_type,
@@ -317,13 +325,73 @@ const mapStateToProps = (state: State) => ({
   privacyPolicyRequired: state.default.features.privacy_policy,
   responses: formValueSelector(form)(state, 'responses'),
   initialValues: {
+    passwordComplexityScore: 0,
     responses: [],
+    passwordConditions: {
+      length: false,
+      upperLowercase: false,
+      digit: false,
+    },
   },
+  passwordComplexityScore: selector(state, 'passwordComplexityScore'),
+  passwordConditions: selector(state, 'passwordConditions'),
 });
+
+export const validate = (values: FormValues, props: Props) => {
+  const errors = {};
+
+  if (!values.username || values.username.length < 2) {
+    errors.username = 'registration.constraints.username.min';
+  }
+  if (!values.email || !isEmail(values.email)) {
+    errors.email = 'global.constraints.email.invalid';
+  }
+  if (!values.charte) {
+    errors.charte = 'registration.constraints.charte.check';
+  }
+  if (
+    !values.captcha &&
+    props.addCaptchaField &&
+    (window && window.location.host !== 'capco.test')
+  ) {
+    errors.captcha = 'registration.constraints.captcha.invalid';
+  }
+
+  return { ...errors, responses: getCustomFieldsErrors(values, props) };
+};
+
+const asyncValidate = (values: FormValues, dispatch: Dispatch) => {
+  const passwordConditions = checkPasswordConditions(values.plainPassword);
+  dispatch(change(form, 'passwordConditions', passwordConditions));
+
+  const credentialValues = {
+    password: values.plainPassword,
+    email: values.email === undefined ? null : values.email,
+  };
+  return new Promise((resolve, reject) => {
+    fetchQuery(environment, getPasswordComplexityScore, credentialValues).then(res => {
+      dispatch(
+        change(
+          form,
+          'passwordComplexityScore',
+          res.passwordComplexityScore + (passwordConditions.length ? 1 : 0),
+        ),
+      );
+    });
+
+    const error = getMatchingPasswordError('plainPassword', passwordConditions);
+    if (error) {
+      reject(error);
+    }
+    resolve();
+  });
+};
 
 const formContainer = reduxForm({
   form,
   validate,
+  asyncValidate,
+  asyncChangeFields: ['plainPassword'],
   onSubmit,
 })(RegistrationForm);
 
