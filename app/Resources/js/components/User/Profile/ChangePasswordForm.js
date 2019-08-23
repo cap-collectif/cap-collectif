@@ -2,20 +2,14 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, SubmissionError, type FormProps, change } from 'redux-form';
+import { reduxForm, Field, SubmissionError, type FormProps } from 'redux-form';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
-import { fetchQuery } from 'react-relay';
 import styled from 'styled-components';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
 import type { Dispatch } from '../../../types';
-import {
-  checkPasswordConditions,
-  getMatchingPasswordError,
-  getPasswordComplexityScore,
-} from '../UserPasswordComplexityUtils';
-import environment from '../../../createRelayEnvironment';
+import { asyncPasswordValidate } from '../UserPasswordComplexityUtils';
 import UserPasswordField from '../UserPasswordField';
 
 type Props = {|
@@ -28,7 +22,8 @@ type FormValues = {
   email: string,
   new_password: string,
 };
-const formName = 'password-form';
+
+export const formName = 'password-form';
 
 const Container = styled.div`
   .flex-column {
@@ -38,6 +33,10 @@ const Container = styled.div`
 
   .mtn-10 {
     margin-top: -10px;
+  }
+
+  .inline {
+    display: block-inline;
   }
 `;
 
@@ -126,7 +125,7 @@ export class ChangePasswordForm extends Component<Props> {
                 <div className="mb-10 mtn-10">
                   <div className="col-sm-3" />
                   <a href="/resetting/request">
-                    {<FormattedMessage id="global.forgot_password" />}
+                    <FormattedMessage id="global.forgot_password" />
                   </a>
                 </div>
 
@@ -140,7 +139,7 @@ export class ChangePasswordForm extends Component<Props> {
                       formName={formName}
                       id="password-form-new"
                       name="new_password"
-                      divClassName="col-sm-6"
+                      divClassName="col-sm-6 inline"
                     />
                   </div>
                 </div>
@@ -203,30 +202,7 @@ const validate = ({
 };
 
 const asyncValidate = (values: FormValues, dispatch: Dispatch) => {
-  const passwordConditions = checkPasswordConditions(values.new_password);
-  dispatch(change(formName, 'passwordConditions', passwordConditions));
-
-  const credentialValues = {
-    password: values.new_password,
-    email: values.email === undefined ? null : values.email,
-  };
-  return new Promise((resolve, reject) => {
-    fetchQuery(environment, getPasswordComplexityScore, credentialValues).then(res => {
-      dispatch(
-        change(
-          formName,
-          'passwordComplexityScore',
-          res.passwordComplexityScore + (passwordConditions.length ? 1 : 0),
-        ),
-      );
-    });
-
-    const error = getMatchingPasswordError('new_password', passwordConditions);
-    if (error) {
-      reject(error);
-    }
-    resolve();
-  });
+  return asyncPasswordValidate(formName, 'new_password', values, dispatch);
 };
 
 const form = reduxForm({

@@ -3,24 +3,30 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { OverlayTrigger, Popover, ProgressBar } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { graphql } from 'react-relay';
-import { formValueSelector, getFormAsyncErrors } from 'redux-form';
+import { fetchQuery, graphql } from 'react-relay';
+import { change, formValueSelector, getFormAsyncErrors } from 'redux-form';
 import { connect } from 'react-redux';
-import CheckCircle from './CheckCircle';
+import CheckCircle from '../Ui/Icons/CheckCircle';
 import config from '../../config';
+import type { Dispatch } from '../../types';
+import environment from '../../createRelayEnvironment';
+import { formName as REGISTRATION_FORM_NAME } from './Profile/ChangePasswordForm';
 
 type Props = {|
   +name: string,
   +field: Object,
   +formName: string,
   +passwordComplexityScore: number,
-  +passwordConditions: Object,
+  +passwordConditions: { length: boolean, upperLowercase: boolean, digit: boolean },
   +formAsyncErrors: Object,
 |};
 
 type State = {||};
 
 const StyleContainer = styled.div`
+  display: inline-block;
+  width: 100%;
+
   .bg-danger .progress-bar {
     background-color: red;
   }
@@ -51,6 +57,13 @@ const StyleContainer = styled.div`
 
   .img-check-circle {
     margin-right: 5px;
+  }
+
+  .info-centered {
+    margin: auto;
+    width: 50%;
+    padding-left: 2%;
+    padding-right: 2%;
   }
 `;
 
@@ -132,7 +145,7 @@ export const checkPasswordConditions = (password: string) => {
   return passwordConditions;
 };
 
-export const getPasswordComplexityScore = graphql`
+const getPasswordComplexityScore = graphql`
   query UserPasswordComplexityUtils_PasswordComplexityScoreQuery(
     $username: String
     $email: String
@@ -141,6 +154,39 @@ export const getPasswordComplexityScore = graphql`
     passwordComplexityScore(username: $username, password: $password, email: $email)
   }
 `;
+
+export const asyncPasswordValidate = (
+  formName: string,
+  passwordFieldName: string,
+  values: Object,
+  dispatch: Dispatch,
+): Promise<void> => {
+  const passwordConditions = checkPasswordConditions(values[passwordFieldName]);
+  dispatch(change(formName, 'passwordConditions', passwordConditions));
+
+  const credentialValues = {
+    password: values[passwordFieldName],
+    email: values.email === undefined ? null : values.email,
+  };
+
+  return new Promise((resolve, reject) => {
+    fetchQuery(environment, getPasswordComplexityScore, credentialValues).then(res => {
+      dispatch(
+        change(
+          formName,
+          'passwordComplexityScore',
+          res.passwordComplexityScore + (passwordConditions.length ? 1 : 0),
+        ),
+      );
+    });
+
+    const error = getMatchingPasswordError(passwordFieldName, passwordConditions);
+    if (error) {
+      reject(error);
+    }
+    resolve();
+  });
+};
 
 export class UserPasswordComplexityField extends Component<Props> {
   getMatchingPasswordSecurityAttributes(passwordComplexityScore: number) {
@@ -184,56 +230,63 @@ export class UserPasswordComplexityField extends Component<Props> {
   }
 
   renderPasswordInformation(
+    formName: string,
     passwordConditions: Object,
     passwordComplexityScore: number,
     error: ?string,
   ) {
     return (
       <StyleContainer>
-        <FormattedMessage id="your-password-must-have" />
+        <div className={formName === REGISTRATION_FORM_NAME ? 'info-centered' : ''}>
+          <FormattedMessage id="your-password-must-have" />
 
-        <div
-          className={passwordConditions && passwordConditions.length ? 'text-green' : 'text-gray'}>
-          <CheckCircle
-            color={passwordConditions && passwordConditions.length ? 'green' : 'black'}
+          <div
+            className={
+              passwordConditions && passwordConditions.length ? 'text-green' : 'text-gray'
+            }>
+            <CheckCircle
+              color={passwordConditions && passwordConditions.length ? 'green' : '#a7a0a0'}
+            />
+            <FormattedMessage id="at-least-8-characters" />
+          </div>
+
+          <div
+            className={
+              passwordConditions && passwordConditions.upperLowercase ? 'text-green' : 'text-gray'
+            }>
+            <CheckCircle
+              color={passwordConditions && passwordConditions.upperLowercase ? 'green' : '#a7a0a0'}
+            />
+            <FormattedMessage id="lower-and-upper-case-letters" />
+          </div>
+
+          <div
+            className={passwordConditions && passwordConditions.digit ? 'text-green' : 'text-gray'}>
+            <CheckCircle
+              color={passwordConditions && passwordConditions.digit ? 'green' : '#a7a0a0'}
+            />
+            <FormattedMessage id="at-least-1-digit" />
+          </div>
+
+          <div>
+            <FormattedMessage id="password.security" />{' '}
+            <FormattedMessage
+              id={this.getMatchingPasswordSecurityAttributes(passwordComplexityScore).text}
+            />
+          </div>
+          <ProgressBar
+            now={20 * passwordComplexityScore}
+            className={this.getMatchingPasswordSecurityAttributes(passwordComplexityScore).color}
           />
-          <FormattedMessage id="at-least-8-characters" />
-        </div>
 
-        <div
-          className={
-            passwordConditions && passwordConditions.upperLowercase ? 'text-green' : 'text-gray'
-          }>
-          <CheckCircle
-            color={passwordConditions && passwordConditions.upperLowercase ? 'green' : 'black'}
-          />
-          <FormattedMessage id="lower-and-upper-case-letters" />
+          {error ? (
+            <span className="text-red">
+              <FormattedMessage id={error} />
+            </span>
+          ) : (
+            <FormattedMessage id="avoid-passwords" />
+          )}
         </div>
-
-        <div
-          className={passwordConditions && passwordConditions.digit ? 'text-green' : 'text-gray'}>
-          <CheckCircle color={passwordConditions && passwordConditions.digit ? 'green' : 'black'} />
-          <FormattedMessage id="at-least-1-digit" />
-        </div>
-
-        <div>
-          <FormattedMessage id="password.security" />{' '}
-          <FormattedMessage
-            id={this.getMatchingPasswordSecurityAttributes(passwordComplexityScore).text}
-          />
-        </div>
-        <ProgressBar
-          now={20 * passwordComplexityScore}
-          className={this.getMatchingPasswordSecurityAttributes(passwordComplexityScore).color}
-        />
-
-        {error ? (
-          <span className="text-red">
-            <FormattedMessage id={error} />
-          </span>
-        ) : (
-          <FormattedMessage id="avoid-passwords" />
-        )}
       </StyleContainer>
     );
   }
@@ -245,6 +298,7 @@ export class UserPasswordComplexityField extends Component<Props> {
       passwordConditions,
       formAsyncErrors,
       name,
+      formName,
     } = this.props;
 
     if (config.isMobile) {
@@ -253,6 +307,7 @@ export class UserPasswordComplexityField extends Component<Props> {
           {field}
 
           {this.renderPasswordInformation(
+            formName,
             passwordConditions,
             passwordComplexityScore,
             formAsyncErrors ? formAsyncErrors[name] : null,
@@ -266,6 +321,7 @@ export class UserPasswordComplexityField extends Component<Props> {
         overlay={
           <Popover placement="right" className="in" id="pinned-label">
             {this.renderPasswordInformation(
+              formName,
               passwordConditions,
               passwordComplexityScore,
               formAsyncErrors ? formAsyncErrors[name] : null,

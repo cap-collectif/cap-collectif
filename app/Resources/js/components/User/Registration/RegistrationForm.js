@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql, fetchQuery } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { Field, reduxForm, type FormProps, formValueSelector, change } from 'redux-form';
+import { Field, reduxForm, type FormProps, formValueSelector } from 'redux-form';
 import { Button } from 'react-bootstrap';
 import { isEmail } from '../../../services/Validator';
 import type { Dispatch, State } from '../../../types';
@@ -13,12 +13,8 @@ import renderComponent from '../../Form/Field';
 import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
 import { validateResponses } from '../../../utils/responsesHelper';
 import PrivacyModal from '../../StaticPage/PrivacyModal';
-import {
-  getMatchingPasswordError,
-  checkPasswordConditions,
-  getPasswordComplexityScore,
-} from '../UserPasswordComplexityUtils';
 import UserPasswordField from '../UserPasswordField';
+import { asyncPasswordValidate } from '../UserPasswordComplexityUtils';
 
 type Props = {|
   ...FormProps,
@@ -64,7 +60,6 @@ export class RegistrationForm extends React.Component<Props> {
       cguName,
       hasQuestions,
       responses,
-      // eslint-disable-next-line no-shadow
       change,
       intl,
       addZipcodeField,
@@ -321,30 +316,7 @@ export const validate = (values: FormValues, props: Props) => {
 };
 
 const asyncValidate = (values: FormValues, dispatch: Dispatch) => {
-  const passwordConditions = checkPasswordConditions(values.plainPassword);
-  dispatch(change(form, 'passwordConditions', passwordConditions));
-
-  const credentialValues = {
-    password: values.plainPassword,
-    email: values.email === undefined ? null : values.email,
-  };
-  return new Promise((resolve, reject) => {
-    fetchQuery(environment, getPasswordComplexityScore, credentialValues).then(res => {
-      dispatch(
-        change(
-          form,
-          'passwordComplexityScore',
-          res.passwordComplexityScore + (passwordConditions.length ? 1 : 0),
-        ),
-      );
-    });
-
-    const error = getMatchingPasswordError('plainPassword', passwordConditions);
-    if (error) {
-      reject(error);
-    }
-    resolve();
-  });
+  return asyncPasswordValidate(form, 'plainPassword', values, dispatch);
 };
 
 const formContainer = reduxForm({

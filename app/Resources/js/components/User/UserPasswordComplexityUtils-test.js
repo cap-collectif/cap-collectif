@@ -57,6 +57,10 @@ describe('<UserPasswordComplexityField />', () => {
     expect(checkPasswordConditions('passWord91')).toMatchSnapshot();
   });
 
+  it('gets bad passwordConditions with checkPasswordConditions', () => {
+    expect(checkPasswordConditions('password')).toMatchSnapshot();
+  });
+
   it('gets all errors with getMatchingPasswordError', () => {
     expect(
       getMatchingPasswordError('password-field', {
