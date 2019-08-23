@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Reply /> should render correctly with profile enabled but without step 1`] = `
+exports[`<Reply /> should render correctly with step 1`] = `
 <ListGroupItem
   bsClass="list-group-item"
   className="list-group-item__opinion opinion mb-20 mt-20"
@@ -43,13 +43,15 @@ exports[`<Reply /> should render correctly with profile enabled but without step
         <p
           className="h5"
         >
-          <span>
-            <a
-              href="https://capco/dev/profile/author1"
-            >
-              author1
-            </a>
-          </span>
+          <ForwardRef(Relay(Connect(UserLink)))
+            user={
+              Object {
+                "$fragmentRefs": null,
+                "url": "https://capco/dev/profile/author1",
+                "username": "author1",
+              }
+            }
+          />
           <span
             className="ml-5 mr-5"
           >
@@ -59,9 +61,11 @@ exports[`<Reply /> should render correctly with profile enabled but without step
             />
           </span>
           <span>
-            <span>
+            <a
+              href="/project/projet-avec-questionnaire/questionnaire/questionnaire-des-jo-2024"
+            >
               Titre du questionnaire
-            </span>
+            </a>
           </span>
         </p>
         <span
@@ -82,7 +86,7 @@ exports[`<Reply /> should render correctly with profile enabled but without step
 </ListGroupItem>
 `;
 
-exports[`<Reply /> should render correctly with profile not enabled but step 1`] = `
+exports[`<Reply /> should render correctly without step 1`] = `
 <ListGroupItem
   bsClass="list-group-item"
   className="list-group-item__opinion opinion mb-20 mt-20"
@@ -125,11 +129,15 @@ exports[`<Reply /> should render correctly with profile not enabled but step 1`]
         <p
           className="h5"
         >
-          <span>
-            <span>
-              author1
-            </span>
-          </span>
+          <ForwardRef(Relay(Connect(UserLink)))
+            user={
+              Object {
+                "$fragmentRefs": null,
+                "url": "https://capco/dev/profile/author1",
+                "username": "author1",
+              }
+            }
+          />
           <span
             className="ml-5 mr-5"
           >
@@ -139,11 +147,9 @@ exports[`<Reply /> should render correctly with profile not enabled but step 1`]
             />
           </span>
           <span>
-            <a
-              href="/project/projet-avec-questionnaire/questionnaire/questionnaire-des-jo-2024"
-            >
+            <span>
               Titre du questionnaire
-            </a>
+            </span>
           </span>
         </p>
         <span

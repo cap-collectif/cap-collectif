@@ -36,8 +36,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
         <div
           className="opinion__user"
         >
-          <UserLink
-            className=""
+          <ForwardRef(Relay(Connect(UserLink)))
             user={
               Object {
                 "displayName": "lbrunet",
@@ -219,8 +218,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
         <div
           className="opinion__user"
         >
-          <UserLink
-            className=""
+          <ForwardRef(Relay(Connect(UserLink)))
             user={
               Object {
                 "displayName": "lbrunet",

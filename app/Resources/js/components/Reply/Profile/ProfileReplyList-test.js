@@ -17,12 +17,7 @@ describe('<ProfileReplyList />', () => {
     ],
   };
 
-  it('should render correctly with profile enabled', () => {
-    const wrapper = shallow(<ProfileReplyList replies={replies} isProfileEnabled />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly with profile not enabled', () => {
+  it('should render correctly', () => {
     const wrapper = shallow(<ProfileReplyList replies={replies} />);
     expect(wrapper).toMatchSnapshot();
   });

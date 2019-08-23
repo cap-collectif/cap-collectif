@@ -33,8 +33,7 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
           }
         }
       >
-        <UserLink
-          className=""
+        <ForwardRef(Relay(Connect(UserLink)))
           user={
             Object {
               "displayName": "bg",
