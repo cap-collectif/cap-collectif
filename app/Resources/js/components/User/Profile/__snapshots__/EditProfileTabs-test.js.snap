@@ -42,7 +42,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               />
             </Left>
             <Body>
-              <ForwardRef(Relay(Connect(UserLink)))
+              <UserLink
                 className="excerpt"
                 user={
                   Object {
@@ -342,7 +342,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               />
             </Left>
             <Body>
-              <ForwardRef(Relay(Connect(UserLink)))
+              <UserLink
                 className="excerpt"
                 user={
                   Object {
@@ -589,7 +589,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               />
             </Left>
             <Body>
-              <ForwardRef(Relay(Connect(UserLink)))
+              <UserLink
                 className="excerpt"
                 user={
                   Object {
