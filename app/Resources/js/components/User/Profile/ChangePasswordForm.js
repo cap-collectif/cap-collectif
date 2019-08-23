@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError, type FormProps, change } from 'redux-form';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import { fetchQuery } from 'react-relay';
+import styled from 'styled-components';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
@@ -28,6 +29,17 @@ type FormValues = {
   new_password: string,
 };
 const formName = 'password-form';
+
+const Container = styled.div`
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mtn-10 {
+    margin-top: -10px;
+  }
+`;
 
 const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
   const input = {
@@ -94,79 +106,75 @@ export class ChangePasswordForm extends Component<Props> {
             <h2 className="page-header">
               <FormattedMessage id="form.new_password" />
             </h2>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}>
-              <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-                <label className="col-sm-3 control-label" htmlFor="password-form-current">
-                  <FormattedMessage id="form.current_password" />
-                </label>
-                <div>
-                  <Field
-                    type="password"
-                    component={component}
-                    name="current_password"
-                    id="password-form-current"
-                    divClassName="col-sm-6"
-                  />
+            <Container>
+              <div className="flex-column">
+                <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+                  <label className="col-sm-3 control-label" htmlFor="password-form-current">
+                    <FormattedMessage id="form.current_password" />
+                  </label>
+                  <div>
+                    <Field
+                      type="password"
+                      component={component}
+                      name="current_password"
+                      id="password-form-current"
+                      divClassName="col-sm-6"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div
-                style={{
-                  marginTop: -10,
-                  marginBottom: 10,
-                }}>
-                <div className="col-sm-3" />
-                <a href="/resetting/request">{<FormattedMessage id="global.forgot_password" />}</a>
-              </div>
+                <div className="mb-10 mtn-10">
+                  <div className="col-sm-3" />
+                  <a href="/resetting/request">
+                    {<FormattedMessage id="global.forgot_password" />}
+                  </a>
+                </div>
 
-              <div className="clearfix" />
-              <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-                <label className="col-sm-3 control-label" htmlFor="password-form-new">
-                  <FormattedMessage id="new-password" />
-                </label>
-                <div>
-                  <UserPasswordField
-                    formName={formName}
-                    id="password-form-new"
-                    name="new_password"
-                    divClassName="col-sm-6"
-                  />
+                <div className="clearfix" />
+                <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+                  <label className="col-sm-3 control-label" htmlFor="password-form-new">
+                    <FormattedMessage id="new-password" />
+                  </label>
+                  <div>
+                    <UserPasswordField
+                      formName={formName}
+                      id="password-form-new"
+                      name="new_password"
+                      divClassName="col-sm-6"
+                    />
+                  </div>
+                </div>
+                <div className="clearfix" />
+                <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+                  <label className="col-sm-3 control-label" htmlFor="password-form-confirmation">
+                    <FormattedMessage id="confirm-password" />
+                  </label>
+                  <div>
+                    <Field
+                      type="password"
+                      component={component}
+                      name="new_password_confirmation"
+                      id="password-form-confirmation"
+                      divClassName="col-sm-6"
+                    />
+                  </div>
+                </div>
+                <div className="clearfix" />
+                <div className="horizontal_field_with_border_top">
+                  <div className="col-sm-3" />
+                  <ButtonToolbar className="col-sm-6 pl-0">
+                    <AlertForm
+                      valid={valid}
+                      invalid={invalid}
+                      errorMessage={error}
+                      submitSucceeded={submitSucceeded}
+                      submitFailed={submitFailed}
+                      submitting={submitting}
+                    />
+                  </ButtonToolbar>
                 </div>
               </div>
-              <div className="clearfix" />
-              <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-                <label className="col-sm-3 control-label" htmlFor="password-form-confirmation">
-                  <FormattedMessage id="confirm-password" />
-                </label>
-                <div>
-                  <Field
-                    type="password"
-                    component={component}
-                    name="new_password_confirmation"
-                    id="password-form-confirmation"
-                    divClassName="col-sm-6"
-                  />
-                </div>
-              </div>
-              <div className="clearfix" />
-              <div className="horizontal_field_with_border_top">
-                <div className="col-sm-3" />
-                <ButtonToolbar className="col-sm-6 pl-0">
-                  <AlertForm
-                    valid={valid}
-                    invalid={invalid}
-                    errorMessage={error}
-                    submitSucceeded={submitSucceeded}
-                    submitFailed={submitFailed}
-                    submitting={submitting}
-                  />
-                </ButtonToolbar>
-              </div>
-            </div>
+            </Container>
           </Panel.Body>
           <Panel.Footer>{footer}</Panel.Footer>
         </Panel>

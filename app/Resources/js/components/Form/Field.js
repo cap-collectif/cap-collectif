@@ -22,7 +22,7 @@ type Props = {
   formName?: string,
   autoComplete?: string,
   disableValidation?: boolean,
-  hideValidationMessage?: boolean,
+  hideValidationMessage: boolean,
   type:
     | 'address'
     | 'text'

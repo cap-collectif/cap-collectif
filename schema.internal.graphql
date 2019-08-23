@@ -5276,7 +5276,7 @@ type Query {
     username: String
 
     """The email of the user"""
-    email: String!
+    email: String
 
     """The password of the user"""
     password: String!

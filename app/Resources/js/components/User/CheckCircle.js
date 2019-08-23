@@ -1,17 +1,17 @@
 // @flow
 import * as React from 'react';
 
-type Props = {
-  className: string,
-  size: number,
-  color: string,
-};
+type Props = {|
+  +className: string,
+  +size: number,
+  +color: string,
+|};
 
 export default class CheckCircle extends React.Component<Props> {
   static defaultProps = {
     className: 'img-check-circle',
     size: 15,
-    color: 'white',
+    color: '#ffffff',
   };
 
   render() {
