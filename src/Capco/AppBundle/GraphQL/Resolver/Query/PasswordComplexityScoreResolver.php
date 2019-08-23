@@ -19,10 +19,10 @@ class PasswordComplexityScoreResolver implements ResolverInterface
     {
         $password = $args->offsetGet('password');
         $userData = [];
-        if (!empty($args->offsetGet('email'))) {
+        if ($args->offsetGet('email')) {
             $userData[] = $args->offsetGet('email');
         }
-        if (!empty($args->offsetGet('username'))) {
+        if ($args->offsetGet('username')) {
             $userData[] = $args->offsetGet('username');
         }
         $strength = $this->zxcvbn->passwordStrength($password, $userData);
