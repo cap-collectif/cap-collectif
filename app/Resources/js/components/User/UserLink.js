@@ -21,7 +21,6 @@ export class UserLink extends React.Component<Props, State> {
   };
 
   render() {
-    console.log(this.props);
     const { legacyUser, className, toggled, user } = this.props;
 
     if (legacyUser) {
