@@ -306,12 +306,9 @@ mappings:
       comment:
         type: object
         properties:
-          id: {type: keyword}
-          proposal:
-            type: object
-            properties:
-              id: { type: keyword }
-              visible: { type: boolean }
+          id: { type: keyword }
+          published: { type: boolean }
+          trashedStatus: { type: keyword }
       proposal:
         type: object
         properties:

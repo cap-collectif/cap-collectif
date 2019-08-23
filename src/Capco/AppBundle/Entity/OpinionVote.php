@@ -114,4 +114,12 @@ class OpinionVote extends AbstractVote
             $this->opinion->removeVote($this);
         }
     }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return array_merge(parent::getElasticsearchSerializationGroups(), [
+            'ElasticsearchNestedProject',
+            'ElasticsearchNestedProposal'
+        ]);
+    }
 }

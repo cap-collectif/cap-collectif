@@ -70,7 +70,7 @@ class ArgumentVote extends AbstractVote
     public static function getElasticsearchSerializationGroups(): array
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedArgument'
+            'ElasticsearchNestedProject'
         ]);
     }
 }

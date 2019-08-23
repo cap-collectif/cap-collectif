@@ -36,10 +36,15 @@ class UserVotesResolver implements ResolverInterface
         $validViewer = $viewer instanceof UserInterface;
 
         if ($aclDisabled) {
-            // TODO: Implements getVotesByUser
             $totalCount = 0;
-            $paginator = new Paginator(static function () {
-                return [];
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $user,
+                &$totalCount
+            ) {
+                $queryResponse = $this->voteSearch->getVotesByUser($user, $limit, $offset);
+                $totalCount = $queryResponse['totalCount'];
+
+                return $queryResponse['results'];
             });
         } elseif ($validViewer && $viewer) {
             $totalCount = 0;

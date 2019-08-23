@@ -336,6 +336,16 @@ abstract class Comment implements
         return null;
     }
 
+    public function getProposal(): ?Proposal
+    {
+        $relatedObject = $this->getRelatedObject();
+        if ($relatedObject instanceof Proposal) {
+            return $relatedObject;
+        }
+
+        return null;
+    }
+
     // ********************** Abstract methods **********************************
 
     abstract public function getRelatedObject();
@@ -369,6 +379,6 @@ abstract class Comment implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['ElasticsearchComment', 'ElasticsearchNestedAuthor'];
+        return ['ElasticsearchComment', 'ElasticsearchNestedAuthor', 'ElasticsearchNestedComment'];
     }
 }

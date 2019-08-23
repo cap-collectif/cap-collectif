@@ -43,6 +43,22 @@ class VoteSearch extends Search
         ];
     }
 
+    public function getVotesByUser(User $user, int $limit = 100, int $offset = 0): array
+    {
+        $query = $this->createVotesByUserQuery($user);
+        $query->setSize($limit);
+        $query->setFrom($offset);
+        $response = $this->index->getType($this->type)->search($query);
+
+        return [
+            'results' => $this->getHydratedResultsFromResultSet(
+                $this->abstractVoteRepository,
+                $response
+            ),
+            'totalCount' => $response->getTotalHits()
+        ];
+    }
+
     public function getPublicVotesByAuthor(User $author, int $limit = 100, int $offset = 0): array
     {
         $query = $this->createPublicVotesByAuthorQuery($author);
@@ -62,16 +78,27 @@ class VoteSearch extends Search
     private function createVotesByAuthorViewerCanSeeQuery(User $author, User $viewer): Query
     {
         $boolQuery = new BoolQuery();
-        $subConditions = [];
         $conditions = [
             new Term(['user.id' => ['value' => $author->getId()]]),
             new Term(['published' => ['value' => true]])
         ];
 
-        if (!$viewer->isSuperAdmin()) {
-        }
-
-        if (!$viewer->isAdmin()) {
+        if ($viewer !== $author && !$viewer->isSuperAdmin()) {
+            $adminSubConditions = [];
+            $superAdminSubConditions = $this->getFiltersForProjectViewerCanSee('project', $viewer);
+            if (!$viewer->isAdmin()) {
+                $adminSubConditions = [new Term(['proposal.visible' => ['value' => true]])];
+            }
+            $conditions[] = (new BoolQuery())->addShould([
+                (new BoolQuery())->addMustNot([new Exists('proposal')]),
+                (new BoolQuery())->addMustNot([new Exists('project')]),
+                (new BoolQuery())->addMust(
+                    array_merge(
+                        [(new BoolQuery())->addShould($superAdminSubConditions)],
+                        $adminSubConditions
+                    )
+                )
+            ]);
         }
 
         $boolQuery->addMust($conditions);
@@ -88,8 +115,6 @@ class VoteSearch extends Search
             (new BoolQuery())->addShould([
                 (new BoolQuery())->addMustNot([new Exists('project'), new Exists('proposal')]),
                 (new BoolQuery())->addMust([
-                    new Exists('project'),
-                    new Exists('proposal'),
                     new Term([
                         'project.visibility' => [
                             'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
@@ -100,6 +125,19 @@ class VoteSearch extends Search
             ]),
             new Term(['published' => ['value' => true]]),
             new Term(['user.id' => ['value' => $author->getId()]])
+        ]);
+        $query = new Query($boolQuery);
+        $query->addSort(['createdAt' => ['order' => 'DESC']]);
+
+        return $query;
+    }
+
+    private function createVotesByUserQuery(User $user): Query
+    {
+        $boolQuery = new BoolQuery();
+        $boolQuery->addMust([
+            new Term(['published' => ['value' => true]]),
+            new Term(['user.id' => ['value' => $user->getId()]])
         ]);
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC']]);

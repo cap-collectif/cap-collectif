@@ -30,6 +30,7 @@
     {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) %}
     {% set projectsCount = userProjectsResolver.__invoke(user).totalCount %}
     {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
+    {% set votesCount = userVotesResolver.__invoke(app.user, user).totalCount %}
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
 
     {% if projectsCount > 0 %}
@@ -107,7 +108,7 @@
         </section>
     {% endif %}
 
-    {% if 1 > 0 %}
+    {% if votesCount > 0 %}
         <section class="section--custom">
             <div class="container">
                 <h2>{{ 'user.profile.show.votes' | trans({}, 'CapcoAppBundle') }}</h2>

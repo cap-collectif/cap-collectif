@@ -37,7 +37,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
-        if (\in_array('ElasticsearchNestedProposal', $groups, true)) {
+        if (\in_array('ElasticsearchNestedProposal', $groups)) {
             return $data;
         }
 

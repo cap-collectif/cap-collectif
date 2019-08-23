@@ -133,6 +133,11 @@ abstract class AbstractVote implements
         return null;
     }
 
+    public function isPrivate(): bool
+    {
+        return false;
+    }
+
     public static function getElasticsearchPriority(): int
     {
         return 50;

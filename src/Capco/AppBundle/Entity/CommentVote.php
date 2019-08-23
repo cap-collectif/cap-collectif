@@ -49,6 +49,16 @@ class CommentVote extends AbstractVote
         return 'commentVote';
     }
 
+    public function getProject(): ?Project
+    {
+        return $this->getProposal() ? $this->getProposal()->getProject() : null;
+    }
+
+    public function getProposal(): ?Proposal
+    {
+        return $this->getComment()->getProposal();
+    }
+
     // *************************** Lifecycle **********************************
 
     /**
@@ -66,8 +76,9 @@ class CommentVote extends AbstractVote
     public static function getElasticsearchSerializationGroups(): array
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchNestedComment',
-            'ElasticsearchNestedProposal'
+            'ElasticsearchNestedProposal',
+            'ElasticsearchNestedProject',
+            'ElasticsearchNestedComment'
         ]);
     }
 }
