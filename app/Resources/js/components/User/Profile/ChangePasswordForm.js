@@ -11,6 +11,7 @@ import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePassw
 import type { Dispatch } from '../../../types';
 import { asyncPasswordValidate } from '../UserPasswordComplexityUtils';
 import UserPasswordField from '../UserPasswordField';
+import config from '../../../config';
 
 type Props = {|
   ...FormProps,
@@ -37,6 +38,10 @@ const Container = styled.div`
 
   .inline {
     display: block-inline;
+  }
+
+  .full-width {
+    width: 100%;
   }
 `;
 
@@ -139,7 +144,7 @@ export class ChangePasswordForm extends Component<Props> {
                       formName={formName}
                       id="password-form-new"
                       name="new_password"
-                      divClassName="col-sm-6 inline"
+                      divClassName={`col-sm-6 inline ${config.isMobile ? 'full-width' : ''}`}
                     />
                   </div>
                 </div>

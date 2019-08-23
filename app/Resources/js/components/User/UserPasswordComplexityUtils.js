@@ -8,9 +8,9 @@ import { change, formValueSelector, getFormAsyncErrors } from 'redux-form';
 import { connect } from 'react-redux';
 import CheckCircle from '../Ui/Icons/CheckCircle';
 import config from '../../config';
-import type { Dispatch } from '../../types';
+import type { Dispatch, State } from '../../types';
 import environment from '../../createRelayEnvironment';
-import { formName as REGISTRATION_FORM_NAME } from './Profile/ChangePasswordForm';
+import { formName as CHANGE_PASSWORD_FORM_NAME } from './Profile/ChangePasswordForm';
 
 type Props = {|
   +name: string,
@@ -20,8 +20,6 @@ type Props = {|
   +passwordConditions: { length: boolean, upperLowercase: boolean, digit: boolean },
   +formAsyncErrors: Object,
 |};
-
-type State = {||};
 
 const StyleContainer = styled.div`
   display: inline-block;
@@ -61,7 +59,6 @@ const StyleContainer = styled.div`
 
   .info-centered {
     margin: auto;
-    width: 50%;
     padding-left: 2%;
     padding-right: 2%;
   }
@@ -237,13 +234,16 @@ export class UserPasswordComplexityField extends Component<Props> {
   ) {
     return (
       <StyleContainer>
-        <div className={formName === REGISTRATION_FORM_NAME ? 'info-centered' : ''}>
+        <div
+          className={`${config.isMobile ? 'mb-20' : ''} ${
+            config.isMobile && formName === CHANGE_PASSWORD_FORM_NAME ? 'info-centered' : ''
+          }`}>
           <FormattedMessage id="your-password-must-have" />
 
           <div
-            className={
+            className={`mb-5 mt-5 ${
               passwordConditions && passwordConditions.length ? 'text-green' : 'text-gray'
-            }>
+            }`}>
             <CheckCircle
               color={passwordConditions && passwordConditions.length ? 'green' : '#a7a0a0'}
             />
@@ -251,9 +251,9 @@ export class UserPasswordComplexityField extends Component<Props> {
           </div>
 
           <div
-            className={
+            className={`mb-5 mt-5 ${
               passwordConditions && passwordConditions.upperLowercase ? 'text-green' : 'text-gray'
-            }>
+            }`}>
             <CheckCircle
               color={passwordConditions && passwordConditions.upperLowercase ? 'green' : '#a7a0a0'}
             />
@@ -261,7 +261,9 @@ export class UserPasswordComplexityField extends Component<Props> {
           </div>
 
           <div
-            className={passwordConditions && passwordConditions.digit ? 'text-green' : 'text-gray'}>
+            className={`mb-5 mt-5 ${
+              passwordConditions && passwordConditions.digit ? 'text-green' : 'text-gray'
+            }`}>
             <CheckCircle
               color={passwordConditions && passwordConditions.digit ? 'green' : '#a7a0a0'}
             />
@@ -303,7 +305,7 @@ export class UserPasswordComplexityField extends Component<Props> {
 
     if (config.isMobile) {
       return (
-        <div>
+        <>
           {field}
 
           {this.renderPasswordInformation(
@@ -312,7 +314,7 @@ export class UserPasswordComplexityField extends Component<Props> {
             passwordComplexityScore,
             formAsyncErrors ? formAsyncErrors[name] : null,
           )}
-        </div>
+        </>
       );
     }
     return (
