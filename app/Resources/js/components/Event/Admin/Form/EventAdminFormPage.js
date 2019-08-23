@@ -67,27 +67,27 @@ type State = { showDeleteModal: boolean };
 
 const validate = (values: FormValues) => {
   const errors = {};
-
   const fields = ['title', 'startAt', 'endAt', 'author', 'body'];
   fields.forEach(value => {
     if (value === 'endAt' && values.endAt) {
       if (!values.startAt && values.endAt !== null) {
         errors.startAt = 'fill-field';
-        return;
       }
-      if (
-        values.startAt &&
-        values.startAt.length > 0 &&
-        (values.endAt !== null && values.endAt.length > 0)
-      ) {
+      if (values.startAt && values.endAt !== null) {
         // $FlowFixMe
         if (Date.parse(values.startAt) > Date.parse(values.endAt)) {
-          errors.endAt = 'date.end_before_start';
-          return;
+          errors.endAt = {
+            id: 'event-before-date-error',
+            values: { before: '<i class="cap cap-attention pr-5" />' },
+          };
         }
       }
     }
-    if (values[value] && values[value].length === 0) {
+    if (value === 'body' && values[value] && values[value] === '<p><br></p>') {
+      errors[value] = 'fill-field';
+    }
+
+    if (value !== 'endAt' && (!values[value] || values[value].length === 0)) {
       errors[value] = 'fill-field';
     }
   });

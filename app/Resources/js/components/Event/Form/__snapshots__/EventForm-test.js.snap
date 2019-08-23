@@ -29,7 +29,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
             values={Object {}}
           />
           <div
-            className="excerpt"
+            className="excerpt inline"
           >
             <FormattedMessage
               id="global.mandatory"
@@ -58,7 +58,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
             values={Object {}}
           />
           <div
-            className="excerpt"
+            className="excerpt inline"
           >
             <FormattedMessage
               id="global.mandatory"
@@ -97,7 +97,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
             values={Object {}}
           />
           <div
-            className="excerpt"
+            className="excerpt inline"
           >
             <FormattedMessage
               id="global.mandatory"
@@ -133,7 +133,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
               values={Object {}}
             />
             <span
-              className="excerpt"
+              className="excerpt inline"
             >
               <FormattedMessage
                 id="global.mandatory"
@@ -152,6 +152,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
             className="cap-calendar-2"
           />
         }
+        className="adminDate"
         component={[Function]}
         dateTimeInputProps={
           Object {
@@ -282,7 +283,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           type="checkbox"
         >
           <FormattedMessage
-            id="authorize-registration"
+            id="admin.fields.event.registration_enable"
             values={Object {}}
           />
         </Field>
@@ -392,7 +393,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
             values={Object {}}
           />
           <div
-            className="excerpt"
+            className="excerpt inline"
           >
             <FormattedMessage
               id="global.mandatory"
@@ -421,7 +422,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
             values={Object {}}
           />
           <div
-            className="excerpt"
+            className="excerpt inline"
           >
             <FormattedMessage
               id="global.mandatory"
@@ -460,7 +461,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
             values={Object {}}
           />
           <div
-            className="excerpt"
+            className="excerpt inline"
           >
             <FormattedMessage
               id="global.mandatory"
@@ -496,7 +497,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
               values={Object {}}
             />
             <span
-              className="excerpt"
+              className="excerpt inline"
             >
               <FormattedMessage
                 id="global.mandatory"
@@ -515,6 +516,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
             className="cap-calendar-2"
           />
         }
+        className="adminDate"
         component={[Function]}
         dateTimeInputProps={
           Object {
@@ -645,7 +647,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
           type="checkbox"
         >
           <FormattedMessage
-            id="authorize-registration"
+            id="admin.fields.event.registration_enable"
             values={Object {}}
           />
         </Field>
@@ -755,7 +757,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
             values={Object {}}
           />
           <div
-            className="excerpt"
+            className="excerpt inline"
           >
             <FormattedMessage
               id="global.mandatory"
@@ -784,7 +786,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
             values={Object {}}
           />
           <div
-            className="excerpt"
+            className="excerpt inline"
           >
             <FormattedMessage
               id="global.mandatory"
@@ -823,7 +825,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
             values={Object {}}
           />
           <div
-            className="excerpt"
+            className="excerpt inline"
           >
             <FormattedMessage
               id="global.mandatory"
@@ -859,7 +861,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
               values={Object {}}
             />
             <span
-              className="excerpt"
+              className="excerpt inline"
             >
               <FormattedMessage
                 id="global.mandatory"
@@ -878,6 +880,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
             className="cap-calendar-2"
           />
         }
+        className="adminDate"
         component={[Function]}
         dateTimeInputProps={
           Object {
@@ -993,7 +996,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           type="checkbox"
         >
           <FormattedMessage
-            id="authorize-registration"
+            id="admin.fields.event.registration_enable"
             values={Object {}}
           />
         </Field>

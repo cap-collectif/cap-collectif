@@ -552,6 +552,10 @@ Hack form button - radio check
             > div{
                 margin-right: 2%; 
             }
+
+            .form-fields.input-group {
+                max-width: 238px;
+            }
         }
     }
 }

@@ -14,8 +14,6 @@ const defaultProps = {
   ...formMock,
   features,
   dispatch: jest.fn(),
-  onSubmit: jest.fn(),
-  validate: jest.fn(),
   autoload: true,
   multi: true,
   initialValues: {},

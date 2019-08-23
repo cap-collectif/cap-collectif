@@ -24,8 +24,6 @@ type Props = {|
   initialValues?: ?{},
   autoload: boolean,
   multi: boolean,
-  onSubmit: (e: Event) => void,
-  validate: (e: Event) => void,
 |};
 
 export const formName = 'EventForm';
@@ -47,7 +45,7 @@ export class EventForm extends React.Component<Props> {
             label={
               <div>
                 <FormattedMessage id="admin.fields.group.title" />
-                <div className="excerpt">
+                <div className="excerpt inline">
                   <FormattedMessage id="global.mandatory" />
                 </div>
               </div>
@@ -62,7 +60,7 @@ export class EventForm extends React.Component<Props> {
               label={
                 <div>
                   <FormattedMessage id="admin.fields.argument_vote.voter" />
-                  <div className="excerpt">
+                  <div className="excerpt inline">
                     <FormattedMessage id="global.mandatory" />
                   </div>
                 </div>
@@ -123,7 +121,7 @@ export class EventForm extends React.Component<Props> {
             label={
               <div>
                 <FormattedMessage id="admin.fields.proposal_form.description" />
-                <div className="excerpt">
+                <div className="excerpt inline">
                   <FormattedMessage id="global.mandatory" />
                 </div>
               </div>
@@ -141,7 +139,7 @@ export class EventForm extends React.Component<Props> {
               label={
                 <div>
                   <FormattedMessage id="start-date" />
-                  <span className="excerpt">
+                  <span className="excerpt inline">
                     <FormattedMessage id="global.mandatory" />
                   </span>
                 </div>
@@ -153,6 +151,7 @@ export class EventForm extends React.Component<Props> {
               dateTimeInputProps={{ id: 'event_input_endAt' }}
               component={component}
               type="datetime"
+              className="adminDate"
               name="endAt"
               formName={formName}
               label={<FormattedMessage id="ending-date" />}
@@ -205,7 +204,7 @@ export class EventForm extends React.Component<Props> {
                 id="event_registrable"
                 type="checkbox"
                 component={component}
-                children={<FormattedMessage id="authorize-registration" />}
+                children={<FormattedMessage id="admin.fields.event.registration_enable" />}
               />
             </div>
             <div className="clearfix">
