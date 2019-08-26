@@ -4,10 +4,12 @@ class LocalStorageService {
     this.defaultCacheTime = 3600000;
   }
 
-  isValid(key, cacheTime) {
+  isValid(key: string, cacheTime: any) {
     if (typeof localStorage === 'undefined') {
       return false;
     }
+
+    // $FlowFixMe
     const cache = JSON.parse(localStorage.getItem(key));
     if (!cache) {
       return false;
@@ -16,15 +18,17 @@ class LocalStorageService {
     return new Date().getTime() - cache.timestamp < time;
   }
 
-  get(key) {
+  get(key: string) {
     if (typeof localStorage === 'undefined') {
       return null;
     }
+
+    // $FlowFixMe
     const parsedJson = JSON.parse(localStorage.getItem(key));
     return parsedJson ? parsedJson.data : null;
   }
 
-  set(key, data) {
+  set(key: string, data: any) {
     if (typeof localStorage === 'undefined') {
       return;
     }
@@ -35,7 +39,7 @@ class LocalStorageService {
     localStorage.setItem(key, JSON.stringify(cache));
   }
 
-  remove(key) {
+  remove(key: string) {
     if (typeof localStorage === 'undefined') {
       return;
     }

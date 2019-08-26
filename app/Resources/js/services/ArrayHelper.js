@@ -1,6 +1,11 @@
 // @flow
 class ArrayHelper {
-  getElementIndexFromArray(els, el, uniqueField = 'id', secondUniqueField = null) {
+  getElementIndexFromArray(
+    els: any,
+    el: any,
+    uniqueField: string = 'id',
+    secondUniqueField: ?string = null,
+  ) {
     let index = -1;
     const valueToCheck = secondUniqueField ? el[uniqueField][secondUniqueField] : el[uniqueField];
     index = els
@@ -9,7 +14,12 @@ class ArrayHelper {
     return index;
   }
 
-  getElementFromArray(els, value, uniqueField = 'id', secondUniqueField = null) {
+  getElementFromArray(
+    els: any,
+    value: any,
+    uniqueField: string = 'id',
+    secondUniqueField: ?string = null,
+  ) {
     let index = -1;
     index = els
       .map(e => (secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField]))
@@ -17,7 +27,12 @@ class ArrayHelper {
     return els[index];
   }
 
-  addElementToArray(els, el, uniqueField = 'id', secondUniqueField = null) {
+  addElementToArray(
+    els: any,
+    el: any,
+    uniqueField: string = 'id',
+    secondUniqueField: ?string = null,
+  ) {
     const index = this.getElementIndexFromArray(els, el, uniqueField, secondUniqueField);
     if (index === -1) {
       els.push(el);
@@ -25,7 +40,12 @@ class ArrayHelper {
     return els;
   }
 
-  removeElementFromArray(els, el, uniqueField = 'id', secondUniqueField = null) {
+  removeElementFromArray(
+    els: any,
+    el: any,
+    uniqueField: string = 'id',
+    secondUniqueField: ?string = null,
+  ) {
     const index = this.getElementIndexFromArray(els, el, uniqueField, secondUniqueField);
     if (index > -1) {
       els.splice(index, 1);
@@ -33,7 +53,12 @@ class ArrayHelper {
     return els;
   }
 
-  sortArrayByField(els, sortField = 'title', naturalSorting = false, sortOrder = 'ASC') {
+  sortArrayByField(
+    els: any,
+    sortField: string = 'title',
+    naturalSorting: boolean = false,
+    sortOrder: string = 'ASC',
+  ) {
     let field = sortField;
     let order = sortOrder;
     let nsort = naturalSorting;
