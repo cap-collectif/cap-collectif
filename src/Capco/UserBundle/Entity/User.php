@@ -1200,7 +1200,7 @@ class User extends BaseUser implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch', 'ElasticsearchNestedAuthor'];
+        return ['Elasticsearch'];
     }
 
     public function addArchive(UserArchive $archive): self

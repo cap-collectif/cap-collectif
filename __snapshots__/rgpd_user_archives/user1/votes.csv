@@ -1,8 +1,8 @@
 ﻿kind,related_kind,related_url,createdAt,private
-proposalVote,proposal,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale,"2017-02-01 00:00:55",0
-proposalVote,proposal,https://capco.dev/projects/appel-a-projets/collect/collecte-des-propositions-avec-vote-simple/proposals/mon-super-projet,"2017-02-01 00:01:00",0
-vote,argument,https://capco.dev/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-2#arg-argument1,"2015-01-01 00:00:00",
 sourceVote,source,https://capco.dev/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3#source-source1,"2017-02-21 01:00:00",
+proposalVote,proposal,https://capco.dev/projects/appel-a-projets/collect/collecte-des-propositions-avec-vote-simple/proposals/mon-super-projet,"2017-02-01 00:01:00",0
+proposalVote,proposal,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale,"2017-02-01 00:00:55",0
+vote,argument,https://capco.dev/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-2#arg-argument1,"2015-01-01 00:00:00",
 vote,version,https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2,"2015-01-01 00:00:00",
 commentVote,eventComment,https://capco.dev/events/phptourdufuture#comment_eventComment1,"2015-01-01 00:00:00",
 commentVote,proposalComment,https://capco.dev/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale#comment_proposalComment1,"2015-01-01 00:00:00",
