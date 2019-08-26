@@ -1,12 +1,13 @@
 /* eslint-env jest */
-/* @Flow */
+/* @flow */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ChangePasswordForm } from './ChangePasswordForm';
-import { intlMock } from '../../../mocks';
+import { intlMock, formMock } from '../../../mocks';
 
 describe('<ChangePasswordForm />', () => {
   const props = {
+    ...formMock,
     intl: intlMock,
   };
 
