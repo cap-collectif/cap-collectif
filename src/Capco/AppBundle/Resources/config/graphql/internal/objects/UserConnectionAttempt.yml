@@ -1,0 +1,22 @@
+UserConnectionAttempt:
+  type: object
+  inherits:
+    - Node
+  config:
+    description: 'A user connection attempt'
+    interfaces:
+      - Node
+    fields:
+      datetime:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      email:
+        type: 'String!'
+        description: ''
+      ipAddress:
+        type: 'String!'
+        description: 'The IP Address'
+      success:
+        type: 'Boolean!'
+        description: 'If the connection was successful or not'
+

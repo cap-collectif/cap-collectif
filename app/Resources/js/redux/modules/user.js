@@ -6,6 +6,9 @@ import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
 import config from '../../config';
 import { formatSubmitResponses } from '../../utils/responsesHelper';
+import AdduserConnectionAttempt from '../../../js/mutations/AddUserConnectionAttemptMutation';
+import { fetchQuery, graphql } from 'react-relay';
+
 
 export type User = {
   +id: string,
@@ -222,6 +225,26 @@ export const login = (
   })
     .then(response => response.json())
     .then((response: { success: boolean, reason: ?string }) => {
+      // console.log("JPEC START");
+      // fetch("https://api.ipdata.co")
+      //   .then(response => {
+      //     return response.json();
+      //   }, "jsonp")
+      //   .then(res => {
+      //     console.log(res.ip)
+      //   })
+      //   .catch(err => console.log(err));
+      const variables = {
+        input: {
+          ipAddress: "192.168.0.0",
+          email: "test",
+          success: false,
+        },
+      };
+      console.log("BEFORE", variables);
+      AdduserConnectionAttempt.commit(variables).then(()=>{
+        console.log("BG");
+      });
       if (response.success) {
         dispatch(closeLoginModal());
         window.location.reload();
@@ -230,7 +253,7 @@ export const login = (
       if (response.reason) {
         throw new SubmissionError({ _error: response.reason });
       } else {
-        throw new SubmissionError({ _error: 'global.login_failed' });
+        throw new SubmissionError({ _error: 'your-email-address-or-password-is-incorrect' });
       }
     });
 

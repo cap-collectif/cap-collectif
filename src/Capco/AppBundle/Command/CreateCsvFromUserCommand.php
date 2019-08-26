@@ -984,4 +984,18 @@ EOF;
 }
 EOF;
     }
+
+    //TODO HERE CODE
+    protected function getConnectionsGraphQLQuery(string $userId): string
+    {
+        return <<<EOF
+{
+  node(id: "${userId}") {
+    ... on User {
+    
+    }
+  }
+}
+EOF;
+    }
 }

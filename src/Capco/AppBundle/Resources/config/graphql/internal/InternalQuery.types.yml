@@ -55,6 +55,20 @@ InternalQuery:
           password:
             type: 'String!'
             description: 'The password of the user'
+      connectionAttempt:
+        type: 'Int'
+        description: 'Get any connection attempt'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserConnectionResolver", [args])'
+        args:
+          email:
+            type: 'String'
+            description: 'Email of the user'
+          datetime:
+            type: 'String'
+            description: 'Date of the attempt'
+          ipAddress:
+            type: 'String'
+            description: 'Ip address of the user'
       contactForms:
         type: '[InternalContactForm!]'
         description: 'Get the contact forms'

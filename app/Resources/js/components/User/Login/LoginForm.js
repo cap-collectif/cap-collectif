@@ -29,6 +29,7 @@ export const validate = (values: LoginValues) => {
 };
 
 export class LoginForm extends React.Component<Props> {
+
   render() {
     const { error } = this.props;
     return (
@@ -36,7 +37,8 @@ export class LoginForm extends React.Component<Props> {
         {error && (
           <Alert bsStyle="danger">
             <p>
-              <FormattedMessage id={error} />
+              <div className="font-weight-bold"><FormattedMessage id={error} /></div>
+              <FormattedMessage id="try-again-or-click-on-forgotten-password-to-reset-it" />
             </p>
           </Alert>
         )}
@@ -65,6 +67,8 @@ export class LoginForm extends React.Component<Props> {
           component={renderInput}
         />
         <a href="/resetting/request">{<FormattedMessage id="global.forgot_password" />}</a>
+        {false ? <Field id="captcha" component={renderInput} name="captcha" type="captcha" /> : null}
+
       </div>
     );
   }

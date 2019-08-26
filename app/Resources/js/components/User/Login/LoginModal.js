@@ -9,14 +9,22 @@ import LoginBox from './LoginBox';
 import { closeLoginModal } from '../../../redux/modules/user';
 import type { Dispatch, State } from '../../../types';
 
-type Props = {
-  submitting: boolean,
-  show: boolean,
-  onClose: Function,
-  onSubmit: Function,
-};
+type Props = {|
+  +submitting: boolean,
+  +show: boolean,
+  +onClose: Function,
+  +onSubmit: Function,
+|};
 
-export class LoginModal extends React.Component<Props> {
+type ModalState = {|
+  failedAttempts: number
+|};
+
+export class LoginModal extends React.Component<Props, ModalState> {
+  state = {
+    failedAttempts: 0
+  };
+
   render() {
     const { submitting, show, onClose, onSubmit } = this.props;
     return (
