@@ -13,7 +13,7 @@ import RegistrationEmailDomainsForm from './RegistrationEmailDomainsForm';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import RegistrationFormQuestions from './RegistrationFormQuestions';
 
-type Props = {
+export type Props = {
   features: FeatureToggles,
   onToggle: (feature: FeatureToggle, value: boolean) => void,
   isSuperAdmin: boolean,

@@ -10,7 +10,7 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import type { State, Dispatch } from '../../../types';
 
-type Props = {
+export type Props = {
   showModal: boolean,
   submitting: boolean,
   pristine: boolean,

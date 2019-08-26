@@ -8,7 +8,7 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { QuestionnaireAdminPageQueryResponse } from '~relay/QuestionnaireAdminPageQuery.graphql';
 import type { Uuid, State } from '../../types';
 
-type Props = {| enableResultsTab: boolean, questionnaireId: Uuid |};
+export type Props = {| enableResultsTab: boolean, questionnaireId: Uuid |};
 
 const component = ({
   error,

@@ -3,7 +3,9 @@ import EventEmitter from 'events';
 import AppDispatcher from '../dispatchers/AppDispatcher';
 
 export default class BaseStore extends EventEmitter {
-  register(actionSubscribe) {
+  _dispatchToken: any;
+
+  register(actionSubscribe: any) {
     this._dispatchToken = AppDispatcher.register(actionSubscribe);
   }
 
@@ -15,11 +17,11 @@ export default class BaseStore extends EventEmitter {
     this.emit('CHANGE');
   }
 
-  addChangeListener(cb) {
+  addChangeListener(cb: any) {
     this.on('CHANGE', cb);
   }
 
-  removeChangeListener(cb) {
+  removeChangeListener(cb: any) {
     this.removeListener('CHANGE', cb);
   }
 }

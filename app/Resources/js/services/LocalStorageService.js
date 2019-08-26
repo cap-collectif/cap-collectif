@@ -1,5 +1,7 @@
 // @flow
 class LocalStorageService {
+  defaultCacheTime: number;
+
   constructor() {
     this.defaultCacheTime = 3600000;
   }

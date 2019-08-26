@@ -4,13 +4,14 @@ import colors from './utils/colors';
 /*eslint-disable */
 (function($) {
   'use strict';
-
   $.fn.googleCharts = function(options) {
+    // $FlowFixMe
     if (typeof google == 'undefined') {
       return;
     }
 
     this.each(function() {
+      // $FlowFixMe
       if ($(`#piechart-${$(this).data('pie-id')}`).length) {
         var pie_chart;
         var options;
@@ -31,6 +32,7 @@ import colors from './utils/colors';
           backgroundColor: 'transparent',
         };
         pie_chart = new google.visualization.PieChart(
+          // $FlowFixMe
           document.getElementById(`piechart-${$(this).data('pie-id')}`),
         );
         pie_chart.draw(data, options);

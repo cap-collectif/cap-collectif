@@ -27,7 +27,9 @@ import CarouselApp from './startup/CarouselApp';
 import MetricsApp from './startup/MetricsApp';
 import OpinionPageApp from './startup/OpinionPageApp';
 import CommentSectionApp from './startup/CommentSectionApp';
+// $FlowFixMe we don't cover Synthesis
 import SynthesisViewBoxApp from './startup/SynthesisViewBoxApp';
+// $FlowFixMe we don't cover Synthesis
 import SynthesisEditBoxApp from './startup/SynthesisEditBoxApp';
 import ProposalPageApp from './startup/ProposalPageApp';
 import QuestionnaireStepPageApp from './startup/QuestionnaireStepPageApp';

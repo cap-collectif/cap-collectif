@@ -9,7 +9,7 @@ import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { State } from '../../../types';
 
-type Props = { proposalId: number, dirty: boolean };
+export type Props = { proposalId: number, dirty: boolean };
 
 const onUnload = e => {
   e.returnValue = true;

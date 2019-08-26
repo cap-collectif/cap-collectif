@@ -22,6 +22,7 @@ sketchy-null-bool=off
 .*/SynthesisElementActions.js
 .*/SynthesisDisplayRules.js
 .*/SynthesisViewBoxApp.js
+.*/SynthesisEditBoxApp.js
 .*/SynthesisActions.js
 .*/SynthesisStore.js
 .*/SynthesisBox.js
