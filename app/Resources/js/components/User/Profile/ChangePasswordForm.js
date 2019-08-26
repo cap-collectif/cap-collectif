@@ -19,10 +19,10 @@ type Props = {|
   dispatch: Dispatch,
 |};
 
-type FormValues = {
+type FormValues = {|
   email: string,
   new_password: string,
-};
+|};
 
 export const formName = 'password-form';
 
@@ -42,6 +42,10 @@ const Container = styled.div`
 
   .full-width {
     width: 100%;
+  }
+
+  .no-border {
+    border: 0;
   }
 `;
 
@@ -112,7 +116,7 @@ export class ChangePasswordForm extends Component<Props> {
             </h2>
             <Container>
               <div className="flex-column">
-                <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+                <div className="horizontal_field_with_border_top no-border">
                   <label className="col-sm-3 control-label" htmlFor="password-form-current">
                     <FormattedMessage id="form.current_password" />
                   </label>
@@ -135,7 +139,7 @@ export class ChangePasswordForm extends Component<Props> {
                 </div>
 
                 <div className="clearfix" />
-                <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+                <div className="horizontal_field_with_border_top no-border">
                   <label className="col-sm-3 control-label" htmlFor="password-form-new">
                     <FormattedMessage id="new-password" />
                   </label>
@@ -149,7 +153,7 @@ export class ChangePasswordForm extends Component<Props> {
                   </div>
                 </div>
                 <div className="clearfix" />
-                <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+                <div className="horizontal_field_with_border_top no-border">
                   <label className="col-sm-3 control-label" htmlFor="password-form-confirmation">
                     <FormattedMessage id="confirm-password" />
                   </label>

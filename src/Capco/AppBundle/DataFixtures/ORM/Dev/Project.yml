@@ -249,9 +249,9 @@ Capco\AppBundle\Entity\Project:
     title: Projet pour le group2
     themes: []
     exportable: true
-    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
-    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
-    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 23 days"))>
+    createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 24 days"))>
+    updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 24 days"))>
+    publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 24 days"))>
     visibility: 3
     isExternal: true
     externalLink: 'http://projet.noob.fr'
