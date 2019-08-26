@@ -17,9 +17,10 @@ class OpinionBody extends React.Component<Props> {
     const { opinion } = this.props;
 
     if (opinion.__typename === 'Version') {
+      const commentStripped = FormattedText.strip(opinion.comment);
       return (
         <div>
-          {opinion.comment !== null && FormattedText.strip(opinion.comment).length ? (
+          {opinion.comment !== null && commentStripped && commentStripped.length ? (
             <div>
               <p className="control-label">
                 <FormattedMessage id="opinion.version_comment" />
