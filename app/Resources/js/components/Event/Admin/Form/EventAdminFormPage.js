@@ -48,6 +48,7 @@ type FormValues = {|
   endAt: ?string,
   commentable: boolean,
   guestListEnabled: boolean,
+  link: ?string,
   addressJson: ?string,
   address: ?string,
   enabled: boolean,
@@ -85,12 +86,15 @@ const validate = (values: FormValues) => {
     }
     if (value === 'body' && values[value] && values[value] === '<p><br></p>') {
       errors[value] = 'fill-field';
-    }
+    }m/EventForm.js
 
     if (value !== 'endAt' && (!values[value] || values[value].length === 0)) {
       errors[value] = 'fill-field';
     }
   });
+  if(values.guestListEnabled && values.link) {
+    errors.link = 'error-alert-choosing-subscription-mode';
+  }
 
   return errors;
 };

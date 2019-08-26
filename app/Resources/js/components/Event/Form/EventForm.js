@@ -3,7 +3,7 @@ import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { type FormProps, Field, reduxForm } from 'redux-form';
+import { type FormProps, Field, reduxForm, formValueSelector } from 'redux-form';
 import component from '../../Form/Field';
 import toggle from '../../Form/Toggle';
 import type { Dispatch, FeatureToggles, GlobalState } from '../../../types';
@@ -21,7 +21,8 @@ type Props = {|
   features: FeatureToggles,
   dispatch: Dispatch,
   intl: IntlShape,
-  initialValues?: ?{},
+  initialValues: Object,
+  currentValues?:  ?{},
   autoload: boolean,
   multi: boolean,
 |};
@@ -30,7 +31,7 @@ export const formName = 'EventForm';
 
 export class EventForm extends React.Component<Props> {
   render() {
-    const { features, event, query } = this.props;
+    const { features, event, query, currentValues } = this.props;
 
     return (
       <form className="eventForm">
@@ -204,6 +205,8 @@ export class EventForm extends React.Component<Props> {
                 id="event_registrable"
                 type="checkbox"
                 component={component}
+                {/* $FlowFixMe */}
+                disabled={(currentValues && currentValues.link && currentValues.link !== null) ? true : false}
                 children={<FormattedMessage id="admin.fields.event.registration_enable" />}
               />
             </div>
@@ -214,6 +217,7 @@ export class EventForm extends React.Component<Props> {
                 component={component}
                 placeholder="http://"
                 type="text"
+                disabled={(currentValues && currentValues.guestListEnabled && currentValues.guestListEnabled !== null) ? currentValues.guestListEnabled : false}
                 id="event_link"
               />
             </div>
@@ -254,6 +258,8 @@ export class EventForm extends React.Component<Props> {
     );
   }
 }
+
+const selector = formValueSelector(formName);
 
 const formContainer = reduxForm({
   form: formName,
@@ -299,10 +305,21 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         addressJson:
           props.event && props.event.googleMapsAddress ? props.event.googleMapsAddress.json : null,
       },
+      currentValues: selector(
+        state,
+        'guestListEnabled',
+        'link',
+      ),
     };
   }
+
   return {
     features: state.default.features,
+    currentValues: selector(
+      state,
+      'guestListEnabled',
+      'link',
+    ),
   };
 };
 

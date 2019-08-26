@@ -19,6 +19,7 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Symfony\Component\Translation\Translator;
 
 class AddEventMutation implements MutationInterface
 {
@@ -27,6 +28,7 @@ class AddEventMutation implements MutationInterface
     private $logger;
     private $indexer;
     private $globalIdResolver;
+    private $translator;
     private $publisher;
 
     public function __construct(
@@ -35,13 +37,15 @@ class AddEventMutation implements MutationInterface
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
         Indexer $indexer,
-        Publisher $publisher
+        Publisher $publisher,
+        Translator $translator
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
         $this->globalIdResolver = $globalIdResolver;
         $this->indexer = $indexer;
+        $this->translator = $translator;
         $this->publisher = $publisher;
     }
 
@@ -52,9 +56,26 @@ class AddEventMutation implements MutationInterface
         if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
             return [
                 'eventEdge' => null,
-                'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
+                'userErrors' => [['message' => 'You are not authorized to add customCode field.']],
             ];
         }
+
+        if (isset($values['startAt']) && !empty($values['startAt']) && isset($values['endAt']) && !empty($values['endAt'])) {
+            if (new \DateTime($values['startAt']) > new \DateTime($values['endAt'])) {
+                return [
+                    'eventEdge' => null,
+                    'userErrors' => [['message' => $this->translator->trans('event-before-date-error')]],
+                ];
+            }
+        }
+
+        if (isset($values['guestListEnabled']) && !empty($values['guestListEnabled']) && isset($values['link']) && !empty($values['link'])) {
+            return [
+                'eventEdge' => null,
+                'userErrors' => [['message' => $this->translator->trans('error-alert-choosing-subscription-mode')]],
+            ];
+        }
+
         /** @var User $author */
         $author = isset($values['author'])
             ? $this->globalIdResolver->resolve($values['author'], $viewer)

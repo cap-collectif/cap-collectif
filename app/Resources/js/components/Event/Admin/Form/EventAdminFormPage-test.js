@@ -67,4 +67,60 @@ describe('<EventAdminFormPage />', () => {
     const wrapper = shallow(<EventAdminFormPage {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('it renders correctly, with bad date', () => {
+    const props = {
+      ...defaultProps,
+      pristine: false,
+      valid: false,
+      submitting: false,
+      submitSucceeded: false,
+      submitFailed: false,
+      invalid: false,
+      event: {
+        viewerDidAuthor: true,
+        startAt: '2019-12-25',
+        endAt: '2019-11-25',
+        $fragmentRefs,
+        $refType,
+      },
+      query: {
+        viewer: {
+          isSuperAdmin: false,
+        },
+        $fragmentRefs,
+        $refType,
+      },
+    };
+    const wrapper = shallow(<EventAdminFormPage {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('it renders correctly, with  registration type', () => {
+    const props = {
+      ...defaultProps,
+      pristine: false,
+      valid: false,
+      submitting: false,
+      submitSucceeded: false,
+      submitFailed: false,
+      invalid: false,
+      event: {
+        guestListEnabled: true,
+        link: 'http://weezevent.com',
+        viewerDidAuthor: true,
+        $fragmentRefs,
+        $refType,
+      },
+      query: {
+        viewer: {
+          isSuperAdmin: false,
+        },
+        $fragmentRefs,
+        $refType,
+      },
+    };
+    const wrapper = shallow(<EventAdminFormPage {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
