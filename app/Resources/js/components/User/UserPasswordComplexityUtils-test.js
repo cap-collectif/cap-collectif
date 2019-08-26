@@ -16,6 +16,7 @@ jest.mock('../../config');
 describe('<UserPasswordComplexityField />', () => {
   const props = {
     name: 'password',
+    isPasswordFocus: true,
     field: (
       <Field
         type="password"
@@ -161,6 +162,7 @@ describe('<UserPasswordComplexityField />', () => {
       <UserPasswordComplexityField
         {...props}
         passwordComplexityScore={1}
+        isPasswordFocus={false}
         passwordConditions={{
           length: false,
           upperLowercase: true,

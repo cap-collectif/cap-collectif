@@ -16,6 +16,7 @@ type Props = {|
   +name: string,
   +field: Object,
   +formName: string,
+  +isPasswordFocus: boolean,
   +passwordComplexityScore: number,
   +passwordConditions: { length: boolean, upperLowercase: boolean, digit: boolean },
   +formAsyncErrors: Object,
@@ -228,10 +229,14 @@ export class UserPasswordComplexityField extends Component<Props> {
 
   renderPasswordInformation(
     formName: string,
+    isPasswordFocus: boolean,
     passwordConditions: Object,
     passwordComplexityScore: number,
     error: ?string,
   ) {
+    if (!isPasswordFocus) {
+      return null;
+    }
     return (
       <StyleContainer>
         <div
@@ -300,6 +305,7 @@ export class UserPasswordComplexityField extends Component<Props> {
       passwordConditions,
       formAsyncErrors,
       name,
+      isPasswordFocus,
       formName,
     } = this.props;
 
@@ -310,6 +316,7 @@ export class UserPasswordComplexityField extends Component<Props> {
 
           {this.renderPasswordInformation(
             formName,
+            isPasswordFocus,
             passwordConditions,
             passwordComplexityScore,
             formAsyncErrors ? formAsyncErrors[name] : null,
@@ -324,6 +331,7 @@ export class UserPasswordComplexityField extends Component<Props> {
           <Popover placement="right" className="in" id="pinned-label">
             {this.renderPasswordInformation(
               formName,
+              isPasswordFocus,
               passwordConditions,
               passwordComplexityScore,
               formAsyncErrors ? formAsyncErrors[name] : null,

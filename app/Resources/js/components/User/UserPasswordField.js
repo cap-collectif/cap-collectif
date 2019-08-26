@@ -53,6 +53,7 @@ class UserPasswordField extends React.Component<Props, State> {
       <UserPasswordComplexityUtils
         name={name}
         formName={formName}
+        isPasswordFocus={isPasswordFocus}
         field={
           <Field
             type="password"
