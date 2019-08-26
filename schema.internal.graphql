@@ -8129,7 +8129,7 @@ type User implements Node & UniformResourceLocatable {
     """
     after: String
 
-    """Returns the first `n` elements from the list."""
+    """Returns the first n elements from the list."""
     first: Int = 100
 
     """
