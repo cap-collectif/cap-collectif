@@ -4,7 +4,7 @@ import { FormattedHTMLMessage } from 'react-intl';
 import AlertStore from '../../stores/AlertStore';
 import AlertAutoDismissable from './AlertAutoDismissable';
 
-type Props = {};
+export type Props = {};
 
 type State = {
   alert: ?Object,

@@ -9,7 +9,7 @@ import type { SectionContainerQueryResponse } from '~relay/SectionContainerQuery
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 
-type Props = {
+export type Props = {
   body: string,
   title: string,
   teaser: string,
