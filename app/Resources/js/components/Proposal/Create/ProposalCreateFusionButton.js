@@ -10,7 +10,7 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import type { State, Dispatch } from '../../../types';
 
-export type Props = {
+export type Props = {|
   showModal: boolean,
   submitting: boolean,
   pristine: boolean,
@@ -18,7 +18,7 @@ export type Props = {
   open: () => void,
   close: () => void,
   submitForm: () => void,
-};
+|};
 
 export class ProposalCreateFusionButton extends React.Component<Props> {
   render() {
