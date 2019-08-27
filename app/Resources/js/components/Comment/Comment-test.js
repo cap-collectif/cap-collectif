@@ -10,7 +10,6 @@ const props = {
     $refType,
     $fragmentRefs,
     author: {
-      $fragmentRefs,
       displayName: 'admin',
       media: null,
       vip: true,
@@ -24,7 +23,6 @@ describe('<Comment />', () => {
     const comment = {
       id: 'comment1',
       author: {
-        $fragmentRefs,
         vip: true,
         displayName: 'jcVandam',
         media: {
@@ -42,7 +40,6 @@ describe('<Comment />', () => {
     const comment = {
       id: 'comment2',
       author: {
-        $fragmentRefs,
         vip: true,
         displayName: 'jcVandam',
         media: null,

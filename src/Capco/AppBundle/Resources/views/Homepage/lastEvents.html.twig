@@ -1,6 +1,4 @@
 {% set props = {'section': { 'title': section.title, 'nbObjects': section.nbObjects, 'teaser': section.teaser, 'body': section.body }, 'showAllUrl': path('app_event')} %}
-{% if eventsCount > 0 %}
-    <section class="section--custom">
-        {{ react_render_component('HomePageEventsApp', { 'props': props }) }}
-    </section>
-{% endif %}
+<section class="section--custom">
+    {{ react_render_component('HomePageEventsApp', { 'props': props }) }}
+</section>

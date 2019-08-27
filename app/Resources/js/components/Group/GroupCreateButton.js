@@ -9,10 +9,10 @@ import CreateGroupMutation from '../../mutations/CreateGroupMutation';
 import type CreateGroupMutationResponse from '~relay/CreateGroupMutation.graphql';
 import GroupForm from './GroupForm';
 
-export type Props = {|
+type Props = {
   submit: Function,
   submitting: boolean,
-|};
+};
 
 type ComponentState = {
   showModal: boolean,

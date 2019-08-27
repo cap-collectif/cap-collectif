@@ -1,11 +1,8 @@
-// @flow
 import EventEmitter from 'events';
 import AppDispatcher from '../dispatchers/AppDispatcher';
 
 export default class BaseStore extends EventEmitter {
-  _dispatchToken: any;
-
-  register(actionSubscribe: any) {
+  register(actionSubscribe) {
     this._dispatchToken = AppDispatcher.register(actionSubscribe);
   }
 
@@ -17,11 +14,11 @@ export default class BaseStore extends EventEmitter {
     this.emit('CHANGE');
   }
 
-  addChangeListener(cb: any) {
+  addChangeListener(cb) {
     this.on('CHANGE', cb);
   }
 
-  removeChangeListener(cb: any) {
+  removeChangeListener(cb) {
     this.removeListener('CHANGE', cb);
   }
 }

@@ -31,7 +31,6 @@ type Props = {|
 const formName = 'proposal-evaluation';
 
 const onUnload = e => {
-  // $FlowFixMe voir https://github.com/facebook/flow/issues/3690
   e.returnValue = true;
 };
 

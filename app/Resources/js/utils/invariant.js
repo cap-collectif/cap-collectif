@@ -1,4 +1,3 @@
-// @flow
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -19,16 +18,7 @@
  * will remain to ensure logic does not differ in production.
  */
 
-const invariant = function(
-  condition: boolean,
-  format: any,
-  a: any,
-  b: any,
-  c: any,
-  d: any,
-  e: any,
-  f: any,
-) {
+const invariant = function(condition, format, a, b, c, d, e, f) {
   if (process.env.NODE_ENV === 'development') {
     if (format === undefined) {
       throw new Error('invariant requires an error message argument');
@@ -48,7 +38,6 @@ const invariant = function(
       error = new Error(`Invariant Violation: ${format.replace(/%s/g, () => args[argIndex++])}`);
     }
 
-    // $FlowFixMe
     error.framesToPop = 1; // we don't care about invariant's own frame
     throw error;
   }

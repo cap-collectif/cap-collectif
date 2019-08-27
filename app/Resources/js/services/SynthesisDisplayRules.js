@@ -1,4 +1,3 @@
-// @flow
 import { ALLOWED_RULES } from '../constants/SynthesisDisplayConstants';
 
 class SynthesisDisplayRules {

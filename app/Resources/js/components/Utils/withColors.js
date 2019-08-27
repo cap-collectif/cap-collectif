@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable flowtype/no-types-missing-file-annotation */
 // TODO activer flow
 import * as React from 'react';

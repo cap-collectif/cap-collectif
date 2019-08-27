@@ -1,6 +1,5 @@
-// @flow
 class FormattedText {
-  strip(text: ?string) {
+  strip(text) {
     if (text) {
       return text.replace('</p>', '\n').replace(/(<([^>]+)>)/gi, '');
     }
