@@ -1,11 +1,10 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import {Field} from 'redux-form';
+import { Field } from 'redux-form';
 import component from '../Form/Field';
 import UserPasswordComplexityUtils from './UserPasswordComplexityUtils';
-import type {FeatureToggles, State} from "../../types";
-
+import type { FeatureToggles, State } from '../../types';
 
 type Props = {|
   +features: FeatureToggles,
@@ -54,7 +53,7 @@ export class UserPasswordField extends React.Component<Props, UserPasswordFieldS
     } = this.props;
     const { isPasswordFocus } = this.state;
 
-    if (features.secure_password){
+    if (features.secure_password) {
       return (
         <UserPasswordComplexityUtils
           name={name}
@@ -79,20 +78,22 @@ export class UserPasswordField extends React.Component<Props, UserPasswordFieldS
         />
       );
     }
-    return (<Field
-      type="password"
-      component={component}
-      onFocus={this.setPasswordFocusToTrue}
-      onBlur={this.setPasswordFocusToFalse}
-      name={name}
-      id={id}
-      divClassName={divClassName}
-      hideValidationMessage={isPasswordFocus}
-      ariaRequired={ariaRequired}
-      autoComplete={autoComplete}
-      label={label || null}
-      labelClassName={labelClassName || ''}
-    />);
+    return (
+      <Field
+        type="password"
+        component={component}
+        onFocus={this.setPasswordFocusToTrue}
+        onBlur={this.setPasswordFocusToFalse}
+        name={name}
+        id={id}
+        divClassName={divClassName || ''}
+        hideValidationMessage={isPasswordFocus}
+        ariaRequired={ariaRequired}
+        autoComplete={autoComplete}
+        label={label || null}
+        labelClassName={labelClassName || ''}
+      />
+    );
   }
 }
 
