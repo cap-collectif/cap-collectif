@@ -8,6 +8,7 @@ import GoogleLoginButton from './GoogleLoginButton';
 import OpenIDLoginButton from './OpenIDLoginButton';
 import FacebookLoginButton from './FacebookLoginButton';
 import type { FeatureToggles, SSOConfiguration, State } from '../../../types';
+import FranceConnectLoginButton from './FranceConnectLoginButton';
 
 export type LabelPrefix = 'registration.' | 'login.' | '';
 
@@ -45,17 +46,25 @@ export class LoginSocialButtons extends React.Component<Props> {
             <FormattedMessage id="authenticate-with" className="font-weight-semi-bold" />
           ) &&
           ssoList.map(
-            ({ ssoType, name, buttonColor, labelColor }: SSOConfiguration, index: number) =>
-              ssoType === 'oauth2' && (
-                <OpenIDLoginButton
-                  text={name}
-                  key={index}
-                  features={features}
-                  prefix={prefix}
-                  labelColor={labelColor}
-                  buttonColor={buttonColor}
-                />
-              ),
+            ({ ssoType, name, buttonColor, labelColor }: SSOConfiguration, index: number) => {
+              switch (ssoType) {
+                case 'oauth2':
+                  return (
+                    <OpenIDLoginButton
+                      text={name}
+                      key={index}
+                      features={features}
+                      prefix={prefix}
+                      labelColor={labelColor}
+                      buttonColor={buttonColor}
+                    />
+                  );
+                case 'franceconnect':
+                  return <FranceConnectLoginButton key={index} features={features} />;
+                default:
+                  break;
+              }
+            },
           )}
         <FacebookLoginButton features={features} prefix={prefix} />
         <GoogleLoginButton features={features} prefix={prefix} />

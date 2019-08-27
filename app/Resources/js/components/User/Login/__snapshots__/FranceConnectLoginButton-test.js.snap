@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FranceConnectLoginButton /> renders a button if feature is active 1`] = `
+<FranceConnectLoginButton__LinkButton
+  className="btn login__social-btn"
+  href="/login/franceconnect?_destination=http://localhost/"
+  title="France Connect"
+>
+  France Connect
+</FranceConnectLoginButton__LinkButton>
+`;
+
+exports[`<FranceConnectLoginButton /> renders nothing if login_franceconnect is not activated 1`] = `""`;

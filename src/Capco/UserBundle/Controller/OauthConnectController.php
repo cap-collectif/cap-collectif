@@ -21,6 +21,7 @@ class OauthConnectController extends ConnectController
         'google' => ['login_gplus'],
         'twitter' => ['login_twitter'],
         'openid' => ['login_openid'],
+        'franceconnect' => ['login_franceconnect']
     ];
 
     public function getFeaturesForService($service)

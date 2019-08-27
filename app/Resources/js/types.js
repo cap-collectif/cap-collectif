@@ -155,7 +155,7 @@ export type District = {|
 |};
 
 // @TODO: Add more type in the future here.
-export type SSOType = 'oauth2';
+export type SSOType = 'oauth2' | 'franceconnect';
 
 export type SSOConfiguration = {|
   name: string,

@@ -5,8 +5,8 @@ Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration:
     enabled: true
     clientId: '***REMOVED***'
     secret: '***REMOVED***'
-    authorizationUrl: '/api/v1/authorize'
-    accessTokenUrl: '/api/v1/token'
-    userInfoUrl: '/api/v1/userinfo'
-    logoutUrl: '/api/v1/logout'
-    environment: 'testing'
+    authorizationUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize'
+    accessTokenUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/token'
+    userInfoUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo'
+    logoutUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/logout'
+    environment: 'TESTING'
