@@ -6,7 +6,7 @@ import GroupAdminPageTabs from './GroupAdminPageTabs';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 
 type DefaultProps = void;
-type Props = { groupId: string };
+export type Props = {| groupId: string |};
 type State = void;
 
 const component = ({ error, props }: { error: ?Error, props: any }) => {

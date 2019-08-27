@@ -1,5 +1,11 @@
+// @flow
 class ArrayHelper {
-  getElementIndexFromArray(els, el, uniqueField = 'id', secondUniqueField = null) {
+  getElementIndexFromArray(
+    els: any,
+    el: any,
+    uniqueField: string = 'id',
+    secondUniqueField: ?string = null,
+  ) {
     let index = -1;
     const valueToCheck = secondUniqueField ? el[uniqueField][secondUniqueField] : el[uniqueField];
     index = els
@@ -8,7 +14,12 @@ class ArrayHelper {
     return index;
   }
 
-  getElementFromArray(els, value, uniqueField = 'id', secondUniqueField = null) {
+  getElementFromArray(
+    els: any,
+    value: any,
+    uniqueField: string = 'id',
+    secondUniqueField: ?string = null,
+  ) {
     let index = -1;
     index = els
       .map(e => (secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField]))
@@ -16,7 +27,12 @@ class ArrayHelper {
     return els[index];
   }
 
-  addElementToArray(els, el, uniqueField = 'id', secondUniqueField = null) {
+  addElementToArray(
+    els: any,
+    el: any,
+    uniqueField: string = 'id',
+    secondUniqueField: ?string = null,
+  ) {
     const index = this.getElementIndexFromArray(els, el, uniqueField, secondUniqueField);
     if (index === -1) {
       els.push(el);
@@ -24,7 +40,12 @@ class ArrayHelper {
     return els;
   }
 
-  removeElementFromArray(els, el, uniqueField = 'id', secondUniqueField = null) {
+  removeElementFromArray(
+    els: any,
+    el: any,
+    uniqueField: string = 'id',
+    secondUniqueField: ?string = null,
+  ) {
     const index = this.getElementIndexFromArray(els, el, uniqueField, secondUniqueField);
     if (index > -1) {
       els.splice(index, 1);
@@ -32,7 +53,12 @@ class ArrayHelper {
     return els;
   }
 
-  sortArrayByField(els, sortField = 'title', naturalSorting = false, sortOrder = 'ASC') {
+  sortArrayByField(
+    els: any,
+    sortField: string = 'title',
+    naturalSorting: boolean = false,
+    sortOrder: string = 'ASC',
+  ) {
     let field = sortField;
     let order = sortOrder;
     let nsort = naturalSorting;
@@ -67,7 +93,7 @@ class ArrayHelper {
     });
   }
 
-  naturalComparison(as, bs) {
+  naturalComparison(as: any, bs: any) {
     const rx = /(\d+)|(\D+)/g;
     const rd = /\d+/;
     const a = String(as)
@@ -76,16 +102,17 @@ class ArrayHelper {
     const b = String(bs)
       .toLowerCase()
       .match(rx);
-    while (a.length && b.length) {
+    while (a && b && a.length && b.length) {
       const a1 = a.shift();
       const b1 = b.shift();
       if (rd.test(a1) || rd.test(b1)) {
         if (!rd.test(a1)) return 1;
         if (!rd.test(b1)) return -1;
+        // $FlowFixMe
         if (a1 !== b1) return a1 - b1;
       } else if (a1 !== b1) return a1 > b1 ? 1 : -1;
     }
-    return a.length - b.length;
+    return a && b ? a.length - b.length : 0;
   }
 }
 

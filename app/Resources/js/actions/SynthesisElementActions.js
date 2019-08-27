@@ -1,3 +1,4 @@
+// @flow
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
 import * as Actions from '../constants/SynthesisElementActionsConstants';
