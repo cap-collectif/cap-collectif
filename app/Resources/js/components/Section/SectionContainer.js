@@ -9,14 +9,14 @@ import type { SectionContainerQueryResponse } from '~relay/SectionContainerQuery
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 
-type Props = {
+export type Props = {|
   body: string,
   title: string,
   teaser: string,
   metricsToDisplayBasics: boolean,
   metricsToDisplayEvents: boolean,
   metricsToDisplayProjects: boolean,
-};
+|};
 
 const MetricsRow = styled.div`
   display: flex;

@@ -48,9 +48,9 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
     }).then(() => {
       setTimeout(() => {
         if (redirectToAdminUrl && userDeletedIsNotViewer) {
-          window.location = `/admin/capco/user/user/list`;
+          window.location.href = `/admin/capco/user/user/list`;
         } else {
-          window.location = `/logout?deleteType=${removalType}`;
+          window.location.href = `/logout?deleteType=${removalType}`;
         }
       }, 1000);
     });

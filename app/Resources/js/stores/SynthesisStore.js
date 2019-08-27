@@ -1,3 +1,4 @@
+// @flow
 import { DISPLAY_SETTINGS } from '../constants/SynthesisDisplayConstants';
 import BaseStore from './BaseStore';
 import * as Actions from '../constants/SynthesisActionsConstants';

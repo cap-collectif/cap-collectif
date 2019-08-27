@@ -32,6 +32,7 @@ class CookieMonster {
     }
     this.cookieBanner = document.getElementById('cookie-banner');
     this.cookieConsent = document.getElementById('cookie-consent');
+    // $FlowFixMe
     window._capco_ga_cookie_value = Cookies.getJSON('_ga');
   }
 

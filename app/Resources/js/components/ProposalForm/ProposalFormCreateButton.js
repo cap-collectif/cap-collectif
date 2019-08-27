@@ -16,11 +16,11 @@ const onSubmit = values =>
     window.location.reload();
   });
 
-type Props = {
+export type Props = {|
   submitting: boolean,
   handleSubmit: Function,
   submit: Function,
-};
+|};
 
 type State = {
   showModal: boolean,

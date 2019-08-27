@@ -15,6 +15,7 @@ import type {
 export type Props = {| +userId: string, +dirty: boolean |};
 
 const onUnload = e => {
+  // $FlowFixMe voir https://github.com/facebook/flow/issues/3690
   e.returnValue = true;
 };
 

@@ -80,7 +80,7 @@ class SearchController extends Controller
             'q' => $searchParams,
             'count' => $searchResults['count'],
             'results' => $searchResults['results'],
-            'nbPages' => $searchResults['pages']
+            'nbPages' => $searchResults['pages'],
         ];
     }
 }

@@ -9,9 +9,10 @@ import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { State } from '../../../types';
 
-type Props = { proposalId: number, dirty: boolean };
+export type Props = {| proposalId: number, dirty: boolean |};
 
 const onUnload = e => {
+  // $FlowFixMe voir https://github.com/facebook/flow/issues/3690
   e.returnValue = true;
 };
 

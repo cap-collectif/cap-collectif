@@ -46,7 +46,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
   }
 
   componentWillUnmount() {
-    window.removeListener('scroll', this.animationFrame, false);
+    window.removeEventListener('scroll', this.animationFrame, false);
   }
 
   animationFrame = () => {

@@ -28,7 +28,8 @@ class OpinionUrlResolver implements ResolverInterface
     public function __invoke(Opinion $contribution): string
     {
         $step = $this->consultationStepRepository->getByOpinionId($contribution->getId());
-        $project = $step ? $step->getProject() : null;
+        $project = $step->getProject();
+
         if (
             $project &&
             $project->getSlug() &&
@@ -42,7 +43,7 @@ class OpinionUrlResolver implements ResolverInterface
                     'projectSlug' => $project->getSlug(),
                     'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
-                    'opinionSlug' => $contribution->getSlug()
+                    'opinionSlug' => $contribution->getSlug(),
                 ],
                 UrlGeneratorInterface::ABSOLUTE_URL
             );

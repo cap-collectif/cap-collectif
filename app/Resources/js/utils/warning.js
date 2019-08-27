@@ -1,3 +1,4 @@
+// @flow
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -28,7 +29,7 @@ function printWarning(format, ...args) {
   } catch (x) {}
 }
 
-const warning = (condition, format, ...args) => {
+const warning = (condition: boolean, format: any, ...args: any) => {
   if (format === undefined) {
     throw new Error('`warning(condition, format, ...args)` requires a warning message argument');
   }
