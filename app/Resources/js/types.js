@@ -62,7 +62,6 @@ export type FeatureToggles = {
   list_sso: ?boolean,
   allow_users_to_propose_events: ?boolean,
   login_franceconnect: ?boolean,
-  secure_password: ?boolean,
 };
 export type FeatureToggle =
   | 'blog'
@@ -100,7 +99,6 @@ export type FeatureToggle =
   | 'sso_by_pass_auth'
   | 'login_franceconnect'
   | 'allow_users_to_propose_events'
-  | 'secure_password'
   | 'list_sso';
 
 export type Action =

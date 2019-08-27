@@ -2,18 +2,16 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import {UserPasswordField} from './UserPasswordField';
-import {features} from "../../redux/modules/default";
+import UserPasswordField from './UserPasswordField';
 
 describe('<UserPasswordField />', () => {
   const props = {
-    features,
     id: 'id',
-    formName: 'form-name',
-    name: 'password',
     divClassName: 'div',
     label: 'label',
     labelClassName: 'label-class',
+    name: 'password',
+    formName: 'form-name',
   };
 
   it('renders a passwordField', () => {

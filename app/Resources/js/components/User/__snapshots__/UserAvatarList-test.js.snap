@@ -61,7 +61,6 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "reporting": false,
             "restrict_registration_via_email_domain": false,
             "search": false,
-            "secure_password": false,
             "server_side_rendering": false,
             "share_buttons": false,
             "shield_mode": false,

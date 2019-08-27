@@ -4,34 +4,15 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import { Media, ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { connect } from 'react-redux';
 import type { Reply_reply } from '~relay/Reply_reply.graphql';
-import type { State } from '../../../types';
 import { UserAvatar } from '../../User/UserAvatar';
-
-type ReduxProps = {|
-  +isProfileEnabled: boolean,
-|};
+import UserLink from '../../User/UserLink';
 
 type Props = {|
   +reply: Reply_reply,
-  ...ReduxProps,
 |};
 
 export class Reply extends React.Component<Props> {
-  static defaultProps = {
-    isProfileEnabled: false,
-  };
-
-  renderProfile({ author }: Reply_reply) {
-    const { isProfileEnabled } = this.props;
-
-    if (isProfileEnabled) {
-      return <a href={author.url}>{author.username}</a>;
-    }
-    return <span>{author.username}</span>;
-  }
-
   renderTitle({ questionnaire }: Reply_reply) {
     if (questionnaire.step) {
       return <a href={questionnaire.step.url}>{questionnaire.title}</a>;
@@ -54,7 +35,7 @@ export class Reply extends React.Component<Props> {
           <Media.Body className="opinion__body">
             <div className="opinion__data">
               <p className="h5">
-                <span>{this.renderProfile(reply)}</span>
+                <UserLink user={reply.author} />
 
                 <span className="ml-5 mr-5">
                   <FormattedMessage id="reply.has_replied" />
@@ -80,13 +61,8 @@ export class Reply extends React.Component<Props> {
     );
   }
 }
-const mapStateToProps = (state: State) => ({
-  isProfileEnabled: !!state.default.features.profiles,
-});
 
-const container = connect(mapStateToProps)(Reply);
-
-export default createFragmentContainer(container, {
+export default createFragmentContainer(Reply, {
   reply: graphql`
     fragment Reply_reply on Reply
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
@@ -100,6 +76,7 @@ export default createFragmentContainer(container, {
       }
       author {
         ...UserAvatar_user
+        ...UserLink_user
         username
         url
       }

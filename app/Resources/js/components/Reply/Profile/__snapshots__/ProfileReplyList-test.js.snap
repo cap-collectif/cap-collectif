@@ -1,23 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProfileReplyList /> should render correctly with profile enabled 1`] = `
+exports[`<ProfileReplyList /> should render correctly 1`] = `
 <div>
-  <ForwardRef(Relay(Connect(Reply)))
-    isProfileEnabled={true}
-    key="0"
-    reply={
-      Object {
-        "$fragmentRefs": null,
-      }
-    }
-  />
-</div>
-`;
-
-exports[`<ProfileReplyList /> should render correctly with profile not enabled 1`] = `
-<div>
-  <ForwardRef(Relay(Connect(Reply)))
-    isProfileEnabled={false}
+  <ForwardRef(Relay(Reply))
     key="0"
     reply={
       Object {

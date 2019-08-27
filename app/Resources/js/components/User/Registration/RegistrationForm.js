@@ -128,7 +128,7 @@ export class RegistrationForm extends React.Component<Props> {
             message: <FormattedMessage id="registration.tooltip.email" />,
           }}
         />
-        {/* $FlowFixMe */}
+
         <UserPasswordField
           formName={form}
           id="password"
