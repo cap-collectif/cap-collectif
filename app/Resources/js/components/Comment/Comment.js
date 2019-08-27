@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import UserAvatar from '../User/UserAvatar';
+import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import CommentInfos from './CommentInfos';
 import CommentBody from './CommentBody';
 import CommentVoteButton from './CommentVoteButton';
@@ -45,9 +45,9 @@ export class Comment extends React.Component<Props, State> {
 
     return (
       <CommentContainer as="li" useBodyColor={useBodyColor} isHighlighted={isHighlighted}>
-        {/* $FlowFixMe */}
         <>
-          <UserAvatar user={comment.author} />
+          {/* $FlowFixMe Will be a fragment soon */}
+          <UserAvatarDeprecated user={comment.author} />
           <Media className="opinion">
             <Media.Body className="opinion__body" id={`comment_${comment.id}`}>
               <div className="opinion__data">
@@ -90,7 +90,6 @@ export default createFragmentContainer(Comment, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       author {
-        ...UserAvatar_user
         vip
         displayName
         media {

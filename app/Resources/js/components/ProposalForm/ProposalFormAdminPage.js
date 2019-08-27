@@ -7,7 +7,7 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { ProposalFormAdminPageQueryResponse } from '~relay/ProposalFormAdminPageQuery.graphql';
 import type { Uuid } from '../../types';
 
-export type Props = {| proposalFormId: Uuid |};
+type Props = { proposalFormId: Uuid };
 
 const component = ({
   error,

@@ -1,4 +1,3 @@
-// @flow
 export const items = [
   {
     id: 12,

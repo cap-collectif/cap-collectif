@@ -22,7 +22,6 @@ export class CommentAnswer extends React.Component<Props> {
     const { comment, useBodyColor, isHighlighted } = this.props;
 
     return (
-      // $FlowFixMe
       <CommentContainer
         as="li"
         useBodyColor={useBodyColor || (comment.author && comment.author.vip)}

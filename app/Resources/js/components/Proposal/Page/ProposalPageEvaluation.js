@@ -30,8 +30,8 @@ type Props = {|
 
 const formName = 'proposal-evaluation';
 
-const onUnload = () => {
-  return true;
+const onUnload = e => {
+  e.returnValue = true;
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {

@@ -14,8 +14,8 @@ import type {
 
 export type Props = {| +userId: string, +dirty: boolean |};
 
-const onUnload = () => {
-  return true;
+const onUnload = e => {
+  e.returnValue = true;
 };
 
 const component = ({ error, props }: { props?: ?UserAdminPageQueryResponse, ...ReadyState }) => {

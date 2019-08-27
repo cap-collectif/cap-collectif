@@ -1,11 +1,6 @@
 // @flow
 import moment from 'moment';
 import ReactOnRails from 'react-on-rails';
-// $FlowFixMe we don't cover synthesis with flow
-import SynthesisViewBoxApp from '../js/startup/SynthesisViewBoxApp';
-// $FlowFixMe we don't cover synthesis with flow
-import SynthesisEditBoxApp from '../js/startup/SynthesisEditBoxApp';
-
 import ProjectsListApp from '../js/startup/ProjectsListAppClient';
 import ProposalStepPageApp from '../js/startup/ProposalStepPageApp';
 import NavbarApp from '../js/startup/NavbarAppClient';
@@ -14,6 +9,8 @@ import AccountProfileApp from '../js/startup/AccountProfileApp';
 import ProjectTrashButtonApp from '../js/startup/ProjectTrashButtonApp';
 import OpinionPageApp from '../js/startup/OpinionPageApp';
 import CommentSectionApp from '../js/startup/CommentSectionApp';
+import SynthesisViewBoxApp from '../js/startup/SynthesisViewBoxApp';
+import SynthesisEditBoxApp from '../js/startup/SynthesisEditBoxApp';
 import ProposalPageApp from '../js/startup/ProposalPageApp';
 import QuestionnaireStepPageApp from '../js/startup/QuestionnaireStepPageApp';
 import ProjectStatsPageApp from '../js/startup/ProjectStatsPageApp';
@@ -56,7 +53,7 @@ import AdminExportButtonApp from '../js/startup/AdminExportButtonApp';
 import EventListApp from '../js/startup/EventListApp';
 import SectionPageApp from '../js/startup/SectionPageApp';
 import AuthentificationAdminApp from '../js/startup/AuthentificationAdminApp';
-import ProfileUserCommentApp from '../js/startup/ProfileUserCommentApp';
+import ProfileUserCommentApp from "../js/startup/ProfileUserCommentApp";
 
 const emptyFunction = () => {};
 
@@ -120,5 +117,5 @@ ReactOnRails.register({
   AdminExportButtonApp,
   EventListApp,
   AuthentificationAdminApp,
-  ProfileUserCommentApp,
+  ProfileUserCommentApp
 });

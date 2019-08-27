@@ -2,18 +2,17 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\Resolver\SectionResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Repository\VideoRepository;
 use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Entity\NewsletterSubscription;
@@ -24,7 +23,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Repository\HighlightedContentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Capco\AppBundle\GraphQL\Resolver\Query\QueryEventsResolver;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 
 class HomepageController extends Controller
@@ -43,10 +41,6 @@ class HomepageController extends Controller
     public function homepageAction(Request $request)
     {
         $sections = $this->get(SectionResolver::class)->getDisplayableEnabledOrdered();
-        $eventsCount = $this->get(QueryEventsResolver::class)
-            ->getEventsConnection(new Argument(['isFuture' => true, 'first' => 0]))
-            ->getTotalCount();
-
         $newsletterActive = $this->get(Manager::class)->isActive('newsletter');
 
         $translator = $this->get('translator');
@@ -133,11 +127,7 @@ class HomepageController extends Controller
             }
         }
 
-        return [
-            'form' => $newsletterActive ? $form->createView() : false,
-            'sections' => $sections,
-            'eventsCount' => $eventsCount
-        ];
+        return ['form' => $newsletterActive ? $form->createView() : false, 'sections' => $sections];
     }
 
     /**

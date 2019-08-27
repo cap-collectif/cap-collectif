@@ -8,7 +8,7 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { SectionPageQueryResponse } from '~relay/SectionPageQuery.graphql';
 import type { GlobalState } from '../../types';
 
-export type Props = {|
+type Props = {|
   +sectionId: string,
   +isAuthenticated: boolean,
 |};

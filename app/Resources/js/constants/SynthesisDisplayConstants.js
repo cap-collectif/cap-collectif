@@ -1,4 +1,3 @@
-// @flow
 export const ALLOWED_RULES = {
   style: ['fontSize', 'color', 'textAlign', 'fontWeight'],
   containerStyle: ['borderTop', 'paddingTop'],

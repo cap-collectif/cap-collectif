@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import renderComponent from '../../Form/Field';
 import Fetcher from '../../../services/Fetcher';
-// $FlowFixMe we don't cover Synthesis
 import SynthesisActions from '../../../actions/SynthesisActions';
 import type { State } from '../../../types';
 

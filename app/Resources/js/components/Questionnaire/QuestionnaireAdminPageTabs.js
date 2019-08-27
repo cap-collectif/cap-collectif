@@ -31,7 +31,6 @@ export class QuestionnaireAdminPageTabs extends Component<Props> {
           </Tab>
           {enableResultsTab ? (
             <Tab eventKey={3} title={intl.formatMessage({ id: 'results' })}>
-              {/* $FlowFixMe */}
               <QuestionnaireAdminResults
                 labelColor="#fff"
                 backgroundColor="#FFF"
