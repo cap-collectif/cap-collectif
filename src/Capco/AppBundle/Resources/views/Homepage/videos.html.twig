@@ -15,7 +15,8 @@
             <div class="row">
                 {% for video in videos %}
                     <div class="col-xs-12  col-sm-6  col-md-4  col-lg-4">
-                            {% include '@CapcoApp/video.html.twig' %}
+                        <div class="video">
+                            {% include '@CapcoApp/video.html.twig' with {'video': video, 'project': null } %}
                             <div class="video-description">
                                 {% if video.title %}
                                     <h3 class="video-title">{{ video.title }}</h3>
