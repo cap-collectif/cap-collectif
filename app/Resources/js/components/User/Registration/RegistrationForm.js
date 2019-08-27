@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, type FormProps, formValueSelector } from 'redux-form';
 import { Button } from 'react-bootstrap';
 import { isEmail } from '../../../services/Validator';
-import type { Dispatch, State } from '../../../types';
+import type { Dispatch, FeatureToggles, State } from '../../../types';
 import { register as onSubmit, displayChartModal } from '../../../redux/modules/user';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
@@ -34,6 +34,7 @@ type Props = {|
   internalCommunicationFrom: string,
   shieldEnabled: boolean,
   dispatch: Dispatch,
+  features: FeatureToggles,
 |};
 
 type FormValues = {
@@ -72,6 +73,7 @@ export class RegistrationForm extends React.Component<Props> {
       addCaptchaField,
       organizationName,
       privacyPolicyRequired,
+      features,
       dispatch,
     } = this.props;
 
@@ -129,15 +131,32 @@ export class RegistrationForm extends React.Component<Props> {
           }}
         />
 
-        <UserPasswordField
-          formName={form}
-          id="password"
-          name="plainPassword"
-          ariaRequired
-          autoComplete="new-password"
-          label={<FormattedMessage id="registration.password" />}
-          labelClassName="font-weight-normal"
-        />
+        {features.secure_password ? (
+          <UserPasswordField
+            formName={form}
+            id="password"
+            name="plainPassword"
+            ariaRequired
+            autoComplete="new-password"
+            label={<FormattedMessage id="registration.password" />}
+            labelClassName="font-weight-normal"
+          />
+        ) : (
+          <Field
+            name="plainPassword"
+            id="password"
+            component={renderComponent}
+            type="password"
+            ariaRequired
+            autoComplete="new-password"
+            label={<FormattedMessage id="registration.password" />}
+            labelClassName="font-weight-normal"
+            popover={{
+              id: 'registration-password-tooltip',
+              message: <FormattedMessage id="registration.tooltip.password" />,
+            }}
+          />
+        )}
 
         {addUserTypeField && (
           <Field
@@ -274,6 +293,7 @@ export class RegistrationForm extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State) => ({
+  features: state.default.features,
   hasQuestions: state.user.registration_form.hasQuestions,
   addCaptchaField: state.default.features.captcha,
   addUserTypeField: state.default.features.user_type,

@@ -576,19 +576,19 @@ Object {
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
-          "contributionsCount": 79,
-          "id": "UHJvamVjdDpwcm9qZWN0NQ==",
-          "publishedAt": "2014-12-27 00:00:00",
-          "title": "Projet de loi Renseignement",
+          "contributionsCount": 174,
+          "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+          "publishedAt": "2014-12-26 00:00:00",
+          "title": "Budget Participatif Rennes",
         },
       },
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
-          "contributionsCount": 174,
-          "id": "UHJvamVjdDpwcm9qZWN0Ng==",
-          "publishedAt": "2014-12-26 00:00:00",
-          "title": "Budget Participatif Rennes",
+          "contributionsCount": 79,
+          "id": "UHJvamVjdDpwcm9qZWN0NQ==",
+          "publishedAt": "2014-12-27 00:00:00",
+          "title": "Projet de loi Renseignement",
         },
       },
       Object {
