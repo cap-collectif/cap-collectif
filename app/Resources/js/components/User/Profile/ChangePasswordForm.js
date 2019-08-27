@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
-import type { Dispatch, FeatureToggles, State } from '../../../types';
+import type { Dispatch } from '../../../types';
 import { asyncPasswordValidate } from '../UserPasswordComplexityUtils';
 import UserPasswordField from '../UserPasswordField';
 import config from '../../../config';
@@ -17,7 +17,6 @@ type Props = {|
   ...FormProps,
   intl: IntlShape,
   dispatch: Dispatch,
-  features: FeatureToggles,
 |};
 
 type FormValues = {|
@@ -84,7 +83,6 @@ export class ChangePasswordForm extends Component<Props> {
       submitFailed,
       handleSubmit,
       submitting,
-      features,
       error,
     } = this.props;
 
@@ -146,22 +144,12 @@ export class ChangePasswordForm extends Component<Props> {
                     <FormattedMessage id="new-password" />
                   </label>
                   <div>
-                    {features.secure_password ? (
-                      <UserPasswordField
-                        formName={formName}
-                        id="password-form-new"
-                        name="new_password"
-                        divClassName={`col-sm-6 inline ${config.isMobile ? 'full-width' : ''}`}
-                      />
-                    ) : (
-                      <Field
-                        type="password"
-                        component={component}
-                        name="new_password"
-                        id="password-form-new"
-                        divClassName="col-sm-6"
-                      />
-                    )}
+                    <UserPasswordField
+                      formName={formName}
+                      id="password-form-new"
+                      name="new_password"
+                      divClassName={`col-sm-6 inline ${config.isMobile ? 'full-width' : ''}`}
+                    />
                   </div>
                 </div>
                 <div className="clearfix" />
@@ -226,10 +214,6 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch) => {
   return asyncPasswordValidate(formName, 'new_password', values, dispatch);
 };
 
-const mapStateToProps = (state: State) => ({
-  features: state.default.features,
-});
-
 const form = reduxForm({
   onSubmit,
   validate,
@@ -239,4 +223,4 @@ const form = reduxForm({
   form: formName,
 })(ChangePasswordForm);
 
-export default connect(mapStateToProps)(injectIntl(form));
+export default connect()(injectIntl(form));

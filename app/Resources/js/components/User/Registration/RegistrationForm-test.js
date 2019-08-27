@@ -4,11 +4,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { intlMock, formMock } from '../../../mocks';
 import { RegistrationForm } from './RegistrationForm';
-import { features } from '../../../redux/modules/default';
 
 describe('<RegistrationForm />', () => {
   const props = {
-    features,
     addUserTypeField: false,
     addZipcodeField: false,
     addCaptchaField: true,
