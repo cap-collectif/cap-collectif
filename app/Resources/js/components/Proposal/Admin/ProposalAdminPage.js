@@ -11,8 +11,8 @@ import type { State } from '../../../types';
 
 export type Props = {| proposalId: number, dirty: boolean |};
 
-const onUnload = e => {
-  e.returnValue = true;
+const onUnload = () => {
+  return true;
 };
 
 const component = ({ error, props }: { error: ?Error, props: any }) => {

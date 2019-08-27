@@ -141,8 +141,8 @@ export type FormValues = {|
 //   });
 // };
 
-const onUnload = e => {
-  e.returnValue = true;
+const onUnload = () => {
+  return true;
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {

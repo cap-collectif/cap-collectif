@@ -47,8 +47,8 @@ type FormValues = {|
   draft: boolean,
 |};
 
-const onUnload = e => {
-  e.returnValue = true;
+const onUnload = () => {
+  return true;
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
