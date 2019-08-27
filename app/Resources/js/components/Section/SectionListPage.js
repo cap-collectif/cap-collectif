@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import { type SectionListPageQueryResponse } from '~relay/SectionListPageQuery.graphql';
 

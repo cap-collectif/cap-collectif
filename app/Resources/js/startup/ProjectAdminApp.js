@@ -2,7 +2,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
-import { graphql, QueryRenderer, type ReadyState } from 'react-relay';
+import { graphql, QueryRenderer } from 'react-relay';
 
 import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';

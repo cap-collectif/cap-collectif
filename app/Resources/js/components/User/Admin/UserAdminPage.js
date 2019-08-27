@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import { isDirty } from 'redux-form';
 import environment, { graphqlError } from '../../../createRelayEnvironment';

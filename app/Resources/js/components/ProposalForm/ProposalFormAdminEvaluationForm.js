@@ -3,7 +3,7 @@ import React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field, type FormProps } from 'redux-form';
-import { createFragmentContainer, graphql, QueryRenderer, type ReadyState } from 'react-relay';
+import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { Dispatch, State } from '../../types';

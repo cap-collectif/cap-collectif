@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 
 import ProjectHeaderDistrictsList from './ProjectHeaderDistrictsList';
 import environment, { graphqlError } from '../../createRelayEnvironment';

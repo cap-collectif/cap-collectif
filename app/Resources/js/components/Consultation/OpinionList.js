@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { QueryRenderer, graphql, createFragmentContainer, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ListGroupItem, Button } from 'react-bootstrap';
 import OpinionListPaginated from './OpinionListPaginated';

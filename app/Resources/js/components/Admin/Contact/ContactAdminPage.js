@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 import { Button } from 'react-bootstrap';
 import type { FormProps } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { type ReadyState, QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
+import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import type { ContactAdminPage_query } from '~relay/ContactAdminPage_query.graphql';
 
 import type { State } from '../../../types';

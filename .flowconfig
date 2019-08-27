@@ -7,7 +7,11 @@ sketchy-null-bool=off
 
 [ignore]
 ; ignore module source to prefer libdef
-.*/node_modules/*
+.*/node_modules/react-beautiful-dnd/*
+.*/node_modules/react-select/*
+.*/node_modules/react-leaflet/*
+.*/node_modules/redux-form/*
+
 ; ignore compiled files
 .*/web/*
 ; large dirs that are not imported

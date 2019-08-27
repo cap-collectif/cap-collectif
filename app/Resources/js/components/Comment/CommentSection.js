@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { CommentSectionQueryResponse } from '~relay/CommentSectionQuery.graphql';
 import Loader from '../Ui/FeedbacksIndicators/Loader';

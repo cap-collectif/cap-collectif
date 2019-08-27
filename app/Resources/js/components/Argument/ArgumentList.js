@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, createFragmentContainer, graphql } from 'react-relay';
 import Input from '../Form/Input';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import ArgumentListView, { type ArgumentOrder } from './ArgumentListView';
