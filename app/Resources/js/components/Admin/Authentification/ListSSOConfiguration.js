@@ -5,11 +5,11 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import ListCustomSSO from './ListCustomSSO';
 import ListPublicSSO from './ListPublicSSO';
-import type { ListCustomSSO_ssoConfigurations } from '~relay/ListCustomSSO_ssoConfigurations.graphql';
+import type { ListSSOConfiguration_ssoConfigurations } from '~relay/ListSSOConfiguration_ssoConfigurations.graphql';
 import type { FeatureToggles, State } from '../../../types';
 
 type RelayProps = {|
-  +ssoConfigurations: ListCustomSSO_ssoConfigurations,
+  +ssoConfigurations: ListSSOConfiguration_ssoConfigurations,
 |};
 
 type Props = {|

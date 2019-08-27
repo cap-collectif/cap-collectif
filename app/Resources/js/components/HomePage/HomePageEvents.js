@@ -103,6 +103,7 @@ class HomePageEvents extends React.Component<Props> {
         </div>
       );
     }
+    return null;
   };
 
   render() {
