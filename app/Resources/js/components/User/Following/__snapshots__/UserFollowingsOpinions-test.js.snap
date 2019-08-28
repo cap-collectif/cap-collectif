@@ -57,6 +57,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
           project={
             Object {
               "id": "project1",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
             }
           }
           viewer={
@@ -69,6 +71,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                       "id": "opinion1",
                       "project": Object {
                         "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Une carte de l'internet",
                       "url": "http://carte.perdu.com",
@@ -78,7 +82,9 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                     "node": Object {
                       "id": "opinion2",
                       "project": Object {
-                        "id": "project1",
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Un GPS de l'internet",
                       "url": "http://gps.perdu.com",
@@ -88,13 +94,16 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                     "node": Object {
                       "id": "opinion3",
                       "project": Object {
-                        "id": "project2",
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Go  nowhere",
                       "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
+                "totalCount": 3,
               },
             }
           }
@@ -104,6 +113,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
           project={
             Object {
               "id": "project2",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
             }
           }
           viewer={
@@ -116,6 +127,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                       "id": "opinion1",
                       "project": Object {
                         "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Une carte de l'internet",
                       "url": "http://carte.perdu.com",
@@ -125,7 +138,9 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                     "node": Object {
                       "id": "opinion2",
                       "project": Object {
-                        "id": "project1",
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Un GPS de l'internet",
                       "url": "http://gps.perdu.com",
@@ -135,13 +150,72 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                     "node": Object {
                       "id": "opinion3",
                       "project": Object {
-                        "id": "project2",
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Go  nowhere",
                       "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
+                "totalCount": 3,
+              },
+            }
+          }
+        />
+        <ForwardRef(Relay(OpinionProjectRow))
+          key="2"
+          project={
+            Object {
+              "id": "project3",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
+            }
+          }
+          viewer={
+            Object {
+              "$refType": null,
+              "followingOpinions": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "opinion1",
+                      "project": Object {
+                        "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion2",
+                      "project": Object {
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion3",
+                      "project": Object {
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
+                    },
+                  },
+                ],
+                "totalCount": 3,
               },
             }
           }
@@ -227,6 +301,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
           project={
             Object {
               "id": "project1",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
             }
           }
           viewer={
@@ -239,6 +315,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                       "id": "opinion1",
                       "project": Object {
                         "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Une carte de l'internet",
                       "url": "http://carte.perdu.com",
@@ -248,7 +326,9 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                     "node": Object {
                       "id": "opinion2",
                       "project": Object {
-                        "id": "project1",
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Un GPS de l'internet",
                       "url": "http://gps.perdu.com",
@@ -258,13 +338,16 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                     "node": Object {
                       "id": "opinion3",
                       "project": Object {
-                        "id": "project2",
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Go  nowhere",
                       "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
+                "totalCount": 3,
               },
             }
           }
@@ -274,6 +357,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
           project={
             Object {
               "id": "project2",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
             }
           }
           viewer={
@@ -286,6 +371,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                       "id": "opinion1",
                       "project": Object {
                         "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Une carte de l'internet",
                       "url": "http://carte.perdu.com",
@@ -295,7 +382,9 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                     "node": Object {
                       "id": "opinion2",
                       "project": Object {
-                        "id": "project1",
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Un GPS de l'internet",
                       "url": "http://gps.perdu.com",
@@ -305,13 +394,72 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                     "node": Object {
                       "id": "opinion3",
                       "project": Object {
-                        "id": "project2",
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
                       },
                       "title": "Go  nowhere",
                       "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
+                "totalCount": 3,
+              },
+            }
+          }
+        />
+        <ForwardRef(Relay(OpinionProjectRow))
+          key="2"
+          project={
+            Object {
+              "id": "project3",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
+            }
+          }
+          viewer={
+            Object {
+              "$refType": null,
+              "followingOpinions": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "opinion1",
+                      "project": Object {
+                        "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion2",
+                      "project": Object {
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion3",
+                      "project": Object {
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
+                    },
+                  },
+                ],
+                "totalCount": 3,
               },
             }
           }
