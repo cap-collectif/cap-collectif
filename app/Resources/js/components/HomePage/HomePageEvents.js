@@ -129,7 +129,7 @@ class HomePageEvents extends React.Component<Props> {
             isFuture: true,
             orderBy: {
               field: 'START_AT',
-              direction: 'DESC',
+              direction: 'ASC',
             },
           }: HomePageEventsQueryVariables)
         }
