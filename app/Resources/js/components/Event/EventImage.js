@@ -8,6 +8,7 @@ import Image from '../Ui/Medias/Image';
 
 type Props = {|
   +event: EventImage_event,
+  +enabled: boolean,
 |};
 
 const PictureContainer = styled.div`
@@ -31,14 +32,14 @@ const FALLBACK_IMAGE = `${baseUrl}/svg/calendar.svg`;
 
 export class EventImage extends React.Component<Props> {
   render() {
-    const { event } = this.props;
+    const { event, enabled } = this.props;
     const imgURL = event.media && event.media.url ? event.media.url : null;
 
-    return (
+    return enabled ? (
       <PictureContainer style={{ backgroundColor: '#eeeeee' }}>
         <Image src={imgURL} width="100%" height="100%" fallBack={FALLBACK_IMAGE} aria-hidden />
       </PictureContainer>
-    );
+    ) : null;
   }
 }
 

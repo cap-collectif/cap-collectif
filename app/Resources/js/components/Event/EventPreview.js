@@ -34,7 +34,7 @@ export class EventPreview extends React.Component<Props, State> {
     return (
       <div className={`d-flex flex-1-1 event block--bordered ${detailClasses}`}>
         {/* $FlowFixMe */}
-        <EventImage event={event} />
+        <EventImage enabled={false} event={event} />
 
         <div className="d-flex event__infos">
           <div className="event__date hidden-xs">

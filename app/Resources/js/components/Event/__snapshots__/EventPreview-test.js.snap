@@ -5,8 +5,10 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
   className="d-flex flex-1-1 event block--bordered highlighted-comment"
 >
   <ForwardRef(Relay(EventImage))
+    enabled={false}
     event={
       Object {
+        "$fragmentRefs": null,
         "$refType": null,
         "author": Object {
           "media": Object {
@@ -17,9 +19,6 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
         },
         "fullAddress": "21 rue george 5, 75012 Paris",
         "id": "event1",
-        "media": Object {
-          "url": "https://picsum.photos/300/400",
-        },
         "themes": Array [
           Object {
             "title": "Le gouter c'est la vie",
@@ -139,8 +138,10 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
   className="d-flex flex-1-1 event block--bordered "
 >
   <ForwardRef(Relay(EventImage))
+    enabled={false}
     event={
       Object {
+        "$fragmentRefs": null,
         "$refType": null,
         "author": Object {
           "media": Object {
@@ -151,9 +152,6 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
         },
         "fullAddress": "21 rue george 5, 75012 Paris",
         "id": "event1",
-        "media": Object {
-          "url": "https://picsum.photos/300/400",
-        },
         "themes": Array [
           Object {
             "title": "Le gouter c'est la vie",
@@ -273,8 +271,10 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
   className="d-flex flex-1-1 event block--bordered "
 >
   <ForwardRef(Relay(EventImage))
+    enabled={false}
     event={
       Object {
+        "$fragmentRefs": null,
         "$refType": null,
         "author": Object {
           "media": null,
@@ -283,9 +283,6 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
         },
         "fullAddress": "21 rue george 5, 75012 Paris",
         "id": "event1",
-        "media": Object {
-          "url": "https://picsum.photos/300/400",
-        },
         "themes": Array [
           Object {
             "title": "Le gouter c'est la vie",
@@ -403,8 +400,10 @@ exports[`<EventPreview /> renders without username 1`] = `
   className="d-flex flex-1-1 event block--bordered "
 >
   <ForwardRef(Relay(EventImage))
+    enabled={false}
     event={
       Object {
+        "$fragmentRefs": null,
         "$refType": null,
         "author": Object {
           "media": Object {
@@ -415,9 +414,6 @@ exports[`<EventPreview /> renders without username 1`] = `
         },
         "fullAddress": "21 rue george 5, 75012 Paris",
         "id": "event1",
-        "media": Object {
-          "url": "https://picsum.photos/300/400",
-        },
         "themes": Array [
           Object {
             "title": "Le gouter c'est la vie",
