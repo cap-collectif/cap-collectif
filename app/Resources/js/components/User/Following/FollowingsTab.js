@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type FollowingsTab_viewer from '~relay/FollowingsTab_viewer.graphql';
+import { type FollowingsTab_viewer } from '~relay/FollowingsTab_viewer.graphql';
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 import OpinionProjectRow from './OpinionProjectRow';
@@ -27,12 +27,16 @@ export class FollowingsTab extends Component<Props, State> {
     const { viewer } = this.props;
 
     const idsProposal =
-      viewer.followingProposals && viewer.followingProposals.edges.length > 0
-        ? viewer.followingProposals.edges.map(edge => edge.node.id)
+      viewer.followingProposals &&
+      viewer.followingProposals.edges &&
+      viewer.followingProposals.edges.length > 0
+        ? viewer.followingProposals.edges.filter(Boolean).map(edge => edge.node.id)
         : null;
     const idsOpinion =
-      viewer.followingOpinions && viewer.followingOpinions.edges.length > 0
-        ? viewer.followingOpinions.edges.map(edge => edge.node.id)
+      viewer.followingOpinions &&
+      viewer.followingOpinions.edges &&
+      viewer.followingOpinions.edges.length > 0
+        ? viewer.followingOpinions.edges.filter(Boolean).map(edge => edge.node.id)
         : null;
 
     this.setState({ open: !this.state.open }, () => {
@@ -54,8 +58,8 @@ export class FollowingsTab extends Component<Props, State> {
     const { open } = this.state;
     const projectsById = {};
 
-    if (viewer.followingOpinions) {
-      viewer.followingOpinions.edges.map(edge => {
+    if (viewer.followingOpinions && viewer.followingOpinions.edges) {
+      viewer.followingOpinions.edges.filter(Boolean).map(edge => {
         projectsById[edge.node.project.id] = {
           type: 'opinionProject',
           object: edge.node.project,
@@ -63,12 +67,14 @@ export class FollowingsTab extends Component<Props, State> {
       });
     }
 
-    if (viewer.followingProposals) {
-      viewer.followingProposals.edges.map(edge => {
-        projectsById[edge.node.project.id] = {
-          type: 'proposalProject',
-          object: edge.node.project,
-        };
+    if (viewer.followingProposals && viewer.followingProposals.edges) {
+      viewer.followingProposals.edges.filter(Boolean).map(edge => {
+        if (edge.node.project) {
+          projectsById[edge.node.project.id] = {
+            type: 'proposalProject',
+            object: edge.node.project,
+          };
+        }
       });
     }
 

@@ -10,7 +10,7 @@ import AccountBox from './AccountBox';
 import type { State, FeatureToggles } from '../../../types';
 import NotificationsForm from './NotificationsForm';
 import FollowingsTab from '../Following/FollowingsTab';
-import type EditProfileTabs_viewer from '~relay/EditProfileTabs_viewer.graphql';
+import { type EditProfileTabs_viewer } from '~relay/EditProfileTabs_viewer.graphql';
 import UserAvatarDeprecated from '../UserAvatarDeprecated';
 import UserLink from '../UserLink';
 import ChangePasswordForm from './ChangePasswordForm';
