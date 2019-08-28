@@ -3,6 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalProjectRow } from './ProposalProjectRow';
+import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalProjectRow />', () => {
   const project1 = {
@@ -18,43 +19,42 @@ describe('<ProposalProjectRow />', () => {
   };
 
   const viewer = {
+    $refType,
     followingProposals: {
+      totalCount: 3,
       edges: [
         {
           node: {
-            url: 'http://carte.perdu.com',
-            id: 'proposal1',
-            title: "Une carte de l'internet",
+            $fragmentRefs,
             project: {
               id: 'project1',
+              url: 'http://carte.perdu.com',
+              title: "Une carte de l'internet",
             },
           },
         },
         {
           node: {
-            url: 'http://gps.perdu.com',
-            id: 'proposal2',
-            title: "Un GPS de l'internet",
+            $fragmentRefs,
             project: {
               id: 'project1',
+              url: 'http://gps.perdu.com',
+              title: "Un GPS de l'internet",
             },
           },
         },
         {
           node: {
-            url: 'https://randomstreetview.com/',
-            id: 'proposal3',
-            title: 'Go  nowhere',
+            $fragmentRefs,
             project: {
               id: 'project2',
+              url: 'https://randomstreetview.com/',
+              title: 'Go  nowhere',
             },
           },
         },
       ],
     },
-  };
-  const viewerWithoutProjectProposal = {
-    followingProposals: [],
   };
 
   it('should render the project 1 with his proposal displayed', () => {
@@ -70,9 +70,7 @@ describe('<ProposalProjectRow />', () => {
   });
 
   it('should render close collapse', () => {
-    const wrapper = shallow(
-      <ProposalProjectRow viewer={viewerWithoutProjectProposal} project={project1} />,
-    );
+    const wrapper = shallow(<ProposalProjectRow viewer={viewer} project={project1} />);
     wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();
   });

@@ -60,10 +60,12 @@ export class FollowingsTab extends Component<Props, State> {
 
     if (viewer.followingOpinions && viewer.followingOpinions.edges) {
       viewer.followingOpinions.edges.filter(Boolean).map(edge => {
-        projectsById[edge.node.project.id] = {
-          type: 'opinionProject',
-          object: edge.node.project,
-        };
+        if (edge.node.project) {
+          projectsById[edge.node.project.id] = {
+            type: 'opinionProject',
+            object: edge.node.project,
+          };
+        }
       });
     }
 

@@ -4,6 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { EditProfileTabs } from './EditProfileTabs';
 import { features } from '../../../redux/modules/default';
+import { $fragmentRefs, $refType } from '../../../mocks';
 
 describe('<EditProfileTabs />', () => {
   const propsWithoutParis = {
@@ -32,6 +33,8 @@ describe('<EditProfileTabs />', () => {
   };
 
   const viewer = {
+    $refType,
+    $fragmentRefs,
     username: 'user',
     displayName: 'iAmAUser',
     media: {

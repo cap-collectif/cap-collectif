@@ -32,8 +32,12 @@ export class ProposalProjectRow extends Component<Props, State> {
   onUnfollowCurrentProject() {
     const { project, viewer } = this.props;
     const idsProposal = viewer.followingProposals.edges
-      .filter(edge => edge.node.project.id === project.id)
-      .map(edge => edge.node.__id);
+      ? viewer.followingProposals.edges
+          .filter(Boolean)
+          .filter(edge => edge.node.project.id === project.id)
+          // $FlowFixMe __id seems to be nullable
+          .map(edge => edge.node.__id)
+      : [];
 
     this.setState({ open: !this.state.open }, () => {
       UnfollowProposalMutation.commit({

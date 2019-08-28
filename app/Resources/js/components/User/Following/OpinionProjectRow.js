@@ -32,8 +32,13 @@ export class OpinionProjectRow extends Component<Props, State> {
   onUnfollowCurrentProject() {
     const { project, viewer } = this.props;
     const idsOpinion = viewer.followingOpinions.edges
-      .filter(edge => edge.node.project.id === project.id)
-      .map(edge => edge.node.id);
+      ? viewer.followingOpinions.edges
+          .filter(Boolean)
+          // $FlowFixMe ID seems to be nullable
+          .filter(edge => edge.node.project.id === project.id)
+          // $FlowFixMe ID seems to be nullable
+          .map(edge => edge.node.id)
+      : [];
 
     this.setState({ open: !this.state.open }, () => {
       UnfollowOpinionMutation.commit({
@@ -65,6 +70,7 @@ export class OpinionProjectRow extends Component<Props, State> {
             {viewer.followingOpinions.edges &&
               viewer.followingOpinions.edges
                 .filter(Boolean)
+                // $FlowFixMe ID seems to be nullable
                 .filter(edge => edge.node.project.id === project.id)
                 .map((edge, key) => <OpinionRow key={key} opinion={edge.node} />)}
           </ListGroup>
