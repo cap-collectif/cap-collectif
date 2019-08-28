@@ -42,7 +42,7 @@ export const ProjectHeaderAuthorsView = (properties: Props) => {
           error,
           props,
         }: {|
-          ...ReadyState,
+          ...ReactRelayReadyState,
           props: ?ProjectHeaderAuthorsViewQueryResponse,
         |}) => {
           if (error) {

@@ -42,7 +42,7 @@ export default (data: Props) => (
           props,
         }: {
           props: ?ProposalVoteBasketWidgetAppQueryResponse,
-          ...ReadyState,
+          ...ReactRelayReadyState,
         }) => {
           if (error) {
             return graphqlError;

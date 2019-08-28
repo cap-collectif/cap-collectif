@@ -29,7 +29,7 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
             }
           }
         `}
-        render={({ error, props }: { props: ?ArgumentListAppQueryResponse, ...ReadyState }) => {
+        render={({ error, props }: { props: ?ArgumentListAppQueryResponse, ...ReactRelayReadyState }) => {
           if (error) {
             return graphqlError;
           }

@@ -35,7 +35,7 @@ const mutation = graphql`
   }
 `;
 
-const updater = (store: RecordSourceSelectorProxy) => {
+const updater = (store: ReactRelayRecordSourceSelectorProxy) => {
   const payload = store.getRootField('createProjectDistrict');
   const districtEdge = payload.getLinkedRecord('districtEdge');
   const root = store.getRoot();

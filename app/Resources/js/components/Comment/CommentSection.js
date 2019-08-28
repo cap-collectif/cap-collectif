@@ -35,7 +35,7 @@ export class CommentSection extends React.Component<Props> {
               }
             }
           `}
-          render={({ error, props }: { props: ?CommentSectionQueryResponse, ...ReadyState }) => {
+          render={({ error, props }: { props: ?CommentSectionQueryResponse, ...ReactRelayReadyState }) => {
             if (error) {
               return graphqlError;
             }

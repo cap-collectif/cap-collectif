@@ -51,7 +51,7 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
             }
           }
         `}
-        render={({ error, props }: { ...ReadyState, props: ?UserProposalsAppQueryResponse }) => {
+        render={({ error, props }: { ...ReactRelayReadyState, props: ?UserProposalsAppQueryResponse }) => {
           if (error) {
             return graphqlError;
           }

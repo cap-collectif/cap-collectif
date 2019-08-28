@@ -11,7 +11,7 @@ export const renderComponent = ({
   props,
 }: {
   props: ?EvaluationsIndexPageQueryResponse,
-  ...ReadyState,
+  ...ReactRelayReadyState,
 }) => {
   if (error) {
     return graphqlError;

@@ -19,7 +19,7 @@ const component = ({
   props,
 }: {
   props: ?QuestionnaireStepPageQueryResponse,
-  ...ReadyState,
+  ...ReactRelayReadyState,
 }) => {
   if (error) {
     return graphqlError;

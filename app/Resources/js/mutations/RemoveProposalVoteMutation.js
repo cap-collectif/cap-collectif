@@ -54,7 +54,7 @@ const commit = (
         deletedIDFieldName: 'previousVoteId',
       },
     ],
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('removeProposalVote');
 
       if (!payload || !payload.getValue('previousVoteId')) return;

@@ -107,7 +107,7 @@ export class ProjectDistrictAdminPage extends React.Component<Props, State> {
           error,
           props,
         }: {|
-          ...ReadyState,
+          ...ReactRelayReadyState,
           props: ?ProjectDistrictAdminPageQueryResponse,
         |}) => {
           if (error) {

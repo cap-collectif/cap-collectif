@@ -69,7 +69,7 @@ const commit = (
         edgeName: 'voteEdge',
       },
     ],
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('addProposalVote');
 
       if (!payload || !payload.getLinkedRecord('voteEdge')) {

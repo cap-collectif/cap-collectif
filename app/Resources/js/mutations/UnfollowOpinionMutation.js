@@ -23,7 +23,7 @@ const mutation = graphql`
   }
 `;
 
-const decrementFollowerCount = (opinionId: string, store: RecordSourceSelectorProxy) => {
+const decrementFollowerCount = (opinionId: string, store: ReactRelayRecordSourceSelectorProxy) => {
   const opinionProxy = store.get(opinionId);
   if (!opinionProxy) return;
 
@@ -54,7 +54,7 @@ const commit = (
         deletedIDFieldName: 'unfollowerId',
       },
     ],
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('unfollowOpinion');
       if (!payload || !payload.getLinkedRecord('opinion')) {
         return;

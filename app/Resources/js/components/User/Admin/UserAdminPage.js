@@ -19,7 +19,7 @@ const onUnload = e => {
   e.returnValue = true;
 };
 
-const component = ({ error, props }: { props?: ?UserAdminPageQueryResponse, ...ReadyState }) => {
+const component = ({ error, props }: { props?: ?UserAdminPageQueryResponse, ...ReactRelayReadyState }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

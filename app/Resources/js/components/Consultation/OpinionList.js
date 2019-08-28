@@ -166,7 +166,7 @@ export class OpinionList extends React.Component<Props, State> {
                     : consultation.opinionCountShownBySection ?? INITIAL_PREVIEW_COUNT,
                 }: OpinionListQueryVariables)
               }
-              render={({ error, props }: { props: ?OpinionListQueryResponse, ...ReadyState }) => {
+              render={({ error, props }: { props: ?OpinionListQueryResponse, ...ReactRelayReadyState }) => {
                 if (error) {
                   console.log(error); // eslint-disable-line no-console
                   return graphqlError;

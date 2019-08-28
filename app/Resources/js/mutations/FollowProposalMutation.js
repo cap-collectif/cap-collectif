@@ -48,7 +48,7 @@ const commit = (variables: FollowProposalMutationVariables): Promise<Response> =
         edgeName: 'followerEdge',
       },
     ],
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('followProposal');
       if (!payload || !payload.getLinkedRecord('followerEdge')) {
         return;

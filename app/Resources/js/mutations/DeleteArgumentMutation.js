@@ -33,7 +33,7 @@ const commit = (
         deletedIDFieldName: 'deletedArgumentId',
       },
     ],
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('deleteArgument');
       if (!payload) return;
       const argumentable = payload.getLinkedRecord('argumentable');

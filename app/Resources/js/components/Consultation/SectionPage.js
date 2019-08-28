@@ -13,7 +13,7 @@ export type Props = {|
   +isAuthenticated: boolean,
 |};
 
-const render = ({ error, props }: { props: ?SectionPageQueryResponse, ...ReadyState }) => {
+const render = ({ error, props }: { props: ?SectionPageQueryResponse, ...ReactRelayReadyState }) => {
   if (error) {
     return graphqlError;
   }

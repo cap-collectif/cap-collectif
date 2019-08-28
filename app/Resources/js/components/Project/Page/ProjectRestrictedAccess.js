@@ -27,7 +27,7 @@ export class ProjectRestrictedAccess extends React.Component<Props> {
       props,
     }: {
       props: ?ProjectRestrictedAccessQueryResponse,
-      ...ReadyState,
+      ...ReactRelayReadyState,
     }) => {
       if (error) {
         return graphqlError;

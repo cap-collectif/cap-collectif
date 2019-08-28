@@ -69,7 +69,7 @@ class HomePageEvents extends React.Component<Props> {
     error,
     props,
   }: {|
-    ...ReadyState,
+    ...ReactRelayReadyState,
     props: ?HomePageEventsQueryResponse,
   |}) => {
     if (error) {

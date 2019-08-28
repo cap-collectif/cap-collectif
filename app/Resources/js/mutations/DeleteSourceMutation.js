@@ -32,7 +32,7 @@ const commit = (
         deletedIDFieldName: 'deletedSourceId',
       },
     ],
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('deleteSource');
       if (!payload) {
         return;

@@ -44,7 +44,7 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
           error,
           props,
         }: {
-          ...ReadyState,
+          ...ReactRelayReadyState,
           props: ?ProfileUserCommentAppQueryResponse,
         }) => {
           if (error) {

@@ -35,7 +35,7 @@ export const rendering = ({
   error,
   props,
 }: {|
-  ...ReadyState,
+  ...ReactRelayReadyState,
   props: ?SourcePageQueryResponse,
 |}) => {
   if (error) {

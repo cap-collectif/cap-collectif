@@ -1,14 +1,11 @@
 // @flow
-import type { CacheConfig, UploadableMap, Variables } from 'react-relay';
-// $FlowFixMe typed with any, need to find the right type.
-import type { RequestNode } from 'relay-runtime';
 import Fetcher from '../services/Fetcher';
 
 const executeFunction = (
-  operation: RequestNode,
-  variables: Variables,
-  cacheConfig: CacheConfig,
-  uploadables: ?UploadableMap,
+  operation: ReactRuntimeRequestNode,
+  variables: ReactRelayVariables,
+  cacheConfig: ReactRelayCacheConfig,
+  uploadables: ?ReactRelayUploadableMap,
 ) => {
   if (uploadables) {
     if (!window.FormData) {

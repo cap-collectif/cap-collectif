@@ -12,7 +12,7 @@ const component = ({
   props,
 }: {
   props: ?AuthentificationAdminPageQueryResponse,
-  ...ReadyState,
+  ...ReactRelayReadyState,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console

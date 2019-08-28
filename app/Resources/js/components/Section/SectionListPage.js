@@ -24,7 +24,7 @@ export const rendering = ({
   error,
   props,
 }: {|
-  ...ReadyState,
+  ...ReactRelayReadyState,
   props: ?SectionListPageQueryResponse,
 |}) => {
   if (error) {

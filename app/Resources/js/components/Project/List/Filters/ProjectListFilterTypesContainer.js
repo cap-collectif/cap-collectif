@@ -14,7 +14,7 @@ export default class ProjectsListFilterTypesContainer extends React.Component<Pr
     props,
   }: {
     props: ?ProjectListFilterTypesQueryResponse,
-    ...ReadyState,
+    ...ReactRelayReadyState,
   }) => {
     if (error) {
       console.log(error); // eslint-disable-line no-console

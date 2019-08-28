@@ -43,7 +43,7 @@ export class UnpublishedArgumentListRenderer extends React.Component<Props> {
             error,
           }: {
             props: ?UnpublishedArgumentListRendererQueryResponse,
-            ...ReadyState,
+            ...ReactRelayReadyState,
           }) => {
             if (error) {
               return graphqlError;

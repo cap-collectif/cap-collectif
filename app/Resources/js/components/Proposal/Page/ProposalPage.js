@@ -59,7 +59,7 @@ export class ProposalPage extends React.Component<Props> {
             cursor: null,
             isAuthenticated: this.props.isAuthenticated,
           }}
-          render={({ error, props }: { props?: ProposalPageQueryResponse, ...ReadyState }) => {
+          render={({ error, props }: { props?: ProposalPageQueryResponse, ...ReactRelayReadyState }) => {
             if (error) {
               console.log(error); // eslint-disable-line no-console
               return graphqlError;

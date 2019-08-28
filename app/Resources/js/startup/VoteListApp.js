@@ -23,7 +23,7 @@ export default ({ userId }: { userId: string }) => (
             }
           }
         `}
-        render={({ error, props }: { props: ?VoteListAppQueryResponse, ...ReadyState }) => {
+        render={({ error, props }: { props: ?VoteListAppQueryResponse, ...ReactRelayReadyState }) => {
           if (error) {
             return graphqlError;
           }

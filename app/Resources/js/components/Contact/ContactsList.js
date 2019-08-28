@@ -8,7 +8,7 @@ import ContactsListView from './ContactsListView';
 type Props = {};
 
 class ContactsList extends React.Component<Props> {
-  renderContactList = ({ error, props }: { props: any, ...ReadyState }) => {
+  renderContactList = ({ error, props }: { props: any, ...ReactRelayReadyState }) => {
     if (error) {
       console.log(error); // eslint-disable-line no-console
       return graphqlError;

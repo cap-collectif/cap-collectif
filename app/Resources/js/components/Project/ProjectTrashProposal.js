@@ -50,7 +50,7 @@ export class ProjectTrashProposal extends React.Component<Props> {
             props,
           }: {
             props?: ?ProjectTrashProposalQueryResponse,
-            ...ReadyState,
+            ...ReactRelayReadyState,
           }) => {
             if (error) {
               return graphqlError;

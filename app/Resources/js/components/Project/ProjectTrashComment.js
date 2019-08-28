@@ -44,7 +44,7 @@ export class ProjectTrashComment extends React.Component<Props> {
             props,
           }: {
             props?: ?ProjectTrashCommentQueryResponse,
-            ...ReadyState,
+            ...ReactRelayReadyState,
           }) => {
             if (error) {
               return graphqlError;

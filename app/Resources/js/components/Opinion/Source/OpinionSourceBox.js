@@ -134,7 +134,7 @@ export class OpinionSourceBox extends React.Component<Props, State> {
               props,
             }: {
               props?: ?OpinionSourceBoxQueryResponse,
-              ...ReadyState,
+              ...ReactRelayReadyState,
             }) => {
               if (error) {
                 return graphqlError;

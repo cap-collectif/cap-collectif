@@ -53,7 +53,7 @@ class PresentationStepEvents extends React.Component<Props> {
     error,
     props,
   }: {|
-    ...ReadyState,
+    ...ReactRelayReadyState,
     props: ?PresentationStepEventsQueryResponse,
   |}) => {
     if (error) {

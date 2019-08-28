@@ -12,7 +12,7 @@ const siteFaviconAdminForm = ({
   props,
 }: {
   props?: ?SiteFaviconAdminPageQueryResponse,
-  ...ReadyState,
+  ...ReactRelayReadyState,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console

@@ -23,7 +23,7 @@ const mutation = graphql`
   }
 `;
 
-const decrementFollowerCount = (proposalId: string, store: RecordSourceSelectorProxy) => {
+const decrementFollowerCount = (proposalId: string, store: ReactRelayRecordSourceSelectorProxy) => {
   const proposalProxy = store.get(proposalId);
   if (!proposalProxy) return;
 
@@ -57,7 +57,7 @@ const commit = (
         deletedIDFieldName: 'unfollowerId',
       },
     ],
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('unfollowProposal');
       if (!payload || !payload.getLinkedRecord('proposal')) {
         return;

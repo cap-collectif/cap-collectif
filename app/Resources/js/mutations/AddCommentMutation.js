@@ -64,7 +64,7 @@ const commit = (variables: AddCommentMutationVariables): Promise<AddCommentMutat
         ],
       },
     ],
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('addComment');
       if (!payload || !payload.getLinkedRecord('commentEdge')) {
         return;

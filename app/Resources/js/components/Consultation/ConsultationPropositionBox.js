@@ -87,7 +87,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
       error,
       props,
     }: {
-      ...ReadyState,
+      ...ReactRelayReadyState,
       props: ?ConsultationPropositionBoxQueryResponse,
     }) => {
       if (error) {

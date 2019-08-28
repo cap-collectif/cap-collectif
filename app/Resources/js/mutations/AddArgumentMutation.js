@@ -90,7 +90,7 @@ const commit = (
     mutation,
     variables,
     configs: getConfigs(variables, viewerIsConfirmed),
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('addArgument');
       if (!payload || !payload.getLinkedRecord('argumentEdge')) {
         // Mutation failed
