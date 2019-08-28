@@ -42,7 +42,9 @@ const updater = (store: RecordSourceSelectorProxy) => {
 
   const connection = ConnectionHandler.getConnection(root, 'ProjectDistrictAdminPage_districts');
 
-  ConnectionHandler.insertEdgeAfter(connection, districtEdge);
+  if (connection) {
+    ConnectionHandler.insertEdgeAfter(connection, districtEdge);
+  }
 };
 
 const commit = (
@@ -68,7 +70,9 @@ const commit = (
         'ProjectDistrictAdminPage_districts',
       );
 
-      ConnectionHandler.insertEdgeAfter(connection, newEdge);
+      if (connection) {
+        ConnectionHandler.insertEdgeAfter(connection, newEdge);
+      }
     },
   });
 

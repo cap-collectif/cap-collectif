@@ -6,7 +6,6 @@ declare module 'relay-runtime' {
   declare export type ReaderFragment = any;
   declare export type FragmentReference = any;
   declare export type ConcreteRequest = any;
-  declare export type RequestNode = any;
 
   declare export class ConnectionHandler {
     static getConnection: (

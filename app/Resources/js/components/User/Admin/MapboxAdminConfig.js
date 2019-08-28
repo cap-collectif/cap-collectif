@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { Field, type FormProps, reduxForm, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled from 'styled-components';
-import { type MapboxAdminConfig_mapToken } from '~relay/MapAdminPageQuery.graphql';
+import { type MapAdminPageQueryResponse } from '~relay/MapAdminPageQuery.graphql';
 import ChangeMapProviderTokenMutation from '../../../mutations/ChangeMapProviderTokenMutation';
 import type { GlobalState } from '../../../types';
 import component from '../../Form/Field';
@@ -23,7 +23,7 @@ type FormValues = {
 
 type Props = {|
   ...FormProps,
-  mapToken: MapboxAdminConfig_mapToken,
+  mapToken: MapAdminPageQueryResponse,
 |};
 
 type State = {

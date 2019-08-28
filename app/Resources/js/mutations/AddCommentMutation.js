@@ -80,6 +80,7 @@ const commit = (variables: AddCommentMutationVariables): Promise<AddCommentMutat
         'CommentAnswers_answers',
       );
       if (answersConnection) {
+        // $FlowFixMe argument 1 must be a int
         answersConnection.setValue(answersConnection.getValue('totalCount') + 1, 'totalCount');
       }
 
@@ -91,6 +92,7 @@ const commit = (variables: AddCommentMutationVariables): Promise<AddCommentMutat
         },
       );
       if (commentsConnection) {
+        // $FlowFixMe argument 1 must be a int
         commentsConnection.setValue(commentsConnection.getValue('totalCount') + 1, 'totalCount');
       }
 

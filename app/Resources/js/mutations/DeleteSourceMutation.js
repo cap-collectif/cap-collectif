@@ -62,6 +62,7 @@ const commit = (
             'Expected "OpinionSourceBox_viewerSourcesUnpublished" to be in the store',
           );
         }
+        // $FlowFixMe argument 1 must be a int
         connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
       }
     },

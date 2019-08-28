@@ -1,5 +1,6 @@
 // @flow
 import type { CacheConfig, UploadableMap, Variables } from 'react-relay';
+// $FlowFixMe typed with any, need to find the right type.
 import type { RequestNode } from 'relay-runtime';
 import Fetcher from '../services/Fetcher';
 

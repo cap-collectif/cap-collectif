@@ -31,6 +31,7 @@ const ProjectAdminPage = ({ projectId }: { projectId: string }) => (
           if (props) {
             return <ProjectContentAdminPage project={props.project} />;
           }
+          return null;
         }}
       />
     </IntlProvider>

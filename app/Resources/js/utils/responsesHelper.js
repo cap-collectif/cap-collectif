@@ -875,7 +875,7 @@ export const renderResponses = ({
   form,
   change,
   disabled,
-}: {|
+}: {
   ...FieldArrayProps,
   questions: Questions,
   responses: ResponsesInReduxForm,
@@ -883,7 +883,7 @@ export const renderResponses = ({
   form: string,
   intl: IntlShape,
   disabled: boolean,
-|}) => {
+}) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
   const ids = questions
@@ -899,180 +899,181 @@ export const renderResponses = ({
   });
   return (
     <div>
-      {fields.map((member, index) => {
-        const field = questions[index];
-        let isAvailableQuestion = true;
+      {fields &&
+        fields.map((member, index) => {
+          const field = questions[index];
+          let isAvailableQuestion = true;
 
-        if (!availableQuestions.includes(field.id)) {
-          isAvailableQuestion = false;
-        }
+          if (!availableQuestions.includes(field.id)) {
+            isAvailableQuestion = false;
+          }
 
-        const { isOtherAllowed } = field;
+          const { isOtherAllowed } = field;
 
-        const labelAppend = field.required
-          ? strategy === 'minority_required'
-            ? ` <span class="warning small"> ${intl.formatMessage({
-                id: 'global.mandatory',
+          const labelAppend = field.required
+            ? strategy === 'minority_required'
+              ? ` <span class="warning small"> ${intl.formatMessage({
+                  id: 'global.mandatory',
+                })}</span>`
+              : ''
+            : strategy === 'majority_required' || strategy === 'half_required'
+            ? ` <span class="excerpt small"> ${intl.formatMessage({
+                id: 'global.optional',
               })}</span>`
-            : ''
-          : strategy === 'majority_required' || strategy === 'half_required'
-          ? ` <span class="excerpt small"> ${intl.formatMessage({
-              id: 'global.optional',
-            })}</span>`
-          : '';
+            : '';
 
-        const labelMessage = field.title + labelAppend;
+          const labelMessage = field.title + labelAppend;
 
-        const label = (
-          <React.Fragment>
-            {field.number && <span className="visible-print-block">{field.number}.</span>}{' '}
-            <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
-          </React.Fragment>
-        );
+          const label = (
+            <React.Fragment>
+              {field.number && <span className="visible-print-block">{field.number}.</span>}{' '}
+              <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
+            </React.Fragment>
+          );
 
-        switch (field.type) {
-          case 'section': {
-            return (
-              <div key={field.id} className="form__section">
-                <TitleInvertContrast>{field.title}</TitleInvertContrast>
-                <div className="mb-15">
-                  <WYSIWYGRender value={field.description} />
+          switch (field.type) {
+            case 'section': {
+              return (
+                <div key={field.id} className="form__section">
+                  <TitleInvertContrast>{field.title}</TitleInvertContrast>
+                  <div className="mb-15">
+                    <WYSIWYGRender value={field.description} />
+                  </div>
                 </div>
-              </div>
-            );
-          }
-          case 'medias': {
-            return (
-              <div
-                key={field.id}
-                className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
-                <PrivateBox show={field.private}>
-                  <Field
-                    name={`${member}.value`}
-                    id={`${form}-${member}`}
-                    type="medias"
-                    component={component}
-                    help={field.helpText}
-                    description={field.description}
-                    placeholder="reply.your_response"
-                    label={label}
-                    disabled={disabled}
-                  />
-                  {/* $FlowFixMe please fix this */}
-                  <ConditionalJumps jumps={field.jumps} />
-                </PrivateBox>
-              </div>
-            );
-          }
-          case 'select': {
-            if (!('choices' in field)) return null;
-            return (
-              <div
-                key={field.id}
-                className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
-                <PrivateBox show={field.private}>
-                  <Field
-                    name={`${member}.value`}
-                    id={`${form}-${member}`}
-                    type={field.type}
-                    component={component}
-                    help={field.helpText}
-                    isOtherAllowed={isOtherAllowed}
-                    description={field.description}
-                    placeholder="reply.your_response"
-                    label={label}
-                    disabled={disabled}>
-                    <option value="" disabled>
-                      {intl.formatMessage({ id: 'global.select' })}
-                    </option>
-                    {field.choices &&
-                      field.choices.map(choice => (
-                        <option key={choice.id} value={choice.title}>
-                          {choice.title}
-                        </option>
-                      ))}
-                  </Field>
-                  <div className="visible-print-block form-fields">
-                    {field.choices &&
-                      field.choices.map(choice => (
-                        <div key={choice.id} className="radio">
-                          {choice.title}
-                        </div>
-                      ))}
-                  </div>
-                  {/* $FlowFixMe please fix this */}
-                  <ConditionalJumps jumps={field.jumps} />
-                </PrivateBox>
-              </div>
-            );
-          }
-          default: {
-            const response =
-              responses && responses[index] && responses[index].value
-                ? responses[index].value
-                : null;
-            let choices = [];
-            if (
-              field.type === 'ranking' ||
-              field.type === 'radio' ||
-              field.type === 'checkbox' ||
-              field.type === 'button'
-            ) {
-              choices = formattedChoicesInField(field);
-
-              if (field.type === 'radio') {
-                return (
-                  <div
-                    key={field.id}
-                    className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
-                    <PrivateBox show={field.private}>
-                      <div key={`${member}-container`}>
-                        <MultipleChoiceRadio
-                          id={`${form}-${member}`}
-                          name={member}
-                          description={field.description}
-                          helpText={field.helpText}
-                          isOtherAllowed={isOtherAllowed}
-                          label={label}
-                          change={change}
-                          choices={choices}
-                          value={response}
-                          disabled={disabled}
-                        />
-                      </div>
-                      {/* $FlowFixMe please fix this */}
-                      <ConditionalJumps jumps={field.jumps} />
-                    </PrivateBox>
-                  </div>
-                );
-              }
+              );
             }
+            case 'medias': {
+              return (
+                <div
+                  key={field.id}
+                  className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
+                  <PrivateBox show={field.private}>
+                    <Field
+                      name={`${member}.value`}
+                      id={`${form}-${member}`}
+                      type="medias"
+                      component={component}
+                      help={field.helpText}
+                      description={field.description}
+                      placeholder="reply.your_response"
+                      label={label}
+                      disabled={disabled}
+                    />
+                    {/* $FlowFixMe please fix this */}
+                    <ConditionalJumps jumps={field.jumps} />
+                  </PrivateBox>
+                </div>
+              );
+            }
+            case 'select': {
+              if (!('choices' in field)) return null;
+              return (
+                <div
+                  key={field.id}
+                  className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
+                  <PrivateBox show={field.private}>
+                    <Field
+                      name={`${member}.value`}
+                      id={`${form}-${member}`}
+                      type={field.type}
+                      component={component}
+                      help={field.helpText}
+                      isOtherAllowed={isOtherAllowed}
+                      description={field.description}
+                      placeholder="reply.your_response"
+                      label={label}
+                      disabled={disabled}>
+                      <option value="" disabled>
+                        {intl.formatMessage({ id: 'global.select' })}
+                      </option>
+                      {field.choices &&
+                        field.choices.map(choice => (
+                          <option key={choice.id} value={choice.title}>
+                            {choice.title}
+                          </option>
+                        ))}
+                    </Field>
+                    <div className="visible-print-block form-fields">
+                      {field.choices &&
+                        field.choices.map(choice => (
+                          <div key={choice.id} className="radio">
+                            {choice.title}
+                          </div>
+                        ))}
+                    </div>
+                    {/* $FlowFixMe please fix this */}
+                    <ConditionalJumps jumps={field.jumps} />
+                  </PrivateBox>
+                </div>
+              );
+            }
+            default: {
+              const response =
+                responses && responses[index] && responses[index].value
+                  ? responses[index].value
+                  : null;
+              let choices = [];
+              if (
+                field.type === 'ranking' ||
+                field.type === 'radio' ||
+                field.type === 'checkbox' ||
+                field.type === 'button'
+              ) {
+                choices = formattedChoicesInField(field);
 
-            return (
-              <div
-                key={field.id}
-                className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
-                <PrivateBox show={field.private}>
-                  <Field
-                    name={`${member}.value`}
-                    id={`${form}-${member}`}
-                    type={field.type}
-                    component={component}
-                    description={field.description}
-                    help={field.helpText}
-                    isOtherAllowed={isOtherAllowed}
-                    placeholder="reply.your_response"
-                    choices={choices}
-                    label={label}
-                    disabled={disabled}
-                    value={response}
-                  />
-                </PrivateBox>
-              </div>
-            );
+                if (field.type === 'radio') {
+                  return (
+                    <div
+                      key={field.id}
+                      className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
+                      <PrivateBox show={field.private}>
+                        <div key={`${member}-container`}>
+                          <MultipleChoiceRadio
+                            id={`${form}-${member}`}
+                            name={member}
+                            description={field.description}
+                            helpText={field.helpText}
+                            isOtherAllowed={isOtherAllowed}
+                            label={label}
+                            change={change}
+                            choices={choices}
+                            value={response}
+                            disabled={disabled}
+                          />
+                        </div>
+                        {/* $FlowFixMe please fix this */}
+                        <ConditionalJumps jumps={field.jumps} />
+                      </PrivateBox>
+                    </div>
+                  );
+                }
+              }
+
+              return (
+                <div
+                  key={field.id}
+                  className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
+                  <PrivateBox show={field.private}>
+                    <Field
+                      name={`${member}.value`}
+                      id={`${form}-${member}`}
+                      type={field.type}
+                      component={component}
+                      description={field.description}
+                      help={field.helpText}
+                      isOtherAllowed={isOtherAllowed}
+                      placeholder="reply.your_response"
+                      choices={choices}
+                      label={label}
+                      disabled={disabled}
+                      value={response}
+                    />
+                  </PrivateBox>
+                </div>
+              );
+            }
           }
-        }
-      })}
+        })}
     </div>
   );
 };

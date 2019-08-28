@@ -65,6 +65,7 @@ const commit = (variables: FollowOpinionMutationVariables): Promise<Response> =>
         'OpinionFollowersBox_followers',
       );
       if (connection) {
+        // $FlowFixMe argument 1 must be a int
         connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
       }
     },

@@ -3,8 +3,8 @@ import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
-  UpdateRegistrationFormQuestionsVariables,
-  UpdateRegistrationFormQuestionsResponse,
+  UpdateRegistrationFormQuestionsMutationVariables,
+  UpdateRegistrationFormQuestionsMutationResponse,
 } from '~relay/UpdateRegistrationFormQuestionsMutation.graphql';
 
 const mutation = graphql`
@@ -18,8 +18,8 @@ const mutation = graphql`
 `;
 
 const commit = (
-  variables: UpdateRegistrationFormQuestionsVariables,
-): Promise<UpdateRegistrationFormQuestionsResponse> =>
+  variables: UpdateRegistrationFormQuestionsMutationVariables,
+): Promise<UpdateRegistrationFormQuestionsMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
