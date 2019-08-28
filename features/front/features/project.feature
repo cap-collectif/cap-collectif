@@ -264,7 +264,10 @@ Scenario: Pierre can access to a restricted project to his user group
   When I unfold "group3" group inside restricted access modal
   Then I should see "Utilisateurs"
   And I should not see "ptondereau" in the "#group3-modal .list-group" element
-  Then I search "ptondereau" in list "#group3-modal .list-group"
+  And I should see "global.more"
+  Then I click on button "#load-more"
+  And I wait 2 seconds
+  Then I should see "ptondereau" in the "#group3-modal .list-group" element
 
 Scenario: Anonymous can access a project and see all authors
   Given I visited "collect page" with:

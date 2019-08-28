@@ -38,13 +38,13 @@ describe('<Reply />', () => {
     id: 'reply1',
   };
 
-  it('should render correctly with step', () => {
+  it('should render correctly with profile not enabled but step', () => {
     const wrapper = shallow(<Reply reply={replyWithStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly without step', () => {
-    const wrapper = shallow(<Reply reply={replyWithoutStep} />);
+  it('should render correctly with profile enabled but without step', () => {
+    const wrapper = shallow(<Reply reply={replyWithoutStep} isProfileEnabled />);
     expect(wrapper).toMatchSnapshot();
   });
 });

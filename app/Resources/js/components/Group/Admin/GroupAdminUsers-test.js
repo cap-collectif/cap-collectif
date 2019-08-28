@@ -3,13 +3,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { GroupAdminUsers } from './GroupAdminUsers';
-import { $refType, $fragmentRefs, intlMock, formMock, relayPaginationMock } from '../../../mocks';
+import { $refType, $fragmentRefs, intlMock, formMock } from '../../../mocks';
 
 describe('<GroupAdminUsers />', () => {
   const props = {
     ...formMock,
     intl: intlMock,
-    relay: relayPaginationMock,
     dispatch: jest.fn(),
     group: {
       $refType,
@@ -24,12 +23,6 @@ describe('<GroupAdminUsers />', () => {
             },
           },
         ],
-        pageInfo: {
-          hasPreviousPage: false,
-          hasNextPage: true,
-          startCursor: '1',
-          endCursor: '3',
-        },
       },
     },
   };

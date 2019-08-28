@@ -94,7 +94,8 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
                 value={"2014-12-31T23:00:00.000Z"}
                 year="numeric"
               />,
-              "user": <ForwardRef(Relay(Connect(UserLink)))
+              "user": <UserLink
+                className=""
                 user={
                   Object {
                     "displayName": "userAdmin",
@@ -293,7 +294,8 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
                 value={"2014-12-31T23:00:00.000Z"}
                 year="numeric"
               />,
-              "user": <ForwardRef(Relay(Connect(UserLink)))
+              "user": <UserLink
+                className=""
                 user={
                   Object {
                     "displayName": "userAdmin",
@@ -494,7 +496,8 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
                 value={"2014-12-31T23:00:00.000Z"}
                 year="numeric"
               />,
-              "user": <ForwardRef(Relay(Connect(UserLink)))
+              "user": <UserLink
+                className=""
                 user={
                   Object {
                     "displayName": "userAdmin",

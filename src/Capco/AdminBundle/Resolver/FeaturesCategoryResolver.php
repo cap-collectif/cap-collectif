@@ -116,6 +116,7 @@ class FeaturesCategoryResolver
             $toggles['server_side_rendering'] = $this->manager->isActive('server_side_rendering');
             $toggles['export'] = $this->manager->isActive('export');
             $toggles['indexation'] = $this->manager->isActive('indexation');
+            $toggles['secure_password'] = $this->manager->isActive('secure_password');
             $toggles['new_feature_questionnaire_result'] = $this->manager->isActive(
                 'new_feature_questionnaire_result'
             );

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { container as UserLink } from '../../User/UserLink';
+import UserLink from '../../User/UserLink';
 import ElementIcon from './ElementIcon';
 import ElementTitle from './ElementTitle';
 import ElementBreadcrumb from './ElementBreadcrumb';
@@ -31,7 +31,7 @@ class ElementBlock extends React.Component {
     if (element.author) {
       return (
         <span>
-          <UserLink legacyUser={element.author} /> •{' '}
+          <UserLink user={element.author} /> •{' '}
         </span>
       );
     }
