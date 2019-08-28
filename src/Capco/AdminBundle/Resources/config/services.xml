@@ -14,10 +14,6 @@
             <tag name="sonata.block" />
         </service>
 
-        <service id="Capco\AdminBundle\Controller\SettingsController">
-            <argument type="service" id="Capco\AppBundle\Repository\AbstractSSOConfigurationRepository" />
-        </service>
-
         <service id="Capco\AdminBundle\Resolver\FeaturesCategoryResolver" autowire="true">
         </service>
 

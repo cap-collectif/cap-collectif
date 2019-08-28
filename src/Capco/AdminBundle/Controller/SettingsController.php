@@ -2,8 +2,6 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
-use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,13 +15,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class SettingsController extends Controller
 {
-    private $SSOConfigurationRepository;
-
-    public function __construct(AbstractSSOConfigurationRepository $SSOConfigurationRepository)
-    {
-        $this->SSOConfigurationRepository = $SSOConfigurationRepository;
-    }
-
     /**
      * @Route("/admin/settings/pages.registration/list", name="capco_admin_settings_registration")
      * @Template("@CapcoAdmin/Settings/registration.html.twig")
@@ -117,7 +108,7 @@ class SettingsController extends Controller
      *
      * @param mixed $toggle
      */
-    public function switchToggleAction(string $toggle)
+    public function switchToggleAction($toggle)
     {
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
@@ -132,21 +123,6 @@ class SettingsController extends Controller
 
         $toggleManager = $this->get(Manager::class);
         $value = $toggleManager->switchValue($toggle);
-
-        /*  We set the `enabled` value of the SSOConfiguration as the same value as the feature toggle
-         *  This can be moved to a listener or a service that handle all the actions that must be trigger
-         *  by the feature toggle but it's not disturbing for now.
-         */
-        if (
-            'login_franceconnect' === $toggle &&
-            ($franceConnectConfiguration = $this->SSOConfigurationRepository->find('franceConnect'))
-        ) {
-            // @var $franceConnectConfiguration FranceConnectSSOConfiguration
-            $franceConnectConfiguration->setEnabled($value);
-            $this->getDoctrine()
-                ->getManager()
-                ->flush();
-        }
 
         if ($value) {
             $message = $this->get('translator')->trans(

@@ -2,20 +2,28 @@
 
 exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
 <Fragment>
-  <div
-    className="consultation-plan sticky col-md-3 col-sm-12"
-    id="consultation-plan"
-  >
+  <div>
     <ForwardRef(Relay(Connect(InjectIntl(ConsultationPlan))))
       consultation={
         Object {
           "$fragmentRefs": null,
+          "id": "consultation1",
+          "sections": Array [
+            Object {
+              "id": "section1",
+              "sections": Array [
+                Object {
+                  "id": "section2",
+                },
+              ],
+            },
+          ],
         }
       }
     />
   </div>
   <div
-    className="col-md-9"
+    className="col-md-10 col-md-offset-1"
     id="scroll-content"
   >
     <h2
@@ -61,6 +69,17 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
               Object {
                 "node": Object {
                   "$fragmentRefs": null,
+                  "id": "consultation1",
+                  "sections": Array [
+                    Object {
+                      "id": "section1",
+                      "sections": Array [
+                        Object {
+                          "id": "section2",
+                        },
+                      ],
+                    },
+                  ],
                 },
               },
             ],
@@ -80,6 +99,17 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan 1`] = `
       consultation={
         Object {
           "$fragmentRefs": null,
+          "id": "consultation1",
+          "sections": Array [
+            Object {
+              "id": "section1",
+              "sections": Array [
+                Object {
+                  "id": "section2",
+                },
+              ],
+            },
+          ],
         }
       }
       hideEmptySection={false}
@@ -137,6 +167,13 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
               Object {
                 "node": Object {
                   "$fragmentRefs": null,
+                  "id": "consultation1",
+                  "sections": Array [
+                    Object {
+                      "id": "section1",
+                      "sections": null,
+                    },
+                  ],
                 },
               },
             ],
@@ -156,6 +193,13 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan 1`] = `
       consultation={
         Object {
           "$fragmentRefs": null,
+          "id": "consultation1",
+          "sections": Array [
+            Object {
+              "id": "section1",
+              "sections": null,
+            },
+          ],
         }
       }
       hideEmptySection={false}

@@ -974,7 +974,6 @@ export const renderResponses = ({
                   className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
                   <PrivateBox show={field.private}>
                     <Field
-                      divClassName="reduced"
                       name={`${member}.value`}
                       id={`${form}-${member}`}
                       type={field.type}
@@ -1058,7 +1057,6 @@ export const renderResponses = ({
                   className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
                   <PrivateBox show={field.private}>
                     <Field
-                      divClassName="reduced"
                       name={`${member}.value`}
                       id={`${form}-${member}`}
                       type={field.type}

@@ -21,7 +21,6 @@ type FormValues = {|
   clientId: string,
   secret: string,
   redirectUri: Uri,
-  logoutUrl: Uri,
 |};
 
 type Props = {|
@@ -111,12 +110,12 @@ export class FranceConnectConfigurationModal extends React.Component<Props> {
               required
               component={component}>
               <ToggleButton
-                value="TESTING"
+                value="test"
                 onClick={() => dispatch(change(formName, 'environment', 'TESTING'))}>
                 <FormattedMessage id="integration" />
               </ToggleButton>
               <ToggleButton
-                value="PRODUCTION"
+                value="prod"
                 onClick={() => dispatch(change(formName, 'environment', 'PRODUCTION'))}>
                 <FormattedMessage id="production" />
               </ToggleButton>
@@ -141,19 +140,9 @@ export class FranceConnectConfigurationModal extends React.Component<Props> {
               id={`${formName}_redirectUri`}
               name="redirectUri"
               disabled
-              required
               type="text"
               component={component}
               label={<FormattedMessage id="callback-url" />}
-            />
-            <Field
-              id={`${formName}_logoutUrl`}
-              name="logoutUrl"
-              disabled
-              required
-              type="text"
-              component={component}
-              label={<FormattedMessage id="logout-url" />}
             />
           </Modal.Body>
           <Modal.Footer>
@@ -201,7 +190,6 @@ export default createFragmentContainer(container, {
       secret
       environment
       redirectUri
-      logoutUrl
     }
   `,
 });

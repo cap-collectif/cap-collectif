@@ -3,7 +3,6 @@ sonata_admin:
   title_logo: favicon-64x64.png
   assets:
     remove_javascripts:
-      - bundles/sonatacore/js/base.js ## https://github.com/sonata-project/SonataAdminBundle/blob/f0c22710bed3a5926bab5a65b4c1b73f2e1da671/src/DependencyInjection/Configuration.php  ##
       - bundles/sonatacore/vendor/jquery/dist/jquery.min.js
   options:
     pager_links: 5 # pager max links to display

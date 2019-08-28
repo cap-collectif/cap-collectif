@@ -2537,10 +2537,10 @@ type FranceConnectSSOConfiguration implements Node & SSOConfiguration {
   labelColor: Color!
 
   """Client ID."""
-  clientId: String
+  clientId: String!
 
   """Secret key."""
-  secret: String
+  secret: String!
 
   """Authorization URL."""
   authorizationUrl: URI!
@@ -3443,10 +3443,10 @@ type Oauth2SSOConfiguration implements Node & SSOConfiguration {
   labelColor: Color!
 
   """Client ID."""
-  clientId: String
+  clientId: String!
 
   """Secret key."""
-  secret: String
+  secret: String!
 
   """Authorization URL."""
   authorizationUrl: URI!
