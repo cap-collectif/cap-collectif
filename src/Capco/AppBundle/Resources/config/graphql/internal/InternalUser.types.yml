@@ -170,11 +170,6 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionsResolver", [value, getUser(), args])'
         description: 'Array of opinions by current user.'
         argsBuilder: 'Relay::Connection'
-        args:
-          first:
-            type: 'Int'
-            description: 'Returns the first n elements from the list.'
-            defaultValue: 100
       contributionsCount:
         type: 'Int!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsCountResolver", [value, getUser()])'
@@ -209,11 +204,6 @@ InternalUser:
         type: 'InternalVoteConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all votes of the user.'
-        args:
-          first:
-            type: 'Int'
-            description: 'Returns the first n elements from the list.'
-            defaultValue: 100
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [getUser(), value, args, context])'
       groups:
         type: 'GroupConnection!'
@@ -271,11 +261,6 @@ InternalUser:
         description: 'Get all projects the user has created.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProjectsResolver", [value, args])'
         argsBuilder: 'Relay::Connection'
-        args:
-          first:
-            type: 'Int'
-            description: 'Returns the first n elements from the list.'
-            defaultValue: 100
       connectionAttempt:
         argsBuilder: 'Relay::Connection'
         type: 'UserConnectionAttemptConnection'
