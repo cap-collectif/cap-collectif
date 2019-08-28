@@ -44,7 +44,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     }
     type="email"
   />
-  <UserPasswordField
+  <Connect(UserPasswordField)
     ariaRequired={true}
     autoComplete="new-password"
     formName="registration-form"
@@ -185,7 +185,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     }
     type="email"
   />
-  <UserPasswordField
+  <Connect(UserPasswordField)
     ariaRequired={true}
     autoComplete="new-password"
     formName="registration-form"
@@ -320,7 +320,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     }
     type="email"
   />
-  <UserPasswordField
+  <Connect(UserPasswordField)
     ariaRequired={true}
     autoComplete="new-password"
     formName="registration-form"
@@ -492,7 +492,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     }
     type="email"
   />
-  <UserPasswordField
+  <Connect(UserPasswordField)
     ariaRequired={true}
     autoComplete="new-password"
     formName="registration-form"

@@ -52,7 +52,8 @@ class Manager
         'sso_by_pass_auth',
         'list_sso',
         'allow_users_to_propose_events',
-        'login_franceconnect'
+        'login_franceconnect',
+        'secure_password'
     ];
 
     protected $context;
