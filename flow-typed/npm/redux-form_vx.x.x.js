@@ -92,6 +92,7 @@ type Option = {
   value: any
 }
 
+/*
 type Context = {
   form: string,
   getFormState: GetFormState,
@@ -109,10 +110,10 @@ type Context = {
   focus: (name: string) => void,
   change: (name: string, value: any) => void,
   blur: (name: string, value: any) => void
-}
+}*/
 
 type ReactContext = {
-  _reduxForm: Context
+  _reduxForm: any //Context
 }
 
 type GetFormNamesInterface<L> = (state: any) => L
