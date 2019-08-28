@@ -4,8 +4,7 @@ exports[`<CommentInfos /> should render correctly 1`] = `
 <div
   className="opinion__user"
 >
-  <UserLink
-    className=""
+  <ForwardRef(Relay(Connect(UserLink)))
     user={
       Object {
         "displayName": "Pipoudou",

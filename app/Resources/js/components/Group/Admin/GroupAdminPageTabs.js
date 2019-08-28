@@ -31,8 +31,9 @@ const container = injectIntl(GroupAdminPageTabs);
 
 export default createFragmentContainer(container, {
   group: graphql`
-    fragment GroupAdminPageTabs_group on Group {
-      ...GroupAdminUsers_group
+    fragment GroupAdminPageTabs_group on Group
+      @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
+      ...GroupAdminUsers_group @arguments(cursor: $cursor, count: $count)
       ...GroupAdminParameters_group
     }
   `,

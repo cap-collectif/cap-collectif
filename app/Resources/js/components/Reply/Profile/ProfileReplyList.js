@@ -10,16 +10,11 @@ type RelayProps = {|
 
 type Props = {|
   ...RelayProps,
-  isProfileEnabled: boolean,
 |};
 
 export class ProfileReplyList extends React.Component<Props> {
-  static defaultProps = {
-    isProfileEnabled: false,
-  };
-
   render() {
-    const { replies, isProfileEnabled } = this.props;
+    const { replies } = this.props;
 
     return (
       <div>
@@ -29,7 +24,8 @@ export class ProfileReplyList extends React.Component<Props> {
             .map(edge => edge.node)
             .filter(Boolean)
             .map((reply, index) => (
-              <Reply key={index} reply={reply} isProfileEnabled={isProfileEnabled} />
+              // $FlowFixMe
+              <Reply key={index} reply={reply} />
             ))}
       </div>
     );

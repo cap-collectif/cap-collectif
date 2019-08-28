@@ -90,6 +90,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
                 },
               },
             ],
+            "pageInfo": Object {
+              "endCursor": "3",
+              "hasNextPage": true,
+              "hasPreviousPage": false,
+              "startCursor": "1",
+            },
           },
         }
       }
@@ -111,6 +117,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
                 },
               },
             ],
+            "pageInfo": Object {
+              "endCursor": "3",
+              "hasNextPage": true,
+              "hasPreviousPage": false,
+              "startCursor": "1",
+            },
           },
         }
       }
@@ -224,6 +236,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
                 },
               },
             ],
+            "pageInfo": Object {
+              "endCursor": "3",
+              "hasNextPage": true,
+              "hasPreviousPage": false,
+              "startCursor": "1",
+            },
           },
         }
       }
@@ -245,6 +263,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
                 },
               },
             ],
+            "pageInfo": Object {
+              "endCursor": "3",
+              "hasNextPage": true,
+              "hasPreviousPage": false,
+              "startCursor": "1",
+            },
           },
         }
       }
@@ -360,6 +384,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
                 },
               },
             ],
+            "pageInfo": Object {
+              "endCursor": "3",
+              "hasNextPage": true,
+              "hasPreviousPage": false,
+              "startCursor": "1",
+            },
           },
         }
       }
@@ -381,6 +411,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
                 },
               },
             ],
+            "pageInfo": Object {
+              "endCursor": "3",
+              "hasNextPage": true,
+              "hasPreviousPage": false,
+              "startCursor": "1",
+            },
           },
         }
       }
@@ -496,6 +532,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
                 },
               },
             ],
+            "pageInfo": Object {
+              "endCursor": "3",
+              "hasNextPage": true,
+              "hasPreviousPage": false,
+              "startCursor": "1",
+            },
           },
         }
       }
@@ -517,6 +559,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
                 },
               },
             ],
+            "pageInfo": Object {
+              "endCursor": "3",
+              "hasNextPage": true,
+              "hasPreviousPage": false,
+              "startCursor": "1",
+            },
           },
         }
       }
