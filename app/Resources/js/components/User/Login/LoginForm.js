@@ -1,22 +1,42 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import {Field, formValueSelector, reduxForm} from 'redux-form';
 import { Alert } from 'react-bootstrap';
+import styled from 'styled-components';
 import renderInput from '../../Form/Field';
 import { login as onSubmit } from '../../../redux/modules/user';
 import { isEmail } from '../../../services/Validator';
+import type {GlobalState} from '../../../types';
+
+const StyledContainer = styled.div`
+  .hide-captcha{
+    display: none;
+  }
+`;
 
 type LoginValues = {|
   username: string,
   password: string,
 |};
 
-type Props = {|
-  error?: string,
+type ReduxProps = {|
+  +displayCaptcha: boolean,
+  +error?: string,
+  +submitting: ?boolean
 |};
 
-const formName = 'login';
+type State = {|
+  error?: ?string
+|};
+
+type Props = {|
+  ...ReduxProps,
+  error?: ?string,
+|};
+
+export const formName = 'login';
 
 export const validate = (values: LoginValues) => {
   const errors = {};
@@ -28,18 +48,34 @@ export const validate = (values: LoginValues) => {
   return errors;
 };
 
-export class LoginForm extends React.Component<Props> {
+export class LoginForm extends React.Component<Props, State> {
+  static defaultProps = {
+    displayCaptcha: false,
+    submitting: undefined
+  };
+
+  state = {
+    error:  null
+  };
+
+  componentDidUpdate(prevProps: Props){
+    const {submitting, error} = this.props;
+    if (prevProps.submitting && submitting === false){
+      // https://reactjs.org/docs/react-component.html#componentdidupdate
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({error});
+    }
+  }
 
   render() {
-    const { error } = this.props;
+    const { error } = this.state;
+    const { displayCaptcha } = this.props;
     return (
       <div className="form_no-bold-label">
         {error && (
           <Alert bsStyle="danger">
-            <p>
               <div className="font-weight-bold"><FormattedMessage id={error} /></div>
               <FormattedMessage id="try-again-or-click-on-forgotten-password-to-reset-it" />
-            </p>
           </Alert>
         )}
         <Field
@@ -57,22 +93,33 @@ export class LoginForm extends React.Component<Props> {
         <Field
           name="password"
           type="password"
-          autoFocus
           disableValidation
           ariaRequired
           id="password"
           label={<FormattedMessage id="global.password" />}
           labelClassName="w-100 font-weight-normal"
-          autoComplete="current-password"
+          autoComplete={error ? undefined : "current-password"}
           component={renderInput}
         />
         <a href="/resetting/request">{<FormattedMessage id="global.forgot_password" />}</a>
-        {false ? <Field id="captcha" component={renderInput} name="captcha" type="captcha" /> : null}
 
+
+        <StyledContainer>
+          <div className={displayCaptcha ? '' : 'hide-captcha'}>
+            <Field id="captcha" component={renderInput} name="captcha" type="captcha"  />
+          </div>
+        </StyledContainer>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: GlobalState) => ({
+  displayCaptcha: formValueSelector(formName)(state, 'displayCaptcha'),
+});
+
+
+const container = connect(mapStateToProps)(LoginForm);
 
 export default reduxForm({
   initialValues: {
@@ -83,4 +130,5 @@ export default reduxForm({
   onSubmit,
   form: formName,
   destroyOnUnmount: true,
-})(LoginForm);
+  persistentSubmitErrors: true
+})(container);

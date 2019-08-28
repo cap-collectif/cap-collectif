@@ -259,12 +259,6 @@ InternalMutation:
           inputType: RequestUserArchiveInput
           payloadType: RequestUserArchivePayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RequestUserArchiveMutation", [value, getUser()])'
-      addUserConnectionAttempt:
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: AddUserConnectionAttemptInput
-          payloadType: AddUserConnectionAttemptPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddUserConnectionAttemptMutation", [value, getUser()])'
       # Proposal
       changeProposalPublicationStatus:
         access: "@=hasRole('ROLE_ADMIN')"

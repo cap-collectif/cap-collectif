@@ -277,27 +277,6 @@ type AddSourceVotePayload {
   clientMutationId: String
 }
 
-input AddUserConnectionAttemptInput {
-  """Email of the user"""
-  email: String
-
-  """Date of the attempt"""
-  datetime: String
-
-  """Ip address of the user"""
-  ipAddress: String
-
-  """Is the connection successful"""
-  success: Boolean
-  clientMutationId: String
-}
-
-type AddUserConnectionAttemptPayload {
-  """The newly created connection attempt."""
-  userConnectionAttempt: UserConnectionAttempt
-  clientMutationId: String
-}
-
 input AddUsersInGroupInput {
   """Users that will be added to the group."""
   users: [ID!]!
@@ -3336,7 +3315,6 @@ type Mutation {
   removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload
   updateProposalVotes(input: UpdateProposalVotesInput!): UpdateProposalVotesPayload
   requestUserArchive(input: RequestUserArchiveInput!): RequestUserArchivePayload
-  addUserConnectionAttempt(input: AddUserConnectionAttemptInput!): AddUserConnectionAttemptPayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   createProposal(input: CreateProposalInput!): CreateProposalPayload
@@ -8297,22 +8275,6 @@ type UserConnection {
 
   """Information to aid in pagination."""
   edges: [UserEdge]
-}
-
-"""A user connection attempt"""
-type UserConnectionAttempt implements Node {
-  """The ID of an object"""
-  id: ID!
-
-  """Identifies the date and time when the object was created."""
-  datetime: DateTime!
-  email: String!
-
-  """The IP Address"""
-  ipAddress: String!
-
-  """If the connection was successful or not"""
-  success: Boolean!
 }
 
 """An edge in a connection."""

@@ -19,4 +19,3 @@ UserConnectionAttempt:
       success:
         type: 'Boolean!'
         description: 'If the connection was successful or not'
-

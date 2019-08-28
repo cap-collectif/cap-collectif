@@ -105,6 +105,7 @@ export default createFragmentContainer(VoteItem, {
         displayName
         url
         vip
+        ...UserLink_user
         media {
           url
         }

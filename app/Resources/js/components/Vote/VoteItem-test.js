@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { VoteItem } from './VoteItem';
-import { $refType } from '../../mocks';
+import { $refType, $fragmentRefs } from '../../mocks';
 
 describe('<VoteItem />', () => {
   const defaultProps = {
@@ -14,6 +14,7 @@ describe('<VoteItem />', () => {
       value: 'YES',
       createdAt: '2018-04-09T23:21:06+0200',
       author: {
+        $fragmentRefs,
         id: 'user1',
         slug: 'lbrunet',
         displayName: 'lbrunet',
@@ -57,6 +58,7 @@ describe('<VoteItem />', () => {
       __typename: 'vote',
       createdAt: '2018-04-09T23:21:06+0200',
       author: {
+        $fragmentRefs,
         id: 'user1',
         slug: 'lbrunet',
         displayName: 'lbrunet',

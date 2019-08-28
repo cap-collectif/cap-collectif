@@ -167,6 +167,7 @@ export default createFragmentContainer(container, {
       ...Profile_viewer
       ...ChangeUsername_viewer
       ...AccountBox_viewer
+      ...UserLink_user
       username
       displayName
       media {

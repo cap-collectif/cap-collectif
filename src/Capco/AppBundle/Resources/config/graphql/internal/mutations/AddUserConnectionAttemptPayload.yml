@@ -1,7 +1,0 @@
-AddUserConnectionAttemptPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      userConnectionAttempt:
-        type: 'UserConnectionAttempt'
-        description: 'The newly created connection attempt.'

@@ -6,9 +6,6 @@ import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
 import config from '../../config';
 import { formatSubmitResponses } from '../../utils/responsesHelper';
-import AdduserConnectionAttempt from '../../../js/mutations/AddUserConnectionAttemptMutation';
-import { fetchQuery, graphql } from 'react-relay';
-
 
 export type User = {
   +id: string,
@@ -175,6 +172,7 @@ export const updateRegistrationFieldSucceeded = (
 export const showRegistrationModal = (): ShowRegistrationModalAction => ({
   type: 'SHOW_REGISTRATION_MODAL',
 });
+
 export const closeRegistrationModal = (): CloseRegistrationModalAction => ({
   type: 'CLOSE_REGISTRATION_MODAL',
 });
@@ -210,7 +208,7 @@ export const setRegistrationEmailDomains = (values: {
 }): Promise<*> => Fetcher.put('/registration_form', values);
 
 export const login = (
-  data: { username: string, password: string },
+  data: { username: string, password: string, displayCaptcha?: boolean},
   dispatch: Dispatch,
 ): Promise<*> =>
   fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
@@ -224,36 +222,17 @@ export const login = (
     },
   })
     .then(response => response.json())
-    .then((response: { success: boolean, reason: ?string }) => {
-      // console.log("JPEC START");
-      // fetch("https://api.ipdata.co")
-      //   .then(response => {
-      //     return response.json();
-      //   }, "jsonp")
-      //   .then(res => {
-      //     console.log(res.ip)
-      //   })
-      //   .catch(err => console.log(err));
-      const variables = {
-        input: {
-          ipAddress: "192.168.0.0",
-          email: "test",
-          success: false,
-        },
-      };
-      console.log("BEFORE", variables);
-      AdduserConnectionAttempt.commit(variables).then(()=>{
-        console.log("BG");
-      });
+    .then((response: { success?: boolean, reason: ?string, tooManyAttempt?: boolean }) => {
       if (response.success) {
         dispatch(closeLoginModal());
         window.location.reload();
         return true;
       }
-      if (response.reason) {
-        throw new SubmissionError({ _error: response.reason });
+      if (response.reason === "Bad credentials.") {
+        throw new SubmissionError({ _error: 'your-email-address-or-password-is-incorrect', catcha: true });
+
       } else {
-        throw new SubmissionError({ _error: 'your-email-address-or-password-is-incorrect' });
+        throw new SubmissionError({ _error: 'global.error.server.form' });
       }
     });
 
