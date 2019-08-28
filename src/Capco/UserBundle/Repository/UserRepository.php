@@ -54,13 +54,14 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getUsersInGroup(Group $group): array
+    public function getUsersInGroup(Group $group, int $offset = 0, int $limit = 1000): array
     {
         $qb = $this->createQueryBuilder('u');
         $qb
             ->innerJoin('u.userGroups', 'ug')
             ->andWhere('ug.group = :group')
             ->setParameter('group', $group);
+        $qb->setFirstResult($offset)->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();
     }
@@ -321,10 +322,7 @@ class UserRepository extends EntityRepository
                 'WITH',
                 'opinions_votes_opinion.published = 1'
             )
-            ->leftJoin(
-                'opinions_votes_opinion.consultation',
-                'opinions_votes_opinion_consultation'
-            )
+            ->leftJoin('opinions_votes_opinion.consultation', 'opinions_votes_opinion_consultation')
             ->leftJoin(
                 'opinions_votes_opinion_consultation.step',
                 'opinions_votes_opinion_consultation_step',
@@ -551,7 +549,12 @@ class UserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions) as opinions_count')
             ->leftJoin('u.opinions', 'opinions', 'WITH', 'opinions.published = 1')
-            ->innerJoin('opinions.consultation', 'consultation', 'WITH', 'consultation.step = :step')
+            ->innerJoin(
+                'opinions.consultation',
+                'consultation',
+                'WITH',
+                'consultation.step = :step'
+            )
             ->groupBy('u.id')
             ->setParameter('step', $step);
 
@@ -595,7 +598,12 @@ class UserRepository extends EntityRepository
             ->select('u.id', 'count(distinct versions) as versions_count')
             ->leftJoin('u.opinionVersions', 'versions', 'WITH', 'versions.published = 1')
             ->leftJoin('versions.parent', 'opinions', 'WITH', 'opinions.published = 1')
-            ->innerJoin('opinions.consultation', 'consultation', 'WITH', 'consultation.step = :step')
+            ->innerJoin(
+                'opinions.consultation',
+                'consultation',
+                'WITH',
+                'consultation.step = :step'
+            )
             ->groupBy('u.id')
             ->setParameter('step', $step);
 
@@ -618,10 +626,7 @@ class UserRepository extends EntityRepository
                 'WITH',
                 'opinions_votes_opinion.published = 1'
             )
-            ->leftJoin(
-                'opinions_votes_opinion.consultation',
-                'opinions_votes_opinion_consultation'
-            )
+            ->leftJoin('opinions_votes_opinion.consultation', 'opinions_votes_opinion_consultation')
             ->innerJoin(
                 'opinions_votes_opinion_consultation.step',
                 'opinions_votes_opinion_consultation_step',

@@ -80,7 +80,10 @@ Capco\AppBundle\Entity\UserGroup:
     id: userGroup22
     user: '@user14'
     group: '@group3'
-
+  userGroup{23..140}:
+    id: 'userGroup<current()>'
+    user: '@user<current()>'
+    group: '@group3'
   # Group 4
   userGroup11:
     id: userGroup11

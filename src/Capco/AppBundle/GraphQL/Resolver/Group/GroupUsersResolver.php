@@ -20,8 +20,12 @@ class GroupUsersResolver implements ResolverInterface
 
     public function __invoke(Group $group, Argument $args): Connection
     {
-        $paginator = new Paginator(function () use ($group) {
-            return $this->userRepository->getUsersInGroup($group);
+        if (!$args) {
+            $args = new Argument(['first' => 100]);
+        }
+
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($group) {
+            return $this->userRepository->getUsersInGroup($group, $offset, $limit);
         });
 
         $totalCount = $this->userRepository->countUsersInGroup($group);

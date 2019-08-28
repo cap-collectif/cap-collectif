@@ -954,6 +954,21 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @When /^(?:|I )search "(?P<text>(?:[^"]|\\")*)" in list "(?P<list>(?:[^"]|\\")*)"$/
+     */
+    public function iSearchTextInList(string $text, string $list): void
+    {
+        $this->iClickOnButton('#load-more');
+        $this->iWait(1);
+
+        try {
+            $this->assertElementContainsText($list, $text);
+        } catch (\Exception $exception) {
+            $this->iSearchTextInList($text, $list);
+        }
+    }
+
+    /**
      * @When I select :select with option :option
      *
      * @param mixed $element

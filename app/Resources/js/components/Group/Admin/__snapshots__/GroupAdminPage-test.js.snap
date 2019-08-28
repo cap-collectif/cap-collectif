@@ -10,6 +10,8 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
     render={[Function]}
     variables={
       Object {
+        "count": 100,
+        "cursor": null,
         "id": "group4",
       }
     }

@@ -2580,6 +2580,8 @@ type Group implements Node {
 
   """Identifies the description of the group."""
   description: String
+
+  """Get all users of the group."""
   users(
     """
     Returns the elements in the list that come after the specified cursor.
