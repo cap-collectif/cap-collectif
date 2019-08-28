@@ -77,9 +77,5 @@ services:
     autowire: true
     autoconfigure: true
 
-  Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier:
-    autowire: true
-    autoconfigure: true
-
   Capco\UserBundle\OpenID\OpenIDExtraMapper:
     arguments: ['%instance_name%']

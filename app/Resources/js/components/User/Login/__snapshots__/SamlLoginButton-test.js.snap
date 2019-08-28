@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SamlLoginButton /> renders 1`] = `
+exports[`<SamlLoginButton /> renders nothing when feature is not active 1`] = `""`;
+
+exports[`<SamlLoginButton /> renders when feature is active 1`] = `
 <a
   className="btn login__social-btn login__social-btn--saml"
   href="/login-saml?_destination=http://localhost/"

@@ -1,14 +1,16 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Argument;
 
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\Resolver\Argument\ArgumentViewerVoteResolver;
 
 class ArgumentViewerHasVoteResolver implements ResolverInterface
 {
+    use ResolverTrait;
+
     private $resolver;
 
     public function __construct(ArgumentViewerVoteResolver $resolver)
@@ -16,8 +18,10 @@ class ArgumentViewerHasVoteResolver implements ResolverInterface
         $this->resolver = $resolver;
     }
 
-    public function __invoke(Argument $argument, User $user): bool
+    public function __invoke(Argument $argument, User $viewer): bool
     {
-        return $this->resolver->__invoke($argument, $user) !== null;
+        $viewer = $this->preventNullableViewer($viewer);
+
+        return null !== $this->resolver->__invoke($argument, $viewer);
     }
 }

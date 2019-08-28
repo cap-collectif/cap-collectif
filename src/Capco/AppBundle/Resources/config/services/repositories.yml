@@ -306,7 +306,3 @@ services:
   Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:SSO\Oauth2SSOConfiguration']
-
-  Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository:
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:SSO\FranceConnectSSOConfiguration']

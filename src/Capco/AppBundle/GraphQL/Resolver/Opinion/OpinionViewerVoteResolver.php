@@ -1,6 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Opinion;
@@ -13,6 +15,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class OpinionViewerVoteResolver implements ResolverInterface
 {
+    use ResolverTrait;
+
     private $logger;
     private $opinionVoteRepository;
     private $versionVoteRepository;
@@ -27,18 +31,24 @@ class OpinionViewerVoteResolver implements ResolverInterface
         $this->versionVoteRepository = $versionVoteRepository;
     }
 
-    public function __invoke(OpinionContributionInterface $contribution, User $user): ?AbstractVote
-    {
+    public function __invoke(
+        OpinionContributionInterface $contribution,
+        ?User $viewer
+    ): ?AbstractVote {
+        $viewer = $this->preventNullableViewer($viewer);
+
         try {
             if ($contribution instanceof Opinion) {
-                return $this->opinionVoteRepository->getByAuthorAndOpinion($user, $contribution);
+                return $this->opinionVoteRepository->getByAuthorAndOpinion($viewer, $contribution);
             }
             if ($contribution instanceof OpinionVersion) {
-                return $this->versionVoteRepository->getByAuthorAndOpinion($user, $contribution);
+                return $this->versionVoteRepository->getByAuthorAndOpinion($viewer, $contribution);
             }
+
             return null;
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
             throw new \RuntimeException($exception->getMessage());
         }
     }

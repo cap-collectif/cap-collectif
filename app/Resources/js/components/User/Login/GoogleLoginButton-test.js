@@ -4,15 +4,23 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { intlMock } from '../../../mocks';
 import { GoogleLoginButton } from './GoogleLoginButton';
+import { features } from '../../../redux/modules/default';
 
 describe('<GoogleLoginButton />', () => {
   const defaultProps = {
+    features: { ...features },
     intl: intlMock,
   };
 
-  it('renders', () => {
+  it('renders nothing if login_gplus is not activate', () => {
+    const wrapper = shallow(<GoogleLoginButton {...defaultProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders a button if feature is active', () => {
     const props = {
       ...defaultProps,
+      features: { ...features, login_gplus: true },
     };
 
     const wrapper = shallow(<GoogleLoginButton {...props} />);
@@ -22,6 +30,7 @@ describe('<GoogleLoginButton />', () => {
   it('renders without prefix', () => {
     const props = {
       ...defaultProps,
+      features: { ...features, login_gplus: true },
       prefix: '',
     };
 
@@ -32,6 +41,7 @@ describe('<GoogleLoginButton />', () => {
   it('renders a button with correct registration label', () => {
     const props = {
       ...defaultProps,
+      features: { ...features, login_gplus: true },
       prefix: 'registration.',
     };
 

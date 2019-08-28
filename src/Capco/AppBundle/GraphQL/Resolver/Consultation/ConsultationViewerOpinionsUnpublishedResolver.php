@@ -3,15 +3,18 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class ConsultationViewerOpinionsUnpublishedResolver implements ResolverInterface
 {
+    use ResolverTrait;
+
     private $opinionRepo;
     private $builder;
 
@@ -21,11 +24,12 @@ class ConsultationViewerOpinionsUnpublishedResolver implements ResolverInterface
         $this->builder = $builder;
     }
 
-    public function __invoke(Consultation $consultation, Argument $args, $viewer): Connection
-    {
-        if (!$viewer instanceof User) {
-            return $this->builder->empty();
-        }
+    public function __invoke(
+        Consultation $consultation,
+        Argument $args,
+        ?User $viewer
+    ): ConnectionInterface {
+        $viewer = $this->preventNullableViewer($viewer);
         $unpublished = $this->opinionRepo->getUnpublishedByConsultationAndAuthor(
             $consultation,
             $viewer

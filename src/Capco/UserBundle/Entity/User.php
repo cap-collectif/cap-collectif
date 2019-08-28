@@ -10,7 +10,6 @@ use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\MediaBundle\Entity\Media;
-use Capco\UserBundle\FranceConnect\FranceConnectUserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Util\Canonicalizer;
@@ -24,8 +23,6 @@ class User extends BaseUser implements
     EquatableInterface,
     IndexableInterface
 {
-    use FranceConnectUserTrait;
-
     public const GENDER_OTHER = 'o';
     protected const SORT_ORDER_CREATED_AT = 0;
     protected const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;

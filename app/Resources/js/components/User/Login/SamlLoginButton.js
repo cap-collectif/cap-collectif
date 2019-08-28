@@ -1,13 +1,17 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import type { FeatureToggles } from '../../../types';
 import type { LabelPrefix } from './LoginSocialButtons';
 
 type Props = {|
+  features: FeatureToggles,
   prefix?: LabelPrefix,
 |};
 
 export class SamlLoginButton extends React.Component<Props> {
+  static displayName = 'SamlLoginButton';
+
   getTitleTraduction = (): string => {
     const { prefix } = this.props;
 
@@ -19,6 +23,11 @@ export class SamlLoginButton extends React.Component<Props> {
   };
 
   render() {
+    const { features } = this.props;
+    if (!features.login_saml) {
+      return null;
+    }
+
     const title = <FormattedMessage id={this.getTitleTraduction()} />;
     return (
       <a

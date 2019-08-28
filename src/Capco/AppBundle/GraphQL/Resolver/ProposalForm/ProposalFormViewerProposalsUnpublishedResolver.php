@@ -6,7 +6,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
@@ -21,7 +21,7 @@ class ProposalFormViewerProposalsUnpublishedResolver implements ResolverInterfac
         $this->builder = $builder;
     }
 
-    public function __invoke(ProposalForm $form, Arg $args, User $viewer): Connection
+    public function __invoke(ProposalForm $form, Arg $args, User $viewer): ConnectionInterface
     {
         $proposals = $this->proposalRepo->getUnpublishedByFormAndAuthor($form, $viewer);
 

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Opinion;
@@ -13,6 +14,8 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class OpinionViewerVersionsUnpublishedResolver implements ResolverInterface
 {
+    use ResolverTrait;
+
     private $logger;
     private $versionRepository;
     private $builder;
@@ -27,8 +30,9 @@ class OpinionViewerVersionsUnpublishedResolver implements ResolverInterface
         $this->builder = $builder;
     }
 
-    public function __invoke(Opinion $opinion, Argument $args, User $viewer): Connection
+    public function __invoke(Opinion $opinion, Argument $args, ?User $viewer): Connection
     {
+        $viewer = $this->preventNullableViewer($viewer);
         $unpublished = $this->versionRepository->getUnpublishedByContributionAndAuthor(
             $opinion,
             $viewer

@@ -12,8 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "ssoType", type = "string")
  * @ORM\DiscriminatorMap({
- *      "oauth2"           = "Oauth2SSOConfiguration",
- *      "franceconnect"    = "FranceConnectSSOConfiguration"
+ *      "oauth2"           = "Oauth2SSOConfiguration"
  * })
  */
 abstract class AbstractSSOConfiguration
@@ -40,11 +39,6 @@ abstract class AbstractSSOConfiguration
      * @ORM\Column(name="label_color", type="string", length=7, nullable=false, options={"default": "#FFFFFF"})
      */
     protected $labelColor = '#FFFFFF';
-
-    /**
-     * @ORM\Column(name="environment", type="enum_sso_environment", nullable=false, options={"default": ""})
-     */
-    protected $environment = '';
 
     public function getName(): string
     {
@@ -95,17 +89,5 @@ abstract class AbstractSSOConfiguration
     public function getKind(): string
     {
         return 'oauth2';
-    }
-
-    public function getEnvironment(): ?string
-    {
-        return $this->environment;
-    }
-
-    public function setEnvironment(?string $environment = null): self
-    {
-        $this->environment = $environment;
-
-        return $this;
     }
 }

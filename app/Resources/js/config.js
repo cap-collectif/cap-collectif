@@ -17,7 +17,6 @@ export default {
   },
   // https://github.com/elementalui/elemental/blob/master/src/constants.js
   canUseDOM: !!(typeof window !== 'undefined' && window.document && window.document.createElement),
-  isDev: baseUrl === 'https://capco.dev',
   isMobile: !!(
     typeof window !== 'undefined' &&
     window.navigator &&

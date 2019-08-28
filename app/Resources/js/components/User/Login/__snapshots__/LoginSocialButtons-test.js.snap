@@ -10,19 +10,141 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
       values={Object {}}
     />
   </div>
-  <SamlLoginButton />
-  <OpenIDLoginButton
-    buttonColor="#ABABAB"
-    key="0"
-    labelColor="#FFFFFF"
-    switchUserMode={false}
-    text="Cap Collectif Oauth2 Provider"
+  <SamlLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_franceconnect": false,
+        "login_gplus": true,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
   />
-  <FranceConnectLoginButton
-    key="1"
+  <InjectIntl(FacebookLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_franceconnect": false,
+        "login_gplus": true,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
   />
-  <InjectIntl(FacebookLoginButton) />
-  <InjectIntl(GoogleLoginButton) />
+  <InjectIntl(GoogleLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_franceconnect": false,
+        "login_gplus": true,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
   <p
     className="p--centered"
   >
@@ -46,30 +168,140 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
       values={Object {}}
     />
   </div>
-  <InjectIntl(FacebookLoginButton) />
-  <p
-    className="p--centered"
-  >
-    <FormattedMessage
-      id="login.or"
-      values={Object {}}
-    />
-  </p>
-</Fragment>
-`;
-
-exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
-<Fragment>
-  <div
-    className="font-weight-semi-bold"
-  >
-    <FormattedMessage
-      id="authenticate-with"
-      values={Object {}}
-    />
-  </div>
-  <FranceConnectLoginButton
-    key="1"
+  <SamlLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_franceconnect": false,
+        "login_gplus": false,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
+  <InjectIntl(FacebookLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_franceconnect": false,
+        "login_gplus": false,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
+  <InjectIntl(GoogleLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_franceconnect": false,
+        "login_gplus": false,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
   />
   <p
     className="p--centered"
@@ -92,7 +324,141 @@ exports[`<LoginSocialButtons /> renders only Google button 1`] = `
       values={Object {}}
     />
   </div>
-  <InjectIntl(GoogleLoginButton) />
+  <SamlLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_franceconnect": false,
+        "login_gplus": true,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
+  <InjectIntl(FacebookLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_franceconnect": false,
+        "login_gplus": true,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
+  <InjectIntl(GoogleLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_franceconnect": false,
+        "login_gplus": true,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
   <p
     className="p--centered"
   >
@@ -114,12 +480,189 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
       values={Object {}}
     />
   </div>
+  <SamlLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_franceconnect": false,
+        "login_gplus": false,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
   <OpenIDLoginButton
     buttonColor="#ABABAB"
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_franceconnect": false,
+        "login_gplus": false,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
     key="0"
     labelColor="#FFFFFF"
-    switchUserMode={false}
     text="Cap Collectif Oauth2 Provider"
+  />
+  <InjectIntl(FacebookLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_franceconnect": false,
+        "login_gplus": false,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
+  <InjectIntl(GoogleLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_franceconnect": false,
+        "login_gplus": false,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": false,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
   />
   <p
     className="p--centered"
@@ -142,7 +685,141 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
       values={Object {}}
     />
   </div>
-  <SamlLoginButton />
+  <SamlLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_franceconnect": false,
+        "login_gplus": false,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
+  <InjectIntl(FacebookLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_franceconnect": false,
+        "login_gplus": false,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
+  <InjectIntl(GoogleLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": false,
+        "login_franceconnect": false,
+        "login_gplus": false,
+        "login_openid": false,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": false,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
   <p
     className="p--centered"
   >
@@ -164,18 +841,189 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
       values={Object {}}
     />
   </div>
-  <SamlLoginButton />
+  <SamlLoginButton
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_franceconnect": false,
+        "login_gplus": true,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": true,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
   <OpenIDLoginButton
     buttonColor="#ABABAB"
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_franceconnect": false,
+        "login_gplus": true,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": true,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
     key="0"
     labelColor="#FFFFFF"
-    switchUserMode={false}
     text="Cap Collectif Oauth2 Provider"
   />
-  <FranceConnectLoginButton
-    key="1"
+  <InjectIntl(FacebookLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_franceconnect": false,
+        "login_gplus": true,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": true,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
   />
-  <InjectIntl(FacebookLoginButton) />
-  <InjectIntl(GoogleLoginButton) />
+  <InjectIntl(GoogleLoginButton)
+    features={
+      Object {
+        "allow_users_to_propose_events": false,
+        "blog": false,
+        "calendar": false,
+        "captcha": false,
+        "consent_external_communication": false,
+        "consent_internal_communication": false,
+        "consultation_plan": false,
+        "disconnect_openid": false,
+        "display_map": false,
+        "districts": false,
+        "export": false,
+        "list_sso": false,
+        "login_facebook": true,
+        "login_franceconnect": false,
+        "login_gplus": true,
+        "login_openid": true,
+        "login_paris": false,
+        "login_saml": true,
+        "members_list": false,
+        "new_feature_questionnaire_result": false,
+        "newsletter": false,
+        "phone_confirmation": false,
+        "privacy_policy": false,
+        "profiles": false,
+        "project_trash": false,
+        "projects_form": false,
+        "registration": false,
+        "reporting": false,
+        "restrict_registration_via_email_domain": false,
+        "search": false,
+        "secure_password": false,
+        "server_side_rendering": false,
+        "share_buttons": false,
+        "shield_mode": false,
+        "sso_by_pass_auth": true,
+        "themes": false,
+        "user_type": false,
+        "votes_evolution": false,
+        "zipcode_at_register": false,
+      }
+    }
+  />
 </Fragment>
 `;

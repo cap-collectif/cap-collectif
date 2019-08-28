@@ -1,9 +1,12 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+
+import type { FeatureToggles } from '../../../types';
 import type { LabelPrefix } from './LoginSocialButtons';
 
 type Props = {|
+  features: FeatureToggles,
   prefix?: LabelPrefix,
   intl: IntlShape,
 |};
@@ -26,6 +29,11 @@ export class FacebookLoginButton extends React.Component<Props> {
   };
 
   render() {
+    const { features } = this.props;
+    if (!features.login_facebook) {
+      return null;
+    }
+
     const title = <FormattedMessage id={this.getTitleTraduction()} />;
     return (
       <a
