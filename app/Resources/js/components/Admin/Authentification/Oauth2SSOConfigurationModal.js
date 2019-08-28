@@ -73,6 +73,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   };
 
   if (id === undefined || id === null) {
+    // $FlowFixMe
     return AddOauth2SSOConfigurationMutation.commit({ input })
       .then(() => {
         if (onClose) {
@@ -88,6 +89,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
 
   return UpdateOauth2SSOConfigurationMutation.commit({
+    // $FlowFixMe
     input: {
       id,
       ...input,

@@ -41,11 +41,11 @@ type Props = {|
   activeKeyboard?: Function,
 |};
 
-type VotesProps = {|
+type VotesProps = {
   ...FieldArrayProps,
   ...RelayProps,
   deletable: boolean,
-|};
+};
 
 const Wrapper = styled.div`
   #background-color: ${({ isDraggingOver }) => (isDraggingOver ? 'blue' : 'grey')};
@@ -73,23 +73,31 @@ if (config.canUseDOM && document) {
   }
 }
 
-const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => (
+const renderMembers = ({ fields, votes, step, deletable }: VotesProps): any => (
   <div>
-    {fields.map((member, index) => (
-      /* $FlowFixMe */
-      <ProposalUserVoteItem
-        key={index}
-        member={member}
-        isVoteVisibilityPublic={fields.get(index).public}
-        vote={votes.edges && votes.edges[index] && votes.edges[index].node}
-        step={step}
-        onDelete={deletable ? () => fields.remove(index) : null}
-      />
-    ))}
+    {fields &&
+      fields.map((member, index) => (
+        /* $FlowFixMe */
+        <ProposalUserVoteItem
+          key={index}
+          member={member}
+          isVoteVisibilityPublic={fields.get(index).public}
+          vote={votes.edges && votes.edges[index] && votes.edges[index].node}
+          step={step}
+          // $FlowFixMe
+          onDelete={deletable ? () => fields.remove(index) : null}
+        />
+      ))}
   </div>
 );
 
-const renderDraggableMembers = ({ fields, votes, step, deletable, intl }: VotesProps & Props) => {
+const renderDraggableMembers = ({
+  fields,
+  votes,
+  step,
+  deletable,
+  intl,
+}: VotesProps & Props): any => {
   if (!votes.edges) {
     return null;
   }

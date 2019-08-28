@@ -50,7 +50,7 @@ export class ProposalAdminEvaluersForm extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    fetchQuery(environment, evaluersQuery)
+    fetchQuery(environment, evaluersQuery, {})
       .then(response =>
         response.groups.map(group => ({
           value: group.id,

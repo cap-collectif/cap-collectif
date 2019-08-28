@@ -89,6 +89,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props> {
           id={`${member}.question.id`}
           name={`${member}.question.id`}
           type="select"
+          // $FlowFixMe
           onChange={this.handleQuestionChange}
           component={component}>
           {questions

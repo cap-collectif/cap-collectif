@@ -1,6 +1,42 @@
 import * as React from 'react';
 import { type RenderProps } from 'react-relay/ReactRelayQueryRenderer.js.flow';
 
+declare module "areEqual" {
+  declare module.exports: any;
+};
+
+declare module "mapObject" {
+  declare module.exports: any;
+};
+
+declare module "forEachObject" {
+  declare module.exports: any;
+};
+
+declare module "graphql" {
+  declare module.exports: any;
+};
+
+declare module "resolveImmediate" {
+  declare module.exports: any;
+};
+
+declare module "ErrorUtils" {
+  declare module.exports: any;
+};
+
+declare module "sprintf" {
+  declare module.exports: any;
+};
+
+declare module "removeFromArray" {
+  declare module.exports: any;
+};
+
+declare module "emptyFunction" {
+  declare module.exports: any;
+};
+
 type ReactRelayReadyState = RenderProps;
 
 type ReactRelayRecordSourceSelectorProxy = {
@@ -35,3 +71,16 @@ type ReactRelayCacheConfig = {
     force?: ?boolean,
     poll?: ?number
 };
+
+
+type ReactRelayMutationConfig<T> = {|
+    configs?: Array<RelayMutationConfig>,
+    mutation: GraphQLTaggedNode,
+    variables: Variables,
+    uploadables?: UploadableMap,
+    onCompleted?: ?(response: T, errors: ?Array<PayloadError>) => void,
+    onError?: ?(error: Error) => void,
+    optimisticUpdater?: ?SelectorStoreUpdater,
+    optimisticResponse?: Object,
+    updater?: ?SelectorStoreUpdater
+|};

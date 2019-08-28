@@ -88,6 +88,7 @@ class PresentationStepEvents extends React.Component<Props> {
         </div>
       );
     }
+    return null;
   };
 
   render() {

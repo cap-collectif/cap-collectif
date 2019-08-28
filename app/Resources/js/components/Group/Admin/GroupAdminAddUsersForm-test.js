@@ -3,11 +3,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { GroupAdminAddUsersForm } from './GroupAdminAddUsersForm';
-import { intlMock } from '../../../mocks';
+import { intlMock, $refType } from '../../../mocks';
 
 describe('<GroupAdminAddUsersForm />', () => {
   const props = {
     group: {
+      $refType,
       id: 'group4',
       title: 'Comité de suvi',
       users: { edges: [] },

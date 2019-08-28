@@ -10,7 +10,7 @@ import ProposalPageTabs from './ProposalPageTabs';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { FeatureToggles, State } from '../../../types';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
-import type ProposalPageQueryResponse from '~relay/ProposalPageQuery.graphql';
+import type { ProposalPageQueryResponse } from '~relay/ProposalPageQuery.graphql';
 
 export type Props = {
   proposalId: string,
@@ -59,7 +59,13 @@ export class ProposalPage extends React.Component<Props> {
             cursor: null,
             isAuthenticated: this.props.isAuthenticated,
           }}
-          render={({ error, props }: { props?: ProposalPageQueryResponse, ...ReactRelayReadyState }) => {
+          render={({
+            error,
+            props,
+          }: {
+            props?: ProposalPageQueryResponse,
+            ...ReactRelayReadyState,
+          }) => {
             if (error) {
               console.log(error); // eslint-disable-line no-console
               return graphqlError;

@@ -3,7 +3,7 @@ import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 
 import environment, { graphqlError } from '../../../../createRelayEnvironment';
-import type { ProjectListFilterTypesQueryResponse } from '~relay/ProjectListFilterTypesContainerQuery.graphql';
+import type { ProjectListFilterTypesContainerQueryResponse } from '~relay/ProjectListFilterTypesContainerQuery.graphql';
 import ProjectsListFilterTypes from './ProjectListFilterTypes';
 
 type Props = {};
@@ -13,7 +13,7 @@ export default class ProjectsListFilterTypesContainer extends React.Component<Pr
     error,
     props,
   }: {
-    props: ?ProjectListFilterTypesQueryResponse,
+    props: ?ProjectListFilterTypesContainerQueryResponse,
     ...ReactRelayReadyState,
   }) => {
     if (error) {

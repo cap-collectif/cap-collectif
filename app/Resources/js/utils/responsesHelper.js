@@ -952,6 +952,7 @@ export const renderResponses = ({
                       name={`${member}.value`}
                       id={`${form}-${member}`}
                       type="medias"
+                      // $FlowFixMe
                       component={component}
                       help={field.helpText}
                       description={field.description}
@@ -976,6 +977,7 @@ export const renderResponses = ({
                       name={`${member}.value`}
                       id={`${form}-${member}`}
                       type={field.type}
+                      // $FlowFixMe
                       component={component}
                       help={field.helpText}
                       isOtherAllowed={isOtherAllowed}
@@ -1058,6 +1060,7 @@ export const renderResponses = ({
                       name={`${member}.value`}
                       id={`${form}-${member}`}
                       type={field.type}
+                      // $FlowFixMe
                       component={component}
                       description={field.description}
                       help={field.helpText}
