@@ -206,6 +206,11 @@ Capco\AppBundle\Entity\Proposal:
     slug: proposition-plus-votable-1
     body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
     rating: 3
+    likers: ['@user504']
+    evaluers: ['@group1']
+    annotation: Lancer l'appel d'offre
+    category: '@pCategory1'
+    address: '[{"address_components":[{"long_name":"263","short_name":"263","types":["street_number"]},{"long_name":"Avenue Général Leclerc","short_name":"Avenue Général Leclerc","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35700","short_name":"35700","types":["postal_code"]}],"formatted_address":"263 Avenue Général Leclerc, 35700 Rennes, France","geometry":{"location":{"lat":48.11910899999999,"lng":-1.6447289},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.1204579802915,"lng":-1.643379919708498},"southwest":{"lat":48.1177600197085,"lng":-1.646077880291502}}},"place_id":"ChIJv1LUaPDeDkgRETcBpBBwDpc","types":["establishment","gym","health","point_of_interest"]}]'
     author: '@user5'
     proposalForm: '@proposalform4'
     theme: '@theme2'

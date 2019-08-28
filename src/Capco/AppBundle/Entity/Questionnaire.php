@@ -194,6 +194,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     public function getRealQuestions(): Collection
     {
         $questions = new ArrayCollection();
+        /** @var QuestionnaireAbstractQuestion $qaq */
         foreach ($this->questions as $qaq) {
             $questions->add($qaq->getQuestion());
         }

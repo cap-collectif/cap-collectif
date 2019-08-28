@@ -173,3 +173,11 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@simplequestion14'
     reply: '@reply8'
     value: 'secret'
+  response42:
+    question: '@simplequestion1'
+    proposal: '@proposal12'
+    value: pas souhaitable
+  response43:
+    question: '@simplequestion3'
+    proposal: '@proposal12'
+    value: 3 millions !
