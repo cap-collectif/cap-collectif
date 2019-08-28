@@ -26,6 +26,16 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
               logoutUrl
               redirectUri
             }
+            ... on FranceConnectSSOConfiguration {
+              clientId
+              secret
+              authorizationUrl
+              accessTokenUrl
+              userInfoUrl
+              logoutUrl
+              redirectUri
+              environment
+            }
           }
         }
       }
@@ -35,30 +45,47 @@ Scenario: GraphQL admin client wants to get all SSO Configurations
   Then the JSON response should match:
   """
   {
-    "data":
-    {
-      "ssoConfigurations": {
-        "totalCount": 1,
-        "edges": [
-          {
-            "node": {
-              "id": "T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
-              "name": "Cap collectif Oauth2 Provider",
-              "enabled": true,
-              "clientId": "account",
-              "secret": "***REMOVED***",
-              "authorizationUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/auth",
-              "accessTokenUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/token",
-              "userInfoUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
-              "logoutUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
-              "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account",
-              "redirectUri": @string@,
-              "buttonColor": "#7498C0",
-              "labelColor": "#FFFFFF"
-            }
-          }
-        ]
-      }
-    }
+     "data":{
+        "ssoConfigurations":{
+           "totalCount": 2,
+           "edges":[
+              {
+                 "node":{
+                    "id":"RnJhbmNlQ29ubmVjdFNTT0NvbmZpZ3VyYXRpb246ZnJhbmNlQ29ubmVjdA==",
+                    "name":"France Connect",
+                    "enabled":true,
+                    "profileUrl":null,
+                    "buttonColor":"#7498C0",
+                    "labelColor":"#FFFFFF",
+                    "clientId":"***REMOVED***",
+                    "secret":"***REMOVED***",
+                    "authorizationUrl":"https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize",
+                    "accessTokenUrl":"https://fcp.integ01.dev-franceconnect.fr/api/v1/token",
+                    "userInfoUrl":"https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo",
+                    "logoutUrl":"https://fcp.integ01.dev-franceconnect.fr/api/v1/logout",
+                    "redirectUri":"https://capco.test/login/check-franceconnect",
+                    "environment":"TESTING"
+                 }
+              },
+              {
+                 "node":{
+                    "id":"T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
+                    "name":"Cap collectif Oauth2 Provider",
+                    "enabled":true,
+                    "profileUrl":"https://keycloak.cap-collectif.com/auth/realms/master/account",
+                    "buttonColor":"#7498C0",
+                    "labelColor":"#FFFFFF",
+                    "clientId":"account",
+                    "secret":"***REMOVED***",
+                    "authorizationUrl":"https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/auth",
+                    "accessTokenUrl":"https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/token",
+                    "userInfoUrl":"https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
+                    "logoutUrl":"https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
+                    "redirectUri":"https://capco.test/login/check-openid"
+                 }
+              }
+           ]
+        }
+     }
   }
   """

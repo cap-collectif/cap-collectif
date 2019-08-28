@@ -44,7 +44,7 @@ final class Version20190426160453 extends AbstractMigration
         $this->addSql('SET FOREIGN_KEY_CHECKS=0');
         $this->addSql('ALTER TABLE opinion_type DROP FOREIGN KEY FK_F11F2BF09637EA18');
         $this->addSql(
-            'CREATE TABLE 2BF09637EA18 (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', step_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', title VARCHAR(100) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, UNIQUE INDEX UNIQ_964685A673B21E9C (step_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
+            'CREATE TABLE consultation (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', step_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', title VARCHAR(100) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, UNIQUE INDEX UNIQ_964685A673B21E9C (step_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
         );
         $this->addSql(
             'ALTER TABLE consultation ADD CONSTRAINT FK_964685A673B21E9C FOREIGN KEY (step_id) REFERENCES step (id) ON DELETE SET NULL'

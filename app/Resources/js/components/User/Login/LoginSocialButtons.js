@@ -30,7 +30,8 @@ export class LoginSocialButtons extends React.Component<Props> {
       !features.login_facebook &&
       !features.login_gplus &&
       !features.login_saml &&
-      (!features.login_openid || !ssoList.length)
+      !features.login_openid &&
+      !features.login_franceconnect
     ) {
       return null;
     }
@@ -41,33 +42,33 @@ export class LoginSocialButtons extends React.Component<Props> {
         <div className="font-weight-semi-bold">
           <FormattedMessage id="authenticate-with" />
         </div>
-        <SamlLoginButton features={features} prefix={prefix} />
-        {ssoList.length > 0 && (
-            <FormattedMessage id="authenticate-with" className="font-weight-semi-bold" />
-          ) &&
+        {features.login_saml && <SamlLoginButton prefix={prefix} />}
+        {ssoList.length > 0 &&
           ssoList.map(
             ({ ssoType, name, buttonColor, labelColor }: SSOConfiguration, index: number) => {
               switch (ssoType) {
                 case 'oauth2':
                   return (
-                    <OpenIDLoginButton
-                      text={name}
-                      key={index}
-                      features={features}
-                      prefix={prefix}
-                      labelColor={labelColor}
-                      buttonColor={buttonColor}
-                    />
+                    features.login_openid && (
+                      <OpenIDLoginButton
+                        text={name}
+                        key={index}
+                        prefix={prefix}
+                        labelColor={labelColor}
+                        buttonColor={buttonColor}
+                        switchUserMode={features.disconnect_openid || false}
+                      />
+                    )
                   );
                 case 'franceconnect':
-                  return <FranceConnectLoginButton key={index} features={features} />;
+                  return features.login_franceconnect && <FranceConnectLoginButton key={index} />;
                 default:
                   break;
               }
             },
           )}
-        <FacebookLoginButton features={features} prefix={prefix} />
-        <GoogleLoginButton features={features} prefix={prefix} />
+        {features.login_facebook && <FacebookLoginButton prefix={prefix} />}
+        {features.login_gplus && <GoogleLoginButton prefix={prefix} />}
         {!features.sso_by_pass_auth && (
           <p className="p--centered">
             <FormattedMessage id="login.or" />

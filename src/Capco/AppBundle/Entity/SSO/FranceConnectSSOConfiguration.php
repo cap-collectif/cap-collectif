@@ -14,7 +14,7 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
 {
     public const ENDPOINTS = [
         EnumSSOEnvironmentType::TESTING => 'https://fcp.integ01.dev-franceconnect.fr',
-        EnumSSOEnvironmentType::PRODUCTION => '	https://app.franceconnect.gouv.fr'
+        EnumSSOEnvironmentType::PRODUCTION => 'https://app.franceconnect.gouv.fr'
     ];
 
     public const ROUTES = [

@@ -57,7 +57,7 @@ describe('<LoginSocialButtons />', () => {
   const propsWithFeatureLoginFranceConnectActivated = {
     features: {
       ...features,
-      login_franconnect: true,
+      login_franceconnect: true,
     },
     ssoList,
   };
@@ -68,8 +68,9 @@ describe('<LoginSocialButtons />', () => {
       login_facebook: true,
       login_saml: true,
       login_openid: true,
+      login_franceconnect: true,
     },
-    ssoList: [],
+    ssoList,
   };
 
   const propsWithAllLoginFeaturesLoginActivatedAndORSeparatorDisabled = {

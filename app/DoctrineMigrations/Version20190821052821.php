@@ -21,7 +21,7 @@ final class Version20190821052821 extends AbstractMigration
         );
 
         $this->addSql(
-            'ALTER TABLE sso_configuration CHANGE environment environment ENUM(\'TESTING\', \'PRODUCTION\', \'\') DEFAULT \'\' NOT NULL'
+            'ALTER TABLE sso_configuration ADD environment ENUM(\'TESTING\', \'PRODUCTION\', \'\') DEFAULT \'\' NOT NULL COMMENT \'(DC2Type:enum_sso_environment)\''
         );
         $this->addSql(
             'ALTER TABLE fos_user ADD france_connect_id VARCHAR(255) DEFAULT NULL, ADD france_connect_access_token VARCHAR(255) DEFAULT NULL'
@@ -39,8 +39,6 @@ final class Version20190821052821 extends AbstractMigration
         $this->addSql(
             'ALTER TABLE fos_user DROP france_connect_id, DROP france_connect_access_token'
         );
-        $this->addSql(
-            'ALTER TABLE sso_configuration CHANGE environment environment VARCHAR(255) DEFAULT \'\' NOT NULL COLLATE utf8_unicode_ci'
-        );
+        $this->addSql('ALTER TABLE sso_configuration DROP environment');
     }
 }

@@ -1,9 +1,20 @@
 InternalFranceConnectSSOConfiguration:
   type: object
+  inherits:
+    - Node
+    - InternalSSOConfiguration
   config:
+    interfaces:
+      - Node
+      - InternalSSOConfiguration
     name: FranceConnectSSOConfiguration
     description: 'France Connect SSO Configuration.'
     fields:
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: FranceConnectSSOConfiguration
       clientId:
         type: 'String!'
         description: 'Client ID.'

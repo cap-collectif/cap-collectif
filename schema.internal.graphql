@@ -2517,7 +2517,25 @@ enum FollowerOrderField {
 }
 
 """France Connect SSO Configuration."""
-type FranceConnectSSOConfiguration {
+type FranceConnectSSOConfiguration implements Node & SSOConfiguration {
+  """The ID of an object."""
+  id: ID!
+
+  """The name of configured SSO."""
+  name: String!
+
+  """Does this configuration is enabled?"""
+  enabled: Boolean!
+
+  """Profile URL on the SSO side."""
+  profileUrl: URI
+
+  """Color in hexadecimal of SSO button."""
+  buttonColor: Color!
+
+  """Color in hexadecimal of label SSO button."""
+  labelColor: Color!
+
   """Client ID."""
   clientId: String!
 

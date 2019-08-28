@@ -42,7 +42,7 @@ abstract class AbstractSSOConfiguration
     protected $labelColor = '#FFFFFF';
 
     /**
-     * @ORM\Column(name="environment", type="enum_sso_configuration", length=10, nullable=false, options={"default": ""})
+     * @ORM\Column(name="environment", type="enum_sso_environment", nullable=false, options={"default": ""})
      */
     protected $environment = '';
 

@@ -18,7 +18,7 @@ abstract class AbstractEnumType extends Type
         }
         $values = $array_map;
 
-        return sprintf('ENUM(%s)', implode(', ', $values));
+        return sprintf('ENUM(%s) COMMENT \'(DC2Type:%s)\'', implode(', ', $values), $this->name);
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)

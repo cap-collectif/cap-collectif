@@ -2,11 +2,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
-import type { FeatureToggles } from '../../../types';
-
-type Props = {|
-  features: FeatureToggles,
-|};
 
 const LinkButton = styled.a`
   && {
@@ -32,13 +27,8 @@ const LinkButton = styled.a`
   }
 `;
 
-export class FranceConnectLoginButton extends React.Component<Props> {
+export class FranceConnectLoginButton extends React.Component<{}> {
   render() {
-    const { features } = this.props;
-    if (!features.login_franceconnect) {
-      return null;
-    }
-
     return (
       <LinkButton
         href={`/login/franceconnect?_destination=${window && window.location.href}`}
