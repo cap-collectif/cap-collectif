@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import type { ReadyState } from 'react-relay';
 import styled from 'styled-components';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { SectionContainerQueryResponse } from '~relay/SectionContainerQuery.graphql';

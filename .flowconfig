@@ -10,7 +10,7 @@ sketchy-null-bool=off
 .*/node_modules/react-beautiful-dnd/*
 .*/node_modules/react-select/*
 .*/node_modules/react-leaflet/*
-.*/node_modules/redux-form/*
+.*/node_modules/graphql/*
 
 ; ignore compiled files
 .*/web/*

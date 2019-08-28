@@ -5,7 +5,7 @@ import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import type Profile_viewer from '~relay/Profile_viewer.graphql';
+import { type Profile_viewer } from '~relay/Profile_viewer.graphql';
 import type { Dispatch, State } from '../../../types';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
