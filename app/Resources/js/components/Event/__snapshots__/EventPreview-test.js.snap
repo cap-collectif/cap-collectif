@@ -4,6 +4,36 @@ exports[`<EventPreview /> renders correctly and highlighted 1`] = `
 <div
   className="d-flex flex-1-1 event block--bordered highlighted-comment"
 >
+  <ForwardRef(Relay(EventImage))
+    enabled={false}
+    event={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "media": Object {
+            "url": "http://monimage.toto",
+          },
+          "url": "http://jesuistoto.fr",
+          "username": "toto",
+        },
+        "fullAddress": "21 rue george 5, 75012 Paris",
+        "id": "event1",
+        "themes": Array [
+          Object {
+            "title": "Le gouter c'est la vie",
+            "url": "https://estcequecestbientotlheuredugouter.neocities.org/",
+          },
+        ],
+        "timeRange": Object {
+          "endAt": "2019-09-27T03:00:00+01:00",
+          "startAt": "2018-09-27T03:00:00+01:00",
+        },
+        "title": "Un super evenement",
+        "url": "http://impossible.com",
+      }
+    }
+  />
   <div
     className="d-flex event__infos"
   >
@@ -107,6 +137,36 @@ exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
 <div
   className="d-flex flex-1-1 event block--bordered "
 >
+  <ForwardRef(Relay(EventImage))
+    enabled={false}
+    event={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "media": Object {
+            "url": "http://monimage.toto",
+          },
+          "url": "http://jesuistoto.fr",
+          "username": "toto",
+        },
+        "fullAddress": "21 rue george 5, 75012 Paris",
+        "id": "event1",
+        "themes": Array [
+          Object {
+            "title": "Le gouter c'est la vie",
+            "url": "https://estcequecestbientotlheuredugouter.neocities.org/",
+          },
+        ],
+        "timeRange": Object {
+          "endAt": "2019-09-27T03:00:00+01:00",
+          "startAt": "2018-09-27T03:00:00+01:00",
+        },
+        "title": "Un super evenement",
+        "url": "http://impossible.com",
+      }
+    }
+  />
   <div
     className="d-flex event__infos"
   >
@@ -210,6 +270,34 @@ exports[`<EventPreview /> renders correctly without picture for user 1`] = `
 <div
   className="d-flex flex-1-1 event block--bordered "
 >
+  <ForwardRef(Relay(EventImage))
+    enabled={false}
+    event={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "media": null,
+          "url": "http://jesuistoto.fr",
+          "username": "toto",
+        },
+        "fullAddress": "21 rue george 5, 75012 Paris",
+        "id": "event1",
+        "themes": Array [
+          Object {
+            "title": "Le gouter c'est la vie",
+            "url": "https://estcequecestbientotlheuredugouter.neocities.org/",
+          },
+        ],
+        "timeRange": Object {
+          "endAt": "2019-09-27T03:00:00+01:00",
+          "startAt": "2018-09-27T03:00:00+01:00",
+        },
+        "title": "Un super evenement",
+        "url": "http://impossible.com",
+      }
+    }
+  />
   <div
     className="d-flex event__infos"
   >
@@ -311,6 +399,36 @@ exports[`<EventPreview /> renders without username 1`] = `
 <div
   className="d-flex flex-1-1 event block--bordered "
 >
+  <ForwardRef(Relay(EventImage))
+    enabled={false}
+    event={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "media": Object {
+            "url": "http://monimage.toto",
+          },
+          "url": "http://jesuistoto.fr",
+          "username": "",
+        },
+        "fullAddress": "21 rue george 5, 75012 Paris",
+        "id": "event1",
+        "themes": Array [
+          Object {
+            "title": "Le gouter c'est la vie",
+            "url": "https://estcequecestbientotlheuredugouter.neocities.org/",
+          },
+        ],
+        "timeRange": Object {
+          "endAt": "2019-09-27T03:00:00+01:00",
+          "startAt": "2018-09-27T03:00:00+01:00",
+        },
+        "title": "Un super evenement",
+        "url": "http://impossible.com",
+      }
+    }
+  />
   <div
     className="d-flex event__infos"
   >

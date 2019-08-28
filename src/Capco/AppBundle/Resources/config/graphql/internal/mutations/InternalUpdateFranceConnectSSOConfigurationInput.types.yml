@@ -1,0 +1,14 @@
+InternalUpdateFranceConnectSSOConfigurationInput:
+  type: relay-mutation-input
+  config:
+    description: 'Update a France Connect configuration'
+    fields:
+      clientId:
+        type: 'String!'
+        description: 'Client ID.'
+      secret:
+        type: 'String!'
+        description: 'Secret key.'
+      environment:
+        type: 'SSOEnvironment!'
+        description: 'Environment mode.'

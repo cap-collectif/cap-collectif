@@ -2,15 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Requirement;
 
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Requirement;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ViewerMeetsTheRequirementResolver implements ResolverInterface
 {
-    use ResolverTrait;
-
     private $resolver;
 
     public function __construct(RequirementViewerValueResolver $resolver)
@@ -18,10 +15,9 @@ class ViewerMeetsTheRequirementResolver implements ResolverInterface
         $this->resolver = $resolver;
     }
 
-    public function __invoke(Requirement $requirement, ?User $viewer): bool
+    public function __invoke(Requirement $requirement, User $user): bool
     {
-        $viewer = $this->preventNullableViewer($viewer);
-        $value = $this->resolver->__invoke($requirement, $viewer);
+        $value = $this->resolver->__invoke($requirement, $user);
         if (null === $value) {
             return false;
         }

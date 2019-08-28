@@ -1,23 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FacebookLoginButton /> renders a button if feature is active 1`] = `
-<a
-  className="btn login__social-btn login__social-btn--facebook"
-  href="/login/facebook?_destination=http://localhost/"
-  title={
-    <FormattedMessage
-      id="share.facebook"
-      values={Object {}}
-    />
-  }
->
-  <FormattedMessage
-    id="share.facebook"
-    values={Object {}}
-  />
-</a>
-`;
-
 exports[`<FacebookLoginButton /> renders a button with correct registration label 1`] = `
 <a
   className="btn login__social-btn login__social-btn--facebook"
@@ -35,8 +17,6 @@ exports[`<FacebookLoginButton /> renders a button with correct registration labe
   />
 </a>
 `;
-
-exports[`<FacebookLoginButton /> renders nothing if login_facebook is not activated 1`] = `""`;
 
 exports[`<FacebookLoginButton /> renders with no prefix 1`] = `
 <a

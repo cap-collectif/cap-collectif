@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Repository\ConsultationRepository;
+use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Repository\QuestionChoiceRepository;
 use Psr\Log\LoggerInterface;
@@ -155,6 +156,12 @@ class GlobalIdResolver
                 case 'Oauth2SSOConfiguration':
                     $node = $this->container
                         ->get(Oauth2SSOConfigurationRepository::class)
+                        ->find($uuid);
+
+                    break;
+                case 'FranceConnectSSOConfiguration':
+                    $node = $this->container
+                        ->get(FranceConnectSSOConfigurationRepository::class)
                         ->find($uuid);
 
                     break;

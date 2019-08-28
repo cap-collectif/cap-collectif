@@ -1,0 +1,7 @@
+InternalUpdateFranceConnectSSOConfigurationPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      fcConfiguration:
+        type: 'InternalFranceConnectSSOConfiguration'
+        description: 'The updated France Connect configuration.'
