@@ -274,54 +274,54 @@ Scenario: GraphQL user wants to get proposals of a project with custom acces tha
   """
   Then the JSON response should match:
   """
-  {
-     "data":{
-        "user":{
-           "proposals":{
-              "edges":[
-                 {
-                    "node":{
-                       "project":{
-                          "_id":"project6",
-                          "visibility":"PUBLIC"
-                       }
-                    }
-                 },
-                 {
-                    "node":{
-                       "project":{
-                          "_id":"project15",
-                          "visibility":"PUBLIC"
-                       }
-                    }
-                 },
-                 {
-                    "node":{
-                       "project":{
-                          "_id":"project15",
-                          "visibility":"PUBLIC"
-                       }
-                    }
-                 },
-                 {
-                    "node":{
-                       "project":{
-                          "_id":"project15",
-                          "visibility":"PUBLIC"
-                       }
-                    }
-                 },
-                 {
-                    "node":{
-                       "project":{
-                          "_id":"project21",
-                          "visibility":"PUBLIC"
-                       }
-                    }
-                 }
-              ]
-           }
+    {
+      "data": {
+        "user": {
+          "proposals": {
+            "edges": [
+                {
+                "node": {
+                  "project": {
+                    "_id": "ProjectWithCustomAccess",
+                    "visibility": "CUSTOM"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "ProjectWithCustomAccess",
+                    "visibility": "CUSTOM"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "ProjectWithCustomAccess",
+                    "visibility": "CUSTOM"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "project6",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              },
+              {
+                "node": {
+                  "project": {
+                    "_id": "project15",
+                    "visibility": "PUBLIC"
+                  }
+                }
+              }
+            ]
+          }
         }
-     }
-  }
+      }
+    }
   """

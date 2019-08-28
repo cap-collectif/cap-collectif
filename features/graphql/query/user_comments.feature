@@ -35,56 +35,66 @@ Scenario: GraphQL user wants to get comments of a project with custom access tha
   """
   Then the JSON response should match:
   """
-  {
-     "data":{
-        "user":{
-           "comments":{
-              "edges":[
-                 {
-                    "node":{
-                       "_id":"proposalComment4",
-                       "commentable":{
-                          "project":{
-                             "visibility":"PUBLIC"
-                          }
-                       }
+    {
+      "data": {
+        "user": {
+          "comments": {
+            "edges": [
+              {
+                "node": {
+                  "_id": "proposalComment71",
+                  "commentable": {
+                    "project": {
+                      "visibility": "CUSTOM"
                     }
-                 },
-                 {
-                    "node":{
-                       "_id":"proposalComment3",
-                       "commentable":{
-                          "project":{
-                             "visibility":"PUBLIC"
-                          }
-                       }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "_id": "proposalComment4",
+                  "commentable": {
+                    "project": {
+                      "visibility": "PUBLIC"
                     }
-                 },
-                 {
-                    "node":{
-                       "_id":"proposalComment2",
-                       "commentable":{
-                          "project":{
-                             "visibility":"PUBLIC"
-                          }
-                       }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "_id": "proposalComment3",
+                  "commentable": {
+                    "project": {
+                      "visibility": "PUBLIC"
                     }
-                 },
-                 {
-                    "node":{
-                       "_id":"proposalComment1",
-                       "commentable":{
-                          "project":{
-                             "visibility":"PUBLIC"
-                          }
-                       }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "_id": "proposalComment2",
+                  "commentable": {
+                    "project": {
+                      "visibility": "PUBLIC"
                     }
-                 }
-              ]
-           }
+                  }
+                }
+              },
+              {
+                "node": {
+                  "_id": "proposalComment1",
+                  "commentable": {
+                    "project": {
+                      "visibility": "PUBLIC"
+                    }
+                  }
+                }
+              }
+            ]
+          }
         }
-     }
-  }
+      }
+    }
   """
 
 @read-only

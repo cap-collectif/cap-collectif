@@ -807,7 +807,6 @@ trait ProposalStepsTrait
         $this->fillField('month', '3');
         $this->fillField('year', '1992');
         $this->iWait(1);
-        $this->uncheckOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx');
         $this->checkOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx');
         $this->iWait(1);
         $this->checkOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy');
