@@ -53,6 +53,7 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
       <ForwardRef(Relay(EventPreview))
         event={
           Object {
+            "$fragmentRefs": null,
             "id": "event1",
           }
         }
@@ -66,6 +67,7 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
       <ForwardRef(Relay(EventPreview))
         event={
           Object {
+            "$fragmentRefs": null,
             "id": "event2",
           }
         }
@@ -79,6 +81,7 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
       <ForwardRef(Relay(EventPreview))
         event={
           Object {
+            "$fragmentRefs": null,
             "id": "event3",
           }
         }
@@ -100,16 +103,19 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
             "edges": Array [
               Object {
                 "node": Object {
+                  "$fragmentRefs": null,
                   "id": "event1",
                 },
               },
               Object {
                 "node": Object {
+                  "$fragmentRefs": null,
                   "id": "event2",
                 },
               },
               Object {
                 "node": Object {
+                  "$fragmentRefs": null,
                   "id": "event3",
                 },
               },

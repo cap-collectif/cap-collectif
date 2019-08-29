@@ -1,5 +1,5 @@
 // @flow
-import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
+import { graphql } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import commitMutation from './commitMutation';
 import environnement from '../createRelayEnvironment';
@@ -23,12 +23,13 @@ const mutation = graphql`
   }
 `;
 
-const decrementFollowerCount = (opinionId: string, store: RecordSourceSelectorProxy) => {
+const decrementFollowerCount = (opinionId: string, store: ReactRelayRecordSourceSelectorProxy) => {
   const opinionProxy = store.get(opinionId);
   if (!opinionProxy) return;
 
   const connection = ConnectionHandler.getConnection(opinionProxy, 'OpinionFollowersBox_followers');
   if (connection) {
+    // $FlowFixMe argument 1 must be a int
     connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
   }
 };
@@ -53,7 +54,7 @@ const commit = (
         deletedIDFieldName: 'unfollowerId',
       },
     ],
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('unfollowOpinion');
       if (!payload || !payload.getLinkedRecord('opinion')) {
         return;

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import { isDirty } from 'redux-form';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
@@ -19,7 +19,7 @@ const onUnload = e => {
   e.returnValue = true;
 };
 
-const component = ({ error, props }: { props?: ?UserAdminPageQueryResponse, ...ReadyState }) => {
+const component = ({ error, props }: { props?: ?UserAdminPageQueryResponse, ...ReactRelayReadyState }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

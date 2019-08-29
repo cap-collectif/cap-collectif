@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import type { ReadyState } from 'react-relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import type { AuthentificationAdminPageQueryResponse } from '~relay/AuthentificationAdminPageQuery.graphql';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
@@ -13,7 +12,7 @@ const component = ({
   props,
 }: {
   props: ?AuthentificationAdminPageQueryResponse,
-  ...ReadyState,
+  ...ReactRelayReadyState,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console

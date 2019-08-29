@@ -44,7 +44,34 @@ exports[`<ProposalProjectRow /> should render close collapse 1`] = `
     </PanelHeading>
     <ListGroup
       className=""
-    />
+    >
+      <ForwardRef(Relay(ProposalRow))
+        key="0"
+        proposal={
+          Object {
+            "$fragmentRefs": null,
+            "project": Object {
+              "id": "project1",
+              "title": "Une carte de l'internet",
+              "url": "http://carte.perdu.com",
+            },
+          }
+        }
+      />
+      <ForwardRef(Relay(ProposalRow))
+        key="1"
+        proposal={
+          Object {
+            "$fragmentRefs": null,
+            "project": Object {
+              "id": "project1",
+              "title": "Un GPS de l'internet",
+              "url": "http://gps.perdu.com",
+            },
+          }
+        }
+      />
+    </ListGroup>
   </Uncontrolled(Panel)>
 </Collapse>
 `;
@@ -98,12 +125,12 @@ exports[`<ProposalProjectRow /> should render the project 1 with his proposal di
         key="0"
         proposal={
           Object {
-            "id": "proposal1",
+            "$fragmentRefs": null,
             "project": Object {
               "id": "project1",
+              "title": "Une carte de l'internet",
+              "url": "http://carte.perdu.com",
             },
-            "title": "Une carte de l'internet",
-            "url": "http://carte.perdu.com",
           }
         }
       />
@@ -111,12 +138,12 @@ exports[`<ProposalProjectRow /> should render the project 1 with his proposal di
         key="1"
         proposal={
           Object {
-            "id": "proposal2",
+            "$fragmentRefs": null,
             "project": Object {
               "id": "project1",
+              "title": "Un GPS de l'internet",
+              "url": "http://gps.perdu.com",
             },
-            "title": "Un GPS de l'internet",
-            "url": "http://gps.perdu.com",
           }
         }
       />
@@ -174,12 +201,12 @@ exports[`<ProposalProjectRow /> should render the project 2 with his proposal di
         key="0"
         proposal={
           Object {
-            "id": "proposal3",
+            "$fragmentRefs": null,
             "project": Object {
               "id": "project2",
+              "title": "Go  nowhere",
+              "url": "https://randomstreetview.com/",
             },
-            "title": "Go  nowhere",
-            "url": "https://randomstreetview.com/",
           }
         }
       />

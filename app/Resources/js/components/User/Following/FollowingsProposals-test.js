@@ -3,39 +3,47 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { FollowingsProposals } from './FollowingsProposals';
+import { $refType } from '../../../mocks';
 
 describe('<FollowingsProposals />', () => {
-  // $FlowFixMe $refType
   const viewer = {
+    $refType,
     followingProposals: {
+      totalCount: 3,
       edges: [
         {
           node: {
-            url: 'http://carte.perdu.com',
             id: 'proposal1',
+            url: 'http://carte.perdu.com',
             title: "Une carte de l'internet",
             project: {
               id: 'UHJvamVjdDpwcm9qZWN0MQ==',
+              url: 'http://carte.perdu.com',
+              title: "Une carte de l'internet",
             },
           },
         },
         {
           node: {
-            url: 'http://gps.perdu.com',
             id: 'proposal2',
+            url: 'http://gps.perdu.com',
             title: "Un GPS de l'internet",
             project: {
               id: 'UHJvamVjdDpwcm9qZWN0MQ==',
+              url: 'http://carte.perdu.com',
+              title: "Une carte de l'internet",
             },
           },
         },
         {
           node: {
-            url: 'https://randomstreetview.com/',
             id: 'proposal3',
+            url: 'https://randomstreetview.com/',
             title: 'Go  nowhere',
             project: {
               id: 'project2',
+              url: 'http://carte.perdu.com',
+              title: "Une carte de l'internet",
             },
           },
         },

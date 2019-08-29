@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Panel, Row, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, createFragmentContainer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type {
   OpinionSourceBoxQueryVariables,
@@ -134,7 +134,7 @@ export class OpinionSourceBox extends React.Component<Props, State> {
               props,
             }: {
               props?: ?OpinionSourceBoxQueryResponse,
-              ...ReadyState,
+              ...ReactRelayReadyState,
             }) => {
               if (error) {
                 return graphqlError;

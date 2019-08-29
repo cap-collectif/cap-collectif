@@ -11,7 +11,7 @@ const renderDomains = ({
   fields,
 }: {
   fields: { push: Function, map: Function, remove: Function },
-}) => (
+}): any => (
   <div>
     {fields.map((member, index) => (
       <Row key={index}>

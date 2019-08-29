@@ -77,6 +77,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
             {choices.map((choice, index) => (
               <div className="radio-field" key={index}>
                 <Field
+                  // $FlowFixMe
                   component={component}
                   type="radio"
                   key={`${name}-${index}`}
@@ -103,6 +104,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
               <div className="other-field" id={`${name}-other-value-row`}>
                 <div className="other-field__input">
                   <Field
+                    // $FlowFixMe
                     component={component}
                     type="radio"
                     disabled={disabled}
@@ -116,6 +118,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
                 </div>
                 <div className="other-field__value">
                   <Field
+                    // $FlowFixMe
                     component={component}
                     type="text"
                     name={`${name}.value.other`}
@@ -125,6 +128,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
                     disabled={disabled}
                     onFocus={this.checkOtherRadio}
                     ref={c => {
+                      // $FlowFixMe
                       this.textField = c;
                     }}
                   />

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, createFragmentContainer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import UnpublishedArgumentList from './UnpublishedArgumentList';
 import type { UnpublishedArgumentListRendererQueryResponse } from '~relay/UnpublishedArgumentListRendererQuery.graphql';
@@ -43,7 +43,7 @@ export class UnpublishedArgumentListRenderer extends React.Component<Props> {
             error,
           }: {
             props: ?UnpublishedArgumentListRendererQueryResponse,
-            ...ReadyState,
+            ...ReactRelayReadyState,
           }) => {
             if (error) {
               return graphqlError;

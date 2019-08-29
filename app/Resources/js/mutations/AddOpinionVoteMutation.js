@@ -113,6 +113,7 @@ const commit = (
         'OpinionVotesBar_previewVotes',
       );
       if (connection) {
+        // $FlowFixMe argument 1 must be a int
         connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
       }
     },

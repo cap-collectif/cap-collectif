@@ -5,7 +5,7 @@ import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 
 import type { Dispatch } from '../../../types';
 import UserListField from '../../Admin/Field/UserListField';
-import GroupAdminUsers_group from '~relay/GroupAdminUsers_group.graphql';
+import type { GroupAdminUsers_group } from '~relay/GroupAdminUsers_group.graphql';
 import { groupAdminUsersUserDeletionReset } from '../../../redux/modules/user';
 import AddUsersInGroupMutation from '../../../mutations/AddUsersInGroupMutation';
 
@@ -53,9 +53,13 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
     const { handleSubmit, group, intl } = this.props;
 
     const usersInGroup = [];
-    group.users.edges.map(edge => {
-      usersInGroup.push(edge.node.id);
-    });
+    if (group.users.edges) {
+      group.users.edges.map(edge => {
+        if (edge && edge.node) {
+          usersInGroup.push(edge.node.id);
+        }
+      });
+    }
 
     return (
       <form onSubmit={handleSubmit}>

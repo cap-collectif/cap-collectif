@@ -9,34 +9,41 @@ describe('<UserFollowingsOpinions />', () => {
   const viewer = {
     $refType,
     followingOpinions: {
+      totalCount: 3,
       edges: [
         {
           node: {
-            url: 'http://carte.perdu.com',
             id: 'opinion1',
+            url: 'http://carte.perdu.com',
             title: "Une carte de l'internet",
             project: {
               id: 'project1',
+              url: 'http://carte.perdu.com',
+              title: "Un projet de l'internet",
             },
           },
         },
         {
           node: {
-            url: 'http://gps.perdu.com',
             id: 'opinion2',
+            url: 'http://gps.perdu.com',
             title: "Un GPS de l'internet",
             project: {
-              id: 'project1',
+              id: 'project2',
+              url: 'http://carte.perdu.com',
+              title: "Un projet de l'internet",
             },
           },
         },
         {
           node: {
-            url: 'https://randomstreetview.com/',
             id: 'opinion3',
+            url: 'https://randomstreetview.com/',
             title: 'Go  nowhere',
             project: {
-              id: 'project2',
+              id: 'project3',
+              url: 'http://carte.perdu.com',
+              title: "Un projet de l'internet",
             },
           },
         },

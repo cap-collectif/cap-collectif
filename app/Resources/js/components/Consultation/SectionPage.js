@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Section from './Section';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
@@ -13,7 +13,7 @@ export type Props = {|
   +isAuthenticated: boolean,
 |};
 
-const render = ({ error, props }: { props: ?SectionPageQueryResponse, ...ReadyState }) => {
+const render = ({ error, props }: { props: ?SectionPageQueryResponse, ...ReactRelayReadyState }) => {
   if (error) {
     return graphqlError;
   }

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Row } from 'react-bootstrap';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import UnpublishedProposalListView from '../Proposal/List/UnpublishedProposalListView';
 import DraftProposalList from '../Proposal/List/DraftProposalList';
@@ -203,7 +203,7 @@ export class ProposalStepPage extends React.Component<Props> {
               isMapDisplay: features.display_map,
             }: ProposalStepPageQueryVariables)
           }
-          render={({ error, props }: { props: ?ProposalStepPageQueryResponse, ...ReadyState }) => {
+          render={({ error, props }: { props: ?ProposalStepPageQueryResponse, ...ReactRelayReadyState }) => {
             if (error) {
               return graphqlError;
             }

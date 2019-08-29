@@ -1,5 +1,5 @@
 // @flow
-import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
+import { graphql } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
@@ -35,14 +35,16 @@ const mutation = graphql`
   }
 `;
 
-const updater = (store: RecordSourceSelectorProxy) => {
+const updater = (store: ReactRelayRecordSourceSelectorProxy) => {
   const payload = store.getRootField('createProjectDistrict');
   const districtEdge = payload.getLinkedRecord('districtEdge');
   const root = store.getRoot();
 
   const connection = ConnectionHandler.getConnection(root, 'ProjectDistrictAdminPage_districts');
 
-  ConnectionHandler.insertEdgeAfter(connection, districtEdge);
+  if (connection) {
+    ConnectionHandler.insertEdgeAfter(connection, districtEdge);
+  }
 };
 
 const commit = (
@@ -68,7 +70,9 @@ const commit = (
         'ProjectDistrictAdminPage_districts',
       );
 
-      ConnectionHandler.insertEdgeAfter(connection, newEdge);
+      if (connection) {
+        ConnectionHandler.insertEdgeAfter(connection, newEdge);
+      }
     },
   });
 

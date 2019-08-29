@@ -1,5 +1,5 @@
 // @flow
-import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
+import { graphql } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
@@ -64,7 +64,7 @@ const commit = (variables: AddCommentMutationVariables): Promise<AddCommentMutat
         ],
       },
     ],
-    updater: (store: RecordSourceSelectorProxy) => {
+    updater: (store: ReactRelayRecordSourceSelectorProxy) => {
       const payload = store.getRootField('addComment');
       if (!payload || !payload.getLinkedRecord('commentEdge')) {
         return;
@@ -80,6 +80,7 @@ const commit = (variables: AddCommentMutationVariables): Promise<AddCommentMutat
         'CommentAnswers_answers',
       );
       if (answersConnection) {
+        // $FlowFixMe argument 1 must be a int
         answersConnection.setValue(answersConnection.getValue('totalCount') + 1, 'totalCount');
       }
 
@@ -91,6 +92,7 @@ const commit = (variables: AddCommentMutationVariables): Promise<AddCommentMutat
         },
       );
       if (commentsConnection) {
+        // $FlowFixMe argument 1 must be a int
         commentsConnection.setValue(commentsConnection.getValue('totalCount') + 1, 'totalCount');
       }
 

@@ -12,11 +12,7 @@
             <div class="sonata-blog-post-container list-group">
                 {% for contribution in contributions %}
                 <a class="list-group-item" href="{{ url('capco_admin_contributions_show', { 'type': contribution.type , 'id': contribution.id }) }}">
-                   {% if contribution.updatedAt is not null  %}
-                       {{ contribution.title }} - {{ contribution.updatedAt | format_date }}
-                   {% else %}
-                       {{ contribution.title }}
-                   {% endif %}
+                    {{ contribution.title }} - {{ contribution.updatedAt | format_date }}
                 </a>
                 {% else %}
                     <a class="list-group-item" href="#">{{ 'recent_contributions.not_found'|trans({}, 'CapcoAppBundle') }}</a>

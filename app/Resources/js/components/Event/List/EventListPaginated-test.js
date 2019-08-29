@@ -34,13 +34,16 @@ const props = {
       },
       edges: [
         {
-          node: { id: 'event1' },
+          node: {
+            $fragmentRefs,
+            id: 'event1',
+          },
         },
         {
-          node: { id: 'event2' },
+          node: { $fragmentRefs, id: 'event2' },
         },
         {
-          node: { id: 'event3' },
+          node: { $fragmentRefs, id: 'event3' },
         },
       ],
     },
@@ -88,7 +91,7 @@ describe('<EventListPaginated />', () => {
     const wrapper = shallow(
       <EventListPaginated
         {...props}
-        query={{ ...props.query, events: emptyConnection, previewPassedEvents: null }}
+        query={{ ...props.query, events: emptyConnection, previewPassedEvents: { totalCount: 0 } }}
         status="ongoing-and-future"
       />,
     );

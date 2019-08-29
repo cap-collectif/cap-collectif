@@ -3,9 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalRow } from './ProposalRow';
+import { $refType } from '../../../mocks';
 
 describe('<ProposalRow />', () => {
   const proposal = {
+    $refType,
     url: 'http://perdu.com',
     id: 'proposal1',
     title: 'perdu sur internet ?',
