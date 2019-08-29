@@ -55,6 +55,12 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
           "title": "Comité de suvi",
           "users": Object {
             "edges": Array [],
+            "pageInfo": Object {
+              "endCursor": "2",
+              "hasNextPage": false,
+              "hasPreviousPage": false,
+              "startCursor": "1",
+            },
           },
         }
       }

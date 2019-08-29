@@ -189,6 +189,10 @@ declare interface Window extends EventTarget, IDBEnvironment {
   _capco_executeAnalyticScript(): void;
   _capco_ga_cookie_value(key: string): any;
   _capco_executeAdsScript(): void;
+  devtoolsFormatters: any;
+
+  _global: any;
+  __RELAY_DEVTOOLS_HOOK__: any;
 }
 
 declare var window: Window;

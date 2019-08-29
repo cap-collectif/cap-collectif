@@ -14,7 +14,15 @@ describe('<GroupAdminModalImportUsers />', () => {
       $refType,
       id: 'group4',
       title: 'oui',
-      users: { edges: [] },
+      users: {
+        pageInfo: {
+          hasPreviousPage: false,
+          hasNextPage: false,
+          startCursor: '1',
+          endCursor: '2',
+        },
+        edges: [],
+      },
     },
     intl: intlMock,
     pristine: false,

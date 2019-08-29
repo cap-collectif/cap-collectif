@@ -39,7 +39,8 @@
         "prettier:php": "prettier --parser php --write 'src/**/*.php'",
         "prettier:yaml": "prettier --parser yaml --write 'src/**/*.yml' 'app/**/*.yml' 'infrastructure/**/*.yml'",
         "prettier": "yarn run prettier:js",
-        "precommit": "flow status && lint-staged"
+        "precommit": "flow status && lint-staged",
+        "postinstall": "relay-flow-types-installer"
     },
     "workspaces": [
         "packages/*"

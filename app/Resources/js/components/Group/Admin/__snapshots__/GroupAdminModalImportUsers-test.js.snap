@@ -55,6 +55,12 @@ exports[`<GroupAdminModalImportUsers /> render correctly 1`] = `
           "title": "oui",
           "users": Object {
             "edges": Array [],
+            "pageInfo": Object {
+              "endCursor": "2",
+              "hasNextPage": false,
+              "hasPreviousPage": false,
+              "startCursor": "1",
+            },
           },
         }
       }
