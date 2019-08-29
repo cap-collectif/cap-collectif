@@ -12,7 +12,12 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
       title="group.admin.users"
     >
       <ForwardRef(Relay(Connect(InjectIntl(GroupAdminUsers))))
-        group={Object {}}
+        group={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
       />
     </Tab>
     <Tab
@@ -20,7 +25,12 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
       title="group.admin.parameters"
     >
       <ForwardRef(Relay(Connect(ReduxForm)))
-        group={Object {}}
+        group={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
       />
     </Tab>
   </Uncontrolled(Tabs)>

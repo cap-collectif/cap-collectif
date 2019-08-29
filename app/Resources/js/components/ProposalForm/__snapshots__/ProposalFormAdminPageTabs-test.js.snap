@@ -36,6 +36,8 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       <ForwardRef(Relay(InjectIntl(Connect(ReduxForm))))
         proposalForm={
           Object {
+            "$fragmentRefs": null,
+            "$refType": null,
             "reference": "2",
             "url": "http://capco.dev/top-budget",
           }
@@ -49,6 +51,8 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       <ForwardRef(Relay(InjectIntl(Connect(ReduxForm))))
         proposalForm={
           Object {
+            "$fragmentRefs": null,
+            "$refType": null,
             "reference": "2",
             "url": "http://capco.dev/top-budget",
           }
@@ -62,6 +66,8 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       <ForwardRef(Relay(InjectIntl(Connect(ReduxForm))))
         proposalForm={
           Object {
+            "$fragmentRefs": null,
+            "$refType": null,
             "reference": "2",
             "url": "http://capco.dev/top-budget",
           }
@@ -75,6 +81,8 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       <ForwardRef(Relay(InjectIntl(Connect(ReduxForm))))
         proposalForm={
           Object {
+            "$fragmentRefs": null,
+            "$refType": null,
             "reference": "2",
             "url": "http://capco.dev/top-budget",
           }
