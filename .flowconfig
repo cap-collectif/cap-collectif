@@ -37,6 +37,8 @@ flow-typed
 [strict]
 
 [options]
+server.max_workers=4
+
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
 suppress_type=$FlowFixMeProps
