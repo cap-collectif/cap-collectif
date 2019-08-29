@@ -22,7 +22,7 @@ final class Version20190426160453 extends AbstractMigration
                 'step_id' => $cst['step_id'],
                 'title' => $cst['title'],
                 'created_at' => $cst['created_at'],
-                'updated_at' => $cst['updated_at'],
+                'updated_at' => $cst['updated_at']
             ]);
         }
     }

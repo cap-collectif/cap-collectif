@@ -5,6 +5,7 @@ twig:
     - 'CapcoAppBundle:Form:bootstrap.html.twig'
     - 'CapcoAppBundle:Form:media_widgets.html.twig'
     - 'SonataCoreBundle:Form:datepicker.html.twig'
+    - 'CapcoAppBundle:Form:ckeditor_widget.html.twig'
   globals:
     facebook_app_id: '%facebook_app_id%'
     google_maps_key: '%google_maps_key%'

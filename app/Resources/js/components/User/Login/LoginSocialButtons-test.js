@@ -13,6 +13,12 @@ describe('<LoginSocialButtons />', () => {
       labelColor: '#FFFFFF',
       buttonColor: '#ABABAB',
     },
+    {
+      name: 'France Connect',
+      ssoType: 'franceconnect',
+      labelColor: '',
+      buttonColor: '',
+    },
   ];
 
   const props = {
@@ -48,6 +54,13 @@ describe('<LoginSocialButtons />', () => {
     },
     ssoList,
   };
+  const propsWithFeatureLoginFranceConnectActivated = {
+    features: {
+      ...features,
+      login_franceconnect: true,
+    },
+    ssoList,
+  };
   const propsWithAllLoginFeaturesLoginActivated = {
     features: {
       ...features,
@@ -55,8 +68,9 @@ describe('<LoginSocialButtons />', () => {
       login_facebook: true,
       login_saml: true,
       login_openid: true,
+      login_franceconnect: true,
     },
-    ssoList: [],
+    ssoList,
   };
 
   const propsWithAllLoginFeaturesLoginActivatedAndORSeparatorDisabled = {
@@ -66,6 +80,7 @@ describe('<LoginSocialButtons />', () => {
       login_facebook: true,
       login_saml: true,
       login_openid: true,
+      login_franceconnect: true,
       sso_by_pass_auth: true,
     },
     ssoList,
@@ -93,6 +108,13 @@ describe('<LoginSocialButtons />', () => {
 
   it('renders only OpenID button', () => {
     const wrapper = shallow(<LoginSocialButtons {...propsWithFeatureLoginOpenIDActivated} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders only FranceConnect button', () => {
+    const wrapper = shallow(
+      <LoginSocialButtons {...propsWithFeatureLoginFranceConnectActivated} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 

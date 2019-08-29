@@ -40,3 +40,15 @@ hwi_oauth:
       infos_url: 'fake'
       options:
         logout_url: 'fake'
+    franceconnect:
+      class: Capco\UserBundle\FranceConnect\FranceConnectResourceOwner
+      type: oauth2
+      options_modifier: Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier
+      # Parameters below need to be set and must be a non-empty string because of options resolver's validation from library.
+      client_id: 'fake'
+      client_secret: 'fake'
+      access_token_url: 'fake'
+      authorization_url: 'fake'
+      infos_url: 'fake'
+      options:
+        logout_url: 'fake'

@@ -1,0 +1,5 @@
+{% extends 'IvoryCKEditorBundle:Form:ckeditor_widget.html.twig' %}
+
+{% block ckeditor_widget_extra %}
+    CKEDITOR.dtd.$removeEmpty['span'] = false;
+{% endblock %}

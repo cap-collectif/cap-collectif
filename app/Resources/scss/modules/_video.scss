@@ -9,21 +9,22 @@
 }
 
 .bg--video {
-    position: static;
     height: 240px;
+    width: 100%;
 }
 
 .video{
+    height: 350px;
     margin-bottom: 25px;
 
     .video-thumbnail{
         position: relative;
-        width:auto;
+        width: auto;
         height: auto;
         
         a{
             cursor: default;
-            width:auto;
+            width: auto;
             height: auto;
             position: absolute;
             top: 50%;

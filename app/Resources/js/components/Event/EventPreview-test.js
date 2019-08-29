@@ -3,20 +3,18 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { EventPreview } from './EventPreview';
-import { $refType } from '../../mocks';
+import { $refType, $fragmentRefs } from '../../mocks';
 
 describe('<EventPreview />', () => {
   it('renders correctly and highlighted', () => {
     const props = {
       event: {
         $refType,
+        $fragmentRefs,
         id: 'event1',
         timeRange: {
           startAt: '2018-09-27T03:00:00+01:00',
           endAt: '2019-09-27T03:00:00+01:00',
-        },
-        media: {
-          url: 'https://picsum.photos/300/400',
         },
         title: 'Un super evenement',
         fullAddress: '21 rue george 5, 75012 Paris',
@@ -45,13 +43,11 @@ describe('<EventPreview />', () => {
     const props = {
       event: {
         $refType,
+        $fragmentRefs,
         id: 'event1',
         timeRange: {
           startAt: '2018-09-27T03:00:00+01:00',
           endAt: '2019-09-27T03:00:00+01:00',
-        },
-        media: {
-          url: 'https://picsum.photos/300/400',
         },
         title: 'Un super evenement',
         fullAddress: '21 rue george 5, 75012 Paris',
@@ -80,13 +76,11 @@ describe('<EventPreview />', () => {
     const props = {
       event: {
         $refType,
+        $fragmentRefs,
         id: 'event1',
         timeRange: {
           startAt: '2018-09-27T03:00:00+01:00',
           endAt: '2019-09-27T03:00:00+01:00',
-        },
-        media: {
-          url: 'https://picsum.photos/300/400',
         },
         title: 'Un super evenement',
         fullAddress: '21 rue george 5, 75012 Paris',
@@ -115,13 +109,11 @@ describe('<EventPreview />', () => {
     const props = {
       event: {
         $refType,
+        $fragmentRefs,
         id: 'event1',
         timeRange: {
           startAt: '2018-09-27T03:00:00+01:00',
           endAt: '2019-09-27T03:00:00+01:00',
-        },
-        media: {
-          url: 'https://picsum.photos/300/400',
         },
         title: 'Un super evenement',
         fullAddress: '21 rue george 5, 75012 Paris',

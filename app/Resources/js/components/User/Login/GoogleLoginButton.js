@@ -1,12 +1,9 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-
-import type { FeatureToggles } from '../../../types';
 import type { LabelPrefix } from './LoginSocialButtons';
 
 type Props = {|
-  features: FeatureToggles,
   prefix?: LabelPrefix,
   intl: IntlShape,
 |};
@@ -29,11 +26,6 @@ export class GoogleLoginButton extends React.Component<Props> {
   };
 
   render() {
-    const { features } = this.props;
-    if (!features.login_gplus) {
-      return null;
-    }
-
     const title = <FormattedMessage id={this.getTitleTraduction()} />;
     return (
       <a
